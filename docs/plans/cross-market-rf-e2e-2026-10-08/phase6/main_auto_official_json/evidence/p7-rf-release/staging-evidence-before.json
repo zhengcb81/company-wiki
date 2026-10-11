@@ -1,0 +1,47 @@
+{
+  "failure": "ordinary git add reused old index stat for unchanged original log bytes; commit was not attempted",
+  "items": [
+    {
+      "path": ".planning/p7-rf-scoped-calibration/attempts/m1/red_test_research_support_diagnostics.log",
+      "expected_sha": "6da049c1cc1c9985aeb3f66fa47e65231511074d2946cd2e7675b9bb490d7f66",
+      "before_index_sha": "1ce8fddc9f90afd3e434948d5fc114145bf57a8d2dee1fd761a493422d3e60fa",
+      "attrs": ".planning/p7-rf-scoped-calibration/attempts/m1/red_test_research_support_diagnostics.log: text: unset\n.planning/p7-rf-scoped-calibration/attempts/m1/red_test_research_support_diagnostics.log: eol: unset\n.planning/p7-rf-scoped-calibration/attempts/m1/red_test_research_support_diagnostics.log: diff: unset\n"
+    },
+    {
+      "path": ".planning/p7-rf-scoped-calibration/attempts/m1/red_test_scoped_calibration_support.log",
+      "expected_sha": "97a2d362ca451c72e6b3135ba6d6f3bb2da716bb784c7c16acf03ba889828ca2",
+      "before_index_sha": "a4a31c3af88dbc400d2a93cd0497c9aaac7148bd7208f2d8eafe89f05b5bf044",
+      "attrs": ".planning/p7-rf-scoped-calibration/attempts/m1/red_test_scoped_calibration_support.log: text: unset\n.planning/p7-rf-scoped-calibration/attempts/m1/red_test_scoped_calibration_support.log: eol: unset\n.planning/p7-rf-scoped-calibration/attempts/m1/red_test_scoped_calibration_support.log: diff: unset\n"
+    },
+    {
+      "path": ".planning/p7-rf-scoped-calibration/attempts/m2/compatibility_main_patch_trial.log",
+      "expected_sha": "9803fcd742ce2532b685eaad306beb0dd382d04bfb4664866f8ef93162cf2cf5",
+      "before_index_sha": "c4a5b567ccf66b1d8e94c8bb32fd43d9e110365b631dd64a4c2ac6485f3e13fe",
+      "attrs": ".planning/p7-rf-scoped-calibration/attempts/m2/compatibility_main_patch_trial.log: text: unset\n.planning/p7-rf-scoped-calibration/attempts/m2/compatibility_main_patch_trial.log: eol: unset\n.planning/p7-rf-scoped-calibration/attempts/m2/compatibility_main_patch_trial.log: diff: unset\n"
+    },
+    {
+      "path": ".planning/p7-rf-scoped-calibration/attempts/m2/green_responsibility.log",
+      "expected_sha": "2225ce4c3db2d5a8c50fb68b883c00f2e5e31a89484c2f70e8266546382ca95e",
+      "before_index_sha": "44e6b04c9a6bb5806da5fe8d3088815f3a6db96e1cd5874d73d5b83496f77d04",
+      "attrs": ".planning/p7-rf-scoped-calibration/attempts/m2/green_responsibility.log: text: unset\n.planning/p7-rf-scoped-calibration/attempts/m2/green_responsibility.log: eol: unset\n.planning/p7-rf-scoped-calibration/attempts/m2/green_responsibility.log: diff: unset\n"
+    },
+    {
+      "path": ".planning/p7-rf-scoped-calibration/attempts/m2/static.log",
+      "expected_sha": "fc315d60c8e4094da0aecc5cfb9bebc2a68d139a5d506d305ae025f72b891254",
+      "before_index_sha": "b2ae62359cb3255cab9c78734a62c8c931886ce668565afcb50659d7580f0337",
+      "attrs": ".planning/p7-rf-scoped-calibration/attempts/m2/static.log: text: unset\n.planning/p7-rf-scoped-calibration/attempts/m2/static.log: eol: unset\n.planning/p7-rf-scoped-calibration/attempts/m2/static.log: diff: unset\n"
+    },
+    {
+      "path": ".planning/p7-rf-scoped-calibration/attempts/m3/pre_push_gate_local.log",
+      "expected_sha": "9721807ab2371ec4d8a5659224f501361d513032cc45478bca3fb38c9e86405a",
+      "before_index_sha": "639b46b8926937a24d712cd90c8f975210b8b2b68c92688b9750cf01a335b523",
+      "attrs": ".planning/p7-rf-scoped-calibration/attempts/m3/pre_push_gate_local.log: text: unset\n.planning/p7-rf-scoped-calibration/attempts/m3/pre_push_gate_local.log: eol: unset\n.planning/p7-rf-scoped-calibration/attempts/m3/pre_push_gate_local.log: diff: unset\n"
+    },
+    {
+      "path": ".planning/p7-rf-scoped-calibration/attempts/m3_e2e.log",
+      "expected_sha": "da721f7c012ddbe50a2296d3e19e614f248c3a86654a4b751d66c727482e8065",
+      "before_index_sha": "997e51a231bc5e2855524e442d5c88121a83ce905949ea02e1bf2fd5cf392970",
+      "attrs": ".planning/p7-rf-scoped-calibration/attempts/m3_e2e.log: text: unset\n.planning/p7-rf-scoped-calibration/attempts/m3_e2e.log: eol: unset\n.planning/p7-rf-scoped-calibration/attempts/m3_e2e.log: diff: unset\n"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w04-red-91j79ts2\\pytest", "requested_basetemp_len": 55, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 22 items
+
+tests\unit\test_narrative_failed_final.py FFFFFFF.FFFFFFFFFF.            [ 86%]
+tests\integration\test_narrative_failed_final_cli.py FFF                 [100%]
+
+================================== FAILURES ===================================
+_ test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final[951] _
+tests\unit\test_narrative_failed_final.py:46: in test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final
+    assert diagnostic is not None, "length response drops its bounded final observation"
+E   AssertionError: length response drops its bounded final observation
+E   assert None is not None
+_ test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final[empty] _
+tests\unit\test_narrative_failed_final.py:46: in test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final
+    assert diagnostic is not None, "length response drops its bounded final observation"
+E   AssertionError: length response drops its bounded final observation
+E   assert None is not None
+_ test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final[unobserved] _
+tests\unit\test_narrative_failed_final.py:46: in test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final
+    assert diagnostic is not None, "length response drops its bounded final observation"
+E   AssertionError: length response drops its bounded final observation
+E   assert None is not None
+_ test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final[18000] _
+tests\unit\test_narrative_failed_final.py:46: in test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final
+    assert diagnostic is not None, "length response drops its bounded final observation"
+E   AssertionError: length response drops its bounded final observation
+E   assert None is not None
+__________ test_entity_hash_tracks_actual_wire_not_canonical_payload __________
+tests\unit\test_narrative_failed_final.py:67: in test_entity_hash_tracks_actual_wire_not_canonical_payload
+    first, second = (_decoded_error(_body("same", spaced=spaced)).failed_final for spaced in (False, True))
+    ^^^^^^^^^^^^^
+tests\unit\test_narrative_failed_final.py:67: in <genexpr>
+    first, second = (_decoded_error(_body("same", spaced=spaced)).failed_final for spaced in (False, True))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelOutputTruncatedError' object has no attribute 'failed_final'
+____ test_direct_observation_without_raw_entity_cannot_fabricate_wire_hash ____
+tests\unit\test_narrative_failed_final.py:73: in test_direct_observation_without_raw_entity_cannot_fabricate_wire_hash
+    from company_wiki.automation.narrative_model import FailedFinalDiagnostic
+E   ImportError: cannot import name 'FailedFinalDiagnostic' from 'company_wiki.automation.narrative_model' (C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki\src\company_wiki\automation\narrative_model.py)
+_ test_explicit_empty_non_length_keeps_original_invalid_response_classification _
+tests\unit\test_narrative_failed_final.py:82: in test_explicit_empty_non_length_keeps_original_invalid_response_classification
+    assert error.failed_final.final_content_bytes == 0
+           ^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelEnvelopeError' object has no attribute 'failed_final'
+___ test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[cjk] ____
+tests\unit\test_narrative_failed_final.py:97: in test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte
+    diagnostic = _decoded_error(_body(content)).failed_final
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelOutputTruncatedError' object has no attribute 'failed_final'
+_ test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[controls] _
+tests\unit\test_narrative_failed_final.py:97: in test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte
+    diagnostic = _decoded_error(_body(content)).failed_final
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelOutputTruncatedError' object has no attribute 'failed_final'
+__ test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[quotes] __
+tests\unit\test_narrative_failed_final.py:97: in test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte
+    diagnostic = _decoded_error(_body(content)).failed_final
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelOutputTruncatedError' object has no attribute 'failed_final'
+__ test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[emoji] ___
+tests\unit\test_narrative_failed_final.py:97: in test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte
+    diagnostic = _decoded_error(_body(content)).failed_final
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelOutputTruncatedError' object has no attribute 'failed_final'
+_ test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[combining] _
+tests\unit\test_narrative_failed_final.py:97: in test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte
+    diagnostic = _decoded_error(_body(content)).failed_final
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelOutputTruncatedError' object has no attribute 'failed_final'
+__ test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[mixed] ___
+tests\unit\test_narrative_failed_final.py:97: in test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte
+    diagnostic = _decoded_error(_body(content)).failed_final
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelOutputTruncatedError' object has no attribute 'failed_final'
+__ test_optional_diagnostic_fit_failure_keeps_primary_error_and_paid_metrics __
+tests\unit\test_narrative_failed_final.py:118: in test_optional_diagnostic_fit_failure_keeps_primary_error_and_paid_metrics
+    diagnostic = _decoded_error(_body("partial")).failed_final
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'ModelOutputTruncatedError' object has no attribute 'failed_final'
+___ test_optional_decoder_diagnostic_failure_does_not_cover_length_or_meter ___
+tests\unit\test_narrative_failed_final.py:130: in test_optional_decoder_diagnostic_failure_does_not_cover_length_or_meter
+    from company_wiki.automation.narrative_model import FailedFinalDiagnostic
+E   ImportError: cannot import name 'FailedFinalDiagnostic' from 'company_wiki.automation.narrative_model' (C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki\src\company_wiki\automation\narrative_model.py)
+_ test_real_decoder_caller_settle_and_failure_have_one_paid_no_output_attempt[True] _
+tests\unit\test_narrative_failed_final.py:180: in test_real_decoder_caller_settle_and_failure_have_one_paid_no_output_attempt
+    assert ledger.settlements[0]["response_sha256"] == hashlib.sha256(("营" * 317).encode()).hexdigest()
+E   AssertionError: assert None == '95c0d8678c535fa7192f4c9e598cff59264010d2e8de8709e055adc5fa164006'
+E    +  where '95c0d8678c535fa7192f4c9e598cff59264010d2e8de8709e055adc5fa164006' = <built-in method hexdigest of _hashlib.HASH object at 0x000001AA511F6E10>()
+E    +    where <built-in method hexdigest of _hashlib.HASH object at 0x000001AA511F6E10> = <sha256 _hashlib.HASH object @ 0x000001AA511F6E10>.hexdigest
+E    +      where <sha256 _hashlib.HASH object @ 0x000001AA511F6E10> = <built-in function openssl_sha256>(b'\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90...e8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5')
+E    +        where <built-in function openssl_sha256> = hashlib.sha256
+E    +        and   b'\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90...e8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5' = <built-in method encode of str object at 0x000001AA4F5FC3A0>()
+E    +          where <built-in method encode of str object at 0x000001AA4F5FC3A0> = ('营' * 317).encode
+_ test_real_decoder_caller_settle_and_failure_have_one_paid_no_output_attempt[False] _
+tests\unit\test_narrative_failed_final.py:180: in test_real_decoder_caller_settle_and_failure_have_one_paid_no_output_attempt
+    assert ledger.settlements[0]["response_sha256"] == hashlib.sha256(("营" * 317).encode()).hexdigest()
+E   AssertionError: assert None == '95c0d8678c535fa7192f4c9e598cff59264010d2e8de8709e055adc5fa164006'
+E    +  where '95c0d8678c535fa7192f4c9e598cff59264010d2e8de8709e055adc5fa164006' = <built-in method hexdigest of _hashlib.HASH object at 0x000001AA511F74D0>()
+E    +    where <built-in method hexdigest of _hashlib.HASH object at 0x000001AA511F74D0> = <sha256 _hashlib.HASH object @ 0x000001AA511F74D0>.hexdigest
+E    +      where <sha256 _hashlib.HASH object @ 0x000001AA511F74D0> = <built-in function openssl_sha256>(b'\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90...e8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5')
+E    +        where <built-in function openssl_sha256> = hashlib.sha256
+E    +        and   b'\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90...e8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5\xe8\x90\xa5' = <built-in method encode of str object at 0x000001AA4F5FD6E0>()
+E    +          where <built-in method encode of str object at 0x000001AA4F5FD6E0> = ('营' * 317).encode
+_ test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[951] _
+tests\integration\test_narrative_failed_final_cli.py:71: in test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact
+    observation, = result["documents"][0]["model_diagnostics"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'model_diagnostics'
+_ test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[empty] _
+tests\integration\test_narrative_failed_final_cli.py:71: in test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact
+    observation, = result["documents"][0]["model_diagnostics"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'model_diagnostics'
+_ test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[unobserved] _
+tests\integration\test_narrative_failed_final_cli.py:71: in test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact
+    observation, = result["documents"][0]["model_diagnostics"]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'model_diagnostics'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_failed_final.py::test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final[951]
+FAILED tests/unit/test_narrative_failed_final.py::test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final[empty]
+FAILED tests/unit/test_narrative_failed_final.py::test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final[unobserved]
+FAILED tests/unit/test_narrative_failed_final.py::test_real_decoder_preserves_two_hashes_and_observed_vs_unobserved_final[18000]
+FAILED tests/unit/test_narrative_failed_final.py::test_entity_hash_tracks_actual_wire_not_canonical_payload
+FAILED tests/unit/test_narrative_failed_final.py::test_direct_observation_without_raw_entity_cannot_fabricate_wire_hash
+FAILED tests/unit/test_narrative_failed_final.py::test_explicit_empty_non_length_keeps_original_invalid_response_classification
+FAILED tests/unit/test_narrative_failed_final.py::test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[cjk]
+FAILED tests/unit/test_narrative_failed_final.py::test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[controls]
+FAILED tests/unit/test_narrative_failed_final.py::test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[quotes]
+FAILED tests/unit/test_narrative_failed_final.py::test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[emoji]
+FAILED tests/unit/test_narrative_failed_final.py::test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[combining]
+FAILED tests/unit/test_narrative_failed_final.py::test_whole_attempt_utf8_limit_includes_json_escapes_and_multibyte[mixed]
+FAILED tests/unit/test_narrative_failed_final.py::test_optional_diagnostic_fit_failure_keeps_primary_error_and_paid_metrics
+FAILED tests/unit/test_narrative_failed_final.py::test_optional_decoder_diagnostic_failure_does_not_cover_length_or_meter
+FAILED tests/unit/test_narrative_failed_final.py::test_real_decoder_caller_settle_and_failure_have_one_paid_no_output_attempt[True]
+FAILED tests/unit/test_narrative_failed_final.py::test_real_decoder_caller_settle_and_failure_have_one_paid_no_output_attempt[False]
+FAILED tests/integration/test_narrative_failed_final_cli.py::test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[951]
+FAILED tests/integration/test_narrative_failed_final_cli.py::test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[empty]
+FAILED tests/integration/test_narrative_failed_final_cli.py::test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[unobserved]
+======================== 20 failed, 2 passed in 14.78s ========================
+
+STDERR

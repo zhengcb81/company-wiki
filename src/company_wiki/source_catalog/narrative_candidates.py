@@ -14,6 +14,7 @@ from .narrative_visual_units import is_ocr_unit, ocr_identity
 TopicClassifier = Callable[[str], tuple[str, ...]]
 FinancialClassifier = Callable[[NarrativeUnit, Sequence[str]], bool]
 OperatingFactDetector = Callable[[str], OperatingFact]
+TextRejector = Callable[[str], bool]
 _NEVER = re.compile(r"(?!x)x")
 _EXCLUDED_ROLES = frozenset(
     {"analyst", "investor_question", "operator", "editorial", "qa_text_shadow"}
@@ -32,6 +33,10 @@ _CURRENT_BUSINESS_TOPICS = frozenset(
 
 def _no_topics(_text: str) -> tuple[str, ...]:
     return ()
+
+
+def _keep_text(_text: str) -> bool:
+    return False
 
 
 def _not_financial(_unit: NarrativeUnit, _topics: Sequence[str]) -> bool:
@@ -62,6 +67,7 @@ class CandidateRules:
     accounting_context: re.Pattern[str] = _NEVER
     heading_only: re.Pattern[str] = _NEVER
     static_definition: re.Pattern[str] = _NEVER
+    reject_text: TextRejector = _keep_text
 
 
 @dataclass(frozen=True)
@@ -251,6 +257,8 @@ def assess_unit(unit: NarrativeUnit, rules: CandidateRules) -> CandidateAssessme
     if unit.source_role in _EXCLUDED_ROLES:
         return CandidateAssessment(None)
     text = unit.raw_text
+    if rules.reject_text(text):
+        return CandidateAssessment(None)
     fact = rules.operating_facts(text)
     topics = rules.topics(text)
     if rules.financial_table(unit, topics) and not fact.financial_exempt:
@@ -271,7 +279,7 @@ def assess_unit(unit: NarrativeUnit, rules: CandidateRules) -> CandidateAssessme
         reason in fact.reasons
         for reason in ("business_scope_change", "reporting_definition_change", "reporting_rename")
     )
-    if _match(rules.static_definition, text) and not scope_change:
+    if _match(rules.static_definition, text) and not scope_change and "business_structure" not in earned.reasons:
         return CandidateAssessment(None)
     return CandidateAssessment(
         EvidenceCandidate(

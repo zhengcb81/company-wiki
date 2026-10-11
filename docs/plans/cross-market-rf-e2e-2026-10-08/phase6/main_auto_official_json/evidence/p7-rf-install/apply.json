@@ -1,0 +1,84 @@
+{
+  "mode": "apply",
+  "schema": "rf-install-result/1",
+  "selected": [
+    "CHANGELOG.md",
+    "SKILL.md",
+    "references/economic-support-diagnostics.md",
+    "references/evidence-role-calibration.md",
+    "scripts/contracts/constants.py",
+    "scripts/research/evidence_roles.py",
+    "scripts/research/native_dependencies.py",
+    "scripts/research_support_diagnostics.py",
+    "scripts/schema_compatibility.py"
+  ],
+  "status": "completed",
+  "targets": [
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 1,
+      "selected": [
+        "CHANGELOG.md",
+        "SKILL.md",
+        "references/economic-support-diagnostics.md",
+        "references/evidence-role-calibration.md",
+        "scripts/contracts/constants.py",
+        "scripts/research/evidence_roles.py",
+        "scripts/research/native_dependencies.py",
+        "scripts/research_support_diagnostics.py",
+        "scripts/schema_compatibility.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "CHANGELOG.md",
+        "SKILL.md",
+        "references/economic-support-diagnostics.md",
+        "references/evidence-role-calibration.md",
+        "scripts/contracts/constants.py",
+        "scripts/research/evidence_roles.py",
+        "scripts/research/native_dependencies.py",
+        "scripts/research_support_diagnostics.py",
+        "scripts/schema_compatibility.py"
+      ]
+    },
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 1,
+      "selected": [
+        "CHANGELOG.md",
+        "SKILL.md",
+        "references/economic-support-diagnostics.md",
+        "references/evidence-role-calibration.md",
+        "scripts/contracts/constants.py",
+        "scripts/research/evidence_roles.py",
+        "scripts/research/native_dependencies.py",
+        "scripts/research_support_diagnostics.py",
+        "scripts/schema_compatibility.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "CHANGELOG.md",
+        "SKILL.md",
+        "references/economic-support-diagnostics.md",
+        "references/evidence-role-calibration.md",
+        "scripts/contracts/constants.py",
+        "scripts/research/evidence_roles.py",
+        "scripts/research/native_dependencies.py",
+        "scripts/research_support_diagnostics.py",
+        "scripts/schema_compatibility.py"
+      ]
+    }
+  ]
+}

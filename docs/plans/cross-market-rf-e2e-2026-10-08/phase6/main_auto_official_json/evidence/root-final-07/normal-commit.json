@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "git",
+    "commit",
+    "-m",
+    "test(transcript): assert current parser while preserving historical replay"
+  ],
+  "exit": 0,
+  "elapsed_seconds": 21.725,
+  "log_sha256": "4d4cc2482f1ef260abf3ddac2423ed6da8eebbcf1d0b3a5f819f400acd2f55dd",
+  "staged_paths": [
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md",
+    "tests/unit/test_native_document_pipeline.py",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-rf-reception/readonly-reception-receipt.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-rf-reception/readonly-reception-summary.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-rf-reception/readonly-reception.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-rf-reception/readonly_reception_driver.py",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/canonical-byte-verification.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/commit-observation-02.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-commit-02.log",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-fetch.log",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-main-ff.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-main-ff.log",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-push.log",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/publication.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-07/version-regression.log",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-07/version-regression.json",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/next-root-review/readonly-next-node.md",
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/next-root-review/w04-bounded-diagnostic-design.md"
+  ]
+}

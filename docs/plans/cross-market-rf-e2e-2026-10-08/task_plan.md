@@ -1,5 +1,35 @@
 # 三市场真实收入预测端到端审计
 
+## 2026-10-11T00:03:32.361246+00:00 — W04与W03 pure源码责任节点完成，归档普通commit
+
+W04最终56责任与public3 GREEN、6恢复零新增请求/费/DB变化；独立六边界probe PASS（首轮一项仅probe frozen Mapping构造错误，保原记录、只重跑该边界）。None/空final、wire/finalSHA、真实unknown费用保守、<16KiB全envelope、scoped outbox与真实budget/storage归因全部成立。W03 pure集中109PASS，末尾4旧版本负控、30具体industry/财务拒绝、1全真实TXT回放及static绿；这些计数有交集，不相加。global0.7显式0.6的fundraising规则泄漏已有RED→effective分派修复；行业具体许可变化被_OBJECT提前过滤已有RED→具体行业对象×actualchange修复，套话仍False。完整旧0.6 MSFT指纹11ad9c7...保持，新0.7实际103candidate/96selected/7omitted且全部真locator回放，诚实partial。PDF原年报p44/IPO173–174小页与原件SHA公共读取成立，不冒称全财报通过。
+
+当前普通commit归档这两个已完成责任节点、P7 RF闭环与真实证据；default仍0.6.0，shared factory/select/verify/resolver尚未接完，详见[共享细则](phase6/main_auto_official_json/W03_SHARED_CONTINUATION.md)。不反复发布每个helper。Next Step：内部shared TDD接线→ROOT最后切0.7 default→一次公共mixed/read/reuse/旧history大节点，正常并线push/exactCI，再原三家真实四审/新三家/loop。P7-AUDIT未交付。goal active，原件/config/Dayu/WIP保留，0外部provider/model/费。
+
+## 2026-10-10T23:53:17.615142+00:00 — P7-RF工程接收闭环
+
+RF main/remote47f497ad一致，精确CI38096229764 success；284PASS/2subtests正常快检43.76s，新两组责任回归已纳入同一清单。定点18安装文件与502其他SHA保护通过，fresh两根实际40业务CLI+2版本/1工程fixture、15.0735s全部exit0；551安装文件/原输入保持、自有TEMP恢复。两次安装driver入口/缺省字段错误原样归档、只修driver，无产品/fixture弱化。最终报告：[P7 RF](phase6/main_auto_official_json/P7_RF_ACCEPTANCE.md)。W04工程源码stable56责任+public3（6恢复0新请求/费/DB变化），ROOT集中独立小复核进行；W03pure已109责任静态绿，交付前验证futuredefault0.7+explicitold0.6规则隔离；shared接线由ROOT。
+
+原三家真实研究四审、新三家/loop/条件八家仍open，goal active；P7-AUDIT未交付，外包源不动。0本轮外部provider/model/费用，USD20/2M与旧unknown保持，原件/config/Dayu/邻仓WIP保留。Next Step：归档正常提交本轮已完成源码/接收记录，实施W03 frozen-version shared TDD与一次公共大节点，再真实复验。
+
+## 2026-10-10T23:45:54.876418+00:00 — P7-RF正式接收、并入主线、发布和定点同步
+
+P7-RF源工程已接收。MAIN独立发现period适用关系缺口及shared PID跨业务校准误用，TDD修所属关系，scope35PASS、六独立反例/正控PASS；不禁共享参数、不新增许可、不改算术与confidence。RF canonical/remote main e929185c398f509867e24fa188e041e378286ddc一致；正常push260PASS/2subtests37.50s，精确CI38096020406 success。assurance三owner WIP SHA和output文件列表保持。九文件定点同步两根18文件、502其他安装文件SHA保持，真实fresh installed集中复验进行。CI/pre-push同一快清单补入已有两新有界责任文件，避免新根因只在验收时测试；不是增加workflow/全库门禁。
+
+W04仍在处理失败final/真实预算阻断恢复：同一run内existing outbox按actual FK scoped，另一run不能触发重复activation；并解决scheduler已终结依赖时blocked归因先后导致非确定status。W03显式0.7.0纯selector已有40责任PASS和真实annualp44/IPO173–174/public source binary+SHA回放；默认暂0.6.0、共享runtime待W04稳定后ROOT接线，不将局部页回放叫完整财报研究。P7-AUDIT未交付，外包源不写；原三家真实修后四审、新三家/loop/条件八家仍未完成，goal active。
+
+Next Step：完成RF新快检正常推送/精确CI与installed验收，继而W04/W03共享接线；不新增小节点人审。原件/config/Dayu/邻仓WIP保留，本节点provider/model与新增费0。
+
+## 2026-10-10T23:30:42.966527+00:00 — CWP MAIN/P7源码正式发布完成
+
+CWP canonical master与远端accdeccc737ccaf27d1698238a31af022960a3fa一致；normal push3020PASS/257.64秒，精确CI38094790883 success。默认HTML测试旧0.3.0固定断言已按明确0.3.1迁移，36责任/旧unit指纹与原件回放PASS，原首次push失败保留。MAIN M3工程集中与发布完成；原三家研究四审/新三家泛化及条件八家未关闭。
+
+RF接收后的period关系缺口已有实际RED4FAIL/10PASS→119PASS/7subtests、Ruff/mypy绿、4组build→native/Markdown/snapshot→diagnostics真实离线E2E；同步FY2031攻击降级、合法FY2025→FY2026 nativebridge保持，数值/confidence不变。独立最终接收进行，normal RF commit/并线/发布/定点安装由MAIN接手，原7raw日志字节因Git自动换行被规范化，已仅本卡证据路径配置byte-preservation且索引核真实SHA，不改历史原件/handoff/全库。
+
+W04有界失败final与W03有界业务召回细则已先写好，内部独占源码TDD进行；W03候选默认暂仍0.6.0，新0.7.0显式策略，ROOT后续串行接线freeze/generation/旧resolver，避免W04共同runtime并写。P7-AUDIT未通知交付，不写其源。0vendor/model/新增费，USD20/2M旧unknown照计、goal active，原件/config/Dayu/邻仓WIP不动。
+
+**Next Step：** RF最终source复核→正常main fast-forward/push/exactCI/定点安装；随后集中W04/W03shared接线及原真实研究复验，不新增小节点人审或授权。
+
 ## 2026-10-10T23:15:40.078596+00:00 — P7-RF独立接收与MAIN后续修复
 
 P7-RF HEAD183c9534、源码05aa2661已接收。独立25责任测试PASS，真实build→validate/compute/Markdown/snapshot→diagnostics发现FY2031 conversion参数/claim/observation同步改期而实际FY2026输出仍错误supported；记source_partial。MAIN接手原写集，先同反例RED，再在calibration/native依赖责任层诊断直接conversion适用期→实际output/消费单元，不设来源披露日相等/跨期禁止门，不改算术/confidence、旧optional空输入和有效历史reference；实际native跨期桥按已可复查关系处理。复用现成MAIN4.2.1兼容patch，正常静态、责任与一次公共离线E2E复验后合线/发布/安装；旧交接记录保留。独立验收报告：[P7 RF reception](phase6/main_auto_official_json/evidence/p7-rf-reception/readonly-reception.md)。P7-AUDIT仍未交付，写集不动。

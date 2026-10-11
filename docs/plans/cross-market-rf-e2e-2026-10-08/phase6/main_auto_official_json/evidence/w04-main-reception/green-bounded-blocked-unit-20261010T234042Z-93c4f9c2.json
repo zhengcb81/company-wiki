@@ -1,0 +1,21 @@
+{
+  "stage": "GREEN bounded diagnostic and blocked decision responsibility",
+  "returncode": 0,
+  "duration_seconds": 5.963,
+  "log_sha256": "9e64de7519ff6e2b41ad5dba034880254297a2ab4389ac7e109ae46b9a0ce30b",
+  "owned_temp_restored": true,
+  "external_vendor_calls": 0,
+  "test_argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_narrative_failed_final.py",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-unit-f21pw4mo\\pytest",
+    "-p",
+    "no:cacheprovider"
+  ]
+}

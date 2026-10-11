@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-10-10T23:27:53.043373+00:00",
+  "target_sha": "accdeccc737ccaf27d1698238a31af022960a3fa",
+  "runs": [
+    {
+      "id": 38094790883,
+      "head_sha": "accdeccc737ccaf27d1698238a31af022960a3fa",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/38094790883"
+    }
+  ]
+}

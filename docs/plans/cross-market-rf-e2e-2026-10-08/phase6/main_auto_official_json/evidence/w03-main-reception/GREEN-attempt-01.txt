@@ -1,0 +1,33 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 40 items
+
+tests\unit\test_narrative_business_recall.py ........................... [ 67%]
+.........                                                                [ 90%]
+tests\integration\test_narrative_business_recall.py F..F                 [100%]
+
+================================== FAILURES ===================================
+______ test_full_msft_true_business_anchors_qualifiers_roles_and_replay _______
+tests\integration\test_narrative_business_recall.py:42: in test_full_msft_true_business_anchors_qualifiers_roles_and_replay
+    assert any(anchor in (span.raw_text or "") for span in business), anchor
+E   AssertionError: 50% less cost
+E   assert False
+E    +  where False = any(<generator object test_full_msft_true_business_anchors_qualifiers_roles_and_replay.<locals>.<genexpr> at 0x0000016A6F7E3760>)
+___ test_native_json_business_structure_role_parent_issuer_and_real_replay ____
+tests\integration\test_narrative_business_recall.py:156: in test_native_json_business_structure_role_parent_issuer_and_real_replay
+    assert replay_verified_projection(view, package.evidence_spans) == len(package.evidence_spans)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_replay.py:211: in replay_verified_projection
+    if view.subject != selected.subject or selected.subject.kind != "official_json":
+                       ^^^^^^^^^^^^^^^^
+E   AttributeError: 'tuple' object has no attribute 'subject'
+=========================== short test summary info ===========================
+FAILED tests/integration/test_narrative_business_recall.py::test_full_msft_true_business_anchors_qualifiers_roles_and_replay
+FAILED tests/integration/test_narrative_business_recall.py::test_native_json_business_structure_role_parent_issuer_and_real_replay
+======================== 2 failed, 38 passed in 5.34s =========================

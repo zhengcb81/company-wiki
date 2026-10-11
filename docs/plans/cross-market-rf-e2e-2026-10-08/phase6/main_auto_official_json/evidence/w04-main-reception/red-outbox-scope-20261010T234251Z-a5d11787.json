@@ -1,0 +1,24 @@
+{
+  "stage": "RED FK-scoped outbox read",
+  "returncode": 1,
+  "duration_seconds": 8.781,
+  "log_sha256": "b51ba70c942e7c53808cfde604884854a2af545510dc5f51ba7b00820f829219",
+  "owned_temp_restored": true,
+  "external_vendor_calls": 0,
+  "test_argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_automation_outbox_read_scope.py",
+    "tests/unit/test_narrative_failed_final.py::test_real_store_blocked_history_readonly_eligibility_preserves_pending_work",
+    "-k",
+    "outbox",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-scope-c8nqzvam\\pytest",
+    "-p",
+    "no:cacheprovider"
+  ]
+}

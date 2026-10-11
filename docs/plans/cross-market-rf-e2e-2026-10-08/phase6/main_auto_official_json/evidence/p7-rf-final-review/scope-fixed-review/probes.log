@@ -1,0 +1,7 @@
+{"probe": "saved-shared-root-scope-attack", "expectation_met": true, "native_validation": "passed", "order_independent": null}
+{"probe": "distinct-scopes-claim-isolation-and-order", "expectation_met": true, "native_validation": "passed", "order_independent": true}
+{"probe": "multiple-calibration-ids-for-same-cell", "expectation_met": true, "native_validation": "passed", "order_independent": true}
+{"probe": "explicit-company-scope-positive", "expectation_met": true, "native_validation": "passed", "order_independent": null}
+{"probe": "historical-measurement-and-disclosure-positive", "expectation_met": true, "native_validation": "passed", "order_independent": null}
+{"probe": "explicit-native-target-bridge-positive", "expectation_met": true, "native_validation": "passed", "order_independent": null}
+{"status": "pass", "source_sha_count": 12, "protected_count": 37, "seconds": 0.1346752999961609, "original_failure_evidence_unchanged": true}

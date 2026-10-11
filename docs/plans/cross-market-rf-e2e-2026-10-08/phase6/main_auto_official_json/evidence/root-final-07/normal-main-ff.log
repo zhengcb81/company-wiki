@@ -1,0 +1,39 @@
+Updating 795a076d..accdeccc
+Fast-forward
+ docs/plans/cross-market-rf-e2e-2026-10-08/findings.md   |   6 ++++++
+ .../evidence/next-root-review/readonly-next-node.md     | Bin 0 -> 9843 bytes
+ .../next-root-review/w04-bounded-diagnostic-design.md   | Bin 0 -> 13765 bytes
+ .../p7-rf-reception/readonly-reception-receipt.json     | Bin 0 -> 92426 bytes
+ .../p7-rf-reception/readonly-reception-summary.json     | Bin 0 -> 3227 bytes
+ .../evidence/p7-rf-reception/readonly-reception.md      | Bin 0 -> 9781 bytes
+ .../p7-rf-reception/readonly_reception_driver.py        | Bin 0 -> 12109 bytes
+ .../root-final-06/canonical-byte-verification.json      | Bin 0 -> 66487 bytes
+ .../evidence/root-final-06/commit-observation-02.json   | Bin 0 -> 315 bytes
+ .../evidence/root-final-06/normal-commit-02.log         | Bin 0 -> 43977 bytes
+ .../evidence/root-final-06/normal-fetch.log             | Bin 0 -> 95 bytes
+ .../evidence/root-final-06/normal-main-ff.json          | Bin 0 -> 23028 bytes
+ .../evidence/root-final-06/normal-main-ff.log           | Bin 0 -> 74273 bytes
+ .../evidence/root-final-06/normal-push.log              | Bin 0 -> 19431 bytes
+ .../evidence/root-final-06/publication.json             | Bin 0 -> 413 bytes
+ .../evidence/root-final-07/version-regression.json      | Bin 0 -> 427 bytes
+ .../evidence/root-final-07/version-regression.log       | Bin 0 -> 1279 bytes
+ docs/plans/cross-market-rf-e2e-2026-10-08/progress.md   |   6 ++++++
+ docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md  |   6 ++++++
+ tests/unit/test_native_document_pipeline.py             |   2 +-
+ 20 files changed, 19 insertions(+), 1 deletion(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/next-root-review/readonly-next-node.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/next-root-review/w04-bounded-diagnostic-design.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-rf-reception/readonly-reception-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-rf-reception/readonly-reception-summary.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-rf-reception/readonly-reception.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/p7-rf-reception/readonly_reception_driver.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/canonical-byte-verification.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/commit-observation-02.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-commit-02.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-fetch.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-main-ff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-main-ff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-06/publication.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-07/version-regression.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/root-final-07/version-regression.log

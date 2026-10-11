@@ -1,0 +1,45 @@
+{
+  "results": [
+    {
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/narrative_http_model.py",
+        "src/company_wiki/automation/narrative_model_caller.py",
+        "src/company_wiki/automation/narrative_summarize.py",
+        "src/company_wiki/automation/narrative_batch.py",
+        "src/company_wiki/automation/narrative_failed_final.py",
+        "tests/unit/test_narrative_failed_final.py",
+        "tests/integration/test_narrative_failed_final_cli.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.286,
+      "log_sha256": "08c8d9e6e870cfbd908a47a20ab036a78f282c8b459086f3c01cc8559f610430"
+    },
+    {
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "mypy",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-static-_2rpk9na\\mypy",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/narrative_http_model.py",
+        "src/company_wiki/automation/narrative_model_caller.py",
+        "src/company_wiki/automation/narrative_summarize.py",
+        "src/company_wiki/automation/narrative_batch.py",
+        "src/company_wiki/automation/narrative_failed_final.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 4.726,
+      "log_sha256": "cbc17f6f33b2d3120cc7268aa4646bde0279a2f3fdc7bc3b04aa3472f4b56447"
+    }
+  ],
+  "owned_temp_restored": true
+}

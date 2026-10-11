@@ -1,0 +1,112 @@
+{
+  "source_tests": {
+    "src/company_wiki/source_catalog/narrative_evidence.py": {
+      "sha256": "8d96775ab0880a1f0ffa1261dc2c967df78afbaeb325a233cef7d6efb9f83dc3",
+      "bytes": 81666,
+      "lines": 1811
+    },
+    "src/company_wiki/source_catalog/narrative_candidates.py": {
+      "sha256": "1374ccd3c74554cb742fe974604b113496f321f507001e8acb96d8b0bed5ef88",
+      "bytes": 10521,
+      "lines": 299
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "02d74f39882f4dd20698103c475388d53c59a8f112d94652beb7b9d8c6327e8e",
+      "bytes": 10222,
+      "lines": 167
+    },
+    "src/company_wiki/source_catalog/narrative_business_groups.py": {
+      "sha256": "859cece970dcc3dd1c4c8a7c5964772c79c3eb804b3292a38aac14763ab3081c",
+      "bytes": 9627,
+      "lines": 193
+    },
+    "tests/unit/test_narrative_business_recall.py": {
+      "sha256": "4838be032d055d7cd15ae07affb149cedd23edf7bca3a278c8ea42d35871a9c1",
+      "bytes": 18240,
+      "lines": 316
+    },
+    "tests/integration/test_narrative_business_recall.py": {
+      "sha256": "8f0203f0dd85eccc356d5f0098c96f08c85cf6c7fc236bd7bff2158d72a341d5",
+      "bytes": 12406,
+      "lines": 188
+    }
+  },
+  "evidence": {
+    "full-transcript-final-metrics.json": {
+      "sha256": "86056e3f99461ac9fbaace7f4f0874c769d1e357fc64d26bccb257b7ef263399",
+      "bytes": 2788
+    },
+    "GREEN-06-legacy-default-isolation.txt": {
+      "sha256": "ac141b45f26bad97299c0d857d3abedabb62fb9d88908e6dcda10f541499756b",
+      "bytes": 1146
+    },
+    "GREEN-attempt-01.txt": {
+      "sha256": "078eba5385c5f699979a7609f6f23ece5301c5f9f73915e87181de5fb530b1e8",
+      "bytes": 2850
+    },
+    "GREEN-attempt-02.txt": {
+      "sha256": "c3ecf455f660d187f524f371d4ecdee53cab15f92862edb73b25433c8efde787",
+      "bytes": 1284
+    },
+    "legacy-0.6.0-msft.json": {
+      "sha256": "9279d5d6e03cfe5eb10dc6bac520b57b437a5c013eddd0fe54c6708d0a7965b8",
+      "bytes": 66311
+    },
+    "NODE-01-concentrated.txt": {
+      "sha256": "c688cf9f38bbd2bf286fbf1fc7fa5d1b93184d7a96d801ff476f2987b67c70b0",
+      "bytes": 1609
+    },
+    "real-source-pdf-node-01.txt": {
+      "sha256": "1068c14fee8cb74321805c6328d96485c53ab1b1f269359b501bbc6ca93d3911",
+      "bytes": 451
+    },
+    "real-source-pdf-node.json": {
+      "sha256": "dbb16218969305399a83ba8104424f9555bf0b9b35e13c0e76604966f595a3c7",
+      "bytes": 3914
+    },
+    "real_source_pdf_node.py": {
+      "sha256": "150369198e889184f24de02e9fad871ee20157bd427b30f09f293ccfbacdfe47",
+      "bytes": 4935
+    },
+    "RED-01.txt": {
+      "sha256": "6037149befd6f1a9c22b7098406933e8cdbba3bb04b9b1da73df028ca4c3dc6d",
+      "bytes": 31620
+    },
+    "RED-02-semantic.txt": {
+      "sha256": "ac1704e13d500ea09ed8494ca57162c115e34a94a8b884a4917293c7be3ecc41",
+      "bytes": 30980
+    },
+    "RED-03-semantic.txt": {
+      "sha256": "4aad4d476983399865852c1a6e8b71cecf7ef37f3f00ef6c1b782c3e7f846076",
+      "bytes": 21619
+    },
+    "RED-04-bounds-vague-business.txt": {
+      "sha256": "b87ac1f65c558e57a89657b6d988f1d230a49b9988a65316a9bf1fa02c1df2db",
+      "bytes": 3914
+    },
+    "RED-05-industry-strategy.txt": {
+      "sha256": "186953e60b4ce4fa46ac2260051b16c97cf383434a8c347d2d83eb92531db01b",
+      "bytes": 3109
+    },
+    "RED-06-legacy-default-isolation.txt": {
+      "sha256": "dcab94c342e0c8c150b7fc86e31ee8ddc31ff47d901b1562c804d3d046e8aaed",
+      "bytes": 3360
+    },
+    "static-mypy-final.txt": {
+      "sha256": "d9a5631f7d87a741fbecc3236286d1792d22d349ff13846d71cdc9217307bb76",
+      "bytes": 44
+    },
+    "static-mypy.txt": {
+      "sha256": "d9a5631f7d87a741fbecc3236286d1792d22d349ff13846d71cdc9217307bb76",
+      "bytes": 44
+    },
+    "static-ruff-final.txt": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "static-ruff.txt": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    }
+  }
+}

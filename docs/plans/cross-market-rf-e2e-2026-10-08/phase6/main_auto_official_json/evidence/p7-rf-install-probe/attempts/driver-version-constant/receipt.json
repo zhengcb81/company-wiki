@@ -1,0 +1,89 @@
+{
+  "schema_version": "p7-rf-installed-probe/1",
+  "status": "failed",
+  "source_head": "47f497ad9dee9dc47f66fca37016e9ba6b6b6f33",
+  "source_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+  "source_selected_sha256": {
+    "CHANGELOG.md": "d3ad9585e9ee70cb3d410847999203b1370220332eb36b632c18dfa6de72bbdc",
+    "SKILL.md": "baad77074b2e4cfbdf502db2e65291c6818dda259ade49a281bd633aaf9be9d0",
+    "references/economic-support-diagnostics.md": "8dd299b5eedb2bc19598b0f38c6ad12f9ad33973b7586bf58ae782bf7241afc0",
+    "references/evidence-role-calibration.md": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21",
+    "scripts/contracts/constants.py": "728f4e6ffc1417c37e155ea0191c3a28b804db601f279c11649e481e0075da74",
+    "scripts/research/evidence_roles.py": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761",
+    "scripts/research/native_dependencies.py": "9dad832d2b6a8cbe3f2faf6e2e9f27b988319ae2d87f212fde26a6863a327dec",
+    "scripts/research_support_diagnostics.py": "8ce8390fc201b9fedb081be7074a4f6ae236ef41d14bff59c4eaeb6dbd14e688",
+    "scripts/schema_compatibility.py": "1df2f419152fdf50da2555417952cb9fd028e6e85a5f5d1e39ca4f46e4e8707a"
+  },
+  "input_source_sha256": {
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\p7-rf-final-review\\shared_root_minimal_input.json": "3353ccb20511e42a86ca3a8bc1e4e3bce6dad483c4c481e32e6276bedb506ef7",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\fixtures\\scoped_calibration_support\\no_research.json": "e9914fccdc3050fb7505658c6d18be6ad52a37f4c1e9ac01137923efe5794275",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\fixtures\\scoped_calibration_support\\valid_calibrated.json": "9dc53ac69033e432b499660a122cb061ebda5a1d14290e54178a370d92976196",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_scoped_calibration_support.py": "ee771575887192835bcaddd0f09344a3dad3eb7c417c01ac899e3235f3a2764d",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_research_evidence_roles.py": "24ec3b395a1ea64e0d0c382113f86cd9c9c54fda079664f8c9ca337d84923ba0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_recognition_bridge.py": "187ea01e45d144031d34b11e3a76c551b2029556c4d26b0b34983f7d59bcc1a5",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_data_contract.py": "1737d73c68d98cc0298896fc0e714d6c5281708015aeb9d3367df23563595202"
+  },
+  "sync_verification": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\p7-rf-install\\verification.json",
+    "sha256": "d602b4c979d54a3450379d7d4517231e66e594215bd507b45a3f7709eeff0de4"
+  },
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-installed-jj0qr8z9",
+  "provider_calls": 0,
+  "model_calls": 0,
+  "new_cost_usd": 0,
+  "commands": [
+    {
+      "name": "factory",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-X",
+        "utf8",
+        "-B",
+        "-c",
+        "\nimport json, socket, sys\nfrom copy import deepcopy\nfrom pathlib import Path\nrepo=Path(sys.argv[1]).resolve()\nout=Path(sys.argv[2]).resolve()\nshared=Path(sys.argv[3]).resolve()\ndef blocked(*args,**kwargs): raise RuntimeError('Fixture factory attempted network access')\nsocket.socket.connect=blocked;socket.create_connection=blocked\nsys.path[:0]=[str(repo/'scripts'),str(repo/'tests')]\nfrom test_scoped_calibration_support import target_period_bridge_document\nfixture=repo/'tests/fixtures/scoped_calibration_support'\nread=lambda p:json.loads(p.read_text(encoding='utf-8'))\nraw=read(fixture/'valid_calibrated.json')\nscoped=read(shared)\ncompany=deepcopy(scoped)\ncompany['operating_research']['calibrations'][0]['scope']=company['company_name']\nfor observation in company['operating_research']['observations']:\n    observation['scope']=company['company_name']\nsync=deepcopy(raw)\nfor parameter in sync['parameters']:\n    if parameter['parameter_id'].startswith('conversion_'): parameter['period']='FY2031'\nfor claim in sync['evidence_claims']:\n    if claim['target_id'].startswith('conversion_'): claim['period']='FY2031'\nfor observation in sync['operating_research']['observations']:\n    if observation['observation_kind']=='conversion': observation['period']='FY2031'\nbridge=target_period_bridge_document()\nassert all(p['period']=='FY2025' for p in bridge['parameters'] if p['parameter_id'] in {'conversion_low','conversion_base','conversion_high'})\nassert all(p['period']=='FY2026' for p in bridge['parameters'] if p['parameter_id'].endswith('_for_2026'))\nassert all(c['period']=='FY2025' for c in bridge['evidence_claims'] if c['target_id'].startswith('conversion_'))\nobjects={'no_optional':read(fixture/'no_research.json'),'scope_a_only':scoped,\n         'company_scope':company,'synchronized_future':sync,'historical_native_bridge':bridge}\nfor name,doc in objects.items():\n    (out/(name+'.json')).write_text(json.dumps(doc,ensure_ascii=False,indent=1)+'\\n',encoding='utf-8')\nprint(json.dumps({'cases':list(objects),'test_helpers_are_engineering_input_factory_only':True,'bridge_factory':str(repo/'tests/test_scoped_calibration_support.py')},ensure_ascii=False))\n",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-installed-jj0qr8z9\\inputs",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\p7-rf-final-review\\shared_root_minimal_input.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6231096000046819,
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-installed-jj0qr8z9\\factory-registry\\publications.jsonl",
+      "stdout": "{\"cases\": [\"no_optional\", \"scope_a_only\", \"company_scope\", \"synchronized_future\", \"historical_native_bridge\"], \"test_helpers_are_engineering_input_factory_only\": true, \"bridge_factory\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast\\\\tests\\\\test_scoped_calibration_support.py\"}\r\n",
+      "stderr": ""
+    },
+    {
+      "name": "install-0-version",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-I",
+        "-X",
+        "utf8",
+        "-B",
+        "-c",
+        "\nimport hashlib, importlib, json, os, runpy, socket, sys\nfrom pathlib import Path\ninstall=Path(sys.argv[1]).resolve()\nentry=sys.argv[2]\nargs=sys.argv[3:]\nsys.path.insert(0,str(install/'scripts'))\nnetwork_attempts=[]\ndef blocked(*args,**kwargs):\n    network_attempts.append('network')\n    raise RuntimeError('Offline installed probe attempted network access')\nsocket.socket.connect=blocked\nsocket.create_connection=blocked\nnames=('contracts.constants','revenue_core','revenue_report','revenue_backtest',\n       'publication_registry','research.evidence_roles','research.native_dependencies',\n       'schema_compatibility','research_support_diagnostics')\norigins={}\nfor name in names:\n    module=importlib.import_module(name)\n    path=Path(module.__file__).resolve()\n    assert path.is_relative_to(install/'scripts'), (name,str(path))\n    origins[name]={'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}\nassert importlib.import_module('contracts.constants').ENGINE_VERSION=='4.2.1'\nregistry=importlib.import_module('publication_registry').registry_file().resolve()\nassert registry==Path(os.environ['REVENUE_PUBLICATION_REGISTRY']).resolve()\nassert os.environ['RF_PUBLICATION_REGISTRY']==os.environ['REVENUE_PUBLICATION_REGISTRY']\nsys.argv=[str(install/'scripts'/entry),*args]\ntry:\n    runpy.run_path(str(install/'scripts'/entry),run_name='__main__')\nfinally:\n    assert not network_attempts, network_attempts\n    print('INSTALLED_ORIGINS='+json.dumps({'install':str(install),'origins':origins,'registry':str(registry),'network_attempts':0},ensure_ascii=False),file=sys.stderr)\n",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+        "revenue_forecast.py",
+        "--version"
+      ],
+      "exit_code": 1,
+      "seconds": 0.4501534000009997,
+      "registry": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\p7-rf-installed-jj0qr8z9\\install-0\\version\\publications.jsonl",
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\r\n  File \"<string>\", line 23, in <module>\r\n    assert importlib.import_module('contracts.constants').ENGINE_VERSION=='4.2.1'\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAttributeError: module 'contracts.constants' has no attribute 'ENGINE_VERSION'. Did you mean: 'SKILL_VERSION'?\r\n"
+    }
+  ],
+  "installations": [],
+  "error": "AssertionError({'name': 'install-0-version', 'argv': ['C:\\\\Miniconda\\\\python.exe', '-I', '-X', 'utf8', '-B', '-c', \"\\nimport hashlib, importlib, json, os, runpy, socket, sys\\nfrom pathlib import Path\\ninstall=Path(sys.argv[1]).resolve()\\nentry=sys.argv[2]\\nargs=sys.argv[3:]\\nsys.path.insert(0,str(install/'scripts'))\\nnetwork_attempts=[]\\ndef blocked(*args,**kwargs):\\n    network_attempts.append('network')\\n    raise RuntimeError('Offline installed probe attempted network access')\\nsocket.socket.connect=blocked\\nsocket.create_connection=blocked\\nnames=('contracts.constants','revenue_core','revenue_report','revenue_backtest',\\n       'publication_registry','research.evidence_roles','research.native_dependencies',\\n       'schema_compatibility','research_support_diagnostics')\\norigins={}\\nfor name in names:\\n    module=importlib.import_module(name)\\n    path=Path(module.__file__).resolve()\\n    assert path.is_relative_to(install/'scripts'), (name,str(path))\\n    origins[name]={'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}\\nassert importlib.import_module('contracts.constants').ENGINE_VERSION=='4.2.1'\\nregistry=importlib.import_module('publication_registry').registry_file().resolve()\\nassert registry==Path(os.environ['REVENUE_PUBLICATION_REGISTRY']).resolve()\\nassert os.environ['RF_PUBLICATION_REGISTRY']==os.environ['REVENUE_PUBLICATION_REGISTRY']\\nsys.argv=[str(install/'scripts'/entry),*args]\\ntry:\\n    runpy.run_path(str(install/'scripts'/entry),run_name='__main__')\\nfinally:\\n    assert not network_attempts, network_attempts\\n    print('INSTALLED_ORIGINS='+json.dumps({'install':str(install),'origins':origins,'registry':str(registry),'network_attempts':0},ensure_ascii=False),file=sys.stderr)\\n\", 'C:\\\\Users\\\\郑曾波\\\\.agents\\\\skills\\\\revenue-forecast', 'revenue_forecast.py', '--version'], 'exit_code': 1, 'seconds': 0.4501534000009997, 'registry': 'C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\p7-rf-installed-jj0qr8z9\\\\install-0\\\\version\\\\publications.jsonl', 'stdout': '', 'stderr': 'Traceback (most recent call last):\\r\\n  File \"<string>\", line 23, in <module>\\r\\n    assert importlib.import_module(\\'contracts.constants\\').ENGINE_VERSION==\\'4.2.1\\'\\r\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\r\\nAttributeError: module \\'contracts.constants\\' has no attribute \\'ENGINE_VERSION\\'. Did you mean: \\'SKILL_VERSION\\'?\\r\\n'})",
+  "all_installed_files_unchanged": true,
+  "installed_file_count": 551,
+  "source_inputs_unchanged": true,
+  "source_selected_unchanged": true,
+  "environment_unchanged": true,
+  "seconds": 1.31547679999494,
+  "owned_temp_removed": true,
+  "log_sha256": {
+    "factory.log": "bde6d5775194154ba2f3a42d08e1effa34ab1c9966a60d843c786b9263a7627b",
+    "install-0-version.log": "8f62279235088524c1173ec057c438e37a64543b3d23651b4a6508e69eda3a9e"
+  }
+}

@@ -1,0 +1,137 @@
+Updating 6883bf00..e929185c
+Fast-forward
+ .gitattributes                                     |    6 +
+ .planning/p7-rf-scoped-calibration/HANDOFF.md      |   54 +
+ .../p7-rf-scoped-calibration/HANDOFF_FORMAT.md     |   22 +
+ .../IMPLEMENTATION_CARD.md                         |   91 +
+ .planning/p7-rf-scoped-calibration/INTERFACES.md   |   38 +
+ .../MAIN_INTEGRATION_PATCH.patch                   |   76 +
+ .../m1/red_test_research_support_diagnostics.log   |  Bin 0 -> 10421 bytes
+ .../m1/red_test_scoped_calibration_support.log     |  Bin 0 -> 6126 bytes
+ .../p7-rf-scoped-calibration/attempts/m1/repro.py  |  Bin 0 -> 1873 bytes
+ .../attempts/m2/compatibility_main_patch_trial.log |  Bin 0 -> 202 bytes
+ .../attempts/m2/green_responsibility.log           |  Bin 0 -> 4428 bytes
+ .../attempts/m2/static.log                         |  Bin 0 -> 87 bytes
+ .../attempts/m3/independent_review.md              |  Bin 0 -> 2185 bytes
+ .../p7-rf-scoped-calibration/attempts/m3/m3_e2e.py |  Bin 0 -> 10994 bytes
+ .../attempts/m3/pre_push_gate_local.log            |  Bin 0 -> 1606 bytes
+ .../p7-rf-scoped-calibration/attempts/m3_e2e.log   |  Bin 0 -> 1613 bytes
+ .planning/p7-rf-scoped-calibration/findings.md     |   55 +
+ .../p7-rf-scoped-calibration/handoff.example.json  |   41 +
+ .planning/p7-rf-scoped-calibration/handoff.json    |  144 ++
+ .../p7-rf-scoped-calibration/handoff.schema.json   |  219 +++
+ .../main_reception/HANDOFF.md                      |  Bin 0 -> 9489 bytes
+ .../main_reception/concentrated.json               |  Bin 0 -> 2434 bytes
+ .../main_reception/handoff.json                    |  Bin 0 -> 6755 bytes
+ .../main_reception/implementation.diff             |  Bin 0 -> 18397 bytes
+ .../main_reception/main-e2e-receipt.json           |  Bin 0 -> 130687 bytes
+ .../main_reception/mypy.log                        |  Bin 0 -> 44 bytes
+ .../main_reception/progress.md                     |  Bin 0 -> 1801 bytes
+ .../main_reception/protected-after.json            |  Bin 0 -> 4419 bytes
+ .../main_reception/protected-before.json           |  Bin 0 -> 3899 bytes
+ .../main_reception/public_e2e.py                   |  Bin 0 -> 12932 bytes
+ .../main_reception/red.json                        |  Bin 0 -> 666 bytes
+ .../main_reception/red.log                         |  Bin 0 -> 4357 bytes
+ .../responsibility-compatibility.log               |  Bin 0 -> 196 bytes
+ .../main_reception/ruff.log                        |  Bin 0 -> 20 bytes
+ .../p7-rf-scoped-calibration/main_reception_fix.md |   28 +
+ .../main_reception_scope_fix/HANDOFF.md            |  Bin 0 -> 6185 bytes
+ .../main_reception_scope_fix/before.json           |  Bin 0 -> 6212 bytes
+ .../main_reception_scope_fix/green.json            |  Bin 0 -> 1721 bytes
+ .../main_reception_scope_fix/handoff.json          |  Bin 0 -> 2739 bytes
+ .../main_reception_scope_fix/implementation.diff   |  Bin 0 -> 10647 bytes
+ .../main_reception_scope_fix/mypy.log              |  Bin 0 -> 42 bytes
+ .../main_reception_scope_fix/progress.md           |  Bin 0 -> 1098 bytes
+ .../main_reception_scope_fix/protected-after.json  |  Bin 0 -> 4376 bytes
+ .../public-cli-receipt.json                        |  Bin 0 -> 3869 bytes
+ .../main_reception_scope_fix/public-cli.log        |  Bin
+ .../main_reception_scope_fix/public_cli.py         |  Bin 0 -> 3784 bytes
+ .../main_reception_scope_fix/red.json              |  Bin 0 -> 806 bytes
+ .../main_reception_scope_fix/red.log               |  Bin 0 -> 4316 bytes
+ .../main_reception_scope_fix/responsibility.log    |  Bin 0 -> 99 bytes
+ .../main_reception_scope_fix/ruff.log              |  Bin 0 -> 19 bytes
+ .../main_reception_scope_fix/run_checks.py         |  Bin 0 -> 2336 bytes
+ .planning/p7-rf-scoped-calibration/progress.md     |   20 +
+ .planning/p7-rf-scoped-calibration/task_plan.md    |   29 +
+ CHANGELOG.md                                       |    6 +
+ SKILL.md                                           |    6 +-
+ references/economic-support-diagnostics.md         |   31 +
+ references/evidence-role-calibration.md            |    8 +-
+ scripts/contracts/constants.py                     |    7 +-
+ scripts/research/evidence_roles.py                 |   46 +-
+ scripts/research/native_dependencies.py            |   38 +-
+ scripts/research_support_diagnostics.py            |  136 ++
+ scripts/schema_compatibility.py                    |    4 +-
+ .../scoped_calibration_support/no_research.json    | 1291 ++++++++++++++
+ .../partial_driver_calibration.json                | 1817 ++++++++++++++++++++
+ .../unrelated_calibration_scope.json               | 1395 +++++++++++++++
+ .../unrelated_conversion_scope.json                | 1395 +++++++++++++++
+ .../valid_calibrated.json                          | 1395 +++++++++++++++
+ tests/test_data_contract.py                        |    2 +-
+ tests/test_m3_period_flow_contract.py              |    4 +-
+ tests/test_m3_schema_compatibility.py              |    2 +-
+ tests/test_research_support_diagnostics.py         |  256 +++
+ tests/test_schema_compatibility.py                 |    2 +-
+ tests/test_scoped_calibration_support.py           |  238 +++
+ 73 files changed, 8882 insertions(+), 20 deletions(-)
+ create mode 100644 .planning/p7-rf-scoped-calibration/HANDOFF.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/HANDOFF_FORMAT.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/IMPLEMENTATION_CARD.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/INTERFACES.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/MAIN_INTEGRATION_PATCH.patch
+ create mode 100644 .planning/p7-rf-scoped-calibration/attempts/m1/red_test_research_support_diagnostics.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/attempts/m1/red_test_scoped_calibration_support.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/attempts/m1/repro.py
+ create mode 100644 .planning/p7-rf-scoped-calibration/attempts/m2/compatibility_main_patch_trial.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/attempts/m2/green_responsibility.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/attempts/m2/static.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/attempts/m3/independent_review.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/attempts/m3/m3_e2e.py
+ create mode 100644 .planning/p7-rf-scoped-calibration/attempts/m3/pre_push_gate_local.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/attempts/m3_e2e.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/findings.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/handoff.example.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/handoff.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/handoff.schema.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/HANDOFF.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/concentrated.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/handoff.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/implementation.diff
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/main-e2e-receipt.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/mypy.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/progress.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/protected-after.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/protected-before.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/public_e2e.py
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/red.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/red.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/responsibility-compatibility.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/ruff.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_fix.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/HANDOFF.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/before.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/green.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/handoff.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/implementation.diff
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/mypy.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/progress.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/protected-after.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/public-cli-receipt.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/public-cli.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/public_cli.py
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/red.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/red.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/responsibility.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/ruff.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_scope_fix/run_checks.py
+ create mode 100644 .planning/p7-rf-scoped-calibration/progress.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/task_plan.md
+ create mode 100644 references/economic-support-diagnostics.md
+ create mode 100644 scripts/research_support_diagnostics.py
+ create mode 100644 tests/fixtures/scoped_calibration_support/no_research.json
+ create mode 100644 tests/fixtures/scoped_calibration_support/partial_driver_calibration.json
+ create mode 100644 tests/fixtures/scoped_calibration_support/unrelated_calibration_scope.json
+ create mode 100644 tests/fixtures/scoped_calibration_support/unrelated_conversion_scope.json
+ create mode 100644 tests/fixtures/scoped_calibration_support/valid_calibrated.json
+ create mode 100644 tests/test_research_support_diagnostics.py
+ create mode 100644 tests/test_scoped_calibration_support.py

@@ -1,0 +1,22 @@
+{
+  "stage": "final bounded diagnostics and scoped read responsibility",
+  "returncode": 0,
+  "duration_seconds": 8.84,
+  "log_sha256": "52808abed8a05ce96701b30bb6f183ea7583e8c7ea74e81c7fc50fef5cff67a4",
+  "owned_temp_restored": true,
+  "external_vendor_calls": 0,
+  "test_argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_narrative_failed_final.py",
+    "tests/unit/test_automation_outbox_read_scope.py",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-green-x2u7f_bf\\pytest",
+    "-p",
+    "no:cacheprovider"
+  ]
+}

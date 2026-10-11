@@ -1,0 +1,37 @@
+{
+  "protected_baseline_count": 254,
+  "protected_changes": [
+    {
+      "path": "src/company_wiki/automation/store.py",
+      "before_sha256": "0c08f9e65ecdebb5555f66bfc8fc9f2aeea245af58e9b2a6cf1d095b3526c043",
+      "after_sha256": "ca021fe84e2157b846347103773b21f86092cc5e9e9d3bb17d5ff53858aa02e2"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_candidates.py",
+      "before_sha256": "44d8292f548cedc3ba0c6f7016532dadbe7448ecb62881a38f21746c767bf26e",
+      "after_sha256": "bc58b8ac0af809fb5002f70caee6a528eab863523a8fea91d967e8e7b8dcdb29"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "before_sha256": "5c2a3fbf2620e1db4a26312a633643ecd8e4a7eb3d353dfc5ff2a87a25b76956",
+      "after_sha256": "bb031300e410edaebadafe28ae9a9b04e68a1927091d9e2b3c34e435084c18d0"
+    }
+  ],
+  "authorized_additional_delta": "src/company_wiki/automation/store.py only list_outbox_entries read method; ROOT scope extension",
+  "production_config_protected": true,
+  "owned_changed_sha256": {
+    "src/company_wiki/automation/narrative_model.py": "c4d213e2eef4d4e9372ebc1af1ae497d811768ab8a1c7dad97f1d6c72508aa66",
+    "src/company_wiki/automation/narrative_http_model.py": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+    "src/company_wiki/automation/narrative_model_caller.py": "abee99f0a93c44aca7dc62d3d002c6e90aca48984839a488bbc098e1f086ff06",
+    "src/company_wiki/automation/narrative_summarize.py": "c438640fffc7fccb204434c3dde27cd0b3d6bca4c6f88ccedf05114d4b2fd035",
+    "src/company_wiki/automation/narrative_batch.py": "3c4eaab154d12f4a2125b0e5a8848d749c7aed07d886870cfba5cf5349c79b0a",
+    "src/company_wiki/automation/store.py": "ca021fe84e2157b846347103773b21f86092cc5e9e9d3bb17d5ff53858aa02e2",
+    "src/company_wiki/automation/narrative_failed_final.py": "0263148027b439f727cea4d9255ade074b8347b81f0398ad1e4b6c050e0b9cb8",
+    "tests/unit/test_narrative_failed_final.py": "7a3915874b47f18af187e5c4d868b60c3248d4619fed25112526316f6c90ef15",
+    "tests/unit/test_automation_outbox_read_scope.py": "40e7ebfceb4585d133ad9a3b8597ea1096d4f69865d068cba2671388ccfdf816",
+    "tests/integration/test_narrative_failed_final_cli.py": "6aedd3d04290db352557a1d998adb07696d6cc45fffedbce003523358775749c"
+  },
+  "diff_sha256": "5c8f131b411091545c0ecb77a337d0c17f15aa38a130335722b39c30f14cbe3d",
+  "external_vendor_calls": 0,
+  "commit_or_stage_or_push": false
+}

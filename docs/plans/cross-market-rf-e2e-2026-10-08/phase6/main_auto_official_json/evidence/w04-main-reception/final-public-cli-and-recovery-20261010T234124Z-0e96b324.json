@@ -1,0 +1,23 @@
+{
+  "stage": "final public CLI and prior recovery responsibility",
+  "returncode": 1,
+  "duration_seconds": 52.956,
+  "log_sha256": "b0224c7f586616dd03afd069faf6059f9790e3c63b0e8550c427046ddd3a8fbf",
+  "owned_temp_restored": true,
+  "external_vendor_calls": 0,
+  "test_argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/integration/test_narrative_failed_final_cli.py",
+    "tests/integration/test_narrative_batch_budget_and_resume.py",
+    "tests/integration/test_narrative_generation_outbox.py",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-cli-gbek9nq9\\pytest",
+    "-p",
+    "no:cacheprovider"
+  ]
+}

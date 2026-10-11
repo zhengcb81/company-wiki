@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "git",
+    "commit",
+    "-m",
+    "fix(research): diagnose conversion applicability without changing forecasts"
+  ],
+  "exit": 0,
+  "head": "9e29b1f8491ed9d0799a79084c4474d789d4fdaf",
+  "elapsed_seconds": 14.066,
+  "native_delivery_logs_exact": true,
+  "log_sha256": "0443e706dfedddd90108bdd395ebf9c794d5ec12146788170181d19c708ca7b7"
+}

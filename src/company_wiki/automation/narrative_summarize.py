@@ -21,6 +21,7 @@ from .narrative_contracts import (
     SourceRevisionEventPayload,
 )
 from .narrative_model import (
+    FailedFinalDiagnostic,
     ModelCitationError,
     ModelRateLimitError,
     ModelResponseError,
@@ -31,6 +32,7 @@ from .narrative_model import (
     decode_model_draft,
 )
 from .narrative_http_model import ModelHTTPError
+from .narrative_failed_final import fit_failed_final_result
 from .narrative_model_caller import NarrativeBudgetCallError, NarrativeModelCaller
 
 
@@ -94,8 +96,9 @@ def _failure(
     outcome: HandlerOutcome,
     detail: str,
     metrics: HandlerMetrics | None = None,
+    *, failed_final: FailedFinalDiagnostic | None = None,
 ) -> HandlerResult:
-    return HandlerResult(
+    base = HandlerResult(
         outcome=outcome,
         result={},
         artifacts=(),
@@ -103,6 +106,13 @@ def _failure(
         metrics=metrics or HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
         error=HandlerError(code=code, detail=detail),
     )
+    if failed_final is not None:
+        try:
+            return fit_failed_final_result(base, failed_final)
+        except Exception:
+            # Optional diagnostic failure cannot hide the primary error/usage.
+            pass
+    return base
 
 
 def _success(
@@ -198,7 +208,7 @@ class NarrativeSummarizeHandler:
                 exc.code,
                 exc.outcome,
                 "metered model attempt did not complete" + status,
-                exc.metrics,
+                exc.metrics, failed_final=exc.failed_final,
             )
         except ModelHTTPError as exc:
             return _failure(

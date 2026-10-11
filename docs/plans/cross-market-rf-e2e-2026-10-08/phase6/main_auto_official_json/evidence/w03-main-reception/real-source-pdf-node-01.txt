@@ -1,0 +1,3 @@
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+{"sample": "annual", "anchors": {"CVD": true, "HAR": true, "ALD": true, "�ظ���������": true}, "selected": 24, "verified": 24, "status": "partial"}
+{"sample": "ipo", "anchors": {"��������": true, "�����Ϊ": true, "ͻ��": true, "���ڹ���": true}, "selected": 23, "verified": 23, "status": "partial"}

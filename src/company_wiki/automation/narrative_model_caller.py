@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 import hashlib
 import sqlite3
@@ -21,6 +21,7 @@ from .narrative_http_model import (
     NarrativeHTTPModel,
 )
 from .narrative_model import (
+    FailedFinalDiagnostic,
     ModelRateLimitError,
     ModelResponseError,
     ModelTimeoutError,
@@ -52,8 +53,11 @@ class NarrativeBudgetCallError(Exception):
     provider_code: int | None = None
     finish_reason: str | None = None
     content_bytes: int | None = None
+    failed_final: FailedFinalDiagnostic | None = None
 
     def __post_init__(self) -> None:
+        if self.failed_final is not None and not isinstance(self.failed_final, FailedFinalDiagnostic):
+            raise TypeError("failed_final must be a typed observation or null")
         if self.finish_reason not in {None, "length"}:
             raise ValueError("invalid response finish diagnostic")
         if self.content_bytes is not None and (type(self.content_bytes) is not int
@@ -196,6 +200,7 @@ class BudgetedNarrativeCaller:
             response_stage = provider_code = None
             finish_reason = content_bytes = reasoning_tokens = None
             usage_diagnostic = None
+            failed_final = None
             duration_ms = max(0, int((time.monotonic() - started) * 1000))
             if isinstance(error, ModelTimeoutError):
                 code, outcome = "MODEL_TIMEOUT", HandlerOutcome.RETRYABLE
@@ -218,6 +223,7 @@ class BudgetedNarrativeCaller:
                 code, usage = "MODEL_CREDENTIALS_INVALID", ModelUsage(0, 0)
             elif isinstance(error, ModelEnvelopeError):
                 http_status, response_stage, provider_code = error.http_status, error.response_stage, error.provider_code
+                failed_final = error.failed_final
                 duration_ms = error.duration_ms
                 reasoning_tokens, usage_diagnostic = error.reasoning_tokens, error.usage_diagnostic
                 if error.input_tokens is not None and error.output_tokens is not None:
@@ -225,25 +231,26 @@ class BudgetedNarrativeCaller:
             elif isinstance(error, ModelOutputTruncatedError):
                 code, duration_ms = "MODEL_OUTPUT_TRUNCATED", error.duration_ms
                 finish_reason, content_bytes = error.finish_reason, error.content_bytes
+                failed_final = error.failed_final
                 reasoning_tokens, usage_diagnostic = error.reasoning_tokens, error.usage_diagnostic
                 if error.input_tokens is not None and error.output_tokens is not None:
                     usage = ModelUsage(error.input_tokens, error.output_tokens)
             elif not isinstance(error, ModelResponseError):
                 code = "MODEL_TRANSPORT_FAILED"
-            metrics = self._settle(
-                context,
-                fallback=admission.record,
-                usage=usage,
-                response_sha256=None,
-                error_code=code,
-                duration_ms=duration_ms,
-                no_output=True,
-                reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
-            )
+            try:
+                metrics = self._settle(
+                    context, fallback=admission.record, usage=usage,
+                    response_sha256=failed_final.final_content_sha256 if failed_final is not None else None,
+                    error_code=code, duration_ms=duration_ms, no_output=True,
+                    reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
+                )
+            except NarrativeBudgetCallError as settlement_error:
+                raise replace(settlement_error, failed_final=failed_final,
+                    finish_reason=finish_reason, content_bytes=content_bytes) from None
             raise NarrativeBudgetCallError(
                 code, outcome, metrics, http_status=http_status,
                 response_stage=response_stage, provider_code=provider_code,
-                finish_reason=finish_reason, content_bytes=content_bytes,
+                finish_reason=finish_reason, content_bytes=content_bytes, failed_final=failed_final,
             ) from None
         usage = None
         if response.input_tokens is not None and response.output_tokens is not None:

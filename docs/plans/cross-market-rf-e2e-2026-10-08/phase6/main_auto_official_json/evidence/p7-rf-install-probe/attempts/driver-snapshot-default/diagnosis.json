@@ -1,0 +1,15 @@
+{
+  "kind": "engineering_driver_optional_forecast_version",
+  "previous_driver_sha256": "f0cb7edf0e2c8c1a3db1a29ae5df7c0cc78c0bc0bdf6c7da2d890960b9438f8f",
+  "repaired_driver_sha256": "faaac5809923bcf34ce978bfe353e093eb0ac331790c27ae2b7d371eb16d4548",
+  "successful_installed_native_before_driver_error": [
+    "version4.2.1",
+    "no_optional_validate",
+    "no_optional_compute_and_markdown"
+  ],
+  "snapshot_not_invoked": true,
+  "actual_public_default_binding": "new native forecast.forecast_version feeds snapshot version",
+  "fixtures_unchanged": true,
+  "no_installed_source_change": true,
+  "preserved_receipt_sha256": "9162836a8acfc322e6c3e6ad6537b1ac71f3be8bf1ada758b2c875fb3d5ea32e"
+}

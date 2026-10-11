@@ -1,0 +1,86 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w04-cli-rc4876fh\\pytest", "requested_basetemp_len": 55, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items
+
+tests\integration\test_narrative_failed_final_cli.py FFF                 [100%]
+
+================================== FAILURES ===================================
+_ test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[951] _
+tests\integration\test_narrative_failed_final_cli.py:50: in test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact
+    with fixtures.isolated_batch_directory(tmp_path_factory) as root:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:148: in __exit__
+    next(self.gen)
+tests\support\narrative_batch_fixtures.py:95: in isolated_batch_directory
+    shutil.rmtree(root)
+C:\Miniconda\Lib\shutil.py:790: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\shutil.py:629: in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+C:\Miniconda\Lib\shutil.py:625: in _rmtree_unsafe
+    os.unlink(fullname)
+E   PermissionError: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-cli-rc4876fh\\pytest\\nb0\\run\\automation.db'
+_ test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[empty] _
+tests\integration\test_narrative_failed_final_cli.py:108: in test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact
+    assert _dump(state.store.db_path) == before
+E   assert ('BEGIN TRANS...n    );', ...) == ('BEGIN TRANS...n    );', ...)
+E     
+E     At index 23 diff: 'INSERT INTO "narrative_runs" VALUES(\'w04-failed-final\',\'aa3f1e18a9de353157f7310a3dde17322f70bdd7e28070b63d1b026d9da6a6e9\',\'b066c39ea4c55d848f9c4fb71bbb8861d09ef9092e36d39c76a00373dd01c2fe\',\'stub-model\',\'1.7.0\',\'fixture-price/1\',1000000,2000000,200000,2000000,2097152,\'blocked\',\'MODEL_USAGE_EXCEEDS_RESERVATION\',\'2026-10-10T23:30:48Z\',\'2026-10-10T23:30:52Z\',4,\'{"execution_versions":{"adapter":"openai-compatible-http/1","handlers":{"source.narrative_select":"1.1.0","source.narrative_summarize":"1.1.0","source.narrative_verify":"1.1.0"...
+E     
+E     ...Full output truncated (2 lines hidden), use '-vv' to show
+
+During handling of the above exception, another exception occurred:
+tests\integration\test_narrative_failed_final_cli.py:50: in test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact
+    with fixtures.isolated_batch_directory(tmp_path_factory) as root:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:162: in __exit__
+    self.gen.throw(value)
+tests\support\narrative_batch_fixtures.py:95: in isolated_batch_directory
+    shutil.rmtree(root)
+C:\Miniconda\Lib\shutil.py:790: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\shutil.py:629: in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+C:\Miniconda\Lib\shutil.py:625: in _rmtree_unsafe
+    os.unlink(fullname)
+E   PermissionError: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-cli-rc4876fh\\pytest\\nb1\\run\\automation.db'
+_ test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[unobserved] _
+tests\integration\test_narrative_failed_final_cli.py:108: in test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact
+    assert _dump(state.store.db_path) == before
+E   assert ('BEGIN TRANS...n    );', ...) == ('BEGIN TRANS...n    );', ...)
+E     
+E     At index 23 diff: 'INSERT INTO "narrative_runs" VALUES(\'w04-failed-final\',\'517f9cde78d3636216624b479443e442f39c81e3166db528b15147c85434d6a0\',\'b386fdb9db34e53be5e285be0528437a67d3ebd233f0c990f902cf8db2ca16ee\',\'stub-model\',\'1.7.0\',\'fixture-price/1\',1000000,2000000,200000,2000000,2097152,\'blocked\',\'MODEL_USAGE_EXCEEDS_RESERVATION\',\'2026-10-10T23:30:54Z\',\'2026-10-10T23:30:57Z\',4,\'{"execution_versions":{"adapter":"openai-compatible-http/1","handlers":{"source.narrative_select":"1.1.0","source.narrative_summarize":"1.1.0","source.narrative_verify":"1.1.0"...
+E     
+E     ...Full output truncated (2 lines hidden), use '-vv' to show
+
+During handling of the above exception, another exception occurred:
+tests\integration\test_narrative_failed_final_cli.py:50: in test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact
+    with fixtures.isolated_batch_directory(tmp_path_factory) as root:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\contextlib.py:162: in __exit__
+    self.gen.throw(value)
+tests\support\narrative_batch_fixtures.py:95: in isolated_batch_directory
+    shutil.rmtree(root)
+C:\Miniconda\Lib\shutil.py:790: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\shutil.py:629: in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+C:\Miniconda\Lib\shutil.py:625: in _rmtree_unsafe
+    os.unlink(fullname)
+E   PermissionError: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-cli-rc4876fh\\pytest\\nb2\\run\\automation.db'
+=========================== short test summary info ===========================
+FAILED tests/integration/test_narrative_failed_final_cli.py::test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[951]
+FAILED tests/integration/test_narrative_failed_final_cli.py::test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[empty]
+FAILED tests/integration/test_narrative_failed_final_cli.py::test_failed_final_public_cli_persists_terminal_and_two_resumes_without_model_or_artifact[unobserved]
+============================= 3 failed in 20.55s ==============================
+
+STDERR

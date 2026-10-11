@@ -1,0 +1,1394 @@
+{
+ "company_name": "Test Co",
+ "as_of_date": "2026-07-12",
+ "currency": "USD",
+ "unit": "million",
+ "fiscal_year_end": "12-31",
+ "base_year": 2025,
+ "forecast_years": [
+  2026,
+  2027
+ ],
+ "sources": [
+  {
+   "source_id": "filing",
+   "source_type": "exchange_filing",
+   "title": "FY2025 filing",
+   "publisher": "Test Exchange",
+   "url": "https://www.sec.gov/Archives/edgar/data/1/test.htm",
+   "published_date": "2026-03-01",
+   "accessed_date": "2026-07-01",
+   "page_or_section": "Revenue note",
+   "capture": {
+    "capture_schema_version": "1.0",
+    "capture_method": "browser_open",
+    "tool_name": "test-browser",
+    "tool_call_id": "fixture-filing",
+    "captured_date": "2026-07-01",
+    "snapshot_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "content_treatment": "untrusted_data_only",
+    "prompt_injection_status": "not_detected",
+    "host_receipt": {
+     "host_receipt_schema_version": "1.0",
+     "issuer": "fixture-host",
+     "environment": "test",
+     "tool_name": "test-browser",
+     "action": "capture_open",
+     "event_sha256": "bed3167a94455e5310b3653677391280303fc19203f4a9905e006e1ab828f088",
+     "timestamp": "2026-07-01",
+     "receipt_sha256": "f5cd3d2e073314511235884c809af13c40257e8229649ea66571224750ed21ee"
+    },
+    "receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+   }
+  }
+ ],
+ "parameters": [
+  {
+   "parameter_id": "reported_total",
+   "kind": "reported_fact",
+   "value": 150,
+   "unit": "USD million",
+   "period": "FY2025",
+   "definition": "reported total revenue",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_reported_total"
+   ]
+  },
+  {
+   "parameter_id": "segment_a_base",
+   "kind": "reported_fact",
+   "value": 100,
+   "unit": "USD million",
+   "period": "FY2025",
+   "definition": "segment A external revenue",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_segment_a_base"
+   ]
+  },
+  {
+   "parameter_id": "segment_b_base",
+   "kind": "reported_fact",
+   "value": 50,
+   "unit": "USD million",
+   "period": "FY2025",
+   "definition": "segment B external revenue",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_segment_b_base"
+   ]
+  },
+  {
+   "parameter_id": "a_growth_2026_base",
+   "kind": "analyst_assumption",
+   "value": 0.1,
+   "unit": "ratio",
+   "period": "FY2026",
+   "definition": "segment A growth rate base",
+   "scenario": "base",
+   "rationale": "Driver-based test assumption",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "ratio",
+   "time_basis": "annual",
+   "claim_ids": [
+    "claim_parameter_a_growth_2026_base"
+   ]
+  },
+  {
+   "parameter_id": "0_low_2026",
+   "kind": "derived_fact",
+   "value": 100.0,
+   "unit": "USD million",
+   "period": "FY2026",
+   "definition": "0_low_2026",
+   "scenario": "low",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_0_low_2026"
+   ],
+   "formula": "x0*x1",
+   "input_parameter_ids": [
+    "reference_lower",
+    "conversion_low"
+   ]
+  },
+  {
+   "parameter_id": "0_low_2027",
+   "kind": "analyst_assumption",
+   "value": 100.0,
+   "unit": "USD million",
+   "period": "FY2027",
+   "definition": "0_low_2027",
+   "scenario": "low",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_0_low_2027"
+   ]
+  },
+  {
+   "parameter_id": "0_base_2026",
+   "kind": "derived_fact",
+   "value": 110.00000000000001,
+   "unit": "USD million",
+   "period": "FY2026",
+   "definition": "0_base_2026",
+   "scenario": "base",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_0_base_2026"
+   ],
+   "formula": "x0*x1",
+   "input_parameter_ids": [
+    "reference_lower",
+    "conversion_base"
+   ]
+  },
+  {
+   "parameter_id": "0_base_2027",
+   "kind": "analyst_assumption",
+   "value": 121.00000000000001,
+   "unit": "USD million",
+   "period": "FY2027",
+   "definition": "0_base_2027",
+   "scenario": "base",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_0_base_2027"
+   ]
+  },
+  {
+   "parameter_id": "0_high_2026",
+   "kind": "derived_fact",
+   "value": 120.0,
+   "unit": "USD million",
+   "period": "FY2026",
+   "definition": "0_high_2026",
+   "scenario": "high",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_0_high_2026"
+   ],
+   "formula": "x0*x1",
+   "input_parameter_ids": [
+    "reference_lower",
+    "conversion_high"
+   ]
+  },
+  {
+   "parameter_id": "0_high_2027",
+   "kind": "analyst_assumption",
+   "value": 144.0,
+   "unit": "USD million",
+   "period": "FY2027",
+   "definition": "0_high_2027",
+   "scenario": "high",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_0_high_2027"
+   ]
+  },
+  {
+   "parameter_id": "1_low_2026",
+   "kind": "analyst_assumption",
+   "value": 50.0,
+   "unit": "USD million",
+   "period": "FY2026",
+   "definition": "1_low_2026",
+   "scenario": "low",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_1_low_2026"
+   ]
+  },
+  {
+   "parameter_id": "1_low_2027",
+   "kind": "analyst_assumption",
+   "value": 50.0,
+   "unit": "USD million",
+   "period": "FY2027",
+   "definition": "1_low_2027",
+   "scenario": "low",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_1_low_2027"
+   ]
+  },
+  {
+   "parameter_id": "1_base_2026",
+   "kind": "analyst_assumption",
+   "value": 55.00000000000001,
+   "unit": "USD million",
+   "period": "FY2026",
+   "definition": "1_base_2026",
+   "scenario": "base",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_1_base_2026"
+   ]
+  },
+  {
+   "parameter_id": "1_base_2027",
+   "kind": "analyst_assumption",
+   "value": 60.50000000000001,
+   "unit": "USD million",
+   "period": "FY2027",
+   "definition": "1_base_2027",
+   "scenario": "base",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_1_base_2027"
+   ]
+  },
+  {
+   "parameter_id": "1_high_2026",
+   "kind": "analyst_assumption",
+   "value": 60.0,
+   "unit": "USD million",
+   "period": "FY2026",
+   "definition": "1_high_2026",
+   "scenario": "high",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_1_high_2026"
+   ]
+  },
+  {
+   "parameter_id": "1_high_2027",
+   "kind": "analyst_assumption",
+   "value": 72.0,
+   "unit": "USD million",
+   "period": "FY2027",
+   "definition": "1_high_2027",
+   "scenario": "high",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_1_high_2027"
+   ]
+  },
+  {
+   "parameter_id": "reference_lower",
+   "kind": "reported_fact",
+   "value": 100,
+   "unit": "USD million",
+   "period": "FY2025",
+   "definition": "reference_lower",
+   "scenario": "all",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_reference_lower"
+   ]
+  },
+  {
+   "parameter_id": "reference_upper",
+   "kind": "reported_fact",
+   "value": 120,
+   "unit": "USD million",
+   "period": "FY2025",
+   "definition": "reference_upper",
+   "scenario": "all",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "revenue",
+   "time_basis": "annual",
+   "currency": "USD",
+   "scale": "million",
+   "claim_ids": [
+    "claim_parameter_reference_upper"
+   ]
+  },
+  {
+   "parameter_id": "conversion_low",
+   "kind": "analyst_assumption",
+   "value": 1.0,
+   "unit": "ratio",
+   "period": "FY2026",
+   "definition": "conversion_low",
+   "scenario": "low",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "ratio",
+   "time_basis": "annual",
+   "claim_ids": [
+    "claim_parameter_conversion_low"
+   ]
+  },
+  {
+   "parameter_id": "conversion_base",
+   "kind": "analyst_assumption",
+   "value": 1.1,
+   "unit": "ratio",
+   "period": "FY2026",
+   "definition": "conversion_base",
+   "scenario": "base",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "ratio",
+   "time_basis": "annual",
+   "claim_ids": [
+    "claim_parameter_conversion_base"
+   ]
+  },
+  {
+   "parameter_id": "conversion_high",
+   "kind": "analyst_assumption",
+   "value": 1.2,
+   "unit": "ratio",
+   "period": "FY2026",
+   "definition": "conversion_high",
+   "scenario": "high",
+   "rationale": "bridge test",
+   "source_ids": [
+    "filing"
+   ],
+   "dimension": "ratio",
+   "time_basis": "annual",
+   "claim_ids": [
+    "claim_parameter_conversion_high"
+   ]
+  }
+ ],
+ "segments": [
+  {
+   "name": "Segment A",
+   "base_revenue_parameter_id": "segment_a_base",
+   "recognition": {
+    "mode": "modeled_as_recognized",
+    "timing": "point_in_time",
+    "trigger": "customer acceptance",
+    "presentation": "gross",
+    "modeled_presentation": "gross",
+    "basis_claim_ids": [
+     "claim_recognition_Segment_A"
+    ]
+   },
+   "scenarios": {
+    "low": {
+     "model": "direct_revenue",
+     "driver_parameter_ids": {
+      "revenue": [
+       "0_low_2026",
+       "0_low_2027"
+      ]
+     },
+     "rationale": "low direct revenue test"
+    },
+    "base": {
+     "model": "direct_revenue",
+     "driver_parameter_ids": {
+      "revenue": [
+       "0_base_2026",
+       "0_base_2027"
+      ]
+     },
+     "rationale": "base direct revenue test"
+    },
+    "high": {
+     "model": "direct_revenue",
+     "driver_parameter_ids": {
+      "revenue": [
+       "0_high_2026",
+       "0_high_2027"
+      ]
+     },
+     "rationale": "high direct revenue test"
+    }
+   }
+  },
+  {
+   "name": "Segment B",
+   "base_revenue_parameter_id": "segment_b_base",
+   "recognition": {
+    "mode": "modeled_as_recognized",
+    "timing": "point_in_time",
+    "trigger": "customer acceptance",
+    "presentation": "gross",
+    "modeled_presentation": "gross",
+    "basis_claim_ids": [
+     "claim_recognition_Segment_B"
+    ]
+   },
+   "scenarios": {
+    "low": {
+     "model": "direct_revenue",
+     "driver_parameter_ids": {
+      "revenue": [
+       "0_low_2026",
+       "1_low_2027"
+      ]
+     },
+     "rationale": "low direct revenue test"
+    },
+    "base": {
+     "model": "direct_revenue",
+     "driver_parameter_ids": {
+      "revenue": [
+       "0_base_2026",
+       "1_base_2027"
+      ]
+     },
+     "rationale": "base direct revenue test"
+    },
+    "high": {
+     "model": "direct_revenue",
+     "driver_parameter_ids": {
+      "revenue": [
+       "0_high_2026",
+       "1_high_2027"
+      ]
+     },
+     "rationale": "high direct revenue test"
+    }
+   }
+  }
+ ],
+ "reported_total_revenue_parameter_id": "reported_total",
+ "base_adjustment_parameter_ids": [],
+ "historical_revenue": [
+  {
+   "year": 2024,
+   "value": 140,
+   "source_ids": [
+    "filing"
+   ],
+   "claim_ids": [
+    "claim_history_2024"
+   ]
+  },
+  {
+   "year": 2025,
+   "value": 150,
+   "source_ids": [
+    "filing"
+   ],
+   "claim_ids": [
+    "claim_history_2025"
+   ]
+  }
+ ],
+ "research_coverage": [
+  {
+   "dimension": "company_foundation",
+   "status": "modeled_driver",
+   "conclusion": "Reported revenue perimeter and segment base are reconciled",
+   "revenue_mechanism": "reported total equals segment external revenue plus adjustments",
+   "parameter_ids": [
+    "reported_total",
+    "segment_a_base",
+    "segment_b_base"
+   ],
+   "source_ids": [
+    "filing"
+   ]
+  },
+  {
+   "dimension": "growth_curve",
+   "status": "modeled_driver",
+   "conclusion": "Direct scenario revenue paths generate the synthetic forecast",
+   "revenue_mechanism": "registered scenario revenue parameters aggregate by segment",
+   "parameter_ids": [
+    "0_base_2026",
+    "0_base_2027",
+    "1_base_2027"
+   ],
+   "source_ids": [
+    "filing"
+   ]
+  },
+  {
+   "dimension": "industry_market",
+   "status": "immaterial",
+   "conclusion": "industry_market is not material to this synthetic test horizon",
+   "revenue_mechanism": "no incremental revenue effect is modeled in this fixture",
+   "parameter_ids": [],
+   "source_ids": [],
+   "rationale": "Synthetic contract test isolates the base and forecast calculation path"
+  },
+  {
+   "dimension": "competition",
+   "status": "immaterial",
+   "conclusion": "competition is not material to this synthetic test horizon",
+   "revenue_mechanism": "no incremental revenue effect is modeled in this fixture",
+   "parameter_ids": [],
+   "source_ids": [],
+   "rationale": "Synthetic contract test isolates the base and forecast calculation path"
+  },
+  {
+   "dimension": "capacity",
+   "status": "immaterial",
+   "conclusion": "capacity is not material to this synthetic test horizon",
+   "revenue_mechanism": "no incremental revenue effect is modeled in this fixture",
+   "parameter_ids": [],
+   "source_ids": [],
+   "rationale": "Synthetic contract test isolates the base and forecast calculation path"
+  },
+  {
+   "dimension": "technology",
+   "status": "immaterial",
+   "conclusion": "technology is not material to this synthetic test horizon",
+   "revenue_mechanism": "no incremental revenue effect is modeled in this fixture",
+   "parameter_ids": [],
+   "source_ids": [],
+   "rationale": "Synthetic contract test isolates the base and forecast calculation path"
+  },
+  {
+   "dimension": "policy",
+   "status": "immaterial",
+   "conclusion": "policy is not material to this synthetic test horizon",
+   "revenue_mechanism": "no incremental revenue effect is modeled in this fixture",
+   "parameter_ids": [],
+   "source_ids": [],
+   "rationale": "Synthetic contract test isolates the base and forecast calculation path"
+  },
+  {
+   "dimension": "customers",
+   "status": "immaterial",
+   "conclusion": "customers is not material to this synthetic test horizon",
+   "revenue_mechanism": "no incremental revenue effect is modeled in this fixture",
+   "parameter_ids": [],
+   "source_ids": [],
+   "rationale": "Synthetic contract test isolates the base and forecast calculation path"
+  },
+  {
+   "dimension": "demand",
+   "status": "immaterial",
+   "conclusion": "demand is not material to this synthetic test horizon",
+   "revenue_mechanism": "no incremental revenue effect is modeled in this fixture",
+   "parameter_ids": [],
+   "source_ids": [],
+   "rationale": "Synthetic contract test isolates the base and forecast calculation path"
+  }
+ ],
+ "schema_version": "3.7",
+ "management_communication_coverage": [
+  {
+   "category": "latest_annual_filing",
+   "status": "checked",
+   "source_ids": [
+    "filing"
+   ],
+   "checked_date": "2026-07-12",
+   "conclusion": "Synthetic fixture review found no material forward revenue target.",
+   "material_revenue_target_ids": []
+  },
+  {
+   "category": "latest_results_release",
+   "status": "checked",
+   "source_ids": [
+    "filing"
+   ],
+   "checked_date": "2026-07-12",
+   "conclusion": "Synthetic fixture review found no material forward revenue target.",
+   "material_revenue_target_ids": []
+  },
+  {
+   "category": "latest_earnings_call",
+   "status": "checked",
+   "source_ids": [
+    "filing"
+   ],
+   "checked_date": "2026-07-12",
+   "conclusion": "Synthetic fixture review found no material forward revenue target.",
+   "material_revenue_target_ids": []
+  },
+  {
+   "category": "latest_investor_presentation",
+   "status": "checked",
+   "source_ids": [
+    "filing"
+   ],
+   "checked_date": "2026-07-12",
+   "conclusion": "Synthetic fixture review found no material forward revenue target.",
+   "material_revenue_target_ids": []
+  },
+  {
+   "category": "latest_strategy_communication",
+   "status": "checked",
+   "source_ids": [
+    "filing"
+   ],
+   "checked_date": "2026-07-12",
+   "conclusion": "Synthetic fixture review found no material forward revenue target.",
+   "material_revenue_target_ids": []
+  },
+  {
+   "category": "material_announcements_since_last_filing",
+   "status": "checked",
+   "source_ids": [
+    "filing"
+   ],
+   "checked_date": "2026-07-12",
+   "conclusion": "Synthetic fixture review found no material forward revenue target.",
+   "material_revenue_target_ids": []
+  }
+ ],
+ "management_targets": [],
+ "probability_claim_ids": [
+  "claim_scenario_probability"
+ ],
+ "growth_driver_tree": {
+  "status": "modeled",
+  "drivers": [
+   {
+    "driver_id": "fixture_driver_Segment_A",
+    "title": "Modeled revenue path for Segment A",
+    "thesis": "The registered base-case operating inputs determine Segment A revenue growth.",
+    "causal_chain": [
+     "operating evidence informs the base-case inputs",
+     "registered model converts the inputs into activity",
+     "revenue-recognition rules convert activity into reported revenue"
+    ],
+    "parameter_ids": [
+     "0_base_2026",
+     "0_base_2027"
+    ],
+    "segment_attribution": [
+     {
+      "segment_name": "Segment A",
+      "weight": 1.0
+     }
+    ],
+    "horizon": {
+     "start_year": 2026,
+     "end_year": 2027
+    },
+    "persistence": "uncertain",
+    "persistence_rationale": "Synthetic fixtures do not assert a real-world structural duration.",
+    "evidence_nodes": [
+     {
+      "evidence_id": "fixture_evidence_Segment_A",
+      "evidence_type": "company_execution",
+      "inference_distance": "direct",
+      "conclusion": "The fixture source supports the modeled path for Segment A.",
+      "claim_ids": [
+       "claim_growth_driver_Segment_A"
+      ]
+     }
+    ],
+    "leading_indicators": [
+     "actual Segment A revenue versus the modeled annual path"
+    ],
+    "falsifiers": [
+     "actual Segment A revenue falls below the low scenario"
+    ],
+    "counterevidence_status": "searched_none_found",
+    "counterevidence_rationale": "The synthetic fixture records no contrary test evidence."
+   },
+   {
+    "driver_id": "fixture_driver_Segment_B",
+    "title": "Modeled revenue path for Segment B",
+    "thesis": "The registered base-case operating inputs determine Segment B revenue growth.",
+    "causal_chain": [
+     "operating evidence informs the base-case inputs",
+     "registered model converts the inputs into activity",
+     "revenue-recognition rules convert activity into reported revenue"
+    ],
+    "parameter_ids": [
+     "0_base_2026",
+     "1_base_2027"
+    ],
+    "segment_attribution": [
+     {
+      "segment_name": "Segment B",
+      "weight": 1.0
+     }
+    ],
+    "horizon": {
+     "start_year": 2026,
+     "end_year": 2027
+    },
+    "persistence": "uncertain",
+    "persistence_rationale": "Synthetic fixtures do not assert a real-world structural duration.",
+    "evidence_nodes": [
+     {
+      "evidence_id": "fixture_evidence_Segment_B",
+      "evidence_type": "company_execution",
+      "inference_distance": "direct",
+      "conclusion": "The fixture source supports the modeled path for Segment B.",
+      "claim_ids": [
+       "claim_growth_driver_Segment_B"
+      ]
+     }
+    ],
+    "leading_indicators": [
+     "actual Segment B revenue versus the modeled annual path"
+    ],
+    "falsifiers": [
+     "actual Segment B revenue falls below the low scenario"
+    ],
+    "counterevidence_status": "searched_none_found",
+    "counterevidence_rationale": "The synthetic fixture records no contrary test evidence."
+   }
+  ]
+ },
+ "evidence_claims": [
+  {
+   "claim_id": "claim_parameter_reported_total",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "reported_total",
+   "support_type": "exact_value",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter reported_total value and definition.",
+   "excerpt_sha256": "c729a435cf42c7eef31e358246f1ef86d6a8479c443c2faf69cc44111ae2adc6",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "extracted_value": 150,
+   "unit": "USD million",
+   "period": "FY2025",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_segment_a_base",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "segment_a_base",
+   "support_type": "exact_value",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter segment_a_base value and definition.",
+   "excerpt_sha256": "95837d8039a9efb73ccc5e52bcf11ac6e6cb4fce6600bb15f3031665548ae3e3",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "extracted_value": 100,
+   "unit": "USD million",
+   "period": "FY2025",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_segment_b_base",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "segment_b_base",
+   "support_type": "exact_value",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter segment_b_base value and definition.",
+   "excerpt_sha256": "7a0dd9610c03af17b9852e83c5a1c39ef228b4194aa29038987a078f176629b4",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "extracted_value": 50,
+   "unit": "USD million",
+   "period": "FY2025",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_a_growth_2026_base",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "a_growth_2026_base",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter a_growth_2026_base value and definition.",
+   "excerpt_sha256": "585b1cdd3a99c1757d38ea4752104ca7ae2dfaa19d2e20af44d3ce6bf5d4916e",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_0_low_2026",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "0_low_2026",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 0_low_2026 value and definition.",
+   "excerpt_sha256": "1863c171a56a6d9deab8a031a6b8cbaf9f62df92f1abf4aa68c57bee55c5a65b",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_0_low_2027",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "0_low_2027",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 0_low_2027 value and definition.",
+   "excerpt_sha256": "982aa86dc1840bd3cbb2da288225da731f1763bfecba4230be2b79ba1fc35543",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_0_base_2026",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "0_base_2026",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 0_base_2026 value and definition.",
+   "excerpt_sha256": "e7555e6c5d3561210353797c115791b4796630a57667d4cee12e6f25d7b7374a",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_0_base_2027",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "0_base_2027",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 0_base_2027 value and definition.",
+   "excerpt_sha256": "d69af90ea598338dbc6c6c8361c54f28cbcdbc9650aab34a39cd29d8156b3826",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_0_high_2026",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "0_high_2026",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 0_high_2026 value and definition.",
+   "excerpt_sha256": "44832eeb226731f20812a40aa9d5b636860046c25efe140a52ca53baca235aa1",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_0_high_2027",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "0_high_2027",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 0_high_2027 value and definition.",
+   "excerpt_sha256": "83e81faad086ef086f275cfe738f638ac0a55e1b418bb60a2f415bfd740d470d",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_1_low_2026",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "1_low_2026",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 1_low_2026 value and definition.",
+   "excerpt_sha256": "268b5abfa2641d9943e87854e712f633d1e845d825bc70dd526152b8a526a553",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_1_low_2027",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "1_low_2027",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 1_low_2027 value and definition.",
+   "excerpt_sha256": "57de31d1a57fd35da478100bc8a8dc246659dc8b6d1f7381f09f2b30686562d7",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_1_base_2026",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "1_base_2026",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 1_base_2026 value and definition.",
+   "excerpt_sha256": "6b7aa5c3e405ab77c319e5bd9139d2f5a14901c91df3ec8eb30829e7b945860f",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_1_base_2027",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "1_base_2027",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 1_base_2027 value and definition.",
+   "excerpt_sha256": "464c3b4775e8402e6efa7e4e9cd9b619866f7ab03afb12e2fe19048ee8989b5d",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_1_high_2026",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "1_high_2026",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 1_high_2026 value and definition.",
+   "excerpt_sha256": "c98c1a962e70c16ba0b71e4a20acaf8580548b02ef7457fcec1f7d5691bc51d9",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_1_high_2027",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "1_high_2027",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter 1_high_2027 value and definition.",
+   "excerpt_sha256": "4d41deb061de7908f4e6c077bc897adafe67942042ef6ce40aa4333ed74be416",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_parameter_reference_lower",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "reference_lower",
+   "support_type": "exact_value",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter reference_lower value and definition.",
+   "excerpt_sha256": "860a8da309bf8b10b69c37ca4954d5e5f5799418af09f1d27183763a33ab2bd4",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "extracted_value": 100,
+   "unit": "USD million",
+   "period": "FY2025",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8",
+   "evidence_role": "value_range"
+  },
+  {
+   "claim_id": "claim_parameter_reference_upper",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "reference_upper",
+   "support_type": "exact_value",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter reference_upper value and definition.",
+   "excerpt_sha256": "c7a94a168eed862568643d3d3fe5719944ed9a429248393022e97942b80f53e3",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "extracted_value": 120,
+   "unit": "USD million",
+   "period": "FY2025",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8",
+   "evidence_role": "value_range"
+  },
+  {
+   "claim_id": "claim_parameter_conversion_low",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "conversion_low",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter conversion_low value and definition.",
+   "excerpt_sha256": "33fce37ac1da1f567d31698a99b67090f8d5b29faa6736c537c3ab5ca134701c",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8",
+   "evidence_role": "conversion_assumption"
+  },
+  {
+   "claim_id": "claim_parameter_conversion_base",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "conversion_base",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter conversion_base value and definition.",
+   "excerpt_sha256": "fc184f60f48b4ec8d58069f830501e832eb949dbe2ecfd8e73f82b89c5b9f806",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8",
+   "evidence_role": "conversion_assumption"
+  },
+  {
+   "claim_id": "claim_parameter_conversion_high",
+   "source_id": "filing",
+   "target_type": "parameter",
+   "target_id": "conversion_high",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Evidence supporting parameter conversion_high value and definition.",
+   "excerpt_sha256": "ecfd351a5a681a7d310055d115ab3a78333a18865381e0386cf00b13c6bd15c6",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8",
+   "evidence_role": "conversion_assumption"
+  },
+  {
+   "claim_id": "claim_history_2024",
+   "source_id": "filing",
+   "target_type": "historical_revenue",
+   "target_id": "historical_revenue:2024",
+   "support_type": "exact_value",
+   "locator": "Revenue note",
+   "excerpt": "Reported company revenue for fiscal year 2024 is disclosed here.",
+   "excerpt_sha256": "6626d477b93e9d16f682ce2af7f8181f809f4c5ce3a1e665506d018838409026",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "extracted_value": 140,
+   "unit": "USD million",
+   "period": "FY2024",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_history_2025",
+   "source_id": "filing",
+   "target_type": "historical_revenue",
+   "target_id": "historical_revenue:2025",
+   "support_type": "exact_value",
+   "locator": "Revenue note",
+   "excerpt": "Reported company revenue for fiscal year 2025 is disclosed here.",
+   "excerpt_sha256": "38518f3da361517b14490cf3b8ffe8bf89b2d35603433fe894934f15343b28b5",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "extracted_value": 150,
+   "unit": "USD million",
+   "period": "FY2025",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_recognition_Segment_A",
+   "source_id": "filing",
+   "target_type": "recognition_policy",
+   "target_id": "recognition:Segment A",
+   "support_type": "policy_support",
+   "locator": "Revenue note",
+   "excerpt": "Revenue recognition policy for Segment A is disclosed in the filing.",
+   "excerpt_sha256": "36feeb2789b40e028e3588785bf5dcc63104a26a02e9c87c0e11078f678e3a46",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_recognition_Segment_B",
+   "source_id": "filing",
+   "target_type": "recognition_policy",
+   "target_id": "recognition:Segment B",
+   "support_type": "policy_support",
+   "locator": "Revenue note",
+   "excerpt": "Revenue recognition policy for Segment B is disclosed in the filing.",
+   "excerpt_sha256": "206cef9408395c42f6334de6a5f9de5a34909d65529ba25e678b97a09e65fd9c",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_scenario_probability",
+   "source_id": "filing",
+   "target_type": "scenario_probability",
+   "target_id": "scenario_probability",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Scenario probability calibration uses the disclosed operating evidence.",
+   "excerpt_sha256": "7356452bef20ead071856304fc8d0ede1a6ba31d05a5ece99199e5aad305729b",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_growth_driver_Segment_A",
+   "source_id": "filing",
+   "target_type": "growth_driver",
+   "target_id": "fixture_evidence_Segment_A",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Synthetic operating evidence supports the modeled revenue path for Segment A.",
+   "excerpt_sha256": "800e3e1c314e0d6436491c487b3f5baa7d085d2b547601acd1d413b2d4d91714",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  },
+  {
+   "claim_id": "claim_growth_driver_Segment_B",
+   "source_id": "filing",
+   "target_type": "growth_driver",
+   "target_id": "fixture_evidence_Segment_B",
+   "support_type": "rationale_support",
+   "locator": "Revenue note",
+   "excerpt": "Synthetic operating evidence supports the modeled revenue path for Segment B.",
+   "excerpt_sha256": "de52ed44f818c824c32110a60ff156c9018b463ec7d2f891d46f99660772c584",
+   "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "verification_status": "opened_and_checked",
+   "verified_by": "test-research-agent",
+   "verified_date": "2026-07-12",
+   "capture_receipt_sha256": "146c94a4a77eb370a7b4035c6d19f3bf9354133f45fe1684243cc8b8673058b8"
+  }
+ ],
+ "forecast_adjustments": [],
+ "operating_research": {
+  "schema_version": "operating-research/1",
+  "inventory": [],
+  "observations": [
+   {
+    "claim_id": "claim_parameter_reference_lower",
+    "observation_kind": "quantitative_reference",
+    "scope": "Segment A",
+    "period": "FY2025",
+    "parameter_ids": [
+     "reference_lower"
+    ],
+    "driver_ids": [],
+    "rationale": "Synthetic scoped range/conversion."
+   },
+   {
+    "claim_id": "claim_parameter_reference_upper",
+    "observation_kind": "quantitative_reference",
+    "scope": "Segment A",
+    "period": "FY2025",
+    "parameter_ids": [
+     "reference_upper"
+    ],
+    "driver_ids": [],
+    "rationale": "Synthetic scoped range/conversion."
+   },
+   {
+    "claim_id": "claim_parameter_conversion_low",
+    "observation_kind": "conversion",
+    "scope": "Segment A",
+    "period": "FY2026",
+    "parameter_ids": [
+     "conversion_low"
+    ],
+    "driver_ids": [],
+    "rationale": "Synthetic scoped range/conversion."
+   },
+   {
+    "claim_id": "claim_parameter_conversion_base",
+    "observation_kind": "conversion",
+    "scope": "Segment A",
+    "period": "FY2026",
+    "parameter_ids": [
+     "conversion_base"
+    ],
+    "driver_ids": [],
+    "rationale": "Synthetic scoped range/conversion."
+   },
+   {
+    "claim_id": "claim_parameter_conversion_high",
+    "observation_kind": "conversion",
+    "scope": "Segment A",
+    "period": "FY2026",
+    "parameter_ids": [
+     "conversion_high"
+    ],
+    "driver_ids": [],
+    "rationale": "Synthetic scoped range/conversion."
+   }
+  ],
+  "calibrations": [
+   {
+    "calibration_id": "reference_bridge",
+    "status": "calibrated",
+    "scope": "Segment A",
+    "observed_period": "FY2025",
+    "source_claim_ids": [
+     "claim_parameter_reference_lower",
+     "claim_parameter_reference_upper"
+    ],
+    "counterevidence_claim_ids": [],
+    "observed_range": {
+     "lower": 100,
+     "upper": 120,
+     "unit": "USD million"
+    },
+    "conversion_formula": "x0*x1",
+    "output_unit": "USD million",
+    "scenario_input_parameter_ids": {
+     "low": [
+      "reference_lower",
+      "conversion_low"
+     ],
+     "base": [
+      "reference_lower",
+      "conversion_base"
+     ],
+     "high": [
+      "reference_lower",
+      "conversion_high"
+     ]
+    },
+    "scenario_output_parameter_ids": {
+     "low": "0_low_2026",
+     "base": "0_base_2026",
+     "high": "0_high_2026"
+    },
+    "rationale": "Observed comparable range then disclosed conversion, not management promise.",
+    "limitations": [
+     "Engineering fixture only; no empirical probability calibration."
+    ]
+   }
+  ]
+ }
+}

@@ -20,6 +20,8 @@ import unicodedata
 from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan
 
 from .narrative_candidates import CandidateRules, EvidenceCandidate, assess_unit
+from .narrative_business_policy import detect_business_fact, reject_finance_only_text
+from .narrative_business_groups import enrich_business_groups
 from .narrative_context import ContextRules, build_section_context
 from .narrative_document import (
     NarrativeEvidencePackage,
@@ -73,6 +75,21 @@ NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
 NARRATIVE_SELECTOR_VERSION = "0.6.0"
+SUPPORTED_NARRATIVE_SELECTOR_VERSIONS = frozenset({"0.6.0", "0.7.0"})
+
+
+class NarrativeSelectorVersionError(ValueError):
+    """An unrecognized selection policy, separate from source/parser identity."""
+
+
+def resolve_narrative_selector_version(version: str | None = None) -> str:
+    """Resolve the effective policy once; legacy/default behavior remains explicit."""
+    effective = NARRATIVE_SELECTOR_VERSION if version is None else version
+    if not isinstance(effective, str) or effective not in SUPPORTED_NARRATIVE_SELECTOR_VERSIONS:
+        raise NarrativeSelectorVersionError("unsupported narrative selector version")
+    return effective
+
+
 _FINANCIAL_TERMS = re.compile(
     r"资产负债表|利润表|现金流量表|每股收益|归母净利润|营业收入|营业成本|"
     r"货币资金|应收账款|存货|固定资产|加权平均|基本每股|稀释每股|"
@@ -1478,8 +1495,9 @@ def _has_business_table_topics(topics: Sequence[str]) -> bool:
     return any(topic in topics for topic in ("products_rd", "capacity_projects"))
 
 
-def _candidate_rules() -> CandidateRules:
-    return CandidateRules(
+def _candidate_rules(*, selector_version: str | None = None) -> CandidateRules:
+    effective = resolve_narrative_selector_version(selector_version)
+    rules = CandidateRules(
         topics=_topics,
         financial_table=_financial_table,
         high_value_event=_HIGH_VALUE_EVENT,
@@ -1502,14 +1520,18 @@ def _candidate_rules() -> CandidateRules:
         heading_only=_HEADING_ONLY,
         static_definition=_STATIC_DEFINITION,
     )
+    if effective == "0.7.0":
+        return replace(rules, operating_facts=detect_business_fact, reject_text=reject_finance_only_text)
+    return rules
 
 
 def _base_candidates(
     parsed: NarrativeParseResult,
+    *, selector_version: str | None = None,
 ) -> tuple[list[EvidenceCandidate], int]:
     candidates: list[EvidenceCandidate] = []
     dropped_financial = 0
-    rules = _candidate_rules()
+    rules = _candidate_rules(selector_version=selector_version)
     for unit in parsed.units:
         assessment = assess_unit(unit, rules)
         if assessment.dropped_financial:
@@ -1570,14 +1592,16 @@ def select_narrative_evidence(
     title: str,
     existing_kind: str = "unknown",
     max_selected: int | None = None,
+    selector_version: str | None = None,
 ) -> NarrativeEvidencePackage:
-    """Select compact narrative spans; incomplete scans can never auto-skip."""
+    """Select compact narrative spans with an explicit replayable policy version."""
+    effective_version = resolve_narrative_selector_version(selector_version)
     original = parsed
     parsed = matching_document(parsed)
     route = route_document(
         matching_text(title), existing_kind=existing_kind, max_selected=max_selected
     )
-    candidates, dropped_financial = _base_candidates(parsed)
+    candidates, dropped_financial = _base_candidates(parsed, selector_version=effective_version)
     selection_group_ids: dict[str, str] = {}
 
     # PDF layout extraction often separates one logical sentence into several
@@ -1652,17 +1676,28 @@ def select_narrative_evidence(
     )
     previous_ids = {candidate.unit.unit_id for candidate in neighbors.candidates}
     dropped_financial -= sum(
-        assess_unit(candidate.unit, _candidate_rules()).dropped_financial
+        assess_unit(candidate.unit, _candidate_rules(selector_version=effective_version)).dropped_financial
         for candidate in projects.candidates if candidate.unit.unit_id not in previous_ids
     )
+    final_candidates = projects.candidates
+    final_group_ids = projects.group_ids
+    excluded_ids = enriched.excluded_context_unit_ids
+    if effective_version == "0.7.0":
+        final_candidates = tuple(candidate for candidate in final_candidates
+            if not reject_finance_only_text(candidate.unit.raw_text))
+        business = enrich_business_groups(parsed.units, initial_candidates=final_candidates,
+            initial_group_ids=final_group_ids, rules=_candidate_rules(selector_version=effective_version))
+        final_candidates = business.candidates
+        final_group_ids = business.group_ids
+        excluded_ids = excluded_ids | business.excluded_unit_ids
     return finalize_selection(
         original,
         route,
-        original_candidates(projects.candidates, original),
-        group_ids=projects.group_ids,
+        original_candidates(final_candidates, original),
+        group_ids=final_group_ids,
         heading_pattern=_HEADING_ONLY,
         dropped_financial_count=dropped_financial,
-        excluded_context_unit_ids=enriched.excluded_context_unit_ids,
+        excluded_context_unit_ids=excluded_ids,
     )
 
 

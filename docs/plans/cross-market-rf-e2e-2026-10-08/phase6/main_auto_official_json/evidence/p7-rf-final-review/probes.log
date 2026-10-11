@@ -1,0 +1,6 @@
+{"probe": "shared-root-cross-segment", "native_validation": "passed", "expectation_met": false, "calibration": "referenced_range"}
+{"probe": "shared-root-cross-year", "native_validation": "passed", "expectation_met": true, "calibration": "unverified"}
+{"probe": "historical-measurement-and-disclosure", "native_validation": "passed", "expectation_met": true, "calibration": "referenced_range"}
+{"probe": "company-scope-direct-wrong-period", "native_validation": "passed", "expectation_met": true, "calibration": "unverified"}
+{"probe": "explicit-native-bridge-older-disclosure", "native_validation": "passed", "expectation_met": true, "calibration": "referenced_range"}
+{"status": "specific_blocker", "source_unchanged": true, "protected_original_count": 23, "all_protected_unchanged": true, "seconds": 0.1044328000061796}

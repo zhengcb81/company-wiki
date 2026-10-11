@@ -1,5 +1,17 @@
 # P7：本次只有三张可立即启动的独立施工卡
 
+## 最新状态 2026-10-10T23:53:17.615142+00:00
+
+P7-RF已正式接收并入main/remote47f497ad，精确CI38096229764 success；定点18文件与真实安装40业务CLI全部通过。[完整接收验收](../main_auto_official_json/P7_RF_ACCEPTANCE.md)。P7-CWP/MAIN已发布accdeccc；P7-AUDIT仍未交付，不碰外包源。W04/W03是内部原计划续行，不是额外外包卡；公司研究/四审/泛化另继续。
+
+## 最新实际状态（2026-10-10T23:30:42.966527+00:00，优先于下方历史）
+
+- P7-CWP及MAIN AUTO：已接收、正常并canonical master/推远端accdeccc，3020 pre-push PASS、精确CI38094790883 success。
+- P7-RF：用户已交付；独立接收25PASS但发现适用期间→实际output漏诊断，MAIN接手修，已119PASS/7subtests与4 actual离线E2E绿；当前最终独立review与normalcommit/并线/发布/安装进行。原partial报告与失败历史保留，不能只按外包engineering_complete标签关闭。
+- P7-AUDIT：仍未收到交付通知，外部harness写集不碰。
+
+W04/W03内部源码按各续行细则并行；只有ROOT共享版本接线与最后跨仓大节点串行，无新增人审签收。真实公司预测/四审/泛化仍待，0新增vendor/model费，原件/config/Dayu/owner WIP保留。
+
 ## 集成进度（2026-10-10T22:53:13.182893+00:00）
 
 P7-CWP source已接收并正常合隔离MAIN，公开canonical CLI/AUTO/read/reuse全部通过；仅新增3shape负控已通过，最终mixed/empty/history9场景PASS。P7-RF/AUDIT继续外部施工，不互等、不碰各自源码。当前下一步正常发布CWP主线及精确CI；实际source/hash/旧字节证据见[MAIN验收](../main_auto_official_json/ACCEPTANCE.md)。本轮0外部供应商/费用、原件和配置不变。

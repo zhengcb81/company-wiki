@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_narrative_failed_final.py",
+    "tests/unit/test_narrative_http_model.py",
+    "tests/unit/test_narrative_model_caller.py",
+    "tests/unit/test_narrative_reasoning_usage.py",
+    "tests/unit/test_narrative_model_usage.py",
+    "tests/unit/test_narrative_summarize_handler.py",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-unit-5qvtf8cj\\pytest",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 10.019,
+  "log_sha256": "62ed1e0d1ae3bbc53629dcfd2d30ce407634c0862277bd64edff4d715c61d2eb",
+  "owned_temp_restored": true,
+  "vendor_calls": 0
+}

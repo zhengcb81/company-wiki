@@ -1,0 +1,15 @@
+{
+  "scope": "After narrowly confirmed industry-object reachability correction; same full fixture, no additional material.",
+  "raw_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+  "raw_unchanged": true,
+  "ordered_package_fingerprint_sha256": "c5e498acbb5d5c158a030b6e4d3bcec3713f408f2c49baa85717b3d63b905478",
+  "candidate_count": 103,
+  "selected_count": 96,
+  "omitted_candidate_count": 7,
+  "status": "partial",
+  "replay_verified": 96,
+  "replay_failed": 0,
+  "earlier_metrics_equal": true,
+  "provider_calls": 0,
+  "llm_calls": 0
+}

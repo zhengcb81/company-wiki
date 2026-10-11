@@ -1,0 +1,20 @@
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy public contracts (FC-1204-c, mirrors CI).........................................Passed
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[codex/p7-rf-calibration-binding 9e29b1f8] fix(research): diagnose conversion applicability without changing forecasts
+ 33 files changed, 186 insertions(+), 8 deletions(-)
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/HANDOFF.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/concentrated.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/handoff.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/implementation.diff
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/main-e2e-receipt.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/mypy.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/progress.md
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/protected-after.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/protected-before.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/public_e2e.py
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/red.json
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/red.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/responsibility-compatibility.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception/ruff.log
+ create mode 100644 .planning/p7-rf-scoped-calibration/main_reception_fix.md

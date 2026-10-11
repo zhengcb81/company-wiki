@@ -1,0 +1,40 @@
+{
+  "stage": "final stable-source public3 loopback E2E",
+  "returncode": 0,
+  "duration_seconds": 25.115,
+  "log_sha256": "910924bc451d9ff66d7989ebf7d3b9f1f50e2240e6de61d644f3b283cfb1bf51",
+  "owned_temp_restored": true,
+  "external_vendor_calls": 0,
+  "test_argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/integration/test_narrative_failed_final_cli.py",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-last-q11lknhu\\pytest",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "passed_assertions": {
+    "cases": [
+      "951",
+      "empty",
+      "unobserved"
+    ],
+    "initial_loopback_posts_total": 3,
+    "resumes_total": 6,
+    "new_posts_on_resumes": 0,
+    "new_formal_artifacts": 0,
+    "original_timestamps_and_bytes_unchanged": true,
+    "automation_and_catalog_dump_unchanged_after_resumes": true,
+    "actual_input_tokens_per_case": 73,
+    "actual_output_tokens_per_case": 8194,
+    "charged_micro_usd_per_case": 16461,
+    "budget_exhausted_preserved": true,
+    "actual_jobs_unchanged": true,
+    "hidden_reasoning_not_persisted": true
+  }
+}

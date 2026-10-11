@@ -1,0 +1,66 @@
+[
+  {
+    "argv": [
+      "git",
+      "status",
+      "--porcelain=v1",
+      "-z"
+    ],
+    "exit": 0,
+    "stdout": " M assurance/runs/daily_alert.jsonl\u0000 M assurance/runs/weekly_alert.jsonl\u0000 M assurance/runs/weekly_manifest.json\u0000?? output/\u0000",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "exit": 0,
+    "stdout": "main\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit": 0,
+    "stdout": "6883bf00548abb9891eab6762aeaa89e3898b202\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "fetch",
+      "origin",
+      "main"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/zhengcb81/revenue-forecast\n * branch              main       -> FETCH_HEAD\n"
+  },
+  {
+    "argv": [
+      "git",
+      "rev-parse",
+      "origin/main"
+    ],
+    "exit": 0,
+    "stdout": "6883bf00548abb9891eab6762aeaa89e3898b202\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "rev-list",
+      "--left-right",
+      "--count",
+      "main...origin/main"
+    ],
+    "exit": 0,
+    "stdout": "0\t0\n",
+    "stderr": ""
+  }
+]

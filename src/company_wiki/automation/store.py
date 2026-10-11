@@ -1728,11 +1728,28 @@ class AutomationStore:
             conn.close()
 
     def list_outbox_entries(
-        self, *, status: str | None = None, limit: int = 100
+        self, *, status: str | None = None, limit: int = 100,
+        allowed_job_ids: tuple[str, ...] | None = None,
     ) -> tuple[dict, ...]:
+        """Read optional job scope through effect foreign keys before LIMIT."""
+        scope = normalize_id_scope(allowed_job_ids, name="allowed_job_ids")
+        if scope == ():
+            return ()
         conn = self._connect()
         try:
-            if status is not None:
+            if scope is not None:
+                clause = f"e.job_id IN ({','.join('?' for _ in scope)})"
+                params: tuple[object, ...] = scope
+                if status is not None:
+                    clause += " AND o.status = ?"
+                    params += (status,)
+                rows = conn.execute(
+                    f"SELECT {_OUTBOX_COLS_O} FROM outbox o "
+                    "JOIN effects e ON e.effect_id = o.effect_id "
+                    f"WHERE {clause} ORDER BY o.not_before LIMIT ?",
+                    params + (limit,),
+                ).fetchall()
+            elif status is not None:
                 rows = conn.execute(
                     f"SELECT {_OUTBOX_COLS} FROM outbox WHERE status = ? "
                     "ORDER BY not_before LIMIT ?",

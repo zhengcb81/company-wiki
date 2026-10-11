@@ -1,0 +1,9 @@
+{
+  "kind": "engineering_driver_constant_import",
+  "previous_driver_sha256": "5f778f241f48128ee4a68da38878e3a3a1690e0ee4ad6999f455afd5933efa36",
+  "repaired_driver_sha256": "f0cb7edf0e2c8c1a3db1a29ae5df7c0cc78c0bc0bdf6c7da2d890960b9438f8f",
+  "failed_before_any_native_cli": true,
+  "actual_public_api": "revenue_core.ENGINE_VERSION",
+  "no_installed_source_change": true,
+  "preserved_receipt_sha256": "489c12dd4dae1d3ad5e4c0bbb970bd54a9914a60d6d73c81fa0c2c529c6c8c3b"
+}

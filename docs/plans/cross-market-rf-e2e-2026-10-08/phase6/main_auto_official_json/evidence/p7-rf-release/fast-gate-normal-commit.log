@@ -1,0 +1,5 @@
+[codex/p7-rf-calibration-binding 47f497ad] test: retain scoped calibration cases in the shared fast gate
+ 4 files changed, 26 insertions(+)
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy public contracts (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed

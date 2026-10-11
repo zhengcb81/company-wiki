@@ -1,0 +1,27 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 56 items / 51 deselected / 5 selected
+
+tests\unit\test_narrative_business_recall.py FF...                       [100%]
+
+================================== FAILURES ===================================
+_ test_concrete_industry_operating_change_needs_no_company_product_noun[\u884c\u4e1a\u51fa\u53e3\u8bb8\u53ef\u653f\u7b56\u8fd1\u671f\u6536\u7d27\uff0c\u51fa\u53e3\u5ba1\u6279\u5468\u671f\u5ef6\u957f\u3002-True] _
+tests\unit\test_narrative_business_recall.py:329: in test_concrete_industry_operating_change_needs_no_company_product_noun
+    assert fact.eligible is eligible
+E   assert False is True
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False).eligible
+_ test_concrete_industry_operating_change_needs_no_company_product_noun[Recent export licensing restrictions have tightened across the semiconductor industry.-True] _
+tests\unit\test_narrative_business_recall.py:329: in test_concrete_industry_operating_change_needs_no_company_product_noun
+    assert fact.eligible is eligible
+E   assert False is True
+E    +  where False = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False).eligible
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_industry_operating_change_needs_no_company_product_noun[\u884c\u4e1a\u51fa\u53e3\u8bb8\u53ef\u653f\u7b56\u8fd1\u671f\u6536\u7d27\uff0c\u51fa\u53e3\u5ba1\u6279\u5468\u671f\u5ef6\u957f\u3002-True]
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_industry_operating_change_needs_no_company_product_noun[Recent export licensing restrictions have tightened across the semiconductor industry.-True]
+================= 2 failed, 3 passed, 51 deselected in 0.75s ==================

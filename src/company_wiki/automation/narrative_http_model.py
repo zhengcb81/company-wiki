@@ -15,6 +15,7 @@ from urllib.parse import urlsplit
 
 from .narrative_model import (
     MODEL_RESPONSE_MAX_BYTES,
+    FailedFinalDiagnostic,
     ModelRateLimitError,
     ModelResponseError,
     ModelTimeoutError,
@@ -60,7 +61,7 @@ class ModelHTTPError(ModelResponseError):
 
 
 class ModelOutputTruncatedError(ModelResponseError):
-    """A terminal provider result with metering, without retained response text."""
+    """A terminal provider result with metering and an optional bounded final."""
 
     def __init__(
         self,
@@ -69,14 +70,16 @@ class ModelOutputTruncatedError(ModelResponseError):
         input_tokens: int | None,
         output_tokens: int | None,
         duration_ms: int,
-        content_bytes: int = 0,
+        content_bytes: int | None = 0,
         reasoning_tokens: int | None = None,
         usage_diagnostic: str | None = None,
+        failed_final: FailedFinalDiagnostic | None = None,
     ) -> None:
-        if type(content_bytes) is not int or not 0 <= content_bytes <= MODEL_RESPONSE_MAX_BYTES:
+        if content_bytes is not None and (type(content_bytes) is not int or not 0 <= content_bytes <= MODEL_RESPONSE_MAX_BYTES):
             raise ValueError("invalid truncated content byte count")
         validate_reasoning_observation(reasoning_tokens, output_tokens, usage_diagnostic)
         self.reasoning_tokens, self.usage_diagnostic = reasoning_tokens, usage_diagnostic
+        self.failed_final = failed_final
         self.finish_reason = "length"
         self.content_bytes = content_bytes
         self.model_id = model_id
@@ -84,6 +87,14 @@ class ModelOutputTruncatedError(ModelResponseError):
         self.output_tokens = output_tokens
         self.duration_ms = duration_ms
         super().__init__("MODEL_OUTPUT_TRUNCATED")
+
+
+def _failed_final_observation(body: bytes, content: str | None) -> FailedFinalDiagnostic | None:
+    try:
+        return FailedFinalDiagnostic.from_observation(provider_body=body, content=content)
+    except Exception:
+        # Observability is optional; keep the provider failure and its real usage.
+        return None
 
 
 class ModelEnvelopeError(ModelResponseError):
@@ -95,7 +106,8 @@ class ModelEnvelopeError(ModelResponseError):
     def __init__(self, response_stage: str, *, http_status: int = 200,
                  provider_code: int | None = None, input_tokens: int | None = None,
                  output_tokens: int | None = None, duration_ms: int = 0,
-                 reasoning_tokens: int | None = None, usage_diagnostic: str | None = None):
+                 reasoning_tokens: int | None = None, usage_diagnostic: str | None = None,
+                 failed_final: FailedFinalDiagnostic | None = None):
         if response_stage not in self.stages:
             raise ValueError("invalid response diagnostic stage")
         if type(http_status) is not int or not 100 <= http_status <= 599:
@@ -108,6 +120,7 @@ class ModelEnvelopeError(ModelResponseError):
             raise ValueError("invalid paired response usage")
         validate_reasoning_observation(reasoning_tokens, output_tokens, usage_diagnostic)
         self.reasoning_tokens, self.usage_diagnostic = reasoning_tokens, usage_diagnostic
+        self.failed_final = failed_final
         self.response_stage, self.http_status, self.provider_code = response_stage, http_status, provider_code
         self.input_tokens, self.output_tokens, self.duration_ms = input_tokens, output_tokens, duration_ms
         super().__init__("MODEL_RESPONSE_INVALID")
@@ -406,6 +419,7 @@ class NarrativeHTTPModel:
             choice = payload["choices"][0]
             stage = "message"
             content = choice["message"]["content"]
+            observed_content = content if isinstance(content, str) else None
             truncated = choice.get("finish_reason") == "length"
             if content is None and truncated:
                 content = ""
@@ -439,13 +453,15 @@ class NarrativeHTTPModel:
                 input_tokens=input_tokens,
                 output_tokens=output_tokens,
                 duration_ms=duration_ms,
-                content_bytes=len(encoded), reasoning_tokens=reasoning_tokens,
+                content_bytes=len(encoded) if observed_content is not None else None, reasoning_tokens=reasoning_tokens,
                 usage_diagnostic=usage_diagnostic,
+                failed_final=_failed_final_observation(body, observed_content),
             )
         if not encoded:
             raise ModelEnvelopeError("empty_content", http_status=http_status,
                 input_tokens=input_tokens, output_tokens=output_tokens, duration_ms=duration_ms,
-                reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic)
+                reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
+                failed_final=_failed_final_observation(body, observed_content))
         return NarrativeModelResponse(
             adapter_id=self.adapter_id,
             model_id=actual_model,

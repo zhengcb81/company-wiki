@@ -1,0 +1,16 @@
+{
+  "observed_at": "2026-10-10T23:22:35.475937+00:00",
+  "target_sha": "accdeccc737ccaf27d1698238a31af022960a3fa",
+  "api_url": "https://api.github.com/repos/zhengcb81/company-wiki/actions/runs?head_sha=accdeccc737ccaf27d1698238a31af022960a3fa&per_page=10",
+  "rate_remaining": "59",
+  "total_count": 1,
+  "runs": [
+    {
+      "id": 38094790883,
+      "head_sha": "accdeccc737ccaf27d1698238a31af022960a3fa",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/38094790883"
+    }
+  ]
+}

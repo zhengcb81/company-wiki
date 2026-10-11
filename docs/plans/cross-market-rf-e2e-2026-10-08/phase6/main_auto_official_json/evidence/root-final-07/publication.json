@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "push",
+    "origin",
+    "master"
+  ],
+  "exit": 0,
+  "target_sha": "accdeccc737ccaf27d1698238a31af022960a3fa",
+  "elapsed_seconds": 271.492,
+  "remote_sha": "accdeccc737ccaf27d1698238a31af022960a3fa",
+  "remote_matches": true,
+  "log_sha256": "d8cbc718e691d1a95e9f8999aba008151ae34b0a3939752ec37ed878848afd25"
+}

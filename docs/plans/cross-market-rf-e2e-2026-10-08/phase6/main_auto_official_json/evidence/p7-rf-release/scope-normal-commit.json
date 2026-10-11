@@ -1,0 +1,15 @@
+{
+  "schema_version": "main-rf-publication/1",
+  "phase": "scope-normal-commit",
+  "at": "2026-10-10T23:42:30.169550+00:00",
+  "returncode": 0,
+  "seconds": 5.067921699999715,
+  "head": "e929185c398f509867e24fa188e041e378286ddc",
+  "log_sha256": "b2b2b8177f127c945cf56fac7692ca3ecdb75520b25c056259de5522a38c9eff",
+  "independent_review_sha256": "3203d6b9de59ce3028a0be6cd7c812ade556058088559f34f5c313314471fe55",
+  "source_stable": {
+    "scripts/research_support_diagnostics.py": "dd09b7088c691205950413adafaf9604e303966c6aada7c344d63486dec12902",
+    "tests/test_research_support_diagnostics.py": "af2a5c81895b1ec1b450a553331852261eba9d2f908ec99959bc3d31b801e12f"
+  },
+  "external_calls": 0
+}

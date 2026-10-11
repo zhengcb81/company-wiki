@@ -1,0 +1,63 @@
+{
+  "results": [
+    {
+      "stage": "ruff",
+      "returncode": 0,
+      "duration_seconds": 0.187,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/narrative_http_model.py",
+        "src/company_wiki/automation/narrative_model_caller.py",
+        "src/company_wiki/automation/narrative_summarize.py",
+        "src/company_wiki/automation/narrative_batch.py",
+        "src/company_wiki/automation/narrative_failed_final.py",
+        "src/company_wiki/automation/store.py",
+        "tests/unit/test_narrative_failed_final.py",
+        "tests/unit/test_automation_outbox_read_scope.py",
+        "tests/integration/test_narrative_failed_final_cli.py"
+      ]
+    },
+    {
+      "stage": "mypy",
+      "returncode": 0,
+      "duration_seconds": 2.208,
+      "log_sha256": "050c52a2b0c61e8b681ef5c485e0bc03340b8d55148e0acef27d744c8be42033",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "mypy",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-static-hnlncsni\\mypy",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/narrative_http_model.py",
+        "src/company_wiki/automation/narrative_model_caller.py",
+        "src/company_wiki/automation/narrative_summarize.py",
+        "src/company_wiki/automation/narrative_batch.py",
+        "src/company_wiki/automation/narrative_failed_final.py",
+        "src/company_wiki/automation/store.py"
+      ]
+    }
+  ],
+  "owned_temp_restored": true,
+  "external_vendor_calls": 0,
+  "changed_sha256": {
+    "src/company_wiki/automation/narrative_model.py": "c4d213e2eef4d4e9372ebc1af1ae497d811768ab8a1c7dad97f1d6c72508aa66",
+    "src/company_wiki/automation/narrative_http_model.py": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+    "src/company_wiki/automation/narrative_model_caller.py": "abee99f0a93c44aca7dc62d3d002c6e90aca48984839a488bbc098e1f086ff06",
+    "src/company_wiki/automation/narrative_summarize.py": "c438640fffc7fccb204434c3dde27cd0b3d6bca4c6f88ccedf05114d4b2fd035",
+    "src/company_wiki/automation/narrative_batch.py": "3c4eaab154d12f4a2125b0e5a8848d749c7aed07d886870cfba5cf5349c79b0a",
+    "src/company_wiki/automation/narrative_failed_final.py": "0263148027b439f727cea4d9255ade074b8347b81f0398ad1e4b6c050e0b9cb8",
+    "src/company_wiki/automation/store.py": "ca021fe84e2157b846347103773b21f86092cc5e9e9d3bb17d5ff53858aa02e2",
+    "tests/unit/test_narrative_failed_final.py": "7a3915874b47f18af187e5c4d868b60c3248d4619fed25112526316f6c90ef15",
+    "tests/unit/test_automation_outbox_read_scope.py": "40e7ebfceb4585d133ad9a3b8597ea1096d4f69865d068cba2671388ccfdf816",
+    "tests/integration/test_narrative_failed_final_cli.py": "6aedd3d04290db352557a1d998adb07696d6cc45fffedbce003523358775749c"
+  }
+}

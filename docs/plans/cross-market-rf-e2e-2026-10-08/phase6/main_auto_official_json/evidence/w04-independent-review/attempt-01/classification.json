@@ -1,0 +1,6 @@
+{
+  "kind": "review_driver_error",
+  "cause": "dataclasses.replace with changed error passed frozen result Mapping into HandlerResult; own probe must provide fresh dict",
+  "product_changed": false,
+  "first_driver_sha256": "00290ff4c14ad7616e1b8d07f52578e774cf3d39172b562249ca5fc60d71c2d7"
+}

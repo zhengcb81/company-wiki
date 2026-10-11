@@ -1,0 +1,161 @@
+{
+  "canonical": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "schema": "rf-install-plan/1",
+  "selected": [
+    "CHANGELOG.md",
+    "SKILL.md",
+    "references/economic-support-diagnostics.md",
+    "references/evidence-role-calibration.md",
+    "scripts/contracts/constants.py",
+    "scripts/research/evidence_roles.py",
+    "scripts/research/native_dependencies.py",
+    "scripts/research_support_diagnostics.py",
+    "scripts/schema_compatibility.py"
+  ],
+  "targets": [
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills",
+      "files": [
+        {
+          "before_sha256": "5b4b0d2eed697897ac49c4a44f1d565a70354ebf0f2f11677ec1ef63d49927fc",
+          "operation": "replace",
+          "path": "CHANGELOG.md",
+          "size": 27970,
+          "source_sha256": "d3ad9585e9ee70cb3d410847999203b1370220332eb36b632c18dfa6de72bbdc"
+        },
+        {
+          "before_sha256": "59929bb32b1fd6a01c9743eb35fe275fe4fa464627fff8a969a41568c34e50ff",
+          "operation": "replace",
+          "path": "SKILL.md",
+          "size": 33277,
+          "source_sha256": "baad77074b2e4cfbdf502db2e65291c6818dda259ade49a281bd633aaf9be9d0"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "references/economic-support-diagnostics.md",
+          "size": 3880,
+          "source_sha256": "8dd299b5eedb2bc19598b0f38c6ad12f9ad33973b7586bf58ae782bf7241afc0"
+        },
+        {
+          "before_sha256": "a476f7b10c24f5d778dbf0e6cacb77c59d831bb7fb97982dc37d49d549d81aaf",
+          "operation": "replace",
+          "path": "references/evidence-role-calibration.md",
+          "size": 12765,
+          "source_sha256": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21"
+        },
+        {
+          "before_sha256": "aa621c0d12efddce7951ff9a03922a67787db1c82bfa191a755e67ddba26de5c",
+          "operation": "replace",
+          "path": "scripts/contracts/constants.py",
+          "size": 7733,
+          "source_sha256": "728f4e6ffc1417c37e155ea0191c3a28b804db601f279c11649e481e0075da74"
+        },
+        {
+          "before_sha256": "bad8c09dde16590d3f56f979051dc814629c8b8b7fc750b66adfba51ecbf21b2",
+          "operation": "replace",
+          "path": "scripts/research/evidence_roles.py",
+          "size": 16538,
+          "source_sha256": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761"
+        },
+        {
+          "before_sha256": "6096e2065d9036235a7960b367bbf9e7ed2ae2c7c5a766cc20f0a11d63045931",
+          "operation": "replace",
+          "path": "scripts/research/native_dependencies.py",
+          "size": 5709,
+          "source_sha256": "9dad832d2b6a8cbe3f2faf6e2e9f27b988319ae2d87f212fde26a6863a327dec"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research_support_diagnostics.py",
+          "size": 6708,
+          "source_sha256": "8ce8390fc201b9fedb081be7074a4f6ae236ef41d14bff59c4eaeb6dbd14e688"
+        },
+        {
+          "before_sha256": "288a64f354e2cefac814b86d9435ff801f5d51c3c2c8dcb8d739ea4ba50cdbd0",
+          "operation": "replace",
+          "path": "scripts/schema_compatibility.py",
+          "size": 4789,
+          "source_sha256": "1df2f419152fdf50da2555417952cb9fd028e6e85a5f5d1e39ca4f46e4e8707a"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 9,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "unselected_drift": 1
+    },
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills",
+      "files": [
+        {
+          "before_sha256": "5b4b0d2eed697897ac49c4a44f1d565a70354ebf0f2f11677ec1ef63d49927fc",
+          "operation": "replace",
+          "path": "CHANGELOG.md",
+          "size": 27970,
+          "source_sha256": "d3ad9585e9ee70cb3d410847999203b1370220332eb36b632c18dfa6de72bbdc"
+        },
+        {
+          "before_sha256": "59929bb32b1fd6a01c9743eb35fe275fe4fa464627fff8a969a41568c34e50ff",
+          "operation": "replace",
+          "path": "SKILL.md",
+          "size": 33277,
+          "source_sha256": "baad77074b2e4cfbdf502db2e65291c6818dda259ade49a281bd633aaf9be9d0"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "references/economic-support-diagnostics.md",
+          "size": 3880,
+          "source_sha256": "8dd299b5eedb2bc19598b0f38c6ad12f9ad33973b7586bf58ae782bf7241afc0"
+        },
+        {
+          "before_sha256": "a476f7b10c24f5d778dbf0e6cacb77c59d831bb7fb97982dc37d49d549d81aaf",
+          "operation": "replace",
+          "path": "references/evidence-role-calibration.md",
+          "size": 12765,
+          "source_sha256": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21"
+        },
+        {
+          "before_sha256": "aa621c0d12efddce7951ff9a03922a67787db1c82bfa191a755e67ddba26de5c",
+          "operation": "replace",
+          "path": "scripts/contracts/constants.py",
+          "size": 7733,
+          "source_sha256": "728f4e6ffc1417c37e155ea0191c3a28b804db601f279c11649e481e0075da74"
+        },
+        {
+          "before_sha256": "bad8c09dde16590d3f56f979051dc814629c8b8b7fc750b66adfba51ecbf21b2",
+          "operation": "replace",
+          "path": "scripts/research/evidence_roles.py",
+          "size": 16538,
+          "source_sha256": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761"
+        },
+        {
+          "before_sha256": "6096e2065d9036235a7960b367bbf9e7ed2ae2c7c5a766cc20f0a11d63045931",
+          "operation": "replace",
+          "path": "scripts/research/native_dependencies.py",
+          "size": 5709,
+          "source_sha256": "9dad832d2b6a8cbe3f2faf6e2e9f27b988319ae2d87f212fde26a6863a327dec"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/research_support_diagnostics.py",
+          "size": 6708,
+          "source_sha256": "8ce8390fc201b9fedb081be7074a4f6ae236ef41d14bff59c4eaeb6dbd14e688"
+        },
+        {
+          "before_sha256": "288a64f354e2cefac814b86d9435ff801f5d51c3c2c8dcb8d739ea4ba50cdbd0",
+          "operation": "replace",
+          "path": "scripts/schema_compatibility.py",
+          "size": 4789,
+          "source_sha256": "1df2f419152fdf50da2555417952cb9fd028e6e85a5f5d1e39ca4f46e4e8707a"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 9,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "unselected_drift": 1
+    }
+  ]
+}

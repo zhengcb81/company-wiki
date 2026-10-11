@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_narrative_failed_final.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-red-nc4rfyme\\pytest",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "returncode": 1,
+  "log_sha256": "cd547cad92d0481ca3797974c020b52e46d0397f79e23f9ae4441824550bd547",
+  "owned_temp_restored": true,
+  "vendor_calls": 0
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": "p7-rf-installed-handoff/1",
+  "status": "accepted_driver_stable",
+  "source_head": "47f497ad9dee9dc47f66fca37016e9ba6b6b6f33",
+  "actual_installation_roots": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast"
+  ],
+  "driver_sha256": "faaac5809923bcf34ce978bfe353e093eb0ac331790c27ae2b7d371eb16d4548",
+  "receipt_sha256": "9f0991056fe2d99dcd1005361b76c5f575815ff4f9cb5dad698e0b6a9f76c72c",
+  "source_and_each_installation_selected_sha256": {
+    "CHANGELOG.md": "d3ad9585e9ee70cb3d410847999203b1370220332eb36b632c18dfa6de72bbdc",
+    "SKILL.md": "baad77074b2e4cfbdf502db2e65291c6818dda259ade49a281bd633aaf9be9d0",
+    "references/economic-support-diagnostics.md": "8dd299b5eedb2bc19598b0f38c6ad12f9ad33973b7586bf58ae782bf7241afc0",
+    "references/evidence-role-calibration.md": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21",
+    "scripts/contracts/constants.py": "728f4e6ffc1417c37e155ea0191c3a28b804db601f279c11649e481e0075da74",
+    "scripts/research/evidence_roles.py": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761",
+    "scripts/research/native_dependencies.py": "9dad832d2b6a8cbe3f2faf6e2e9f27b988319ae2d87f212fde26a6863a327dec",
+    "scripts/research_support_diagnostics.py": "8ce8390fc201b9fedb081be7074a4f6ae236ef41d14bff59c4eaeb6dbd14e688",
+    "scripts/schema_compatibility.py": "1df2f419152fdf50da2555417952cb9fd028e6e85a5f5d1e39ca4f46e4e8707a"
+  },
+  "accepted_cases": 10,
+  "actual_native_business_commands": 40,
+  "version_commands": 2,
+  "factory_commands": 1,
+  "seconds": 15.073516600001312,
+  "all_551_installed_files_unchanged": true,
+  "source_inputs_and_selected_source_unchanged": true,
+  "owned_temp_removed": true,
+  "environment_unchanged": true,
+  "network_attempts": 0,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "new_cost_usd": 0,
+  "root_sync_evidence_readonly_sha256": {
+    "plan.json": "bbd3372ded1ce710f02182ef6382045e94bedcd4ea8cf5379c1f9365a630f2a4",
+    "apply.json": "dcb556c5b8d40a0d63492f97217b0f9aad86ad8f218bb9dbe06e0a1ffb6127a5",
+    "verification.json": "d602b4c979d54a3450379d7d4517231e66e594215bd507b45a3f7709eeff0de4",
+    "before.json": "69f7a284af0f21238361617e5618d3a64ee808ed915e71875259c6f3d430b811"
+  },
+  "prior_driver_attempts": [
+    {
+      "directory": "driver-snapshot-default",
+      "status": "failed",
+      "native_business_commands_run": 2,
+      "receipt_sha256": "9162836a8acfc322e6c3e6ad6537b1ac71f3be8bf1ada758b2c875fb3d5ea32e",
+      "diagnosis_sha256": "6ca0ff5f61108aa102e6ff5a97e76942071ba97ea8a735bd99c59b3c6e3d7fd4",
+      "all_installed_files_unchanged": true,
+      "owned_temp_removed": true
+    },
+    {
+      "directory": "driver-version-constant",
+      "status": "failed",
+      "native_business_commands_run": 0,
+      "receipt_sha256": "489c12dd4dae1d3ad5e4c0bbb970bd54a9914a60d6d73c81fa0c2c529c6c8c3b",
+      "diagnosis_sha256": "015d0828db3cddbcc95a52ae930b146ab4997ff9ed5698f5570103f0057c9479",
+      "all_installed_files_unchanged": true,
+      "owned_temp_removed": true
+    }
+  ],
+  "no_rf_source_or_installation_write": true,
+  "open_economic_research": [
+    "R16",
+    "R17",
+    "R18",
+    "W09"
+  ]
+}

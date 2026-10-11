@@ -1,0 +1,308 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 40 items
+
+tests\unit\test_narrative_business_recall.py .FFFFFFFFFFFFFFFFFFFFFFFFFF [ 67%]
+FFFFFFFFF                                                                [ 90%]
+tests\integration\test_narrative_business_recall.py FFFF                 [100%]
+
+================================== FAILURES ===================================
+_ test_concrete_generic_business_meaning_does_not_require_launch[And so what we launched with Orion is essentially saying, let's sort of really make sure that you have the red team agents that know how to find vulnerabilities.-specific_business_event] _
+tests\unit\test_narrative_business_recall.py:91: in test_concrete_generic_business_meaning_does_not_require_launch
+    package = selected(units([text]))
+                       ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_concrete_generic_business_meaning_does_not_require_launch[Our service uses a diversified model mix to reduce token cost and remain available if one provider fails.-operating_mechanism] _
+tests\unit\test_narrative_business_recall.py:91: in test_concrete_generic_business_meaning_does_not_require_launch
+    package = selected(units([text]))
+                       ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_concrete_generic_business_meaning_does_not_require_launch[Efficiency depends on workload mix, token usage and silicon price performance.-operating_mechanism] _
+tests\unit\test_narrative_business_recall.py:91: in test_concrete_generic_business_meaning_does_not_require_launch
+    package = selected(units([text]))
+                       ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_concrete_generic_business_meaning_does_not_require_launch[\u516c\u53f8\u4ea7\u80fd\u5177\u6709\u4e00\u5b9a\u5f39\u6027\uff0c\u4f46\u7a81\u53d1\u8ba2\u5355\u4e0b\u77ed\u671f\u914d\u5907\u7684\u4eba\u5de5\u3001\u7ec4\u88c5\u68c0\u6d4b\u8bbe\u5907\u548c\u4f9b\u5e94\u5546\u77ed\u671f\u4f9b\u8d27\u80fd\u529b\u4ecd\u4f1a\u9650\u5236\u751f\u4ea7\u3002-business_risk_or_constraint] _
+tests\unit\test_narrative_business_recall.py:91: in test_concrete_generic_business_meaning_does_not_require_launch
+    package = selected(units([text]))
+                       ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_concrete_generic_business_meaning_does_not_require_launch[\u516c\u53f8\u7684\u4ea7\u54c1\u5206\u4e3a\u63a7\u5236\u5668\u4e0e\u6267\u884c\u5668\uff0c\u63a7\u5236\u5668\u901a\u8fc7\u76f4\u9500\u4f9b\u7ed9\u8bbe\u5907\u5382\uff0c\u6267\u884c\u5668\u7531\u6d77\u5916\u6e20\u9053\u9500\u552e\uff1b\u5173\u952e\u90e8\u4ef6\u987b\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1\u3002-business_structure] _
+tests\unit\test_narrative_business_recall.py:91: in test_concrete_generic_business_meaning_does_not_require_launch
+    package = selected(units([text]))
+                       ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_concrete_generic_business_meaning_does_not_require_launch[We serve equipment makers through direct sales while overseas distributors handle local service and qualification.-business_structure] _
+tests\unit\test_narrative_business_recall.py:91: in test_concrete_generic_business_meaning_does_not_require_launch
+    package = selected(units([text]))
+                       ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_concrete_generic_business_meaning_does_not_require_launch[\u516c\u53f8\u4e3b\u8981\u91c7\u7528\u4ee5\u9500\u5b9a\u4ea7\u7684\u751f\u4ea7\u6a21\u5f0f\uff0c\u751f\u4ea7\u6d41\u7a0b\u6309\u7167\u6a21\u5757\u5316\u8bbe\u8ba1\uff0c\u5148\u7ec4\u88c5\u6a21\u5757\u518d\u7ec4\u88c5\u6574\u673a\u3002-business_structure] _
+tests\unit\test_narrative_business_recall.py:91: in test_concrete_generic_business_meaning_does_not_require_launch
+    package = selected(units([text]))
+                       ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_concrete_generic_business_meaning_does_not_require_launch[\u62a5\u544a\u671f\u5185\u516c\u53f8\u8425\u4e1a\u6536\u5165\u589e\u957f\uff0c\u4e3b\u8981\u901a\u8fc7\u63d0\u9ad8\u4ed8\u8d39\u8f6c\u5316\u7387\u548c\u5e7f\u544a\u4ef7\u683c\u5b9e\u73b0\uff0c\u6d77\u5916\u9700\u6c42\u5c1a\u5b58\u5728\u4e0d\u786e\u5b9a\u6027\u3002-operating_mechanism] _
+tests\unit\test_narrative_business_recall.py:91: in test_concrete_generic_business_meaning_does_not_require_launch
+    package = selected(units([text]))
+                       ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_concrete_generic_business_meaning_does_not_require_launch[Our new service targets industrial customers through a local distributor network, with on-site qualification required before adoption.-business_structure] _
+tests\unit\test_narrative_business_recall.py:91: in test_concrete_generic_business_meaning_does_not_require_launch
+    package = selected(units([text]))
+                       ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_boilerplate_definition_and_finance_are_not_business_facts[We take security and shareholder returns seriously and always seek excellence.] _
+tests\unit\test_narrative_business_recall.py:107: in test_boilerplate_definition_and_finance_are_not_business_facts
+    assert selected(units([text])).evidence_spans == ()
+                    ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_boilerplate_definition_and_finance_are_not_business_facts[The dividend increased by 20% and financing proceeds supported liquidity.] _
+tests\unit\test_narrative_business_recall.py:107: in test_boilerplate_definition_and_finance_are_not_business_facts
+    assert selected(units([text])).evidence_spans == ()
+                    ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_boilerplate_definition_and_finance_are_not_business_facts[Revenue increased by 20% while our product philosophy remains unchanged.] _
+tests\unit\test_narrative_business_recall.py:107: in test_boilerplate_definition_and_finance_are_not_business_facts
+    assert selected(units([text])).evidence_spans == ()
+                    ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_boilerplate_definition_and_finance_are_not_business_facts[\u672c\u516c\u53f8\u4f9d\u6cd5\u7ecf\u8425\uff0c\u575a\u6301\u521b\u65b0\u53d1\u5c55\uff0c\u4e3a\u5ba2\u6237\u521b\u9020\u4ef7\u503c\u3002] _
+tests\unit\test_narrative_business_recall.py:107: in test_boilerplate_definition_and_finance_are_not_business_facts
+    assert selected(units([text])).evidence_spans == ()
+                    ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_boilerplate_definition_and_finance_are_not_business_facts[\u8ba2\u5355\u5f0f\u751f\u4ea7\u662f\u6307\u6839\u636e\u5ba2\u6237\u8ba2\u5355\u5b89\u6392\u751f\u4ea7\u7684\u901a\u7528\u751f\u4ea7\u65b9\u5f0f\u3002] _
+tests\unit\test_narrative_business_recall.py:107: in test_boilerplate_definition_and_finance_are_not_business_facts
+    assert selected(units([text])).evidence_spans == ()
+                    ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_boilerplate_definition_and_finance_are_not_business_facts[Forward-looking statements may differ materially from actual results.] _
+tests\unit\test_narrative_business_recall.py:107: in test_boilerplate_definition_and_finance_are_not_business_facts
+    assert selected(units([text])).evidence_spans == ()
+                    ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_boilerplate_definition_and_finance_are_not_business_facts[We believe that innovation and customer success are important to everyone.] _
+tests\unit\test_narrative_business_recall.py:107: in test_boilerplate_definition_and_finance_are_not_business_facts
+    assert selected(units([text])).evidence_spans == ()
+                    ^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+___________ test_noncompany_role_cannot_seed_company_fact[analyst] ____________
+tests\unit\test_narrative_business_recall.py:112: in test_noncompany_role_cannot_seed_company_fact
+    package = selected(units([
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+______ test_noncompany_role_cannot_seed_company_fact[investor_question] _______
+tests\unit\test_narrative_business_recall.py:112: in test_noncompany_role_cannot_seed_company_fact
+    package = selected(units([
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+___________ test_noncompany_role_cannot_seed_company_fact[operator] ___________
+tests\unit\test_narrative_business_recall.py:112: in test_noncompany_role_cannot_seed_company_fact
+    package = selected(units([
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+__________ test_noncompany_role_cannot_seed_company_fact[editorial] ___________
+tests\unit\test_narrative_business_recall.py:112: in test_noncompany_role_cannot_seed_company_fact
+    package = selected(units([
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+___ test_unchanged_framework_and_efficiency_form_small_atomic_support_group ___
+tests\unit\test_narrative_business_recall.py:123: in test_unchanged_framework_and_efficiency_form_small_atomic_support_group
+    package = selected(units(texts), limit=2)
+                       ^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_required_context_does_not_cross_source_actor_or_record_boundary[qa_group_id-qa-2] _
+tests\unit\test_narrative_business_recall.py:140: in test_required_context_does_not_cross_source_actor_or_record_boundary
+    members = units(["The return calculation has not changed.",
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_required_context_does_not_cross_source_actor_or_record_boundary[qa_parent_id-2] _
+tests\unit\test_narrative_business_recall.py:140: in test_required_context_does_not_cross_source_actor_or_record_boundary
+    members = units(["The return calculation has not changed.",
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_required_context_does_not_cross_source_actor_or_record_boundary[speaker-Different officer] _
+tests\unit\test_narrative_business_recall.py:140: in test_required_context_does_not_cross_source_actor_or_record_boundary
+    members = units(["The return calculation has not changed.",
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_required_context_does_not_cross_source_actor_or_record_boundary[parent_content_sha256-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb] _
+tests\unit\test_narrative_business_recall.py:140: in test_required_context_does_not_cross_source_actor_or_record_boundary
+    members = units(["The return calculation has not changed.",
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_required_context_does_not_cross_source_actor_or_record_boundary[record_pointer-/datas/0/records/2] _
+tests\unit\test_narrative_business_recall.py:140: in test_required_context_does_not_cross_source_actor_or_record_boundary
+    members = units(["The return calculation has not changed.",
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_ test_required_context_does_not_cross_source_actor_or_record_boundary[section-Separate business] _
+tests\unit\test_narrative_business_recall.py:140: in test_required_context_does_not_cross_source_actor_or_record_boundary
+    members = units(["The return calculation has not changed.",
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+___ test_required_qualifier_group_is_atomic_and_source_order_deterministic ____
+tests\unit\test_narrative_business_recall.py:155: in test_required_qualifier_group_is_atomic_and_source_order_deterministic
+    members = units(texts)
+              ^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+______ test_unknown_or_nonstring_version_is_explicit_value_error[0.8.0] _______
+tests\unit\test_narrative_business_recall.py:169: in test_unknown_or_nonstring_version_is_explicit_value_error
+    selected(units(["Our product is supplied through overseas distributors."]), version=version)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_________ test_unknown_or_nonstring_version_is_explicit_value_error[] _________
+tests\unit\test_narrative_business_recall.py:169: in test_unknown_or_nonstring_version_is_explicit_value_error
+    selected(units(["Our product is supplied through overseas distributors."]), version=version)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_____ test_unknown_or_nonstring_version_is_explicit_value_error[version2] _____
+tests\unit\test_narrative_business_recall.py:169: in test_unknown_or_nonstring_version_is_explicit_value_error
+    selected(units(["Our product is supplied through overseas distributors."]), version=version)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_____ test_unknown_or_nonstring_version_is_explicit_value_error[version3] _____
+tests\unit\test_narrative_business_recall.py:169: in test_unknown_or_nonstring_version_is_explicit_value_error
+    selected(units(["Our product is supplied through overseas distributors."]), version=version)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+_______ test_unknown_or_nonstring_version_is_explicit_value_error[True] _______
+tests\unit\test_narrative_business_recall.py:169: in test_unknown_or_nonstring_version_is_explicit_value_error
+    selected(units(["Our product is supplied through overseas distributors."]), version=version)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+__ test_native_whole_field_oversize_stays_omitted_partial_never_fake_sliced ___
+tests\unit\test_narrative_business_recall.py:174: in test_native_whole_field_oversize_stays_omitted_partial_never_fake_sliced
+    members = units([text.strip()], kind="official_json_field", metadata={
+tests\unit\test_narrative_business_recall.py:28: in units
+    coordinates=EvidenceCoordinates(paragraph_index=index,
+E   TypeError: EvidenceCoordinates.__init__() got an unexpected keyword argument 'line_start'
+____________ test_pure_group_diagnostics_are_bounded_locator_only _____________
+tests\unit\test_narrative_business_recall.py:183: in test_pure_group_diagnostics_are_bounded_locator_only
+    from company_wiki.source_catalog.narrative_business_groups import enrich_business_groups
+E   ModuleNotFoundError: No module named 'company_wiki.source_catalog.narrative_business_groups'
+______ test_full_msft_true_business_anchors_qualifiers_roles_and_replay _______
+tests\integration\test_narrative_business_recall.py:42: in test_full_msft_true_business_anchors_qualifiers_roles_and_replay
+    assert any(anchor in (span.raw_text or "") for span in business), anchor
+E   AssertionError: what we launched with Perception
+E   assert False
+E    +  where False = any(<generator object test_full_msft_true_business_anchors_qualifiers_roles_and_replay.<locals>.<genexpr> at 0x000002333D7DD8C0>)
+_ test_frozen_business_excerpt_pdf_parse_select_original_byte_replay[2025\u5e74\u5ea6\u62a5\u544a.pdf-texts0] _
+tests\integration\test_narrative_business_recall.py:107: in test_frozen_business_excerpt_pdf_parse_select_original_byte_replay
+    verified, failed = verify_pdf_evidence_spans(path, source_id=source_id_for_sha256(source_sha),
+E   TypeError: verify_pdf_evidence_spans() got an unexpected keyword argument 'language'
+---------------------------- Captured stdout call -----------------------------
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+_ test_frozen_business_excerpt_pdf_parse_select_original_byte_replay[\u4e0a\u5e02\u62db\u80a1\u8bf4\u660e\u4e66.pdf-texts1] _
+tests\integration\test_narrative_business_recall.py:106: in test_frozen_business_excerpt_pdf_parse_select_original_byte_replay
+    assert "�豸" in joined and ("�ֳ���֤" in joined if texts is ANNUAL else "���ڹ���" in joined)
+E   AssertionError: assert ('�豸' in 'ԭ���Ϸ��棬��˾��ԭ���Ϲ�Ӧ�����϶࣬��˾��ϸ�ԭ���Ϲ�Ӧ�̽������ȶ��ĺ�����ϵ��\n�ܹ���֤ԭ���ϵĹ�Ӧ���������ȶ���ԭ���ϲ����Ϊ��˾�Ĳ���ƿ����')
+___ test_native_json_business_structure_role_parent_issuer_and_real_replay ____
+tests\integration\test_narrative_business_recall.py:154: in test_native_json_business_structure_role_parent_issuer_and_real_replay
+    package = new.package
+              ^^^^^^^^^^^
+E   AttributeError: 'NarrativeEvidencePackage' object has no attribute 'package'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_generic_business_meaning_does_not_require_launch[And so what we launched with Orion is essentially saying, let's sort of really make sure that you have the red team agents that know how to find vulnerabilities.-specific_business_event]
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_generic_business_meaning_does_not_require_launch[Our service uses a diversified model mix to reduce token cost and remain available if one provider fails.-operating_mechanism]
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_generic_business_meaning_does_not_require_launch[Efficiency depends on workload mix, token usage and silicon price performance.-operating_mechanism]
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_generic_business_meaning_does_not_require_launch[\u516c\u53f8\u4ea7\u80fd\u5177\u6709\u4e00\u5b9a\u5f39\u6027\uff0c\u4f46\u7a81\u53d1\u8ba2\u5355\u4e0b\u77ed\u671f\u914d\u5907\u7684\u4eba\u5de5\u3001\u7ec4\u88c5\u68c0\u6d4b\u8bbe\u5907\u548c\u4f9b\u5e94\u5546\u77ed\u671f\u4f9b\u8d27\u80fd\u529b\u4ecd\u4f1a\u9650\u5236\u751f\u4ea7\u3002-business_risk_or_constraint]
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_generic_business_meaning_does_not_require_launch[\u516c\u53f8\u7684\u4ea7\u54c1\u5206\u4e3a\u63a7\u5236\u5668\u4e0e\u6267\u884c\u5668\uff0c\u63a7\u5236\u5668\u901a\u8fc7\u76f4\u9500\u4f9b\u7ed9\u8bbe\u5907\u5382\uff0c\u6267\u884c\u5668\u7531\u6d77\u5916\u6e20\u9053\u9500\u552e\uff1b\u5173\u952e\u90e8\u4ef6\u987b\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1\u3002-business_structure]
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_generic_business_meaning_does_not_require_launch[We serve equipment makers through direct sales while overseas distributors handle local service and qualification.-business_structure]
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_generic_business_meaning_does_not_require_launch[\u516c\u53f8\u4e3b\u8981\u91c7\u7528\u4ee5\u9500\u5b9a\u4ea7\u7684\u751f\u4ea7\u6a21\u5f0f\uff0c\u751f\u4ea7\u6d41\u7a0b\u6309\u7167\u6a21\u5757\u5316\u8bbe\u8ba1\uff0c\u5148\u7ec4\u88c5\u6a21\u5757\u518d\u7ec4\u88c5\u6574\u673a\u3002-business_structure]
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_generic_business_meaning_does_not_require_launch[\u62a5\u544a\u671f\u5185\u516c\u53f8\u8425\u4e1a\u6536\u5165\u589e\u957f\uff0c\u4e3b\u8981\u901a\u8fc7\u63d0\u9ad8\u4ed8\u8d39\u8f6c\u5316\u7387\u548c\u5e7f\u544a\u4ef7\u683c\u5b9e\u73b0\uff0c\u6d77\u5916\u9700\u6c42\u5c1a\u5b58\u5728\u4e0d\u786e\u5b9a\u6027\u3002-operating_mechanism]
+FAILED tests/unit/test_narrative_business_recall.py::test_concrete_generic_business_meaning_does_not_require_launch[Our new service targets industrial customers through a local distributor network, with on-site qualification required before adoption.-business_structure]
+FAILED tests/unit/test_narrative_business_recall.py::test_boilerplate_definition_and_finance_are_not_business_facts[We take security and shareholder returns seriously and always seek excellence.]
+FAILED tests/unit/test_narrative_business_recall.py::test_boilerplate_definition_and_finance_are_not_business_facts[The dividend increased by 20% and financing proceeds supported liquidity.]
+FAILED tests/unit/test_narrative_business_recall.py::test_boilerplate_definition_and_finance_are_not_business_facts[Revenue increased by 20% while our product philosophy remains unchanged.]
+FAILED tests/unit/test_narrative_business_recall.py::test_boilerplate_definition_and_finance_are_not_business_facts[\u672c\u516c\u53f8\u4f9d\u6cd5\u7ecf\u8425\uff0c\u575a\u6301\u521b\u65b0\u53d1\u5c55\uff0c\u4e3a\u5ba2\u6237\u521b\u9020\u4ef7\u503c\u3002]
+FAILED tests/unit/test_narrative_business_recall.py::test_boilerplate_definition_and_finance_are_not_business_facts[\u8ba2\u5355\u5f0f\u751f\u4ea7\u662f\u6307\u6839\u636e\u5ba2\u6237\u8ba2\u5355\u5b89\u6392\u751f\u4ea7\u7684\u901a\u7528\u751f\u4ea7\u65b9\u5f0f\u3002]
+FAILED tests/unit/test_narrative_business_recall.py::test_boilerplate_definition_and_finance_are_not_business_facts[Forward-looking statements may differ materially from actual results.]
+FAILED tests/unit/test_narrative_business_recall.py::test_boilerplate_definition_and_finance_are_not_business_facts[We believe that innovation and customer success are important to everyone.]
+FAILED tests/unit/test_narrative_business_recall.py::test_noncompany_role_cannot_seed_company_fact[analyst]
+FAILED tests/unit/test_narrative_business_recall.py::test_noncompany_role_cannot_seed_company_fact[investor_question]
+FAILED tests/unit/test_narrative_business_recall.py::test_noncompany_role_cannot_seed_company_fact[operator]
+FAILED tests/unit/test_narrative_business_recall.py::test_noncompany_role_cannot_seed_company_fact[editorial]
+FAILED tests/unit/test_narrative_business_recall.py::test_unchanged_framework_and_efficiency_form_small_atomic_support_group
+FAILED tests/unit/test_narrative_business_recall.py::test_required_context_does_not_cross_source_actor_or_record_boundary[qa_group_id-qa-2]
+FAILED tests/unit/test_narrative_business_recall.py::test_required_context_does_not_cross_source_actor_or_record_boundary[qa_parent_id-2]
+FAILED tests/unit/test_narrative_business_recall.py::test_required_context_does_not_cross_source_actor_or_record_boundary[speaker-Different officer]
+FAILED tests/unit/test_narrative_business_recall.py::test_required_context_does_not_cross_source_actor_or_record_boundary[parent_content_sha256-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb]
+FAILED tests/unit/test_narrative_business_recall.py::test_required_context_does_not_cross_source_actor_or_record_boundary[record_pointer-/datas/0/records/2]
+FAILED tests/unit/test_narrative_business_recall.py::test_required_context_does_not_cross_source_actor_or_record_boundary[section-Separate business]
+FAILED tests/unit/test_narrative_business_recall.py::test_required_qualifier_group_is_atomic_and_source_order_deterministic
+FAILED tests/unit/test_narrative_business_recall.py::test_unknown_or_nonstring_version_is_explicit_value_error[0.8.0]
+FAILED tests/unit/test_narrative_business_recall.py::test_unknown_or_nonstring_version_is_explicit_value_error[]
+FAILED tests/unit/test_narrative_business_recall.py::test_unknown_or_nonstring_version_is_explicit_value_error[version2]
+FAILED tests/unit/test_narrative_business_recall.py::test_unknown_or_nonstring_version_is_explicit_value_error[version3]
+FAILED tests/unit/test_narrative_business_recall.py::test_unknown_or_nonstring_version_is_explicit_value_error[True]
+FAILED tests/unit/test_narrative_business_recall.py::test_native_whole_field_oversize_stays_omitted_partial_never_fake_sliced
+FAILED tests/unit/test_narrative_business_recall.py::test_pure_group_diagnostics_are_bounded_locator_only
+FAILED tests/integration/test_narrative_business_recall.py::test_full_msft_true_business_anchors_qualifiers_roles_and_replay
+FAILED tests/integration/test_narrative_business_recall.py::test_frozen_business_excerpt_pdf_parse_select_original_byte_replay[2025\u5e74\u5ea6\u62a5\u544a.pdf-texts0]
+FAILED tests/integration/test_narrative_business_recall.py::test_frozen_business_excerpt_pdf_parse_select_original_byte_replay[\u4e0a\u5e02\u62db\u80a1\u8bf4\u660e\u4e66.pdf-texts1]
+FAILED tests/integration/test_narrative_business_recall.py::test_native_json_business_structure_role_parent_issuer_and_real_replay
+======================== 39 failed, 1 passed in 6.32s =========================

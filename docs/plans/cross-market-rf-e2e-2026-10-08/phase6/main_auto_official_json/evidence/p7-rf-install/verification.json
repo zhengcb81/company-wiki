@@ -1,0 +1,15 @@
+{
+  "schema_version": "main-rf-targeted-install/1",
+  "at": "2026-10-10T23:45:15.402776+00:00",
+  "head": "e929185c398f509867e24fa188e041e378286ddc",
+  "ci_id": 38096020406,
+  "selected_verified": 18,
+  "unselected_files_unchanged": 502,
+  "only_selected_file_names_changed": true,
+  "roots": [
+    "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast"
+  ],
+  "apply_sha256": "dcb556c5b8d40a0d63492f97217b0f9aad86ad8f218bb9dbe06e0a1ffb6127a5",
+  "provider_model_calls": 0
+}

@@ -1,0 +1,1 @@
+{"cases": ["no_optional", "scope_a_only", "company_scope", "synchronized_future", "historical_native_bridge"], "test_helpers_are_engineering_input_factory_only": true, "bridge_factory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_scoped_calibration_support.py"}

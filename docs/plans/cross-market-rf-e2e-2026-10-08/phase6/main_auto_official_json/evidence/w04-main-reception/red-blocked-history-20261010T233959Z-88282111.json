@@ -1,0 +1,21 @@
+{
+  "stage": "RED blocked history decision",
+  "returncode": 1,
+  "duration_seconds": 6.832,
+  "log_sha256": "eeeff2cb438ba79f989556cf8f0ba1c9b6fdea9b1c7fa6632027a678543ebd4a",
+  "owned_temp_restored": true,
+  "external_vendor_calls": 0,
+  "test_argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_narrative_failed_final.py::test_real_store_blocked_history_readonly_eligibility_preserves_pending_work",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-red-3t_q_p0x\\pytest",
+    "-p",
+    "no:cacheprovider"
+  ]
+}

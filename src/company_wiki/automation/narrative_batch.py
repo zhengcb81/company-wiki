@@ -27,13 +27,13 @@ from company_wiki.source_catalog.source_read_policy import (
     EXACT_READ_POLICY_FINGERPRINT_SCHEMA_VERSION, READ_POLICY_FINGERPRINT_SCHEMA_VERSION,
 )
 
-from .models import Event, HandlerResult, Job, JobStatus, RuntimeState, canonical_json, canonical_json_hash
+from .models import EffectStatus, Event, HandlerResult, Job, JobStatus, RuntimeGate, RuntimeState, canonical_json, canonical_json_hash
 from .narrative_batch_request import NarrativeBatchRequest
 from .narrative_contracts import (
     BUNDLE_MAX_BYTES, SELECT_RESULT_MAX_BYTES, SUMMARY_RESULT_MAX_BYTES,
     SourceRevisionEventPayload,
 )
-from .narrative_model import NARRATIVE_PROMPT_VERSION
+from .narrative_model import FailedFinalDiagnostic, NARRATIVE_PROMPT_VERSION
 from .narrative_generation import generation_manifest, projection_generation_manifest, generation_sha256, find_reuse_pin, read_reuse_pin
 from .narrative_official_json import open_verified_projection
 from .narrative_verify import BUNDLE_PRODUCER_VERSION
@@ -1409,8 +1409,12 @@ def _run_prepared(
     gate = store.read_runtime_gate()
     if gate.desired_state is RuntimeState.ENABLED and previous is None:
         raise ValueError("AUTOMATION_RUNTIME_ALREADY_ENABLED")
-    if previous is not None and all(job.status in _TERMINAL for job in current_jobs):
-        # Completed history is a read, not a new execution under current code.
+    if previous is not None and (
+        all(job.status in _TERMINAL for job in current_jobs)
+        or (previous.blocked and _blocked_history_is_idle(store, current_jobs, gate))
+    ):
+        # Completed or blocked idle history is a read, not a new execution.
+        # Blocked pending jobs and the original usage remain untouched.
         readonly_artifacts = NarrativeArtifactReader(
             catalog.config.database_path,
             LocalNarrativeObjectStore(catalog.config.catalog_dir),
@@ -1444,16 +1448,7 @@ def _run_prepared(
             ):
                 status = "budget_exhausted"
             if previous.blocked:
-                status = (
-                    "storage_exhausted"
-                    if previous.block_reason
-                    in {
-                        "PERSISTENT_BYTES_EXCEEDED",
-                        "SCRATCH_BYTES_EXCEEDED",
-                        "FINAL_BYTES_EXCEEDED",
-                    }
-                    else "budget_exhausted"
-                )
+                status = _blocked_status(previous)
             return _receipt(previous.run_id, status, documents, runs, guard)
     if previous is not None and versions != _execution_versions(request):
         raise BatchResumeError("BATCH_EXECUTION_VERSION_UNAVAILABLE_NEW_RUN_REQUIRED")
@@ -1678,6 +1673,14 @@ def _run_prepared(
             jobs = store.list_jobs(job_ids=run.job_ids)
             if len(jobs) != len(run.job_ids):
                 raise RunConflictError("batch run job disappeared")
+            current_run = runs.get_run(run.run_id)
+            if current_run is None:
+                raise RunConflictError("batch run disappeared")
+            # The ledger's hard limit is independent of whether maintenance
+            # has already terminalized dependent jobs after a model failure.
+            if current_run.blocked:
+                status = _blocked_status(current_run)
+                break
             if all(job.status in terminal for job in jobs):
                 status = (
                     "completed"
@@ -1686,12 +1689,6 @@ def _run_prepared(
                 )
                 if any(job.last_error_code == "MODEL_BUDGET_DENIED" for job in jobs):
                     status = "budget_exhausted"
-                break
-            current_run = runs.get_run(run.run_id)
-            if current_run is None:
-                raise RunConflictError("batch run disappeared")
-            if current_run.blocked:
-                status = "budget_exhausted"
                 break
             time.sleep(0.05)
     except KeyboardInterrupt:
@@ -1821,6 +1818,44 @@ def _write_generation_owner(pointer, db_path, run_id):
         temporary.unlink(missing_ok=True)
 
 
+def _blocked_status(run) -> str:
+    return (
+        "storage_exhausted"
+        if run.block_reason in {
+            "PERSISTENT_BYTES_EXCEEDED", "SCRATCH_BYTES_EXCEEDED", "FINAL_BYTES_EXCEEDED",
+        }
+        else "budget_exhausted"
+    )
+
+
+def _blocked_history_is_idle(
+    store: AutomationStore, jobs: tuple[Job, ...], gate: RuntimeGate,
+) -> bool:
+    """Read blocked history only when execution and delivery are quiescent.
+
+    A paused gate fences new claims. Unfinished attempts (even expired) and
+    unpublished effects retain the normal recovery path. Bounded outbox reads
+    use the actual effect/job foreign key: another run cannot reactivate this
+    blocked history, and opaque outbox identities need no derived naming.
+    """
+    if gate.desired_state is not RuntimeState.PAUSED:
+        return False
+    for job in jobs:
+        if job.status in {JobStatus.LEASED, JobStatus.RUNNING, JobStatus.VERIFYING}:
+            return False
+        if any(attempt.finished_at is None for attempt in store.list_attempts(job.job_id)):
+            return False
+        if any(
+            effect.status not in {EffectStatus.VERIFIED, EffectStatus.FAILED, EffectStatus.CANCELLED}
+            for effect in store.list_effects(job.job_id)
+        ):
+            return False
+    return not any(
+        store.list_outbox_entries(status=status, limit=1, allowed_job_ids=tuple(job.job_id for job in jobs))
+        for status in ("pending", "leased", "failed")
+    )
+
+
 def _receipt(run_id, status, documents, runs, guard):
     budget = runs.budget_snapshot(run_id)
     storage = guard.snapshot()
@@ -1854,21 +1889,27 @@ def _attempt_model_diagnostics(store, reservations, summary_job):
     observations = []
     for attempt in store.list_attempts(summary_job.job_id):
         raw = attempt.result_json
-        if raw is None or not any(field in raw for field in ('"reasoning_tokens":', '"usage_diagnostic":')):
+        if raw is None or not any(field in raw for field in ('"reasoning_tokens":', '"usage_diagnostic":', '"failed_final":')):
             continue
         try:
-            metrics = HandlerResult.from_dict(json.loads(raw)).metrics
-            if metrics.reasoning_tokens is None and metrics.usage_diagnostic is None:
+            parsed = HandlerResult.from_dict(json.loads(raw))
+            metrics = parsed.metrics
+            failed = parsed.result.get("failed_final")
+            diagnostic = FailedFinalDiagnostic.from_dict(failed).to_dict() if failed is not None else None
+            if metrics.reasoning_tokens is None and metrics.usage_diagnostic is None and diagnostic is None:
                 continue
             reservation = reservations.get(attempt.attempt_id)
-            observations.append({
+            observation: dict[str, Any] = {
                 "attempt_id": attempt.attempt_id,
                 "usage_status": reservation.usage_status if reservation else "unknown",
                 "input_tokens": reservation.input_tokens if reservation else None,
                 "output_tokens": reservation.output_tokens if reservation else None,
                 "reasoning_tokens": metrics.reasoning_tokens,
                 "usage_diagnostic": metrics.usage_diagnostic,
-            })
+            }
+            if diagnostic is not None:
+                observation["failed_final"] = diagnostic
+            observations.append(observation)
         except (KeyError, TypeError, ValueError):
             # Optional diagnostics never change the original job/fee outcome.
             observations.append({"attempt_id": attempt.attempt_id,

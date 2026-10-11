@@ -1,0 +1,186 @@
+{
+  "schema_version": "w04-independent-review-summary/1",
+  "status": "accepted_engineering_boundary_review",
+  "unique_pass_probes": 6,
+  "execution_receipts": [
+    {
+      "path": "receipt.json",
+      "sha256": "7561147dcfbdf5679de74ff3bfaa58a7736d889d1513dd7057e184f76a8ffa21",
+      "truth": "initial 5 pass plus 1 review-driver construction error; original result retained"
+    },
+    {
+      "path": "boundary-receipt.json",
+      "sha256": "04aecd0e55ce12628c91db793a30757040b2b42f39ea40691bb69269476e52ea",
+      "truth": "only corrected boundary probe rerun; 1 pass"
+    }
+  ],
+  "probes": [
+    {
+      "name": "existing-envelope-escaping-and-maximal-codepoint",
+      "status": "pass",
+      "details": {
+        "base_bytes": 8832,
+        "saved_bytes": 16382,
+        "one_codepoint_more_bytes": 16384,
+        "saved_prefix_bytes": 4675,
+        "error_and_meter_unchanged": true
+      }
+    },
+    {
+      "name": "real-ledger-partial-invalid-usage-none-empty-paid-replay",
+      "status": "pass",
+      "details": [
+        {
+          "observed_final": false,
+          "usage_status": "unknown",
+          "reserved_tokens": 219,
+          "charged_tokens": 219,
+          "reserved_micro_usd": 124,
+          "charged_micro_usd": 124,
+          "response_sha256": null,
+          "provider_sha256": "1d0e13fc1ae8bb6af97d3ac73443e56cf46d87572bdd8bcf8583562b79eaade3",
+          "output_bytes": 0,
+          "same_attempt_decoder_calls": 1,
+          "replay_db_unchanged": true
+        },
+        {
+          "observed_final": true,
+          "usage_status": "unknown",
+          "reserved_tokens": 219,
+          "charged_tokens": 219,
+          "reserved_micro_usd": 124,
+          "charged_micro_usd": 124,
+          "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "provider_sha256": "5ae1f137a435e55375f2cca738d30842e7189dbd8bdf37e9f4fec7f73400efd1",
+          "output_bytes": 0,
+          "same_attempt_decoder_calls": 1,
+          "replay_db_unchanged": true
+        }
+      ]
+    },
+    {
+      "name": "raw-entity-versus-final-utf8-no-normalization",
+      "status": "pass",
+      "details": {
+        "nfd_exact_bytes": 12,
+        "nfc_hash_distinct": true,
+        "different_raw_encodings_same_final_hash": true,
+        "bom_controls_crlf_preserved": true
+      }
+    },
+    {
+      "name": "multi-job-foreign-run-outbox-future-pending-preserved",
+      "status": "pass",
+      "details": [
+        {
+          "owned_state": "pending",
+          "owned_future_not_before": "2026-10-11T00:09:00Z",
+          "foreign_outboxes": 25,
+          "readonly_idle": false,
+          "actual_fk_scoped_before_limit": true,
+          "db_and_pending_jobs_unchanged": true
+        },
+        {
+          "owned_state": "failed",
+          "owned_future_not_before": "2026-10-11T00:09:00Z",
+          "foreign_outboxes": 25,
+          "readonly_idle": false,
+          "actual_fk_scoped_before_limit": true,
+          "db_and_pending_jobs_unchanged": true
+        },
+        {
+          "owned_state": "delivered",
+          "owned_future_not_before": "2026-10-11T00:09:00Z",
+          "foreign_outboxes": 25,
+          "readonly_idle": true,
+          "actual_fk_scoped_before_limit": true,
+          "db_and_pending_jobs_unchanged": true
+        }
+      ]
+    },
+    {
+      "name": "real-persisted-storage-and-actual-usage-budget-status",
+      "status": "pass",
+      "details": [
+        {
+          "actual_persisted_block_reason": "PERSISTENT_BYTES_EXCEEDED",
+          "status": "storage_exhausted"
+        },
+        {
+          "actual_persisted_block_reason": "SCRATCH_BYTES_EXCEEDED",
+          "status": "storage_exhausted"
+        },
+        {
+          "actual_persisted_block_reason": "FINAL_BYTES_EXCEEDED",
+          "status": "storage_exhausted"
+        },
+        {
+          "actual_settled_usage": [
+            73,
+            65
+          ],
+          "reserved_output_cap": 64,
+          "actual_persisted_block_reason": "MODEL_USAGE_EXCEEDS_RESERVATION",
+          "status": "budget_exhausted",
+          "pending_verify_unchanged": true,
+          "decoder_calls": 1
+        }
+      ]
+    },
+    {
+      "name": "exact-16384-metadata-none-versus-empty",
+      "status": "pass",
+      "details": [
+        {
+          "observed": false,
+          "metadata_exact_rejected_bytes": 16384,
+          "one_less_saved_bytes": 16383,
+          "meter_unchanged": true
+        },
+        {
+          "observed": true,
+          "metadata_exact_rejected_bytes": 16384,
+          "one_less_saved_bytes": 16383,
+          "meter_unchanged": true
+        }
+      ]
+    }
+  ],
+  "source_sha256": {
+    "src/company_wiki/automation/narrative_model.py": "c4d213e2eef4d4e9372ebc1af1ae497d811768ab8a1c7dad97f1d6c72508aa66",
+    "src/company_wiki/automation/narrative_http_model.py": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+    "src/company_wiki/automation/narrative_model_caller.py": "abee99f0a93c44aca7dc62d3d002c6e90aca48984839a488bbc098e1f086ff06",
+    "src/company_wiki/automation/narrative_summarize.py": "c438640fffc7fccb204434c3dde27cd0b3d6bca4c6f88ccedf05114d4b2fd035",
+    "src/company_wiki/automation/narrative_batch.py": "3c4eaab154d12f4a2125b0e5a8848d749c7aed07d886870cfba5cf5349c79b0a",
+    "src/company_wiki/automation/store.py": "ca021fe84e2157b846347103773b21f86092cc5e9e9d3bb17d5ff53858aa02e2",
+    "src/company_wiki/automation/narrative_failed_final.py": "0263148027b439f727cea4d9255ade074b8347b81f0398ad1e4b6c050e0b9cb8",
+    "tests/unit/test_narrative_failed_final.py": "7a3915874b47f18af187e5c4d868b60c3248d4619fed25112526316f6c90ef15",
+    "tests/unit/test_automation_outbox_read_scope.py": "40e7ebfceb4585d133ad9a3b8597ea1096d4f69865d068cba2671388ccfdf816",
+    "tests/integration/test_narrative_failed_final_cli.py": "6aedd3d04290db352557a1d998adb07696d6cc45fffedbce003523358775749c"
+  },
+  "source_unchanged_all": true,
+  "handoff_unchanged_all": true,
+  "production_config_unchanged_all": true,
+  "environment_unchanged_all": true,
+  "owned_temp_removed_all": true,
+  "other_owner_w03": {
+    "before": {
+      "src/company_wiki/source_catalog/narrative_candidates.py": "1374ccd3c74554cb742fe974604b113496f321f507001e8acb96d8b0bed5ef88",
+      "src/company_wiki/source_catalog/narrative_evidence.py": "8d96775ab0880a1f0ffa1261dc2c967df78afbaeb325a233cef7d6efb9f83dc3"
+    },
+    "after": {
+      "src/company_wiki/source_catalog/narrative_candidates.py": "1374ccd3c74554cb742fe974604b113496f321f507001e8acb96d8b0bed5ef88",
+      "src/company_wiki/source_catalog/narrative_evidence.py": "8d96775ab0880a1f0ffa1261dc2c967df78afbaeb325a233cef7d6efb9f83dc3"
+    },
+    "attribution": "ROOT-authorized concurrent W03 pure ownership, not W04/reviewer write"
+  },
+  "probe_driver_sha256": "e325ad82f7c1dcdbc3a8138c1724132652c00fe8081a4d244234160f13c63a53",
+  "new_network_provider_llm_calls": 0,
+  "new_cost_usd": 0,
+  "source_write_count": 0,
+  "test_write_count": 0,
+  "installation_write_count": 0,
+  "commit_push_count": 0,
+  "scope": "minimal independent boundary engineering review, not new public full pipeline execution or real configured supplier/company research closure",
+  "aggregate_probe_execution_seconds": 4.970729900000151
+}

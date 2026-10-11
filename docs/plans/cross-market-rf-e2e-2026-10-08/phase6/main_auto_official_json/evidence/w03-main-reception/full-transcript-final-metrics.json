@@ -1,0 +1,87 @@
+{
+  "raw_sha256_before": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+  "raw_sha256_after": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+  "raw_bytes": 66324,
+  "source_units": 489,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "versions": {
+    "0.6.0": {
+      "ordered_package_fingerprint_sha256": "11ad9c7f21c92d10847861f387a16ce1035f94da6a47a50128b354d0594b6d9f",
+      "candidate_count": 51,
+      "selected_count": 51,
+      "omitted_candidate_count": 0,
+      "status": "selected",
+      "coverage_complete": true,
+      "selection_limit": 96,
+      "roles": {
+        "management": 40,
+        "analyst": 11
+      },
+      "anchors": {
+        "what we launched with Perception": [],
+        "50% less cost": [],
+        "90% of the tasks": [],
+        "if a given model goes away": [],
+        "still continue your cyber operations": [],
+        "my math has changed": [],
+        "price performance on silicon": [],
+        "token usage": [],
+        "mix of the portfolio": []
+      },
+      "replay_verified": 51,
+      "replay_failed": 0,
+      "atomic_group_count": 0,
+      "max_atomic_group_units": 0,
+      "max_atomic_group_characters": 0
+    },
+    "0.7.0": {
+      "ordered_package_fingerprint_sha256": "c5e498acbb5d5c158a030b6e4d3bcec3713f408f2c49baa85717b3d63b905478",
+      "candidate_count": 103,
+      "selected_count": 96,
+      "omitted_candidate_count": 7,
+      "status": "partial",
+      "coverage_complete": true,
+      "selection_limit": 96,
+      "roles": {
+        "management": 88,
+        "analyst": 8
+      },
+      "anchors": {
+        "what we launched with Perception": [
+          "loc:v1/paragraph:303/chars:590-802"
+        ],
+        "50% less cost": [
+          "loc:v1/paragraph:303/chars:1492-1680"
+        ],
+        "90% of the tasks": [
+          "loc:v1/paragraph:303/chars:1682-1820"
+        ],
+        "if a given model goes away": [
+          "loc:v1/paragraph:303/chars:2015-2177"
+        ],
+        "still continue your cyber operations": [
+          "loc:v1/paragraph:303/chars:2178-2238"
+        ],
+        "my math has changed": [
+          "loc:v1/paragraph:317/chars:18-117"
+        ],
+        "price performance on silicon": [
+          "loc:v1/paragraph:317/chars:624-771"
+        ],
+        "token usage": [
+          "loc:v1/paragraph:135/chars:3980-4211",
+          "loc:v1/paragraph:317/chars:772-1031"
+        ],
+        "mix of the portfolio": [
+          "loc:v1/paragraph:317/chars:1207-1454"
+        ]
+      },
+      "replay_verified": 96,
+      "replay_failed": 0,
+      "atomic_group_count": 8,
+      "max_atomic_group_units": 5,
+      "max_atomic_group_characters": 681
+    }
+  }
+}

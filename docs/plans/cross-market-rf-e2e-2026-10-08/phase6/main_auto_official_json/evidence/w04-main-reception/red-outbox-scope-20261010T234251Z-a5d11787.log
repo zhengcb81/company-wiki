@@ -1,0 +1,66 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w04-scope-c8nqzvam\\pytest", "requested_basetemp_len": 57, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 25 items / 11 deselected / 14 selected
+
+tests\unit\test_automation_outbox_read_scope.py FFFFFF...                [ 64%]
+tests\unit\test_narrative_failed_final.py ...FF                          [100%]
+
+================================== FAILURES ===================================
+__ test_outbox_read_scope_filters_real_fk_before_limit_without_writing[None] __
+tests\unit\test_automation_outbox_read_scope.py:48: in test_outbox_read_scope_filters_real_fk_before_limit_without_writing
+    rows = store.list_outbox_entries(status=status, limit=1, allowed_job_ids=(target.job_id,))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AutomationStore.list_outbox_entries() got an unexpected keyword argument 'allowed_job_ids'
+_ test_outbox_read_scope_filters_real_fk_before_limit_without_writing[pending] _
+tests\unit\test_automation_outbox_read_scope.py:48: in test_outbox_read_scope_filters_real_fk_before_limit_without_writing
+    rows = store.list_outbox_entries(status=status, limit=1, allowed_job_ids=(target.job_id,))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AutomationStore.list_outbox_entries() got an unexpected keyword argument 'allowed_job_ids'
+_ test_outbox_read_scope_filters_real_fk_before_limit_without_writing[leased] _
+tests\unit\test_automation_outbox_read_scope.py:48: in test_outbox_read_scope_filters_real_fk_before_limit_without_writing
+    rows = store.list_outbox_entries(status=status, limit=1, allowed_job_ids=(target.job_id,))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AutomationStore.list_outbox_entries() got an unexpected keyword argument 'allowed_job_ids'
+_ test_outbox_read_scope_filters_real_fk_before_limit_without_writing[failed] _
+tests\unit\test_automation_outbox_read_scope.py:48: in test_outbox_read_scope_filters_real_fk_before_limit_without_writing
+    rows = store.list_outbox_entries(status=status, limit=1, allowed_job_ids=(target.job_id,))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AutomationStore.list_outbox_entries() got an unexpected keyword argument 'allowed_job_ids'
+_ test_outbox_read_scope_filters_real_fk_before_limit_without_writing[delivered] _
+tests\unit\test_automation_outbox_read_scope.py:48: in test_outbox_read_scope_filters_real_fk_before_limit_without_writing
+    rows = store.list_outbox_entries(status=status, limit=1, allowed_job_ids=(target.job_id,))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AutomationStore.list_outbox_entries() got an unexpected keyword argument 'allowed_job_ids'
+__ test_multiple_effects_same_job_keep_full_opaque_rows_and_delivered_state ___
+tests\unit\test_automation_outbox_read_scope.py:68: in test_multiple_effects_same_job_keep_full_opaque_rows_and_delivered_state
+    assert store.list_outbox_entries(allowed_job_ids=(target.job_id,)) == old_rows
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: AutomationStore.list_outbox_entries() got an unexpected keyword argument 'allowed_job_ids'
+_ test_real_store_blocked_history_readonly_eligibility_preserves_pending_work[failed-outbox-False] _
+tests\unit\test_narrative_failed_final.py:312: in test_real_store_blocked_history_readonly_eligibility_preserves_pending_work
+    assert batch._blocked_history_is_idle(store, (job,), gate) is expected
+E   AssertionError: assert True is False
+E    +  where True = <function _blocked_history_is_idle at 0x0000020FBC3D7E20>(<company_wiki.automation.store.AutomationStore object at 0x0000020FBBBF7BD0>, (Job(job_id='job', job_key='c53bc7f874b234914328e658916fa33b1ce22c5bea9af3359180708b106900d9', job_type='source.narrat..., created_at='2026-10-11T00:00:00Z', updated_at='2026-10-11T00:00:00Z', last_error_code=None, last_error_detail=None),), RuntimeGate(desired_state=<RuntimeState.PAUSED: 'paused'>, control_generation=1, updated_at='1970-01-01T00:00:00Z'))
+E    +    where <function _blocked_history_is_idle at 0x0000020FBC3D7E20> = <module 'company_wiki.automation.narrative_batch' from 'C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_batch.py'>._blocked_history_is_idle
+_ test_real_store_blocked_history_readonly_eligibility_preserves_pending_work[foreign-outbox-True] _
+tests\unit\test_narrative_failed_final.py:312: in test_real_store_blocked_history_readonly_eligibility_preserves_pending_work
+    assert batch._blocked_history_is_idle(store, (job,), gate) is expected
+E   AssertionError: assert False is True
+E    +  where False = <function _blocked_history_is_idle at 0x0000020FBC3D7E20>(<company_wiki.automation.store.AutomationStore object at 0x0000020FBC3E4D70>, (Job(job_id='job', job_key='c53bc7f874b234914328e658916fa33b1ce22c5bea9af3359180708b106900d9', job_type='source.narrat..., created_at='2026-10-11T00:00:00Z', updated_at='2026-10-11T00:00:00Z', last_error_code=None, last_error_detail=None),), RuntimeGate(desired_state=<RuntimeState.PAUSED: 'paused'>, control_generation=1, updated_at='1970-01-01T00:00:00Z'))
+E    +    where <function _blocked_history_is_idle at 0x0000020FBC3D7E20> = <module 'company_wiki.automation.narrative_batch' from 'C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_batch.py'>._blocked_history_is_idle
+=========================== short test summary info ===========================
+FAILED tests/unit/test_automation_outbox_read_scope.py::test_outbox_read_scope_filters_real_fk_before_limit_without_writing[None]
+FAILED tests/unit/test_automation_outbox_read_scope.py::test_outbox_read_scope_filters_real_fk_before_limit_without_writing[pending]
+FAILED tests/unit/test_automation_outbox_read_scope.py::test_outbox_read_scope_filters_real_fk_before_limit_without_writing[leased]
+FAILED tests/unit/test_automation_outbox_read_scope.py::test_outbox_read_scope_filters_real_fk_before_limit_without_writing[failed]
+FAILED tests/unit/test_automation_outbox_read_scope.py::test_outbox_read_scope_filters_real_fk_before_limit_without_writing[delivered]
+FAILED tests/unit/test_automation_outbox_read_scope.py::test_multiple_effects_same_job_keep_full_opaque_rows_and_delivered_state
+FAILED tests/unit/test_narrative_failed_final.py::test_real_store_blocked_history_readonly_eligibility_preserves_pending_work[failed-outbox-False]
+FAILED tests/unit/test_narrative_failed_final.py::test_real_store_blocked_history_readonly_eligibility_preserves_pending_work[foreign-outbox-True]
+================= 8 failed, 6 passed, 11 deselected in 4.53s ==================
