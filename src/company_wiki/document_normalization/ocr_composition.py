@@ -9,12 +9,14 @@ import json
 from company_wiki.source_contract import EvidenceCoordinates
 from .document import NormalizedDocument
 from .local_ocr import (
+    OCR_REGION_RECOVERY_SCHEMA,
     ImageOCRResult,
     LocalOCRError,
     OCRAdapter,
     OCRLimits,
     image_dimensions,
 )
+from .ocr_region_recovery import RecoveryBudget, recover_regions
 from .units import FORMAT_PPTX, PPTX_OCR_PARSER_VERSION, build_unit
 
 OCR_LOCATOR_SCHEMA = "cwp-pptx-image-ocr/1"
@@ -43,6 +45,44 @@ def enrich_pptx(
     ocr_limits: OCRLimits | None = None,
     selected_media_sha256s: frozenset[str] | None = None,
 ):
+    """Compose configured native OCR behind one reusable hard process boundary.
+
+    The backend adapter remains a cooperative primitive. Public normalization
+    and replay passing that configured adapter get a request-owned child for
+    preflight, full images and ROI attempts, closed before this call returns.
+    Protocol adapters and already-isolated clients retain their own boundary.
+    """
+    from .local_ocr import LocalOCRAdapter
+
+    if type(ocr) is LocalOCRAdapter:
+        from .isolated_ocr import IsolatedOCRAdapter
+
+        deadlines = [
+            value for value in (
+                limits.deadline,
+                None if ocr_limits is None else ocr_limits.deadline,
+            ) if value is not None
+        ]
+        deadline = min(deadlines) if deadlines else None
+        with IsolatedOCRAdapter(ocr.config, deadline=deadline) as bounded:
+            return _enrich_pptx(
+                document, ocr=bounded, limits=limits, ocr_limits=ocr_limits,
+                selected_media_sha256s=selected_media_sha256s,
+            )
+    return _enrich_pptx(
+        document, ocr=ocr, limits=limits, ocr_limits=ocr_limits,
+        selected_media_sha256s=selected_media_sha256s,
+    )
+
+
+def _enrich_pptx(
+    document: NormalizedDocument,
+    *,
+    ocr: OCRAdapter,
+    limits,
+    ocr_limits: OCRLimits | None = None,
+    selected_media_sha256s: frozenset[str] | None = None,
+):
     ocr_limits = ocr_limits or OCRLimits()
     if limits.deadline is not None:
         deadline = (
@@ -53,6 +93,7 @@ def enrich_pptx(
         ocr_limits = replace(ocr_limits, deadline=deadline)
     manifest, fingerprint = adapter_identity(ocr)
     threshold = manifest.get("low_confidence_threshold", 0.8)
+    accept_threshold = manifest.get("text_score", 0.5)
     units = []
     for old in document.units:
         metadata = {
@@ -76,10 +117,15 @@ def enrich_pptx(
             )
         )
     text_bytes = sum(len(u.raw_text.encode()) for u in units)
-    pixels = 0
     images = 0
-    cache = {}
-    page_records = {}
+    # One shared per-request accumulator: ROI pixels are charged against the
+    # same max_total_pixels budget and attempts are counted request-wide, so
+    # no image gets a fresh full budget of its own.
+    recovery_budget = RecoveryBudget()
+    total_recovered_lines = 0
+    total_unrecovered_regions = 0
+    cache: dict = {}
+    page_records: dict = {}
     assets = []
     errors = list(document.structure.errors)
     for asset in document.opaque_assets:
@@ -103,8 +149,7 @@ def enrich_pptx(
         if digest not in cache:
             try:
                 width, height = image_dimensions(asset.original_bytes, ocr_limits)
-                pixels += width * height
-                ocr_limits.require_within("max_total_pixels", pixels)
+                recovery_budget.reserve_pixels(width * height, limits=ocr_limits)
                 result = ocr.transcribe(asset.original_bytes, limits=ocr_limits)
                 limits.check_deadline("OCR native return")
                 ocr_limits.check_deadline()
@@ -113,7 +158,20 @@ def enrich_pptx(
                     result.height,
                 ) != (width, height):
                     raise LocalOCRError("OCR_RESULT_INVALID")
-                cache[digest] = (result, None)
+                recovered = ()
+                diagnostics = result.region_diagnostics
+                if diagnostics is not None and diagnostics.dropped:
+                    outcome = recover_regions(
+                        ocr=ocr,
+                        image_bytes=asset.original_bytes,
+                        result=result,
+                        limits=ocr_limits,
+                        budget=recovery_budget,
+                        accept_threshold=accept_threshold,
+                    )
+                    recovered = outcome.recovered_lines
+                    diagnostics = outcome.diagnostics
+                cache[digest] = (result, recovered, diagnostics, None)
             except LocalOCRError as exc:
                 # Runtime/configuration failures cannot masquerade as image gaps.
                 if exc.code not in {
@@ -127,8 +185,8 @@ def enrich_pptx(
                     "OCR_TEXT_INVALID",
                 }:
                     raise
-                cache[digest] = (None, exc.code)
-        result, error = cache[digest]
+                cache[digest] = (None, (), None, exc.code)
+        result, recovered, diagnostics, error = cache[digest]
         page = page_records.setdefault(
             asset.slide_number,
             {
@@ -136,11 +194,24 @@ def enrich_pptx(
                 "slide_id": document.metadata["slide_ids"][asset.slide_number],
                 "line_count": 0,
                 "low_confidence_lines": 0,
+                "dropped_regions": 0,
+                "recovered_lines": 0,
+                "unrecovered_regions": 0,
+                "recovery_attempts": 0,
                 "status": "recognized",
                 "images": [],
             },
         )
-        lines = () if result is None else result.lines
+        base_lines = () if result is None else result.lines
+        lines = base_lines + (recovered if result is not None else ())
+        media_unrecovered = 0
+        if diagnostics is not None:
+            # Every dropped region without a recovered line stays visible:
+            # attempted-and-failed, budget-exhausted and never-attempted all
+            # count as unrecovered quality flags.
+            media_unrecovered = sum(
+                1 for record in diagnostics.recovery if record.status != "recovered"
+            )
         low = sum(line.confidence < threshold for line in lines)
         status = (
             "failed"
@@ -156,25 +227,67 @@ def enrich_pptx(
             page["status"] = status
         page["line_count"] += len(lines)
         page["low_confidence_lines"] += low
-        page["images"].append(
-            {
-                "shape_path": asset.shape_path,
-                "media_sha256": digest,
-                "line_count": len(lines),
-                "status": status,
-                "error": error,
-                "dimensions": None if result is None else [result.width, result.height],
-            }
-        )
+        if diagnostics is not None:
+            media_attempts = sum(
+                len(record.attempts) for record in diagnostics.recovery
+            )
+            page["dropped_regions"] += len(diagnostics.dropped)
+            page["recovered_lines"] += len(recovered)
+            page["unrecovered_regions"] += media_unrecovered
+            page["recovery_attempts"] += media_attempts
+        total_recovered_lines += len(recovered)
+        total_unrecovered_regions += media_unrecovered
+        image_record = {
+            "shape_path": asset.shape_path,
+            "media_sha256": digest,
+            "line_count": len(lines),
+            "status": status,
+            "error": error,
+            "dimensions": None if result is None else [result.width, result.height],
+        }
+        if diagnostics is not None:
+            image_record.update(
+                {
+                    "dropped_regions": len(diagnostics.dropped),
+                    "recovered_lines": len(recovered),
+                    "unrecovered_regions": media_unrecovered,
+                    "recovery_attempts": sum(
+                        len(record.attempts) for record in diagnostics.recovery
+                    ),
+                    "region_diagnostics": diagnostics.to_dict(),
+                }
+            )
+        page["images"].append(image_record)
         for index, line in enumerate(lines):
             limits.require_within("max_units", len(units) + 1)
             text_bytes += len(line.text.encode())
             limits.require_within("max_text_output_bytes", text_bytes)
             box = ",".join(format(v, ".3f") for v in line.box)
             locator = f"{OCR_LOCATOR_SCHEMA}|s={asset.slide_number}|p={asset.shape_path}|m={digest}|ocr={fingerprint}|l={index}|b={box}"
+            is_recovered = result is not None and index >= len(base_lines)
             flags = ["ocr_used", "layout_ambiguous"]
+            if is_recovered:
+                flags.append("ocr_recovered")
             if line.confidence < threshold:
                 flags.append("low_ocr_confidence")
+            line_metadata = {
+                "slide_number": asset.slide_number,
+                "slide_id": document.metadata["slide_ids"][asset.slide_number],
+                "shape_path": asset.shape_path,
+                "media_sha256": digest,
+                "ocr_fingerprint": fingerprint,
+                "ocr_box": list(line.box),
+                "coordinate_space": "image_pixels",
+                "image_width": result.width,
+                "image_height": result.height,
+                "ocr_line_index": index,
+                "ocr_confidence": line.confidence,
+                "reading_order": "top-left-box/1",
+                "table_cells_inferred": False,
+                "recall_status": "unverified",
+            }
+            if is_recovered:
+                line_metadata["ocr_recovered"] = True
             units.append(
                 build_unit(
                     source_id=document.source_id,
@@ -189,22 +302,7 @@ def enrich_pptx(
                     transform="rapidocr-image-rgb/1",
                     parser_version=PPTX_OCR_PARSER_VERSION,
                     quality_flags=flags,
-                    extra_metadata={
-                        "slide_number": asset.slide_number,
-                        "slide_id": document.metadata["slide_ids"][asset.slide_number],
-                        "shape_path": asset.shape_path,
-                        "media_sha256": digest,
-                        "ocr_fingerprint": fingerprint,
-                        "ocr_box": list(line.box),
-                        "coordinate_space": "image_pixels",
-                        "image_width": result.width,
-                        "image_height": result.height,
-                        "ocr_line_index": index,
-                        "ocr_confidence": line.confidence,
-                        "reading_order": "top-left-box/1",
-                        "table_cells_inferred": False,
-                        "recall_status": "unverified",
-                    },
+                    extra_metadata=line_metadata,
                 )
             )
         assets.append(
@@ -258,7 +356,15 @@ def enrich_pptx(
                 "reading_order": "top-left-box/1",
                 "image_occurrences": images,
                 "unique_media_count": len(cache),
-                "total_decoded_pixels": pixels,
+                "total_decoded_pixels": recovery_budget.total_pixels,
+                "region_recovery": {
+                    "schema_version": OCR_REGION_RECOVERY_SCHEMA,
+                    "regions_started": recovery_budget.regions_started,
+                    "attempts": recovery_budget.total_attempts,
+                    "roi_pixels": recovery_budget.total_roi_pixels,
+                    "recovered_lines": total_recovered_lines,
+                    "unrecovered_regions": total_unrecovered_regions,
+                },
                 "pages": [page_records[k] for k in sorted(page_records)],
             },
         },

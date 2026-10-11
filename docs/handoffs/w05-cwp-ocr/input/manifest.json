@@ -1,0 +1,31 @@
+{
+  "schema_version": "w05-fixed-inputs/1",
+  "lane": "W05-CWP-OCR",
+  "files": [
+    {
+      "path": "construction_card.md",
+      "bytes": 6307,
+      "sha256": "75affd54f2f27a6926f83508a1568b689c76c2b50941ff512a122db91c64edcb"
+    },
+    {
+      "path": "handoff_contract.md",
+      "bytes": 3497,
+      "sha256": "45e10c161731aa108e3dc0df8262786f968a2bc8d7fa517b72ff6d17d6bb4835"
+    },
+    {
+      "path": "inputs.json",
+      "bytes": 2159,
+      "sha256": "ba6c009added8980404ded3222ee13e43508ac094f725f784e716e4564fca992"
+    },
+    {
+      "path": "slide7-root-cause.json",
+      "bytes": 60313,
+      "sha256": "31a993a34a0b032933d2a189569a9f9625b9ab791db75e26a5fbc251a89f6204"
+    },
+    {
+      "path": "slide7-root-cause.md",
+      "bytes": 4375,
+      "sha256": "c3fca2ace822205f356ffb0ea56783edbeefb1e79467809682aed810d0cd41ed"
+    }
+  ]
+}

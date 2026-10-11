@@ -1,0 +1,53 @@
+W05-CWP-OCR RED session record (captured 2026-10-11 during Node A)
+Scope: pre-implementation tree evolved in place per the writable set, so this
+file preserves the ACTUAL captured pytest output (verbatim summary lines and
+representative business failures), not a claim of completeness for every
+failure trace. Import/dependency errors were excluded from business RED by
+design: local_ocr.py carried structural schemas first, so failures below are
+behavioral (NotImplementedError("w05 RED") / behavior assertions).
+
+RED run 1 — schemas-only local_ocr + behavior skeletons (command identical to
+the card's focused suite):
+  python -B -m pytest -q tests/document_normalization/test_local_ocr_adapter.py \
+    tests/document_normalization/test_local_pptx_ocr.py tests/document_normalization/test_pptx.py \
+    tests/document_normalization/test_ocr_region_recovery.py tests/document_normalization/test_ocr_region_composition.py
+  exit_code=1
+  summary (verbatim): 23 failed, 35 passed in 9.57s
+  FAILED tests/document_normalization/test_local_ocr_adapter.py::test_engine_runs_with_score_floor_and_reports_dropped_regions
+    E   assert 0.5 == 0.0   (engine still receives the configured threshold;
+        the filtered regions are not observable -> diagnostics missing)
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_plan_selects_score_band_geometry_and_order
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_plan_caps_regions_per_image
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_margin_crop_roundtrip_maps_box_by_translation
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_split_stack_chunks_gap_detection_and_chunk_mapping
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_upscale_maps_box_with_scale
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_map_box_matrix_rotate_padding_and_invalid
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_recover_accepts_margin_crop_line_and_reports_records
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_recover_rejects_below_threshold_and_garbled_stitching
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_recover_split_stack_all_chunks_pass_stitches_in_reading_order
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_recover_low_aspect_uses_upscale_as_second_attempt
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_recovered_duplicate_of_accepted_line_is_rejected_not_duplicated
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_budget_exhaustion_before_second_attempt_is_recorded
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_deadline_between_attempts_propagates_without_partial_recovery
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_engine_failure_attempt_is_recorded_and_ladder_continues
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_unattempted_regions_carry_not_attempted_status
+  FAILED tests/document_normalization/test_ocr_region_recovery.py::test_iou_and_diagnostic_record_validation
+  FAILED tests/document_normalization/test_ocr_region_composition.py::test_composer_emits_recovered_unit_with_flags_locator_and_counts
+  FAILED tests/document_normalization/test_ocr_region_composition.py::test_unrecovered_region_surfaces_quality_counts_and_keeps_good_lines
+  FAILED tests/document_normalization/test_ocr_region_composition.py::test_roi_pixels_are_charged_request_wide_not_per_image
+  FAILED tests/document_normalization/test_ocr_region_composition.py::test_old_adapters_without_diagnostics_are_unchanged
+  FAILED tests/document_normalization/test_ocr_region_composition.py::test_replay_round_trips_recovered_unit_with_identical_metadata
+  FAILED tests/document_normalization/test_ocr_region_composition.py::test_recovered_duplicate_of_accepted_line_is_not_emitted
+  representative recovery failure (verbatim):
+    src\company_wiki\document_normalization\ocr_region_recovery.py:113: in build_margin_crop
+        raise NotImplementedError("w05 RED")
+  representative composition failure (verbatim tail):
+    E   AssertionError: assert 'unrecovered' == 'recovered'  / NotImplementedError("w05 RED")
+    (composer did not yet consume diagnostics/recovery)
+
+RED run 2 — after local_ocr diagnostics landed, before recovery/composition
+implementation (same command, verbatim summary):
+  21 failed, 38 passed in 10.08s
+
+Subsequent GREEN (implementation complete):
+  59 passed (logs/green-focused-suite.log) and 129 passed (logs/green-full-suite.log).

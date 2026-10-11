@@ -1,0 +1,29 @@
+{
+  "schema_version": "root-w05-ocr-acceptance/1",
+  "status": "PASS_WITH_SCOPE",
+  "worker_head": "6fe9a82a6a96fe024774791e2018c882a098d512",
+  "product_sha256": {
+    "src/company_wiki/document_normalization/isolated_ocr.py": "edade53c3c0fed2cb47ab115dbc969e1bd18be183280ee67a086fc876623d396",
+    "src/company_wiki/document_normalization/local_ocr.py": "ff7db0e6aeea844c1f32d3de3f3fdfa7965e6a3cd4f3fe56d4e455efc08a574f",
+    "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe",
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "d3890356211e7fe21fce22fcfb11ac71769941712dd77937d4d28e1d291f512c",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "b29a4fe2069713800d171c30ecd09d7bcf3a35984ef2f872ed85d8d4986ccbfd",
+    "tests/document_normalization/test_isolated_ocr.py": "cae823beff8cf78d49fd28cd4621aa12596868b517f462d9fcd7dfeba5013c04",
+    "tests/document_normalization/test_local_ocr_adapter.py": "53d99507129c9f28d70de8fd0ea49408fabe966368ad7357f2fd7b8505c7003f",
+    "tests/document_normalization/test_ocr_region_composition.py": "f355a81c34193d87bb510d3f36b1e70e4731ef2a80c98ad0c70cdb1678752b3f",
+    "tests/document_normalization/test_ocr_region_recovery.py": "3acea08f310eb21549b5353e4f092ec4956bcba6be953f5eef6e52704211aa50",
+    "tools/pre_push_gate.py": "b0f01eb54549bb2fc3270e72bfc0de5f3826f87a16612f23747804ea4b311593",
+    "tests/unit/test_ci_push_selection.py": "76a241152c8f29876bd9794875eefcd4be14a951284098bd8e787dacc54f4fd4"
+  },
+  "native_suite_before_preallocation": 22,
+  "preallocation_focused": 54,
+  "independent_preallocation": 34,
+  "shared_fast_smoke": 148,
+  "real_two_phase_seconds": 83.006,
+  "raw_config_unchanged": true,
+  "scratch_restored": true,
+  "fees_usd": 0,
+  "scope": "Windows source/resource contract; POSIX static only; no peak RSS or research-quality certification",
+  "original_failures_preserved": true,
+  "main_integration_and_remote_ci": "publication step follows this frozen acceptance"
+}

@@ -8,6 +8,7 @@ import math
 from pathlib import Path
 from company_wiki import document_normalization as dn
 from company_wiki.document_normalization.units import require_parser_version
+from company_wiki.document_normalization.isolated_ocr import IsolatedOCRAdapter
 
 PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 
@@ -40,7 +41,7 @@ class NarrativeNormalization:
         self.config = config
         self.deadline = deadline
         self.parser_versions = dict(parser_versions or {})
-        self._adapter_factory = adapter_factory or dn.LocalOCRAdapter
+        self._adapter_factory = adapter_factory
         self._adapter = None
         self._validated = False
 
@@ -79,7 +80,11 @@ class NarrativeNormalization:
         if self.config is None:
             return None
         if self._adapter is None:
-            self._adapter = self._adapter_factory(self.config)
+            self._adapter = (
+                IsolatedOCRAdapter(self.config, deadline=self.deadline)
+                if self._adapter_factory is None
+                else self._adapter_factory(self.config)
+            )
         return self._adapter
 
     def _prepare_ocr(self):
@@ -90,6 +95,26 @@ class NarrativeNormalization:
             adapter.validate_environment()
             self._validated = True
         return adapter
+
+    def close(self):
+        """Release the configured native child; injected adapters stay compatible."""
+        adapter, self._adapter = self._adapter, None
+        self._validated = False
+        closer = getattr(adapter, "close", None)
+        if closer is not None:
+            closer()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.close()
+
+    def __del__(self):
+        try:
+            self.close()
+        except Exception:
+            pass
 
     def identity(self, mime_type, *, document_id=None, parser_version=None):
         version = parser_version or self.parser_versions.get(document_id)

@@ -231,3 +231,8 @@ def test_unit_only_change_keeps_known_transitive_test_helper_consumers(project):
     _file(project, "tests/unit/test_runtime.py", "import subprocess\nsubprocess.run(argv)\n")
     assert select_unit_tests(project, {"tests/unit/test_helper.py"}) == (
         ["tests/unit/test_helper.py", "tests/unit/test_reader.py"], "affected unit tests")
+
+
+@pytest.mark.parametrize("node", ('tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer', 'tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget', 'tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it', 'tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]', 'tests/document_normalization/test_isolated_ocr.py::test_native_crt_stdin_probe_does_not_deadlock_liveness_monitor[_fstat64]', 'tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native'))
+def test_ocr_resource_regressions_share_ci_and_local_smoke(node):
+    assert node in gate.FAST_CONTRACT_CASES

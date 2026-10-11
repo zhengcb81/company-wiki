@@ -1,0 +1,715 @@
+{
+ "status": "HARD_TIMEOUT",
+ "calls": 13,
+ "records": [
+  {
+   "tag": "E0-full-image",
+   "use_cls": true,
+   "elapsed": 36.668,
+   "txts": [
+    "FY27 Segment changes and resulting new product and service reporting updates",
+    " l s    os    i  a i  s o o  on l ",
+    "our consulting and support businesses. Devices and Consumer will include our Windows, XBOX, and advertising businesses. With these segment",
+    "changes and to provide transparency to investors, we are updating our product and services reporting definitions to better represent the businesses as",
+    "we manage them today, which will be used in our SEC filings going forward.",
+    "Agents andInfra",
+    "Azure has been updated to reflect the move of GitHub cloud and other developer cloud services as well as Security Copilot to Microsoft 365 cloud.",
+    "Healthcare and Life Sciences cloud will move to the new Industry solutions cloud metric.",
+    "Microsoft 365 cloud now brings together our productivity, developer, and security app offerings across commercial and consumer including:",
+    "· Microsoft 365 commercial cloud will now include GitHub cloud and other developer cloud services as well as Security Copilot which were",
+    "previously reported in Azure",
+    "· Microsoft 365 consumer cloud is unchanged",
+    "n s o so so sl  sa r   nns",
+    "· Server products now excludes the on-premises portion of GitHub and other developer services which has moved to Microsoft 365",
+    "commercial products as well as the on-premises portion of the Healthcare and Life Sciences business which has moved to Industry Solutions",
+    "· Microsoft 365 commercial products will now include the on-premises portion of GitHub and other developer services which were previously",
+    "reported in Server products",
+    "· Microsoft 365 consumer products was previously reported as Office consumer products, but is otherwise unchanged",
+    "Industry solutions brings together our vertical commercial offerings across Dynamics, Linkedln, and Healthcare including:",
+    "· Industry solutions cloud, which is formed from Dynamics 365, Linkedln Talent Solutions and Sales Solutions, previously reported in Linkedln,",
+    "and Healthcare and Life Sciences cloud, previously reported in Azure",
+    "· Industry solutions products, which is the on-premises portion of these businesses",
+    "·",
+    "Frontier and support services was previously reported as Enterprise and Partner services, but is otherwise unchanged",
+    "The product and service offerings referenced above will be reported in our SEC filings"
+   ],
+   "scores": [
+    0.99363,
+    0.43236,
+    0.9871,
+    0.99461,
+    0.98376,
+    0.95847,
+    0.9938,
+    0.98539,
+    0.99016,
+    0.98956,
+    0.98433,
+    0.97156,
+    0.44278,
+    0.98836,
+    0.99453,
+    0.98862,
+    0.99518,
+    0.98584,
+    0.99713,
+    0.99219,
+    0.99072,
+    0.98901,
+    0.45808,
+    0.99736,
+    0.98918
+   ],
+   "boxes": [
+    [
+     82.0,
+     74.0,
+     2381.0,
+     139.0
+    ],
+    [
+     94.0,
+     177.0,
+     2320.0,
+     216.0
+    ],
+    [
+     95.0,
+     220.0,
+     2359.0,
+     259.0
+    ],
+    [
+     97.0,
+     263.0,
+     2437.0,
+     300.0
+    ],
+    [
+     93.0,
+     304.0,
+     1275.0,
+     345.0
+    ],
+    [
+     96.0,
+     384.0,
+     421.0,
+     426.0
+    ],
+    [
+     148.0,
+     444.0,
+     2440.0,
+     487.0
+    ],
+    [
+     152.0,
+     490.0,
+     1521.0,
+     526.0
+    ],
+    [
+     149.0,
+     545.0,
+     2350.0,
+     589.0
+    ],
+    [
+     235.0,
+     601.0,
+     2385.0,
+     644.0
+    ],
+    [
+     262.0,
+     645.0,
+     702.0,
+     690.0
+    ],
+    [
+     239.0,
+     704.0,
+     951.0,
+     744.0
+    ],
+    [
+     150.0,
+     763.0,
+     1719.0,
+     805.0
+    ],
+    [
+     235.0,
+     804.0,
+     2281.0,
+     845.0
+    ],
+    [
+     259.0,
+     847.0,
+     2439.0,
+     888.0
+    ],
+    [
+     235.0,
+     902.0,
+     2428.0,
+     947.0
+    ],
+    [
+     260.0,
+     950.0,
+     692.0,
+     988.0
+    ],
+    [
+     237.0,
+     1004.0,
+     2072.0,
+     1048.0
+    ],
+    [
+     149.0,
+     1063.0,
+     2055.0,
+     1104.0
+    ],
+    [
+     240.0,
+     1108.0,
+     2429.0,
+     1144.0
+    ],
+    [
+     260.0,
+     1149.0,
+     1325.0,
+     1188.0
+    ],
+    [
+     239.0,
+     1207.0,
+     1527.0,
+     1246.0
+    ],
+    [
+     92.0,
+     1274.0,
+     161.0,
+     1291.0
+    ],
+    [
+     146.0,
+     1264.0,
+     2001.0,
+     1305.0
+    ],
+    [
+     78.0,
+     1344.0,
+     1122.0,
+     1382.0
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-1:plain-cls",
+   "use_cls": true,
+   "elapsed": 4.217,
+   "txts": [
+    "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and"
+   ],
+   "scores": [
+    0.98912
+   ],
+   "boxes": [
+    [
+     1.0,
+     10.0,
+     2225.0,
+     54.0
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-1:plain-nocls",
+   "use_cls": false,
+   "elapsed": 2.356,
+   "txts": [
+    "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and"
+   ],
+   "scores": [
+    0.98912
+   ],
+   "boxes": [
+    [
+     1.0,
+     10.0,
+     2225.0,
+     54.0
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-1:splitstack",
+   "use_cls": true,
+   "elapsed": 3.389,
+   "txts": [
+    "We will transition to two",
+    "reporting",
+    " segments for",
+    "FY27. Agents and Infra",
+    "will include the",
+    "Microsoft Cloud,",
+    "productivity and",
+    "server licensing, and"
+   ],
+   "scores": [
+    0.96034,
+    0.99825,
+    0.98874,
+    0.99662,
+    0.99877,
+    0.98094,
+    0.99876,
+    0.97563
+   ],
+   "boxes": [
+    [
+     1.0,
+     14.0,
+     378.0,
+     45.0
+    ],
+    [
+     5.0,
+     91.0,
+     156.0,
+     123.0
+    ],
+    [
+     143.0,
+     86.0,
+     366.0,
+     123.0
+    ],
+    [
+     3.0,
+     158.0,
+     374.0,
+     197.0
+    ],
+    [
+     6.0,
+     234.0,
+     240.0,
+     264.0
+    ],
+    [
+     6.0,
+     305.0,
+     259.0,
+     339.0
+    ],
+    [
+     6.0,
+     378.0,
+     259.0,
+     416.0
+    ],
+    [
+     4.0,
+     453.0,
+     322.0,
+     486.0
+    ]
+   ],
+   "split_bounds": [
+    0,
+    383,
+    753,
+    1130,
+    1375,
+    1641,
+    1904,
+    2226
+   ],
+   "stack_places": [
+    [
+     0,
+     383,
+     0,
+     65
+    ],
+    [
+     383,
+     753,
+     73,
+     138
+    ],
+    [
+     753,
+     1130,
+     146,
+     211
+    ],
+    [
+     1130,
+     1375,
+     219,
+     284
+    ],
+    [
+     1375,
+     1641,
+     292,
+     357
+    ],
+    [
+     1641,
+     1904,
+     365,
+     430
+    ],
+    [
+     1904,
+     2226,
+     438,
+     503
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-1:gray-autocontrast",
+   "use_cls": true,
+   "elapsed": 2.375,
+   "txts": [
+    "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and"
+   ],
+   "scores": [
+    0.98906
+   ],
+   "boxes": [
+    [
+     1.0,
+     10.0,
+     2225.0,
+     54.0
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-1:up2x",
+   "use_cls": true,
+   "elapsed": 4.434,
+   "txts": [
+    "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and"
+   ],
+   "scores": [
+    0.99101
+   ],
+   "boxes": [
+    [
+     3.0,
+     23.0,
+     4450.5,
+     102.9
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-1:rot180",
+   "use_cls": true,
+   "elapsed": 3.029,
+   "txts": [
+    "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and"
+   ],
+   "scores": [
+    0.98746
+   ],
+   "boxes": [
+    [
+     0.0,
+     11.0,
+     2225.0,
+     55.0
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-2:plain-cls",
+   "use_cls": true,
+   "elapsed": 2.699,
+   "txts": [
+    "Productivity and server licensing brings together licensing offerings across our products including:"
+   ],
+   "scores": [
+    0.98632
+   ],
+   "boxes": [
+    [
+     2.0,
+     13.0,
+     1565.0,
+     53.0
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-2:plain-nocls",
+   "use_cls": false,
+   "elapsed": 2.096,
+   "txts": [
+    "Productivity and server licensing brings together licensing offerings across our products including:"
+   ],
+   "scores": [
+    0.98632
+   ],
+   "boxes": [
+    [
+     2.0,
+     13.0,
+     1565.0,
+     53.0
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-2:splitstack-forced",
+   "use_cls": true,
+   "elapsed": 3.919,
+   "txts": [
+    "Productivity and server",
+    "lice",
+    "+..",
+    "nsing",
+    "brings together",
+    "1.：+",
+    "licensing offerings across",
+    "1I+:",
+    "products including:",
+    "our"
+   ],
+   "scores": [
+    0.99667,
+    0.97951,
+    0.32204,
+    0.99746,
+    0.99954,
+    0.435,
+    0.98582,
+    0.44726,
+    0.99892,
+    0.99474
+   ],
+   "boxes": [
+    [
+     3.0,
+     16.0,
+     397.0,
+     50.0
+    ],
+    [
+     384.0,
+     17.0,
+     453.0,
+     45.0
+    ],
+    [
+     273.0,
+     59.0,
+     356.0,
+     74.0
+    ],
+    [
+     3.0,
+     96.0,
+     92.0,
+     128.0
+    ],
+    [
+     96.0,
+     94.0,
+     343.0,
+     129.0
+    ],
+    [
+     32.0,
+     138.0,
+     160.0,
+     150.0
+    ],
+    [
+     2.0,
+     171.0,
+     394.0,
+     209.0
+    ],
+    [
+     166.0,
+     214.0,
+     318.0,
+     229.0
+    ],
+    [
+     62.0,
+     248.0,
+     367.0,
+     287.0
+    ],
+    [
+     7.0,
+     258.0,
+     73.0,
+     281.0
+    ]
+   ],
+   "split_bounds": [
+    0,
+    455,
+    805,
+    1201,
+    1569
+   ],
+   "stack_places": [
+    [
+     0,
+     455,
+     0,
+     70
+    ],
+    [
+     455,
+     805,
+     78,
+     148
+    ],
+    [
+     805,
+     1201,
+     156,
+     226
+    ],
+    [
+     1201,
+     1569,
+     234,
+     304
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-2:gray-autocontrast",
+   "use_cls": true,
+   "elapsed": 2.413,
+   "txts": [
+    "Productivity and server licensing brings together licensing offerings across our products including:"
+   ],
+   "scores": [
+    0.98632
+   ],
+   "boxes": [
+    [
+     2.0,
+     13.0,
+     1565.0,
+     53.0
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-2:up2x",
+   "use_cls": true,
+   "elapsed": 3.253,
+   "txts": [
+    "Productivity and server licensing brings together licensing offerings across our products including:"
+   ],
+   "scores": [
+    0.99189
+   ],
+   "boxes": [
+    [
+     4.2,
+     27.3,
+     3128.6,
+     105.0
+    ]
+   ]
+  },
+  {
+   "tag": "business-line-2:rot180",
+   "use_cls": true,
+   "elapsed": 3.236,
+   "txts": [
+    " offerings across our products including:",
+    "brings together licensing",
+    "Productivity and server licensing"
+   ],
+   "scores": [
+    0.99397,
+    0.98574,
+    0.99731
+   ],
+   "boxes": [
+    [
+     4.0,
+     17.0,
+     627.0,
+     54.0
+    ],
+    [
+     622.0,
+     17.0,
+     1018.0,
+     55.0
+    ],
+    [
+     1018.0,
+     16.0,
+     1567.0,
+     57.0
+    ]
+   ]
+  }
+ ],
+ "e0_accepted_matches_root_cause": true,
+ "e0_counts": {
+  "engine_returned": 25,
+  "accepted_at_0.5": 22
+ },
+ "roi_meta": [
+  {
+   "name": "business-line-1",
+   "crop_box": [
+    94,
+    164,
+    2320,
+    229
+   ],
+   "size": [
+    2226,
+    65
+   ],
+   "orig_score": 0.43236
+  },
+  {
+   "name": "business-line-2",
+   "crop_box": [
+    150,
+    749,
+    1719,
+    819
+   ],
+   "size": [
+    1569,
+    70
+   ],
+   "orig_score": 0.44278
+  }
+ ],
+ "config_sha256": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105",
+ "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+ "media_sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+ "network_calls": 0
+}
