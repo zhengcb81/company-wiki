@@ -6,7 +6,7 @@ Goal: 独立、离线、多根迁移与引用回放套件（tools/source_root_po
 排他写集: tools/source_root_portability/、tests/unit/test_w06_root_portability_oracle.py、tests/integration/test_w06_root_portability.py、.planning/w06-cwp-portability/、docs/handoffs/w06-cwp-portability/（input/ 只读）。src/scripts/config/现有tests/CI 全只读。
 
 ## Next Step
-Phase 6：交接件（handoff.json/handoff.md/manifest.json）+ 两次普通 commit（代码、交接件）。
+全部完成。ROOT 接线：合并 49afd873 + 562bb879；快速 oracle 单元可入选 CI，run.py 留手动大节点。
 
 ### Phase 1 — 实读真实公开 API/CLI（完成）
 - Status: complete
@@ -36,10 +36,11 @@ Phase 6：交接件（handoff.json/handoff.md/manifest.json）+ 两次普通 com
   报告 29KB。历史 attempt-0001（oracle 抓到 S4 记录缺字段→FAIL）/0002 保留不覆写。
 - 产物：logs/e2e-runner*.log + e2e/attempt-0003-report.json。
 
-### Phase 6 — 交接与普通 commit
-- Status: in_progress
-- handoff.json（w06-lane-handoff/1）+ handoff.md + manifest.json + RED/GREEN/E2E 日志 + ROOT fix 建议；
-  正常 commit（不 force/跳 hooks/不推主线）。
+### Phase 6 — 交接与普通 commit（完成）
+- Status: complete
+- handoff.json（w06-lane-handoff/1，status COMPLETE）+ handoff.md + manifest.json（不含自哈希）+ RED/GREEN/E2E 日志 + ROOT fix 建议（F14/F15/F17）。
+- 两次普通 commit：49afd873（工具+测试+PWF+日志+E2E 报告副本）、562bb879（交接件）；未 force/跳 hooks/推主线。
+- input/ 保持只读未入库；config/ 零改动；scratch 峰值 308KB、留存 218KB（≤64MiB/≤8MiB）。
 
 ## Decisions Made
 - root_id 用 local_company / external_dayu / external_dropbox（ROOT 接口补充：斜杠只属于目录路径，不把 local/company 抄成 ID）。

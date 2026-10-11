@@ -55,8 +55,8 @@
     },
     {
       "path": ".planning/w06-cwp-portability/task_plan.md",
-      "sha256": "4847a427a213cc88021ec4db6720f69f50ba75ff60f94a2ff8357943fc80745d",
-      "bytes": 4588
+      "sha256": "cb88e9ac38726910ff65f76df839f53f13d5cdc289ff08138ef170abdfb10d9b",
+      "bytes": 4861
     },
     {
       "path": ".planning/w06-cwp-portability/findings.md",
@@ -110,7 +110,7 @@
     },
     {
       "path": "docs/handoffs/w06-cwp-portability/handoff.json",
-      "sha256": "1afcc327a85c578ad928009b1973d59713f179780d46b59ccd553834cf2983b9",
+      "sha256": "d2b6564198c45d962e89bcf0ccd0245b66df2a1e685b9a6e6b54a6fea8e93480",
       "bytes": 13051
     }
   ]

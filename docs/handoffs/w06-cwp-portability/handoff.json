@@ -71,8 +71,8 @@
     },
     {
       "path": ".planning/w06-cwp-portability/task_plan.md",
-      "sha256": "4847a427a213cc88021ec4db6720f69f50ba75ff60f94a2ff8357943fc80745d",
-      "bytes": 4588,
+      "sha256": "cb88e9ac38726910ff65f76df839f53f13d5cdc289ff08138ef170abdfb10d9b",
+      "bytes": 4861,
       "purpose": "lane PWF plan"
     },
     {
@@ -288,7 +288,7 @@
     "unknown_charge": 0.0
   },
   "space": {
-    "retained_bytes": 218476,
+    "retained_bytes": 218749,
     "scratch_peak_bytes": 308565,
     "measurement": "scratch peak measured on fixture+catalog after registration (all files under owned scratch); retained = sum of handoff file bytes"
   },
