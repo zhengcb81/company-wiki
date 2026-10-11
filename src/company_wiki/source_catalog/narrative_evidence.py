@@ -74,8 +74,9 @@ NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # and keeps unrecognized business documents reviewable. The version also pins
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
-NARRATIVE_SELECTOR_VERSION = "0.7.0"
-SUPPORTED_NARRATIVE_SELECTOR_VERSIONS = frozenset({"0.6.0", "0.7.0"})
+# 0.7.1 respects native document traversal, table and slide-shape boundaries.
+NARRATIVE_SELECTOR_VERSION = "0.7.1"
+SUPPORTED_NARRATIVE_SELECTOR_VERSIONS = frozenset({"0.6.0", "0.7.0", "0.7.1"})
 
 
 class NarrativeSelectorVersionError(ValueError):
@@ -1520,7 +1521,7 @@ def _candidate_rules(*, selector_version: str | None = None) -> CandidateRules:
         heading_only=_HEADING_ONLY,
         static_definition=_STATIC_DEFINITION,
     )
-    if effective == "0.7.0":
+    if effective in {"0.7.0", "0.7.1"}:
         return replace(rules, operating_facts=detect_business_fact, reject_text=reject_finance_only_text)
     return rules
 
@@ -1682,11 +1683,12 @@ def select_narrative_evidence(
     final_candidates = projects.candidates
     final_group_ids = projects.group_ids
     excluded_ids = enriched.excluded_context_unit_ids
-    if effective_version == "0.7.0":
+    if effective_version in {"0.7.0", "0.7.1"}:
         final_candidates = tuple(candidate for candidate in final_candidates
             if not reject_finance_only_text(candidate.unit.raw_text))
         business = enrich_business_groups(parsed.units, initial_candidates=final_candidates,
-            initial_group_ids=final_group_ids, rules=_candidate_rules(selector_version=effective_version))
+            initial_group_ids=final_group_ids, rules=_candidate_rules(selector_version=effective_version),
+            respect_native_structure=effective_version == "0.7.1")
         final_candidates = business.candidates
         final_group_ids = business.group_ids
         excluded_ids = excluded_ids | business.excluded_unit_ids

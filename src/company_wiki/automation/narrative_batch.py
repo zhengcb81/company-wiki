@@ -1745,11 +1745,16 @@ def _run_prepared(
 
 
 def _normalization_parsers(binding, versions):
-    """Use exact recorded versions, including pre-generation legacy PPTX runs."""
+    """Pass every native format's recorded parser to its owning Worker."""
+    from .narrative_formats import NORMALIZED_MIME_TYPES
+
     parsers = {}
     for event in binding.events:
         payload = SourceRevisionEventPayload.from_dict(json.loads(event.payload_json))
-        if payload.source_metadata.source_class != "filing" or payload.source_ref.mime_type not in {"text/html", "application/xhtml+xml", PPTX_MIME}:
+        if (
+            payload.source_metadata.source_class != "filing"
+            or payload.source_ref.mime_type not in NORMALIZED_MIME_TYPES
+        ):
             continue
         manifest = binding.generation_manifests.get(event.subject_id)
         parsers[event.subject_id] = (manifest["parser_component"]["version"] if manifest else

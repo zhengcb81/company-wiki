@@ -1,0 +1,18 @@
+{
+  "attempt_id": "pw03",
+  "step_id": "execution-handoff",
+  "company": "CN-688012",
+  "executor_agent": "/root/pw03_cn_revenue_executor",
+  "evidence": [
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\handoffs\\execution.json",
+      "sha256": "7d0762f68223586721bbeb31f89f0f240a41a3eefd2961a122f52fdab14764e2",
+      "locator": "/manifest"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\execution-intake-CN-688012\\manifest-observation.json",
+      "locator": "/sha_mismatches"
+    }
+  ],
+  "observation": "Actual final third sealed partial executor; original economic/interface/storage limitations explicit; four distinct quality reviews per company pending/running."
+}

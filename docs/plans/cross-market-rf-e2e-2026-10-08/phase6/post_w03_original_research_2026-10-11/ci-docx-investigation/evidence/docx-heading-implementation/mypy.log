@@ -1,0 +1,13 @@
+COMMAND: C:\Miniconda\python.exe -B -m mypy --cache-dir nul src/company_wiki/document_normalization/docx_parser.py src/company_wiki/document_normalization/units.py src/company_wiki/document_normalization/__init__.py src/company_wiki/source_catalog/narrative_normalization.py
+EXIT: 1
+src\company_wiki\document_normalization\docx_parser.py:14: error: Library stubs not installed for "lxml"  [import-untyped]
+src\company_wiki\document_normalization\docx_parser.py:14: note: Hint: "python3 -m pip install lxml-stubs"
+src\company_wiki\document_normalization\docx_parser.py:14: note: (or run "mypy --install-types" to install all missing stub packages)
+src\company_wiki\document_normalization\docx_parser.py:14: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
+src\company_wiki\document_normalization\docx_parser.py:165: error: Need type annotation for "styles" (hint: "styles: dict[<type>, <type>] = ...")  [var-annotated]
+src\company_wiki\document_normalization\docx_parser.py:220: error: Need type annotation for "chain" (hint: "chain: list[<type>] = ...")  [var-annotated]
+src\company_wiki\document_normalization\docx_parser.py:243: error: Incompatible types in assignment (expression has type "tuple[Any, str, Any]", variable has type "tuple[None, None, None]")  [assignment]
+src\company_wiki\document_normalization\docx_parser.py:248: error: Incompatible types in assignment (expression has type "tuple[None, str, None]", variable has type "tuple[None, None, None]")  [assignment]
+src\company_wiki\document_normalization\docx_parser.py:274: error: Incompatible types in assignment (expression has type "None", variable has type "str")  [assignment]
+src\company_wiki\source_catalog\narrative_normalization.py:215: error: Need type annotation for "seen" (hint: "seen: set[<type>] = ...")  [var-annotated]
+Found 7 errors in 2 files (checked 4 source files)

@@ -1,0 +1,635 @@
+{
+  "phase": "after implementation / before ROOT public acceptance",
+  "provider_calls": 0,
+  "model_calls": 0,
+  "new_fee": 0,
+  "source_files": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "tests/document_normalization/test_docx.py": "e69b0c6d276d1eb8279c5f8e6fce0f3082ab3d516f7fe8dbfe7f8b999a2ee0b6",
+    "tests/unit/test_docx_heading_normalization.py": "ea74c6439ecba14f798a743b0748ed75f47659d52077ae84b6322bd0d217e888"
+  },
+  "parent_owned_source_files": {
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f"
+  },
+  "legacy_original_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+  "legacy_exact_before_equals_after": true,
+  "replay": {
+    "legacy_1.0.0": {
+      "count": 6,
+      "all_exact": true,
+      "units_fingerprint": "a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4"
+    },
+    "current_1.1.0": {
+      "count": 6,
+      "all_exact": true,
+      "units_fingerprint": "584394a3f8bc6f5d2067d9fdfecc968beb4edd29cf62e51445cefd81bf1684ed"
+    }
+  },
+  "tampered_heading_metadata": {
+    "rejected": true,
+    "error": "replayed source differs from claimed unit identity/text/coordinates/metadata"
+  },
+  "legacy_record": {
+    "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+    "parser_version": "1.0.0",
+    "metadata": {
+      "archive_member_count": 5,
+      "uncompressed_bytes": 2147,
+      "external_relationship_count": 0,
+      "body_paragraph_count": 5,
+      "table_count": 1
+    },
+    "errors": [],
+    "units": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:5eb226a1781fa5fcf05f937e6fa0121634d5da7cdc46105bcfc403180bdbd316",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.0.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 0,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "The return calculation has not changed",
+        "unit_kind": "docx_paragraph",
+        "source_role": "company_filing",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|p=0",
+          "transform": "docx_visible_body_v1"
+        }
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:4f8d38439a462b54176745154b8608e490723a784ac05ede7174352d6e29c7dc",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.0.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 1,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "Efficiency assumptions",
+        "unit_kind": "docx_paragraph",
+        "source_role": "company_filing",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|p=1",
+          "transform": "docx_visible_body_v1"
+        }
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:9488fdb37630101b6ec59669461465a53235ba0dedcb2ae2f3e62d207b35a131",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.0.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 2,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+        "unit_kind": "docx_paragraph",
+        "source_role": "company_filing",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|p=2",
+          "transform": "docx_visible_body_v1"
+        }
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:77fefd4a7a9be5627e48e083b4b02ad31e8743ac0f656c62c32c14aa3deab6cf",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.0.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 3,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "Q: Has customer validation finished?",
+        "unit_kind": "docx_paragraph",
+        "source_role": "analyst",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|p=3",
+          "transform": "docx_visible_body_v1",
+          "qa_group_id": "docx-qa-1",
+          "section": "qa"
+        }
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:f7af5824566c1402ca26a920c19e34ca7ef143010b3c1406cfc2bf6803e0b97d",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.0.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 4,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "A: Customer validation remains planned next year.",
+        "unit_kind": "docx_paragraph",
+        "source_role": "management",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|p=4",
+          "transform": "docx_visible_body_v1",
+          "qa_group_id": "docx-qa-1",
+          "section": "qa"
+        }
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:f2a4e1be303a51af3fde848374faa3033c44805a8c6c328a70bad195ca590330",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.0.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": null,
+          "table_index": 0,
+          "row_index": 0,
+          "column_index": 0,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "New products received repeat customer orders.",
+        "unit_kind": "docx_table_cell",
+        "source_role": "company_filing",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|t=0|r=0|c=0|p=0",
+          "transform": "docx_visible_body_v1",
+          "table_class": "unknown",
+          "table_class_basis": [],
+          "table_headers": [
+            "New products received repeat customer orders."
+          ],
+          "table_index": 0,
+          "row_index": 0,
+          "column_index": 0,
+          "cell_paragraph_index": 0
+        }
+      }
+    ]
+  },
+  "current_record": {
+    "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+    "parser_version": "1.1.0",
+    "metadata": {
+      "archive_member_count": 5,
+      "uncompressed_bytes": 2147,
+      "external_relationship_count": 0,
+      "body_paragraph_count": 5,
+      "table_count": 1
+    },
+    "errors": [],
+    "units": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:e06db84ec1a322ca570fef2ab72fc4945654621ed51945e5ccc04a63ebab1faa",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 0,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "The return calculation has not changed",
+        "unit_kind": "docx_paragraph",
+        "source_role": "company_filing",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|p=0",
+          "transform": "docx_visible_body_v1",
+          "paragraph_style_id": "Normal",
+          "paragraph_style_name": "Normal"
+        }
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:5ff7b93e10d5b3c961b01ddaa59033c16b6e286a437aa3151683fb85ac1fe09e",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 1,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "Efficiency assumptions",
+        "unit_kind": "docx_heading",
+        "source_role": "company_filing",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|p=1",
+          "transform": "docx_visible_body_v1",
+          "paragraph_style_id": "Heading1",
+          "paragraph_style_name": "heading 1",
+          "outline_level": 0,
+          "outline_style_id": "Heading1",
+          "heading_level": 1,
+          "heading_basis": "style_outline"
+        }
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:69066a8c9cdf47701f52fa1c12c08633042f9460007f2a1dbd45326c0e8dd3f7",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 2,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+        "unit_kind": "docx_paragraph",
+        "source_role": "company_filing",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|p=2",
+          "transform": "docx_visible_body_v1",
+          "paragraph_style_id": "Normal",
+          "paragraph_style_name": "Normal"
+        }
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:f6c49815962fbc91cf4f2a9c8a20c652d41ed4a1923ff96aa92b4fffd17f0744",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 3,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "Q: Has customer validation finished?",
+        "unit_kind": "docx_paragraph",
+        "source_role": "analyst",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|p=3",
+          "transform": "docx_visible_body_v1",
+          "paragraph_style_id": "Normal",
+          "paragraph_style_name": "Normal",
+          "qa_group_id": "docx-qa-1",
+          "section": "qa"
+        }
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:4e449231a0352c7db17ee41c8e73752dfca29b772e63ca3d95710cadf90b1ba3",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 4,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "A: Customer validation remains planned next year.",
+        "unit_kind": "docx_paragraph",
+        "source_role": "management",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|p=4",
+          "transform": "docx_visible_body_v1",
+          "paragraph_style_id": "Normal",
+          "paragraph_style_name": "Normal",
+          "qa_group_id": "docx-qa-1",
+          "section": "qa"
+        }
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:ee8884b560fe7fbf9b8d0225d718fd6df3d4141010c14c7857f30be56414a07e",
+        "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": null,
+          "table_index": 0,
+          "row_index": 0,
+          "column_index": 0,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "New products received repeat customer orders.",
+        "unit_kind": "docx_table_cell",
+        "source_role": "company_filing",
+        "language": "und",
+        "quality_flags": [],
+        "metadata": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "source_locator": "cwp-docx-body/1|t=0|r=0|c=0|p=0",
+          "transform": "docx_visible_body_v1",
+          "table_class": "unknown",
+          "table_class_basis": [],
+          "table_headers": [
+            "New products received repeat customer orders."
+          ],
+          "table_index": 0,
+          "row_index": 0,
+          "column_index": 0,
+          "cell_paragraph_index": 0
+        }
+      }
+    ]
+  },
+  "review_original": {
+    "path": "../independent-review/docx_heading_minimal.docx",
+    "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+    "document": {
+      "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+      "parser_version": "1.1.0",
+      "metadata": {
+        "archive_member_count": 17,
+        "uncompressed_bytes": 826440,
+        "external_relationship_count": 0,
+        "body_paragraph_count": 3,
+        "table_count": 0
+      },
+      "errors": [],
+      "units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:a0ffb8d3f32fd56bdf96be8c3e26c1183afe24b0952e2d7e58626a657b735b7f",
+          "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.1.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "The return calculation has not changed",
+          "unit_kind": "docx_paragraph",
+          "source_role": "company_filing",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+            "source_locator": "cwp-docx-body/1|p=0",
+            "transform": "docx_visible_body_v1",
+            "paragraph_style_id": "Normal",
+            "paragraph_style_name": "Normal"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:0b50606d7e0eff8702ab105158eed552e4a846ff5f637807cfb7e1355dd1abb3",
+          "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.1.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 1,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "Efficiency assumptions",
+          "unit_kind": "docx_heading",
+          "source_role": "company_filing",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+            "source_locator": "cwp-docx-body/1|p=1",
+            "transform": "docx_visible_body_v1",
+            "paragraph_style_id": "Heading1",
+            "paragraph_style_name": "heading 1",
+            "outline_level": 0,
+            "outline_style_id": "Heading1",
+            "heading_level": 1,
+            "heading_basis": "style_outline"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:7c8d50b6380c69e6823f75df18f9da166358bdfd69b544ee429c6c5cfd7cabfe",
+          "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.1.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 2,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+          "unit_kind": "docx_paragraph",
+          "source_role": "company_filing",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+            "source_locator": "cwp-docx-body/1|p=2",
+            "transform": "docx_visible_body_v1",
+            "paragraph_style_id": "Normal",
+            "paragraph_style_name": "Normal"
+          }
+        }
+      ]
+    },
+    "selection_text": [
+      "Efficiency depends on workload mix, token usage and silicon price performance."
+    ],
+    "all_units_replayed_exactly": true
+  },
+  "inheritance_override_original": {
+    "source_sha256": "f98f852a2e497073effdcef7da41241e53b3ab7a2700c4134ff56e91a5cdb5c2",
+    "document": {
+      "source_sha256": "f98f852a2e497073effdcef7da41241e53b3ab7a2700c4134ff56e91a5cdb5c2",
+      "parser_version": "1.1.0",
+      "metadata": {
+        "archive_member_count": 5,
+        "uncompressed_bytes": 1757,
+        "external_relationship_count": 0,
+        "body_paragraph_count": 2,
+        "table_count": 0
+      },
+      "errors": [],
+      "units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:bd9d7a5098fdbe71f4b411ca0dc56d3fe76f392552625af9f5a14544fce66f27",
+          "source_id": "urn:company-wiki:source:sha256:f98f852a2e497073effdcef7da41241e53b3ab7a2700c4134ff56e91a5cdb5c2",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.1.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "Inherited section",
+          "unit_kind": "docx_heading",
+          "source_role": "company_filing",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "f98f852a2e497073effdcef7da41241e53b3ab7a2700c4134ff56e91a5cdb5c2",
+            "source_locator": "cwp-docx-body/1|p=0",
+            "transform": "docx_visible_body_v1",
+            "paragraph_style_id": "Custom",
+            "paragraph_style_name": "Customer Section",
+            "outline_level": 0,
+            "outline_style_id": "Heading1",
+            "heading_level": 1,
+            "heading_basis": "style_outline"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:dcea5fed28f2438da92d84cf8179f7b68f4d4f66fdbfe24db670fbef61ce9f0b",
+          "source_id": "urn:company-wiki:source:sha256:f98f852a2e497073effdcef7da41241e53b3ab7a2700c4134ff56e91a5cdb5c2",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.1.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 1,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "Body override",
+          "unit_kind": "docx_paragraph",
+          "source_role": "company_filing",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "f98f852a2e497073effdcef7da41241e53b3ab7a2700c4134ff56e91a5cdb5c2",
+            "source_locator": "cwp-docx-body/1|p=1",
+            "transform": "docx_visible_body_v1",
+            "paragraph_style_id": "Custom",
+            "paragraph_style_name": "Customer Section",
+            "outline_level": 9
+          }
+        }
+      ]
+    }
+  },
+  "checks": {
+    "red": "17 items: 11 failed, 6 passed",
+    "green_focused": "104 passed, 1 expected duplicate ZIP warning",
+    "ruff": "all checks passed",
+    "mypy": "4 source files passed with explicit import-untyped exclusion for missing lxml stubs",
+    "green_final_docx": "37 passed / 0.58s after final type annotations; final exact source files"
+  },
+  "root_remaining": [
+    "unified native/public batch generation/cache acceptance",
+    "independent supplementary review",
+    "normal publish and exact new HEAD CI"
+  ],
+  "sealed_utc": "2026-10-11T02:19:35.496604+00:00",
+  "red_log_encoding_note": "Initial RED capture decoded the Windows pytest GBK path as UTF-8; test EXIT=1 and complete ASCII failures were saved before the display wrapper encountered UnicodeEncodeError. RED was not rerun. Later logs explicitly decode GBK."
+}

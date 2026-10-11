@@ -1,0 +1,29 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\root-final-node\\pytest-temp", "requested_basetemp_len": 211, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261011-022051-d6e6a1de", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 15 items
+
+tests\unit\test_narrative_native_business_boundaries.py .........
+tests\unit\test_native_document_pipeline.py .....
+tests\integration\test_docx_parser_public_history.py F
+
+================================== FAILURES ===================================
+_ test_docx_new_parser_preserves_old_public_history_and_creates_distinct_generation _
+tests\integration\test_docx_parser_public_history.py:112: in test_docx_new_parser_preserves_old_public_history_and_creates_distinct_generation
+    old_ref, old_binding = _read(state, old, "1.0.0", context_selected=True)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_docx_parser_public_history.py:78: in _read
+    assert bundle.versions.parser == version
+E   AssertionError: assert '1.1.0' == '1.0.0'
+E     
+E     - 1.0.0
+E     + 1.1.0
+=========================== short test summary info ===========================
+FAILED tests/integration/test_docx_parser_public_history.py::test_docx_new_parser_preserves_old_public_history_and_creates_distinct_generation
+======================== 1 failed, 14 passed in 9.26s =========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261011-022051-d6e6a1de", "existed": true, "removed": true}

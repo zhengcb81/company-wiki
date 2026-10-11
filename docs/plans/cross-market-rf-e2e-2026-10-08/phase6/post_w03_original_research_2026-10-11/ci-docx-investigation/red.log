@@ -1,0 +1,99 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\red-temp", "requested_basetemp_len": 183, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261011-013350-6caeea07", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 12 items
+
+tests\unit\test_narrative_native_business_boundaries.py FFFFFFF          [ 58%]
+tests\unit\test_native_document_pipeline.py ..FFF                        [100%]
+
+================================== FAILURES ===================================
+_ test_native_financial_cell_cannot_be_reintroduced_as_sentence_context[docx_table_cell] _
+tests\unit\test_narrative_native_business_boundaries.py:55: in test_native_financial_cell_cannot_be_reintroduced_as_sentence_context
+    assert [span.raw_text for span in result.evidence_spans] == [BUSINESS]
+E   AssertionError: assert ['Company lau...ty.', '12345'] == ['Company lau...on capacity.']
+E     
+E     Left contains one more item: '12345'
+E     Use -v to get more diff
+_ test_native_financial_cell_cannot_be_reintroduced_as_sentence_context[html_table_cell] _
+tests\unit\test_narrative_native_business_boundaries.py:55: in test_native_financial_cell_cannot_be_reintroduced_as_sentence_context
+    assert [span.raw_text for span in result.evidence_spans] == [BUSINESS]
+E   AssertionError: assert ['Company lau...ty.', '12345'] == ['Company lau...on capacity.']
+E     
+E     Left contains one more item: '12345'
+E     Use -v to get more diff
+_ test_native_financial_cell_cannot_be_reintroduced_as_sentence_context[pptx_table_cell] _
+tests\unit\test_narrative_native_business_boundaries.py:55: in test_native_financial_cell_cannot_be_reintroduced_as_sentence_context
+    assert [span.raw_text for span in result.evidence_spans] == [BUSINESS]
+E   AssertionError: assert ['Company lau...ty.', '12345'] == ['Company lau...on capacity.']
+E     
+E     Left contains one more item: '12345'
+E     Use -v to get more diff
+___ test_docx_table_interrupts_paragraph_completion_in_physical_body_order ____
+tests\unit\test_narrative_native_business_boundaries.py:67: in test_docx_table_interrupts_paragraph_completion_in_physical_body_order
+    assert {span.raw_text for span in result.evidence_spans} == {QUALIFIER}
+E   AssertionError: assert {'Efficiency ... not changed'} == {'Efficiency ...performance.'}
+E     
+E     Extra items in the left set:
+E     'The return calculation has not changed'
+E     Use -v to get more diff
+_______ test_native_business_table_cell_remains_independently_selected ________
+tests\unit\test_narrative_native_business_boundaries.py:91: in test_native_business_table_cell_remains_independently_selected
+    assert not spans[0].structured_value.get("selection_group_id")
+E   AssertionError: assert not 'urn:company-wiki:context-group:sha256:eee6189ea55456da5ec902560ca71914cffe618f825e37c9919a7ed570403431'
+E    +  where 'urn:company-wiki:context-group:sha256:eee6189ea55456da5ec902560ca71914cffe618f825e37c9919a7ed570403431' = <built-in method get of mappingproxy object at 0x000002774E6CE260>('selection_group_id')
+E    +    where <built-in method get of mappingproxy object at 0x000002774E6CE260> = mappingproxy({'normalization_schema': 'cwp-document-normalization/1', 'format': 'docx', 'source_sha256': 'ac3279666639...n_group_id': 'urn:company-wiki:context-group:sha256:eee6189ea55456da5ec902560ca71914cffe618f825e37c9919a7ed570403431'}).get
+E    +      where mappingproxy({'normalization_schema': 'cwp-document-normalization/1', 'format': 'docx', 'source_sha256': 'ac3279666639...n_group_id': 'urn:company-wiki:context-group:sha256:eee6189ea55456da5ec902560ca71914cffe618f825e37c9919a7ed570403431'}) = EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:16c0c70a80c3b0b38f4e8be4a64fd3f5f2...d69a11abc4a7c6311d3f5d0eeef4ad16d98e9671992553303292c5', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()).structured_value
+______________ test_pptx_text_shapes_are_separate_context_owners ______________
+tests\unit\test_narrative_native_business_boundaries.py:101: in test_pptx_text_shapes_are_separate_context_owners
+    assert [span.raw_text for span in result.evidence_spans] == [QUALIFIER]
+E   AssertionError: assert ['Efficiency ... not changed'] == ['Efficiency ...performance.']
+E     
+E     Left contains one more item: 'The return calculation has not changed'
+E     Use -v to get more diff
+______ test_new_policy_identity_preserves_explicit_old_native_selection _______
+tests\unit\test_narrative_native_business_boundaries.py:116: in test_new_policy_identity_preserves_explicit_old_native_selection
+    new = select_units((table, business), "0.7.1")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_native_business_boundaries.py:33: in select_units
+    return select_narrative_evidence(structure, title="Company communication",
+src\company_wiki\source_catalog\narrative_evidence.py:1598: in select_narrative_evidence
+    effective_version = resolve_narrative_selector_version(selector_version)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_evidence.py:89: in resolve_narrative_selector_version
+    raise NarrativeSelectorVersionError("unsupported narrative selector version")
+E   company_wiki.source_catalog.narrative_evidence.NarrativeSelectorVersionError: unsupported narrative selector version
+_ test_docx_financial_table_cells_stay_out_of_business_selection[Container 0] _
+tests\unit\test_native_document_pipeline.py:134: in test_docx_financial_table_cells_stay_out_of_business_selection
+    assert all(s.raw_text != "12345" for s in selected.evidence_spans)
+E   assert False
+E    +  where False = all(<generator object test_docx_financial_table_cells_stay_out_of_business_selection.<locals>.<genexpr> at 0x000002774E6E39F0>)
+_ test_docx_financial_table_cells_stay_out_of_business_selection[Container 1] _
+tests\unit\test_native_document_pipeline.py:134: in test_docx_financial_table_cells_stay_out_of_business_selection
+    assert all(s.raw_text != "12345" for s in selected.evidence_spans)
+E   assert False
+E    +  where False = all(<generator object test_docx_financial_table_cells_stay_out_of_business_selection.<locals>.<genexpr> at 0x000002774E7182B0>)
+_ test_docx_financial_table_cells_stay_out_of_business_selection[Container 2] _
+tests\unit\test_native_document_pipeline.py:135: in test_docx_financial_table_cells_stay_out_of_business_selection
+    assert not any(
+E   assert not True
+E    +  where True = any(<generator object test_docx_financial_table_cells_stay_out_of_business_selection.<locals>.<genexpr> at 0x000002774E719FF0>)
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_native_business_boundaries.py::test_native_financial_cell_cannot_be_reintroduced_as_sentence_context[docx_table_cell]
+FAILED tests/unit/test_narrative_native_business_boundaries.py::test_native_financial_cell_cannot_be_reintroduced_as_sentence_context[html_table_cell]
+FAILED tests/unit/test_narrative_native_business_boundaries.py::test_native_financial_cell_cannot_be_reintroduced_as_sentence_context[pptx_table_cell]
+FAILED tests/unit/test_narrative_native_business_boundaries.py::test_docx_table_interrupts_paragraph_completion_in_physical_body_order
+FAILED tests/unit/test_narrative_native_business_boundaries.py::test_native_business_table_cell_remains_independently_selected
+FAILED tests/unit/test_narrative_native_business_boundaries.py::test_pptx_text_shapes_are_separate_context_owners
+FAILED tests/unit/test_narrative_native_business_boundaries.py::test_new_policy_identity_preserves_explicit_old_native_selection
+FAILED tests/unit/test_native_document_pipeline.py::test_docx_financial_table_cells_stay_out_of_business_selection[Container 0]
+FAILED tests/unit/test_native_document_pipeline.py::test_docx_financial_table_cells_stay_out_of_business_selection[Container 1]
+FAILED tests/unit/test_native_document_pipeline.py::test_docx_financial_table_cells_stay_out_of_business_selection[Container 2]
+======================== 10 failed, 2 passed in 1.62s =========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261011-013350-6caeea07", "existed": true, "removed": true}
+
+STDERR

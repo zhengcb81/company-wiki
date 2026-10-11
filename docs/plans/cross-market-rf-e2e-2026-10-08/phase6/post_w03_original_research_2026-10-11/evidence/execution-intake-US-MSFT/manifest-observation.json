@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-10-11T01:59:23.161477+00:00",
+  "run_id": "pw03-20261011T010657Z-us-msft",
+  "manifest": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\execution\\manifest.json",
+  "manifest_sha256": "ccbbeea4e3feaa0a482bf0f493d0d4a4cb00a1ccacc17ba13baaf670b1354e6c",
+  "seal_sha256": "dafd001671a7658e8ac1591f2a015b9bc00434d387c739a4bad9afca62cf4bcb",
+  "artifacts_checked": 401,
+  "artifacts_bytes_read": 21304082,
+  "missing": [],
+  "sha_mismatches": [],
+  "raw_originals_rehashed": 0,
+  "authority": "artifact_integrity_not_research_quality",
+  "appendable_delivery_boundary": {
+    "capture_id": "1395b3391d3a49ff86e54e784cea3c77",
+    "pending_mutable_delivery_files": [
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\roles\\executor\\commands\\1395b3391d3a49ff86e54e784cea3c77\\stdout.txt",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\roles\\executor\\commands\\1395b3391d3a49ff86e54e784cea3c77\\stderr.txt",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\roles\\executor\\events.jsonl"
+    ],
+    "events_prefix_bytes": 330233,
+    "events_prefix_sha256": "0d13460693e6106ec464b233acec37421bf9320d818ff7a527333565d0ee17c4",
+    "events_observed_count": 92,
+    "expected_final_append": "Audit tool writes enclosing command_finished and stdout after this child exits; no subsequent executor business mutation. These delivery bytes are not represented as sealed existing outputs."
+  },
+  "execution_outcome": "partial",
+  "artifact_completeness": "partial"
+}

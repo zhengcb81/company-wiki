@@ -28,7 +28,8 @@ FORMAT_HTML = "html"
 FORMAT_PPTX = "pptx"
 FORMAT_DOCX = "docx"
 DOCX_LOCATOR_SCHEMA = "cwp-docx-body/1"
-DOCX_PARSER_VERSION = "1.0.0"
+DOCX_PARSER_VERSION = "1.1.0"
+LEGACY_DOCX_PARSER_VERSION = "1.0.0"
 
 HTML_LOCATOR_SCHEMA = "cwp-html-dom/1"
 PPTX_LOCATOR_SCHEMA = "cwp-pptx-shape/2"
@@ -38,6 +39,8 @@ PPTX_OCR_PARSER_VERSION = "2.0.0"
 
 
 def parser_version_for_format(format_name: str) -> str:
+    if format_name == FORMAT_DOCX:
+        return DOCX_PARSER_VERSION
     return PPTX_PARSER_VERSION if format_name == FORMAT_PPTX else PARSER_VERSION
 
 
@@ -45,6 +48,8 @@ def require_parser_version(format_name: str, version: str) -> None:
     allowed = (
         {PARSER_VERSION, PPTX_PARSER_VERSION, PPTX_OCR_PARSER_VERSION}
         if format_name == FORMAT_PPTX
+        else {LEGACY_DOCX_PARSER_VERSION, DOCX_PARSER_VERSION}
+        if format_name == FORMAT_DOCX
         else {PARSER_VERSION}
     )
     if version not in allowed:
@@ -187,6 +192,7 @@ __all__ = [
     "FORMAT_DOCX",
     "DOCX_LOCATOR_SCHEMA",
     "DOCX_PARSER_VERSION",
+    "LEGACY_DOCX_PARSER_VERSION",
     "FORMAT_HTML",
     "FORMAT_PPTX",
     "HTML_LOCATOR_SCHEMA",

@@ -1,0 +1,18 @@
+{
+  "attempt_id": "pw03",
+  "step_id": "execution-handoff",
+  "company": "US-MSFT",
+  "executor_agent": "/root/pw03_us_revenue_executor",
+  "evidence": [
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\handoffs\\execution.json",
+      "sha256": "ad29152fa9eed0ee1fdea2bcd991fac64b1a0c4e3a2bb2c31e8b2a5221b3350e",
+      "locator": "/manifest"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\execution-intake-US-MSFT\\manifest-observation.json",
+      "locator": "/artifacts_checked"
+    }
+  ],
+  "observation": "Actual sealed partial executor with indexed artifact integrity; four fresh independent quality reviews pending."
+}

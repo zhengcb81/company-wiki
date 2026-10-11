@@ -1,0 +1,550 @@
+{
+  "schema_version": "independent-final-docx-heading-review/1",
+  "observed_at": "2026-10-11T02:28:06.328764+00:00",
+  "reviewer": "fresh independent child ci_docx_heading_final_review",
+  "recommendation": "accepted_for_reviewed_scope",
+  "scope": "Final targeted DOCX heading normalization/default1.1, legacy1.0 identity/replay, strict0.7.1 heading barrier, finite real public history/generation/worker-map proof. Previously accepted unrelated native/CI responsibilities are not reexecuted.",
+  "source_tree": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "source_before": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/document_normalization/replay.py": "83a9ca6fe4739924ae4f06effa0cee138f37c1df8bf6463ae293d5bbdb3af1de",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+    "src/company_wiki/automation/narrative_batch.py": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "source_after": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/document_normalization/replay.py": "83a9ca6fe4739924ae4f06effa0cee138f37c1df8bf6463ae293d5bbdb3af1de",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+    "src/company_wiki/automation/narrative_batch.py": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "source_unchanged": true,
+  "codegraph_usage": "Canonical codegraph_context consulted first. Current native normalization symbols absent from old canonical index; inspected known source files directly. No init/reindex.",
+  "checks": [
+    {
+      "id": "old_minimal_original_unchanged",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_default_real_version",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_real_heading_and_original_locator",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_no_context_crosses_heading",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_old_new_locators_match",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_versions_unit_ids_separate",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_selected_original_replay",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_old_unit_exact_replay",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "forged_heading_unit_metadata_rejected",
+      "status": "PASS",
+      "details": {
+        "rejected": true,
+        "error_type": "ReplayError",
+        "message": "replayed source differs from claimed unit identity/text/coordinates/metadata"
+      }
+    },
+    {
+      "id": "forged_heading_span_metadata_rejected",
+      "status": "PASS",
+      "details": {
+        "rejected": true,
+        "error_type": "ReplayError",
+        "message": "selected span source metadata differs"
+      }
+    },
+    {
+      "id": "own_three_level_style_inheritance",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_direct_outline9_body_override",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_inherited_outline9_body_override",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_direct_heading_overrides_body_style",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_no_context_crosses_inherited_heading",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_override_body_positive_group_complete",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_business_cell_retained_source_semantics",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_same_paragraph_positive_exact",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_direct_heading_barrier",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_selected_original_replay",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "legacy_original_sha",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "legacy_all_record_fields_before_after_independent_equal",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "legacy_full_record_fingerprint_unchanged",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "legacy_all_unit_exact_replay",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "legacy_forged_heading_unit_metadata_rejected",
+      "status": "PASS",
+      "details": {
+        "rejected": true,
+        "error_type": "ReplayError",
+        "message": "replayed source differs from claimed unit identity/text/coordinates/metadata"
+      }
+    },
+    {
+      "id": "saved_old_pin_stays_1_0",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "current_identity_really_1_1",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "old_minimal_original_still_unchanged_after_probes",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "all_source_and_config_sha_unchanged",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "implementation_and_actual_log_integrity",
+      "status": "PASS",
+      "basis": "Recomputed source/evidence/log SHA256 against frozen implementation manifest and both ROOT receipts."
+    },
+    {
+      "id": "review_source_matches_public_frozen_snapshot",
+      "status": "PASS",
+      "basis": "All seven final runtime sources match ROOT public attempt2 before/after; replay.py and production catalog config unchanged independently."
+    },
+    {
+      "id": "public_real_old_parser_and_new_parser",
+      "status": "PASS",
+      "basis": "Actual passing finite Worker/public read test checks each bundle parser_version, each EvidenceSpan parser_version and frozen generation_manifest parser component; old producer only selects runtime before processing."
+    },
+    {
+      "id": "public_old_history_sql_manifest_budget_unchanged",
+      "status": "PASS",
+      "basis": "Reviewed executed assertions: current resume has identical old items/budget/artifact reference/binding; both read-only SQLite iterdump tuples equal before resume. Source: test_docx_parser_public_history.py:118-126. Original saved artifacts/rows are never edited."
+    },
+    {
+      "id": "public_two_actual_loopback_posts",
+      "status": "PASS",
+      "basis": "ThreadingHTTPServer listens at 127.0.0.1; do_POST records actual production Worker requests after real prompt checks, not fabricated HandlerResult. New run contributes second POST, old resume/reuse add none."
+    },
+    {
+      "id": "public_new_generation_does_not_hit_old_cache",
+      "status": "PASS",
+      "basis": "Same immutable source_ref, distinct old/new artifact version IDs; current bundle heading spans remain standalone, original locator replay verified through real public read."
+    },
+    {
+      "id": "public_same_generation_reuse_zero_increment",
+      "status": "PASS",
+      "basis": "Executed reuse assertions retain exact new reference and count of two POSTs; zero incremental reuse tokens and synthetic charge. External provider/model fee is zero; two loopback runs record synthetic 111 micro-USD each."
+    },
+    {
+      "id": "public_preserved_material_red_then_targeted_green",
+      "status": "PASS",
+      "basis": "Original native-public attempt1 keeps 14 PASS/1 FAIL for actual bundle1.1 vs frozen1.0 mismatch; only failed public responsibility rerun after sole _normalization_parsers fix. No assertion weakening."
+    },
+    {
+      "id": "source_native_worker_map_common_cause_fixed",
+      "status": "PASS",
+      "basis": "Read exact git diff: only _normalization_parsers expands its normalized MIME enumeration to existing shared NORMALIZED_MIME_TYPES including DOCX; recorded manifest.version and legacy fallback1.0 are preserved. Runtime passes this map to owning worker."
+    },
+    {
+      "id": "public_owned_config_original_cleanup",
+      "status": "PASS",
+      "basis": "Executed fixture finally assertions compare all original bytes and tmp config before/after, closes catalog, removes owned temporary tree; actual CW-BASETEMP-CLEANUP confirms relocation cleanup. Production config independently SHA sealed."
+    }
+  ],
+  "material_findings": [],
+  "closed_prior_finding": "NATIVE-DOCX-HEADING-01: original c29c7c0d… now actual docx_heading/Heading1/level1 at original p=1 and no longer generic context.",
+  "public_proof": {
+    "actual_cli_calls": [
+      {
+        "exit_code": 0,
+        "run_id": "docx-old"
+      },
+      {
+        "exit_code": 0,
+        "run_id": "docx-old"
+      },
+      {
+        "exit_code": 0,
+        "run_id": "docx-current"
+      },
+      {
+        "exit_code": 0,
+        "run_id": "docx-reuse"
+      }
+    ],
+    "config_sha256": "d8fdd21c8f051f3985db918018606e5af9a6d435e00f796a7c1eed02a92fcbc9",
+    "loopback_posts": 2,
+    "new_budget": {
+      "estimated_micro_usd": 111,
+      "tokens": 92,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "new_parser": "1.1.0",
+    "new_reference": {
+      "artifact_sha256": "c0096c14bfd207100911d07c2bc0b7e3f333f4d1c7a54540a3d4fde0f49d0d95",
+      "artifact_version_id": "narrative-e8f839511e004288819feb5cee1b9ca6",
+      "byte_size": 5089,
+      "schema_version": "narrative-ref/1",
+      "source_ref": {
+        "byte_size": 36730,
+        "content_sha256": "e6ffe5f9a23ecfd68f0b1d5d02df019d33db9be6b2bfeba999b4dd3485d21899",
+        "document_id": "urn:company-wiki:document:sha256:e6ffe5f9a23ecfd68f0b1d5d02df019d33db9be6b2bfeba999b4dd3485d21899",
+        "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:e6ffe5f9a23ecfd68f0b1d5d02df019d33db9be6b2bfeba999b4dd3485d21899"
+      }
+    },
+    "old_budget": {
+      "estimated_micro_usd": 111,
+      "tokens": 92,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "old_parser": "1.0.0",
+    "old_reference": {
+      "artifact_sha256": "15200675005bc41a34f67eb3ea04b7ea8e4c726a5c46f18dbf23e573758c3e32",
+      "artifact_version_id": "narrative-dbbcaf06b82e4742853de33f1ebd6766",
+      "byte_size": 6360,
+      "schema_version": "narrative-ref/1",
+      "source_ref": {
+        "byte_size": 36730,
+        "content_sha256": "e6ffe5f9a23ecfd68f0b1d5d02df019d33db9be6b2bfeba999b4dd3485d21899",
+        "document_id": "urn:company-wiki:document:sha256:e6ffe5f9a23ecfd68f0b1d5d02df019d33db9be6b2bfeba999b4dd3485d21899",
+        "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:e6ffe5f9a23ecfd68f0b1d5d02df019d33db9be6b2bfeba999b4dd3485d21899"
+      }
+    },
+    "original_sha256": "e6ffe5f9a23ecfd68f0b1d5d02df019d33db9be6b2bfeba999b4dd3485d21899",
+    "reuse_budget": {
+      "estimated_micro_usd": 0,
+      "tokens": 0,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    }
+  },
+  "integrity": [
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\document_normalization\\docx_parser.py",
+      "expected": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+      "actual": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\document_normalization\\units.py",
+      "expected": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+      "actual": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\document_normalization\\__init__.py",
+      "expected": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+      "actual": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_normalization.py",
+      "expected": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+      "actual": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\document_normalization\\test_docx.py",
+      "expected": "e69b0c6d276d1eb8279c5f8e6fce0f3082ab3d516f7fe8dbfe7f8b999a2ee0b6",
+      "actual": "e69b0c6d276d1eb8279c5f8e6fce0f3082ab3d516f7fe8dbfe7f8b999a2ee0b6",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\unit\\test_docx_heading_normalization.py",
+      "expected": "ea74c6439ecba14f798a743b0748ed75f47659d52077ae84b6322bd0d217e888",
+      "actual": "ea74c6439ecba14f798a743b0748ed75f47659d52077ae84b6322bd0d217e888",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\after.json",
+      "expected": "2862d41447baed7c4f95f6d5d4fa435bf997d881d03b8fb8e09f6b5b213fe5a2",
+      "actual": "2862d41447baed7c4f95f6d5d4fa435bf997d881d03b8fb8e09f6b5b213fe5a2",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\before.json",
+      "expected": "987462b9d88d6cd509587caa4f4883e5ec6b1fb172eb527711a558ae2c2305c8",
+      "actual": "987462b9d88d6cd509587caa4f4883e5ec6b1fb172eb527711a558ae2c2305c8",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\green-final-docx.log",
+      "expected": "3ad353a848053073d90379700f4075a5e5bbbc9efe32ec848e061d60d3101b4d",
+      "actual": "3ad353a848053073d90379700f4075a5e5bbbc9efe32ec848e061d60d3101b4d",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\green-focused.log",
+      "expected": "601ca3481aee3c5c51d418e014e13d4e55c7714dd5fbcd28271ef425b8c50788",
+      "actual": "601ca3481aee3c5c51d418e014e13d4e55c7714dd5fbcd28271ef425b8c50788",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\heading-minimal.docx",
+      "expected": "ff1b655fe67c6fc59206079ae612373231758a35a751293df5af6c61e189f5e0",
+      "actual": "ff1b655fe67c6fc59206079ae612373231758a35a751293df5af6c61e189f5e0",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\IMPLEMENTATION.md",
+      "expected": "194395d21c3e9361b78165691947dd70eb7a820b96483581cbf930995247f1f6",
+      "actual": "194395d21c3e9361b78165691947dd70eb7a820b96483581cbf930995247f1f6",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\legacy-original.docx",
+      "expected": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+      "actual": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\mypy-final.log",
+      "expected": "866612c6db2892657c86cf926fd01fb2a9b378447e90b9c70ea45d18c2345d74",
+      "actual": "866612c6db2892657c86cf926fd01fb2a9b378447e90b9c70ea45d18c2345d74",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\mypy.log",
+      "expected": "4077a1aa525b2bdd6f9b96f432cd9765b58b1846e13b9f889643f492fba04c10",
+      "actual": "4077a1aa525b2bdd6f9b96f432cd9765b58b1846e13b9f889643f492fba04c10",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\red.log",
+      "expected": "e6a2d1b49297b0f83c7037d96824bd31b4571ad9e697d88e343e959e75ed9d29",
+      "actual": "e6a2d1b49297b0f83c7037d96824bd31b4571ad9e697d88e343e959e75ed9d29",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\ruff-final.log",
+      "expected": "1b5b1b837d76d4359e3f1a6dbc490094f5f9253acd338c32757fddb367ad35f5",
+      "actual": "1b5b1b837d76d4359e3f1a6dbc490094f5f9253acd338c32757fddb367ad35f5",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\ruff.log",
+      "expected": "1b5b1b837d76d4359e3f1a6dbc490094f5f9253acd338c32757fddb367ad35f5",
+      "actual": "1b5b1b837d76d4359e3f1a6dbc490094f5f9253acd338c32757fddb367ad35f5",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\style-inheritance-override.docx",
+      "expected": "f98f852a2e497073effdcef7da41241e53b3ab7a2700c4134ff56e91a5cdb5c2",
+      "actual": "f98f852a2e497073effdcef7da41241e53b3ab7a2700c4134ff56e91a5cdb5c2",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\root-final-node\\native-public-attempt1.log",
+      "expected": "a1eff1fd2afdd9f8f3baa510872ddd15010a812f70c618416d5cb7ed8543ff23",
+      "actual": "a1eff1fd2afdd9f8f3baa510872ddd15010a812f70c618416d5cb7ed8543ff23",
+      "status": "PASS"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\root-final-node\\docx-public-attempt2.log",
+      "expected": "6288936168769b74376770e11ad348054e2822979a2a9f0135164bb830bc8045",
+      "actual": "6288936168769b74376770e11ad348054e2822979a2a9f0135164bb830bc8045",
+      "status": "PASS"
+    }
+  ],
+  "read_materials": [
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\task_plan.md",
+      "sha256": "c26f671b8b4a81779cc10df9ca8f5b549f9167e97980aefc6f5903b7d7cd61df"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\DOCX_HEADING_CONTINUATION.md",
+      "sha256": "ba911522ca791d69b484f26d469699cdb1a212c55ea0de2f145f0ee20e03d0f4"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\independent-review\\review.json",
+      "sha256": "db81219e561af005aea9c830b3d9a9a4d678b4510292b10ad991bbaa95adf711"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\independent-review\\review.md",
+      "sha256": "db11cffe947ebca61a226eb9c5ded2a5c55e887d939daf2d377019919cffa1a0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\IMPLEMENTATION.md",
+      "sha256": "194395d21c3e9361b78165691947dd70eb7a820b96483581cbf930995247f1f6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\handoff-manifest.json",
+      "sha256": "1d1bb0d3783ff2251f77c431e606df0ce946faab04fa58bb8c8c7570f4e84595"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\before.json",
+      "sha256": "987462b9d88d6cd509587caa4f4883e5ec6b1fb172eb527711a558ae2c2305c8"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\after.json",
+      "sha256": "2862d41447baed7c4f95f6d5d4fa435bf997d881d03b8fb8e09f6b5b213fe5a2"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\root-final-node\\native-public-attempt1.json",
+      "sha256": "7abfdad6b64ef5cb77e2c39312e35254989d5c96f9965fd0f87bc5c1867a5f16"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\root-final-node\\native-public-attempt1.log",
+      "sha256": "a1eff1fd2afdd9f8f3baa510872ddd15010a812f70c618416d5cb7ed8543ff23"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\root-final-node\\docx-public-attempt2.json",
+      "sha256": "ff5bfd9fc9ca0419d757765c66f69ee61091da7d706662f48cc83ae27869088a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\root-final-node\\docx-public-attempt2.log",
+      "sha256": "6288936168769b74376770e11ad348054e2822979a2a9f0135164bb830bc8045"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\integration\\test_docx_parser_public_history.py",
+      "sha256": "65fd53345c9d264d54834bee0aa711187906961506e43422b96cab2d72f81df7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\support\\official_json_batch_fixture.py",
+      "sha256": "ad8ce82d1e590e2037c586983b62a57159c9d6ba5b745110a34c604bbfaf1e89"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_formats.py",
+      "sha256": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\final-heading-independent-review\\probe.py",
+      "sha256": "805a76016c0bc96303361d58e8ca0a18c15369a8dbed81cb67a5299fb33bdc9c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\final-heading-independent-review\\probe-first.py",
+      "sha256": "46fb530708095f2904bd8c0e48a1e67cac5a7d68f54b5293cbfc36adfc24e054"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\final-heading-independent-review\\probe-first-run.json",
+      "sha256": "2f17dcdefedd753f832f683f86e45537fc902fb687fa28c79b1cb05e4be9c8b6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\final-heading-independent-review\\probe-results.json",
+      "sha256": "e3f18da9b656c15ec669a2370445177303f3f95b82b434908826ba66f84e71d5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\final-heading-independent-review\\own-noneligible-cell.docx",
+      "sha256": "34dd86f5c45258f78f5eedd67dcf14b57aacad11858b83b08634c3f5ce5ea291"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\final-heading-independent-review\\own-inheritance-outline.docx",
+      "sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e"
+    }
+  ],
+  "harness_history": [
+    "Initial self probe attempted changing EvidenceSpan structured_value without updating its own canonical output/span IDs; constructor rejected before source replay. Self harness changed to recompute both identities so source metadata replay is actually tested. No source/saved artifact edit.",
+    "Second self harness run hit Windows filename path length262 at creating independent-inheritance-outline-controls.docx; renamed new self fixture to own-inheritance-outline.docx. Existing c29c original bytes never rewritten.",
+    "First completed probe had28 PASS/1 FAIL: generic New products received repeat customer orders. cell is not eligible under existing initial business policy; read-only comparison of frozen parser1.0 with selector0.7/0.7.1 both gives no selected cell. Original self input/probe/result preserved in own-noneligible-cell.docx/probe-first.py/probe-first-run.json. Self positive cell changed to established explicitly eligible operating-event wording; final29 PASS, no source behavior changed."
+  ],
+  "operations": {
+    "provider_calls": 0,
+    "external_model_calls": 0,
+    "new_external_fee": 0,
+    "source_edits": 0,
+    "production_config_edits": 0,
+    "saved_artifact_edits": 0,
+    "writes_limited_to": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\final-heading-independent-review",
+    "sealed_execution_packages_run": false,
+    "dayu_run": false,
+    "commit_or_push": false
+  },
+  "limits": [
+    "Did not rerun104/112 concentrated units, prior4 public cases or unrelated previously accepted native/CI responsibilities.",
+    "Public evidence was independently read and SHA checked; the reviewer did not rerun E2E. SQL/binding equality basis is actual passing assertions in retained test/log; owned temporary SQL/database files were removed by the test fixture.",
+    "New code HEAD is not yet published; no new-HEAD remote CI certification. Normal release/exact HEAD CI remains ROOT gate."
+  ]
+}

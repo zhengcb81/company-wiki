@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-10-11T01:39:50.523946+00:00",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/integration/test_w03_selector_public_node.py::test_full_true_txt_both_saved_policies_resolve_every_original_group",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\txt-recheck-temp"
+  ],
+  "exit_code": 0,
+  "seconds": 17.748496899999736,
+  "log_sha256": "0eec00174d599b2e3547b47e49d6587dcc1c76d5f7e36f404b33110efe7f9230",
+  "only_prior_failed_test": true,
+  "source_changes_for_recheck": 0,
+  "external_model_calls": 0
+}

@@ -1,0 +1,31 @@
+{
+  "observed_at": "2026-10-11T01:38:32.539301+00:00",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/integration/test_w03_selector_public_node.py",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\public-temp"
+  ],
+  "exit_code": 1,
+  "seconds": 75.1786018999992,
+  "source_before": {
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "701876166fa4547483425358475fbaf5d5a91e8171e73fb37bb6f41b4e57f230",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f"
+  },
+  "source_after": {
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "701876166fa4547483425358475fbaf5d5a91e8171e73fb37bb6f41b4e57f230",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f"
+  },
+  "source_unchanged": true,
+  "log_sha256": "3f2b012d6f9aeac08024b7ad72deed6a1bbe695814c02b681d78a1172e128076",
+  "external_model_calls": 0,
+  "loopback_only": true
+}

@@ -53,12 +53,22 @@ def _order(unit: NarrativeUnit) -> tuple:
         -1 if c.char_start is None else c.char_start, unit.unit_id)
 
 
-def _same_boundary(left: NarrativeUnit, right: NarrativeUnit) -> bool:
+def _same_boundary(left: NarrativeUnit, right: NarrativeUnit, *,
+    respect_native_structure: bool = False) -> bool:
     if (left.source_id, left.parser_name, left.parser_version, left.source_role, left.language) != (
         right.source_id, right.parser_name, right.parser_version, right.source_role, right.language):
         return False
     if any(left.metadata.get(key) != right.metadata.get(key) for key in _SCOPE_KEYS):
         return False
+    if respect_native_structure and left.parser_name == "cwp_document_normalization":
+        # Native paragraphs, headings and cells are different structural owners.
+        # Table semantics stay with the table classifier, never sentence completion.
+        if left.unit_kind != right.unit_kind:
+            return False
+        if left.unit_kind == "pptx_paragraph":
+            shape = left.metadata.get("shape_path")
+            if shape is None or shape != right.metadata.get("shape_path"):
+                return False
     # Native JSON currently exposes whole fields, never synthetic char fragments.
     if left.unit_kind == "official_json_field" or right.unit_kind == "official_json_field":
         return False
@@ -79,16 +89,26 @@ def _same_boundary(left: NarrativeUnit, right: NarrativeUnit) -> bool:
     return not (left_names and right_names and left_names.isdisjoint(right_names))
 
 
-def _barrier(unit: NarrativeUnit, rules: CandidateRules) -> bool:
+def _barrier(unit: NarrativeUnit, rules: CandidateRules, *,
+    respect_native_structure: bool = False) -> bool:
     if unit.source_role in _EXCLUDED_ROLES or unit.unit_kind == "pdf_table_row":
         return True
+    if respect_native_structure and unit.parser_name == "cwp_document_normalization" and (
+        unit.coordinates.table_index is not None
+        or unit.unit_kind.endswith("_table_cell")
+        or unit.unit_kind.endswith("_heading")
+    ):
+        return True  # Eligible cells/headings remain standalone initial candidates.
     text = unit.raw_text
     return bool(rules.reject_text(text) or rules.table_of_contents.search(text)
         or rules.accounting_context.search(text) or rules.heading_only.search(text))
 
 
-def _relation(left: NarrativeUnit, right: NarrativeUnit, rules: CandidateRules) -> str | None:
-    if not _same_boundary(left, right) or _barrier(right, rules) or _NEW_SUBJECT.search(right.raw_text):
+def _relation(left: NarrativeUnit, right: NarrativeUnit, rules: CandidateRules, *,
+    respect_native_structure: bool = False) -> str | None:
+    if (not _same_boundary(left, right, respect_native_structure=respect_native_structure)
+        or _barrier(right, rules, respect_native_structure=respect_native_structure)
+        or _NEW_SUBJECT.search(right.raw_text)):
         return None
     if not ends_sentence(left.raw_text):
         return "required"
@@ -129,9 +149,26 @@ def _text_size(members: Sequence[NarrativeUnit]) -> int:
 
 def enrich_business_groups(units: Sequence[NarrativeUnit], *,
     initial_candidates: Sequence[EvidenceCandidate], initial_group_ids: Mapping[str, str],
-    rules: CandidateRules) -> BusinessEnrichmentResult:
-    """Complete only nearby specific meaning and expose bounded omission diagnostics."""
-    ordered = tuple(sorted(units, key=_order))
+    rules: CandidateRules, respect_native_structure: bool = False) -> BusinessEnrichmentResult:
+    """Complete nearby meaning; frozen older policies retain their exact ordering."""
+    native_sources = {unit.source_id for unit in units
+        if respect_native_structure and unit.parser_name == "cwp_document_normalization"}
+    positions = {unit.unit_id: index for index, unit in enumerate(units)}
+
+    def context_order(unit: NarrativeUnit) -> tuple:
+        if unit.source_id in native_sources:
+            # Native parsers already return physical document traversal order.
+            # Independent paragraph/table counters cannot reconstruct that order.
+            return (unit.source_id, positions[unit.unit_id])
+        return _order(unit)
+
+    def barrier(unit: NarrativeUnit) -> bool:
+        return _barrier(unit, rules, respect_native_structure=respect_native_structure)
+
+    def relation(left: NarrativeUnit, right: NarrativeUnit) -> str | None:
+        return _relation(left, right, rules, respect_native_structure=respect_native_structure)
+
+    ordered = tuple(sorted(units, key=context_order))
     by_id = {candidate.unit.unit_id: candidate for candidate in initial_candidates}
     group_ids = dict(initial_group_ids)
     excluded: set[str] = set()
@@ -168,7 +205,7 @@ def enrich_business_groups(units: Sequence[NarrativeUnit], *,
         handled.update(unit.unit_id for unit in members)
 
     for index, seed in enumerate(ordered):
-        if seed.unit_id not in by_id or seed.unit_id in handled or _barrier(seed, rules):
+        if seed.unit_id not in by_id or seed.unit_id in handled or barrier(seed):
             continue
         if seed.unit_kind == "official_json_field":
             if len(seed.raw_text) > BUSINESS_CHARACTER_WINDOW:
@@ -185,8 +222,8 @@ def enrich_business_groups(units: Sequence[NarrativeUnit], *,
             previous = ordered[index - 1]
             if (previous.unit_id not in handled and (previous.unit_id not in group_ids
                     or (extendable_singleton(previous) and _referential_pdf_event(previous, seed, rules)))
-                and not _barrier(previous, rules)
-                and _relation(previous, seed, rules) == "required"):
+                and not barrier(previous)
+                and relation(previous, seed) == "required"):
                 start -= 1
         members = list(ordered[start:index + 1])
         if _text_size(members) > BUSINESS_CHARACTER_WINDOW:
@@ -199,14 +236,14 @@ def enrich_business_groups(units: Sequence[NarrativeUnit], *,
                 and not (extendable_singleton(follower)
                     and _referential_pdf_event(members[-1], follower, rules))):
                 break
-            relation = _relation(members[-1], follower, rules)
-            if relation is None:
+            relation_kind = relation(members[-1], follower)
+            if relation_kind is None:
                 break
             prospective = (*members, follower)
             over_units = len(prospective) > MAX_COMPLETION_UNITS
             over_text = _text_size(prospective) > BUSINESS_CHARACTER_WINDOW
             if over_units or over_text:
-                if relation == "required":
+                if relation_kind == "required":
                     members.append(follower)
                     add_members(members)
                     diagnostic("business_group_unit_limit" if over_units else "business_group_character_limit", members)
@@ -214,7 +251,7 @@ def enrich_business_groups(units: Sequence[NarrativeUnit], *,
             members.append(follower)
         add_members(members)
     return BusinessEnrichmentResult(tuple(by_id[unit_id] for unit_id in sorted(by_id,
-        key=lambda unit_id: _order(by_id[unit_id].unit))), MappingProxyType(group_ids),
+        key=lambda unit_id: context_order(by_id[unit_id].unit))), MappingProxyType(group_ids),
         frozenset(excluded), tuple(diagnostics))
 
 

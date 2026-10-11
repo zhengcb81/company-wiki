@@ -47,6 +47,7 @@ from .replay import replay_unit, replay_units, replay_evidence_spans
 from .units import (
     FORMAT_DOCX,
     DOCX_PARSER_VERSION,
+    LEGACY_DOCX_PARSER_VERSION,
     FORMAT_HTML,
     FORMAT_PPTX,
     NORMALIZATION_SCHEMA,
@@ -60,6 +61,7 @@ __all__ = [
     "DEFAULT_LIMITS",
     "FORMAT_DOCX",
     "DOCX_PARSER_VERSION",
+    "LEGACY_DOCX_PARSER_VERSION",
     "FORMAT_HTML",
     "FORMAT_PPTX",
     "KNOWN_FORMATS",
@@ -121,10 +123,13 @@ def normalize_document(
         )
     mime_main = mime_type.split(";")[0].strip().lower()
     if mime_main in _DOCX_MIME_TYPES:
-        if parser_version not in {None, DOCX_PARSER_VERSION}:
+        version = DOCX_PARSER_VERSION if parser_version is None else parser_version
+        if version not in {LEGACY_DOCX_PARSER_VERSION, DOCX_PARSER_VERSION}:
             raise ValueError("unsupported DOCX parser_version")
-        return parse_docx(original, source_id=source_id, source_sha256=source_sha256,
-                          mime_type=mime_type, limits=limits)
+        return parse_docx(
+            original, source_id=source_id, source_sha256=source_sha256,
+            mime_type=mime_type, limits=limits, parser_version=version,
+        )
     if mime_main in _HTML_MIME_TYPES:
         if parser_version not in {None, PARSER_VERSION}:
             raise ValueError("unsupported HTML parser_version")

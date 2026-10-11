@@ -1,0 +1,122 @@
+[
+  {
+    "variant": 0,
+    "sha256": "8bca5b476de5aa016eebe42fc59fe9b1417aaaef7109190fd96c40b44a404c6b",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "12345"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": true
+  },
+  {
+    "variant": 1,
+    "sha256": "118c8fb300f65f7a65200f77330643152afa1810d566c8aaa9883c8cca1be7f3",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "12345"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": true
+  },
+  {
+    "variant": 2,
+    "sha256": "890108f4fac06e3af9010f9a458e8ed4fb676212a6b8a73876ac0e4e2136e1d9",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "Profit"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": false
+  },
+  {
+    "variant": 3,
+    "sha256": "5160c60a4af842d500b1e6c017f5850f2f811936be4f30f617d61f48ac3e74de",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "Profit"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": false
+  },
+  {
+    "variant": 4,
+    "sha256": "2a8ae0a5c7891d4b509035cab301ed7d3681fd19cb7ef453b4bdd4aa3c5566ab",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "12345"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": true
+  },
+  {
+    "variant": 5,
+    "sha256": "79d686bde967f04f523c6b89e5685e376821960337d5433456eec7de6c47ad81",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "Revenue"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": false
+  },
+  {
+    "variant": 6,
+    "sha256": "82c018b0e09926c4de936edcab623ab67b886072ee76804b351b7c7cd7cbdf02",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "Income statement"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": false
+  },
+  {
+    "variant": 7,
+    "sha256": "d6c9a038892de1d9d00960b76d54b97aa50d70b600863c63d07f40516f3f23db",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "12345"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": true
+  },
+  {
+    "variant": 8,
+    "sha256": "0c8093141312ac8e7497d81f509a1b1da6566c41c439c43d65d2527cd7eeb64b",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "Income statement"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": false
+  },
+  {
+    "variant": 9,
+    "sha256": "8caca9c933d8227b97ba8673822f8562954dbc19867560a885e5678277c793e5",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "12345"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": true
+  },
+  {
+    "variant": 10,
+    "sha256": "af98c7515b68079858fb00a09a694d18950577b800e892318241d1cde3f1bb87",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "Income statement"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": false
+  },
+  {
+    "variant": 11,
+    "sha256": "50dc8e9f0966fef9c573b51ebe75022492cb4a302cb9c67542f1386704a96358",
+    "selected_texts": [
+      "Company launched a new product and expanded overseas production capacity.",
+      "12345"
+    ],
+    "dropped_financial": 4,
+    "numeric_reselected": true
+  }
+]

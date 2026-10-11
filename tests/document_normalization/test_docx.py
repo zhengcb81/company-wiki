@@ -8,6 +8,7 @@ from dataclasses import replace
 import pytest
 from company_wiki.document_normalization import (
     normalize_document,
+    DOCX_PARSER_VERSION,
     NormalizationLimits,
     replay_units,
 )
@@ -69,7 +70,7 @@ def test_native_text_table_qa_and_exact_original_replay():
     )
     before = hashlib.sha256(data).hexdigest()
     doc = norm(data)
-    assert doc.format_name == "docx" and doc.parser_version == "1.0.0"
+    assert doc.format_name == "docx" and doc.parser_version == DOCX_PARSER_VERSION
     assert doc.structure.coverage_complete
     assert [u.raw_text for u in doc.units[:3]] == [
         "投资者关系活动记录",
@@ -222,7 +223,7 @@ def test_native_language_sampling_and_generation_dispatch():
     )
     assert detect_narrative_language(data, MIME) == "zh"
     assert source_class_for(MIME, "investor_relations") == "filing"
-    assert parser_component(MIME) == ("cwp_document_normalization", "1.0.0")
+    assert parser_component(MIME) == ("cwp_document_normalization", DOCX_PARSER_VERSION)
 
 
 def test_one_paragraph_qa_splits_roles_with_original_character_locators():

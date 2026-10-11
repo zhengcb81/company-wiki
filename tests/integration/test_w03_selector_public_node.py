@@ -3,6 +3,8 @@
 Policy bootstrap changes the parent producer's actual execution version, never
 saved results. Spawned workers must execute that frozen version themselves.
 """
+import pytest
+
 from contextlib import closing
 from copy import deepcopy
 import hashlib
@@ -177,8 +179,8 @@ def test_new_default_public_mixed_selects_actual_industry_then_resume_reuse_is_f
         path = fixtures.request_for(state, server.endpoint, "w03-current")
         process, first = _invoke(state, path, "w03-current")
         assert process.returncode == 0, (first, process.stderr)
-        refs = _reads(state, first, "0.7.0", industry=True)
-        _frozen(state, "w03-current", "0.7.0")
+        refs = _reads(state, first, NARRATIVE_SELECTOR_VERSION, industry=True)
+        _frozen(state, "w03-current", NARRATIVE_SELECTOR_VERSION)
         assert len(server.requests) == 3 and server.errors == []
         _prompt_industry(server, state, offset=0)
         assert json.loads(path.read_bytes())["model"]["max_output_tokens"] == 400
@@ -192,37 +194,38 @@ def test_new_default_public_mixed_selects_actual_industry_then_resume_reuse_is_f
         reuse_path = fixtures.request_for(state, server.endpoint, "w03-reuse")
         process, reused = _invoke(state, reuse_path, "w03-reuse")
         assert process.returncode == 0
-        assert _reads(state, reused, "0.7.0", industry=True) == refs
+        assert _reads(state, reused, NARRATIVE_SELECTOR_VERSION, industry=True) == refs
         assert reused["budget"]["tokens"] == reused["budget"]["estimated_micro_usd"] == 0
         assert len(server.requests) == 3 and server.errors == []
         _trace(state, first, len(server.requests))
 
 
+@pytest.mark.parametrize("old_version", ["0.6.0", "0.7.0"])
 def test_real_frozen_old_mixed_is_read_only_under_new_policy_and_not_new_cache(
-    tmp_path, monkeypatch, official_json_loopback_model,
+    tmp_path, monkeypatch, official_json_loopback_model, old_version,
 ):
     server = official_json_loopback_model
     _semantic_fixture(monkeypatch)
     with fixtures.official_batch_state(tmp_path) as state:
         path = fixtures.request_for(state, server.endpoint, "w03-history")
-        process, old = _invoke(state, path, "w03-history", policy="0.6.0")
+        process, old = _invoke(state, path, "w03-history", policy=old_version)
         assert process.returncode == 0, (old, process.stderr)
-        old_refs = _reads(state, old, "0.6.0", industry=False)
-        original_binding = _frozen(state, "w03-history", "0.6.0")
+        old_refs = _reads(state, old, old_version, industry=old_version != "0.6.0")
+        original_binding = _frozen(state, "w03-history", old_version)
         before_auto, before_source = _dump(state.automation_db), _dump(state.catalog.config.database_path)
-        process, resumed = _invoke(state, path, "w03-history", policy="0.7.0")
+        process, resumed = _invoke(state, path, "w03-history", policy=NARRATIVE_SELECTOR_VERSION)
         assert process.returncode == 0 and resumed["items"] == old["items"], resumed
         assert resumed["budget"] == old["budget"]
-        assert _frozen(state, "w03-history", "0.6.0") == original_binding
-        assert _reads(state, resumed, "0.6.0", industry=False) == old_refs
+        assert _frozen(state, "w03-history", old_version) == original_binding
+        assert _reads(state, resumed, old_version, industry=old_version != "0.6.0") == old_refs
         assert _dump(state.automation_db) == before_auto
         assert _dump(state.catalog.config.database_path) == before_source
         assert len(server.requests) == 3
         new_path = fixtures.request_for(state, server.endpoint, "w03-after-upgrade")
-        process, current = _invoke(state, new_path, "w03-after-upgrade", policy="0.7.0")
+        process, current = _invoke(state, new_path, "w03-after-upgrade", policy=NARRATIVE_SELECTOR_VERSION)
         assert process.returncode == 0, (current, process.stderr)
-        new_refs = _reads(state, current, "0.7.0", industry=True)
-        _frozen(state, "w03-after-upgrade", "0.7.0")
+        new_refs = _reads(state, current, NARRATIVE_SELECTOR_VERSION, industry=True)
+        _frozen(state, "w03-after-upgrade", NARRATIVE_SELECTOR_VERSION)
         assert all(new_refs[key]["artifact_version_id"] != old_refs[key]["artifact_version_id"]
                    for key in old_refs)
         assert len(server.requests) == 6 and server.errors == []
@@ -256,7 +259,7 @@ def test_full_true_txt_both_saved_policies_resolve_every_original_group(tmp_path
     assert _fingerprint(packages["0.7.0"]) == "c5e498acbb5d5c158a030b6e4d3bcec3713f408f2c49baa85717b3d63b905478"
     default = select_narrative_evidence(parsed, title=FIXTURE.name,
                                        existing_kind="investor_call_transcript")
-    assert NARRATIVE_SELECTOR_VERSION == "0.7.0"
+    assert NARRATIVE_SELECTOR_VERSION == "0.7.1"
     assert _fingerprint(default) == _fingerprint(packages["0.7.0"])
     business = [span for span in default.evidence_spans
                 if span.structured_value["source_role"] == "management"]
@@ -316,7 +319,7 @@ def _public_true_txt_new_anchor(tmp_path, raw):
         reference = NarrativeTransportReader(fixture.artifacts, fixture.reader).reference(fixture.source_ref)
         request = fixture.read_request(reference, as_of_date="2026-10-08")
         wire = json.loads(fixture.payload)
-        assert wire["versions"]["selector"] == "0.7.0"
+        assert wire["versions"]["selector"] == NARRATIVE_SELECTOR_VERSION
         spans = {span["span_id"]: span for span in wire["evidence_spans"]}
         assert len(spans) == 96 and wire["selection"]["status"] == "partial"
 
@@ -331,7 +334,7 @@ def _public_true_txt_new_anchor(tmp_path, raw):
             assert receipt["status"] == "ok" and receipt["replay_status"] == "verified"
             assert receipt["view_sha256"] == hashlib.sha256(process.stdout).hexdigest()
             assert receipt["byte_size"] == len(process.stdout) and receipt["locator_count"] == 96
-            assert result["versions"]["selector"] == "0.7.0"
+            assert result["versions"]["selector"] == NARRATIVE_SELECTOR_VERSION
             return result
 
         hits = cli("evidence-search", "--query", "90% of the tasks", "--limit", "2")["items"]

@@ -54,7 +54,7 @@ def management_summary(selected):
     return summary
 
 
-@pytest.mark.parametrize("version", ["0.6.0", "0.7.0"])
+@pytest.mark.parametrize("version", ["0.6.0", "0.7.0", "0.7.1"])
 def test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift(monkeypatch, version):
     monkeypatch.setattr(policy, "NARRATIVE_SELECTOR_VERSION", "0.7.0")
     data, selected = raw_selection(version)
@@ -66,7 +66,7 @@ def test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drif
         existing_kind="earnings_call_transcript", selector_version=version)
     assert [span.to_dict() for span in selected.evidence_spans] == [span.to_dict() for span in expected.evidence_spans]
     assert selected.selector.version == version
-    assert ("90% of the tasks" in "\n".join(span.raw_text or "" for span in selected.evidence_spans)) is (version == "0.7.0")
+    assert ("90% of the tasks" in "\n".join(span.raw_text or "" for span in selected.evidence_spans)) is (version in {"0.7.0", "0.7.1"})
     if version == "0.6.0":
         full = policy.select_narrative_evidence(parsed_fixture(), title=FIXTURE.name,
             existing_kind="investor_call_transcript", selector_version=version)
@@ -84,7 +84,7 @@ def test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drif
     assert mismatched.error.code == "DEPENDENCY_INVALID"
 
 
-@pytest.mark.parametrize("version", ["0.6.0", "0.7.0"])
+@pytest.mark.parametrize("version", ["0.6.0", "0.7.0", "0.7.1"])
 def test_runtime_registers_select_and_verify_with_same_effective_version(version):
     handlers = {}
     class Registrar:
@@ -130,7 +130,7 @@ def test_custom_missing_declaration_conflict_and_internal_typeerror_do_not_retry
     assert calls == [FIXTURE.name]
 
 
-@pytest.mark.parametrize("version", ["0.6.0", "0.7.0"])
+@pytest.mark.parametrize("version", ["0.6.0", "0.7.0", "0.7.1"])
 def test_real_transcript_resolver_uses_recorded_version_full_ordered_rows(tmp_path, monkeypatch, version):
     parsed = parsed_fixture()
     package = policy.select_narrative_evidence(parsed, title=FIXTURE.name,
@@ -154,7 +154,7 @@ def test_real_transcript_resolver_uses_recorded_version_full_ordered_rows(tmp_pa
         NarrativeEvidenceResolver._replay_record(record, raw_path=raw, source_id=parsed.source_id, source_sha256=FIXTURE_SHA)
 
 
-@pytest.mark.parametrize("version", ["0.6.0", "0.7.0", "unsupported", None])
+@pytest.mark.parametrize("version", ["0.6.0", "0.7.0", "0.7.1", "unsupported", None])
 def test_factory_decodes_frozen_binding_once_and_pins_before_model(tmp_path, monkeypatch, version):
     with official.owned_catalog(tmp_path) as (catalog, root):
         ref, _ = official.import_page(catalog, official.flat_page(1))
@@ -179,7 +179,7 @@ def test_factory_decodes_frozen_binding_once_and_pins_before_model(tmp_path, mon
         options = {"project_root": str(root), "catalog_config_path": str(config), "run_id": "owned-run",
             "expected_run_input_hash": run.input_hash, "model": {"model_id": run.model_id,
             "endpoint": "https://fixture.invalid/v1/chat/completions", "api_key_env": "UNREAD_KEY"}}
-        spec = WorkerProcessSpec(worker_id="owned-child", role="compute" if version in {"0.6.0", "0.7.0"} else "mixed",
+        spec = WorkerProcessSpec(worker_id="owned-child", role="compute" if version in {"0.6.0", "0.7.0", "0.7.1"} else "mixed",
             db_path=str(root/"unused.db"),
             log_dir=str(root/"logs"), runtime_factory_path="company_wiki.automation.narrative_worker_factory:create_runtime",
             runtime_options_json=canonical_json(options), allowed_job_types=("source.narrative_select", "source.narrative_verify"),
@@ -202,7 +202,7 @@ def test_factory_decodes_frozen_binding_once_and_pins_before_model(tmp_path, mon
         monkeypatch.setattr(factory, "NarrativeHTTPModel", forbidden)
         monkeypatch.setattr(factory, "BudgetedNarrativeCaller", forbidden)
         monkeypatch.setattr(policy, "NARRATIVE_SELECTOR_VERSION", "0.7.0")
-        if version in {"0.6.0", "0.7.0"}:
+        if version in {"0.6.0", "0.7.0", "0.7.1"}:
             factory.create_runtime(spec)
             try:
                 assert captured[0].selector_version == version

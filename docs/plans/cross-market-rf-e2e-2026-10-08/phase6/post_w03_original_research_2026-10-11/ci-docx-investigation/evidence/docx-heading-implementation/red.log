@@ -1,0 +1,100 @@
+COMMAND: C:\Miniconda\python.exe -B -m pytest tests/unit/test_docx_heading_normalization.py -q -p no:cacheprovider
+EXIT: 1
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 17 items
+
+tests\unit\test_docx_heading_normalization.py FFFFF.FFFF..F...F          [100%]
+
+================================== FAILURES ===================================
+______ test_builtin_heading_from_real_word_style_keeps_paragraph_locator ______
+tests\unit\test_docx_heading_normalization.py:121: in test_builtin_heading_from_real_word_style_keeps_paragraph_locator
+    assert heading.unit_kind == "docx_heading"
+E   AssertionError: assert 'docx_paragraph' == 'docx_heading'
+E     
+E     - docx_heading
+E     + docx_paragraph
+_ test_inherited_style_and_direct_outline_take_real_precedence[<w:pStyle w:val="Custom"/>-docx_heading-1-style_outline] _
+tests\unit\test_docx_heading_normalization.py:140: in test_inherited_style_and_direct_outline_take_real_precedence
+    assert unit.unit_kind == kind
+E   AssertionError: assert 'docx_paragraph' == 'docx_heading'
+E     
+E     - docx_heading
+E     + docx_paragraph
+_ test_inherited_style_and_direct_outline_take_real_precedence[<w:outlineLvl w:val="3"/>-docx_heading-4-paragraph_outline] _
+tests\unit\test_docx_heading_normalization.py:140: in test_inherited_style_and_direct_outline_take_real_precedence
+    assert unit.unit_kind == kind
+E   AssertionError: assert 'docx_paragraph' == 'docx_heading'
+E     
+E     - docx_heading
+E     + docx_paragraph
+_ test_inherited_style_and_direct_outline_take_real_precedence[<w:pStyle w:val="Custom"/><w:outlineLvl w:val="9"/>-docx_paragraph-None-None] _
+tests\unit\test_docx_heading_normalization.py:144: in test_inherited_style_and_direct_outline_take_real_precedence
+    assert unit.metadata["outline_level"] == 9
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'outline_level'
+_ test_inherited_style_and_direct_outline_take_real_precedence[<w:pStyle w:val="Custom"/><w:outlineLvl w:val="2"/>-docx_heading-3-paragraph_outline] _
+tests\unit\test_docx_heading_normalization.py:140: in test_inherited_style_and_direct_outline_take_real_precedence
+    assert unit.unit_kind == kind
+E   AssertionError: assert 'docx_paragraph' == 'docx_heading'
+E     
+E     - docx_heading
+E     + docx_paragraph
+_____________ test_default_paragraph_style_uses_its_real_outline ______________
+tests\unit\test_docx_heading_normalization.py:160: in test_default_paragraph_style_uses_its_real_outline
+    assert unit.unit_kind == "docx_heading" and unit.metadata["heading_level"] == 2
+E   AssertionError: assert ('docx_paragraph' == 'docx_heading'
+E     
+E     - docx_heading
+E     + docx_paragraph)
+_________ test_style_cycle_is_bounded_and_marks_incomplete_structure __________
+tests\unit\test_docx_heading_normalization.py:168: in test_style_cycle_is_bounded_and_marks_incomplete_structure
+    assert "docx_style_inheritance_cycle" in doc.structure.errors
+E   AssertionError: assert 'docx_style_inheritance_cycle' in ()
+E    +  where () = DocumentStructure(source_id='urn:company-wiki:source:sha256:e89cd6f4b438ae7b27c79cd34ae358e69875dc0bb42bf18f7ad617cee7...,), page_count=0, pages_read=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=1, errors=()).errors
+E    +    where DocumentStructure(source_id='urn:company-wiki:source:sha256:e89cd6f4b438ae7b27c79cd34ae358e69875dc0bb42bf18f7ad617cee7...,), page_count=0, pages_read=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=1, errors=()) = NormalizedDocument(source_id='urn:company-wiki:source:sha256:e89cd6f4b438ae7b27c79cd34ae358e69875dc0bb42bf18f7ad617cee...count': 5, 'uncompressed_bytes': 1418, 'external_relationship_count': 0, 'body_paragraph_count': 1, 'table_count': 0})).structure
+_______ test_missing_style_and_invalid_outline_are_explicit_diagnostics _______
+tests\unit\test_docx_heading_normalization.py:174: in test_missing_style_and_invalid_outline_are_explicit_diagnostics
+    assert "docx_paragraph_style_missing" in missing.structure.errors
+E   AssertionError: assert 'docx_paragraph_style_missing' in ()
+E    +  where () = DocumentStructure(source_id='urn:company-wiki:source:sha256:5e07b7dbd91cc5fbff4964b06ef00f7b2a55e953667ba9fa31c6c6a1af...,), page_count=0, pages_read=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=1, errors=()).errors
+E    +    where DocumentStructure(source_id='urn:company-wiki:source:sha256:5e07b7dbd91cc5fbff4964b06ef00f7b2a55e953667ba9fa31c6c6a1af...,), page_count=0, pages_read=0, opaque_pages=(), table_scan_pages=(), deferred_table_pages=(), line_count=1, errors=()) = NormalizedDocument(source_id='urn:company-wiki:source:sha256:5e07b7dbd91cc5fbff4964b06ef00f7b2a55e953667ba9fa31c6c6a1a...count': 4, 'uncompressed_bytes': 1176, 'external_relationship_count': 0, 'body_paragraph_count': 1, 'table_count': 0})).structure
+___________ test_styles_part_uses_existing_xml_limits_and_deadline ____________
+tests\unit\test_docx_heading_normalization.py:182: in test_styles_part_uses_existing_xml_limits_and_deadline
+    with pytest.raises(dn.UnsupportedFormatError, match="DOCX XML"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE UnsupportedFormatError
+_ test_default_and_saved_old_pins_have_separate_generation_and_replay_identity _
+tests\unit\test_docx_heading_normalization.py:220: in test_default_and_saved_old_pins_have_separate_generation_and_replay_identity
+    assert dn.DOCX_PARSER_VERSION == "1.1.0"
+E   AssertionError: assert '1.0.0' == '1.1.0'
+E     
+E     - 1.1.0
+E     + 1.0.0
+____________ test_real_heading_stops_native_business_group_context ____________
+tests\unit\test_docx_heading_normalization.py:259: in test_real_heading_stops_native_business_group_context
+    assert {span.raw_text for span in selected.evidence_spans} == {QUALIFIER}
+E   AssertionError: assert {'Efficiency ...performance.'} == {'Efficiency ...performance.'}
+E     
+E     Extra items in the left set:
+E     'Efficiency assumptions'
+E     Use -v to get more diff
+=========================== short test summary info ===========================
+FAILED tests/unit/test_docx_heading_normalization.py::test_builtin_heading_from_real_word_style_keeps_paragraph_locator
+FAILED tests/unit/test_docx_heading_normalization.py::test_inherited_style_and_direct_outline_take_real_precedence[<w:pStyle w:val="Custom"/>-docx_heading-1-style_outline]
+FAILED tests/unit/test_docx_heading_normalization.py::test_inherited_style_and_direct_outline_take_real_precedence[<w:outlineLvl w:val="3"/>-docx_heading-4-paragraph_outline]
+FAILED tests/unit/test_docx_heading_normalization.py::test_inherited_style_and_direct_outline_take_real_precedence[<w:pStyle w:val="Custom"/><w:outlineLvl w:val="9"/>-docx_paragraph-None-None]
+FAILED tests/unit/test_docx_heading_normalization.py::test_inherited_style_and_direct_outline_take_real_precedence[<w:pStyle w:val="Custom"/><w:outlineLvl w:val="2"/>-docx_heading-3-paragraph_outline]
+FAILED tests/unit/test_docx_heading_normalization.py::test_default_paragraph_style_uses_its_real_outline
+FAILED tests/unit/test_docx_heading_normalization.py::test_style_cycle_is_bounded_and_marks_incomplete_structure
+FAILED tests/unit/test_docx_heading_normalization.py::test_missing_style_and_invalid_outline_are_explicit_diagnostics
+FAILED tests/unit/test_docx_heading_normalization.py::test_styles_part_uses_existing_xml_limits_and_deadline
+FAILED tests/unit/test_docx_heading_normalization.py::test_default_and_saved_old_pins_have_separate_generation_and_replay_identity
+FAILED tests/unit/test_docx_heading_normalization.py::test_real_heading_stops_native_business_group_context
+======================== 11 failed, 6 passed in 1.05s =========================

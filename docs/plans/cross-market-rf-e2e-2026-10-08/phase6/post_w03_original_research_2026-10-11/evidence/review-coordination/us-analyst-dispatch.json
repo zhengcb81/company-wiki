@@ -1,0 +1,8 @@
+{
+  "company": "US-MSFT",
+  "role": "analyst",
+  "agent": "/root/pw03_us_analyst_reviewer",
+  "dispatch_observed_at": "2026-10-11T02:25:21.327949+00:00",
+  "executor_manifest_sha256": "ccbbeea4e3feaa0a482bf0f493d0d4a4cb00a1ccacc17ba13baaf670b1354e6c",
+  "other_reviewer_report_shared": false
+}

@@ -1,0 +1,1598 @@
+{
+  "observed_at": "2026-10-11T02:01:16.514233+00:00",
+  "source_before": {
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "701876166fa4547483425358475fbaf5d5a91e8171e73fb37bb6f41b4e57f230",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f"
+  },
+  "source_root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "probes": [
+    {
+      "id": "docx_heading_duplicates_mixed_tables",
+      "checks": [
+        {
+          "id": "repeated_text_keeps_distinct_original_locators",
+          "status": "FAIL",
+          "detail": [
+            "loc:v1/paragraph:0",
+            "loc:v1/table:1/row:1/column:1"
+          ]
+        },
+        {
+          "id": "business_table_cell_standalone",
+          "status": "PASS",
+          "detail": [
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:a186fdf4bd3d77a3b98b48e91ee0f557b282996084ac7b557e518cdef5d02a66",
+              "locator": "loc:v1/paragraph:0",
+              "source_locator": "cwp-docx-body/1|p=0",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:9dbcbb3fe6613b7a5f70b2a494ce1c075a36f690cc3be27600f97085cade5021",
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:c3eed0a54e7b83780eed62507f89e18f223d834a79835e063dcaa9321d062671",
+              "locator": "loc:v1/table:1/row:1/column:1",
+              "source_locator": "cwp-docx-body/1|t=1|r=1|c=1|p=0",
+              "kind": "docx_table_cell",
+              "group": null,
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": null,
+              "table_class": "unknown"
+            }
+          ]
+        },
+        {
+          "id": "financial_table_excluded",
+          "status": "PASS",
+          "detail": []
+        },
+        {
+          "id": "native_heading_not_sentence_context",
+          "status": "FAIL",
+          "detail": [
+            {
+              "text": "Efficiency assumptions",
+              "span_id": "urn:company-wiki:evidence-span:sha256:5dc990133c8ec459c9c8246b33224be1828259b1f042c9d1aabdbd90e7c6f6a5",
+              "locator": "loc:v1/paragraph:2",
+              "source_locator": "cwp-docx-body/1|p=2",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:9dbcbb3fe6613b7a5f70b2a494ce1c075a36f690cc3be27600f97085cade5021",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            }
+          ]
+        },
+        {
+          "id": "adjacent_paragraph_positive_control",
+          "status": "PASS",
+          "detail": [
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:c16aa477fd98145eade3170638446fded61e1fc5f50ca7be9325648517472851",
+              "locator": "loc:v1/paragraph:1",
+              "source_locator": "cwp-docx-body/1|p=1",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:9dbcbb3fe6613b7a5f70b2a494ce1c075a36f690cc3be27600f97085cade5021",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            }
+          ]
+        },
+        {
+          "id": "every_selected_original_locator_replays",
+          "status": "PASS",
+          "detail": {
+            "replayed": 5,
+            "selected": 5
+          }
+        }
+      ],
+      "input_sha256": "0d025dcdac1f3b521748a604f60b42b768df3fba9faa71b60ef7a361187e5c44",
+      "input_bytes": 36958,
+      "native_units": [
+        {
+          "text": "Company launched a new product and expanded overseas production capacity.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:0d0d11ff7b06ecccff5d2a29bbfd8d1b5585af741c666266d69dc30cc48698f9",
+          "kind": "docx_paragraph",
+          "locator": "cwp-docx-body/1|p=0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "The return calculation has not changed",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:8386af4a2294e0b026f2e50dd11221a7c54c3fd742ac42209add0df522a2eb5a",
+          "kind": "docx_paragraph",
+          "locator": "cwp-docx-body/1|p=1",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 1,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "Efficiency assumptions",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:c7afe569706a855d803222151e2741971a86048e7b87a9fc87fcab5c4222d236",
+          "kind": "docx_paragraph",
+          "locator": "cwp-docx-body/1|p=2",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 2,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:b56862ec8a508173ebec7d05bc6de7643f57b45b60705d60e4ad058654acd3fd",
+          "kind": "docx_paragraph",
+          "locator": "cwp-docx-body/1|p=3",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 3,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "Revenue",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:057e82cbdc9e4bde42013e4e7567ea89ef5a62a3601f977bd743d3fc3c44868d",
+          "kind": "docx_table_cell",
+          "locator": "cwp-docx-body/1|t=0|r=0|c=0|p=0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "financial"
+        },
+        {
+          "text": "Net income",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:b4298632cd2aa38ed6d3d49e26486f19b36b7d261bad0361dbd4028803757af5",
+          "kind": "docx_table_cell",
+          "locator": "cwp-docx-body/1|t=0|r=0|c=1|p=0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "financial"
+        },
+        {
+          "text": "12345",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:0f58a78ef17b759d28dca4bba5aa66ac351e0658eded3d66f0802c2049ca66dc",
+          "kind": "docx_table_cell",
+          "locator": "cwp-docx-body/1|t=0|r=1|c=0|p=0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 1,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "financial"
+        },
+        {
+          "text": "67890",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f5df4e2204ad7a5d229b95a9b062d95e82c4a377c79554e4b48f5aa8a7cf7ed4",
+          "kind": "docx_table_cell",
+          "locator": "cwp-docx-body/1|t=0|r=1|c=1|p=0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 1,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "financial"
+        },
+        {
+          "text": "Company launched a new product and expanded overseas production capacity.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:dda9fd8a8b3ebebc6c4fa39a8d895ce80aa8dbdf163bcc85fa2c4eb64bebb619",
+          "kind": "docx_paragraph",
+          "locator": "cwp-docx-body/1|p=4",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 4,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "Business",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:86f6919070dfea44ba627b7dd19c417dae2c4472933dc570b539a34b035d9d66",
+          "kind": "docx_table_cell",
+          "locator": "cwp-docx-body/1|t=1|r=0|c=0|p=0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 1,
+            "row_index": 0,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "unknown"
+        },
+        {
+          "text": "Milestone",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:9b324323f909b420cde9f673a0c2eb2baa4aca0e926bc4b5a618da3d69f39090",
+          "kind": "docx_table_cell",
+          "locator": "cwp-docx-body/1|t=1|r=0|c=1|p=0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 1,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "unknown"
+        },
+        {
+          "text": "New product",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:09502bc793790c2617ec930b510c20537b1e34034448ed92852750287501d017",
+          "kind": "docx_table_cell",
+          "locator": "cwp-docx-body/1|t=1|r=1|c=0|p=0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 1,
+            "row_index": 1,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "unknown"
+        },
+        {
+          "text": "Company launched a new product and expanded overseas production capacity.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:83936ce5379ce95e3dd32d691826d6e0c2e565612717ea24695f367b7d4088ee",
+          "kind": "docx_table_cell",
+          "locator": "cwp-docx-body/1|t=1|r=1|c=1|p=0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 1,
+            "row_index": 1,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "unknown"
+        },
+        {
+          "text": "The return calculation has not changed",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:1627ce1f06db19c7085763009dd2cd3775b895054378df99fc1aec61fec1904f",
+          "kind": "docx_paragraph",
+          "locator": "cwp-docx-body/1|p=5",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 5,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:0d6431062b24a3e56693f5564ddd8f1a248286c50c7f7198b061a910761d91a1",
+          "kind": "docx_paragraph",
+          "locator": "cwp-docx-body/1|p=6",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 6,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        }
+      ],
+      "selections": {
+        "0.6.0": {
+          "status": "partial",
+          "dropped_financial_count": 4,
+          "spans": [
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:41f598d4cb325b600450107ae54dc2268ad610967b7c965bf8d9eeebf3bacdd1",
+              "locator": "loc:v1/paragraph:0",
+              "source_locator": "cwp-docx-body/1|p=0",
+              "kind": "docx_paragraph",
+              "group": null,
+              "reasons": [
+                "business_narrative_signal",
+                "progress_or_change_language",
+                "specific_business_event"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:debf0c9491d865afc7dc71ebc769426c26e66a06b9ba6522842766e68bffa300",
+              "locator": "loc:v1/table:1/row:1/column:1",
+              "source_locator": "cwp-docx-body/1|t=1|r=1|c=1|p=0",
+              "kind": "docx_table_cell",
+              "group": null,
+              "reasons": [
+                "business_narrative_signal",
+                "progress_or_change_language",
+                "specific_business_event"
+              ],
+              "shape_path": null,
+              "table_class": "unknown"
+            }
+          ]
+        },
+        "0.7.0": {
+          "status": "partial",
+          "dropped_financial_count": 4,
+          "spans": [
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:af9c6467bada0138a0cedd369586fb73dd0e215201721308deadffb91d28dca8",
+              "locator": "loc:v1/paragraph:0",
+              "source_locator": "cwp-docx-body/1|p=0",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:2484db42cfbd9ade073de3c677f6eed1ddbb5bca125765e5d23c8388bbae8f75",
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:432b879ebe5e49dc3713b2bf3429027baa194ee6c51d0e4d993ccd7495759663",
+              "locator": "loc:v1/paragraph:1",
+              "source_locator": "cwp-docx-body/1|p=1",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:2484db42cfbd9ade073de3c677f6eed1ddbb5bca125765e5d23c8388bbae8f75",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Efficiency assumptions",
+              "span_id": "urn:company-wiki:evidence-span:sha256:cd80fa3937eb4e9cdae51f2398ac7294430252fe31b6c1cb877adc0caab58c15",
+              "locator": "loc:v1/paragraph:2",
+              "source_locator": "cwp-docx-body/1|p=2",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:2484db42cfbd9ade073de3c677f6eed1ddbb5bca125765e5d23c8388bbae8f75",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:4e197a69ee7503d35c357b78fc36b73144f41701cac49f96847ced5e11d1134f",
+              "locator": "loc:v1/paragraph:3",
+              "source_locator": "cwp-docx-body/1|p=3",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:2484db42cfbd9ade073de3c677f6eed1ddbb5bca125765e5d23c8388bbae8f75",
+              "reasons": [
+                "business_narrative_signal",
+                "operating_mechanism"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "12345",
+              "span_id": "urn:company-wiki:evidence-span:sha256:fc1f08753d39affcb71812cf6fac512e42c57fa0ad352db992b6aa958afbdb81",
+              "locator": "loc:v1/table:0/row:1/column:0",
+              "source_locator": "cwp-docx-body/1|t=0|r=1|c=0|p=0",
+              "kind": "docx_table_cell",
+              "group": "urn:company-wiki:context-group:sha256:2b1e9f5cc5d1f3feee35821335856fbd39b7c7edeecad64f4b47f52f1250b1b8",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": "financial"
+            },
+            {
+              "text": "67890",
+              "span_id": "urn:company-wiki:evidence-span:sha256:88f6b2b7229d2c11ddcdef2378979b48884b21e656d81d2134c70ab4e3faa6fa",
+              "locator": "loc:v1/table:0/row:1/column:1",
+              "source_locator": "cwp-docx-body/1|t=0|r=1|c=1|p=0",
+              "kind": "docx_table_cell",
+              "group": "urn:company-wiki:context-group:sha256:2484db42cfbd9ade073de3c677f6eed1ddbb5bca125765e5d23c8388bbae8f75",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": "financial"
+            },
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:5ee6e46e54d45a7c30a7ce963c60b9d21bdfbfef43723e9c8330ea5058e0b690",
+              "locator": "loc:v1/table:1/row:1/column:1",
+              "source_locator": "cwp-docx-body/1|t=1|r=1|c=1|p=0",
+              "kind": "docx_table_cell",
+              "group": "urn:company-wiki:context-group:sha256:2b1e9f5cc5d1f3feee35821335856fbd39b7c7edeecad64f4b47f52f1250b1b8",
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": null,
+              "table_class": "unknown"
+            }
+          ]
+        },
+        "0.7.1": {
+          "status": "partial",
+          "dropped_financial_count": 4,
+          "spans": [
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:a186fdf4bd3d77a3b98b48e91ee0f557b282996084ac7b557e518cdef5d02a66",
+              "locator": "loc:v1/paragraph:0",
+              "source_locator": "cwp-docx-body/1|p=0",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:9dbcbb3fe6613b7a5f70b2a494ce1c075a36f690cc3be27600f97085cade5021",
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:c16aa477fd98145eade3170638446fded61e1fc5f50ca7be9325648517472851",
+              "locator": "loc:v1/paragraph:1",
+              "source_locator": "cwp-docx-body/1|p=1",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:9dbcbb3fe6613b7a5f70b2a494ce1c075a36f690cc3be27600f97085cade5021",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Efficiency assumptions",
+              "span_id": "urn:company-wiki:evidence-span:sha256:5dc990133c8ec459c9c8246b33224be1828259b1f042c9d1aabdbd90e7c6f6a5",
+              "locator": "loc:v1/paragraph:2",
+              "source_locator": "cwp-docx-body/1|p=2",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:9dbcbb3fe6613b7a5f70b2a494ce1c075a36f690cc3be27600f97085cade5021",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:26d12194e447ade536e1eb70841998e1a457a1f150e58accabf6243bc5280e14",
+              "locator": "loc:v1/paragraph:3",
+              "source_locator": "cwp-docx-body/1|p=3",
+              "kind": "docx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:9dbcbb3fe6613b7a5f70b2a494ce1c075a36f690cc3be27600f97085cade5021",
+              "reasons": [
+                "business_narrative_signal",
+                "operating_mechanism"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:c3eed0a54e7b83780eed62507f89e18f223d834a79835e063dcaa9321d062671",
+              "locator": "loc:v1/table:1/row:1/column:1",
+              "source_locator": "cwp-docx-body/1|t=1|r=1|c=1|p=0",
+              "kind": "docx_table_cell",
+              "group": null,
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": null,
+              "table_class": "unknown"
+            }
+          ]
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "id": "html_heading_duplicates_mixed_tables",
+      "checks": [
+        {
+          "id": "repeated_text_keeps_distinct_original_locators",
+          "status": "FAIL",
+          "detail": [
+            "loc:v1/paragraph:0"
+          ]
+        },
+        {
+          "id": "business_table_cell_standalone",
+          "status": "FAIL",
+          "detail": [
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:1d66501d4be2598d9b5447df4ef6a5e7a978f6424b42c0c6990cc94fbeca8b10",
+              "locator": "loc:v1/paragraph:0",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.0",
+              "kind": "html_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:c8efbf24b732923792457b74aa7f3fe2cbb71cb2867155be34d10950dbb2e7ae",
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": null,
+              "table_class": null
+            }
+          ]
+        },
+        {
+          "id": "financial_table_excluded",
+          "status": "PASS",
+          "detail": []
+        },
+        {
+          "id": "native_heading_not_sentence_context",
+          "status": "PASS",
+          "detail": []
+        },
+        {
+          "id": "adjacent_paragraph_positive_control",
+          "status": "FAIL",
+          "detail": [
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:a042a1acbdafd55c2d59e8a4cf1f090031a9307f3be8d89c73880e073ac88111",
+              "locator": "loc:v1/paragraph:1",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.1",
+              "kind": "html_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:c8efbf24b732923792457b74aa7f3fe2cbb71cb2867155be34d10950dbb2e7ae",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:0ea9529cb166823e5f43dddaf89e30c5026893feba63b568e2afb721d30284a9",
+              "locator": "loc:v1/paragraph:13",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.7",
+              "kind": "html_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:48c7bd29cef06d46c13da8f30fa481d69d4a98bb635086cfc7eea64eed8a91c6",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            }
+          ]
+        },
+        {
+          "id": "every_selected_original_locator_replays",
+          "status": "PASS",
+          "detail": {
+            "replayed": 4,
+            "selected": 4
+          }
+        }
+      ],
+      "input_sha256": "8fd1519cce8c0af0c765ba2f36daa1fdededcc5ebb4aaa3714393563c803bbe5",
+      "input_bytes": 756,
+      "native_units": [
+        {
+          "text": "Company launched a new product and expanded overseas production capacity.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:ea96f7340b147cffa120bf2eb79722ab1f80e4746cdb453b95b2eec481ce6cdd",
+          "kind": "html_paragraph",
+          "locator": "cwp-html-dom/1|n=0.0.0.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "The return calculation has not changed",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:6aa3c48fe707bd5ef3b9fd3ebb3c7331e7f294ebd00da4bcba37ce3883bced1c",
+          "kind": "html_paragraph",
+          "locator": "cwp-html-dom/1|n=0.0.0.1",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 1,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "Efficiency assumptions",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4617db12bcd77d44769d7e8acd5e61318826eb15b4a5575fcdbcaf9e49b5ead2",
+          "kind": "html_heading",
+          "locator": "cwp-html-dom/1|n=0.0.0.2",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 2,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:a158855e7039667695502ad677a2f21e3a501d494729ee2f7916cb6602330161",
+          "kind": "html_paragraph",
+          "locator": "cwp-html-dom/1|n=0.0.0.3",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 3,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "Revenue",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:639ecb303bd588038dc4f4c02d93adfe641e336fb8a5958e81a086ce27a5a3df",
+          "kind": "html_table_cell",
+          "locator": "cwp-html-dom/1|n=0.0.0.4.0.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "financial"
+        },
+        {
+          "text": "Net income",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:9b8e1c339b8e08b6baed1d74e598061acb213df5b38977524ebf6d06509e445a",
+          "kind": "html_table_cell",
+          "locator": "cwp-html-dom/1|n=0.0.0.4.0.1",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "financial"
+        },
+        {
+          "text": "12345",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:9b746d3a5ee68a4989b4756c4d9aa2494580aff44aed2c1614adaee6bd075e35",
+          "kind": "html_table_cell",
+          "locator": "cwp-html-dom/1|n=0.0.0.4.1.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 1,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "financial"
+        },
+        {
+          "text": "67890",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:11677d3cb6e8ca634e9d0adf77c29685ba2b93abaf51673fedea73046242d38c",
+          "kind": "html_table_cell",
+          "locator": "cwp-html-dom/1|n=0.0.0.4.1.1",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 1,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "financial"
+        },
+        {
+          "text": "Company launched a new product and expanded overseas production capacity.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:57bbd40e1805c11d32735861f59b49b9c0c0f38469be275cca297c9437816f90",
+          "kind": "html_paragraph",
+          "locator": "cwp-html-dom/1|n=0.0.0.5",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 8,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "Business",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:a9fb4ae6841b68d36ab526aa359cf9231221c08e803d92fcc58c4922b113045c",
+          "kind": "html_table_cell",
+          "locator": "cwp-html-dom/1|n=0.0.0.6.0.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 1,
+            "row_index": 0,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "unknown"
+        },
+        {
+          "text": "Milestone",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:b5a12b4fe6e303d5b8a88d6215451789762e24bb8f13338477fd7888af0adb22",
+          "kind": "html_table_cell",
+          "locator": "cwp-html-dom/1|n=0.0.0.6.0.1",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 1,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "unknown"
+        },
+        {
+          "text": "New product",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:1c98af59454e352f45badef6e0ee075afbb120bdc90005a2742d2a87fe9a9ad7",
+          "kind": "html_table_cell",
+          "locator": "cwp-html-dom/1|n=0.0.0.6.1.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 1,
+            "row_index": 1,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "unknown"
+        },
+        {
+          "text": "Company launched a new product and expanded overseas production capacity.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:21a8e18ca3d488564d5739b97546b96463620b246bf3f7a19d069c67a3eab897",
+          "kind": "html_table_cell",
+          "locator": "cwp-html-dom/1|n=0.0.0.6.1.1",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 1,
+            "row_index": 1,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": "unknown"
+        },
+        {
+          "text": "The return calculation has not changed",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:d2a4d2c2c36158ddd62fb96ae73cd9a3c488d72c4401d3dab4bb3e8a2f3f1305",
+          "kind": "html_paragraph",
+          "locator": "cwp-html-dom/1|n=0.0.0.7",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 13,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        },
+        {
+          "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f68956c8b2afdd747aec94ef49467c74c7f4ceb0b0a3cd9908d1b7b7955ac32d",
+          "kind": "html_paragraph",
+          "locator": "cwp-html-dom/1|n=0.0.0.8",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 14,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": null,
+          "table_class": null
+        }
+      ],
+      "selections": {
+        "0.6.0": {
+          "status": "partial",
+          "dropped_financial_count": 4,
+          "spans": [
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:724d5dfa4fa7653455b00be46cd2ee3af34e90695c06cd03eb26a2d9fa0573bc",
+              "locator": "loc:v1/table:1/row:1/column:1",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.6.1.1",
+              "kind": "html_table_cell",
+              "group": null,
+              "reasons": [
+                "business_narrative_signal",
+                "progress_or_change_language",
+                "specific_business_event"
+              ],
+              "shape_path": null,
+              "table_class": "unknown"
+            }
+          ]
+        },
+        "0.7.0": {
+          "status": "partial",
+          "dropped_financial_count": 4,
+          "spans": [
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:81c18a45efc386b1e0a167e434e84480ded929309e6e2d26d7b5f1ea96d179d0",
+              "locator": "loc:v1/paragraph:0",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.0",
+              "kind": "html_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:ba2382533adbad85bcfc571031f3f1360ba7c8bfdb2e0b54a6b1af87aaea77db",
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:814ed0529e0863e8f74333c7c3d65b2e8c06a4d0f682cac16425127b24e81b07",
+              "locator": "loc:v1/paragraph:1",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.1",
+              "kind": "html_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:ba2382533adbad85bcfc571031f3f1360ba7c8bfdb2e0b54a6b1af87aaea77db",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Efficiency assumptions",
+              "span_id": "urn:company-wiki:evidence-span:sha256:4ee79a1f711dd578ed4efb547d8d8f8354e4fb237039bf29afbc74a22df00725",
+              "locator": "loc:v1/paragraph:2",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.2",
+              "kind": "html_heading",
+              "group": "urn:company-wiki:context-group:sha256:ba2382533adbad85bcfc571031f3f1360ba7c8bfdb2e0b54a6b1af87aaea77db",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:518cde023aa7590f968f13a2092508b97fb0da8b900db6980773ca8b6501b61e",
+              "locator": "loc:v1/paragraph:3",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.3",
+              "kind": "html_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:ba2382533adbad85bcfc571031f3f1360ba7c8bfdb2e0b54a6b1af87aaea77db",
+              "reasons": [
+                "business_narrative_signal",
+                "operating_mechanism"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Milestone",
+              "span_id": "urn:company-wiki:evidence-span:sha256:59ec782290b7cdb7fef868537dbae9771806c06b61b85838abef7343301a6086",
+              "locator": "loc:v1/table:1/row:0/column:1",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.6.0.1",
+              "kind": "html_table_cell",
+              "group": "urn:company-wiki:context-group:sha256:ba2382533adbad85bcfc571031f3f1360ba7c8bfdb2e0b54a6b1af87aaea77db",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": "unknown"
+            },
+            {
+              "text": "New product",
+              "span_id": "urn:company-wiki:evidence-span:sha256:a13dedc83445dfd3fdab5cb0669660c918bd317abf0cd7b1b94b620f9d4e7415",
+              "locator": "loc:v1/table:1/row:1/column:0",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.6.1.0",
+              "kind": "html_table_cell",
+              "group": "urn:company-wiki:context-group:sha256:97017215bbaa31f31c99966d6acaedafd77f90cdbd58c838c301db0dbf6e4a02",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": "unknown"
+            },
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:42577b7a5a274a1f1579b4651f474192b8cf96a0435f03edf0ddaeb3fc37245c",
+              "locator": "loc:v1/table:1/row:1/column:1",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.6.1.1",
+              "kind": "html_table_cell",
+              "group": "urn:company-wiki:context-group:sha256:97017215bbaa31f31c99966d6acaedafd77f90cdbd58c838c301db0dbf6e4a02",
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": null,
+              "table_class": "unknown"
+            }
+          ]
+        },
+        "0.7.1": {
+          "status": "partial",
+          "dropped_financial_count": 4,
+          "spans": [
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:1d66501d4be2598d9b5447df4ef6a5e7a978f6424b42c0c6990cc94fbeca8b10",
+              "locator": "loc:v1/paragraph:0",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.0",
+              "kind": "html_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:c8efbf24b732923792457b74aa7f3fe2cbb71cb2867155be34d10950dbb2e7ae",
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:a042a1acbdafd55c2d59e8a4cf1f090031a9307f3be8d89c73880e073ac88111",
+              "locator": "loc:v1/paragraph:1",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.1",
+              "kind": "html_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:c8efbf24b732923792457b74aa7f3fe2cbb71cb2867155be34d10950dbb2e7ae",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:0ea9529cb166823e5f43dddaf89e30c5026893feba63b568e2afb721d30284a9",
+              "locator": "loc:v1/paragraph:13",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.7",
+              "kind": "html_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:48c7bd29cef06d46c13da8f30fa481d69d4a98bb635086cfc7eea64eed8a91c6",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": null,
+              "table_class": null
+            },
+            {
+              "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:471b2eb96a6463d80db9d3043decd3872d75b85a5d46300687af4529956c99c1",
+              "locator": "loc:v1/paragraph:14",
+              "source_locator": "cwp-html-dom/1|n=0.0.0.8",
+              "kind": "html_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:48c7bd29cef06d46c13da8f30fa481d69d4a98bb635086cfc7eea64eed8a91c6",
+              "reasons": [
+                "business_narrative_signal",
+                "operating_mechanism"
+              ],
+              "shape_path": null,
+              "table_class": null
+            }
+          ]
+        }
+      },
+      "status": "FAIL"
+    },
+    {
+      "id": "pptx_same_and_different_shape_mixed_tables",
+      "checks": [
+        {
+          "id": "repeated_text_keeps_distinct_original_locators",
+          "status": "FAIL",
+          "detail": [
+            "loc:v1/page:1/table:4/row:1/column:1"
+          ]
+        },
+        {
+          "id": "business_table_cell_standalone",
+          "status": "PASS",
+          "detail": [
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:954d33b6b47fb6747f865009e1f302abe452392ca16274613d9deaa7394514e6",
+              "locator": "loc:v1/page:1/table:4/row:1/column:1",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=4|c=1,1",
+              "kind": "pptx_table_cell",
+              "group": null,
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": "4",
+              "table_class": null
+            }
+          ]
+        },
+        {
+          "id": "financial_table_excluded",
+          "status": "PASS",
+          "detail": []
+        },
+        {
+          "id": "shape_boundary_and_same_shape_positive_control",
+          "status": "PASS",
+          "detail": [
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:abe694bc16b4b8671775c0301007086cfce05a6b6651a0102a32a84e2979c51d",
+              "locator": "loc:v1/page:1/paragraph:0",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=5|par=0",
+              "kind": "pptx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:acc07c054c5daf881bbed26f999006d21718af5e000c7625d65affde9ca06b6c",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": "5",
+              "table_class": null
+            }
+          ]
+        },
+        {
+          "id": "every_selected_original_locator_replays",
+          "status": "PASS",
+          "detail": {
+            "replayed": 3,
+            "selected": 3
+          }
+        }
+      ],
+      "input_sha256": "8c00e6c52daef951e3fcf1b6fda6e8d39b62de2d51a63469969c4fc0a5f5c400",
+      "input_bytes": 29645,
+      "native_units": [
+        {
+          "text": "The return calculation has not changed",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:3b62f7ac534a0dd73ff96691905d2cc02865b2043426b33d23419d23be586ea5",
+          "kind": "pptx_paragraph",
+          "locator": "cwp-pptx-shape/2|s=1|p=0|par=0",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "0",
+          "table_class": null
+        },
+        {
+          "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:2d74f056aa0337af923773589e654c1d135135b195ae50cdcb91b7f8ec967e27",
+          "kind": "pptx_paragraph",
+          "locator": "cwp-pptx-shape/2|s=1|p=1|par=0",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "1",
+          "table_class": null
+        },
+        {
+          "text": "Company launched a new product and expanded overseas production capacity.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:89077f515d65dd9b870766441aadb9c83002357f6e870886490a216c56be2df7",
+          "kind": "pptx_paragraph",
+          "locator": "cwp-pptx-shape/2|s=1|p=2|par=0",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "2",
+          "table_class": null
+        },
+        {
+          "text": "Revenue",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:8220558c2b3d8693a61edb3d4df7bd315902a23cd8e3f461ab76a0dff2d098c9",
+          "kind": "pptx_table_cell",
+          "locator": "cwp-pptx-shape/2|s=1|p=3|c=0,0",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": null,
+            "table_index": 3,
+            "row_index": 0,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "3",
+          "table_class": null
+        },
+        {
+          "text": "Net income",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:b216aab0500c84713a0507a7ca783a34e06a5e12a345f389f2809477b436d785",
+          "kind": "pptx_table_cell",
+          "locator": "cwp-pptx-shape/2|s=1|p=3|c=0,1",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": null,
+            "table_index": 3,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "3",
+          "table_class": null
+        },
+        {
+          "text": "12345",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:d967a3416516c404f0ea497391f5bd6a7e2bf3b02f343771c82fa11699bc607f",
+          "kind": "pptx_table_cell",
+          "locator": "cwp-pptx-shape/2|s=1|p=3|c=1,0",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": null,
+            "table_index": 3,
+            "row_index": 1,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "3",
+          "table_class": null
+        },
+        {
+          "text": "67890",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:d445eac5fdae2c5f573dc4af768fcb1f4805f98208da7ef4125ecb3232a36bee",
+          "kind": "pptx_table_cell",
+          "locator": "cwp-pptx-shape/2|s=1|p=3|c=1,1",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": null,
+            "table_index": 3,
+            "row_index": 1,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "3",
+          "table_class": null
+        },
+        {
+          "text": "Business",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:e4b105b3f5ad11f185e9c02cb9f1eb0ed417ab14dbf57be72b651a89d53329f1",
+          "kind": "pptx_table_cell",
+          "locator": "cwp-pptx-shape/2|s=1|p=4|c=0,0",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": null,
+            "table_index": 4,
+            "row_index": 0,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "4",
+          "table_class": null
+        },
+        {
+          "text": "Milestone",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:00693ef0d28386757009dc6dbbdc2f89b26ee60b3700d337aef797a2777ff1f3",
+          "kind": "pptx_table_cell",
+          "locator": "cwp-pptx-shape/2|s=1|p=4|c=0,1",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": null,
+            "table_index": 4,
+            "row_index": 0,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "4",
+          "table_class": null
+        },
+        {
+          "text": "New product",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:bf42bce89d4d6472fd173a8e505a1bd74b86ffa27b40a7e8b2599dde2b73f969",
+          "kind": "pptx_table_cell",
+          "locator": "cwp-pptx-shape/2|s=1|p=4|c=1,0",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": null,
+            "table_index": 4,
+            "row_index": 1,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "4",
+          "table_class": null
+        },
+        {
+          "text": "Company launched a new product and expanded overseas production capacity.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:ef055f3f86fd2f5ac799c8cb73c9d1e7f7f6f3e477d0ac6cae8bb8b9686f96a2",
+          "kind": "pptx_table_cell",
+          "locator": "cwp-pptx-shape/2|s=1|p=4|c=1,1",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": null,
+            "table_index": 4,
+            "row_index": 1,
+            "column_index": 1,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "4",
+          "table_class": null
+        },
+        {
+          "text": "The return calculation has not changed",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:6889c530dcdb6676be606c640db6d2d42f6686f0747dd394d56a60149735192b",
+          "kind": "pptx_paragraph",
+          "locator": "cwp-pptx-shape/2|s=1|p=5|par=0",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "5",
+          "table_class": null
+        },
+        {
+          "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:25d055f883aeecd6df08200ad86ea4cbbd3449a156fccae2d8a6f7a6d458ab65",
+          "kind": "pptx_paragraph",
+          "locator": "cwp-pptx-shape/2|s=1|p=5|par=1",
+          "coordinates": {
+            "page_number": 1,
+            "paragraph_index": 1,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "5",
+          "table_class": null
+        },
+        {
+          "text": "Company launched a new product and expanded overseas production capacity.",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:ca71250b187d82d17cf6b0dc422a7498cc0b3c3508c27e6c17f8f0a1b773c158",
+          "kind": "pptx_paragraph",
+          "locator": "cwp-pptx-shape/2|s=2|p=0|par=0",
+          "coordinates": {
+            "page_number": 2,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "shape_path": "0",
+          "table_class": null
+        }
+      ],
+      "selections": {
+        "0.6.0": {
+          "status": "partial",
+          "dropped_financial_count": 0,
+          "spans": [
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:aaa42a851021d45fd7e94ff10e9a063fb76b230cb2d96c14fd1da01642bbfea1",
+              "locator": "loc:v1/page:1/table:4/row:1/column:1",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=4|c=1,1",
+              "kind": "pptx_table_cell",
+              "group": null,
+              "reasons": [
+                "business_narrative_signal",
+                "progress_or_change_language",
+                "specific_business_event"
+              ],
+              "shape_path": "4",
+              "table_class": null
+            }
+          ]
+        },
+        "0.7.0": {
+          "status": "partial",
+          "dropped_financial_count": 0,
+          "spans": [
+            {
+              "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:8f77668de3dad66784898c246dc5ff7442c801eb1a1927349a2a88a2e769f14c",
+              "locator": "loc:v1/page:1/paragraph:0",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=1|par=0",
+              "kind": "pptx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:1d69ec51330da34837093d854e9e2e0275256bd6afaaf7f98ae46792c35b50dd",
+              "reasons": [
+                "business_narrative_signal",
+                "operating_mechanism"
+              ],
+              "shape_path": "1",
+              "table_class": null
+            },
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:32a3b85c374d9187b528ebc8a119ffe542c1366742c211cd66cc0d9023b72aa2",
+              "locator": "loc:v1/page:1/paragraph:0",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=0|par=0",
+              "kind": "pptx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:1d69ec51330da34837093d854e9e2e0275256bd6afaaf7f98ae46792c35b50dd",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": "0",
+              "table_class": null
+            },
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:aed39f2ec36da2b31877f5a5b450b0453b9d443428e12dff18b071a861e3bfbc",
+              "locator": "loc:v1/page:1/paragraph:0",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=2|par=0",
+              "kind": "pptx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:1d69ec51330da34837093d854e9e2e0275256bd6afaaf7f98ae46792c35b50dd",
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": "2",
+              "table_class": null
+            },
+            {
+              "text": "Business",
+              "span_id": "urn:company-wiki:evidence-span:sha256:6f5d467e3269cd20ef43877c8244687c6620aee5b9d8cf1a3c709c5559b58034",
+              "locator": "loc:v1/page:1/table:4/row:0/column:0",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=4|c=0,0",
+              "kind": "pptx_table_cell",
+              "group": "urn:company-wiki:context-group:sha256:3e1642594f5e90386e8925cc7bcb30cda31d96b11b77405ab90cd2ee6f46ce24",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": "4",
+              "table_class": null
+            },
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:3219fb1ef6acfc6826f5c6159ce3eabd2ab599d57afed67b9c2feac97a0dc149",
+              "locator": "loc:v1/page:1/table:4/row:1/column:1",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=4|c=1,1",
+              "kind": "pptx_table_cell",
+              "group": "urn:company-wiki:context-group:sha256:3e1642594f5e90386e8925cc7bcb30cda31d96b11b77405ab90cd2ee6f46ce24",
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": "4",
+              "table_class": null
+            }
+          ]
+        },
+        "0.7.1": {
+          "status": "partial",
+          "dropped_financial_count": 0,
+          "spans": [
+            {
+              "text": "The return calculation has not changed",
+              "span_id": "urn:company-wiki:evidence-span:sha256:abe694bc16b4b8671775c0301007086cfce05a6b6651a0102a32a84e2979c51d",
+              "locator": "loc:v1/page:1/paragraph:0",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=5|par=0",
+              "kind": "pptx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:acc07c054c5daf881bbed26f999006d21718af5e000c7625d65affde9ca06b6c",
+              "reasons": [
+                "business_group_context",
+                "operating_qualification"
+              ],
+              "shape_path": "5",
+              "table_class": null
+            },
+            {
+              "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:42baa62ae2eb7a3589e10b6650148e6c2ff489d59d14a6280cbc98ed3d673923",
+              "locator": "loc:v1/page:1/paragraph:1",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=5|par=1",
+              "kind": "pptx_paragraph",
+              "group": "urn:company-wiki:context-group:sha256:acc07c054c5daf881bbed26f999006d21718af5e000c7625d65affde9ca06b6c",
+              "reasons": [
+                "business_narrative_signal",
+                "operating_mechanism"
+              ],
+              "shape_path": "5",
+              "table_class": null
+            },
+            {
+              "text": "Company launched a new product and expanded overseas production capacity.",
+              "span_id": "urn:company-wiki:evidence-span:sha256:954d33b6b47fb6747f865009e1f302abe452392ca16274613d9deaa7394514e6",
+              "locator": "loc:v1/page:1/table:4/row:1/column:1",
+              "source_locator": "cwp-pptx-shape/2|s=1|p=4|c=1,1",
+              "kind": "pptx_table_cell",
+              "group": null,
+              "reasons": [
+                "business_narrative_signal",
+                "specific_business_event",
+                "progress_or_change_language"
+              ],
+              "shape_path": "4",
+              "table_class": null
+            }
+          ]
+        }
+      },
+      "status": "FAIL"
+    }
+  ],
+  "source_after": {
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "701876166fa4547483425358475fbaf5d5a91e8171e73fb37bb6f41b4e57f230",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f"
+  },
+  "source_unchanged": true,
+  "finished_at": "2026-10-11T02:01:16.910099+00:00"
+}

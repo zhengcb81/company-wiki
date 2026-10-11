@@ -1,0 +1,8 @@
+{
+  "company": "CN-688012",
+  "role": "storage",
+  "agent": "/root/pw03_cn_storage_reviewer",
+  "dispatch_observed_at": "2026-10-11T02:29:45.752665+00:00",
+  "executor_manifest_sha256": "2445a99ac69cc5465da9f254b629a40ade24ad3b44a915963d9e1f88047ba121",
+  "other_reviewer_report_shared": false
+}

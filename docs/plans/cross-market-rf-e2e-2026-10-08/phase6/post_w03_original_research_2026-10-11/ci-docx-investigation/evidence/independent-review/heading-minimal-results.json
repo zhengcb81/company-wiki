@@ -1,0 +1,127 @@
+{
+  "observed_at": "2026-10-11T02:03:30.434899+00:00",
+  "input_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+  "input_bytes": 36699,
+  "original_xml_sha256": "9723556c4c7ed5112a12693ad3d021fa384aa6935ac63ca7a780ea13b7dfdcb9",
+  "raw_paragraphs": [
+    {
+      "text": "The return calculation has not changed",
+      "style": [],
+      "outline_level": []
+    },
+    {
+      "text": "Efficiency assumptions",
+      "style": [
+        "Heading1"
+      ],
+      "outline_level": []
+    },
+    {
+      "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+      "style": [],
+      "outline_level": []
+    }
+  ],
+  "normalized_units": [
+    {
+      "text": "The return calculation has not changed",
+      "kind": "docx_paragraph",
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "docx",
+        "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+        "source_locator": "cwp-docx-body/1|p=0",
+        "transform": "docx_visible_body_v1"
+      }
+    },
+    {
+      "text": "Efficiency assumptions",
+      "kind": "docx_paragraph",
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "docx",
+        "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+        "source_locator": "cwp-docx-body/1|p=1",
+        "transform": "docx_visible_body_v1"
+      }
+    },
+    {
+      "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+      "kind": "docx_paragraph",
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "docx",
+        "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+        "source_locator": "cwp-docx-body/1|p=2",
+        "transform": "docx_visible_body_v1"
+      }
+    }
+  ],
+  "selected_spans": [
+    {
+      "text": "Efficiency assumptions",
+      "locator": "loc:v1/paragraph:1",
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "docx",
+        "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+        "source_locator": "cwp-docx-body/1|p=1",
+        "transform": "docx_visible_body_v1",
+        "normalization_quality": {
+          "coverage_complete": true,
+          "opaque_pages": [],
+          "errors": []
+        },
+        "language": "en",
+        "selection_reasons": [
+          "business_group_context",
+          "operating_qualification"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "384d8675d3f9ebe6647fdb0755826624fbedd3dfc7334a6f384ae36ef32a02d9",
+        "topics": [
+          "core_business",
+          "products_rd"
+        ],
+        "unit_kind": "docx_paragraph",
+        "selection_group_id": "urn:company-wiki:context-group:sha256:7997f7cf4fa7456c5ae1924c2d60d6eadf7d75c23f419d8f7c2b8fd372a0e833"
+      }
+    },
+    {
+      "text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+      "locator": "loc:v1/paragraph:2",
+      "metadata": {
+        "normalization_schema": "cwp-document-normalization/1",
+        "format": "docx",
+        "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+        "source_locator": "cwp-docx-body/1|p=2",
+        "transform": "docx_visible_body_v1",
+        "normalization_quality": {
+          "coverage_complete": true,
+          "opaque_pages": [],
+          "errors": []
+        },
+        "language": "en",
+        "selection_reasons": [
+          "business_narrative_signal",
+          "operating_mechanism"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "09c8149ee0210cf9c81df9fee5bb1f1cb29b4e148dff906833dad939051c5ad2",
+        "topics": [
+          "core_business",
+          "products_rd"
+        ],
+        "unit_kind": "docx_paragraph",
+        "selection_group_id": "urn:company-wiki:context-group:sha256:7997f7cf4fa7456c5ae1924c2d60d6eadf7d75c23f419d8f7c2b8fd372a0e833"
+      }
+    }
+  ],
+  "expectation": "A true Heading 1 is a native structural boundary and must not be reintroduced as generic sentence context.",
+  "status": "FAIL",
+  "replay_count": 2,
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "701876166fa4547483425358475fbaf5d5a91e8171e73fb37bb6f41b4e57f230",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f"
+  }
+}

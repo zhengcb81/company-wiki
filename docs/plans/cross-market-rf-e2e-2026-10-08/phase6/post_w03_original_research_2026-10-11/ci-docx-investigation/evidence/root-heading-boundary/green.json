@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-10-11T02:12:33.778959+00:00",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_narrative_native_business_boundaries.py::test_native_headings_never_complete_other_heading_sentences",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\root-heading-boundary\\green-temp"
+  ],
+  "exit_code": 0,
+  "seconds": 2.9102972999971826,
+  "source_before": {
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f"
+  },
+  "source_after": {
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f"
+  },
+  "source_unchanged": true,
+  "scope": "ROOT native heading barrier only; parser-owned heading detection/version still in progress",
+  "log_sha256": "37a09213ff4a15ef60cf6b4cf5bae659c1fdec96f96d742641efb22ca20ec55c"
+}

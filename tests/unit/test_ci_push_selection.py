@@ -178,3 +178,15 @@ def test_source_scope_guard_is_shared_but_full_cache_matrix_is_major_node_only(e
     assert len(seen) == 1
     assert "tests/contract/test_source_scope_qualification.py" in seen[0]
     assert "tests/contract/test_fresh_cache_behavior_receipts.py" not in seen[0]
+
+
+def test_planning_evidence_only_changes_do_not_schedule_full_ci():
+    import yaml
+    root = Path(__file__).resolve().parents[2]
+    workflow = yaml.load((root / ".github/workflows/ci.yml").read_text(encoding="utf-8"),
+                         Loader=yaml.BaseLoader)
+    for event in ("push", "pull_request"):
+        assert "docs/plans/**" in workflow["on"][event]["paths-ignore"]
+        assert "src/**" not in workflow["on"][event]["paths-ignore"]
+        assert "tests/**" not in workflow["on"][event]["paths-ignore"]
+    assert "pytest tests/unit" in (root / ".github/workflows/ci.yml").read_text(encoding="utf-8")

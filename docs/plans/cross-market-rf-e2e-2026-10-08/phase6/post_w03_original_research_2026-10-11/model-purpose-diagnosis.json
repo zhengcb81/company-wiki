@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-10-11T01:41:08.727453+00:00",
+  "configuration_observed": {
+    "primary_provider": "minimax",
+    "model": "MiniMax-M3",
+    "max_tokens": 8192,
+    "temperature": 1.0,
+    "generation_policy": null
+  },
+  "actual_explicit_run_provider": "deepseek",
+  "actual_model": "deepseek-flash",
+  "official_docs": [
+    {
+      "url": "https://api-docs.deepseek.com/guides/thinking_mode/",
+      "supports_thinking_disabled": true,
+      "default_thinking": "enabled",
+      "default_effort": "high"
+    },
+    {
+      "url": "https://api-docs.deepseek.com/api/create-chat-completion/",
+      "max_tokens_counts_reasoning_and_final": true
+    }
+  ],
+  "inference": "missing narrative purpose policy allows provider default high thinking to exhaust existing output cap; verify in isolated configuration and real affected replay after independent review",
+  "production_config_changed": false,
+  "model_calls_from_root": 0
+}

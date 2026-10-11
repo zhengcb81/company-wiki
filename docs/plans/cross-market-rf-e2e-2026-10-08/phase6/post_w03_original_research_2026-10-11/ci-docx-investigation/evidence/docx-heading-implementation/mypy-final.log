@@ -1,0 +1,3 @@
+COMMAND: C:\Miniconda\python.exe -B -m mypy --cache-dir nul --disable-error-code import-untyped src/company_wiki/document_normalization/docx_parser.py src/company_wiki/document_normalization/units.py src/company_wiki/document_normalization/__init__.py src/company_wiki/source_catalog/narrative_normalization.py
+EXIT: 0
+Success: no issues found in 4 source files

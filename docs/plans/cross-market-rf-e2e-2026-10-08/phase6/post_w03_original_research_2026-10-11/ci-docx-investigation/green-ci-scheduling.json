@@ -1,0 +1,28 @@
+{
+  "observed_at": "2026-10-11T01:42:41.358699+00:00",
+  "prior_red": "test_planning_evidence_only_changes_do_not_schedule_full_ci actual 1FAIL/0.43s before workflow mutation, prior ignore list only docs/**/*.md and *.md",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_ci_push_selection.py",
+    "tests/unit/test_commit_policy.py",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\scheduling-temp"
+  ],
+  "exit_code": 0,
+  "seconds": 3.21072070000082,
+  "workflow_before_sha256": "ba9793319722fc8cc7304252950e8db5df98ed4ad854d5591999fd07c704d091",
+  "workflow_after_sha256": "9f2864979058658089bb9d4edd879e05a733404f3d1a6d1de06ec012a63359b8",
+  "log_sha256": "0ca6a45ad57c43e27d8292a7f735baac3f3162a442a6575b3698af1d78c46542",
+  "runtime_docs_plans_dependency_found": false,
+  "code_and_tests_still_run_full_ci": true,
+  "production_config_mutations": 0,
+  "initial_edit_driver_failure": "raw CRLF decode needle count assertion before mutation; corrected normal text newline read only, not source/test assertion change"
+}

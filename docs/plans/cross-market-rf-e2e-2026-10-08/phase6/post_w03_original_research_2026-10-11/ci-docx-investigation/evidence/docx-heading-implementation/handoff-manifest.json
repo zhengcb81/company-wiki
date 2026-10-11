@@ -1,0 +1,31 @@
+{
+  "sealed_utc": "2026-10-11T02:19:35.496604+00:00",
+  "write_stopped_after_seal": true,
+  "source_files": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "tests/document_normalization/test_docx.py": "e69b0c6d276d1eb8279c5f8e6fce0f3082ab3d516f7fe8dbfe7f8b999a2ee0b6",
+    "tests/unit/test_docx_heading_normalization.py": "ea74c6439ecba14f798a743b0748ed75f47659d52077ae84b6322bd0d217e888"
+  },
+  "evidence_files": {
+    "after.json": "2862d41447baed7c4f95f6d5d4fa435bf997d881d03b8fb8e09f6b5b213fe5a2",
+    "before.json": "987462b9d88d6cd509587caa4f4883e5ec6b1fb172eb527711a558ae2c2305c8",
+    "green-final-docx.log": "3ad353a848053073d90379700f4075a5e5bbbc9efe32ec848e061d60d3101b4d",
+    "green-focused.log": "601ca3481aee3c5c51d418e014e13d4e55c7714dd5fbcd28271ef425b8c50788",
+    "heading-minimal.docx": "ff1b655fe67c6fc59206079ae612373231758a35a751293df5af6c61e189f5e0",
+    "IMPLEMENTATION.md": "194395d21c3e9361b78165691947dd70eb7a820b96483581cbf930995247f1f6",
+    "legacy-original.docx": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+    "mypy-final.log": "866612c6db2892657c86cf926fd01fb2a9b378447e90b9c70ea45d18c2345d74",
+    "mypy.log": "4077a1aa525b2bdd6f9b96f432cd9765b58b1846e13b9f889643f492fba04c10",
+    "red.log": "e6a2d1b49297b0f83c7037d96824bd31b4571ad9e697d88e343e959e75ed9d29",
+    "ruff-final.log": "1b5b1b837d76d4359e3f1a6dbc490094f5f9253acd338c32757fddb367ad35f5",
+    "ruff.log": "1b5b1b837d76d4359e3f1a6dbc490094f5f9253acd338c32757fddb367ad35f5",
+    "style-inheritance-override.docx": "f98f852a2e497073effdcef7da41241e53b3ab7a2700c4134ff56e91a5cdb5c2"
+  },
+  "config_changed": false,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "new_fee": 0
+}

@@ -6,6 +6,7 @@ import sys
 from dataclasses import replace
 import pytest
 from company_wiki.automation.models import HandlerOutcome
+from company_wiki.document_normalization.units import DOCX_PARSER_VERSION
 from company_wiki.automation.narrative_contracts import (
     NarrativeBundle,
     NarrativeSelectResult,
@@ -84,7 +85,7 @@ def test_native_documents_select_verify_public_replay_and_roles(
     if mime == DOCX_MIME:
         assert (
             selected.parser.name == "cwp_document_normalization"
-            and selected.parser.version == "1.0.0"
+            and selected.parser.version == DOCX_PARSER_VERSION
         )
         assert all(
             str(s.structured_value["source_locator"]).startswith("cwp-docx-body/1|")
@@ -102,11 +103,13 @@ def test_native_documents_select_verify_public_replay_and_roles(
     )
 
 
-def test_docx_financial_table_cells_stay_out_of_business_selection():
+@pytest.mark.parametrize("container_title", ["Container 0", "Container 1", "Container 2"])
+def test_docx_financial_table_cells_stay_out_of_business_selection(container_title):
     from docx import Document
     from io import BytesIO
 
     document = Document()
+    document.core_properties.title = container_title
     t = document.add_table(rows=2, cols=2)
     t.cell(0, 0).text = "Income statement"
     t.cell(0, 1).text = "Revenue"
@@ -130,3 +133,10 @@ def test_docx_financial_table_cells_stay_out_of_business_selection():
     selected = NarrativeSelectResult.from_dict(raw.result)
     assert selected.selection.dropped_financial_count >= 4
     assert all(s.raw_text != "12345" for s in selected.evidence_spans)
+    assert not any(
+        s.structured_value.get("table_class") == "financial"
+        for s in selected.evidence_spans
+    )
+    assert {s.raw_text for s in selected.evidence_spans} == {
+        "Company launched a new product and expanded overseas production capacity."
+    }

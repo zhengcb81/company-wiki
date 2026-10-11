@@ -11,3 +11,7 @@
 /docs/plans/**/*.log -text -diff
 /docs/plans/**/evidence/** -text -diff
 /tests/fixtures/narrative_real_transcript/*.txt -text -diff
+
+# This real-run phase records native observations with declared byte hashes.
+/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/**/*.json -text
+/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/** -text

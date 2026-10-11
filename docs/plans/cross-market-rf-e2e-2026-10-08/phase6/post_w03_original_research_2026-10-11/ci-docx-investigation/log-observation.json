@@ -1,0 +1,11 @@
+{
+  "observed_at": "2026-10-11T01:23:04.161891+00:00",
+  "head": "1152dad7b5cbfef82604d816aaf05d45db7cad4c",
+  "run_id": 38101290406,
+  "job_id": 114357569625,
+  "log_bytes": 77565,
+  "log_sha256": "301bcfd856beef2c1bf469e4f940d2a6d6dd3687835b9b8cc68fa7ea25cf1002",
+  "credential_logged": false,
+  "redirect_fetched_without_github_credentials": true,
+  "artifact": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\job-114357569625.log"
+}

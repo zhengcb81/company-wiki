@@ -84,7 +84,7 @@ P7-RF已正式发布/安装验收，详见[P7 RF验收](P7_RF_ACCEPTANCE.md)。W
 
 ## Next Step
 
-W04/纯W03已236fca08正常提交；W03共享及实际default0.7的公共/独立集中验收均通过。现在正常提交本轮共享源码和证据，canonical干净fast-forward并一次普通push；只用新HEAD CI验收发布，随后按W08/W09复用真实原件重跑原三家四审。P7-RF主线47f497ad已绿/安装完成，P7-AUDIT未交付。工程不冒称研究通过，旧失败历史保留。
+W03/W04/来源URL工程正常0f7540b5发布/精确CI绿，P7-RF47f497ad主线/远端/安装接受；1152dad7来源交接进度已推送。三fresh executor按post_w03_original_research_2026-10-11/cohort运行，seal后各四独立审查→专家共因→新三家泛化/既有loop，P7-AUDIT未交源不动。
 
 ## 保留约束
 

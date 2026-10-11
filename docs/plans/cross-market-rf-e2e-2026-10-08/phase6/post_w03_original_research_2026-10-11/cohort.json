@@ -21,7 +21,17 @@
       "source_environment": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\CN-688012",
       "audit_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012",
       "scope": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\scope.json",
-      "run_id": "pw03-20261011T010657Z-cn-688012"
+      "run_id": "pw03-20261011T010657Z-cn-688012",
+      "executor_agent": "/root/pw03_cn_revenue_executor",
+      "executor_dispatch_observed_at": "2026-10-11T01:19:38.385251+00:00",
+      "actual_executor_start_time_from_child_pending": true,
+      "executor_state": "SEALED_PARTIAL",
+      "sealed_at": "2026-10-11T02:02:25.151529+00:00",
+      "manifest_sha256": "2445a99ac69cc5465da9f254b629a40ade24ad3b44a915963d9e1f88047ba121",
+      "execution_handoff": {
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\handoffs\\execution.json",
+        "sha256": "7d0762f68223586721bbeb31f89f0f240a41a3eefd2961a122f52fdab14764e2"
+      }
     },
     {
       "company": "HK-00700",
@@ -29,7 +39,17 @@
       "source_environment": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\HK-00700",
       "audit_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700",
       "scope": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\scope.json",
-      "run_id": "pw03-20261011T010657Z-hk-00700"
+      "run_id": "pw03-20261011T010657Z-hk-00700",
+      "executor_agent": "/root/pw03_hk_revenue_executor",
+      "executor_dispatch_observed_at": "2026-10-11T01:20:31.628844+00:00",
+      "actual_executor_start_time_from_child_pending": true,
+      "executor_state": "SEALED_PARTIAL",
+      "sealed_at": "2026-10-11T01:59:28.588202+00:00",
+      "manifest_sha256": "a1cee8fc896cd4a097403c26796f9103cd34765818223af0f0eeff7112cf3058",
+      "execution_handoff": {
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\handoffs\\execution.json",
+        "sha256": "03ad7c33d0b66a48f966d4912c6eb307c8cbada15f8724ae6936576c9a9bfe4e"
+      }
     },
     {
       "company": "US-MSFT",
@@ -37,13 +57,23 @@
       "source_environment": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\US-MSFT",
       "audit_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft",
       "scope": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\scope.json",
-      "run_id": "pw03-20261011T010657Z-us-msft"
+      "run_id": "pw03-20261011T010657Z-us-msft",
+      "executor_agent": "/root/pw03_us_revenue_executor",
+      "executor_dispatch_observed_at": "2026-10-11T01:20:31.628844+00:00",
+      "actual_executor_start_time_from_child_pending": true,
+      "executor_state": "SEALED_PARTIAL",
+      "sealed_at": "2026-10-11T01:56:53.102343+00:00",
+      "manifest_sha256": "ccbbeea4e3feaa0a482bf0f493d0d4a4cb00a1ccacc17ba13baaf670b1354e6c",
+      "execution_handoff": {
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\handoffs\\execution.json",
+        "sha256": "ad29152fa9eed0ee1fdea2bcd991fac64b1a0c4e3a2bb2c31e8b2a5221b3350e"
+      }
     }
   ],
-  "external_provider_calls": 0,
-  "paid_model_calls": 0,
-  "new_cost_micro_usd": 0,
-  "status": "SOURCE_PREPARATION_COMPLETE_RESEARCH_READY",
+  "external_provider_calls": null,
+  "paid_model_calls": 9,
+  "new_cost_micro_usd": 83773,
+  "status": "THREE_EXECUTORS_SEALED_PARTIAL_INDEPENDENT_REVIEWS_RUNNING",
   "source_registration_report": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\source_environment_handoff.json",
   "source_handoff_sha256": "4554b035f37ff45a03646b21518cdc013bc0de6c6e5e427e1f96f693f7ecfbd7",
   "source_preparation_execution_status": "PASS",
@@ -54,5 +84,50 @@
     "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\CN-688012_EXECUTOR.md",
     "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\HK-00700_EXECUTOR.md",
     "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\US-MSFT_EXECUTOR.md"
-  ]
+  ],
+  "dispatch_observed_at": "2026-10-11T01:20:31.628844+00:00",
+  "docs_publication": {
+    "head": "1152dad7b5cbfef82604d816aaf05d45db7cad4c",
+    "normal_commit_seconds": 1.5716091,
+    "normal_push_seconds": 24.707922,
+    "pre_push_passed": 137,
+    "pre_push_test_seconds": 19.16,
+    "ci_id": 38101290406,
+    "ci_state_observed": "failure",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/38101290406",
+    "exact_ci": {
+      "id": 38101290406,
+      "name": "CI",
+      "head_sha": "1152dad7b5cbfef82604d816aaf05d45db7cad4c",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-11T01:16:38Z",
+      "updated_at": "2026-10-11T01:18:43Z",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38101290406"
+    }
+  },
+  "provider_calls_observation_pending_execution_seals": true,
+  "live_budget_observation": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\budget-observation-native-20261011T0140.json",
+    "sha256": "b711ca14414ea7aa1bf5ee93bae14d6a83141e4a95da29f91a28e3051b69b3c0",
+    "observed_at": "2026-10-11T01:38:50.542887+00:00",
+    "not_final_invoice": true,
+    "unknown": 0,
+    "unsettled": 0
+  },
+  "source_preparation_before_executor_only": {
+    "external_provider_calls": 0,
+    "paid_model_calls": 0,
+    "new_cost_micro_usd": 0
+  },
+  "pending_isolated_ci_fix": {
+    "published": false,
+    "selector_version": "0.7.1",
+    "unit_responsibility_passed": 112,
+    "public_unique_responsibilities_passed": 4,
+    "ci_scheduling_responsibility_passed": 42,
+    "canonical_runtime_remains": "1152dad7b5cbfef82604d816aaf05d45db7cad4c",
+    "independent_review_pending": true
+  },
+  "runtime_freeze_until_executor_seals_satisfied_at": "2026-10-11T02:05:11.296438+00:00"
 }

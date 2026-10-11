@@ -12,7 +12,7 @@
 
 方法输入只读 `C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\main_auto_official_json\W09_EXECUTOR_BRIEF.md`。配置/入口指南 `C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\main_auto_official_json\evidence\w08-operational-readiness-20261011.md`是旧准备时观察，须以scope及已发布0f7540b5为准：source catalog已准备；shared source_url producer已修复，真实capture URL或诚实None，无需重复修复；当前DeepSeek已实际Config.load校验。不要原样复跑旧first-fetch、旧未开始陈述或旧mFresh输出目录。
 
-读取原语言有价值业务span；真实configured narrative_batch_configured.py --llm-config canonical/config.yaml --llm-provider deepseek，owned catalog/AUTO/work和request2，profile P1/selector0.7、原versioned pricing。模型选项从配置，不手写竞争model endpoint、不翻译。已可能计费unknown不盲重发；失败final如实报告。CN还须86 SSE既有成功raw按reconciliation和真实旧receipt分别public import→三个1.0.2 projection/replay/export，local import不伪造新HTTP；目标24record/86parent和partial保持，不能只17页声称全覆盖。HK/US此SSE步骤N/A；MSFT正式call使用既有官方HTML，不能给工程TXT借出版日期。
+读取原语言有价值业务span；真实configured narrative_batch_configured.py --llm-config canonical/config.yaml --llm-provider deepseek，owned catalog/AUTO和request2；scope 的 work 是准备资料父目录；每个 narrative batch 的 --work-dir 必须为该父目录下新建、空的独占子目录（例如 work/executor-narrative）。不能传父目录，不能删除 source-owner 资料来腾空；同 run 恢复使用同批次目录，新批次另用空子目录。 profile P1/selector0.7、原versioned pricing。模型选项从配置，不手写竞争model endpoint、不翻译。已可能计费unknown不盲重发；失败final如实报告。CN还须86 SSE既有成功raw按reconciliation和真实旧receipt分别public import→三个1.0.2 projection/replay/export，local import不伪造新HTTP；目标24record/86parent和partial保持，不能只17页声称全覆盖。HK/US此SSE步骤N/A；MSFT正式call使用既有官方HTML，不能给工程TXT借出版日期。
 
 ## 独占写集与预算
 

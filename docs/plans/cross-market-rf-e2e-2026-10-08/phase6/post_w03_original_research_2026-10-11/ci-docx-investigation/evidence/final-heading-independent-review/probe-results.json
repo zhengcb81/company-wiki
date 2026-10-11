@@ -1,0 +1,1209 @@
+{
+  "schema_version": "independent-final-docx-heading-probe/1",
+  "observed_at": "2026-10-11T02:25:52.747534+00:00",
+  "source_tree": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "source_before": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/document_normalization/replay.py": "83a9ca6fe4739924ae4f06effa0cee138f37c1df8bf6463ae293d5bbdb3af1de",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+    "src/company_wiki/automation/narrative_batch.py": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "source_after": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/document_normalization/replay.py": "83a9ca6fe4739924ae4f06effa0cee138f37c1df8bf6463ae293d5bbdb3af1de",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+    "src/company_wiki/automation/narrative_batch.py": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "checks": [
+    {
+      "id": "old_minimal_original_unchanged",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_default_real_version",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_real_heading_and_original_locator",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_no_context_crosses_heading",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_old_new_locators_match",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_versions_unit_ids_separate",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_selected_original_replay",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "minimal_old_unit_exact_replay",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "forged_heading_unit_metadata_rejected",
+      "status": "PASS",
+      "details": {
+        "rejected": true,
+        "error_type": "ReplayError",
+        "message": "replayed source differs from claimed unit identity/text/coordinates/metadata"
+      }
+    },
+    {
+      "id": "forged_heading_span_metadata_rejected",
+      "status": "PASS",
+      "details": {
+        "rejected": true,
+        "error_type": "ReplayError",
+        "message": "selected span source metadata differs"
+      }
+    },
+    {
+      "id": "own_three_level_style_inheritance",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_direct_outline9_body_override",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_inherited_outline9_body_override",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_direct_heading_overrides_body_style",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_no_context_crosses_inherited_heading",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_override_body_positive_group_complete",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_business_cell_retained_source_semantics",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_same_paragraph_positive_exact",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_direct_heading_barrier",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "own_selected_original_replay",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "legacy_original_sha",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "legacy_all_record_fields_before_after_independent_equal",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "legacy_full_record_fingerprint_unchanged",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "legacy_all_unit_exact_replay",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "legacy_forged_heading_unit_metadata_rejected",
+      "status": "PASS",
+      "details": {
+        "rejected": true,
+        "error_type": "ReplayError",
+        "message": "replayed source differs from claimed unit identity/text/coordinates/metadata"
+      }
+    },
+    {
+      "id": "saved_old_pin_stays_1_0",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "current_identity_really_1_1",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "old_minimal_original_still_unchanged_after_probes",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "id": "all_source_and_config_sha_unchanged",
+      "status": "PASS",
+      "details": null
+    }
+  ],
+  "status": "PASS",
+  "minimal_original": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\independent-review\\docx_heading_minimal.docx",
+    "sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+    "bytes": 36699,
+    "current_document": {
+      "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+      "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+      "format_name": "docx",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.1.0",
+      "structure": {
+        "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+        "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+        "language": "und",
+        "units": [
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:a0ffb8d3f32fd56bdf96be8c3e26c1183afe24b0952e2d7e58626a657b735b7f",
+            "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 0,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "The return calculation has not changed",
+            "unit_kind": "docx_paragraph",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+              "source_locator": "cwp-docx-body/1|p=0",
+              "transform": "docx_visible_body_v1",
+              "paragraph_style_id": "Normal",
+              "paragraph_style_name": "Normal"
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:0b50606d7e0eff8702ab105158eed552e4a846ff5f637807cfb7e1355dd1abb3",
+            "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 1,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "Efficiency assumptions",
+            "unit_kind": "docx_heading",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+              "source_locator": "cwp-docx-body/1|p=1",
+              "transform": "docx_visible_body_v1",
+              "paragraph_style_id": "Heading1",
+              "paragraph_style_name": "heading 1",
+              "outline_level": 0,
+              "outline_style_id": "Heading1",
+              "heading_level": 1,
+              "heading_basis": "style_outline"
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:7c8d50b6380c69e6823f75df18f9da166358bdfd69b544ee429c6c5cfd7cabfe",
+            "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 2,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+            "unit_kind": "docx_paragraph",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+              "source_locator": "cwp-docx-body/1|p=2",
+              "transform": "docx_visible_body_v1",
+              "paragraph_style_id": "Normal",
+              "paragraph_style_name": "Normal"
+            }
+          }
+        ],
+        "page_count": 0,
+        "pages_read": 0,
+        "opaque_pages": [],
+        "table_scan_pages": [],
+        "deferred_table_pages": [],
+        "line_count": 3,
+        "errors": []
+      },
+      "opaque_assets": [],
+      "metadata": {
+        "archive_member_count": 17,
+        "uncompressed_bytes": 826440,
+        "external_relationship_count": 0,
+        "body_paragraph_count": 3,
+        "table_count": 0
+      }
+    },
+    "old_document": {
+      "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+      "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+      "format_name": "docx",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.0.0",
+      "structure": {
+        "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+        "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+        "language": "und",
+        "units": [
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:c02fd5270255b0791d3de0ff789bce5494714cb0cf35c8e924ece6e625984000",
+            "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.0.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 0,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "The return calculation has not changed",
+            "unit_kind": "docx_paragraph",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+              "source_locator": "cwp-docx-body/1|p=0",
+              "transform": "docx_visible_body_v1"
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:57c70cad4508ac352bfd64f78d0fd252f554e8ef770a81fc419642db7dad473c",
+            "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.0.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 1,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "Efficiency assumptions",
+            "unit_kind": "docx_paragraph",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+              "source_locator": "cwp-docx-body/1|p=1",
+              "transform": "docx_visible_body_v1"
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:58dd31b3645e29d2d826422aeab5e866906655da973a931a5c6c9e5c3f5aeb89",
+            "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.0.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 2,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+            "unit_kind": "docx_paragraph",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+              "source_locator": "cwp-docx-body/1|p=2",
+              "transform": "docx_visible_body_v1"
+            }
+          }
+        ],
+        "page_count": 0,
+        "pages_read": 0,
+        "opaque_pages": [],
+        "table_scan_pages": [],
+        "deferred_table_pages": [],
+        "line_count": 3,
+        "errors": []
+      },
+      "opaque_assets": [],
+      "metadata": {
+        "archive_member_count": 17,
+        "uncompressed_bytes": 826440,
+        "external_relationship_count": 0,
+        "body_paragraph_count": 3,
+        "table_count": 0
+      }
+    },
+    "selected": [
+      {
+        "schema_version": "1.0.0",
+        "span_id": "urn:company-wiki:evidence-span:sha256:32752081d2be92a855f3308158d239857ec1ca9d9f15542769cb7b8270bba9e5",
+        "source_id": "urn:company-wiki:source:sha256:c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+        "locator": "loc:v1/paragraph:2",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 2,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+        "structured_value": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c",
+          "source_locator": "cwp-docx-body/1|p=2",
+          "transform": "docx_visible_body_v1",
+          "paragraph_style_id": "Normal",
+          "paragraph_style_name": "Normal",
+          "normalization_quality": {
+            "coverage_complete": true,
+            "opaque_pages": [],
+            "errors": []
+          },
+          "language": "en",
+          "selection_reasons": [
+            "business_narrative_signal",
+            "operating_mechanism"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "09c8149ee0210cf9c81df9fee5bb1f1cb29b4e148dff906833dad939051c5ad2",
+          "topics": [
+            "core_business",
+            "products_rd"
+          ],
+          "unit_kind": "docx_paragraph"
+        },
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "output_sha256": "c75267020e1196fab4606ab4c4c5d316fc6b910990e2dc5f6e63c5fa7bb4aeec",
+        "parse_status": "parsed",
+        "quality_flags": []
+      }
+    ],
+    "selected_replay_count": 1
+  },
+  "own_original": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\final-heading-independent-review\\own-inheritance-outline.docx",
+    "sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+    "bytes": 3486,
+    "document": {
+      "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+      "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+      "format_name": "docx",
+      "parser_name": "cwp_document_normalization",
+      "parser_version": "1.1.0",
+      "structure": {
+        "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+        "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+        "language": "und",
+        "units": [
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:04d10bfd844200e1dc030053bbcbda62a1090cdbf8e6f1c754cb3f60d8282aa4",
+            "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 0,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "The return calculation has not changed",
+            "unit_kind": "docx_paragraph",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+              "source_locator": "cwp-docx-body/1|p=0",
+              "transform": "docx_visible_body_v1",
+              "paragraph_style_id": "Ordinary",
+              "paragraph_style_name": "Ordinary"
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ca95cef80240f224b63f1a5ee1d6198b3e6ceafc6a1d5e15c0c3385301f754c0",
+            "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 1,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "Efficiency assumptions",
+            "unit_kind": "docx_heading",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+              "source_locator": "cwp-docx-body/1|p=1",
+              "transform": "docx_visible_body_v1",
+              "paragraph_style_id": "ReviewChild",
+              "paragraph_style_name": "Neutral Child",
+              "outline_level": 0,
+              "outline_style_id": "OutlineRoot",
+              "heading_level": 1,
+              "heading_basis": "style_outline"
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:db91dc94245f2755a8e29a2e7798b53927c50e9fc785c829765e14aa14528e1d",
+            "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 2,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+            "unit_kind": "docx_paragraph",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+              "source_locator": "cwp-docx-body/1|p=2",
+              "transform": "docx_visible_body_v1",
+              "paragraph_style_id": "Ordinary",
+              "paragraph_style_name": "Ordinary"
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ea49b565b1e87e1e89ffcf28b0da6ce2182c9c90af0f7eb8071b0013ad88481c",
+            "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": null,
+              "table_index": 0,
+              "row_index": 0,
+              "column_index": 0,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "Company launched a new product and expanded overseas production capacity.",
+            "unit_kind": "docx_table_cell",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+              "source_locator": "cwp-docx-body/1|t=0|r=0|c=0|p=0",
+              "transform": "docx_visible_body_v1",
+              "table_class": "unknown",
+              "table_class_basis": [],
+              "table_headers": [
+                "Company launched a new product and expanded overseas production capacity."
+              ],
+              "table_index": 0,
+              "row_index": 0,
+              "column_index": 0,
+              "cell_paragraph_index": 0
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ba6004ad23a40d153c88468561278a042b6eab327d22d7f8bf2b31133de6dc87",
+            "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 3,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "The workload calculation has not changed",
+            "unit_kind": "docx_paragraph",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+              "source_locator": "cwp-docx-body/1|p=3",
+              "transform": "docx_visible_body_v1",
+              "paragraph_style_id": "ReviewChild",
+              "paragraph_style_name": "Neutral Child",
+              "outline_level": 9
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:d79ee9deffc7d476b04627979c7c5c4784bd9f9b984f4451c301fbdc868102da",
+            "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 4,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "Efficiency depends on customer workload mix, token usage and memory price performance.",
+            "unit_kind": "docx_paragraph",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+              "source_locator": "cwp-docx-body/1|p=4",
+              "transform": "docx_visible_body_v1",
+              "paragraph_style_id": "ReviewBody",
+              "paragraph_style_name": "Body Override",
+              "outline_level": 9,
+              "outline_style_id": "ReviewBody"
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:9a945d0c1741b201f8ce09ff3f2bef167ae2e935afd1ff77173b2abff5f00058",
+            "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 5,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "Other programme assumptions",
+            "unit_kind": "docx_heading",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+              "source_locator": "cwp-docx-body/1|p=5",
+              "transform": "docx_visible_body_v1",
+              "paragraph_style_id": "ReviewBody",
+              "paragraph_style_name": "Body Override",
+              "outline_level": 2,
+              "heading_level": 3,
+              "heading_basis": "paragraph_outline"
+            }
+          },
+          {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:8eaf7b77ba4478ad543bddf1faa6389aa4e30f06972c9ae2ff37b791543927dc",
+            "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+            "parser_name": "cwp_document_normalization",
+            "parser_version": "1.1.0",
+            "coordinates": {
+              "page_number": null,
+              "paragraph_index": 6,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "The operating plan has not changed. Efficiency depends on inference workload mix, token usage and chip price performance.",
+            "unit_kind": "docx_paragraph",
+            "source_role": "company_filing",
+            "language": "und",
+            "quality_flags": [],
+            "metadata": {
+              "normalization_schema": "cwp-document-normalization/1",
+              "format": "docx",
+              "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+              "source_locator": "cwp-docx-body/1|p=6",
+              "transform": "docx_visible_body_v1",
+              "paragraph_style_id": "Ordinary",
+              "paragraph_style_name": "Ordinary"
+            }
+          }
+        ],
+        "page_count": 0,
+        "pages_read": 0,
+        "opaque_pages": [],
+        "table_scan_pages": [],
+        "deferred_table_pages": [],
+        "line_count": 8,
+        "errors": []
+      },
+      "opaque_assets": [],
+      "metadata": {
+        "archive_member_count": 5,
+        "uncompressed_bytes": 2904,
+        "external_relationship_count": 0,
+        "body_paragraph_count": 7,
+        "table_count": 1
+      }
+    },
+    "selected": [
+      {
+        "schema_version": "1.0.0",
+        "span_id": "urn:company-wiki:evidence-span:sha256:a58724bf90e810cac868bb62859ee8d0d860373ff377513b92dec9cb789259f5",
+        "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+        "locator": "loc:v1/paragraph:2",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 2,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+        "structured_value": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+          "source_locator": "cwp-docx-body/1|p=2",
+          "transform": "docx_visible_body_v1",
+          "paragraph_style_id": "Ordinary",
+          "paragraph_style_name": "Ordinary",
+          "normalization_quality": {
+            "coverage_complete": true,
+            "opaque_pages": [],
+            "errors": []
+          },
+          "language": "en",
+          "selection_reasons": [
+            "business_narrative_signal",
+            "operating_mechanism"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "09c8149ee0210cf9c81df9fee5bb1f1cb29b4e148dff906833dad939051c5ad2",
+          "topics": [
+            "core_business",
+            "products_rd"
+          ],
+          "unit_kind": "docx_paragraph"
+        },
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "output_sha256": "427f7487a82f31957dc2abf9e02f0183a5d89b23c8ed5ee39fa7a8d2ce75d6d1",
+        "parse_status": "parsed",
+        "quality_flags": []
+      },
+      {
+        "schema_version": "1.0.0",
+        "span_id": "urn:company-wiki:evidence-span:sha256:b6422bc8e89ef27a18b4fd8b5060c62c441a70bb44316d2fb485d7489a0e4c60",
+        "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+        "locator": "loc:v1/paragraph:3",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 3,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "The workload calculation has not changed",
+        "structured_value": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+          "source_locator": "cwp-docx-body/1|p=3",
+          "transform": "docx_visible_body_v1",
+          "paragraph_style_id": "ReviewChild",
+          "paragraph_style_name": "Neutral Child",
+          "outline_level": 9,
+          "normalization_quality": {
+            "coverage_complete": true,
+            "opaque_pages": [],
+            "errors": []
+          },
+          "language": "en",
+          "selection_reasons": [
+            "business_group_context",
+            "operating_qualification"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "a78ec1c15bac7691c7376c0ec66f08bdcf606e568b85c32939bb46071cd7a9db",
+          "topics": [
+            "orders_customers"
+          ],
+          "unit_kind": "docx_paragraph",
+          "selection_group_id": "urn:company-wiki:context-group:sha256:9294f7b6c33b8afa41f96e7e8da93fe909b6c7c9c4f2abcdc1c5b1f3046fc4b7"
+        },
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "output_sha256": "9f837f92ed71923d509ccc13dbc98ebb27a1ff117c8d1ffb41d8ae66de591434",
+        "parse_status": "parsed",
+        "quality_flags": []
+      },
+      {
+        "schema_version": "1.0.0",
+        "span_id": "urn:company-wiki:evidence-span:sha256:7a6e3035cf02ff14faafa3dc940e0dbd060e10b1d2a3c1971eb16ba34a324981",
+        "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+        "locator": "loc:v1/paragraph:4",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 4,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "Efficiency depends on customer workload mix, token usage and memory price performance.",
+        "structured_value": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+          "source_locator": "cwp-docx-body/1|p=4",
+          "transform": "docx_visible_body_v1",
+          "paragraph_style_id": "ReviewBody",
+          "paragraph_style_name": "Body Override",
+          "outline_level": 9,
+          "outline_style_id": "ReviewBody",
+          "normalization_quality": {
+            "coverage_complete": true,
+            "opaque_pages": [],
+            "errors": []
+          },
+          "language": "en",
+          "selection_reasons": [
+            "business_narrative_signal",
+            "operating_mechanism"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "f48121da8f7857f188c59d814eb40acc6d8bd0d6b803aaec25487730c69c7f63",
+          "topics": [
+            "orders_customers"
+          ],
+          "unit_kind": "docx_paragraph",
+          "selection_group_id": "urn:company-wiki:context-group:sha256:9294f7b6c33b8afa41f96e7e8da93fe909b6c7c9c4f2abcdc1c5b1f3046fc4b7"
+        },
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "output_sha256": "2ac405dc8286e574149381b782d846b3ae4398d907e4a3d73866e4625ca07e46",
+        "parse_status": "parsed",
+        "quality_flags": []
+      },
+      {
+        "schema_version": "1.0.0",
+        "span_id": "urn:company-wiki:evidence-span:sha256:6c602f77df8e01e3837f1a7e7d029d77f6a92e93621aae396c7f559fec8f4ebb",
+        "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+        "locator": "loc:v1/paragraph:6",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": 6,
+          "table_index": null,
+          "row_index": null,
+          "column_index": null,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "The operating plan has not changed. Efficiency depends on inference workload mix, token usage and chip price performance.",
+        "structured_value": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+          "source_locator": "cwp-docx-body/1|p=6",
+          "transform": "docx_visible_body_v1",
+          "paragraph_style_id": "Ordinary",
+          "paragraph_style_name": "Ordinary",
+          "normalization_quality": {
+            "coverage_complete": true,
+            "opaque_pages": [],
+            "errors": []
+          },
+          "language": "en",
+          "selection_reasons": [
+            "business_narrative_signal",
+            "operating_mechanism"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "4b941e057c1b27867971a9386b7c42fd14b825ddccee9015366e610c2ccda291",
+          "topics": [
+            "core_business",
+            "products_rd"
+          ],
+          "unit_kind": "docx_paragraph"
+        },
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "output_sha256": "36fa9e576465111d68f937afe33924efc3adae0ece4c6291558fbf9d679fa7ce",
+        "parse_status": "parsed",
+        "quality_flags": []
+      },
+      {
+        "schema_version": "1.0.0",
+        "span_id": "urn:company-wiki:evidence-span:sha256:be15a2abbcefe43a4ef951029cac58289c2713f603003ad8d82a90541c2ad1e9",
+        "source_id": "urn:company-wiki:source:sha256:89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+        "locator": "loc:v1/table:0/row:0/column:0",
+        "coordinates": {
+          "page_number": null,
+          "paragraph_index": null,
+          "table_index": 0,
+          "row_index": 0,
+          "column_index": 0,
+          "char_start": null,
+          "char_end": null
+        },
+        "raw_text": "Company launched a new product and expanded overseas production capacity.",
+        "structured_value": {
+          "normalization_schema": "cwp-document-normalization/1",
+          "format": "docx",
+          "source_sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e",
+          "source_locator": "cwp-docx-body/1|t=0|r=0|c=0|p=0",
+          "transform": "docx_visible_body_v1",
+          "table_class": "unknown",
+          "table_class_basis": [],
+          "table_headers": [
+            "Company launched a new product and expanded overseas production capacity."
+          ],
+          "table_index": 0,
+          "row_index": 0,
+          "column_index": 0,
+          "cell_paragraph_index": 0,
+          "normalization_quality": {
+            "coverage_complete": true,
+            "opaque_pages": [],
+            "errors": []
+          },
+          "language": "en",
+          "selection_reasons": [
+            "business_narrative_signal",
+            "specific_business_event",
+            "progress_or_change_language"
+          ],
+          "source_role": "company_filing",
+          "text_sha256": "285d883fff7d08306687a0b38aa98f4b59ebb21a9fd1055d1891e568a1e88821",
+          "topics": [
+            "new_business",
+            "overseas",
+            "capacity_projects",
+            "products_rd"
+          ],
+          "unit_kind": "docx_table_cell"
+        },
+        "parser_name": "cwp_document_normalization",
+        "parser_version": "1.1.0",
+        "output_sha256": "76bd51654ce34fd82645d3327cf5d548f4278467f7358bafdbc2ee6b44c90dd4",
+        "parse_status": "parsed",
+        "quality_flags": []
+      }
+    ],
+    "selected_replay_count": 5
+  },
+  "legacy_equality": {
+    "independent_record": {
+      "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+      "parser_version": "1.0.0",
+      "metadata": {
+        "archive_member_count": 5,
+        "uncompressed_bytes": 2147,
+        "external_relationship_count": 0,
+        "body_paragraph_count": 5,
+        "table_count": 1
+      },
+      "errors": [],
+      "units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:5eb226a1781fa5fcf05f937e6fa0121634d5da7cdc46105bcfc403180bdbd316",
+          "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.0.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "The return calculation has not changed",
+          "unit_kind": "docx_paragraph",
+          "source_role": "company_filing",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+            "source_locator": "cwp-docx-body/1|p=0",
+            "transform": "docx_visible_body_v1"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4f8d38439a462b54176745154b8608e490723a784ac05ede7174352d6e29c7dc",
+          "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.0.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 1,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "Efficiency assumptions",
+          "unit_kind": "docx_paragraph",
+          "source_role": "company_filing",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+            "source_locator": "cwp-docx-body/1|p=1",
+            "transform": "docx_visible_body_v1"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:9488fdb37630101b6ec59669461465a53235ba0dedcb2ae2f3e62d207b35a131",
+          "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.0.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 2,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "Efficiency depends on workload mix, token usage and silicon price performance.",
+          "unit_kind": "docx_paragraph",
+          "source_role": "company_filing",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+            "source_locator": "cwp-docx-body/1|p=2",
+            "transform": "docx_visible_body_v1"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:77fefd4a7a9be5627e48e083b4b02ad31e8743ac0f656c62c32c14aa3deab6cf",
+          "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.0.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 3,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "Q: Has customer validation finished?",
+          "unit_kind": "docx_paragraph",
+          "source_role": "analyst",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+            "source_locator": "cwp-docx-body/1|p=3",
+            "transform": "docx_visible_body_v1",
+            "qa_group_id": "docx-qa-1",
+            "section": "qa"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f7af5824566c1402ca26a920c19e34ca7ef143010b3c1406cfc2bf6803e0b97d",
+          "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.0.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 4,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "A: Customer validation remains planned next year.",
+          "unit_kind": "docx_paragraph",
+          "source_role": "management",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+            "source_locator": "cwp-docx-body/1|p=4",
+            "transform": "docx_visible_body_v1",
+            "qa_group_id": "docx-qa-1",
+            "section": "qa"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:f2a4e1be303a51af3fde848374faa3033c44805a8c6c328a70bad195ca590330",
+          "source_id": "urn:company-wiki:source:sha256:d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.0.0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": null,
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 0,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "New products received repeat customer orders.",
+          "unit_kind": "docx_table_cell",
+          "source_role": "company_filing",
+          "language": "und",
+          "quality_flags": [],
+          "metadata": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "docx",
+            "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+            "source_locator": "cwp-docx-body/1|t=0|r=0|c=0|p=0",
+            "transform": "docx_visible_body_v1",
+            "table_class": "unknown",
+            "table_class_basis": [],
+            "table_headers": [
+              "New products received repeat customer orders."
+            ],
+            "table_index": 0,
+            "row_index": 0,
+            "column_index": 0,
+            "cell_paragraph_index": 0
+          }
+        }
+      ]
+    },
+    "fingerprint": "a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4",
+    "before_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\before.json",
+    "after_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\docx-heading-implementation\\after.json"
+  },
+  "operations": {
+    "provider_calls": 0,
+    "external_model_calls": 0,
+    "new_fee": 0,
+    "source_edits": 0,
+    "production_config_edits": 0,
+    "writes_limited_to": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\final-heading-independent-review",
+    "input_old_original_reencoded": false
+  }
+}

@@ -187,7 +187,7 @@ request2的有限设置模板（profile沿原P1；ROOT为本次fresh单轮在现
 这段用于configured wrapper，不能绕它直接调用缺model选型的bareCLI。价格是原M3实际版本化保守估算，非现金发票；本文件未联网重查、不改价。existing generation_policy照读，0.7策略真实升级后新generation可需要模型，旧0.6不得当新缓存或伪resume。范例命令：
 
 ```powershell
-& $w08Python -B "$w08CwpCode/scripts/narrative_batch_configured.py" --llm-config "$w08CwpCode/config.yaml" --llm-provider deepseek --project-root "$w08Sources/CN-688012" --catalog-config "$w08Sources/CN-688012/config/source_catalog.yaml" --automation-db '<本次owned/CN/auto/narrative.sqlite3>' --work-dir '<本次owned/CN/work>' --request '<本次owned/CN/narrative-request2.json>'
+& $w08Python -B "$w08CwpCode/scripts/narrative_batch_configured.py" --llm-config "$w08CwpCode/config.yaml" --llm-provider deepseek --project-root "$w08Sources/CN-688012" --catalog-config "$w08Sources/CN-688012/config/source_catalog.yaml" --automation-db '<本次owned/CN/auto/narrative.sqlite3>' --work-dir '<本次owned/CN/work/本批新空子目录>' --request '<本次owned/CN/narrative-request2.json>'
 ```
 
 HK/US逐项换成相应真实root/catalog及独占AUTO/work/request路径，不能三个进程复用同一work目录。实际每missingitem一次POST，同run恢复零新费用；同generation另run精确reuse再读verify/ref。failure-final/partial/unknown照实保留，8192截断不提高caps或当success。source_preparation不会启动这个模型入口，真正调用记录必须分别保存。
@@ -236,3 +236,9 @@ HK/US逐项换成相应真实root/catalog及独占AUTO/work/request路径，不�
 5. 各真实输出的source/ref/span/replay/usage进入新三年RF研究与四独立审查，材料used/notused/covered_by逐项记。原M3预测/审查答案不作新研究输入；未得正文/截断/缺qualifying日期保持partial。原件保持，最后只清理本次owned临时副本并恢复baseline，不完整备份恢复演练。
 
 本文件给出的是确切已有CLI/路径和尚需生成的输入shape，不伪称尚未创建的请求已就绪。既有W08继续，未签三家研究完成、未启动新公司或loop。
+
+## 2026-10-11T01:33:27.333361+00:00 — 实跑工作目录勘误
+
+scope 的 work 是准备资料父目录；每个 narrative batch 的 --work-dir 必须为该父目录下新建、空的独占子目录（例如 work/executor-narrative）。不能传父目录，不能删除 source-owner 资料来腾空；同 run 恢复使用同批次目录，新批次另用空子目录。
+
+US 原预检 BATCH_WORK_DIRECTORY_NOT_EMPTY 没有发出模型请求，修正 CLI 子目录后才是真实首批；原失败不覆盖，不重置已知/未知费用。CN/HK 首次使用空子目录已成功进入实际供应商；不因本勘误重复其付费调用。

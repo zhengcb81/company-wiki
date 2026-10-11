@@ -1,0 +1,18 @@
+{
+  "attempt_id": "pw03",
+  "step_id": "execution-handoff",
+  "company": "HK-00700",
+  "executor_agent": "/root/pw03_hk_revenue_executor",
+  "evidence": [
+    {
+      "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\handoffs\\execution.json",
+      "sha256": "03ad7c33d0b66a48f966d4912c6eb307c8cbada15f8724ae6936576c9a9bfe4e",
+      "locator": "/manifest"
+    },
+    {
+      "artifact": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\execution-intake-HK-00700\\manifest-observation.json",
+      "locator": "/sha_mismatches"
+    }
+  ],
+  "observation": "Actual sealed partial executor; scope final/persistent limit_exceeded remains explicit; four fresh independent quality reviews pending."
+}

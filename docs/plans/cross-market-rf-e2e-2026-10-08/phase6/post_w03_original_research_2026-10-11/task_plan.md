@@ -1,4 +1,42 @@
+
+## 2026-10-11T02:29:45.752665+00:00 — native CI共因集中独立接受，正常发布
+
+final-heading独立报告json1eba0243…/md8f778369…原字节核符合；39 checks PASS、21 source/log记录PASS、29最小probe PASS，material findings空。关闭DOCX heading原问题；唯一Worker MIME映射接线及真实public old1.0/new1.1/原SQL和账务不变/新代不撞cache/复用0POST接受，不代签尚未发布的新CI。ROOT源码实现停写，仅正常发布7源及其测试/CI调度/PWF证据。三executorseal保持；CN storage第5位fresh审查真实派，US两审封存FAIL，另process/analyst仍进行。source发布后工程验收以精确HEAD CI；四审共因计划仍待，不宣称项目完成。
+
+## 2026-10-11T02:25:21.327949+00:00 — US fetch封存FAIL，analyst独立派出
+
+US fetch7finding/json e79fe03d…/md2c579a79…真实报告读回，11/11raw独立实开但formal9/11，0新下载；本次主问题为latest_as_of主动跳过local query，非期间pinned deck/SRG误SEC年季报路由，及request_error原因丢失。旧11项3PASS/2FAIL/5NOT_RUN/1BLOCKED；不以新本地0HTTP补签旧真实HTTP/ET/FMP未知。第4位analyst fresh上下文已实际dispatch，未分享其它审查初稿。原executor/费用不改。Git diff--check默认将既有CRLF普通PWF当尾空白，后续只读检查显式cr-at-eol识别已有换行，不重新编码rawproof、不改全局git设置或绕hooks。
+
+## 2026-10-11T02:24:24.649677+00:00 — DOCX所属层和ROOT公共责任集中GREEN，独立最后定点中
+
+child明确停写，4parser源+2测试与handoff SHA1d1bb0d…全部读回符合。实际DOCX RED11FAIL/6PASS；集中104PASS，最终typing后所属DOCX37PASS，Ruff/mypy四源绿但环境缺lxml-stubs明示排import-untyped；旧1.0全字段指纹a6580fca…保持且6真locator回放，新1.1默认真实样式/outline/正文override。ROOT实际native14PASS首次有效；公共首RED发现Worker版本map漏DOCX后复用统一formats修正，仅复验同公共一项1PASS/21.68s（whole25.855s），不是再跑15。4实际CLI exit0；old1.0原items/budget/binding、AUTO/source SQL不变；new1.1不同artifactID；same-generation再用0POST/0费用；总2次真实loopbackHTTP×92 synthetictokens，非真实供应商调用/母账费用。原件/config受保护，pytest ownedTEMP消失。ROOT三文件静态Ruff绿。source7SHA前后保持，原失败不覆盖。fresh独立final_heading reviewer正在核原c29c…反例/新inheritance+outline组合及公共日志，未提前签接受。Next Step：独立定点收尾→正常commit/master ff/普通push与精确新HEAD CI；三公司四审继续，经济/配置/DTO/持久空间问题待expert共因。
+
+## 2026-10-11T02:18:38.924151+00:00 — US storage独立封存；process真实调度
+
+US storage18check/8finding为FAIL，报告SHA0cf07997…/f18c8fc8…及真实完成事件已读回；原15项7PASS/5FAIL/2NOT_RUN/1BLOCKED。9/11正式来源、deck/call截断、release业务要点漏选、摘要→RF链缺失与未入库网页仍真实问题，结构一致不代质量。process fresh独立context已真实派，第三位reviewer，不共享其它初稿；三executor仍停写，旧运行/费用不改。DOCX所属层104PASS、Ruff与有限mypy已绿，待handoff停写及ROOT公共新旧parser节点/独立定点。最近read driver两不存在文件路径记录为工具调查错误，没有产品写入或重复收费。Next Step：同职责公共DOCX版本/缓存闭环→一次正常发布；并行完成12四审后专家根因PWF。
+
+## 2026-10-11T02:07:00.378613+00:00 — 三家公司真实封存，独立审查与解析责任补齐
+
+CN2445a99a…/HKa1cee8fc…/USccbbeea4…真实executor全部停写，ROOT交接完整列文件逐SHA读回为1102/349/401件无缺失/差异，0旧原件再次hash；各自partial不是研究PASS。CN/HK原生条件三年path存在但幅度未校准/经济支持不通过，US正式输出无，9请求费用已记母账不重置。CN全owned40,089,351B、HK56,173,279B、US22,174,039B；不同final对象超限明示，不能用compact projection替换native原snapshot。12四审队列READY；已实际派USstorage/fetch两个fresh上下文，后续按slot排，全部原157引用仍保留。
+
+CI独立确认真实DOCX标题样式在parser丢失，native财表/其它格式/旧policy/CI调度责任通过。单独[标题解析实施细则](ci-docx-investigation/DOCX_HEADING_CONTINUATION.md)已明确parser1.1默认、旧1.0 exactreplay、无source overlap与先RED/集中GREEN/公共大节点/独立定点；尚未修改实现。Next Step：并行三公司四审与DOCX所属层TDD修复→一次正常发布精确CI→四审汇总expert根因新PWF→逐包改进/原三家新执行/新三家泛化及原loop。goal active、原件/config/Dayu/其它owner WIP不改。
+
 # W03/W04/P7修后原三家真实研究大节点
+
+## 2026-10-11T01:44:15.318473+00:00 — P7-RF接受；真实研究运行与新接口根因登记
+
+P7-RF47f497ad主线/远端/精确CI38096229764与实际定点安装接受保持。三fresh独立executor实际9模型request，native只读ledger81763tokens/83773µUSD、freshunknown/unsettled0；累计413778tokens/334463µUSD含旧7hold，FX2764保留，剩余1586222/$19.662773。current cohort不得继续写本轮0付费，已明确source-preparation零费是此前阶段。
+
+DOCX真正CI共因先确定10FAIL/2PASS，再隔离native结构/0.7.1版本责任集中112PASS/19.89s、public4责任联合GREEN（3原PASS+1定点重验，不冒称重跑4）、static绿；docs/plans evidence-only触发差异先RED再42PASS/0.84s，源/测试仍全CI。canonical1152冻结，最新CI38101290406仍failure，待独立接受/三execution seal后正常发布新source及精确CI，不能用0f旧绿代签。
+
+实跑新增：DeepSeek空purpose policy默认high thinking耗尽8192输出；H126 artifact source_metadata附declared_language被RF exact-key拒绝；65 parent+coverage readrequest57784B超16KiB；MSFT deck/Synergy abstract source preparation缺form/kind能力。原失败/字节和paidusage留存，勿剪coverage/盲重发/公司特判。三年经济参数未校准与工程接口分开，四审后expert生成共因TDD PWF。四审按各自职责覆盖全量，去掉四角色重复全模型复算的泛指导，12agent独立/157旧问题引用保持。
+
+Next Step：三executor完整seal→每家四不同fresh reviewer→expert归并原157+本轮新根因；并行完成隔离CI修复独立接受，随后正常发布。goal active、原件/config/Dayu/其它owner WIP保持。
+
+
+## 2026-10-11T01:27:59.546391+00:00 — docs CI真实共因，隔离修复与研究并行
+
+1152dad7新CI38101290406 failure（1FAIL/3025PASS/6skip），原77,565B joblog及12容器variant反例封存。DOCX财表在base丢4后被generic上下文重加，hash排序影响随机出现的单元，原测试只排数字而漏表头；不是简单删/放宽测试。隔离[修复PWF](ci-docx-investigation/task_plan.md)先TDD和policy/cache/replay边界，canonical1152保持三执行冻结；执行seal后正常集中发布。不把旧0f绿代签新CI。
 
 ## 目标
 
@@ -6,7 +44,7 @@
 
 ## 当前状态
 
-来源已准备封存、3run/scope已创建；尚未派executor，也未调用业务API或模型。P7-RF47f497ad主线/远端/精确CI/定点安装完成。CWP source09正常推送发现7失败，五pure保旧断言TDD修及列举补充25PASS/独立2probe接受；ROOT另2责任test20PASS。W08公开来源URL producer组58责任联合、Cc补充3PASS/独立原反例接受。最终源码集中接受，已normalcommit/push至0f7540b5，3163PASS/174.85s、exactCI38100444473 success。新3scope已01:06:57Z初始化，source-only登记进行，RF executor尚未启动。必须使用最终发布实际源，不能拿旧accdeccc CI代签。
+P7-RF47f497ad已主线/远端/精确CI与实际定点安装接受。当前三家公司executor全部SEALED_PARTIAL，原运行字节不变；US storage/fetch两份独立FAIL已封存，process/analyst运行；CN/HK八审READY等待空槽。真实9供应商请求81763tokens/83773µUSD，母账413778tokens/334463µUSD另保留FX2764；费用不重置。CWP7源修复在隔离树完成，DOCX default1.1/old1.0及Worker version-map、strictselector0.7.1与公共节点已绿；集中独立最后定点未封存、尚未发布，canonical/origin仍1152dad7，该HEAD最新CI38101290406 failure。只能在正常source发布的新精确CI后签工程接受；工程绿不替四审研究。
 
 ## 完整接口与排他目录
 
@@ -41,4 +79,4 @@ E. 原三家有主要问题先根治并相关复验，四路完整接受后才�
 
 ## Next Step
 
-CWP源发布大节点完成；新3scope/cohort已实际冻结。SOURCE owner32/29准备已封存、ROOT READY已冻结；正常归档进度后正式派3fresh executor；各execution封存后4独立审查。
+先收本次CI共因独立最后定点→normal source commit / canonical ff-only / ordinary push / exact新source HEAD CI；并行按review_queue.json实际空槽完成剩余10份fresh独立审查。汇齐12报告后编程专家归并原157+新问题，先完整根因PWF再TDD实施；修后原三家新execution、再新A/H/US三家、NVDA及公司池loop。不能跳过四审或用旧运行覆写为新PASS。

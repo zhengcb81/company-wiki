@@ -7,6 +7,7 @@ import json
 import math
 from pathlib import Path
 from company_wiki import document_normalization as dn
+from company_wiki.document_normalization.units import require_parser_version
 
 PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 
@@ -92,11 +93,13 @@ class NarrativeNormalization:
 
     def identity(self, mime_type, *, document_id=None, parser_version=None):
         version = parser_version or self.parser_versions.get(document_id)
-        pptx = mime_type == PPTX_MIME
-        if version is not None and version not in (
-            {"1.0.0", "1.1.0", "2.0.0"} if pptx else {"1.0.0"}
-        ):
-            raise ValueError("unsupported normalization parser")
+        pptx = mime_type.split(";")[0].strip().lower() == PPTX_MIME
+        format_identity = dn.normalization_identity(mime_type)
+        if version is not None:
+            try:
+                require_parser_version(format_identity["format"], version)
+            except ValueError as exc:
+                raise ValueError("unsupported normalization parser") from exc
         use_ocr = pptx and (
             version == "2.0.0" or version is None and self.config is not None
         )
@@ -209,7 +212,7 @@ class NarrativeNormalization:
         if self.config is None:
             return text
         adapter = self._prepare_ocr()
-        seen = set()
+        seen: set[str] = set()
         total_pixels = 0
         limits = dn.OCRLimits(max_images=max_images, deadline=self.deadline)
         from company_wiki.document_normalization.local_ocr import image_dimensions

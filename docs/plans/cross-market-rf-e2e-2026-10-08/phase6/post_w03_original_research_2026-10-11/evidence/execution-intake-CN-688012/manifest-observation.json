@@ -1,0 +1,15 @@
+{
+  "observed_at": "2026-10-11T02:05:11.296438+00:00",
+  "run_id": "pw03-20261011T010657Z-cn-688012",
+  "manifest": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\execution\\manifest.json",
+  "manifest_sha256": "2445a99ac69cc5465da9f254b629a40ade24ad3b44a915963d9e1f88047ba121",
+  "seal_sha256": "db79419d5c47e323a17473ca382999f665b8b2eb70819e87068176d662118702",
+  "artifacts_checked": 1102,
+  "artifacts_bytes_read": 39398134,
+  "missing": [],
+  "sha_mismatches": [],
+  "raw_originals_rehashed": 0,
+  "authority": "artifact_integrity_not_research_quality",
+  "execution_outcome": "partial",
+  "artifact_completeness_declared_by_executor": "partial"
+}
