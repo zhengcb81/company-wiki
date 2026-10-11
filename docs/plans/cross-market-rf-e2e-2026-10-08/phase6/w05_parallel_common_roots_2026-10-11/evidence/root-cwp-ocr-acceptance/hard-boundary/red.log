@@ -1,0 +1,39 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\Projects\_harness_worktrees\w05\cwp-ocr-root
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 10 items / 7 deselected / 3 selected
+
+tests\document_normalization\test_isolated_ocr.py FFF                    [100%]
+
+================================== FAILURES ===================================
+_ test_noncooperative_native_stops_at_product_deadline[block-preflight-preflight] _
+tests\document_normalization\test_isolated_ocr.py:83: in test_noncooperative_native_stops_at_product_deadline
+    assert time.monotonic() - started < 1.0, 'product waited for noncooperative native return'
+E   AssertionError: product waited for noncooperative native return
+E   assert (74865.3474386 - 74863.345316) < 1.0
+E    +  where 74865.3474386 = <built-in function monotonic>()
+E    +    where <built-in function monotonic> = time.monotonic
+_ test_noncooperative_native_stops_at_product_deadline[block-inference-infer] _
+tests\document_normalization\test_isolated_ocr.py:83: in test_noncooperative_native_stops_at_product_deadline
+    assert time.monotonic() - started < 1.0, 'product waited for noncooperative native return'
+E   AssertionError: product waited for noncooperative native return
+E   assert (74868.5240745 - 74866.5206313) < 1.0
+E    +  where 74868.5240745 = <built-in function monotonic>()
+E    +    where <built-in function monotonic> = time.monotonic
+_______________ test_one_deadline_accumulates_across_inferences _______________
+tests\document_normalization\test_isolated_ocr.py:100: in test_one_deadline_accumulates_across_inferences
+    assert time.monotonic() - started < 1.0, 'later call reset the request deadline'
+E   AssertionError: later call reset the request deadline
+E   assert (74870.726864 - 74868.7190351) < 1.0
+E    +  where 74870.726864 = <built-in function monotonic>()
+E    +    where <built-in function monotonic> = time.monotonic
+=========================== short test summary info ===========================
+FAILED tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[block-preflight-preflight]
+FAILED tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[block-inference-infer]
+FAILED tests/document_normalization/test_isolated_ocr.py::test_one_deadline_accumulates_across_inferences
+======================= 3 failed, 7 deselected in 8.55s =======================

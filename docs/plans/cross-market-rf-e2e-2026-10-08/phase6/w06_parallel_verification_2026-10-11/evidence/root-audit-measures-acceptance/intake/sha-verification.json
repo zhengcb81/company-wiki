@@ -1,0 +1,186 @@
+[
+  {
+    "group": "changed",
+    "path": "skills/revenue-forecast-audit/scripts/financial_measure_audit.py",
+    "sha256": "ee06ea05d86b6d981751d3d93cb7cc9ef42702145de7b9bed32d1767d578b408",
+    "bytes": 34647,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "changed",
+    "path": "skills/revenue-forecast-audit/references/financial-measure-audit.md",
+    "sha256": "a1d80636df5d21b326c740d247c96138925b1d0a059104e261bea11bcf3238d4",
+    "bytes": 7628,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "changed",
+    "path": "tests/test_financial_measure_audit.py",
+    "sha256": "853311ddfcd4f16167c5a8c2e96aef272ce884966f6d74a8d63af831890b27fe",
+    "bytes": 21062,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "changed",
+    "path": "tests/test_financial_measure_audit_cli.py",
+    "sha256": "2bd27158f0c59cc030ecce1ad75123393be228be1a180e94a2cc0c2f1be0bab6",
+    "bytes": 6069,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "changed",
+    "path": "tests/fixtures/financial_measures/legal_cn.json",
+    "sha256": "8e69ac4c031af5b1ab4673a0e083cb88c7ab8b6fb86ccdfce24428093a699936",
+    "bytes": 2741,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "changed",
+    "path": "tests/fixtures/financial_measures/unit_error_hk.json",
+    "sha256": "4b9bfb7c5035dbb1b547e42901545de55fab51c75d51c6bd8e56b71b323d24ca",
+    "bytes": 1187,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "changed",
+    "path": "tests/fixtures/financial_measures/unknown_us.json",
+    "sha256": "56d7873724ae484f4f791963d78bbba011e07ea033ead4bbdb9d3c8d7b9fb662",
+    "bytes": 535,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "changed",
+    "path": "tools/run_financial_measure_e2e.py",
+    "sha256": "637f55ed02a167862f6e587a1165b6165864b203161299a1654be5667de64f26",
+    "bytes": 8002,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "changed",
+    "path": ".planning/w06-audit-measures/task_plan.md",
+    "sha256": "b7ac1b38cfa49a309172d4a92f802c04baf575ea2d8e87572323a9157a115aef",
+    "bytes": 2598,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "changed",
+    "path": ".planning/w06-audit-measures/findings.md",
+    "sha256": "f952a789700b2760e4bfcb73a058ebc5041fc4b04904bb58484ed6aaebd906a4",
+    "bytes": 3368,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "changed",
+    "path": ".planning/w06-audit-measures/progress.md",
+    "sha256": "26d985c36e9138ce93769d2018b8e3a1eb497d3c64d04e7a6f00a0ddea777ebe",
+    "bytes": 1293,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "input",
+    "path": "docs/handoffs/w06-audit-measures/input/construction_card.md",
+    "sha256": "f06a8cc1eb53c2d2294e0f563293a88cb0ca0cdc528a6df6e48d8fa1d85410e3",
+    "bytes": 5941,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "input",
+    "path": "docs/handoffs/w06-audit-measures/input/handoff_contract.md",
+    "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+    "bytes": 3345,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "input",
+    "path": "docs/handoffs/w06-audit-measures/input/inputs.json",
+    "sha256": "022c7c33d26f105a8f146dfaadf2a490b3ee544293758f09fbb7d9a1dbf02bad",
+    "bytes": 4447,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "input",
+    "path": "docs/handoffs/w06-audit-measures/input/ROOT_INTERFACE_AMENDMENT.md",
+    "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+    "bytes": 2220,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "manifest",
+    "path": "docs/handoffs/w06-audit-measures/handoff.md",
+    "sha256": "486318c28b5d3ca78d3fe9d3755349ef5d6f9d8ba56551a47b61e4b8192ebf01",
+    "bytes": 3392,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "manifest",
+    "path": "docs/handoffs/w06-audit-measures/handoff.json",
+    "sha256": "136056b625b1c163cb23829046ed05c8be6bc83b9b23068cafa5b8e9c6d90308",
+    "bytes": 10804,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "manifest",
+    "path": "docs/handoffs/w06-audit-measures/logs/RED_unit_cli.txt",
+    "sha256": "d3a85b53861111c0e21dca8418ef09d957771268a829caf235c583ebacf49239",
+    "bytes": 37016,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "manifest",
+    "path": "docs/handoffs/w06-audit-measures/logs/GREEN_unit_cli.txt",
+    "sha256": "9b09991433169074718921acbc756d510d0e71e25cf198721376d9c04a0f33e8",
+    "bytes": 5867,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "manifest",
+    "path": "docs/handoffs/w06-audit-measures/logs/GREEN_numeric_audit_unchanged.txt",
+    "sha256": "79823070b213e7b7fbcee8c84f0a9998f6fd55ce97282980e11cf27d70f1b5e2",
+    "bytes": 1086,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "manifest",
+    "path": "docs/handoffs/w06-audit-measures/logs/E2E_run.txt",
+    "sha256": "ac0e7e68eb762744fb856cd3d4b5896aed970032ebc11ec9f774cc407cfbf024",
+    "bytes": 239,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "manifest",
+    "path": "docs/handoffs/w06-audit-measures/logs/E2E_receipt.json",
+    "sha256": "d4caa59463d1129c4e33d288959efc65976757e04d7561f39c65984927588bd9",
+    "bytes": 4144,
+    "sha_match": true,
+    "size_match": true
+  },
+  {
+    "group": "manifest",
+    "path": "docs/handoffs/w06-audit-measures/logs/FINAL_full_suite.txt",
+    "sha256": "fe355a7e468ec98a28827e91cd665b5c40957d4104b68b174b3812991b41e34b",
+    "bytes": 30148,
+    "sha_match": true,
+    "size_match": true
+  }
+]

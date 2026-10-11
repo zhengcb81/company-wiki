@@ -1,0 +1,186 @@
+{
+  "schema_version": "w06-independent-real-cli-probes/1",
+  "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\intake\\cwpa-independent-measures-cli",
+  "initial": "absent",
+  "final": "absent",
+  "cleanup_verified": true,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "source_truth_verified": false,
+  "economic_reasonableness": "not_evaluated",
+  "cases": [
+    {
+      "id": "conversion_result_missing_source_ref",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\intake\\cwpa-independent-measures-cli\\conversion_result_missing_source_ref.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\intake\\cwpa-independent-measures-cli\\attempts"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"attempt_id\": \"20261011T112006Z-a35e8d3f\", \"attempt_dir\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\w06_parallel_verification_2026-10-11\\\\evidence\\\\root-audit-measures-acceptance\\\\intake\\\\cwpa-independent-measures-cli\\\\attempts\\\\20261011T112006Z-a35e8d3f\", \"output_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\w06_parallel_verification_2026-10-11\\\\evidence\\\\root-audit-measures-acceptance\\\\intake\\\\cwpa-independent-measures-cli\\\\attempts\\\\20261011T112006Z-a35e8d3f\\\\report.json\", \"overall\": \"PASS\", \"exit_code\": 0, \"check_kind\": \"declared_measure_and_relation_checks_not_source_truth\", \"source_truth_verified\": false, \"economic_reasonableness\": \"not_evaluated\"}\n",
+      "stderr": "",
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD billion",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:conversion",
+            "kind": "relation",
+            "op": "scale_conversion",
+            "status": "PASS",
+            "expected": "12.0",
+            "actual": "12",
+            "units": "USD 亿",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": null,
+            "diagnostics": [
+              {
+                "code": "missing_source_ref",
+                "detail": "reported_fact requires source_id+locator"
+              }
+            ]
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      }
+    },
+    {
+      "id": "sum_output_silently_relabels_currency_entity_definition",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\intake\\cwpa-independent-measures-cli\\sum_output_silently_relabels_currency_entity_definition.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\intake\\cwpa-independent-measures-cli\\attempts"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"attempt_id\": \"20261011T112006Z-769b28cb\", \"attempt_dir\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\w06_parallel_verification_2026-10-11\\\\evidence\\\\root-audit-measures-acceptance\\\\intake\\\\cwpa-independent-measures-cli\\\\attempts\\\\20261011T112006Z-769b28cb\", \"output_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\w06_parallel_verification_2026-10-11\\\\evidence\\\\root-audit-measures-acceptance\\\\intake\\\\cwpa-independent-measures-cli\\\\attempts\\\\20261011T112006Z-769b28cb\\\\report.json\", \"overall\": \"PASS\", \"exit_code\": 0, \"check_kind\": \"declared_measure_and_relation_checks_not_source_truth\", \"source_truth_verified\": false, \"economic_reasonableness\": \"not_evaluated\"}\n",
+      "stderr": "",
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:h1",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-01-01..2024-06-30",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          },
+          {
+            "check_id": "obs:h2",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-07-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:sum",
+            "kind": "relation",
+            "op": "sum",
+            "status": "PASS",
+            "expected": "180",
+            "actual": "180",
+            "units": "CNY million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 2,
+          "observation_denominator": 2,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      }
+    },
+    {
+      "id": "difference_one_operand_should_diagnose_not_crash",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\intake\\cwpa-independent-measures-cli\\difference_one_operand_should_diagnose_not_crash.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\intake\\cwpa-independent-measures-cli\\attempts"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py\", line 717, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py\", line 701, in main\n    report = audit_measures(ledger)\n  File \"C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py\", line 641, in audit_measures\n    relation_checks = [_check_relation(rel, norms) for rel in relations]\n                       ~~~~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py\", line 474, in _check_relation\n    a, b = resolved[0], resolved[1]\n                        ~~~~~~~~^^^\nIndexError: list index out of range\n",
+      "report": null
+    }
+  ]
+}

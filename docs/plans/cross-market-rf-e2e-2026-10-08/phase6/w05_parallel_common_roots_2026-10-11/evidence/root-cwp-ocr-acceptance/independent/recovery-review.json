@@ -1,0 +1,28 @@
+{
+  "schema_version": "root-w05-ocr-independent-review/1",
+  "stage": "frozen_recovery_budget_geometry",
+  "status": "PASS_WITH_SCOPE",
+  "tree": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/cwp-ocr-root",
+  "source_sha256": {
+    "src/company_wiki/document_normalization/local_ocr.py": "ff7db0e6aeea844c1f32d3de3f3fdfa7965e6a3cd4f3fe56d4e455efc08a574f",
+    "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe",
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "bc11c76be2d0fcf6ca586f9a410467e88e561e21e7bd76a73fa46b29c9b0dbe7"
+  },
+  "counts": {"behavioral_failed":0,"passed":6,"harness_error":0},
+  "evidence": [
+    {"path":"counterexamples.py","sha256":"0ee1d69c4135fd49db47fe0ca7bac2c4782a3a5617b053555bdcfd60cc8d9169","expectations_changed":false},
+    {"path":"final-counterexamples.json","sha256":"26ba4e506d6b3a3ca7aee8fea8ff68ddcfa1f13cba081827b222da49d5e31e1a"},
+    {"path":"original-counterexamples.json","sha256":"6c86ea1042bd1abded0fcbe6163e5842a22d6887fbaaa0ade06e1b8642fbda9c","retained":true}
+  ],
+  "findings": [
+    {"id":"OCR-I01","status":"closed_for_fixed_sha","mechanism":"Atomic pre-inference source/ROI reservation in one request accumulator"},
+    {"id":"OCR-I02","status":"closed_for_fixed_sha","mechanism":"Mapped actual filtered drop remainder prevents partial recovery acceptance"},
+    {"id":"OCR-I03","status":"closed_for_fixed_sha","mechanism":"Whole bbox must fit one true split chunk; unmappable extras prevent acceptance"},
+    {"id":"OCR-I04","status":"closed_for_fixed_sha","mechanism":"PIL CCW pre-canvas inverse geometry with independent non-square forward expectations"}
+  ],
+  "formal_test_result_reviewed":{"executed_by":"ROOT repair agent","passed":37,"independent_rerun":false,"old_fixture_bounds_adjustment":"valid; successful text and failure semantics retained plus negative padding/cross-chunk tests"},
+  "algorithm_identity":"bounded-source-roi/2",
+  "remaining":["Hard isolated OCR module freeze and focused lifecycle review pending","ROOT actual source E2E pending","W04/RF downstream quality remains outside receipt"],
+  "cost":{"provider_calls":0,"paid_usd":"0","cloud_ocr_calls":0,"model_downloads":0},
+  "cleanup":{"scratch_created":false,"product_unchanged":true,"original_failure_retained":true}
+}

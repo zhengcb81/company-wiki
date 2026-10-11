@@ -1,0 +1,43 @@
+{
+  "schema_version": "w06-independent-git-intake/1",
+  "leaf": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/audit-measures",
+  "branch": "codex/w06-audit-measures",
+  "head": "6a50d7ed1b4cf389589c7ca62b4ab161b5dc0ad1",
+  "status": [],
+  "commits": [
+    "6a50d7ed1b4cf389589c7ca62b4ab161b5dc0ad1 docs(audit): W06-AUDIT-MEASURES handoff package (handoff.json/md, manifest)",
+    "098b4d03f65bfa19a57eb5ae802f44c08d6c8dc6 feat(audit): financial-measure 口径 and relation audit tool (W06-AUDIT-MEASURES)"
+  ],
+  "changed_paths": [
+    ".planning/w06-audit-measures/findings.md",
+    ".planning/w06-audit-measures/progress.md",
+    ".planning/w06-audit-measures/task_plan.md",
+    "docs/handoffs/w06-audit-measures/handoff.json",
+    "docs/handoffs/w06-audit-measures/handoff.md",
+    "docs/handoffs/w06-audit-measures/input/ROOT_INTERFACE_AMENDMENT.md",
+    "docs/handoffs/w06-audit-measures/input/amendment_manifest.json",
+    "docs/handoffs/w06-audit-measures/input/construction_card.md",
+    "docs/handoffs/w06-audit-measures/input/handoff_contract.md",
+    "docs/handoffs/w06-audit-measures/input/inputs.json",
+    "docs/handoffs/w06-audit-measures/input/manifest.json",
+    "docs/handoffs/w06-audit-measures/logs/E2E_receipt.json",
+    "docs/handoffs/w06-audit-measures/logs/E2E_run.txt",
+    "docs/handoffs/w06-audit-measures/logs/FINAL_full_suite.txt",
+    "docs/handoffs/w06-audit-measures/logs/GREEN_numeric_audit_unchanged.txt",
+    "docs/handoffs/w06-audit-measures/logs/GREEN_unit_cli.txt",
+    "docs/handoffs/w06-audit-measures/logs/RED_unit_cli.txt",
+    "docs/handoffs/w06-audit-measures/manifest.json",
+    "skills/revenue-forecast-audit/references/financial-measure-audit.md",
+    "skills/revenue-forecast-audit/scripts/financial_measure_audit.py",
+    "tests/fixtures/financial_measures/legal_cn.json",
+    "tests/fixtures/financial_measures/unit_error_hk.json",
+    "tests/fixtures/financial_measures/unknown_us.json",
+    "tests/test_financial_measure_audit.py",
+    "tests/test_financial_measure_audit_cli.py",
+    "tools/run_financial_measure_e2e.py"
+  ],
+  "canonical_main": "321d4c165575e81add3b4aa1ee9ba0a047ca6082",
+  "canonical_status": [],
+  "canonical_remote": [],
+  "shared_dependency_changes": []
+}

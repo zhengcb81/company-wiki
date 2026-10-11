@@ -1,0 +1,67 @@
+{
+  "schema_version": "root-w05-ocr-independent-manifest/1",
+  "status": "FAIL_REAL_E2E",
+  "engineering_scope_result": "PASS_WITH_SCOPE",
+  "files": [
+    {
+      "path": "counterexamples.py",
+      "bytes": 8098,
+      "sha256": "0ee1d69c4135fd49db47fe0ca7bac2c4782a3a5617b053555bdcfd60cc8d9169"
+    },
+    {
+      "path": "final-counterexamples.json",
+      "bytes": 8808,
+      "sha256": "26ba4e506d6b3a3ca7aee8fea8ff68ddcfa1f13cba081827b222da49d5e31e1a"
+    },
+    {
+      "path": "final-review.json",
+      "bytes": 4986,
+      "sha256": "78fd8bcc7cb543c67f251a46957845ba0b42d4974158d505dec15ef853d6a32e"
+    },
+    {
+      "path": "final-review.md",
+      "bytes": 7559,
+      "sha256": "5f8ddfb5164824c4954c7c0a101a25bb161b799ff6d44d96eb69e37ae5091356"
+    },
+    {
+      "path": "frozen-counterexamples.json",
+      "bytes": 8808,
+      "sha256": "7ad080a7e5f563a4017dffd6f6ccedf47d13263d90c0e741ee2ff397a6efac33"
+    },
+    {
+      "path": "hard-startup-probe.py",
+      "bytes": 3567,
+      "sha256": "dc5d4e7efb9e1abd25a86d4a98b7a4e6a958a1f44adba6542d8f405e84d1cab4"
+    },
+    {
+      "path": "hard-startup-result.json",
+      "bytes": 1318,
+      "sha256": "946417781df16c120a2405848ed10e35af6086acd682441122e0a5a5373ec918"
+    },
+    {
+      "path": "original-counterexamples.json",
+      "bytes": 10646,
+      "sha256": "6c86ea1042bd1abded0fcbe6163e5842a22d6887fbaaa0ade06e1b8642fbda9c"
+    },
+    {
+      "path": "original-review.json",
+      "bytes": 2705,
+      "sha256": "5471fb286aa944c23b17482ee3a841c4f1260415f34f837696484ad515ad0601"
+    },
+    {
+      "path": "original-review.md",
+      "bytes": 5802,
+      "sha256": "963796a7c1935a6406da8cf5c4cd6421887216b0458be09bfddffa2ce3ed1129"
+    },
+    {
+      "path": "recovery-review.json",
+      "bytes": 2362,
+      "sha256": "ba9fe6d420dcadac5becef090db1cb6acc9ef43f67867e6fbe409cafd70121c6"
+    },
+    {
+      "path": "recovery-review.md",
+      "bytes": 3744,
+      "sha256": "ab33a65ae4033b5a3a5d89311e3b32ff1c385048e22eb845ff8e486c2de899a7"
+    }
+  ]
+}

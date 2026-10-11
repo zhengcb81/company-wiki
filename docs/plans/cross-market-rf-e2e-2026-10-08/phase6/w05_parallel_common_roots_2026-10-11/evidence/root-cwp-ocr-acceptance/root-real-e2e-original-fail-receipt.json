@@ -1,0 +1,31 @@
+{
+  "status": "FAIL",
+  "scratch_before": "absent",
+  "input_before": {
+    "\\\\?\\C:\\Users\\郑曾波\\Projects\\company-wiki\\.source-preservation\\w04-temp-20261011\\US-MSFT\\roots\\prior_scope_raw\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "\\\\?\\C:\\Users\\郑曾波\\Projects\\company-wiki\\.source-preservation\\w04-temp-20261011\\US-MSFT\\replay-config.yaml": "c9635ab393464ee01f85fcba4e907ecd40cdf3e39ae76ebd9c8e11c0a0ce0b86",
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr-root\\config\\local_ocr.json": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "project_network_calls": 0,
+  "project_provider_calls": 0,
+  "project_llm_calls": 0,
+  "cost_usd": 0,
+  "hard_limit_per_phase_seconds": 90,
+  "outer_hard_limit_seconds": 195,
+  "exit_code": 1,
+  "result_status": "FAILED",
+  "error": "AssertionError: ",
+  "elapsed_seconds": 86.166,
+  "input_after": {
+    "\\\\?\\C:\\Users\\郑曾波\\Projects\\company-wiki\\.source-preservation\\w04-temp-20261011\\US-MSFT\\roots\\prior_scope_raw\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "\\\\?\\C:\\Users\\郑曾波\\Projects\\company-wiki\\.source-preservation\\w04-temp-20261011\\US-MSFT\\replay-config.yaml": "c9635ab393464ee01f85fcba4e907ecd40cdf3e39ae76ebd9c8e11c0a0ce0b86",
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr-root\\config\\local_ocr.json": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "raw_config_unchanged": true,
+  "scratch_peak_retained_bytes": 588,
+  "scratch_after": "absent"
+}

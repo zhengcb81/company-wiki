@@ -1,0 +1,95 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\Projects\_harness_worktrees\w05\cwp-ocr-root
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 34 items / 23 deselected / 11 selected
+
+tests\document_normalization\test_ocr_region_recovery.py FF.F.FFFF       [ 81%]
+tests\document_normalization\test_ocr_region_composition.py FF           [100%]
+
+================================== FAILURES ===================================
+_____ test_filtered_low_score_remainder_prevents_partial_recovery[False] ______
+tests\document_normalization\test_ocr_region_recovery.py:574: in test_filtered_low_score_remainder_prevents_partial_recovery
+    assert got.recovered_lines == ()
+E   AssertionError: assert (OCRLine(text...idence=0.99),) == ()
+E     
+E     Left contains one more item: OCRLine(text='Revenue increased', box=(10.0, 21.0, 100.0, 44.0), confidence=0.99)
+E     Use -v to get more diff
+______ test_filtered_low_score_remainder_prevents_partial_recovery[True] ______
+tests\document_normalization\test_ocr_region_recovery.py:574: in test_filtered_low_score_remainder_prevents_partial_recovery
+    assert got.recovered_lines == ()
+E   AssertionError: assert (OCRLine(text...idence=0.99),) == ()
+E     
+E     Left contains one more item: OCRLine(text='Clean fragment Clean fragment', box=(11.0, 28.0, 190.0, 38.0), confidence=0.99)
+E     Use -v to get more diff
+________ test_rotation_forward_inverse_matches_pil_canvas_geometry[90] ________
+tests\document_normalization\test_ocr_region_recovery.py:602: in test_rotation_forward_inverse_matches_pil_canvas_geometry
+    assert rr.map_box({"kind": "rotate", "angle": angle, "size": mask.size}, forward) == (30., 2., 38., 6.)
+E   assert (10.0, 2.0, 18.0, 6.0) == (30.0, 2.0, 38.0, 6.0)
+E     
+E     At index 0 diff: 10.0 != 30.0
+E     Use -v to get more diff
+_______ test_rotation_forward_inverse_matches_pil_canvas_geometry[270] ________
+tests\document_normalization\test_ocr_region_recovery.py:602: in test_rotation_forward_inverse_matches_pil_canvas_geometry
+    assert rr.map_box({"kind": "rotate", "angle": angle, "size": mask.size}, forward) == (30., 2., 38., 6.)
+E   assert (30.0, 22.0, 38.0, 26.0) == (30.0, 2.0, 38.0, 6.0)
+E     
+E     At index 1 diff: 22.0 != 2.0
+E     Use -v to get more diff
+____ test_split_stack_requires_whole_box_inside_actual_chunk[cross_chunk] _____
+tests\document_normalization\test_ocr_region_recovery.py:619: in test_split_stack_requires_whole_box_inside_actual_chunk
+    assert rr.map_box(transform, box) is None
+E   AssertionError: assert (92.0, 9.0, 141.0, 36.0) is None
+E    +  where (92.0, 9.0, 141.0, 36.0) = <function map_box at 0x000001272E36D760>({'transform': 'split-stack/1', 'kind': 'split-stack', 'size': (171, 76), 'chunks': ((0, 0, 10, 21, 0, 81), (0, 42, 91, 21, 81, 252))}, (1.0, 30.0, 50.0, 57.0))
+E    +    where <function map_box at 0x000001272E36D760> = rr.map_box
+___ test_split_stack_requires_whole_box_inside_actual_chunk[right_padding] ____
+tests\document_normalization\test_ocr_region_recovery.py:619: in test_split_stack_requires_whole_box_inside_actual_chunk
+    assert rr.map_box(transform, box) is None
+E   AssertionError: assert (11.0, 26.0, 92.0, 36.0) is None
+E    +  where (11.0, 26.0, 92.0, 36.0) = <function map_box at 0x000001272E36D760>({'transform': 'split-stack/1', 'kind': 'split-stack', 'size': (171, 76), 'chunks': ((0, 0, 10, 21, 0, 81), (0, 42, 91, 21, 81, 252))}, (1.0, 5.0, 82.0, 15.0))
+E    +    where <function map_box at 0x000001272E36D760> = rr.map_box
+__ test_split_stack_requires_whole_box_inside_actual_chunk[below_last_chunk] __
+tests\document_normalization\test_ocr_region_recovery.py:619: in test_split_stack_requires_whole_box_inside_actual_chunk
+    assert rr.map_box(transform, box) is None
+E   AssertionError: assert (92.0, 52.0, 141.0, 58.0) is None
+E    +  where (92.0, 52.0, 141.0, 58.0) = <function map_box at 0x000001272E36D760>({'transform': 'split-stack/1', 'kind': 'split-stack', 'size': (171, 76), 'chunks': ((0, 0, 10, 21, 0, 81), (0, 42, 91, 21, 81, 252))}, (1.0, 73.0, 50.0, 79.0))
+E    +    where <function map_box at 0x000001272E36D760> = rr.map_box
+___________ test_roi_pixels_are_charged_request_wide_not_per_image ____________
+tests\document_normalization\test_ocr_region_composition.py:249: in test_roi_pixels_are_charged_request_wide_not_per_image
+    assert fake.calls == [(320, 80), crop_size_for(None), (640, 160)]
+E   assert [(320, 80), (...0), (290, 54)] == [(320, 80), (...), (640, 160)]
+E     
+E     Left contains one more item: (290, 54)
+E     Use -v to get more diff
+___________ test_recovery_pixel_budget_rejects_before_roi_inference ___________
+tests\document_normalization\test_ocr_region_composition.py:397: in test_recovery_pixel_budget_rejects_before_roi_inference
+    assert fake.calls == [(320, 80)]
+E   assert [(320, 80), (290, 54)] == [(320, 80)]
+E     
+E     Left contains one more item: (290, 54)
+E     Use -v to get more diff
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\cacheprovider.py:469
+  C:\Miniconda\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: cache could not write path C:\Users\֣����\Projects\_harness_worktrees\w05\cwp-ocr-root\.pytest_cache\v\cache\nodeids: [Errno 13] Permission denied: 'C:\\Users\\֣����\\Projects\\_harness_worktrees\\w05\\cwp-ocr-root\\.pytest_cache\\v\\cache\\nodeids'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\cacheprovider.py:423
+  C:\Miniconda\Lib\site-packages\_pytest\cacheprovider.py:423: PytestCacheWarning: cache could not write path C:\Users\֣����\Projects\_harness_worktrees\w05\cwp-ocr-root\.pytest_cache\v\cache\lastfailed: [Errno 13] Permission denied: 'C:\\Users\\֣����\\Projects\\_harness_worktrees\\w05\\cwp-ocr-root\\.pytest_cache\\v\\cache\\lastfailed'
+    config.cache.set("cache/lastfailed", self.lastfailed)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/document_normalization/test_ocr_region_recovery.py::test_filtered_low_score_remainder_prevents_partial_recovery[False]
+FAILED tests/document_normalization/test_ocr_region_recovery.py::test_filtered_low_score_remainder_prevents_partial_recovery[True]
+FAILED tests/document_normalization/test_ocr_region_recovery.py::test_rotation_forward_inverse_matches_pil_canvas_geometry[90]
+FAILED tests/document_normalization/test_ocr_region_recovery.py::test_rotation_forward_inverse_matches_pil_canvas_geometry[270]
+FAILED tests/document_normalization/test_ocr_region_recovery.py::test_split_stack_requires_whole_box_inside_actual_chunk[cross_chunk]
+FAILED tests/document_normalization/test_ocr_region_recovery.py::test_split_stack_requires_whole_box_inside_actual_chunk[right_padding]
+FAILED tests/document_normalization/test_ocr_region_recovery.py::test_split_stack_requires_whole_box_inside_actual_chunk[below_last_chunk]
+FAILED tests/document_normalization/test_ocr_region_composition.py::test_roi_pixels_are_charged_request_wide_not_per_image
+FAILED tests/document_normalization/test_ocr_region_composition.py::test_recovery_pixel_budget_rejects_before_roi_inference
+=========== 9 failed, 2 passed, 23 deselected, 2 warnings in 2.14s ============

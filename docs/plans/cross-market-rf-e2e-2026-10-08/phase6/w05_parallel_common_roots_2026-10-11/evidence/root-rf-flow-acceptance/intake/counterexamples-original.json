@@ -1,0 +1,38 @@
+{
+  "project_calls": 0,
+  "product_writes": 0,
+  "manifest": {
+    "checked_records": 87,
+    "failures": []
+  },
+  "probes": [
+    {
+      "case": "valid_post_control_bridge",
+      "expected": "accept",
+      "actual": "accepted",
+      "composed_value": 31.29190208,
+      "fy2026_low": 181.29190208
+    },
+    {
+      "case": "annual_alias_of_partial_flow",
+      "expected": "reject",
+      "actual": "accepted",
+      "composed_value": 1.29190208,
+      "fy2026_low": 151.29190208
+    },
+    {
+      "case": "rationale_cannot_move_2026_amount_to_2027",
+      "expected": "reject",
+      "actual": "accepted",
+      "composed_value": 31.29190208,
+      "fy2026_low": 150.0
+    },
+    {
+      "case": "same_perimeter_h1_plus_own_q2",
+      "expected": "reject",
+      "actual": "accepted",
+      "composed_value": 85.0,
+      "fy2026_low": 235.0
+    }
+  ]
+}

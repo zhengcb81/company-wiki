@@ -1,0 +1,27 @@
+
+=================================== ERRORS ====================================
+______________ ERROR collecting tests/test_contract_registry.py _______________
+ImportError while importing test module 'C:\Users\֣����\Projects\_harness_worktrees\w05\rf-flow\tests\test_contract_registry.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_contract_registry.py:25: in <module>
+    from contract_registry import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'contract_registry'
+____________ ERROR collecting tests/test_compatibility_manifest.py ____________
+ImportError while importing test module 'C:\Users\֣����\Projects\_harness_worktrees\w05\rf-flow\tests\test_compatibility_manifest.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_compatibility_manifest.py:25: in <module>
+    from compatibility_manifest import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'compatibility_manifest'
+=========================== short test summary info ===========================
+ERROR tests/test_contract_registry.py
+ERROR tests/test_compatibility_manifest.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+no tests collected, 2 errors in 0.76s

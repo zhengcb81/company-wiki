@@ -1,0 +1,330 @@
+{
+  "schema": "root-w05-ocr-independent-probes/1",
+  "tree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr-root",
+  "source_sha256": {
+    "src/company_wiki/document_normalization/local_ocr.py": "ff7db0e6aeea844c1f32d3de3f3fdfa7965e6a3cd4f3fe56d4e455efc08a574f",
+    "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe",
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "bc11c76be2d0fcf6ca586f9a410467e88e561e21e7bd76a73fa46b29c9b0dbe7"
+  },
+  "results": [
+    {
+      "test": "test_budget_reserves_before_inference",
+      "status": "PASS"
+    },
+    {
+      "test": "test_filtered_partial_margin_stays_unrecovered",
+      "status": "PASS"
+    },
+    {
+      "test": "test_filtered_partial_stack_stays_unrecovered",
+      "status": "PASS"
+    },
+    {
+      "test": "test_ccw_90_returns_original_geometry",
+      "status": "PASS"
+    },
+    {
+      "test": "test_split_cross_chunk_is_not_one_source_box",
+      "status": "PASS"
+    },
+    {
+      "test": "test_overlap_does_not_drop_distinct_text",
+      "status": "PASS"
+    }
+  ],
+  "observations": {
+    "budget_before_inference": {
+      "cap": 25601,
+      "calls": [
+        [
+          320,
+          80
+        ]
+      ],
+      "rejected": true,
+      "roi_pixels": 15660,
+      "expected": "No ROI OCR call when remaining pixels=1"
+    },
+    "filtered_partial_margin": {
+      "emitted": [],
+      "diagnostics": {
+        "schema_version": "cwp-ocr-region-diagnostics/1",
+        "detected": null,
+        "recognized": 1,
+        "accepted": 0,
+        "dropped": [
+          {
+            "box": [
+              10.0,
+              20.0,
+              300.0,
+              52.0
+            ],
+            "confidence": 0.43,
+            "text": "g ar b le",
+            "reason": "low_text_score"
+          }
+        ],
+        "recovery": [
+          {
+            "box": [
+              10.0,
+              20.0,
+              300.0,
+              52.0
+            ],
+            "status": "unrecovered",
+            "attempts": [
+              {
+                "transform": "roi-margin-crop/1",
+                "params": {
+                  "margin_ratio": 0.35
+                },
+                "outcome": "rejected",
+                "lines": [
+                  [
+                    "Revenue increased",
+                    0.99
+                  ],
+                  [
+                    "unread material qualifier",
+                    0.3
+                  ]
+                ],
+                "error": null,
+                "note": "in_region_dropped_text"
+              },
+              {
+                "transform": "upscale-2x/1",
+                "params": {
+                  "factor": 2.0
+                },
+                "outcome": "rejected",
+                "lines": [
+                  [
+                    "Revenue increased",
+                    0.99
+                  ],
+                  [
+                    "unread material qualifier",
+                    0.3
+                  ]
+                ],
+                "error": null,
+                "note": "in_region_dropped_text"
+              }
+            ],
+            "recovered_text": null,
+            "recovered_box": null,
+            "recovered_confidence": null
+          }
+        ]
+      },
+      "expected": "Do not mark full region recovered while its in-region remainder is dropped"
+    },
+    "filtered_partial_stack": {
+      "emitted": [],
+      "diagnostics": {
+        "schema_version": "cwp-ocr-region-diagnostics/1",
+        "detected": null,
+        "recognized": 1,
+        "accepted": 0,
+        "dropped": [
+          {
+            "box": [
+              10.0,
+              28.0,
+              262.0,
+              48.0
+            ],
+            "confidence": 0.44,
+            "text": "g ar b le",
+            "reason": "low_text_score"
+          }
+        ],
+        "recovery": [
+          {
+            "box": [
+              10.0,
+              28.0,
+              262.0,
+              48.0
+            ],
+            "status": "unrecovered",
+            "attempts": [
+              {
+                "transform": "roi-margin-crop/1",
+                "params": {
+                  "margin_ratio": 0.35
+                },
+                "outcome": "rejected",
+                "lines": [
+                  [
+                    "bad",
+                    0.3
+                  ]
+                ],
+                "error": null,
+                "note": "in_region_dropped_text"
+              },
+              {
+                "transform": "split-stack/1",
+                "params": {
+                  "target_ratio": 6.5,
+                  "gap_rows": 8,
+                  "min_gap": 5,
+                  "dark_threshold": 200
+                },
+                "outcome": "rejected",
+                "lines": [
+                  [
+                    "Clean fragment",
+                    0.99
+                  ],
+                  [
+                    "Clean fragment",
+                    0.99
+                  ],
+                  [
+                    "unread qualifier",
+                    0.3
+                  ]
+                ],
+                "error": null,
+                "note": "in_region_dropped_text"
+              }
+            ],
+            "recovered_text": null,
+            "recovered_box": null,
+            "recovered_confidence": null
+          }
+        ]
+      },
+      "expected": "All material chunks including diagnostic dropped text must be accounted for"
+    },
+    "ccw_90_mapping": {
+      "actual": [
+        30.0,
+        2.0,
+        38.0,
+        6.0
+      ],
+      "expected": [
+        30.0,
+        2.0,
+        38.0,
+        6.0
+      ],
+      "in_use_by_recovery_ladder": false
+    },
+    "split_cross_chunk": {
+      "actual": null,
+      "box": [
+        1.0,
+        30.0,
+        90.0,
+        75.0
+      ],
+      "transform": {
+        "transform": "split-stack/1",
+        "kind": "split-stack",
+        "size": [
+          171,
+          76
+        ],
+        "chunks": [
+          [
+            0,
+            0,
+            10,
+            21,
+            0,
+            81
+          ],
+          [
+            0,
+            42,
+            91,
+            21,
+            81,
+            252
+          ]
+        ]
+      },
+      "expected": "Reject boxes spanning disjoint chunk rows rather than translating their center"
+    },
+    "distinct_overlap": {
+      "emitted": [],
+      "diagnostics": {
+        "schema_version": "cwp-ocr-region-diagnostics/1",
+        "detected": null,
+        "recognized": 2,
+        "accepted": 1,
+        "dropped": [
+          {
+            "box": [
+              10.0,
+              20.0,
+              300.0,
+              52.0
+            ],
+            "confidence": 0.44,
+            "text": "g ar b le",
+            "reason": "low_text_score"
+          }
+        ],
+        "recovery": [
+          {
+            "box": [
+              10.0,
+              20.0,
+              300.0,
+              52.0
+            ],
+            "status": "unrecovered",
+            "attempts": [
+              {
+                "transform": "roi-margin-crop/1",
+                "params": {
+                  "margin_ratio": 0.35
+                },
+                "outcome": "rejected",
+                "lines": [
+                  [
+                    "Additional distinct full label",
+                    0.99
+                  ]
+                ],
+                "error": null,
+                "note": "overlaps_accepted_line"
+              },
+              {
+                "transform": "upscale-2x/1",
+                "params": {
+                  "factor": 2.0
+                },
+                "outcome": "rejected",
+                "lines": [
+                  [
+                    "Additional distinct full label",
+                    0.99
+                  ]
+                ],
+                "error": null,
+                "note": "overlaps_accepted_line"
+              }
+            ],
+            "recovered_text": null,
+            "recovered_box": null,
+            "recovered_confidence": null
+          }
+        ]
+      },
+      "original_preserved": true,
+      "expected": "Distinct overlapping text remains explicitly ambiguous; conservative suppression is not content recall proof"
+    }
+  },
+  "provider_calls": 0,
+  "raw_files_opened": 0,
+  "scratch_created": false
+}

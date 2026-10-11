@@ -1,0 +1,64 @@
+{
+  "schema_version": "w06-independent-intake-manifest/1",
+  "lane": "W06-AUDIT-MEASURES",
+  "status": "FAIL",
+  "head": "6a50d7ed1b4cf389589c7ca62b4ab161b5dc0ad1",
+  "provider_calls": 0,
+  "model_calls": 0,
+  "paid_usd": 0,
+  "source_truth_verified": false,
+  "economic_reasonableness": "not_evaluated",
+  "retained_bytes": 112364.0,
+  "files": [
+    {
+      "path": "cli_probe.py",
+      "sha256": "8b9d525e0e9477e51c0747b9636d0467817006367e544c0b12c705540eddcd4f",
+      "bytes": 3101
+    },
+    {
+      "path": "counterexamples.json",
+      "sha256": "d697d766592e802e5a2c597f9f33f2d40faf4f82a0c76ea1cee21e0d22e58702",
+      "bytes": 66549
+    },
+    {
+      "path": "git-intake.json",
+      "sha256": "8dfa496a4ca11a0ff91b579ba19f3b7b544f10510402f1287e60c6b4402a0da3",
+      "bytes": 2280
+    },
+    {
+      "path": "independent-review.md",
+      "sha256": "e7dfb888e823421d9ba9316344200c120c6839011de7ed577ad99759546621a9",
+      "bytes": 8700
+    },
+    {
+      "path": "probe.py",
+      "sha256": "08a39915a1a1a41997ba91ac6f22551d2d9b02dc822848a2d2b06950c6ab7e44",
+      "bytes": 7767
+    },
+    {
+      "path": "real-cli-counterexamples.json",
+      "sha256": "3eba201dc8a20842a680828d492c402976fc82d06006a58647580cbccd24ecf1",
+      "bytes": 10089
+    },
+    {
+      "path": "replay-financial-tests.log",
+      "sha256": "fffc194b054ad57f5ddd7bda12dab752563858bcc0c9602f5f0e2609cd4fc5b6",
+      "bytes": 5867
+    },
+    {
+      "path": "replay-numeric-tests.log",
+      "sha256": "f4882668217a48fd5eaa044297f921e440704c9caec72c961eb4fbf40fe2b00f",
+      "bytes": 1086
+    },
+    {
+      "path": "sha-verification.json",
+      "sha256": "6c4c8201d5ba162318696e932040c1a4a227a4a02ac8b2fb3d6c9e9a7061b123",
+      "bytes": 5875
+    },
+    {
+      "path": "test-replay.json",
+      "sha256": "86d1bc9ad945566b50ee9f1b4ace4fa838d48ece386ff5628c8ce8f041d1cb2f",
+      "bytes": 1050
+    }
+  ]
+}

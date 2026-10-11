@@ -1,0 +1,2180 @@
+{
+  "schema_version": "w06-independent-measure-probes/1",
+  "head": "6a50d7ed1b4cf389589c7ca62b4ab161b5dc0ad1",
+  "source_truth_verified": false,
+  "economic_reasonableness": "not_evaluated",
+  "cases": [
+    {
+      "id": "control_scale_conversion",
+      "expected_statuses": [
+        "PASS"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": true,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD billion",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:conversion",
+            "kind": "relation",
+            "op": "scale_conversion",
+            "status": "PASS",
+            "expected": "12.0",
+            "actual": "12",
+            "units": "USD 亿",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 0.000589,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "1.2",
+            "scale": "billion",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "conversion",
+            "op": "scale_conversion",
+            "inputs": [
+              "revenue"
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "conversion_changes_company_definition_and_time",
+      "expected_statuses": [
+        "FAIL",
+        "INVALID",
+        "UNRESOLVED"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD billion",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:conversion",
+            "kind": "relation",
+            "op": "scale_conversion",
+            "status": "PASS",
+            "expected": "12.0",
+            "actual": "12",
+            "units": "USD 亿",
+            "time": "2025-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 0.00011,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "1.2",
+            "scale": "billion",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "conversion",
+            "op": "scale_conversion",
+            "inputs": [
+              "revenue"
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "stock",
+              "entity_key": "other-company",
+              "definition": "cash_balance",
+              "period_start": null,
+              "period_end": null,
+              "point_date": "2025-12-31",
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "conversion_result_missing_source_ref",
+      "expected_statuses": [
+        "FAIL",
+        "INVALID",
+        "UNRESOLVED"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD billion",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:conversion",
+            "kind": "relation",
+            "op": "scale_conversion",
+            "status": "PASS",
+            "expected": "12.0",
+            "actual": "12",
+            "units": "USD 亿",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": null,
+            "diagnostics": [
+              {
+                "code": "missing_source_ref",
+                "detail": "reported_fact requires source_id+locator"
+              }
+            ]
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 9e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "1.2",
+            "scale": "billion",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "conversion",
+            "op": "scale_conversion",
+            "inputs": [
+              "revenue"
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": null,
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "conversion_result_missing_window",
+      "expected_statuses": [
+        "FAIL",
+        "INVALID",
+        "UNRESOLVED"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD billion",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:conversion",
+            "kind": "relation",
+            "op": "scale_conversion",
+            "status": "PASS",
+            "expected": "12.0",
+            "actual": "12",
+            "units": "USD 亿",
+            "time": null,
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": [
+              {
+                "code": "missing_window",
+                "detail": "flow requires period_start and period_end"
+              }
+            ]
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 8.2e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "1.2",
+            "scale": "billion",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "conversion",
+            "op": "scale_conversion",
+            "inputs": [
+              "revenue"
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": null,
+              "period_end": null,
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "conversion_multiple_operands_ignored",
+      "expected_statuses": [
+        "INVALID"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD billion",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:conversion",
+            "kind": "relation",
+            "op": "scale_conversion",
+            "status": "PASS",
+            "expected": "12.0",
+            "actual": "12",
+            "units": "USD 亿",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 8.1e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "1.2",
+            "scale": "billion",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "conversion",
+            "op": "scale_conversion",
+            "inputs": [
+              "revenue",
+              "revenue"
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "unsupported_schema_is_silently_accepted",
+      "expected_statuses": [
+        "INVALID"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD billion",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:conversion",
+            "kind": "relation",
+            "op": "scale_conversion",
+            "status": "PASS",
+            "expected": "12.0",
+            "actual": "12",
+            "units": "USD 亿",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 8.1e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/999",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "1.2",
+            "scale": "billion",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "conversion",
+            "op": "scale_conversion",
+            "inputs": [
+              "revenue"
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "malformed_as_of_is_silently_accepted",
+      "expected_statuses": [
+        "INVALID"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "not-a-date",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD billion",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:conversion",
+            "kind": "relation",
+            "op": "scale_conversion",
+            "status": "PASS",
+            "expected": "12.0",
+            "actual": "12",
+            "units": "USD 亿",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 0.000131,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "not-a-date",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "1.2",
+            "scale": "billion",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "conversion",
+            "op": "scale_conversion",
+            "inputs": [
+              "revenue"
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "malformed_observation_id_list",
+      "expected_statuses": [
+        "INVALID"
+      ],
+      "actual_status": "EXCEPTION",
+      "passes_expectation": false,
+      "exception": "TypeError: unhashable type: 'list'",
+      "elapsed_seconds": 1.8e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": [],
+            "value": "1.2",
+            "scale": "billion",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "conversion",
+            "op": "scale_conversion",
+            "inputs": [
+              "revenue"
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "malformed_scale_list",
+      "expected_statuses": [
+        "INVALID"
+      ],
+      "actual_status": "EXCEPTION",
+      "passes_expectation": false,
+      "exception": "TypeError: unhashable type: 'list'",
+      "elapsed_seconds": 6e-06,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "1.2",
+            "scale": [],
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "conversion",
+            "op": "scale_conversion",
+            "inputs": [
+              "revenue"
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "malformed_relation_input_object",
+      "expected_statuses": [
+        "INVALID"
+      ],
+      "actual_status": "EXCEPTION",
+      "passes_expectation": false,
+      "exception": "TypeError: unhashable type: 'dict'",
+      "elapsed_seconds": 2.4e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "1.2",
+            "scale": "billion",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "conversion",
+            "op": "scale_conversion",
+            "inputs": [
+              {}
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "blank_relation_id_accepted",
+      "expected_statuses": [
+        "INVALID"
+      ],
+      "actual_status": "INVALID",
+      "passes_expectation": true,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "INVALID",
+        "exit_code": 2,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD billion",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:<invalid>",
+            "kind": "relation",
+            "op": "scale_conversion",
+            "status": "INVALID",
+            "expected": null,
+            "actual": null,
+            "units": "USD 亿",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": [
+              {
+                "code": "missing_relation_id",
+                "detail": "relation_id must be nonempty text"
+              },
+              {
+                "code": "conversion_error",
+                "detail": "id required"
+              }
+            ]
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 3.8e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "1.2",
+            "scale": "billion",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "",
+            "op": "scale_conversion",
+            "inputs": [
+              "revenue"
+            ],
+            "result": {
+              "id": "converted",
+              "value": "12",
+              "scale": "亿",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "control_contiguous_sum",
+      "expected_statuses": [
+        "PASS"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": true,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:h1",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-01-01..2024-06-30",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          },
+          {
+            "check_id": "obs:h2",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-07-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:sum",
+            "kind": "relation",
+            "op": "sum",
+            "status": "PASS",
+            "expected": "180",
+            "actual": "180",
+            "units": "USD million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 2,
+          "observation_denominator": 2,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 0.000333,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "h1",
+            "value": "100",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-06-30",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          },
+          {
+            "id": "h2",
+            "value": "80",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-07-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "sum",
+            "op": "sum",
+            "inputs": [
+              "h1",
+              "h2"
+            ],
+            "result": {
+              "id": "fy",
+              "value": "180",
+              "scale": "million",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "sum_output_silently_relabels_currency_entity_definition",
+      "expected_statuses": [
+        "FAIL",
+        "INVALID"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:h1",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-01-01..2024-06-30",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          },
+          {
+            "check_id": "obs:h2",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-07-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:sum",
+            "kind": "relation",
+            "op": "sum",
+            "status": "PASS",
+            "expected": "180",
+            "actual": "180",
+            "units": "CNY million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 2,
+          "observation_denominator": 2,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 0.000142,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "h1",
+            "value": "100",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-06-30",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          },
+          {
+            "id": "h2",
+            "value": "80",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-07-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "sum",
+            "op": "sum",
+            "inputs": [
+              "h1",
+              "h2"
+            ],
+            "result": {
+              "id": "fy",
+              "value": "180",
+              "scale": "million",
+              "currency": "CNY",
+              "measure_kind": "flow",
+              "entity_key": "other-company",
+              "definition": "net_profit",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "missing_flow_anchor_should_diagnose_not_crash",
+      "expected_statuses": [
+        "INVALID",
+        "UNRESOLVED"
+      ],
+      "actual_status": "EXCEPTION",
+      "passes_expectation": false,
+      "exception": "TypeError: '<' not supported between instances of 'datetime.date' and 'NoneType'",
+      "elapsed_seconds": 8.5e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "h1",
+            "value": "100",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": null,
+            "period_end": null,
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          },
+          {
+            "id": "h2",
+            "value": "80",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-07-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "sum",
+            "op": "sum",
+            "inputs": [
+              "h1",
+              "h2"
+            ],
+            "result": {
+              "id": "fy",
+              "value": "180",
+              "scale": "million",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "annual_vs_quarter_called_growth",
+      "expected_statuses": [
+        "FAIL",
+        "INVALID",
+        "UNRESOLVED"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:now",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          },
+          {
+            "check_id": "obs:base",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2023-01-01..2023-03-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:g",
+            "kind": "relation",
+            "op": "growth_rate",
+            "status": "PASS",
+            "expected": "2E+1",
+            "actual": "20",
+            "units": "percent",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 2,
+          "observation_denominator": 2,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 9.4e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "now",
+            "value": "120",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          },
+          {
+            "id": "base",
+            "value": "100",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2023-01-01",
+            "period_end": "2023-03-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "g",
+            "op": "growth_rate",
+            "inputs": [
+              "now",
+              "base"
+            ],
+            "result": {
+              "id": "growth",
+              "value": "20",
+              "scale": "percent",
+              "currency": null,
+              "measure_kind": "growth",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "growth_between_different_companies",
+      "expected_statuses": [
+        "INVALID",
+        "UNRESOLVED"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:now",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          },
+          {
+            "check_id": "obs:base",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2023-01-01..2023-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:g",
+            "kind": "relation",
+            "op": "growth_rate",
+            "status": "PASS",
+            "expected": "2E+1",
+            "actual": "20",
+            "units": "percent",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 2,
+          "observation_denominator": 2,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 8.7e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "now",
+            "value": "120",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          },
+          {
+            "id": "base",
+            "value": "100",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "other-company",
+            "definition": "revenue",
+            "period_start": "2023-01-01",
+            "period_end": "2023-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "g",
+            "op": "growth_rate",
+            "inputs": [
+              "now",
+              "base"
+            ],
+            "result": {
+              "id": "growth",
+              "value": "20",
+              "scale": "percent",
+              "currency": null,
+              "measure_kind": "growth",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "difference_one_operand_should_diagnose_not_crash",
+      "expected_statuses": [
+        "INVALID"
+      ],
+      "actual_status": "EXCEPTION",
+      "passes_expectation": false,
+      "exception": "IndexError: list index out of range",
+      "elapsed_seconds": 5.3e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "a",
+            "value": "120",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "d",
+            "op": "difference",
+            "inputs": [
+              "a"
+            ],
+            "result": {
+              "id": "delta",
+              "value": "20",
+              "scale": "million",
+              "currency": "USD",
+              "measure_kind": "flow",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "flow_revenue_divided_by_stock_cash_called_share",
+      "expected_statuses": [
+        "FAIL",
+        "INVALID",
+        "UNRESOLVED"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          },
+          {
+            "check_id": "obs:cash",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:s",
+            "kind": "relation",
+            "op": "share",
+            "status": "PASS",
+            "expected": "2E+1",
+            "actual": "20",
+            "units": "percent",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 2,
+          "observation_denominator": 2,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 8.5e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "revenue",
+            "value": "20",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          },
+          {
+            "id": "cash",
+            "value": "100",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "stock",
+            "entity_key": "acme",
+            "definition": "cash_balance",
+            "period_start": null,
+            "period_end": null,
+            "point_date": "2024-12-31",
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "s",
+            "op": "share",
+            "inputs": [
+              "revenue",
+              "cash"
+            ],
+            "result": {
+              "id": "share",
+              "value": "20",
+              "scale": "percent",
+              "currency": null,
+              "measure_kind": "ratio",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            },
+            "scope_inclusion": "revenue_part_of_cash"
+          }
+        ]
+      }
+    },
+    {
+      "id": "subunit_tolerance_masks_multimillion_factor_error",
+      "expected_statuses": [
+        "FAIL",
+        "INVALID"
+      ],
+      "actual_status": "PASS",
+      "passes_expectation": false,
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:tiny",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          },
+          {
+            "check_id": "obs:whole",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": null,
+            "units": "USD million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:s",
+            "kind": "relation",
+            "op": "share",
+            "status": "PASS",
+            "expected": "1E-7",
+            "actual": "0.49",
+            "units": "decimal",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": []
+          }
+        ],
+        "coverage": {
+          "observations_declared": 2,
+          "observation_denominator": 2,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "elapsed_seconds": 9.5e-05,
+      "ledger": {
+        "schema_version": "financial-measure-ledger/1",
+        "as_of_date": "2026-10-11",
+        "observations": [
+          {
+            "id": "tiny",
+            "value": "0.0000001",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          },
+          {
+            "id": "whole",
+            "value": "1",
+            "scale": "million",
+            "currency": "USD",
+            "measure_kind": "flow",
+            "entity_key": "acme",
+            "definition": "revenue",
+            "period_start": "2024-01-01",
+            "period_end": "2024-12-31",
+            "point_date": null,
+            "evidence_role": "reported_fact",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "rationale": null,
+            "available_by": null
+          }
+        ],
+        "relations": [
+          {
+            "relation_id": "s",
+            "op": "share",
+            "inputs": [
+              "tiny",
+              "whole"
+            ],
+            "result": {
+              "id": "share",
+              "value": "0.49",
+              "scale": "decimal",
+              "currency": null,
+              "measure_kind": "ratio",
+              "entity_key": "acme",
+              "definition": "revenue",
+              "period_start": "2024-01-01",
+              "period_end": "2024-12-31",
+              "point_date": null,
+              "evidence_role": "reported_fact",
+              "source_ref": {
+                "source_id": "SRC1",
+                "locator": "p3 table"
+              },
+              "rationale": null,
+              "available_by": null
+            },
+            "scope_inclusion": "tiny_subset_of_whole",
+            "absolute_tolerance": "0.499"
+          }
+        ]
+      }
+    }
+  ]
+}

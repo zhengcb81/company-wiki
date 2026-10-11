@@ -1,0 +1,53 @@
+{
+  "schema_version": "root-w05-ocr-independent-review/1",
+  "stage": "final_frozen_windows_source_engineering",
+  "status": "FAIL_REAL_E2E",
+  "engineering_scope_result": "PASS_WITH_SCOPE",
+  "tree": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/cwp-ocr-root",
+  "source_sha256": {
+    "src/company_wiki/document_normalization/local_ocr.py": "ff7db0e6aeea844c1f32d3de3f3fdfa7965e6a3cd4f3fe56d4e455efc08a574f",
+    "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe",
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "2803919d0f9b816c5cff45cf6344709abea8104f124945d9a3da24862417823e",
+    "src/company_wiki/document_normalization/isolated_ocr.py": "d59a52a35dc6fc9c196d9e293b962ea844f171caf132e5823ea97f66b4303c98",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "b29a4fe2069713800d171c30ecd09d7bcf3a35984ef2f872ed85d8d4986ccbfd"
+  },
+  "config_sha256": {
+    "config/local_ocr.json":"3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105",
+    "config.yaml":"2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config/source_catalog.yaml":"3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "independent_tests": {
+    "unchanged_original_probes":{"passed":6,"failed":0,"harness_errors":0},
+    "real_spawn_startup_deadline":{"passed":1,"deadline_seconds":0.05,"elapsed_seconds":0.05216330000257585,"native_started":false,"bootstrap_pid":5240,"bootstrap_reaped":true,"scratch_restored":true,"external_emergency_timer_used":false}
+  },
+  "evidence":[
+    {"path":"counterexamples.py","sha256":"0ee1d69c4135fd49db47fe0ca7bac2c4782a3a5617b053555bdcfd60cc8d9169","expectations_changed":false},
+    {"path":"original-counterexamples.json","sha256":"6c86ea1042bd1abded0fcbe6163e5842a22d6887fbaaa0ade06e1b8642fbda9c","failures_retained":5},
+    {"path":"frozen-counterexamples.json","sha256":"7ad080a7e5f563a4017dffd6f6ccedf47d13263d90c0e741ee2ff397a6efac33"},
+    {"path":"hard-startup-probe.py","sha256":"dc5d4e7efb9e1abd25a86d4a98b7a4e6a958a1f44adba6542d8f405e84d1cab4"},
+    {"path":"hard-startup-result.json","sha256":"946417781df16c120a2405848ed10e35af6086acd682441122e0a5a5373ec918"}
+  ],
+  "findings":[
+    {"id":"OCR-I01","status":"closed_for_fixed_sha","mechanism":"Atomic shared source/ROI pixel reservation before each inference"},
+    {"id":"OCR-I02","status":"closed_for_fixed_sha","mechanism":"Actual filtered dropped diagnostics checked in source-region geometry"},
+    {"id":"OCR-I03","status":"closed_for_fixed_sha","mechanism":"Whole split detector bbox must be inside one true source chunk"},
+    {"id":"OCR-I04","status":"closed_for_fixed_sha","mechanism":"Non-square PIL forward rotation validates inverse 90/180/270 geometry"},
+    {"id":"OCR-I05","priority":1,"status":"open_real_e2e","mechanism":"Configured native first transcribe did not produce within existing absolute phase deadline; performance sub-stage root cause not yet measured"}
+  ],
+  "hard_boundary_review":{
+    "absolute_deadline":"one pinned deadline includes startup/preflight/native/IPC; later deadlines cannot extend",
+    "windows_ownership":"Job assignment before bootstrap release; KILL_ON_JOB_CLOSE and owned tree termination",
+    "posix":"static inspection only, NOT executed on Windows",
+    "bulk_transport":"bounded owned files, no blocking payload pipe",
+    "cleanup_grace_seconds":2.5,
+    "daemon_auto_compatibility":"subprocess new interpreter; formal daemon-flag test inspected",
+    "config_fingerprint_preserved":true,
+    "formal_execution_reviewed":"original failures preserved; affected 6 plus 3 port regressions passed; ROOT reported final combined pack184 PASS"
+  },
+  "root_real_e2e":{"status":"FAILED","phase1_elapsed_seconds":85.047,"runner_elapsed_seconds":86.166,"exit_code":1,"error":"NormalizationLimitError deadline in isolated local OCR","receipt":"../root-real-e2e-original-fail-receipt.json","result":"../root-real-e2e-original-fail-result.json","raw_config_unchanged":true,"scratch_before":"absent","scratch_after":"absent"},
+  "scope_exclusions":["Independent repeat of ROOT full combined suite","POSIX runtime execution","W04 selector/summary/RF economic quality"],
+  "limitations":["Undetected text recall cannot be guaranteed; opaque/unverified retained","Uncatchable Windows owner death may leave bounded TEMP files; OSJob still kills native tree"],
+  "cost":{"provider_calls":0,"paid_usd":"0","cloud_ocr_calls":0,"model_downloads":0,"raw_files_opened":0},
+  "cleanup":{"owned_root":"owned-hard-startup-kinv8yib","initial":"absent","final":"absent","product_unchanged":true,"config_unchanged":true,"original_failures_retained":true},
+  "root_next_action":"Do not publish while real E2E is FAIL. Measure native startup/model/inference/IPC performance sub-stages and repair common cause without raising time budget; then freeze/retest actual source path and retain original failure"
+}

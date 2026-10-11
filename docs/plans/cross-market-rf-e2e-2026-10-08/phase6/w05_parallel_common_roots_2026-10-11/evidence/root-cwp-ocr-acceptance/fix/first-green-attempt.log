@@ -1,0 +1,40 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\Projects\_harness_worktrees\w05\cwp-ocr-root
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 34 items
+
+tests\document_normalization\test_ocr_region_recovery.py ........FF....F [ 44%]
+...........                                                              [ 76%]
+tests\document_normalization\test_ocr_region_composition.py ........     [100%]
+
+================================== FAILURES ===================================
+_____ test_recover_split_stack_all_chunks_pass_stitches_in_reading_order ______
+tests\document_normalization\test_ocr_region_recovery.py:282: in test_recover_split_stack_all_chunks_pass_stitches_in_reading_order
+    assert outcome.recovered_lines and outcome.recovered_lines[0].text == "part part"
+E   AssertionError: assert (())
+E    +  where () = RegionRecoveryOutcome(recovered_lines=(), diagnostics=OCRRegionDiagnostics(detected=None, recognized=1, accepted=0, dr...e_region_text')), recovered_text=None, recovered_box=None, recovered_confidence=None),)), roi_pixels=21564, attempts=2).recovered_lines
+________ test_split_stack_with_failing_chunk_is_rejected_not_stitched _________
+tests\document_normalization\test_ocr_region_recovery.py:319: in test_split_stack_with_failing_chunk_is_rejected_not_stitched
+    assert record.attempts[1].note == "line_below_threshold"
+E   AssertionError: assert 'unmappable_region_text' == 'line_below_threshold'
+E     
+E     - line_below_threshold
+E     + unmappable_region_text
+________ test_engine_failure_attempt_is_recorded_and_ladder_continues _________
+tests\document_normalization\test_ocr_region_recovery.py:489: in test_engine_failure_attempt_is_recorded_and_ladder_continues
+    assert record.status == "recovered"
+E   AssertionError: assert 'unrecovered' == 'recovered'
+E     
+E     - recovered
+E     + unrecovered
+E     ? ++
+=========================== short test summary info ===========================
+FAILED tests/document_normalization/test_ocr_region_recovery.py::test_recover_split_stack_all_chunks_pass_stitches_in_reading_order
+FAILED tests/document_normalization/test_ocr_region_recovery.py::test_split_stack_with_failing_chunk_is_rejected_not_stitched
+FAILED tests/document_normalization/test_ocr_region_recovery.py::test_engine_failure_attempt_is_recorded_and_ladder_continues
+======================== 3 failed, 31 passed in 1.98s =========================

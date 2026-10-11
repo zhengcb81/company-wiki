@@ -1,0 +1,30 @@
+{
+  "schema_version": "root-lane-review/1",
+  "lane": "W05-RF-FLOW",
+  "verdict": "NEEDS_FIXES",
+  "head": "f1a782a478d255b9b4b8f531e7a3961134e257ba",
+  "work_commit": "7b22bca8d6aa87f643780100832daec2836ed558",
+  "base": "1b616622763ece6549676f2a74f596e6c65244af",
+  "leaf_clean": true,
+  "main_ahead_behind_leaf": [0, 2],
+  "manifest_checked_records": 87,
+  "manifest_failures": 0,
+  "focused_test_result": {"passed": 120, "subtests_passed": 33, "seconds": 6.41, "exit_code": 0},
+  "independent_counterexamples": {"expected_reject_but_accepted": 3, "valid_bridge_pass": true, "negative_disposal_pass": true, "deterministic_full_output_pass": true},
+  "findings": [
+    {"id": "RF-FLOW-ROOT-01", "priority": "P1", "summary": "Derived annual label bypasses partial-flow coverage"},
+    {"id": "RF-FLOW-ROOT-02", "priority": "P1", "summary": "Nonempty rationale skips input/output window containment"},
+    {"id": "RF-FLOW-ROOT-03", "priority": "P1", "summary": "Same-perimeter H1 plus its Q2 passes double counting"},
+    {"id": "RF-FLOW-ROOT-04", "priority": "P2", "summary": "Sealed CNY amount relabeled as USD in CLI fixture"},
+    {"id": "RF-FLOW-ROOT-05", "priority": "P2", "summary": "Ignored E2E artifacts absent from committed manifest"},
+    {"id": "RF-FLOW-ROOT-06", "priority": "DIAGNOSTIC", "summary": "Compatibility collection failures caused by sparse checkout, not absent tracked product code"}
+  ],
+  "baseline_product_failure_verified": "test_mixed_rejects_lagged_activity: KeyError carry_in_parameter_ids",
+  "project_provider_calls": 0,
+  "project_model_calls": 0,
+  "project_paid_usd": 0,
+  "product_writes": 0,
+  "merged": false,
+  "installed": false,
+  "report": "independent-review.md"
+}

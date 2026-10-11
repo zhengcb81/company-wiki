@@ -1,0 +1,31 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w05-cwp-ocr-reception\run_real_e2e.py", line 81, in <module>
+    child() if '--child' in sys.argv else parent()
+    ~~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w05-cwp-ocr-reception\run_real_e2e.py", line 28, in child
+    g['main']()
+    ~~~~~~~~~^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w05\cwp-ocr-root\docs\handoffs\w05-cwp-ocr\scripts\e2e_slide7_recovery.py", line 152, in main
+    doc = enrich_pptx(
+        pure,
+    ...<3 lines>...
+        selected_media_sha256s=frozenset({MEDIA_SHA}),
+    )
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w05\cwp-ocr-root\src\company_wiki\document_normalization\ocr_composition.py", line 68, in enrich_pptx
+    return _enrich_pptx(
+        document, ocr=bounded, limits=limits, ocr_limits=ocr_limits,
+        selected_media_sha256s=selected_media_sha256s,
+    )
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w05\cwp-ocr-root\src\company_wiki\document_normalization\ocr_composition.py", line 153, in _enrich_pptx
+    result = ocr.transcribe(asset.original_bytes, limits=ocr_limits)
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w05\cwp-ocr-root\src\company_wiki\document_normalization\isolated_ocr.py", line 426, in transcribe
+    return self._dispatch("infer", self._limits(limits), data)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w05\cwp-ocr-root\src\company_wiki\document_normalization\isolated_ocr.py", line 390, in _dispatch
+    self._await_file(directory / f"response-{number}.json", limits.deadline)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w05\cwp-ocr-root\src\company_wiki\document_normalization\isolated_ocr.py", line 285, in _await_file
+    raise NormalizationLimitError(
+        "deadline", deadline, "isolated local OCR"
+    )
+company_wiki.document_normalization.errors.NormalizationLimitError: normalization limit exceeded: deadline=76225.4675139 (isolated local OCR)

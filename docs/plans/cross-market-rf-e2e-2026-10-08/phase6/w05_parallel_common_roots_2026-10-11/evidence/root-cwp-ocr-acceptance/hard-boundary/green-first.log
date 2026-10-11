@@ -1,0 +1,116 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\Projects\_harness_worktrees\w05\cwp-ocr-root
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 10 items
+
+tests\document_normalization\test_isolated_ocr.py FFFFFFFF.F             [100%]
+
+================================== FAILURES ===================================
+_ test_noncooperative_native_stops_at_product_deadline[block-preflight-preflight] _
+tests\document_normalization\test_isolated_ocr.py:73: in test_noncooperative_native_stops_at_product_deadline
+    warm(adapter)
+tests\document_normalization\test_isolated_ocr.py:66: in warm
+    adapter._ensure_worker(time.monotonic() + 30)
+src\company_wiki\document_normalization\isolated_ocr.py:247: in _ensure_worker
+    self._await_file(directory / 'ready.json', deadline)
+src\company_wiki\document_normalization\isolated_ocr.py:215: in _await_file
+    raise LocalOCRError('OCR_WORKER_FAILED')
+E   company_wiki.document_normalization.local_ocr.LocalOCRError: OCR_WORKER_FAILED
+_ test_noncooperative_native_stops_at_product_deadline[block-inference-infer] _
+tests\document_normalization\test_isolated_ocr.py:73: in test_noncooperative_native_stops_at_product_deadline
+    warm(adapter)
+tests\document_normalization\test_isolated_ocr.py:66: in warm
+    adapter._ensure_worker(time.monotonic() + 30)
+src\company_wiki\document_normalization\isolated_ocr.py:247: in _ensure_worker
+    self._await_file(directory / 'ready.json', deadline)
+src\company_wiki\document_normalization\isolated_ocr.py:215: in _await_file
+    raise LocalOCRError('OCR_WORKER_FAILED')
+E   company_wiki.document_normalization.local_ocr.LocalOCRError: OCR_WORKER_FAILED
+_______________ test_one_deadline_accumulates_across_inferences _______________
+tests\document_normalization\test_isolated_ocr.py:93: in test_one_deadline_accumulates_across_inferences
+    warm(adapter)
+tests\document_normalization\test_isolated_ocr.py:66: in warm
+    adapter._ensure_worker(time.monotonic() + 30)
+src\company_wiki\document_normalization\isolated_ocr.py:247: in _ensure_worker
+    self._await_file(directory / 'ready.json', deadline)
+src\company_wiki\document_normalization\isolated_ocr.py:215: in _await_file
+    raise LocalOCRError('OCR_WORKER_FAILED')
+E   company_wiki.document_normalization.local_ocr.LocalOCRError: OCR_WORKER_FAILED
+_______ test_worker_is_lazy_reused_and_close_reaps_and_restores_scratch _______
+tests\document_normalization\test_isolated_ocr.py:112: in test_worker_is_lazy_reused_and_close_reaps_and_restores_scratch
+    adapter.validate_environment()
+src\company_wiki\document_normalization\isolated_ocr.py:293: in validate_environment
+    self._dispatch('validate', self._limits(deadline=deadline))
+src\company_wiki\document_normalization\isolated_ocr.py:260: in _dispatch
+    self._ensure_worker(limits.deadline)
+src\company_wiki\document_normalization\isolated_ocr.py:247: in _ensure_worker
+    self._await_file(directory / 'ready.json', deadline)
+src\company_wiki\document_normalization\isolated_ocr.py:215: in _await_file
+    raise LocalOCRError('OCR_WORKER_FAILED')
+E   company_wiki.document_normalization.local_ocr.LocalOCRError: OCR_WORKER_FAILED
+_ test_failed_native_results_never_publish_and_worker_is_reaped[error-preflight-OCR_MODEL_MISSING] _
+tests\document_normalization\test_isolated_ocr.py:130: in test_failed_native_results_never_publish_and_worker_is_reaped
+    warm(adapter)
+tests\document_normalization\test_isolated_ocr.py:66: in warm
+    adapter._ensure_worker(time.monotonic() + 30)
+src\company_wiki\document_normalization\isolated_ocr.py:247: in _ensure_worker
+    self._await_file(directory / 'ready.json', deadline)
+src\company_wiki\document_normalization\isolated_ocr.py:215: in _await_file
+    raise LocalOCRError('OCR_WORKER_FAILED')
+E   company_wiki.document_normalization.local_ocr.LocalOCRError: OCR_WORKER_FAILED
+_ test_failed_native_results_never_publish_and_worker_is_reaped[error-OCR_INFERENCE_FAILED] _
+tests\document_normalization\test_isolated_ocr.py:130: in test_failed_native_results_never_publish_and_worker_is_reaped
+    warm(adapter)
+tests\document_normalization\test_isolated_ocr.py:66: in warm
+    adapter._ensure_worker(time.monotonic() + 30)
+src\company_wiki\document_normalization\isolated_ocr.py:247: in _ensure_worker
+    self._await_file(directory / 'ready.json', deadline)
+src\company_wiki\document_normalization\isolated_ocr.py:215: in _await_file
+    raise LocalOCRError('OCR_WORKER_FAILED')
+E   company_wiki.document_normalization.local_ocr.LocalOCRError: OCR_WORKER_FAILED
+_ test_failed_native_results_never_publish_and_worker_is_reaped[invalid-OCR_RESULT_INVALID] _
+tests\document_normalization\test_isolated_ocr.py:130: in test_failed_native_results_never_publish_and_worker_is_reaped
+    warm(adapter)
+tests\document_normalization\test_isolated_ocr.py:66: in warm
+    adapter._ensure_worker(time.monotonic() + 30)
+src\company_wiki\document_normalization\isolated_ocr.py:247: in _ensure_worker
+    self._await_file(directory / 'ready.json', deadline)
+src\company_wiki\document_normalization\isolated_ocr.py:215: in _await_file
+    raise LocalOCRError('OCR_WORKER_FAILED')
+E   company_wiki.document_normalization.local_ocr.LocalOCRError: OCR_WORKER_FAILED
+_ test_failed_native_results_never_publish_and_worker_is_reaped[crash-OCR_WORKER_FAILED] _
+tests\document_normalization\test_isolated_ocr.py:130: in test_failed_native_results_never_publish_and_worker_is_reaped
+    warm(adapter)
+tests\document_normalization\test_isolated_ocr.py:66: in warm
+    adapter._ensure_worker(time.monotonic() + 30)
+src\company_wiki\document_normalization\isolated_ocr.py:247: in _ensure_worker
+    self._await_file(directory / 'ready.json', deadline)
+src\company_wiki\document_normalization\isolated_ocr.py:215: in _await_file
+    raise LocalOCRError('OCR_WORKER_FAILED')
+E   company_wiki.document_normalization.local_ocr.LocalOCRError: OCR_WORKER_FAILED
+___ test_finite_default_is_resolved_once_and_explicit_longer_does_not_reset ___
+tests\document_normalization\test_isolated_ocr.py:152: in test_finite_default_is_resolved_once_and_explicit_longer_does_not_reset
+    warm(adapter)
+tests\document_normalization\test_isolated_ocr.py:66: in warm
+    adapter._ensure_worker(time.monotonic() + 30)
+src\company_wiki\document_normalization\isolated_ocr.py:247: in _ensure_worker
+    self._await_file(directory / 'ready.json', deadline)
+src\company_wiki\document_normalization\isolated_ocr.py:215: in _await_file
+    raise LocalOCRError('OCR_WORKER_FAILED')
+E   company_wiki.document_normalization.local_ocr.LocalOCRError: OCR_WORKER_FAILED
+=========================== short test summary info ===========================
+FAILED tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[block-preflight-preflight]
+FAILED tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[block-inference-infer]
+FAILED tests/document_normalization/test_isolated_ocr.py::test_one_deadline_accumulates_across_inferences
+FAILED tests/document_normalization/test_isolated_ocr.py::test_worker_is_lazy_reused_and_close_reaps_and_restores_scratch
+FAILED tests/document_normalization/test_isolated_ocr.py::test_failed_native_results_never_publish_and_worker_is_reaped[error-preflight-OCR_MODEL_MISSING]
+FAILED tests/document_normalization/test_isolated_ocr.py::test_failed_native_results_never_publish_and_worker_is_reaped[error-OCR_INFERENCE_FAILED]
+FAILED tests/document_normalization/test_isolated_ocr.py::test_failed_native_results_never_publish_and_worker_is_reaped[invalid-OCR_RESULT_INVALID]
+FAILED tests/document_normalization/test_isolated_ocr.py::test_failed_native_results_never_publish_and_worker_is_reaped[crash-OCR_WORKER_FAILED]
+FAILED tests/document_normalization/test_isolated_ocr.py::test_finite_default_is_resolved_once_and_explicit_longer_does_not_reset
+======================== 9 failed, 1 passed in 38.37s =========================

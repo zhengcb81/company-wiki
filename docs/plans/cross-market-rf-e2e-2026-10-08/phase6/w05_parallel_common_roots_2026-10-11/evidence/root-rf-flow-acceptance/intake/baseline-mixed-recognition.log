@@ -1,0 +1,50 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____________________ test_mixed_rejects_lagged_activity ______________________
+
+    def test_mixed_rejects_lagged_activity():
+        data = mixed_document()
+        data["segments"][0]["recognition"]["mode"] = "lagged_activity"
+        with pytest.raises(ForecastInputError, match="already recognized"):
+>           run_forecast(data, mode="draft")
+
+tests\test_mixed_aggregate_recognition.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\revenue_core.py:446: in run_forecast
+    result = _build_forecast_draft(data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\revenue_core.py:63: in _build_forecast_draft
+    validated = validate_document(data)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+scripts\contracts\document.py:1111: in validate_document
+    growth_driver_tree = validate_growth_driver_tree(
+scripts\research\drivers.py:463: in validate_growth_driver_tree
+    base_parameter_ids = base_forecast_parameter_ids(data, parameter_index)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\forecast\calc.py:420: in base_forecast_parameter_ids
+    return scenario_forecast_parameter_ids(data, "base", parameter_index)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\forecast\calc.py:180: in scenario_forecast_parameter_ids
+    roots = referenced_parameter_ids(data, scenario)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+data = {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}
+scenario = 'base'
+
+    def referenced_parameter_ids(data: dict[str, Any], scenario: str) -> set[str]:
+        referenced: set[str] = set()
+        for segment in data["segments"]:
+            scenario_input = segment["scenarios"][scenario]
+            for ids in scenario_input["driver_parameter_ids"].values():
+                referenced.update(ids)
+            recognition = segment["recognition"]
+            if recognition.get("mode") == "lagged_activity":
+>               referenced.update(recognition["carry_in_parameter_ids"][scenario])
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               KeyError: 'carry_in_parameter_ids'
+
+scripts\forecast\calc.py:158: KeyError
+=========================== short test summary info ===========================
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_rejects_lagged_activity
+1 failed in 1.58s

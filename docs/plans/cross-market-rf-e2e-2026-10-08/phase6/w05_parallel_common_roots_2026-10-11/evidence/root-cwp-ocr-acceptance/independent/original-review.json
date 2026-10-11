@@ -1,0 +1,32 @@
+{
+  "schema_version": "root-w05-ocr-independent-review/1",
+  "stage": "original_delivery",
+  "status": "FAIL",
+  "delivery_head": "6fe9a82a6a96fe024774791e2018c882a098d512",
+  "feature_head": "4e3d28a9ba8a7df61c95860cc96b8088fe9f571d",
+  "source_sha256": {
+    "src/company_wiki/document_normalization/local_ocr.py": "9b3b02a3891ac6c06bdb34f9244ca84c4cc73a67338b02bfcb1d1f9c120bc6f9",
+    "src/company_wiki/document_normalization/ocr_composition.py": "3b938a0fb2085713914f2593f7222d2318b26f2794515cf747dae67fc0979400",
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "c021cee73e2509bfa2c5e70a7a12d03aef6b2ca60b18ccccab578ab3368fae2c"
+  },
+  "counts": {"behavioral_failed": 5, "passed": 1, "harness_error": 0},
+  "findings": [
+    {"id":"OCR-I01","priority":1,"status":"open","root_cause":"ROI max_total_pixels enforced after native inference instead of before each work reservation","tests":["test_budget_reserves_before_inference"]},
+    {"id":"OCR-I02","priority":1,"status":"open","root_cause":"Recovery evaluator ignores actual adapter filtered dropped regions and overstates partial recognition as recovered","tests":["test_filtered_partial_margin_stays_unrecovered","test_filtered_partial_stack_stays_unrecovered"]},
+    {"id":"OCR-I03","priority":1,"status":"open","root_cause":"Center-only split-stack mapping translates a cross-chunk box as one contiguous original region","tests":["test_split_cross_chunk_is_not_one_source_box"]},
+    {"id":"OCR-I04","priority":2,"status":"open","root_cause":"Non-square 90/270 inverse uses wrong original dimension; existing golden mirrors formula","tests":["test_ccw_90_returns_original_geometry"]}
+  ],
+  "evidence": [
+    {"path":"counterexamples.py","bytes":8098,"sha256":"0ee1d69c4135fd49db47fe0ca7bac2c4782a3a5617b053555bdcfd60cc8d9169"},
+    {"path":"original-counterexamples.json","bytes":10646,"sha256":"6c86ea1042bd1abded0fcbe6163e5842a22d6887fbaaa0ade06e1b8642fbda9c"}
+  ],
+  "remaining": [
+    "ROOT integration repair and frozen independent retest pending; retain original FAIL files",
+    "Actual entrypoint native hard deadline/cancellation must be proved by ROOT; the 20s test proves only its own external subprocess supervisor",
+    "ROOT real source OCR/compose/replay E2E pending",
+    "W04 selector/summary and RF economic-quality are out of this receipt"
+  ],
+  "cost": {"provider_calls":0,"paid_usd":"0","cloud_ocr_calls":0,"raw_files_opened":0},
+  "cleanup": {"scratch_created":false,"product_unchanged":true,"writes":"independent evidence only"},
+  "root_next_action": "Fix common budget/filtered-result/geometry mechanisms in isolation; freeze; rerun original probes unchanged plus ROOT selected quality nodes"
+}

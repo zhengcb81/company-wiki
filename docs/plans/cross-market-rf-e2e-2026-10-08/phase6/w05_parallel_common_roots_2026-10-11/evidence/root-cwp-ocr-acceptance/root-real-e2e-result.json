@@ -1,0 +1,18 @@
+{
+  "status": "FAILED",
+  "started_at": 1791718016.3914096,
+  "phases": {
+    "phase1_source_ocr_compose": {
+      "elapsed_seconds": 85.047,
+      "status": "FAILED"
+    }
+  },
+  "source_read": {
+    "via": "SourceVersionReader.open_version",
+    "purpose": "source_export",
+    "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "byte_size": 4016522,
+    "policy_sha256": "3553c50b850056eec9cc1cb7b37ddddb6aaafa5c54b5990d0e5bb92dad6a9e15"
+  },
+  "error": "NormalizationLimitError: normalization limit exceeded: deadline=76225.4675139 (isolated local OCR)"
+}
