@@ -1,0 +1,10 @@
+{
+  "method": "GitHub official anonymous API",
+  "gh_attempt": "command unavailable on host",
+  "run_id": 38132897880,
+  "head_sha": "8d281af1a2ee4f9adbba4c9bdbb576505c240095",
+  "status": "in_progress",
+  "conclusion": null,
+  "url": "https://github.com/zhengcb81/company-wiki/actions/runs/38132897880",
+  "observed_at": "2026-10-11T10:44:09.5919077Z"
+}

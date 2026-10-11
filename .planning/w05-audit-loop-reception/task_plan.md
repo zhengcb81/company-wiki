@@ -11,8 +11,8 @@
 - [x] 如有实质问题，保留原失败证据、按根因修复并集中复验；不放宽 clean 或费用未知断言。
 - [x] 接线 SKILL/loop 入口、验证技能、正常 commit/主线快进、定点同步安装并记录实际 SHA。
 - [x] 更新 W05 和母 PWF。Audit 不擅自创建远端。
-- [ ] 正常推送CWP：补齐 `.planning` 与 `docs/plans` 同级资料目录分类，TDD核实资料不触发全量Unit/CI，混合runtime与未知源码仍保留原测试；正常钩子推送，不绕过。
+- [x] 正常推送CWP：补齐 `.planning` 与 `docs/plans` 同级资料目录分类，TDD核实资料不触发全量Unit/CI，混合runtime与未知源码仍保留原测试；正常钩子推送，不绕过。
 
 ## Next Step
 
-Audit接收/并线/安装完成。CWP资料提交c9dd5124的推送因.planning一次性脚本被误当未知运行源码而触发全量Unit，ROOT发布器180秒超时；已精确停止确认归属的pytest42572，保留取消记录并让父finally清理。先根治两套计划目录不一致的测试选择/CI调度规则，再正常推送全部提交；完成后回到母PWF的W04责任包。
+本包COMPLETE：Audit main321d4c1、两套技能24文件MATCH、CWP源修复8d281af1已正常推送且远端同HEAD。最终发布本收尾记录；之后恢复母PWF的W04责任包，不重跑一次性补丁或重派其他owner。

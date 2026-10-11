@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-10-11T10:42:53.798988+00:00",
+  "status": "COMPLETE",
+  "audit_main": "321d4c165575e81add3b4aa1ee9ba0a047ca6082",
+  "audit_remote": null,
+  "company_wiki_source_commit": "8d281af1a2ee4f9adbba4c9bdbb576505c240095",
+  "observed_remote_head": "8d281af1a2ee4f9adbba4c9bdbb576505c240095",
+  "normal_push_unit_summary": [
+    "====================== 3240 passed in 302.47s (0:05:02) ======================="
+  ],
+  "gate_tdd": "5 RED then 58 GREEN",
+  "installed_destinations": 2,
+  "package_files_per_destination": 24,
+  "project_incremental_fees_usd": 0,
+  "raw_and_production_config_unchanged": true,
+  "scope": "W05-AUDIT-LOOP acceptance, root cause repair, main merge, skill installation and observed CWP publication",
+  "remaining_mother_pwf": "W04 semantic roots and G2/G4/G5; W05 other owners/W06 remain separate"
+}

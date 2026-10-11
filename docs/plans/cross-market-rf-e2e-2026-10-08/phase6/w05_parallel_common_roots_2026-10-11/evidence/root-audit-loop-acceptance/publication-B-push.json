@@ -1,0 +1,8 @@
+{
+  "started": "2026-10-11T10:37:01.4646702Z",
+  "ended": "2026-10-11T10:42:14.2977054Z",
+  "exit_code": 0,
+  "commit": "8d281af1a2ee4f9adbba4c9bdbb576505c240095",
+  "hooks": "normal",
+  "note": "Selector/workflow change runs full Unit once; no internal Git wrapper timeout and no hook bypass"
+}

@@ -1,0 +1,21 @@
+{
+  "code_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tools\\changed_unit_tests.py",
+      "baseline_blob": "caeab7371ff7f0a9b399b0e7515925d9445280b2",
+      "new_sha256": "a9b509f974b8556efdf1380bf0e723eb2f0e5aeebc452e65d51230ea93d0361c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\unit\\test_ci_push_selection.py",
+      "baseline_blob": "d6d4cf1b11b909fefdb4d2aaa62701295ca2132e",
+      "new_sha256": "85439972e1ed96678f6eebf5fe9e6c382ae7e517dad26eb31ed7a3f5eb9db9f0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\.github\\workflows\\ci.yml",
+      "baseline_blob": "c46d2a04fdedb7218b324791095a47cd62aa9c00",
+      "new_sha256": "bf270a2a7281e6b594dcdfa4ac1a0e74382cffe551a8beff02f28aceea04e27d"
+    }
+  ],
+  "pwf_headers": 15,
+  "historical_bytes_preserved": true
+}
