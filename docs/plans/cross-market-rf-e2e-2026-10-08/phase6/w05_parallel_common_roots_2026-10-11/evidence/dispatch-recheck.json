@@ -1,0 +1,139 @@
+{
+  "schema_version": "w05-dispatch-recheck/1",
+  "observed_at": "2026-10-11T08:49:32.889509+00:00",
+  "status": "READY",
+  "scope": "finite input and construction-card checks only; not product acceptance",
+  "checks": [
+    {
+      "lane": "W05-CWP-OCR",
+      "workdir": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/cwp-ocr",
+      "fixed_inputs_verified": [
+        {
+          "path": "construction_card.md",
+          "bytes": 6307,
+          "sha256": "75affd54f2f27a6926f83508a1568b689c76c2b50941ff512a122db91c64edcb",
+          "verified": true
+        },
+        {
+          "path": "handoff_contract.md",
+          "bytes": 3497,
+          "sha256": "45e10c161731aa108e3dc0df8262786f968a2bc8d7fa517b72ff6d17d6bb4835",
+          "verified": true
+        },
+        {
+          "path": "inputs.json",
+          "bytes": 2159,
+          "sha256": "ba6c009added8980404ded3222ee13e43508ac094f725f784e716e4564fca992",
+          "verified": true
+        },
+        {
+          "path": "slide7-root-cause.json",
+          "bytes": 60313,
+          "sha256": "31a993a34a0b032933d2a189569a9f9625b9ab791db75e26a5fbc251a89f6204",
+          "verified": true
+        },
+        {
+          "path": "slide7-root-cause.md",
+          "bytes": 4375,
+          "sha256": "c3fca2ace822205f356ffb0ea56783edbeefb1e79467809682aed810d0cd41ed",
+          "verified": true
+        }
+      ],
+      "current_product_changes": "none; git status only has provided docs/handoffs input",
+      "ready_to_dispatch": true
+    },
+    {
+      "lane": "W05-RF-FLOW",
+      "workdir": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/rf-flow",
+      "fixed_inputs_verified": [
+        {
+          "path": "construction_card.md",
+          "bytes": 6847,
+          "sha256": "f17002ffad055ce0e878545c9d71877390788e766419c03ca1c403bd87c65231",
+          "verified": true
+        },
+        {
+          "path": "control-window-findings.json",
+          "bytes": 7958,
+          "sha256": "f5e974cd301d2a007021f7e6a952328e58e3cf6fea0e5b4c2deaa4f1d42b40f8",
+          "verified": true
+        },
+        {
+          "path": "g4-authoring-review.json",
+          "bytes": 30450,
+          "sha256": "c893309c88f2df85c226cd4b47124a158e68466c9a22057a0e77dbb516c2207e",
+          "verified": true
+        },
+        {
+          "path": "handoff_contract.md",
+          "bytes": 3497,
+          "sha256": "45e10c161731aa108e3dc0df8262786f968a2bc8d7fa517b72ff6d17d6bb4835",
+          "verified": true
+        },
+        {
+          "path": "inputs.json",
+          "bytes": 749,
+          "sha256": "80f29005c1561b94ae10eae7a3d112c1966c97ad609d0fd1b7dbe0689a146550",
+          "verified": true
+        },
+        {
+          "path": "interface-verification.json",
+          "bytes": 5449,
+          "sha256": "42285a745e58d628b3ed17af139f9fc1e359c4f0ba8f919d0f72872914991e3c",
+          "verified": true
+        },
+        {
+          "path": "w04_research_authoring_card.md",
+          "bytes": 28247,
+          "sha256": "68b0422726fba6100135b0aebb596f2b30ade64c923208f1ee6dfbc48f627dad",
+          "verified": true
+        }
+      ],
+      "current_product_changes": "none; git status only has provided docs/handoffs input",
+      "ready_to_dispatch": true
+    },
+    {
+      "lane": "W05-AUDIT-LOOP",
+      "workdir": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/audit-loop",
+      "fixed_inputs_verified": [
+        {
+          "path": "audit-readiness.json",
+          "bytes": 28401,
+          "sha256": "6024e21274548d43cb0912da33cea305e7b5cf80bd5ea1654939f0e38a7414e3",
+          "verified": true
+        },
+        {
+          "path": "audit-readiness.md",
+          "bytes": 5320,
+          "sha256": "47c1dbcec84df39fb3e235e15daa628e07e241b4573ab1a1ab0232140789bfe9",
+          "verified": true
+        },
+        {
+          "path": "construction_card.md",
+          "bytes": 8569,
+          "sha256": "b59545a3bc2449952033e489e77cd460d356252b3c694726b790c812f23ec71d",
+          "verified": true
+        },
+        {
+          "path": "handoff_contract.md",
+          "bytes": 3497,
+          "sha256": "45e10c161731aa108e3dc0df8262786f968a2bc8d7fa517b72ff6d17d6bb4835",
+          "verified": true
+        },
+        {
+          "path": "inputs.json",
+          "bytes": 497,
+          "sha256": "dfe0e34fe65a03e4eab829c5dd5cdc615381f4114ec4480011f1f8a79a220fd2",
+          "verified": true
+        }
+      ],
+      "current_product_changes": "none; git status only has provided docs/handoffs input",
+      "ready_to_dispatch": true
+    }
+  ],
+  "supplied_inputs_untracked_expected": true,
+  "independence": "three separate repositories/worktrees; product write sets and ROOT seams stated in construction cards",
+  "provider_calls": 0,
+  "model_calls": 0,
+  "paid_usd": "0"
+}

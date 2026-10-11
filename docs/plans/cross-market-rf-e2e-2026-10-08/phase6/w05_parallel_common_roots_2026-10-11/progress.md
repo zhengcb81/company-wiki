@@ -11,3 +11,7 @@
 W04分类worker最终STOP_PARTIAL：310focused测试绿，真实年报/半年报/IPO回放执行；短板仍有裸“未/没有+完成谓词”两处通用否定误判及部分候选固定预算落选。ROOT负责这部分，W05只做来源OCR，不与分类工作叠写。不因此发布尚未关闭的0.8源码。
 
 施工计划已正常提交并推远端master：db6a72eecdcd7ff84ca89514789c6625b81a32dd，提交/推送exit0，remote实读同HEAD。pre-push见publication/published.json与原始日志。native Git stdout含非UTF8，推送完成后的展示wrapper失败；只读替代解码/remote验真，不重复push。三卡可开工；ROOT继续W04未闭环问题，费用仍0。
+
+## 分包复核 2026-10-11T08:49:32.889509+00:00
+
+用户再次要求独立施工包：复核W05三树起点与状态，只有ROOT预置的docs/handoffs输入未提交，没有产品WIP；17个固定输入文件的字节/SHA及三张卡/共用交接格式完全匹配。可同时分派，尚未启动或完成施工。本次无项目provider/模型调用或新增费用。

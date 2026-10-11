@@ -20,3 +20,7 @@ ROOT集成树新cards父目录首次apply_patch创建失败，未写两卡；改
 发布前git diff --cached --check因两份新JSON的Windows CRLF报trailing whitespace，退出2；commit尚未启动。只将自己新生成的workspace/input-delivery两收据写为LF，JSON语义不变，不规范化历史PWF或封存审查报告。重新正常stage/check/commit，未绕过hooks。
 
 推送本身exit0，随后read_text UTF8展示日志抛UnicodeDecodeError；保留raw日志SHA，解码时errors=replace仅供展示并核实际remote，未重发推送。该异常不是测试/发布失败。
+
+## 分包复核 2026-10-11T08:49:32.889509+00:00
+
+再次分包时使用现成W05三卡，不重复创建任务。OCR写document_normalization；RF写期间合同及consumer；Audit只新增pool-progress模块。ROOT继续selector/预算/配置和跨仓最终接线。三个独立目录已存在；docs/handoffs未跟踪项是预置输入，不应清理掉。
