@@ -1,0 +1,164 @@
+{
+  "schema": "root-w06-portability-acceptance/1",
+  "status": "PASS_WITH_SCOPE",
+  "worker_delivery": "f8d5e0f4f6047375fdaef38e15e54edff2abe61d",
+  "final_product": {
+    "schema_version": "root-w06-portability-product-freeze/2",
+    "status": "READY_FOR_INDEPENDENT_REVIEW",
+    "head": "8862372f714209cff1b218d77b5c4b8af6bc74dc",
+    "previous_freeze_sha256": "b1662c806216a8c2e729ae7a48fda6b83a741a552e0e60323b1a662854dd715b",
+    "independent_fail_sha256": "c0a2bfa8963d8ea13212faef76e3f2dd589a75977d07f5d83ab64d5edfcd97bf",
+    "files": [
+      {
+        "path": "tools/source_root_portability/__init__.py",
+        "sha256": "436c64f4abc5830d80a7404416713f313575a82c359a1ddde9187ff867fdb656",
+        "byte_size": 315
+      },
+      {
+        "path": "tools/source_root_portability/consumer_spy.py",
+        "sha256": "347cd8fbb524a9c709779102e9adf908cb7193945df35059e8b377fc66d2fa1b",
+        "byte_size": 8381
+      },
+      {
+        "path": "tools/source_root_portability/fixture_builder.py",
+        "sha256": "af91addcbccdf85cd1431d9c7e2abd088b415bee035d06d3ffc86b85351b8c83",
+        "byte_size": 11295
+      },
+      {
+        "path": "tools/source_root_portability/oracle.py",
+        "sha256": "995290fbd149113624c288ac67b35377f35668696265f881d4e6e2a5ce05bcce",
+        "byte_size": 43619
+      },
+      {
+        "path": "tools/source_root_portability/report.py",
+        "sha256": "604dd0c5b70a0fdcb152d4495708f38216e48f6e1218e4e9b2cfbd421e073f7d",
+        "byte_size": 4075
+      },
+      {
+        "path": "tools/source_root_portability/run.py",
+        "sha256": "c4eda76d82a74cee0e4c52e9f40828e01c75f69a34dd5b8f82ba78b79d1f2c5c",
+        "byte_size": 12224
+      },
+      {
+        "path": "tools/source_root_portability/runtime.py",
+        "sha256": "96897a036650e2423a34fa446ce2675d33099c9464847abd9d10c6be92db180c",
+        "byte_size": 5677
+      },
+      {
+        "path": "tools/source_root_portability/scenarios.py",
+        "sha256": "7c4d1f9320981c4069b3e13268542a7ea9c74aa30bc67f5555f40a0f20370d4b",
+        "byte_size": 35876
+      },
+      {
+        "path": "tools/source_root_portability/README.md",
+        "sha256": "c1f2673c18d10eb126af8a7e49cc10d58ac2d164da12646d69f4c7b49095941b",
+        "byte_size": 6119
+      },
+      {
+        "path": "tests/unit/test_w06_root_portability_oracle.py",
+        "sha256": "0eba0482a7f5e9965e108fe5100aa387c27eb266f6a8244ce1367cdb40cbd363",
+        "byte_size": 30530
+      },
+      {
+        "path": "tests/integration/test_w06_root_portability.py",
+        "sha256": "19833f8153d0138b088a208a1349011e8e44b97f14aa95f68323ae7159d39d2f",
+        "byte_size": 14368
+      }
+    ],
+    "changed_within_original_11": [
+      "tools/source_root_portability/oracle.py",
+      "tools/source_root_portability/run.py",
+      "tests/unit/test_w06_root_portability_oracle.py"
+    ],
+    "final_node_sha256": "abdf9ddf173a22511fcd6b76f7391b05b0d5da80107f8eea089dfc54d541e8e9",
+    "real_report_sha256": "cdb53400b90fdd5fd090c23e0da299abdeeb79d9753de758334f5025bd763bf6",
+    "original_fail_replay_sha256": "40620d5a653b0940bc119e15fbbba74543a071ec2d61bc5e96494e910e412b50",
+    "producer_8_before_after_match": true,
+    "raw_originals_modified": 0,
+    "permission_gates_added": 0
+  },
+  "independent": {
+    "schema_version": "w06-portability-independent-verdict-acceptance/1",
+    "verdict": "PASS_WITH_SCOPE",
+    "reviewer": "/root/portability_verdict_final",
+    "blockers": [],
+    "accepted_fix": {
+      "root_cause": "Hard contract findings previously did not determine scenario and overall status unless their codes matched a whitelist.",
+      "resolution": "Explicit Finding outcomes with default FAIL and None diagnostics are projected by one monotonic aggregation rule. Finding names do not determine severity.",
+      "product_freeze_sha256": "ede6ae471e17ad5a77adb5a16c409b2b62617e53311bc96dd0e54083bb341bc3",
+      "changed_product_files": [
+        "tools/source_root_portability/oracle.py",
+        "tools/source_root_portability/run.py",
+        "tests/unit/test_w06_root_portability_oracle.py"
+      ]
+    },
+    "independent_execution": {
+      "case_count": 53,
+      "unexpected": 0,
+      "pure_probe_seconds": 0.033,
+      "original_four_effective_input_shas_match": true,
+      "original_four_overall_and_S2_status": "FAIL",
+      "default_constructor_and_helper_outcome": "FAIL",
+      "severity_states": [
+        "PASS",
+        "UNKNOWN",
+        "PARTIAL",
+        "FAIL",
+        "INVALID_RECORD"
+      ],
+      "all_base_states_and_explicit_outcomes_checked": true,
+      "None_diagnostics_checked": true,
+      "finding_code_prefix_independent": true,
+      "monotonic_and_order_independent": true,
+      "input_status_map_not_mutated": true,
+      "unknown_and_wrongly_typed_outcomes_return_structured_invalid": true,
+      "legitimate_diagnostic_UNKNOWN_PARTIAL_controls": true,
+      "old_and_current_frozen_seven_scene_records_still_PASS": true,
+      "results_ref": "results.json",
+      "replay_ref": "probes.py"
+    },
+    "receipt_scope": {
+      "author_tests": "69 passed, 1 skipped, 1 warning in 9.07s",
+      "author_synthetic_runner_seconds": 4.051,
+      "all_seven_author_scene_statuses": "PASS",
+      "final_node_sha256": "abdf9ddf173a22511fcd6b76f7391b05b0d5da80107f8eea089dfc54d541e8e9",
+      "real_run_report_sha256": "cdb53400b90fdd5fd090c23e0da299abdeeb79d9753de758334f5025bd763bf6",
+      "author_receipts_read_and_bound_not_reexecuted": true,
+      "prior_non_author_fullRef_rawCLI_environment_and_cleanup_evidence": "Preserved; prior review passed these areas and isolated only the repaired verdict aggregation P1.",
+      "four_doc_keys_three_logical_sources": true
+    },
+    "preservation": {
+      "eleven_product_SHAs_before_after_match": true,
+      "eight_producer_SHAs_before_after_match": true,
+      "original_independent_FAIL_and_counterexamples_unchanged": true,
+      "previous_real_run_report_unchanged": true,
+      "scratch_restored_absent": true,
+      "product_source_PWF_and_git_writes": 0,
+      "new_permission_gates": 0
+    },
+    "hygiene": {
+      "native_scenes_reexecuted": 0,
+      "large_suites_reexecuted": 0,
+      "network_calls": 0,
+      "provider_calls": 0,
+      "LLM_calls": 0,
+      "fees_usd": 0,
+      "real_originals_accessed": 0
+    },
+    "scope": "Common tool verdict aggregation, exact historical JSON counterexamples, and frozen Windows synthetic Reader/catalog/CLI receipts. No new certification of POSIX, cloud or external roots, real OCR/LLM behavior, raw financial-document coverage, or investment conclusions.",
+    "disposition": "STOP; ROOT may proceed with the normal scoped integration and publication. Original failing review remains historical evidence."
+  },
+  "engineering": {
+    "passed": 69,
+    "skipped_host_symlink": 1,
+    "seconds": 9.07
+  },
+  "actual_synthetic_reader_cli_scenarios": 7,
+  "scenario_seconds": 4.051,
+  "production_code_config_raw_unchanged": true,
+  "historical_failures_preserved": true,
+  "scope": "Windows synthetic source-root/Reader/full-Ref/CLI/tool verdict; not real cloud, POSIX, OCR, LLM or economic certification",
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "cost_micro_usd": 0
+}

@@ -1,0 +1,154 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\_harness_worktrees\w06\cwp-portability
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 22 items
+
+tests\unit\test_w06_root_portability_oracle.py .FFFFFFFFFFFFFFFF.F.FF    [100%]
+
+================================== FAILURES ===================================
+_______________ test_counterexample_missing_reopen_is_rejected ________________
+tests\unit\test_w06_root_portability_oracle.py:270: in test_counterexample_missing_reopen_is_rejected
+    assert verdict.statuses["S7"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+___________ test_counterexample_reopen_in_same_process_is_rejected ____________
+tests\unit\test_w06_root_portability_oracle.py:278: in test_counterexample_reopen_in_same_process_is_rejected
+    assert verdict.statuses["S7"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+______________ test_counterexample_sha_only_metadata_is_rejected ______________
+tests\unit\test_w06_root_portability_oracle.py:288: in test_counterexample_sha_only_metadata_is_rejected
+    assert verdict.statuses["S1"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+_______ test_counterexample_forged_receipt_skipping_reader_is_rejected ________
+tests\unit\test_w06_root_portability_oracle.py:298: in test_counterexample_forged_receipt_skipping_reader_is_rejected
+    assert verdict.statuses["S1"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+__________ test_counterexample_consumer_sneaks_raw_open_is_rejected ___________
+tests\unit\test_w06_root_portability_oracle.py:309: in test_counterexample_consumer_sneaks_raw_open_is_rejected
+    assert verdict.statuses["S7"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+___________ test_counterexample_fake_dates_after_move_are_rejected ____________
+tests\unit\test_w06_root_portability_oracle.py:318: in test_counterexample_fake_dates_after_move_are_rejected
+    assert verdict.statuses["S6"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+___________ test_counterexample_fake_fy_on_nonperiodic_is_rejected ____________
+tests\unit\test_w06_root_portability_oracle.py:327: in test_counterexample_fake_fy_on_nonperiodic_is_rejected
+    assert verdict.statuses["S6"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+____ test_counterexample_physical_duplicate_as_logical_source_is_rejected _____
+tests\unit\test_w06_root_portability_oracle.py:335: in test_counterexample_physical_duplicate_as_logical_source_is_rejected
+    assert verdict.statuses["S4"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+_________ test_counterexample_missing_policy_observation_is_rejected __________
+tests\unit\test_w06_root_portability_oracle.py:345: in test_counterexample_missing_policy_observation_is_rejected
+    assert verdict.statuses["S2"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+_____ test_counterexample_policy_change_claim_without_values_is_rejected ______
+tests\unit\test_w06_root_portability_oracle.py:355: in test_counterexample_policy_change_claim_without_values_is_rejected
+    assert verdict.statuses["S2"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+____________ test_counterexample_cleanup_out_of_scope_is_rejected _____________
+tests\unit\test_w06_root_portability_oracle.py:363: in test_counterexample_cleanup_out_of_scope_is_rejected
+    assert "false_pass_cleanup_out_of_scope" in _codes(verdict)
+E   AssertionError: assert 'false_pass_cleanup_out_of_scope' in set()
+E    +  where set() = _codes(OracleVerdict(statuses={'S1': 'PASS', 'S2': 'PASS', 'S3': 'PASS', 'S4': 'PASS', 'S5': 'PASS', 'S6': 'PASS', 'S7': 'PASS'}, findings=(), overall='PASS'))
+________________ test_counterexample_lost_sentinel_is_rejected ________________
+tests\unit\test_w06_root_portability_oracle.py:371: in test_counterexample_lost_sentinel_is_rejected
+    assert "false_pass_lost_sentinel" in _codes(verdict)
+E   AssertionError: assert 'false_pass_lost_sentinel' in set()
+E    +  where set() = _codes(OracleVerdict(statuses={'S1': 'PASS', 'S2': 'PASS', 'S3': 'PASS', 'S4': 'PASS', 'S5': 'PASS', 'S6': 'PASS', 'S7': 'PASS'}, findings=(), overall='PASS'))
+__________ test_counterexample_mutated_fixed_expectation_is_rejected __________
+tests\unit\test_w06_root_portability_oracle.py:379: in test_counterexample_mutated_fixed_expectation_is_rejected
+    assert "false_pass_fixed_expectation_mutated" in _codes(verdict)
+E   AssertionError: assert 'false_pass_fixed_expectation_mutated' in set()
+E    +  where set() = _codes(OracleVerdict(statuses={'S1': 'PASS', 'S2': 'PASS', 'S3': 'PASS', 'S4': 'PASS', 'S5': 'PASS', 'S6': 'PASS', 'S7': 'PASS'}, findings=(), overall='PASS'))
+______ test_unknown_identity_stability_cannot_pass_as_same_id_migration _______
+tests\unit\test_w06_root_portability_oracle.py:389: in test_unknown_identity_stability_cannot_pass_as_same_id_migration
+    assert verdict.statuses["S3"] in {oracle.STATUS_FAIL, oracle.STATUS_UNKNOWN}
+E   AssertionError: assert 'PASS' in {'FAIL', 'UNKNOWN'}
+___________ test_corruption_detected_only_via_metadata_is_rejected ____________
+tests\unit\test_w06_root_portability_oracle.py:398: in test_corruption_detected_only_via_metadata_is_rejected
+    assert verdict.statuses["S5"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+__________ test_fake_verified_receipt_while_raw_missing_is_rejected ___________
+tests\unit\test_w06_root_portability_oracle.py:406: in test_fake_verified_receipt_while_raw_missing_is_rejected
+    assert verdict.statuses["S5"] == oracle.STATUS_FAIL
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS
+_____________ test_malformed_record_is_invalid_not_a_product_bug ______________
+tests\unit\test_w06_root_portability_oracle.py:425: in test_malformed_record_is_invalid_not_a_product_bug
+    assert verdict.overall == oracle.STATUS_INVALID
+E   AssertionError: assert 'PASS' == 'INVALID_RECORD'
+E     
+E     - INVALID_RECORD
+E     + PASS
+_______________ test_offline_contract_requires_zero_http_calls ________________
+tests\unit\test_w06_root_portability_oracle.py:439: in test_offline_contract_requires_zero_http_calls
+    assert "offline_violation" in _codes(verdict)
+E   AssertionError: assert 'offline_violation' in set()
+E    +  where set() = _codes(OracleVerdict(statuses={'S1': 'PASS', 'S2': 'PASS', 'S3': 'PASS', 'S4': 'PASS', 'S5': 'PASS', 'S6': 'PASS', 'S7': 'PASS'}, findings=(), overall='PASS'))
+_____________________ test_code_identity_must_be_recorded _____________________
+tests\unit\test_w06_root_portability_oracle.py:447: in test_code_identity_must_be_recorded
+    assert "code_identity_missing" in _codes(verdict)
+E   AssertionError: assert 'code_identity_missing' in set()
+E    +  where set() = _codes(OracleVerdict(statuses={'S1': 'PASS', 'S2': 'PASS', 'S3': 'PASS', 'S4': 'PASS', 'S5': 'PASS', 'S6': 'PASS', 'S7': 'PASS'}, findings=(), overall='PASS'))
+=========================== short test summary info ===========================
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_missing_reopen_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_reopen_in_same_process_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_sha_only_metadata_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_forged_receipt_skipping_reader_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_consumer_sneaks_raw_open_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_fake_dates_after_move_are_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_fake_fy_on_nonperiodic_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_physical_duplicate_as_logical_source_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_missing_policy_observation_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_policy_change_claim_without_values_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_cleanup_out_of_scope_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_lost_sentinel_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_counterexample_mutated_fixed_expectation_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_unknown_identity_stability_cannot_pass_as_same_id_migration
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_corruption_detected_only_via_metadata_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_fake_verified_receipt_while_raw_missing_is_rejected
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_malformed_record_is_invalid_not_a_product_bug
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_offline_contract_requires_zero_http_calls
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_code_identity_must_be_recorded
+======================== 19 failed, 3 passed in 1.83s =========================

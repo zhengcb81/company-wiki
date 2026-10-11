@@ -1,0 +1,11 @@
+[S1] PASS
+[S2] PASS
+[S3] PASS
+[S4] PASS
+[S5] PASS
+[S6] PASS
+[S7] PASS
+report: C:\tmp\w06rp\out\attempt-0001\report.json
+overall: FAIL
+  finding: false_pass_physical_dup_as_logical_source [S4] fixture claims >1 logical source for one digest
+  finding: false_pass_sha_metadata_only [S4] read_sha256 does not match the fixture original
