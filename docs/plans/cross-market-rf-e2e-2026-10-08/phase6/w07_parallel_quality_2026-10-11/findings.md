@@ -8,3 +8,9 @@
 - 详细只读候选复核在 candidate-review.md。当前范围不需要真实金融数据或 LLM；不能据此认证经济结论。
 
 - Audit交付34b5c8ee/e3206880；ROOT独立TDD及agent试读发现引用存在不等于可解、全局合集丢scope、period-only actual假覆盖。通用native索引和scope/日期/数值修复后正常接收e7c92577、资料2c494913在Audit main；作者提交保持，旧断言保持，仅修默认synthetic builder悬空依赖。90PASS+4子案例，13真CLI，两安装入口及28×2 SHA绿。0网络/付费，不新增许可或预测阻断。
+
+## W07-RF-MODEL ROOT 接收结果
+
+工程工具接收、整卡部分覆盖：作者d282c9d/72d0ced保留，ROOT22RED/1PASS暴露误报共因；系统修复异常分类、per-case真实request/result、未知/空比较、完整清单、CLI/readonly/清理状态和原目录恢复。原assertions不变，最终36PASS/4.19s，原16向量11PASS/5REJECT_OK、三实际CLI0/2/0，1.394767s。正常main/origin/main8dc26710，推送前390PASS＋36subtests/32.07s，精确CI38168556914成功；150WIP文件SHA保持，不安装工程工具。
+
+仍缺CNY/HKD、并购控制/跨FY、联合量价、累计/净额/防双计、future actual/WAPE五组覆盖，不能称整卡COMPLETE，详[后续](ROOT-rf-remaining-coverage.md)。ROOT留证只存单份压缩native JSON与摘要，当前约330KB。0provider/LLM/费用；来源真值/买方经济判断仍未认证。CWP母PWF提交可在本地保存，远端发布仍待W04旧18失败修复，不以RF CI代替CWP发布。

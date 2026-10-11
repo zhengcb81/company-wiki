@@ -1,0 +1,23 @@
+{
+  "schema": "w07-root-publication/1",
+  "repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+  "main_head": "8dc2671040f4330d3b54d1bea1d17246130f9c2a",
+  "remote_main_head": "8dc2671040f4330d3b54d1bea1d17246130f9c2a",
+  "author_commits_included": true,
+  "main_wip_preserved_sha_files": 150,
+  "main_status": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? output/",
+  "normal_pre_push": "390 passed + 36 subtests / 32.07s; ruff and public types GREEN",
+  "skill_installation": "not applicable (engineering tool only)",
+  "coverage": "PARTIAL; see ROOT-rf-remaining-coverage.md",
+  "cost_usd": 0,
+  "ci": [
+    {
+      "id": 38168556914,
+      "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/38168556914",
+      "head_sha": "8dc2671040f4330d3b54d1bea1d17246130f9c2a",
+      "name": "quality",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

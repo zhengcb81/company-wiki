@@ -4,7 +4,7 @@
 
 ## 当前接收进度（2026-10-11）
 
-W07-AUDIT-ANALYST已接收、修复共用引用/作用域/actual诊断并并入Audit main：实现e7c92577，收尾2c494913；90PASS＋4子案例、原13真实CLI绿。两份技能各28文件一致，已连接第四reviewer并完成安装后实际入口验证。无remote，只有本地主线。详细见[ROOT接收PWF](../../../../../.planning/w07-audit-analyst-reception/task_plan.md)。另两包仍独立，当前未接收；不要把准备状态当作实时开工状态。
+W07-AUDIT-ANALYST已接收、修复共用引用/作用域/actual诊断并并入Audit main：实现e7c92577，收尾2c494913；90PASS＋4子案例、原13真实CLI绿。两份技能各28文件一致，已连接第四reviewer并完成安装后实际入口验证。无remote，只有本地主线。详细见[ROOT接收PWF](../../../../../.planning/w07-audit-analyst-reception/task_plan.md)。RF-MODEL工具已正常并线发布8dc26710/CI38168556914成功；组合覆盖PARTIAL，见[ROOT剩余覆盖计划](ROOT-rf-remaining-coverage.md)。FF仍未ROOT接收；不要把准备状态当作实时开工状态。
 
 | 包 | 工作内容 | 独立施工卡 | 工作目录 |
 |---|---|---|---|

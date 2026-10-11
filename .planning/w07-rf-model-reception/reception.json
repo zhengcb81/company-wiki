@@ -1,0 +1,98 @@
+{
+  "schema": "w07-root-rf-reception/1",
+  "acceptance": "ACCEPTED_PARTIAL_COVERAGE",
+  "repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+  "author_commits": [
+    "d282c9d58734d2905d5c8b20aa9ee0db1541a1da",
+    "72d0ced4f08d51256308707ab397fc280c35bb54"
+  ],
+  "regressions": {
+    "root_red": "22 failed / 1 passed",
+    "final": "36 passed / 4.19 seconds",
+    "original_assertions_unchanged": true
+  },
+  "native_e2e": {
+    "status": "COMPLETE",
+    "counts": {
+      "total": 16,
+      "passed": 11,
+      "failed": 0,
+      "reject_ok": 5,
+      "reject_mismatch": 0,
+      "errored": 0,
+      "not_run": 0
+    },
+    "class_status": {
+      "M01": "PASS",
+      "M02": "PASS",
+      "M03": "PASS",
+      "M04": "PASS",
+      "M05": "PASS",
+      "M06": "PASS",
+      "M07": "PASS",
+      "M08": "PASS"
+    },
+    "combination_coverage": {
+      "status": "PARTIAL",
+      "remaining": [
+        "M01 explicit CNY/HKD labels and same-currency scaling",
+        "M04 dated acquisition/control, cross-FY and missing-quarter ancestry",
+        "M06 correlated joint volume/price scenarios",
+        "M07 cumulative target and gross/net/cannibalization",
+        "M08 future actual/WAPE null through draft output"
+      ],
+      "note": "Class PASS describes declared vectors only, not every card boundary."
+    },
+    "wall_seconds": 1.394767,
+    "cleanup": {
+      "scratch_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\root-w07-rf-model-e2e-owned\\w07-523e81d95d2944a2909ff261556af379",
+      "baseline": {
+        "existed": false,
+        "sentinel": null
+      },
+      "restored_absent": true,
+      "owned_root_baseline": {
+        "existed": false,
+        "sentinel": null
+      },
+      "owned_root_restored": true,
+      "readonly_unchanged": true
+    },
+    "cli_evidence": {
+      "legal_validate_only": {
+        "command": "C:\\Miniconda\\python.exe -B C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\root-rf-model-reception\\scripts\\revenue_forecast.py C:\\Users\\郑曾波\\AppData\\Local\\Temp\\root-w07-rf-model-e2e-owned\\w07-523e81d95d2944a2909ff261556af379\\cli_legal_input.json --validate-only",
+        "returncode": 0,
+        "stdout_tail": "valid\n",
+        "stderr_tail": ""
+      },
+      "reject_validate_only": {
+        "command": "C:\\Miniconda\\python.exe -B C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\root-rf-model-reception\\scripts\\revenue_forecast.py C:\\Users\\郑曾波\\AppData\\Local\\Temp\\root-w07-rf-model-e2e-owned\\w07-523e81d95d2944a2909ff261556af379\\cli_reject_input.json --validate-only",
+        "returncode": 2,
+        "stdout_tail": "",
+        "stderr_tail": "error: fiscal_year_end is not a valid month-day\n"
+      },
+      "support_diagnostics": {
+        "command": "C:\\Miniconda\\python.exe -B C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\root-rf-model-reception\\scripts\\research_support_diagnostics.py --input C:\\Users\\郑曾波\\AppData\\Local\\Temp\\root-w07-rf-model-e2e-owned\\w07-523e81d95d2944a2909ff261556af379\\cli_support_input.json --output C:\\Users\\郑曾波\\AppData\\Local\\Temp\\root-w07-rf-model-e2e-owned\\w07-523e81d95d2944a2909ff261556af379\\cli_support_output.json",
+        "returncode": 0,
+        "stdout_tail": "",
+        "stderr_tail": ""
+      },
+      "support_output_schema": "economic-support-diagnostics/1"
+    },
+    "residuals": []
+  },
+  "payload": {
+    "relative_to_company_wiki": ".planning/w07-rf-model-reception/native-e2e.json.gz",
+    "sha256_gzip": "4813415bbf3561f0aed17d066c538900ac904237af0345e29e83b1c78ce0f94c",
+    "sha256_json": "230f253f925826121ff6d2b71929591dc4279fb6bab25327aaf2056ee1203528",
+    "bytes_json": 2842915,
+    "bytes_gzip": 221880
+  },
+  "scope": "Engineering tool execution accepted; wider card combination coverage remains OPEN, not a source truth or economic conclusion.",
+  "installation": "Not applicable: engineering tools excluded from installed RF skill.",
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "cost_usd": 0,
+  "wip_files_preserved": 150,
+  "publication": "Normal commit/push pending; ROOT records exact-head CI separately."
+}

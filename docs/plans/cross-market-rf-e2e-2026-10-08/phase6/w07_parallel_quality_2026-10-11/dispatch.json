@@ -12,7 +12,12 @@
       "branch": "codex/w07-rf-model-quality",
       "card_sha256": "4ad342bfd3da7bfe24c78c9bfee5f76c1684d1a6dd1868e599361620b61a1569",
       "input_manifest_sha256": "d7813ffeb7bc69b76bca2fb591c52fe4fd76dedef0a0ccf7f8c5bbd850fab59a",
-      "readonly_file_count": 271
+      "readonly_file_count": 271,
+      "status": "ACCEPTED_TOOL_PARTIAL_COVERAGE_MERGED_PUBLISHED",
+      "accepted_main_head": "8dc2671040f4330d3b54d1bea1d17246130f9c2a",
+      "exact_ci": 38168556914,
+      "root_evidence": ".planning/w07-rf-model-reception/publication.json",
+      "remaining_plan": "ROOT-rf-remaining-coverage.md"
     },
     {
       "lane": "W07-AUDIT-ANALYST",
