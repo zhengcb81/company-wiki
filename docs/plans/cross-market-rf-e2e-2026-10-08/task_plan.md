@@ -1,3 +1,20 @@
+## 当前执行与发布状态（2026-10-11T06:56:13.845649+00:00）
+
+- P7-AUDIT已正式接收：main c0993332，最终147 PASS/38.226s、独立5/5复验绿、两个独立安装目录已同步；没有remote，CI=not_triggered。CWP32a412bb、RFb7fe04aa、FF08ec85b2均已普通commit/main快进/push，精确源码CI38118943063/38118272390/38119051847均success。
+- 已完成源码与已安装入口一致。RF/FF的.claude是指向.agents的junction；RF7脚本、FF4脚本各只是一套物理文件，不能把两入口14/8条逻辑路径说成双份磁盘占用。FF同步4物理文件后重复alias旧SHA断言退出1，已真实samefile/原字节复核完成，不再重复写；错误和恢复均收据。
+- 正常CWP push实际2783 PASS/191.42s（whole221.6422s）；3234只是全unit+精选非unit理论union。先前额外5627测试超360s仍是timeout，不冒签；继续用现有受影响范围和CI，不删反例、不增加每小步复核。RF284 PASS/2subtests，FF645 PASS/7环境SKIP/78subtests，skip具体原因保持。
+- Wave2已派两排他树：WP02摘要语义（新CWP树32base）与WP06研究规范（RF b7base稀疏92files/1.10MB）。ROOT负责公共接口、配置G2和发布，worker不写共享PWF/旧run/production config。
+- selected-availability只读调查确认c620多issuer原件null全局事实正确；所选行只有revision clocks，无发布日期/链接或prior capture，actual2.2 availability=null。该项继续unknown，不能捏造历史资格；未来subject qualification seam仅在真实来源proof可用时由ROOT做TDD，不为此阻断其他合格年报/官方release的研究链。
+- 原三家12sealed审查FAIL/246映射、原raw、Dayu、生产config及邻仓WIP保持。本轮0供应商/模型/新费用；母账413778tokens/334463µUSD+FX2764，剩1586222tokens/$19.662773。mW03两唯一raw788213B和w4p1共享fixture仍保护。
+
+[精确发布收据与当前接口状态](phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/publication-status.json)。
+
+## Next Step
+
+接收WP02语义与WP06研究规范的排他交接，ROOT并行准备实际配置G2；只归档已STOP发布证据并正常推送。然后G2真实有限摘要→public读→RF实际消费，G4原三家新执行/12独审，G5新A/H/US及池loop。工程闭包不等于研究验收；主目标继续active。
+
+以下带日期内容为历史记录。
+
 ## 发布验收范围纠正（2026-10-11T06:31:19.815369+00:00）
 
 P7-AUDIT main/两处安装已完成；RF lint补充3文件无逻辑变化，完整9文件Ruff及既有mypy/30新测试绿，普通commit b7fe04aa已完成，main/远端发布在执行。FF WP04独立94checks PASS、真实FF→RF四类联调及200旧/新兼容绿，未签真实新下载/经济质量。

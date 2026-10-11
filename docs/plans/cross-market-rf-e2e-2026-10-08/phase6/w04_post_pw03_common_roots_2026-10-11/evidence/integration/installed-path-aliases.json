@@ -1,0 +1,26 @@
+{
+  "schema_version": "w04-installed-path-aliases/1",
+  "observed_at": "2026-10-11T06:54:56.529182+00:00",
+  "skills": [
+    {
+      "skill": "revenue-forecast-audit",
+      "claude_resolved": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "agents_resolved": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "same_physical_directory": false
+    },
+    {
+      "skill": "revenue-forecast",
+      "claude_resolved": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "agents_resolved": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "same_physical_directory": true
+    },
+    {
+      "skill": "filing-fetch",
+      "claude_resolved": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "agents_resolved": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "same_physical_directory": true
+    }
+  ],
+  "future_install_rule": "Resolve aliases before preflight; stage and replace each unique physical file once. Verify all user-visible skill entry paths afterward.",
+  "previous_receipt_counts": "Logical installation paths; do not interpret as distinct physical files"
+}

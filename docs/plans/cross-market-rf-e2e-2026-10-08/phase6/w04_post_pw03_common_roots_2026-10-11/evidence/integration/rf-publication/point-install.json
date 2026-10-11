@@ -1,0 +1,64 @@
+{
+  "schema_version": "w04-rf-point-install/1",
+  "source_head": "b7fe04aabe1d2a53b67a385c97161af976031040",
+  "elapsed_seconds": 0.2614,
+  "changed_total": 14,
+  "exact_changed_paths": [
+    "scripts/company_wiki_narrative_contracts.py",
+    "scripts/company_wiki_narrative_reader.py",
+    "scripts/filing_fetch_client.py",
+    "scripts/filing_upstream_cause.py",
+    "scripts/revenue_backtest.py",
+    "scripts/source_narrative_context.py",
+    "scripts/source_preparation.py"
+  ],
+  "installations": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "before_sha": {
+        "scripts/company_wiki_narrative_contracts.py": "87217f45ac810b572f4fba114b1ee0574ea437de5e973ea23374365c1384fecf",
+        "scripts/company_wiki_narrative_reader.py": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+        "scripts/filing_fetch_client.py": "7f730131f4bad0e22e3e43b0ffac48475dd1c373a4bc8dec40ad21a6b8a1341b",
+        "scripts/filing_upstream_cause.py": "ea4df706c2f2ea05c5e36a04574ea464b0ce249255ec4bf3263efcdaba836ae7",
+        "scripts/revenue_backtest.py": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+        "scripts/source_narrative_context.py": "c499ae024e9013c165aa98650df624b9567dd8ee67465a7826a06b35cfc18bde",
+        "scripts/source_preparation.py": "e8db267971f5c967ab6cd8e358e23423afe42f7af8ce19847be7b266cc00742d"
+      },
+      "after_sha": {
+        "scripts/company_wiki_narrative_contracts.py": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+        "scripts/company_wiki_narrative_reader.py": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+        "scripts/filing_fetch_client.py": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+        "scripts/filing_upstream_cause.py": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+        "scripts/revenue_backtest.py": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4",
+        "scripts/source_narrative_context.py": "3bdb21c4b08e85f03ff190a1d43945a70ac272afe1000a5748d17d7f2b4f0223",
+        "scripts/source_preparation.py": "ddb6b7224e1cf5141c04f6395f86390bbb898a52739de9763da6917e0dcfdab2"
+      }
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "before_sha": {
+        "scripts/company_wiki_narrative_contracts.py": "87217f45ac810b572f4fba114b1ee0574ea437de5e973ea23374365c1384fecf",
+        "scripts/company_wiki_narrative_reader.py": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+        "scripts/filing_fetch_client.py": "7f730131f4bad0e22e3e43b0ffac48475dd1c373a4bc8dec40ad21a6b8a1341b",
+        "scripts/filing_upstream_cause.py": "ea4df706c2f2ea05c5e36a04574ea464b0ce249255ec4bf3263efcdaba836ae7",
+        "scripts/revenue_backtest.py": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+        "scripts/source_narrative_context.py": "c499ae024e9013c165aa98650df624b9567dd8ee67465a7826a06b35cfc18bde",
+        "scripts/source_preparation.py": "e8db267971f5c967ab6cd8e358e23423afe42f7af8ce19847be7b266cc00742d"
+      },
+      "after_sha": {
+        "scripts/company_wiki_narrative_contracts.py": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+        "scripts/company_wiki_narrative_reader.py": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+        "scripts/filing_fetch_client.py": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+        "scripts/filing_upstream_cause.py": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+        "scripts/revenue_backtest.py": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4",
+        "scripts/source_narrative_context.py": "3bdb21c4b08e85f03ff190a1d43945a70ac272afe1000a5748d17d7f2b4f0223",
+        "scripts/source_preparation.py": "ddb6b7224e1cf5141c04f6395f86390bbb898a52739de9763da6917e0dcfdab2"
+      }
+    }
+  ],
+  "unchanged_files": "not written; no directory replacement or deletion",
+  "source_matches": true,
+  "model_calls": 0,
+  "provider_calls": 0,
+  "new_cost_usd": 0
+}

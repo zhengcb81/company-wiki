@@ -1,0 +1,17 @@
+{
+  "schema_version": "w04-exact-ci-observation/1",
+  "observed_at": "2026-10-11T06:45:49.912164+00:00",
+  "head": "32a412bb5bd60e750d51a332e349b21b7e96bd95",
+  "runs": [
+    {
+      "id": 38118943063,
+      "head_sha": "32a412bb5bd60e750d51a332e349b21b7e96bd95",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38118943063",
+      "created_at": "2026-10-11T06:42:38Z",
+      "updated_at": "2026-10-11T06:44:45Z"
+    }
+  ],
+  "raw_response_sha256": "a8fb1a22dc5adefa74084688d5f430bd0a4767c8dd69963b39b582d8fb0d1e10"
+}

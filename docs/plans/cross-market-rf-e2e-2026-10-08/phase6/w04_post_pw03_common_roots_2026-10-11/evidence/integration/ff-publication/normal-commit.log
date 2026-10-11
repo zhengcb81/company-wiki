@@ -1,0 +1,13 @@
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy public contracts (FC-1204-c, mirrors CI).........................................Passed
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[codex/m3-acceptance-20261010 08ec85b] fix(fetch): preserve typed request rejection diagnostics
+ 13 files changed, 251 insertions(+), 12 deletions(-)
+ create mode 100644 .planning/w04-wp04/findings.md
+ create mode 100644 .planning/w04-wp04/handoff.json
+ create mode 100644 .planning/w04-wp04/progress.md
+ create mode 100644 .planning/w04-wp04/root_acceptance/evidence-manifest.json
+ create mode 100644 .planning/w04-wp04/root_acceptance/review.json
+ create mode 100644 .planning/w04-wp04/root_acceptance/review.md
+ create mode 100644 .planning/w04-wp04/task_plan.md
+ create mode 100644 tests/test_w04_failure_observation.py

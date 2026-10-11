@@ -1,0 +1,463 @@
+{
+  "schema_version": "w04-projected-availability-investigation/1",
+  "status": "STOP",
+  "date": "2026-10-11",
+  "scope": {
+    "task": "Bounded read-only follow-up; G1 sealed unchanged",
+    "parent_sha256": "c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+    "selected_record_pointer": "/datas/0/records/1",
+    "raw_reads": 2,
+    "raw_bytes_per_read": 7102,
+    "full_engine_runs": 0,
+    "test_runs": 0,
+    "http_calls": 0,
+    "provider_calls": 0,
+    "model_calls": 0,
+    "source_writes": 0,
+    "inspection_method": "Verified existing public /3 sealed subject/spans; bounded local raw reader 2.2 on the single selected parent; source-known file reads.",
+    "environment_restored": true,
+    "not_inspected": "No whole lake, other parent originals, external publisher documentation or linked announcement download."
+  },
+  "conclusion": {
+    "actual_selected_claim_publication": "unknown",
+    "actual_selected_claim_data_period": "unknown; investor_relations is nonperiod; activity title alone is not typed reporting-period evidence",
+    "actual_asof_capture_eligibility": "unknown; no authentic 2.2 raw availability proof",
+    "g1_defect": "No newly reproducible G1 consumer contract defect; sealed verdict unchanged.",
+    "scope_gap": "Existing capture qualification is whole-raw SourceRef/manifest scoped. There is no subject/record/field clock input in the inspected public 2.2 interface. A source-owned selected-version qualification seam is needed if reliable selected-claim publication evidence is later established.",
+    "scope_gap_limit": "The sample does not establish reliable selected-claim publication. Adding a scoped DTO would not make these row timestamps sufficient.",
+    "responsibility": "Source layer establishes publisher field semantics, selected-version identity and publication/availability; RF verifies the declared as-of contract and preserves provenance.",
+    "root_decision": "Consider a WP07/G2 implementation detail; no implementation or economic-quality acceptance in this report."
+  },
+  "actual_evidence": {
+    "parent_ref": {
+      "byte_size": 7102,
+      "content_sha256": "c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+      "document_id": "urn:company-wiki:document:sha256:c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+      "mime_type": "application/json",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271"
+    },
+    "raw_body_sha256": "c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+    "parent_pagination": {
+      "total": 195,
+      "size": 3,
+      "current": 54,
+      "pages": 65
+    },
+    "same_parent_row_identity_and_clocks": [
+      {
+        "record_pointer": "/datas/0/records/0",
+        "identity": {
+          "id": 2508090,
+          "companyId": 151160,
+          "activityCompanyId": 57908,
+          "aactivityCompanyId": 57908,
+          "qactivityCompanyId": 57908,
+          "guestCompanyName": "久日新材",
+          "activityId": 40766
+        },
+        "clock_fields": {
+          "auditTime": "2026-09-10 15:38:33",
+          "crtTime": "2026-09-10 15:37:37",
+          "updTime": "2026-09-10 15:38:33",
+          "questionDate": "2026-09-10 15:00:35",
+          "questionUpdDate": "2026-09-10 15:00:35"
+        }
+      },
+      {
+        "record_pointer": "/datas/0/records/1",
+        "identity": {
+          "id": 2508080,
+          "companyId": 145565,
+          "activityCompanyId": 57790,
+          "aactivityCompanyId": 57790,
+          "qactivityCompanyId": 57790,
+          "guestCompanyName": "中微公司",
+          "activityId": 40766
+        },
+        "clock_fields": {
+          "auditTime": "2026-09-10 15:37:45",
+          "crtTime": "2026-09-10 15:36:00",
+          "updTime": "2026-09-10 15:37:45",
+          "questionDate": "2026-09-10 15:29:25",
+          "questionUpdDate": "2026-09-10 15:29:25"
+        }
+      },
+      {
+        "record_pointer": "/datas/0/records/2",
+        "identity": {
+          "id": 2508072,
+          "companyId": 269805,
+          "activityCompanyId": 57793,
+          "aactivityCompanyId": 57793,
+          "qactivityCompanyId": 57793,
+          "guestCompanyName": "晶升股份",
+          "activityId": 40766
+        },
+        "clock_fields": {
+          "auditTime": "2026-09-10 15:33:54",
+          "crtTime": "2026-09-10 15:33:03",
+          "updTime": "2026-09-10 15:33:54",
+          "questionDate": "2026-09-10 15:09:21",
+          "questionUpdDate": "2026-09-10 15:09:21"
+        }
+      }
+    ],
+    "selected_record_field_names": [
+      "id",
+      "questionType",
+      "questionId",
+      "userNickName",
+      "userType",
+      "isAnswerPassed",
+      "activityCompanyId",
+      "activityId",
+      "companyId",
+      "guestId",
+      "guestTitle",
+      "guestTitleEn",
+      "guestCompanyName",
+      "guestCompanyNameEn",
+      "guestName",
+      "guestNameEn",
+      "content",
+      "contentEn",
+      "status",
+      "auditUser",
+      "auditName",
+      "auditTime",
+      "isAnswered",
+      "isPush",
+      "askType",
+      "crtTime",
+      "updTime",
+      "isDel",
+      "isTestData",
+      "activityTitle",
+      "questionContent",
+      "questionContentEn",
+      "questionAskUserType",
+      "questionDate",
+      "isCancelInfo",
+      "questionUpdDate",
+      "guestImage",
+      "logoPath",
+      "miniLogoPath",
+      "qactivityCompanyId",
+      "aactivityCompanyId",
+      "isMulti"
+    ],
+    "selected_identity_and_clock_fields": {
+      "id": 2508080,
+      "companyId": 145565,
+      "activityCompanyId": 57790,
+      "guestCompanyName": "中微公司",
+      "activityId": 40766,
+      "auditTime": "2026-09-10 15:37:45",
+      "crtTime": "2026-09-10 15:36:00",
+      "updTime": "2026-09-10 15:37:45",
+      "questionDate": "2026-09-10 15:29:25",
+      "questionUpdDate": "2026-09-10 15:29:25",
+      "activityTitle": "科创板2026年半年度半导体制造、设备及材料行业集体业绩说明会"
+    },
+    "selected_text_fields": [
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:5d886e5e331dbc49635184ec6724b18d3f2da7e90bc9e120eb54340465e933cd",
+        "locator": "loc:v1/paragraph:30",
+        "raw_text_length": 199,
+        "answer_first_publication_known": false,
+        "as_of_eligibility": "eligible",
+        "decoded_sha256": "d68338dd98d21e16cc32b117323dd10e09b84133ecb1f1171e0fe3ff4de2f4ff",
+        "encoded_token_sha256": "ecd2b6370efd6a42e7f739b5586c86feddb0c3ba556cca1ec4d77f65be0f7f5d",
+        "original_role": "management_answer",
+        "parent_content_sha256": "c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+        "pointer": "/datas/0/records/1/content",
+        "provider_record_id": 2508080,
+        "record_pointer": "/datas/0/records/1",
+        "source_locator": "cwp-json-pointer/1|p=%2Fdatas%2F0%2Frecords%2F1%2Fcontent|b=2739:3338|d=0:199|x=json-string-decode/1",
+        "token_range": [
+          2739,
+          3338
+        ]
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:8548c49c8f2653735597012e3fbf509b59298f4a4cacfdd080134f48a77b7ad4",
+        "locator": "loc:v1/paragraph:37",
+        "raw_text_length": 43,
+        "answer_first_publication_known": false,
+        "as_of_eligibility": "eligible",
+        "decoded_sha256": "3bc0d5b047701506851ea1f4aec2949deac101f14616ba3404ff44e2e5dbd59a",
+        "encoded_token_sha256": "bac07a6075d7c3d453e0d60b5c08d9d688965e20056c9a01fd16e69a61a79d0a",
+        "original_role": "investor_question",
+        "parent_content_sha256": "c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+        "pointer": "/datas/0/records/1/questionContent",
+        "provider_record_id": 2508080,
+        "record_pointer": "/datas/0/records/1",
+        "source_locator": "cwp-json-pointer/1|p=%2Fdatas%2F0%2Frecords%2F1%2FquestionContent|b=4571:4702|d=0:43|x=json-string-decode/1",
+        "token_range": [
+          4571,
+          4702
+        ]
+      }
+    ],
+    "selected_record_linked_announcement_or_url_fields": [],
+    "selected_text_http_links": [],
+    "subject": {
+      "adapter": {
+        "layout_fingerprint": "8bd33122aba90026cecba77077f889d4d96084bff614fdebd2b2ae13f31c9eb8",
+        "layout_id": "official-paged-qa",
+        "layout_version": "1.0.0",
+        "parser": "cwp_official_json/1.0.2",
+        "structure_parser_version": "1.0.1"
+      },
+      "as_of_date": "2026-10-08",
+      "issuer": {
+        "canonical_name": null,
+        "entity_name": null,
+        "market": "CN",
+        "provider_activity_company_id": 57790,
+        "provider_company_id": 145565,
+        "security_id": "688012"
+      },
+      "item_key": "urn:company-wiki:source-projection:sha256:b0c6bfb3faa447f292330ae9d73a27a09367184a820bb6f8c454ab60ead7e695",
+      "kind": "official_json",
+      "subject_sha256": "b0c6bfb3faa447f292330ae9d73a27a09367184a820bb6f8c454ab60ead7e695"
+    },
+    "subject_parent_count": 65,
+    "subject_coverage": {
+      "as_of_excluded_records": 0,
+      "conflicting_record_ids": 0,
+      "diagnostics": [],
+      "duplicate_record_occurrences": 0,
+      "issuer_records_selected": 8,
+      "missing_record_ids": 0,
+      "other_issuer_records": 185,
+      "page_envelope_complete": true,
+      "pagination_complete": true,
+      "total_records": 195,
+      "unattributed_records": 2,
+      "unique_record_ids": 195
+    },
+    "receipt_2_2": {
+      "schema_version": "2.2",
+      "status": "ok",
+      "availability_evidence": null,
+      "read_at": "2026-10-11T06:44:35.422327+00:00",
+      "policy_sha256": "a624d4df552d6d37171905bba7016e01a46ae0d53005eafa72b6f72feb05af92",
+      "source_read_policy_sha256": "a61c5edf2e26eecbcd55e5124363f5d77b7fe46e25931abcc122394a12f81b48",
+      "manifest": {
+        "byte_size": 7102,
+        "canonical_entity_id": null,
+        "collector_name": "official-json-import",
+        "collector_version": "2.0.0",
+        "content_sha256": "c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+        "display_name": null,
+        "document_id": "urn:company-wiki:document:sha256:c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+        "document_kind": "investor_relations",
+        "fiscal_period": null,
+        "fiscal_year": null,
+        "form_type": null,
+        "language": null,
+        "market": null,
+        "mime_type": "application/json",
+        "period_end": null,
+        "provider": "official",
+        "provider_document_id": "c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+        "published_date": null,
+        "retrieved_at": "2026-10-11T01:22:25Z",
+        "security_id": null,
+        "source_id": "urn:company-wiki:source:sha256:c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+        "source_url": "https://roadshow.sseinfo.com/base-service/api/pub/v1/question_answer/answer_question_page",
+        "title": "roadshow.sseinfo.com:40766"
+      }
+    },
+    "receipt_bytes_sha256": "6c2086e0672a679446ebcd4916c2583195c1300c0a92b03c01da64a5fb01ad88",
+    "public_narrative_read_request": {
+      "as_of_date": "2026-10-08",
+      "expected_issuer": {
+        "market": "CN",
+        "security_id": "688012"
+      },
+      "narrative_ref": {
+        "artifact_sha256": "970ce8774bbf7ab660a5562c7c299057b54648b2b412872c0480ad8aa4ff19ff",
+        "artifact_version_id": "narrative-a4adc2b7681e42d8b3bc58818eae22c9",
+        "byte_size": 59247,
+        "generation_sha256": "edd259c118079788205c69422a5a61f033df5f9df6091e7b03167a41478eefa5",
+        "schema_version": "narrative-ref/3",
+        "subject_ref": {
+          "item_key": "urn:company-wiki:source-projection:sha256:b0c6bfb3faa447f292330ae9d73a27a09367184a820bb6f8c454ab60ead7e695",
+          "kind": "official_json",
+          "schema_version": "narrative-subject-ref/1",
+          "subject_sha256": "b0c6bfb3faa447f292330ae9d73a27a09367184a820bb6f8c454ab60ead7e695"
+        }
+      },
+      "schema_version": "narrative-read-request/3"
+    }
+  },
+  "public_interface": {
+    "legal_raw_read_argv": [
+      "python",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.source_reader_cli",
+      "--config",
+      "C:/Users/郑曾波/AppData/Local/Temp/w4p1-k4f7_7dv/CN-688012/config.yaml",
+      "--document-id",
+      "urn:company-wiki:document:sha256:c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+      "--source-id",
+      "urn:company-wiki:source:sha256:c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+      "--content-sha256",
+      "c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271",
+      "--purpose",
+      "filing_reuse",
+      "--include-availability-evidence"
+    ],
+    "runtime": "Isolated CWP src on PYTHONPATH; local already registered source only. The task-owned retained fixture config may not be durable.",
+    "actual_read_result": "status=ok, receipt=2.2, 7102 bytes, exact SHA matched; availability_evidence=null",
+    "legal_selected_availability_input": "None demonstrated by the existing inspected 2.2 DTO/CLI. Legal /3 narrative read preserves subject/parent/pointers but its as_of_eligibility does not establish first publication.",
+    "qualification_failure": "source_availability_unknown: publication unknown and no reliable prior availability proof",
+    "identity_rule": "Raw manifest null issuer/period facts must remain null. A registered raw candidate may omit unknown issuer fields; it must not copy selected issuer into raw manifest. Authentic raw availability would allow a raw capture followed by the independently bound projected subject, but none exists in this sample.",
+    "clock_rule": "crtTime/auditTime/updTime/questionDate are observed field values. No inspected contract establishes them as first public availability, and none may be relabeled prior_verified_capture.",
+    "existing_proof": "CWP 2.2 authenticates canonical acquisition sidecar DownloadReceipt HTTP 2xx, exact raw SHA/size/MIME, matching provider/candidate/top-level receipt fields. available_by is verified receipt retrieved_at UTC date; evidence_ref binds full sidecar byte SHA. This sample returns null; manifest retrieval 2026-10-11 and current read time are not historic evidence for 2026-10-08."
+  },
+  "source_anchors": [
+    {
+      "file": "company-wiki/src/company_wiki/source_catalog/source_reader_cli.py",
+      "line": 45,
+      "fact": "2.2 extension receives only exact raw identity; no subject/record/field argument."
+    },
+    {
+      "file": "company-wiki/src/company_wiki/source_catalog/source_availability.py",
+      "line": 46,
+      "fact": "Real DownloadReceipt and exact raw bytes qualify acquisition proof; no row timestamps."
+    },
+    {
+      "file": "company-wiki/src/company_wiki/source_catalog/source_availability.py",
+      "line": 70,
+      "fact": "whole-raw SHA and retrieved_at UTC date; sidecar full-byte SHA evidence_ref."
+    },
+    {
+      "file": "company-wiki/src/company_wiki/source_catalog/source_availability.py",
+      "line": 88,
+      "fact": "Bounded exact-version metadata lookup, max 64 locations and 64KiB each; no rehash/lake scan."
+    },
+    {
+      "file": "company-wiki/src/company_wiki/source_catalog/official_json_projection.py",
+      "line": 508,
+      "fact": "Observed revision times filter after-as-of records; creation is not answer publication."
+    },
+    {
+      "file": "company-wiki/src/company_wiki/source_catalog/official_json_projection.py",
+      "line": 569,
+      "fact": "answer_first_publication_known=False remains explicit."
+    },
+    {
+      "file": "company-wiki/src/company_wiki/source_catalog/official_json_projection.py",
+      "line": 971,
+      "fact": "EvidenceSpan retains exact parent SHA, record and field pointers, token ranges and encoded/decoded hashes."
+    },
+    {
+      "file": "revenue-forecast/scripts/company_wiki_source_reader_v2.py",
+      "line": 230,
+      "fact": "RF qualifies raw manifest published_date and whole-raw availability evidence."
+    },
+    {
+      "file": "revenue-forecast/scripts/source_preparation.py",
+      "line": 382,
+      "fact": "Supplied raw issuer/period fields must equal raw manifest; cannot pretend projection identity is raw identity."
+    },
+    {
+      "file": "revenue-forecast/scripts/contracts/source_clock.py",
+      "line": 57,
+      "fact": "DTO exact fields and only prior_verified_capture/primary_archive bases, bound to source_sha256."
+    },
+    {
+      "file": "revenue-forecast/scripts/contracts/source_clock.py",
+      "line": 88,
+      "fact": "Unknown publication without reliable proof is a named refusal; known publication controls cutoff."
+    },
+    {
+      "file": "revenue-forecast/scripts/source_narrative_context.py",
+      "line": 37,
+      "fact": "Narrative binds genuine parent SourceCapture and exact SourceRef; selected field locator survives."
+    }
+  ],
+  "proposed_minimal_seam": {
+    "classification": "Design proposal; not implemented or executed",
+    "owner": "CWP source/projection adapter establishes scoped source facts; RF public consumer validates and binds once",
+    "reuse": "Extend/version existing verified projection/public read receipt. Reuse current projection store, existing SourceRef verification, generation/subject/body hash lineage, and one verified raw buffer. No second task/database, separate authorization, duplicate issuer revalidation or extra original hash pass.",
+    "single_dto": {
+      "name": "subject-source-qualification/1 (proposed)",
+      "scope": "Distinct raw SourceRef and projected subject_ref; selected record/field set",
+      "identity": "Full parent SourceRef/SHA, subject/projection SHA, selected provider record ID and original record/field pointer with exact field hashes",
+      "issuer": "Source-qualified selected issuer with original pointers; raw container manifest retains its own null/whole-file facts",
+      "data_period": "Separate nullable typed period with source locator; nonperiod investor_relations remains null unless direct selected-claim evidence exists",
+      "clock": "Source-qualified selected-version publication/availability, or explicit unknown. Preserve original timestamp field/value/locator, extractor and verified provider semantics; bind original content version/hash and proof evidence_ref. Neighbor dates, activity title, mtime and current retrieval cannot establish this.",
+      "consumer": "RF validates expected as_of once against authenticated scoped qualification and binds rationale/source+original locator to genuine capture/projection lineage, without changing numbers or creating a SourceRef for text.",
+      "compatibility": "Whole-raw 2.2 proof semantics unchanged; any new scoped proof is distinct/versioned, never passed as invented source-availability-evidence/1."
+    },
+    "bounded_tdd_cases": [
+      "Actual c620 selected row remains unknown despite old crt/audit/upd fields and eligible selection; no capture promotion.",
+      "Neighbor issuer/date/period and H1 activity title cannot supply selected issuer/clock/period.",
+      "Altered parent SHA, projection SHA, pointer/field hash or later selected-answer revision cannot reuse an earlier scoped proof.",
+      "Source-authenticated selected-version publication/availability fixture qualifies exactly one as-of; lacks provider semantics or proof => unknown, date after as-of => named refusal.",
+      "RF adapter accepts source-qualified subject with raw null container facts, retains full lineage and one cutoff result; no invented raw publication/FY/security fields.",
+      "Only a future real source-qualified selected-version public receipt can clear this exact management chain in G2; synthetic signed fixtures prove contract behavior only."
+    ]
+  },
+  "verification": {
+    "source_hashes": [
+      {
+        "file": "company-wiki/src/company_wiki/source_catalog/source_availability.py",
+        "sha256": "53f42926fe54ad1165934170aa9f0d876a263856ea4408c6030a3131910c0bb2"
+      },
+      {
+        "file": "company-wiki/src/company_wiki/source_catalog/source_reader_cli.py",
+        "sha256": "afd5fdf3f5238c85f78f391cdc0fa9ec4cbc5c593e9b2a77b3e8916b0d0cb019"
+      },
+      {
+        "file": "company-wiki/src/company_wiki/source_catalog/official_json_projection.py",
+        "sha256": "3a0f7844f86eb07876812e5b8015c5179022762a3c25adc59b565a4f4f010adf"
+      },
+      {
+        "file": "revenue-forecast/scripts/company_wiki_source_reader_v2.py",
+        "sha256": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025"
+      },
+      {
+        "file": "revenue-forecast/scripts/contracts/source_clock.py",
+        "sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b"
+      },
+      {
+        "file": "revenue-forecast/scripts/source_preparation.py",
+        "sha256": "ddb6b7224e1cf5141c04f6395f86390bbb898a52739de9763da6917e0dcfdab2"
+      },
+      {
+        "file": "revenue-forecast/scripts/source_narrative_context.py",
+        "sha256": "3bdb21c4b08e85f03ff190a1d43945a70ac272afe1000a5748d17d7f2b4f0223"
+      }
+    ],
+    "sealed_g1_hashes_unchanged": [
+      {
+        "file": "review.json",
+        "sha256": "79af2a4d66fd426f1423be247881d0ce8e3380ce74b0843dd234d2d6f8cf5335"
+      },
+      {
+        "file": "review.md",
+        "sha256": "6869de8e9674dd8899b69f5323822e146078893ec34acb0a5cb4a1b6c80329b1"
+      }
+    ],
+    "independent_static_check": "snapshot_check child reviewed source_reader, source_availability, scoped read policy and SEC assertion scope; no writes/runs/network",
+    "not_executed": [
+      "No full engine or forecast_document run",
+      "No test suite or four independent reviews",
+      "No linked announcement fetch",
+      "No real selected-publication proof construction",
+      "No source/adapter implementation"
+    ]
+  },
+  "operational_notes": [
+    "Two bounded local reads of the same parent: initial verbose extraction output truncated, compact repeat succeeded.",
+    "One read-only PowerShell hash enumeration initially had an empty-pipe parser error; corrected read-only command succeeded.",
+    "Source gate was not bypassed or promoted to SourceCapture. No changes to sealed G1 reports."
+  ]
+}

@@ -1,0 +1,24 @@
+Updating e1e3ad8..08ec85b
+Fast-forward
+ .gitattributes                                     |   5 +-
+ .planning/w04-wp04/findings.md                     | Bin 0 -> 2219 bytes
+ .planning/w04-wp04/handoff.json                    | Bin 0 -> 6233 bytes
+ .planning/w04-wp04/progress.md                     | Bin 0 -> 1148 bytes
+ .../root_acceptance/evidence-manifest.json         | Bin 0 -> 1683 bytes
+ .planning/w04-wp04/root_acceptance/review.json     | Bin 0 -> 10866 bytes
+ .planning/w04-wp04/root_acceptance/review.md       | Bin 0 -> 1485 bytes
+ .planning/w04-wp04/task_plan.md                    | Bin 0 -> 1354 bytes
+ scripts/fetch_filing.py                            |   4 +
+ scripts/ff_provider_cause.py                       |  37 +++++
+ scripts/ff_v2_envelope.py                          |   5 +
+ scripts/filing_contracts.py                        |  43 ++++--
+ tests/test_w04_failure_observation.py              | 169 +++++++++++++++++++++
+ 13 files changed, 251 insertions(+), 12 deletions(-)
+ create mode 100644 .planning/w04-wp04/findings.md
+ create mode 100644 .planning/w04-wp04/handoff.json
+ create mode 100644 .planning/w04-wp04/progress.md
+ create mode 100644 .planning/w04-wp04/root_acceptance/evidence-manifest.json
+ create mode 100644 .planning/w04-wp04/root_acceptance/review.json
+ create mode 100644 .planning/w04-wp04/root_acceptance/review.md
+ create mode 100644 .planning/w04-wp04/task_plan.md
+ create mode 100644 tests/test_w04_failure_observation.py

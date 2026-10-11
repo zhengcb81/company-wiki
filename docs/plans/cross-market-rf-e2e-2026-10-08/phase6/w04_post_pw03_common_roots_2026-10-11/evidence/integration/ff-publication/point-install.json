@@ -1,0 +1,67 @@
+{
+  "schema_version": "w04-ff-point-install/1",
+  "source_head": "08ec85b27133cdf8a8d3b38fdba15255fc1ebac2",
+  "baseline": "e1e3ad8679e21264258e48006786fbf01a6991bd",
+  "observed_at": "2026-10-11T06:54:56.526962+00:00",
+  "physical_changed_files": 4,
+  "logical_visible_updated_files": 8,
+  "canonical_destination": "C:/Users/郑曾波/.agents/skills/filing-fetch",
+  "alias_destination": "C:/Users/郑曾波/.claude/skills/filing-fetch",
+  "alias_type": "directory junction",
+  "files": [
+    {
+      "path": "scripts/filing_contracts.py",
+      "reviewed_worktree_sha256": "18745e3fb395c398e7b00530b5228c8ccdce0bdf6fc876c609d71cd97e3b3245",
+      "committed_blob_sha256": "18745e3fb395c398e7b00530b5228c8ccdce0bdf6fc876c609d71cd97e3b3245",
+      "byte_identical": true,
+      "newline_only": true,
+      "worktree_crlf": 0,
+      "blob_crlf": 0,
+      "claude_current_sha256": "18745e3fb395c398e7b00530b5228c8ccdce0bdf6fc876c609d71cd97e3b3245",
+      "agents_current_sha256": "18745e3fb395c398e7b00530b5228c8ccdce0bdf6fc876c609d71cd97e3b3245"
+    },
+    {
+      "path": "scripts/fetch_filing.py",
+      "reviewed_worktree_sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+      "committed_blob_sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+      "byte_identical": true,
+      "newline_only": true,
+      "worktree_crlf": 0,
+      "blob_crlf": 0,
+      "claude_current_sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+      "agents_current_sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331"
+    },
+    {
+      "path": "scripts/ff_provider_cause.py",
+      "reviewed_worktree_sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a",
+      "committed_blob_sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a",
+      "byte_identical": true,
+      "newline_only": true,
+      "worktree_crlf": 0,
+      "blob_crlf": 0,
+      "claude_current_sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a",
+      "agents_current_sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a"
+    },
+    {
+      "path": "scripts/ff_v2_envelope.py",
+      "reviewed_worktree_sha256": "6cade6e377fc01e680a88c2911e72099d095bada110b28e3c255d211eef89e34",
+      "committed_blob_sha256": "6cade6e377fc01e680a88c2911e72099d095bada110b28e3c255d211eef89e34",
+      "byte_identical": true,
+      "newline_only": true,
+      "worktree_crlf": 0,
+      "blob_crlf": 0,
+      "claude_current_sha256": "6cade6e377fc01e680a88c2911e72099d095bada110b28e3c255d211eef89e34",
+      "agents_current_sha256": "6cade6e377fc01e680a88c2911e72099d095bada110b28e3c255d211eef89e34"
+    }
+  ],
+  "source_matches": true,
+  "samefile_verified": true,
+  "initial_command_exit": 1,
+  "initial_command_failure": "redundant alias old-SHA assertion after first physical destination was already installed",
+  "recovery": "Verify same physical target and exact source bytes; no second write or directory replacement",
+  "other_files_written": false,
+  "config_key_read_or_written": false,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "new_cost_usd": 0
+}

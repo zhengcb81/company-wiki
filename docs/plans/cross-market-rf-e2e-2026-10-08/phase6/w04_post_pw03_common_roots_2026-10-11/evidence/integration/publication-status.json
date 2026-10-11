@@ -1,0 +1,70 @@
+{
+  "schema_version": "w04-publication-status/1",
+  "observed_at": "2026-10-11T06:56:13.845649+00:00",
+  "repositories": {
+    "cwp": {
+      "head": "32a412bb5bd60e750d51a332e349b21b7e96bd95",
+      "main": "master",
+      "remote": "origin/master",
+      "ci": 38118943063,
+      "ci_conclusion": "success",
+      "prepush_tests": "2783 PASS /191.42s; whole push221.6422s",
+      "runtime": "main"
+    },
+    "rf": {
+      "head": "b7fe04aabe1d2a53b67a385c97161af976031040",
+      "main": "main",
+      "remote": "origin/main",
+      "ci": 38118272390,
+      "ci_conclusion": "success",
+      "prepush_tests": "284 PASS /2 subtests /29.63s",
+      "runtime": "two visible skill paths; one physical junction target, 7 scripts"
+    },
+    "ff": {
+      "head": "08ec85b27133cdf8a8d3b38fdba15255fc1ebac2",
+      "main": "main",
+      "remote": "origin/main",
+      "ci": 38119051847,
+      "ci_conclusion": "success",
+      "prepush_tests": "645 PASS /7 SKIP /78 subtests /65.98s",
+      "runtime": "two visible skill paths; one physical junction target, 4 scripts"
+    },
+    "audit": {
+      "head": "c0993332623637d53f059350a382d99a95ef731d",
+      "main": "main",
+      "remote": "no_remote",
+      "ci": null,
+      "ci_conclusion": "not_triggered",
+      "acceptance_tests": "147 PASS /38.226s; independent5/5",
+      "runtime": "two distinct skill directories, 18 changed files each /22 package files verified"
+    }
+  },
+  "research_status": "original3 sealed partial/FAIL unchanged; WP02/WP06/G2/G4/G5 pending",
+  "model_calls_this_publication": 0,
+  "provider_calls_this_publication": 0,
+  "new_cost_usd": 0,
+  "budget": {
+    "used_tokens": 413778,
+    "used_micro_usd": 334463,
+    "fx_hold_micro_usd": 2764,
+    "remaining_tokens": 1586222,
+    "remaining_usd": "19.662773"
+  },
+  "test_scope_note": "3234 is theoretical full unit plus selected nonunit union, not actual normal push count. Actual impacted normal push selected2783. Extra5627 manual command timed out360s; not PASS.",
+  "install_note": "RF/FF .claude is directory junction to .agents; count logical paths separately from physical files. Audit two physical directories.",
+  "availability_decision": "c620 selected management row remains unknown at historical as-of. Future subject-qualified publication seam is not proof for this item and does not block using qualified annual/release originals.",
+  "active_packages": [
+    {
+      "id": "WP02",
+      "path": "C:/Users/郑曾波/.codex/worktrees/w04-narrative-semantics-20261011/company-wiki",
+      "owner": "w04_wp02_narrative_semantics"
+    },
+    {
+      "id": "WP06",
+      "path": "C:/Users/郑曾波/.codex/worktrees/w04-research-authoring-20261011/revenue-forecast",
+      "owner": "w04_wp06_research_authoring",
+      "sparse_files": 92,
+      "sparse_byte_size": 1100392
+    }
+  ]
+}

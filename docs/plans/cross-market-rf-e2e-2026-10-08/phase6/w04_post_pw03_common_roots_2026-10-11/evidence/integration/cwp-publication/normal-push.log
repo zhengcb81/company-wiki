@@ -1,0 +1,8 @@
+Push unit scope: affected unit tests (152 paths)
+
+=== affected units and CI contract smoke ===
+====================== 2783 passed in 191.42s (0:03:11) =======================
+
+pre-push gate GREEN ¡ª safe to push (then self-monitor CI).
+To https://github.com/zhengcb81/company-wiki.git
+   3d540797..32a412bb  master -> master

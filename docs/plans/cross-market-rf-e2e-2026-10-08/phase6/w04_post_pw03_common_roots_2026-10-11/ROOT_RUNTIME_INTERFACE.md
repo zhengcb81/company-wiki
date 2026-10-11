@@ -17,3 +17,9 @@ Audit main c0993332 and two single-skill installations now contain the final run
 ## ROOT publication logging and scope
 
 Ordinary CWP publication uses the existing push gate/CI scope, not all manual contracts. The mistaken 5627-case manual command timed out at360s and is not PASS; truthful failure receipt retained. Stream stdout to exclusive log files and persist timeout receipts before leaving, rather than buffering all output until success. This is coordinator execution detail, not a new project gate or runtime permission.
+
+## Publication complete and next seams
+
+CWP32a412bb/RFb7fe04aa/FF08ec85b2 exact-source CI all success; auditc0993332 no_remote. Actual CWP affected push count2783, theoretical full-unit union3234 not an executed count. RF/FF installed entry paths are junction aliases: resolve target before preflight, write each unique physical file once and verify both visible entry paths. Audit installed directories are distinct. FF alias redundant-old-SHA failure is recorded with verified final bytes; no newline mismatch or directory replacement.
+
+The scoped-availability follow-up is STOP and does not alter G1. Actual c620 selected row has no verified prior publication; raw2.2 availability null remains correct. Do not infer publication from revision/event dates or invent a typed reporting period. A future source-owned subject qualification must bind exact selected identity/version/pointers/clock semantics before RF uses it; adding that DTO alone would not qualify this item. Continue current research with eligible annual/release sources and report this bounded source gap. No duplicate identity resolver/permission database.

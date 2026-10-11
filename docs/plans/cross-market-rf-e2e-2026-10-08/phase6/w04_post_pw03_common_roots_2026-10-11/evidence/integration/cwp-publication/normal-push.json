@@ -1,0 +1,11 @@
+{
+  "schema_version": "w04-cwp-normal-push/1",
+  "head": "32a412bb5bd60e750d51a332e349b21b7e96bd95",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 221.6422,
+  "log_sha256": "3ede777d5095cf5c183db894e924ba3a722a8c33c547f9f23ce2ee4b32d72f41",
+  "gate_scope": "existing push-checks, not all manual contracts",
+  "protected_config_unchanged": true,
+  "ci": "pending_exact_head_observation"
+}

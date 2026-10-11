@@ -1,0 +1,56 @@
+{
+  "schema_version": "w04-point-install-alias-observation/1",
+  "observed_at": "2026-10-11T06:54:56.525844+00:00",
+  "reason": "The install loop wrote four physical files through .claude junction. Its fifth iteration asserted the same physical .agents first file still had baseline bytes and stopped, because it was already updated. Newline mismatch was an incorrect initial hypothesis; all four committed/reviewed source bytes are identical.",
+  "files": [
+    {
+      "path": "scripts/filing_contracts.py",
+      "reviewed_worktree_sha256": "18745e3fb395c398e7b00530b5228c8ccdce0bdf6fc876c609d71cd97e3b3245",
+      "committed_blob_sha256": "18745e3fb395c398e7b00530b5228c8ccdce0bdf6fc876c609d71cd97e3b3245",
+      "byte_identical": true,
+      "newline_only": true,
+      "worktree_crlf": 0,
+      "blob_crlf": 0,
+      "claude_current_sha256": "18745e3fb395c398e7b00530b5228c8ccdce0bdf6fc876c609d71cd97e3b3245",
+      "agents_current_sha256": "18745e3fb395c398e7b00530b5228c8ccdce0bdf6fc876c609d71cd97e3b3245"
+    },
+    {
+      "path": "scripts/fetch_filing.py",
+      "reviewed_worktree_sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+      "committed_blob_sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+      "byte_identical": true,
+      "newline_only": true,
+      "worktree_crlf": 0,
+      "blob_crlf": 0,
+      "claude_current_sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+      "agents_current_sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331"
+    },
+    {
+      "path": "scripts/ff_provider_cause.py",
+      "reviewed_worktree_sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a",
+      "committed_blob_sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a",
+      "byte_identical": true,
+      "newline_only": true,
+      "worktree_crlf": 0,
+      "blob_crlf": 0,
+      "claude_current_sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a",
+      "agents_current_sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a"
+    },
+    {
+      "path": "scripts/ff_v2_envelope.py",
+      "reviewed_worktree_sha256": "6cade6e377fc01e680a88c2911e72099d095bada110b28e3c255d211eef89e34",
+      "committed_blob_sha256": "6cade6e377fc01e680a88c2911e72099d095bada110b28e3c255d211eef89e34",
+      "byte_identical": true,
+      "newline_only": true,
+      "worktree_crlf": 0,
+      "blob_crlf": 0,
+      "claude_current_sha256": "6cade6e377fc01e680a88c2911e72099d095bada110b28e3c255d211eef89e34",
+      "agents_current_sha256": "6cade6e377fc01e680a88c2911e72099d095bada110b28e3c255d211eef89e34"
+    }
+  ],
+  "superseded_observation_sha256": "5b4e4844a71406c9afc7b3e6b6466be92b8d41d8d925c1442196b5cf63701b73",
+  "physical_mutation_count": 4,
+  "logical_paths_updated": 8,
+  "samefile_verified_all_four": true,
+  "temporary_files_remaining": []
+}

@@ -1,0 +1,485 @@
+Updating 3d540797..32a412bb
+Fast-forward
+ .gitattributes                                     |   10 +
+ .../cross-market-rf-e2e-2026-10-08/findings.md     |   35 +
+ .../main_auto_official_json/P7_AUDIT_ACCEPTANCE.md |   19 +
+ .../phase6/main_auto_official_json/findings.md     |  127 +-
+ .../phase6/main_auto_official_json/progress.md     |   81 +-
+ .../phase6/main_auto_official_json/task_plan.md    |   35 +
+ .../p7_parallel_handoff_2026-10-10/README.md       |  126 +-
+ .../ROOT_RUNTIME_INTERFACE.md                      |  Bin 0 -> 3311 bytes
+ .../WP04_INTERFACE_AMENDMENT.md                    |  Bin 0 -> 1082 bytes
+ .../evidence/implementation/wp01/compatibility.log |  Bin 0 -> 1852 bytes
+ .../evidence/implementation/wp01/findings.md       |  Bin 0 -> 2335 bytes
+ .../evidence/implementation/wp01/green-initial.log |  Bin 0 -> 1122 bytes
+ .../evidence/implementation/wp01/green.log         |  Bin 0 -> 1122 bytes
+ .../evidence/implementation/wp01/handoff.json      |  Bin 0 -> 88246 bytes
+ .../implementation/wp01/implementation.diff        |  Bin 0 -> 43330 bytes
+ .../evidence/implementation/wp01/mypy.log          |  Bin 0 -> 44 bytes
+ .../evidence/implementation/wp01/progress.md       |  Bin 0 -> 942 bytes
+ .../implementation/wp01/public-producer.json       |  Bin 0 -> 66905 bytes
+ .../evidence/implementation/wp01/public-replay.log |  Bin 0 -> 1000 bytes
+ .../implementation/wp01/real-evidence3.stderr.json |  Bin 0 -> 981 bytes
+ .../implementation/wp01/real-evidence3.stdin.json  |  Bin 0 -> 725 bytes
+ .../implementation/wp01/real-evidence3.stdout.json |  Bin 0 -> 67310 bytes
+ .../implementation/wp01/real-read3.stderr.json     |  Bin 0 -> 931 bytes
+ .../implementation/wp01/real-read3.stdin.json      |  Bin 0 -> 725 bytes
+ .../implementation/wp01/real-read3.stdout.json     |  Bin 0 -> 59247 bytes
+ .../wp01/real-reference3.stderr.json               |  Bin 0 -> 667 bytes
+ .../implementation/wp01/real-reference3.stdin.json |  Bin 0 -> 424 bytes
+ .../wp01/real-reference3.stdout.json               |  Bin 0 -> 579 bytes
+ .../wp01/real-refusal-artifact.stderr.json         |  Bin 0 -> 108 bytes
+ .../wp01/real-refusal-artifact.stdin.json          |  Bin 0 -> 725 bytes
+ .../wp01/real-refusal-artifact.stdout.json         |  Bin
+ .../wp01/real-refusal-asof.stderr.json             |  Bin 0 -> 99 bytes
+ .../wp01/real-refusal-asof.stdin.json              |  Bin 0 -> 725 bytes
+ .../wp01/real-refusal-asof.stdout.json             |  Bin
+ .../wp01/real-refusal-generation.stderr.json       |  Bin 0 -> 108 bytes
+ .../wp01/real-refusal-generation.stdin.json        |  Bin 0 -> 725 bytes
+ .../wp01/real-refusal-generation.stdout.json       |  Bin
+ .../wp01/real-refusal-issuer.stderr.json           |  Bin 0 -> 103 bytes
+ .../wp01/real-refusal-issuer.stdin.json            |  Bin 0 -> 725 bytes
+ .../wp01/real-refusal-issuer.stdout.json           |  Bin
+ .../wp01/real-refusal-subject.stderr.json          |  Bin 0 -> 97 bytes
+ .../wp01/real-refusal-subject.stdin.json           |  Bin 0 -> 725 bytes
+ .../wp01/real-refusal-subject.stdout.json          |  Bin
+ .../evidence/implementation/wp01/red.log           |  Bin 0 -> 2662 bytes
+ .../evidence/implementation/wp01/replay_public.py  |  Bin 0 -> 14129 bytes
+ .../evidence/implementation/wp01/report.md         |  Bin 0 -> 3860 bytes
+ .../evidence/implementation/wp01/ruff.log          |  Bin 0 -> 20 bytes
+ .../wp01/scratch-cleanup-manifest.json             |  Bin 0 -> 423 bytes
+ .../evidence/implementation/wp01/task_plan.md      |  Bin 0 -> 1557 bytes
+ .../implementation/wp03/IMPLEMENTATION_RECEIPT.md  |  Bin 0 -> 4611 bytes
+ .../implementation/wp03/artifact-manifest.json     |  Bin 0 -> 4327 bytes
+ .../implementation/wp03/executed-commands.json     |  Bin 0 -> 3028 bytes
+ .../evidence/implementation/wp03/green-final3.log  |  Bin 0 -> 275 bytes
+ .../implementation/wp03/h1-actual-red.json         |  Bin 0 -> 458 bytes
+ .../wp03/h1-and-constraints-green.json             |  Bin 0 -> 1580 bytes
+ .../wp03/lint-amendment/AMENDMENT_RECEIPT.md       |  Bin 0 -> 2904 bytes
+ .../wp03/lint-amendment/artifact-manifest.json     |  Bin 0 -> 8883 bytes
+ .../wp03/lint-amendment/ast-semantic-check.json    |  Bin 0 -> 609 bytes
+ .../implementation/wp03/lint-amendment/before.json |  Bin 0 -> 817 bytes
+ .../before/scripts/revenue_backtest.py             |  Bin 0 -> 30159 bytes
+ .../before/tests/test_w04_public_consumer.py       |  Bin 0 -> 16578 bytes
+ .../before/tests/test_w04_snapshot_delivery.py     |  Bin 0 -> 2108 bytes
+ .../wp03/lint-amendment/check-results.json         |  Bin 0 -> 2589 bytes
+ .../wp03/lint-amendment/codegraph.json             |  Bin 0 -> 1113 bytes
+ .../wp03/lint-amendment/diff-check.log             |  Bin
+ .../wp03/lint-amendment/lint-amendment.diff        |  Bin 0 -> 2003 bytes
+ .../implementation/wp03/lint-amendment/mypy.log    |  Bin 0 -> 45 bytes
+ .../wp03/lint-amendment/owned-temp-cleanup.json    |  Bin 0 -> 211 bytes
+ .../implementation/wp03/lint-amendment/pytest.log  |  Bin 0 -> 101 bytes
+ .../lint-amendment/reexport-reference-check.json   |  Bin 0 -> 282 bytes
+ .../implementation/wp03/lint-amendment/ruff.log    |  Bin 0 -> 19 bytes
+ .../wp03/lint-amendment/source-amendment.json      |  Bin 0 -> 1283 bytes
+ .../evidence/implementation/wp03/local-static.json |  Bin 0 -> 2295 bytes
+ .../implementation/wp03/owned-temp-cleanup.json    |  Bin 0 -> 1359 bytes
+ .../implementation/wp03/public-consumer-green.json |  Bin 0 -> 6196 bytes
+ .../implementation/wp03/public-consumer-red.json   |  Bin 0 -> 699 bytes
+ .../evidence/implementation/wp03/red.log           |  Bin 0 -> 12494 bytes
+ .../evidence/implementation/wp03/red2.log          |  Bin 0 -> 3580 bytes
+ .../evidence/implementation/wp03/red3.log          |  Bin 0 -> 2969 bytes
+ .../evidence/implementation/wp03/red4.log          |  Bin 0 -> 2379 bytes
+ .../evidence/implementation/wp03/rf.diff           |  Bin 0 -> 66470 bytes
+ .../implementation/wp03/snapshot-native-proof.json |  Bin 0 -> 2155 bytes
+ .../evidence/implementation/wp04/HANDOFF.md        |  Bin 0 -> 1638 bytes
+ .../implementation/wp04/artifact-manifest.json     |  Bin 0 -> 5970 bytes
+ .../evidence/implementation/wp04/git-status.txt    |  Bin 0 -> 183 bytes
+ .../evidence/implementation/wp04/green.json        |  Bin 0 -> 1862 bytes
+ .../evidence/implementation/wp04/green.log         |  Bin 0 -> 264 bytes
+ .../implementation/wp04/implementation.diff        |  Bin 0 -> 19285 bytes
+ .../wp04/public-cli/exact_original-request.json    |  Bin 0 -> 292 bytes
+ .../public-cli/exact_original-rf-consumer.json     |  Bin 0 -> 422 bytes
+ .../wp04/public-cli/exact_original-stderr.txt      |  Bin
+ .../wp04/public-cli/exact_original-stdout.json     |  Bin 0 -> 689 bytes
+ .../wp04/public-cli/integration-receipt.json       |  Bin 0 -> 7837 bytes
+ .../public-cli/invalid_limits_derived-request.json |  Bin 0 -> 310 bytes
+ .../invalid_limits_derived-rf-consumer.json        |  Bin 0 -> 439 bytes
+ .../public-cli/invalid_limits_derived-stderr.txt   |  Bin
+ .../public-cli/invalid_limits_derived-stdout.json  |  Bin 0 -> 646 bytes
+ .../public-cli/latest_limits_original-request.json |  Bin 0 -> 299 bytes
+ .../latest_limits_original-rf-consumer.json        |  Bin 0 -> 443 bytes
+ .../public-cli/latest_limits_original-stderr.txt   |  Bin
+ .../public-cli/latest_limits_original-stdout.json  |  Bin 0 -> 697 bytes
+ .../public-cli/latest_year_derived-request.json    |  Bin 0 -> 337 bytes
+ .../latest_year_derived-rf-consumer.json           |  Bin 0 -> 422 bytes
+ .../wp04/public-cli/latest_year_derived-stderr.txt |  Bin
+ .../public-cli/latest_year_derived-stdout.json     |  Bin 0 -> 692 bytes
+ .../implementation/wp04/pytest-cleanup-after.json  |  Bin 0 -> 341 bytes
+ .../implementation/wp04/pytest-cleanup-before.json |  Bin 0 -> 7284 bytes
+ .../evidence/implementation/wp04/red.json          |  Bin 0 -> 1337 bytes
+ .../evidence/implementation/wp04/red.log           |  Bin 0 -> 31984 bytes
+ .../evidence/implementation/wp04/static.json       |  Bin 0 -> 857 bytes
+ .../evidence/implementation/wp04/static.log        |  Bin 0 -> 19 bytes
+ .../implementation/wp07/capture-cas-green.json     |  Bin 0 -> 351 bytes
+ .../implementation/wp07/capture-cas-green.log      |  Bin 0 -> 2011 bytes
+ .../implementation/wp07/capture-cas-red.json       |  Bin 0 -> 351 bytes
+ .../implementation/wp07/capture-cas-red.log        |  Bin 0 -> 5795 bytes
+ .../implementation/wp07/capture-core-green.json    |  Bin 0 -> 449 bytes
+ .../implementation/wp07/capture-core-green.log     |  Bin 0 -> 914 bytes
+ .../wp07/capture-recovery-green.json               |  Bin 0 -> 351 bytes
+ .../implementation/wp07/capture-recovery-green.log |  Bin 0 -> 2393 bytes
+ .../implementation/wp07/capture-recovery-red.json  |  Bin 0 -> 351 bytes
+ .../implementation/wp07/capture-recovery-red.log   |  Bin 0 -> 3859 bytes
+ .../evidence/implementation/wp07/capture-red.json  |  Bin 0 -> 405 bytes
+ .../evidence/implementation/wp07/capture-red.log   |  Bin 0 -> 3995 bytes
+ .../wp07/composer-cas-amendment.json               |  Bin 0 -> 1236 bytes
+ .../implementation/wp07/composer-cas-green.log     |  Bin 0 -> 2580 bytes
+ .../implementation/wp07/composer-cas-red.log       |  Bin 0 -> 4448 bytes
+ .../implementation/wp07/generation-green.json      |  Bin 0 -> 585 bytes
+ .../implementation/wp07/generation-green.log       |  Bin 0 -> 1441 bytes
+ .../implementation/wp07/generation-red.json        |  Bin 0 -> 719 bytes
+ .../implementation/wp07/partial-private-green.json |  Bin 0 -> 599 bytes
+ .../implementation/wp07/partial-private-green.log  |  Bin 0 -> 2785 bytes
+ .../implementation/wp07/partial-private-red.json   |  Bin 0 -> 351 bytes
+ .../implementation/wp07/partial-private-red.log    |  Bin 0 -> 4026 bytes
+ .../evidence/independent/g1-cwp/checks.json        |  Bin 0 -> 28640 bytes
+ .../evidence/independent/g1-cwp/checks.log         |  Bin 0 -> 4054 bytes
+ .../evidence/independent/g1-cwp/probe.py           |  Bin 0 -> 17396 bytes
+ .../g1-cwp/real-evidence-page.stderr.json          |  Bin 0 -> 981 bytes
+ .../g1-cwp/real-evidence-page.stdin.json           |  Bin 0 -> 725 bytes
+ .../g1-cwp/real-evidence-page.stdout.json          |  Bin 0 -> 67822 bytes
+ .../independent/g1-cwp/real-read.stderr.json       |  Bin 0 -> 931 bytes
+ .../independent/g1-cwp/real-read.stdin.json        |  Bin 0 -> 725 bytes
+ .../independent/g1-cwp/real-read.stdout.json       |  Bin 0 -> 59247 bytes
+ .../independent/g1-cwp/real-reference.stderr.json  |  Bin 0 -> 667 bytes
+ .../independent/g1-cwp/real-reference.stdin.json   |  Bin 0 -> 424 bytes
+ .../independent/g1-cwp/real-reference.stdout.json  |  Bin 0 -> 579 bytes
+ .../g1-cwp/refusal-artifact.stderr.json            |  Bin 0 -> 108 bytes
+ .../independent/g1-cwp/refusal-artifact.stdin.json |  Bin 0 -> 725 bytes
+ .../g1-cwp/refusal-artifact.stdout.json            |  Bin
+ .../independent/g1-cwp/refusal-asof.stderr.json    |  Bin 0 -> 99 bytes
+ .../independent/g1-cwp/refusal-asof.stdin.json     |  Bin 0 -> 725 bytes
+ .../independent/g1-cwp/refusal-asof.stdout.json    |  Bin
+ .../g1-cwp/refusal-generation.stderr.json          |  Bin 0 -> 108 bytes
+ .../g1-cwp/refusal-generation.stdin.json           |  Bin 0 -> 725 bytes
+ .../g1-cwp/refusal-generation.stdout.json          |  Bin
+ .../independent/g1-cwp/refusal-issuer.stderr.json  |  Bin 0 -> 103 bytes
+ .../independent/g1-cwp/refusal-issuer.stdin.json   |  Bin 0 -> 725 bytes
+ .../independent/g1-cwp/refusal-issuer.stdout.json  |  Bin
+ .../g1-cwp/refusal-last-parent-bytes.stderr.json   |  Bin 0 -> 101 bytes
+ .../g1-cwp/refusal-last-parent-bytes.stdin.json    |  Bin 0 -> 725 bytes
+ .../g1-cwp/refusal-last-parent-bytes.stdout.json   |  Bin
+ .../g1-cwp/refusal-wire-over-LF-cap.stderr.json    |  Bin 0 -> 92 bytes
+ .../g1-cwp/refusal-wire-over-LF-cap.stdin.json     |  Bin 0 -> 16385 bytes
+ .../g1-cwp/refusal-wire-over-LF-cap.stdout.json    |  Bin
+ .../evidence/independent/g1-cwp/review.json        |  Bin 0 -> 14282 bytes
+ .../evidence/independent/g1-cwp/review.md          |  Bin 0 -> 6272 bytes
+ .../independent/g1-ff/companion_invalid-stderr.txt |  Bin
+ .../g1-ff/companion_invalid-stdout.json            |  Bin 0 -> 447 bytes
+ .../independent/g1-ff/evidence-manifest.json       |  Bin 0 -> 1683 bytes
+ .../g1-ff/noncanonical_money-stderr.txt            |  Bin
+ .../g1-ff/noncanonical_money-stdout.json           |  Bin 0 -> 645 bytes
+ .../independent/g1-ff/nonfinite_time-stderr.txt    |  Bin
+ .../independent/g1-ff/nonfinite_time-stdout.json   |  Bin 0 -> 651 bytes
+ .../evidence/independent/g1-ff/probe.log           |  Bin 0 -> 5264 bytes
+ .../g1-ff/report-finalization-error.json           |  Bin 0 -> 615 bytes
+ .../evidence/independent/g1-ff/review.json         |  Bin 0 -> 10866 bytes
+ .../evidence/independent/g1-ff/review.md           |  Bin 0 -> 1485 bytes
+ .../independent/g1-rf/executed-commands.json       |  Bin 0 -> 3928 bytes
+ .../independent/g1-rf/microprobe-results.json      |  Bin 0 -> 7956 bytes
+ .../evidence/independent/g1-rf/review.json         |  Bin 0 -> 12833 bytes
+ .../evidence/independent/g1-rf/review.md           |  Bin 0 -> 4128 bytes
+ .../g1-rf/source-kind-compatibility.json           |  Bin 0 -> 1313 bytes
+ .../independent/g3-audit/alias-probe.command.json  |  Bin 0 -> 1784 bytes
+ .../evidence/independent/g3-audit/alias-probe.log  |  Bin 0 -> 329 bytes
+ .../g3-audit/boundary-probes.command.json          |  Bin 0 -> 7714 bytes
+ .../independent/g3-audit/boundary-probes.log       |  Bin 0 -> 2618 bytes
+ .../independent/g3-audit/evidence-manifest.json    |  Bin 0 -> 23089 bytes
+ .../g3-audit/final-combined-probe.command.json     |  Bin 0 -> 9218 bytes
+ .../independent/g3-audit/final-combined-probe.log  |  Bin 0 -> 6574 bytes
+ .../independent/g3-audit/final-review.json         |  Bin 0 -> 26185 bytes
+ .../evidence/independent/g3-audit/final-review.md  |  Bin 0 -> 1854 bytes
+ .../g3-audit/original-composer-red.command.json    |  Bin 0 -> 2337 bytes
+ .../independent/g3-audit/original-composer-red.log |  Bin 0 -> 548 bytes
+ .../independent/g3-audit/original-review.json      |  Bin 0 -> 35140 bytes
+ .../independent/g3-audit/original-review.md        |  Bin 0 -> 2759 bytes
+ .../g3-audit/pin-seal-probes.command.json          |  Bin 0 -> 3377 bytes
+ .../independent/g3-audit/pin-seal-probes.log       |  Bin 0 -> 622 bytes
+ .../g3-audit/recovery-status-probes.command.json   |  Bin 0 -> 5467 bytes
+ .../g3-audit/recovery-status-probes.log            |  Bin 0 -> 3872 bytes
+ .../g3-audit/sandbox-setup-failure.command.json    |  Bin 0 -> 2317 bytes
+ .../independent/g3-audit/sandbox-setup-failure.log |  Bin 0 -> 2619 bytes
+ .../independent/major-timeout/collect-all.log      |  Bin 0 -> 507540 bytes
+ .../independent/major-timeout/collect-fast.log     |  Bin 0 -> 15650 bytes
+ .../independent/major-timeout/collection.json      |  Bin 0 -> 5031 bytes
+ .../independent/major-timeout/manifest.json        |  Bin 0 -> 845 bytes
+ .../evidence/independent/major-timeout/review.json |  Bin 0 -> 8179 bytes
+ .../evidence/independent/major-timeout/review.md   |  Bin 0 -> 2957 bytes
+ .../audit-publication/.agents-audit_run.py.log     |  Bin 0 -> 2607 bytes
+ .../.agents-execution_request.py.log               |  Bin 0 -> 693 bytes
+ .../audit-publication/.claude-audit_run.py.log     |  Bin 0 -> 2607 bytes
+ .../.claude-execution_request.py.log               |  Bin 0 -> 693 bytes
+ .../audit-publication/main-fast-forward.json       |  Bin 0 -> 306 bytes
+ .../audit-publication/main-fast-forward.log        |  Bin 0 -> 17964 bytes
+ .../audit-publication/normal-commit.json           |  Bin 0 -> 3350 bytes
+ .../audit-publication/normal-commit.log            |  Bin 0 -> 2549 bytes
+ .../audit-publication/point-install.json           |  Bin 0 -> 4849 bytes
+ .../cwp-publication/pathspec-command-length.json   |  Bin 0 -> 328 bytes
+ .../cwp-publication/source-index-refresh.json      |  Bin 0 -> 2220 bytes
+ .../source-line-ending-preflight.json              |  Bin 0 -> 802 bytes
+ .../integration/g1-cwp/final-major-timeout.json    |  Bin 0 -> 1040 bytes
+ .../integration/g3-audit/final-accepted-major.json |  Bin 0 -> 2922 bytes
+ .../integration/g3-audit/final-accepted-major.log  |  Bin 0 -> 24385 bytes
+ .../evidence/integration/g3-audit/major-g3.json    |  Bin 0 -> 2257 bytes
+ .../evidence/integration/g3-audit/major-g3.log     |  Bin 0 -> 23324 bytes
+ .../rf-publication/main-fast-forward.json          |  Bin 0 -> 1053 bytes
+ .../rf-publication/main-fast-forward.log           |  Bin 0 -> 7794 bytes
+ .../rf-publication/normal-commit-after-lint.json   |  Bin 0 -> 820 bytes
+ .../rf-publication/normal-commit-after-lint.log    |  Bin 0 -> 4296 bytes
+ .../integration/rf-publication/normal-commit.json  |  Bin 0 -> 1856 bytes
+ .../integration/rf-publication/normal-commit.log   |  Bin 0 -> 4171 bytes
+ .../integration/rf-publication/normal-push.json    |  Bin 0 -> 338 bytes
+ .../integration/rf-publication/normal-push.log     |  Bin 0 -> 642 bytes
+ .../evidence/plan-publication/canonical-ff.json    |  Bin 0 -> 400 bytes
+ .../evidence/plan-publication/exact-ci.json        |  Bin 0 -> 435 bytes
+ .../evidence/plan-publication/normal-commit.json   |  Bin 0 -> 10251 bytes
+ .../evidence/plan-publication/normal-commit.log    |  Bin 0 -> 5988 bytes
+ .../evidence/plan-publication/normal-push.json     |  Bin 0 -> 465 bytes
+ .../evidence/plan-publication/normal-push.log      |  Bin 0 -> 327 bytes
+ .../cross-market-rf-e2e-2026-10-08/progress.md     |   35 +
+ .../cross-market-rf-e2e-2026-10-08/task_plan.md    |   35 +
+ .../automation/narrative_evidence_view.py          |  434 +++---
+ .../automation/narrative_generation.py             |   28 +-
+ src/company_wiki/automation/narrative_transport.py |  831 +++++-----
+ .../automation/narrative_transport_contracts.py    |  733 ++++-----
+ src/company_wiki/narrative_subject.py              |  384 ++---
+ src/company_wiki/source_catalog/document_kinds.py  |   43 +-
+ .../source_catalog/narrative_transport_cli.py      |  436 +++---
+ src/company_wiki/source_catalog/source_reader.py   | 1581 ++++++++++----------
+ tests/unit/test_w04_generation_identity.py         |   44 +
+ tests/unit/test_w04_source_transport.py            |  288 ++++
+ 249 files changed, 3031 insertions(+), 2274 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/P7_AUDIT_ACCEPTANCE.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/ROOT_RUNTIME_INTERFACE.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP04_INTERFACE_AMENDMENT.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/compatibility.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/findings.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/green-initial.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/implementation.diff
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/progress.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/public-producer.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/public-replay.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-evidence3.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-evidence3.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-evidence3.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-read3.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-read3.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-read3.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-reference3.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-reference3.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-reference3.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-artifact.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-artifact.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-artifact.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-asof.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-asof.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-asof.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-generation.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-generation.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-generation.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-issuer.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-issuer.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-issuer.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-subject.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-subject.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/real-refusal-subject.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/replay_public.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/report.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/scratch-cleanup-manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp01/task_plan.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/IMPLEMENTATION_RECEIPT.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/artifact-manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/executed-commands.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/green-final3.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/h1-actual-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/h1-and-constraints-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/AMENDMENT_RECEIPT.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/artifact-manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/ast-semantic-check.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/before.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/before/scripts/revenue_backtest.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/before/tests/test_w04_public_consumer.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/before/tests/test_w04_snapshot_delivery.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/check-results.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/codegraph.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/diff-check.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/lint-amendment.diff
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/owned-temp-cleanup.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/pytest.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/reexport-reference-check.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/lint-amendment/source-amendment.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/local-static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/owned-temp-cleanup.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/public-consumer-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/public-consumer-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/red2.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/red3.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/red4.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/rf.diff
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp03/snapshot-native-proof.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/artifact-manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/git-status.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/implementation.diff
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/exact_original-request.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/exact_original-rf-consumer.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/exact_original-stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/exact_original-stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/integration-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/invalid_limits_derived-request.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/invalid_limits_derived-rf-consumer.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/invalid_limits_derived-stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/invalid_limits_derived-stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/latest_limits_original-request.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/latest_limits_original-rf-consumer.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/latest_limits_original-stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/latest_limits_original-stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/latest_year_derived-request.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/latest_year_derived-rf-consumer.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/latest_year_derived-stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/public-cli/latest_year_derived-stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/pytest-cleanup-after.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/pytest-cleanup-before.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/static.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp04/static.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-cas-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-cas-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-cas-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-cas-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-core-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-core-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-recovery-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-recovery-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-recovery-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-recovery-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/capture-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/composer-cas-amendment.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/composer-cas-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/composer-cas-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/generation-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/generation-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/generation-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/partial-private-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/partial-private-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/partial-private-red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp07/partial-private-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/checks.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/checks.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/probe.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/real-evidence-page.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/real-evidence-page.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/real-evidence-page.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/real-read.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/real-read.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/real-read.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/real-reference.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/real-reference.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/real-reference.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-artifact.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-artifact.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-artifact.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-asof.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-asof.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-asof.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-generation.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-generation.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-generation.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-issuer.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-issuer.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-issuer.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-last-parent-bytes.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-last-parent-bytes.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-last-parent-bytes.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-wire-over-LF-cap.stderr.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-wire-over-LF-cap.stdin.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/refusal-wire-over-LF-cap.stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-cwp/review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/companion_invalid-stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/companion_invalid-stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/evidence-manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/noncanonical_money-stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/noncanonical_money-stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/nonfinite_time-stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/nonfinite_time-stdout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/probe.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/report-finalization-error.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-ff/review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-rf/executed-commands.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-rf/microprobe-results.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-rf/review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-rf/review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g1-rf/source-kind-compatibility.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/alias-probe.command.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/alias-probe.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/boundary-probes.command.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/boundary-probes.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/evidence-manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/final-combined-probe.command.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/final-combined-probe.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/final-review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/final-review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/original-composer-red.command.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/original-composer-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/original-review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/original-review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/pin-seal-probes.command.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/pin-seal-probes.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/recovery-status-probes.command.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/recovery-status-probes.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/sandbox-setup-failure.command.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g3-audit/sandbox-setup-failure.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/major-timeout/collect-all.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/major-timeout/collect-fast.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/major-timeout/collection.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/major-timeout/manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/major-timeout/review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/major-timeout/review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/audit-publication/.agents-audit_run.py.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/audit-publication/.agents-execution_request.py.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/audit-publication/.claude-audit_run.py.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/audit-publication/.claude-execution_request.py.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/audit-publication/main-fast-forward.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/audit-publication/main-fast-forward.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/audit-publication/normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/audit-publication/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/audit-publication/point-install.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-publication/pathspec-command-length.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-publication/source-index-refresh.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-publication/source-line-ending-preflight.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/g1-cwp/final-major-timeout.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/g3-audit/final-accepted-major.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/g3-audit/final-accepted-major.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/g3-audit/major-g3.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/g3-audit/major-g3.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-publication/main-fast-forward.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-publication/main-fast-forward.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-publication/normal-commit-after-lint.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-publication/normal-commit-after-lint.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-publication/normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-publication/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-publication/normal-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-publication/normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/plan-publication/canonical-ff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/plan-publication/exact-ci.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/plan-publication/normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/plan-publication/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/plan-publication/normal-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/plan-publication/normal-push.log
+ create mode 100644 tests/unit/test_w04_generation_identity.py
+ create mode 100644 tests/unit/test_w04_source_transport.py

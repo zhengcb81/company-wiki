@@ -1,0 +1,26 @@
+{
+  "schema_version": "w04-ff-normal-commit/1",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 7.1639,
+  "log_sha256": "6d4b70e3f4abf2e956eafc8685b0fd66ae0607fd767ccfd3110315eee7256467",
+  "staged_paths": [
+    ".gitattributes",
+    ".planning/w04-wp04/findings.md",
+    ".planning/w04-wp04/handoff.json",
+    ".planning/w04-wp04/progress.md",
+    ".planning/w04-wp04/root_acceptance/evidence-manifest.json",
+    ".planning/w04-wp04/root_acceptance/review.json",
+    ".planning/w04-wp04/root_acceptance/review.md",
+    ".planning/w04-wp04/task_plan.md",
+    "scripts/fetch_filing.py",
+    "scripts/ff_provider_cause.py",
+    "scripts/ff_v2_envelope.py",
+    "scripts/filing_contracts.py",
+    "tests/test_w04_failure_observation.py"
+  ],
+  "product_sha_exact": true,
+  "scope": "typed diagnostic only; six-key cause/latest unchanged",
+  "economic_quality": "NOT_EVALUATED",
+  "head": "08ec85b27133cdf8a8d3b38fdba15255fc1ebac2"
+}
