@@ -75,8 +75,9 @@ NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
 # 0.7.1 respects native document traversal, table and slide-shape boundaries.
-NARRATIVE_SELECTOR_VERSION = "0.7.1"
-SUPPORTED_NARRATIVE_SELECTOR_VERSIONS = frozenset({"0.6.0", "0.7.0", "0.7.1"})
+# 0.8.0 preserves bounded operating context in mixed narrative blocks.
+NARRATIVE_SELECTOR_VERSION = "0.8.0"
+SUPPORTED_NARRATIVE_SELECTOR_VERSIONS = frozenset({"0.6.0", "0.7.0", "0.7.1", "0.8.0"})
 
 
 class NarrativeSelectorVersionError(ValueError):
@@ -1521,6 +1522,10 @@ def _candidate_rules(*, selector_version: str | None = None) -> CandidateRules:
         heading_only=_HEADING_ONLY,
         static_definition=_STATIC_DEFINITION,
     )
+    if effective == "0.8.0":
+        from .narrative_business_groups import _operating_fact, _commercialization_milestone
+        return replace(rules, operating_facts=_operating_fact,
+            new_product_detector=_commercialization_milestone, reject_text=reject_finance_only_text)
     if effective in {"0.7.0", "0.7.1"}:
         return replace(rules, operating_facts=detect_business_fact, reject_text=reject_finance_only_text)
     return rules
@@ -1534,7 +1539,10 @@ def _base_candidates(
     dropped_financial = 0
     rules = _candidate_rules(selector_version=selector_version)
     for unit in parsed.units:
-        assessment = assess_unit(unit, rules)
+        unit_rules = (replace(rules, operating_facts=detect_business_fact)
+            if rules.new_product_detector and (unit.unit_kind == "pdf_table_row"
+                or unit.unit_kind.endswith("_table_cell")) else rules)
+        assessment = assess_unit(unit, unit_rules)
         if assessment.dropped_financial:
             dropped_financial += 1
         candidate = assessment.candidate
@@ -1643,6 +1651,7 @@ def select_narrative_evidence(
             quantified_market_coverage_target=_QUANTIFIED_MARKET_COVERAGE_TARGET,
             permit_milestone=_PERMIT_ACQUIRED_MILESTONE,
             new_product_milestone=_NEW_PRODUCT_COMMERCIALIZATION,
+            new_product_detector=_candidate_rules(selector_version=effective_version).new_product_detector,
             project_rationale=_PROJECT_RATIONALE_SIGNAL,
             downstream_extension=_DOWNSTREAM_BUSINESS_EXTENSION,
             project_plan=_PROJECT_PLAN,
@@ -1683,14 +1692,19 @@ def select_narrative_evidence(
     final_candidates = projects.candidates
     final_group_ids = projects.group_ids
     excluded_ids = enriched.excluded_context_unit_ids
-    if effective_version in {"0.7.0", "0.7.1"}:
+    if effective_version in {"0.7.0", "0.7.1", "0.8.0"}:
         final_candidates = tuple(candidate for candidate in final_candidates
             if not reject_finance_only_text(candidate.unit.raw_text))
+        group_options = {"respect_native_structure": effective_version in {"0.7.1", "0.8.0"}}
+        if effective_version == "0.8.0":
+            group_options["preserve_operating_context"] = True
         business = enrich_business_groups(parsed.units, initial_candidates=final_candidates,
             initial_group_ids=final_group_ids, rules=_candidate_rules(selector_version=effective_version),
-            respect_native_structure=effective_version == "0.7.1")
+            **group_options)
         final_candidates = business.candidates
         final_group_ids = business.group_ids
+        if effective_version == "0.8.0":
+            excluded_ids = excluded_ids - business.restored_unit_ids
         excluded_ids = excluded_ids | business.excluded_unit_ids
     return finalize_selection(
         original,
@@ -1700,6 +1714,7 @@ def select_narrative_evidence(
         heading_pattern=_HEADING_ONLY,
         dropped_financial_count=dropped_financial,
         excluded_context_unit_ids=excluded_ids,
+        budget_policy="semantic_coverage/1" if effective_version == "0.8.0" else "legacy",
     )
 
 

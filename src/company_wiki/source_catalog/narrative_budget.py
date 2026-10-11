@@ -7,6 +7,11 @@ per-category fair share stops one high-frequency reason class (generic risk or
 vague commitment language) from spending the whole budget before industry,
 project, product or capacity evidence gets its turn. The planner reads only
 the items it is given.
+
+The additive semantic_coverage/1 policy ranks content before page rotation
+within the same reason family and keeps plans/mechanisms distinct from generic
+events. Its context-length tie-breaker is bounded; the hard cost remains the
+actual span count. The default legacy policy stays replayable.
 """
 
 from __future__ import annotations
@@ -14,11 +19,15 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Generic, TypeVar
 
+from .narrative_semantic_coverage import CoverageSignature, softly_repeats
+
 
 PayloadT = TypeVar("PayloadT")
 OrderKey = tuple[int, ...]
 Priority = tuple[int, int, OrderKey, str]
 PageKey = tuple[str, int | str]
+LEGACY_BUDGET_POLICY = "legacy"
+SEMANTIC_BUDGET_POLICY = "semantic_coverage/1"
 
 _REASON_PRIORITY = (
     ("downstream_center_certification_timeline", -2),
@@ -93,6 +102,20 @@ CATEGORY_ORDER = (
     "industry",
     "other",
 )
+_SEMANTIC_REASON_CATEGORY = (
+    ("specific_operating_constraint", "critical_risk"),
+    *((reason, "product_milestone" if category == "named_product_milestone" else category)
+      for reason, category in _REASON_CATEGORY[:18]),
+    ("project_plan_or_status", "project"),
+    ("operating_mechanism", "operating_mechanism"),
+    *tuple(row for row in _REASON_CATEGORY[18:] if row[0] != "project_plan_or_status"),
+)
+_SEMANTIC_CATEGORY_ORDER = (
+    *tuple(category for category in CATEGORY_ORDER[:14] if category != "named_product_milestone"),
+    "project",
+    "operating_mechanism",
+    *tuple(category for category in CATEGORY_ORDER[14:] if category != "project"),
+)
 _RESERVED_REASONS = (
     "downstream_center_certification_timeline",
     "downstream_business_extension",
@@ -112,6 +135,9 @@ class BudgetItem(Generic[PayloadT]):
     score: int
     is_heading: bool
     payload: PayloadT
+    evidence_chars: int = 0
+    semantic_tokens: tuple[str, ...] = ()
+    coverage_signature: CoverageSignature | None = None
 
 
 @dataclass(frozen=True)
@@ -122,6 +148,11 @@ class _Bundle(Generic[PayloadT]):
     category: str
     priority: Priority
     score: int
+    evidence_chars: int
+    semantic_strength: int
+    quality_band: int
+    semantic_tokens: frozenset[str]
+    coverage_signature: CoverageSignature | None
 
     @property
     def cost(self) -> int:
@@ -135,8 +166,11 @@ def _reason_value(reasons: frozenset[str], choices: tuple[tuple[str, int], ...])
     return 7
 
 
-def _category(reasons: frozenset[str]) -> str:
-    for reason, category in _REASON_CATEGORY:
+def _category(
+    reasons: frozenset[str], policy: str = LEGACY_BUDGET_POLICY
+) -> str:
+    choices = _SEMANTIC_REASON_CATEGORY if policy == SEMANTIC_BUDGET_POLICY else _REASON_CATEGORY
+    for reason, category in choices:
         if reason in reasons:
             return category
     return "other"
@@ -149,11 +183,16 @@ def _priority(item: BudgetItem[Any]) -> Priority:
     return (rank, -item.score, item.order_key, item.item_id)
 
 
-def _make_bundle(key: str, items: list[BudgetItem[PayloadT]]) -> _Bundle[PayloadT]:
+def _make_bundle(
+    key: str, items: list[BudgetItem[PayloadT]], policy: str = LEGACY_BUDGET_POLICY
+) -> _Bundle[PayloadT]:
     ordered = tuple(sorted(items, key=_priority))
     first = ordered[0]
-    categories = {_category(frozenset(item.reasons)) for item in ordered}
-    category = min(categories, key=CATEGORY_ORDER.index)
+    categories = {_category(frozenset(item.reasons), policy) for item in ordered}
+    category_order = _SEMANTIC_CATEGORY_ORDER if policy == SEMANTIC_BUDGET_POLICY else CATEGORY_ORDER
+    category = min(categories, key=category_order.index)
+    signature = (first.coverage_signature if all(
+        item.coverage_signature == first.coverage_signature for item in ordered) else None)
     return _Bundle(
         key=key,
         items=ordered,
@@ -161,15 +200,82 @@ def _make_bundle(key: str, items: list[BudgetItem[PayloadT]]) -> _Bundle[Payload
         category=category,
         priority=min(_priority(item) for item in ordered),
         score=max(item.score for item in ordered),
+        evidence_chars=sum(item.evidence_chars for item in ordered),
+        semantic_strength=_semantic_strength(ordered, category),
+        quality_band=_quality_band(ordered, signature),
+        semantic_tokens=frozenset(token for item in ordered for token in item.semantic_tokens),
+        coverage_signature=signature,
     )
 
 
-def _bundles(items: tuple[BudgetItem[PayloadT], ...]) -> tuple[_Bundle[PayloadT], ...]:
+_SPECIFIC_FACT_REASONS = frozenset({
+    "specific_operating_constraint", "direct_capacity_constraint",
+    "long_customer_qualification_cycle", "quantified_industry_change",
+})
+_CONCRETE_CONTEXT_REASONS = frozenset({
+    "project_certification_timeline", "project_execution_timeline",
+    "downstream_center_certification_timeline", "downstream_business_extension",
+    "quantified_market_coverage_target", "concrete_fundraising_project",
+    "incremental_project_capacity", "quantified_industry_outlook",
+    "quantified_operating_status", "customer_adoption_milestone",
+    "applied_operating_milestone", "permit_acquired_milestone",
+    "corporate_development", "specific_project_rationale",
+})
+_CONTEXT_REASONS = frozenset({
+    "project_plan_or_status", "operating_mechanism",
+    "specific_emerging_business_positioning",
+})
+_PLAN_DIAGNOSTICS = frozenset({
+    "planned_or_conditional", "conditional", "prerequisite_or_preparation",
+})
+
+
+def _quality_band(
+    items: tuple[BudgetItem[Any], ...], signature: CoverageSignature | None
+) -> int:
+    """Internal ranking only: source facts outrank same-level category quotas.
+
+    Concrete constraints/industry changes are classified by their source
+    owner. A commercial label alone is insufficient: the shared whole-group
+    predicate proof must actually be realized. A dated/quantified plan remains
+    valuable context, never a realized stage. The planner does not open text
+    payloads or invent a second classifier for those source-owned categories.
+    """
+    reasons = frozenset(reason for item in items for reason in item.reasons)
+    signals = signature.stage_signals if signature is not None else ()
+    if reasons & _SPECIFIC_FACT_REASONS or any(realized for _, _, realized, _ in signals):
+        return 0
+    if "new_product_commercialization_milestone" in reasons:
+        if reasons & _CONCRETE_CONTEXT_REASONS and any(
+            diagnostic in _PLAN_DIAGNOSTICS for _, _, _, diagnostic in signals
+        ):
+            return 1
+        # Unknown/negated stages cannot become realized because an earlier
+        # enrichment attached a commercial reason or a large numeric score.
+        return 2
+    if reasons & _CONCRETE_CONTEXT_REASONS:
+        return 1
+    return 2 if reasons & _CONTEXT_REASONS else 3
+
+
+def _semantic_strength(items: tuple[BudgetItem[Any], ...], category: str) -> int:
+    if category != "product_milestone":
+        return 0
+    reasons = frozenset(reason for item in items for reason in item.reasons)
+    if "new_product_commercialization_milestone" in reasons:
+        return 0 if "quantified_operating_status" in reasons else 1
+    return 2  # Name/adjacent context without an asserted operating stage.
+
+
+
+def _bundles(
+    items: tuple[BudgetItem[PayloadT], ...], policy: str = LEGACY_BUDGET_POLICY
+) -> tuple[_Bundle[PayloadT], ...]:
     grouped: dict[str, list[BudgetItem[PayloadT]]] = {}
     for item in items:
         key = f"group:{item.group_id}" if item.group_id is not None else f"item:{item.item_id}"
         grouped.setdefault(key, []).append(item)
-    return tuple(_make_bundle(key, values) for key, values in grouped.items())
+    return tuple(_make_bundle(key, values, policy) for key, values in grouped.items())
 
 
 def _bundle_sort_key(bundle: _Bundle[Any]) -> tuple[object, ...]:
@@ -184,7 +290,7 @@ def _bundle_sort_key(bundle: _Bundle[Any]) -> tuple[object, ...]:
 
 
 def _reserve(
-    bundles: tuple[_Bundle[PayloadT], ...], limit: int
+    bundles: tuple[_Bundle[PayloadT], ...], limit: int, *, semantic: bool = False
 ) -> tuple[list[_Bundle[PayloadT]], set[str]]:
     reserved: list[_Bundle[PayloadT]] = []
     keys: set[str] = set()
@@ -195,7 +301,9 @@ def _reserve(
             if bundle.key not in keys
             and any(reason in item.reasons for item in bundle.items)
         ]
-        options.sort(key=_bundle_sort_key)
+        options.sort(key=(lambda bundle: (bundle.quality_band, bundle.semantic_strength, -bundle.score,
+            -min(bundle.evidence_chars, 512), bundle.priority[2:], bundle.key))
+            if semantic else _bundle_sort_key)
         if (
             options
             and sum(bundle.cost for bundle in reserved) + options[0].cost <= limit
@@ -228,18 +336,29 @@ def _over_share(taken: int, fair_share: int | None) -> bool:
 
 
 def _plan(
-    items: tuple[BudgetItem[PayloadT], ...], limit: int
+    items: tuple[BudgetItem[PayloadT], ...], limit: int, policy: str = LEGACY_BUDGET_POLICY
 ) -> tuple[tuple[BudgetItem[PayloadT], ...], tuple[BudgetDiagnostic, ...]]:
+    if policy not in {LEGACY_BUDGET_POLICY, SEMANTIC_BUDGET_POLICY}:
+        raise ValueError(f"unknown budget policy: {policy}")
+    semantic = policy == SEMANTIC_BUDGET_POLICY
+    if semantic and any(type(item.evidence_chars) is not int or item.evidence_chars < 0 for item in items):
+        raise ValueError("evidence_chars must be a nonnegative integer")
+    if semantic and any(not isinstance(item.semantic_tokens, tuple)
+            or len(item.semantic_tokens) > 512
+            or any(not isinstance(token, str) or not token for token in item.semantic_tokens)
+            for item in items):
+        raise ValueError("semantic_tokens must be a bounded tuple of nonempty strings")
     if limit < 1:
         raise ValueError("limit must be positive")
     item_ids = [item.item_id for item in items]
     if len(item_ids) != len(set(item_ids)):
         raise ValueError("item_id values must be unique")
     if len(items) <= limit:
-        return items, ()
+        return (tuple(sorted(items, key=_priority)) if semantic else items), ()
 
-    bundles = _bundles(items)
-    selected, reserved_keys = _reserve(bundles, limit)
+    bundles = _bundles(items, policy)
+    category_order = _SEMANTIC_CATEGORY_ORDER if semantic else CATEGORY_ORDER
+    selected, reserved_keys = _reserve(bundles, limit, semantic=semantic)
     counts: dict[str, int] = {}
     page_visits: dict[tuple[str, PageKey], int] = {}
     for bundle in selected:
@@ -256,8 +375,33 @@ def _plan(
     for values in remaining.values():
         values.sort(key=lambda bundle: (bundle.priority, bundle.cost, bundle.key))
 
+    def repeats_selected(bundle: _Bundle[PayloadT]) -> bool:
+        # The finalizer owns full-group/native-order construction; this pure
+        # planner only reads the supplied metadata, never its payload text.
+        return any(old.category == bundle.category
+            and softly_repeats(bundle.coverage_signature, old.coverage_signature)
+            for old in selected)
+
     def offer_key(page_key: PageKey, bundle: _Bundle[PayloadT]) -> tuple[object, ...]:
         taken = counts.get(bundle.category, 0)
+        if semantic:
+            # A whole business context competes on content before physical page
+            # rotation. The bounded tie-breaker never outranks a higher score
+            # or changes the actual number of spans charged to the hard cap.
+            return (
+                bundle.quality_band,
+                _over_share(taken, fair_share),
+                category_order.index(bundle.category),
+                int(bundle.category == "product_milestone" and bundle.semantic_strength == 2),
+                repeats_selected(bundle),
+                bundle.semantic_strength,
+                -bundle.score,
+                -min(bundle.evidence_chars, 512),
+                page_visits.get((bundle.category, page_key), 0),
+                bundle.priority[2:],
+                bundle.key,
+                _page_sort_key(page_key),
+            )
         return (
             _over_share(taken, fair_share),
             CATEGORY_ORDER.index(bundle.category),
@@ -296,7 +440,7 @@ def _plan(
             else:
                 reason = "group_exceeds_limit" if bundle.cost > limit else "budget_full"
                 dropped.append((bundle, reason))
-            if fair_share is not None:
+            if fair_share is not None or semantic:
                 # Re-offer a busy page immediately: its next category must
                 # compete before unrelated pages exhaust the whole budget.
                 # Per-category page visits still rotate equally ranked facts.
@@ -323,10 +467,11 @@ def _plan(
 
 
 def select_budget_items(
-    items: tuple[BudgetItem[PayloadT], ...], *, limit: int
+    items: tuple[BudgetItem[PayloadT], ...], *, limit: int,
+    policy: str = LEGACY_BUDGET_POLICY,
 ) -> tuple[BudgetItem[PayloadT], ...]:
     """Select whole context groups within a hard span budget."""
-    return _plan(items, limit)[0]
+    return _plan(items, limit, policy)[0]
 
 
 @dataclass(frozen=True)
@@ -344,16 +489,19 @@ class BudgetDiagnostic:
 
 
 def budget_diagnostics(
-    items: tuple[BudgetItem[PayloadT], ...], *, limit: int
+    items: tuple[BudgetItem[PayloadT], ...], *, limit: int,
+    policy: str = LEGACY_BUDGET_POLICY,
 ) -> tuple[BudgetDiagnostic, ...]:
     """Explain every bundle left outside the budget for the same inputs."""
-    return _plan(items, limit)[1]
+    return _plan(items, limit, policy)[1]
 
 
 __all__ = [
     "BudgetDiagnostic",
     "BudgetItem",
     "CATEGORY_ORDER",
+    "LEGACY_BUDGET_POLICY",
+    "SEMANTIC_BUDGET_POLICY",
     "budget_diagnostics",
     "select_budget_items",
 ]

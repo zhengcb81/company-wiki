@@ -36,3 +36,6 @@
 /.planning/w06-cross-period-acquisition/cutoff-implementation/** -text -diff
 /.planning/w06-cross-period-acquisition/cutoff-independent/retest/** -text -diff
 /.planning/w07-parallel-packages/** -text -diff
+
+# Exact ROOT W04 integration receipts.
+/.planning/w04-selector-reception/** -text -diff

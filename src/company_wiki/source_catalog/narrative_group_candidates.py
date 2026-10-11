@@ -67,6 +67,7 @@ class GroupCandidateRules:
     quantified_market_coverage_target: re.Pattern[str] = _NEVER
     permit_milestone: re.Pattern[str] = _NEVER
     new_product_milestone: re.Pattern[str] = _NEVER
+    new_product_detector: Callable[[str], bool] | None = None
     project_rationale: re.Pattern[str] = _NEVER
     downstream_extension: re.Pattern[str] = _NEVER
     project_plan: re.Pattern[str] = _NEVER
@@ -170,7 +171,8 @@ def _signals(
         certification_timeline=_match(rules.project_certification_timeline, text),
         market_coverage_target=_match(rules.quantified_market_coverage_target, text),
         permit_milestone=_match(rules.permit_milestone, text),
-        new_product_milestone=_match(rules.new_product_milestone, text),
+        new_product_milestone=(rules.new_product_detector(text) if rules.new_product_detector
+            else _match(rules.new_product_milestone, text)),
         project_rationale=_match(rules.project_rationale, text),
         downstream_extension=_match(rules.downstream_extension, text),
         project=any(

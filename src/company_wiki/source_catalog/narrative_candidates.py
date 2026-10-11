@@ -62,6 +62,7 @@ class CandidateRules:
     project_certification_timeline: re.Pattern[str] = _NEVER
     permit_milestone: re.Pattern[str] = _NEVER
     new_product_milestone: re.Pattern[str] = _NEVER
+    new_product_detector: Callable[[str], bool] | None = None
     recency: re.Pattern[str] = _NEVER
     table_of_contents: re.Pattern[str] = _NEVER
     accounting_context: re.Pattern[str] = _NEVER
@@ -117,7 +118,8 @@ def _signals(text: str, topics: tuple[str, ...], rules: CandidateRules) -> _Sign
         long_customer_qualification=_match(rules.long_customer_qualification, text),
         project_certification_timeline=certification,
         permit_milestone=_match(rules.permit_milestone, text),
-        new_product_milestone=_match(rules.new_product_milestone, text),
+        new_product_milestone=(rules.new_product_detector(text) if rules.new_product_detector
+            else _match(rules.new_product_milestone, text)),
         project_rationale=_match(rules.project_rationale, text),
         downstream_extension=_match(rules.downstream_extension, text),
         current_industry=(

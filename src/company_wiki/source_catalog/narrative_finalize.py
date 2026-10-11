@@ -10,7 +10,8 @@ from typing import Literal
 from company_wiki.source_contract import EvidenceSpan
 
 from .n6_budget_dedup import deduplicate_candidates
-from .narrative_budget import BudgetItem, select_budget_items
+from .narrative_budget import BudgetItem, LEGACY_BUDGET_POLICY, select_budget_items
+from .narrative_semantic_coverage import CoverageSignature, group_coverage_signature
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
 from .narrative_routing import DocumentRoute
@@ -49,6 +50,7 @@ def _budget_item(
     candidate: EvidenceCandidate,
     group_ids: Mapping[str, str],
     heading_pattern: re.Pattern[str],
+    *, signature: CoverageSignature | None = None,
 ) -> BudgetItem[EvidenceCandidate]:
     unit = candidate.unit
     return BudgetItem(
@@ -61,7 +63,27 @@ def _budget_item(
         score=candidate.score,
         is_heading=heading_pattern.search(unit.raw_text) is not None,
         payload=candidate,
+        evidence_chars=len(unit.raw_text),
+        semantic_tokens=signature.tokens if signature is not None else (),
+        coverage_signature=signature,
     )
+
+
+def _group_signatures(
+    candidates: Sequence[EvidenceCandidate], group_ids: Mapping[str, str]
+) -> dict[str, CoverageSignature]:
+    """Join native source order once; per-span bags cannot bind quantities."""
+    groups: dict[str, list[EvidenceCandidate]] = {}
+    for candidate in candidates:
+        key = group_ids.get(candidate.unit.unit_id, candidate.unit.unit_id)
+        groups.setdefault(key, []).append(candidate)
+    signatures: dict[str, CoverageSignature] = {}
+    for members in groups.values():
+        ordered = sorted(members, key=lambda item: (_order_key(item), item.unit.unit_id))
+        signature = group_coverage_signature(candidate.unit.raw_text for candidate in ordered)
+        for candidate in members:
+            signatures[candidate.unit.unit_id] = signature
+    return signatures
 
 
 def _evidence_spans(
@@ -110,6 +132,7 @@ def finalize_selection(
     heading_pattern: re.Pattern[str],
     dropped_financial_count: int,
     excluded_context_unit_ids: frozenset[str] = frozenset(),
+    budget_policy: str = LEGACY_BUDGET_POLICY,
 ) -> NarrativeEvidencePackage:
     """Create the compact package after deterministic candidate enrichment.
 
@@ -123,13 +146,16 @@ def finalize_selection(
                      if candidate.unit.unit_id not in excluded_context_unit_ids
                      and group_ids.get(candidate.unit.unit_id) not in excluded_groups)
     deduplicated = deduplicate_candidates(complete, group_ids)
+    signatures = (_group_signatures(deduplicated.candidates, deduplicated.group_ids)
+        if budget_policy != LEGACY_BUDGET_POLICY else {})
     budget_items = tuple(
-        _budget_item(candidate, deduplicated.group_ids, heading_pattern)
+        _budget_item(candidate, deduplicated.group_ids, heading_pattern,
+            signature=signatures.get(candidate.unit.unit_id))
         for candidate in deduplicated.candidates
     )
     selected = [
         item.payload
-        for item in select_budget_items(budget_items, limit=route.selection_limit)
+        for item in select_budget_items(budget_items, limit=route.selection_limit, policy=budget_policy)
     ]
     omitted = max(0, len(candidates) - len(selected))
     selected.sort(key=lambda item: (item.unit.coordinates.locator(), item.unit.unit_id))

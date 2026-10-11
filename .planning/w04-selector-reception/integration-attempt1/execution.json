@@ -1,0 +1,161 @@
+{
+  "schema": "root-w04-selector-integration/1",
+  "workdir": "C:\\Users\\郑曾波\\.codex\\worktrees\\w04-selector-integration\\company-wiki",
+  "branch": "codex/root-w04-selector-integration-20261011",
+  "base_commit": "5c07f47cc6f9255b9ce2824e9c9c63139f48f533",
+  "frozen_manifest_sha256": "f9a3260d03fd0e5d4ea38abecc92ec2fb1df4b822dd213d7a1ac84a3c348447c",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "main_sha256": "88a25a1854449224f20606e9949adda3649d77aa04b45f2c9cc7dfe07943b404",
+      "frozen_worktree_sha256": "ae68412ea81b8439284ee65305da440ac84b5ddb69fe69a2070920489e7b8a1b",
+      "normalized_lf_sha256": "a664159b0b2ba287925de5d868fb7393ea54df57e98817049cdd308eaf68b8bc",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_groups.py",
+      "main_sha256": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+      "frozen_worktree_sha256": "c2ced013b8823695d0a16f447e36848dcd060a2c344de322f3b425b296236402",
+      "normalized_lf_sha256": "c2ced013b8823695d0a16f447e36848dcd060a2c344de322f3b425b296236402",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_candidates.py",
+      "main_sha256": "ff286285f0d90a0a9de3683cc633d6139a4f7f49cf8a4d99f64903a966b716b6",
+      "frozen_worktree_sha256": "aec5e2d22c942064dea64b805e09d6b835c516af16d931e7218366e5b8ff5fa4",
+      "normalized_lf_sha256": "aec5e2d22c942064dea64b805e09d6b835c516af16d931e7218366e5b8ff5fa4",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "main_sha256": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+      "frozen_worktree_sha256": "400ae1cd3ff3a789d307c8fc85de09839a3f9fe6cbed1d5572699535b1598b68",
+      "normalized_lf_sha256": "400ae1cd3ff3a789d307c8fc85de09839a3f9fe6cbed1d5572699535b1598b68",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "main_sha256": "527a33be9e94514c55241cfeb03c4e4279196781e955e9483c27055445fa67f7",
+      "frozen_worktree_sha256": "48083f0bd7c6862744667597a14818e20ef02979f1ec4615bec5670cb1f77f47",
+      "normalized_lf_sha256": "a7c18dd72b8c706366e7e48d0bbb3ccf6627843fdaa989f9ee5abf873fc95b2b",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_group_candidates.py",
+      "main_sha256": "c1915ce95439aac90757129cb134b20fff7150331467e6b367952f9c02785569",
+      "frozen_worktree_sha256": "729b77bb92655fd05945980331f68e5a2f3701a1cbece7b26e4c0fc683590e7f",
+      "normalized_lf_sha256": "729b77bb92655fd05945980331f68e5a2f3701a1cbece7b26e4c0fc683590e7f",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_semantic_coverage.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca",
+      "normalized_lf_sha256": "92ac400cc91f08b47c9706f067e69ef52724b487a02734e2f43984df5711be00",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_stage_assertions.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "a7efe34bd99533302a20cfeee0c401ed77c225bfba95a203a8c4c3b1f08aea73",
+      "normalized_lf_sha256": "a7efe34bd99533302a20cfeee0c401ed77c225bfba95a203a8c4c3b1f08aea73",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "tests/integration/test_w04_novelty_finalize.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "967edc28d7e65b251fde9074d724a4c51a350308a0067eca181890df79fc2db1",
+      "normalized_lf_sha256": "50c4ca15ec3cdd1b668646394efebbcac9ace6c7a061393fd7497fd2aeb5df63",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "tests/integration/test_w04_quality_band_budget.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "6359f12b4229fd624a3902eaeee393dca5802a62ca25a29811c6e69e6cf4361a",
+      "normalized_lf_sha256": "cb72af8a66904e75978a3e815227d3514185906cbf22927f7d86eb4ab0ae5055",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "tests/integration/test_w04_semantic_budget_finalize.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "fb55bfb43c043b02446d24c709dcb0e4264c59fa419bdd15588d0f03e3ce1a8c",
+      "normalized_lf_sha256": "86f78781317076ab63a98191c9a8676c7173ffc598443e48d4ac0f71f08137c3",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "tests/unit/test_narrative_business_recall.py",
+      "main_sha256": "cadc2af6e962ee8977982c0f5334c365456bd6046a9b78cd9c67822e5d671ef3",
+      "frozen_worktree_sha256": "9714951af67a77113969ee4794b6eb1fddf8d6623db1009c662ac228cdefe93e",
+      "normalized_lf_sha256": "ff7364eecdab09a827ef422a63eb3c1bcb2bbc36469faf795f607bfe3b6022b8",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "tests/unit/test_w04_narrative_semantics.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "03e83d6675c3e14315624e04eabea353f0eac5394112a0bc3efdede8352cda3d",
+      "normalized_lf_sha256": "47aadb0a2a32b65f6e21f287f4d8cc2e5f34cdb8b6400c2a3183407b6a137510",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "tests/unit/test_w04_novelty_budget.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "fe68f44a8ac90e63a92d60b1ce8b0ae94f1f5feecba118b86f1a335d39615bbf",
+      "normalized_lf_sha256": "269ae73edef2b176c3c92499bea9d1838a550429ce8f8d80dcee91ee47c3badc",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "tests/unit/test_w04_selector_version_dispatch.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "d5409951a8f172f2f25f32cb7a40f0fcac66a789bea2a173e95cc31979fcb296",
+      "normalized_lf_sha256": "55364737d94ac57a5db2acf3143d3a07b81869e578f2f5b36052f5c12d761d5f",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "tests/unit/test_w04_semantic_budget.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "7eb30ac41c05094958ee05479b4de039a777f7f1c546366b904073f0806f23e1",
+      "normalized_lf_sha256": "6b15be2178863e57485d8b6881abab3ecef2394bb5001823713bf21d4788c84a",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "tests/unit/test_w04_stage_predicate_scope.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "32e02c1a902ff2ca64cbf83b0ac46b2603d25c4cd43f07c2edd5246c86a4feab",
+      "normalized_lf_sha256": "1a5eaacdd30a838563acb9b503beb0b9d2cf02759fe5634be5da02fc788ab45d",
+      "three_way": "no_main_content_conflict"
+    },
+    {
+      "path": "tests/unit/test_w04_stage_public_assertions.py",
+      "main_sha256": null,
+      "frozen_worktree_sha256": "c8a31dc605456c93b3c7219a9920a9552eaf0cfd9c2afc0ec3bdc8004c44771b",
+      "normalized_lf_sha256": "c8a31dc605456c93b3c7219a9920a9552eaf0cfd9c2afc0ec3bdc8004c44771b",
+      "three_way": "no_main_content_conflict"
+    }
+  ],
+  "test_command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_w04_selector_version_dispatch.py",
+    "tests/integration/test_w04_semantic_budget_finalize.py",
+    "tests/integration/test_w04_novelty_finalize.py",
+    "tests/integration/test_w04_quality_band_budget.py",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\w04-selector-integration\\company-wiki\\.tmp\\w04s-0c63579c\\pytest"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "seconds": 10.7673,
+  "protected_config_ci_unchanged": true,
+  "production_configs_unchanged": true,
+  "source_bytes_still_frozen": true,
+  "scratch_restored_absent": true,
+  "real_provider_llm_calls": 0,
+  "summary_economic_quality": "not_evaluated"
+}

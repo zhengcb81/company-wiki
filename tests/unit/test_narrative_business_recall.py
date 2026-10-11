@@ -168,7 +168,7 @@ def test_required_qualifier_group_is_atomic_and_source_order_deterministic():
     assert tight.status == "partial" and tight.evidence_spans == ()
 
 
-@pytest.mark.parametrize("version", ["0.8.0", "", [], {}, True])
+@pytest.mark.parametrize("version", ["0.9.9", "", [], {}, True])
 def test_unknown_or_nonstring_version_is_explicit_value_error(version):
     with pytest.raises(ValueError, match="selector version"):
         selected(units(["Our product is supplied through overseas distributors."]), version=version)
