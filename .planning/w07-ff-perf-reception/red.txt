@@ -1,0 +1,184 @@
+FFFFFFFFFFF                                                              [100%]
+================================== FAILURES ===================================
+________ test_attempt_caches_do_not_share_between_independent_batches _________
+
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_attempt_caches_do_not_sha0')
+
+    def test_attempt_caches_do_not_share_between_independent_batches(tmp_path):
+        first = runtime.OwnedAttempt.create(tmp_path/"owned",tmp_path/"out")
+        second = runtime.OwnedAttempt.create(tmp_path/"owned",tmp_path/"out")
+        try:
+>           assert first.cache != second.cache
+E           AssertionError: assert WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_attempt_caches_do_not_sha0/owned/pc') != WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_attempt_caches_do_not_sha0/owned/pc')
+E            +  where WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_attempt_caches_do_not_sha0/owned/pc') = OwnedAttempt(scratch=WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_attempt_caches_do_not_s...C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_attempt_caches_do_not_sha0/owned/pc'), cache_created=True).cache
+E            +  and   WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_attempt_caches_do_not_sha0/owned/pc') = OwnedAttempt(scratch=WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_attempt_caches_do_not_s...:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_attempt_caches_do_not_sha0/owned/pc'), cache_created=False).cache
+
+tests\test_root_w07_matrix_boundaries.py:19: AssertionError
+______________ test_existing_cache_is_never_used_for_new_attempt ______________
+
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_existing_cache_is_never_u0')
+
+    def test_existing_cache_is_never_used_for_new_attempt(tmp_path):
+        original = tmp_path/"owned"/"pc"
+        original.mkdir(parents=True)
+        sentinel = original/"sentinel.pyc"
+        sentinel.write_bytes(b"original")
+        before = {p.relative_to(original).as_posix():p.read_bytes() for p in original.rglob("*") if p.is_file()}
+        attempt = runtime.OwnedAttempt.create(tmp_path/"owned",tmp_path/"out")
+        try:
+            env = runtime.synthetic_env(attempt.scratch,tmp_path/"cwp",tmp_path/"et",pycache_root=attempt.cache)
+            active = Path(env["PYTHONPYCACHEPREFIX"]).resolve()
+>           assert active != original.resolve()
+E           AssertionError: assert WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_existing_cache_is_never_u0/owned/pc') != WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_existing_cache_is_never_u0/owned/pc')
+E            +  where WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_existing_cache_is_never_u0/owned/pc') = resolve()
+E            +    where resolve = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_existing_cache_is_never_u0/owned/pc').resolve
+
+tests\test_root_w07_matrix_boundaries.py:34: AssertionError
+____ test_colliding_document_proofs_do_not_hide_failed_worker[False-True] _____
+
+first = False, second = True
+
+    @pytest.mark.parametrize("first,second",[(False,True),(True,False)])
+    def test_colliding_document_proofs_do_not_hide_failed_worker(first,second):
+        combined = {"proofs":{},"catalog_snapshot":[]}
+>       cli_main._merge_source_proofs(combined,{"proofs":{"same-doc":{"verified":first,"content_sha256":"a","byte_size":3}},"catalog_snapshot":[]},"g1")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'cli_main' has no attribute '_merge_source_proofs'
+
+tests\test_root_w07_matrix_boundaries.py:44: AttributeError
+____ test_colliding_document_proofs_do_not_hide_failed_worker[True-False] _____
+
+first = True, second = False
+
+    @pytest.mark.parametrize("first,second",[(False,True),(True,False)])
+    def test_colliding_document_proofs_do_not_hide_failed_worker(first,second):
+        combined = {"proofs":{},"catalog_snapshot":[]}
+>       cli_main._merge_source_proofs(combined,{"proofs":{"same-doc":{"verified":first,"content_sha256":"a","byte_size":3}},"catalog_snapshot":[]},"g1")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'cli_main' has no attribute '_merge_source_proofs'
+
+tests\test_root_w07_matrix_boundaries.py:44: AttributeError
+______________ test_verified_collisions_keep_all_worker_evidence ______________
+
+    def test_verified_collisions_keep_all_worker_evidence():
+        combined = {"proofs":{},"catalog_snapshot":[]}
+        proof = {"verified":True,"content_sha256":"a","byte_size":3,"source_versions":1,"physical_originals":1}
+        for group in ("g1","g2"):
+>           cli_main._merge_source_proofs(combined,{"proofs":{"same-doc":proof},"catalog_snapshot":[]},group)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'cli_main' has no attribute '_merge_source_proofs'
+
+tests\test_root_w07_matrix_boundaries.py:53: AttributeError
+______________ test_incompatible_verified_collision_is_not_green ______________
+
+    def test_incompatible_verified_collision_is_not_green():
+        combined = {"proofs":{},"catalog_snapshot":[]}
+        for group, digest in [("g1","a"),("g2","b")]:
+>           cli_main._merge_source_proofs(combined,{"proofs":{"doc":{"verified":True,"content_sha256":digest,"byte_size":3}},"catalog_snapshot":[]},group)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'cli_main' has no attribute '_merge_source_proofs'
+
+tests\test_root_w07_matrix_boundaries.py:60: AttributeError
+_______________ test_measurement_failure_still_restores_attempt _______________
+
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_measurement_failure_still0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000019F0649FBB0>
+
+    def test_measurement_failure_still_restores_attempt(tmp_path,monkeypatch):
+        monkeypatch.setattr(cli_main,"_verify_binding",lambda *a,**kw:{"verified":False})
+        def broken(*a):
+            raise RuntimeError("metrics unavailable")
+        monkeypatch.setattr(cli_main,"cache_stats",broken)
+        with pytest.raises(Exception):
+            cli_main.main(["--cwp-project",str(tmp_path/"cwp"),"--et-project",str(tmp_path/"et"),"--owned-root",str(tmp_path/"owned"),"--out-root",str(tmp_path/"out")])
+>       assert not (tmp_path/"owned").exists()
+E       AssertionError: assert not True
+E        +  where True = exists()
+E        +    where exists = (WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_measurement_failure_still0') / 'owned').exists
+
+tests\test_root_w07_matrix_boundaries.py:70: AssertionError
+__________ test_dead_child_is_reaped_after_second_communicate_error ___________
+
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_dead_child_is_reaped_afte0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000019F0649FE10>
+
+    def test_dead_child_is_reaped_after_second_communicate_error(tmp_path,monkeypatch):
+        class Child:
+            pid=123
+            returncode=None
+            waited=False
+            def communicate(self,*a,**kw):
+                raise RuntimeError("pipe broken")
+            def kill(self):
+                self.returncode=-9
+            def wait(self,timeout=None):
+                self.waited=True
+                return self.returncode
+        child=Child()
+        monkeypatch.setattr(runtime.subprocess,"Popen",lambda *a,**kw:child)
+        monkeypatch.setattr(runtime,"_terminate_tree",lambda proc,env:proc.kill())
+        with pytest.raises(RuntimeError):
+            runtime.run_process(["python"],env={},cwd=tmp_path,deadline=runtime.Deadline(1))
+>       assert child.waited
+E       assert False
+E        +  where False = <test_root_w07_matrix_boundaries.test_dead_child_is_reaped_after_second_communicate_error.<locals>.Child object at 0x0000019F06555010>.waited
+
+tests\test_root_w07_matrix_boundaries.py:89: AssertionError
+_______ test_seed_response_cardinality_and_order_are_validated[missing] _______
+
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_seed_response_cardinality0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000019F06595A30>
+kind = 'missing'
+
+    @pytest.mark.parametrize("kind",["missing","extra","reordered"])
+    def test_seed_response_cardinality_and_order_are_validated(tmp_path,monkeypatch,kind):
+        from fixture_builder import Identity
+        ctx=Context(ff_root=tmp_path/"ff",cwp_root=tmp_path/"cwp",et_root=tmp_path/"et",scratch=tmp_path/"scratch",out_root=tmp_path/"out")
+>       seeds=[(Identity("US","Apple Inc.","US:AAPL"),"annual_report",2025,"FY")]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Identity.__init__() missing 6 required positional arguments: 'security_id', 'ticker', 'exchange', 'provider', 'source_url', and 'aliases'
+
+tests\test_root_w07_matrix_boundaries.py:95: TypeError
+________ test_seed_response_cardinality_and_order_are_validated[extra] ________
+
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_seed_response_cardinality1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000019F06423F00>
+kind = 'extra'
+
+    @pytest.mark.parametrize("kind",["missing","extra","reordered"])
+    def test_seed_response_cardinality_and_order_are_validated(tmp_path,monkeypatch,kind):
+        from fixture_builder import Identity
+        ctx=Context(ff_root=tmp_path/"ff",cwp_root=tmp_path/"cwp",et_root=tmp_path/"et",scratch=tmp_path/"scratch",out_root=tmp_path/"out")
+>       seeds=[(Identity("US","Apple Inc.","US:AAPL"),"annual_report",2025,"FY")]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Identity.__init__() missing 6 required positional arguments: 'security_id', 'ticker', 'exchange', 'provider', 'source_url', and 'aliases'
+
+tests\test_root_w07_matrix_boundaries.py:95: TypeError
+______ test_seed_response_cardinality_and_order_are_validated[reordered] ______
+
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-77/test_seed_response_cardinality2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000019F065B8D10>
+kind = 'reordered'
+
+    @pytest.mark.parametrize("kind",["missing","extra","reordered"])
+    def test_seed_response_cardinality_and_order_are_validated(tmp_path,monkeypatch,kind):
+        from fixture_builder import Identity
+        ctx=Context(ff_root=tmp_path/"ff",cwp_root=tmp_path/"cwp",et_root=tmp_path/"et",scratch=tmp_path/"scratch",out_root=tmp_path/"out")
+>       seeds=[(Identity("US","Apple Inc.","US:AAPL"),"annual_report",2025,"FY")]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: Identity.__init__() missing 6 required positional arguments: 'security_id', 'ticker', 'exchange', 'provider', 'source_url', and 'aliases'
+
+tests\test_root_w07_matrix_boundaries.py:95: TypeError
+=========================== short test summary info ===========================
+FAILED tests/test_root_w07_matrix_boundaries.py::test_attempt_caches_do_not_share_between_independent_batches
+FAILED tests/test_root_w07_matrix_boundaries.py::test_existing_cache_is_never_used_for_new_attempt
+FAILED tests/test_root_w07_matrix_boundaries.py::test_colliding_document_proofs_do_not_hide_failed_worker[False-True]
+FAILED tests/test_root_w07_matrix_boundaries.py::test_colliding_document_proofs_do_not_hide_failed_worker[True-False]
+FAILED tests/test_root_w07_matrix_boundaries.py::test_verified_collisions_keep_all_worker_evidence
+FAILED tests/test_root_w07_matrix_boundaries.py::test_incompatible_verified_collision_is_not_green
+FAILED tests/test_root_w07_matrix_boundaries.py::test_measurement_failure_still_restores_attempt
+FAILED tests/test_root_w07_matrix_boundaries.py::test_dead_child_is_reaped_after_second_communicate_error
+FAILED tests/test_root_w07_matrix_boundaries.py::test_seed_response_cardinality_and_order_are_validated[missing]
+FAILED tests/test_root_w07_matrix_boundaries.py::test_seed_response_cardinality_and_order_are_validated[extra]
+FAILED tests/test_root_w07_matrix_boundaries.py::test_seed_response_cardinality_and_order_are_validated[reordered]
+11 failed in 1.24s

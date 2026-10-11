@@ -1,6 +1,6 @@
 {
   "schema": "w07-root-dispatch/1",
-  "state": "PARTIALLY_ACCEPTED",
+  "state": "ACCEPTED_WITH_RF_COVERAGE_REMAINING",
   "lanes": [
     {
       "lane": "W07-RF-MODEL",
@@ -44,7 +44,14 @@
       "branch": "codex/w07-ff-matrix-efficiency",
       "card_sha256": "300cb4ac9836cf0e000a864fd1835fda856f2d1141c362926009ea7b92752709",
       "input_manifest_sha256": "20b270408f31aa959b0655fc4e02671bd20fae7d53875007625edd98b1408f03",
-      "readonly_file_count": 286
+      "readonly_file_count": 286,
+      "status": "ACCEPTED_MERGED_PUBLISHED_INSTALLED",
+      "accepted_main_head": "64b4d294a1e61e595e330b4a7d4075c289f9fdc3",
+      "et_main_head": "d0ac42c60dcca992db78860b8469cfed3dd527e5",
+      "exact_ci": 38170433893,
+      "ci_status": "completed",
+      "ci_conclusion": "success",
+      "root_evidence": ".planning/w07-ff-perf-reception/publication.json"
     }
   ],
   "root_only": [

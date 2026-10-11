@@ -1,0 +1,2 @@
+cases: {'PASS': 41, 'FAIL': 0, 'PARTIAL': 0, 'NOT_RUN': 0}; seconds=99.96; oracle findings=0
+report: C:\Users\Ö£Ôø²¨\AppData\Local\Temp\w7ff-root-reports\attempt-77f781b892d54252809d1cd633a23e9e\report.json

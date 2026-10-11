@@ -8,7 +8,7 @@
 | W05-RF-FLOW | main/origin/main30ddae8e；CI38142227109成功。390+36工程绿、非作者31案例及16原P1入口均绿。17运行文件×2物理安装副本/34SHA匹配，安装后两个fresh进程的合法预测/两强reader/原P1共8拒绝边界通过1.921s；未选元数据和缓存保持 | 完成并线、安装、发布。ROOT干净工作树已正常移除，branch/worker/evidence保留；仅数学与运行接口范围 |
 | W06-AUDIT-MEASURES | main9cd5ff8a；296大节点/最终77/非作者反例绿，技能两份各26文件匹配。Audit无remote | 完成；算术审查不认证来源真值 |
 | W06-CWP-PORTABILITY | 共用Finding outcome单调聚合已修：69PASS1SKIP9.07s，七场景实际Reader/CLI4.051s；非作者53纯案例/原4输入SHA重放通过，11产品/8producer未变 | 正常ROOT5f10af0b并线发布master6dd7a119，精确CI38145427297成功/正常push3305PASS；ROOT干净checkout已移除。手动工具无需技能安装 |
-| W06-FF-MATRIX | CaseSpec/RunSpec195PASS、非作者28/28；FFmain4167dac4/CWP来源master8bd23344已发布且精确CI绿。cutoff/usage分支修复ETd0ac42c6/FF2d380a05，集中独审7PASS；旧39PASS/3FAIL保留。最新原41为1PASS/27PARTIAL/13NOT_RUN、184.54秒，180秒到期后fresh proofs未完成 | W07-FF-PERF修准备/进程/proof共同超时，原41/30s/180s/期望不减；ROOT接收后并线ET/FF生产修复，当前未认证全链 |
+| W06-FF-MATRIX / W07-FF-PERF | 原41全PASS/99.9624秒；26fresh原文证明、零oracle、目录恢复。FF64b4d29/ETd0ac42c6本地与远端相同；FF精确CI38170433893 成功。225集中、ET53、正常push708＋78subtests；两文件×两安装/各5边界及三仓配置体检绿 | 接收、并线、同步完成；真实供应商/经济质量仍留G4/G5 |
 | W04业务信息召回 | 质量带375PASS、同六原件87.4409秒、非作者17＋4通过；18文件已接入本地主线7a0b702a，集中集成51PASS。正常推送前3098项暴露18FAIL/3080PASS，远端仍5c07f47c | ROOT在隔离接收树修复经营事实召回、OCR质量、完整句条件/预算等共同边界，区分明确排序迁移；正常测试通过后发布。摘要/研究尚未验收 |
 
 ## 执行顺序
@@ -20,7 +20,7 @@ CWP来源层已正常并入master并推送8bd23344（实现983c1732），推送�
 3. W04旧365工程绿与六原件3FAIL保留；新375工程/同六原件87.4409秒/非作者17＋4均绿。18文件已精确集成且51集中测试通过；正常hook发现18既有边界FAIL，远端尚未发布。ROOT先修共因并验收，不跳过hook、不盲目重跑全套；G2四文件仍独立后移。
 4. G2真实有界摘要及RF消费 → G4原三公司执行/四路独审 → G5另三公司和指定公司循环。W04/G2/G4/G5仍开放，不能声称整个PWF完成。
 
-本批次0真实provider/LLM/费用；原件、生产配置、Dayu、IQS及他人WIP不改。预算母账保持413778tokens/334463µUSD+FX2764hold，累计上限$20/200万tokens。目标工具当前active。
+本批次0真实provider/LLM/费用；原件、生产配置、Dayu、IQS及他人WIP不改。预算母账保持413778tokens/334463µUSD+FX2764hold，累计上限$20/200万tokens。目标工具当前paused；用户授权的独立接收正常推进。
 
 详细证据：W05/evidence/root-{cwp-ocr,rf-flow}-acceptance/publication.json；W06/evidence/root-audit-measures-acceptance/publication.json，以及另两包独立ROOT接收目录。精选本地计划 .planning/w05-{cwp-ocr,rf-flow}-reception、.planning/w06-{cwp-portability,ff-matrix}-reception。
 
@@ -32,10 +32,18 @@ CWP来源层已正常并入master并推送8bd23344（实现983c1732），推送�
 
 ### W07-AUDIT-ANALYST 已接收
 
-用户交付34b5c8ee/e3206880，ROOT独立反例及agent试读发现scope/ref/actual共因；已在独立接收树系统修复，原assertions保持。最终90PASS+4子案例/2.30s、原13真CLI COMPLETE/1.4392s、技能结构绿。正常Audit main实现e7c92577及收尾2c494913，主仓干净；两副本只变三文件，各28文件SHA一致，两个安装后实际CLI通过。无remote/CI，不宣称远端发布；0provider/LLM/费用。详细 `.planning/w07-audit-analyst-reception/publication.json`。另外两包尚未ROOT接收，当前开工状态不推定。ROOT回W04→G2；此诊断工具不替代G4/G5真实研究及独立判断。
+用户交付34b5c8ee/e3206880，ROOT独立反例及agent试读发现scope/ref/actual共因；已在独立接收树系统修复，原assertions保持。最终90PASS+4子案例/2.30s、原13真CLI COMPLETE/1.4392s、技能结构绿。正常Audit main实现e7c92577及收尾2c494913，主仓干净；两副本只变三文件，各28文件SHA一致，两个安装后实际CLI通过。无remote/CI，不宣称远端发布；0provider/LLM/费用。详细 `.planning/w07-audit-analyst-reception/publication.json`。RF与FF最新接收结果见本文后续条目；此句为历史记录。ROOT回W04→G2；此诊断工具不替代G4/G5真实研究及独立判断。
 
 ## W07-RF-MODEL ROOT 接收结果
 
 工程工具接收、整卡部分覆盖：作者d282c9d/72d0ced保留，ROOT22RED/1PASS暴露误报共因；系统修复异常分类、per-case真实request/result、未知/空比较、完整清单、CLI/readonly/清理状态和原目录恢复。原assertions不变，最终36PASS/4.19s，原16向量11PASS/5REJECT_OK、三实际CLI0/2/0，1.394767s。正常main/origin/main8dc26710，推送前390PASS＋36subtests/32.07s，精确CI38168556914成功；150WIP文件SHA保持，不安装工程工具。
 
-仍缺CNY/HKD、并购控制/跨FY、联合量价、累计/净额/防双计、future actual/WAPE五组覆盖，不能称整卡COMPLETE，详[后续](ROOT-rf-remaining-coverage.md)。ROOT留证只存单份压缩native JSON与摘要，当前约330KB。0provider/LLM/费用；来源真值/买方经济判断仍未认证。CWP母PWF提交可在本地保存，远端发布仍待W04旧18失败修复，不以RF CI代替CWP发布。
+仍缺CNY/HKD、并购控制/跨FY、联合量价、累计/净额/防双计、future actual/WAPE五组覆盖，不能称整卡COMPLETE，详[后续](../w07_parallel_quality_2026-10-11/ROOT-rf-remaining-coverage.md)。ROOT留证只存单份压缩native JSON与摘要，当前约330KB。0provider/LLM/费用；来源真值/买方经济判断仍未认证。CWP母PWF提交可在本地保存，远端发布仍待W04旧18失败修复，不以RF CI代替CWP发布。
+
+## 2026-10-11 W07-FF-PERF ROOT 最终接收
+
+W07-FF-PERF已完成ROOT接收：原41场景全PASS/99.9624s、零oracle findings、26最终原文证明，原30/180秒上限与case/期望不减；225集中绿、ET53绿。FF main/origin/main64b4d29、ET main/origin/main d0ac42c6已正常发布，FF精确CI38170433893状态成功；ET没有配置workflow。两运行文件×两物理FF技能副本同步、各5实际安装后边界绿；三仓配置体检绿，非选文件元数据和原WIP保持。Audit已接收安装；RF工具已发布8dc26710/精确CI成功，整卡仍缺五组组合覆盖。W04已本地并线7a0b702a但正常push18FAIL，远端仍5c07f47c；ROOT后续W04共因→G2→G4→G5。目标工具当前paused，本次仅完成用户授权的接收，0付费调用。
+
+共因修复：Windows长路径重复编译/重复准备与proof饥饿由作者统一解决；ROOT补独占attempt缓存、proof失败不可覆盖/完整worker证明、子进程reap、异常清理和seed完整序列。ROOT自己的逻辑别名数过约束有反例修复；首轮28/13记录保持，最终原41重跑全绿。两轮原始证据仅490060-byte ZIP，隔离重放oracle零发现、自动恢复。长矩阵手动大节点；轻量测试走同一正常push/CI，未新增人工门禁。
+
+证据入口：company-wiki/.planning/w07-ff-perf-reception/publication.json、acceptance.json、offline-evidence.zip、replay_evidence.py。工程绿不认证真实供应商可达、来源真值或研究质量。预算母账保持413778tokens/334463µUSD+2764FXhold，累计$20/200万tokens。

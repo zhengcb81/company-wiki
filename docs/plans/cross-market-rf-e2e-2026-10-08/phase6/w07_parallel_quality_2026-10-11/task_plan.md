@@ -1,15 +1,15 @@
-# W07 分包总计划
+# W07 ROOT 分包总计划
 
-## 状态
-准备完成。W07-AUDIT-ANALYST已由用户交付、ROOT修共因后验收并线和安装；RF-MODEL工具已由ROOT共因修复后并线发布，整卡组合覆盖仍PARTIAL；FF-PERF当前未接收，开工状态不据旧准备记录推定。
+## 当前状态
 
-## 阶段
-1. 完成：只读调查、实际独立worktree、固定接口/输入/唯一写集。
-2. 完成：三个独立卡、独立PWF、共用交接格式、本地副本。
-3. 进行中：Audit A/B/C交付后ROOT独立反例发现共因并修复，90＋4子案例/13 E2E绿，main e7c92577/2c494913、技能两副本28文件匹配；RF工具main/origin/main8dc26710、精确CI38168556914成功；36集中/16原生向量及三CLI绿，5组组合缺口保留详细后续计划。FF仍待交接。Audit无remote/CI。
+W07-FF-PERF已完成ROOT接收：原41场景全PASS/99.9624s、零oracle findings、26最终原文证明，原30/180秒上限与case/期望不减；225集中绿、ET53绿。FF main/origin/main64b4d29、ET main/origin/main d0ac42c6已正常发布，FF精确CI38170433893状态成功；ET没有配置workflow。两运行文件×两物理FF技能副本同步、各5实际安装后边界绿；三仓配置体检绿，非选文件元数据和原WIP保持。Audit已接收安装；RF工具已发布8dc26710/精确CI成功，整卡仍缺五组组合覆盖。W04已本地并线7a0b702a但正常push18FAIL，远端仍5c07f47c；ROOT后续W04共因→G2→G4→G5。目标工具当前paused，本次仅完成用户授权的接收，0付费调用。
+
+## 大节点
+
+A独立工区/固定输入完成；B三个包均已ROOT接收。Audit和FF范围完成、RF工具接收但组合覆盖PARTIAL。C Audit main/安装完成，FF及ET主线发布/安装完成，RF主线发布/CI成功；CWP共享PWF远端等待W04修复。
 
 ## Next Step
-ROOT继续W04共因修复→G2；FF交付后接收。RF剩余覆盖按[详细计划](ROOT-rf-remaining-coverage.md)在G4/G5引用充分组合证据前完成，不误报整卡完成。
 
-## 不增加门禁
-不创建授权JSON/逐材料许可、私人/public分类、重复来源身份合同、每小节点签收或第二任务库。保留原件、配置资源限额、所属层实际字节/期间和大节点质量测试。
+母目标恢复后先修W04已证实共因并正常发布，再G2真实摘要/RF消费→G4原三公司四独审→G5新三及指定循环。RF五组缺口按[详细计划](ROOT-rf-remaining-coverage.md)在消费组合结论前补完。
+
+不增加授权JSON、private/public、逐材料许可或小节点签收；原件、实际资源上限和责任层字节/期间校验保留。
