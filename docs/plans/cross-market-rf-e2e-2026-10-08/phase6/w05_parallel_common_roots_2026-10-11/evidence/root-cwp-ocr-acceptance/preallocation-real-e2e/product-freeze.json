@@ -1,0 +1,15 @@
+{
+  "before": {
+    "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe",
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "d3890356211e7fe21fce22fcfb11ac71769941712dd77937d4d28e1d291f512c",
+    "src/company_wiki/document_normalization/isolated_ocr.py": "edade53c3c0fed2cb47ab115dbc969e1bd18be183280ee67a086fc876623d396",
+    "src/company_wiki/document_normalization/local_ocr.py": "ff7db0e6aeea844c1f32d3de3f3fdfa7965e6a3cd4f3fe56d4e455efc08a574f"
+  },
+  "after": {
+    "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe",
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "d3890356211e7fe21fce22fcfb11ac71769941712dd77937d4d28e1d291f512c",
+    "src/company_wiki/document_normalization/isolated_ocr.py": "edade53c3c0fed2cb47ab115dbc969e1bd18be183280ee67a086fc876623d396",
+    "src/company_wiki/document_normalization/local_ocr.py": "ff7db0e6aeea844c1f32d3de3f3fdfa7965e6a3cd4f3fe56d4e455efc08a574f"
+  },
+  "unchanged": true
+}

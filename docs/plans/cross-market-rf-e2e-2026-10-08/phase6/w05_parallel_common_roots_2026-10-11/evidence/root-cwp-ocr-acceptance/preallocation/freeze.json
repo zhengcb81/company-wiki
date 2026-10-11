@@ -1,0 +1,29 @@
+{
+  "schema": "root-w05-ocr-preallocation-acceptance/1",
+  "legal_before_after_equal": true,
+  "cases": 15,
+  "legal_png_sha_count": 13,
+  "unchanged_existing_error_count": 2,
+  "roi_size": [
+    3180,
+    170
+  ],
+  "sampled_pixels_per_scan": 270300,
+  "scan_seconds": {
+    "original_reference": [
+      0.08426970000436995,
+      0.0543784999899799
+    ],
+    "read_only_source_scan": [
+      0.1752210999984527,
+      0.1569178999925498
+    ]
+  },
+  "source_sha256": {
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "d3890356211e7fe21fce22fcfb11ac71769941712dd77937d4d28e1d291f512c",
+    "tests/document_normalization/test_ocr_region_recovery.py": "3acea08f310eb21549b5353e4f092ec4956bcba6be953f5eef6e52704211aa50"
+  },
+  "provider_calls": 0,
+  "raw_opened": 0,
+  "fee_usd": 0
+}

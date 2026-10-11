@@ -1,0 +1,27 @@
+{
+  "schema": "root-w05-ocr-independent-hard-startup/1",
+  "tree": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\_harness_worktrees\\w05\\cwp-ocr-root",
+  "platform": "win32",
+  "timeout_seconds": 0.05,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "initial_owned_root": "absent before mkdtemp",
+  "owned_root": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-cwp-ocr-acceptance\\independent-post-deadlock\\owned-hard-startup-32qdvk25",
+  "error_limit_name": "deadline",
+  "elapsed_seconds": 0.052073999991989695,
+  "spawned_bootstrap_pids": [
+    79896
+  ],
+  "all_bootstraps_reaped": true,
+  "backend_started": false,
+  "remaining_proxy_scratch": [],
+  "adapter_worker_pid": null,
+  "configured_identity_unchanged": true,
+  "status": "PASS",
+  "owned_root_restored": true,
+  "source_sha256": {
+    "src/company_wiki/document_normalization/isolated_ocr.py": "edade53c3c0fed2cb47ab115dbc969e1bd18be183280ee67a086fc876623d396",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "b29a4fe2069713800d171c30ecd09d7bcf3a35984ef2f872ed85d8d4986ccbfd",
+    "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe"
+  }
+}

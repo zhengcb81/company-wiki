@@ -1,4 +1,18 @@
+## ROOT 最终资源与真实回放通过 — 2026-10-11
+
+OCR source/resource 大节点已通过：预分配7真实RED→54集中PASS/3.78秒、15旧输出/坐标/原错误完全一致；非作者34纯几何/预算探针PASS/0.383秒。真实初次处理+新进程locator回开总83.006秒，阶段37.706/44.104秒，原85/90上限不变；22旧行EXACT、两定义置信度.98912/.99044及locators同旧PASS，5原件/配置SHA与4产品SHA前后相同，scratch恢复absent，0调用/费用。原85秒native FAIL、旧独审FAIL、预分配7RED全部保留。
+
+Windows native边界最终22项此前通过，当前未再改其源码；184项仅属去掉重复监听之前的组合基线，不能说已按最后源码重跑。最终独审PASS_WITH_SCOPE；POSIX仅静态审查、没有峰值RSS实测，不签研究质量。报告 independent-preallocation/report.md 与 preallocation-real-e2e/ 位于共用W05接收证据。
+
+为避免关键回归未接CI而漏检，ROOT在既有FAST_CONTRACT_CASES登记6个小节点（实际11参数用例），先6登记断言RED，再既有fast入口148PASS/24.45秒；没有新gate，也没有把真实模型/整套normalization纳入每push。正常源码发布时既有完整受影响节点仍会执行。
+
+## Next Step
+
+A/B/C完成；待正常暂存ROOT的两份登记变更、commit/merge/push与精确CI。用户新交付W06-CWP-PORTABILITY当前只读验收发现owned目录清理缺口，FF matrix也发现oracle/隔离缺口；它们单独修复，不改已冻结OCR，不把测试工具的错误称为CWP生产缺陷。母W04/G2/G4/G5尚未完成。
+
 # 发现
+
+性能分段诊断当前事实：child握手3.67s、权重SHA约0.07s，import rapidocr卡住，尚未进入ONNX session/推理；child约2s CPU/54MB，不能归因为识别慢或机器负载。正在核堆栈及native EOF监听线程与Windows CRT stdin互锁；此为待证伪假设，不先按猜测改预算或配置。
 
 2026-10-11 ROOT最终工程184PASS/66.32s、ruffPASS，六未改反例及有效50ms startup截止独审PASS。真实PPTX首次原图推理85.047s触产品deadline，完整回放未通过；原日志/result/receipt以original-fail冻结，原件/配置SHA全等、测试根恢复absent、增量费用0。下一步先查隔离进程的配置与native初始化/推理耗时共因，不提升时间、不绕硬截止。
 

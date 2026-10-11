@@ -1,0 +1,368 @@
+{
+  "status": "COMPLETED",
+  "started_at": 1791720893.4394183,
+  "phases": {
+    "phase1_source_ocr_compose": {
+      "elapsed_seconds": 37.706,
+      "status": "COMPLETED"
+    },
+    "phase2_locator_replay_reopen": {
+      "elapsed_seconds": 44.104,
+      "status": "COMPLETED"
+    }
+  },
+  "source_read": {
+    "via": "SourceVersionReader.open_version",
+    "purpose": "source_export",
+    "content_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "byte_size": 4016522,
+    "policy_sha256": "3553c50b850056eec9cc1cb7b37ddddb6aaafa5c54b5990d0e5bb92dad6a9e15"
+  },
+  "ocr_elapsed_seconds": 37.68,
+  "slide7": {
+    "page_number": 7,
+    "image_units_total": 24,
+    "original_lines_kept": 22,
+    "recovered_lines": [
+      "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and",
+      "Productivity and server licensing brings together licensing offerings across our products including:"
+    ],
+    "recovered_boxes": [
+      [
+        95.0,
+        174.0,
+        2319.0,
+        218.0
+      ],
+      [
+        152.0,
+        762.0,
+        1715.0,
+        803.0
+      ]
+    ],
+    "recovered_confidences": [
+      0.98912,
+      0.99044
+    ],
+    "recovered_locators": [
+      "cwp-pptx-image-ocr/1|s=7|p=0|m=d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea|ocr=9ff38d342a0743ed6d7eb439a7a0ade47b0195e6e34fd8c7b936557b625bac23|l=22|b=95.000,174.000,2319.000,218.000",
+      "cwp-pptx-image-ocr/1|s=7|p=0|m=d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea|ocr=9ff38d342a0743ed6d7eb439a7a0ade47b0195e6e34fd8c7b936557b625bac23|l=23|b=152.000,762.000,1715.000,803.000"
+    ],
+    "dropped_regions": [
+      {
+        "box": [
+          94.0,
+          177.0,
+          2320.0,
+          216.0
+        ],
+        "confidence": 0.43236,
+        "text": "l s os i a i s o o on l",
+        "reason": "low_text_score"
+      },
+      {
+        "box": [
+          150.0,
+          763.0,
+          1719.0,
+          805.0
+        ],
+        "confidence": 0.44278,
+        "text": "n s o so so sl sa r nns",
+        "reason": "low_text_score"
+      },
+      {
+        "box": [
+          92.0,
+          1274.0,
+          161.0,
+          1291.0
+        ],
+        "confidence": 0.45808,
+        "text": "·",
+        "reason": "low_text_score"
+      }
+    ],
+    "recovery_records": [
+      {
+        "box": [
+          94.0,
+          177.0,
+          2320.0,
+          216.0
+        ],
+        "status": "recovered",
+        "attempts": [
+          {
+            "transform": "roi-margin-crop/1",
+            "params": {
+              "margin_ratio": 0.35
+            },
+            "outcome": "accepted",
+            "lines": [
+              [
+                "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and",
+                0.98912
+              ]
+            ],
+            "error": null,
+            "note": null
+          }
+        ],
+        "recovered_text": "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and",
+        "recovered_box": [
+          95.0,
+          174.0,
+          2319.0,
+          218.0
+        ],
+        "recovered_confidence": 0.98912
+      },
+      {
+        "box": [
+          150.0,
+          763.0,
+          1719.0,
+          805.0
+        ],
+        "status": "recovered",
+        "attempts": [
+          {
+            "transform": "roi-margin-crop/1",
+            "params": {
+              "margin_ratio": 0.35
+            },
+            "outcome": "accepted",
+            "lines": [
+              [
+                "Productivity and server licensing brings together licensing offerings across our products including:",
+                0.99044
+              ],
+              [
+                "?",
+                0.57485
+              ],
+              [
+                "T+",
+                0.33531
+              ],
+              [
+                "2R",
+                0.15428
+              ]
+            ],
+            "error": null,
+            "note": null
+          }
+        ],
+        "recovered_text": "Productivity and server licensing brings together licensing offerings across our products including:",
+        "recovered_box": [
+          152.0,
+          762.0,
+          1715.0,
+          803.0
+        ],
+        "recovered_confidence": 0.99044
+      },
+      {
+        "box": [
+          92.0,
+          1274.0,
+          161.0,
+          1291.0
+        ],
+        "status": "not_attempted",
+        "attempts": [],
+        "recovered_text": null,
+        "recovered_box": null,
+        "recovered_confidence": null
+      }
+    ]
+  },
+  "page_record": {
+    "page_number": 7,
+    "slide_id": 262,
+    "line_count": 24,
+    "low_confidence_lines": 0,
+    "dropped_regions": 3,
+    "recovered_lines": 2,
+    "unrecovered_regions": 1,
+    "recovery_attempts": 2,
+    "status": "recognized",
+    "images": [
+      {
+        "shape_path": "0",
+        "media_sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+        "line_count": 24,
+        "status": "recognized",
+        "error": null,
+        "dimensions": [
+          2560,
+          1440
+        ],
+        "dropped_regions": 3,
+        "recovered_lines": 2,
+        "unrecovered_regions": 1,
+        "recovery_attempts": 2,
+        "region_diagnostics": {
+          "schema_version": "cwp-ocr-region-diagnostics/1",
+          "detected": null,
+          "recognized": 25,
+          "accepted": 22,
+          "dropped": [
+            {
+              "box": [
+                94.0,
+                177.0,
+                2320.0,
+                216.0
+              ],
+              "confidence": 0.43236,
+              "text": "l s os i a i s o o on l",
+              "reason": "low_text_score"
+            },
+            {
+              "box": [
+                150.0,
+                763.0,
+                1719.0,
+                805.0
+              ],
+              "confidence": 0.44278,
+              "text": "n s o so so sl sa r nns",
+              "reason": "low_text_score"
+            },
+            {
+              "box": [
+                92.0,
+                1274.0,
+                161.0,
+                1291.0
+              ],
+              "confidence": 0.45808,
+              "text": "·",
+              "reason": "low_text_score"
+            }
+          ],
+          "recovery": [
+            {
+              "box": [
+                94.0,
+                177.0,
+                2320.0,
+                216.0
+              ],
+              "status": "recovered",
+              "attempts": [
+                {
+                  "transform": "roi-margin-crop/1",
+                  "params": {
+                    "margin_ratio": 0.35
+                  },
+                  "outcome": "accepted",
+                  "lines": [
+                    [
+                      "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and",
+                      0.98912
+                    ]
+                  ],
+                  "error": null,
+                  "note": null
+                }
+              ],
+              "recovered_text": "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and",
+              "recovered_box": [
+                95.0,
+                174.0,
+                2319.0,
+                218.0
+              ],
+              "recovered_confidence": 0.98912
+            },
+            {
+              "box": [
+                150.0,
+                763.0,
+                1719.0,
+                805.0
+              ],
+              "status": "recovered",
+              "attempts": [
+                {
+                  "transform": "roi-margin-crop/1",
+                  "params": {
+                    "margin_ratio": 0.35
+                  },
+                  "outcome": "accepted",
+                  "lines": [
+                    [
+                      "Productivity and server licensing brings together licensing offerings across our products including:",
+                      0.99044
+                    ],
+                    [
+                      "?",
+                      0.57485
+                    ],
+                    [
+                      "T+",
+                      0.33531
+                    ],
+                    [
+                      "2R",
+                      0.15428
+                    ]
+                  ],
+                  "error": null,
+                  "note": null
+                }
+              ],
+              "recovered_text": "Productivity and server licensing brings together licensing offerings across our products including:",
+              "recovered_box": [
+                152.0,
+                762.0,
+                1715.0,
+                803.0
+              ],
+              "recovered_confidence": 0.99044
+            },
+            {
+              "box": [
+                92.0,
+                1274.0,
+                161.0,
+                1291.0
+              ],
+              "status": "not_attempted",
+              "attempts": [],
+              "recovered_text": null,
+              "recovered_box": null,
+              "recovered_confidence": null
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "replay": {
+    "targets": [
+      "We will transition to two reporting segments for FY27. Agents and Infra will include the Microsoft Cloud, productivity and server licensing, and",
+      "Productivity and server licensing brings together licensing offerings across our products including:",
+      "FY27 Segment changes and resulting new product and service reporting updates"
+    ],
+    "exact_match": true,
+    "fresh_adapter": true
+  },
+  "baseline_match": {
+    "source": "input/slide7-root-cause.json normalized_lines",
+    "lines_compared": 22,
+    "text_box_confidence_exact": true
+  },
+  "sha_unchanged": {
+    "pptx": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "media": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+    "config": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105"
+  },
+  "network_calls": 0,
+  "paid_calls": 0
+}

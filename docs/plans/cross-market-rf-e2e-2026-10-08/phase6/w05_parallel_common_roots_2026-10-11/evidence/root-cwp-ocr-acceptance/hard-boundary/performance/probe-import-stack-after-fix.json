@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "budget_seconds": 15,
+  "native_inference_calls": 0,
+  "elapsed_seconds": 2.0876979999884497,
+  "scratch_restored": true
+}

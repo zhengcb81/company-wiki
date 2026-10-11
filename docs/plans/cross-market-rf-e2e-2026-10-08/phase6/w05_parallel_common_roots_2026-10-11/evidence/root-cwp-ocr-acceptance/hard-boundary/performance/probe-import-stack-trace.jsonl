@@ -1,0 +1,5 @@
+{"stage": "diagnostic_backend_import", "pid": 49940, "monotonic": 77024.9799181, "cpu": 1.359375}
+{"stage": "diagnostic_backend_import", "pid": 22944, "monotonic": 77028.452191, "cpu": 2.109375}
+{"stage": "adapter_construct_enter", "pid": 22944, "monotonic": 77028.5144427, "cpu": 2.125, "fingerprint": "9ff38d342a0743ed6d7eb439a7a0ade47b0195e6e34fd8c7b936557b625bac23"}
+{"stage": "adapter_construct_exit", "pid": 22944, "monotonic": 77028.5169324, "cpu": 2.140625}
+{"stage": "stack_import_enter", "pid": 22944, "monotonic": 77028.5345391, "cpu": 2.140625}

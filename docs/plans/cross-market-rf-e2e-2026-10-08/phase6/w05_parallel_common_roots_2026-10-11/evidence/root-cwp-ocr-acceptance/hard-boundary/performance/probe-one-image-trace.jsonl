@@ -1,0 +1,10 @@
+{"stage": "diagnostic_backend_import", "pid": 18400, "monotonic": 76900.9669022, "cpu": 2.0}
+{"stage": "parent_start", "pid": 18400, "monotonic": 76901.1431612, "cpu": 2.09375, "deadline": 76986.1391159}
+{"stage": "diagnostic_backend_import", "pid": 62336, "monotonic": 76904.782561, "cpu": 1.859375}
+{"stage": "parent_ready", "pid": 18400, "monotonic": 76904.81139, "cpu": 2.1875, "worker_pid": 62336}
+{"stage": "adapter_construct_enter", "pid": 62336, "monotonic": 76904.835614, "cpu": 1.875, "fingerprint": "9ff38d342a0743ed6d7eb439a7a0ade47b0195e6e34fd8c7b936557b625bac23"}
+{"stage": "adapter_construct_exit", "pid": 62336, "monotonic": 76904.8367398, "cpu": 1.875}
+{"stage": "preflight_enter", "pid": 62336, "monotonic": 76904.83801, "cpu": 1.875}
+{"stage": "load_engine_enter", "pid": 62336, "monotonic": 76904.8392255, "cpu": 1.875}
+{"stage": "import_enter", "pid": 62336, "monotonic": 76904.9084838, "cpu": 1.9375, "module": "rapidocr"}
+{"stage": "parent_failure", "pid": 18400, "monotonic": 76986.1445932, "cpu": 4.125, "error_type": "NormalizationLimitError", "error": "normalization limit exceeded: deadline=76986.1391159 (isolated local OCR)"}

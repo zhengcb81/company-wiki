@@ -1,0 +1,66 @@
+Timeout (0:00:05)!
+Thread 0x00011bec (most recent call first):
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\_harness_worktrees\w05\cwp-ocr-root\src\company_wiki\document_normalization\isolated_ocr.py", line 138 in _parent_watch
+  File "C:\Miniconda\Lib\threading.py", line 994 in run
+  File "C:\Miniconda\Lib\threading.py", line 1043 in _bootstrap_inner
+  File "C:\Miniconda\Lib\threading.py", line 1014 in _bootstrap
+
+Thread 0x0000593c (most recent call first):
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1321 in create_module
+  File "<frozen importlib._bootstrap>", line 813 in module_from_spec
+  File "<frozen importlib._bootstrap>", line 921 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1415 in _handle_fromlist
+  File "C:\Miniconda\Lib\site-packages\numpy\_core\multiarray.py", line 11 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1415 in _handle_fromlist
+  File "C:\Miniconda\Lib\site-packages\numpy\_core\__init__.py", line 24 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1310 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Miniconda\Lib\site-packages\numpy\__config__.py", line 4 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Miniconda\Lib\site-packages\numpy\__init__.py", line 125 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Miniconda\Lib\site-packages\cv2\__init__.py", line 11 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Miniconda\Lib\site-packages\rapidocr\main.py", line 9 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Miniconda\Lib\site-packages\rapidocr\__init__.py", line 4 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w05_parallel_common_roots_2026-10-11\evidence\root-cwp-ocr-acceptance\hard-boundary\performance\stack_backend.py", line 15 in validate_environment
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\_harness_worktrees\w05\cwp-ocr-root\src\company_wiki\document_normalization\isolated_ocr.py", line 182 in _worker_main
+  File "<string>", line 1 in <module>

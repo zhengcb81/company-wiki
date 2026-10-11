@@ -1,0 +1,252 @@
+{
+  "schema_version": "root-w05-ocr-independent-preallocation-acceptance/1",
+  "date": "2026-10-11",
+  "status": "PASS_WITH_SCOPE",
+  "reviewer_is_product_non_author": true,
+  "merge_recommendation": "Accept final frozen Windows native boundary and production ROI preallocation resource contract. No P1 defect found in this scope",
+  "tree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr-root",
+  "head": "f10a8a677b022ea81c1f00f4c4f929c6385e8930",
+  "product_sha256": {
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "d3890356211e7fe21fce22fcfb11ac71769941712dd77937d4d28e1d291f512c",
+    "tests/document_normalization/test_ocr_region_recovery.py": "3acea08f310eb21549b5353e4f092ec4956bcba6be953f5eef6e52704211aa50",
+    "src/company_wiki/document_normalization/isolated_ocr.py": "edade53c3c0fed2cb47ab115dbc969e1bd18be183280ee67a086fc876623d396",
+    "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "b29a4fe2069713800d171c30ecd09d7bcf3a35984ef2f872ed85d8d4986ccbfd"
+  },
+  "independent_execution": {
+    "vectors": 34,
+    "passed": 34,
+    "seconds": 0.38317579998692963,
+    "budgets_and_zero_renderer_vectors": 6,
+    "render_and_inference_failed_charge_vectors": 2,
+    "mode_transform_reference_vectors": 15,
+    "mode_luminance_reference_vectors": 8,
+    "scan_roi_and_deadline_vectors": 2,
+    "size_only_former_oversize_canvas_vectors": 1,
+    "actual_ocr_repeated": false,
+    "formal_54_repeated": false,
+    "old_184_or_22_repeated": false
+  },
+  "root_execution_reviewed": {
+    "formal_red": 7,
+    "focused_green": 54,
+    "focused_seconds": 3.78,
+    "author_15_before_after_receipts_equal": true,
+    "ruff": "PASS",
+    "real_e2e": {
+      "status": "PASS",
+      "total_seconds": 83.006,
+      "phases": {
+        "phase1_source_ocr_compose": {
+          "elapsed_seconds": 37.706,
+          "status": "COMPLETED"
+        },
+        "phase2_locator_replay_reopen": {
+          "elapsed_seconds": 44.104,
+          "status": "COMPLETED"
+        }
+      },
+      "phase1_native_seconds": 85,
+      "phase2_native_fallback_seconds": 90,
+      "per_phase_emergency_seconds": 90,
+      "outer_emergency_seconds": 195,
+      "product_frozen_before_after": true,
+      "original_22_text_box_confidence_exact": true,
+      "two_definitions_and_locators_equal_to_prior_pass": true,
+      "recovered_confidences": [
+        0.98912,
+        0.99044
+      ],
+      "all_5_raw_config_before_after_sha_equal": true,
+      "scratch_before_after": [
+        "absent",
+        "absent"
+      ],
+      "scratch_peak_retained_bytes": 41194
+    }
+  },
+  "checks": [
+    {
+      "id": "OCR-POST-07",
+      "status": "CLOSED_FOR_FROZEN_SHA",
+      "check": "Exact crop/canvas geometry planned, entire canvas including padding atomically reserved before render, native infer and retry; previous 63.984M unbudgeted allocation is rejected as size-only geometry"
+    },
+    {
+      "id": "OCR-PRE-01",
+      "status": "PASS",
+      "check": "All margin/split/upscale max_image/max_total rejection probes emit zero target render calls; prior successful attempt charges remain"
+    },
+    {
+      "id": "OCR-PRE-02",
+      "status": "PASS",
+      "check": "Render/native failure remains charged once; reserved attempts and rejected diagnostics retained"
+    },
+    {
+      "id": "OCR-PRE-03",
+      "status": "PASS",
+      "check": "Small legacy grayscale/raster reference agrees for legal modes/PNG transforms and original coordinate maps; entire padded stack reserved, not just ink pixels"
+    },
+    {
+      "id": "OCR-PRE-04",
+      "status": "PASS",
+      "check": "Source ROI scan reads alternate rows only, O(W) counts, no full grayscale/crop analysis raster, observes deadline before first column/every64 columns/at completion"
+    },
+    {
+      "id": "OCR-PRE-05",
+      "status": "STATIC_PASS",
+      "check": "Configured composer checks source dimensions and shared full-image budget before native decode/infer; recovery re-loads only already-validated source before planning. No claim of guards on arbitrary direct low-level utility callers"
+    },
+    {
+      "id": "OCR-PRE-06",
+      "status": "PASS_WINDOWS_WITH_SCOPE",
+      "check": "Existing edade53c boundary and native metadata regression remain pinned; no change to config/model/identity/approval chain; new real SourceReader+locator replay supports deployment compatibility"
+    }
+  ],
+  "static_boundaries": {
+    "source_max_image_pixels_default": 16000000,
+    "request_total_pixels_default": 96000000,
+    "transformed_output_cap_checked_before_render": true,
+    "split_analysis_auxiliary": "O(W) count list plus geometry tables; no allocated W*H analysis raster",
+    "scan_work": "W*ceil(H/2) sampled source pixels; current deadline checked every64 columns",
+    "production_input_mode": "Already-loaded RGB source in recover_regions",
+    "one_pixel_palette_converter": "Alternative utility modes only; P cache <=256; not an entire analysis image",
+    "budget_rejection_counters": "Pixel/attempt counters atomic; regions_started can mark selected region even when first reservation rejects"
+  },
+  "limitations": [
+    "Windows runtime only; POSIX guardian remains statically reviewed, not executed",
+    "Whole-process peak RSS and maximum-size throughput were not measured; bounded source decode and successful crop/PIL/PNG buffers still consume memory",
+    "Low-level build_* render utilities rely on the production planner/reservation caller; direct standalone use has no resource-limit argument",
+    "Margin single-image rejection vector tests the ROI seam under newly stricter limits after source preapproval; unchanged public source cap would reject source first",
+    "184 combined suite is pre-EOF-fix; 22 native suite pre-preallocation; post-preallocation evidence is54 focused+34 independent vectors+ROOT configured real replay",
+    "Kernel owner death can leave bounded owned TEMP files; native tree ownership remains OSJob/guardian responsibility",
+    "No certified complete OCR recall, W04 summary quality, source financial fact truth or RF economic judgment"
+  ],
+  "preserved_prior_evidence": [
+    {
+      "path": "independent/counterexamples.py",
+      "sha256": "0ee1d69c4135fd49db47fe0ca7bac2c4782a3a5617b053555bdcfd60cc8d9169"
+    },
+    {
+      "path": "independent/final-counterexamples.json",
+      "sha256": "26ba4e506d6b3a3ca7aee8fea8ff68ddcfa1f13cba081827b222da49d5e31e1a"
+    },
+    {
+      "path": "independent/final-review.json",
+      "sha256": "78fd8bcc7cb543c67f251a46957845ba0b42d4974158d505dec15ef853d6a32e"
+    },
+    {
+      "path": "independent/final-review.md",
+      "sha256": "5f8ddfb5164824c4954c7c0a101a25bb161b799ff6d44d96eb69e37ae5091356"
+    },
+    {
+      "path": "independent/frozen-counterexamples.json",
+      "sha256": "7ad080a7e5f563a4017dffd6f6ccedf47d13263d90c0e741ee2ff397a6efac33"
+    },
+    {
+      "path": "independent/hard-startup-probe.py",
+      "sha256": "dc5d4e7efb9e1abd25a86d4a98b7a4e6a958a1f44adba6542d8f405e84d1cab4"
+    },
+    {
+      "path": "independent/hard-startup-result.json",
+      "sha256": "946417781df16c120a2405848ed10e35af6086acd682441122e0a5a5373ec918"
+    },
+    {
+      "path": "independent/original-counterexamples.json",
+      "sha256": "6c86ea1042bd1abded0fcbe6163e5842a22d6887fbaaa0ade06e1b8642fbda9c"
+    },
+    {
+      "path": "independent/original-review.json",
+      "sha256": "5471fb286aa944c23b17482ee3a841c4f1260415f34f837696484ad515ad0601"
+    },
+    {
+      "path": "independent/original-review.md",
+      "sha256": "963796a7c1935a6406da8cf5c4cd6421887216b0458be09bfddffa2ce3ed1129"
+    },
+    {
+      "path": "independent/recovery-review.json",
+      "sha256": "ba9fe6d420dcadac5becef090db1cb6acc9ef43f67867e6fbe409cafd70121c6"
+    },
+    {
+      "path": "independent/recovery-review.md",
+      "sha256": "ab33a65ae4033b5a3a5d89311e3b32ff1c385048e22eb845ff8e486c2de899a7"
+    },
+    {
+      "path": "independent-post-deadlock/build_review.py",
+      "sha256": "c64364d5c1ea1aa3644f3227a60afa0bc582d8301d44c3168ca3dd88b67928e7"
+    },
+    {
+      "path": "independent-post-deadlock/geometry-bounds.json",
+      "sha256": "0bb9f54a92443a1e94dba39e2aa59d30f888135952ea415f8dd4070478861e97"
+    },
+    {
+      "path": "independent-post-deadlock/geometry_review.py",
+      "sha256": "eb2651cd7a18128fb55c836fa080e2be21c86005d13f0780e715c4d808ba5272"
+    },
+    {
+      "path": "independent-post-deadlock/hard-startup-probe.py",
+      "sha256": "dc5d4e7efb9e1abd25a86d4a98b7a4e6a958a1f44adba6542d8f405e84d1cab4"
+    },
+    {
+      "path": "independent-post-deadlock/hard-startup-result.json",
+      "sha256": "65b3dc69fdff0afaa0c84818b48f2b5d2e0f64f553a9e95b3840f0b157c3cade"
+    },
+    {
+      "path": "independent-post-deadlock/review.json",
+      "sha256": "653627c3b4c86ec780ca1bc074783d207168f6f020b33223a1d08720ca6e7a73"
+    },
+    {
+      "path": "independent-post-deadlock/review.md",
+      "sha256": "98127558f4fc6e41b3f4ebbbe52108a0a6986c778461502c3de8810968e14548"
+    },
+    {
+      "path": "root-real-e2e-original-fail-result.json",
+      "sha256": "95a1d259caa3bced97a4518220b29478f8f0137d1557cd92d71420770f2eae25",
+      "commit": "c145da9b"
+    },
+    {
+      "path": "root-real-e2e-original-fail-receipt.json",
+      "sha256": "ad08b02ef35d82500e818323c263ebfb3b609f1dbce2ccd18cf1fdb9eedb2da7",
+      "commit": "c145da9b"
+    },
+    {
+      "path": "root-real-e2e-original-fail.log",
+      "sha256": "8038d0e5fbd00b6ca3892a9d57f91f1f299dbfad0284a97f5a186ed3cb5ec940",
+      "commit": "c145da9b"
+    }
+  ],
+  "reviewed_evidence_sha256": {
+    "preallocation/report.md": "4456894b1fd0e9296447fb948162705f8461ae371219480b0639068a38e9eadc",
+    "preallocation/freeze.json": "a9dc34cf568c7f517685c733b292ab01569d1e1ba5c42af9101730a867926ca3",
+    "preallocation/red.log": "32a27c0ce78fb4753077a29254fe182b7c2bcdc0f374b4f576b929b4bcd4ac0d",
+    "preallocation/green-attempt.log": "0a1fb904043a6069a474f50fa26774b470e536df971f3aee2d3156588f24e0cf",
+    "preallocation/green.log": "f2bbcd99475eb1874f654d8e0348e1585a2cf2499358c98a4b259c4a2641bc5e",
+    "preallocation/ruff.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "preallocation/before.json": "42c93021de6882ee0a26658fe8a4da38105a2b7c3e097777bc3dbf4d93acd554",
+    "preallocation/after.json": "42c93021de6882ee0a26658fe8a4da38105a2b7c3e097777bc3dbf4d93acd554",
+    "preallocation-real-e2e/root-real-e2e-result.json": "6965cf4bdba2f9242244d64d503b2f15f8f1437ef86b88cfc8e4861b248eabfe",
+    "preallocation-real-e2e/root-real-e2e-receipt.json": "523a488982f4c431bf57b9185b57ac3d68afcdc59854e63a276f8e62316c9712",
+    "preallocation-real-e2e/product-freeze.json": "a8fa11ff5cc349243805c87f7853d9f15570d487ef80e0bb47a531397c71ed46",
+    "independent-post-deadlock/review.json": "653627c3b4c86ec780ca1bc074783d207168f6f020b33223a1d08720ca6e7a73",
+    "independent-post-deadlock/manifest.json": "49b4bde6400dce74c9436438d57c01785a5c301587952fbf99e621d884c8ebe1"
+  },
+  "resource_cost": {
+    "network": 0,
+    "providers": 0,
+    "LLM": 0,
+    "cloud_ocr": 0,
+    "real_native_inference_by_reviewer": 0,
+    "raw_originals_opened_by_reviewer": 0,
+    "model_downloads": 0,
+    "fees_usd": 0
+  },
+  "writes": {
+    "only": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-cwp-ocr-acceptance\\independent-preallocation",
+    "product_changed": false,
+    "old_fail_changed": false,
+    "config_changed": false,
+    "shared_pwf_changed": false,
+    "git_commit_or_install": false,
+    "test_scratch_created": false,
+    "synthetic_image_data": "In memory only; no downloaded/test data files retained"
+  }
+}

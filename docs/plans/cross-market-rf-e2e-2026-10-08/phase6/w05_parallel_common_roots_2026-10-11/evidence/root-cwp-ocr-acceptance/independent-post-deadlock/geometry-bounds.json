@@ -1,0 +1,44 @@
+{
+  "schema_version": "root-w05-ocr-pure-geometry-upper-bound/1",
+  "method": "Static formulas only; no image allocation, native inference, or runtime peak-RSS claim",
+  "default_max_image_pixels": 16000000,
+  "default_max_total_pixels": 96000000,
+  "pre_render_fixed_max_side": null,
+  "rapidocr_config_max_side_len": 3000,
+  "margin_pixels_upper": 16000000,
+  "upscale_factor_per_edge": 2,
+  "upscale_pixels_upper": 64000000,
+  "upscale_rgb_payload_bytes_lower_bound_at_upper": 192000000,
+  "plausible_upscale_case": {
+    "source": [
+      6000,
+      2666
+    ],
+    "source_pixels": 15996000,
+    "aspect_ratio": 2.250562640660165,
+    "transform": "upscale-2x/1",
+    "rendered": [
+      12000,
+      5332
+    ],
+    "rendered_pixels": 63984000,
+    "rendered_rgb_payload_bytes_lower_bound": 191952000,
+    "default_max_image_cap_checked_after_render": true
+  },
+  "split_stack_conservative_upper": {
+    "source_width": 1333333,
+    "source_height": 12,
+    "source_pixels": 15999996,
+    "maximum_chunk_width": 78,
+    "minimum_cut_step": 23,
+    "chunks_upper": 57969,
+    "stack_height_upper": 1159372,
+    "stack_pixels_upper": 90431016
+  },
+  "notes": [
+    "PIL internal storage and ancillary buffers can exceed nominal three-byte RGB payload; not measured",
+    "Split bound is conservative and depends on ROI whitespace; not an asserted observed allocation",
+    "Both transform methods materialize PNG before RecoveryBudget.reserve_pixels rejects the transformed size",
+    "The configured OCR max_side_len acts inside RapidOCR after dispatch and does not cap this parent-side rendering"
+  ]
+}

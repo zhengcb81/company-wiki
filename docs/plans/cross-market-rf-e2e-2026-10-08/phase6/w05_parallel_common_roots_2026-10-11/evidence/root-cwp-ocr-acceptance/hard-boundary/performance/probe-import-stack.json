@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "budget_seconds": 15,
+  "native_inference_calls": 0,
+  "error_type": "NormalizationLimitError",
+  "error": "normalization limit exceeded: deadline=77039.9953077 (isolated local OCR)",
+  "elapsed_seconds": 15.00245200000063,
+  "scratch_restored": true
+}

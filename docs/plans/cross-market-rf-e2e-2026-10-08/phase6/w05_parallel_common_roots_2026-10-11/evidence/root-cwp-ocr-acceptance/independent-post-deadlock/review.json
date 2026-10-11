@@ -1,0 +1,315 @@
+{
+  "schema_version": "root-w05-ocr-independent-post-deadlock/1",
+  "date": "2026-10-11",
+  "status": "PASS_NATIVE_BOUNDARY_PENDING_PREALLOCATION",
+  "merge_recommendation": "Native-runtime correction is acceptable for frozen SHA; overall resource-cap acceptance waits for ROOT preallocation repair and concentrated geometry verification",
+  "reviewer_is_product_non_author": true,
+  "tree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr-root",
+  "head": "f10a8a677b022ea81c1f00f4c4f929c6385e8930",
+  "source_sha256": {
+    "src/company_wiki/document_normalization/isolated_ocr.py": "edade53c3c0fed2cb47ab115dbc969e1bd18be183280ee67a086fc876623d396",
+    "src/company_wiki/document_normalization/local_ocr.py": "ff7db0e6aeea844c1f32d3de3f3fdfa7965e6a3cd4f3fe56d4e455efc08a574f",
+    "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe",
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "2803919d0f9b816c5cff45cf6344709abea8104f124945d9a3da24862417823e",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "b29a4fe2069713800d171c30ecd09d7bcf3a35984ef2f872ed85d8d4986ccbfd",
+    "tests/document_normalization/test_isolated_ocr.py": "cae823beff8cf78d49fd28cd4621aa12596868b517f462d9fcd7dfeba5013c04",
+    "tests/document_normalization/test_local_ocr_adapter.py": "53d99507129c9f28d70de8fd0ea49408fabe966368ad7357f2fd7b8505c7003f",
+    "tests/document_normalization/test_ocr_region_composition.py": "f355a81c34193d87bb510d3f36b1e70e4731ef2a80c98ad0c70cdb1678752b3f",
+    "tests/document_normalization/test_ocr_region_recovery.py": "2bca41f4718237ed999e454fa054231dd9ef3622e6f81be7cf7edf109a740e74",
+    "src/company_wiki/_bounded_process.py": "bed227c5b2da0c4f5d0d177d4ce17b8ee767f2bb53c6844fc269f03231da714e",
+    "src/company_wiki/_process_tree.py": "d95b3da4eeaca24a7f1cd42747d266bc1c1be79c0ca85486df2095de185b0e6c"
+  },
+  "config_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr-root\\config\\local_ocr.json": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "old_independent_manifest_matches": [
+    {
+      "path": "counterexamples.py",
+      "bytes": 8098,
+      "sha256": "0ee1d69c4135fd49db47fe0ca7bac2c4782a3a5617b053555bdcfd60cc8d9169",
+      "actual_sha256": "0ee1d69c4135fd49db47fe0ca7bac2c4782a3a5617b053555bdcfd60cc8d9169"
+    },
+    {
+      "path": "final-counterexamples.json",
+      "bytes": 8808,
+      "sha256": "26ba4e506d6b3a3ca7aee8fea8ff68ddcfa1f13cba081827b222da49d5e31e1a",
+      "actual_sha256": "26ba4e506d6b3a3ca7aee8fea8ff68ddcfa1f13cba081827b222da49d5e31e1a"
+    },
+    {
+      "path": "final-review.json",
+      "bytes": 4986,
+      "sha256": "78fd8bcc7cb543c67f251a46957845ba0b42d4974158d505dec15ef853d6a32e",
+      "actual_sha256": "78fd8bcc7cb543c67f251a46957845ba0b42d4974158d505dec15ef853d6a32e"
+    },
+    {
+      "path": "final-review.md",
+      "bytes": 7559,
+      "sha256": "5f8ddfb5164824c4954c7c0a101a25bb161b799ff6d44d96eb69e37ae5091356",
+      "actual_sha256": "5f8ddfb5164824c4954c7c0a101a25bb161b799ff6d44d96eb69e37ae5091356"
+    },
+    {
+      "path": "frozen-counterexamples.json",
+      "bytes": 8808,
+      "sha256": "7ad080a7e5f563a4017dffd6f6ccedf47d13263d90c0e741ee2ff397a6efac33",
+      "actual_sha256": "7ad080a7e5f563a4017dffd6f6ccedf47d13263d90c0e741ee2ff397a6efac33"
+    },
+    {
+      "path": "hard-startup-probe.py",
+      "bytes": 3567,
+      "sha256": "dc5d4e7efb9e1abd25a86d4a98b7a4e6a958a1f44adba6542d8f405e84d1cab4",
+      "actual_sha256": "dc5d4e7efb9e1abd25a86d4a98b7a4e6a958a1f44adba6542d8f405e84d1cab4"
+    },
+    {
+      "path": "hard-startup-result.json",
+      "bytes": 1318,
+      "sha256": "946417781df16c120a2405848ed10e35af6086acd682441122e0a5a5373ec918",
+      "actual_sha256": "946417781df16c120a2405848ed10e35af6086acd682441122e0a5a5373ec918"
+    },
+    {
+      "path": "original-counterexamples.json",
+      "bytes": 10646,
+      "sha256": "6c86ea1042bd1abded0fcbe6163e5842a22d6887fbaaa0ade06e1b8642fbda9c",
+      "actual_sha256": "6c86ea1042bd1abded0fcbe6163e5842a22d6887fbaaa0ade06e1b8642fbda9c"
+    },
+    {
+      "path": "original-review.json",
+      "bytes": 2705,
+      "sha256": "5471fb286aa944c23b17482ee3a841c4f1260415f34f837696484ad515ad0601",
+      "actual_sha256": "5471fb286aa944c23b17482ee3a841c4f1260415f34f837696484ad515ad0601"
+    },
+    {
+      "path": "original-review.md",
+      "bytes": 5802,
+      "sha256": "963796a7c1935a6406da8cf5c4cd6421887216b0458be09bfddffa2ce3ed1129",
+      "actual_sha256": "963796a7c1935a6406da8cf5c4cd6421887216b0458be09bfddffa2ce3ed1129"
+    },
+    {
+      "path": "recovery-review.json",
+      "bytes": 2362,
+      "sha256": "ba9fe6d420dcadac5becef090db1cb6acc9ef43f67867e6fbe409cafd70121c6",
+      "actual_sha256": "ba9fe6d420dcadac5becef090db1cb6acc9ef43f67867e6fbe409cafd70121c6"
+    },
+    {
+      "path": "recovery-review.md",
+      "bytes": 3744,
+      "sha256": "ab33a65ae4033b5a3a5d89311e3b32ff1c385048e22eb845ff8e486c2de899a7",
+      "actual_sha256": "ab33a65ae4033b5a3a5d89311e3b32ff1c385048e22eb845ff8e486c2de899a7"
+    }
+  ],
+  "original_real_fail_matches_committed_bytes": [
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-cwp-ocr-acceptance/root-real-e2e-original-fail-result.json",
+      "sha256": "95a1d259caa3bced97a4518220b29478f8f0137d1557cd92d71420770f2eae25",
+      "committed_sha256": "95a1d259caa3bced97a4518220b29478f8f0137d1557cd92d71420770f2eae25",
+      "commit": "c145da9b",
+      "bytes": 617
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-cwp-ocr-acceptance/root-real-e2e-original-fail-receipt.json",
+      "sha256": "ad08b02ef35d82500e818323c263ebfb3b609f1dbce2ccd18cf1fdb9eedb2da7",
+      "committed_sha256": "ad08b02ef35d82500e818323c263ebfb3b609f1dbce2ccd18cf1fdb9eedb2da7",
+      "commit": "c145da9b",
+      "bytes": 2550
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-cwp-ocr-acceptance/root-real-e2e-original-fail.log",
+      "sha256": "8038d0e5fbd00b6ca3892a9d57f91f1f299dbfad0284a97f5a186ed3cb5ec940",
+      "committed_sha256": "8038d0e5fbd00b6ca3892a9d57f91f1f299dbfad0284a97f5a186ed3cb5ec940",
+      "commit": "c145da9b",
+      "bytes": 2181
+    }
+  ],
+  "reviewed_evidence_sha256": {
+    "runtime-boundary.md": "7d2521da5c86671d70f8df3a43d7086323b8d856adc77c678cc8113e9a0768ea",
+    "root-real-e2e-result.json": "f2997d638801f0a0ecd9f438760ea4d6b70fa926b108a286edf386a843a49376",
+    "root-real-e2e-receipt.json": "c8f8e2f63479985ccf4bcb25b90eba5b82fe967d1acc38414b3faae4d3151a25",
+    "hard-boundary/performance/runtime-import-deadlock.md": "bc51749f8beb12060a418b4f4b95d5f1a99fb50b2156be2957b39395b973774d",
+    "hard-boundary/performance/red-stdin.log": "f833aac37fed5f3f6a612d6bb650211777e8b9b98d6ee5989b16904d3fbd030e",
+    "hard-boundary/performance/red-crt-stdin.log": "4cc71fbb98401e35705c12e6659f177dfd431c2a6fe0eacd76e273dce9bf6f2f",
+    "hard-boundary/performance/green-crt-stdin-and-owned-tree.log": "3c3f79861dd439d0d9ce0773eca5efff7ad1ca7237fb2c02a70356dab37b9584",
+    "hard-boundary/performance/probe-import-stack-after-fix.json": "005738a0c9acf43f920339695b072692a1c6b57c2cb9f5661cc6bdb01246ea71",
+    "hard-boundary/performance/probe-import-stack-after-fix-trace.jsonl": "5fccc43a136f12b08a7c563fe0c37ed262448703c68fbf55d00f5386de46b71b",
+    "independent/manifest.json": "ac8097b82e3374a0e99d27baf26def0a3564614914733cbff64de59277e9d47a",
+    "independent/final-review.json": "78fd8bcc7cb543c67f251a46957845ba0b42d4974158d505dec15ef853d6a32e",
+    "independent/frozen-counterexamples.json": "7ad080a7e5f563a4017dffd6f6ccedf47d13263d90c0e741ee2ff397a6efac33"
+  },
+  "independently_executed": {
+    "cold_start_50ms_probe": {
+      "schema": "root-w05-ocr-independent-hard-startup/1",
+      "tree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr-root",
+      "platform": "win32",
+      "timeout_seconds": 0.05,
+      "provider_calls": 0,
+      "model_calls": 0,
+      "initial_owned_root": "absent before mkdtemp",
+      "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-cwp-ocr-acceptance\\independent-post-deadlock\\owned-hard-startup-32qdvk25",
+      "error_limit_name": "deadline",
+      "elapsed_seconds": 0.052073999991989695,
+      "spawned_bootstrap_pids": [
+        79896
+      ],
+      "all_bootstraps_reaped": true,
+      "backend_started": false,
+      "remaining_proxy_scratch": [],
+      "adapter_worker_pid": null,
+      "configured_identity_unchanged": true,
+      "status": "PASS",
+      "owned_root_restored": true,
+      "source_sha256": {
+        "src/company_wiki/document_normalization/isolated_ocr.py": "edade53c3c0fed2cb47ab115dbc969e1bd18be183280ee67a086fc876623d396",
+        "src/company_wiki/source_catalog/narrative_normalization.py": "b29a4fe2069713800d171c30ecd09d7bcf3a35984ef2f872ed85d8d4986ccbfd",
+        "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe"
+      }
+    },
+    "bulk_suite_repeated": false,
+    "focused_22_repeated": false,
+    "real_ocr_repeated": false,
+    "posix_executed": false
+  },
+  "root_execution_reviewed": {
+    "post_fix_focused_22": {
+      "passed": 22,
+      "seconds": 25.58
+    },
+    "pre_fix_combined_184": {
+      "passed": 184,
+      "post_fix": false
+    },
+    "real_e2e": {
+      "status": "PASS",
+      "seconds": 88.83,
+      "phase_seconds": {
+        "phase1_source_ocr_compose": 44.095,
+        "phase2_locator_replay_reopen": 43.805
+      },
+      "product_native_phase1_deadline_seconds": 85,
+      "product_native_replay_fallback_seconds": 90,
+      "emergency_harness_per_phase_seconds": 90,
+      "outer_harness_seconds": 195,
+      "old_22_exact": true,
+      "recovered_confidences": [
+        0.98912,
+        0.99044
+      ],
+      "locator_replay_exact": true,
+      "config_raw_before_after_equal": true,
+      "scratch_before_after": [
+        "absent",
+        "absent"
+      ],
+      "scratch_peak_retained_bytes": 41195
+    }
+  },
+  "checks": [
+    {
+      "id": "OCR-POST-01",
+      "status": "PASS",
+      "check": "No native worker EOF/stdin monitor; UCRT _fstat64 regression retained at identical 1s budget; native import RED/GREEN causal evidence supports common root cause"
+    },
+    {
+      "id": "OCR-POST-02",
+      "status": "PASS_WINDOWS",
+      "check": "Non-inheritable Windows Job KILL_ON_JOB_CLOSE assigned before bootstrap release; native worker and descendants inherit job; close/timeout/owner death independent of native GIL"
+    },
+    {
+      "id": "OCR-POST-03",
+      "status": "STATIC_ONLY_POSIX",
+      "check": "Separate guardian watches parent pipe, owns process session and kills group; no native-process EOF thread"
+    },
+    {
+      "id": "OCR-POST-04",
+      "status": "PASS",
+      "check": "One pinned minimum absolute deadline includes startup/preflight/native/IPC; fallback starts once; repeated image/ROI and later deadline cannot renew it"
+    },
+    {
+      "id": "OCR-POST-05",
+      "status": "PASS",
+      "check": "Bounded per-call image/result files, bounded atomic controls, owned generated temp root; native tree reaped before normal cleanup; 2.5s cleanup grace separate from request work"
+    },
+    {
+      "id": "OCR-POST-06",
+      "status": "PASS",
+      "check": "enrich_pptx auto-isolates configured LocalOCRAdapter; NarrativeNormalization default preflight/sample/normalize/replay already uses isolated adapter; injected legacy protocol retained"
+    },
+    {
+      "id": "OCR-POST-07",
+      "status": "PENDING_PREALLOCATION_REPAIR",
+      "check": "Shared full-image/ROI pixels reserved before native inference; PIL ROI transformation precedes reserve. Valid 15.996M-pixel source can render 63.984M-pixel upscale before rejection; default caps do not currently bound render allocation"
+    },
+    {
+      "id": "OCR-POST-08",
+      "status": "PASS",
+      "check": "Engine model/config fingerprint and source identities unchanged; low confidence and undetected recall remain diagnostic/unverified; no new permissions/reviews/providers"
+    }
+  ],
+  "limitations": [
+    "POSIX behavior received static review only; no claim of POSIX runtime acceptance",
+    "184 combined suite is a pre-EOF-correction baseline; post-correction execution is 22 focused plus configured real E2E and this independent 50ms probe",
+    "Kernel-forced owner death kills job-owned native tree, but may leave bounded owned TEMP files; exact scratch restoration is only claimed for handled success/failure",
+    "ROI PIL transform/PNG allocation occurs before pixel reservation. Over-budget native inference is rejected, but over-budget render is a concrete common resource-cap gap. ROOT has assigned unified geometry planning, reservation-before-render, and focused TDD. Overall resource contract remains pending that repair",
+    "Low-level LocalOCRAdapter is a cooperative primitive; bypassing configured composition/NarrativeNormalization by directly invoking it is outside reviewed public entrypoints",
+    "No claims for W04 summary selection, RF company factual correctness, or investment economic quality"
+  ],
+  "resources": {
+    "provider_calls": 0,
+    "cloud_ocr_calls": 0,
+    "model_downloads": 0,
+    "independent_real_native_inference_calls": 0,
+    "fees_usd": 0,
+    "raw_bytes_opened_by_independent_review": 0
+  },
+  "writes": {
+    "only": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-cwp-ocr-acceptance\\independent-post-deadlock",
+    "product_changed": false,
+    "shared_pwf_changed": false,
+    "original_fail_overwritten": false,
+    "config_changed": false,
+    "git_committed": false
+  },
+  "preallocation_static_geometry_bounds": {
+    "schema_version": "root-w05-ocr-pure-geometry-upper-bound/1",
+    "method": "Static formulas only; no image allocation, native inference, or runtime peak-RSS claim",
+    "default_max_image_pixels": 16000000,
+    "default_max_total_pixels": 96000000,
+    "pre_render_fixed_max_side": null,
+    "rapidocr_config_max_side_len": 3000,
+    "margin_pixels_upper": 16000000,
+    "upscale_factor_per_edge": 2,
+    "upscale_pixels_upper": 64000000,
+    "upscale_rgb_payload_bytes_lower_bound_at_upper": 192000000,
+    "plausible_upscale_case": {
+      "source": [
+        6000,
+        2666
+      ],
+      "source_pixels": 15996000,
+      "aspect_ratio": 2.250562640660165,
+      "transform": "upscale-2x/1",
+      "rendered": [
+        12000,
+        5332
+      ],
+      "rendered_pixels": 63984000,
+      "rendered_rgb_payload_bytes_lower_bound": 191952000,
+      "default_max_image_cap_checked_after_render": true
+    },
+    "split_stack_conservative_upper": {
+      "source_width": 1333333,
+      "source_height": 12,
+      "source_pixels": 15999996,
+      "maximum_chunk_width": 78,
+      "minimum_cut_step": 23,
+      "chunks_upper": 57969,
+      "stack_height_upper": 1159372,
+      "stack_pixels_upper": 90431016
+    },
+    "notes": [
+      "PIL internal storage and ancillary buffers can exceed nominal three-byte RGB payload; not measured",
+      "Split bound is conservative and depends on ROI whitespace; not an asserted observed allocation",
+      "Both transform methods materialize PNG before RecoveryBudget.reserve_pixels rejects the transformed size",
+      "The configured OCR max_side_len acts inside RapidOCR after dispatch and does not cap this parent-side rendering"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "root-w05-ocr-independent-post-deadlock-manifest/1",
+  "status": "PASS_NATIVE_BOUNDARY_PENDING_PREALLOCATION",
+  "files": [
+    {
+      "path": "build_review.py",
+      "bytes": 11217,
+      "sha256": "c64364d5c1ea1aa3644f3227a60afa0bc582d8301d44c3168ca3dd88b67928e7"
+    },
+    {
+      "path": "geometry-bounds.json",
+      "bytes": 1654,
+      "sha256": "0bb9f54a92443a1e94dba39e2aa59d30f888135952ea415f8dd4070478861e97"
+    },
+    {
+      "path": "geometry_review.py",
+      "bytes": 2573,
+      "sha256": "eb2651cd7a18128fb55c836fa080e2be21c86005d13f0780e715c4d808ba5272"
+    },
+    {
+      "path": "hard-startup-probe.py",
+      "bytes": 3567,
+      "sha256": "dc5d4e7efb9e1abd25a86d4a98b7a4e6a958a1f44adba6542d8f405e84d1cab4"
+    },
+    {
+      "path": "hard-startup-result.json",
+      "bytes": 1334,
+      "sha256": "65b3dc69fdff0afaa0c84818b48f2b5d2e0f64f553a9e95b3840f0b157c3cade"
+    },
+    {
+      "path": "review.json",
+      "bytes": 16415,
+      "sha256": "653627c3b4c86ec780ca1bc074783d207168f6f020b33223a1d08720ca6e7a73"
+    },
+    {
+      "path": "review.md",
+      "bytes": 8992,
+      "sha256": "98127558f4fc6e41b3f4ebbbe52108a0a6986c778461502c3de8810968e14548"
+    }
+  ]
+}

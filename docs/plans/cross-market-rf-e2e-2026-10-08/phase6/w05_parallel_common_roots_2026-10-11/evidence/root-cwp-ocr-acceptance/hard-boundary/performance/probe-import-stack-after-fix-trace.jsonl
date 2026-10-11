@@ -1,0 +1,6 @@
+{"stage": "diagnostic_backend_import", "pid": 72272, "monotonic": 77295.5221205, "cpu": 0.765625}
+{"stage": "diagnostic_backend_import", "pid": 17144, "monotonic": 77296.2953127, "cpu": 0.59375}
+{"stage": "adapter_construct_enter", "pid": 17144, "monotonic": 77296.3396033, "cpu": 0.609375, "fingerprint": "9ff38d342a0743ed6d7eb439a7a0ade47b0195e6e34fd8c7b936557b625bac23"}
+{"stage": "adapter_construct_exit", "pid": 17144, "monotonic": 77296.3402407, "cpu": 0.609375}
+{"stage": "stack_import_enter", "pid": 17144, "monotonic": 77296.3411654, "cpu": 0.609375}
+{"stage": "stack_import_exit", "pid": 17144, "monotonic": 77297.5997794, "cpu": 1.171875, "origin": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\__init__.py"}

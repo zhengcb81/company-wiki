@@ -1,0 +1,279 @@
+{
+  "RGB:build_margin_crop": {
+    "sha256": "75a2d2d5104f52fe7d01e44400cf73794250eee82d5aa5cc3d09f88162ff3221",
+    "transform": {
+      "transform": "roi-margin-crop/1",
+      "kind": "translate",
+      "origin": [
+        10.0,
+        21.0
+      ],
+      "size": [
+        252,
+        34
+      ]
+    }
+  },
+  "RGB:build_split_stack": {
+    "sha256": "6f62d3940d762f978c195f6ad3009eec3d79e5d28579f18033f3057d15f05c72",
+    "transform": {
+      "transform": "split-stack/1",
+      "kind": "split-stack",
+      "size": [
+        171,
+        76
+      ],
+      "chunks": [
+        [
+          0,
+          0,
+          10,
+          21,
+          0,
+          81
+        ],
+        [
+          0,
+          42,
+          91,
+          21,
+          81,
+          252
+        ]
+      ]
+    }
+  },
+  "RGB:build_upscale": {
+    "sha256": "f3d8c936edfc0cfd3adf90b1db4e2d8975d1657e02e7ce6571cd08015be52705",
+    "transform": {
+      "transform": "upscale-2x/1",
+      "kind": "scale",
+      "origin": [
+        10.0,
+        21.0
+      ],
+      "scale": 0.5,
+      "size": [
+        504,
+        68
+      ]
+    }
+  },
+  "L:build_margin_crop": {
+    "sha256": "e4c7c1bcae8b6cf8151a1d50fe9a1fc9dba6f6abf231d19e1d9eeca5511d5f05",
+    "transform": {
+      "transform": "roi-margin-crop/1",
+      "kind": "translate",
+      "origin": [
+        10.0,
+        21.0
+      ],
+      "size": [
+        252,
+        34
+      ]
+    }
+  },
+  "L:build_split_stack": {
+    "sha256": "6f62d3940d762f978c195f6ad3009eec3d79e5d28579f18033f3057d15f05c72",
+    "transform": {
+      "transform": "split-stack/1",
+      "kind": "split-stack",
+      "size": [
+        171,
+        76
+      ],
+      "chunks": [
+        [
+          0,
+          0,
+          10,
+          21,
+          0,
+          81
+        ],
+        [
+          0,
+          42,
+          91,
+          21,
+          81,
+          252
+        ]
+      ]
+    }
+  },
+  "L:build_upscale": {
+    "sha256": "a8b73466b7183a72c6f9c22744e3264192efe9fc0913941c35dd2f1eae542b79",
+    "transform": {
+      "transform": "upscale-2x/1",
+      "kind": "scale",
+      "origin": [
+        10.0,
+        21.0
+      ],
+      "scale": 0.5,
+      "size": [
+        504,
+        68
+      ]
+    }
+  },
+  "RGBA:build_margin_crop": {
+    "sha256": "21b126877cee9d1e70cfe4e2b409b7235a3ec91cf7005d0f625c344d3b6ad77d",
+    "transform": {
+      "transform": "roi-margin-crop/1",
+      "kind": "translate",
+      "origin": [
+        10.0,
+        21.0
+      ],
+      "size": [
+        252,
+        34
+      ]
+    }
+  },
+  "RGBA:build_split_stack": {
+    "sha256": "6f62d3940d762f978c195f6ad3009eec3d79e5d28579f18033f3057d15f05c72",
+    "transform": {
+      "transform": "split-stack/1",
+      "kind": "split-stack",
+      "size": [
+        171,
+        76
+      ],
+      "chunks": [
+        [
+          0,
+          0,
+          10,
+          21,
+          0,
+          81
+        ],
+        [
+          0,
+          42,
+          91,
+          21,
+          81,
+          252
+        ]
+      ]
+    }
+  },
+  "RGBA:build_upscale": {
+    "sha256": "1e6d793edb3ce262e4b6c911fa4c6d7d7b8d833f1fa9094ac66f6ccfb195297e",
+    "transform": {
+      "transform": "upscale-2x/1",
+      "kind": "scale",
+      "origin": [
+        10.0,
+        21.0
+      ],
+      "scale": 0.5,
+      "size": [
+        504,
+        68
+      ]
+    }
+  },
+  "P:build_margin_crop": {
+    "sha256": "3735110c6c490af14f3316bf0ee9708994cf4805dd3fc1e06c9e8fb48ec6f988",
+    "transform": {
+      "transform": "roi-margin-crop/1",
+      "kind": "translate",
+      "origin": [
+        10.0,
+        21.0
+      ],
+      "size": [
+        252,
+        34
+      ]
+    }
+  },
+  "P:build_split_stack": {
+    "sha256": "a05af5a0b5dd0158456b58572808f3f2c2d5a9a3841dabaa7c6baabb22a67a2e",
+    "transform": {
+      "transform": "split-stack/1",
+      "kind": "split-stack",
+      "size": [
+        171,
+        76
+      ],
+      "chunks": [
+        [
+          0,
+          0,
+          10,
+          21,
+          0,
+          81
+        ],
+        [
+          0,
+          42,
+          91,
+          21,
+          81,
+          252
+        ]
+      ]
+    }
+  },
+  "P:build_upscale": {
+    "sha256": "373b8aa000145c058a334cd728b280cefa011b7f0828850021d224bfa830c3aa",
+    "transform": {
+      "transform": "upscale-2x/1",
+      "kind": "scale",
+      "origin": [
+        10.0,
+        21.0
+      ],
+      "scale": 0.5,
+      "size": [
+        504,
+        68
+      ]
+    }
+  },
+  "CMYK:build_margin_crop": {
+    "error": "OSError",
+    "detail": "cannot write mode CMYK as PNG"
+  },
+  "CMYK:build_split_stack": {
+    "sha256": "6f62d3940d762f978c195f6ad3009eec3d79e5d28579f18033f3057d15f05c72",
+    "transform": {
+      "transform": "split-stack/1",
+      "kind": "split-stack",
+      "size": [
+        171,
+        76
+      ],
+      "chunks": [
+        [
+          0,
+          0,
+          10,
+          21,
+          0,
+          81
+        ],
+        [
+          0,
+          42,
+          91,
+          21,
+          81,
+          252
+        ]
+      ]
+    }
+  },
+  "CMYK:build_upscale": {
+    "error": "OSError",
+    "detail": "cannot write mode CMYK as PNG"
+  }
+}

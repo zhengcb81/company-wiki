@@ -1,0 +1,31 @@
+{
+  "schema_version": "root-w05-ocr-independent-preallocation-manifest/1",
+  "status": "PASS_WITH_SCOPE",
+  "files": [
+    {
+      "path": "build_report.py",
+      "bytes": 10656,
+      "sha256": "f298c387bd977b2e3aa435f696947e3454223fdfeaeddd947836b6b9cb71bbd1"
+    },
+    {
+      "path": "probes.json",
+      "bytes": 13307,
+      "sha256": "321420e6d2ce658b8ac7ec2c36b956d26d78c3fb546364a3523d2c6a97e58fa3"
+    },
+    {
+      "path": "probes.py",
+      "bytes": 15290,
+      "sha256": "16479b5b9c810df60fdbe6e75b0823a5dc965f3ea91de6835bce0f30156044dd"
+    },
+    {
+      "path": "report.json",
+      "bytes": 12111,
+      "sha256": "ad7b15152a334c44bfe2cd37ac17dd6dda816142f6257394b83a42ffbd9ebd3e"
+    },
+    {
+      "path": "report.md",
+      "bytes": 7203,
+      "sha256": "719f99dbc8a2a2b8b06644ad61af295a816ad153b24f6928c855087f9aa2763f"
+    }
+  ]
+}
