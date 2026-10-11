@@ -1,0 +1,48 @@
+{
+  "schema_version": "w04-retention-plan/1",
+  "state": "CURRENT_TEMP_ORIGINALS_PRESERVED_MIGRATION_NOT_EXECUTED",
+  "current_config": "C:/Users/郑曾波/AppData/Local/Temp/mW03-ahg078jp/HK-00700/config/source_catalog.yaml",
+  "current_catalog": "C:/Users/郑曾波/AppData/Local/Temp/mW03-ahg078jp/HK-00700/catalog/catalog.sqlite3",
+  "raw2": [
+    {
+      "sha256": "8d734283bab8c62890967dbffeff5fb06fac5ca96679c6745ca97cf3ab688711",
+      "byte_size": 264101,
+      "mime_type": "text/html",
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/mW03-ahg078jp/HK-00700/companies/Tencent Music Entertainment Group/raw/investor_relations/8d734283bab8c62890967dbffeff5fb06fac5ca96679c6745ca97cf3ab688711.html",
+      "sidecar_sha256": "b27c48e6ca0ec44c45110bbb556722ecfc129b7eb4cf532a69f3f58130c1536f",
+      "http_call_id": "http-26b1760983ab40fb9f27a4456632d49f",
+      "document_kind": "investor_relations",
+      "publisher": "Tencent Music Entertainment Group",
+      "published_date": "2026-08-11",
+      "security_id": "1698",
+      "fiscal_year": 2026,
+      "fiscal_period": "Q2"
+    },
+    {
+      "sha256": "57308d55329e0d010c1e2b32777d719879c82eae81ae1737fea699ca018bd6d9",
+      "byte_size": 524112,
+      "mime_type": "application/pdf",
+      "path": "C:/Users/郑曾波/AppData/Local/Temp/mW03-ahg078jp/HK-00700/companies/Tencent Music Entertainment Group/raw/other/57308d55329e0d010c1e2b32777d719879c82eae81ae1737fea699ca018bd6d9.pdf",
+      "sidecar_sha256": "87f8434865609185aaba4daf1d69430bbc721bef0073280f220863fe0c92eae0",
+      "http_call_id": "http-03fecdac7b354a99986fba0ae67ea284",
+      "document_kind": "regulatory_filing",
+      "publisher": "Tencent Music Entertainment Group",
+      "published_date": "2026-05-18",
+      "security_id": "1698",
+      "fiscal_year": 2026,
+      "fiscal_period": "Q2"
+    }
+  ],
+  "total_raw_bytes": 788213,
+  "target": "ROOT chooses short durable owned artifact root, flat cas/<sha>.<ext> + exact sidecar and sourceRef/replay mapping; no production/dayu write",
+  "delete_condition": "Both original raw+sidecar retained with verified bytes/hash and CWP rebuilt TEMP catalog public exact-open reproduces refs/metadata; hash mapping and cleanup receipt sealed first; no sole original deleted",
+  "sourceRef_contract": {
+    "schema_version": "2.0",
+    "document_id": "urn:company-wiki:document:sha256:<sha>",
+    "source_id": "urn:company-wiki:source:sha256:<sha>",
+    "content_sha256": "<sha>",
+    "byte_size": "actual int",
+    "mime_type": "actual string"
+  },
+  "current_bytes_are_not_proven_elsewhere": true
+}

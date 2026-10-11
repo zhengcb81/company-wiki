@@ -1,0 +1,38 @@
+{
+  "schema_version": "root-w04-plan-intake/1",
+  "observed_at": "2026-10-11T03:55:11.300678+00:00",
+  "handoff_sha256": "cdc7f015d2e162ad9478a2be6fc05f06f69d3c5f208b02f870040c12bea0fef6",
+  "verified_sealed_manifest_files": 21,
+  "main_inventory": 246,
+  "roots": 20,
+  "packages": 7,
+  "duplicate_keys": 0,
+  "unmapped_keys": 0,
+  "root_primary_memberships_match": true,
+  "per_package_keys": {
+    "WP07": 90,
+    "WP02": 22,
+    "WP06": 87,
+    "WP03": 15,
+    "WP04": 10,
+    "WP01": 10,
+    "WP05": 12
+  },
+  "auxiliary_ids": [
+    "TECH-P7-001",
+    "TECH-P7-002",
+    "TECH-P7-003",
+    "CONFIG-EFFICIENCY-NULL-001"
+  ],
+  "protected_config_sha256": {
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "known_execution_overlay": [
+    "CWP new tests belong to tests/unit to be on normal existing CI; sealed card unchanged"
+  ],
+  "technical_interface_review": "in_progress",
+  "new_source_implementation_started": false,
+  "new_provider_calls": 0,
+  "new_model_calls": 0
+}

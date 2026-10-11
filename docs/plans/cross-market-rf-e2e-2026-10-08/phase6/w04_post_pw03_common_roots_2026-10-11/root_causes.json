@@ -1,0 +1,1440 @@
+{
+  "schema_version": "w04-root-causes/1",
+  "status": "DIAGNOSED_AND_PLANNED",
+  "roots": [
+    {
+      "root_id": "RC01",
+      "title": "已登记非期间来源被所有kind财期资格及filing路由阻断",
+      "owner_work_package": "WP01",
+      "test_id": "T01",
+      "diagnosis_class": "code_interface",
+      "mechanism": "CWP source_reader capture_ready 对 investor_relations/broker_research 也要求 period_known；FF exact 要FY，latest 排除 source_query，RF registered入口仍验 resolved FY。",
+      "native_locator": "source_reader.py:545–585; FF fetch_filing.py:1238–1243; RF source_preparation.py:371–390",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-001",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-001",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-002",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-007"
+      ],
+      "primary_issue_count": 4,
+      "category": "code_interface",
+      "owner": "WP01",
+      "finding_keys": [
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-001",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-001",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-002",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-007"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\storage.json",
+          "sha256": "0cf07997c862f9fd75e3be6e21d9616ccb657413708bb8d66f5acb51d132e2a2",
+          "locator": "/findings/0"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\fetch.json",
+          "sha256": "e79fe03d1723663a9268dea08663c7fd914cae85075771fceac3f89310b0cec2",
+          "locator": "/findings/0"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\process.json",
+          "sha256": "b467a9a38ffcf4058a2979b25d0a76f1f1fb85ee206a1bc98bea4278febceef2",
+          "locator": "/findings/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\analyst.json",
+          "sha256": "2a7222849ff556cfee4f8109f82af5bfa938e55b6d46689546197e91102d92b9",
+          "locator": "/findings/6"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "source_reader.py:545–585; FF fetch_filing.py:1238–1243; RF source_preparation.py:371–390",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC02",
+      "title": "SourceMetadata公共DTO扩展与RF四字段拒绝错位",
+      "owner_work_package": "WP03",
+      "test_id": "T02",
+      "diagnosis_class": "code_interface",
+      "mechanism": "CWP五字段含 declared_language:str|null；RF _bundle_metadata exact四字段拒绝已完成H1。",
+      "native_locator": "CWP narrative_contracts.py:228–288; RF company_wiki_narrative_contracts.py:452–453",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-002",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-004",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-003"
+      ],
+      "primary_issue_count": 3,
+      "category": "code_interface",
+      "owner": "WP03",
+      "finding_keys": [
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-002",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-004",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-003"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\fetch.json",
+          "sha256": "e82fb4d00a17cd10222bc8858e0daeb90ca56e688aba9cef67f6ea4039619016",
+          "locator": "/findings/3"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+          "sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b",
+          "locator": "/findings/2"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "CWP narrative_contracts.py:228–288; RF company_wiki_narrative_contracts.py:452–453",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC03",
+      "title": "投影完整父链在小请求和收据重复传输",
+      "owner_work_package": "WP01",
+      "test_id": "T03",
+      "diagnosis_class": "code_interface",
+      "mechanism": "65parents请求57784B超过16384；read_projected receipt重复 ref/subject/parents；RF只支持raw ref/1，必须整体v3投影兼容。",
+      "native_locator": "CWP narrative_transport_contracts.py:233–240; narrative_transport.py:361–378; RF company_wiki_narrative_reader.py",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-004",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-003",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-006",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-003",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-005",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-005"
+      ],
+      "primary_issue_count": 6,
+      "category": "code_interface",
+      "owner": "WP01",
+      "finding_keys": [
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-004",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-003",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-006",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-003",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-005",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-005"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/2"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\fetch.json",
+          "sha256": "e82fb4d00a17cd10222bc8858e0daeb90ca56e688aba9cef67f6ea4039619016",
+          "locator": "/findings/4"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+          "sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b",
+          "locator": "/findings/4"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "CWP narrative_transport_contracts.py:233–240; narrative_transport.py:361–378; RF company_wiki_narrative_reader.py",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC04",
+      "title": "限定经营上下文的选择与摘要召回仍需实际新运行验收",
+      "owner_work_package": "WP02",
+      "test_id": "T04",
+      "diagnosis_class": "source_extraction",
+      "mechanism": "0.7.0 omission已证；0.7.1/116a39d8接受不可追签。ID/hash合法不能保证主体、阶段、单位、否定、相邻约束与关键已选命题保真。",
+      "native_locator": "CN/HK/US storage selected/summary findings; CWP narrative_context/business_groups/summarize",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-004",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-005",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-003",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-005",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-001",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-008",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-009",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-001",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-002",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-004",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-007",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-008",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-005",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-006",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-001",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-003",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-004"
+      ],
+      "primary_issue_count": 18,
+      "category": "source_extraction",
+      "owner": "WP02",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-004",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-005",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-003",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-005",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-001",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-008",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-009",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-001",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-002",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-004",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-007",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-008",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-005",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-006",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-001",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-003",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-004"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/4"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/5"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\storage.json",
+          "sha256": "56a6b2a84c5b1ef4a77512d34ee6452e6f73d81c861d758a614804e111a5230e",
+          "locator": "/findings/0"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\storage.json",
+          "sha256": "0cf07997c862f9fd75e3be6e21d9616ccb657413708bb8d66f5acb51d132e2a2",
+          "locator": "/findings/2"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "CN/HK/US storage selected/summary findings; CWP narrative_context/business_groups/summarize",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC05",
+      "title": "配置purpose可观察、实际配置策略和可见输出预算不足导致已付费空final",
+      "owner_work_package": "WP07",
+      "test_id": "T05",
+      "diagnosis_class": "code_config_interface",
+      "mechanism": "canonical configured wrapper固定purpose=narrative正确接现resolver。current/frozen actual generation_policy absent，PW03 reasoning8192/空final已证；配置策略/可见输出需ROOT按实际wire设计。explicit thinking/effort/maxoutput已经正确入身份，不是缺key，purpose仅标签同wire应hit。nullable optionalraw额外miss另列RC14auxiliary。",
+      "native_locator": "scripts/narrative_batch_configured.py:27; narrative_http_model.py:160; llm.generation_policy",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-002",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-004",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-002",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-002",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-003",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-005",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-004",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-004",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-002",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-004",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-002",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-004",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-006"
+      ],
+      "primary_issue_count": 13,
+      "category": "code_config_interface",
+      "owner": "WP07",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-002",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-004",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-002",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-002",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-003",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-005",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-004",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-004",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-002",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-004",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-002",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-004",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-006"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/3"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+          "sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b",
+          "locator": "/findings/3"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\storage.json",
+          "sha256": "56a6b2a84c5b1ef4a77512d34ee6452e6f73d81c861d758a614804e111a5230e",
+          "locator": "/findings/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\process.json",
+          "sha256": "bf648c17b00a65d5223738c9cc2b5343e60de13e7b4a80e1f2ca4e334bb65bfb",
+          "locator": "/findings/3"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "scripts/narrative_batch_configured.py:27; narrative_http_model.py:160; llm.generation_policy",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC06",
+      "title": "公开摘要存在/读取与RF实际公式消费混记",
+      "owner_work_package": "WP03",
+      "test_id": "T06",
+      "diagnosis_class": "code_interface",
+      "mechanism": "RF consume_narrative_input已有explicit rationale_support→used parameter→formula祖先绑定；本轮多bundle未消费，仅discovery，不应由summary存在推research完成。",
+      "native_locator": "RF source_narrative_context.py:16–96",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-005",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-005"
+      ],
+      "primary_issue_count": 2,
+      "category": "code_interface",
+      "owner": "WP03",
+      "finding_keys": [
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-005",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-005"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\storage.json",
+          "sha256": "56a6b2a84c5b1ef4a77512d34ee6452e6f73d81c861d758a614804e111a5230e",
+          "locator": "/findings/4"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\storage.json",
+          "sha256": "0cf07997c862f9fd75e3be6e21d9616ccb657413708bb8d66f5acb51d132e2a2",
+          "locator": "/findings/4"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "RF source_narrative_context.py:16–96",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC07",
+      "title": "命名拒绝/来源调用/当前用量与历史版本事实投影不完整",
+      "owner_work_package": "WP04",
+      "test_id": "T07",
+      "diagnosis_class": "code_interface",
+      "mechanism": "FF具体request_error现generic unspecified；HK14/16calls空。真实operation usage/cost unknown必须保留；115B历史metadata差额不能推raw错误或现GET零费用。",
+      "native_locator": "FF filing_contracts.py:293–323; RF _safe_preparation_failure:169; audit document_status_join.py join_status_index",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-005",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-004",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-005",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-002",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-003",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-005",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-006",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-003",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-002",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-007"
+      ],
+      "primary_issue_count": 10,
+      "category": "code_interface",
+      "owner": "WP04",
+      "finding_keys": [
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-005",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-004",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-005",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-002",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-003",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-005",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-006",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-003",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-002",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-007"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\fetch.json",
+          "sha256": "fb3a09010f99c970407dfefcba62e53d97cbb52c904a61d2715dcad1bc49f9a3",
+          "locator": "/findings/2"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\fetch.json",
+          "sha256": "e79fe03d1723663a9268dea08663c7fd914cae85075771fceac3f89310b0cec2",
+          "locator": "/findings/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\fetch.json",
+          "sha256": "e79fe03d1723663a9268dea08663c7fd914cae85075771fceac3f89310b0cec2",
+          "locator": "/findings/6"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "FF filing_contracts.py:293–323; RF _safe_preparation_failure:169; audit document_status_join.py join_status_index",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC08",
+      "title": "同SHA来源身份及公开时钟证据不足",
+      "owner_work_package": "WP07",
+      "test_id": "T08",
+      "diagnosis_class": "read_fact_unknown",
+      "mechanism": "CN FY24身份/URL/publication空；HK overview publicationnull。未知资格正确排除，同标题/mtime/数据年不能补日期。",
+      "native_locator": "CN storage001; HK storage003; source_read receipts",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-007",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-003",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-007",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-001",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-002",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-001",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-004",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-001",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-002",
+        "fresh-20261009T065028-us-msft/process/PROCESS-002",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-007",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-005",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-010",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-001",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-003",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-008",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-003",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-005"
+      ],
+      "primary_issue_count": 19,
+      "category": "read_fact_unknown",
+      "owner": "WP07",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-007",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-003",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-007",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-001",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-002",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-001",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-004",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-001",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-002",
+        "fresh-20261009T065028-us-msft/process/PROCESS-002",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-007",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-005",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-010",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-001",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-003",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-008",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-003",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-005"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/0"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\fetch.json",
+          "sha256": "e82fb4d00a17cd10222bc8858e0daeb90ca56e688aba9cef67f6ea4039619016",
+          "locator": "/findings/2"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+          "sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b",
+          "locator": "/findings/7"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\storage.json",
+          "sha256": "56a6b2a84c5b1ef4a77512d34ee6452e6f73d81c861d758a614804e111a5230e",
+          "locator": "/findings/2"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "CN storage001; HK storage003; source_read receipts",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC09",
+      "title": "研究需要矩阵没有绑定类型、重大性、窗口和实际原件",
+      "owner_work_package": "WP06",
+      "test_id": "T09",
+      "diagnosis_class": "research_and_external",
+      "mechanism": "IR活动DOCX、交易audit/proforma、策略/IPO/equity/convertible及latest-filing后公告窗口缺口；web工具阅读缺immutable body。不能用旧403证明当前不存在。",
+      "native_locator": "CN fetch001/002/006; HK fetch002; US fetch003/process007",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-002",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-002",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-003",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-004",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-002",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-006",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-004",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-007",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-001",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-002",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-006",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-002",
+        "pw03-20261011T010657Z-cn-688012/analyst/ANALYST-PW03-CN-005",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-004",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-002",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-002",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-003",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-006",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-003",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-007"
+      ],
+      "primary_issue_count": 21,
+      "category": "research_and_external",
+      "owner": "WP06",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-002",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-002",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-003",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-004",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-002",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-006",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-004",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-007",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-001",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-002",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-006",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-002",
+        "pw03-20261011T010657Z-cn-688012/analyst/ANALYST-PW03-CN-005",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-004",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-002",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-002",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-003",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-006",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-003",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-007"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/6"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\fetch.json",
+          "sha256": "e82fb4d00a17cd10222bc8858e0daeb90ca56e688aba9cef67f6ea4039619016",
+          "locator": "/findings/0"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\fetch.json",
+          "sha256": "e82fb4d00a17cd10222bc8858e0daeb90ca56e688aba9cef67f6ea4039619016",
+          "locator": "/findings/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\fetch.json",
+          "sha256": "e82fb4d00a17cd10222bc8858e0daeb90ca56e688aba9cef67f6ea4039619016",
+          "locator": "/findings/5"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "CN fetch001/002/006; HK fetch002; US fetch003/process007",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC10",
+      "title": "合法未来假设未完成经济量级论证或完整年度路径",
+      "owner_work_package": "WP06",
+      "test_id": "T10",
+      "diagnosis_class": "research",
+      "mechanism": "CN18未来cells/HK73假设范围未校准；US72future参数/84calcs空，任务三年未完成。历史/机制和native算术不是未来范围，未来actual非必需。",
+      "native_locator": "RF operating-research/1 observations/calibrations; three process/analyst actual input",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/process/PROCESS-001",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-001",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-001",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-001",
+        "fresh-20261009T065028-us-msft/process/PROCESS-001",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-001",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-001",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-001",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-004",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-001",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-001",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-002",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-005",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-001",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-001",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-002",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-001",
+        "pw03-20261011T010657Z-cn-688012/analyst/ANALYST-PW03-CN-001",
+        "pw03-20261011T010657Z-cn-688012/analyst/ANALYST-PW03-CN-002",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-001",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-001",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-001",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-001",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-002"
+      ],
+      "primary_issue_count": 24,
+      "category": "research",
+      "owner": "WP06",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/process/PROCESS-001",
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-001",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-001",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-001",
+        "fresh-20261009T065028-us-msft/process/PROCESS-001",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-001",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-001",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-001",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-004",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-001",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-001",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-002",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-005",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-001",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-001",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-002",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-001",
+        "pw03-20261011T010657Z-cn-688012/analyst/ANALYST-PW03-CN-001",
+        "pw03-20261011T010657Z-cn-688012/analyst/ANALYST-PW03-CN-002",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-001",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-001",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-001",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-001",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-002"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+          "sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b",
+          "locator": "/findings/0"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\analyst.json",
+          "sha256": "4840a3c26f2cda8bfcfae3d8f03f47939b2d47f02a56d94917e54a8bb214b86f",
+          "locator": "/findings/0"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\analyst.json",
+          "sha256": "4840a3c26f2cda8bfcfae3d8f03f47939b2d47f02a56d94917e54a8bb214b86f",
+          "locator": "/findings/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\process.json",
+          "sha256": "bf648c17b00a65d5223738c9cc2b5343e60de13e7b4a80e1f2ca4e334bb65bfb",
+          "locator": "/findings/0"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "RF operating-research/1 observations/calibrations; three process/analyst actual input",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC11",
+      "title": "财报期间、控制贡献、外部收入、管理指引及父级增量未桥接",
+      "owner_work_package": "WP06",
+      "test_id": "T11",
+      "diagnosis_class": "research_semantic",
+      "mechanism": "CMP报表H1和May31贡献窗口需分别保留；子集团280/430/580不是集团外部收入；MSFT RPO/CC/FX/exTAC/paid counts非可直接累加收入。",
+      "native_locator": "CN cmp_h1_2026/management_targets; US targets and analyst006",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-004",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-002",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-006",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-002",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-003",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-004",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-006",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-009",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-002",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-004",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-007",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-006",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-007",
+        "pw03-20261011T010657Z-cn-688012/analyst/ANALYST-PW03-CN-003",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-003",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-003",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-006"
+      ],
+      "primary_issue_count": 18,
+      "category": "research_semantic",
+      "owner": "WP06",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-004",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-002",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-006",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-002",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-003",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-004",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-006",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-009",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-002",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-003",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-004",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-007",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-006",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-007",
+        "pw03-20261011T010657Z-cn-688012/analyst/ANALYST-PW03-CN-003",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-003",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-003",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-006"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+          "sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b",
+          "locator": "/findings/5"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+          "sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b",
+          "locator": "/findings/6"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\analyst.json",
+          "sha256": "4840a3c26f2cda8bfcfae3d8f03f47939b2d47f02a56d94917e54a8bb214b86f",
+          "locator": "/findings/2"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\process.json",
+          "sha256": "b467a9a38ffcf4058a2979b25d0a76f1f1fb85ee206a1bc98bea4278febceef2",
+          "locator": "/findings/2"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "CN cmp_h1_2026/management_targets; US targets and analyst006",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC12",
+      "title": "经济共同冲击没有经营曝光和真实收入确认路径",
+      "owner_work_package": "WP06",
+      "test_id": "T12",
+      "diagnosis_class": "research",
+      "mechanism": "CN illustrative demand/延期/融资、HK均匀0.95、UScloud共同容量与first-party/需求缺口；应在同一DAG重算，不加单shock、不造GPU/平方米硬cap。",
+      "native_locator": "three analyst joint findings; native sensitivity artifacts",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-002",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-002",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-002",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-003",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-005",
+        "pw03-20261011T010657Z-cn-688012/analyst/ANALYST-PW03-CN-004",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-002",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-005"
+      ],
+      "primary_issue_count": 8,
+      "category": "research",
+      "owner": "WP06",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/analyst/ANALYST-002",
+        "fresh-20261009T065028-hk-00700/analyst/ANALYST-002",
+        "fresh-20261009T065028-us-msft/analyst/ANALYST-002",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-003",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-005",
+        "pw03-20261011T010657Z-cn-688012/analyst/ANALYST-PW03-CN-004",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-002",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-005"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\analyst.json",
+          "sha256": "4840a3c26f2cda8bfcfae3d8f03f47939b2d47f02a56d94917e54a8bb214b86f",
+          "locator": "/findings/3"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\analyst.json",
+          "sha256": "80a5fab30b5a7fce5f44019ebed04251cd15b08ed091dc083c71adf800bd6f68",
+          "locator": "/findings/1"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\analyst.json",
+          "sha256": "2a7222849ff556cfee4f8109f82af5bfa938e55b6d46689546197e91102d92b9",
+          "locator": "/findings/4"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "three analyst joint findings; native sensitivity artifacts",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC13",
+      "title": "物理留存重复和native序列化超过原空间限制",
+      "owner_work_package": "WP05",
+      "test_id": "T13",
+      "diagnosis_class": "code_storage_interface",
+      "mechanism": "CN40089351/HK53533437持久字节超过32MiB；HKnative2283328>2MiB，compact投影不同身份不替原native；CAS只能共享immutable，consumed副本独立。",
+      "native_locator": "CN/HK resource observations; audit_run.freeze_command_inputs",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-004",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-002",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-001",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-002",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-001",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-003",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-005",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-008",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-009",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-006",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-006",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-008"
+      ],
+      "primary_issue_count": 12,
+      "category": "code_storage_interface",
+      "owner": "WP05",
+      "finding_keys": [
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-004",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-002",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-001",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-002",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-001",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-003",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-005",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-008",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-009",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-006",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-006",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-008"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/7"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+          "sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b",
+          "locator": "/findings/8"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\storage.json",
+          "sha256": "56a6b2a84c5b1ef4a77512d34ee6452e6f73d81c861d758a614804e111a5230e",
+          "locator": "/findings/5"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\fetch.json",
+          "sha256": "fb3a09010f99c970407dfefcba62e53d97cbb52c904a61d2715dcad1bc49f9a3",
+          "locator": "/findings/5"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "CN/HK resource observations; audit_run.freeze_command_inputs",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC14",
+      "title": "早期helper字节、重复cache/版本失效及恢复未完整保存/执行",
+      "owner_work_package": "WP07",
+      "test_id": "T14",
+      "diagnosis_class": "execution_history",
+      "mechanism": "旧helper被覆盖不可补造；cache/crash本轮NOT_RUN。新attempt保存writer/version/source/config/generation与恢复证据，原缺字节永久unknown。",
+      "native_locator": "CN fetch007/process010; three storage cache findings",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-006",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-006",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-005",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-006",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-009",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-007",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-010",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-007",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-007"
+      ],
+      "primary_issue_count": 9,
+      "category": "execution_history",
+      "owner": "WP07",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-006",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-006",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-005",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-006",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-009",
+        "pw03-20261011T010657Z-cn-688012/fetch/PW03-CN-FETCH-007",
+        "pw03-20261011T010657Z-cn-688012/process/PROCESS-010",
+        "pw03-20261011T010657Z-hk-00700/storage/PW03-HK-STORAGE-007",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-007"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/8"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\fetch.json",
+          "sha256": "e82fb4d00a17cd10222bc8858e0daeb90ca56e688aba9cef67f6ea4039619016",
+          "locator": "/findings/6"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+          "sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b",
+          "locator": "/findings/9"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\storage.json",
+          "sha256": "56a6b2a84c5b1ef4a77512d34ee6452e6f73d81c861d758a614804e111a5230e",
+          "locator": "/findings/6"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "CN fetch007/process010; three storage cache findings",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC15",
+      "title": "失败响应全正文旧要求与新bounded failed-final责任需明确",
+      "owner_work_package": "WP02",
+      "test_id": "T15",
+      "diagnosis_class": "historical_and_metric",
+      "mechanism": "当前final/usage/reasoning/response字节计量真实，旧supplier全文不可恢复；新边界可保存bounded final/hash/finish/usage及响应hash观察，不复制无限body或把旧缺失改PASS。",
+      "native_locator": "CN storage010; narrative_failed_final.py; PW03 response receipts",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-003",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-003",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-007",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-010"
+      ],
+      "primary_issue_count": 4,
+      "category": "historical_and_metric",
+      "owner": "WP02",
+      "finding_keys": [
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-003",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-003",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-007",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-010"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/9"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "CN storage010; narrative_failed_final.py; PW03 response receipts",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC16",
+      "title": "外部能力/entitlement和未触发分支不是已证工程失败",
+      "owner_work_package": "WP07",
+      "test_id": "T16",
+      "diagnosis_class": "external_or_not_run",
+      "mechanism": "HK ET unsupported_market actual0HTTP；US ET/FMP未调用，不沿旧credentials/403推今天状态；Lam与SEMI来源不同。配置原文路径有界新尝试而非许可链。",
+      "native_locator": "HK fetch001; US fetch005; CN storage011",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-004",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-001",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-003",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-004",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-011",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-005",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-005",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-001",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-007",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-004",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-008",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-009",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-003",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-004",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-006",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-011",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-001",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-003",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-006",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-005"
+      ],
+      "primary_issue_count": 20,
+      "category": "external_or_not_run",
+      "owner": "WP07",
+      "finding_keys": [
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-004",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-001",
+        "fresh-20261009T065028-us-msft/fetch/FETCH-003",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-004",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-011",
+        "m3-20261009T184946-cn-688012/analyst/ANALYST-CN688012-005",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-005",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-001",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-007",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-004",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-008",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-009",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-003",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-004",
+        "m3-20261009T184946-us-msft/analyst/ANALYST-006",
+        "pw03-20261011T010657Z-cn-688012/storage/PW03-CN-STORAGE-011",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-001",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-003",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-006",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-005"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+          "sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+          "locator": "/findings/10"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\fetch.json",
+          "sha256": "fb3a09010f99c970407dfefcba62e53d97cbb52c904a61d2715dcad1bc49f9a3",
+          "locator": "/findings/0"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\process.json",
+          "sha256": "bf648c17b00a65d5223738c9cc2b5343e60de13e7b4a80e1f2ca4e334bb65bfb",
+          "locator": "/findings/2"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\analyst.json",
+          "sha256": "80a5fab30b5a7fce5f44019ebed04251cd15b08ed091dc083c71adf800bd6f68",
+          "locator": "/findings/5"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "HK fetch001; US fetch005; CN storage011",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC17",
+      "title": "原文连续性与证据的政策/机制/反证角色失真",
+      "owner_work_package": "WP06",
+      "test_id": "T17",
+      "diagnosis_class": "research_semantic",
+      "mechanism": "HK Ximalaya拼正文/脚注；USFrontier引用Search KPI、Search错政策、四拼接；Others认收定义不是未来正向机制；FTB摘录截关键限制。",
+      "native_locator": "HK claim_ximalaya_postclose; US policy claims; audit authoring_provenance.py",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/process/PROCESS-008",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-007",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-008",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-005",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-006",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-003",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-006",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-007",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-006",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-007",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-004",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-005",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-004",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-005",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-004",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-004"
+      ],
+      "primary_issue_count": 16,
+      "category": "research_semantic",
+      "owner": "WP06",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/process/PROCESS-008",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-007",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-008",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-005",
+        "m3-20261009T184946-hk-00700/fetch/M3-HK-FETCH-006",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-003",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-006",
+        "m3-20261009T184946-hk-00700/analyst/HK-ANALYST-007",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-006",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-007",
+        "pw03-20261011T010657Z-hk-00700/fetch/PW03-HK-FETCH-004",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-005",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-004",
+        "pw03-20261011T010657Z-hk-00700/analyst/ANALYST-005",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-004",
+        "pw03-20261011T010657Z-us-msft/analyst/ANALYST-004"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\fetch.json",
+          "sha256": "fb3a09010f99c970407dfefcba62e53d97cbb52c904a61d2715dcad1bc49f9a3",
+          "locator": "/findings/3"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\process.json",
+          "sha256": "bf648c17b00a65d5223738c9cc2b5343e60de13e7b4a80e1f2ca4e334bb65bfb",
+          "locator": "/findings/4"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\analyst.json",
+          "sha256": "80a5fab30b5a7fce5f44019ebed04251cd15b08ed091dc083c71adf800bd6f68",
+          "locator": "/findings/3"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\analyst.json",
+          "sha256": "80a5fab30b5a7fce5f44019ebed04251cd15b08ed091dc083c71adf800bd6f68",
+          "locator": "/findings/4"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "HK claim_ximalaya_postclose; US policy claims; audit authoring_provenance.py",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC18",
+      "title": "RF快照实际schema身份、native大小与交付信任边界契约",
+      "owner_work_package": "WP03",
+      "test_id": "T18",
+      "diagnosis_class": "code_interface",
+      "mechanism": "create_snapshot header取constant3.7，input_document.schema_version和forecast_result.schema_version均3.9；金额已复算无数值错。写原生紧凑JSON及相邻TRUST_BOUNDARY明确，旧snapshot不可重写。",
+      "native_locator": "RF revenue_backtest.py:36–78; HKsnapshot-v2; HKprocess006/007",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-006",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-007",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-004",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-005",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-006",
+        "fresh-20261009T065028-us-msft/process/PROCESS-005",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-008",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-006",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-007",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-005"
+      ],
+      "primary_issue_count": 10,
+      "category": "code_interface",
+      "owner": "WP03",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-006",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-007",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-004",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-005",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-006",
+        "fresh-20261009T065028-us-msft/process/PROCESS-005",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-008",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-006",
+        "pw03-20261011T010657Z-hk-00700/process/PW03-HK-PROCESS-007",
+        "pw03-20261011T010657Z-us-msft/process/PW03-US-PROCESS-005"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\process.json",
+          "sha256": "bf648c17b00a65d5223738c9cc2b5343e60de13e7b4a80e1f2ca4e334bb65bfb",
+          "locator": "/findings/5"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\process.json",
+          "sha256": "bf648c17b00a65d5223738c9cc2b5343e60de13e7b4a80e1f2ca4e334bb65bfb",
+          "locator": "/findings/6"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\process.json",
+          "sha256": "b467a9a38ffcf4058a2979b25d0a76f1f1fb85ee206a1bc98bea4278febceef2",
+          "locator": "/findings/4"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "RF revenue_backtest.py:36–78; HKsnapshot-v2; HKprocess006/007",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC19",
+      "title": "已接受或未知的旧特定路径保持精确未执行状态",
+      "owner_work_package": "WP07",
+      "test_id": "T19",
+      "diagnosis_class": "historical_not_run",
+      "mechanism": "原GET/aggregate caps/encoding/optionalH1/quarter摘要/缓存等仅按实际新证据签状态，通用纯测试不能代旧外部路径复验。",
+      "native_locator": "old157 original retest mapping; US storage008/fetch006",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-003",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-004",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-005",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-006",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-002",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-005",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-001",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-005",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-008",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-006"
+      ],
+      "primary_issue_count": 11,
+      "category": "historical_not_run",
+      "owner": "WP07",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-003",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-004",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-005",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-006",
+        "fresh-20261009T065028-hk-00700/storage/STORAGE-002",
+        "fresh-20261009T065028-hk-00700/fetch/FETCH-003",
+        "m3-20261009T184946-cn-688012/storage/M3-CN-STORAGE-005",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-001",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-005",
+        "pw03-20261011T010657Z-us-msft/storage/PW03-MSFT-STORAGE-008",
+        "pw03-20261011T010657Z-us-msft/fetch/PW03-US-FETCH-006"
+      ],
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\storage.json",
+          "sha256": "0cf07997c862f9fd75e3be6e21d9616ccb657413708bb8d66f5acb51d132e2a2",
+          "locator": "/findings/7"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\fetch.json",
+          "sha256": "e79fe03d1723663a9268dea08663c7fd914cae85075771fceac3f89310b0cec2",
+          "locator": "/findings/5"
+        },
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "old157 original retest mapping; US storage008/fetch006",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    },
+    {
+      "root_id": "RC20",
+      "title": "既有接受工程及2expert carryover需收实际owner证据",
+      "owner_work_package": "WP07",
+      "test_id": "T20",
+      "diagnosis_class": "accepted_engineering_not_research",
+      "mechanism": "locale/parser/transcript/period/sensitivity/输出重构等既有工程闭包保留，不重复源码修改。2expert source_loss/signed adjustments须actualacceptancereceipt，不把R22旧remaining直接改完成。",
+      "native_locator": "old coverage entries155/156; accepted48+6; RF47f497ad; DOCX d3d80769; selector116a39d8",
+      "engineering_status": "planned_or_existing_receipt_required",
+      "research_status": "not_accepted_by_this_plan",
+      "primary_issue_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-001",
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-005",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-001",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-003",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-003",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-002",
+        "fresh-20261009T065028-us-msft/process/PROCESS-003",
+        "fresh-20261009T065028-us-msft/process/PROCESS-004",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-006",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-007",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-004",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-005",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-003",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-006",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-002",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-004",
+        "fresh-root-expert-20261009/output/EXPERT-001",
+        "fresh-root-expert-20261009/output/EXPERT-002"
+      ],
+      "primary_issue_count": 18,
+      "category": "accepted_engineering_not_research",
+      "owner": "WP07",
+      "finding_keys": [
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-001",
+        "fresh-20261009T065028-cn-688012/storage/STORAGE-005",
+        "fresh-20261009T065028-cn-688012/fetch/FETCH-001",
+        "fresh-20261009T065028-cn-688012/process/PROCESS-003",
+        "fresh-20261009T065028-hk-00700/process/PROCESS-003",
+        "fresh-20261009T065028-us-msft/storage/STORAGE-002",
+        "fresh-20261009T065028-us-msft/process/PROCESS-003",
+        "fresh-20261009T065028-us-msft/process/PROCESS-004",
+        "m3-20261009T184946-cn-688012/fetch/CN688012-FETCH-006",
+        "m3-20261009T184946-cn-688012/process/CN688012-PROCESS-007",
+        "m3-20261009T184946-hk-00700/storage/HK-00700-STORAGE-004",
+        "m3-20261009T184946-hk-00700/process/M3-HK-PROCESS-005",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-003",
+        "m3-20261009T184946-us-msft/storage/MSFT-STORAGE-006",
+        "m3-20261009T184946-us-msft/fetch/M3-US-FETCH-002",
+        "m3-20261009T184946-us-msft/process/M3-US-PROCESS-004",
+        "fresh-root-expert-20261009/output/EXPERT-001",
+        "fresh-root-expert-20261009/output/EXPERT-002"
+      ],
+      "evidence": [
+        {
+          "artifact": "actual native code contract reads",
+          "locator": "old coverage entries155/156; accepted48+6; RF47f497ad; DOCX d3d80769; selector116a39d8",
+          "detail": "See evidence/native_contract_reads.json and implementation_details.md"
+        }
+      ]
+    }
+  ],
+  "auxiliary_p7": {
+    "technical_report": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\technical-review.json",
+    "sha256": "259ed822fdc747e3a364e58a1bf08055c5906b4f13062ac10ef9d71528407f21",
+    "findings": [
+      {
+        "issue_id": "TECH-P7-001",
+        "root_ids": [
+          "RC05",
+          "RC13"
+        ],
+        "work_package": "WP05",
+        "test_id": "T21"
+      },
+      {
+        "issue_id": "TECH-P7-002",
+        "root_ids": [
+          "RC05",
+          "RC13"
+        ],
+        "work_package": "WP05",
+        "test_id": "T22"
+      },
+      {
+        "issue_id": "TECH-P7-003",
+        "root_ids": [
+          "RC13",
+          "RC14"
+        ],
+        "work_package": "WP05",
+        "test_id": "T23"
+      }
+    ],
+    "w01_w08_mapping": {
+      "W01": [
+        "RC17",
+        "RC11"
+      ],
+      "W02": [
+        "RC17",
+        "RC07"
+      ],
+      "W03": [
+        "RC06",
+        "RC14"
+      ],
+      "W04": [
+        "RC07"
+      ],
+      "W05": [
+        "RC07",
+        "RC14"
+      ],
+      "W06": [
+        "RC10",
+        "RC11",
+        "RC12"
+      ],
+      "W07": [
+        "RC10",
+        "RC17"
+      ],
+      "W08": [
+        "RC16",
+        "RC19",
+        "RC14"
+      ]
+    },
+    "not_counted_as_additional_company_findings": true
+  },
+  "auxiliary_config_readonly": {
+    "status": "READ_ONLY_SUPPORT_STOP; NOT_NEW_COMPANY_FINDING",
+    "work_package": "WP07",
+    "root_ids": [
+      "RC05",
+      "RC14"
+    ],
+    "test_id": "T24",
+    "finding": "actual absentpolicy; equivalent optionalnull/omitted unnecessarycache miss; no forced labelidentity",
+    "support_agent": "/root/w04_generation_config_readonly",
+    "actual_config_sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "report": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\w04-config-readonly\\handoff.json",
+    "report_sha256": "6b8964de31377bd8e6b5c326fe94279e78e73317e3383cf27d39a28e908cf9a8",
+    "efficiency_issue_id": "CONFIG-EFFICIENCY-NULL-001",
+    "included_in246": false
+  },
+  "auxiliary_capture_readonly": {
+    "status": "READ_ONLY_SUPPORT_STOP; NO_PROBE_OR_EVIDENCE_FILES",
+    "work_packages": [
+      "WP05",
+      "WP07"
+    ],
+    "root_ids": [
+      "RC13",
+      "RC14"
+    ],
+    "support_agent": "/root/w04_capture_retention_readonly",
+    "details": "exactimmutable/mutable/emptybytes/FrozenBlobRef/atomicCAS/logicalphysicaldeadline/manifestlocation/DBcompat design folded into implementation and bothpackages"
+  },
+  "inventory_namespaces": {
+    "main_finding_inventory246": {
+      "old157": 157,
+      "new89": 89,
+      "total": 246
+    },
+    "auxiliary_technical3": {
+      "count": 3,
+      "ids": [
+        "TECH-P7-001",
+        "TECH-P7-002",
+        "TECH-P7-003"
+      ],
+      "included_in246": false
+    },
+    "auxiliary_config_efficiency1": {
+      "count": 1,
+      "ids": [
+        "CONFIG-EFFICIENCY-NULL-001"
+      ],
+      "included_in246": false
+    },
+    "combined_main_inventory_not_recomputed": true
+  }
+}

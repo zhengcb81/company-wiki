@@ -15,3 +15,7 @@
 # This real-run phase records native observations with declared byte hashes.
 /docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/**/*.json -text
 /docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/** -text
+
+# This sealed expert package declares SHA for every byte of its plan artifacts.
+# Shared implementation progress stays outside the sealed package files.
+/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/** -text -diff

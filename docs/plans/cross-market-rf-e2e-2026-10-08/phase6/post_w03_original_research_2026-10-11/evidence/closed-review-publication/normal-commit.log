@@ -1,0 +1,56 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped
+[codex/main-auto-official-json-20261010 21a8d20e] docs: seal twelve original-company reviews and technical intake
+ 58 files changed, 131 insertions(+), 6 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/canonical-fast-forward.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/exact-ci-observation-1.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/normal-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/TECHNICAL_REVIEW.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/findings.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/deploy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/execution/requests/20261011T032630Z-81d865ec/attempt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/execution/requests/20261011T032630Z-81d865ec/execution_request.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/execution/requests/20261011T032630Z-81d865ec/request.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/roles/executor/commands/dc673bb7c1da40feba5a0d809a7d336f/consume-0001-ee373648444a.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/roles/executor/commands/dc673bb7c1da40feba5a0d809a7d336f/input-0001-ee373648444a.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/roles/executor/commands/dc673bb7c1da40feba5a0d809a7d336f/stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/roles/executor/commands/dc673bb7c1da40feba5a0d809a7d336f/stdout.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/roles/executor/events.jsonl
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/run.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/scope.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/template.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/deploy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/execution/requests/20261011T032631Z-54960259/attempt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/execution/requests/20261011T032631Z-54960259/execution_request.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/execution/requests/20261011T032631Z-54960259/request.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/roles/executor/commands/a24556ec90bc43cf8847aa5fa16a211e/consume-0001-fcb8c8f39f63.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/roles/executor/commands/a24556ec90bc43cf8847aa5fa16a211e/input-0001-fcb8c8f39f63.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/roles/executor/commands/a24556ec90bc43cf8847aa5fa16a211e/stderr.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/roles/executor/commands/a24556ec90bc43cf8847aa5fa16a211e/stdout.txt
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/roles/executor/events.jsonl
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/run.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/scope.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/template.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence/P05/deploy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence/P05/runs/p05/run.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence/P05/scope.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence/P05/template.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/probe-plan.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/probe-results.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/probes-first-longpath-failure.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/probes.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/progress.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/task_plan.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/technical-review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/write_report.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_fetch-intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_process-intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/all-twelve-sealed.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/p7-audit-technical-intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/root-expert-dispatch.json

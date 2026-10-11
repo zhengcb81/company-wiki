@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-10-11T04:01:41.815880+00:00",
+  "rows": [
+    {
+      "repo": "RF",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast",
+      "base_head": "47f497ad9dee9dc47f66fca37016e9ba6b6b6f33",
+      "previous_branch": "codex/p7-rf-calibration-binding",
+      "branch": "codex/w04-rf-public-consumer-20261011",
+      "clean": true,
+      "source_edits": 0
+    },
+    {
+      "repo": "AUDIT",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit",
+      "base_head": "40b38103f4b96860617e9bae98ec5b4ea8ee08d5",
+      "previous_branch": "codex/p7-audit-execution-review",
+      "branch": "codex/w04-audit-capture-20261011",
+      "clean": true,
+      "source_edits": 0
+    }
+  ],
+  "new_worktree_copies": 0,
+  "canonical_wip_writes": 0,
+  "new_provider_calls": 0,
+  "new_model_calls": 0
+}

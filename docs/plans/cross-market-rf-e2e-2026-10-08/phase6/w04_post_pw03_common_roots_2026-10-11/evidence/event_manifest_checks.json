@@ -1,0 +1,279 @@
+{
+  "schema_version": "w04-event-checks/1",
+  "review_completed_events": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\roles\\storage\\events.jsonl",
+      "sha256": "8d0c61bd23a32e788ff7b21147d2e1a8f3919cf3ea5fc5130027f493d167eccf",
+      "event_id": "37ebf015badf4bfaa634afae37148a38",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T02:52:17.570390+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\roles\\fetch\\events.jsonl",
+      "sha256": "48c9aaf94b211dc920e258cba1ea4957600688e75b3a182b05bf041410ce0080",
+      "event_id": "5218c6b8d1794c78ba8ccab760b6046c",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T02:51:38.084921+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\roles\\process\\events.jsonl",
+      "sha256": "c3d085a6aac36619814a1cd4a98d4da61a9dbb20c7484a354e0add56749c8068",
+      "event_id": "fb8b31c0a8594ca0b56b78920c124868",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T03:05:28.705228+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\roles\\analyst\\events.jsonl",
+      "sha256": "66e06632b7e28ce815f848276b8f51997a6dadeaa9408f99f51b8019686c472c",
+      "event_id": "a97f337d26354134bb3468d96f5fd782",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T03:03:43.671094+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\roles\\storage\\events.jsonl",
+      "sha256": "015da49cce41c95b88d99316a0a5e00e258cc44e88e1cc57730c1a5fc39398f6",
+      "event_id": "8405d44315f54dc58f9e741596165eec",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T03:05:04.874451+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\roles\\fetch\\events.jsonl",
+      "sha256": "3d784b30140a36477fc3ccd61058aa6b8c0238bfb791523b03acb91ea9c50460",
+      "event_id": "28a7415e694644abb34846df39d78b13",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T03:20:53.956821+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\roles\\process\\events.jsonl",
+      "sha256": "d5d10d045cb068750e12454ca4cb1b11b4ccf898a9429d290325238f0e5ca546",
+      "event_id": "ab222188901c4b13a0ae352c0ebd2a08",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T03:24:22.658183+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\roles\\analyst\\events.jsonl",
+      "sha256": "de041656a42316900ddf8ac65c102fe8b8c59c9e194f6ff719284083bc4416e3",
+      "event_id": "361c11089e7843a8b817cbdb00c6aff3",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T03:18:52.942652+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\roles\\storage\\events.jsonl",
+      "sha256": "43a9ca0441376c7de9a5b04323e8fdc0e221073f580e7296d0b99d102a1e004c",
+      "event_id": "e352e32e48774cab8741903c2a829783",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T02:16:58.109264+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\roles\\fetch\\events.jsonl",
+      "sha256": "a083427bfa52c5d8c6c79332e789df080eba2cd56e037696cbaac5f478f17132",
+      "event_id": "b164f825b6b9419ba2f3c6942c5f0706",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T02:23:56.024019+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\roles\\process\\events.jsonl",
+      "sha256": "f619dbba9e74de1c13e3bee3b80d53a964f6da67d891b6e6e972165a0834d683",
+      "event_id": "c6d6a7afbb7d49adaf427caa6af61ba1",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T02:36:34.407472+00:00",
+      "json_md_shas_bound": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\roles\\analyst\\events.jsonl",
+      "sha256": "5daa257b8f0740b5ef56884cb83ac31d4b9a9e05e675c60e506038db9b753888",
+      "event_id": "8a9eeaab848a405a8d5e0682e6be868f",
+      "kind": "review_completed",
+      "recorded_at": "2026-10-11T02:48:05.822355+00:00",
+      "json_md_shas_bound": true
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "pw03-20261011T010657Z-cn-688012",
+      "scope_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\scope.json",
+      "scope_sha256": "f85960f0239b357a58c6418273fa8b6a1e3ed1c37b5c21f8c97f56fdebf95d6e",
+      "scope_fields": {
+        "company_name": "中微公司",
+        "security_id": "688012",
+        "market": "CN",
+        "as_of_date": "2026-10-08",
+        "base_year": 2025,
+        "forecast_years": [
+          2026,
+          2027,
+          2028
+        ],
+        "currency": "CNY",
+        "unit": "million",
+        "fiscal_year_end": "12-31",
+        "effective_config_refs": [
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\CN-688012\\config\\filing_fetch_company_wiki.json",
+            "sha256": "53b19cf7bc90a3e6623683cdacb7fef6a4c8e57daacd28720a22f316f009d4e1",
+            "secret_values_copied_to_report": false
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\CN-688012\\config\\local_ocr.json",
+            "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+            "secret_values_copied_to_report": false
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\CN-688012\\config\\source_acquisition.yaml",
+            "sha256": "75f1a6d065ba10953d2d7eb447d3aae465705b62bca13cf481801c7ae3ce5ea7",
+            "secret_values_copied_to_report": false
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\CN-688012\\config\\source_catalog.yaml",
+            "sha256": "251ede4971afe495297c652f9f13ca03edd3225d73a363080466c374ded8c948",
+            "secret_values_copied_to_report": false
+          }
+        ],
+        "resource_limits": {
+          "environment_max_bytes": 268435456,
+          "cohort_max_bytes": 536870912,
+          "max_log_bytes": 1048576,
+          "max_final_bytes": 2097152,
+          "max_persistent_bytes": 33554432,
+          "max_scratch_bytes": 67108864
+        }
+      },
+      "handoff_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\handoffs\\execution.json",
+      "handoff_sha256": "7d0762f68223586721bbeb31f89f0f240a41a3eefd2961a122f52fdab14764e2",
+      "manifest_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\execution\\manifest.json",
+      "manifest_sha256": "2445a99ac69cc5465da9f254b629a40ade24ad3b44a915963d9e1f88047ba121",
+      "manifest_reference_matched": true,
+      "execution_outcome": "partial",
+      "artifact_completeness_manifest": "partial",
+      "note": "manifest completeness is bookkeeping; real partial research preserved"
+    },
+    {
+      "run_id": "pw03-20261011T010657Z-hk-00700",
+      "scope_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\scope.json",
+      "scope_sha256": "4d7e5880b1150908bf5be50720ef303fabfd4b038ab6b850cc8224d2cb33b7ee",
+      "scope_fields": {
+        "company_name": "腾讯",
+        "security_id": "00700",
+        "market": "HK",
+        "as_of_date": "2026-10-08",
+        "base_year": 2025,
+        "forecast_years": [
+          2026,
+          2027,
+          2028
+        ],
+        "currency": "CNY",
+        "unit": "million",
+        "fiscal_year_end": "12-31",
+        "effective_config_refs": [
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\HK-00700\\config\\filing_fetch_company_wiki.json",
+            "sha256": "540f5c3f3983546acfa868c4c43efccb0fcac7bc4ce51d87f6b4d1f7687cf4ea",
+            "secret_values_copied_to_report": false
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\HK-00700\\config\\local_ocr.json",
+            "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+            "secret_values_copied_to_report": false
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\HK-00700\\config\\source_acquisition.yaml",
+            "sha256": "daabac25f331f20121100cf1ea4be7d1aff9e8a46e4fe3735fcb91cf62ae0911",
+            "secret_values_copied_to_report": false
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\HK-00700\\config\\source_catalog.yaml",
+            "sha256": "2cbc4855e75ba7b20b7df9bda72213bc1de086f09505a01e1f578b76096e7c39",
+            "secret_values_copied_to_report": false
+          }
+        ],
+        "resource_limits": {
+          "environment_max_bytes": 268435456,
+          "cohort_max_bytes": 536870912,
+          "max_log_bytes": 1048576,
+          "max_final_bytes": 2097152,
+          "max_persistent_bytes": 33554432,
+          "max_scratch_bytes": 67108864
+        }
+      },
+      "handoff_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\handoffs\\execution.json",
+      "handoff_sha256": "03ad7c33d0b66a48f966d4912c6eb307c8cbada15f8724ae6936576c9a9bfe4e",
+      "manifest_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\execution\\manifest.json",
+      "manifest_sha256": "a1cee8fc896cd4a097403c26796f9103cd34765818223af0f0eeff7112cf3058",
+      "manifest_reference_matched": true,
+      "execution_outcome": "partial",
+      "artifact_completeness_manifest": "complete",
+      "note": "manifest completeness is bookkeeping; real partial research preserved"
+    },
+    {
+      "run_id": "pw03-20261011T010657Z-us-msft",
+      "scope_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\scope.json",
+      "scope_sha256": "bd6e35f55b5075d2a381f7aff8c23e161bc44e5f1c0e29c45efa033d3d384017",
+      "scope_fields": {
+        "company_name": "微软",
+        "security_id": "MSFT",
+        "market": "US",
+        "as_of_date": "2026-10-08",
+        "base_year": 2026,
+        "forecast_years": [
+          2027,
+          2028,
+          2029
+        ],
+        "currency": "USD",
+        "unit": "million",
+        "fiscal_year_end": "06-30",
+        "effective_config_refs": [
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\US-MSFT\\config\\filing_fetch_company_wiki.json",
+            "sha256": "98d06a3120d242a42ed02ee5f3fbf7fd536df2539c8b32a464a27ab48bb0940d",
+            "secret_values_copied_to_report": false
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\US-MSFT\\config\\local_ocr.json",
+            "sha256": "9b8a7df81ca62ebc4bb9c2d60d45c247b291564a4a38f5648e5f4b3edb59889b",
+            "secret_values_copied_to_report": false
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\US-MSFT\\config\\source_acquisition.yaml",
+            "sha256": "8dfd801b57773d0d34c4b4da89f838a9a11580d9664fe3301cc417a8030d7b56",
+            "secret_values_copied_to_report": false
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\US-MSFT\\config\\source_catalog.yaml",
+            "sha256": "b6baec32a39c4b23b80e13631d56d265b9c65f58c9f3a9a60b1db9e21b731a86",
+            "secret_values_copied_to_report": false
+          }
+        ],
+        "resource_limits": {
+          "environment_max_bytes": 268435456,
+          "cohort_max_bytes": 536870912,
+          "max_log_bytes": 1048576,
+          "max_final_bytes": 2097152,
+          "max_persistent_bytes": 33554432,
+          "max_scratch_bytes": 67108864
+        }
+      },
+      "handoff_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\handoffs\\execution.json",
+      "handoff_sha256": "ad29152fa9eed0ee1fdea2bcd991fac64b1a0c4e3a2bb2c31e8b2a5221b3350e",
+      "manifest_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\execution\\manifest.json",
+      "manifest_sha256": "ccbbeea4e3feaa0a482bf0f493d0d4a4cb00a1ccacc17ba13baaf670b1354e6c",
+      "manifest_reference_matched": true,
+      "execution_outcome": "partial",
+      "artifact_completeness_manifest": "partial",
+      "note": "manifest completeness is bookkeeping; real partial research preserved"
+    }
+  ],
+  "events_verified": 12,
+  "manifest_refs_verified": 3
+}

@@ -1,0 +1,158 @@
+{
+  "schema_version": "w04-generation-config-readonly/1",
+  "observed_at": "2026-10-11T03:49:30.621112+00:00",
+  "worktree_head": "21a8d20ebde42972a2644999296b7ac2f8b83ff5",
+  "scope": {
+    "HTTP_calls": 0,
+    "model_provider_calls": 0,
+    "product_config_old_run_plan_writes": 0,
+    "only_write": "this_owned_evidence_file",
+    "codegraph": "not initialized; known files read; no initialization",
+    "probe": "TEMP synthetic Config.load + in-memory generation pure functions; no provider calls"
+  },
+  "production_config": {
+    "path": "C:/Users/郑曾波/Projects/company-wiki/config.yaml",
+    "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "llm_generation_policy_present": false,
+    "llm_generation_policy": null,
+    "observation_kind": "current read, not original execution capture"
+  },
+  "frozen_diagnosis": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\model-purpose-diagnosis.json",
+    "sha256": "4d859763e00b1cdd1ba6fc6ddf369b8f3f1f3a123d092c3ee5392a6e558ff83c",
+    "observed_at": "2026-10-11T01:41:08.727453+00:00",
+    "recorded_policy": null,
+    "recorded_actual_explicit_run_provider": "deepseek",
+    "recorded_actual_model": "deepseek-flash",
+    "production_config_changed": false,
+    "note": "Frozen historical diagnosis. Current code/config read must not replace original capture or claim planned disabled policy already existed."
+  },
+  "policy_contract": {
+    "definition": "scripts/config.py:107-138",
+    "default_purpose": "general",
+    "overlay": "selected provider.general then selected provider[purpose], purpose overwrites same keys",
+    "supported_options": {
+      "thinking": [
+        "enabled",
+        "disabled",
+        "adaptive except deepseek"
+      ],
+      "reasoning_effort": [
+        "low",
+        "high",
+        "max"
+      ]
+    },
+    "named_purposes": "regex [a-z][a-z0-9_]*; an unconfigured valid purpose inherits general",
+    "omitted_policy": "empty mapping; adapter omits thinking/effort; provider-side defaults are not inferred from model name",
+    "purpose_scoped_max_output_tokens_supported": false,
+    "global_max_output": "Config llm.max_tokens -> model options.max_output_tokens; token field selected from actual provider"
+  },
+  "wire": {
+    "config_load": "scripts/config.py:189-256,311-323 loads and selects runtime provider; exact primary/fallback model and endpoint are preserved; explicit other provider comes from Config loader defaults with shared generation",
+    "LLMClient": "scripts/llm_client.py:124 workload default research; config-backed selected.generation_options(workload):169-171; fallback passes same workload:190-197; SDK thinking extra_body + effort kwarg:517-523; urllib payload.update:580",
+    "NarrativeHTTPModel": "src/company_wiki/automation/narrative_http_model.py:160-185 default purpose narrative; request_bytes:292-314 emits selected options",
+    "configured_wrapper": "scripts/narrative_batch_configured.py:19-35 has no purpose selection; calls helper default narrative; canonical fixed narrative entry is wired, not a forgotten-policy resolver",
+    "finite_worker": "src/company_wiki/automation/narrative_worker_factory.py:37-39 allows resolved generation fields; :175 consumes frozen model_options; no worker-side Config.load/purpose inference",
+    "latent_noncanonical_path": "LLMClient(provider=... without config) bypasses Config.load due :148 guard and uses :173-179 defaults. Do not widen W04 into frozen legacy writers."
+  },
+  "identity": {
+    "raw": "src/company_wiki/automation/narrative_generation.py:51-66 binds model_id, endpoint, max_output_tokens, thinking, temperature, reasoning_split, explicit nonnull reasoning_effort, normalized token-field default",
+    "projection": "src/company_wiki/automation/narrative_generation.py:158-220 normalizes all optional null fields as omitted",
+    "run": "src/company_wiki/automation/narrative_batch_request.py:300,337-349 includes resolved model options in input hash",
+    "attempt": "src/company_wiki/automation/narrative_model_caller.py:140-149 binds model input + exact HTTP body SHA, max_output reservation",
+    "purpose_name": "not a generation causal content field; if effective wire is equal and prompt/source versions equal, reuse should remain permitted",
+    "explicit_option_changes": "thinking, reasoning_effort, max_output_tokens changes already invalidate current raw generation identity; not a missing-cache-key root cause"
+  },
+  "local_probe_results": {
+    "HTTP_calls": 0,
+    "synthetic_Config_load_fixture_bytes_unchanged": true,
+    "overlay": {
+      "general": {
+        "reasoning_effort": "low",
+        "max_output_tokens": 8192
+      },
+      "narrative": {
+        "thinking": "disabled",
+        "reasoning_effort": "low",
+        "max_output_tokens": 8192
+      },
+      "research": {
+        "thinking": "enabled",
+        "reasoning_effort": "max",
+        "max_output_tokens": 8192
+      },
+      "same_as_narrative": {
+        "thinking": "disabled",
+        "reasoning_effort": "low",
+        "max_output_tokens": 8192
+      },
+      "unconfigured_workload": {
+        "reasoning_effort": "low",
+        "max_output_tokens": 8192
+      }
+    },
+    "same_wire_same_projection_identity": true,
+    "purpose_scoped_output_limit_rejected": true,
+    "null_vs_omitted": {
+      "thinking": {
+        "HTTP_effective_equal": true,
+        "raw_generation_equal": false
+      },
+      "reasoning_effort": {
+        "HTTP_effective_equal": true,
+        "raw_generation_equal": true
+      },
+      "temperature": {
+        "HTTP_effective_equal": true,
+        "raw_generation_equal": false
+      },
+      "reasoning_split": {
+        "HTTP_effective_equal": true,
+        "raw_generation_equal": false
+      }
+    },
+    "explicit_changes_invalidate_raw_generation": {
+      "thinking": "disabled",
+      "reasoning_effort": "low",
+      "max_output_tokens": 16384
+    }
+  },
+  "repair_design": {
+    "configuration_intent": "Add or adjust only deliberate provider/purpose policy after review; keep Config.load sole provider/model/endpoint/output-budget authority. Current absent policy is configuration evidence, not proof of an old-client caching bug. No blind model/endpoint/token changes.",
+    "entrypoint_scope": "Canonical source narrative uses narrative purpose. Only add explicit workload selection/auditable selected-purpose receipt if the authorized workflow actually needs alternate policies; do not expand frozen research writers. Selected purpose can be observable metadata without causing content cache miss.",
+    "identity": "Use canonical effective-wire fields for new requests; null/omitted equivalence should retain legacy omitted manifest hash. Existing nullable historical generations need bounded, verified compatibility handling if included, not re-signing or rewriting ledger/artifact manifests.",
+    "unknown_fee": "Leave original AUTO reservation/usage/history unchanged; do not resume or resend an old unknown-fee attempt. Future actual affected run uses a new run_id under configured cumulative budget.",
+    "RED_first": "Seed old verified artifact using omitted optional generation fields. Current raw null-vs-omitted equivalence assertion is a real RED. Changing explicit thinking/effort/output limit is already a correct miss and is a regression guard; changing selected purpose with equal wire must hit. Do not manufacture a RED by treating absent production policy as already configured disabled."
+  },
+  "exclusive_write_set_proposal": [
+    "scripts/config.py only if explicit policy schema or shared resolved settings must change",
+    "scripts/narrative_batch_configured.py only if workflow requires explicit selected-purpose entrypoint",
+    "src/company_wiki/automation/narrative_http_model.py only for shared canonical effective generation seam",
+    "src/company_wiki/automation/narrative_generation.py for null/omitted compatibility only if included",
+    "tests/unit/test_generation_policy.py",
+    "tests/unit/test_narrative_model_config.py",
+    "tests/unit/test_narrative_generation.py",
+    "tests/unit/test_official_json_projection_generation.py",
+    "one focused existing generation-reuse integration case with synthetic model, never paid provider",
+    "production config.yaml only as a separately owned deliberate intent edit; not test fixture"
+  ],
+  "minimum_test_package_proposal": [
+    "existing synthetic primary/fallback/explicit-provider Config.load overlay-to-wire checks",
+    "configured composition purpose/default parsing and exact resolved provider settings",
+    "raw/projection generation identity equality for equal effective wire and inequality for changed thinking/effort/output cap",
+    "one old verified cache artifact: equal wire hits with zero budget; changed wire misses without sending HTTP; resume refuses changed frozen model identity",
+    "no rerun of accepted48/3206/source116; no provider HTTP"
+  ],
+  "code_sha256": {
+    "scripts/config.py": "c7889864f3693f9f28f8c4d88bb8f9e8a56564eebf533bbba105a53259cb9f94",
+    "scripts/llm_client.py": "82a7a40eb8c63703ed11e83ccf6cf29ecd8206a901d598d98ffc4f79295885bb",
+    "scripts/narrative_batch_configured.py": "3def255fb8f1488955b2fc4c8023eafbf76e4ba0dd3cb4f96f47aecdb540a696",
+    "src/company_wiki/automation/narrative_http_model.py": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+    "src/company_wiki/automation/narrative_batch_request.py": "85b9e0ddca2c368da8145b986bc5df215be2df2603bc2df4c1b91fb41e8f3fc5",
+    "src/company_wiki/automation/narrative_generation.py": "b293fc26a8e3fec5a42a634e53d70ee8bf88582de45fc938e70dcf693b434dfa",
+    "src/company_wiki/automation/narrative_worker_factory.py": "73000216cff325c602b811be457f2c7e35d2c4b8ffb9b90c14c13a07160e9d69",
+    "tests/unit/test_generation_policy.py": "3ad287885603fc1bc9b843e43e6aa1a6db3c6905f6769de1d77b78d2a41eea2b"
+  },
+  "stop": "Read-only task complete; no product changes or expanded tests executed."
+}

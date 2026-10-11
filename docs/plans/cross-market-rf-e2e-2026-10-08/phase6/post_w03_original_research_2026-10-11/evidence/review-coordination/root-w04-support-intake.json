@@ -1,0 +1,22 @@
+{
+  "schema_version": "root-w04-support-intake/1",
+  "observed_at": "2026-10-11T03:50:13.449554+00:00",
+  "generation_support": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\w04-config-readonly\\handoff.json",
+    "sha256": "6b8964de31377bd8e6b5c326fe94279e78e73317e3383cf27d39a28e908cf9a8",
+    "bytes": 10108,
+    "stopped": true,
+    "claim_scope": "read-only configured pipeline and pure effective-wire/cache probes, not a new provider acceptance"
+  },
+  "retention_support": {
+    "agent": "/root/w04_capture_retention_readonly",
+    "stopped": true,
+    "report_mode": "message-only",
+    "evidence_file_created": false,
+    "claim_scope": "source/old test interpretation and design; no migration or probe executed"
+  },
+  "new_model_calls": 0,
+  "new_provider_calls": 0,
+  "new_product_writes": 0,
+  "expert_has_both": true
+}

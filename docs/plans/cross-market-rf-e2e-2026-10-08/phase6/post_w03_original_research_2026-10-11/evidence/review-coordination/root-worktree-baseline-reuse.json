@@ -1,0 +1,23 @@
+{
+  "schema_version": "root-worktree-baseline-reuse/1",
+  "observed_at": "2026-10-11T03:49:02.473779+00:00",
+  "rf": {
+    "head": "47f497ad9dee9dc47f66fca37016e9ba6b6b6f33",
+    "clean": true,
+    "canonical_wip_untouched": true
+  },
+  "ff": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch",
+    "before_head": "0c06e72dd4c82c5b321262a7d00a44a3f7fc46b8",
+    "accepted_canonical_head": "e1e3ad8679e21264258e48006786fbf01a6991bd",
+    "after_head": "e1e3ad8679e21264258e48006786fbf01a6991bd",
+    "clean": true,
+    "fast_forward_only": true,
+    "merge_output": "Updating 0c06e72..e1e3ad8\nFast-forward"
+  },
+  "preflight_driver_error_preserved": "root-worktree-baseline-preflight-error.json",
+  "new_source_edits": 0,
+  "new_provider_calls": 0,
+  "new_model_calls": 0,
+  "note": "accepted baseline only; source repair not begun; protected canonical config/FMP key/WIP untouched"
+}

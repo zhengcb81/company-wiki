@@ -1,0 +1,37 @@
+{
+  "schema_version": "w04-plan-validation/1",
+  "status": "PLAN_STRUCTURE_VERIFIED_NOT_PRODUCT_TESTS",
+  "total_keys": 246,
+  "old157": 157,
+  "new89": 89,
+  "duplicate_keys": 0,
+  "unmapped_keys": 0,
+  "roots": 20,
+  "packages": 7,
+  "old_company_actual_retests": 155,
+  "expert_carryover": 2,
+  "checks": 229,
+  "retet_status_counts": {
+    "PASS": 40,
+    "FAIL": 68,
+    "NOT_RUN": 31,
+    "BLOCKED": 15,
+    "N/A": 1,
+    "EXPERT_CARRYOVER_PENDING_ACTUAL_RECEIPT": 2
+  },
+  "package_primary_key_counts": {
+    "WP07": 90,
+    "WP02": 22,
+    "WP06": 87,
+    "WP03": 15,
+    "WP04": 10,
+    "WP01": 10,
+    "WP05": 12
+  },
+  "public_future_test_spec_count": 24,
+  "product_tests_executed": 0,
+  "product_changes": 0,
+  "http_model_provider_calls": 0,
+  "new_cost_usd": "0",
+  "size_before_handoff": 951458
+}

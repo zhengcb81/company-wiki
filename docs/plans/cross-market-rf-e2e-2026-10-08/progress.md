@@ -1057,3 +1057,20 @@ CWP本地master/远端116a39d86ac0894786ea53a295c860c01f38a888一致；normalcom
 ## 2026-10-11T03:34:01.720812+00:00 — docs归档驱动长路径错误（无commit/产品测试失败）
 
 上一归档driver已完成真实状态更新和受控暂存；在读P7 technical的自有深层probe attempt.json时普通Path遇Windows MAX_PATH FileNotFoundError，尚未commit。实际文件由extended path创建，改只读物理表示为扩展路径并核git blob字节，不改业务路径/证据内容、不重跑测试。后续W04留存/目录设计统一纳短owned scratch及平坦archive对象，防止诊断夹具深嵌进计划目录。
+
+
+## 2026-10-11T03:44:05.346834+00:00 — 12审查及P7技术记录已普通发布
+
+CWP master/origin 21a8d20一致；58已关闭docs文件/49原证据暂存字节一致，normalcommit1.5543秒，normalpush25.5827秒/137smoke PASS19.85秒，archive .py 已按目录责任排除为运行源。docs-only未触发新CI，source116精确CI38108528804 success仍适用，不伪造docsHEAD CI。W04专家正在写157旧+89新问题的完整共因/TDD/PWF和排他包；ROOT两个只读支援分别核真实配置→wire/cache身份、冻结/CAS/长路径/原件retention设计，不改产品或配置、不复跑已收工程节点、不新增收费。母账及所有raw/config/Dayu/邻仓WIP保护；HK新raw2必须先完整原bytes/sidecar/hash/replay mapping持久留存，再考虑ownedTEMP清理。
+
+Next Step：完整W04交接收齐后集中审计划和覆盖，再按不重叠仓内责任实施。
+
+
+## 2026-10-11T03:49:02.473779+00:00 — W04 baseline复用
+
+RF隔离47f497ad和FF隔离0c06→e1e3仅快进至已验canonical baseline，均clean，canonical WIP/密钥不碰。首预检是driver fullSHA文字多写b6，实际两个worktree皆干净；原错误/纠正留存，不记为产品缺陷。新修复尚未开工，等待完整expert包。
+
+
+## 2026-10-11T04:03:35.775817+00:00 — W04整体计划接受并准备TDD开工
+
+246唯一主keys/20roots/7包以及21封存文件原SHA均核符合；独立review a5a63674…/0190a7c9…接受，三调整已在ROOT overlay冻结。3TECH+1NULL独立aux不计主246，工程新实现未跑不签绿。复用RF/AUDIT clean新branch和FF acceptedbaseline，无额外checkout/原件copy；仅W04封存范围Git -text -diff保证byteSHA不被自动换行改变。下一普通归档完成后Wave1三worker并行+ROOT公共接线，按完整后续G1–G5推进，0新收费与母账不变。

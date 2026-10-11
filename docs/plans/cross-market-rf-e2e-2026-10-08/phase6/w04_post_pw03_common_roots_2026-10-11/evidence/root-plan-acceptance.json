@@ -1,0 +1,30 @@
+{
+  "schema_version": "root-w04-plan-acceptance/1",
+  "observed_at": "2026-10-11T04:03:35.775817+00:00",
+  "status": "PLAN_ACCEPTED_READY_FOR_TDD",
+  "expert_handoff_sha256": "cdc7f015d2e162ad9478a2be6fc05f06f69d3c5f208b02f870040c12bea0fef6",
+  "review_json_sha256": "a5a63674d18ccc14fe74153b2860cbd0bd3612651c3400618baa24ca062b332d",
+  "review_md_sha256": "0190a7c91dc04c12655e95411c85ca7c8758ad568ebd806bac9508de0d967198",
+  "execution_overlay_sha256": "82b8596ddde2dc8a733c9a339284402407fb407bc971d2cb34aa04087732c509",
+  "dispatch_adjustments": [
+    "existing CI tests/unit path",
+    "ROOT audit_run full opt-in freeze/capture/CAS/deadline/cleanup seam",
+    "WP01 owns evidence_view /3 branch"
+  ],
+  "sealed_expert_files_unchanged": true,
+  "main_inventory_count": 246,
+  "auxiliary_count": 4,
+  "engineering_execution_status": "NOT_RUN_NEW_REPAIRS",
+  "mother_tokens": 413778,
+  "mother_cost_microusd": 334463,
+  "fx_hold_microusd": 2764,
+  "new_provider_calls": 0,
+  "new_model_calls": 0,
+  "wave1": [
+    "WP01",
+    "WP03",
+    "WP05"
+  ],
+  "root_owner": "WP07",
+  "no_new_approval_layers": true
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": "w04-native-reads/1",
+  "code_files": [
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_contracts.py",
+      "sha256": "6a3b4a262dac4079d7ec6a21c1e09e7ec238d55db3253483f11a69365e76faf3",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_transport_contracts.py",
+      "sha256": "9bb13eb9b0479d482659554cc48dc137c68534420f0dd0dbe7eb1655d8c7344c",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_transport.py",
+      "sha256": "0f237fd79a6f160cb2c28d43d8dc7c143604975fd4c725812eade28780bb7c3e",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_generation.py",
+      "sha256": "b293fc26a8e3fec5a42a634e53d70ee8bf88582de45fc938e70dcf693b434dfa",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\automation\\narrative_http_model.py",
+      "sha256": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\scripts\\narrative_batch_configured.py",
+      "sha256": "3def255fb8f1488955b2fc4c8023eafbf76e4ba0dd3cb4f96f47aecdb540a696",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\scripts\\config.py",
+      "sha256": "c7889864f3693f9f28f8c4d88bb8f9e8a56564eebf533bbba105a53259cb9f94",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader.py",
+      "sha256": "c0c516c97754ae27d986be594674b16311c7d4ff20434d855d338d4d13827946",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py",
+      "sha256": "e8db267971f5c967ab6cd8e358e23423afe42f7af8ce19847be7b266cc00742d",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py",
+      "sha256": "87217f45ac810b572f4fba114b1ee0574ea437de5e973ea23374365c1384fecf",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_reader.py",
+      "sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_narrative_context.py",
+      "sha256": "c499ae024e9013c165aa98650df624b9567dd8ee67465a7826a06b35cfc18bde",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py",
+      "sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_compatibility.py",
+      "sha256": "1df2f419152fdf50da2555417952cb9fd028e6e85a5f5d1e39ca4f46e4e8707a",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py",
+      "sha256": "7f730131f4bad0e22e3e43b0ffac48475dd1c373a4bc8dec40ad21a6b8a1341b",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py",
+      "sha256": "3dfe0a3fb2659acad155660b129f1d4adcfa4664ee3a3bf91df7cccf825493ff",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py",
+      "sha256": "6b12ee17ab2a01f1292eacf3598177ca959d2f5ab306c44b772abec6a648d12c",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_provider_cause.py",
+      "sha256": "966a63d544a7f534e661b163b1b11cdfac07c8965449fe41bf3328a59fe35280",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+      "sha256": "1dc8ad4705011fa553c62e71e961d5a2a5912250d00cf117410f06391e21918f",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+      "sha256": "2c30b29fe64c78deef194ace0650ad73d3402e22510995baa2cf184c5ae54c57",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\document_status_join.py",
+      "sha256": "01083ea689adc7f5e60b9b096d5937967a0b7e06a6a866f25c3560b64bfcab62",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\authoring_provenance.py",
+      "sha256": "fe64757cc959d8128a205fad048f7dc1c0ac687b1d2126868513f3491ba2df0a",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+      "sha256": "1cfc07b6a2c8b322676d0d531e45dd72f1c6087bd55c79c267ef881a50a4327b",
+      "read_scope": "specific interface/body loci inspected; not blanket claim whole repository read"
+    }
+  ],
+  "native_artifacts": [
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pw03-20261011T010657Z-cn-688012/execution/forecast/assembled/linked-input.json",
+      "scope": "parameters, operating_research/calibrations, management_targets, cmp_h1_2026"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pw03-20261011T010657Z-hk-00700/execution/forecast/snapshot-v2.json",
+      "scope": "header3.7,input_document.schema_version3.9,forecast_result.schema_version3.9; actual2283328B"
+    }
+  ],
+  "purpose_cache_finding": "existing identity effective_model contains model_id/endpoint/max_output_tokens/thinking/temperature/reasoning_split/output_token_field and explicit nonnull reasoning_effort; label-onlypurpose does not require cachechange",
+  "codegraph_limitations": [
+    "CWP worktree uninitialized; no init within scope",
+    "audit uninitialized; no init",
+    "RF/FF main index older than newfunctions; structural first then actualknownfile reads"
+  ],
+  "no_new_http_model": true
+}

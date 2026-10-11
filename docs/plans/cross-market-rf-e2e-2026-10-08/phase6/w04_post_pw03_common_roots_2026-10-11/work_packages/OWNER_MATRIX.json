@@ -1,0 +1,227 @@
+{
+  "schema_version": "w04-owner-matrix/1",
+  "max_workers": 3,
+  "packages": {
+    "WP01": {
+      "title": "CWP source capability 与 compact projected transport",
+      "repo": "company-wiki managed worktree",
+      "write": [
+        "src/company_wiki/source_catalog/source_reader.py",
+        "src/company_wiki/source_catalog/document_kinds.py (仅必要periodic分类)",
+        "src/company_wiki/automation/narrative_transport_contracts.py",
+        "src/company_wiki/automation/narrative_transport.py",
+        "src/company_wiki/source_catalog/narrative_transport_cli.py",
+        "src/company_wiki/narrative_subject.py",
+        "tests/test_w04_source_transport.py (新增专用)"
+      ],
+      "reads": [
+        "source_catalog/official_json_projection.py load_projection/verify parents",
+        "SourceRequest/query_local/SourceVersionReader",
+        "CN official3 projections and 65parents; US pinned deck/Synergy candidate"
+      ],
+      "deps": "公共v3字段已由本卡提出；ROOT冻结后做producer；WP03 consumer串行用producer实际输出。",
+      "ids": [
+        "T01",
+        "T03"
+      ],
+      "action": "先用原件fixture保存nonperiod capture_ready和小wire failure RED。保持periodic资格和exactSHA owner。新增compact subject/ref/request/receipt版本而不提高16KiB；load现projection registry完整父链，source loader验证后才public出receipt。reference stdout和read stderr都要compact，完整body lineage不删。不得改RF/FF/runtime/config/selector。",
+      "gate": "G1 producer公共reference/read/evidence三操作及T01 exact source read；无模型/GET，独立contract审查。"
+    },
+    "WP02": {
+      "title": "CWP 经营选择/摘要保真与 bounded failed-final 接受",
+      "repo": "company-wiki managed worktree",
+      "write": [
+        "src/company_wiki/source_catalog/narrative_context.py",
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "src/company_wiki/source_catalog/narrative_neighbors.py",
+        "src/company_wiki/automation/narrative_summarize.py",
+        "tests/test_w04_narrative_semantics.py (新增)"
+      ],
+      "reads": [
+        "accepted selector116a39d8/CI38108528804",
+        "PW03 selector0.7.0 selected spans/summaries",
+        "narrative_failed_final.py current contract (只读既有闭包)",
+        "CN/HK/US重点经营native原locator"
+      ],
+      "deps": "WP07 purpose接线/预算；保持已接受0.7.1 baseline，先semantic replay，只有残余新RED才leaf改。",
+      "ids": [
+        "T04",
+        "T15"
+      ],
+      "action": "新replay限定业务反例，不重复原CI小门禁。选择记录主体/相邻定义/限制/表头单位，summary保留selected核心命题或明确omission，不能关键词计数称coverage_complete。failed-final旧全文missing保留unknown，新bounded metrics只接现实现。不要修改shared contracts/runtime/model/config；要新增summary字段交ROOT。",
+      "gate": "G2新真实有限摘要/public读/消费后独立来源审查；在ROOT之前只local无费用反例。"
+    },
+    "WP03": {
+      "title": "RF public consumer、pinned registered source 与 snapshot交付",
+      "repo": "C:/Users/郑曾波/Projects/revenue-forecast",
+      "write": [
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/company_wiki_narrative_reader.py",
+        "scripts/source_preparation.py",
+        "scripts/company_wiki_source_reader_v2.py (仅nonperiod真实candidate资格)",
+        "scripts/source_narrative_context.py",
+        "scripts/revenue_backtest.py",
+        "tests/test_w04_public_consumer.py",
+        "tests/test_w04_snapshot_delivery.py",
+        "scripts/filing_upstream_cause.py",
+        "scripts/filing_fetch_client.py (仅optionaltyped request_diagnostic sibling)"
+      ],
+      "reads": [
+        "RF47f497ad accepted source/18install evidence",
+        "CWP SourceMetadataValue & WP01 producer接口",
+        "实际 HK snapshot input_document/schema_version/result",
+        "publication_registry/trust_anchor/schema_compatibility"
+      ],
+      "deps": "与WP01接口并行准备RED，必须等actualv3producer再整合；shared source type mapping若新增enum交ROOT而非自造。",
+      "ids": [
+        "T01",
+        "T02",
+        "T06",
+        "T18"
+      ],
+      "action": "required4+optional declared_language strict typed compatibility。新增projected DTO路径支持subject_ref/parents bundle及原pointer，保留rawref1行为；不能复用单raw _span/source_id验证投影父链。现prepare_registered_source_result对已pin非period允许actualnullFY，industry source_type正确由owner配置映射而非unknown默认regulatory。消费只显式rationale_support到usedDAG，不造数。snapshot新identity actual input_document.schema_version与result.schema_version，不用常量；native compactwrite保完整数据和registry，旧IDheader不重写；相邻trust+MDlink。2expert另收receipt别重复改输出。",
+      "gate": "G1 publicconsumer+G4 snapshot/publish完整链；原snapshot metadata差不是金额错误；既有RF安装闭包引用不重跑。",
+      "protected_read_only": [
+        "scripts/revenue_report.py assurance/output",
+        "publication_registry.py existing owner semantics",
+        "trust_anchor.py existing owner semantics"
+      ]
+    },
+    "WP04": {
+      "title": "FF/RF失因边界、operation用量与来源结果映射",
+      "repo": "C:/Users/郑曾波/Projects/filing-fetch",
+      "write": [
+        "scripts/filing_contracts.py (局部typed request reason)",
+        "scripts/fetch_filing.py (命名错误envelope与native结果route；不取消latest discovery语义)",
+        "scripts/ff_provider_cause.py (现 closed-vocabulary cause/operation observation owner)",
+        "tests/test_w04_failure_observation.py"
+      ],
+      "reads": [
+        "filing_contracts validate_request/_validate_acquisition_limits",
+        "fetch_filing _use_source_query/resolve_filing",
+        "RF source_preparation safe_failure &prepare_registered (跨仓只读)",
+        "HK source_ledger and originaloperation captures"
+      ],
+      "deps": "WP01 nonperiod和WP03 RFpinned入口负责不用filing fallback；FF只财报route有界latest，不盲删mode guard。auditjoin由WP05依typed输出。",
+      "ids": [
+        "T07",
+        "T19"
+      ],
+      "action": "保存四具体validationcause安全enum+field_path，不复制secret/request全文。现错误code request_error保兼容，引导明细到safe observation。传existing acquisition-observation/1 currentoperation实际counts/bytes/cost，preHTTP0与invoiceunknown不同。为一batch逐document定位result/SourceRef不复制统一callids；消费端RF改动由WP03接规范field。115B只历史版本调和，未来新HTTP如触发才收nativeheaders。",
+      "gate": "G1有界FF纯validation/真实CLI source结果；无需新GET、不扩大财报业务范围。"
+    },
+    "WP05": {
+      "title": "audit P7三个技术修补、CAS冻结和诊断真引用",
+      "repo": "C:/Users/郑曾波/Projects/_harness_worktrees/p7/audit",
+      "write": [
+        "skills/revenue-forecast-audit/scripts/execution_request.py",
+        "skills/revenue-forecast-audit/scripts/document_status_join.py",
+        "skills/revenue-forecast-audit/scripts/authoring_provenance.py",
+        "skills/revenue-forecast-audit/scripts/audit_contracts.py (仅CAS/root locator helper)",
+        "tests/test_w04_request_capture.py",
+        "tests/test_w04_status_provenance.py",
+        "skills/revenue-forecast-audit/references/execution-artifact-contract.md"
+      ],
+      "reads": [
+        "P7 sealedtechnical JSON/MD all6probes",
+        "audit_run.py freeze/capture/observed_input_integrity (baseline W11只读)",
+        "current review_protocol helpers and W01–W08建议",
+        "CN/HKphysical resource observation +HKraw2 retention plan"
+      ],
+      "deps": "audit_run shared opt-in expectedSHA hook ROOT WP07独占修改；本包给精确RED和hook契约，不能编辑W11基线。native shape adapters先依actualFF/CWP字段，不未知推enforcement。",
+      "ids": [
+        "T07",
+        "T13",
+        "T17",
+        "T21",
+        "T22",
+        "T23"
+      ],
+      "action": "money0 finite非负domain，尺寸/time/token严格正。outer vsobservednative分离；普通RF无controls=unknown。expected builderSHA经ROOTfreeze hook exactfrozen边界，不prehashrace；明细failurechild_startedfalse。CAS immutable共享,percall mutable独立，短root平坦 refs，aggregate physicalcounts真实。result resolver验证限定JSONpointer实际存在且source正确、diagnostic不quality裁决；W01/W02/W07的quote/value/unit/actor/period只比较已消费fragments。旧59/96日志引用，新增风险localtests，不改37旧断言。",
+      "gate": "G3真实 publicbuild→freeze→child和mutate-beforelaunch拒绝+mutable隔离/实际状态join；独立技术agent封存后STOP。"
+    },
+    "WP06": {
+      "title": "RF研究方法与下一轮authoring责任卡",
+      "repo": "C:/Users/郑曾波/Projects/revenue-forecast",
+      "write": [
+        "SKILL.md (实际repo根技能文件)",
+        "references/research-coverage.md (实际既有research规范)",
+        "docs/w04_research_authoring_card.md (新文档)"
+      ],
+      "reads": [
+        "RF实际schema3.9参数/targets/operating-research合同",
+        "12sealed process/analyst与source gaps",
+        "RF47f497ad release接受及研究诊断字段",
+        "CWP只source事实/证据接口"
+      ],
+      "deps": "文档并行无源码冲突，sourceinterfaces G1/G2后ROOT owned新attempt实际研究；不改contracts/forecast calc或旧input，schema建议交ROOT。",
+      "ids": [
+        "T09",
+        "T10",
+        "T11",
+        "T12",
+        "T17"
+      ],
+      "action": "RF authoring采用现inventory/observation/calibration字段，区分事实/机制/量级/外部；未来假设可填非null，无futureactual要求；actualrange未知保留conditional并少参数桥。需求矩阵窗口/type/materiality/原件查询真实，call未知不能ReadOriginalNoTarget。连续/复合quote和正确政策、目标scope/CC/FX/grossnet、控制贡献/内部抵销；source→claim→parameter→actualDAG；共有经济joint路径并独立挑战。不要让CWP/audit生成投资结论，不新hardgate。",
+      "gate": "G4三公司原请求三年 native path+render+snapshot/真实敏感性；四独立研究审查，工程与经济分别状态。"
+    },
+    "WP07": {
+      "title": "ROOT独占公共接线、版本安装、大节点和留存恢复",
+      "repo": "ROOT shared integration (多仓受控顺序)",
+      "write": [
+        "company-wiki/scripts/config.py",
+        "company-wiki/scripts/narrative_batch_configured.py",
+        "company-wiki/src/company_wiki/automation/narrative_http_model.py",
+        "company-wiki/src/company_wiki/automation/narrative_batch_request.py",
+        "company-wiki/src/company_wiki/automation/narrative_generation.py",
+        "company-wiki/src/company_wiki/automation/narrative_batch.py; company-wiki/src/company_wiki/automation/narrative_runtime.py (仅sharedpurpose必要)",
+        "audit/skills/revenue-forecast-audit/scripts/audit_run.py (仅opt-inexpectedSHA冻字节hook)",
+        "RF共享schema/type/安装版本文件 (先具体定位冻结，不交leaf)",
+        "owned newattempt/execution/CAS/configfixtures/replay receipts (不改oldrun或productionraw)",
+        "ROOT主PWF进度及集成记录（由ROOT授权继续；本专家不写）"
+      ],
+      "reads": [
+        "all12 actualSHAs + coverage246",
+        "7包RED/GREEN/STOP/SHA",
+        "HK2raw exactbytes+sidecars+sourcecatalogconfig",
+        "accepted48+6/selector116a39d8 exactCI/DOCXd3/RF47f497ad",
+        "old母账未知hold/production baseline"
+      ],
+      "deps": "ROOT唯一公共接口/配置/install/integration owner；≤3workers；leaf seam交接与review后串行安装并新scope跑G1→G3→G2→G4。",
+      "ids": [
+        "T05",
+        "T08",
+        "T14",
+        "T16",
+        "T19",
+        "T20",
+        "T23"
+      ],
+      "action": "llm.generation_policy目的真实配置general→narrative（其它显式purpose仅实际工作流需要）与wire/cacheidentity，不猜model。expectedSHA在W11现freeze exactbytes流结束比，legacy无expected无行为diff。确认当前installed配置及bounded预算，与mother账不reset。Sourcequalification同SHA补真实证据、外部原文有界尝试；不可得仍unknown。owned短TEMP/平坦CAS且HKraw2不可删唯一；封存2bytes+sidecar再以tmpcatalogpublicreadreplay，seal迁移receipt后才按baselinecleanup。保留originalpath/MAX_PATH事实，source/lake/Dayu/neighborWIP零写；并发恢复沿AUTO原库。",
+      "gate": "G1/G3 code独审，G2来源摘要独审，G4三公司12审；实际cost/physicalscope/cleanup receipt封存；所有未执行明确。"
+    }
+  },
+  "shared_file_owner": "WP07 ROOT",
+  "parallel_waves": [
+    [
+      "WP01",
+      "WP03",
+      "WP05"
+    ],
+    [
+      "WP02",
+      "WP04"
+    ],
+    [
+      "WP06",
+      "WP07"
+    ]
+  ],
+  "rules": [
+    "wave overlap uses disjoint files; WP03 waits actual WP01 producer output before integrate",
+    "no production configuration write by workers",
+    "unknown file existence first native locate and ROOT freeze explicit owner",
+    "no baselineW11 source write inWP05; optinhook WP07only",
+    "all new research execution input/output ownedROOTnewattempt, never oldrun"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-10-11T03:48:24.378065+00:00",
+  "failed_action": "baseline reuse preflight clean assertion",
+  "writes_before_failure": 0,
+  "rows": [
+    {
+      "repo": "revenue-forecast",
+      "exit_code": 0,
+      "status": "",
+      "stderr": ""
+    },
+    {
+      "repo": "filing-fetch",
+      "exit_code": 0,
+      "status": "",
+      "stderr": ""
+    }
+  ],
+  "next_action": "classify actual worktree changes without resetting; no FF fast-forward claimed",
+  "correction": {
+    "actual_failed_check": "RF full HEAD equality, not clean assertion",
+    "reason": "driver literal copied from context had length42 with duplicated b6; real immutable RF HEAD length40 valid",
+    "actual_rf_head": "47f497ad9dee9dc47f66fca37016e9ba6b6b6f33",
+    "new_source_edits": 0,
+    "actual_dirty_worktrees": 0
+  }
+}

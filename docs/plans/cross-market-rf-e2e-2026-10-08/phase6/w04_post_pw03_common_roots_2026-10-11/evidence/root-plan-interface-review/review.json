@@ -1,0 +1,397 @@
+{
+  "schema_version": "w04-root-plan-interface-review/1",
+  "status": "STOP_REVIEW_COMPLETE",
+  "verdict": "PLAN_ACCEPTABLE_WITH_ROOT_EXECUTION_OVERLAY",
+  "reviewed_at": "2026-10-11T04:02:16.6691925+00:00",
+  "reviewer": "/root/w04_plan_interface_review",
+  "plan_root": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11",
+  "handoff_sha256": "cdc7f015d2e162ad9478a2be6fc05f06f69d3c5f208b02f870040c12bea0fef6",
+  "sealed_plan_file_count": 21,
+  "sealed_plan_files": [
+    {
+      "path": "coverage.json",
+      "sha256": "3a189e4e6a6c1768d1c5cf939146acfbfb2be746bf1f5d22d7eef9b322aff116",
+      "byte_size": 698886,
+      "seal_match": true
+    },
+    {
+      "path": "evidence/event_manifest_checks.json",
+      "sha256": "1caa53ab8cc876a4006124e85c83660ffc7bb730e6159fa075ec8fbaeab3eb44",
+      "byte_size": 13875,
+      "seal_match": true
+    },
+    {
+      "path": "evidence/expert_tool_errors.json",
+      "sha256": "7c2d4219365b7ea084924bf539ccb4b00c6861f26f8b84724e055f0da9750718",
+      "byte_size": 1745,
+      "seal_match": true
+    },
+    {
+      "path": "evidence/hk_raw2_retention_plan.json",
+      "sha256": "aaeddfc5cae082d62b7b93f2e8981bf279473493e21a52717460d259ca955b88",
+      "byte_size": 2627,
+      "seal_match": true
+    },
+    {
+      "path": "evidence/input_read_manifest.json",
+      "sha256": "3b68896b58d0e79d2370c6ed1a24f85871d03beb234a7bbd9ff21b8e0fe12259",
+      "byte_size": 12553,
+      "seal_match": true
+    },
+    {
+      "path": "evidence/native_contract_reads.json",
+      "sha256": "9f3d02aaa859d9311cb8d4674083b6c23b58065a56bcebc741d9999e6a8f6f46",
+      "byte_size": 8686,
+      "seal_match": true
+    },
+    {
+      "path": "evidence/plan_validation.json",
+      "sha256": "852cae020f86fdb12ba87f2efffd09236802b736ff7346f42bd43874f4d3d933",
+      "byte_size": 850,
+      "seal_match": true
+    },
+    {
+      "path": "findings.md",
+      "sha256": "0416f10e2d622619ae1cdbdf30d14bc01af001d5a95e70b3bef71aa25ab8acc6",
+      "byte_size": 5405,
+      "seal_match": true
+    },
+    {
+      "path": "implementation_details.md",
+      "sha256": "d196b886510f789dfb9282e067aa39b455a502a5ee2dddc55ea6fcd0d8c911ee",
+      "byte_size": 27330,
+      "seal_match": true
+    },
+    {
+      "path": "progress.md",
+      "sha256": "fe107525e36f1c1d9447a516a0b0697e3a4c40c0cc85a9dcfe9d273d41fd19a0",
+      "byte_size": 1491,
+      "seal_match": true
+    },
+    {
+      "path": "root_causes.json",
+      "sha256": "9cde25df26497eece6c8163c0eb900c3ddf695c97d8741e4253e254015d0b336",
+      "byte_size": 77051,
+      "seal_match": true
+    },
+    {
+      "path": "task_plan.md",
+      "sha256": "e1ba786936560309d4275cddcd85717b3c246579adf9fc2896aad48b05ce1bb1",
+      "byte_size": 2899,
+      "seal_match": true
+    },
+    {
+      "path": "test_matrix.md",
+      "sha256": "894955db59dc14f9a29322d216b505fbb52dc86d18ff25c2fe7e997beb860e32",
+      "byte_size": 8945,
+      "seal_match": true
+    },
+    {
+      "path": "work_packages/OWNER_MATRIX.json",
+      "sha256": "307eb384d7313659d17dd78c3bd2cb2c826bef44c7d5c59407e8b101ba9dec56",
+      "byte_size": 13841,
+      "seal_match": true
+    },
+    {
+      "path": "work_packages/WP01.md",
+      "sha256": "ca457ac34d5c8866ca8838612e0c58f88db2525a6b3e8233e4cf55a7660154f5",
+      "byte_size": 6918,
+      "seal_match": true
+    },
+    {
+      "path": "work_packages/WP02.md",
+      "sha256": "42d21847c2a51a93450c0c610cb8623d2f92bd3a14cf40a3069a52f1ced3684b",
+      "byte_size": 7510,
+      "seal_match": true
+    },
+    {
+      "path": "work_packages/WP03.md",
+      "sha256": "124077b2ecadddeef97ba1f28348a71a70703acdbf99659389772ed24d14f204",
+      "byte_size": 9460,
+      "seal_match": true
+    },
+    {
+      "path": "work_packages/WP04.md",
+      "sha256": "dde57f6449174025936c28bb4cd19675b5bfc382bde96ac0fe2c296a3879c1e0",
+      "byte_size": 8074,
+      "seal_match": true
+    },
+    {
+      "path": "work_packages/WP05.md",
+      "sha256": "e3c9e683672b3a425efc4b67532b86cba42bee99a27188e965ecb873837f27b6",
+      "byte_size": 14373,
+      "seal_match": true
+    },
+    {
+      "path": "work_packages/WP06.md",
+      "sha256": "7a399659beb77e8bb680bd8a453cba993b95e4830e5dda1402c63b4e0cc38b8c",
+      "byte_size": 12174,
+      "seal_match": true
+    },
+    {
+      "path": "work_packages/WP07.md",
+      "sha256": "f988653a155b4c41b7fa0e684fd09116f53774dfa7442b9cfc7d446a63b083ea",
+      "byte_size": 21511,
+      "seal_match": true
+    }
+  ],
+  "scope": {
+    "new_GETs": 0,
+    "provider_model_calls": 0,
+    "paid_tokens": 0,
+    "tests_or_probes": 0,
+    "fullsuites": 0,
+    "product_config_install_oldrun_sealed_plan_writes": 0,
+    "report_files": [
+      "review.json",
+      "REVIEW.md"
+    ],
+    "report_cap_bytes": 32768,
+    "local_script_parse_failures": 1,
+    "parse_failure_side_effects": 0
+  },
+  "inventory": {
+    "main": 246,
+    "old": 157,
+    "new": 89,
+    "auxiliary_technical": 3,
+    "auxiliary_null": 1,
+    "roots": 20,
+    "packages": 7,
+    "distinct_keys": 246,
+    "primary_wp_counts": [
+      10,
+      22,
+      15,
+      10,
+      12,
+      87,
+      90
+    ],
+    "explicit_paths_reviewed": 44,
+    "explicit_path_overlaps": [],
+    "remaining_root_placeholder": "RF shared schema/type/install: ROOT freezes actual paths before dispatch as already planned"
+  },
+  "material_findings": [
+    {
+      "id": "W04-ROOT-IFACE-001",
+      "priority": "P2",
+      "title": "CWP risk tests miss normal CI and changed-unit gate",
+      "plan_loci": [
+        "WP01.md:19",
+        "WP02.md:17",
+        "OWNER_MATRIX.json:15/:38"
+      ],
+      "native_loci": [
+        ".github/workflows/ci.yml:45/:59",
+        "pytest.ini:2",
+        "tools/changed_unit_tests.py select_unit_tests",
+        "tools/pre_push_gate.py:148"
+      ],
+      "risk": "The proposed tests/test_w04_*.py files are discoverable by unrestricted pytest, but existing unit CI, lint and changed-unit gate select tests/unit and can omit these regressions.",
+      "necessary_root_overlay": "Replace only the two CWP test paths with tests/unit/test_w04_source_transport.py and tests/unit/test_w04_narrative_semantics.py; preserve WP01/WP02 owner and sealed files. Use existing G1/G2 and normal unit gate, without new node/approval."
+    },
+    {
+      "id": "W04-ROOT-IFACE-002",
+      "priority": "P2",
+      "title": "audit_run ROOT scope label omits surrounding opt-in integration",
+      "plan_loci": [
+        "WP07.md:19/:192/:200",
+        "OWNER_MATRIX.json:178",
+        "implementation_details.md:101/:109"
+      ],
+      "native_loci": [
+        "audit_run.py:461/:597/:625"
+      ],
+      "risk": "Only expectedSHA hook is named, while the same plan requires retention_mode/blob_store/deadline, child remaining-time, physical reservations, private-copy and cleanup priority. These surrounding capture changes are in ROOT-owned audit_run.py; literal dispatch can omit them or cause cross-owner edits.",
+      "necessary_root_overlay": "Explicitly assign WP07 opt-in freeze/capture/CAS/private-copy/deadline/cleanup integration in audit_run.py, preserving legacy default behavior. WP05 keeps helper/composer/tests and read-only audit_run. No Windows immutable CLI lease, new registry or task DB."
+    },
+    {
+      "id": "W04-ROOT-IFACE-003",
+      "priority": "P2",
+      "title": "WP01 compact evidence operation requires an omitted leaf file",
+      "plan_loci": [
+        "WP01.md:12-19",
+        "OWNER_MATRIX.json WP01/write",
+        "test_matrix.md:T03"
+      ],
+      "native_loci": [
+        "narrative_evidence_view.py:108/:112/:116/:133/:140"
+      ],
+      "risk": "Existing evidence-list/lookup/search hardcode projected view/receipt /2 and populate reference/lineage from request/bundle. Transport-only edits cannot deliver a correctly typed compact /3 evidence response while preserving /2.",
+      "necessary_root_overlay": "Add src/company_wiki/automation/narrative_evidence_view.py to WP01 exclusive leaf write set for /3 compact evidence DTO/receipt only; preserve current /1 raw and /2 projected behavior. Freeze its exact /3 receipt fields with transport; use existing T03/G1, no new gate. ROOT confirmed this seam from actual code."
+    }
+  ],
+  "interface_freeze_notes": [
+    {
+      "id": "SOURCE_AND_TRANSPORT_VERSION",
+      "status": "EXISTING_ROOT_FREEZE",
+      "note": "SourceRef schema_version remains exactly 2.0. CWP current raw NarrativeRef is narrative-ref/1, projected narrative-ref/2; their reference/read/receipt use /1 and /2. New compact /3 is additive: narrative-ref/3, narrative-reference-request/3, narrative-read-request/3, narrative-read-receipt/3. Existing projected bundle is narrative-bundle/3.0, raw bundle narrative-bundle/2.0; do not relabel or rehash old versions. RF historically supports /1 only; add explicit /3 projected branch without fabricating historical /2 support."
+    },
+    {
+      "id": "REQUEST_RECEIPT_LINEAGE",
+      "status": "EXISTING_ROOT_FREEZE",
+      "note": "Freeze exact reference/read/evidence success and refusal field sets together, all request/reference/receipt <=16384B and full read bundle <=1310720B. ROOT proposed lineage_sha256=SHA256(canonical_json(full bundle.subject_binding)), parent_count=all real parent refs. Compact subject/generation must match pinned full body parents, issuer/asof and every original pointer. SourceRefs and raw loc:v1 are not projection surrogates. RF verifies body+receipt, without reopening all source parents as a second owner."
+    },
+    {
+      "id": "ONE_VERIFIED_PROJECTION_RESOLUTION",
+      "status": "EXISTING_ROOT_FREEZE",
+      "note": "Existing projection_loader takes NarrativeSubject and returns VerifiedProjectionView. The compact resolver may reuse CLI open_verified_projection(projection_id, expected_projection_sha256) once and pass its real verified view through artifact/replay checks; avoid load plus duplicate reopen of all 65 parents. Keep complete subject binding and original pointers in the existing pinned bundle."
+    },
+    {
+      "id": "METADATA",
+      "status": "DESIGN_ACCEPTABLE",
+      "note": "Required old four keys plus optional declared_language matches current CWP. Preserve raw filing/transcript en/zh/mixed and projected official_json with unknown language on summary_not_needed. title nullable, declared-language-family matching, unknown keys strict by version. Do not route projected metadata/evidence through raw source_id validation."
+    },
+    {
+      "id": "PURPOSE_AND_NULL",
+      "status": "DESIGN_ACCEPTABLE",
+      "note": "Native model_options_from_config defaults to narrative and canonical connection already works. Actual main config hash matches plan with zero generation_policy keys. Raw generation distinguishes null/omitted thinking, temperature, reasoning_split; HTTP and projected generation omit null. Canonical effective-wire normalization and explicit legacy mapping are the scoped efficiency fix. Explicit thinking/effort/maxoutput already bind identity. Label-only purpose hits cache; absent policy is configuration fact, not missing wiring."
+    },
+    {
+      "id": "SNAPSHOT",
+      "status": "NO_CURRENT_NORMALIZATION_DEFECT",
+      "note": "Native validate_top_level accepts 3.7/3.8/3.9 without upgrading schema; legacy versions reject new period_flow. _build_forecast_draft sets result.schema_version=data.schema_version after validation. schema_compatibility allows current ENGINE_VERSION4.2.1 for all three. New header takes actual versions rather than constant3.7; observe both schemas and retain existing policy. No new header=input/result equality on frozen historical snapshots, no old ID/hash rewrite. No probe needed."
+    }
+  ],
+  "accepted_design_checks": [
+    {
+      "area": "RF research",
+      "result": "ACCEPTABLE",
+      "detail": "Future analyst_assumption may be nonnull without future actual. Calibration must explain economic scope/amount and actual DAG. Historical ancestry dates are not mechanically forced to forecast year; CMP H1 calendar and May31 contribution measurement may differ. RF owns conclusions."
+    },
+    {
+      "area": "Source qualification",
+      "result": "ACCEPTABLE",
+      "detail": "Pathless six-field Ref, exact CWP byte owner, pinned nonperiod null fiscal period, bounded unpinned latest discovery, no non-financial keyword filter or forged fiscal year."
+    },
+    {
+      "area": "Audit controls",
+      "result": "ACCEPTABLE_AFTER_ROOT_OVERLAY",
+      "detail": "59 legacy API/96 accepted are preserved. Money finite>=0 permits free0; other resource domains positive. Builder exact requestSHA/size compared at streamed freeze before child. Requested/effective/observed/owner-enforced distinct; ordinary RF without resource controls remains unknown. Call0 transport differs from business failure and missing invoice usage."
+    },
+    {
+      "area": "CAS/resource/deadline/replay",
+      "result": "ACCEPTABLE_AFTER_ROOT_OVERLAY",
+      "detail": "No-replace immutable CAS plus ordinary private copies, physical retained/peak reservations, one monotonic stage deadline, primary error/secondary cleanup priority and exact raw replay are explicit. Keep immutable original_path/manifest/DB identities and necessary raw/AUTO replay states. First version excludes Windows immutable CLI lease."
+    },
+    {
+      "area": "Owner/gates",
+      "result": "ACCEPTABLE_AFTER_ROOT_OVERLAY",
+      "detail": "44 explicit original paths pairwise disjoint; adding narrative_evidence_view leaf to WP01 creates no listed overlap. Shared runtime/config/schema/install/audit freeze remain ROOT. Original G1-G5 large nodes suffice; no per-document approval, allow/block list, second task DB or old fullsuite/probe rerun."
+    }
+  ],
+  "acceptance_refs": {
+    "CWP_source": "116a39d8",
+    "CWP_exact_CI": "38108528804",
+    "RF_source": "47f497ad",
+    "P7_RF": "38096229764",
+    "audit_accepted": 96,
+    "audit_legacy_API": 59,
+    "rerun": false,
+    "mode": "reference prior accepted receipts only"
+  },
+  "config_observation": {
+    "path": "C:/Users/郑曾波/Projects/company-wiki/config.yaml",
+    "sha256": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "generation_policy_key_count": 0,
+    "secret_values_output": false,
+    "write": false
+  },
+  "native_interface_hashes": [
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/pytest.ini",
+      "sha256": "76a0dae330d88784dff727a5cbd7a08af06d9297a498689a9aaadba8cdf262af"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/.github/workflows/ci.yml",
+      "sha256": "9f2864979058658089bb9d4edd879e05a733404f3d1a6d1de06ec012a63359b8"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/tools/changed_unit_tests.py",
+      "sha256": "4c589d12bc467fc14aefcad3dbfffce8bcea0a217c67bb2fda5d05320a171b19"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/tools/pre_push_gate.py",
+      "sha256": "58f50f6467dfc52f67d9a2a7dbadb943e683313e5efe6f514d4ac9d95b6752d4"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/src/company_wiki/automation/narrative_contracts.py",
+      "sha256": "6a3b4a262dac4079d7ec6a21c1e09e7ec238d55db3253483f11a69365e76faf3"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/src/company_wiki/automation/narrative_transport_contracts.py",
+      "sha256": "9bb13eb9b0479d482659554cc48dc137c68534420f0dd0dbe7eb1655d8c7344c"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/src/company_wiki/automation/narrative_transport.py",
+      "sha256": "0f237fd79a6f160cb2c28d43d8dc7c143604975fd4c725812eade28780bb7c3e"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/src/company_wiki/automation/narrative_evidence_view.py",
+      "sha256": "7860f3925ae09e09d2edec82df52618268ff785bcc437e9d2b50e9847ec5eb68"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/src/company_wiki/automation/narrative_generation.py",
+      "sha256": "b293fc26a8e3fec5a42a634e53d70ee8bf88582de45fc938e70dcf693b434dfa"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/src/company_wiki/automation/narrative_http_model.py",
+      "sha256": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/src/company_wiki/source_catalog/narrative_transport_cli.py",
+      "sha256": "b265daec047b8dd89f10b38e1f9ffaef045b8841019ff2de8514ecd186abda1b"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/src/company_wiki/narrative_subject.py",
+      "sha256": "e29b000610a73874d5cd26701992f795c17bf80b6d12e1a46fc67061ea11be39"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/src/company_wiki/source_catalog/official_json_projection.py",
+      "sha256": "3a0f7844f86eb07876812e5b8015c5179022762a3c25adc59b565a4f4f010adf"
+    },
+    {
+      "path": "C:/Users/郑曾波/.codex/worktrees/m3-acceptance-20261010/company-wiki/scripts/narrative_batch_configured.py",
+      "sha256": "3def255fb8f1488955b2fc4c8023eafbf76e4ba0dd3cb4f96f47aecdb540a696"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/company_wiki_narrative_contracts.py",
+      "sha256": "87217f45ac810b572f4fba114b1ee0574ea437de5e973ea23374365c1384fecf"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/revenue_core.py",
+      "sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/revenue_backtest.py",
+      "sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/contracts/document.py",
+      "sha256": "882a08abba740ba14f17cfcc614e29aa7c40fe68783bf05ee9d73c5891f7769c"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/contracts/constants.py",
+      "sha256": "728f4e6ffc1417c37e155ea0191c3a28b804db601f279c11649e481e0075da74"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/schema_compatibility.py",
+      "sha256": "1df2f419152fdf50da2555417952cb9fd028e6e85a5f5d1e39ca4f46e4e8707a"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/_harness_worktrees/p7/audit/skills/revenue-forecast-audit/scripts/audit_run.py",
+      "sha256": "2c30b29fe64c78deef194ace0650ad73d3402e22510995baa2cf184c5ae54c57"
+    },
+    {
+      "path": "C:/Users/郑曾波/Projects/_harness_worktrees/p7/audit/skills/revenue-forecast-audit/scripts/execution_request.py",
+      "sha256": "1dc8ad4705011fa553c62e71e961d5a2a5912250d00cf117410f06391e21918f"
+    }
+  ],
+  "limitations": [
+    "Interface/plan review only: future RED/GREEN/public replay/paid G2/research G4/generalization G5 remain NOT_RUN.",
+    "CWP worktree CodeGraph uninitialized; no init. RF index has older line positions; version-critical loci read from known current files.",
+    "No source lake/old run/production configuration changed; missing historical supplier response/helper evidence remain unknown."
+  ],
+  "next_owner": "ROOT applies only execution overlay and completes already assigned exact public v3 freeze before exclusive dispatch; no new approval step."
+}

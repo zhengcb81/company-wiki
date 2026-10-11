@@ -1,0 +1,27 @@
+{
+  "schema_version": "root-w04-support-dispatch/1",
+  "observed_at": "2026-10-11T03:46:25.778769+00:00",
+  "purpose": "read-only input to complete W04 plan before any source implementation",
+  "agents": [
+    {
+      "id": "/root/w04_generation_config_readonly",
+      "owned_report_directory": "evidence/w04-config-readonly",
+      "focus": "actual configured purpose, effective wire, cache identity; no credentials"
+    },
+    {
+      "id": "/root/w04_capture_retention_readonly",
+      "owned_report_directory": "evidence/w04-retention-readonly",
+      "focus": "immutable freeze vs mutable consume, flat CAS and physical byte accounting, original-byte/replay retention"
+    }
+  ],
+  "root_owns_shared_plan": true,
+  "product_writes": false,
+  "new_provider_calls": 0,
+  "new_model_calls": 0,
+  "new_charged_tokens": 0,
+  "new_cost_microusd": 0,
+  "main_docs_head": "21a8d20ebde42972a2644999296b7ac2f8b83ff5",
+  "accepted_source_head": "116a39d86ac0894786ea53a295c860c01f38a888",
+  "accepted_source_ci": 38108528804,
+  "proof_scope": "dispatch observation, not forged child start timestamp or acceptance"
+}

@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-10-11T03:35:35.067250+00:00",
+  "command": [
+    "git",
+    "-c",
+    "core.longpaths=true",
+    "merge",
+    "--ff-only",
+    "21a8d20ebde42972a2644999296b7ac2f8b83ff5"
+  ],
+  "base": "116a39d86ac0894786ea53a295c860c01f38a888",
+  "head": "21a8d20ebde42972a2644999296b7ac2f8b83ff5",
+  "config_before": {
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "config_after": {
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "source_products_tools_tests_same_blobs": true,
+  "exact_evidence_checkout_count": 49,
+  "per_command_windows_longpath_support_only": true
+}

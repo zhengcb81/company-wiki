@@ -1,13 +1,12 @@
-## 当前施工入口（2026-10-11T03:26:44.846769+00:00）
+## 当前施工入口（2026-10-11T04:03:35.775817+00:00）
 
-- P7-RF已验收/主线47f497ad/CI38096229764/18定点安装；CWP DOCX精确d3CI38106925215绿。
-- 推送范围责任修复116a39d8 normalcommit8.82秒，48责任测试+6独立probe通过，43files/26原evidence暂存字节相同；普通ff/push3206PASS/195.93秒，精确CI38108528804success，master/远端一致。工程大节点已关闭。
-- 原三公司sealed partial，12不同context四审全部真实封存FAIL，共229checks/89新finding；155 company旧key逐角色映射+2expert carryover=157。原预算/费用不重置，末3HK本地review如实晚于execution旧截止，原executors在窗口内。
-- 下一唯一主线行动：fresh expert已派，按 [专家卡](phase6/post_w03_original_research_2026-10-11/expert_handoff_card.md) 归并157旧+全部新→兄弟独立W04完整PWF/TDD/排他施工包，再实施；ROOT完成正常发布。P7-AUDIT独立技术已接收foundation、3材料缺陷纳W04，当前audit runtime不切，不直接改其源码。
-- 研究后续：原三家新执行四审→没参与修复A300750/HK00175/USCOST→NVDA/池loop；后置8公司目标尚未激活。执行/本地审查stage今后合理分别有界，不伪造旧时间或质量PASS。
-- 母账413778tokens/334463µUSD+FX2764保持，余额1586222tokens/$19.662773；本轮四审/CI0新付费。原件/config/Dayu/邻仓ownerWIP保护。TEMP mW03保留至专家已取得可复现必要输入/原件再按基线清理。
+- P7-RF已接受：RF main/origin 47f497ad、精确CI38096229764、18定点安装；CWP source116精确CI38108528804绿，docs21a8d20已普通主线推送。
+- 原三家公司12审均封存FAIL，229checks/89新finding；完整W04专家包246主keys=157旧+89新、20共因、7排他包，另3技术+1NULL效率项。21封存文件SHA/大小、246排他映射和独立接口审查都通过。三个dispatch调整已写[ROOT补充](phase6/w04_post_pw03_common_roots_2026-10-11/ROOT_EXECUTION_OVERLAY.md)，未改封存专家包。
+- 下一唯一行动：正常归档计划/只读支援/准备回执后，启动Wave1 WP01(CWP)/WP03(RF)/WP05(audit)，ROOT WP07负责共享接线；先RED再集中GREEN。旧版本CWP /1 /2保留，新 /3同请求/收据紧凑，完整lineage保留；CWP新增测试在tests/unit。旧59/96默认与配置模型来源保持。
+- 后续按完整包Wave2与G1/G3工程→定点安装→真实G2摘要/消费→G4原三家新执行/12审→G5 A300750/HK00175/USCOST→NVDA/池loop。未来假设可填但需经济桥，不要求未来实际数据；后置8公司目标尚未激活。
+- 母账413778tokens/334463µUSD+FX2764保持，余1586222tokens/$19.662773；0新收费。原件/production config/Dayu/邻仓ownerWIP不碰。TEMP mW03保留至HK新raw2+sidecar持久原字节/SHA/public replay及必要AUTO/catalog恢复资料明确封存后才清理；不以唯一原件或证据删除换空间。
 
-以下带日期的旧状态为历史账，依此入口与真实queue执行。
+以下带日期条目为历史账；依当前入口及真实新attempt推进。
 
 ## 2026-10-11T03:08:17.102343+00:00 — P7-RF主线保持；DOCX精确CI通过，12四审全部真实派出
 
@@ -597,3 +596,10 @@ MAIN 新增 repair 仅为升级后的明确 generation：保留父失败/任务/
 CI子包仍已关闭：已发布CWP284328bb/CI37925080695、FF44c778b4/CI37923517689、RF5acad6a1/CI37919247211全部exact SUCCESS；pre-commit快速static、push共用行为清单。W05现独立源码审查，103规范化+14原CLI/Worker端到端、真实微软41/41段回放通过后已正常合master3b842eaa；合后W03/W05同入口80PASS/13.05s。自然电话会10契约加入既有FAST_CONTRACT_CASES，先2RED/35PASS再GREEN，不另开CI或commit门。新普通commit/push及远端exact验收尚待，不用本地绿冒称已发布。
 
 W06同任务预算从本地盘点/元数据/枚举/hash一直传到ready验证，实际MSFT同期间缺原文正确not_found，不再因无关旧年度元数据阻断下载；独占工作树196PASS/2明确skip，最后交接待。W08 typed usage/cause跨CLI绿后独立复核又发现中间RF candidates公开嵌套正文泄漏，正在原责任层RED根修，暂不验收。W11独立发现输入/输出同路径覆盖历史及atomic清理遮蔽主因，已修为明确argv绑定、历史/消费副本隔离、保留真实childexit及主异常；59全suite/28.352s、15focused、新版4个实际安装RF调用通过，集中独立复审/commit/定点安装待。以上均零真实供应商/LLM付费，旧封存/原件/配置不改，不能当M3研究通过。
+
+
+## 2026-10-11T03:44:05.346834+00:00 — 12审查及P7技术记录已普通发布
+
+CWP master/origin 21a8d20一致；58已关闭docs文件/49原证据暂存字节一致，normalcommit1.5543秒，normalpush25.5827秒/137smoke PASS19.85秒，archive .py 已按目录责任排除为运行源。docs-only未触发新CI，source116精确CI38108528804 success仍适用，不伪造docsHEAD CI。W04专家正在写157旧+89新问题的完整共因/TDD/PWF和排他包；ROOT两个只读支援分别核真实配置→wire/cache身份、冻结/CAS/长路径/原件retention设计，不改产品或配置、不复跑已收工程节点、不新增收费。母账及所有raw/config/Dayu/邻仓WIP保护；HK新raw2必须先完整原bytes/sidecar/hash/replay mapping持久留存，再考虑ownedTEMP清理。
+
+Next Step：完整W04交接收齐后集中审计划和覆盖，再按不重叠仓内责任实施。

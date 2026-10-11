@@ -1,0 +1,264 @@
+{
+  "observed_at": "2026-10-11T03:34:06.181987+00:00",
+  "command": [
+    "git",
+    "commit",
+    "-m",
+    "docs: seal twelve original-company reviews and technical intake"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 1.5543311000001268,
+  "head": "21a8d20ebde42972a2644999296b7ac2f8b83ff5",
+  "files": 58,
+  "evidence_blob_equal": 49,
+  "evidence": [
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/canonical-fast-forward.json",
+      "sha256": "c4f78585dab580fb2ae4f1dccb546c673a9c2deab6e30d35b911dc5a11fb2165",
+      "bytes": 9148
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/exact-ci-observation-1.json",
+      "sha256": "68a5b1c7f85204041c10d68ec310938a4b7639ce59409508ec9e0ad461a84fff",
+      "bytes": 502
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/normal-commit.json",
+      "sha256": "116539b8d8cdf2a6b6716b95ad3b6d191ea2c9693ca4709e4b3108a4fe057733",
+      "bytes": 8184
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/normal-commit.log",
+      "sha256": "c202279722c41b4a23378729029d42a28a2e0149c2fefb99b937a8a18316b8cb",
+      "bytes": 5857
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/normal-push.json",
+      "sha256": "1b579cf525674b6fe619ec9780dbb781b48df239b2a658e03fb8204f78886047",
+      "bytes": 544
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-publication/normal-push.log",
+      "sha256": "7c43c7a76f39843acb00ab3f27cf636d973a56c9a0d1e57af8e6472d7c78afc2",
+      "bytes": 348
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/TECHNICAL_REVIEW.md",
+      "sha256": "8b013e286d3d24b3d370f80a05c1d85bb5040852d5ad1aaa8910b7b1de56c766",
+      "bytes": 6617
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/findings.md",
+      "sha256": "15a76262093ee7d4884b29fa23b61505ee88c3daddd569abc6b82c2184899af2",
+      "bytes": 1828
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/deploy.json",
+      "sha256": "ad154e8a5c439417512db8496190a5294d49d6b0286d6b5907c7c1712838025c",
+      "bytes": 124
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/execution/requests/20261011T032630Z-81d865ec/attempt.json",
+      "sha256": "5e32ef4187a28389fc0b311b5c9741efc20f714fc945db202c997e8985c05d8b",
+      "bytes": 1840
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/execution/requests/20261011T032630Z-81d865ec/execution_request.json",
+      "sha256": "46defcaaafee316b0d19b1b7d07ab6b80723ba4456eddf75d711317b3965d2dd",
+      "bytes": 1919
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/execution/requests/20261011T032630Z-81d865ec/request.json",
+      "sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "bytes": 84
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/roles/executor/commands/dc673bb7c1da40feba5a0d809a7d336f/consume-0001-ee373648444a.json",
+      "sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "bytes": 84
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/roles/executor/commands/dc673bb7c1da40feba5a0d809a7d336f/input-0001-ee373648444a.json",
+      "sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "bytes": 84
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/roles/executor/commands/dc673bb7c1da40feba5a0d809a7d336f/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/roles/executor/commands/dc673bb7c1da40feba5a0d809a7d336f/stdout.txt",
+      "sha256": "73773bfd49cf68f7d4b3284afc3490cf74a202bf22ed4a4084afa31fbd7a4571",
+      "bytes": 539
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/roles/executor/events.jsonl",
+      "sha256": "8bdfb6577de7b7c59db88e40f938d46253ba0a2b4298efd56c0091b45d4cb63f",
+      "bytes": 7371
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/runs/p05/run.json",
+      "sha256": "da22c1bc52a3806b347eea659cae12c07c2d1e5e51f75e7f59bff406237e9020",
+      "bytes": 216
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/scope.json",
+      "sha256": "5573d48437af4188a3c38521f41b74607278e69c56036518a575942958929209",
+      "bytes": 170
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P05/template.json",
+      "sha256": "4a14897555afad168d6c78d64a6c5d167eff767899641c8272a349bf4b2bfd07",
+      "bytes": 457
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/deploy.json",
+      "sha256": "ad154e8a5c439417512db8496190a5294d49d6b0286d6b5907c7c1712838025c",
+      "bytes": 124
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/execution/requests/20261011T032631Z-54960259/attempt.json",
+      "sha256": "dd00946bb4bbf735321ba46b15dc4699df5ba979124f445633c4c5499796fa1d",
+      "bytes": 1840
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/execution/requests/20261011T032631Z-54960259/execution_request.json",
+      "sha256": "7e0fae86c1b3488e353c8e99aa1274c204a503829414346a2cbac9d0f054da8d",
+      "bytes": 1919
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/execution/requests/20261011T032631Z-54960259/request.json",
+      "sha256": "fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a",
+      "bytes": 161
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/roles/executor/commands/a24556ec90bc43cf8847aa5fa16a211e/consume-0001-fcb8c8f39f63.json",
+      "sha256": "fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a",
+      "bytes": 161
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/roles/executor/commands/a24556ec90bc43cf8847aa5fa16a211e/input-0001-fcb8c8f39f63.json",
+      "sha256": "fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a",
+      "bytes": 161
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/roles/executor/commands/a24556ec90bc43cf8847aa5fa16a211e/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/roles/executor/commands/a24556ec90bc43cf8847aa5fa16a211e/stdout.txt",
+      "sha256": "19ec81faa9e1fc6e104caadf1bb10d23d6d2b3cccbc46209c424c1a177c5208e",
+      "bytes": 540
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/roles/executor/events.jsonl",
+      "sha256": "a11b4b943c4d56d4dd308694d277805668595dd01d152a7fa8f03f623206d5cc",
+      "bytes": 7374
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/runs/p06/run.json",
+      "sha256": "0ab4d62b5de0a865083591ced25b2ae094ce753bdf72a82392aa38a9b65abf47",
+      "bytes": 216
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/scope.json",
+      "sha256": "5573d48437af4188a3c38521f41b74607278e69c56036518a575942958929209",
+      "bytes": 170
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence-retry/P06/template.json",
+      "sha256": "4a14897555afad168d6c78d64a6c5d167eff767899641c8272a349bf4b2bfd07",
+      "bytes": 457
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence/P05/deploy.json",
+      "sha256": "ad154e8a5c439417512db8496190a5294d49d6b0286d6b5907c7c1712838025c",
+      "bytes": 124
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence/P05/runs/p05/run.json",
+      "sha256": "623d634c1abf6477959edac2e7a27db33ba1eb1c14a17ea4a72b732e6e855886",
+      "bytes": 216
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence/P05/scope.json",
+      "sha256": "5573d48437af4188a3c38521f41b74607278e69c56036518a575942958929209",
+      "bytes": 170
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/local-evidence/P05/template.json",
+      "sha256": "4a14897555afad168d6c78d64a6c5d167eff767899641c8272a349bf4b2bfd07",
+      "bytes": 457
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/probe-plan.md",
+      "sha256": "1fecba2dd43961226dc749e4d47785e30a6cfcddb029b9d357357a099b8060c6",
+      "bytes": 1383
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/probe-results.json",
+      "sha256": "9638b9ecd449f19a92663a1d7f601f75bd8c138057d7466d99d3d06af3ff5965",
+      "bytes": 38200
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/probes-first-longpath-failure.py",
+      "sha256": "14e2cda77416c8720c6a9dff0211879ee4587e403a3c4554027ee30f9c11cbb3",
+      "bytes": 8141
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/probes.py",
+      "sha256": "cf9f931210e3e943f1aa7da5232fe03044fceabecb7f266d983e7bd924ef269d",
+      "bytes": 8200
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/progress.md",
+      "sha256": "55d7f3d9eea7fa2c0e260ea049cc035c4e78b16dd4c7dde24d6ab97cb3330224",
+      "bytes": 736
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/task_plan.md",
+      "sha256": "fa229cdc46cc4d083dd6ce083011e5b5dc96bcc04a12d045f403ecbcdc6f769a",
+      "bytes": 1511
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/technical-review.json",
+      "sha256": "259ed822fdc747e3a364e58a1bf08055c5906b4f13062ac10ef9d71528407f21",
+      "bytes": 17824
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-technical-review/write_report.py",
+      "sha256": "e0b35c5f085bf7dc2955bd041a83c3b4d285e1b28597d50c63dfbd20070c7e93",
+      "bytes": 19536
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_fetch-intake.json",
+      "sha256": "b4677cf345c66f8f1758ca03453a40299e4baafd257258b9524fd6ff1ff82548",
+      "bytes": 3946
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_process-intake.json",
+      "sha256": "663dee0acfa0ca1345de5bf2d8f759f843c271f6edcc8a010d9eb20e011a8838",
+      "bytes": 4978
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/all-twelve-sealed.json",
+      "sha256": "a811d4fc08972f1331c60294fc22f24cea5068d408b2ccda07694b6595c7e49e",
+      "bytes": 9750
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/p7-audit-technical-intake.json",
+      "sha256": "b8c1891ec4ea1067900a537583c3dc1e791c7f61b5934527c6c2b6f48c50a277",
+      "bytes": 1105
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/root-expert-dispatch.json",
+      "sha256": "281c4946bd3f147bc42eef422a9e93fd99b0d04ed73341b20afb8db91411de7a",
+      "bytes": 893
+    }
+  ],
+  "normal_hooks": true,
+  "log_sha256": "799747d0c6df1eff58a3971c092cbb67bedd73cf930811dcf6ffe529d279cdef",
+  "live_expert_excluded": true
+}

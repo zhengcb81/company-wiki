@@ -1,0 +1,42 @@
+{
+  "schema_version": "w04-tool-errors/1",
+  "errors": [
+    {
+      "kind": "git_sandbox_false_worktree",
+      "detail": "default git diff --stat said must be run in work tree; approved require_escalated readonly succeeded; not product failure"
+    },
+    {
+      "kind": "codegraph_index_unavailable_or_stale",
+      "detail": "no initialization; actual targetedfile reads used after structural queries"
+    },
+    {
+      "kind": "powershell_pipeline_syntax",
+      "detail": "foreach pipe invalid; corrected assigningrows"
+    },
+    {
+      "kind": "python_display_syntax",
+      "detail": "unmatched parenthesis in condensed reader; corrected"
+    },
+    {
+      "kind": "stdout_encoding",
+      "detail": "cp936 display corrected withPYTHONIOENCODING=utf-8"
+    },
+    {
+      "kind": "wrong_tool_path",
+      "detail": "guessed P7 intake main_auto path and audit/scripts paths absent; located withrgfiles actualpostphase/evidence and skills/revenue-forecast-audit/scripts"
+    },
+    {
+      "kind": "wrong_json_key",
+      "detail": "coverage issues vsentries; original_summary/original_finding differ; snapshot input vsinput_document and schema_version names corrected byactualkeys; no outputproduct changed"
+    },
+    {
+      "kind": "guessed_input_filename",
+      "detail": "CN input-main/US input-v2 absent; actualmanifest currentinput used; not evidence missing"
+    },
+    {
+      "kind": "display_truncation",
+      "detail": "bulky read output truncated; targeted checks/findings/old64–156/HKMD/native contracts reopened; no skippedstatus silentlyPASS"
+    }
+  ],
+  "impact": "expert tooling only; all final246 coverage verified from actualfields; errors not blamed on products"
+}
