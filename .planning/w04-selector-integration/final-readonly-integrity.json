@@ -1,0 +1,13 @@
+{
+  "read_only_preparation": "PASS",
+  "old_all25_source_test_ci_g2_sha_unchanged": true,
+  "canonical_all25_working_bytes_unchanged": true,
+  "old_index_unchanged": true,
+  "canonical_index_unchanged": true,
+  "canonical_head": "d75f0d42e0fc11caa50d5030d16fa238c0e02d55",
+  "canonical_head_unchanged": true,
+  "phase2_freeze_unchanged": true,
+  "new_scratch_created": false,
+  "tests_provider_network_llm_calls": 0,
+  "source_git_config_raw_mutations": 0
+}

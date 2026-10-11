@@ -1,0 +1,32 @@
+{
+  "schema_version": "w04-phase2-independent-engineering-freeze/1",
+  "state": "FINAL_STOP",
+  "verdict": "PASS_WITH_SCOPE",
+  "files": [
+    {
+      "path": "probe.py",
+      "sha256": "efd160688c51d8084247cd11fce5aa98ccd729c41f2bb00739072e1fce4cc861",
+      "bytes": 19017
+    },
+    {
+      "path": "report.json",
+      "sha256": "16ca36b4ebaf7fbc99d7e5e8ac2b19446848f805e75cc0cab560ce413a9988c2",
+      "bytes": 9775
+    },
+    {
+      "path": "report.md",
+      "sha256": "fd8f06aa411d10da3c6172a71b23667d816c7c66ffd5bfd6dcf70f8517600eea",
+      "bytes": 3676
+    },
+    {
+      "path": "witness-inspection.json",
+      "sha256": "e0d3892c66898b39d77304a40f31658344b9bc4e9533a56122ae9a30d82d0de7",
+      "bytes": 6130
+    },
+    {
+      "path": "witness_inspection.py",
+      "sha256": "6d7b6fde336ba5eff722394e63414042dff56eb8fb3999e571938137583c4340",
+      "bytes": 7327
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": "malformed-usage-repair-before/1",
+  "old_freeze_sha256": "e13ee23e64e0ec720edce6e4f5c6847f0dea2ead17a8d112d63874cd0e4cf28a",
+  "files": [
+    {
+      "repository": "et",
+      "path": "transcript_api.py",
+      "sha256": "f1bc6e6cadcf02ce6aad757c2d79d16a5ed87270dece827ac45399d4ffcbf2e3",
+      "bytes": 57923
+    },
+    {
+      "repository": "et",
+      "path": "tests/test_transcript_api.py",
+      "sha256": "72303bc90edc5e7687881f2b698d831ccf20875910b40885f8e38d17a9512c54",
+      "bytes": 35002
+    },
+    {
+      "repository": "et",
+      "path": "tests/test_retrieval_cli_e2e.py",
+      "sha256": "a55153a6f12fcfc2c751ea6da5818c05d60caa87a7d4aac696e96a223ceda9a7",
+      "bytes": 14455
+    },
+    {
+      "repository": "ff",
+      "path": "scripts/transcript_tool_transport.py",
+      "sha256": "781509900fc767a162fb9b530bc54c96f6d560a5157886df182815e6fc9c386c",
+      "bytes": 36981
+    },
+    {
+      "repository": "ff",
+      "path": "scripts/et_v2_contract.py",
+      "sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+      "bytes": 10157
+    },
+    {
+      "repository": "ff",
+      "path": "tests/test_transcript_launch_contract.py",
+      "sha256": "e2c43e092d15a94cc8813b0e3148d01f921d862e3e873573fbbd42cfcc2f08f2",
+      "bytes": 29605
+    },
+    {
+      "repository": "ff",
+      "path": "tests/test_transcript_companion_transport.py",
+      "sha256": "643251a8d6adfb74c1fdfa6cb83e17bec8cafef9a56daf40c2e7ed35c7ba389a",
+      "bytes": 20348
+    },
+    {
+      "repository": "ff",
+      "path": "tests/test_et_s0b_contract.py",
+      "sha256": "8280d87f5bfddaa1431e40f84a793ef63cde53dbb4f1a69deeaf122f79971f34",
+      "bytes": 4901
+    }
+  ]
+}

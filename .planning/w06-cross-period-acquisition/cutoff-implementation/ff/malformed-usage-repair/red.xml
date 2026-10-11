@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.305" timestamp="2026-10-11T16:14:00.529020+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.test_transcript_launch_contract" name="test_malformed_stdout_preserves_independently_verified_usage[{broken-json]" time="0.013"><failure message="assert None == 1">tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp/mu-a780cffc/pt/test_malformed_stdout_preserve0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000025DDC5D4180&gt;
+stdout = b'{broken-json'
+
+    @pytest.mark.parametrize("stdout", [b"{broken-json", b"[]", b"null"])
+    def test_malformed_stdout_preserves_independently_verified_usage(
+        tmp_path, monkeypatch, stdout,
+    ):
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True,
+                   "usage": {"requests_used": 1, "response_bytes_used": 987}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return stdout, json.dumps(receipt).encode("utf-8"), 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+        assert public["status"] == "provider_unavailable"
+        assert public["reason"] == "provider_result_invalid"
+&gt;       assert public["provider_requests"] == 1
+E       assert None == 1
+
+tests\test_transcript_launch_contract.py:591: AssertionError</failure></testcase><testcase classname="tests.test_transcript_launch_contract" name="test_malformed_stdout_preserves_independently_verified_usage[[]]" time="0.006"><failure message="assert None == 1">tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp/mu-a780cffc/pt/test_malformed_stdout_preserve1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000025DDBA43CE0&gt;
+stdout = b'[]'
+
+    @pytest.mark.parametrize("stdout", [b"{broken-json", b"[]", b"null"])
+    def test_malformed_stdout_preserves_independently_verified_usage(
+        tmp_path, monkeypatch, stdout,
+    ):
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True,
+                   "usage": {"requests_used": 1, "response_bytes_used": 987}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return stdout, json.dumps(receipt).encode("utf-8"), 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+        assert public["status"] == "provider_unavailable"
+        assert public["reason"] == "provider_result_invalid"
+&gt;       assert public["provider_requests"] == 1
+E       assert None == 1
+
+tests\test_transcript_launch_contract.py:591: AssertionError</failure></testcase><testcase classname="tests.test_transcript_launch_contract" name="test_malformed_stdout_preserves_independently_verified_usage[null]" time="0.005"><failure message="assert None == 1">tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp/mu-a780cffc/pt/test_malformed_stdout_preserve2')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000025DDC5F1910&gt;
+stdout = b'null'
+
+    @pytest.mark.parametrize("stdout", [b"{broken-json", b"[]", b"null"])
+    def test_malformed_stdout_preserves_independently_verified_usage(
+        tmp_path, monkeypatch, stdout,
+    ):
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True,
+                   "usage": {"requests_used": 1, "response_bytes_used": 987}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return stdout, json.dumps(receipt).encode("utf-8"), 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+        assert public["status"] == "provider_unavailable"
+        assert public["reason"] == "provider_result_invalid"
+&gt;       assert public["provider_requests"] == 1
+E       assert None == 1
+
+tests\test_transcript_launch_contract.py:591: AssertionError</failure></testcase></testsuite></testsuites>

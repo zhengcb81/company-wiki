@@ -1,0 +1,117 @@
+FFF....F..F                                                              [100%]
+================================== FAILURES ===================================
+______ test_as_of_date_excludes_later_publication_without_fetching_body _______
+
+    def test_as_of_date_excludes_later_publication_without_fetching_body():
+        session = FakeSession({QUOTE_URL: FakeResponse(QUOTE_URL, quote_html(Q2_URL))})
+        result = fetch_transcript(
+            make_request(as_of_date="2026-08-31"), session_factory=lambda: session, provider_settings=ProviderSettings(motley_fool_enabled=True)
+        )
+        assert result["status"] == "not_found"
+>       assert result["error_code"] == "publication_after_as_of"
+               ^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'error_code'
+
+tests\test_transcript_api.py:128: KeyError
+______________ test_fmp_excludes_call_after_requested_as_of_date ______________
+
+    def test_fmp_excludes_call_after_requested_as_of_date():
+        session = FakeSession({FMP_URL: FakeResponse(FMP_URL, fmp_payload())})
+        result = fetch_transcript(
+            make_request(
+                ticker="MSFT", exchange="nasdaq", fiscal_quarter=3,
+                provider="fmp", as_of_date="2026-07-21",
+            ),
+            session_factory=lambda: session, provider_settings=ProviderSettings(motley_fool_enabled=True),
+            fmp_api_key="fake-key",
+        )
+        assert result["status"] == "not_found"
+>       assert result["error_code"] == "call_after_as_of"
+               ^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'error_code'
+
+tests\test_transcript_api.py:490: KeyError
+___________ test_w06_fmp_cutoff_cause_survives_both_result_versions ___________
+
+    def test_w06_fmp_cutoff_cause_survives_both_result_versions():
+        for include_payload in (False, True):
+            result = _fmp_cutoff_result(fmp_payload(), include_payload=include_payload)
+            assert result["schema_version"] == (
+                "earnings-transcript-result/2" if include_payload
+                else "earnings-transcript-result/1"
+            )
+            assert result["status"] == "not_found"
+            assert result["fiscal_period"] == "2026-Q3"
+            assert result["candidate_count"] == 0
+>           assert result["error_code"] == "call_after_as_of"
+                   ^^^^^^^^^^^^^^^^^^^^
+E           KeyError: 'error_code'
+
+tests\test_transcript_api.py:773: KeyError
+____ test_w06_motley_fetch_and_discover_preserve_target_publication_cutoff ____
+
+    def test_w06_motley_fetch_and_discover_preserve_target_publication_cutoff():
+        for operation in (fetch_transcript, discover_transcripts):
+            session = FakeSession({QUOTE_URL: FakeResponse(QUOTE_URL, quote_html(Q2_URL))})
+            result = operation(
+                make_request(as_of_date="2026-08-31"),
+                session_factory=lambda: session,
+                provider_settings=ProviderSettings(motley_fool_enabled=True),
+            )
+            assert result["status"] == "not_found"
+            assert result["candidate_count"] == 0
+>           assert result["error_code"] == "publication_after_as_of"
+                   ^^^^^^^^^^^^^^^^^^^^
+E           KeyError: 'error_code'
+
+tests\test_transcript_api.py:827: KeyError
+_______ test_w06_cutoff_diagnostic_and_actual_usage_survive_real_worker _______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001AA6D89D220>
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp/ec-25da131a/pt/test_w06_cutoff_diagnostic_and0')
+
+    def test_w06_cutoff_diagnostic_and_actual_usage_survive_real_worker(monkeypatch, tmp_path):
+        forbid_translator(monkeypatch)
+        monkeypatch.chdir(tmp_path)
+        temp_root = tmp_path / "rt"
+        temp_root.mkdir()
+        for provider in ("fmp", "motley_fool"):
+            calls_file = tmp_path / f"{provider}.jsonl"
+            if provider == "fmp":
+                request = make_request(
+                    ticker="MSFT", exchange="nasdaq", fiscal_quarter=3,
+                    provider="fmp", as_of_date="2026-07-21",
+                )
+                payload = fmp_payload()
+                responses = {
+                    FMP_URL: FakeResponse(FMP_URL, payload, content_type="application/json")
+                }
+                expected_code = "call_after_as_of"
+            else:
+                request = make_request(as_of_date="2026-08-31")
+                payload = quote_html(Q2_URL)
+                responses = {QUOTE_URL: FakeResponse(QUOTE_URL, payload)}
+                expected_code = "publication_after_as_of"
+            spec = fake_spec(responses, calls_file=calls_file)
+            rc, out, err = run_tool(
+                monkeypatch,
+                ["--request-stdin", "--include-source-payload", "--report-usage"],
+                request, spec=spec, temp_root=temp_root, settings=ENABLED_FOOL,
+            )
+            result = json.loads(out)
+            usage = json.loads(err)
+            assert rc == 0
+            assert result["schema_version"] == "earnings-transcript-result/2"
+            assert result["status"] == "not_found"
+>           assert result["error_code"] == expected_code
+                   ^^^^^^^^^^^^^^^^^^^^
+E           KeyError: 'error_code'
+
+C:\Users\郑曾波\Projects\_harness_worktrees\w06\et-cutoff-root\tests\test_retrieval_cli_e2e.py:387: KeyError
+=========================== short test summary info ===========================
+FAILED tests/test_transcript_api.py::test_as_of_date_excludes_later_publication_without_fetching_body
+FAILED tests/test_transcript_api.py::test_fmp_excludes_call_after_requested_as_of_date
+FAILED tests/test_transcript_api.py::test_w06_fmp_cutoff_cause_survives_both_result_versions
+FAILED tests/test_transcript_api.py::test_w06_motley_fetch_and_discover_preserve_target_publication_cutoff
+FAILED tests/test_retrieval_cli_e2e.py::test_w06_cutoff_diagnostic_and_actual_usage_survive_real_worker
+5 failed, 6 passed, 42 deselected in 1.58s

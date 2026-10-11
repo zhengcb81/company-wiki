@@ -1,0 +1,1020 @@
+FFFFFFFFFFFFFFFFFFFFFFF........                                          [100%]
+================================== FAILURES ===================================
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/2-call_after_as_of-call_after_as_of] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F051E00>
+schema = 'earnings-transcript-result/2', diagnostic = 'call_after_as_of'
+reason = 'call_after_as_of', usage_complete = True
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/1-publication_after_as_of-publication_after_as_of] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F0528B0>
+schema = 'earnings-transcript-result/1', diagnostic = 'publication_after_as_of'
+reason = 'publication_after_as_of', usage_complete = True
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/2-None-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F049B50>
+schema = 'earnings-transcript-result/2', diagnostic = None
+reason = 'exact_transcript_missing', usage_complete = True
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/1-None-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F003570>
+schema = 'earnings-transcript-result/1', diagnostic = None
+reason = 'exact_transcript_missing', usage_complete = True
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/2-child_free_text_never_public-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F003130>
+schema = 'earnings-transcript-result/2'
+diagnostic = 'child_free_text_never_public', reason = 'exact_transcript_missing'
+usage_complete = True
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/2-diagnostic5-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F35AD50>
+schema = 'earnings-transcript-result/2', diagnostic = ['call_after_as_of']
+reason = 'exact_transcript_missing', usage_complete = True
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/2-provider_deadline-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F35B350>
+schema = 'earnings-transcript-result/2', diagnostic = 'provider_deadline'
+reason = 'exact_transcript_missing', usage_complete = True
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/2-call_after_as_of-call_after_as_of] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve7')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F40AF30>
+schema = 'earnings-transcript-result/2', diagnostic = 'call_after_as_of'
+reason = 'call_after_as_of', usage_complete = False
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/1-publication_after_as_of-publication_after_as_of] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F40B4D0>
+schema = 'earnings-transcript-result/1', diagnostic = 'publication_after_as_of'
+reason = 'publication_after_as_of', usage_complete = False
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/2-None-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve9')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F1144B0>
+schema = 'earnings-transcript-result/2', diagnostic = None
+reason = 'exact_transcript_missing', usage_complete = False
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/1-None-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve10')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F11BAF0>
+schema = 'earnings-transcript-result/1', diagnostic = None
+reason = 'exact_transcript_missing', usage_complete = False
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/2-child_free_text_never_public-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve11')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F1B3790>
+schema = 'earnings-transcript-result/2'
+diagnostic = 'child_free_text_never_public', reason = 'exact_transcript_missing'
+usage_complete = False
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/2-diagnostic5-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve12')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015EFBEBD0>
+schema = 'earnings-transcript-result/2', diagnostic = ['call_after_as_of']
+reason = 'exact_transcript_missing', usage_complete = False
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/2-provider_deadline-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_result_preserve13')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015EFBEB10>
+schema = 'earnings-transcript-result/2', diagnostic = 'provider_deadline'
+reason = 'exact_transcript_missing', usage_complete = False
+
+    @pytest.mark.parametrize("schema,diagnostic,reason", [
+        ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
+        ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
+        ("earnings-transcript-result/2", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/1", None, "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
+        ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
+        ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
+        tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
+    ):
+        result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
+                  "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
+        if diagnostic is not None:
+            result["error_code"] = diagnostic
+        usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                 "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        # A synthetic environment seam; never resolve/read any host credential.
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_launch_contract.py:517: AssertionError
+_ test_not_found_transcript_stops_before_import_and_survives_public_envelope[True-call_after_as_of-call_after_as_of] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_transcript_stop0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F351700>
+diagnostic = 'call_after_as_of', reason = 'call_after_as_of'
+usage_complete = True
+
+    @pytest.mark.parametrize("diagnostic,reason", [
+        ("call_after_as_of", "call_after_as_of"),
+        ("publication_after_as_of", "publication_after_as_of"),
+        (None, "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_transcript_stops_before_import_and_survives_public_envelope(
+        tmp_path, monkeypatch, diagnostic, reason, usage_complete,
+    ):
+        from ff_v2_envelope import _transcript_result
+    
+        tool = tmp_path / "transcript_tool.py"
+        tool.write_text("# synthetic supplier receipt only", encoding="utf-8")
+        request_id = "urn:company-wiki:source-request:sha256:" + "c" * 64
+        commands = []
+        def run(command, *, input_bytes=None, **kwargs):
+            commands.append(command)
+            if "source_query_cli" in " ".join(command):
+                payload = {"schema_version": "2.0", "status": "not_found", "reason": "no_local_match",
+                           "request_id": request_id, "matches": [], "candidates": [],
+                           "source_read_policy_sha256": "d" * 64}
+                return json.dumps(payload).encode(), b"", 0
+            assert str(tool) in command, "not_found must never import or open a source"
+            request = json.loads(input_bytes)
+            payload = {"schema_version": "earnings-transcript-result/2", "request_id": request["request_id"],
+                       "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q3",
+                       "candidate_count": 0}
+            if diagnostic is not None:
+                payload["error_code"] = diagnostic
+            receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": request_id,
+                       "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+            return json.dumps(payload).encode(), json.dumps(receipt).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transcript_tool_transport, "_run_bounded_json", run)
+        transport = EarningsTranscriptsTransport(wiki_root=tmp_path, transcript_tool=tool,
+                                                deadline=time.monotonic() + 30)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        result = resolve_companion_transcript(request=_request(), filing_handle=_filing(), transport=transport)
+        public = _transcript_result(result)
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_companion_transport.py:479: AssertionError
+_ test_not_found_transcript_stops_before_import_and_survives_public_envelope[True-publication_after_as_of-publication_after_as_of] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_transcript_stop1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F3519C0>
+diagnostic = 'publication_after_as_of', reason = 'publication_after_as_of'
+usage_complete = True
+
+    @pytest.mark.parametrize("diagnostic,reason", [
+        ("call_after_as_of", "call_after_as_of"),
+        ("publication_after_as_of", "publication_after_as_of"),
+        (None, "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_transcript_stops_before_import_and_survives_public_envelope(
+        tmp_path, monkeypatch, diagnostic, reason, usage_complete,
+    ):
+        from ff_v2_envelope import _transcript_result
+    
+        tool = tmp_path / "transcript_tool.py"
+        tool.write_text("# synthetic supplier receipt only", encoding="utf-8")
+        request_id = "urn:company-wiki:source-request:sha256:" + "c" * 64
+        commands = []
+        def run(command, *, input_bytes=None, **kwargs):
+            commands.append(command)
+            if "source_query_cli" in " ".join(command):
+                payload = {"schema_version": "2.0", "status": "not_found", "reason": "no_local_match",
+                           "request_id": request_id, "matches": [], "candidates": [],
+                           "source_read_policy_sha256": "d" * 64}
+                return json.dumps(payload).encode(), b"", 0
+            assert str(tool) in command, "not_found must never import or open a source"
+            request = json.loads(input_bytes)
+            payload = {"schema_version": "earnings-transcript-result/2", "request_id": request["request_id"],
+                       "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q3",
+                       "candidate_count": 0}
+            if diagnostic is not None:
+                payload["error_code"] = diagnostic
+            receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": request_id,
+                       "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+            return json.dumps(payload).encode(), json.dumps(receipt).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transcript_tool_transport, "_run_bounded_json", run)
+        transport = EarningsTranscriptsTransport(wiki_root=tmp_path, transcript_tool=tool,
+                                                deadline=time.monotonic() + 30)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        result = resolve_companion_transcript(request=_request(), filing_handle=_filing(), transport=transport)
+        public = _transcript_result(result)
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_companion_transport.py:479: AssertionError
+_ test_not_found_transcript_stops_before_import_and_survives_public_envelope[True-None-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_transcript_stop2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F10C9B0>
+diagnostic = None, reason = 'exact_transcript_missing', usage_complete = True
+
+    @pytest.mark.parametrize("diagnostic,reason", [
+        ("call_after_as_of", "call_after_as_of"),
+        ("publication_after_as_of", "publication_after_as_of"),
+        (None, "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_transcript_stops_before_import_and_survives_public_envelope(
+        tmp_path, monkeypatch, diagnostic, reason, usage_complete,
+    ):
+        from ff_v2_envelope import _transcript_result
+    
+        tool = tmp_path / "transcript_tool.py"
+        tool.write_text("# synthetic supplier receipt only", encoding="utf-8")
+        request_id = "urn:company-wiki:source-request:sha256:" + "c" * 64
+        commands = []
+        def run(command, *, input_bytes=None, **kwargs):
+            commands.append(command)
+            if "source_query_cli" in " ".join(command):
+                payload = {"schema_version": "2.0", "status": "not_found", "reason": "no_local_match",
+                           "request_id": request_id, "matches": [], "candidates": [],
+                           "source_read_policy_sha256": "d" * 64}
+                return json.dumps(payload).encode(), b"", 0
+            assert str(tool) in command, "not_found must never import or open a source"
+            request = json.loads(input_bytes)
+            payload = {"schema_version": "earnings-transcript-result/2", "request_id": request["request_id"],
+                       "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q3",
+                       "candidate_count": 0}
+            if diagnostic is not None:
+                payload["error_code"] = diagnostic
+            receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": request_id,
+                       "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+            return json.dumps(payload).encode(), json.dumps(receipt).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transcript_tool_transport, "_run_bounded_json", run)
+        transport = EarningsTranscriptsTransport(wiki_root=tmp_path, transcript_tool=tool,
+                                                deadline=time.monotonic() + 30)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        result = resolve_companion_transcript(request=_request(), filing_handle=_filing(), transport=transport)
+        public = _transcript_result(result)
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_companion_transport.py:479: AssertionError
+_ test_not_found_transcript_stops_before_import_and_survives_public_envelope[False-call_after_as_of-call_after_as_of] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_transcript_stop3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F10C410>
+diagnostic = 'call_after_as_of', reason = 'call_after_as_of'
+usage_complete = False
+
+    @pytest.mark.parametrize("diagnostic,reason", [
+        ("call_after_as_of", "call_after_as_of"),
+        ("publication_after_as_of", "publication_after_as_of"),
+        (None, "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_transcript_stops_before_import_and_survives_public_envelope(
+        tmp_path, monkeypatch, diagnostic, reason, usage_complete,
+    ):
+        from ff_v2_envelope import _transcript_result
+    
+        tool = tmp_path / "transcript_tool.py"
+        tool.write_text("# synthetic supplier receipt only", encoding="utf-8")
+        request_id = "urn:company-wiki:source-request:sha256:" + "c" * 64
+        commands = []
+        def run(command, *, input_bytes=None, **kwargs):
+            commands.append(command)
+            if "source_query_cli" in " ".join(command):
+                payload = {"schema_version": "2.0", "status": "not_found", "reason": "no_local_match",
+                           "request_id": request_id, "matches": [], "candidates": [],
+                           "source_read_policy_sha256": "d" * 64}
+                return json.dumps(payload).encode(), b"", 0
+            assert str(tool) in command, "not_found must never import or open a source"
+            request = json.loads(input_bytes)
+            payload = {"schema_version": "earnings-transcript-result/2", "request_id": request["request_id"],
+                       "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q3",
+                       "candidate_count": 0}
+            if diagnostic is not None:
+                payload["error_code"] = diagnostic
+            receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": request_id,
+                       "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+            return json.dumps(payload).encode(), json.dumps(receipt).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transcript_tool_transport, "_run_bounded_json", run)
+        transport = EarningsTranscriptsTransport(wiki_root=tmp_path, transcript_tool=tool,
+                                                deadline=time.monotonic() + 30)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        result = resolve_companion_transcript(request=_request(), filing_handle=_filing(), transport=transport)
+        public = _transcript_result(result)
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_companion_transport.py:479: AssertionError
+_ test_not_found_transcript_stops_before_import_and_survives_public_envelope[False-publication_after_as_of-publication_after_as_of] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_transcript_stop4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F136A80>
+diagnostic = 'publication_after_as_of', reason = 'publication_after_as_of'
+usage_complete = False
+
+    @pytest.mark.parametrize("diagnostic,reason", [
+        ("call_after_as_of", "call_after_as_of"),
+        ("publication_after_as_of", "publication_after_as_of"),
+        (None, "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_transcript_stops_before_import_and_survives_public_envelope(
+        tmp_path, monkeypatch, diagnostic, reason, usage_complete,
+    ):
+        from ff_v2_envelope import _transcript_result
+    
+        tool = tmp_path / "transcript_tool.py"
+        tool.write_text("# synthetic supplier receipt only", encoding="utf-8")
+        request_id = "urn:company-wiki:source-request:sha256:" + "c" * 64
+        commands = []
+        def run(command, *, input_bytes=None, **kwargs):
+            commands.append(command)
+            if "source_query_cli" in " ".join(command):
+                payload = {"schema_version": "2.0", "status": "not_found", "reason": "no_local_match",
+                           "request_id": request_id, "matches": [], "candidates": [],
+                           "source_read_policy_sha256": "d" * 64}
+                return json.dumps(payload).encode(), b"", 0
+            assert str(tool) in command, "not_found must never import or open a source"
+            request = json.loads(input_bytes)
+            payload = {"schema_version": "earnings-transcript-result/2", "request_id": request["request_id"],
+                       "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q3",
+                       "candidate_count": 0}
+            if diagnostic is not None:
+                payload["error_code"] = diagnostic
+            receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": request_id,
+                       "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+            return json.dumps(payload).encode(), json.dumps(receipt).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transcript_tool_transport, "_run_bounded_json", run)
+        transport = EarningsTranscriptsTransport(wiki_root=tmp_path, transcript_tool=tool,
+                                                deadline=time.monotonic() + 30)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        result = resolve_companion_transcript(request=_request(), filing_handle=_filing(), transport=transport)
+        public = _transcript_result(result)
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_companion_transport.py:479: AssertionError
+_ test_not_found_transcript_stops_before_import_and_survives_public_envelope[False-None-exact_transcript_missing] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-08b953e4/p/test_not_found_transcript_stop5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002015F2BB650>
+diagnostic = None, reason = 'exact_transcript_missing', usage_complete = False
+
+    @pytest.mark.parametrize("diagnostic,reason", [
+        ("call_after_as_of", "call_after_as_of"),
+        ("publication_after_as_of", "publication_after_as_of"),
+        (None, "exact_transcript_missing"),
+    ])
+    @pytest.mark.parametrize("usage_complete", [True, False])
+    def test_not_found_transcript_stops_before_import_and_survives_public_envelope(
+        tmp_path, monkeypatch, diagnostic, reason, usage_complete,
+    ):
+        from ff_v2_envelope import _transcript_result
+    
+        tool = tmp_path / "transcript_tool.py"
+        tool.write_text("# synthetic supplier receipt only", encoding="utf-8")
+        request_id = "urn:company-wiki:source-request:sha256:" + "c" * 64
+        commands = []
+        def run(command, *, input_bytes=None, **kwargs):
+            commands.append(command)
+            if "source_query_cli" in " ".join(command):
+                payload = {"schema_version": "2.0", "status": "not_found", "reason": "no_local_match",
+                           "request_id": request_id, "matches": [], "candidates": [],
+                           "source_read_policy_sha256": "d" * 64}
+                return json.dumps(payload).encode(), b"", 0
+            assert str(tool) in command, "not_found must never import or open a source"
+            request = json.loads(input_bytes)
+            payload = {"schema_version": "earnings-transcript-result/2", "request_id": request["request_id"],
+                       "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q3",
+                       "candidate_count": 0}
+            if diagnostic is not None:
+                payload["error_code"] = diagnostic
+            receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": request_id,
+                       "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+            return json.dumps(payload).encode(), json.dumps(receipt).encode() if usage_complete else b"", 0
+        monkeypatch.setattr(transcript_tool_transport, "_run_bounded_json", run)
+        transport = EarningsTranscriptsTransport(wiki_root=tmp_path, transcript_tool=tool,
+                                                deadline=time.monotonic() + 30)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        result = resolve_companion_transcript(request=_request(), filing_handle=_filing(), transport=transport)
+        public = _transcript_result(result)
+>       assert public["status"] == "not_found"
+E       AssertionError: assert 'provider_unavailable' == 'not_found'
+E         
+E         - not_found
+E         + provider_unavailable
+
+tests\test_transcript_companion_transport.py:479: AssertionError
+_ test_not_found_consumer_contract_preserves_optional_date_diagnostic[None-exact_transcript_missing] _
+
+diagnostic = None, reason = 'exact_transcript_missing'
+
+    @pytest.mark.parametrize("diagnostic,reason", [
+        (None, "exact_transcript_missing"),
+        ("call_after_as_of", "call_after_as_of"),
+        ("publication_after_as_of", "publication_after_as_of"),
+    ])
+    def test_not_found_consumer_contract_preserves_optional_date_diagnostic(diagnostic, reason):
+        request, result = _not_found_receipt(diagnostic)
+        original = copy.deepcopy(result)
+>       assert normalize_et_v2_result(result, request) == {"status": "not_found", "reason": reason}
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_et_s0b_contract.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\et_v2_contract.py:218: in normalize_et_v2_result
+    return _failure_result(result, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\et_v2_contract.py:115: in _failure_result
+    _fail("failure_keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reason = 'failure_keys'
+
+    def _fail(reason: str) -> NoReturn:
+>       raise ETContractError(reason)
+E       et_v2_contract.ETContractError: failure_keys
+
+scripts\et_v2_contract.py:53: ETContractError
+_ test_not_found_consumer_contract_preserves_optional_date_diagnostic[call_after_as_of-call_after_as_of] _
+
+diagnostic = 'call_after_as_of', reason = 'call_after_as_of'
+
+    @pytest.mark.parametrize("diagnostic,reason", [
+        (None, "exact_transcript_missing"),
+        ("call_after_as_of", "call_after_as_of"),
+        ("publication_after_as_of", "publication_after_as_of"),
+    ])
+    def test_not_found_consumer_contract_preserves_optional_date_diagnostic(diagnostic, reason):
+        request, result = _not_found_receipt(diagnostic)
+        original = copy.deepcopy(result)
+>       assert normalize_et_v2_result(result, request) == {"status": "not_found", "reason": reason}
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_et_s0b_contract.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\et_v2_contract.py:218: in normalize_et_v2_result
+    return _failure_result(result, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\et_v2_contract.py:115: in _failure_result
+    _fail("failure_keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reason = 'failure_keys'
+
+    def _fail(reason: str) -> NoReturn:
+>       raise ETContractError(reason)
+E       et_v2_contract.ETContractError: failure_keys
+
+scripts\et_v2_contract.py:53: ETContractError
+_ test_not_found_consumer_contract_preserves_optional_date_diagnostic[publication_after_as_of-publication_after_as_of] _
+
+diagnostic = 'publication_after_as_of', reason = 'publication_after_as_of'
+
+    @pytest.mark.parametrize("diagnostic,reason", [
+        (None, "exact_transcript_missing"),
+        ("call_after_as_of", "call_after_as_of"),
+        ("publication_after_as_of", "publication_after_as_of"),
+    ])
+    def test_not_found_consumer_contract_preserves_optional_date_diagnostic(diagnostic, reason):
+        request, result = _not_found_receipt(diagnostic)
+        original = copy.deepcopy(result)
+>       assert normalize_et_v2_result(result, request) == {"status": "not_found", "reason": reason}
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_et_s0b_contract.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\et_v2_contract.py:218: in normalize_et_v2_result
+    return _failure_result(result, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\et_v2_contract.py:115: in _failure_result
+    _fail("failure_keys")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+reason = 'failure_keys'
+
+    def _fail(reason: str) -> NoReturn:
+>       raise ETContractError(reason)
+E       et_v2_contract.ETContractError: failure_keys
+
+scripts\et_v2_contract.py:53: ETContractError
+=========================== short test summary info ===========================
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/2-call_after_as_of-call_after_as_of]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/1-publication_after_as_of-publication_after_as_of]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/2-None-exact_transcript_missing]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/1-None-exact_transcript_missing]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/2-child_free_text_never_public-exact_transcript_missing]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/2-diagnostic5-exact_transcript_missing]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[True-earnings-transcript-result/2-provider_deadline-exact_transcript_missing]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/2-call_after_as_of-call_after_as_of]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/1-publication_after_as_of-publication_after_as_of]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/2-None-exact_transcript_missing]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/1-None-exact_transcript_missing]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/2-child_free_text_never_public-exact_transcript_missing]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/2-diagnostic5-exact_transcript_missing]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_result_preserves_date_cause_without_claiming_provider_outage[False-earnings-transcript-result/2-provider_deadline-exact_transcript_missing]
+FAILED tests/test_transcript_companion_transport.py::test_not_found_transcript_stops_before_import_and_survives_public_envelope[True-call_after_as_of-call_after_as_of]
+FAILED tests/test_transcript_companion_transport.py::test_not_found_transcript_stops_before_import_and_survives_public_envelope[True-publication_after_as_of-publication_after_as_of]
+FAILED tests/test_transcript_companion_transport.py::test_not_found_transcript_stops_before_import_and_survives_public_envelope[True-None-exact_transcript_missing]
+FAILED tests/test_transcript_companion_transport.py::test_not_found_transcript_stops_before_import_and_survives_public_envelope[False-call_after_as_of-call_after_as_of]
+FAILED tests/test_transcript_companion_transport.py::test_not_found_transcript_stops_before_import_and_survives_public_envelope[False-publication_after_as_of-publication_after_as_of]
+FAILED tests/test_transcript_companion_transport.py::test_not_found_transcript_stops_before_import_and_survives_public_envelope[False-None-exact_transcript_missing]
+FAILED tests/test_et_s0b_contract.py::test_not_found_consumer_contract_preserves_optional_date_diagnostic[None-exact_transcript_missing]
+FAILED tests/test_et_s0b_contract.py::test_not_found_consumer_contract_preserves_optional_date_diagnostic[call_after_as_of-call_after_as_of]
+FAILED tests/test_et_s0b_contract.py::test_not_found_consumer_contract_preserves_optional_date_diagnostic[publication_after_as_of-publication_after_as_of]
+23 failed, 8 passed, 77 deselected in 1.09s

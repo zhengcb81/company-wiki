@@ -1,0 +1,41 @@
+{
+  "label": "binding-red",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\s-4c39e089\\p",
+    "-q",
+    "tests/test_transcript_launch_contract.py",
+    "tests/test_transcript_companion_transport.py",
+    "tests/test_et_s0b_contract.py",
+    "-k",
+    "not_found_envelope"
+  ],
+  "exit_code": 1,
+  "seconds": 5.9344,
+  "scratch": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\s-4c39e089",
+  "scratch_restored": true,
+  "real_provider_calls": 0,
+  "real_key_reads": 0,
+  "llm_calls": 0,
+  "log_sha256": "8e8ea92f73dd1ad0a9304f1de54f130cf6a949702ed62d3e259e2bd13624eebd",
+  "files": [
+    {
+      "path": "tests/test_transcript_launch_contract.py",
+      "sha256": "3b8cf9ce3c70caccb0c398fdeeb818dbf07e1737be9253199366d939dd1a26f7"
+    },
+    {
+      "path": "tests/test_transcript_companion_transport.py",
+      "sha256": "643251a8d6adfb74c1fdfa6cb83e17bec8cafef9a56daf40c2e7ed35c7ba389a"
+    },
+    {
+      "path": "tests/test_et_s0b_contract.py",
+      "sha256": "8280d87f5bfddaa1431e40f84a793ef63cde53dbb4f1a69deeaf122f79971f34"
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+.F                                                                       [100%]
+================================== FAILURES ===================================
+_ test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[schema_version-value2-0-provider_result_invalid] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-b9bbf674/p/test_not_found_envelope_cannot1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000016D56892780>
+field = 'schema_version', value = ['earnings-transcript-result/2']
+exit_code = 0, reason = 'provider_result_invalid'
+
+    @pytest.mark.parametrize("field,value,exit_code,reason", [
+        ("request_id", "unrelated-request", 0, "provider_result_invalid"),
+        ("schema_version", "earnings-transcript-result/3", 0, "provider_result_invalid"),
+        ("schema_version", ["earnings-transcript-result/2"], 0, "provider_result_invalid"),
+        ("provider", "unrelated-provider", 0, "provider_result_invalid"),
+        ("fiscal_period", "2026-Q3", 0, "provider_result_invalid"),
+        ("candidate_count", 1, 0, "provider_result_invalid"),
+        ("candidate_count", True, 0, "provider_result_invalid"),
+        ("candidate_count", "0", 0, "provider_result_invalid"),
+        (None, None, 2, "provider_tool_failed"),
+    ])
+    def test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child(
+        tmp_path, monkeypatch, field, value, exit_code, reason,
+    ):
+        result = {"schema_version": "earnings-transcript-result/2", "request_id": "w07",
+                  "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q4",
+                  "candidate_count": 0, "error_code": "call_after_as_of"}
+        if field is not None:
+            result[field] = value
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(receipt).encode(), exit_code
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+>       public = transport._et_result(request=_request(), limits=_limits())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_transcript_launch_contract.py:559: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <transcript_tool_transport.EarningsTranscriptsTransport object at 0x0000016D567E3610>
+request = {'request_id': 'w07', 'security_id': 'MSFT', 'exchange': 'NASDAQ', 'fiscal_year': 2026, ...}
+limits = {'timeout_seconds': 10, 'max_bytes': 1000000, 'max_cost_usd': '0.00'}
+
+    def _et_result(
+        self,
+        *,
+        request: dict[str, Any],
+        limits: dict[str, Any],
+    ) -> dict[str, Any]:
+        if self.transcript_tool is None:
+            return self._local_unavailable(self._tool_configuration_error)
+        if not self.transcript_tool.is_file():
+            return self._local_unavailable("transcript_tool_unavailable")
+        remaining = self._remaining()
+        # The provider deadline is a cap; reserve bounded time for the ET
+        # process to start, enforce its worker deadline and clean up. If the
+        # enclosing FF request is already too close to its deadline, do not
+        # start a child that FF would have to kill before ET can reap it.
+        provider_budget = min(
+            float(limits["timeout_seconds"]),
+            remaining - _ET_CLEANUP_GRACE_SECONDS,
+            float(_ET_MAX_TIMEOUT_SECONDS),
+        )
+        timeout_seconds = int(math.floor(provider_budget))
+        if timeout_seconds < 1:
+            return {
+                "status": "provider_unavailable",
+                "reason": "provider_deadline",
+                "retryable": True,
+                "provider_calls": 0,
+            }
+        et_request = {
+            "schema_version": "earnings-transcript-request/1",
+            "request_id": request["request_id"],
+            "ticker": request["security_id"],
+            # FF's canonical identity uses uppercase exchange names while
+            # ET's public CLI contract uses lowercase exchange slugs.
+            "exchange": (
+                request["exchange"].strip().lower()
+                if isinstance(request.get("exchange"), str)
+                else request.get("exchange")
+            ),
+            "fiscal_year": request["fiscal_year"],
+            "fiscal_quarter": request["fiscal_quarter"],
+            "as_of_date": request["as_of_date"],
+            "provider": "fmp",
+            "download_authorized": True,
+            "timeout_seconds": timeout_seconds,
+            "max_body_bytes": min(limits["max_bytes"], _ET_MAX_BODY_BYTES),
+            "max_response_bytes": limits["max_bytes"],
+            "max_cost_usd": limits["max_cost_usd"],
+        }
+        try:
+            et_env, credential = self._et_environment()
+        except (ValueError, OSError) as exc:
+            safe = str(exc) if isinstance(exc, ValueError) else "provider_credentials_config_invalid"
+            return self._local_unavailable(safe)
+        command = [
+            sys.executable,
+            str(self.transcript_tool),
+            "--request-stdin",
+            "--include-source-payload",
+            "--report-usage",
+        ]
+        try:
+            stdout, usage_stderr, code = _run_bounded_json(
+                command,
+                timeout_seconds=min(
+                    float(timeout_seconds) + _ET_CLEANUP_GRACE_SECONDS,
+                    self._remaining(),
+                ),
+                input_bytes=json.dumps(
+                    et_request, ensure_ascii=False, separators=(",", ":")
+                ).encode("utf-8"),
+                cwd=str(self.transcript_tool.parent),
+                env=et_env,
+            )
+        except (TransportError, ValueError):
+            return {
+                "status": "provider_unavailable",
+                "reason": "provider_result_oversized",
+                "retryable": False,
+                "provider_calls": 1,
+                **_provider_usage(b"", request["request_id"]),
+            }
+        self._last_provider_usage = _provider_usage(usage_stderr, request["request_id"], credential)
+        if _credential_exposed(stdout, usage_stderr, credential):
+            return {"status": "provider_unavailable", "reason": "provider_credentials_leaked",
+                    "retryable": False, "provider_calls": 1,
+                    "provider_started": self._provider_started(self._last_provider_usage),
+                    **self._last_provider_usage}
+        try:
+            result = json.loads(stdout.decode("utf-8", errors="strict"))
+        except (UnicodeError, json.JSONDecodeError):
+            return {
+                "status": "provider_unavailable",
+                "reason": "provider_result_invalid",
+                "retryable": False,
+                "provider_calls": 1,
+                **_provider_usage(b"", request["request_id"]),
+            }
+        if not isinstance(result, dict):
+            return {
+                "status": "provider_unavailable",
+                "reason": "provider_result_invalid",
+                "retryable": False,
+                "provider_calls": 1,
+                **_provider_usage(b"", request["request_id"]),
+            }
+        self._last_provider_usage = _provider_usage(usage_stderr, request["request_id"], credential)
+        if result.get("status") == "not_found":
+            # Bind this one process receipt to the current request. This is not
+            # another company-identity lookup or a source-byte validation.
+            invalid = (
+>               result.get("schema_version") not in {
+                    "earnings-transcript-result/1", "earnings-transcript-result/2",
+                }
+                or result.get("request_id") != et_request["request_id"]
+                or result.get("provider") != et_request["provider"]
+                or result.get("fiscal_period")
+                != f"{et_request['fiscal_year']}-Q{et_request['fiscal_quarter']}"
+                or type(result.get("candidate_count")) is not int
+                or result["candidate_count"] != 0
+            )
+E           TypeError: unhashable type: 'list'
+
+scripts\transcript_tool_transport.py:611: TypeError
+=========================== short test summary info ===========================
+FAILED tests/test_transcript_launch_contract.py::test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[schema_version-value2-0-provider_result_invalid]
+1 failed, 1 passed, 115 deselected in 0.63s

@@ -1,0 +1,88 @@
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+_ test_malformed_stdout_preserves_independently_verified_usage[{broken-json] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp/mu-a780cffc/pt/test_malformed_stdout_preserve0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000025DDC5D4180>
+stdout = b'{broken-json'
+
+    @pytest.mark.parametrize("stdout", [b"{broken-json", b"[]", b"null"])
+    def test_malformed_stdout_preserves_independently_verified_usage(
+        tmp_path, monkeypatch, stdout,
+    ):
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True,
+                   "usage": {"requests_used": 1, "response_bytes_used": 987}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return stdout, json.dumps(receipt).encode("utf-8"), 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+        assert public["status"] == "provider_unavailable"
+        assert public["reason"] == "provider_result_invalid"
+>       assert public["provider_requests"] == 1
+E       assert None == 1
+
+tests\test_transcript_launch_contract.py:591: AssertionError
+______ test_malformed_stdout_preserves_independently_verified_usage[[]] _______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp/mu-a780cffc/pt/test_malformed_stdout_preserve1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000025DDBA43CE0>
+stdout = b'[]'
+
+    @pytest.mark.parametrize("stdout", [b"{broken-json", b"[]", b"null"])
+    def test_malformed_stdout_preserves_independently_verified_usage(
+        tmp_path, monkeypatch, stdout,
+    ):
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True,
+                   "usage": {"requests_used": 1, "response_bytes_used": 987}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return stdout, json.dumps(receipt).encode("utf-8"), 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+        assert public["status"] == "provider_unavailable"
+        assert public["reason"] == "provider_result_invalid"
+>       assert public["provider_requests"] == 1
+E       assert None == 1
+
+tests\test_transcript_launch_contract.py:591: AssertionError
+_____ test_malformed_stdout_preserves_independently_verified_usage[null] ______
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp/mu-a780cffc/pt/test_malformed_stdout_preserve2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000025DDC5F1910>
+stdout = b'null'
+
+    @pytest.mark.parametrize("stdout", [b"{broken-json", b"[]", b"null"])
+    def test_malformed_stdout_preserves_independently_verified_usage(
+        tmp_path, monkeypatch, stdout,
+    ):
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True,
+                   "usage": {"requests_used": 1, "response_bytes_used": 987}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return stdout, json.dumps(receipt).encode("utf-8"), 0
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+        assert public["status"] == "provider_unavailable"
+        assert public["reason"] == "provider_result_invalid"
+>       assert public["provider_requests"] == 1
+E       assert None == 1
+
+tests\test_transcript_launch_contract.py:591: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_transcript_launch_contract.py::test_malformed_stdout_preserves_independently_verified_usage[{broken-json]
+FAILED tests/test_transcript_launch_contract.py::test_malformed_stdout_preserves_independently_verified_usage[[]]
+FAILED tests/test_transcript_launch_contract.py::test_malformed_stdout_preserves_independently_verified_usage[null]
+3 failed, 75 deselected in 0.37s

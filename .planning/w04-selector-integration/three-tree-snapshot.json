@@ -1,0 +1,853 @@
+{
+  "schema_version": "w04-selector-three-tree-snapshot/1",
+  "old_tree": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "canonical_tree": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "old_base": "35a9a64591169bf217f05e87aba633dc4204033a",
+  "current_main": "d75f0d42e0fc11caa50d5030d16fa238c0e02d55",
+  "scope": "read-only source/test blob inspection; no product tests or six originals",
+  "semantic_freeze": {
+    "at": "2026-10-11T09:47:38.781404+00:00",
+    "files": [
+      {
+        "path": "src/company_wiki/source_catalog/narrative_stage_assertions.py",
+        "sha256": "a7efe34bd99533302a20cfeee0c401ed77c225bfba95a203a8c4c3b1f08aea73",
+        "bytes": 6885
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_semantic_coverage.py",
+        "sha256": "a1cd83bce1f275cf0f6c10e5fb0bf07bdeabaa79cd6a14f1188fc2d2269b21b8",
+        "bytes": 760
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "sha256": "c2ced013b8823695d0a16f447e36848dcd060a2c344de322f3b425b296236402",
+        "bytes": 29375
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_budget.py",
+        "sha256": "eddde4ef746f2693a6f1bc79470be1340b6be51f017716c9dd63aa515bc189f6",
+        "bytes": 17044
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_candidates.py",
+        "sha256": "aec5e2d22c942064dea64b805e09d6b835c516af16d931e7218366e5b8ff5fa4",
+        "bytes": 10366
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_group_candidates.py",
+        "sha256": "729b77bb92655fd05945980331f68e5a2f3701a1cbece7b26e4c0fc683590e7f",
+        "bytes": 35968
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+        "sha256": "400ae1cd3ff3a789d307c8fc85de09839a3f9fe6cbed1d5572699535b1598b68",
+        "bytes": 81107
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+        "sha256": "d8d8fc5d61fa17d4268f1a0eb43955af2a02e9797e9678cb02cd392d3b94df28",
+        "bytes": 5750
+      },
+      {
+        "path": "tests/unit/test_w04_stage_public_assertions.py",
+        "sha256": "c8a31dc605456c93b3c7219a9920a9552eaf0cfd9c2afc0ec3bdc8004c44771b",
+        "bytes": 6211
+      },
+      {
+        "path": "tests/unit/test_w04_stage_predicate_scope.py",
+        "sha256": "32e02c1a902ff2ca64cbf83b0ac46b2603d25c4cd43f07c2edd5246c86a4feab",
+        "bytes": 4386
+      },
+      {
+        "path": "tests/unit/test_w04_semantic_budget.py",
+        "sha256": "eb84776a66c550f72b4e94576a8cf83fe47b28273fda2d8c4ba1111c262612ee",
+        "bytes": 11661
+      },
+      {
+        "path": "tests/unit/test_w04_selector_version_dispatch.py",
+        "sha256": "d5409951a8f172f2f25f32cb7a40f0fcac66a789bea2a173e95cc31979fcb296",
+        "bytes": 4963
+      },
+      {
+        "path": "tests/unit/test_w04_narrative_semantics.py",
+        "sha256": "03e83d6675c3e14315624e04eabea353f0eac5394112a0bc3efdede8352cda3d",
+        "bytes": 116101
+      },
+      {
+        "path": "tests/unit/test_narrative_business_recall.py",
+        "sha256": "9714951af67a77113969ee4794b6eb1fddf8d6623db1009c662ac228cdefe93e",
+        "bytes": 19321
+      },
+      {
+        "path": "tests/integration/test_w04_semantic_budget_finalize.py",
+        "sha256": "fb55bfb43c043b02446d24c709dcb0e4264c59fa419bdd15588d0f03e3ce1a8c",
+        "bytes": 1876
+      }
+    ],
+    "test_receipt": "semantic-closure-concentrated-v3.json",
+    "config_sha256": {
+      "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+      "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+    },
+    "native_replay": "native-budget-six-semantic-coverage.json.gz",
+    "status": "FROZEN_FOR_MAJOR_REVIEW"
+  },
+  "phase2_freeze_sha256": "2db879e8744fe646caa2a44a93d89ef4b89dbbf65f5fffe4549ed4d7d21b69ed",
+  "rows": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "old_base": {
+        "git_blob": "c46d2a04fdedb7218b324791095a47cd62aa9c00",
+        "sha256": "9f2864979058658089bb9d4edd879e05a733404f3d1a6d1de06ec012a63359b8",
+        "bytes": 6156
+      },
+      "current_main": {
+        "git_blob": "b7f07f14ea89804c24431f20a08be6bba27c6dcc",
+        "sha256": "83acf7be22008c407254cc5135b8267f58526bfdcc83cdae172827b3cf840ccf",
+        "bytes": 6202
+      },
+      "pending_worktree": {
+        "sha256": "bf270a2a7281e6b594dcdfa4ac1a0e74382cffe551a8beff02f28aceea04e27d",
+        "bytes": 6320
+      },
+      "canonical_working_sha256": "bf270a2a7281e6b594dcdfa4ac1a0e74382cffe551a8beff02f28aceea04e27d",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "9f2864979058658089bb9d4edd879e05a733404f3d1a6d1de06ec012a63359b8",
+        "current_main": "83acf7be22008c407254cc5135b8267f58526bfdcc83cdae172827b3cf840ccf",
+        "pending": "83acf7be22008c407254cc5135b8267f58526bfdcc83cdae172827b3cf840ccf"
+      },
+      "main_changed_from_base": true,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "already_on_main_eol_equivalent",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "scripts/config.py",
+      "old_base": {
+        "git_blob": "d3fe719ca824a4feafac723614b3f61773aeea82",
+        "sha256": "0660232b92d0b2699acb779af701416d054c52361b0ad16f935e9e98e6bc4941",
+        "bytes": 18634
+      },
+      "current_main": {
+        "git_blob": "d3fe719ca824a4feafac723614b3f61773aeea82",
+        "sha256": "0660232b92d0b2699acb779af701416d054c52361b0ad16f935e9e98e6bc4941",
+        "bytes": 18634
+      },
+      "pending_worktree": {
+        "sha256": "63c8a3982715d6b716ef01d973a067ce3c9bf0b0a26cb8405d096e216211ce5f",
+        "bytes": 21147
+      },
+      "canonical_working_sha256": "c7889864f3693f9f28f8c4d88bb8f9e8a56564eebf533bbba105a53259cb9f94",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "0660232b92d0b2699acb779af701416d054c52361b0ad16f935e9e98e6bc4941",
+        "current_main": "0660232b92d0b2699acb779af701416d054c52361b0ad16f935e9e98e6bc4941",
+        "pending": "915476c86cfa66c05f18e41e44b46de1a899e22a5937b65dce6c96c99cd966b2"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "scripts/narrative_batch_configured.py",
+      "old_base": {
+        "git_blob": "ee651a49d9dfe681647c73524ee09a3cf63f01ed",
+        "sha256": "b72e4a9cbd1662e7bff938cab2c66fd3635e2882f21ce739aa2c1b6a98490d0b",
+        "bytes": 1603
+      },
+      "current_main": {
+        "git_blob": "ee651a49d9dfe681647c73524ee09a3cf63f01ed",
+        "sha256": "b72e4a9cbd1662e7bff938cab2c66fd3635e2882f21ce739aa2c1b6a98490d0b",
+        "bytes": 1603
+      },
+      "pending_worktree": {
+        "sha256": "123ad26d54d5c3aedb0ccfbe7cbdcbf6ddb14eb4833c3d0f539f258c588a3374",
+        "bytes": 1642
+      },
+      "canonical_working_sha256": "b72e4a9cbd1662e7bff938cab2c66fd3635e2882f21ce739aa2c1b6a98490d0b",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "b72e4a9cbd1662e7bff938cab2c66fd3635e2882f21ce739aa2c1b6a98490d0b",
+        "current_main": "b72e4a9cbd1662e7bff938cab2c66fd3635e2882f21ce739aa2c1b6a98490d0b",
+        "pending": "5ddaf7ea03047173067a40ce189867417aeb5b542fdcf61600e9e95b7618979f"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "old_base": {
+        "git_blob": "87a03d6d6a7f9328c5babbc4794a18d615b7aa95",
+        "sha256": "88a25a1854449224f20606e9949adda3649d77aa04b45f2c9cc7dfe07943b404",
+        "bytes": 12409
+      },
+      "current_main": {
+        "git_blob": "87a03d6d6a7f9328c5babbc4794a18d615b7aa95",
+        "sha256": "88a25a1854449224f20606e9949adda3649d77aa04b45f2c9cc7dfe07943b404",
+        "bytes": 12409
+      },
+      "pending_worktree": {
+        "sha256": "ae68412ea81b8439284ee65305da440ac84b5ddb69fe69a2070920489e7b8a1b",
+        "bytes": 20340
+      },
+      "canonical_working_sha256": "e0768818b6dd82020300126a2e32bbb43ece422dac369595fc4c6ec4237e83d5",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "88a25a1854449224f20606e9949adda3649d77aa04b45f2c9cc7dfe07943b404",
+        "current_main": "88a25a1854449224f20606e9949adda3649d77aa04b45f2c9cc7dfe07943b404",
+        "pending": "a664159b0b2ba287925de5d868fb7393ea54df57e98817049cdd308eaf68b8bc"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_groups.py",
+      "old_base": {
+        "git_blob": "5729f860d171611c8d78f9e2c56efa9e47670f4d",
+        "sha256": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+        "bytes": 13329
+      },
+      "current_main": {
+        "git_blob": "5729f860d171611c8d78f9e2c56efa9e47670f4d",
+        "sha256": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+        "bytes": 13329
+      },
+      "pending_worktree": {
+        "sha256": "c2ced013b8823695d0a16f447e36848dcd060a2c344de322f3b425b296236402",
+        "bytes": 29375
+      },
+      "canonical_working_sha256": "a48ba80d7969f6b67d64c9992e1affed7885204304f9aa76e56b1f678d7df8d8",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+        "current_main": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+        "pending": "c2ced013b8823695d0a16f447e36848dcd060a2c344de322f3b425b296236402"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_candidates.py",
+      "old_base": {
+        "git_blob": "8306acbe64b4d09829dbb4052d7daa3650851af3",
+        "sha256": "ff286285f0d90a0a9de3683cc633d6139a4f7f49cf8a4d99f64903a966b716b6",
+        "bytes": 10222
+      },
+      "current_main": {
+        "git_blob": "8306acbe64b4d09829dbb4052d7daa3650851af3",
+        "sha256": "ff286285f0d90a0a9de3683cc633d6139a4f7f49cf8a4d99f64903a966b716b6",
+        "bytes": 10222
+      },
+      "pending_worktree": {
+        "sha256": "aec5e2d22c942064dea64b805e09d6b835c516af16d931e7218366e5b8ff5fa4",
+        "bytes": 10366
+      },
+      "canonical_working_sha256": "1374ccd3c74554cb742fe974604b113496f321f507001e8acb96d8b0bed5ef88",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "ff286285f0d90a0a9de3683cc633d6139a4f7f49cf8a4d99f64903a966b716b6",
+        "current_main": "ff286285f0d90a0a9de3683cc633d6139a4f7f49cf8a4d99f64903a966b716b6",
+        "pending": "aec5e2d22c942064dea64b805e09d6b835c516af16d931e7218366e5b8ff5fa4"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "old_base": {
+        "git_blob": "2825ff1e1deaeac7221d9c91224f33d5235ad048",
+        "sha256": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+        "bytes": 80031
+      },
+      "current_main": {
+        "git_blob": "2825ff1e1deaeac7221d9c91224f33d5235ad048",
+        "sha256": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+        "bytes": 80031
+      },
+      "pending_worktree": {
+        "sha256": "400ae1cd3ff3a789d307c8fc85de09839a3f9fe6cbed1d5572699535b1598b68",
+        "bytes": 81107
+      },
+      "canonical_working_sha256": "e95bde99423eebbc209d81bed836e7d0582a116f6cd5b0669583a86be062f711",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+        "current_main": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+        "pending": "400ae1cd3ff3a789d307c8fc85de09839a3f9fe6cbed1d5572699535b1598b68"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "old_base": {
+        "git_blob": "10a5410a462d23ccf3620bc6481592d166e3433d",
+        "sha256": "527a33be9e94514c55241cfeb03c4e4279196781e955e9483c27055445fa67f7",
+        "bytes": 5404
+      },
+      "current_main": {
+        "git_blob": "10a5410a462d23ccf3620bc6481592d166e3433d",
+        "sha256": "527a33be9e94514c55241cfeb03c4e4279196781e955e9483c27055445fa67f7",
+        "bytes": 5404
+      },
+      "pending_worktree": {
+        "sha256": "48083f0bd7c6862744667597a14818e20ef02979f1ec4615bec5670cb1f77f47",
+        "bytes": 6983
+      },
+      "canonical_working_sha256": "c6840d8772681f88ba99207686dedad85a4d58615a36eb4b136a5bc1213b0916",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "527a33be9e94514c55241cfeb03c4e4279196781e955e9483c27055445fa67f7",
+        "current_main": "527a33be9e94514c55241cfeb03c4e4279196781e955e9483c27055445fa67f7",
+        "pending": "a7c18dd72b8c706366e7e48d0bbb3ccf6627843fdaa989f9ee5abf873fc95b2b"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_group_candidates.py",
+      "old_base": {
+        "git_blob": "96dbfd4e3e795b9a02060a873593d11fad4fd0b6",
+        "sha256": "c1915ce95439aac90757129cb134b20fff7150331467e6b367952f9c02785569",
+        "bytes": 35824
+      },
+      "current_main": {
+        "git_blob": "96dbfd4e3e795b9a02060a873593d11fad4fd0b6",
+        "sha256": "c1915ce95439aac90757129cb134b20fff7150331467e6b367952f9c02785569",
+        "bytes": 35824
+      },
+      "pending_worktree": {
+        "sha256": "729b77bb92655fd05945980331f68e5a2f3701a1cbece7b26e4c0fc683590e7f",
+        "bytes": 35968
+      },
+      "canonical_working_sha256": "cface6b409883958142aa1e3906c5d7abdcb1ea6e4a164a85491725a8ec5b04b",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "c1915ce95439aac90757129cb134b20fff7150331467e6b367952f9c02785569",
+        "current_main": "c1915ce95439aac90757129cb134b20fff7150331467e6b367952f9c02785569",
+        "pending": "729b77bb92655fd05945980331f68e5a2f3701a1cbece7b26e4c0fc683590e7f"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_semantic_coverage.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca",
+        "bytes": 5944
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "92ac400cc91f08b47c9706f067e69ef52724b487a02734e2f43984df5711be00"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_stage_assertions.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "a7efe34bd99533302a20cfeee0c401ed77c225bfba95a203a8c4c3b1f08aea73",
+        "bytes": 6885
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "a7efe34bd99533302a20cfeee0c401ed77c225bfba95a203a8c4c3b1f08aea73"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "tests/integration/test_w04_novelty_finalize.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "967edc28d7e65b251fde9074d724a4c51a350308a0067eca181890df79fc2db1",
+        "bytes": 8434
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "50c4ca15ec3cdd1b668646394efebbcac9ace6c7a061393fd7497fd2aeb5df63"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true
+    },
+    {
+      "path": "tests/integration/test_w04_quality_band_budget.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "6359f12b4229fd624a3902eaeee393dca5802a62ca25a29811c6e69e6cf4361a",
+        "bytes": 6502
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "cb72af8a66904e75978a3e815227d3514185906cbf22927f7d86eb4ab0ae5055"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true
+    },
+    {
+      "path": "tests/integration/test_w04_semantic_budget_finalize.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "fb55bfb43c043b02446d24c709dcb0e4264c59fa419bdd15588d0f03e3ce1a8c",
+        "bytes": 1876
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "86f78781317076ab63a98191c9a8676c7173ffc598443e48d4ac0f71f08137c3"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "tests/unit/test_ci_push_selection.py",
+      "old_base": {
+        "git_blob": "d6d4cf1b11b909fefdb4d2aaa62701295ca2132e",
+        "sha256": "37e848b78ea8957bd678edd90a2016b7fd26404d6b4dc655eb106413f308be81",
+        "bytes": 10779
+      },
+      "current_main": {
+        "git_blob": "4ed2b8b49403ec106f0a1b3472a9c437771e3b06",
+        "sha256": "698b28a86c41ea554f3212d425de8e7913ce457469f6f0d1a445de1027670569",
+        "bytes": 12215
+      },
+      "pending_worktree": {
+        "sha256": "85439972e1ed96678f6eebf5fe9e6c382ae7e517dad26eb31ed7a3f5eb9db9f0",
+        "bytes": 11557
+      },
+      "canonical_working_sha256": "2919eb26b2a77c8c1137bfcdde22cdd11f48169c7af387e6f78d354767da87ca",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "37e848b78ea8957bd678edd90a2016b7fd26404d6b4dc655eb106413f308be81",
+        "current_main": "698b28a86c41ea554f3212d425de8e7913ce457469f6f0d1a445de1027670569",
+        "pending": "3e166e03cb7bdfd31bcd65c66e9dfedfc14f90f5fa9c37fd3e994d465f601b00"
+      },
+      "main_changed_from_base": true,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "both_sides_changed_requires_three_way_review",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "tests/unit/test_narrative_business_recall.py",
+      "old_base": {
+        "git_blob": "5cf3ecc61948c8ede3200b6a78c4c8f2c5612b9e",
+        "sha256": "cadc2af6e962ee8977982c0f5334c365456bd6046a9b78cd9c67822e5d671ef3",
+        "bytes": 18985
+      },
+      "current_main": {
+        "git_blob": "5cf3ecc61948c8ede3200b6a78c4c8f2c5612b9e",
+        "sha256": "cadc2af6e962ee8977982c0f5334c365456bd6046a9b78cd9c67822e5d671ef3",
+        "bytes": 18985
+      },
+      "pending_worktree": {
+        "sha256": "9714951af67a77113969ee4794b6eb1fddf8d6623db1009c662ac228cdefe93e",
+        "bytes": 19321
+      },
+      "canonical_working_sha256": "a64750af0a0c53e45b034ce7cef7054195fb52a764817e27bf3069b3864605c8",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "cadc2af6e962ee8977982c0f5334c365456bd6046a9b78cd9c67822e5d671ef3",
+        "current_main": "cadc2af6e962ee8977982c0f5334c365456bd6046a9b78cd9c67822e5d671ef3",
+        "pending": "ff7364eecdab09a827ef422a63eb3c1bcb2bbc36469faf795f607bfe3b6022b8"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "tests/unit/test_narrative_model_config.py",
+      "old_base": {
+        "git_blob": "a5a4c816d88dfae7e573c0414eb8cb6ca75364b0",
+        "sha256": "f3f27768425ab76fb69ade0c164da800a5cf1c1cd440578fec6275dd654d886d",
+        "bytes": 13596
+      },
+      "current_main": {
+        "git_blob": "a5a4c816d88dfae7e573c0414eb8cb6ca75364b0",
+        "sha256": "f3f27768425ab76fb69ade0c164da800a5cf1c1cd440578fec6275dd654d886d",
+        "bytes": 13596
+      },
+      "pending_worktree": {
+        "sha256": "d6460baf85f3ab69ba75aecbd64719a30823afcc26df150d44b778b74635f8a6",
+        "bytes": 13877
+      },
+      "canonical_working_sha256": "59475efbaacfa68383bc08f6e07118ed66ca2a30b47fba06a716281760e627f0",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "f3f27768425ab76fb69ade0c164da800a5cf1c1cd440578fec6275dd654d886d",
+        "current_main": "f3f27768425ab76fb69ade0c164da800a5cf1c1cd440578fec6275dd654d886d",
+        "pending": "633d6a39ddcdd53c2c32489c3791e30177c7505ffb8189f5c6a74c3a10cc2b2a"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "tests/unit/test_w04_llm_config_scope.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "0be78f38edb81ea1c4c475dd1b6c5479588de05328ae62b81fafbafc02612cc8",
+        "bytes": 14007
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "3c03631fe7e6dec8d905429934988d4f6dda922ed343e51a77917c100876220f"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "tests/unit/test_w04_narrative_semantics.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "03e83d6675c3e14315624e04eabea353f0eac5394112a0bc3efdede8352cda3d",
+        "bytes": 116101
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "47aadb0a2a32b65f6e21f287f4d8cc2e5f34cdb8b6400c2a3183407b6a137510"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "tests/unit/test_w04_novelty_budget.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "fe68f44a8ac90e63a92d60b1ce8b0ae94f1f5feecba118b86f1a335d39615bbf",
+        "bytes": 3953
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "269ae73edef2b176c3c92499bea9d1838a550429ce8f8d80dcee91ee47c3badc"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true
+    },
+    {
+      "path": "tests/unit/test_w04_selector_version_dispatch.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "d5409951a8f172f2f25f32cb7a40f0fcac66a789bea2a173e95cc31979fcb296",
+        "bytes": 4963
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "55364737d94ac57a5db2acf3143d3a07b81869e578f2f5b36052f5c12d761d5f"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "tests/unit/test_w04_semantic_budget.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "7eb30ac41c05094958ee05479b4de039a777f7f1c546366b904073f0806f23e1",
+        "bytes": 12181
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "6b15be2178863e57485d8b6881abab3ecef2394bb5001823713bf21d4788c84a"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true
+    },
+    {
+      "path": "tests/unit/test_w04_stage_predicate_scope.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "32e02c1a902ff2ca64cbf83b0ac46b2603d25c4cd43f07c2edd5246c86a4feab",
+        "bytes": 4386
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "1a5eaacdd30a838563acb9b503beb0b9d2cf02759fe5634be5da02fc788ab45d"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "tests/unit/test_w04_stage_public_assertions.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "c8a31dc605456c93b3c7219a9920a9552eaf0cfd9c2afc0ec3bdc8004c44771b",
+        "bytes": 6211
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "c8a31dc605456c93b3c7219a9920a9552eaf0cfd9c2afc0ec3bdc8004c44771b"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    },
+    {
+      "path": "tools/changed_unit_tests.py",
+      "old_base": {
+        "git_blob": "caeab7371ff7f0a9b399b0e7515925d9445280b2",
+        "sha256": "2527cfa7acb25bdf305a701e21a8894c17f7579d0a55b8d050d4803ba953108a",
+        "bytes": 7661
+      },
+      "current_main": {
+        "git_blob": "13628ea5dddfc69aac36c25752618d4a1ce91f17",
+        "sha256": "70f043361480b4c5a751814dded3d1f14cd01a5f0b64a222513113f2ffe6dd49",
+        "bytes": 7677
+      },
+      "pending_worktree": {
+        "sha256": "a9b509f974b8556efdf1380bf0e723eb2f0e5aeebc452e65d51230ea93d0361c",
+        "bytes": 7839
+      },
+      "canonical_working_sha256": "a9b509f974b8556efdf1380bf0e723eb2f0e5aeebc452e65d51230ea93d0361c",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "2527cfa7acb25bdf305a701e21a8894c17f7579d0a55b8d050d4803ba953108a",
+        "current_main": "70f043361480b4c5a751814dded3d1f14cd01a5f0b64a222513113f2ffe6dd49",
+        "pending": "70f043361480b4c5a751814dded3d1f14cd01a5f0b64a222513113f2ffe6dd49"
+      },
+      "main_changed_from_base": true,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "already_on_main_eol_equivalent",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null
+    }
+  ],
+  "integrity_before": {
+    "canonical": {
+      "head": "d75f0d42e0fc11caa50d5030d16fa238c0e02d55",
+      "status_sha256": "129655332830e7fa42753a6b3a125985f2e7470272364d97d16a6e9e8e15bf1a",
+      "status": " M .planning/w06-cross-period-acquisition/run_final_matrix.py\n?? .planning/w04-root-novelty-recall/phase2-independent/manifest.json\n?? .planning/w04-root-novelty-recall/phase2-independent/probe.py\n?? .planning/w04-root-novelty-recall/phase2-independent/report.json\n?? .planning/w04-root-novelty-recall/phase2-independent/report.md\n?? .planning/w04-root-novelty-recall/phase2-independent/witness-inspection.json\n?? .planning/w04-root-novelty-recall/phase2-independent/witness_inspection.py\n?? .planning/w04-selector-integration/collect-manifest.py\n?? .planning/w04-selector-integration/findings.md\n?? .planning/w04-selector-integration/progress.md\n?? .planning/w04-selector-integration/task_plan.md\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/before.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/git-diff-check.txt\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/git-diff-stat.txt\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/git-head.txt\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/git-product.txt\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/git-status.txt\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/golden.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/golden.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/green.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/green.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/green.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/lint.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/lint.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/manifest.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/product-freeze.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/red.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/author_freeze.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/author_tests.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/baseline.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding-green.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding-green.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding-red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding-red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding_implement.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding_tests.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/business-red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/business-red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final2.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final2.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final2.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/diff-check-final.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/diff-check.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/diff-stat-final.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/diff-stat.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/final-focused-green.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/final-focused-green.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/final_author_freeze.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/focused-green.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/focused-green.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/implement.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/lint-final.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/lint.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/before.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/concentrated.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/concentrated.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/concentrated.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/diff-check.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/finalize.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/implement.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/lint.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/lint.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/manifest.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/red.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/report.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/report.md\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/run.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/setup.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/tracked-product-v2.patch\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/manifest-final.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/manifest.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/product-freeze-final.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/product-freeze.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/report-final.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/report-final.md\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/report.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/report.md\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/run_focused.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema-type-red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema-type-red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema-types-red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema-types-red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema_type_tests.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema_types_final.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/status-final.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/status.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/tracked-product-final.patch\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/tracked-product.patch\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/finalize_et.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/freeze_combined.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/implement_et.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/manifest.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/product-freeze-v2.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/product-freeze.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/report.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/report.md\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/run_et.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/run_ff.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/seal.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/setup_et.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/write_et_tests.py\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/manifest.json\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/report.json\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/report.md\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/retest-result.json\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/retest.stderr.txt\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/retest.stdout.txt\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/run_retest.py\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/scoped_receipts.py\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/test_unknown_control.py\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/trace.jsonl\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/recall-checkpoint-publication.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/root-matrix-final-usage-v2/execution.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/root-matrix-final-usage-v2/original-report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/root-matrix-final-usage-v2/stderr.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/root-matrix-final-usage-v2/stdout.log\n",
+      "index_sha256": "555e03e6cc7af3d357b40fe27b9da9ec17122a09dac0f68c9fe1b44d7e922ba1"
+    },
+    "old": {
+      "head": "35a9a64591169bf217f05e87aba633dc4204033a",
+      "status_sha256": "c9348b3c9dcecda0f3a9dddae57eb5d9c64838c6e436dc8ee824db6c35faaea1",
+      "status": " M .github/workflows/ci.yml\n M docs/plans/cross-market-rf-e2e-2026-10-08/findings.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/findings.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/progress.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/task_plan.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/progress.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md\n M docs/plans/narrative-evidence-pilot-2026-09-26/findings.md\n M docs/plans/narrative-evidence-pilot-2026-09-26/progress.md\n M docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md\n M scripts/config.py\n M scripts/narrative_batch_configured.py\n M src/company_wiki/source_catalog/narrative_budget.py\n M src/company_wiki/source_catalog/narrative_business_groups.py\n M src/company_wiki/source_catalog/narrative_candidates.py\n M src/company_wiki/source_catalog/narrative_evidence.py\n M src/company_wiki/source_catalog/narrative_finalize.py\n M src/company_wiki/source_catalog/narrative_group_candidates.py\n M tests/unit/test_ci_push_selection.py\n M tests/unit/test_narrative_business_recall.py\n M tests/unit/test_narrative_model_config.py\n M tools/changed_unit_tests.py\n?? .planning/w04-g2-config/baseline.json\n?? .planning/w04-g2-config/bounded_manifest.json\n?? .planning/w04-g2-config/diff_check.json\n?? .planning/w04-g2-config/diff_check.log\n?? .planning/w04-g2-config/findings.md\n?? .planning/w04-g2-config/green.json\n?? .planning/w04-g2-config/green.log\n?? .planning/w04-g2-config/green_final.json\n?? .planning/w04-g2-config/green_final.log\n?? .planning/w04-g2-config/handoff.json\n?? .planning/w04-g2-config/handoff.md\n?? .planning/w04-g2-config/lint.json\n?? .planning/w04-g2-config/lint.log\n?? .planning/w04-g2-config/progress.md\n?? .planning/w04-g2-config/red.json\n?? .planning/w04-g2-config/red.log\n?? .planning/w04-g2-config/red_cli.json\n?? .planning/w04-g2-config/red_cli.log\n?? .planning/w04-g2-config/sparse_checkout_repair.json\n?? .planning/w04-g2-config/task_plan.md\n?? .planning/w04-g2-config/tracked_changes.patch\n?? .planning/w04-root-novelty-recall/baseline.json\n?? .planning/w04-root-novelty-recall/behavior-red-formal.json\n?? .planning/w04-root-novelty-recall/behavior-red-formal.log\n?? .planning/w04-root-novelty-recall/behavior-red.json\n?? .planning/w04-root-novelty-recall/behavior-red.log\n?? .planning/w04-root-novelty-recall/concentrated-attempt1.json\n?? .planning/w04-root-novelty-recall/concentrated-attempt1.log\n?? .planning/w04-root-novelty-recall/evidence-manifest.json\n?? .planning/w04-root-novelty-recall/findings.md\n?? .planning/w04-root-novelty-recall/handoff.json\n?? .planning/w04-root-novelty-recall/handoff.md\n?? .planning/w04-root-novelty-recall/mypy-attempt1.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/actual-budget-diagnosis.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt1.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt1.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt2.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt2.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/evidence-manifest.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/findings.md\n?? .planning/w04-root-novelty-recall/phase2-real-recall/handoff.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/handoff.md\n?? .planning/w04-root-novelty-recall/phase2-real-recall/mypy-attempt1.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/mypy-attempt2.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/mypy-attempt3.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/progress.md\n?? .planning/w04-root-novelty-recall/phase2-real-recall/quality-red.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/quality-red.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/reserved-branch-red.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/reserved-branch-red.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/ruff-attempt1.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/ruff-attempt2.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/ruff-attempt3.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/task_plan.md\n?? .planning/w04-root-novelty-recall/product-freeze.json\n?? .planning/w04-root-novelty-recall/progress.md\n?? .planning/w04-root-novelty-recall/ruff-attempt1.log\n?? .planning/w04-root-novelty-recall/task_plan.md\n?? .planning/w04-root-selector-recall/BUDGET_INTERFACE.md\n?? .planning/w04-root-selector-recall/budget-concentrated.log\n?? .planning/w04-root-selector-recall/budget-green.log\n?? .planning/w04-root-selector-recall/budget-red.log\n?? .planning/w04-root-selector-recall/config-binding-concentrated.log\n?? .planning/w04-root-selector-recall/coverage-red.json\n?? .planning/w04-root-selector-recall/coverage-red.log\n?? .planning/w04-root-selector-recall/current-stage-concentrated.log\n?? .planning/w04-root-selector-recall/current-stage-red.log\n?? .planning/w04-root-selector-recall/engineering-receipt.json\n?? .planning/w04-root-selector-recall/findings.md\n?? .planning/w04-root-selector-recall/intake.json\n?? .planning/w04-root-selector-recall/native-budget-six-assertion-closure-storage.json\n?? .planning/w04-root-selector-recall/native-budget-six-assertion-closure.json\n?? .planning/w04-root-selector-recall/native-budget-six-assertion-closure.json.gz\n?? .planning/w04-root-selector-recall/native-budget-six-assertion-closure.log\n?? .planning/w04-root-selector-recall/native-budget-six-current-stage-storage.json\n?? .planning/w04-root-selector-recall/native-budget-six-current-stage.json.gz\n?? .planning/w04-root-selector-recall/native-budget-six-current-stage.log\n?? .planning/w04-root-selector-recall/native-budget-six-semantic-coverage-storage.json\n?? .planning/w04-root-selector-recall/native-budget-six-semantic-coverage.json\n?? .planning/w04-root-selector-recall/native-budget-six-semantic-coverage.json.gz\n?? .planning/w04-root-selector-recall/native-budget-six-semantic-coverage.log\n?? .planning/w04-root-selector-recall/native-budget-six.json.gz\n?? .planning/w04-root-selector-recall/native-budget-six.log\n?? .planning/w04-root-selector-recall/native-budget-storage.json\n?? .planning/w04-root-selector-recall/native_assertion_replay.py\n?? .planning/w04-root-selector-recall/native_budget_probe.py\n?? .planning/w04-root-selector-recall/native_coverage_replay.py\n?? .planning/w04-root-selector-recall/pre-main-doc-sync.json\n?? .planning/w04-root-selector-recall/predicate-green.json\n?? .planning/w04-root-selector-recall/predicate-green.log\n?? .planning/w04-root-selector-recall/predicate-red.json\n?? .planning/w04-root-selector-recall/predicate-red.log\n?? .planning/w04-root-selector-recall/progress.md\n?? .planning/w04-root-selector-recall/public-assertion-green-attempt1.json\n?? .planning/w04-root-selector-recall/public-assertion-green-attempt1.log\n?? .planning/w04-root-selector-recall/public-assertion-red.json\n?? .planning/w04-root-selector-recall/public-assertion-red.log\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated-v2.json\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated-v2.log\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated-v3.json\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated-v3.log\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated.json\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated.log\n?? .planning/w04-root-selector-recall/semantic-closure-ruff.json\n?? .planning/w04-root-selector-recall/semantic-coverage-freeze.json\n?? .planning/w04-root-selector-recall/task_plan.md\n?? .planning/w04-wp02/findings.md\n?? .planning/w04-wp02/progress.md\n?? .planning/w04-wp02/task_plan.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/G2_LLM_CONFIG_INTERFACE_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP02_SELECTOR_INTERFACE_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP02_STAGE_CLASSIFICATION_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP06_FINANCIAL_WINDOW_INTERFACE_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/execute.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/failure-resume.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/failure.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/finalize.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/resume.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/source-after-final.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/source-before-resume.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/source-before.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/HANDOFF.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/baseline.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/cleanup-command-error.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/compact-observer-repair.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/final-git-observation.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/final-manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/handoff.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-resume-state.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-final-focused-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-final-focused-storage.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-final-focused.json.gz\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-final-focused.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-key-vectors.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-old-annual-entrypoint.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-replay-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-replay.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-replay.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-resume-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-resume.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native_stage_final_probe.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native_stage_probe.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native_stage_probe_resume.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/owned-temp-final.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/owned-temp.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/sealed-evidence-verification.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/space-before-cleanup.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-concentrated-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-concentrated.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-final-concentrated-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-final-concentrated.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-followup-check-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-followup-check.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-followup-red-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-followup-red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-incremental-leaf.diff\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-initial-64ba.py.txt\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-red-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-scoped-negation-gap.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/HANDOFF.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/baseline.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/final-git-observation.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/final-manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/handoff.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/leaf-product.diff\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-budget-owner-handoff-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-budget-owner-handoff.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-budget-owner-handoff.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-candidate-trace-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-candidate-trace.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-candidate-trace.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-semantic-replay-v080-final.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-slide7-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-slide7-replay.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-slide7-replay.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_budget_handoff_probe.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_candidate_trace.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_semantic_probe.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_semantic_probe_v080.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_semantic_probe_v080_current.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_semantic_probe_v080_final.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_slide7_probe.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/primary-finding-disposition.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-concentrated-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-concentrated-final-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-concentrated-final.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-concentrated.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-red-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/test-owned-temp-final.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/test-owned-temp.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-closure/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-closure/review.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-closure/review.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-review/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-review/review.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-review/review.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g4-authoring-method/artifact-manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g4-authoring-method/review.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g4-authoring-method/review.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/llm-config-major/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/llm-config-major/review.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/llm-config-major/review.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/ast.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/probe.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/probe.ps1\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/corrected-public-interpretation.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-probe-corrected.log.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-probe-corrected.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-probe-initial.log.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-probe-initial.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-public-fixture-failed.log.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-public-fixture-failed.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-public-unit.log.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-public-unit.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-coverage/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-coverage/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-coverage/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/slide7-extraction-root-cause/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/slide7-extraction-root-cause/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/slide7-extraction-root-cause/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/temp-preservation-plan/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/temp-preservation-plan/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/temp-preservation-plan/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/current-command-diagnostics.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/commit.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/commit.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/fast-forward.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/fast-forward.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/push.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/push.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/green.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/green.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/lint-fixed.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/lint-fixed.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/lint.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/lint.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-green.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-green.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-lint.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-lint.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-red.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/red-native.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/red-native.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/red.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/canonical-wip-before.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-commit.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-commit.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-fast-forward.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-fast-forward.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-push.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-push.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-stage.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-stage.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/commit.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/commit.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/fast-forward.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/fast-forward.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/fetch.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/fetch.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/install-preflight.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/installed-forecast-help.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/installed-forecast-help.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/installed-help.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/installed.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/precommit-inputs.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/published.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/push.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/push.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/stage.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/stage.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/amendment.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/intake-route-green.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/intake-route-green.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/leaf-intake.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/red.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/restoration-red.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/restoration-red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/sentinel-sync.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/artifact-manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/findings.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/policy-decision.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/progress.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/task_plan.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/w05-audit-card-readiness/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/w05-audit-card-readiness/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/w05-audit-card-readiness/report.md\n?? src/company_wiki/source_catalog/narrative_semantic_coverage.py\n?? src/company_wiki/source_catalog/narrative_stage_assertions.py\n?? tests/integration/test_w04_novelty_finalize.py\n?? tests/integration/test_w04_quality_band_budget.py\n?? tests/integration/test_w04_semantic_budget_finalize.py\n?? tests/unit/test_w04_llm_config_scope.py\n?? tests/unit/test_w04_narrative_semantics.py\n?? tests/unit/test_w04_novelty_budget.py\n?? tests/unit/test_w04_selector_version_dispatch.py\n?? tests/unit/test_w04_semantic_budget.py\n?? tests/unit/test_w04_stage_predicate_scope.py\n?? tests/unit/test_w04_stage_public_assertions.py\n",
+      "index_sha256": "92871d2dec1c3d18766eb2a9e5594151caf90ac2235dd95d687712886b8247f5"
+    }
+  },
+  "integrity_after": {
+    "canonical": {
+      "head": "d75f0d42e0fc11caa50d5030d16fa238c0e02d55",
+      "status_sha256": "129655332830e7fa42753a6b3a125985f2e7470272364d97d16a6e9e8e15bf1a",
+      "status": " M .planning/w06-cross-period-acquisition/run_final_matrix.py\n?? .planning/w04-root-novelty-recall/phase2-independent/manifest.json\n?? .planning/w04-root-novelty-recall/phase2-independent/probe.py\n?? .planning/w04-root-novelty-recall/phase2-independent/report.json\n?? .planning/w04-root-novelty-recall/phase2-independent/report.md\n?? .planning/w04-root-novelty-recall/phase2-independent/witness-inspection.json\n?? .planning/w04-root-novelty-recall/phase2-independent/witness_inspection.py\n?? .planning/w04-selector-integration/collect-manifest.py\n?? .planning/w04-selector-integration/findings.md\n?? .planning/w04-selector-integration/progress.md\n?? .planning/w04-selector-integration/task_plan.md\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/before.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/git-diff-check.txt\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/git-diff-stat.txt\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/git-head.txt\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/git-product.txt\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/git-status.txt\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/golden.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/golden.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/green.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/green.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/green.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/lint.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/lint.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/manifest.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/product-freeze.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/et/red.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/author_freeze.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/author_tests.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/baseline.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding-green.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding-green.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding-red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding-red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding_implement.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/binding_tests.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/business-red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/business-red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final2.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final2.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated-final2.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/concentrated.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/diff-check-final.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/diff-check.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/diff-stat-final.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/diff-stat.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/final-focused-green.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/final-focused-green.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/final_author_freeze.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/focused-green.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/focused-green.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/implement.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/lint-final.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/lint.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/before.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/concentrated.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/concentrated.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/concentrated.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/diff-check.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/finalize.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/implement.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/lint.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/lint.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/manifest.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/red.xml\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/report.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/report.md\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/run.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/setup.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/malformed-usage-repair/tracked-product-v2.patch\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/manifest-final.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/manifest.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/product-freeze-final.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/product-freeze.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/report-final.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/report-final.md\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/report.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/report.md\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/run_focused.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema-type-red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema-type-red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema-types-red.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema-types-red.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema_type_tests.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/schema_types_final.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/status-final.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/status.log\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/tracked-product-final.patch\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/ff/tracked-product.patch\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/finalize_et.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/freeze_combined.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/implement_et.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/manifest.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/product-freeze-v2.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/product-freeze.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/report.json\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/report.md\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/run_et.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/run_ff.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/seal.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/setup_et.py\n?? .planning/w06-cross-period-acquisition/cutoff-implementation/write_et_tests.py\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/manifest.json\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/report.json\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/report.md\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/retest-result.json\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/retest.stderr.txt\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/retest.stdout.txt\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/run_retest.py\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/scoped_receipts.py\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/test_unknown_control.py\n?? .planning/w06-cross-period-acquisition/cutoff-independent/retest/trace.jsonl\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/recall-checkpoint-publication.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/root-matrix-final-usage-v2/execution.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/root-matrix-final-usage-v2/original-report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/root-matrix-final-usage-v2/stderr.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/root-matrix-final-usage-v2/stdout.log\n",
+      "index_sha256": "555e03e6cc7af3d357b40fe27b9da9ec17122a09dac0f68c9fe1b44d7e922ba1"
+    },
+    "old": {
+      "head": "35a9a64591169bf217f05e87aba633dc4204033a",
+      "status_sha256": "c9348b3c9dcecda0f3a9dddae57eb5d9c64838c6e436dc8ee824db6c35faaea1",
+      "status": " M .github/workflows/ci.yml\n M docs/plans/cross-market-rf-e2e-2026-10-08/findings.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/findings.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/progress.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/task_plan.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/progress.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md\n M docs/plans/narrative-evidence-pilot-2026-09-26/findings.md\n M docs/plans/narrative-evidence-pilot-2026-09-26/progress.md\n M docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md\n M scripts/config.py\n M scripts/narrative_batch_configured.py\n M src/company_wiki/source_catalog/narrative_budget.py\n M src/company_wiki/source_catalog/narrative_business_groups.py\n M src/company_wiki/source_catalog/narrative_candidates.py\n M src/company_wiki/source_catalog/narrative_evidence.py\n M src/company_wiki/source_catalog/narrative_finalize.py\n M src/company_wiki/source_catalog/narrative_group_candidates.py\n M tests/unit/test_ci_push_selection.py\n M tests/unit/test_narrative_business_recall.py\n M tests/unit/test_narrative_model_config.py\n M tools/changed_unit_tests.py\n?? .planning/w04-g2-config/baseline.json\n?? .planning/w04-g2-config/bounded_manifest.json\n?? .planning/w04-g2-config/diff_check.json\n?? .planning/w04-g2-config/diff_check.log\n?? .planning/w04-g2-config/findings.md\n?? .planning/w04-g2-config/green.json\n?? .planning/w04-g2-config/green.log\n?? .planning/w04-g2-config/green_final.json\n?? .planning/w04-g2-config/green_final.log\n?? .planning/w04-g2-config/handoff.json\n?? .planning/w04-g2-config/handoff.md\n?? .planning/w04-g2-config/lint.json\n?? .planning/w04-g2-config/lint.log\n?? .planning/w04-g2-config/progress.md\n?? .planning/w04-g2-config/red.json\n?? .planning/w04-g2-config/red.log\n?? .planning/w04-g2-config/red_cli.json\n?? .planning/w04-g2-config/red_cli.log\n?? .planning/w04-g2-config/sparse_checkout_repair.json\n?? .planning/w04-g2-config/task_plan.md\n?? .planning/w04-g2-config/tracked_changes.patch\n?? .planning/w04-root-novelty-recall/baseline.json\n?? .planning/w04-root-novelty-recall/behavior-red-formal.json\n?? .planning/w04-root-novelty-recall/behavior-red-formal.log\n?? .planning/w04-root-novelty-recall/behavior-red.json\n?? .planning/w04-root-novelty-recall/behavior-red.log\n?? .planning/w04-root-novelty-recall/concentrated-attempt1.json\n?? .planning/w04-root-novelty-recall/concentrated-attempt1.log\n?? .planning/w04-root-novelty-recall/evidence-manifest.json\n?? .planning/w04-root-novelty-recall/findings.md\n?? .planning/w04-root-novelty-recall/handoff.json\n?? .planning/w04-root-novelty-recall/handoff.md\n?? .planning/w04-root-novelty-recall/mypy-attempt1.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/actual-budget-diagnosis.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt1.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt1.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt2.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt2.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/evidence-manifest.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/findings.md\n?? .planning/w04-root-novelty-recall/phase2-real-recall/handoff.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/handoff.md\n?? .planning/w04-root-novelty-recall/phase2-real-recall/mypy-attempt1.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/mypy-attempt2.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/mypy-attempt3.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/progress.md\n?? .planning/w04-root-novelty-recall/phase2-real-recall/quality-red.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/quality-red.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/reserved-branch-red.json\n?? .planning/w04-root-novelty-recall/phase2-real-recall/reserved-branch-red.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/ruff-attempt1.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/ruff-attempt2.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/ruff-attempt3.log\n?? .planning/w04-root-novelty-recall/phase2-real-recall/task_plan.md\n?? .planning/w04-root-novelty-recall/product-freeze.json\n?? .planning/w04-root-novelty-recall/progress.md\n?? .planning/w04-root-novelty-recall/ruff-attempt1.log\n?? .planning/w04-root-novelty-recall/task_plan.md\n?? .planning/w04-root-selector-recall/BUDGET_INTERFACE.md\n?? .planning/w04-root-selector-recall/budget-concentrated.log\n?? .planning/w04-root-selector-recall/budget-green.log\n?? .planning/w04-root-selector-recall/budget-red.log\n?? .planning/w04-root-selector-recall/config-binding-concentrated.log\n?? .planning/w04-root-selector-recall/coverage-red.json\n?? .planning/w04-root-selector-recall/coverage-red.log\n?? .planning/w04-root-selector-recall/current-stage-concentrated.log\n?? .planning/w04-root-selector-recall/current-stage-red.log\n?? .planning/w04-root-selector-recall/engineering-receipt.json\n?? .planning/w04-root-selector-recall/findings.md\n?? .planning/w04-root-selector-recall/intake.json\n?? .planning/w04-root-selector-recall/native-budget-six-assertion-closure-storage.json\n?? .planning/w04-root-selector-recall/native-budget-six-assertion-closure.json\n?? .planning/w04-root-selector-recall/native-budget-six-assertion-closure.json.gz\n?? .planning/w04-root-selector-recall/native-budget-six-assertion-closure.log\n?? .planning/w04-root-selector-recall/native-budget-six-current-stage-storage.json\n?? .planning/w04-root-selector-recall/native-budget-six-current-stage.json.gz\n?? .planning/w04-root-selector-recall/native-budget-six-current-stage.log\n?? .planning/w04-root-selector-recall/native-budget-six-semantic-coverage-storage.json\n?? .planning/w04-root-selector-recall/native-budget-six-semantic-coverage.json\n?? .planning/w04-root-selector-recall/native-budget-six-semantic-coverage.json.gz\n?? .planning/w04-root-selector-recall/native-budget-six-semantic-coverage.log\n?? .planning/w04-root-selector-recall/native-budget-six.json.gz\n?? .planning/w04-root-selector-recall/native-budget-six.log\n?? .planning/w04-root-selector-recall/native-budget-storage.json\n?? .planning/w04-root-selector-recall/native_assertion_replay.py\n?? .planning/w04-root-selector-recall/native_budget_probe.py\n?? .planning/w04-root-selector-recall/native_coverage_replay.py\n?? .planning/w04-root-selector-recall/pre-main-doc-sync.json\n?? .planning/w04-root-selector-recall/predicate-green.json\n?? .planning/w04-root-selector-recall/predicate-green.log\n?? .planning/w04-root-selector-recall/predicate-red.json\n?? .planning/w04-root-selector-recall/predicate-red.log\n?? .planning/w04-root-selector-recall/progress.md\n?? .planning/w04-root-selector-recall/public-assertion-green-attempt1.json\n?? .planning/w04-root-selector-recall/public-assertion-green-attempt1.log\n?? .planning/w04-root-selector-recall/public-assertion-red.json\n?? .planning/w04-root-selector-recall/public-assertion-red.log\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated-v2.json\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated-v2.log\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated-v3.json\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated-v3.log\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated.json\n?? .planning/w04-root-selector-recall/semantic-closure-concentrated.log\n?? .planning/w04-root-selector-recall/semantic-closure-ruff.json\n?? .planning/w04-root-selector-recall/semantic-coverage-freeze.json\n?? .planning/w04-root-selector-recall/task_plan.md\n?? .planning/w04-wp02/findings.md\n?? .planning/w04-wp02/progress.md\n?? .planning/w04-wp02/task_plan.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/G2_LLM_CONFIG_INTERFACE_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP02_SELECTOR_INTERFACE_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP02_STAGE_CLASSIFICATION_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP06_FINANCIAL_WINDOW_INTERFACE_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/execute.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/failure-resume.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/failure.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/finalize.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/resume.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/source-after-final.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/source-before-resume.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/source-before.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/HANDOFF.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/baseline.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/cleanup-command-error.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/compact-observer-repair.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/final-git-observation.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/final-manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/handoff.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-resume-state.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-final-focused-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-final-focused-storage.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-final-focused.json.gz\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-final-focused.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-key-vectors.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-old-annual-entrypoint.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-replay-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-replay.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-replay.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-resume-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native-stage-resume.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native_stage_final_probe.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native_stage_probe.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/native_stage_probe_resume.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/owned-temp-final.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/owned-temp.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/sealed-evidence-verification.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/space-before-cleanup.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-concentrated-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-concentrated.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-final-concentrated-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-final-concentrated.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-followup-check-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-followup-check.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-followup-red-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-followup-red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-incremental-leaf.diff\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-initial-64ba.py.txt\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-red-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/stage-scoped-negation-gap.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/HANDOFF.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/baseline.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/final-git-observation.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/final-manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/handoff.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/leaf-product.diff\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-budget-owner-handoff-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-budget-owner-handoff.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-budget-owner-handoff.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-candidate-trace-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-candidate-trace.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-candidate-trace.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-semantic-replay-v080-final.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-slide7-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-slide7-replay.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native-slide7-replay.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_budget_handoff_probe.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_candidate_trace.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_semantic_probe.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_semantic_probe_v080.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_semantic_probe_v080_current.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_semantic_probe_v080_final.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/native_slide7_probe.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/primary-finding-disposition.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-concentrated-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-concentrated-final-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-concentrated-final.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-concentrated.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-red-command.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/semantic-red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/test-owned-temp-final.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/test-owned-temp.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-closure/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-closure/review.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-closure/review.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-review/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-review/review.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-review/review.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g4-authoring-method/artifact-manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g4-authoring-method/review.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g4-authoring-method/review.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/llm-config-major/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/llm-config-major/review.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/llm-config-major/review.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/ast.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/probe.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/probe.ps1\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/budget-agent/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/corrected-public-interpretation.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-probe-corrected.log.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-probe-corrected.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-probe-initial.log.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-probe-initial.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-public-fixture-failed.log.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-public-fixture-failed.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-public-unit.log.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/stage-public-unit.py\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-coverage/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-coverage/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-coverage/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/slide7-extraction-root-cause/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/slide7-extraction-root-cause/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/slide7-extraction-root-cause/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/temp-preservation-plan/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/temp-preservation-plan/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/temp-preservation-plan/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/current-command-diagnostics.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/commit.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/commit.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/fast-forward.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/fast-forward.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/push.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/push.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/green.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/green.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/lint-fixed.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/lint-fixed.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/lint.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/lint.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-green.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-green.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-lint.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-lint.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-red.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/nullable-red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/red-native.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/red-native.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/red.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/canonical-wip-before.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-commit.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-commit.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-fast-forward.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-fast-forward.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-push.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-push.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-stage.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/ci-wire-stage.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/commit.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/commit.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/fast-forward.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/fast-forward.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/fetch.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/fetch.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/install-preflight.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/installed-forecast-help.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/installed-forecast-help.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/installed-help.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/installed.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/precommit-inputs.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/published.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/push.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/push.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/stage.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/stage.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/amendment.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/intake-route-green.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/intake-route-green.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/leaf-intake.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/red.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/restoration-red.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/restoration-red.log\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/sentinel-sync.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/artifact-manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/findings.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/policy-decision.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/progress.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/report.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/g2-configured/task_plan.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/w05-audit-card-readiness/manifest.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/w05-audit-card-readiness/report.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/w05-audit-card-readiness/report.md\n?? src/company_wiki/source_catalog/narrative_semantic_coverage.py\n?? src/company_wiki/source_catalog/narrative_stage_assertions.py\n?? tests/integration/test_w04_novelty_finalize.py\n?? tests/integration/test_w04_quality_band_budget.py\n?? tests/integration/test_w04_semantic_budget_finalize.py\n?? tests/unit/test_w04_llm_config_scope.py\n?? tests/unit/test_w04_narrative_semantics.py\n?? tests/unit/test_w04_novelty_budget.py\n?? tests/unit/test_w04_selector_version_dispatch.py\n?? tests/unit/test_w04_semantic_budget.py\n?? tests/unit/test_w04_stage_predicate_scope.py\n?? tests/unit/test_w04_stage_public_assertions.py\n",
+      "index_sha256": "92871d2dec1c3d18766eb2a9e5594151caf90ac2235dd95d687712886b8247f5"
+    }
+  },
+  "git_products_config_raw_mutations": 0,
+  "provider_network_llm_calls": 0
+}

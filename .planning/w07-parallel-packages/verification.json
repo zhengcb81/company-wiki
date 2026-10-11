@@ -1,0 +1,53 @@
+{
+  "schema": "w07-root-packet-verification/1",
+  "lanes": [
+    {
+      "lane": "W07-RF-MODEL",
+      "card_and_copy_identical": true,
+      "baseline_branch_correct": true,
+      "readonly_code_unchanged": 271,
+      "inputs_match": 4,
+      "state": "READY_NOT_STARTED"
+    },
+    {
+      "lane": "W07-AUDIT-ANALYST",
+      "card_and_copy_identical": true,
+      "baseline_branch_correct": true,
+      "readonly_code_unchanged": 24,
+      "inputs_match": 4,
+      "state": "READY_NOT_STARTED"
+    },
+    {
+      "lane": "W07-FF-PERF",
+      "card_and_copy_identical": true,
+      "baseline_branch_correct": true,
+      "readonly_code_unchanged": 286,
+      "inputs_match": 2,
+      "state": "READY_NOT_STARTED"
+    }
+  ],
+  "separate_roots": true,
+  "local_links_verified": 6,
+  "ff_runtime_ignored": true,
+  "mother_pwf_updated": [
+    "docs\\plans\\narrative-evidence-pilot-2026-09-26\\task_plan.md",
+    "docs\\plans\\narrative-evidence-pilot-2026-09-26\\findings.md",
+    "docs\\plans\\narrative-evidence-pilot-2026-09-26\\progress.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\task_plan.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\findings.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\progress.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\task_plan.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\findings.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\progress.md",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\ROOT-reception-status.md",
+    ".planning\\w06-cross-period-acquisition\\matrix-deadline-diagnosis.md"
+  ],
+  "provider_llm_calls": 0,
+  "future_worker_tests": "NOT_RUN",
+  "paid_budget_unchanged": true,
+  "distributable_text_lf": true,
+  "card_bytes_reverified_after_lf": true
+}

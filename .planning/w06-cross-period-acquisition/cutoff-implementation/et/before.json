@@ -1,0 +1,82 @@
+{
+  "tree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root",
+  "base_head": "c91f5f54bc2a24e7b5d6e648dba3f9d578f5fa52",
+  "files": [
+    {
+      "path": "transcript_api.py",
+      "sha256": "0bf6bbc8d316ae8878b2f4cae27686862af378c8682963404613bbbf349b6292",
+      "bytes": 59166
+    },
+    {
+      "path": "tests\\test_transcript_api.py",
+      "sha256": "0266d7c8b719fc1a539345c852075cd54e9345b529dd2e0e91c403903e82b766",
+      "bytes": 30477
+    },
+    {
+      "path": "tests\\test_retrieval_cli_e2e.py",
+      "sha256": "66de3e3c825dc2b4ddb25d167e9420b62719e8a42a4e4581bdbf2a6efc8f465f",
+      "bytes": 12670
+    },
+    {
+      "path": "tests\\golden\\.gitattributes",
+      "sha256": "8b6bb6bcb9ba3a682e10de1303de9dd9e27841641bc478a8114426e97531722b",
+      "bytes": 20
+    },
+    {
+      "path": "tests\\golden\\fmp_v2.credentials_missing.json",
+      "sha256": "0515573fa8b48f40d25d105817c53181907808858f5130ec08fff56670e7fc56",
+      "bytes": 166
+    },
+    {
+      "path": "tests\\golden\\fmp_v2.entitlement_402.json",
+      "sha256": "289bdd6de882eb690103ee9c967c97910cb429927c1005d4cd3d5f2faf4fb351",
+      "bytes": 167
+    },
+    {
+      "path": "tests\\golden\\fmp_v2.fetched.json",
+      "sha256": "ee643fbbd6c37b82c933689f819525330df21c6383e8b2fa81500902ac39ece3",
+      "bytes": 2263
+    },
+    {
+      "path": "tests\\golden\\fmp_v2.fy_only_invalid.json",
+      "sha256": "8133e5d90075ba4970568f0f9fbfaf19190c6a6ef1e641c1db0533d0e3572bda",
+      "bytes": 164
+    },
+    {
+      "path": "tests\\golden\\fmp_v2.request.json",
+      "sha256": "3e76b12cab53275c7244e4782a1ddb44de4122080a474f85d2a725f249ab8842",
+      "bytes": 318
+    },
+    {
+      "path": "tests\\golden\\fmp_v2.wrong_quarter.json",
+      "sha256": "a7554f636a312ffc29e6b1b9e242fd37b089610bb95dc3b116c8740899aad1ca",
+      "bytes": 171
+    },
+    {
+      "path": "tests\\golden\\manifest.json",
+      "sha256": "2b098b1f53b5d347671ddeda9aa7f8eabb08ca97b539ccbdddf7b3699e7f5453",
+      "bytes": 1539
+    },
+    {
+      "path": "tests\\golden\\motley_candidate_v2.disabled.json",
+      "sha256": "6876601068650f01cae88acabe52e12ed2343681af602ffc1aaaa26afda7350c",
+      "bytes": 163
+    },
+    {
+      "path": "tests\\golden\\motley_candidate_v2.fetched_test_only.json",
+      "sha256": "35469e35d91149f175ba15118ef10b4825eda265f2c58fe063300907e2acde6a",
+      "bytes": 1929
+    },
+    {
+      "path": "tests\\golden\\motley_candidate_v2.request.json",
+      "sha256": "f0bc5f8eb8112ef31e5f4c355295a79b7de6fa8d6c5220922b58c99226b59015",
+      "bytes": 612
+    },
+    {
+      "path": "tests\\golden\\README.md",
+      "sha256": "c3c2d63d18f1aab6adf431086741cc31aab5da3e413d4e9a8652d98e714457f4",
+      "bytes": 3053
+    }
+  ],
+  "keys_read": 0
+}

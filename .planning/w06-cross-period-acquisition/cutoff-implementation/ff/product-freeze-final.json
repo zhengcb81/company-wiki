@@ -1,0 +1,132 @@
+{
+  "schema_version": "ff-cutoff-author-freeze/2",
+  "state": "AUTHOR_FROZEN_PENDING_ROOT_REAL41",
+  "head_before": "88997b85ce5be20dc3d563b5c040706590df6dbb",
+  "head_after": "88997b85ce5be20dc3d563b5c040706590df6dbb",
+  "files": [
+    {
+      "path": "scripts/transcript_tool_transport.py",
+      "sha256": "781509900fc767a162fb9b530bc54c96f6d560a5157886df182815e6fc9c386c",
+      "bytes": 36981
+    },
+    {
+      "path": "scripts/et_v2_contract.py",
+      "sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+      "bytes": 10157
+    },
+    {
+      "path": "tests/test_transcript_launch_contract.py",
+      "sha256": "e2c43e092d15a94cc8813b0e3148d01f921d862e3e873573fbbd42cfcc2f08f2",
+      "bytes": 29605
+    },
+    {
+      "path": "tests/test_transcript_companion_transport.py",
+      "sha256": "643251a8d6adfb74c1fdfa6cb83e17bec8cafef9a56daf40c2e7ed35c7ba389a",
+      "bytes": 20348
+    },
+    {
+      "path": "tests/test_et_s0b_contract.py",
+      "sha256": "8280d87f5bfddaa1431e40f84a793ef63cde53dbb4f1a69deeaf122f79971f34",
+      "bytes": 4901
+    }
+  ],
+  "protected_count": 354,
+  "protected_changed": [],
+  "tool_freeze_count": 205,
+  "tool_changed": [],
+  "tool_manifest_sha256": "e2bf72bde855935db1beeca45ad10d4a9b205f4ca1137dab07db4d827e3f7fe3",
+  "original_tests": [
+    {
+      "path": "tests/test_transcript_launch_contract.py",
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "tests/test_transcript_companion_transport.py",
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "tests/test_et_s0b_contract.py",
+      "original_prefix_preserved": true
+    }
+  ],
+  "final_green_test_sha_unchanged": true,
+  "checks": {
+    "lint-final": {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "scripts/transcript_tool_transport.py",
+        "scripts/et_v2_contract.py",
+        "tests/test_transcript_launch_contract.py",
+        "tests/test_transcript_companion_transport.py",
+        "tests/test_et_s0b_contract.py"
+      ],
+      "exit_code": 0,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "diff-check-final": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "status-final": {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exit_code": 0,
+      "sha256": "176b08878f1f8c1ad399c6d1eb55b2c7388458175757af63c5482a57e93ad86f"
+    },
+    "diff-stat-final": {
+      "command": [
+        "git",
+        "diff",
+        "--stat"
+      ],
+      "exit_code": 0,
+      "sha256": "915fef565ae25eb28d255153696b3af56b85b96efdf5f73dba0ec9c261b1715a"
+    }
+  },
+  "scratch_restored": true,
+  "real_key_reads": 0,
+  "real_provider_calls": 0,
+  "llm_calls": 0,
+  "root_concentrated": {
+    "passed": 134,
+    "skipped": 4,
+    "pytest_seconds": 1.9,
+    "receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated-final2.json",
+    "skips": [
+      {
+        "classname": "tests.test_transcript_launch_contract",
+        "name": "test_ff_real_et_cli_preserves_filing_and_measured_pre_http_zero[HKEX-unsupported_market]",
+        "reason": "W07 real ET checkout integration requires an explicit test tool path"
+      },
+      {
+        "classname": "tests.test_transcript_launch_contract",
+        "name": "test_ff_real_et_cli_preserves_filing_and_measured_pre_http_zero[NASDAQ-provider_credentials_missing]",
+        "reason": "W07 real ET checkout integration requires an explicit test tool path"
+      },
+      {
+        "classname": "tests.test_transcript_launch_contract",
+        "name": "test_ff_real_et_cli_preserves_filing_and_measured_pre_http_zero[TOKYO-unsupported_exchange]",
+        "reason": "W07 real ET checkout integration requires an explicit test tool path"
+      },
+      {
+        "classname": "tests.test_transcript_companion_transport",
+        "name": "test_real_cwp_cli_import_and_unknown_publication_replay",
+        "reason": "company-wiki source checkout is not available for cross-project E2E"
+      }
+    ]
+  },
+  "supersedes_author_freeze_sha256": "0574664a9634d6ea11a9fa93949c8ea8469a60d013671e97c2015e8e093fa03c"
+}

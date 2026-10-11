@@ -1,0 +1,29 @@
+{
+  "mode": "red",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_transcript_api.py",
+    "tests/test_retrieval_cli_e2e.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\ec-25da131a\\pt",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\et\\red.xml",
+    "-k",
+    "w06 or test_as_of_date_excludes_later_publication_without_fetching_body or test_fmp_excludes_call_after_requested_as_of_date"
+  ],
+  "tree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root",
+  "exit_code": 1,
+  "elapsed_seconds": 1.993,
+  "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\ec-25da131a",
+  "environment": "platform-allowlist plus synthetic HOME/TEMP/key and network deny",
+  "real_network": 0,
+  "keys_read": 0,
+  "llm_calls": 0,
+  "scratch_restored_absent": true
+}

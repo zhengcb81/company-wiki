@@ -1,0 +1,2 @@
+cases: {'PASS': 1, 'FAIL': 0, 'PARTIAL': 27, 'NOT_RUN': 13}; seconds=184.54; oracle findings=69
+report: C:\Users\郑曾波\Projects\company-wiki\.tmp\w06-root-matrix-evidence\attempt-1e11a57b90a8419db1ca1795f6080cca\report.json

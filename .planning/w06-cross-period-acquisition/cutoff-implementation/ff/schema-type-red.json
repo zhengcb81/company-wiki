@@ -1,0 +1,41 @@
+{
+  "label": "schema-type-red",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\s-b9bbf674\\p",
+    "-q",
+    "tests/test_transcript_launch_contract.py",
+    "tests/test_transcript_companion_transport.py",
+    "tests/test_et_s0b_contract.py",
+    "-k",
+    "not_found_envelope and schema_version"
+  ],
+  "exit_code": 1,
+  "seconds": 3.8277,
+  "scratch": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\s-b9bbf674",
+  "scratch_restored": true,
+  "real_provider_calls": 0,
+  "real_key_reads": 0,
+  "llm_calls": 0,
+  "log_sha256": "5f2e6167606253eea29e109c32ef58789c0e657b9e12fc633d52a53c0310a804",
+  "files": [
+    {
+      "path": "tests/test_transcript_launch_contract.py",
+      "sha256": "5cb03bc342fbd591872abd5352608a191b50f72601a26cc2ae3d41d089f86da1"
+    },
+    {
+      "path": "tests/test_transcript_companion_transport.py",
+      "sha256": "643251a8d6adfb74c1fdfa6cb83e17bec8cafef9a56daf40c2e7ed35c7ba389a"
+    },
+    {
+      "path": "tests/test_et_s0b_contract.py",
+      "sha256": "8280d87f5bfddaa1431e40f84a793ef63cde53dbb4f1a69deeaf122f79971f34"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "mode": "lint",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "ruff",
+    "check",
+    "--no-cache",
+    "transcript_api.py",
+    "tests/test_transcript_api.py",
+    "tests/test_retrieval_cli_e2e.py"
+  ],
+  "tree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root",
+  "exit_code": 0,
+  "elapsed_seconds": 0.222,
+  "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\ec-45bcae3a",
+  "environment": "platform-allowlist plus synthetic HOME/TEMP/key and network deny",
+  "real_network": 0,
+  "keys_read": 0,
+  "llm_calls": 0,
+  "scratch_restored_absent": true
+}

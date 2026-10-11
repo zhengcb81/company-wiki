@@ -1,0 +1,275 @@
+{
+  "schema_version": "ff-cutoff-evidence-manifest/2",
+  "files": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\findings.md",
+      "bytes": 2946,
+      "sha256": "301635fe454199d9182f9dc1b0928d7a7a48cc3aaf96003a602e29937b34632e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\progress.md",
+      "bytes": 3396,
+      "sha256": "f62d4a17f7332125910b3eaf5dd298e815eb830338ce217e99453ce8cee5c55a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\task_plan.md",
+      "bytes": 4185,
+      "sha256": "1024808bc6ca6cf6dfcc32bea6cc00a50497d49c15a40b0e331ce203a6adbaa8"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-cutoff-result\\handoff.json",
+      "bytes": 4044,
+      "sha256": "00d0cd85c0880f42590a794462065645af690d871bab6511a8b217cbc4a0baab"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-cutoff-result\\handoff.md",
+      "bytes": 3578,
+      "sha256": "a385a6dcb8bd7386c33a50ee03af6b0b6d4aac9a24e66db3271c1a2b948ebb1d"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\author_freeze.py",
+      "bytes": 10381,
+      "sha256": "bdf61ff3f5856546fb50bac241f4d37d86396cb4dd518052b2acc3e13693c7d6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\author_tests.py",
+      "bytes": 8541,
+      "sha256": "79b01c041ac0c18ae49e8d3aea956b3bf260a56e69906d87ee83e07cb32445ca"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\baseline.json",
+      "bytes": 80370,
+      "sha256": "faad41ed7de13a8c31c1486d6e9569dd10f22b2314a0f2a20531746cd62f85fa"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\binding-green.json",
+      "bytes": 1369,
+      "sha256": "52a22bd185a6dc69f2697662be76416ae4a5f4f0a0733e349d261d5bb6d41a25"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\binding-green.log",
+      "bytes": 116,
+      "sha256": "acb16445a84e3d75d44d8b4d3e5146f6610d66c895ce527ef5f7edb18f01b12f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\binding-red.json",
+      "bytes": 1375,
+      "sha256": "4a661d1805ad3c5e4a119fd60f7c326076bab3c24cb095a7affdf737d9adcf9d"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\binding-red.log",
+      "bytes": 21623,
+      "sha256": "8e8ea92f73dd1ad0a9304f1de54f130cf6a949702ed62d3e259e2bd13624eebd"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\binding_implement.py",
+      "bytes": 2676,
+      "sha256": "75e8866aa4a878ce0216e6d0a69d6ff9a9268e4c9e9cc233e10a75d90d1264bd"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\binding_tests.py",
+      "bytes": 4665,
+      "sha256": "1418bd07c34e975b0b6d3b6b844ef942f90a713c03d6280f0efa4b2aaaa015df"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\business-red.json",
+      "bytes": 1368,
+      "sha256": "ebacab71f1c3ec649646422b7ad6311d2f86f5ed0de85c097f017a87322c4882"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\business-red.log",
+      "bytes": 66132,
+      "sha256": "6ad11c05d41d2f45daa85d8ee02614841aedb736aa8b81e6de4839bba9b7444d"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated-final.json",
+      "bytes": 1051,
+      "sha256": "cc57a855db0c114078cbb6ce935bc8f55869073b3818c561892678d7839a2ecf"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated-final.log",
+      "bytes": 194,
+      "sha256": "2bf4bd71afd1fce128c5933ceb8e2a644ea15abf6c1e503ab96b12950d036edf"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated-final.xml",
+      "bytes": 25260,
+      "sha256": "ec454c1a2b335cdf360599ff193e07fc87f38a14a0ad0e692a0256c6cd715b1e"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated-final2.json",
+      "bytes": 1052,
+      "sha256": "deea00eb88e966320a8b2972a923ebd097bd223a1584d30d59dec65ac2cac0d1"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated-final2.log",
+      "bytes": 194,
+      "sha256": "7dd42c39ec5e7a990304031fd73e476fb472056c0ca43df6badb79d811019b11"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated-final2.xml",
+      "bytes": 25670,
+      "sha256": "2b48385be9649d26642f365787bcf7a0a181b4a997c9612dc657a4c5b2718d81"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated.json",
+      "bytes": 1045,
+      "sha256": "2b23f5637f66f1c79432de5e1227a346fa9f64e377cbc33320e48943b3aeca91"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated.log",
+      "bytes": 194,
+      "sha256": "721cb5545b90bba74f9009026de820886de68203863293cdc01af82a43198027"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated.xml",
+      "bytes": 23609,
+      "sha256": "087973d573a9c4bdd896747135463ee87f1a64eb1ce2f3cfb0c632f78ff53041"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\diff-check-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\diff-stat-final.log",
+      "bytes": 375,
+      "sha256": "915fef565ae25eb28d255153696b3af56b85b96efdf5f73dba0ec9c261b1715a"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\diff-stat.log",
+      "bytes": 389,
+      "sha256": "3f012658d4fc53b3668b978073ea4d12d821c4e48edf52ed50297ec577a56553"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\final-focused-green.json",
+      "bytes": 1375,
+      "sha256": "888f38326540b04ce5b579566c1c229e9e5afa4f02396295a5f3b8f964e68cd6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\final-focused-green.log",
+      "bytes": 116,
+      "sha256": "ced0122b55992ad4396b5e2137956a7ef5f05bdf8c490cdd47b341bb9d13cbd1"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\final_author_freeze.py",
+      "bytes": 12043,
+      "sha256": "a08cc9f8274dc7a7adf7bf8d62794c8f614d5eec2d286b7ff210c83c58414ba9"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\focused-green.json",
+      "bytes": 1369,
+      "sha256": "3a467809c32674d80bcac6d7ad8b13948c1cd9ab1f505941333d422fe52edf42"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\focused-green.log",
+      "bytes": 116,
+      "sha256": "ebec0081190d930435175595e3fe74dc9e7fef12e12dbf211ea70eb7d39f7c94"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\implement.py",
+      "bytes": 6085,
+      "sha256": "30d174a95bb80021787ec882ed15fd1a5f8b260fd8868ea879858344da1096c9"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\lint-final.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\lint.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\product-freeze-final.json",
+      "bytes": 4546,
+      "sha256": "a235b0c2c25f6c52a6402dd160737f2ec6ffa10309c368ee6eb06fbdc332cf4f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\product-freeze.json",
+      "bytes": 2812,
+      "sha256": "0574664a9634d6ea11a9fa93949c8ea8469a60d013671e97c2015e8e093fa03c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\report-final.json",
+      "bytes": 4044,
+      "sha256": "00d0cd85c0880f42590a794462065645af690d871bab6511a8b217cbc4a0baab"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\report-final.md",
+      "bytes": 3578,
+      "sha256": "a385a6dcb8bd7386c33a50ee03af6b0b6d4aac9a24e66db3271c1a2b948ebb1d"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\report.json",
+      "bytes": 2827,
+      "sha256": "30125294e16faea147331d13c7d17916b73623e10ea68575e900de6198f487df"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\report.md",
+      "bytes": 2598,
+      "sha256": "5930c60c0d4850cb8de320eed937bbd2427793b4e019914053fd4ba3856051a0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\run_focused.py",
+      "bytes": 2699,
+      "sha256": "2d84e9fb296c21102896ef86707697bc9731c5f74bf6e183237674de6bae2021"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\schema-type-red.json",
+      "bytes": 1398,
+      "sha256": "cc4bd5dc19c16a6d3639b305a1116a01a59acdc8b08b70d4192cb1da3c9d8537"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\schema-type-red.log",
+      "bytes": 9071,
+      "sha256": "5f2e6167606253eea29e109c32ef58789c0e657b9e12fc633d52a53c0310a804"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\schema-types-red.json",
+      "bytes": 1399,
+      "sha256": "2b318355e9d4ff7c0d478637f5bc88450ed5a4c4daf483357988b3dfe341a50c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\schema-types-red.log",
+      "bytes": 18073,
+      "sha256": "6eb4f4e848c44c583825f97ed1fa2b4524b42e5ac76755fc51ab240845963d6f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\schema_type_tests.py",
+      "bytes": 664,
+      "sha256": "570b3006b56db10f6384a703bc03378943dce3e385c096f565952da6942de8ef"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\schema_types_final.py",
+      "bytes": 1524,
+      "sha256": "d3761494a30b0ac75f6ea96414f2fa0c233881188a049b3a95dc4084a003775c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\status-final.log",
+      "bytes": 262,
+      "sha256": "176b08878f1f8c1ad399c6d1eb55b2c7388458175757af63c5482a57e93ad86f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\status.log",
+      "bytes": 226,
+      "sha256": "6938aecf93321afd270c51b3f2691835b73c8742878e47222d16b5a74b9405c3"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\tracked-product-final.patch",
+      "bytes": 15998,
+      "sha256": "799e046532fb77792adc40179cc40c89ed7abcdb4a843bfad24315d5693d9c49"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\tracked-product.patch",
+      "bytes": 12458,
+      "sha256": "a2e7d57967a40c87428a252cfe481cdb287a7950fd8658dab33899889c065b30"
+    }
+  ]
+}

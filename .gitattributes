@@ -29,3 +29,10 @@
 /src/company_wiki/source_catalog/narrative_transport_cli.py -text -eol
 /src/company_wiki/source_catalog/source_reader.py -text -eol
 /tests/unit/test_w04_source_transport.py -text -eol
+
+# ROOT reception evidence and W07 fixed input references must retain byte hashes.
+/.planning/w04-root-novelty-recall/phase2-independent/** -text -diff
+/.planning/w04-selector-integration/** -text -diff
+/.planning/w06-cross-period-acquisition/cutoff-implementation/** -text -diff
+/.planning/w06-cross-period-acquisition/cutoff-independent/retest/** -text -diff
+/.planning/w07-parallel-packages/** -text -diff

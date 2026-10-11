@@ -1,0 +1,46 @@
+{
+  "task": "w04-selector-integration",
+  "state": "READ_ONLY_READY_STOP",
+  "files": [
+    {
+      "path": "assemble-manifest.py",
+      "sha256": "46b09d9ccc60ccd5865d4628e55336d4a8ffeadfc547d7e5a83852d30577e2a5",
+      "bytes": 11823
+    },
+    {
+      "path": "collect-manifest.py",
+      "sha256": "ed44dd512dc53986a8eb8dcb12a4a653a93135176c867e4940b70cc242c4b13f",
+      "bytes": 6281
+    },
+    {
+      "path": "final-readonly-integrity.json",
+      "sha256": "f4ebddc3b6cf3bbf6025d6a704c6295a0f71dbcd2502de7c61c6e71c3d80b196",
+      "bytes": 471
+    },
+    {
+      "path": "findings.md",
+      "sha256": "0006a981eb4122027e586b2910f3502e07c3e182d13df06c11a30deb8c13396f",
+      "bytes": 14946
+    },
+    {
+      "path": "integration-manifest.json",
+      "sha256": "f9a3260d03fd0e5d4ea38abecc92ec2fb1df4b822dd213d7a1ac84a3c348447c",
+      "bytes": 88576
+    },
+    {
+      "path": "progress.md",
+      "sha256": "af0ff5ec6ea0f26002b7d4f3490985c5f235fec48509f64d2a0c2e573db18391",
+      "bytes": 1556
+    },
+    {
+      "path": "task_plan.md",
+      "sha256": "4ab26fb8326479c2ef400509c27046cf4bfeca056d1becbf4b320cacfd8908ea",
+      "bytes": 8748
+    },
+    {
+      "path": "three-tree-snapshot.json",
+      "sha256": "f55fa9d58319f1b42ac1a935d155dbdd1f2f8a5649f9035887f148bb976f77b3",
+      "bytes": 133674
+    }
+  ]
+}

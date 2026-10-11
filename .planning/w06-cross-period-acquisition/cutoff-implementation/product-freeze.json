@@ -1,0 +1,303 @@
+{
+  "schema_version": "root-w06-cutoff-product-freeze/1",
+  "frozen_at": "2026-10-11T15:01:19.338008+00:00",
+  "verdict": "AUTHOR_COMPLETE_PENDING_ROOT_MATRIX",
+  "roots": {
+    "et": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root",
+    "ff": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root"
+  },
+  "head_before": {
+    "et": "c91f5f54bc2a24e7b5d6e648dba3f9d578f5fa52",
+    "ff": "88997b85ce5be20dc3d563b5c040706590df6dbb"
+  },
+  "head_after": {
+    "et": "c91f5f54bc2a24e7b5d6e648dba3f9d578f5fa52",
+    "ff": "88997b85ce5be20dc3d563b5c040706590df6dbb"
+  },
+  "files": [
+    {
+      "repository": "et",
+      "path": "transcript_api.py",
+      "sha256": "f1bc6e6cadcf02ce6aad757c2d79d16a5ed87270dece827ac45399d4ffcbf2e3",
+      "bytes": 57923
+    },
+    {
+      "repository": "et",
+      "path": "tests/test_transcript_api.py",
+      "sha256": "72303bc90edc5e7687881f2b698d831ccf20875910b40885f8e38d17a9512c54",
+      "bytes": 35002
+    },
+    {
+      "repository": "et",
+      "path": "tests/test_retrieval_cli_e2e.py",
+      "sha256": "a55153a6f12fcfc2c751ea6da5818c05d60caa87a7d4aac696e96a223ceda9a7",
+      "bytes": 14455
+    },
+    {
+      "repository": "ff",
+      "path": "scripts/transcript_tool_transport.py",
+      "sha256": "781509900fc767a162fb9b530bc54c96f6d560a5157886df182815e6fc9c386c",
+      "bytes": 36981
+    },
+    {
+      "repository": "ff",
+      "path": "scripts/et_v2_contract.py",
+      "sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+      "bytes": 10157
+    },
+    {
+      "repository": "ff",
+      "path": "tests/test_transcript_launch_contract.py",
+      "sha256": "e2c43e092d15a94cc8813b0e3148d01f921d862e3e873573fbbd42cfcc2f08f2",
+      "bytes": 29605
+    },
+    {
+      "repository": "ff",
+      "path": "tests/test_transcript_companion_transport.py",
+      "sha256": "643251a8d6adfb74c1fdfa6cb83e17bec8cafef9a56daf40c2e7ed35c7ba389a",
+      "bytes": 20348
+    },
+    {
+      "repository": "ff",
+      "path": "tests/test_et_s0b_contract.py",
+      "sha256": "8280d87f5bfddaa1431e40f84a793ef63cde53dbb4f1a69deeaf122f79971f34",
+      "bytes": 4901
+    }
+  ],
+  "old_author_freezes": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-ff-matrix-acceptance\\fix\\case-authority\\manifest.json",
+      "sha256": "e2bf72bde855935db1beeca45ad10d4a9b205f4ca1137dab07db4d827e3f7fe3",
+      "files": 205,
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\product-freeze.json",
+      "sha256": "0574664a9634d6ea11a9fa93949c8ea8469a60d013671e97c2015e8e093fa03c",
+      "role": "historical first author freeze; not final delivery"
+    }
+  ],
+  "old_goldens": {
+    "et": [
+      {
+        "path": "tests\\golden\\.gitattributes",
+        "sha256": "8b6bb6bcb9ba3a682e10de1303de9dd9e27841641bc478a8114426e97531722b",
+        "bytes": 20
+      },
+      {
+        "path": "tests\\golden\\fmp_v2.credentials_missing.json",
+        "sha256": "0515573fa8b48f40d25d105817c53181907808858f5130ec08fff56670e7fc56",
+        "bytes": 166
+      },
+      {
+        "path": "tests\\golden\\fmp_v2.entitlement_402.json",
+        "sha256": "289bdd6de882eb690103ee9c967c97910cb429927c1005d4cd3d5f2faf4fb351",
+        "bytes": 167
+      },
+      {
+        "path": "tests\\golden\\fmp_v2.fetched.json",
+        "sha256": "ee643fbbd6c37b82c933689f819525330df21c6383e8b2fa81500902ac39ece3",
+        "bytes": 2263
+      },
+      {
+        "path": "tests\\golden\\fmp_v2.fy_only_invalid.json",
+        "sha256": "8133e5d90075ba4970568f0f9fbfaf19190c6a6ef1e641c1db0533d0e3572bda",
+        "bytes": 164
+      },
+      {
+        "path": "tests\\golden\\fmp_v2.request.json",
+        "sha256": "3e76b12cab53275c7244e4782a1ddb44de4122080a474f85d2a725f249ab8842",
+        "bytes": 318
+      },
+      {
+        "path": "tests\\golden\\fmp_v2.wrong_quarter.json",
+        "sha256": "a7554f636a312ffc29e6b1b9e242fd37b089610bb95dc3b116c8740899aad1ca",
+        "bytes": 171
+      },
+      {
+        "path": "tests\\golden\\manifest.json",
+        "sha256": "2b098b1f53b5d347671ddeda9aa7f8eabb08ca97b539ccbdddf7b3699e7f5453",
+        "bytes": 1539
+      },
+      {
+        "path": "tests\\golden\\motley_candidate_v2.disabled.json",
+        "sha256": "6876601068650f01cae88acabe52e12ed2343681af602ffc1aaaa26afda7350c",
+        "bytes": 163
+      },
+      {
+        "path": "tests\\golden\\motley_candidate_v2.fetched_test_only.json",
+        "sha256": "35469e35d91149f175ba15118ef10b4825eda265f2c58fe063300907e2acde6a",
+        "bytes": 1929
+      },
+      {
+        "path": "tests\\golden\\motley_candidate_v2.request.json",
+        "sha256": "f0bc5f8eb8112ef31e5f4c355295a79b7de6fa8d6c5220922b58c99226b59015",
+        "bytes": 612
+      },
+      {
+        "path": "tests\\golden\\README.md",
+        "sha256": "c3c2d63d18f1aab6adf431086741cc31aab5da3e413d4e9a8652d98e714457f4",
+        "bytes": 3053
+      }
+    ],
+    "ff": [
+      {
+        "path": "tests/fixtures/et_s0b/.gitattributes",
+        "sha256": "8b6bb6bcb9ba3a682e10de1303de9dd9e27841641bc478a8114426e97531722b",
+        "bytes": 20
+      },
+      {
+        "path": "tests/fixtures/et_s0b/fmp_v2.credentials_missing.json",
+        "sha256": "0515573fa8b48f40d25d105817c53181907808858f5130ec08fff56670e7fc56",
+        "bytes": 166
+      },
+      {
+        "path": "tests/fixtures/et_s0b/fmp_v2.entitlement_402.json",
+        "sha256": "289bdd6de882eb690103ee9c967c97910cb429927c1005d4cd3d5f2faf4fb351",
+        "bytes": 167
+      },
+      {
+        "path": "tests/fixtures/et_s0b/fmp_v2.fetched.json",
+        "sha256": "ee643fbbd6c37b82c933689f819525330df21c6383e8b2fa81500902ac39ece3",
+        "bytes": 2263
+      },
+      {
+        "path": "tests/fixtures/et_s0b/fmp_v2.fy_only_invalid.json",
+        "sha256": "8133e5d90075ba4970568f0f9fbfaf19190c6a6ef1e641c1db0533d0e3572bda",
+        "bytes": 164
+      },
+      {
+        "path": "tests/fixtures/et_s0b/fmp_v2.request.json",
+        "sha256": "3e76b12cab53275c7244e4782a1ddb44de4122080a474f85d2a725f249ab8842",
+        "bytes": 318
+      },
+      {
+        "path": "tests/fixtures/et_s0b/fmp_v2.wrong_quarter.json",
+        "sha256": "a7554f636a312ffc29e6b1b9e242fd37b089610bb95dc3b116c8740899aad1ca",
+        "bytes": 171
+      },
+      {
+        "path": "tests/fixtures/et_s0b/manifest.json",
+        "sha256": "2b098b1f53b5d347671ddeda9aa7f8eabb08ca97b539ccbdddf7b3699e7f5453",
+        "bytes": 1539
+      },
+      {
+        "path": "tests/golden/.gitattributes",
+        "sha256": "8b6bb6bcb9ba3a682e10de1303de9dd9e27841641bc478a8114426e97531722b",
+        "bytes": 20
+      },
+      {
+        "path": "tests/golden/ff_v1_not_found.json",
+        "sha256": "0ad53b379fca8007ea9c26191e4dff572b28c18c1413cce0a988376e7b2b7025",
+        "bytes": 218
+      },
+      {
+        "path": "tests/golden/ff_v1_success.json",
+        "sha256": "b5ebe79bdd5459824d5e1b79095f631e212738b79bacfc097c975c2f351f1fa6",
+        "bytes": 238
+      },
+      {
+        "path": "tests/golden/ff_v2_fetch_source_candidate.json",
+        "sha256": "789a36132c46a9e258a9b7372a1101b3e0ee026527f1008b9e5fb76b4861615a",
+        "bytes": 969
+      },
+      {
+        "path": "tests/golden/ff_v2_gap.json",
+        "sha256": "da2782b8af2c584ea0af2b986651463cc38142641c8022b26c7d1253bfbe9379",
+        "bytes": 600
+      },
+      {
+        "path": "tests/golden/ff_v2_period_unresolved.json",
+        "sha256": "24eb16333d7a80864a0f1c4876d271c3bc502ad73466c6c65b39fbd6196622f5",
+        "bytes": 1012
+      },
+      {
+        "path": "tests/golden/ff_v2_source_candidate.json",
+        "sha256": "789a36132c46a9e258a9b7372a1101b3e0ee026527f1008b9e5fb76b4861615a",
+        "bytes": 969
+      },
+      {
+        "path": "tests/golden/ff_v2_transcript_downloaded.json",
+        "sha256": "fbf5b266677d5ce567c01c767264ff32d051f8dd0aba941150697aeea4e48dc6",
+        "bytes": 1704
+      },
+      {
+        "path": "tests/golden/ff_v2_upstream_error.json",
+        "sha256": "a754125263bde9c4dfa254052ad4d6b10b3c7bb96077a181c6b259a84ba78c1d",
+        "bytes": 486
+      },
+      {
+        "path": "tests/golden/s3_ff_limits_argv.json",
+        "sha256": "ee8becb06b0fb91f323cda71458e7bb989c46749af0a73d2a07f558db24695d2",
+        "bytes": 1244
+      }
+    ],
+    "unchanged": true
+  },
+  "ff_protected_before_after": {
+    "baseline": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\baseline.json",
+    "sha256": "faad41ed7de13a8c31c1486d6e9569dd10f22b2314a0f2a20531746cd62f85fa",
+    "files": 354,
+    "unchanged": true
+  },
+  "final_responsibility_tests": {
+    "et": {
+      "passed": 56,
+      "seconds": 40.37,
+      "record": "et/green.json"
+    },
+    "ff": {
+      "passed": 134,
+      "skipped": 4,
+      "seconds": 1.9,
+      "record": "ff/concentrated-final2.json"
+    }
+  },
+  "existing_golden_check": "10 matched",
+  "owned_scratch": [
+    {
+      "record": "et/red.json",
+      "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\ec-25da131a",
+      "restored_absent": true
+    },
+    {
+      "record": "et/green.json",
+      "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\ec-56b9e368",
+      "restored_absent": true
+    },
+    {
+      "record": "et/golden.json",
+      "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\ec-940b8fa4",
+      "restored_absent": true
+    },
+    {
+      "record": "et/lint.json",
+      "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\ec-45bcae3a",
+      "restored_absent": true
+    },
+    {
+      "record": "ff/concentrated.json",
+      "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\fc-83d2b71a",
+      "restored_absent": true
+    },
+    {
+      "record": "ff/concentrated-final.json",
+      "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\fc-8b4b4ce9",
+      "restored_absent": true
+    },
+    {
+      "record": "ff/concentrated-final2.json",
+      "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\fc-409ade88",
+      "restored_absent": true
+    }
+  ],
+  "original_matrix_attempt_preserved": "attempt-1f64f745d3a94506ae4bc35c8997b562",
+  "original_matrix_result": "40 PASS / 1 FAIL / 164.62s",
+  "matrix_reruns_by_author": 0,
+  "real_network_requests": 0,
+  "real_key_reads": 0,
+  "llm_calls": 0,
+  "commit_merge_push_install": false,
+  "cwp_product_writes": 0,
+  "next_step": "ROOT unchanged 41-case matrix with these two roots and the separately frozen published CWP source tree; independent review and normal publication"
+}

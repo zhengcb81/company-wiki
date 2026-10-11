@@ -1,0 +1,46 @@
+{
+  "schema_version": "cutoff-independent-v2-freeze/1",
+  "status": "FROZEN_STOP",
+  "verdict": "PASS_SCOPED_CUTOFF_PRODUCT_ACCEPTANCE_PENDING_ROOT_MATRIX",
+  "v2_product_freeze_sha256": "87495b11e3c41986c3a10374bae0c603af6db4d61d7b8ed8c6a01771b7ed3381",
+  "previous_failure_manifest_sha256": "3140797e6c6839063446565ea88d89138ec4a9afae84ad1c8da03138443c9050",
+  "files": {
+    "report.json": {
+      "sha256": "d1c6f194dfd7ac93b4ccc48959456ada1a5352cba2e76ae8d2200d24f98b77f9",
+      "bytes": 1794
+    },
+    "report.md": {
+      "sha256": "77e5415c3c76ce67c182196d70d7b491f52fa91516299f4caadc5835b4572031",
+      "bytes": 3749
+    },
+    "retest-result.json": {
+      "sha256": "eafca16640e4520981a4bea6db0d7e9d2bebd57ea91d3e16360cc9be517dd97e",
+      "bytes": 158394
+    },
+    "retest.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "retest.stdout.txt": {
+      "sha256": "522203b2e27ff8e2daccc326414508d9aabdb6cea7719e1c99b83a9caf0ad8c6",
+      "bytes": 100
+    },
+    "run_retest.py": {
+      "sha256": "ca43256a025f86082ac234e292b2a29bb92613212ca0b01cff4823e1b4640d6c",
+      "bytes": 7159
+    },
+    "scoped_receipts.py": {
+      "sha256": "31bdfba7d663612351bd401aeafc467e68a3761f565022ad82cbe5e7fb6fcc3d",
+      "bytes": 633
+    },
+    "test_unknown_control.py": {
+      "sha256": "73a4a23dc4203a1e20add6aab4183459181b7cdd38622d43379621a39d29ce64",
+      "bytes": 1116
+    },
+    "trace.jsonl": {
+      "sha256": "d092ad3e217288b9475195792fb4d43dcbf7169a707360d8c346512db325d7f2",
+      "bytes": 2657
+    }
+  },
+  "frozen_at": "2026-10-11T15:25:41.824546+00:00"
+}

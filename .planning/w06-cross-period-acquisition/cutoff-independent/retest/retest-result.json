@@ -1,0 +1,2415 @@
+{
+  "schema_version": "cutoff-independent-scoped-retest/1",
+  "command": [
+    "C:/Miniconda/python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-p",
+    "scoped_receipts",
+    "-c",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\pytest.ini",
+    "--rootdir",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\retest",
+    "--confcutdir",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cut-review-3a81897c\\tests",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\probes.py::test_ff_malformed_stdout_does_not_erase_valid_usage",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\probes.py::test_ff_closed_reason_and_observed_usage[earnings-transcript-result/2-call_after_as_of-call_after_as_of-True]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\probes.py::test_ff_closed_reason_and_observed_usage[earnings-transcript-result/1-None-exact_transcript_missing-True]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\probes.py::test_ff_closed_reason_and_observed_usage[earnings-transcript-result/2-call_after_as_of-call_after_as_of-False]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\retest\\test_unknown_control.py"
+  ],
+  "selected": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\probes.py::test_ff_malformed_stdout_does_not_erase_valid_usage",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\probes.py::test_ff_closed_reason_and_observed_usage[earnings-transcript-result/2-call_after_as_of-call_after_as_of-True]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\probes.py::test_ff_closed_reason_and_observed_usage[earnings-transcript-result/1-None-exact_transcript_missing-True]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\probes.py::test_ff_closed_reason_and_observed_usage[earnings-transcript-result/2-call_after_as_of-call_after_as_of-False]",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-independent\\retest\\test_unknown_control.py"
+  ],
+  "before": {
+    "v2_freeze": {
+      "sha256": "87495b11e3c41986c3a10374bae0c603af6db4d61d7b8ed8c6a01771b7ed3381",
+      "bytes": 11865
+    },
+    "product": {
+      "et:transcript_api.py": {
+        "sha256": "f1bc6e6cadcf02ce6aad757c2d79d16a5ed87270dece827ac45399d4ffcbf2e3",
+        "bytes": 57923
+      },
+      "et:tests/test_transcript_api.py": {
+        "sha256": "72303bc90edc5e7687881f2b698d831ccf20875910b40885f8e38d17a9512c54",
+        "bytes": 35002
+      },
+      "et:tests/test_retrieval_cli_e2e.py": {
+        "sha256": "a55153a6f12fcfc2c751ea6da5818c05d60caa87a7d4aac696e96a223ceda9a7",
+        "bytes": 14455
+      },
+      "ff:scripts/transcript_tool_transport.py": {
+        "sha256": "1e974dd54920355d57de21894c046f2fcfec6fc1554a3a8db782f85a9b6fea62",
+        "bytes": 36217
+      },
+      "ff:scripts/et_v2_contract.py": {
+        "sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+        "bytes": 10157
+      },
+      "ff:tests/test_transcript_launch_contract.py": {
+        "sha256": "42a3dfd22baef9f52998e6ae789494544964caac464530a6a154a49302852f39",
+        "bytes": 30820
+      },
+      "ff:tests/test_transcript_companion_transport.py": {
+        "sha256": "643251a8d6adfb74c1fdfa6cb83e17bec8cafef9a56daf40c2e7ed35c7ba389a",
+        "bytes": 20348
+      },
+      "ff:tests/test_et_s0b_contract.py": {
+        "sha256": "8280d87f5bfddaa1431e40f84a793ef63cde53dbb4f1a69deeaf122f79971f34",
+        "bytes": 4901
+      }
+    },
+    "old_goldens": {
+      "et:tests\\golden\\.gitattributes": {
+        "sha256": "8b6bb6bcb9ba3a682e10de1303de9dd9e27841641bc478a8114426e97531722b",
+        "bytes": 20
+      },
+      "et:tests\\golden\\fmp_v2.credentials_missing.json": {
+        "sha256": "0515573fa8b48f40d25d105817c53181907808858f5130ec08fff56670e7fc56",
+        "bytes": 166
+      },
+      "et:tests\\golden\\fmp_v2.entitlement_402.json": {
+        "sha256": "289bdd6de882eb690103ee9c967c97910cb429927c1005d4cd3d5f2faf4fb351",
+        "bytes": 167
+      },
+      "et:tests\\golden\\fmp_v2.fetched.json": {
+        "sha256": "ee643fbbd6c37b82c933689f819525330df21c6383e8b2fa81500902ac39ece3",
+        "bytes": 2263
+      },
+      "et:tests\\golden\\fmp_v2.fy_only_invalid.json": {
+        "sha256": "8133e5d90075ba4970568f0f9fbfaf19190c6a6ef1e641c1db0533d0e3572bda",
+        "bytes": 164
+      },
+      "et:tests\\golden\\fmp_v2.request.json": {
+        "sha256": "3e76b12cab53275c7244e4782a1ddb44de4122080a474f85d2a725f249ab8842",
+        "bytes": 318
+      },
+      "et:tests\\golden\\fmp_v2.wrong_quarter.json": {
+        "sha256": "a7554f636a312ffc29e6b1b9e242fd37b089610bb95dc3b116c8740899aad1ca",
+        "bytes": 171
+      },
+      "et:tests\\golden\\manifest.json": {
+        "sha256": "2b098b1f53b5d347671ddeda9aa7f8eabb08ca97b539ccbdddf7b3699e7f5453",
+        "bytes": 1539
+      },
+      "et:tests\\golden\\motley_candidate_v2.disabled.json": {
+        "sha256": "6876601068650f01cae88acabe52e12ed2343681af602ffc1aaaa26afda7350c",
+        "bytes": 163
+      },
+      "et:tests\\golden\\motley_candidate_v2.fetched_test_only.json": {
+        "sha256": "35469e35d91149f175ba15118ef10b4825eda265f2c58fe063300907e2acde6a",
+        "bytes": 1929
+      },
+      "et:tests\\golden\\motley_candidate_v2.request.json": {
+        "sha256": "f0bc5f8eb8112ef31e5f4c355295a79b7de6fa8d6c5220922b58c99226b59015",
+        "bytes": 612
+      },
+      "et:tests\\golden\\README.md": {
+        "sha256": "c3c2d63d18f1aab6adf431086741cc31aab5da3e413d4e9a8652d98e714457f4",
+        "bytes": 3053
+      },
+      "ff:tests/fixtures/et_s0b/.gitattributes": {
+        "sha256": "8b6bb6bcb9ba3a682e10de1303de9dd9e27841641bc478a8114426e97531722b",
+        "bytes": 20
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.credentials_missing.json": {
+        "sha256": "0515573fa8b48f40d25d105817c53181907808858f5130ec08fff56670e7fc56",
+        "bytes": 166
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.entitlement_402.json": {
+        "sha256": "289bdd6de882eb690103ee9c967c97910cb429927c1005d4cd3d5f2faf4fb351",
+        "bytes": 167
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.fetched.json": {
+        "sha256": "ee643fbbd6c37b82c933689f819525330df21c6383e8b2fa81500902ac39ece3",
+        "bytes": 2263
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.fy_only_invalid.json": {
+        "sha256": "8133e5d90075ba4970568f0f9fbfaf19190c6a6ef1e641c1db0533d0e3572bda",
+        "bytes": 164
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.request.json": {
+        "sha256": "3e76b12cab53275c7244e4782a1ddb44de4122080a474f85d2a725f249ab8842",
+        "bytes": 318
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.wrong_quarter.json": {
+        "sha256": "a7554f636a312ffc29e6b1b9e242fd37b089610bb95dc3b116c8740899aad1ca",
+        "bytes": 171
+      },
+      "ff:tests/fixtures/et_s0b/manifest.json": {
+        "sha256": "2b098b1f53b5d347671ddeda9aa7f8eabb08ca97b539ccbdddf7b3699e7f5453",
+        "bytes": 1539
+      },
+      "ff:tests/golden/.gitattributes": {
+        "sha256": "8b6bb6bcb9ba3a682e10de1303de9dd9e27841641bc478a8114426e97531722b",
+        "bytes": 20
+      },
+      "ff:tests/golden/ff_v1_not_found.json": {
+        "sha256": "0ad53b379fca8007ea9c26191e4dff572b28c18c1413cce0a988376e7b2b7025",
+        "bytes": 218
+      },
+      "ff:tests/golden/ff_v1_success.json": {
+        "sha256": "b5ebe79bdd5459824d5e1b79095f631e212738b79bacfc097c975c2f351f1fa6",
+        "bytes": 238
+      },
+      "ff:tests/golden/ff_v2_fetch_source_candidate.json": {
+        "sha256": "789a36132c46a9e258a9b7372a1101b3e0ee026527f1008b9e5fb76b4861615a",
+        "bytes": 969
+      },
+      "ff:tests/golden/ff_v2_gap.json": {
+        "sha256": "da2782b8af2c584ea0af2b986651463cc38142641c8022b26c7d1253bfbe9379",
+        "bytes": 600
+      },
+      "ff:tests/golden/ff_v2_period_unresolved.json": {
+        "sha256": "24eb16333d7a80864a0f1c4876d271c3bc502ad73466c6c65b39fbd6196622f5",
+        "bytes": 1012
+      },
+      "ff:tests/golden/ff_v2_source_candidate.json": {
+        "sha256": "789a36132c46a9e258a9b7372a1101b3e0ee026527f1008b9e5fb76b4861615a",
+        "bytes": 969
+      },
+      "ff:tests/golden/ff_v2_transcript_downloaded.json": {
+        "sha256": "fbf5b266677d5ce567c01c767264ff32d051f8dd0aba941150697aeea4e48dc6",
+        "bytes": 1704
+      },
+      "ff:tests/golden/ff_v2_upstream_error.json": {
+        "sha256": "a754125263bde9c4dfa254052ad4d6b10b3c7bb96077a181c6b259a84ba78c1d",
+        "bytes": 486
+      },
+      "ff:tests/golden/s3_ff_limits_argv.json": {
+        "sha256": "ee8becb06b0fb91f323cda71458e7bb989c46749af0a73d2a07f558db24695d2",
+        "bytes": 1244
+      }
+    },
+    "original_failure_manifest": {
+      "sha256": "3140797e6c6839063446565ea88d89138ec4a9afae84ad1c8da03138443c9050",
+      "bytes": 1529
+    },
+    "original_failure": {
+      "probe-result.json": {
+        "sha256": "143384e779a1287a894661d7f8d96a4fa742d54c95385346c1684fdcbe21e2da",
+        "bytes": 146199
+      },
+      "probe.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "probe.stdout.txt": {
+        "sha256": "1670453e07b800ebc771de704cf947c14181f4510a1fd70a56012e6d8798dfec",
+        "bytes": 1590
+      },
+      "probes.py": {
+        "sha256": "b991d08c44f79c2a135058b34eccb84e3038c6c7aceee5de5b4440fad062ab82",
+        "bytes": 13143
+      },
+      "pytest.ini": {
+        "sha256": "fa33bd755b3735c508b3edfccbcfa472dadc11f8d1013a7e91c9eb3a6fe3cc16",
+        "bytes": 30
+      },
+      "report.json": {
+        "sha256": "3d534d9be564af33c7087b125be4e508494a6e1880dfc276c64d5a388e1e7457",
+        "bytes": 2360
+      },
+      "report.md": {
+        "sha256": "d66cdf20a8029c2247ef08b820f130734a18f86a2885f82bd0dcf74486f3afea",
+        "bytes": 5261
+      },
+      "run_review.py": {
+        "sha256": "265343482a17893c93632a246eb252fa785b24aa1cfa908871bfeb1ea8aab31c",
+        "bytes": 5907
+      },
+      "trace.jsonl": {
+        "sha256": "b288c2b7548f88e72c61e5f62ca3d7498016e0220431bff50f9e72c97d3e8b84",
+        "bytes": 11507
+      }
+    },
+    "root_cwp_freeze": {
+      "sha256": "397a02e903e1543c6ca4d3116eff10c03d46cb9d6fe657a1c93fb2860f1fcb2c",
+      "bytes": 2778
+    },
+    "cwp_product": {
+      "src/company_wiki/source_catalog/acquisition.py": {
+        "sha256": "a740b777f0c14143959d809e3f371403ef14f8db0816dd7a6d074cb952e42daf",
+        "bytes": 32750
+      },
+      "src/company_wiki/source_catalog/acquisition_service.py": {
+        "sha256": "1dbac83477f06b498e2af301446b088c6beb0136c3cb78d75aa728c9db912c7c",
+        "bytes": 15985
+      },
+      "src/company_wiki/source_catalog/assertion_service.py": {
+        "sha256": "676b8c14e02369d8ea6e7ec16ff8edc719b8b2495c3780496055da8897d2196e",
+        "bytes": 51431
+      },
+      "src/company_wiki/source_catalog/canonical_scope.py": {
+        "sha256": "95e21e0298e915def9e14b5e045654779841a2e504d752236053c23a38ccf798",
+        "bytes": 8726
+      },
+      "src/company_wiki/source_catalog/canonical_writer.py": {
+        "sha256": "5b90a9b541bd8c167c54145485025b5deba36101dab4cf8750757d466e6ebb91",
+        "bytes": 37114
+      },
+      "src/company_wiki/source_catalog/local_reconcile.py": {
+        "sha256": "e43af3d492d16f2b6d3fe2ff4fc71d3d86224e20fbca4e7a151e3a01657e2fd3",
+        "bytes": 29769
+      },
+      "src/company_wiki/source_catalog/operation_contract.py": {
+        "sha256": "580e89da8d3afc9dbacb34c6e6f0837c7e118ca5d0f57b14f946255d3b4491dd",
+        "bytes": 8697
+      },
+      "src/company_wiki/source_catalog/operation_projection.py": {
+        "sha256": "f046ae241db4f3b0680f055ea0c3f783d431bd8c40918dcab1f9aef7bf8911a0",
+        "bytes": 5745
+      },
+      "src/company_wiki/source_catalog/registration_scope.py": {
+        "sha256": "85f6c0b324c13181e7bfa8d1e9f0efa406b6149817d35e0a6cbc79c20f81146f",
+        "bytes": 2271
+      },
+      "src/company_wiki/source_catalog/scanner.py": {
+        "sha256": "14638494175254037df2cbc851f43214de56a11912b712fe597dc7add4b97203",
+        "bytes": 100730
+      },
+      "tests/contract/test_canonical_acquisition_scope.py": {
+        "sha256": "8a125aad088f3fad3d6ea5363209630ac751c21a4a6a8514de8623e1da912840",
+        "bytes": 20366
+      },
+      "tests/unit/test_canonical_scope.py": {
+        "sha256": "32453803611055b7945d7b26aad40fbb95748fb2d1db1f09c76373d9edf61796",
+        "bytes": 2203
+      }
+    },
+    "repair_manifest": {
+      "sha256": "2176c0c39e97d20ce510f73b7d72c47175ff1834e702b6e1a9d252621b6905c0",
+      "bytes": 4408
+    },
+    "repair_evidence": {
+      "before.json": {
+        "sha256": "68895532a6cba686f6d1cedb31361a31945d5fc546df395a5872a960e9d43f92",
+        "bytes": 1763
+      },
+      "concentrated.json": {
+        "sha256": "38301ccddb718ed305c66c9d2e48bbf22dae68e6b929bdd2f696fcc41cd5e272",
+        "bytes": 1050
+      },
+      "concentrated.log": {
+        "sha256": "88948814dce9af285b967865b01834455d1b6668f178d6cd7ca4e587e30f4a35",
+        "bytes": 194
+      },
+      "concentrated.xml": {
+        "sha256": "25a9bda4c19caf19caefc14af76dcb66d91ce97c76e2ab24ede49d4f54e8f235",
+        "bytes": 26123
+      },
+      "diff-check.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "finalize.py": {
+        "sha256": "527d887d279efd414cfe546b35d9884b1ee7c306ed05c8647bdc77c090e3f4f6",
+        "bytes": 10403
+      },
+      "implement.py": {
+        "sha256": "92530d6bb5a74686ff530d0bcc6d5b85332f016d2dbd133b655a9201bad6624f",
+        "bytes": 5661
+      },
+      "lint.json": {
+        "sha256": "c832ca77744d23ad3773474ff88ce16904739ffd59fe526070700d4143a190c9",
+        "bytes": 745
+      },
+      "lint.log": {
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "bytes": 20
+      },
+      "red.json": {
+        "sha256": "755ac5df73d2c8a275d62ee8d577419341c335e89e80828de357d6675ecf0d12",
+        "bytes": 934
+      },
+      "red.log": {
+        "sha256": "17b7a654b6ef9a0e924188491c9e4af7d97238b341a25ff34c42df0ce9d07f0f",
+        "bytes": 4831
+      },
+      "red.xml": {
+        "sha256": "40ad210843cdf173d2e31d02305fbef88834378e3daac603f63597c43da1c102",
+        "bytes": 4838
+      },
+      "report.json": {
+        "sha256": "2a2200a5e0461bc7f416ad3195bb6995863d58584d1bbbb4a1aa46a2e25166eb",
+        "bytes": 1215
+      },
+      "report.md": {
+        "sha256": "e97df0984043342b445022d5e33b8aaba441de25689fa5dd4cd8465955b02fa7",
+        "bytes": 1307
+      },
+      "run.py": {
+        "sha256": "c9b2013d21f9d50571530a1252b4f615e76602c1f9b75569f4cf825c6d0590da",
+        "bytes": 3896
+      },
+      "setup.py": {
+        "sha256": "7bcd9fb64b6ff7b1926716e80a82dead8edaf14703dffdf341028af2c1a36b2c",
+        "bytes": 4470
+      },
+      "tracked-product-v2.patch": {
+        "sha256": "05fdb88ccbd556d46e897bb5139e810634197e4806c31255b77c7cad88956384",
+        "bytes": 21096
+      },
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\product-freeze-v2.json": {
+        "sha256": "87495b11e3c41986c3a10374bae0c603af6db4d61d7b8ed8c6a01771b7ed3381",
+        "bytes": 11865
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\findings.md": {
+        "sha256": "87de4604a3544d4dbeac7812be87756da8eb9cf03d0c4574d690363a12b8e4e6",
+        "bytes": 3649
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\progress.md": {
+        "sha256": "ee68dd275a3d5ec27c92afef60bbec836a78d43c430141640e0494aaff3ea7e2",
+        "bytes": 4547
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\task_plan.md": {
+        "sha256": "74cd2f047e4373279ed4b4fc6a60296a05766d44f4180152cdbd68bcf6631782",
+        "bytes": 5383
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-cutoff-result\\handoff-v2.md": {
+        "sha256": "e97df0984043342b445022d5e33b8aaba441de25689fa5dd4cd8465955b02fa7",
+        "bytes": 1307
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-cutoff-result\\handoff-v2.json": {
+        "sha256": "2a2200a5e0461bc7f416ad3195bb6995863d58584d1bbbb4a1aa46a2e25166eb",
+        "bytes": 1215
+      }
+    },
+    "old_case_authority": {
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-ff-matrix\\findings.md": {
+        "sha256": "d4ee2d8e3fb8a3ab0166a845b5c5a66c55a357f37c95df6f9b006dcb04e8cbbc",
+        "bytes": 19881
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-ff-matrix\\progress.md": {
+        "sha256": "048581a054be35fd9b64babeab5c4cb8a3e9a577df932d8b36dbf022c708a21b",
+        "bytes": 7551
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-ff-matrix\\task_plan.md": {
+        "sha256": "d182481760084bbdd5d64f8d34c88ec73ef0a23e0b202eed6f1a4f64e86a6c62",
+        "bytes": 10808
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-ff-matrix\\case-authority\\handoff.json": {
+        "sha256": "d7cbcef96a476210e5b33d6d5ab688b373a9992fe28143b980696a8e52f74fab",
+        "bytes": 1229
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-ff-matrix\\case-authority\\handoff.md": {
+        "sha256": "f6ce3c4debc20ba2d772754d6d7a2a22edd85c79803038fa693af7e547a40cd9",
+        "bytes": 3222
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\.gitattributes": {
+        "sha256": "eebea40ad733e7c5216e9d2ad50533e354ecdd1f6f6cccea1b02e963b2cac425",
+        "bytes": 179
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_fy_only_no_q.run1.request.json": {
+        "sha256": "8568a7c530be760cb1fe0fd266a622d5caaa154b0648536d6da1ceab0c2dc77b",
+        "bytes": 478
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_fy_only_no_q.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_fy_only_no_q.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_hard_timeout.run1.request.json": {
+        "sha256": "748f748fb38164392f595e2ce763ef3b428aa3860e32516ffcaa902f061c09ed",
+        "bytes": 503
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_hard_timeout.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_hard_timeout.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_max_bytes.run1.request.json": {
+        "sha256": "5cad894ddaa2409e60ff097384f4fc3503c69bc69947c764b861cc12d95eebd3",
+        "bytes": 499
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_max_bytes.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_max_bytes.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_past_cutoff.run1.request.json": {
+        "sha256": "b76acfc9ce98defac0e31a714b73508e307315055431dd09a8dd6f935e140acf",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_past_cutoff.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_past_cutoff.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_mime.run1.request.json": {
+        "sha256": "eaf44324d62eb23384f5a57a48050d2dd1fa9a810c93340f45576104164b278f",
+        "bytes": 503
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_mime.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_mime.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_quarter.run1.request.json": {
+        "sha256": "1bcaae7ae1880f7f4c859851ab762aafc41a2b0c948054e8a7bfc177773e051a",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_quarter.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_quarter.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_symbol.run1.request.json": {
+        "sha256": "989067a5bcbd9e00214445529241492488b6299fb4dc7697183df3c061b6c339",
+        "bytes": 503
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_symbol.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_symbol.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run1.request.json": {
+        "sha256": "eef349d3eb597bacd0d3e45176c25a92f51f929ab68562b76d75f102b07c84a3",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run2.request.json": {
+        "sha256": "eef349d3eb597bacd0d3e45176c25a92f51f929ab68562b76d75f102b07c84a3",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run2.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_402_entitlement.run1.request.json": {
+        "sha256": "0ca64d13a2e30a9b92b237ebd93d789dfcfc6b63fb18948e597a681c63e147d9",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_402_entitlement.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_402_entitlement.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_missing_creds.run1.request.json": {
+        "sha256": "c4d6aff6546c8500266a2d45afdb04b947656c857c10a53eb904ff131255562a",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_missing_creds.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_missing_creds.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_request_error.run1.request.json": {
+        "sha256": "b604022dafcff9c2c0b38fcc4d004dfb7977ba376883c7dc30055bd812bd96ed",
+        "bytes": 186
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_request_error.run1.response.json": {
+        "sha256": "32917771111531f7a242253b00aafb10f7c0be0b67f859e5c38f20ffa9c344ae",
+        "bytes": 687
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_request_error.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_unknown_usage.run1.request.json": {
+        "sha256": "789e577094af4b7baeba5906c70f118561ac195d0ade95c1cc62cfdea16aa830",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_unknown_usage.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_unknown_usage.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run1.request.json": {
+        "sha256": "86ee58427a3af92172d7a0c81d4dd989de3eed1edd146db6a99b0be7150f648e",
+        "bytes": 357
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run1.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run2.request.json": {
+        "sha256": "86ee58427a3af92172d7a0c81d4dd989de3eed1edd146db6a99b0be7150f648e",
+        "bytes": 357
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run2.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_hit.run1.request.json": {
+        "sha256": "d6ef736be115ed8234c3c27e762b80e32c02e7650bf3d61d4d5f3c78ff6c5eb1",
+        "bytes": 238
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_hit.run1.response.json": {
+        "sha256": "550d8f274ecc9d04f22f2cd9fea68a4e8e8eca49f5fe557c4e0b00f78dea497f",
+        "bytes": 1047
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run1.request.json": {
+        "sha256": "eb8453c70b467f816aac14fdbe98964c2f4d07e8e373ba6b9b403908e1ad6c18",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run1.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run2.request.json": {
+        "sha256": "eb8453c70b467f816aac14fdbe98964c2f4d07e8e373ba6b9b403908e1ad6c18",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run2.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_hit.run1.request.json": {
+        "sha256": "6840dba7adf0d457df7bb4733d12615eeae66ef40d92af9f372e5a2a41d14876",
+        "bytes": 241
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_hit.run1.response.json": {
+        "sha256": "5e8b0e49ed4321e455fea3820298e3a7ce231c0029407bd333dd81572b5a00ed",
+        "bytes": 1050
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run1.request.json": {
+        "sha256": "7423696452bc34f491bdcab908358dd081ac605178719f8cae3f34e3fe901952",
+        "bytes": 362
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run1.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run2.request.json": {
+        "sha256": "7423696452bc34f491bdcab908358dd081ac605178719f8cae3f34e3fe901952",
+        "bytes": 362
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run2.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_hit.run1.request.json": {
+        "sha256": "af6d5bda297c5eff69675c40ad25c235673a4fecf8133ba013450b2bea5b8261",
+        "bytes": 243
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_hit.run1.response.json": {
+        "sha256": "eb803827db110f3304da4fc76850c2d53ec5eac87b6f9249eadf3e6f57ce1787",
+        "bytes": 1052
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run1.request.json": {
+        "sha256": "58e0e2ae61782ba099c5173a81b6f4de09cea77fb6628c5fc28c5eb79df36b79",
+        "bytes": 357
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run1.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run2.request.json": {
+        "sha256": "58e0e2ae61782ba099c5173a81b6f4de09cea77fb6628c5fc28c5eb79df36b79",
+        "bytes": 357
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run2.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_hit.run1.request.json": {
+        "sha256": "5fdf48ad9ca9b76fc70d745071aea974eb2d60ae9b6ebaa9b38c257b8b0d8006",
+        "bytes": 238
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_hit.run1.response.json": {
+        "sha256": "eb2dd1aa91fac878e7747ee7d59d8142d28ef40773ff7d078352ebe43e422f1a",
+        "bytes": 1047
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run1.request.json": {
+        "sha256": "b03dc7258b07bc19fdc2191f3bcf49163bc03f329f179908fb0093ff93a46307",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run1.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run2.request.json": {
+        "sha256": "b03dc7258b07bc19fdc2191f3bcf49163bc03f329f179908fb0093ff93a46307",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run2.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_hit.run1.request.json": {
+        "sha256": "fbd9a91f22a017ab36a2db114f8e8b4d5766a3c0e28fa4ebec0827d09d21c7d9",
+        "bytes": 241
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_hit.run1.response.json": {
+        "sha256": "94109f9d29e64fae5cdeb748c3f41b913c38c03cf209327494128fa7ad0802d8",
+        "bytes": 1050
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run1.request.json": {
+        "sha256": "5b754d8a9650c8904dbf59b1e6b7ea6dcc81ff0c615c1a7a128f6ed0cfb3c442",
+        "bytes": 362
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run1.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run2.request.json": {
+        "sha256": "5b754d8a9650c8904dbf59b1e6b7ea6dcc81ff0c615c1a7a128f6ed0cfb3c442",
+        "bytes": 362
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run2.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_hit.run1.request.json": {
+        "sha256": "79dd03794356220b46075d5c14e329bc1cc295e85f082286fb6ad073b5294068",
+        "bytes": 243
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_hit.run1.response.json": {
+        "sha256": "ca4c0c4bd82d5ac04b74c9b5b13ed3e24ed819620fe72f9f4644e6b119a9bc67",
+        "bytes": 1052
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run1.request.json": {
+        "sha256": "56c0029cd20980a086269225cc1d73c7beecfa0fb16c226dc029d4d96e0a3a74",
+        "bytes": 355
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run1.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run2.request.json": {
+        "sha256": "56c0029cd20980a086269225cc1d73c7beecfa0fb16c226dc029d4d96e0a3a74",
+        "bytes": 355
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run2.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_hit.run1.request.json": {
+        "sha256": "342d71052a174aef9dff4802ecaa8be38ef32fe205a143f15d499533ffc30bf5",
+        "bytes": 236
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_hit.run1.response.json": {
+        "sha256": "bc54fed7cdfcd8f26d5251a79f60d1a79be87f57897f2014d0d3a564e075c6ef",
+        "bytes": 1047
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run1.request.json": {
+        "sha256": "33b0cd70f4d96e416b6e1e35003497b8bebbd2e7a0c5b56b8e8f5047916d09f9",
+        "bytes": 358
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run1.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run2.request.json": {
+        "sha256": "33b0cd70f4d96e416b6e1e35003497b8bebbd2e7a0c5b56b8e8f5047916d09f9",
+        "bytes": 358
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run2.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_hit.run1.request.json": {
+        "sha256": "59706ddf75b22f18b46fd4339aaa07953cbb68bb7de29a0c3cf89ec941d0270a",
+        "bytes": 239
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_hit.run1.response.json": {
+        "sha256": "b82564046e1835f02e68c25f01c46a13635a915d6f33bbf5208b3863218f6982",
+        "bytes": 1050
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run1.request.json": {
+        "sha256": "1826800f321c63281159db76a40d9f9cdd112dcddc7f40f74a15731c8862cc73",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run1.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run2.request.json": {
+        "sha256": "1826800f321c63281159db76a40d9f9cdd112dcddc7f40f74a15731c8862cc73",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run2.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_hit.run1.request.json": {
+        "sha256": "cd7ccf78c7a356cfdd904d30774ae731437eb748f44ee67e9d95835c2ffa2075",
+        "bytes": 241
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_hit.run1.response.json": {
+        "sha256": "553364ea70df810db7a0827834ee8de024b720e97541edf508a92a8b0a72343f",
+        "bytes": 1052
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fresh-source-proofs.json": {
+        "sha256": "a59ac47016882c9976c7df9470c6b91cabb008a1c8ef3780c4117cf8027c9b6a",
+        "bytes": 105241
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fresh-source-proofs.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\incomplete_sidecar_metadata_gap.run1.request.json": {
+        "sha256": "2185d5afac12802d8669fa9dad31670802bafa0d5bad63439ffae657a2d3a0fb",
+        "bytes": 238
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\incomplete_sidecar_metadata_gap.run1.response.json": {
+        "sha256": "ccf72dbabfbd2bf9a215925b87496164eb0476dd26ee304d06e0c1d35d38a47d",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\incomplete_sidecar_metadata_gap.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\local_txt_exact_reuse.run1.request.json": {
+        "sha256": "ed470e59b95a53eeb24303ca1a4ce579d42ba6edf18cf72373ccea185b3a4b8b",
+        "bytes": 375
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\local_txt_exact_reuse.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\local_txt_exact_reuse.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_convertible_bond.run1.request.json": {
+        "sha256": "6dfb492dadc36e849005039ec7f132f0a9f219e479c49e9043d15965f7363878",
+        "bytes": 343
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_convertible_bond.run1.response.json": {
+        "sha256": "42a9ce9e2e1e0680879faec7084eb27391beb030bef3e4fb0becdfbea62666e5",
+        "bytes": 1487
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_convertible_bond.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_equity_offering.run1.request.json": {
+        "sha256": "fc8b1b902129fc70d2ddb9c2d1e09ca1bbc8df35870a1b7ee93bddc93b49fb2b",
+        "bytes": 342
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_equity_offering.run1.response.json": {
+        "sha256": "9162187b1922f1c4c4c508a297e8181304a721ed89d191ec293e67308131a540",
+        "bytes": 1486
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_equity_offering.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_investor_relations.run1.request.json": {
+        "sha256": "e6183ce586eae5da5dfba3374089e83aaf82588c44403fbb2cfc54482298c662",
+        "bytes": 336
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_investor_relations.run1.response.json": {
+        "sha256": "d8f1262d7f7e0f260ead984bc6512a966083d770618a1352a5019c55945102b9",
+        "bytes": 1472
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_investor_relations.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_prospectus.run1.request.json": {
+        "sha256": "732fd9b1d478348890d62d20d256728376766c3ec7754aa147a7ca6964f315f5",
+        "bytes": 326
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_prospectus.run1.response.json": {
+        "sha256": "d48454473e59f4e999fdd846017453e8d48b2ec79b2473ab87cb9f3d886ecf20",
+        "bytes": 1470
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_prospectus.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_max_bytes.run1.request.json": {
+        "sha256": "11cfa755e014a6ba87f4c2f0f654c89f70370b11073526ae4731265f6ae46a10",
+        "bytes": 322
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_max_bytes.run1.response.json": {
+        "sha256": "621295194c3e9c98c61756fcad7a40ea2f1cc0de87f9a0f2540c2f9145983790",
+        "bytes": 1530
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_max_bytes.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_mime.run1.request.json": {
+        "sha256": "b8af82e17b1e82d304e525b123ffbe722cfee7e9e793e286291c07f0043681f3",
+        "bytes": 327
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_mime.run1.response.json": {
+        "sha256": "9408b20bf4af0f2187341a7a52963d1c543c53b000ca4a864cb2acedc9f91d10",
+        "bytes": 1531
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_mime.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_sha.run1.request.json": {
+        "sha256": "b8af82e17b1e82d304e525b123ffbe722cfee7e9e793e286291c07f0043681f3",
+        "bytes": 327
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_sha.run1.response.json": {
+        "sha256": "e3259a5af7fbd715e3273c3daf7868188f36473867a9b06efba5ee8c0cf3bbf4",
+        "bytes": 1531
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_sha.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.retry.request.json": {
+        "sha256": "c3b844caf4bfc2149645e83b06b5d899aa8de1dcc02e9b1b8dc32ef6580f35e1",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.retry.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.retry.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.run1.request.json": {
+        "sha256": "92997b18076ebebf8c36ae0041b17fe1a163c28a01f39b703e12bf1795665cfc",
+        "bytes": 503
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\reuse_only_missing_period.run1.request.json": {
+        "sha256": "0386cf29a43bb86749c7e006bd3021d302e7ace2ae9f14473483a338c1f944a1",
+        "bytes": 238
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\reuse_only_missing_period.run1.response.json": {
+        "sha256": "4e65d8749e0290287062c4d2a9c197b82e2fc0cb5bf9b9690156297dd6cbefeb",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\reuse_only_missing_period.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed-scan.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed-scan.stdout.txt": {
+        "sha256": "5f3794340a6154c73952ccfd7cc41124d0a0a4f095ac511484c57f10e733130f",
+        "bytes": 418
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_annual_report_2024_FY.response.json": {
+        "sha256": "e389f1c7261b7256ca3d9ed22c8b547d432289156de18a1e2de97ade53fd8539",
+        "bytes": 2610
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_annual_report_2024_FY.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_quarterly_report_2024_Q1.response.json": {
+        "sha256": "01b8a54a38fe2e3ef220fac86066a3c864b7ca124b5d69cc648c50dc3473c3c6",
+        "bytes": 2622
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_quarterly_report_2024_Q1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_semi_annual_report_2024_S1.response.json": {
+        "sha256": "6e3c6dd53e69a3e805735a8801949342e66bbb1a5eaa8b02e8d9950059a2c03a",
+        "bytes": 2630
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_semi_annual_report_2024_S1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_annual_report_2024_FY.response.json": {
+        "sha256": "a4e53ec3ac4c3142e44cbe74f93b5dcf80255639612b01d1b5b14cfb5ddba790",
+        "bytes": 2606
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_annual_report_2024_FY.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_quarterly_report_2024_Q1.response.json": {
+        "sha256": "161109681ec135f52a31ec98cc1f75569f56dea377c3e873cd409345b063c446",
+        "bytes": 2618
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_quarterly_report_2024_Q1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_semi_annual_report_2024_S1.response.json": {
+        "sha256": "15381b2a15f5d491d6c54c31f12592ea7025a3b18b806bd0622dba1c463e66d4",
+        "bytes": 2626
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_semi_annual_report_2024_S1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_annual_report_2024_FY.response.json": {
+        "sha256": "8c845cf4313394d25adfe1f430f8bd237fc94b3568da27befc0232d796adb933",
+        "bytes": 2602
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_annual_report_2024_FY.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_annual_report_2025_FY.response.json": {
+        "sha256": "ae9783a507e442a2f33092c9aae24700ec78cd5bcd8648251c6ade416e6fb10b",
+        "bytes": 738
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_annual_report_2025_FY.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_quarterly_report_2024_Q1.response.json": {
+        "sha256": "827713bec61a5c2597e8c108bc573bae6072da4724a2491e6289a85c87e412ec",
+        "bytes": 2614
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_quarterly_report_2024_Q1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_semi_annual_report_2024_S1.response.json": {
+        "sha256": "554f714fa14c0b2f574b406eeaddea57d63f31f686f192f9da0a71bb85cd6f5c",
+        "bytes": 2622
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_semi_annual_report_2024_S1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\warm-seed-receipts.json": {
+        "sha256": "b926cca49743edee82dafd4634a2f880686e949a199106c3420e656c3bfde51e",
+        "bytes": 42838
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\original-41-report.json": {
+        "sha256": "aa2ab10add76f89e6e259fa0a05c8ad961f562f46b3fd21a1e94c1b2a3acc72f",
+        "bytes": 340060
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\test_w06_case_authority.py": {
+        "sha256": "2cf638a73fa2f9ca30651f48a2ce43dbf71829334f40f9fdf8dbcc9a9a267174",
+        "bytes": 9004
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\test_w06_contract_matrix.py": {
+        "sha256": "a973f3981f9b5a1a64b15d960ff04fe66ee681e8088b3606793cde0468e98590",
+        "bytes": 10452
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\test_w06_matrix_runtime.py": {
+        "sha256": "fe546fc250beae1a5ed262960b78d9ee04197e043521bbdc2cd6adf1ed702241",
+        "bytes": 10092
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\case_specs.py": {
+        "sha256": "b8a6542a35ab5255fe18be232ff5a0afbbf5c4bdca12b53c421401e303055281",
+        "bytes": 33175
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\cli_main.py": {
+        "sha256": "983c21327c04b343e235b2e81639c3e0b33ecf7094e7864f99b81369c78862f4",
+        "bytes": 11114
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\et_transcript_proxy.py": {
+        "sha256": "18d597e4974ce796e2c44ccc5cc270003061f19eb8636ed6e8a6b58850a716fc",
+        "bytes": 6696
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\extended_cases.py": {
+        "sha256": "86cd7e2b2f2c19fdf2221ac1ea6de5e085c99c2399b60eda1cac1900cebf288d",
+        "bytes": 8257
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\fixture_builder.py": {
+        "sha256": "b12ba2f4a6574d2a5bf756438ec02c54d54b1b0b1d5cfd4773f6ff2b1d56463c",
+        "bytes": 14158
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\fixture_provider_adapter.py": {
+        "sha256": "6f7e6385868c36395a6f79e0624fa4fb75b7b77ad9d8d59b50544a8c5c897282",
+        "bytes": 8653
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\matrix_cases.py": {
+        "sha256": "b28aa95c5aacef1cced2e4de6ace5054b40baca2e73a07dc4df2373b7947a331",
+        "bytes": 24534
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\matrix_outcome.py": {
+        "sha256": "82caaa23a6efa53a9cefaa07ee349c84e64a0913f8479fd88392bb3844aa424b",
+        "bytes": 2838
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\oracle.py": {
+        "sha256": "b3d90a003b2b3b2d669d7089da91eb9db7dbb06aa5a50f9d712e0d0ce82106a5",
+        "bytes": 17723
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\README.md": {
+        "sha256": "5819e649afc1117136f80e4d49b5c1ceb89ce3737865be7ecfac6c131bd4877e",
+        "bytes": 9815
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\report.py": {
+        "sha256": "0433b06b6eae46f42276de012c5a1055e4c5e8608bea84e0a8fe11d12b12ffdb",
+        "bytes": 2451
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\run.py": {
+        "sha256": "f63a3f4d7920c6ca9b4d9a801c1c5bb6fe166a167188d553c205f6bad3a94bea",
+        "bytes": 15022
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\runtime.py": {
+        "sha256": "022786a8dfaa9f54270955c047e02dc6556aef6ba2bf09c175a6667abec09d6b",
+        "bytes": 9528
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\source_proofs.py": {
+        "sha256": "0f8efefe78bd9285c3de6f1a3001d2b9eefe333e3a5911a824166b63df59f5e6",
+        "bytes": 4251
+      }
+    }
+  },
+  "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cut-review-3a81897c",
+  "initial_scratch_absent": true,
+  "environment_keys": [
+    "APPDATA",
+    "COMSPEC",
+    "HOME",
+    "PATH",
+    "PATHEXT",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD",
+    "PYTHONDONTWRITEBYTECODE",
+    "PYTHONPATH",
+    "PYTHONUTF8",
+    "SystemRoot",
+    "TEMP",
+    "TMP",
+    "USERPROFILE",
+    "WINDIR"
+  ],
+  "real_credentials_read_or_inherited": false,
+  "real_network_requests": 0,
+  "llm_calls": 0,
+  "cost_usd": 0,
+  "exit_code": 0,
+  "elapsed_seconds": 2.769,
+  "scratch_restored": true,
+  "after": {
+    "v2_freeze": {
+      "sha256": "87495b11e3c41986c3a10374bae0c603af6db4d61d7b8ed8c6a01771b7ed3381",
+      "bytes": 11865
+    },
+    "product": {
+      "et:transcript_api.py": {
+        "sha256": "f1bc6e6cadcf02ce6aad757c2d79d16a5ed87270dece827ac45399d4ffcbf2e3",
+        "bytes": 57923
+      },
+      "et:tests/test_transcript_api.py": {
+        "sha256": "72303bc90edc5e7687881f2b698d831ccf20875910b40885f8e38d17a9512c54",
+        "bytes": 35002
+      },
+      "et:tests/test_retrieval_cli_e2e.py": {
+        "sha256": "a55153a6f12fcfc2c751ea6da5818c05d60caa87a7d4aac696e96a223ceda9a7",
+        "bytes": 14455
+      },
+      "ff:scripts/transcript_tool_transport.py": {
+        "sha256": "1e974dd54920355d57de21894c046f2fcfec6fc1554a3a8db782f85a9b6fea62",
+        "bytes": 36217
+      },
+      "ff:scripts/et_v2_contract.py": {
+        "sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+        "bytes": 10157
+      },
+      "ff:tests/test_transcript_launch_contract.py": {
+        "sha256": "42a3dfd22baef9f52998e6ae789494544964caac464530a6a154a49302852f39",
+        "bytes": 30820
+      },
+      "ff:tests/test_transcript_companion_transport.py": {
+        "sha256": "643251a8d6adfb74c1fdfa6cb83e17bec8cafef9a56daf40c2e7ed35c7ba389a",
+        "bytes": 20348
+      },
+      "ff:tests/test_et_s0b_contract.py": {
+        "sha256": "8280d87f5bfddaa1431e40f84a793ef63cde53dbb4f1a69deeaf122f79971f34",
+        "bytes": 4901
+      }
+    },
+    "old_goldens": {
+      "et:tests\\golden\\.gitattributes": {
+        "sha256": "8b6bb6bcb9ba3a682e10de1303de9dd9e27841641bc478a8114426e97531722b",
+        "bytes": 20
+      },
+      "et:tests\\golden\\fmp_v2.credentials_missing.json": {
+        "sha256": "0515573fa8b48f40d25d105817c53181907808858f5130ec08fff56670e7fc56",
+        "bytes": 166
+      },
+      "et:tests\\golden\\fmp_v2.entitlement_402.json": {
+        "sha256": "289bdd6de882eb690103ee9c967c97910cb429927c1005d4cd3d5f2faf4fb351",
+        "bytes": 167
+      },
+      "et:tests\\golden\\fmp_v2.fetched.json": {
+        "sha256": "ee643fbbd6c37b82c933689f819525330df21c6383e8b2fa81500902ac39ece3",
+        "bytes": 2263
+      },
+      "et:tests\\golden\\fmp_v2.fy_only_invalid.json": {
+        "sha256": "8133e5d90075ba4970568f0f9fbfaf19190c6a6ef1e641c1db0533d0e3572bda",
+        "bytes": 164
+      },
+      "et:tests\\golden\\fmp_v2.request.json": {
+        "sha256": "3e76b12cab53275c7244e4782a1ddb44de4122080a474f85d2a725f249ab8842",
+        "bytes": 318
+      },
+      "et:tests\\golden\\fmp_v2.wrong_quarter.json": {
+        "sha256": "a7554f636a312ffc29e6b1b9e242fd37b089610bb95dc3b116c8740899aad1ca",
+        "bytes": 171
+      },
+      "et:tests\\golden\\manifest.json": {
+        "sha256": "2b098b1f53b5d347671ddeda9aa7f8eabb08ca97b539ccbdddf7b3699e7f5453",
+        "bytes": 1539
+      },
+      "et:tests\\golden\\motley_candidate_v2.disabled.json": {
+        "sha256": "6876601068650f01cae88acabe52e12ed2343681af602ffc1aaaa26afda7350c",
+        "bytes": 163
+      },
+      "et:tests\\golden\\motley_candidate_v2.fetched_test_only.json": {
+        "sha256": "35469e35d91149f175ba15118ef10b4825eda265f2c58fe063300907e2acde6a",
+        "bytes": 1929
+      },
+      "et:tests\\golden\\motley_candidate_v2.request.json": {
+        "sha256": "f0bc5f8eb8112ef31e5f4c355295a79b7de6fa8d6c5220922b58c99226b59015",
+        "bytes": 612
+      },
+      "et:tests\\golden\\README.md": {
+        "sha256": "c3c2d63d18f1aab6adf431086741cc31aab5da3e413d4e9a8652d98e714457f4",
+        "bytes": 3053
+      },
+      "ff:tests/fixtures/et_s0b/.gitattributes": {
+        "sha256": "8b6bb6bcb9ba3a682e10de1303de9dd9e27841641bc478a8114426e97531722b",
+        "bytes": 20
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.credentials_missing.json": {
+        "sha256": "0515573fa8b48f40d25d105817c53181907808858f5130ec08fff56670e7fc56",
+        "bytes": 166
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.entitlement_402.json": {
+        "sha256": "289bdd6de882eb690103ee9c967c97910cb429927c1005d4cd3d5f2faf4fb351",
+        "bytes": 167
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.fetched.json": {
+        "sha256": "ee643fbbd6c37b82c933689f819525330df21c6383e8b2fa81500902ac39ece3",
+        "bytes": 2263
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.fy_only_invalid.json": {
+        "sha256": "8133e5d90075ba4970568f0f9fbfaf19190c6a6ef1e641c1db0533d0e3572bda",
+        "bytes": 164
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.request.json": {
+        "sha256": "3e76b12cab53275c7244e4782a1ddb44de4122080a474f85d2a725f249ab8842",
+        "bytes": 318
+      },
+      "ff:tests/fixtures/et_s0b/fmp_v2.wrong_quarter.json": {
+        "sha256": "a7554f636a312ffc29e6b1b9e242fd37b089610bb95dc3b116c8740899aad1ca",
+        "bytes": 171
+      },
+      "ff:tests/fixtures/et_s0b/manifest.json": {
+        "sha256": "2b098b1f53b5d347671ddeda9aa7f8eabb08ca97b539ccbdddf7b3699e7f5453",
+        "bytes": 1539
+      },
+      "ff:tests/golden/.gitattributes": {
+        "sha256": "8b6bb6bcb9ba3a682e10de1303de9dd9e27841641bc478a8114426e97531722b",
+        "bytes": 20
+      },
+      "ff:tests/golden/ff_v1_not_found.json": {
+        "sha256": "0ad53b379fca8007ea9c26191e4dff572b28c18c1413cce0a988376e7b2b7025",
+        "bytes": 218
+      },
+      "ff:tests/golden/ff_v1_success.json": {
+        "sha256": "b5ebe79bdd5459824d5e1b79095f631e212738b79bacfc097c975c2f351f1fa6",
+        "bytes": 238
+      },
+      "ff:tests/golden/ff_v2_fetch_source_candidate.json": {
+        "sha256": "789a36132c46a9e258a9b7372a1101b3e0ee026527f1008b9e5fb76b4861615a",
+        "bytes": 969
+      },
+      "ff:tests/golden/ff_v2_gap.json": {
+        "sha256": "da2782b8af2c584ea0af2b986651463cc38142641c8022b26c7d1253bfbe9379",
+        "bytes": 600
+      },
+      "ff:tests/golden/ff_v2_period_unresolved.json": {
+        "sha256": "24eb16333d7a80864a0f1c4876d271c3bc502ad73466c6c65b39fbd6196622f5",
+        "bytes": 1012
+      },
+      "ff:tests/golden/ff_v2_source_candidate.json": {
+        "sha256": "789a36132c46a9e258a9b7372a1101b3e0ee026527f1008b9e5fb76b4861615a",
+        "bytes": 969
+      },
+      "ff:tests/golden/ff_v2_transcript_downloaded.json": {
+        "sha256": "fbf5b266677d5ce567c01c767264ff32d051f8dd0aba941150697aeea4e48dc6",
+        "bytes": 1704
+      },
+      "ff:tests/golden/ff_v2_upstream_error.json": {
+        "sha256": "a754125263bde9c4dfa254052ad4d6b10b3c7bb96077a181c6b259a84ba78c1d",
+        "bytes": 486
+      },
+      "ff:tests/golden/s3_ff_limits_argv.json": {
+        "sha256": "ee8becb06b0fb91f323cda71458e7bb989c46749af0a73d2a07f558db24695d2",
+        "bytes": 1244
+      }
+    },
+    "original_failure_manifest": {
+      "sha256": "3140797e6c6839063446565ea88d89138ec4a9afae84ad1c8da03138443c9050",
+      "bytes": 1529
+    },
+    "original_failure": {
+      "probe-result.json": {
+        "sha256": "143384e779a1287a894661d7f8d96a4fa742d54c95385346c1684fdcbe21e2da",
+        "bytes": 146199
+      },
+      "probe.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "probe.stdout.txt": {
+        "sha256": "1670453e07b800ebc771de704cf947c14181f4510a1fd70a56012e6d8798dfec",
+        "bytes": 1590
+      },
+      "probes.py": {
+        "sha256": "b991d08c44f79c2a135058b34eccb84e3038c6c7aceee5de5b4440fad062ab82",
+        "bytes": 13143
+      },
+      "pytest.ini": {
+        "sha256": "fa33bd755b3735c508b3edfccbcfa472dadc11f8d1013a7e91c9eb3a6fe3cc16",
+        "bytes": 30
+      },
+      "report.json": {
+        "sha256": "3d534d9be564af33c7087b125be4e508494a6e1880dfc276c64d5a388e1e7457",
+        "bytes": 2360
+      },
+      "report.md": {
+        "sha256": "d66cdf20a8029c2247ef08b820f130734a18f86a2885f82bd0dcf74486f3afea",
+        "bytes": 5261
+      },
+      "run_review.py": {
+        "sha256": "265343482a17893c93632a246eb252fa785b24aa1cfa908871bfeb1ea8aab31c",
+        "bytes": 5907
+      },
+      "trace.jsonl": {
+        "sha256": "b288c2b7548f88e72c61e5f62ca3d7498016e0220431bff50f9e72c97d3e8b84",
+        "bytes": 11507
+      }
+    },
+    "root_cwp_freeze": {
+      "sha256": "397a02e903e1543c6ca4d3116eff10c03d46cb9d6fe657a1c93fb2860f1fcb2c",
+      "bytes": 2778
+    },
+    "cwp_product": {
+      "src/company_wiki/source_catalog/acquisition.py": {
+        "sha256": "a740b777f0c14143959d809e3f371403ef14f8db0816dd7a6d074cb952e42daf",
+        "bytes": 32750
+      },
+      "src/company_wiki/source_catalog/acquisition_service.py": {
+        "sha256": "1dbac83477f06b498e2af301446b088c6beb0136c3cb78d75aa728c9db912c7c",
+        "bytes": 15985
+      },
+      "src/company_wiki/source_catalog/assertion_service.py": {
+        "sha256": "676b8c14e02369d8ea6e7ec16ff8edc719b8b2495c3780496055da8897d2196e",
+        "bytes": 51431
+      },
+      "src/company_wiki/source_catalog/canonical_scope.py": {
+        "sha256": "95e21e0298e915def9e14b5e045654779841a2e504d752236053c23a38ccf798",
+        "bytes": 8726
+      },
+      "src/company_wiki/source_catalog/canonical_writer.py": {
+        "sha256": "5b90a9b541bd8c167c54145485025b5deba36101dab4cf8750757d466e6ebb91",
+        "bytes": 37114
+      },
+      "src/company_wiki/source_catalog/local_reconcile.py": {
+        "sha256": "e43af3d492d16f2b6d3fe2ff4fc71d3d86224e20fbca4e7a151e3a01657e2fd3",
+        "bytes": 29769
+      },
+      "src/company_wiki/source_catalog/operation_contract.py": {
+        "sha256": "580e89da8d3afc9dbacb34c6e6f0837c7e118ca5d0f57b14f946255d3b4491dd",
+        "bytes": 8697
+      },
+      "src/company_wiki/source_catalog/operation_projection.py": {
+        "sha256": "f046ae241db4f3b0680f055ea0c3f783d431bd8c40918dcab1f9aef7bf8911a0",
+        "bytes": 5745
+      },
+      "src/company_wiki/source_catalog/registration_scope.py": {
+        "sha256": "85f6c0b324c13181e7bfa8d1e9f0efa406b6149817d35e0a6cbc79c20f81146f",
+        "bytes": 2271
+      },
+      "src/company_wiki/source_catalog/scanner.py": {
+        "sha256": "14638494175254037df2cbc851f43214de56a11912b712fe597dc7add4b97203",
+        "bytes": 100730
+      },
+      "tests/contract/test_canonical_acquisition_scope.py": {
+        "sha256": "8a125aad088f3fad3d6ea5363209630ac751c21a4a6a8514de8623e1da912840",
+        "bytes": 20366
+      },
+      "tests/unit/test_canonical_scope.py": {
+        "sha256": "32453803611055b7945d7b26aad40fbb95748fb2d1db1f09c76373d9edf61796",
+        "bytes": 2203
+      }
+    },
+    "repair_manifest": {
+      "sha256": "2176c0c39e97d20ce510f73b7d72c47175ff1834e702b6e1a9d252621b6905c0",
+      "bytes": 4408
+    },
+    "repair_evidence": {
+      "before.json": {
+        "sha256": "68895532a6cba686f6d1cedb31361a31945d5fc546df395a5872a960e9d43f92",
+        "bytes": 1763
+      },
+      "concentrated.json": {
+        "sha256": "38301ccddb718ed305c66c9d2e48bbf22dae68e6b929bdd2f696fcc41cd5e272",
+        "bytes": 1050
+      },
+      "concentrated.log": {
+        "sha256": "88948814dce9af285b967865b01834455d1b6668f178d6cd7ca4e587e30f4a35",
+        "bytes": 194
+      },
+      "concentrated.xml": {
+        "sha256": "25a9bda4c19caf19caefc14af76dcb66d91ce97c76e2ab24ede49d4f54e8f235",
+        "bytes": 26123
+      },
+      "diff-check.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "finalize.py": {
+        "sha256": "527d887d279efd414cfe546b35d9884b1ee7c306ed05c8647bdc77c090e3f4f6",
+        "bytes": 10403
+      },
+      "implement.py": {
+        "sha256": "92530d6bb5a74686ff530d0bcc6d5b85332f016d2dbd133b655a9201bad6624f",
+        "bytes": 5661
+      },
+      "lint.json": {
+        "sha256": "c832ca77744d23ad3773474ff88ce16904739ffd59fe526070700d4143a190c9",
+        "bytes": 745
+      },
+      "lint.log": {
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+        "bytes": 20
+      },
+      "red.json": {
+        "sha256": "755ac5df73d2c8a275d62ee8d577419341c335e89e80828de357d6675ecf0d12",
+        "bytes": 934
+      },
+      "red.log": {
+        "sha256": "17b7a654b6ef9a0e924188491c9e4af7d97238b341a25ff34c42df0ce9d07f0f",
+        "bytes": 4831
+      },
+      "red.xml": {
+        "sha256": "40ad210843cdf173d2e31d02305fbef88834378e3daac603f63597c43da1c102",
+        "bytes": 4838
+      },
+      "report.json": {
+        "sha256": "2a2200a5e0461bc7f416ad3195bb6995863d58584d1bbbb4a1aa46a2e25166eb",
+        "bytes": 1215
+      },
+      "report.md": {
+        "sha256": "e97df0984043342b445022d5e33b8aaba441de25689fa5dd4cd8465955b02fa7",
+        "bytes": 1307
+      },
+      "run.py": {
+        "sha256": "c9b2013d21f9d50571530a1252b4f615e76602c1f9b75569f4cf825c6d0590da",
+        "bytes": 3896
+      },
+      "setup.py": {
+        "sha256": "7bcd9fb64b6ff7b1926716e80a82dead8edaf14703dffdf341028af2c1a36b2c",
+        "bytes": 4470
+      },
+      "tracked-product-v2.patch": {
+        "sha256": "05fdb88ccbd556d46e897bb5139e810634197e4806c31255b77c7cad88956384",
+        "bytes": 21096
+      },
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\product-freeze-v2.json": {
+        "sha256": "87495b11e3c41986c3a10374bae0c603af6db4d61d7b8ed8c6a01771b7ed3381",
+        "bytes": 11865
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\findings.md": {
+        "sha256": "87de4604a3544d4dbeac7812be87756da8eb9cf03d0c4574d690363a12b8e4e6",
+        "bytes": 3649
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\progress.md": {
+        "sha256": "ee68dd275a3d5ec27c92afef60bbec836a78d43c430141640e0494aaff3ea7e2",
+        "bytes": 4547
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\task_plan.md": {
+        "sha256": "74cd2f047e4373279ed4b4fc6a60296a05766d44f4180152cdbd68bcf6631782",
+        "bytes": 5383
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-cutoff-result\\handoff-v2.md": {
+        "sha256": "e97df0984043342b445022d5e33b8aaba441de25689fa5dd4cd8465955b02fa7",
+        "bytes": 1307
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-cutoff-result\\handoff-v2.json": {
+        "sha256": "2a2200a5e0461bc7f416ad3195bb6995863d58584d1bbbb4a1aa46a2e25166eb",
+        "bytes": 1215
+      }
+    },
+    "old_case_authority": {
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-ff-matrix\\findings.md": {
+        "sha256": "d4ee2d8e3fb8a3ab0166a845b5c5a66c55a357f37c95df6f9b006dcb04e8cbbc",
+        "bytes": 19881
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-ff-matrix\\progress.md": {
+        "sha256": "048581a054be35fd9b64babeab5c4cb8a3e9a577df932d8b36dbf022c708a21b",
+        "bytes": 7551
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-ff-matrix\\task_plan.md": {
+        "sha256": "d182481760084bbdd5d64f8d34c88ec73ef0a23e0b202eed6f1a4f64e86a6c62",
+        "bytes": 10808
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-ff-matrix\\case-authority\\handoff.json": {
+        "sha256": "d7cbcef96a476210e5b33d6d5ab688b373a9992fe28143b980696a8e52f74fab",
+        "bytes": 1229
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-ff-matrix\\case-authority\\handoff.md": {
+        "sha256": "f6ce3c4debc20ba2d772754d6d7a2a22edd85c79803038fa693af7e547a40cd9",
+        "bytes": 3222
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\.gitattributes": {
+        "sha256": "eebea40ad733e7c5216e9d2ad50533e354ecdd1f6f6cccea1b02e963b2cac425",
+        "bytes": 179
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_fy_only_no_q.run1.request.json": {
+        "sha256": "8568a7c530be760cb1fe0fd266a622d5caaa154b0648536d6da1ceab0c2dc77b",
+        "bytes": 478
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_fy_only_no_q.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_fy_only_no_q.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_hard_timeout.run1.request.json": {
+        "sha256": "748f748fb38164392f595e2ce763ef3b428aa3860e32516ffcaa902f061c09ed",
+        "bytes": 503
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_hard_timeout.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_hard_timeout.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_max_bytes.run1.request.json": {
+        "sha256": "5cad894ddaa2409e60ff097384f4fc3503c69bc69947c764b861cc12d95eebd3",
+        "bytes": 499
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_max_bytes.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_max_bytes.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_past_cutoff.run1.request.json": {
+        "sha256": "b76acfc9ce98defac0e31a714b73508e307315055431dd09a8dd6f935e140acf",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_past_cutoff.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_past_cutoff.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_mime.run1.request.json": {
+        "sha256": "eaf44324d62eb23384f5a57a48050d2dd1fa9a810c93340f45576104164b278f",
+        "bytes": 503
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_mime.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_mime.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_quarter.run1.request.json": {
+        "sha256": "1bcaae7ae1880f7f4c859851ab762aafc41a2b0c948054e8a7bfc177773e051a",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_quarter.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_quarter.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_symbol.run1.request.json": {
+        "sha256": "989067a5bcbd9e00214445529241492488b6299fb4dc7697183df3c061b6c339",
+        "bytes": 503
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_symbol.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\call_wrong_symbol.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run1.request.json": {
+        "sha256": "eef349d3eb597bacd0d3e45176c25a92f51f929ab68562b76d75f102b07c84a3",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run2.request.json": {
+        "sha256": "eef349d3eb597bacd0d3e45176c25a92f51f929ab68562b76d75f102b07c84a3",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run2.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\chainA_download_reuse.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_402_entitlement.run1.request.json": {
+        "sha256": "0ca64d13a2e30a9b92b237ebd93d789dfcfc6b63fb18948e597a681c63e147d9",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_402_entitlement.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_402_entitlement.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_missing_creds.run1.request.json": {
+        "sha256": "c4d6aff6546c8500266a2d45afdb04b947656c857c10a53eb904ff131255562a",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_missing_creds.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_missing_creds.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_request_error.run1.request.json": {
+        "sha256": "b604022dafcff9c2c0b38fcc4d004dfb7977ba376883c7dc30055bd812bd96ed",
+        "bytes": 186
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_request_error.run1.response.json": {
+        "sha256": "32917771111531f7a242253b00aafb10f7c0be0b67f859e5c38f20ffa9c344ae",
+        "bytes": 687
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_request_error.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_unknown_usage.run1.request.json": {
+        "sha256": "789e577094af4b7baeba5906c70f118561ac195d0ade95c1cc62cfdea16aa830",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_unknown_usage.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\err_unknown_usage.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run1.request.json": {
+        "sha256": "86ee58427a3af92172d7a0c81d4dd989de3eed1edd146db6a99b0be7150f648e",
+        "bytes": 357
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run1.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run2.request.json": {
+        "sha256": "86ee58427a3af92172d7a0c81d4dd989de3eed1edd146db6a99b0be7150f648e",
+        "bytes": 357
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run2.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_hit.run1.request.json": {
+        "sha256": "d6ef736be115ed8234c3c27e762b80e32c02e7650bf3d61d4d5f3c78ff6c5eb1",
+        "bytes": 238
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_hit.run1.response.json": {
+        "sha256": "550d8f274ecc9d04f22f2cd9fea68a4e8e8eca49f5fe557c4e0b00f78dea497f",
+        "bytes": 1047
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_annual_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run1.request.json": {
+        "sha256": "eb8453c70b467f816aac14fdbe98964c2f4d07e8e373ba6b9b403908e1ad6c18",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run1.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run2.request.json": {
+        "sha256": "eb8453c70b467f816aac14fdbe98964c2f4d07e8e373ba6b9b403908e1ad6c18",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run2.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_hit.run1.request.json": {
+        "sha256": "6840dba7adf0d457df7bb4733d12615eeae66ef40d92af9f372e5a2a41d14876",
+        "bytes": 241
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_hit.run1.response.json": {
+        "sha256": "5e8b0e49ed4321e455fea3820298e3a7ce231c0029407bd333dd81572b5a00ed",
+        "bytes": 1050
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_quarterly_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run1.request.json": {
+        "sha256": "7423696452bc34f491bdcab908358dd081ac605178719f8cae3f34e3fe901952",
+        "bytes": 362
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run1.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run2.request.json": {
+        "sha256": "7423696452bc34f491bdcab908358dd081ac605178719f8cae3f34e3fe901952",
+        "bytes": 362
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run2.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_hit.run1.request.json": {
+        "sha256": "af6d5bda297c5eff69675c40ad25c235673a4fecf8133ba013450b2bea5b8261",
+        "bytes": 243
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_hit.run1.response.json": {
+        "sha256": "eb803827db110f3304da4fc76850c2d53ec5eac87b6f9249eadf3e6f57ce1787",
+        "bytes": 1052
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_cn_semi_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run1.request.json": {
+        "sha256": "58e0e2ae61782ba099c5173a81b6f4de09cea77fb6628c5fc28c5eb79df36b79",
+        "bytes": 357
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run1.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run2.request.json": {
+        "sha256": "58e0e2ae61782ba099c5173a81b6f4de09cea77fb6628c5fc28c5eb79df36b79",
+        "bytes": 357
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run2.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_hit.run1.request.json": {
+        "sha256": "5fdf48ad9ca9b76fc70d745071aea974eb2d60ae9b6ebaa9b38c257b8b0d8006",
+        "bytes": 238
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_hit.run1.response.json": {
+        "sha256": "eb2dd1aa91fac878e7747ee7d59d8142d28ef40773ff7d078352ebe43e422f1a",
+        "bytes": 1047
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_annual_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run1.request.json": {
+        "sha256": "b03dc7258b07bc19fdc2191f3bcf49163bc03f329f179908fb0093ff93a46307",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run1.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run2.request.json": {
+        "sha256": "b03dc7258b07bc19fdc2191f3bcf49163bc03f329f179908fb0093ff93a46307",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run2.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_hit.run1.request.json": {
+        "sha256": "fbd9a91f22a017ab36a2db114f8e8b4d5766a3c0e28fa4ebec0827d09d21c7d9",
+        "bytes": 241
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_hit.run1.response.json": {
+        "sha256": "94109f9d29e64fae5cdeb748c3f41b913c38c03cf209327494128fa7ad0802d8",
+        "bytes": 1050
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_quarterly_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run1.request.json": {
+        "sha256": "5b754d8a9650c8904dbf59b1e6b7ea6dcc81ff0c615c1a7a128f6ed0cfb3c442",
+        "bytes": 362
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run1.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run2.request.json": {
+        "sha256": "5b754d8a9650c8904dbf59b1e6b7ea6dcc81ff0c615c1a7a128f6ed0cfb3c442",
+        "bytes": 362
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run2.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_hit.run1.request.json": {
+        "sha256": "79dd03794356220b46075d5c14e329bc1cc295e85f082286fb6ad073b5294068",
+        "bytes": 243
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_hit.run1.response.json": {
+        "sha256": "ca4c0c4bd82d5ac04b74c9b5b13ed3e24ed819620fe72f9f4644e6b119a9bc67",
+        "bytes": 1052
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_hk_semi_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run1.request.json": {
+        "sha256": "56c0029cd20980a086269225cc1d73c7beecfa0fb16c226dc029d4d96e0a3a74",
+        "bytes": 355
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run1.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run2.request.json": {
+        "sha256": "56c0029cd20980a086269225cc1d73c7beecfa0fb16c226dc029d4d96e0a3a74",
+        "bytes": 355
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run2.response.json": {
+        "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_hit.run1.request.json": {
+        "sha256": "342d71052a174aef9dff4802ecaa8be38ef32fe205a143f15d499533ffc30bf5",
+        "bytes": 236
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_hit.run1.response.json": {
+        "sha256": "bc54fed7cdfcd8f26d5251a79f60d1a79be87f57897f2014d0d3a564e075c6ef",
+        "bytes": 1047
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_annual_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run1.request.json": {
+        "sha256": "33b0cd70f4d96e416b6e1e35003497b8bebbd2e7a0c5b56b8e8f5047916d09f9",
+        "bytes": 358
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run1.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run2.request.json": {
+        "sha256": "33b0cd70f4d96e416b6e1e35003497b8bebbd2e7a0c5b56b8e8f5047916d09f9",
+        "bytes": 358
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run2.response.json": {
+        "sha256": "552806abae24c95823ab2ff7e475f25b44d88f58795134277c1697e0236c27a1",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_hit.run1.request.json": {
+        "sha256": "59706ddf75b22f18b46fd4339aaa07953cbb68bb7de29a0c3cf89ec941d0270a",
+        "bytes": 239
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_hit.run1.response.json": {
+        "sha256": "b82564046e1835f02e68c25f01c46a13635a915d6f33bbf5208b3863218f6982",
+        "bytes": 1050
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_quarterly_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run1.request.json": {
+        "sha256": "1826800f321c63281159db76a40d9f9cdd112dcddc7f40f74a15731c8862cc73",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run1.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run2.request.json": {
+        "sha256": "1826800f321c63281159db76a40d9f9cdd112dcddc7f40f74a15731c8862cc73",
+        "bytes": 360
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run2.response.json": {
+        "sha256": "e5a1dfd3819c9c90e962b0de40c48653858d8ab22681721a14c91928d9999299",
+        "bytes": 1118
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_fetch.run2.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_hit.run1.request.json": {
+        "sha256": "cd7ccf78c7a356cfdd904d30774ae731437eb748f44ee67e9d95835c2ffa2075",
+        "bytes": 241
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_hit.run1.response.json": {
+        "sha256": "553364ea70df810db7a0827834ee8de024b720e97541edf508a92a8b0a72343f",
+        "bytes": 1052
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fin_us_semi_hit.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fresh-source-proofs.json": {
+        "sha256": "a59ac47016882c9976c7df9470c6b91cabb008a1c8ef3780c4117cf8027c9b6a",
+        "bytes": 105241
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\fresh-source-proofs.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\incomplete_sidecar_metadata_gap.run1.request.json": {
+        "sha256": "2185d5afac12802d8669fa9dad31670802bafa0d5bad63439ffae657a2d3a0fb",
+        "bytes": 238
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\incomplete_sidecar_metadata_gap.run1.response.json": {
+        "sha256": "ccf72dbabfbd2bf9a215925b87496164eb0476dd26ee304d06e0c1d35d38a47d",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\incomplete_sidecar_metadata_gap.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\local_txt_exact_reuse.run1.request.json": {
+        "sha256": "ed470e59b95a53eeb24303ca1a4ce579d42ba6edf18cf72373ccea185b3a4b8b",
+        "bytes": 375
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\local_txt_exact_reuse.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\local_txt_exact_reuse.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_convertible_bond.run1.request.json": {
+        "sha256": "6dfb492dadc36e849005039ec7f132f0a9f219e479c49e9043d15965f7363878",
+        "bytes": 343
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_convertible_bond.run1.response.json": {
+        "sha256": "42a9ce9e2e1e0680879faec7084eb27391beb030bef3e4fb0becdfbea62666e5",
+        "bytes": 1487
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_convertible_bond.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_equity_offering.run1.request.json": {
+        "sha256": "fc8b1b902129fc70d2ddb9c2d1e09ca1bbc8df35870a1b7ee93bddc93b49fb2b",
+        "bytes": 342
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_equity_offering.run1.response.json": {
+        "sha256": "9162187b1922f1c4c4c508a297e8181304a721ed89d191ec293e67308131a540",
+        "bytes": 1486
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_equity_offering.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_investor_relations.run1.request.json": {
+        "sha256": "e6183ce586eae5da5dfba3374089e83aaf82588c44403fbb2cfc54482298c662",
+        "bytes": 336
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_investor_relations.run1.response.json": {
+        "sha256": "d8f1262d7f7e0f260ead984bc6512a966083d770618a1352a5019c55945102b9",
+        "bytes": 1472
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_investor_relations.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_prospectus.run1.request.json": {
+        "sha256": "732fd9b1d478348890d62d20d256728376766c3ec7754aa147a7ca6964f315f5",
+        "bytes": 326
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_prospectus.run1.response.json": {
+        "sha256": "d48454473e59f4e999fdd846017453e8d48b2ec79b2473ab87cb9f3d886ecf20",
+        "bytes": 1470
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\nonperiod_prospectus.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_max_bytes.run1.request.json": {
+        "sha256": "11cfa755e014a6ba87f4c2f0f654c89f70370b11073526ae4731265f6ae46a10",
+        "bytes": 322
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_max_bytes.run1.response.json": {
+        "sha256": "621295194c3e9c98c61756fcad7a40ea2f1cc0de87f9a0f2540c2f9145983790",
+        "bytes": 1530
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_max_bytes.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_mime.run1.request.json": {
+        "sha256": "b8af82e17b1e82d304e525b123ffbe722cfee7e9e793e286291c07f0043681f3",
+        "bytes": 327
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_mime.run1.response.json": {
+        "sha256": "9408b20bf4af0f2187341a7a52963d1c543c53b000ca4a864cb2acedc9f91d10",
+        "bytes": 1531
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_mime.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_sha.run1.request.json": {
+        "sha256": "b8af82e17b1e82d304e525b123ffbe722cfee7e9e793e286291c07f0043681f3",
+        "bytes": 327
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_sha.run1.response.json": {
+        "sha256": "e3259a5af7fbd715e3273c3daf7868188f36473867a9b06efba5ee8c0cf3bbf4",
+        "bytes": 1531
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\original_wrong_sha.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.retry.request.json": {
+        "sha256": "c3b844caf4bfc2149645e83b06b5d899aa8de1dcc02e9b1b8dc32ef6580f35e1",
+        "bytes": 504
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.retry.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.retry.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.run1.request.json": {
+        "sha256": "92997b18076ebebf8c36ae0041b17fe1a163c28a01f39b703e12bf1795665cfc",
+        "bytes": 503
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.run1.response.json": {
+        "sha256": "2fd89ffb160de74aec3406698763cace43205301ac08385b7aacd81ccfb2dbaf",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\request_after_failure_retry.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\reuse_only_missing_period.run1.request.json": {
+        "sha256": "0386cf29a43bb86749c7e006bd3021d302e7ace2ae9f14473483a338c1f944a1",
+        "bytes": 238
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\reuse_only_missing_period.run1.response.json": {
+        "sha256": "4e65d8749e0290287062c4d2a9c197b82e2fc0cb5bf9b9690156297dd6cbefeb",
+        "bytes": 747
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\reuse_only_missing_period.run1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed-scan.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed-scan.stdout.txt": {
+        "sha256": "5f3794340a6154c73952ccfd7cc41124d0a0a4f095ac511484c57f10e733130f",
+        "bytes": 418
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_annual_report_2024_FY.response.json": {
+        "sha256": "e389f1c7261b7256ca3d9ed22c8b547d432289156de18a1e2de97ade53fd8539",
+        "bytes": 2610
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_annual_report_2024_FY.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_quarterly_report_2024_Q1.response.json": {
+        "sha256": "01b8a54a38fe2e3ef220fac86066a3c864b7ca124b5d69cc648c50dc3473c3c6",
+        "bytes": 2622
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_quarterly_report_2024_Q1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_semi_annual_report_2024_S1.response.json": {
+        "sha256": "6e3c6dd53e69a3e805735a8801949342e66bbb1a5eaa8b02e8d9950059a2c03a",
+        "bytes": 2630
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_cn_semi_annual_report_2024_S1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_annual_report_2024_FY.response.json": {
+        "sha256": "a4e53ec3ac4c3142e44cbe74f93b5dcf80255639612b01d1b5b14cfb5ddba790",
+        "bytes": 2606
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_annual_report_2024_FY.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_quarterly_report_2024_Q1.response.json": {
+        "sha256": "161109681ec135f52a31ec98cc1f75569f56dea377c3e873cd409345b063c446",
+        "bytes": 2618
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_quarterly_report_2024_Q1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_semi_annual_report_2024_S1.response.json": {
+        "sha256": "15381b2a15f5d491d6c54c31f12592ea7025a3b18b806bd0622dba1c463e66d4",
+        "bytes": 2626
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_hk_semi_annual_report_2024_S1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_annual_report_2024_FY.response.json": {
+        "sha256": "8c845cf4313394d25adfe1f430f8bd237fc94b3568da27befc0232d796adb933",
+        "bytes": 2602
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_annual_report_2024_FY.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_annual_report_2025_FY.response.json": {
+        "sha256": "ae9783a507e442a2f33092c9aae24700ec78cd5bcd8648251c6ade416e6fb10b",
+        "bytes": 738
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_annual_report_2025_FY.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_quarterly_report_2024_Q1.response.json": {
+        "sha256": "827713bec61a5c2597e8c108bc573bae6072da4724a2491e6289a85c87e412ec",
+        "bytes": 2614
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_quarterly_report_2024_Q1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_semi_annual_report_2024_S1.response.json": {
+        "sha256": "554f714fa14c0b2f574b406eeaddea57d63f31f686f192f9da0a71bb85cd6f5c",
+        "bytes": 2622
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\seed_us_semi_annual_report_2024_S1.stderr.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\artifacts\\warm-seed-receipts.json": {
+        "sha256": "b926cca49743edee82dafd4634a2f880686e949a199106c3420e656c3bfde51e",
+        "bytes": 42838
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\fixtures\\w06_contract_matrix\\authority\\original-41-report.json": {
+        "sha256": "aa2ab10add76f89e6e259fa0a05c8ad961f562f46b3fd21a1e94c1b2a3acc72f",
+        "bytes": 340060
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\test_w06_case_authority.py": {
+        "sha256": "2cf638a73fa2f9ca30651f48a2ce43dbf71829334f40f9fdf8dbcc9a9a267174",
+        "bytes": 9004
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\test_w06_contract_matrix.py": {
+        "sha256": "a973f3981f9b5a1a64b15d960ff04fe66ee681e8088b3606793cde0468e98590",
+        "bytes": 10452
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tests\\test_w06_matrix_runtime.py": {
+        "sha256": "fe546fc250beae1a5ed262960b78d9ee04197e043521bbdc2cd6adf1ed702241",
+        "bytes": 10092
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\case_specs.py": {
+        "sha256": "b8a6542a35ab5255fe18be232ff5a0afbbf5c4bdca12b53c421401e303055281",
+        "bytes": 33175
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\cli_main.py": {
+        "sha256": "983c21327c04b343e235b2e81639c3e0b33ecf7094e7864f99b81369c78862f4",
+        "bytes": 11114
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\et_transcript_proxy.py": {
+        "sha256": "18d597e4974ce796e2c44ccc5cc270003061f19eb8636ed6e8a6b58850a716fc",
+        "bytes": 6696
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\extended_cases.py": {
+        "sha256": "86cd7e2b2f2c19fdf2221ac1ea6de5e085c99c2399b60eda1cac1900cebf288d",
+        "bytes": 8257
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\fixture_builder.py": {
+        "sha256": "b12ba2f4a6574d2a5bf756438ec02c54d54b1b0b1d5cfd4773f6ff2b1d56463c",
+        "bytes": 14158
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\fixture_provider_adapter.py": {
+        "sha256": "6f7e6385868c36395a6f79e0624fa4fb75b7b77ad9d8d59b50544a8c5c897282",
+        "bytes": 8653
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\matrix_cases.py": {
+        "sha256": "b28aa95c5aacef1cced2e4de6ace5054b40baca2e73a07dc4df2373b7947a331",
+        "bytes": 24534
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\matrix_outcome.py": {
+        "sha256": "82caaa23a6efa53a9cefaa07ee349c84e64a0913f8479fd88392bb3844aa424b",
+        "bytes": 2838
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\oracle.py": {
+        "sha256": "b3d90a003b2b3b2d669d7089da91eb9db7dbb06aa5a50f9d712e0d0ce82106a5",
+        "bytes": 17723
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\README.md": {
+        "sha256": "5819e649afc1117136f80e4d49b5c1ceb89ce3737865be7ecfac6c131bd4877e",
+        "bytes": 9815
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\report.py": {
+        "sha256": "0433b06b6eae46f42276de012c5a1055e4c5e8608bea84e0a8fe11d12b12ffdb",
+        "bytes": 2451
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\run.py": {
+        "sha256": "f63a3f4d7920c6ca9b4d9a801c1c5bb6fe166a167188d553c205f6bad3a94bea",
+        "bytes": 15022
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\runtime.py": {
+        "sha256": "022786a8dfaa9f54270955c047e02dc6556aef6ba2bf09c175a6667abec09d6b",
+        "bytes": 9528
+      },
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\source_proofs.py": {
+        "sha256": "0f8efefe78bd9285c3de6f1a3001d2b9eefe333e3a5911a824166b63df59f5e6",
+        "bytes": 4251
+      }
+    }
+  },
+  "freeze_unchanged": true
+}

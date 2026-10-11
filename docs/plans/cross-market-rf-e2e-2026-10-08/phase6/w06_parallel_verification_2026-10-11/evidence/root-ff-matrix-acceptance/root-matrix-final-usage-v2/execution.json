@@ -1,0 +1,419 @@
+{
+  "schema": "root-w06-final-original-matrix/1",
+  "exit_code": 1,
+  "seconds": 184.9606,
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "tools/offline_contract_matrix/run.py",
+    "--cwp-project",
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-acquisition-scope-root",
+    "--et-project",
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root",
+    "--owned-root",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\mx-8b70d240",
+    "--out-root",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-root-matrix-evidence"
+  ],
+  "tool_freeze_sha256": "e2bf72bde855935db1beeca45ad10d4a9b205f4ca1137dab07db4d827e3f7fe3",
+  "source_freeze_sha256": "397a02e903e1543c6ca4d3116eff10c03d46cb9d6fe657a1c93fb2860f1fcb2c",
+  "cutoff_freeze_sha256": "87495b11e3c41986c3a10374bae0c603af6db4d61d7b8ed8c6a01771b7ed3381",
+  "actual_report": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-root-matrix-evidence\\attempt-1e11a57b90a8419db1ca1795f6080cca\\report.json",
+  "production_config_unchanged": true,
+  "real_key_stat_unchanged": true,
+  "scratch_restored_absent": true,
+  "real_provider_llm_fees": 0,
+  "report_sha256": "ef56fac720d84a90e143c1ab13f4c7370f2e894fdf6a91c998e3b1f783bd1179",
+  "counts": {
+    "PARTIAL": 27,
+    "PASS": 1,
+    "NOT_RUN": 13
+  },
+  "oracle": {
+    "pass": false,
+    "findings": [
+      {
+        "vector": "deadline_exceeded",
+        "case_id": null,
+        "detail": "absolute batch deadline exceeded"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "err_402_entitlement",
+        "detail": "actual result PARTIAL cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "err_missing_creds",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "err_unknown_usage",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "local_txt_exact_reuse",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "reuse_only_missing_period",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "call_wrong_symbol",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "call_wrong_mime",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "call_max_bytes",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "call_hard_timeout",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "request_after_failure_retry",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "original_wrong_sha",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "original_wrong_mime",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "original_max_bytes",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "case_not_passed",
+        "case_id": "incomplete_sidecar_metadata_gap",
+        "detail": "actual result NOT_RUN cannot certify required case"
+      },
+      {
+        "vector": "unrestored_scratch",
+        "case_id": null,
+        "detail": "restore receipt does not confirm restoration (got {'owned_parent_shape_preserved': True, 'output_parent_initially_existed': True, 'retained_output_is_explicit_evidence': True, 'scratch_torn_down': True, 'preexisting_parent_entries_preserved': False, 'restored': False, 'output': 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.tmp\\\\w06-root-matrix-evidence\\\\attempt-1e11a57b90a8419db1ca1795f6080cca', 'production_metadata_unchanged': True})"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "chainA_download_reuse",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "chainA_download_reuse",
+        "detail": "fresh reader/source version/original count mismatch for transcript"
+      },
+      {
+        "vector": "translated_or_changed_text",
+        "case_id": "chainA_download_reuse",
+        "detail": "stored original language content differs from supplied fixture text"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "chainA_download_reuse",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "chainA_download_reuse",
+        "detail": "fresh reader/source version/original count mismatch for transcript"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_cn_annual_hit",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_cn_semi_hit",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_cn_quarterly_hit",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_hk_annual_hit",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_hk_semi_hit",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_hk_quarterly_hit",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_us_annual_hit",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_us_semi_hit",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_us_quarterly_hit",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_cn_annual_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_cn_annual_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_cn_semi_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_cn_semi_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_cn_quarterly_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_cn_quarterly_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_hk_annual_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_hk_annual_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_hk_semi_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_hk_semi_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_hk_quarterly_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_hk_quarterly_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_us_annual_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_us_annual_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_us_semi_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_us_semi_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_us_quarterly_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "fin_us_quarterly_fetch",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "nonperiod_prospectus",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "nonperiod_equity_offering",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "nonperiod_convertible_bond",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "nonperiod_investor_relations",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "call_fy_only_no_q",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "call_past_cutoff",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "source_bytes_not_verified",
+        "case_id": "call_wrong_quarter",
+        "detail": "fresh reader/source version/original count mismatch for filing"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "err_402_entitlement",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "err_missing_creds",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "err_unknown_usage",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "local_txt_exact_reuse",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "reuse_only_missing_period",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "call_wrong_symbol",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "call_wrong_mime",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "call_max_bytes",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "call_hard_timeout",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "request_after_failure_retry",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "original_wrong_sha",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "original_wrong_mime",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "original_max_bytes",
+        "detail": "PASS lacks actual request/response files"
+      },
+      {
+        "vector": "missing_bound_evidence",
+        "case_id": "incomplete_sidecar_metadata_gap",
+        "detail": "PASS lacks actual request/response files"
+      }
+    ]
+  },
+  "restore": {
+    "owned_parent_shape_preserved": true,
+    "output_parent_initially_existed": true,
+    "retained_output_is_explicit_evidence": true,
+    "scratch_torn_down": true,
+    "preexisting_parent_entries_preserved": false,
+    "restored": false,
+    "output": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-root-matrix-evidence\\attempt-1e11a57b90a8419db1ca1795f6080cca",
+    "production_metadata_unchanged": true
+  },
+  "scope": {
+    "batch_elapsed_seconds": 184.5443,
+    "case_limit_seconds": 30,
+    "network_guard_boots": 186,
+    "network_attempts_denied": 0,
+    "translation_attempts": 0,
+    "provider_boundary": "fixture response only; real supplier reachability/coverage is not proven",
+    "error": "DeadlineExceeded: absolute deadline exhausted",
+    "production_baseline_scope": "stat only; no real key/config bytes read or hashed"
+  },
+  "cost": {
+    "real_provider_calls": 0,
+    "paid_usd": 0,
+    "unknown_charge": null,
+    "fixture_requests": 29,
+    "fixture_counter_scope": "observed local fixture GETs only; producer unknown usage stays null"
+  },
+  "cutoff_observation": {
+    "status": "not_found",
+    "reason": "call_after_as_of",
+    "eligible": false,
+    "cutoff_diagnostic": true,
+    "as_of_cutoff_verified": null
+  },
+  "all_frozen_products_unchanged": true
+}

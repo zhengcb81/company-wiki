@@ -14,7 +14,7 @@ FF = ROOT.parent / '_harness_worktrees/w06/ff-contract-matrix-root'
 CWP = ROOT.parent / '_harness_worktrees/w06/cwp-acquisition-scope-root'
 ET = ROOT.parent / '_harness_worktrees/w06/et-cutoff-root'
 E = ROOT / 'docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance'
-tag = sys.argv[1] if len(sys.argv) == 2 else ''
+tag = sys.argv[1] if len(sys.argv) in (2, 3) else ''
 assert tag and tag.replace('-', '').isalnum(), 'Supply a new readable attempt tag'
 OUT = E / tag
 assert not OUT.exists(), 'Preserve prior attempts'
@@ -22,7 +22,9 @@ sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 tool = json.loads((E / 'fix/case-authority/manifest.json').read_text(encoding='utf-8'))
 source_path = E / 'source-publication/root-product-freeze.json'
 source = json.loads(source_path.read_text(encoding='utf-8'))
-cutoff_path = ROOT / '.planning/w06-cross-period-acquisition/cutoff-implementation/product-freeze.json'
+cutoff_name = sys.argv[2] if len(sys.argv) == 3 else 'product-freeze.json'
+assert cutoff_name in ('product-freeze.json', 'product-freeze-v2.json')
+cutoff_path = ROOT / '.planning/w06-cross-period-acquisition/cutoff-implementation' / cutoff_name
 cutoff = json.loads(cutoff_path.read_text(encoding='utf-8'))
 roots = {'ff': FF, 'et': ET}
 

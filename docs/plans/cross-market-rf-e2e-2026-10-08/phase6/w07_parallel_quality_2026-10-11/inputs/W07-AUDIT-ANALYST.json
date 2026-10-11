@@ -1,0 +1,156 @@
+{
+  "repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit",
+  "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\audit-analyst-quality",
+  "branch": "codex/w07-audit-analyst-quality",
+  "base_commit": "9cd5ff8a2c8f9c1726c4047785164e3263673614",
+  "sparse_paths": null,
+  "working_tree_status": "",
+  "lane": "W07-AUDIT-ANALYST",
+  "plan_id": "w07-audit-analyst-quality",
+  "readonly_code": [
+    {
+      "path": "skills/revenue-forecast-audit/references/artifact-contract.md",
+      "sha256": "4de59015c66a757ef73bca1855516c69fc3935c4ac71e4113382a8e7b7c36633",
+      "bytes": 13087
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/company-pool-loop.md",
+      "sha256": "aa7dfcc864f1c8e7e2d66e770ae199c251a003fc3836583422a8f24226c629db",
+      "bytes": 12019
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/execution-artifact-contract.md",
+      "sha256": "9e9a854d39c4ac02aa7e1789ba27375c72f9cd8a2003210249b97036d4cce1d5",
+      "bytes": 7586
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/executor.md",
+      "sha256": "c9acb192a7a921d15a3da450832a6cd5f4e09bbaa7b7387b156cb613c165ba8e",
+      "bytes": 6238
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/financial-measure-audit.md",
+      "sha256": "26fe6796d27d125254b7b523fc7317ae12aa3db8c366efa07210a7af331a1faf",
+      "bytes": 12412
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/numeric-ledger-example.json",
+      "sha256": "2f793ef0b2ec633a7a31bd8b42c7d7a0c8759667c928122d721e0677f4f33890",
+      "bytes": 347
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+      "sha256": "b9004f3af394b211fb450c844faf166e4219c93f081fffb4a088da9c528a285b",
+      "bytes": 12567
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/remediation.md",
+      "sha256": "91baa2d3f19fa03696eee78b899a6a4e34310f07677d9c4afa3b9b943ab251cf",
+      "bytes": 5731
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/review-analyst.md",
+      "sha256": "beb18b08e02459cea0e08d8b300b07a12911eb0000538805a651af59e0352c85",
+      "bytes": 4094
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/review-fetch.md",
+      "sha256": "40f5ec6e95c301ba6a9011e379bfaf08b8244f8c9eea6427e8fe23f52914b1d8",
+      "bytes": 3847
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/review-process.md",
+      "sha256": "afce9a432b087596cbb3f7bed5d01552ac93b4c63612d6882cb5d8e5bb599140",
+      "bytes": 5791
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/review-storage.md",
+      "sha256": "885edfe6d2273c17b1adf6c1daf9ffe6605e7ce1bfe65d3d20d8b47bb1c4dcdc",
+      "bytes": 3831
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/rf-checkpoints.md",
+      "sha256": "76a91e6509c3b982ef967fb868f3cddaaadc77fa45d19360918d9f921bb1e54f",
+      "bytes": 6563
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/workflow.md",
+      "sha256": "407bc77900da1562c36ee15306a2f85ed8dec7688d712d43d84ca21440773d5f",
+      "bytes": 10272
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_blob_store.py",
+      "sha256": "ae2317875aaf064d396ac536c7e68838251c24370b6308abb245b4aa5cf966ad",
+      "bytes": 18222
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_contracts.py",
+      "sha256": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+      "bytes": 5168
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_run.py",
+      "sha256": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca",
+      "bytes": 53804
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/authoring_provenance.py",
+      "sha256": "20d18f1ed4fc8adf65661f429738db64d81a025ed72b35f5b4e5a97b3d2c192c",
+      "bytes": 15043
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/document_status_join.py",
+      "sha256": "68f8799188218396bbad497e0fc54c19365a423d5bb8e3c8977fd4ebe103d85a",
+      "bytes": 19239
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/execution_request.py",
+      "sha256": "48fcc4a3a5eb84fed49a886a394f9d7058721c32a47237cd4f95ef13d976a2fa",
+      "bytes": 21060
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/financial_measure_audit.py",
+      "sha256": "de7c7fe3764ce3678fecc51466a9dca84e2c14da84d215c472157c4fb8f9dced",
+      "bytes": 35341
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/numeric_audit.py",
+      "sha256": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec",
+      "bytes": 5633
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/pool_progress.py",
+      "sha256": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+      "bytes": 67942
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/review_protocol.py",
+      "sha256": "1cfc07b6a2c8b322676d0d531e45dd72f1c6087bd55c79c267ef881a50a4327b",
+      "bytes": 13098
+    }
+  ],
+  "local_inputs": [
+    {
+      "path": "input\\manifest.json",
+      "sha256": "c519023b0fc9a1738336ed0ed9be621e839f1e5e5fdaf3ebb7d75d0bad78495d",
+      "bytes": 804
+    },
+    {
+      "path": "input\\native-draft.json",
+      "sha256": "d0c38f4a82c31077341f0ed95c4501c4e5cec21f34bc583543412ed06bfbc1bb",
+      "bytes": 121883
+    },
+    {
+      "path": "input\\native-input.json",
+      "sha256": "a9001a0139596bd55d6c1c68e90779498988d1e0a0ff42411257fab8b04d2e8d",
+      "bytes": 49668
+    },
+    {
+      "path": "input\\native-support.json",
+      "sha256": "65fe2ec714d3c504d654d3d94f0c61bf4bc6b0721ee56f33deab8b713d3855a1",
+      "bytes": 6258
+    }
+  ],
+  "real_calls": 0,
+  "status": "READY_NOT_STARTED"
+}

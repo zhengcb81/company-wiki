@@ -1,0 +1,43 @@
+{
+  "schema_version": "cutoff-independent-v2-acceptance/1",
+  "reviewer": "/root/w05_ocr_recovery_fix",
+  "role": "non_author_product_reviewer",
+  "verdict": "PASS_SCOPED_CUTOFF_PRODUCT_ACCEPTANCE_PENDING_ROOT_MATRIX",
+  "original_blocker_resolved": "P1_VALID_USAGE_ERASED_BY_MALFORMED_STDOUT",
+  "tests": {
+    "original_failures_passed": 3,
+    "necessary_controls_passed": 4,
+    "total_passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "pytest_seconds": 1.39,
+    "result": "retest-result.json"
+  },
+  "v2_product_freeze_sha256": "87495b11e3c41986c3a10374bae0c603af6db4d61d7b8ed8c6a01771b7ed3381",
+  "root_cwp_freeze_sha256": "397a02e903e1543c6ca4d3116eff10c03d46cb9d6fe657a1c93fb2860f1fcb2c",
+  "previous_failure_manifest_sha256": "3140797e6c6839063446565ea88d89138ec4a9afae84ad1c8da03138443c9050",
+  "previous_failure_files_verified": 9,
+  "product_files_verified": 8,
+  "cwp_root_files_verified": 12,
+  "old_tools_case_authority_files_verified": 205,
+  "old_goldens_verified": 30,
+  "author_repair_manifest_sha256": "2176c0c39e97d20ce510f73b7d72c47175ff1834e702b6e1a9d252621b6905c0",
+  "blocking_findings": [],
+  "cwp_original_mismatch_clarification": "ROOT published one dict[str, Any] annotation, no runtime behavior change; new ROOT freeze12 matches",
+  "before_after_unchanged": true,
+  "scratch_restored": true,
+  "raw_config_git_install_pwf_product_writes": false,
+  "real_credentials_read_or_inherited": false,
+  "real_network_requests": 0,
+  "llm_calls": 0,
+  "fee_usd": 0,
+  "not_claimed": [
+    "42 independent full rerun",
+    "56/137/195 responsibility suites",
+    "41 CLI matrix",
+    "optional4SKIP as pass",
+    "actual suppliers/network/LLM"
+  ],
+  "status": "FROZEN_STOP",
+  "frozen_at": "2026-10-11T15:25:41.824546+00:00"
+}

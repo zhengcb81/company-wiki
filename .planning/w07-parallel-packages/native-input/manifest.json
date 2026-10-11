@@ -1,0 +1,25 @@
+{
+  "schema": "w07-native-engineering-fixture/1",
+  "synthetic": true,
+  "source_truth_verified": false,
+  "economic_reasonableness": "not_evaluated",
+  "rf_base": "30ddae8ed2a457c418e63b182e7d8c9230fbf3ff",
+  "generation": "calibrated_document; run_forecast(mode=draft); build_support_diagnostics",
+  "files": [
+    {
+      "path": "native-draft.json",
+      "sha256": "d0c38f4a82c31077341f0ed95c4501c4e5cec21f34bc583543412ed06bfbc1bb",
+      "bytes": 121883
+    },
+    {
+      "path": "native-input.json",
+      "sha256": "a9001a0139596bd55d6c1c68e90779498988d1e0a0ff42411257fab8b04d2e8d",
+      "bytes": 49668
+    },
+    {
+      "path": "native-support.json",
+      "sha256": "65fe2ec714d3c504d654d3d94f0c61bf4bc6b0721ee56f33deab8b713d3855a1",
+      "bytes": 6258
+    }
+  ]
+}

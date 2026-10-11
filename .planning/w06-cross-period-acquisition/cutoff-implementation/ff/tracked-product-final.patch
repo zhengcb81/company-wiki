@@ -1,0 +1,309 @@
+diff --git a/scripts/et_v2_contract.py b/scripts/et_v2_contract.py
+index f31456c..c34d42b 100644
+--- a/scripts/et_v2_contract.py
++++ b/scripts/et_v2_contract.py
+@@ -27,6 +27,12 @@ _FMP_SUCCESS_KEYS = frozenset({
+     "effective_url", "http_status", "retrieved_at",
+     "adapter_name", "adapter_version",
+ })
++# Additive not_found diagnostics share one finite vocabulary with the transport.
++# Importing this constant does not add another production contract validator.
++ET_NOT_FOUND_DIAGNOSTICS = frozenset({"call_after_as_of", "publication_after_as_of"})
++_NOT_FOUND_KEYS = frozenset({
++    "schema_version", "request_id", "status", "provider", "fiscal_period", "candidate_count",
++})
+ _FAILURE_KEYS = frozenset({
+     "schema_version", "request_id", "status", "provider", "error_code",
+ })
+@@ -135,6 +141,26 @@ def _period(request: dict[str, Any]) -> str:
+     return f"{year}-Q{quarter}"
+ 
+ 
++def _not_found_result(result: dict[str, Any], request: dict[str, Any]) -> dict[str, Any]:
++    """Read ordinary/legacy missing results and additive actual date exclusions."""
++    fields = frozenset(result)
++    if not (_NOT_FOUND_KEYS <= fields <= (_NOT_FOUND_KEYS | {"error_code"})):
++        _fail("not_found_keys")
++    if result.get("provider") != request.get("provider"):
++        _fail("provider")
++    if result.get("fiscal_period") != _period(request):
++        _fail("fiscal_period")
++    if type(result.get("candidate_count")) is not int or result["candidate_count"] != 0:
++        _fail("candidate_count")
++    reason = "exact_transcript_missing"
++    if "error_code" in result:
++        diagnostic = result["error_code"]
++        if not isinstance(diagnostic, str) or diagnostic not in ET_NOT_FOUND_DIAGNOSTICS:
++            _fail("not_found_diagnostic")
++        reason = diagnostic
++    return {"status": "not_found", "reason": reason}
++
++
+ def _success_identity(result: dict[str, Any], request: dict[str, Any]) -> str:
+     if frozenset(result) != _FMP_SUCCESS_KEYS:
+         _fail("fmp_success_keys")
+@@ -214,6 +240,8 @@ def normalize_et_v2_result(
+     if not isinstance(result, dict) or not isinstance(request, dict):
+         _fail("shape")
+     _check_header(result, request)
++    if result.get("status") == "not_found":
++        return _not_found_result(result, request)
+     if result.get("status") != "fetched":
+         return _failure_result(result, request)
+     fiscal_period = _success_identity(result, request)
+diff --git a/scripts/transcript_tool_transport.py b/scripts/transcript_tool_transport.py
+index 3436cbf..b4264fc 100644
+--- a/scripts/transcript_tool_transport.py
++++ b/scripts/transcript_tool_transport.py
+@@ -15,6 +15,8 @@ import sys
+ import time
+ from typing import Any
+ 
++from et_v2_contract import ET_NOT_FOUND_DIAGNOSTICS
++
+ 
+ _LOOKUP_SCHEMA = "company-wiki-transcript-import-lookup-request/1"
+ _IMPORT_SCHEMA = "company-wiki-transcript-import-request/2"
+@@ -602,6 +604,43 @@ class EarningsTranscriptsTransport:
+                 **_provider_usage(b"", request["request_id"]),
+             }
+         self._last_provider_usage = _provider_usage(usage_stderr, request["request_id"], credential)
++        if result.get("status") == "not_found":
++            # Bind this one process receipt to the current request. This is not
++            # another company-identity lookup or a source-byte validation.
++            invalid = (
++                result.get("schema_version") not in (
++                    "earnings-transcript-result/1", "earnings-transcript-result/2",
++                )
++                or result.get("request_id") != et_request["request_id"]
++                or result.get("provider") != et_request["provider"]
++                or result.get("fiscal_period")
++                != f"{et_request['fiscal_year']}-Q{et_request['fiscal_quarter']}"
++                or type(result.get("candidate_count")) is not int
++                or result["candidate_count"] != 0
++            )
++            if code != 0 or invalid:
++                return {
++                    "status": "provider_unavailable",
++                    "reason": "provider_tool_failed" if code != 0 else "provider_result_invalid",
++                    "retryable": False,
++                    "provider_calls": 1,
++                    "provider_started": self._provider_started(self._last_provider_usage),
++                    **self._last_provider_usage,
++                }
++            # A completed lookup with no eligible transcript is not a provider
++            # outage. Only a producer-declared finite date diagnostic can name
++            # a cutoff; neither zero candidates nor child free text proves one.
++            diagnostic = result.get("error_code")
++            reason = (diagnostic if isinstance(diagnostic, str)
++                      and diagnostic in ET_NOT_FOUND_DIAGNOSTICS else "exact_transcript_missing")
++            return {
++                "status": "not_found",
++                "reason": reason,
++                "retryable": False,
++                "provider_calls": 1,
++                "provider_started": self._provider_started(self._last_provider_usage),
++                **self._last_provider_usage,
++            }
+         if result.get("status") != "fetched":
+             error_code = result.get("error_code")
+             safe_code = (
+diff --git a/tests/test_et_s0b_contract.py b/tests/test_et_s0b_contract.py
+index b1c8157..5152337 100644
+--- a/tests/test_et_s0b_contract.py
++++ b/tests/test_et_s0b_contract.py
+@@ -90,3 +90,39 @@ def test_fmp_extra_field_cannot_silently_change_frozen_26_key_contract() -> None
+     result["published_date"] = result["call_date"]
+     with pytest.raises(ETContractError):
+         normalize_et_v2_result(result, fixture("fmp_v2.request.json"))
++
++
++
++def _not_found_receipt(diagnostic=None):
++    request = fixture("fmp_v2.request.json")
++    result = {"schema_version": "earnings-transcript-result/2", "request_id": request["request_id"],
++              "status": "not_found", "provider": "fmp", "fiscal_period": "2026-Q3",
++              "candidate_count": 0}
++    if diagnostic is not None:
++        result["error_code"] = diagnostic
++    return request, result
++
++
++@pytest.mark.parametrize("diagnostic,reason", [
++    (None, "exact_transcript_missing"),
++    ("call_after_as_of", "call_after_as_of"),
++    ("publication_after_as_of", "publication_after_as_of"),
++])
++def test_not_found_consumer_contract_preserves_optional_date_diagnostic(diagnostic, reason):
++    request, result = _not_found_receipt(diagnostic)
++    original = copy.deepcopy(result)
++    assert normalize_et_v2_result(result, request) == {"status": "not_found", "reason": reason}
++    assert result == original
++
++
++@pytest.mark.parametrize("field,value", [
++    ("request_id", "unrelated-request"), ("provider", "unrelated-provider"),
++    ("fiscal_period", "2026-Q4"), ("candidate_count", 1), ("candidate_count", True),
++    ("error_code", "child_free_text_never_public"), ("error_code", ["call_after_as_of"]),
++    ("reason", "call_after_as_of"),
++])
++def test_not_found_consumer_contract_rejects_invalid_binding_or_unknown_diagnostic(field, value):
++    request, result = _not_found_receipt("call_after_as_of")
++    result[field] = value
++    with pytest.raises(ETContractError):
++        normalize_et_v2_result(result, request)
+diff --git a/tests/test_transcript_companion_transport.py b/tests/test_transcript_companion_transport.py
+index 236186c..046378d 100644
+--- a/tests/test_transcript_companion_transport.py
++++ b/tests/test_transcript_companion_transport.py
+@@ -435,3 +435,56 @@ def test_creationflags_handles_a_missing_windows_constant(monkeypatch) -> None:
+     monkeypatch.setattr(transcript_tool_transport, "subprocess", SimpleNamespace())
+ 
+     assert EarningsTranscriptsTransport._creationflags() == 0
++
++
++
++@pytest.mark.parametrize("diagnostic,reason", [
++    ("call_after_as_of", "call_after_as_of"),
++    ("publication_after_as_of", "publication_after_as_of"),
++    (None, "exact_transcript_missing"),
++])
++@pytest.mark.parametrize("usage_complete", [True, False])
++def test_not_found_transcript_stops_before_import_and_survives_public_envelope(
++    tmp_path, monkeypatch, diagnostic, reason, usage_complete,
++):
++    from ff_v2_envelope import _transcript_result
++
++    tool = tmp_path / "transcript_tool.py"
++    tool.write_text("# synthetic supplier receipt only", encoding="utf-8")
++    request_id = "urn:company-wiki:source-request:sha256:" + "c" * 64
++    commands = []
++    def run(command, *, input_bytes=None, **kwargs):
++        commands.append(command)
++        if "source_query_cli" in " ".join(command):
++            payload = {"schema_version": "2.0", "status": "not_found", "reason": "no_local_match",
++                       "request_id": request_id, "matches": [], "candidates": [],
++                       "source_read_policy_sha256": "d" * 64}
++            return json.dumps(payload).encode(), b"", 0
++        assert str(tool) in command, "not_found must never import or open a source"
++        request = json.loads(input_bytes)
++        payload = {"schema_version": "earnings-transcript-result/2", "request_id": request["request_id"],
++                   "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q3",
++                   "candidate_count": 0}
++        if diagnostic is not None:
++            payload["error_code"] = diagnostic
++        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": request_id,
++                   "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
++        return json.dumps(payload).encode(), json.dumps(receipt).encode() if usage_complete else b"", 0
++    monkeypatch.setattr(transcript_tool_transport, "_run_bounded_json", run)
++    transport = EarningsTranscriptsTransport(wiki_root=tmp_path, transcript_tool=tool,
++                                            deadline=time.monotonic() + 30)
++    monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
++    result = resolve_companion_transcript(request=_request(), filing_handle=_filing(), transport=transport)
++    public = _transcript_result(result)
++    assert public["status"] == "not_found"
++    assert public["reason"] == reason
++    assert public["retryable"] is False
++    assert public["provider_calls"] == 1
++    assert public["provider_usage_complete"] is usage_complete
++    assert public["provider_requests"] == (1 if usage_complete else None)
++    assert public["provider_response_bytes"] == (512 if usage_complete else None)
++    assert public["provider_started"] is (True if usage_complete else None)
++    assert "source_ref" not in public
++    assert len(commands) == 2
++    assert sum(str(tool) in command for command in commands) == 1
++    assert transport.company_wiki_calls == 1
+diff --git a/tests/test_transcript_launch_contract.py b/tests/test_transcript_launch_contract.py
+index aa25ea1..90c6358 100644
+--- a/tests/test_transcript_launch_contract.py
++++ b/tests/test_transcript_launch_contract.py
+@@ -483,3 +483,89 @@ def test_public_loader_rejects_malformed_persistent_tool(tmp_path, invalid):
+     with pytest.raises(FilingFetchError) as error:
+         load_company_wiki_root(config_path=config)
+     assert error.value.code == "config_error"
++
++
++
++@pytest.mark.parametrize("schema,diagnostic,reason", [
++    ("earnings-transcript-result/2", "call_after_as_of", "call_after_as_of"),
++    ("earnings-transcript-result/1", "publication_after_as_of", "publication_after_as_of"),
++    ("earnings-transcript-result/2", None, "exact_transcript_missing"),
++    ("earnings-transcript-result/1", None, "exact_transcript_missing"),
++    ("earnings-transcript-result/2", "child_free_text_never_public", "exact_transcript_missing"),
++    ("earnings-transcript-result/2", ["call_after_as_of"], "exact_transcript_missing"),
++    ("earnings-transcript-result/2", "provider_deadline", "exact_transcript_missing"),
++])
++@pytest.mark.parametrize("usage_complete", [True, False])
++def test_not_found_result_preserves_date_cause_without_claiming_provider_outage(
++    tmp_path, monkeypatch, schema, diagnostic, reason, usage_complete,
++):
++    result = {"schema_version": schema, "request_id": "w07", "provider": "fmp",
++              "status": "not_found", "fiscal_period": "2026-Q4", "candidate_count": 0}
++    if diagnostic is not None:
++        result["error_code"] = diagnostic
++    usage = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
++             "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
++    calls = []
++    def run(command, **kwargs):
++        calls.append(command)
++        return json.dumps(result).encode(), json.dumps(usage).encode() if usage_complete else b"", 0
++    monkeypatch.setattr(transport_module, "_run_bounded_json", run)
++    # A synthetic environment seam; never resolve/read any host credential.
++    transport = _transport(tmp_path)
++    monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
++    public = transport._et_result(request=_request(), limits=_limits())
++    assert public["status"] == "not_found"
++    assert public["reason"] == reason
++    assert public["retryable"] is False
++    assert len(calls) == 1
++    assert public["provider_calls"] == 1
++    assert public["provider_usage_complete"] is usage_complete
++    assert public["provider_requests"] == (1 if usage_complete else None)
++    assert public["provider_response_bytes"] == (512 if usage_complete else None)
++    assert public["provider_started"] is (True if usage_complete else None)
++    assert "child_free_text_never_public" not in json.dumps(public)
++    assert "source_ref" not in public
++
++
++
++@pytest.mark.parametrize("field,value,exit_code,reason", [
++    ("request_id", "unrelated-request", 0, "provider_result_invalid"),
++    ("schema_version", "earnings-transcript-result/3", 0, "provider_result_invalid"),
++    ("schema_version", ["earnings-transcript-result/2"], 0, "provider_result_invalid"),
++    ("schema_version", {"version": "earnings-transcript-result/2"}, 0, "provider_result_invalid"),
++    ("provider", "unrelated-provider", 0, "provider_result_invalid"),
++    ("fiscal_period", "2026-Q3", 0, "provider_result_invalid"),
++    ("candidate_count", 1, 0, "provider_result_invalid"),
++    ("candidate_count", True, 0, "provider_result_invalid"),
++    ("candidate_count", "0", 0, "provider_result_invalid"),
++    (None, None, 2, "provider_tool_failed"),
++])
++def test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child(
++    tmp_path, monkeypatch, field, value, exit_code, reason,
++):
++    result = {"schema_version": "earnings-transcript-result/2", "request_id": "w07",
++              "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q4",
++              "candidate_count": 0, "error_code": "call_after_as_of"}
++    if field is not None:
++        result[field] = value
++    receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
++               "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
++    calls = []
++    def run(command, **kwargs):
++        calls.append(command)
++        return json.dumps(result).encode(), json.dumps(receipt).encode(), exit_code
++    monkeypatch.setattr(transport_module, "_run_bounded_json", run)
++    transport = _transport(tmp_path)
++    monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
++    public = transport._et_result(request=_request(), limits=_limits())
++    assert public["status"] == "provider_unavailable"
++    assert public["reason"] == reason
++    assert public["retryable"] is False
++    assert public["provider_requests"] == 1
++    assert public["provider_response_bytes"] == 512
++    assert public["provider_usage_complete"] is True
++    assert public["provider_started"] is True
++    assert public["provider_calls"] == 1
++    assert "call_after_as_of" not in json.dumps(public)
++    assert "source_ref" not in public
++    assert len(calls) == 1

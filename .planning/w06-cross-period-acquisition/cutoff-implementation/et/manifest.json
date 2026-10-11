@@ -1,0 +1,119 @@
+{
+  "schema_version": "root-w06-et-cutoff-manifest/1",
+  "files": [
+    {
+      "path": "before.json",
+      "sha256": "de984668ee2e4db025336378e5a517b1cda8a710eb6bc942cb7734f289922b3b",
+      "bytes": 2830
+    },
+    {
+      "path": "git-diff-check.txt",
+      "sha256": "308ca3228b188852682f31024fb9549a4eba5756372656a0c0818f07060c95ac",
+      "bytes": 358
+    },
+    {
+      "path": "git-diff-stat.txt",
+      "sha256": "17ff9c33492490097df9ace71707c5717da8b7b3d1d31af6ec60353c36b9276c",
+      "bytes": 615
+    },
+    {
+      "path": "git-head.txt",
+      "sha256": "a088ee24cf505b1cd256d914086e449c6c1bb31516535f51c44380b5617a8c72",
+      "bytes": 42
+    },
+    {
+      "path": "git-product.txt",
+      "sha256": "20370939038f0c006f6af518231af400f756276597899214bf49ef61af11792a",
+      "bytes": 15487
+    },
+    {
+      "path": "git-status.txt",
+      "sha256": "41ef579d193de861554f681672457986efeb4fea8b6547b6a1132144bafe0715",
+      "bytes": 124
+    },
+    {
+      "path": "golden.json",
+      "sha256": "b27d73ddbf0cd34535868116048b8f93ed8d7bbe302eee5abb52257339644edf",
+      "bytes": 548
+    },
+    {
+      "path": "golden.log",
+      "sha256": "172bfe812a45280a988bd3bdd2db7e7607b34a2ec12a3cf2514cc823eb7a24f3",
+      "bytes": 20
+    },
+    {
+      "path": "green.json",
+      "sha256": "1cec6abcf39444a0ee49769be169a2774c1b95eaf6207602fcfd88030dc68a6b",
+      "bytes": 1193
+    },
+    {
+      "path": "green.log",
+      "sha256": "17c2e5e24dbef4cc43c0b657bebd6396873d4a72d8c858c412fd2c5ae63461ce",
+      "bytes": 102
+    },
+    {
+      "path": "green.xml",
+      "sha256": "c93e0e6a40ae436cce977620d6e24578e46d5cb3ffb41b4a451a9ba2b3a89bbb",
+      "bytes": 7536
+    },
+    {
+      "path": "lint.json",
+      "sha256": "5bc9becd877198df3dc1877e9cafcf8f75f70f8d0d0ed8f45d50510cfd6808ff",
+      "bytes": 645
+    },
+    {
+      "path": "lint.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": "product-freeze.json",
+      "sha256": "325f3bbc9ac7953748f43a07a485fbfac5bcf8dd61ad06af2fe5545532143f90",
+      "bytes": 3200
+    },
+    {
+      "path": "red.json",
+      "sha256": "188fe1fb51695fd341fc2e39eeac7ba548a0405b3b95a261879d947ffe279c91",
+      "bytes": 1022
+    },
+    {
+      "path": "red.log",
+      "sha256": "4c2bbe60043811bb68a1fe7a395df605c831bfbfe30602308ec3f796e47a9f18",
+      "bytes": 6092
+    },
+    {
+      "path": "red.xml",
+      "sha256": "97821e5af885082cf1bf5b87b556751ba6a23459f60af9e9bf34687a857c3040",
+      "bytes": 6895
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root\\.planning\\w06-cutoff-result\\findings.md",
+      "sha256": "e0c086e70b79e549724fc2e7560be2a4526933ffc1fd0a64b85e4d5f8d992180",
+      "bytes": 828
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root\\.planning\\w06-cutoff-result\\progress.md",
+      "sha256": "a727f27886380437de4e64a5f8aa0917b4a7613e8c6ee3e9e35bbc256f4a5b42",
+      "bytes": 1698
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root\\.planning\\w06-cutoff-result\\task_plan.md",
+      "sha256": "4392884c92f341b0a946fb57d2445e1417dbb3e226ce128e95cede2ffb1bc80b",
+      "bytes": 2392
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root\\docs\\handoffs\\w06-cutoff-result\\handoff.json",
+      "sha256": "ce046f0740f38f01c0240dd25d2ffe22c5473b6900c2f644a3f0ac6b57142a7c",
+      "bytes": 1141
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root\\docs\\handoffs\\w06-cutoff-result\\handoff.md",
+      "sha256": "0a5dc67fbc360aa1fb98ef2cd1ef7d2cc5653b71759b640d51d8f191f75bbbf0",
+      "bytes": 1713
+    }
+  ],
+  "old_goldens_unchanged": true,
+  "scratch_restored_absent": true,
+  "product_files": 3,
+  "verdict": "AUTHOR_COMPLETE_PENDING_ROOT_MATRIX"
+}

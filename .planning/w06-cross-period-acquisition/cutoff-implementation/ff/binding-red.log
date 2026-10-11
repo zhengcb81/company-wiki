@@ -1,0 +1,347 @@
+FFFFFFFF                                                                 [100%]
+================================== FAILURES ===================================
+_ test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[request_id-unrelated-request-0-provider_result_invalid] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-4c39e089/p/test_not_found_envelope_cannot0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000013722662780>
+field = 'request_id', value = 'unrelated-request', exit_code = 0
+reason = 'provider_result_invalid'
+
+    @pytest.mark.parametrize("field,value,exit_code,reason", [
+        ("request_id", "unrelated-request", 0, "provider_result_invalid"),
+        ("schema_version", "earnings-transcript-result/3", 0, "provider_result_invalid"),
+        ("provider", "unrelated-provider", 0, "provider_result_invalid"),
+        ("fiscal_period", "2026-Q3", 0, "provider_result_invalid"),
+        ("candidate_count", 1, 0, "provider_result_invalid"),
+        ("candidate_count", True, 0, "provider_result_invalid"),
+        ("candidate_count", "0", 0, "provider_result_invalid"),
+        (None, None, 2, "provider_tool_failed"),
+    ])
+    def test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child(
+        tmp_path, monkeypatch, field, value, exit_code, reason,
+    ):
+        result = {"schema_version": "earnings-transcript-result/2", "request_id": "w07",
+                  "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q4",
+                  "candidate_count": 0, "error_code": "call_after_as_of"}
+        if field is not None:
+            result[field] = value
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(receipt).encode(), exit_code
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "provider_unavailable"
+E       AssertionError: assert 'not_found' == 'provider_unavailable'
+E         
+E         - provider_unavailable
+E         + not_found
+
+tests\test_transcript_launch_contract.py:559: AssertionError
+_ test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[schema_version-earnings-transcript-result/3-0-provider_result_invalid] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-4c39e089/p/test_not_found_envelope_cannot1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000137226629E0>
+field = 'schema_version', value = 'earnings-transcript-result/3', exit_code = 0
+reason = 'provider_result_invalid'
+
+    @pytest.mark.parametrize("field,value,exit_code,reason", [
+        ("request_id", "unrelated-request", 0, "provider_result_invalid"),
+        ("schema_version", "earnings-transcript-result/3", 0, "provider_result_invalid"),
+        ("provider", "unrelated-provider", 0, "provider_result_invalid"),
+        ("fiscal_period", "2026-Q3", 0, "provider_result_invalid"),
+        ("candidate_count", 1, 0, "provider_result_invalid"),
+        ("candidate_count", True, 0, "provider_result_invalid"),
+        ("candidate_count", "0", 0, "provider_result_invalid"),
+        (None, None, 2, "provider_tool_failed"),
+    ])
+    def test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child(
+        tmp_path, monkeypatch, field, value, exit_code, reason,
+    ):
+        result = {"schema_version": "earnings-transcript-result/2", "request_id": "w07",
+                  "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q4",
+                  "candidate_count": 0, "error_code": "call_after_as_of"}
+        if field is not None:
+            result[field] = value
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(receipt).encode(), exit_code
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "provider_unavailable"
+E       AssertionError: assert 'not_found' == 'provider_unavailable'
+E         
+E         - provider_unavailable
+E         + not_found
+
+tests\test_transcript_launch_contract.py:559: AssertionError
+_ test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[provider-unrelated-provider-0-provider_result_invalid] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-4c39e089/p/test_not_found_envelope_cannot2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001372265A450>
+field = 'provider', value = 'unrelated-provider', exit_code = 0
+reason = 'provider_result_invalid'
+
+    @pytest.mark.parametrize("field,value,exit_code,reason", [
+        ("request_id", "unrelated-request", 0, "provider_result_invalid"),
+        ("schema_version", "earnings-transcript-result/3", 0, "provider_result_invalid"),
+        ("provider", "unrelated-provider", 0, "provider_result_invalid"),
+        ("fiscal_period", "2026-Q3", 0, "provider_result_invalid"),
+        ("candidate_count", 1, 0, "provider_result_invalid"),
+        ("candidate_count", True, 0, "provider_result_invalid"),
+        ("candidate_count", "0", 0, "provider_result_invalid"),
+        (None, None, 2, "provider_tool_failed"),
+    ])
+    def test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child(
+        tmp_path, monkeypatch, field, value, exit_code, reason,
+    ):
+        result = {"schema_version": "earnings-transcript-result/2", "request_id": "w07",
+                  "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q4",
+                  "candidate_count": 0, "error_code": "call_after_as_of"}
+        if field is not None:
+            result[field] = value
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(receipt).encode(), exit_code
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "provider_unavailable"
+E       AssertionError: assert 'not_found' == 'provider_unavailable'
+E         
+E         - provider_unavailable
+E         + not_found
+
+tests\test_transcript_launch_contract.py:559: AssertionError
+_ test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[fiscal_period-2026-Q3-0-provider_result_invalid] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-4c39e089/p/test_not_found_envelope_cannot3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000013722613570>
+field = 'fiscal_period', value = '2026-Q3', exit_code = 0
+reason = 'provider_result_invalid'
+
+    @pytest.mark.parametrize("field,value,exit_code,reason", [
+        ("request_id", "unrelated-request", 0, "provider_result_invalid"),
+        ("schema_version", "earnings-transcript-result/3", 0, "provider_result_invalid"),
+        ("provider", "unrelated-provider", 0, "provider_result_invalid"),
+        ("fiscal_period", "2026-Q3", 0, "provider_result_invalid"),
+        ("candidate_count", 1, 0, "provider_result_invalid"),
+        ("candidate_count", True, 0, "provider_result_invalid"),
+        ("candidate_count", "0", 0, "provider_result_invalid"),
+        (None, None, 2, "provider_tool_failed"),
+    ])
+    def test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child(
+        tmp_path, monkeypatch, field, value, exit_code, reason,
+    ):
+        result = {"schema_version": "earnings-transcript-result/2", "request_id": "w07",
+                  "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q4",
+                  "candidate_count": 0, "error_code": "call_after_as_of"}
+        if field is not None:
+            result[field] = value
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(receipt).encode(), exit_code
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "provider_unavailable"
+E       AssertionError: assert 'not_found' == 'provider_unavailable'
+E         
+E         - provider_unavailable
+E         + not_found
+
+tests\test_transcript_launch_contract.py:559: AssertionError
+_ test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[candidate_count-1-0-provider_result_invalid] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-4c39e089/p/test_not_found_envelope_cannot4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000013722613130>
+field = 'candidate_count', value = 1, exit_code = 0
+reason = 'provider_result_invalid'
+
+    @pytest.mark.parametrize("field,value,exit_code,reason", [
+        ("request_id", "unrelated-request", 0, "provider_result_invalid"),
+        ("schema_version", "earnings-transcript-result/3", 0, "provider_result_invalid"),
+        ("provider", "unrelated-provider", 0, "provider_result_invalid"),
+        ("fiscal_period", "2026-Q3", 0, "provider_result_invalid"),
+        ("candidate_count", 1, 0, "provider_result_invalid"),
+        ("candidate_count", True, 0, "provider_result_invalid"),
+        ("candidate_count", "0", 0, "provider_result_invalid"),
+        (None, None, 2, "provider_tool_failed"),
+    ])
+    def test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child(
+        tmp_path, monkeypatch, field, value, exit_code, reason,
+    ):
+        result = {"schema_version": "earnings-transcript-result/2", "request_id": "w07",
+                  "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q4",
+                  "candidate_count": 0, "error_code": "call_after_as_of"}
+        if field is not None:
+            result[field] = value
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(receipt).encode(), exit_code
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "provider_unavailable"
+E       AssertionError: assert 'not_found' == 'provider_unavailable'
+E         
+E         - provider_unavailable
+E         + not_found
+
+tests\test_transcript_launch_contract.py:559: AssertionError
+_ test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[candidate_count-True-0-provider_result_invalid] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-4c39e089/p/test_not_found_envelope_cannot5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001372298EF50>
+field = 'candidate_count', value = True, exit_code = 0
+reason = 'provider_result_invalid'
+
+    @pytest.mark.parametrize("field,value,exit_code,reason", [
+        ("request_id", "unrelated-request", 0, "provider_result_invalid"),
+        ("schema_version", "earnings-transcript-result/3", 0, "provider_result_invalid"),
+        ("provider", "unrelated-provider", 0, "provider_result_invalid"),
+        ("fiscal_period", "2026-Q3", 0, "provider_result_invalid"),
+        ("candidate_count", 1, 0, "provider_result_invalid"),
+        ("candidate_count", True, 0, "provider_result_invalid"),
+        ("candidate_count", "0", 0, "provider_result_invalid"),
+        (None, None, 2, "provider_tool_failed"),
+    ])
+    def test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child(
+        tmp_path, monkeypatch, field, value, exit_code, reason,
+    ):
+        result = {"schema_version": "earnings-transcript-result/2", "request_id": "w07",
+                  "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q4",
+                  "candidate_count": 0, "error_code": "call_after_as_of"}
+        if field is not None:
+            result[field] = value
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(receipt).encode(), exit_code
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "provider_unavailable"
+E       AssertionError: assert 'not_found' == 'provider_unavailable'
+E         
+E         - provider_unavailable
+E         + not_found
+
+tests\test_transcript_launch_contract.py:559: AssertionError
+_ test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[candidate_count-0-0-provider_result_invalid] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-4c39e089/p/test_not_found_envelope_cannot6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001372298F350>
+field = 'candidate_count', value = '0', exit_code = 0
+reason = 'provider_result_invalid'
+
+    @pytest.mark.parametrize("field,value,exit_code,reason", [
+        ("request_id", "unrelated-request", 0, "provider_result_invalid"),
+        ("schema_version", "earnings-transcript-result/3", 0, "provider_result_invalid"),
+        ("provider", "unrelated-provider", 0, "provider_result_invalid"),
+        ("fiscal_period", "2026-Q3", 0, "provider_result_invalid"),
+        ("candidate_count", 1, 0, "provider_result_invalid"),
+        ("candidate_count", True, 0, "provider_result_invalid"),
+        ("candidate_count", "0", 0, "provider_result_invalid"),
+        (None, None, 2, "provider_tool_failed"),
+    ])
+    def test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child(
+        tmp_path, monkeypatch, field, value, exit_code, reason,
+    ):
+        result = {"schema_version": "earnings-transcript-result/2", "request_id": "w07",
+                  "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q4",
+                  "candidate_count": 0, "error_code": "call_after_as_of"}
+        if field is not None:
+            result[field] = value
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(receipt).encode(), exit_code
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "provider_unavailable"
+E       AssertionError: assert 'not_found' == 'provider_unavailable'
+E         
+E         - provider_unavailable
+E         + not_found
+
+tests\test_transcript_launch_contract.py:559: AssertionError
+_ test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[None-None-2-provider_tool_failed] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/w06-cross-period-acquisition/cutoff-implementation/ff/s-4c39e089/p/test_not_found_envelope_cannot7')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000137229F3200>
+field = None, value = None, exit_code = 2, reason = 'provider_tool_failed'
+
+    @pytest.mark.parametrize("field,value,exit_code,reason", [
+        ("request_id", "unrelated-request", 0, "provider_result_invalid"),
+        ("schema_version", "earnings-transcript-result/3", 0, "provider_result_invalid"),
+        ("provider", "unrelated-provider", 0, "provider_result_invalid"),
+        ("fiscal_period", "2026-Q3", 0, "provider_result_invalid"),
+        ("candidate_count", 1, 0, "provider_result_invalid"),
+        ("candidate_count", True, 0, "provider_result_invalid"),
+        ("candidate_count", "0", 0, "provider_result_invalid"),
+        (None, None, 2, "provider_tool_failed"),
+    ])
+    def test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child(
+        tmp_path, monkeypatch, field, value, exit_code, reason,
+    ):
+        result = {"schema_version": "earnings-transcript-result/2", "request_id": "w07",
+                  "provider": "fmp", "status": "not_found", "fiscal_period": "2026-Q4",
+                  "candidate_count": 0, "error_code": "call_after_as_of"}
+        if field is not None:
+            result[field] = value
+        receipt = {"schema_version": "earnings-retrieval-usage/1", "request_id": "w07",
+                   "usage_complete": True, "usage": {"requests_used": 1, "response_bytes_used": 512}}
+        calls = []
+        def run(command, **kwargs):
+            calls.append(command)
+            return json.dumps(result).encode(), json.dumps(receipt).encode(), exit_code
+        monkeypatch.setattr(transport_module, "_run_bounded_json", run)
+        transport = _transport(tmp_path)
+        monkeypatch.setattr(transport, "_et_environment", lambda: ({}, None))
+        public = transport._et_result(request=_request(), limits=_limits())
+>       assert public["status"] == "provider_unavailable"
+E       AssertionError: assert 'not_found' == 'provider_unavailable'
+E         
+E         - provider_unavailable
+E         + not_found
+
+tests\test_transcript_launch_contract.py:559: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_transcript_launch_contract.py::test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[request_id-unrelated-request-0-provider_result_invalid]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[schema_version-earnings-transcript-result/3-0-provider_result_invalid]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[provider-unrelated-provider-0-provider_result_invalid]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[fiscal_period-2026-Q3-0-provider_result_invalid]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[candidate_count-1-0-provider_result_invalid]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[candidate_count-True-0-provider_result_invalid]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[candidate_count-0-0-provider_result_invalid]
+FAILED tests/test_transcript_launch_contract.py::test_not_found_envelope_cannot_claim_cutoff_for_unrelated_or_failed_child[None-None-2-provider_tool_failed]
+8 failed, 108 deselected in 1.03s

@@ -1,7 +1,9 @@
 ## ROOT 当前入口 — 2026-10-11
 
 当前状态、已发布SHA与下一步统一见 [ROOT接收状态](ROOT-reception-status.md)，优先于本文旧状态。
-OCR/RF/Audit/Portability已并线发布；FF工具main4167dac4/CWP来源master8bd23344精确CI均成功。W04质量带375工程绿、固定六原件87.4409秒PASS，四项主体绑定业务事实恢复，待非作者和并线。ET/FF cutoff工程绿；独审发现坏JSON抹去实测用量的共因，正在修。原41历史40/1保留，新attempt因180秒批次截止为2PASS/31PARTIAL/8NOT_RUN，未认证，避免重型并跑后再按原限额验收。G2/G4/G5仍开放；目标active，无新增人工许可，原件/配置/WIP保持。
+OCR/RF/Audit/Portability已并线发布，精确CI成功。W04质量带375工程绿、同六原件87.4409秒PASS，非作者17/17及四事实见证通过；18文件集成清单READY，ROOT待正常并线。ET/FF坏stdout覆盖已测用量共因已修并提交分支ETd0ac42c6/FF2d380a05，集中独审7PASS，尚未发布；原41最新1PASS/27PARTIAL/13NOT_RUN、184.54秒触及180秒截止，未认证。W07三包已实际准备（READY_NOT_STARTED）：FF固定41提速、RF组合测试、Audit买方风险诊断，ROOT保留W04/G2/G4/G5与主线安装；G2/G4/G5仍开放，目标active，0付费调用，无新增人工许可。
+W07：[三包总览及实际工作目录](../w07_parallel_quality_2026-10-11/README.md)。三包可同时启动；各自只有A/B/C三个测试大节点，不增加小节点门禁。
+
 
 ## ROOT 当前状态 — OCR 已本地并线 / 两张 W06 接收修复 — 2026-10-11
 

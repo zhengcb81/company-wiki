@@ -1,0 +1,53 @@
+{
+  "schema": "root-w07-prepared-roots/1",
+  "cutoff_product_freeze_sha256": "87495b11e3c41986c3a10374bae0c603af6db4d61d7b8ed8c6a01771b7ed3381",
+  "runtime_branch_commits": {
+    "ff": "2d380a054c658ce3b5f0763523e49a0ab34acf78",
+    "et": "d0ac42c60dcca992db78860b8469cfed3dd527e5"
+  },
+  "runtime_release": "not merged to main; complete matrix pending",
+  "lanes": {
+    "W07-RF-MODEL": {
+      "repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\rf-model-quality",
+      "branch": "codex/w07-rf-model-quality",
+      "base_commit": "30ddae8ed2a457c418e63b182e7d8c9230fbf3ff",
+      "sparse_paths": [
+        "scripts",
+        "references",
+        "tests",
+        "tools",
+        "agents",
+        "config",
+        "compatibility",
+        ".githooks"
+      ],
+      "working_tree_status": ""
+    },
+    "W07-AUDIT-ANALYST": {
+      "repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\audit-analyst-quality",
+      "branch": "codex/w07-audit-analyst-quality",
+      "base_commit": "9cd5ff8a2c8f9c1726c4047785164e3263673614",
+      "sparse_paths": null,
+      "working_tree_status": ""
+    },
+    "W07-FF-PERF": {
+      "repository": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\ff-matrix-efficiency",
+      "branch": "codex/w07-ff-matrix-efficiency",
+      "base_commit": "2d380a054c658ce3b5f0763523e49a0ab34acf78",
+      "sparse_paths": null,
+      "working_tree_status": "",
+      "dependencies": {
+        "manifest": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\ff-matrix-efficiency\\.planning\\w07-ff-matrix-efficiency\\input\\dependency-manifest.json",
+        "manifest_sha256": "f8e17feda1f540948521f595d7e4fd2697b39b6b3867cdb2bd04107eea27a00f",
+        "et_root": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\ff-matrix-efficiency\\.planning\\w07-ff-matrix-efficiency\\input\\runtime\\et",
+        "cwp_root": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\ff-matrix-efficiency\\.planning\\w07-ff-matrix-efficiency\\input\\runtime\\cwp"
+      }
+    }
+  },
+  "preparation_notes": [
+    "RF no-checkout worktree required read-tree -mu HEAD after sparse setup to initialize its index; brand-new empty checkout verified; final status clean."
+  ]
+}

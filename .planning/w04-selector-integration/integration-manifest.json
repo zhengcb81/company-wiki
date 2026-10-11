@@ -1,0 +1,1898 @@
+{
+  "schema_version": "w04-selector-integration-manifest/1",
+  "status": "READ_ONLY_READY_FOR_ROOT_INTEGRATION_STOP",
+  "generated_at": "2026-10-11",
+  "base": {
+    "tree": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+    "commit": "35a9a64591169bf217f05e87aba633dc4204033a"
+  },
+  "main": {
+    "tree": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "commit": "d75f0d42e0fc11caa50d5030d16fa238c0e02d55"
+  },
+  "sha_semantics": "oldbase/currentmain SHA are immutable Git blob bytes; pending SHA is exact current frozen worktree bytes. CRLF/LF normalized SHA is separate and only used for source/test comparison, never raw documents/evidence.",
+  "selector_write_set_count": 18,
+  "selector_sources_count": 8,
+  "selector_tests_count": 10,
+  "deferred_g2_count": 4,
+  "excluded_ci_count": 3,
+  "rows": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "old_base": {
+        "git_blob": "c46d2a04fdedb7218b324791095a47cd62aa9c00",
+        "sha256": "9f2864979058658089bb9d4edd879e05a733404f3d1a6d1de06ec012a63359b8",
+        "bytes": 6156
+      },
+      "current_main": {
+        "git_blob": "b7f07f14ea89804c24431f20a08be6bba27c6dcc",
+        "sha256": "83acf7be22008c407254cc5135b8267f58526bfdcc83cdae172827b3cf840ccf",
+        "bytes": 6202
+      },
+      "pending_worktree": {
+        "sha256": "bf270a2a7281e6b594dcdfa4ac1a0e74382cffe551a8beff02f28aceea04e27d",
+        "bytes": 6320
+      },
+      "canonical_working_sha256": "bf270a2a7281e6b594dcdfa4ac1a0e74382cffe551a8beff02f28aceea04e27d",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "9f2864979058658089bb9d4edd879e05a733404f3d1a6d1de06ec012a63359b8",
+        "current_main": "83acf7be22008c407254cc5135b8267f58526bfdcc83cdae172827b3cf840ccf",
+        "pending": "83acf7be22008c407254cc5135b8267f58526bfdcc83cdae172827b3cf840ccf"
+      },
+      "main_changed_from_base": true,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "already_on_main_eol_equivalent",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+          "locator": "preserved_initial_non_owned_sha256[path]",
+          "meaning": "non-owned preexisting WIP; not selector dependency"
+        }
+      ],
+      "package": "keep_current_main_ci",
+      "action": "KEEP_MAIN_NO_COPY",
+      "conflict_disposition": "Currentmain already equals oldtarget after source checkout CRLF/LF normalization; no content change needed."
+    },
+    {
+      "path": "scripts/config.py",
+      "old_base": {
+        "git_blob": "d3fe719ca824a4feafac723614b3f61773aeea82",
+        "sha256": "0660232b92d0b2699acb779af701416d054c52361b0ad16f935e9e98e6bc4941",
+        "bytes": 18634
+      },
+      "current_main": {
+        "git_blob": "d3fe719ca824a4feafac723614b3f61773aeea82",
+        "sha256": "0660232b92d0b2699acb779af701416d054c52361b0ad16f935e9e98e6bc4941",
+        "bytes": 18634
+      },
+      "pending_worktree": {
+        "sha256": "63c8a3982715d6b716ef01d973a067ce3c9bf0b0a26cb8405d096e216211ce5f",
+        "bytes": 21147
+      },
+      "canonical_working_sha256": "c7889864f3693f9f28f8c4d88bb8f9e8a56564eebf533bbba105a53259cb9f94",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "0660232b92d0b2699acb779af701416d054c52361b0ad16f935e9e98e6bc4941",
+        "current_main": "0660232b92d0b2699acb779af701416d054c52361b0ad16f935e9e98e6bc4941",
+        "pending": "915476c86cfa66c05f18e41e44b46de1a899e22a5937b65dce6c96c99cd966b2"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-g2-config/handoff.json",
+          "locator": "products and concentrated102PASS",
+          "meaning": "independent configuration package"
+        }
+      ],
+      "package": "g2_configuration_deferred",
+      "action": "EXCLUDE_FROM_SELECTOR_RECEIPT"
+    },
+    {
+      "path": "scripts/narrative_batch_configured.py",
+      "old_base": {
+        "git_blob": "ee651a49d9dfe681647c73524ee09a3cf63f01ed",
+        "sha256": "b72e4a9cbd1662e7bff938cab2c66fd3635e2882f21ce739aa2c1b6a98490d0b",
+        "bytes": 1603
+      },
+      "current_main": {
+        "git_blob": "ee651a49d9dfe681647c73524ee09a3cf63f01ed",
+        "sha256": "b72e4a9cbd1662e7bff938cab2c66fd3635e2882f21ce739aa2c1b6a98490d0b",
+        "bytes": 1603
+      },
+      "pending_worktree": {
+        "sha256": "123ad26d54d5c3aedb0ccfbe7cbdcbf6ddb14eb4833c3d0f539f258c588a3374",
+        "bytes": 1642
+      },
+      "canonical_working_sha256": "b72e4a9cbd1662e7bff938cab2c66fd3635e2882f21ce739aa2c1b6a98490d0b",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "b72e4a9cbd1662e7bff938cab2c66fd3635e2882f21ce739aa2c1b6a98490d0b",
+        "current_main": "b72e4a9cbd1662e7bff938cab2c66fd3635e2882f21ce739aa2c1b6a98490d0b",
+        "pending": "5ddaf7ea03047173067a40ce189867417aeb5b542fdcf61600e9e95b7618979f"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-g2-config/handoff.json",
+          "locator": "products and concentrated102PASS",
+          "meaning": "independent configuration package"
+        }
+      ],
+      "package": "g2_configuration_deferred",
+      "action": "EXCLUDE_FROM_SELECTOR_RECEIPT"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "old_base": {
+        "git_blob": "87a03d6d6a7f9328c5babbc4794a18d615b7aa95",
+        "sha256": "88a25a1854449224f20606e9949adda3649d77aa04b45f2c9cc7dfe07943b404",
+        "bytes": 12409
+      },
+      "current_main": {
+        "git_blob": "87a03d6d6a7f9328c5babbc4794a18d615b7aa95",
+        "sha256": "88a25a1854449224f20606e9949adda3649d77aa04b45f2c9cc7dfe07943b404",
+        "bytes": 12409
+      },
+      "pending_worktree": {
+        "sha256": "ae68412ea81b8439284ee65305da440ac84b5ddb69fe69a2070920489e7b8a1b",
+        "bytes": 20340
+      },
+      "canonical_working_sha256": "e0768818b6dd82020300126a2e32bbb43ece422dac369595fc4c6ec4237e83d5",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "88a25a1854449224f20606e9949adda3649d77aa04b45f2c9cc7dfe07943b404",
+        "current_main": "88a25a1854449224f20606e9949adda3649d77aa04b45f2c9cc7dfe07943b404",
+        "pending": "a664159b0b2ba287925de5d868fb7393ea54df57e98817049cdd308eaf68b8bc"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+          "locator": "products[path]",
+          "meaning": "final authoritative bytes supersede earlier semantic freeze"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "REPLACE_EXACT_FROZEN_WORKTREE_BYTES"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_groups.py",
+      "old_base": {
+        "git_blob": "5729f860d171611c8d78f9e2c56efa9e47670f4d",
+        "sha256": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+        "bytes": 13329
+      },
+      "current_main": {
+        "git_blob": "5729f860d171611c8d78f9e2c56efa9e47670f4d",
+        "sha256": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+        "bytes": 13329
+      },
+      "pending_worktree": {
+        "sha256": "c2ced013b8823695d0a16f447e36848dcd060a2c344de322f3b425b296236402",
+        "bytes": 29375
+      },
+      "canonical_working_sha256": "a48ba80d7969f6b67d64c9992e1affed7885204304f9aa76e56b1f678d7df8d8",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+        "current_main": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+        "pending": "c2ced013b8823695d0a16f447e36848dcd060a2c344de322f3b425b296236402"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "REPLACE_EXACT_FROZEN_WORKTREE_BYTES",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_candidates.py",
+      "old_base": {
+        "git_blob": "8306acbe64b4d09829dbb4052d7daa3650851af3",
+        "sha256": "ff286285f0d90a0a9de3683cc633d6139a4f7f49cf8a4d99f64903a966b716b6",
+        "bytes": 10222
+      },
+      "current_main": {
+        "git_blob": "8306acbe64b4d09829dbb4052d7daa3650851af3",
+        "sha256": "ff286285f0d90a0a9de3683cc633d6139a4f7f49cf8a4d99f64903a966b716b6",
+        "bytes": 10222
+      },
+      "pending_worktree": {
+        "sha256": "aec5e2d22c942064dea64b805e09d6b835c516af16d931e7218366e5b8ff5fa4",
+        "bytes": 10366
+      },
+      "canonical_working_sha256": "1374ccd3c74554cb742fe974604b113496f321f507001e8acb96d8b0bed5ef88",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "ff286285f0d90a0a9de3683cc633d6139a4f7f49cf8a4d99f64903a966b716b6",
+        "current_main": "ff286285f0d90a0a9de3683cc633d6139a4f7f49cf8a4d99f64903a966b716b6",
+        "pending": "aec5e2d22c942064dea64b805e09d6b835c516af16d931e7218366e5b8ff5fa4"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "REPLACE_EXACT_FROZEN_WORKTREE_BYTES",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "old_base": {
+        "git_blob": "2825ff1e1deaeac7221d9c91224f33d5235ad048",
+        "sha256": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+        "bytes": 80031
+      },
+      "current_main": {
+        "git_blob": "2825ff1e1deaeac7221d9c91224f33d5235ad048",
+        "sha256": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+        "bytes": 80031
+      },
+      "pending_worktree": {
+        "sha256": "400ae1cd3ff3a789d307c8fc85de09839a3f9fe6cbed1d5572699535b1598b68",
+        "bytes": 81107
+      },
+      "canonical_working_sha256": "e95bde99423eebbc209d81bed836e7d0582a116f6cd5b0669583a86be062f711",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+        "current_main": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+        "pending": "400ae1cd3ff3a789d307c8fc85de09839a3f9fe6cbed1d5572699535b1598b68"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "REPLACE_EXACT_FROZEN_WORKTREE_BYTES",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "old_base": {
+        "git_blob": "10a5410a462d23ccf3620bc6481592d166e3433d",
+        "sha256": "527a33be9e94514c55241cfeb03c4e4279196781e955e9483c27055445fa67f7",
+        "bytes": 5404
+      },
+      "current_main": {
+        "git_blob": "10a5410a462d23ccf3620bc6481592d166e3433d",
+        "sha256": "527a33be9e94514c55241cfeb03c4e4279196781e955e9483c27055445fa67f7",
+        "bytes": 5404
+      },
+      "pending_worktree": {
+        "sha256": "48083f0bd7c6862744667597a14818e20ef02979f1ec4615bec5670cb1f77f47",
+        "bytes": 6983
+      },
+      "canonical_working_sha256": "c6840d8772681f88ba99207686dedad85a4d58615a36eb4b136a5bc1213b0916",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "527a33be9e94514c55241cfeb03c4e4279196781e955e9483c27055445fa67f7",
+        "current_main": "527a33be9e94514c55241cfeb03c4e4279196781e955e9483c27055445fa67f7",
+        "pending": "a7c18dd72b8c706366e7e48d0bbb3ccf6627843fdaa989f9ee5abf873fc95b2b"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+          "locator": "products[path]",
+          "meaning": "final authoritative bytes supersede earlier semantic freeze"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "REPLACE_EXACT_FROZEN_WORKTREE_BYTES"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_group_candidates.py",
+      "old_base": {
+        "git_blob": "96dbfd4e3e795b9a02060a873593d11fad4fd0b6",
+        "sha256": "c1915ce95439aac90757129cb134b20fff7150331467e6b367952f9c02785569",
+        "bytes": 35824
+      },
+      "current_main": {
+        "git_blob": "96dbfd4e3e795b9a02060a873593d11fad4fd0b6",
+        "sha256": "c1915ce95439aac90757129cb134b20fff7150331467e6b367952f9c02785569",
+        "bytes": 35824
+      },
+      "pending_worktree": {
+        "sha256": "729b77bb92655fd05945980331f68e5a2f3701a1cbece7b26e4c0fc683590e7f",
+        "bytes": 35968
+      },
+      "canonical_working_sha256": "cface6b409883958142aa1e3906c5d7abdcb1ea6e4a164a85491725a8ec5b04b",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "c1915ce95439aac90757129cb134b20fff7150331467e6b367952f9c02785569",
+        "current_main": "c1915ce95439aac90757129cb134b20fff7150331467e6b367952f9c02785569",
+        "pending": "729b77bb92655fd05945980331f68e5a2f3701a1cbece7b26e4c0fc683590e7f"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "REPLACE_EXACT_FROZEN_WORKTREE_BYTES",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_semantic_coverage.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca",
+        "bytes": 5944
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "92ac400cc91f08b47c9706f067e69ef52724b487a02734e2f43984df5711be00"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+          "locator": "products[path]",
+          "meaning": "final authoritative bytes supersede earlier semantic freeze"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_stage_assertions.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "a7efe34bd99533302a20cfeee0c401ed77c225bfba95a203a8c4c3b1f08aea73",
+        "bytes": 6885
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "a7efe34bd99533302a20cfeee0c401ed77c225bfba95a203a8c4c3b1f08aea73"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "tests/integration/test_w04_novelty_finalize.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "967edc28d7e65b251fde9074d724a4c51a350308a0067eca181890df79fc2db1",
+        "bytes": 8434
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "50c4ca15ec3cdd1b668646394efebbcac9ace6c7a061393fd7497fd2aeb5df63"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+          "locator": "products[path]",
+          "meaning": "final authoritative bytes supersede earlier semantic freeze"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD"
+    },
+    {
+      "path": "tests/integration/test_w04_quality_band_budget.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "6359f12b4229fd624a3902eaeee393dca5802a62ca25a29811c6e69e6cf4361a",
+        "bytes": 6502
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "cb72af8a66904e75978a3e815227d3514185906cbf22927f7d86eb4ab0ae5055"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+          "locator": "products[path]",
+          "meaning": "final authoritative bytes supersede earlier semantic freeze"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD"
+    },
+    {
+      "path": "tests/integration/test_w04_semantic_budget_finalize.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "fb55bfb43c043b02446d24c709dcb0e4264c59fa419bdd15588d0f03e3ce1a8c",
+        "bytes": 1876
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "86f78781317076ab63a98191c9a8676c7173ffc598443e48d4ac0f71f08137c3"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "tests/unit/test_ci_push_selection.py",
+      "old_base": {
+        "git_blob": "d6d4cf1b11b909fefdb4d2aaa62701295ca2132e",
+        "sha256": "37e848b78ea8957bd678edd90a2016b7fd26404d6b4dc655eb106413f308be81",
+        "bytes": 10779
+      },
+      "current_main": {
+        "git_blob": "4ed2b8b49403ec106f0a1b3472a9c437771e3b06",
+        "sha256": "698b28a86c41ea554f3212d425de8e7913ce457469f6f0d1a445de1027670569",
+        "bytes": 12215
+      },
+      "pending_worktree": {
+        "sha256": "85439972e1ed96678f6eebf5fe9e6c382ae7e517dad26eb31ed7a3f5eb9db9f0",
+        "bytes": 11557
+      },
+      "canonical_working_sha256": "2919eb26b2a77c8c1137bfcdde22cdd11f48169c7af387e6f78d354767da87ca",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "37e848b78ea8957bd678edd90a2016b7fd26404d6b4dc655eb106413f308be81",
+        "current_main": "698b28a86c41ea554f3212d425de8e7913ce457469f6f0d1a445de1027670569",
+        "pending": "3e166e03cb7bdfd31bcd65c66e9dfedfc14f90f5fa9c37fd3e994d465f601b00"
+      },
+      "main_changed_from_base": true,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "both_sides_changed_requires_three_way_review",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": true,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+          "locator": "preserved_initial_non_owned_sha256[path]",
+          "meaning": "non-owned preexisting WIP; not selector dependency"
+        }
+      ],
+      "package": "keep_current_main_ci",
+      "action": "KEEP_MAIN_NO_COPY",
+      "conflict_disposition": "Exclude old target. Currentmain is oldtarget plus6 OCR resource regression cases in test_ocr_resource_regressions_share_ci_and_local_smoke; old copy would remove accepted main coverage."
+    },
+    {
+      "path": "tests/unit/test_narrative_business_recall.py",
+      "old_base": {
+        "git_blob": "5cf3ecc61948c8ede3200b6a78c4c8f2c5612b9e",
+        "sha256": "cadc2af6e962ee8977982c0f5334c365456bd6046a9b78cd9c67822e5d671ef3",
+        "bytes": 18985
+      },
+      "current_main": {
+        "git_blob": "5cf3ecc61948c8ede3200b6a78c4c8f2c5612b9e",
+        "sha256": "cadc2af6e962ee8977982c0f5334c365456bd6046a9b78cd9c67822e5d671ef3",
+        "bytes": 18985
+      },
+      "pending_worktree": {
+        "sha256": "9714951af67a77113969ee4794b6eb1fddf8d6623db1009c662ac228cdefe93e",
+        "bytes": 19321
+      },
+      "canonical_working_sha256": "a64750af0a0c53e45b034ce7cef7054195fb52a764817e27bf3069b3864605c8",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "cadc2af6e962ee8977982c0f5334c365456bd6046a9b78cd9c67822e5d671ef3",
+        "current_main": "cadc2af6e962ee8977982c0f5334c365456bd6046a9b78cd9c67822e5d671ef3",
+        "pending": "ff7364eecdab09a827ef422a63eb3c1bcb2bbc36469faf795f607bfe3b6022b8"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "REPLACE_EXACT_FROZEN_WORKTREE_BYTES",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "tests/unit/test_narrative_model_config.py",
+      "old_base": {
+        "git_blob": "a5a4c816d88dfae7e573c0414eb8cb6ca75364b0",
+        "sha256": "f3f27768425ab76fb69ade0c164da800a5cf1c1cd440578fec6275dd654d886d",
+        "bytes": 13596
+      },
+      "current_main": {
+        "git_blob": "a5a4c816d88dfae7e573c0414eb8cb6ca75364b0",
+        "sha256": "f3f27768425ab76fb69ade0c164da800a5cf1c1cd440578fec6275dd654d886d",
+        "bytes": 13596
+      },
+      "pending_worktree": {
+        "sha256": "d6460baf85f3ab69ba75aecbd64719a30823afcc26df150d44b778b74635f8a6",
+        "bytes": 13877
+      },
+      "canonical_working_sha256": "59475efbaacfa68383bc08f6e07118ed66ca2a30b47fba06a716281760e627f0",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "f3f27768425ab76fb69ade0c164da800a5cf1c1cd440578fec6275dd654d886d",
+        "current_main": "f3f27768425ab76fb69ade0c164da800a5cf1c1cd440578fec6275dd654d886d",
+        "pending": "633d6a39ddcdd53c2c32489c3791e30177c7505ffb8189f5c6a74c3a10cc2b2a"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-g2-config/handoff.json",
+          "locator": "products and concentrated102PASS",
+          "meaning": "independent configuration package"
+        }
+      ],
+      "package": "g2_configuration_deferred",
+      "action": "EXCLUDE_FROM_SELECTOR_RECEIPT"
+    },
+    {
+      "path": "tests/unit/test_w04_llm_config_scope.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "0be78f38edb81ea1c4c475dd1b6c5479588de05328ae62b81fafbafc02612cc8",
+        "bytes": 14007
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "3c03631fe7e6dec8d905429934988d4f6dda922ed343e51a77917c100876220f"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-g2-config/handoff.json",
+          "locator": "products and concentrated102PASS",
+          "meaning": "independent configuration package"
+        }
+      ],
+      "package": "g2_configuration_deferred",
+      "action": "EXCLUDE_FROM_SELECTOR_RECEIPT"
+    },
+    {
+      "path": "tests/unit/test_w04_narrative_semantics.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "03e83d6675c3e14315624e04eabea353f0eac5394112a0bc3efdede8352cda3d",
+        "bytes": 116101
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "47aadb0a2a32b65f6e21f287f4d8cc2e5f34cdb8b6400c2a3183407b6a137510"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "tests/unit/test_w04_novelty_budget.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "fe68f44a8ac90e63a92d60b1ce8b0ae94f1f5feecba118b86f1a335d39615bbf",
+        "bytes": 3953
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "269ae73edef2b176c3c92499bea9d1838a550429ce8f8d80dcee91ee47c3badc"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+          "locator": "products[path]",
+          "meaning": "final authoritative bytes supersede earlier semantic freeze"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD"
+    },
+    {
+      "path": "tests/unit/test_w04_selector_version_dispatch.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "d5409951a8f172f2f25f32cb7a40f0fcac66a789bea2a173e95cc31979fcb296",
+        "bytes": 4963
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "55364737d94ac57a5db2acf3143d3a07b81869e578f2f5b36052f5c12d761d5f"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "tests/unit/test_w04_semantic_budget.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "7eb30ac41c05094958ee05479b4de039a777f7f1c546366b904073f0806f23e1",
+        "bytes": 12181
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "6b15be2178863e57485d8b6881abab3ecef2394bb5001823713bf21d4788c84a"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": true,
+      "phase2_freeze_matches": true,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+          "locator": "products[path]",
+          "meaning": "final authoritative bytes supersede earlier semantic freeze"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD"
+    },
+    {
+      "path": "tests/unit/test_w04_stage_predicate_scope.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "32e02c1a902ff2ca64cbf83b0ac46b2603d25c4cd43f07c2edd5246c86a4feab",
+        "bytes": 4386
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "1a5eaacdd30a838563acb9b503beb0b9d2cf02759fe5634be5da02fc788ab45d"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "tests/unit/test_w04_stage_public_assertions.py",
+      "old_base": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "current_main": {
+        "git_blob": null,
+        "sha256": null,
+        "bytes": null
+      },
+      "pending_worktree": {
+        "sha256": "c8a31dc605456c93b3c7219a9920a9552eaf0cfd9c2afc0ec3bdc8004c44771b",
+        "bytes": 6211
+      },
+      "canonical_working_sha256": null,
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": null,
+        "current_main": null,
+        "pending": "c8a31dc605456c93b3c7219a9920a9552eaf0cfd9c2afc0ec3bdc8004c44771b"
+      },
+      "main_changed_from_base": false,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "accept_frozen_target_no_main_content_conflict",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+          "locator": "files[path]",
+          "meaning": "prerequisite business/public0.8/stage union"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+          "locator": "nodes[name=concentrated]",
+          "meaning": "all10 test modules/375PASS"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+          "locator": "verdict/checks",
+          "meaning": "17 independent engineering checks; reserved prepass boundary"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+          "locator": "product_freeze_sha256/unchanged_checkpoint_script_sha256",
+          "meaning": "ROOT fixed six originals successful replay"
+        }
+      ],
+      "package": "selector_accept",
+      "action": "ADD",
+      "earlier_semantic_freeze_still_exact": true
+    },
+    {
+      "path": "tools/changed_unit_tests.py",
+      "old_base": {
+        "git_blob": "caeab7371ff7f0a9b399b0e7515925d9445280b2",
+        "sha256": "2527cfa7acb25bdf305a701e21a8894c17f7579d0a55b8d050d4803ba953108a",
+        "bytes": 7661
+      },
+      "current_main": {
+        "git_blob": "13628ea5dddfc69aac36c25752618d4a1ce91f17",
+        "sha256": "70f043361480b4c5a751814dded3d1f14cd01a5f0b64a222513113f2ffe6dd49",
+        "bytes": 7677
+      },
+      "pending_worktree": {
+        "sha256": "a9b509f974b8556efdf1380bf0e723eb2f0e5aeebc452e65d51230ea93d0361c",
+        "bytes": 7839
+      },
+      "canonical_working_sha256": "a9b509f974b8556efdf1380bf0e723eb2f0e5aeebc452e65d51230ea93d0361c",
+      "canonical_working_eol_equivalent_to_main": true,
+      "normalized_lf_sha256": {
+        "old_base": "2527cfa7acb25bdf305a701e21a8894c17f7579d0a55b8d050d4803ba953108a",
+        "current_main": "70f043361480b4c5a751814dded3d1f14cd01a5f0b64a222513113f2ffe6dd49",
+        "pending": "70f043361480b4c5a751814dded3d1f14cd01a5f0b64a222513113f2ffe6dd49"
+      },
+      "main_changed_from_base": true,
+      "pending_changed_from_base": true,
+      "receipt_recommendation": "already_on_main_eol_equivalent",
+      "phase2_frozen_product": false,
+      "phase2_freeze_matches": null,
+      "content_conflict": false,
+      "pwf_acceptance_references": [
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+          "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+          "locator": "preserved_initial_non_owned_sha256[path]",
+          "meaning": "non-owned preexisting WIP; not selector dependency"
+        }
+      ],
+      "package": "keep_current_main_ci",
+      "action": "KEEP_MAIN_NO_COPY",
+      "conflict_disposition": "Currentmain already equals oldtarget after source checkout CRLF/LF normalization; no content change needed."
+    }
+  ],
+  "direct_dependency_reads": [
+    {
+      "path": "src/company_wiki/automation/narrative_generation.py",
+      "consumers": [
+        "tests/unit/test_w04_selector_version_dispatch.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "b8621f835b0480fd79ab2f0a7ef33a2e3427e5b3d494f126612538be5411b1a8",
+      "current_main_sha256": "b8621f835b0480fd79ab2f0a7ef33a2e3427e5b3d494f126612538be5411b1a8",
+      "pending_worktree_sha256": "b8621f835b0480fd79ab2f0a7ef33a2e3427e5b3d494f126612538be5411b1a8"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_selector_binding.py",
+      "consumers": [
+        "tests/unit/test_w04_selector_version_dispatch.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "16c11b2c7d8d5d9e277dc9b637883c08e5ff8d1b6eaca9cfb1c2ccec83bcd001",
+      "current_main_sha256": "16c11b2c7d8d5d9e277dc9b637883c08e5ff8d1b6eaca9cfb1c2ccec83bcd001",
+      "pending_worktree_sha256": "23fed8698f85c2a2f28277bd38266b61ae51fbd01dc2bb783f03d60adce73a45"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/n6_budget_dedup.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_finalize.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "7ce91e8dd9736cdb6ff0da250dc4328261169c4f3b0b2be946efca865ed8c694",
+      "current_main_sha256": "7ce91e8dd9736cdb6ff0da250dc4328261169c4f3b0b2be946efca865ed8c694",
+      "pending_worktree_sha256": "992ea8dfce2808aac33827e921bfb4997e3605052eee18822c23e5b5ebda85a7"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/n6_candidate_completion.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "src/company_wiki/source_catalog/narrative_group_candidates.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "69b4b6b77ceb4b568b001e963dda7ca9ef874b855e4add9332de7dbdf2a91854",
+      "current_main_sha256": "69b4b6b77ceb4b568b001e963dda7ca9ef874b855e4add9332de7dbdf2a91854",
+      "pending_worktree_sha256": "6e42c29ae05a8bd904598aba9d5944ec2f90ea01585ede8b21839081cf19ee40"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/n6_candidate_operating_facts.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "src/company_wiki/source_catalog/narrative_candidates.py",
+        "src/company_wiki/source_catalog/narrative_group_candidates.py",
+        "tests/unit/test_narrative_business_recall.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "f576407ec55f25283c8fee72f443cde1ad8dae87355ecc7d54ad5df63098f142",
+      "current_main_sha256": "f576407ec55f25283c8fee72f443cde1ad8dae87355ecc7d54ad5df63098f142",
+      "pending_worktree_sha256": "f05f884167b1789a028b0628f1104f3d699059f658a60f6572fc8efa49950a9a"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_finalize.py",
+        "tests/unit/test_w04_novelty_budget.py",
+        "tests/unit/test_w04_semantic_budget.py"
+      ],
+      "disposition": "included_in_18_file_selector_write_set",
+      "old_base_sha256": null,
+      "current_main_sha256": null,
+      "pending_worktree_sha256": "ae68412ea81b8439284ee65305da440ac84b5ddb69fe69a2070920489e7b8a1b"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_groups.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "tests/unit/test_narrative_business_recall.py",
+        "tests/unit/test_w04_narrative_semantics.py",
+        "tests/unit/test_w04_stage_predicate_scope.py",
+        "tests/unit/test_w04_stage_public_assertions.py"
+      ],
+      "disposition": "included_in_18_file_selector_write_set",
+      "old_base_sha256": null,
+      "current_main_sha256": null,
+      "pending_worktree_sha256": "c2ced013b8823695d0a16f447e36848dcd060a2c344de322f3b425b296236402"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "tests/unit/test_narrative_business_recall.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "335b3e2b4cab554ba045ea76a5d4140cce945b1219e7895fb54b50f0bbb9532d",
+      "current_main_sha256": "335b3e2b4cab554ba045ea76a5d4140cce945b1219e7895fb54b50f0bbb9532d",
+      "pending_worktree_sha256": "c7e900878cf3a21438ae53ee53cff01e6eecb8615a46468ef3ba70a49f0e852f"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_candidates.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "src/company_wiki/source_catalog/narrative_finalize.py",
+        "src/company_wiki/source_catalog/narrative_group_candidates.py",
+        "tests/integration/test_w04_novelty_finalize.py",
+        "tests/unit/test_narrative_business_recall.py",
+        "tests/unit/test_w04_narrative_semantics.py"
+      ],
+      "disposition": "included_in_18_file_selector_write_set",
+      "old_base_sha256": null,
+      "current_main_sha256": null,
+      "pending_worktree_sha256": "aec5e2d22c942064dea64b805e09d6b835c516af16d931e7218366e5b8ff5fa4"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_context.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "src/company_wiki/source_catalog/narrative_group_candidates.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "abd8436b1d517c2e6e7aafb0b21586609e7c378b36ebb282b625d57a3cfdb893",
+      "current_main_sha256": "abd8436b1d517c2e6e7aafb0b21586609e7c378b36ebb282b625d57a3cfdb893",
+      "pending_worktree_sha256": "4f4749cd3df6c6a16d31e9ea5327beb5cee9d0895c6e25ef2df19404fde69e4e"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_document.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "src/company_wiki/source_catalog/narrative_candidates.py",
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "src/company_wiki/source_catalog/narrative_finalize.py",
+        "src/company_wiki/source_catalog/narrative_group_candidates.py",
+        "tests/integration/test_w04_novelty_finalize.py",
+        "tests/integration/test_w04_quality_band_budget.py",
+        "tests/unit/test_narrative_business_recall.py",
+        "tests/unit/test_w04_narrative_semantics.py",
+        "tests/unit/test_w04_stage_public_assertions.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "a97cb87891330b2b225ff9c1d6c3e0e0cfd96050c1867822b01c4eefb97a7320",
+      "current_main_sha256": "a97cb87891330b2b225ff9c1d6c3e0e0cfd96050c1867822b01c4eefb97a7320",
+      "pending_worktree_sha256": "bab047de2b80d92ad6d6131f340605ea6fbf93f3c560d4bf7738ce4f7b295120"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "consumers": [
+        "tests/integration/test_w04_novelty_finalize.py",
+        "tests/integration/test_w04_semantic_budget_finalize.py",
+        "tests/unit/test_narrative_business_recall.py",
+        "tests/unit/test_w04_narrative_semantics.py",
+        "tests/unit/test_w04_stage_predicate_scope.py",
+        "tests/unit/test_w04_stage_public_assertions.py"
+      ],
+      "disposition": "included_in_18_file_selector_write_set",
+      "old_base_sha256": null,
+      "current_main_sha256": null,
+      "pending_worktree_sha256": "400ae1cd3ff3a789d307c8fc85de09839a3f9fe6cbed1d5572699535b1598b68"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "tests/integration/test_w04_novelty_finalize.py",
+        "tests/integration/test_w04_quality_band_budget.py"
+      ],
+      "disposition": "included_in_18_file_selector_write_set",
+      "old_base_sha256": null,
+      "current_main_sha256": null,
+      "pending_worktree_sha256": "48083f0bd7c6862744667597a14818e20ef02979f1ec4615bec5670cb1f77f47"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_group_candidates.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py"
+      ],
+      "disposition": "included_in_18_file_selector_write_set",
+      "old_base_sha256": null,
+      "current_main_sha256": null,
+      "pending_worktree_sha256": "729b77bb92655fd05945980331f68e5a2f3701a1cbece7b26e4c0fc683590e7f"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_matching.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "d9eaa7235f82b8d6e555504be041d9a396cdef72883f3d87fcf8f1cd0a79e693",
+      "current_main_sha256": "d9eaa7235f82b8d6e555504be041d9a396cdef72883f3d87fcf8f1cd0a79e693",
+      "pending_worktree_sha256": "9b5b89b9c74153980ab2ca0b52965010b3a33cd611a4efcf4f724d3515b33d57"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_neighbors.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "7e2a7b4ed97639beaf292f54a0e8a11ad03f9163316e725471170e3f42d7fdad",
+      "current_main_sha256": "7e2a7b4ed97639beaf292f54a0e8a11ad03f9163316e725471170e3f42d7fdad",
+      "pending_worktree_sha256": "44fca7fd68a1c1365dbbc6c9700883a979f85bbfe4789236f19048fffcd6d09c"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_ocr_groups.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "src/company_wiki/source_catalog/narrative_group_candidates.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "b7b4703962acc1f8555ce8ab84dedc28d88790e1bfde3af7753738cca0c99426",
+      "current_main_sha256": "b7b4703962acc1f8555ce8ab84dedc28d88790e1bfde3af7753738cca0c99426",
+      "pending_worktree_sha256": "5078f6348d96ffb186e0bb3df9ac25ef93c153adfece98162f05df7fa586a93e"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_groups.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "src/company_wiki/source_catalog/narrative_evidence.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "f67b9409cd1158219caa23120e04cd6aa1e7bb7cd8e27b2dcecd8f2f42333ff3",
+      "current_main_sha256": "f67b9409cd1158219caa23120e04cd6aa1e7bb7cd8e27b2dcecd8f2f42333ff3",
+      "pending_worktree_sha256": "d803d975bf4167105548e96f2a75dfa426ae704a8071bd2970356d1cdd2ee7c9"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_qa.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "f06ff742370f8d68b18f283869b31a223dffced7d1472bf489baad153312a5b1",
+      "current_main_sha256": "f06ff742370f8d68b18f283869b31a223dffced7d1472bf489baad153312a5b1",
+      "pending_worktree_sha256": "b38d0c369c84c1c974b6ec8af52d790f404912da07e620aa08daa1b0f50bf188"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_project_context.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "918bc36a7a5de03c9163855eff2a216cb15099a9896d78d60f5af22a5422f65e",
+      "current_main_sha256": "918bc36a7a5de03c9163855eff2a216cb15099a9896d78d60f5af22a5422f65e",
+      "pending_worktree_sha256": "87d6e8ae285765c236b3571b86fb9e316a53b520f8adc7f6f06564d1bdeefd06"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_replay.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "02f6a812ff929dc403b06881487cac5db49c59f10061cdec75b5e2f403184390",
+      "current_main_sha256": "02f6a812ff929dc403b06881487cac5db49c59f10061cdec75b5e2f403184390",
+      "pending_worktree_sha256": "07215964b96a9d422fe301c03645d84b68af75733d7fa1922a7a6893bdbe297e"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_routing.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "src/company_wiki/source_catalog/narrative_finalize.py",
+        "tests/integration/test_w04_novelty_finalize.py",
+        "tests/integration/test_w04_quality_band_budget.py",
+        "tests/integration/test_w04_semantic_budget_finalize.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "6887d3eba7682322bef0d7b9bfd0f996b05a91b94b8269e8e888ff013adcf27a",
+      "current_main_sha256": "6887d3eba7682322bef0d7b9bfd0f996b05a91b94b8269e8e888ff013adcf27a",
+      "pending_worktree_sha256": "50b7cd6dfebc6056f255bf7c21bde304993cbd747ceedfe09637a7ee890b923e"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_semantic_coverage.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_budget.py",
+        "src/company_wiki/source_catalog/narrative_finalize.py",
+        "tests/unit/test_w04_semantic_budget.py"
+      ],
+      "disposition": "included_in_18_file_selector_write_set",
+      "old_base_sha256": null,
+      "current_main_sha256": null,
+      "pending_worktree_sha256": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_stage_assertions.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "src/company_wiki/source_catalog/narrative_semantic_coverage.py"
+      ],
+      "disposition": "included_in_18_file_selector_write_set",
+      "old_base_sha256": null,
+      "current_main_sha256": null,
+      "pending_worktree_sha256": "a7efe34bd99533302a20cfeee0c401ed77c225bfba95a203a8c4c3b1f08aea73"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_visual_units.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "src/company_wiki/source_catalog/narrative_candidates.py",
+        "src/company_wiki/source_catalog/narrative_group_candidates.py",
+        "tests/unit/test_w04_narrative_semantics.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "ec88e23406cc3cc65d5bf92ab33452da79e2e228e804f9aa92341b58e5748442",
+      "current_main_sha256": "ec88e23406cc3cc65d5bf92ab33452da79e2e228e804f9aa92341b58e5748442",
+      "pending_worktree_sha256": "958625522caecab61ff637dc9538e3e0b2b3955b1df48c1d3bd16a2916f68c3d"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/transcript_layout.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "7f7d3471daca667edd99dde7c4b04992c50beda1e91aab5bd958dc7c0cccd00e",
+      "current_main_sha256": "7f7d3471daca667edd99dde7c4b04992c50beda1e91aab5bd958dc7c0cccd00e",
+      "pending_worktree_sha256": "7f7d3471daca667edd99dde7c4b04992c50beda1e91aab5bd958dc7c0cccd00e"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/transcript_versions.py",
+      "consumers": [
+        "src/company_wiki/source_catalog/narrative_evidence.py"
+      ],
+      "disposition": "present_currentmain_eol_equivalent_to_old_dependency_keep_main",
+      "old_base_sha256": "9d809abd3e686b38040b99918eae240bee3f9f11f5bd3d79ab57b6a029c45c24",
+      "current_main_sha256": "9d809abd3e686b38040b99918eae240bee3f9f11f5bd3d79ab57b6a029c45c24",
+      "pending_worktree_sha256": "9d809abd3e686b38040b99918eae240bee3f9f11f5bd3d79ab57b6a029c45c24"
+    }
+  ],
+  "evidence": [
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": ".planning/w04-root-selector-recall/semantic-coverage-freeze.json",
+      "sha256": "fc2acbad329c7e01793ecc76509e6bbfd09b43c2408bf9e1cdbfcae7b40f67af",
+      "bytes": 3246,
+      "role": "business/stage/public routing15 pre-novelty files",
+      "lines": "5-75"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": ".planning/w04-root-selector-recall/BUDGET_INTERFACE.md",
+      "sha256": "1304989cfed96936089615b72c640259806abad8200881b3182a12d2fa7a3c45",
+      "bytes": 1726,
+      "role": "low-level defaultlegacy and public0.8 policy",
+      "lines": "3-11"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": ".planning/w04-root-selector-recall/task_plan.md",
+      "sha256": "bf35cc0d39fabd587e3f9a4c81bbf49483806954e02d352e3e4449ca4c17e6aa",
+      "bytes": 2036,
+      "role": "historical rootcause/failed recalls; later freeze supersedes pending nextstep",
+      "lines": ""
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": ".planning/w04-wp02/task_plan.md",
+      "sha256": "d8620886eff4725aca0df53b4a21d923b3b8bf4e042cde2ae39cd0ac3787b6c4",
+      "bytes": 3058,
+      "role": "STOP_PARTIAL historical business leaf; final roots handled by newer phases",
+      "lines": "1-43"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": ".planning/w04-wp02/progress.md",
+      "sha256": "00ff5f13289a75b15d8aa67333b32b6b54557e8f070ca66e26bae938e62fa6ee",
+      "bytes": 1581,
+      "role": "historical247PASS and original replayFAIL retained",
+      "lines": ""
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP02_SELECTOR_INTERFACE_AMENDMENT.md",
+      "sha256": "7fe428141ef859e355581001f645b52dfa32d1a726d6385f29df98de0148f29d",
+      "bytes": 2459,
+      "role": "public0.8 approved default, legacyexplicit, restored groups",
+      "lines": "3-18"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP02_STAGE_CLASSIFICATION_AMENDMENT.md",
+      "sha256": "7f2e6d51031fc8aea0e876078125701bb983a645e672bbc9dbc5b3d47e6f72f6",
+      "bytes": 1711,
+      "role": "stage meaning, actual vs plan/financial mechanism",
+      "lines": "3-13"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": ".planning/w04-root-novelty-recall/phase2-real-recall/product-freeze.json",
+      "sha256": "2db879e8744fe646caa2a44a93d89ef4b89dbbf65f5fffe4549ed4d7d21b69ed",
+      "bytes": 8902,
+      "role": "final7productsfreeze2db879",
+      "lines": ""
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": ".planning/w04-root-novelty-recall/phase2-real-recall/handoff.json",
+      "sha256": "e39e5878f4e769aa06298cc35b54dd19e409b48cde90013a1a20500287f29f79",
+      "bytes": 2975,
+      "role": "RED/GREEN375PASS/ruff/mypy/failure history",
+      "lines": "11-46"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": ".planning/w04-root-novelty-recall/phase2-real-recall/concentrated-attempt3.json",
+      "sha256": "9b4f2fa0967284bed7e1f73e90dfa2b025c7c255b781bbd4454772b19e7f4084",
+      "bytes": 3690,
+      "role": "10 modules375PASS",
+      "lines": ""
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "path": ".planning/w04-root-novelty-recall/independent-engineering/scope-controls.json",
+      "sha256": "fe2b0071bdc27b44c2c2b0ba5e26d8c118d29c5369ef78487b84df13f0f7778f",
+      "bytes": 2136,
+      "role": "correctpublicdefault/explicit0.7.1/low-levellegacy controls",
+      "lines": "5-33"
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "path": ".planning/w04-root-novelty-recall/phase2-independent/manifest.json",
+      "sha256": "6eb7350ae7b238f2eba101ad4e239cc217e9cc6c6f5a9885af8dad6a8a22e6f7",
+      "bytes": 924,
+      "role": "final independent freeze",
+      "lines": ""
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "path": ".planning/w04-root-novelty-recall/phase2-independent/report.json",
+      "sha256": "16ca36b4ebaf7fbc99d7e5e8ac2b19446848f805e75cc0cab560ce413a9988c2",
+      "bytes": 9775,
+      "role": "17/17 independent engineering scope acceptance",
+      "lines": ""
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "path": ".planning/w04-root-novelty-recall/phase2-independent/witness-inspection.json",
+      "sha256": "e0d3892c66898b39d77304a40f31658344b9bc4e9533a56122ae9a30d82d0de7",
+      "bytes": 6130,
+      "role": "4/4 completegroup bound factual witnesses",
+      "lines": ""
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2-execution.json",
+      "sha256": "fd9801ebf5eb406376b7ffd809d2d86541e0f13ee860912f942c5e2e1413530e",
+      "bytes": 742,
+      "role": "actualfixedsixPASS87.4409sec/no mutation",
+      "lines": ""
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "path": ".planning/w04-root-novelty-recall/native-novelty-six-quality-v2.json.gz",
+      "sha256": "297eca12e3412834163e0753533aa47c0d570a9f0e8ffd119c99881c7a6bdc6b",
+      "bytes": 296774,
+      "role": "ROOT actual six raw/golden/cap/completegroup recall",
+      "lines": ""
+    },
+    {
+      "root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "path": ".planning/w04-g2-config/handoff.json",
+      "sha256": "eefba1177b6ad219fc028d2c0dcb21a2cb5340f5a947e7208c0bdb551a3d5e8c",
+      "bytes": 8887,
+      "role": "separate G2 four files102PASS; excluded",
+      "lines": ""
+    }
+  ],
+  "currentmain_other_source_changes_preserved": [
+    "src/company_wiki/document_normalization/isolated_ocr.py",
+    "src/company_wiki/document_normalization/local_ocr.py",
+    "src/company_wiki/document_normalization/ocr_composition.py",
+    "src/company_wiki/document_normalization/ocr_region_recovery.py",
+    "src/company_wiki/source_catalog/acquisition.py",
+    "src/company_wiki/source_catalog/acquisition_service.py",
+    "src/company_wiki/source_catalog/assertion_service.py",
+    "src/company_wiki/source_catalog/canonical_scope.py",
+    "src/company_wiki/source_catalog/canonical_writer.py",
+    "src/company_wiki/source_catalog/local_reconcile.py",
+    "src/company_wiki/source_catalog/narrative_normalization.py",
+    "src/company_wiki/source_catalog/operation_contract.py",
+    "src/company_wiki/source_catalog/operation_projection.py",
+    "src/company_wiki/source_catalog/registration_scope.py",
+    "src/company_wiki/source_catalog/scanner.py"
+  ],
+  "actual_main_conflicts_inside_selector": 0,
+  "reserved_contract": "Existing protected reserve minimum-coverage prepass retained; quality ordering is within ordinary and reserved each, not global across channels.",
+  "reuse_evidence": [
+    "375PASS/RED evidence",
+    "17 independent engineering checks",
+    "fixed six-original replay and6 legacy package fingerprints",
+    "4 complete-group subject-bound witness inspections"
+  ],
+  "required_single_integration_batch": [
+    "tests/unit/test_w04_selector_version_dispatch.py",
+    "tests/integration/test_w04_semantic_budget_finalize.py",
+    "tests/integration/test_w04_novelty_finalize.py",
+    "tests/integration/test_w04_quality_band_budget.py"
+  ],
+  "testing_not_performed_by_this_preparation": true,
+  "not_evaluated": [
+    "summary semantic quality",
+    "downstream RF forecast/research quality"
+  ],
+  "git_products_config_raw_mutations": 0,
+  "provider_network_llm_calls": 0,
+  "cost_usd": 0,
+  "integrity_snapshot": "three-tree-snapshot.json"
+}

@@ -1,0 +1,124 @@
+{
+  "schema_version": "root-w06-ff-malformed-usage-manifest/1",
+  "files": [
+    {
+      "path": "before.json",
+      "sha256": "68895532a6cba686f6d1cedb31361a31945d5fc546df395a5872a960e9d43f92",
+      "bytes": 1763
+    },
+    {
+      "path": "concentrated.json",
+      "sha256": "38301ccddb718ed305c66c9d2e48bbf22dae68e6b929bdd2f696fcc41cd5e272",
+      "bytes": 1050
+    },
+    {
+      "path": "concentrated.log",
+      "sha256": "88948814dce9af285b967865b01834455d1b6668f178d6cd7ca4e587e30f4a35",
+      "bytes": 194
+    },
+    {
+      "path": "concentrated.xml",
+      "sha256": "25a9bda4c19caf19caefc14af76dcb66d91ce97c76e2ab24ede49d4f54e8f235",
+      "bytes": 26123
+    },
+    {
+      "path": "diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "finalize.py",
+      "sha256": "527d887d279efd414cfe546b35d9884b1ee7c306ed05c8647bdc77c090e3f4f6",
+      "bytes": 10403
+    },
+    {
+      "path": "implement.py",
+      "sha256": "92530d6bb5a74686ff530d0bcc6d5b85332f016d2dbd133b655a9201bad6624f",
+      "bytes": 5661
+    },
+    {
+      "path": "lint.json",
+      "sha256": "c832ca77744d23ad3773474ff88ce16904739ffd59fe526070700d4143a190c9",
+      "bytes": 745
+    },
+    {
+      "path": "lint.log",
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    {
+      "path": "red.json",
+      "sha256": "755ac5df73d2c8a275d62ee8d577419341c335e89e80828de357d6675ecf0d12",
+      "bytes": 934
+    },
+    {
+      "path": "red.log",
+      "sha256": "17b7a654b6ef9a0e924188491c9e4af7d97238b341a25ff34c42df0ce9d07f0f",
+      "bytes": 4831
+    },
+    {
+      "path": "red.xml",
+      "sha256": "40ad210843cdf173d2e31d02305fbef88834378e3daac603f63597c43da1c102",
+      "bytes": 4838
+    },
+    {
+      "path": "report.json",
+      "sha256": "2a2200a5e0461bc7f416ad3195bb6995863d58584d1bbbb4a1aa46a2e25166eb",
+      "bytes": 1215
+    },
+    {
+      "path": "report.md",
+      "sha256": "e97df0984043342b445022d5e33b8aaba441de25689fa5dd4cd8465955b02fa7",
+      "bytes": 1307
+    },
+    {
+      "path": "run.py",
+      "sha256": "c9b2013d21f9d50571530a1252b4f615e76602c1f9b75569f4cf825c6d0590da",
+      "bytes": 3896
+    },
+    {
+      "path": "setup.py",
+      "sha256": "7bcd9fb64b6ff7b1926716e80a82dead8edaf14703dffdf341028af2c1a36b2c",
+      "bytes": 4470
+    },
+    {
+      "path": "tracked-product-v2.patch",
+      "sha256": "05fdb88ccbd556d46e897bb5139e810634197e4806c31255b77c7cad88956384",
+      "bytes": 21096
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\product-freeze-v2.json",
+      "sha256": "87495b11e3c41986c3a10374bae0c603af6db4d61d7b8ed8c6a01771b7ed3381",
+      "bytes": 11865
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\findings.md",
+      "sha256": "87de4604a3544d4dbeac7812be87756da8eb9cf03d0c4574d690363a12b8e4e6",
+      "bytes": 3649
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\progress.md",
+      "sha256": "ee68dd275a3d5ec27c92afef60bbec836a78d43c430141640e0494aaff3ea7e2",
+      "bytes": 4547
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\.planning\\w06-cutoff-result\\task_plan.md",
+      "sha256": "74cd2f047e4373279ed4b4fc6a60296a05766d44f4180152cdbd68bcf6631782",
+      "bytes": 5383
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-cutoff-result\\handoff-v2.md",
+      "sha256": "e97df0984043342b445022d5e33b8aaba441de25689fa5dd4cd8465955b02fa7",
+      "bytes": 1307
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\docs\\handoffs\\w06-cutoff-result\\handoff-v2.json",
+      "sha256": "2a2200a5e0461bc7f416ad3195bb6995863d58584d1bbbb4a1aa46a2e25166eb",
+      "bytes": 1215
+    }
+  ],
+  "verdict": "AUTHOR_COMPLETE_PENDING_INDEPENDENT_REREVIEW",
+  "et_unchanged": true,
+  "old_freeze_preserved": true,
+  "scratch_restored": true
+}

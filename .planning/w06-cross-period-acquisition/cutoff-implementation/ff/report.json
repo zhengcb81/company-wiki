@@ -1,0 +1,73 @@
+{
+  "schema_version": "ff-cutoff-author-report/1",
+  "verdict": "AUTHOR_COMPLETE_PENDING_ROOT_ACCEPTANCE",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root",
+  "base": "88997b85ce5be20dc3d563b5c040706590df6dbb",
+  "product_freeze_sha256": "0574664a9634d6ea11a9fa93949c8ea8469a60d013671e97c2015e8e093fa03c",
+  "evidence_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff",
+  "files": [
+    {
+      "path": "scripts/transcript_tool_transport.py",
+      "sha256": "ba15706c4f07221801095bd8d0bac056357d8a3bba8fcb08608923bdc7d900a4",
+      "bytes": 35794
+    },
+    {
+      "path": "scripts/et_v2_contract.py",
+      "sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+      "bytes": 10157
+    },
+    {
+      "path": "tests/test_transcript_launch_contract.py",
+      "sha256": "dab108c70c827b187d3af2a03c53bac7597440a417dde0cf117fd87067a5c331",
+      "bytes": 27318
+    },
+    {
+      "path": "tests/test_transcript_companion_transport.py",
+      "sha256": "643251a8d6adfb74c1fdfa6cb83e17bec8cafef9a56daf40c2e7ed35c7ba389a",
+      "bytes": 20348
+    },
+    {
+      "path": "tests/test_et_s0b_contract.py",
+      "sha256": "8280d87f5bfddaa1431e40f84a793ef63cde53dbb4f1a69deeaf122f79971f34",
+      "bytes": 4901
+    }
+  ],
+  "red": {
+    "failed": 23,
+    "passed": 8,
+    "deselected": 77,
+    "pytest_seconds": 1.09,
+    "receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\business-red.json"
+  },
+  "focused_green": {
+    "passed": 31,
+    "deselected": 77,
+    "pytest_seconds": 0.54,
+    "receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\focused-green.json"
+  },
+  "protected_count": 354,
+  "protected_changed": [],
+  "test_sha_same_red_green": true,
+  "real_key_reads": 0,
+  "real_provider_calls": 0,
+  "llm_calls": 0,
+  "scratch_restored": true,
+  "root_responsibility_files": [
+    "tests/test_transcript_launch_contract.py",
+    "tests/test_transcript_companion_transport.py",
+    "tests/test_et_s0b_contract.py",
+    "tests/test_transcript_response_budget.py",
+    "tests/test_transcript_companion.py"
+  ],
+  "still_required": [
+    "ROOT concentrated ET+FF responsibility tests",
+    "ROOT unchanged original41 real offline matrix",
+    "ROOT publication"
+  ],
+  "notes": [
+    "No manual approvals, receipts or canary gates added.",
+    "No duplicate production validator.",
+    "Do not infer cutoff from zero candidates or unknown publication.",
+    "The products are not committed; do not omit the appended tests and own PWF when ROOT receives."
+  ]
+}

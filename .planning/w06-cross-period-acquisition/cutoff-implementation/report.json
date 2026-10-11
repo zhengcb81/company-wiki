@@ -1,0 +1,67 @@
+{
+  "schema_version": "root-w06-cutoff-implementation-report/1",
+  "verdict": "AUTHOR_COMPLETE_PENDING_ROOT_MATRIX",
+  "owners": ["/root/portability_final_acceptance", "/root/portability_final_acceptance/cutoff_ff_mapping"],
+  "final_tests": {
+    "et": {"passed": 56, "failed": 0, "seconds": 40.37, "evidence": "et/green.json"},
+    "ff": {"passed": 134, "failed": 0, "skipped": 4, "seconds": 1.90, "evidence": "ff/concentrated-final2.json"},
+    "et_goldens_matched": 10,
+    "lint_and_diff": "PASS"
+  },
+  "red_evidence": {
+    "et_business": {"failed": 5, "passed": 6, "seconds": 1.58},
+    "ff_business": {"failed": 23, "passed": 8, "seconds": 1.09},
+    "ff_binding": {"failed": 8, "seconds": 1.03},
+    "ff_json_schema_types": {"failed": 2, "passed": 1, "seconds": 0.95},
+    "business_red_not_import_failure": true
+  },
+  "preserved": {
+    "original_41_attempt": "attempt-1f64f745d3a94506ae4bc35c8997b562",
+    "original_41_result": "40 PASS / 1 FAIL / 164.62s",
+    "old_intermediate_acceptance_records": true,
+    "case_authority_tools_unchanged": 205,
+    "ff_protected_unchanged": 354,
+    "et_golden_files_unchanged": 12,
+    "ff_golden_and_et_fixture_files_unchanged": 18
+  },
+  "compatibility": {
+    "schema_versions_unchanged": true,
+    "et_diagnostic_field": "error_code",
+    "closed_cutoff_codes": ["call_after_as_of", "publication_after_as_of"],
+    "ordinary_missing_reason": "exact_transcript_missing",
+    "publication_unknown_preserved": true,
+    "receipt_binding_once_at_existing_boundary": true,
+    "additional_company_identity_or_source_byte_validation": false,
+    "new_permissions_or_licenses": false,
+    "additional_provider_or_import_calls": false
+  },
+  "freeze": {
+    "file": "product-freeze.json",
+    "schema_version": "root-w06-cutoff-product-freeze/1",
+    "sha256": "e13ee23e64e0ec720edce6e4f5c6847f0dea2ead17a8d112d63874cd0e4cf28a",
+    "product_and_test_files": 8,
+    "ff_final_author_file": "ff/product-freeze-final.json",
+    "ff_final_author_sha256": "a235b0c2c25f6c52a6402dd160737f2ec6ffa10309c368ee6eb06fbdc332cf4f"
+  },
+  "skip_scope": [
+    "W07 HKEX/unsupported_market requires explicit real ET tool path",
+    "W07 NASDAQ/credentials_missing requires explicit real ET tool path",
+    "W07 TOKYO/unsupported_exchange requires explicit real ET tool path",
+    "CWP import/replay requires explicit cross-project source checkout"
+  ],
+  "resources": {
+    "minimal_environment": true,
+    "synthetic_home_temp_key": true,
+    "socket_network_denied": true,
+    "real_key_config_raw_reads": 0,
+    "real_network_provider_llm_calls": 0,
+    "owned_root_scratch_restored_absent": 7,
+    "ff_author_scratch_restored": true,
+    "cwp_product_writes": 0,
+    "commit_merge_push_install": false,
+    "matrix_reruns": 0
+  },
+  "pwf_and_handoff_updated": true,
+  "next_step": "ROOT original unchanged41 matrix with frozen ET/FF roots and independently published CWP tree, one independent review and normal publication",
+  "stop": true
+}

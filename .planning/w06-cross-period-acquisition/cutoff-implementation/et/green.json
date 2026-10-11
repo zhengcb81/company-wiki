@@ -1,0 +1,30 @@
+{
+  "mode": "green",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_transcript_api.py",
+    "tests/test_retrieval_cli_e2e.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\ec-56b9e368\\pt",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\et\\green.xml",
+    "tests/test_batch_runtime.py::test_fool_recent_quarters_expand_only_from_resolvable_metadata",
+    "tests/test_batch_runtime.py::test_fool_recent_quarters_without_resolvable_periods_is_period_unresolved",
+    "tests/test_batch_runtime.py::test_list_with_explicit_periods_prints_only_matching_metadata"
+  ],
+  "tree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\et-cutoff-root",
+  "exit_code": 0,
+  "elapsed_seconds": 42.174,
+  "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\ec-56b9e368",
+  "environment": "platform-allowlist plus synthetic HOME/TEMP/key and network deny",
+  "real_network": 0,
+  "keys_read": 0,
+  "llm_calls": 0,
+  "scratch_restored_absent": true
+}

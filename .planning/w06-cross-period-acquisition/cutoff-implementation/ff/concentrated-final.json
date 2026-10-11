@@ -1,0 +1,29 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-q",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\fc-8b4b4ce9\\pt",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w06-cross-period-acquisition\\cutoff-implementation\\ff\\concentrated-final.xml",
+    "tests/test_transcript_launch_contract.py",
+    "tests/test_transcript_companion_transport.py",
+    "tests/test_et_s0b_contract.py",
+    "tests/test_transcript_response_budget.py",
+    "tests/test_transcript_companion.py"
+  ],
+  "tree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root",
+  "exit_code": 0,
+  "elapsed_seconds": 3.813,
+  "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\fc-8b4b4ce9",
+  "environment": "platform allowlist, synthetic HOME/TEMP/key, no plugin autoload, socket deny",
+  "real_network": 0,
+  "keys_read": 0,
+  "llm_calls": 0,
+  "scratch_restored_absent": true
+}

@@ -1,0 +1,126 @@
+{
+  "schema_version": "w04-independent-root-witness-inspection/1",
+  "status": "PASS_EVIDENCE_BINDING_ONLY",
+  "evidence_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w04-root-novelty-recall\\native-novelty-six-quality-v2.json.gz",
+  "evidence_sha256": "297eca12e3412834163e0753533aa47c0d570a9f0e8ffd119c99881c7a6bdc6b",
+  "product_freeze_sha256": "2db879e8744fe646caa2a44a93d89ef4b89dbbf65f5fffe4549ed4d7d21b69ed",
+  "root_status": "PASS",
+  "four_witnesses": [
+    {
+      "name": "lpcvd_shipments",
+      "pass": true,
+      "group_id": "group:urn:company-wiki:context-group:sha256:2833df0c6721f27c6fcdb85344700d11a13854949e533d19095cb3e91445cd08",
+      "locators": [
+        "loc:v1/page:41/paragraph:19",
+        "loc:v1/page:41/paragraph:20",
+        "loc:v1/page:41/paragraph:21"
+      ],
+      "span_cost": 3,
+      "raw_text_sha256": "67c8d7ad05e20ac4bc2f5fe0b2c77dd46c4c2cb2d8cd36d3a905ec6b30195dde",
+      "raw_text": "公司在新产品开发方面取得了显著成效，近两年新开发出十多种导体和介质薄膜设备，目前已有多款新型设备产品进入市场，其中部分设备已获得重复性订单，LPCVD 设备累计出货量突破三百个反应台，其他多个关键薄膜沉积设备研发项目正在顺利推进；",
+      "boundary": "Specific LPCVD shipments exceed three hundred reactors; repeat orders refer only to some new equipment, not LPCVD exclusively."
+    },
+    {
+      "name": "prismo_pd5_new_facts",
+      "pass": true,
+      "group_id": "group:urn:company-wiki:context-group:sha256:78cb11ecaa825d79fcabd7e79cbed6dca45122f20e19962a1d4dde664957a50b",
+      "locators": [
+        "loc:v1/page:56/paragraph:24",
+        "loc:v1/page:56/paragraph:25",
+        "loc:v1/page:56/paragraph:26"
+      ],
+      "span_cost": 3,
+      "raw_text_sha256": "8c00ea7e8a7421013b5ae1344b0297e30ff2ec654344f344ab7cd3578ecb0894",
+      "raw_text": "用于硅基氮化镓功率器件用MOCVD 设备PRISMO PD5，具有高灵活性的特点，在同一系统中可配备多达4 个反应腔，每个反应腔都可实现独立控制，仅通过更换石墨托盘即可实现6 英寸与8 英寸工艺的便捷切换，PRISMO PD5 设备已在客户生产线上验证通过并获得重复订单。",
+      "boundary": "PD5 supports up to four chambers and switching six/eight inches, with completed line validation and repeat orders."
+    },
+    {
+      "name": "supplier_lead_time_constraint",
+      "pass": true,
+      "group_id": "group:urn:company-wiki:context-group:sha256:ff270983f58f01c13cac080695a16e4ac978e7c532ef3d0d3d8ce3733a0b20f2",
+      "locators": [
+        "loc:v1/page:62/paragraph:30",
+        "loc:v1/page:62/paragraph:31",
+        "loc:v1/page:62/paragraph:32"
+      ],
+      "span_cost": 3,
+      "raw_text_sha256": "d42cf02b23b3d6a22774a3f32e2a65c7c8ead9a4e5b7786e29418c5ef69e8a46",
+      "raw_text": "公司科学管理供应厂商，对关键零部件供应商采取多厂商策略保障零部件及时供应。若未来上游供应链产能紧张形势延续，将对公司设备交期产生影响。",
+      "boundary": "Multi-supplier mitigation; lead-time effect is conditional on continuing upstream capacity constraints."
+    },
+    {
+      "name": "tungsten_validation_and_repeat_orders",
+      "pass": true,
+      "group_id": "group:urn:company-wiki:context-group:sha256:da616903a1ef8d7ec49757247840b3f078d7590872b6c7fc824f3971685399f2",
+      "locators": [
+        "loc:v1/page:44/paragraph:11",
+        "loc:v1/page:44/paragraph:12",
+        "loc:v1/page:44/paragraph:13",
+        "loc:v1/page:44/paragraph:14",
+        "loc:v1/page:44/paragraph:15"
+      ],
+      "span_cost": 5,
+      "raw_text_sha256": "ed9513836ac12de472a6fb4ab6867285d58184c7ac2f652b04b8256d4909a0e5",
+      "raw_text": "中微公司钨系列薄膜沉积产品：CVD（化学气相沉积）钨设备，HAR（高深宽比）钨设备和ALD（原子层沉积）钨设备，可覆盖存储器件所有钨应用；该系列设备均已通过关键存储客户端现场验证，满足先进存储应用中所有金属互连应用（包含高深宽比金属互连应用）及三维存储器件字线应用各项性能指标，并获得客户重复量产订单。",
+      "boundary": "CVD/HAR/ALD tungsten series shares completed customer validation and repeat production orders."
+    }
+  ],
+  "six_report_declarations": [
+    {
+      "key": "cn-h1",
+      "raw_sha_unchanged": true,
+      "legacy_matches_frozen": true,
+      "selected": 96,
+      "cap": 96,
+      "omitted_partition": true
+    },
+    {
+      "key": "cn-annual",
+      "raw_sha_unchanged": true,
+      "legacy_matches_frozen": true,
+      "selected": 96,
+      "cap": 96,
+      "omitted_partition": true
+    },
+    {
+      "key": "cn-ipo",
+      "raw_sha_unchanged": true,
+      "legacy_matches_frozen": true,
+      "selected": 160,
+      "cap": 160,
+      "omitted_partition": true
+    },
+    {
+      "key": "hk-release",
+      "raw_sha_unchanged": true,
+      "legacy_matches_frozen": true,
+      "selected": 12,
+      "cap": 96,
+      "omitted_partition": true
+    },
+    {
+      "key": "hk-deck",
+      "raw_sha_unchanged": true,
+      "legacy_matches_frozen": true,
+      "selected": 69,
+      "cap": 96,
+      "omitted_partition": true
+    },
+    {
+      "key": "us-release",
+      "raw_sha_unchanged": true,
+      "legacy_matches_frozen": true,
+      "selected": 14,
+      "cap": 96,
+      "omitted_partition": true
+    }
+  ],
+  "scope": "Read compressed ROOT result only; original PDF/TXT/HTML bytes, parser and selector not rerun. Four witnesses matched complete selected source groups in native coordinate order and text SHA.",
+  "provider_network_LLM_calls": 0,
+  "fees_usd": 0,
+  "root_evidence_and_products_unchanged": true,
+  "limitations": [
+    "Independent raw-document rehash/full-six replay not performed; ROOT supplied frozen execution evidence.",
+    "Summary quality, logical entailment of generated summaries and downstream RF remain not_evaluated."
+  ]
+}
