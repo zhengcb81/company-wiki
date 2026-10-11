@@ -267,10 +267,7 @@ class CanonicalSourceWriter:
         ):
             if budget is not None:
                 budget.ensure_open()
-            if reactivate_retired:
-                # Explicit provider re-acquisition retains its existing contract.
-                self._reactivate_if_retired(receipt.content_sha256)
-            else:
+            if not reactivate_retired:
                 # A local import cannot turn a withdrawal into fresh provider approval.
                 document_id = source_id_for_sha256(receipt.content_sha256).replace(
                     "urn:company-wiki:source:", "urn:company-wiki:document:")
@@ -280,6 +277,10 @@ class CanonicalSourceWriter:
                     raise CanonicalImportError("local import requires atomic metadata reconciliation")
             existing = self._existing_original(receipt.content_sha256)
             if existing is not None:
+                with self.catalog.store.coalesced_transactions():
+                    self._record_validated_capture(request,candidate,receipt,self.catalog.store)
+                    if reactivate_retired:
+                        self._reactivate_if_retired(receipt.content_sha256)
                 source_ref = self.source_ref_for_import(request, candidate, receipt.content_sha256)
                 if cleanup_staged:
                     self._remove_staged(staged)
@@ -330,6 +331,8 @@ class CanonicalSourceWriter:
                 self.catalog.config, self.catalog.store,
                 SourceRegistrationScope(self.company_root.root_id,
                     frozenset({destination.relative_to(self.company_root.path).as_posix()})),
+                on_registered=lambda store: self._complete_registration(
+                    request,candidate,receipt,store,reactivate_retired=reactivate_retired),
             )
             source_ref = self.source_ref_for_import(request, candidate, receipt.content_sha256)
             if cleanup_staged:
@@ -420,6 +423,82 @@ class CanonicalSourceWriter:
                                   provenance_extensions=dict(provenance_extensions),
                                   reactivate_retired=False, cleanup_staged=cleanup_staged)
 
+    def _complete_registration(self,request,candidate,receipt,store,*,reactivate_retired):
+        self._record_validated_capture(request,candidate,receipt,store)
+        if reactivate_retired:
+            self._reactivate_if_retired(receipt.content_sha256)
+
+    def _record_validated_capture(self, request, candidate, receipt, store):
+        """Internal writer event, never reconstructed from a scanner-side declaration."""
+        if not isinstance(request, SourceRequest) or not isinstance(candidate, DownloadCandidate):
+            # Official JSON/shared source intake has its own source-fact owner.
+            return
+        from .assertion_service import (
+            _evidence_payload, _prepare_source_fact_write, _validate_source_facts,
+            _write_source_fact_projection, get_verified_assertion,
+        )
+        from .source_reader import SourceRef
+
+        source_id = source_id_for_sha256(receipt.content_sha256)
+        document_id = source_id.replace("urn:company-wiki:source:", "urn:company-wiki:document:")
+        row = store.fetchone("SELECT * FROM sources WHERE source_id=?", (source_id,))
+        if row is None or (row["content_sha256"], row["byte_size"]) != (
+                receipt.content_sha256, receipt.byte_size):
+            raise CanonicalImportError("canonical_registered_version_conflict")
+        if row["mime_type"] != receipt.mime_type:
+            # A previous scan may have guessed HTML from a .htm path containing
+            # these same PDF bytes. Intake has verified the complete SHA and PDF
+            # magic; fix only that actual type observation, not scope or identity.
+            if receipt.mime_type != "application/pdf":
+                raise CanonicalImportError("canonical_registered_version_conflict")
+            with store.transaction() as connection:
+                connection.execute("UPDATE sources SET mime_type=? WHERE source_id=?",
+                                   (receipt.mime_type,source_id))
+        ref = SourceRef(document_id, source_id, receipt.content_sha256, receipt.byte_size, receipt.mime_type)
+        facts = {"entity": request.entity, "market": candidate.market,
+            "security_id": request.security_id, "document_kind": candidate.document_kind,
+            "fiscal_year": candidate.fiscal_year, "fiscal_period": candidate.fiscal_period,
+            "form_type": candidate.form_type, "published_date": candidate.filing_date,
+            "filing_date": candidate.filing_date, "provider": candidate.provider,
+            "provider_document_id": candidate.provider_document_id, "source_url": candidate.source_url,
+            "language": candidate.language, "title": candidate.title}
+        claim = {"owner": "CanonicalSourceWriter", "schema_version": "1.0",
+            "request": request.identity_dict(),
+            "candidate": {key:getattr(candidate,key) for key in (
+                "candidate_id", "provider", "provider_document_id", "market", "entity",
+                "title", "source_url", "document_kind", "filing_date", "fiscal_year",
+                "fiscal_period", "form_type", "language")},
+            "receipt": {key:getattr(receipt,key) for key in (
+                "candidate_id", "provider", "provider_document_id", "source_url",
+                "content_sha256", "byte_size", "mime_type", "adapter_name", "adapter_version")}}
+        claim_sha = hashlib.sha256(canonical_json(claim).encode("utf-8")).hexdigest()
+        evidence = {key:{"locator":"canonical-commit:/" + (
+                "request/security_id" if key=="security_id" else "candidate/" + key),
+                "value":value, "content_sha256":ref.content_sha256,
+                "commit_sha256":claim_sha, "extraction_method":"provider-metadata-import/1"}
+            for key,value in facts.items()}
+        prior = get_verified_assertion(store, ref.source_id, ref.content_sha256, reader="steady")
+        if prior:
+            old = _evidence_payload(prior["evidence_json"],prior["assertion_id"])
+            previous = old.get("source_fact_patch") or {}
+            for key,value in previous.items():
+                if key in {"entity","market","security_id","document_kind","fiscal_year","fiscal_period","form_type"} and key in facts and value is not None and facts[key] is not None:
+                    left, right = str(value).casefold(), str(facts[key]).casefold()
+                    if left != right:
+                        raise CanonicalImportError("canonical_scope_conflict:" + key)
+            # An explicit correction/unknown is stronger than another provider declaration.
+            facts = {key:value for key,value in facts.items() if key not in previous}
+            evidence = {key:value for key,value in evidence.items() if key in facts}
+        if not facts:
+            return
+        _validate_source_facts(facts,evidence)
+        assertion, projection, _ = _prepare_source_fact_write(
+            self.catalog,ref,{"display_name":request.entity},facts,evidence,
+            assertion_store=store,capture_evidence={**claim,"sha256":claim_sha})
+        if assertion is not None:
+            with store.transaction() as connection:
+                _write_source_fact_projection(connection,ref,assertion,projection)
+
     def source_ref_for_import(
         self,
         request: SourceRequest,
@@ -467,6 +546,10 @@ class CanonicalSourceWriter:
             raise CanonicalImportError("staged byte_size does not match receipt")
         if _hash_file(staged) != receipt.content_sha256:
             raise CanonicalImportError("staged SHA-256 does not match receipt")
+        if receipt.mime_type == "application/pdf":
+            with staged.open("rb") as stream:
+                if stream.read(5) != b"%PDF-":
+                    raise CanonicalImportError("staged PDF does not have PDF magic")
         return staged
 
     def _reactivate_if_retired(self, content_sha256: str) -> None:

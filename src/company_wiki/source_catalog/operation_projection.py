@@ -99,6 +99,8 @@ def _status_and_source(
     operation_input: SourceOperationInput,
     reader: VersionReader,
 ) -> tuple[str, SourceRef | None, dict[str, object] | None]:
+    if operation_input.local_preparation is not None:
+        return operation_input.local_preparation["status"], None, None
     if operation_input.producer_status == "gap":
         return "gap", None, None
     resolved = _resolved_source(operation_input, reader)
@@ -138,6 +140,8 @@ def project_source_operation(
         "candidate": candidate,
         "gap_plan": _gap_projection(operation_input.gap_plan) if status == "gap" else None,
     }
+    if operation_input.local_preparation is not None:
+        result["local_preparation"] = operation_input.local_preparation
     if _contains_physical_field(result):
         raise SourceOperationProjectionError(
             "operation result contains a physical field"

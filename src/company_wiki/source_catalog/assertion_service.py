@@ -381,16 +381,18 @@ def record_source_facts(catalog: Any, *, ref: Any, facts: dict[str, Any],
                 "assertion_id": assertion_id, "document_id": ref.document_id, "source_id": ref.source_id}
 
 
-def _prepare_source_fact_write(catalog, ref, current, facts, evidence):
+def _prepare_source_fact_write(catalog, ref, current, facts, evidence, *, assertion_store=None, capture_evidence=None):
     """One semantic correction builder shared by active updates and atomic restoration."""
-    prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
+    prior = get_verified_assertion(assertion_store or catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
     previous_evidence = _evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
     patch = dict(previous_evidence.get("source_fact_patch") or {})
     field_evidence = dict(previous_evidence.get("source_fact_evidence") or {})
     patch.update(facts)
     field_evidence.update(evidence)
     _validate_source_facts(patch, field_evidence)
-    evidence_payload = {"source_fact_patch": patch, "source_fact_evidence": field_evidence}
+    evidence_payload = {**previous_evidence, "source_fact_patch": patch, "source_fact_evidence": field_evidence}
+    if capture_evidence is not None:
+        evidence_payload["canonical_commit"] = capture_evidence
     def semantic_evidence(value: dict[str, Any]) -> dict[str, Any]:
         fields = value.get("source_fact_evidence") or {}
         return {"source_fact_patch": value.get("source_fact_patch"),
