@@ -10,3 +10,5 @@
 - 三卡及各自本地PWF已准备，固定原生合成三文件177809B，三workdir不重叠/分支基线/全部只读输入/本地链接核对通过；FF runtime忽略，不入commit。worker未开工。母12PWF与ROOT入口/失败诊断已同步。
 
 - diff --check 发现 ROOT接收文档的换行CR被当作尾部空格；统一该文档LF后继续正常资料提交，未改内容或测试标准。
+
+- 正常提交/推送8e7027b8，pre-push资料快测148PASS/19.41s（0行为路径），失败记录与三包已上远端。额外只读发现FF内部gitless依赖会拾取父FF HEAD，已在卡明确如实区分来源commit，未实施运行代码。所有worker仍READY_NOT_STARTED。

@@ -49,5 +49,6 @@
   "future_worker_tests": "NOT_RUN",
   "paid_budget_unchanged": true,
   "distributable_text_lf": true,
-  "card_bytes_reverified_after_lf": true
+  "card_bytes_reverified_after_lf": true,
+  "ff_card_parent_git_edge_documented": true
 }

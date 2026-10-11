@@ -27,7 +27,7 @@
 ET：`.planning/w07-ff-matrix-efficiency/input/runtime/et`，commit d0ac42c60dcca992db78860b8469cfed3dd527e5。
 CWP：`.planning/w07-ff-matrix-efficiency/input/runtime/cwp`，commit d75f0d42e0fc11caa50d5030d16fa238c0e02d55，src/pyproject code-only。
 依赖 manifest SHA f8e17feda1f540948521f595d7e4fd2697b39b6b3867cdb2bd04107eea27a00f。
-两份只含代码共约3.6MB，不含原件/生产config/密钥。输入runtime已忽略，不提交复制代码；需要重建时按 dependency-manifest 的固定commit/path用 git archive导出，而非复制主仓WIP。gitless依赖HEAD可能unknown，报告用manifest固定commit和实测module SHA，不伪造git证据。
+两份只含代码共约3.6MB，不含原件/生产config/密钥。输入runtime已忽略，不提交复制代码；需要重建时按 dependency-manifest 的固定commit/path用 git archive导出，而非复制主仓WIP。ROOT已实测：这两个code-only目录位于FF worktree内部，现有git -C会向上找到FF HEAD（2d380a05），不能把它误报为ET/CWP提交。工具依赖记录须区分实际git归属与manifest固定来源commit：只在toplevel等于传入root时用git HEAD，否则git_head为unknown/null，来源commit从本包dependency-manifest读取并与现有实际module绑定分开表示。此处是报告真实性，不增加身份许可或新门禁；集中快测加一个嵌套gitless快照反例。
 
 ## A：测量与 TDD
 先用已有 deadline/runtime/OwnedAttempt 接口建立阶段计时：binding、seed、FFCLI、ET supervisor/worker、fixture、fresh source proof、cleanup、总时长与实际启动数。计时不改变deadline起点/限额；unknown的阶段不能瞎估。

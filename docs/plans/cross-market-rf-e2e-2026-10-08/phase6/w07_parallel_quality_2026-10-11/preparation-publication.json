@@ -1,0 +1,34 @@
+{
+  "schema": "w07-root-preparation-publication/1",
+  "checkpoint_commit": "8e7027b898aa2a443bf042ba724a84dba7350f35",
+  "remote_confirmed_by_push": true,
+  "normal_precommit": true,
+  "pre_push": {
+    "passed": 148,
+    "seconds": 19.41,
+    "behavior_paths": 0
+  },
+  "worker_state": "READY_NOT_STARTED",
+  "real_provider_llm_calls": 0,
+  "followup": "FF card documents verified parent-Git metadata edge; no runtime implementation",
+  "cards": [
+    {
+      "lane": "W07-RF-MODEL",
+      "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w07_parallel_quality_2026-10-11\\cards\\W07-RF-MODEL.md",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\rf-model-quality",
+      "card_sha256": "4ad342bfd3da7bfe24c78c9bfee5f76c1684d1a6dd1868e599361620b61a1569"
+    },
+    {
+      "lane": "W07-AUDIT-ANALYST",
+      "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w07_parallel_quality_2026-10-11\\cards\\W07-AUDIT-ANALYST.md",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\audit-analyst-quality",
+      "card_sha256": "c055c256501210226cb208c4e5deb5eb81caf41f814e6ef4878b6c6088f273cf"
+    },
+    {
+      "lane": "W07-FF-PERF",
+      "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w07_parallel_quality_2026-10-11\\cards\\W07-FF-PERF.md",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\ff-matrix-efficiency",
+      "card_sha256": "300cb4ac9836cf0e000a864fd1835fda856f2d1141c362926009ea7b92752709"
+    }
+  ]
+}
