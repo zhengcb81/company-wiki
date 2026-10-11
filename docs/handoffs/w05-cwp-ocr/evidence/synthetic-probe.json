@@ -1,0 +1,128 @@
+{
+ "schema_version": "w05-synthetic-probe/1",
+ "synthetic": true,
+ "note": "Synthetic images exercise the generic geometry/low-score mechanism only; they never substitute for the real slide7 acceptance.",
+ "config_sha256": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105",
+ "cases": [
+  {
+   "name": "chinese-synthetic",
+   "synthetic": true,
+   "image_bytes": 12709,
+   "transcribe_seconds": 10.638,
+   "accepted_lines": [
+    {
+     "text": "云基础设施与办公套件收入合计增长明显",
+     "box": [
+      24.0,
+      29.0,
+      493.0,
+      57.0
+     ],
+     "confidence": 0.99927
+    },
+    {
+     "text": "企业职务试约率保持花定",
+     "box": [
+      6.0,
+      78.0,
+      319.0,
+      110.0
+     ],
+     "confidence": 0.64563
+    }
+   ],
+   "dropped": []
+  },
+  {
+   "name": "english-synthetic",
+   "synthetic": true,
+   "image_bytes": 8131,
+   "transcribe_seconds": 4.937,
+   "accepted_lines": [
+    {
+     "text": "mix shifted this quarter",
+     "box": [
+      335.0,
+      27.0,
+      634.0,
+      61.0
+     ],
+     "confidence": 0.9968
+    },
+    {
+     "text": "products revenue r",
+     "box": [
+      107.0,
+      29.0,
+      351.0,
+      59.0
+     ],
+     "confidence": 0.96489
+    },
+    {
+     "text": "Serverp",
+     "box": [
+      24.0,
+      32.0,
+      120.0,
+      59.0
+     ],
+     "confidence": 0.97055
+    },
+    {
+     "text": "brody",
+     "box": [
+      397.0,
+      74.0,
+      512.0,
+      113.0
+     ],
+     "confidence": 0.81988
+    },
+    {
+     "text": "oflenings",
+     "box": [
+      148.0,
+      78.0,
+      271.0,
+      114.0
+     ],
+     "confidence": 0.80992
+    },
+    {
+     "text": "Corum cer",
+     "box": [
+      8.0,
+      80.0,
+      149.0,
+      110.0
+     ],
+     "confidence": 0.66442
+    },
+    {
+     "text": "unchenged",
+     "box": [
+      502.0,
+      80.0,
+      663.0,
+      112.0
+     ],
+     "confidence": 0.92172
+    },
+    {
+     "text": "remaind",
+     "box": [
+      261.0,
+      82.0,
+      401.0,
+      108.0
+     ],
+     "confidence": 0.59895
+    }
+   ],
+   "dropped": []
+  }
+ ],
+ "network_calls": 0,
+ "paid_calls": 0
+}

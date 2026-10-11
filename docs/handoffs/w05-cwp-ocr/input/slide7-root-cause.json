@@ -1,0 +1,2313 @@
+{
+  "schema_version": "w04-slide7-extraction-root-cause/1",
+  "status": "STOP_ROOT_CAUSE_LAYER_CONFIRMED_REPAIR_NOT_IMPLEMENTED",
+  "reviewer": "/root/w04_major_config_review",
+  "observed_at": "2026-10-11T08:08:54.452518+00:00",
+  "read_only_product": true,
+  "source": {
+    "source_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx",
+    "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+    "source_byte_size": 4016522,
+    "media_part": "ppt/media/image7.png",
+    "media_sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+    "media_bytes": 331246,
+    "slide7_xml_sha256": "f9f53a4a53c56b0ebd5d968373c3a746b00f59f4428d238ef366073b1d35c41b",
+    "slide7_relationships_sha256": "a43bee0d8917eb36abec91aed3bbfa5dee84cbf5db5739cad688b1011d2e09c6",
+    "shape_image_crop": null,
+    "owned_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-slide7-rootcause-9ca9534274c1437cb37aa3bab92f0525",
+    "temp_parent": "C:\\Users\\郑曾波\\AppData\\Local\\Temp",
+    "image_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-slide7-rootcause-9ca9534274c1437cb37aa3bab92f0525\\original-slide7.png"
+  },
+  "source_identity_as_of": "This task binds actual bytes to retained source_ref; identity and publication date are not newly asserted or invented.",
+  "confirmed_root_cause": "Full original media visibly contains two business-definition lines. Detector finds both boxes; recognition returns gibberish with scores0.43236/0.44278. RapidOCR text_score0.5 filters them before CWP normalization and selector.",
+  "excluded_causes": [
+    "source absence",
+    "PPTX srcRect crop",
+    "CWP truncation of image",
+    "global input image downscaling",
+    "CWP role label exclusion",
+    "selector dropping an available correct line"
+  ],
+  "finer_cause_unknown": "Per-box classifier orientation and recognition input tensors were not captured. Do not claim model weights alone, false180-degree rotation, dictionary mismatch or English-model incompatibility is proven.",
+  "real_stage_counts": {
+    "det": 25,
+    "rec": 25,
+    "blank_filter_removed": 0,
+    "score_filter_removed": 3,
+    "post_filter": 22,
+    "normalized": 22,
+    "legacy_replay_text_boxes_confidences_exact_match": true
+  },
+  "actual_removed_regions": [
+    {
+      "text": " l s    os    i  a i  s o o  on l ",
+      "score": 0.43236,
+      "box": [
+        [
+          94.0,
+          177.0
+        ],
+        [
+          2320.0,
+          177.0
+        ],
+        [
+          2320.0,
+          216.0
+        ],
+        [
+          94.0,
+          216.0
+        ]
+      ]
+    },
+    {
+      "text": "n s o so so sl  sa r   nns",
+      "score": 0.44278,
+      "box": [
+        [
+          150.0,
+          763.0
+        ],
+        [
+          1719.0,
+          766.0
+        ],
+        [
+          1719.0,
+          805.0
+        ],
+        [
+          150.0,
+          802.0
+        ]
+      ]
+    },
+    {
+      "text": "·",
+      "score": 0.45808,
+      "box": [
+        [
+          92.0,
+          1274.0
+        ],
+        [
+          161.0,
+          1274.0
+        ],
+        [
+          161.0,
+          1291.0
+        ],
+        [
+          92.0,
+          1291.0
+        ]
+      ]
+    }
+  ],
+  "visual_read": {
+    "method": "view_image of exact original ppt/media/image7.png; no synthetic text injection",
+    "source_image_sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+    "business_regions": [
+      {
+        "box": [
+          94,
+          177,
+          2320,
+          216
+        ],
+        "visible_terms": [
+          "Agents and Infra",
+          "Microsoft Cloud",
+          "productivity and server licensing"
+        ],
+        "recognizer_score": 0.43236,
+        "recognizer_text_usable": false
+      },
+      {
+        "box": [
+          150,
+          763,
+          1719,
+          805
+        ],
+        "visible_terms": [
+          "Productivity and server licensing",
+          "licensing offerings across our products"
+        ],
+        "recognizer_score": 0.44278,
+        "recognizer_text_usable": false
+      }
+    ],
+    "other_filtered_item": "single bullet at y1274..1291, score0.45808; not a business-definition gap"
+  },
+  "legacy_selector_comparison": {
+    "0.7.1": {
+      "selected_count": 13,
+      "selected_paragraphs": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        2,
+        20,
+        21,
+        3,
+        8,
+        9
+      ]
+    },
+    "0.8.0": {
+      "selected_count": 13,
+      "selected_paragraphs": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        2,
+        20,
+        21,
+        3,
+        8,
+        9
+      ]
+    }
+  },
+  "chain": [
+    "source SHA -> slide7 relationship -> ppt/media/image7.png SHA",
+    "LocalOCRAdapter opens entire media, converts RGB; no source crop",
+    "RapidOCR LoadImage PIL RGB->BGR, global preprocess ratios1/1 and padding0",
+    "det25 -> optional angle classification (not observed) -> rec25 incl two garbled business lines",
+    "RapidOCR.filter_by_text_score removes3 scores below0.5 ->22",
+    "CWP adapter only normalizes/sorts returned nonempty lines; composition creates22 units",
+    "company_filing roles; both selectors see22/select13; two missing lines absent before selector"
+  ],
+  "existing_quality": {
+    "coverage_complete": false,
+    "recall_status": "unverified",
+    "flags": [
+      "ocr_used",
+      "layout_ambiguous"
+    ],
+    "page_status": "recognized",
+    "recognized_is_exhaustive_recall": false
+  },
+  "configured_probe": {
+    "schema_version": "w04-slide7-ocr-stage-probe/1",
+    "status": "COMPLETED",
+    "source_info": {
+      "source_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx",
+      "source_sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4",
+      "source_byte_size": 4016522,
+      "media_part": "ppt/media/image7.png",
+      "media_sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea",
+      "media_bytes": 331246,
+      "slide7_xml_sha256": "f9f53a4a53c56b0ebd5d968373c3a746b00f59f4428d238ef366073b1d35c41b",
+      "slide7_relationships_sha256": "a43bee0d8917eb36abec91aed3bbfa5dee84cbf5db5739cad688b1011d2e09c6",
+      "shape_image_crop": null,
+      "owned_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-slide7-rootcause-9ca9534274c1437cb37aa3bab92f0525",
+      "temp_parent": "C:\\Users\\郑曾波\\AppData\\Local\\Temp",
+      "image_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-slide7-rootcause-9ca9534274c1437cb37aa3bab92f0525\\original-slide7.png"
+    },
+    "started_at": "2026-10-11T08:03:12.609263+00:00",
+    "config_sha256": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105",
+    "configuration": {
+      "engine_version": "3.8.1",
+      "runtime_version": "1.26.0",
+      "base_config_sha256": "e753d39c0222297f0180e1bdcde1799bc26218f315356763362810846b6afa84",
+      "text_score": 0.5,
+      "low_confidence_threshold": 0.8,
+      "max_side_len": 3000,
+      "intra_op_threads": 2,
+      "inter_op_threads": 1,
+      "schema_version": "cwp-local-ocr-config/1",
+      "models": {
+        "det": {
+          "path": "C:/Miniconda/Lib/site-packages/rapidocr/models/ch_PP-OCRv4_det_mobile.onnx",
+          "sha256": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9"
+        },
+        "cls": {
+          "path": "C:/Miniconda/Lib/site-packages/rapidocr/models/ch_ppocr_mobile_v2.0_cls_mobile.onnx",
+          "sha256": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c"
+        },
+        "rec": {
+          "path": "C:/Miniconda/Lib/site-packages/rapidocr/models/ch_PP-OCRv4_rec_mobile.onnx",
+          "sha256": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+        }
+      }
+    },
+    "local_inference_calls": 1,
+    "network_attempts": 0,
+    "paid_calls": 0,
+    "external_model_provider_calls": 0,
+    "owned_probe_attempt": 2,
+    "prior_attempt": {
+      "status": "FAILED_OBSERVER",
+      "exception": "AttributeError: list object has no attribute tolist",
+      "inference_completed_before_observer_failure": true,
+      "persisted_stage_data": false,
+      "not_a_product_or_provider_failure": true
+    },
+    "effective_runtime": {
+      "engine_version": "3.8.1",
+      "runtime_version": "1.26.0",
+      "text_score": 0.5,
+      "max_side_len": 3000,
+      "min_side_len": 30,
+      "min_height": 30,
+      "width_height_ratio": 8.0,
+      "det_limit_side_len": 736,
+      "det_limit_type": "min",
+      "det_thresh": 0.3,
+      "det_box_thresh": 0.5,
+      "det_unclip_ratio": 1.6,
+      "det_use_dilation": true,
+      "rec_img_shape": [
+        3,
+        48,
+        320
+      ],
+      "rec_batch_num": 6,
+      "configured_parameters_changed": false
+    },
+    "internal_preprocessed_dimensions": [
+      2560,
+      1440
+    ],
+    "operation_record": {
+      "preprocess": {
+        "ratio_h": 1.0,
+        "ratio_w": 1.0
+      },
+      "padding_1": {
+        "top": 0,
+        "left": 0
+      }
+    },
+    "detected_before_blank_filter": {
+      "boxes": [
+        [
+          [
+            82.0,
+            74.0
+          ],
+          [
+            2381.0,
+            74.0
+          ],
+          [
+            2381.0,
+            139.0
+          ],
+          [
+            82.0,
+            139.0
+          ]
+        ],
+        [
+          [
+            94.0,
+            177.0
+          ],
+          [
+            2320.0,
+            177.0
+          ],
+          [
+            2320.0,
+            216.0
+          ],
+          [
+            94.0,
+            216.0
+          ]
+        ],
+        [
+          [
+            95.0,
+            220.0
+          ],
+          [
+            2359.0,
+            220.0
+          ],
+          [
+            2359.0,
+            259.0
+          ],
+          [
+            95.0,
+            259.0
+          ]
+        ],
+        [
+          [
+            97.0,
+            264.0
+          ],
+          [
+            2437.0,
+            263.0
+          ],
+          [
+            2437.0,
+            299.0
+          ],
+          [
+            97.0,
+            300.0
+          ]
+        ],
+        [
+          [
+            93.0,
+            305.0
+          ],
+          [
+            1275.0,
+            304.0
+          ],
+          [
+            1275.0,
+            344.0
+          ],
+          [
+            93.0,
+            345.0
+          ]
+        ],
+        [
+          [
+            96.0,
+            386.0
+          ],
+          [
+            421.0,
+            384.0
+          ],
+          [
+            421.0,
+            424.0
+          ],
+          [
+            96.0,
+            426.0
+          ]
+        ],
+        [
+          [
+            148.0,
+            445.0
+          ],
+          [
+            2440.0,
+            444.0
+          ],
+          [
+            2440.0,
+            486.0
+          ],
+          [
+            148.0,
+            487.0
+          ]
+        ],
+        [
+          [
+            152.0,
+            490.0
+          ],
+          [
+            1521.0,
+            493.0
+          ],
+          [
+            1521.0,
+            526.0
+          ],
+          [
+            152.0,
+            523.0
+          ]
+        ],
+        [
+          [
+            149.0,
+            545.0
+          ],
+          [
+            2350.0,
+            546.0
+          ],
+          [
+            2350.0,
+            589.0
+          ],
+          [
+            149.0,
+            588.0
+          ]
+        ],
+        [
+          [
+            235.0,
+            601.0
+          ],
+          [
+            2385.0,
+            604.0
+          ],
+          [
+            2385.0,
+            644.0
+          ],
+          [
+            235.0,
+            641.0
+          ]
+        ],
+        [
+          [
+            262.0,
+            650.0
+          ],
+          [
+            702.0,
+            645.0
+          ],
+          [
+            702.0,
+            685.0
+          ],
+          [
+            262.0,
+            690.0
+          ]
+        ],
+        [
+          [
+            239.0,
+            704.0
+          ],
+          [
+            951.0,
+            708.0
+          ],
+          [
+            951.0,
+            744.0
+          ],
+          [
+            239.0,
+            740.0
+          ]
+        ],
+        [
+          [
+            150.0,
+            763.0
+          ],
+          [
+            1719.0,
+            766.0
+          ],
+          [
+            1719.0,
+            805.0
+          ],
+          [
+            150.0,
+            802.0
+          ]
+        ],
+        [
+          [
+            235.0,
+            806.0
+          ],
+          [
+            2281.0,
+            804.0
+          ],
+          [
+            2281.0,
+            843.0
+          ],
+          [
+            235.0,
+            845.0
+          ]
+        ],
+        [
+          [
+            259.0,
+            848.0
+          ],
+          [
+            2439.0,
+            847.0
+          ],
+          [
+            2439.0,
+            887.0
+          ],
+          [
+            259.0,
+            888.0
+          ]
+        ],
+        [
+          [
+            235.0,
+            902.0
+          ],
+          [
+            2428.0,
+            905.0
+          ],
+          [
+            2428.0,
+            947.0
+          ],
+          [
+            235.0,
+            944.0
+          ]
+        ],
+        [
+          [
+            260.0,
+            951.0
+          ],
+          [
+            692.0,
+            950.0
+          ],
+          [
+            692.0,
+            987.0
+          ],
+          [
+            260.0,
+            988.0
+          ]
+        ],
+        [
+          [
+            237.0,
+            1004.0
+          ],
+          [
+            2072.0,
+            1005.0
+          ],
+          [
+            2072.0,
+            1048.0
+          ],
+          [
+            237.0,
+            1047.0
+          ]
+        ],
+        [
+          [
+            149.0,
+            1063.0
+          ],
+          [
+            2055.0,
+            1065.0
+          ],
+          [
+            2055.0,
+            1104.0
+          ],
+          [
+            149.0,
+            1102.0
+          ]
+        ],
+        [
+          [
+            240.0,
+            1108.0
+          ],
+          [
+            2429.0,
+            1108.0
+          ],
+          [
+            2429.0,
+            1144.0
+          ],
+          [
+            240.0,
+            1144.0
+          ]
+        ],
+        [
+          [
+            260.0,
+            1149.0
+          ],
+          [
+            1325.0,
+            1152.0
+          ],
+          [
+            1325.0,
+            1188.0
+          ],
+          [
+            260.0,
+            1185.0
+          ]
+        ],
+        [
+          [
+            239.0,
+            1207.0
+          ],
+          [
+            1527.0,
+            1207.0
+          ],
+          [
+            1527.0,
+            1246.0
+          ],
+          [
+            239.0,
+            1246.0
+          ]
+        ],
+        [
+          [
+            92.0,
+            1274.0
+          ],
+          [
+            161.0,
+            1274.0
+          ],
+          [
+            161.0,
+            1291.0
+          ],
+          [
+            92.0,
+            1291.0
+          ]
+        ],
+        [
+          [
+            146.0,
+            1265.0
+          ],
+          [
+            2001.0,
+            1264.0
+          ],
+          [
+            2001.0,
+            1304.0
+          ],
+          [
+            146.0,
+            1305.0
+          ]
+        ],
+        [
+          [
+            78.0,
+            1344.0
+          ],
+          [
+            1122.0,
+            1345.0
+          ],
+          [
+            1122.0,
+            1382.0
+          ],
+          [
+            78.0,
+            1381.0
+          ]
+        ]
+      ],
+      "scores": [
+        0.6751467146467581,
+        0.5480271392812331,
+        0.6595280215864728,
+        0.6947938528397809,
+        0.7258000589415797,
+        0.7040945703793788,
+        0.6799087089789438,
+        0.623572064232452,
+        0.7492895965702188,
+        0.64635075849836,
+        0.643374433256359,
+        0.6903865409348466,
+        0.7105406270136905,
+        0.724964685638784,
+        0.6923540044618774,
+        0.6398598733029436,
+        0.6416869292562885,
+        0.7135672375446996,
+        0.666159197594846,
+        0.8167568095761909,
+        0.6588758046114623,
+        0.7314544204105143,
+        0.66852934017947,
+        0.676024690502092,
+        0.6658232176604119
+      ]
+    },
+    "recognized_before_blank_filter": {
+      "texts": [
+        "FY27 Segment changes and resulting new product and service reporting updates",
+        " l s    os    i  a i  s o o  on l ",
+        "our consulting and support businesses. Devices and Consumer will include our Windows, XBOX, and advertising businesses. With these segment",
+        "changes and to provide transparency to investors, we are updating our product and services reporting definitions to better represent the businesses as",
+        "we manage them today, which will be used in our SEC filings going forward.",
+        "Agents andInfra",
+        "Azure has been updated to reflect the move of GitHub cloud and other developer cloud services as well as Security Copilot to Microsoft 365 cloud.",
+        "Healthcare and Life Sciences cloud will move to the new Industry solutions cloud metric.",
+        "Microsoft 365 cloud now brings together our productivity, developer, and security app offerings across commercial and consumer including:",
+        "· Microsoft 365 commercial cloud will now include GitHub cloud and other developer cloud services as well as Security Copilot which were",
+        "previously reported in Azure",
+        "· Microsoft 365 consumer cloud is unchanged",
+        "n s o so so sl  sa r   nns",
+        "· Server products now excludes the on-premises portion of GitHub and other developer services which has moved to Microsoft 365",
+        "commercial products as well as the on-premises portion of the Healthcare and Life Sciences business which has moved to Industry Solutions",
+        "· Microsoft 365 commercial products will now include the on-premises portion of GitHub and other developer services which were previously",
+        "reported in Server products",
+        "· Microsoft 365 consumer products was previously reported as Office consumer products, but is otherwise unchanged",
+        "Industry solutions brings together our vertical commercial offerings across Dynamics, Linkedln, and Healthcare including:",
+        "· Industry solutions cloud, which is formed from Dynamics 365, Linkedln Talent Solutions and Sales Solutions, previously reported in Linkedln,",
+        "and Healthcare and Life Sciences cloud, previously reported in Azure",
+        "· Industry solutions products, which is the on-premises portion of these businesses",
+        "·",
+        "Frontier and support services was previously reported as Enterprise and Partner services, but is otherwise unchanged",
+        "The product and service offerings referenced above will be reported in our SEC filings"
+      ],
+      "scores": [
+        0.99363,
+        0.43236,
+        0.9871,
+        0.99461,
+        0.98376,
+        0.95847,
+        0.9938,
+        0.98539,
+        0.99016,
+        0.98956,
+        0.98433,
+        0.97156,
+        0.44278,
+        0.98836,
+        0.99453,
+        0.98862,
+        0.99518,
+        0.98584,
+        0.99713,
+        0.99219,
+        0.99072,
+        0.98901,
+        0.45808,
+        0.99736,
+        0.98918
+      ]
+    },
+    "before_score_filter": [
+      {
+        "text": "FY27 Segment changes and resulting new product and service reporting updates",
+        "score": 0.99363,
+        "box": [
+          [
+            82.0,
+            74.0
+          ],
+          [
+            2381.0,
+            74.0
+          ],
+          [
+            2381.0,
+            139.0
+          ],
+          [
+            82.0,
+            139.0
+          ]
+        ]
+      },
+      {
+        "text": " l s    os    i  a i  s o o  on l ",
+        "score": 0.43236,
+        "box": [
+          [
+            94.0,
+            177.0
+          ],
+          [
+            2320.0,
+            177.0
+          ],
+          [
+            2320.0,
+            216.0
+          ],
+          [
+            94.0,
+            216.0
+          ]
+        ]
+      },
+      {
+        "text": "our consulting and support businesses. Devices and Consumer will include our Windows, XBOX, and advertising businesses. With these segment",
+        "score": 0.9871,
+        "box": [
+          [
+            95.0,
+            220.0
+          ],
+          [
+            2359.0,
+            220.0
+          ],
+          [
+            2359.0,
+            259.0
+          ],
+          [
+            95.0,
+            259.0
+          ]
+        ]
+      },
+      {
+        "text": "changes and to provide transparency to investors, we are updating our product and services reporting definitions to better represent the businesses as",
+        "score": 0.99461,
+        "box": [
+          [
+            97.0,
+            264.0
+          ],
+          [
+            2437.0,
+            263.0
+          ],
+          [
+            2437.0,
+            299.0
+          ],
+          [
+            97.0,
+            300.0
+          ]
+        ]
+      },
+      {
+        "text": "we manage them today, which will be used in our SEC filings going forward.",
+        "score": 0.98376,
+        "box": [
+          [
+            93.0,
+            305.0
+          ],
+          [
+            1275.0,
+            304.0
+          ],
+          [
+            1275.0,
+            344.0
+          ],
+          [
+            93.0,
+            345.0
+          ]
+        ]
+      },
+      {
+        "text": "Agents andInfra",
+        "score": 0.95847,
+        "box": [
+          [
+            96.0,
+            386.0
+          ],
+          [
+            421.0,
+            384.0
+          ],
+          [
+            421.0,
+            424.0
+          ],
+          [
+            96.0,
+            426.0
+          ]
+        ]
+      },
+      {
+        "text": "Azure has been updated to reflect the move of GitHub cloud and other developer cloud services as well as Security Copilot to Microsoft 365 cloud.",
+        "score": 0.9938,
+        "box": [
+          [
+            148.0,
+            445.0
+          ],
+          [
+            2440.0,
+            444.0
+          ],
+          [
+            2440.0,
+            486.0
+          ],
+          [
+            148.0,
+            487.0
+          ]
+        ]
+      },
+      {
+        "text": "Healthcare and Life Sciences cloud will move to the new Industry solutions cloud metric.",
+        "score": 0.98539,
+        "box": [
+          [
+            152.0,
+            490.0
+          ],
+          [
+            1521.0,
+            493.0
+          ],
+          [
+            1521.0,
+            526.0
+          ],
+          [
+            152.0,
+            523.0
+          ]
+        ]
+      },
+      {
+        "text": "Microsoft 365 cloud now brings together our productivity, developer, and security app offerings across commercial and consumer including:",
+        "score": 0.99016,
+        "box": [
+          [
+            149.0,
+            545.0
+          ],
+          [
+            2350.0,
+            546.0
+          ],
+          [
+            2350.0,
+            589.0
+          ],
+          [
+            149.0,
+            588.0
+          ]
+        ]
+      },
+      {
+        "text": "· Microsoft 365 commercial cloud will now include GitHub cloud and other developer cloud services as well as Security Copilot which were",
+        "score": 0.98956,
+        "box": [
+          [
+            235.0,
+            601.0
+          ],
+          [
+            2385.0,
+            604.0
+          ],
+          [
+            2385.0,
+            644.0
+          ],
+          [
+            235.0,
+            641.0
+          ]
+        ]
+      },
+      {
+        "text": "previously reported in Azure",
+        "score": 0.98433,
+        "box": [
+          [
+            262.0,
+            650.0
+          ],
+          [
+            702.0,
+            645.0
+          ],
+          [
+            702.0,
+            685.0
+          ],
+          [
+            262.0,
+            690.0
+          ]
+        ]
+      },
+      {
+        "text": "· Microsoft 365 consumer cloud is unchanged",
+        "score": 0.97156,
+        "box": [
+          [
+            239.0,
+            704.0
+          ],
+          [
+            951.0,
+            708.0
+          ],
+          [
+            951.0,
+            744.0
+          ],
+          [
+            239.0,
+            740.0
+          ]
+        ]
+      },
+      {
+        "text": "n s o so so sl  sa r   nns",
+        "score": 0.44278,
+        "box": [
+          [
+            150.0,
+            763.0
+          ],
+          [
+            1719.0,
+            766.0
+          ],
+          [
+            1719.0,
+            805.0
+          ],
+          [
+            150.0,
+            802.0
+          ]
+        ]
+      },
+      {
+        "text": "· Server products now excludes the on-premises portion of GitHub and other developer services which has moved to Microsoft 365",
+        "score": 0.98836,
+        "box": [
+          [
+            235.0,
+            806.0
+          ],
+          [
+            2281.0,
+            804.0
+          ],
+          [
+            2281.0,
+            843.0
+          ],
+          [
+            235.0,
+            845.0
+          ]
+        ]
+      },
+      {
+        "text": "commercial products as well as the on-premises portion of the Healthcare and Life Sciences business which has moved to Industry Solutions",
+        "score": 0.99453,
+        "box": [
+          [
+            259.0,
+            848.0
+          ],
+          [
+            2439.0,
+            847.0
+          ],
+          [
+            2439.0,
+            887.0
+          ],
+          [
+            259.0,
+            888.0
+          ]
+        ]
+      },
+      {
+        "text": "· Microsoft 365 commercial products will now include the on-premises portion of GitHub and other developer services which were previously",
+        "score": 0.98862,
+        "box": [
+          [
+            235.0,
+            902.0
+          ],
+          [
+            2428.0,
+            905.0
+          ],
+          [
+            2428.0,
+            947.0
+          ],
+          [
+            235.0,
+            944.0
+          ]
+        ]
+      },
+      {
+        "text": "reported in Server products",
+        "score": 0.99518,
+        "box": [
+          [
+            260.0,
+            951.0
+          ],
+          [
+            692.0,
+            950.0
+          ],
+          [
+            692.0,
+            987.0
+          ],
+          [
+            260.0,
+            988.0
+          ]
+        ]
+      },
+      {
+        "text": "· Microsoft 365 consumer products was previously reported as Office consumer products, but is otherwise unchanged",
+        "score": 0.98584,
+        "box": [
+          [
+            237.0,
+            1004.0
+          ],
+          [
+            2072.0,
+            1005.0
+          ],
+          [
+            2072.0,
+            1048.0
+          ],
+          [
+            237.0,
+            1047.0
+          ]
+        ]
+      },
+      {
+        "text": "Industry solutions brings together our vertical commercial offerings across Dynamics, Linkedln, and Healthcare including:",
+        "score": 0.99713,
+        "box": [
+          [
+            149.0,
+            1063.0
+          ],
+          [
+            2055.0,
+            1065.0
+          ],
+          [
+            2055.0,
+            1104.0
+          ],
+          [
+            149.0,
+            1102.0
+          ]
+        ]
+      },
+      {
+        "text": "· Industry solutions cloud, which is formed from Dynamics 365, Linkedln Talent Solutions and Sales Solutions, previously reported in Linkedln,",
+        "score": 0.99219,
+        "box": [
+          [
+            240.0,
+            1108.0
+          ],
+          [
+            2429.0,
+            1108.0
+          ],
+          [
+            2429.0,
+            1144.0
+          ],
+          [
+            240.0,
+            1144.0
+          ]
+        ]
+      },
+      {
+        "text": "and Healthcare and Life Sciences cloud, previously reported in Azure",
+        "score": 0.99072,
+        "box": [
+          [
+            260.0,
+            1149.0
+          ],
+          [
+            1325.0,
+            1152.0
+          ],
+          [
+            1325.0,
+            1188.0
+          ],
+          [
+            260.0,
+            1185.0
+          ]
+        ]
+      },
+      {
+        "text": "· Industry solutions products, which is the on-premises portion of these businesses",
+        "score": 0.98901,
+        "box": [
+          [
+            239.0,
+            1207.0
+          ],
+          [
+            1527.0,
+            1207.0
+          ],
+          [
+            1527.0,
+            1246.0
+          ],
+          [
+            239.0,
+            1246.0
+          ]
+        ]
+      },
+      {
+        "text": "·",
+        "score": 0.45808,
+        "box": [
+          [
+            92.0,
+            1274.0
+          ],
+          [
+            161.0,
+            1274.0
+          ],
+          [
+            161.0,
+            1291.0
+          ],
+          [
+            92.0,
+            1291.0
+          ]
+        ]
+      },
+      {
+        "text": "Frontier and support services was previously reported as Enterprise and Partner services, but is otherwise unchanged",
+        "score": 0.99736,
+        "box": [
+          [
+            146.0,
+            1265.0
+          ],
+          [
+            2001.0,
+            1264.0
+          ],
+          [
+            2001.0,
+            1304.0
+          ],
+          [
+            146.0,
+            1305.0
+          ]
+        ]
+      },
+      {
+        "text": "The product and service offerings referenced above will be reported in our SEC filings",
+        "score": 0.98918,
+        "box": [
+          [
+            78.0,
+            1344.0
+          ],
+          [
+            1122.0,
+            1345.0
+          ],
+          [
+            1122.0,
+            1382.0
+          ],
+          [
+            78.0,
+            1381.0
+          ]
+        ]
+      }
+    ],
+    "after_score_filter": [
+      {
+        "text": "FY27 Segment changes and resulting new product and service reporting updates",
+        "score": 0.99363,
+        "box": [
+          [
+            82.0,
+            74.0
+          ],
+          [
+            2381.0,
+            74.0
+          ],
+          [
+            2381.0,
+            139.0
+          ],
+          [
+            82.0,
+            139.0
+          ]
+        ]
+      },
+      {
+        "text": "our consulting and support businesses. Devices and Consumer will include our Windows, XBOX, and advertising businesses. With these segment",
+        "score": 0.9871,
+        "box": [
+          [
+            95.0,
+            220.0
+          ],
+          [
+            2359.0,
+            220.0
+          ],
+          [
+            2359.0,
+            259.0
+          ],
+          [
+            95.0,
+            259.0
+          ]
+        ]
+      },
+      {
+        "text": "changes and to provide transparency to investors, we are updating our product and services reporting definitions to better represent the businesses as",
+        "score": 0.99461,
+        "box": [
+          [
+            97.0,
+            264.0
+          ],
+          [
+            2437.0,
+            263.0
+          ],
+          [
+            2437.0,
+            299.0
+          ],
+          [
+            97.0,
+            300.0
+          ]
+        ]
+      },
+      {
+        "text": "we manage them today, which will be used in our SEC filings going forward.",
+        "score": 0.98376,
+        "box": [
+          [
+            93.0,
+            305.0
+          ],
+          [
+            1275.0,
+            304.0
+          ],
+          [
+            1275.0,
+            344.0
+          ],
+          [
+            93.0,
+            345.0
+          ]
+        ]
+      },
+      {
+        "text": "Agents andInfra",
+        "score": 0.95847,
+        "box": [
+          [
+            96.0,
+            386.0
+          ],
+          [
+            421.0,
+            384.0
+          ],
+          [
+            421.0,
+            424.0
+          ],
+          [
+            96.0,
+            426.0
+          ]
+        ]
+      },
+      {
+        "text": "Azure has been updated to reflect the move of GitHub cloud and other developer cloud services as well as Security Copilot to Microsoft 365 cloud.",
+        "score": 0.9938,
+        "box": [
+          [
+            148.0,
+            445.0
+          ],
+          [
+            2440.0,
+            444.0
+          ],
+          [
+            2440.0,
+            486.0
+          ],
+          [
+            148.0,
+            487.0
+          ]
+        ]
+      },
+      {
+        "text": "Healthcare and Life Sciences cloud will move to the new Industry solutions cloud metric.",
+        "score": 0.98539,
+        "box": [
+          [
+            152.0,
+            490.0
+          ],
+          [
+            1521.0,
+            493.0
+          ],
+          [
+            1521.0,
+            526.0
+          ],
+          [
+            152.0,
+            523.0
+          ]
+        ]
+      },
+      {
+        "text": "Microsoft 365 cloud now brings together our productivity, developer, and security app offerings across commercial and consumer including:",
+        "score": 0.99016,
+        "box": [
+          [
+            149.0,
+            545.0
+          ],
+          [
+            2350.0,
+            546.0
+          ],
+          [
+            2350.0,
+            589.0
+          ],
+          [
+            149.0,
+            588.0
+          ]
+        ]
+      },
+      {
+        "text": "· Microsoft 365 commercial cloud will now include GitHub cloud and other developer cloud services as well as Security Copilot which were",
+        "score": 0.98956,
+        "box": [
+          [
+            235.0,
+            601.0
+          ],
+          [
+            2385.0,
+            604.0
+          ],
+          [
+            2385.0,
+            644.0
+          ],
+          [
+            235.0,
+            641.0
+          ]
+        ]
+      },
+      {
+        "text": "previously reported in Azure",
+        "score": 0.98433,
+        "box": [
+          [
+            262.0,
+            650.0
+          ],
+          [
+            702.0,
+            645.0
+          ],
+          [
+            702.0,
+            685.0
+          ],
+          [
+            262.0,
+            690.0
+          ]
+        ]
+      },
+      {
+        "text": "· Microsoft 365 consumer cloud is unchanged",
+        "score": 0.97156,
+        "box": [
+          [
+            239.0,
+            704.0
+          ],
+          [
+            951.0,
+            708.0
+          ],
+          [
+            951.0,
+            744.0
+          ],
+          [
+            239.0,
+            740.0
+          ]
+        ]
+      },
+      {
+        "text": "· Server products now excludes the on-premises portion of GitHub and other developer services which has moved to Microsoft 365",
+        "score": 0.98836,
+        "box": [
+          [
+            235.0,
+            806.0
+          ],
+          [
+            2281.0,
+            804.0
+          ],
+          [
+            2281.0,
+            843.0
+          ],
+          [
+            235.0,
+            845.0
+          ]
+        ]
+      },
+      {
+        "text": "commercial products as well as the on-premises portion of the Healthcare and Life Sciences business which has moved to Industry Solutions",
+        "score": 0.99453,
+        "box": [
+          [
+            259.0,
+            848.0
+          ],
+          [
+            2439.0,
+            847.0
+          ],
+          [
+            2439.0,
+            887.0
+          ],
+          [
+            259.0,
+            888.0
+          ]
+        ]
+      },
+      {
+        "text": "· Microsoft 365 commercial products will now include the on-premises portion of GitHub and other developer services which were previously",
+        "score": 0.98862,
+        "box": [
+          [
+            235.0,
+            902.0
+          ],
+          [
+            2428.0,
+            905.0
+          ],
+          [
+            2428.0,
+            947.0
+          ],
+          [
+            235.0,
+            944.0
+          ]
+        ]
+      },
+      {
+        "text": "reported in Server products",
+        "score": 0.99518,
+        "box": [
+          [
+            260.0,
+            951.0
+          ],
+          [
+            692.0,
+            950.0
+          ],
+          [
+            692.0,
+            987.0
+          ],
+          [
+            260.0,
+            988.0
+          ]
+        ]
+      },
+      {
+        "text": "· Microsoft 365 consumer products was previously reported as Office consumer products, but is otherwise unchanged",
+        "score": 0.98584,
+        "box": [
+          [
+            237.0,
+            1004.0
+          ],
+          [
+            2072.0,
+            1005.0
+          ],
+          [
+            2072.0,
+            1048.0
+          ],
+          [
+            237.0,
+            1047.0
+          ]
+        ]
+      },
+      {
+        "text": "Industry solutions brings together our vertical commercial offerings across Dynamics, Linkedln, and Healthcare including:",
+        "score": 0.99713,
+        "box": [
+          [
+            149.0,
+            1063.0
+          ],
+          [
+            2055.0,
+            1065.0
+          ],
+          [
+            2055.0,
+            1104.0
+          ],
+          [
+            149.0,
+            1102.0
+          ]
+        ]
+      },
+      {
+        "text": "· Industry solutions cloud, which is formed from Dynamics 365, Linkedln Talent Solutions and Sales Solutions, previously reported in Linkedln,",
+        "score": 0.99219,
+        "box": [
+          [
+            240.0,
+            1108.0
+          ],
+          [
+            2429.0,
+            1108.0
+          ],
+          [
+            2429.0,
+            1144.0
+          ],
+          [
+            240.0,
+            1144.0
+          ]
+        ]
+      },
+      {
+        "text": "and Healthcare and Life Sciences cloud, previously reported in Azure",
+        "score": 0.99072,
+        "box": [
+          [
+            260.0,
+            1149.0
+          ],
+          [
+            1325.0,
+            1152.0
+          ],
+          [
+            1325.0,
+            1188.0
+          ],
+          [
+            260.0,
+            1185.0
+          ]
+        ]
+      },
+      {
+        "text": "· Industry solutions products, which is the on-premises portion of these businesses",
+        "score": 0.98901,
+        "box": [
+          [
+            239.0,
+            1207.0
+          ],
+          [
+            1527.0,
+            1207.0
+          ],
+          [
+            1527.0,
+            1246.0
+          ],
+          [
+            239.0,
+            1246.0
+          ]
+        ]
+      },
+      {
+        "text": "Frontier and support services was previously reported as Enterprise and Partner services, but is otherwise unchanged",
+        "score": 0.99736,
+        "box": [
+          [
+            146.0,
+            1265.0
+          ],
+          [
+            2001.0,
+            1264.0
+          ],
+          [
+            2001.0,
+            1304.0
+          ],
+          [
+            146.0,
+            1305.0
+          ]
+        ]
+      },
+      {
+        "text": "The product and service offerings referenced above will be reported in our SEC filings",
+        "score": 0.98918,
+        "box": [
+          [
+            78.0,
+            1344.0
+          ],
+          [
+            1122.0,
+            1345.0
+          ],
+          [
+            1122.0,
+            1382.0
+          ],
+          [
+            78.0,
+            1381.0
+          ]
+        ]
+      }
+    ],
+    "ocr_fingerprint": "7834f117defffd44dc4719eda68151371b5f5cb68f2c51f2b968c02290126b1d",
+    "normalized_lines": [
+      {
+        "text": "FY27 Segment changes and resulting new product and service reporting updates",
+        "score": 0.99363,
+        "box": [
+          82.0,
+          74.0,
+          2381.0,
+          139.0
+        ]
+      },
+      {
+        "text": "our consulting and support businesses. Devices and Consumer will include our Windows, XBOX, and advertising businesses. With these segment",
+        "score": 0.9871,
+        "box": [
+          95.0,
+          220.0,
+          2359.0,
+          259.0
+        ]
+      },
+      {
+        "text": "changes and to provide transparency to investors, we are updating our product and services reporting definitions to better represent the businesses as",
+        "score": 0.99461,
+        "box": [
+          97.0,
+          263.0,
+          2437.0,
+          300.0
+        ]
+      },
+      {
+        "text": "we manage them today, which will be used in our SEC filings going forward.",
+        "score": 0.98376,
+        "box": [
+          93.0,
+          304.0,
+          1275.0,
+          345.0
+        ]
+      },
+      {
+        "text": "Agents andInfra",
+        "score": 0.95847,
+        "box": [
+          96.0,
+          384.0,
+          421.0,
+          426.0
+        ]
+      },
+      {
+        "text": "Azure has been updated to reflect the move of GitHub cloud and other developer cloud services as well as Security Copilot to Microsoft 365 cloud.",
+        "score": 0.9938,
+        "box": [
+          148.0,
+          444.0,
+          2440.0,
+          487.0
+        ]
+      },
+      {
+        "text": "Healthcare and Life Sciences cloud will move to the new Industry solutions cloud metric.",
+        "score": 0.98539,
+        "box": [
+          152.0,
+          490.0,
+          1521.0,
+          526.0
+        ]
+      },
+      {
+        "text": "Microsoft 365 cloud now brings together our productivity, developer, and security app offerings across commercial and consumer including:",
+        "score": 0.99016,
+        "box": [
+          149.0,
+          545.0,
+          2350.0,
+          589.0
+        ]
+      },
+      {
+        "text": "· Microsoft 365 commercial cloud will now include GitHub cloud and other developer cloud services as well as Security Copilot which were",
+        "score": 0.98956,
+        "box": [
+          235.0,
+          601.0,
+          2385.0,
+          644.0
+        ]
+      },
+      {
+        "text": "previously reported in Azure",
+        "score": 0.98433,
+        "box": [
+          262.0,
+          645.0,
+          702.0,
+          690.0
+        ]
+      },
+      {
+        "text": "· Microsoft 365 consumer cloud is unchanged",
+        "score": 0.97156,
+        "box": [
+          239.0,
+          704.0,
+          951.0,
+          744.0
+        ]
+      },
+      {
+        "text": "· Server products now excludes the on-premises portion of GitHub and other developer services which has moved to Microsoft 365",
+        "score": 0.98836,
+        "box": [
+          235.0,
+          804.0,
+          2281.0,
+          845.0
+        ]
+      },
+      {
+        "text": "commercial products as well as the on-premises portion of the Healthcare and Life Sciences business which has moved to Industry Solutions",
+        "score": 0.99453,
+        "box": [
+          259.0,
+          847.0,
+          2439.0,
+          888.0
+        ]
+      },
+      {
+        "text": "· Microsoft 365 commercial products will now include the on-premises portion of GitHub and other developer services which were previously",
+        "score": 0.98862,
+        "box": [
+          235.0,
+          902.0,
+          2428.0,
+          947.0
+        ]
+      },
+      {
+        "text": "reported in Server products",
+        "score": 0.99518,
+        "box": [
+          260.0,
+          950.0,
+          692.0,
+          988.0
+        ]
+      },
+      {
+        "text": "· Microsoft 365 consumer products was previously reported as Office consumer products, but is otherwise unchanged",
+        "score": 0.98584,
+        "box": [
+          237.0,
+          1004.0,
+          2072.0,
+          1048.0
+        ]
+      },
+      {
+        "text": "Industry solutions brings together our vertical commercial offerings across Dynamics, Linkedln, and Healthcare including:",
+        "score": 0.99713,
+        "box": [
+          149.0,
+          1063.0,
+          2055.0,
+          1104.0
+        ]
+      },
+      {
+        "text": "· Industry solutions cloud, which is formed from Dynamics 365, Linkedln Talent Solutions and Sales Solutions, previously reported in Linkedln,",
+        "score": 0.99219,
+        "box": [
+          240.0,
+          1108.0,
+          2429.0,
+          1144.0
+        ]
+      },
+      {
+        "text": "and Healthcare and Life Sciences cloud, previously reported in Azure",
+        "score": 0.99072,
+        "box": [
+          260.0,
+          1149.0,
+          1325.0,
+          1188.0
+        ]
+      },
+      {
+        "text": "· Industry solutions products, which is the on-premises portion of these businesses",
+        "score": 0.98901,
+        "box": [
+          239.0,
+          1207.0,
+          1527.0,
+          1246.0
+        ]
+      },
+      {
+        "text": "Frontier and support services was previously reported as Enterprise and Partner services, but is otherwise unchanged",
+        "score": 0.99736,
+        "box": [
+          146.0,
+          1264.0,
+          2001.0,
+          1305.0
+        ]
+      },
+      {
+        "text": "The product and service offerings referenced above will be reported in our SEC filings",
+        "score": 0.98918,
+        "box": [
+          78.0,
+          1344.0,
+          1122.0,
+          1382.0
+        ]
+      }
+    ],
+    "elapsed_seconds": 14.80594469999778,
+    "finished_at": "2026-10-11T08:03:27.939621+00:00",
+    "source_and_config_unchanged": true
+  },
+  "probe_byte_identity": {
+    "original_json_sha256": "ed8771fbc8dcc82b8c6de5cbefc5492ca1f034d81ba92393380c43e504316498",
+    "reconstruction": "json.dumps(configured_probe,ensure_ascii=False,indent=2)+newline; replace actual LF with CRLF; encode UTF-8. Input key order preserved. Reconstructed SHA verified before cleanup.",
+    "line_endings": "CRLF",
+    "hard_timeout_seconds": 60,
+    "successful_elapsed_seconds": 14.80594469999778,
+    "source_config_parameters_changed": false
+  },
+  "first_attempt_failure": {
+    "status": "FAILED_OBSERVER_NOT_PRODUCT",
+    "exit_code": 1,
+    "exception_type": "AttributeError",
+    "exception": "list object has no attribute tolist",
+    "observed_trace": [
+      "<stdin>:52 -> LocalOCRAdapter.transcribe local_ocr.py:377",
+      "rapidocr/main.py:120 -> observed run_ocr_steps",
+      "<stdin>:43 -> det.scores.tolist()",
+      "AttributeError: list object has no attribute tolist"
+    ],
+    "stage_data_saved": false,
+    "fix": "observer-only list/ndarray safe conversion, no product/config/model changes",
+    "root_authorized_retry": "one extra same-page <=60s run; stop on success",
+    "failed_sandbox_temp_check": {
+      "scope": "C:/Users/郑曾波/AppData/Local/Packages/sandbox.*/AC/Temp/w04-slide7-rootcause-*",
+      "matches": 0
+    }
+  },
+  "report_build_failure": {
+    "exception": "initial reconstruction assertion assumed LF; actual Windows write_text probe used CRLF",
+    "product_changes": false,
+    "report_files_written_before_failure": false,
+    "corrected": "explicit exact-byte CRLF reconstruction verified"
+  },
+  "commands_and_fields": {
+    "command": "python -X utf8 -B -",
+    "native_call": "LocalOCRAdapter.transcribe(exact_media,limits=OCRLimits(max_images=1,deadline=started+60))",
+    "observers": "memory-only RapidOCR.run_ocr_steps and filter_by_text_score",
+    "network": "socket connect/create_connection forbidden",
+    "hard_stop": "threading.Timer(60), process exit124 after persisting timeout status",
+    "fields": [
+      "det.boxes/scores",
+      "rec.txts/scores before empty filtering",
+      "prefilter boxes/txts/scores",
+      "postfilter boxes/txts/scores",
+      "normalized line.text/box/confidence",
+      "effective runtime config",
+      "source/media/config hashes"
+    ]
+  },
+  "systemic_fix_plan": [
+    {
+      "id": "OCR-R1",
+      "action": "Expose dropped low-score boxes/scores/stage counts with source/media/config fingerprints in existing OCR quality diagnostics. Keep coverage_complete=false/recall_status=unverified. Do not treat recognized as exhaustive or gibberish as a source fact.",
+      "root": "Backend filtering erases identifiable unreadable regions before CWP can report them."
+    },
+    {
+      "id": "OCR-R2",
+      "action": "For business-critical unreadable regions, design finite local source-owned ROI replay, observe crop geometry and angle classification, preserve configured models unless intentionally testing an explicit alternative. Bind transformations/offsets/config version for replay. Cap retries/time/space.",
+      "root": "Threshold reduction cannot recover gibberish; angle/crop/model internal cause still requires a separate controlled experiment. No company string patch or invented text."
+    },
+    {
+      "id": "OCR-R3",
+      "action": "TDD unit25->22 stage diagnostics; integration whole-image/ROI source byte identity, boxes and quality flags; real single-page checkpoint two business definitions correctly recovered or specifically diagnosed unreadable. Good lines remain usable.",
+      "root": "Nonempty output/schema success/page recognized do not test content recall. No per-step manual permission gate."
+    },
+    {
+      "id": "OCR-R4",
+      "action": "At existing major G2/G4 nodes after repair, trace raw/media->units->selected spans->summary citations->RF real usage. No summary/forecast may cite a definition absent from actual valid source spans.",
+      "root": "Extraction engineering diagnosis is not G2/economic PASS. Do not temporarily block other usable real texts."
+    }
+  ],
+  "limits": [
+    "No product/OCR/config/source metadata/reports/PWF repair implemented.",
+    "No source text manually injected into canonical normalized text, EvidenceSpan or summary.",
+    "Two own local CPU inference attempts total, one observer failure and one success; no further page/model inference.",
+    "14.806 seconds is an observed local probe, not a speedup benchmark.",
+    "CodeGraph canonical index lacked LocalOCRAdapter/enrich_pptx; specifically named current files used after structural lookup, no reindex."
+  ],
+  "cost": {
+    "external_http_calls": 0,
+    "external_model_provider_calls": 0,
+    "paid_calls": 0,
+    "live_tokens": 0,
+    "live_cost_usd": "0",
+    "own_local_cpu_inference_attempts": 2,
+    "successful_attempts": 1,
+    "mother_ledger_change": 0
+  },
+  "inputs": [
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\implementation\\wp02\\handoff.json",
+      "bytes": 10818,
+      "sha256": "b26eb16b39b36a9768e70b0daaf319ecee834f6bb657b9681d14c6e0d7b97326"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\implementation\\wp02\\native_slide7_probe.py",
+      "bytes": 3388,
+      "sha256": "fc3366961cf68318b669fe06cb64111553e596b1cda24f4a96ba03ab709d9fde"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\implementation\\wp02\\native-slide7-replay.json",
+      "bytes": 187581,
+      "sha256": "11ef07c0a2bebe1d131a53e6854761ee293c4a4f0821e176ecf2694e09b35dba"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\implementation\\wp02\\native-slide7-command.json",
+      "bytes": 401,
+      "sha256": "289359015e5dd9f7f412c1e4f7195eaaea91055f1676bdae1bce3b64d22d487f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\config\\local_ocr.json",
+      "bytes": 968,
+      "sha256": "3ef4d36adff892e66115271a15e3e73dd20a530af615e24d80cdb35f4cf20105"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\document_normalization\\__init__.py",
+      "bytes": 7178,
+      "sha256": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\document_normalization\\local_ocr.py",
+      "bytes": 15241,
+      "sha256": "b2086f65cf555e5d753444ec938ee30110f891e9231c72d9ef00bf77e3627679"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\document_normalization\\ocr_composition.py",
+      "bytes": 10446,
+      "sha256": "1711ec26727f668cff2b565128f078cf6680dfea8b5066318de3dde84a363bbd"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\document_normalization\\pptx_parser.py",
+      "bytes": 29898,
+      "sha256": "f04e3111e3567a5b99824588942f97d615b327a9bb494ca92959fa27f7c222a4"
+    },
+    {
+      "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\main.py",
+      "bytes": 15513,
+      "sha256": "5444ef163d03680f44d684c1e7bd225641fd7f0e307f25510d29dab4a45f712c"
+    },
+    {
+      "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\config.yaml",
+      "bytes": 4165,
+      "sha256": "e753d39c0222297f0180e1bdcde1799bc26218f315356763362810846b6afa84"
+    },
+    {
+      "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\ch_ppocr_det\\main.py",
+      "bytes": 3733,
+      "sha256": "a56c0f51fd6a8c03a5abf2f0a5843b382b8f3257d1bfacf8d5ac6305d5e63024"
+    },
+    {
+      "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\ch_ppocr_cls\\main.py",
+      "bytes": 3904,
+      "sha256": "a48b3197d5588f035668f5adfc6d60006fcd851049a840ad03718c57cead2c45"
+    },
+    {
+      "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\utils\\load_image.py",
+      "bytes": 5334,
+      "sha256": "f6de151fdce9fdf6890650dc3f7305455a2cade9bbf7652a30a558ee3fbe3f59"
+    },
+    {
+      "path": "C:\\Miniconda\\Lib\\site-packages\\rapidocr\\utils\\process_img.py",
+      "bytes": 5723,
+      "sha256": "abaf2ed615878f618a372cba6157bc6c41a494e05f6c41bf9f7c5c2ba1ee5772"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\roles\\storage\\scratch\\local_observation.json",
+      "bytes": 617913,
+      "sha256": "a112516933ea344e30cd53119c31c3359b3f199caf4a9ce1db15efc709cba37c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4_FY27 Segments and Investor Metrics.pptx",
+      "bytes": 4016522,
+      "sha256": "c02f4ea1a2719b74d5752559ad7b907d89dd4b47d292424ade8988396fb2dcd4"
+    }
+  ],
+  "cleanup": {
+    "status": "RESTORED_VERIFIED",
+    "owned_temp_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-slide7-rootcause-9ca9534274c1437cb37aa3bab92f0525",
+    "verified_parent": "C:\\Users\\郑曾波\\AppData\\Local\\Temp",
+    "expected_files": [
+      {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-slide7-rootcause-9ca9534274c1437cb37aa3bab92f0525\\original-slide7.png",
+        "bytes": 331246,
+        "sha256": "d4edf0903db8d061555fc3d0a99409f21c9f034fe8e31df59a37ae69de5f31ea"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-slide7-rootcause-9ca9534274c1437cb37aa3bab92f0525\\source-info.json",
+        "bytes": 1098,
+        "sha256": "37a5ce184e651c9ff2e0161522c5692635bfd11b7645225c84b421f39320380d"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04-slide7-rootcause-9ca9534274c1437cb37aa3bab92f0525\\probe.json",
+        "bytes": 38796,
+        "sha256": "ed8771fbc8dcc82b8c6de5cbefc5492ca1f034d81ba92393380c43e504316498"
+      }
+    ],
+    "restore_target": "new directory absent; individual exact-file deletes then empty-dir delete, no recursion",
+    "protected_roots_untouched": [
+      "mFresh-me8cejn4",
+      "mW03-ahg078jp",
+      "w4p1-k4f7_7dv"
+    ],
+    "restored_utc": "2026-10-11T08:10:08.590540+00:00",
+    "final_owned_directory_exists": false,
+    "exact_file_sha_preflight": true,
+    "individual_files_removed": 3,
+    "empty_directory_removed": true,
+    "recursive_delete_used": false,
+    "all_bounded_inputs_sha_unchanged": true,
+    "first_preflight_error": {
+      "exception": "Split-Path -LiteralPath with -Parent parameter set cannot be resolved",
+      "files_deleted_before_error": 0,
+      "fix": "System.IO.Path.GetDirectoryName for parent-only path verification; same exact target/files/SHA"
+    }
+  },
+  "next_owner": "ROOT",
+  "next_action": "Add source-owned diagnostic/recovery seam to PWF; keep other valid text usable; no G2/economic pass is given."
+}
