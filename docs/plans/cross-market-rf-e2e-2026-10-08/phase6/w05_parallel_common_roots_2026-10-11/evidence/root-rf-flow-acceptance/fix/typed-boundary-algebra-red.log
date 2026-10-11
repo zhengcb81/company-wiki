@@ -1,0 +1,109 @@
+["C:\\Miniconda\\python.exe", "-B", "-m", "pytest", "-p", "no:cacheprovider", "-q", "tests/test_w05_root_temporal_lineage.py", "-k", "money_stock_cannot_join or stock_divided or actual_annual_turnover or derived_annual_price"]
+FFFF..                                                                   [100%]
+================================== FAILURES ===================================
+_ test_money_stock_cannot_join_recognized_flow_even_with_real_annual_anchor[0.0] _
+
+flow_value = 0.0
+
+    @pytest.mark.parametrize("flow_value", [0.0, 10.0])
+    def test_money_stock_cannot_join_recognized_flow_even_with_real_annual_anchor(flow_value):
+        data = acquisition_document()
+        typed_assumption(data, "receivable_stock", 20.0, "monetary_balance", "point_in_time")
+        typed_assumption(data, "annual_anchor", flow_value, "revenue")
+        rebind_annual_adjustment(data, "x0+x1", ["receivable_stock", "annual_anchor"], 20.0 + flow_value)
+>       with pytest.raises(ForecastInputError, match="typed flow"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_w05_root_temporal_lineage.py:242: Failed
+_ test_money_stock_cannot_join_recognized_flow_even_with_real_annual_anchor[10.0] _
+
+flow_value = 10.0
+
+    @pytest.mark.parametrize("flow_value", [0.0, 10.0])
+    def test_money_stock_cannot_join_recognized_flow_even_with_real_annual_anchor(flow_value):
+        data = acquisition_document()
+        typed_assumption(data, "receivable_stock", 20.0, "monetary_balance", "point_in_time")
+        typed_assumption(data, "annual_anchor", flow_value, "revenue")
+        rebind_annual_adjustment(data, "x0+x1", ["receivable_stock", "annual_anchor"], 20.0 + flow_value)
+>       with pytest.raises(ForecastInputError, match="typed flow"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_w05_root_temporal_lineage.py:242: Failed
+_____ test_stock_divided_by_flow_then_multiplied_by_that_flow_stays_stock _____
+
+    def test_stock_divided_by_flow_then_multiplied_by_that_flow_stays_stock():
+        data = acquisition_document()
+        typed_assumption(data, "receivable_stock", 20.0, "monetary_balance", "point_in_time")
+        typed_assumption(data, "annual_anchor", 10.0, "revenue")
+        ratio = typed_assumption(data, "stock_to_flow", 2.0, "ratio")
+        ratio.update(kind="derived_fact", formula="x0/x1", input_parameter_ids=["receivable_stock", "annual_anchor"])
+        rebind_annual_adjustment(data, "x0*x1", ["annual_anchor", "stock_to_flow"], 20.0)
+>       with pytest.raises(ForecastInputError, match="typed flow"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_w05_root_temporal_lineage.py:253: Failed
+_ test_actual_annual_turnover_ratio_can_convert_a_money_stock_with_its_flow_ancestry _
+
+    def test_actual_annual_turnover_ratio_can_convert_a_money_stock_with_its_flow_ancestry():
+        data = acquisition_document()
+        typed_assumption(data, "asset_stock", 20.0, "monetary_balance", "point_in_time")
+        typed_assumption(data, "annual_anchor", 10.0, "revenue")
+        ratio = typed_assumption(data, "annual_turnover", 0.5, "ratio")
+        ratio.update(kind="derived_fact", formula="x0/x1", input_parameter_ids=["annual_anchor", "asset_stock"])
+        rebind_annual_adjustment(data, "x0*x1", ["asset_stock", "annual_turnover"], 10.0)
+>       run_forecast(data)
+
+tests\test_w05_root_temporal_lineage.py:264: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\revenue_core.py:446: in run_forecast
+    result = _build_forecast_draft(data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\revenue_core.py:63: in _build_forecast_draft
+    validated = validate_document(data)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+scripts\contracts\document.py:1103: in validate_document
+    parameter_index = validate_parameters(data, source_index)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\contracts\document.py:538: in validate_parameters
+    validate_windowed_composition(
+scripts\contracts\period_flow.py:420: in validate_windowed_composition
+    validate_derived_flow_ancestry(parameter_id, parameter, parameter_index)
+scripts\contracts\period_flow.py:299: in validate_derived_flow_ancestry
+    result = describe(parameter_id, parameter, frozenset())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\contracts\period_flow.py:295: in describe
+    require(duration, f"{identifier}: typed flow requires a flow-bearing amount or dimensionally matching annual price; stock/rate/scalar alone cannot establish recognized revenue")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False
+message = 'cmp_fy2026_low: typed flow requires a flow-bearing amount or dimensionally matching annual price; stock/rate/scalar alone cannot establish recognized revenue'
+
+    def require(condition: Any, message: str) -> None:
+        # Truthiness gate (bool in intent); data-validation callers pass
+        # isinstance()/fullmatch() results, so the parameter is Any.
+        """Raise ``ForecastInputError`` when *condition* is falsy.
+    
+        When a :class:`Collector` is active for the current context (set via
+        :func:`collect_mode`), a falsy *condition* appends to that collector instead
+        of raising, enabling a single collect-all pass. With no collector active the
+        behavior is unchanged (raise on the first violation).
+        """
+        if condition:
+            return
+        collector = _COLLECTOR.get()
+        if collector is not None:
+            collector.add(message)
+        else:
+>           raise ForecastInputError(message)
+E           contracts.evidence.ForecastInputError: cmp_fy2026_low: typed flow requires a flow-bearing amount or dimensionally matching annual price; stock/rate/scalar alone cannot establish recognized revenue
+
+scripts\contracts\evidence.py:98: ForecastInputError
+=========================== short test summary info ===========================
+FAILED tests/test_w05_root_temporal_lineage.py::test_money_stock_cannot_join_recognized_flow_even_with_real_annual_anchor[0.0]
+FAILED tests/test_w05_root_temporal_lineage.py::test_money_stock_cannot_join_recognized_flow_even_with_real_annual_anchor[10.0]
+FAILED tests/test_w05_root_temporal_lineage.py::test_stock_divided_by_flow_then_multiplied_by_that_flow_stays_stock
+FAILED tests/test_w05_root_temporal_lineage.py::test_actual_annual_turnover_ratio_can_convert_a_money_stock_with_its_flow_ancestry
+4 failed, 2 passed, 23 deselected in 0.76s

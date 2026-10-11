@@ -1,0 +1,41 @@
+One post-P1 existing gate and frozen native replay; 0 provider/LLM calls, $0
+{"label": "existing single daily gate", "command": ["C:\\Miniconda\\python.exe", "-B", "tools/pre_push_gate.py"], "exit_code": 0, "seconds": 40.049}
+
+=== ruff ===
+All checks passed!
+
+=== public contract types ===
+Success: no issues found in 11 source files
+
+=== current source and forecast behavior ===
+................................................................... [ 17%]
+................................................. [ 30%]
+........................................................................ [ 50%]
+........................................................................ [ 69%]
+................................................................ [ 86%]
+....................................................                     [100%]
+376 passed, 36 subtests passed in 36.41s
+
+pre-push/CI checks GREEN
+
+{"label": "case1_acquisition native frozen-input replay", "command": ["C:\\Miniconda\\python.exe", "-B", "scripts/revenue_forecast.py", "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\docs\\handoffs\\w05-rf-flow\\e2e\\frozen\\case1_acquisition.input.json", "--output", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\typed-boundary-scratch\\case1_acquisition.forecast.json", "--markdown", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\typed-boundary-scratch\\case1_acquisition.forecast.md"], "exit_code": 0, "seconds": 0.384}
+
+{"label": "case1_acquisition strong reader/rehashed date reject", "command": ["C:\\Miniconda\\python.exe", "-B", "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\typed-boundary-scratch\\case1_acquisition.forecast.json", "window"], "exit_code": 0, "seconds": 0.334}
+reader: PASS schema=3.10 engine=4.3.0 windows=[('cmp_post_2026', '2026-05-31', '2026-06-30', 1.29190208), ('cmp_h2_2026_low', '2026-07-01', '2026-12-31', 30.0), ('cmp_fy2026_low', '2026-01-01', '2026-12-31', 31.29190208), ('cmp_fy2027_low', '2027-01-01', '2027-12-31', 200.0), ('cmp_h2_2026_base', '2026-07-01', '2026-12-31', 40.0), ('cmp_fy2026_base', '2026-01-01', '2026-12-31', 41.29190208), ('cmp_fy2027_base', '2027-01-01', '2027-12-31', 300.0), ('cmp_h2_2026_high', '2026-07-01', '2026-12-31', 50.0), ('cmp_fy2026_high', '2026-01-01', '2026-12-31', 51.29190208), ('cmp_fy2027_high', '2027-01-01', '2027-12-31', 400.0)]
+tamper: cmp_post_2026 period_end -> 2026-12-31 (rehashed)
+tamper rejected: parameter_trace must match the validated input parameters
+
+{"label": "case2_offset_fy native frozen-input replay", "command": ["C:\\Miniconda\\python.exe", "-B", "scripts/revenue_forecast.py", "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\docs\\handoffs\\w05-rf-flow\\e2e\\frozen\\case2_offset_fy.input.json", "--output", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\typed-boundary-scratch\\case2_offset_fy.forecast.json", "--markdown", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\typed-boundary-scratch\\case2_offset_fy.forecast.md"], "exit_code": 0, "seconds": 0.329}
+
+{"label": "case2_offset_fy strong reader/rehashed date reject", "command": ["C:\\Miniconda\\python.exe", "-B", "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\typed-boundary-scratch\\case2_offset_fy.forecast.json", "window"], "exit_code": 0, "seconds": 0.278}
+reader: PASS schema=3.10 engine=4.3.0 windows=[('fy26_a', '2025-07-01', '2025-12-31', 7.0), ('fy26_b', '2026-01-01', '2026-05-31', 10.0), ('fy26_c', '2026-06-01', '2026-06-30', 3.0), ('fy26_ten_day', '2026-06-01', '2026-06-10', 1.0), ('fy26_total', '2025-07-01', '2026-06-30', 20.0)]
+tamper: fy26_a period_end -> 2026-12-31 (rehashed)
+tamper rejected: parameter_trace must match the validated input parameters
+
+{"label": "C1 strong reader/rehashed currency reject", "command": ["C:\\Miniconda\\python.exe", "-B", "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\typed-boundary-scratch\\case1_acquisition.forecast.json", "currency"], "exit_code": 0, "seconds": 0.273}
+reader: PASS schema=3.10 engine=4.3.0 windows=[('cmp_post_2026', '2026-05-31', '2026-06-30', 1.29190208), ('cmp_h2_2026_low', '2026-07-01', '2026-12-31', 30.0), ('cmp_fy2026_low', '2026-01-01', '2026-12-31', 31.29190208), ('cmp_fy2027_low', '2027-01-01', '2027-12-31', 200.0), ('cmp_h2_2026_base', '2026-07-01', '2026-12-31', 40.0), ('cmp_fy2026_base', '2026-01-01', '2026-12-31', 41.29190208), ('cmp_fy2027_base', '2027-01-01', '2027-12-31', 300.0), ('cmp_h2_2026_high', '2026-07-01', '2026-12-31', 50.0), ('cmp_fy2026_high', '2026-01-01', '2026-12-31', 51.29190208), ('cmp_fy2027_high', '2027-01-01', '2027-12-31', 400.0)]
+tamper: currency -> USD (rehashed)
+tamper rejected: forecast output currency does not match the bound input
+
+{"label": "native frozen C1 snapshot replay", "command": ["C:\\Miniconda\\python.exe", "-B", "scripts/revenue_backtest.py", "create", "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\docs\\handoffs\\w05-rf-flow\\e2e\\frozen\\case1_acquisition.input.json", "--version", "w05-root-cny-v1", "--output", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\typed-boundary-scratch\\case1_acquisition.snapshot.json"], "exit_code": 0, "seconds": 0.422}
+

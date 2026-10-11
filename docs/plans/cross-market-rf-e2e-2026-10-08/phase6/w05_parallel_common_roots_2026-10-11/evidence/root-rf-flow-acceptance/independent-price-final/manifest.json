@@ -1,0 +1,33 @@
+{
+  "schema_version": "w05-independent-price-final-manifest/1",
+  "verdict": "PASS_WITH_SCOPE",
+  "file_count": 5,
+  "total_bytes": 69900,
+  "files": [
+    {
+      "path": "final-review.json",
+      "bytes": 1512,
+      "sha256": "c8aad56e9ac03afdde47ef9f284e398d6e63d36c3d73410251b116f73c634457"
+    },
+    {
+      "path": "final-review.md",
+      "bytes": 6915,
+      "sha256": "f7b70bf1c885eb54b37c0d52e31b08420755b2f686fc538dd6cbb3495245f4a6"
+    },
+    {
+      "path": "native-cli.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "probes.py",
+      "bytes": 17175,
+      "sha256": "19c27b80fcc57fb317b3346a3cdb8c27789fa03164ef8be04b05b3ce42672552"
+    },
+    {
+      "path": "results.json",
+      "bytes": 44298,
+      "sha256": "b9d116d82f62beb5ff95754ccb91e94a6d5c38ac9c3d4a4bfd3acedc48132a38"
+    }
+  ]
+}

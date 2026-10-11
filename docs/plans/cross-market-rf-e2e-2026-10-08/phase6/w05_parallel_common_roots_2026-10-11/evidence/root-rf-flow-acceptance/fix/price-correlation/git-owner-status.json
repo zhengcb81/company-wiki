@@ -1,0 +1,23 @@
+[
+  {
+    "label": "ROOT",
+    "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root",
+    "head": "1b616622763ece6549676f2a74f596e6c65244af",
+    "branch": "codex/root-w05-rf-flow-20261011",
+    "status": "A  .planning/w05-rf-flow/design.md\nA  .planning/w05-rf-flow/findings.md\nA  .planning/w05-rf-flow/progress.md\nA  .planning/w05-rf-flow/task_plan.md\nMM CHANGELOG.md\nMM SKILL.md\n M compatibility/compatibility_manifest.py\n M compatibility/contract_registry.py\nAM docs/handoffs/w05-rf-flow/e2e/build_inputs.py\nA  docs/handoffs/w05-rf-flow/e2e/make_handoff.py\nAM docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py\nA  docs/handoffs/w05-rf-flow/handoff.json\nA  docs/handoffs/w05-rf-flow/handoff.md\nA  docs/handoffs/w05-rf-flow/input/construction_card.md\nA  docs/handoffs/w05-rf-flow/input/control-window-findings.json\nA  docs/handoffs/w05-rf-flow/input/g4-authoring-review.json\nA  docs/handoffs/w05-rf-flow/input/handoff_contract.md\nA  docs/handoffs/w05-rf-flow/input/inputs.json\nA  docs/handoffs/w05-rf-flow/input/interface-verification.json\nA  docs/handoffs/w05-rf-flow/input/manifest.json\nA  docs/handoffs/w05-rf-flow/input/w04_research_authoring_card.md\nA  docs/handoffs/w05-rf-flow/logs/phaseA_red.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseB_centralized.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseB_final_consolidated.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseB_regression_all.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_artifact_hashes.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_build_inputs.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_case1_cli.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_case1_reader_tamper.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_case2_cli.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_scratch_final.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_scratch_initial.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_snapshot_report.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_template.txt\nA  docs/handoffs/w05-rf-flow/manifest.json\nAM references/dated-contribution.md\nMM references/input-construction.md\nM  references/input-schema.md\nM  references/output-schema.md\nMM scripts/contracts/annual_consumption.py\nM  scripts/contracts/constants.py\nMM scripts/contracts/document.py\nMM scripts/contracts/period_flow.py\n M scripts/forecast/segments.py\nMM scripts/generate_input_template.py\nM  scripts/research/drivers.py\nM  scripts/revenue_core.py\nM  scripts/revenue_report.py\nM  scripts/schema_compatibility.py\n M tests/test_compatibility_manifest.py\n M tests/test_contract_registry.py\nM  tests/test_data_contract.py\nM  tests/test_m3_period_flow_contract.py\nM  tests/test_m3_schema_compatibility.py\nM  tests/test_schema_compatibility.py\nAM tests/test_w05_dated_contribution_composition.py\nAM tests/test_w05_dated_contribution_contract.py\nA  tests/test_w05_dated_contribution_output.py\n M tools/pre_push_gate.py\n?? docs/handoffs/w05-rf-flow/ROOT-reception.md\n?? docs/handoffs/w05-rf-flow/e2e/frozen/\n?? scripts/contracts/recognition.py\n?? tests/test_w05_root_temporal_lineage.py"
+  },
+  {
+    "label": "original_worker",
+    "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow",
+    "head": "f1a782a478d255b9b4b8f531e7a3961134e257ba",
+    "branch": "codex/w05-rf-flow",
+    "status": ""
+  },
+  {
+    "label": "canonical_RF",
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+    "head": "1b616622763ece6549676f2a74f596e6c65244af",
+    "branch": "main",
+    "status": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? output/"
+  }
+]

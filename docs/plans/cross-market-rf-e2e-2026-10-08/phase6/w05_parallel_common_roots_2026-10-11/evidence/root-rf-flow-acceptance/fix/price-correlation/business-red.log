@@ -1,0 +1,40 @@
+FFFFFF.......                                                            [100%]
+================================== FAILURES ===================================
+_ test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-inline] _
+tests\test_w05_root_temporal_lineage.py:315: in test_price_cancellation_cannot_change_original_stock_or_flow_time
+    with pytest.raises(ForecastInputError, match="typed flow"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ForecastInputError
+_ test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-derived_ratio] _
+tests\test_w05_root_temporal_lineage.py:315: in test_price_cancellation_cannot_change_original_stock_or_flow_time
+    with pytest.raises(ForecastInputError, match="typed flow"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ForecastInputError
+_ test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-distinct_prices] _
+tests\test_w05_root_temporal_lineage.py:315: in test_price_cancellation_cannot_change_original_stock_or_flow_time
+    with pytest.raises(ForecastInputError, match="typed flow"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ForecastInputError
+_ test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-nested_alias] _
+tests\test_w05_root_temporal_lineage.py:315: in test_price_cancellation_cannot_change_original_stock_or_flow_time
+    with pytest.raises(ForecastInputError, match="typed flow"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ForecastInputError
+_ test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-equivalent_expression] _
+tests\test_w05_root_temporal_lineage.py:315: in test_price_cancellation_cannot_change_original_stock_or_flow_time
+    with pytest.raises(ForecastInputError, match="typed flow"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ForecastInputError
+_ test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-scaled_cancel] _
+tests\test_w05_root_temporal_lineage.py:315: in test_price_cancellation_cannot_change_original_stock_or_flow_time
+    with pytest.raises(ForecastInputError, match="typed flow"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ForecastInputError
+=========================== short test summary info ===========================
+FAILED tests/test_w05_root_temporal_lineage.py::test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-inline]
+FAILED tests/test_w05_root_temporal_lineage.py::test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-derived_ratio]
+FAILED tests/test_w05_root_temporal_lineage.py::test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-distinct_prices]
+FAILED tests/test_w05_root_temporal_lineage.py::test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-nested_alias]
+FAILED tests/test_w05_root_temporal_lineage.py::test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-equivalent_expression]
+FAILED tests/test_w05_root_temporal_lineage.py::test_price_cancellation_cannot_change_original_stock_or_flow_time[monetary_balance-point_in_time-reject-scaled_cancel]
+6 failed, 7 passed, 29 deselected in 1.00s

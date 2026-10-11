@@ -1,0 +1,204 @@
+{
+  "schema": "w05-root-fix-product-inventory/1",
+  "base": "1b616622763ece6549676f2a74f596e6c65244af",
+  "original_delivery": "f1a782a478d255b9b4b8f531e7a3961134e257ba",
+  "tracked_modified_after_delivery": [
+    "CHANGELOG.md",
+    "SKILL.md",
+    "compatibility/compatibility_manifest.py",
+    "compatibility/contract_registry.py",
+    "docs/handoffs/w05-rf-flow/e2e/build_inputs.py",
+    "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py",
+    "references/dated-contribution.md",
+    "references/input-construction.md",
+    "scripts/contracts/document.py",
+    "scripts/contracts/period_flow.py",
+    "scripts/forecast/segments.py",
+    "scripts/generate_input_template.py",
+    "tests/test_compatibility_manifest.py",
+    "tests/test_contract_registry.py",
+    "tests/test_w05_dated_contribution_composition.py",
+    "tests/test_w05_dated_contribution_contract.py",
+    "tools/pre_push_gate.py"
+  ],
+  "new_files": [
+    "docs/handoffs/w05-rf-flow/ROOT-reception.md",
+    "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.forecast.json",
+    "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.forecast.md",
+    "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.input.json",
+    "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.snapshot.json",
+    "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.forecast.json",
+    "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.forecast.md",
+    "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.input.json",
+    "docs/handoffs/w05-rf-flow/e2e/frozen/manifest.json",
+    "docs/handoffs/w05-rf-flow/e2e/frozen/template-3.10.json",
+    "scripts/contracts/recognition.py",
+    "tests/test_w05_root_temporal_lineage.py"
+  ],
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 31327,
+      "sha256": "9e17fe2b219127e9c393534d99f9e3c99dc3159c3e1d9cd36d51db39fa48c76d"
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 36484,
+      "sha256": "78344866179a784f1b7495deb7352932e9c57fa0385c33f1deeaeb61b1f1f227"
+    },
+    {
+      "path": "compatibility/compatibility_manifest.py",
+      "bytes": 9585,
+      "sha256": "48c605f6c606e43c50cd55a8915f08ee73eff5679c597a9d4d733710f1096215"
+    },
+    {
+      "path": "compatibility/contract_registry.py",
+      "bytes": 5513,
+      "sha256": "982ee13dcb92b30da4c820c79854c36059b009927e1fcccafe1110474f34d61c"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/ROOT-reception.md",
+      "bytes": 6573,
+      "sha256": "e47e2f01313e50b2d374510768bde4f7d276e392fc476bd67b739ff08cf323e8"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/build_inputs.py",
+      "bytes": 5765,
+      "sha256": "acd6a4504e1ef6ee3c2bff86175b34ec62fe3f1515bb8a4c4b8b0fc4b9eeb21e"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.forecast.json",
+      "bytes": 112015,
+      "sha256": "290a1c3eec1940003b331504bcde79c3bdfd5068370d2ae35d464c7cfd3eac1e"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.forecast.md",
+      "bytes": 13864,
+      "sha256": "2db6a60bfb693831a61d4a514a77c0ef8950761f6edd53973cd7b03d605e70e3"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.input.json",
+      "bytes": 47763,
+      "sha256": "f7a1733d8b70609cf07a24652b8a45bf27fabb551e70d9dc10ad3570b4faee8c"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.snapshot.json",
+      "bytes": 119003,
+      "sha256": "b6eacd637ff6ff9c58ece13cf2ebb0a5bfe34922a1efe9fb18868a140025f87a"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.forecast.json",
+      "bytes": 106931,
+      "sha256": "8a404ef221f496cab2184bb8c00c664138837f4ad0b16d0f2bc057fc6fdcd47e"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.forecast.md",
+      "bytes": 13358,
+      "sha256": "b187917834c968ce6e5b31cd30a20705e804e3c60bb510016a398dccad961214"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.input.json",
+      "bytes": 45675,
+      "sha256": "be195610564be3c2c6a76a72bb95c8c15570f85867ea98410510ccb5caf9aa7c"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/manifest.json",
+      "bytes": 2162,
+      "sha256": "c205db53c35dea316f105c81b782341dc8278d0eb4a9e39f47a8628fa9cddfe8"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/template-3.10.json",
+      "bytes": 22033,
+      "sha256": "d556b9fdc754f51a60c7c58382f7e442a074ba28c5001fe8b179ed8fdbda374f"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py",
+      "bytes": 2438,
+      "sha256": "5964f57dd195d53d21b8de26a221484bc9a4da9538f403bdc1950158c4bfb177"
+    },
+    {
+      "path": "references/dated-contribution.md",
+      "bytes": 7234,
+      "sha256": "a956751caa32b96e2e83517b35bd56aad1e66d3e4e1948b21699b46d0bce3b4b"
+    },
+    {
+      "path": "references/input-construction.md",
+      "bytes": 15946,
+      "sha256": "9667c77f120a1d0d492cf9ece3310a3822f7a7312fb747fb7df18513c93770d4"
+    },
+    {
+      "path": "scripts/contracts/document.py",
+      "bytes": 53333,
+      "sha256": "55332d53947bae59321e6fa7f553ad20cd39376a34142284992ddb82814c0405"
+    },
+    {
+      "path": "scripts/contracts/period_flow.py",
+      "bytes": 18186,
+      "sha256": "31ac27d37180c4a08f801745efe399ffc1281adad89b145f677fa5e94622841e"
+    },
+    {
+      "path": "scripts/contracts/recognition.py",
+      "bytes": 4665,
+      "sha256": "9e83d5396c575a898930bd89cb6f7e46c52659195a17fb255f1463a28073550f"
+    },
+    {
+      "path": "scripts/forecast/segments.py",
+      "bytes": 26043,
+      "sha256": "6ada6cf125f59f975e0315859035c548033b1d5b5bc9f21a875eee850ee21104"
+    },
+    {
+      "path": "scripts/generate_input_template.py",
+      "bytes": 16376,
+      "sha256": "82a0389dcbdd8a4dfc5f198521c37db6bd1f48da3447dd70918aa9f2d354e796"
+    },
+    {
+      "path": "tests/test_compatibility_manifest.py",
+      "bytes": 8655,
+      "sha256": "be98cfdd5b9aba2b1b396e249829ca7dd83082d48469183c36564fbd04c8eb0a"
+    },
+    {
+      "path": "tests/test_contract_registry.py",
+      "bytes": 4855,
+      "sha256": "12b6efe1f4254e4c1c3840f042553f735bea440fe0d9070b3a6cc6801d072d0a"
+    },
+    {
+      "path": "tests/test_w05_dated_contribution_composition.py",
+      "bytes": 17543,
+      "sha256": "3d3b8d79adf835d5ca25c22efd6c95a48053b9c59ecd970c518384b666d1366a"
+    },
+    {
+      "path": "tests/test_w05_dated_contribution_contract.py",
+      "bytes": 12001,
+      "sha256": "07bb93eccf399554efa009285a81f67776ee01826dffe9280e8c8073abc0ae86"
+    },
+    {
+      "path": "tests/test_w05_root_temporal_lineage.py",
+      "bytes": 6712,
+      "sha256": "d0812231cb3cff8e7a5eba340a8a72bdb350aea2e047ab780531f8ff95bf83ea"
+    },
+    {
+      "path": "tools/pre_push_gate.py",
+      "bytes": 4766,
+      "sha256": "25e429d51c9bc3bdbdf6e60d0e169ace4f78a0a4060c59e6c9f82669eceb3246"
+    }
+  ],
+  "file_count": 29,
+  "total_bytes": 776804,
+  "status": {
+    "root_branch": "codex/root-w05-rf-flow-20261011",
+    "root_head": "1b616622763ece6549676f2a74f596e6c65244af",
+    "merge_head": "f1a782a478d255b9b4b8f531e7a3961134e257ba",
+    "root_status": "A  .planning/w05-rf-flow/design.md\nA  .planning/w05-rf-flow/findings.md\nA  .planning/w05-rf-flow/progress.md\nA  .planning/w05-rf-flow/task_plan.md\nMM CHANGELOG.md\nMM SKILL.md\n M compatibility/compatibility_manifest.py\n M compatibility/contract_registry.py\nAM docs/handoffs/w05-rf-flow/e2e/build_inputs.py\nA  docs/handoffs/w05-rf-flow/e2e/make_handoff.py\nAM docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py\nA  docs/handoffs/w05-rf-flow/handoff.json\nA  docs/handoffs/w05-rf-flow/handoff.md\nA  docs/handoffs/w05-rf-flow/input/construction_card.md\nA  docs/handoffs/w05-rf-flow/input/control-window-findings.json\nA  docs/handoffs/w05-rf-flow/input/g4-authoring-review.json\nA  docs/handoffs/w05-rf-flow/input/handoff_contract.md\nA  docs/handoffs/w05-rf-flow/input/inputs.json\nA  docs/handoffs/w05-rf-flow/input/interface-verification.json\nA  docs/handoffs/w05-rf-flow/input/manifest.json\nA  docs/handoffs/w05-rf-flow/input/w04_research_authoring_card.md\nA  docs/handoffs/w05-rf-flow/logs/phaseA_red.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseB_centralized.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseB_final_consolidated.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseB_regression_all.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_artifact_hashes.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_build_inputs.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_case1_cli.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_case1_reader_tamper.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_case2_cli.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_scratch_final.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_scratch_initial.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_snapshot_report.txt\nA  docs/handoffs/w05-rf-flow/logs/phaseC_template.txt\nA  docs/handoffs/w05-rf-flow/manifest.json\nAM references/dated-contribution.md\nMM references/input-construction.md\nM  references/input-schema.md\nM  references/output-schema.md\nM  scripts/contracts/annual_consumption.py\nM  scripts/contracts/constants.py\nMM scripts/contracts/document.py\nMM scripts/contracts/period_flow.py\n M scripts/forecast/segments.py\nMM scripts/generate_input_template.py\nM  scripts/research/drivers.py\nM  scripts/revenue_core.py\nM  scripts/revenue_report.py\nM  scripts/schema_compatibility.py\n M tests/test_compatibility_manifest.py\n M tests/test_contract_registry.py\nM  tests/test_data_contract.py\nM  tests/test_m3_period_flow_contract.py\nM  tests/test_m3_schema_compatibility.py\nM  tests/test_schema_compatibility.py\nAM tests/test_w05_dated_contribution_composition.py\nAM tests/test_w05_dated_contribution_contract.py\nA  tests/test_w05_dated_contribution_output.py\n M tools/pre_push_gate.py\n?? docs/handoffs/w05-rf-flow/ROOT-reception.md\n?? docs/handoffs/w05-rf-flow/e2e/frozen/\n?? scripts/contracts/recognition.py\n?? tests/test_w05_root_temporal_lineage.py",
+    "original_worker_head": "f1a782a478d255b9b4b8f531e7a3961134e257ba",
+    "original_worker_status": "",
+    "canonical_head": "1b616622763ece6549676f2a74f596e6c65244af",
+    "canonical_status": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? output/",
+    "scratch_absent": true,
+    "template_scratch_absent": true,
+    "no_commit_push_install": true,
+    "provider_calls": 0,
+    "llm_calls": 0,
+    "fees_usd": 0
+  },
+  "scope": "ROOT changes relative to original delivery; original staged worker delivery remains in pending merge"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "FAIL",
+  "commands": [
+    {
+      "label": "existing shared daily gate",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "tools/pre_push_gate.py"
+      ],
+      "exit_code": 1,
+      "seconds": 62.238
+    }
+  ],
+  "initial": {
+    "scratch_exists": false,
+    "frozen_exists": false
+  },
+  "owned_scratch_files_before_cleanup": [],
+  "scratch_exists_after": false,
+  "original_scratch_state_restored": true,
+  "product_frozen_exists_after": false,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0
+}

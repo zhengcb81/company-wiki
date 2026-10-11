@@ -1,0 +1,12 @@
+One post-P1 existing gate and frozen native replay; 0 provider/LLM calls, $0
+{"label": "existing single daily gate", "command": ["C:\\Miniconda\\python.exe", "-B", "tools/pre_push_gate.py"], "exit_code": 1, "seconds": 5.713}
+
+=== ruff ===
+All checks passed!
+
+=== public contract types ===
+scripts\contracts\period_flow.py:240: error: Invalid index type "Any | None" for "dict[str, dict[str, float]]"; expected type "str"  [index]
+Found 1 error in 1 file (checked 11 source files)
+
+FAILED: public contract types
+

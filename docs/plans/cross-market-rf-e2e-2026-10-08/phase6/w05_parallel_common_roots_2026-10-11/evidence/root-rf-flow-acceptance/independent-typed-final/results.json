@@ -1,0 +1,971 @@
+{
+  "schema_version": "w05-independent-typed-final/1",
+  "before": [
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 31619,
+      "sha256": "fbbd6c455c59f13d668af6cd420325dcf9cd79d766ca28acd07447fb18c84975",
+      "matches": true
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 36692,
+      "sha256": "eb858796e99c52939af588927129f3dced98a28367bf3614b8eeab170fde3707",
+      "matches": true
+    },
+    {
+      "path": "compatibility/compatibility_manifest.py",
+      "bytes": 9585,
+      "sha256": "48c605f6c606e43c50cd55a8915f08ee73eff5679c597a9d4d733710f1096215",
+      "matches": true
+    },
+    {
+      "path": "compatibility/contract_registry.py",
+      "bytes": 5513,
+      "sha256": "982ee13dcb92b30da4c820c79854c36059b009927e1fcccafe1110474f34d61c",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/ROOT-reception.md",
+      "bytes": 10342,
+      "sha256": "ca0f7acafd7889a7e56842ce1a6def05ec7b0cbc747e50922330a48f830bb9f4",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/build_inputs.py",
+      "bytes": 5765,
+      "sha256": "acd6a4504e1ef6ee3c2bff86175b34ec62fe3f1515bb8a4c4b8b0fc4b9eeb21e",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.forecast.json",
+      "bytes": 112015,
+      "sha256": "290a1c3eec1940003b331504bcde79c3bdfd5068370d2ae35d464c7cfd3eac1e",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.forecast.md",
+      "bytes": 13864,
+      "sha256": "2db6a60bfb693831a61d4a514a77c0ef8950761f6edd53973cd7b03d605e70e3",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.input.json",
+      "bytes": 47763,
+      "sha256": "f7a1733d8b70609cf07a24652b8a45bf27fabb551e70d9dc10ad3570b4faee8c",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.snapshot.json",
+      "bytes": 119003,
+      "sha256": "b6eacd637ff6ff9c58ece13cf2ebb0a5bfe34922a1efe9fb18868a140025f87a",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.forecast.json",
+      "bytes": 106931,
+      "sha256": "8a404ef221f496cab2184bb8c00c664138837f4ad0b16d0f2bc057fc6fdcd47e",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.forecast.md",
+      "bytes": 13358,
+      "sha256": "b187917834c968ce6e5b31cd30a20705e804e3c60bb510016a398dccad961214",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.input.json",
+      "bytes": 45675,
+      "sha256": "be195610564be3c2c6a76a72bb95c8c15570f85867ea98410510ccb5caf9aa7c",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/manifest.json",
+      "bytes": 2162,
+      "sha256": "c205db53c35dea316f105c81b782341dc8278d0eb4a9e39f47a8628fa9cddfe8",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/template-3.10.json",
+      "bytes": 22033,
+      "sha256": "d556b9fdc754f51a60c7c58382f7e442a074ba28c5001fe8b179ed8fdbda374f",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py",
+      "bytes": 2438,
+      "sha256": "5964f57dd195d53d21b8de26a221484bc9a4da9538f403bdc1950158c4bfb177",
+      "matches": true
+    },
+    {
+      "path": "references/dated-contribution.md",
+      "bytes": 9404,
+      "sha256": "126f4aa2c3ef5203f77adbabe166e01006e04f21486455bf536acec4d413b33a",
+      "matches": true
+    },
+    {
+      "path": "references/input-construction.md",
+      "bytes": 16165,
+      "sha256": "52f0b6ecb56ed9c1949550514db517bafae549e1b84be76050eee0d185de4402",
+      "matches": true
+    },
+    {
+      "path": "scripts/contracts/annual_consumption.py",
+      "bytes": 7673,
+      "sha256": "939bc3941bdb8d05d0d76ec2497eb6d2a4dbcd953323ecb35d2b883b6303f6a6",
+      "matches": true
+    },
+    {
+      "path": "scripts/contracts/document.py",
+      "bytes": 53333,
+      "sha256": "55332d53947bae59321e6fa7f553ad20cd39376a34142284992ddb82814c0405",
+      "matches": true
+    },
+    {
+      "path": "scripts/contracts/period_flow.py",
+      "bytes": 26039,
+      "sha256": "f5de747178cf8df70fd14c241706fa28666cc7ad50cb6231f062918cf1999353",
+      "matches": true
+    },
+    {
+      "path": "scripts/contracts/recognition.py",
+      "bytes": 4665,
+      "sha256": "9e83d5396c575a898930bd89cb6f7e46c52659195a17fb255f1463a28073550f",
+      "matches": true
+    },
+    {
+      "path": "scripts/forecast/segments.py",
+      "bytes": 26043,
+      "sha256": "6ada6cf125f59f975e0315859035c548033b1d5b5bc9f21a875eee850ee21104",
+      "matches": true
+    },
+    {
+      "path": "scripts/generate_input_template.py",
+      "bytes": 16376,
+      "sha256": "82a0389dcbdd8a4dfc5f198521c37db6bd1f48da3447dd70918aa9f2d354e796",
+      "matches": true
+    },
+    {
+      "path": "tests/test_compatibility_manifest.py",
+      "bytes": 8655,
+      "sha256": "be98cfdd5b9aba2b1b396e249829ca7dd83082d48469183c36564fbd04c8eb0a",
+      "matches": true
+    },
+    {
+      "path": "tests/test_contract_registry.py",
+      "bytes": 4855,
+      "sha256": "12b6efe1f4254e4c1c3840f042553f735bea440fe0d9070b3a6cc6801d072d0a",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w05_dated_contribution_composition.py",
+      "bytes": 17543,
+      "sha256": "3d3b8d79adf835d5ca25c22efd6c95a48053b9c59ecd970c518384b666d1366a",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w05_dated_contribution_contract.py",
+      "bytes": 12001,
+      "sha256": "07bb93eccf399554efa009285a81f67776ee01826dffe9280e8c8073abc0ae86",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w05_root_temporal_lineage.py",
+      "bytes": 15385,
+      "sha256": "97f64089e12f13a137a5b4308b2ea222b08b15689643b5208b6837f2f8a49643",
+      "matches": true
+    },
+    {
+      "path": "tools/pre_push_gate.py",
+      "bytes": 4766,
+      "sha256": "25e429d51c9bc3bdbdf6e60d0e169ace4f78a0a4060c59e6c9f82669eceb3246",
+      "matches": true
+    }
+  ],
+  "after": [
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 31619,
+      "sha256": "fbbd6c455c59f13d668af6cd420325dcf9cd79d766ca28acd07447fb18c84975",
+      "matches": true
+    },
+    {
+      "path": "SKILL.md",
+      "bytes": 36692,
+      "sha256": "eb858796e99c52939af588927129f3dced98a28367bf3614b8eeab170fde3707",
+      "matches": true
+    },
+    {
+      "path": "compatibility/compatibility_manifest.py",
+      "bytes": 9585,
+      "sha256": "48c605f6c606e43c50cd55a8915f08ee73eff5679c597a9d4d733710f1096215",
+      "matches": true
+    },
+    {
+      "path": "compatibility/contract_registry.py",
+      "bytes": 5513,
+      "sha256": "982ee13dcb92b30da4c820c79854c36059b009927e1fcccafe1110474f34d61c",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/ROOT-reception.md",
+      "bytes": 10342,
+      "sha256": "ca0f7acafd7889a7e56842ce1a6def05ec7b0cbc747e50922330a48f830bb9f4",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/build_inputs.py",
+      "bytes": 5765,
+      "sha256": "acd6a4504e1ef6ee3c2bff86175b34ec62fe3f1515bb8a4c4b8b0fc4b9eeb21e",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.forecast.json",
+      "bytes": 112015,
+      "sha256": "290a1c3eec1940003b331504bcde79c3bdfd5068370d2ae35d464c7cfd3eac1e",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.forecast.md",
+      "bytes": 13864,
+      "sha256": "2db6a60bfb693831a61d4a514a77c0ef8950761f6edd53973cd7b03d605e70e3",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.input.json",
+      "bytes": 47763,
+      "sha256": "f7a1733d8b70609cf07a24652b8a45bf27fabb551e70d9dc10ad3570b4faee8c",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.snapshot.json",
+      "bytes": 119003,
+      "sha256": "b6eacd637ff6ff9c58ece13cf2ebb0a5bfe34922a1efe9fb18868a140025f87a",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.forecast.json",
+      "bytes": 106931,
+      "sha256": "8a404ef221f496cab2184bb8c00c664138837f4ad0b16d0f2bc057fc6fdcd47e",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.forecast.md",
+      "bytes": 13358,
+      "sha256": "b187917834c968ce6e5b31cd30a20705e804e3c60bb510016a398dccad961214",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.input.json",
+      "bytes": 45675,
+      "sha256": "be195610564be3c2c6a76a72bb95c8c15570f85867ea98410510ccb5caf9aa7c",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/manifest.json",
+      "bytes": 2162,
+      "sha256": "c205db53c35dea316f105c81b782341dc8278d0eb4a9e39f47a8628fa9cddfe8",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/template-3.10.json",
+      "bytes": 22033,
+      "sha256": "d556b9fdc754f51a60c7c58382f7e442a074ba28c5001fe8b179ed8fdbda374f",
+      "matches": true
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py",
+      "bytes": 2438,
+      "sha256": "5964f57dd195d53d21b8de26a221484bc9a4da9538f403bdc1950158c4bfb177",
+      "matches": true
+    },
+    {
+      "path": "references/dated-contribution.md",
+      "bytes": 9404,
+      "sha256": "126f4aa2c3ef5203f77adbabe166e01006e04f21486455bf536acec4d413b33a",
+      "matches": true
+    },
+    {
+      "path": "references/input-construction.md",
+      "bytes": 16165,
+      "sha256": "52f0b6ecb56ed9c1949550514db517bafae549e1b84be76050eee0d185de4402",
+      "matches": true
+    },
+    {
+      "path": "scripts/contracts/annual_consumption.py",
+      "bytes": 7673,
+      "sha256": "939bc3941bdb8d05d0d76ec2497eb6d2a4dbcd953323ecb35d2b883b6303f6a6",
+      "matches": true
+    },
+    {
+      "path": "scripts/contracts/document.py",
+      "bytes": 53333,
+      "sha256": "55332d53947bae59321e6fa7f553ad20cd39376a34142284992ddb82814c0405",
+      "matches": true
+    },
+    {
+      "path": "scripts/contracts/period_flow.py",
+      "bytes": 26039,
+      "sha256": "f5de747178cf8df70fd14c241706fa28666cc7ad50cb6231f062918cf1999353",
+      "matches": true
+    },
+    {
+      "path": "scripts/contracts/recognition.py",
+      "bytes": 4665,
+      "sha256": "9e83d5396c575a898930bd89cb6f7e46c52659195a17fb255f1463a28073550f",
+      "matches": true
+    },
+    {
+      "path": "scripts/forecast/segments.py",
+      "bytes": 26043,
+      "sha256": "6ada6cf125f59f975e0315859035c548033b1d5b5bc9f21a875eee850ee21104",
+      "matches": true
+    },
+    {
+      "path": "scripts/generate_input_template.py",
+      "bytes": 16376,
+      "sha256": "82a0389dcbdd8a4dfc5f198521c37db6bd1f48da3447dd70918aa9f2d354e796",
+      "matches": true
+    },
+    {
+      "path": "tests/test_compatibility_manifest.py",
+      "bytes": 8655,
+      "sha256": "be98cfdd5b9aba2b1b396e249829ca7dd83082d48469183c36564fbd04c8eb0a",
+      "matches": true
+    },
+    {
+      "path": "tests/test_contract_registry.py",
+      "bytes": 4855,
+      "sha256": "12b6efe1f4254e4c1c3840f042553f735bea440fe0d9070b3a6cc6801d072d0a",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w05_dated_contribution_composition.py",
+      "bytes": 17543,
+      "sha256": "3d3b8d79adf835d5ca25c22efd6c95a48053b9c59ecd970c518384b666d1366a",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w05_dated_contribution_contract.py",
+      "bytes": 12001,
+      "sha256": "07bb93eccf399554efa009285a81f67776ee01826dffe9280e8c8073abc0ae86",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w05_root_temporal_lineage.py",
+      "bytes": 15385,
+      "sha256": "97f64089e12f13a137a5b4308b2ea222b08b15689643b5208b6837f2f8a49643",
+      "matches": true
+    },
+    {
+      "path": "tools/pre_push_gate.py",
+      "bytes": 4766,
+      "sha256": "25e429d51c9bc3bdbdf6e60d0e169ace4f78a0a4060c59e6c9f82669eceb3246",
+      "matches": true
+    }
+  ],
+  "frozen_unchanged": true,
+  "original_fail_unchanged": true,
+  "original_fail_sha256": "3a928ad0dd22a4b4b9daa1a6628e4ce0694a7ea241264e5c05a95cebc245709a",
+  "cases": [
+    {
+      "name": "valid_post_control_bridge",
+      "group": "unchanged_original",
+      "expected": "accept",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "52d917e56e71e22c913ad37aa388509d6891202d8afcab20194830a065ad33e2",
+      "fy2026_low": 181.29190208
+    },
+    {
+      "name": "annual_alias_of_partial_flow",
+      "group": "unchanged_original",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: full-year dated composition has unexplained gaps; missing flows cannot be zero-filled",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: full-year dated composition has unexplained gaps; missing flows cannot be zero-filled",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "eee510ecaaf1b6d9bcf93f251a82821b9ecbd7ffa3e849f2d9920f53370db18a"
+    },
+    {
+      "name": "rationale_cannot_move_2026_amount_to_2027",
+      "group": "unchanged_original",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: dated composition input cmp_post_2026 window 2026-05-31..2026-06-30 lies outside the composed window 2027-01-01..2027-12-31",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: dated composition input cmp_post_2026 window 2026-05-31..2026-06-30 lies outside the composed window 2027-01-01..2027-12-31",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "b8240e1bd798b8111804512c605149ab896627628418df6fbf023b8a10dbe5f2"
+    },
+    {
+      "name": "same_perimeter_h1_plus_own_q2",
+      "group": "unchanged_original",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: dated composition double counts the same economic flow in overlapping inputs same_revenue_h1 and same_revenue_q2",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: dated composition double counts the same economic flow in overlapping inputs same_revenue_h1 and same_revenue_q2",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "5db510b70d77df4926afee077a889a598788f06608d49b3d31c08095193cc6b4"
+    },
+    {
+      "name": "negative_disposal_window_flow",
+      "group": "unchanged_original",
+      "expected": "accept",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "8f1780825698fb6bc15fd3b2152369d6545a7ce4b4b4f165fe51b8090f9ad672",
+      "fy2026_low": 149.6870809792
+    },
+    {
+      "name": "independent_point_stock_cannot_be_annual_revenue_alias",
+      "group": "unchanged_original",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "ce8e852b75f4c425df222d98faac9ab1d0d55d11b9174cd77dbdd0ab361cc51c"
+    },
+    {
+      "name": "independent_point_stock_cannot_be_dated_revenue_alias",
+      "group": "unchanged_original",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "659f360acd9633661f6399f8d73f5546290482c38ae7e5ee08f26d88e463dfb9"
+    },
+    {
+      "name": "independent_zero_weight_does_not_fill_fy",
+      "group": "unchanged_original",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: full-year dated composition has unexplained gaps; missing flows cannot be zero-filled",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: full-year dated composition has unexplained gaps; missing flows cannot be zero-filled",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "2a6214061089ca2e578a69761e4b753616962e54633e4858c13914ad5d331065"
+    },
+    {
+      "name": "rate_only",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow formula dimension does not match declared revenue; relabeling cannot change original units",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow formula dimension does not match declared revenue; relabeling cannot change original units",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "a5e6f13d37d16e326c23852d1c3b73e0a6a98b91348faa1b7d230af0d29bb979"
+    },
+    {
+      "name": "quantity_only",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow formula dimension does not match declared revenue; relabeling cannot change original units",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow formula dimension does not match declared revenue; relabeling cannot change original units",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "f11f55b46609961ed48bbd68a7430f6e3872a8dcc492eb9438c8e4d82e3e1c17"
+    },
+    {
+      "name": "stock_plus_flow",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow cannot add/subtract stocks and period amounts; use the explicit native stock-flow model",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow cannot add/subtract stocks and period amounts; use the explicit native stock-flow model",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "d33fe0e0c54cfe965b067129adf86456d54973e74ead028e21064e1c9f1773cf"
+    },
+    {
+      "name": "nested_stock",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "60c600acd7930fdab570dbc9105d79a4a683d119c8f7345b102d8b01265f1eba"
+    },
+    {
+      "name": "flow_cancelled_to_stock",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "4c9159beca1c33749bb44f91eaff051341c33bc6de709716290aff6790a527b7"
+    },
+    {
+      "name": "stock_price_alias",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "a695ebf27ca83c6d7b74836ef910a56145b2181b58c21c0c5037e699e872879f"
+    },
+    {
+      "name": "zero_weight_price",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "reject",
+          "error_type": "ForecastInputError",
+          "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "7e7a2b99aced02058f684b9c8ca5cec89b33a42ba780b8e058022fe5e430a48c"
+    },
+    {
+      "name": "same_price_cancels_inline",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": false
+        }
+      ],
+      "pass": false,
+      "input_sha256": "362f14029d0e8137c9a0e0c9177cd15a98e8b121178f16b5d547954c37491d43",
+      "fy2026_low": 170.0
+    },
+    {
+      "name": "same_price_cancels_derived",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": false
+        }
+      ],
+      "pass": false,
+      "input_sha256": "f59799dbe179dc535531c497791282231467d653a31345ef7ed1202e3982f6ba",
+      "fy2026_low": 170.0
+    },
+    {
+      "name": "distinct_equal_prices_cancel",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": false
+        }
+      ],
+      "pass": false,
+      "input_sha256": "78cdffb247ec56e22b68a31fe7667833c175294ac50afdf5ced3a00835ee1c56",
+      "fy2026_low": 170.0
+    },
+    {
+      "name": "arpu",
+      "group": "independent",
+      "expected": "accept",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "7325702a5a4dedb93078a58e32e084caecff1bc7193f74fc8c4380318060d9fe",
+      "fy2026_low": 170.0
+    },
+    {
+      "name": "derived_arpu",
+      "group": "independent",
+      "expected": "accept",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "183ff67ea2e845e0f246fd673f1224e4df78fac36b494750824111df47a7cd14",
+      "fy2026_low": 160.0
+    },
+    {
+      "name": "turnover",
+      "group": "independent",
+      "expected": "accept",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": true
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "input_sha256": "70541db0f42b6568f75406daddf6fea4ae688488988aa3ed36f375c0e45e0df5",
+      "fy2026_low": 160.0
+    },
+    {
+      "name": "native_subscription",
+      "expected": "accept",
+      "pass": true,
+      "unchanged_consolidated_numbers": true
+    },
+    {
+      "name": "native_asset_management",
+      "expected": "accept",
+      "pass": true,
+      "unchanged_consolidated_numbers": true
+    },
+    {
+      "name": "native_bank_revenue",
+      "expected": "accept",
+      "pass": true,
+      "unchanged_consolidated_numbers": true
+    }
+  ],
+  "exact_rehashed_strong_readers": [
+    {
+      "boundary": "validate_forecast_output",
+      "pass": true,
+      "actual": "reject",
+      "error": "cmp_fy2026_base: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+      "error_type": "ForecastInputError"
+    },
+    {
+      "boundary": "validate_published_forecast",
+      "pass": true,
+      "actual": "reject",
+      "error": "cmp_fy2026_base: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+      "error_type": "ForecastInputError"
+    }
+  ],
+  "native_cli": [
+    {
+      "exit_code": 0,
+      "network_denied": true,
+      "synthetic_input": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\docs\\handoffs\\w05-rf-flow\\e2e\\frozen\\case1_acquisition.input.json"
+    },
+    {
+      "artifact": "forecast.json",
+      "identical_frozen_bytes": true,
+      "sha256": "290a1c3eec1940003b331504bcde79c3bdfd5068370d2ae35d464c7cfd3eac1e"
+    },
+    {
+      "artifact": "forecast.md",
+      "identical_frozen_bytes": true,
+      "sha256": "2db6a60bfb693831a61d4a514a77c0ef8950761f6edd53973cd7b03d605e70e3"
+    }
+  ],
+  "seconds": 1.188,
+  "scratch_initial_exists": false,
+  "scratch_final_exists": false,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "network_attempts": [],
+  "fees_usd": 0,
+  "raw_writes": 0,
+  "product_writes": 0
+}

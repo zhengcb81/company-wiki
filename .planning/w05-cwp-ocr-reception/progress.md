@@ -1,3 +1,9 @@
+## ROOT 完成 — 正常主线并入、远端与 CI 已确认 — 2026-10-11
+
+A/B/C/D均完成。正常ROOT merge commit c7fb1b81，master merge ae0ca0d3，已发布8862372f；精确远端SHA相同，现有push3257PASS/224.81秒，GitHub CI38140484490同SHA success。冻结publication.json记录全部范围与实际验收；旧pending勾选/失败记录仅作历史，不再作为待办执行。
+
+原件/config未改；无provider/LLM费用。后续W06测试工具或W04候选修复不重开本卡、不重复整套OCR或3257全集；新的受影响变更按当前现有测试映射检查。
+
 ## ROOT 最终资源与真实回放通过 — 2026-10-11
 
 OCR source/resource 大节点已通过：预分配7真实RED→54集中PASS/3.78秒、15旧输出/坐标/原错误完全一致；非作者34纯几何/预算探针PASS/0.383秒。真实初次处理+新进程locator回开总83.006秒，阶段37.706/44.104秒，原85/90上限不变；22旧行EXACT、两定义置信度.98912/.99044及locators同旧PASS，5原件/配置SHA与4产品SHA前后相同，scratch恢复absent，0调用/费用。原85秒native FAIL、旧独审FAIL、预分配7RED全部保留。

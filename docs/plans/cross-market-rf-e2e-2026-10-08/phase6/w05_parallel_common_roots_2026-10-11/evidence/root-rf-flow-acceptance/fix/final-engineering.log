@@ -1,0 +1,59 @@
+ROOT final engineering node; 0 provider/LLM calls, 0 fees
+{"label": "existing shared daily gate", "command": ["C:\\Miniconda\\python.exe", "-B", "tools/pre_push_gate.py"], "exit_code": 0, "seconds": 38.043}
+
+=== ruff ===
+All checks passed!
+
+=== public contract types ===
+Success: no issues found in 11 source files
+
+=== current source and forecast behavior ===
+................................................................... [ 18%]
+................................................. [ 32%]
+........................................................................ [ 52%]
+................................................................ [ 70%]
+........................................................................ [ 91%]
+................................                                         [100%]
+356 passed, 36 subtests passed in 33.20s
+
+pre-push/CI checks GREEN
+
+{"label": "portable legacy compatibility and 3.9 field semantics", "command": ["C:\\Miniconda\\python.exe", "-B", "-m", "pytest", "-p", "no:cacheprovider", "-q", "--basetemp", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\compat-pytest", "tests/test_contract_registry.py", "tests/test_compatibility_manifest.py", "tests/test_m3_period_flow_contract.py", "tests/test_m3_schema_compatibility.py"], "exit_code": 0, "seconds": 6.651}
+....................................................              [100%]
+52 passed, 7 subtests passed in 3.90s
+
+{"label": "native fixture generator", "command": ["C:\\Miniconda\\python.exe", "-B", "docs/handoffs/w05-rf-flow/e2e/build_inputs.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch"], "exit_code": 0, "seconds": 0.339}
+wrote C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w05_parallel_common_roots_2026-10-11\evidence\root-rf-flow-acceptance\fix\e2e-scratch\case1_acquisition.input.json sha256=f7a1733d8b70609cf07a24652b8a45bf27fabb551e70d9dc10ad3570b4faee8c
+wrote C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w05_parallel_common_roots_2026-10-11\evidence\root-rf-flow-acceptance\fix\e2e-scratch\case2_offset_fy.input.json sha256=be195610564be3c2c6a76a72bb95c8c15570f85867ea98410510ccb5caf9aa7c
+
+{"label": "schema3.10 native template generation", "command": ["C:\\Miniconda\\python.exe", "-B", "scripts/generate_input_template.py", "--name", "FixtureCo Template (synthetic)", "--base-year", "2025", "--forecast-years", "2026", "2027", "--segments", "Segment A", "--schema", "3.10", "--currency", "CNY", "--output", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\template-3.10.json"], "exit_code": 0, "seconds": 0.23}
+
+{"label": "case1_acquisition native validation", "command": ["C:\\Miniconda\\python.exe", "-B", "scripts/revenue_forecast.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.input.json", "--validate-only", "--verbose"], "exit_code": 0, "seconds": 0.27}
+valid
+
+{"label": "case1_acquisition forecast/report", "command": ["C:\\Miniconda\\python.exe", "-B", "scripts/revenue_forecast.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.input.json", "--output", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.forecast.json", "--markdown", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.forecast.md"], "exit_code": 0, "seconds": 0.32}
+
+{"label": "case1_acquisition native strong reader/rehashed window", "command": ["C:\\Miniconda\\python.exe", "-B", "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.forecast.json", "window"], "exit_code": 0, "seconds": 0.28}
+reader: PASS schema=3.10 engine=4.3.0 windows=[('cmp_post_2026', '2026-05-31', '2026-06-30', 1.29190208), ('cmp_h2_2026_low', '2026-07-01', '2026-12-31', 30.0), ('cmp_fy2026_low', '2026-01-01', '2026-12-31', 31.29190208), ('cmp_fy2027_low', '2027-01-01', '2027-12-31', 200.0), ('cmp_h2_2026_base', '2026-07-01', '2026-12-31', 40.0), ('cmp_fy2026_base', '2026-01-01', '2026-12-31', 41.29190208), ('cmp_fy2027_base', '2027-01-01', '2027-12-31', 300.0), ('cmp_h2_2026_high', '2026-07-01', '2026-12-31', 50.0), ('cmp_fy2026_high', '2026-01-01', '2026-12-31', 51.29190208), ('cmp_fy2027_high', '2027-01-01', '2027-12-31', 400.0)]
+tamper: cmp_post_2026 period_end -> 2026-12-31 (rehashed)
+tamper rejected: parameter_trace must match the validated input parameters
+
+{"label": "case1_acquisition native strong reader/rehashed currency", "command": ["C:\\Miniconda\\python.exe", "-B", "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.forecast.json", "currency"], "exit_code": 0, "seconds": 0.249}
+reader: PASS schema=3.10 engine=4.3.0 windows=[('cmp_post_2026', '2026-05-31', '2026-06-30', 1.29190208), ('cmp_h2_2026_low', '2026-07-01', '2026-12-31', 30.0), ('cmp_fy2026_low', '2026-01-01', '2026-12-31', 31.29190208), ('cmp_fy2027_low', '2027-01-01', '2027-12-31', 200.0), ('cmp_h2_2026_base', '2026-07-01', '2026-12-31', 40.0), ('cmp_fy2026_base', '2026-01-01', '2026-12-31', 41.29190208), ('cmp_fy2027_base', '2027-01-01', '2027-12-31', 300.0), ('cmp_h2_2026_high', '2026-07-01', '2026-12-31', 50.0), ('cmp_fy2026_high', '2026-01-01', '2026-12-31', 51.29190208), ('cmp_fy2027_high', '2027-01-01', '2027-12-31', 400.0)]
+tamper: currency -> USD (rehashed)
+tamper rejected: forecast output currency does not match the bound input
+
+{"label": "case2_offset_fy native validation", "command": ["C:\\Miniconda\\python.exe", "-B", "scripts/revenue_forecast.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case2_offset_fy.input.json", "--validate-only", "--verbose"], "exit_code": 0, "seconds": 0.259}
+valid
+
+{"label": "case2_offset_fy forecast/report", "command": ["C:\\Miniconda\\python.exe", "-B", "scripts/revenue_forecast.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case2_offset_fy.input.json", "--output", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case2_offset_fy.forecast.json", "--markdown", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case2_offset_fy.forecast.md"], "exit_code": 0, "seconds": 0.324}
+
+{"label": "case2_offset_fy native strong reader/rehashed window", "command": ["C:\\Miniconda\\python.exe", "-B", "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case2_offset_fy.forecast.json", "window"], "exit_code": 0, "seconds": 0.32}
+reader: PASS schema=3.10 engine=4.3.0 windows=[('fy26_a', '2025-07-01', '2025-12-31', 7.0), ('fy26_b', '2026-01-01', '2026-05-31', 10.0), ('fy26_c', '2026-06-01', '2026-06-30', 3.0), ('fy26_ten_day', '2026-06-01', '2026-06-10', 1.0), ('fy26_total', '2025-07-01', '2026-06-30', 20.0)]
+tamper: fy26_a period_end -> 2026-12-31 (rehashed)
+tamper rejected: parameter_trace must match the validated input parameters
+
+{"label": "native immutable snapshot creation", "command": ["C:\\Miniconda\\python.exe", "-B", "scripts/revenue_backtest.py", "create", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.input.json", "--version", "w05-root-cny-v1", "--output", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.snapshot.json"], "exit_code": 0, "seconds": 0.335}
+
+{"label": "full forecast determinism second native CLI", "command": ["C:\\Miniconda\\python.exe", "-B", "scripts/revenue_forecast.py", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.input.json", "--output", "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\repeat.forecast.json"], "exit_code": 0, "seconds": 0.305}
+

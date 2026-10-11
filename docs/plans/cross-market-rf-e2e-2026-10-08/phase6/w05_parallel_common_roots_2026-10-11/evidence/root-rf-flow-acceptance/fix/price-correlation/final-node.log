@@ -1,0 +1,40 @@
+existing single daily gate
+
+=== ruff ===
+All checks passed!
+
+=== public contract types ===
+Success: no issues found in 11 source files
+
+=== current source and forecast behavior ===
+................................................................... [ 17%]
+................................................. [ 29%]
+........................................................................ [ 48%]
+........................................................................ [ 66%]
+................................................................ [ 83%]
+..................................................................       [100%]
+390 passed, 36 subtests passed in 42.00s
+
+pre-push/CI checks GREEN
+
+case1_acquisition native CLI
+
+case1_acquisition strong readers and date tamper
+reader: PASS schema=3.10 engine=4.3.0 windows=[('cmp_post_2026', '2026-05-31', '2026-06-30', 1.29190208), ('cmp_h2_2026_low', '2026-07-01', '2026-12-31', 30.0), ('cmp_fy2026_low', '2026-01-01', '2026-12-31', 31.29190208), ('cmp_fy2027_low', '2027-01-01', '2027-12-31', 200.0), ('cmp_h2_2026_base', '2026-07-01', '2026-12-31', 40.0), ('cmp_fy2026_base', '2026-01-01', '2026-12-31', 41.29190208), ('cmp_fy2027_base', '2027-01-01', '2027-12-31', 300.0), ('cmp_h2_2026_high', '2026-07-01', '2026-12-31', 50.0), ('cmp_fy2026_high', '2026-01-01', '2026-12-31', 51.29190208), ('cmp_fy2027_high', '2027-01-01', '2027-12-31', 400.0)]
+tamper: cmp_post_2026 period_end -> 2026-12-31 (rehashed)
+tamper rejected: parameter_trace must match the validated input parameters
+
+case2_offset_fy native CLI
+
+case2_offset_fy strong readers and date tamper
+reader: PASS schema=3.10 engine=4.3.0 windows=[('fy26_a', '2025-07-01', '2025-12-31', 7.0), ('fy26_b', '2026-01-01', '2026-05-31', 10.0), ('fy26_c', '2026-06-01', '2026-06-30', 3.0), ('fy26_ten_day', '2026-06-01', '2026-06-10', 1.0), ('fy26_total', '2025-07-01', '2026-06-30', 20.0)]
+tamper: fy26_a period_end -> 2026-12-31 (rehashed)
+tamper rejected: parameter_trace must match the validated input parameters
+
+C1 currency tamper
+reader: PASS schema=3.10 engine=4.3.0 windows=[('cmp_post_2026', '2026-05-31', '2026-06-30', 1.29190208), ('cmp_h2_2026_low', '2026-07-01', '2026-12-31', 30.0), ('cmp_fy2026_low', '2026-01-01', '2026-12-31', 31.29190208), ('cmp_fy2027_low', '2027-01-01', '2027-12-31', 200.0), ('cmp_h2_2026_base', '2026-07-01', '2026-12-31', 40.0), ('cmp_fy2026_base', '2026-01-01', '2026-12-31', 41.29190208), ('cmp_fy2027_base', '2027-01-01', '2027-12-31', 300.0), ('cmp_h2_2026_high', '2026-07-01', '2026-12-31', 50.0), ('cmp_fy2026_high', '2026-01-01', '2026-12-31', 51.29190208), ('cmp_fy2027_high', '2027-01-01', '2027-12-31', 400.0)]
+tamper: currency -> USD (rehashed)
+tamper rejected: forecast output currency does not match the bound input
+
+C1 snapshot
+

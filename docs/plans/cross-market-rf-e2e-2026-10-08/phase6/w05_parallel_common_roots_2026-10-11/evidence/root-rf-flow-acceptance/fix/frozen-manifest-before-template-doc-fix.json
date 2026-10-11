@@ -1,0 +1,52 @@
+{
+  "schema": "w05-root-frozen-e2e/1",
+  "artifacts": [
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.input.json",
+      "bytes": 47763,
+      "sha256": "f7a1733d8b70609cf07a24652b8a45bf27fabb551e70d9dc10ad3570b4faee8c"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.forecast.json",
+      "bytes": 112015,
+      "sha256": "290a1c3eec1940003b331504bcde79c3bdfd5068370d2ae35d464c7cfd3eac1e"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.forecast.md",
+      "bytes": 13864,
+      "sha256": "2db6a60bfb693831a61d4a514a77c0ef8950761f6edd53973cd7b03d605e70e3"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case1_acquisition.snapshot.json",
+      "bytes": 119003,
+      "sha256": "b6eacd637ff6ff9c58ece13cf2ebb0a5bfe34922a1efe9fb18868a140025f87a"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.input.json",
+      "bytes": 45675,
+      "sha256": "be195610564be3c2c6a76a72bb95c8c15570f85867ea98410510ccb5caf9aa7c"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.forecast.json",
+      "bytes": 106931,
+      "sha256": "8a404ef221f496cab2184bb8c00c664138837f4ad0b16d0f2bc057fc6fdcd47e"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/case2_offset_fy.forecast.md",
+      "bytes": 13358,
+      "sha256": "b187917834c968ce6e5b31cd30a20705e804e3c60bb510016a398dccad961214"
+    },
+    {
+      "path": "docs/handoffs/w05-rf-flow/e2e/frozen/template-3.10.json",
+      "bytes": 21887,
+      "sha256": "46c33ad26f94d71b5832b491be047a69640ad647105f303fbdbf268b029b58b8"
+    }
+  ],
+  "total_bytes": 480496,
+  "raw_originals_copied": 0,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0,
+  "generator": "docs/handoffs/w05-rf-flow/e2e/build_inputs.py",
+  "scope": "synthetic offline engineering, C1 sealed value/window retained in CNY; not economic acceptance"
+}

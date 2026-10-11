@@ -1,0 +1,17 @@
+{
+  "schema_version": "root-owned-checkout-cleanup/1",
+  "status": "removed_clean_checkout",
+  "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/cwp-ocr-root",
+  "absolute_target_scope": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/",
+  "git_status_before": "clean",
+  "accepted_commit": "c7fb1b814e6d03a2f39d2092ab668448bca7e24d",
+  "ancestor_of_published_head": "8862372f714209cff1b218d77b5c4b8af6bc74dc",
+  "accepted_files_before_cleanup": 11,
+  "accepted_root_sha_matched": true,
+  "canonical_LF_bytes_equal": true,
+  "method": "normal git worktree remove, without force",
+  "branch_and_git_history_preserved": true,
+  "original_worker_and_source_documents_untouched": true,
+  "backup_restore_rehearsal": false,
+  "note": "First guard attempt rejected a doubled trailing separator before any removal; corrected absolute-prefix guard then succeeded. No business test failed."
+}

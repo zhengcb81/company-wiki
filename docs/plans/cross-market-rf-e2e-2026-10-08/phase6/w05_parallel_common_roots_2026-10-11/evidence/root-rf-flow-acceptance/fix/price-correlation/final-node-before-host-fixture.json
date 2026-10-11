@@ -1,0 +1,24 @@
+{
+  "status": "FAIL",
+  "commands": [
+    {
+      "label": "existing single daily gate",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "tools/pre_push_gate.py"
+      ],
+      "exit_code": 1,
+      "seconds": 19.36,
+      "network_denied": false
+    }
+  ],
+  "frozen_comparisons": [],
+  "scratch_initial_exists": false,
+  "files_before_cleanup": [],
+  "scratch_final_exists": false,
+  "scratch_restored": true,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0
+}

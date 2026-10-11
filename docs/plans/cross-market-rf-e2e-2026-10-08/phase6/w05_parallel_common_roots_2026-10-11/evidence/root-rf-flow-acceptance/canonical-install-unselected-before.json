@@ -1,0 +1,2094 @@
+{
+  "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast": {
+    ".gitignore": [
+      1840,
+      1790975968519310100
+    ],
+    "agents/openai.yaml": [
+      331,
+      1784062460034237200
+    ],
+    "config/company_wiki.json": [
+      1443,
+      1791225761075910800
+    ],
+    "config/filing_fetch.json": [
+      94,
+      1791225761078085900
+    ],
+    "output/coreweave_forecast.json": [
+      81853,
+      1784990293892160900
+    ],
+    "output/coreweave_forecast.md": [
+      16633,
+      1784990293896152100
+    ],
+    "output/coreweave_forecast_5yr.json": [
+      139037,
+      1784991161653314800
+    ],
+    "output/coreweave_forecast_5yr.md": [
+      26818,
+      1784991161656035700
+    ],
+    "output/coreweave_input.json": [
+      63262,
+      1784990287295728300
+    ],
+    "output/coreweave_input_5yr.json": [
+      115678,
+      1784991154232209100
+    ],
+    "output/microsoft_us_forecast.json": [
+      33871,
+      1784665155965094000
+    ],
+    "output/microsoft_us_forecast.md": [
+      8621,
+      1784665155965094000
+    ],
+    "output/tencent_hk_forecast.json": [
+      33785,
+      1784665155959332700
+    ],
+    "output/tencent_hk_forecast.md": [
+      8561,
+      1784665155959332700
+    ],
+    "output/zijin_backtest_snapshot.json": [
+      121816,
+      1784977061192473100
+    ],
+    "output/zijin_backtest_v3.json": [
+      318238,
+      1784978424058026300
+    ],
+    "output/zijin_forecast.json": [
+      55942,
+      1784972762310126400
+    ],
+    "output/zijin_forecast.md": [
+      15278,
+      1784972762313082700
+    ],
+    "output/zijin_forecast_v2.json": [
+      66075,
+      1784976980597278600
+    ],
+    "output/zijin_forecast_v2.md": [
+      17544,
+      1784976980602276900
+    ],
+    "output/zijin_forecast_v3.json": [
+      162161,
+      1784978245541477500
+    ],
+    "output/zijin_forecast_v3.md": [
+      23692,
+      1784978245547986000
+    ],
+    "output/zijin_forecast_v4.json": [
+      156323,
+      1784980908575831800
+    ],
+    "output/zijin_forecast_v4.md": [
+      29560,
+      1784980908575831800
+    ],
+    "output/zijin_input.json": [
+      39844,
+      1784972736932829100
+    ],
+    "output/zijin_input_v2.json": [
+      49112,
+      1784976949771211200
+    ],
+    "output/zijin_input_v3.json": [
+      139472,
+      1784978192695565200
+    ],
+    "output/zijin_input_v4.json": [
+      123342,
+      1784980872022076200
+    ],
+    "references/accounting-boundaries.md": [
+      2570,
+      1791225761126294400
+    ],
+    "references/backtesting.md": [
+      10191,
+      1791225761126294400
+    ],
+    "references/buy-side-methodology.md": [
+      12669,
+      1791519908604876800
+    ],
+    "references/compliance-contract.md": [
+      7697,
+      1786185848098177300
+    ],
+    "references/data-governance.md": [
+      7020,
+      1791573626126542500
+    ],
+    "references/economic-support-diagnostics.md": [
+      3880,
+      1791675771791503100
+    ],
+    "references/evidence-role-calibration.md": [
+      12765,
+      1791675771793511300
+    ],
+    "references/extended-models.md": [
+      16741,
+      1791396621761626400
+    ],
+    "references/growth-driver-tree.md": [
+      7337,
+      1791225761126294400
+    ],
+    "references/industry-lifecycle-routing.md": [
+      10202,
+      1791225761126294400
+    ],
+    "references/m3-period-evidence.md": [
+      5045,
+      1791663746950487100
+    ],
+    "references/management-targets.md": [
+      7776,
+      1791225761142884600
+    ],
+    "references/model-library.md": [
+      14308,
+      1791396621761626400
+    ],
+    "references/research-coverage.md": [
+      33066,
+      1791705266640879800
+    ],
+    "references/resource-business-guidance.md": [
+      6263,
+      1791225761147883500
+    ],
+    "references/schema-migration-3.4-to-3.5.md": [
+      2927,
+      1786183445228738900
+    ],
+    "references/schema-migration-3.5-to-3.6.md": [
+      2177,
+      1791225761149879500
+    ],
+    "references/schema-migration-3.6-to-3.7.md": [
+      2149,
+      1791396621761626400
+    ],
+    "references/target-measurement-comparison.md": [
+      5537,
+      1791519908432876200
+    ],
+    "scripts/asset_ownership.py": [
+      10622,
+      1791225761161541200
+    ],
+    "scripts/commercial_terms.py": [
+      4795,
+      1791225761161541200
+    ],
+    "scripts/company_wiki_narrative_contracts.py": [
+      41228,
+      1791700476755090300
+    ],
+    "scripts/company_wiki_narrative_posix.py": [
+      2824,
+      1791225761161541200
+    ],
+    "scripts/company_wiki_narrative_process.py": [
+      8500,
+      1791225761174198400
+    ],
+    "scripts/company_wiki_narrative_reader.py": [
+      3382,
+      1791700476768503000
+    ],
+    "scripts/company_wiki_narrative_tree.py": [
+      6960,
+      1791225761179222800
+    ],
+    "scripts/company_wiki_source.py": [
+      20953,
+      1791524769102428100
+    ],
+    "scripts/company_wiki_source_reader_v2.py": [
+      17186,
+      1791566378273689300
+    ],
+    "scripts/company_wiki_source_v2.py": [
+      16571,
+      1791573625954817000
+    ],
+    "scripts/confidence_policy.py": [
+      7843,
+      1791225761186211200
+    ],
+    "scripts/filing_fetch_client.py": [
+      19426,
+      1791700476773078400
+    ],
+    "scripts/filing_upstream_cause.py": [
+      16962,
+      1791700476786048100
+    ],
+    "scripts/fix_hashes.py": [
+      8484,
+      1791225761194830200
+    ],
+    "scripts/internal_flow.py": [
+      4841,
+      1791225761194830200
+    ],
+    "scripts/lint_input.py": [
+      21589,
+      1791225761194830200
+    ],
+    "scripts/mine_year_operation.py": [
+      4670,
+      1791225761194830200
+    ],
+    "scripts/mixed_recognition.py": [
+      4034,
+      1791225761194830200
+    ],
+    "scripts/model_extensions.py": [
+      16009,
+      1791225761194830200
+    ],
+    "scripts/model_registry.py": [
+      30116,
+      1791225761194830200
+    ],
+    "scripts/narrative_source_preparation.py": [
+      2400,
+      1791225761209886400
+    ],
+    "scripts/processed_artifact_canary.py": [
+      4639,
+      1791225761210891600
+    ],
+    "scripts/processing_demand.py": [
+      8231,
+      1791225761212176600
+    ],
+    "scripts/publication_registry.py": [
+      10936,
+      1791446141395204500
+    ],
+    "scripts/reconciliation.py": [
+      4224,
+      1791225761215166800
+    ],
+    "scripts/research_support_diagnostics.py": [
+      6708,
+      1791675771798604800
+    ],
+    "scripts/revenue_backtest.py": [
+      30110,
+      1791700476806313000
+    ],
+    "scripts/revenue_constraints.py": [
+      15064,
+      1791225761222171300
+    ],
+    "scripts/revenue_forecast.py": [
+      5324,
+      1791396621761626400
+    ],
+    "scripts/revenue_publication.py": [
+      24917,
+      1791225761227209600
+    ],
+    "scripts/rolling_backtest.py": [
+      8900,
+      1791225761229199400
+    ],
+    "scripts/schema_fields.py": [
+      1526,
+      1791225761231200000
+    ],
+    "scripts/schema_optin.py": [
+      2263,
+      1791225761232019800
+    ],
+    "scripts/source_narrative_context.py": [
+      8074,
+      1791700476830208600
+    ],
+    "scripts/source_period_semantics.py": [
+      423,
+      1791519908490014900
+    ],
+    "scripts/source_preparation.py": [
+      26650,
+      1791700476835551800
+    ],
+    "scripts/trust_anchor.py": [
+      1634,
+      1791225761234032800
+    ],
+    "scripts/__init__.py": [
+      35,
+      1791225761158863900
+    ],
+    "tests/conftest.py": [
+      498,
+      1791225761250054800
+    ],
+    "tests/golden_behavior_hashes.json": [
+      408,
+      1791225761285210100
+    ],
+    "tests/test_attestation.py": [
+      9688,
+      1791225761287204600
+    ],
+    "tests/test_backtest.py": [
+      17665,
+      1791225761288209200
+    ],
+    "tests/test_bundle_artifact_selection.py": [
+      9089,
+      1791225761289206100
+    ],
+    "tests/test_bundle_e2e_d01.py": [
+      17948,
+      1791225761290209100
+    ],
+    "tests/test_buy_side_accuracy.py": [
+      7270,
+      1791225761291957800
+    ],
+    "tests/test_ca201_pr_fanout_ownership.py": [
+      8401,
+      1791225761293035500
+    ],
+    "tests/test_ca202_daily_t2_runner.py": [
+      10700,
+      1791225761294044000
+    ],
+    "tests/test_ca203_weekly_t3.py": [
+      12081,
+      1791225761295036700
+    ],
+    "tests/test_ca204_monthly_generalization.py": [
+      9872,
+      1791225761296051900
+    ],
+    "tests/test_ca205_atomic_report.py": [
+      12396,
+      1791225761297047100
+    ],
+    "tests/test_ca206_soak_window.py": [
+      12676,
+      1791225761298048500
+    ],
+    "tests/test_ca301_clean_checkout.py": [
+      11331,
+      1791225761300044600
+    ],
+    "tests/test_ca302_three_journeys.py": [
+      10225,
+      1791225761302061100
+    ],
+    "tests/test_ca303_arch_quality.py": [
+      7592,
+      1791369779278960100
+    ],
+    "tests/test_ca304_r9_removal.py": [
+      11936,
+      1791225761303569600
+    ],
+    "tests/test_ca305_six_problems.py": [
+      9569,
+      1791225761303569600
+    ],
+    "tests/test_ca306_terminal_closure.py": [
+      9211,
+      1791225761303569600
+    ],
+    "tests/test_company_wiki_narrative_process.py": [
+      8277,
+      1791225761309097600
+    ],
+    "tests/test_company_wiki_narrative_reader.py": [
+      10050,
+      1791349295864340900
+    ],
+    "tests/test_company_wiki_source.py": [
+      4934,
+      1791225761313721400
+    ],
+    "tests/test_company_wiki_source_reader_v2.py": [
+      6848,
+      1791225761315725600
+    ],
+    "tests/test_company_wiki_source_ref_v2.py": [
+      2042,
+      1791225761318723300
+    ],
+    "tests/test_company_wiki_source_v2.py": [
+      6923,
+      1791225761322716100
+    ],
+    "tests/test_compatibility_manifest.py": [
+      6563,
+      1791225761323727700
+    ],
+    "tests/test_contract_registry.py": [
+      4243,
+      1791225761324716600
+    ],
+    "tests/test_critical_mutation_gate.py": [
+      2715,
+      1791225761326721800
+    ],
+    "tests/test_cross_repo_chain_e2e.py": [
+      7632,
+      1791225761329723300
+    ],
+    "tests/test_data_contract.py": [
+      31723,
+      1791225761330751000
+    ],
+    "tests/test_dropbox_full_chain_fc505.py": [
+      11706,
+      1791225761331722200
+    ],
+    "tests/test_fc1001_isolated_lake.py": [
+      14223,
+      1791225761332721600
+    ],
+    "tests/test_fc1002_three_process_e2e.py": [
+      10594,
+      1791239963227230200
+    ],
+    "tests/test_fc1003_uj.py": [
+      7160,
+      1791237016841342200
+    ],
+    "tests/test_fc1004_platform.py": [
+      6127,
+      1791237189118937700
+    ],
+    "tests/test_fc1101_ci_manifest.py": [
+      3871,
+      1791225761337723600
+    ],
+    "tests/test_fc1102_t2_runner.py": [
+      5533,
+      1791225761339225100
+    ],
+    "tests/test_fc1103_t3_runner.py": [
+      3920,
+      1791225761342288200
+    ],
+    "tests/test_fc1104_dashboard.py": [
+      3660,
+      1791225761343911900
+    ],
+    "tests/test_fc1105_fault_injection.py": [
+      7846,
+      1791225761344914600
+    ],
+    "tests/test_fc1302_scan_health.py": [
+      4826,
+      1791225761345918500
+    ],
+    "tests/test_fc1307a_host_assumption_gate.py": [
+      3796,
+      1791225761348916700
+    ],
+    "tests/test_fc904_artifact_selection.py": [
+      11801,
+      1791228922898323800
+    ],
+    "tests/test_fc905b_trusted_receipt.py": [
+      8103,
+      1791239545856667800
+    ],
+    "tests/test_filing_acquisition.py": [
+      5556,
+      1791225761352917100
+    ],
+    "tests/test_filing_fetch_client.py": [
+      16886,
+      1791225761355918300
+    ],
+    "tests/test_fix_hashes.py": [
+      8310,
+      1791225761356917500
+    ],
+    "tests/test_generate_input_template.py": [
+      6478,
+      1791225761357741600
+    ],
+    "tests/test_golden_behavior_lock.py": [
+      7608,
+      1791225761358870500
+    ],
+    "tests/test_gp009_monthly_broker.py": [
+      10826,
+      1791225761358870500
+    ],
+    "tests/test_growth_driver_tree.py": [
+      11898,
+      1791225761360961300
+    ],
+    "tests/test_independent_targets.py": [
+      4216,
+      1791225761360961300
+    ],
+    "tests/test_industry_end_to_end.py": [
+      15216,
+      1791225761360961300
+    ],
+    "tests/test_input_construction_consistency.py": [
+      3518,
+      1791225761364133700
+    ],
+    "tests/test_input_contract_migration.py": [
+      3166,
+      1791225761364133700
+    ],
+    "tests/test_lifecycle_forecasts.py": [
+      10708,
+      1791225761364133700
+    ],
+    "tests/test_lint_input.py": [
+      13134,
+      1791225761364133700
+    ],
+    "tests/test_management_targets.py": [
+      13858,
+      1791225761364133700
+    ],
+    "tests/test_message_contract_pins.py": [
+      10874,
+      1791240631167487700
+    ],
+    "tests/test_models.py": [
+      8125,
+      1791225761378204800
+    ],
+    "tests/test_model_economic_guardrails.py": [
+      10414,
+      1791225761364133700
+    ],
+    "tests/test_model_extensions.py": [
+      15345,
+      1791225761364133700
+    ],
+    "tests/test_model_extensions_anchor.py": [
+      7378,
+      1791225761374184100
+    ],
+    "tests/test_model_integration_bounds.py": [
+      1644,
+      1791225761375199100
+    ],
+    "tests/test_model_registry_contract.py": [
+      1780,
+      1791225761377198600
+    ],
+    "tests/test_narrative_source_preparation_e2e.py": [
+      9948,
+      1791225761381199300
+    ],
+    "tests/test_narrative_source_preparation_transport.py": [
+      4673,
+      1791225761383196200
+    ],
+    "tests/test_output_report.py": [
+      20417,
+      1791225761384216400
+    ],
+    "tests/test_p5_source_default_cli_e2e.py": [
+      7264,
+      1791240253840449700
+    ],
+    "tests/test_p5_source_default_v2.py": [
+      11668,
+      1791229467401334500
+    ],
+    "tests/test_preparation_e2e_failure.py": [
+      4294,
+      1791225761387198600
+    ],
+    "tests/test_preparation_e2e_success.py": [
+      10340,
+      1791239724809057300
+    ],
+    "tests/test_pre_push_gate_git_hook_env.py": [
+      1411,
+      1791225761386206800
+    ],
+    "tests/test_publication_pipeline.py": [
+      15590,
+      1791225761389655700
+    ],
+    "tests/test_publication_registry.py": [
+      4768,
+      1791225761391124200
+    ],
+    "tests/test_recognition_bridge.py": [
+      6991,
+      1791225761392128500
+    ],
+    "tests/test_revenue_constraints.py": [
+      7702,
+      1791225761393136900
+    ],
+    "tests/test_rf_coverage_report.py": [
+      10255,
+      1791369779281918000
+    ],
+    "tests/test_rf_optional_tools_e2e.py": [
+      12372,
+      1791369779312092400
+    ],
+    "tests/test_rf_release_checklist.py": [
+      6198,
+      1791369779338929700
+    ],
+    "tests/test_scenarios_confidence.py": [
+      9699,
+      1791225761397132800
+    ],
+    "tests/test_scenario_coverage.py": [
+      2840,
+      1791225761394134100
+    ],
+    "tests/test_scenario_registry.py": [
+      5075,
+      1791225761395129000
+    ],
+    "tests/test_schema_compatibility.py": [
+      2861,
+      1791225761398128000
+    ],
+    "tests/test_single_owner_guard.py": [
+      3377,
+      1791225761399130800
+    ],
+    "tests/test_skill_documentation.py": [
+      5826,
+      1791225761401135800
+    ],
+    "tests/test_skill_doc_executable.py": [
+      1370,
+      1791225761400130900
+    ],
+    "tests/test_source_consumption.py": [
+      3959,
+      1791225761402133300
+    ],
+    "tests/test_source_preparation.py": [
+      14650,
+      1791239724809057300
+    ],
+    "tests/test_source_ref_v2_three_repo_e2e.py": [
+      5915,
+      1791225761405129100
+    ],
+    "tests/test_structure_targets.py": [
+      2006,
+      1791225761406578900
+    ],
+    "tests/test_verbose_validation.py": [
+      4154,
+      1791225761407628600
+    ],
+    "tests/test_verify_plan_claims.py": [
+      2155,
+      1791225761408632800
+    ],
+    "tests/test_zr1001_release_readiness.py": [
+      14715,
+      1791369779343176700
+    ],
+    "tests/test_zr1004_small_cohort.py": [
+      7058,
+      1791225761412777100
+    ],
+    "tests/test_zr1007_mine_shadow.py": [
+      10939,
+      1791225761413780600
+    ],
+    "tests/test_zr1008_new_chain_cutover.py": [
+      9123,
+      1791225761414778200
+    ],
+    "tests/test_zr1009_legacy_removal.py": [
+      9190,
+      1791225761415780700
+    ],
+    "tests/test_zr1102_adversarial_audit.py": [
+      7400,
+      1791225761418783900
+    ],
+    "tests/test_zr1103_journey_reverify.py": [
+      7910,
+      1791225761419779600
+    ],
+    "tests/test_zr1104_observation_drill.py": [
+      10069,
+      1791225761420778300
+    ],
+    "tests/test_zr601_asset_facts.py": [
+      6626,
+      1791225761422780000
+    ],
+    "tests/test_zr602_asset_facts_basis.py": [
+      10235,
+      1791225761424082200
+    ],
+    "tests/test_zr603_ownership_timeline.py": [
+      10166,
+      1791225761425247300
+    ],
+    "tests/test_zr604_conflict_resolution.py": [
+      5445,
+      1791225761426239700
+    ],
+    "tests/test_zr605_mine_year_operation.py": [
+      5412,
+      1791225761427239900
+    ],
+    "tests/test_zr606_commercial_terms.py": [
+      7320,
+      1791225761429236700
+    ],
+    "tests/test_zr607_internal_flow.py": [
+      6923,
+      1791225761430236800
+    ],
+    "tests/test_zr608_reconciliation.py": [
+      4029,
+      1791225761431243100
+    ],
+    "tests/test_zr609_zijin_pilot.py": [
+      11317,
+      1791225761432243100
+    ],
+    "tests/test_zr611_synthetic_e2e.py": [
+      10878,
+      1791225761434236600
+    ],
+    "tests/test_zr701_f1_draft_formal.py": [
+      10344,
+      1791229532244593200
+    ],
+    "tests/test_zr702_schema_source_of_truth.py": [
+      4820,
+      1791225761436234800
+    ],
+    "tests/test_zr703_schema_drift_cleanup.py": [
+      3243,
+      1791225761437241700
+    ],
+    "tests/test_zr704_validate_only_gate.py": [
+      5280,
+      1791225761439233400
+    ],
+    "tests/test_zr705_draft_formal_swap.py": [
+      7138,
+      1791225761439233400
+    ],
+    "tests/test_zr706_selector_contract.py": [
+      6440,
+      1791225761439233400
+    ],
+    "tests/test_zr707_mixed_recognition.py": [
+      4878,
+      1791225761439233400
+    ],
+    "tests/test_zr708_backtest_reverify.py": [
+      4855,
+      1791225761443899400
+    ],
+    "tests/test_zr709_zijin_journey.py": [
+      36992,
+      1791238531443568500
+    ],
+    "tests/test_zr710_publication_txn.py": [
+      5482,
+      1791225761446906400
+    ],
+    "tests/test_zr711_schema_optin.py": [
+      7193,
+      1791225761447898600
+    ],
+    "tests/test_zr712_confidence_policy.py": [
+      6625,
+      1791225761448901600
+    ],
+    "tests/test_zr713_rolling_backtest.py": [
+      7996,
+      1791225761449898600
+    ],
+    "tests/test_zr801_scenario_registry.py": [
+      4660,
+      1791225761450900600
+    ],
+    "tests/test_zr802_combined_journeys.py": [
+      14400,
+      1791237985395464200
+    ],
+    "tests/test_zr803_chaos_recovery.py": [
+      12352,
+      1791240416122337500
+    ],
+    "tests/test_zr804_platform_shape.py": [
+      8769,
+      1791232648423759500
+    ],
+    "tests/test_zr805_t3_authorization.py": [
+      6639,
+      1791237279239376900
+    ],
+    "tests/test_zr806_real_t2_samples.py": [
+      10983,
+      1791225761457902500
+    ],
+    "tests/test_zr901_pr_fanout.py": [
+      9564,
+      1791225761460899600
+    ],
+    "tests/test_zr902b_run_outcome.py": [
+      5855,
+      1791225761463894000
+    ],
+    "tests/test_zr902_daily_schedule.py": [
+      19297,
+      1791225761461902500
+    ],
+    "tests/test_zr903_weekly_t3.py": [
+      17242,
+      1791225761464895500
+    ],
+    "tests/test_zr904_release_gate.py": [
+      9262,
+      1791225761466895600
+    ],
+    "tests/test_zr905_audit_self_test.py": [
+      10152,
+      1791225761467901600
+    ],
+    "tests/test_zr906_final_ratchet.py": [
+      12220,
+      1791369779369852800
+    ],
+    "tests/test_zr907_drift_patrol.py": [
+      4476,
+      1791225761469907000
+    ],
+    "tests/adversarial/test_anchor_attacks.py": [
+      4382,
+      1791225761246060100
+    ],
+    "tests/adversarial/test_receipt_attacks.py": [
+      3126,
+      1791225761248053800
+    ],
+    "tests/adversarial/__init__.py": [
+      0,
+      1791225761244201000
+    ],
+    "tests/contract/host_assumption_allowlist.json": [
+      6013,
+      1791225761253057800
+    ],
+    "tests/contract/host_assumption_baseline.json": [
+      1935,
+      1791225761254060100
+    ],
+    "tests/e2e_support/isolated_lake.py": [
+      23993,
+      1791232215478335800
+    ],
+    "tests/fixtures/cwp_source_ref_v2.json": [
+      373,
+      1791225761277203100
+    ],
+    "tests/fixtures/cwp_verified_open_bad_sha.json": [
+      85,
+      1791225761280205500
+    ],
+    "tests/fixtures/cwp_verified_open_receipt_normalized.json": [
+      1318,
+      1791225761283201900
+    ],
+    "tests/fixtures/legacy_filing_data.py": [
+      11769,
+      1791225761284204700
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/bundle.json": [
+      4042,
+      1791225761260556200
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/invalid_request.json": [
+      832,
+      1791225761263559700
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/metadata.json": [
+      849,
+      1791225761266552700
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/read_receipt.json": [
+      1788,
+      1791225761266552700
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/read_request.json": [
+      832,
+      1791225761266552700
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/reference.json": [
+      573,
+      1791225761266552700
+    ],
+    "scripts/analysis/confidence.py": [
+      14476,
+      1791519908520129100
+    ],
+    "scripts/analysis/sensitivity.py": [
+      13266,
+      1791541313469754500
+    ],
+    "scripts/analysis/__init__.py": [
+      0,
+      1791225761161541200
+    ],
+    "scripts/contracts/evidence.py": [
+      15959,
+      1791531363483968600
+    ],
+    "scripts/contracts/source_clock.py": [
+      9677,
+      1791524769315655400
+    ],
+    "scripts/contracts/__init__.py": [
+      0,
+      1791225761187213400
+    ],
+    "scripts/forecast/calc.py": [
+      18909,
+      1791541313471901000
+    ],
+    "scripts/research/communication_scope.py": [
+      7654,
+      1791705266657496900
+    ],
+    "scripts/research/coverage.py": [
+      5801,
+      1786205130429291300
+    ],
+    "scripts/research/evidence_roles.py": [
+      16538,
+      1791675771796862900
+    ],
+    "scripts/research/input_evidence.py": [
+      14093,
+      1791524769352170200
+    ],
+    "scripts/research/input_quantities.py": [
+      9970,
+      1791495290743006300
+    ],
+    "scripts/research/input_targets.py": [
+      14221,
+      1791495390748062100
+    ],
+    "scripts/research/native_dependencies.py": [
+      5709,
+      1791675771796862900
+    ],
+    "scripts/research/targets.py": [
+      36535,
+      1791531363484968000
+    ],
+    "scripts/research/target_measurement.py": [
+      12423,
+      1791519908413297400
+    ],
+    "scripts/research/timing_bridge.py": [
+      5578,
+      1791519908584694900
+    ],
+    "scripts/research/__init__.py": [
+      0,
+      1791225761216164400
+    ],
+    "scripts/__pycache__/asset_ownership.cpython-313.pyc": [
+      13306,
+      1791442456296445600
+    ],
+    "scripts/__pycache__/company_wiki_source.cpython-313.pyc": [
+      21509,
+      1791442195149764700
+    ],
+    "scripts/__pycache__/company_wiki_source_reader_v2.cpython-313.pyc": [
+      18495,
+      1791442740662704400
+    ],
+    "scripts/__pycache__/company_wiki_source_v2.cpython-313.pyc": [
+      17328,
+      1791442740680802200
+    ],
+    "scripts/__pycache__/filing_upstream_cause.cpython-313.pyc": [
+      18083,
+      1791681627435863600
+    ],
+    "scripts/__pycache__/fix_hashes.cpython-313.pyc": [
+      11176,
+      1791443831895430600
+    ],
+    "scripts/__pycache__/mine_year_operation.cpython-313.pyc": [
+      6180,
+      1791442456314129900
+    ],
+    "scripts/__pycache__/model_extensions.cpython-313.pyc": [
+      18195,
+      1791442456262627800
+    ],
+    "scripts/__pycache__/model_registry.cpython-313.pyc": [
+      34843,
+      1791442456250558000
+    ],
+    "scripts/__pycache__/processing_demand.cpython-313.pyc": [
+      10341,
+      1791442195171661600
+    ],
+    "scripts/__pycache__/publication_registry.cpython-313.pyc": [
+      14666,
+      1791448223916764900
+    ],
+    "scripts/__pycache__/revenue_backtest.cpython-313.pyc": [
+      32325,
+      1791444186062087200
+    ],
+    "scripts/__pycache__/revenue_constraints.cpython-313.pyc": [
+      18323,
+      1791442456279565900
+    ],
+    "scripts/__pycache__/revenue_core.cpython-313.pyc": [
+      23448,
+      1791442456219879300
+    ],
+    "scripts/__pycache__/revenue_publication.cpython-313.pyc": [
+      23278,
+      1791443869459236200
+    ],
+    "scripts/__pycache__/revenue_report.cpython-313.pyc": [
+      75327,
+      1791443869455234100
+    ],
+    "scripts/__pycache__/schema_compatibility.cpython-313.pyc": [
+      3362,
+      1791443869462391400
+    ],
+    "scripts/__pycache__/schema_fields.cpython-313.pyc": [
+      1443,
+      1791443831912397600
+    ],
+    "scripts/__pycache__/trust_anchor.cpython-313.pyc": [
+      2040,
+      1791443869462391400
+    ],
+    "scripts/research/__pycache__/coverage.cpython-313.pyc": [
+      6420,
+      1791442456319125800
+    ],
+    "scripts/research/__pycache__/drivers.cpython-313.pyc": [
+      21958,
+      1791442456325173500
+    ],
+    "scripts/research/__pycache__/targets.cpython-313.pyc": [
+      27308,
+      1791442456329174800
+    ],
+    "scripts/research/__pycache__/__init__.cpython-313.pyc": [
+      179,
+      1791442456316129400
+    ],
+    "scripts/forecast/__pycache__/calc.cpython-313.pyc": [
+      21721,
+      1791442456292278200
+    ],
+    "scripts/forecast/__pycache__/segments.cpython-313.pyc": [
+      30731,
+      1791443869433342300
+    ],
+    "scripts/contracts/__pycache__/constants.cpython-313.pyc": [
+      4135,
+      1791443869411343700
+    ],
+    "scripts/contracts/__pycache__/document.cpython-313.pyc": [
+      49238,
+      1791442456296445600
+    ],
+    "scripts/contracts/__pycache__/evidence.cpython-313.pyc": [
+      19343,
+      1791442258660880300
+    ],
+    "scripts/contracts/__pycache__/__init__.cpython-313.pyc": [
+      180,
+      1791442258644941100
+    ],
+    "scripts/analysis/__pycache__/confidence.cpython-313.pyc": [
+      13558,
+      1791442456351460700
+    ],
+    "scripts/analysis/__pycache__/sensitivity.cpython-313.pyc": [
+      12246,
+      1791442456337593400
+    ],
+    "scripts/analysis/__pycache__/__init__.cpython-313.pyc": [
+      179,
+      1791442456329174800
+    ]
+  },
+  "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast": {
+    ".gitignore": [
+      1840,
+      1790975968519310100
+    ],
+    "agents/openai.yaml": [
+      331,
+      1784062460034237200
+    ],
+    "config/company_wiki.json": [
+      1443,
+      1791225761075910800
+    ],
+    "config/filing_fetch.json": [
+      94,
+      1791225761078085900
+    ],
+    "references/accounting-boundaries.md": [
+      2570,
+      1791225761126294400
+    ],
+    "references/backtesting.md": [
+      10191,
+      1791225761126294400
+    ],
+    "references/buy-side-methodology.md": [
+      12669,
+      1791519908990267600
+    ],
+    "references/compliance-contract.md": [
+      7697,
+      1786185848098177300
+    ],
+    "references/data-governance.md": [
+      7020,
+      1791573626551180900
+    ],
+    "references/economic-support-diagnostics.md": [
+      3880,
+      1791675771791503100
+    ],
+    "references/evidence-role-calibration.md": [
+      12765,
+      1791675771793511300
+    ],
+    "references/extended-models.md": [
+      16741,
+      1791396621761626400
+    ],
+    "references/growth-driver-tree.md": [
+      7337,
+      1791225761126294400
+    ],
+    "references/industry-lifecycle-routing.md": [
+      10202,
+      1791225761126294400
+    ],
+    "references/m3-period-evidence.md": [
+      5045,
+      1791663747226266600
+    ],
+    "references/management-targets.md": [
+      7776,
+      1791225761142884600
+    ],
+    "references/model-library.md": [
+      14308,
+      1791396621761626400
+    ],
+    "references/research-coverage.md": [
+      9188,
+      1791225761146878500
+    ],
+    "references/resource-business-guidance.md": [
+      6263,
+      1791225761147883500
+    ],
+    "references/schema-migration-3.4-to-3.5.md": [
+      2927,
+      1786183445228738900
+    ],
+    "references/schema-migration-3.5-to-3.6.md": [
+      2177,
+      1791225761149879500
+    ],
+    "references/schema-migration-3.6-to-3.7.md": [
+      2149,
+      1791396621761626400
+    ],
+    "references/target-measurement-comparison.md": [
+      5537,
+      1791519908679124300
+    ],
+    "scripts/asset_ownership.py": [
+      10622,
+      1791225761161541200
+    ],
+    "scripts/commercial_terms.py": [
+      4795,
+      1791225761161541200
+    ],
+    "scripts/company_wiki_narrative_contracts.py": [
+      26500,
+      1791531363482965800
+    ],
+    "scripts/company_wiki_narrative_posix.py": [
+      2824,
+      1791225761161541200
+    ],
+    "scripts/company_wiki_narrative_process.py": [
+      8500,
+      1791225761174198400
+    ],
+    "scripts/company_wiki_narrative_reader.py": [
+      3348,
+      1791225761176215900
+    ],
+    "scripts/company_wiki_narrative_tree.py": [
+      6960,
+      1791225761179222800
+    ],
+    "scripts/company_wiki_source.py": [
+      20953,
+      1791524769125051700
+    ],
+    "scripts/company_wiki_source_reader_v2.py": [
+      17186,
+      1791566378350282300
+    ],
+    "scripts/company_wiki_source_v2.py": [
+      16571,
+      1791573626354464500
+    ],
+    "scripts/confidence_policy.py": [
+      7843,
+      1791225761186211200
+    ],
+    "scripts/filing_fetch_client.py": [
+      19106,
+      1791663747261829600
+    ],
+    "scripts/filing_upstream_cause.py": [
+      15727,
+      1791663747284429700
+    ],
+    "scripts/fix_hashes.py": [
+      8484,
+      1791225761194830200
+    ],
+    "scripts/internal_flow.py": [
+      4841,
+      1791225761194830200
+    ],
+    "scripts/lint_input.py": [
+      21589,
+      1791225761194830200
+    ],
+    "scripts/mine_year_operation.py": [
+      4670,
+      1791225761194830200
+    ],
+    "scripts/mixed_recognition.py": [
+      4034,
+      1791225761194830200
+    ],
+    "scripts/model_extensions.py": [
+      16009,
+      1791225761194830200
+    ],
+    "scripts/model_registry.py": [
+      30116,
+      1791225761194830200
+    ],
+    "scripts/narrative_source_preparation.py": [
+      2400,
+      1791225761209886400
+    ],
+    "scripts/processed_artifact_canary.py": [
+      4639,
+      1791225761210891600
+    ],
+    "scripts/processing_demand.py": [
+      8231,
+      1791225761212176600
+    ],
+    "scripts/publication_registry.py": [
+      10936,
+      1791446141395204500
+    ],
+    "scripts/reconciliation.py": [
+      4224,
+      1791225761215166800
+    ],
+    "scripts/research_support_diagnostics.py": [
+      6708,
+      1791675771798604800
+    ],
+    "scripts/revenue_backtest.py": [
+      29070,
+      1791225761221175800
+    ],
+    "scripts/revenue_constraints.py": [
+      15064,
+      1791225761222171300
+    ],
+    "scripts/revenue_forecast.py": [
+      5324,
+      1791396621761626400
+    ],
+    "scripts/revenue_publication.py": [
+      24917,
+      1791225761227209600
+    ],
+    "scripts/rolling_backtest.py": [
+      8900,
+      1791225761229199400
+    ],
+    "scripts/schema_fields.py": [
+      1526,
+      1791225761231200000
+    ],
+    "scripts/schema_optin.py": [
+      2263,
+      1791225761232019800
+    ],
+    "scripts/source_narrative_context.py": [
+      6124,
+      1791524769402294900
+    ],
+    "scripts/source_period_semantics.py": [
+      423,
+      1791519908806162300
+    ],
+    "scripts/source_preparation.py": [
+      25236,
+      1791663747377881800
+    ],
+    "scripts/trust_anchor.py": [
+      1634,
+      1791225761234032800
+    ],
+    "scripts/__init__.py": [
+      35,
+      1791225761158863900
+    ],
+    "tests/conftest.py": [
+      498,
+      1791225761250054800
+    ],
+    "tests/golden_behavior_hashes.json": [
+      408,
+      1791225761285210100
+    ],
+    "tests/test_attestation.py": [
+      9688,
+      1791225761287204600
+    ],
+    "tests/test_backtest.py": [
+      17665,
+      1791225761288209200
+    ],
+    "tests/test_bundle_artifact_selection.py": [
+      9089,
+      1791225761289206100
+    ],
+    "tests/test_bundle_e2e_d01.py": [
+      17948,
+      1791225761290209100
+    ],
+    "tests/test_buy_side_accuracy.py": [
+      7270,
+      1791225761291957800
+    ],
+    "tests/test_ca201_pr_fanout_ownership.py": [
+      8401,
+      1791225761293035500
+    ],
+    "tests/test_ca202_daily_t2_runner.py": [
+      10700,
+      1791225761294044000
+    ],
+    "tests/test_ca203_weekly_t3.py": [
+      12081,
+      1791225761295036700
+    ],
+    "tests/test_ca204_monthly_generalization.py": [
+      9872,
+      1791225761296051900
+    ],
+    "tests/test_ca205_atomic_report.py": [
+      12396,
+      1791225761297047100
+    ],
+    "tests/test_ca206_soak_window.py": [
+      12676,
+      1791225761298048500
+    ],
+    "tests/test_ca301_clean_checkout.py": [
+      11331,
+      1791225761300044600
+    ],
+    "tests/test_ca302_three_journeys.py": [
+      10225,
+      1791225761302061100
+    ],
+    "tests/test_ca303_arch_quality.py": [
+      7592,
+      1791369779390353400
+    ],
+    "tests/test_ca304_r9_removal.py": [
+      11936,
+      1791225761303569600
+    ],
+    "tests/test_ca305_six_problems.py": [
+      9569,
+      1791225761303569600
+    ],
+    "tests/test_ca306_terminal_closure.py": [
+      9211,
+      1791225761303569600
+    ],
+    "tests/test_company_wiki_narrative_process.py": [
+      8277,
+      1791225761309097600
+    ],
+    "tests/test_company_wiki_narrative_reader.py": [
+      10050,
+      1791349296114674800
+    ],
+    "tests/test_company_wiki_source.py": [
+      4934,
+      1791225761313721400
+    ],
+    "tests/test_company_wiki_source_reader_v2.py": [
+      6848,
+      1791225761315725600
+    ],
+    "tests/test_company_wiki_source_ref_v2.py": [
+      2042,
+      1791225761318723300
+    ],
+    "tests/test_company_wiki_source_v2.py": [
+      6923,
+      1791225761322716100
+    ],
+    "tests/test_compatibility_manifest.py": [
+      6563,
+      1791225761323727700
+    ],
+    "tests/test_contract_registry.py": [
+      4243,
+      1791225761324716600
+    ],
+    "tests/test_critical_mutation_gate.py": [
+      2715,
+      1791225761326721800
+    ],
+    "tests/test_cross_repo_chain_e2e.py": [
+      7632,
+      1791225761329723300
+    ],
+    "tests/test_data_contract.py": [
+      31723,
+      1791225761330751000
+    ],
+    "tests/test_dropbox_full_chain_fc505.py": [
+      11706,
+      1791225761331722200
+    ],
+    "tests/test_fc1001_isolated_lake.py": [
+      14223,
+      1791225761332721600
+    ],
+    "tests/test_fc1002_three_process_e2e.py": [
+      10594,
+      1791239963227230200
+    ],
+    "tests/test_fc1003_uj.py": [
+      7160,
+      1791237016841342200
+    ],
+    "tests/test_fc1004_platform.py": [
+      6127,
+      1791237189118937700
+    ],
+    "tests/test_fc1101_ci_manifest.py": [
+      3871,
+      1791225761337723600
+    ],
+    "tests/test_fc1102_t2_runner.py": [
+      5533,
+      1791225761339225100
+    ],
+    "tests/test_fc1103_t3_runner.py": [
+      3920,
+      1791225761342288200
+    ],
+    "tests/test_fc1104_dashboard.py": [
+      3660,
+      1791225761343911900
+    ],
+    "tests/test_fc1105_fault_injection.py": [
+      7846,
+      1791225761344914600
+    ],
+    "tests/test_fc1302_scan_health.py": [
+      4826,
+      1791225761345918500
+    ],
+    "tests/test_fc1307a_host_assumption_gate.py": [
+      3796,
+      1791225761348916700
+    ],
+    "tests/test_fc904_artifact_selection.py": [
+      11801,
+      1791228922898323800
+    ],
+    "tests/test_fc905b_trusted_receipt.py": [
+      8103,
+      1791239545856667800
+    ],
+    "tests/test_filing_acquisition.py": [
+      5556,
+      1791225761352917100
+    ],
+    "tests/test_filing_fetch_client.py": [
+      16886,
+      1791225761355918300
+    ],
+    "tests/test_fix_hashes.py": [
+      8310,
+      1791225761356917500
+    ],
+    "tests/test_generate_input_template.py": [
+      6478,
+      1791225761357741600
+    ],
+    "tests/test_golden_behavior_lock.py": [
+      7608,
+      1791225761358870500
+    ],
+    "tests/test_gp009_monthly_broker.py": [
+      10826,
+      1791225761358870500
+    ],
+    "tests/test_growth_driver_tree.py": [
+      11898,
+      1791225761360961300
+    ],
+    "tests/test_independent_targets.py": [
+      4216,
+      1791225761360961300
+    ],
+    "tests/test_industry_end_to_end.py": [
+      15216,
+      1791225761360961300
+    ],
+    "tests/test_input_construction_consistency.py": [
+      3518,
+      1791225761364133700
+    ],
+    "tests/test_input_contract_migration.py": [
+      3166,
+      1791225761364133700
+    ],
+    "tests/test_lifecycle_forecasts.py": [
+      10708,
+      1791225761364133700
+    ],
+    "tests/test_lint_input.py": [
+      13134,
+      1791225761364133700
+    ],
+    "tests/test_management_targets.py": [
+      13858,
+      1791225761364133700
+    ],
+    "tests/test_message_contract_pins.py": [
+      10874,
+      1791240631167487700
+    ],
+    "tests/test_models.py": [
+      8125,
+      1791225761378204800
+    ],
+    "tests/test_model_economic_guardrails.py": [
+      10414,
+      1791225761364133700
+    ],
+    "tests/test_model_extensions.py": [
+      15345,
+      1791225761364133700
+    ],
+    "tests/test_model_extensions_anchor.py": [
+      7378,
+      1791225761374184100
+    ],
+    "tests/test_model_integration_bounds.py": [
+      1644,
+      1791225761375199100
+    ],
+    "tests/test_model_registry_contract.py": [
+      1780,
+      1791225761377198600
+    ],
+    "tests/test_narrative_source_preparation_e2e.py": [
+      9948,
+      1791225761381199300
+    ],
+    "tests/test_narrative_source_preparation_transport.py": [
+      4673,
+      1791225761383196200
+    ],
+    "tests/test_output_report.py": [
+      20417,
+      1791225761384216400
+    ],
+    "tests/test_p5_source_default_cli_e2e.py": [
+      7264,
+      1791240253840449700
+    ],
+    "tests/test_p5_source_default_v2.py": [
+      11668,
+      1791229467401334500
+    ],
+    "tests/test_preparation_e2e_failure.py": [
+      4294,
+      1791225761387198600
+    ],
+    "tests/test_preparation_e2e_success.py": [
+      10340,
+      1791239724809057300
+    ],
+    "tests/test_pre_push_gate_git_hook_env.py": [
+      1411,
+      1791225761386206800
+    ],
+    "tests/test_publication_pipeline.py": [
+      15590,
+      1791225761389655700
+    ],
+    "tests/test_publication_registry.py": [
+      4768,
+      1791225761391124200
+    ],
+    "tests/test_recognition_bridge.py": [
+      6991,
+      1791225761392128500
+    ],
+    "tests/test_revenue_constraints.py": [
+      7702,
+      1791225761393136900
+    ],
+    "tests/test_rf_coverage_report.py": [
+      10255,
+      1791369779394960400
+    ],
+    "tests/test_rf_optional_tools_e2e.py": [
+      12372,
+      1791369779418666800
+    ],
+    "tests/test_rf_release_checklist.py": [
+      6198,
+      1791369779431214400
+    ],
+    "tests/test_scenarios_confidence.py": [
+      9699,
+      1791225761397132800
+    ],
+    "tests/test_scenario_coverage.py": [
+      2840,
+      1791225761394134100
+    ],
+    "tests/test_scenario_registry.py": [
+      5075,
+      1791225761395129000
+    ],
+    "tests/test_schema_compatibility.py": [
+      2861,
+      1791225761398128000
+    ],
+    "tests/test_single_owner_guard.py": [
+      3377,
+      1791225761399130800
+    ],
+    "tests/test_skill_documentation.py": [
+      5826,
+      1791225761401135800
+    ],
+    "tests/test_skill_doc_executable.py": [
+      1370,
+      1791225761400130900
+    ],
+    "tests/test_source_consumption.py": [
+      3959,
+      1791225761402133300
+    ],
+    "tests/test_source_preparation.py": [
+      14650,
+      1791239724809057300
+    ],
+    "tests/test_source_ref_v2_three_repo_e2e.py": [
+      5915,
+      1791225761405129100
+    ],
+    "tests/test_structure_targets.py": [
+      2006,
+      1791225761406578900
+    ],
+    "tests/test_verbose_validation.py": [
+      4154,
+      1791225761407628600
+    ],
+    "tests/test_verify_plan_claims.py": [
+      2155,
+      1791225761408632800
+    ],
+    "tests/test_zr1001_release_readiness.py": [
+      14715,
+      1791369779434150900
+    ],
+    "tests/test_zr1004_small_cohort.py": [
+      7058,
+      1791225761412777100
+    ],
+    "tests/test_zr1007_mine_shadow.py": [
+      10939,
+      1791225761413780600
+    ],
+    "tests/test_zr1008_new_chain_cutover.py": [
+      9123,
+      1791225761414778200
+    ],
+    "tests/test_zr1009_legacy_removal.py": [
+      9190,
+      1791225761415780700
+    ],
+    "tests/test_zr1102_adversarial_audit.py": [
+      7400,
+      1791225761418783900
+    ],
+    "tests/test_zr1103_journey_reverify.py": [
+      7910,
+      1791225761419779600
+    ],
+    "tests/test_zr1104_observation_drill.py": [
+      10069,
+      1791225761420778300
+    ],
+    "tests/test_zr601_asset_facts.py": [
+      6626,
+      1791225761422780000
+    ],
+    "tests/test_zr602_asset_facts_basis.py": [
+      10235,
+      1791225761424082200
+    ],
+    "tests/test_zr603_ownership_timeline.py": [
+      10166,
+      1791225761425247300
+    ],
+    "tests/test_zr604_conflict_resolution.py": [
+      5445,
+      1791225761426239700
+    ],
+    "tests/test_zr605_mine_year_operation.py": [
+      5412,
+      1791225761427239900
+    ],
+    "tests/test_zr606_commercial_terms.py": [
+      7320,
+      1791225761429236700
+    ],
+    "tests/test_zr607_internal_flow.py": [
+      6923,
+      1791225761430236800
+    ],
+    "tests/test_zr608_reconciliation.py": [
+      4029,
+      1791225761431243100
+    ],
+    "tests/test_zr609_zijin_pilot.py": [
+      11317,
+      1791225761432243100
+    ],
+    "tests/test_zr611_synthetic_e2e.py": [
+      10878,
+      1791225761434236600
+    ],
+    "tests/test_zr701_f1_draft_formal.py": [
+      10344,
+      1791229532244593200
+    ],
+    "tests/test_zr702_schema_source_of_truth.py": [
+      4820,
+      1791225761436234800
+    ],
+    "tests/test_zr703_schema_drift_cleanup.py": [
+      3243,
+      1791225761437241700
+    ],
+    "tests/test_zr704_validate_only_gate.py": [
+      5280,
+      1791225761439233400
+    ],
+    "tests/test_zr705_draft_formal_swap.py": [
+      7138,
+      1791225761439233400
+    ],
+    "tests/test_zr706_selector_contract.py": [
+      6440,
+      1791225761439233400
+    ],
+    "tests/test_zr707_mixed_recognition.py": [
+      4878,
+      1791225761439233400
+    ],
+    "tests/test_zr708_backtest_reverify.py": [
+      4855,
+      1791225761443899400
+    ],
+    "tests/test_zr709_zijin_journey.py": [
+      36992,
+      1791238531443568500
+    ],
+    "tests/test_zr710_publication_txn.py": [
+      5482,
+      1791225761446906400
+    ],
+    "tests/test_zr711_schema_optin.py": [
+      7193,
+      1791225761447898600
+    ],
+    "tests/test_zr712_confidence_policy.py": [
+      6625,
+      1791225761448901600
+    ],
+    "tests/test_zr713_rolling_backtest.py": [
+      7996,
+      1791225761449898600
+    ],
+    "tests/test_zr801_scenario_registry.py": [
+      4660,
+      1791225761450900600
+    ],
+    "tests/test_zr802_combined_journeys.py": [
+      14400,
+      1791237985395464200
+    ],
+    "tests/test_zr803_chaos_recovery.py": [
+      12352,
+      1791240416122337500
+    ],
+    "tests/test_zr804_platform_shape.py": [
+      8769,
+      1791232648423759500
+    ],
+    "tests/test_zr805_t3_authorization.py": [
+      6639,
+      1791237279239376900
+    ],
+    "tests/test_zr806_real_t2_samples.py": [
+      10983,
+      1791225761457902500
+    ],
+    "tests/test_zr901_pr_fanout.py": [
+      9564,
+      1791225761460899600
+    ],
+    "tests/test_zr902b_run_outcome.py": [
+      5855,
+      1791225761463894000
+    ],
+    "tests/test_zr902_daily_schedule.py": [
+      19297,
+      1791225761461902500
+    ],
+    "tests/test_zr903_weekly_t3.py": [
+      17242,
+      1791225761464895500
+    ],
+    "tests/test_zr904_release_gate.py": [
+      9262,
+      1791225761466895600
+    ],
+    "tests/test_zr905_audit_self_test.py": [
+      10152,
+      1791225761467901600
+    ],
+    "tests/test_zr906_final_ratchet.py": [
+      12220,
+      1791369779452278500
+    ],
+    "tests/test_zr907_drift_patrol.py": [
+      4476,
+      1791225761469907000
+    ],
+    "tests/adversarial/test_anchor_attacks.py": [
+      4382,
+      1791225761246060100
+    ],
+    "tests/adversarial/test_receipt_attacks.py": [
+      3126,
+      1791225761248053800
+    ],
+    "tests/adversarial/__init__.py": [
+      0,
+      1791225761244201000
+    ],
+    "tests/contract/host_assumption_allowlist.json": [
+      6013,
+      1791225761253057800
+    ],
+    "tests/contract/host_assumption_baseline.json": [
+      1935,
+      1791225761254060100
+    ],
+    "tests/e2e_support/isolated_lake.py": [
+      23993,
+      1791232215478335800
+    ],
+    "tests/fixtures/cwp_source_ref_v2.json": [
+      373,
+      1791225761277203100
+    ],
+    "tests/fixtures/cwp_verified_open_bad_sha.json": [
+      85,
+      1791225761280205500
+    ],
+    "tests/fixtures/cwp_verified_open_receipt_normalized.json": [
+      1318,
+      1791225761283201900
+    ],
+    "tests/fixtures/legacy_filing_data.py": [
+      11769,
+      1791225761284204700
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/bundle.json": [
+      4042,
+      1791225761260556200
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/invalid_request.json": [
+      832,
+      1791225761263559700
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/metadata.json": [
+      849,
+      1791225761266552700
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/read_receipt.json": [
+      1788,
+      1791225761266552700
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/read_request.json": [
+      832,
+      1791225761266552700
+    ],
+    "tests/fixtures/cwp_narrative_transport_v1/reference.json": [
+      573,
+      1791225761266552700
+    ],
+    "scripts/analysis/confidence.py": [
+      14476,
+      1791519908856863500
+    ],
+    "scripts/analysis/sensitivity.py": [
+      13266,
+      1791541313469754500
+    ],
+    "scripts/analysis/__init__.py": [
+      0,
+      1791225761161541200
+    ],
+    "scripts/contracts/evidence.py": [
+      15959,
+      1791531363483968600
+    ],
+    "scripts/contracts/source_clock.py": [
+      9677,
+      1791524769335049800
+    ],
+    "scripts/contracts/__init__.py": [
+      0,
+      1791225761187213400
+    ],
+    "scripts/forecast/calc.py": [
+      18909,
+      1791541313471901000
+    ],
+    "scripts/research/communication_scope.py": [
+      5435,
+      1791519908836636300
+    ],
+    "scripts/research/coverage.py": [
+      5801,
+      1786205130429291300
+    ],
+    "scripts/research/evidence_roles.py": [
+      16538,
+      1791675771796862900
+    ],
+    "scripts/research/input_evidence.py": [
+      14093,
+      1791524769373565500
+    ],
+    "scripts/research/input_quantities.py": [
+      9970,
+      1791495290743006300
+    ],
+    "scripts/research/input_targets.py": [
+      14221,
+      1791495390748062100
+    ],
+    "scripts/research/native_dependencies.py": [
+      5709,
+      1791675771796862900
+    ],
+    "scripts/research/targets.py": [
+      36535,
+      1791531363484968000
+    ],
+    "scripts/research/target_measurement.py": [
+      12423,
+      1791519908640477500
+    ],
+    "scripts/research/timing_bridge.py": [
+      5578,
+      1791519908973675000
+    ],
+    "scripts/research/__init__.py": [
+      0,
+      1791225761216164400
+    ]
+  }
+}

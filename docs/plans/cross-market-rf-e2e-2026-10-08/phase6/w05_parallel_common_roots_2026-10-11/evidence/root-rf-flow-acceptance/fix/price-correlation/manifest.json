@@ -1,0 +1,109 @@
+{
+  "schema": "w05-price-correlation-evidence/1",
+  "files": [
+    {
+      "path": "business-red.log",
+      "bytes": 3783,
+      "sha256": "249398ec2f96b14587d5d9c843db465d1c582f8529df5acd6efc6e85058a8835"
+    },
+    {
+      "path": "exact-final-green.json",
+      "bytes": 5918,
+      "sha256": "d1a01d6cc61157440f76e5fae474ce8329b562ee6272f8719583719682580abf"
+    },
+    {
+      "path": "exact-green.json",
+      "bytes": 5912,
+      "sha256": "dbd41c6b49516232d7cc28ad5799ab69a4f974814815c476161a0ac58751bd44"
+    },
+    {
+      "path": "exact-red.json",
+      "bytes": 3486,
+      "sha256": "0aa749461053ae14ea6053be522a22ebf7939cdfb9264c3a31951a7b908e4070"
+    },
+    {
+      "path": "exact_replay.py",
+      "bytes": 3521,
+      "sha256": "365abec5449a839b3f1b72c67c2cd27ac983b01a84146c1e4d58fd517a979862"
+    },
+    {
+      "path": "final-node-before-host-fixture.json",
+      "bytes": 525,
+      "sha256": "0ebfed555a16174e2e816c10159f009da49fda6f76e6d6619fec4d26d4be00c6"
+    },
+    {
+      "path": "final-node-before-host-fixture.log",
+      "bytes": 2284,
+      "sha256": "8cae1b7b9f18ca3273310ee6e09a1eae0f26b6bed35ff76f4c257061267f75d6"
+    },
+    {
+      "path": "final-node.json",
+      "bytes": 8993,
+      "sha256": "12ee53c9002a310b56bb49c76eef2502ed0c181d2f17ef0be3764e8f4da38358"
+    },
+    {
+      "path": "final-node.log",
+      "bytes": 2823,
+      "sha256": "303221961476d908a2604316a79badaae6bde63b13ed8b8b520dc04efad05d4b"
+    },
+    {
+      "path": "final-reception.md",
+      "bytes": 4727,
+      "sha256": "720d7c26fe3fc1f642aa6be00bbdb91f0d497583aa44fdfe6d987266c1ba2adc"
+    },
+    {
+      "path": "final_node.py",
+      "bytes": 4489,
+      "sha256": "b129ebaed345a29d849b1210a2f9fc768646695bec79d4d7409361b99373abb7"
+    },
+    {
+      "path": "findings.md",
+      "bytes": 1145,
+      "sha256": "eeb09997526f955b62f0b8a8d9e7bd3baf6a94e42c77fbac7a62a66c31fc0d40"
+    },
+    {
+      "path": "focused-green.log",
+      "bytes": 251,
+      "sha256": "510ca95dfe001fe8bf953d5aa0372272088f41947a7eba6442f4d891d7e54502"
+    },
+    {
+      "path": "git-owner-status.json",
+      "bytes": 3662,
+      "sha256": "abd4226814963ff5c2e6d9208c260d4c96132fcd91584dd76b1a88880c149dc7"
+    },
+    {
+      "path": "install-readonly-plan.json",
+      "bytes": 12112,
+      "sha256": "2a3a2ecd6517c9efaab8136c095cbf1ceef942ebb997c63a4bd5c7381603cb34"
+    },
+    {
+      "path": "install-readonly-summary.json",
+      "bytes": 2495,
+      "sha256": "d6f4bfe6b53a0828972103a5717c71501237042ff2d1f366c80d6f47b0dddbd5"
+    },
+    {
+      "path": "progress.md",
+      "bytes": 893,
+      "sha256": "fb39c8e0a6def85e21c94574d10fe18f4a2a17f37d94a065dd3a8b107ffd20de"
+    },
+    {
+      "path": "root-product-inventory.json",
+      "bytes": 14151,
+      "sha256": "d139dbfe622b077816d6efb2a8bd77fb10131c37c2b29b7cf3e90eaf573e6d4e"
+    },
+    {
+      "path": "task_plan.md",
+      "bytes": 1002,
+      "sha256": "49b03e3932e07086f6022c10c78f8e3a1b14633909a5e2c732f71ce3d001cccf"
+    }
+  ],
+  "count": 19,
+  "total_bytes": 82172,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0,
+  "scratch_initial_exists": false,
+  "scratch_final_exists": false,
+  "installed_file_writes": 0,
+  "product_frozen": true
+}

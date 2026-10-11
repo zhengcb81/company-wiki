@@ -1,0 +1,32 @@
+{
+  "original_input": "typed-boundary-exact-independent-red.json",
+  "paths": [
+    {
+      "path": "validate_document",
+      "actual": "rejected",
+      "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue"
+    },
+    {
+      "path": "run_forecast",
+      "actual": "rejected",
+      "error": "cmp_fy2026_low: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue"
+    },
+    {
+      "path": "validate_forecast_output",
+      "actual": "rejected",
+      "error": "cmp_fy2026_base: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue"
+    },
+    {
+      "path": "validate_published_forecast",
+      "actual": "rejected",
+      "error": "cmp_fy2026_base: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue"
+    }
+  ],
+  "old_invalid_annual_contribution": 20.0,
+  "old_fy2026_low": 170.0,
+  "new_invalid_forecast_written": false,
+  "scratch_restored": true,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0
+}

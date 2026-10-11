@@ -1,0 +1,33 @@
+{
+  "schema": "w05-installed-runtime-smoke-manifest/1",
+  "verdict": "PASS_WITH_SCOPE",
+  "file_count": 5,
+  "total_bytes": 152591,
+  "files": [
+    {
+      "path": "report.md",
+      "bytes": 2838,
+      "sha256": "2d205c1131b0b008b594659b0949c27c136a64f16d06d5491746dfc6208f234f"
+    },
+    {
+      "path": "results.json",
+      "bytes": 139438,
+      "sha256": "73d074150129363080cd97e8252e3f142c3351135b7d3962306f681344acabda"
+    },
+    {
+      "path": "smoke.py",
+      "bytes": 7513,
+      "sha256": "c5ffb2af30148ff2f154c760e1bbdc7a8dc87a826c361cc09ed11ac9a126624b"
+    },
+    {
+      "path": "target-0.log",
+      "bytes": 1402,
+      "sha256": "bcdd3572b0aa0219ecf4ba688921a151ddc0b360a725eeda1dc520efd3e311ad"
+    },
+    {
+      "path": "target-1.log",
+      "bytes": 1400,
+      "sha256": "4ed065d962dc11692f124cac4f218656f820958a7d423ebf97d545fbe02749ae"
+    }
+  ]
+}

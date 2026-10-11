@@ -1,0 +1,248 @@
+{
+  "status": "PASS",
+  "commands": [
+    {
+      "label": "existing shared daily gate",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "tools/pre_push_gate.py"
+      ],
+      "exit_code": 0,
+      "seconds": 38.043
+    },
+    {
+      "label": "portable legacy compatibility and 3.9 field semantics",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\compat-pytest",
+        "tests/test_contract_registry.py",
+        "tests/test_compatibility_manifest.py",
+        "tests/test_m3_period_flow_contract.py",
+        "tests/test_m3_schema_compatibility.py"
+      ],
+      "exit_code": 0,
+      "seconds": 6.651
+    },
+    {
+      "label": "native fixture generator",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "docs/handoffs/w05-rf-flow/e2e/build_inputs.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch"
+      ],
+      "exit_code": 0,
+      "seconds": 0.339
+    },
+    {
+      "label": "schema3.10 native template generation",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "scripts/generate_input_template.py",
+        "--name",
+        "FixtureCo Template (synthetic)",
+        "--base-year",
+        "2025",
+        "--forecast-years",
+        "2026",
+        "2027",
+        "--segments",
+        "Segment A",
+        "--schema",
+        "3.10",
+        "--currency",
+        "CNY",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\template-3.10.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.23
+    },
+    {
+      "label": "case1_acquisition native validation",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "scripts/revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.input.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "exit_code": 0,
+      "seconds": 0.27
+    },
+    {
+      "label": "case1_acquisition forecast/report",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "scripts/revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.input.json",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.forecast.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.forecast.md"
+      ],
+      "exit_code": 0,
+      "seconds": 0.32
+    },
+    {
+      "label": "case1_acquisition native strong reader/rehashed window",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.forecast.json",
+        "window"
+      ],
+      "exit_code": 0,
+      "seconds": 0.28
+    },
+    {
+      "label": "case1_acquisition native strong reader/rehashed currency",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.forecast.json",
+        "currency"
+      ],
+      "exit_code": 0,
+      "seconds": 0.249
+    },
+    {
+      "label": "case2_offset_fy native validation",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "scripts/revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case2_offset_fy.input.json",
+        "--validate-only",
+        "--verbose"
+      ],
+      "exit_code": 0,
+      "seconds": 0.259
+    },
+    {
+      "label": "case2_offset_fy forecast/report",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "scripts/revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case2_offset_fy.input.json",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case2_offset_fy.forecast.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case2_offset_fy.forecast.md"
+      ],
+      "exit_code": 0,
+      "seconds": 0.324
+    },
+    {
+      "label": "case2_offset_fy native strong reader/rehashed window",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case2_offset_fy.forecast.json",
+        "window"
+      ],
+      "exit_code": 0,
+      "seconds": 0.32
+    },
+    {
+      "label": "native immutable snapshot creation",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "scripts/revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.input.json",
+        "--version",
+        "w05-root-cny-v1",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.snapshot.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.335
+    },
+    {
+      "label": "full forecast determinism second native CLI",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "scripts/revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\case1_acquisition.input.json",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\e2e-scratch\\repeat.forecast.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.305
+    }
+  ],
+  "initial": {
+    "scratch_exists": false,
+    "frozen_exists": false
+  },
+  "owned_scratch_files_before_cleanup": [
+    {
+      "path": "case1_acquisition.forecast.json",
+      "bytes": 112015
+    },
+    {
+      "path": "case1_acquisition.forecast.md",
+      "bytes": 13864
+    },
+    {
+      "path": "case1_acquisition.input.json",
+      "bytes": 47763
+    },
+    {
+      "path": "case1_acquisition.snapshot.json",
+      "bytes": 119003
+    },
+    {
+      "path": "case2_offset_fy.forecast.json",
+      "bytes": 106931
+    },
+    {
+      "path": "case2_offset_fy.forecast.md",
+      "bytes": 13358
+    },
+    {
+      "path": "case2_offset_fy.input.json",
+      "bytes": 45675
+    },
+    {
+      "path": "publication-registry.jsonl",
+      "bytes": 3835
+    },
+    {
+      "path": "repeat.forecast.json",
+      "bytes": 112015
+    },
+    {
+      "path": "template-3.10.json",
+      "bytes": 21887
+    },
+    {
+      "path": "compat-pytest/publication-registry0/publications.jsonl",
+      "bytes": 2254
+    }
+  ],
+  "scratch_exists_after": false,
+  "original_scratch_state_restored": true,
+  "product_frozen_exists_after": true,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0
+}

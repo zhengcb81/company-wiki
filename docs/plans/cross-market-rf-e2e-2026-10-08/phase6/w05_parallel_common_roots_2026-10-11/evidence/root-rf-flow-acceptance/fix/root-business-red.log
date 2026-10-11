@@ -1,0 +1,96 @@
+FFF.F                                                                    [100%]
+================================== FAILURES ===================================
+______ test_partial_flow_cannot_become_full_year_by_derived_annual_alias ______
+
+    def test_partial_flow_cannot_become_full_year_by_derived_annual_alias():
+        data = acquisition_document()
+        for scenario in ("low", "base", "high"):
+            target = parameter(data, f"cmp_fy2026_{scenario}")
+            target.update(time_basis="annual", formula="x0", input_parameter_ids=["cmp_post_2026"], value=1.29190208)
+            for field in ("period_start", "period_end", "rationale"):
+                target.pop(field)
+>       with pytest.raises(ForecastInputError, match="composition"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_w05_root_temporal_lineage.py:30: Failed
+_______ test_rationale_cannot_relabel_existing_2026_amount_as_2027_flow _______
+
+    def test_rationale_cannot_relabel_existing_2026_amount_as_2027_flow():
+        data = acquisition_document()
+        data.pop("forecast_adjustments")
+        for scenario in ("low", "base", "high"):
+            target = parameter(data, f"cmp_fy2026_{scenario}")
+            target.update(period="FY2027", period_start="2027-01-01", period_end="2027-12-31", rationale="explicit composition")
+>       with pytest.raises(ForecastInputError, match="composition"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_w05_root_temporal_lineage.py:40: Failed
+_____ test_same_perimeter_h1_and_its_q2_cannot_be_added_despite_rationale _____
+
+    def test_same_perimeter_h1_and_its_q2_cannot_be_added_despite_rationale():
+        data = acquisition_document()
+        definition = "Segment A recognized revenue"
+        add_window_parameter(data, "same_h1", 55.0, "2026-01-01", "2026-06-30", 2026, definition=definition)
+        add_window_parameter(data, "same_q2", 30.0, "2026-04-01", "2026-06-30", 2026, definition=definition)
+        for scenario in ("low", "base", "high"):
+            target = parameter(data, f"cmp_fy2026_{scenario}")
+            target.update(formula="x0+x1", input_parameter_ids=["same_h1", "same_q2"], value=85.0,
+                          definition=definition, rationale="Q2 is a subset of H1; intentional overlap")
+>       with pytest.raises(ForecastInputError, match="composition"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_w05_root_temporal_lineage.py:53: Failed
+_____________________ test_mixed_rejects_lagged_activity ______________________
+
+    def test_mixed_rejects_lagged_activity():
+        data = mixed_document()
+        data["segments"][0]["recognition"]["mode"] = "lagged_activity"
+        with pytest.raises(ForecastInputError, match="already recognized"):
+>           run_forecast(data, mode="draft")
+
+tests\test_mixed_aggregate_recognition.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\revenue_core.py:446: in run_forecast
+    result = _build_forecast_draft(data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\revenue_core.py:63: in _build_forecast_draft
+    validated = validate_document(data)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+scripts\contracts\document.py:1126: in validate_document
+    growth_driver_tree = validate_growth_driver_tree(
+scripts\research\drivers.py:463: in validate_growth_driver_tree
+    base_parameter_ids = base_forecast_parameter_ids(data, parameter_index)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\forecast\calc.py:420: in base_forecast_parameter_ids
+    return scenario_forecast_parameter_ids(data, "base", parameter_index)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\forecast\calc.py:180: in scenario_forecast_parameter_ids
+    roots = referenced_parameter_ids(data, scenario)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+data = {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}
+scenario = 'base'
+
+    def referenced_parameter_ids(data: dict[str, Any], scenario: str) -> set[str]:
+        referenced: set[str] = set()
+        for segment in data["segments"]:
+            scenario_input = segment["scenarios"][scenario]
+            for ids in scenario_input["driver_parameter_ids"].values():
+                referenced.update(ids)
+            recognition = segment["recognition"]
+            if recognition.get("mode") == "lagged_activity":
+>               referenced.update(recognition["carry_in_parameter_ids"][scenario])
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               KeyError: 'carry_in_parameter_ids'
+
+scripts\forecast\calc.py:158: KeyError
+=========================== short test summary info ===========================
+FAILED tests/test_w05_root_temporal_lineage.py::test_partial_flow_cannot_become_full_year_by_derived_annual_alias
+FAILED tests/test_w05_root_temporal_lineage.py::test_rationale_cannot_relabel_existing_2026_amount_as_2027_flow
+FAILED tests/test_w05_root_temporal_lineage.py::test_same_perimeter_h1_and_its_q2_cannot_be_added_despite_rationale
+FAILED tests/test_mixed_aggregate_recognition.py::test_mixed_rejects_lagged_activity
+4 failed, 1 passed in 2.16s

@@ -1,0 +1,122 @@
+{
+  "mode": "red",
+  "cases": [
+    {
+      "name": "same_price_cancels_inline",
+      "unchanged_input_sha256": "c6f55655ce6568c1f9eec1c6688b38e3bcbe64613d35e5ab0077fd452b225239",
+      "unchanged_original_output_sha256": "e6588fc8b10876df774402e767d145a1b154170edaf2a09d46e19e984ec606c6",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        }
+      ]
+    },
+    {
+      "name": "same_price_cancels_derived",
+      "unchanged_input_sha256": "c9e5a206754521dad1339c223cdd07aa78ca5ec2650a49b195cf466f633fe6c0",
+      "unchanged_original_output_sha256": "d5a93256361efce2fd8abbd223c019685a39f71e707967cbcaad76dafc6c8e19",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        }
+      ]
+    },
+    {
+      "name": "distinct_equal_prices_cancel",
+      "unchanged_input_sha256": "f1052adf3bffee5b3f982568a83189cd8ff4ec957f56ac9aa42558f628261178",
+      "unchanged_original_output_sha256": "82d2eca3195efedab541831847cfff687012b96de71830754cd3bfa769fab7c4",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "expected": "reject",
+          "pass": false
+        }
+      ]
+    },
+    {
+      "label": "portable business RED",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_w05_root_temporal_lineage.py",
+        "-k",
+        "price_cancellation or annual_operating_flow",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\rf-price-exact-uqggnxcz\\pytest"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "scratch_removed": true,
+  "network_attempts": [],
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "w05-independent-final-evidence/1",
+  "files": [
+    {
+      "path": "final-review.json",
+      "bytes": 8191,
+      "sha256": "c92588d680110050362a5f29f6845c1fec20c9ff28c3545f08d970bd9e8e68cc"
+    },
+    {
+      "path": "final-review.md",
+      "bytes": 3997,
+      "sha256": "c2e2525f639a2dc04210a17067fbe2f8aaa4b0b8a1bd975c2914592bc4c34529"
+    },
+    {
+      "path": "first-unconfigured-registry-probes.json",
+      "bytes": 456656,
+      "sha256": "73d4fd2109308b73a860482e49c88ee733666649bc22e1f902fe59049ce87b69"
+    },
+    {
+      "path": "first-unconfigured-registry-probes.py",
+      "bytes": 5649,
+      "sha256": "b911cc7c37ce8bf42bb6dc2beb56d4bb52dc7a2c7c5dd6851e6ef9139ad1d07c"
+    },
+    {
+      "path": "original-and-independent-probes.json",
+      "bytes": 456037,
+      "sha256": "3a928ad0dd22a4b4b9daa1a6628e4ce0694a7ea241264e5c05a95cebc245709a"
+    },
+    {
+      "path": "original-point-stock-annual-fail.json",
+      "bytes": 456037,
+      "sha256": "3a928ad0dd22a4b4b9daa1a6628e4ce0694a7ea241264e5c05a95cebc245709a"
+    },
+    {
+      "path": "probe-cleanup.json",
+      "bytes": 575,
+      "sha256": "82b048ef92202b0e0d913f23807104e61f4d8d6f4c484f509014ec2af7200819"
+    },
+    {
+      "path": "probes.py",
+      "bytes": 6651,
+      "sha256": "e694ebef3ffdbbec9823b52953422304f174c64ed441dc6f8db39fe89b40cc85"
+    },
+    {
+      "path": "write-review.py",
+      "bytes": 10848,
+      "sha256": "f9e532b161acbcdc4a479d59c61c4855ef933a9ca04aea158333021d7e1cd12c"
+    }
+  ]
+}

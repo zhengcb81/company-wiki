@@ -1,0 +1,144 @@
+{
+  "verdict": "FAIL_NEW_PRICE_PERIOD_CORRELATION_P1",
+  "product_root": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/rf-flow-root",
+  "checked_files": 30,
+  "checked_bytes": 807661,
+  "all_frozen_shas_match": true,
+  "cases": 24,
+  "boundary_outcomes": 58,
+  "new_P1_cases": [
+    {
+      "name": "same_price_cancels_inline",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": false
+        }
+      ],
+      "pass": false,
+      "input_sha256": "362f14029d0e8137c9a0e0c9177cd15a98e8b121178f16b5d547954c37491d43",
+      "fy2026_low": 170.0
+    },
+    {
+      "name": "same_price_cancels_derived",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": false
+        }
+      ],
+      "pass": false,
+      "input_sha256": "f59799dbe179dc535531c497791282231467d653a31345ef7ed1202e3982f6ba",
+      "fy2026_low": 170.0
+    },
+    {
+      "name": "distinct_equal_prices_cancel",
+      "group": "independent",
+      "expected": "reject",
+      "boundaries": [
+        {
+          "boundary": "validate_document",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "run_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_published_forecast",
+          "actual": "accept",
+          "pass": false
+        },
+        {
+          "boundary": "validate_forecast_output",
+          "actual": "accept",
+          "pass": false
+        }
+      ],
+      "pass": false,
+      "input_sha256": "78cdffb247ec56e22b68a31fe7667833c175294ac50afdf5ced3a00835ee1c56",
+      "fy2026_low": 170.0
+    }
+  ],
+  "original_fail_unchanged": true,
+  "exact_original_P1_reader_rejection": [
+    {
+      "boundary": "validate_forecast_output",
+      "pass": true,
+      "actual": "reject",
+      "error": "cmp_fy2026_base: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+      "error_type": "ForecastInputError"
+    },
+    {
+      "boundary": "validate_published_forecast",
+      "pass": true,
+      "actual": "reject",
+      "error": "cmp_fy2026_base: typed flow requires flow-bearing ancestry with a period amount; stock/rate/scalar alone cannot establish recognized revenue",
+      "error_type": "ForecastInputError"
+    }
+  ],
+  "native_cli": [
+    {
+      "exit_code": 0,
+      "network_denied": true,
+      "synthetic_input": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\docs\\handoffs\\w05-rf-flow\\e2e\\frozen\\case1_acquisition.input.json"
+    },
+    {
+      "artifact": "forecast.json",
+      "identical_frozen_bytes": true,
+      "sha256": "290a1c3eec1940003b331504bcde79c3bdfd5068370d2ae35d464c7cfd3eac1e"
+    },
+    {
+      "artifact": "forecast.md",
+      "identical_frozen_bytes": true,
+      "sha256": "2db6a60bfb693831a61d4a514a77c0ef8950761f6edd53973cd7b03d605e70e3"
+    }
+  ],
+  "scratch_restored": true,
+  "product_writes": 0,
+  "raw_writes": 0,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "network_calls": 0,
+  "fees_usd": 0,
+  "full_suite_repeated": false,
+  "scope": "Synthetic mathematical type and period provenance; not factual source or economic forecast certification"
+}

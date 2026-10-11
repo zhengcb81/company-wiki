@@ -1,0 +1,16 @@
+{
+  "schema": "root-checkout-cleanup/1",
+  "removed_checkout": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root",
+  "retained_branch": "codex/root-w05-rf-flow-20261011",
+  "accepted_commit": "30ddae8ed2a457c418e63b182e7d8c9230fbf3ff",
+  "ancestor_of_main": true,
+  "tracked_clean": true,
+  "canonical_LF_equal_files": 30,
+  "ignored_only_disposable_caches": [
+    "!! .mypy_cache/",
+    "!! .ruff_cache/"
+  ],
+  "normal_worktree_remove": true,
+  "worker_and_canonical_preserved": true,
+  "raw_originals_untouched": true
+}

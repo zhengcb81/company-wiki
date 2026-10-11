@@ -1,0 +1,8 @@
+Command: python -B -m pytest -p no:cacheprovider -q tests/test_w05_root_temporal_lineage.py -k point_stock
+Working tree: C:/Users/郑曾波/Projects/_harness_worktrees/w05/rf-flow-root
+Exit: 1
+Native actual forecast accepted closing monetary_balance point stock =20 relabeled as a full-year revenue period_flow by formula x0 + rationale.
+FAILED tests/test_w05_root_temporal_lineage.py::test_point_stock_alone_cannot_be_retyped_as_dated_recognized_revenue
+E Failed: DID NOT RAISE ForecastInputError
+1 failed, 8 deselected in 0.65s
+No provider/LLM calls or fees. Test assertion is retained unchanged.

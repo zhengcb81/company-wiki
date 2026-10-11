@@ -1,0 +1,281 @@
+{
+  "canonical": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+  "schema": "rf-install-plan/1",
+  "selected": [
+    "CHANGELOG.md",
+    "SKILL.md",
+    "references/dated-contribution.md",
+    "references/input-construction.md",
+    "references/input-schema.md",
+    "references/output-schema.md",
+    "scripts/contracts/annual_consumption.py",
+    "scripts/contracts/constants.py",
+    "scripts/contracts/document.py",
+    "scripts/contracts/period_flow.py",
+    "scripts/contracts/recognition.py",
+    "scripts/forecast/segments.py",
+    "scripts/generate_input_template.py",
+    "scripts/research/drivers.py",
+    "scripts/revenue_core.py",
+    "scripts/revenue_report.py",
+    "scripts/schema_compatibility.py"
+  ],
+  "targets": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills",
+      "files": [
+        {
+          "before_sha256": "d3ad9585e9ee70cb3d410847999203b1370220332eb36b632c18dfa6de72bbdc",
+          "operation": "replace",
+          "path": "CHANGELOG.md",
+          "size": 31353,
+          "source_sha256": "96bd2e8abcc5e202c87c968e5ef3046c329d8f4e20804db5889baaae668701b7"
+        },
+        {
+          "before_sha256": "a71600e6f9764c13c8236883eb591451c90548582191eaedd26cc87723e62741",
+          "operation": "replace",
+          "path": "SKILL.md",
+          "size": 36352,
+          "source_sha256": "eb0182a2d659338e967d16ee9e6ec8159e598cfc7fbb3e1fc895519cb325e4a4"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "references/dated-contribution.md",
+          "size": 10154,
+          "source_sha256": "68cd514189224f3335aca54f29fc8f198f8caba1ad5c3f255ab12da18688a2b0"
+        },
+        {
+          "before_sha256": "c7ef79311c0be7f1bb63a1ff4213044d8a1f44024b53ade7b9688ebdbdab2d20",
+          "operation": "replace",
+          "path": "references/input-construction.md",
+          "size": 15924,
+          "source_sha256": "ca1fb512031a61c8614245003f32cdf5c6ab07eed5ee4633ff5ba97c4802499f"
+        },
+        {
+          "before_sha256": "b2d70aa6f97dc3382c4e342c7f449bb8205a4d47f1709656d3ba1eeeecd43607",
+          "operation": "replace",
+          "path": "references/input-schema.md",
+          "size": 19274,
+          "source_sha256": "24394133fdd4d7f29f2ec1e84e2395922475254905769e1b0f10ddfc93fb3744"
+        },
+        {
+          "before_sha256": "fd8628717c5638ddb35e485bcec970f2ae7d8baefff75171fee18d6cd557d75d",
+          "operation": "replace",
+          "path": "references/output-schema.md",
+          "size": 6795,
+          "source_sha256": "de434ae4d10454fba6d4235bf78762e23d67bbed13dcaf8d66b5e26d383412b6"
+        },
+        {
+          "before_sha256": "3861b9920ac46250e75364ef40eb592617cfab4da52ad21689e7bba6ac7b7e15",
+          "operation": "replace",
+          "path": "scripts/contracts/annual_consumption.py",
+          "size": 7537,
+          "source_sha256": "7bba88869eb3edaae9a668d55d5287321c01c0cb259dafa189bdde548b3aa33a"
+        },
+        {
+          "before_sha256": "728f4e6ffc1417c37e155ea0191c3a28b804db601f279c11649e481e0075da74",
+          "operation": "replace",
+          "path": "scripts/contracts/constants.py",
+          "size": 8718,
+          "source_sha256": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e"
+        },
+        {
+          "before_sha256": "882a08abba740ba14f17cfcc614e29aa7c40fe68783bf05ee9d73c5891f7769c",
+          "operation": "replace",
+          "path": "scripts/contracts/document.py",
+          "size": 52038,
+          "source_sha256": "8c26881c9d1d727029ea027069f94cd8d98c4687ea82ed48a41b50b5c2831dbd"
+        },
+        {
+          "before_sha256": "0caeb1f1d69778405c1816e1dcddfcc9faac4ddf618c883e70564d6f7ad1e19f",
+          "operation": "replace",
+          "path": "scripts/contracts/period_flow.py",
+          "size": 26965,
+          "source_sha256": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/contracts/recognition.py",
+          "size": 4559,
+          "source_sha256": "551ddb361d28ef8466051fa848d25a3bcc954fb998ef8e3c474c7140e91e0375"
+        },
+        {
+          "before_sha256": "fc2d33f91f4cd1e003a9ed93efec2a88be1839bfea043aa106f13a6daeb08b7b",
+          "operation": "replace",
+          "path": "scripts/forecast/segments.py",
+          "size": 25436,
+          "source_sha256": "15ee89945da4ee05276af7393e4924ae39e1eeeccdc6d3d9659ebc577b355190"
+        },
+        {
+          "before_sha256": "5507ae1fb484c0d6bef097d1776998155e50d1c0e76fa2a3ac6171e31ab61bf0",
+          "operation": "replace",
+          "path": "scripts/generate_input_template.py",
+          "size": 15970,
+          "source_sha256": "5fe3fc24c2a68069a6ea7827a6b0c93bec00d070fda7140f4e34c105c8da2c70"
+        },
+        {
+          "before_sha256": "aebfc5ddcdb56e743efa35f3514b867e2cac6e9a1f335ab1c79bd309ccc8a696",
+          "operation": "replace",
+          "path": "scripts/research/drivers.py",
+          "size": 24185,
+          "source_sha256": "964fa1dba1429dd11321d52b6389a95803a09454f4ddcfa74821f15cdedb3456"
+        },
+        {
+          "before_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+          "operation": "replace",
+          "path": "scripts/revenue_core.py",
+          "size": 26101,
+          "source_sha256": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c"
+        },
+        {
+          "before_sha256": "4c35f485d8b028aaf3a3d9d92b203882f1f10ec0ddacf3bad2ffc9eece36a29f",
+          "operation": "replace",
+          "path": "scripts/revenue_report.py",
+          "size": 82832,
+          "source_sha256": "7f12259cedfb232ea05118d3d29a3c75ba49732c1b9cc0fbaeed76fd50a3964d"
+        },
+        {
+          "before_sha256": "1df2f419152fdf50da2555417952cb9fd028e6e85a5f5d1e39ca4f46e4e8707a",
+          "operation": "replace",
+          "path": "scripts/schema_compatibility.py",
+          "size": 5299,
+          "source_sha256": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 17,
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills",
+      "files": [
+        {
+          "before_sha256": "d3ad9585e9ee70cb3d410847999203b1370220332eb36b632c18dfa6de72bbdc",
+          "operation": "replace",
+          "path": "CHANGELOG.md",
+          "size": 31353,
+          "source_sha256": "96bd2e8abcc5e202c87c968e5ef3046c329d8f4e20804db5889baaae668701b7"
+        },
+        {
+          "before_sha256": "baad77074b2e4cfbdf502db2e65291c6818dda259ade49a281bd633aaf9be9d0",
+          "operation": "replace",
+          "path": "SKILL.md",
+          "size": 36352,
+          "source_sha256": "eb0182a2d659338e967d16ee9e6ec8159e598cfc7fbb3e1fc895519cb325e4a4"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "references/dated-contribution.md",
+          "size": 10154,
+          "source_sha256": "68cd514189224f3335aca54f29fc8f198f8caba1ad5c3f255ab12da18688a2b0"
+        },
+        {
+          "before_sha256": "c7ef79311c0be7f1bb63a1ff4213044d8a1f44024b53ade7b9688ebdbdab2d20",
+          "operation": "replace",
+          "path": "references/input-construction.md",
+          "size": 15924,
+          "source_sha256": "ca1fb512031a61c8614245003f32cdf5c6ab07eed5ee4633ff5ba97c4802499f"
+        },
+        {
+          "before_sha256": "b2d70aa6f97dc3382c4e342c7f449bb8205a4d47f1709656d3ba1eeeecd43607",
+          "operation": "replace",
+          "path": "references/input-schema.md",
+          "size": 19274,
+          "source_sha256": "24394133fdd4d7f29f2ec1e84e2395922475254905769e1b0f10ddfc93fb3744"
+        },
+        {
+          "before_sha256": "fd8628717c5638ddb35e485bcec970f2ae7d8baefff75171fee18d6cd557d75d",
+          "operation": "replace",
+          "path": "references/output-schema.md",
+          "size": 6795,
+          "source_sha256": "de434ae4d10454fba6d4235bf78762e23d67bbed13dcaf8d66b5e26d383412b6"
+        },
+        {
+          "before_sha256": "3861b9920ac46250e75364ef40eb592617cfab4da52ad21689e7bba6ac7b7e15",
+          "operation": "replace",
+          "path": "scripts/contracts/annual_consumption.py",
+          "size": 7537,
+          "source_sha256": "7bba88869eb3edaae9a668d55d5287321c01c0cb259dafa189bdde548b3aa33a"
+        },
+        {
+          "before_sha256": "728f4e6ffc1417c37e155ea0191c3a28b804db601f279c11649e481e0075da74",
+          "operation": "replace",
+          "path": "scripts/contracts/constants.py",
+          "size": 8718,
+          "source_sha256": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e"
+        },
+        {
+          "before_sha256": "882a08abba740ba14f17cfcc614e29aa7c40fe68783bf05ee9d73c5891f7769c",
+          "operation": "replace",
+          "path": "scripts/contracts/document.py",
+          "size": 52038,
+          "source_sha256": "8c26881c9d1d727029ea027069f94cd8d98c4687ea82ed48a41b50b5c2831dbd"
+        },
+        {
+          "before_sha256": "0caeb1f1d69778405c1816e1dcddfcc9faac4ddf618c883e70564d6f7ad1e19f",
+          "operation": "replace",
+          "path": "scripts/contracts/period_flow.py",
+          "size": 26965,
+          "source_sha256": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/contracts/recognition.py",
+          "size": 4559,
+          "source_sha256": "551ddb361d28ef8466051fa848d25a3bcc954fb998ef8e3c474c7140e91e0375"
+        },
+        {
+          "before_sha256": "fc2d33f91f4cd1e003a9ed93efec2a88be1839bfea043aa106f13a6daeb08b7b",
+          "operation": "replace",
+          "path": "scripts/forecast/segments.py",
+          "size": 25436,
+          "source_sha256": "15ee89945da4ee05276af7393e4924ae39e1eeeccdc6d3d9659ebc577b355190"
+        },
+        {
+          "before_sha256": "5507ae1fb484c0d6bef097d1776998155e50d1c0e76fa2a3ac6171e31ab61bf0",
+          "operation": "replace",
+          "path": "scripts/generate_input_template.py",
+          "size": 15970,
+          "source_sha256": "5fe3fc24c2a68069a6ea7827a6b0c93bec00d070fda7140f4e34c105c8da2c70"
+        },
+        {
+          "before_sha256": "aebfc5ddcdb56e743efa35f3514b867e2cac6e9a1f335ab1c79bd309ccc8a696",
+          "operation": "replace",
+          "path": "scripts/research/drivers.py",
+          "size": 24185,
+          "source_sha256": "964fa1dba1429dd11321d52b6389a95803a09454f4ddcfa74821f15cdedb3456"
+        },
+        {
+          "before_sha256": "9ac2532094dde2a0539ba5177f5e1296f4a15f62dd259f61ec2d5f788caf81c2",
+          "operation": "replace",
+          "path": "scripts/revenue_core.py",
+          "size": 26101,
+          "source_sha256": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c"
+        },
+        {
+          "before_sha256": "4c35f485d8b028aaf3a3d9d92b203882f1f10ec0ddacf3bad2ffc9eece36a29f",
+          "operation": "replace",
+          "path": "scripts/revenue_report.py",
+          "size": 82832,
+          "source_sha256": "7f12259cedfb232ea05118d3d29a3c75ba49732c1b9cc0fbaeed76fd50a3964d"
+        },
+        {
+          "before_sha256": "1df2f419152fdf50da2555417952cb9fd028e6e85a5f5d1e39ca4f46e4e8707a",
+          "operation": "replace",
+          "path": "scripts/schema_compatibility.py",
+          "size": 5299,
+          "source_sha256": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 17,
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "unselected_drift": 9
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+existing single daily gate
+
+=== ruff ===
+All checks passed!
+
+=== public contract types ===
+Success: no issues found in 11 source files
+
+=== current source and forecast behavior ===
+efault_cli_e2e.py:160: in test_cli_default_v2_journey_survives_derived_deletion
+    ff_root, cwp_root = _env_roots()
+                        ^^^^^^^^^^^^
+tests\test_p5_source_default_cli_e2e.py:50: in _env_roots
+    raise FileNotFoundError(f"Required offline source dependency missing: {root}")
+E   FileNotFoundError: Required offline source dependency missing: C:\Users\郑曾波\Projects\_harness_worktrees\w05\filing-fetch
+__________________ test_cli_corrupted_raw_refuses_then_heals __________________
+tests\test_p5_source_default_cli_e2e.py:193: in test_cli_corrupted_raw_refuses_then_heals
+    ff_root, cwp_root = _env_roots()
+                        ^^^^^^^^^^^^
+tests\test_p5_source_default_cli_e2e.py:50: in _env_roots
+    raise FileNotFoundError(f"Required offline source dependency missing: {root}")
+E   FileNotFoundError: Required offline source dependency missing: C:\Users\郑曾波\Projects\_harness_worktrees\w05\filing-fetch
+__________ test_cli_verified_missing_title_is_display_only_metadata ___________
+tests\test_p5_source_default_cli_e2e.py:225: in test_cli_verified_missing_title_is_display_only_metadata
+    ff_root, cwp_root = _env_roots()
+                        ^^^^^^^^^^^^
+tests\test_p5_source_default_cli_e2e.py:50: in _env_roots
+    raise FileNotFoundError(f"Required offline source dependency missing: {root}")
+E   FileNotFoundError: Required offline source dependency missing: C:\Users\郑曾波\Projects\_harness_worktrees\w05\filing-fetch
+=========================== short test summary info ===========================
+FAILED tests/test_w05_root_temporal_lineage.py::test_actual_dated_quantity_times_transaction_price_keeps_real_window
+FAILED tests/test_p5_source_default_cli_e2e.py::test_cli_default_v2_journey_survives_derived_deletion
+FAILED tests/test_p5_source_default_cli_e2e.py::test_cli_corrupted_raw_refuses_then_heals
+FAILED tests/test_p5_source_default_cli_e2e.py::test_cli_verified_missing_title_is_display_only_metadata
+4 failed, 386 passed, 36 subtests passed in 12.99s
+
+FAILED: current source and forecast behavior
+

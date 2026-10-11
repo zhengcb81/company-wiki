@@ -1,0 +1,4 @@
+["C:\\Miniconda\\python.exe", "-B", "-m", "pytest", "-p", "no:cacheprovider", "-q", "tests/test_w05_root_temporal_lineage.py", "tests/test_mixed_aggregate_recognition.py", "tests/test_m3_period_flow_contract.py", "tests/test_m3_period_flow_consumers.py", "tests/test_m3_period_flow_annual_consumers.py", "tests/test_m3_schema_compatibility.py", "tests/test_schema_compatibility.py", "tests/test_w05_dated_contribution_contract.py", "tests/test_w05_dated_contribution_composition.py", "tests/test_w05_dated_contribution_output.py"]
+................................................................. [ 41%]
+.............................................................................................                          [100%]
+158 passed, 33 subtests passed in 3.29s

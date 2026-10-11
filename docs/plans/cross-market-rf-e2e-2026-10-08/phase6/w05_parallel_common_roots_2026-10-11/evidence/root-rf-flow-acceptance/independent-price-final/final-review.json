@@ -1,0 +1,40 @@
+{
+  "verdict": "PASS_WITH_SCOPE",
+  "product_inventory": "fix/price-correlation/root-product-inventory.json",
+  "checked_files": 30,
+  "checked_bytes": 818229,
+  "all_frozen_shas_match": true,
+  "cases_passed": 31,
+  "case_boundary_outcomes": 74,
+  "exact_reader_outcomes": 8,
+  "exact_four_original_P1_boundary_calls": 16,
+  "prior_price_fail_11_files_unchanged": true,
+  "original_point_stock_fail_unchanged": true,
+  "native_cli": [
+    {
+      "exit_code": 0,
+      "network_denied": true,
+      "synthetic_input": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\docs\\handoffs\\w05-rf-flow\\e2e\\frozen\\case1_acquisition.input.json"
+    },
+    {
+      "artifact": "forecast.json",
+      "identical_frozen_bytes": true,
+      "sha256": "290a1c3eec1940003b331504bcde79c3bdfd5068370d2ae35d464c7cfd3eac1e"
+    },
+    {
+      "artifact": "forecast.md",
+      "identical_frozen_bytes": true,
+      "sha256": "2db6a60bfb693831a61d4a514a77c0ef8950761f6edd53973cd7b03d605e70e3"
+    }
+  ],
+  "scratch_restored": true,
+  "product_writes": 0,
+  "raw_writes": 0,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "network_calls": 0,
+  "fees_usd": 0,
+  "full_suite_repeated": false,
+  "seconds_after_imports": 1.199,
+  "scope": "Common mathematical type/period provenance and native boundaries. Not real source qualification or investment/economic forecast certification. Same-dimension mixed raw price roles require native roles or actual flow-derived price."
+}

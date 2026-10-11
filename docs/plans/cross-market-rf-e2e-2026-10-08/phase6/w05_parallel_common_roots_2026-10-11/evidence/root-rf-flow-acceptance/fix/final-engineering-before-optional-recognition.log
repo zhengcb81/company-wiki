@@ -1,0 +1,44 @@
+ROOT final engineering node; 0 provider/LLM calls, 0 fees
+{"label": "existing shared daily gate", "command": ["C:\\Miniconda\\python.exe", "-B", "tools/pre_push_gate.py"], "exit_code": 1, "seconds": 62.238}
+
+=== ruff ===
+All checks passed!
+
+=== public contract types ===
+Success: no issues found in 11 source files
+
+=== current source and forecast behavior ===
+  [100%]
+================================== FAILURES ===================================
+_______ DataContractTests.test_pre_revenue_company_can_have_no_history ________
+tests\test_data_contract.py:778: in test_pre_revenue_company_can_have_no_history
+    validate_document(data)
+scripts\contracts\document.py:1132: in validate_document
+    validate_recognition_contracts(data, source_index, claim_index)
+scripts\contracts\document.py:1081: in validate_recognition_contracts
+    validate_recognition_metadata(segment, source_index, claim_index)
+scripts\contracts\recognition.py:14: in validate_recognition_metadata
+    require(isinstance(recognition, dict), f"{name} requires recognition metadata")
+scripts\contracts\evidence.py:98: in require
+    raise ForecastInputError(message)
+E   contracts.evidence.ForecastInputError: Segment A requires recognition metadata
+____________________ DataContractTests.test_valid_document ____________________
+tests\test_data_contract.py:547: in test_valid_document
+    validated = validate_document(valid_document())
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\contracts\document.py:1132: in validate_document
+    validate_recognition_contracts(data, source_index, claim_index)
+scripts\contracts\document.py:1081: in validate_recognition_contracts
+    validate_recognition_metadata(segment, source_index, claim_index)
+scripts\contracts\recognition.py:14: in validate_recognition_metadata
+    require(isinstance(recognition, dict), f"{name} requires recognition metadata")
+scripts\contracts\evidence.py:98: in require
+    raise ForecastInputError(message)
+E   contracts.evidence.ForecastInputError: Segment A requires recognition metadata
+=========================== short test summary info ===========================
+FAILED tests/test_data_contract.py::DataContractTests::test_pre_revenue_company_can_have_no_history
+FAILED tests/test_data_contract.py::DataContractTests::test_valid_document - ...
+2 failed, 354 passed, 36 subtests passed in 52.79s
+
+FAILED: current source and forecast behavior
+

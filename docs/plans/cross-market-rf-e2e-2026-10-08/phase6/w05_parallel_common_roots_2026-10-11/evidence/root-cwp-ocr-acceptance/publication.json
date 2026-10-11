@@ -1,0 +1,31 @@
+{
+  "schema_version": "root-w05-ocr-publication/1",
+  "status": "COMPLETE_WITH_SCOPE",
+  "integration_commit": "c7fb1b814e6d03a2f39d2092ab668448bca7e24d",
+  "main_merge": "ae0ca0d3c03f4a974ff26e472860ee306959d091",
+  "published_head": "8862372f714209cff1b218d77b5c4b8af6bc74dc",
+  "remote_head_verified": "8862372f714209cff1b218d77b5c4b8af6bc74dc",
+  "normal_hooks": true,
+  "push_gate": {
+    "passed": 3257,
+    "seconds": 224.81
+  },
+  "github_ci": {
+    "id": 38140484490,
+    "head_sha": "8862372f714209cff1b218d77b5c4b8af6bc74dc",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/38140484490",
+    "verification": "GitHub public REST API; no credentials read"
+  },
+  "focused_preallocation_pass": 54,
+  "independent_preallocation_pass": 34,
+  "existing_fast_smoke_pass": 148,
+  "real_e2e_seconds": 83.006,
+  "originals_config_unchanged": true,
+  "scratch_restored": true,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0,
+  "scope": "Windows source/resource/locator; POSIX static only; no peak RSS/full recall/research certification"
+}

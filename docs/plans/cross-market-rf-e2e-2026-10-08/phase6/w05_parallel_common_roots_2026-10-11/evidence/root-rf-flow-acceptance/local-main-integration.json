@@ -1,0 +1,20 @@
+{
+  "integration_commit": "30ddae8ed2a457c418e63b182e7d8c9230fbf3ff",
+  "main_head": "30ddae8ed2a457c418e63b182e7d8c9230fbf3ff",
+  "normal_hooks": true,
+  "canonical_wip_sha_before": {
+    "assurance/runs/daily_alert.jsonl": "afba37eca9ccd7e31b17d9d4ac2e3ce2abd677553d270fbfd7e1356f2369546c",
+    "assurance/runs/weekly_alert.jsonl": "0304c1de7d4ce35af30a349d322873b2dd625c26e50c309952dc00c1d835c70f",
+    "assurance/runs/weekly_manifest.json": "fd778d160d128b65e641c38daeb898e48515caaef30b9e0f38b050cb89d02d1b"
+  },
+  "canonical_wip_sha_after": {
+    "assurance/runs/daily_alert.jsonl": "afba37eca9ccd7e31b17d9d4ac2e3ce2abd677553d270fbfd7e1356f2369546c",
+    "assurance/runs/weekly_alert.jsonl": "0304c1de7d4ce35af30a349d322873b2dd625c26e50c309952dc00c1d835c70f",
+    "assurance/runs/weekly_manifest.json": "fd778d160d128b65e641c38daeb898e48515caaef30b9e0f38b050cb89d02d1b"
+  },
+  "canonical_porcelain_before": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? output/",
+  "canonical_porcelain_after": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? output/",
+  "product_LF_equal": 30,
+  "install_pending": true,
+  "remote_push_pending": true
+}

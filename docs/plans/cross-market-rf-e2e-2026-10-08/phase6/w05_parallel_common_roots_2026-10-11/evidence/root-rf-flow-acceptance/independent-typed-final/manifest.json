@@ -1,0 +1,63 @@
+{
+  "schema_version": "w05-independent-typed-final-manifest/1",
+  "verdict": "FAIL_NEW_PRICE_PERIOD_CORRELATION_P1",
+  "file_count": 11,
+  "total_bytes": 558367,
+  "files": [
+    {
+      "path": "distinct_equal_prices_cancel.unexpected-accepted-input.json",
+      "bytes": 49660,
+      "sha256": "f1052adf3bffee5b3f982568a83189cd8ff4ec957f56ac9aa42558f628261178"
+    },
+    {
+      "path": "distinct_equal_prices_cancel.unexpected-accepted-output.json",
+      "bytes": 119221,
+      "sha256": "82d2eca3195efedab541831847cfff687012b96de71830754cd3bfa769fab7c4"
+    },
+    {
+      "path": "final-review.json",
+      "bytes": 4320,
+      "sha256": "313a457dbca2eb8cea270e43044c76afd06ed9e080d290b2d7c10c73f81170d4"
+    },
+    {
+      "path": "final-review.md",
+      "bytes": 6188,
+      "sha256": "456f5287125d9800a41adb72f72fea40364ef43b8d595aacaf7dca7791e1e431"
+    },
+    {
+      "path": "native-cli.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "probes.py",
+      "bytes": 13006,
+      "sha256": "2c1d218b1ed680a5a10db8d1345d54679819b4093c340bd684d3511440684d5f"
+    },
+    {
+      "path": "results.json",
+      "bytes": 32711,
+      "sha256": "7082d61455a6d2c4b14a18a044bc0a2d1f203e735fb65609d87c713636cf622d"
+    },
+    {
+      "path": "same_price_cancels_derived.unexpected-accepted-input.json",
+      "bytes": 49162,
+      "sha256": "c9e5a206754521dad1339c223cdd07aa78ca5ec2650a49b195cf466f633fe6c0"
+    },
+    {
+      "path": "same_price_cancels_derived.unexpected-accepted-output.json",
+      "bytes": 118168,
+      "sha256": "d5a93256361efce2fd8abbd223c019685a39f71e707967cbcaad76dafc6c8e19"
+    },
+    {
+      "path": "same_price_cancels_inline.unexpected-accepted-input.json",
+      "bytes": 48707,
+      "sha256": "c6f55655ce6568c1f9eec1c6688b38e3bcbe64613d35e5ab0077fd452b225239"
+    },
+    {
+      "path": "same_price_cancels_inline.unexpected-accepted-output.json",
+      "bytes": 117224,
+      "sha256": "e6588fc8b10876df774402e767d145a1b154170edaf2a09d46e19e984ec606c6"
+    }
+  ]
+}

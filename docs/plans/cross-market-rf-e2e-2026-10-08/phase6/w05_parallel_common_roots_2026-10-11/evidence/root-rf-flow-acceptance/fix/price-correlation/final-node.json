@@ -1,0 +1,181 @@
+{
+  "status": "PASS",
+  "commands": [
+    {
+      "label": "existing single daily gate",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "tools/pre_push_gate.py"
+      ],
+      "exit_code": 0,
+      "seconds": 46.311,
+      "network_denied": false
+    },
+    {
+      "label": "case1_acquisition native CLI",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-c",
+        "import socket,runpy,sys; sys.dont_write_bytecode=True;\ndef deny(*a,**k): raise RuntimeError('network forbidden by offline final replay')\nsocket.socket.connect=deny; socket.create_connection=deny; socket.getaddrinfo=deny; sys.path.insert(0,sys.argv[1]); sys.argv=sys.argv[2:]; runpy.run_path(sys.argv[0],run_name='__main__')",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\scripts",
+        "scripts/revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\docs\\handoffs\\w05-rf-flow\\e2e\\frozen\\case1_acquisition.input.json",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\price-correlation\\owned-scratch\\case1_acquisition.forecast.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\price-correlation\\owned-scratch\\case1_acquisition.forecast.md"
+      ],
+      "exit_code": 0,
+      "seconds": 0.39,
+      "network_denied": true
+    },
+    {
+      "label": "case1_acquisition strong readers and date tamper",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-c",
+        "import socket,runpy,sys; sys.dont_write_bytecode=True;\ndef deny(*a,**k): raise RuntimeError('network forbidden by offline final replay')\nsocket.socket.connect=deny; socket.create_connection=deny; socket.getaddrinfo=deny; sys.path.insert(0,sys.argv[1]); sys.argv=sys.argv[2:]; runpy.run_path(sys.argv[0],run_name='__main__')",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\scripts",
+        "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\price-correlation\\owned-scratch\\case1_acquisition.forecast.json",
+        "window"
+      ],
+      "exit_code": 0,
+      "seconds": 0.324,
+      "network_denied": true
+    },
+    {
+      "label": "case2_offset_fy native CLI",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-c",
+        "import socket,runpy,sys; sys.dont_write_bytecode=True;\ndef deny(*a,**k): raise RuntimeError('network forbidden by offline final replay')\nsocket.socket.connect=deny; socket.create_connection=deny; socket.getaddrinfo=deny; sys.path.insert(0,sys.argv[1]); sys.argv=sys.argv[2:]; runpy.run_path(sys.argv[0],run_name='__main__')",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\scripts",
+        "scripts/revenue_forecast.py",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\docs\\handoffs\\w05-rf-flow\\e2e\\frozen\\case2_offset_fy.input.json",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\price-correlation\\owned-scratch\\case2_offset_fy.forecast.json",
+        "--markdown",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\price-correlation\\owned-scratch\\case2_offset_fy.forecast.md"
+      ],
+      "exit_code": 0,
+      "seconds": 0.451,
+      "network_denied": true
+    },
+    {
+      "label": "case2_offset_fy strong readers and date tamper",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-c",
+        "import socket,runpy,sys; sys.dont_write_bytecode=True;\ndef deny(*a,**k): raise RuntimeError('network forbidden by offline final replay')\nsocket.socket.connect=deny; socket.create_connection=deny; socket.getaddrinfo=deny; sys.path.insert(0,sys.argv[1]); sys.argv=sys.argv[2:]; runpy.run_path(sys.argv[0],run_name='__main__')",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\scripts",
+        "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\price-correlation\\owned-scratch\\case2_offset_fy.forecast.json",
+        "window"
+      ],
+      "exit_code": 0,
+      "seconds": 0.349,
+      "network_denied": true
+    },
+    {
+      "label": "C1 currency tamper",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-c",
+        "import socket,runpy,sys; sys.dont_write_bytecode=True;\ndef deny(*a,**k): raise RuntimeError('network forbidden by offline final replay')\nsocket.socket.connect=deny; socket.create_connection=deny; socket.getaddrinfo=deny; sys.path.insert(0,sys.argv[1]); sys.argv=sys.argv[2:]; runpy.run_path(sys.argv[0],run_name='__main__')",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\scripts",
+        "docs/handoffs/w05-rf-flow/e2e/read_and_tamper.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\price-correlation\\owned-scratch\\case1_acquisition.forecast.json",
+        "currency"
+      ],
+      "exit_code": 0,
+      "seconds": 0.391,
+      "network_denied": true
+    },
+    {
+      "label": "C1 snapshot",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-c",
+        "import socket,runpy,sys; sys.dont_write_bytecode=True;\ndef deny(*a,**k): raise RuntimeError('network forbidden by offline final replay')\nsocket.socket.connect=deny; socket.create_connection=deny; socket.getaddrinfo=deny; sys.path.insert(0,sys.argv[1]); sys.argv=sys.argv[2:]; runpy.run_path(sys.argv[0],run_name='__main__')",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\scripts",
+        "scripts/revenue_backtest.py",
+        "create",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root\\docs\\handoffs\\w05-rf-flow\\e2e\\frozen\\case1_acquisition.input.json",
+        "--version",
+        "w05-root-cny-v1",
+        "--output",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-rf-flow-acceptance\\fix\\price-correlation\\owned-scratch\\case1_acquisition.snapshot.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.473,
+      "network_denied": true
+    }
+  ],
+  "frozen_comparisons": [
+    {
+      "path": "case1_acquisition.forecast.json",
+      "full_bytes_identical": true,
+      "sha256": "290a1c3eec1940003b331504bcde79c3bdfd5068370d2ae35d464c7cfd3eac1e"
+    },
+    {
+      "path": "case1_acquisition.forecast.md",
+      "full_bytes_identical": true,
+      "sha256": "2db6a60bfb693831a61d4a514a77c0ef8950761f6edd53973cd7b03d605e70e3"
+    },
+    {
+      "path": "case2_offset_fy.forecast.json",
+      "full_bytes_identical": true,
+      "sha256": "8a404ef221f496cab2184bb8c00c664138837f4ad0b16d0f2bc057fc6fdcd47e"
+    },
+    {
+      "path": "case2_offset_fy.forecast.md",
+      "full_bytes_identical": true,
+      "sha256": "b187917834c968ce6e5b31cd30a20705e804e3c60bb510016a398dccad961214"
+    },
+    {
+      "path": "case1_acquisition.snapshot.json",
+      "full_bytes_identical": true,
+      "sha256": "b6eacd637ff6ff9c58ece13cf2ebb0a5bfe34922a1efe9fb18868a140025f87a"
+    }
+  ],
+  "scratch_initial_exists": false,
+  "files_before_cleanup": [
+    {
+      "path": "case1_acquisition.forecast.json",
+      "bytes": 112015
+    },
+    {
+      "path": "case1_acquisition.forecast.md",
+      "bytes": 13864
+    },
+    {
+      "path": "case1_acquisition.snapshot.json",
+      "bytes": 119003
+    },
+    {
+      "path": "case2_offset_fy.forecast.json",
+      "bytes": 106931
+    },
+    {
+      "path": "case2_offset_fy.forecast.md",
+      "bytes": 13358
+    },
+    {
+      "path": "registry.jsonl",
+      "bytes": 3062
+    }
+  ],
+  "scratch_final_exists": false,
+  "scratch_restored": true,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0
+}

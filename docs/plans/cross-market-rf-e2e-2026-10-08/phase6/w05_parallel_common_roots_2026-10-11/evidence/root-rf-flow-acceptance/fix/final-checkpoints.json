@@ -1,0 +1,60 @@
+{
+  "full_forecast_deterministic": true,
+  "c1_actual_cny_unit_and_window": {
+    "parameter_id": "cmp_post_2026",
+    "kind": "reported_fact",
+    "value": 1.29190208,
+    "unit": "CNY million",
+    "period": "FY2026",
+    "definition": "acquired entity revenue from control date 2026-05-31 to period end (purchase-to-end)",
+    "scenario": null,
+    "source_ids": [
+      "filing"
+    ],
+    "dimension": "revenue",
+    "time_basis": "period_flow",
+    "currency": "CNY",
+    "scale": "million",
+    "period_start": "2026-05-31",
+    "period_end": "2026-06-30",
+    "claim_ids": [
+      "claim_parameter_cmp_post_2026"
+    ]
+  },
+  "c2_offset_fye": {
+    "parameter_id": "fy26_total",
+    "kind": "derived_fact",
+    "value": 20.0,
+    "unit": "USD million",
+    "period": "FY2026",
+    "definition": "explicit full-year composition over the offset fiscal window",
+    "scenario": null,
+    "source_ids": [],
+    "formula": "x0+x1+x2",
+    "input_parameter_ids": [
+      "fy26_a",
+      "fy26_b",
+      "fy26_c"
+    ],
+    "dimension": "revenue",
+    "time_basis": "period_flow",
+    "currency": "USD",
+    "scale": "million",
+    "period_start": "2025-07-01",
+    "period_end": "2026-06-30"
+  },
+  "snapshot_reader": "PASS",
+  "rehashed_snapshot_tamper_rejected": "parameter_trace must match the validated input parameters",
+  "portable_unit_tests": "explicit temporary repos/docs",
+  "real_integration_roots": {
+    "revenue": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root",
+    "filing": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+    "wiki": "C:\\Users\\郑曾波\\Projects\\company-wiki"
+  },
+  "real_manifest_structural": [],
+  "real_manifest_ancestry": [],
+  "real_canonical_docs": [],
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0
+}

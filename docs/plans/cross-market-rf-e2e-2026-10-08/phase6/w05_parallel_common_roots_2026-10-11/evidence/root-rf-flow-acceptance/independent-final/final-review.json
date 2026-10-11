@@ -1,0 +1,176 @@
+{
+  "schema_version": "w05-rf-flow-independent-final-review/1",
+  "reviewer": "/root/w05_ocr_acceptance_review",
+  "author_of_product": false,
+  "product_root": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow-root",
+  "root_head_declared": "1b616622763ece6549676f2a74f596e6c65244af",
+  "worker_delivery": "f1a782a478d255b9b4b8f531e7a3961134e257ba",
+  "frozen_key_files": [
+    {
+      "path": "scripts/contracts/period_flow.py",
+      "sha256": "31ac27d37180c4a08f801745efe399ffc1281adad89b145f677fa5e94622841e",
+      "bytes": 18186
+    },
+    {
+      "path": "scripts/contracts/annual_consumption.py",
+      "sha256": "454b66aca0bbc4d5c453cc9128437bd6fb0a3c493409cc97d7e299a9ee97003f",
+      "bytes": 7173
+    },
+    {
+      "path": "scripts/contracts/document.py",
+      "sha256": "55332d53947bae59321e6fa7f553ad20cd39376a34142284992ddb82814c0405",
+      "bytes": 53333
+    },
+    {
+      "path": "scripts/contracts/recognition.py",
+      "sha256": "9e83d5396c575a898930bd89cb6f7e46c52659195a17fb255f1463a28073550f",
+      "bytes": 4665
+    },
+    {
+      "path": "scripts/forecast/segments.py",
+      "sha256": "6ada6cf125f59f975e0315859035c548033b1d5b5bc9f21a875eee850ee21104",
+      "bytes": 26043
+    },
+    {
+      "path": "compatibility/compatibility_manifest.py",
+      "sha256": "48c605f6c606e43c50cd55a8915f08ee73eff5679c597a9d4d733710f1096215",
+      "bytes": 9585
+    },
+    {
+      "path": "compatibility/contract_registry.py",
+      "sha256": "982ee13dcb92b30da4c820c79854c36059b009927e1fcccafe1110474f34d61c",
+      "bytes": 5513
+    }
+  ],
+  "root_inventory_records_checked": 29,
+  "freeze_mismatches": [],
+  "verdict": "FAIL_NEW_TYPED_ANCESTRY_P1",
+  "findings": [
+    {
+      "id": "W05-RF-INDEPENDENT-01",
+      "priority": "P1",
+      "status": "OPEN_AT_REVIEW_FREEZE",
+      "title": "An annual alias can launder point stock as recognized annual revenue",
+      "cause": "validate_windowed_composition returns for annual derived facts without period_flow ancestors; validate_annual_consumption trusts the outer annual basis. Typed monetary_balance point ancestry is never checked.",
+      "actual": "validate_document -> run_forecast -> validate_published_forecast -> validate_forecast_output accepts point monetary_balance 20 via annual revenue x0 alias, increases FY2026 low revenue from 150 to 170, and both strong readers PASS.",
+      "expected": "A pure relabeling of a point stock cannot establish recognized annual flow. Reject at the business contract, not due to registry write permissions.",
+      "evidence": "original-point-stock-annual-fail.json cases[5].input",
+      "reproducer": "probes.py stock_as_annual()",
+      "control": "The same stock alias labeled period_flow is correctly rejected with flow-bearing input diagnostic.",
+      "repair_scope": "Use unified typed ancestry for annual/datetime wrappers; do not blanket-reject native legitimate stock quantity times annual price/ARPU, stock-flow bridge models, or annual-only legacy drafts."
+    }
+  ],
+  "independent_results": [
+    {
+      "case": "valid_post_control_bridge",
+      "expected": "accept",
+      "actual": "accepted",
+      "group": "unchanged_original",
+      "pass": true,
+      "fy2026_low": 181.29190208,
+      "strong_readers": "PASS",
+      "elapsed_seconds": 0.040867
+    },
+    {
+      "case": "annual_alias_of_partial_flow",
+      "expected": "reject",
+      "actual": "rejected",
+      "group": "unchanged_original",
+      "pass": true,
+      "exception": "ForecastInputError",
+      "detail": "cmp_fy2026_low: full-year dated composition has unexplained gaps; missing flows cannot be zero-filled",
+      "elapsed_seconds": 0.002358
+    },
+    {
+      "case": "rationale_cannot_move_2026_amount_to_2027",
+      "expected": "reject",
+      "actual": "rejected",
+      "group": "unchanged_original",
+      "pass": true,
+      "exception": "ForecastInputError",
+      "detail": "cmp_fy2026_low: dated composition input cmp_post_2026 window 2026-05-31..2026-06-30 lies outside the composed window 2027-01-01..2027-12-31",
+      "elapsed_seconds": 0.00216
+    },
+    {
+      "case": "same_perimeter_h1_plus_own_q2",
+      "expected": "reject",
+      "actual": "rejected",
+      "group": "unchanged_original",
+      "pass": true,
+      "exception": "ForecastInputError",
+      "detail": "cmp_fy2026_low: dated composition double counts the same economic flow in overlapping inputs same_revenue_h1 and same_revenue_q2",
+      "elapsed_seconds": 0.001775
+    },
+    {
+      "case": "negative_disposal_window_flow",
+      "expected": "accept",
+      "actual": "accepted",
+      "group": "unchanged_original",
+      "pass": true,
+      "fy2026_low": 149.6870809792,
+      "strong_readers": "PASS",
+      "elapsed_seconds": 0.053663
+    },
+    {
+      "case": "independent_point_stock_cannot_be_annual_revenue_alias",
+      "expected": "reject",
+      "actual": "accepted",
+      "group": "independent",
+      "pass": false,
+      "fy2026_low": 170.0,
+      "strong_readers": "PASS",
+      "elapsed_seconds": 0.062512
+    },
+    {
+      "case": "independent_point_stock_cannot_be_dated_revenue_alias",
+      "expected": "reject",
+      "actual": "rejected",
+      "group": "independent",
+      "pass": true,
+      "exception": "ForecastInputError",
+      "detail": "cmp_fy2026_low: dated composition needs a flow-bearing input; stock/rate alone cannot establish recognized revenue",
+      "elapsed_seconds": 0.001367
+    },
+    {
+      "case": "independent_zero_weight_does_not_fill_fy",
+      "expected": "reject",
+      "actual": "rejected",
+      "group": "independent",
+      "pass": true,
+      "exception": "ForecastInputError",
+      "detail": "cmp_fy2026_low: full-year dated composition has unexplained gaps; missing flows cannot be zero-filled",
+      "elapsed_seconds": 0.001286
+    }
+  ],
+  "tested_scope": [
+    "Original three P1 builders and expectations were replayed unchanged with only LEAF path rebound in memory; all three now receive real composition diagnostics.",
+    "Original valid post-control bridge and negative disposal pass the actual run_forecast and strong readers.",
+    "A zero-weight FY operand cannot manufacture full-year coverage.",
+    "point stock -> period_flow rejects, point stock -> annual incorrectly accepts.",
+    "All 29 ROOT frozen inventory byte sizes and SHA values match."
+  ],
+  "unmeasured_scope": [
+    "No repeat of 356-test daily suite or 52-test compatibility suite.",
+    "H1/Q3 concatenation, additional annual-rate extrapolation and pure rate/scalar ancestry controls were not independently run before ROOT requested turn completion after the P1.",
+    "Recognition shared-owner ordering and registry root split were read; their authored GREEN evidence was read but not reexecuted in this narrow turn.",
+    "No independent CLI subprocess was completed in this turn; run_forecast formal publication and both strong readers were exercised with an explicit isolated registry.",
+    "No source truth, actual business perimeter validity, all-company forecast economics or W04 quality verdict."
+  ],
+  "environment_failure_preserved": {
+    "file": "first-unconfigured-registry-probes.json",
+    "cause": "First independent harness lacked explicit REVENUE_PUBLICATION_REGISTRY; formal publication attempted default external-tree artifacts and was denied by sandbox. No such failure is counted as a valid business rejection.",
+    "resolution": "Set publication registry to initially absent owned scratch and disable attestation provider for synthetic tests; original expectations untouched."
+  },
+  "author_evidence_not_independently_repeated": {
+    "daily_gate": "356 passed +36 subtests in 33.20s",
+    "portable_compatibility": "52 passed +7 subtests in 3.90s",
+    "explicit_real_three_repo_roots": "../fix/final-checkpoints.json",
+    "report": "../fix/ROOT-fix-summary.md"
+  },
+  "scratch_restored": true,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0,
+  "product_writes": 0,
+  "original_documents_touched": 0
+}
