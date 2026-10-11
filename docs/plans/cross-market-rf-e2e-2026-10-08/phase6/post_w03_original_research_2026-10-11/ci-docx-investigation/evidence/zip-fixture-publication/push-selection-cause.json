@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-10-11T02:59:00.867966+00:00",
+  "old_head": "ee293769037d0a9a205d75d15d64f0600929eaad",
+  "new_head": "d3d807691efa68a30ae50fffb9980db4942eccae",
+  "changed_count": 40,
+  "runtime_changes": [
+    "tests/unit/test_docx_heading_normalization.py"
+  ],
+  "archived_python_changes": [
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-independent-review/probe.py"
+  ],
+  "selected": [
+    "tests/unit"
+  ],
+  "reason": "deleted or unknown dependency",
+  "tests_executed": false
+}

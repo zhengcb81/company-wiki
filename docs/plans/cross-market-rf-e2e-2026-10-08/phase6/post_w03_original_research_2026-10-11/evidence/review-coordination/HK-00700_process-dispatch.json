@@ -1,0 +1,14 @@
+{
+  "company": "HK-00700",
+  "role": "process",
+  "reviewer_agent": "/root/pw03_hk_process_reviewer",
+  "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\HK-00700_process.md",
+  "execution_handoff": {
+    "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\handoffs\\execution.json",
+    "sha256": "03ad7c33d0b66a48f966d4912c6eb307c8cbada15f8724ae6936576c9a9bfe4e"
+  },
+  "observation": "ROOT observes actual fresh spawn; not the child's started timestamp",
+  "observed_at": "2026-10-11T03:08:17.102343+00:00",
+  "new_provider_calls": 0,
+  "new_model_calls": 0
+}

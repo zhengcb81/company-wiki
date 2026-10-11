@@ -16,3 +16,7 @@
 ## 2026-10-11T02:54:29.485947+00:00 发布事实补充
 
 7产品源码ee293769普通提交/主线/推送，本地3196PASS199.24s，精确LinuxCI38105648234实际2FAIL/3057PASS/6skip76.96s。两失败现精确归ZIP fixture宿主create_system；唯一test-only补丁双宿主TDD RED1FAIL/1PASS→集中39PASS及独立4probe+2定点PASS接受，原正文/locator/完整旧字段断言/历史recordSHA保持。源产品7SHA和生产2config保持。下一次普通发布后只以其精确LinuxCI接收，不把本地或旧CI冒签绿。公司四审质量另有真实FAIL待共因专家，未完成总目标。
+
+## 2026-10-11T03:10:01.647836+00:00 — ZIP跨平台fixture修复正式关闭
+
+普通commit d3d807691efa68a30ae50fffb9980db4942eccae，normalpush3198PASS/191.38s；精确GitHub CI38106925215 completed/success，同HEAD。原ee293769两项FAIL和原日志不改，新fixture保持d428原DOCX及a658全record指纹，独立报告2a40a946…/b6171d18…接受。来源7产品/2配置前后不变。本次只签工程DOCX责任，不签三公司研究。后续推送范围修复为独立效率事项，不能替代原CI接受。

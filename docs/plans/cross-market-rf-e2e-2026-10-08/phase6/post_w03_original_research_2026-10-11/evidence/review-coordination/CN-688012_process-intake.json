@@ -1,0 +1,101 @@
+{
+  "company": "CN-688012",
+  "role": "process",
+  "observed_at": "2026-10-11T03:08:17.102343+00:00",
+  "report": {
+    "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+    "json_sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b",
+    "md": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.md",
+    "md_sha256": "f0d4d0f997fd93cc3d148d402b2c19b34b125e52b9845953c68287a5e25f3346"
+  },
+  "checks": 23,
+  "findings": 10,
+  "old_issue_count": 19,
+  "old_issue_status": {
+    "FAIL": 10,
+    "PASS": 5,
+    "NOT_RUN": 4
+  },
+  "start_event": {
+    "schema_version": "1.0",
+    "event_id": "217c21a67571471c9d6f89e132384a5e",
+    "run_id": "pw03-20261011T010657Z-cn-688012",
+    "role": "process",
+    "kind": "review_started",
+    "recorded_at": "2026-10-11T02:53:22.339309+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "pw03-fresh-independent",
+      "step_id": "REVIEW_START",
+      "call_id": "process-review-start",
+      "observation": "Independent process reviewer started after executor seal. Reads only owned role, executor evidence, exact sources and assigned 19 legacy coverage entries. Original deadline retained; no provider/model/GET and no business reruns.",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\handoffs\\execution.json",
+          "locator": "entire handoff"
+        }
+      ]
+    }
+  },
+  "completed_event": {
+    "schema_version": "1.0",
+    "event_id": "fb8b31c0a8594ca0b56b78920c124868",
+    "run_id": "pw03-20261011T010657Z-cn-688012",
+    "role": "process",
+    "kind": "review_completed",
+    "recorded_at": "2026-10-11T03:05:28.705228+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "pw03-fresh-independent",
+      "step_id": "REVIEW_SEALED",
+      "call_id": "process-review-seal",
+      "observation": "Process report sealed. 23 checks/10 findings; all assigned19 legacy keys covered. Independent225 mathematical recomputations,48 exact RF quotes,11 extracted RF numbers,16 completed narrative claims/56 exact cited spans. Review makes0 provider/model/GET calls and0 USD cost. No business rerun, database open, source/config/code/install or other-role write. Original deadline retained. STOP.",
+      "outcome": "FAIL",
+      "executor_completion": "partial",
+      "coverage_counts": {
+        "FAIL": 10,
+        "PASS": 5,
+        "NOT_RUN": 4
+      },
+      "original_deadline_at": "2026-10-11T03:06:57.807570+00:00",
+      "sealed_at": "2026-10-11T03:05:25.580093+00:00",
+      "past_original_deadline": false,
+      "review_new_provider_calls": 0,
+      "review_new_model_calls": 0,
+      "review_new_http_gets": 0,
+      "review_cost_usd": 0,
+      "start_event_id": "217c21a67571471c9d6f89e132384a5e",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.json",
+          "locator": "entire",
+          "sha256": "935ad90bda2bc2a96fdfb185d3a42c0f568aea57646cba3750bcc1b74ab7d58b"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\process.md",
+          "locator": "entire",
+          "sha256": "f0d4d0f997fd93cc3d148d402b2c19b34b125e52b9845953c68287a5e25f3346"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\roles\\process\\numeric-audit.json",
+          "locator": "entire",
+          "sha256": "23618918a9a26fb5549e6e181e9fe69a546b32b35941fad7d28d6d130d87f0bb"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\roles\\process\\execution-observations.json",
+          "locator": "entire",
+          "sha256": "c4ddb869553869ff8b1aaa77274025cf12afece8f68e398baee17e9f3d4ab321"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\roles\\process\\source-and-scope-diagnostics.json",
+          "locator": "entire",
+          "sha256": "8d6b6fed7db06fe2bc19522bcb51b0168f1fb1e1eee8d368b2988e4f7c9ec19b"
+        }
+      ]
+    }
+  },
+  "integrity_accepted": true,
+  "quality_pass": false
+}

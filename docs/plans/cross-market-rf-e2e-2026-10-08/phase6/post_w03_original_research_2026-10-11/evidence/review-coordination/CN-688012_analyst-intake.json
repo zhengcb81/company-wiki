@@ -1,0 +1,100 @@
+{
+  "company": "CN-688012",
+  "role": "analyst",
+  "observed_at": "2026-10-11T03:08:17.102343+00:00",
+  "report": {
+    "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\analyst.json",
+    "json_sha256": "4840a3c26f2cda8bfcfae3d8f03f47939b2d47f02a56d94917e54a8bb214b86f",
+    "md": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\analyst.md",
+    "md_sha256": "54228728f16057394d6f81f1080c43bf0d6f91f37c34d6a41f7942cbd6cbd082"
+  },
+  "checks": 14,
+  "findings": 5,
+  "old_issue_count": 10,
+  "old_issue_status": {
+    "FAIL": 7,
+    "BLOCKED": 2,
+    "PASS": 1
+  },
+  "start_event": {
+    "schema_version": "1.0",
+    "event_id": "04419a130ad341be816047dd820c10f2",
+    "run_id": "pw03-20261011T010657Z-cn-688012",
+    "role": "analyst",
+    "kind": "review_started",
+    "recorded_at": "2026-10-11T02:53:41.288432+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "initial",
+      "step_id": "A00",
+      "call_id": "analyst-start-001",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\scope.json",
+          "locator": "deadline"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\handoffs\\execution.json",
+          "locator": "sealed_at; execution_outcome"
+        }
+      ],
+      "observation": "Fresh independent analyst review started after reading complete company card and installed audit role contract. Review remains read-only toward executor/source/code/config. No external GET, provider or model calls. Original cohort deadline remains 2026-10-11T03:06:57.807570+00:00; actual event time is not backdated."
+    }
+  },
+  "completed_event": {
+    "schema_version": "1.0",
+    "event_id": "a97f337d26354134bb3468d96f5fd782",
+    "run_id": "pw03-20261011T010657Z-cn-688012",
+    "role": "analyst",
+    "kind": "review_completed",
+    "recorded_at": "2026-10-11T03:03:43.671094+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "initial",
+      "step_id": "A_SEAL",
+      "call_id": "analyst-seal-001",
+      "observation": "Independent analyst report sealed. 14 checks, 5 findings; all 10 original keys mapped: 7 FAIL, 2 BLOCKED, 1 PASS. Native three-year numbers independently crosschecked; economic magnitude remains conditional and unverified. Original run PARTIAL preserved. STOP after this event.",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\analyst.json",
+          "sha256": "4840a3c26f2cda8bfcfae3d8f03f47939b2d47f02a56d94917e54a8bb214b86f",
+          "bytes": 58717
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\analyst.md",
+          "sha256": "54228728f16057394d6f81f1080c43bf0d6f91f37c34d6a41f7942cbd6cbd082",
+          "bytes": 30049
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\roles\\analyst\\independent-crosschecks.json",
+          "sha256": "368d31eafda03d0997213671b75eb6c88023a6fc312ea8115a26a0ed23323e24",
+          "bytes": 7593
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\roles\\analyst\\read-log.json",
+          "sha256": "4487c7de93f4c613331973b608f0e44f164511ba68c0131bac1482beed0773d0",
+          "bytes": 8143
+        }
+      ],
+      "review_outcome": "FAIL_research_partial",
+      "original_cohort_deadline": "2026-10-11T03:06:57.807570+00:00",
+      "seal_requested_at_utc": "2026-10-11T03:03:43.547610+00:00",
+      "within_original_window_at_seal_request": true,
+      "deadline_reset": false,
+      "additional_GET": 0,
+      "additional_provider_calls": 0,
+      "additional_model_calls": 0,
+      "additional_tokens": 0,
+      "additional_cost_usd": 0,
+      "invoice_usd": null,
+      "mother_ledger_reset": false,
+      "owned_file_count_before_seal": 6,
+      "owned_bytes_before_seal": 106336,
+      "independence": "Only assigned card, own-role historical coverage entries, real executor and source artifacts read. No other reviewer report, draft or reply read; no executor replay or source/config/code changes."
+    }
+  },
+  "integrity_accepted": true,
+  "quality_pass": false
+}

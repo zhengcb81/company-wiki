@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-10-11T03:01:23.921248+00:00",
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_ci_push_selection.py",
+    "-q",
+    "--tb=short"
+  ],
+  "exit_code": 1,
+  "wall_seconds": 5.846100900002057,
+  "log_sha256": "451f4e968bd07a4f00b0461efd89f0e84443fe05001f1625444593405a1fe471"
+}

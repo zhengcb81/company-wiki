@@ -1,0 +1,17 @@
+{
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_ci_push_selection.py",
+    "-q"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 4.5029332999984035,
+  "observed_at": "2026-10-11T03:06:47.875998+00:00",
+  "log_sha256": "95d6a63ec47b7d7a0191fea6dea6211adb8ff9125618dfa66bcbdad23e4c33d0",
+  "log_bytes": 1198
+}

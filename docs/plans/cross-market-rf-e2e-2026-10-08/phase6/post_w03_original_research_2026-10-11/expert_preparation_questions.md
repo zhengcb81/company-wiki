@@ -11,8 +11,11 @@
 7. 冻结输入历史+可写consumed重复造成CN/HK超过32MiB；P7-AUDIT交接18a52f16/40b38103已只读发现，须技术验收/主线和安装后才能依赖新helpers；本卡旧W11没有改动。封存content addressing共享仅immutable，mutable按actualCLI独立，不新增数据库。不删除失败的唯一输入或重标retention通过；旧manifest消费引用可重定位须保持事实与审计可复查。
 8. 新的研究问题与配置/代码/外部限制分别分类，157旧项及所有新项→共因→工作包→测试逐项，不把相同症状做多个小门禁。只共享契约/仓内责任/真实跨仓公共节点做集中审查，不增每字段许可或更多hash重复。
 
-当前DOCX产品共因7源已发布，ZIP fixture跨平台反例39GREEN待独立/精确CI，避免专家再创建同一已解决包。P7-RF47f497ad接受，Dayu零写、原文保留。公司asof/期限和model实际范围见本轮scope。费用按同母账累计。
+当前DOCX产品共因7源已发布，ZIP fixture跨平台反例39GREEN及独立接受已完成，d3d80769精确CI38106925215 success；推送范围责任边界48GREEN，待其正常集中发布。避免专家再创建同一已解决包。P7-RF47f497ad接受，Dayu零写、原文保留。公司asof/期限和model实际范围见本轮scope。费用按同母账累计。
 
 P7-AUDIT真实工程交接位于C:/Users/郑曾波/Projects/_harness_worktrees/p7/audit/.planning/p7-audit-execution-review/HANDOFF.md（946afe38…），将其中remaining及expert W01–W08纳入同一issue→root→test映射，不另造一层身份/许可；新helpers实际仅diagnostic/not_evaluated，研究停止/修复由coordinator原流程判断。
 
 P7-AUDIT接收补充：只读helper实测零费用cap0.00拒绝；声明P1/100和合成业务正文P2/1000分离仍accepted。需确认实际CWP/FF/LLM请求字段映射和owner已有cap责任，不能只用另一个template.limits声明证明child执行上限，也不能说纯helper合成probe证明实际provider越界。先实际native合同TDD，零费用允许且负/NaN拒绝；不增加按provider人签或盲修改所有JSON字段。
+
+9. 原executors01:56–02:02已在7200s窗口内封存；十二独立review排队使最后本地审查在原03:06:57后。未来以真实执行/只读review stage分别合理有界，cohort原截止不可重写；原收费/partial状态不变。检查是否仅把研究窗口当stage窗口使用错误，不增加许可或少做四审。
+10. 四审若对期间有不同判断，亲查语义而非机械照改：fiscal reporting period的1月1日起点不必等于购后贡献control window。CN process的CMP起日与analyst的控制桥结论要基于period_flow/参数rationale/实际公式裁决，分别保留calendar period、contribution时窗和集团外部抵销，不能加全局“日期必须相等”门。非连续quote哪怕两个数字真也须多个span或明确组合，不能伪称连续excerpt。

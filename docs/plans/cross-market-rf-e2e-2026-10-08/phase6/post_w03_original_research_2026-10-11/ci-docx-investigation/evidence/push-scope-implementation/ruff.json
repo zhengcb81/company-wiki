@@ -1,0 +1,18 @@
+{
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "ruff",
+    "check",
+    "tools/changed_unit_tests.py",
+    "tests/unit/test_ci_push_selection.py"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.15490349999890896,
+  "observed_at": "2026-10-11T03:06:48.031732+00:00",
+  "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+  "log_bytes": 19
+}

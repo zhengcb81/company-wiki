@@ -1,0 +1,12 @@
+{
+  "observed_at": "2026-10-11T03:05:24.764287+00:00",
+  "api_response_sha256": "587aaf45dcaf8281f9760271a1a60f7a99dd9979394c7c1d1ede22e416a638ee",
+  "id": 38106925215,
+  "name": "CI",
+  "head_sha": "d3d807691efa68a30ae50fffb9980db4942eccae",
+  "status": "completed",
+  "conclusion": "success",
+  "created_at": "2026-10-11T02:59:26Z",
+  "updated_at": "2026-10-11T03:00:56Z",
+  "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38106925215"
+}

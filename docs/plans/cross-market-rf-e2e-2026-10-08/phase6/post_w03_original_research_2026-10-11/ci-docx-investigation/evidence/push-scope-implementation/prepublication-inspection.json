@@ -1,0 +1,71 @@
+{
+  "whitespace_exit_code": 2,
+  "source_diff_sha256": "c535a90fb6f081f5e62a20f00e14639b27155bbbe7c4b596fdfc6fa50adffa44",
+  "protected_config_sha256": {
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "product_changed_paths": [],
+  "review_queue": [
+    {
+      "company": "CN-688012",
+      "role": "storage",
+      "state": "SEALED_FAIL"
+    },
+    {
+      "company": "CN-688012",
+      "role": "fetch",
+      "state": "SEALED_FAIL"
+    },
+    {
+      "company": "CN-688012",
+      "role": "process",
+      "state": "SEALED_FAIL"
+    },
+    {
+      "company": "CN-688012",
+      "role": "analyst",
+      "state": "SEALED_FAIL"
+    },
+    {
+      "company": "HK-00700",
+      "role": "storage",
+      "state": "SEALED_FAIL"
+    },
+    {
+      "company": "HK-00700",
+      "role": "fetch",
+      "state": "RUNNING"
+    },
+    {
+      "company": "HK-00700",
+      "role": "process",
+      "state": "RUNNING"
+    },
+    {
+      "company": "HK-00700",
+      "role": "analyst",
+      "state": "RUNNING"
+    },
+    {
+      "company": "US-MSFT",
+      "role": "storage",
+      "state": "SEALED_FAIL"
+    },
+    {
+      "company": "US-MSFT",
+      "role": "fetch",
+      "state": "SEALED_FAIL"
+    },
+    {
+      "company": "US-MSFT",
+      "role": "process",
+      "state": "SEALED_FAIL"
+    },
+    {
+      "company": "US-MSFT",
+      "role": "analyst",
+      "state": "SEALED_FAIL"
+    }
+  ]
+}

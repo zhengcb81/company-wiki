@@ -1,0 +1,503 @@
+{
+  "reviewed_at": "2026-10-11T03:23:07.197735+00:00",
+  "status": "no_material_findings",
+  "base_head": "d3d807691efa68a30ae50fffb9980db4942eccae",
+  "source_sha256": {
+    "tools/changed_unit_tests.py": "4c589d12bc467fc14aefcad3dbfffce8bcea0a217c67bb2fda5d05320a171b19",
+    "tests/unit/test_ci_push_selection.py": "37e848b78ea8957bd678edd90a2016b7fd26404d6b4dc655eb106413f308be81",
+    "tools/pre_push_gate.py": "58f50f6467dfc52f67d9a2a7dbadb943e683313e5efe6f514d4ac9d95b6752d4",
+    ".githooks/pre-push": "365cf3a7a63a1bcd4173934b28af6a1023cc850cdd5360d48aa694e016ed96ab",
+    ".github/workflows/ci.yml": "9f2864979058658089bb9d4edd879e05a733404f3d1a6d1de06ec012a63359b8"
+  },
+  "scope": "Read-only stopped selector/test diff, existing hook/CI wiring and RED-to-GREEN; six local selector micro probes only.",
+  "exclusions": [
+    "No full Unit/48/39 suite rerun",
+    "No public E2E",
+    "No original test/source/config/PWF/company execution package modifications",
+    "No external GET/provider/model calls",
+    "No new-HEAD CI success assertion"
+  ],
+  "external_gets": 0,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "cost": 0,
+  "source_unchanged_before_after": true,
+  "old_test_functions": {
+    "count": 20,
+    "all_ast_identical": true
+  },
+  "src_config_diff_against_base_empty": true,
+  "hooks": {
+    "pre_push_uses_push_checks": true,
+    "ci_keeps_full_unit": true,
+    "push_uses_stdin_full_range": true,
+    "docs_plans_ignored_for_ci_scheduling": true
+  },
+  "existing_evidence_checked": {
+    "red.json": {
+      "sha256": "60627746766fcda7535e0173f218c6f05de7ac7283a523642c5d35a4b4974f2b",
+      "data": {
+        "observed_at": "2026-10-11T03:01:23.921248+00:00",
+        "argv": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/unit/test_ci_push_selection.py",
+          "-q",
+          "--tb=short"
+        ],
+        "exit_code": 1,
+        "wall_seconds": 5.846100900002057,
+        "log_sha256": "451f4e968bd07a4f00b0461efd89f0e84443fe05001f1625444593405a1fe471"
+      }
+    },
+    "green.json": {
+      "sha256": "00f6e7d570739a3beb7f2edb011a9074dd634b79094985bb1e0969c468fcb525",
+      "data": {
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "tests/unit/test_ci_push_selection.py",
+          "-q"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 4.5029332999984035,
+        "observed_at": "2026-10-11T03:06:47.875998+00:00",
+        "log_sha256": "95d6a63ec47b7d7a0191fea6dea6211adb8ff9125618dfa66bcbdad23e4c33d0",
+        "log_bytes": 1198
+      }
+    },
+    "ruff.json": {
+      "sha256": "5896278addc58737b6cb9e900bfddcf2ece600db1499d68831c3d7f2d656bcb1",
+      "data": {
+        "command": [
+          "python",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "ruff",
+          "check",
+          "tools/changed_unit_tests.py",
+          "tests/unit/test_ci_push_selection.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.15490349999890896,
+        "observed_at": "2026-10-11T03:06:48.031732+00:00",
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "log_bytes": 19
+      }
+    },
+    "actual-range-green.json": {
+      "sha256": "dac2b5116a86d100b71d4535776ae358dff218417098bed3c6e42caf0c00cf3f",
+      "data": {
+        "actual_push_range": [
+          "ee293769037d0a9a205d75d15d64f0600929eaad",
+          "d3d807691efa68a30ae50fffb9980db4942eccae"
+        ],
+        "changes": [
+          "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/SOURCE_ACCEPTANCE.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/ZIP_FIXTURE_CONTINUATION.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-annotations-failure.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-check-failure.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-failed-job.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-jobs-failure.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-observation-1.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-observation-2.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/normal-commit.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/normal-commit.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/normal-push.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/normal-push.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-green-attempt1-path-error.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-green-attempt1-path-error.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-reproduction.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-tdd-green.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-tdd-green.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-tdd-red.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-tdd-red.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-independent-review/probe.py",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-independent-review/review.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-independent-review/review.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-independent-review/two-host-tests.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/findings.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/progress.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/task_plan.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-readonly-intake/request-contract-diagnostics.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/CN-688012_analyst-dispatch.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/CN-688012_fetch-dispatch.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/CN-688012_process-dispatch.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_storage-dispatch.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/expert_preparation_questions.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/findings.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/progress.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/review_queue.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/task_plan.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md",
+          "tests/unit/test_docx_heading_normalization.py"
+        ],
+        "selected": [
+          "tests/unit/test_docx_heading_normalization.py"
+        ],
+        "reason": "affected unit tests",
+        "selected_test_files": 1,
+        "observed_at": "2026-10-11T03:06:54.372103+00:00"
+      }
+    },
+    "old-tests-preserved.json": {
+      "sha256": "7d6a43d48b04f19c82ade6257371da7765d2054803476e903714ce7ab582fa07",
+      "data": {
+        "observed_at": "2026-10-11T03:12:01.783838+00:00",
+        "base": "d3d807691efa68a30ae50fffb9980db4942eccae",
+        "test_file": "tests/unit/test_ci_push_selection.py",
+        "all_old_functions_AST_identical": true,
+        "old_function_count": 20,
+        "added_functions": [
+          "test_live_unit_change_with_archived_probe_does_not_seed_unrelated_cli_tests",
+          "test_mixed_live_source_and_planning_archive_keeps_actual_consumers",
+          "test_planning_archive_is_not_live_behavior_even_with_code_suffix",
+          "test_unit_only_change_keeps_known_transitive_test_helper_consumers"
+        ],
+        "source_docstring_adjustment": "accurate runtime vs test-only fallback description only"
+      }
+    },
+    "red.log": {
+      "sha256": "451f4e968bd07a4f00b0461efd89f0e84443fe05001f1625444593405a1fe471",
+      "tail": [
+        "    assert select_unit_tests(project, {\"tests/unit/test_helper.py\"}) == (",
+        "E   AssertionError: assert (['tests/unit...tion changed') == (['tests/unit...d unit tests')",
+        "E     ",
+        "E     At index 0 diff: ['tests/unit'] != ['tests/unit/test_helper.py', 'tests/unit/test_reader.py']",
+        "E     Use -v to get more diff",
+        "=========================== short test summary info ===========================",
+        "FAILED tests/unit/test_ci_push_selection.py::test_planning_archive_is_not_live_behavior_even_with_code_suffix[docs/plans/run/evidence/probe.py]",
+        "FAILED tests/unit/test_ci_push_selection.py::test_planning_archive_is_not_live_behavior_even_with_code_suffix[docs/plans/run/conftest.py]",
+        "FAILED tests/unit/test_ci_push_selection.py::test_mixed_live_source_and_planning_archive_keeps_actual_consumers",
+        "FAILED tests/unit/test_ci_push_selection.py::test_live_unit_change_with_archived_probe_does_not_seed_unrelated_cli_tests",
+        "FAILED tests/unit/test_ci_push_selection.py::test_unit_only_change_keeps_known_transitive_test_helper_consumers",
+        "======================== 5 failed, 43 passed in 2.18s ========================="
+      ]
+    },
+    "green.log": {
+      "sha256": "95d6a63ec47b7d7a0191fea6dea6211adb8ff9125618dfa66bcbdad23e4c33d0",
+      "tail": [
+        "platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0",
+        "benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)",
+        "rootdir: C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+        "configfile: pytest.ini",
+        "plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0",
+        "asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function",
+        "collected 48 items",
+        "",
+        "tests\\unit\\test_ci_push_selection.py ................................... [ 72%]",
+        ".............                                                            [100%]",
+        "",
+        "============================= 48 passed in 1.35s =============================="
+      ]
+    },
+    "ruff.log": {
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tail": [
+        "All checks passed!"
+      ]
+    }
+  },
+  "source_diff": "diff --git a/tests/unit/test_ci_push_selection.py b/tests/unit/test_ci_push_selection.py\nindex 47742abf..d6d4cf1b 100644\n--- a/tests/unit/test_ci_push_selection.py\n+++ b/tests/unit/test_ci_push_selection.py\n@@ -190,3 +190,34 @@ def test_planning_evidence_only_changes_do_not_schedule_full_ci():\n         assert \"src/**\" not in workflow[\"on\"][event][\"paths-ignore\"]\n         assert \"tests/**\" not in workflow[\"on\"][event][\"paths-ignore\"]\n     assert \"pytest tests/unit\" in (root / \".github/workflows/ci.yml\").read_text(encoding=\"utf-8\")\n+\n+@pytest.mark.parametrize(\"archive\", [\n+    \"docs/plans/run/evidence/probe.py\", \"docs/plans/run/conftest.py\",\n+    \"docs/plans/run/requirements.txt\", \"docs/plans/run/evidence/result.json\",\n+    \"docs/plans/run/evidence/original.docx\",\n+])\n+def test_planning_archive_is_not_live_behavior_even_with_code_suffix(project, archive):\n+    assert select_unit_tests(project, {archive}) == ([], \"no behavior changes\")\n+\n+\n+def test_mixed_live_source_and_planning_archive_keeps_actual_consumers(project):\n+    _file(project, \"tests/unit/test_runtime.py\", \"from importlib import import_module as load\\nload(name)\\n\")\n+    assert select_unit_tests(project, {\n+        \"src/pkg/core.py\", \"docs/plans/run/conftest.py\", \"docs/plans/run/evidence/probe.py\",\n+    }) == ([\"tests/unit/test_reader.py\", \"tests/unit/test_runtime.py\"], \"affected unit tests\")\n+\n+\n+def test_live_unit_change_with_archived_probe_does_not_seed_unrelated_cli_tests(project):\n+    _file(project, \"tests/unit/test_runtime.py\", \"import subprocess\\nsubprocess.run(argv)\\n\")\n+    _file(project, \"tests/unit/test_reader.py\", \"import subprocess\\nsubprocess.run(argv)\\n\")\n+    assert select_unit_tests(project, {\n+        \"tests/unit/test_reader.py\", \"docs/plans/run/evidence/probe.py\",\n+    }) == ([\"tests/unit/test_reader.py\"], \"affected unit tests\")\n+\n+\n+def test_unit_only_change_keeps_known_transitive_test_helper_consumers(project):\n+    _file(project, \"tests/unit/test_helper.py\", \"import subprocess\\nsubprocess.run(argv)\\n\")\n+    _file(project, \"tests/unit/test_reader.py\", \"from tests.unit import test_helper\\n\")\n+    _file(project, \"tests/unit/test_runtime.py\", \"import subprocess\\nsubprocess.run(argv)\\n\")\n+    assert select_unit_tests(project, {\"tests/unit/test_helper.py\"}) == (\n+        [\"tests/unit/test_helper.py\", \"tests/unit/test_reader.py\"], \"affected unit tests\")\ndiff --git a/tools/changed_unit_tests.py b/tools/changed_unit_tests.py\nindex dd908a76..caeab737 100644\n--- a/tools/changed_unit_tests.py\n+++ b/tools/changed_unit_tests.py\n@@ -1,7 +1,8 @@\n \"\"\"Conservative, cache-free unit selection for the complete Git push range.\n \n Static imports are an optimization, not a replacement for CI's full unit suite.\n-Uncertain ranges, configuration, test entrypoints and dynamic execution use it all.\n+Uncertain ranges, configuration, shared test entrypoints and dynamic runtime\n+execution use it all. Test-only changes retain their known helper consumers.\n \"\"\"\n from __future__ import annotations\n \n@@ -101,6 +102,9 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str],\n     full = [\"tests/unit\"]\n     if changes is None:\n         return full, \"unknown push range\"\n+    # Plans retain diagnostic scripts and fixtures as evidence, not live code.\n+    # Filter by that directory responsibility before entrypoint/dependency rules.\n+    changes = {name for name in changes if not name.startswith(\"docs/plans/\")}\n     global_names = {\"pyproject.toml\", \"pytest.ini\", \"conftest.py\", \"tests/conftest.py\"}\n     global_prefixes = (\"config/\", \".github/\", \".githooks/\", \"tools/\", \"tests/fixtures/\")\n     if any(name in global_names or name.startswith((*global_prefixes, \"requirements\"))\n@@ -113,13 +117,16 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str],\n              for p in (root / directory).rglob(\"*.py\")}\n     if not relevant <= paths.keys():\n         return full, \"deleted or unknown dependency\"\n+    # Changing a unit test does not alter the runtime used by unrelated CLI or\n+    # computed-import tests. Its known helper consumers still follow the graph.\n+    unit_tests_only = all(name.startswith(\"tests/unit/test_\") and name.endswith(\".py\") for name in relevant)\n     modules = {alias: name for name in paths for alias in _aliases(name)}\n     reverse: dict[str, set[str]] = {}\n     uncertain = set()\n     try:\n         for name, path in paths.items():\n             tree = ast.parse(path.read_text(encoding=\"utf-8-sig\"))\n-            if _dynamic_execution(tree):\n+            if not unit_tests_only and _dynamic_execution(tree):\n                 if name in relevant:\n                     return full, \"dynamic execution changed\"\n                 uncertain.add(name)\n",
+  "probes": [
+    {
+      "name": "actual_ee293769_to_d3d80769_only_docx",
+      "status": "pass",
+      "result": {
+        "old": "ee293769037d0a9a205d75d15d64f0600929eaad",
+        "new": "d3d807691efa68a30ae50fffb9980db4942eccae",
+        "change_count": 40,
+        "changes": [
+          "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/SOURCE_ACCEPTANCE.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/ZIP_FIXTURE_CONTINUATION.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-annotations-failure.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-check-failure.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-failed-job.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-jobs-failure.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-observation-1.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/exact-ci-observation-2.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/normal-commit.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/normal-commit.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/normal-push.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/normal-push.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-green-attempt1-path-error.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-green-attempt1-path-error.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-reproduction.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-tdd-green.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-tdd-green.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-tdd-red.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/source-publication/zip-host-tdd-red.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-independent-review/probe.py",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-independent-review/review.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-independent-review/review.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-independent-review/two-host-tests.log",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/findings.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/progress.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/task_plan.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/p7-audit-readonly-intake/request-contract-diagnostics.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/CN-688012_analyst-dispatch.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/CN-688012_fetch-dispatch.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/CN-688012_process-dispatch.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_storage-dispatch.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/expert_preparation_questions.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/findings.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/progress.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/review_queue.json",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/task_plan.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md",
+          "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md",
+          "tests/unit/test_docx_heading_normalization.py"
+        ],
+        "selected": [
+          "tests/unit/test_docx_heading_normalization.py"
+        ],
+        "reason": "affected unit tests"
+      }
+    },
+    {
+      "name": "archive_responsibility_filter_precedes_entrypoint_rules",
+      "status": "pass",
+      "result": {
+        "changes": [
+          "docs/plans/a/config/x.yaml",
+          "docs/plans/a/conftest.py",
+          "docs/plans/a/evidence/subprocess_probe.py",
+          "docs/plans/a/requirements-dev.txt"
+        ],
+        "selected": [],
+        "reason": "no behavior changes"
+      }
+    },
+    {
+      "name": "unknown_deleted_runtime_config_shared_fixture_full_unit",
+      "status": "pass",
+      "result": [
+        {
+          "changes": null,
+          "selected": [
+            "tests/unit"
+          ],
+          "reason": "unknown push range"
+        },
+        {
+          "changes": [
+            "src/parcel/deleted.py"
+          ],
+          "selected": [
+            "tests/unit"
+          ],
+          "reason": "deleted or unknown dependency"
+        },
+        {
+          "changes": [
+            "scripts/deleted_driver.py"
+          ],
+          "selected": [
+            "tests/unit"
+          ],
+          "reason": "deleted or unknown dependency"
+        },
+        {
+          "changes": [
+            "src/parcel/schema.json"
+          ],
+          "selected": [
+            "tests/unit"
+          ],
+          "reason": "deleted or unknown dependency"
+        },
+        {
+          "changes": [
+            "config/source_catalog.yaml"
+          ],
+          "selected": [
+            "tests/unit"
+          ],
+          "reason": "configuration or test entrypoint changed"
+        },
+        {
+          "changes": [
+            "tests/fixtures/shared.json"
+          ],
+          "selected": [
+            "tests/unit"
+          ],
+          "reason": "configuration or test entrypoint changed"
+        },
+        {
+          "changes": [
+            "tests/support/conftest.py"
+          ],
+          "selected": [
+            "tests/unit"
+          ],
+          "reason": "configuration or test entrypoint changed"
+        }
+      ]
+    },
+    {
+      "name": "runtime_change_keeps_computed_and_cli_support_consumers",
+      "status": "pass",
+      "result": {
+        "changes": [
+          "docs/plans/evidence/conftest.py",
+          "src/parcel/model.py"
+        ],
+        "selected": [
+          "tests/unit/test_cli_consumer.py",
+          "tests/unit/test_computed.py",
+          "tests/unit/test_known.py"
+        ],
+        "reason": "affected unit tests"
+      }
+    },
+    {
+      "name": "test_only_keeps_two_hop_known_helper_without_unrelated_cli",
+      "status": "pass",
+      "result": {
+        "selected": [
+          "tests/unit/test_bridge.py",
+          "tests/unit/test_consumer.py",
+          "tests/unit/test_helper.py"
+        ],
+        "reason": "affected unit tests",
+        "kept_relative_helper_chain": true,
+        "unrelated_cli_not_seeded": true
+      }
+    },
+    {
+      "name": "changed_aliased_runtime_execution_full_unit",
+      "status": "pass",
+      "result": [
+        {
+          "body": "from subprocess import Popen as launch\nlaunch(argv)\n",
+          "selected": [
+            "tests/unit"
+          ],
+          "reason": "dynamic execution changed"
+        },
+        {
+          "body": "from runpy import run_path as execute\nexecute('scripts/parcel.py')\n",
+          "selected": [
+            "tests/unit"
+          ],
+          "reason": "dynamic execution changed"
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "show",
+        "d3d807691efa68a30ae50fffb9980db4942eccae:tests/unit/test_ci_push_selection.py"
+      ],
+      "exit_code": 0,
+      "stdout": "\"\"\"Pushes include changed behavior across the whole range, with conservative fallbacks.\"\"\"\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nimport pytest\n\nfrom tools.changed_unit_tests import changed_paths, select_unit_tests\nfrom tools import pre_push_gate as gate\n\n\ndef _file(root, name, text):\n    path = root / name\n    path.parent.mkdir(parents=True, exist_ok=True)\n    path.write_text(text, encoding=\"utf-8\")\n    return name\n\n\n@pytest.fixture\ndef project(tmp_path):\n    _file(tmp_path, \"src/pkg/__init__.py\", \"\")\n    _file(tmp_path, \"src/pkg/core.py\", \"value = 1\\n\")\n    _file(tmp_path, \"src/pkg/reader.py\", \"from . import core\\n\")\n    _file(tmp_path, \"tests/support/fixture.py\", \"from pkg import reader\\n\")\n    _file(tmp_path, \"tests/unit/test_reader.py\", \"from support import fixture\\n\")\n    _file(tmp_path, \"tests/unit/test_unrelated.py\", \"def test_other(): pass\\n\")\n    return tmp_path\n\n\ndef test_transitive_relative_import_includes_fixture_consumers(project):\n    selected, reason = select_unit_tests(project, {\"src/pkg/core.py\"})\n    assert selected == [\"tests/unit/test_reader.py\"]\n    assert reason == \"affected unit tests\"\n\n\n@pytest.mark.parametrize(\"changed\", [\"tests/support/fixture.py\", \"tests/unit/test_reader.py\"])\ndef test_changed_test_or_fixture_is_not_omitted(project, changed):\n    assert select_unit_tests(project, {changed})[0] == [\"tests/unit/test_reader.py\"]\n\n\n@pytest.mark.parametrize(\"changed\", [\n    \"config/local_ocr.json\", \"requirements.txt\", \"pyproject.toml\", \"conftest.py\",\n    \"tests/conftest.py\", \"tools/pre_push_gate.py\", \".github/workflows/ci.yml\",\n    \"src/pkg/deleted.py\", \"tests/fixtures/input.json\",\n])\ndef test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back(project, changed):\n    assert select_unit_tests(project, {changed})[0] == [\"tests/unit\"]\n\n\n@pytest.mark.parametrize(\"body\", [\n    \"import importlib\\nmodule = importlib.import_module(name)\\n\",\n    \"import subprocess\\nsubprocess.run(['python', '-m', name])\\n\",\n    \"import runpy\\nrunpy.run_module(name)\\n\",\n    \"exec(name)\\n\",\n    \"from subprocess import run as execute\\nexecute(argv)\\n\",\n    \"import subprocess as sp\\nsp.run(argv)\\n\",\n    \"from importlib import import_module as load\\nload(name)\\n\",\n    \"from runpy import run_path as execute\\nexecute('scripts/child.py')\\n\",\n])\ndef test_changed_dynamic_execution_falls_back(project, body):\n    _file(project, \"src/pkg/core.py\", body)\n    assert select_unit_tests(project, {\"src/pkg/core.py\"})[0] == [\"tests/unit\"]\n\n\ndef test_literal_dynamic_import_is_detected(project):\n    _file(project, \"tests/unit/test_dynamic.py\", \"import importlib\\nimportlib.import_module('pkg.core')\\n\")\n    assert select_unit_tests(project, {\"src/pkg/core.py\"})[0] == [\n        \"tests/unit/test_dynamic.py\", \"tests/unit/test_reader.py\",\n    ]\n\n\ndef test_unchanged_computed_import_consumer_is_kept_alongside_static_consumer(project):\n    _file(project, \"tests/unit/test_runtime.py\", \"from importlib import import_module as load\\nload(name)\\n\")\n    assert select_unit_tests(project, {\"src/pkg/core.py\"})[0] == [\n        \"tests/unit/test_reader.py\", \"tests/unit/test_runtime.py\",\n    ]\n\n\n@pytest.mark.parametrize(\"body\", [\n    \"import importlib\\nimportlib.import_module('.core', 'pkg')\\n\",\n    \"from runpy import run_path as run\\nrun('src/pkg/core.py')\\n\",\n    \"from importlib import import_module\\nimport_module('core')\\n\",\n])\ndef test_literal_relative_import_bare_module_or_file_consumer_is_not_lost(project, body):\n    _file(project, \"tests/unit/test_dynamic.py\", body)\n    assert \"tests/unit/test_dynamic.py\" in select_unit_tests(project, {\"src/pkg/core.py\"})[0]\n\n\ndef test_unknown_source_dependency_falls_back_instead_of_silent_skip(project):\n    _file(project, \"src/pkg/plugin.py\", \"value = 1\\n\")\n    assert select_unit_tests(project, {\"src/pkg/plugin.py\"})[0] == [\"tests/unit\"]\n\n\ndef test_document_only_push_does_not_run_full_units(project):\n    assert select_unit_tests(project, {\"docs/report.md\", \"docs/receipt.json\"})[0] == []\n\n\ndef test_git_range_covers_earlier_code_and_final_document_commit(project, monkeypatch):\n    commands = []\n    def git(cmd, **kwargs):\n        commands.append(cmd)\n        return subprocess.CompletedProcess(cmd, 0, \"src/pkg/core.py\\ndocs/report.md\\n\", \"\")\n    monkeypatch.setattr(subprocess, \"run\", git)\n    old, new = \"a\" * 40, \"b\" * 40\n    changes = changed_paths(project, f\"refs/heads/master {new} refs/heads/master {old}\\n\")\n    assert changes == {\"src/pkg/core.py\", \"docs/report.md\"}\n    assert commands == [[\"git\", \"diff\", \"--no-renames\", \"--name-only\", old, new, \"--\"]]\n\n\ndef test_multiple_refs_union_and_branch_deletion(project, monkeypatch):\n    values = iter([\"src/pkg/core.py\\n\", \"tests/unit/test_unrelated.py\\n\"])\n    monkeypatch.setattr(subprocess, \"run\", lambda cmd, **kw: subprocess.CompletedProcess(cmd, 0, next(values), \"\"))\n    a, b, c, z = \"a\" * 40, \"b\" * 40, \"c\" * 40, \"0\" * 40\n    push = f\"refs/heads/a {b} refs/heads/a {a}\\nrefs/heads/b {c} refs/heads/b {b}\\n(delete) {z} refs/heads/c {c}\\n\"\n    assert changed_paths(project, push) == {\"src/pkg/core.py\", \"tests/unit/test_unrelated.py\"}\n\n\n@pytest.mark.parametrize(\"push\", [\"\", \"bad line\", f\"a {'a' * 40} b {'0' * 40}\"])\ndef test_no_comparable_push_range_falls_back(project, push):\n    assert changed_paths(project, push) is None\n\n\ndef test_git_failure_falls_back(project, monkeypatch):\n    monkeypatch.setattr(subprocess, \"run\", lambda cmd, **kw: subprocess.CompletedProcess(cmd, 128, \"\", \"missing object\"))\n    assert changed_paths(project, f\"a {'b' * 40} b {'a' * 40}\") is None\n\n\ndef test_hook_and_ci_keep_fast_commit_and_use_correct_entrypoints():\n    root = Path(__file__).resolve().parents[2]\n    hook = (root / \".githooks/pre-push\").read_text(encoding=\"utf-8\")\n    assert \"--push-checks\" in hook\n    assert \"--fast-contracts-only\" not in hook\n    workflow = (root / \".github/workflows/ci.yml\").read_text(encoding=\"utf-8\")\n    assert \"pytest tests/unit\" in workflow\n    assert \"--fast-contracts-only\" in workflow\n\n\ndef test_push_failure_is_propagated_and_suites_are_not_duplicated(monkeypatch):\n    seen = []\n    monkeypatch.setattr(sys, \"stdin\", type(\"Input\", (), {\"read\": lambda self: \"refs\"})())\n    monkeypatch.setattr(gate, \"changed_paths\", lambda root, data: {\"test\"})\n    monkeypatch.setattr(gate, \"select_unit_tests\", lambda root, files: ([\"tests/unit\"], \"fixture fallback\"))\n    def pytest_gate(cmd, label):\n        seen.append(cmd)\n        return 7\n    monkeypatch.setattr(gate, \"_run_pytest_gate\", pytest_gate)\n    assert gate.main([\"--push-checks\"]) == 7\n    assert len(seen) == 1\n    assert seen[0].count(\"tests/unit\") == 1\n    assert not any(x.startswith(\"tests/unit/\") for x in seen[0])\n    assert any(x.startswith(\"tests/contract/\") for x in seen[0])\n\n\n@pytest.mark.parametrize(\"entrypoint\", [\"--push-checks\", \"--fast-contracts-only\"])\ndef test_published_summary_contracts_run_in_both_ci_and_push(entrypoint, monkeypatch):\n    seen = []\n    monkeypatch.setattr(sys, \"stdin\", type(\"Input\", (), {\"read\": lambda self: \"refs\"})())\n    monkeypatch.setattr(gate, \"changed_paths\", lambda root, data: {\"docs/report.md\"})\n    monkeypatch.setattr(gate, \"select_unit_tests\", lambda root, files: ([], \"documents only\"))\n    monkeypatch.setattr(gate, \"_run_pytest_gate\", lambda cmd, label: seen.append(cmd) or 0)\n\n    assert gate.main([entrypoint]) == 0\n    assert len(seen) == 1\n    assert \"tests/contract/test_narrative_output_plan.py\" in seen[0]\n    assert \"tests/contract/test_summary_group_coverage.py\" in seen[0]\n    assert \"tests/contract/test_official_transcript_layouts.py\" in seen[0]\n\n\n@pytest.mark.parametrize(\"entrypoint\", [\"--push-checks\", \"--fast-contracts-only\"])\ndef test_source_scope_guard_is_shared_but_full_cache_matrix_is_major_node_only(entrypoint, monkeypatch):\n    seen = []\n    monkeypatch.setattr(sys, \"stdin\", type(\"Input\", (), {\"read\": lambda self: \"refs\"})())\n    monkeypatch.setattr(gate, \"changed_paths\", lambda root, data: {\"docs/report.md\"})\n    monkeypatch.setattr(gate, \"select_unit_tests\", lambda root, files: ([], \"documents only\"))\n    monkeypatch.setattr(gate, \"_run_pytest_gate\", lambda cmd, label: seen.append(cmd) or 0)\n\n    assert gate.main([entrypoint]) == 0\n    assert len(seen) == 1\n    assert \"tests/contract/test_source_scope_qualification.py\" in seen[0]\n    assert \"tests/contract/test_fresh_cache_behavior_receipts.py\" not in seen[0]\n\n\ndef test_planning_evidence_only_changes_do_not_schedule_full_ci():\n    import yaml\n    root = Path(__file__).resolve().parents[2]\n    workflow = yaml.load((root / \".github/workflows/ci.yml\").read_text(encoding=\"utf-8\"),\n                         Loader=yaml.BaseLoader)\n    for event in (\"push\", \"pull_request\"):\n        assert \"docs/plans/**\" in workflow[\"on\"][event][\"paths-ignore\"]\n        assert \"src/**\" not in workflow[\"on\"][event][\"paths-ignore\"]\n        assert \"tests/**\" not in workflow[\"on\"][event][\"paths-ignore\"]\n    assert \"pytest tests/unit\" in (root / \".github/workflows/ci.yml\").read_text(encoding=\"utf-8\")\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "d3d807691efa68a30ae50fffb9980db4942eccae",
+        "--",
+        "src",
+        "config"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "d3d807691efa68a30ae50fffb9980db4942eccae",
+        "--",
+        "tools/changed_unit_tests.py",
+        "tests/unit/test_ci_push_selection.py"
+      ],
+      "exit_code": 0,
+      "stdout": "diff --git a/tests/unit/test_ci_push_selection.py b/tests/unit/test_ci_push_selection.py\nindex 47742abf..d6d4cf1b 100644\n--- a/tests/unit/test_ci_push_selection.py\n+++ b/tests/unit/test_ci_push_selection.py\n@@ -190,3 +190,34 @@ def test_planning_evidence_only_changes_do_not_schedule_full_ci():\n         assert \"src/**\" not in workflow[\"on\"][event][\"paths-ignore\"]\n         assert \"tests/**\" not in workflow[\"on\"][event][\"paths-ignore\"]\n     assert \"pytest tests/unit\" in (root / \".github/workflows/ci.yml\").read_text(encoding=\"utf-8\")\n+\n+@pytest.mark.parametrize(\"archive\", [\n+    \"docs/plans/run/evidence/probe.py\", \"docs/plans/run/conftest.py\",\n+    \"docs/plans/run/requirements.txt\", \"docs/plans/run/evidence/result.json\",\n+    \"docs/plans/run/evidence/original.docx\",\n+])\n+def test_planning_archive_is_not_live_behavior_even_with_code_suffix(project, archive):\n+    assert select_unit_tests(project, {archive}) == ([], \"no behavior changes\")\n+\n+\n+def test_mixed_live_source_and_planning_archive_keeps_actual_consumers(project):\n+    _file(project, \"tests/unit/test_runtime.py\", \"from importlib import import_module as load\\nload(name)\\n\")\n+    assert select_unit_tests(project, {\n+        \"src/pkg/core.py\", \"docs/plans/run/conftest.py\", \"docs/plans/run/evidence/probe.py\",\n+    }) == ([\"tests/unit/test_reader.py\", \"tests/unit/test_runtime.py\"], \"affected unit tests\")\n+\n+\n+def test_live_unit_change_with_archived_probe_does_not_seed_unrelated_cli_tests(project):\n+    _file(project, \"tests/unit/test_runtime.py\", \"import subprocess\\nsubprocess.run(argv)\\n\")\n+    _file(project, \"tests/unit/test_reader.py\", \"import subprocess\\nsubprocess.run(argv)\\n\")\n+    assert select_unit_tests(project, {\n+        \"tests/unit/test_reader.py\", \"docs/plans/run/evidence/probe.py\",\n+    }) == ([\"tests/unit/test_reader.py\"], \"affected unit tests\")\n+\n+\n+def test_unit_only_change_keeps_known_transitive_test_helper_consumers(project):\n+    _file(project, \"tests/unit/test_helper.py\", \"import subprocess\\nsubprocess.run(argv)\\n\")\n+    _file(project, \"tests/unit/test_reader.py\", \"from tests.unit import test_helper\\n\")\n+    _file(project, \"tests/unit/test_runtime.py\", \"import subprocess\\nsubprocess.run(argv)\\n\")\n+    assert select_unit_tests(project, {\"tests/unit/test_helper.py\"}) == (\n+        [\"tests/unit/test_helper.py\", \"tests/unit/test_reader.py\"], \"affected unit tests\")\ndiff --git a/tools/changed_unit_tests.py b/tools/changed_unit_tests.py\nindex dd908a76..caeab737 100644\n--- a/tools/changed_unit_tests.py\n+++ b/tools/changed_unit_tests.py\n@@ -1,7 +1,8 @@\n \"\"\"Conservative, cache-free unit selection for the complete Git push range.\n \n Static imports are an optimization, not a replacement for CI's full unit suite.\n-Uncertain ranges, configuration, test entrypoints and dynamic execution use it all.\n+Uncertain ranges, configuration, shared test entrypoints and dynamic runtime\n+execution use it all. Test-only changes retain their known helper consumers.\n \"\"\"\n from __future__ import annotations\n \n@@ -101,6 +102,9 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str],\n     full = [\"tests/unit\"]\n     if changes is None:\n         return full, \"unknown push range\"\n+    # Plans retain diagnostic scripts and fixtures as evidence, not live code.\n+    # Filter by that directory responsibility before entrypoint/dependency rules.\n+    changes = {name for name in changes if not name.startswith(\"docs/plans/\")}\n     global_names = {\"pyproject.toml\", \"pytest.ini\", \"conftest.py\", \"tests/conftest.py\"}\n     global_prefixes = (\"config/\", \".github/\", \".githooks/\", \"tools/\", \"tests/fixtures/\")\n     if any(name in global_names or name.startswith((*global_prefixes, \"requirements\"))\n@@ -113,13 +117,16 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str],\n              for p in (root / directory).rglob(\"*.py\")}\n     if not relevant <= paths.keys():\n         return full, \"deleted or unknown dependency\"\n+    # Changing a unit test does not alter the runtime used by unrelated CLI or\n+    # computed-import tests. Its known helper consumers still follow the graph.\n+    unit_tests_only = all(name.startswith(\"tests/unit/test_\") and name.endswith(\".py\") for name in relevant)\n     modules = {alias: name for name in paths for alias in _aliases(name)}\n     reverse: dict[str, set[str]] = {}\n     uncertain = set()\n     try:\n         for name, path in paths.items():\n             tree = ast.parse(path.read_text(encoding=\"utf-8-sig\"))\n-            if _dynamic_execution(tree):\n+            if not unit_tests_only and _dynamic_execution(tree):\n                 if name in relevant:\n                     return full, \"dynamic execution changed\"\n                 uncertain.add(name)\n",
+      "stderr": "warning: in the working copy of 'tests/unit/test_ci_push_selection.py', LF will be replaced by CRLF the next time Git touches it\n"
+    }
+  ],
+  "earlier_tool_diagnostics": [
+    {
+      "tool": "CodeGraph context",
+      "error": "not initialized",
+      "action": "Read located files per review card; no init"
+    },
+    {
+      "command": "git diff d3 -- selector/test; git status --short",
+      "sandbox_exit_code": 1,
+      "error": "must be run in a work tree",
+      "action": "Read-only require_escalated Git succeeded without config changes"
+    },
+    {
+      "command": "clear inherited GIT_*; git diff/status/range",
+      "aggregate_exit_code": 0,
+      "per_operation_errors": "diff working tree/status still failed; commit-to-commit range succeeded",
+      "action": "No further environment/config investigation; use authorized read-only Git"
+    }
+  ],
+  "material_findings": [],
+  "prior_probe_attempt": {
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\push-scope-independent-review\\probe.py"
+    ],
+    "exit_code": 1,
+    "passed": 4,
+    "probe_count": 6,
+    "review_json_sha256": "32b4e05b9ee787e8ea17ebce1701557de1a3643dde8642c56b0d8626d3b6a633",
+    "fixture_errors": [
+      {
+        "name": "runtime_change_keeps_computed_and_cli_support_consumers",
+        "status": "fail",
+        "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\ci-docx-investigation\\\\evidence\\\\push-scope-independent-review\\\\runtime-kompvju5\\\\tests\\\\unit\\\\test_cli_consumer.py'"
+      },
+      {
+        "name": "test_only_keeps_two_hop_known_helper_without_unrelated_cli",
+        "status": "fail",
+        "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\ci-docx-investigation\\\\evidence\\\\push-scope-independent-review\\\\helper-b2nybkm3\\\\tests\\\\unit\\\\test_unrelated_cli.py'"
+      }
+    ],
+    "classification": "Two FileNotFoundError fixture writes caused by Windows path length; no selector assertion failure."
+  },
+  "review_command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\push-scope-independent-review\\probe.py",
+    "--retry-fixture-failures"
+  ],
+  "retry_scope": "Only the two fixture write failures rerun; four prior passes reused.",
+  "probe_sha256": "9c6d4d764d816b1108536787ed7b7ad9b020ca9ec1dbb4c3819af3f642191c15",
+  "limitations": [
+    "Selection optimization is not a full CI guarantee.",
+    "d3 CI success covers DOCX fix; selector change new exact HEAD CI remains pending.",
+    "Test-only optimization retains statically known helper consumers; tests/unit/test_* changed files do not seed all unrelated dynamic consumers.",
+    "Independent probes parse synthetic code; they do not execute synthetic runtime bodies."
+  ],
+  "stop": true
+}

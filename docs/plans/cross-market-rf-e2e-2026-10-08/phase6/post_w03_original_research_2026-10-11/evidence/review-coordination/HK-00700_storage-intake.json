@@ -1,0 +1,102 @@
+{
+  "company": "HK-00700",
+  "role": "storage",
+  "observed_at": "2026-10-11T03:08:17.102343+00:00",
+  "report": {
+    "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\storage.json",
+    "json_sha256": "56a6b2a84c5b1ef4a77512d34ee6452e6f73d81c861d758a614804e111a5230e",
+    "md": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\storage.md",
+    "md_sha256": "15e52f023454205cb7315b0110e8481bb3e8a1ef5ccfd776a0dbac4018b9123a"
+  },
+  "checks": 15,
+  "findings": 7,
+  "old_issue_count": 13,
+  "old_issue_status": {
+    "BLOCKED": 3,
+    "NOT_RUN": 7,
+    "PASS": 1,
+    "FAIL": 2
+  },
+  "start_event": {
+    "schema_version": "1.0",
+    "event_id": "5b6a8fa11d754aa0aae321160529fef5",
+    "run_id": "pw03-20261011T010657Z-hk-00700",
+    "role": "storage",
+    "kind": "review_started",
+    "recorded_at": "2026-10-11T02:54:34.303459+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "initial",
+      "step_id": "S00",
+      "call_id": "storage-review-start-20261011",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\HK-00700_storage.md",
+          "locator": "full card"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\handoffs\\execution.json",
+          "locator": "executor_stopped_writing,sealed_at,execution_outcome"
+        }
+      ],
+      "observation": "Independent storage review started on sealed partial HK-00700 execution. No other reviewer report or draft read. No executor rerun, provider/model/GET calls, source/config/install writes. Original deadline 2026-10-11T03:06:57.807570+00:00 preserved; review current UTC will be recorded truthfully."
+    }
+  },
+  "completed_event": {
+    "schema_version": "1.0",
+    "event_id": "8405d44315f54dc58f9e741596165eec",
+    "run_id": "pw03-20261011T010657Z-hk-00700",
+    "role": "storage",
+    "kind": "review_completed",
+    "recorded_at": "2026-10-11T03:05:04.874451+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "initial",
+      "step_id": "S13",
+      "call_id": "storage-review-seal-20261011",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\storage.json",
+          "locator": "whole sealed reviewer artifact",
+          "sha256": "56a6b2a84c5b1ef4a77512d34ee6452e6f73d81c861d758a614804e111a5230e",
+          "bytes": 55812
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\storage.md",
+          "locator": "whole sealed reviewer artifact",
+          "sha256": "15e52f023454205cb7315b0110e8481bb3e8a1ef5ccfd776a0dbac4018b9123a",
+          "bytes": 18875
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\roles\\storage\\diagnostic.json",
+          "locator": "whole sealed reviewer artifact",
+          "sha256": "3d725b03eee9241d52010ea2f647cf979b0eddb1dceccae1bb5bcbc43f7e3e35",
+          "bytes": 69554
+        }
+      ],
+      "observation": "Independent storage review completed and STOP. Verified sealed partial execution package; role verdict FAIL with7findings/15checks/13original issue mappings. Only own reports/role diagnostic written. No execution/source/code/config/install/other-role/Dayu writes or executor rerun. Real original selector0.7.0 judged; current0.7.1 not substituted. Compact projection distinct from native original; snapshot/persistent breaches retained.",
+      "outcome": "FAIL",
+      "stop_state": "STOP",
+      "checks": 15,
+      "findings": 7,
+      "original_key_mapping_count": 13,
+      "review_started_event_id": "5b6a8fa11d754aa0aae321160529fef5",
+      "report_created_at": "2026-10-11T03:04:12.441745+00:00",
+      "review_completed_observed_at": "2026-10-11T03:05:04.739561+00:00",
+      "original_deadline_at": "2026-10-11T03:06:57.807570+00:00",
+      "review_completed_after_original_deadline": false,
+      "deadline_budget_reset": false,
+      "new_external_gets": 0,
+      "new_provider_calls": 0,
+      "new_model_calls": 0,
+      "new_tokens": 0,
+      "new_estimated_micro_usd": 0,
+      "actual_provider_invoice_usd": null,
+      "other_review_reports_read": false
+    }
+  },
+  "integrity_accepted": true,
+  "quality_pass": false
+}

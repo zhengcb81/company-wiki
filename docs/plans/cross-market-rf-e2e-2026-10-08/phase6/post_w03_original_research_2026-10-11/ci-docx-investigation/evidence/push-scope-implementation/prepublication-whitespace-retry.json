@@ -1,0 +1,7 @@
+{
+  "observed_at": "2026-10-11T03:11:19.487564+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "warning: in the working copy of 'tests/unit/test_ci_push_selection.py', LF will be replaced by CRLF the next time Git touches it\n",
+  "change": "only new test EOF whitespace; original behavior unchanged"
+}

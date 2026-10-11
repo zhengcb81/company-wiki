@@ -190,3 +190,34 @@ def test_planning_evidence_only_changes_do_not_schedule_full_ci():
         assert "src/**" not in workflow["on"][event]["paths-ignore"]
         assert "tests/**" not in workflow["on"][event]["paths-ignore"]
     assert "pytest tests/unit" in (root / ".github/workflows/ci.yml").read_text(encoding="utf-8")
+
+@pytest.mark.parametrize("archive", [
+    "docs/plans/run/evidence/probe.py", "docs/plans/run/conftest.py",
+    "docs/plans/run/requirements.txt", "docs/plans/run/evidence/result.json",
+    "docs/plans/run/evidence/original.docx",
+])
+def test_planning_archive_is_not_live_behavior_even_with_code_suffix(project, archive):
+    assert select_unit_tests(project, {archive}) == ([], "no behavior changes")
+
+
+def test_mixed_live_source_and_planning_archive_keeps_actual_consumers(project):
+    _file(project, "tests/unit/test_runtime.py", "from importlib import import_module as load\nload(name)\n")
+    assert select_unit_tests(project, {
+        "src/pkg/core.py", "docs/plans/run/conftest.py", "docs/plans/run/evidence/probe.py",
+    }) == (["tests/unit/test_reader.py", "tests/unit/test_runtime.py"], "affected unit tests")
+
+
+def test_live_unit_change_with_archived_probe_does_not_seed_unrelated_cli_tests(project):
+    _file(project, "tests/unit/test_runtime.py", "import subprocess\nsubprocess.run(argv)\n")
+    _file(project, "tests/unit/test_reader.py", "import subprocess\nsubprocess.run(argv)\n")
+    assert select_unit_tests(project, {
+        "tests/unit/test_reader.py", "docs/plans/run/evidence/probe.py",
+    }) == (["tests/unit/test_reader.py"], "affected unit tests")
+
+
+def test_unit_only_change_keeps_known_transitive_test_helper_consumers(project):
+    _file(project, "tests/unit/test_helper.py", "import subprocess\nsubprocess.run(argv)\n")
+    _file(project, "tests/unit/test_reader.py", "from tests.unit import test_helper\n")
+    _file(project, "tests/unit/test_runtime.py", "import subprocess\nsubprocess.run(argv)\n")
+    assert select_unit_tests(project, {"tests/unit/test_helper.py"}) == (
+        ["tests/unit/test_helper.py", "tests/unit/test_reader.py"], "affected unit tests")

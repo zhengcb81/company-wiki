@@ -1,0 +1,88 @@
+{
+  "observed_at": "2026-10-11T03:19:50.410544+00:00",
+  "company": "HK-00700",
+  "role": "analyst",
+  "report": {
+    "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\analyst.json",
+    "json_sha256": "80a5fab30b5a7fce5f44019ebed04251cd15b08ed091dc083c71adf800bd6f68",
+    "md": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\analyst.md",
+    "md_sha256": "c0b83f190349462ced4db1487dc2b3dce2d3e28a2b0e45d797ffd064a7e953ba"
+  },
+  "start_event": {
+    "schema_version": "1.0",
+    "event_id": "01c3833d522f4dc7bfb02253dc3e8aa0",
+    "run_id": "pw03-20261011T010657Z-hk-00700",
+    "role": "analyst",
+    "kind": "review_started",
+    "recorded_at": "2026-10-11T03:07:44.808310+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "initial",
+      "step_id": "A00",
+      "call_id": "analyst-local-review-start",
+      "observation": "Independent analyst reviewer begins local read-only review after sealed executor partial result; zero external GET/provider/model. Actual UTC will be recorded by audit CLI. Original executor deadline is not renewed.",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\handoffs\\execution.json",
+          "locator": "executor_stopped_writing,execution_outcome"
+        }
+      ]
+    }
+  },
+  "completed_event": {
+    "schema_version": "1.0",
+    "event_id": "361c11089e7843a8b817cbdb00c6aff3",
+    "run_id": "pw03-20261011T010657Z-hk-00700",
+    "role": "analyst",
+    "kind": "review_completed",
+    "recorded_at": "2026-10-11T03:18:52.942652+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "initial",
+      "step_id": "A-END",
+      "call_id": "analyst-local-review-complete",
+      "stage": "local_readonly_review_after_executor_deadline",
+      "review_outcome": "FAIL",
+      "execution_outcome": "partial",
+      "observation": "Completed independent analyst review: 15 original SourceRef local opens, 180 claims (179 contiguous), 110 derived formulas recomputed, 73 assumptions reviewed, 12 own-role historical keys retested. 6 findings; no new external GET/provider/model, no expired deadline renewal, no project completion verdict. Reports and own seal now immutable.",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\analyst.json",
+          "locator": "checks/findings/coverage_retests",
+          "sha256": "80a5fab30b5a7fce5f44019ebed04251cd15b08ed091dc083c71adf800bd6f68"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\analyst.md",
+          "locator": "checks/findings/12 old coverage retests",
+          "sha256": "c0b83f190349462ced4db1487dc2b3dce2d3e28a2b0e45d797ffd064a7e953ba"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\roles\\analyst\\diagnostics\\analyst-SEAL.json",
+          "locator": "artifact_hashes",
+          "sha256": "0f698fb9d4ceb6173071833ed3bc9125999cf354df0234c49b09431afb771576"
+        }
+      ],
+      "external_GET": 0,
+      "provider_calls": 0,
+      "model_calls": 0,
+      "tokens": 0,
+      "new_cost_usd": "0.00",
+      "actual_invoice_usd": null,
+      "owned_physical_bytes_before_closure_receipts": 1716363,
+      "owned_file_count_before_closure_receipts": 15
+    }
+  },
+  "checks": 20,
+  "findings": 6,
+  "old_keys": 12,
+  "old_status": {
+    "FAIL": 7,
+    "PASS": 4,
+    "BLOCKED": 1
+  },
+  "review_stage": "local_readonly_review_after_executor_deadline",
+  "native_original_deadline_preserved": true,
+  "quality_pass": false
+}

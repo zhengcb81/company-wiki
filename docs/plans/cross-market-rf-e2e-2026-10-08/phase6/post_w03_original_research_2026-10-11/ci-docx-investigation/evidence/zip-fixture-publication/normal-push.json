@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-10-11T02:59:24.010052+00:00",
+  "head": "d3d807691efa68a30ae50fffb9980db4942eccae",
+  "exit_code": 0,
+  "wall_seconds": 198.67572790000122,
+  "log_sha256": "884fe93c05e8cd0283e1c2d337739f3841baadc2f6ebfb04b5965633abcd9a1c",
+  "hook_bypassed": false,
+  "canonical_source_config_unchanged": true,
+  "protected_before": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "a48ba80d7969f6b67d64c9992e1affed7885204304f9aa76e56b1f678d7df8d8",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "e95bde99423eebbc209d81bed836e7d0582a116f6cd5b0669583a86be062f711",
+    "src/company_wiki/automation/narrative_batch.py": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "protected_after": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "a48ba80d7969f6b67d64c9992e1affed7885204304f9aa76e56b1f678d7df8d8",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "e95bde99423eebbc209d81bed836e7d0582a116f6cd5b0669583a86be062f711",
+    "src/company_wiki/automation/narrative_batch.py": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "evidence_checkout_exact": 26,
+  "origin_master": "d3d807691efa68a30ae50fffb9980db4942eccae"
+}

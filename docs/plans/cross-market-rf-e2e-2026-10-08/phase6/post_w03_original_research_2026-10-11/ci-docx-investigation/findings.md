@@ -48,3 +48,15 @@ Linux默认create_system3得原件SHA1af5cb9e/完整旧record63c83b56，与精�
 CN storage JSONaed252e2…/MDce1d66d5…与fetchJSONe82fb4d0…/MD1e9dc5c8…SHA核对，两真实完成事件读回，CN2+US4共6审封存FAIL；当前8/12已派，CN process/analyst运行，HK4待空槽。storage旧15项3PASS/7FAIL/1BLOCKED/4NOT_RUN；fetch旧13项3PASS/5FAIL/5NOT_RUN，旧问题/费用不改。实际SSE request上限16384B，原57784B在供应商前invalid_request，更正之前另一快速观察的32768和历史摘要里的16K猜测后以actualowner实值为准。年度0final、重要业务事实遗漏、IR/交易正文遗漏、派生重复超32MiB以及旧恢复未测等进expert共因，不把证据不全强行签PASS。
 
 两个Next Step改写多加空行被diff--check报EOF blank，ROOT只去其多余末尾空白，原CRLF及evidence保持；CI actual2failure日志未覆盖，fixture39GREEN等待独立。0新模型/provider/收费。
+
+## 2026-10-11T03:01:15.089964+00:00 — 正常test-only发布与错误全量scope共因
+
+d3d80769正常提交25.62s/push198.676s，本地3198PASS191.38s，canonical/remote一致，产品7源/config保持。精确CI38106925215在做；不能称已绿。只读actual range证明归档probe.py造成deleted or unknown dependency→全量Unit，运行改动只有test_docx_heading_normalization.py。施工细则PUSH_SCOPE_CONTINUATION.md先RED再共享边界修复，不以no-verify/删断言减时间。
+
+## 2026-10-11T03:08:17.102343+00:00 — 精确d3CI成功/selector责任集中GREEN
+
+CI38106925215在d3d80769为success；ZIP大节点关闭。archive/live责任TDD5FAIL/43PASS→48PASS/1.35s，Ruff绿；实际ee→d3只选test_docx_heading_normalization.py，已知test helper传递保留，所有原fallback断言保持。无需再跑39DOCX/public节点；待一个独立selector定点/正常发布。
+
+## 2026-10-11T03:24:23.490662+00:00 — selector集中独立接受，源码停止写入，普通发布
+
+独立review594766d6…/beff7d16…SHA真实核符合，6微型probe最终0/全PASS，原20函数AST一致，source/config无diff。首轮两长路径fixture FileNotFoundError保留，仅两个阻塞probe以Windows扩展路径重验，未重跑48/39/3198/财报公共节点。actual ee→d3仅DOCX，runtime/config/unknown/dynamic保障、helper传递保持，无material。ROOT实现停写；普通commit/canonical ff/push/精确新CI，gate源码变动本次按既有全unit一次。新CI尚未发生不能签绿。P7-RF已收/P7-AUDIT只读技术接收并行；HK fetch已STOP待ROOT入账、process收尾。母账/原件/config/Dayu/邻仓WIP保持，0新费用。

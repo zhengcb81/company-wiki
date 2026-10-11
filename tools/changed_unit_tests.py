@@ -1,7 +1,8 @@
 """Conservative, cache-free unit selection for the complete Git push range.
 
 Static imports are an optimization, not a replacement for CI's full unit suite.
-Uncertain ranges, configuration, test entrypoints and dynamic execution use it all.
+Uncertain ranges, configuration, shared test entrypoints and dynamic runtime
+execution use it all. Test-only changes retain their known helper consumers.
 """
 from __future__ import annotations
 
@@ -101,6 +102,9 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
     full = ["tests/unit"]
     if changes is None:
         return full, "unknown push range"
+    # Plans retain diagnostic scripts and fixtures as evidence, not live code.
+    # Filter by that directory responsibility before entrypoint/dependency rules.
+    changes = {name for name in changes if not name.startswith("docs/plans/")}
     global_names = {"pyproject.toml", "pytest.ini", "conftest.py", "tests/conftest.py"}
     global_prefixes = ("config/", ".github/", ".githooks/", "tools/", "tests/fixtures/")
     if any(name in global_names or name.startswith((*global_prefixes, "requirements"))
@@ -113,13 +117,16 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
              for p in (root / directory).rglob("*.py")}
     if not relevant <= paths.keys():
         return full, "deleted or unknown dependency"
+    # Changing a unit test does not alter the runtime used by unrelated CLI or
+    # computed-import tests. Its known helper consumers still follow the graph.
+    unit_tests_only = all(name.startswith("tests/unit/test_") and name.endswith(".py") for name in relevant)
     modules = {alias: name for name in paths for alias in _aliases(name)}
     reverse: dict[str, set[str]] = {}
     uncertain = set()
     try:
         for name, path in paths.items():
             tree = ast.parse(path.read_text(encoding="utf-8-sig"))
-            if _dynamic_execution(tree):
+            if not unit_tests_only and _dynamic_execution(tree):
                 if name in relevant:
                     return full, "dynamic execution changed"
                 uncertain.add(name)
