@@ -1,0 +1,171 @@
+{
+  "review_type": "bounded_independent_zip_fixture_review",
+  "observed_at": "2026-10-11T02:52:55.697633+00:00",
+  "source_commit": "ee293769037d0a9a205d75d15d64f0600929eaad",
+  "original_ci": {
+    "run_id": 38105648234,
+    "job_id": 114370500236,
+    "platform": "linux",
+    "result": "2 failed, 3057 passed, 6 skipped"
+  },
+  "decision": "ACCEPT_FIXTURE_ONLY_FIX",
+  "material_findings": [],
+  "rationale": "Only the test ZIP creator metadata is frozen. Original complete-record, metadata, identity, locator, replay and version assertions are AST-identical to the exact source commit. Both simulated host defaults produce sealed historical bytes and the original full legacy fingerprint.",
+  "actual_independent_probe_cases": 4,
+  "actual_new_host_pytest_cases": 2,
+  "independent_cases": [
+    {
+      "label": "baseline",
+      "simulated_host_default": 0,
+      "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+      "complete_record_fingerprint": "a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4",
+      "bytes": 2729,
+      "unit_count": 6,
+      "creator_systems": [
+        0
+      ],
+      "equal_to_sealed_original": true,
+      "locator_identity_metadata_replay": "PASS",
+      "entry_payload_sha256": {
+        "[Content_Types].xml": "2f62cce3c23f463a0575357d587e2e513bd0b0d3b2a13833151a6fdd88adad57",
+        "_rels/.rels": "22c01d12e912dc45bdf191c382dd5b80cdeca1a9e95af86a477798a9f7e541e9",
+        "word/document.xml": "be530e6d9fa37fa428b5cd07b9eac94cdae662acb464a6af22ac860d3ceb10c7",
+        "word/_rels/document.xml.rels": "985cbadc16b861e6ef712d03bed554bf3ec200c1ba62da8a4aafb7629ea11658",
+        "word/styles.xml": "cfe78965941bd164996ec3461939f07c6d4504f92a8b9c6153eb1211644f8113"
+      }
+    },
+    {
+      "label": "baseline",
+      "simulated_host_default": 3,
+      "source_sha256": "1af5cb9e60f9b799b6057fe992b20a4009c338b38c5eb28e01307902024fa0d9",
+      "complete_record_fingerprint": "63c83b5638f54e4454dd66e69fbd51b89cd5b69f8f2f9a1146298e87c64e7c97",
+      "bytes": 2729,
+      "unit_count": 6,
+      "creator_systems": [
+        3
+      ],
+      "equal_to_sealed_original": false,
+      "locator_identity_metadata_replay": "PASS",
+      "entry_payload_sha256": {
+        "[Content_Types].xml": "2f62cce3c23f463a0575357d587e2e513bd0b0d3b2a13833151a6fdd88adad57",
+        "_rels/.rels": "22c01d12e912dc45bdf191c382dd5b80cdeca1a9e95af86a477798a9f7e541e9",
+        "word/document.xml": "be530e6d9fa37fa428b5cd07b9eac94cdae662acb464a6af22ac860d3ceb10c7",
+        "word/_rels/document.xml.rels": "985cbadc16b861e6ef712d03bed554bf3ec200c1ba62da8a4aafb7629ea11658",
+        "word/styles.xml": "cfe78965941bd164996ec3461939f07c6d4504f92a8b9c6153eb1211644f8113"
+      }
+    },
+    {
+      "label": "fixed",
+      "simulated_host_default": 0,
+      "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+      "complete_record_fingerprint": "a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4",
+      "bytes": 2729,
+      "unit_count": 6,
+      "creator_systems": [
+        0
+      ],
+      "equal_to_sealed_original": true,
+      "locator_identity_metadata_replay": "PASS",
+      "entry_payload_sha256": {
+        "[Content_Types].xml": "2f62cce3c23f463a0575357d587e2e513bd0b0d3b2a13833151a6fdd88adad57",
+        "_rels/.rels": "22c01d12e912dc45bdf191c382dd5b80cdeca1a9e95af86a477798a9f7e541e9",
+        "word/document.xml": "be530e6d9fa37fa428b5cd07b9eac94cdae662acb464a6af22ac860d3ceb10c7",
+        "word/_rels/document.xml.rels": "985cbadc16b861e6ef712d03bed554bf3ec200c1ba62da8a4aafb7629ea11658",
+        "word/styles.xml": "cfe78965941bd164996ec3461939f07c6d4504f92a8b9c6153eb1211644f8113"
+      }
+    },
+    {
+      "label": "fixed",
+      "simulated_host_default": 3,
+      "source_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+      "complete_record_fingerprint": "a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4",
+      "bytes": 2729,
+      "unit_count": 6,
+      "creator_systems": [
+        0
+      ],
+      "equal_to_sealed_original": true,
+      "locator_identity_metadata_replay": "PASS",
+      "entry_payload_sha256": {
+        "[Content_Types].xml": "2f62cce3c23f463a0575357d587e2e513bd0b0d3b2a13833151a6fdd88adad57",
+        "_rels/.rels": "22c01d12e912dc45bdf191c382dd5b80cdeca1a9e95af86a477798a9f7e541e9",
+        "word/document.xml": "be530e6d9fa37fa428b5cd07b9eac94cdae662acb464a6af22ac860d3ceb10c7",
+        "word/_rels/document.xml.rels": "985cbadc16b861e6ef712d03bed554bf3ec200c1ba62da8a4aafb7629ea11658",
+        "word/styles.xml": "cfe78965941bd164996ec3461939f07c6d4504f92a8b9c6153eb1211644f8113"
+      }
+    }
+  ],
+  "baseline_host_byte_delta": {
+    "count": 5,
+    "offsets": [
+      2392,
+      2457,
+      2514,
+      2577,
+      2651
+    ],
+    "all_uncompressed_xml_payloads_equal": true
+  },
+  "original_assertion_functions_preserved": [
+    "paragraph",
+    "legacy_original",
+    "normalize",
+    "plain",
+    "document_record",
+    "fingerprint",
+    "test_builtin_heading_from_real_word_style_keeps_paragraph_locator",
+    "test_inherited_style_and_direct_outline_take_real_precedence",
+    "test_style_name_and_heading_wording_do_not_guess_structure",
+    "test_default_paragraph_style_uses_its_real_outline",
+    "test_style_cycle_is_bounded_and_marks_incomplete_structure",
+    "test_missing_style_and_invalid_outline_are_explicit_diagnostics",
+    "test_styles_part_uses_existing_xml_limits_and_deadline",
+    "test_style_heading_inside_table_retains_table_semantics_and_body_order",
+    "test_explicit_legacy_is_exact_field_metadata_identity_and_replay_freeze",
+    "test_default_and_saved_old_pins_have_separate_generation_and_replay_identity",
+    "test_parser_capabilities_remain_specific_to_their_format",
+    "test_real_heading_stops_native_business_group_context"
+  ],
+  "original_non_function_statements_preserved_except_added_sha_constant": true,
+  "guarded_git_diff": [
+    "tests/unit/test_docx_heading_normalization.py"
+  ],
+  "test_file_sha256": "cf5646fc25e157f6bdcbccf77ba7c5e3a111e6cccb3b9c49bf7ad6e7c9fabb13",
+  "probe_sha256": "cc6da93b2492c9fa44446cb6303303afb6cdaf00825a05f80288183552185149",
+  "protected_product_and_config_sha256": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+    "src/company_wiki/automation/narrative_batch.py": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "protected_before_equals_after": true,
+  "red_and_green_log_hashes_verified": true,
+  "new_host_pytest_exit_code": 0,
+  "new_host_pytest_log_sha256": "238596679255258aa8d1f8726a13ca85ebfe8a28defd9a28463bc7ce3e90e17f",
+  "evidence_sha256": {
+    "ZIP_FIXTURE_CONTINUATION.md": "c0e52899294efb12a239c47636743e354c804cbc174ddd82560f9795851eb246",
+    "evidence/source-publication/exact-ci-check-failure.json": "c6eb805a44c530087069b8b3b4cab52f5387e01ebc5e4e7ee46bfef636327637",
+    "evidence/source-publication/exact-ci-failed-job.log": "f177afd4478d4280f1e5d3a32f84b9843a03dd097c943e7040f3533d6bb539c8",
+    "evidence/source-publication/zip-host-reproduction.json": "5fabdb71459ed14aaff3cbb9a56d2e3062ce6eaefec4b1515c0131dc2372a35f",
+    "evidence/source-publication/zip-host-tdd-red.json": "cfcfd7af158e0ccfca4b9028ece37c63da86a454f8ed60db5f3b64c62173957b",
+    "evidence/source-publication/zip-host-tdd-red.log": "9d690ec374403eb59ba0fad05c6b1587a40697908d2401a199311ee7d5e45583",
+    "evidence/source-publication/zip-host-tdd-green.json": "5c08b83e2ba1291ff04588561af1265a87cca4a63688eb540947d6aff2272541",
+    "evidence/source-publication/zip-host-tdd-green.log": "f504fafccc3c564a4ca7684d562f25065d8f21969dc02d7a42ef9c7054dc86a4",
+    "evidence/docx-heading-implementation/legacy-original.docx": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761"
+  },
+  "remote_ci_claim": "NOT_SIGNED: new exact Linux CI has not been observed by this review; local simulated ZIP hosts cannot substitute for that final evidence.",
+  "boundaries": {
+    "company_review_material_read": false,
+    "external_network_calls": 0,
+    "provider_calls": 0,
+    "model_calls": 0,
+    "source_or_config_writes": 0,
+    "large_suites_rerun": false
+  },
+  "stop": "STOP"
+}

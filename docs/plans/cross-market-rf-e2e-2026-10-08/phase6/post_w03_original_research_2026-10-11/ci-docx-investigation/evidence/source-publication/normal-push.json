@@ -1,0 +1,25 @@
+{
+  "schema_version": "native-boundary-normal-push/1",
+  "recorded_at": "2026-10-11T02:35:24.701216+00:00",
+  "returncode": 0,
+  "seconds": 208.12468190000072,
+  "canonical_before": "1152dad7b5cbfef82604d816aaf05d45db7cad4c",
+  "canonical_after": "ee293769037d0a9a205d75d15d64f0600929eaad",
+  "origin_master_local": "ee293769037d0a9a205d75d15d64f0600929eaad",
+  "merge": "ff-only",
+  "byte_archives_verified_after_checkout": 88,
+  "config_before": {
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "config_after": {
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "config_unchanged": true,
+  "working_tree_clean": true,
+  "log_sha256": "5240df0623cb58c7fe74f8ea18dd9f38aceced57d114b32902c5885ce14675b9",
+  "no_verify": false,
+  "external_provider_calls": 0,
+  "paid_model_calls": 0
+}

@@ -1,0 +1,43 @@
+{
+  "observed_at": "2026-10-11T02:43:56.452736+00:00",
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_docx_heading_normalization.py",
+    "tests/unit/test_document_normalization_docx.py",
+    "-q",
+    "--tb=short"
+  ],
+  "exit_code": 4,
+  "wall_seconds": 2.5978524000020116,
+  "log_sha256": "e029c9808c58d2490559c25eff4bf016e0b93ee2a23c7b262bdcda10d2dc55bd",
+  "protected_before": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+    "src/company_wiki/automation/narrative_batch.py": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "protected_after": {
+    "src/company_wiki/document_normalization/docx_parser.py": "319b6108d27cdde262ab272f2c7b34965c2ca55228ce01d11a3bbb13fea01fbe",
+    "src/company_wiki/document_normalization/units.py": "f7b88241228dffd689aec0f1a00184ccdf5a6cd4636a641f423856366f4299d9",
+    "src/company_wiki/document_normalization/__init__.py": "1eb702537c9d5d18959325fff4a3a3d139084caa6de9ef6b50c7af2083db42cf",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "69f0e220cbb860863ab790d137dec532096b85652ad93420f66dbcb4d844d114",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "4f6d8f56d961e54debcffd51a4ba0431ef70487d4aad9577aad5d909d5ac3f08",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "a04b7d90e9b304e726036e7c14d2463bd0c680a8c2f8f9dcff768cc03c84ee3f",
+    "src/company_wiki/automation/narrative_batch.py": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "all_protected_unchanged": true,
+  "paid_provider_calls": 0,
+  "paid_model_calls": 0
+}

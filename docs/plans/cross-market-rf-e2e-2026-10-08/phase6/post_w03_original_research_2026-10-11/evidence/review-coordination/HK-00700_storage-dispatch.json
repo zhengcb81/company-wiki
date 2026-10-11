@@ -1,0 +1,10 @@
+{
+  "company": "HK-00700",
+  "role": "storage",
+  "reviewer_agent": "/root/pw03_hk_storage_reviewer",
+  "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\HK-00700_storage.md",
+  "manifest_sha256": "a1cee8fc896cd4a097403c26796f9103cd34765818223af0f0eeff7112cf3058",
+  "execution_handoff_sha256": "03ad7c33d0b66a48f966d4912c6eb307c8cbada15f8724ae6936576c9a9bfe4e",
+  "dispatch_observed_at": "2026-10-11T02:54:29.485947+00:00",
+  "actual_child_start_time": "own true role event, not coordinator invented"
+}

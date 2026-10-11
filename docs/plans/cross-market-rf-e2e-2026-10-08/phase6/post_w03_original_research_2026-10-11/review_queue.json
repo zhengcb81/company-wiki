@@ -1,8 +1,8 @@
 {
   "schema_version": "post-w03-independent-review-queue/1",
-  "observed_at": "2026-10-11T02:29:45.752665+00:00",
+  "observed_at": "2026-10-11T02:54:29.485947+00:00",
   "quality_claim": false,
-  "reviewer_agents_dispatched": 5,
+  "reviewer_agents_dispatched": 9,
   "prior_coverage": {
     "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_root_remediation_2026-10-09\\coverage.json",
     "sha256": "bf523eaa37bb28b1e414ae3e6d6c09e38e0ba2d65638bf25ef6776fb134df64a",
@@ -16,7 +16,7 @@
       "role": "storage",
       "run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012",
       "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\CN-688012_storage.md",
-      "state": "RUNNING",
+      "state": "SEALED_FAIL",
       "execution_handoff": {
         "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\handoffs\\execution.json",
         "sha256": "7d0762f68223586721bbeb31f89f0f240a41a3eefd2961a122f52fdab14764e2"
@@ -58,19 +58,28 @@
       ],
       "manifest_sha256": "2445a99ac69cc5465da9f254b629a40ade24ad3b44a915963d9e1f88047ba121",
       "execution_outcome": "partial",
-      "dispatch_observed_at": "2026-10-11T02:29:45.752665+00:00"
+      "dispatch_observed_at": "2026-10-11T02:29:45.752665+00:00",
+      "quality_pass": false,
+      "accepted_integrity_at": "2026-10-11T02:53:22.829449+00:00",
+      "report": {
+        "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.json",
+        "json_sha256": "aed252e271eb9e24926e237a34ea4b3572f9e6d771147d6da2d9853a3d9e7792",
+        "md": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\storage.md",
+        "md_sha256": "ce1d66d524e8f34d4c42686a8aef4aee23ebe06ac3f3fb215033ab2570c0b44d"
+      },
+      "review_completed_event_id": "37ebf015badf4bfaa634afae37148a38"
     },
     {
       "company": "CN-688012",
       "role": "fetch",
       "run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012",
       "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\CN-688012_fetch.md",
-      "state": "READY_EXECUTION_SEALED",
+      "state": "SEALED_FAIL",
       "execution_handoff": {
         "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\handoffs\\execution.json",
         "sha256": "7d0762f68223586721bbeb31f89f0f240a41a3eefd2961a122f52fdab14764e2"
       },
-      "reviewer_agent": null,
+      "reviewer_agent": "/root/pw03_cn_fetch_reviewer",
       "prior_issue_keys": [
         "fresh-20261009T065028-cn-688012/fetch/FETCH-001",
         "fresh-20261009T065028-cn-688012/fetch/FETCH-002",
@@ -102,19 +111,29 @@
         78
       ],
       "manifest_sha256": "2445a99ac69cc5465da9f254b629a40ade24ad3b44a915963d9e1f88047ba121",
-      "execution_outcome": "partial"
+      "execution_outcome": "partial",
+      "dispatch_observed_at": "2026-10-11T02:42:18.118095+00:00",
+      "quality_pass": false,
+      "accepted_integrity_at": "2026-10-11T02:53:22.829449+00:00",
+      "report": {
+        "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\fetch.json",
+        "json_sha256": "e82fb4d00a17cd10222bc8858e0daeb90ca56e688aba9cef67f6ea4039619016",
+        "md": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\reports\\fetch.md",
+        "md_sha256": "1e9dc5c8cc9ff7923a5553e74e75deec59176616af52e20a8d44274383c9e257"
+      },
+      "review_completed_event_id": "5218c6b8d1794c78ba8ccab760b6046c"
     },
     {
       "company": "CN-688012",
       "role": "process",
       "run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012",
       "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\CN-688012_process.md",
-      "state": "READY_EXECUTION_SEALED",
+      "state": "RUNNING",
       "execution_handoff": {
         "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\handoffs\\execution.json",
         "sha256": "7d0762f68223586721bbeb31f89f0f240a41a3eefd2961a122f52fdab14764e2"
       },
-      "reviewer_agent": null,
+      "reviewer_agent": "/root/pw03_cn_process_reviewer",
       "prior_issue_keys": [
         "fresh-20261009T065028-cn-688012/process/PROCESS-001",
         "fresh-20261009T065028-cn-688012/process/PROCESS-002",
@@ -158,19 +177,20 @@
         89
       ],
       "manifest_sha256": "2445a99ac69cc5465da9f254b629a40ade24ad3b44a915963d9e1f88047ba121",
-      "execution_outcome": "partial"
+      "execution_outcome": "partial",
+      "dispatch_observed_at": "2026-10-11T02:53:22.829449+00:00"
     },
     {
       "company": "CN-688012",
       "role": "analyst",
       "run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012",
       "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\CN-688012_analyst.md",
-      "state": "READY_EXECUTION_SEALED",
+      "state": "RUNNING",
       "execution_handoff": {
         "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\handoffs\\execution.json",
         "sha256": "7d0762f68223586721bbeb31f89f0f240a41a3eefd2961a122f52fdab14764e2"
       },
-      "reviewer_agent": null,
+      "reviewer_agent": "/root/pw03_cn_analyst_reviewer",
       "prior_issue_keys": [
         "fresh-20261009T065028-cn-688012/analyst/ANALYST-001",
         "fresh-20261009T065028-cn-688012/analyst/ANALYST-002",
@@ -196,19 +216,20 @@
         95
       ],
       "manifest_sha256": "2445a99ac69cc5465da9f254b629a40ade24ad3b44a915963d9e1f88047ba121",
-      "execution_outcome": "partial"
+      "execution_outcome": "partial",
+      "dispatch_observed_at": "2026-10-11T02:53:22.829449+00:00"
     },
     {
       "company": "HK-00700",
       "role": "storage",
       "run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700",
       "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\HK-00700_storage.md",
-      "state": "READY_EXECUTION_SEALED",
+      "state": "RUNNING",
       "execution_handoff": {
         "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\handoffs\\execution.json",
         "sha256": "03ad7c33d0b66a48f966d4912c6eb307c8cbada15f8724ae6936576c9a9bfe4e"
       },
-      "reviewer_agent": null,
+      "reviewer_agent": "/root/pw03_hk_storage_reviewer",
       "prior_issue_keys": [
         "fresh-20261009T065028-hk-00700/storage/STORAGE-001",
         "fresh-20261009T065028-hk-00700/storage/STORAGE-002",
@@ -240,7 +261,8 @@
         101
       ],
       "manifest_sha256": "a1cee8fc896cd4a097403c26796f9103cd34765818223af0f0eeff7112cf3058",
-      "execution_outcome": "partial"
+      "execution_outcome": "partial",
+      "dispatch_observed_at": "2026-10-11T02:54:29.485947+00:00"
     },
     {
       "company": "HK-00700",
@@ -485,7 +507,7 @@
       "role": "process",
       "run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft",
       "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\US-MSFT_process.md",
-      "state": "RUNNING",
+      "state": "SEALED_FAIL",
       "execution_handoff": {
         "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\handoffs\\execution.json",
         "sha256": "ad29152fa9eed0ee1fdea2bcd991fac64b1a0c4e3a2bb2c31e8b2a5221b3350e"
@@ -521,14 +543,23 @@
       ],
       "manifest_sha256": "ccbbeea4e3feaa0a482bf0f493d0d4a4cb00a1ccacc17ba13baaf670b1354e6c",
       "execution_outcome": "partial",
-      "dispatch_observed_at": "2026-10-11T02:18:38.924151+00:00"
+      "dispatch_observed_at": "2026-10-11T02:18:38.924151+00:00",
+      "quality_pass": false,
+      "accepted_integrity_at": "2026-10-11T02:42:18.118095+00:00",
+      "report": {
+        "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\process.json",
+        "json_sha256": "b467a9a38ffcf4058a2979b25d0a76f1f1fb85ee206a1bc98bea4278febceef2",
+        "md": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\process.md",
+        "md_sha256": "4f2bcfa971017c3442a54bf8ef226cb7cf97aac6a23711ed558a0aeab3eac1fc"
+      },
+      "review_completed_event_id": "c6d6a7afbb7d49adaf427caa6af61ba1"
     },
     {
       "company": "US-MSFT",
       "role": "analyst",
       "run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft",
       "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\US-MSFT_analyst.md",
-      "state": "RUNNING",
+      "state": "SEALED_FAIL",
       "execution_handoff": {
         "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\handoffs\\execution.json",
         "sha256": "ad29152fa9eed0ee1fdea2bcd991fac64b1a0c4e3a2bb2c31e8b2a5221b3350e"
@@ -560,7 +591,18 @@
       ],
       "manifest_sha256": "ccbbeea4e3feaa0a482bf0f493d0d4a4cb00a1ccacc17ba13baaf670b1354e6c",
       "execution_outcome": "partial",
-      "dispatch_observed_at": "2026-10-11T02:25:21.327949+00:00"
+      "dispatch_observed_at": "2026-10-11T02:25:21.327949+00:00",
+      "quality_pass": false,
+      "accepted_integrity_at": "2026-10-11T02:51:12.155175+00:00",
+      "report": {
+        "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\analyst.json",
+        "json_sha256": "2a7222849ff556cfee4f8109f82af5bfa938e55b6d46689546197e91102d92b9",
+        "md": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\reports\\analyst.md",
+        "md_sha256": "86b6e4a640bf12e1c9150d3ff362109c6309011e51f488d413a0495cecc626dd"
+      },
+      "review_completed_event_id": "8a9eeaab848a405a8d5e0682e6be868f",
+      "review_sealed_event_id": "86193eaaa70f42449051d07b850c4d4a",
+      "reported_quality_verdict": "FAIL: material forecast research incomplete; native delivery BLOCKED"
     }
   ],
   "expert_carryover": [

@@ -1,3 +1,11 @@
+## 2026-10-11T02:54:29.485947+00:00 — ZIP原字节独立接受；正常集中发布准备
+
+独立报告2a40a946…/b6171d18… SHA核符合，4真正probe（baseline/fixed各双宿主）精确原CI复现；固定两宿主等于封存d428原DOCX、原全serializer/每旧assert AST保留、7产品源/config不变，材料发现0。独立仅2参数测试PASS/0.56s，未重复39/3196/public节点，不签尚待新CI。ROOT test-only修复停止；正常commit/master ff/push新精确CI。三公司独立9/12已派，6份真实FAIL已封存；CN process/analyst/HK storage正在审，HK其余3排队。P7-AUDIT40b38103真实交接只读已发现，尚待技术接收及合同不足裁决，不再假定未交；当前audit78c运行/安装不切。
+
+## 2026-10-11T02:42:18.118095+00:00 — 新源码正常发布；精确CI两项fixture跨平台失败，process审查封存
+
+源码 ee293769037d0a9a205d75d15d64f0600929eaad 已普通commit/master ff/普通push，本地3196PASS/199.24秒、88原证据字节checkout匹配；远端精确CI38105648234为2FAIL/3057PASS/6skip、76.96秒，两个新增DOCX旧指纹测试得到63c83b56…而非a6580fca…。原79387B日志SHAf177afd4…保留，不能称新CI绿；先查fixture ZIP平台元数据，不动原断言或解析契约。US process报告b467a9a3…/4f2bcfa9…真实SHA/Event读回，FAIL/partial；72未来param/84未来calc为空、71deck claim未capture、认收claim错配、真实Xbox FY27目标漏账，旧12映射齐全。第6位fresh CN fetch已实际派；3审封存FAIL、另US analyst/CN storage/CN fetch运行。母账与sealed execution保持、0新模型/provider。
+
 
 ## 2026-10-11T02:29:45.752665+00:00 — native CI共因集中独立接受，正常发布
 
@@ -29,3 +37,15 @@ Public TXT single recheck1PASS/15.41s，same source SHA保持；public责任4 un
 ## 2026-10-11T01:42:41.358699+00:00 — CI调度独立简化
 
 先写docs/plans evidence-only反例实际1FAIL/0.43s，旧workflow只ignore markdown。src/scripts runtime未发现docs/plans依赖，normal prepush行为分类本来忽略该纯计划路径；现push/PR仅补docs/plans/**，普通源码/测试仍全CI。GREEN集中两轻量responsibility文件，原precommit静态职责/normalpush行为职责不变，不增加新workflow/许可、不用skip掩盖DOCX真问题。首editdriver读rawCRLF needle assert提前停止未写；改正常text读换行后完成，不是产品故障。receipt green-ci-scheduling.json/log；native源码pure集中112PASS和public4责任联合GREEN，独立审与三executor seal后发布仍待。
+
+ROOT集中GREEN首命令引用了不存在的tests/unit/test_document_normalization_docx.py，pytest exit4/0 collected，没有产品失败或实际GREEN；原log/JSON保存为zip-host-green-attempt1-path-error。已读取实际child handoff后使用tests/document_normalization/test_docx.py，不猜路径。
+
+## 2026-10-11T02:46:17.450427+00:00 — ZIP跨平台准确复现与TDD集中绿
+
+Linux默认create_system3得原件SHA1af5cb9e/完整旧record63c83b56，与精确CI完全一致；Windows0得d428ad04/a6580fca，6正文及locator相同。新增两个宿主反例先1FAIL/1PASS0.82秒，再仅package固定creator0，原assert未减，集中DOCX39PASS/0.74秒，Ruff绿，7产品源+2config SHA保持。普通推送不是未测：它在Win32确实3196PASS；重复加全套本地测试无法识别缺失的Linuxfixture封套边界，现双宿主反例锁住根因。首GREEN错路径exit4/0 collected明示保留，读取实际handoff后修driver，不影响产品。下一步独立定点与正常发布精确CI；四审保持独立。
+
+## 2026-10-11T02:53:22.829449+00:00 — CN storage/fetch封存FAIL，CN process/analyst真实派出
+
+CN storage JSONaed252e2…/MDce1d66d5…与fetchJSONe82fb4d0…/MD1e9dc5c8…SHA核对，两真实完成事件读回，CN2+US4共6审封存FAIL；当前8/12已派，CN process/analyst运行，HK4待空槽。storage旧15项3PASS/7FAIL/1BLOCKED/4NOT_RUN；fetch旧13项3PASS/5FAIL/5NOT_RUN，旧问题/费用不改。实际SSE request上限16384B，原57784B在供应商前invalid_request，更正之前另一快速观察的32768和历史摘要里的16K猜测后以actualowner实值为准。年度0final、重要业务事实遗漏、IR/交易正文遗漏、派生重复超32MiB以及旧恢复未测等进expert共因，不把证据不全强行签PASS。
+
+两个Next Step改写多加空行被diff--check报EOF blank，ROOT只去其多余末尾空白，原CRLF及evidence保持；CI actual2failure日志未覆盖，fixture39GREEN等待独立。0新模型/provider/收费。

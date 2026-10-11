@@ -1,0 +1,464 @@
+{
+  "schema_version": "native-boundary-normal-commit/1",
+  "recorded_at": "2026-10-11T02:31:01.566753+00:00",
+  "returncode": 0,
+  "seconds": 18.439558999998553,
+  "head": "ee293769037d0a9a205d75d15d64f0600929eaad",
+  "staged_file_count": 127,
+  "byte_archives_verified": 88,
+  "byte_archives": [
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-operational-readiness-20261011.md",
+      "byte_size": 26435,
+      "sha256": "212c7c9421249fa14edb02fe8b0e7b94c57316f4f05f695cd5e1038c504c1817"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/budget-observation-native-20261011T0140.json",
+      "byte_size": 9309,
+      "sha256": "b711ca14414ea7aa1bf5ee93bae14d6a83141e4a95da29f91a28e3051b69b3c0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/DOCX_HEADING_CONTINUATION.md",
+      "byte_size": 4418,
+      "sha256": "ba911522ca791d69b484f26d469699cdb1a212c55ea0de2f145f0ee20e03d0f4"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/INDEPENDENT_REVIEW_CARD.md",
+      "byte_size": 3267,
+      "sha256": "081f9773336057f2dceab69f094f0e7a1a9bbe6a2052ae51ccff869e591937a7"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/SOURCE_ACCEPTANCE.md",
+      "byte_size": 1799,
+      "sha256": "042157b6bdee63f63592f5417714abf10a23ff6d547087d7e954fc16aa7844ed"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/container-variants-before.json",
+      "byte_size": 3722,
+      "sha256": "2524bea8e354e7869652b4faa2fcde3d1e09c6fdb045fee7328a9013b472fa95"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/IMPLEMENTATION.md",
+      "byte_size": 5529,
+      "sha256": "194395d21c3e9361b78165691947dd70eb7a820b96483581cbf930995247f1f6"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/after.json",
+      "byte_size": 26849,
+      "sha256": "2862d41447baed7c4f95f6d5d4fa435bf997d881d03b8fb8e09f6b5b213fe5a2"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/before.json",
+      "byte_size": 8650,
+      "sha256": "987462b9d88d6cd509587caa4f4883e5ec6b1fb172eb527711a558ae2c2305c8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/green-final-docx.log",
+      "byte_size": 1778,
+      "sha256": "3ad353a848053073d90379700f4075a5e5bbbc9efe32ec848e061d60d3101b4d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/green-focused.log",
+      "byte_size": 2108,
+      "sha256": "601ca3481aee3c5c51d418e014e13d4e55c7714dd5fbcd28271ef425b8c50788"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/handoff-manifest.json",
+      "byte_size": 2196,
+      "sha256": "1d1bb0d3783ff2251f77c431e606df0ce946faab04fa58bb8c8c7570f4e84595"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/heading-minimal.docx",
+      "byte_size": 2416,
+      "sha256": "ff1b655fe67c6fc59206079ae612373231758a35a751293df5af6c61e189f5e0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/legacy-original.docx",
+      "byte_size": 2729,
+      "sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/mypy-final.log",
+      "byte_size": 366,
+      "sha256": "866612c6db2892657c86cf926fd01fb2a9b378447e90b9c70ea45d18c2345d74"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/mypy.log",
+      "byte_size": 1911,
+      "sha256": "4077a1aa525b2bdd6f9b96f432cd9765b58b1846e13b9f889643f492fba04c10"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/red.log",
+      "byte_size": 8725,
+      "sha256": "e6a2d1b49297b0f83c7037d96824bd31b4571ad9e697d88e343e959e75ed9d29"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/ruff-final.log",
+      "byte_size": 394,
+      "sha256": "1b5b1b837d76d4359e3f1a6dbc490094f5f9253acd338c32757fddb367ad35f5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/ruff.log",
+      "byte_size": 394,
+      "sha256": "1b5b1b837d76d4359e3f1a6dbc490094f5f9253acd338c32757fddb367ad35f5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/docx-heading-implementation/style-inheritance-override.docx",
+      "byte_size": 2339,
+      "sha256": "f98f852a2e497073effdcef7da41241e53b3ab7a2700c4134ff56e91a5cdb5c2"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/final-heading-independent-review/own-inheritance-outline.docx",
+      "byte_size": 3486,
+      "sha256": "89ac8a4d3f7ff42f531f07ef9342af4697008cf31526724cd711f0fd1d78e87e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/final-heading-independent-review/own-noneligible-cell.docx",
+      "byte_size": 3458,
+      "sha256": "34dd86f5c45258f78f5eedd67dcf14b57aacad11858b83b08634c3f5ce5ea291"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/final-heading-independent-review/probe-first-run.json",
+      "byte_size": 49372,
+      "sha256": "2f17dcdefedd753f832f683f86e45537fc902fb687fa28c79b1cb05e4be9c8b6"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/final-heading-independent-review/probe-first.py",
+      "byte_size": 15411,
+      "sha256": "46fb530708095f2904bd8c0e48a1e67cac5a7d68f54b5293cbfc36adfc24e054"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/final-heading-independent-review/probe-results.json",
+      "byte_size": 51988,
+      "sha256": "e3f18da9b656c15ec669a2370445177303f3f95b82b434908826ba66f84e71d5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/final-heading-independent-review/probe.py",
+      "byte_size": 15493,
+      "sha256": "805a76016c0bc96303361d58e8ca0a18c15369a8dbed81cb67a5299fb33bdc9c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/final-heading-independent-review/review.json",
+      "byte_size": 31839,
+      "sha256": "1eba0243e1d32b035faf255a214742d92f19e3ec42c7bd4375ccc26b3367fc1b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/final-heading-independent-review/review.md",
+      "byte_size": 4124,
+      "sha256": "8f778369fe40e3c7ded5ab6aff9664d0fba01048e049a725a3d71c015d8980ac"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/final-heading-independent-review/seal_review.py",
+      "byte_size": 14476,
+      "sha256": "8f3180fe1b38ddb25bf60ba873e62bf3febaba1a9529259304a0efcec10a46f9"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/docx_heading_duplicates_mixed_tables.docx",
+      "byte_size": 36958,
+      "sha256": "0d025dcdac1f3b521748a604f60b42b768df3fba9faa71b60ef7a361187e5c44"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/docx_heading_minimal.docx",
+      "byte_size": 36699,
+      "sha256": "c29c7c0d1a40da78cdf6215bb9675f27773b461af49d71f8e1877136d944702c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/heading-minimal-results.json",
+      "byte_size": 4732,
+      "sha256": "f7e6c11a3c7fd9943f5602d481226a03848f83dc6b501ae2aedf7301d5ac8e00"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/heading_minimal_probe.py",
+      "byte_size": 3372,
+      "sha256": "e95ff0ace261dddf671e9c21fb372b7700e4691c1833b63c34e2cfcbca62fc9b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/heading_minimal_probe_v0_serialization_error.py",
+      "byte_size": 3344,
+      "sha256": "8f67f850011bd35e355cab284b46b1445d79ac3d17e61d0502c25d643aa974d8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/html_heading_duplicates_mixed_tables.html",
+      "byte_size": 756,
+      "sha256": "8fd1519cce8c0af0c765ba2f36daa1fdededcc5ebb4aaa3714393563c803bbe5"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/independent_probe.py",
+      "byte_size": 8557,
+      "sha256": "425a2ad180d4e79b71d713904b613ec101e738eb56b29f60ed3858f1109726b2"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/pptx_same_and_different_shape_mixed_tables.pptx",
+      "byte_size": 29645,
+      "sha256": "8c00e6c52daef951e3fcf1b6fda6e8d39b62de2d51a63469969c4fc0a5f5c400"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/probe-results.json",
+      "byte_size": 66162,
+      "sha256": "469a1d11c4cc8d37f63d0d065bd815d6ab4d48a206a7a0bbb9be670e2ec08522"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/review.json",
+      "byte_size": 27185,
+      "sha256": "db81219e561af005aea9c830b3d9a9a4d678b4510292b10ad991bbaa95adf711"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/independent-review/review.md",
+      "byte_size": 4334,
+      "sha256": "db11cffe947ebca61a226eb9c5ded2a5c55e887d939daf2d377019919cffa1a0"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/root-final-node/docx-public-attempt2.json",
+      "byte_size": 2691,
+      "sha256": "ff5bfd9fc9ca0419d757765c66f69ee61091da7d706662f48cc83ae27869088a"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/root-final-node/docx-public-attempt2.log",
+      "byte_size": 3923,
+      "sha256": "6288936168769b74376770e11ad348054e2822979a2a9f0135164bb830bc8045"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/root-final-node/native-public-attempt1.json",
+      "byte_size": 2584,
+      "sha256": "7abfdad6b64ef5cb77e2c39312e35254989d5c96f9965fd0f87bc5c1867a5f16"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/root-final-node/native-public-attempt1.log",
+      "byte_size": 2747,
+      "sha256": "a1eff1fd2afdd9f8f3baa510872ddd15010a812f70c618416d5cb7ed8543ff23"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/root-heading-boundary/green.json",
+      "byte_size": 1442,
+      "sha256": "7d31e437c0faef285220b112c8a968d997fb57b585b54ce33dbd908747a9647d"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/root-heading-boundary/green.log",
+      "byte_size": 1753,
+      "sha256": "37a09213ff4a15ef60cf6b4cf5bae659c1fdec96f96d742641efb22ca20ec55c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/root-heading-boundary/red.json",
+      "byte_size": 1532,
+      "sha256": "7a82e21b91c611573ee548c022862178871afd22d51a5db78a3d589861379f1b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/root-heading-boundary/red.log",
+      "byte_size": 3533,
+      "sha256": "6edcbc2edc6257607bfd6a7d2cd170d9b276a034421d142137c14ca6814fe3fb"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/findings.md",
+      "byte_size": 5380,
+      "sha256": "8655e684513cf2caf0686317963d3f2cb8bde543d39efbf4b1e4a187957d5be3"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/green-ci-scheduling.json",
+      "byte_size": 1294,
+      "sha256": "b0420a38625a52ea1eea1011dcbecb39efa7e3fc823e8cd2dc1d9ae969152c06"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/green-ci-scheduling.log",
+      "byte_size": 1910,
+      "sha256": "0ca6a45ad57c43e27d8292a7f735baac3f3162a442a6575b3698af1d78c46542"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/green-public-txt.json",
+      "byte_size": 808,
+      "sha256": "8241410031cd3f61b7c6b30b0b2895911f3ee244f94daf9080efddf99a93b587"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/green-public-txt.log",
+      "byte_size": 1747,
+      "sha256": "0eec00174d599b2e3547b47e49d6587dcc1c76d5f7e36f404b33110efe7f9230"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/green-public.json",
+      "byte_size": 1303,
+      "sha256": "926478876e55346db711b17a90adc4b28e2e25fcba2fce4b3533b2adf3397834"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/green-public.log",
+      "byte_size": 2545,
+      "sha256": "3f2b012d6f9aeac08024b7ad72deed6a1bbe695814c02b681d78a1172e128076"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/green-unit.json",
+      "byte_size": 1464,
+      "sha256": "1c46274179f96e4c4e22a087b5096a8b9ed8afdd1e4d93a45a0a33e99ad35ad8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/green-unit.log",
+      "byte_size": 2149,
+      "sha256": "b01ed3ad8db4a27f89f10035964455fbedc8fe937e7ea0cfdbd3eb9362483772"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/job-114357569625.log",
+      "byte_size": 77565,
+      "sha256": "301bcfd856beef2c1bf469e4f940d2a6d6dd3687835b9b8cc68fa7ea25cf1002"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/log-observation.json",
+      "byte_size": 595,
+      "sha256": "7bc36f31c33952884b8cf4515628e5f1e3c2c7d86c15fc082967fecd131a8b31"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/progress.md",
+      "byte_size": 6058,
+      "sha256": "0c31d88d35c4c4b6b2340ff0bfa821f25356286e0fa129fdf06cdc0f6a893d96"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/red.json",
+      "byte_size": 1302,
+      "sha256": "e9a7f7dc14200465dfa12695ec6f9e4adb91313b144293b656eeedce4264a750"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/red.log",
+      "byte_size": 9521,
+      "sha256": "ccea28ca2116d9a3929184410acbf07c8b04daa4271499cadcd8de72bdc29d6c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/task_plan.md",
+      "byte_size": 7644,
+      "sha256": "5439b384a1af5feaa444216e3eb55931051633970563fb1963f9dbfa61ec3bb8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/cohort.json",
+      "byte_size": 7652,
+      "sha256": "142b37cad3d70c4022505d1c02808801e78efe42a64b7c872d3af20a4e79aae1"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/docs-publication-exact-ci.json",
+      "byte_size": 324,
+      "sha256": "0d9b4259634cbe51359f4b6c16704de16eeb8aacfac360e5460c29a5f40ab0cd"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-CN-688012/coordinator-event-data.json",
+      "byte_size": 913,
+      "sha256": "f8dcff4e669143804349911115ff315b5b67f71b73a448cc355c13c1b71304fe"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-CN-688012/event.stderr.log",
+      "byte_size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-CN-688012/event.stdout.log",
+      "byte_size": 191,
+      "sha256": "b372496fc14cc121cadd1c26441b359192c9c81e096aadf87a8ece8efa609bdd"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-CN-688012/manifest-observation.json",
+      "byte_size": 702,
+      "sha256": "53dd70ee4f34e70ff5559dec9711c5889f9749d1e7fc63364ad206fbaf312128"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-HK-00700/coordinator-event-data.json",
+      "byte_size": 885,
+      "sha256": "5523f3d3fba46b8115aebc15a3be4d5df0a5050547696fe27e913e785f6774e8"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-HK-00700/event.stderr.log",
+      "byte_size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-HK-00700/event.stdout.log",
+      "byte_size": 190,
+      "sha256": "7a364a4a7fafe1600c5c3a4199d35191d65cd5744e15dca1658a78dc0bcacb5b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-HK-00700/manifest-observation.json",
+      "byte_size": 700,
+      "sha256": "a09548debf75db972e089413b38c3621fd84316eccfa5c52b51d2b9bee0c68dd"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-US-MSFT/coordinator-event-data.json",
+      "byte_size": 861,
+      "sha256": "d8a388cf5211ac09fa1b92b85624d214da9efb6ae53f1dcdc97ed20ebc0d26be"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-US-MSFT/event.stderr.log",
+      "byte_size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-US-MSFT/event.stdout.log",
+      "byte_size": 189,
+      "sha256": "a5191eb5a8b3cd188108cc7ef93fba9c16612f467e8ccf04133c96d250c3fba1"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/execution-intake-US-MSFT/manifest-observation.json",
+      "byte_size": 1683,
+      "sha256": "91a21c323753d052529d6fd774a17c52784c2a15314fc5723951aba0ba2c6789"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/cn-storage-dispatch.json",
+      "byte_size": 296,
+      "sha256": "2272e5d09fb33af63abb73f6845a76ae29a5d0fac6dc661d50b3865a23cec36e"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/us-analyst-dispatch.json",
+      "byte_size": 294,
+      "sha256": "b05cfd76e2deb1a0113b32be029b457ae8b0b166a4fe6f77a600a89cf627eb87"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/us-process-dispatch.json",
+      "byte_size": 294,
+      "sha256": "5f8d8007a890a7c16525924e6eaa65ab9d70e50414fce0503733b89abd1bc2e1"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/reviewer-dispatch-US-MSFT/fetch.json",
+      "byte_size": 776,
+      "sha256": "50ccd1edefec7a9ea69e16b018f6dad9aa13676c90402481d873d3f6cc21fb0b"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/reviewer-dispatch-US-MSFT/fetch.stderr.log",
+      "byte_size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/reviewer-dispatch-US-MSFT/fetch.stdout.log",
+      "byte_size": 189,
+      "sha256": "bcda68b74ec7a1199a64b1e1acf22ce38d0150519e62b3143587d0032241aeee"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/reviewer-dispatch-US-MSFT/storage.json",
+      "byte_size": 782,
+      "sha256": "02c02b9da746f7277bf01462ba4298aa7813fde0312e202e695caba6d73fe336"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/reviewer-dispatch-US-MSFT/storage.stderr.log",
+      "byte_size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/reviewer-dispatch-US-MSFT/storage.stdout.log",
+      "byte_size": 189,
+      "sha256": "496b59ecd5292689c157d749d4014c82d83b6afdd63606c90d2c20845ac4806c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/model-purpose-diagnosis.json",
+      "byte_size": 940,
+      "sha256": "4d859763e00b1cdd1ba6fc6ddf369b8f3f1f3a123d092c3ee5392a6e558ff83c"
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/review_queue.json",
+      "byte_size": 25900,
+      "sha256": "0f68eb68cc63431f3c8b4ace7c1627b190b0b032258987e587df959f571abd36"
+    }
+  ],
+  "log_sha256": "525b79992adbaf0917e15e7bc194919e771558aae17ea361e26b76b0772acebc",
+  "config_before": {
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "config_after": {
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "config_unchanged": true,
+  "no_verify": false,
+  "external_provider_calls": 0,
+  "paid_model_calls": 0
+}

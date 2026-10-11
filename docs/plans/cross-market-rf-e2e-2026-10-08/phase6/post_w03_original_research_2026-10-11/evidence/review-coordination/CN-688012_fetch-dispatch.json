@@ -1,0 +1,10 @@
+{
+  "company": "CN-688012",
+  "role": "fetch",
+  "reviewer_agent": "/root/pw03_cn_fetch_reviewer",
+  "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\reviewer_cards\\CN-688012_fetch.md",
+  "manifest_sha256": "2445a99ac69cc5465da9f254b629a40ade24ad3b44a915963d9e1f88047ba121",
+  "execution_handoff_sha256": "7d0762f68223586721bbeb31f89f0f240a41a3eefd2961a122f52fdab14764e2",
+  "dispatch_observed_at": "2026-10-11T02:42:18.118095+00:00",
+  "actual_child_start_time": "role event, not invented by coordinator"
+}

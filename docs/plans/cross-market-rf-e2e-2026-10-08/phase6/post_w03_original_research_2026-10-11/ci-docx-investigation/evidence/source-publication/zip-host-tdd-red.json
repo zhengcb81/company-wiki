@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-11T02:43:28.374849+00:00",
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_docx_heading_normalization.py::test_legacy_fixture_bytes_are_independent_of_zip_host_default",
+    "-q",
+    "--tb=short"
+  ],
+  "exit_code": 1,
+  "wall_seconds": 5.638057600001048,
+  "log_sha256": "9d690ec374403eb59ba0fad05c6b1587a40697908d2401a199311ee7d5e45583",
+  "result": "1 failed, 1 passed; Linux create_system3 changes original SHA"
+}

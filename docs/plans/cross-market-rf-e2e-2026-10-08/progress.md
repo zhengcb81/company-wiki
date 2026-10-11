@@ -1,3 +1,15 @@
+## 2026-10-11T02:54:29.485947+00:00 — ZIP原字节独立接受；正常集中发布准备
+
+独立报告2a40a946…/b6171d18… SHA核符合，4真正probe（baseline/fixed各双宿主）精确原CI复现；固定两宿主等于封存d428原DOCX、原全serializer/每旧assert AST保留、7产品源/config不变，材料发现0。独立仅2参数测试PASS/0.56s，未重复39/3196/public节点，不签尚待新CI。ROOT test-only修复停止；正常commit/master ff/push新精确CI。三公司独立9/12已派，6份真实FAIL已封存；CN process/analyst/HK storage正在审，HK其余3排队。P7-AUDIT40b38103真实交接只读已发现，尚待技术接收及合同不足裁决，不再假定未交；当前audit78c运行/安装不切。
+
+
+## 2026-10-11T02:48:27.870103+00:00 — 只读发现P7-AUDIT真实交接，取消“未交付”的当前假设
+
+实际工作树clean，源码18a52f16、docs40b38103，HANDOFF.md SHA946afe38… / handoff.json SHAd63b9015…，PWF已记M1–M3及96测试/离线E2E/4不同synthetic reviewer；canonical audit clean仍78c2b108。这只是只读交接发现，尚未技术接收/合主线/安装，不能宣称真实研究通过。先验收现有CI小边界；后续空槽审P7 audit合同与实际旧兼容，卡上剩余W0x交expert合并裁决，明确不把诊断造为新全局许可。当前12公司四审沿冻结旧audit78c不切runtime，source/helper边界读原run，安装等四审封存后集中接线。不改外包tree/当前旧run、0新收费。
+## 2026-10-11T02:42:18.118095+00:00 — 新源码正常发布；精确CI两项fixture跨平台失败，process审查封存
+
+源码 ee293769037d0a9a205d75d15d64f0600929eaad 已普通commit/master ff/普通push，本地3196PASS/199.24秒、88原证据字节checkout匹配；远端精确CI38105648234为2FAIL/3057PASS/6skip、76.96秒，两个新增DOCX旧指纹测试得到63c83b56…而非a6580fca…。原79387B日志SHAf177afd4…保留，不能称新CI绿；先查fixture ZIP平台元数据，不动原断言或解析契约。US process报告b467a9a3…/4f2bcfa9…真实SHA/Event读回，FAIL/partial；72未来param/84未来calc为空、71deck claim未capture、认收claim错配、真实Xbox FY27目标漏账，旧12映射齐全。第6位fresh CN fetch已实际派；3审封存FAIL、另US analyst/CN storage/CN fetch运行。母账与sealed execution保持、0新模型/provider。
+
 
 ## 2026-10-11T02:29:45.752665+00:00 — native CI共因集中独立接受，正常发布
 
@@ -987,3 +999,19 @@ RF接收后的period关系缺口已有实际RED4FAIL/10PASS→119PASS/7subtests�
 W04有界失败final与W03有界业务召回细则已先写好，内部独占源码TDD进行；W03候选默认暂仍0.6.0，新0.7.0显式策略，ROOT后续串行接线freeze/generation/旧resolver，避免W04共同runtime并写。P7-AUDIT未通知交付，不写其源。0vendor/model/新增费，USD20/2M旧unknown照计、goal active，原件/config/Dayu/邻仓WIP不动。
 
 **Next Step：** RF最终source复核→正常main fast-forward/push/exactCI/定点安装；随后集中W04/W03shared接线及原真实研究复验，不新增小节点人审或授权。
+
+## 2026-10-11T02:46:17.450427+00:00 — ZIP跨平台准确复现与TDD集中绿
+
+Linux默认create_system3得原件SHA1af5cb9e/完整旧record63c83b56，与精确CI完全一致；Windows0得d428ad04/a6580fca，6正文及locator相同。新增两个宿主反例先1FAIL/1PASS0.82秒，再仅package固定creator0，原assert未减，集中DOCX39PASS/0.74秒，Ruff绿，7产品源+2config SHA保持。普通推送不是未测：它在Win32确实3196PASS；重复加全套本地测试无法识别缺失的Linuxfixture封套边界，现双宿主反例锁住根因。首GREEN错路径exit4/0 collected明示保留，读取实际handoff后修driver，不影响产品。下一步独立定点与正常发布精确CI；四审保持独立。
+
+## 2026-10-11T02:51:12.155175+00:00 — US四审完整封存FAIL；audit合同只读反例
+
+US analyst JSON2a722284…/MD86b6e4a6…及真实sealed事件SHA核符合，7finding（4P1/3P2），旧10key9FAIL/1BLOCKED，历史复算无差、72future null。US四角色全部实际独立FAIL封存，不能发布正式预测或声称旧问题已闭合。当前fresh公司四审仍6已派/4已封存、CN storage/fetch运行；一个短slot审fixture-only跨宿主边界后继续CN/HK余6。ROOT首次intake错将非必需quality_verdict prose要求exact FAIL，造成只读driver AssertionError，报告实际为FAIL:后跟具体理由，核心schema/checks/findings有效；已按实际字段保留原prose，没有改报告或把FAIL变PASS。
+
+P7-AUDIT正常40b38103交接的只读内存builderprobe发现：零费cap0.00被positive校验拒绝；声明P1/100但body P2/1000可冻结成native bytes（纯helper合成body，没有执行真实native，不冒称真实provider超额）。独立证据evidence/p7-audit-readonly-intake/request-contract-diagnostics.json，0写外包源码/0调用。接收前需确认实际native字段责任/声明与actual映射，不给diagnostic助手强加新全局许可；纳入12审后同共因expert计划，未合audit主线或安装。
+
+## 2026-10-11T02:53:22.829449+00:00 — CN storage/fetch封存FAIL，CN process/analyst真实派出
+
+CN storage JSONaed252e2…/MDce1d66d5…与fetchJSONe82fb4d0…/MD1e9dc5c8…SHA核对，两真实完成事件读回，CN2+US4共6审封存FAIL；当前8/12已派，CN process/analyst运行，HK4待空槽。storage旧15项3PASS/7FAIL/1BLOCKED/4NOT_RUN；fetch旧13项3PASS/5FAIL/5NOT_RUN，旧问题/费用不改。实际SSE request上限16384B，原57784B在供应商前invalid_request，更正之前另一快速观察的32768和历史摘要里的16K猜测后以actualowner实值为准。年度0final、重要业务事实遗漏、IR/交易正文遗漏、派生重复超32MiB以及旧恢复未测等进expert共因，不把证据不全强行签PASS。
+
+两个Next Step改写多加空行被diff--check报EOF blank，ROOT只去其多余末尾空白，原CRLF及evidence保持；CI actual2failure日志未覆盖，fixture39GREEN等待独立。0新模型/provider/收费。

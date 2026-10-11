@@ -1,3 +1,15 @@
+## 2026-10-11T02:54:29.485947+00:00 — ZIP原字节独立接受；正常集中发布准备
+
+独立报告2a40a946…/b6171d18… SHA核符合，4真正probe（baseline/fixed各双宿主）精确原CI复现；固定两宿主等于封存d428原DOCX、原全serializer/每旧assert AST保留、7产品源/config不变，材料发现0。独立仅2参数测试PASS/0.56s，未重复39/3196/public节点，不签尚待新CI。ROOT test-only修复停止；正常commit/master ff/push新精确CI。三公司独立9/12已派，6份真实FAIL已封存；CN process/analyst/HK storage正在审，HK其余3排队。P7-AUDIT40b38103真实交接只读已发现，尚待技术接收及合同不足裁决，不再假定未交；当前audit78c运行/安装不切。
+
+
+## 2026-10-11T02:48:27.870103+00:00 — 只读发现P7-AUDIT真实交接，取消“未交付”的当前假设
+
+实际工作树clean，源码18a52f16、docs40b38103，HANDOFF.md SHA946afe38… / handoff.json SHAd63b9015…，PWF已记M1–M3及96测试/离线E2E/4不同synthetic reviewer；canonical audit clean仍78c2b108。这只是只读交接发现，尚未技术接收/合主线/安装，不能宣称真实研究通过。先验收现有CI小边界；后续空槽审P7 audit合同与实际旧兼容，卡上剩余W0x交expert合并裁决，明确不把诊断造为新全局许可。当前12公司四审沿冻结旧audit78c不切runtime，source/helper边界读原run，安装等四审封存后集中接线。不改外包tree/当前旧run、0新收费。
+## 2026-10-11T02:42:18.118095+00:00 — 新源码正常发布；精确CI两项fixture跨平台失败，process审查封存
+
+源码 ee293769037d0a9a205d75d15d64f0600929eaad 已普通commit/master ff/普通push，本地3196PASS/199.24秒、88原证据字节checkout匹配；远端精确CI38105648234为2FAIL/3057PASS/6skip、76.96秒，两个新增DOCX旧指纹测试得到63c83b56…而非a6580fca…。原79387B日志SHAf177afd4…保留，不能称新CI绿；先查fixture ZIP平台元数据，不动原断言或解析契约。US process报告b467a9a3…/4f2bcfa9…真实SHA/Event读回，FAIL/partial；72未来param/84未来calc为空、71deck claim未capture、认收claim错配、真实Xbox FY27目标漏账，旧12映射齐全。第6位fresh CN fetch已实际派；3审封存FAIL、另US analyst/CN storage/CN fetch运行。母账与sealed execution保持、0新模型/provider。
+
 
 ## 2026-10-11T02:29:45.752665+00:00 — native CI共因集中独立接受，正常发布
 
@@ -44,7 +56,7 @@ Next Step：三executor完整seal→每家四不同fresh reviewer→expert归并
 
 ## 当前状态
 
-P7-RF47f497ad已主线/远端/精确CI与实际定点安装接受。当前三家公司executor全部SEALED_PARTIAL，原运行字节不变；US storage/fetch两份独立FAIL已封存，process/analyst运行；CN/HK八审READY等待空槽。真实9供应商请求81763tokens/83773µUSD，母账413778tokens/334463µUSD另保留FX2764；费用不重置。CWP7源修复在隔离树完成，DOCX default1.1/old1.0及Worker version-map、strictselector0.7.1与公共节点已绿；集中独立最后定点未封存、尚未发布，canonical/origin仍1152dad7，该HEAD最新CI38101290406 failure。只能在正常source发布的新精确CI后签工程接受；工程绿不替四审研究。
+P7-RF已接受；三公司真实执行均partial封存，原费用和manifest不改。独立四审9/12已派，US4+CN2共6份封存FAIL，CN2/HK1在做，HK3排队。CWP source ee293769已主线/远端，正常本地3196PASS；精确CI38105648234两DOCX legacy fixture指纹失败，已复现ZIP create_system宿主差异；原fixture仅固定原平台元数据，完整旧指纹/原件SHA/定位断言保留，TDD RED1FAIL/1PASS→集中39PASS。产品7源/config不变，独立定点已接受、待普通发布与精确新CI。不能用本地绿代远端绿，更不能代四审研究绿。
 
 ## 完整接口与排他目录
 
@@ -79,4 +91,4 @@ E. 原三家有主要问题先根治并相关复验，四路完整接受后才�
 
 ## Next Step
 
-先收本次CI共因独立最后定点→normal source commit / canonical ff-only / ordinary push / exact新source HEAD CI；并行按review_queue.json实际空槽完成剩余10份fresh独立审查。汇齐12报告后编程专家归并原157+新问题，先完整根因PWF再TDD实施；修后原三家新execution、再新A/H/US三家、NVDA及公司池loop。不能跳过四审或用旧运行覆写为新PASS。
+正常提交本次fixture-only根因、真实日志与PWF→canonical干净ff→普通push→精确新HEAD Linux CI；三公司按队列完成余6份独立审查。12份齐后expert把旧157+新问题+P7-AUDIT待裁决合为完整共因TDD PWF，再逐包实施、原三家新运行/新三家/loop。

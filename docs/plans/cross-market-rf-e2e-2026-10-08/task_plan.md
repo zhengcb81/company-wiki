@@ -1,16 +1,27 @@
+## 2026-10-11T02:54:29.485947+00:00 — ZIP原字节独立接受；正常集中发布准备
+
+独立报告2a40a946…/b6171d18… SHA核符合，4真正probe（baseline/fixed各双宿主）精确原CI复现；固定两宿主等于封存d428原DOCX、原全serializer/每旧assert AST保留、7产品源/config不变，材料发现0。独立仅2参数测试PASS/0.56s，未重复39/3196/public节点，不签尚待新CI。ROOT test-only修复停止；正常commit/master ff/push新精确CI。三公司独立9/12已派，6份真实FAIL已封存；CN process/analyst/HK storage正在审，HK其余3排队。P7-AUDIT40b38103真实交接只读已发现，尚待技术接收及合同不足裁决，不再假定未交；当前audit78c运行/安装不切。
+
+
+## 2026-10-11T02:48:27.870103+00:00 — 只读发现P7-AUDIT真实交接，取消“未交付”的当前假设
+
+实际工作树clean，源码18a52f16、docs40b38103，HANDOFF.md SHA946afe38… / handoff.json SHAd63b9015…，PWF已记M1–M3及96测试/离线E2E/4不同synthetic reviewer；canonical audit clean仍78c2b108。这只是只读交接发现，尚未技术接收/合主线/安装，不能宣称真实研究通过。先验收现有CI小边界；后续空槽审P7 audit合同与实际旧兼容，卡上剩余W0x交expert合并裁决，明确不把诊断造为新全局许可。当前12公司四审沿冻结旧audit78c不切runtime，source/helper边界读原run，安装等四审封存后集中接线。不改外包tree/当前旧run、0新收费。
+## 2026-10-11T02:42:18.118095+00:00 — 新源码正常发布；精确CI两项fixture跨平台失败，process审查封存
+
+源码 ee293769037d0a9a205d75d15d64f0600929eaad 已普通commit/master ff/普通push，本地3196PASS/199.24秒、88原证据字节checkout匹配；远端精确CI38105648234为2FAIL/3057PASS/6skip、76.96秒，两个新增DOCX旧指纹测试得到63c83b56…而非a6580fca…。原79387B日志SHAf177afd4…保留，不能称新CI绿；先查fixture ZIP平台元数据，不动原断言或解析契约。US process报告b467a9a3…/4f2bcfa9…真实SHA/Event读回，FAIL/partial；72未来param/84未来calc为空、71deck claim未capture、认收claim错配、真实Xbox FY27目标漏账，旧12映射齐全。第6位fresh CN fetch已实际派；3审封存FAIL、另US analyst/CN storage/CN fetch运行。母账与sealed execution保持、0新模型/provider。
+
 
 ## 2026-10-11T02:29:45.752665+00:00 — native CI共因集中独立接受，正常发布
 
 final-heading独立报告json1eba0243…/md8f778369…原字节核符合；39 checks PASS、21 source/log记录PASS、29最小probe PASS，material findings空。关闭DOCX heading原问题；唯一Worker MIME映射接线及真实public old1.0/new1.1/原SQL和账务不变/新代不撞cache/复用0POST接受，不代签尚未发布的新CI。ROOT源码实现停写，仅正常发布7源及其测试/CI调度/PWF证据。三executorseal保持；CN storage第5位fresh审查真实派，US两审封存FAIL，另process/analyst仍进行。source发布后工程验收以精确HEAD CI；四审共因计划仍待，不宣称项目完成。
-## 当前执行入口（2026-10-11T02:27:24.927939+00:00；以下带旧日期的状态为历史快照）
+## 当前执行入口（2026-10-11T02:46:17.450427+00:00；以下带旧日期的状态为历史快照）
 
-- 主目标 active；当前计划 Phase6，未完成。P7-RF main/origin `47f497ad`、CI `38096229764`、18定点安装已接受，不重复施工。
-- 真正原三家公司执行均封存 partial；12份独立四审已派4份，其中US storage/fetch已FAIL、process/analyst运行，CN/HK8份排队。旧157问题逐key继续复验，工程绿不代研究绿。
-- CI共因7源码隔离TDD/公共节点已绿，独立最后定点正在封存；源码尚未正常发布，canonical/origin `1152dad7` 的 CI `38101290406` 仍失败。唯一下一步：收独立报告→normal source发布与精确CI；同时四审继续。
-- 实际执行/审查清单及交接：[本轮PWF](phase6/post_w03_original_research_2026-10-11/task_plan.md)、[队列](phase6/post_w03_original_research_2026-10-11/review_queue.json)、[CI根因PWF](phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/task_plan.md)。三运行资料只读，清理owned环境须等四审完成。
-- 四审汇齐后：expert共同根因新PWF→相关TDD实施→原三家新的真实执行和相关四审→未参加修复的新A/H/US三家→NVDA/公司池loop。后置八家公司目标尚未激活。
-- 母账仍413778tokens/334463µUSD+FX2764，当前剩余1586222tokens/$19.662773，9真实摘要请求已计；本次CI/审查0新外部调用/费。原件、生产config、Dayu、其它owner WIP保留；P7-AUDIT未交付不写其源。
-
+- 主目标active，Phase6未完成。P7-RF main/origin47f497ad、精确CI38096229764和18定点安装已接受。
+- CWP源码ee293769已普通提交/主线/推送；本地3196PASS，精确远端CI38105648234有2项新DOCX历史fixture失败，其余3057PASS/6skip。根因已精确复现为ZIP宿主元数据，不是解析正文/locator变化；新2反例RED1FAIL/1PASS，固定fixture平台字段后DOCX集中39PASS/0.74秒，产品7源/config保持；已获集中独立定点接受，等待正常发布、新精确CI。
+- 三公司执行原字节均SEALED_PARTIAL；12独立审查已实际派9份，US四角色/CN storage和fetch共6份封存FAIL；CN process/analyst/HK storage在做，另HK3待空槽。旧157逐key复验，工程绿不等于研究完成。
+- 实际入口：[本轮PWF](phase6/post_w03_original_research_2026-10-11/task_plan.md)、[队列](phase6/post_w03_original_research_2026-10-11/review_queue.json)、[CI根因](phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/ZIP_FIXTURE_CONTINUATION.md)。不重新跑已封存执行、不清理正在审查的ownedTEMP。
+- 收齐四审后expert写完整共因新PWF/TDD/排他write set与问题映射，再实施，原三家新执行复审→未参加修复A/H/US新三家→NVDA/公司池loop。后置8公司goal尚未激活。
+- 母账413778tokens/334463µUSD+FX2764，9真实模型已计，unknown旧hold保持；剩余1586222tokens/$19.662773。当前CI/四审0新付费调用。原件/config/Dayu/邻仓ownerWIP保留；P7-AUDIT已发现40b38103交接，尚未技术接收；当前四审不切audit runtime。
 
 ## 2026-10-11T02:25:21.327949+00:00 — US fetch封存FAIL，analyst独立派出
 
@@ -431,18 +442,7 @@ JSON/USAGE/FLOW三交付已在隔离集成树实质验收并修10类共因；独
 
 ## Next Step
 
-CI防漏检节点已收尾。原三家四独立报告与专家共因PWF均已齐，原生汇总仍needs_remediation/exit2。MAIN实施分工：本工作树W01→W02→W03（语言/选择/有界摘要）；独占CWP工作树W04（稳定物理名/持久捕获/真实总deadline）；独占RF工作树W10→W14（DAG敏感性/输出回放）；独占FF/ET工作树W07（capability/凭据传播）。共享接口及后续W05/W06/W08–W13按冻结卡串行整合。原公司复验、新三家和loop均未完成。后文旧Next Step是历史证据，页首当前状态优先；工程CI通过不能代替研究验收。
-
-### Phase 5: 固化三市场回归套件（2026-10-08 新请求）
-**Status:** complete
-
-施工细则见 regression_suite_plan.md。先写失败分类、样本验真、隔离清理、比较和语义回归测试，再实现命令入口。固定 CN v3 / HK v4 / US v2，不改已封存审查。离线真实原件重放与在线供应商联调分别计分；旧产品 PARTIAL 不改成全绿。大节点验收为：小测试 → 三公司重放及跨仓契约 → 重跑比较/故障清理。日常 CI 不增加真实下载或收费模型。
-
-已交付 `benchmarks/cross_market_rf/README.md` 一命令入口、71检查点、固定来源/输入SHA、隔离 registry/catalog/AUTO/work/profile、真实RF/FF/ET/Worker流程、前后比较、可搬移去重数据包和完整新研究大节点施工卡。16小测试绿；full真原件重放92.555秒；脱离生产库的数据包重放90.309秒，71状态相同。在线CN半年报真实新下载→验字节→再次0下载→RF读取通过。临时环境均恢复，导出样本副本签收后删除。
-
-**当前基线不是产品全绿**：46 PASS / 3 BLOCKED / 1 FAIL / 14 NOT_RUN / 7 NOT_APPLICABLE。US跨进程置信度验证缺陷已真实复现，优先放入follow_up_plan.md；HK官方认证、HTML/PPTX处理和在线Dayu/ET仍具名留存。固定输入/loopback不能证明新一轮研究、真实供应商或新摘要实际被模型消费。
-
-本轮审计任务完成。CN v3、HK v4、US v2最终独立复查已封存：条件模型可接受，三公司产品E2E均PARTIAL。原件/旧快照保护、RF交付归档、237文件TEMP清理、359命令账核对及本仓主线发布完成；c72d532b远端CI成功。完整归总见acceptance_summary.md。尚未实施的Dayu bounded、ET套餐/路由、HTML Worker等是后续功能施工，按follow_up_plan.md推进，不能把审计完成说成完整产品全绿。
+正常提交本次fixture-only根因、真实日志与PWF→canonical干净ff→普通push→精确新HEAD Linux CI；三公司按队列完成余6份独立审查。12份齐后expert把旧157+新问题+P7-AUDIT待裁决合为完整共因TDD PWF，再逐包实施、原三家新运行/新三家/loop。
 
 ## 问题记录
 

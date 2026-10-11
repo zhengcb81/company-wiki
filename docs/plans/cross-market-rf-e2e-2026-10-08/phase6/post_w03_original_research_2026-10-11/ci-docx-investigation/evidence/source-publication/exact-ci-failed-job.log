@@ -1,0 +1,735 @@
+﻿2026-10-11T02:35:31.7136665Z Current runner version: '2.337.0'
+2026-10-11T02:35:31.7161377Z ##[group]Runner Image Provisioner
+2026-10-11T02:35:31.7162270Z Hosted Compute Agent
+2026-10-11T02:35:31.7163437Z Version: 20261002.596
+2026-10-11T02:35:31.7164134Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+2026-10-11T02:35:31.7164825Z Build Date: 2026-10-02T22:28:27Z
+2026-10-11T02:35:31.7165565Z Worker ID: {c6286853-daa7-4b6a-9553-953fd19914da}
+2026-10-11T02:35:31.7166258Z Region: westus3
+2026-10-11T02:35:31.7166861Z Cloud: Azure
+2026-10-11T02:35:31.7167395Z ##[endgroup]
+2026-10-11T02:35:31.7169026Z ##[group]Operating System
+2026-10-11T02:35:31.7170100Z Ubuntu
+2026-10-11T02:35:31.7170614Z 24.04.5
+2026-10-11T02:35:31.7171135Z LTS
+2026-10-11T02:35:31.7171789Z ##[endgroup]
+2026-10-11T02:35:31.7172329Z ##[group]Runner Image
+2026-10-11T02:35:31.7173243Z Image: ubuntu-24.04
+2026-10-11T02:35:31.7173805Z Version: 20261004.327.1
+2026-10-11T02:35:31.7175119Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-11T02:35:31.7176626Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+2026-10-11T02:35:31.7177619Z ##[endgroup]
+2026-10-11T02:35:31.7178798Z ##[group]GITHUB_TOKEN Permissions
+2026-10-11T02:35:31.7180989Z Contents: read
+2026-10-11T02:35:31.7181593Z Metadata: read
+2026-10-11T02:35:31.7182153Z Packages: read
+2026-10-11T02:35:31.7183015Z ##[endgroup]
+2026-10-11T02:35:31.7185083Z Secret source: Actions
+2026-10-11T02:35:31.7186093Z Cache mode: write
+2026-10-11T02:35:31.7186755Z Prepare workflow directory
+2026-10-11T02:35:31.7580688Z Prepare all required actions
+2026-10-11T02:35:31.7628445Z Getting action download info
+2026-10-11T02:35:32.0711776Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-11T02:35:32.1769889Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-11T02:35:32.3619500Z Complete job name: Fast checks (Python 3.12)
+2026-10-11T02:35:32.4419534Z ##[group]Run actions/checkout@v4
+2026-10-11T02:35:32.4420392Z with:
+2026-10-11T02:35:32.4420833Z   repository: zhengcb81/company-wiki
+2026-10-11T02:35:32.4424983Z   token: ***
+2026-10-11T02:35:32.4425401Z   ssh-strict: true
+2026-10-11T02:35:32.4425821Z   ssh-user: git
+2026-10-11T02:35:32.4426255Z   persist-credentials: true
+2026-10-11T02:35:32.4426727Z   clean: true
+2026-10-11T02:35:32.4427150Z   sparse-checkout-cone-mode: true
+2026-10-11T02:35:32.4427646Z   fetch-depth: 1
+2026-10-11T02:35:32.4428058Z   fetch-tags: false
+2026-10-11T02:35:32.4428483Z   show-progress: true
+2026-10-11T02:35:32.4428917Z   lfs: false
+2026-10-11T02:35:32.4429314Z   submodules: false
+2026-10-11T02:35:32.4429740Z   set-safe-directory: true
+2026-10-11T02:35:32.4430234Z   allow-unsafe-pr-checkout: false
+2026-10-11T02:35:32.4431150Z ##[endgroup]
+2026-10-11T02:35:32.5436795Z Syncing repository: zhengcb81/company-wiki
+2026-10-11T02:35:32.5439469Z ##[group]Getting Git version info
+2026-10-11T02:35:32.5440849Z Working directory is '/home/runner/work/company-wiki/company-wiki'
+2026-10-11T02:35:32.5442987Z [command]/usr/bin/git version
+2026-10-11T02:35:32.5498295Z git version 2.55.0
+2026-10-11T02:35:32.5519804Z ##[endgroup]
+2026-10-11T02:35:32.5544366Z Temporarily overriding HOME='/home/runner/work/_temp/013bbfa1-dd85-4eea-b812-74642955fe0f' before making global git config changes
+2026-10-11T02:35:32.5546017Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-11T02:35:32.5547175Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/company-wiki/company-wiki
+2026-10-11T02:35:32.5593335Z Deleting the contents of '/home/runner/work/company-wiki/company-wiki'
+2026-10-11T02:35:32.5606225Z ##[group]Initializing the repository
+2026-10-11T02:35:32.5610003Z [command]/usr/bin/git init /home/runner/work/company-wiki/company-wiki
+2026-10-11T02:35:32.5719587Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-11T02:35:32.5721757Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-11T02:35:32.5723674Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-11T02:35:32.5724979Z hint: call:
+2026-10-11T02:35:32.5725668Z hint:
+2026-10-11T02:35:32.5726417Z hint: 	git config --global init.defaultBranch <name>
+2026-10-11T02:35:32.5727228Z hint:
+2026-10-11T02:35:32.5728212Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-11T02:35:32.5729352Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-11T02:35:32.5730077Z hint:
+2026-10-11T02:35:32.5730615Z hint: 	git branch -m <name>
+2026-10-11T02:35:32.5731091Z hint:
+2026-10-11T02:35:32.5731699Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-11T02:35:32.5733119Z Initialized empty Git repository in /home/runner/work/company-wiki/company-wiki/.git/
+2026-10-11T02:35:32.5735658Z [command]/usr/bin/git remote add origin https://github.com/zhengcb81/company-wiki
+2026-10-11T02:35:32.5785674Z ##[endgroup]
+2026-10-11T02:35:32.5786447Z ##[group]Disabling automatic garbage collection
+2026-10-11T02:35:32.5790098Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-11T02:35:32.5821311Z ##[endgroup]
+2026-10-11T02:35:32.5822044Z ##[group]Setting up auth
+2026-10-11T02:35:32.5830245Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-11T02:35:32.5863869Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-11T02:35:32.6283628Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-11T02:35:32.6325827Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-11T02:35:32.6557231Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-11T02:35:32.6592945Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-11T02:35:32.6819664Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-11T02:35:32.6864168Z ##[endgroup]
+2026-10-11T02:35:32.6865907Z ##[group]Fetching the repository
+2026-10-11T02:35:32.6875898Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ee293769037d0a9a205d75d15d64f0600929eaad:refs/remotes/origin/master
+2026-10-11T02:35:35.3887880Z From https://github.com/zhengcb81/company-wiki
+2026-10-11T02:35:35.3890679Z  * [new ref]         ee293769037d0a9a205d75d15d64f0600929eaad -> origin/master
+2026-10-11T02:35:35.3897327Z ##[endgroup]
+2026-10-11T02:35:35.3899805Z ##[group]Determining the checkout info
+2026-10-11T02:35:35.3903361Z ##[endgroup]
+2026-10-11T02:35:35.3905146Z [command]/usr/bin/git sparse-checkout disable
+2026-10-11T02:35:35.3957830Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-11T02:35:35.3990329Z ##[group]Checking out the ref
+2026-10-11T02:35:35.3996907Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+2026-10-11T02:35:35.9441911Z Reset branch 'master'
+2026-10-11T02:35:35.9446121Z branch 'master' set up to track 'origin/master'.
+2026-10-11T02:35:35.9475404Z ##[endgroup]
+2026-10-11T02:35:35.9521854Z [command]/usr/bin/git log -1 --format=%H
+2026-10-11T02:35:35.9548792Z ee293769037d0a9a205d75d15d64f0600929eaad
+2026-10-11T02:35:35.9820437Z ##[group]Run actions/setup-python@v5
+2026-10-11T02:35:35.9820834Z with:
+2026-10-11T02:35:35.9821089Z   python-version: 3.12
+2026-10-11T02:35:35.9821366Z   cache: pip
+2026-10-11T02:35:35.9821733Z   cache-dependency-path: requirements.txt
+requirements-test.txt
+
+2026-10-11T02:35:35.9822178Z   check-latest: false
+2026-10-11T02:35:35.9825236Z   token: ***
+2026-10-11T02:35:35.9825518Z   update-environment: true
+2026-10-11T02:35:35.9825823Z   allow-prereleases: false
+2026-10-11T02:35:35.9826105Z   freethreaded: false
+2026-10-11T02:35:35.9826374Z ##[endgroup]
+2026-10-11T02:35:36.1145298Z ##[group]Installed versions
+2026-10-11T02:35:36.1253320Z (node:2270) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-11T02:35:36.1254893Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-11T02:35:36.1255815Z Successfully set up CPython (3.12.15)
+2026-10-11T02:35:36.1257320Z ##[endgroup]
+2026-10-11T02:35:36.1571066Z [command]/opt/hostedtoolcache/Python/3.12.15/x64/bin/pip cache dir
+2026-10-11T02:35:36.4633745Z /home/runner/.cache/pip
+2026-10-11T02:35:36.6934926Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.15-pip-5500db6234f5687bcf61d9723f495c40655ee47c1e092c69407f9c9cdf96017f
+2026-10-11T02:35:36.7048136Z (node:2270) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-11T02:35:37.9214299Z Received 41943040 of 173113786 (24.2%), 40.0 MBs/sec
+2026-10-11T02:35:38.9149628Z Received 173113786 of 173113786 (100.0%), 82.8 MBs/sec
+2026-10-11T02:35:38.9151839Z Cache Size: ~165 MB (173113786 B)
+2026-10-11T02:35:38.9193429Z [command]/usr/bin/tar -xf /home/runner/work/_temp/b1b3dcc4-409c-4657-ba87-100c60d54f3e/cache.tzst -P -C /home/runner/work/company-wiki/company-wiki --use-compress-program unzstd
+2026-10-11T02:35:39.1875132Z Cache restored successfully
+2026-10-11T02:35:39.1955205Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.15-pip-5500db6234f5687bcf61d9723f495c40655ee47c1e092c69407f9c9cdf96017f
+2026-10-11T02:35:39.2178777Z ##[group]Run python -m pip install -r requirements.txt -r requirements-test.txt "ruff==0.15.18"
+2026-10-11T02:35:39.2179608Z [36;1mpython -m pip install -r requirements.txt -r requirements-test.txt "ruff==0.15.18"[0m
+2026-10-11T02:35:39.2484471Z shell: /usr/bin/bash -e {0}
+2026-10-11T02:35:39.2484844Z env:
+2026-10-11T02:35:39.2485200Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:35:39.2485805Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-11T02:35:39.2486382Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:35:39.2486907Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:35:39.2487441Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:35:39.2487984Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-11T02:35:39.2488431Z ##[endgroup]
+2026-10-11T02:35:39.8254015Z Ignoring tomli: markers 'python_version < "3.11"' don't match your environment
+2026-10-11T02:35:40.2432175Z Collecting ruff==0.15.18
+2026-10-11T02:35:40.2447699Z   Using cached ruff-0.15.18-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (26 kB)
+2026-10-11T02:35:40.2798408Z Collecting pyyaml>=6.0 (from -r requirements.txt (line 2))
+2026-10-11T02:35:40.2811015Z   Using cached pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-10-11T02:35:40.2991880Z Collecting requests>=2.28.0 (from -r requirements.txt (line 3))
+2026-10-11T02:35:40.3004113Z   Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+2026-10-11T02:35:40.3150181Z Collecting httpx<1,>=0.27 (from -r requirements.txt (line 4))
+2026-10-11T02:35:40.3163166Z   Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2026-10-11T02:35:40.3738767Z Collecting openai>=1.0.0 (from -r requirements.txt (line 5))
+2026-10-11T02:35:40.4507388Z   Downloading openai-3.28.0-py3-none-any.whl.metadata (44 kB)
+2026-10-11T02:35:40.6016753Z Collecting PyMuPDF>=1.23.0 (from -r requirements.txt (line 8))
+2026-10-11T02:35:40.6031475Z   Using cached pymupdf-1.28.2-cp310-abi3-manylinux_2_28_x86_64.whl.metadata (26 kB)
+2026-10-11T02:35:40.6369200Z Collecting playwright>=1.40.0 (from -r requirements.txt (line 11))
+2026-10-11T02:35:40.6381884Z   Using cached playwright-1.63.0-py3-none-manylinux1_x86_64.whl.metadata (3.3 kB)
+2026-10-11T02:35:40.8260219Z Collecting cryptography>=41.0 (from -r requirements.txt (line 15))
+2026-10-11T02:35:40.8274422Z   Using cached cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+2026-10-11T02:35:40.8416771Z Collecting beautifulsoup4>=4.12.0 (from -r requirements.txt (line 16))
+2026-10-11T02:35:40.8429598Z   Using cached beautifulsoup4-4.15.0-py3-none-any.whl.metadata (3.8 kB)
+2026-10-11T02:35:40.8747446Z Collecting docling-core>=2.0.0 (from -r requirements.txt (line 17))
+2026-10-11T02:35:40.8760194Z   Using cached docling_core-2.101.1-py3-none-any.whl.metadata (8.5 kB)
+2026-10-11T02:35:40.8916692Z Collecting markdownify>=0.13.0 (from -r requirements.txt (line 18))
+2026-10-11T02:35:40.8929386Z   Using cached markdownify-1.2.3-py3-none-any.whl.metadata (9.9 kB)
+2026-10-11T02:35:40.9138043Z Collecting opencc<2.0,>=1.4.1 (from -r requirements.txt (line 19))
+2026-10-11T02:35:40.9150638Z   Using cached opencc-1.4.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (30 kB)
+2026-10-11T02:35:40.9291756Z Collecting openpyxl>=3.1.0 (from -r requirements.txt (line 20))
+2026-10-11T02:35:40.9304423Z   Using cached openpyxl-3.1.5-py2.py3-none-any.whl.metadata (2.5 kB)
+2026-10-11T02:35:40.9409634Z Collecting python-docx>=1.1.0 (from -r requirements.txt (line 21))
+2026-10-11T02:35:40.9421778Z   Using cached python_docx-1.2.0-py3-none-any.whl.metadata (2.0 kB)
+2026-10-11T02:35:40.9534311Z Collecting python-pptx>=1.0.0 (from -r requirements.txt (line 22))
+2026-10-11T02:35:40.9546726Z   Using cached python_pptx-1.0.2-py3-none-any.whl.metadata (2.5 kB)
+2026-10-11T02:35:40.9639216Z Collecting xlrd>=2.0.0 (from -r requirements.txt (line 23))
+2026-10-11T02:35:40.9651402Z   Using cached xlrd-2.0.2-py2.py3-none-any.whl.metadata (3.5 kB)
+2026-10-11T02:35:41.1956077Z Collecting lxml>=4.9.0 (from -r requirements.txt (line 25))
+2026-10-11T02:35:41.1970920Z   Using cached lxml-6.1.3-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+2026-10-11T02:35:41.2989062Z Collecting mypy==1.19.0 (from -r requirements.txt (line 26))
+2026-10-11T02:35:41.3003799Z   Using cached mypy-1.19.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.2 kB)
+2026-10-11T02:35:41.3258634Z Collecting pytest>=7.0.0 (from -r requirements-test.txt (line 1))
+2026-10-11T02:35:41.3271424Z   Using cached pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-10-11T02:35:41.3402463Z Collecting pytest-cov>=4.0.0 (from -r requirements-test.txt (line 2))
+2026-10-11T02:35:41.3415085Z   Using cached pytest_cov-7.1.0-py3-none-any.whl.metadata (32 kB)
+2026-10-11T02:35:41.3576482Z Collecting pytest-mock>=3.10.0 (from -r requirements-test.txt (line 4))
+2026-10-11T02:35:41.3588737Z   Using cached pytest_mock-3.16.0-py3-none-any.whl.metadata (3.9 kB)
+2026-10-11T02:35:41.3744951Z Collecting pytest-asyncio>=0.21.0 (from -r requirements-test.txt (line 5))
+2026-10-11T02:35:41.3757501Z   Using cached pytest_asyncio-1.4.0-py3-none-any.whl.metadata (4.1 kB)
+2026-10-11T02:35:41.3864942Z Collecting pytest-timeout>=2.1.0 (from -r requirements-test.txt (line 6))
+2026-10-11T02:35:41.3877214Z   Using cached pytest_timeout-2.4.0-py3-none-any.whl.metadata (20 kB)
+2026-10-11T02:35:41.4016517Z Collecting pytest-xdist>=3.3.0 (from -r requirements-test.txt (line 7))
+2026-10-11T02:35:41.4028898Z   Using cached pytest_xdist-3.8.0-py3-none-any.whl.metadata (3.0 kB)
+2026-10-11T02:35:41.8513581Z Collecting coverage>=7.0.0 (from -r requirements-test.txt (line 8))
+2026-10-11T02:35:41.8533590Z   Using cached coverage-7.16.2-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.2 kB)
+2026-10-11T02:35:41.8745488Z Collecting jsonschema>=4.23 (from -r requirements-test.txt (line 10))
+2026-10-11T02:35:41.8773448Z   Using cached jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+2026-10-11T02:35:41.9356028Z Collecting typing_extensions>=4.6.0 (from mypy==1.19.0->-r requirements.txt (line 26))
+2026-10-11T02:35:41.9371272Z   Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-10-11T02:35:41.9727192Z Collecting mypy_extensions>=1.0.0 (from mypy==1.19.0->-r requirements.txt (line 26))
+2026-10-11T02:35:41.9740283Z   Using cached mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+2026-10-11T02:35:42.0191395Z Collecting pathspec>=0.9.0 (from mypy==1.19.0->-r requirements.txt (line 26))
+2026-10-11T02:35:42.0205843Z   Using cached pathspec-1.1.1-py3-none-any.whl.metadata (14 kB)
+2026-10-11T02:35:42.1839990Z Collecting librt>=0.6.2 (from mypy==1.19.0->-r requirements.txt (line 26))
+2026-10-11T02:35:42.1855149Z   Using cached librt-0.16.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (1.3 kB)
+2026-10-11T02:35:42.2344365Z Collecting anyio (from httpx<1,>=0.27->-r requirements.txt (line 4))
+2026-10-11T02:35:42.2358019Z   Using cached anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+2026-10-11T02:35:42.2823547Z Collecting certifi (from httpx<1,>=0.27->-r requirements.txt (line 4))
+2026-10-11T02:35:42.2840142Z   Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+2026-10-11T02:35:42.3253570Z Collecting httpcore==1.* (from httpx<1,>=0.27->-r requirements.txt (line 4))
+2026-10-11T02:35:42.3278382Z   Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2026-10-11T02:35:42.3692828Z Collecting idna (from httpx<1,>=0.27->-r requirements.txt (line 4))
+2026-10-11T02:35:42.3706260Z   Using cached idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+2026-10-11T02:35:42.3820232Z Collecting h11>=0.16 (from httpcore==1.*->httpx<1,>=0.27->-r requirements.txt (line 4))
+2026-10-11T02:35:42.3834638Z   Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2026-10-11T02:35:42.5271492Z Collecting charset_normalizer<4,>=2 (from requests>=2.28.0->-r requirements.txt (line 3))
+2026-10-11T02:35:42.5285298Z   Using cached charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+2026-10-11T02:35:42.6777849Z Collecting urllib3<3,>=1.26 (from requests>=2.28.0->-r requirements.txt (line 3))
+2026-10-11T02:35:42.6791033Z   Using cached urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+2026-10-11T02:35:43.1240351Z Collecting httpx2<3,>=2.12.0 (from openai>=1.0.0->-r requirements.txt (line 5))
+2026-10-11T02:35:43.1255423Z   Using cached httpx2-2.13.1-py3-none-any.whl.metadata (9.8 kB)
+2026-10-11T02:35:43.3877731Z Collecting jiter<1,>=0.16.0 (from openai>=1.0.0->-r requirements.txt (line 5))
+2026-10-11T02:35:43.3891938Z   Using cached jiter-0.17.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.2 kB)
+2026-10-11T02:35:43.5195300Z Collecting pydantic!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,<3,>=1.10.13 (from openai>=1.0.0->-r requirements.txt (line 5))
+2026-10-11T02:35:43.5208736Z   Using cached pydantic-2.14.0-py3-none-any.whl.metadata (131 kB)
+2026-10-11T02:35:43.5336836Z Collecting sniffio (from openai>=1.0.0->-r requirements.txt (line 5))
+2026-10-11T02:35:43.5349354Z   Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+2026-10-11T02:35:43.5493372Z Collecting httpcore2==2.13.1 (from httpx2<3,>=2.12.0->openai>=1.0.0->-r requirements.txt (line 5))
+2026-10-11T02:35:43.5504758Z   Using cached httpcore2-2.13.1-py3-none-any.whl.metadata (26 kB)
+2026-10-11T02:35:43.5622556Z Collecting truststore>=0.10 (from httpx2<3,>=2.12.0->openai>=1.0.0->-r requirements.txt (line 5))
+2026-10-11T02:35:43.5634649Z   Using cached truststore-0.10.4-py3-none-any.whl.metadata (4.4 kB)
+2026-10-11T02:35:43.5748108Z Collecting annotated-types>=0.6.0 (from pydantic!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,<3,>=1.10.13->openai>=1.0.0->-r requirements.txt (line 5))
+2026-10-11T02:35:43.5760270Z   Using cached annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+2026-10-11T02:35:44.2524155Z Collecting pydantic-core==2.50.0 (from pydantic!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,<3,>=1.10.13->openai>=1.0.0->-r requirements.txt (line 5))
+2026-10-11T02:35:44.2538420Z   Using cached pydantic_core-2.50.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.5 kB)
+2026-10-11T02:35:44.2636984Z Collecting typing-inspection>=0.4.4 (from pydantic!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,<3,>=1.10.13->openai>=1.0.0->-r requirements.txt (line 5))
+2026-10-11T02:35:44.2649163Z   Using cached typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+2026-10-11T02:35:44.2792054Z Collecting pyee<14,>=13 (from playwright>=1.40.0->-r requirements.txt (line 11))
+2026-10-11T02:35:44.2804234Z   Using cached pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)
+2026-10-11T02:35:44.4205044Z Collecting greenlet<4.0.0,>=3.1.1 (from playwright>=1.40.0->-r requirements.txt (line 11))
+2026-10-11T02:35:44.4219367Z   Using cached greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+2026-10-11T02:35:44.5189338Z Collecting cffi>=2.0.0 (from cryptography>=41.0->-r requirements.txt (line 15))
+2026-10-11T02:35:44.5202098Z   Using cached cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+2026-10-11T02:35:44.5362839Z Collecting soupsieve>=1.6.1 (from beautifulsoup4>=4.12.0->-r requirements.txt (line 16))
+2026-10-11T02:35:44.5466899Z   Downloading soupsieve-3.0.1-py3-none-any.whl.metadata (4.4 kB)
+2026-10-11T02:35:44.5692035Z Collecting jsonref<2.0.0,>=1.1.0 (from docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:44.5704000Z   Using cached jsonref-1.1.0-py3-none-any.whl.metadata (2.7 kB)
+2026-10-11T02:35:44.5796149Z Collecting tabulate<0.11.0,>=0.9.0 (from docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:44.5807789Z   Using cached tabulate-0.10.0-py3-none-any.whl.metadata (40 kB)
+2026-10-11T02:35:44.6911302Z Collecting pandas<4.0.0,>=2.1.4 (from docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:44.6924888Z   Using cached pandas-3.0.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)
+2026-10-11T02:35:44.8743627Z Collecting pillow<13.0.0,>=10.0.0 (from docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:44.8758182Z   Using cached pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+2026-10-11T02:35:44.8986658Z Collecting typer<0.27.0,>=0.12.5 (from docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:44.8999079Z   Using cached typer-0.26.8-py3-none-any.whl.metadata (15 kB)
+2026-10-11T02:35:44.9613368Z Collecting latex2mathml<4.0.0,>=3.77.0 (from docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:44.9626093Z   Using cached latex2mathml-3.81.1-py3-none-any.whl.metadata (15 kB)
+2026-10-11T02:35:44.9724987Z Collecting defusedxml<0.8.0,>=0.7.1 (from docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:44.9736808Z   Using cached defusedxml-0.7.1-py2.py3-none-any.whl.metadata (32 kB)
+2026-10-11T02:35:44.9872163Z Collecting pydantic-settings>=2.14.0 (from docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:44.9884417Z   Using cached pydantic_settings-2.15.0-py3-none-any.whl.metadata (3.9 kB)
+2026-10-11T02:35:44.9987616Z Collecting doclang<0.8,>=0.7 (from docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:44.9999080Z   Using cached doclang-0.7.3-py3-none-any.whl.metadata (4.6 kB)
+2026-10-11T02:35:45.0127814Z Collecting attrs>=22.2.0 (from jsonschema>=4.23->-r requirements-test.txt (line 10))
+2026-10-11T02:35:45.0139439Z   Using cached attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+2026-10-11T02:35:45.0245163Z Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=4.23->-r requirements-test.txt (line 10))
+2026-10-11T02:35:45.0256951Z   Using cached jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+2026-10-11T02:35:45.0432158Z Collecting referencing>=0.28.4 (from jsonschema>=4.23->-r requirements-test.txt (line 10))
+2026-10-11T02:35:45.0444327Z   Using cached referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+2026-10-11T02:35:45.2863113Z Collecting rpds-py>=0.25.0 (from jsonschema>=4.23->-r requirements-test.txt (line 10))
+2026-10-11T02:35:45.2878446Z   Using cached rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+2026-10-11T02:35:45.4867523Z Collecting numpy>=1.26.0 (from pandas<4.0.0,>=2.1.4->docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:45.4976153Z   Downloading numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+2026-10-11T02:35:45.5105583Z Collecting python-dateutil>=2.8.2 (from pandas<4.0.0,>=2.1.4->docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:45.5118217Z   Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+2026-10-11T02:35:45.5257400Z Collecting shellingham>=1.3.0 (from typer<0.27.0,>=0.12.5->docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:45.5271123Z   Using cached shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+2026-10-11T02:35:45.5617376Z Collecting rich>=13.8.0 (from typer<0.27.0,>=0.12.5->docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:45.5630452Z   Using cached rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+2026-10-11T02:35:45.5720914Z Collecting annotated-doc>=0.0.2 (from typer<0.27.0,>=0.12.5->docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:45.5733364Z   Using cached annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+2026-10-11T02:35:45.5857066Z Collecting six<2,>=1.15 (from markdownify>=0.13.0->-r requirements.txt (line 18))
+2026-10-11T02:35:45.5869379Z   Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+2026-10-11T02:35:45.5956821Z Collecting et-xmlfile (from openpyxl>=3.1.0->-r requirements.txt (line 20))
+2026-10-11T02:35:45.5969210Z   Using cached et_xmlfile-2.0.0-py3-none-any.whl.metadata (2.7 kB)
+2026-10-11T02:35:45.6287334Z Collecting XlsxWriter>=0.5.7 (from python-pptx>=1.0.0->-r requirements.txt (line 22))
+2026-10-11T02:35:45.6299735Z   Using cached xlsxwriter-3.2.9-py3-none-any.whl.metadata (2.7 kB)
+2026-10-11T02:35:45.6407524Z Collecting iniconfig>=1.0.1 (from pytest>=7.0.0->-r requirements-test.txt (line 1))
+2026-10-11T02:35:45.6419974Z   Using cached iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-10-11T02:35:45.6552111Z Collecting packaging>=22 (from pytest>=7.0.0->-r requirements-test.txt (line 1))
+2026-10-11T02:35:45.6564803Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-10-11T02:35:45.6659405Z Collecting pluggy<2,>=1.5 (from pytest>=7.0.0->-r requirements-test.txt (line 1))
+2026-10-11T02:35:45.6671744Z   Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+2026-10-11T02:35:45.6841406Z Collecting pygments>=2.7.2 (from pytest>=7.0.0->-r requirements-test.txt (line 1))
+2026-10-11T02:35:45.6854837Z   Using cached pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-10-11T02:35:45.7116346Z Collecting execnet>=2.1 (from pytest-xdist>=3.3.0->-r requirements-test.txt (line 7))
+2026-10-11T02:35:45.7128444Z   Using cached execnet-2.1.2-py3-none-any.whl.metadata (2.9 kB)
+2026-10-11T02:35:45.7272636Z Collecting pycparser (from cffi>=2.0.0->cryptography>=41.0->-r requirements.txt (line 15))
+2026-10-11T02:35:45.7380838Z   Downloading pycparser-3.11-py3-none-any.whl.metadata (8.2 kB)
+2026-10-11T02:35:45.7664284Z Collecting python-dotenv>=0.21.0 (from pydantic-settings>=2.14.0->docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:45.7676615Z   Using cached python_dotenv-1.2.4-py3-none-any.whl.metadata (29 kB)
+2026-10-11T02:35:45.7876717Z Collecting markdown-it-py>=2.2.0 (from rich>=13.8.0->typer<0.27.0,>=0.12.5->docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:45.7889310Z   Using cached markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+2026-10-11T02:35:45.8018238Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.8.0->typer<0.27.0,>=0.12.5->docling-core>=2.0.0->-r requirements.txt (line 17))
+2026-10-11T02:35:45.8030379Z   Using cached mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+2026-10-11T02:35:45.8141655Z Using cached ruff-0.15.18-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.6 MB)
+2026-10-11T02:35:45.8195072Z Using cached mypy-1.19.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (13.6 MB)
+2026-10-11T02:35:45.8254118Z Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+2026-10-11T02:35:45.8266464Z Using cached opencc-1.4.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.4 MB)
+2026-10-11T02:35:45.8288837Z Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+2026-10-11T02:35:45.8301628Z Using cached pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+2026-10-11T02:35:45.8316631Z Using cached requests-2.34.2-py3-none-any.whl (73 kB)
+2026-10-11T02:35:45.8330002Z Using cached charset_normalizer-3.5.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (257 kB)
+2026-10-11T02:35:45.8342823Z Using cached idna-3.20-py3-none-any.whl (69 kB)
+2026-10-11T02:35:45.8355270Z Using cached urllib3-2.8.0-py3-none-any.whl (135 kB)
+2026-10-11T02:35:45.8460602Z Downloading openai-3.28.0-py3-none-any.whl (2.2 MB)
+2026-10-11T02:35:46.0218759Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 13.3 MB/s  0:00:00
+2026-10-11T02:35:46.0232059Z Using cached anyio-4.15.1-py3-none-any.whl (132 kB)
+2026-10-11T02:35:46.0244920Z Using cached httpx2-2.13.1-py3-none-any.whl (95 kB)
+2026-10-11T02:35:46.0257346Z Using cached httpcore2-2.13.1-py3-none-any.whl (83 kB)
+2026-10-11T02:35:46.0270244Z Using cached jiter-0.17.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (345 kB)
+2026-10-11T02:35:46.0283923Z Using cached pydantic-2.14.0-py3-none-any.whl (487 kB)
+2026-10-11T02:35:46.0297779Z Using cached pydantic_core-2.50.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.2 MB)
+2026-10-11T02:35:46.0318005Z Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-10-11T02:35:46.0329988Z Using cached pymupdf-1.28.2-cp310-abi3-manylinux_2_28_x86_64.whl (25.8 MB)
+2026-10-11T02:35:46.0436157Z Using cached playwright-1.63.0-py3-none-manylinux1_x86_64.whl (48.2 MB)
+2026-10-11T02:35:46.0618544Z Using cached greenlet-3.5.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (621 kB)
+2026-10-11T02:35:46.0634184Z Using cached pyee-13.0.1-py3-none-any.whl (15 kB)
+2026-10-11T02:35:46.0649728Z Using cached cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
+2026-10-11T02:35:46.0681505Z Using cached beautifulsoup4-4.15.0-py3-none-any.whl (109 kB)
+2026-10-11T02:35:46.0694148Z Using cached docling_core-2.101.1-py3-none-any.whl (317 kB)
+2026-10-11T02:35:46.0706925Z Using cached jsonschema-4.26.0-py3-none-any.whl (90 kB)
+2026-10-11T02:35:46.0719046Z Using cached defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+2026-10-11T02:35:46.0730708Z Using cached doclang-0.7.3-py3-none-any.whl (32 kB)
+2026-10-11T02:35:46.0742384Z Using cached jsonref-1.1.0-py3-none-any.whl (9.4 kB)
+2026-10-11T02:35:46.0754516Z Using cached latex2mathml-3.81.1-py3-none-any.whl (79 kB)
+2026-10-11T02:35:46.0766504Z Using cached pandas-3.0.6-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (10.8 MB)
+2026-10-11T02:35:46.0818970Z Using cached pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+2026-10-11T02:35:46.0857527Z Using cached tabulate-0.10.0-py3-none-any.whl (39 kB)
+2026-10-11T02:35:46.0869379Z Using cached typer-0.26.8-py3-none-any.whl (122 kB)
+2026-10-11T02:35:46.0881862Z Using cached markdownify-1.2.3-py3-none-any.whl (15 kB)
+2026-10-11T02:35:46.0894754Z Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+2026-10-11T02:35:46.0906969Z Using cached openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
+2026-10-11T02:35:46.0919998Z Using cached python_docx-1.2.0-py3-none-any.whl (252 kB)
+2026-10-11T02:35:46.0932482Z Using cached python_pptx-1.0.2-py3-none-any.whl (472 kB)
+2026-10-11T02:35:46.0946606Z Using cached xlrd-2.0.2-py2.py3-none-any.whl (96 kB)
+2026-10-11T02:35:46.0960376Z Using cached lxml-6.1.3-cp312-cp312-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (5.2 MB)
+2026-10-11T02:35:46.0991226Z Using cached pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-10-11T02:35:46.1004485Z Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+2026-10-11T02:35:46.1017301Z Using cached pytest_cov-7.1.0-py3-none-any.whl (22 kB)
+2026-10-11T02:35:46.1029220Z Using cached pytest_mock-3.16.0-py3-none-any.whl (10 kB)
+2026-10-11T02:35:46.1040599Z Using cached pytest_asyncio-1.4.0-py3-none-any.whl (16 kB)
+2026-10-11T02:35:46.1052145Z Using cached pytest_timeout-2.4.0-py3-none-any.whl (14 kB)
+2026-10-11T02:35:46.1064049Z Using cached pytest_xdist-3.8.0-py3-none-any.whl (46 kB)
+2026-10-11T02:35:46.1076033Z Using cached coverage-7.16.2-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (258 kB)
+2026-10-11T02:35:46.1088215Z Using cached annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+2026-10-11T02:35:46.1102508Z Using cached annotated_types-0.8.0-py3-none-any.whl (13 kB)
+2026-10-11T02:35:46.1118503Z Using cached attrs-26.1.0-py3-none-any.whl (67 kB)
+2026-10-11T02:35:46.1131406Z Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
+2026-10-11T02:35:46.1144406Z Using cached cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+2026-10-11T02:35:46.1157483Z Using cached execnet-2.1.2-py3-none-any.whl (40 kB)
+2026-10-11T02:35:46.1171085Z Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+2026-10-11T02:35:46.1184313Z Using cached iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-10-11T02:35:46.1199916Z Using cached jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+2026-10-11T02:35:46.1215560Z Using cached librt-0.16.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (531 kB)
+2026-10-11T02:35:46.1228976Z Using cached mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+2026-10-11T02:35:46.1339022Z Downloading numpy-2.5.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+2026-10-11T02:35:46.4739106Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 50.5 MB/s  0:00:00
+2026-10-11T02:35:46.4751320Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+2026-10-11T02:35:46.4763961Z Using cached pathspec-1.1.1-py3-none-any.whl (57 kB)
+2026-10-11T02:35:46.4776036Z Using cached pydantic_settings-2.15.0-py3-none-any.whl (69 kB)
+2026-10-11T02:35:46.4787688Z Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-10-11T02:35:46.4804128Z Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+2026-10-11T02:35:46.4816524Z Using cached python_dotenv-1.2.4-py3-none-any.whl (23 kB)
+2026-10-11T02:35:46.4828094Z Using cached referencing-0.37.0-py3-none-any.whl (26 kB)
+2026-10-11T02:35:46.4839692Z Using cached rich-15.0.0-py3-none-any.whl (310 kB)
+2026-10-11T02:35:46.4852281Z Using cached markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+2026-10-11T02:35:46.4864428Z Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+2026-10-11T02:35:46.4876300Z Using cached rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (371 kB)
+2026-10-11T02:35:46.4888629Z Using cached shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+2026-10-11T02:35:46.4997739Z Downloading soupsieve-3.0.1-py3-none-any.whl (41 kB)
+2026-10-11T02:35:46.5031030Z Using cached truststore-0.10.4-py3-none-any.whl (18 kB)
+2026-10-11T02:35:46.5042783Z Using cached typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+2026-10-11T02:35:46.5055430Z Using cached xlsxwriter-3.2.9-py3-none-any.whl (175 kB)
+2026-10-11T02:35:46.5067372Z Using cached et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
+2026-10-11T02:35:46.5174736Z Downloading pycparser-3.11-py3-none-any.whl (51 kB)
+2026-10-11T02:35:46.5205979Z Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+2026-10-11T02:35:47.1099633Z Installing collected packages: opencc, XlsxWriter, xlrd, urllib3, typing_extensions, truststore, tabulate, soupsieve, sniffio, six, shellingham, ruff, rpds-py, pyyaml, python-dotenv, PyMuPDF, pygments, pycparser, pluggy, pillow, pathspec, packaging, numpy, mypy_extensions, mdurl, lxml, librt, latex2mathml, jsonref, jiter, iniconfig, idna, h11, greenlet, execnet, et-xmlfile, defusedxml, coverage, charset_normalizer, certifi, attrs, annotated-types, annotated-doc, typing-inspection, requests, referencing, python-pptx, python-docx, python-dateutil, pytest, pyee, pydantic-core, openpyxl, mypy, markdown-it-py, httpcore2, httpcore, cffi, beautifulsoup4, anyio, rich, pytest-xdist, pytest-timeout, pytest-mock, pytest-cov, pytest-asyncio, pydantic, playwright, pandas, markdownify, jsonschema-specifications, httpx2, httpx, cryptography, typer, pydantic-settings, openai, jsonschema, doclang, docling-core
+2026-10-11T02:36:04.1193005Z 
+2026-10-11T02:36:04.1259194Z Successfully installed PyMuPDF-1.28.2 XlsxWriter-3.2.9 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 attrs-26.1.0 beautifulsoup4-4.15.0 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.2 coverage-7.16.2 cryptography-50.0.2 defusedxml-0.7.1 doclang-0.7.3 docling-core-2.101.1 et-xmlfile-2.0.0 execnet-2.1.2 greenlet-3.5.6 h11-0.16.0 httpcore-1.0.9 httpcore2-2.13.1 httpx-0.28.1 httpx2-2.13.1 idna-3.20 iniconfig-2.3.1 jiter-0.17.0 jsonref-1.1.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 latex2mathml-3.81.1 librt-0.16.0 lxml-6.1.3 markdown-it-py-4.2.0 markdownify-1.2.3 mdurl-0.1.2 mypy-1.19.0 mypy_extensions-1.1.0 numpy-2.5.4 openai-3.28.0 opencc-1.4.2 openpyxl-3.1.5 packaging-26.3 pandas-3.0.6 pathspec-1.1.1 pillow-12.3.0 playwright-1.63.0 pluggy-1.6.0 pycparser-3.11 pydantic-2.14.0 pydantic-core-2.50.0 pydantic-settings-2.15.0 pyee-13.0.1 pygments-2.21.0 pytest-9.1.1 pytest-asyncio-1.4.0 pytest-cov-7.1.0 pytest-mock-3.16.0 pytest-timeout-2.4.0 pytest-xdist-3.8.0 python-dateutil-2.9.0.post0 python-docx-1.2.0 python-dotenv-1.2.4 python-pptx-1.0.2 pyyaml-6.0.3 referencing-0.37.0 requests-2.34.2 rich-15.0.0 rpds-py-2026.9.1 ruff-0.15.18 shellingham-1.5.4 six-1.17.0 sniffio-1.3.1 soupsieve-3.0.1 tabulate-0.10.0 truststore-0.10.4 typer-0.26.8 typing-inspection-0.4.4 typing_extensions-4.16.0 urllib3-2.8.0 xlrd-2.0.2
+2026-10-11T02:36:04.3502407Z ##[group]Run ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/support/narrative_model_fixture.py tools/check_dependencies.py tools/changed_unit_tests.py tools/pre_push_gate.py tools/summarize_junit_failures.py
+2026-10-11T02:36:04.3504575Z [36;1mruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/support/narrative_model_fixture.py tools/check_dependencies.py tools/changed_unit_tests.py tools/pre_push_gate.py tools/summarize_junit_failures.py[0m
+2026-10-11T02:36:04.3571316Z shell: /usr/bin/bash -e {0}
+2026-10-11T02:36:04.3571570Z env:
+2026-10-11T02:36:04.3571845Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:04.3572297Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-11T02:36:04.3572878Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:04.3573319Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:04.3573710Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:04.3574106Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-11T02:36:04.3574437Z ##[endgroup]
+2026-10-11T02:36:04.4952997Z All checks passed!
+2026-10-11T02:36:04.5003567Z ##[group]Run python -m mypy src/company_wiki/source_catalog/artifact_handle.py src/company_wiki/source_catalog/source_bundle.py src/company_wiki/source_catalog/runtime_policy.py src/company_wiki/source_catalog/activation.py src/company_wiki/source_catalog/close_gap.py src/company_wiki/source_catalog/policy_2x.py src/company_wiki/source_catalog/canary_registry.py src/company_wiki/source_catalog/normalized_meta.py src/company_wiki/source_catalog/flags.py src/company_wiki/source_catalog/policy.py src/company_wiki/source_catalog/restore.py src/company_wiki/source_catalog/operation_contract.py src/company_wiki/source_catalog/operation_projection.py src/company_wiki/source_catalog/source_operation.py src/company_wiki/source_catalog/source_reader.py src/company_wiki/source_catalog/narrative_document.py src/company_wiki/source_catalog/narrative_routing.py src/company_wiki/source_catalog/narrative_candidates.py src/company_wiki/source_catalog/narrative_context.py src/company_wiki/source_catalog/narrative_budget.py src/company_wiki/source_catalog/narrative_group_candidates.py src/company_wiki/source_catalog/narrative_neighbors.py src/company_wiki/source_catalog/narrative_finalize.py src/company_wiki/source_catalog/narrative_pdf_groups.py src/company_wiki/source_catalog/narrative_replay.py src/company_wiki/source_catalog/narrative_evidence.py src/company_wiki/source_catalog/transcript_tool_contract.py src/company_wiki/source_catalog/transcript_import.py src/company_wiki/source_catalog/transcript_text_extract.py src/company_wiki/source_catalog/transcript_lineage.py src/company_wiki/source_catalog/transcript_material.py src/company_wiki/source_catalog/transcript_import_cli.py src/company_wiki/automation/narrative_contracts.py src/company_wiki/automation/execution_snapshot.py src/company_wiki/automation/execution_context.py src/company_wiki/automation/worker.py src/company_wiki/automation/registry.py src/company_wiki/automation/planner.py src/company_wiki/automation/cli.py src/company_wiki/automation/narrative_select.py src/company_wiki/automation/narrative_model.py src/company_wiki/automation/narrative_summarize.py src/company_wiki/automation/narrative_source_guard.py src/company_wiki/automation/narrative_verify.py src/company_wiki/automation/narrative_runtime.py
+2026-10-11T02:36:04.5020990Z [36;1mpython -m mypy src/company_wiki/source_catalog/artifact_handle.py src/company_wiki/source_catalog/source_bundle.py src/company_wiki/source_catalog/runtime_policy.py src/company_wiki/source_catalog/activation.py src/company_wiki/source_catalog/close_gap.py src/company_wiki/source_catalog/policy_2x.py src/company_wiki/source_catalog/canary_registry.py src/company_wiki/source_catalog/normalized_meta.py src/company_wiki/source_catalog/flags.py src/company_wiki/source_catalog/policy.py src/company_wiki/source_catalog/restore.py src/company_wiki/source_catalog/operation_contract.py src/company_wiki/source_catalog/operation_projection.py src/company_wiki/source_catalog/source_operation.py src/company_wiki/source_catalog/source_reader.py src/company_wiki/source_catalog/narrative_document.py src/company_wiki/source_catalog/narrative_routing.py src/company_wiki/source_catalog/narrative_candidates.py src/company_wiki/source_catalog/narrative_context.py src/company_wiki/source_catalog/narrative_budget.py src/company_wiki/source_catalog/narrative_group_candidates.py src/company_wiki/source_catalog/narrative_neighbors.py src/company_wiki/source_catalog/narrative_finalize.py src/company_wiki/source_catalog/narrative_pdf_groups.py src/company_wiki/source_catalog/narrative_replay.py src/company_wiki/source_catalog/narrative_evidence.py src/company_wiki/source_catalog/transcript_tool_contract.py src/company_wiki/source_catalog/transcript_import.py src/company_wiki/source_catalog/transcript_text_extract.py src/company_wiki/source_catalog/transcript_lineage.py src/company_wiki/source_catalog/transcript_material.py src/company_wiki/source_catalog/transcript_import_cli.py src/company_wiki/automation/narrative_contracts.py src/company_wiki/automation/execution_snapshot.py src/company_wiki/automation/execution_context.py src/company_wiki/automation/worker.py src/company_wiki/automation/registry.py src/company_wiki/automation/planner.py src/company_wiki/automation/cli.py src/company_wiki/automation/narrative_select.py src/company_wiki/automation/narrative_model.py src/company_wiki/automation/narrative_summarize.py src/company_wiki/automation/narrative_source_guard.py src/company_wiki/automation/narrative_verify.py src/company_wiki/automation/narrative_runtime.py[0m
+2026-10-11T02:36:04.5095708Z shell: /usr/bin/bash -e {0}
+2026-10-11T02:36:04.5095979Z env:
+2026-10-11T02:36:04.5096248Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:04.5096730Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-11T02:36:04.5097330Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:04.5097727Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:04.5098134Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:04.5098541Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-11T02:36:04.5098873Z ##[endgroup]
+2026-10-11T02:36:06.9433741Z Success: no issues found in 45 source files
+2026-10-11T02:36:06.9560997Z ##[group]Run python -m compileall -q src scripts tests
+2026-10-11T02:36:06.9561443Z [36;1mpython -m compileall -q src scripts tests[0m
+2026-10-11T02:36:06.9561819Z [36;1mPYTHONPATH=src python scripts/config_doctor.py[0m
+2026-10-11T02:36:06.9625181Z shell: /usr/bin/bash -e {0}
+2026-10-11T02:36:06.9625438Z env:
+2026-10-11T02:36:06.9625738Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:06.9626195Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-11T02:36:06.9626641Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:06.9627027Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:06.9627415Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:06.9627805Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-11T02:36:06.9628130Z ##[endgroup]
+2026-10-11T02:36:09.3322426Z OK: /home/runner/work/company-wiki/company-wiki/config/source_catalog.yaml healthy
+2026-10-11T02:36:09.3613227Z ##[group]Run report="$RUNNER_TEMP/unit-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
+2026-10-11T02:36:09.3613903Z [36;1mreport="$RUNNER_TEMP/unit-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"[0m
+2026-10-11T02:36:09.3614449Z [36;1mpython -m pytest tests/unit -q --tb=short --junitxml="$report"[0m
+2026-10-11T02:36:09.3678480Z shell: /usr/bin/bash -e {0}
+2026-10-11T02:36:09.3678733Z env:
+2026-10-11T02:36:09.3679009Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:09.3679482Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-11T02:36:09.3679920Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:09.3680304Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:09.3680701Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:36:09.3681090Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-11T02:36:09.3681422Z ##[endgroup]
+2026-10-11T02:36:10.0042045Z CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+2026-10-11T02:36:15.1207082Z ============================= test session starts ==============================
+2026-10-11T02:36:15.1208298Z platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+2026-10-11T02:36:15.1209043Z rootdir: /home/runner/work/company-wiki/company-wiki
+2026-10-11T02:36:15.1209643Z configfile: pytest.ini
+2026-10-11T02:36:15.1210310Z plugins: asyncio-1.4.0, timeout-2.4.0, mock-3.16.0, cov-7.1.0, xdist-3.8.0, anyio-4.15.1
+2026-10-11T02:36:15.1211620Z asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+2026-10-11T02:36:15.1212939Z collected 3065 items
+2026-10-11T02:36:15.1213221Z 
+2026-10-11T02:36:15.1302410Z tests/unit/test_acquisition_budget.py ..                                 [  0%]
+2026-10-11T02:36:15.1764477Z tests/unit/test_acquisition_failure_diagnostic.py .....................s [  0%]
+2026-10-11T02:36:15.8916316Z ....s....                                                                [  1%]
+2026-10-11T02:36:15.8986260Z tests/unit/test_acquisition_scope_responsibility.py ......               [  1%]
+2026-10-11T02:36:21.4220550Z tests/unit/test_acquisition_usage_recovery.py ...........                [  1%]
+2026-10-11T02:36:21.8446678Z tests/unit/test_adapter_process_budget.py .................              [  2%]
+2026-10-11T02:36:21.9129797Z tests/unit/test_adapter_registration_efficiency.py .....                 [  2%]
+2026-10-11T02:36:21.9433382Z tests/unit/test_automation_approval_api_retired.py ..                    [  2%]
+2026-10-11T02:36:24.0079199Z tests/unit/test_automation_controller.py ............                    [  2%]
+2026-10-11T02:36:24.1820018Z tests/unit/test_automation_error_semantics.py .................          [  3%]
+2026-10-11T02:36:24.1935427Z tests/unit/test_automation_execution_context.py .......                  [  3%]
+2026-10-11T02:36:24.2619070Z tests/unit/test_automation_job_scope_queries.py ...                      [  3%]
+2026-10-11T02:36:24.5831342Z tests/unit/test_automation_migrations.py ...........................     [  4%]
+2026-10-11T02:36:24.7026208Z tests/unit/test_automation_migrations_v2.py .........                    [  4%]
+2026-10-11T02:36:24.7948333Z tests/unit/test_automation_migrations_v3.py .....                        [  5%]
+2026-10-11T02:36:24.8295083Z tests/unit/test_automation_models.py .............................       [  5%]
+2026-10-11T02:36:25.0576843Z tests/unit/test_automation_outbox_read_scope.py .........                [  6%]
+2026-10-11T02:36:25.0899632Z tests/unit/test_automation_planner.py .............................      [  7%]
+2026-10-11T02:36:25.2005140Z tests/unit/test_automation_runtime_control.py .....                      [  7%]
+2026-10-11T02:36:25.3603758Z tests/unit/test_automation_scheduler.py .......                          [  7%]
+2026-10-11T02:36:26.0688176Z tests/unit/test_automation_store.py ..............................       [  8%]
+2026-10-11T02:36:26.4284253Z tests/unit/test_automation_store_atomic.py ...............               [  9%]
+2026-10-11T02:36:26.4358409Z tests/unit/test_automation_supervisor.py .....                           [  9%]
+2026-10-11T02:36:26.6663213Z tests/unit/test_automation_worker.py .................                   [  9%]
+2026-10-11T02:36:26.7082146Z tests/unit/test_b10_frontmatter_tolerance.py .....                       [  9%]
+2026-10-11T02:36:27.5113223Z tests/unit/test_b10_manifest_abort_paths.py ...                          [ 10%]
+2026-10-11T02:36:27.5204767Z tests/unit/test_b10_metadata_state.py ....                               [ 10%]
+2026-10-11T02:36:27.5496600Z tests/unit/test_batch_assessment.py ................                     [ 10%]
+2026-10-11T02:36:27.6418861Z tests/unit/test_batch_preparation_deadline.py ..........                 [ 11%]
+2026-10-11T02:36:27.6959430Z tests/unit/test_bounded_content_encoding.py ............................ [ 11%]
+2026-10-11T02:36:27.7176228Z ..........                                                               [ 12%]
+2026-10-11T02:36:27.7852374Z tests/unit/test_bounded_http.py .............                            [ 12%]
+2026-10-11T02:36:28.1610924Z tests/unit/test_bounded_process.py ....                                  [ 12%]
+2026-10-11T02:36:28.1659272Z tests/unit/test_canonical_import_reference.py ....                       [ 12%]
+2026-10-11T02:36:28.2554592Z tests/unit/test_catalog_reader.py ..........                             [ 13%]
+2026-10-11T02:36:28.4287116Z tests/unit/test_catalog_reader_queries.py .............                  [ 13%]
+2026-10-11T02:36:28.5354134Z tests/unit/test_ci_push_selection.py ................................... [ 14%]
+2026-10-11T02:36:28.5493533Z .....                                                                    [ 15%]
+2026-10-11T02:36:28.5605811Z tests/unit/test_cleanup_deprecated.py .....                              [ 15%]
+2026-10-11T02:36:28.5732547Z tests/unit/test_commit_policy.py ..                                      [ 15%]
+2026-10-11T02:36:28.6065576Z tests/unit/test_common.py ...................                            [ 15%]
+2026-10-11T02:36:28.6274017Z tests/unit/test_config.py .........                                      [ 16%]
+2026-10-11T02:36:28.6600126Z tests/unit/test_contradiction_detector.py .........                      [ 16%]
+2026-10-11T02:36:28.6986969Z tests/unit/test_cross_market_suite.py .............................      [ 17%]
+2026-10-11T02:36:28.7506185Z tests/unit/test_dayu_fiscal_metadata.py ................................ [ 18%]
+2026-10-11T02:36:28.7542234Z ..                                                                       [ 18%]
+2026-10-11T02:36:28.7635789Z tests/unit/test_dayu_sdk_bridge.py ........                              [ 18%]
+2026-10-11T02:36:28.7860975Z tests/unit/test_dayu_sdk_config.py ...                                   [ 18%]
+2026-10-11T02:36:28.8024704Z tests/unit/test_dayu_sdk_fetch.py ......                                 [ 19%]
+2026-10-11T02:36:28.9492210Z tests/unit/test_default_steady_source_reader.py ......                   [ 19%]
+2026-10-11T02:36:29.0014554Z tests/unit/test_dependency_declarations.py ...                           [ 19%]
+2026-10-11T02:36:29.1514752Z tests/unit/test_deployment.py .......................                    [ 20%]
+2026-10-11T02:36:29.3322406Z tests/unit/test_docx_heading_normalization.py ...........FF....          [ 20%]
+2026-10-11T02:36:29.3417636Z tests/unit/test_domain.py .........                                      [ 20%]
+2026-10-11T02:36:29.3800435Z tests/unit/test_download.py .........                                    [ 21%]
+2026-10-11T02:36:29.4025881Z tests/unit/test_error_taxonomy.py ................                       [ 21%]
+2026-10-11T02:36:29.6343250Z tests/unit/test_file_mutex.py ..                                         [ 21%]
+2026-10-11T02:36:30.9442341Z tests/unit/test_finite_configured_entrypoint_launch.py ........          [ 22%]
+2026-10-11T02:36:31.1589737Z tests/unit/test_fresh_selection_semantics.py ......................      [ 22%]
+2026-10-11T02:36:31.6221830Z tests/unit/test_g4_pipeline_retirement.py .....................          [ 23%]
+2026-10-11T02:36:32.3135924Z tests/unit/test_g5_legacy_checks_retirement.py ......................... [ 24%]
+2026-10-11T02:36:33.4345766Z .............................                                            [ 25%]
+2026-10-11T02:36:33.5214652Z tests/unit/test_generation_policy.py .....................               [ 25%]
+2026-10-11T02:36:33.5463112Z tests/unit/test_graph_models.py ............                             [ 26%]
+2026-10-11T02:36:33.6238226Z tests/unit/test_hermetic_runtime.py ...                                  [ 26%]
+2026-10-11T02:36:33.6842965Z tests/unit/test_ingest.py ...............                                [ 26%]
+2026-10-11T02:36:35.5353495Z tests/unit/test_legacy_entrypoint_simplification.py .................... [ 27%]
+2026-10-11T02:36:41.0603958Z ........................................................................ [ 29%]
+2026-10-11T02:36:42.8667651Z ....................                                                     [ 30%]
+2026-10-11T02:36:43.5769111Z tests/unit/test_llm_client.py .....................                      [ 31%]
+2026-10-11T02:36:43.6290864Z tests/unit/test_llm_defaults.py .........                                [ 31%]
+2026-10-11T02:36:43.6479663Z tests/unit/test_log_writer.py ........                                   [ 31%]
+2026-10-11T02:36:43.6799117Z tests/unit/test_m3_acquisition_usage_acceptance.py ..................... [ 32%]
+2026-10-11T02:36:43.6826416Z ..                                                                       [ 32%]
+2026-10-11T02:36:43.7032591Z tests/unit/test_m3_acquisition_usage_observation.py .................... [ 33%]
+2026-10-11T02:36:43.7251540Z ...................                                                      [ 33%]
+2026-10-11T02:36:43.7563076Z tests/unit/test_m3_official_json_parser.py ............................. [ 34%]
+2026-10-11T02:36:43.7849312Z ssss........................                                             [ 35%]
+2026-10-11T02:36:43.8572214Z tests/unit/test_main_ocr_selection.py .................................. [ 36%]
+2026-10-11T02:36:44.0403404Z .........                                                                [ 37%]
+2026-10-11T02:36:44.0555072Z tests/unit/test_migrate_raw.py ...........                               [ 37%]
+2026-10-11T02:36:44.0896140Z tests/unit/test_migration.py ..................                          [ 38%]
+2026-10-11T02:36:44.1421759Z tests/unit/test_monitor.py .................                             [ 38%]
+2026-10-11T02:36:45.6656276Z tests/unit/test_n4_batch_scope.py .....................                  [ 39%]
+2026-10-11T02:36:45.6740274Z tests/unit/test_n4c_preflight_budget.py .....                            [ 39%]
+2026-10-11T02:36:45.6961759Z tests/unit/test_n6_budget_selection.py .........                         [ 39%]
+2026-10-11T02:36:45.8317993Z tests/unit/test_n6_candidate_main_boundaries.py .................        [ 40%]
+2026-10-11T02:36:45.8481069Z tests/unit/test_n6_candidate_recall.py ......                            [ 40%]
+2026-10-11T02:36:45.9048020Z tests/unit/test_n6_context_boundaries.py ...................             [ 41%]
+2026-10-11T02:36:45.9260221Z tests/unit/test_n6_dedup_context_safety.py ...............               [ 41%]
+2026-10-11T02:36:45.9496003Z tests/unit/test_n6_group_dedup.py .................                      [ 42%]
+2026-10-11T02:36:46.1625864Z tests/unit/test_narrative_artifact_store.py .............                [ 42%]
+2026-10-11T02:36:46.2143046Z tests/unit/test_narrative_batch.py .................                     [ 43%]
+2026-10-11T02:36:46.2375203Z tests/unit/test_narrative_batch_request.py .................             [ 43%]
+2026-10-11T02:36:47.3873046Z tests/unit/test_narrative_business_recall.py ........................... [ 44%]
+2026-10-11T02:36:48.4504191Z .............................                                            [ 45%]
+2026-10-11T02:36:48.4707469Z tests/unit/test_narrative_current_read.py .............                  [ 45%]
+2026-10-11T02:36:48.5206631Z tests/unit/test_narrative_english_business_recall.py ................... [ 46%]
+2026-10-11T02:36:48.5317528Z ....                                                                     [ 46%]
+2026-10-11T02:36:48.5804131Z tests/unit/test_narrative_english_operations.py .......................  [ 47%]
+2026-10-11T02:36:48.7005622Z tests/unit/test_narrative_evidence.py .................................. [ 48%]
+2026-10-11T02:36:49.1796372Z ...............................                                          [ 49%]
+2026-10-11T02:36:49.1877874Z tests/unit/test_narrative_evidence_view_query.py .......                 [ 49%]
+2026-10-11T02:36:49.2386800Z tests/unit/test_narrative_failed_final.py .............................. [ 50%]
+2026-10-11T02:36:49.6111859Z .................                                                        [ 51%]
+2026-10-11T02:36:49.7467045Z tests/unit/test_narrative_format_pipeline.py .............               [ 51%]
+2026-10-11T02:36:49.8383119Z tests/unit/test_narrative_generation.py ............                     [ 52%]
+2026-10-11T02:36:50.5996294Z tests/unit/test_narrative_http_model.py ................................ [ 53%]
+2026-10-11T02:36:50.8636235Z ...........................                                              [ 54%]
+2026-10-11T02:36:50.9427664Z tests/unit/test_narrative_job_contracts.py ...............               [ 54%]
+2026-10-11T02:36:50.9544490Z tests/unit/test_narrative_language.py ......                             [ 54%]
+2026-10-11T02:36:50.9882535Z tests/unit/test_narrative_locale_boundary.py ...................         [ 55%]
+2026-10-11T02:36:51.7400457Z tests/unit/test_narrative_model_aliases.py .........                     [ 55%]
+2026-10-11T02:36:51.7640796Z tests/unit/test_narrative_model_caller.py ....................           [ 56%]
+2026-10-11T02:36:51.8401607Z tests/unit/test_narrative_model_config.py ...........................    [ 57%]
+2026-10-11T02:36:52.2020949Z tests/unit/test_narrative_model_request.py ........                      [ 57%]
+2026-10-11T02:36:52.2181051Z tests/unit/test_narrative_model_usage.py ...............                 [ 57%]
+2026-10-11T02:36:52.3419602Z tests/unit/test_narrative_native_business_boundaries.py .........        [ 58%]
+2026-10-11T02:36:52.9303251Z tests/unit/test_narrative_ocr_composition.py ........................    [ 59%]
+2026-10-11T02:36:53.0372150Z tests/unit/test_narrative_outbox_store.py ....                           [ 59%]
+2026-10-11T02:36:53.1458607Z tests/unit/test_narrative_partial_summary.py ........................... [ 60%]
+2026-10-11T02:36:53.1632124Z .....                                                                    [ 60%]
+2026-10-11T02:36:53.1924249Z tests/unit/test_narrative_pdf_bytes.py ..                                [ 60%]
+2026-10-11T02:36:53.2527276Z tests/unit/test_narrative_quality_projection.py ...........              [ 60%]
+2026-10-11T02:36:53.2722151Z tests/unit/test_narrative_reasoning_usage.py ................            [ 61%]
+2026-10-11T02:36:53.3105049Z tests/unit/test_narrative_retrieval.py ............                      [ 61%]
+2026-10-11T02:36:53.7290917Z tests/unit/test_narrative_run_ownership.py ...............               [ 62%]
+2026-10-11T02:36:54.3890818Z tests/unit/test_narrative_run_store.py ......................            [ 62%]
+2026-10-11T02:36:54.7031785Z tests/unit/test_narrative_select_handler.py ............................ [ 63%]
+2026-10-11T02:36:54.7039640Z                                                                          [ 63%]
+2026-10-11T02:36:54.7277345Z tests/unit/test_narrative_selection_architecture.py .................... [ 64%]
+2026-10-11T02:36:54.7585182Z .......................                                                  [ 65%]
+2026-10-11T02:37:10.4065145Z tests/unit/test_narrative_selector_binding.py ................           [ 65%]
+2026-10-11T02:37:10.4128349Z tests/unit/test_narrative_source_guard.py .....                          [ 65%]
+2026-10-11T02:37:10.5071461Z tests/unit/test_narrative_summarize_handler.py ......................... [ 66%]
+2026-10-11T02:37:10.6190308Z ..............                                                           [ 67%]
+2026-10-11T02:37:10.6311604Z tests/unit/test_narrative_summary_review_pilot.py .........              [ 67%]
+2026-10-11T02:37:10.6333963Z tests/unit/test_narrative_transport_cli_output.py .                      [ 67%]
+2026-10-11T02:37:10.6593073Z tests/unit/test_narrative_transport_contracts.py ....................... [ 68%]
+2026-10-11T02:37:10.6704736Z .....                                                                    [ 68%]
+2026-10-11T02:37:10.8793773Z tests/unit/test_narrative_verify_handler.py ....................         [ 68%]
+2026-10-11T02:37:11.7343793Z tests/unit/test_narrative_versioned_resume.py .......................... [ 69%]
+2026-10-11T02:37:13.0363239Z ..........................                                               [ 70%]
+2026-10-11T02:37:14.4954593Z tests/unit/test_narrative_worker_factory.py .................            [ 71%]
+2026-10-11T02:37:14.6926711Z tests/unit/test_native_document_pipeline.py .....                        [ 71%]
+2026-10-11T02:37:14.8120955Z tests/unit/test_new_modules.py ..................                        [ 71%]
+2026-10-11T02:37:14.8732467Z tests/unit/test_normalized_artifact_reader.py ....................       [ 72%]
+2026-10-11T02:37:14.9650522Z tests/unit/test_official_json_batch_identity.py ................         [ 73%]
+2026-10-11T02:37:15.0528984Z tests/unit/test_official_json_model_subject.py ......................... [ 73%]
+2026-10-11T02:37:15.1815534Z .......                                                                  [ 74%]
+2026-10-11T02:37:15.2320032Z tests/unit/test_official_json_narrative_adapter.py .................     [ 74%]
+2026-10-11T02:37:15.2821516Z tests/unit/test_official_json_narrative_subject.py ..............        [ 75%]
+2026-10-11T02:37:15.3250768Z tests/unit/test_official_json_projection_generation.py ................. [ 75%]
+2026-10-11T02:37:15.4055247Z ......................................                                   [ 76%]
+2026-10-11T02:37:15.4257089Z tests/unit/test_official_json_public_dispatch.py ..........              [ 77%]
+2026-10-11T02:37:15.9857819Z tests/unit/test_official_json_run_prompt_admission.py .................. [ 77%]
+2026-10-11T02:37:16.2090920Z ...........                                                              [ 78%]
+2026-10-11T02:37:16.3185757Z tests/unit/test_official_json_subject_contracts.py ...............       [ 78%]
+2026-10-11T02:37:16.3715467Z tests/unit/test_official_json_summarize_subject.py ..........            [ 79%]
+2026-10-11T02:37:16.4430341Z tests/unit/test_official_json_transport_subject_contracts.py ........... [ 79%]
+2026-10-11T02:37:16.6082277Z ............................                                             [ 80%]
+2026-10-11T02:37:16.6944554Z tests/unit/test_p7_official_projection_identity.py ...................   [ 80%]
+2026-10-11T02:37:16.7017478Z tests/unit/test_pdf_classify.py ....                                     [ 81%]
+2026-10-11T02:37:16.7590733Z tests/unit/test_pipeline.py ...................                          [ 81%]
+2026-10-11T02:37:16.8207596Z tests/unit/test_policy_3x.py ............                                [ 82%]
+2026-10-11T02:37:16.8994462Z tests/unit/test_pre_push_temp_scope.py ....                              [ 82%]
+2026-10-11T02:37:16.9248424Z tests/unit/test_prompt_injection_guard.py .........                      [ 82%]
+2026-10-11T02:37:16.9307570Z tests/unit/test_prompt_review_gate_retired.py ..                         [ 82%]
+2026-10-11T02:37:16.9496321Z tests/unit/test_prompts.py ...................                           [ 83%]
+2026-10-11T02:37:17.0044752Z tests/unit/test_proposal.py .............................                [ 84%]
+2026-10-11T02:37:17.0380002Z tests/unit/test_quality.py ................                              [ 84%]
+2026-10-11T02:37:17.0823896Z tests/unit/test_query.py ..............                                  [ 85%]
+2026-10-11T02:37:17.1148162Z tests/unit/test_question_model.py ........................               [ 85%]
+2026-10-11T02:37:17.1542285Z tests/unit/test_recovery_baseline.py ....                                [ 86%]
+2026-10-11T02:37:19.1687994Z tests/unit/test_replay_config_isolation.py .......                       [ 86%]
+2026-10-11T02:37:19.1710873Z tests/unit/test_runtime_dependencies.py .                                [ 86%]
+2026-10-11T02:37:19.2063683Z tests/unit/test_s7_adoption_project_context.py ......................... [ 87%]
+2026-10-11T02:37:19.2153863Z ...                                                                      [ 87%]
+2026-10-11T02:37:19.2469038Z tests/unit/test_s7_operating_fact_semantics.py ........................  [ 87%]
+2026-10-11T02:37:19.2928619Z tests/unit/test_s7_pdf_qa_fragments.py .............................     [ 88%]
+2026-10-11T02:37:19.5169527Z tests/unit/test_scheduler.py .........................                   [ 89%]
+2026-10-11T02:37:19.6422260Z tests/unit/test_secret_audit.py .......                                  [ 89%]
+2026-10-11T02:37:19.7004622Z tests/unit/test_secret_preflight.py ...                                  [ 90%]
+2026-10-11T02:37:19.7172300Z tests/unit/test_source_catalog_financing_classification.py ............. [ 90%]
+2026-10-11T02:37:19.7975170Z ......                                                                   [ 90%]
+2026-10-11T02:37:19.8420781Z tests/unit/test_source_catalog_scanner_direct.py ....                    [ 90%]
+2026-10-11T02:37:20.1610013Z tests/unit/test_source_catalog_scoped_scan.py ...............            [ 91%]
+2026-10-11T02:37:20.2002476Z tests/unit/test_source_discoverer.py ..........                          [ 91%]
+2026-10-11T02:37:21.3427579Z tests/unit/test_source_facts.py .......................                  [ 92%]
+2026-10-11T02:37:21.3866610Z tests/unit/test_source_policy.py .............                           [ 92%]
+2026-10-11T02:37:21.4126012Z tests/unit/test_source_qualification.py .......................          [ 93%]
+2026-10-11T02:37:21.4943044Z tests/unit/test_source_read_policy.py ..........................         [ 94%]
+2026-10-11T02:37:21.5142285Z tests/unit/test_stage_taxonomy.py ....................                   [ 95%]
+2026-10-11T02:37:21.6529740Z tests/unit/test_state_store.py ...............                           [ 95%]
+2026-10-11T02:37:21.6613421Z tests/unit/test_steady_runtime_policy.py .....                           [ 95%]
+2026-10-11T02:37:22.1524624Z tests/unit/test_store_initialization.py .......................          [ 96%]
+2026-10-11T02:37:22.1827983Z tests/unit/test_summarize_junit_failures.py .........                    [ 96%]
+2026-10-11T02:37:23.9354419Z tests/unit/test_terminal_narrative_receipts.py .....................     [ 97%]
+2026-10-11T02:37:25.0388946Z tests/unit/test_transcript_boundary_versions.py ..............           [ 97%]
+2026-10-11T02:37:25.1332927Z tests/unit/test_transcript_parser_compatibility.py ...................   [ 98%]
+2026-10-11T02:37:25.2032450Z tests/unit/test_wiki_repository.py ..................                    [ 99%]
+2026-10-11T02:37:25.2592905Z tests/unit/test_wikilinks.py .........                                   [ 99%]
+2026-10-11T02:37:26.8285841Z tests/unit/test_writer_freeze.py ..........                              [ 99%]
+2026-10-11T02:37:27.1797587Z tests/unit/test_zr304_read_model.py .........                            [100%]
+2026-10-11T02:37:27.1798131Z 
+2026-10-11T02:37:27.1798346Z =================================== FAILURES ===================================
+2026-10-11T02:37:27.1799102Z ___ test_explicit_legacy_is_exact_field_metadata_identity_and_replay_freeze ____
+2026-10-11T02:37:27.1800208Z tests/unit/test_docx_heading_normalization.py:204: in test_explicit_legacy_is_exact_field_metadata_identity_and_replay_freeze
+2026-10-11T02:37:27.1801673Z     assert fingerprint(document_record(old)) == LEGACY_FINGERPRINT
+2026-10-11T02:37:27.1802277Z E   AssertionError: assert '63c83b5638f5...98e87c64e7c97' == 'a6580fca5dcd...44cb68d0031e4'
+2026-10-11T02:37:27.1803457Z E     
+2026-10-11T02:37:27.1803808Z E     - a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4
+2026-10-11T02:37:27.1804359Z E     + 63c83b5638f54e4454dd66e69fbd51b89cd5b69f8f2f9a1146298e87c64e7c97
+2026-10-11T02:37:27.1804928Z _ test_default_and_saved_old_pins_have_separate_generation_and_replay_identity _
+2026-10-11T02:37:27.1805748Z tests/unit/test_docx_heading_normalization.py:229: in test_default_and_saved_old_pins_have_separate_generation_and_replay_identity
+2026-10-11T02:37:27.1806499Z     assert fingerprint(document_record(old)) == LEGACY_FINGERPRINT
+2026-10-11T02:37:27.1807113Z E   AssertionError: assert '63c83b5638f5...98e87c64e7c97' == 'a6580fca5dcd...44cb68d0031e4'
+2026-10-11T02:37:27.1807604Z E     
+2026-10-11T02:37:27.1807938Z E     - a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4
+2026-10-11T02:37:27.1808469Z E     + 63c83b5638f54e4454dd66e69fbd51b89cd5b69f8f2f9a1146298e87c64e7c97
+2026-10-11T02:37:27.1808937Z =============================== warnings summary ===============================
+2026-10-11T02:37:27.1809733Z tests/unit/test_replay_config_isolation.py::test_single_image_pptx_public_cli_is_offline_blocked_with_actual_tiny_evidence
+2026-10-11T02:37:27.1810793Z   tests/unit/test_replay_config_isolation.py:180: PytestWarning: record_property is incompatible with junit_family 'xunit2' (use 'legacy' or 'xunit1')
+2026-10-11T02:37:27.1811758Z     def test_single_image_pptx_public_cli_is_offline_blocked_with_actual_tiny_evidence(record_property):
+2026-10-11T02:37:27.1812214Z 
+2026-10-11T02:37:27.1812461Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-10-11T02:37:27.1813187Z --- generated xml file: /home/runner/work/_temp/unit-tests-38105648234-1.xml ---
+2026-10-11T02:37:27.1813697Z =========================== short test summary info ============================
+2026-10-11T02:37:27.1814799Z FAILED tests/unit/test_docx_heading_normalization.py::test_explicit_legacy_is_exact_field_metadata_identity_and_replay_freeze - AssertionError: assert '63c83b5638f5...98e87c64e7c97' == 'a6580fca5dcd...44cb68d0031e4'
+2026-10-11T02:37:27.1815810Z   
+2026-10-11T02:37:27.1816133Z   - a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4
+2026-10-11T02:37:27.1816661Z   + 63c83b5638f54e4454dd66e69fbd51b89cd5b69f8f2f9a1146298e87c64e7c97
+2026-10-11T02:37:27.1817978Z FAILED tests/unit/test_docx_heading_normalization.py::test_default_and_saved_old_pins_have_separate_generation_and_replay_identity - AssertionError: assert '63c83b5638f5...98e87c64e7c97' == 'a6580fca5dcd...44cb68d0031e4'
+2026-10-11T02:37:27.1818981Z   
+2026-10-11T02:37:27.1819294Z   - a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4
+2026-10-11T02:37:27.1819811Z   + 63c83b5638f54e4454dd66e69fbd51b89cd5b69f8f2f9a1146298e87c64e7c97
+2026-10-11T02:37:27.1820331Z ======= 2 failed, 3057 passed, 6 skipped, 1 warning in 76.96s (0:01:16) ========
+2026-10-11T02:37:27.5931327Z ##[error]Process completed with exit code 1.
+2026-10-11T02:37:27.6005910Z ##[group]Run report="$RUNNER_TEMP/unit-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
+2026-10-11T02:37:27.6006562Z [36;1mreport="$RUNNER_TEMP/unit-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"[0m
+2026-10-11T02:37:27.6007075Z [36;1mpython tools/summarize_junit_failures.py "$report"[0m
+2026-10-11T02:37:27.6069399Z shell: /usr/bin/bash -e {0}
+2026-10-11T02:37:27.6069663Z env:
+2026-10-11T02:37:27.6069943Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:37:27.6070401Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-11T02:37:27.6070833Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:37:27.6071217Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:37:27.6071609Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:37:27.6071998Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-11T02:37:27.6072333Z   TEST_SUITE_NAME: unit tests
+2026-10-11T02:37:27.6072871Z   TEST_SUITE_OUTCOME: failure
+2026-10-11T02:37:27.6073115Z ##[endgroup]
+2026-10-11T02:37:27.6511029Z ##[error]tests.unit.test_docx_heading_normalization::test_explicit_legacy_is_exact_field_metadata_identity_and_replay_freeze [AssertionError]
+2026-10-11T02:37:27.6515244Z ##[error]tests.unit.test_docx_heading_normalization::test_default_and_saved_old_pins_have_separate_generation_and_replay_identity [AssertionError]
+2026-10-11T02:37:27.6594928Z ##[group]Run report="$RUNNER_TEMP/contract-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"
+2026-10-11T02:37:27.6595614Z [36;1mreport="$RUNNER_TEMP/contract-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xml"[0m
+2026-10-11T02:37:27.6596144Z [36;1mpython tools/summarize_junit_failures.py "$report"[0m
+2026-10-11T02:37:27.6653746Z shell: /usr/bin/bash -e {0}
+2026-10-11T02:37:27.6654009Z env:
+2026-10-11T02:37:27.6654285Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:37:27.6654748Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-11T02:37:27.6655203Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:37:27.6655592Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:37:27.6656006Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T02:37:27.6656421Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-11T02:37:27.6656813Z   TEST_SUITE_NAME: focused contract tests
+2026-10-11T02:37:27.6657099Z   TEST_SUITE_OUTCOME: skipped
+2026-10-11T02:37:27.6657340Z ##[endgroup]
+2026-10-11T02:37:27.6999946Z ##[error]JUnit report unavailable or invalid; inspect the authenticated job log
+2026-10-11T02:37:27.7189217Z Post job cleanup.
+2026-10-11T02:37:27.8022921Z [command]/usr/bin/git version
+2026-10-11T02:37:27.8068864Z git version 2.55.0
+2026-10-11T02:37:27.8114837Z Temporarily overriding HOME='/home/runner/work/_temp/c5012786-8568-4463-9108-875fc909cc6c' before making global git config changes
+2026-10-11T02:37:27.8116164Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-11T02:37:27.8120560Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/company-wiki/company-wiki
+2026-10-11T02:37:27.8161413Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-11T02:37:27.8198540Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-11T02:37:27.8462740Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-11T02:37:27.8493526Z http.https://github.com/.extraheader
+2026-10-11T02:37:27.8505496Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-11T02:37:27.8542328Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-11T02:37:27.8836003Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-11T02:37:27.8877545Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-11T02:37:27.9299243Z Cleaning up orphan processes
+2026-10-11T02:37:27.9682200Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

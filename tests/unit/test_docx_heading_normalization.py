@@ -22,6 +22,7 @@ W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 CONTEXT = "The return calculation has not changed"
 HEADING = "Efficiency assumptions"
 QUALIFIER = "Efficiency depends on workload mix, token usage and silicon price performance."
+LEGACY_SOURCE_SHA256 = "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761"
 LEGACY_FINGERPRINT = "a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4"
 STYLES = (
     '<w:styles xmlns:w="' + W + '">'
@@ -55,7 +56,11 @@ def package(body, styles=STYLES):
     out = BytesIO()
     with zipfile.ZipFile(out, "w") as archive:
         for name, value in parts.items():
-            archive.writestr(zipfile.ZipInfo(name, (1980, 1, 1, 0, 0, 0)), value)
+            info = zipfile.ZipInfo(name, (1980, 1, 1, 0, 0, 0))
+            # Freeze the historical Windows-made original on every test host.
+            # ZIP creator metadata is part of source SHA and all derived IDs.
+            info.create_system = 0
+            archive.writestr(info, value)
     return out.getvalue()
 
 
@@ -262,3 +267,23 @@ def test_real_heading_stops_native_business_group_context():
         NarrativeNormalization.language_structure(control, "en"),
         title="Company communication", existing_kind="investor_relations", selector_version="0.7.1")
     assert {span.raw_text for span in selected_control.evidence_spans} == {CONTEXT, QUALIFIER}
+
+
+@pytest.mark.parametrize("host_system", [0, 3])
+def test_legacy_fixture_bytes_are_independent_of_zip_host_default(monkeypatch, host_system):
+    original_zip_info = zipfile.ZipInfo
+
+    class HostDefaultZipInfo(original_zip_info):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.create_system = host_system
+
+    monkeypatch.setattr(zipfile, "ZipInfo", HostDefaultZipInfo)
+    data = legacy_original()
+    assert hashlib.sha256(data).hexdigest() == LEGACY_SOURCE_SHA256
+    with zipfile.ZipFile(BytesIO(data)) as archive:
+        assert {info.create_system for info in archive.infolist()} == {0}
+    old = normalize(data, parser_version="1.0.0")
+    assert fingerprint(document_record(old)) == LEGACY_FINGERPRINT
+    assert dn.replay_units(data, source_sha256=old.source_sha256, units=old.units,
+        limits=dn.NormalizationLimits()) == tuple(unit.raw_text for unit in old.units)

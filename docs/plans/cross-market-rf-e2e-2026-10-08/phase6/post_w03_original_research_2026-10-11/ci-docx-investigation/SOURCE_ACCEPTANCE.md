@@ -12,3 +12,7 @@
 - 原77,565B远端失败日志、所有RED/首attempt/旧before/actualdocx原件保留。0真实provider/model/新费；原三家公司旧execution seal不改变。
 
 证据见 evidence/root-final-node、docx-heading-implementation、final-heading-independent-review 与本PWF。测试owned临时根已恢复；生产原件/config/Dayu及其它仓库owner WIP保持。
+
+## 2026-10-11T02:54:29.485947+00:00 发布事实补充
+
+7产品源码ee293769普通提交/主线/推送，本地3196PASS199.24s，精确LinuxCI38105648234实际2FAIL/3057PASS/6skip76.96s。两失败现精确归ZIP fixture宿主create_system；唯一test-only补丁双宿主TDD RED1FAIL/1PASS→集中39PASS及独立4probe+2定点PASS接受，原正文/locator/完整旧字段断言/历史recordSHA保持。源产品7SHA和生产2config保持。下一次普通发布后只以其精确LinuxCI接收，不把本地或旧CI冒签绿。公司四审质量另有真实FAIL待共因专家，未完成总目标。

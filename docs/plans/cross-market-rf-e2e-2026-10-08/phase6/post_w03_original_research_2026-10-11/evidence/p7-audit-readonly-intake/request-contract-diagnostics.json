@@ -1,0 +1,37 @@
+{
+  "observed_at": "2026-10-11T02:49:28.794837+00:00",
+  "delivery_head": "18a52f16e605e2ca33bcf5dff5b7d4176077aa1c",
+  "source_sha256": "1dc8ad4705011fa553c62e71e961d5a2a5912250d00cf117410f06391e21918f",
+  "probes": [
+    {
+      "case": "declared_caps_100_actual_body_1000",
+      "result": "accepted",
+      "native_request": {
+        "max_cost_usd": "10.00",
+        "max_response_bytes": 1000,
+        "max_tokens": 1000,
+        "profile": "P2"
+      },
+      "effective_scope": {
+        "profile": "P1",
+        "caps": {
+          "max_response_bytes": 100,
+          "max_tokens": 100,
+          "max_cost_usd": "1.00"
+        },
+        "config_fingerprint": []
+      },
+      "write_performed": false,
+      "native_child_performed": false
+    },
+    {
+      "case": "free_acquisition_budget_zero",
+      "result": "rejected",
+      "error_type": "ValueError",
+      "error": "caps_invalid: max_cost_usd must be positive and finite"
+    }
+  ],
+  "product_write": false,
+  "paid_calls": 0,
+  "quality_claim": false
+}

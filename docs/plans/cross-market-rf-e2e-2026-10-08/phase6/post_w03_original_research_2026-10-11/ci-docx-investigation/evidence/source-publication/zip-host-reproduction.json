@@ -1,0 +1,54 @@
+{
+  "observed_at": "2026-10-11T02:42:42.997550+00:00",
+  "reproduced_exact_linux_fingerprint": true,
+  "parser_semantics_equal": true,
+  "zip_host_default_is_source_byte_difference": true,
+  "records": [
+    {
+      "host_create_system": 0,
+      "original_sha256": "d428ad041147fb650671ee805c38a03539b4f28529a5516bce325cc3a8541761",
+      "record_fingerprint": "a6580fca5dcd6c063e2447bf5cf489aaabd8f61c52856646db744cb68d0031e4",
+      "bytes": 2729,
+      "unit_count": 6,
+      "texts": [
+        "The return calculation has not changed",
+        "Efficiency assumptions",
+        "Efficiency depends on workload mix, token usage and silicon price performance.",
+        "Q: Has customer validation finished?",
+        "A: Customer validation remains planned next year.",
+        "New products received repeat customer orders."
+      ],
+      "locations": [
+        "cwp-docx-body/1|p=0",
+        "cwp-docx-body/1|p=1",
+        "cwp-docx-body/1|p=2",
+        "cwp-docx-body/1|p=3",
+        "cwp-docx-body/1|p=4",
+        "cwp-docx-body/1|t=0|r=0|c=0|p=0"
+      ]
+    },
+    {
+      "host_create_system": 3,
+      "original_sha256": "1af5cb9e60f9b799b6057fe992b20a4009c338b38c5eb28e01307902024fa0d9",
+      "record_fingerprint": "63c83b5638f54e4454dd66e69fbd51b89cd5b69f8f2f9a1146298e87c64e7c97",
+      "bytes": 2729,
+      "unit_count": 6,
+      "texts": [
+        "The return calculation has not changed",
+        "Efficiency assumptions",
+        "Efficiency depends on workload mix, token usage and silicon price performance.",
+        "Q: Has customer validation finished?",
+        "A: Customer validation remains planned next year.",
+        "New products received repeat customer orders."
+      ],
+      "locations": [
+        "cwp-docx-body/1|p=0",
+        "cwp-docx-body/1|p=1",
+        "cwp-docx-body/1|p=2",
+        "cwp-docx-body/1|p=3",
+        "cwp-docx-body/1|p=4",
+        "cwp-docx-body/1|t=0|r=0|c=0|p=0"
+      ]
+    }
+  ]
+}
