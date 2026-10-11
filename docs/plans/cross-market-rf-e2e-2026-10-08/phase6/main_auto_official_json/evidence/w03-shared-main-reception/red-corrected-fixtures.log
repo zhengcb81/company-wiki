@@ -1,0 +1,25 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w03-red-7mh5b4xk\\t", "requested_basetemp_len": 50, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 5 items / 2 deselected / 3 selected
+
+tests\integration\test_narrative_shared_selector_version.py F..          [100%]
+
+================================== FAILURES ===================================
+_______ test_complete_empty_projection_does_not_bypass_unknown_version ________
+tests\integration\test_narrative_shared_selector_version.py:75: in test_complete_empty_projection_does_not_bypass_unknown_version
+    assert not view.evidence_spans
+E   assert not (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:d95c9f8e9ea9f8bf148ad3cca7bfc6efe...baa3b079d5ccd4e77432a9add8d4e68b0879cba1eff13b49ef099', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()))
+E    +  where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:d95c9f8e9ea9f8bf148ad3cca7bfc6efe...baa3b079d5ccd4e77432a9add8d4e68b0879cba1eff13b49ef099', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())) = VerifiedProjectionView(subject=NarrativeSubject(_binding_json='{"adapter":{"layout_fingerprint":"112c051c25a11f55f0087...t_sha256":"3da2933b484ab699afd89bb83b2a239f4717926544640fbaa10ef7d2c10b3951"}'), language=None, coverage_complete=True).evidence_spans
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_narrative_shared_selector_version.py::test_complete_empty_projection_does_not_bypass_unknown_version
+============ 1 failed, 2 passed, 2 deselected, 1 warning in 6.77s =============

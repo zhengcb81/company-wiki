@@ -149,9 +149,9 @@ def test_native_json_business_structure_role_parent_issuer_and_real_replay(tmp_p
         view = open_verified_projection(catalog, projection_id=projection.projection_id,
             expected_projection_sha256=projection.projection_sha256)
         old = select_verified_projection(view, title="投资者关系活动记录",
-            selector=partial(select_narrative_evidence, selector_version="0.6.0"))
+            selector=partial(select_narrative_evidence, selector_version="0.6.0"), selector_version="0.6.0")
         new = select_verified_projection(view, title="投资者关系活动记录",
-            selector=partial(select_narrative_evidence, selector_version="0.7.0"))
+            selector=partial(select_narrative_evidence, selector_version="0.7.0"), selector_version="0.7.0")
         package = new
         assert native in {span.raw_text for span in package.evidence_spans}
         # Real typed selected DTO bridges the pure policy package to existing

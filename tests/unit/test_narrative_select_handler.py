@@ -235,7 +235,7 @@ def _run(
     checkpoints: list[int] = []
     handler = NarrativeSelectHandler(
         reader=reader or FakeReader(payload, data),
-        selector=selector,
+        selector=selector, selector_version="0.6.0" if selector is not None else None,
     )
     result = handler(_context(payload, lambda: checkpoints.append(1)))
     return result, len(checkpoints)

@@ -21,3 +21,13 @@ built-in绑定effective版本并真正传selector_version；raw/official同一ca
 ## 真实研究边界
 
 工程通过不核销完整财报所有业务召回、摘要命题质量和三年预测。后续配置供应商真实原三家四审/新三家泛化/loop按根PWF执行，累计USD20/2M及旧unknown保持。
+
+## ROOT集中公共补强（2026-10-11）
+
+现有mixed样本虽然跨真实CLI/child/HTTP/publish/read/reuse，却未证明0.7独有语义；旧effort history也不等于0.6筛选历史。ROOT独占新tests/integration/test_w03_selector_public_node.py，唯一集中三项：
+
+1. actual缺省mixed raw TXT+两issuer两页JSON中，新增具体出口许可变化（不依赖product/customer词）在精选/公开原定位读取及实际冻结0.7均可见；同run resume SQL dump/账本不变，新run精确复用零新增POST。
+2. first公共CLI producer真实声明0.6，实际Worker按冻结0.6执行/发布（不改旧结果tag或metadata）；升级0.7 fresh CLI对finished history只读，原binding/generation/原件/账本/尝试/outbox保持。新0.7 run不把旧策略缓存误命中，只有真实3缺项再次POST。版本bootstrap只修改该工程child producer实际版本，Worker由factory frozen pin执行，无fake artifact/同一请求外人工许可。
+3. 全66324B真实MSFT TXT旧0.6完整指纹11ad9c7…、新0.7的103candidate/96selected/7omitted partial；两saved policy分别真实resolver回放全部精选group的原文/locator/hash，无重标、无复制生产全湖，自有单文件TEMP删除恢复。
+
+先保存真实RED与前后源码SHA（如并行共享源变化真实标记），最终ROOT切默认后集中GREEN与独立关键复核，不反复已有W04/109/168整包。loopback模型仍400输出限额、原request caps、同账本；0外部provider/model费。测试驱动错误与产品原因分开记录。

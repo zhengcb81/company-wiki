@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w03-red-7mh5b4xk\\t",
+    "tests/integration/test_narrative_shared_selector_version.py",
+    "-k",
+    "empty or history"
+  ],
+  "exit_code": 1,
+  "seconds": 7.189184599999862
+}

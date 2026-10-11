@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-11T00:12:12.193455+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/integration/test_w03_selector_public_node.py",
+    "--tb=short"
+  ],
+  "returncode": 1,
+  "seconds": 33.52774219999992,
+  "log_sha256": "04697e56ecf95e53d75765678532f52c0574087f6610468930394c5be6a93663",
+  "before_sha": {
+    "tests/integration/test_w03_selector_public_node.py": "9ddef94ac05335852b569185a71c42fb863fa26ee9568cb838765b3c29ac672d",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "8d96775ab0880a1f0ffa1261dc2c967df78afbaeb325a233cef7d6efb9f83dc3",
+    "src/company_wiki/automation/narrative_runtime.py": "4fde54ea255ccf9dbe37fae6d90c4e850cd76ecbda8d7cffd9da784ed7286eb1",
+    "src/company_wiki/automation/narrative_worker_factory.py": "69733204127ac7b1e7d76c2d3c3b206d9f1cf32c4f43a9d4007f4364b022457e",
+    "src/company_wiki/automation/narrative_select.py": "57172274ca32a3d58b7955506df219614041a12262699150a06686b07e2ae553",
+    "src/company_wiki/automation/narrative_official_json.py": "b96a17402fc520e4673815206e1a8736250b4e1b2e8f2eaab6813960c267edcd",
+    "src/company_wiki/automation/narrative_verify.py": "28c3ffdd41ccc9da8dd924e7a7ea550ba38b23b844ad020d7a92749f538a0f99",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "7a24fe44f24fcdb188d3c30932d78db6d9362df35a1ac49c9eddf1f3446a8f83"
+  },
+  "after_sha": {
+    "tests/integration/test_w03_selector_public_node.py": "9ddef94ac05335852b569185a71c42fb863fa26ee9568cb838765b3c29ac672d",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "8d96775ab0880a1f0ffa1261dc2c967df78afbaeb325a233cef7d6efb9f83dc3",
+    "src/company_wiki/automation/narrative_runtime.py": "4fde54ea255ccf9dbe37fae6d90c4e850cd76ecbda8d7cffd9da784ed7286eb1",
+    "src/company_wiki/automation/narrative_worker_factory.py": "69733204127ac7b1e7d76c2d3c3b206d9f1cf32c4f43a9d4007f4364b022457e",
+    "src/company_wiki/automation/narrative_select.py": "57172274ca32a3d58b7955506df219614041a12262699150a06686b07e2ae553",
+    "src/company_wiki/automation/narrative_official_json.py": "b96a17402fc520e4673815206e1a8736250b4e1b2e8f2eaab6813960c267edcd",
+    "src/company_wiki/automation/narrative_verify.py": "28c3ffdd41ccc9da8dd924e7a7ea550ba38b23b844ad020d7a92749f538a0f99",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "7a24fe44f24fcdb188d3c30932d78db6d9362df35a1ac49c9eddf1f3446a8f83"
+  },
+  "concurrent_source_changes": [],
+  "external_vendor_calls": 0,
+  "fee_usd": 0
+}

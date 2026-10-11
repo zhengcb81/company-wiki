@@ -1,0 +1,141 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w03-shared-red-ylcuop3c\\pytest", "requested_basetemp_len": 62, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261011-001244-bf8a4176", "effective_basetemp_len": 75}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 17 items
+
+tests\unit\test_narrative_selector_binding.py FFFFFFF.FFFF               [ 70%]
+tests\integration\test_narrative_shared_selector_version.py FFFFF        [100%]
+
+================================== FAILURES ===================================
+_ test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift[0.6.0] _
+tests\unit\test_narrative_selector_binding.py:49: in test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift
+    data, selected = raw_selection(version)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_selector_binding.py:39: in raw_selection
+    handler = NarrativeSelectHandler(reader=raw_fixture.FakeReader(payload, data),
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'selector_version'
+_ test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift[0.7.0] _
+tests\unit\test_narrative_selector_binding.py:49: in test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift
+    data, selected = raw_selection(version)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_selector_binding.py:39: in raw_selection
+    handler = NarrativeSelectHandler(reader=raw_fixture.FakeReader(payload, data),
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'selector_version'
+_ test_runtime_registers_select_and_verify_with_same_effective_version[0.6.0] _
+tests\unit\test_narrative_selector_binding.py:76: in test_runtime_registers_select_and_verify_with_same_effective_version
+    data, selected = raw_selection(version)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_selector_binding.py:39: in raw_selection
+    handler = NarrativeSelectHandler(reader=raw_fixture.FakeReader(payload, data),
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'selector_version'
+_ test_runtime_registers_select_and_verify_with_same_effective_version[0.7.0] _
+tests\unit\test_narrative_selector_binding.py:76: in test_runtime_registers_select_and_verify_with_same_effective_version
+    data, selected = raw_selection(version)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_selector_binding.py:39: in raw_selection
+    handler = NarrativeSelectHandler(reader=raw_fixture.FakeReader(payload, data),
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'selector_version'
+__ test_custom_legacy_shape_explicit_pin_and_version_aware_partial_are_real ___
+tests\unit\test_narrative_selector_binding.py:93: in test_custom_legacy_shape_explicit_pin_and_version_aware_partial_are_real
+    _, legacy_result = raw_selection("0.6.0", selector=legacy)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_selector_binding.py:39: in raw_selection
+    handler = NarrativeSelectHandler(reader=raw_fixture.FakeReader(payload, data),
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'selector_version'
+_ test_custom_missing_declaration_conflict_and_internal_typeerror_do_not_retry _
+tests\unit\test_narrative_selector_binding.py:101: in test_custom_missing_declaration_conflict_and_internal_typeerror_do_not_retry
+    from company_wiki.automation.narrative_selector_binding import bind_narrative_selector
+E   ModuleNotFoundError: No module named 'company_wiki.automation.narrative_selector_binding'
+_ test_real_transcript_resolver_uses_recorded_version_full_ordered_rows[0.6.0] _
+tests\unit\test_narrative_selector_binding.py:131: in test_real_transcript_resolver_uses_recorded_version_full_ordered_rows
+    replay = NarrativeEvidenceResolver._replay_record(record, raw_path=raw,
+src\company_wiki\source_catalog\narrative_retrieval.py:525: in _replay_record
+    raise NarrativeEvidenceResolveError("unsupported narrative selector version")
+E   company_wiki.source_catalog.narrative_retrieval.NarrativeEvidenceResolveError: unsupported narrative selector version
+____ test_factory_decodes_frozen_binding_once_and_pins_before_model[0.6.0] ____
+tests\unit\test_narrative_selector_binding.py:190: in test_factory_decodes_frozen_binding_once_and_pins_before_model
+    assert captured[0].selector_version == version
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeRuntimeDependencies' object has no attribute 'selector_version'
+____ test_factory_decodes_frozen_binding_once_and_pins_before_model[0.7.0] ____
+tests\unit\test_narrative_selector_binding.py:190: in test_factory_decodes_frozen_binding_once_and_pins_before_model
+    assert captured[0].selector_version == version
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'NarrativeRuntimeDependencies' object has no attribute 'selector_version'
+_ test_factory_decodes_frozen_binding_once_and_pins_before_model[unsupported] _
+tests\unit\test_narrative_selector_binding.py:195: in test_factory_decodes_frozen_binding_once_and_pins_before_model
+    with pytest.raises(policy.NarrativeSelectorVersionError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeSelectorVersionError
+____ test_factory_decodes_frozen_binding_once_and_pins_before_model[None] _____
+tests\unit\test_narrative_selector_binding.py:195: in test_factory_decodes_frozen_binding_once_and_pins_before_model
+    with pytest.raises(policy.NarrativeSelectorVersionError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE NarrativeSelectorVersionError
+_ test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays[0.6.0] _
+tests\integration\test_narrative_shared_selector_version.py:38: in test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays
+    handler = NarrativeSelectHandler(reader=official.NoRawReader(), projection_catalog=catalog, selector_version=version)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'selector_version'
+_ test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays[0.7.0] _
+tests\integration\test_narrative_shared_selector_version.py:38: in test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays
+    handler = NarrativeSelectHandler(reader=official.NoRawReader(), projection_catalog=catalog, selector_version=version)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: NarrativeSelectHandler.__init__() got an unexpected keyword argument 'selector_version'
+_______ test_complete_empty_projection_does_not_bypass_unknown_version ________
+tests\integration\test_narrative_shared_selector_version.py:71: in test_complete_empty_projection_does_not_bypass_unknown_version
+    projection = official.persist(catalog, [ref])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_official_json_verify_handler.py:92: in persist
+    projection = build_projection_from_refs(catalog, refs=refs, layout_id=layout,
+src\company_wiki\source_catalog\official_json_projection.py:789: in build_projection_from_refs
+    return build_source_projection(
+src\company_wiki\source_catalog\official_json_projection.py:488: in build_source_projection
+    raise ProjectionError("issuer_not_on_page")
+E   company_wiki.source_catalog.official_json_projection.ProjectionError: issuer_not_on_page
+_ test_actual_finished_06_history_readonly_and_new07_cannot_reuse_old_generation[1] _
+tests\integration\test_narrative_shared_selector_version.py:107: in test_actual_finished_06_history_readonly_and_new07_cannot_reuse_old_generation
+    assert resumed == first
+E   AssertionError: assert {'schema_vers...s': []}], ...} == {'schema_vers...s': []}], ...}
+E     
+E     Omitting 5 identical items, use -vv to show
+E     Differing items:
+E     {'storage': {'persistent_added_bytes': 241956, 'scratch_peak_bytes': 0}} != {'storage': {'persistent_added_bytes': 241955, 'scratch_peak_bytes': 4069}}
+E     Use -v to get more diff
+_ test_actual_finished_06_history_readonly_and_new07_cannot_reuse_old_generation[2] _
+tests\integration\test_narrative_shared_selector_version.py:107: in test_actual_finished_06_history_readonly_and_new07_cannot_reuse_old_generation
+    assert resumed == first
+E   AssertionError: assert {'schema_vers...}, ...}], ...} == {'schema_vers...}, ...}], ...}
+E     
+E     Omitting 5 identical items, use -vv to show
+E     Differing items:
+E     {'storage': {'persistent_added_bytes': 241956, 'scratch_peak_bytes': 0}} != {'storage': {'persistent_added_bytes': 241955, 'scratch_peak_bytes': 4069}}
+E     Use -v to get more diff
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_selector_binding.py::test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift[0.6.0]
+FAILED tests/unit/test_narrative_selector_binding.py::test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift[0.7.0]
+FAILED tests/unit/test_narrative_selector_binding.py::test_runtime_registers_select_and_verify_with_same_effective_version[0.6.0]
+FAILED tests/unit/test_narrative_selector_binding.py::test_runtime_registers_select_and_verify_with_same_effective_version[0.7.0]
+FAILED tests/unit/test_narrative_selector_binding.py::test_custom_legacy_shape_explicit_pin_and_version_aware_partial_are_real
+FAILED tests/unit/test_narrative_selector_binding.py::test_custom_missing_declaration_conflict_and_internal_typeerror_do_not_retry
+FAILED tests/unit/test_narrative_selector_binding.py::test_real_transcript_resolver_uses_recorded_version_full_ordered_rows[0.6.0]
+FAILED tests/unit/test_narrative_selector_binding.py::test_factory_decodes_frozen_binding_once_and_pins_before_model[0.6.0]
+FAILED tests/unit/test_narrative_selector_binding.py::test_factory_decodes_frozen_binding_once_and_pins_before_model[0.7.0]
+FAILED tests/unit/test_narrative_selector_binding.py::test_factory_decodes_frozen_binding_once_and_pins_before_model[unsupported]
+FAILED tests/unit/test_narrative_selector_binding.py::test_factory_decodes_frozen_binding_once_and_pins_before_model[None]
+FAILED tests/integration/test_narrative_shared_selector_version.py::test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays[0.6.0]
+FAILED tests/integration/test_narrative_shared_selector_version.py::test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays[0.7.0]
+FAILED tests/integration/test_narrative_shared_selector_version.py::test_complete_empty_projection_does_not_bypass_unknown_version
+FAILED tests/integration/test_narrative_shared_selector_version.py::test_actual_finished_06_history_readonly_and_new07_cannot_reuse_old_generation[1]
+FAILED tests/integration/test_narrative_shared_selector_version.py::test_actual_finished_06_history_readonly_and_new07_cannot_reuse_old_generation[2]
+================== 16 failed, 1 passed, 1 warning in 11.57s ===================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261011-001244-bf8a4176", "existed": true, "removed": true}

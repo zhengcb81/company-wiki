@@ -1,0 +1,53 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\Ö£Ôø²¨\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items
+
+tests\integration\test_w03_selector_public_node.py FFF                   [100%]
+
+================================== FAILURES ===================================
+_ test_new_default_public_mixed_selects_actual_industry_then_resume_reuse_is_free _
+tests\integration\test_w03_selector_public_node.py:137: in test_new_default_public_mixed_selects_actual_industry_then_resume_reuse_is_free
+    refs = _reads(state, first, "0.7.0", industry=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_w03_selector_public_node.py:101: in _reads
+    assert bundle.versions.selector == version
+E   AssertionError: assert '0.6.0' == '0.7.0'
+E     
+E     - 0.7.0
+E     ?   ^
+E     + 0.6.0
+E     ?   ^
+_ test_real_frozen_old_mixed_is_read_only_under_new_policy_and_not_new_cache __
+tests\integration\test_w03_selector_public_node.py:178: in test_real_frozen_old_mixed_is_read_only_under_new_policy_and_not_new_cache
+    new_refs = _reads(state, current, "0.7.0", industry=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\integration\test_w03_selector_public_node.py:101: in _reads
+    assert bundle.versions.selector == version
+E   AssertionError: assert '0.6.0' == '0.7.0'
+E     
+E     - 0.7.0
+E     ?   ^
+E     + 0.6.0
+E     ?   ^
+_____ test_full_true_txt_both_saved_policies_resolve_every_original_group _____
+tests\integration\test_w03_selector_public_node.py:233: in test_full_true_txt_both_saved_policies_resolve_every_original_group
+    resolved = resolver.resolve_group(
+src\company_wiki\source_catalog\narrative_retrieval.py:375: in resolve_group
+    return self._resolve_row(record, row)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\narrative_retrieval.py:454: in _resolve_row
+    replayed_rows = self._replay_record(
+src\company_wiki\source_catalog\narrative_retrieval.py:525: in _replay_record
+    raise NarrativeEvidenceResolveError("unsupported narrative selector version")
+E   company_wiki.source_catalog.narrative_retrieval.NarrativeEvidenceResolveError: unsupported narrative selector version
+=========================== short test summary info ===========================
+FAILED tests/integration/test_w03_selector_public_node.py::test_new_default_public_mixed_selects_actual_industry_then_resume_reuse_is_free
+FAILED tests/integration/test_w03_selector_public_node.py::test_real_frozen_old_mixed_is_read_only_under_new_policy_and_not_new_cache
+FAILED tests/integration/test_w03_selector_public_node.py::test_full_true_txt_both_saved_policies_resolve_every_original_group
+============================= 3 failed in 31.00s ==============================

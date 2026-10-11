@@ -1,5 +1,39 @@
 # 三市场真实收入预测端到端审计
 
+## 2026-10-11T00:29:43.905332+00:00 — W03集中独立验收通过，正常发布准备
+
+W03共享责任104PASS及独立34PASS（138不重叠；另外4定点与104重叠不加），ROOT公共3PASS/55.06秒，独立只新增2组合PASS/0.185秒，261源码与配置/原件保持。审查[报告](phase6/main_auto_official_json/evidence/w03-shared-independent-review/review.md) SHA58a4323a…；真实0.7业务内容/prompt/公开原定位、实际0.6历史SQL/费用零变化、新0.7generation不命中旧pin、全TXT双指纹/96真locator成立。无阻断问题，不重复整包。完整验收见[W03](phase6/main_auto_official_json/W03_ACCEPTANCE.md)。
+
+P7-RF已主线/远端47f497ad、精确CI38096229764绿、两根安装实际fresh业务入口验证完成。W04及pure W03已236fca08；本次正常提交共享接线/实际default0.7/公共测试/证据，再一次合master推送与新HEAD CI，不用旧CI替代。普通PWF工作文本换行统一回Git已有LF，原始evidence字节不格式化。
+
+W08[资料盘点](phase6/main_auto_official_json/evidence/w08-readiness-20261011.md)确认32精确已有Ref（当前mFresh scope均active）、CN半年报/IPO/USHTML/HK正式presentation/融资已下载，应以所属层实际复用/读取验真，不能以旧production索引miss重下或SQL复活retired。SSE86页完整官方JSON与来源资格缺口、真实配置供应商摘要、原三家研究四审仍待；工程loopback不计真实外部供应商费。P7-AUDIT未交付保持排他边界。
+
+Next Step：正常commit→canonical干净fast-forward→一次普通push/exact HEAD CI→W08/W09同as-of真实三家重跑。goal active，USD20/2M累计旧unknown不重置，原件/config/Dayu/邻仓WIP保留。
+
+## 2026-10-11T00:23:29.960736+00:00 — W03共享责任及真实公共三项GREEN，独立最终复核中
+
+共享17新+87受影响既有集中104PASS/22.88秒，7源Ruff/mypy绿；ROOT按先写好的W03_SHARED_CONTINUATION最后仅pure默认0.6→0.7，SHA64b724df…，不重标旧记录。最终public3实际3PASS/55.06pytest秒（全命令57.72秒），9源/新测试前后SHA完全相同；回执[public3](phase6/main_auto_official_json/evidence/w03-public-main-reception/green-public3-20261011T002035Z-a2218c36.json)。缺省新策略的具体行业许可变化进入rawTXT/两issuer两母页JSON实际模型prompt、generation与最终public原定位；同run resume SQL/budget不变、exact新run reuse三pin零新增POST。真正旧0.6 first公共CLI/Worker/publish→新0.7 finished history原binding/generation/SQL/费用/refs零变；新0.7另run不误命中旧pin，仅真实3缺项POST。全66324B微软TXT旧11ad9c7/newc5e4全指纹、103candidate/96selected/7omitted诚实partial，9管理层业务anchor、两saved版本逐group resolver及公开新anchorsearch/lookup96locators通过，原件与TEMP恢复。
+
+最后existingcustom fixture声明和unknown/missing frozen真实mixed模型构造前拒绝小组已绿（与104存在重叠不相加）；共享owner只收尾自己handoff，源码已停。独立复核只查关键共因/新反例，不重复public3或整包。资料覆盖只读盘点发现部分重要原件已在mFresh隔离catalog注册，需要下一实跑固定正确catalog、复用既有bytes，不能据旧production索引miss重下；详单准备中。
+
+仍0外部provider/model/费，不提高model400或实际预算上限，不新增审批/签收/canary。正常新HEAD并线push/exactCI尚待；旧accdeccc CI不能替这轮验收。Next Step：独立复核闭环→普通commit与一次并线push/exactCI→按W08/W09及P7-AUDIT交付边界推进真实三家四审/新三家/loop。goal active、真实研究未冒称完成。
+
+## 2026-10-11T00:15:29.387066+00:00 — W03公共3项真实RED与同一节点补强
+
+ROOT新增唯一tests/integration/test_w03_selector_public_node.py；真实mixed first/default、first0.6→fresh0.7 history及full TXT saved0.7 resolver一组3FAIL/33.53秒，前后8源码SHA完全相同，真实记录[RED](phase6/main_auto_official_json/evidence/w03-public-main-reception/red-public3-20261011T001138Z-f56d3951.json)。三问题分别：实际default仍0.6（计划最后切）、parent producer明确冻结0.7的新run仍返回Worker0.6而completed、saved0.7 resolver被current0.6拒绝。真正0.6首轮公共CLI/Worker完成→0.7 finished history SQL/ledger/refs零变已成立；不是事后手写旧DTO。内部共享owner另集中16FAIL/1PASS，源码6+一个内聚helper正在按所属责任修。
+
+独立只读方案核原mixed文本旧规则也可选、旧effort历史并不自动成为0.6，补在同一三项内，增加actual model prompt/generation版本、futuredefault0.7完整新旧fingerprint与9management anchors、真实公开evidence-search/lookup新锚点。没有新testworkflow/人工门，没有改model400输出或request原上限；ROOT新测试Ruff绿。一个初次Ruff只因沙箱不能创建隔离树cache，使用标准--no-cache无源码/规则改变、随即PASS，非产品RED。详细[公共方案](phase6/main_auto_official_json/evidence/w03-public-node-design.md)/[实施细则](phase6/main_auto_official_json/W03_SHARED_CONTINUATION.md)。
+
+0外部供应商/LLM/费用、原件与配置保留、自有TEMP恢复；default仍0.6.0，当前不得宣称版本接线和真实公司研究完成。Next Step：共享责任GREEN→ROOT一次默认切换与public3 GREEN/独立复核→正常并线push/exactCI。
+
+## 2026-10-11T00:07:43.720007+00:00 — P7-RF交付正式闭环，共享版本接线实施中
+
+P7-RF已验收、正常并主线与远端47f497ad，精确CI38096229764 success；两根安装的40实际业务CLI等验收保持原证据，不再次重跑。CWP完成的W04/纯W03责任节点已正常提交236fca0850800445bc5d89948049c38e7c80c2fb，pre-commit静态/host规则通过，21.74秒；尚未将此新提交推送，计划与共享接线大节点合并一次正常发布，当前canonical/remote仍accdeccc。公开发布不能用旧CI替新HEAD。
+
+内部共享owner按W03_SHARED_CONTINUATION先写RED，独占factory/runtime/select/official/verify/resolver，默认仍0.6.0；ROOT保留最后0.7默认切换、一个公共mixed/旧history/reuse集中节点和正常并线push/exactCI。内部另一路只读准备最小公共节点入口，避免反复整包测试。P7-AUDIT未收到交付，源不动。原三家真实四审、新三家泛化/loop和条件八家仍open；goal active，原件/config/Dayu/邻仓WIP保留，0外部provider/model/费，USD20/2M及旧unknown不重置。
+
+Next Step：共享责任GREEN与静态→ROOT默认切换及公共大节点/独立复核→normal发布/精确CI→原三家真实修后复验。
+
 ## 2026-10-11T00:03:32.361246+00:00 — W04与W03 pure源码责任节点完成，归档普通commit
 
 W04最终56责任与public3 GREEN、6恢复零新增请求/费/DB变化；独立六边界probe PASS（首轮一项仅probe frozen Mapping构造错误，保原记录、只重跑该边界）。None/空final、wire/finalSHA、真实unknown费用保守、<16KiB全envelope、scoped outbox与真实budget/storage归因全部成立。W03 pure集中109PASS，末尾4旧版本负控、30具体industry/财务拒绝、1全真实TXT回放及static绿；这些计数有交集，不相加。global0.7显式0.6的fundraising规则泄漏已有RED→effective分派修复；行业具体许可变化被_OBJECT提前过滤已有RED→具体行业对象×actualchange修复，套话仍False。完整旧0.6 MSFT指纹11ad9c7...保持，新0.7实际103candidate/96selected/7omitted且全部真locator回放，诚实partial。PDF原年报p44/IPO173–174小页与原件SHA公共读取成立，不冒称全财报通过。

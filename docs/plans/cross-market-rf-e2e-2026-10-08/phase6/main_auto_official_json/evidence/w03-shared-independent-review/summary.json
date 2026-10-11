@@ -1,0 +1,45 @@
+{
+  "schema_version": "w03-independent-final-summary/1",
+  "status": "accepted_engineering_node",
+  "source_stable": {
+    "src/company_wiki/automation/narrative_runtime.py": "3635775b4933b998a5b79a7047b326869815ff4e187c6af2531a2814acb64d9c",
+    "src/company_wiki/automation/narrative_worker_factory.py": "73000216cff325c602b811be457f2c7e35d2c4b8ffb9b90c14c13a07160e9d69",
+    "src/company_wiki/automation/narrative_select.py": "436e2500362d5c9082bdf7748a53519b232b66a44f62bd81abb4353bb9979974",
+    "src/company_wiki/automation/narrative_official_json.py": "3dd559f183e065fbce68daa870b83c0249e34eaadff99a661a962e329693d7b3",
+    "src/company_wiki/automation/narrative_verify.py": "dae39594f35a5f15c85c2b2398c596bd9b668df9cbc8d76b29fcc695ba579d08",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "5318557aff5b973e92071b845910b0d3d4d0912c08f90a6c2d10cac714c04f93",
+    "src/company_wiki/automation/narrative_selector_binding.py": "23fed8698f85c2a2f28277bd38266b61ae51fbd01dc2bb783f03d60adce73a45",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "64b724df8b879b6859832facd4d18cf7f306b927611439f037c554c6e557e616"
+  },
+  "own_probes": {
+    "count": 2,
+    "status": "pass",
+    "seconds": 0.18542979999620002,
+    "receipt_sha256": "fba0fec552ca72a62a17bf99ffadafe19fbcfd84827de4038ac2991eebd83f8b",
+    "driver_sha256": "7cf35ccbb982b57ffd54b93991f6d97476b68e2b2f95156f9f9e4c2a0bd230e0"
+  },
+  "reviewed_not_rerun_public3": {
+    "receipt": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\w03-public-main-reception\\green-public3-20261011T002035Z-a2218c36.json",
+    "receipt_sha256": "79f33afc829d85278fa0df0f9db53d600eef826bc9efb0389547d375de807cb7",
+    "log_sha256": "2819f07027259bb656926e17b53da0b12dc75041936a81d89c76e6fd6693f39d",
+    "returncode": 0,
+    "seconds": 57.71687999999995,
+    "source9_unchanged": true
+  },
+  "preserved_real_red": [
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\w03-public-main-reception\\red-public3-20261011T001138Z-f56d3951.json",
+      "sha256": "bf3a92c8ac38dd3b7e9a2cb3b5db1733a53242a7e44db051b83baddc498cab38",
+      "log_sha256": "04697e56ecf95e53d75765678532f52c0574087f6610468930394c5be6a93663",
+      "returncode": 1
+    }
+  ],
+  "source_count": 261,
+  "source_unchanged": true,
+  "w04_source_unchanged": true,
+  "protected_state_restored": true,
+  "external_calls": 0,
+  "new_cost_usd": 0,
+  "source_test_config_install_git_writes": 0,
+  "scope": "W03 default/pinned-selector runtime, immutable completed history, actual public engineering content/source locator; not configured-provider/financial-research quality closure"
+}

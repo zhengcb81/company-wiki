@@ -348,6 +348,7 @@ def test_factory_reads_frozen_generation_binding_and_checks_actual_execution_ver
         projection = persist(catalog, [ref])
         subject = NarrativeSubject.from_projection(projection)
         binding = {"schema_version": "narrative-run-binding/4", "execution_versions": {
+            "selector": "0.6.0",
             "projection_prompt": PROJECTION_NARRATIVE_PROMPT_VERSION,
             "projection_model_request_schema": PROJECTION_MODEL_REQUEST_SCHEMA,
             "official_json_adapter": NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION},

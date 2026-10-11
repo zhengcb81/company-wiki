@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w03-green-gaty5l69\\t",
+    "tests/unit/test_narrative_selector_binding.py",
+    "tests/integration/test_narrative_shared_selector_version.py",
+    "tests/unit/test_narrative_select_handler.py",
+    "tests/unit/test_narrative_verify_handler.py",
+    "tests/unit/test_narrative_retrieval.py",
+    "tests/integration/test_official_json_verify_handler.py",
+    "tests/integration/test_narrative_business_recall.py::test_native_json_business_structure_role_parent_issuer_and_real_replay"
+  ],
+  "exit_code": 1,
+  "seconds": 26.084862899995642
+}

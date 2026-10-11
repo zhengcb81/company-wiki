@@ -2,7 +2,7 @@
 
 ## 结论
 
-**PASS_ENGINEERING / publication_pending。** 官方逻辑subject与原PDF/TXT共用同一有限AUTO，P7-CWP已正常合隔离树。正常canonical/远端主线发布及该HEAD CI尚待；原三家研究、四审、新三家/loop不据此签完成。
+**PASS_ENGINEERING / published。** 官方逻辑subject与原PDF/TXT共用同一有限AUTO，P7-CWP已正常合主线；canonical/remote accdeccc737ccaf27d1698238a31af022960a3fa、精确CI38094790883 success（发布证据见evidence/root-final-07）。后续W04/pure W03正常提交236fca08，共享版本接线及其新HEAD发布尚待，不用旧CI替代。原三家研究、四审、新三家/loop不据此签完成。
 
 ## 真实证据索引（重复case不相加）
 
@@ -34,7 +34,7 @@
 
 ## 下一步
 
-正常commit/主线fast-forward/push/精确HEAD CI，在下个施工节点归档发布后生成的回执，避免仅为回执递归commit。之后继续根计划W04/W03/W05/W08/W09和真实研究。P7-RF/AUDIT待各自通知再独立接收，旧157问题/研究封存保持。
+本包原M1–M3工程已正常主线发布、精确CI通过。P7-RF也已独立接收、发布、安装验证，见P7_RF_ACCEPTANCE.md；P7-AUDIT尚未交付。当前继续W03共享版本接线/公共大节点，再正常发布最新HEAD，随后W05/W08/W09与真实研究。已完成W04和纯W03节点见236fca08；旧157问题/研究封存保持，不重写下面的历史过程记录。
 
 ## 原始证据归档字节
 

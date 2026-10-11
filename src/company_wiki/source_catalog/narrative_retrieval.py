@@ -504,7 +504,8 @@ class NarrativeEvidenceResolver:
         from company_wiki.source_catalog.narrative_evidence import (
             NARRATIVE_PARSER_NAME,
             NARRATIVE_SELECTOR_NAME,
-            NARRATIVE_SELECTOR_VERSION,
+            NarrativeSelectorVersionError,
+            resolve_narrative_selector_version,
             parse_pdf,
             parse_transcript_text,
             select_narrative_evidence,
@@ -518,11 +519,12 @@ class NarrativeEvidenceResolver:
             or contract.get("schema_version") != NARRATIVE_REPLAY_CONTRACT_SCHEMA_VERSION
         ):
             raise NarrativeEvidenceResolveError("unsupported replay contract")
-        if (
-            contract.get("selector_name") != NARRATIVE_SELECTOR_NAME
-            or contract.get("selector_version") != NARRATIVE_SELECTOR_VERSION
-        ):
+        if contract.get("selector_name") != NARRATIVE_SELECTOR_NAME or not isinstance(contract.get("selector_version"), str):
             raise NarrativeEvidenceResolveError("unsupported narrative selector version")
+        try:
+            selector_version = resolve_narrative_selector_version(contract["selector_version"])
+        except NarrativeSelectorVersionError as exc:
+            raise NarrativeEvidenceResolveError("unsupported narrative selector version") from exc
         parser_name = _required_string(contract, "parser_name")
         parser_version = _required_string(contract, "parser_version")
         if parser_name != NARRATIVE_PARSER_NAME:
@@ -619,7 +621,7 @@ class NarrativeEvidenceResolver:
             parsed,
             title=_required_string(record, "title"),
             existing_kind=existing_kind,
-            max_selected=max_selected,
+            max_selected=max_selected, selector_version=selector_version,
         )
         if (
             selected.document_kind != summary.get("document_kind")

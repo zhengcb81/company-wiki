@@ -13,7 +13,7 @@ from company_wiki.source_catalog.official_json_projection import ProjectionError
 
 from company_wiki.source_catalog.narrative_evidence import (
     NARRATIVE_SELECTOR_NAME,
-    NARRATIVE_SELECTOR_VERSION,
+    resolve_narrative_selector_version,
 )
 from company_wiki.source_catalog.source_reader import SourceReadError
 from company_wiki.source_catalog.transcript_text_extract import (
@@ -144,6 +144,7 @@ def _validate_dependency_identity(
     selected: NarrativeSelectResult,
     summary: NarrativeSummaryResult,
     normalization=None,
+    *, selector_version: str,
 ) -> None:
     if (
         selected.subject != payload.subject
@@ -167,7 +168,7 @@ def _validate_dependency_identity(
     if (
         not parser_current
         or selected.selector.name != NARRATIVE_SELECTOR_NAME
-        or selected.selector.version != NARRATIVE_SELECTOR_VERSION
+        or selected.selector.version != selector_version
         or (summary.model is not None and summary.model.prompt_version != active_prompt)
     ):
         raise _VerifyFailure(
@@ -187,7 +188,9 @@ class NarrativeVerifyHandler:
         normalization: NarrativeNormalization | None = None,
         projection_catalog: Any | None = None,
         generation_sha256: Callable[[NarrativeSubject], str] | None = None,
+        selector_version: str | None = None,
     ) -> None:
+        self._selector_version = resolve_narrative_selector_version(selector_version)
         self._reader = reader
         self._pdf_replayer = pdf_replayer
         self._normalization = normalization or NarrativeNormalization()
@@ -226,7 +229,8 @@ class NarrativeVerifyHandler:
         context.checkpoint()
         payload = self._payload(context)
         selected, summary = _dependencies(context)
-        _validate_dependency_identity(payload, selected, summary, self._normalization)
+        _validate_dependency_identity(payload, selected, summary, self._normalization,
+            selector_version=self._selector_version)
         if payload.subject.kind == "official_json":
             return self._execute_projection(context, payload, selected, summary)
         ref = source_ref(payload)

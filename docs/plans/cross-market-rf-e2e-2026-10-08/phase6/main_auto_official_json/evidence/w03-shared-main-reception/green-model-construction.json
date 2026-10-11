@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w03-final-6vs8vs2y\\t",
+    "tests/unit/test_narrative_selector_binding.py::test_factory_decodes_frozen_binding_once_and_pins_before_model"
+  ],
+  "exit_code": 0
+}

@@ -1,0 +1,98 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w03-green-7nbl5ef_\\t", "requested_basetemp_len": 52, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 17 items
+
+tests\unit\test_narrative_selector_binding.py FFFF........               [ 70%]
+tests\integration\test_narrative_shared_selector_version.py FF...        [100%]
+
+================================== FAILURES ===================================
+_ test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift[0.6.0] _
+tests\unit\test_narrative_selector_binding.py:52: in test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift
+    assert [span.to_dict() for span in selected.evidence_spans] == [span.to_dict() for span in expected.evidence_spans]
+E   assert [{'schema_ver...1', ...}, ...] == [{'schema_ver...7', ...}, ...]
+E     
+E     At index 0 diff: {'schema_version': '1.0.0', 'span_id': 'urn:company-wiki:evidence-span:sha256:bf94016b54ed5b73fafe9610eccdd2354c89cdc7417dfc0554b8dc29a136b30f', 'source_id': 'urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a', 'locator': 'loc:v1/paragraph:122/chars:13-188', 'coordinates': {'page_number': None, 'paragraph_index': 122, 'table_index': None, 'row_index': None, 'column_index': None, 'char_start': 13, 'char_end': 188}, 'raw_text': "Satya, maybe I'll start away from the numbers and ask if you could spend a minute ...
+E     
+E     ...Full output truncated (2 lines hidden), use '-vv' to show
+_ test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift[0.7.0] _
+tests\unit\test_narrative_selector_binding.py:52: in test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift
+    assert [span.to_dict() for span in selected.evidence_spans] == [span.to_dict() for span in expected.evidence_spans]
+E   assert [{'schema_ver...0', ...}, ...] == [{'schema_ver...9', ...}, ...]
+E     
+E     At index 0 diff: {'schema_version': '1.0.0', 'span_id': 'urn:company-wiki:evidence-span:sha256:bf94016b54ed5b73fafe9610eccdd2354c89cdc7417dfc0554b8dc29a136b30f', 'source_id': 'urn:company-wiki:source:sha256:4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a', 'locator': 'loc:v1/paragraph:122/chars:13-188', 'coordinates': {'page_number': None, 'paragraph_index': 122, 'table_index': None, 'row_index': None, 'column_index': None, 'char_start': 13, 'char_end': 188}, 'raw_text': "Satya, maybe I'll start away from the numbers and ask if you could spend a minute ...
+E     
+E     ...Full output truncated (2 lines hidden), use '-vv' to show
+_ test_runtime_registers_select_and_verify_with_same_effective_version[0.6.0] _
+src\company_wiki\automation\narrative_contracts.py:1215: in validate_against
+    validate_summary_draft(
+src\company_wiki\source_catalog\narrative_evidence.py:1720: in validate_summary_draft
+    validate_summary_claim(claim, known, draft.status)
+src\company_wiki\source_catalog\narrative_evidence.py:1746: in validate_summary_claim
+    _validate_claim_roles(claim, known)
+src\company_wiki\source_catalog\narrative_evidence.py:1755: in _validate_claim_roles
+    raise SummaryValidationError("non-company evidence cannot support a company statement")
+E   company_wiki.source_catalog.narrative_evidence.SummaryValidationError: non-company evidence cannot support a company statement
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_narrative_selector_binding.py:82: in test_runtime_registers_select_and_verify_with_same_effective_version
+    verified = handlers["source.narrative_verify"](verify_fixture._context(actual_selected, verify_fixture._summary(actual_selected)))
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:259: in _summary
+    result.validate_against(selected)
+src\company_wiki\automation\narrative_contracts.py:1223: in validate_against
+    raise NarrativeContractError(str(exc)) from exc
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: non-company evidence cannot support a company statement
+_ test_runtime_registers_select_and_verify_with_same_effective_version[0.7.0] _
+src\company_wiki\automation\narrative_contracts.py:1215: in validate_against
+    validate_summary_draft(
+src\company_wiki\source_catalog\narrative_evidence.py:1720: in validate_summary_draft
+    validate_summary_claim(claim, known, draft.status)
+src\company_wiki\source_catalog\narrative_evidence.py:1746: in validate_summary_claim
+    _validate_claim_roles(claim, known)
+src\company_wiki\source_catalog\narrative_evidence.py:1755: in _validate_claim_roles
+    raise SummaryValidationError("non-company evidence cannot support a company statement")
+E   company_wiki.source_catalog.narrative_evidence.SummaryValidationError: non-company evidence cannot support a company statement
+
+The above exception was the direct cause of the following exception:
+tests\unit\test_narrative_selector_binding.py:82: in test_runtime_registers_select_and_verify_with_same_effective_version
+    verified = handlers["source.narrative_verify"](verify_fixture._context(actual_selected, verify_fixture._summary(actual_selected)))
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_verify_handler.py:259: in _summary
+    result.validate_against(selected)
+src\company_wiki\automation\narrative_contracts.py:1223: in validate_against
+    raise NarrativeContractError(str(exc)) from exc
+E   company_wiki.automation.narrative_contracts.NarrativeContractError: non-company evidence cannot support a company statement
+_ test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays[0.6.0] _
+tests\integration\test_narrative_shared_selector_version.py:46: in test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays
+    assert selected.result["evidence_spans"] == [span.to_dict() for span in expected.evidence_spans]
+E   AssertionError: assert (mappingproxy..._flags': ()})) == [{'schema_ver...raph:3', ...}]
+E     
+E     At index 0 diff: mappingproxy({'schema_version': '1.0.0', 'span_id': 'urn:company-wiki:evidence-span:sha256:3d5a32e6f40972c3d62576749baaef0c30f41d4d70d0013a28bb33472b20d17e', 'source_id': 'urn:company-wiki:source:sha256:60c244a2afcf6bf0fed81ce42fa6daa9af4fbe2836e27ab4b8e20491d090dc52', 'locator': 'loc:v1/paragraph:2', 'coordinates': mappingproxy({'page_number': None, 'paragraph_index': 2, 'table_index': None, 'row_index': None, 'column_index': None, 'char_start': None, 'char_end': None}), 'raw_text': '\t  公司的产品分为控制器与执行器，控制器通过直销供给设备厂，执行器由海外渠道销售；关键部件须完成客户验证。\r\n', 'struct...
+E     
+E     ...Full output truncated (2 lines hidden), use '-vv' to show
+_ test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays[0.7.0] _
+tests\integration\test_narrative_shared_selector_version.py:46: in test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays
+    assert selected.result["evidence_spans"] == [span.to_dict() for span in expected.evidence_spans]
+E   AssertionError: assert (mappingproxy..._flags': ()})) == [{'schema_ver...raph:3', ...}]
+E     
+E     At index 0 diff: mappingproxy({'schema_version': '1.0.0', 'span_id': 'urn:company-wiki:evidence-span:sha256:e8e9630963058003ff6e7135a367caf948863a07d233d068c9a8d82275af5021', 'source_id': 'urn:company-wiki:source:sha256:60c244a2afcf6bf0fed81ce42fa6daa9af4fbe2836e27ab4b8e20491d090dc52', 'locator': 'loc:v1/paragraph:2', 'coordinates': mappingproxy({'page_number': None, 'paragraph_index': 2, 'table_index': None, 'row_index': None, 'column_index': None, 'char_start': None, 'char_end': None}), 'raw_text': '\t  公司的产品分为控制器与执行器，控制器通过直销供给设备厂，执行器由海外渠道销售；关键部件须完成客户验证。\r\n', 'struct...
+E     
+E     ...Full output truncated (2 lines hidden), use '-vv' to show
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_selector_binding.py::test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift[0.6.0]
+FAILED tests/unit/test_narrative_selector_binding.py::test_raw_frozen_policy_executes_actual_spans_and_verifies_under_default_drift[0.7.0]
+FAILED tests/unit/test_narrative_selector_binding.py::test_runtime_registers_select_and_verify_with_same_effective_version[0.6.0]
+FAILED tests/unit/test_narrative_selector_binding.py::test_runtime_registers_select_and_verify_with_same_effective_version[0.7.0]
+FAILED tests/integration/test_narrative_shared_selector_version.py::test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays[0.6.0]
+FAILED tests/integration/test_narrative_shared_selector_version.py::test_official_actual_version_keeps_native_parent_roles_whitespace_partial_and_replays[0.7.0]
+================== 6 failed, 11 passed, 1 warning in 18.84s ===================

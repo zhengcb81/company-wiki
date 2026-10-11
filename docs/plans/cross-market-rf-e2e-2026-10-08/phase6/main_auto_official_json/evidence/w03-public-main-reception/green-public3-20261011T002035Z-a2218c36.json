@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-11T00:21:33.623547+00:00",
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-s",
+    "-p",
+    "no:cacheprovider",
+    "tests/integration/test_w03_selector_public_node.py",
+    "--tb=short"
+  ],
+  "returncode": 0,
+  "seconds": 57.71687999999995,
+  "log_sha256": "2819f07027259bb656926e17b53da0b12dc75041936a81d89c76e6fd6693f39d",
+  "before_sha": {
+    "tests/integration/test_w03_selector_public_node.py": "30200e4504663ae8a474b0fd9dab0392b2b42b5ff6b43eff7af5e6aaaf1e5f8a",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "64b724df8b879b6859832facd4d18cf7f306b927611439f037c554c6e557e616",
+    "src/company_wiki/automation/narrative_runtime.py": "3635775b4933b998a5b79a7047b326869815ff4e187c6af2531a2814acb64d9c",
+    "src/company_wiki/automation/narrative_worker_factory.py": "73000216cff325c602b811be457f2c7e35d2c4b8ffb9b90c14c13a07160e9d69",
+    "src/company_wiki/automation/narrative_select.py": "436e2500362d5c9082bdf7748a53519b232b66a44f62bd81abb4353bb9979974",
+    "src/company_wiki/automation/narrative_official_json.py": "3dd559f183e065fbce68daa870b83c0249e34eaadff99a661a962e329693d7b3",
+    "src/company_wiki/automation/narrative_verify.py": "dae39594f35a5f15c85c2b2398c596bd9b668df9cbc8d76b29fcc695ba579d08",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "5318557aff5b973e92071b845910b0d3d4d0912c08f90a6c2d10cac714c04f93",
+    "src/company_wiki/automation/narrative_selector_binding.py": "23fed8698f85c2a2f28277bd38266b61ae51fbd01dc2bb783f03d60adce73a45"
+  },
+  "after_sha": {
+    "tests/integration/test_w03_selector_public_node.py": "30200e4504663ae8a474b0fd9dab0392b2b42b5ff6b43eff7af5e6aaaf1e5f8a",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "64b724df8b879b6859832facd4d18cf7f306b927611439f037c554c6e557e616",
+    "src/company_wiki/automation/narrative_runtime.py": "3635775b4933b998a5b79a7047b326869815ff4e187c6af2531a2814acb64d9c",
+    "src/company_wiki/automation/narrative_worker_factory.py": "73000216cff325c602b811be457f2c7e35d2c4b8ffb9b90c14c13a07160e9d69",
+    "src/company_wiki/automation/narrative_select.py": "436e2500362d5c9082bdf7748a53519b232b66a44f62bd81abb4353bb9979974",
+    "src/company_wiki/automation/narrative_official_json.py": "3dd559f183e065fbce68daa870b83c0249e34eaadff99a661a962e329693d7b3",
+    "src/company_wiki/automation/narrative_verify.py": "dae39594f35a5f15c85c2b2398c596bd9b668df9cbc8d76b29fcc695ba579d08",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "5318557aff5b973e92071b845910b0d3d4d0912c08f90a6c2d10cac714c04f93",
+    "src/company_wiki/automation/narrative_selector_binding.py": "23fed8698f85c2a2f28277bd38266b61ae51fbd01dc2bb783f03d60adce73a45"
+  },
+  "concurrent_source_changes": [],
+  "actual_default": "0.7.0",
+  "external_vendor_calls": 0,
+  "fee_usd": 0
+}

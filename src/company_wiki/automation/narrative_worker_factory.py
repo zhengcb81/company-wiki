@@ -11,6 +11,9 @@ from company_wiki.source_catalog import SourceCatalog
 from company_wiki.source_catalog.config import load_catalog_config
 from company_wiki.source_catalog.source_reader import SourceVersionReader
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
+from company_wiki.source_catalog.narrative_evidence import (
+    NarrativeSelectorVersionError, resolve_narrative_selector_version,
+)
 
 from .migrations import InvalidDatabasePathError
 from .narrative_http_model import NarrativeHTTPModel
@@ -87,14 +90,17 @@ def _contains_projected_work(binding: dict[str, Any], manifests: dict) -> bool:
     return False
 
 
-def _generation_values(binding_json: str | None) -> dict[str, str]:
+def _runtime_snapshot(binding_json: str | None) -> tuple[dict[str, str], str]:
     """Read the coordinator-frozen snapshot; do not repeat manifest signing/parsing."""
     if binding_json is None:
-        return {}
+        return {}, resolve_narrative_selector_version()
     try:
         binding = json.loads(binding_json)
         versions = binding.get("execution_versions", {})
         manifests = binding.get("generation_manifests", {})
+        if not isinstance(versions, dict) or not isinstance(versions.get("selector"), str):
+            raise NarrativeSelectorVersionError("NARRATIVE_RUN_SELECTOR_VERSION_UNAVAILABLE")
+        selector_version = resolve_narrative_selector_version(versions["selector"])
         if not isinstance(manifests, dict):
             raise ValueError("NARRATIVE_RUN_GENERATION_INVALID")
         if binding.get("schema_version") == "narrative-run-binding/4":
@@ -115,9 +121,14 @@ def _generation_values(binding_json: str | None) -> dict[str, str]:
                     or not isinstance(value, str) or re.fullmatch(r"[0-9a-f]{64}", value) is None):
                 raise ValueError("NARRATIVE_RUN_GENERATION_INVALID")
             values[item_key] = value
-        return values
+        return values, selector_version
     except (AttributeError, TypeError, json.JSONDecodeError):
         raise ValueError("NARRATIVE_RUN_GENERATION_INVALID") from None
+
+
+def _generation_values(binding_json: str | None) -> dict[str, str]:
+    """Compatibility seam; runtime reads the complete snapshot exactly once."""
+    return _runtime_snapshot(binding_json)[0]
 
 
 def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
@@ -149,7 +160,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     if spec.role in {"model", "mixed"} and run.blocked:
         raise ValueError("NARRATIVE_RUN_BLOCKED")
 
-    generation_values = _generation_values(run.binding_json)
+    generation_values, selector_version = _runtime_snapshot(run.binding_json)
     project_root = Path(options["project_root"])
     config_path = Path(options["catalog_config_path"])
     catalog = SourceCatalog(load_catalog_config(config_path, project_root=project_root))
@@ -171,7 +182,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     register_narrative_handlers(
         executor,
         NarrativeRuntimeDependencies(reader=reader, model=model, model_caller=caller, normalization=normalization,
-            projection_catalog=catalog,
+            projection_catalog=catalog, selector_version=selector_version,
             generation_sha256=(lambda subject: generation_values[subject.item_key]) if generation_values else None),
     )
     runtime = WorkerRuntime(registry=registry, executor=executor, model_client=model)

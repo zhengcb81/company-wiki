@@ -13,10 +13,8 @@ from company_wiki.source_catalog.narrative_document import (
 from company_wiki.source_catalog.narrative_evidence import (
     NARRATIVE_PARSER_VERSION,
     NARRATIVE_SELECTOR_NAME,
-    NARRATIVE_SELECTOR_VERSION,
     parse_pdf_bytes,
     parse_transcript_text,
-    select_narrative_evidence,
 )
 from company_wiki.source_catalog.narrative_language import NarrativeLanguageError
 from company_wiki.source_catalog.official_json_projection import ProjectionError
@@ -33,6 +31,7 @@ from company_wiki.source_contract import EvidenceSpan
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 
 from .execution_context import JobExecutionContext
+from .narrative_selector_binding import bind_narrative_selector
 from .narrative_formats import NORMALIZED_MIME_TYPES, parser_component
 from .narrative_official_json import (
     OfficialProjectionAdapterError,
@@ -208,12 +207,13 @@ class NarrativeSelectHandler:
         reader: NarrativeSourceReader,
         pdf_parser: PdfBytesParser = parse_pdf_bytes,
         selector: NarrativeSelector | None = None,
+        selector_version: str | None = None,
         normalization: NarrativeNormalization | None = None,
         projection_catalog: Any | None = None,
     ) -> None:
         self._reader = reader
         self._pdf_parser = pdf_parser
-        self._selector = selector or select_narrative_evidence
+        self._selector = bind_narrative_selector(selector, selector_version=selector_version)
         self._normalization = normalization or NarrativeNormalization()
         self._projection_catalog = projection_catalog
 
@@ -285,7 +285,7 @@ class NarrativeSelectHandler:
         review = prompt_review_value(opened)
         context.checkpoint()
         work = self._select(payload, opened.data, context)
-        raw = self._result_dict(payload, review, work)
+        raw = self._result_dict(payload, review, work, selector_version=self._selector.selector_version)
         result = NarrativeSelectResult.from_dict(raw)
         context.checkpoint()
         return HandlerResult(
@@ -357,7 +357,7 @@ class NarrativeSelectHandler:
             "subject_binding": view.subject.to_dict(),
             "source_metadata": payload.source_metadata.to_dict(),
             "parser": {"name": parser_name, "version": parser_version},
-            "selector": {"name": NARRATIVE_SELECTOR_NAME, "version": NARRATIVE_SELECTOR_VERSION},
+            "selector": {"name": NARRATIVE_SELECTOR_NAME, "version": self._selector.selector_version},
             "selection": selection.to_dict(),
             "evidence_spans": [span.to_dict() for span in package.evidence_spans],
             "prompt_review": review.to_dict(), "summary_scope": "selected_evidence_only",
@@ -542,6 +542,7 @@ class NarrativeSelectHandler:
         payload: SourceRevisionEventPayload,
         review: PromptReviewValue,
         work: _SelectionWork,
+        *, selector_version: str,
     ) -> dict[str, Any]:
         material = work.material
         bindings = (
@@ -563,7 +564,7 @@ class NarrativeSelectHandler:
             },
             "selector": {
                 "name": NARRATIVE_SELECTOR_NAME,
-                "version": NARRATIVE_SELECTOR_VERSION,
+                "version": selector_version,
             },
             "selection": _selection_value(work.parsed, work.package).to_dict(),
             "evidence_spans": [

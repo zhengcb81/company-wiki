@@ -147,7 +147,7 @@ def test_no_native_fields_have_no_guessed_language_or_summary(monkeypatch):
     assert view.evidence_spans == ()
     def forbidden(*_args, **_kwargs):
         raise AssertionError("empty/undetermined source must not run selector or model")
-    package = adapter.select_verified_projection(view, title="Investor relations", selector=forbidden)
+    package = adapter.select_verified_projection(view, title="Investor relations", selector=forbidden, selector_version="0.6.0")
     assert not package.evidence_spans
     assert package.status == "skipped_no_narrative"
     assert package.coverage_complete is True

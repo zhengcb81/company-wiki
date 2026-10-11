@@ -74,7 +74,7 @@ NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # and keeps unrecognized business documents reviewable. The version also pins
 # batch generation identity, so old selection results cannot be silently reused.
 # Parsing, source bytes and locator construction remain unchanged.
-NARRATIVE_SELECTOR_VERSION = "0.6.0"
+NARRATIVE_SELECTOR_VERSION = "0.7.0"
 SUPPORTED_NARRATIVE_SELECTOR_VERSIONS = frozenset({"0.6.0", "0.7.0"})
 
 

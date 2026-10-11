@@ -20,6 +20,8 @@ from company_wiki.source_catalog.narrative_document import (
     DocumentStructure, NarrativeEvidencePackage, NarrativeUnit,
 )
 from company_wiki.source_catalog.narrative_evidence import select_narrative_evidence
+
+from .narrative_selector_binding import bind_narrative_selector
 from company_wiki.source_catalog.narrative_language import (
     NarrativeLanguageError, detect_narrative_text_language,
 )
@@ -230,7 +232,8 @@ def _unit(span: EvidenceSpan) -> NarrativeUnit:
 
 
 def select_verified_projection(view: VerifiedProjectionView, *, title: str,
-                               selector: ProjectionSelector = select_narrative_evidence
+                               selector: ProjectionSelector = select_narrative_evidence,
+                               selector_version: str | None = None
                                ) -> NarrativeEvidencePackage:
     """Reuse the pure selector; package source fields are a real FK anchor only.
 
@@ -238,6 +241,7 @@ def select_verified_projection(view: VerifiedProjectionView, *, title: str,
     spans keep their actual parents, even when the compatibility package has
     a single real parent anchor. No mixed-role record is joined into one quote.
     """
+    bound_selector = bind_narrative_selector(selector, selector_version=selector_version)
     anchor = view.subject.anchor_ref
     native_spans = tuple(span for span in view.evidence_spans if span.raw_text and span.raw_text.strip())
     if view.language is None or not native_spans:
@@ -251,7 +255,7 @@ def select_verified_projection(view: VerifiedProjectionView, *, title: str,
     units = tuple(_unit(span) for span in native_spans)
     parsed = _ProjectionStructure(source_id=anchor["source_id"], source_sha256=anchor["content_sha256"],
         language=view.language, units=units, _complete=view.coverage_complete)
-    package = selector(parsed, title=title, existing_kind="investor_relations")
+    package = bound_selector(parsed, title=title, existing_kind="investor_relations")
     if not view.coverage_complete and package.status != "blocked":
         return replace(package, coverage_complete=False, status="partial")
     return package

@@ -1,0 +1,86 @@
+{
+  "schema_version": "w03-shared-independent-review/1",
+  "probes": [
+    {
+      "name": "falsey-custom-actual-legacy-policy-and-no-typeerror-retry",
+      "status": "pass",
+      "details": {
+        "actual_default": "0.7.0",
+        "actual_custom_pin": "0.6.0",
+        "custom_calls": 1,
+        "truthiness_calls": 0,
+        "new_industry_absent_old_present_default": true,
+        "internal_typeerror_calls": 1,
+        "rebound_old_pin_unchanged": true
+      }
+    },
+    {
+      "name": "forged-bound-unknown-cannot-bypass-real-complete-empty-projection",
+      "status": "pass",
+      "details": {
+        "coverage_complete": true,
+        "native_language": null,
+        "forged_unknown_bound_rejected": true,
+        "actual_supported_old_handler_pin": "0.6.0",
+        "metadata_language": "unknown",
+        "status": "skipped_no_narrative",
+        "custom_invocations": 0,
+        "owned_catalog_restored": true,
+        "original_bytes_unchanged": true
+      }
+    }
+  ],
+  "shared_before_sha256": {
+    "src/company_wiki/automation/narrative_runtime.py": "3635775b4933b998a5b79a7047b326869815ff4e187c6af2531a2814acb64d9c",
+    "src/company_wiki/automation/narrative_worker_factory.py": "73000216cff325c602b811be457f2c7e35d2c4b8ffb9b90c14c13a07160e9d69",
+    "src/company_wiki/automation/narrative_select.py": "436e2500362d5c9082bdf7748a53519b232b66a44f62bd81abb4353bb9979974",
+    "src/company_wiki/automation/narrative_official_json.py": "3dd559f183e065fbce68daa870b83c0249e34eaadff99a661a962e329693d7b3",
+    "src/company_wiki/automation/narrative_verify.py": "dae39594f35a5f15c85c2b2398c596bd9b668df9cbc8d76b29fcc695ba579d08",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "5318557aff5b973e92071b845910b0d3d4d0912c08f90a6c2d10cac714c04f93",
+    "src/company_wiki/automation/narrative_selector_binding.py": "23fed8698f85c2a2f28277bd38266b61ae51fbd01dc2bb783f03d60adce73a45",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "64b724df8b879b6859832facd4d18cf7f306b927611439f037c554c6e557e616"
+  },
+  "w04_expected_sha256": {
+    "src/company_wiki/automation/narrative_model.py": "c4d213e2eef4d4e9372ebc1af1ae497d811768ab8a1c7dad97f1d6c72508aa66",
+    "src/company_wiki/automation/narrative_http_model.py": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+    "src/company_wiki/automation/narrative_model_caller.py": "abee99f0a93c44aca7dc62d3d002c6e90aca48984839a488bbc098e1f086ff06",
+    "src/company_wiki/automation/narrative_summarize.py": "c438640fffc7fccb204434c3dde27cd0b3d6bca4c6f88ccedf05114d4b2fd035",
+    "src/company_wiki/automation/narrative_batch.py": "3c4eaab154d12f4a2125b0e5a8848d749c7aed07d886870cfba5cf5349c79b0a",
+    "src/company_wiki/automation/store.py": "ca021fe84e2157b846347103773b21f86092cc5e9e9d3bb17d5ff53858aa02e2",
+    "src/company_wiki/automation/narrative_failed_final.py": "0263148027b439f727cea4d9255ade074b8347b81f0398ad1e4b6c050e0b9cb8"
+  },
+  "provider_calls": 0,
+  "external_model_calls": 0,
+  "new_cost_usd": 0,
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w03-independent-pll4rt_c",
+  "public_receipt_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\w03-public-main-reception\\green-public3-20261011T002035Z-a2218c36.json",
+  "status": "pass",
+  "shared_after_sha256": {
+    "src/company_wiki/automation/narrative_runtime.py": "3635775b4933b998a5b79a7047b326869815ff4e187c6af2531a2814acb64d9c",
+    "src/company_wiki/automation/narrative_worker_factory.py": "73000216cff325c602b811be457f2c7e35d2c4b8ffb9b90c14c13a07160e9d69",
+    "src/company_wiki/automation/narrative_select.py": "436e2500362d5c9082bdf7748a53519b232b66a44f62bd81abb4353bb9979974",
+    "src/company_wiki/automation/narrative_official_json.py": "3dd559f183e065fbce68daa870b83c0249e34eaadff99a661a962e329693d7b3",
+    "src/company_wiki/automation/narrative_verify.py": "dae39594f35a5f15c85c2b2398c596bd9b668df9cbc8d76b29fcc695ba579d08",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "5318557aff5b973e92071b845910b0d3d4d0912c08f90a6c2d10cac714c04f93",
+    "src/company_wiki/automation/narrative_selector_binding.py": "23fed8698f85c2a2f28277bd38266b61ae51fbd01dc2bb783f03d60adce73a45",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "64b724df8b879b6859832facd4d18cf7f306b927611439f037c554c6e557e616"
+  },
+  "all_source_unchanged": true,
+  "all_source_count": 261,
+  "w04_source_unchanged": true,
+  "protected_sha256": {
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\integration\\test_w03_selector_public_node.py": "30200e4504663ae8a474b0fd9dab0392b2b42b5ff6b43eff7af5e6aaaf1e5f8a",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\tests\\fixtures\\narrative_real_transcript\\MSFT_Q4_2026_earnings_call.txt": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\w03-public-node-design.md": "f52a1bfbbb47e62ecd3e6c68ec59a4ef8af65ccb4a9085df9802ed48112d196d",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\w03-shared-main-reception\\HANDOFF.md": "34b526470dd85aa9338ed27c3f5500108c3826153e86812392c8a7d5637b056a",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\w03-shared-main-reception\\source-after.json": "783668a786b80edf486da2bdacf1069bce60f2da93fbea7d25aa98314aa1a9d4",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\w03-public-main-reception\\green-public3-20261011T002035Z-a2218c36.json": "79f33afc829d85278fa0df0f9db53d600eef826bc9efb0389547d375de807cb7",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589"
+  },
+  "protected_unchanged": true,
+  "environment_unchanged": true,
+  "network_attempts": 0,
+  "seconds": 0.18542979999620002,
+  "owned_temp_removed": true
+}

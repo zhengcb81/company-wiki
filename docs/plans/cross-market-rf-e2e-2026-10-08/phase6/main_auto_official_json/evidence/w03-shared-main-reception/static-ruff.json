@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "ruff",
+    "check",
+    "--no-cache",
+    "src/company_wiki/automation/narrative_selector_binding.py",
+    "src/company_wiki/automation/narrative_worker_factory.py",
+    "src/company_wiki/automation/narrative_runtime.py",
+    "src/company_wiki/automation/narrative_select.py",
+    "src/company_wiki/automation/narrative_official_json.py",
+    "src/company_wiki/automation/narrative_verify.py",
+    "src/company_wiki/source_catalog/narrative_retrieval.py",
+    "tests/unit/test_narrative_selector_binding.py",
+    "tests/integration/test_narrative_shared_selector_version.py",
+    "tests/unit/test_narrative_select_handler.py",
+    "tests/unit/test_official_json_narrative_adapter.py",
+    "tests/integration/test_official_json_verify_handler.py",
+    "tests/integration/test_narrative_business_recall.py"
+  ],
+  "exit_code": 0,
+  "seconds": 0.11491729999397648
+}
