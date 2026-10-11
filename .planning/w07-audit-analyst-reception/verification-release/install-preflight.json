@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "tools/sync_skill.py",
+    "--check"
+  ],
+  "exit_code": 1,
+  "seconds": 0.9836695999983931,
+  "stdout": "{\n  \"installations\": [\n    {\n      \"destination\": \"C:\\\\Users\\\\郑曾波\\\\.claude\\\\skills\\\\revenue-forecast-audit\",\n      \"files\": 28,\n      \"changed\": [],\n      \"mismatches\": [\n        \"scripts/analyst_risk_audit.py\",\n        \"references/analyst-risk-audit.md\",\n        \"references/review-analyst.md\"\n      ],\n      \"status\": \"DRIFT\"\n    },\n    {\n      \"destination\": \"C:\\\\Users\\\\郑曾波\\\\.agents\\\\skills\\\\revenue-forecast-audit\",\n      \"files\": 28,\n      \"changed\": [],\n      \"mismatches\": [\n        \"scripts/analyst_risk_audit.py\",\n        \"references/analyst-risk-audit.md\",\n        \"references/review-analyst.md\"\n      ],\n      \"status\": \"DRIFT\"\n    }\n  ]\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "tools/run_analyst_risk_e2e.py",
+    "--owned-root",
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\root-audit-analyst-reception\\.tmp\\root-w07-2b35cc72",
+    "--out-root",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w07-audit-analyst-reception\\verification\\e2e"
+  ],
+  "exit_code": 1,
+  "wall_seconds": 1.7477747000084491
+}

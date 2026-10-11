@@ -1,0 +1,87 @@
+{
+  "schema": "analyst-risk-e2e/1",
+  "status": "COMPLETE",
+  "tool": "run_analyst_risk_e2e.py",
+  "real_provider_calls": 0,
+  "real_llm_calls": 0,
+  "dollars": 0,
+  "checks": [
+    {
+      "name": "no_context_run",
+      "ok": true,
+      "evidence": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\root-audit-analyst-reception\\.tmp\\root-w07-2d52c0f8\\attempts\\20261011T191202Z-3bb385a1\\report.json"
+    },
+    {
+      "name": "absent_future_actuals_stay_null",
+      "ok": true,
+      "evidence": "A18 wape null; years_unchecked 2026/2027"
+    },
+    {
+      "name": "missing_inputs_are_not_a_pass",
+      "ok": true,
+      "evidence": "no-context gaps stay NOT_CHECKED; no PASS; flags permanent"
+    },
+    {
+      "name": "supported_context_observed",
+      "ok": true,
+      "evidence": "A05/A10/A17 observed; A18 scope 2026 checked, 2027 unchecked"
+    },
+    {
+      "name": "support_granularity_preserved",
+      "ok": true,
+      "evidence": "12 A06 findings, one per native support entry; 2027 support gaps never inherit the 2026 scope"
+    },
+    {
+      "name": "support_scope_not_expanded",
+      "ok": true,
+      "evidence": "declared range covers Segment A FY2026 only"
+    },
+    {
+      "name": "missing_baseline_needs_review",
+      "ok": true,
+      "evidence": "beat without baseline is UNRESOLVED; consensus is not fabricated"
+    },
+    {
+      "name": "redaction_of_secrets",
+      "ok": true,
+      "evidence": "api_key/token patterns and env secrets are REDACTED"
+    },
+    {
+      "name": "counterexample_not_flipped_to_pass",
+      "ok": true,
+      "evidence": "same-source/target-derived/single-shock/unit-mismatch all UNRESOLVED"
+    },
+    {
+      "name": "pointers_resolve",
+      "ok": true,
+      "evidence": "every non-context finding pointer resolves in its native document"
+    },
+    {
+      "name": "attempt_isolation_no_overwrite",
+      "ok": true,
+      "evidence": "5 distinct attempt dirs; earlier report unchanged"
+    },
+    {
+      "name": "failure_recovery",
+      "ok": true,
+      "evidence": "unknown context schema exits 1 with error envelope, no partial attempt, and the next valid run succeeds"
+    },
+    {
+      "name": "fixed_inputs_unchanged",
+      "ok": true,
+      "evidence": "native trio and context fixtures are byte-identical before/after"
+    }
+  ],
+  "run_labels": [
+    "counterexample",
+    "missing_baseline",
+    "no_context",
+    "supported"
+  ],
+  "source_truth_verified": false,
+  "economic_reasonableness": "not_evaluated",
+  "owned_root": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\root-audit-analyst-reception\\.tmp\\root-w07-2d52c0f8",
+  "initial_owned_state": "absent",
+  "final_owned_state": "absent",
+  "scratch_restored": true
+}

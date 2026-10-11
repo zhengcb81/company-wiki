@@ -1,0 +1,2630 @@
+{
+  "schema_version": "analyst-risk-audit/1",
+  "check_kind": "analyst_model_risk_diagnostics",
+  "source_truth_verified": false,
+  "economic_reasonableness": "not_evaluated",
+  "checkpoints": [
+    {
+      "checkpoint_id": "A02",
+      "status": "OBSERVED",
+      "reasons": [
+        "driver_linked_to_revenue_path"
+      ],
+      "missing_fields": [],
+      "unresolved_scope": [],
+      "finding_ids": [
+        "A02-F001",
+        "A02-F002"
+      ]
+    },
+    {
+      "checkpoint_id": "A05",
+      "status": "NOT_CHECKED",
+      "reasons": [
+        "no_checkable_constraint_recorded"
+      ],
+      "missing_fields": [
+        "context.constraint_note",
+        "revenue_constraints"
+      ],
+      "unresolved_scope": [
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        }
+      ],
+      "finding_ids": [
+        "A05-F001"
+      ]
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "conversion_relationship_missing",
+        "conversion_relationship_observed"
+      ],
+      "missing_fields": [
+        "conversion evidence for Segment A/base/FY2027",
+        "conversion evidence for Segment A/high/FY2027",
+        "conversion evidence for Segment A/low/FY2027",
+        "conversion evidence for Segment B/base/FY2026",
+        "conversion evidence for Segment B/base/FY2027",
+        "conversion evidence for Segment B/high/FY2026",
+        "conversion evidence for Segment B/high/FY2027",
+        "conversion evidence for Segment B/low/FY2026",
+        "conversion evidence for Segment B/low/FY2027"
+      ],
+      "unresolved_scope": [
+        {
+          "segment": "Segment A",
+          "year": "2027",
+          "scenario": "low"
+        },
+        {
+          "segment": "Segment A",
+          "year": "2027",
+          "scenario": "base"
+        },
+        {
+          "segment": "Segment A",
+          "year": "2027",
+          "scenario": "high"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2026",
+          "scenario": "low"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2027",
+          "scenario": "low"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2026",
+          "scenario": "base"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2027",
+          "scenario": "base"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2026",
+          "scenario": "high"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2027",
+          "scenario": "high"
+        }
+      ],
+      "finding_ids": [
+        "A06-F001",
+        "A06-F002",
+        "A06-F003",
+        "A06-F004",
+        "A06-F005",
+        "A06-F006",
+        "A06-F007",
+        "A06-F008",
+        "A06-F009",
+        "A06-F010",
+        "A06-F011",
+        "A06-F012"
+      ]
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_reference_unresolved",
+        "independence_unknown_not_assumed",
+        "no_management_target_declared",
+        "same_source_not_independent"
+      ],
+      "missing_fields": [
+        "management_targets"
+      ],
+      "unresolved_scope": [
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        }
+      ],
+      "finding_ids": [
+        "A08-F001",
+        "A08-F002",
+        "A08-F003",
+        "A08-F004",
+        "A08-F005",
+        "A08-F006",
+        "A08-F007",
+        "A08-F008",
+        "A08-F009",
+        "A08-F010",
+        "A08-F011",
+        "A08-F012",
+        "A08-F013",
+        "A08-F014",
+        "A08-F015",
+        "A08-F016",
+        "A08-F017",
+        "A08-F018",
+        "A08-F019",
+        "A08-F020",
+        "A08-F021",
+        "A08-F022",
+        "A08-F023",
+        "A08-F024",
+        "A08-F025",
+        "A08-F026",
+        "A08-F027",
+        "A08-F028"
+      ]
+    },
+    {
+      "checkpoint_id": "A10",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "beat_period_incomparable",
+        "beat_unit_incomparable"
+      ],
+      "missing_fields": [],
+      "unresolved_scope": [
+        {
+          "segment": null,
+          "year": "2026",
+          "scenario": null
+        }
+      ],
+      "finding_ids": [
+        "A10-F001"
+      ]
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "operating_range_observed",
+        "operating_range_unknown",
+        "range_derived_from_target",
+        "range_timing_unknown",
+        "support_period_gap"
+      ],
+      "missing_fields": [
+        "operating range covering Segment A/FY2027",
+        "operating range covering Segment B/FY2026",
+        "operating range covering Segment B/FY2027",
+        "source_claim_ids",
+        "support_years/scope.segment"
+      ],
+      "unresolved_scope": [
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        },
+        {
+          "segment": "Segment A",
+          "year": "2027",
+          "scenario": "low"
+        },
+        {
+          "segment": "Segment A",
+          "year": "2027",
+          "scenario": "base"
+        },
+        {
+          "segment": "Segment A",
+          "year": "2027",
+          "scenario": "high"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2026",
+          "scenario": "low"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2027",
+          "scenario": "low"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2026",
+          "scenario": "base"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2027",
+          "scenario": "base"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2026",
+          "scenario": "high"
+        },
+        {
+          "segment": "Segment B",
+          "year": "2027",
+          "scenario": "high"
+        }
+      ],
+      "finding_ids": [
+        "A13-F001",
+        "A13-F002",
+        "A13-F003",
+        "A13-F004",
+        "A13-F005",
+        "A13-F006",
+        "A13-F007",
+        "A13-F008",
+        "A13-F009",
+        "A13-F010",
+        "A13-F011"
+      ]
+    },
+    {
+      "checkpoint_id": "A17",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "joint_stress_scope_unresolved"
+      ],
+      "missing_fields": [],
+      "unresolved_scope": [
+        {
+          "segment": null,
+          "year": null,
+          "scenario": null
+        }
+      ],
+      "finding_ids": [
+        "A17-F001"
+      ]
+    },
+    {
+      "checkpoint_id": "A18",
+      "status": "NOT_CHECKED",
+      "reasons": [
+        "future_actual_absent_not_zero_error"
+      ],
+      "missing_fields": [
+        "actual value for FY2026",
+        "actual value for FY2027"
+      ],
+      "unresolved_scope": [
+        {
+          "segment": null,
+          "year": "2026",
+          "scenario": null
+        },
+        {
+          "segment": null,
+          "year": "2027",
+          "scenario": null
+        }
+      ],
+      "finding_ids": [
+        "A18-F001",
+        "A18-F002"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "checkpoint_id": "A02",
+      "status": "OBSERVED",
+      "reasons": [
+        "driver_linked_to_revenue_path"
+      ],
+      "segment": "Segment A",
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [
+        "0_base_2026",
+        "0_base_2027"
+      ],
+      "claim_ids": [
+        "claim_growth_driver_Segment_A"
+      ],
+      "driver_ids": [
+        "fixture_driver_Segment_A"
+      ],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "input",
+          "pointer": "/growth_driver_tree/drivers/0"
+        }
+      ],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "driver-to-revenue-path linkage, cadence and parameter resolution",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "0_base_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/6"
+        },
+        {
+          "kind": "parameter",
+          "id": "0_base_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/7"
+        },
+        {
+          "kind": "claim",
+          "id": "claim_growth_driver_Segment_A",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/26"
+        },
+        {
+          "kind": "driver",
+          "id": "fixture_driver_Segment_A",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/growth_driver_tree/drivers/0"
+        }
+      ],
+      "finding_id": "A02-F001"
+    },
+    {
+      "checkpoint_id": "A02",
+      "status": "OBSERVED",
+      "reasons": [
+        "driver_linked_to_revenue_path"
+      ],
+      "segment": "Segment B",
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [
+        "1_base_2026",
+        "1_base_2027"
+      ],
+      "claim_ids": [
+        "claim_growth_driver_Segment_B"
+      ],
+      "driver_ids": [
+        "fixture_driver_Segment_B"
+      ],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "input",
+          "pointer": "/growth_driver_tree/drivers/1"
+        }
+      ],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "driver-to-revenue-path linkage, cadence and parameter resolution",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "1_base_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/12"
+        },
+        {
+          "kind": "parameter",
+          "id": "1_base_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/13"
+        },
+        {
+          "kind": "claim",
+          "id": "claim_growth_driver_Segment_B",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/27"
+        },
+        {
+          "kind": "driver",
+          "id": "fixture_driver_Segment_B",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/growth_driver_tree/drivers/1"
+        }
+      ],
+      "finding_id": "A02-F002"
+    },
+    {
+      "checkpoint_id": "A05",
+      "status": "NOT_CHECKED",
+      "reasons": [
+        "no_checkable_constraint_recorded"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [
+        "revenue_constraints",
+        "context.constraint_note"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "no checkable constraint record exists; no limit is invented",
+      "native_evidence_refs": [],
+      "finding_id": "A05-F001"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "OBSERVED",
+      "reasons": [
+        "conversion_relationship_observed"
+      ],
+      "segment": "Segment A",
+      "year": "2026",
+      "scenario": "low",
+      "parameter_ids": [
+        "0_low_2026"
+      ],
+      "claim_ids": [
+        "claim_parameter_reference_lower",
+        "claim_parameter_reference_upper"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [
+        "reference_bridge"
+      ],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/0/entries/0"
+        },
+        {
+          "document": "input",
+          "pointer": "/operating_research/calibrations/0"
+        }
+      ],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "TAM/backlog/stock to revenue conversion: formula, timing, unit",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "0_low_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/4"
+        },
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reference_lower",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/16"
+        },
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reference_upper",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/17"
+        },
+        {
+          "kind": "calibration",
+          "id": "reference_bridge",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/operating_research/calibrations/0"
+        }
+      ],
+      "finding_id": "A06-F001"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "conversion_relationship_missing"
+      ],
+      "segment": "Segment A",
+      "year": "2027",
+      "scenario": "low",
+      "parameter_ids": [
+        "0_low_2027"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/0/entries/1"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:0_low_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment A"
+      ],
+      "missing_fields": [
+        "conversion evidence for Segment A/low/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support entry declares no conversion coverage for this cell",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "0_low_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/5"
+        }
+      ],
+      "finding_id": "A06-F002"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "OBSERVED",
+      "reasons": [
+        "conversion_relationship_observed"
+      ],
+      "segment": "Segment A",
+      "year": "2026",
+      "scenario": "base",
+      "parameter_ids": [
+        "0_base_2026"
+      ],
+      "claim_ids": [
+        "claim_parameter_reference_lower",
+        "claim_parameter_reference_upper"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [
+        "reference_bridge"
+      ],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/0/entries/2"
+        },
+        {
+          "document": "input",
+          "pointer": "/operating_research/calibrations/0"
+        }
+      ],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "TAM/backlog/stock to revenue conversion: formula, timing, unit",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "0_base_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/6"
+        },
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reference_lower",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/16"
+        },
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reference_upper",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/17"
+        },
+        {
+          "kind": "calibration",
+          "id": "reference_bridge",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/operating_research/calibrations/0"
+        }
+      ],
+      "finding_id": "A06-F003"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "conversion_relationship_missing"
+      ],
+      "segment": "Segment A",
+      "year": "2027",
+      "scenario": "base",
+      "parameter_ids": [
+        "0_base_2027"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/0/entries/3"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:0_base_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment A"
+      ],
+      "missing_fields": [
+        "conversion evidence for Segment A/base/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support entry declares no conversion coverage for this cell",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "0_base_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/7"
+        }
+      ],
+      "finding_id": "A06-F004"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "OBSERVED",
+      "reasons": [
+        "conversion_relationship_observed"
+      ],
+      "segment": "Segment A",
+      "year": "2026",
+      "scenario": "high",
+      "parameter_ids": [
+        "0_high_2026"
+      ],
+      "claim_ids": [
+        "claim_parameter_reference_lower",
+        "claim_parameter_reference_upper"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [
+        "reference_bridge"
+      ],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/0/entries/4"
+        },
+        {
+          "document": "input",
+          "pointer": "/operating_research/calibrations/0"
+        }
+      ],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "TAM/backlog/stock to revenue conversion: formula, timing, unit",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "0_high_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/8"
+        },
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reference_lower",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/16"
+        },
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reference_upper",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/17"
+        },
+        {
+          "kind": "calibration",
+          "id": "reference_bridge",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/operating_research/calibrations/0"
+        }
+      ],
+      "finding_id": "A06-F005"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "conversion_relationship_missing"
+      ],
+      "segment": "Segment A",
+      "year": "2027",
+      "scenario": "high",
+      "parameter_ids": [
+        "0_high_2027"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/0/entries/5"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:0_high_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment A"
+      ],
+      "missing_fields": [
+        "conversion evidence for Segment A/high/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support entry declares no conversion coverage for this cell",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "0_high_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/9"
+        }
+      ],
+      "finding_id": "A06-F006"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "conversion_relationship_missing"
+      ],
+      "segment": "Segment B",
+      "year": "2026",
+      "scenario": "low",
+      "parameter_ids": [
+        "1_low_2026"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/0"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_low_2026",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "conversion evidence for Segment B/low/FY2026"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support entry declares no conversion coverage for this cell",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "1_low_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/10"
+        }
+      ],
+      "finding_id": "A06-F007"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "conversion_relationship_missing"
+      ],
+      "segment": "Segment B",
+      "year": "2027",
+      "scenario": "low",
+      "parameter_ids": [
+        "1_low_2027"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/1"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_low_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "conversion evidence for Segment B/low/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support entry declares no conversion coverage for this cell",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "1_low_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/11"
+        }
+      ],
+      "finding_id": "A06-F008"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "conversion_relationship_missing"
+      ],
+      "segment": "Segment B",
+      "year": "2026",
+      "scenario": "base",
+      "parameter_ids": [
+        "1_base_2026"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/2"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_base_2026",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "conversion evidence for Segment B/base/FY2026"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support entry declares no conversion coverage for this cell",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "1_base_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/12"
+        }
+      ],
+      "finding_id": "A06-F009"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "conversion_relationship_missing"
+      ],
+      "segment": "Segment B",
+      "year": "2027",
+      "scenario": "base",
+      "parameter_ids": [
+        "1_base_2027"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/3"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_base_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "conversion evidence for Segment B/base/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support entry declares no conversion coverage for this cell",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "1_base_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/13"
+        }
+      ],
+      "finding_id": "A06-F010"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "conversion_relationship_missing"
+      ],
+      "segment": "Segment B",
+      "year": "2026",
+      "scenario": "high",
+      "parameter_ids": [
+        "1_high_2026"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/4"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_high_2026",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "conversion evidence for Segment B/high/FY2026"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support entry declares no conversion coverage for this cell",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "1_high_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/14"
+        }
+      ],
+      "finding_id": "A06-F011"
+    },
+    {
+      "checkpoint_id": "A06",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "conversion_relationship_missing"
+      ],
+      "segment": "Segment B",
+      "year": "2027",
+      "scenario": "high",
+      "parameter_ids": [
+        "1_high_2027"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/5"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_high_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "conversion evidence for Segment B/high/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support entry declares no conversion coverage for this cell",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "1_high_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/15"
+        }
+      ],
+      "finding_id": "A06-F012"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_reference_unresolved",
+        "same_source_not_independent"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_reference_lower",
+        "claim_parameter_reference_upper"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "context",
+          "pointer": "/statements/1"
+        }
+      ],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "declared source independence for cited claims",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reference_lower",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/16"
+        },
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reference_upper",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/17"
+        }
+      ],
+      "finding_id": "A08-F001"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_reported_total"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reported_total",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/0"
+        }
+      ],
+      "finding_id": "A08-F002"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_segment_a_base"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_segment_a_base",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/1"
+        }
+      ],
+      "finding_id": "A08-F003"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_segment_b_base"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_segment_b_base",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/2"
+        }
+      ],
+      "finding_id": "A08-F004"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_a_growth_2026_base"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_a_growth_2026_base",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/3"
+        }
+      ],
+      "finding_id": "A08-F005"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_0_low_2026"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_0_low_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/4"
+        }
+      ],
+      "finding_id": "A08-F006"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_0_low_2027"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_0_low_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/5"
+        }
+      ],
+      "finding_id": "A08-F007"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_0_base_2026"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_0_base_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/6"
+        }
+      ],
+      "finding_id": "A08-F008"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_0_base_2027"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_0_base_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/7"
+        }
+      ],
+      "finding_id": "A08-F009"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_0_high_2026"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_0_high_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/8"
+        }
+      ],
+      "finding_id": "A08-F010"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_0_high_2027"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_0_high_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/9"
+        }
+      ],
+      "finding_id": "A08-F011"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_1_low_2026"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_1_low_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/10"
+        }
+      ],
+      "finding_id": "A08-F012"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_1_low_2027"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_1_low_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/11"
+        }
+      ],
+      "finding_id": "A08-F013"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_1_base_2026"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_1_base_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/12"
+        }
+      ],
+      "finding_id": "A08-F014"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_1_base_2027"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_1_base_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/13"
+        }
+      ],
+      "finding_id": "A08-F015"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_1_high_2026"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_1_high_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/14"
+        }
+      ],
+      "finding_id": "A08-F016"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_1_high_2027"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_1_high_2027",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/15"
+        }
+      ],
+      "finding_id": "A08-F017"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_conversion_low"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_conversion_low",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/18"
+        }
+      ],
+      "finding_id": "A08-F018"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_conversion_base"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_conversion_base",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/19"
+        }
+      ],
+      "finding_id": "A08-F019"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_conversion_high"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_conversion_high",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/20"
+        }
+      ],
+      "finding_id": "A08-F020"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_history_2024"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_history_2024",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/21"
+        }
+      ],
+      "finding_id": "A08-F021"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_history_2025"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_history_2025",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/22"
+        }
+      ],
+      "finding_id": "A08-F022"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_recognition_Segment_A"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_recognition_Segment_A",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/23"
+        }
+      ],
+      "finding_id": "A08-F023"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_recognition_Segment_B"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_recognition_Segment_B",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/24"
+        }
+      ],
+      "finding_id": "A08-F024"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_scenario_probability"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_scenario_probability",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/25"
+        }
+      ],
+      "finding_id": "A08-F025"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_growth_driver_Segment_A"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_growth_driver_Segment_A",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/26"
+        }
+      ],
+      "finding_id": "A08-F026"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "independence_unknown_not_assumed"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_growth_driver_Segment_B"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "this claim group has no independence metadata",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_growth_driver_Segment_B",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/27"
+        }
+      ],
+      "finding_id": "A08-F027"
+    },
+    {
+      "checkpoint_id": "A08",
+      "status": "NOT_CHECKED",
+      "reasons": [
+        "no_management_target_declared"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [
+        "management_targets"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "no management target is declared to separate from independent evidence",
+      "native_evidence_refs": [],
+      "finding_id": "A08-F028"
+    },
+    {
+      "checkpoint_id": "A10",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "beat_unit_incomparable",
+        "beat_period_incomparable"
+      ],
+      "segment": null,
+      "year": "2026",
+      "scenario": null,
+      "parameter_ids": [
+        "0_base_2026"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "context",
+          "pointer": "/statements/0"
+        }
+      ],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "beat claim versus dated baseline, period, unit and comparison driver",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "0_base_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/6"
+        }
+      ],
+      "finding_id": "A10-F001"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "OBSERVED",
+      "reasons": [
+        "operating_range_observed"
+      ],
+      "segment": "Segment A",
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [
+        "claim_parameter_reference_lower",
+        "claim_parameter_reference_upper"
+      ],
+      "driver_ids": [],
+      "calibration_ids": [
+        "reference_bridge"
+      ],
+      "pointers": [
+        {
+          "document": "input",
+          "pointer": "/operating_research/calibrations/0"
+        }
+      ],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": 100,
+      "range_upper": 120,
+      "detail": "operating range source, conversion, support period, target separation",
+      "native_evidence_refs": [
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reference_lower",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/16"
+        },
+        {
+          "kind": "claim",
+          "id": "claim_parameter_reference_upper",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/evidence_claims/17"
+        },
+        {
+          "kind": "calibration",
+          "id": "reference_bridge",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/operating_research/calibrations/0"
+        }
+      ],
+      "finding_id": "A13-F001"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "range_timing_unknown",
+        "operating_range_unknown",
+        "range_derived_from_target"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "context",
+          "pointer": "/statements/2"
+        }
+      ],
+      "native_reasons": [],
+      "missing_fields": [
+        "support_years/scope.segment",
+        "source_claim_ids"
+      ],
+      "range_lower": 100,
+      "range_upper": 120,
+      "detail": "reviewer-declared operating range and its support period",
+      "native_evidence_refs": [],
+      "finding_id": "A13-F002"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "support_period_gap"
+      ],
+      "segment": "Segment A",
+      "year": "2027",
+      "scenario": "low",
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/0/entries/1"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:0_low_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment A"
+      ],
+      "missing_fields": [
+        "operating range covering Segment A/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support period gap: no declared range covers this cell",
+      "native_evidence_refs": [],
+      "finding_id": "A13-F003"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "support_period_gap"
+      ],
+      "segment": "Segment A",
+      "year": "2027",
+      "scenario": "base",
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/0/entries/3"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:0_base_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment A"
+      ],
+      "missing_fields": [
+        "operating range covering Segment A/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support period gap: no declared range covers this cell",
+      "native_evidence_refs": [],
+      "finding_id": "A13-F004"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "support_period_gap"
+      ],
+      "segment": "Segment A",
+      "year": "2027",
+      "scenario": "high",
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/0/entries/5"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:0_high_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment A"
+      ],
+      "missing_fields": [
+        "operating range covering Segment A/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support period gap: no declared range covers this cell",
+      "native_evidence_refs": [],
+      "finding_id": "A13-F005"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "support_period_gap"
+      ],
+      "segment": "Segment B",
+      "year": "2026",
+      "scenario": "low",
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/0"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_low_2026",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "operating range covering Segment B/FY2026"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support period gap: no declared range covers this cell",
+      "native_evidence_refs": [],
+      "finding_id": "A13-F006"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "support_period_gap"
+      ],
+      "segment": "Segment B",
+      "year": "2027",
+      "scenario": "low",
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/1"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_low_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "operating range covering Segment B/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support period gap: no declared range covers this cell",
+      "native_evidence_refs": [],
+      "finding_id": "A13-F007"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "support_period_gap"
+      ],
+      "segment": "Segment B",
+      "year": "2026",
+      "scenario": "base",
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/2"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_base_2026",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "operating range covering Segment B/FY2026"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support period gap: no declared range covers this cell",
+      "native_evidence_refs": [],
+      "finding_id": "A13-F008"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "support_period_gap"
+      ],
+      "segment": "Segment B",
+      "year": "2027",
+      "scenario": "base",
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/3"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_base_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "operating range covering Segment B/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support period gap: no declared range covers this cell",
+      "native_evidence_refs": [],
+      "finding_id": "A13-F009"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "support_period_gap"
+      ],
+      "segment": "Segment B",
+      "year": "2026",
+      "scenario": "high",
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/4"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_high_2026",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "operating range covering Segment B/FY2026"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support period gap: no declared range covers this cell",
+      "native_evidence_refs": [],
+      "finding_id": "A13-F010"
+    },
+    {
+      "checkpoint_id": "A13",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "support_period_gap"
+      ],
+      "segment": "Segment B",
+      "year": "2027",
+      "scenario": "high",
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "support",
+          "pointer": "/segments/1/entries/5"
+        }
+      ],
+      "native_reasons": [
+        "parameter_without_referenced_range_calibration:1_high_2027",
+        "calibration_scope_not_covering:reference_bridge:Segment B"
+      ],
+      "missing_fields": [
+        "operating range covering Segment B/FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "support period gap: no declared range covers this cell",
+      "native_evidence_refs": [],
+      "finding_id": "A13-F011"
+    },
+    {
+      "checkpoint_id": "A17",
+      "status": "UNRESOLVED",
+      "reasons": [
+        "joint_stress_scope_unresolved"
+      ],
+      "segment": null,
+      "year": null,
+      "scenario": null,
+      "parameter_ids": [
+        "0_base_2026"
+      ],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [
+        {
+          "document": "context",
+          "pointer": "/statements/3"
+        }
+      ],
+      "native_reasons": [],
+      "missing_fields": [],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "declared stress path, acting scope and cross exposure",
+      "native_evidence_refs": [
+        {
+          "kind": "parameter",
+          "id": "0_base_2026",
+          "resolved": true,
+          "document": "input",
+          "pointer": "/parameters/6"
+        }
+      ],
+      "finding_id": "A17-F001"
+    },
+    {
+      "checkpoint_id": "A18",
+      "status": "NOT_CHECKED",
+      "reasons": [
+        "future_actual_absent_not_zero_error"
+      ],
+      "segment": null,
+      "year": "2026",
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [
+        "actual value for FY2026"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "absent future actual is a gap, not WAPE=0 and not a model failure",
+      "native_evidence_refs": [],
+      "finding_id": "A18-F001"
+    },
+    {
+      "checkpoint_id": "A18",
+      "status": "NOT_CHECKED",
+      "reasons": [
+        "future_actual_absent_not_zero_error"
+      ],
+      "segment": null,
+      "year": "2027",
+      "scenario": null,
+      "parameter_ids": [],
+      "claim_ids": [],
+      "driver_ids": [],
+      "calibration_ids": [],
+      "pointers": [],
+      "native_reasons": [],
+      "missing_fields": [
+        "actual value for FY2027"
+      ],
+      "range_lower": null,
+      "range_upper": null,
+      "detail": "absent future actual is a gap, not WAPE=0 and not a model failure",
+      "native_evidence_refs": [],
+      "finding_id": "A18-F002"
+    }
+  ],
+  "remaining_review": [
+    {
+      "checkpoint_id": "A05",
+      "item": "reviewer judgement required for A05: no_checkable_constraint_recorded"
+    },
+    {
+      "checkpoint_id": "A06",
+      "item": "reviewer judgement required for A06: conversion_relationship_missing; conversion_relationship_observed"
+    },
+    {
+      "checkpoint_id": "A08",
+      "item": "reviewer judgement required for A08: independence_reference_unresolved; independence_unknown_not_assumed; no_management_target_declared; same_source_not_independent"
+    },
+    {
+      "checkpoint_id": "A10",
+      "item": "reviewer judgement required for A10: beat_period_incomparable; beat_unit_incomparable"
+    },
+    {
+      "checkpoint_id": "A13",
+      "item": "reviewer judgement required for A13: operating_range_observed; operating_range_unknown; range_derived_from_target; range_timing_unknown; support_period_gap"
+    },
+    {
+      "checkpoint_id": "A17",
+      "item": "reviewer judgement required for A17: joint_stress_scope_unresolved"
+    },
+    {
+      "checkpoint_id": "A18",
+      "item": "reviewer judgement required for A18: future_actual_absent_not_zero_error"
+    }
+  ],
+  "actual_input_refs": {
+    "records": [],
+    "years_checked": [],
+    "years_unchecked": [
+      "2026",
+      "2027"
+    ],
+    "wape": null
+  },
+  "context_ref": {
+    "provided": "analyst-risk-context/1",
+    "statement_count": 4
+  },
+  "measure_report_ref": null,
+  "diagnostics": []
+}

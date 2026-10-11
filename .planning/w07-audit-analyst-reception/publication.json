@@ -1,0 +1,82 @@
+{
+  "status": "ACCEPTED_MERGED_INSTALLED",
+  "implementation_commit": "e7c92577e853f6567475dcd26d54bdd30f5ab141",
+  "main_head": "e7c92577e853f6567475dcd26d54bdd30f5ab141",
+  "author_commits": [
+    "34b5c8ee605059be7639080a03502026ebce3410",
+    "e3206880224f7fa97d3923cb70044a6956f7d2f4"
+  ],
+  "focused": {
+    "passed": 90,
+    "subtests_passed": 4,
+    "seconds": 2.3
+  },
+  "e2e_checks": 13,
+  "installation": {
+    "installations": [
+      {
+        "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+        "files": 28,
+        "changed": [
+          "scripts/analyst_risk_audit.py",
+          "references/analyst-risk-audit.md",
+          "references/review-analyst.md"
+        ],
+        "mismatches": [],
+        "status": "MATCH"
+      },
+      {
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+        "files": 28,
+        "changed": [
+          "scripts/analyst_risk_audit.py",
+          "references/analyst-risk-audit.md",
+          "references/review-analyst.md"
+        ],
+        "mismatches": [],
+        "status": "MATCH"
+      }
+    ]
+  },
+  "installation_check": {
+    "installations": [
+      {
+        "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+        "files": 28,
+        "changed": [],
+        "mismatches": [],
+        "status": "MATCH"
+      },
+      {
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+        "files": 28,
+        "changed": [],
+        "mismatches": [],
+        "status": "MATCH"
+      }
+    ]
+  },
+  "installed_cli": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "seconds": 0.22199669999827165,
+      "checkpoint_count": 8,
+      "success": true
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "seconds": 0.20560080000723246,
+      "checkpoint_count": 8,
+      "success": true
+    }
+  ],
+  "scratch_restored": true,
+  "real_provider_calls": 0,
+  "real_llm_calls": 0,
+  "source_truth_verified": false,
+  "economic_reasonableness": "not_evaluated",
+  "remote": "",
+  "ci": "not_configured_no_remote",
+  "final_main_head": "2c49491355bd68b7ab5ed664bfd8010d9dae5a84",
+  "final_main_clean": true
+}

@@ -1,0 +1,140 @@
+[
+  {
+    "path": "skills/revenue-forecast-audit/scripts/analyst_risk_audit.py",
+    "expected": "f563cb802a538279bd933c68dc3f89a10afd3a53814ed7592409d1cddb92c04b",
+    "actual": "f563cb802a538279bd933c68dc3f89a10afd3a53814ed7592409d1cddb92c04b",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/analyst-risk-audit.md",
+    "expected": "4ae523908a9337bc3f552395fe52e364d0ad87c6019cd27f15a470da0892145e",
+    "actual": "4ae523908a9337bc3f552395fe52e364d0ad87c6019cd27f15a470da0892145e",
+    "match": true
+  },
+  {
+    "path": "tests/test_w07_analyst_risk_audit.py",
+    "expected": "446425ecf75d11e4b209a9c82a5a136490c76caef14d0b9d520319a51b79df43",
+    "actual": "446425ecf75d11e4b209a9c82a5a136490c76caef14d0b9d520319a51b79df43",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w07_analyst_risk/context_supported.json",
+    "expected": "16eecf8e075c8c636b0dbe0936516b44a7603a44d2b9d0f99876e028291936c5",
+    "actual": "16eecf8e075c8c636b0dbe0936516b44a7603a44d2b9d0f99876e028291936c5",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w07_analyst_risk/context_missing_baseline.json",
+    "expected": "65627ad9d1ebdce5fabbdd5ed130c985eeb0a9a99d38e9d883eb0f453aa70807",
+    "actual": "65627ad9d1ebdce5fabbdd5ed130c985eeb0a9a99d38e9d883eb0f453aa70807",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w07_analyst_risk/context_counterexample.json",
+    "expected": "d941649d54491d52bc9d136e947b6826ac60f586437635ec3dafecab54745234",
+    "actual": "d941649d54491d52bc9d136e947b6826ac60f586437635ec3dafecab54745234",
+    "match": true
+  },
+  {
+    "path": "tools/run_analyst_risk_e2e.py",
+    "expected": "5073a521863ed4efa0545659b88e4e600b1604520fd67d5b0218e31ecf321c0c",
+    "actual": "5073a521863ed4efa0545659b88e4e600b1604520fd67d5b0218e31ecf321c0c",
+    "match": true
+  },
+  {
+    "path": ".planning/w07-audit-analyst-quality/task_plan.md",
+    "expected": "671d3118a85d1e109413b99acfa0718acca8d3297dda14a46ff11079ddaba453",
+    "actual": "671d3118a85d1e109413b99acfa0718acca8d3297dda14a46ff11079ddaba453",
+    "match": true
+  },
+  {
+    "path": ".planning/w07-audit-analyst-quality/findings.md",
+    "expected": "6144d18d44636713b33edba3ff50aca2ca3a7d9afa373eb1a26b2c6fece937f2",
+    "actual": "6144d18d44636713b33edba3ff50aca2ca3a7d9afa373eb1a26b2c6fece937f2",
+    "match": true
+  },
+  {
+    "path": ".planning/w07-audit-analyst-quality/progress.md",
+    "expected": "15909896e3225b2fbd5b06aa5ceca159f0fec9e32fccdb70443ca04c40f8d481",
+    "actual": "15909896e3225b2fbd5b06aa5ceca159f0fec9e32fccdb70443ca04c40f8d481",
+    "match": true
+  },
+  {
+    "path": "docs/handoffs/w07-audit-analyst-quality/test-summary.md",
+    "expected": "e7e5f9b0fe0734a98cff801cea0c13ccfb603ed62d14eaee6310c21c97a9d549",
+    "actual": "e7e5f9b0fe0734a98cff801cea0c13ccfb603ed62d14eaee6310c21c97a9d549",
+    "match": true
+  },
+  {
+    "path": "docs/handoffs/w07-audit-analyst-quality/evidence/e2e-report.json",
+    "expected": "6fcac95fa784bf63bbd91703728b90f4b69bdabef25f5fae22cc2ac874f2ed38",
+    "actual": "6fcac95fa784bf63bbd91703728b90f4b69bdabef25f5fae22cc2ac874f2ed38",
+    "match": true
+  },
+  {
+    "path": "docs/handoffs/w07-audit-analyst-quality/evidence/attempt-no-context.json",
+    "expected": "1328758bf3dd95bb3a8b78b4d54357993353b0549ece530bd85ebccd9342efca",
+    "actual": "1328758bf3dd95bb3a8b78b4d54357993353b0549ece530bd85ebccd9342efca",
+    "match": true
+  },
+  {
+    "path": "docs/handoffs/w07-audit-analyst-quality/evidence/attempt-counterexample.json",
+    "expected": "5f944fcec2f3fcf6c8e6b530eead552e0e9d47e1747f90de2b46fb301e86b06f",
+    "actual": "5f944fcec2f3fcf6c8e6b530eead552e0e9d47e1747f90de2b46fb301e86b06f",
+    "match": true
+  },
+  {
+    "path": ".planning/w07-audit-analyst-quality/input/manifest.json",
+    "expected": "c519023b0fc9a1738336ed0ed9be621e839f1e5e5fdaf3ebb7d75d0bad78495d",
+    "actual": "c519023b0fc9a1738336ed0ed9be621e839f1e5e5fdaf3ebb7d75d0bad78495d",
+    "match": true
+  },
+  {
+    "path": ".planning/w07-audit-analyst-quality/input/native-draft.json",
+    "expected": "d0c38f4a82c31077341f0ed95c4501c4e5cec21f34bc583543412ed06bfbc1bb",
+    "actual": "d0c38f4a82c31077341f0ed95c4501c4e5cec21f34bc583543412ed06bfbc1bb",
+    "match": true
+  },
+  {
+    "path": ".planning/w07-audit-analyst-quality/input/native-input.json",
+    "expected": "a9001a0139596bd55d6c1c68e90779498988d1e0a0ff42411257fab8b04d2e8d",
+    "actual": "a9001a0139596bd55d6c1c68e90779498988d1e0a0ff42411257fab8b04d2e8d",
+    "match": true
+  },
+  {
+    "path": ".planning/w07-audit-analyst-quality/input/native-support.json",
+    "expected": "65fe2ec714d3c504d654d3d94f0c61bf4bc6b0721ee56f33deab8b713d3855a1",
+    "actual": "65fe2ec714d3c504d654d3d94f0c61bf4bc6b0721ee56f33deab8b713d3855a1",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-analyst.md",
+    "expected": "beb18b08e02459cea0e08d8b300b07a12911eb0000538805a651af59e0352c85",
+    "actual": "beb18b08e02459cea0e08d8b300b07a12911eb0000538805a651af59e0352c85",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/audit_contracts.py",
+    "expected": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+    "actual": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/audit_run.py",
+    "expected": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca",
+    "actual": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/financial_measure_audit.py",
+    "expected": "de7c7fe3764ce3678fecc51466a9dca84e2c14da84d215c472157c4fb8f9dced",
+    "actual": "de7c7fe3764ce3678fecc51466a9dca84e2c14da84d215c472157c4fb8f9dced",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/financial-measure-audit.md",
+    "expected": "26fe6796d27d125254b7b523fc7317ae12aa3db8c366efa07210a7af331a1faf",
+    "actual": "26fe6796d27d125254b7b523fc7317ae12aa3db8c366efa07210a7af331a1faf",
+    "match": true
+  }
+]
