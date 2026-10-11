@@ -1,0 +1,400 @@
+{
+  "schema_version": "w05-audit-loop-independent-major-review/1.0",
+  "generated_at": "2026-10-11T10:06:32.769Z",
+  "delivery_tree": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/audit-loop",
+  "supplied_branch": "codex/w05-audit-loop",
+  "supplied_feature_commit": "7a5d4b8733c3442002b7ced95a4a319265ee687a",
+  "supplied_handoff_commit": "2ed0b5e",
+  "status": "FAIL_CONTRACT_COUNTEREXAMPLES_ROOT_REPAIR_REQUIRED",
+  "source_sha256": "03f0d33b9233aac894d415e26406e4ccec22caa2b955adcb678856ca5836ce51",
+  "input_sha256": {
+    "AGENTS.md": "fe506bcf5e87570747c035dd05e6b6b46b11075fa7bd3f844b8edff0500d9d37",
+    "skills/revenue-forecast-audit/SKILL.md": "340a6174fdffe6b075faec0c68abf71ad32523afd8f4a29f77ee3588c984bfb7",
+    "docs/handoffs/w05-audit-loop/handoff.md": "42c62ffcf393cc1ff6d212169fac0c63db60500fa38f3b5a9da0112400a500b9",
+    "docs/handoffs/w05-audit-loop/input/construction_card.md": "b59545a3bc2449952033e489e77cd460d356252b3c694726b790c812f23ec71d",
+    "skills/revenue-forecast-audit/references/pool-progress-contract.md": "a9e592de10572f8ccbc726c2ba1960e0122d4be374775a7c2077926de6e91026",
+    "skills/revenue-forecast-audit/scripts/pool_progress.py": "03f0d33b9233aac894d415e26406e4ccec22caa2b955adcb678856ca5836ce51",
+    "tests/test_pool_progress.py": "41a812e56df6ecb0771f11181e1a968a6f851f96884d77a07d507ea9e4440ce5",
+    "tests/test_pool_progress_cli.py": "87f9954e40a7bd7d3782a42a7e2e47f384abb017a11339e88e9d04ea0df76fbb",
+    "skills/revenue-forecast-audit/scripts/audit_run.py": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca"
+  },
+  "input_integrity_unchanged": true,
+  "method": {
+    "codegraph": "Delivery tree not initialized; no index/admin change. Exact supplied files read.",
+    "construction_card": "Root/input/construction_card.md was not present; exact delivery copy found at docs/handoffs/w05-audit-loop/input/construction_card.md.",
+    "tests": "Six fixed pure reducer scenarios and two owned scratch scenarios. No concentrated 201 suite, provided E2E or manifest rerun; those belong to ROOT.",
+    "isolation": "Scratch was only under the explicitly authorized independent report directory; no producer output/state/installed skill/shared PWF/W06 writes.",
+    "budget": {
+      "fees_usd": 0,
+      "network_calls": 0,
+      "LLM_calls": 0,
+      "provider_calls": 0,
+      "product_writes": 0
+    }
+  },
+  "scenarios": [
+    {
+      "probe": "MISSING_REPORT_REFS",
+      "expected": "not_clean",
+      "actual_clean": [
+        true,
+        []
+      ],
+      "streak": 1,
+      "evidence_refs": [
+        null,
+        null,
+        null,
+        null,
+        "run-new/manifest.json"
+      ],
+      "status": "FAIL"
+    },
+    {
+      "probe": "STALE_RUN_AND_VERSION_REVIEWS",
+      "expected": "old run and old version reviews cannot count for new run",
+      "old_digest": "6ad8f56d6a7367658e07ce6a8854951e95d5a8d7da2e834956b8a75b82e4aaa4",
+      "new_digest": "aebc29fcc3057a420a62994ad5cc80159a1f66592df106e47861412fe58466e5",
+      "actual_clean": [
+        true,
+        []
+      ],
+      "streak": 1,
+      "stored": [
+        {
+          "role": "storage",
+          "conclusion": "PASS",
+          "report_ref": "run-old/storage.json",
+          "attempt": "initial",
+          "n_a_reason": null,
+          "versions_digest": "aebc29fcc3057a420a62994ad5cc80159a1f66592df106e47861412fe58466e5",
+          "recorded_at": "2026-10-11T15:00:00Z",
+          "observed_run": "run-old"
+        },
+        {
+          "role": "fetch",
+          "conclusion": "PASS",
+          "report_ref": "run-old/fetch.json",
+          "attempt": "initial",
+          "n_a_reason": null,
+          "versions_digest": "aebc29fcc3057a420a62994ad5cc80159a1f66592df106e47861412fe58466e5",
+          "recorded_at": "2026-10-11T15:00:00Z",
+          "observed_run": "run-old"
+        },
+        {
+          "role": "process",
+          "conclusion": "PASS",
+          "report_ref": "run-old/process.json",
+          "attempt": "initial",
+          "n_a_reason": null,
+          "versions_digest": "aebc29fcc3057a420a62994ad5cc80159a1f66592df106e47861412fe58466e5",
+          "recorded_at": "2026-10-11T15:00:00Z",
+          "observed_run": "run-old"
+        },
+        {
+          "role": "analyst",
+          "conclusion": "PASS",
+          "report_ref": "run-old/analyst.json",
+          "attempt": "initial",
+          "n_a_reason": null,
+          "versions_digest": "aebc29fcc3057a420a62994ad5cc80159a1f66592df106e47861412fe58466e5",
+          "recorded_at": "2026-10-11T15:00:00Z",
+          "observed_run": "run-old"
+        }
+      ],
+      "status": "FAIL"
+    },
+    {
+      "probe": "UNRESOLVED_UNKNOWN_CHARGE",
+      "before_action": {
+        "action": "reconcile_possible_charge",
+        "why": "a POST may already have been charged with an unknown result; reconcile via tool logs and the provider ledger, never blindly resend; cost stays null",
+        "args": {
+          "call_ids": [
+            "maybe-posted"
+          ],
+          "resend": false
+        }
+      },
+      "after_action": {
+        "action": "dispatch_executor",
+        "why": "selection is already saved in this state file; create the run for the selected entity, then apply run_started",
+        "args": {
+          "entity_key": "CN:CASE1",
+          "run_hint": null
+        }
+      },
+      "entry": {
+        "call_id": "maybe-posted",
+        "ref": "logs/possible-post",
+        "cost_usd": null,
+        "state": "reconciled_unknown",
+        "evidence_ref": "no-provider-reconciliation-available",
+        "note": null
+      },
+      "pending_reconciles": [],
+      "expected": "remain unresolved; never infer a safe executor redispatch from unknown reconciliation",
+      "status": "FAIL"
+    },
+    {
+      "probe": "RETEST_WITHOUT_EVIDENCE",
+      "before_action": {
+        "action": "resume_remediation",
+        "why": "clean streak reached but old retest obligations remain; they are not swallowed by the sampling stop condition",
+        "args": {
+          "refs": [
+            "legacy-run::OLD1"
+          ]
+        }
+      },
+      "after_action": {
+        "action": "campaign_sample_criteria_met",
+        "why": "3 consecutive distinct entities that did not participate in remediation are clean under one effective version; sampling stop condition met within the sampled scope, not a proof about every company",
+        "args": {
+          "streak": 3,
+          "entities": [
+            "CN:CASE1",
+            "CN:CASE3",
+            "CN:CASE0"
+          ],
+          "markets_covered": [
+            "CN"
+          ],
+          "markets_available": [
+            "CN"
+          ]
+        }
+      },
+      "obligation": {
+        "ref": "legacy-run::OLD1",
+        "reason": "major fix must be retested",
+        "entity_key": "CN:OLD-OUTSIDE-POOL",
+        "done": true,
+        "evidence_ref": "unspecified"
+      },
+      "expected": "missing evidence must not discharge historical retest",
+      "status": "FAIL"
+    },
+    {
+      "probe": "LAST_COMPANY_CLOSE_SUGGESTION",
+      "before_manual_advance": {
+        "action": {
+          "action": "no_action",
+          "why": "company closeable but the pool is exhausted after it",
+          "args": {}
+        },
+        "closed": 2,
+        "streak": 2,
+        "clean_check": [
+          true,
+          []
+        ]
+      },
+      "after_manual_advance": {
+        "stage": "pool_exhausted",
+        "action": {
+          "action": "campaign_sample_criteria_met",
+          "why": "3 consecutive distinct entities that did not participate in remediation are clean under one effective version; sampling stop condition met within the sampled scope, not a proof about every company",
+          "args": {
+            "streak": 3,
+            "entities": [
+              "CN:CASE1",
+              "CN:CASE0",
+              "CN:CASE2"
+            ],
+            "markets_covered": [
+              "CN"
+            ],
+            "markets_available": [
+              "CN"
+            ]
+          }
+        },
+        "closed": 3,
+        "streak": 3
+      },
+      "status": "LIMITATION"
+    },
+    {
+      "probe": "POOL_EXHAUSTED_BEFORE_CRITERIA",
+      "stage": "pool_exhausted",
+      "action": {
+        "action": "no_action",
+        "why": "pool exhausted; no further sampling",
+        "args": {}
+      },
+      "streak": 2,
+      "status": "PASS"
+    },
+    {
+      "probe": "LIVE_HOLDER_STALE_STEAL",
+      "recorded_pid": 35948,
+      "actual_live_pid": 35948,
+      "default_stale_seconds": 30,
+      "setup": "mtime aged 31s while holder A stays alive and owns lock; no real wait or crashed process",
+      "two_holders_owned": true,
+      "old_release_removed_new_lock": true,
+      "third_holder_acquired_while_second_owned": true,
+      "status": "FAIL"
+    },
+    {
+      "probe": "PLAN_OVERWRITES_STATE_ALIAS",
+      "expected": "reject --out equal to state; state bytes must stay unchanged",
+      "returned": {
+        "plan": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\independent\\w05-audit-loop-review-jdxfhamn\\state.json",
+        "base_revision": 0,
+        "next_action": {
+          "action": "dispatch_executor",
+          "why": "selection is already saved in this state file; create the run for the selected entity, then apply run_started",
+          "args": {
+            "entity_key": "CN:ONLY",
+            "run_hint": null
+          }
+        },
+        "replay": false,
+        "conflict": false,
+        "exit_code": 0
+      },
+      "before_sha256": "ceaeada88852d741b2fef7d826866ccd173283f24c1f5d13d8b0eb5fcfbf6195",
+      "after_sha256": "cd9bfc7a32f08a0a0b96f47c1675e91e1dfa3eea758e8eff8d73f752f0defc3c",
+      "after_schema": "audit-pool-plan/1",
+      "reload_error": "invalid state schema_version",
+      "status": "FAIL"
+    }
+  ],
+  "scratch_receipts": [
+    {
+      "phase": "sentinel_integrity",
+      "unchanged": true,
+      "sha256": "4073b18801d9a2e0a120eb2f5c214379874acf6f18a7ac6071f289d29b0957e5"
+    },
+    {
+      "phase": "tmp_cleanup",
+      "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\independent\\w05-audit-loop-review-jdxfhamn",
+      "removed": true,
+      "source_sha256": "03f0d33b9233aac894d415e26406e4ccec22caa2b955adcb678856ca5836ce51",
+      "source_unchanged": true,
+      "network_calls": 0,
+      "provider_calls": 0,
+      "producer_writes": 0,
+      "tmp_probe_count": 2
+    }
+  ],
+  "failures": [
+    {
+      "id": "W05-I01",
+      "severity": "P1",
+      "root": "Unbound completion evidence",
+      "locations": [
+        "pool_progress.py:432",
+        "pool_progress.py:620"
+      ],
+      "probes": [
+        "MISSING_REPORT_REFS",
+        "STALE_RUN_AND_VERSION_REVIEWS"
+      ],
+      "actual": "Four PASS role labels with no report_ref count clean and put nulls in evidence_refs. Separate old-run/old-version observations are accepted for a new run and stamped with the current version digest; they also count clean.",
+      "expected": "Recorded conclusions must refer to the applicable executor/run and review attempt and retain actual evidence-version provenance; missing final report sources cannot establish clean.",
+      "minimal_fix": "Validate the existing completion handoff once on intake. Preserve source-bound run/review-attempt/version rather than inferring them from current receipt time. Treat missing/unread/unbound evidence as diagnostic non-clean, not an authorization or human sign-off step.",
+      "scope": "Pure synthetic accepted observations, not a claim that actual users' four reviewer reports are false."
+    },
+    {
+      "id": "W05-I02",
+      "severity": "P1",
+      "root": "Reconciliation attempt conflated with resolved charge",
+      "locations": [
+        "pool_progress.py:563",
+        "pool_progress.py:741",
+        "pool_progress.py:851"
+      ],
+      "probes": [
+        "UNRESOLVED_UNKNOWN_CHARGE"
+      ],
+      "actual": "outcome=unknown changes entry.state to reconciled_unknown; pending_reconciles only includes state=unknown, so advice becomes dispatch_executor while cost remains null.",
+      "expected": "Unresolved possibly-paid calls remain unresolved across reconciliation attempts and crash recovery; unknown cannot infer safe redispatch.",
+      "minimal_fix": "Keep reconciliation-attempt metadata separate from resolution. All unresolved/null cost entries continue to produce reconciliation advice with resend=false; preserve costless work and existing cumulative ledger references."
+    },
+    {
+      "id": "W05-I03",
+      "severity": "P1",
+      "root": "Age-based lock ownership and ABA release",
+      "locations": [
+        "pool_progress.py:1055",
+        "pool_progress.py:1090",
+        "pool_progress.py:1101"
+      ],
+      "probes": [
+        "LIVE_HOLDER_STALE_STEAL"
+      ],
+      "actual": "A has a live current PID and owns its lock. Aging mtime by 31s lets B acquire with default stale=30; A.release deletes B's lock and C then acquires while B still owns it.",
+      "expected": "Read-check-replace must have mutual exclusion while a holder lives, and an old holder cannot release a replacement holder's lock.",
+      "minimal_fix": "Use a short-lived kernel lock with release-on-process-death, or an ownership-preserving equivalent. Age alone must never transfer a live critical section; no new permission/lease service.",
+      "scope": "Single process, multiple independent StateLock objects, mtime artificially aged to exercise the implemented expiry path; no actual 31-second pause, process kill or two concurrent commits claimed."
+    },
+    {
+      "id": "W05-I04",
+      "severity": "P1",
+      "root": "Advisory output can overwrite live input/history",
+      "locations": [
+        "pool_progress.py:1170",
+        "pool_progress.py:1026"
+      ],
+      "probes": [
+        "PLAN_OVERWRITES_STATE_ALIAS"
+      ],
+      "actual": "plan_observation(state, observation, state) returns exit0 and replaces audit-pool-progress/1 with audit-pool-plan/1. The state can no longer be loaded.",
+      "expected": "plan is read-only with respect to state and observation; a fresh output must not overwrite current inputs/history.",
+      "minimal_fix": "Create-only output artifacts with explicit input/output alias rejection and atomic publication; retain atomic replace only for the apply-owned state under its lock. This is file correctness, not a permission gate."
+    },
+    {
+      "id": "W05-I05",
+      "severity": "P1",
+      "root": "Unproved historical retest marked complete",
+      "locations": [
+        "pool_progress.py:528"
+      ],
+      "probes": [
+        "RETEST_WITHOUT_EVIDENCE"
+      ],
+      "actual": "retest_done without evidence_ref invents 'unspecified', marks the old obligation done, and turns resume_remediation into campaign_sample_criteria_met.",
+      "expected": "An omitted result source cannot discharge required historical retesting.",
+      "minimal_fix": "Require the existing retest completion evidence to be source-bound/read before setting done. Preserve missing/unknown as diagnostics and an open obligation; do not add manual approval receipts."
+    }
+  ],
+  "limitations": [
+    {
+      "id": "W05-L01",
+      "severity": "P2",
+      "location": "pool_progress.py:952",
+      "probe": "LAST_COMPANY_CLOSE_SUGGESTION",
+      "actual": "After the final company has sealed executor/four PASS/expert, next_action=no_action, closed=2/streak=2. Explicit manual advance closes it and reaches streak3, with stage pool_exhausted but action campaign_sample_criteria_met.",
+      "impact": "A harness strictly following suggested actions lacks an actionable final-close transition. It is a progress suggestion gap, not a false all-company-success claim.",
+      "action": "ROOT can make final-close advice explicit while preserving the fixed action contract or updating it coherently."
+    },
+    {
+      "id": "W05-L02",
+      "severity": "scope",
+      "actual": "Four role keys are not evidence of four independent native agents by themselves. The module records observations; native harness/P7 execution and actual reviewer records must prove independence and research quality."
+    }
+  ],
+  "positive_checks": [
+    "Pool exhaustion after only two clean entities produces no_action, not campaign_sample_criteria_met.",
+    "Unknown charges initially produce reconcile_possible_charge with resend=false and cost null.",
+    "Historical unfinished retests do block sample stopping until the faulty evidence-free retest completion is applied.",
+    "The module proposes actions and does not launch agents/providers or introduce a separate ledger/manual authorization.",
+    "Pure reducer uses bounded reference state and input deep copies; source bytes stayed fixed."
+  ],
+  "infrastructure_failure": {
+    "failed_tmp_exit_code": 1,
+    "reason": "Sandbox TEMP sentinel write PermissionError occurred before actual lock/plan probes; not a producer failure.",
+    "cleanup": "Failed owned scratch already absent at native verification",
+    "retry": "Authorized independent output directory owned scratch; two real counterexamples executed and restored.",
+    "temporary_scratch_removed": true
+  },
+  "receipt_exit_codes": {
+    "pure_observation_script": 0,
+    "tmp_observation_script": 0
+  },
+  "interpretation": "Probe scripts returned 0 because they recorded observed PASS/FAIL faithfully; script exit0 does not mean the six failing scenarios passed.",
+  "next_owner": "ROOT owns isolated integration repairs, one concentrated green rerun and E2E, producer handoff merge/install and all PWF updates. This reviewer stops after evidence sealing."
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": "independent-major-review-final-manifest/1.0",
+  "status": "PASS_WITH_SCOPE",
+  "files": [
+    {
+      "name": "final-review.json",
+      "bytes": 9057,
+      "sha256": "14b474f46e82d2b6862d86ea43e7c0d79004dd80809a6a1b548f6f94742b4817"
+    },
+    {
+      "name": "final-review.md",
+      "bytes": 2638,
+      "sha256": "7452f7a508aa0c16648958d62d164be1d7b7474b98308555472a7ee77e12f628"
+    },
+    {
+      "name": "final-pure-probes.ps1",
+      "bytes": 6767,
+      "sha256": "527866f57bfcb7a4374c903c8b6982949650affe232500fb4e90ca3cebae1df9"
+    },
+    {
+      "name": "final-pure-probes.log",
+      "bytes": 6309,
+      "sha256": "55d3854725c6452a187fe28429baa5a96ee54afd2d37f2ae1a0b6df47c0a2a9f"
+    },
+    {
+      "name": "final-tmp-observer-error.ps1",
+      "bytes": 3906,
+      "sha256": "1f537b8a26f33aa31716158e17cbd9a3ad7583ee83a5770da7b33935e5bd62a5"
+    },
+    {
+      "name": "final-tmp-observer-error.log",
+      "bytes": 1097,
+      "sha256": "155d25fe2d76852ea4263b3e4e47012d9df84228c79fde531e8402362bf71af4"
+    },
+    {
+      "name": "final-plan-probe.ps1",
+      "bytes": 2892,
+      "sha256": "4e5cfd2a0bdb126150bf2a92288d9cee4ff451499d15465c32cc4881f96e3726"
+    },
+    {
+      "name": "final-plan-probe.log",
+      "bytes": 1294,
+      "sha256": "b5daeabfdf045dd1e9bff3956bd0990c9a605ca09ccc30cb5c6985dbf5fb9fbe"
+    },
+    {
+      "name": "final-integrity.json",
+      "bytes": 6949,
+      "sha256": "3d786c1230a45934518ee18d60bc055b17eefd100d7dd404de249a95ecb40062"
+    }
+  ],
+  "candidate_input_sha256": {
+    "skills/revenue-forecast-audit/scripts/pool_progress.py": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+    "skills/revenue-forecast-audit/references/pool-progress-contract.md": "b9004f3af394b211fb450c844faf166e4219c93f081fffb4a088da9c528a285b",
+    "tests/test_pool_progress.py": "1028c5e1a0c0f2edd58f03a589f167a9d0e2c251baab375f5733527ef0fb914e",
+    "tests/test_pool_progress_cli.py": "abfce372bcaf764ed1c1e7538073a4638d4698cddc8478f5fa6ab59ea6e1fa7b",
+    "tests/fixtures/pool_progress/pool_6_entities.json": "7f0d9a76a0f0a37853c347089ccba92490621ee48449f023cbd3bf844dafae50",
+    "tests/fixtures/pool_progress/pool_6_cn.json": "2359055b5f2b504d96337cb0ef91860c0eae4e6b2728e8905d6c682baa60c994",
+    "tests/fixtures/pool_progress/versions_ref.json": "928d11e60e358b33188509828a1c70c97c484f0e378c1366b3bc09bf0a8cb595",
+    "tests/fixtures/pool_progress/budget_ref.json": "dbb5aeb89f13cc9b9dfacb2fcf5d67ffbafe0cead23f230f369aff9b683fcd2c",
+    "tests/fixtures/pool_progress/old_campaign.json": "86523c040a59235b6eb18c884cf16e4f8275050a8c31d534ce64634a77775cd5",
+    "tools/run_pool_progress_e2e.py": "fda6a9ac335726937423a5cb1350c44e6f5026908c065b03bada0d548e0c6ba6",
+    "docs/implementation/w05-audit-pool-progress/implementation.md": "f226e685b7c59b45be9f620b24e9fc96c75f97104b998544fe37b8a12ed82243",
+    "skills/revenue-forecast-audit/SKILL.md": "603de7034e7d4adf4b0d9fc86ba75a17d3f892824108b53c2aaad3ffe84c7996",
+    "skills/revenue-forecast-audit/agents/openai.yaml": "b81a556d2424002ea561ba9c124ccbe8b888b6fb27300df0d0c0c4c554af319f",
+    "skills/revenue-forecast-audit/references/artifact-contract.md": "4de59015c66a757ef73bca1855516c69fc3935c4ac71e4113382a8e7b7c36633",
+    "skills/revenue-forecast-audit/references/company-pool-loop.md": "aa7dfcc864f1c8e7e2d66e770ae199c251a003fc3836583422a8f24226c629db",
+    "skills/revenue-forecast-audit/references/execution-artifact-contract.md": "9e9a854d39c4ac02aa7e1789ba27375c72f9cd8a2003210249b97036d4cce1d5",
+    "skills/revenue-forecast-audit/references/executor.md": "c9acb192a7a921d15a3da450832a6cd5f4e09bbaa7b7387b156cb613c165ba8e",
+    "skills/revenue-forecast-audit/references/numeric-ledger-example.json": "2f793ef0b2ec633a7a31bd8b42c7d7a0c8759667c928122d721e0677f4f33890",
+    "skills/revenue-forecast-audit/references/remediation.md": "91baa2d3f19fa03696eee78b899a6a4e34310f07677d9c4afa3b9b943ab251cf",
+    "skills/revenue-forecast-audit/references/review-analyst.md": "39c233a498be1eabe9aabfdb65ea58c6f39a1201fe87d2d5d1a273481cf45cc7",
+    "skills/revenue-forecast-audit/references/review-fetch.md": "40f5ec6e95c301ba6a9011e379bfaf08b8244f8c9eea6427e8fe23f52914b1d8",
+    "skills/revenue-forecast-audit/references/review-process.md": "35173fb133e6931b422afd3c5f18c3e9e05880d7b44fd31cb1bb6b541b1c577d",
+    "skills/revenue-forecast-audit/references/review-storage.md": "885edfe6d2273c17b1adf6c1daf9ffe6605e7ce1bfe65d3d20d8b47bb1c4dcdc",
+    "skills/revenue-forecast-audit/references/rf-checkpoints.md": "76a91e6509c3b982ef967fb868f3cddaaadc77fa45d19360918d9f921bb1e54f",
+    "skills/revenue-forecast-audit/references/workflow.md": "407bc77900da1562c36ee15306a2f85ed8dec7688d712d43d84ca21440773d5f",
+    "skills/revenue-forecast-audit/scripts/audit_blob_store.py": "ae2317875aaf064d396ac536c7e68838251c24370b6308abb245b4aa5cf966ad",
+    "skills/revenue-forecast-audit/scripts/audit_contracts.py": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+    "skills/revenue-forecast-audit/scripts/audit_run.py": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca",
+    "skills/revenue-forecast-audit/scripts/authoring_provenance.py": "20d18f1ed4fc8adf65661f429738db64d81a025ed72b35f5b4e5a97b3d2c192c",
+    "skills/revenue-forecast-audit/scripts/document_status_join.py": "68f8799188218396bbad497e0fc54c19365a423d5bb8e3c8977fd4ebe103d85a",
+    "skills/revenue-forecast-audit/scripts/execution_request.py": "48fcc4a3a5eb84fed49a886a394f9d7058721c32a47237cd4f95ef13d976a2fa",
+    "skills/revenue-forecast-audit/scripts/numeric_audit.py": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec",
+    "skills/revenue-forecast-audit/scripts/review_protocol.py": "1cfc07b6a2c8b322676d0d531e45dd72f1c6087bd55c79c267ef881a50a4327b",
+    "tests/test_w05_progress_closure.py": "18c30678ec0049321ee4267c84b61cd9b8584cd460f5de6dbe482743bc1792ec"
+  },
+  "candidate_freeze_unchanged_except_documented_e2e_fixture": true,
+  "candidate_all_34_snapshot_sha_match_at_seal": true,
+  "core_sha_before_after": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+  "old_fail_manifest_sha256": "bfdbb8890999128e8ba5857d7b4b31e5c12eb72cbfb946282d0abbb9715e1345",
+  "old_fail_8_artifacts_preserved": true,
+  "old_producer_9_inputs_preserved": true,
+  "new_probes": {
+    "pure": 6,
+    "tmp": 2,
+    "observer_plan_retry": 1,
+    "product_failures": 0
+  },
+  "observer_failure_retained": true,
+  "owned_scratch_removed": true,
+  "network_calls": 0,
+  "llm_calls": 0,
+  "paid_usd": 0,
+  "producer_writes": 0,
+  "shared_pwf_writes": 0,
+  "e2e_receipts_read_sha256": {
+    "root-receipt.json": "ef50a4973c23850221f52e16c93a88e56301c327f2ffc0629c6cb085d38841c6",
+    "receipt.json": "98ef21588dbfc8f572b7c4e81dac14ad3760fd3f862c4718412e1c925be735f7"
+  },
+  "scope": "engineering-record-and-recovery; not independent real-company research quality",
+  "stop": true
+}

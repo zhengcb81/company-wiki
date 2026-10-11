@@ -1,0 +1,18 @@
+{
+  "installations": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "files": 24,
+      "changed": [],
+      "mismatches": [],
+      "status": "MATCH"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "files": 24,
+      "changed": [],
+      "mismatches": [],
+      "status": "MATCH"
+    }
+  ]
+}

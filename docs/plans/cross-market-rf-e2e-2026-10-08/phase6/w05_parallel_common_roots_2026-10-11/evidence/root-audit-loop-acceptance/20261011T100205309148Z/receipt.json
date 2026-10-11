@@ -1,0 +1,76 @@
+{
+  "schema_version": "w05-root-reception/1",
+  "source": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\audit-loop",
+  "feature_commit": "7a5d4b8733c3442002b7ced95a4a319265ee687a",
+  "intake_pass": true,
+  "commands": [
+    {
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\audit-loop",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 75.958,
+      "log_sha256": "4f646769e8080d9e503565b7ba30988051b07095c66c80ea113ec2bb3637dc9c"
+    },
+    {
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "tools/run_pool_progress_e2e.py",
+        "--owned-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\20261011T100205309148Z\\scratch",
+        "--receipt",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\20261011T100205309148Z\\e2e\\receipt.json"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\audit-loop",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 17.55,
+      "log_sha256": "4ea8d9666600bd99fa50e4bc14561d0ff62b4d81346f59b2765034f353dac731"
+    }
+  ],
+  "source_sha_before": {
+    "skills/revenue-forecast-audit/scripts/pool_progress.py": "03f0d33b9233aac894d415e26406e4ccec22caa2b955adcb678856ca5836ce51",
+    "skills/revenue-forecast-audit/references/pool-progress-contract.md": "a9e592de10572f8ccbc726c2ba1960e0122d4be374775a7c2077926de6e91026",
+    "tests/test_pool_progress.py": "41a812e56df6ecb0771f11181e1a968a6f851f96884d77a07d507ea9e4440ce5",
+    "tests/test_pool_progress_cli.py": "87f9954e40a7bd7d3782a42a7e2e47f384abb017a11339e88e9d04ea0df76fbb",
+    "tests/fixtures/pool_progress/pool_6_entities.json": "7f0d9a76a0f0a37853c347089ccba92490621ee48449f023cbd3bf844dafae50",
+    "tests/fixtures/pool_progress/pool_6_cn.json": "2359055b5f2b504d96337cb0ef91860c0eae4e6b2728e8905d6c682baa60c994",
+    "tests/fixtures/pool_progress/versions_ref.json": "928d11e60e358b33188509828a1c70c97c484f0e378c1366b3bc09bf0a8cb595",
+    "tests/fixtures/pool_progress/budget_ref.json": "dbb5aeb89f13cc9b9dfacb2fcf5d67ffbafe0cead23f230f369aff9b683fcd2c",
+    "tests/fixtures/pool_progress/old_campaign.json": "86523c040a59235b6eb18c884cf16e4f8275050a8c31d534ce64634a77775cd5",
+    "tools/run_pool_progress_e2e.py": "52e57589a772ce923fd5a83bc1293340b60ad89f69f4f967fb2344f20fe0591f",
+    "docs/implementation/w05-audit-pool-progress/implementation.md": "f226e685b7c59b45be9f620b24e9fc96c75f97104b998544fe37b8a12ed82243"
+  },
+  "source_sha_after": {
+    "skills/revenue-forecast-audit/scripts/pool_progress.py": "03f0d33b9233aac894d415e26406e4ccec22caa2b955adcb678856ca5836ce51",
+    "skills/revenue-forecast-audit/references/pool-progress-contract.md": "a9e592de10572f8ccbc726c2ba1960e0122d4be374775a7c2077926de6e91026",
+    "tests/test_pool_progress.py": "41a812e56df6ecb0771f11181e1a968a6f851f96884d77a07d507ea9e4440ce5",
+    "tests/test_pool_progress_cli.py": "87f9954e40a7bd7d3782a42a7e2e47f384abb017a11339e88e9d04ea0df76fbb",
+    "tests/fixtures/pool_progress/pool_6_entities.json": "7f0d9a76a0f0a37853c347089ccba92490621ee48449f023cbd3bf844dafae50",
+    "tests/fixtures/pool_progress/pool_6_cn.json": "2359055b5f2b504d96337cb0ef91860c0eae4e6b2728e8905d6c682baa60c994",
+    "tests/fixtures/pool_progress/versions_ref.json": "928d11e60e358b33188509828a1c70c97c484f0e378c1366b3bc09bf0a8cb595",
+    "tests/fixtures/pool_progress/budget_ref.json": "dbb5aeb89f13cc9b9dfacb2fcf5d67ffbafe0cead23f230f369aff9b683fcd2c",
+    "tests/fixtures/pool_progress/old_campaign.json": "86523c040a59235b6eb18c884cf16e4f8275050a8c31d534ce64634a77775cd5",
+    "tools/run_pool_progress_e2e.py": "52e57589a772ce923fd5a83bc1293340b60ad89f69f4f967fb2344f20fe0591f",
+    "docs/implementation/w05-audit-pool-progress/implementation.md": "f226e685b7c59b45be9f620b24e9fc96c75f97104b998544fe37b8a12ed82243"
+  },
+  "source_unchanged": true,
+  "scratch_initial": "absent",
+  "scratch_restored": true,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "new_cost_usd": "0",
+  "quality_scope": "offline engineering reception only",
+  "independent_review": "PENDING",
+  "status": "PASS"
+}

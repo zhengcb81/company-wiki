@@ -1,0 +1,28 @@
+{
+  "installations": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "files": 24,
+      "changed": [
+        "SKILL.md",
+        "scripts/pool_progress.py",
+        "references/company-pool-loop.md",
+        "references/pool-progress-contract.md"
+      ],
+      "mismatches": [],
+      "status": "MATCH"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "files": 24,
+      "changed": [
+        "SKILL.md",
+        "scripts/pool_progress.py",
+        "references/company-pool-loop.md",
+        "references/pool-progress-contract.md"
+      ],
+      "mismatches": [],
+      "status": "MATCH"
+    }
+  ]
+}

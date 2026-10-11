@@ -1,0 +1,559 @@
+{
+  "sha256": "d8464cbe4265968c1bbf7acb730e880a4c2be0f1e15a70da3d35228362e8e1e7",
+  "state": {
+    "schema_version": "audit-pool-progress/1",
+    "revision": 58,
+    "created_at": "2026-10-11T10:13:32.148548+00:00",
+    "last_event": {
+      "event_id": "e2e-0061",
+      "fingerprint": "074b3ce39f2f3e712538b6edcc1ed0487096177fe9ad12cf890bf0f8cd6955c7",
+      "recorded_at": "2026-10-11T09:00:00+00:00"
+    },
+    "event_log": {
+      "total": 58,
+      "pruned": 8,
+      "recent": [
+        {
+          "event_id": "e2e-0010",
+          "fingerprint": "f0970cecfdbc312c75c1dfa866c7c72c70ab8690c68a26fc5a815952edbfec03",
+          "kind": "query_result",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0012",
+          "fingerprint": "faf084e506a2d4018b996a61cd4b5e7ff9ea652d4a5b8214677f45520ff2894b",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0013",
+          "fingerprint": "01ab5c4b3932c2b45d1080bb3480eb5a1f988fcd090c82dd916c00c5ef5f90c3",
+          "kind": "charge_unknown",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0015",
+          "fingerprint": "b608095f9808e1c7bbfcfb757f957f1c6fa6a4e5fd8ecae4e6de4207e7535455",
+          "kind": "charge_reconciled",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0016",
+          "fingerprint": "43297c3318476a2de8c1760dbb293b1d68337ac0258998644f60a269a4502565",
+          "kind": "charge_reconciled",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0017",
+          "fingerprint": "9de338a5f5bc87714e6a4d65fb59dcaf3ddee7937d211468c35be680b6541281",
+          "kind": "expert_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0018",
+          "fingerprint": "8a796ea3b56a8e2a71be21d855809e52f57835a7096251507dbfd2304e90fb4c",
+          "kind": "advance_round",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0019",
+          "fingerprint": "a07011ce8062b000982f1480867e868321bd759a64cd58b59ba6ec50557fdc2f",
+          "kind": "version_change",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0020",
+          "fingerprint": "1aecbbeaaa19cac8f023b6b9fd8a8cb6804f134adc9e3c5ae25738d6c6e50af1",
+          "kind": "finding",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0021",
+          "fingerprint": "d6f5ad8e45b070d945ffbb77e3d5ffc59b85befa99e46f0e7920cc24a7331e5f",
+          "kind": "fix_applied",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0022",
+          "fingerprint": "f4383dfafc39c5601003dec26c6bc8709ff46a3674fb622c3c256ec0b0786da7",
+          "kind": "run_started",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0023",
+          "fingerprint": "c91373fe2dabfa2e8d671793a0b81c6639bbef8dbffc0e78317bead40f24b586",
+          "kind": "executor_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0024",
+          "fingerprint": "0190eef1a68ebce3a146be717aad15bfe516eea4fd896a9db1188df5000768ad",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0025",
+          "fingerprint": "75fc635c6d768c9dd491c450313bda05af6074c171eaa2dd01d017e524fcdd30",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0026",
+          "fingerprint": "0fe69b145907ab6f369d2ffdc50ea4e045190107294d8f9efb702e8c86ee04f6",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0027",
+          "fingerprint": "adfe35ea436df3b7e83c63d1189ae4bd21e2cb025bf77472c68b8dd87623891c",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0028",
+          "fingerprint": "8e904e7d0012a64e7d081d010a9757df65ad9c94bec7a7ad3a014a79224c466d",
+          "kind": "expert_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0029",
+          "fingerprint": "4124797155e7d5de7cb994af737a3cb3a1bd4317b050894cf09bf3a85a870585",
+          "kind": "advance_round",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0030",
+          "fingerprint": "76d7c9d3d49a22b64eae2a24a89c896aa90931948d832c7abd992bbb4d1e2e7a",
+          "kind": "run_started",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0031",
+          "fingerprint": "5d62519fc33816a514117f27f9d74b6867864f29492f14f65605597336fffc1f",
+          "kind": "executor_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0032",
+          "fingerprint": "a8543f0d0616df4ba4d92b08c40c1287c48c7f89c3bd7ffc03ca1dceb1e4d37e",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0033",
+          "fingerprint": "7d3318a3dc1ae7f4e2ccd854d32e1b9da2ead11075063241b375a9816f82571f",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0034",
+          "fingerprint": "9cebd3abdebd610d66fc59200a7e0a216bde2791726ef28c1c9021794837b589",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0035",
+          "fingerprint": "b35762525957f007d1b91ddaaf9cac3a7dd4faba1a84bba54f079e7835ebd377",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0036",
+          "fingerprint": "c3fbe89f201903b49b2bfcd341dc7bb32369d5c92cc6edad8af936dbd71124fb",
+          "kind": "expert_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0037",
+          "fingerprint": "b756cd28b4c31e5038a54ce1e3886d2785600963e4344295f15a734713e8ea1c",
+          "kind": "advance_round",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0038",
+          "fingerprint": "adc42f0dfd65cf5e1e58d52088a614f29ef7586e0c27fc795c06b484f5ddd643",
+          "kind": "run_started",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0039",
+          "fingerprint": "d58e2f695b41ebad4232ef466301a7424a90a69f721e6513873d570b271e3698",
+          "kind": "executor_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0040",
+          "fingerprint": "5ba51559bb49f0f82d2c60a151e88b7138848df551ed186406b6914b4d2332d8",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0041",
+          "fingerprint": "7248ddc14f6391fe813bad32cbad2d78ec7e9ba8d3d0dbd21aa62377d985777c",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0042",
+          "fingerprint": "3276f41b136a2ce92344abd3fb93d68177bb0e0844c5acd890dafc6e721859dc",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0043",
+          "fingerprint": "074d3ad9546d588444747a94d831601d65c2721743c299e991194d815f8124fa",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0044",
+          "fingerprint": "c57db8617a8493b07ed486b27558393de9ba5fce3a6f3c40e6cd0f256679d541",
+          "kind": "expert_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0045",
+          "fingerprint": "1f71563b5b47c428b73700ea13ee773ac479d6c33be50b595ace1f037d54f378",
+          "kind": "advance_round",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0046",
+          "fingerprint": "226b656116e5213788305aab48171dbcf05bb6c2036854f0aa36d51f7464e21e",
+          "kind": "run_started",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0047",
+          "fingerprint": "2e6efb5f57b0da3683600ee0d940dfa76eca3d285f4a219bc2dc66085ad7cc14",
+          "kind": "executor_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0048",
+          "fingerprint": "d19f903378fafe08d59c4e17a7e59f804896497b3a645f301a3758cc8b2fe3f4",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0049",
+          "fingerprint": "1270a5ad0bdc2d3b954d459bc5be8e25f8eae1da35c9a2f38d2adc4ce17f9bc8",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0050",
+          "fingerprint": "3a26a0a9f7ade076c0ae116e497f3809332c9cba660c6fb2a7de8cd09e4e0d2a",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0051",
+          "fingerprint": "e1329f6e9268261de615b3c2f075593c4a5836f1132b03840dfa59128eaf63a6",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0052",
+          "fingerprint": "7079e37e2f7be0e1a80a10235258cd77bc1f9903177f08c7b9476301789c857c",
+          "kind": "expert_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0053",
+          "fingerprint": "96938f187679513bf00df835538fe09430f1b3ea63be1200eebc76f27a514fc5",
+          "kind": "advance_round",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0054",
+          "fingerprint": "3c79c2db695a8d821d84ca31c7eaf84386870ff03a7a1cdf6ed7f0c7e50d73ad",
+          "kind": "run_started",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0055",
+          "fingerprint": "efed032b519b464ad4e76c348f4342b274ef16465a564b29c9b8c69e5b647a40",
+          "kind": "executor_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0056",
+          "fingerprint": "4292ff90b0f497d3a3877aee34eff92edcbc8001690b1954ca524ce95186d411",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0057",
+          "fingerprint": "3f4386046c7ba5137d5e2f1e52fd3140754cf803bfd606cb7eac88c19e4e6139",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0058",
+          "fingerprint": "3eae10807356cd24254ba3cf46f95ddba8638d73ecaba80275cda7b8e0e159e2",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0059",
+          "fingerprint": "58325adfc1e4a9ce36b8c3bc36a29f2830eb165a2e91558df6d5c1754f9e4d21",
+          "kind": "review_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0060",
+          "fingerprint": "d6c72e356ff2721999fdbdc7fa6f38b2ad35d8fa0c70bc891bc38d6e6f1d7d3e",
+          "kind": "expert_status",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        },
+        {
+          "event_id": "e2e-0061",
+          "fingerprint": "074b3ce39f2f3e712538b6edcc1ed0487096177fe9ad12cf890bf0f8cd6955c7",
+          "kind": "advance_round",
+          "recorded_at": "2026-10-11T09:00:00+00:00"
+        }
+      ]
+    },
+    "event_fingerprints": {
+      "e2e-0001": "dea8cf719d4eff730be74402de8a5f455877cf11da0c0b553e0274829767bf45",
+      "e2e-0003": "51cb1edbc4148b2bb51381b17c83456e3fc297901949be4c25d0773318ebca92",
+      "e2e-0004": "a618d37336b0322e104e6c2c0abbac4e2c465949060e26e4335ba087d9d7eb9c",
+      "e2e-0005": "23389ac83e46f521dbe588afa5c31bac71492433cce9002cd56e71c41cb3343f",
+      "e2e-0006": "cb49ed409fa3076cb8bf5a06d63acb48400b40264ded2f530bf1fba7a94e2233",
+      "e2e-0007": "33ac443bb232fcc13bcd27ba5eb28febb330e9c42352d8d6136eedd821d39699",
+      "e2e-0008": "c6e35fac3ffa681edccb4423ca43076b664576beea34a1b19eb36a7452adf174",
+      "e2e-0009": "f9f57ce4b0d6b272929792b064222551fcec8306590a2b2a36a60e3f91cb0662",
+      "e2e-0010": "f0970cecfdbc312c75c1dfa866c7c72c70ab8690c68a26fc5a815952edbfec03",
+      "e2e-0012": "faf084e506a2d4018b996a61cd4b5e7ff9ea652d4a5b8214677f45520ff2894b",
+      "e2e-0013": "01ab5c4b3932c2b45d1080bb3480eb5a1f988fcd090c82dd916c00c5ef5f90c3",
+      "e2e-0015": "b608095f9808e1c7bbfcfb757f957f1c6fa6a4e5fd8ecae4e6de4207e7535455",
+      "e2e-0016": "43297c3318476a2de8c1760dbb293b1d68337ac0258998644f60a269a4502565",
+      "e2e-0017": "9de338a5f5bc87714e6a4d65fb59dcaf3ddee7937d211468c35be680b6541281",
+      "e2e-0018": "8a796ea3b56a8e2a71be21d855809e52f57835a7096251507dbfd2304e90fb4c",
+      "e2e-0019": "a07011ce8062b000982f1480867e868321bd759a64cd58b59ba6ec50557fdc2f",
+      "e2e-0020": "1aecbbeaaa19cac8f023b6b9fd8a8cb6804f134adc9e3c5ae25738d6c6e50af1",
+      "e2e-0021": "d6f5ad8e45b070d945ffbb77e3d5ffc59b85befa99e46f0e7920cc24a7331e5f",
+      "e2e-0022": "f4383dfafc39c5601003dec26c6bc8709ff46a3674fb622c3c256ec0b0786da7",
+      "e2e-0023": "c91373fe2dabfa2e8d671793a0b81c6639bbef8dbffc0e78317bead40f24b586",
+      "e2e-0024": "0190eef1a68ebce3a146be717aad15bfe516eea4fd896a9db1188df5000768ad",
+      "e2e-0025": "75fc635c6d768c9dd491c450313bda05af6074c171eaa2dd01d017e524fcdd30",
+      "e2e-0026": "0fe69b145907ab6f369d2ffdc50ea4e045190107294d8f9efb702e8c86ee04f6",
+      "e2e-0027": "adfe35ea436df3b7e83c63d1189ae4bd21e2cb025bf77472c68b8dd87623891c",
+      "e2e-0028": "8e904e7d0012a64e7d081d010a9757df65ad9c94bec7a7ad3a014a79224c466d",
+      "e2e-0029": "4124797155e7d5de7cb994af737a3cb3a1bd4317b050894cf09bf3a85a870585",
+      "e2e-0030": "76d7c9d3d49a22b64eae2a24a89c896aa90931948d832c7abd992bbb4d1e2e7a",
+      "e2e-0031": "5d62519fc33816a514117f27f9d74b6867864f29492f14f65605597336fffc1f",
+      "e2e-0032": "a8543f0d0616df4ba4d92b08c40c1287c48c7f89c3bd7ffc03ca1dceb1e4d37e",
+      "e2e-0033": "7d3318a3dc1ae7f4e2ccd854d32e1b9da2ead11075063241b375a9816f82571f",
+      "e2e-0034": "9cebd3abdebd610d66fc59200a7e0a216bde2791726ef28c1c9021794837b589",
+      "e2e-0035": "b35762525957f007d1b91ddaaf9cac3a7dd4faba1a84bba54f079e7835ebd377",
+      "e2e-0036": "c3fbe89f201903b49b2bfcd341dc7bb32369d5c92cc6edad8af936dbd71124fb",
+      "e2e-0037": "b756cd28b4c31e5038a54ce1e3886d2785600963e4344295f15a734713e8ea1c",
+      "e2e-0038": "adc42f0dfd65cf5e1e58d52088a614f29ef7586e0c27fc795c06b484f5ddd643",
+      "e2e-0039": "d58e2f695b41ebad4232ef466301a7424a90a69f721e6513873d570b271e3698",
+      "e2e-0040": "5ba51559bb49f0f82d2c60a151e88b7138848df551ed186406b6914b4d2332d8",
+      "e2e-0041": "7248ddc14f6391fe813bad32cbad2d78ec7e9ba8d3d0dbd21aa62377d985777c",
+      "e2e-0042": "3276f41b136a2ce92344abd3fb93d68177bb0e0844c5acd890dafc6e721859dc",
+      "e2e-0043": "074d3ad9546d588444747a94d831601d65c2721743c299e991194d815f8124fa",
+      "e2e-0044": "c57db8617a8493b07ed486b27558393de9ba5fce3a6f3c40e6cd0f256679d541",
+      "e2e-0045": "1f71563b5b47c428b73700ea13ee773ac479d6c33be50b595ace1f037d54f378",
+      "e2e-0046": "226b656116e5213788305aab48171dbcf05bb6c2036854f0aa36d51f7464e21e",
+      "e2e-0047": "2e6efb5f57b0da3683600ee0d940dfa76eca3d285f4a219bc2dc66085ad7cc14",
+      "e2e-0048": "d19f903378fafe08d59c4e17a7e59f804896497b3a645f301a3758cc8b2fe3f4",
+      "e2e-0049": "1270a5ad0bdc2d3b954d459bc5be8e25f8eae1da35c9a2f38d2adc4ce17f9bc8",
+      "e2e-0050": "3a26a0a9f7ade076c0ae116e497f3809332c9cba660c6fb2a7de8cd09e4e0d2a",
+      "e2e-0051": "e1329f6e9268261de615b3c2f075593c4a5836f1132b03840dfa59128eaf63a6",
+      "e2e-0052": "7079e37e2f7be0e1a80a10235258cd77bc1f9903177f08c7b9476301789c857c",
+      "e2e-0053": "96938f187679513bf00df835538fe09430f1b3ea63be1200eebc76f27a514fc5",
+      "e2e-0054": "3c79c2db695a8d821d84ca31c7eaf84386870ff03a7a1cdf6ed7f0c7e50d73ad",
+      "e2e-0055": "efed032b519b464ad4e76c348f4342b274ef16465a564b29c9b8c69e5b647a40",
+      "e2e-0056": "4292ff90b0f497d3a3877aee34eff92edcbc8001690b1954ca524ce95186d411",
+      "e2e-0057": "3f4386046c7ba5137d5e2f1e52fd3140754cf803bfd606cb7eac88c19e4e6139",
+      "e2e-0058": "3eae10807356cd24254ba3cf46f95ddba8638d73ecaba80275cda7b8e0e159e2",
+      "e2e-0059": "58325adfc1e4a9ce36b8c3bc36a29f2830eb165a2e91558df6d5c1754f9e4d21",
+      "e2e-0060": "d6c72e356ff2721999fdbdc7fa6f38b2ad35d8fa0c70bc891bc38d6e6f1d7d3e",
+      "e2e-0061": "074b3ce39f2f3e712538b6edcc1ed0487096177fe9ad12cf890bf0f8cd6955c7"
+    },
+    "pool": {
+      "ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\20261011T101209544274Z\\scratch\\inputs\\pool.json",
+      "sha256": "8b28e6bc06b57b29dd9303e9ea24bd40e369cedd6e73d75d49b8127580d43628",
+      "entity_count": 6,
+      "seed": "e2e-seed-2026-10-11",
+      "algorithm": "pool-sample/1",
+      "markets_available": [
+        "CN",
+        "HK",
+        "US"
+      ],
+      "entity_markets": {
+        "CN:SYN-01": [
+          "CN"
+        ],
+        "CN:SYN-02": [
+          "CN"
+        ],
+        "HK:SYN-01": [
+          "HK"
+        ],
+        "HK:SYN-02": [
+          "HK"
+        ],
+        "US:SYN-01": [
+          "US"
+        ],
+        "US:SYN-02": [
+          "US"
+        ]
+      }
+    },
+    "sampling": {
+      "round_index": 6,
+      "draw_order": [
+        "CN:SYN-01",
+        "HK:SYN-01",
+        "US:SYN-02",
+        "CN:SYN-02",
+        "HK:SYN-02",
+        "US:SYN-01"
+      ],
+      "selected": [
+        {
+          "entity_key": "CN:SYN-01",
+          "round": 0
+        },
+        {
+          "entity_key": "HK:SYN-01",
+          "round": 1
+        },
+        {
+          "entity_key": "US:SYN-02",
+          "round": 2
+        },
+        {
+          "entity_key": "CN:SYN-02",
+          "round": 3
+        },
+        {
+          "entity_key": "HK:SYN-02",
+          "round": 4
+        },
+        {
+          "entity_key": "US:SYN-01",
+          "round": 5
+        }
+      ]
+    },
+    "current_run": null,
+    "stage": "pool_exhausted",
+    "role_observations": {
+      "executor": null,
+      "storage": null,
+      "fetch": null,
+      "process": null,
+      "analyst": null,
+      "expert": null
+    },
+    "review_conclusions": {
+      "storage": null,
+      "fetch": null,
+      "process": null,
+      "analyst": null
+    },
+    "records_evidence": null,
+    "effective_versions": {
+      "digest": "2aa475087ba7ec151e76984463cadb0fd6580fc53234ef09a9cb6e1de04dfab9",
+      "refs": [
+        {
+          "kind": "repo_head",
+          "id": "e2e-baseline"
+        },
+        {
+          "kind": "install",
+          "id": "e2e-install"
+        },
+        {
+          "kind": "config",
+          "id": "e2e-config"
+        },
+        "commit-e2e-behavior",
+        "commit-legacy-fix"
+      ],
+      "docs_only_changes": []
+    },
+    "remediation_participants": [
+      "US:LEGACY-E2E"
+    ],
+    "clean": {
+      "streak": 0,
+      "streak_entities": [],
+      "evidence_refs": [],
+      "last_reset_reason": "version change: code"
+    },
+    "open_root_causes": [
+      {
+        "ref": "run-legacy-0::OLD1",
+        "severity": "P1",
+        "substantive": true,
+        "entity_key": "US:LEGACY-E2E",
+        "summary": "legacy retest obligation",
+        "fixed": true
+      }
+    ],
+    "required_retests": [
+      {
+        "ref": "run-legacy-0::OLD1",
+        "reason": "major fix must be retested",
+        "entity_key": "US:LEGACY-E2E",
+        "done": false,
+        "evidence_ref": null
+      }
+    ],
+    "budget_ref": {
+      "ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\20261011T101209544274Z\\scratch\\inputs\\budget.json",
+      "sha256": "5e37622096a9ca4641f175f70924942193294b240c17e69571f39f681ddc0bc3"
+    },
+    "budget": {
+      "remaining": "unknown",
+      "note": null,
+      "recorded_at": null
+    },
+    "possibly_paid_invocation_refs": [
+      {
+        "call_id": "call-e2e-1",
+        "ref": "runs/run-e2e-1/commands/call-e2e-1",
+        "cost_usd": 0,
+        "state": "reconciled_known",
+        "evidence_ref": "synthetic/provider-ledger/no-charge",
+        "note": null
+      }
+    ],
+    "next_action": {
+      "action": "no_action",
+      "why": "pool exhausted; no further sampling",
+      "args": {}
+    },
+    "diagnostics": [
+      {
+        "code": "records_status_structural_only",
+        "detail": "structural records (records_complete/not_evaluated) are evidence of transport, never of clean"
+      },
+      {
+        "code": "writer_query_pending",
+        "detail": "fetch failed but its writer is unknown; query first, never overwrite the role directory"
+      },
+      {
+        "code": "streak_reset_by_version_change",
+        "detail": "behavior version change (code) resets clean counting; re-accumulate on the new effective version"
+      },
+      {
+        "code": "pool_exhausted",
+        "detail": "every pool entity has been sampled"
+      }
+    ],
+    "history": {
+      "companies_closed": 6,
+      "clean_total": 1
+    }
+  }
+}

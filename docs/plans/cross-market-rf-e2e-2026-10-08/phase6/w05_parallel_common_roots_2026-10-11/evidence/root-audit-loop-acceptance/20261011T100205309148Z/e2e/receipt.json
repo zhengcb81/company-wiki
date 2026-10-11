@@ -1,0 +1,395 @@
+{
+  "schema_version": "w05-pool-progress-e2e/1",
+  "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\20261011T100205309148Z\\scratch",
+  "elapsed_seconds": 17.324,
+  "sigterm": {
+    "child_pid": 27620,
+    "killed_after_event": "e2e-0001",
+    "method": "terminate",
+    "returncode": 1,
+    "state_sha256_after_kill": "a47225d0bd35a581f231783b1613d18834b13d6c0e93baaa2b8271be08232acc",
+    "marker": {
+      "pid": 27620,
+      "event_id": "e2e-0001",
+      "revision": 1,
+      "state_sha256": "a47225d0bd35a581f231783b1613d18834b13d6c0e93baaa2b8271be08232acc"
+    }
+  },
+  "state_hashes": {
+    "init": "d072adf041587f91bf52f618b4bb85937b57ca477289c7f38106f8deab5f95d1",
+    "after_kill": "a47225d0bd35a581f231783b1613d18834b13d6c0e93baaa2b8271be08232acc",
+    "final": "cbb497ed3b262884b465e2a75b93c1f724035339a8fb478cc2e5d0145d3a0f3d"
+  },
+  "draw_order_sha256": "6958a08c2277be8cb18318fe62b0c95c1bbda9b27937ea27275e42bf3bfa412e",
+  "first_entity": "CN:SYN-01",
+  "dispatch_counts": {
+    "dispatch_executor": 7,
+    "dispatch_missing_reviewer": 18,
+    "query_role_status": 2,
+    "dispatch_expert": 5,
+    "reconcile_possible_charge": 1,
+    "select_next_company": 4,
+    "no_action": 3,
+    "resume_remediation": 1,
+    "campaign_sample_criteria_met": 1
+  },
+  "external_posts": 0,
+  "paid_usd": "0",
+  "synthetic_only": true,
+  "network": "disabled_by_construction",
+  "sentinel": {
+    "initial": {
+      "keep-a.txt": "b34e9a46a1f4d4f81df9d0b6c66eae8df2be5adc51787ee644bdbda6a71d4fc4",
+      "keep-b.bin": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+    },
+    "final": {
+      "keep-a.txt": "b34e9a46a1f4d4f81df9d0b6c66eae8df2be5adc51787ee644bdbda6a71d4fc4",
+      "keep-b.bin": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+    },
+    "unchanged": true
+  },
+  "restore": {
+    "owned_files_removed": 58,
+    "final_listing": [
+      "sentinel"
+    ]
+  },
+  "clean_stop": {
+    "streak": 3,
+    "entities": [
+      "HK:SYN-01",
+      "US:SYN-02",
+      "CN:SYN-02"
+    ],
+    "participants_excluded": [
+      "US:LEGACY-E2E"
+    ]
+  },
+  "steps": [
+    {
+      "step": "plan",
+      "event": "e2e-0002",
+      "next_action": "no_action",
+      "note": "resume after crash"
+    },
+    {
+      "step": "e2e-0003",
+      "kind": "executor_status",
+      "revision": 2,
+      "next_action": "dispatch_missing_reviewer",
+      "note": "sealed; 4 reviewers missing"
+    },
+    {
+      "step": "e2e-0004",
+      "kind": "records_status",
+      "revision": 3,
+      "next_action": "dispatch_missing_reviewer",
+      "note": "records != clean"
+    },
+    {
+      "step": "e2e-0005",
+      "kind": "review_status",
+      "revision": 4,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0006",
+      "kind": "review_status",
+      "revision": 5,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0007",
+      "kind": "review_status",
+      "revision": 6,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0008",
+      "kind": "review_status",
+      "revision": 7,
+      "next_action": "query_role_status",
+      "note": "fetch failed, writer unknown"
+    },
+    {
+      "step": "e2e-0009",
+      "kind": "query_result",
+      "revision": 8,
+      "next_action": "query_role_status",
+      "note": "still unknown"
+    },
+    {
+      "step": "e2e-0010",
+      "kind": "query_result",
+      "revision": 9,
+      "next_action": "dispatch_missing_reviewer",
+      "note": "only fetch re-dispatched"
+    },
+    {
+      "step": "plan",
+      "event": "e2e-0011",
+      "next_action": "dispatch_missing_reviewer",
+      "note": "which roles to re-dispatch"
+    },
+    {
+      "step": "e2e-0012",
+      "kind": "review_status",
+      "revision": 10,
+      "next_action": "dispatch_expert",
+      "note": "four conclusions complete"
+    },
+    {
+      "step": "e2e-0013",
+      "kind": "charge_unknown",
+      "revision": 11,
+      "next_action": "reconcile_possible_charge",
+      "note": "POST may have happened"
+    },
+    {
+      "step": "plan",
+      "event": "e2e-0014",
+      "next_action": "reconcile_possible_charge",
+      "note": "unknown-fee restart probe"
+    },
+    {
+      "step": "e2e-0015",
+      "kind": "charge_reconciled",
+      "revision": 12,
+      "next_action": "dispatch_expert",
+      "note": "still unknown; cost stays null"
+    },
+    {
+      "step": "e2e-0016",
+      "kind": "expert_status",
+      "revision": 13,
+      "next_action": "select_next_company",
+      "note": "company 1 closeable"
+    },
+    {
+      "step": "e2e-0017",
+      "kind": "advance_round",
+      "revision": 14,
+      "next_action": "dispatch_executor",
+      "note": "company 1 clean close"
+    },
+    {
+      "step": "replay",
+      "event": "e2e-0017",
+      "revision": 14,
+      "next_action": "dispatch_executor",
+      "note": "idempotent"
+    },
+    {
+      "step": "e2e-0018",
+      "kind": "version_change",
+      "revision": 15,
+      "next_action": "dispatch_executor",
+      "note": "streak reset by version change"
+    },
+    {
+      "step": "e2e-0019",
+      "kind": "finding",
+      "revision": 16,
+      "next_action": "dispatch_executor",
+      "note": ""
+    },
+    {
+      "step": "e2e-0020",
+      "kind": "fix_applied",
+      "revision": 17,
+      "next_action": "dispatch_executor",
+      "note": "obligation created"
+    },
+    {
+      "step": "e2e-0021",
+      "kind": "run_started",
+      "revision": 18,
+      "next_action": "no_action",
+      "note": ""
+    },
+    {
+      "step": "e2e-0022",
+      "kind": "executor_status",
+      "revision": 19,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0023",
+      "kind": "review_status",
+      "revision": 20,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0024",
+      "kind": "review_status",
+      "revision": 21,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0025",
+      "kind": "review_status",
+      "revision": 22,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0026",
+      "kind": "review_status",
+      "revision": 23,
+      "next_action": "dispatch_expert",
+      "note": ""
+    },
+    {
+      "step": "e2e-0027",
+      "kind": "expert_status",
+      "revision": 24,
+      "next_action": "select_next_company",
+      "note": ""
+    },
+    {
+      "step": "e2e-0028",
+      "kind": "advance_round",
+      "revision": 25,
+      "next_action": "dispatch_executor",
+      "note": ""
+    },
+    {
+      "step": "e2e-0029",
+      "kind": "run_started",
+      "revision": 26,
+      "next_action": "no_action",
+      "note": ""
+    },
+    {
+      "step": "e2e-0030",
+      "kind": "executor_status",
+      "revision": 27,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0031",
+      "kind": "review_status",
+      "revision": 28,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0032",
+      "kind": "review_status",
+      "revision": 29,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0033",
+      "kind": "review_status",
+      "revision": 30,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0034",
+      "kind": "review_status",
+      "revision": 31,
+      "next_action": "dispatch_expert",
+      "note": ""
+    },
+    {
+      "step": "e2e-0035",
+      "kind": "expert_status",
+      "revision": 32,
+      "next_action": "select_next_company",
+      "note": ""
+    },
+    {
+      "step": "e2e-0036",
+      "kind": "advance_round",
+      "revision": 33,
+      "next_action": "dispatch_executor",
+      "note": ""
+    },
+    {
+      "step": "e2e-0037",
+      "kind": "run_started",
+      "revision": 34,
+      "next_action": "no_action",
+      "note": ""
+    },
+    {
+      "step": "e2e-0038",
+      "kind": "executor_status",
+      "revision": 35,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0039",
+      "kind": "review_status",
+      "revision": 36,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0040",
+      "kind": "review_status",
+      "revision": 37,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0041",
+      "kind": "review_status",
+      "revision": 38,
+      "next_action": "dispatch_missing_reviewer",
+      "note": ""
+    },
+    {
+      "step": "e2e-0042",
+      "kind": "review_status",
+      "revision": 39,
+      "next_action": "dispatch_expert",
+      "note": ""
+    },
+    {
+      "step": "e2e-0043",
+      "kind": "expert_status",
+      "revision": 40,
+      "next_action": "select_next_company",
+      "note": ""
+    },
+    {
+      "step": "e2e-0044",
+      "kind": "advance_round",
+      "revision": 41,
+      "next_action": "resume_remediation",
+      "note": ""
+    },
+    {
+      "step": "plan",
+      "event": "e2e-0045",
+      "next_action": "resume_remediation",
+      "note": "stop criteria with outstanding obligation"
+    },
+    {
+      "step": "e2e-0046",
+      "kind": "retest_done",
+      "revision": 42,
+      "next_action": "campaign_sample_criteria_met",
+      "note": "obligation cleared"
+    },
+    {
+      "step": "plan",
+      "event": "e2e-0047",
+      "next_action": "campaign_sample_criteria_met",
+      "note": "final"
+    }
+  ],
+  "note": "recovery-protocol test over synthetic fixtures; not a real company research pass; external exactly-once charging cannot be guaranteed"
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "relative": "sentinel/keep-a.txt",
+    "sha256": "b34e9a46a1f4d4f81df9d0b6c66eae8df2be5adc51787ee644bdbda6a71d4fc4",
+    "bytes": 21
+  },
+  {
+    "relative": "sentinel/keep-b.bin",
+    "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+    "bytes": 256
+  }
+]

@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-10-11T10:26:11.676890+00:00",
+  "main_head": "321d4c165575e81add3b4aa1ee9ba0a047ca6082",
+  "preflight": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "files": 24,
+      "changed": [],
+      "mismatches": [
+        "SKILL.md",
+        "scripts/pool_progress.py",
+        "references/company-pool-loop.md",
+        "references/pool-progress-contract.md"
+      ],
+      "status": "DRIFT"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "files": 24,
+      "changed": [],
+      "mismatches": [
+        "SKILL.md",
+        "scripts/pool_progress.py",
+        "references/company-pool-loop.md",
+        "references/pool-progress-contract.md"
+      ],
+      "status": "DRIFT"
+    }
+  ],
+  "install": {
+    "installations": [
+      {
+        "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+        "files": 24,
+        "changed": [
+          "SKILL.md",
+          "scripts/pool_progress.py",
+          "references/company-pool-loop.md",
+          "references/pool-progress-contract.md"
+        ],
+        "mismatches": [],
+        "status": "MATCH"
+      },
+      {
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+        "files": 24,
+        "changed": [
+          "SKILL.md",
+          "scripts/pool_progress.py",
+          "references/company-pool-loop.md",
+          "references/pool-progress-contract.md"
+        ],
+        "mismatches": [],
+        "status": "MATCH"
+      }
+    ]
+  },
+  "check": {
+    "installations": [
+      {
+        "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+        "files": 24,
+        "changed": [],
+        "mismatches": [],
+        "status": "MATCH"
+      },
+      {
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+        "files": 24,
+        "changed": [],
+        "mismatches": [],
+        "status": "MATCH"
+      }
+    ]
+  },
+  "native_help": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "exit_code": 0,
+      "source_sha256": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+      "unaffected_files_unchanged": 20
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "exit_code": 0,
+      "source_sha256": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+      "unaffected_files_unchanged": 20
+    }
+  ],
+  "scope": "one skill; four differing files per destination and install manifests only",
+  "http_calls": 0,
+  "llm_calls": 0,
+  "status": "PASS"
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "tools/run_pool_progress_e2e.py",
+    "--owned-root",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\20261011T100205309148Z\\scratch",
+    "--receipt",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\20261011T100205309148Z\\e2e\\receipt.json"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\audit-loop",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 17.55,
+  "log_sha256": "4ea8d9666600bd99fa50e4bc14561d0ff62b4d81346f59b2765034f353dac731"
+}

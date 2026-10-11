@@ -1,0 +1,62 @@
+{
+  "schema_version": "independent-major-review-manifest/1.0",
+  "files": [
+    {
+      "name": "review.json",
+      "bytes": 17857,
+      "sha256": "441ba6cc461f9d6c6e4605580f1dd4c8a33ca3929902a82c35a75eca899f0a44"
+    },
+    {
+      "name": "review.md",
+      "bytes": 3838,
+      "sha256": "4471a6a0e9f41a2ca951b5df0ba9e57e3e2160776ae9697200dd4d65c83dbc1b"
+    },
+    {
+      "name": "pure_probes.log",
+      "bytes": 5516,
+      "sha256": "db5a6e9ff67124d25cc480260dc0ac0398ae2a9bec2b8ddbfc47ca0cf77e6ecd"
+    },
+    {
+      "name": "pure_probes.ps1",
+      "bytes": 5866,
+      "sha256": "881ea808c453f56c07fd03dd577bdf5334b57a10fe391becd5bedd150f45413e"
+    },
+    {
+      "name": "tmp_probes.log",
+      "bytes": 1914,
+      "sha256": "fe350b53004a85c35238215bad06377d2c12f55044ff0d9edae5e4e9533b8bd5"
+    },
+    {
+      "name": "tmp_probes.ps1",
+      "bytes": 3917,
+      "sha256": "c9a3f1c4c85df6a32b26620c1f525111f404091dd7ea43974409f1b1d76413bf"
+    },
+    {
+      "name": "failed_tmp.log",
+      "bytes": 617,
+      "sha256": "a5b1930e01852f9f6bc24b3f0d0ceabbc4872ce1876c4a74b601a9bfb783e7f9"
+    },
+    {
+      "name": "failed_tmp_cleanup.log",
+      "bytes": 60,
+      "sha256": "7865501519030b07fb2b1765725494cacbaea0b418fd5398e4cb8563edad5959"
+    }
+  ],
+  "producer_input_sha256": {
+    "AGENTS.md": "fe506bcf5e87570747c035dd05e6b6b46b11075fa7bd3f844b8edff0500d9d37",
+    "skills/revenue-forecast-audit/SKILL.md": "340a6174fdffe6b075faec0c68abf71ad32523afd8f4a29f77ee3588c984bfb7",
+    "docs/handoffs/w05-audit-loop/handoff.md": "42c62ffcf393cc1ff6d212169fac0c63db60500fa38f3b5a9da0112400a500b9",
+    "docs/handoffs/w05-audit-loop/input/construction_card.md": "b59545a3bc2449952033e489e77cd460d356252b3c694726b790c812f23ec71d",
+    "skills/revenue-forecast-audit/references/pool-progress-contract.md": "a9e592de10572f8ccbc726c2ba1960e0122d4be374775a7c2077926de6e91026",
+    "skills/revenue-forecast-audit/scripts/pool_progress.py": "03f0d33b9233aac894d415e26406e4ccec22caa2b955adcb678856ca5836ce51",
+    "tests/test_pool_progress.py": "41a812e56df6ecb0771f11181e1a968a6f851f96884d77a07d507ea9e4440ce5",
+    "tests/test_pool_progress_cli.py": "87f9954e40a7bd7d3782a42a7e2e47f384abb017a11339e88e9d04ea0df76fbb",
+    "skills/revenue-forecast-audit/scripts/audit_run.py": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca"
+  },
+  "producer_unchanged": true,
+  "producer_writes": 0,
+  "fees_usd": 0,
+  "network_calls": 0,
+  "old_reports_untouched": true,
+  "owned_scratch_removed": true
+}

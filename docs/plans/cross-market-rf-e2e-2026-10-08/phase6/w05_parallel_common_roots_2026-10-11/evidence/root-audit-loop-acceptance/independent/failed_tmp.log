@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<stdin>", line 8, in <module>
+  File "C:\Miniconda\Lib\pathlib\_abc.py", line 641, in write_bytes
+    with self.open(mode='wb') as f:
+         ~~~~~~~~~^^^^^^^^^^^
+  File "C:\Miniconda\Lib\pathlib\_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{3af11d33-0266-4481-88ee-e26470dc43a9}\\AC\\Temp\\w05-audit-loop-review-3y9stxeh\\sentinel.txt'

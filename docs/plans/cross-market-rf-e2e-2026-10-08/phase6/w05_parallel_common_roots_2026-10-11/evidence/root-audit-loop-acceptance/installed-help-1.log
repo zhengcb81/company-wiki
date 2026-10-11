@@ -1,0 +1,26 @@
+usage: pool_progress.py [-h] {init,plan,apply,migrate-preview} ...
+
+Company-pool loop progress reducer and recovery CLI (W05-AUDIT-LOOP). A small,
+pure state machine for the pool-loop campaign described in references/company-
+pool-loop.md. The reducer folds one observation at a time into an ``audit-
+pool-progress/1`` state and proposes the next action for a native harness to
+dispatch. It never starts agents or providers, never schedules work, never
+keeps a parallel cost ledger, and never evaluates research quality: structural
+records_complete stays distinct from four independent review conclusions.
+Read-only reuse of P7 primitives: audit_run validation helpers and its
+Redactor for every persisted artifact. Duplicate call costs are already
+deduplicated by document_status_join.py; this tool only stores call ids and
+refs, with unknown cost/usage kept null. State files are written through a
+staged-file atomic replace guarded by a short-held OS-level lock; a crash
+leaves either the old or the new complete JSON and a locatable ``.pool-
+progress-`` orphan, never a torn file.
+
+positional arguments:
+  {init,plan,apply,migrate-preview}
+    init                create a new pool-loop state
+    plan                dry-run one observation
+    apply               fold one observation atomically
+    migrate-preview     preview an old campaign
+
+options:
+  -h, --help            show this help message and exit

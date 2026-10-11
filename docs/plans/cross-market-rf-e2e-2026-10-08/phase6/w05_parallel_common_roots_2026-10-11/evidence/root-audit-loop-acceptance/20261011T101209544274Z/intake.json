@@ -1,0 +1,264 @@
+{
+  "checks": [
+    {
+      "kind": "handoff_manifest",
+      "path": "evidence/e2e/receipt.json",
+      "expected": {
+        "path": "evidence/e2e/receipt.json",
+        "bytes": 9762,
+        "sha256": "3012fab6b87c5a85efa7e9fac48891a737b4614b9247919b5869f04dc3b52b3d"
+      },
+      "actual": {
+        "sha256": "3012fab6b87c5a85efa7e9fac48891a737b4614b9247919b5869f04dc3b52b3d",
+        "bytes": 9762
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "evidence/e2e/resume.json",
+      "expected": {
+        "path": "evidence/e2e/resume.json",
+        "bytes": 1366,
+        "sha256": "da77d2342bc3b87914b56d123266b612b20e2ba83f4ab5b9bcca94a8e48973f6"
+      },
+      "actual": {
+        "sha256": "da77d2342bc3b87914b56d123266b612b20e2ba83f4ab5b9bcca94a8e48973f6",
+        "bytes": 1366
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "evidence/e2e/resume.md",
+      "expected": {
+        "path": "evidence/e2e/resume.md",
+        "bytes": 460,
+        "sha256": "ade744f5da5763f9f98ef60e9ccf98dfa15d6823665165e78bc51a810d8b20ad"
+      },
+      "actual": {
+        "sha256": "ade744f5da5763f9f98ef60e9ccf98dfa15d6823665165e78bc51a810d8b20ad",
+        "bytes": 460
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "evidence/e2e/run.log",
+      "expected": {
+        "path": "evidence/e2e/run.log",
+        "bytes": 450,
+        "sha256": "8b5f7038e7e0a7fb2b1fb5ae8e77b814db4f86823354c0cd4f2b0326dd15b37b"
+      },
+      "actual": {
+        "sha256": "8b5f7038e7e0a7fb2b1fb5ae8e77b814db4f86823354c0cd4f2b0326dd15b37b",
+        "bytes": 450
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "evidence/green_full_suite.log",
+      "expected": {
+        "path": "evidence/green_full_suite.log",
+        "bytes": 31050,
+        "sha256": "e5c4211b1ca55c47682e6ba900aab5306d73b58ece58a23d5ee2a7419cf42008"
+      },
+      "actual": {
+        "sha256": "e5c4211b1ca55c47682e6ba900aab5306d73b58ece58a23d5ee2a7419cf42008",
+        "bytes": 31050
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "evidence/red_pool_progress.log",
+      "expected": {
+        "path": "evidence/red_pool_progress.log",
+        "bytes": 72501,
+        "sha256": "50a31c0aa8a9c518a834c8808a6a0b9c4f36aef6140c2fa5668e855521e9d095"
+      },
+      "actual": {
+        "sha256": "50a31c0aa8a9c518a834c8808a6a0b9c4f36aef6140c2fa5668e855521e9d095",
+        "bytes": 72501
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "handoff.json",
+      "expected": {
+        "path": "handoff.json",
+        "bytes": 10904,
+        "sha256": "9851d15a5eacda94e93aa320202c4c4c9db1580816f3191b17afefe7b4f57e3e"
+      },
+      "actual": {
+        "sha256": "9851d15a5eacda94e93aa320202c4c4c9db1580816f3191b17afefe7b4f57e3e",
+        "bytes": 10904
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "handoff.md",
+      "expected": {
+        "path": "handoff.md",
+        "bytes": 3913,
+        "sha256": "42c62ffcf393cc1ff6d212169fac0c63db60500fa38f3b5a9da0112400a500b9"
+      },
+      "actual": {
+        "sha256": "42c62ffcf393cc1ff6d212169fac0c63db60500fa38f3b5a9da0112400a500b9",
+        "bytes": 3913
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "input/audit-readiness.json",
+      "expected": {
+        "path": "input/audit-readiness.json",
+        "bytes": 28401,
+        "sha256": "6024e21274548d43cb0912da33cea305e7b5cf80bd5ea1654939f0e38a7414e3"
+      },
+      "actual": {
+        "sha256": "6024e21274548d43cb0912da33cea305e7b5cf80bd5ea1654939f0e38a7414e3",
+        "bytes": 28401
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "input/audit-readiness.md",
+      "expected": {
+        "path": "input/audit-readiness.md",
+        "bytes": 5320,
+        "sha256": "47c1dbcec84df39fb3e235e15daa628e07e241b4573ab1a1ab0232140789bfe9"
+      },
+      "actual": {
+        "sha256": "47c1dbcec84df39fb3e235e15daa628e07e241b4573ab1a1ab0232140789bfe9",
+        "bytes": 5320
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "input/construction_card.md",
+      "expected": {
+        "path": "input/construction_card.md",
+        "bytes": 8569,
+        "sha256": "b59545a3bc2449952033e489e77cd460d356252b3c694726b790c812f23ec71d"
+      },
+      "actual": {
+        "sha256": "b59545a3bc2449952033e489e77cd460d356252b3c694726b790c812f23ec71d",
+        "bytes": 8569
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "input/handoff_contract.md",
+      "expected": {
+        "path": "input/handoff_contract.md",
+        "bytes": 3497,
+        "sha256": "45e10c161731aa108e3dc0df8262786f968a2bc8d7fa517b72ff6d17d6bb4835"
+      },
+      "actual": {
+        "sha256": "45e10c161731aa108e3dc0df8262786f968a2bc8d7fa517b72ff6d17d6bb4835",
+        "bytes": 3497
+      },
+      "pass": true
+    },
+    {
+      "kind": "handoff_manifest",
+      "path": "input/inputs.json",
+      "expected": {
+        "path": "input/inputs.json",
+        "bytes": 497,
+        "sha256": "dfe0e34fe65a03e4eab829c5dd5cdc615381f4114ec4480011f1f8a79a220fd2"
+      },
+      "actual": {
+        "sha256": "dfe0e34fe65a03e4eab829c5dd5cdc615381f4114ec4480011f1f8a79a220fd2",
+        "bytes": 497
+      },
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "skills/revenue-forecast-audit/scripts/pool_progress.py",
+      "expected_sha256": "03f0d33b9233aac894d415e26406e4ccec22caa2b955adcb678856ca5836ce51",
+      "actual_sha256": "03f0d33b9233aac894d415e26406e4ccec22caa2b955adcb678856ca5836ce51",
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+      "expected_sha256": "a9e592de10572f8ccbc726c2ba1960e0122d4be374775a7c2077926de6e91026",
+      "actual_sha256": "a9e592de10572f8ccbc726c2ba1960e0122d4be374775a7c2077926de6e91026",
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "tests/test_pool_progress.py",
+      "expected_sha256": "41a812e56df6ecb0771f11181e1a968a6f851f96884d77a07d507ea9e4440ce5",
+      "actual_sha256": "41a812e56df6ecb0771f11181e1a968a6f851f96884d77a07d507ea9e4440ce5",
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "tests/test_pool_progress_cli.py",
+      "expected_sha256": "87f9954e40a7bd7d3782a42a7e2e47f384abb017a11339e88e9d04ea0df76fbb",
+      "actual_sha256": "87f9954e40a7bd7d3782a42a7e2e47f384abb017a11339e88e9d04ea0df76fbb",
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "tests/fixtures/pool_progress/pool_6_entities.json",
+      "expected_sha256": "7f0d9a76a0f0a37853c347089ccba92490621ee48449f023cbd3bf844dafae50",
+      "actual_sha256": "7f0d9a76a0f0a37853c347089ccba92490621ee48449f023cbd3bf844dafae50",
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "tests/fixtures/pool_progress/pool_6_cn.json",
+      "expected_sha256": "2359055b5f2b504d96337cb0ef91860c0eae4e6b2728e8905d6c682baa60c994",
+      "actual_sha256": "2359055b5f2b504d96337cb0ef91860c0eae4e6b2728e8905d6c682baa60c994",
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "tests/fixtures/pool_progress/versions_ref.json",
+      "expected_sha256": "928d11e60e358b33188509828a1c70c97c484f0e378c1366b3bc09bf0a8cb595",
+      "actual_sha256": "928d11e60e358b33188509828a1c70c97c484f0e378c1366b3bc09bf0a8cb595",
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "tests/fixtures/pool_progress/budget_ref.json",
+      "expected_sha256": "dbb5aeb89f13cc9b9dfacb2fcf5d67ffbafe0cead23f230f369aff9b683fcd2c",
+      "actual_sha256": "dbb5aeb89f13cc9b9dfacb2fcf5d67ffbafe0cead23f230f369aff9b683fcd2c",
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "tests/fixtures/pool_progress/old_campaign.json",
+      "expected_sha256": "86523c040a59235b6eb18c884cf16e4f8275050a8c31d534ce64634a77775cd5",
+      "actual_sha256": "86523c040a59235b6eb18c884cf16e4f8275050a8c31d534ce64634a77775cd5",
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "tools/run_pool_progress_e2e.py",
+      "expected_sha256": "52e57589a772ce923fd5a83bc1293340b60ad89f69f4f967fb2344f20fe0591f",
+      "actual_sha256": "52e57589a772ce923fd5a83bc1293340b60ad89f69f4f967fb2344f20fe0591f",
+      "pass": true
+    },
+    {
+      "kind": "changed_file",
+      "path": "docs/implementation/w05-audit-pool-progress/implementation.md",
+      "expected_sha256": "f226e685b7c59b45be9f620b24e9fc96c75f97104b998544fe37b8a12ed82243",
+      "actual_sha256": "f226e685b7c59b45be9f620b24e9fc96c75f97104b998544fe37b8a12ed82243",
+      "pass": true
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,102 @@
+{
+  "freeze_ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\20261011T101209544274Z\\source-freeze.json",
+  "freeze_sha256": "dfb85899e385bd31124814a17c76046623ff3b4f180ed40b801a11de3c358904",
+  "actual_source_sha256": {
+    "skills/revenue-forecast-audit/scripts/pool_progress.py": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+    "skills/revenue-forecast-audit/references/pool-progress-contract.md": "b9004f3af394b211fb450c844faf166e4219c93f081fffb4a088da9c528a285b",
+    "tests/test_pool_progress.py": "1028c5e1a0c0f2edd58f03a589f167a9d0e2c251baab375f5733527ef0fb914e",
+    "tests/test_pool_progress_cli.py": "abfce372bcaf764ed1c1e7538073a4638d4698cddc8478f5fa6ab59ea6e1fa7b",
+    "tests/fixtures/pool_progress/pool_6_entities.json": "7f0d9a76a0f0a37853c347089ccba92490621ee48449f023cbd3bf844dafae50",
+    "tests/fixtures/pool_progress/pool_6_cn.json": "2359055b5f2b504d96337cb0ef91860c0eae4e6b2728e8905d6c682baa60c994",
+    "tests/fixtures/pool_progress/versions_ref.json": "928d11e60e358b33188509828a1c70c97c484f0e378c1366b3bc09bf0a8cb595",
+    "tests/fixtures/pool_progress/budget_ref.json": "dbb5aeb89f13cc9b9dfacb2fcf5d67ffbafe0cead23f230f369aff9b683fcd2c",
+    "tests/fixtures/pool_progress/old_campaign.json": "86523c040a59235b6eb18c884cf16e4f8275050a8c31d534ce64634a77775cd5",
+    "tools/run_pool_progress_e2e.py": "fda6a9ac335726937423a5cb1350c44e6f5026908c065b03bada0d548e0c6ba6",
+    "docs/implementation/w05-audit-pool-progress/implementation.md": "f226e685b7c59b45be9f620b24e9fc96c75f97104b998544fe37b8a12ed82243",
+    "skills/revenue-forecast-audit/SKILL.md": "603de7034e7d4adf4b0d9fc86ba75a17d3f892824108b53c2aaad3ffe84c7996",
+    "skills/revenue-forecast-audit/agents/openai.yaml": "b81a556d2424002ea561ba9c124ccbe8b888b6fb27300df0d0c0c4c554af319f",
+    "skills/revenue-forecast-audit/references/artifact-contract.md": "4de59015c66a757ef73bca1855516c69fc3935c4ac71e4113382a8e7b7c36633",
+    "skills/revenue-forecast-audit/references/company-pool-loop.md": "aa7dfcc864f1c8e7e2d66e770ae199c251a003fc3836583422a8f24226c629db",
+    "skills/revenue-forecast-audit/references/execution-artifact-contract.md": "9e9a854d39c4ac02aa7e1789ba27375c72f9cd8a2003210249b97036d4cce1d5",
+    "skills/revenue-forecast-audit/references/executor.md": "c9acb192a7a921d15a3da450832a6cd5f4e09bbaa7b7387b156cb613c165ba8e",
+    "skills/revenue-forecast-audit/references/numeric-ledger-example.json": "2f793ef0b2ec633a7a31bd8b42c7d7a0c8759667c928122d721e0677f4f33890",
+    "skills/revenue-forecast-audit/references/remediation.md": "91baa2d3f19fa03696eee78b899a6a4e34310f07677d9c4afa3b9b943ab251cf",
+    "skills/revenue-forecast-audit/references/review-analyst.md": "39c233a498be1eabe9aabfdb65ea58c6f39a1201fe87d2d5d1a273481cf45cc7",
+    "skills/revenue-forecast-audit/references/review-fetch.md": "40f5ec6e95c301ba6a9011e379bfaf08b8244f8c9eea6427e8fe23f52914b1d8",
+    "skills/revenue-forecast-audit/references/review-process.md": "35173fb133e6931b422afd3c5f18c3e9e05880d7b44fd31cb1bb6b541b1c577d",
+    "skills/revenue-forecast-audit/references/review-storage.md": "885edfe6d2273c17b1adf6c1daf9ffe6605e7ce1bfe65d3d20d8b47bb1c4dcdc",
+    "skills/revenue-forecast-audit/references/rf-checkpoints.md": "76a91e6509c3b982ef967fb868f3cddaaadc77fa45d19360918d9f921bb1e54f",
+    "skills/revenue-forecast-audit/references/workflow.md": "407bc77900da1562c36ee15306a2f85ed8dec7688d712d43d84ca21440773d5f",
+    "skills/revenue-forecast-audit/scripts/audit_blob_store.py": "ae2317875aaf064d396ac536c7e68838251c24370b6308abb245b4aa5cf966ad",
+    "skills/revenue-forecast-audit/scripts/audit_contracts.py": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+    "skills/revenue-forecast-audit/scripts/audit_run.py": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca",
+    "skills/revenue-forecast-audit/scripts/authoring_provenance.py": "20d18f1ed4fc8adf65661f429738db64d81a025ed72b35f5b4e5a97b3d2c192c",
+    "skills/revenue-forecast-audit/scripts/document_status_join.py": "68f8799188218396bbad497e0fc54c19365a423d5bb8e3c8977fd4ebe103d85a",
+    "skills/revenue-forecast-audit/scripts/execution_request.py": "48fcc4a3a5eb84fed49a886a394f9d7058721c32a47237cd4f95ef13d976a2fa",
+    "skills/revenue-forecast-audit/scripts/numeric_audit.py": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec",
+    "skills/revenue-forecast-audit/scripts/review_protocol.py": "1cfc07b6a2c8b322676d0d531e45dd72f1c6087bd55c79c267ef881a50a4327b",
+    "tests/test_w05_progress_closure.py": "18c30678ec0049321ee4267c84b61cd9b8584cd460f5de6dbe482743bc1792ec"
+  },
+  "freeze_differences": {
+    "tools/run_pool_progress_e2e.py": {
+      "expected": "acbb9dc8be80d6882fa877453f8da731f3c5f76f7c79cb939482384fd8080c39",
+      "actual": "fda6a9ac335726937423a5cb1350c44e6f5026908c065b03bada0d548e0c6ba6"
+    }
+  },
+  "old_reports": {
+    "review.json": {
+      "sha256": "441ba6cc461f9d6c6e4605580f1dd4c8a33ca3929902a82c35a75eca899f0a44",
+      "bytes": 17857,
+      "preserved": true
+    },
+    "review.md": {
+      "sha256": "4471a6a0e9f41a2ca951b5df0ba9e57e3e2160776ae9697200dd4d65c83dbc1b",
+      "bytes": 3838,
+      "preserved": true
+    },
+    "pure_probes.log": {
+      "sha256": "db5a6e9ff67124d25cc480260dc0ac0398ae2a9bec2b8ddbfc47ca0cf77e6ecd",
+      "bytes": 5516,
+      "preserved": true
+    },
+    "pure_probes.ps1": {
+      "sha256": "881ea808c453f56c07fd03dd577bdf5334b57a10fe391becd5bedd150f45413e",
+      "bytes": 5866,
+      "preserved": true
+    },
+    "tmp_probes.log": {
+      "sha256": "fe350b53004a85c35238215bad06377d2c12f55044ff0d9edae5e4e9533b8bd5",
+      "bytes": 1914,
+      "preserved": true
+    },
+    "tmp_probes.ps1": {
+      "sha256": "c9a3f1c4c85df6a32b26620c1f525111f404091dd7ea43974409f1b1d76413bf",
+      "bytes": 3917,
+      "preserved": true
+    },
+    "failed_tmp.log": {
+      "sha256": "a5b1930e01852f9f6bc24b3f0d0ceabbc4872ce1876c4a74b601a9bfb783e7f9",
+      "bytes": 617,
+      "preserved": true
+    },
+    "failed_tmp_cleanup.log": {
+      "sha256": "7865501519030b07fb2b1765725494cacbaea0b418fd5398e4cb8563edad5959",
+      "bytes": 60,
+      "preserved": true
+    }
+  },
+  "old_manifest_sha256": "bfdbb8890999128e8ba5857d7b4b31e5c12eb72cbfb946282d0abbb9715e1345",
+  "old_producer_preserved": {
+    "AGENTS.md": true,
+    "skills/revenue-forecast-audit/SKILL.md": true,
+    "docs/handoffs/w05-audit-loop/handoff.md": true,
+    "docs/handoffs/w05-audit-loop/input/construction_card.md": true,
+    "skills/revenue-forecast-audit/references/pool-progress-contract.md": true,
+    "skills/revenue-forecast-audit/scripts/pool_progress.py": true,
+    "tests/test_pool_progress.py": true,
+    "tests/test_pool_progress_cli.py": true,
+    "skills/revenue-forecast-audit/scripts/audit_run.py": true
+  },
+  "scratch_remaining": [],
+  "new_artifacts_before": []
+}

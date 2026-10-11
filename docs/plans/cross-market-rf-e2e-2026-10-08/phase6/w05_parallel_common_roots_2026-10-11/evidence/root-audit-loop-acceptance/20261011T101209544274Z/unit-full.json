@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\audit-loop-root",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 81.441,
+  "log_sha256": "c29b8e1293ad7ef7656f13cdf44312a7cf0c79edf0daf1c848423580cb1fd665"
+}

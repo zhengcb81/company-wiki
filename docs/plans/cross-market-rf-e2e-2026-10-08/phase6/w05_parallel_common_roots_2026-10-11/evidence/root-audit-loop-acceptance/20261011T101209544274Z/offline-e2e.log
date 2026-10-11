@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\Ö£Ôø²¨\Projects\_harness_worktrees\w05\audit-loop-root\tools\run_pool_progress_e2e.py", line 488, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "C:\Users\Ö£Ôø²¨\Projects\_harness_worktrees\w05\audit-loop-root\tools\run_pool_progress_e2e.py", line 167, in main
+    return coordinator(args)
+  File "C:\Users\Ö£Ôø²¨\Projects\_harness_worktrees\w05\audit-loop-root\tools\run_pool_progress_e2e.py", line 361, in coordinator
+    entity = state["next_action"]["args"]["entity_key"]
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'entity_key'

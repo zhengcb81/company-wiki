@@ -1,0 +1,176 @@
+{
+  "schema_version": "independent-major-review-final/1.0",
+  "status": "PASS_WITH_SCOPE",
+  "reviewer": "/root/w04_major_config_review/budget_counterexamples",
+  "candidate_root": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/audit-loop-root",
+  "delivered_root": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/audit-loop",
+  "source_freeze_ref": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\20261011T101209544274Z\\source-freeze.json",
+  "source_freeze_sha256": "dfb85899e385bd31124814a17c76046623ff3b4f180ed40b801a11de3c358904",
+  "source_sha256": {
+    "skills/revenue-forecast-audit/scripts/pool_progress.py": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+    "skills/revenue-forecast-audit/SKILL.md": "603de7034e7d4adf4b0d9fc86ba75a17d3f892824108b53c2aaad3ffe84c7996",
+    "skills/revenue-forecast-audit/references/company-pool-loop.md": "aa7dfcc864f1c8e7e2d66e770ae199c251a003fc3836583422a8f24226c629db",
+    "skills/revenue-forecast-audit/references/pool-progress-contract.md": "b9004f3af394b211fb450c844faf166e4219c93f081fffb4a088da9c528a285b",
+    "tests/test_w05_progress_closure.py": "18c30678ec0049321ee4267c84b61cd9b8584cd460f5de6dbe482743bc1792ec"
+  },
+  "freeze_difference": {
+    "file": "tools/run_pool_progress_e2e.py",
+    "expected": "acbb9dc8be80d6882fa877453f8da731f3c5f76f7c79cb939482384fd8080c39",
+    "actual": "fda6a9ac335726937423a5cb1350c44e6f5026908c065b03bada0d548e0c6ba6",
+    "reason": "ROOT replaced only the synthetic expert fixture to supply refs; core freeze remains exact. Read final-e2e-20261011T101539365420Z/root-receipt.json and receipt.json; did not rerun."
+  },
+  "dynamic_scope": {
+    "pure_counterexample_scenarios": 6,
+    "tmp_counterexample_scenarios": 2,
+    "full_suite_runs": 0,
+    "e2e_runs": 0,
+    "network_calls": 0,
+    "llm_calls": 0,
+    "paid_usd": 0,
+    "producer_writes": 0,
+    "shared_pwf_writes": 0
+  },
+  "tests": [
+    {
+      "probe": "MISSING_REPORT_REFS",
+      "status": "PASS",
+      "evidence": "final-pure-probes.log"
+    },
+    {
+      "probe": "STALE_RUN_AND_VERSION_REVIEWS",
+      "status": "PASS",
+      "evidence": "final-pure-probes.log"
+    },
+    {
+      "probe": "UNRESOLVED_UNKNOWN_CHARGE",
+      "status": "PASS",
+      "evidence": "final-pure-probes.log"
+    },
+    {
+      "probe": "RETEST_WITHOUT_EVIDENCE",
+      "status": "PASS",
+      "evidence": "final-pure-probes.log"
+    },
+    {
+      "probe": "LAST_COMPANY_CLOSE_SUGGESTION",
+      "status": "PASS",
+      "evidence": "final-pure-probes.log"
+    },
+    {
+      "probe": "POOL_EXHAUSTED_BEFORE_CRITERIA",
+      "status": "PASS",
+      "evidence": "final-pure-probes.log"
+    },
+    {
+      "probe": "LIVE_HOLDER_STALE_STEAL",
+      "status": "PASS",
+      "evidence": "final-tmp-observer-error.log"
+    },
+    {
+      "probe": "PLAN_OVERWRITES_STATE_ALIAS",
+      "status": "PASS",
+      "evidence": "final-plan-probe.log"
+    }
+  ],
+  "repaired_root_causes": [
+    {
+      "old": "Missing report references formed a clean round; old-run completions and receipt-time version overwrote current slots.",
+      "now": "Current run/execution attempt boundary filters late observations. Nonempty review, executor and expert references are required by clean. run_started freezes versions_digest. reviewer-2 with execution_attempt=initial remains valid but late reports retain old run version.",
+      "evidence": [
+        "MISSING_REPORT_REFS",
+        "STALE_RUN_AND_VERSION_REVIEWS"
+      ]
+    },
+    {
+      "old": "reconciled_unknown with cost=null reopened paid executor dispatch.",
+      "now": "All cost=null entries continue reconciliation with resend=false; known without numeric cost also stays unresolved. Three otherwise complete synthetic rounds do not accumulate clean.",
+      "evidence": [
+        "UNRESOLVED_UNKNOWN_CHARGE"
+      ]
+    },
+    {
+      "old": "Missing retest evidence wrote unspecified and discharged historical obligations.",
+      "now": "Missing evidence retains done=false, evidence_ref=null; three clean samples cannot swallow older unresolved major or required retest.",
+      "evidence": [
+        "RETEST_WITHOUT_EVIDENCE"
+      ]
+    },
+    {
+      "old": "Age-based lock transfer stole a live holder; old release unlinked successor lock (ABA).",
+      "now": "Kernel file lock is not transferred by mtime. Persistent file keeps one lock domain; duplicate release cannot remove successor holder. Reacquire after actual release took 1.507ms in this local probe.",
+      "evidence": [
+        "LIVE_HOLDER_STALE_STEAL"
+      ]
+    },
+    {
+      "old": "plan --out equal to state replaced active progress with plan schema.",
+      "now": "Existing output refused and state bytes preserved: ceaeada88852d741b2fef7d826866ccd173283f24c1f5d13d8b0eb5fcfbf6195. Static review confirms init/plan/migrate use replace_existing=False and atomic hard-link create-if-absent.",
+      "evidence": [
+        "PLAN_OVERWRITES_STATE_ALIAS"
+      ]
+    },
+    {
+      "old": "Final closeable company got no_action before advance_round.",
+      "now": "select_next_company with close_current=true directs last company close; pool exhaustion before three rounds remains no_action and is not success.",
+      "evidence": [
+        "LAST_COMPANY_CLOSE_SUGGESTION",
+        "POOL_EXHAUSTED_BEFORE_CRITERIA"
+      ]
+    }
+  ],
+  "static_review": {
+    "files": [
+      "tests/test_w05_progress_closure.py",
+      "skills/revenue-forecast-audit/SKILL.md",
+      "skills/revenue-forecast-audit/references/company-pool-loop.md",
+      "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+      "skills/revenue-forecast-audit/scripts/pool_progress.py"
+    ],
+    "causal_binding": "Reviewed handler and reducer boundary; query_result requires matching run_id/execution_attempt before mutating writer state. Did not add or run a new unrelated-query probe.",
+    "atomic_create_only": "Reviewed write_state_atomic/create-if-absent os.link, init_state, plan_observation, migrate_preview_command; only existing plan/state alias was dynamically replayed.",
+    "cas_idempotency": "Reviewed unchanged CAS read inside StateLock, expected_revision check and reducer event fingerprints; did not duplicate ROOT's centralized tests.",
+    "actual_holder_kill": "Read ROOT's added real child-holder termination regression; did not independently terminate another process. Live-holder/ABA replay uses same-process independent handles.",
+    "role_independence": "Four role slots cannot establish four different actual agents or their factual correctness. This remains coordinator responsibility under current docs.",
+    "permission_simplification": "Progress emits suggestions only. No approval receipt, permission service, paid dispatch or provider added."
+  },
+  "harness_error": {
+    "product_failure": false,
+    "retained": "final-tmp-observer-error.ps1 + final-tmp-observer-error.log",
+    "reason": "Independent observer referenced nonexistent STATE_SCHEMA while printing plan alias result after refusal. Python finally cleaned its owned scratch. Corrected observer compares loaded schema with original state's schema and replays only plan alias.",
+    "error_exit_code": 1,
+    "retry_exit_code": 0,
+    "prior_owned_scratch_absent": true
+  },
+  "root_evidence_read": {
+    "refs": [
+      "../final-e2e-20261011T101539365420Z/root-receipt.json",
+      "../final-e2e-20261011T101539365420Z/receipt.json"
+    ],
+    "status": "PASS",
+    "synthetic_only": true,
+    "steps": 48,
+    "elapsed_seconds": 86.696,
+    "producer_sha_before_after": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+    "independently_rerun": false
+  },
+  "old_fail_preservation": {
+    "manifest_sha256": "bfdbb8890999128e8ba5857d7b4b31e5c12eb72cbfb946282d0abbb9715e1345",
+    "artifact_count": 8,
+    "all_preserved": true,
+    "old_producer_all_9_inputs_preserved": true
+  },
+  "actual_findings_within_scope": {
+    "P0": [],
+    "P1": [],
+    "P2": []
+  },
+  "limits": [
+    "This is a bounded engineering record/recovery acceptance, not a real revenue forecast pass or four independent company quality reviews.",
+    "The reducer records references but does not read report contents, prove authentic evidence, enforce physical agent independence or adjudicate financial quality. The coordinator must actually read and validate evidence.",
+    "Synthetic unknown-charge handling cannot guarantee external exactly-once charging or provider ledger truth.",
+    "No network, original document parsing, installed skill writes, paid calls, entire test suite or duplicate E2E performed.",
+    "Very old event replay beyond bounded fingerprint retention remains a documented limitation; this final pass did not expand that scope.",
+    "The completed probe integrity logs prove touched source reads remained unchanged; final-manifest.json rechecks full frozen candidate inventory and old artifacts at seal."
+  ],
+  "stop": true
+}

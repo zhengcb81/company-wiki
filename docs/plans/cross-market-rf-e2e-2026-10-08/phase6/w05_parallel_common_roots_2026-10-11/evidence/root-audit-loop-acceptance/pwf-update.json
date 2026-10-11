@@ -1,0 +1,107 @@
+{
+  "generated_at": "2026-10-11T10:26:33.592535+00:00",
+  "changes": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md",
+      "previous_sha256": "acc1aaa1b680df1d08c5f4e1f27b9883794caac885c97d7a32fadd5dbc8a5d30",
+      "new_sha256": "e96add71b914ea96bb7ec2a4cae710739f42a7191e2b76dd75643a6eccfd8b28",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md",
+      "previous_sha256": "c956ab4cb4b1202f851139d073cbcebc5e8741c1a083658066448aadc4fc347f",
+      "new_sha256": "81138e412e60a680fdf1ae1880d8f735992e976f975a9b7c5d76895b60eeb61e",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md",
+      "previous_sha256": "0ad2240ad087d8854fb0fc7ee6963fe66356050a27a8179f75df6ce0fdb6d555",
+      "new_sha256": "3150f047d4885cd6b52ee86eb4b91cc8ec5e65ba17d11e01c359a6f4de513ad3",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\task_plan.md",
+      "previous_sha256": "0f7d285b4ad46b62593ec8386f72b3152fb838d473396dc1f9d3fe6e242467ab",
+      "new_sha256": "6bab4d9e14a75ae8cb356b892ac37e3d205d3869b2c9a12aaff82a1a2d775d50",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\findings.md",
+      "previous_sha256": "e094db32328808f275e04fe318cd3f5c6dfead3b26db58ba080e71bae3689990",
+      "new_sha256": "4a9d07a94678fa95ce1ea13e296fda456f276423f7f5da635002948d4b1c5da6",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\progress.md",
+      "previous_sha256": "b79c0ce09c180120cc4089cde2c8341fb42fa66d9d7eceaf090f1e29648ffb00",
+      "new_sha256": "a2f689d6c4996ae84107e37c3450b51a5b41fadcb011b9fe4187036ec0f2f768",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\task_plan.md",
+      "previous_sha256": "57b79163ec0922e97aa5955620b4284a8d230930d855273d01f122a2aa351515",
+      "new_sha256": "1c5a85793062d0a1171e13bb36c9e92574672740d5d369a625432fe80719d330",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\findings.md",
+      "previous_sha256": "43297a48ed696876a9ca7ea93934d135e03be21e697388b294bddf5b317b8ca9",
+      "new_sha256": "453ff344397006a371f3341ddc3751de40dccd8a27d3e186033a9bcd3039c971",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\progress.md",
+      "previous_sha256": "ad0bdf8be50898d01f64c45e335373454a7e48aee24e3387989fd667c1638131",
+      "new_sha256": "889d5795446878e996425336a383db28921bc907fdc9bc6cdacb123e17802ddf",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\task_plan.md",
+      "previous_sha256": "0f7d285b4ad46b62593ec8386f72b3152fb838d473396dc1f9d3fe6e242467ab",
+      "new_sha256": "6bab4d9e14a75ae8cb356b892ac37e3d205d3869b2c9a12aaff82a1a2d775d50",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\findings.md",
+      "previous_sha256": "e094db32328808f275e04fe318cd3f5c6dfead3b26db58ba080e71bae3689990",
+      "new_sha256": "4a9d07a94678fa95ce1ea13e296fda456f276423f7f5da635002948d4b1c5da6",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\narrative-evidence-pilot-2026-09-26\\progress.md",
+      "previous_sha256": "b79c0ce09c180120cc4089cde2c8341fb42fa66d9d7eceaf090f1e29648ffb00",
+      "new_sha256": "a2f689d6c4996ae84107e37c3450b51a5b41fadcb011b9fe4187036ec0f2f768",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\task_plan.md",
+      "previous_sha256": "d62936c5fdd8bb7132f52972b44ca5834dadf51738d463e8c66b8ca9bc8b9a92",
+      "new_sha256": "f61e190f198e90fb7dda5c9f7db717b74c8335d0240894f9bb16ca5bf4570621",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\findings.md",
+      "previous_sha256": "75946d6bddcaa8d2cc80bef297a216948497c4f5585618c55cb6882a9c673175",
+      "new_sha256": "6e0d2fb6e2a80deac0d8d43056d36bf1be3a69d23eadcd0f3251fa4f4c001da1",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\progress.md",
+      "previous_sha256": "8f3a4257c8aed80ee1339b169c60eeae4e0f726e3fded2edbf047cdca237785e",
+      "new_sha256": "3dbba2f26b8c364f49c900181d9419af554ec5aee4881921c9e8268c74018233",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w05-audit-loop-reception\\findings.md",
+      "previous_sha256": "fe256324d65e38c26fe2cb60726e8baa66910f8bb57bfafc20a30402d208c36e",
+      "new_sha256": "df456f4d87aa09964da4023d38767bc4a5bf9c0bfabaa33c0903fbe79a095177",
+      "previous_bytes_preserved": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w05-audit-loop-reception\\progress.md",
+      "previous_sha256": "0244242559a874d367e0464b6de9c8138f2f6e6be7cd5e4cb7445e1959d82017",
+      "new_sha256": "6c8b3e2e2cb9b6b8f373e8b86fab1210a77acd2f89e99ef783bb632eb04d1437",
+      "previous_bytes_preserved": true
+    }
+  ]
+}

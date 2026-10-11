@@ -1,0 +1,333 @@
+test_live_lock_cannot_be_stolen_by_age (test_w05_progress_closure.ArtifactAndMutexTests.test_live_lock_cannot_be_stolen_by_age) ... FAIL
+test_lock_rejects_unbounded_time_values (test_w05_progress_closure.ArtifactAndMutexTests.test_lock_rejects_unbounded_time_values) ... 
+  test_lock_rejects_unbounded_time_values (test_w05_progress_closure.ArtifactAndMutexTests.test_lock_rejects_unbounded_time_values) (value=nan) ... FAIL
+  test_lock_rejects_unbounded_time_values (test_w05_progress_closure.ArtifactAndMutexTests.test_lock_rejects_unbounded_time_values) (value=inf) ... FAIL
+  test_lock_rejects_unbounded_time_values (test_w05_progress_closure.ArtifactAndMutexTests.test_lock_rejects_unbounded_time_values) (value=-1) ... FAIL
+test_migration_cannot_overwrite_pool_or_old_output (test_w05_progress_closure.ArtifactAndMutexTests.test_migration_cannot_overwrite_pool_or_old_output) ... 
+  test_migration_cannot_overwrite_pool_or_old_output (test_w05_progress_closure.ArtifactAndMutexTests.test_migration_cannot_overwrite_pool_or_old_output) (target='pool.json') ... FAIL
+test_plan_never_overwrites_any_existing_output (test_w05_progress_closure.ArtifactAndMutexTests.test_plan_never_overwrites_any_existing_output) ... 
+  test_plan_never_overwrites_any_existing_output (test_w05_progress_closure.ArtifactAndMutexTests.test_plan_never_overwrites_any_existing_output) (target='state.json') ... FAIL
+test_late_report_does_not_receive_new_version_stamp (test_w05_progress_closure.CausalBindingTests.test_late_report_does_not_receive_new_version_stamp) ... FAIL
+test_missing_expert_completion_never_counts_clean (test_w05_progress_closure.CausalBindingTests.test_missing_expert_completion_never_counts_clean) ... FAIL
+test_missing_report_reference_never_counts_clean (test_w05_progress_closure.CausalBindingTests.test_missing_report_reference_never_counts_clean) ... 
+  test_missing_report_reference_never_counts_clean (test_w05_progress_closure.CausalBindingTests.test_missing_report_reference_never_counts_clean) (missing=None) ... FAIL
+  test_missing_report_reference_never_counts_clean (test_w05_progress_closure.CausalBindingTests.test_missing_report_reference_never_counts_clean) (missing='') ... FAIL
+  test_missing_report_reference_never_counts_clean (test_w05_progress_closure.CausalBindingTests.test_missing_report_reference_never_counts_clean) (missing='   ') ... FAIL
+test_new_role_attempt_can_reference_same_execution (test_w05_progress_closure.CausalBindingTests.test_new_role_attempt_can_reference_same_execution) ... ok
+test_old_execution_attempt_never_fills_new_review_slot (test_w05_progress_closure.CausalBindingTests.test_old_execution_attempt_never_fills_new_review_slot) ... FAIL
+test_old_run_completion_never_counts_for_new_run (test_w05_progress_closure.CausalBindingTests.test_old_run_completion_never_counts_for_new_run) ... 
+  test_old_run_completion_never_counts_for_new_run (test_w05_progress_closure.CausalBindingTests.test_old_run_completion_never_counts_for_new_run) (kind='executor_status') ... FAIL
+  test_old_run_completion_never_counts_for_new_run (test_w05_progress_closure.CausalBindingTests.test_old_run_completion_never_counts_for_new_run) (kind='review_status') ... FAIL
+  test_old_run_completion_never_counts_for_new_run (test_w05_progress_closure.CausalBindingTests.test_old_run_completion_never_counts_for_new_run) (kind='expert_status') ... FAIL
+test_unrelated_query_result_does_not_clear_active_writer (test_w05_progress_closure.CausalBindingTests.test_unrelated_query_result_does_not_clear_active_writer) ... FAIL
+test_invalid_amounts_never_become_reconciled (test_w05_progress_closure.UnknownAndObligationTests.test_invalid_amounts_never_become_reconciled) ... 
+  test_invalid_amounts_never_become_reconciled (test_w05_progress_closure.UnknownAndObligationTests.test_invalid_amounts_never_become_reconciled) (cost=True) ... FAIL
+  test_invalid_amounts_never_become_reconciled (test_w05_progress_closure.UnknownAndObligationTests.test_invalid_amounts_never_become_reconciled) (cost=-1) ... FAIL
+  test_invalid_amounts_never_become_reconciled (test_w05_progress_closure.UnknownAndObligationTests.test_invalid_amounts_never_become_reconciled) (cost=nan) ... FAIL
+  test_invalid_amounts_never_become_reconciled (test_w05_progress_closure.UnknownAndObligationTests.test_invalid_amounts_never_become_reconciled) (cost=inf) ... FAIL
+test_last_company_still_has_explicit_close_action (test_w05_progress_closure.UnknownAndObligationTests.test_last_company_still_has_explicit_close_action) ... FAIL
+test_reconciliation_without_known_amount_stays_pending (test_w05_progress_closure.UnknownAndObligationTests.test_reconciliation_without_known_amount_stays_pending) ... 
+  test_reconciliation_without_known_amount_stays_pending (test_w05_progress_closure.UnknownAndObligationTests.test_reconciliation_without_known_amount_stays_pending) (outcome='unknown') ... FAIL
+  test_reconciliation_without_known_amount_stays_pending (test_w05_progress_closure.UnknownAndObligationTests.test_reconciliation_without_known_amount_stays_pending) (outcome='known') ... FAIL
+test_retest_cannot_close_without_evidence (test_w05_progress_closure.UnknownAndObligationTests.test_retest_cannot_close_without_evidence) ... 
+  test_retest_cannot_close_without_evidence (test_w05_progress_closure.UnknownAndObligationTests.test_retest_cannot_close_without_evidence) (evidence=None) ... FAIL
+  test_retest_cannot_close_without_evidence (test_w05_progress_closure.UnknownAndObligationTests.test_retest_cannot_close_without_evidence) (evidence='') ... FAIL
+test_zero_is_known_only_when_actually_recorded (test_w05_progress_closure.UnknownAndObligationTests.test_zero_is_known_only_when_actually_recorded) ... ok
+
+======================================================================
+FAIL: test_live_lock_cannot_be_stolen_by_age (test_w05_progress_closure.ArtifactAndMutexTests.test_live_lock_cannot_be_stolen_by_age)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 171, in test_live_lock_cannot_be_stolen_by_age
+    with self.assertRaises(PP.LockTimeout):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: LockTimeout not raised
+
+======================================================================
+FAIL: test_lock_rejects_unbounded_time_values (test_w05_progress_closure.ArtifactAndMutexTests.test_lock_rejects_unbounded_time_values) (value=nan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 178, in test_lock_rejects_unbounded_time_values
+    with self.subTest(value=value), self.assertRaises(ValueError):
+                                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_lock_rejects_unbounded_time_values (test_w05_progress_closure.ArtifactAndMutexTests.test_lock_rejects_unbounded_time_values) (value=inf)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 178, in test_lock_rejects_unbounded_time_values
+    with self.subTest(value=value), self.assertRaises(ValueError):
+                                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_lock_rejects_unbounded_time_values (test_w05_progress_closure.ArtifactAndMutexTests.test_lock_rejects_unbounded_time_values) (value=-1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 178, in test_lock_rejects_unbounded_time_values
+    with self.subTest(value=value), self.assertRaises(ValueError):
+                                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_migration_cannot_overwrite_pool_or_old_output (test_w05_progress_closure.ArtifactAndMutexTests.test_migration_cannot_overwrite_pool_or_old_output) (target='pool.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 160, in test_migration_cannot_overwrite_pool_or_old_output
+    with self.assertRaises(ValueError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_plan_never_overwrites_any_existing_output (test_w05_progress_closure.ArtifactAndMutexTests.test_plan_never_overwrites_any_existing_output) (target='state.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 145, in test_plan_never_overwrites_any_existing_output
+    with self.assertRaises(ValueError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_late_report_does_not_receive_new_version_stamp (test_w05_progress_closure.CausalBindingTests.test_late_report_does_not_receive_new_version_stamp)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 55, in test_late_report_does_not_receive_new_version_stamp
+    self.assertEqual(state["review_conclusions"]["storage"]["versions_digest"], before)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'b6759d1f775feb5af6ef050193b829308af0fa547fadc5e80de41927b598dbfd' != 'bf5f8b89a0da0ec408d4a806f9cec531c0fe7198877cc0323b9d31fefd37e580'
+- b6759d1f775feb5af6ef050193b829308af0fa547fadc5e80de41927b598dbfd
++ bf5f8b89a0da0ec408d4a806f9cec531c0fe7198877cc0323b9d31fefd37e580
+
+
+======================================================================
+FAIL: test_missing_expert_completion_never_counts_clean (test_w05_progress_closure.CausalBindingTests.test_missing_expert_completion_never_counts_clean)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 75, in test_missing_expert_completion_never_counts_clean
+    self.assertEqual(state["clean"]["streak"], 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_missing_report_reference_never_counts_clean (test_w05_progress_closure.CausalBindingTests.test_missing_report_reference_never_counts_clean) (missing=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 67, in test_missing_report_reference_never_counts_clean
+    self.assertEqual(state["clean"]["streak"], 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_missing_report_reference_never_counts_clean (test_w05_progress_closure.CausalBindingTests.test_missing_report_reference_never_counts_clean) (missing='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 67, in test_missing_report_reference_never_counts_clean
+    self.assertEqual(state["clean"]["streak"], 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_missing_report_reference_never_counts_clean (test_w05_progress_closure.CausalBindingTests.test_missing_report_reference_never_counts_clean) (missing='   ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 67, in test_missing_report_reference_never_counts_clean
+    self.assertEqual(state["clean"]["streak"], 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_old_execution_attempt_never_fills_new_review_slot (test_w05_progress_closure.CausalBindingTests.test_old_execution_attempt_never_fills_new_review_slot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 38, in test_old_execution_attempt_never_fills_new_review_slot
+    self.assertIsNone(result["review_conclusions"]["storage"])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'conclusion': 'PASS', 'report_ref': 'reports/initial/storage.json', 'attempt': 'initial', 'n_a_reason': None, 'versions_digest': 'bf5f8b89a0da0ec408d4a806f9cec531c0fe7198877cc0323b9d31fefd37e580', 'recorded_at': '2026-10-11T10:00:00+00:00'} is not None
+
+======================================================================
+FAIL: test_old_run_completion_never_counts_for_new_run (test_w05_progress_closure.CausalBindingTests.test_old_run_completion_never_counts_for_new_run) (kind='executor_status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 30, in test_old_run_completion_never_counts_for_new_run
+    self.assertEqual(result["role_observations"], state["role_observations"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'exe[73 chars]d': 'old', 'attempt': 'initial', 'refs': ['old[149 chars]None} != {'exe[73 chars]d': 'current', 'attempt': 'initial', 'refs': [[157 chars]None}
+  {'analyst': None,
+   'executor': {'attempt': 'initial',
+                'executor_completion': 'verified',
+                'recorded_at': '2026-10-11T10:00:00+00:00',
+-               'refs': ['old/execution/manifest.json'],
+?                         ^^^
+
++               'refs': ['current/execution/manifest.json'],
+?                         ^^^^^^^
+
+-               'run_id': 'old',
+?                          ^^^
+
++               'run_id': 'current',
+?                          ^^^^^^^
+
+                'status': 'completed'},
+   'expert': None,
+   'fetch': None,
+   'process': None,
+   'storage': None}
+
+======================================================================
+FAIL: test_old_run_completion_never_counts_for_new_run (test_w05_progress_closure.CausalBindingTests.test_old_run_completion_never_counts_for_new_run) (kind='review_status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 30, in test_old_run_completion_never_counts_for_new_run
+    self.assertEqual(result["role_observations"], state["role_observations"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'exe[206 chars]ge': {'status': 'completed', 'run_id': 'old', [148 chars]None} != {'exe[206 chars]ge': None, 'fetch': None, 'process': None, 'an[24 chars]None}
+  {'analyst': None,
+   'executor': {'attempt': 'initial',
+                'executor_completion': 'verified',
+                'recorded_at': '2026-10-11T10:00:00+00:00',
+                'refs': ['current/execution/manifest.json'],
+                'run_id': 'current',
+                'status': 'completed'},
+   'expert': None,
+   'fetch': None,
+   'process': None,
++  'storage': None}
+-  'storage': {'attempt': 'initial',
+-              'recorded_at': '2026-10-11T10:00:00+00:00',
+-              'run_id': 'old',
+-              'status': 'completed',
+-              'writer_state': None}}
+
+======================================================================
+FAIL: test_old_run_completion_never_counts_for_new_run (test_w05_progress_closure.CausalBindingTests.test_old_run_completion_never_counts_for_new_run) (kind='expert_status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 30, in test_old_run_completion_never_counts_for_new_run
+    self.assertEqual(result["role_observations"], state["role_observations"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'exe[271 chars]rt': {'status': 'completed', 'run_id': 'old', [100 chars]00'}} != {'exe[271 chars]rt': None}
+  {'analyst': None,
+   'executor': {'attempt': 'initial',
+                'executor_completion': 'verified',
+                'recorded_at': '2026-10-11T10:00:00+00:00',
+                'refs': ['current/execution/manifest.json'],
+                'run_id': 'current',
+                'status': 'completed'},
++  'expert': None,
+-  'expert': {'attempt': 'initial',
+-             'recorded_at': '2026-10-11T10:00:00+00:00',
+-             'refs': ['old/expert/diagnosis.json'],
+-             'run_id': 'old',
+-             'status': 'completed'},
+   'fetch': None,
+   'process': None,
+   'storage': None}
+
+======================================================================
+FAIL: test_unrelated_query_result_does_not_clear_active_writer (test_w05_progress_closure.CausalBindingTests.test_unrelated_query_result_does_not_clear_active_writer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 83, in test_unrelated_query_result_does_not_clear_active_writer
+    self.assertEqual(state["role_observations"]["fetch"]["status"], "writer_unknown")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'writer_stopped' != 'writer_unknown'
+- writer_stopped
++ writer_unknown
+
+
+======================================================================
+FAIL: test_invalid_amounts_never_become_reconciled (test_w05_progress_closure.UnknownAndObligationTests.test_invalid_amounts_never_become_reconciled) (cost=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 107, in test_invalid_amounts_never_become_reconciled
+    with self.assertRaises(ValueError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_amounts_never_become_reconciled (test_w05_progress_closure.UnknownAndObligationTests.test_invalid_amounts_never_become_reconciled) (cost=-1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 107, in test_invalid_amounts_never_become_reconciled
+    with self.assertRaises(ValueError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_amounts_never_become_reconciled (test_w05_progress_closure.UnknownAndObligationTests.test_invalid_amounts_never_become_reconciled) (cost=nan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 107, in test_invalid_amounts_never_become_reconciled
+    with self.assertRaises(ValueError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_amounts_never_become_reconciled (test_w05_progress_closure.UnknownAndObligationTests.test_invalid_amounts_never_become_reconciled) (cost=inf)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 107, in test_invalid_amounts_never_become_reconciled
+    with self.assertRaises(ValueError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_last_company_still_has_explicit_close_action (test_w05_progress_closure.UnknownAndObligationTests.test_last_company_still_has_explicit_close_action)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 129, in test_last_company_still_has_explicit_close_action
+    self.assertEqual(PP.derive_next_action(state)["action"], "select_next_company")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'no_action' != 'select_next_company'
+- no_action
++ select_next_company
+
+
+======================================================================
+FAIL: test_reconciliation_without_known_amount_stays_pending (test_w05_progress_closure.UnknownAndObligationTests.test_reconciliation_without_known_amount_stays_pending) (outcome='unknown')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 94, in test_reconciliation_without_known_amount_stays_pending
+    self.assertEqual(action["action"], "reconcile_possible_charge")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'dispatch_executor' != 'reconcile_possible_charge'
+- dispatch_executor
++ reconcile_possible_charge
+
+
+======================================================================
+FAIL: test_reconciliation_without_known_amount_stays_pending (test_w05_progress_closure.UnknownAndObligationTests.test_reconciliation_without_known_amount_stays_pending) (outcome='known')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 94, in test_reconciliation_without_known_amount_stays_pending
+    self.assertEqual(action["action"], "reconcile_possible_charge")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'dispatch_executor' != 'reconcile_possible_charge'
+- dispatch_executor
++ reconcile_possible_charge
+
+
+======================================================================
+FAIL: test_retest_cannot_close_without_evidence (test_w05_progress_closure.UnknownAndObligationTests.test_retest_cannot_close_without_evidence) (evidence=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 120, in test_retest_cannot_close_without_evidence
+    self.assertFalse(result["required_retests"][0]["done"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_retest_cannot_close_without_evidence (test_w05_progress_closure.UnknownAndObligationTests.test_retest_cannot_close_without_evidence) (evidence='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\֣����\Projects\_harness_worktrees\w05\audit-loop-root\tests\test_w05_progress_closure.py", line 120, in test_retest_cannot_close_without_evidence
+    self.assertFalse(result["required_retests"][0]["done"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.326s
+
+FAILED (failures=25)

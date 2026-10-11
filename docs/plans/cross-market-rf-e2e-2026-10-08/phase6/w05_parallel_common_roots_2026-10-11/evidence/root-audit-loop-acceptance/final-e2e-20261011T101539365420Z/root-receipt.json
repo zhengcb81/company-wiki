@@ -1,0 +1,23 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\audit-loop-root\\tools\\run_pool_progress_e2e.py",
+    "--owned-root",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\final-e2e-20261011T101539365420Z\\scratch",
+    "--receipt",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\final-e2e-20261011T101539365420Z\\receipt.json"
+  ],
+  "exit_code": 0,
+  "producer_sha_before": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+  "producer_sha_after": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+  "e2e_script_sha": "fda6a9ac335726937423a5cb1350c44e6f5026908c065b03bada0d548e0c6ba6",
+  "cleanup": {
+    "initial": "absent",
+    "restored": true,
+    "removed": 2
+  },
+  "http_calls": 0,
+  "llm_calls": 0,
+  "status": "PASS"
+}
