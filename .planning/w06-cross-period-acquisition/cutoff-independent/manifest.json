@@ -1,0 +1,45 @@
+{
+  "schema_version": "cutoff-independent-freeze/1",
+  "status": "FROZEN_STOP",
+  "verdict": "FAIL_USAGE_PROJECTION_P1",
+  "cutoff_freeze_sha256": "e13ee23e64e0ec720edce6e4f5c6847f0dea2ead17a8d112d63874cd0e4cf28a",
+  "files": {
+    "probe-result.json": {
+      "sha256": "143384e779a1287a894661d7f8d96a4fa742d54c95385346c1684fdcbe21e2da",
+      "bytes": 146199
+    },
+    "probe.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "probe.stdout.txt": {
+      "sha256": "1670453e07b800ebc771de704cf947c14181f4510a1fd70a56012e6d8798dfec",
+      "bytes": 1590
+    },
+    "probes.py": {
+      "sha256": "b991d08c44f79c2a135058b34eccb84e3038c6c7aceee5de5b4440fad062ab82",
+      "bytes": 13143
+    },
+    "pytest.ini": {
+      "sha256": "fa33bd755b3735c508b3edfccbcfa472dadc11f8d1013a7e91c9eb3a6fe3cc16",
+      "bytes": 30
+    },
+    "report.json": {
+      "sha256": "3d534d9be564af33c7087b125be4e508494a6e1880dfc276c64d5a388e1e7457",
+      "bytes": 2360
+    },
+    "report.md": {
+      "sha256": "d66cdf20a8029c2247ef08b820f130734a18f86a2885f82bd0dcf74486f3afea",
+      "bytes": 5261
+    },
+    "run_review.py": {
+      "sha256": "265343482a17893c93632a246eb252fa785b24aa1cfa908871bfeb1ea8aab31c",
+      "bytes": 5907
+    },
+    "trace.jsonl": {
+      "sha256": "b288c2b7548f88e72c61e5f62ca3d7498016e0220431bff50f9e72c97d3e8b84",
+      "bytes": 11507
+    }
+  },
+  "frozen_at": "2026-10-11T15:10:21.250152+00:00"
+}

@@ -1,0 +1,99 @@
+{
+  "files": {
+    "actual-budget-diagnosis.json": {
+      "bytes": 48274,
+      "sha256": "6e7aa3db9f3d0d268e9c71e59bb894313f57eaf37b5e4abc2bda59fa5fd49bf5"
+    },
+    "concentrated-attempt1.json": {
+      "bytes": 3207,
+      "sha256": "4686ce268c87e4679f838478adef9dbc8aa54d1105d4c97248d7cf8c1537b973"
+    },
+    "concentrated-attempt1.log": {
+      "bytes": 14755,
+      "sha256": "575e155e2ba6c9a62f2c035b6981582b0da74bda7161e4d143a15f1fe85ffe36"
+    },
+    "concentrated-attempt2.json": {
+      "bytes": 3690,
+      "sha256": "7d2a932b81ef2616eb77116885b3d8684684f6e613a414140d856a56ed36ca00"
+    },
+    "concentrated-attempt2.log": {
+      "bytes": 3218,
+      "sha256": "89af79a3285d22fd70403506a86a677c081494cb6d50e1c03a2b68a126b4bb85"
+    },
+    "concentrated-attempt3.json": {
+      "bytes": 3690,
+      "sha256": "9b4f2fa0967284bed7e1f73e90dfa2b025c7c255b781bbd4454772b19e7f4084"
+    },
+    "concentrated-attempt3.log": {
+      "bytes": 2475,
+      "sha256": "2bc24a3c4b0e8f2478a1000255540b666d80734e0204be542857f5ddbb53c8a9"
+    },
+    "findings.md": {
+      "bytes": 3833,
+      "sha256": "76d1075c88d75498274a622ccd1b8d17a57838a893ca23c68a3f6e13952785a6"
+    },
+    "handoff.json": {
+      "bytes": 2975,
+      "sha256": "e39e5878f4e769aa06298cc35b54dd19e409b48cde90013a1a20500287f29f79"
+    },
+    "handoff.md": {
+      "bytes": 1121,
+      "sha256": "668c70398308909828aa5513905e5d72d2a17a5a7ea1569b5e6ebe481305b721"
+    },
+    "mypy-attempt1.log": {
+      "bytes": 44,
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    "mypy-attempt2.log": {
+      "bytes": 44,
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    "mypy-attempt3.log": {
+      "bytes": 44,
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24"
+    },
+    "product-freeze.json": {
+      "bytes": 8902,
+      "sha256": "2db879e8744fe646caa2a44a93d89ef4b89dbbf65f5fffe4549ed4d7d21b69ed"
+    },
+    "progress.md": {
+      "bytes": 1621,
+      "sha256": "1f3b144a9816bb853f39ff057dffbd156dd1ea065ead62402f6f85095d53d444"
+    },
+    "quality-red.json": {
+      "bytes": 584,
+      "sha256": "6e39265c025ab3a79238ed5596b660268618278452c98e9352b84b76120adf4f"
+    },
+    "quality-red.log": {
+      "bytes": 5508,
+      "sha256": "548c1ee705c6531d3ce79fd8f197156de1d60d7dd659dd4721d3683773e2e3f1"
+    },
+    "reserved-branch-red.json": {
+      "bytes": 705,
+      "sha256": "eb3bf2664e419eed305297972daa28c3a08dbfced1633758382e8691e355a5f0"
+    },
+    "reserved-branch-red.log": {
+      "bytes": 1867,
+      "sha256": "687a23905484e8e676e631427a54fa5ee21f2673426a5343785ab27de5873b73"
+    },
+    "ruff-attempt1.log": {
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    "ruff-attempt2.log": {
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    "ruff-attempt3.log": {
+      "bytes": 20,
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    "task_plan.md": {
+      "bytes": 3291,
+      "sha256": "c41255e1a90ef97c22691a04ce517bab58b212d42c3308bccdc353e8559192d9"
+    }
+  },
+  "total_bytes": 109908,
+  "product_freeze_sha256": "2db879e8744fe646caa2a44a93d89ef4b89dbbf65f5fffe4549ed4d7d21b69ed",
+  "scope": "phase2 engineering evidence; no raw originals or credentials"
+}

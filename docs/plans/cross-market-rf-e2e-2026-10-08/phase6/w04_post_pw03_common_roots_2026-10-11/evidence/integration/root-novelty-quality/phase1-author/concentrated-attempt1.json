@@ -1,0 +1,77 @@
+{
+  "nodes": [
+    {
+      "name": "concentrated",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_w04_stage_public_assertions.py",
+        "tests/unit/test_w04_stage_predicate_scope.py",
+        "tests/unit/test_w04_semantic_budget.py",
+        "tests/unit/test_w04_selector_version_dispatch.py",
+        "tests/unit/test_w04_narrative_semantics.py",
+        "tests/unit/test_narrative_business_recall.py",
+        "tests/integration/test_w04_semantic_budget_finalize.py",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04nov-final-nk36r0te\\pytest",
+        "tests/unit/test_w04_novelty_budget.py",
+        "tests/integration/test_w04_novelty_finalize.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 13.484,
+      "log_sha256": "7e611b981afd09c28cbf75ba59b470469a237e3025209de2508b35124a2c439c"
+    },
+    {
+      "name": "ruff",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/source_catalog/narrative_semantic_coverage.py",
+        "src/company_wiki/source_catalog/narrative_budget.py",
+        "src/company_wiki/source_catalog/narrative_finalize.py",
+        "tests/unit/test_w04_semantic_budget.py",
+        "tests/unit/test_w04_novelty_budget.py",
+        "tests/integration/test_w04_novelty_finalize.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.25,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "mypy",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04nov-final-nk36r0te\\mypy",
+        "src/company_wiki/source_catalog/narrative_semantic_coverage.py",
+        "src/company_wiki/source_catalog/narrative_budget.py",
+        "src/company_wiki/source_catalog/narrative_finalize.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.612,
+      "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+    }
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04nov-final-nk36r0te",
+  "owned_temp_restored": true,
+  "network_provider_model_calls": 0,
+  "scope": "engineering only; six-original replay and summary not evaluated"
+}

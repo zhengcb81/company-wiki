@@ -1,0 +1,82 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w04q-red-ivu989ru\\pytest", "requested_basetemp_len": 56, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 9 items
+
+tests\integration\test_w04_quality_band_budget.py FFFFF.F..              [100%]
+
+================================== FAILURES ===================================
+_ test_realized_progress_can_enter_before_other_low_quality_category_quota_is_full _
+tests\integration\test_w04_quality_band_budget.py:59: in test_realized_progress_can_enter_before_other_low_quality_category_quota_is_full
+    assert {1,2,3,4} <= pages
+E   assert {1, 2, 3, 4} <= {1, 2, 10, 11, 20, 21}
+E     
+E     Extra items in the left set:
+E     3
+E     4
+_ test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized[\u65b0\u578b\u8bbe\u5907\u9884\u8ba1\u52302027\u5e74\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1\u3002] _
+tests\integration\test_w04_quality_band_budget.py:73: in test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized
+    assert finalize(groups, 1)[1] == {1}
+E   assert {2} == {1}
+E     
+E     Extra items in the left set:
+E     2
+E     Extra items in the right set:
+E     1
+E     Use -v to get more diff
+_ test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized[\u65b0\u578b\u8bbe\u5907\u8ba1\u5212\u901a\u8fc7\u5ba2\u6237\u9a8c\u8bc1\u540e\u4ea4\u4ed8500\u53f0\u3002] _
+tests\integration\test_w04_quality_band_budget.py:73: in test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized
+    assert finalize(groups, 1)[1] == {1}
+E   assert {2} == {1}
+E     
+E     Extra items in the left set:
+E     2
+E     Extra items in the right set:
+E     1
+E     Use -v to get more diff
+_ test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized[\u65b0\u578b\u8bbe\u5907\u5c1a\u672a\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1\uff0c\u89c4\u5212\u4ea4\u4ed8500\u53f0\u3002] _
+tests\integration\test_w04_quality_band_budget.py:73: in test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized
+    assert finalize(groups, 1)[1] == {1}
+E   assert {2} == {1}
+E     
+E     Extra items in the left set:
+E     2
+E     Extra items in the right set:
+E     1
+E     Use -v to get more diff
+_ test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized[\u65b0\u578b\u8bbe\u5907\u578b\u53f72027\u7684\u6280\u672f\u7279\u5f81\u6db5\u76d6500\u53f0\u89c4\u6a21\u3002] _
+tests\integration\test_w04_quality_band_budget.py:73: in test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized
+    assert finalize(groups, 1)[1] == {1}
+E   assert {2} == {1}
+E     
+E     Extra items in the left set:
+E     2
+E     Extra items in the right set:
+E     1
+E     Use -v to get more diff
+_ test_actual_three_five_three_span_costs_are_not_crowded_out_by_generic_families _
+tests\integration\test_w04_quality_band_budget.py:94: in test_actual_three_five_three_span_costs_are_not_crowded_out_by_generic_families
+    assert {3,4,5} <= finalize(groups, 24)[1]
+E   assert {3, 4, 5} <= {1, 2, 10, 11, 12, 20, ...}
+E     
+E     Extra items in the left set:
+E     3
+E     4
+E     5
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_w04_quality_band_budget.py::test_realized_progress_can_enter_before_other_low_quality_category_quota_is_full
+FAILED tests/integration/test_w04_quality_band_budget.py::test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized[\u65b0\u578b\u8bbe\u5907\u9884\u8ba1\u52302027\u5e74\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1\u3002]
+FAILED tests/integration/test_w04_quality_band_budget.py::test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized[\u65b0\u578b\u8bbe\u5907\u8ba1\u5212\u901a\u8fc7\u5ba2\u6237\u9a8c\u8bc1\u540e\u4ea4\u4ed8500\u53f0\u3002]
+FAILED tests/integration/test_w04_quality_band_budget.py::test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized[\u65b0\u578b\u8bbe\u5907\u5c1a\u672a\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1\uff0c\u89c4\u5212\u4ea4\u4ed8500\u53f0\u3002]
+FAILED tests/integration/test_w04_quality_band_budget.py::test_same_reason_labels_do_not_turn_planned_negated_or_unproved_text_into_realized[\u65b0\u578b\u8bbe\u5907\u578b\u53f72027\u7684\u6280\u672f\u7279\u5f81\u6db5\u76d6500\u53f0\u89c4\u6a21\u3002]
+FAILED tests/integration/test_w04_quality_band_budget.py::test_actual_three_five_three_span_costs_are_not_crowded_out_by_generic_families
+=================== 6 failed, 3 passed, 1 warning in 1.09s ====================

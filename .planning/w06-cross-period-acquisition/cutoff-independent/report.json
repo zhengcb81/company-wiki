@@ -1,0 +1,75 @@
+{
+  "schema_version": "cutoff-independent-review/1",
+  "reviewer": "/root/w05_ocr_recovery_fix",
+  "role": "non_author_et_ff_product_reviewer",
+  "verdict": "FAIL_USAGE_PROJECTION_P1",
+  "tests": {
+    "passed": 39,
+    "failed": 3,
+    "skipped": 0,
+    "seconds": 1.27,
+    "record": "probe-result.json"
+  },
+  "blocking_findings": [
+    {
+      "id": "P1_VALID_USAGE_ERASED_BY_MALFORMED_STDOUT",
+      "root_cause": "JSON-decode and non-dict stdout branches overwrite already verified stderr usage with _provider_usage(empty)",
+      "file": "scripts/transcript_tool_transport.py",
+      "method": "EarningsTranscriptsTransport._et_result",
+      "wires": [
+        "{broken-json",
+        "[]",
+        "null"
+      ],
+      "expected": {
+        "provider_requests": 1,
+        "provider_response_bytes": 987,
+        "provider_usage_complete": true
+      },
+      "actual": {
+        "provider_requests": null,
+        "provider_response_bytes": null,
+        "provider_usage_complete": false
+      },
+      "test": "test_ff_malformed_stdout_does_not_erase_valid_usage"
+    }
+  ],
+  "cutoff_freeze_sha256": "e13ee23e64e0ec720edce6e4f5c6847f0dea2ead17a8d112d63874cd0e4cf28a",
+  "product_files_verified": 8,
+  "old_goldens_verified": 30,
+  "old_case_authority_files_verified": 205,
+  "cwp_original_freeze_mismatches": {
+    "src/company_wiki/source_catalog/operation_contract.py": {
+      "original_freeze": {
+        "sha256": "954c6cb5f0955c0246aecb12f62388f27f494dd3681305a1c967dd03bc17dbde",
+        "bytes": 8681
+      },
+      "observed": {
+        "sha256": "580e89da8d3afc9dbacb34c6e6f0837c7e118ca5d0f57b14f946255d3b4491dd",
+        "bytes": 8697
+      }
+    }
+  },
+  "all_actual_sources_before_after_unchanged": true,
+  "scratch_restored": true,
+  "real_network_requests": 0,
+  "real_credentials_read_or_inherited": false,
+  "llm_calls": 0,
+  "cost_usd": 0,
+  "mutations": {
+    "product": false,
+    "git": false,
+    "config": false,
+    "originals": false,
+    "shared_pwf": false
+  },
+  "not_claimed": [
+    "full56/134/195 responsibility rerun",
+    "41 CLI matrix",
+    "real provider or supervisor execution",
+    "optional SKIP as green",
+    "old CWP 12 exactfreeze all matched"
+  ],
+  "status": "FROZEN_STOP",
+  "frozen_at": "2026-10-11T15:10:21.250152+00:00"
+}

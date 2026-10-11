@@ -1,0 +1,64 @@
+{
+  "schema_version": "w04-novelty-engineering-freeze/1",
+  "head": "35a9a64591169bf217f05e87aba633dc4204033a",
+  "scope": "engineering-only; ROOT independent major-node and real six-original recall pending",
+  "products": {
+    "src/company_wiki/source_catalog/narrative_semantic_coverage.py": {
+      "sha256": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca",
+      "bytes": 5944
+    },
+    "src/company_wiki/source_catalog/narrative_budget.py": {
+      "sha256": "ca2688d9cd11fe7fa3c25218488450e5d64d59926c31322f7de8354e98a8502d",
+      "bytes": 17842
+    },
+    "src/company_wiki/source_catalog/narrative_finalize.py": {
+      "sha256": "48083f0bd7c6862744667597a14818e20ef02979f1ec4615bec5670cb1f77f47",
+      "bytes": 6983
+    },
+    "tests/unit/test_w04_semantic_budget.py": {
+      "sha256": "7eb30ac41c05094958ee05479b4de039a777f7f1c546366b904073f0806f23e1",
+      "bytes": 12181
+    },
+    "tests/unit/test_w04_novelty_budget.py": {
+      "sha256": "cc710a1df6ff7410fc215e7f09538dca478c77d510605f2130b51a7f1f2139e8",
+      "bytes": 3923
+    },
+    "tests/integration/test_w04_novelty_finalize.py": {
+      "sha256": "3b239fc19f4c68aae0f9a97fd68a61a09bb1a34b5fc5336cf17b7b9b4b439931",
+      "bytes": 8021
+    }
+  },
+  "preserved_initial_non_owned_sha256": {
+    ".github/workflows/ci.yml": true,
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md": true,
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/findings.md": true,
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/progress.md": true,
+    "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/task_plan.md": true,
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md": true,
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md": true,
+    "docs/plans/narrative-evidence-pilot-2026-09-26/findings.md": true,
+    "docs/plans/narrative-evidence-pilot-2026-09-26/progress.md": true,
+    "docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md": true,
+    "scripts/config.py": true,
+    "scripts/narrative_batch_configured.py": true,
+    "src/company_wiki/source_catalog/narrative_business_groups.py": true,
+    "src/company_wiki/source_catalog/narrative_candidates.py": true,
+    "src/company_wiki/source_catalog/narrative_evidence.py": true,
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": true,
+    "src/company_wiki/source_catalog/narrative_stage_assertions.py": true,
+    "tests/integration/test_w04_semantic_budget_finalize.py": true,
+    "tests/unit/test_ci_push_selection.py": true,
+    "tests/unit/test_narrative_business_recall.py": true,
+    "tests/unit/test_narrative_model_config.py": true,
+    "tools/changed_unit_tests.py": true
+  },
+  "initial_manifest": "baseline.json",
+  "formal_red": "behavior-red-formal.json",
+  "final_engineering": "concentrated-attempt1.json",
+  "network_provider_llm_calls": 0,
+  "cost_usd": 0,
+  "real_recall": "not_evaluated",
+  "summary_quality": "not_evaluated",
+  "git_operations": "read_only; no index/commit/reset/clean",
+  "current_status": " M .github/workflows/ci.yml\n M docs/plans/cross-market-rf-e2e-2026-10-08/findings.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/findings.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/progress.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/task_plan.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/progress.md\n M docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md\n M docs/plans/narrative-evidence-pilot-2026-09-26/findings.md\n M docs/plans/narrative-evidence-pilot-2026-09-26/progress.md\n M docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md\n M scripts/config.py\n M scripts/narrative_batch_configured.py\n M src/company_wiki/source_catalog/narrative_budget.py\n M src/company_wiki/source_catalog/narrative_business_groups.py\n M src/company_wiki/source_catalog/narrative_candidates.py\n M src/company_wiki/source_catalog/narrative_evidence.py\n M src/company_wiki/source_catalog/narrative_finalize.py\n M src/company_wiki/source_catalog/narrative_group_candidates.py\n M tests/unit/test_ci_push_selection.py\n M tests/unit/test_narrative_business_recall.py\n M tests/unit/test_narrative_model_config.py\n M tools/changed_unit_tests.py\n?? .planning/w04-g2-config/\n?? .planning/w04-root-novelty-recall/\n?? .planning/w04-root-selector-recall/\n?? .planning/w04-wp02/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/G2_LLM_CONFIG_INTERFACE_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP02_SELECTOR_INTERFACE_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP02_STAGE_CLASSIFICATION_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/WP06_FINANCIAL_WINDOW_INTERFACE_AMENDMENT.md\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/temp-preservation-execution/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02-stage-classification/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/implementation/wp02/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-closure/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/financial-window-review/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/g4-authoring-method/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/llm-config-major/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-budget/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/root-semantic-coverage/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/slide7-extraction-root-cause/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/independent/temp-preservation-plan/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/current-command-diagnostics.json\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/cwp-docs-publication/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/financial-window/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/rf-wp06-publication/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/integration/selector-semantic-route/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/preparation/\n?? src/company_wiki/source_catalog/narrative_semantic_coverage.py\n?? src/company_wiki/source_catalog/narrative_stage_assertions.py\n?? tests/integration/test_w04_novelty_finalize.py\n?? tests/integration/test_w04_semantic_budget_finalize.py\n?? tests/unit/test_w04_llm_config_scope.py\n?? tests/unit/test_w04_narrative_semantics.py\n?? tests/unit/test_w04_novelty_budget.py\n?? tests/unit/test_w04_selector_version_dispatch.py\n?? tests/unit/test_w04_semantic_budget.py\n?? tests/unit/test_w04_stage_predicate_scope.py\n?? tests/unit/test_w04_stage_public_assertions.py\n"
+}

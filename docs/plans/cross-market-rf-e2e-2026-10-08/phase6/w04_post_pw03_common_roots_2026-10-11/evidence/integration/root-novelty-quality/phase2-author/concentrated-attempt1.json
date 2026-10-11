@@ -1,0 +1,86 @@
+{
+  "nodes": [
+    {
+      "name": "concentrated",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_w04_stage_public_assertions.py",
+        "tests/unit/test_w04_stage_predicate_scope.py",
+        "tests/unit/test_w04_semantic_budget.py",
+        "tests/unit/test_w04_selector_version_dispatch.py",
+        "tests/unit/test_w04_narrative_semantics.py",
+        "tests/unit/test_narrative_business_recall.py",
+        "tests/integration/test_w04_semantic_budget_finalize.py",
+        "tests/unit/test_w04_novelty_budget.py",
+        "tests/integration/test_w04_novelty_finalize.py",
+        "tests/integration/test_w04_quality_band_budget.py",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04q-final-803riyrm\\pytest"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 12.878,
+      "log_sha256": "e9f28d199f260d521fda4e5fd5922574ad392cde49ca223772091c809df041bd"
+    },
+    {
+      "name": "ruff",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/source_catalog/narrative_semantic_coverage.py",
+        "src/company_wiki/source_catalog/narrative_budget.py",
+        "src/company_wiki/source_catalog/narrative_finalize.py",
+        "tests/unit/test_w04_semantic_budget.py",
+        "tests/unit/test_w04_novelty_budget.py",
+        "tests/integration/test_w04_novelty_finalize.py",
+        "tests/integration/test_w04_quality_band_budget.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.162,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "mypy",
+        "--cache-dir",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04q-final-803riyrm\\mypy",
+        "src/company_wiki/source_catalog/narrative_semantic_coverage.py",
+        "src/company_wiki/source_catalog/narrative_budget.py",
+        "src/company_wiki/source_catalog/narrative_finalize.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.314,
+      "log_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+    }
+  ],
+  "source_sha256": {
+    "src/company_wiki/source_catalog/narrative_semantic_coverage.py": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca",
+    "src/company_wiki/source_catalog/narrative_budget.py": "3fcdbdf2b2edbe4da7f9527b853d55b3ac0ae0d10810f0a6b95c8506ae7fe223",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "48083f0bd7c6862744667597a14818e20ef02979f1ec4615bec5670cb1f77f47"
+  },
+  "source_unchanged_during_checks": true,
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04q-final-803riyrm",
+  "owned_temp_restored": true,
+  "scope": "phase2 engineering only; new actual six-document recall not evaluated",
+  "network_provider_llm_calls": 0,
+  "cost_usd": 0
+}

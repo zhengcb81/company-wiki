@@ -1,0 +1,10 @@
+{
+  "schema": "root-completed-checkpoints-publication/1",
+  "commit": "8e3d895f832d8bf289fcaf96f3d96159df9e47db",
+  "normal_hooks": true,
+  "staged_files": 208,
+  "source_and_tool_exact_ci": "success",
+  "active_cutoff_evidence_excluded": true,
+  "w04_real_native_result": "FAIL_CRITICAL_RECALL preserved; phase2 active",
+  "whole_pwf_complete": false
+}

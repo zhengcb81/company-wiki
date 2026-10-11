@@ -1,0 +1,22 @@
+{
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04q-red-ivu989ru\\pytest",
+    "tests/integration/test_w04_quality_band_budget.py"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 1.701,
+  "log_sha256": "c386e3f5518357d410fed98eb15813077053ca5397965e35b8e4bfa8d12040eb",
+  "phase1_source_freeze_match": true,
+  "scope": "new quality-band public finalizer behavior; source unchanged",
+  "owned_temp_restored": true
+}

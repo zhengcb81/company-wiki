@@ -1,0 +1,14 @@
+START cn-h1
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+DONE cn-h1 96 True gained 17 lost 4 16.132
+START cn-annual
+DONE cn-annual 96 True gained 15 lost 0 21.763
+START cn-ipo
+DONE cn-ipo 160 True gained 7 lost 0 41.757
+START hk-release
+DONE hk-release 12 True gained 1 lost 0 1.51
+START hk-deck
+DONE hk-deck 69 True gained 1 lost 4 3.41
+START us-release
+DONE us-release 14 True gained 0 lost 2 1.08
+ALL_DONE PASS {"lpcvd_shipments": true, "tungsten_validation_and_repeat_orders": true, "supplier_lead_time_constraint": true, "prismo_pd5_new_facts": true}

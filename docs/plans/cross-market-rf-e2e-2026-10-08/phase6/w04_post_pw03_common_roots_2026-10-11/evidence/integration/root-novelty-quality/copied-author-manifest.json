@@ -1,0 +1,167 @@
+{
+  "schema": "root-w04-author-evidence-copy/1",
+  "scope": "author frozen engineering evidence; no source/code or raw copies",
+  "files": {
+    "phase1-author\\baseline.json": {
+      "sha256": "47aee60b5bd60c96e14867da1f6cd2fdcb9546d2e6af41ce2f1d6a5ad6e64547",
+      "bytes": 8136
+    },
+    "phase1-author\\behavior-red-formal.json": {
+      "sha256": "f4ec6d099b960c476d0b5e5277191fd00d542e25348c61ad213411ebffee9a52",
+      "bytes": 757
+    },
+    "phase1-author\\behavior-red-formal.log": {
+      "sha256": "09f5f5aecb625eabbbe36bc8810ffc28ff69c75bd6b36f8092e419696946d80e",
+      "bytes": 23542
+    },
+    "phase1-author\\behavior-red.json": {
+      "sha256": "8e338227664872847ebe3b2d6120d8c7c2467b25195c4bd11949c80989aa6e4c",
+      "bytes": 781
+    },
+    "phase1-author\\behavior-red.log": {
+      "sha256": "387a5ce402e4b26f79a5a4daab03dfa71eaeb7f850307b40e13ba6485ac42543",
+      "bytes": 51878
+    },
+    "phase1-author\\concentrated-attempt1.json": {
+      "sha256": "d44f5853514dd5b62f3330a383dc17a7425e6d3d9b5ced337aaba167671c7b1d",
+      "bytes": 2599
+    },
+    "phase1-author\\concentrated-attempt1.log": {
+      "sha256": "79f8e9513edb3120ac7b146002dbe5e9fed63a638311beb9d0141a3291c0b13b",
+      "bytes": 2395
+    },
+    "phase1-author\\evidence-manifest.json": {
+      "sha256": "2c2dc4a7527b61ec44b632e9fb29a801672905cdd74689fbaf2b4b0718a7b3c5",
+      "bytes": 2172
+    },
+    "phase1-author\\findings.md": {
+      "sha256": "f48bb9087de864a3eda6c912aeef07f0992107b80af67c7727db804fbbef2946",
+      "bytes": 1945
+    },
+    "phase1-author\\handoff.json": {
+      "sha256": "bb2523b94ba67c56a467fa888517e7ba2853d83a8f204c303a48317bfc492237",
+      "bytes": 1377
+    },
+    "phase1-author\\handoff.md": {
+      "sha256": "233a97970d94d957c886ca6e4c44e869adda3b005b5addf18cd5d6ae7aacb0e6",
+      "bytes": 367
+    },
+    "phase1-author\\mypy-attempt1.log": {
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24",
+      "bytes": 44
+    },
+    "phase1-author\\product-freeze.json": {
+      "sha256": "b17fafe79199ccc2091356de1e2a012becfa6dd001a7d4a541b30b471a60a6db",
+      "bytes": 7935
+    },
+    "phase1-author\\progress.md": {
+      "sha256": "9aa1a1d96e89260c6d74150d6480c27a8cf911b6654c0aea61652616892e77a6",
+      "bytes": 794
+    },
+    "phase1-author\\ruff-attempt1.log": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "phase1-author\\task_plan.md": {
+      "sha256": "756d69380a319e095e48dfc56216914cede1abb759ea69bf174f86bfba7cfa01",
+      "bytes": 1810
+    },
+    "phase2-author\\actual-budget-diagnosis.json": {
+      "sha256": "6e7aa3db9f3d0d268e9c71e59bb894313f57eaf37b5e4abc2bda59fa5fd49bf5",
+      "bytes": 48274
+    },
+    "phase2-author\\concentrated-attempt1.json": {
+      "sha256": "4686ce268c87e4679f838478adef9dbc8aa54d1105d4c97248d7cf8c1537b973",
+      "bytes": 3207
+    },
+    "phase2-author\\concentrated-attempt1.log": {
+      "sha256": "575e155e2ba6c9a62f2c035b6981582b0da74bda7161e4d143a15f1fe85ffe36",
+      "bytes": 14755
+    },
+    "phase2-author\\concentrated-attempt2.json": {
+      "sha256": "7d2a932b81ef2616eb77116885b3d8684684f6e613a414140d856a56ed36ca00",
+      "bytes": 3690
+    },
+    "phase2-author\\concentrated-attempt2.log": {
+      "sha256": "89af79a3285d22fd70403506a86a677c081494cb6d50e1c03a2b68a126b4bb85",
+      "bytes": 3218
+    },
+    "phase2-author\\concentrated-attempt3.json": {
+      "sha256": "9b4f2fa0967284bed7e1f73e90dfa2b025c7c255b781bbd4454772b19e7f4084",
+      "bytes": 3690
+    },
+    "phase2-author\\concentrated-attempt3.log": {
+      "sha256": "2bc24a3c4b0e8f2478a1000255540b666d80734e0204be542857f5ddbb53c8a9",
+      "bytes": 2475
+    },
+    "phase2-author\\evidence-manifest.json": {
+      "sha256": "41e608adce8bbb8f053c40373ef72a25fef32daec1f590b62ef500645bc084ec",
+      "bytes": 3521
+    },
+    "phase2-author\\findings.md": {
+      "sha256": "76d1075c88d75498274a622ccd1b8d17a57838a893ca23c68a3f6e13952785a6",
+      "bytes": 3833
+    },
+    "phase2-author\\handoff.json": {
+      "sha256": "e39e5878f4e769aa06298cc35b54dd19e409b48cde90013a1a20500287f29f79",
+      "bytes": 2975
+    },
+    "phase2-author\\handoff.md": {
+      "sha256": "668c70398308909828aa5513905e5d72d2a17a5a7ea1569b5e6ebe481305b721",
+      "bytes": 1121
+    },
+    "phase2-author\\mypy-attempt1.log": {
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24",
+      "bytes": 44
+    },
+    "phase2-author\\mypy-attempt2.log": {
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24",
+      "bytes": 44
+    },
+    "phase2-author\\mypy-attempt3.log": {
+      "sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24",
+      "bytes": 44
+    },
+    "phase2-author\\product-freeze.json": {
+      "sha256": "2db879e8744fe646caa2a44a93d89ef4b89dbbf65f5fffe4549ed4d7d21b69ed",
+      "bytes": 8902
+    },
+    "phase2-author\\progress.md": {
+      "sha256": "1f3b144a9816bb853f39ff057dffbd156dd1ea065ead62402f6f85095d53d444",
+      "bytes": 1621
+    },
+    "phase2-author\\quality-red.json": {
+      "sha256": "6e39265c025ab3a79238ed5596b660268618278452c98e9352b84b76120adf4f",
+      "bytes": 584
+    },
+    "phase2-author\\quality-red.log": {
+      "sha256": "548c1ee705c6531d3ce79fd8f197156de1d60d7dd659dd4721d3683773e2e3f1",
+      "bytes": 5508
+    },
+    "phase2-author\\reserved-branch-red.json": {
+      "sha256": "eb3bf2664e419eed305297972daa28c3a08dbfced1633758382e8691e355a5f0",
+      "bytes": 705
+    },
+    "phase2-author\\reserved-branch-red.log": {
+      "sha256": "687a23905484e8e676e631427a54fa5ee21f2673426a5343785ab27de5873b73",
+      "bytes": 1867
+    },
+    "phase2-author\\ruff-attempt1.log": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "phase2-author\\ruff-attempt2.log": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "phase2-author\\ruff-attempt3.log": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "phase2-author\\task_plan.md": {
+      "sha256": "c41255e1a90ef97c22691a04ce517bab58b212d42c3308bccdc353e8559192d9",
+      "bytes": 3291
+    }
+  },
+  "bytes": 219981
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "root-w04-phase2-native-execution/1",
+  "exit_code": 0,
+  "seconds": 87.4409,
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w04-root-novelty-recall\\native_novelty_replay.py",
+    "native-novelty-six-quality-v2"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "product_freeze_sha256": "2db879e8744fe646caa2a44a93d89ef4b89dbbf65f5fffe4549ed4d7d21b69ed",
+  "unchanged_checkpoint_script_sha256": "15b06195a41a0694a8cf3ca996216686ddb3a7072ca2623eee7e4a68740b17b6",
+  "frozen_products_unchanged": true,
+  "production_config_unchanged": true,
+  "provider_llm_fees": 0
+}

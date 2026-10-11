@@ -1,0 +1,72 @@
+{
+  "schema_version": "w04-novelty-quality-handoff/1",
+  "status": "ENGINEERING_PASS_STOP",
+  "implementation_tree": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "plan": "task_plan.md",
+  "findings": "findings.md",
+  "progress": "progress.md",
+  "product_freeze": "product-freeze.json",
+  "product_freeze_sha256": "2db879e8744fe646caa2a44a93d89ef4b89dbbf65f5fffe4549ed4d7d21b69ed",
+  "parent_phase1_freeze_sha256": "b17fafe79199ccc2091356de1e2a012becfa6dd001a7d4a541b30b471a60a6db",
+  "formal_red": {
+    "path": "quality-red.json",
+    "result": "6 FAIL / 3 PASS",
+    "pytest_seconds": 1.09
+  },
+  "reserve_red": {
+    "path": "reserved-branch-red.json",
+    "result": "1 FAIL",
+    "pytest_seconds": 0.77
+  },
+  "concentrated_attempts": [
+    {
+      "path": "concentrated-attempt1.json",
+      "result": "18 FAIL / 357 PASS",
+      "pytest_seconds": 12.37
+    },
+    {
+      "path": "concentrated-attempt2.json",
+      "result": "1 FAIL / 374 PASS",
+      "pytest_seconds": 13.42
+    },
+    {
+      "path": "concentrated-attempt3.json",
+      "result": "375 PASS / 1 existing asyncio_mode warning",
+      "pytest_seconds": 13.57
+    }
+  ],
+  "lint_typecheck": {
+    "ruff": "PASS seven affected files",
+    "mypy": "PASS three affected sources"
+  },
+  "core_change": "single precomputed internal quality_band before soft category quota, shared by ordinary offer and semantic reserve; realized proof from complete-group signature, source-owned concrete risk and quantified industry change same highest band",
+  "fixtures": {
+    "weak_context": "generic background without actual delivered proof; all numeric/unit/subject/stage assertions unchanged",
+    "layout_repetition": "standalone low-score realized alternate for same-band duplicate assertion",
+    "classification": "name-only context generic band3; real proof may still promote it"
+  },
+  "constraints_preserved": [
+    "legacy/default 0.6/0.7 rank path",
+    "annual96/IPO160 caps",
+    "whole-group actual span cost",
+    "bounded signature metadata only",
+    "raw text/hash/locator",
+    "diagnostic partition",
+    "22 initial non-owned files SHA",
+    "same HEAD",
+    "all Phase1 evidence",
+    "all Phase2 failed attempt evidence"
+  ],
+  "owned_temp_restored": true,
+  "network_provider_llm_calls": 0,
+  "cost_usd": 0,
+  "real_six_recall": "NOT_EVALUATED_BY_AUTHOR",
+  "summary_quality": "NOT_EVALUATED_BY_AUTHOR",
+  "next_owner": "ROOT",
+  "next_steps": [
+    "Run one new attempt of fixed native_novelty_replay with seven-product freeze; do not relax native-checkpoints or invent LPCVD attribution",
+    "Verify three exact source-group facts and supplier leadtime; six 0.7.1 ordered package fingerprints, caps, atomic cost, raw SHA, partition must remain",
+    "Independent major-node review, then integration/commit/push only by ROOT"
+  ],
+  "evidence_manifest": "evidence-manifest.json"
+}

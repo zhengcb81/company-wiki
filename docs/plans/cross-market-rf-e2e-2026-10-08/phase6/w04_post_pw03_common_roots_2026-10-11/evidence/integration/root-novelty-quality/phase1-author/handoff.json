@@ -1,0 +1,39 @@
+{
+  "status": "STOP_ENGINEERING_PASS_REAL_RECALL_PENDING",
+  "implementation_tree": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "product_freeze": "product-freeze.json",
+  "freeze_sha256": "b17fafe79199ccc2091356de1e2a012becfa6dd001a7d4a541b30b471a60a6db",
+  "formal_red": {
+    "fail": 30,
+    "pass": 1,
+    "pytest_seconds": 0.97
+  },
+  "final": {
+    "pass": 365,
+    "warning": 1,
+    "pytest_seconds": 12.83,
+    "ruff": "PASS",
+    "mypy": "PASS_3_FILES",
+    "owned_temp_restored": true
+  },
+  "changed_files": [
+    "src/company_wiki/source_catalog/narrative_semantic_coverage.py",
+    "src/company_wiki/source_catalog/narrative_budget.py",
+    "src/company_wiki/source_catalog/narrative_finalize.py",
+    "tests/unit/test_w04_semantic_budget.py",
+    "tests/unit/test_w04_novelty_budget.py",
+    "tests/integration/test_w04_novelty_finalize.py"
+  ],
+  "preserved_non_owned_initial_files": 22,
+  "root_next": [
+    "Independent review at frozen product SHA",
+    "One unchanged six-original replay with exact original-locator and bound equivalent fact checkpoints",
+    "Normal integration/main/CI publication; then G2 summaries"
+  ],
+  "not_evaluated": [
+    "real six-original recall",
+    "0.7.1 full ordered package fingerprints",
+    "summary generation",
+    "RF downstream use"
+  ]
+}

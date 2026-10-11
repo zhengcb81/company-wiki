@@ -9,3 +9,7 @@
 工具最终独审另发现3反例：删22失败案例并同步自报集合、删cutoff expected、把CN请求改HK并重算请求SHA，均可假PASS。ROOT要求单一CaseSpec权威、完整请求和覆盖核对，不能只加3字段特判或仅数41条。旧报告、ZIP、freeze及输入SHA保持。
 
 完整证据：intake/初始错误；fix/冻结34测试与真实矩阵；independent-final/权威缺口；root-cause-review/生产根因；新修复 fix/case-authority/ 与 producer-scope-fix/分别归属不同目录。
+
+## 2026-10-11 当前大节点
+
+工具及CWP来源已正常发布/精确CI成功。cutoff修复实际原因正确，但原41新attempt因180秒批次截止不能认证，原2/31/8及无fresh proofs保留。另独审发现三例malformed stdout丢实测usage同根，集中修复和必要复验后，错开重型测试按原41限额新attempt。

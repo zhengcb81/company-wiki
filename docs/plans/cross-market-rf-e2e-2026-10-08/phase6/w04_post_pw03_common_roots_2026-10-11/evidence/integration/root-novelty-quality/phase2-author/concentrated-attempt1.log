@@ -1,0 +1,230 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w04q-final-803riyrm\\pytest", "requested_basetemp_len": 58, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 375 items
+
+tests\unit\test_w04_stage_public_assertions.py ......................... [  6%]
+....................................................                     [ 20%]
+tests\unit\test_w04_stage_predicate_scope.py ........................... [ 27%]
+................                                                         [ 32%]
+tests\unit\test_w04_semantic_budget.py ............................F.... [ 40%]
+..                                                                       [ 41%]
+tests\unit\test_w04_selector_version_dispatch.py ..............          [ 45%]
+tests\unit\test_w04_narrative_semantics.py ............................. [ 52%]
+........................................................................ [ 72%]
+...                                                                      [ 72%]
+tests\unit\test_narrative_business_recall.py ........................... [ 80%]
+.............................                                            [ 87%]
+tests\integration\test_w04_semantic_budget_finalize.py .                 [ 88%]
+tests\unit\test_w04_novelty_budget.py .....F...                          [ 90%]
+tests\integration\test_w04_novelty_finalize.py ..FFFF.FFFFF.FFFFFFF..... [ 97%]
+.                                                                        [ 97%]
+tests\integration\test_w04_quality_band_budget.py ..........             [100%]
+
+================================== FAILURES ===================================
+_______ test_named_and_actual_product_context_share_one_semantic_quota ________
+tests\unit\test_w04_semantic_budget.py:183: in test_named_and_actual_product_context_share_one_semantic_quota
+    assert {"actual", "industry"} <= ids(choose(items, 8))
+E   AssertionError: assert {'actual', 'industry'} <= {'actual', 'g...neric-4', ...}
+E     
+E     Extra items in the left set:
+E     'industry'
+____ test_incomplete_bounded_signature_cannot_call_long_content_repetition ____
+tests\unit\test_w04_novelty_budget.py:44: in test_incomplete_bounded_signature_cannot_call_long_content_repetition
+    assert {v.item_id for v in select_budget_items(items, limit=2, policy="semantic_coverage/1")} == {"old", "new"}
+E   AssertionError: assert {'old', 'weak'} == {'new', 'old'}
+E     
+E     Extra items in the left set:
+E     'weak'
+E     Extra items in the right set:
+E     'new'
+E     Use -v to get more diff
+_ test_new_quantity_or_unit_survives_high_shared_vocabulary[\u826f\u7387\u8fbe\u523085%-\u826f\u7387\u8fbe\u523095%] _
+tests\integration\test_w04_novelty_finalize.py:69: in test_new_quantity_or_unit_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_quantity_or_unit_survives_high_shared_vocabulary[\u4ea7\u80fd\u8fbe\u52302.5\u4e07\u53f0-\u4ea7\u80fd\u8fbe\u52303.5\u4e07\u53f0] _
+tests\integration\test_w04_novelty_finalize.py:69: in test_new_quantity_or_unit_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_quantity_or_unit_survives_high_shared_vocabulary[\u53ef\u5207\u63626\u548c8\u82f1\u5bf8\u6676\u5706-\u53ef\u5207\u63628\u548c12\u82f1\u5bf8\u6676\u5706] _
+tests\integration\test_w04_novelty_finalize.py:69: in test_new_quantity_or_unit_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_quantity_or_unit_survives_high_shared_vocabulary[\u53cd\u5e94\u8154\u8fbe\u52304\u4e2a-\u53cd\u5e94\u8154\u8fbe\u52306\u4e2a] _
+tests\integration\test_w04_novelty_finalize.py:69: in test_new_quantity_or_unit_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_quantity_or_unit_survives_high_shared_vocabulary[\u4ea4\u4ed8\u5468\u671f\u4e3a6-8\u5468-\u4ea4\u4ed8\u5468\u671f\u4e3a8-12\u5468] _
+tests\integration\test_w04_novelty_finalize.py:69: in test_new_quantity_or_unit_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_quantity_or_unit_survives_high_shared_vocabulary[shipments reached 300 units-shipments reached 500 units] _
+tests\integration\test_w04_novelty_finalize.py:69: in test_new_quantity_or_unit_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_quantity_or_unit_survives_high_shared_vocabulary[yield reached 85.5%-yield reached 95.5%] _
+tests\integration\test_w04_novelty_finalize.py:69: in test_new_quantity_or_unit_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_quantity_or_unit_survives_high_shared_vocabulary[capacity reached 2.5 million units-capacity reached 3.5 million units] _
+tests\integration\test_w04_novelty_finalize.py:69: in test_new_quantity_or_unit_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_quantity_or_unit_survives_high_shared_vocabulary[delivery takes 6 to 8 weeks-delivery takes 8 to 12 weeks] _
+tests\integration\test_w04_novelty_finalize.py:69: in test_new_quantity_or_unit_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_stage_or_polarity_survives_high_shared_vocabulary[\u5df2\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1-\u8ba1\u5212\u5f00\u5c55\u5ba2\u6237\u9a8c\u8bc1] _
+tests\integration\test_w04_novelty_finalize.py:86: in test_new_stage_or_polarity_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_stage_or_polarity_survives_high_shared_vocabulary[\u5df2\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1-\u5c1a\u672a\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1] _
+tests\integration\test_w04_novelty_finalize.py:86: in test_new_stage_or_polarity_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_stage_or_polarity_survives_high_shared_vocabulary[\u5df2\u83b7\u5f97\u91cd\u590d\u8ba2\u5355-\u5c1a\u672a\u83b7\u5f97\u91cd\u590d\u8ba2\u5355] _
+tests\integration\test_w04_novelty_finalize.py:86: in test_new_stage_or_polarity_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_stage_or_polarity_survives_high_shared_vocabulary[\u5df2\u7d2f\u8ba1\u51fa\u8d27300\u53f0-\u9884\u8ba1\u7d2f\u8ba1\u51fa\u8d27300\u53f0] _
+tests\integration\test_w04_novelty_finalize.py:86: in test_new_stage_or_polarity_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_stage_or_polarity_survives_high_shared_vocabulary[has passed customer validation-has not passed customer validation] _
+tests\integration\test_w04_novelty_finalize.py:86: in test_new_stage_or_polarity_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+_ test_new_stage_or_polarity_survives_high_shared_vocabulary[customer validation is progressing-has completed customer validation] _
+tests\integration\test_w04_novelty_finalize.py:86: in test_new_stage_or_polarity_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {2, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     1
+E     Use -v to get more diff
+_ test_new_stage_or_polarity_survives_high_shared_vocabulary[has received repeat orders-plans to receive repeat orders] _
+tests\integration\test_w04_novelty_finalize.py:86: in test_new_stage_or_polarity_survives_high_shared_vocabulary
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 2}
+E   assert {1, 3} == {1, 2}
+E     
+E     Extra items in the left set:
+E     3
+E     Extra items in the right set:
+E     2
+E     Use -v to get more diff
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_w04_semantic_budget.py::test_named_and_actual_product_context_share_one_semantic_quota
+FAILED tests/unit/test_w04_novelty_budget.py::test_incomplete_bounded_signature_cannot_call_long_content_repetition
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_quantity_or_unit_survives_high_shared_vocabulary[\u826f\u7387\u8fbe\u523085%-\u826f\u7387\u8fbe\u523095%]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_quantity_or_unit_survives_high_shared_vocabulary[\u4ea7\u80fd\u8fbe\u52302.5\u4e07\u53f0-\u4ea7\u80fd\u8fbe\u52303.5\u4e07\u53f0]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_quantity_or_unit_survives_high_shared_vocabulary[\u53ef\u5207\u63626\u548c8\u82f1\u5bf8\u6676\u5706-\u53ef\u5207\u63628\u548c12\u82f1\u5bf8\u6676\u5706]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_quantity_or_unit_survives_high_shared_vocabulary[\u53cd\u5e94\u8154\u8fbe\u52304\u4e2a-\u53cd\u5e94\u8154\u8fbe\u52306\u4e2a]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_quantity_or_unit_survives_high_shared_vocabulary[\u4ea4\u4ed8\u5468\u671f\u4e3a6-8\u5468-\u4ea4\u4ed8\u5468\u671f\u4e3a8-12\u5468]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_quantity_or_unit_survives_high_shared_vocabulary[shipments reached 300 units-shipments reached 500 units]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_quantity_or_unit_survives_high_shared_vocabulary[yield reached 85.5%-yield reached 95.5%]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_quantity_or_unit_survives_high_shared_vocabulary[capacity reached 2.5 million units-capacity reached 3.5 million units]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_quantity_or_unit_survives_high_shared_vocabulary[delivery takes 6 to 8 weeks-delivery takes 8 to 12 weeks]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_stage_or_polarity_survives_high_shared_vocabulary[\u5df2\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1-\u8ba1\u5212\u5f00\u5c55\u5ba2\u6237\u9a8c\u8bc1]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_stage_or_polarity_survives_high_shared_vocabulary[\u5df2\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1-\u5c1a\u672a\u5b8c\u6210\u5ba2\u6237\u9a8c\u8bc1]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_stage_or_polarity_survives_high_shared_vocabulary[\u5df2\u83b7\u5f97\u91cd\u590d\u8ba2\u5355-\u5c1a\u672a\u83b7\u5f97\u91cd\u590d\u8ba2\u5355]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_stage_or_polarity_survives_high_shared_vocabulary[\u5df2\u7d2f\u8ba1\u51fa\u8d27300\u53f0-\u9884\u8ba1\u7d2f\u8ba1\u51fa\u8d27300\u53f0]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_stage_or_polarity_survives_high_shared_vocabulary[has passed customer validation-has not passed customer validation]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_stage_or_polarity_survives_high_shared_vocabulary[customer validation is progressing-has completed customer validation]
+FAILED tests/integration/test_w04_novelty_finalize.py::test_new_stage_or_polarity_survives_high_shared_vocabulary[has received repeat orders-plans to receive repeat orders]
+================= 18 failed, 357 passed, 1 warning in 12.37s ==================

@@ -1,0 +1,28 @@
+{
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04nov-red2-1t2q4048\\pytest",
+    "tests/unit/test_w04_novelty_budget.py",
+    "tests/integration/test_w04_novelty_finalize.py"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 1.355,
+  "log_sha256": "335ea629eaf34485fcb149c5136f9583cf68c95c2dee392198a22cb7117b67e7",
+  "scope": "formal actual tokenizer + public finalizer; implementation unchanged",
+  "calls": {
+    "network": 0,
+    "provider": 0,
+    "LLM": 0
+  },
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04nov-red2-1t2q4048",
+  "owned_temp_restored": true
+}

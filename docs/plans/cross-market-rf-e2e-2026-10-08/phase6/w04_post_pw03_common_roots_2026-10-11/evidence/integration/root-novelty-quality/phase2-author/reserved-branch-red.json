@@ -1,0 +1,22 @@
+{
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w04q-resred-oguk4iet\\pytest",
+    "tests/integration/test_w04_quality_band_budget.py::test_reserved_reason_uses_the_same_quality_order_as_ordinary_offers"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 1.199,
+  "log_sha256": "cf504f983054427b680388c1c6259439cb2623d02679c0d1f1c5b0dc99d52e12",
+  "budget_sha256": "3383865e8ff18d17ffcd536bb682a44e6ee95d0f0533557b9182de7655bf8f02",
+  "scope": "ordinary quality sort implemented; reserved branch still old",
+  "owned_temp_restored": true
+}

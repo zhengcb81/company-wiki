@@ -11,4 +11,4 @@
 
 当前写集与问题依据：母W06/evidence/root-ff-matrix-acceptance/independent-final/；活跃修复 fix/case-authority/，旧 fix/freeze-manifest.json、root_report.md和offline-evidence.zip不可覆盖。生产共因依据 root-cause-review/ 与 .planning/w06-cross-period-acquisition/，不是由工具特判换绿。
 
-Next Step：提交并线已通过的手动工具；保留40/1失败证据，修ET→FF共用cutoff原因传递后再统一回放一次。不会在每次commit自动执行完整矩阵。
+Next Step：手动工具已正常并线推送main4167dac4且CI成功，CWP来源master8bd23344/CI也成功。保留40/1历史失败；ET→FF cutoff原因已修，非作者发现三个坏stdout重置实测usage的同根失败，集中修复再冻结。新41 attempt180秒批次耗尽造成2PASS/31PARTIAL/8NOT_RUN、fresh proofs为空，具体分类见../w06-cross-period-acquisition/matrix-deadline-diagnosis.md。等待小用量复验与重型测试结束，再按原41/原期望/原30/180秒收尾。不会在每次commit自动执行完整矩阵。

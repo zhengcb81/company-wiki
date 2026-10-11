@@ -9,3 +9,7 @@
 FF作者正对CaseSpec共因做TDD并冻结；CWP作者在独立cwp-acquisition-scope-root执行真实writer行为RED与共用scope修复。两个工区及证据目录排他。ROOT负责最后原矩阵一次联调与非作者大节点验收，不能先删失败或重复跑旧41CLI。
 
 下一步：接收工具新freeze→非作者复核；接收生产新freeze→原41向量新attempt回放→正常发布。原件/生产配置/密钥/他人WIP保持，零真实provider/LLM/费用；母W04/G2/G4/G5仍开放。
+
+## 2026-10-11 当前大节点
+
+工具及CWP来源已正常发布/精确CI成功。cutoff修复实际原因正确，但原41新attempt因180秒批次截止不能认证，原2/31/8及无fresh proofs保留。另独审发现三例malformed stdout丢实测usage同根，集中修复和必要复验后，错开重型测试按原41限额新attempt。

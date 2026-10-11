@@ -1,0 +1,46 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w04q-final2-p_vfz4dw\\pytest", "requested_basetemp_len": 59, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+collected 375 items
+
+tests\unit\test_w04_stage_public_assertions.py ......................... [  6%]
+....................................................                     [ 20%]
+tests\unit\test_w04_stage_predicate_scope.py ........................... [ 27%]
+................                                                         [ 32%]
+tests\unit\test_w04_semantic_budget.py ................................. [ 40%]
+..                                                                       [ 41%]
+tests\unit\test_w04_selector_version_dispatch.py ..............          [ 45%]
+tests\unit\test_w04_narrative_semantics.py ............................. [ 52%]
+........................................................................ [ 72%]
+...                                                                      [ 72%]
+tests\unit\test_narrative_business_recall.py ........................... [ 80%]
+.............................                                            [ 87%]
+tests\integration\test_w04_semantic_budget_finalize.py .                 [ 88%]
+tests\unit\test_w04_novelty_budget.py .........                          [ 90%]
+tests\integration\test_w04_novelty_finalize.py ........................F [ 97%]
+.                                                                        [ 97%]
+tests\integration\test_w04_quality_band_budget.py ..........             [100%]
+
+================================== FAILURES ===================================
+___ test_same_complete_fact_with_only_layout_changes_is_soft_deprioritized ____
+tests\integration\test_w04_novelty_finalize.py:127: in test_same_complete_fact_with_only_layout_changes_is_soft_deprioritized
+    assert {span.coordinates.page_number for span in result.evidence_spans} == {1, 3}
+E   assert {1, 2} == {1, 3}
+E     
+E     Extra items in the left set:
+E     2
+E     Extra items in the right set:
+E     3
+E     Use -v to get more diff
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_w04_novelty_finalize.py::test_same_complete_fact_with_only_layout_changes_is_soft_deprioritized
+================== 1 failed, 374 passed, 1 warning in 13.42s ==================

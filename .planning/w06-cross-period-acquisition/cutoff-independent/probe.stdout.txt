@@ -1,0 +1,19 @@
+.....................................FFF..                               [100%]
+================================== FAILURES ===================================
+______ test_ff_malformed_stdout_does_not_erase_valid_usage[{broken-json] ______
+..\..\.planning\w06-cross-period-acquisition\cutoff-independent\probes.py:216: in test_ff_malformed_stdout_does_not_erase_valid_usage
+    assert result["provider_usage_complete"] is True
+E   assert False is True
+___________ test_ff_malformed_stdout_does_not_erase_valid_usage[[]] ___________
+..\..\.planning\w06-cross-period-acquisition\cutoff-independent\probes.py:216: in test_ff_malformed_stdout_does_not_erase_valid_usage
+    assert result["provider_usage_complete"] is True
+E   assert False is True
+__________ test_ff_malformed_stdout_does_not_erase_valid_usage[null] __________
+..\..\.planning\w06-cross-period-acquisition\cutoff-independent\probes.py:216: in test_ff_malformed_stdout_does_not_erase_valid_usage
+    assert result["provider_usage_complete"] is True
+E   assert False is True
+=========================== short test summary info ===========================
+FAILED ..\..\.planning\w06-cross-period-acquisition\cutoff-independent\probes.py::test_ff_malformed_stdout_does_not_erase_valid_usage[{broken-json]
+FAILED ..\..\.planning\w06-cross-period-acquisition\cutoff-independent\probes.py::test_ff_malformed_stdout_does_not_erase_valid_usage[[]]
+FAILED ..\..\.planning\w06-cross-period-acquisition\cutoff-independent\probes.py::test_ff_malformed_stdout_does_not_erase_valid_usage[null]
+3 failed, 39 passed in 1.27s

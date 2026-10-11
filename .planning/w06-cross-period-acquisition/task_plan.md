@@ -46,4 +46,4 @@ ROOT新独立工作树 cwp-acquisition-scope-root，从最新master创建；作�
 
 只创建unique自有scratch，基线不存在就恢复不存在，基线已有文件/空目录均保留。最终关闭全部SQLite/子进程并恢复配置、raw及输出目录。原始失败证据用小JSON/日志或压缩bundle保存，禁止完整数据湖副本和备份恢复演练。secret只允许stat，不读/hash/继承；测试环境用合成HOME/TEMP/假凭证，网络拒绝。
 
-Next Step：原41回放已达40/1；单独定位ET→FF的past-cutoff诊断丢失，先共用边界TDD再修，原期望/180秒上限不变。完成后正常并线发布CWP12文件及FF工具；母W04/G2/G4/G5仍开放。
+Next Step：CWP12来源文件与FF工具已正常并线、推送、精确CI成功；原41历史40/1保留。ET/FF截止日期已TDD修复，非作者39PASS/3FAIL找到坏JSON/非对象stdout与独立stderr usage混绑共因，作者定点修并重新冻结。最新完整41因原180秒批次截止为2PASS/31PARTIAL/8NOT_RUN，fresh downstream证明未执行；具体分类见matrix-deadline-diagnosis.md，不能算产品绿或31个独立故障。先完成用量集中复验，重型测试错开后原期望/原deadline新attempt，再发布ET/FF。W04真实6已PASS待复核并线；G2/G4/G5仍开放。

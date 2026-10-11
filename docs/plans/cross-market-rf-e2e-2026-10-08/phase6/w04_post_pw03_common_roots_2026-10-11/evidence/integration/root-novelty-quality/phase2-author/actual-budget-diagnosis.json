@@ -1,0 +1,1197 @@
+{
+  "report_sha256": "dcf6337b7ceef2f5038527004c412b69fbd64814a2ae59c357c928b6dba7a262",
+  "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+  "raw_sha_after": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+  "candidate_count": 526,
+  "selected_count": 96,
+  "cap": 96,
+  "selected_span_cost_by_category": {
+    "product_milestone": 9,
+    "event": 10,
+    "project": 8,
+    "customer_adoption": 5,
+    "operating_milestone": 9,
+    "project_timeline": 8,
+    "risk": 9,
+    "industry": 9,
+    "operating_mechanism": 7,
+    "positioning": 6,
+    "critical_risk": 6,
+    "corporate_development": 2,
+    "operating_status": 3,
+    "quantified_industry": 3,
+    "other": 2
+  },
+  "selected_group_count_by_category": {
+    "product_milestone": 2,
+    "event": 2,
+    "project": 3,
+    "customer_adoption": 3,
+    "operating_milestone": 3,
+    "project_timeline": 4,
+    "risk": 3,
+    "industry": 2,
+    "operating_mechanism": 3,
+    "positioning": 1,
+    "critical_risk": 2,
+    "corporate_development": 1,
+    "operating_status": 1,
+    "quantified_industry": 1,
+    "other": 1
+  },
+  "omitted_group_count_by_category": {
+    "operating_mechanism": 22,
+    "event": 114,
+    "other": 6,
+    "risk": 3,
+    "project": 12,
+    "positioning": 2,
+    "industry": 5,
+    "operating_milestone": 1,
+    "product_milestone": 12,
+    "customer_adoption": 1,
+    "operating_status": 3
+  },
+  "omitted_cost_by_category": {
+    "operating_mechanism": 54,
+    "event": 241,
+    "other": 16,
+    "risk": 7,
+    "project": 33,
+    "positioning": 12,
+    "industry": 10,
+    "operating_milestone": 1,
+    "product_milestone": 39,
+    "customer_adoption": 5,
+    "operating_status": 9
+  },
+  "drop_reasons": {
+    "budget_full": 181
+  },
+  "selected_groups": [
+    {
+      "category": "product_milestone",
+      "cost": 4,
+      "locators": [
+        "loc:v1/page:32/paragraph:19",
+        "loc:v1/page:32/paragraph:20",
+        "loc:v1/page:32/paragraph:21",
+        "loc:v1/page:32/paragraph:22"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "business_strategy",
+        "current_business_progress",
+        "current_industry_context",
+        "new_product_commercialization_milestone",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "quantified_operating_status",
+        "specific_business_event"
+      ],
+      "raw_text": "公司近两年新开发的LPCVD 薄膜设备和ALD 薄膜设备，目前已有多款新型设备产品进入市场并获得重复性订单。其中，薄膜设备累计出货量已突破300 个反应台，其他二十多种导体薄膜沉积设备也将陆续进入市场，能够覆盖全部类别的先进金属应用；",
+      "raw_text_sha256": "e7af3435be3994ea1d3570b88751aad980c8d91c3b9be2308e94f3503e349434"
+    },
+    {
+      "category": "product_milestone",
+      "cost": 5,
+      "locators": [
+        "loc:v1/page:40/paragraph:3",
+        "loc:v1/page:40/paragraph:4",
+        "loc:v1/page:40/paragraph:5",
+        "loc:v1/page:40/paragraph:6",
+        "loc:v1/page:40/paragraph:7"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "current_industry_context",
+        "new_product_commercialization_milestone",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "quantified_operating_status",
+        "specific_business_event"
+      ],
+      "raw_text": "新产品开发已经取得了显著成效，近两年新开发的LPCVD 薄膜设备和ALD 薄膜设备，已有多款新型设备顺利进入市场并获得重要客户的重复性订单。其中，薄膜设备累计出货量已突破300 个反应台，其他多个关键薄膜沉积设备研发项目的研发进程均比较顺利，有望尽快进入客户验证阶段。",
+      "raw_text_sha256": "926c1134f1b28e8904cd090ffe84b8d87d54f9e7bab44bd8c085b0456d1892d2"
+    },
+    {
+      "category": "event",
+      "cost": 5,
+      "locators": [
+        "loc:v1/page:40/paragraph:23",
+        "loc:v1/page:40/paragraph:24",
+        "loc:v1/page:40/paragraph:25",
+        "loc:v1/page:40/paragraph:26",
+        "loc:v1/page:40/paragraph:27"
+      ],
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "specific_business_event"
+      ],
+      "raw_text": "公司坚持以市场和客户需求为导向，积极应对复杂形势，继续加大研发投入和业务开拓力度，推动以研发创新为驱动的高质量增长策略，抓住重点客户扩产投资机会，推进订制化精细化生产经营，公司在刻蚀设备、薄膜设备、MOCVD 设备等设备产品研发、市场布局、新业务投资拓展等诸多方面取得了较大的突破和进展，产品不断获得海内外客户的认可，为公司持续健康发展提供了有力支撑。",
+      "raw_text_sha256": "db002617ce1a547d3ca8cdba1512f9379fcbc3187bcf615130614f173d2c920f"
+    },
+    {
+      "category": "event",
+      "cost": 5,
+      "locators": [
+        "loc:v1/page:75/paragraph:33",
+        "loc:v1/page:75/paragraph:34",
+        "loc:v1/page:75/paragraph:35",
+        "loc:v1/page:75/paragraph:41",
+        "loc:v1/page:75/paragraph:42"
+      ],
+      "reasons": [
+        "business_narrative_signal",
+        "current_industry_context",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "specific_business_event"
+      ],
+      "raw_text": "(二) 公司发展战略√适用\n□不适用\n公司目前开发的产品以半导体前道生产的等离子体刻蚀设备、薄膜沉积设备等关键设备为主，并开发了先进封装、MEMS、蓝绿光及紫外LED、Mini-LED、Micro-LED 等泛半导体设备产品。公司将紧紧抓住半导体产业发展的机遇，不断提升技术水平和市场竞争力，引领国内半导体设备和技术的发展。",
+      "raw_text_sha256": "1cfb73f7ad94c404103dd8722bb857f6b9cba26567f74b5d863153a3be5842a4"
+    },
+    {
+      "category": "project",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:75/paragraph:39",
+        "loc:v1/page:75/paragraph:40"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "current_industry_context",
+        "operating_mechanism",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "project_plan_or_status",
+        "specific_business_event"
+      ],
+      "raw_text": "公司将继续通过自主研发进一步提高公司产品的竞争力，为客户提供品质一流、性能创新的产品和优良快捷的服务，努力提高市场份额。",
+      "raw_text_sha256": "14772c44c1787fb1d99d823fa7f32c050f0594e3d71d3d961b50b3680106a64a"
+    },
+    {
+      "category": "customer_adoption",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:32/paragraph:8",
+        "loc:v1/page:32/paragraph:9"
+      ],
+      "reasons": [
+        "applied_operating_milestone",
+        "business_group_context",
+        "business_narrative_signal",
+        "customer_adoption_milestone",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "specific_business_event"
+      ],
+      "raw_text": "在海外先进的3 纳米芯片生产线及下一代更先进的生产线上，公司的CCP 刻蚀设备均实现了批量销售。",
+      "raw_text_sha256": "00081faa4a78b0618002f9e8c9106aef0ecb91aec4baa0282725885c174674eb"
+    },
+    {
+      "category": "operating_milestone",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:40/paragraph:36",
+        "loc:v1/page:40/paragraph:37",
+        "loc:v1/page:40/paragraph:38"
+      ],
+      "reasons": [
+        "applied_operating_milestone",
+        "business_group_context",
+        "business_narrative_signal",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "quantified_operating_status",
+        "specific_business_event"
+      ],
+      "raw_text": "公司在上海临港的约18 万平方米的生产和研发基地已于2024 年8 月正式投入使用，临港二期约20万平方米的生产和研发基地拟于2026 年下半年开工建设；",
+      "raw_text_sha256": "c418917f87fd8c8b5e0597216f949e90c3ca9213026663763ea0a0ace93fd912"
+    },
+    {
+      "category": "operating_milestone",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:48/paragraph:37",
+        "loc:v1/page:48/paragraph:38",
+        "loc:v1/page:48/paragraph:39"
+      ],
+      "reasons": [
+        "applied_operating_milestone",
+        "business_group_context",
+        "business_narrative_signal",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "quantified_operating_status",
+        "specific_business_event"
+      ],
+      "raw_text": "公司在上海临港的约18 万平方米的生产和研发基地已于2024 年8 月正式投入使用，临港二期约20 万平方米的生产和研发基地拟于2026 年下半年开工建设；",
+      "raw_text_sha256": "53710f3809d0808f1a7eeac9dfb23cf4b16960f74723c64eb9e08bd65aea1dcd"
+    },
+    {
+      "category": "project_timeline",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:40/paragraph:43",
+        "loc:v1/page:40/paragraph:44"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "project_execution_timeline",
+        "project_plan_or_status",
+        "quantified_operating_status"
+      ],
+      "raw_text": "成都研发及生产基地暨西南总部一期项目占地约50 亩，于2025 年10 月正式启动建设，预计2027 年投产；",
+      "raw_text_sha256": "6d9f4cc13238c0947b35a736b6512a853e44bb239dc26228d3e8f6b4455fcc43"
+    },
+    {
+      "category": "project_timeline",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:49/paragraph:2",
+        "loc:v1/page:49/paragraph:3"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "project_execution_timeline",
+        "project_plan_or_status",
+        "quantified_operating_status"
+      ],
+      "raw_text": "地暨西南总部一期项目占地约50 亩，于2025 年10 月正式启动建设，预计2027 年建成投产，为今后的发展夯实基础。",
+      "raw_text_sha256": "cdc526f0a7276dbd0dce55975535be6461f9c1a05f94280821d2223e305f1f0d"
+    },
+    {
+      "category": "project",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:76/paragraph:27",
+        "loc:v1/page:76/paragraph:28",
+        "loc:v1/page:76/paragraph:29"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "business_strategy",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "project_plan_or_status",
+        "specific_business_event"
+      ],
+      "raw_text": "设备的研发方面，公司在持续改善现有设备的性能的同时，将根据先进逻辑芯片和高密度存储DRAM 和3D NAND 芯片的不同刻蚀需求，细分产品，开发不同的硬件特征，提高产品针对不同应用的刻蚀性能，满足不同客户的需求。",
+      "raw_text_sha256": "edac3e3cc76779051adf8a52c8e170a6b966f897a6b041c48dcad4ffc1054ed9"
+    },
+    {
+      "category": "project",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:78/paragraph:20",
+        "loc:v1/page:78/paragraph:21",
+        "loc:v1/page:78/paragraph:22"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "current_business_progress",
+        "operating_mechanism",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "project_plan_or_status",
+        "specific_business_event"
+      ],
+      "raw_text": "2026 年，公司将在中微临港等生产基地，继续推进智能工厂项目和精益管理，提升人员及营运效率，缩短设备交付周期，并努力保持100%订单准时交付。",
+      "raw_text_sha256": "6e3d555d8087d236a26b71adb6dc8f36de0c9fd6a68760b1b0d4ce705c65cfa4"
+    },
+    {
+      "category": "risk",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:103/paragraph:14",
+        "loc:v1/page:103/paragraph:15",
+        "loc:v1/page:103/paragraph:16"
+      ],
+      "reasons": [
+        "business_narrative_signal",
+        "business_risk_or_constraint",
+        "pdf_visual_context_group",
+        "progress_or_change_language"
+      ],
+      "raw_text": "同时公司秉持开放共赢的合作理念，坚持合法合规、互利共赢的合作原则，建立完善的供应商管理体系，强化供应链ESG 风险管控，致力于打造高效、透明、负责任的供应链治理体系，推动产业链协同可持续发展。",
+      "raw_text_sha256": "08410087c6104930501c9cfef0c9ac79319b9d4907947a04379f0d9c17cde4be"
+    },
+    {
+      "category": "customer_adoption",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:29/paragraph:4",
+        "loc:v1/page:29/paragraph:5"
+      ],
+      "reasons": [
+        "applied_operating_milestone",
+        "business_group_context",
+        "business_narrative_signal",
+        "customer_adoption_milestone",
+        "operating_qualification",
+        "specific_business_event"
+      ],
+      "raw_text": "中微公司的等离子体刻蚀设备已被广泛应用于国内和国际一线客户，从65 纳米到3 纳米及更先进工艺的众多刻蚀应用。",
+      "raw_text_sha256": "2e98779014441c94a32511a17bfe5cf857ae788c4b37062765b9f8963e73c9e2"
+    },
+    {
+      "category": "customer_adoption",
+      "cost": 1,
+      "locators": [
+        "loc:v1/page:32/paragraph:7"
+      ],
+      "reasons": [
+        "applied_operating_milestone",
+        "business_narrative_signal",
+        "customer_adoption_milestone",
+        "specific_business_event"
+      ],
+      "raw_text": "公司刻蚀设备已应用于全球先进的3 纳米及以下集成电路加工制造生产线。",
+      "raw_text_sha256": "b71132ab1282b8529b16ec4560145740457b0e5394aaae63db5cb644804eb910"
+    },
+    {
+      "category": "project_timeline",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:40/paragraph:41",
+        "loc:v1/page:40/paragraph:42"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "current_business_progress",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "project_execution_timeline",
+        "project_plan_or_status",
+        "quantified_operating_status",
+        "specific_business_event"
+      ],
+      "raw_text": "位于广州的华南总部研发及生产基地总体规划占地约130 亩，2025 年9 月开工建设的一期项目占地约50 亩，预计2026 年年底建成，2027 年投产；",
+      "raw_text_sha256": "96702c8e5a302d67b5ea26b704c046865d32b73b0a1c7b255a206211d4712924"
+    },
+    {
+      "category": "project_timeline",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:48/paragraph:42",
+        "loc:v1/page:48/paragraph:43"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "current_business_progress",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "project_execution_timeline",
+        "project_plan_or_status",
+        "quantified_operating_status",
+        "specific_business_event"
+      ],
+      "raw_text": "位于广州的华南总部研发及生产基地总体规划占地约130 亩，2025 年9 月开工建设的一期项目占地约50 亩，预计2026 年年底建成，2027 年投产；",
+      "raw_text_sha256": "96702c8e5a302d67b5ea26b704c046865d32b73b0a1c7b255a206211d4712924"
+    },
+    {
+      "category": "industry",
+      "cost": 6,
+      "locators": [
+        "loc:v1/page:101/paragraph:13",
+        "loc:v1/page:101/paragraph:14",
+        "loc:v1/page:101/paragraph:15",
+        "loc:v1/page:101/paragraph:16",
+        "loc:v1/page:101/paragraph:19",
+        "loc:v1/page:101/paragraph:20"
+      ],
+      "reasons": [
+        "business_narrative_signal",
+        "current_industry_context",
+        "pdf_visual_context_group",
+        "progress_or_change_language"
+      ],
+      "raw_text": "(二)推动科技创新情况公司持续加大关键核心技术研发与创新投入，将环境友好、资源高效、安全可靠等理念融入产品全生命周期，打造技术先进性以及绿色可持续性的高端装备，以负责任创新助力半导体产业高质量发展。更多内容请参见公司于2026 年3 月31 日在上海证券交易所网站（www.sse.com.cn）披露的《中微公司2025 年环境、社会及公司治理报告》。",
+      "raw_text_sha256": "abc8a47fc0bd995c4744c311584440ba050d7090733d236e65bf62323953b198"
+    },
+    {
+      "category": "operating_mechanism",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:101/paragraph:17",
+        "loc:v1/page:101/paragraph:18"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "current_industry_context",
+        "operating_mechanism",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language"
+      ],
+      "raw_text": "通过优化研发流程、强化资源投入、完善激励机制和构建开放生态，持续提升自主创新能力与产品竞争力，为长期可持续发展奠定坚实基础。",
+      "raw_text_sha256": "a4d1e7b8c9d7d1d28a977f8e716f35128629481d168329821df614ccc689b996"
+    },
+    {
+      "category": "operating_mechanism",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:37/paragraph:22",
+        "loc:v1/page:37/paragraph:23",
+        "loc:v1/page:37/paragraph:24"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "operating_mechanism",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language"
+      ],
+      "raw_text": "MOCVD 设备的迭代更新主要目标是在提高大规模生产的前提下满足外延生长的性能要求、从而达到降低生产成本、提高生产效率的目的。",
+      "raw_text_sha256": "0432b3da7f5aeeae5fa610a88bf66895366cd9b861303c6e4161503ab8ec6711"
+    },
+    {
+      "category": "operating_milestone",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:52/paragraph:35",
+        "loc:v1/page:52/paragraph:36",
+        "loc:v1/page:52/paragraph:37"
+      ],
+      "reasons": [
+        "applied_operating_milestone",
+        "business_group_context",
+        "business_narrative_signal",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "specific_business_event"
+      ],
+      "raw_text": "在3D NAND 芯片制造环节，公司的等离子体刻蚀设备已应用于200 层以上的量产，同时公司根据存储器件客户的需求正在开发极高深宽比的刻蚀设备和工艺；",
+      "raw_text_sha256": "6dab0a45ff57801f1757a627f828792f9844a83934dd881636062a342f2906ae"
+    },
+    {
+      "category": "positioning",
+      "cost": 6,
+      "locators": [
+        "loc:v1/page:28/paragraph:20",
+        "loc:v1/page:28/paragraph:21",
+        "loc:v1/page:28/paragraph:22",
+        "loc:v1/page:28/paragraph:23",
+        "loc:v1/page:28/paragraph:24",
+        "loc:v1/page:28/paragraph:25"
+      ],
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "specific_emerging_business_positioning"
+      ],
+      "raw_text": "第三节\n管理层讨论与分析一、报告期内公司所从事的主要业务、经营模式、行业情况说明(一) 主要业务、主要产品或服务情况报告期内，公司主要从事高端半导体设备及泛半导体设备的研发、生产和销售。公司瞄准世界科技前沿，基于在半导体设备制造产业多年积累的专业技术，涉足半导体集成电路制造、先进",
+      "raw_text_sha256": "0f693f21d4b0a9350d3a9e6b90657b945adb1b53b882d6ad7dad8d0d91b7c683"
+    },
+    {
+      "category": "critical_risk",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:62/paragraph:27",
+        "loc:v1/page:62/paragraph:28",
+        "loc:v1/page:62/paragraph:29"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "business_risk_or_constraint",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "specific_operating_constraint"
+      ],
+      "raw_text": "3、上游供应链产能紧张的风险近年来，随着全球经济和日常生活的加速数字化转型，半导体行业保持高景气周期，半导体器件供应链持续紧张。",
+      "raw_text_sha256": "1a0dd7784e39f82440e55af25e2a37a6c577ff73719dd74c2f3ddcc1e21ef6cc"
+    },
+    {
+      "category": "operating_mechanism",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:31/paragraph:39",
+        "loc:v1/page:31/paragraph:40"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "current_industry_context",
+        "operating_mechanism",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language"
+      ],
+      "raw_text": "因此，面向氮化镓功率器件的外延设备的需求具有很大的增长空间。",
+      "raw_text_sha256": "6ed9ba8563fb854c4f1a419944ec560a832b7fae29b444c66141d098c1c5a3ad"
+    },
+    {
+      "category": "critical_risk",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:62/paragraph:30",
+        "loc:v1/page:62/paragraph:31",
+        "loc:v1/page:62/paragraph:32"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "business_risk_or_constraint",
+        "operating_mechanism",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "specific_operating_constraint"
+      ],
+      "raw_text": "公司科学管理供应厂商，对关键零部件供应商采取多厂商策略保障零部件及时供应。若未来上游供应链产能紧张形势延续，将对公司设备交期产生影响。",
+      "raw_text_sha256": "d42cf02b23b3d6a22774a3f32e2a65c7c8ead9a4e5b7786e29418c5ef69e8a46"
+    },
+    {
+      "category": "corporate_development",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:40/paragraph:12",
+        "loc:v1/page:40/paragraph:13"
+      ],
+      "reasons": [
+        "business_narrative_signal",
+        "corporate_development",
+        "pdf_visual_context_group",
+        "project_plan_or_status"
+      ],
+      "raw_text": "同时，公司拟通过发行股份及支付现金购买资产并募集配套资金的方式购买杭州众硅电子科技有限公司控股权实现从“干法”向“干法+湿法”整体解决方案的关键跨越。",
+      "raw_text_sha256": "9854adbe80cf1a5fed7e543055e725ca24be291a33eb431934a5e6b812bd62ad"
+    },
+    {
+      "category": "operating_status",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:75/paragraph:13",
+        "loc:v1/page:75/paragraph:14",
+        "loc:v1/page:75/paragraph:15"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "current_industry_context",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "quantified_operating_status"
+      ],
+      "raw_text": "其中，人工智能（AI）相关半导体（包括处理器、高带宽内存HBM 及网络组件）成为核心增长引擎，贡献了近三分之一的销售额，且预计到2026 年AI 基础设施支出将突破1.3 万亿美元。",
+      "raw_text_sha256": "1e6f0504fe3abc957d24218576ff40ed72344da4695a7fb0dee7d962a656a877"
+    },
+    {
+      "category": "risk",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:31/paragraph:7",
+        "loc:v1/page:31/paragraph:8",
+        "loc:v1/page:31/paragraph:9"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "business_risk_or_constraint",
+        "operating_mechanism",
+        "operating_qualification",
+        "progress_or_change_language"
+      ],
+      "raw_text": "由于目前先进工艺芯片加工使用的光刻机受到波长限制，14 纳米及以下的逻辑器件微观结构的加工多通过等离子体刻蚀和薄膜沉积的工艺组合——多重模板工艺来实现，使得刻蚀等相关设备的加工步骤增多。",
+      "raw_text_sha256": "6cacd28548f861eceeb23fe1ede574265d2ab8717642ac58b618e843161a045e"
+    },
+    {
+      "category": "quantified_industry",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:75/paragraph:20",
+        "loc:v1/page:75/paragraph:21",
+        "loc:v1/page:75/paragraph:22"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "current_industry_context",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "quantified_industry_outlook"
+      ],
+      "raw_text": "半导体设备位于半导体产业链的上游，其市场规模随着下游半导体技术发展和市场需求而波动，据国际半导体产业协会（SEMI）预测，全球半导体制造装备销售额今年将达1330 亿美元，同比增加13.7%；",
+      "raw_text_sha256": "6fffeeeb23a03cfcdd22d2647b9412a79d0b109b27fc945b01713009018094b0"
+    },
+    {
+      "category": "industry",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:75/paragraph:30",
+        "loc:v1/page:75/paragraph:31",
+        "loc:v1/page:75/paragraph:32"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "current_industry_context",
+        "operating_qualification",
+        "pdf_visual_context_group",
+        "progress_or_change_language"
+      ],
+      "raw_text": "作为全球最大的半导体消费市场，市场需求带动全球产能中心逐步向中国大陆转移，持续的产能转移带动了市场规模和技术水平的提高，也为设备行业的发展提供了机遇。",
+      "raw_text_sha256": "f2cd1444fcc29cad938863058ba1291cf662b2e3d82f563382435944ebd118c3"
+    },
+    {
+      "category": "other",
+      "cost": 2,
+      "locators": [
+        "loc:v1/page:102/paragraph:23",
+        "loc:v1/page:102/paragraph:24"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "business_structure",
+        "operating_qualification",
+        "progress_or_change_language"
+      ],
+      "raw_text": "公司严格履行信息披露义务，通过公告、投资者交流会、业绩说明会等多渠道，做到信息披露的真实、准确、及时、完整，使得股东和债权人平等的获取信息。",
+      "raw_text_sha256": "ad58748223d7a6d174497031235bccf0c4ff6a11be275a5f831aa59934799a2f"
+    },
+    {
+      "category": "risk",
+      "cost": 3,
+      "locators": [
+        "loc:v1/page:39/paragraph:8",
+        "loc:v1/page:39/paragraph:9",
+        "loc:v1/page:39/paragraph:10"
+      ],
+      "reasons": [
+        "business_group_context",
+        "business_narrative_signal",
+        "business_risk_or_constraint",
+        "operating_qualification"
+      ],
+      "raw_text": "光刻机由于波长的限制，先进的微观结构要靠等离子体刻蚀和薄膜的组合“二重模板”和“四重模板”工艺技术来加工，刻蚀机和薄膜设备的重要性不断提高，这给主要提供等离子体刻蚀设备和薄膜设备的中微公司带来了高速成长机会。",
+      "raw_text_sha256": "9cb2bd075e77e9ab65f4799e11abaec8895c38ca29e6e0fa71abbc2f3251a326"
+    }
+  ],
+  "fixed_focus_actual_candidates": [
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:2833df0c6721f27c6fcdb85344700d11a13854949e533d19095cb3e91445cd08",
+      "locator": "loc:v1/page:41/paragraph:19",
+      "raw_text": "公司在新产品开发方面取得了显著成效，近两年新开发出十多种导体和介质薄膜设备，目前",
+      "reasons": [
+        "business_narrative_signal",
+        "progress_or_change_language",
+        "current_business_progress",
+        "current_industry_context",
+        "quantified_operating_status",
+        "new_product_commercialization_milestone",
+        "specific_business_event",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 16,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:2833df0c6721f27c6fcdb85344700d11a13854949e533d19095cb3e91445cd08",
+      "locator": "loc:v1/page:41/paragraph:20",
+      "raw_text": "已有多款新型设备产品进入市场，其中部分设备已获得重复性订单，LPCVD 设备累计出货量突破",
+      "reasons": [
+        "business_narrative_signal",
+        "current_industry_context",
+        "new_product_commercialization_milestone",
+        "progress_or_change_language",
+        "specific_business_event",
+        "quantified_operating_status",
+        "current_business_progress",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 16,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:2833df0c6721f27c6fcdb85344700d11a13854949e533d19095cb3e91445cd08",
+      "locator": "loc:v1/page:41/paragraph:21",
+      "raw_text": "三百个反应台，其他多个关键薄膜沉积设备研发项目正在顺利推进；",
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "current_industry_context",
+        "quantified_operating_status",
+        "new_product_commercialization_milestone",
+        "progress_or_change_language",
+        "specific_business_event",
+        "current_business_progress",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 16,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 5,
+      "group_id": "urn:company-wiki:context-group:sha256:da616903a1ef8d7ec49757247840b3f078d7590872b6c7fc824f3971685399f2",
+      "locator": "loc:v1/page:44/paragraph:11",
+      "raw_text": "中微公司钨系列薄膜沉积产品：CVD（化学气相",
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "specific_business_event",
+        "operating_mechanism",
+        "new_product_commercialization_milestone",
+        "progress_or_change_language",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 15,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 5,
+      "group_id": "urn:company-wiki:context-group:sha256:da616903a1ef8d7ec49757247840b3f078d7590872b6c7fc824f3971685399f2",
+      "locator": "loc:v1/page:44/paragraph:12",
+      "raw_text": "沉积）钨设备，HAR（高深宽比）钨设备和ALD（原子层沉积）钨设备，可覆盖存储器件所有钨",
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "specific_business_event",
+        "operating_mechanism",
+        "new_product_commercialization_milestone",
+        "progress_or_change_language",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 15,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 5,
+      "group_id": "urn:company-wiki:context-group:sha256:da616903a1ef8d7ec49757247840b3f078d7590872b6c7fc824f3971685399f2",
+      "locator": "loc:v1/page:44/paragraph:13",
+      "raw_text": "应用；",
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "specific_business_event",
+        "operating_mechanism",
+        "new_product_commercialization_milestone",
+        "progress_or_change_language",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 15,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 5,
+      "group_id": "urn:company-wiki:context-group:sha256:da616903a1ef8d7ec49757247840b3f078d7590872b6c7fc824f3971685399f2",
+      "locator": "loc:v1/page:44/paragraph:14",
+      "raw_text": "该系列设备均已通过关键存储客户端现场验证，满足先进存储应用中所有金属互连应用（包",
+      "reasons": [
+        "business_narrative_signal",
+        "specific_business_event",
+        "operating_mechanism",
+        "new_product_commercialization_milestone",
+        "progress_or_change_language",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 17,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 5,
+      "group_id": "urn:company-wiki:context-group:sha256:da616903a1ef8d7ec49757247840b3f078d7590872b6c7fc824f3971685399f2",
+      "locator": "loc:v1/page:44/paragraph:15",
+      "raw_text": "含高深宽比金属互连应用）及三维存储器件字线应用各项性能指标，并获得客户重复量产订单。",
+      "reasons": [
+        "business_narrative_signal",
+        "specific_business_event",
+        "progress_or_change_language",
+        "operating_mechanism",
+        "new_product_commercialization_milestone",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 15,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 2,
+      "group_id": "urn:company-wiki:context-group:sha256:74f8aac3f65fc44ab9d36e77b7125c969962deb4d28370e74e0faf6088080aaa",
+      "locator": "loc:v1/page:44/paragraph:16",
+      "raw_text": "同时，公司钨系列产品也可满足先进逻辑器件中多道金属钨互连应用需求，已通过关键逻辑客户",
+      "reasons": [
+        "business_narrative_signal",
+        "specific_business_event",
+        "progress_or_change_language",
+        "operating_mechanism",
+        "new_product_commercialization_milestone",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 15,
+      "selected": false
+    },
+    {
+      "budget_category": "operating_mechanism",
+      "candidate": true,
+      "group_cost": 4,
+      "group_id": "urn:company-wiki:context-group:sha256:9a148cf99fee8bfd96d91fa683130276789f30b0a17c9884797f0b82e5348dc1",
+      "locator": "loc:v1/page:56/paragraph:3",
+      "raw_text": "公司新推出自主开发的金",
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "specific_business_event",
+        "operating_mechanism",
+        "progress_or_change_language",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 10,
+      "selected": false
+    },
+    {
+      "budget_category": "operating_mechanism",
+      "candidate": true,
+      "group_cost": 4,
+      "group_id": "urn:company-wiki:context-group:sha256:9a148cf99fee8bfd96d91fa683130276789f30b0a17c9884797f0b82e5348dc1",
+      "locator": "loc:v1/page:56/paragraph:4",
+      "raw_text": "属栅系列产品，继承中微独特的双反应台设计，通过中微专利的多级匀气混气设计，基于模型算",
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "specific_business_event",
+        "operating_mechanism",
+        "progress_or_change_language",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 10,
+      "selected": false
+    },
+    {
+      "budget_category": "operating_mechanism",
+      "candidate": true,
+      "group_cost": 4,
+      "group_id": "urn:company-wiki:context-group:sha256:9a148cf99fee8bfd96d91fa683130276789f30b0a17c9884797f0b82e5348dc1",
+      "locator": "loc:v1/page:56/paragraph:5",
+      "raw_text": "法的加热系统设计和可实现高效原子层沉积反应的反应腔流导设计等，具备高输出效率的同时，",
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "specific_business_event",
+        "operating_mechanism",
+        "progress_or_change_language",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 10,
+      "selected": false
+    },
+    {
+      "budget_category": "operating_mechanism",
+      "candidate": true,
+      "group_cost": 4,
+      "group_id": "urn:company-wiki:context-group:sha256:9a148cf99fee8bfd96d91fa683130276789f30b0a17c9884797f0b82e5348dc1",
+      "locator": "loc:v1/page:56/paragraph:6",
+      "raw_text": "产品性能达到国际先进水平，可满足先进逻辑关键金属栅应用需求。",
+      "reasons": [
+        "business_narrative_signal",
+        "specific_business_event",
+        "progress_or_change_language",
+        "operating_mechanism",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 10,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:cda6b637529fb73b358f8d69c4f6ca4dad9e9ac0a7531e4a465799686735ff27",
+      "locator": "loc:v1/page:56/paragraph:12",
+      "raw_text": "用于制造深紫外光LED的高温MOCVD设备PRISMO HiT3，其反应腔最高工艺温度可达1400",
+      "reasons": [
+        "business_narrative_signal",
+        "new_product_commercialization_milestone",
+        "progress_or_change_language",
+        "specific_business_event",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 11,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:cda6b637529fb73b358f8d69c4f6ca4dad9e9ac0a7531e4a465799686735ff27",
+      "locator": "loc:v1/page:56/paragraph:13",
+      "raw_text": "度，单炉可生长18 片2 英寸外延晶片，并可延伸到生长4 英寸晶片，已在行业领先客户端用于深",
+      "reasons": [
+        "business_narrative_signal",
+        "new_product_commercialization_milestone",
+        "progress_or_change_language",
+        "specific_business_event",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 11,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:cda6b637529fb73b358f8d69c4f6ca4dad9e9ac0a7531e4a465799686735ff27",
+      "locator": "loc:v1/page:56/paragraph:14",
+      "raw_text": "紫外LED 的生产验证并获得重复订单。",
+      "reasons": [
+        "business_narrative_signal",
+        "new_product_commercialization_milestone",
+        "progress_or_change_language",
+        "specific_business_event",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 11,
+      "selected": false
+    },
+    {
+      "budget_category": "operating_mechanism",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:35ba4022fd2329a2ac6090766b0f65d97a2366065c78cd41a74e4eae79d21b5a",
+      "locator": "loc:v1/page:56/paragraph:17",
+      "raw_text": "PRISMO UniMax",
+      "reasons": [
+        "business_narrative_signal",
+        "operating_mechanism",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 4,
+      "selected": false
+    },
+    {
+      "budget_category": "operating_mechanism",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:35ba4022fd2329a2ac6090766b0f65d97a2366065c78cd41a74e4eae79d21b5a",
+      "locator": "loc:v1/page:56/paragraph:18",
+      "raw_text": "配置了785mm 大直径石墨托盘，可实现同时加工164 片4 英寸或72 片6 英寸外延晶片，有效提",
+      "reasons": [
+        "business_narrative_signal",
+        "operating_mechanism",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 4,
+      "selected": false
+    },
+    {
+      "budget_category": "operating_mechanism",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:35ba4022fd2329a2ac6090766b0f65d97a2366065c78cd41a74e4eae79d21b5a",
+      "locator": "loc:v1/page:56/paragraph:19",
+      "raw_text": "高产能并降低生产成本；",
+      "reasons": [
+        "business_narrative_signal",
+        "operating_mechanism",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 4,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:78cb11ecaa825d79fcabd7e79cbed6dca45122f20e19962a1d4dde664957a50b",
+      "locator": "loc:v1/page:56/paragraph:24",
+      "raw_text": "用于硅基氮化镓功率器件用MOCVD 设备PRISMO PD5，具有高灵活性的特点，在同一系统",
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "specific_business_event",
+        "new_product_commercialization_milestone",
+        "operating_mechanism",
+        "quantified_operating_status",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 17,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:78cb11ecaa825d79fcabd7e79cbed6dca45122f20e19962a1d4dde664957a50b",
+      "locator": "loc:v1/page:56/paragraph:25",
+      "raw_text": "中可配备多达4 个反应腔，每个反应腔都可实现独立控制，仅通过更换石墨托盘即可实现6 英寸",
+      "reasons": [
+        "business_narrative_signal",
+        "pdf_visual_context_group",
+        "progress_or_change_language",
+        "specific_business_event",
+        "new_product_commercialization_milestone",
+        "operating_mechanism",
+        "quantified_operating_status",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 17,
+      "selected": false
+    },
+    {
+      "budget_category": "product_milestone",
+      "candidate": true,
+      "group_cost": 3,
+      "group_id": "urn:company-wiki:context-group:sha256:78cb11ecaa825d79fcabd7e79cbed6dca45122f20e19962a1d4dde664957a50b",
+      "locator": "loc:v1/page:56/paragraph:26",
+      "raw_text": "与8 英寸工艺的便捷切换，PRISMO PD5 设备已在客户生产线上验证通过并获得重复订单。",
+      "reasons": [
+        "business_narrative_signal",
+        "new_product_commercialization_milestone",
+        "progress_or_change_language",
+        "specific_business_event",
+        "operating_mechanism",
+        "quantified_operating_status",
+        "business_group_context",
+        "operating_qualification"
+      ],
+      "score": 15,
+      "selected": false
+    },
+    {
+      "budget_category": "event",
+      "candidate": true,
+      "group_cost": 1,
+      "group_id": "urn:company-wiki:context-group:sha256:3e05b19d712900d6e923612dc2a8d3c4c2ef73416ec2bde285c301b0538a1ae9:sentence:32:32",
+      "locator": "loc:v1/page:56/paragraph:34",
+      "raw_text": "Preciomo Udx 已在领先客户生产线上验证通过并获得重复订单。",
+      "reasons": [
+        "business_narrative_signal",
+        "progress_or_change_language",
+        "specific_business_event"
+      ],
+      "score": 7,
+      "selected": false
+    }
+  ],
+  "bound_fact_results": {
+    "lpcvd_shipments": {
+      "complete": false,
+      "patterns_frozen_before_replay": [
+        "LPCVD设备累计出货量突破三百个反应台"
+      ],
+      "witnesses": []
+    },
+    "prismo_pd5_new_facts": {
+      "complete": false,
+      "patterns_frozen_before_replay": [
+        "PRISMOPD5",
+        "4个反应腔",
+        "6英寸与8英寸工艺",
+        "PRISMOPD5设备已在客户生产线上验证通过并获得重复订单"
+      ],
+      "witnesses": []
+    },
+    "supplier_lead_time_constraint": {
+      "complete": true,
+      "patterns_frozen_before_replay": [
+        "关键零部件供应商",
+        "多厂商策略",
+        "若未来上游供应链产能紧张形势延续，将对公司设备交期产生影响"
+      ],
+      "witnesses": [
+        {
+          "group_id": "group:urn:company-wiki:context-group:sha256:ff270983f58f01c13cac080695a16e4ac978e7c532ef3d0d3d8ce3733a0b20f2",
+          "locators": [
+            "loc:v1/page:62/paragraph:30",
+            "loc:v1/page:62/paragraph:31",
+            "loc:v1/page:62/paragraph:32"
+          ],
+          "raw_text": "公司科学管理供应厂商，对关键零部件供应商采取多厂商策略保障零部件及时供应。若未来上游供应链产能紧张形势延续，将对公司设备交期产生影响。",
+          "raw_text_sha256": "d42cf02b23b3d6a22774a3f32e2a65c7c8ead9a4e5b7786e29418c5ef69e8a46",
+          "span_cost": 3
+        }
+      ]
+    },
+    "tungsten_validation_and_repeat_orders": {
+      "complete": false,
+      "patterns_frozen_before_replay": [
+        "CVD",
+        "HAR",
+        "ALD",
+        "钨设备",
+        "该系列设备均已通过关键存储客户端现场验证",
+        "获得客户重复量产订单"
+      ],
+      "witnesses": []
+    }
+  },
+  "report_fields_missing": [
+    "full candidate BudgetItem metadata",
+    "full candidate bundle score/reason/signature",
+    "selection offer trace"
+  ]
+}
