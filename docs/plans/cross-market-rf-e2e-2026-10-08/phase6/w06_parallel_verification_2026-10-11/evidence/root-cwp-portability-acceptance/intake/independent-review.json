@@ -1,0 +1,251 @@
+{
+  "schema_version": "root-cwp-portability-independent-review/1",
+  "status": "FAIL_HARNESS_ACCEPTANCE",
+  "recommendation": "HOLD_MAINLINE_ACCEPTANCE; merge original commits only into a ROOT-owned isolation tree for systemic harness repair, preserve worker and original FAIL evidence. No production src fix is currently justified.",
+  "worker_head": "f8d5e0f4f6047375fdaef38e15e54edff2abe61d",
+  "original_code_commit": "49afd8738b38f45507ccc58fa4bab27c638addf7",
+  "original_handoff_commits": [
+    "562bb87971fe889dd974261ef75a1e6344469894",
+    "f8d5e0f4f6047375fdaef38e15e54edff2abe61d"
+  ],
+  "base": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+  "exclusive_write_set_ok": true,
+  "handoff_manifest": {
+    "files": 22,
+    "all_sha_size_match": true
+  },
+  "dispatch_inputs": {
+    "all_sha_size_match": true,
+    "code_references": 9,
+    "raw_document_references": 0,
+    "all_git_blob_refs_match": true
+  },
+  "worker_status": "?? docs/handoffs/w06-cwp-portability/input/",
+  "findings": [
+    {
+      "id": "P1-CLEANUP-OWNERSHIP",
+      "priority": 1,
+      "scope": "harness",
+      "files": [
+        {
+          "path": "tools/source_root_portability/run.py",
+          "line": 74
+        }
+      ],
+      "root_cause": "Cleanup classifies generated content by top-level name, not creation ownership. The baseline snapshot only detects loss after recursive deletion; raw_unchanged is returned True regardless. Existing generated-name subtrees and nested output roots are not protected.",
+      "observed": "3 preexisting synthetic scratch/logs/cfg sentinels were actually deleted by cleanup_owned_root; restored returned false, raw_unchanged returned true. Exact test baseline was rescued then the newly owned root restored absent.",
+      "repair": "Use a fresh per-attempt generated workspace under an explicit owned root, keep baseline and out-root separate, validate root overlap/symlink/collisions before creating or deleting, and delete only files/directories recorded as created by this attempt. Preserve existing sentinels and empty directories; never delete by name alone."
+    },
+    {
+      "id": "P1-ACTUAL-EXPORT-EVIDENCE",
+      "priority": 1,
+      "scope": "harness",
+      "files": [
+        {
+          "path": "tools/source_root_portability/scenarios.py",
+          "line": 396
+        }
+      ],
+      "root_cause": "S1 overwrites actual CLI manifests with in-process reader facts. S2 consumer exit/status is not mandatory to determine its PASS; therefore local reader success can hide an independent consumer/export failure.",
+      "observed": "Static real diff shows export[manifests] is replaced after export_via_cli; oracle mutants also demonstrate missing/incorrect downstream evidence accepted. This is a tool evidence defect, not proof of a real current CLI failure.",
+      "repair": "Retain immutable actual child JSON/exit/stdout/stderr and source manifests; perform comparisons against fixed fixture facts without synthesizing replacements. Require successful fresh child reopen and exact source-ref identity; failed/absent child evidence produces PARTIAL/FAIL."
+    },
+    {
+      "id": "P1-ORACLE-STRUCTURE-COVERAGE",
+      "priority": 1,
+      "scope": "harness",
+      "files": [
+        {
+          "path": "tools/source_root_portability/oracle.py",
+          "line": 46
+        },
+        {
+          "path": "tools/source_root_portability/oracle.py",
+          "line": 128
+        },
+        {
+          "path": "tools/source_root_portability/oracle.py",
+          "line": 325
+        }
+      ],
+      "root_cause": "Nonempty scenarios/read lists substitute for the required seven-scene/document coverage. verify_version is treated as a returned-byte read. Several new-version/root/path checks are omitted; period expectations can be rewritten inside the report. Nested weak types can raise instead of returning a diagnostic.",
+      "observed": "Seven independent mutated reports still PASS; malformed S2 actual=[] causes AttributeError. Original worker report still evaluates PASS. Mutant details are preserved in probes.json.",
+      "repair": "Validate typed nested shapes before business checks, exact S1-S7 coverage and required original coverage, actual open_version byte checks, before/after root equality from observed config, S5 new-version and recovery reads, S7 no path fields, and fixed fixture expected FY/period/kind with UNKNOWN/PARTIAL rather than invented dates. Invalid input returns structured INVALID; no whole-run crash."
+    },
+    {
+      "id": "P1-CONSUMER-REF-PIN",
+      "priority": 1,
+      "scope": "harness",
+      "files": [
+        {
+          "path": "tools/source_root_portability/consumer_spy.py",
+          "line": 172
+        }
+      ],
+      "root_cause": "The consumer re-queries identity/SHA then opens a refreshed ref, ignoring the full SourceRef received from upstream (schema/size/MIME). It does not replay the exact input ref.",
+      "observed": "Against canonical ae0ca0d3 reader, direct wrong byte_size ref is rejected as source_ref_changed. Worker consumer_spy accepts that same wrong input (input 256 bytes / actual 255), exits 0 and reports status ok after query_ref refresh. Reader package prefix alone was adjusted to its true canonical import location; bytes and SourceReader were not mocked.",
+      "repair": "Deserialize and open the exact received SourceRef. Any query is diagnostic only; never replace the supplied ref. Include wrong size/MIME/schema ref negatives and exact valid fresh-child replay."
+    },
+    {
+      "id": "P2-ENVIRONMENT-ISOLATION",
+      "priority": 2,
+      "scope": "harness",
+      "files": [
+        {
+          "path": "tools/source_root_portability/scenarios.py",
+          "line": 232
+        }
+      ],
+      "root_cause": "Harness child env copies the whole user environment. The runner is synthetic/offline and does not need credentials, real HOME or arbitrary inherited PYTHONPATH.",
+      "observed": "Static code inherits os.environ.copy; no provider/key usage was observed or triggered. Independent helper strips env, uses synthetic HOME, blocks credential-file reads/network, and pins canonical module binding.",
+      "repair": "Use a small runtime env allowlist, synthetic HOME/profile, explicit pinned PYTHONPATH and config, no provider keys. Declare synthetic-only scope and retain failure outputs per attempt."
+    }
+  ],
+  "independent_false_PASS_cases": {
+    "omitted_S2_to_S7": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "S2_only_one_original_reopened": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "S5_new_version_read_failed": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "receipt_only_method_claims_returned_bytes": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "wrong_root_after_move": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "S7_export_path_fields_present": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "malformed_S2_actual": {
+      "actual": "CRASH",
+      "exception": "AttributeError",
+      "detail": "'list' object has no attribute 'get'"
+    },
+    "annual_period_truth_self_rewritten_unknown": {
+      "actual": "PASS",
+      "findings": []
+    }
+  },
+  "canonical_reader": {
+    "status": "PASS",
+    "canonical_binding": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\__init__.py",
+    "current_code_head": "ae0ca0d3c03f4a974ff26e472860ee306959d091",
+    "initial": "absent",
+    "source_ref_schema": "2.0",
+    "original_count": 4,
+    "provider_calls": 0,
+    "register_query_open_reads": [
+      {
+        "doc_key": "pdf",
+        "sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+        "fiscal_year": 2025
+      },
+      {
+        "doc_key": "htm",
+        "sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+        "fiscal_year": null
+      },
+      {
+        "doc_key": "txt",
+        "sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+        "fiscal_year": null
+      },
+      {
+        "doc_key": "txt_copy",
+        "sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+        "fiscal_year": null
+      }
+    ],
+    "old_ref_after_move": "exact_bytes",
+    "policy_change_observed": true,
+    "duplicate_fallback": "exact_bytes",
+    "corruption": {
+      "status": "unavailable",
+      "reason": "no_verified_location",
+      "detail": "content_sha256_mismatch"
+    },
+    "unsupported_ref_schema": "named_refusal",
+    "fresh_child": {
+      "status": "ok",
+      "pid": 57468,
+      "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+      "byte_size": 255,
+      "binding": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\__init__.py"
+    },
+    "exact_ref_metadata_guard": "source_ref_changed",
+    "new_version": {
+      "status": "ok",
+      "fresh_sha": "98bde458bbb47d843cb3193d2196762bd040769b6d9c8492b12a43cf1e7ef781",
+      "old_outcome": {
+        "status": "unavailable",
+        "reason": "no_indexed_location"
+      }
+    },
+    "original_recovery": "exact_bytes",
+    "seconds": 1.843,
+    "final": "absent"
+  },
+  "consumer_full_ref_counterexample": {
+    "actual_exit": 0,
+    "status": "ok",
+    "input_byte_size": 256,
+    "actual_byte_size": 255,
+    "canonical_direct_refusal": "source_ref_changed",
+    "source_layer_binding": "canonical current main preloaded",
+    "audit_prefix_relocation_override_only": true
+  },
+  "canonical_inventory_head": "8862372f714209cff1b218d77b5c4b8af6bc74dc",
+  "canonical_runtime_same_bytes_as_worker": true,
+  "preserved_attempts": [
+    {
+      "path": "probes.json",
+      "status": "FAIL_HARNESS_ACCEPTANCE",
+      "setup_failure": "Missing synthetic HOME before Path.home; no product behavior reached"
+    },
+    {
+      "path": "reader-e2e-attempt2.json",
+      "status": "HARNESS_OR_PRODUCT_FAIL",
+      "setup_failure": "Independent helper supplied extended \\?\\ absolute paths; SQLite URI invalid authority ?. Not classified as a production P1."
+    },
+    {
+      "path": "reader-e2e-attempt3.json",
+      "status": "PASS",
+      "scope": "ordinary absolute paths, synthetic HOME, real canonical Reader"
+    }
+  ],
+  "cost_and_safety": {
+    "credential_environment_inherited": false,
+    "HOME": "synthetic-owned-home",
+    "blocked_actions": [],
+    "actual_network_calls": 0,
+    "provider_calls": 0,
+    "LLM_calls": 0,
+    "fees_usd": 0,
+    "raw_originals_accessed": 0,
+    "synthetic_files_only": true
+  },
+  "writes_only_intake": true,
+  "production_or_original_raw_writes": false,
+  "git_mutation_merge_commit_install": false,
+  "author_suite_not_rerun": true,
+  "author_33_tests_scope": "Worker own tests reported green; independent negative cases show harness acceptance gaps. No full CWP tests/OCR/provider calls performed.",
+  "scope_exclusions": [
+    "real cloud/Dayu/Dropbox services",
+    "real filings and production roots",
+    "OCR/LLM/narrative extraction",
+    "investment/revenue economic quality",
+    "POSIX runtime",
+    "latest whole-main test suite"
+  ],
+  "next_root_gate": "One concentrated TDD repair and final tool acceptance node: freeze observed failures as RED, repair tool-layer ownership/evidence/oracle/ref/env issues, run short unit/integration+one complete synthetic runner on current main binding, verify existing owned/output sentinels and exact scratch restoration. No new approvals or identity tickets."
+}

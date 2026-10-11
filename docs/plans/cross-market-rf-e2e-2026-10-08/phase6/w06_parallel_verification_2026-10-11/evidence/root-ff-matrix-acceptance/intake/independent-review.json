@@ -1,0 +1,201 @@
+{
+  "schema_version": "w06-root-independent-review/1",
+  "lane": "W06-FF-MATRIX",
+  "date": "2026-10-11",
+  "verdict": "PARTIAL_REPAIR_REQUIRED",
+  "complete_accepted": false,
+  "delivery_received": true,
+  "workdir": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/ff-contract-matrix",
+  "branch": "codex/w06-ff-contract-matrix",
+  "base_commit": "08ec85b27133cdf8a8d3b38fdba15255fc1ebac2",
+  "feature_commit": "8dd00e207e1465095f37ff720bc165b541bdd093",
+  "delivery_head": "c5527f1a9b2123e3f1796b5eb4dd35e0a81e13f5",
+  "distance": {
+    "canonical_main_only": 0,
+    "delivery_only": 2
+  },
+  "changed_paths": 139,
+  "worker_dirty": [
+    " M .planning/w06-ff-matrix/progress.md",
+    " M .planning/w06-ff-matrix/task_plan.md",
+    "?? docs/handoffs/w06-ff-matrix/input/"
+  ],
+  "canonical_dirty": [
+    "?? config/FMP_API_KEY.txt"
+  ],
+  "sha_rows": {
+    "checked": 25,
+    "match": 23,
+    "mismatch": [
+      ".planning/w06-ff-matrix/progress.md",
+      ".planning/w06-ff-matrix/task_plan.md"
+    ]
+  },
+  "producer_sha_rows": {
+    "checked": 9,
+    "matched": 9
+  },
+  "unit_replay": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\tests\\test_w06_contract_matrix.py",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-ff-matrix-acceptance\\intake\\unit-owned-o2n9u42w\\pytest"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.1876083000097424,
+    "scope": "only 12 delivered pure unit tests; no runner/provider/network",
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-ff-matrix-acceptance\\intake\\unit-owned-o2n9u42w",
+    "scratch_restored": true,
+    "log": {
+      "sha256": "fb3d8290cd92326dbcaec9145c4a045ff469c0c7f5431f1d856d8adca7a89b3b",
+      "bytes": 101
+    }
+  },
+  "independent_probes": {
+    "count": 11,
+    "fail": 10,
+    "positive_controls_pass": 1,
+    "file": "independent-counterexamples.json"
+  },
+  "findings": [
+    {
+      "id": "FFI-P1-ISOLATION",
+      "priority": "P1",
+      "component": "test-harness",
+      "root_cause": "No shared hermetic child environment; secret file is hashed despite stat-only declaration. Binding ignores synthetic supplied env.",
+      "source_locations": [
+        "run.py:56-89",
+        "run.py:120-137",
+        "report.py:27-28",
+        "cli_main.py:53-88"
+      ],
+      "probes": [
+        "FFI-SECRET-HASH",
+        "FFI-ENV-LEAK"
+      ],
+      "scope_limit": "Synthetic fake key/environment only; no evidence actual delivered run read or leaked real secret, and no production network send was observed.",
+      "root_action": "One platform-startup allowlist plus synthetic mandatory env for every child; secret path stat-only; scratch profile/temp; test-only network refusal/translation spy."
+    },
+    {
+      "id": "FFI-P1-RESULT-EVIDENCE",
+      "priority": "P1",
+      "component": "test-harness",
+      "root_cause": "Case predicates and oracle accept self-declared booleans, generic errors, unknown counters as zero and incorrect quarter/reuse status.",
+      "source_locations": [
+        "matrix_cases.py:91-109",
+        "matrix_cases.py:162-183",
+        "matrix_cases.py:257-261",
+        "matrix_cases.py:283-295",
+        "matrix_cases.py:399-405",
+        "oracle.py:49-103",
+        "cli_main.py:142-145",
+        "cli_main.py:234-237"
+      ],
+      "probes": [
+        "FFI-WRONG-QUARTER",
+        "FFI-CUTOFF-UNRELATED-ERROR",
+        "FFI-MISSING-REUSE",
+        "FFI-UNKNOWN-ZERO",
+        "FFI-EMPTY-UNBOUND-ORACLE",
+        "FFI-ORACLE-NULL-AS-ZERO",
+        "CONTROL-QUARTER-REJECTED"
+      ],
+      "scope_limit": "Pure helper synthetic responses prove harness false PASS, not actual FF/CWP/ET product accepts those responses.",
+      "root_action": "Shared typed outcome predicates and mandatory coverage; bind exact request/counters/real fresh reader proof. Missing data UNRESOLVED, no second identity/authorization layer."
+    },
+    {
+      "id": "FFI-P1-OWNERSHIP",
+      "priority": "P1",
+      "component": "test-harness",
+      "root_cause": "CLI unconditionally overwrites sentinel and deletes existing scratch but reports restored based only on its own rewritten sentinel.",
+      "source_locations": [
+        "cli_main.py:128-140",
+        "cli_main.py:166-185"
+      ],
+      "probes": [
+        "FFI-CLI-BASELINE-DELETION"
+      ],
+      "scope_limit": "Only an intake-owned synthetic preexisting baseline was deleted; no production directory/raw was touched.",
+      "root_action": "Reject unsafe/nonempty or overlapping roots before mutation, or use fresh owned child; immutable before baseline and finally cleanup only generated paths."
+    },
+    {
+      "id": "FFI-P1-DEADLINE",
+      "priority": "P1",
+      "component": "test-harness",
+      "root_cause": "No active batch absolute deadline; per-case budget produces WARN only. Binding/init/seed and repeated FF calls bypass batch accounting.",
+      "source_locations": [
+        "run.py:45-46",
+        "run.py:177-182",
+        "cli_main.py:147-164",
+        "cli_main.py:244-249"
+      ],
+      "probes": [
+        "FFI-CLI-UNBOUND-BUDGET"
+      ],
+      "scope_limit": "Clock simulated; did not run an expensive 220-second process or real provider.",
+      "root_action": "One batch/case deadline covers all spawn and phases, partial output on timeout, terminate/reap active processes, no larger budget to hide issue."
+    },
+    {
+      "id": "FFI-P1-COVERAGE",
+      "priority": "P1",
+      "component": "acceptance-test-coverage",
+      "root_cause": "Required matrix missing; generic fixture provider mistaken for actual provider tool-routing proof; cross-period original failure moved away instead of remaining named failing regression.",
+      "source_locations": [
+        "cli_main.py:95-115",
+        "fixture_builder.py:202-228",
+        "fixture_provider_adapter.py:39-51",
+        "docs/handoffs/w06-ff-matrix/handoff.json:findings.W06FF-01"
+      ],
+      "probes": [],
+      "scope_limit": "Existing product cross-period bug is already reported by worker, not newly independently reproduced by live product CLI here. Dayu unchanged; generic ensure/import useful but narrower than route proof.",
+      "root_action": "Keep original cross-period FAIL as PARTIAL pending ROOT product repair; add missing required error/market/doc controls, actual configured provider-boundary route proof, no Dayu writes/provider addition."
+    },
+    {
+      "id": "FFI-P2-HANDOFF",
+      "priority": "P2",
+      "component": "handoff",
+      "root_cause": "Post-commit final PWF states not included in manifest; stale next step/unchecked items; missing quantitative scratch peak and RED chronology scope.",
+      "source_locations": [
+        ".planning/w06-ff-matrix/task_plan.md",
+        ".planning/w06-ff-matrix/progress.md",
+        "docs/handoffs/w06-ff-matrix/handoff.json"
+      ],
+      "probes": [],
+      "root_action": "ROOT preserve original SHA snapshot, integrate understood final status changes, report actual 136567 retained bytes and unknown peak honestly; no full suite repeat."
+    }
+  ],
+  "delivery_retained_bytes": 136567,
+  "test_restore": {
+    "pure_probe_scratch_restored": true,
+    "unit_scratch_restored": true
+  },
+  "cost": {
+    "real_provider_calls": 0,
+    "model_calls": 0,
+    "paid_usd": 0,
+    "unknown_charge": null
+  },
+  "did_not_run": [
+    "original complete runner (isolation/ownership flaws)",
+    "actual provider/network/LLM",
+    "whole legacy suite",
+    "production lake scan/hash/copy"
+  ],
+  "unchanged": [
+    "FF/ET/CWP products and shared PWF",
+    "worker Git/main/install",
+    "Dayu and IQS",
+    "real secret bytes",
+    "production raw and configuration"
+  ],
+  "root_next_action": "Create isolated FF ROOT integration, preserve frozen negatives + positive controls, TDD shared hermetic env/ownership/deadline/evidence predicates; keep cross-period original product FAIL as PARTIAL; final real three-layer offline chain and matrix using explicit final CWP/ET roots, then independent final accept/normal commit/merge/push."
+}

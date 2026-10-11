@@ -1,0 +1,16 @@
+Initial sandboxed independent attempt, preserved before changing scratch placement.
+
+22 oracle cases completed. Unexpected PASS:
+- new_move_denies_same_root_ids
+- new_move_denies_same_relative_paths
+- new_policy_change_is_auth_gate
+- new_old_ref_identity_not_preserved
+
+Runtime attempted a unique host sandbox TEMP child. Final deletion raised:
+PermissionError: [WinError 5] access denied for
+C:/Users/郑曾波/AppData/Local/Packages/sandbox.{13e89545-7ec1-43d7-9f87-2bc4f6d0c23e}/AC/Temp/w6-pind-z87mx6es
+
+Subsequent exact-path read-only Test/Get-Item found this target absent. This is
+independent harness environment evidence, not a production product failure.
+Next attempt uses a unique short child of company-wiki/.tmp, with escalated
+execution for native subprocess bootstrap and exact final absolute-path deletion.

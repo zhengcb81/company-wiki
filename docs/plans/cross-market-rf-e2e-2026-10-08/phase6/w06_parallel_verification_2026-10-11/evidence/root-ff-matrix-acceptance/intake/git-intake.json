@@ -1,0 +1,103 @@
+{
+  "worker_head": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "stdout": "c5527f1a9b2123e3f1796b5eb4dd35e0a81e13f5\n",
+    "stderr": ""
+  },
+  "worker_status": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix",
+      "status",
+      "--short"
+    ],
+    "exit_code": 0,
+    "stdout": " M .planning/w06-ff-matrix/progress.md\n M .planning/w06-ff-matrix/task_plan.md\n?? docs/handoffs/w06-ff-matrix/input/\n",
+    "stderr": ""
+  },
+  "worker_branch": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix",
+      "branch",
+      "--show-current"
+    ],
+    "exit_code": 0,
+    "stdout": "codex/w06-ff-contract-matrix\n",
+    "stderr": ""
+  },
+  "worker_log": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix",
+      "log",
+      "-3",
+      "--format=%H %s"
+    ],
+    "exit_code": 0,
+    "stdout": "c5527f1a9b2123e3f1796b5eb4dd35e0a81e13f5 docs(w06): FF-MATRIX handoff (schema w06-lane-handoff/1) + manifest\n8dd00e207e1465095f37ff720bc165b541bdd093 feat(w06): offline FF-ET-CWP real three-layer contract matrix + coverage map\n08ec85b27133cdf8a8d3b38fdba15255fc1ebac2 fix(fetch): preserve typed request rejection diagnostics\n",
+    "stderr": ""
+  },
+  "worker_diff": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix",
+      "diff",
+      "--name-status",
+      "08ec85b27133cdf8a8d3b38fdba15255fc1ebac2",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "stdout": "A\t.planning/w06-ff-matrix/findings.md\nA\t.planning/w06-ff-matrix/progress.md\nA\t.planning/w06-ff-matrix/task_plan.md\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_fy_only_no_q.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_fy_only_no_q.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_fy_only_no_q.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_past_cutoff.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_past_cutoff.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_past_cutoff.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_wrong_quarter.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_wrong_quarter.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_wrong_quarter.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run2.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run2.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run2.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_402_entitlement.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_402_entitlement.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_402_entitlement.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_missing_creds.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_missing_creds.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_missing_creds.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_request_error.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_request_error.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_request_error.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_unknown_usage.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_unknown_usage.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_unknown_usage.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run2.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run2.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run2.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_hit.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_hit.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_hit.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_hk_semi_hit.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_hk_semi_hit.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_hk_semi_hit.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_us_quarterly_hit.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_us_quarterly_hit.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_us_quarterly_hit.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_convertible_bond.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_convertible_bond.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_convertible_bond.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_equity_offering.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_equity_offering.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_equity_offering.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_investor_relations.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_investor_relations.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_investor_relations.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_prospectus.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_prospectus.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_prospectus.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/report.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-1/restore.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_fy_only_no_q.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_fy_only_no_q.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_fy_only_no_q.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_past_cutoff.result.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_past_cutoff.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_past_cutoff.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_past_cutoff.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_past_cutoff.usage.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_wrong_quarter.result.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_wrong_quarter.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_wrong_quarter.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_wrong_quarter.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_wrong_quarter.usage.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run2.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run2.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run2.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse_run1.result.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse_run1.usage.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_402_entitlement.result.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_402_entitlement.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_402_entitlement.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_402_entitlement.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_402_entitlement.usage.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_missing_creds.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_missing_creds.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_missing_creds.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_request_error.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_request_error.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_request_error.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_unknown_usage.result.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_unknown_usage.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_unknown_usage.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_unknown_usage.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_unknown_usage.usage.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_cn_annual_hit.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_cn_annual_hit.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_cn_annual_hit.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run2.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run2.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run2.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_semi_hit.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_semi_hit.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_semi_hit.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_us_quarterly_hit.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_us_quarterly_hit.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_us_quarterly_hit.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_convertible_bond.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_convertible_bond.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_convertible_bond.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_equity_offering.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_equity_offering.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_equity_offering.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_investor_relations.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_investor_relations.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_investor_relations.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_prospectus.run1.request.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_prospectus.run1.response.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_prospectus.run1.stderr.txt\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/report.json\nA\tdocs/handoffs/w06-ff-matrix/attempts/attempt-5/restore.json\nA\tdocs/handoffs/w06-ff-matrix/handoff.json\nA\tdocs/handoffs/w06-ff-matrix/handoff.md\nA\tdocs/handoffs/w06-ff-matrix/logs/unit-tests.log\nA\tdocs/handoffs/w06-ff-matrix/manifest.json\nA\ttests/test_w06_contract_matrix.py\nA\ttools/offline_contract_matrix/README.md\nA\ttools/offline_contract_matrix/cli_main.py\nA\ttools/offline_contract_matrix/et_transcript_proxy.py\nA\ttools/offline_contract_matrix/fixture_builder.py\nA\ttools/offline_contract_matrix/fixture_provider_adapter.py\nA\ttools/offline_contract_matrix/matrix_cases.py\nA\ttools/offline_contract_matrix/oracle.py\nA\ttools/offline_contract_matrix/report.py\nA\ttools/offline_contract_matrix/run.py\n",
+    "stderr": ""
+  },
+  "canonical_head": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "stdout": "08ec85b27133cdf8a8d3b38fdba15255fc1ebac2\n",
+    "stderr": ""
+  },
+  "canonical_status": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "status",
+      "--short"
+    ],
+    "exit_code": 0,
+    "stdout": "?? config/FMP_API_KEY.txt\n",
+    "stderr": ""
+  },
+  "canonical_worker_distance": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "rev-list",
+      "--left-right",
+      "--count",
+      "main...codex/w06-ff-contract-matrix"
+    ],
+    "exit_code": 0,
+    "stdout": "0\t2\n",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "root-w06-cwp-portability-independent-probes/1",
+  "status": "HARNESS_OR_PRODUCT_FAIL",
+  "observations": {
+    "canonical_synthetic_reader_e2e": {
+      "status": "HARNESS_OR_PRODUCT_FAIL",
+      "canonical_binding": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\__init__.py",
+      "current_code_head": "ae0ca0d3c03f4a974ff26e472860ee306959d091",
+      "initial": "absent",
+      "source_ref_schema": "2.0",
+      "original_count": 4,
+      "provider_calls": 0,
+      "error": "CatalogReaderUnavailable",
+      "detail": "cannot open catalog read-only: \\\\?\\C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-cwp-portability-acceptance\\intake\\synthetic-reader-attempt2-owned\\catalog\\catalog.sqlite3: invalid uri authority: ?",
+      "seconds": 0.41,
+      "final": "absent"
+    }
+  },
+  "runtime_hygiene": {
+    "credential_environment_inherited": false,
+    "HOME": "synthetic-owned-home",
+    "blocked_actions": [],
+    "actual_network_calls": 0,
+    "provider_calls": 0,
+    "LLM_calls": 0,
+    "fees_usd": 0,
+    "raw_originals_accessed": 0,
+    "synthetic_files_only": true
+  }
+}

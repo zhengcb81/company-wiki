@@ -1,0 +1,25 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\tests\\test_w06_contract_matrix.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-ff-matrix-acceptance\\intake\\unit-owned-o2n9u42w\\pytest"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 3.1876083000097424,
+  "scope": "only 12 delivered pure unit tests; no runner/provider/network",
+  "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-ff-matrix-acceptance\\intake\\unit-owned-o2n9u42w",
+  "scratch_restored": true,
+  "log": {
+    "sha256": "fb3d8290cd92326dbcaec9145c4a045ff469c0c7f5431f1d856d8adca7a89b3b",
+    "bytes": 101
+  }
+}

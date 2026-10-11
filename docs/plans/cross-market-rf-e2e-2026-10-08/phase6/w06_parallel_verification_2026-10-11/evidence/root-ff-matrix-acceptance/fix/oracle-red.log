@@ -1,0 +1,150 @@
+...........EEEEEEFFF                                                     [100%]
+=================================== ERRORS ====================================
+________________ ERROR at setup of test_report_schema_and_emit ________________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_report_schema_and_emit>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+E               OSError: could not create numbered dir with prefix pytest- in C:\Users\֣����\AppData\Local\Packages\sandbox.{7dd1acb1-e78b-4112-8349-762e697642be}\AC\Temp\pytest-of-֣���� after 10 tries
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: OSError
+_________ ERROR at setup of test_wrong_downloaded_quarter_cannot_pass _________
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_wrong_downloaded_quarter_cannot_pass>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+E               OSError: could not create numbered dir with prefix pytest- in C:\Users\֣����\AppData\Local\Packages\sandbox.{7dd1acb1-e78b-4112-8349-762e697642be}\AC\Temp\pytest-of-֣���� after 10 tries
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: OSError
+_ ERROR at setup of test_explicit_quarter_rejection_remains_valid_positive_control _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_explicit_quarter_rejection_remains_valid_positive_control>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+E               OSError: could not create numbered dir with prefix pytest- in C:\Users\֣����\AppData\Local\Packages\sandbox.{7dd1acb1-e78b-4112-8349-762e697642be}\AC\Temp\pytest-of-֣���� after 10 tries
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: OSError
+_____ ERROR at setup of test_unrelated_upstream_error_cannot_prove_cutoff _____
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_unrelated_upstream_error_cannot_prove_cutoff>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+E               OSError: could not create numbered dir with prefix pytest- in C:\Users\֣����\AppData\Local\Packages\sandbox.{7dd1acb1-e78b-4112-8349-762e697642be}\AC\Temp\pytest-of-֣���� after 10 tries
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: OSError
+_ ERROR at setup of test_repeated_download_without_source_ref_cannot_prove_reuse _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_repeated_download_without_source_ref_cannot_prove_reuse>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+E               OSError: could not create numbered dir with prefix pytest- in C:\Users\֣����\AppData\Local\Packages\sandbox.{7dd1acb1-e78b-4112-8349-762e697642be}\AC\Temp\pytest-of-֣���� after 10 tries
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: OSError
+___ ERROR at setup of test_unknown_usage_even_incomplete_cannot_render_zero ___
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_unknown_usage_even_incomplete_cannot_render_zero>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+E               OSError: could not create numbered dir with prefix pytest- in C:\Users\֣����\AppData\Local\Packages\sandbox.{7dd1acb1-e78b-4112-8349-762e697642be}\AC\Temp\pytest-of-֣���� after 10 tries
+
+C:\Miniconda\Lib\site-packages\pytest_asyncio\plugin.py:728: OSError
+================================== FAILURES ===================================
+________________ test_empty_unbound_matrix_cannot_pass_oracle _________________
+
+    def test_empty_unbound_matrix_cannot_pass_oracle():
+        report = _report([])
+        report["code_binding"] = {"verified": False}
+>       assert not oracle_mod.passes(oracle_mod.audit(report))
+E       AssertionError: assert not True
+E        +  where True = <function passes at 0x000001B51380E5C0>([])
+E        +    where <function passes at 0x000001B51380E5C0> = oracle_mod.passes
+E        +    and   [] = <function audit at 0x000001B51380E8E0>({'schema_version': 'ff-et-cwp-offline-matrix/1', 'cases': [], 'restore': {'restored': True}, 'code_binding': {'verified': False}})
+E        +      where <function audit at 0x000001B51380E8E0> = oracle_mod.audit
+
+tests\test_w06_contract_matrix.py:226: AssertionError
+_________________ test_null_run2_counter_is_not_measured_zero _________________
+
+    def test_null_run2_counter_is_not_measured_zero():
+        case = _case("unknown_reuse", expected={"run_twice": True},
+                     counters={"fixture_requests": 1, "run2_fixture_requests": None})
+>       assert any(f.vector == "second_run_still_downloads" for f in oracle_mod.audit(_report([case])))
+E       assert False
+E        +  where False = any(<generator object test_null_run2_counter_is_not_measured_zero.<locals>.<genexpr> at 0x000001B5139936B0>)
+
+tests\test_w06_contract_matrix.py:232: AssertionError
+____________ test_actual_unknown_zero_not_boolean_self_declaration ____________
+
+    def test_actual_unknown_zero_not_boolean_self_declaration():
+        case = _case("unknown_usage", expected={"unknown_usage": True}, actual={
+            "provider_usage_complete": False, "provider_requests": 0,
+            "unknown_usage_reported_as_zero": False, "calls_swallowed": False})
+>       assert any(f.vector == "fake_zero_cost" for f in oracle_mod.audit(_report([case])))
+E       assert False
+E        +  where False = any(<generator object test_actual_unknown_zero_not_boolean_self_declaration.<locals>.<genexpr> at 0x000001B513993B90>)
+
+tests\test_w06_contract_matrix.py:239: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_w06_contract_matrix.py::test_empty_unbound_matrix_cannot_pass_oracle
+FAILED tests/test_w06_contract_matrix.py::test_null_run2_counter_is_not_measured_zero
+FAILED tests/test_w06_contract_matrix.py::test_actual_unknown_zero_not_boolean_self_declaration
+ERROR tests/test_w06_contract_matrix.py::test_report_schema_and_emit - OSErro...
+ERROR tests/test_w06_contract_matrix.py::test_wrong_downloaded_quarter_cannot_pass
+ERROR tests/test_w06_contract_matrix.py::test_explicit_quarter_rejection_remains_valid_positive_control
+ERROR tests/test_w06_contract_matrix.py::test_unrelated_upstream_error_cannot_prove_cutoff
+ERROR tests/test_w06_contract_matrix.py::test_repeated_download_without_source_ref_cannot_prove_reuse
+ERROR tests/test_w06_contract_matrix.py::test_unknown_usage_even_incomplete_cannot_render_zero
+3 failed, 11 passed, 6 errors in 1.18s

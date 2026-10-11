@@ -1,0 +1,203 @@
+{
+  "executed_request": {
+    "schema_version": "2.0",
+    "company_query": "Tencent Holdings Limited",
+    "market": "HK",
+    "document_kind": "annual_report",
+    "fiscal_year": 2024,
+    "as_of_date": "2026-12-31",
+    "filing_intent": "reuse_only",
+    "fiscal_period": "FY"
+  },
+  "request_sha256": "3abf0c3d101818b484bf03cd69673f49cc31f3c9facd153fed228e414e0d7393",
+  "retained_source_proof": {
+    "verified": true,
+    "reference": {
+      "byte_size": 621,
+      "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+      "document_id": "urn:company-wiki:document:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+    },
+    "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+    "byte_size": 621,
+    "source_versions": 1,
+    "original_locations": 1,
+    "physical_originals": 1,
+    "location_records": [
+      {
+        "root_id": "company_raw",
+        "relative_path": "宁德时代/raw/financial_reports/annual/ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803.pdf",
+        "absolute_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-matrix-owned\\attempt-1bb98380f75347e7b792e5966c11867e\\wiki\\companies\\宁德时代\\raw\\financial_reports\\annual\\ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803.pdf"
+      }
+    ],
+    "document_kind": "annual_report",
+    "metadata": {
+      "adapter_name": "w06-fixture-cn",
+      "adapter_version": "1.0.0",
+      "amended": false,
+      "byte_size": 621,
+      "candidate": {
+        "adapter_payload_json": "{\"candidate_id\":\"w06-cn-300750-annual_report-2024-FY\",\"document_kind\":\"annual_report\",\"filing_date\":\"2026-12-31\",\"fiscal_period\":\"FY\",\"fiscal_year\":2024,\"market\":\"CN\",\"provider\":\"w06fixture\",\"provider_document_id\":\"w06-cn-300750-annual_report-2024-FY\",\"source_url\":\"https://fixture.invalid/w06/w06-cn-300750-annual_report-2024-FY\",\"title\":\"Synthetic CN 300750 annual_report 2024 FY\"}",
+        "amended": false,
+        "candidate_id": "w06-cn-300750-annual_report-2024-FY",
+        "document_kind": "annual_report",
+        "entity": "宁德时代",
+        "etag": null,
+        "filing_date": "2026-12-31",
+        "fiscal_period": "FY",
+        "fiscal_year": 2024,
+        "form_type": null,
+        "language": null,
+        "last_modified": null,
+        "market": "CN",
+        "provider": "w06fixture",
+        "provider_document_id": "w06-cn-300750-annual_report-2024-FY",
+        "remote_size": null,
+        "schema_version": "1.0",
+        "source_url": "https://fixture.invalid/w06/w06-cn-300750-annual_report-2024-FY",
+        "title": "Synthetic CN 300750 annual_report 2024 FY"
+      },
+      "company_name": "宁德时代",
+      "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+      "document_kind": "annual_report",
+      "etag": null,
+      "filing_date": "2026-12-31",
+      "fiscal_period": "FY",
+      "fiscal_year": 2024,
+      "form_type": null,
+      "language": null,
+      "last_modified": null,
+      "market": "CN",
+      "mime_type": "application/pdf",
+      "provider": "w06fixture",
+      "provider_document_id": "w06-cn-300750-annual_report-2024-FY",
+      "receipt": {
+        "adapter_name": "w06-fixture-cn",
+        "adapter_version": "1.0.0",
+        "byte_size": 621,
+        "candidate_id": "w06-cn-300750-annual_report-2024-FY",
+        "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+        "etag": null,
+        "http_status": 200,
+        "last_modified": null,
+        "mime_type": "application/pdf",
+        "provider": "w06fixture",
+        "provider_document_id": "w06-cn-300750-annual_report-2024-FY",
+        "retrieved_at": "2026-01-01T00:00:00Z",
+        "schema_version": "1.0",
+        "source_url": "https://fixture.invalid/w06/w06-cn-300750-annual_report-2024-FY",
+        "staged_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-matrix-owned\\attempt-1bb98380f75347e7b792e5966c11867e\\wiki\\.source_catalog\\staging\\850aa66bc68f4fd9c3a91a2392bea7824a7a592c5c547e5ba580cc67d56f4bc9\\w06-original.pdf"
+      },
+      "request": {
+        "allow_download": true,
+        "as_of_date": "2026-12-31",
+        "document_kind": "annual_report",
+        "entity": "宁德时代",
+        "fiscal_period": "FY",
+        "fiscal_year": 2024,
+        "form_type": null,
+        "language": null,
+        "market": "CN",
+        "mode": null,
+        "provider": null,
+        "provider_document_id": null,
+        "schema_version": "1.0",
+        "security_id": "300750"
+      },
+      "request_id": "urn:company-wiki:source-request:sha256:78f10a17faa812de4f03d09235b769872e75860f5ddb45ea7acfd59ea49a24ed",
+      "retrieved_at": "2026-01-01T00:00:00Z",
+      "schema_version": "1.0",
+      "security_id": "300750",
+      "source_title": "Synthetic CN 300750 annual_report 2024 FY",
+      "source_url": "https://fixture.invalid/w06/w06-cn-300750-annual_report-2024-FY"
+    },
+    "original_language_content_sha256": null
+  },
+  "target_case": {
+    "id": "fin_cn_annual_hit",
+    "title": "CN annual_report local hit (reuse_only)",
+    "declared_layer": "ff+cwp",
+    "observed_layer": "ff-cli + cwp-source-query",
+    "result": "PASS",
+    "scope": "periodic financial report local reuse, zero provider requests",
+    "expected": {
+      "status": "source_candidate",
+      "download_events": 0
+    },
+    "actual": {
+      "status": "source_candidate",
+      "resolution_outcome": "reused_existing",
+      "download_events": 0,
+      "real_layer_evidence": {
+        "ff_public_cli": true,
+        "et_supervisor_worker": false,
+        "cwp_import": true
+      },
+      "elapsed_seconds": 1.5445,
+      "runs": [
+        {
+          "exit_code": 0,
+          "response": {
+            "schema_version": "2.0",
+            "status": "source_candidate",
+            "request_period": {
+              "mode": "exact",
+              "fiscal_year": 2024,
+              "fiscal_period": "FY",
+              "as_of_date": "2026-12-31"
+            },
+            "filing": {
+              "status": "source_candidate",
+              "source_ref": {
+                "byte_size": 621,
+                "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+                "document_id": "urn:company-wiki:document:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+                "mime_type": "application/pdf",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+              },
+              "byte_verification": "pending_verified_open",
+              "document_kind": "annual_report",
+              "fiscal_year": 2024,
+              "fiscal_period": "FY",
+              "resolution_outcome": "reused_existing",
+              "download_events": 0
+            },
+            "transcript": {
+              "status": "not_requested",
+              "retryable": false
+            },
+            "calls": 2,
+            "downloads": 0
+          },
+          "stderr": "",
+          "request_ref": "fin_cn_annual_hit.run1.request.json",
+          "response_ref": "fin_cn_annual_hit.run1.response.json",
+          "stderr_ref": "fin_cn_annual_hit.run1.stderr.txt",
+          "et_fixture_requests": 0,
+          "adapter_fixture_requests": 0,
+          "fixture_requests": 0,
+          "receipt_tag": "chainA_download_reuse_run2",
+          "fixture_scenario": "success",
+          "expected_original_content_sha256": null,
+          "request_sha256": "3abf0c3d101818b484bf03cd69673f49cc31f3c9facd153fed228e414e0d7393",
+          "response_sha256": "550d8f274ecc9d04f22f2cd9fea68a4e8e8eca49f5fe557c4e0b00f78dea497f"
+        }
+      ]
+    },
+    "provider_counters": {
+      "fixture_requests": 0,
+      "run2_fixture_requests": 0,
+      "downloads": 0,
+      "translations": 0
+    },
+    "request_ref": "fin_cn_annual_hit.run1.request.json",
+    "response_ref": "fin_cn_annual_hit.run1.response.json",
+    "receipt_refs": [],
+    "diagnostics": []
+  },
+  "executed_evidence_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-ff-matrix-acceptance\\independent-final\\_expectation_scratch",
+  "original_evidence_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-matrix-evidence\\attempt-1bb98380f75347e7b792e5966c11867e\\artifacts"
+}

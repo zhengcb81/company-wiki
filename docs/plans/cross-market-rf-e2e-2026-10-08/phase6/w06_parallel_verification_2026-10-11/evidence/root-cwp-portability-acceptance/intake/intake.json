@@ -1,0 +1,583 @@
+{
+  "schema_version": "root-cwp-portability-intake/1",
+  "worker": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability",
+  "base": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+  "head": "f8d5e0f4f6047375fdaef38e15e54edff2abe61d",
+  "branch": "codex/w06-cwp-portability",
+  "status": "?? docs/handoffs/w06-cwp-portability/input/",
+  "commits": [
+    "f8d5e0f4f6047375fdaef38e15e54edff2abe61d docs(w06): finalize PWF status and refresh handoff digests",
+    "562bb87971fe889dd974261ef75a1e6344469894 docs(w06): lane handoff for W06-CWP-PORTABILITY (schema w06-lane-handoff/1)",
+    "49afd8738b38f45507ccc58fa4bab27c638addf7 feat(w06): virtual storage-root migration regression harness (source_root_portability)"
+  ],
+  "changed_paths": [
+    ".planning/w06-cwp-portability/findings.md",
+    ".planning/w06-cwp-portability/progress.md",
+    ".planning/w06-cwp-portability/task_plan.md",
+    "docs/handoffs/w06-cwp-portability/e2e/attempt-0003-report.json",
+    "docs/handoffs/w06-cwp-portability/handoff.json",
+    "docs/handoffs/w06-cwp-portability/handoff.md",
+    "docs/handoffs/w06-cwp-portability/logs/e2e-runner-2.log",
+    "docs/handoffs/w06-cwp-portability/logs/e2e-runner-final.log",
+    "docs/handoffs/w06-cwp-portability/logs/e2e-runner.log",
+    "docs/handoffs/w06-cwp-portability/logs/green-unit-integration-final.log",
+    "docs/handoffs/w06-cwp-portability/logs/green-unit-integration.log",
+    "docs/handoffs/w06-cwp-portability/logs/red-oracle.log",
+    "docs/handoffs/w06-cwp-portability/manifest.json",
+    "tests/integration/test_w06_root_portability.py",
+    "tests/unit/test_w06_root_portability_oracle.py",
+    "tools/source_root_portability/README.md",
+    "tools/source_root_portability/__init__.py",
+    "tools/source_root_portability/consumer_spy.py",
+    "tools/source_root_portability/fixture_builder.py",
+    "tools/source_root_portability/oracle.py",
+    "tools/source_root_portability/report.py",
+    "tools/source_root_portability/run.py",
+    "tools/source_root_portability/scenarios.py"
+  ],
+  "exclusive_write_set_ok": true,
+  "forbidden_src_scripts_config_oldtests_CI_changed": false,
+  "manifest": {
+    "all_match": true,
+    "files": [
+      {
+        "path": "tools/source_root_portability/__init__.py",
+        "expected": {
+          "sha256": "6529565236eea8e010c18a8e64c74abe9460a547863311b85413ed8b231964ea",
+          "bytes": 309
+        },
+        "actual": {
+          "sha256": "6529565236eea8e010c18a8e64c74abe9460a547863311b85413ed8b231964ea",
+          "bytes": 309
+        },
+        "match": true
+      },
+      {
+        "path": "tools/source_root_portability/README.md",
+        "expected": {
+          "sha256": "36ed9b93be71df7e89161be56fbe4790fd831c9a091d4d33a191b74a17e60d51",
+          "bytes": 4389
+        },
+        "actual": {
+          "sha256": "36ed9b93be71df7e89161be56fbe4790fd831c9a091d4d33a191b74a17e60d51",
+          "bytes": 4389
+        },
+        "match": true
+      },
+      {
+        "path": "tools/source_root_portability/fixture_builder.py",
+        "expected": {
+          "sha256": "31e88bc98d45c6ad709fb94d8a09cdbd482ceab4adf207fadf855c0fb895c6f2",
+          "bytes": 11003
+        },
+        "actual": {
+          "sha256": "31e88bc98d45c6ad709fb94d8a09cdbd482ceab4adf207fadf855c0fb895c6f2",
+          "bytes": 11003
+        },
+        "match": true
+      },
+      {
+        "path": "tools/source_root_portability/consumer_spy.py",
+        "expected": {
+          "sha256": "bc7222c9fbf412959476a509947393c43f62ba929425527790cdc889fed69e22",
+          "bytes": 8312
+        },
+        "actual": {
+          "sha256": "bc7222c9fbf412959476a509947393c43f62ba929425527790cdc889fed69e22",
+          "bytes": 8312
+        },
+        "match": true
+      },
+      {
+        "path": "tools/source_root_portability/oracle.py",
+        "expected": {
+          "sha256": "480e195897fdc5052a8fad5d5b2e0b35bed69ea5a22d366691b2cb3a31df4a5f",
+          "bytes": 32824
+        },
+        "actual": {
+          "sha256": "480e195897fdc5052a8fad5d5b2e0b35bed69ea5a22d366691b2cb3a31df4a5f",
+          "bytes": 32824
+        },
+        "match": true
+      },
+      {
+        "path": "tools/source_root_portability/report.py",
+        "expected": {
+          "sha256": "ee8ce8c556ef55f28593d3bfa4223c5af564fa396c02fd94bee4c962053c28aa",
+          "bytes": 3967
+        },
+        "actual": {
+          "sha256": "ee8ce8c556ef55f28593d3bfa4223c5af564fa396c02fd94bee4c962053c28aa",
+          "bytes": 3967
+        },
+        "match": true
+      },
+      {
+        "path": "tools/source_root_portability/scenarios.py",
+        "expected": {
+          "sha256": "091838174d3ad7696ff26dea67d5c83bb41d130778e1da72f4de707bf7ba76cd",
+          "bytes": 34272
+        },
+        "actual": {
+          "sha256": "091838174d3ad7696ff26dea67d5c83bb41d130778e1da72f4de707bf7ba76cd",
+          "bytes": 34272
+        },
+        "match": true
+      },
+      {
+        "path": "tools/source_root_portability/run.py",
+        "expected": {
+          "sha256": "4a1d2d9072ec459b9acb546f796ef17499927625917c2626b9a52f1b3536a0eb",
+          "bytes": 10304
+        },
+        "actual": {
+          "sha256": "4a1d2d9072ec459b9acb546f796ef17499927625917c2626b9a52f1b3536a0eb",
+          "bytes": 10304
+        },
+        "match": true
+      },
+      {
+        "path": "tests/unit/test_w06_root_portability_oracle.py",
+        "expected": {
+          "sha256": "3a0ce4bd4378336d950826e08708c20526fcfd5ef92b56e085948ead4b0c0081",
+          "bytes": 19638
+        },
+        "actual": {
+          "sha256": "3a0ce4bd4378336d950826e08708c20526fcfd5ef92b56e085948ead4b0c0081",
+          "bytes": 19638
+        },
+        "match": true
+      },
+      {
+        "path": "tests/integration/test_w06_root_portability.py",
+        "expected": {
+          "sha256": "22c0ae62795b68617c8ba949039718a11aac7bbdf1e891f2f626a6e793fd0b72",
+          "bytes": 8376
+        },
+        "actual": {
+          "sha256": "22c0ae62795b68617c8ba949039718a11aac7bbdf1e891f2f626a6e793fd0b72",
+          "bytes": 8376
+        },
+        "match": true
+      },
+      {
+        "path": ".planning/w06-cwp-portability/task_plan.md",
+        "expected": {
+          "sha256": "cb88e9ac38726910ff65f76df839f53f13d5cdc289ff08138ef170abdfb10d9b",
+          "bytes": 4861
+        },
+        "actual": {
+          "sha256": "cb88e9ac38726910ff65f76df839f53f13d5cdc289ff08138ef170abdfb10d9b",
+          "bytes": 4861
+        },
+        "match": true
+      },
+      {
+        "path": ".planning/w06-cwp-portability/findings.md",
+        "expected": {
+          "sha256": "273adc1f7c3f18946245c55917c21a2143ebc24b816bb6847b83457835497cee",
+          "bytes": 12972
+        },
+        "actual": {
+          "sha256": "273adc1f7c3f18946245c55917c21a2143ebc24b816bb6847b83457835497cee",
+          "bytes": 12972
+        },
+        "match": true
+      },
+      {
+        "path": ".planning/w06-cwp-portability/progress.md",
+        "expected": {
+          "sha256": "fc94931b7ab40d00b05cfa21c36a9355a653995e9bf26cd9c496483a6a8b2e97",
+          "bytes": 1703
+        },
+        "actual": {
+          "sha256": "fc94931b7ab40d00b05cfa21c36a9355a653995e9bf26cd9c496483a6a8b2e97",
+          "bytes": 1703
+        },
+        "match": true
+      },
+      {
+        "path": "docs/handoffs/w06-cwp-portability/logs/red-oracle.log",
+        "expected": {
+          "sha256": "d6e596376d78a3655be420c9aba99f1199caf296c384386843ca4a36a4bfc74c",
+          "bytes": 10524
+        },
+        "actual": {
+          "sha256": "d6e596376d78a3655be420c9aba99f1199caf296c384386843ca4a36a4bfc74c",
+          "bytes": 10524
+        },
+        "match": true
+      },
+      {
+        "path": "docs/handoffs/w06-cwp-portability/logs/green-unit-integration.log",
+        "expected": {
+          "sha256": "22abff98fcc084629647b5a75792ff8445aa47194c11c1243e331ccbb2397584",
+          "bytes": 1193
+        },
+        "actual": {
+          "sha256": "22abff98fcc084629647b5a75792ff8445aa47194c11c1243e331ccbb2397584",
+          "bytes": 1193
+        },
+        "match": true
+      },
+      {
+        "path": "docs/handoffs/w06-cwp-portability/logs/green-unit-integration-final.log",
+        "expected": {
+          "sha256": "c5fafcab1f4119be57353b1dc36b716fc09939c53d589c8e2ba2c1d468d75f43",
+          "bytes": 1193
+        },
+        "actual": {
+          "sha256": "c5fafcab1f4119be57353b1dc36b716fc09939c53d589c8e2ba2c1d468d75f43",
+          "bytes": 1193
+        },
+        "match": true
+      },
+      {
+        "path": "docs/handoffs/w06-cwp-portability/logs/e2e-runner.log",
+        "expected": {
+          "sha256": "41f5eab4da9c932233a2417004aaa2986c47dda78a97fd7794e7ff68fba0c00e",
+          "bytes": 344
+        },
+        "actual": {
+          "sha256": "41f5eab4da9c932233a2417004aaa2986c47dda78a97fd7794e7ff68fba0c00e",
+          "bytes": 344
+        },
+        "match": true
+      },
+      {
+        "path": "docs/handoffs/w06-cwp-portability/logs/e2e-runner-2.log",
+        "expected": {
+          "sha256": "e442ae31768be1252e2116698a7f5f4b4105e6a0ee623f67c419794077b2b9a2",
+          "bytes": 143
+        },
+        "actual": {
+          "sha256": "e442ae31768be1252e2116698a7f5f4b4105e6a0ee623f67c419794077b2b9a2",
+          "bytes": 143
+        },
+        "match": true
+      },
+      {
+        "path": "docs/handoffs/w06-cwp-portability/logs/e2e-runner-final.log",
+        "expected": {
+          "sha256": "8d49466e3215540fb9b98445c118a51c09ea9ca511fea674baa1e0ef4ed6351e",
+          "bytes": 143
+        },
+        "actual": {
+          "sha256": "8d49466e3215540fb9b98445c118a51c09ea9ca511fea674baa1e0ef4ed6351e",
+          "bytes": 143
+        },
+        "match": true
+      },
+      {
+        "path": "docs/handoffs/w06-cwp-portability/e2e/attempt-0003-report.json",
+        "expected": {
+          "sha256": "0f5901777afbe9ef81d9e7241057d69f701494da23949a0bb18def498b88d3a2",
+          "bytes": 29459
+        },
+        "actual": {
+          "sha256": "0f5901777afbe9ef81d9e7241057d69f701494da23949a0bb18def498b88d3a2",
+          "bytes": 29459
+        },
+        "match": true
+      },
+      {
+        "path": "docs/handoffs/w06-cwp-portability/handoff.md",
+        "expected": {
+          "sha256": "90cddb372b9ab760e1a44820a62d13d0f3b3f0b42ccd9f3d10518e49430d3eb9",
+          "bytes": 4477
+        },
+        "actual": {
+          "sha256": "90cddb372b9ab760e1a44820a62d13d0f3b3f0b42ccd9f3d10518e49430d3eb9",
+          "bytes": 4477
+        },
+        "match": true
+      },
+      {
+        "path": "docs/handoffs/w06-cwp-portability/handoff.json",
+        "expected": {
+          "sha256": "d2b6564198c45d962e89bcf0ccd0245b66df2a1e685b9a6e6b54a6fea8e93480",
+          "bytes": 13051
+        },
+        "actual": {
+          "sha256": "d2b6564198c45d962e89bcf0ccd0245b66df2a1e685b9a6e6b54a6fea8e93480",
+          "bytes": 13051
+        },
+        "match": true
+      }
+    ]
+  },
+  "frozen_inputs": {
+    "dispatch_sha": {
+      "sha256": "24c3c47cdc77b75986f7a2077adb110b11ccd0c1127700106deb9595404315f2",
+      "bytes": 7308
+    },
+    "all_match": true,
+    "files": [
+      {
+        "name": "amendment_manifest.json",
+        "expected": {
+          "sha256": "320a27c9a60250eed7a46c0b2fed5ddba41baf104b67dcc2f7e1af56a9367891",
+          "bytes": 374
+        },
+        "actual": {
+          "sha256": "320a27c9a60250eed7a46c0b2fed5ddba41baf104b67dcc2f7e1af56a9367891",
+          "bytes": 374
+        },
+        "match": true
+      },
+      {
+        "name": "construction_card.md",
+        "expected": {
+          "sha256": "d3f73a4e421335159d53b2d1ff7bfdebd0296b2a999f13f132cda8ae023bbe22",
+          "bytes": 6135
+        },
+        "actual": {
+          "sha256": "d3f73a4e421335159d53b2d1ff7bfdebd0296b2a999f13f132cda8ae023bbe22",
+          "bytes": 6135
+        },
+        "match": true
+      },
+      {
+        "name": "handoff_contract.md",
+        "expected": {
+          "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+          "bytes": 3345
+        },
+        "actual": {
+          "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+          "bytes": 3345
+        },
+        "match": true
+      },
+      {
+        "name": "inputs.json",
+        "expected": {
+          "sha256": "46119404b7088666e7b41af6dadd93881d9f5d14ef5a62cd3a23ab631a56d770",
+          "bytes": 5717
+        },
+        "actual": {
+          "sha256": "46119404b7088666e7b41af6dadd93881d9f5d14ef5a62cd3a23ab631a56d770",
+          "bytes": 5717
+        },
+        "match": true
+      },
+      {
+        "name": "manifest.json",
+        "expected": {
+          "sha256": "56baa2ebe06c16e3b1264c0fe94850dda89e52fa94423a8788b49f57341a6a97",
+          "bytes": 552
+        },
+        "actual": {
+          "sha256": "56baa2ebe06c16e3b1264c0fe94850dda89e52fa94423a8788b49f57341a6a97",
+          "bytes": 552
+        },
+        "match": true
+      },
+      {
+        "name": "ROOT_INTERFACE_AMENDMENT.md",
+        "expected": {
+          "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+          "bytes": 2220
+        },
+        "actual": {
+          "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+          "bytes": 2220
+        },
+        "match": true
+      }
+    ],
+    "code_reference_count": 9,
+    "raw_document_reference_count": 0,
+    "references": [
+      {
+        "path": "AGENTS.md",
+        "raw": {
+          "sha256": "c7d82854df893225adc1a265f267055bbcfd9a50a33f4821eaba843e4575b8dc",
+          "bytes": 12029
+        },
+        "frozen_input_raw_sha": "c7d82854df893225adc1a265f267055bbcfd9a50a33f4821eaba843e4575b8dc",
+        "raw_match": true,
+        "actual_git_blob_sha": "e6f9a5f8c3359a759b92bd151e34e2780f6340054b4f5fce78155b3d013d7d23",
+        "frozen_git_blob_sha": "e6f9a5f8c3359a759b92bd151e34e2780f6340054b4f5fce78155b3d013d7d23",
+        "git_blob_match": true,
+        "EOL_equivalent_to_blob": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/source_reader.py",
+        "raw": {
+          "sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+          "bytes": 35904
+        },
+        "frozen_input_raw_sha": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+        "raw_match": true,
+        "actual_git_blob_sha": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+        "frozen_git_blob_sha": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+        "git_blob_match": true,
+        "EOL_equivalent_to_blob": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/source_export_v2_cli.py",
+        "raw": {
+          "sha256": "41e1ab1d7b9d62f5467c564ae42b748f1fb93d2d9cbe57f0f98d9c9942c4fa61",
+          "bytes": 4139
+        },
+        "frozen_input_raw_sha": "41e1ab1d7b9d62f5467c564ae42b748f1fb93d2d9cbe57f0f98d9c9942c4fa61",
+        "raw_match": true,
+        "actual_git_blob_sha": "2cef48cad967fc10c40ec9d50dde90fbf5887288feb11308f1916e9d489bfb54",
+        "frozen_git_blob_sha": "2cef48cad967fc10c40ec9d50dde90fbf5887288feb11308f1916e9d489bfb54",
+        "git_blob_match": true,
+        "EOL_equivalent_to_blob": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/config.py",
+        "raw": {
+          "sha256": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+          "bytes": 11841
+        },
+        "frozen_input_raw_sha": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+        "raw_match": true,
+        "actual_git_blob_sha": "412056e5610d6a8f5488c43c812fc045160ef39454dee9f7cd42c18781c43297",
+        "frozen_git_blob_sha": "412056e5610d6a8f5488c43c812fc045160ef39454dee9f7cd42c18781c43297",
+        "git_blob_match": true,
+        "EOL_equivalent_to_blob": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/service.py",
+        "raw": {
+          "sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+          "bytes": 62571
+        },
+        "frozen_input_raw_sha": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+        "raw_match": true,
+        "actual_git_blob_sha": "40e2147fff1baf3f079e9ec6ac39c7fd11f90d3e265611e33a146dce266aab7d",
+        "frozen_git_blob_sha": "40e2147fff1baf3f079e9ec6ac39c7fd11f90d3e265611e33a146dce266aab7d",
+        "git_blob_match": true,
+        "EOL_equivalent_to_blob": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/cli.py",
+        "raw": {
+          "sha256": "c297615bf26889e7959a994918d8bca1511423303a449a93de7fa969661a1ed7",
+          "bytes": 60147
+        },
+        "frozen_input_raw_sha": "c297615bf26889e7959a994918d8bca1511423303a449a93de7fa969661a1ed7",
+        "raw_match": true,
+        "actual_git_blob_sha": "57f14a4f911fce319b4c893621170c937cca9cac76aff2e141a90d363cffdcbf",
+        "frozen_git_blob_sha": "57f14a4f911fce319b4c893621170c937cca9cac76aff2e141a90d363cffdcbf",
+        "git_blob_match": true,
+        "EOL_equivalent_to_blob": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/document_kinds.py",
+        "raw": {
+          "sha256": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+          "bytes": 1480
+        },
+        "frozen_input_raw_sha": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+        "raw_match": true,
+        "actual_git_blob_sha": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+        "frozen_git_blob_sha": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+        "git_blob_match": true,
+        "EOL_equivalent_to_blob": true
+      },
+      {
+        "path": "tests/unit/test_default_steady_source_reader.py",
+        "raw": {
+          "sha256": "05f7c237042a371d366653c9b851a734f4de6c2597929b4b7558538ea3ba30db",
+          "bytes": 4370
+        },
+        "frozen_input_raw_sha": "1a682b8e7ca2690f23d8f5ab6576b9f1bff1686e69e138540f0a6636c761fa88",
+        "raw_match": false,
+        "actual_git_blob_sha": "1a682b8e7ca2690f23d8f5ab6576b9f1bff1686e69e138540f0a6636c761fa88",
+        "frozen_git_blob_sha": "1a682b8e7ca2690f23d8f5ab6576b9f1bff1686e69e138540f0a6636c761fa88",
+        "git_blob_match": true,
+        "EOL_equivalent_to_blob": true
+      },
+      {
+        "path": "tests/unit/test_replay_config_isolation.py",
+        "raw": {
+          "sha256": "28863e70b6b15355446d36774506a708dce1d53ac38e5d4a5ec8f7fad342e232",
+          "bytes": 19257
+        },
+        "frozen_input_raw_sha": "28863e70b6b15355446d36774506a708dce1d53ac38e5d4a5ec8f7fad342e232",
+        "raw_match": true,
+        "actual_git_blob_sha": "b239b3ef20f6b6a648b572a80713283b3d9b249b78fdffba4802f6b18a2c216b",
+        "frozen_git_blob_sha": "b239b3ef20f6b6a648b572a80713283b3d9b249b78fdffba4802f6b18a2c216b",
+        "git_blob_match": true,
+        "EOL_equivalent_to_blob": true
+      }
+    ]
+  },
+  "canonical": {
+    "head": "8862372f714209cff1b218d77b5c4b8af6bc74dc",
+    "branch": "master",
+    "runtime_modules": [
+      {
+        "path": "src/company_wiki/source_catalog/source_reader.py",
+        "raw": {
+          "sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+          "bytes": 35904
+        },
+        "worker_raw": {
+          "sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+          "bytes": 35904
+        },
+        "same_worker_bytes": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/config.py",
+        "raw": {
+          "sha256": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+          "bytes": 11841
+        },
+        "worker_raw": {
+          "sha256": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+          "bytes": 11841
+        },
+        "same_worker_bytes": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/service.py",
+        "raw": {
+          "sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+          "bytes": 62571
+        },
+        "worker_raw": {
+          "sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+          "bytes": 62571
+        },
+        "same_worker_bytes": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/source_export_v2_cli.py",
+        "raw": {
+          "sha256": "41e1ab1d7b9d62f5467c564ae42b748f1fb93d2d9cbe57f0f98d9c9942c4fa61",
+          "bytes": 4139
+        },
+        "worker_raw": {
+          "sha256": "41e1ab1d7b9d62f5467c564ae42b748f1fb93d2d9cbe57f0f98d9c9942c4fa61",
+          "bytes": 4139
+        },
+        "same_worker_bytes": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/store.py",
+        "raw": {
+          "sha256": "ccae2c324b2efbac3824cef4e3fa3cfa273583efb6aeac11334c70625e5fd99e",
+          "bytes": 69929
+        },
+        "worker_raw": {
+          "sha256": "ccae2c324b2efbac3824cef4e3fa3cfa273583efb6aeac11334c70625e5fd99e",
+          "bytes": 69929
+        },
+        "same_worker_bytes": true
+      }
+    ]
+  },
+  "cost": {
+    "provider_calls": 0,
+    "llm_calls": 0,
+    "usd": 0
+  },
+  "products_modified": false
+}

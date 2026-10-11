@@ -1,0 +1,93 @@
+{
+  "schema_version": "w06-portability-four-common-classification-counterexamples/1",
+  "base_report_ref": "../fix/final-refresh/real-run-report.json",
+  "base_report_sha256": "bcbfaa7ae9c1ab496fd86b50ac617bd25060a50f57a20b956c55a4fb6e4fbf1f",
+  "replay": "probes.py; each JSON patch applied separately to the unchanged base report",
+  "canonical_input_encoding": "UTF-8 JSON sort_keys=true ensure_ascii=false compact separators",
+  "counterexamples": [
+    {
+      "name": "new_move_denies_same_root_ids",
+      "original_value": true,
+      "json_patch": [
+        {
+          "op": "replace",
+          "path": "/scenarios/1/evidence/move/same_root_ids",
+          "value": false
+        }
+      ],
+      "canonical_effective_input_sha256": "186ce3ff661bbb89acf1f79ab5d503a24bcd1e9ec03a2cac2c2171f49f7c0abf",
+      "expected_overall": "FAIL",
+      "actual_overall": "PASS",
+      "actual_findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "move is not same root_id + same relative_path"
+        }
+      ]
+    },
+    {
+      "name": "new_move_denies_same_relative_paths",
+      "original_value": true,
+      "json_patch": [
+        {
+          "op": "replace",
+          "path": "/scenarios/1/evidence/move/same_relative_paths",
+          "value": false
+        }
+      ],
+      "canonical_effective_input_sha256": "c9d097df7253e49935e29cd51285503360e630d524d0370b61cad7993fa43fbc",
+      "expected_overall": "FAIL",
+      "actual_overall": "PASS",
+      "actual_findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "move is not same root_id + same relative_path"
+        }
+      ]
+    },
+    {
+      "name": "new_policy_change_is_auth_gate",
+      "original_value": false,
+      "json_patch": [
+        {
+          "op": "replace",
+          "path": "/scenarios/1/evidence/policy_observation/change_is_auth_gate",
+          "value": true
+        }
+      ],
+      "canonical_effective_input_sha256": "d08a4ad9b411428e007309f751e3aad234d44445249cca31c423568b09512a67",
+      "expected_overall": "FAIL",
+      "actual_overall": "PASS",
+      "actual_findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "policy change treated as an authorization gate"
+        }
+      ]
+    },
+    {
+      "name": "new_old_ref_identity_not_preserved",
+      "original_value": true,
+      "json_patch": [
+        {
+          "op": "replace",
+          "path": "/scenarios/1/evidence/reads_after_move/0/ref_identity_preserved",
+          "value": false
+        }
+      ],
+      "canonical_effective_input_sha256": "a67e0d767561d9a7326724b48e108caa40ef324aff740fa38c64470bb72d12e6",
+      "expected_overall": "FAIL",
+      "actual_overall": "PASS",
+      "actual_findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "old SourceRef identity not preserved"
+        }
+      ]
+    }
+  ]
+}

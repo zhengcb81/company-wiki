@@ -1,0 +1,16 @@
+{
+  "schema_version": "w06-configured-provider-observation/1",
+  "configuration": "C:/Users/郑曾波/Projects/company-wiki/config/source_acquisition.yaml",
+  "source_of_observation": "read-only selected provider name/interface/project_root fields; no credential files or LLM configuration read",
+  "cn": {
+    "name": "stockinfo-cninfo",
+    "interface": "json_command_v1",
+    "project_root": "${PROJECT_ROOT}/../StockInfoDLSimple/v2-clean-rewrite",
+    "selection": "StockInfoDLSimple, not StockInfoDownloader"
+  },
+  "hk": {"name": "dayu-hk-sdk", "interface": "dayu_sdk_bounded_v1"},
+  "us": {"name": "dayu-us-sdk", "interface": "dayu_sdk_bounded_v1"},
+  "matrix_provider_boundary": "The offline matrix replaces the configured supplier response with the owned synthetic adapter. It does not run StockInfoDLSimple or Dayu production download clients.",
+  "real_tool_download_verified": false,
+  "dayu_and_iqs_writes": 0
+}

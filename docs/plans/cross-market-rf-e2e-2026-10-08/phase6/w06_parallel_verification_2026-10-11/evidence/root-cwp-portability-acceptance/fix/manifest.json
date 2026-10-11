@@ -1,0 +1,125 @@
+{
+  "schema_version": "root-w06-portability-fix-manifest/1",
+  "files": [
+    {
+      "path": "copy-ref-red.log",
+      "sha256": "fa51b735b814d583f9c33b4eeaf05666345bd4bcbede5c83d70e5f8f937238a2",
+      "byte_size": 2445
+    },
+    {
+      "path": "final-node.json",
+      "sha256": "661106d73a81c36b4b974a73c7ea2d44c2e3b356e829543a651991c8400ebcf0",
+      "byte_size": 11723
+    },
+    {
+      "path": "final-refresh/final-node.json",
+      "sha256": "96f2e990f24a9458469ee043270ddbe75c033ab32d764076320b71b581c39f03",
+      "byte_size": 11723
+    },
+    {
+      "path": "final-refresh/real-run-report.json",
+      "sha256": "bcbfaa7ae9c1ab496fd86b50ac617bd25060a50f57a20b956c55a4fb6e4fbf1f",
+      "byte_size": 71626
+    },
+    {
+      "path": "final-refresh/ruff-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "final-refresh/ruff-stdout.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "byte_size": 19
+    },
+    {
+      "path": "final-refresh/runner-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "final-refresh/runner-stdout.log",
+      "sha256": "dc609447e8ee04f1f5fb10be9c30d7756001c86374a23609272b64e1e9c3a585",
+      "byte_size": 195
+    },
+    {
+      "path": "final-refresh/tests-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "final-refresh/tests-stdout.log",
+      "sha256": "6b721ab871a64e6cfe43c2cca31a394e0a67075b0a044574aabb2e705bdf4b16",
+      "byte_size": 1797
+    },
+    {
+      "path": "final_node.py",
+      "sha256": "8ba283f493b0ca89a805df10feb2f0406003c7994d62ff8486e62f9c195ee463",
+      "byte_size": 6173
+    },
+    {
+      "path": "final_node_refresh.py",
+      "sha256": "b4d0faed51f29e028d2438d72f8ead7d58bf40cb674346556ad336effcc55ae8",
+      "byte_size": 6357
+    },
+    {
+      "path": "formal-red-receipt.json",
+      "sha256": "46c8d988d162de77e0ce6f0eb3012ffb4e276fe63ddb2ae70481d396df6ee2f2",
+      "byte_size": 1517
+    },
+    {
+      "path": "interim-test-fixture-shape-failure.log",
+      "sha256": "72d4729a1c49335e2a0940abdc7a9004138b801cebec7cf151063746e77cba0d",
+      "byte_size": 1733
+    },
+    {
+      "path": "product-freeze.json",
+      "sha256": "b1662c806216a8c2e729ae7a48fda6b83a741a552e0e60323b1a662854dd715b",
+      "byte_size": 2588
+    },
+    {
+      "path": "real-run-report.json",
+      "sha256": "15140cc3403b6edf6649f46fe44a1ef32599a1c8f030cc044e7565754d8a4067",
+      "byte_size": 69720
+    },
+    {
+      "path": "ROOT-tool-repair.md",
+      "sha256": "fbee7b61f338c769b2065ef46664e0e8b96e080c80d2592b61172e0c83bcea2d",
+      "byte_size": 3458
+    },
+    {
+      "path": "ruff-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "ruff-stdout.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "byte_size": 19
+    },
+    {
+      "path": "runner-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "runner-stdout.log",
+      "sha256": "7a8d729f46450085bd5e9c7525e44eea4881e3d8a4c7bd1c7c6cd9cdb3742c97",
+      "byte_size": 195
+    },
+    {
+      "path": "socket-event-diagnostic.json",
+      "sha256": "ea7c9afa4acf441eec1171fc14a8a42b8114bae9115728944e4d043bc99e7b3b",
+      "byte_size": 219
+    },
+    {
+      "path": "tests-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "tests-stdout.log",
+      "sha256": "98b8ae36f19e159c47143a6e1889a179c508affb101b975d960adbff2a38f6c7",
+      "byte_size": 1797
+    }
+  ]
+}

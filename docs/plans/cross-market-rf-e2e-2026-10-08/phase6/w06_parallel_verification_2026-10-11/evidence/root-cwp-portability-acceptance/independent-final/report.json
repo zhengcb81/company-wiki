@@ -1,0 +1,111 @@
+{
+  "schema_version": "w06-portability-independent-review/1",
+  "verdict": "FAIL_NEW_ORACLE_EXPECTATION_CLASSIFICATION",
+  "blockers": [
+    {
+      "id": "W06-PORT-ORACLE-FINDING-VERDICT",
+      "priority": "P1",
+      "root_cause": "Failed hard contract checks emit expectation_unmet, but final verdict/scenario status only escalates false_pass prefix and two named hard-defect codes.",
+      "source_locations": [
+        "tools/source_root_portability/oracle.py:389",
+        "tools/source_root_portability/oracle.py:407",
+        "tools/source_root_portability/oracle.py:457",
+        "tools/source_root_portability/oracle.py:847"
+      ],
+      "demonstrated_vectors": [
+        "new_move_denies_same_root_ids",
+        "new_move_denies_same_relative_paths",
+        "new_policy_change_is_auth_gate",
+        "new_old_ref_identity_not_preserved"
+      ],
+      "fix_direction": "A common finding outcome/severity contract must determine both scenario status and overall verdict. Do not fix the four field names separately. Preserve accurate PARTIAL/UNKNOWN and non-blocking diagnostics."
+    }
+  ],
+  "oracle": {
+    "bounded_cases": 22,
+    "as_expected": 18,
+    "false_pass": 4,
+    "original_eight_oracle_counterexamples_rejected": true,
+    "legitimate_PASS_PARTIAL_UNKNOWN_controls": true
+  },
+  "real_child_full_ref": [
+    {
+      "name": "valid_full_ref",
+      "exit_code": 0,
+      "status": "ok",
+      "reason": null
+    },
+    {
+      "name": "wrong_byte_size",
+      "exit_code": 2,
+      "status": "unavailable",
+      "reason": "source_ref_changed"
+    },
+    {
+      "name": "wrong_mime_type",
+      "exit_code": 2,
+      "status": "unavailable",
+      "reason": "source_ref_changed"
+    },
+    {
+      "name": "wrong_schema_version",
+      "exit_code": 2,
+      "status": "unavailable",
+      "reason": "unsupported_version"
+    }
+  ],
+  "runtime": {
+    "raw_CLI_failure_unmodified": true,
+    "old_files_preserved": 7,
+    "existing_empty_directories_preserved": 6,
+    "all_three_overlap_refusals_before_write": true,
+    "minimal_environment": true,
+    "synthetic_home_temp": true,
+    "scratch_restored_absent": true
+  },
+  "freeze": {
+    "sha256": "b1662c806216a8c2e729ae7a48fda6b83a741a552e0e60323b1a662854dd715b",
+    "product_file_count": 11,
+    "producer_file_count": 8,
+    "all_frozen_shas_match": true,
+    "old_intake_preserved": true
+  },
+  "author_current_evidence": {
+    "tests": {
+      "exit": 0,
+      "seconds": 11.568,
+      "summary": [
+        "56 passed, 1 skipped, 1 warning in 10.97s"
+      ]
+    },
+    "runner": {
+      "exit": 0,
+      "seconds": 4.755,
+      "summary": []
+    },
+    "real_report_sha256": "bcbfaa7ae9c1ab496fd86b50ac617bd25060a50f57a20b956c55a4fb6e4fbf1f",
+    "scene_statuses": {
+      "S1": "PASS",
+      "S2": "PASS",
+      "S3": "PASS",
+      "S4": "PASS",
+      "S5": "PASS",
+      "S6": "PASS",
+      "S7": "PASS"
+    },
+    "three_logical_sources_four_doc_keys": true
+  },
+  "hygiene": {
+    "blocked_actions": [
+      "network"
+    ],
+    "network_calls": 0,
+    "LLM_calls": 0,
+    "provider_calls": 0,
+    "fees_usd": 0,
+    "real_originals_accessed": 0
+  },
+  "scope": "Windows synthetic tool/catalog/Reader/CLI only; no real OCR, LLM, cloud, POSIX or research certification",
+  "seconds": 4.449,
+  "disposition": "STOP; ROOT common tool verdict fix before publication"
+}

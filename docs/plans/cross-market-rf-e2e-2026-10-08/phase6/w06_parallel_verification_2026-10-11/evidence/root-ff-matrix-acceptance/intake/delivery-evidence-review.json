@@ -1,0 +1,403 @@
+{
+  "dependencies": [
+    {
+      "repository": "ff",
+      "root": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix",
+      "head": "d9c5383eaa15214083099b4628cabe473cad31db",
+      "modules": [
+        {
+          "path": "scripts/fetch_filing.py",
+          "file": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\scripts\\fetch_filing.py",
+          "sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331"
+        },
+        {
+          "path": "scripts/transcript_tool_transport.py",
+          "file": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\scripts\\transcript_tool_transport.py",
+          "sha256": "013c905b88e4d936d9fd0d2f88a67bb8204378a7e091b29f5ccfb58bed30e847"
+        },
+        {
+          "path": "scripts/transcript_companion.py",
+          "file": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\scripts\\transcript_companion.py",
+          "sha256": "1f373148043d66502d9c1316036597c09a2c1071981ce38a17ba06fa9b13db14"
+        }
+      ]
+    },
+    {
+      "repository": "cwp",
+      "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "head": "c145da9bde681790a63235b3cf99809edbbbf7ba",
+      "modules": [
+        {
+          "path": "src/company_wiki/source_catalog/source_reader.py",
+          "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader.py",
+          "sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/service.py",
+          "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\service.py",
+          "sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/config.py",
+          "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\config.py",
+          "sha256": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064"
+        }
+      ]
+    },
+    {
+      "repository": "et",
+      "root": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts",
+      "head": "c91f5f54bc2a24e7b5d6e648dba3f9d578f5fa52",
+      "modules": [
+        {
+          "path": "transcript_tool.py",
+          "file": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py",
+          "sha256": "1684c922c8bff9a6ecc26fa5502a5abdc147e6c273619c5817e16325d7449003"
+        },
+        {
+          "path": "transcript_api.py",
+          "file": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_api.py",
+          "sha256": "0bf6bbc8d316ae8878b2f4cae27686862af378c8682963404613bbbf349b6292"
+        },
+        {
+          "path": "retrieval_runtime.py",
+          "file": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_runtime.py",
+          "sha256": "2655bbadeccc98e74c51df1f3e49171f0a827f7699abee0afc4e7d665ffb1957"
+        }
+      ]
+    }
+  ],
+  "code_binding": {
+    "company_wiki_file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\__init__.py",
+    "company_wiki_sha256": "39921253e7b65e89c49eca2f8904b24c39b2425af79fb8f1ab8edc61e4c69ad2",
+    "transcript_tool_file": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py",
+    "transcript_tool_sha256": "1684c922c8bff9a6ecc26fa5502a5abdc147e6c273619c5817e16325d7449003",
+    "verified": true
+  },
+  "scope": {
+    "network": "all real HTTP refused; only in-process fixture responses",
+    "downloads": "synthetic valid PDF/HTML/TXT originals, metadata marked synthetic",
+    "translation": "0 (TranslatorFactory never constructed)",
+    "caveat": "offline synthetic run proves contract wiring only; it does not prove external reachability, real supplier completeness, or economic quality",
+    "batch_elapsed_seconds": 86.76
+  },
+  "cost": {
+    "real_provider_calls": 0,
+    "paid_usd": 0,
+    "unknown_charge": null,
+    "fixture_requests": 9,
+    "note": "fixture requests are offline synthetic and excluded from the real-cost ledger"
+  },
+  "restore": {
+    "baseline_unchanged": true,
+    "sentinel_intact": true,
+    "scratch_torn_down": true,
+    "restored": true
+  },
+  "producer_sha_verification": [
+    {
+      "repository": "ff",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\scripts\\fetch_filing.py",
+      "reported_sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+      "actual": {
+        "sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+        "bytes": 75954
+      },
+      "match": true
+    },
+    {
+      "repository": "ff",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\scripts\\transcript_tool_transport.py",
+      "reported_sha256": "013c905b88e4d936d9fd0d2f88a67bb8204378a7e091b29f5ccfb58bed30e847",
+      "actual": {
+        "sha256": "013c905b88e4d936d9fd0d2f88a67bb8204378a7e091b29f5ccfb58bed30e847",
+        "bytes": 34930
+      },
+      "match": true
+    },
+    {
+      "repository": "ff",
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix\\scripts\\transcript_companion.py",
+      "reported_sha256": "1f373148043d66502d9c1316036597c09a2c1071981ce38a17ba06fa9b13db14",
+      "actual": {
+        "sha256": "1f373148043d66502d9c1316036597c09a2c1071981ce38a17ba06fa9b13db14",
+        "bytes": 8058
+      },
+      "match": true
+    },
+    {
+      "repository": "cwp",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader.py",
+      "reported_sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+      "actual": {
+        "sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+        "bytes": 35904
+      },
+      "match": true
+    },
+    {
+      "repository": "cwp",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\service.py",
+      "reported_sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+      "actual": {
+        "sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+        "bytes": 62571
+      },
+      "match": true
+    },
+    {
+      "repository": "cwp",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\config.py",
+      "reported_sha256": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+      "actual": {
+        "sha256": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+        "bytes": 11841
+      },
+      "match": true
+    },
+    {
+      "repository": "et",
+      "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py",
+      "reported_sha256": "1684c922c8bff9a6ecc26fa5502a5abdc147e6c273619c5817e16325d7449003",
+      "actual": {
+        "sha256": "1684c922c8bff9a6ecc26fa5502a5abdc147e6c273619c5817e16325d7449003",
+        "bytes": 11966
+      },
+      "match": true
+    },
+    {
+      "repository": "et",
+      "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_api.py",
+      "reported_sha256": "0bf6bbc8d316ae8878b2f4cae27686862af378c8682963404613bbbf349b6292",
+      "actual": {
+        "sha256": "0bf6bbc8d316ae8878b2f4cae27686862af378c8682963404613bbbf349b6292",
+        "bytes": 59166
+      },
+      "match": true
+    },
+    {
+      "repository": "et",
+      "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_runtime.py",
+      "reported_sha256": "2655bbadeccc98e74c51df1f3e49171f0a827f7699abee0afc4e7d665ffb1957",
+      "actual": {
+        "sha256": "2655bbadeccc98e74c51df1f3e49171f0a827f7699abee0afc4e7d665ffb1957",
+        "bytes": 10809
+      },
+      "match": true
+    }
+  ],
+  "critical_artifacts": {
+    "chainA_download_reuse.run1.response.json": {
+      "content": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2025,
+          "fiscal_period": "FY",
+          "as_of_date": "2026-12-31"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 609,
+            "content_sha256": "b72964efce2bf2fe007192c418d69158751c19e748d42a58c4dc4443c7a737b7",
+            "document_id": "urn:company-wiki:document:sha256:b72964efce2bf2fe007192c418d69158751c19e748d42a58c4dc4443c7a737b7",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:b72964efce2bf2fe007192c418d69158751c19e748d42a58c4dc4443c7a737b7"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "annual_report",
+          "fiscal_year": 2025,
+          "fiscal_period": "FY",
+          "resolution_outcome": "reused_existing",
+          "download_events": 0
+        },
+        "transcript": {
+          "status": "downloaded",
+          "retryable": false,
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:db593610a6bdbb506fcbaec3cf2cf6cc6360a28ed55b0b9ce75bc133e7ccd7c9",
+            "source_id": "urn:company-wiki:source:sha256:db593610a6bdbb506fcbaec3cf2cf6cc6360a28ed55b0b9ce75bc133e7ccd7c9",
+            "content_sha256": "db593610a6bdbb506fcbaec3cf2cf6cc6360a28ed55b0b9ce75bc133e7ccd7c9",
+            "byte_size": 512,
+            "mime_type": "application/json",
+            "schema_version": "2.0"
+          },
+          "provider": "fmp",
+          "fiscal_year": 2025,
+          "fiscal_quarter": 1,
+          "provider_document_id": "fmp:AAPL:2025:Q1:2025-12-01",
+          "call_date": "2025-12-01",
+          "publication_date": null,
+          "as_of_cutoff_verified": false,
+          "provider_calls": 1,
+          "provider_requests": 1,
+          "provider_response_bytes": 512,
+          "provider_usage_complete": true
+        },
+        "calls": 5,
+        "downloads": 0
+      },
+      "file": {
+        "sha256": "bdbf3f17cbb93df2495fed0b04437d0310af85ae75babb9d9e843159ad8d7d10",
+        "bytes": 1870
+      }
+    },
+    "chainA_download_reuse.run2.response.json": {
+      "content": {
+        "schema_version": "2.0",
+        "status": "source_candidate",
+        "request_period": {
+          "mode": "exact",
+          "fiscal_year": 2025,
+          "fiscal_period": "FY",
+          "as_of_date": "2026-12-31"
+        },
+        "filing": {
+          "status": "source_candidate",
+          "source_ref": {
+            "byte_size": 609,
+            "content_sha256": "b72964efce2bf2fe007192c418d69158751c19e748d42a58c4dc4443c7a737b7",
+            "document_id": "urn:company-wiki:document:sha256:b72964efce2bf2fe007192c418d69158751c19e748d42a58c4dc4443c7a737b7",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:b72964efce2bf2fe007192c418d69158751c19e748d42a58c4dc4443c7a737b7"
+          },
+          "byte_verification": "pending_verified_open",
+          "document_kind": "annual_report",
+          "fiscal_year": 2025,
+          "fiscal_period": "FY",
+          "resolution_outcome": "reused_existing",
+          "download_events": 0
+        },
+        "transcript": {
+          "status": "unknown_publication",
+          "reason": "publication_date_unknown",
+          "retryable": false,
+          "source_ref": {
+            "byte_size": 512,
+            "content_sha256": "db593610a6bdbb506fcbaec3cf2cf6cc6360a28ed55b0b9ce75bc133e7ccd7c9",
+            "document_id": "urn:company-wiki:document:sha256:db593610a6bdbb506fcbaec3cf2cf6cc6360a28ed55b0b9ce75bc133e7ccd7c9",
+            "mime_type": "application/json",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:db593610a6bdbb506fcbaec3cf2cf6cc6360a28ed55b0b9ce75bc133e7ccd7c9"
+          },
+          "provider": "fmp",
+          "fiscal_year": 2025,
+          "fiscal_quarter": 1,
+          "publication_date": null,
+          "as_of_cutoff_verified": false,
+          "provider_calls": 0
+        },
+        "calls": 4,
+        "downloads": 0
+      },
+      "file": {
+        "sha256": "44f1185fbeac1fd083548a90c6b646aa73925cb117d12b4abfc27b50c665d55c",
+        "bytes": 1726
+      }
+    },
+    "chainA_download_reuse_run1.usage.json": {
+      "content": {
+        "schema_version": "earnings-retrieval-usage/1",
+        "request_id": "urn:company-wiki:source-request:sha256:914da3e40f05a038ff7c1b1aefc6fb06ad997e9e10ff67ca4972b88762a44e10",
+        "usage_complete": true,
+        "usage": {
+          "requests_used": 1,
+          "response_bytes_used": 512,
+          "exhausted": null
+        }
+      },
+      "file": {
+        "sha256": "1d673633efb9aedd315b7d184d3267c8d3242905207b3731ec1e2f9764cb5920",
+        "bytes": 261
+      }
+    },
+    "call_past_cutoff.result.json": {
+      "content": {
+        "schema_version": "earnings-transcript-result/2",
+        "request_id": "urn:company-wiki:source-request:sha256:fbff906ed7f9852711da359f92ca254ebb271b4656f939d8665b6a68e0f65ef5",
+        "status": "not_found",
+        "provider": "fmp",
+        "fiscal_period": "2025-Q2",
+        "candidate_count": 0
+      },
+      "file": {
+        "sha256": "cdecc7031684b97b077f593c7f3d568280c88279d5227c484d770faad3e2e66b",
+        "bytes": 254
+      }
+    },
+    "call_wrong_quarter.result.json": {
+      "content": {
+        "schema_version": "earnings-transcript-result/2",
+        "request_id": "urn:company-wiki:source-request:sha256:f146bb82cb677bbfd93ed46d7d9b895567e0e5e91abadaa44a643a13d8939dbc",
+        "status": "provenance_rejected",
+        "provider": "fmp",
+        "error_code": "provider_identity_or_host"
+      },
+      "file": {
+        "sha256": "e9d49a32147682ae6920b4b759951cf6e2b7c3198d470ff77f589ed2d7be0dc4",
+        "bytes": 259
+      }
+    },
+    "err_unknown_usage.usage.json": {
+      "content": {
+        "schema_version": "earnings-retrieval-usage/1",
+        "request_id": "urn:company-wiki:source-request:sha256:be1c7a9aec1fcf472e06554a5a67f96ebf2b17d527eaa8b6e54c956d7ca47556",
+        "usage_complete": false,
+        "usage": null
+      },
+      "file": {
+        "sha256": "846132b7056b52a92ea1fe466e7c86072eecc271cf2cc5f52be3d1a74e2fd7a2",
+        "bytes": 204
+      }
+    }
+  },
+  "retained_bytes": 136567,
+  "ff_report_head_exists": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix",
+      "cat-file",
+      "-t",
+      "d9c5383eaa15214083099b4628cabe473cad31db"
+    ],
+    "exit_code": 0,
+    "stdout": "commit\n",
+    "stderr": ""
+  },
+  "ff_report_head_vs_current_product": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix",
+      "diff",
+      "--stat",
+      "d9c5383eaa15214083099b4628cabe473cad31db",
+      "HEAD",
+      "--",
+      "scripts/"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "worker_dirty_diff": {
+    "command": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix",
+      "diff",
+      "--",
+      ".planning/w06-ff-matrix/task_plan.md",
+      ".planning/w06-ff-matrix/progress.md"
+    ],
+    "exit_code": 0,
+    "stdout": "diff --git a/.planning/w06-ff-matrix/progress.md b/.planning/w06-ff-matrix/progress.md\nindex 29dd192..dac1d5b 100644\n--- a/.planning/w06-ff-matrix/progress.md\n+++ b/.planning/w06-ff-matrix/progress.md\n@@ -12,3 +12,10 @@\n - 烟测验证：FF 本地命中 seeded 年报(reused_existing,downloads=0)；链A真三层贯通——FF公开CLI→ET真supervisor/worker/fakeHTTP(calls 3行)→FF真实import→CWP注册(source_ref 860d...)→open_version→run2复用(0请求,unknown_publication/publication_date_unknown=真诊断)。\n - 关键发现：FMP transcript publication_date 恒 null，故复用命中显示 unknown_publication(as_of_cutoff_verified=False)，这是正确产品行为；call_date 须<=as_of_date 否则 cutoff 拒绝。\n - 下一步：建正式 runner run.py + report.py + oracle.py，覆盖矩阵1-5。\n+\n+## Session 2026-10-11 (final)\n+- 建 tools/offline_contract_matrix/{run,cli_main,matrix_cases,report,oracle,fixture_builder,et_transcript_proxy,fixture_provider_adapter}.py + README 覆盖图。\n+- tests/test_w06_contract_matrix.py：oracle RED 六向量 + 合法原件 + report schema，12 过。\n+- 手动 runner attempt-5：16 PASS/0 FAIL，oracle 0 findings，code_binding verified，restore 完整，真实收费 0/unknown=null，fixture 请求单列。attempt-1 保留为 RED（oracle 当场旗标 3 真实失败向量）。\n+- 关键根因修复：child_env 缺 USERPROFILE→fatal；as_of<published→本地命中失败；transcript 案例撞 chainA Q1→各自独立季度；prepare_local_source 同 entity+kind 跨期阻塞→fetch 选无候选组合。\n+- 交接：handoff.json(Complete)/handoff.md/manifest.json；两笔正常 commit：8dd00e2(工作)+c5527f1(交接)。input/ 未提交（ROOT 所有）。\ndiff --git a/.planning/w06-ff-matrix/task_plan.md b/.planning/w06-ff-matrix/task_plan.md\nindex c041e3c..823a98a 100644\n--- a/.planning/w06-ff-matrix/task_plan.md\n+++ b/.planning/w06-ff-matrix/task_plan.md\n@@ -14,7 +14,7 @@\n - .planning/w06-ff-matrix/、docs/handoffs/w06-ff-matrix/\n \n ## Current Phase\n-Phase A — 记录旧覆盖矩阵/固定入口，先写 runner oracle 失败向量（RED）\n+All phases complete\n \n ## Next Step\n 勘察 FF SKILL.md/真实 argv、isolated_wiki、ET private retrieval launcher、CWP open_version/config/load_company_wiki_root，然后写 oracle 失败向量 stub（RED）。\n@@ -28,7 +28,7 @@ Phase A — 记录旧覆盖矩阵/固定入口，先写 runner oracle 失败向\n - [ ] 勘察 CWP source_reader.SourceVersionReader.open_version、config.load_company_wiki_root、cli help 字段\n - [ ] 读已有 test_et_s0b_contract.py、test_cwp_s0b_source_ref_contract.py\n - [ ] 写 runner oracle 失败向量 RED：整层fake却写real、第二次仍下载、少ET receipt、错cutoff、假0cost、未恢复scratch\n-- **Status:** in_progress\n+- **Status:** complete\n \n ### Phase B — 实现 fixture/计数器 + runner\n - [ ] 小 synthetic 原件 fixture builder（valid PDF/HTML/TXT，元数据 synthetic）\n@@ -37,14 +37,14 @@ Phase A — 记录旧覆盖矩阵/固定入口，先写 runner oracle 失败向\n - [ ] 顶层 report schema ff-et-cwp-offline-matrix/1\n - [ ] 单元 `python -B -m pytest -q tests/test_w06_contract_matrix.py`\n - [ ] 至少一次 FF 真实公开 CLI + 一次 ET 真实 supervisor 子进程\n-- **Status:** pending\n+- **Status:** complete\n \n ### Phase C — 新 scratch 手动跑 + 交接\n - [ ] 新 scratch 跑手动 runner（每 case ≤30s、批次 ≤180s）\n - [ ] 保存小型报告/精确日志，关闭 worker/SQLite，恢复 sentinel/baseline\n - [ ] 第二次执行新 attempt 不覆第一次\n - [ ] handoff.json/handoff.md/manifest.json + 正常 commit\n-- **Status:** pending\n+- **Status:** complete\n \n ## Decisions Made\n - (待补)\n",
+    "stderr": "warning: in the working copy of '.planning/w06-ff-matrix/task_plan.md', CRLF will be replaced by LF the next time Git touches it\n"
+  },
+  "changed_files_count": 139
+}

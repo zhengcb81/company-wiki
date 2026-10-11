@@ -1,0 +1,61 @@
+{
+  "schema_version": "root-w06-original-fail-aggregation-replay/1",
+  "base_report_sha256": "bcbfaa7ae9c1ab496fd86b50ac617bd25060a50f57a20b956c55a4fb6e4fbf1f",
+  "all_original_input_hashes_match": true,
+  "original_four_cases": [
+    {
+      "name": "new_move_denies_same_root_ids",
+      "input_sha256": "186ce3ff661bbb89acf1f79ab5d503a24bcd1e9ec03a2cac2c2171f49f7c0abf",
+      "overall": "FAIL",
+      "scenario_status": "FAIL",
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "outcome": "FAIL",
+          "scenario": "S2"
+        }
+      ]
+    },
+    {
+      "name": "new_move_denies_same_relative_paths",
+      "input_sha256": "c9d097df7253e49935e29cd51285503360e630d524d0370b61cad7993fa43fbc",
+      "overall": "FAIL",
+      "scenario_status": "FAIL",
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "outcome": "FAIL",
+          "scenario": "S2"
+        }
+      ]
+    },
+    {
+      "name": "new_policy_change_is_auth_gate",
+      "input_sha256": "d08a4ad9b411428e007309f751e3aad234d44445249cca31c423568b09512a67",
+      "overall": "FAIL",
+      "scenario_status": "FAIL",
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "outcome": "FAIL",
+          "scenario": "S2"
+        }
+      ]
+    },
+    {
+      "name": "new_old_ref_identity_not_preserved",
+      "input_sha256": "a67e0d767561d9a7326724b48e108caa40ef324aff740fa38c64470bb72d12e6",
+      "overall": "FAIL",
+      "scenario_status": "FAIL",
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "outcome": "FAIL",
+          "scenario": "S2"
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "scope": "pure replay; independent final FAIL and source report unchanged"
+}

@@ -1,0 +1,426 @@
+{
+  "schema_version": "w06-portability-independent-pure/1",
+  "results": [
+    {
+      "name": "frozen_legitimate_seven_scene_control",
+      "actual": "PASS",
+      "expected": [
+        "PASS"
+      ],
+      "as_expected": true,
+      "findings": []
+    },
+    {
+      "name": "original_omitted_S2_to_S7",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL",
+        "INVALID_RECORD"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_required_scenarios_missing",
+          "scenario": null,
+          "detail": "required S1 through S7 must each be reported"
+        }
+      ]
+    },
+    {
+      "name": "original_S2_only_one_ref_reopened",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_missing_reopen",
+          "scenario": "S2",
+          "detail": "move did not return bytes for every original ref including copy"
+        }
+      ]
+    },
+    {
+      "name": "original_S5_new_version_read_failed",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_new_version_not_read",
+          "scenario": "S5",
+          "detail": "new version did not return verified bytes"
+        }
+      ]
+    },
+    {
+      "name": "original_receipt_only_method_claims_bytes",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S1",
+          "detail": "read method 'verify_version' bypasses the official reader"
+        }
+      ]
+    },
+    {
+      "name": "original_wrong_root_after_move",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_wrong_move_roots",
+          "scenario": "S2",
+          "detail": "after_roots does not match all actual configured roots"
+        }
+      ]
+    },
+    {
+      "name": "original_S7_export_path_fields_present",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_path_leak",
+          "scenario": "S7",
+          "detail": "actual export carries paths or has unknown path status"
+        }
+      ]
+    },
+    {
+      "name": "original_malformed_S2_actual",
+      "actual": "INVALID_RECORD",
+      "expected": [
+        "INVALID_RECORD"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "invalid_record_shape",
+          "scenario": null,
+          "detail": "scenario actual is not an object"
+        }
+      ]
+    },
+    {
+      "name": "original_annual_truth_and_observations_self_rewritten_unknown",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_fixture_truth_rewritten",
+          "scenario": null,
+          "detail": "fixed fixture facts changed: pdf"
+        }
+      ]
+    },
+    {
+      "name": "raw_CLI_stdout_bundle_disagree",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S1",
+          "detail": "original CLI stdout/bundle missing or replaced"
+        }
+      ]
+    },
+    {
+      "name": "raw_CLI_manifests_replaced",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S7",
+          "detail": "manifests differ from actual CLI stdout"
+        }
+      ]
+    },
+    {
+      "name": "read_byte_count_bool",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S2",
+          "detail": "read size is not a positive byte count"
+        }
+      ]
+    },
+    {
+      "name": "new_malformed_read_shape",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL",
+        "INVALID_RECORD"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S1",
+          "detail": "no verified read recorded for pdf"
+        },
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S1",
+          "detail": "no verified read recorded for htm"
+        },
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S1",
+          "detail": "no verified read recorded for txt"
+        },
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S1",
+          "detail": "no verified read recorded for txt_copy"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S1",
+          "detail": "wire manifest/ref/facts mismatch: pdf"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S1",
+          "detail": "wire manifest/ref/facts mismatch: htm"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S1",
+          "detail": "wire manifest/ref/facts mismatch: txt"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S7",
+          "detail": "wire manifest/ref/facts mismatch: pdf"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S7",
+          "detail": "wire manifest/ref/facts mismatch: htm"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S7",
+          "detail": "wire manifest/ref/facts mismatch: txt"
+        }
+      ]
+    },
+    {
+      "name": "new_malformed_cost_shape",
+      "actual": "INVALID_RECORD",
+      "expected": [
+        "INVALID_RECORD"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "invalid_record_shape",
+          "scenario": null,
+          "detail": "cost.http_calls is not an integer"
+        }
+      ]
+    },
+    {
+      "name": "new_model_calls_nonzero",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "offline_violation",
+          "scenario": null,
+          "detail": "run performed network calls"
+        }
+      ]
+    },
+    {
+      "name": "new_final_recovery_one_ref_missing",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_raw_recovery_not_observed",
+          "scenario": null,
+          "detail": "final bytes not reopened for every physical original"
+        }
+      ]
+    },
+    {
+      "name": "new_move_denies_same_root_ids",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "move is not same root_id + same relative_path"
+        }
+      ]
+    },
+    {
+      "name": "new_move_denies_same_relative_paths",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "move is not same root_id + same relative_path"
+        }
+      ]
+    },
+    {
+      "name": "new_policy_change_is_auth_gate",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "policy change treated as an authorization gate"
+        }
+      ]
+    },
+    {
+      "name": "new_old_ref_identity_not_preserved",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "old SourceRef identity not preserved"
+        }
+      ]
+    },
+    {
+      "name": "honest_PARTIAL_control",
+      "actual": "PARTIAL",
+      "expected": [
+        "PARTIAL"
+      ],
+      "as_expected": true,
+      "findings": []
+    },
+    {
+      "name": "honest_UNKNOWN_control",
+      "actual": "UNKNOWN",
+      "expected": [
+        "UNKNOWN"
+      ],
+      "as_expected": true,
+      "findings": []
+    }
+  ],
+  "unexpected": [
+    {
+      "name": "new_move_denies_same_root_ids",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "move is not same root_id + same relative_path"
+        }
+      ]
+    },
+    {
+      "name": "new_move_denies_same_relative_paths",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "move is not same root_id + same relative_path"
+        }
+      ]
+    },
+    {
+      "name": "new_policy_change_is_auth_gate",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "policy change treated as an authorization gate"
+        }
+      ]
+    },
+    {
+      "name": "new_old_ref_identity_not_preserved",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "old SourceRef identity not preserved"
+        }
+      ]
+    }
+  ]
+}

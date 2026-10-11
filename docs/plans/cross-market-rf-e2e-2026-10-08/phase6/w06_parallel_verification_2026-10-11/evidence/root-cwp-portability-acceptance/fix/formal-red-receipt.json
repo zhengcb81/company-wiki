@@ -1,0 +1,36 @@
+{
+  "schema_version": "root-w06-portability-red/1",
+  "kind": "transcribed native pytest result; original tool output retained in task",
+  "command": "python -X utf8 -B -m pytest tests/unit/test_w06_root_portability_oracle.py tests/integration/test_w06_root_portability.py -k test_root --tb=short -q",
+  "before_product_repair": {
+    "failed": 10,
+    "passed": 1,
+    "deselected": 32,
+    "seconds": 3.95,
+    "control": "test_root_move_with_config_remap_keeps_old_refs",
+    "failures": [
+      "test_root_omitted_required_scenarios_cannot_pass",
+      "test_root_move_must_read_every_logical_original",
+      "test_root_new_version_must_really_read",
+      "test_root_receipt_only_cannot_claim_returned_bytes",
+      "test_root_actual_move_roots_must_match_all_configured_roots",
+      "test_root_fresh_export_cannot_carry_paths",
+      "test_root_annual_fixture_truth_cannot_self_rewrite_unknown",
+      "test_root_weak_nested_type_is_structured_invalid",
+      "test_root_consumer_must_open_complete_input_ref",
+      "test_root_cleanup_preserves_preexisting_generated_names_and_empty_dirs"
+    ]
+  },
+  "additional_copy_coverage_red": {
+    "failed": 1,
+    "seconds": 0.44,
+    "log": "copy-ref-red.log"
+  },
+  "interim_fixture_error": {
+    "failed": 1,
+    "passed": 29,
+    "cause": "new actual wire manifests have no doc_key; mutation fixture updated to content SHA lookup",
+    "log": "interim-test-fixture-shape-failure.log"
+  },
+  "production_bug_claimed": false
+}

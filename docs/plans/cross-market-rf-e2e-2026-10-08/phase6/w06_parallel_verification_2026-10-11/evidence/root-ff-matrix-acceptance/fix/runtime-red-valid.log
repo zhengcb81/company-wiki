@@ -1,0 +1,113 @@
+FF.F                                                                     [100%]
+================================== FAILURES ===================================
+___________ test_production_guard_does_not_read_even_synthetic_key ____________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/fix/runtime-red-valid-temp/test_production_guard_does_not0')
+
+    def test_production_guard_does_not_read_even_synthetic_key(tmp_path):
+        roots = [tmp_path / n for n in ("ff", "cwp", "et")]
+        for root in roots:
+            (root / "config").mkdir(parents=True)
+        key = roots[0] / "config/FMP_API_KEY.txt"
+        key.write_text("synthetic-not-a-secret", encoding="utf-8")
+        with patch.object(runner, "sha256_file", side_effect=AssertionError("byte read forbidden")):
+>           guard = runner.ProductionGuard(*roots)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_w06_matrix_runtime.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tools\offline_contract_matrix\run.py:85: in __init__
+    self.before = {str(p): _hash_meta(p) for p in self.paths}
+                           ^^^^^^^^^^^^^
+tools\offline_contract_matrix\run.py:63: in _hash_meta
+    meta["sha256"] = sha256_file(path)
+                     ^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\unittest\mock.py:1169: in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\unittest\mock.py:1173: in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <MagicMock name='sha256_file' id='2112565011728'>
+args = (WindowsPath('C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verific...ence/root-ff-matrix-acceptance/fix/runtime-red-valid-temp/test_production_guard_does_not0/ff/config/FMP_API_KEY.txt'),)
+kwargs = {}
+
+    def _execute_mock_call(self, /, *args, **kwargs):
+        # separate from _increment_mock_call so that awaited functions are
+        # executed separately from their call, also AsyncMock overrides this method
+    
+        effect = self.side_effect
+        if effect is not None:
+            if _is_exception(effect):
+>               raise effect
+E               AssertionError: byte read forbidden
+
+C:\Miniconda\Lib\unittest\mock.py:1228: AssertionError
+_________ test_context_does_not_inherit_host_credentials_or_endpoints _________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/fix/runtime-red-valid-temp/test_context_does_not_inherit_0')
+
+    def test_context_does_not_inherit_host_credentials_or_endpoints(tmp_path):
+        ctx = object.__new__(runner.Context)
+        ctx.cwp_root = tmp_path / "cwp"
+        ctx.et_root = tmp_path / "et"
+        ctx.scratch = tmp_path / "scratch"
+        ctx.env = SimpleNamespace(proxy_state=tmp_path / "proxy")
+        with patch.dict(os.environ, {"DEEPSEEK_API_KEY":"synthetic-marker", "OPENAI_API_KEY":"synthetic-marker", "API_BASE_URL":"https://synthetic.invalid", "FMP_API_KEY_FILE":"synthetic-file"}, clear=True):
+            child = ctx.child_env()
+>       assert not ({"DEEPSEEK_API_KEY", "OPENAI_API_KEY", "API_BASE_URL", "FMP_API_KEY_FILE"} & child.keys())
+E       AssertionError: assert not ({'API_BASE_URL', 'DEEPSEEK_API_KEY', 'FMP_API_KEY_FILE', 'OPENAI_API_KEY'} & dict_keys(['DEEPSEEK_API_KEY', 'OPENAI_API_KEY', 'API_BASE_URL', 'PYTHONUTF8', 'PYTHONDONTWRITEBYTECODE', 'PYTHONIOENCODING', 'PYTHONPATH', 'W06_ET_ROOT', 'W06_MATRIX_SCRATCH', 'W06_MATRIX_STATE', 'FMP_API_KEY']))
+E        +  where dict_keys(['DEEPSEEK_API_KEY', 'OPENAI_API_KEY', 'API_BASE_URL', 'PYTHONUTF8', 'PYTHONDONTWRITEBYTECODE', 'PYTHONIOENCODING', 'PYTHONPATH', 'W06_ET_ROOT', 'W06_MATRIX_SCRATCH', 'W06_MATRIX_STATE', 'FMP_API_KEY']) = <built-in method keys of dict object at 0x000001EBDEBA3A80>()
+E        +    where <built-in method keys of dict object at 0x000001EBDEBA3A80> = {'DEEPSEEK_API_KEY': 'synthetic-marker', 'OPENAI_API_KEY': 'synthetic-marker', 'API_BASE_URL': 'https://synthetic.invalid', 'PYTHONUTF8': '1', ...}.keys
+
+tests\test_w06_matrix_runtime.py:32: AssertionError
+___________ test_cli_preserves_existing_scratch_sentinel_and_report ___________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/fix/runtime-red-valid-temp/test_cli_preserves_existing_sc0')
+
+    def test_cli_preserves_existing_scratch_sentinel_and_report(tmp_path):
+        _, existing, sentinel, report = _unbound_cli(tmp_path)
+>       assert existing.read_text(encoding="utf-8") == "old baseline"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_w06_matrix_runtime.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Miniconda\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verifica...dence/root-ff-matrix-acceptance/fix/runtime-red-valid-temp/test_cli_preserves_existing_sc0/owned/scratch/existing.txt')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-ff-matrix-acceptance\\fix\\runtime-red-valid-temp\\test_cli_preserves_existing_sc0\\owned\\scratch\\existing.txt'
+
+C:\Miniconda\Lib\pathlib\_local.py:537: FileNotFoundError
+---------------------------- Captured stdout call -----------------------------
+cases: {'PASS': 0, 'FAIL': 0, 'NOT_RUN': 0}  batch_elapsed=0.0s
+oracle: FAIL findings=4
+  [empty_matrix] None: no cases were executed
+  [unbound_code] None: supplied producer code binding is unverified
+  [coverage_gap] None: required case registry is missing, incomplete or duplicated
+  [unbound_code] None: matrix lacks verified import binding
+report: C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\fix\runtime-red-valid-temp\test_cli_preserves_existing_sc0\out\report.json
+=========================== short test summary info ===========================
+FAILED tests/test_w06_matrix_runtime.py::test_production_guard_does_not_read_even_synthetic_key
+FAILED tests/test_w06_matrix_runtime.py::test_context_does_not_inherit_host_credentials_or_endpoints
+FAILED tests/test_w06_matrix_runtime.py::test_cli_preserves_existing_scratch_sentinel_and_report
+3 failed, 1 passed in 0.55s

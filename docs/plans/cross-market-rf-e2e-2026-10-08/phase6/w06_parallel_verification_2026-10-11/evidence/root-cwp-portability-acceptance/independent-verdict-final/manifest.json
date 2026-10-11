@@ -1,0 +1,26 @@
+{
+  "schema_version": "w06-portability-independent-verdict-manifest/1",
+  "status": "PASS_WITH_SCOPE",
+  "files": [
+    {
+      "path": "probes.py",
+      "byte_size": 14185,
+      "sha256": "20325f0ad347f3546a61dc4155274d2722c7ea6d6bd692184bc828e5c232c0a8"
+    },
+    {
+      "path": "results.json",
+      "byte_size": 40072,
+      "sha256": "9e04bc2a70fce74f264f5f49d77c34970e39b5481c838b552bba57e4d29358f2"
+    },
+    {
+      "path": "report.json",
+      "byte_size": 3297,
+      "sha256": "6fca1c49140beeffb63b5c2a68c547859c298d89b9769e3be1215f4a56377505"
+    },
+    {
+      "path": "report.md",
+      "byte_size": 2091,
+      "sha256": "920b039b53d4a5dacffae1ad79c17f8b7d5c59cc9c3b114dda383fab5171a534"
+    }
+  ]
+}

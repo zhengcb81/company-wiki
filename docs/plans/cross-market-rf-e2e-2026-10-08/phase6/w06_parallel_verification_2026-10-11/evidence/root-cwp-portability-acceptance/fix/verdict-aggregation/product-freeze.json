@@ -1,0 +1,75 @@
+{
+  "schema_version": "root-w06-portability-product-freeze/2",
+  "status": "READY_FOR_INDEPENDENT_REVIEW",
+  "head": "8862372f714209cff1b218d77b5c4b8af6bc74dc",
+  "previous_freeze_sha256": "b1662c806216a8c2e729ae7a48fda6b83a741a552e0e60323b1a662854dd715b",
+  "independent_fail_sha256": "c0a2bfa8963d8ea13212faef76e3f2dd589a75977d07f5d83ab64d5edfcd97bf",
+  "files": [
+    {
+      "path": "tools/source_root_portability/__init__.py",
+      "sha256": "436c64f4abc5830d80a7404416713f313575a82c359a1ddde9187ff867fdb656",
+      "byte_size": 315
+    },
+    {
+      "path": "tools/source_root_portability/consumer_spy.py",
+      "sha256": "347cd8fbb524a9c709779102e9adf908cb7193945df35059e8b377fc66d2fa1b",
+      "byte_size": 8381
+    },
+    {
+      "path": "tools/source_root_portability/fixture_builder.py",
+      "sha256": "af91addcbccdf85cd1431d9c7e2abd088b415bee035d06d3ffc86b85351b8c83",
+      "byte_size": 11295
+    },
+    {
+      "path": "tools/source_root_portability/oracle.py",
+      "sha256": "995290fbd149113624c288ac67b35377f35668696265f881d4e6e2a5ce05bcce",
+      "byte_size": 43619
+    },
+    {
+      "path": "tools/source_root_portability/report.py",
+      "sha256": "604dd0c5b70a0fdcb152d4495708f38216e48f6e1218e4e9b2cfbd421e073f7d",
+      "byte_size": 4075
+    },
+    {
+      "path": "tools/source_root_portability/run.py",
+      "sha256": "c4eda76d82a74cee0e4c52e9f40828e01c75f69a34dd5b8f82ba78b79d1f2c5c",
+      "byte_size": 12224
+    },
+    {
+      "path": "tools/source_root_portability/runtime.py",
+      "sha256": "96897a036650e2423a34fa446ce2675d33099c9464847abd9d10c6be92db180c",
+      "byte_size": 5677
+    },
+    {
+      "path": "tools/source_root_portability/scenarios.py",
+      "sha256": "7c4d1f9320981c4069b3e13268542a7ea9c74aa30bc67f5555f40a0f20370d4b",
+      "byte_size": 35876
+    },
+    {
+      "path": "tools/source_root_portability/README.md",
+      "sha256": "c1f2673c18d10eb126af8a7e49cc10d58ac2d164da12646d69f4c7b49095941b",
+      "byte_size": 6119
+    },
+    {
+      "path": "tests/unit/test_w06_root_portability_oracle.py",
+      "sha256": "0eba0482a7f5e9965e108fe5100aa387c27eb266f6a8244ce1367cdb40cbd363",
+      "byte_size": 30530
+    },
+    {
+      "path": "tests/integration/test_w06_root_portability.py",
+      "sha256": "19833f8153d0138b088a208a1349011e8e44b97f14aa95f68323ae7159d39d2f",
+      "byte_size": 14368
+    }
+  ],
+  "changed_within_original_11": [
+    "tools/source_root_portability/oracle.py",
+    "tools/source_root_portability/run.py",
+    "tests/unit/test_w06_root_portability_oracle.py"
+  ],
+  "final_node_sha256": "abdf9ddf173a22511fcd6b76f7391b05b0d5da80107f8eea089dfc54d541e8e9",
+  "real_report_sha256": "cdb53400b90fdd5fd090c23e0da299abdeeb79d9753de758334f5025bd763bf6",
+  "original_fail_replay_sha256": "40620d5a653b0940bc119e15fbbba74543a071ec2d61bc5e96494e910e412b50",
+  "producer_8_before_after_match": true,
+  "raw_originals_modified": 0,
+  "permission_gates_added": 0
+}

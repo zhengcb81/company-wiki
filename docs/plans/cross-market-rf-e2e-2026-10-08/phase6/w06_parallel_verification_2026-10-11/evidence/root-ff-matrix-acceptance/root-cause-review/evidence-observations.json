@@ -1,0 +1,715 @@
+{
+  "schema_version": "w06-cross-period-readonly-root-cause/1",
+  "verdict": "CONFIRMED_SHARED_RELEVANCE_AND_PROOF_CHANNEL_MISMATCH",
+  "input_ref": "../fix/cross-period-repro.json",
+  "input_sha256": "f4cff44e9d77a005342e71181105ab5aff27d134d6607a110795b5aa95be2747",
+  "source_head": "057f2f8d274a14019f59302095df4148d9e28c7b",
+  "current_source_before": {
+    "canonical_writer.py": "b7bf1988e5b4ec711e7677092a7989370c51a2842e0bfff6cb5afb138ff268d8",
+    "acquisition.py": "42b893dda8cd4ec57a624f023ab0fb14c97f7ae73721e4d04248a94b3b46fb38",
+    "acquisition_service.py": "dd72c788716c48583964c7cc032801b2192600ad12b31c7f8ea6d4c1ec6e3e6c",
+    "local_reconcile.py": "f54283240d6a2c289b2d9d743e4c2d835f147697cf0dc2d3efdb5cea4bdee667",
+    "assertion_service.py": "641a8e4e42be8295cc05e9159a0c45ca609bbfa188bd80c1c75d19dd7a2f1148",
+    "resolver.py": "a9a5aa19afa5330223d45c484dfe4261bdc7964b209461030fa423acd40ba6d5",
+    "metadata_observation.py": "371d357533e975084e8c468762a3b6d76de6b6d0284483122c292fbbbbc8cac3",
+    "acquisition_validation.py": "9cb48d4b36aab91277328d868e21b0c26e4082a2eb0febafd38f0c7e8767b00c",
+    "source_reader.py": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+    "cli.py": "c297615bf26889e7959a994918d8bca1511423303a449a93de7fa969661a1ed7",
+    "source_operation.py": "ffcdbd035547a9cbc42c65efe04a0731d8ad55eef60d8b925eeb303bd722d5b3",
+    "operation_projection.py": "3a425783ca972b5d917c2e69c11e9669a8af65f9d811170cfe2b5096ba2bbadc",
+    "acquisition_failure.py": "b509eeb73464b13d1771e50888d2ff4e2e90dab4ca126c7483f25f64f1ae49fe"
+  },
+  "current_source_after": {
+    "canonical_writer.py": "b7bf1988e5b4ec711e7677092a7989370c51a2842e0bfff6cb5afb138ff268d8",
+    "acquisition.py": "42b893dda8cd4ec57a624f023ab0fb14c97f7ae73721e4d04248a94b3b46fb38",
+    "acquisition_service.py": "dd72c788716c48583964c7cc032801b2192600ad12b31c7f8ea6d4c1ec6e3e6c",
+    "local_reconcile.py": "f54283240d6a2c289b2d9d743e4c2d835f147697cf0dc2d3efdb5cea4bdee667",
+    "assertion_service.py": "641a8e4e42be8295cc05e9159a0c45ca609bbfa188bd80c1c75d19dd7a2f1148",
+    "resolver.py": "a9a5aa19afa5330223d45c484dfe4261bdc7964b209461030fa423acd40ba6d5",
+    "metadata_observation.py": "371d357533e975084e8c468762a3b6d76de6b6d0284483122c292fbbbbc8cac3",
+    "acquisition_validation.py": "9cb48d4b36aab91277328d868e21b0c26e4082a2eb0febafd38f0c7e8767b00c",
+    "source_reader.py": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+    "cli.py": "c297615bf26889e7959a994918d8bca1511423303a449a93de7fa969661a1ed7",
+    "source_operation.py": "ffcdbd035547a9cbc42c65efe04a0731d8ad55eef60d8b925eeb303bd722d5b3",
+    "operation_projection.py": "3a425783ca972b5d917c2e69c11e9669a8af65f9d811170cfe2b5096ba2bbadc",
+    "acquisition_failure.py": "b509eeb73464b13d1771e50888d2ff4e2e90dab4ca126c7483f25f64f1ae49fe"
+  },
+  "current_sources_unchanged": true,
+  "actual_source_locations": {
+    "canonical_writer.py": {
+      "class CanonicalSourceWriter:": [
+        207
+      ],
+      "def import_staged(": [
+        226
+      ],
+      "def _validate_staged(": [
+        444
+      ],
+      "def _write_provenance(": [
+        564
+      ],
+      "register_catalog_sources(": [
+        329
+      ],
+      "def source_ref_for_import(": [
+        423
+      ]
+    },
+    "acquisition.py": {
+      "def select(": [
+        372
+      ],
+      "local = prepare_local_source(": [
+        412
+      ],
+      "elif local[\"blocks_download\"]:": [
+        421
+      ],
+      "adapter = self.adapters.for_market(": [
+        437,
+        491,
+        587
+      ],
+      "def _validate_candidates(": [
+        465
+      ]
+    },
+    "acquisition_service.py": {
+      "def _ensure(": [
+        121
+      ],
+      "if acquisition.status is AcquisitionStatus.MISSING:": [
+        232
+      ],
+      "imported = self.writer.import_staged(": [
+        278
+      ]
+    },
+    "local_reconcile.py": {
+      "def _prior_source_facts(": [
+        192
+      ],
+      "def _proven_facts(": [
+        206
+      ],
+      "raise SourceReadError(\"blocked\", \"local_metadata_incomplete\")": [
+        307
+      ],
+      "def _prepare_local_source(": [
+        416
+      ],
+      "candidates = catalog.query_filing_candidates(": [
+        468
+      ],
+      "candidates = [x for x in candidates": [
+        476
+      ],
+      "operation = restore_document_facts(": [
+        531
+      ],
+      "if operation[\"status\"] == \"not_relevant\":": [
+        538
+      ],
+      "targeted = True": [
+        541,
+        569
+      ],
+      "if targeted:": [
+        612
+      ],
+      "\"local_metadata_gap\",": [
+        616
+      ]
+    },
+    "assertion_service.py": {
+      "def _sec_original(": [
+        101
+      ],
+      "def source_scope_qualification(": [
+        269
+      ],
+      "def record_source_facts(": [
+        359
+      ],
+      "def restore_document_facts(": [
+        439
+      ],
+      "prior = get_verified_assertion(": [
+        290,
+        386
+      ],
+      "if facts is None and evidence is None:": [
+        474
+      ]
+    },
+    "resolver.py": {
+      "def resolve(": [
+        1296
+      ],
+      "if request.fiscal_year is not None and year != request.fiscal_year:": [
+        1382
+      ],
+      "if request.fiscal_period and fiscal_period != request.fiscal_period:": [
+        1390
+      ],
+      "def _source_metadata(": [
+        1099
+      ],
+      "def _fiscal_year(": [
+        1156
+      ]
+    },
+    "operation_projection.py": {
+      "def _status_and_source(": [
+        98
+      ],
+      "return \"not_found\", None, None": [
+        116
+      ],
+      "def project_source_operation(": [
+        120
+      ]
+    }
+  },
+  "warm2024": [
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "Apple Inc.",
+        "--market",
+        "US",
+        "--security-id",
+        "AAPL",
+        "--document-kind",
+        "annual_report",
+        "--fiscal-year",
+        "2024",
+        "--fiscal-period",
+        "FY",
+        "--as-of-date",
+        "2026-12-31",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_acquisition.yaml",
+        "--max-download-bytes",
+        "2000000",
+        "--max-download-seconds",
+        "10",
+        "--max-download-cost-usd",
+        "0"
+      ],
+      "status": "completed",
+      "outcome": "downloaded_new",
+      "download_events": 1,
+      "actual_ref": {
+        "byte_size": 619,
+        "content_sha256": "6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+        "document_id": "urn:company-wiki:document:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+      },
+      "response_sha256": "3f9ed2b3dffe88a4dd5d992e02858607c9f89ce797940e409bb6e8327668ebc5"
+    },
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "宁德时代",
+        "--market",
+        "CN",
+        "--security-id",
+        "300750",
+        "--document-kind",
+        "annual_report",
+        "--fiscal-year",
+        "2024",
+        "--fiscal-period",
+        "FY",
+        "--as-of-date",
+        "2026-12-31",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_acquisition.yaml",
+        "--max-download-bytes",
+        "2000000",
+        "--max-download-seconds",
+        "10",
+        "--max-download-cost-usd",
+        "0"
+      ],
+      "status": "completed",
+      "outcome": "downloaded_new",
+      "download_events": 1,
+      "actual_ref": {
+        "byte_size": 621,
+        "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+        "document_id": "urn:company-wiki:document:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+      },
+      "response_sha256": "c14310999e87ba46116d80a0f8fc901f641634cd9e3331ba05711fcbd43a2e30"
+    }
+  ],
+  "warm2025_attempt": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_catalog.yaml",
+      "ensure",
+      "--entity",
+      "Apple Inc.",
+      "--market",
+      "US",
+      "--security-id",
+      "AAPL",
+      "--document-kind",
+      "annual_report",
+      "--fiscal-year",
+      "2025",
+      "--fiscal-period",
+      "FY",
+      "--as-of-date",
+      "2026-12-31",
+      "--source-ref-v2",
+      "--allow-download",
+      "--acquisition-config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_acquisition.yaml",
+      "--max-download-bytes",
+      "2000000",
+      "--max-download-seconds",
+      "10",
+      "--max-download-cost-usd",
+      "0"
+    ],
+    "exit_code": 0,
+    "response": {
+      "acquisition_observation": {
+        "cost_usd": null,
+        "entity_body_bytes": 0,
+        "http_exchanges": 0,
+        "http_exchanges_complete": true,
+        "http_observation": null,
+        "outcome": "missing",
+        "provider_started": false,
+        "schema_version": "acquisition-observation/1",
+        "usage_complete": true,
+        "usage_scope": "operation",
+        "wire_body_bytes": 0,
+        "wire_usage_complete": true
+      },
+      "candidate": null,
+      "download_events": 0,
+      "gap_plan": null,
+      "operation": "ensure",
+      "operation_schema_version": "1.0",
+      "outcome": "missing",
+      "policy_hash": "66bebab3e5fe0d5b8fd5bf0eae357c0238d9e83756b3975a4a56b71a5d99fd08",
+      "request_id": "urn:company-wiki:source-request:sha256:e29ac9bc8a654d876fc10aa682d963610e8e54bc54966ef0c77526f6d0c7c0b8",
+      "source_ref": null,
+      "status": "not_found"
+    },
+    "response_ref": "seed_us_annual_report_2025_FY.response.json",
+    "response_sha256": "50b13c5baab8cb022634e58c0f7bccaf37c96f20ad525c06f6d01a19c2d64c10",
+    "scope": "fixture-only initial CWP acquisition/import; separate from local reuse counters"
+  },
+  "next2026": [
+    {
+      "identity": "US",
+      "run": {
+        "exit_code": 2,
+        "response": {
+          "schema_version": "2.0",
+          "status": "not_found",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2026,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-12-31"
+          },
+          "filing": {
+            "status": "not_found",
+            "reason": "company-wiki ensure not_found",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "source_not_found",
+              "provider_started": null,
+              "usage_complete": null,
+              "retry_scope": "none"
+            },
+            "stage": "not_found"
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0,
+          "acquisition_observation": {
+            "schema_version": "acquisition-observation/1",
+            "usage_scope": "operation",
+            "outcome": "missing",
+            "provider_started": false,
+            "usage_complete": true,
+            "wire_usage_complete": true,
+            "http_exchanges_complete": true,
+            "wire_body_bytes": 0,
+            "entity_body_bytes": 0,
+            "http_exchanges": 0,
+            "cost_usd": null,
+            "http_observation": null
+          }
+        },
+        "stderr": "",
+        "request_ref": "warm2024_request2026_US.run1.request.json",
+        "response_ref": "warm2024_request2026_US.run1.response.json",
+        "stderr_ref": "warm2024_request2026_US.run1.stderr.txt",
+        "et_fixture_requests": 0,
+        "adapter_fixture_requests": 0,
+        "fixture_requests": 0,
+        "receipt_tag": "warm2024_request2026_US",
+        "fixture_scenario": "success",
+        "expected_original_content_sha256": null,
+        "request_sha256": "56c0029cd20980a086269225cc1d73c7beecfa0fb16c226dc029d4d96e0a3a74",
+        "response_sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940"
+      },
+      "request_observation": {
+        "schema_version": "2.0",
+        "market": "US",
+        "document_kind": "annual_report",
+        "fiscal_year": 2026,
+        "fiscal_period": "FY",
+        "as_of_date": "2026-12-31"
+      }
+    },
+    {
+      "identity": "CN",
+      "run": {
+        "exit_code": 2,
+        "response": {
+          "schema_version": "2.0",
+          "status": "not_found",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2026,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-12-31"
+          },
+          "filing": {
+            "status": "not_found",
+            "reason": "company-wiki ensure not_found",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "source_not_found",
+              "provider_started": null,
+              "usage_complete": null,
+              "retry_scope": "none"
+            },
+            "stage": "not_found"
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0,
+          "acquisition_observation": {
+            "schema_version": "acquisition-observation/1",
+            "usage_scope": "operation",
+            "outcome": "missing",
+            "provider_started": false,
+            "usage_complete": true,
+            "wire_usage_complete": true,
+            "http_exchanges_complete": true,
+            "wire_body_bytes": 0,
+            "entity_body_bytes": 0,
+            "http_exchanges": 0,
+            "cost_usd": null,
+            "http_observation": null
+          }
+        },
+        "stderr": "",
+        "request_ref": "warm2024_request2026_CN.run1.request.json",
+        "response_ref": "warm2024_request2026_CN.run1.response.json",
+        "stderr_ref": "warm2024_request2026_CN.run1.stderr.txt",
+        "et_fixture_requests": 0,
+        "adapter_fixture_requests": 0,
+        "fixture_requests": 0,
+        "receipt_tag": "warm2024_request2026_CN",
+        "fixture_scenario": "success",
+        "expected_original_content_sha256": null,
+        "request_sha256": "86ee58427a3af92172d7a0c81d4dd989de3eed1edd146db6a99b0be7150f648e",
+        "response_sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940"
+      },
+      "request_observation": {
+        "schema_version": "2.0",
+        "market": "CN",
+        "document_kind": "annual_report",
+        "fiscal_year": 2026,
+        "fiscal_period": "FY",
+        "as_of_date": "2026-12-31"
+      }
+    }
+  ],
+  "actual_indexed_source_facts": [
+    {
+      "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+      "content_sha256": "6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+      "document_kind": "annual_report",
+      "published_date": "2026-12-31",
+      "acquisition": {
+        "schema_version": "1.0",
+        "request_id": "urn:company-wiki:source-request:sha256:9fc42b69cdd60a2be99730ab1775dc29bbea3f6bbed0a1f95de02ae9c175bcfc",
+        "company_name": "Apple Inc.",
+        "market": "US",
+        "security_id": "AAPL",
+        "document_kind": "annual_report",
+        "fiscal_year": 2024,
+        "fiscal_period": "FY",
+        "form_type": null,
+        "filing_date": "2026-12-31",
+        "content_sha256": "6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+        "byte_size": 619,
+        "mime_type": "application/pdf",
+        "adapter_name": "w06-fixture-us",
+        "adapter_version": "1.0.0"
+      },
+      "validated_request": {
+        "allow_download": true,
+        "as_of_date": "2026-12-31",
+        "document_kind": "annual_report",
+        "entity": "Apple Inc.",
+        "fiscal_period": "FY",
+        "fiscal_year": 2024,
+        "form_type": null,
+        "language": null,
+        "market": "US",
+        "mode": null,
+        "provider": null,
+        "provider_document_id": null,
+        "schema_version": "1.0",
+        "security_id": "AAPL"
+      },
+      "validated_candidate": {
+        "candidate_id": "w06-us-AAPL-annual_report-2024-FY",
+        "entity": "Apple Inc.",
+        "market": "US",
+        "document_kind": "annual_report",
+        "fiscal_year": 2024,
+        "fiscal_period": "FY",
+        "provider": "w06fixture",
+        "provider_document_id": "w06-us-AAPL-annual_report-2024-FY",
+        "source_url": "https://fixture.invalid/w06/w06-us-AAPL-annual_report-2024-FY",
+        "filing_date": "2026-12-31"
+      },
+      "receipt": {
+        "candidate_id": "w06-us-AAPL-annual_report-2024-FY",
+        "provider": "w06fixture",
+        "provider_document_id": "w06-us-AAPL-annual_report-2024-FY",
+        "content_sha256": "6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+        "byte_size": 619,
+        "mime_type": "application/pdf"
+      },
+      "actual_verified_assertion": null,
+      "actual_evidence_payload": null
+    },
+    {
+      "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+      "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+      "document_kind": "annual_report",
+      "published_date": "2026-12-31",
+      "acquisition": {
+        "schema_version": "1.0",
+        "request_id": "urn:company-wiki:source-request:sha256:78f10a17faa812de4f03d09235b769872e75860f5ddb45ea7acfd59ea49a24ed",
+        "company_name": "宁德时代",
+        "market": "CN",
+        "security_id": "300750",
+        "document_kind": "annual_report",
+        "fiscal_year": 2024,
+        "fiscal_period": "FY",
+        "form_type": null,
+        "filing_date": "2026-12-31",
+        "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+        "byte_size": 621,
+        "mime_type": "application/pdf",
+        "adapter_name": "w06-fixture-cn",
+        "adapter_version": "1.0.0"
+      },
+      "validated_request": {
+        "allow_download": true,
+        "as_of_date": "2026-12-31",
+        "document_kind": "annual_report",
+        "entity": "宁德时代",
+        "fiscal_period": "FY",
+        "fiscal_year": 2024,
+        "form_type": null,
+        "language": null,
+        "market": "CN",
+        "mode": null,
+        "provider": null,
+        "provider_document_id": null,
+        "schema_version": "1.0",
+        "security_id": "300750"
+      },
+      "validated_candidate": {
+        "candidate_id": "w06-cn-300750-annual_report-2024-FY",
+        "entity": "宁德时代",
+        "market": "CN",
+        "document_kind": "annual_report",
+        "fiscal_year": 2024,
+        "fiscal_period": "FY",
+        "provider": "w06fixture",
+        "provider_document_id": "w06-cn-300750-annual_report-2024-FY",
+        "source_url": "https://fixture.invalid/w06/w06-cn-300750-annual_report-2024-FY",
+        "filing_date": "2026-12-31"
+      },
+      "receipt": {
+        "candidate_id": "w06-cn-300750-annual_report-2024-FY",
+        "provider": "w06fixture",
+        "provider_document_id": "w06-cn-300750-annual_report-2024-FY",
+        "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+        "byte_size": 621,
+        "mime_type": "application/pdf"
+      },
+      "actual_verified_assertion": null,
+      "actual_evidence_payload": null
+    }
+  ],
+  "adapter_invocations": [
+    {
+      "receipt_tag": "seed_us_annual_report_2024_FY",
+      "action": "discover",
+      "request_kind": "annual_report",
+      "request_year": 2024,
+      "request_market": "US",
+      "scenario": "serve",
+      "status": "ok",
+      "n_candidates": 1,
+      "has_receipt": false
+    },
+    {
+      "receipt_tag": "seed_us_annual_report_2024_FY",
+      "action": "fetch",
+      "request_kind": "annual_report",
+      "request_year": 2024,
+      "request_market": "US",
+      "scenario": "serve",
+      "status": "ok",
+      "n_candidates": 0,
+      "has_receipt": true
+    },
+    {
+      "receipt_tag": "seed_cn_annual_report_2024_FY",
+      "action": "discover",
+      "request_kind": "annual_report",
+      "request_year": 2024,
+      "request_market": "CN",
+      "scenario": "serve",
+      "status": "ok",
+      "n_candidates": 1,
+      "has_receipt": false
+    },
+    {
+      "receipt_tag": "seed_cn_annual_report_2024_FY",
+      "action": "fetch",
+      "request_kind": "annual_report",
+      "request_year": 2024,
+      "request_market": "CN",
+      "scenario": "serve",
+      "status": "ok",
+      "n_candidates": 0,
+      "has_receipt": true
+    }
+  ],
+  "artifact_sha_checks": [
+    {
+      "ref": "seed_us_annual_report_2024_FY.response.json",
+      "exists": true,
+      "sha256": "3f9ed2b3dffe88a4dd5d992e02858607c9f89ce797940e409bb6e8327668ebc5",
+      "expected_sha256": "3f9ed2b3dffe88a4dd5d992e02858607c9f89ce797940e409bb6e8327668ebc5",
+      "matching": true
+    },
+    {
+      "ref": "seed_cn_annual_report_2024_FY.response.json",
+      "exists": true,
+      "sha256": "c14310999e87ba46116d80a0f8fc901f641634cd9e3331ba05711fcbd43a2e30",
+      "expected_sha256": "c14310999e87ba46116d80a0f8fc901f641634cd9e3331ba05711fcbd43a2e30",
+      "matching": true
+    },
+    {
+      "ref": "seed_us_annual_report_2025_FY.response.json",
+      "exists": true,
+      "sha256": "50b13c5baab8cb022634e58c0f7bccaf37c96f20ad525c06f6d01a19c2d64c10",
+      "expected_sha256": "50b13c5baab8cb022634e58c0f7bccaf37c96f20ad525c06f6d01a19c2d64c10",
+      "matching": true
+    },
+    {
+      "ref": "warm2024_request2026_US.run1.request.json",
+      "exists": true,
+      "sha256": "56c0029cd20980a086269225cc1d73c7beecfa0fb16c226dc029d4d96e0a3a74",
+      "expected_sha256": "56c0029cd20980a086269225cc1d73c7beecfa0fb16c226dc029d4d96e0a3a74",
+      "matching": true
+    },
+    {
+      "ref": "warm2024_request2026_US.run1.response.json",
+      "exists": true,
+      "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+      "expected_sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+      "matching": true
+    },
+    {
+      "ref": "warm2024_request2026_CN.run1.request.json",
+      "exists": true,
+      "sha256": "86ee58427a3af92172d7a0c81d4dd989de3eed1edd146db6a99b0be7150f648e",
+      "expected_sha256": "86ee58427a3af92172d7a0c81d4dd989de3eed1edd146db6a99b0be7150f648e",
+      "matching": true
+    },
+    {
+      "ref": "warm2024_request2026_CN.run1.response.json",
+      "exists": true,
+      "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+      "expected_sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+      "matching": true
+    },
+    {
+      "ref": "actual-verified-source-facts.json",
+      "exists": true,
+      "sha256": "4c5fcd9b6f3d85a2e21fba7579f774952ded4c97cea5726e4fa28960c85289ad",
+      "expected_sha256": "4c5fcd9b6f3d85a2e21fba7579f774952ded4c97cea5726e4fa28960c85289ad",
+      "matching": true
+    }
+  ],
+  "all_available_artifacts_match": true,
+  "all_artifacts_present": true,
+  "new_control_execution": "none; existing exact CLI/cross-repo public-boundary repro already proves path",
+  "network_calls": 0,
+  "LLM_calls": 0,
+  "provider_calls": 0,
+  "fees_usd": 0,
+  "product_writes": 0,
+  "user_raw_reads_or_writes": 0
+}

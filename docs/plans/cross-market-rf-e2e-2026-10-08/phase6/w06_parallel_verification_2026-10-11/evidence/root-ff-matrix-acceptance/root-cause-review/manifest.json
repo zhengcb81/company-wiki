@@ -1,0 +1,30 @@
+{
+  "schema_version": "w06-ff-root-cause-review-manifest/1",
+  "files": [
+    {
+      "path": "evidence-observations.json",
+      "byte_size": 25489,
+      "sha256": "c8ad1eea7b0eade9ff98a476125004f763a0b5c33fb186ae9a18d99002aba676"
+    },
+    {
+      "path": "extract.py",
+      "byte_size": 8653,
+      "sha256": "c60fa64ee204e776f88ade42175b80ab38529c1f8d21e0bde79853d4475cc580"
+    },
+    {
+      "path": "finalize.py",
+      "byte_size": 19924,
+      "sha256": "1e2089af65428c71747fa5eaa608e4c43bf8f7c8dceb341c2aa24c5d4860445b"
+    },
+    {
+      "path": "report.json",
+      "byte_size": 11167,
+      "sha256": "e3dc31d1e24fff28557e8202b43203f62ebad070d45887ffa416a6bcdbe059b0"
+    },
+    {
+      "path": "report.md",
+      "byte_size": 10251,
+      "sha256": "30cd9fa1239960401bd0f890a6c4d96498ffe96ccda7e552ce24db9fa8da3dd2"
+    }
+  ]
+}

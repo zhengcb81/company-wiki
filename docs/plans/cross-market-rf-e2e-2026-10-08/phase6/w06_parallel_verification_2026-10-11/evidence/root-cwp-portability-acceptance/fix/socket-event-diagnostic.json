@@ -1,0 +1,12 @@
+{
+  "events": [
+    "socket.__new__",
+    "socket.bind"
+  ],
+  "blocked": [
+    "network"
+  ],
+  "scope": "one synthetic initialization/register only",
+  "fees_usd": 0,
+  "temporary_restored_absent": true
+}

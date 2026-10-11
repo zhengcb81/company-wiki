@@ -1,0 +1,10 @@
+{
+  "main_before": "057f2f8d274a14019f59302095df4148d9e28c7b",
+  "root_acceptance_commit": "5f10af0bafafb1c13d26d1afd9821e83dd8b7168",
+  "main_head": "e2e19ea200bf87b13dd41d6389897ea5f2711d93",
+  "normal_hooks": true,
+  "main_preexisting_status_before": "M docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/ROOT-reception-status.md\n?? .planning/w06-cross-period-acquisition/\n?? .planning/w06-cwp-portability-reception/\n?? .planning/w06-ff-matrix-reception/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-cwp-portability-acceptance/\n?? docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/",
+  "product_LF_equal_files": 11,
+  "remote_push_pending": true,
+  "installation": "Repository-only manual tools; not skill runtime install"
+}

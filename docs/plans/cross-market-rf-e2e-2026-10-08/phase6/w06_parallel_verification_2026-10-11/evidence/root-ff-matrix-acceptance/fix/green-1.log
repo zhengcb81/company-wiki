@@ -1,0 +1,70 @@
+......................FF.....                                            [100%]
+================================== FAILURES ===================================
+___________________ test_unbound_cli_never_reports_success ____________________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/fix/green-temp-1/test_unbound_cli_never_reports0')
+
+    def test_unbound_cli_never_reports_success(tmp_path):
+>       rc, *_ = _unbound_cli(tmp_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_w06_matrix_runtime.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_w06_matrix_runtime.py:51: in _unbound_cli
+    rc = cli_main.main(["--cwp-project", str(tmp_path / "cwp"), "--et-project", str(tmp_path / "et"), "--owned-root", str(owned), "--out-root", str(out)])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\offline_contract_matrix\cli_main.py:114: in main
+    attempt = OwnedAttempt.create(args.owned_root, args.out_root, protected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\offline_contract_matrix\runtime.py:80: in create
+    scratch.mkdir()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verifica...-ff-matrix-acceptance/fix/green-temp-1/test_unbound_cli_never_reports0/owned/attempt-7a1787732a8b47f599ddb9e04fb9f974')
+mode = 511, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 206] 文件名或扩展名太长。: 'C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-ff-matrix-acceptance\\fix\\green-temp-1\\test_unbound_cli_never_reports0\\owned\\attempt-7a1787732a8b47f599ddb9e04fb9f974'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+___________ test_cli_preserves_existing_scratch_sentinel_and_report ___________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/fix/green-temp-1/test_cli_preserves_existing_sc0')
+
+    def test_cli_preserves_existing_scratch_sentinel_and_report(tmp_path):
+>       _, existing, sentinel, report = _unbound_cli(tmp_path)
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_w06_matrix_runtime.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_w06_matrix_runtime.py:51: in _unbound_cli
+    rc = cli_main.main(["--cwp-project", str(tmp_path / "cwp"), "--et-project", str(tmp_path / "et"), "--owned-root", str(owned), "--out-root", str(out)])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\offline_contract_matrix\cli_main.py:114: in main
+    attempt = OwnedAttempt.create(args.owned_root, args.out_root, protected)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\offline_contract_matrix\runtime.py:80: in create
+    scratch.mkdir()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verifica...-ff-matrix-acceptance/fix/green-temp-1/test_cli_preserves_existing_sc0/owned/attempt-ccbf080c3cf247f0a2d02cd9b2d44bf1')
+mode = 511, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 206] 文件名或扩展名太长。: 'C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-ff-matrix-acceptance\\fix\\green-temp-1\\test_cli_preserves_existing_sc0\\owned\\attempt-ccbf080c3cf247f0a2d02cd9b2d44bf1'
+
+C:\Miniconda\Lib\pathlib\_local.py:722: FileNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/test_w06_matrix_runtime.py::test_unbound_cli_never_reports_success
+FAILED tests/test_w06_matrix_runtime.py::test_cli_preserves_existing_scratch_sentinel_and_report
+2 failed, 27 passed in 2.76s

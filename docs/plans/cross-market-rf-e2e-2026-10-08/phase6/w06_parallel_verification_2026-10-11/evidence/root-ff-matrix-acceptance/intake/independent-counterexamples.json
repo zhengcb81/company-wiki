@@ -1,0 +1,280 @@
+{
+  "schema_version": "w06-ff-independent-probes/1",
+  "real_provider_calls": 0,
+  "model_calls": 0,
+  "paid_usd": 0,
+  "scratch_restored": true,
+  "probes": [
+    {
+      "id": "FFI-SECRET-HASH",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "no byte read or digest of even synthetic key",
+      "actual": {
+        "secret_path_hashed": true,
+        "secret_sha_in_guard": true
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "id": "FFI-ENV-LEAK",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "synthetic environment excludes unrelated host credentials/endpoint",
+      "actual": {
+        "unrelated_credential_names_propagated": [
+          "DEEPSEEK_API_KEY",
+          "OPENAI_API_KEY",
+          "API_BASE_URL"
+        ],
+        "fmp_key_synthetic": true,
+        "fmp_key_file_removed": true
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "id": "FFI-WRONG-QUARTER",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "requested Q3, returned downloaded Q2 must FAIL",
+      "actual": {
+        "id": "call_wrong_quarter",
+        "title": "wrong-quarter provider response is not accepted as the requested quarter",
+        "declared_layer": "ff+et",
+        "observed_layer": "ff-cli + et-supervisor/worker (test-proxy)",
+        "result": "PASS",
+        "scope": "quarter provenance is enforced; a mismatch is not silently accepted",
+        "expected": {
+          "quarter_provenance": true
+        },
+        "actual": {
+          "status": "downloaded",
+          "reason": null,
+          "fiscal_quarter": 2,
+          "real_layer_evidence": {
+            "ff_public_cli": true,
+            "et_supervisor_worker": false,
+            "cwp_import": true
+          }
+        },
+        "provider_counters": {
+          "fixture_requests": 0,
+          "run2_fixture_requests": 0,
+          "downloads": 0,
+          "translations": 0
+        },
+        "request_ref": "req",
+        "response_ref": "resp",
+        "receipt_refs": [],
+        "diagnostics": []
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "id": "FFI-CUTOFF-UNRELATED-ERROR",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "unrelated upstream error is not cutoff proof",
+      "actual": {
+        "id": "call_past_cutoff",
+        "title": "past-cutoff transcript surfaces the cutoff diagnostic",
+        "declared_layer": "ff+et",
+        "observed_layer": "ff-cli + et-supervisor/worker (test-proxy)",
+        "result": "PASS",
+        "scope": "publication/call after as_of_date is never reported historical-eligible",
+        "expected": {
+          "past_cutoff": true
+        },
+        "actual": {
+          "status": "upstream_error",
+          "reason": "arbitrary_import_failure",
+          "as_of_cutoff_verified": null,
+          "cutoff_diagnostic": true,
+          "eligible": false,
+          "real_layer_evidence": {
+            "ff_public_cli": true,
+            "et_supervisor_worker": false,
+            "cwp_import": false
+          }
+        },
+        "provider_counters": {
+          "fixture_requests": 0,
+          "run2_fixture_requests": 0,
+          "downloads": 0,
+          "translations": 0
+        },
+        "request_ref": "req",
+        "response_ref": "resp",
+        "receipt_refs": [],
+        "diagnostics": []
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "id": "FFI-MISSING-REUSE",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "run2 downloaded_new with missing source_ref must FAIL",
+      "actual": {
+        "id": "negative",
+        "title": "HK annual_report fetch_if_missing via fixture provider",
+        "declared_layer": "ff+cwp",
+        "observed_layer": "ff-cli + cwp-ensure/import + fixture-adapter",
+        "result": "PASS",
+        "scope": "financial report download at the configured fixture provider boundary; real CWP ensure/import, only the supplier response is simulated",
+        "expected": {
+          "run_twice": true
+        },
+        "actual": {
+          "run1_outcome": "downloaded_new",
+          "run2_outcome": "downloaded_new",
+          "run1_kind": null,
+          "real_layer_evidence": {
+            "ff_public_cli": true,
+            "et_supervisor_worker": false,
+            "cwp_import": false
+          }
+        },
+        "provider_counters": {
+          "fixture_requests": 0,
+          "run2_fixture_requests": 0,
+          "downloads": 0,
+          "translations": 0
+        },
+        "request_ref": "req",
+        "response_ref": "resp",
+        "receipt_refs": [],
+        "diagnostics": [
+          "run1 resolves: ok",
+          "run1 imported: ok",
+          "run2 reuses without re-download: ok"
+        ]
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "id": "FFI-UNKNOWN-ZERO",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "unknown provider request count must remain null, even completeness false",
+      "actual": {
+        "id": "err_unknown_usage",
+        "title": "unknown usage/cost kept null, provider call not swallowed",
+        "declared_layer": "ff+et",
+        "observed_layer": "ff-cli + et-supervisor/worker-failure (test-proxy)",
+        "result": "PASS",
+        "scope": "unknown usage is null (never 0); the failed call is preserved",
+        "expected": {
+          "unknown_usage": true
+        },
+        "actual": {
+          "status": "upstream_error",
+          "reason": "provider_loss",
+          "provider_usage_complete": false,
+          "provider_requests": 0,
+          "unknown_usage_reported_as_zero": false,
+          "calls_swallowed": false,
+          "real_layer_evidence": {
+            "ff_public_cli": true,
+            "et_supervisor_worker": false,
+            "cwp_import": false
+          }
+        },
+        "provider_counters": {
+          "fixture_requests": 0,
+          "run2_fixture_requests": 0,
+          "downloads": 0,
+          "translations": 0
+        },
+        "request_ref": "req",
+        "response_ref": "resp",
+        "receipt_refs": [],
+        "diagnostics": []
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "id": "CONTROL-QUARTER-REJECTED",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "explicit quarter mismatch is allowed negative diagnostic",
+      "actual": {
+        "id": "call_wrong_quarter",
+        "title": "wrong-quarter provider response is not accepted as the requested quarter",
+        "declared_layer": "ff+et",
+        "observed_layer": "ff-cli + et-supervisor/worker (test-proxy)",
+        "result": "PASS",
+        "scope": "quarter provenance is enforced; a mismatch is not silently accepted",
+        "expected": {
+          "quarter_provenance": true
+        },
+        "actual": {
+          "status": "provider_unavailable",
+          "reason": "quarter_mismatch",
+          "fiscal_quarter": null,
+          "real_layer_evidence": {
+            "ff_public_cli": true,
+            "et_supervisor_worker": false,
+            "cwp_import": false
+          }
+        },
+        "provider_counters": {
+          "fixture_requests": 0,
+          "run2_fixture_requests": 0,
+          "downloads": 0,
+          "translations": 0
+        },
+        "request_ref": "req",
+        "response_ref": "resp",
+        "receipt_refs": [],
+        "diagnostics": []
+      },
+      "verdict": "PASS"
+    },
+    {
+      "id": "FFI-EMPTY-UNBOUND-ORACLE",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "empty matrix/unverified code binding cannot be PASS",
+      "actual": {
+        "findings": [],
+        "passes": true
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "id": "FFI-ORACLE-NULL-AS-ZERO",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "unknown reuse request count is not measured zero",
+      "actual": {
+        "findings": []
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "id": "FFI-CLI-UNBOUND-BUDGET",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "unverified import + 41s case/220s batch must not exit0",
+      "actual": {
+        "exit_code": 0,
+        "binding": {
+          "verified": false
+        },
+        "batch_seconds": 220.0,
+        "diagnostics": [
+          "elapsed_seconds=41.00",
+          "WARN case exceeded 30s budget"
+        ]
+      },
+      "verdict": "FAIL"
+    },
+    {
+      "id": "FFI-CLI-BASELINE-DELETION",
+      "scope": "independent synthetic pure-function/helper control; no provider, actual product CLI, or network",
+      "expected": "existing scratch bytes/sentinel must be rejected or preserved",
+      "actual": {
+        "preexisting_file_survived": false,
+        "original_sentinel_survived": false,
+        "restore_claim": {
+          "baseline_unchanged": true,
+          "sentinel_intact": true,
+          "scratch_torn_down": true,
+          "restored": true
+        }
+      },
+      "verdict": "FAIL"
+    }
+  ]
+}

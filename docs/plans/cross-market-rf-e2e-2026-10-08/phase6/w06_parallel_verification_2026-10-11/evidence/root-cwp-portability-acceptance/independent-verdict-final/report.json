@@ -1,0 +1,65 @@
+{
+  "schema_version": "w06-portability-independent-verdict-acceptance/1",
+  "verdict": "PASS_WITH_SCOPE",
+  "reviewer": "/root/portability_verdict_final",
+  "blockers": [],
+  "accepted_fix": {
+    "root_cause": "Hard contract findings previously did not determine scenario and overall status unless their codes matched a whitelist.",
+    "resolution": "Explicit Finding outcomes with default FAIL and None diagnostics are projected by one monotonic aggregation rule. Finding names do not determine severity.",
+    "product_freeze_sha256": "ede6ae471e17ad5a77adb5a16c409b2b62617e53311bc96dd0e54083bb341bc3",
+    "changed_product_files": [
+      "tools/source_root_portability/oracle.py",
+      "tools/source_root_portability/run.py",
+      "tests/unit/test_w06_root_portability_oracle.py"
+    ]
+  },
+  "independent_execution": {
+    "case_count": 53,
+    "unexpected": 0,
+    "pure_probe_seconds": 0.033,
+    "original_four_effective_input_shas_match": true,
+    "original_four_overall_and_S2_status": "FAIL",
+    "default_constructor_and_helper_outcome": "FAIL",
+    "severity_states": ["PASS", "UNKNOWN", "PARTIAL", "FAIL", "INVALID_RECORD"],
+    "all_base_states_and_explicit_outcomes_checked": true,
+    "None_diagnostics_checked": true,
+    "finding_code_prefix_independent": true,
+    "monotonic_and_order_independent": true,
+    "input_status_map_not_mutated": true,
+    "unknown_and_wrongly_typed_outcomes_return_structured_invalid": true,
+    "legitimate_diagnostic_UNKNOWN_PARTIAL_controls": true,
+    "old_and_current_frozen_seven_scene_records_still_PASS": true,
+    "results_ref": "results.json",
+    "replay_ref": "probes.py"
+  },
+  "receipt_scope": {
+    "author_tests": "69 passed, 1 skipped, 1 warning in 9.07s",
+    "author_synthetic_runner_seconds": 4.051,
+    "all_seven_author_scene_statuses": "PASS",
+    "final_node_sha256": "abdf9ddf173a22511fcd6b76f7391b05b0d5da80107f8eea089dfc54d541e8e9",
+    "real_run_report_sha256": "cdb53400b90fdd5fd090c23e0da299abdeeb79d9753de758334f5025bd763bf6",
+    "author_receipts_read_and_bound_not_reexecuted": true,
+    "prior_non_author_fullRef_rawCLI_environment_and_cleanup_evidence": "Preserved; prior review passed these areas and isolated only the repaired verdict aggregation P1.",
+    "four_doc_keys_three_logical_sources": true
+  },
+  "preservation": {
+    "eleven_product_SHAs_before_after_match": true,
+    "eight_producer_SHAs_before_after_match": true,
+    "original_independent_FAIL_and_counterexamples_unchanged": true,
+    "previous_real_run_report_unchanged": true,
+    "scratch_restored_absent": true,
+    "product_source_PWF_and_git_writes": 0,
+    "new_permission_gates": 0
+  },
+  "hygiene": {
+    "native_scenes_reexecuted": 0,
+    "large_suites_reexecuted": 0,
+    "network_calls": 0,
+    "provider_calls": 0,
+    "LLM_calls": 0,
+    "fees_usd": 0,
+    "real_originals_accessed": 0
+  },
+  "scope": "Common tool verdict aggregation, exact historical JSON counterexamples, and frozen Windows synthetic Reader/catalog/CLI receipts. No new certification of POSIX, cloud or external roots, real OCR/LLM behavior, raw financial-document coverage, or investment conclusions.",
+  "disposition": "STOP; ROOT may proceed with the normal scoped integration and publication. Original failing review remains historical evidence."
+}

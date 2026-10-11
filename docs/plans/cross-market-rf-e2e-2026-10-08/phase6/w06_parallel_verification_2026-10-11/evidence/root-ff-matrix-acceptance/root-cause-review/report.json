@@ -1,0 +1,189 @@
+{
+  "schema_version": "w06-ff-cross-period-root-cause-review/1",
+  "verdict": "CONFIRMED_SHARED_RELEVANCE_AND_PROOF_CHANNEL_MISMATCH",
+  "priority": "P1",
+  "root_cause": {
+    "proof_channel_split": "Canonical provider import owns validated request/candidate/receipt byte-bound metadata, while local reconciliation accepts only steady correction assertions for non-SEC originals.",
+    "relevance_error": "After resolver excludes a proven old period, local reconciliation enumerates every same-entity/same-kind source without current scope classification. A missing correction assertion on FY2024 becomes targeted=True and blocks FY2025/FY2026 acquisition.",
+    "projection_loss": "Coordinator maps local blocked to MISSING; pathless operation projection exposes not_found and drops concrete local evidence diagnostics."
+  },
+  "source_head": "057f2f8d274a14019f59302095df4148d9e28c7b",
+  "cross_period_input_sha256": "f4cff44e9d77a005342e71181105ab5aff27d134d6607a110795b5aa95be2747",
+  "source_file_count": 13,
+  "current_sources_unchanged": true,
+  "source_catalog_diff_8862372_to_057f2f8": "empty; Git read-only diff confirms source_catalog unchanged during read",
+  "artifact_checks": [
+    {
+      "ref": "seed_us_annual_report_2024_FY.response.json",
+      "exists": true,
+      "sha256": "3f9ed2b3dffe88a4dd5d992e02858607c9f89ce797940e409bb6e8327668ebc5",
+      "expected_sha256": "3f9ed2b3dffe88a4dd5d992e02858607c9f89ce797940e409bb6e8327668ebc5",
+      "matching": true
+    },
+    {
+      "ref": "seed_cn_annual_report_2024_FY.response.json",
+      "exists": true,
+      "sha256": "c14310999e87ba46116d80a0f8fc901f641634cd9e3331ba05711fcbd43a2e30",
+      "expected_sha256": "c14310999e87ba46116d80a0f8fc901f641634cd9e3331ba05711fcbd43a2e30",
+      "matching": true
+    },
+    {
+      "ref": "seed_us_annual_report_2025_FY.response.json",
+      "exists": true,
+      "sha256": "50b13c5baab8cb022634e58c0f7bccaf37c96f20ad525c06f6d01a19c2d64c10",
+      "expected_sha256": "50b13c5baab8cb022634e58c0f7bccaf37c96f20ad525c06f6d01a19c2d64c10",
+      "matching": true
+    },
+    {
+      "ref": "warm2024_request2026_US.run1.request.json",
+      "exists": true,
+      "sha256": "56c0029cd20980a086269225cc1d73c7beecfa0fb16c226dc029d4d96e0a3a74",
+      "expected_sha256": "56c0029cd20980a086269225cc1d73c7beecfa0fb16c226dc029d4d96e0a3a74",
+      "matching": true
+    },
+    {
+      "ref": "warm2024_request2026_US.run1.response.json",
+      "exists": true,
+      "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+      "expected_sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+      "matching": true
+    },
+    {
+      "ref": "warm2024_request2026_CN.run1.request.json",
+      "exists": true,
+      "sha256": "86ee58427a3af92172d7a0c81d4dd989de3eed1edd146db6a99b0be7150f648e",
+      "expected_sha256": "86ee58427a3af92172d7a0c81d4dd989de3eed1edd146db6a99b0be7150f648e",
+      "matching": true
+    },
+    {
+      "ref": "warm2024_request2026_CN.run1.response.json",
+      "exists": true,
+      "sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+      "expected_sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940",
+      "matching": true
+    },
+    {
+      "ref": "actual-verified-source-facts.json",
+      "exists": true,
+      "sha256": "4c5fcd9b6f3d85a2e21fba7579f774952ded4c97cea5726e4fa28960c85289ad",
+      "expected_sha256": "4c5fcd9b6f3d85a2e21fba7579f774952ded4c97cea5726e4fa28960c85289ad",
+      "matching": true
+    }
+  ],
+  "evidence": {
+    "warm2024": "US and CN: completed/downloaded_new, one actual fixture fetch each, actual SourceRef returned",
+    "new2025": "US: public ensure not_found/missing, download_events=0, provider_started=false",
+    "new2026": "US and CN: FF not_found, calls=2/downloads=0, no adapter fixture invocation",
+    "assertion_state": "Actual steady verified assertion and actual source_fact evidence are NULL; no injected assertion",
+    "metadata": "Actual indexed acquisition has FY2024/FY, correct identity and matching request/candidate/receipt byte binding"
+  },
+  "scope_authority": {
+    "canonical_import": "Provider/import declaration checked at current writer boundary and bound to SHA/size; usable source selection observation, not universal original-body fiscal extraction",
+    "scan_sidecar": "A scan observes user metadata; same JSON shape/filename/year does not prove writer-owned import or original truth",
+    "SEC_primary": "Existing complete original DEI scope proof keeps its own parser/locator authority and should not be manufactured from import metadata"
+  },
+  "implementation_shape": [
+    "One owner-produced typed SourceScope observation in the existing source record/projection; distinguish original-extracted, canonical-provider-import, scanned-declaration, conflict and unknown.",
+    "One shared request relevance comparator, used by resolver/local prepare/acquisition; classify MATCH, NOT_RELEVANT or UNKNOWN before repairs. Only relevant/possibly relevant current candidates can create a local gap.",
+    "Treat absent correction assertion as no correction, not rejection of already validated canonical import scope. Consume existing actual declaration and origin without a new approval/canary/receipt store.",
+    "Keep current exact byte read/size/MIME/path/source status checks when original is opened, and existing acquisition target lock and resource budget. Do not bypass SHA or write fake source_fact_patch.",
+    "Preserve named local incomplete/conflict/unavailable diagnosis through the existing versioned pathless operation DTO to FF; true not_found means true local/provider absence, not hidden prerequisite failure."
+  ],
+  "TDD_test_package": [
+    {
+      "id": "SCOPE-01",
+      "layer": "unit",
+      "case": "Writer-native candidate/request/receipt facts agree and pin exact source SHA/size; classify their authority as provider/import declaration, never original DEI extraction."
+    },
+    {
+      "id": "SCOPE-02",
+      "layer": "unit",
+      "case": "Validated FY2024 is NOT_RELEVANT for exact FY2025/FY2026; absent source_fact_patch does not manufacture current-source gap."
+    },
+    {
+      "id": "SCOPE-03",
+      "layer": "unit",
+      "case": "Conflicting year/security/kind/receipt SHA, explicit unknown, fake sidecar shaped like acquisition, or missing owner origin cannot be promoted to verified out-of-scope or reuse."
+    },
+    {
+      "id": "SCOPE-04",
+      "layer": "unit",
+      "case": "Q2 is not Q3, H1 is not annual, nonperiodic prospectus/IR does not acquire invented FY; common scope comparator respects actual explicit fields."
+    },
+    {
+      "id": "SCOPE-05",
+      "layer": "unit",
+      "case": "Declared provider metadata and extracted SEC primary facts stay distinct; disagreement is named conflict, not overwritten field/forged assertion."
+    },
+    {
+      "id": "ACQ-01",
+      "layer": "integration",
+      "case": "Public ensure warm FY2024 then exact request FY2025: discover/fetch only the actual new period, commit distinct bytes, final exact SourceRef reads requested FY; old original and manifest SHA unchanged."
+    },
+    {
+      "id": "ACQ-02",
+      "layer": "integration",
+      "case": "Same period warm reuse: zero discover/fetch, complete SourceRef opens actual original, no redundant identity/period re-qualification transaction."
+    },
+    {
+      "id": "ACQ-03",
+      "layer": "integration",
+      "case": "Unverified scan-sidecar declaring old FY while scope remains unknown: bounded owner reconciliation or explicit unknown; no fabricated canonical import proof and no false exact reuse."
+    },
+    {
+      "id": "ACQ-04",
+      "layer": "integration",
+      "case": "Relevant original wrong SHA/size/MIME or withdrawn status fails its current responsibility checks; no integrity bypass disguised as missing local bytes, no raw modification."
+    },
+    {
+      "id": "ACQ-05",
+      "layer": "integration",
+      "case": "Latest-as-of consults provider metadata despite locally available older validated scope; cutoff forbids future publication reuse/import, no filename/mtime date fallback."
+    },
+    {
+      "id": "ACQ-06",
+      "layer": "integration",
+      "case": "Relevant uncertain/metadata-retired candidates are reconciled narrowly; unrelated old/other-security candidates do not set targeted/blocks_download. Provider absence stays actual not_found."
+    },
+    {
+      "id": "ACQ-07",
+      "layer": "integration",
+      "case": "Byte-identical differing-source declarations and period disagreement remain conflict/unknown; no second physical copy or relabeling existing immutable manifest."
+    },
+    {
+      "id": "ACQ-08",
+      "layer": "integration",
+      "case": "Existing target lock/byte/time/cost budget survive cross-period and two concurrent same-target requests; one canonical original, no unknown usage rewritten as zero, scratch recovery exact."
+    },
+    {
+      "id": "WIRE-01",
+      "layer": "contract",
+      "case": "Pathless local_metadata_unknown/unavailable/conflict is distinguishable from provider true absence; named owner cause and provider_started=false reach FF without physical paths or artificial retries."
+    },
+    {
+      "id": "E2E-01",
+      "layer": "offline end-to-end",
+      "case": "Re-run existing bound FF→CWP/ET 41 matrix once after common fix; classify actual outcome and proof scope truthfully. Use existing exact US/CN cross-period repro as frozen negative baseline; do not claim real provider routing/financial quality from fixtures."
+    }
+  ],
+  "validation_nodes": [
+    "A: formal shared scope RED from existing failure + negative/legitimate unit controls",
+    "B: real public-boundary synthetic ensure integration, narrow restoration/hash evidence",
+    "C: existing offline matrix once, independent major-node review, normal repo gates/publish"
+  ],
+  "new_tests_executed": 0,
+  "reason_no_repeat": "Existing exact 8s repro and actual bound metadata/artifacts provide enough evidence; no need to duplicate 41 matrix or run provider/LLM.",
+  "network_calls": 0,
+  "provider_calls": 0,
+  "LLM_calls": 0,
+  "fees_usd": 0,
+  "production_or_tool_changes": 0,
+  "user_raw_reads_or_changes": 0,
+  "write_scope": "root-ff-matrix-acceptance/root-cause-review only",
+  "limitations": [
+    "Actual reproduced blocker is canonical CN PDF and US PDF annual cross-period path; actual SEC HTML/DEI path is structurally different and already returns non-relevance before publication proof.",
+    "Other HK/semi/quarter matrix failures must be tied to their own exact scope/fixture metadata; not all 14 failures are claimed solved by this diagnosis.",
+    "Provider declaration validation is not proof that economic statements or source-body fiscal facts are correct. No real providers/markets/LLM/fees or investment analysis evaluated."
+  ],
+  "disposition": "STOP; ROOT owns TDD common source implementation and later offline contract acceptance"
+}

@@ -1,0 +1,108 @@
+............F.FFFFFF                                                     [100%]
+================================== FAILURES ===================================
+__________________ test_wrong_downloaded_quarter_cannot_pass __________________
+
+tmp_path = WindowsPath('C:/Users/֣����/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/fix/pytest-red-20261011/test_wrong_downloaded_quarter_0')
+
+    def test_wrong_downloaded_quarter_cannot_pass(tmp_path):
+        import matrix_cases as cases
+        ctx = _ControlledContext(tmp_path, [{"transcript": {
+            "status": "downloaded", "fiscal_quarter": 2, "source_ref": {"document_id": "x"}}}])
+>       assert cases.case_call_wrong_quarter(ctx).result != "PASS"
+E       AssertionError: assert 'PASS' != 'PASS'
+E        +  where 'PASS' = CaseResult(id='call_wrong_quarter', title='wrong-quarter provider response is not accepted as the requested quarter', ... 'downloads': 0, 'translations': 0}, request_ref='req.json', response_ref='resp.json', receipt_refs=[], diagnostics=[]).result
+E        +    where CaseResult(id='call_wrong_quarter', title='wrong-quarter provider response is not accepted as the requested quarter', ... 'downloads': 0, 'translations': 0}, request_ref='req.json', response_ref='resp.json', receipt_refs=[], diagnostics=[]) = <function case_call_wrong_quarter at 0x00000232DD56AAC0>(<test_w06_contract_matrix._ControlledContext object at 0x00000232DD532270>)
+E        +      where <function case_call_wrong_quarter at 0x00000232DD56AAC0> = <module 'matrix_cases' from 'C:\\Users\\֣����\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\matrix_cases.py'>.case_call_wrong_quarter
+
+tests\test_w06_contract_matrix.py:189: AssertionError
+______________ test_unrelated_upstream_error_cannot_prove_cutoff ______________
+
+tmp_path = WindowsPath('C:/Users/֣����/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/fix/pytest-red-20261011/test_unrelated_upstream_error_0')
+
+    def test_unrelated_upstream_error_cannot_prove_cutoff(tmp_path):
+        import matrix_cases as cases
+        ctx = _ControlledContext(tmp_path, [{"transcript": {
+            "status": "upstream_error", "reason": "arbitrary_import_failure"}}])
+>       assert cases.case_call_past_cutoff(ctx).result != "PASS"
+E       AssertionError: assert 'PASS' != 'PASS'
+E        +  where 'PASS' = CaseResult(id='call_past_cutoff', title='past-cutoff transcript surfaces the cutoff diagnostic', declared_layer='ff+et... 'downloads': 0, 'translations': 0}, request_ref='req.json', response_ref='resp.json', receipt_refs=[], diagnostics=[]).result
+E        +    where CaseResult(id='call_past_cutoff', title='past-cutoff transcript surfaces the cutoff diagnostic', declared_layer='ff+et... 'downloads': 0, 'translations': 0}, request_ref='req.json', response_ref='resp.json', receipt_refs=[], diagnostics=[]) = <function case_call_past_cutoff at 0x00000232DD56AA20>(<test_w06_contract_matrix._ControlledContext object at 0x00000232DD3E6210>)
+E        +      where <function case_call_past_cutoff at 0x00000232DD56AA20> = <module 'matrix_cases' from 'C:\\Users\\֣����\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\matrix_cases.py'>.case_call_past_cutoff
+
+tests\test_w06_contract_matrix.py:203: AssertionError
+________ test_repeated_download_without_source_ref_cannot_prove_reuse _________
+
+tmp_path = WindowsPath('C:/Users/֣����/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/fix/pytest-red-20261011/test_repeated_download_without0')
+
+    def test_repeated_download_without_source_ref_cannot_prove_reuse(tmp_path):
+        import matrix_cases as cases
+        from fixture_builder import HK
+        response = {"status": "source_candidate", "filing": {
+            "resolution_outcome": "downloaded_new", "download_events": 0}}
+        ctx = _ControlledContext(tmp_path, [response, response])
+>       assert cases.case_fin_fetch(ctx, HK, "annual_report", 2026, "negative").result != "PASS"
+E       AssertionError: assert 'PASS' != 'PASS'
+E        +  where 'PASS' = CaseResult(id='negative', title='HK annual_report fetch_if_missing via fixture provider', declared_layer='ff+cwp', obs....json', receipt_refs=[], diagnostics=['run1 resolves: ok', 'run1 imported: ok', 'run2 reuses without re-download: ok']).result
+E        +    where CaseResult(id='negative', title='HK annual_report fetch_if_missing via fixture provider', declared_layer='ff+cwp', obs....json', receipt_refs=[], diagnostics=['run1 resolves: ok', 'run1 imported: ok', 'run2 reuses without re-download: ok']) = <function case_fin_fetch at 0x00000232DD56A840>(<test_w06_contract_matrix._ControlledContext object at 0x00000232DD4796E0>, Identity(market='HK', entity='�vӍ�ع�', canonical_name='�vӍ�ع�', security_id='00700', ticker='00700', exchange='HKEX', prov...rce_url='https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0408/syn.pdf', aliases=['TENCENT', '��Ѷ', '��Ѷ�ع�', '�vӍ']), 'annual_report', 2026, 'negative')
+E        +      where <function case_fin_fetch at 0x00000232DD56A840> = <module 'matrix_cases' from 'C:\\Users\\֣����\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\matrix_cases.py'>.case_fin_fetch
+
+tests\test_w06_contract_matrix.py:212: AssertionError
+____________ test_unknown_usage_even_incomplete_cannot_render_zero ____________
+
+tmp_path = WindowsPath('C:/Users/֣����/Projects/company-wiki/docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/evidence/root-ff-matrix-acceptance/fix/pytest-red-20261011/test_unknown_usage_even_incomp0')
+
+    def test_unknown_usage_even_incomplete_cannot_render_zero(tmp_path):
+        import matrix_cases as cases
+        ctx = _ControlledContext(tmp_path, [{"transcript": {
+            "status": "upstream_error", "reason": "provider_loss",
+            "provider_usage_complete": False, "provider_requests": 0}}])
+>       assert cases.case_err_unknown_usage(ctx).result != "PASS"
+E       AssertionError: assert 'PASS' != 'PASS'
+E        +  where 'PASS' = CaseResult(id='err_unknown_usage', title='unknown usage/cost kept null, provider call not swallowed', declared_layer='... 'downloads': 0, 'translations': 0}, request_ref='req.json', response_ref='resp.json', receipt_refs=[], diagnostics=[]).result
+E        +    where CaseResult(id='err_unknown_usage', title='unknown usage/cost kept null, provider call not swallowed', declared_layer='... 'downloads': 0, 'translations': 0}, request_ref='req.json', response_ref='resp.json', receipt_refs=[], diagnostics=[]) = <function case_err_unknown_usage at 0x00000232DD56AD40>(<test_w06_contract_matrix._ControlledContext object at 0x00000232DD479BA0>)
+E        +      where <function case_err_unknown_usage at 0x00000232DD56AD40> = <module 'matrix_cases' from 'C:\\Users\\֣����\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\tools\\offline_contract_matrix\\matrix_cases.py'>.case_err_unknown_usage
+
+tests\test_w06_contract_matrix.py:220: AssertionError
+________________ test_empty_unbound_matrix_cannot_pass_oracle _________________
+
+    def test_empty_unbound_matrix_cannot_pass_oracle():
+        report = _report([])
+        report["code_binding"] = {"verified": False}
+>       assert not oracle_mod.passes(oracle_mod.audit(report))
+E       AssertionError: assert not True
+E        +  where True = <function passes at 0x00000232DD3FE5C0>([])
+E        +    where <function passes at 0x00000232DD3FE5C0> = oracle_mod.passes
+E        +    and   [] = <function audit at 0x00000232DD3FE8E0>({'schema_version': 'ff-et-cwp-offline-matrix/1', 'cases': [], 'restore': {'restored': True}, 'code_binding': {'verified': False}})
+E        +      where <function audit at 0x00000232DD3FE8E0> = oracle_mod.audit
+
+tests\test_w06_contract_matrix.py:226: AssertionError
+_________________ test_null_run2_counter_is_not_measured_zero _________________
+
+    def test_null_run2_counter_is_not_measured_zero():
+        case = _case("unknown_reuse", expected={"run_twice": True},
+                     counters={"fixture_requests": 1, "run2_fixture_requests": None})
+>       assert any(f.vector == "second_run_still_downloads" for f in oracle_mod.audit(_report([case])))
+E       assert False
+E        +  where False = any(<generator object test_null_run2_counter_is_not_measured_zero.<locals>.<genexpr> at 0x00000232DD5839F0>)
+
+tests\test_w06_contract_matrix.py:232: AssertionError
+____________ test_actual_unknown_zero_not_boolean_self_declaration ____________
+
+    def test_actual_unknown_zero_not_boolean_self_declaration():
+        case = _case("unknown_usage", expected={"unknown_usage": True}, actual={
+            "provider_usage_complete": False, "provider_requests": 0,
+            "unknown_usage_reported_as_zero": False, "calls_swallowed": False})
+>       assert any(f.vector == "fake_zero_cost" for f in oracle_mod.audit(_report([case])))
+E       assert False
+E        +  where False = any(<generator object test_actual_unknown_zero_not_boolean_self_declaration.<locals>.<genexpr> at 0x00000232DD5817D0>)
+
+tests\test_w06_contract_matrix.py:239: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_w06_contract_matrix.py::test_wrong_downloaded_quarter_cannot_pass
+FAILED tests/test_w06_contract_matrix.py::test_unrelated_upstream_error_cannot_prove_cutoff
+FAILED tests/test_w06_contract_matrix.py::test_repeated_download_without_source_ref_cannot_prove_reuse
+FAILED tests/test_w06_contract_matrix.py::test_unknown_usage_even_incomplete_cannot_render_zero
+FAILED tests/test_w06_contract_matrix.py::test_empty_unbound_matrix_cannot_pass_oracle
+FAILED tests/test_w06_contract_matrix.py::test_null_run2_counter_is_not_measured_zero
+FAILED tests/test_w06_contract_matrix.py::test_actual_unknown_zero_not_boolean_self_declaration
+7 failed, 13 passed in 0.40s

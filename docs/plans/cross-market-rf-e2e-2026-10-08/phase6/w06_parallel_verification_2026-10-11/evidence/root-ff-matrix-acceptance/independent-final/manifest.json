@@ -1,0 +1,63 @@
+{
+  "schema": "w06-independent-final-tool-manifest/1",
+  "verdict": "TOOL_BLOCKER_CASE_CONTRACT_AUTHORITY_P1",
+  "file_count": 11,
+  "total_bytes": 969203,
+  "files": [
+    {
+      "path": "expectation-results.json",
+      "bytes": 2925,
+      "sha256": "1f65650d44315ef9abbd21f3b39f0752d72eb941d09fc59e167fec4f9f8974c7"
+    },
+    {
+      "path": "expectation_probes.py",
+      "bytes": 4808,
+      "sha256": "566c0746bc3556a37eb2ade1326312103db24f98cb2e55fc1a0e44ab19720d18"
+    },
+    {
+      "path": "final-review.json",
+      "bytes": 5402,
+      "sha256": "c9f7fd812e7ec15e25b75d6ce5e8f1e451b05d6823864acc19ae95b7a04bde4a"
+    },
+    {
+      "path": "final-review.md",
+      "bytes": 9870,
+      "sha256": "652e7a7119b3bee9aa7457f711aef3caba1a7e5fc3d17f87b22c224418bcb4e5"
+    },
+    {
+      "path": "modified-request-vector.json",
+      "bytes": 8991,
+      "sha256": "de6eff84633cb165d2c7180c3865c2c9470b7e77f2bae3bffc3d1721b49170d3"
+    },
+    {
+      "path": "omitted-required-22-cases-counterexample.json",
+      "bytes": 215468,
+      "sha256": "befdd11779b96b2dd1494c520a0cc324c26733ce19c32fabb03559d2f1d8c366"
+    },
+    {
+      "path": "optional-public-control-failure.json",
+      "bytes": 475,
+      "sha256": "7d1ddd980d09f034035337d6be489622f69a25d281087c061ee8e4d1cec6d04c"
+    },
+    {
+      "path": "original-41-report-copy.json",
+      "bytes": 340060,
+      "sha256": "aa2ab10add76f89e6e259fa0a05c8ad961f562f46b3fd21a1e94c1b2a3acc72f"
+    },
+    {
+      "path": "probes.py",
+      "bytes": 13246,
+      "sha256": "5651a42f0570f04702f9b50331466307377275a81c04b569640e4db7c93aafe8"
+    },
+    {
+      "path": "removed-cutoff-expectation-report-copy.json",
+      "bytes": 340025,
+      "sha256": "b4433cc0a58e9160ff9db69a889540b7c95db55e0c2c377a45299c8fe7abd883"
+    },
+    {
+      "path": "results.json",
+      "bytes": 27933,
+      "sha256": "7ee03b62a64151a04147c10a878b73afda02cc72580824e1b66f3d773a3b8b01"
+    }
+  ]
+}

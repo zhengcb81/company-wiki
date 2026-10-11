@@ -1,0 +1,633 @@
+{
+  "schema_version": "w06-portability-independent-final/1",
+  "verdict": "FAIL_NEW_ORACLE_EXPECTATION_CLASSIFICATION",
+  "seconds": 4.449,
+  "oracle_cases": [
+    {
+      "name": "frozen_legitimate_seven_scene_control",
+      "actual": "PASS",
+      "expected": [
+        "PASS"
+      ],
+      "as_expected": true,
+      "findings": []
+    },
+    {
+      "name": "original_omitted_S2_to_S7",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL",
+        "INVALID_RECORD"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_required_scenarios_missing",
+          "scenario": null,
+          "detail": "required S1 through S7 must each be reported"
+        }
+      ]
+    },
+    {
+      "name": "original_S2_only_one_ref_reopened",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_missing_reopen",
+          "scenario": "S2",
+          "detail": "move did not return bytes for every original ref including copy"
+        }
+      ]
+    },
+    {
+      "name": "original_S5_new_version_read_failed",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_new_version_not_read",
+          "scenario": "S5",
+          "detail": "new version did not return verified bytes"
+        }
+      ]
+    },
+    {
+      "name": "original_receipt_only_method_claims_bytes",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S1",
+          "detail": "read method 'verify_version' bypasses the official reader"
+        }
+      ]
+    },
+    {
+      "name": "original_wrong_root_after_move",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_wrong_move_roots",
+          "scenario": "S2",
+          "detail": "after_roots does not match all actual configured roots"
+        }
+      ]
+    },
+    {
+      "name": "original_S7_export_path_fields_present",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_path_leak",
+          "scenario": "S7",
+          "detail": "actual export carries paths or has unknown path status"
+        }
+      ]
+    },
+    {
+      "name": "original_malformed_S2_actual",
+      "actual": "INVALID_RECORD",
+      "expected": [
+        "INVALID_RECORD"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "invalid_record_shape",
+          "scenario": null,
+          "detail": "scenario actual is not an object"
+        }
+      ]
+    },
+    {
+      "name": "original_annual_truth_and_observations_self_rewritten_unknown",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_fixture_truth_rewritten",
+          "scenario": null,
+          "detail": "fixed fixture facts changed: pdf"
+        }
+      ]
+    },
+    {
+      "name": "raw_CLI_stdout_bundle_disagree",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S1",
+          "detail": "original CLI stdout/bundle missing or replaced"
+        }
+      ]
+    },
+    {
+      "name": "raw_CLI_manifests_replaced",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S7",
+          "detail": "manifests differ from actual CLI stdout"
+        }
+      ]
+    },
+    {
+      "name": "read_byte_count_bool",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S2",
+          "detail": "read size is not a positive byte count"
+        }
+      ]
+    },
+    {
+      "name": "new_malformed_read_shape",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL",
+        "INVALID_RECORD"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S1",
+          "detail": "no verified read recorded for pdf"
+        },
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S1",
+          "detail": "no verified read recorded for htm"
+        },
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S1",
+          "detail": "no verified read recorded for txt"
+        },
+        {
+          "code": "false_pass_sha_metadata_only",
+          "scenario": "S1",
+          "detail": "no verified read recorded for txt_copy"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S1",
+          "detail": "wire manifest/ref/facts mismatch: pdf"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S1",
+          "detail": "wire manifest/ref/facts mismatch: htm"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S1",
+          "detail": "wire manifest/ref/facts mismatch: txt"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S7",
+          "detail": "wire manifest/ref/facts mismatch: pdf"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S7",
+          "detail": "wire manifest/ref/facts mismatch: htm"
+        },
+        {
+          "code": "false_pass_export_evidence_substituted",
+          "scenario": "S7",
+          "detail": "wire manifest/ref/facts mismatch: txt"
+        }
+      ]
+    },
+    {
+      "name": "new_malformed_cost_shape",
+      "actual": "INVALID_RECORD",
+      "expected": [
+        "INVALID_RECORD"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "invalid_record_shape",
+          "scenario": null,
+          "detail": "cost.http_calls is not an integer"
+        }
+      ]
+    },
+    {
+      "name": "new_model_calls_nonzero",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "offline_violation",
+          "scenario": null,
+          "detail": "run performed network calls"
+        }
+      ]
+    },
+    {
+      "name": "new_final_recovery_one_ref_missing",
+      "actual": "FAIL",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": true,
+      "findings": [
+        {
+          "code": "false_pass_raw_recovery_not_observed",
+          "scenario": null,
+          "detail": "final bytes not reopened for every physical original"
+        }
+      ]
+    },
+    {
+      "name": "new_move_denies_same_root_ids",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "move is not same root_id + same relative_path"
+        }
+      ]
+    },
+    {
+      "name": "new_move_denies_same_relative_paths",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "move is not same root_id + same relative_path"
+        }
+      ]
+    },
+    {
+      "name": "new_policy_change_is_auth_gate",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "policy change treated as an authorization gate"
+        }
+      ]
+    },
+    {
+      "name": "new_old_ref_identity_not_preserved",
+      "actual": "PASS",
+      "expected": [
+        "FAIL"
+      ],
+      "as_expected": false,
+      "findings": [
+        {
+          "code": "expectation_unmet",
+          "scenario": "S2",
+          "detail": "old SourceRef identity not preserved"
+        }
+      ]
+    },
+    {
+      "name": "honest_PARTIAL_control",
+      "actual": "PARTIAL",
+      "expected": [
+        "PARTIAL"
+      ],
+      "as_expected": true,
+      "findings": []
+    },
+    {
+      "name": "honest_UNKNOWN_control",
+      "actual": "UNKNOWN",
+      "expected": [
+        "UNKNOWN"
+      ],
+      "as_expected": true,
+      "findings": []
+    }
+  ],
+  "runtime": {
+    "legacy_cleanup_sentinels_preserved": true,
+    "minimal_env_names": [
+      "APPDATA",
+      "COMSPEC",
+      "HOME",
+      "HOMEDRIVE",
+      "HOMEPATH",
+      "LOCALAPPDATA",
+      "PATH",
+      "PATHEXT",
+      "PYTHONDONTWRITEBYTECODE",
+      "PYTHONPATH",
+      "PYTHONUTF8",
+      "PYTHON_DOTENV_DISABLED",
+      "SYSTEMROOT",
+      "TEMP",
+      "TMP",
+      "USERPROFILE",
+      "WINDIR"
+    ],
+    "synthetic_home_temp": true,
+    "actual_complete_ref_child_results": [
+      {
+        "name": "valid_full_ref",
+        "expected_reason": null,
+        "actual": {
+          "exit_code": 0,
+          "pid": 70624,
+          "probe": {
+            "pid": 70624,
+            "ref": {
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "byte_size": 255,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            },
+            "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+            "byte_size": 255,
+            "status": "ok",
+            "reason": null,
+            "raw_non_reader_opens": 0,
+            "open_log": [
+              {
+                "event": "open",
+                "path_ref": "C:/Users/郑曾波/Projects/company-wiki/.tmp/w6-pind-fp3hty42/owned/w06-owned-40g4xwkf/lake_A/外部 Dayu 根/业绩说明会 纪要.txt",
+                "path_class": "raw",
+                "attributed_to": "company_wiki"
+              }
+            ],
+            "bytes_origin": "fresh_read",
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            },
+            "method": "open_version",
+            "channel": "reader_verified_bytes",
+            "receipt": {
+              "policy_sha256": "baf64034aee59651f47cefb83f7501c45fa29990ff94208b39a82c7632ca3cd5",
+              "source_read_policy_sha256": "4964a9f2154398c53aa1465e0518b72262dfe91937c1982c24fdeeb0b633b304",
+              "read_at": "2026-10-11T13:21:35.031383+00:00"
+            }
+          }
+        }
+      },
+      {
+        "name": "wrong_byte_size",
+        "expected_reason": "source_ref_changed",
+        "actual": {
+          "exit_code": 2,
+          "pid": 56568,
+          "probe": {
+            "pid": 56568,
+            "ref": {
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "byte_size": 256,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            },
+            "read_sha256": null,
+            "byte_size": null,
+            "status": "unavailable",
+            "reason": "source_ref_changed",
+            "raw_non_reader_opens": 0,
+            "open_log": []
+          }
+        }
+      },
+      {
+        "name": "wrong_mime_type",
+        "expected_reason": "source_ref_changed",
+        "actual": {
+          "exit_code": 2,
+          "pid": 66156,
+          "probe": {
+            "pid": 66156,
+            "ref": {
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "byte_size": 255,
+              "mime_type": "application/pdf",
+              "schema_version": "2.0"
+            },
+            "read_sha256": null,
+            "byte_size": null,
+            "status": "unavailable",
+            "reason": "source_ref_changed",
+            "raw_non_reader_opens": 0,
+            "open_log": []
+          }
+        }
+      },
+      {
+        "name": "wrong_schema_version",
+        "expected_reason": "unsupported_version",
+        "actual": {
+          "exit_code": 2,
+          "pid": 46840,
+          "probe": {
+            "pid": 46840,
+            "ref": {
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "byte_size": 255,
+              "mime_type": "text/plain",
+              "schema_version": "1.0"
+            },
+            "read_sha256": null,
+            "byte_size": null,
+            "status": "unavailable",
+            "reason": "unsupported_version",
+            "raw_non_reader_opens": 0,
+            "open_log": []
+          }
+        }
+      }
+    ],
+    "raw_CLI_failure_preserved": {
+      "channel": "source_export_v2_cli",
+      "exit_code": 0,
+      "stdout": "{\"schema_version\": \"2.0.0\", \"manifests\": [], \"bundle_sha256\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+      "stderr": "independent marker",
+      "bundle": {
+        "schema_version": "2.0.0",
+        "manifests": [],
+        "bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "parse_error": null,
+      "bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "path_fields_present": false,
+      "manifests": [],
+      "stderr_head": "independent marker"
+    },
+    "owned_child_absent": true,
+    "sentinels_before": {
+      "owned\\cfg\\keep.bin": "4a0ba414836301c0c861d5575dcc69bb35fa23f1d30252648c88fcc1731d2cf0",
+      "owned\\lake_A\\keep.bin": "c9921d03da415e7499b2f2e5cecd4d7c0b4e6c20868ccac6fc8238b8013b652c",
+      "owned\\lake_B\\keep.bin": "63d988c141cbd0b41f363beefdb5f82066508d5dc4e2ad60ce643100fd9dfc1a",
+      "owned\\catalog\\keep.bin": "d1bfb61c517edfdccd49111ff8fd2b24e251f7f37ea98f5903e2e903d68b4248",
+      "owned\\logs\\keep.bin": "37389e5a51d79d278297ab3305788590cbd74d7cf45f0fc570015060f41216b6",
+      "owned\\scratch\\keep.bin": "4a08826ffcdc9c9aeb8ef2f8505605b8b3e59ce0c9021dd157604f983e590802",
+      "output\\keep.bin": "049d540c189ffeb2fbcdbee094e76d7b9982f9a59f3f9476e9338258cf17818c"
+    },
+    "sentinels_after": {
+      "owned\\cfg\\keep.bin": "4a0ba414836301c0c861d5575dcc69bb35fa23f1d30252648c88fcc1731d2cf0",
+      "owned\\lake_A\\keep.bin": "c9921d03da415e7499b2f2e5cecd4d7c0b4e6c20868ccac6fc8238b8013b652c",
+      "owned\\lake_B\\keep.bin": "63d988c141cbd0b41f363beefdb5f82066508d5dc4e2ad60ce643100fd9dfc1a",
+      "owned\\catalog\\keep.bin": "d1bfb61c517edfdccd49111ff8fd2b24e251f7f37ea98f5903e2e903d68b4248",
+      "owned\\logs\\keep.bin": "37389e5a51d79d278297ab3305788590cbd74d7cf45f0fc570015060f41216b6",
+      "owned\\scratch\\keep.bin": "4a08826ffcdc9c9aeb8ef2f8505605b8b3e59ce0c9021dd157604f983e590802",
+      "output\\keep.bin": "049d540c189ffeb2fbcdbee094e76d7b9982f9a59f3f9476e9338258cf17818c"
+    },
+    "all_six_empty_dirs_preserved": true,
+    "all_three_overlap_refusals_without_write": [
+      true,
+      true,
+      true
+    ],
+    "scratch_restored_absent": true
+  },
+  "freeze_sha256": "b1662c806216a8c2e729ae7a48fda6b83a741a552e0e60323b1a662854dd715b",
+  "product_and_producer_before": {
+    "tools/source_root_portability/__init__.py": "436c64f4abc5830d80a7404416713f313575a82c359a1ddde9187ff867fdb656",
+    "tools/source_root_portability/consumer_spy.py": "347cd8fbb524a9c709779102e9adf908cb7193945df35059e8b377fc66d2fa1b",
+    "tools/source_root_portability/fixture_builder.py": "af91addcbccdf85cd1431d9c7e2abd088b415bee035d06d3ffc86b85351b8c83",
+    "tools/source_root_portability/oracle.py": "532d14cea31b264a72772d42e4e73846a8d0d433ce7f47305cb5b700e477386d",
+    "tools/source_root_portability/report.py": "604dd0c5b70a0fdcb152d4495708f38216e48f6e1218e4e9b2cfbd421e073f7d",
+    "tools/source_root_portability/run.py": "c4830ccfab45da9c0c67c22212f9016f93cff68d87d23747ee9f70a123f97fa6",
+    "tools/source_root_portability/runtime.py": "96897a036650e2423a34fa446ce2675d33099c9464847abd9d10c6be92db180c",
+    "tools/source_root_portability/scenarios.py": "7c4d1f9320981c4069b3e13268542a7ea9c74aa30bc67f5555f40a0f20370d4b",
+    "tools/source_root_portability/README.md": "c1f2673c18d10eb126af8a7e49cc10d58ac2d164da12646d69f4c7b49095941b",
+    "tests/unit/test_w06_root_portability_oracle.py": "ed28bb19f7842c9cb9b0c1b3eced100b6594a19225f8a63ac8f8c67578438ff3",
+    "tests/integration/test_w06_root_portability.py": "19833f8153d0138b088a208a1349011e8e44b97f14aa95f68323ae7159d39d2f",
+    "src/company_wiki/source_catalog/source_reader.py": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+    "src/company_wiki/source_catalog/config.py": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+    "src/company_wiki/source_catalog/service.py": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+    "src/company_wiki/source_catalog/store.py": "ccae2c324b2efbac3824cef4e3fa3cfa273583efb6aeac11334c70625e5fd99e",
+    "src/company_wiki/source_catalog/scanner.py": "4a79882979e07097a9996779dee1f642dfe0446a8422b7f2ce6ace2dcbe89846",
+    "src/company_wiki/source_catalog/resolver.py": "a9a5aa19afa5330223d45c484dfe4261bdc7964b209461030fa423acd40ba6d5",
+    "src/company_wiki/source_catalog/document_kinds.py": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+    "src/company_wiki/source_contract/source_export_v2.py": "95d245dd3ab72e9af1451f9dab4163954ab08ecf8655ecd280b3e215b33e5211"
+  },
+  "product_and_producer_after": {
+    "tools/source_root_portability/__init__.py": "436c64f4abc5830d80a7404416713f313575a82c359a1ddde9187ff867fdb656",
+    "tools/source_root_portability/consumer_spy.py": "347cd8fbb524a9c709779102e9adf908cb7193945df35059e8b377fc66d2fa1b",
+    "tools/source_root_portability/fixture_builder.py": "af91addcbccdf85cd1431d9c7e2abd088b415bee035d06d3ffc86b85351b8c83",
+    "tools/source_root_portability/oracle.py": "532d14cea31b264a72772d42e4e73846a8d0d433ce7f47305cb5b700e477386d",
+    "tools/source_root_portability/report.py": "604dd0c5b70a0fdcb152d4495708f38216e48f6e1218e4e9b2cfbd421e073f7d",
+    "tools/source_root_portability/run.py": "c4830ccfab45da9c0c67c22212f9016f93cff68d87d23747ee9f70a123f97fa6",
+    "tools/source_root_portability/runtime.py": "96897a036650e2423a34fa446ce2675d33099c9464847abd9d10c6be92db180c",
+    "tools/source_root_portability/scenarios.py": "7c4d1f9320981c4069b3e13268542a7ea9c74aa30bc67f5555f40a0f20370d4b",
+    "tools/source_root_portability/README.md": "c1f2673c18d10eb126af8a7e49cc10d58ac2d164da12646d69f4c7b49095941b",
+    "tests/unit/test_w06_root_portability_oracle.py": "ed28bb19f7842c9cb9b0c1b3eced100b6594a19225f8a63ac8f8c67578438ff3",
+    "tests/integration/test_w06_root_portability.py": "19833f8153d0138b088a208a1349011e8e44b97f14aa95f68323ae7159d39d2f",
+    "src/company_wiki/source_catalog/source_reader.py": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+    "src/company_wiki/source_catalog/config.py": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+    "src/company_wiki/source_catalog/service.py": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+    "src/company_wiki/source_catalog/store.py": "ccae2c324b2efbac3824cef4e3fa3cfa273583efb6aeac11334c70625e5fd99e",
+    "src/company_wiki/source_catalog/scanner.py": "4a79882979e07097a9996779dee1f642dfe0446a8422b7f2ce6ace2dcbe89846",
+    "src/company_wiki/source_catalog/resolver.py": "a9a5aa19afa5330223d45c484dfe4261bdc7964b209461030fa423acd40ba6d5",
+    "src/company_wiki/source_catalog/document_kinds.py": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+    "src/company_wiki/source_contract/source_export_v2.py": "95d245dd3ab72e9af1451f9dab4163954ab08ecf8655ecd280b3e215b33e5211"
+  },
+  "all_frozen_shas_match": true,
+  "old_intake_preserved": true,
+  "hygiene": {
+    "blocked_actions": [
+      "network"
+    ],
+    "network_calls": 0,
+    "LLM_calls": 0,
+    "provider_calls": 0,
+    "fees_usd": 0,
+    "real_originals_accessed": 0
+  },
+  "author_final": {
+    "tests": {
+      "exit": 0,
+      "seconds": 11.568,
+      "summary": [
+        "56 passed, 1 skipped, 1 warning in 10.97s"
+      ]
+    },
+    "runner": {
+      "exit": 0,
+      "seconds": 4.755,
+      "summary": []
+    },
+    "real_report_sha256": "bcbfaa7ae9c1ab496fd86b50ac617bd25060a50f57a20b956c55a4fb6e4fbf1f",
+    "scene_statuses": {
+      "S1": "PASS",
+      "S2": "PASS",
+      "S3": "PASS",
+      "S4": "PASS",
+      "S5": "PASS",
+      "S6": "PASS",
+      "S7": "PASS"
+    },
+    "three_logical_sources_four_doc_keys": true
+  },
+  "scope": "Windows synthetic tool/catalog/Reader/CLI only; no real OCR, LLM, cloud, POSIX or research certification"
+}

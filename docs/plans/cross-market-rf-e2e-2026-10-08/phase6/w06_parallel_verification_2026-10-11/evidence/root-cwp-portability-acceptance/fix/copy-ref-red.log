@@ -1,0 +1,25 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\_harness_worktrees\w06\cwp-portability-root
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 1 item
+
+tests\unit\test_w06_root_portability_oracle.py F                         [100%]
+
+================================== FAILURES ===================================
+___________ test_root_move_covers_copy_ref_as_well_as_primary_refs ____________
+tests\unit\test_w06_root_portability_oracle.py:583: in test_root_move_covers_copy_ref_as_well_as_primary_refs
+    assert oracle.evaluate_run(record).overall != oracle.STATUS_PASS
+E   AssertionError: assert 'PASS' != 'PASS'
+E    +  where 'PASS' = OracleVerdict(statuses={'S1': 'PASS', 'S2': 'PASS', 'S3': 'PASS', 'S4': 'PASS', 'S5': 'PASS', 'S6': 'PASS', 'S7': 'PASS'}, findings=(), overall='PASS').overall
+E    +    where OracleVerdict(statuses={'S1': 'PASS', 'S2': 'PASS', 'S3': 'PASS', 'S4': 'PASS', 'S5': 'PASS', 'S6': 'PASS', 'S7': 'PASS'}, findings=(), overall='PASS') = <function evaluate_run at 0x00000190D9A7B7E0>({'schema_version': 'cwp-root-portability/1', 'run': {'run_id': 'attempt-0001', 'runner_pid': 41000, 'started_at': '202..._kind_stable': True, 'nonperiodic_no_fake_fy': True}, 'status': 'PASS', 'actual': {'supported': True}, ...}, ...], ...})
+E    +      where <function evaluate_run at 0x00000190D9A7B7E0> = oracle.evaluate_run
+E    +  and   'PASS' = oracle.STATUS_PASS
+=========================== short test summary info ===========================
+FAILED tests/unit/test_w06_root_portability_oracle.py::test_root_move_covers_copy_ref_as_well_as_primary_refs
+============================== 1 failed in 0.44s ==============================
+

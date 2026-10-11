@@ -1,0 +1,42 @@
+{
+  "tools\\offline_contract_matrix\\cli_main.py": {
+    "sha256": "9d59382d186c45649bedda416eae9d6e95647b6012e6e3cc5af36d24682d4133",
+    "bytes": 11148
+  },
+  "tools\\offline_contract_matrix\\et_transcript_proxy.py": {
+    "sha256": "4730f9f55b98cbc91502b919118b393ab4e52b60cbc495ff42e522a9ff9006e9",
+    "bytes": 6125
+  },
+  "tools\\offline_contract_matrix\\fixture_builder.py": {
+    "sha256": "b12ba2f4a6574d2a5bf756438ec02c54d54b1b0b1d5cfd4773f6ff2b1d56463c",
+    "bytes": 14158
+  },
+  "tools\\offline_contract_matrix\\fixture_provider_adapter.py": {
+    "sha256": "2aca85c6a92417f4fb4781c388ee0300f2c6e90833a5daae2951cb62743c53b3",
+    "bytes": 7797
+  },
+  "tools\\offline_contract_matrix\\matrix_cases.py": {
+    "sha256": "c43695e4f165220483569a0589830fe05a366fb36ccc2674a9c9ee003528b116",
+    "bytes": 23167
+  },
+  "tools\\offline_contract_matrix\\oracle.py": {
+    "sha256": "249043b9abb1312e12e7ee26a177993d7e4aa8ac46e97b95c88e68526f614262",
+    "bytes": 4763
+  },
+  "tools\\offline_contract_matrix\\README.md": {
+    "sha256": "de7f935ba04364b1aa082953fb4c9eadf77dd0b55296c751e8a86d12b5729715",
+    "bytes": 6059
+  },
+  "tools\\offline_contract_matrix\\report.py": {
+    "sha256": "888000908cd515431b4b5623e45cc2832d0e41c093dfbb0b5ae9cce36e651c96",
+    "bytes": 2359
+  },
+  "tools\\offline_contract_matrix\\run.py": {
+    "sha256": "be0d23050d51326f716ad68b8503979645226ab164b738c6c5fa14b01dcdae37",
+    "bytes": 11024
+  },
+  "tests/test_w06_contract_matrix.py": {
+    "sha256": "ea64f9d40aa7eb11a925d07477508ecea1165fb45145c33a2876ea6b7cae7677",
+    "bytes": 6854
+  }
+}

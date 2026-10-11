@@ -1,0 +1,28 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_________ test_fixture_originals_distinguish_issuer_market_and_period _________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp/w06-fixture-red/test_fixture_originals_disting0')
+
+    def test_fixture_originals_distinguish_issuer_market_and_period(tmp_path):
+        import fixture_provider_adapter as adapter
+        from unittest.mock import patch
+        hashes = []
+        with patch.object(adapter, "_state", return_value={"provider_scenario":"serve"}):
+            for market, security in (("CN", "300750"), ("HK", "00700"), ("US", "AAPL")):
+                payload = {"market":market, "security_id":security, "document_kind":"annual_report", "fiscal_year":2024, "fiscal_period":"FY"}
+                discovered = adapter._discover(payload)["candidates"][0]
+                returned = adapter._fetch(["--staging-dir", str(tmp_path / market)], discovered)
+                hashes.append(returned["receipt"]["content_sha256"])
+            annual = adapter._discover({"market":"CN", "security_id":"300750", "document_kind":"annual_report", "fiscal_year":2024})["candidates"][0]
+            quarterly = adapter._discover({"market":"CN", "security_id":"300750", "document_kind":"quarterly_report", "fiscal_year":2024, "fiscal_period":"Q1"})["candidates"][0]
+>       assert len(set(hashes)) == 3, "fixture company originals collided in immutable SHA store"
+E       AssertionError: fixture company originals collided in immutable SHA store
+E       assert 1 == 3
+E        +  where 1 = len({'a8c4228e5c7e29cf85db21049d473478ee99581201ed04d3810a35091edd869c'})
+E        +    where {'a8c4228e5c7e29cf85db21049d473478ee99581201ed04d3810a35091edd869c'} = set(['a8c4228e5c7e29cf85db21049d473478ee99581201ed04d3810a35091edd869c', 'a8c4228e5c7e29cf85db21049d473478ee99581201ed04d3810a35091edd869c', 'a8c4228e5c7e29cf85db21049d473478ee99581201ed04d3810a35091edd869c'])
+
+tests\test_w06_matrix_runtime.py:187: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_w06_matrix_runtime.py::test_fixture_originals_distinguish_issuer_market_and_period
+1 failed, 13 deselected in 0.42s

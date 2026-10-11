@@ -1,0 +1,1528 @@
+{
+  "schema_version": "w06-cross-period-repro/1",
+  "meaning": "actual writer warm2024, new period request2025/2026; distinct identity/period bytes; no handmade assertion",
+  "output": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-evidence\\attempt-0df01e0fe1ee42918edd21e0fa299a20",
+  "warm": [
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "Apple Inc.",
+        "--market",
+        "US",
+        "--security-id",
+        "AAPL",
+        "--document-kind",
+        "annual_report",
+        "--fiscal-year",
+        "2024",
+        "--fiscal-period",
+        "FY",
+        "--as-of-date",
+        "2026-12-31",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_acquisition.yaml",
+        "--max-download-bytes",
+        "2000000",
+        "--max-download-seconds",
+        "10",
+        "--max-download-cost-usd",
+        "0"
+      ],
+      "exit_code": 0,
+      "response": {
+        "acquisition_observation": {
+          "cost_usd": null,
+          "entity_body_bytes": 619,
+          "http_exchanges": 0,
+          "http_exchanges_complete": null,
+          "http_observation": null,
+          "outcome": "downloaded_new",
+          "provider_started": true,
+          "schema_version": "acquisition-observation/1",
+          "usage_complete": true,
+          "usage_scope": "operation",
+          "wire_body_bytes": 0,
+          "wire_usage_complete": false
+        },
+        "candidate": {
+          "byte_size": 619,
+          "canonical_entity_id": null,
+          "capture_provenance": "indexed_location_manifest",
+          "capture_ready": true,
+          "collector_name": "w06-fixture-us",
+          "collector_version": "1.0.0",
+          "display_name": null,
+          "document_id": "urn:company-wiki:document:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+          "document_kind": "annual_report",
+          "fiscal_period": "FY",
+          "fiscal_year": 2024,
+          "form_type": null,
+          "https_url": "https://fixture.invalid/w06/w06-us-AAPL-annual_report-2024-FY",
+          "language": null,
+          "market": "US",
+          "mime_type": "application/pdf",
+          "period_end": null,
+          "prompt_injection_status": "not_reviewed",
+          "provider": "w06fixture",
+          "provider_document_id": "w06-us-AAPL-annual_report-2024-FY",
+          "published_date": "2026-12-31",
+          "retrieved_at": "2026-01-01T00:00:00Z",
+          "security_id": "AAPL",
+          "snapshot_sha256": "6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+          "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+          "source_ref": {
+            "byte_size": 619,
+            "content_sha256": "6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+            "document_id": "urn:company-wiki:document:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+          },
+          "title": "Synthetic US AAPL annual_report 2024 FY"
+        },
+        "download_events": 1,
+        "gap_plan": null,
+        "operation": "ensure",
+        "operation_schema_version": "1.0",
+        "outcome": "downloaded_new",
+        "policy_hash": "66bebab3e5fe0d5b8fd5bf0eae357c0238d9e83756b3975a4a56b71a5d99fd08",
+        "request_id": "urn:company-wiki:source-request:sha256:9fc42b69cdd60a2be99730ab1775dc29bbea3f6bbed0a1f95de02ae9c175bcfc",
+        "source_ref": {
+          "byte_size": 619,
+          "content_sha256": "6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+          "document_id": "urn:company-wiki:document:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+        },
+        "status": "completed"
+      },
+      "response_ref": "seed_us_annual_report_2024_FY.response.json",
+      "response_sha256": "3f9ed2b3dffe88a4dd5d992e02858607c9f89ce797940e409bb6e8327668ebc5",
+      "scope": "fixture-only initial CWP acquisition/import; separate from local reuse counters"
+    },
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "company_wiki.source_catalog.cli",
+        "--config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_catalog.yaml",
+        "ensure",
+        "--entity",
+        "宁德时代",
+        "--market",
+        "CN",
+        "--security-id",
+        "300750",
+        "--document-kind",
+        "annual_report",
+        "--fiscal-year",
+        "2024",
+        "--fiscal-period",
+        "FY",
+        "--as-of-date",
+        "2026-12-31",
+        "--source-ref-v2",
+        "--allow-download",
+        "--acquisition-config",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_acquisition.yaml",
+        "--max-download-bytes",
+        "2000000",
+        "--max-download-seconds",
+        "10",
+        "--max-download-cost-usd",
+        "0"
+      ],
+      "exit_code": 0,
+      "response": {
+        "acquisition_observation": {
+          "cost_usd": null,
+          "entity_body_bytes": 621,
+          "http_exchanges": 0,
+          "http_exchanges_complete": null,
+          "http_observation": null,
+          "outcome": "downloaded_new",
+          "provider_started": true,
+          "schema_version": "acquisition-observation/1",
+          "usage_complete": true,
+          "usage_scope": "operation",
+          "wire_body_bytes": 0,
+          "wire_usage_complete": false
+        },
+        "candidate": {
+          "byte_size": 621,
+          "canonical_entity_id": null,
+          "capture_provenance": "indexed_location_manifest",
+          "capture_ready": true,
+          "collector_name": "w06-fixture-cn",
+          "collector_version": "1.0.0",
+          "display_name": null,
+          "document_id": "urn:company-wiki:document:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+          "document_kind": "annual_report",
+          "fiscal_period": "FY",
+          "fiscal_year": 2024,
+          "form_type": null,
+          "https_url": "https://fixture.invalid/w06/w06-cn-300750-annual_report-2024-FY",
+          "language": null,
+          "market": "CN",
+          "mime_type": "application/pdf",
+          "period_end": null,
+          "prompt_injection_status": "not_reviewed",
+          "provider": "w06fixture",
+          "provider_document_id": "w06-cn-300750-annual_report-2024-FY",
+          "published_date": "2026-12-31",
+          "retrieved_at": "2026-01-01T00:00:00Z",
+          "security_id": "300750",
+          "snapshot_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+          "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+          "source_ref": {
+            "byte_size": 621,
+            "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+            "document_id": "urn:company-wiki:document:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+            "mime_type": "application/pdf",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+          },
+          "title": "Synthetic CN 300750 annual_report 2024 FY"
+        },
+        "download_events": 1,
+        "gap_plan": null,
+        "operation": "ensure",
+        "operation_schema_version": "1.0",
+        "outcome": "downloaded_new",
+        "policy_hash": "66bebab3e5fe0d5b8fd5bf0eae357c0238d9e83756b3975a4a56b71a5d99fd08",
+        "request_id": "urn:company-wiki:source-request:sha256:78f10a17faa812de4f03d09235b769872e75860f5ddb45ea7acfd59ea49a24ed",
+        "source_ref": {
+          "byte_size": 621,
+          "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+          "document_id": "urn:company-wiki:document:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+        },
+        "status": "completed"
+      },
+      "response_ref": "seed_cn_annual_report_2024_FY.response.json",
+      "response_sha256": "c14310999e87ba46116d80a0f8fc901f641634cd9e3331ba05711fcbd43a2e30",
+      "scope": "fixture-only initial CWP acquisition/import; separate from local reuse counters"
+    }
+  ],
+  "cases": [
+    {
+      "identity": "US",
+      "run": {
+        "exit_code": 2,
+        "response": {
+          "schema_version": "2.0",
+          "status": "not_found",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2026,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-12-31"
+          },
+          "filing": {
+            "status": "not_found",
+            "reason": "company-wiki ensure not_found",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "source_not_found",
+              "provider_started": null,
+              "usage_complete": null,
+              "retry_scope": "none"
+            },
+            "stage": "not_found"
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0,
+          "acquisition_observation": {
+            "schema_version": "acquisition-observation/1",
+            "usage_scope": "operation",
+            "outcome": "missing",
+            "provider_started": false,
+            "usage_complete": true,
+            "wire_usage_complete": true,
+            "http_exchanges_complete": true,
+            "wire_body_bytes": 0,
+            "entity_body_bytes": 0,
+            "http_exchanges": 0,
+            "cost_usd": null,
+            "http_observation": null
+          }
+        },
+        "stderr": "",
+        "request_ref": "warm2024_request2026_US.run1.request.json",
+        "response_ref": "warm2024_request2026_US.run1.response.json",
+        "stderr_ref": "warm2024_request2026_US.run1.stderr.txt",
+        "et_fixture_requests": 0,
+        "adapter_fixture_requests": 0,
+        "fixture_requests": 0,
+        "receipt_tag": "warm2024_request2026_US",
+        "fixture_scenario": "success",
+        "expected_original_content_sha256": null,
+        "request_sha256": "56c0029cd20980a086269225cc1d73c7beecfa0fb16c226dc029d4d96e0a3a74",
+        "response_sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940"
+      }
+    },
+    {
+      "identity": "CN",
+      "run": {
+        "exit_code": 2,
+        "response": {
+          "schema_version": "2.0",
+          "status": "not_found",
+          "request_period": {
+            "mode": "exact",
+            "fiscal_year": 2026,
+            "fiscal_period": "FY",
+            "as_of_date": "2026-12-31"
+          },
+          "filing": {
+            "status": "not_found",
+            "reason": "company-wiki ensure not_found",
+            "retryable": false,
+            "upstream_cause": {
+              "schema_version": "filing-upstream-cause/1",
+              "operation": "ensure",
+              "code": "source_not_found",
+              "provider_started": null,
+              "usage_complete": null,
+              "retry_scope": "none"
+            },
+            "stage": "not_found"
+          },
+          "transcript": {
+            "status": "not_requested",
+            "retryable": false
+          },
+          "calls": 2,
+          "downloads": 0,
+          "acquisition_observation": {
+            "schema_version": "acquisition-observation/1",
+            "usage_scope": "operation",
+            "outcome": "missing",
+            "provider_started": false,
+            "usage_complete": true,
+            "wire_usage_complete": true,
+            "http_exchanges_complete": true,
+            "wire_body_bytes": 0,
+            "entity_body_bytes": 0,
+            "http_exchanges": 0,
+            "cost_usd": null,
+            "http_observation": null
+          }
+        },
+        "stderr": "",
+        "request_ref": "warm2024_request2026_CN.run1.request.json",
+        "response_ref": "warm2024_request2026_CN.run1.response.json",
+        "stderr_ref": "warm2024_request2026_CN.run1.stderr.txt",
+        "et_fixture_requests": 0,
+        "adapter_fixture_requests": 0,
+        "fixture_requests": 0,
+        "receipt_tag": "warm2024_request2026_CN",
+        "fixture_scenario": "success",
+        "expected_original_content_sha256": null,
+        "request_sha256": "86ee58427a3af92172d7a0c81d4dd989de3eed1edd146db6a99b0be7150f648e",
+        "response_sha256": "078a382d682e87f6d0d9f8a69c8a26615f0b9a5926b9d8c002de5d398bc72940"
+      }
+    }
+  ],
+  "warm2025_attempt": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.cli",
+      "--config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_catalog.yaml",
+      "ensure",
+      "--entity",
+      "Apple Inc.",
+      "--market",
+      "US",
+      "--security-id",
+      "AAPL",
+      "--document-kind",
+      "annual_report",
+      "--fiscal-year",
+      "2025",
+      "--fiscal-period",
+      "FY",
+      "--as-of-date",
+      "2026-12-31",
+      "--source-ref-v2",
+      "--allow-download",
+      "--acquisition-config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\config\\source_acquisition.yaml",
+      "--max-download-bytes",
+      "2000000",
+      "--max-download-seconds",
+      "10",
+      "--max-download-cost-usd",
+      "0"
+    ],
+    "exit_code": 0,
+    "response": {
+      "acquisition_observation": {
+        "cost_usd": null,
+        "entity_body_bytes": 0,
+        "http_exchanges": 0,
+        "http_exchanges_complete": true,
+        "http_observation": null,
+        "outcome": "missing",
+        "provider_started": false,
+        "schema_version": "acquisition-observation/1",
+        "usage_complete": true,
+        "usage_scope": "operation",
+        "wire_body_bytes": 0,
+        "wire_usage_complete": true
+      },
+      "candidate": null,
+      "download_events": 0,
+      "gap_plan": null,
+      "operation": "ensure",
+      "operation_schema_version": "1.0",
+      "outcome": "missing",
+      "policy_hash": "66bebab3e5fe0d5b8fd5bf0eae357c0238d9e83756b3975a4a56b71a5d99fd08",
+      "request_id": "urn:company-wiki:source-request:sha256:e29ac9bc8a654d876fc10aa682d963610e8e54bc54966ef0c77526f6d0c7c0b8",
+      "source_ref": null,
+      "status": "not_found"
+    },
+    "response_ref": "seed_us_annual_report_2025_FY.response.json",
+    "response_sha256": "50b13c5baab8cb022634e58c0f7bccaf37c96f20ad525c06f6d01a19c2d64c10",
+    "scope": "fixture-only initial CWP acquisition/import; separate from local reuse counters"
+  },
+  "verified_facts": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-evidence\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\artifacts\\actual-verified-source-facts.json",
+    "exit_code": 0,
+    "sha256": "4c5fcd9b6f3d85a2e21fba7579f774952ded4c97cea5726e4fa28960c85289ad",
+    "records": [
+      {
+        "document_id": "urn:company-wiki:document:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+        "document_kind": "annual_report",
+        "published_date": "2026-12-31",
+        "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+        "content_sha256": "6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+        "metadata": {
+          "acquisition": {
+            "adapter_name": "w06-fixture-us",
+            "adapter_version": "1.0.0",
+            "amended": false,
+            "byte_size": 619,
+            "candidate": {
+              "adapter_payload_json": "{\"candidate_id\":\"w06-us-AAPL-annual_report-2024-FY\",\"document_kind\":\"annual_report\",\"filing_date\":\"2026-12-31\",\"fiscal_period\":\"FY\",\"fiscal_year\":2024,\"market\":\"US\",\"provider\":\"w06fixture\",\"provider_document_id\":\"w06-us-AAPL-annual_report-2024-FY\",\"source_url\":\"https://fixture.invalid/w06/w06-us-AAPL-annual_report-2024-FY\",\"title\":\"Synthetic US AAPL annual_report 2024 FY\"}",
+              "amended": false,
+              "candidate_id": "w06-us-AAPL-annual_report-2024-FY",
+              "document_kind": "annual_report",
+              "entity": "Apple Inc.",
+              "etag": null,
+              "filing_date": "2026-12-31",
+              "fiscal_period": "FY",
+              "fiscal_year": 2024,
+              "form_type": null,
+              "language": null,
+              "last_modified": null,
+              "market": "US",
+              "provider": "w06fixture",
+              "provider_document_id": "w06-us-AAPL-annual_report-2024-FY",
+              "remote_size": null,
+              "schema_version": "1.0",
+              "source_url": "https://fixture.invalid/w06/w06-us-AAPL-annual_report-2024-FY",
+              "title": "Synthetic US AAPL annual_report 2024 FY"
+            },
+            "company_name": "Apple Inc.",
+            "content_sha256": "6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+            "document_kind": "annual_report",
+            "etag": null,
+            "filing_date": "2026-12-31",
+            "fiscal_period": "FY",
+            "fiscal_year": 2024,
+            "form_type": null,
+            "language": null,
+            "last_modified": null,
+            "market": "US",
+            "mime_type": "application/pdf",
+            "provider": "w06fixture",
+            "provider_document_id": "w06-us-AAPL-annual_report-2024-FY",
+            "receipt": {
+              "adapter_name": "w06-fixture-us",
+              "adapter_version": "1.0.0",
+              "byte_size": 619,
+              "candidate_id": "w06-us-AAPL-annual_report-2024-FY",
+              "content_sha256": "6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de",
+              "etag": null,
+              "http_status": 200,
+              "last_modified": null,
+              "mime_type": "application/pdf",
+              "provider": "w06fixture",
+              "provider_document_id": "w06-us-AAPL-annual_report-2024-FY",
+              "retrieved_at": "2026-01-01T00:00:00Z",
+              "schema_version": "1.0",
+              "source_url": "https://fixture.invalid/w06/w06-us-AAPL-annual_report-2024-FY",
+              "staged_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\.source_catalog\\staging\\0a4e84893f6432cce2a04e12a981e464c0a0796f01b36e0a2d4b1b002c818edf\\w06-original.pdf"
+            },
+            "request": {
+              "allow_download": true,
+              "as_of_date": "2026-12-31",
+              "document_kind": "annual_report",
+              "entity": "Apple Inc.",
+              "fiscal_period": "FY",
+              "fiscal_year": 2024,
+              "form_type": null,
+              "language": null,
+              "market": "US",
+              "mode": null,
+              "provider": null,
+              "provider_document_id": null,
+              "schema_version": "1.0",
+              "security_id": "AAPL"
+            },
+            "request_id": "urn:company-wiki:source-request:sha256:9fc42b69cdd60a2be99730ab1775dc29bbea3f6bbed0a1f95de02ae9c175bcfc",
+            "retrieved_at": "2026-01-01T00:00:00Z",
+            "schema_version": "1.0",
+            "security_id": "AAPL",
+            "source_title": "Synthetic US AAPL annual_report 2024 FY",
+            "source_url": "https://fixture.invalid/w06/w06-us-AAPL-annual_report-2024-FY"
+          },
+          "admission": null,
+          "dayu_meta": null,
+          "group_key": "Apple Inc/raw/financial_reports/annual/6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de.pdf",
+          "r4_provenance": {
+            "fields": {
+              "acquisition.adapter_name": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "81b2cb0f137f"
+              },
+              "acquisition.adapter_version": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "39fe4a40977d"
+              },
+              "acquisition.amended": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "fcbcf165908d"
+              },
+              "acquisition.byte_size": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "86a3f9b13a5b"
+              },
+              "acquisition.candidate": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "5ca2ae53c142"
+              },
+              "acquisition.company_name": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "703060f35371"
+              },
+              "acquisition.content_sha256": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "b4643f4fc04d"
+              },
+              "acquisition.document_kind": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "3553b3ebba0b"
+              },
+              "acquisition.etag": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "74234e98afe7"
+              },
+              "acquisition.filing_date": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "7bf6d2e4c96f"
+              },
+              "acquisition.fiscal_period": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "28a46b09d326"
+              },
+              "acquisition.fiscal_year": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "6557739a6728"
+              },
+              "acquisition.form_type": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "74234e98afe7"
+              },
+              "acquisition.language": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "74234e98afe7"
+              },
+              "acquisition.last_modified": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "74234e98afe7"
+              },
+              "acquisition.market": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "b5e86cefc9cf"
+              },
+              "acquisition.mime_type": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "f75d8dab0e40"
+              },
+              "acquisition.provider": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "233ef6d7980f"
+              },
+              "acquisition.provider_document_id": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "47af5e032a05"
+              },
+              "acquisition.receipt": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "c5120d04f57e"
+              },
+              "acquisition.request": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "70bd91b2c345"
+              },
+              "acquisition.request_id": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "b91cf5782a52"
+              },
+              "acquisition.retrieved_at": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "e4c1e80f1133"
+              },
+              "acquisition.schema_version": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "a51162aeeb05"
+              },
+              "acquisition.security_id": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "7137fbcfb7bf"
+              },
+              "acquisition.source_title": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "f4bf4a3720d1"
+              },
+              "acquisition.source_url": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "197845e88416"
+              },
+              "document_kind": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "3553b3ebba0b"
+              },
+              "primary_source_id": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": false,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "61eeca6abeec"
+              },
+              "published_date": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "7bf6d2e4c96f"
+              },
+              "source_status": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": false,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "db0fb2bf5ebc"
+              },
+              "source_type": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": false,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "1636f817d9a2"
+              },
+              "title": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:26:59Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:6cfb919f52dfdb5f8be431db296f74d554a4c318b439fdcc1057d5c5d60428de"
+                  }
+                ],
+                "value": "f4bf4a3720d1"
+              }
+            },
+            "schema_version": "1.0"
+          },
+          "root_id": "company_raw",
+          "scanner_version": "1.0.2"
+        },
+        "actual_verified_assertion": null,
+        "actual_evidence_payload": null
+      },
+      {
+        "document_id": "urn:company-wiki:document:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+        "document_kind": "annual_report",
+        "published_date": "2026-12-31",
+        "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+        "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+        "metadata": {
+          "acquisition": {
+            "adapter_name": "w06-fixture-cn",
+            "adapter_version": "1.0.0",
+            "amended": false,
+            "byte_size": 621,
+            "candidate": {
+              "adapter_payload_json": "{\"candidate_id\":\"w06-cn-300750-annual_report-2024-FY\",\"document_kind\":\"annual_report\",\"filing_date\":\"2026-12-31\",\"fiscal_period\":\"FY\",\"fiscal_year\":2024,\"market\":\"CN\",\"provider\":\"w06fixture\",\"provider_document_id\":\"w06-cn-300750-annual_report-2024-FY\",\"source_url\":\"https://fixture.invalid/w06/w06-cn-300750-annual_report-2024-FY\",\"title\":\"Synthetic CN 300750 annual_report 2024 FY\"}",
+              "amended": false,
+              "candidate_id": "w06-cn-300750-annual_report-2024-FY",
+              "document_kind": "annual_report",
+              "entity": "宁德时代",
+              "etag": null,
+              "filing_date": "2026-12-31",
+              "fiscal_period": "FY",
+              "fiscal_year": 2024,
+              "form_type": null,
+              "language": null,
+              "last_modified": null,
+              "market": "CN",
+              "provider": "w06fixture",
+              "provider_document_id": "w06-cn-300750-annual_report-2024-FY",
+              "remote_size": null,
+              "schema_version": "1.0",
+              "source_url": "https://fixture.invalid/w06/w06-cn-300750-annual_report-2024-FY",
+              "title": "Synthetic CN 300750 annual_report 2024 FY"
+            },
+            "company_name": "宁德时代",
+            "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+            "document_kind": "annual_report",
+            "etag": null,
+            "filing_date": "2026-12-31",
+            "fiscal_period": "FY",
+            "fiscal_year": 2024,
+            "form_type": null,
+            "language": null,
+            "last_modified": null,
+            "market": "CN",
+            "mime_type": "application/pdf",
+            "provider": "w06fixture",
+            "provider_document_id": "w06-cn-300750-annual_report-2024-FY",
+            "receipt": {
+              "adapter_name": "w06-fixture-cn",
+              "adapter_version": "1.0.0",
+              "byte_size": 621,
+              "candidate_id": "w06-cn-300750-annual_report-2024-FY",
+              "content_sha256": "ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803",
+              "etag": null,
+              "http_status": 200,
+              "last_modified": null,
+              "mime_type": "application/pdf",
+              "provider": "w06fixture",
+              "provider_document_id": "w06-cn-300750-annual_report-2024-FY",
+              "retrieved_at": "2026-01-01T00:00:00Z",
+              "schema_version": "1.0",
+              "source_url": "https://fixture.invalid/w06/w06-cn-300750-annual_report-2024-FY",
+              "staged_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-owned\\attempt-0df01e0fe1ee42918edd21e0fa299a20\\wiki\\.source_catalog\\staging\\850aa66bc68f4fd9c3a91a2392bea7824a7a592c5c547e5ba580cc67d56f4bc9\\w06-original.pdf"
+            },
+            "request": {
+              "allow_download": true,
+              "as_of_date": "2026-12-31",
+              "document_kind": "annual_report",
+              "entity": "宁德时代",
+              "fiscal_period": "FY",
+              "fiscal_year": 2024,
+              "form_type": null,
+              "language": null,
+              "market": "CN",
+              "mode": null,
+              "provider": null,
+              "provider_document_id": null,
+              "schema_version": "1.0",
+              "security_id": "300750"
+            },
+            "request_id": "urn:company-wiki:source-request:sha256:78f10a17faa812de4f03d09235b769872e75860f5ddb45ea7acfd59ea49a24ed",
+            "retrieved_at": "2026-01-01T00:00:00Z",
+            "schema_version": "1.0",
+            "security_id": "300750",
+            "source_title": "Synthetic CN 300750 annual_report 2024 FY",
+            "source_url": "https://fixture.invalid/w06/w06-cn-300750-annual_report-2024-FY"
+          },
+          "admission": null,
+          "dayu_meta": null,
+          "group_key": "宁德时代/raw/financial_reports/annual/ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803.pdf",
+          "r4_provenance": {
+            "fields": {
+              "acquisition.adapter_name": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "3bffbf4e86e9"
+              },
+              "acquisition.adapter_version": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "39fe4a40977d"
+              },
+              "acquisition.amended": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "fcbcf165908d"
+              },
+              "acquisition.byte_size": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "90b0ce469fbd"
+              },
+              "acquisition.candidate": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "882051f951e0"
+              },
+              "acquisition.company_name": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "e93263fecf68"
+              },
+              "acquisition.content_sha256": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "94103912c2b3"
+              },
+              "acquisition.document_kind": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "3553b3ebba0b"
+              },
+              "acquisition.etag": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "74234e98afe7"
+              },
+              "acquisition.filing_date": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "7bf6d2e4c96f"
+              },
+              "acquisition.fiscal_period": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "28a46b09d326"
+              },
+              "acquisition.fiscal_year": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "6557739a6728"
+              },
+              "acquisition.form_type": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "74234e98afe7"
+              },
+              "acquisition.language": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "74234e98afe7"
+              },
+              "acquisition.last_modified": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "74234e98afe7"
+              },
+              "acquisition.market": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "8b82357795af"
+              },
+              "acquisition.mime_type": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "f75d8dab0e40"
+              },
+              "acquisition.provider": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "233ef6d7980f"
+              },
+              "acquisition.provider_document_id": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "1c557ff5d768"
+              },
+              "acquisition.receipt": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "43ecf46a10ab"
+              },
+              "acquisition.request": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "4c92d0700f12"
+              },
+              "acquisition.request_id": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "7e0b258639e2"
+              },
+              "acquisition.retrieved_at": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "e4c1e80f1133"
+              },
+              "acquisition.schema_version": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "a51162aeeb05"
+              },
+              "acquisition.security_id": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "d45267fe5d25"
+              },
+              "acquisition.source_title": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "e1350d69507a"
+              },
+              "acquisition.source_url": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "04a1ca2da660"
+              },
+              "document_kind": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "3553b3ebba0b"
+              },
+              "primary_source_id": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": false,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "c8bc777ae0a3"
+              },
+              "published_date": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "7bf6d2e4c96f"
+              },
+              "source_status": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": false,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "db0fb2bf5ebc"
+              },
+              "source_type": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": false,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "1636f817d9a2"
+              },
+              "title": {
+                "conflicts": [],
+                "sources": [
+                  {
+                    "declared": true,
+                    "observed_at": "2026-10-11T13:27:00Z",
+                    "role": "incoming",
+                    "source_id": "urn:company-wiki:source:sha256:ec4b1c6b418644c8a4d9979212d83cff0e9171d19f5bd9cae0c1fd98cb5a8803"
+                  }
+                ],
+                "value": "e1350d69507a"
+              }
+            },
+            "schema_version": "1.0"
+          },
+          "root_id": "company_raw",
+          "scanner_version": "1.0.2"
+        },
+        "actual_verified_assertion": null,
+        "actual_evidence_payload": null
+      }
+    ]
+  },
+  "adapter_invocations": [
+    {
+      "receipt_tag": "seed_us_annual_report_2024_FY",
+      "action": "discover",
+      "request_kind": "annual_report",
+      "request_year": 2024,
+      "request_market": "US",
+      "scenario": "serve",
+      "status": "ok",
+      "n_candidates": 1,
+      "has_receipt": false
+    },
+    {
+      "receipt_tag": "seed_us_annual_report_2024_FY",
+      "action": "fetch",
+      "request_kind": "annual_report",
+      "request_year": 2024,
+      "request_market": "US",
+      "scenario": "serve",
+      "status": "ok",
+      "n_candidates": 0,
+      "has_receipt": true
+    },
+    {
+      "receipt_tag": "seed_cn_annual_report_2024_FY",
+      "action": "discover",
+      "request_kind": "annual_report",
+      "request_year": 2024,
+      "request_market": "CN",
+      "scenario": "serve",
+      "status": "ok",
+      "n_candidates": 1,
+      "has_receipt": false
+    },
+    {
+      "receipt_tag": "seed_cn_annual_report_2024_FY",
+      "action": "fetch",
+      "request_kind": "annual_report",
+      "request_year": 2024,
+      "request_market": "CN",
+      "scenario": "serve",
+      "status": "ok",
+      "n_candidates": 0,
+      "has_receipt": true
+    }
+  ],
+  "guard": [
+    {
+      "op": "guard_boot",
+      "pid": 47984
+    },
+    {
+      "op": "guard_boot",
+      "pid": 31036
+    },
+    {
+      "op": "guard_boot",
+      "pid": 70344
+    },
+    {
+      "op": "guard_boot",
+      "pid": 48476
+    },
+    {
+      "op": "guard_boot",
+      "pid": 35976
+    },
+    {
+      "op": "guard_boot",
+      "pid": 20708
+    },
+    {
+      "op": "guard_boot",
+      "pid": 68620
+    },
+    {
+      "op": "guard_boot",
+      "pid": 12416
+    },
+    {
+      "op": "guard_boot",
+      "pid": 74000
+    },
+    {
+      "op": "guard_boot",
+      "pid": 75160
+    },
+    {
+      "op": "guard_boot",
+      "pid": 40592
+    },
+    {
+      "op": "guard_boot",
+      "pid": 5824
+    },
+    {
+      "op": "guard_boot",
+      "pid": 41764
+    },
+    {
+      "op": "guard_boot",
+      "pid": 40536
+    }
+  ],
+  "restore": {
+    "owned_parent_shape_preserved": true,
+    "output_parent_initially_existed": false,
+    "retained_output_is_explicit_evidence": true,
+    "scratch_torn_down": true,
+    "preexisting_parent_entries_preserved": true,
+    "restored": true,
+    "output": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-repro-evidence\\attempt-0df01e0fe1ee42918edd21e0fa299a20"
+  },
+  "production_stat_unchanged": true,
+  "remaining_seconds": 37.29211920000671
+}

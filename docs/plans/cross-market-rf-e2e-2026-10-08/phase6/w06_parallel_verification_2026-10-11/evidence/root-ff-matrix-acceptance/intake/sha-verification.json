@@ -1,0 +1,380 @@
+{
+  "rows": [
+    {
+      "group": "changed_files",
+      "path": "tools/offline_contract_matrix/cli_main.py",
+      "expected": {
+        "path": "tools/offline_contract_matrix/cli_main.py",
+        "sha256": "9d59382d186c45649bedda416eae9d6e95647b6012e6e3cc5af36d24682d4133",
+        "purpose": "offline contract-matrix tool"
+      },
+      "actual": {
+        "sha256": "9d59382d186c45649bedda416eae9d6e95647b6012e6e3cc5af36d24682d4133",
+        "bytes": 11148
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": "tools/offline_contract_matrix/et_transcript_proxy.py",
+      "expected": {
+        "path": "tools/offline_contract_matrix/et_transcript_proxy.py",
+        "sha256": "4730f9f55b98cbc91502b919118b393ab4e52b60cbc495ff42e522a9ff9006e9",
+        "purpose": "offline contract-matrix tool"
+      },
+      "actual": {
+        "sha256": "4730f9f55b98cbc91502b919118b393ab4e52b60cbc495ff42e522a9ff9006e9",
+        "bytes": 6125
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": "tools/offline_contract_matrix/fixture_builder.py",
+      "expected": {
+        "path": "tools/offline_contract_matrix/fixture_builder.py",
+        "sha256": "b12ba2f4a6574d2a5bf756438ec02c54d54b1b0b1d5cfd4773f6ff2b1d56463c",
+        "purpose": "offline contract-matrix tool"
+      },
+      "actual": {
+        "sha256": "b12ba2f4a6574d2a5bf756438ec02c54d54b1b0b1d5cfd4773f6ff2b1d56463c",
+        "bytes": 14158
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": "tools/offline_contract_matrix/fixture_provider_adapter.py",
+      "expected": {
+        "path": "tools/offline_contract_matrix/fixture_provider_adapter.py",
+        "sha256": "2aca85c6a92417f4fb4781c388ee0300f2c6e90833a5daae2951cb62743c53b3",
+        "purpose": "offline contract-matrix tool"
+      },
+      "actual": {
+        "sha256": "2aca85c6a92417f4fb4781c388ee0300f2c6e90833a5daae2951cb62743c53b3",
+        "bytes": 7797
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": "tools/offline_contract_matrix/matrix_cases.py",
+      "expected": {
+        "path": "tools/offline_contract_matrix/matrix_cases.py",
+        "sha256": "c43695e4f165220483569a0589830fe05a366fb36ccc2674a9c9ee003528b116",
+        "purpose": "offline contract-matrix tool"
+      },
+      "actual": {
+        "sha256": "c43695e4f165220483569a0589830fe05a366fb36ccc2674a9c9ee003528b116",
+        "bytes": 23167
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": "tools/offline_contract_matrix/oracle.py",
+      "expected": {
+        "path": "tools/offline_contract_matrix/oracle.py",
+        "sha256": "249043b9abb1312e12e7ee26a177993d7e4aa8ac46e97b95c88e68526f614262",
+        "purpose": "offline contract-matrix tool"
+      },
+      "actual": {
+        "sha256": "249043b9abb1312e12e7ee26a177993d7e4aa8ac46e97b95c88e68526f614262",
+        "bytes": 4763
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": "tools/offline_contract_matrix/report.py",
+      "expected": {
+        "path": "tools/offline_contract_matrix/report.py",
+        "sha256": "888000908cd515431b4b5623e45cc2832d0e41c093dfbb0b5ae9cce36e651c96",
+        "purpose": "offline contract-matrix tool"
+      },
+      "actual": {
+        "sha256": "888000908cd515431b4b5623e45cc2832d0e41c093dfbb0b5ae9cce36e651c96",
+        "bytes": 2359
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": "tools/offline_contract_matrix/run.py",
+      "expected": {
+        "path": "tools/offline_contract_matrix/run.py",
+        "sha256": "be0d23050d51326f716ad68b8503979645226ab164b738c6c5fa14b01dcdae37",
+        "purpose": "offline contract-matrix tool"
+      },
+      "actual": {
+        "sha256": "be0d23050d51326f716ad68b8503979645226ab164b738c6c5fa14b01dcdae37",
+        "bytes": 11024
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": "tools/offline_contract_matrix/README.md",
+      "expected": {
+        "path": "tools/offline_contract_matrix/README.md",
+        "sha256": "de7f935ba04364b1aa082953fb4c9eadf77dd0b55296c751e8a86d12b5729715",
+        "purpose": "coverage matrix map + run docs"
+      },
+      "actual": {
+        "sha256": "de7f935ba04364b1aa082953fb4c9eadf77dd0b55296c751e8a86d12b5729715",
+        "bytes": 6059
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": "tests/test_w06_contract_matrix.py",
+      "expected": {
+        "path": "tests/test_w06_contract_matrix.py",
+        "sha256": "ea64f9d40aa7eb11a925d07477508ecea1165fb45145c33a2876ea6b7cae7677",
+        "purpose": "oracle RED + fixture/report unit tests"
+      },
+      "actual": {
+        "sha256": "ea64f9d40aa7eb11a925d07477508ecea1165fb45145c33a2876ea6b7cae7677",
+        "bytes": 6854
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": ".planning/w06-ff-matrix/findings.md",
+      "expected": {
+        "path": ".planning/w06-ff-matrix/findings.md",
+        "sha256": "ad6ce3d6fd553fdd7e0df20926930dc90c72f0332b060dcf66f8e782351c3904",
+        "purpose": "lane planning files"
+      },
+      "actual": {
+        "sha256": "ad6ce3d6fd553fdd7e0df20926930dc90c72f0332b060dcf66f8e782351c3904",
+        "bytes": 12446
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": ".planning/w06-ff-matrix/progress.md",
+      "expected": {
+        "path": ".planning/w06-ff-matrix/progress.md",
+        "sha256": "573067b2d225795fd291417f21c9471e5a7871e2d717fe39e299435ee9f85702",
+        "purpose": "lane planning files"
+      },
+      "actual": {
+        "sha256": "5e12216bd650caee64fddbd0d5dbfb86a74665e61635c9049849285f074b0fd1",
+        "bytes": 2175
+      },
+      "sha_match": false,
+      "bytes_match": true
+    },
+    {
+      "group": "changed_files",
+      "path": ".planning/w06-ff-matrix/task_plan.md",
+      "expected": {
+        "path": ".planning/w06-ff-matrix/task_plan.md",
+        "sha256": "dfa2744ef834b11a93c2ab7141a5d8bdea380fb52619a2f701337b1a76395c8d",
+        "purpose": "lane planning files"
+      },
+      "actual": {
+        "sha256": "9d60d4356dde9a6cace63b9a7bf5b3a22703fecc024f94013d5e7499028bd0ba",
+        "bytes": 2856
+      },
+      "sha_match": false,
+      "bytes_match": true
+    },
+    {
+      "group": "input_evidence",
+      "path": "docs/handoffs/w06-ff-matrix/input/construction_card.md",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/input/construction_card.md",
+        "sha256": "27e66f0b7d3b3a5e9a12b2f5ff898d97accf58176c6f8607faebbafa4a394e0d",
+        "bytes": 7102
+      },
+      "actual": {
+        "sha256": "27e66f0b7d3b3a5e9a12b2f5ff898d97accf58176c6f8607faebbafa4a394e0d",
+        "bytes": 7102
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "input_evidence",
+      "path": "docs/handoffs/w06-ff-matrix/input/handoff_contract.md",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/input/handoff_contract.md",
+        "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+        "bytes": 3345
+      },
+      "actual": {
+        "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+        "bytes": 3345
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "input_evidence",
+      "path": "docs/handoffs/w06-ff-matrix/input/inputs.json",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/input/inputs.json",
+        "sha256": "9ab29e07ca0ff74e45cf5a72961408371cb3c12966a474caaf1e9101feb3cc7f",
+        "bytes": 11682
+      },
+      "actual": {
+        "sha256": "9ab29e07ca0ff74e45cf5a72961408371cb3c12966a474caaf1e9101feb3cc7f",
+        "bytes": 11682
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "input_evidence",
+      "path": "docs/handoffs/w06-ff-matrix/input/ROOT_INTERFACE_AMENDMENT.md",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/input/ROOT_INTERFACE_AMENDMENT.md",
+        "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+        "bytes": 2220
+      },
+      "actual": {
+        "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+        "bytes": 2220
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "input_evidence",
+      "path": "docs/handoffs/w06-ff-matrix/input/manifest.json",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/input/manifest.json",
+        "sha256": "6a919bdba4cb9b7090f9bbe734075d83e5fbbdfc1cf48f5d4a0b56933fb33e5c",
+        "bytes": 547
+      },
+      "actual": {
+        "sha256": "6a919bdba4cb9b7090f9bbe734075d83e5fbbdfc1cf48f5d4a0b56933fb33e5c",
+        "bytes": 547
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "input_evidence",
+      "path": "docs/handoffs/w06-ff-matrix/input/amendment_manifest.json",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/input/amendment_manifest.json",
+        "sha256": "79277b90d41ae32fb0b0773655f82dad8cde81c2183c09fd1858de7281e15e16",
+        "bytes": 374
+      },
+      "actual": {
+        "sha256": "79277b90d41ae32fb0b0773655f82dad8cde81c2183c09fd1858de7281e15e16",
+        "bytes": 374
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "manifest",
+      "path": "docs/handoffs/w06-ff-matrix/handoff.json",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/handoff.json",
+        "sha256": "c597fd30d21a04290aa8aa067e60a77b91eb74a5618060aef9c1b9a48f227d14",
+        "bytes": 9820
+      },
+      "actual": {
+        "sha256": "c597fd30d21a04290aa8aa067e60a77b91eb74a5618060aef9c1b9a48f227d14",
+        "bytes": 9820
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "manifest",
+      "path": "docs/handoffs/w06-ff-matrix/handoff.md",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/handoff.md",
+        "sha256": "3a42c338c6635871206fbdf6b6dc6c3c86e8404908bc8d64560577b66bf2f6ca",
+        "bytes": 3145
+      },
+      "actual": {
+        "sha256": "3a42c338c6635871206fbdf6b6dc6c3c86e8404908bc8d64560577b66bf2f6ca",
+        "bytes": 3145
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "manifest",
+      "path": "docs/handoffs/w06-ff-matrix/attempts/attempt-1/report.json",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/attempts/attempt-1/report.json",
+        "sha256": "86de4ad2d41af513fc002fb2650700d62e4b26d777b602cd2a4caebda27c5224",
+        "bytes": 24113
+      },
+      "actual": {
+        "sha256": "86de4ad2d41af513fc002fb2650700d62e4b26d777b602cd2a4caebda27c5224",
+        "bytes": 24113
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "manifest",
+      "path": "docs/handoffs/w06-ff-matrix/attempts/attempt-5/report.json",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/attempts/attempt-5/report.json",
+        "sha256": "5729b09e1b0aea0d3d4f70cb1e42b2d6d7825c4a9086ec5d3c40f5e56d1df35c",
+        "bytes": 23114
+      },
+      "actual": {
+        "sha256": "5729b09e1b0aea0d3d4f70cb1e42b2d6d7825c4a9086ec5d3c40f5e56d1df35c",
+        "bytes": 23114
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "manifest",
+      "path": "docs/handoffs/w06-ff-matrix/attempts/attempt-5/restore.json",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/attempts/attempt-5/restore.json",
+        "sha256": "c47da4489ac5d6d771f646e504a300c4e9950691ab244def0e1644df54c8d2bc",
+        "bytes": 113
+      },
+      "actual": {
+        "sha256": "c47da4489ac5d6d771f646e504a300c4e9950691ab244def0e1644df54c8d2bc",
+        "bytes": 113
+      },
+      "sha_match": true,
+      "bytes_match": true
+    },
+    {
+      "group": "manifest",
+      "path": "docs/handoffs/w06-ff-matrix/logs/unit-tests.log",
+      "expected": {
+        "path": "docs/handoffs/w06-ff-matrix/logs/unit-tests.log",
+        "sha256": "b7da013ae6f980669e8e4620bb4c2c85b3006c5969238e809f2e2f11bf7a42c2",
+        "bytes": 101
+      },
+      "actual": {
+        "sha256": "b7da013ae6f980669e8e4620bb4c2c85b3006c5969238e809f2e2f11bf7a42c2",
+        "bytes": 101
+      },
+      "sha_match": true,
+      "bytes_match": true
+    }
+  ],
+  "all_match": false
+}

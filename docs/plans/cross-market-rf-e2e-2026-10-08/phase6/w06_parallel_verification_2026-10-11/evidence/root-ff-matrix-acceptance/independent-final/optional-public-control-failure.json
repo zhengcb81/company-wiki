@@ -1,0 +1,11 @@
+{
+  "status": "UNCOMPLETED_OPTIONAL_CONTROL",
+  "operation": "Context.warm_seed(CN, annual_report, 2024, FY)",
+  "observed_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "location": "run.py warm_seed json.loads(proc.stdout)",
+  "cause": "unknown: child stderr was not retained before owned cleanup",
+  "does_not_prove_producer_fault": true,
+  "actual_public_reader_control_closed": false,
+  "repeated": false,
+  "scratch_restored": true
+}

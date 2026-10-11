@@ -1,0 +1,51 @@
+{
+  "schema_version": "w06-portability-independent-manifest/1",
+  "verdict": "FAIL_NEW_ORACLE_EXPECTATION_CLASSIFICATION",
+  "files": [
+    {
+      "path": "counterexamples.json",
+      "byte_size": 3089,
+      "sha256": "8c814c036659c8de9275824e26bb7e872c5a84fd3df299a037b62da4bda0509a"
+    },
+    {
+      "path": "finalize.py",
+      "byte_size": 11468,
+      "sha256": "044b01c8d7c77b88c1807921fafac60b2bff8e7b798ee734fe1f1d562192acaf"
+    },
+    {
+      "path": "initial-runtime-diagnostic.log",
+      "byte_size": 822,
+      "sha256": "20b7f6b4aebb8e8e92c7c4b77c9cc58ceda2a8b917b2404c0c771c20786c12c3"
+    },
+    {
+      "path": "oracle-results-final.json",
+      "byte_size": 10607,
+      "sha256": "daf9cd4441275069b3f52cf1231ff7a62603c00bf4d8d0cbd06478ad220462bd"
+    },
+    {
+      "path": "oracle-results.json",
+      "byte_size": 10607,
+      "sha256": "daf9cd4441275069b3f52cf1231ff7a62603c00bf4d8d0cbd06478ad220462bd"
+    },
+    {
+      "path": "probes.py",
+      "byte_size": 15000,
+      "sha256": "f3ac101f1717450c067873cfecdd295b52bdf2200b570832dd8f64c492db9264"
+    },
+    {
+      "path": "report.json",
+      "byte_size": 3471,
+      "sha256": "c0a2bfa8963d8ea13212faef76e3f2dd589a75977d07f5d83ab64d5edfcd97bf"
+    },
+    {
+      "path": "report.md",
+      "byte_size": 5701,
+      "sha256": "c0e43e099f4143de9ded3bbcf798b0b1d86589b456b104945ee8e4d847925dc0"
+    },
+    {
+      "path": "results.json",
+      "byte_size": 22760,
+      "sha256": "feb158465d538d228b94718e2173d20d23f151129e817e9ddb68b978583fecc7"
+    }
+  ]
+}

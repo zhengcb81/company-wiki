@@ -1,0 +1,56 @@
+{
+  "schema_version": "root-cwp-portability-intake-manifest/1",
+  "note": "Only independent intake files. Manifest does not hash itself. Prior FAIL attempts preserved.",
+  "files": [
+    {
+      "path": "independent-review.json",
+      "sha256": "ba647a5c967ed3ebbae1caecc1eb33226a0f9ecdc0166236a0826a7e92b2091a",
+      "bytes": 11716
+    },
+    {
+      "path": "independent-review.md",
+      "sha256": "5cc8f8511f6a0cd40ef279f3cc18ba4ac6e3ea87a57f02e387451aefa37e9a83",
+      "bytes": 6200
+    },
+    {
+      "path": "intake.json",
+      "sha256": "0c86cb26ea101bea21e5b91c4133362752e88b261e39e6a5633f126c7ccc0dd6",
+      "bytes": 21770
+    },
+    {
+      "path": "inventory.py",
+      "sha256": "f9265cc491b0edca10f6d11d8cc25c6acb02a1c034421b6320e31cd88337ae06",
+      "bytes": 4337
+    },
+    {
+      "path": "probes.json",
+      "sha256": "7184f6704b33e93394b8314317bb57a3389986852305ad2dc38ce00a178ba0ee",
+      "bytes": 2723
+    },
+    {
+      "path": "probes.py",
+      "sha256": "3f2475e5c550710b400606e094829594fa2fe17ef4ac6ddc5557eb8d238cce3f",
+      "bytes": 14163
+    },
+    {
+      "path": "reader-e2e-attempt2.json",
+      "sha256": "6d95600128417c325f8f02ba9d45884105b1b9be24bdfa268df4cf0446731175",
+      "bytes": 1266
+    },
+    {
+      "path": "reader-e2e-attempt3.json",
+      "sha256": "33a746d183c1529204439f22896118568feb43f789b71072ccf49b3582e0d9eb",
+      "bytes": 2939
+    },
+    {
+      "path": "reader_e2e_attempt2.py",
+      "sha256": "5f09f13d93df8801f43f1d13bbd9b93bec9e555cd96325c368739362b6b4a8a0",
+      "bytes": 12351
+    },
+    {
+      "path": "reader_e2e_attempt3.py",
+      "sha256": "afecf6f2ed1d7e35d6de94a352335460da510c17b63bb3b817d404440a1f4ff1",
+      "bytes": 12287
+    }
+  ]
+}

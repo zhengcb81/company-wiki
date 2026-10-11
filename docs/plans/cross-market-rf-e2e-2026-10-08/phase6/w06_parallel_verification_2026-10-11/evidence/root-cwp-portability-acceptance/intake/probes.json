@@ -1,0 +1,90 @@
+{
+  "schema_version": "root-w06-cwp-portability-independent-probes/1",
+  "status": "FAIL_HARNESS_ACCEPTANCE",
+  "observations": {
+    "author_report_oracle": "PASS",
+    "omitted_S2_to_S7": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "S2_only_one_original_reopened": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "S5_new_version_read_failed": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "receipt_only_method_claims_returned_bytes": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "wrong_root_after_move": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "S7_export_path_fields_present": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "malformed_S2_actual": {
+      "actual": "CRASH",
+      "exception": "AttributeError",
+      "detail": "'list' object has no attribute 'get'"
+    },
+    "annual_period_truth_self_rewritten_unknown": {
+      "actual": "PASS",
+      "findings": []
+    },
+    "cleanup_existing_generated_name_sentinels": {
+      "before": {
+        "exists": true,
+        "sentinels": [
+          {
+            "path_ref": "cfg/existing-sentinel.txt",
+            "sha256": "5c1d863e32a035e4c74b603c8f8a1b1040728c10ebd24a8d8c312adeb3c5694e"
+          },
+          {
+            "path_ref": "logs/existing-sentinel.txt",
+            "sha256": "2ff0be00ab31ff8f483667a9fcc83eda8ea9cf651169e9453c8751eccae3d15c"
+          },
+          {
+            "path_ref": "scratch/existing-sentinel.txt",
+            "sha256": "9268baff1c24875194928d9d567deadf8213b9341f26431874ae6e85dc6d599f"
+          }
+        ]
+      },
+      "after_actual_cleanup": {
+        "exists": true,
+        "sentinels": []
+      },
+      "restored_returned": false,
+      "raw_unchanged_returned": true,
+      "lost_sentinels": 3
+    },
+    "cleanup_counterexample_root_restored_absent": true,
+    "canonical_synthetic_reader_e2e": {
+      "status": "HARNESS_OR_PRODUCT_FAIL",
+      "canonical_binding": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\__init__.py",
+      "current_code_head": "0381418eea0d3bfa5ab08b81d176c16ea07101b2",
+      "initial": "absent",
+      "source_ref_schema": "2.0",
+      "original_count": 4,
+      "provider_calls": 0,
+      "error": "RuntimeError",
+      "detail": "Could not determine home directory.",
+      "seconds": 0.037,
+      "final": "absent"
+    }
+  },
+  "runtime_hygiene": {
+    "credential_environment_inherited": false,
+    "blocked_actions": [],
+    "actual_network_calls": 0,
+    "provider_calls": 0,
+    "LLM_calls": 0,
+    "fees_usd": 0,
+    "raw_originals_accessed": 0,
+    "synthetic_files_only": true
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "root-w06-cwp-portability-independent-probes/1",
+  "status": "PASS",
+  "observations": {
+    "consumer_spy_replaces_wrong_ref_metadata": {
+      "actual_exit": 0,
+      "status": "ok",
+      "input_byte_size": 256,
+      "actual_byte_size": 255,
+      "canonical_direct_refusal": "source_ref_changed",
+      "source_layer_binding": "canonical current main preloaded",
+      "audit_prefix_relocation_override_only": true
+    },
+    "canonical_synthetic_reader_e2e": {
+      "status": "PASS",
+      "canonical_binding": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\__init__.py",
+      "current_code_head": "ae0ca0d3c03f4a974ff26e472860ee306959d091",
+      "initial": "absent",
+      "source_ref_schema": "2.0",
+      "original_count": 4,
+      "provider_calls": 0,
+      "register_query_open_reads": [
+        {
+          "doc_key": "pdf",
+          "sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "fiscal_year": 2025
+        },
+        {
+          "doc_key": "htm",
+          "sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+          "fiscal_year": null
+        },
+        {
+          "doc_key": "txt",
+          "sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+          "fiscal_year": null
+        },
+        {
+          "doc_key": "txt_copy",
+          "sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+          "fiscal_year": null
+        }
+      ],
+      "old_ref_after_move": "exact_bytes",
+      "policy_change_observed": true,
+      "duplicate_fallback": "exact_bytes",
+      "corruption": {
+        "status": "unavailable",
+        "reason": "no_verified_location",
+        "detail": "content_sha256_mismatch"
+      },
+      "unsupported_ref_schema": "named_refusal",
+      "fresh_child": {
+        "status": "ok",
+        "pid": 57468,
+        "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+        "byte_size": 255,
+        "binding": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\__init__.py"
+      },
+      "exact_ref_metadata_guard": "source_ref_changed",
+      "new_version": {
+        "status": "ok",
+        "fresh_sha": "98bde458bbb47d843cb3193d2196762bd040769b6d9c8492b12a43cf1e7ef781",
+        "old_outcome": {
+          "status": "unavailable",
+          "reason": "no_indexed_location"
+        }
+      },
+      "original_recovery": "exact_bytes",
+      "seconds": 1.843,
+      "final": "absent"
+    }
+  },
+  "runtime_hygiene": {
+    "credential_environment_inherited": false,
+    "HOME": "synthetic-owned-home",
+    "blocked_actions": [],
+    "actual_network_calls": 0,
+    "provider_calls": 0,
+    "LLM_calls": 0,
+    "fees_usd": 0,
+    "raw_originals_accessed": 0,
+    "synthetic_files_only": true
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "w06-independent-expectation-authority/1",
+  "probes": [
+    {
+      "name": "CASE-EXPECTED-CUTOFF-REMOVAL",
+      "expected": "fixed case ID must retain cutoff requirement",
+      "old_expected": {
+        "past_cutoff": true
+      },
+      "new_expected": {},
+      "original_findings": [
+        {
+          "vector": "fake_layer_claimed_real",
+          "case_id": "chainA_download_reuse",
+          "detail": "declared real-3layer but ff_public_cli/et_supervisor_worker/cwp_import evidence is not all present (got {'ff_public_cli': True, 'et_supervisor_worker': False, 'cwp_import': False})"
+        },
+        {
+          "vector": "wrong_cutoff",
+          "case_id": "call_past_cutoff",
+          "detail": "past-cutoff case did not report the actual cutoff diagnostic"
+        },
+        {
+          "vector": "fake_zero_cost",
+          "case_id": "err_unknown_usage",
+          "detail": "unknown usage/cost was reported as 0 or the provider call was swallowed"
+        }
+      ],
+      "mutated_findings": [
+        {
+          "vector": "fake_layer_claimed_real",
+          "case_id": "chainA_download_reuse",
+          "detail": "declared real-3layer but ff_public_cli/et_supervisor_worker/cwp_import evidence is not all present (got {'ff_public_cli': True, 'et_supervisor_worker': False, 'cwp_import': False})"
+        },
+        {
+          "vector": "fake_zero_cost",
+          "case_id": "err_unknown_usage",
+          "detail": "unknown usage/cost was reported as 0 or the provider call was swallowed"
+        }
+      ],
+      "pass": false
+    },
+    {
+      "name": "CASE-REQUEST-MARKET-NOT-BOUND-TO-FIXED-VECTOR",
+      "expected": "fin_cn_annual_hit requires its fixed CN request, not caller-declared HK",
+      "original_request": {
+        "schema_version": "2.0",
+        "company_query": "宁德时代",
+        "market": "CN",
+        "document_kind": "annual_report",
+        "fiscal_year": 2024,
+        "as_of_date": "2026-12-31",
+        "filing_intent": "reuse_only",
+        "fiscal_period": "FY"
+      },
+      "mutated_request": {
+        "schema_version": "2.0",
+        "company_query": "Tencent Holdings Limited",
+        "market": "HK",
+        "document_kind": "annual_report",
+        "fiscal_year": 2024,
+        "as_of_date": "2026-12-31",
+        "filing_intent": "reuse_only",
+        "fiscal_period": "FY"
+      },
+      "retained_case_id": "fin_cn_annual_hit",
+      "case_expected": {
+        "status": "source_candidate",
+        "download_events": 0
+      },
+      "oracle_findings": [],
+      "oracle_pass": true,
+      "pass": false
+    }
+  ],
+  "scratch_initial_exists": false,
+  "scratch_final_exists": false,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0,
+  "scope": "Only report copies and synthetic copied request/response evidence; no actual producer calls"
+}

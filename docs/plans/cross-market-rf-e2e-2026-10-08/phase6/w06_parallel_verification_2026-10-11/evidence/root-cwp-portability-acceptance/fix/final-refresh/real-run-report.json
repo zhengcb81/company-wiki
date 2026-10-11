@@ -1,0 +1,1563 @@
+{
+  "schema_version": "cwp-root-portability/1",
+  "run": {
+    "run_id": "attempt-0001",
+    "runner_pid": 41008,
+    "started_at": "2026-10-11T13:06:41.319392Z",
+    "finished_at": "2026-10-11T13:06:45.759714Z",
+    "elapsed_seconds": 4.44,
+    "code_identity": {
+      "head": "8862372f714209cff1b218d77b5c4b8af6bc74dc",
+      "branch": "codex/root-w06-cwp-portability-20261011",
+      "modules": [
+        {
+          "path": "src/company_wiki/source_catalog/source_reader.py",
+          "sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/config.py",
+          "sha256": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/service.py",
+          "sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/store.py",
+          "sha256": "ccae2c324b2efbac3824cef4e3fa3cfa273583efb6aeac11334c70625e5fd99e",
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/scanner.py",
+          "sha256": "4a79882979e07097a9996779dee1f642dfe0446a8422b7f2ce6ace2dcbe89846",
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/resolver.py",
+          "sha256": "a9a5aa19afa5330223d45c484dfe4261bdc7964b209461030fa423acd40ba6d5",
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/document_kinds.py",
+          "sha256": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+          "source": "worktree"
+        },
+        {
+          "path": "src/company_wiki/source_contract/source_export_v2.py",
+          "sha256": "95d245dd3ab72e9af1451f9dab4163954ab08ecf8655ecd280b3e215b33e5211",
+          "source": "worktree"
+        }
+      ],
+      "python_binding": {
+        "company_wiki_file": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/cwp-portability-root/src/company_wiki/__init__.py",
+        "bound_root": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/cwp-portability-root/src"
+      }
+    },
+    "config_summary": {
+      "schema_version": "1.0",
+      "roots": [
+        {
+          "root_id": "local_company",
+          "path_ref": "lake/本地公司 根",
+          "kind": "directory",
+          "priority": 10,
+          "adapter_id": "sidecar_filing_v1"
+        },
+        {
+          "root_id": "external_dayu",
+          "path_ref": "lake/外部 Dayu 根",
+          "kind": "directory",
+          "priority": 20,
+          "adapter_id": "sidecar_filing_v1"
+        },
+        {
+          "root_id": "external_dropbox",
+          "path_ref": "lake/Dropbox 外部 根",
+          "kind": "directory",
+          "priority": 30,
+          "adapter_id": "sidecar_filing_v1"
+        }
+      ],
+      "catalog_dir_ref": "owned/catalog",
+      "config_files": [
+        "owned/cfg/config_lake_A.yaml",
+        "owned/cfg/config_lake_B.yaml"
+      ]
+    }
+  },
+  "fixture": {
+    "originals": [
+      {
+        "doc_key": "pdf",
+        "root_id": "local_company",
+        "relative_path": "2025 年度报告/年报 文件.pdf",
+        "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+        "byte_size": 640,
+        "mime_type": "application/pdf",
+        "document_kind": "annual_report",
+        "published_date": "2026-03-01",
+        "fiscal_year": 2025,
+        "period_end": "2025-12-31",
+        "nonperiodic": false,
+        "synthetic": true,
+        "is_physical_copy_of": null
+      },
+      {
+        "doc_key": "htm",
+        "root_id": "external_dropbox",
+        "relative_path": "募集说明书 文件.html",
+        "content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+        "byte_size": 236,
+        "mime_type": "text/html",
+        "document_kind": "prospectus",
+        "published_date": "2026-05-06",
+        "fiscal_year": null,
+        "period_end": "nonperiodic",
+        "nonperiodic": true,
+        "synthetic": true,
+        "is_physical_copy_of": null
+      },
+      {
+        "doc_key": "txt",
+        "root_id": "external_dayu",
+        "relative_path": "业绩说明会 纪要.txt",
+        "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+        "byte_size": 255,
+        "mime_type": "text/plain",
+        "document_kind": "investor_relations",
+        "published_date": "2026-04-10",
+        "fiscal_year": null,
+        "period_end": "nonperiodic",
+        "nonperiodic": true,
+        "synthetic": true,
+        "is_physical_copy_of": null
+      },
+      {
+        "doc_key": "txt_copy",
+        "root_id": "external_dropbox",
+        "relative_path": "副本/业绩说明会 纪要.txt",
+        "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+        "byte_size": 255,
+        "mime_type": "text/plain",
+        "document_kind": "investor_relations",
+        "published_date": "2026-04-10",
+        "fiscal_year": null,
+        "period_end": "nonperiodic",
+        "nonperiodic": true,
+        "synthetic": true,
+        "is_physical_copy_of": "txt"
+      }
+    ],
+    "final_reads": [
+      {
+        "doc_key": "pdf",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "byte_size": 640,
+          "mime_type": "application/pdf",
+          "schema_version": "2.0"
+        },
+        "method": "open_version",
+        "purpose": "source_export",
+        "channel": "reader_verified_bytes",
+        "read_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+        "byte_size": 640,
+        "receipt": {
+          "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+          "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+          "read_at": "2026-10-11T13:06:45.745729+00:00"
+        },
+        "verification": {
+          "byte_hash_match": true,
+          "sha_computed_from": "read_bytes"
+        }
+      },
+      {
+        "doc_key": "htm",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+          "source_id": "urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+          "content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+          "byte_size": 236,
+          "mime_type": "text/html",
+          "schema_version": "2.0"
+        },
+        "method": "open_version",
+        "purpose": "source_export",
+        "channel": "reader_verified_bytes",
+        "read_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+        "byte_size": 236,
+        "receipt": {
+          "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+          "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+          "read_at": "2026-10-11T13:06:45.748968+00:00"
+        },
+        "verification": {
+          "byte_hash_match": true,
+          "sha_computed_from": "read_bytes"
+        }
+      },
+      {
+        "doc_key": "txt",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+          "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+          "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+          "byte_size": 255,
+          "mime_type": "text/plain",
+          "schema_version": "2.0"
+        },
+        "method": "open_version",
+        "purpose": "source_export",
+        "channel": "reader_verified_bytes",
+        "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+        "byte_size": 255,
+        "receipt": {
+          "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+          "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+          "read_at": "2026-10-11T13:06:45.752154+00:00"
+        },
+        "verification": {
+          "byte_hash_match": true,
+          "sha_computed_from": "read_bytes"
+        }
+      },
+      {
+        "doc_key": "txt_copy",
+        "source_ref": {
+          "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+          "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+          "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+          "byte_size": 255,
+          "mime_type": "text/plain",
+          "schema_version": "2.0"
+        },
+        "method": "open_version",
+        "purpose": "source_export",
+        "channel": "reader_verified_bytes",
+        "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+        "byte_size": 255,
+        "receipt": {
+          "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+          "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+          "read_at": "2026-10-11T13:06:45.754058+00:00"
+        },
+        "verification": {
+          "byte_hash_match": true,
+          "sha_computed_from": "read_bytes"
+        }
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "S1",
+      "status": "PASS",
+      "failure": null,
+      "evidence": {
+        "registration": {
+          "channel": "register_sources",
+          "root_ids": [
+            "local_company",
+            "external_dayu",
+            "external_dropbox"
+          ],
+          "doc_keys": [
+            "htm",
+            "pdf",
+            "txt",
+            "txt_copy"
+          ]
+        },
+        "reads": [
+          {
+            "doc_key": "pdf",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "byte_size": 640,
+              "mime_type": "application/pdf",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+            "byte_size": 640,
+            "receipt": {
+              "policy_sha256": "acd8d2a921619430535cdc2aa7732769d567f4cca82fe1789993cf5f908e2bc5",
+              "source_read_policy_sha256": "b46e411d7a35b8db329d2f303d0e9835393420d9b09f08ee43dae45c006ef0b3",
+              "read_at": "2026-10-11T13:06:42.161661+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            }
+          },
+          {
+            "doc_key": "htm",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "source_id": "urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "byte_size": 236,
+              "mime_type": "text/html",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+            "byte_size": 236,
+            "receipt": {
+              "policy_sha256": "acd8d2a921619430535cdc2aa7732769d567f4cca82fe1789993cf5f908e2bc5",
+              "source_read_policy_sha256": "b46e411d7a35b8db329d2f303d0e9835393420d9b09f08ee43dae45c006ef0b3",
+              "read_at": "2026-10-11T13:06:42.165203+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            }
+          },
+          {
+            "doc_key": "txt",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "byte_size": 255,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+            "byte_size": 255,
+            "receipt": {
+              "policy_sha256": "acd8d2a921619430535cdc2aa7732769d567f4cca82fe1789993cf5f908e2bc5",
+              "source_read_policy_sha256": "b46e411d7a35b8db329d2f303d0e9835393420d9b09f08ee43dae45c006ef0b3",
+              "read_at": "2026-10-11T13:06:42.168761+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            }
+          },
+          {
+            "doc_key": "txt_copy",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "byte_size": 255,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+            "byte_size": 255,
+            "receipt": {
+              "policy_sha256": "acd8d2a921619430535cdc2aa7732769d567f4cca82fe1789993cf5f908e2bc5",
+              "source_read_policy_sha256": "b46e411d7a35b8db329d2f303d0e9835393420d9b09f08ee43dae45c006ef0b3",
+              "read_at": "2026-10-11T13:06:42.171539+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            }
+          }
+        ],
+        "describes": [
+          {
+            "doc_key": "pdf",
+            "document_kind": "annual_report",
+            "published_date": "2026-03-01",
+            "fiscal_year": 2025,
+            "period_end": "2025-12-31"
+          },
+          {
+            "doc_key": "htm",
+            "document_kind": "prospectus",
+            "published_date": "2026-05-06",
+            "fiscal_year": null,
+            "period_end": "nonperiodic"
+          },
+          {
+            "doc_key": "txt",
+            "document_kind": "investor_relations",
+            "published_date": "2026-04-10",
+            "fiscal_year": null,
+            "period_end": "nonperiodic"
+          },
+          {
+            "doc_key": "txt_copy",
+            "document_kind": "investor_relations",
+            "published_date": "2026-04-10",
+            "fiscal_year": null,
+            "period_end": "nonperiodic"
+          }
+        ],
+        "export": {
+          "channel": "source_export_v2_cli",
+          "exit_code": 0,
+          "stdout": "{\"bundle_sha256\":\"8c931ff71ca9d053737e057f1b4435ddc2cde69e2841ad42794ad603cdb1fd02\",\"counts\":{\"evidence_spans\":0,\"source_manifests\":3},\"evidence_span_schema_version\":\"1.0.0\",\"evidence_spans\":[],\"export_id\":\"urn:company-wiki:source-export:sha256:8c931ff71ca9d053737e057f1b4435ddc2cde69e2841ad42794ad603cdb1fd02\",\"manifests\":[{\"byte_size\":640,\"canonical_entity_id\":\"ent-synthetic-w06\",\"collector_name\":\"w06-fixture-builder\",\"collector_version\":\"1.0\",\"content_sha256\":\"1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85\",\"display_name\":\"[SYNTHETIC] W06 Fixture Co\",\"document_id\":\"urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85\",\"document_kind\":\"annual_report\",\"fiscal_period\":null,\"fiscal_year\":2025,\"form_type\":\"annual_report\",\"language\":\"zh\",\"market\":\"CN\",\"mime_type\":\"application/pdf\",\"period_end\":\"2025-12-31\",\"provider\":\"example-filing\",\"provider_document_id\":\"synthetic-w06-pdf\",\"published_date\":\"2026-03-01\",\"retrieved_at\":\"2026-03-01T00:00:00Z\",\"security_id\":\"W06TEST\",\"source_id\":\"urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85\",\"source_url\":null,\"title\":\"[SYNTHETIC][W06] pdf fixture original\"},{\"byte_size\":236,\"canonical_entity_id\":\"ent-synthetic-w06\",\"collector_name\":\"w06-fixture-builder\",\"collector_version\":\"1.0\",\"content_sha256\":\"64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a\",\"display_name\":\"[SYNTHETIC] W06 Fixture Co\",\"document_id\":\"urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a\",\"document_kind\":\"prospectus\",\"fiscal_period\":null,\"fiscal_year\":null,\"form_type\":\"prospectus\",\"language\":\"zh\",\"market\":\"CN\",\"mime_type\":\"text/html\",\"period_end\":\"nonperiodic\",\"provider\":\"example-filing\",\"provider_document_id\":\"synthetic-w06-htm\",\"published_date\":\"2026-05-06\",\"retrieved_at\":\"2026-05-06T00:00:00Z\",\"security_id\":\"W06TEST\",\"source_id\":\"urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a\",\"source_url\":null,\"title\":\"[SYNTHETIC][W06] htm fixture original\"},{\"byte_size\":255,\"canonical_entity_id\":\"ent-synthetic-w06\",\"collector_name\":\"w06-fixture-builder\",\"collector_version\":\"1.0\",\"content_sha256\":\"e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609\",\"display_name\":\"[SYNTHETIC] W06 Fixture Co\",\"document_id\":\"urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609\",\"document_kind\":\"investor_relations\",\"fiscal_period\":null,\"fiscal_year\":null,\"form_type\":\"investor_relations\",\"language\":\"zh\",\"market\":\"CN\",\"mime_type\":\"text/plain\",\"period_end\":\"nonperiodic\",\"provider\":\"example-filing\",\"provider_document_id\":null,\"published_date\":\"2026-04-10\",\"retrieved_at\":\"2026-04-10T00:00:00Z\",\"security_id\":\"W06TEST\",\"source_id\":\"urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609\",\"source_url\":null,\"title\":null}],\"schema_version\":\"2.0.0\",\"source_manifest_schema_version\":\"2.0.0\"}\n",
+          "stderr": "",
+          "bundle": {
+            "bundle_sha256": "8c931ff71ca9d053737e057f1b4435ddc2cde69e2841ad42794ad603cdb1fd02",
+            "counts": {
+              "evidence_spans": 0,
+              "source_manifests": 3
+            },
+            "evidence_span_schema_version": "1.0.0",
+            "evidence_spans": [],
+            "export_id": "urn:company-wiki:source-export:sha256:8c931ff71ca9d053737e057f1b4435ddc2cde69e2841ad42794ad603cdb1fd02",
+            "manifests": [
+              {
+                "byte_size": 640,
+                "canonical_entity_id": "ent-synthetic-w06",
+                "collector_name": "w06-fixture-builder",
+                "collector_version": "1.0",
+                "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+                "display_name": "[SYNTHETIC] W06 Fixture Co",
+                "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+                "document_kind": "annual_report",
+                "fiscal_period": null,
+                "fiscal_year": 2025,
+                "form_type": "annual_report",
+                "language": "zh",
+                "market": "CN",
+                "mime_type": "application/pdf",
+                "period_end": "2025-12-31",
+                "provider": "example-filing",
+                "provider_document_id": "synthetic-w06-pdf",
+                "published_date": "2026-03-01",
+                "retrieved_at": "2026-03-01T00:00:00Z",
+                "security_id": "W06TEST",
+                "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+                "source_url": null,
+                "title": "[SYNTHETIC][W06] pdf fixture original"
+              },
+              {
+                "byte_size": 236,
+                "canonical_entity_id": "ent-synthetic-w06",
+                "collector_name": "w06-fixture-builder",
+                "collector_version": "1.0",
+                "content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+                "display_name": "[SYNTHETIC] W06 Fixture Co",
+                "document_id": "urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+                "document_kind": "prospectus",
+                "fiscal_period": null,
+                "fiscal_year": null,
+                "form_type": "prospectus",
+                "language": "zh",
+                "market": "CN",
+                "mime_type": "text/html",
+                "period_end": "nonperiodic",
+                "provider": "example-filing",
+                "provider_document_id": "synthetic-w06-htm",
+                "published_date": "2026-05-06",
+                "retrieved_at": "2026-05-06T00:00:00Z",
+                "security_id": "W06TEST",
+                "source_id": "urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+                "source_url": null,
+                "title": "[SYNTHETIC][W06] htm fixture original"
+              },
+              {
+                "byte_size": 255,
+                "canonical_entity_id": "ent-synthetic-w06",
+                "collector_name": "w06-fixture-builder",
+                "collector_version": "1.0",
+                "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+                "display_name": "[SYNTHETIC] W06 Fixture Co",
+                "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+                "document_kind": "investor_relations",
+                "fiscal_period": null,
+                "fiscal_year": null,
+                "form_type": "investor_relations",
+                "language": "zh",
+                "market": "CN",
+                "mime_type": "text/plain",
+                "period_end": "nonperiodic",
+                "provider": "example-filing",
+                "provider_document_id": null,
+                "published_date": "2026-04-10",
+                "retrieved_at": "2026-04-10T00:00:00Z",
+                "security_id": "W06TEST",
+                "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+                "source_url": null,
+                "title": null
+              }
+            ],
+            "schema_version": "2.0.0",
+            "source_manifest_schema_version": "2.0.0"
+          },
+          "parse_error": null,
+          "bundle_sha256": "8c931ff71ca9d053737e057f1b4435ddc2cde69e2841ad42794ad603cdb1fd02",
+          "path_fields_present": false,
+          "manifests": [
+            {
+              "byte_size": 640,
+              "canonical_entity_id": "ent-synthetic-w06",
+              "collector_name": "w06-fixture-builder",
+              "collector_version": "1.0",
+              "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "display_name": "[SYNTHETIC] W06 Fixture Co",
+              "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "document_kind": "annual_report",
+              "fiscal_period": null,
+              "fiscal_year": 2025,
+              "form_type": "annual_report",
+              "language": "zh",
+              "market": "CN",
+              "mime_type": "application/pdf",
+              "period_end": "2025-12-31",
+              "provider": "example-filing",
+              "provider_document_id": "synthetic-w06-pdf",
+              "published_date": "2026-03-01",
+              "retrieved_at": "2026-03-01T00:00:00Z",
+              "security_id": "W06TEST",
+              "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "source_url": null,
+              "title": "[SYNTHETIC][W06] pdf fixture original"
+            },
+            {
+              "byte_size": 236,
+              "canonical_entity_id": "ent-synthetic-w06",
+              "collector_name": "w06-fixture-builder",
+              "collector_version": "1.0",
+              "content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "display_name": "[SYNTHETIC] W06 Fixture Co",
+              "document_id": "urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "document_kind": "prospectus",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": "prospectus",
+              "language": "zh",
+              "market": "CN",
+              "mime_type": "text/html",
+              "period_end": "nonperiodic",
+              "provider": "example-filing",
+              "provider_document_id": "synthetic-w06-htm",
+              "published_date": "2026-05-06",
+              "retrieved_at": "2026-05-06T00:00:00Z",
+              "security_id": "W06TEST",
+              "source_id": "urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "source_url": null,
+              "title": "[SYNTHETIC][W06] htm fixture original"
+            },
+            {
+              "byte_size": 255,
+              "canonical_entity_id": "ent-synthetic-w06",
+              "collector_name": "w06-fixture-builder",
+              "collector_version": "1.0",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "display_name": "[SYNTHETIC] W06 Fixture Co",
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "document_kind": "investor_relations",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": "investor_relations",
+              "language": "zh",
+              "market": "CN",
+              "mime_type": "text/plain",
+              "period_end": "nonperiodic",
+              "provider": "example-filing",
+              "provider_document_id": null,
+              "published_date": "2026-04-10",
+              "retrieved_at": "2026-04-10T00:00:00Z",
+              "security_id": "W06TEST",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_url": null,
+              "title": null
+            }
+          ],
+          "stderr_head": ""
+        },
+        "api_surface": {
+          "open_verified_exists": false,
+          "open_version_signature": "(self, ref: 'SourceRef', *, purpose: 'str' = 'filing_reuse', expected_read_policy_sha256: 'str | None' = None) -> 'VerifiedContent'",
+          "verify_version_is_receipt_only": true,
+          "reader_cli_help": {
+            "exit_code": 0,
+            "purpose_flag": false
+          }
+        }
+      },
+      "expected": {
+        "exact_sha": true,
+        "period_kind_preserved": true,
+        "channel": "reader_verified_bytes"
+      },
+      "actual": {
+        "reported_status": "PASS"
+      },
+      "cleanup": {
+        "scope": "created_attempt",
+        "restored": true
+      }
+    },
+    {
+      "id": "S2",
+      "status": "PASS",
+      "failure": null,
+      "evidence": {
+        "move": {
+          "same_root_ids": true,
+          "same_relative_paths": true,
+          "before_roots": [
+            {
+              "root_id": "local_company",
+              "path_ref": "lake_A/本地公司 根"
+            },
+            {
+              "root_id": "external_dayu",
+              "path_ref": "lake_A/外部 Dayu 根"
+            },
+            {
+              "root_id": "external_dropbox",
+              "path_ref": "lake_A/Dropbox 外部 根"
+            }
+          ],
+          "after_roots": [
+            {
+              "root_id": "local_company",
+              "path_ref": "lake_B/本地公司 根"
+            },
+            {
+              "root_id": "external_dayu",
+              "path_ref": "lake_B/外部 Dayu 根"
+            },
+            {
+              "root_id": "external_dropbox",
+              "path_ref": "lake_B/Dropbox 外部 根"
+            }
+          ]
+        },
+        "policy_observation": {
+          "before_policy_sha256": "acd8d2a921619430535cdc2aa7732769d567f4cca82fe1789993cf5f908e2bc5",
+          "after_policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+          "change_observed": true,
+          "change_is_auth_gate": false
+        },
+        "reads_after_move": [
+          {
+            "doc_key": "pdf",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "byte_size": 640,
+              "mime_type": "application/pdf",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+            "byte_size": 640,
+            "receipt": {
+              "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+              "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+              "read_at": "2026-10-11T13:06:43.110003+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            },
+            "ref_identity_preserved": true,
+            "resolution": "current_root"
+          },
+          {
+            "doc_key": "htm",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "source_id": "urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "byte_size": 236,
+              "mime_type": "text/html",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+            "byte_size": 236,
+            "receipt": {
+              "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+              "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+              "read_at": "2026-10-11T13:06:43.111879+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            },
+            "ref_identity_preserved": true,
+            "resolution": "current_root"
+          },
+          {
+            "doc_key": "txt",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "byte_size": 255,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+            "byte_size": 255,
+            "receipt": {
+              "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+              "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+              "read_at": "2026-10-11T13:06:43.113814+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            },
+            "ref_identity_preserved": true,
+            "resolution": "current_root"
+          },
+          {
+            "doc_key": "txt_copy",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "byte_size": 255,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+            "byte_size": 255,
+            "receipt": {
+              "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+              "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+              "read_at": "2026-10-11T13:06:43.115841+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            },
+            "ref_identity_preserved": true,
+            "resolution": "current_root"
+          }
+        ],
+        "consumer_abs_path_dependency": false,
+        "supported": true,
+        "consumer_probe": {
+          "exit_code": 0,
+          "pid": 46796,
+          "probe": {
+            "pid": 46796,
+            "ref": {
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "byte_size": 255,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            },
+            "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+            "byte_size": 255,
+            "status": "ok",
+            "reason": null,
+            "raw_non_reader_opens": 0,
+            "open_log": [
+              {
+                "event": "open",
+                "path_ref": "C:/Users/郑曾波/AppData/Local/Temp/w06-port-final-etcsolb_/owned/w06-owned-4lriuogb/lake_B/外部 Dayu 根/业绩说明会 纪要.txt",
+                "path_class": "raw",
+                "attributed_to": "company_wiki"
+              }
+            ],
+            "bytes_origin": "fresh_read",
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            },
+            "method": "open_version",
+            "channel": "reader_verified_bytes",
+            "receipt": {
+              "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+              "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+              "read_at": "2026-10-11T13:06:43.922422+00:00"
+            }
+          }
+        }
+      },
+      "expected": {
+        "same_root_id_relative_path": true,
+        "old_ref_same_bytes": true,
+        "abs_old_path_not_consumer_dependency": true,
+        "policy_change_is_not_auth_gate": true
+      },
+      "actual": {
+        "reported_status": "PASS"
+      },
+      "cleanup": {
+        "scope": "created_attempt",
+        "restored": true
+      }
+    },
+    {
+      "id": "S3",
+      "status": "PASS",
+      "failure": null,
+      "evidence": {
+        "before": {
+          "doc_key": "pdf",
+          "root_id": "local_company",
+          "relative_path": "2025 年度报告/年报 文件.pdf",
+          "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "byte_size": 640,
+          "mime_type": "application/pdf",
+          "document_kind": "annual_report",
+          "published_date": "2026-03-01",
+          "fiscal_year": 2025,
+          "period_end": "2025-12-31"
+        },
+        "after": {
+          "root_id": "external_dayu",
+          "relative_path": "迁移/年报 文件.pdf",
+          "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "byte_size": 640,
+          "mime_type": "application/pdf",
+          "document_kind": "annual_report",
+          "published_date": "2026-03-01",
+          "fiscal_year": 2025,
+          "period_end": "2025-12-31"
+        },
+        "new_ref_read": {
+          "doc_key": "pdf",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+            "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+            "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+            "byte_size": 640,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "method": "open_version",
+          "purpose": "source_export",
+          "channel": "reader_verified_bytes",
+          "read_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+          "byte_size": 640,
+          "receipt": {
+            "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+            "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+            "read_at": "2026-10-11T13:06:44.037079+00:00"
+          },
+          "verification": {
+            "byte_hash_match": true,
+            "sha_computed_from": "read_bytes"
+          }
+        },
+        "revision_relation": "same_content_same_ids",
+        "old_ref_outcome": {
+          "status": "readable",
+          "reason": null,
+          "classification": "old_ref_reads_via_current_location",
+          "read": {
+            "doc_key": "pdf",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "byte_size": 640,
+              "mime_type": "application/pdf",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+            "byte_size": 640,
+            "receipt": {
+              "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+              "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+              "read_at": "2026-10-11T13:06:44.039699+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            },
+            "ref_identity_preserved": true,
+            "resolution": "current_root"
+          }
+        },
+        "identity_stability": "PROMISED_FIELDS_ONLY",
+        "stability_claimed_fields": [
+          "content_sha256",
+          "byte_size",
+          "mime_type",
+          "document_kind",
+          "published_date"
+        ],
+        "needs_root_decision": false
+      },
+      "expected": {
+        "re_register_normal_flow": true,
+        "record_id_relationships": true,
+        "identity_stability_only_promised_fields": true
+      },
+      "actual": {
+        "reported_status": "PASS"
+      },
+      "cleanup": {
+        "scope": "created_attempt",
+        "restored": true
+      }
+    },
+    {
+      "id": "S4",
+      "status": "PASS",
+      "failure": null,
+      "evidence": {
+        "dup": {
+          "logical_source_count": 1,
+          "physical_copy_count": 2,
+          "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+          "copies": [
+            {
+              "root_id": "external_dayu",
+              "candidate_rank": 1,
+              "is_canonical": true
+            },
+            {
+              "root_id": "external_dropbox",
+              "candidate_rank": 2,
+              "is_canonical": false
+            }
+          ],
+          "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+          "physical_byte_size": 255
+        },
+        "selection": {
+          "chose_by": "root_priority_not_disk_path",
+          "selected_root_id": "external_dayu"
+        },
+        "after_delete": {
+          "deleted_root_id": "external_dayu",
+          "synthetic_only": true,
+          "read": {
+            "doc_key": "txt",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "byte_size": 255,
+              "mime_type": "text/plain",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+            "byte_size": 255,
+            "receipt": {
+              "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+              "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+              "read_at": "2026-10-11T13:06:44.043143+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            }
+          }
+        }
+      },
+      "expected": {
+        "one_logical_source": true,
+        "candidate_by_root_priority": true,
+        "fallback_copy_readable_after_delete": true
+      },
+      "actual": {
+        "reported_status": "PASS"
+      },
+      "cleanup": {
+        "scope": "created_attempt",
+        "restored": true
+      }
+    },
+    {
+      "id": "S5",
+      "status": "PASS",
+      "failure": null,
+      "evidence": {
+        "raw_unavailable": {
+          "tried": true,
+          "status": "unavailable",
+          "reason": "no_verified_location",
+          "bytes_claimed_verified": false,
+          "receipt_issued": false
+        },
+        "restored": {
+          "read": {
+            "doc_key": "htm",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "source_id": "urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "byte_size": 236,
+              "mime_type": "text/html",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+            "byte_size": 236,
+            "receipt": {
+              "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+              "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+              "read_at": "2026-10-11T13:06:44.049171+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            }
+          }
+        },
+        "corruption": {
+          "refused": true,
+          "reason": "content_sha256_mismatch",
+          "sha_computed_from": "read_bytes",
+          "channel": "reader_verified_bytes",
+          "raised": {
+            "status": "unavailable",
+            "reason": "no_verified_location",
+            "detail": "content_sha256_mismatch"
+          }
+        },
+        "new_version": {
+          "doc_key": "htm",
+          "old_content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+          "new_content_sha256": "5d022f8098df94da80855ff9b685ba8b89924638812cf2742a01ea96d8a5fe9a",
+          "new_byte_size": 271,
+          "distinct": true,
+          "old_ref_after_new_content": {
+            "status": "unavailable",
+            "reason": "no_indexed_location"
+          },
+          "tamper_refusal_before_register": {
+            "status": "unavailable",
+            "reason": "no_verified_location"
+          },
+          "new_ref_read": {
+            "status": "ok",
+            "document_id": "urn:company-wiki:document:sha256:5d022f8098df94da80855ff9b685ba8b89924638812cf2742a01ea96d8a5fe9a",
+            "source_id": "urn:company-wiki:source:sha256:5d022f8098df94da80855ff9b685ba8b89924638812cf2742a01ea96d8a5fe9a",
+            "content_sha256": "5d022f8098df94da80855ff9b685ba8b89924638812cf2742a01ea96d8a5fe9a",
+            "read_sha256": "5d022f8098df94da80855ff9b685ba8b89924638812cf2742a01ea96d8a5fe9a",
+            "method": "open_version",
+            "byte_size": 271,
+            "channel": "reader_verified_bytes",
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            }
+          }
+        },
+        "final_recovery": {
+          "read": {
+            "doc_key": "htm",
+            "source_ref": {
+              "document_id": "urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "source_id": "urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "byte_size": 236,
+              "mime_type": "text/html",
+              "schema_version": "2.0"
+            },
+            "method": "open_version",
+            "purpose": "source_export",
+            "channel": "reader_verified_bytes",
+            "read_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+            "byte_size": 236,
+            "receipt": {
+              "policy_sha256": "c1314512efd2faaa1dfc9c8f50788a0bb2524f9dbb54256c55a7a8f1ffd8237d",
+              "source_read_policy_sha256": "2761faba65cd008c6c81dd5759e82f59abfb6c666d4bb84695d3087e65c0d1f4",
+              "read_at": "2026-10-11T13:06:44.160821+00:00"
+            },
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            }
+          }
+        }
+      },
+      "expected": {
+        "no_fake_verified_receipt": true,
+        "sha_rejects_corruption": true,
+        "new_content_new_version": true
+      },
+      "actual": {
+        "reported_status": "PASS"
+      },
+      "cleanup": {
+        "scope": "created_attempt",
+        "restored": true
+      }
+    },
+    {
+      "id": "S6",
+      "status": "PASS",
+      "failure": null,
+      "evidence": {
+        "docs": [
+          {
+            "doc_key": "pdf",
+            "nonperiodic": false,
+            "before": {
+              "document_kind": "annual_report",
+              "published_date": "2026-03-01",
+              "fiscal_year": 2025,
+              "period_end": "2025-12-31"
+            },
+            "after": {
+              "document_kind": "annual_report",
+              "published_date": "2026-03-01",
+              "fiscal_year": 2025,
+              "period_end": "2025-12-31"
+            }
+          },
+          {
+            "doc_key": "htm",
+            "nonperiodic": true,
+            "before": {
+              "document_kind": "prospectus",
+              "published_date": "2026-05-06",
+              "fiscal_year": null,
+              "period_end": "nonperiodic"
+            },
+            "after": {
+              "document_kind": "prospectus",
+              "published_date": "2026-05-06",
+              "fiscal_year": null,
+              "period_end": "nonperiodic"
+            }
+          },
+          {
+            "doc_key": "txt",
+            "nonperiodic": true,
+            "before": {
+              "document_kind": "investor_relations",
+              "published_date": "2026-04-10",
+              "fiscal_year": null,
+              "period_end": "nonperiodic"
+            },
+            "after": {
+              "document_kind": "investor_relations",
+              "published_date": "2026-04-10",
+              "fiscal_year": null,
+              "period_end": "nonperiodic"
+            }
+          },
+          {
+            "doc_key": "txt_copy",
+            "nonperiodic": true,
+            "before": {
+              "document_kind": "investor_relations",
+              "published_date": "2026-04-10",
+              "fiscal_year": null,
+              "period_end": "nonperiodic"
+            },
+            "after": {
+              "document_kind": "investor_relations",
+              "published_date": "2026-04-10",
+              "fiscal_year": null,
+              "period_end": "nonperiodic"
+            }
+          }
+        ]
+      },
+      "expected": {
+        "asof_period_kind_stable": true,
+        "nonperiodic_no_fake_fy": true
+      },
+      "actual": {
+        "reported_status": "PASS"
+      },
+      "cleanup": {
+        "scope": "created_attempt",
+        "restored": true
+      }
+    },
+    {
+      "id": "S7",
+      "status": "PASS",
+      "failure": null,
+      "evidence": {
+        "export_process": {
+          "channel": "source_export_v2_cli",
+          "exit_code": 0,
+          "stdout": "{\"bundle_sha256\":\"8c931ff71ca9d053737e057f1b4435ddc2cde69e2841ad42794ad603cdb1fd02\",\"counts\":{\"evidence_spans\":0,\"source_manifests\":3},\"evidence_span_schema_version\":\"1.0.0\",\"evidence_spans\":[],\"export_id\":\"urn:company-wiki:source-export:sha256:8c931ff71ca9d053737e057f1b4435ddc2cde69e2841ad42794ad603cdb1fd02\",\"manifests\":[{\"byte_size\":640,\"canonical_entity_id\":\"ent-synthetic-w06\",\"collector_name\":\"w06-fixture-builder\",\"collector_version\":\"1.0\",\"content_sha256\":\"1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85\",\"display_name\":\"[SYNTHETIC] W06 Fixture Co\",\"document_id\":\"urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85\",\"document_kind\":\"annual_report\",\"fiscal_period\":null,\"fiscal_year\":2025,\"form_type\":\"annual_report\",\"language\":\"zh\",\"market\":\"CN\",\"mime_type\":\"application/pdf\",\"period_end\":\"2025-12-31\",\"provider\":\"example-filing\",\"provider_document_id\":\"synthetic-w06-pdf\",\"published_date\":\"2026-03-01\",\"retrieved_at\":\"2026-03-01T00:00:00Z\",\"security_id\":\"W06TEST\",\"source_id\":\"urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85\",\"source_url\":null,\"title\":\"[SYNTHETIC][W06] pdf fixture original\"},{\"byte_size\":236,\"canonical_entity_id\":\"ent-synthetic-w06\",\"collector_name\":\"w06-fixture-builder\",\"collector_version\":\"1.0\",\"content_sha256\":\"64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a\",\"display_name\":\"[SYNTHETIC] W06 Fixture Co\",\"document_id\":\"urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a\",\"document_kind\":\"prospectus\",\"fiscal_period\":null,\"fiscal_year\":null,\"form_type\":\"prospectus\",\"language\":\"zh\",\"market\":\"CN\",\"mime_type\":\"text/html\",\"period_end\":\"nonperiodic\",\"provider\":\"example-filing\",\"provider_document_id\":\"synthetic-w06-htm\",\"published_date\":\"2026-05-06\",\"retrieved_at\":\"2026-05-06T00:00:00Z\",\"security_id\":\"W06TEST\",\"source_id\":\"urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a\",\"source_url\":null,\"title\":\"[SYNTHETIC][W06] htm fixture original\"},{\"byte_size\":255,\"canonical_entity_id\":\"ent-synthetic-w06\",\"collector_name\":\"w06-fixture-builder\",\"collector_version\":\"1.0\",\"content_sha256\":\"e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609\",\"display_name\":\"[SYNTHETIC] W06 Fixture Co\",\"document_id\":\"urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609\",\"document_kind\":\"investor_relations\",\"fiscal_period\":null,\"fiscal_year\":null,\"form_type\":\"investor_relations\",\"language\":\"zh\",\"market\":\"CN\",\"mime_type\":\"text/plain\",\"period_end\":\"nonperiodic\",\"provider\":\"example-filing\",\"provider_document_id\":null,\"published_date\":\"2026-04-10\",\"retrieved_at\":\"2026-04-10T00:00:00Z\",\"security_id\":\"W06TEST\",\"source_id\":\"urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609\",\"source_url\":null,\"title\":null}],\"schema_version\":\"2.0.0\",\"source_manifest_schema_version\":\"2.0.0\"}\n",
+          "stderr": "",
+          "bundle": {
+            "bundle_sha256": "8c931ff71ca9d053737e057f1b4435ddc2cde69e2841ad42794ad603cdb1fd02",
+            "counts": {
+              "evidence_spans": 0,
+              "source_manifests": 3
+            },
+            "evidence_span_schema_version": "1.0.0",
+            "evidence_spans": [],
+            "export_id": "urn:company-wiki:source-export:sha256:8c931ff71ca9d053737e057f1b4435ddc2cde69e2841ad42794ad603cdb1fd02",
+            "manifests": [
+              {
+                "byte_size": 640,
+                "canonical_entity_id": "ent-synthetic-w06",
+                "collector_name": "w06-fixture-builder",
+                "collector_version": "1.0",
+                "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+                "display_name": "[SYNTHETIC] W06 Fixture Co",
+                "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+                "document_kind": "annual_report",
+                "fiscal_period": null,
+                "fiscal_year": 2025,
+                "form_type": "annual_report",
+                "language": "zh",
+                "market": "CN",
+                "mime_type": "application/pdf",
+                "period_end": "2025-12-31",
+                "provider": "example-filing",
+                "provider_document_id": "synthetic-w06-pdf",
+                "published_date": "2026-03-01",
+                "retrieved_at": "2026-03-01T00:00:00Z",
+                "security_id": "W06TEST",
+                "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+                "source_url": null,
+                "title": "[SYNTHETIC][W06] pdf fixture original"
+              },
+              {
+                "byte_size": 236,
+                "canonical_entity_id": "ent-synthetic-w06",
+                "collector_name": "w06-fixture-builder",
+                "collector_version": "1.0",
+                "content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+                "display_name": "[SYNTHETIC] W06 Fixture Co",
+                "document_id": "urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+                "document_kind": "prospectus",
+                "fiscal_period": null,
+                "fiscal_year": null,
+                "form_type": "prospectus",
+                "language": "zh",
+                "market": "CN",
+                "mime_type": "text/html",
+                "period_end": "nonperiodic",
+                "provider": "example-filing",
+                "provider_document_id": "synthetic-w06-htm",
+                "published_date": "2026-05-06",
+                "retrieved_at": "2026-05-06T00:00:00Z",
+                "security_id": "W06TEST",
+                "source_id": "urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+                "source_url": null,
+                "title": "[SYNTHETIC][W06] htm fixture original"
+              },
+              {
+                "byte_size": 255,
+                "canonical_entity_id": "ent-synthetic-w06",
+                "collector_name": "w06-fixture-builder",
+                "collector_version": "1.0",
+                "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+                "display_name": "[SYNTHETIC] W06 Fixture Co",
+                "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+                "document_kind": "investor_relations",
+                "fiscal_period": null,
+                "fiscal_year": null,
+                "form_type": "investor_relations",
+                "language": "zh",
+                "market": "CN",
+                "mime_type": "text/plain",
+                "period_end": "nonperiodic",
+                "provider": "example-filing",
+                "provider_document_id": null,
+                "published_date": "2026-04-10",
+                "retrieved_at": "2026-04-10T00:00:00Z",
+                "security_id": "W06TEST",
+                "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+                "source_url": null,
+                "title": null
+              }
+            ],
+            "schema_version": "2.0.0",
+            "source_manifest_schema_version": "2.0.0"
+          },
+          "parse_error": null,
+          "bundle_sha256": "8c931ff71ca9d053737e057f1b4435ddc2cde69e2841ad42794ad603cdb1fd02",
+          "path_fields_present": false,
+          "manifests": [
+            {
+              "byte_size": 640,
+              "canonical_entity_id": "ent-synthetic-w06",
+              "collector_name": "w06-fixture-builder",
+              "collector_version": "1.0",
+              "content_sha256": "1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "display_name": "[SYNTHETIC] W06 Fixture Co",
+              "document_id": "urn:company-wiki:document:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "document_kind": "annual_report",
+              "fiscal_period": null,
+              "fiscal_year": 2025,
+              "form_type": "annual_report",
+              "language": "zh",
+              "market": "CN",
+              "mime_type": "application/pdf",
+              "period_end": "2025-12-31",
+              "provider": "example-filing",
+              "provider_document_id": "synthetic-w06-pdf",
+              "published_date": "2026-03-01",
+              "retrieved_at": "2026-03-01T00:00:00Z",
+              "security_id": "W06TEST",
+              "source_id": "urn:company-wiki:source:sha256:1f9774fe3de6d73beb728bab000b1f1bb5e27ee6400049f38f6baff5c26abb85",
+              "source_url": null,
+              "title": "[SYNTHETIC][W06] pdf fixture original"
+            },
+            {
+              "byte_size": 236,
+              "canonical_entity_id": "ent-synthetic-w06",
+              "collector_name": "w06-fixture-builder",
+              "collector_version": "1.0",
+              "content_sha256": "64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "display_name": "[SYNTHETIC] W06 Fixture Co",
+              "document_id": "urn:company-wiki:document:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "document_kind": "prospectus",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": "prospectus",
+              "language": "zh",
+              "market": "CN",
+              "mime_type": "text/html",
+              "period_end": "nonperiodic",
+              "provider": "example-filing",
+              "provider_document_id": "synthetic-w06-htm",
+              "published_date": "2026-05-06",
+              "retrieved_at": "2026-05-06T00:00:00Z",
+              "security_id": "W06TEST",
+              "source_id": "urn:company-wiki:source:sha256:64a5178a7e608d4ed4812685eec201153f2291760b0bade05e102b3e0ad8dc1a",
+              "source_url": null,
+              "title": "[SYNTHETIC][W06] htm fixture original"
+            },
+            {
+              "byte_size": 255,
+              "canonical_entity_id": "ent-synthetic-w06",
+              "collector_name": "w06-fixture-builder",
+              "collector_version": "1.0",
+              "content_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "display_name": "[SYNTHETIC] W06 Fixture Co",
+              "document_id": "urn:company-wiki:document:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "document_kind": "investor_relations",
+              "fiscal_period": null,
+              "fiscal_year": null,
+              "form_type": "investor_relations",
+              "language": "zh",
+              "market": "CN",
+              "mime_type": "text/plain",
+              "period_end": "nonperiodic",
+              "provider": "example-filing",
+              "provider_document_id": null,
+              "published_date": "2026-04-10",
+              "retrieved_at": "2026-04-10T00:00:00Z",
+              "security_id": "W06TEST",
+              "source_id": "urn:company-wiki:source:sha256:e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+              "source_url": null,
+              "title": null
+            }
+          ],
+          "stderr_head": ""
+        },
+        "consumer_process": {
+          "pid": 15316,
+          "exit_code": 0,
+          "distinct_from_runner": true,
+          "reopen": {
+            "doc_key": "txt",
+            "method": "open_version",
+            "channel": "reader_verified_bytes",
+            "bytes_origin": "fresh_read",
+            "read_sha256": "e16267bcd59f0cb545b83db1704197a543ed15ab58f078ad73fe21be5b3c7609",
+            "byte_size": 255,
+            "verification": {
+              "byte_hash_match": true,
+              "sha_computed_from": "read_bytes"
+            }
+          }
+        },
+        "buffer_reuse_claimed": false
+      },
+      "expected": {
+        "fresh_process_reopen": true,
+        "pathless_consumer": true
+      },
+      "actual": {
+        "reported_status": "PASS"
+      },
+      "cleanup": {
+        "scope": "created_attempt",
+        "restored": true
+      }
+    }
+  ],
+  "consumer_access": {
+    "entries": [
+      {
+        "pid": 46796,
+        "path_class": "raw",
+        "attributed_to": "company_wiki",
+        "path_ref": "C:/Users/郑曾波/AppData/Local/Temp/w06-port-final-etcsolb_/owned/w06-owned-4lriuogb/lake_B/外部 Dayu 根/业绩说明会 纪要.txt"
+      },
+      {
+        "pid": 15316,
+        "path_class": "raw",
+        "attributed_to": "company_wiki",
+        "path_ref": "C:/Users/郑曾波/AppData/Local/Temp/w06-port-final-etcsolb_/owned/w06-owned-4lriuogb/lake_B/外部 Dayu 根/业绩说明会 纪要.txt"
+      }
+    ]
+  },
+  "cost": {
+    "in_process_reader_calls": 58,
+    "subprocess_read_invocations": 4,
+    "source_read_calls": 62,
+    "http_calls": 0,
+    "model_calls": 0,
+    "paid_usd": 0.0,
+    "basis": "synthetic current-reader/CLI only; active offline audit guard",
+    "blocked_actions": [
+      "network"
+    ]
+  },
+  "cleanup": {
+    "owned_root": "C:/Users/郑曾波/AppData/Local/Temp/w06-port-final-etcsolb_/owned",
+    "created_child": "C:/Users/郑曾波/AppData/Local/Temp/w06-port-final-etcsolb_/owned/w06-owned-4lriuogb",
+    "baseline": {
+      "exists": true,
+      "sentinels": [
+        {
+          "path_ref": "catalog",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001115471900,
+          "inode": 9570149210732338
+        },
+        {
+          "path_ref": "cfg",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001111481400,
+          "inode": 10133099164153640
+        },
+        {
+          "path_ref": "lake_A",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001113480100,
+          "inode": 7599824373757740
+        },
+        {
+          "path_ref": "lake_B",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001114405700,
+          "inode": 8444249303889711
+        },
+        {
+          "path_ref": "logs",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001115471900,
+          "inode": 8444249303889718
+        },
+        {
+          "path_ref": "scratch",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001115471900,
+          "inode": 14355223814813497
+        }
+      ]
+    },
+    "after": {
+      "exists": true,
+      "sentinels": [
+        {
+          "path_ref": "catalog",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001115471900,
+          "inode": 9570149210732338
+        },
+        {
+          "path_ref": "cfg",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001111481400,
+          "inode": 10133099164153640
+        },
+        {
+          "path_ref": "lake_A",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001113480100,
+          "inode": 7599824373757740
+        },
+        {
+          "path_ref": "lake_B",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001114405700,
+          "inode": 8444249303889711
+        },
+        {
+          "path_ref": "logs",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001115471900,
+          "inode": 8444249303889718
+        },
+        {
+          "path_ref": "scratch",
+          "type": "directory",
+          "byte_size": 0,
+          "mtime_ns": 1791724001115471900,
+          "inode": 14355223814813497
+        }
+      ]
+    },
+    "deleted_within_owned": true,
+    "restored": true,
+    "raw_unchanged": true,
+    "raw_scope": "known synthetic originals only; no production raw accessed"
+  },
+  "findings": [],
+  "oracle_verdict": {
+    "statuses": {
+      "S1": "PASS",
+      "S2": "PASS",
+      "S3": "PASS",
+      "S4": "PASS",
+      "S5": "PASS",
+      "S6": "PASS",
+      "S7": "PASS"
+    },
+    "overall": "PASS",
+    "findings": []
+  }
+}
