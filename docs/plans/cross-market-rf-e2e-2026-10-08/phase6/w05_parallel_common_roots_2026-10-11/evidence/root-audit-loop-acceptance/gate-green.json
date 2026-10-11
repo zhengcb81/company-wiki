@@ -1,0 +1,23 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_ci_push_selection.py",
+    "tests/unit/test_pre_push_temp_scope.py",
+    "-q",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\gate-owned-iqqbaorb",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 4.321799,
+  "scratch": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\evidence\\root-audit-loop-acceptance\\gate-owned-iqqbaorb",
+  "restored_initial_absent": true,
+  "fees_usd": 0
+}

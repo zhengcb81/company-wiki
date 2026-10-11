@@ -1,0 +1,13 @@
+{
+  "reason": "Known .planning evidence was misclassified as unknown runtime dependency; unnecessary full-suite invocation cancelled to correct selector",
+  "parent_gate_pid": 49172,
+  "owned_basetemp": "C:/Users/郑曾波/AppData/Local/Temp/cwpp-e9b1w3ej",
+  "stopped": [
+    {
+      "pid": 42572,
+      "parent_pid": 49172,
+      "created": "2026-10-11T11:28:04.128916+01:00",
+      "name": "python.exe"
+    }
+  ]
+}

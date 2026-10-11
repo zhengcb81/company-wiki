@@ -1,0 +1,84 @@
+[master c9dd5124] docs(w05): accept audit loop with causal recovery fixes
+ 86 files changed, 1242 insertions(+)
+ create mode 100644 .planning/w05-audit-loop-reception/README.md
+ create mode 100644 .planning/w05-audit-loop-reception/acceptance_report.py
+ create mode 100644 .planning/w05-audit-loop-reception/apply_closure.py
+ create mode 100644 .planning/w05-audit-loop-reception/close_stop_rules.py
+ create mode 100644 .planning/w05-audit-loop-reception/final_e2e.py
+ create mode 100644 .planning/w05-audit-loop-reception/finalize_closure.py
+ create mode 100644 .planning/w05-audit-loop-reception/findings.md
+ create mode 100644 .planning/w05-audit-loop-reception/install_skill.py
+ create mode 100644 .planning/w05-audit-loop-reception/progress.md
+ create mode 100644 .planning/w05-audit-loop-reception/publish_cwp.py
+ create mode 100644 .planning/w05-audit-loop-reception/run_acceptance.py
+ create mode 100644 .planning/w05-audit-loop-reception/task_plan.md
+ create mode 100644 .planning/w05-audit-loop-reception/test_w05_progress_closure.py
+ create mode 100644 .planning/w05-audit-loop-reception/update_pwf.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T095847273013Z/intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T100205309148Z/e2e/receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T100205309148Z/e2e/resume.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T100205309148Z/e2e/resume.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T100205309148Z/intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T100205309148Z/offline-e2e.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T100205309148Z/offline-e2e.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T100205309148Z/receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T100205309148Z/unit-201.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T100205309148Z/unit-201.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T101209544274Z/failed-state-summary.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T101209544274Z/failure-scratch-restoration.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T101209544274Z/intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T101209544274Z/offline-e2e.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T101209544274Z/offline-e2e.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T101209544274Z/receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T101209544274Z/scratch-cleanup-manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T101209544274Z/source-freeze.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T101209544274Z/unit-full.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/20261011T101209544274Z/unit-full.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/acceptance-manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/acceptance.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/acceptance.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/closure-existing-green-v2.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/closure-existing-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/closure-final-19-v2.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/closure-final-19.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/closure-new-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/closure-obligation-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/closure-red-v2.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/closure-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/closure-stop-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/final-e2e-20261011T101539365420Z/receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/final-e2e-20261011T101539365420Z/resume.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/final-e2e-20261011T101539365420Z/resume.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/final-e2e-20261011T101539365420Z/root-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/final-e2e-20261011T101539365420Z/run.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/final-e2e-20261011T101539365420Z/scratch-cleanup-manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/failed_tmp.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/failed_tmp_cleanup.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/final-integrity.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/final-manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/final-plan-probe.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/final-plan-probe.ps1
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/final-pure-probes.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/final-pure-probes.ps1
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/final-review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/final-review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/final-tmp-observer-error.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/final-tmp-observer-error.ps1
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/pure_probes.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/pure_probes.ps1
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/tmp_probes.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/independent/tmp_probes.ps1
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/installation-check.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/installation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/installation.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/installed-help-0.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/installed-help-1.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/root-audit-loop-acceptance/pwf-update.json
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped

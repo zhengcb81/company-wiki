@@ -104,7 +104,7 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
         return full, "unknown push range"
     # Plans retain diagnostic scripts and fixtures as evidence, not live code.
     # Filter by that directory responsibility before entrypoint/dependency rules.
-    changes = {name for name in changes if not name.startswith("docs/plans/")}
+    changes = {name for name in changes if not name.startswith(("docs/plans/", ".planning/"))}
     global_names = {"pyproject.toml", "pytest.ini", "conftest.py", "tests/conftest.py"}
     global_prefixes = ("config/", ".github/", ".githooks/", "tools/", "tests/fixtures/")
     if any(name in global_names or name.startswith((*global_prefixes, "requirements"))
