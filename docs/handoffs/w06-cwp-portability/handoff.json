@@ -1,0 +1,297 @@
+{
+  "schema_version": "w06-lane-handoff/1",
+  "lane": "W06-CWP-PORTABILITY",
+  "status": "COMPLETE",
+  "repository": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability",
+  "branch": "codex/w06-cwp-portability",
+  "base_commit": "01ea86a37edb5506d6269b6e10d9cb56a1270efd",
+  "head_commit": "49afd8738b38f45507ccc58fa4bab27c638addf7",
+  "head_commit_note": "code/test/log/e2e commit; this handoff set is committed after it",
+  "changed_files": [
+    {
+      "path": "tools/source_root_portability/__init__.py",
+      "sha256": "6529565236eea8e010c18a8e64c74abe9460a547863311b85413ed8b231964ea",
+      "bytes": 309,
+      "purpose": "tool package marker"
+    },
+    {
+      "path": "tools/source_root_portability/README.md",
+      "sha256": "36ed9b93be71df7e89161be56fbe4790fd831c9a091d4d33a191b74a17e60d51",
+      "bytes": 4389,
+      "purpose": "tool usage/contract documentation"
+    },
+    {
+      "path": "tools/source_root_portability/fixture_builder.py",
+      "sha256": "31e88bc98d45c6ad709fb94d8a09cdbd482ceab4adf207fadf855c0fb895c6f2",
+      "bytes": 11003,
+      "purpose": "synthetic fixture lake + real temp YAML config builder"
+    },
+    {
+      "path": "tools/source_root_portability/consumer_spy.py",
+      "sha256": "bc7222c9fbf412959476a509947393c43f62ba929425527790cdc889fed69e22",
+      "bytes": 8312,
+      "purpose": "cross-process pathless consumer probe with open-attribution audit hook"
+    },
+    {
+      "path": "tools/source_root_portability/oracle.py",
+      "sha256": "480e195897fdc5052a8fad5d5b2e0b35bed69ea5a22d366691b2cb3a31df4a5f",
+      "bytes": 32824,
+      "purpose": "run-record oracle (schema cwp-root-portability/1) with fixed expectations"
+    },
+    {
+      "path": "tools/source_root_portability/report.py",
+      "sha256": "ee8ce8c556ef55f28593d3bfa4223c5af564fa396c02fd94bee4c962053c28aa",
+      "bytes": 3967,
+      "purpose": "attempt dir, code identity, small report writer"
+    },
+    {
+      "path": "tools/source_root_portability/scenarios.py",
+      "sha256": "091838174d3ad7696ff26dea67d5c83bb41d130778e1da72f4de707bf7ba76cd",
+      "bytes": 34272,
+      "purpose": "7 scenario implementations over real SourceCatalog/SourceVersionReader"
+    },
+    {
+      "path": "tools/source_root_portability/run.py",
+      "sha256": "4a1d2d9072ec459b9acb546f796ef17499927625917c2626b9a52f1b3536a0eb",
+      "bytes": 10304,
+      "purpose": "manual runner CLI (baseline/cleanup/orchestration/oracle re-check)"
+    },
+    {
+      "path": "tests/unit/test_w06_root_portability_oracle.py",
+      "sha256": "3a0ce4bd4378336d950826e08708c20526fcfd5ef92b56e085948ead4b0c0081",
+      "bytes": 19638,
+      "purpose": "oracle counterexamples + truthful/invalid record contracts"
+    },
+    {
+      "path": "tests/integration/test_w06_root_portability.py",
+      "sha256": "22c0ae62795b68617c8ba949039718a11aac7bbdf1e891f2f626a6e793fd0b72",
+      "bytes": 8376,
+      "purpose": "real reader + temp catalog + cross-process spy + sentinel cleanup"
+    },
+    {
+      "path": ".planning/w06-cwp-portability/task_plan.md",
+      "sha256": "4847a427a213cc88021ec4db6720f69f50ba75ff60f94a2ff8357943fc80745d",
+      "bytes": 4588,
+      "purpose": "lane PWF plan"
+    },
+    {
+      "path": ".planning/w06-cwp-portability/findings.md",
+      "sha256": "273adc1f7c3f18946245c55917c21a2143ebc24b816bb6847b83457835497cee",
+      "bytes": 12972,
+      "purpose": "lane PWF findings"
+    },
+    {
+      "path": ".planning/w06-cwp-portability/progress.md",
+      "sha256": "fc94931b7ab40d00b05cfa21c36a9355a653995e9bf26cd9c496483a6a8b2e97",
+      "bytes": 1703,
+      "purpose": "lane PWF progress log"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/red-oracle.log",
+      "sha256": "d6e596376d78a3655be420c9aba99f1199caf296c384386843ca4a36a4bfc74c",
+      "bytes": 10524,
+      "purpose": "phase A RED log (stub run)"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/green-unit-integration.log",
+      "sha256": "22abff98fcc084629647b5a75792ff8445aa47194c11c1243e331ccbb2397584",
+      "bytes": 1193,
+      "purpose": "phase B GREEN log (32 passed, pre-sentinel-test)"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/green-unit-integration-final.log",
+      "sha256": "c5fafcab1f4119be57353b1dc36b716fc09939c53d589c8e2ba2c1d468d75f43",
+      "bytes": 1193,
+      "purpose": "phase B GREEN log (33 passed, final)"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/e2e-runner.log",
+      "sha256": "41f5eab4da9c932233a2417004aaa2986c47dda78a97fd7794e7ff68fba0c00e",
+      "bytes": 344,
+      "purpose": "phase C E2E attempt-0001 (oracle caught S4 record gap, FAIL)"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/e2e-runner-2.log",
+      "sha256": "e442ae31768be1252e2116698a7f5f4b4105e6a0ee623f67c419794077b2b9a2",
+      "bytes": 143,
+      "purpose": "phase C E2E attempt-0002 (first PASS)"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/e2e-runner-final.log",
+      "sha256": "8d49466e3215540fb9b98445c118a51c09ea9ca511fea674baa1e0ef4ed6351e",
+      "bytes": 143,
+      "purpose": "phase C E2E attempt-0003 final (PASS)"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/e2e/attempt-0003-report.json",
+      "sha256": "0f5901777afbe9ef81d9e7241057d69f701494da23949a0bb18def498b88d3a2",
+      "bytes": 29459,
+      "purpose": "final E2E report copy (schema cwp-root-portability/1)"
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/handoff.md",
+      "sha256": "90cddb372b9ab760e1a44820a62d13d0f3b3f0b42ccd9f3d10518e49430d3eb9",
+      "bytes": 4477,
+      "purpose": "human-readable handoff summary"
+    }
+  ],
+  "input_evidence": [
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/amendment_manifest.json",
+      "sha256": "320a27c9a60250eed7a46c0b2fed5ddba41baf104b67dcc2f7e1af56a9367891",
+      "bytes": 374
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/construction_card.md",
+      "sha256": "d3f73a4e421335159d53b2d1ff7bfdebd0296b2a999f13f132cda8ae023bbe22",
+      "bytes": 6135
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/handoff_contract.md",
+      "sha256": "593f1b15464db6dc5de382570c11196921c1997251c36ac4c452afd275d86173",
+      "bytes": 3345
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/inputs.json",
+      "sha256": "46119404b7088666e7b41af6dadd93881d9f5d14ef5a62cd3a23ab631a56d770",
+      "bytes": 5717
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/manifest.json",
+      "sha256": "56baa2ebe06c16e3b1264c0fe94850dda89e52fa94423a8788b49f57341a6a97",
+      "bytes": 552
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/input/ROOT_INTERFACE_AMENDMENT.md",
+      "sha256": "b874c266a4cd37cb823fcbfda556606754fbcef9294ada5919a023a7844bb9bb",
+      "bytes": 2220
+    }
+  ],
+  "interfaces": [
+    {
+      "name": "company_wiki.source_catalog.source_reader.SourceVersionReader.open_version(ref, purpose=...)",
+      "before": "unchanged",
+      "after": "unchanged",
+      "compatibility": "read-only use; tool adds no interface"
+    },
+    {
+      "name": "SourceVersionReader.query_ref/verify_version/describe_version/read_policy_sha256",
+      "before": "unchanged",
+      "after": "unchanged",
+      "compatibility": "read-only use"
+    },
+    {
+      "name": "SourceCatalog.register_sources(root_id, relative_paths)",
+      "before": "unchanged",
+      "after": "unchanged",
+      "compatibility": "precise registration on synthetic fixture roots only"
+    },
+    {
+      "name": "source_export_v2_cli / SourceExportBundleV2",
+      "before": "unchanged",
+      "after": "unchanged",
+      "compatibility": "pathless bundle asserted; no new fields"
+    },
+    {
+      "name": "SourceRef 2.0",
+      "before": "unchanged",
+      "after": "unchanged",
+      "compatibility": "identity/SHA/size/MIME/schema only; no physical path or new identity ticket added"
+    }
+  ],
+  "tests": [
+    {
+      "phase": "A-RED",
+      "command": "python -B -m pytest -q tests/unit/test_w06_root_portability_oracle.py (against pre-implementation stub)",
+      "exit_code": 1,
+      "counts": "19 failed, 3 passed",
+      "elapsed_seconds": 1.83,
+      "log": "docs/handoffs/w06-cwp-portability/logs/red-oracle.log",
+      "log_sha256": "d6e596376d78a3655be420c9aba99f1199caf296c384386843ca4a36a4bfc74c",
+      "scope": "oracle counterexamples must reject false PASS; ImportError/uninitialized not counted as RED"
+    },
+    {
+      "phase": "B-GREEN",
+      "command": "python -B -m pytest -q tests/unit/test_w06_root_portability_oracle.py tests/integration/test_w06_root_portability.py",
+      "exit_code": 0,
+      "counts": "33 passed",
+      "elapsed_seconds": 12.55,
+      "log": "docs/handoffs/w06-cwp-portability/logs/green-unit-integration-final.log",
+      "log_sha256": "c5fafcab1f4119be57353b1dc36b716fc09939c53d589c8e2ba2c1d468d75f43",
+      "scope": "oracle units + real SourceVersionReader/fixture/spy/sentinel-cleanup integration; no mocked bytes"
+    },
+    {
+      "phase": "C-E2E",
+      "command": "python -B tools/source_root_portability/run.py --owned-root C:/tmp/w06rp/owned --out-root C:/tmp/w06rp/out",
+      "exit_code": 0,
+      "counts": "7 scenarios PASS; oracle overall PASS; source_read_calls 51; http_calls 0",
+      "elapsed_seconds": 7.424,
+      "log": "docs/handoffs/w06-cwp-portability/logs/e2e-runner-final.log",
+      "log_sha256": "8d49466e3215540fb9b98445c118a51c09ea9ca511fea674baa1e0ef4ed6351e",
+      "scope": "full manual runner on fresh owned root (absent baseline); attempt-0003; attempts never overwritten"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F14-sidecar-nonperiodic-period-contract",
+      "root_cause": "sidecar_filing_v1 completeness (WU-701 N-02) requires truthy fiscal_year/period_end; a missing period degrades the group to indexed_only/incomplete and query_ref refuses it",
+      "disposition": "ROOT_SUGGESTION",
+      "evidence": "findings.md F14; fixture uses explicit 'nonperiodic' markers; describe fiscal_year stays None",
+      "test_ids": [
+        "tests/integration/test_w06_root_portability.py::test_register_query_open_keeps_exact_bytes_and_facts"
+      ]
+    },
+    {
+      "id": "F15-content-derived-identity-observations",
+      "root_cause": "source_id/document_id derive from content SHA; same-path re-registration rebinds the (root_id,relative_path) location via ON CONFLICT DO UPDATE, so an old ref then refuses with no_indexed_location after a content change",
+      "disposition": "ROOT_SUGGESTION_DOCUMENT_CONTRACT",
+      "evidence": "findings.md F15; e2e attempt-0003 S3 (same_content_same_ids) and S5 (old ref no_indexed_location)",
+      "test_ids": [
+        "tests/integration/test_w06_root_portability.py::test_corruption_refusal_and_recovery"
+      ]
+    },
+    {
+      "id": "F17-directory-scan-standalone-sidecar-quirk",
+      "root_cause": "directory roots without routes register .source.json files as standalone documents (legacy walk behavior)",
+      "disposition": "ROOT_SUGGESTION",
+      "evidence": "findings.md F17; fixture roots use routes include ['*'] to reach the pairing branch",
+      "test_ids": []
+    },
+    {
+      "id": "F18-migration-abstraction-holds",
+      "root_cause": "n/a (positive observation): root move + config remap, re-registration, duplicate fallback and fresh-process replay all preserved exact bytes/period/kind through the reader contract",
+      "disposition": "OBSERVATION",
+      "evidence": "e2e/attempt-0003-report.json (oracle overall PASS)",
+      "test_ids": [
+        "tests/integration/test_w06_root_portability.py"
+      ]
+    }
+  ],
+  "cleanup": {
+    "owned_root": "C:/tmp/w06rp/owned",
+    "baseline": {
+      "exists": false,
+      "sentinels": []
+    },
+    "after": {
+      "exists": false,
+      "sentinels": []
+    },
+    "restored": true,
+    "raw_unchanged": true
+  },
+  "cost": {
+    "provider_calls": 0,
+    "model_calls": 0,
+    "paid_usd": 0.0,
+    "unknown_charge": 0.0
+  },
+  "space": {
+    "retained_bytes": 218476,
+    "scratch_peak_bytes": 308565,
+    "measurement": "scratch peak measured on fixture+catalog after registration (all files under owned scratch); retained = sum of handoff file bytes"
+  },
+  "remaining": "PNG/PPTX OCR out of scope (W05 lane); multi-root full replay stays a manual big-node entry, default CI does not traverse the real lake",
+  "root_next_action": "ROOT merges the tool as-is (no src changes needed); optionally adopt findings F14/F15/F17 suggestions; select the fast oracle unit tests for affected CI and keep run.py for manual big nodes; rerun attempt after any source-catalog change using the same runner"
+}
