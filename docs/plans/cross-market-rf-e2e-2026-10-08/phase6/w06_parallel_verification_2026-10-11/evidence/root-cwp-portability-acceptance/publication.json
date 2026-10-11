@@ -1,0 +1,43 @@
+{
+  "schema": "root-w06-portability-publication/1",
+  "status": "PUBLISHED_WITH_SCOPE",
+  "acceptance_commit": "5f10af0bafafb1c13d26d1afd9821e83dd8b7168",
+  "main_merge": "e2e19ea200bf87b13dd41d6389897ea5f2711d93",
+  "published_head": "6dd7a1197f480c05ced36c6865b89f7f23d49ba6",
+  "remote_exact": true,
+  "normal_commit_push_hooks": true,
+  "prepush": {
+    "passed": 3305,
+    "seconds": 212.82
+  },
+  "ci": {
+    "id": 38145427297,
+    "head_sha": "6dd7a1197f480c05ced36c6865b89f7f23d49ba6",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38145427297"
+  },
+  "engineering": {
+    "passed": 69,
+    "host_symlink_skipped": 1
+  },
+  "actual_synthetic_reader_cli_scenarios": 7,
+  "independent_cases": 53,
+  "product_LF_match_files": 11,
+  "cleanup": {
+    "removed_checkout": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-portability-root",
+    "file_count": 6969,
+    "bytes": 126358354,
+    "force": false,
+    "ignored_only": [
+      "!! .pytest_cache/",
+      "!! .ruff_cache/"
+    ],
+    "branch_worker_evidence_kept": true
+  },
+  "installation": "Repository-only manual tools; no skill installation required",
+  "scope": "Windows synthetic roots/Reader/full SourceRef/CLI/oracle; not real cloud or POSIX or model quality",
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "fee_micro_usd": 0
+}
