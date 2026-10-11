@@ -57,6 +57,206 @@ class OCRLimits:
             raise NormalizationLimitError(name, getattr(self, name), "local OCR")
 
 
+OCR_REGION_DIAGNOSTICS_SCHEMA = "cwp-ocr-region-diagnostics/1"
+OCR_REGION_RECOVERY_SCHEMA = "cwp-ocr-region-recovery/1"
+# The engine is constructed with this floor instead of the configured
+# text_score so score-filtered regions stay observable; the adapter applies
+# the configured threshold itself.
+ENGINE_TEXT_SCORE_FLOOR = 0.0
+
+_RECOVERY_STATUSES = frozenset(
+    {"recovered", "unrecovered", "budget_exhausted", "not_attempted"}
+)
+_ATTEMPT_OUTCOMES = frozenset({"accepted", "rejected", "error"})
+
+
+def _checked_box(value, error_code: str):
+    if len(value) != 4 or any(
+        isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v)
+        for v in value
+    ):
+        raise LocalOCRError(error_code)
+    x0, y0, x1, y1 = value
+    if x0 < 0 or y0 < 0 or x1 <= x0 or y1 <= y0:
+        raise LocalOCRError(error_code)
+    return tuple(float(v) for v in value)
+
+
+def _checked_confidence(value, error_code: str):
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not math.isfinite(value)
+        or not 0 <= value <= 1
+    ):
+        raise LocalOCRError(error_code)
+    return float(value)
+
+
+@dataclass(frozen=True)
+class OCRDroppedRegion:
+    """One recognizer region removed by score filtering; diagnostic only.
+
+    ``text`` keeps the garbled recognizer output for diagnosis.  It never
+    becomes an OCRLine, unit text or evidence span.
+    """
+
+    box: tuple[float, float, float, float]
+    confidence: float
+    text: str
+    reason: str
+
+    def __post_init__(self):
+        object.__setattr__(self, "box", _checked_box(self.box, "OCR_BOX_INVALID"))
+        object.__setattr__(
+            self, "confidence", _checked_confidence(self.confidence, "OCR_CONFIDENCE_INVALID")
+        )
+        if not isinstance(self.text, str) or not self.text:
+            raise LocalOCRError("OCR_TEXT_INVALID")
+        if not isinstance(self.reason, str) or not self.reason:
+            raise LocalOCRError("OCR_DROP_REASON_INVALID")
+
+
+@dataclass(frozen=True)
+class OCRRecoveryAttempt:
+    """One bounded re-recognition attempt over a deterministic transform."""
+
+    transform: str
+    params: dict
+    outcome: str
+    lines: tuple[tuple[str, float], ...] = ()
+    error: str | None = None
+    note: str | None = None
+
+    def __post_init__(self):
+        if not isinstance(self.transform, str) or not self.transform:
+            raise LocalOCRError("OCR_RECOVERY_RECORD_INVALID")
+        if not isinstance(self.params, dict):
+            raise LocalOCRError("OCR_RECOVERY_RECORD_INVALID")
+        if self.outcome not in _ATTEMPT_OUTCOMES:
+            raise LocalOCRError("OCR_RECOVERY_RECORD_INVALID")
+        if (self.outcome == "error") != (self.error is not None):
+            raise LocalOCRError("OCR_RECOVERY_RECORD_INVALID")
+        checked = []
+        for text, score in self.lines:
+            if not isinstance(text, str) or not isinstance(score, (int, float)):
+                raise LocalOCRError("OCR_RECOVERY_RECORD_INVALID")
+            checked.append((text, float(score)))
+        object.__setattr__(self, "lines", tuple(checked))
+        if self.error is not None and (not isinstance(self.error, str) or not self.error):
+            raise LocalOCRError("OCR_RECOVERY_RECORD_INVALID")
+        if self.note is not None and (not isinstance(self.note, str) or not self.note):
+            raise LocalOCRError("OCR_RECOVERY_RECORD_INVALID")
+
+
+@dataclass(frozen=True)
+class OCRRegionRecovery:
+    """Per-dropped-region recovery status and its attempt records."""
+
+    box: tuple[float, float, float, float]
+    status: str
+    attempts: tuple[OCRRecoveryAttempt, ...] = ()
+    recovered_text: str | None = None
+    recovered_box: tuple[float, float, float, float] | None = None
+    recovered_confidence: float | None = None
+
+    def __post_init__(self):
+        object.__setattr__(self, "box", _checked_box(self.box, "OCR_BOX_INVALID"))
+        if self.status not in _RECOVERY_STATUSES:
+            raise LocalOCRError("OCR_RECOVERY_RECORD_INVALID")
+        for attempt in self.attempts:
+            if not isinstance(attempt, OCRRecoveryAttempt):
+                raise LocalOCRError("OCR_RECOVERY_RECORD_INVALID")
+        if self.status == "recovered":
+            if (
+                not isinstance(self.recovered_text, str)
+                or not self.recovered_text
+                or self.recovered_box is None
+                or self.recovered_confidence is None
+            ):
+                raise LocalOCRError("OCR_RECOVERY_RECORD_INVALID")
+        if self.recovered_box is not None:
+            object.__setattr__(
+                self, "recovered_box", _checked_box(self.recovered_box, "OCR_BOX_INVALID")
+            )
+        if self.recovered_confidence is not None:
+            object.__setattr__(
+                self,
+                "recovered_confidence",
+                _checked_confidence(
+                    self.recovered_confidence, "OCR_CONFIDENCE_INVALID"
+                ),
+            )
+        object.__setattr__(self, "attempts", tuple(self.attempts))
+
+    def to_dict(self):
+        return {
+            "box": list(self.box),
+            "status": self.status,
+            "attempts": [
+                {
+                    "transform": a.transform,
+                    "params": a.params,
+                    "outcome": a.outcome,
+                    "lines": [[t, s] for t, s in a.lines],
+                    "error": a.error,
+                    "note": a.note,
+                }
+                for a in self.attempts
+            ],
+            "recovered_text": self.recovered_text,
+            "recovered_box": None if self.recovered_box is None else list(self.recovered_box),
+            "recovered_confidence": self.recovered_confidence,
+        }
+
+
+@dataclass(frozen=True)
+class OCRRegionDiagnostics:
+    """Stage counts plus regions lost to backend score filtering.
+
+    ``detected`` is ``None`` when the backend seam cannot observe the
+    pre-recognition count.  ``recognized`` never implies exhaustive recall.
+    """
+
+    detected: int | None
+    recognized: int | None
+    accepted: int | None
+    dropped: tuple[OCRDroppedRegion, ...] = ()
+    recovery: tuple[OCRRegionRecovery, ...] = ()
+
+    def __post_init__(self):
+        for name in ("detected", "recognized", "accepted"):
+            value = getattr(self, name)
+            if value is not None and (
+                isinstance(value, bool) or not isinstance(value, int) or value < 0
+            ):
+                raise LocalOCRError("OCR_DIAGNOSTICS_INVALID")
+        for seq, kind in ((self.dropped, OCRDroppedRegion), (self.recovery, OCRRegionRecovery)):
+            for item in seq:
+                if not isinstance(item, kind):
+                    raise LocalOCRError("OCR_DIAGNOSTICS_INVALID")
+        object.__setattr__(self, "dropped", tuple(self.dropped))
+        object.__setattr__(self, "recovery", tuple(self.recovery))
+
+    def to_dict(self):
+        return {
+            "schema_version": OCR_REGION_DIAGNOSTICS_SCHEMA,
+            "detected": self.detected,
+            "recognized": self.recognized,
+            "accepted": self.accepted,
+            "dropped": [
+                {
+                    "box": list(r.box),
+                    "confidence": r.confidence,
+                    "text": r.text,
+                    "reason": r.reason,
+                }
+                for r in self.dropped
+            ],
+            "recovery": [r.to_dict() for r in self.recovery],
+        }
+
+
 @dataclass(frozen=True)
 class OCRLine:
     text: str
@@ -92,6 +292,7 @@ class ImageOCRResult:
     width: int
     height: int
     lines: tuple[OCRLine, ...]
+    region_diagnostics: OCRRegionDiagnostics | None = None
 
     def __post_init__(self):
         _positive(self.width, "width")
@@ -103,6 +304,22 @@ class ImageOCRResult:
                 or line.box[3] > self.height
             ):
                 raise LocalOCRError("OCR_BOX_OUTSIDE_IMAGE")
+        diagnostics = self.region_diagnostics
+        if diagnostics is not None:
+            if not isinstance(diagnostics, OCRRegionDiagnostics):
+                raise LocalOCRError("OCR_DIAGNOSTICS_INVALID")
+            for record in (
+                *(r.box for r in diagnostics.dropped),
+                *(r.box for r in diagnostics.recovery),
+                *(
+                    box
+                    for r in diagnostics.recovery
+                    if r.recovered_box is not None
+                    for box in (r.recovered_box,)
+                ),
+            ):
+                if record[2] > self.width or record[3] > self.height:
+                    raise LocalOCRError("OCR_BOX_OUTSIDE_IMAGE")
         object.__setattr__(self, "lines", tuple(self.lines))
 
 
@@ -198,6 +415,15 @@ class LocalOCRConfig:
             "confidence_round_decimals": 6,
             "reading_order": "top-left-box/1",
             "transform": "rapidocr-image-rgb/1",
+            # Region diagnostics/recovery seam (W05): the engine is constructed
+            # with a 0.0 text_score floor and the configured threshold is applied
+            # inside this adapter so dropped regions stay observable.  Bump these
+            # schema strings whenever the diagnostic or recovery algorithm changes;
+            # the fingerprint (cache identity) changes with them.
+            "region_diagnostics": OCR_REGION_DIAGNOSTICS_SCHEMA,
+            "engine_text_score_floor": ENGINE_TEXT_SCORE_FLOOR,
+            "region_recovery": OCR_REGION_RECOVERY_SCHEMA,
+            "region_recovery_algorithm": "bounded-source-roi/2",
         }
 
     @property
@@ -338,7 +564,10 @@ class LocalOCRAdapter:
         params.update(
             {
                 "Global.log_level": "warning",
-                "Global.text_score": self.config.text_score,
+                # 0.0 floor: the engine must not filter low-score regions away;
+                # the configured threshold is applied inside transcribe() so the
+                # dropped regions remain observable as diagnostics.
+                "Global.text_score": ENGINE_TEXT_SCORE_FLOOR,
                 "Global.max_side_len": self.config.max_side_len,
                 "Global.return_word_box": False,
                 "Global.return_single_char_box": False,
@@ -387,19 +616,27 @@ class LocalOCRAdapter:
         if not (len(texts) == len(scores) == len(boxes)):
             raise LocalOCRError("OCR_RESULT_INVALID")
         lines = []
+        dropped = []
         for text, score, points in zip(texts, scores, boxes, strict=True):
             text = normalize_text(text)
             if not text:
                 continue
             box = (
-                max(0.0, float(min(p[0] for p in points))),
-                max(0.0, float(min(p[1] for p in points))),
-                min(float(width), float(max(p[0] for p in points))),
-                min(float(height), float(max(p[1] for p in points))),
+                round(max(0.0, float(min(p[0] for p in points))), 3),
+                round(max(0.0, float(min(p[1] for p in points))), 3),
+                round(min(float(width), float(max(p[0] for p in points))), 3),
+                round(min(float(height), float(max(p[1] for p in points))), 3),
             )
-            lines.append(
-                OCRLine(text, tuple(round(v, 3) for v in box), round(float(score), 6))
-            )
+            score = round(float(score), 6)
+            if score < self.config.text_score:
+                # The engine runs with a 0.0 floor so filtered regions stay
+                # observable here; the configured threshold is applied only by
+                # this adapter.  Dropped text is diagnostic, never a line.
+                dropped.append(
+                    OCRDroppedRegion(box, score, text, "low_text_score")
+                )
+                continue
+            lines.append(OCRLine(text, box, score))
         lines.sort(
             key=lambda line: (
                 line.box[1],
@@ -409,4 +646,10 @@ class LocalOCRAdapter:
                 line.text,
             )
         )
-        return ImageOCRResult(width, height, tuple(lines))
+        diagnostics = OCRRegionDiagnostics(
+            detected=None,  # pre-recognition count is not observable at this seam
+            recognized=len(texts),
+            accepted=len(lines),
+            dropped=tuple(dropped),
+        )
+        return ImageOCRResult(width, height, tuple(lines), diagnostics)

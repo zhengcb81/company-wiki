@@ -58,6 +58,14 @@ CURRENT_CI_REGRESSION_CASES = (
     "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
 )
 FAST_CONTRACT_CASES = (
+    # Small OCR resource regressions; real model replay remains a major-node test.
+    'tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer',
+    'tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget',
+    'tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it',
+    'tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]',
+    'tests/document_normalization/test_isolated_ocr.py::test_native_crt_stdin_probe_does_not_deadlock_liveness_monitor[_fstat64]',
+    'tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native',
+
     "tests/integration/test_m3_official_json_acceptance.py",
     "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
     *CURRENT_CI_REGRESSION_CASES,
