@@ -8,6 +8,6 @@
 
 核心源码与新19回归在 `C:/Users/郑曾波/Projects/_harness_worktrees/w05/audit-loop-root`；正常并线后 canonical 为 `C:/Users/郑曾波/Projects/revenue-forecast-audit`。工程复现使用该仓库 `python -B -m unittest discover -s tests -v` 和 `tools/run_pool_progress_e2e.py --help` 指定独立 owned scratch / receipt。以测试初始目录清单为准恢复，不能操作真实 runs、原件或他人临时目录。
 
-本目录 `apply_closure.py`、`finalize_closure.py`、`close_stop_rules.py`、`final_e2e.py` 是已执行的一次性精确 SHA/旧文本补丁脚本，**不能作为日常启动器再跑**。旧失败/修复日志用作因果证据，不是新的待实现问题。`acceptance_report.py` 与 `update_pwf.py` 也是 create-only 单次封存工具，重跑会拒绝覆盖。重复测试另建新 attempt，不能改写过去 receipt。
+本目录 `apply_closure.py`、`finalize_closure.py`、`close_stop_rules.py`、`final_e2e.py` 是已执行的一次性精确 SHA/旧文本补丁脚本，**不能作为日常启动器再跑**。旧失败/修复日志用作因果证据，不是新的待实现问题。`acceptance_report.py`、`update_pwf.py`、`publish_cwp.py`、`mirror_gate.py`、`final_publication.py`、`install_skill.py` 也是单次封存/限定基线工具，不能盲目重跑；`gate_tests.py` 两次red/green证据已经封存。重复测试另建新 attempt，不能改写过去 receipt。
 
 本次通过只证明有界进度记录、恢复协议及技能接线；真实公司来源、四个独立 agent 和预测质量仍按母 PWF 大节点执行。零新项目费用，不新增人工审批或每 commit 全量测试。

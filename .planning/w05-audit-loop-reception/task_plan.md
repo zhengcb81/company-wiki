@@ -15,4 +15,4 @@
 
 ## Next Step
 
-本包COMPLETE：Audit main321d4c1、两套技能24文件MATCH、CWP源修复8d281af1已正常推送且远端同HEAD。最终发布本收尾记录；之后恢复母PWF的W04责任包，不重跑一次性补丁或重派其他owner。
+本包COMPLETE：Audit main321d4c1、两套技能24文件MATCH、CWP源修复8d281af1已正常推送且远端同HEAD。CWP源码精确CI38132897880 success、资料98ef925a已发布/137smoke绿。恢复母PWF的W04责任包，不重跑一次性补丁或重派其他owner。
