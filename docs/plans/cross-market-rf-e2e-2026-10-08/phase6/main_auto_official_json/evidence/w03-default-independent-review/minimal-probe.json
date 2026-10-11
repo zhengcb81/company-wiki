@@ -1,0 +1,31 @@
+{
+  "probes": [
+    {
+      "text": "公司产品包括各类设备及配套服务等。",
+      "expected_selected": false,
+      "actual_selected": true,
+      "status": "selected",
+      "selection_reasons": [
+        [
+          "business_narrative_signal",
+          "business_structure"
+        ]
+      ]
+    },
+    {
+      "text": "公司的产品包括工业控制器与电动执行器。",
+      "expected_selected": true,
+      "actual_selected": true,
+      "status": "selected",
+      "selection_reasons": [
+        [
+          "business_narrative_signal",
+          "business_structure"
+        ]
+      ]
+    }
+  ],
+  "all_pass": false,
+  "external_calls": 0,
+  "temporary_files": 0
+}

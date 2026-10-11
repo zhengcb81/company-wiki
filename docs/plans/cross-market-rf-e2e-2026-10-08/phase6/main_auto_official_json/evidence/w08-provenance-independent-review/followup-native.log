@@ -1,0 +1,64 @@
+HANDOFF_SHA 2e2ec9567da36eca03a8034113181e3d2de2abda07987c18ef6f5bda4752ca1d
+# W08 provenance control-character supplement
+
+Independent review found a real URL data classification omission: `ord(char) < 32` covered C0 but not DEL/C1. The helper now uses the Unicode general category `Cc` plus existing whitespace handling. A URL containing such a raw character stays unknown (`None`); raw storage behavior and the existing writer nullable interface do not change. No new permission, URL HTTP check, schema, consumer or capture rewrite.
+
+Targeted RED: DEL U+007F and C1 U+009F failed; C1 U+0085 was already rejected as whitespace, yielding2 FAIL/1 PASS in0.54s. Targeted GREEN: all3 PASS; Ruff0. No58-test/full/public CLI repeat. Original HANDOFF.md, RED.log, GREEN.log, GREEN_final_targeted.log and old static logs are untouched. No provider/model/network/production data/Git/install operation.
+
+## Current frozen source/test SHA256
+
+- `src/company_wiki/source_catalog/official_json_import.py`: `604d62cefd2ceb8b566dae08cac9e1ad86e8ea285e88da84ff845b4bf93cf027`
+- `src/company_wiki/source_catalog/canonical_writer.py`: `26d9c475442f5438b19b8ad6a1c8578d0f14cfd13660b5955fd04c75a798e70f`
+- `tests/integration/test_official_json_capture_provenance.py`: `3b1ff1c8dee0d4e48b1012d0fd468ff17191afa24d4119c740be437bcd71b6be`
+
+## Additional original logs
+
+- `RED_control_chars.log`: `cc27ee0fdcf4253e77004da8bc338d56f05bc11e49a06a4cf1a07a2f302f49bd`
+- `GREEN_control_chars.log`: `1a2e7269ffd98dbbc75beb09704a67fdf0d69566cead53accd9c5fdc84548f2a`
+- `ruff-control-chars.log`: `82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18`
+
+CONTROL_EVIDENCE CONTROL_CHAR_SUPPLEMENT.md 2e2ec9567da36eca03a8034113181e3d2de2abda07987c18ef6f5bda4752ca1d 1555
+CONTROL_EVIDENCE GREEN_control_chars.log 1a2e7269ffd98dbbc75beb09704a67fdf0d69566cead53accd9c5fdc84548f2a 1116
+CONTROL_EVIDENCE RED_control_chars.log cc27ee0fdcf4253e77004da8bc338d56f05bc11e49a06a4cf1a07a2f302f49bd 2824
+CONTROL_EVIDENCE ruff-control-chars.log 82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18 19
+FILE src/company_wiki/source_catalog/official_json_import.py 604d62cefd2ceb8b566dae08cac9e1ad86e8ea285e88da84ff845b4bf93cf027
+9: from __future__ import annotations
+10: 
+11: from dataclasses import asdict
+12: import hashlib
+13: from typing import Any
+14: from urllib.parse import urlsplit
+15: from unicodedata import category
+16: 
+17: from .canonical_writer import CanonicalSourceWriter
+18: from .document_kinds import SOURCE_FACT_KINDS
+FILE src/company_wiki/source_catalog/official_json_import.py 604d62cefd2ceb8b566dae08cac9e1ad86e8ea285e88da84ff845b4bf93cf027
+201:             or original.get("response_bytes") != receipt["response_bytes"]
+202:         ):
+203:             return None
+204:         observation = original
+205:     url = observation.get("url")
+206:     if (not isinstance(url, str) or not url or len(url) > 2048
+207:             or any(char.isspace() or category(char) == "Cc" for char in url)):
+208:         return None
+209:     try:
+210:         parts = urlsplit(url)
+211:         if (parts.scheme not in {"https", "http"} or not parts.hostname
+212:                 or parts.username or parts.password):
+213:             return None
+214:         parts.port  # Validate a declared port without any network operation.
+215:     except ValueError:
+216:         return None
+217:     return url
+FILE tests/integration/test_official_json_capture_provenance.py 3b1ff1c8dee0d4e48b1012d0fd468ff17191afa24d4119c740be437bcd71b6be
+258:         assert export_manifest(state, [later["source_ref"]])["manifests"][0]["source_url"] == legacy_url
+259: 
+260: 
+261: @pytest.mark.parametrize("character", ["\x7f", "\x85", "\x9f"])
+262: def test_capture_url_control_characters_remain_unknown(character):
+263:     from company_wiki.source_catalog.official_json_import import _captured_source_url
+264: 
+265:     receipt = request(page(1), nested=False)["capture_receipt"]
+266:     receipt["url"] = URL + character
+267:     assert _captured_source_url(receipt) is None
+NATIVE_FOLLOWUP {"receipt": {"content_sha256": "1111111111111111111111111111111111111111111111111111111111111111", "response_bytes": 123, "url": "https://official.example/qa"}, "expected_source_url": null, "actual_source_url": null, "pass": true, "external_calls": 0, "temporary_files": 0}

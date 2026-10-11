@@ -11,6 +11,8 @@ from __future__ import annotations
 from dataclasses import asdict
 import hashlib
 from typing import Any
+from urllib.parse import urlsplit
+from unicodedata import category
 
 from .canonical_writer import CanonicalSourceWriter
 from .document_kinds import SOURCE_FACT_KINDS
@@ -149,7 +151,7 @@ def _commit_shared(catalog, staged, state, validated, *, layout_id, layout_statu
         request_id=validated.request_id,
         document_kind=document_kind,
         title=event_label or "official shared JSON page",
-        source_url="https://official.invalid/shared-json",
+        source_url=_captured_source_url(validated.capture_receipt),
         publisher="official",
         staged_path=staged,
         content_sha256=validated.content_sha256,
@@ -181,6 +183,38 @@ def _commit_shared(catalog, staged, state, validated, *, layout_id, layout_statu
     from .official_source_flow import _persist_completed
     _persist_completed(catalog, state, out, journal_attempt_id=attempt.attempt_id)
     return out
+
+
+def _captured_source_url(receipt: dict[str, Any]) -> str | None:
+    """Project the observed original URL, without inventing source facts.
+
+    Existing captures carry ``url``. A later local import may retain that
+    observation under ``original_capture_observation``; it belongs to this
+    page only when its byte identity matches the validated outer capture.
+    Missing/invalid observations remain unknown and never block raw storage.
+    """
+    observation = receipt
+    if "url" not in observation:
+        original = receipt.get("original_capture_observation")
+        if not isinstance(original, dict) or (
+            original.get("content_sha256") != receipt["content_sha256"]
+            or original.get("response_bytes") != receipt["response_bytes"]
+        ):
+            return None
+        observation = original
+    url = observation.get("url")
+    if (not isinstance(url, str) or not url or len(url) > 2048
+            or any(char.isspace() or category(char) == "Cc" for char in url)):
+        return None
+    try:
+        parts = urlsplit(url)
+        if (parts.scheme not in {"https", "http"} or not parts.hostname
+                or parts.username or parts.password):
+            return None
+        parts.port  # Validate a declared port without any network operation.
+    except ValueError:
+        return None
+    return url
 
 
 def _captured_at_utc(receipt: dict[str, Any]) -> str:

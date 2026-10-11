@@ -1,0 +1,169 @@
+{
+  "probes": [
+    {
+      "text": "公司产品包括各类设备及配套服务等。",
+      "expected_selected": false,
+      "actual_selected": false,
+      "status": "needs_review",
+      "source_text_unchanged": true,
+      "selection_reasons": [],
+      "pass": true
+    },
+    {
+      "text": "公司的产品包括工业控制器与电动执行器等。",
+      "expected_selected": true,
+      "actual_selected": true,
+      "status": "selected",
+      "source_text_unchanged": true,
+      "selection_reasons": [
+        [
+          "business_narrative_signal",
+          "business_structure"
+        ]
+      ],
+      "pass": true
+    }
+  ],
+  "all_pass": true,
+  "external_calls": 0,
+  "temporary_files": 0
+}
+EVIDENCE enumeration-node-receipt.json d541a93df6fd3f5a5aeb9d7b7ce3d5d422345767bfffaaebbdd0470ccf24af7b
+{
+  "results": [
+    {
+      "log": "enumeration-green.log",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp=C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w03-list-hhvjq9eo\\pytest",
+        "tests/unit/test_narrative_evidence.py",
+        "-k",
+        "static_topic_mentions or specific_emerging_business_positions or complete_report_with_boilerplate or adjacent_product_context or new_business_policy or already_selected_product or component_enumeration_grammar"
+      ],
+      "returncode": 0,
+      "seconds": 3.1432607999959146,
+      "log_sha256": "3411c22c9c6e945f0f9dfc21de158e9e62124e93a44b1add6f16bc5af6803f91"
+    },
+    {
+      "log": "enumeration-ruff.log",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/source_catalog/narrative_business_policy.py",
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "tests/unit/test_narrative_evidence.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.1073605999990832,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ],
+  "before": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "c7e900878cf3a21438ae53ee53cff01e6eecb8615a46468ef3ba70a49f0e852f",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0",
+    "tests/unit/test_narrative_evidence.py": "10b96c8fef3502d4348747ffb356ef6bd714f94512f155bf94102388d8d1f7cd"
+  },
+  "after": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "c7e900878cf3a21438ae53ee53cff01e6eecb8615a46468ef3ba70a49f0e852f",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0",
+    "tests/unit/test_narrative_evidence.py": "10b96c8fef3502d4348747ffb356ef6bd714f94512f155bf94102388d8d1f7cd"
+  },
+  "source_stable": true,
+  "temp_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w03-list-hhvjq9eo",
+  "temp_removed": true,
+  "temporary_files_removed": 0,
+  "external_calls": 0,
+  "full_suite_reruns": 0,
+  "public_node_reruns": 0
+}
+EVIDENCE enumeration-final-receipt.json 826dd5465a348f05e1cdf63f2532e2bd9cef9ac9593f3ef53f360c281f1c6120
+{
+  "protected_before": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "f7849b9c5a7cc50474d7e1063d4c39b7b71fa87d587578377e5754aaa95f27bd",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "64b724df8b879b6859832facd4d18cf7f306b927611439f037c554c6e557e616",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "cface6b409883958142aa1e3906c5d7abdcb1ea6e4a164a85491725a8ec5b04b",
+    "src/company_wiki/automation/narrative_model_caller.py": "abee99f0a93c44aca7dc62d3d002c6e90aca48984839a488bbc098e1f086ff06",
+    "src/company_wiki/automation/narrative_http_model.py": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+    "tests/unit/test_narrative_evidence.py": "3ceeb18241a4ce1852b8a715787954c5bec52fa498ee304638dcb46100b41534",
+    "tests/unit/test_transcript_boundary_versions.py": "9d4aa9de4d0885278f3d14ec494520ea89d50041f9bc09cf8b4c8cf24597c265",
+    "tests/contract/test_narrative_output_plan.py": "bd00c3c438d5ddf09535fd2ba2aabae22431f63799f6471f19383c874021d0d2",
+    "tests/unit/test_narrative_business_recall.py": "a64750af0a0c53e45b034ce7cef7054195fb52a764817e27bf3069b3864605c8",
+    "tests/integration/test_w03_selector_public_node.py": "30200e4504663ae8a474b0fd9dab0392b2b42b5ff6b43eff7af5e6aaaf1e5f8a",
+    "tests/fixtures/narrative_real_transcript/MSFT_Q4_2026_earnings_call.txt": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "protected_after": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "c7e900878cf3a21438ae53ee53cff01e6eecb8615a46468ef3ba70a49f0e852f",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "64b724df8b879b6859832facd4d18cf7f306b927611439f037c554c6e557e616",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "cface6b409883958142aa1e3906c5d7abdcb1ea6e4a164a85491725a8ec5b04b",
+    "src/company_wiki/automation/narrative_model_caller.py": "abee99f0a93c44aca7dc62d3d002c6e90aca48984839a488bbc098e1f086ff06",
+    "src/company_wiki/automation/narrative_http_model.py": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+    "tests/unit/test_narrative_evidence.py": "10b96c8fef3502d4348747ffb356ef6bd714f94512f155bf94102388d8d1f7cd",
+    "tests/unit/test_transcript_boundary_versions.py": "9d4aa9de4d0885278f3d14ec494520ea89d50041f9bc09cf8b4c8cf24597c265",
+    "tests/contract/test_narrative_output_plan.py": "bd00c3c438d5ddf09535fd2ba2aabae22431f63799f6471f19383c874021d0d2",
+    "tests/unit/test_narrative_business_recall.py": "a64750af0a0c53e45b034ce7cef7054195fb52a764817e27bf3069b3864605c8",
+    "tests/integration/test_w03_selector_public_node.py": "30200e4504663ae8a474b0fd9dab0392b2b42b5ff6b43eff7af5e6aaaf1e5f8a",
+    "tests/fixtures/narrative_real_transcript/MSFT_Q4_2026_earnings_call.txt": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "actual_changed": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "before": "f7849b9c5a7cc50474d7e1063d4c39b7b71fa87d587578377e5754aaa95f27bd",
+      "after": "c7e900878cf3a21438ae53ee53cff01e6eecb8615a46468ef3ba70a49f0e852f"
+    },
+    "tests/unit/test_narrative_evidence.py": {
+      "before": "3ceeb18241a4ce1852b8a715787954c5bec52fa498ee304638dcb46100b41534",
+      "after": "10b96c8fef3502d4348747ffb356ef6bd714f94512f155bf94102388d8d1f7cd"
+    }
+  },
+  "only_policy_and_added_test_changed": true,
+  "historical_evidence_stable": true,
+  "groups_unchanged": true,
+  "full_suite_reruns": 0,
+  "public_node_reruns": 0,
+  "external_calls": 0,
+  "fees_usd": 0,
+  "source_frozen": true
+}
+EVIDENCE enumeration-final-sha-index.json 8ad6af696564e731a8c4fdaca87d97f0eec5486a598424c5b91d27969814e756
+{
+  "enumeration-before-shas.json": "27a86bc3e3bfd99bdf20b20594e3009d474acc073cbe6c69370a627bf7e0593a",
+  "enumeration-red.log": "a00cb7902a17b5ca0171303c6bc24fbb3e6a053166169c777e382b197e12afd2",
+  "enumeration-green.log": "3411c22c9c6e945f0f9dfc21de158e9e62124e93a44b1add6f16bc5af6803f91",
+  "enumeration-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+  "enumeration-node-receipt.json": "d541a93df6fd3f5a5aeb9d7b7ce3d5d422345767bfffaaebbdd0470ccf24af7b",
+  "enumeration-final-receipt.json": "826dd5465a348f05e1cdf63f2532e2bd9cef9ac9593f3ef53f360c281f1c6120",
+  "HANDOFF-enumeration-supplement.md": "7ffc12e995972d5eba85efc0e871af2f77b4e46ad1cede4c5b5cf1ff54792e87"
+}
+EVIDENCE enumeration-green.log 3411c22c9c6e945f0f9dfc21de158e9e62124e93a44b1add6f16bc5af6803f91
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwp-w03-list-hhvjq9eo\\pytest", "requested_basetemp_len": 60, "cwd_len": 65, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 65 items / 40 deselected / 25 selected
+
+tests\unit\test_narrative_evidence.py .........................          [100%]
+
+====================== 25 passed, 40 deselected in 0.63s ======================
+
+EVIDENCE enumeration-red.log a00cb7902a17b5ca0171303c6bc24fbb3e6a053166169c777e382b197e12afd2
+EVIDENCE enumeration-ruff.log 82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18
+All checks passed!
+
+FINAL_INDEX_MATCH True

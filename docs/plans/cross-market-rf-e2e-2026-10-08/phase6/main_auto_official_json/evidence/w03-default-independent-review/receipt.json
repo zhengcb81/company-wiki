@@ -1,0 +1,76 @@
+{
+  "schema_version": "w03-default-independent-review/1",
+  "verdict": "BLOCKER",
+  "protected_before": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "f7849b9c5a7cc50474d7e1063d4c39b7b71fa87d587578377e5754aaa95f27bd",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "64b724df8b879b6859832facd4d18cf7f306b927611439f037c554c6e557e616",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "cface6b409883958142aa1e3906c5d7abdcb1ea6e4a164a85491725a8ec5b04b",
+    "src/company_wiki/automation/narrative_model_caller.py": "abee99f0a93c44aca7dc62d3d002c6e90aca48984839a488bbc098e1f086ff06",
+    "src/company_wiki/automation/narrative_http_model.py": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+    "tests/unit/test_narrative_evidence.py": "3ceeb18241a4ce1852b8a715787954c5bec52fa498ee304638dcb46100b41534",
+    "tests/unit/test_transcript_boundary_versions.py": "9d4aa9de4d0885278f3d14ec494520ea89d50041f9bc09cf8b4c8cf24597c265",
+    "tests/contract/test_narrative_output_plan.py": "bd00c3c438d5ddf09535fd2ba2aabae22431f63799f6471f19383c874021d0d2",
+    "tests/unit/test_narrative_business_recall.py": "a64750af0a0c53e45b034ce7cef7054195fb52a764817e27bf3069b3864605c8",
+    "tests/integration/test_w03_selector_public_node.py": "30200e4504663ae8a474b0fd9dab0392b2b42b5ff6b43eff7af5e6aaaf1e5f8a",
+    "tests/fixtures/narrative_real_transcript/MSFT_Q4_2026_earnings_call.txt": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "protected_after": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "f7849b9c5a7cc50474d7e1063d4c39b7b71fa87d587578377e5754aaa95f27bd",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "64b724df8b879b6859832facd4d18cf7f306b927611439f037c554c6e557e616",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "cface6b409883958142aa1e3906c5d7abdcb1ea6e4a164a85491725a8ec5b04b",
+    "src/company_wiki/automation/narrative_model_caller.py": "abee99f0a93c44aca7dc62d3d002c6e90aca48984839a488bbc098e1f086ff06",
+    "src/company_wiki/automation/narrative_http_model.py": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+    "tests/unit/test_narrative_evidence.py": "3ceeb18241a4ce1852b8a715787954c5bec52fa498ee304638dcb46100b41534",
+    "tests/unit/test_transcript_boundary_versions.py": "9d4aa9de4d0885278f3d14ec494520ea89d50041f9bc09cf8b4c8cf24597c265",
+    "tests/contract/test_narrative_output_plan.py": "bd00c3c438d5ddf09535fd2ba2aabae22431f63799f6471f19383c874021d0d2",
+    "tests/unit/test_narrative_business_recall.py": "a64750af0a0c53e45b034ce7cef7054195fb52a764817e27bf3069b3864605c8",
+    "tests/integration/test_w03_selector_public_node.py": "30200e4504663ae8a474b0fd9dab0392b2b42b5ff6b43eff7af5e6aaaf1e5f8a",
+    "tests/fixtures/narrative_real_transcript/MSFT_Q4_2026_earnings_call.txt": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "protected_unchanged": true,
+  "probe": {
+    "probes": [
+      {
+        "text": "公司产品包括各类设备及配套服务等。",
+        "expected_selected": false,
+        "actual_selected": true,
+        "status": "selected",
+        "selection_reasons": [
+          [
+            "business_narrative_signal",
+            "business_structure"
+          ]
+        ]
+      },
+      {
+        "text": "公司的产品包括工业控制器与电动执行器。",
+        "expected_selected": true,
+        "actual_selected": true,
+        "status": "selected",
+        "selection_reasons": [
+          [
+            "business_narrative_signal",
+            "business_structure"
+          ]
+        ]
+      }
+    ],
+    "all_pass": false,
+    "external_calls": 0,
+    "temporary_files": 0
+  },
+  "reviewed_owner_handoff_sha256": "9e6647b5fd698c5e6fcbfb883da5034c9bdd5abadde3c3dec594ced2326f559e",
+  "original_prepush_sha256": "389f0e29b686f15b3ba861838fc1a92cd9068bba01b301e6e3723c43a87e18c2",
+  "readonly_git_diff": true,
+  "git_mutations": 0,
+  "external_provider_calls": 0,
+  "paid_model_calls": 0,
+  "source_test_config_fixture_writes": 0,
+  "temporary_files": 0,
+  "full_suite_reruns": 0,
+  "public_node_reruns": 0
+}

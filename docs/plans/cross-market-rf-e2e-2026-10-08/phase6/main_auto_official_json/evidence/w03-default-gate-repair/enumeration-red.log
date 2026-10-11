@@ -1,0 +1,36 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 65 items / 60 deselected / 5 selected
+
+tests\unit\test_narrative_evidence.py FFF..                              [100%]
+
+================================== FAILURES ===================================
+_ test_component_enumeration_grammar_is_not_a_specific_operating_object[\u516c\u53f8\u4ea7\u54c1\u5305\u62ec\u5404\u7c7b\u8bbe\u5907\u53ca\u914d\u5957\u670d\u52a1\u7b49\u3002-False] _
+tests\unit\test_narrative_evidence.py:1548: in test_component_enumeration_grammar_is_not_a_specific_operating_object
+    assert bool(package.evidence_spans) is selected
+E   AssertionError: assert True is False
+E    +  where True = bool((EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:4f4ba4ea45570fe9816c773eae71b8285...8da189c0128e76636387c86bb16826919cf0c21bfc1b1a841e40', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),))
+E    +    where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:4f4ba4ea45570fe9816c773eae71b8285...8da189c0128e76636387c86bb16826919cf0c21bfc1b1a841e40', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:aec477a48b75c91de45d1454af7af3e2fc21a371d06803fd948...t=160, candidate_count=1, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+_ test_component_enumeration_grammar_is_not_a_specific_operating_object[\u516c\u53f8\u4ea7\u54c1\u5305\u62ec\u5404\u7c7b\u8bbe\u5907\u4ee5\u53ca\u914d\u5957\u89e3\u51b3\u65b9\u6848\u7b49\u7b49\u3002-False] _
+tests\unit\test_narrative_evidence.py:1548: in test_component_enumeration_grammar_is_not_a_specific_operating_object
+    assert bool(package.evidence_spans) is selected
+E   AssertionError: assert True is False
+E    +  where True = bool((EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:bf0755f33c04e774dae4f4ebc274fee00...f26b18d45207c270afc0bbc44e383712603125172f830b11cb07', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),))
+E    +    where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:bf0755f33c04e774dae4f4ebc274fee00...f26b18d45207c270afc0bbc44e383712603125172f830b11cb07', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:0daf45de73cf4a4d253a4aa00612dda4d1fd466a00d07d653d8...t=160, candidate_count=1, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+_ test_component_enumeration_grammar_is_not_a_specific_operating_object[\u516c\u53f8\u4ea7\u54c1\u5305\u62ec\u4ea7\u54c1\u3001\u8bbe\u5907\u53ca\u76f8\u5173\u670d\u52a1\u7b49\u7c7b\u578b\u3002-False] _
+tests\unit\test_narrative_evidence.py:1548: in test_component_enumeration_grammar_is_not_a_specific_operating_object
+    assert bool(package.evidence_spans) is selected
+E   AssertionError: assert True is False
+E    +  where True = bool((EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:459597c7b6524ec0cddc10a3e4bc205db...e229990caf012a37a14bef1ca8b252101546a740b02da90eb2fc', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),))
+E    +    where (EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:459597c7b6524ec0cddc10a3e4bc205db...e229990caf012a37a14bef1ca8b252101546a740b02da90eb2fc', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=()),) = NarrativeEvidencePackage(source_id='urn:company-wiki:source:sha256:a2a6d7a0224c002876f272ee4dfdcb03fee1019a606b5a857a1...t=160, candidate_count=1, dropped_financial_count=0, source_units=1, omitted_candidate_count=0, coverage_complete=True).evidence_spans
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_evidence.py::test_component_enumeration_grammar_is_not_a_specific_operating_object[\u516c\u53f8\u4ea7\u54c1\u5305\u62ec\u5404\u7c7b\u8bbe\u5907\u53ca\u914d\u5957\u670d\u52a1\u7b49\u3002-False]
+FAILED tests/unit/test_narrative_evidence.py::test_component_enumeration_grammar_is_not_a_specific_operating_object[\u516c\u53f8\u4ea7\u54c1\u5305\u62ec\u5404\u7c7b\u8bbe\u5907\u4ee5\u53ca\u914d\u5957\u89e3\u51b3\u65b9\u6848\u7b49\u7b49\u3002-False]
+FAILED tests/unit/test_narrative_evidence.py::test_component_enumeration_grammar_is_not_a_specific_operating_object[\u516c\u53f8\u4ea7\u54c1\u5305\u62ec\u4ea7\u54c1\u3001\u8bbe\u5907\u53ca\u76f8\u5173\u670d\u52a1\u7b49\u7c7b\u578b\u3002-False]
+================= 3 failed, 2 passed, 60 deselected in 1.62s ==================

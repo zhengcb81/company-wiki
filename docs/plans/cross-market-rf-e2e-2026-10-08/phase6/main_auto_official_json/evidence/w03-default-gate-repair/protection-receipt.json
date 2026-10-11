@@ -1,0 +1,30 @@
+{
+  "source_changed": {
+    "src\\company_wiki\\source_catalog\\narrative_business_groups.py": {
+      "before": "859cece970dcc3dd1c4c8a7c5964772c79c3eb804b3292a38aac14763ab3081c",
+      "after": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0"
+    },
+    "src\\company_wiki\\source_catalog\\narrative_business_policy.py": {
+      "before": "fde99e4425720b2d344387df6ac4ab6932d3c1563951b51626b7075d7470dfeb",
+      "after": "f7849b9c5a7cc50474d7e1063d4c39b7b71fa87d587578377e5754aaa95f27bd"
+    }
+  },
+  "allowed_source_changes_only": true,
+  "source_count": 261,
+  "config_and_fixture_unchanged": true,
+  "owned_files": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "f7849b9c5a7cc50474d7e1063d4c39b7b71fa87d587578377e5754aaa95f27bd",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0",
+    "tests/unit/test_narrative_evidence.py": "3ceeb18241a4ce1852b8a715787954c5bec52fa498ee304638dcb46100b41534"
+  },
+  "pure_narrative_evidence_unchanged": true,
+  "public_test_unchanged_sha256": "30200e4504663ae8a474b0fd9dab0392b2b42b5ff6b43eff7af5e6aaaf1e5f8a",
+  "fixture_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+  "legacy_package_sha256": "11ad9c7f21c92d10847861f387a16ce1035f94da6a47a50128b354d0594b6d9f",
+  "current_package_sha256": "c5e498acbb5d5c158a030b6e4d3bcec3713f408f2c49baa85717b3d63b905478",
+  "external_provider_calls": 0,
+  "external_model_calls": 0,
+  "estimated_cost_usd": 0,
+  "git_mutations": 0,
+  "source_stable": true
+}

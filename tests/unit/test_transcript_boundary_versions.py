@@ -85,8 +85,11 @@ def test_real_fixture_excludes_editorial_roster_and_footer_and_replays_every_spa
     assert not any("Revenue-- $90.0 billion" in unit.raw_text or
                    "This article is a transcript" in unit.raw_text or
                    "Average returns" in unit.raw_text for unit in result.units)
+    # Parser boundary replay uses its recorded selector; current policy caps
+    # and partial coverage are independently tested by the public W03 node.
     selected = select_narrative_evidence(result, title="MSFT Q4 2026 earnings call",
-                                         existing_kind="investor_call_transcript")
+                                         existing_kind="investor_call_transcript",
+                                         selector_version="0.6.0")
     assert selected.status == "selected" and selected.coverage_complete
     assert selected.evidence_spans and any("Azure" in span.raw_text for span in selected.evidence_spans)
     verified, failed = verify_transcript_evidence_spans(

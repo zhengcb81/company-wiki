@@ -1,5 +1,25 @@
 # MAIN：官方 JSON 接入同一叙述 Worker
 
+## 2026-10-11T00:57:24.703695+00:00 — source09根因修复与W08来源网址集中独立接受，正常发布准备
+
+先前normalpush真实7FAIL及原日志SHA389f0e29…保留，不绕hooks。五项pure0.7误选/邻接原断言保持：实际具体组件/用途/流程关系与明确指代的紧邻原子组替代泛经营标签，122PASS属于首次修复快照；独立审发现列表尾“等/等等/以及”通用词法遗漏，再真实RED3FAIL/2PASS→新5+原20定点25PASS/0.63s，不重跑122/public3。独立2原生负控/正控PASS，原文、locator、groups、旧策略和真实TXT全指纹保持。另两项ROOT职责测试20PASS仍有效，W04生产源码未改。最终集中[独立补充](evidence/w03-default-independent-review/FOLLOWUP.md)接受，历史BLOCKER不覆盖。
+
+W08真正共因是shared producer丢失observed capture URL；现只在producer读取既有receipt.url或SHA+size同页original_capture_observation.url→existing publicmanifest，未知/坏URL诚实None且原件照常入库，不猜body/issuer网址/新网络验证/许可。真实两parent两issuer/publicexport/reopen/replay/retained-recovery/immutable-dedup组57PASS+唯一新测试容器误读修正定点1PASS；其联合58责任不冒称重跑58。独立发现DEL/C1遗漏，通用UnicodeCc分类再RED2FAIL/1PASS→3PASS0.39s，Ruff绿，独立原DEL微probe PASS。最终[独立補充](evidence/w08-provenance-independent-review/FOLLOWUP.md)接受。旧placeholder immutable来源不静默改写；SSE86页真实import和研究仍待。
+
+P7-RF47f497ad主线/远端、精确CI38096229764与定点安装已接受。下一真实大节点已落实为[独立PWF](../post_w03_original_research_2026-10-11/task_plan.md)，按[W08实际入口](evidence/w08-operational-readiness-20261011.md)、[母账刷新](evidence/w08-budget-refresh-20261011.json)及不含旧答案的[W09执行卡](W09_EXECUTOR_BRIEF.md)。当前母账保守charged332015tokens/250690µUSD含7旧unknownhold，FX2764保留；未新增外部provider/model/费，不重置/双扣。
+
+Next Step：本次源码/测试/计划与原始证据normalcommit→canonical干净ff→一次normalpush和精确新HEAD CI，当前远端仍accdeccc，不能称新CI通过。随后初始化原三家真正新scope/独立executor并四审，之后新三家泛化及既有loop；P7-AUDIT未交付源不动。goal active；原件/config/Dayu/邻仓WIP保持。
+
+## 2026-10-11T00:39:20.165835+00:00 — 正常source09推送拦下真实7FAIL；按共因修复，不绕过
+
+普通commit1415e314已完成9.77秒，canonical master干净ff至同HEAD；normalpush实际3137PASS/7FAIL、197.27s pytest（全203.31s），远端仍accdeccc未发布。原失败[log](phase6/main_auto_official_json/evidence/source-09-publication/normal-push.log) SHA389f0e29…及回执保留；上面的104/公共3/独立复核只证明其覆盖责任，不代替此发布节点，不能签最新CI绿。
+
+五项default0.7纯筛选问题由内部actor独占pure policy/groups/evidence及必要旧unit，查泛经营/静态noise、具体新业务上下文，不能一律改pin/断言。ROOT另外两项已查明责任：parser版本边界原测试误依赖缺省selector完整度，用实际历史0.6明确保护其全部旧断言，新0.7的96cap/partial由公共节点实验；W04已冻结response_sha256仍decoded final，旧断言None失实，加强双SHA/原wire字节/真实final/正式output0和唯一settle，不回退诊断功能。两个文件集中实际20PASS/2.71s+Ruff绿，原件/config/W04源码SHA保持，owned+pytest重定位TEMP均清理；[回执](phase6/main_auto_official_json/evidence/source-09-test-contract-repair/green-contract20.json)。
+
+W08只读发现官方JSON共享writer用official.invalid占位URL，而真实HTTP capture保留在extensions。下一实跑前调查公共SourceRecord/export主来源URL是否丢失；见[责任细则](phase6/main_auto_official_json/W08_PROVENANCE_CONTINUATION.md)。应在producer保留真实capture URL，缺失则诚实unknown，不猜网站、不加network检查/人工授权、不重写sealed旧来源或删原件。
+
+Next Step：pure根因定点GREEN→一次集中影响/独立复核→正常commit/ff/push和新HEAD CI；并行W08真实母账/来源URL准备，W09研究安全输入已交。P7-RF仍47f497ad主线/远端/CI/安装接受；P7-AUDIT未交源不动。goal active、真实研究四审仍open，累计20USD/2M/旧unknown不重置，本节点0外部provider/model/费。
+
 ## 2026-10-11T00:29:43.905332+00:00 — W03集中独立验收通过，正常发布准备
 
 W03共享责任104PASS及独立34PASS（138不重叠；另外4定点与104重叠不加），ROOT公共3PASS/55.06秒，独立只新增2组合PASS/0.185秒，261源码与配置/原件保持。审查[报告](phase6/main_auto_official_json/evidence/w03-shared-independent-review/review.md) SHA58a4323a…；真实0.7业务内容/prompt/公开原定位、实际0.6历史SQL/费用零变化、新0.7generation不命中旧pin、全TXT双指纹/96真locator成立。无阻断问题，不重复整包。完整验收见[W03](phase6/main_auto_official_json/W03_ACCEPTANCE.md)。

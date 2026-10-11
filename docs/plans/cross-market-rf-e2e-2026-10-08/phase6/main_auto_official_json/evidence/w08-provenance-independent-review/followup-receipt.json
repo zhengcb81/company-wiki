@@ -1,0 +1,34 @@
+{
+  "schema_version": "w08-control-independent-followup/1",
+  "verdict": "PASS",
+  "protected_before": {
+    "src/company_wiki/source_catalog/official_json_import.py": "604d62cefd2ceb8b566dae08cac9e1ad86e8ea285e88da84ff845b4bf93cf027",
+    "src/company_wiki/source_catalog/canonical_writer.py": "26d9c475442f5438b19b8ad6a1c8578d0f14cfd13660b5955fd04c75a798e70f",
+    "tests/integration/test_official_json_capture_provenance.py": "3b1ff1c8dee0d4e48b1012d0fd468ff17191afa24d4119c740be437bcd71b6be"
+  },
+  "protected_after": {
+    "src/company_wiki/source_catalog/official_json_import.py": "604d62cefd2ceb8b566dae08cac9e1ad86e8ea285e88da84ff845b4bf93cf027",
+    "src/company_wiki/source_catalog/canonical_writer.py": "26d9c475442f5438b19b8ad6a1c8578d0f14cfd13660b5955fd04c75a798e70f",
+    "tests/integration/test_official_json_capture_provenance.py": "3b1ff1c8dee0d4e48b1012d0fd468ff17191afa24d4119c740be437bcd71b6be"
+  },
+  "protected_unchanged": true,
+  "own_historical_sha256": {
+    "REVIEW.md": "40d9ff7cfb1d5408d91b5f0eca1846656b14fae35311e386e24098879ed82420",
+    "receipt.json": "b385c0d18135aaa7fd6126a8d0ff285db21c1364f050fbbf24b43a3f48e5d914",
+    "minimal-probe.json": "b3fb79f5763e1bcd6b1b8384306674195c07d14d9ce6e352010d178a7f1533fa"
+  },
+  "own_historical_unchanged": true,
+  "owner_historical_sha256": {
+    "HANDOFF.md": "b2f67bc8d20327b898a15916bec86bf94a7f83348a175e01354c7c2c0125b559",
+    "RED.log": "7f58c26e568c5ea69e520d3f9443b55db2198e67200a476fb69fe1ad6bec561c",
+    "GREEN.log": "229fd90569457bed04b19d166178ed9fbf572df7bffbe2ca3bd8a828509d4fcf",
+    "GREEN_final_targeted.log": "3064ac7c6271fed31c2f83a54238456bca9a1e3c7baa6a49124de0a3e6bc86a0"
+  },
+  "owner_historical_unchanged": true,
+  "external_calls": 0,
+  "fees_usd": 0,
+  "temporary_files": 0,
+  "source_test_config_raw_git_install_writes": 0,
+  "whole_suite_reruns": 0,
+  "public_node_reruns": 0
+}

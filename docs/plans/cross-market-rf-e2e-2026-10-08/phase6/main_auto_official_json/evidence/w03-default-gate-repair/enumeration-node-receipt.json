@@ -1,0 +1,57 @@
+{
+  "results": [
+    {
+      "log": "enumeration-green.log",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp=C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w03-list-hhvjq9eo\\pytest",
+        "tests/unit/test_narrative_evidence.py",
+        "-k",
+        "static_topic_mentions or specific_emerging_business_positions or complete_report_with_boilerplate or adjacent_product_context or new_business_policy or already_selected_product or component_enumeration_grammar"
+      ],
+      "returncode": 0,
+      "seconds": 3.1432607999959146,
+      "log_sha256": "3411c22c9c6e945f0f9dfc21de158e9e62124e93a44b1add6f16bc5af6803f91"
+    },
+    {
+      "log": "enumeration-ruff.log",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "--no-cache",
+        "src/company_wiki/source_catalog/narrative_business_policy.py",
+        "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "tests/unit/test_narrative_evidence.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.1073605999990832,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ],
+  "before": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "c7e900878cf3a21438ae53ee53cff01e6eecb8615a46468ef3ba70a49f0e852f",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0",
+    "tests/unit/test_narrative_evidence.py": "10b96c8fef3502d4348747ffb356ef6bd714f94512f155bf94102388d8d1f7cd"
+  },
+  "after": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "c7e900878cf3a21438ae53ee53cff01e6eecb8615a46468ef3ba70a49f0e852f",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0",
+    "tests/unit/test_narrative_evidence.py": "10b96c8fef3502d4348747ffb356ef6bd714f94512f155bf94102388d8d1f7cd"
+  },
+  "source_stable": true,
+  "temp_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-w03-list-hhvjq9eo",
+  "temp_removed": true,
+  "temporary_files_removed": 0,
+  "external_calls": 0,
+  "full_suite_reruns": 0,
+  "public_node_reruns": 0
+}

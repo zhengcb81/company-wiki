@@ -1,0 +1,299 @@
+Push unit scope: deleted or unknown dependency (1 paths)
+
+=== affected units and CI contract smoke ===
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\cwpp-3kfzmsh2", "requested_basetemp_len": 45, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\Ö£Ôø²¨\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 3144 items
+
+tests\unit\test_acquisition_budget.py ..                                 [  0%]
+tests\unit\test_acquisition_failure_diagnostic.py ...................... [  0%]
+.........                                                                [  1%]
+tests\unit\test_acquisition_scope_responsibility.py ......               [  1%]
+tests\unit\test_acquisition_usage_recovery.py ...........                [  1%]
+tests\unit\test_adapter_process_budget.py .................              [  2%]
+tests\unit\test_adapter_registration_efficiency.py .....                 [  2%]
+tests\unit\test_automation_approval_api_retired.py ..                    [  2%]
+tests\unit\test_automation_controller.py ............                    [  2%]
+tests\unit\test_automation_error_semantics.py .................          [  3%]
+tests\unit\test_automation_execution_context.py .......                  [  3%]
+tests\unit\test_automation_job_scope_queries.py ...                      [  3%]
+tests\unit\test_automation_migrations.py ...........................     [  4%]
+tests\unit\test_automation_migrations_v2.py .........                    [  4%]
+tests\unit\test_automation_migrations_v3.py .....                        [  4%]
+tests\unit\test_automation_models.py .............................       [  5%]
+tests\unit\test_automation_outbox_read_scope.py .........                [  6%]
+tests\unit\test_automation_planner.py .............................      [  7%]
+tests\unit\test_automation_runtime_control.py .....                      [  7%]
+tests\unit\test_automation_scheduler.py .......                          [  7%]
+tests\unit\test_automation_store.py ..............................       [  8%]
+tests\unit\test_automation_store_atomic.py ...............               [  8%]
+tests\unit\test_automation_supervisor.py .....                           [  9%]
+tests\unit\test_automation_worker.py .................                   [  9%]
+tests\unit\test_b10_frontmatter_tolerance.py .....                       [  9%]
+tests\unit\test_b10_manifest_abort_paths.py ...                          [  9%]
+tests\unit\test_b10_metadata_state.py ....                               [  9%]
+tests\unit\test_batch_assessment.py ................                     [ 10%]
+tests\unit\test_batch_preparation_deadline.py ..........                 [ 10%]
+tests\unit\test_bounded_content_encoding.py ............................ [ 11%]
+..........                                                               [ 11%]
+tests\unit\test_bounded_http.py .............                            [ 12%]
+tests\unit\test_bounded_process.py ....                                  [ 12%]
+tests\unit\test_canonical_import_reference.py ....                       [ 12%]
+tests\unit\test_catalog_reader.py ..........                             [ 12%]
+tests\unit\test_catalog_reader_queries.py .............                  [ 13%]
+tests\unit\test_ci_push_selection.py ................................... [ 14%]
+....                                                                     [ 14%]
+tests\unit\test_cleanup_deprecated.py .....                              [ 14%]
+tests\unit\test_commit_policy.py ..                                      [ 14%]
+tests\unit\test_common.py ...................                            [ 15%]
+tests\unit\test_config.py .........                                      [ 15%]
+tests\unit\test_contradiction_detector.py .........                      [ 15%]
+tests\unit\test_cross_market_suite.py .............................      [ 16%]
+tests\unit\test_dayu_fiscal_metadata.py ................................ [ 17%]
+..                                                                       [ 18%]
+tests\unit\test_dayu_sdk_bridge.py ........                              [ 18%]
+tests\unit\test_dayu_sdk_config.py ...                                   [ 18%]
+tests\unit\test_dayu_sdk_fetch.py ......                                 [ 18%]
+tests\unit\test_default_steady_source_reader.py ......                   [ 18%]
+tests\unit\test_dependency_declarations.py ...                           [ 18%]
+tests\unit\test_deployment.py .......................                    [ 19%]
+tests\unit\test_domain.py .........                                      [ 19%]
+tests\unit\test_download.py .........                                    [ 20%]
+tests\unit\test_error_taxonomy.py ................                       [ 20%]
+tests\unit\test_file_mutex.py ..                                         [ 20%]
+tests\unit\test_finite_configured_entrypoint_launch.py ........          [ 20%]
+tests\unit\test_fresh_selection_semantics.py ......................      [ 21%]
+tests\unit\test_g4_pipeline_retirement.py .....................          [ 22%]
+tests\unit\test_g5_legacy_checks_retirement.py ......................... [ 23%]
+.............................                                            [ 24%]
+tests\unit\test_generation_policy.py .....................               [ 24%]
+tests\unit\test_graph_models.py ............                             [ 25%]
+tests\unit\test_hermetic_runtime.py ...                                  [ 25%]
+tests\unit\test_ingest.py ...............                                [ 25%]
+tests\unit\test_legacy_entrypoint_simplification.py .................... [ 26%]
+........................................................................ [ 28%]
+....................                                                     [ 29%]
+tests\unit\test_llm_client.py .....................                      [ 29%]
+tests\unit\test_llm_defaults.py .........                                [ 30%]
+tests\unit\test_log_writer.py ........                                   [ 30%]
+tests\unit\test_m3_acquisition_usage_acceptance.py ..................... [ 31%]
+..                                                                       [ 31%]
+tests\unit\test_m3_acquisition_usage_observation.py .................... [ 31%]
+...................                                                      [ 32%]
+tests\unit\test_m3_official_json_parser.py ............................. [ 33%]
+............................                                             [ 34%]
+tests\unit\test_main_ocr_selection.py .................................. [ 35%]
+.........                                                                [ 35%]
+tests\unit\test_migrate_raw.py ...........                               [ 35%]
+tests\unit\test_migration.py ..................                          [ 36%]
+tests\unit\test_monitor.py .................                             [ 37%]
+tests\unit\test_n4_batch_scope.py .....................                  [ 37%]
+tests\unit\test_n4c_preflight_budget.py .....                            [ 37%]
+tests\unit\test_n6_budget_selection.py .........                         [ 38%]
+tests\unit\test_n6_candidate_main_boundaries.py .................        [ 38%]
+tests\unit\test_n6_candidate_recall.py ......                            [ 38%]
+tests\unit\test_n6_context_boundaries.py ...................             [ 39%]
+tests\unit\test_n6_dedup_context_safety.py ...............               [ 39%]
+tests\unit\test_n6_group_dedup.py .................                      [ 40%]
+tests\unit\test_narrative_artifact_store.py .............                [ 40%]
+tests\unit\test_narrative_batch.py .................                     [ 41%]
+tests\unit\test_narrative_batch_request.py .................             [ 42%]
+tests\unit\test_narrative_business_recall.py ........................... [ 42%]
+.............................                                            [ 43%]
+tests\unit\test_narrative_current_read.py .............                  [ 44%]
+tests\unit\test_narrative_english_business_recall.py ................... [ 44%]
+....                                                                     [ 44%]
+tests\unit\test_narrative_english_operations.py .......................  [ 45%]
+tests\unit\test_narrative_evidence.py ..............FF.....FF........... [ 46%]
+...F........                                                             [ 47%]
+tests\unit\test_narrative_evidence_view_query.py .......                 [ 47%]
+tests\unit\test_narrative_failed_final.py .............................. [ 48%]
+.................                                                        [ 48%]
+tests\unit\test_narrative_format_pipeline.py .............               [ 49%]
+tests\unit\test_narrative_generation.py ............                     [ 49%]
+tests\unit\test_narrative_http_model.py ................................ [ 50%]
+...........................                                              [ 51%]
+tests\unit\test_narrative_job_contracts.py ...............               [ 52%]
+tests\unit\test_narrative_language.py ......                             [ 52%]
+tests\unit\test_narrative_locale_boundary.py ...................         [ 52%]
+tests\unit\test_narrative_model_aliases.py .........                     [ 53%]
+tests\unit\test_narrative_model_caller.py ....................           [ 53%]
+tests\unit\test_narrative_model_config.py ...........................    [ 54%]
+tests\unit\test_narrative_model_request.py ........                      [ 54%]
+tests\unit\test_narrative_model_usage.py ...............                 [ 55%]
+tests\unit\test_narrative_ocr_composition.py ........................    [ 56%]
+tests\unit\test_narrative_outbox_store.py ....                           [ 56%]
+tests\unit\test_narrative_partial_summary.py ........................... [ 57%]
+.....                                                                    [ 57%]
+tests\unit\test_narrative_pdf_bytes.py ..                                [ 57%]
+tests\unit\test_narrative_quality_projection.py ...........              [ 57%]
+tests\unit\test_narrative_reasoning_usage.py ................            [ 58%]
+tests\unit\test_narrative_retrieval.py ............                      [ 58%]
+tests\unit\test_narrative_run_ownership.py ...............               [ 59%]
+tests\unit\test_narrative_run_store.py ......................            [ 59%]
+tests\unit\test_narrative_select_handler.py ............................ [ 60%]
+                                                                         [ 60%]
+tests\unit\test_narrative_selection_architecture.py .................... [ 61%]
+.......................                                                  [ 61%]
+tests\unit\test_narrative_selector_binding.py ............               [ 62%]
+tests\unit\test_narrative_source_guard.py .....                          [ 62%]
+tests\unit\test_narrative_summarize_handler.py ......................... [ 63%]
+..............                                                           [ 63%]
+tests\unit\test_narrative_summary_review_pilot.py .........              [ 64%]
+tests\unit\test_narrative_transport_cli_output.py .                      [ 64%]
+tests\unit\test_narrative_transport_contracts.py ....................... [ 64%]
+.....                                                                    [ 64%]
+tests\unit\test_narrative_verify_handler.py ....................         [ 65%]
+tests\unit\test_narrative_versioned_resume.py .......................... [ 66%]
+..........................                                               [ 67%]
+tests\unit\test_narrative_worker_factory.py .................            [ 67%]
+tests\unit\test_native_document_pipeline.py ...                          [ 67%]
+tests\unit\test_new_modules.py ..................                        [ 68%]
+tests\unit\test_normalized_artifact_reader.py ....................       [ 69%]
+tests\unit\test_official_json_batch_identity.py ................         [ 69%]
+tests\unit\test_official_json_model_subject.py ......................... [ 70%]
+.......                                                                  [ 70%]
+tests\unit\test_official_json_narrative_adapter.py .................     [ 71%]
+tests\unit\test_official_json_narrative_subject.py ..............        [ 71%]
+tests\unit\test_official_json_projection_generation.py ................. [ 72%]
+......................................                                   [ 73%]
+tests\unit\test_official_json_public_dispatch.py ..........              [ 73%]
+tests\unit\test_official_json_run_prompt_admission.py .................. [ 74%]
+...........                                                              [ 74%]
+tests\unit\test_official_json_subject_contracts.py ...............       [ 75%]
+tests\unit\test_official_json_summarize_subject.py ..........            [ 75%]
+tests\unit\test_official_json_transport_subject_contracts.py ........... [ 75%]
+............................                                             [ 76%]
+tests\unit\test_p7_official_projection_identity.py ...................   [ 77%]
+tests\unit\test_pdf_classify.py ....                                     [ 77%]
+tests\unit\test_pipeline.py ...................                          [ 77%]
+tests\unit\test_policy_3x.py ............                                [ 78%]
+tests\unit\test_pre_push_temp_scope.py ....                              [ 78%]
+tests\unit\test_prompt_injection_guard.py .........                      [ 78%]
+tests\unit\test_prompt_review_gate_retired.py ..                         [ 78%]
+tests\unit\test_prompts.py ...................                           [ 79%]
+tests\unit\test_proposal.py .............................                [ 80%]
+tests\unit\test_quality.py ................                              [ 80%]
+tests\unit\test_query.py ..............                                  [ 81%]
+tests\unit\test_question_model.py ........................               [ 82%]
+tests\unit\test_recovery_baseline.py ....                                [ 82%]
+tests\unit\test_replay_config_isolation.py .......                       [ 82%]
+tests\unit\test_runtime_dependencies.py .                                [ 82%]
+tests\unit\test_s7_adoption_project_context.py ......................... [ 83%]
+...                                                                      [ 83%]
+tests\unit\test_s7_operating_fact_semantics.py ........................  [ 84%]
+tests\unit\test_s7_pdf_qa_fragments.py .............................     [ 85%]
+tests\unit\test_scheduler.py .........................                   [ 85%]
+tests\unit\test_secret_audit.py .......                                  [ 86%]
+tests\unit\test_secret_preflight.py ...                                  [ 86%]
+tests\unit\test_source_catalog_financing_classification.py ............. [ 86%]
+......                                                                   [ 86%]
+tests\unit\test_source_catalog_scanner_direct.py ....                    [ 86%]
+tests\unit\test_source_catalog_scoped_scan.py ...............            [ 87%]
+tests\unit\test_source_discoverer.py ..........                          [ 87%]
+tests\unit\test_source_facts.py .......................                  [ 88%]
+tests\unit\test_source_policy.py .............                           [ 88%]
+tests\unit\test_source_qualification.py .......................          [ 89%]
+tests\unit\test_source_read_policy.py ..........................         [ 90%]
+tests\unit\test_stage_taxonomy.py ....................                   [ 90%]
+tests\unit\test_state_store.py ...............                           [ 91%]
+tests\unit\test_steady_runtime_policy.py .....                           [ 91%]
+tests\unit\test_store_initialization.py .......................          [ 92%]
+tests\unit\test_summarize_junit_failures.py .........                    [ 92%]
+tests\unit\test_terminal_narrative_receipts.py .....................     [ 93%]
+tests\unit\test_transcript_boundary_versions.py ..F...........           [ 93%]
+tests\unit\test_transcript_parser_compatibility.py ...................   [ 94%]
+tests\unit\test_wiki_repository.py ..................                    [ 94%]
+tests\unit\test_wikilinks.py .........                                   [ 95%]
+tests\unit\test_writer_freeze.py ..........                              [ 95%]
+tests\unit\test_zr304_read_model.py .........                            [ 95%]
+tests\integration\test_m3_official_json_acceptance.py .................. [ 96%]
+...........................                                              [ 97%]
+tests\contract\test_zr203_reader_rewire.py .                             [ 97%]
+tests\contract\test_zr1003_shadow_assertions.py .                        [ 97%]
+tests\contract\test_zr1006_broker_cohort.py .                            [ 97%]
+tests\contract\test_source_catalog_temp_worker_governance.py ..          [ 97%]
+tests\contract\test_narrative_output_plan.py ....F.                      [ 97%]
+tests\contract\test_summary_group_coverage.py .......................    [ 98%]
+tests\contract\test_official_transcript_layouts.py ..........            [ 98%]
+tests\contract\test_transcript_speaker_affiliation.py .............      [ 99%]
+tests\contract\test_source_scope_qualification.py ...................... [ 99%]
+.....                                                                    [ 99%]
+tests\contract\test_fc905_receipt_envelope.py .                          [ 99%]
+tests\contract\test_b10_read_chain.py .                                  [100%]
+
+================================== FAILURES ===================================
+_ test_static_topic_mentions_are_not_selected_without_a_change_or_current_event _
+tests\unit\test_narrative_evidence.py:438: in test_static_topic_mentions_are_not_selected_without_a_change_or_current_event
+    assert package.evidence_spans == ()
+E   AssertionError: assert (EvidenceSpan...ty_flags=()),) == ()
+E     
+E     Left contains one more item: EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:5a429e0b092bd401d116cb56d8371ddfb1...eb2d8c727807ddf8da2e57a1556f26bb9999a259e488fbef2a471f', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())
+E     Use -v to get more diff
+_ test_specific_emerging_business_positions_are_selected_without_generic_product_noise _
+tests\unit\test_narrative_evidence.py:471: in test_specific_emerging_business_positions_are_selected_without_generic_product_noise
+    assert {span.coordinates.page_number for span in package.evidence_spans} == {2, 16}
+E   assert {2, 3, 16} == {2, 16}
+E     
+E     Extra items in the left set:
+E     3
+E     Use -v to get more diff
+_ test_complete_report_with_boilerplate_static_background_or_contents_requires_review[\u62a5\u544a\u671f\u5185\uff0c\u516c\u53f8\u6301\u7eed\u5173\u6ce8\u6d77\u5916\u5e02\u573a\u52a8\u6001\uff0c\u79ef\u6781\u505a\u597d\u4e3b\u8425\u4e1a\u52a1\u7ecf\u8425\u7ba1\u7406\u3002] _
+tests\unit\test_narrative_evidence.py:578: in test_complete_report_with_boilerplate_static_background_or_contents_requires_review
+    assert package.evidence_spans == ()
+E   AssertionError: assert (EvidenceSpan...ty_flags=()),) == ()
+E     
+E     Left contains one more item: EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:d1ce50cf9ee10a52432e2c24fd0b598cfc...3896e8f0fdf7c5ea0a2a964448fdcac038b0824127925974821bf5', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())
+E     Use -v to get more diff
+_ test_complete_report_with_boilerplate_static_background_or_contents_requires_review[\u516c\u53f8\u4e3b\u8425\u4e1a\u52a1\u662f\u6307\u9ad8\u7aef\u88c5\u5907\u7814\u53d1\u3001\u751f\u4ea7\u548c\u9500\u552e\uff0c\u6d77\u5916\u5e02\u573a\u662f\u516c\u53f8\u672a\u6765\u7684\u53d1\u5c55\u65b9\u5411\u3002] _
+tests\unit\test_narrative_evidence.py:578: in test_complete_report_with_boilerplate_static_background_or_contents_requires_review
+    assert package.evidence_spans == ()
+E   AssertionError: assert (EvidenceSpan...ty_flags=()),) == ()
+E     
+E     Left contains one more item: EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:8609e3a120dcdc808922e78d34526f8f83...edf50c8fb074ef67e170180e81eb3fdef2d125fdec4a3719104257', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())
+E     Use -v to get more diff
+______ test_adjacent_product_context_is_retained_for_a_validation_event _______
+tests\unit\test_narrative_evidence.py:1207: in test_adjacent_product_context_is_retained_for_a_validation_event
+    assert any(
+E   assert False
+E    +  where False = any(<generator object test_adjacent_product_context_is_retained_for_a_validation_event.<locals>.<genexpr> at 0x0000016A10601220>)
+_ test_real_fixture_excludes_editorial_roster_and_footer_and_replays_every_span _
+tests\unit\test_transcript_boundary_versions.py:90: in test_real_fixture_excludes_editorial_roster_and_footer_and_replays_every_span
+    assert selected.status == "selected" and selected.coverage_complete
+E   AssertionError: assert ('partial' == 'selected'
+E     
+E     - selected
+E     + partial)
+_ test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay _
+tests\contract\test_narrative_output_plan.py:168: in test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay
+    assert record.charged_tokens == 10908 and record.response_sha256 is None
+E   AssertionError: assert (10908 == 10908 and '48a24e73114099844e8cf5141a6be93b69ea9d4df49dc7a994e531d27875f9b5' is None)
+E    +  where 10908 = ReservationRecord(attempt_id='attempt-job-a', run_id='run-one', job_id='job-a', request_sha256='56caac819e90ae218226ae... reserved_at='2026-10-03T10:01:00Z', usage_settled_at='2026-10-03T10:01:00Z', output_settled_at='2026-10-03T10:01:00Z').charged_tokens
+E    +  and   '48a24e73114099844e8cf5141a6be93b69ea9d4df49dc7a994e531d27875f9b5' = ReservationRecord(attempt_id='attempt-job-a', run_id='run-one', job_id='job-a', request_sha256='56caac819e90ae218226ae... reserved_at='2026-10-03T10:01:00Z', usage_settled_at='2026-10-03T10:01:00Z', output_settled_at='2026-10-03T10:01:00Z').response_sha256
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_evidence.py::test_static_topic_mentions_are_not_selected_without_a_change_or_current_event
+FAILED tests/unit/test_narrative_evidence.py::test_specific_emerging_business_positions_are_selected_without_generic_product_noise
+FAILED tests/unit/test_narrative_evidence.py::test_complete_report_with_boilerplate_static_background_or_contents_requires_review[\u62a5\u544a\u671f\u5185\uff0c\u516c\u53f8\u6301\u7eed\u5173\u6ce8\u6d77\u5916\u5e02\u573a\u52a8\u6001\uff0c\u79ef\u6781\u505a\u597d\u4e3b\u8425\u4e1a\u52a1\u7ecf\u8425\u7ba1\u7406\u3002]
+FAILED tests/unit/test_narrative_evidence.py::test_complete_report_with_boilerplate_static_background_or_contents_requires_review[\u516c\u53f8\u4e3b\u8425\u4e1a\u52a1\u662f\u6307\u9ad8\u7aef\u88c5\u5907\u7814\u53d1\u3001\u751f\u4ea7\u548c\u9500\u552e\uff0c\u6d77\u5916\u5e02\u573a\u662f\u516c\u53f8\u672a\u6765\u7684\u53d1\u5c55\u65b9\u5411\u3002]
+FAILED tests/unit/test_narrative_evidence.py::test_adjacent_product_context_is_retained_for_a_validation_event
+FAILED tests/unit/test_transcript_boundary_versions.py::test_real_fixture_excludes_editorial_roster_and_footer_and_replays_every_span
+FAILED tests/contract/test_narrative_output_plan.py::test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay
+================= 7 failed, 3137 passed in 197.27s (0:03:17) ==================
+
+
+FAILED: affected units and CI contract smoke
+
+GATE RED at: affected units and CI contract smoke
+Fix the root cause (see revenue-forecast ci_root_fix.md), do not bypass.
+
+PUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.
+error: failed to push some refs to 'https://github.com/zhengcb81/company-wiki.git'

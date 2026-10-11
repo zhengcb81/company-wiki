@@ -1,0 +1,474 @@
+{
+  "baseline_chain": [
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_budget_preparation.json",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\fresh_executor_launch\\launched\\budget_observation.json",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\m3_source_research_2026-10-09\\budget_observation.json"
+  ],
+  "company_original_cap_remaining": {
+    "CN-688012": {
+      "max_micro_usd": 1945381,
+      "max_tokens": 66954
+    },
+    "HK-00700": {
+      "max_micro_usd": 1967345,
+      "max_tokens": 88617
+    },
+    "US-MSFT": {
+      "max_micro_usd": 1956255,
+      "max_tokens": 79456
+    }
+  },
+  "cumulative_arithmetic": {
+    "arithmetic_remaining_micro_usd_after_hold_already_counted_and_fx": 19746546,
+    "arithmetic_remaining_tokens": 1667985,
+    "baseline_charged_micro_usd_including_old_unknown_hold": 119671,
+    "baseline_charged_tokens_including_old_unknown_hold": 207042,
+    "cap_micro_usd": 20000000,
+    "cap_tokens": 2000000,
+    "conservative_charged_micro_usd_including_preserved_unknown_hold": 250690,
+    "conservative_charged_tokens_including_preserved_unknown_hold": 332015,
+    "fresh_known_micro_usd": 31894,
+    "fresh_known_tokens": 29572,
+    "m3_known_micro_usd": 99125,
+    "m3_known_tokens": 95401,
+    "not_final_invoice_or_universal_current_ledger": true,
+    "retained_fx_guard_micro_usd": 2764,
+    "warning": "Do not add the 29572 fresh tokens twice to the 18:40 snapshot; do not subtract historical unknown hold a second time. This arithmetic relies on historical conservative charge receipts, not current native re-open of their old DBs."
+  },
+  "database_mutations": 0,
+  "deduplication": {
+    "identity": "attempt_id with exact selected row equality; conflicting duplicate refuses arithmetic",
+    "known_micro_usd": 131019,
+    "known_tokens": 124973,
+    "unique_attempts": 17,
+    "unknown_reservations": 0,
+    "unsettled_reservations": 0
+  },
+  "environment_secrets_accessed": false,
+  "historical_unknown": {
+    "already_in_baseline_conservative_charge": true,
+    "count": 7,
+    "invoice_usage_known": false,
+    "preserved_micro_usd_upper_bound": 50230,
+    "preserved_token_upper_bound": 132012,
+    "settled_or_cleared_by_this_refresh": false,
+    "seventh_run_aggregate": {
+      "attempt_id": null,
+      "charged_micro_usd_upper_bound": 5258,
+      "charged_token_upper_bound": 10325,
+      "current_native_reopened": false,
+      "documented_unknown_hold_receipt": "docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\n4c_latency_version_closeout_2026-10-05.md",
+      "limitation": "Frozen native run budget aggregate and closeout explicitly preserve the unknown hold; not a currently reopened per-attempt native row.",
+      "native_aggregate_snapshot_receipt": "docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\n4c_live_2026-10-05.json",
+      "original_database_path": null,
+      "receipt_sha256": "df98afe553826472e39e3638e769e02e40528a9a15f74cd6ab1941c8f8e21e58",
+      "run_id": "n4c-20261004-wave1",
+      "unknown_reservations": 1
+    },
+    "six_per_attempt_snapshots": [
+      {
+        "current_native_reopened": false,
+        "micro_usd_upper_bound": 5990,
+        "native_row_snapshot_receipt": "docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\n4c_live_2026-10-05_run02.json",
+        "original_database_path": null,
+        "receipt_sha256": "bdd47d1ab1c29bfa4b038ace7c7a037689d4d8a0e26f0c2ff46e73134309dfd5",
+        "row": {
+          "attempt_id": "4010350a943243eca57759530881203a",
+          "estimated_micro_usd": null,
+          "input_tokens": null,
+          "input_tokens_bound": 10364,
+          "max_output_tokens": 2400,
+          "output_tokens": null,
+          "reserved_micro_usd": 5990,
+          "run_id": "n4c-20261005-live-disabled-02",
+          "usage_status": "unknown"
+        },
+        "token_upper_bound": 12764
+      },
+      {
+        "current_native_reopened": false,
+        "micro_usd_upper_bound": 5332,
+        "native_row_snapshot_receipt": "docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\n4c_live_2026-10-05_run02.json",
+        "original_database_path": null,
+        "receipt_sha256": "bdd47d1ab1c29bfa4b038ace7c7a037689d4d8a0e26f0c2ff46e73134309dfd5",
+        "row": {
+          "attempt_id": "e750945f77174040bbe765335fe68000",
+          "estimated_micro_usd": null,
+          "input_tokens": null,
+          "input_tokens_bound": 8171,
+          "max_output_tokens": 2400,
+          "output_tokens": null,
+          "reserved_micro_usd": 5332,
+          "run_id": "n4c-20261005-live-disabled-02",
+          "usage_status": "unknown"
+        },
+        "token_upper_bound": 10571
+      },
+      {
+        "current_native_reopened": false,
+        "micro_usd_upper_bound": 17304,
+        "native_row_snapshot_receipt": "docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\n4c_live_2026-10-05_run04.json",
+        "original_database_path": null,
+        "receipt_sha256": "26eca5b1737444bfdc86f9b8d7182c12a8d12d2d9dd08cb74468f7db323cf189",
+        "row": {
+          "attempt_id": "771f61de440e46d8ba27a13614d6e8d2",
+          "estimated_micro_usd": null,
+          "input_tokens": null,
+          "input_tokens_bound": 16671,
+          "max_output_tokens": 8192,
+          "output_tokens": null,
+          "reserved_micro_usd": 17304,
+          "run_id": "n4c-20261005-live-configured-04",
+          "usage_status": "unknown"
+        },
+        "token_upper_bound": 24863
+      },
+      {
+        "current_native_reopened": false,
+        "micro_usd_upper_bound": 5507,
+        "native_row_snapshot_receipt": "docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\n4c_live_2026-10-05_run05.json",
+        "original_database_path": null,
+        "receipt_sha256": "e683f4bb12f0e82bb824330dd5ac8958f158ed9b67ab92afc730356a83fe1c81",
+        "row": {
+          "attempt_id": "09764ef47aea45cbbe267becb44976dc",
+          "estimated_micro_usd": null,
+          "input_tokens": null,
+          "input_tokens_bound": 16653,
+          "max_output_tokens": 8192,
+          "output_tokens": null,
+          "reserved_micro_usd": 5507,
+          "run_id": "n4c-20261005-live-mimo-05",
+          "usage_status": "unknown"
+        },
+        "token_upper_bound": 24845
+      },
+      {
+        "current_native_reopened": false,
+        "micro_usd_upper_bound": 5507,
+        "native_row_snapshot_receipt": "docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\n4c_live_2026-10-05_run05.json",
+        "original_database_path": null,
+        "receipt_sha256": "e683f4bb12f0e82bb824330dd5ac8958f158ed9b67ab92afc730356a83fe1c81",
+        "row": {
+          "attempt_id": "b862d17378df485ea254e8e319eb92a4",
+          "estimated_micro_usd": null,
+          "input_tokens": null,
+          "input_tokens_bound": 16653,
+          "max_output_tokens": 8192,
+          "output_tokens": null,
+          "reserved_micro_usd": 5507,
+          "run_id": "n4c-20261005-live-mimo-05",
+          "usage_status": "unknown"
+        },
+        "token_upper_bound": 24845
+      },
+      {
+        "current_native_reopened": false,
+        "micro_usd_upper_bound": 5332,
+        "native_row_snapshot_receipt": "docs\\plans\\narrative-evidence-pilot-2026-09-26\\harness_lanes\\results\\n4c_live_2026-10-05_run07.json",
+        "original_database_path": null,
+        "receipt_sha256": "26998ef3df5869bd0f862a952e9991b32525acf37c95a0d55253767ab0a46f5f",
+        "row": {
+          "attempt_id": "26174e8cb1434f9fbcc9586adc83d7a6",
+          "estimated_micro_usd": null,
+          "input_tokens": null,
+          "input_tokens_bound": 15607,
+          "max_output_tokens": 8192,
+          "output_tokens": null,
+          "reserved_micro_usd": 5332,
+          "run_id": "n4c-20261005-live-mimo-07",
+          "usage_status": "unknown"
+        },
+        "token_upper_bound": 23799
+      }
+    ]
+  },
+  "native_current_entries": [
+    {
+      "company": "CN-688012",
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\auto\\narrative.sqlite3",
+      "known_micro_usd": 18817,
+      "known_tokens": 17333,
+      "phase": "fresh",
+      "query_only": true,
+      "reservations": [
+        {
+          "attempt_id": "5de60a611ae843968d5d2941468027a9",
+          "estimated_micro_usd": 11829,
+          "input_tokens": 2716,
+          "input_tokens_bound": 11764,
+          "max_output_tokens": 8192,
+          "output_tokens": 8192,
+          "reserved_micro_usd": 14845,
+          "run_id": "fresh-20261009T065028-cn-688012-annual-native",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "6494d75e9e5b4a468a3e09b38a3852b6",
+          "estimated_micro_usd": 6988,
+          "input_tokens": 1579,
+          "input_tokens_bound": 6568,
+          "max_output_tokens": 8192,
+          "output_tokens": 4846,
+          "reserved_micro_usd": 13113,
+          "run_id": "fresh-20261009T065028-cn-688012-q1-native",
+          "usage_status": "known"
+        }
+      ],
+      "sqlite_uri_mode": "ro",
+      "unknown_reservations": 0,
+      "unresolved_micro_usd_bound": 0,
+      "unresolved_token_bound": 0,
+      "unsettled_reservations": 0
+    },
+    {
+      "company": "CN-688012",
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012\\m3\\20261009T184946\\auto\\narrative.sqlite3",
+      "known_micro_usd": 35802,
+      "known_tokens": 35713,
+      "phase": "m3",
+      "query_only": true,
+      "reservations": [
+        {
+          "attempt_id": "25351685342042a2bfdb7411af89f8a9",
+          "estimated_micro_usd": 12528,
+          "input_tokens": 4807,
+          "input_tokens_bound": 19262,
+          "max_output_tokens": 8192,
+          "output_tokens": 8194,
+          "reserved_micro_usd": 17344,
+          "run_id": "m3-cn-688012-batch1",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "881a5a34a18545d89db61fbe7e4a1d2a",
+          "estimated_micro_usd": 11134,
+          "input_tokens": 3360,
+          "input_tokens_bound": 13808,
+          "max_output_tokens": 8192,
+          "output_tokens": 7510,
+          "reserved_micro_usd": 15526,
+          "run_id": "m3-cn-688012-batch1",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "e66c1aa489704c5bbbcecfdcc3fd2ee6",
+          "estimated_micro_usd": 12140,
+          "input_tokens": 3650,
+          "input_tokens_bound": 14722,
+          "max_output_tokens": 8192,
+          "output_tokens": 8192,
+          "reserved_micro_usd": 15831,
+          "run_id": "m3-cn-688012-batch1",
+          "usage_status": "known"
+        }
+      ],
+      "sqlite_uri_mode": "ro",
+      "unknown_reservations": 0,
+      "unresolved_micro_usd_bound": 0,
+      "unresolved_token_bound": 0,
+      "unsettled_reservations": 0
+    },
+    {
+      "company": "HK-00700",
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\auto\\narrative.sqlite3",
+      "known_micro_usd": 7347,
+      "known_tokens": 7134,
+      "phase": "fresh",
+      "query_only": true,
+      "reservations": [
+        {
+          "attempt_id": "23af14c4708d40b19f5d68060f7ce188",
+          "estimated_micro_usd": 4178,
+          "input_tokens": 1129,
+          "input_tokens_bound": 4775,
+          "max_output_tokens": 8192,
+          "output_tokens": 2851,
+          "reserved_micro_usd": 12515,
+          "run_id": "fresh-20261009T065028-hk-00700-narrative-01",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "bca3c43646c443e3a412f48946790b03",
+          "estimated_micro_usd": 3169,
+          "input_tokens": 1037,
+          "input_tokens_bound": 4249,
+          "max_output_tokens": 8192,
+          "output_tokens": 2117,
+          "reserved_micro_usd": 12340,
+          "run_id": "fresh-20261009T065028-hk-00700-narrative-01",
+          "usage_status": "known"
+        }
+      ],
+      "sqlite_uri_mode": "ro",
+      "unknown_reservations": 0,
+      "unresolved_micro_usd_bound": 0,
+      "unresolved_token_bound": 0,
+      "unsettled_reservations": 0
+    },
+    {
+      "company": "HK-00700",
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\m3\\20261009T184946\\auto\\narrative.sqlite3",
+      "known_micro_usd": 25308,
+      "known_tokens": 24249,
+      "phase": "m3",
+      "query_only": true,
+      "reservations": [
+        {
+          "attempt_id": "28dee1a125524528a103b57b1ea7674c",
+          "estimated_micro_usd": 8328,
+          "input_tokens": 3685,
+          "input_tokens_bound": 13707,
+          "max_output_tokens": 8192,
+          "output_tokens": 5324,
+          "reserved_micro_usd": 15492,
+          "run_id": "m3-hk-initial-business",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "e6fc2583a870496c8f8952a8fd4a5b2f",
+          "estimated_micro_usd": 5385,
+          "input_tokens": 1326,
+          "input_tokens_bound": 5683,
+          "max_output_tokens": 8192,
+          "output_tokens": 3707,
+          "reserved_micro_usd": 12818,
+          "run_id": "m3-hk-initial-business",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "ef7415a8e14b458cbdf34b83767a2714",
+          "estimated_micro_usd": 11595,
+          "input_tokens": 2015,
+          "input_tokens_bound": 7806,
+          "max_output_tokens": 8192,
+          "output_tokens": 8192,
+          "reserved_micro_usd": 13525,
+          "run_id": "m3-hk-initial-business",
+          "usage_status": "known"
+        }
+      ],
+      "sqlite_uri_mode": "ro",
+      "unknown_reservations": 0,
+      "unresolved_micro_usd_bound": 0,
+      "unresolved_token_bound": 0,
+      "unsettled_reservations": 0
+    },
+    {
+      "company": "US-MSFT",
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\auto\\narrative.sqlite3",
+      "known_micro_usd": 5730,
+      "known_tokens": 5105,
+      "phase": "fresh",
+      "query_only": true,
+      "reservations": [
+        {
+          "attempt_id": "9e1e9eb9bb574b2aae67fe33b5397bfb",
+          "estimated_micro_usd": 5730,
+          "input_tokens": 1077,
+          "input_tokens_bound": 4892,
+          "max_output_tokens": 8192,
+          "output_tokens": 4028,
+          "reserved_micro_usd": 12554,
+          "run_id": "fresh-20261009T065028-us-msft-narrative",
+          "usage_status": "known"
+        }
+      ],
+      "sqlite_uri_mode": "ro",
+      "unknown_reservations": 0,
+      "unresolved_micro_usd_bound": 0,
+      "unresolved_token_bound": 0,
+      "unsettled_reservations": 0
+    },
+    {
+      "company": "US-MSFT",
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\m3\\20261009T184946\\auto\\narrative.sqlite3",
+      "known_micro_usd": 38015,
+      "known_tokens": 35439,
+      "phase": "m3",
+      "query_only": true,
+      "reservations": [
+        {
+          "attempt_id": "29ec2abeb6d348b1a6c2eb1aa289a4a3",
+          "estimated_micro_usd": 3137,
+          "input_tokens": 1309,
+          "input_tokens_bound": 5943,
+          "max_output_tokens": 8192,
+          "output_tokens": 2025,
+          "reserved_micro_usd": 12904,
+          "run_id": "m3-us-msft-finite-1",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "2c6580b0bdcd4cff89a5b62a73d02def",
+          "estimated_micro_usd": 11687,
+          "input_tokens": 2291,
+          "input_tokens_bound": 10423,
+          "max_output_tokens": 8192,
+          "output_tokens": 8192,
+          "reserved_micro_usd": 14398,
+          "run_id": "m3-us-msft-finite-1",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "4ed183fe41704195a0544973fe0fc5b8",
+          "estimated_micro_usd": 6570,
+          "input_tokens": 1336,
+          "input_tokens_bound": 5940,
+          "max_output_tokens": 8192,
+          "output_tokens": 4593,
+          "reserved_micro_usd": 12903,
+          "run_id": "m3-us-msft-finite-1",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "6665bbb1fe154265ba103524763e43c7",
+          "estimated_micro_usd": 5075,
+          "input_tokens": 1451,
+          "input_tokens_bound": 6664,
+          "max_output_tokens": 8192,
+          "output_tokens": 3443,
+          "reserved_micro_usd": 13145,
+          "run_id": "m3-us-msft-finite-1",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "99e7dea64dd44aaeaec1d856dbbda4f3",
+          "estimated_micro_usd": 5738,
+          "input_tokens": 1597,
+          "input_tokens_bound": 7378,
+          "max_output_tokens": 8192,
+          "output_tokens": 3904,
+          "reserved_micro_usd": 13383,
+          "run_id": "m3-us-msft-finite-1",
+          "usage_status": "known"
+        },
+        {
+          "attempt_id": "b2d9f0a65543439daf07562d1c94f346",
+          "estimated_micro_usd": 5808,
+          "input_tokens": 1257,
+          "input_tokens_bound": 5610,
+          "max_output_tokens": 8192,
+          "output_tokens": 4041,
+          "reserved_micro_usd": 12793,
+          "run_id": "m3-us-msft-finite-1",
+          "usage_status": "known"
+        }
+      ],
+      "sqlite_uri_mode": "ro",
+      "unknown_reservations": 0,
+      "unresolved_micro_usd_bound": 0,
+      "unresolved_token_bound": 0,
+      "unsettled_reservations": 0
+    }
+  ],
+  "new_vendor_model_calls_this_readiness": 0,
+  "observed_at": "2026-10-11T00:36:21.032865+00:00",
+  "schema_version": "w08-readonly-budget-refresh/1",
+  "scope": "Six explicitly linked fresh/M3 AUTO ledgers only; historical seven unresolved reservations preserved from frozen native snapshots. No provider/model call, settle, schema initialization or database write.",
+  "unobserved_acquisition_usage": {
+    "capture_id": "1fc320db8942401694de2c53d2e5cc23",
+    "receipt": "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\fresh_executor_launch\\launched\\budget_observation.json",
+    "run": "fresh-20261009T065028-us-msft",
+    "status": "No native HTTP usage receipt; amount and byte count remain unknown; not assigned zero or invented bound."
+  }
+}

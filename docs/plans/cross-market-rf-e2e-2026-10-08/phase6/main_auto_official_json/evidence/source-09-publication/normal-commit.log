@@ -1,0 +1,46 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy contract modules (FC-1204-c, mirrors CI).........................................Passed
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[codex/main-auto-official-json-20261010 1415e314] feat: propagate pinned narrative business selector policy
+ 56 files changed, 985 insertions(+), 32 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/W03_ACCEPTANCE.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-08-publication/normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-08-publication/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-public-main-reception/green-public3-20261011T002035Z-a2218c36.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-public-main-reception/green-public3-20261011T002035Z-a2218c36.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-public-main-reception/red-public3-20261011T001138Z-f56d3951.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-public-main-reception/red-public3-20261011T001138Z-f56d3951.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-public-node-design.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-independent-review/probes.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-independent-review/receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-independent-review/review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-independent-review/summary.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/green-extra.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/green-extra.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/green-final.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/green-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/green-first.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/green-first.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/green-model-construction.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/green-model-construction.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/green-scoped.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/green-scoped.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/red-corrected-fixtures.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/red-corrected-fixtures.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/red-focused.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/red-focused.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/source-after.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/source-before.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/static-mypy.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/static-mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/static-ruff-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/static-ruff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-shared-main-reception/static-ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-readiness-20261011.md
+ create mode 100644 src/company_wiki/automation/narrative_selector_binding.py
+ create mode 100644 tests/integration/test_narrative_shared_selector_version.py
+ create mode 100644 tests/integration/test_w03_selector_public_node.py
+ create mode 100644 tests/unit/test_narrative_selector_binding.py

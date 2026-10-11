@@ -1,0 +1,27 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 3 items
+
+tests\integration\test_official_json_capture_provenance.py F.F           [100%]
+
+================================== FAILURES ===================================
+__________ test_capture_url_control_characters_remain_unknown[\x7f] ___________
+tests\integration\test_official_json_capture_provenance.py:267: in test_capture_url_control_characters_remain_unknown
+    assert _captured_source_url(receipt) is None
+E   AssertionError: assert 'https://official.example/api/question_answer/answer_question_page\x7f' is None
+E    +  where 'https://official.example/api/question_answer/answer_question_page\x7f' = <function _captured_source_url at 0x0000021B07FB5D00>({'capture_method': 'local_document', 'tool_name': 'offline-import', 'tool_call_id': 'public-capture', 'captured_at': '2026-10-11T00:00:00Z', ...})
+__________ test_capture_url_control_characters_remain_unknown[\x9f] ___________
+tests\integration\test_official_json_capture_provenance.py:267: in test_capture_url_control_characters_remain_unknown
+    assert _captured_source_url(receipt) is None
+E   AssertionError: assert 'https://official.example/api/question_answer/answer_question_page\x9f' is None
+E    +  where 'https://official.example/api/question_answer/answer_question_page\x9f' = <function _captured_source_url at 0x0000021B07FB5D00>({'capture_method': 'local_document', 'tool_name': 'offline-import', 'tool_call_id': 'public-capture', 'captured_at': '2026-10-11T00:00:00Z', ...})
+=========================== short test summary info ===========================
+FAILED tests/integration/test_official_json_capture_provenance.py::test_capture_url_control_characters_remain_unknown[\x7f]
+FAILED tests/integration/test_official_json_capture_provenance.py::test_capture_url_control_characters_remain_unknown[\x9f]
+========================= 2 failed, 1 passed in 0.54s =========================

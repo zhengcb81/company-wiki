@@ -105,6 +105,18 @@ def _relation(left: NarrativeUnit, right: NarrativeUnit, rules: CandidateRules) 
     return None
 
 
+def _referential_pdf_event(left: NarrativeUnit, right: NarrativeUnit, rules: CandidateRules) -> bool:
+    """An independently selected product can still be required event context."""
+    a, b = left.coordinates, right.coordinates
+    return (left.unit_kind == right.unit_kind == "pdf_text_block"
+        and a.page_number == b.page_number and a.paragraph_index is not None
+        and b.paragraph_index == a.paragraph_index + 1
+        and _same_boundary(left, right) and not _barrier(left, rules)
+        and not _barrier(right, rules) and _REFERENCE.search(right.raw_text) is not None
+        and rules.high_value_event.search(right.raw_text) is not None
+        and bool(business_objects(left.raw_text).intersection(business_objects(right.raw_text))))
+
+
 def _group_id(members: Sequence[NarrativeUnit]) -> str:
     digest = hashlib.sha256("|".join(unit.unit_id for unit in members).encode()).hexdigest()
     return "urn:company-wiki:context-group:sha256:" + digest
@@ -132,6 +144,11 @@ def enrich_business_groups(units: Sequence[NarrativeUnit], *,
             diagnostics.append(BusinessGroupDiagnostic(reason,
                 tuple(unit.coordinates.locator() for unit in members[:MAX_COMPLETION_UNITS]), len(members)))
 
+    def extendable_singleton(unit: NarrativeUnit) -> bool:
+        group = group_ids.get(unit.unit_id)
+        return group is None or not any(other != unit.unit_id and value == group
+            for other, value in group_ids.items())
+
     def add_members(members: Sequence[NarrativeUnit]) -> None:
         topics = tuple(dict.fromkeys(topic for unit in members if unit.unit_id in by_id
             for topic in by_id[unit.unit_id].topics))
@@ -139,6 +156,11 @@ def enrich_business_groups(units: Sequence[NarrativeUnit], *,
             if unit.unit_id not in by_id:
                 by_id[unit.unit_id] = EvidenceCandidate(unit, topics,
                     ("business_group_context", "operating_qualification"), 0)
+        for left, right in zip(members, members[1:]):
+            if _referential_pdf_event(left, right, rules):
+                candidate = by_id[left.unit_id]
+                by_id[left.unit_id] = EvidenceCandidate(candidate.unit, candidate.topics,
+                    tuple(dict.fromkeys((*candidate.reasons, "adjacent_subject_context"))), candidate.score)
         if len(members) > 1:
             group = _group_id(members)
             for unit in members:
@@ -153,12 +175,16 @@ def enrich_business_groups(units: Sequence[NarrativeUnit], *,
                 diagnostic("business_group_character_limit", (seed,))
             handled.add(seed.unit_id)
             continue
-        if seed.unit_id in group_ids:
-            continue  # Existing project/PDF groups retain their separate semantics.
+        reference_pair = (
+            index > 0 and _referential_pdf_event(ordered[index - 1], seed, rules)
+        ) or (index + 1 < len(ordered) and _referential_pdf_event(seed, ordered[index + 1], rules))
+        if seed.unit_id in group_ids and (not extendable_singleton(seed) or not reference_pair):
+            continue  # Multi-member project/PDF groups retain their separate semantics.
         start = index
         if index > 0:
             previous = ordered[index - 1]
-            if (previous.unit_id not in handled and previous.unit_id not in group_ids
+            if (previous.unit_id not in handled and (previous.unit_id not in group_ids
+                    or (extendable_singleton(previous) and _referential_pdf_event(previous, seed, rules)))
                 and not _barrier(previous, rules)
                 and _relation(previous, seed, rules) == "required"):
                 start -= 1
@@ -169,7 +195,9 @@ def enrich_business_groups(units: Sequence[NarrativeUnit], *,
             continue
         for next_index in range(index + 1, len(ordered)):
             follower = ordered[next_index]
-            if follower.unit_id in handled or follower.unit_id in group_ids:
+            if follower.unit_id in handled or (follower.unit_id in group_ids
+                and not (extendable_singleton(follower)
+                    and _referential_pdf_event(members[-1], follower, rules))):
                 break
             relation = _relation(members[-1], follower, rules)
             if relation is None:

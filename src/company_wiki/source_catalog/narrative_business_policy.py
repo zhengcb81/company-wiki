@@ -30,7 +30,7 @@ _MECHANISM = re.compile(
     r"\b(?:multi[- ]?model|model)\b[^。.!?;]{0,90}\b(?:critical|important)\b|"
     r"\b(?:critical|important)\b[^。.!?;]{0,90}\b(?:multi[- ]?model|model)\b|"
     r"通过.{0,50}(?:提高|减少|降低|提升|实现)|因(?:为|此)|取决于|"
-    r"模块化|先组装|生产流程|供货能力|人工.{0,25}(?:安排|调整)|"
+    r"模块化|先组装|生产流程.{0,30}(?:按照|采用|通过|分为)|供货能力|人工.{0,25}(?:安排|调整)|"
     r"降低.{0,30}(?:成本|能耗|风险)|提升.{0,30}(?:效率|转化率|价格)", re.IGNORECASE)
 _STRUCTURE = re.compile(
     r"\b(?:consist\w*|compris\w*|divided into|made up of|"
@@ -38,10 +38,37 @@ _STRUCTURE = re.compile(
     r"\b(?:through|via|using)\b[^。.!?;]{0,50}\b(?:distributors?|distribution networks?|supply channels?)\b|"
     r"\bdistributors?\b[^。.!?;]{0,60}\b(?:handle|provide|sell|supply|support|serve)\b|"
     r"\btargets?\s+(?:(?:industrial|enterprise|manufacturing|overseas|international|institutional|retail)\s+(?:customers?|users?|markets?)|manufacturers?|equipment makers)\b|"
-    r"分为|包括.{0,40}(?:产品|服务|业务|设备)|主要(?:采用|从事|生产|经营)|"
-    r"主营.{0,35}(?:产品|业务|服务)|产品.{0,40}(?:用于|应用于|可覆盖)|"
-    r"通过.{0,35}(?:直销|渠道|经销|外购)|生产模式|生产流程|模块化|"
-    r"原材料供应渠道|合作关系|销售渠道|客户群体|研发平台|生产组织", re.IGNORECASE)
+    r"产品.{0,40}(?:用于|应用于|可覆盖)|"
+    r"通过.{0,35}(?:直销|渠道|经销|外购)|模块化|"
+    r"主要采用.{1,40}(?:生产模式|销售模式|工艺)|"
+    r"(?:生产模式|生产流程|生产组织|销售渠道|客户群体|研发平台)"
+    r".{0,35}(?:采用|按照|分为|由|包括|通过|面向)|"
+    r"原材料.{0,30}(?:来源于|外购|供应渠道)", re.IGNORECASE)
+# Enumerating identifiable components is useful static source meaning. A list
+# consisting entirely of generic categories or business activities is not.
+_COMPONENT_LIST = re.compile(
+    r"(?:产品|业务|服务|设备|部件|系统)(?:主要)?(?:分为|包括|由)"
+    r"(?P<components>[^，。；]{1,100})")
+_COMPONENT_SEPARATOR = re.compile(r"以及|与|和|及|、")
+# Normalize only list grammar in classification tokens; source units and
+# component names such as 等离子刻蚀设备 remain byte-for-byte unchanged.
+_COMPONENT_ENUMERATION_SUFFIX = re.compile(r"(?:等等|等)(?:类型|种类|类别|产品|服务|设备|业务|方案)?$")
+_GENERIC_COMPONENT = re.compile(
+    r"(?:(?:高端|先进|各类|多类|各种|相关|主要|配套|核心|多种|综合|的)|"
+    r"研发|研究|开发|生产|制造|销售|经营|管理|业务|产品|服务|设备|装备|"
+    r"解决方案|方案)+")
+
+
+def _component_structure(clause: str) -> bool:
+    for match in _COMPONENT_LIST.finditer(clause):
+        parts = tuple(_COMPONENT_ENUMERATION_SUFFIX.sub("", part.strip()).strip()
+            for part in _COMPONENT_SEPARATOR.split(match.group("components")))
+        if len(parts) > 1 and any(part and not _GENERIC_COMPONENT.fullmatch(part)
+            for part in parts):
+            return True
+    return False
+
+
 _CONSTRAINT = re.compile(
     r"\b(?:constraints?|shortages?|bottleneck|limited|restrict\w*|fails?|"
     r"goes away|resilience|remain available|qualification required|"
@@ -136,7 +163,7 @@ def _business_fact(text: str) -> OperatingFact:
             reasons.append("specific_business_event")
         if _MECHANISM.search(clause):
             reasons.append("operating_mechanism")
-        if _STRUCTURE.search(clause):
+        if _STRUCTURE.search(clause) or _component_structure(clause):
             reasons.append("business_structure")
         if _CONSTRAINT.search(clause):
             reasons.append("business_risk_or_constraint")

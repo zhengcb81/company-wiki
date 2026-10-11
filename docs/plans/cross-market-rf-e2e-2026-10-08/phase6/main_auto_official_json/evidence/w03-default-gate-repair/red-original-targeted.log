@@ -1,0 +1,54 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 46 items / 40 deselected / 6 selected
+
+tests\unit\test_narrative_evidence.py FFFF.F                             [100%]
+
+================================== FAILURES ===================================
+_ test_static_topic_mentions_are_not_selected_without_a_change_or_current_event _
+tests\unit\test_narrative_evidence.py:438: in test_static_topic_mentions_are_not_selected_without_a_change_or_current_event
+    assert package.evidence_spans == ()
+E   AssertionError: assert (EvidenceSpan...ty_flags=()),) == ()
+E     
+E     Left contains one more item: EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:5a429e0b092bd401d116cb56d8371ddfb1...eb2d8c727807ddf8da2e57a1556f26bb9999a259e488fbef2a471f', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())
+E     Use -v to get more diff
+_ test_specific_emerging_business_positions_are_selected_without_generic_product_noise _
+tests\unit\test_narrative_evidence.py:471: in test_specific_emerging_business_positions_are_selected_without_generic_product_noise
+    assert {span.coordinates.page_number for span in package.evidence_spans} == {2, 16}
+E   assert {2, 3, 16} == {2, 16}
+E     
+E     Extra items in the left set:
+E     3
+E     Use -v to get more diff
+_ test_complete_report_with_boilerplate_static_background_or_contents_requires_review[\u62a5\u544a\u671f\u5185\uff0c\u516c\u53f8\u6301\u7eed\u5173\u6ce8\u6d77\u5916\u5e02\u573a\u52a8\u6001\uff0c\u79ef\u6781\u505a\u597d\u4e3b\u8425\u4e1a\u52a1\u7ecf\u8425\u7ba1\u7406\u3002] _
+tests\unit\test_narrative_evidence.py:578: in test_complete_report_with_boilerplate_static_background_or_contents_requires_review
+    assert package.evidence_spans == ()
+E   AssertionError: assert (EvidenceSpan...ty_flags=()),) == ()
+E     
+E     Left contains one more item: EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:d1ce50cf9ee10a52432e2c24fd0b598cfc...3896e8f0fdf7c5ea0a2a964448fdcac038b0824127925974821bf5', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())
+E     Use -v to get more diff
+_ test_complete_report_with_boilerplate_static_background_or_contents_requires_review[\u516c\u53f8\u4e3b\u8425\u4e1a\u52a1\u662f\u6307\u9ad8\u7aef\u88c5\u5907\u7814\u53d1\u3001\u751f\u4ea7\u548c\u9500\u552e\uff0c\u6d77\u5916\u5e02\u573a\u662f\u516c\u53f8\u672a\u6765\u7684\u53d1\u5c55\u65b9\u5411\u3002] _
+tests\unit\test_narrative_evidence.py:578: in test_complete_report_with_boilerplate_static_background_or_contents_requires_review
+    assert package.evidence_spans == ()
+E   AssertionError: assert (EvidenceSpan...ty_flags=()),) == ()
+E     
+E     Left contains one more item: EvidenceSpan(schema_version='1.0.0', span_id='urn:company-wiki:evidence-span:sha256:8609e3a120dcdc808922e78d34526f8f83...edf50c8fb074ef67e170180e81eb3fdef2d125fdec4a3719104257', parse_status=<ParseStatus.PARSED: 'parsed'>, quality_flags=())
+E     Use -v to get more diff
+______ test_adjacent_product_context_is_retained_for_a_validation_event _______
+tests\unit\test_narrative_evidence.py:1207: in test_adjacent_product_context_is_retained_for_a_validation_event
+    assert any(
+E   assert False
+E    +  where False = any(<generator object test_adjacent_product_context_is_retained_for_a_validation_event.<locals>.<genexpr> at 0x000002037E279630>)
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_evidence.py::test_static_topic_mentions_are_not_selected_without_a_change_or_current_event
+FAILED tests/unit/test_narrative_evidence.py::test_specific_emerging_business_positions_are_selected_without_generic_product_noise
+FAILED tests/unit/test_narrative_evidence.py::test_complete_report_with_boilerplate_static_background_or_contents_requires_review[\u62a5\u544a\u671f\u5185\uff0c\u516c\u53f8\u6301\u7eed\u5173\u6ce8\u6d77\u5916\u5e02\u573a\u52a8\u6001\uff0c\u79ef\u6781\u505a\u597d\u4e3b\u8425\u4e1a\u52a1\u7ecf\u8425\u7ba1\u7406\u3002]
+FAILED tests/unit/test_narrative_evidence.py::test_complete_report_with_boilerplate_static_background_or_contents_requires_review[\u516c\u53f8\u4e3b\u8425\u4e1a\u52a1\u662f\u6307\u9ad8\u7aef\u88c5\u5907\u7814\u53d1\u3001\u751f\u4ea7\u548c\u9500\u552e\uff0c\u6d77\u5916\u5e02\u573a\u662f\u516c\u53f8\u672a\u6765\u7684\u53d1\u5c55\u65b9\u5411\u3002]
+FAILED tests/unit/test_narrative_evidence.py::test_adjacent_product_context_is_retained_for_a_validation_event
+================= 5 failed, 1 passed, 40 deselected in 0.85s ==================

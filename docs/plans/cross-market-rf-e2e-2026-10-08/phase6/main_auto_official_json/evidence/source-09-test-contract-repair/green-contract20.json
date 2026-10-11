@@ -1,0 +1,48 @@
+{
+  "schema_version": "source09-contract-repair/1",
+  "returncode": 0,
+  "ruff_returncode": 0,
+  "seconds": 5.232768500005477,
+  "source_and_test_before": {
+    "tests/unit/test_transcript_boundary_versions.py": "9d4aa9de4d0885278f3d14ec494520ea89d50041f9bc09cf8b4c8cf24597c265",
+    "tests/contract/test_narrative_output_plan.py": "bd00c3c438d5ddf09535fd2ba2aabae22431f63799f6471f19383c874021d0d2",
+    "src/company_wiki/automation/narrative_model.py": "c4d213e2eef4d4e9372ebc1af1ae497d811768ab8a1c7dad97f1d6c72508aa66",
+    "src/company_wiki/automation/narrative_model_caller.py": "abee99f0a93c44aca7dc62d3d002c6e90aca48984839a488bbc098e1f086ff06",
+    "src/company_wiki/automation/narrative_failed_final.py": "0263148027b439f727cea4d9255ade074b8347b81f0398ad1e4b6c050e0b9cb8",
+    "tests/fixtures/narrative_real_transcript/MSFT_Q4_2026_earnings_call.txt": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "source_and_test_after": {
+    "tests/unit/test_transcript_boundary_versions.py": "9d4aa9de4d0885278f3d14ec494520ea89d50041f9bc09cf8b4c8cf24597c265",
+    "tests/contract/test_narrative_output_plan.py": "bd00c3c438d5ddf09535fd2ba2aabae22431f63799f6471f19383c874021d0d2",
+    "src/company_wiki/automation/narrative_model.py": "c4d213e2eef4d4e9372ebc1af1ae497d811768ab8a1c7dad97f1d6c72508aa66",
+    "src/company_wiki/automation/narrative_model_caller.py": "abee99f0a93c44aca7dc62d3d002c6e90aca48984839a488bbc098e1f086ff06",
+    "src/company_wiki/automation/narrative_failed_final.py": "0263148027b439f727cea4d9255ade074b8347b81f0398ad1e4b6c050e0b9cb8",
+    "tests/fixtures/narrative_real_transcript/MSFT_Q4_2026_earnings_call.txt": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "protected_unchanged": true,
+  "owned_temp_removed": true,
+  "temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-source09-test-contract-1k0_j00z",
+  "argv": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/unit/test_transcript_boundary_versions.py",
+    "tests/contract/test_narrative_output_plan.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-source09-test-contract-1k0_j00z\\pytest"
+  ],
+  "external_provider_calls": 0,
+  "paid_model_calls": 0,
+  "log_sha256": "93da85b90799f7c2a407d4efff41d8cac5e88ae8f83b776b06bc192fd2c1a506",
+  "original_red_log": "../source-09-publication/normal-push.log",
+  "original_red_log_sha256": "389f0e29b686f15b3ba861838fc1a92cd9068bba01b301e6e3723c43a87e18c2",
+  "actual_test_count": 20,
+  "pytest_seconds": 2.71,
+  "pytest_relocated_temp_cleanup": true
+}

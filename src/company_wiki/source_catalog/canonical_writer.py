@@ -173,7 +173,7 @@ class _SharedOriginal:
     """
 
     title: str
-    source_url: str
+    source_url: str | None
     document_kind: str
     publisher: str
     provider: str
@@ -387,7 +387,7 @@ class CanonicalSourceWriter:
 
     def import_shared_original_staged(
         self, *, request_id: str, document_kind: str, title: str,
-        source_url: str, publisher: str, staged_path: Path, content_sha256: str,
+        source_url: str | None, publisher: str, staged_path: Path, content_sha256: str,
         byte_size: int, mime_type: str, retrieved_at: str,
         capture_receipt: Mapping[str, Any], provenance_extensions: Mapping[str, Any],
         cleanup_staged: bool = True, market: str | None = None,

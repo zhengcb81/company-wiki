@@ -1,5 +1,6 @@
 """96 selected spans: compact planning, honest truncation and one settlement."""
 
+import hashlib
 import json
 import time
 import pytest
@@ -75,7 +76,9 @@ class PlannedProvider(NarrativeHTTPModel):
                 "completion_tokens": self.max_output_tokens if truncated else 1100,
             },
         }
-        return self._response(request, json.dumps(payload).encode(), time.monotonic())
+        self.returned_final = payload["choices"][0]["message"]["content"]
+        self.returned_wire = json.dumps(payload).encode()
+        return self._response(request, self.returned_wire, time.monotonic())
 
 
 def test_96_span_compact_plan_is_material_excerpt_not_row_enumeration_and_preserves_every_source_row():
@@ -165,7 +168,22 @@ def test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_
         record.input_tokens,
         record.output_tokens,
     ) == (2716, 8192)
-    assert record.charged_tokens == 10908 and record.response_sha256 is None
+    # A failed but observed final has its actual decoded-content fingerprint.
+    # It is diagnostic data, with zero accepted/published output.
+    final_bytes = model.returned_final.encode("utf-8")
+    diagnostic = error.failed_final
+    assert diagnostic is not None
+    assert record.charged_tokens == 10908
+    assert record.error_code == "MODEL_OUTPUT_TRUNCATED"
+    assert record.response_sha256 == hashlib.sha256(final_bytes).hexdigest()
+    assert diagnostic.final_content_sha256 == record.response_sha256
+    assert diagnostic.final_content_bytes == len(final_bytes)
+    assert diagnostic.provider_response_sha256 == hashlib.sha256(model.returned_wire).hexdigest()
+    assert diagnostic.provider_response_bytes == len(model.returned_wire)
+    assert diagnostic.provider_response_sha256 != diagnostic.final_content_sha256
+    assert diagnostic.final_prefix == model.returned_final and not diagnostic.clipped
+    assert record.output_bytes == 0 and record.output_sha256 is None
+    assert record.output_settled_at is not None
     before = store.budget_snapshot("run-one")
     with pytest.raises(
         NarrativeBudgetCallError, match="MODEL_REQUEST_ALREADY_RESERVED"

@@ -1,0 +1,21 @@
+{
+  "schema_version": "source-10-repaired-snapshot/1",
+  "observed_at": "2026-10-11T00:57:24.703695+00:00",
+  "source_and_independent_report_sha256": {
+    "src/company_wiki/source_catalog/official_json_import.py": "604d62cefd2ceb8b566dae08cac9e1ad86e8ea285e88da84ff845b4bf93cf027",
+    "src/company_wiki/source_catalog/canonical_writer.py": "26d9c475442f5438b19b8ad6a1c8578d0f14cfd13660b5955fd04c75a798e70f",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "c7e900878cf3a21438ae53ee53cff01e6eecb8615a46468ef3ba70a49f0e852f",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "7e1852eca0b041cecf0f9b97325e93d0f75bb452b5c0d26ee4139861402d60c0",
+    "tests/unit/test_narrative_evidence.py": "10b96c8fef3502d4348747ffb356ef6bd714f94512f155bf94102388d8d1f7cd",
+    "tests/integration/test_official_json_capture_provenance.py": "3b1ff1c8dee0d4e48b1012d0fd468ff17191afa24d4119c740be437bcd71b6be",
+    "tests/unit/test_transcript_boundary_versions.py": "9d4aa9de4d0885278f3d14ec494520ea89d50041f9bc09cf8b4c8cf24597c265",
+    "tests/contract/test_narrative_output_plan.py": "bd00c3c438d5ddf09535fd2ba2aabae22431f63799f6471f19383c874021d0d2",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\w03-default-independent-review\\FOLLOWUP.md": "9e385332d1f1be7eebc02aa19d52c71cd3ea1278b6e82d348f4e07571efdca13",
+    "docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\main_auto_official_json\\evidence\\w08-provenance-independent-review\\FOLLOWUP.md": "8094874319a3c55d1bf4f35e70289778cbb1ff8a2418087b37ed426ddb4e846c"
+  },
+  "status": "engineered_and_independently_accepted_publication_pending",
+  "old_publication_failure_preserved": true,
+  "external_provider_calls": 0,
+  "paid_model_calls": 0,
+  "new_real_cost_micro_usd": 0
+}

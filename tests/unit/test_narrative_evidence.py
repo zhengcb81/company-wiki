@@ -1449,3 +1449,108 @@ def test_company_statement_rejects_unknown_roles_and_unstable_locators_need_revi
             language="zh",
             evidence_spans=(unknown_unit,),
         )
+
+
+@pytest.mark.parametrize("text", (
+    "公司业务主要包括研发、生产及销售，并持续关注海外市场。",
+    "公司重视销售渠道和客户群体的管理，积极做好主营业务。",
+    "公司产品包括各类设备与配套解决方案。",
+    "公司高度重视生产流程，持续关注行业发展。",
+))
+def test_new_business_policy_does_not_promote_generic_categories_or_labels(text: str) -> None:
+    source_id, source_sha = _source(text)
+    unit = _unit(text, source_id=source_id)
+    parsed = NarrativeParseResult(source_id=source_id, source_sha256=source_sha,
+        language="zh", units=(unit,), page_count=1, pages_read=1)
+    package = select_narrative_evidence(parsed, title="年报.pdf", selector_version="0.7.0")
+    assert package.evidence_spans == ()
+    assert package.status == "needs_review"
+    assert package.coverage_complete is True
+
+
+@pytest.mark.parametrize("text", (
+    "公司的产品包括工业控制器与电动执行器。",
+    "公司的产品分为控制器与执行器，产品用于设备厂的运动控制。",
+    "公司主要采用以销定产的生产模式，生产流程按照模块化设计。",
+    "公司通过海外经销商销售工业设备，并由本地渠道提供安装服务。",
+))
+def test_new_business_policy_retains_concrete_static_operating_relationships(text: str) -> None:
+    source_id, source_sha = _source(text)
+    unit = _unit(text, source_id=source_id)
+    parsed = NarrativeParseResult(source_id=source_id, source_sha256=source_sha,
+        language="zh", units=(unit,), page_count=1, pages_read=1)
+    package = select_narrative_evidence(parsed, title="招股说明书.pdf", selector_version="0.7.0")
+    assert [span.raw_text for span in package.evidence_spans] == [text]
+    assert package.selection_limit == 160
+    assert "business_structure" in package.evidence_spans[0].structured_value["selection_reasons"]
+    assert verify_replayed_pdf_spans(package.evidence_spans, parsed.units) == (
+        (package.evidence_spans[0].span_id,), ())
+
+
+@pytest.mark.parametrize("limit", (1, 2))
+def test_already_selected_product_and_referential_event_are_an_atomic_original_pair(limit: int) -> None:
+    source_id, source_sha = _source("referential-product-pair")
+    texts = ("四款MOCVD新产品包括用于功率器件、Micro-LED和红黄光LED的设备。",
+        "其中GaAs MOCVD设备已进入客户端验证阶段，部分获得批量订货。")
+    members = tuple(_unit(text, source_id=source_id,
+        coords=EvidenceCoordinates(page_number=3, paragraph_index=24 + i))
+        for i, text in enumerate(texts))
+    parsed = NarrativeParseResult(source_id=source_id, source_sha256=source_sha,
+        language="zh", units=members, page_count=3, pages_read=3)
+    package = select_narrative_evidence(parsed, title="一季报.pdf", max_selected=limit,
+        selector_version="0.7.0")
+    if limit == 1:
+        assert package.evidence_spans == ()
+        assert package.status == "partial"
+        assert package.omitted_candidate_count == package.candidate_count == 2
+    else:
+        assert [span.raw_text for span in package.evidence_spans] == list(texts)
+        assert len({span.structured_value["selection_group_id"] for span in package.evidence_spans}) == 1
+        assert "adjacent_subject_context" in package.evidence_spans[0].structured_value["selection_reasons"]
+        assert tuple(span.coordinates.paragraph_index for span in package.evidence_spans) == (24, 25)
+        assert verify_replayed_pdf_spans(package.evidence_spans, parsed.units) == (
+            tuple(span.span_id for span in package.evidence_spans), ())
+
+
+@pytest.mark.parametrize("boundary", ("speaker", "qa_group_id", "parent_content_sha256", "section"))
+def test_already_selected_product_context_does_not_bridge_distinct_boundaries(boundary: str) -> None:
+    source_id, source_sha = _source("separate-product-pair")
+    texts = ("四款MOCVD新产品包括用于功率器件、Micro-LED和红黄光LED的设备。",
+        "其中GaAs MOCVD设备已进入客户端验证阶段，部分获得批量订货。")
+    members = tuple(_unit(text, source_id=source_id,
+        coords=EvidenceCoordinates(page_number=3, paragraph_index=24 + i),
+        metadata={boundary: str(i)}) for i, text in enumerate(texts))
+    parsed = NarrativeParseResult(source_id=source_id, source_sha256=source_sha,
+        language="zh", units=members, page_count=3, pages_read=3)
+    package = select_narrative_evidence(parsed, title="一季报.pdf", selector_version="0.7.0")
+    assert {span.raw_text for span in package.evidence_spans} == set(texts)
+    assert all("adjacent_subject_context" not in span.structured_value["selection_reasons"]
+        for span in package.evidence_spans)
+    groups = [span.structured_value.get("selection_group_id") for span in package.evidence_spans]
+    assert not (groups[0] is not None and groups[0] == groups[1])
+
+
+@pytest.mark.parametrize("text, selected", (
+    ("公司产品包括各类设备及配套服务等。", False),
+    ("公司产品包括各类设备以及配套解决方案等等。", False),
+    ("公司产品包括产品、设备及相关服务等类型。", False),
+    ("公司的产品包括工业控制器与电动执行器等。", True),
+    ("公司的产品包括工业控制器以及等离子刻蚀设备等。", True),
+))
+def test_component_enumeration_grammar_is_not_a_specific_operating_object(
+    text: str, selected: bool,
+) -> None:
+    source_id, source_sha = _source(text)
+    unit = _unit(text, source_id=source_id)
+    parsed = NarrativeParseResult(source_id=source_id, source_sha256=source_sha,
+        language="zh", units=(unit,), page_count=1, pages_read=1)
+    package = select_narrative_evidence(parsed, title="招股说明书.pdf", selector_version="0.7.0")
+    assert bool(package.evidence_spans) is selected
+    if selected:
+        assert [span.raw_text for span in package.evidence_spans] == [text]
+        assert "business_structure" in package.evidence_spans[0].structured_value["selection_reasons"]
+        assert verify_replayed_pdf_spans(package.evidence_spans, parsed.units) == (
+            (package.evidence_spans[0].span_id,), ())
+    else:
+        assert package.status == "needs_review"
+        assert package.coverage_complete is True

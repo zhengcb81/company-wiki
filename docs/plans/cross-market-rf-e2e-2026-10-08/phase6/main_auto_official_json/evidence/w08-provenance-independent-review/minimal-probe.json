@@ -1,0 +1,33 @@
+{
+  "probes": [
+    {
+      "name": "bound-existing-page",
+      "receipt": {
+        "content_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "response_bytes": 123,
+        "original_capture_observation": {
+          "content_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+          "response_bytes": 123,
+          "url": "https://official.example/qa?page=2"
+        }
+      },
+      "expected_source_url": "https://official.example/qa?page=2",
+      "actual_source_url": "https://official.example/qa?page=2",
+      "pass": true
+    },
+    {
+      "name": "ascii-delete-control",
+      "receipt": {
+        "content_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "response_bytes": 123,
+        "url": "https://official.example/qa"
+      },
+      "expected_source_url": null,
+      "actual_source_url": "https://official.example/qa",
+      "pass": false
+    }
+  ],
+  "all_pass": false,
+  "external_calls": 0,
+  "temporary_files": 0
+}

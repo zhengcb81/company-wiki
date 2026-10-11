@@ -1,0 +1,13 @@
+{
+  "before-shas.json": "f6b52bff28d3440c8e659cfd2beba3927f19689ffb08aa5d73a8c6b1a353d8f5",
+  "green-targeted-attempt-01.log": "3b2d23e75a998119f635abec752fbf614da0ba1f012be744cc4132b5fd2ea1d1",
+  "HANDOFF.md": "9e6647b5fd698c5e6fcbfb883da5034c9bdd5abadde3c3dec594ced2326f559e",
+  "node-pure-business-public.log": "9bbd76a03f39a1ef740cde0e48c2266ac48c3a63753f610c865e5d504309a4f1",
+  "node-receipt.json": "2b9b79208e7f6c61b0b26dcd43bc82c667a43876fe3c5783b5345d67f8928c98",
+  "original-prepush-red.log": "389f0e29b686f15b3ba861838fc1a92cd9068bba01b301e6e3723c43a87e18c2",
+  "protection-receipt.json": "f2084812c89e7cb919a952c785f6c84510b19199bcb018fd2e8628e08f11b870",
+  "red-new-semantic.log": "abdad8ff15aa7b46c1d89d5ccdbf0f08f098fa4cb12cc1ad05ba7979d8a952ca",
+  "red-original-targeted.log": "ff8740527f28d2eeb57063c024968bb5247d422cebc47ace36a96d6550b04d48",
+  "static-mypy.log": "0c37c4158c91ef55c724ba017bf6465f26018199badb08e3ff13f98acdf056c2",
+  "static-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+}
