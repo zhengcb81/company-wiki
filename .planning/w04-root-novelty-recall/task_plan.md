@@ -10,10 +10,12 @@
 
 不改96年报cap、现有IPO160cap、whole-group真实span成本、原文字节、默认legacy和六份0.7.1完整package hash。纯soft排序，不删除原候选；不加LLM、事实库、配置许可、人工签收。
 
+接口澄清：这里“默认legacy”指直接调用budget/finalizer时省略policy，不能覆盖先前ROOT已固定的WP02_SELECTOR_INTERFACE_AMENDMENT：公开selector默认0.8.0并一次绑定，显式0.6/0.7.0/0.7.1走原算法且保持归档指纹。新0.8默认是已授权升级，不增加opt-in/canary门禁。首轮非作者误按公开默认0.7.1的失败证据保留并说明范围错误；真实六文档失败与此不同。
+
 ## 三个大节点
 
-- [ ] A：先写真实tokenizer/公开finalizer行为RED：中文/英文数字、小数/range/百分比与主体不同；计划/进行验证/验证通过/否定/订单阶段不同；短subset/长组新事实；相同完整内容只有排版变化的重复正控。复用已有stage predicate，不为公司/页码特判。
-- [ ] B：共用有界完整group signature，按native coordinates而非locator字符串或逐span独立提取。保留数值和主体/谓词状态的保护信号；高对称重叠且无新保护信号才软降级。截断或无法绑定主体时不冒重复。0.8独有，旧调用默认legacy。一次集中330既有+新增必要测试、类型/lint；真正新事实不被旧词汇重叠压制。
+- [x] A：真实tokenizer/公开finalizer正式30FAIL/1正控已留证；数字、主体、阶段、否定和subset等覆盖，复用已有stage predicate。
+- [x] B：完整native-order group signature保留保护信号，仅85%双向重叠且无新信号才软降级；365集中测试、lint、3文件类型检查通过。6产品冻结SHA，22既有WIP不变；本项仅工程范围。
 - [ ] C：新唯一stem真实六原件一次解析/回放；冻结SHA/config、0.7.1完整有序package、原文相等、cap、完整组、omitted partition。年报LPCVD主体数量、钨验证与重复量产订单、供应交期条件分别提供同SHA同完整组原文见证；保留PRISMO56新增事实。非作者一次大节点复核→正常commit/并线/push/CI→G2。
 
 原精确locators断言永久保留为另栏。可接受另一处等价原文时，必须绑定同source/group的native顺序、实际locators/原文SHA及主体→数量/限定→阶段归属；跨组substring、其它型号数量、薄膜总量替代LPCVD量、计划替代完成均须拒绝。固定检查点不允许在见到新结果后偷偷降级。仍漏钨或LPCVD便记FAIL_CRITICAL_RECALL，根据真实budget诊断修共用策略后再验，不能抬cap换绿。
@@ -22,4 +24,4 @@
 
 测试只用独立自有tmp；真实回放不下载、不复制原件、无模型费用，保留小压缩证据。保留旧FAIL及已有WIP；把本树已与主线相同的CI选择修复按Git三方比对处理，不覆盖最新远端。共享12份PWF由ROOT引用当前状态，作者只维护本包。新分包前必须重新定义排他写集。
 
-Next Step：完成FF CaseSpec/生产scope的原41联调接收，随后在原ROOT selector树固定上述行为RED并实施。
+Next Step：一次真实6原件回放已完成，旧6个0.7.1指纹全保持但主体事实检查3项仍失败；保留FAIL_CRITICAL_RECALL，查共用budget排序原因。非作者工程审查并行；不能以365工程绿代替真实召回或放宽原断言。

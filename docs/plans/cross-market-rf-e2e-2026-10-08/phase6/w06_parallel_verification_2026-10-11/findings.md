@@ -1,7 +1,7 @@
 ## ROOT 当前入口 — 2026-10-11
 
 当前状态、已发布SHA与下一步统一见 [ROOT接收状态](ROOT-reception-status.md)，优先于本文旧状态。
-OCR/RF/Audit已并线发布；Portability正常并线发布且精确CI绿；FF权威案例工具修复与CWP跨期生产修复并行。母W04/G2/G4/G5未完成。目标active，不增加小节点许可；原FAIL/原件/配置/WIP保留。
+OCR/RF/Audit/Portability已并线发布；FF手动矩阵工具已并main4167dac4且精确CI38148263309成功。CWP跨期修复191+14独审通过，原41联调40/1，正在修ET→FF截止日诊断。W04真实6原件旧指纹保持但3项业务召回FAIL，按共用质量排序修；G2/G4/G5开放。目标active，不增加小节点许可；原FAIL/原件/配置/WIP保留。
 
 ## ROOT 当前状态 — OCR 已本地并线 / 两张 W06 接收修复 — 2026-10-11
 

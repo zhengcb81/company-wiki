@@ -1,0 +1,689 @@
+{
+  "schema_version": "w06-independent-case-authority-final/1",
+  "verdict": "TOOL_BLOCKER",
+  "author_state": "FROZEN_STOP",
+  "reviewer_state": "FINAL_STOP",
+  "scope": "One bounded pure counterexample/static group; tools acceptance only, not product matrix completion.",
+  "freeze_sha256": "e2bf72bde855935db1beeca45ad10d4a9b205f4ca1137dab07db4d827e3f7fe3",
+  "freeze_products": 205,
+  "original_matrix": {
+    "PASS": 19,
+    "FAIL": 21,
+    "PARTIAL": 1,
+    "status": "PARTIAL_PRODUCT_FAILURES"
+  },
+  "unknown_usage_semantics": "Negative case may PASS while business remains failed/unknown; null is preserved and overall incomplete matrix never FULL_PASS.",
+  "scope_gaps": [
+    "ROOT producer/source-fact fix pending",
+    "Unchanged 41-case real offline integration rerun pending",
+    "40 historical new fixture receipts absent; no retroactive manufacture"
+  ],
+  "probes": [
+    {
+      "name": "FREEZE-205-PRODUCT-19-EVIDENCE",
+      "pass": true,
+      "actual": {
+        "freeze_sha256": "e2bf72bde855935db1beeca45ad10d4a9b205f4ca1137dab07db4d827e3f7fe3",
+        "products": 205,
+        "evidence": 19,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "HISTORICAL-20-FREEZE-REPORT-ZIP",
+      "pass": true,
+      "actual": {
+        "old_freeze_entries": 20,
+        "hashes": {
+          "freeze": "e098e5bca867a33802d8fcf6945af7370bb092aec13a4397be475244c43e1246",
+          "zip": "dd8fc402a337ef02b3db456a760162f59129c9e7ae5667c62d281294d903bea3",
+          "report": "aa2ab10add76f89e6e259fa0a05c8ad961f562f46b3fd21a1e94c1b2a3acc72f"
+        },
+        "scope": "Historical 20-entry manifest and previous review retained; repaired live tools use new 205-entry freeze."
+      }
+    },
+    {
+      "name": "TEN-PRODUCER-BINDINGS",
+      "pass": true,
+      "actual": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\scripts\\fetch_filing.py",
+          "sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+          "matches": true
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\scripts\\transcript_tool_transport.py",
+          "sha256": "013c905b88e4d936d9fd0d2f88a67bb8204378a7e091b29f5ccfb58bed30e847",
+          "matches": true
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\ff-contract-matrix-root\\scripts\\transcript_companion.py",
+          "sha256": "1f373148043d66502d9c1316036597c09a2c1071981ce38a17ba06fa9b13db14",
+          "matches": true
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader.py",
+          "sha256": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+          "matches": true
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\service.py",
+          "sha256": "b308b935067e9a08fd4aee6c8c1cd56964447dadaed9f8401a6fe12fd684b1aa",
+          "matches": true
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\config.py",
+          "sha256": "beb07a6d0e97942c81c0ab7a1f82904d0fdcb3ef5447f01659773431b2839064",
+          "matches": true
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py",
+          "sha256": "1684c922c8bff9a6ecc26fa5502a5abdc147e6c273619c5817e16325d7449003",
+          "matches": true
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_api.py",
+          "sha256": "0bf6bbc8d316ae8878b2f4cae27686862af378c8682963404613bbbf349b6292",
+          "matches": true
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_runtime.py",
+          "sha256": "2655bbadeccc98e74c51df1f3e49171f0a827f7699abee0afc4e7d665ffb1957",
+          "matches": true
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\__init__.py",
+          "sha256": "39921253e7b65e89c49eca2f8904b24c39b2425af79fb8f1ab8edc61e4c69ad2",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "name": "THREE-ORIGINAL-INPUT-SHA",
+      "pass": true,
+      "actual": {
+        "omitted-required-22-cases-counterexample.json": "befdd11779b96b2dd1494c520a0cc324c26733ce19c32fabb03559d2f1d8c366",
+        "removed-cutoff-expectation-report-copy.json": "b4433cc0a58e9160ff9db69a889540b7c95db55e0c2c377a45299c8fe7abd883",
+        "modified-request-vector.json": "de6eff84633cb165d2c7180c3865c2c9470b7e77f2bae3bffc3d1721b49170d3"
+      }
+    },
+    {
+      "name": "EXACT-OMITTED-22",
+      "pass": true,
+      "actual": [
+        {
+          "vector": "coverage_gap",
+          "case_id": null,
+          "detail": "missing=['call_fy_only_no_q', 'call_hard_timeout', 'call_max_bytes', 'call_past_cutoff', 'call_wrong_mime', 'call_wrong_quarter', 'call_wrong_symbol', 'chainA_download_reuse', 'err_402_entitlement', 'err_missing_creds', 'err_unknown_usage', 'fin_cn_annual_fetch', 'fin_cn_quarterly_fetch', 'fin_cn_semi_fetch', 'fin_hk_annual_fetch', 'fin_hk_quarterly_fetch', 'fin_hk_semi_fetch', 'fin_us_annual_fetch', 'fin_us_quarterly_fetch', 'fin_us_semi_fetch', 'local_txt_exact_reuse', 'request_after_failure_retry'], unknown=[], duplicate=[]"
+        }
+      ]
+    },
+    {
+      "name": "EXACT-CUTOFF-EXPECTATION-ERASED",
+      "pass": true,
+      "actual": [
+        {
+          "vector": "case_contract_mismatch",
+          "case_id": "call_past_cutoff",
+          "detail": "expected differs from w06-cases/1:call_past_cutoff"
+        },
+        {
+          "vector": "case_not_passed",
+          "case_id": "call_past_cutoff",
+          "detail": "actual result FAIL cannot certify required case"
+        },
+        {
+          "vector": "wrong_cutoff",
+          "case_id": "call_past_cutoff",
+          "detail": "past-cutoff case did not report the actual cutoff diagnostic"
+        },
+        {
+          "vector": "missing_case_fixture_evidence",
+          "case_id": "call_past_cutoff",
+          "detail": "KeyError: 'fixture_ref'"
+        }
+      ]
+    },
+    {
+      "name": "EXACT-MODIFIED-REQUEST-BYTES",
+      "pass": false,
+      "actual": {
+        "expected": "3abf0c3d101818b484bf03cd69673f49cc31f3c9facd153fed228e414e0d7393",
+        "actual": "51aeeaf3a6a3a30836d46b87418c6b7b530e687dfe606e95c84a6f8d3f8c8759"
+      }
+    },
+    {
+      "name": "EXACT-HASHED-WRONG-MARKET",
+      "pass": false,
+      "actual": []
+    },
+    {
+      "name": "POSITIVE-FULL-FIXED-REGISTRY",
+      "pass": true,
+      "actual": {
+        "count": 41
+      }
+    },
+    {
+      "name": "REGISTRY-MISSING",
+      "pass": true,
+      "actual": [
+        "missing=['chainA_download_reuse'], unknown=[], duplicate=[]"
+      ]
+    },
+    {
+      "name": "REGISTRY-DUPLICATE",
+      "pass": true,
+      "actual": [
+        "missing=[], unknown=[], duplicate=['chainA_download_reuse']"
+      ]
+    },
+    {
+      "name": "REGISTRY-EXTRA",
+      "pass": true,
+      "actual": [
+        "missing=[], unknown=['synthetic-extra-case'], duplicate=[]"
+      ]
+    },
+    {
+      "name": "RUNNER-ORACLE-SAME-AUTHORITY",
+      "pass": true,
+      "actual": {
+        "case_count": 41,
+        "authority": "w06-cases/1"
+      }
+    },
+    {
+      "name": "POSITIVE-NAMED-SINGLE-CASE",
+      "pass": true,
+      "actual": {
+        "id": "fin_cn_annual_hit",
+        "scope": "component only"
+      }
+    },
+    {
+      "name": "FULL-REQUEST-DIMENSION-DRIFT",
+      "pass": true,
+      "actual": [
+        {
+          "field": "company_query",
+          "rejected": true
+        },
+        {
+          "field": "market",
+          "rejected": true
+        },
+        {
+          "field": "document_kind",
+          "rejected": true
+        },
+        {
+          "field": "fiscal_year",
+          "rejected": true
+        },
+        {
+          "field": "fiscal_period",
+          "rejected": true
+        },
+        {
+          "field": "as_of_date",
+          "rejected": true
+        },
+        {
+          "field": "filing_intent",
+          "rejected": true
+        },
+        {
+          "field": "mode",
+          "rejected": true
+        },
+        {
+          "field": "companion.fiscal_quarter",
+          "rejected": true
+        },
+        {
+          "field": "companion.max_bytes",
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "name": "FIXTURE-SCENARIO-DATE-CONTENT-BYTES-KEY",
+      "pass": true,
+      "actual": [
+        {
+          "field": "scenario",
+          "rejected": true
+        },
+        {
+          "field": "call_date",
+          "rejected": true
+        },
+        {
+          "field": "content_utf8",
+          "rejected": true
+        },
+        {
+          "field": "response_bytes",
+          "rejected": true
+        },
+        {
+          "field": "with_fmp_key",
+          "rejected": true
+        }
+      ]
+    },
+    {
+      "name": "ORIGINAL-41-REQUEST-VECTORS-UNCHANGED",
+      "pass": true,
+      "actual": {
+        "cases": 41,
+        "mismatches": []
+      }
+    },
+    {
+      "name": "FIXED-BUSINESS-ASSERTIONS-21-FAIL-AS-PASS",
+      "pass": true,
+      "actual": [
+        {
+          "case_id": "chainA_download_reuse",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "chainA_download_reuse",
+              "detail": "transcript download then stable source reuse is unproved"
+            },
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "chainA_download_reuse",
+              "detail": "transcript expected 1 then 0 GETs"
+            }
+          ]
+        },
+        {
+          "case_id": "fin_cn_annual_fetch",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "fin_cn_annual_fetch",
+              "detail": "new filing acquisition followed by exact source reuse is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "fin_cn_semi_fetch",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "fin_cn_semi_fetch",
+              "detail": "new filing acquisition followed by exact source reuse is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "fin_cn_quarterly_fetch",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "fin_cn_quarterly_fetch",
+              "detail": "new filing acquisition followed by exact source reuse is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "fin_hk_annual_fetch",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "fin_hk_annual_fetch",
+              "detail": "new filing acquisition followed by exact source reuse is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "fin_hk_semi_fetch",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "fin_hk_semi_fetch",
+              "detail": "new filing acquisition followed by exact source reuse is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "fin_hk_quarterly_fetch",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "fin_hk_quarterly_fetch",
+              "detail": "new filing acquisition followed by exact source reuse is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "fin_us_annual_fetch",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "fin_us_annual_fetch",
+              "detail": "new filing acquisition followed by exact source reuse is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "fin_us_semi_fetch",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "fin_us_semi_fetch",
+              "detail": "new filing acquisition followed by exact source reuse is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "fin_us_quarterly_fetch",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "fin_us_quarterly_fetch",
+              "detail": "new filing acquisition followed by exact source reuse is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "call_fy_only_no_q",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "call_fy_only_no_q",
+              "detail": "FY-only unresolved-period diagnostic missing"
+            }
+          ]
+        },
+        {
+          "case_id": "call_past_cutoff",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "call_past_cutoff",
+              "detail": "named cutoff rejection missing"
+            }
+          ]
+        },
+        {
+          "case_id": "call_wrong_quarter",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "call_wrong_quarter",
+              "detail": "named quarter/provenance rejection missing"
+            }
+          ]
+        },
+        {
+          "case_id": "err_402_entitlement",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "err_402_entitlement",
+              "detail": "402 entitlement diagnostic missing"
+            }
+          ]
+        },
+        {
+          "case_id": "err_missing_creds",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "err_missing_creds",
+              "detail": "credential preflight not preserved as zero-request diagnostic"
+            }
+          ]
+        },
+        {
+          "case_id": "err_unknown_usage",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "err_unknown_usage",
+              "detail": "unknown usage not preserved as a named null failure"
+            }
+          ]
+        },
+        {
+          "case_id": "call_wrong_symbol",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "call_wrong_symbol",
+              "detail": "required attempted ET rejection is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "call_wrong_mime",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "call_wrong_mime",
+              "detail": "required attempted ET rejection is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "call_max_bytes",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "call_max_bytes",
+              "detail": "required attempted ET rejection is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "call_hard_timeout",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "call_hard_timeout",
+              "detail": "required attempted ET rejection is unproved"
+            }
+          ]
+        },
+        {
+          "case_id": "request_after_failure_retry",
+          "rejected": true,
+          "findings": [
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "request_after_failure_retry",
+              "detail": "required attempted ET rejection is unproved"
+            },
+            {
+              "vector": "case_assertion_failed",
+              "case_id": "request_after_failure_retry",
+              "detail": "successful retry after named failure unproved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SHARED-PREFLIGHT-NO-LAUNCH-ON-DRIFT",
+      "pass": true,
+      "actual": [
+        {
+          "kind": "request",
+          "rejected": true,
+          "process_launches": 0
+        },
+        {
+          "kind": "fixture",
+          "rejected": true,
+          "process_launches": 0
+        }
+      ]
+    },
+    {
+      "name": "UNKNOWN-USAGE-CASE-VS-BUSINESS-VS-MATRIX",
+      "pass": false,
+      "actual": {
+        "case_result": "FAIL",
+        "business_status": "not_requested",
+        "business_reason": null,
+        "provider_requests": null,
+        "provider_usage_complete": null,
+        "unknown_charge": null,
+        "matrix_state": "PARTIAL_PRODUCT_FAILURES"
+      }
+    },
+    {
+      "name": "UNKNOWN-USAGE-FAKE-ZERO-REJECTED",
+      "pass": true,
+      "actual": [
+        {
+          "vector": "case_not_passed",
+          "case_id": "err_unknown_usage",
+          "detail": "actual result FAIL cannot certify required case"
+        },
+        {
+          "vector": "fake_zero_cost",
+          "case_id": "err_unknown_usage",
+          "detail": "unknown usage/cost was reported as 0 or the provider call was swallowed"
+        }
+      ]
+    },
+    {
+      "name": "ORIGINAL-MATRIX-REMAINS-INCOMPLETE-NO-RECEIPT-MANUFACTURE",
+      "pass": true,
+      "actual": {
+        "counts": {
+          "FAIL": 21,
+          "PASS": 19,
+          "PARTIAL": 1
+        },
+        "finding_counts": {
+          "case_not_passed": 22,
+          "fake_layer_claimed_real": 1,
+          "wrong_cutoff": 1,
+          "fake_zero_cost": 1,
+          "missing_case_fixture_evidence": 40
+        },
+        "missing_fixture_receipts": 40,
+        "oracle_pass": false
+      }
+    },
+    {
+      "name": "SYNTHETIC-SENTINEL-UNCHANGED",
+      "pass": true,
+      "actual": {
+        "sha256": "e1b3afa2bc1df7342cb84d3931c1e4900654ea6d075e4f2fc57d056f7f4b2a64"
+      }
+    },
+    {
+      "name": "NARROW-FIXTURE-ATTRIBUTES-INDEX-RAW",
+      "pass": false,
+      "actual": {
+        "lines": [
+          "artifacts/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+          "original-41-report.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol"
+        ],
+        "representatives": [
+          {
+            "path": "tests/fixtures/w06_contract_matrix/authority/.gitattributes",
+            "index_sha256": "335329f94a86496c287d2b25712688d8105adbb248b27ad4a1474e6903941920",
+            "raw_sha256": "eebea40ad733e7c5216e9d2ad50533e354ecdd1f6f6cccea1b02e963b2cac425",
+            "equal": false
+          },
+          {
+            "path": "tests/fixtures/w06_contract_matrix/authority/original-41-report.json",
+            "index_sha256": "aa2ab10add76f89e6e259fa0a05c8ad961f562f46b3fd21a1e94c1b2a3acc72f",
+            "raw_sha256": "aa2ab10add76f89e6e259fa0a05c8ad961f562f46b3fd21a1e94c1b2a3acc72f",
+            "equal": true
+          },
+          {
+            "path": "tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_annual_hit.run1.request.json",
+            "index_sha256": "d6ef736be115ed8234c3c27e762b80e32c02e7650bf3d61d4d5f3c78ff6c5eb1",
+            "raw_sha256": "d6ef736be115ed8234c3c27e762b80e32c02e7650bf3d61d4d5f3c78ff6c5eb1",
+            "equal": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "NO-PRODUCTION-SCRIPTS-CONFIG-CI-DIFF",
+      "pass": true,
+      "actual": {
+        "forbidden_changed_paths": []
+      }
+    },
+    {
+      "name": "FINAL-FREEZE-HISTORY-TEN-PRODUCERS-UNCHANGED",
+      "pass": true,
+      "actual": {
+        "product_inventory_sha256": "174d32a4db0e677f73ec8e1d9fc5162cd9e0f64ea17b15f75641e603bac6d29d",
+        "evidence_inventory_sha256": "a683da0a20c64e4d9a66ef4e1097bc22730944b74db17d25bed0ad01620ab104",
+        "producer_count": 10,
+        "historical_files": 15,
+        "production_metadata_unchanged": true
+      }
+    },
+    {
+      "name": "SCRATCH-RESTORED-INITIAL-ABSENCE",
+      "pass": true,
+      "actual": {
+        "initial_exists": false,
+        "final_exists": false
+      }
+    }
+  ],
+  "probe_count": 27,
+  "passed_count": 23,
+  "failed": [
+    "EXACT-MODIFIED-REQUEST-BYTES",
+    "EXACT-HASHED-WRONG-MARKET",
+    "UNKNOWN-USAGE-CASE-VS-BUSINESS-VS-MATRIX",
+    "NARROW-FIXTURE-ATTRIBUTES-INDEX-RAW"
+  ],
+  "seconds": 0.9212,
+  "provider_process_launches": 0,
+  "provider_network_calls": 0,
+  "llm_calls": 0,
+  "fees_usd": 0,
+  "git_mutations": 0,
+  "production_mutations": 0,
+  "scratch": {
+    "initial_exists": false,
+    "final_exists": false,
+    "restored": true
+  },
+  "reviewer_environment_retries": {
+    "count": 2,
+    "reasons": [
+      "WinError 3 copying long synthetic fixture paths before probes; reduced own scratch names",
+      "Sandbox git -C external worktree Permission denied at final static index checks; same pure group rerun outside sandbox"
+    ],
+    "prior_scratch_restored": true,
+    "product_execution_on_prior_attempts": false
+  }
+}

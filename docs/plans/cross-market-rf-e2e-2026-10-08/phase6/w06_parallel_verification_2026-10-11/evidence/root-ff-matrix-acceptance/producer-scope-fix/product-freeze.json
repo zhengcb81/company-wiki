@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-acquisition-scope-root",
+  "branch": "codex/root-w06-cwp-acquisition-scope-20261011",
+  "base_head": "e2e19ea200bf87b13dd41d6389897ea5f2711d93",
+  "frozen_at": "2026-10-11T14:19:36.114665+00:00",
+  "product_files": {
+    "src/company_wiki/source_catalog/acquisition.py": {
+      "sha256": "a740b777f0c14143959d809e3f371403ef14f8db0816dd7a6d074cb952e42daf",
+      "bytes": 32750
+    },
+    "src/company_wiki/source_catalog/acquisition_service.py": {
+      "sha256": "1dbac83477f06b498e2af301446b088c6beb0136c3cb78d75aa728c9db912c7c",
+      "bytes": 15985
+    },
+    "src/company_wiki/source_catalog/assertion_service.py": {
+      "sha256": "676b8c14e02369d8ea6e7ec16ff8edc719b8b2495c3780496055da8897d2196e",
+      "bytes": 51431
+    },
+    "src/company_wiki/source_catalog/canonical_scope.py": {
+      "sha256": "95e21e0298e915def9e14b5e045654779841a2e504d752236053c23a38ccf798",
+      "bytes": 8726
+    },
+    "src/company_wiki/source_catalog/canonical_writer.py": {
+      "sha256": "5b90a9b541bd8c167c54145485025b5deba36101dab4cf8750757d466e6ebb91",
+      "bytes": 37114
+    },
+    "src/company_wiki/source_catalog/local_reconcile.py": {
+      "sha256": "e43af3d492d16f2b6d3fe2ff4fc71d3d86224e20fbca4e7a151e3a01657e2fd3",
+      "bytes": 29769
+    },
+    "src/company_wiki/source_catalog/operation_contract.py": {
+      "sha256": "954c6cb5f0955c0246aecb12f62388f27f494dd3681305a1c967dd03bc17dbde",
+      "bytes": 8681
+    },
+    "src/company_wiki/source_catalog/operation_projection.py": {
+      "sha256": "f046ae241db4f3b0680f055ea0c3f783d431bd8c40918dcab1f9aef7bf8911a0",
+      "bytes": 5745
+    },
+    "src/company_wiki/source_catalog/registration_scope.py": {
+      "sha256": "85f6c0b324c13181e7bfa8d1e9f0efa406b6149817d35e0a6cbc79c20f81146f",
+      "bytes": 2271
+    },
+    "src/company_wiki/source_catalog/scanner.py": {
+      "sha256": "14638494175254037df2cbc851f43214de56a11912b712fe597dc7add4b97203",
+      "bytes": 100730
+    },
+    "tests/contract/test_canonical_acquisition_scope.py": {
+      "sha256": "8a125aad088f3fad3d6ea5363209630ac751c21a4a6a8514de8623e1da912840",
+      "bytes": 20366
+    },
+    "tests/unit/test_canonical_scope.py": {
+      "sha256": "32453803611055b7945d7b26aad40fbb95748fb2d1db1f09c76373d9edf61796",
+      "bytes": 2203
+    }
+  },
+  "pre_post_unchanged": true,
+  "final_test_evidence": "final-affected.json",
+  "committed": false
+}

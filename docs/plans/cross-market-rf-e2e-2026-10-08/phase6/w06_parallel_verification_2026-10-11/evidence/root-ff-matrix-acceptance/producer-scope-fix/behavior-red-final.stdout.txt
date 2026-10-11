@@ -1,0 +1,256 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest", "requested_basetemp_len": 59, "cwd_len": 71, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+FFFFF.F                                                                  [100%]
+================================== FAILURES ===================================
+_________ test_public_writer_old_annual_does_not_block_next_year[CN] __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026206909550>
+market = 'CN'
+
+    @pytest.mark.parametrize("market", ["CN", "HK", "US"])
+    def test_public_writer_old_annual_does_not_block_next_year(lake, market):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+>       old = ensure(svc, request(market))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:110: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:149: in _ensure
+    result = self._finish(request, staged, budget=budget,
+src\company_wiki\source_catalog\acquisition_service.py:278: in _finish
+    imported = self.writer.import_staged(request, candidate, acquisition.receipt, budget=budget)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\canonical_writer.py:256: in import_staged
+    staged = self._validate_staged(request, candidate, receipt)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\canonical_writer.py:459: in _validate_staged
+    staging_root = self.staging_root.resolve(strict=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:670: in resolve
+    return self.with_segments(os.path.realpath(self, strict=strict))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest\\test_public_writer_old_annual_0\\.source_catalog\\staging'
+strict = True
+
+>   ???
+E   FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest\\test_public_writer_old_annual_0\\.source_catalog\\staging'
+
+<frozen ntpath>:738: FileNotFoundError
+_________ test_public_writer_old_annual_does_not_block_next_year[HK] __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026206A760D0>
+market = 'HK'
+
+    @pytest.mark.parametrize("market", ["CN", "HK", "US"])
+    def test_public_writer_old_annual_does_not_block_next_year(lake, market):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+>       old = ensure(svc, request(market))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:110: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:149: in _ensure
+    result = self._finish(request, staged, budget=budget,
+src\company_wiki\source_catalog\acquisition_service.py:278: in _finish
+    imported = self.writer.import_staged(request, candidate, acquisition.receipt, budget=budget)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\canonical_writer.py:256: in import_staged
+    staged = self._validate_staged(request, candidate, receipt)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\canonical_writer.py:459: in _validate_staged
+    staging_root = self.staging_root.resolve(strict=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:670: in resolve
+    return self.with_segments(os.path.realpath(self, strict=strict))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest\\test_public_writer_old_annual_1\\.source_catalog\\staging'
+strict = True
+
+>   ???
+E   FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest\\test_public_writer_old_annual_1\\.source_catalog\\staging'
+
+<frozen ntpath>:738: FileNotFoundError
+_________ test_public_writer_old_annual_does_not_block_next_year[US] __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026206A77ED0>
+market = 'US'
+
+    @pytest.mark.parametrize("market", ["CN", "HK", "US"])
+    def test_public_writer_old_annual_does_not_block_next_year(lake, market):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+>       old = ensure(svc, request(market))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:118: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:110: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:149: in _ensure
+    result = self._finish(request, staged, budget=budget,
+src\company_wiki\source_catalog\acquisition_service.py:278: in _finish
+    imported = self.writer.import_staged(request, candidate, acquisition.receipt, budget=budget)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\canonical_writer.py:256: in import_staged
+    staged = self._validate_staged(request, candidate, receipt)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\canonical_writer.py:459: in _validate_staged
+    staging_root = self.staging_root.resolve(strict=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:670: in resolve
+    return self.with_segments(os.path.realpath(self, strict=strict))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest\\test_public_writer_old_annual_2\\.source_catalog\\staging'
+strict = True
+
+>   ???
+E   FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest\\test_public_writer_old_annual_2\\.source_catalog\\staging'
+
+<frozen ntpath>:738: FileNotFoundError
+___ test_public_writer_nonannual_cross_period[quarterly_report-Q2-Q3-2024] ____
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026206959A70>
+kind = 'quarterly_report', old_period = 'Q2', new_period = 'Q3', new_year = 2024
+
+    @pytest.mark.parametrize("kind,old_period,new_period,new_year", [
+        ("quarterly_report", "Q2", "Q3", 2024),
+        ("semi_annual_report", "H1", "H1", 2025),
+    ])
+    def test_public_writer_nonannual_cross_period(lake, kind, old_period, new_period, new_year):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+>       assert ensure(svc, request("HK", 2024, old_period, kind)).status.value == "imported"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:141: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:110: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:149: in _ensure
+    result = self._finish(request, staged, budget=budget,
+src\company_wiki\source_catalog\acquisition_service.py:278: in _finish
+    imported = self.writer.import_staged(request, candidate, acquisition.receipt, budget=budget)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\canonical_writer.py:256: in import_staged
+    staged = self._validate_staged(request, candidate, receipt)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\canonical_writer.py:459: in _validate_staged
+    staging_root = self.staging_root.resolve(strict=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:670: in resolve
+    return self.with_segments(os.path.realpath(self, strict=strict))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest\\test_public_writer_nonannual_c0\\.source_catalog\\staging'
+strict = True
+
+>   ???
+E   FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest\\test_public_writer_nonannual_c0\\.source_catalog\\staging'
+
+<frozen ntpath>:738: FileNotFoundError
+__ test_public_writer_nonannual_cross_period[semi_annual_report-H1-H1-2025] ___
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026206A6AC40>
+kind = 'semi_annual_report', old_period = 'H1', new_period = 'H1'
+new_year = 2025
+
+    @pytest.mark.parametrize("kind,old_period,new_period,new_year", [
+        ("quarterly_report", "Q2", "Q3", 2024),
+        ("semi_annual_report", "H1", "H1", 2025),
+    ])
+    def test_public_writer_nonannual_cross_period(lake, kind, old_period, new_period, new_year):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+>       assert ensure(svc, request("HK", 2024, old_period, kind)).status.value == "imported"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:141: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:110: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:149: in _ensure
+    result = self._finish(request, staged, budget=budget,
+src\company_wiki\source_catalog\acquisition_service.py:278: in _finish
+    imported = self.writer.import_staged(request, candidate, acquisition.receipt, budget=budget)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\canonical_writer.py:256: in import_staged
+    staged = self._validate_staged(request, candidate, receipt)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\canonical_writer.py:459: in _validate_staged
+    staging_root = self.staging_root.resolve(strict=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\pathlib\_local.py:670: in resolve
+    return self.with_segments(os.path.realpath(self, strict=strict))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest\\test_public_writer_nonannual_c1\\.source_catalog\\staging'
+strict = True
+
+>   ???
+E   FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-3522fc4ed\\pytest\\test_public_writer_nonannual_c1\\.source_catalog\\staging'
+
+<frozen ntpath>:738: FileNotFoundError
+_________ test_local_unknown_diagnostic_survives_pathless_projection __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026206A2AAD0>
+
+    def test_local_unknown_diagnostic_survives_pathless_projection(lake):
+        source = lake.config.roots[0].path / "Acme" / "2024_annual_report.pdf"
+        source.parent.mkdir()
+        source.write_bytes(pdf_bytes("Acme 2024 report"))
+        source.with_name(source.name + ".source.json").write_text(json.dumps({
+            "company_name": "Acme", "document_kind": "annual_report", "fiscal_year": 2024,
+            "market": "CN", "security_id": "600000", "fiscal_period": "FY",
+        }), encoding="utf-8")
+        lake.scan()
+        adapter = PeriodAdapter()
+        result = ensure(service(lake, adapter), request(year=2025))
+        assert adapter.fetches == 0
+        dto = project_operation_result(result.to_dict(), operation="ensure", reader=SourceVersionReader(lake))
+>       assert dto["status"] in {"blocked", "unavailable"}
+E       AssertionError: assert 'not_found' in {'blocked', 'unavailable'}
+
+tests\contract\test_canonical_acquisition_scope.py:181: AssertionError
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_old_annual_does_not_block_next_year[CN]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_old_annual_does_not_block_next_year[HK]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_old_annual_does_not_block_next_year[US]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_nonannual_cross_period[quarterly_report-Q2-Q3-2024]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_nonannual_cross_period[semi_annual_report-H1-H1-2025]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_local_unknown_diagnostic_survives_pathless_projection
+6 failed, 1 passed, 1 warning in 2.55s

@@ -1,0 +1,69 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.tmp\\cs-75dc98253\\pytest", "requested_basetemp_len": 59, "cwd_len": 71, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+_ test_unverified_declaration_cannot_match_or_exclude_even_if_shape_complete __
+
+    def test_unverified_declaration_cannot_match_or_exclude_even_if_shape_complete():
+        unverified=SourceScope(scope().facts,{},"unverified-declaration")
+>       assert scope_relatedness(unverified,request()) is ScopeRelation.UNKNOWN
+E       AssertionError: assert <ScopeRelation.MATCH: 'match'> is <ScopeRelation.UNKNOWN: 'unknown'>
+E        +  where <ScopeRelation.MATCH: 'match'> = scope_relatedness(SourceScope(facts={'schema_version': '1.0', 'entity': 'Acme', 'market': 'HK', 'security_id': '09999', 'document_kind':...iscal_year': 2024, 'fiscal_period': 'FY', 'as_of_date': '2026-01-01'}, evidence={}, authority='unverified-declaration'), SourceRequest(entity='Acme', document_kind='annual_report', as_of_date='2026-01-01', market='HK', security_id='09999',...d='FY', language=None, provider=None, provider_document_id=None, mode=None, allow_download=False, schema_version='1.0'))
+E        +    where SourceRequest(entity='Acme', document_kind='annual_report', as_of_date='2026-01-01', market='HK', security_id='09999',...d='FY', language=None, provider=None, provider_document_id=None, mode=None, allow_download=False, schema_version='1.0') = request()
+E        +  and   <ScopeRelation.UNKNOWN: 'unknown'> = ScopeRelation.UNKNOWN
+
+tests\unit\test_canonical_scope.py:44: AssertionError
+_________ test_public_writer_pdf_receipt_with_html_bytes_is_rejected __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000020B85554050>
+
+    def test_public_writer_pdf_receipt_with_html_bytes_is_rejected(lake):
+        from company_wiki.source_catalog.canonical_writer import CanonicalImportError
+        writer=CanonicalSourceWriter(lake)
+        adapter=PeriodAdapter()
+        candidate=adapter.discover(request())[0]
+        receipt=adapter.fetch(candidate,writer.staging_root)
+        html=b"<html><body>Acme report</body></html>"
+        Path(receipt.staged_path).write_bytes(html)
+        receipt=replace(receipt,content_sha256=hashlib.sha256(html).hexdigest(),byte_size=len(html))
+>       with pytest.raises(CanonicalImportError,match="PDF magic"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE CanonicalImportError
+
+tests\contract\test_canonical_acquisition_scope.py:338: Failed
+____ test_failed_explicit_reacquisition_does_not_reactivate_retired_source ____
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000020B84F3F750>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020B85366450>
+
+    def test_failed_explicit_reacquisition_does_not_reactivate_retired_source(lake,monkeypatch):
+        from company_wiki.source_catalog.store import retire_document
+        adapter=PeriodAdapter()
+        svc=service(lake,adapter)
+        old=ensure(svc,request())
+        retire_document(lake.store,document_id=old.canonical_import.source_ref.document_id,
+                        reason="withdrawn",created_by="test")
+        candidate=adapter.discover(request())[0]
+        receipt=adapter.fetch(candidate,svc.writer.staging_root)
+        with monkeypatch.context() as patch:
+            patch.setattr(svc.writer,"_record_validated_capture",lambda *args: (_ for _ in ()).throw(RuntimeError("fact write failed")))
+            with pytest.raises(RuntimeError,match="fact write failed"):
+                svc.writer.import_staged(request(),candidate,receipt)
+>       assert lake.reader.exact_source_version(old.canonical_import.source_ref.document_id)["source_status"] == "retired"
+E       AssertionError: assert 'active' == 'retired'
+E         
+E         - retired
+E         + active
+
+tests\contract\test_canonical_acquisition_scope.py:356: AssertionError
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/test_canonical_scope.py::test_unverified_declaration_cannot_match_or_exclude_even_if_shape_complete
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_pdf_receipt_with_html_bytes_is_rejected
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_failed_explicit_reacquisition_does_not_reactivate_retired_source
+3 failed, 1 warning in 1.46s

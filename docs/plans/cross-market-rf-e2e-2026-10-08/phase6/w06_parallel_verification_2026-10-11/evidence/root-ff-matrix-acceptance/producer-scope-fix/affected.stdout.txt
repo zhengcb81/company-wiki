@@ -1,0 +1,241 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.tmp\\cs-d992de4fa\\pytest", "requested_basetemp_len": 59, "cwd_len": 71, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+.........FFF.FF................................F........................ [ 53%]
+..............................................................           [100%]
+================================== FAILURES ===================================
+_ test_historical_origin_requires_real_attempt_request_and_version_binding[request_scope] _
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026E1868AB50>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000026E184DA9C0>
+tamper = 'request_scope'
+
+    @pytest.mark.parametrize("tamper", ["journal_digest", "request_scope", "version_sha", "candidate_binding"])
+    def test_historical_origin_requires_real_attempt_request_and_version_binding(lake, monkeypatch, tamper):
+        svc, adapter, old = warm_legacy(lake, monkeypatch)
+        if tamper == "journal_digest":
+            journal = AcquisitionJournal(lake.config.catalog_dir).path
+            item = json.loads(journal.read_text(encoding="utf-8"))
+            item["attempt_id"] = "urn:company-wiki:acquisition-attempt:sha256:" + "a"*64
+            journal.write_text(json.dumps(item)+"\n",encoding="utf-8")
+        else:
+            sidecar = Path(old.canonical_import.provenance_path)
+            item = json.loads(sidecar.read_text(encoding="utf-8"))
+            if tamper == "request_scope":
+                item["request"]["fiscal_year"] = 2023
+            elif tamper == "version_sha":
+                item["receipt"]["content_sha256"] = "f"*64
+            else:
+                item["candidate"]["provider_document_id"] = "forged"
+            sidecar.write_text(json.dumps(item),encoding="utf-8")
+            lake.scan()
+        newer = ensure(svc,request(year=2025))
+>       assert newer.status.value == "missing"
+E       AssertionError: assert 'imported' == 'missing'
+E         
+E         - missing
+E         + imported
+
+tests\contract\test_canonical_acquisition_scope.py:232: AssertionError
+_ test_historical_origin_requires_real_attempt_request_and_version_binding[version_sha] _
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026E188B18B0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000026E18715F10>
+tamper = 'version_sha'
+
+    @pytest.mark.parametrize("tamper", ["journal_digest", "request_scope", "version_sha", "candidate_binding"])
+    def test_historical_origin_requires_real_attempt_request_and_version_binding(lake, monkeypatch, tamper):
+        svc, adapter, old = warm_legacy(lake, monkeypatch)
+        if tamper == "journal_digest":
+            journal = AcquisitionJournal(lake.config.catalog_dir).path
+            item = json.loads(journal.read_text(encoding="utf-8"))
+            item["attempt_id"] = "urn:company-wiki:acquisition-attempt:sha256:" + "a"*64
+            journal.write_text(json.dumps(item)+"\n",encoding="utf-8")
+        else:
+            sidecar = Path(old.canonical_import.provenance_path)
+            item = json.loads(sidecar.read_text(encoding="utf-8"))
+            if tamper == "request_scope":
+                item["request"]["fiscal_year"] = 2023
+            elif tamper == "version_sha":
+                item["receipt"]["content_sha256"] = "f"*64
+            else:
+                item["candidate"]["provider_document_id"] = "forged"
+            sidecar.write_text(json.dumps(item),encoding="utf-8")
+            lake.scan()
+        newer = ensure(svc,request(year=2025))
+>       assert newer.status.value == "missing"
+E       AssertionError: assert 'imported' == 'missing'
+E         
+E         - missing
+E         + imported
+
+tests\contract\test_canonical_acquisition_scope.py:232: AssertionError
+_ test_historical_origin_requires_real_attempt_request_and_version_binding[candidate_binding] _
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026E188B0500>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000026E185720A0>
+tamper = 'candidate_binding'
+
+    @pytest.mark.parametrize("tamper", ["journal_digest", "request_scope", "version_sha", "candidate_binding"])
+    def test_historical_origin_requires_real_attempt_request_and_version_binding(lake, monkeypatch, tamper):
+        svc, adapter, old = warm_legacy(lake, monkeypatch)
+        if tamper == "journal_digest":
+            journal = AcquisitionJournal(lake.config.catalog_dir).path
+            item = json.loads(journal.read_text(encoding="utf-8"))
+            item["attempt_id"] = "urn:company-wiki:acquisition-attempt:sha256:" + "a"*64
+            journal.write_text(json.dumps(item)+"\n",encoding="utf-8")
+        else:
+            sidecar = Path(old.canonical_import.provenance_path)
+            item = json.loads(sidecar.read_text(encoding="utf-8"))
+            if tamper == "request_scope":
+                item["request"]["fiscal_year"] = 2023
+            elif tamper == "version_sha":
+                item["receipt"]["content_sha256"] = "f"*64
+            else:
+                item["candidate"]["provider_document_id"] = "forged"
+            sidecar.write_text(json.dumps(item),encoding="utf-8")
+            lake.scan()
+        newer = ensure(svc,request(year=2025))
+>       assert newer.status.value == "missing"
+E       AssertionError: assert 'imported' == 'missing'
+E         
+E         - missing
+E         + imported
+
+tests\contract\test_canonical_acquisition_scope.py:232: AssertionError
+________ test_target_tampering_remains_unavailable_and_never_downloads ________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026E185C5710>
+
+    def test_target_tampering_remains_unavailable_and_never_downloads(lake):
+        from company_wiki.source_catalog.source_reader import SourceReadError
+        adapter = PeriodAdapter()
+        svc = service(lake,adapter)
+        old = ensure(svc,request())
+        path = Path(old.canonical_import.canonical_path)
+        before = path.read_bytes()
+        path.write_bytes(before.replace(b"Acme",b"Else"))
+        # PDF text may be compressed; use a same-size mutation guaranteed to change actual bytes.
+        changed = bytearray(before)
+        changed[-8] ^= 1
+        path.write_bytes(changed)
+>       with pytest.raises(SourceReadError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE SourceReadError
+
+tests\contract\test_canonical_acquisition_scope.py:262: Failed
+_________ test_unknown_publication_for_target_is_not_a_cold_download __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000026E1843A5B0>
+
+    def test_unknown_publication_for_target_is_not_a_cold_download(lake):
+        adapter = PeriodAdapter()
+        candidate = replace(adapter.discover(request())[0],filing_date=None)
+        writer = CanonicalSourceWriter(lake)
+        receipt = adapter.fetch(candidate,writer.staging_root)
+        old = writer.import_staged(request(),candidate,receipt)
+        result = ensure(service(lake,adapter),request())
+>       assert result.status.value == "missing"
+E       AssertionError: assert 'ambiguous' == 'missing'
+E         
+E         - missing
+E         + ambiguous
+
+tests\contract\test_canonical_acquisition_scope.py:274: AssertionError
+_____________ test_writer_dedup_ignores_dayu_portfolio_locations ______________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.tmp/cs-d992de4fa/pytest/test_writer_dedup_ignores_dayu0')
+
+    def test_writer_dedup_ignores_dayu_portfolio_locations(tmp_path):
+        """Dedup must only match canonical company_raw locations: a same-hash file
+        ingested from the dayu portfolio lives outside companies/ and must not be
+        offered as the canonical path (MongoDB finding)."""
+        from company_wiki.source_catalog import (
+            CanonicalImportStatus,
+            CanonicalSourceWriter,
+            CatalogConfig,
+            RootSpec,
+            SourceCatalog,
+        )
+    
+        project = tmp_path / "project"
+        companies = project / "companies"
+        portfolio = tmp_path / "dayu" / "portfolio"
+        companies.mkdir(parents=True)
+        filing = portfolio / "MDB" / "filings" / "fil_x"
+        filing.mkdir(parents=True)
+        catalog = SourceCatalog(
+            CatalogConfig(
+                project_root=project,
+                catalog_dir=project / ".source_catalog",
+                roots=(
+                    RootSpec("company_raw", companies, "company_raw", priority=10),
+                    RootSpec("dayu", portfolio, "dayu_portfolio", priority=20),
+                ),
+            )
+        )
+        request, candidate, receipt, staged = _staged_contract(tmp_path)
+    
+        # a same-hash file exists only under the dayu portfolio root
+        dayu_copy = filing / "same.htm"
+        dayu_copy.write_bytes(staged.read_bytes())
+        catalog.scan()
+    
+        writer = CanonicalSourceWriter(catalog)
+>       imported = writer.import_staged(request, candidate, receipt)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_source_catalog_canonical_writer.py:495: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\company_wiki\source_catalog\canonical_writer.py:257: in import_staged
+    return self._commit_staged(request, candidate, receipt, staged,
+src\company_wiki\source_catalog\canonical_writer.py:331: in _commit_staged
+    register_catalog_sources(
+src\company_wiki\source_catalog\registration_scope.py:43: in register_catalog_sources
+    return scan_catalog(config, store, root_ids={scope.root_id},
+src\company_wiki\source_catalog\scanner.py:2128: in scan_catalog
+    on_registered(store)
+src\company_wiki\source_catalog\canonical_writer.py:335: in <lambda>
+    on_registered=lambda store: self._record_validated_capture(request,candidate,receipt,store),
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <company_wiki.source_catalog.canonical_writer.CanonicalSourceWriter object at 0x0000026E18445240>
+request = SourceRequest(entity='示例公司', document_kind='annual_report', as_of_date='2026-07-18', market='CN', security_id='600000'...od='FY', language=None, provider=None, provider_document_id=None, mode=None, allow_download=True, schema_version='1.0')
+candidate = DownloadCandidate(candidate_id='cninfo:announcement-2025', provider='cninfo', provider_document_id='announcement-2025'...h-CN', amended=False, etag=None, last_modified=None, remote_size=None, adapter_payload_json=None, schema_version='1.0')
+receipt = DownloadReceipt(candidate_id='cninfo:announcement-2025', provider='cninfo', provider_document_id='announcement-2025', ...tus=200, adapter_name='stockinfo-cninfo', adapter_version='1.0.0', etag=None, last_modified=None, schema_version='1.0')
+store = <company_wiki.source_catalog.store.CatalogStore object at 0x0000026E186C33F0>
+
+    def _record_validated_capture(self, request, candidate, receipt, store):
+        """Internal writer event, never reconstructed from a scanner-side declaration."""
+        if not isinstance(request, SourceRequest) or not isinstance(candidate, DownloadCandidate):
+            # Official JSON/shared source intake has its own source-fact owner.
+            return
+        from .assertion_service import (
+            _evidence_payload, _prepare_source_fact_write, _validate_source_facts,
+            _write_source_fact_projection, get_verified_assertion,
+        )
+        from .source_reader import SourceRef
+    
+        source_id = source_id_for_sha256(receipt.content_sha256)
+        document_id = source_id.replace("urn:company-wiki:source:", "urn:company-wiki:document:")
+        row = store.fetchone("SELECT * FROM sources WHERE source_id=?", (source_id,))
+        if row is None or (row["content_sha256"], row["byte_size"], row["mime_type"]) != (
+                receipt.content_sha256, receipt.byte_size, receipt.mime_type):
+>           raise CanonicalImportError("canonical_registered_version_conflict")
+E           company_wiki.source_catalog.canonical_writer.CanonicalImportError: canonical_registered_version_conflict
+
+src\company_wiki\source_catalog\canonical_writer.py:442: CanonicalImportError
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_historical_origin_requires_real_attempt_request_and_version_binding[request_scope]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_historical_origin_requires_real_attempt_request_and_version_binding[version_sha]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_historical_origin_requires_real_attempt_request_and_version_binding[candidate_binding]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_target_tampering_remains_unavailable_and_never_downloads
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_unknown_publication_for_target_is_not_a_cold_download
+FAILED tests/contract/test_source_catalog_canonical_writer.py::test_writer_dedup_ignores_dayu_portfolio_locations
+6 failed, 128 passed, 1 warning in 21.05s

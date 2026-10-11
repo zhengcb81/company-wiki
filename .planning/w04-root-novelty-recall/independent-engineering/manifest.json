@@ -1,0 +1,47 @@
+{
+  "schema_version": "w04-independent-novelty-engineering-freeze/1",
+  "state": "FINAL_STOP",
+  "verdict": "PASS_WITH_SCOPE",
+  "files": [
+    {
+      "path": "initial-27-of-28-manifest.json",
+      "sha256": "d01be9cc0d2227a9cf14f9e55f286482a07df708c8657f54a8d806b4aab80fa2",
+      "bytes": 605
+    },
+    {
+      "path": "initial-27-of-28-report.json",
+      "sha256": "ed4abefb6ce6daae3799301750d64c41ea254e39db2998752f61e1708ac9f98e",
+      "bytes": 9749
+    },
+    {
+      "path": "initial-27-of-28-report.md",
+      "sha256": "dcd1ec6b8c0ebf47d3d7d6c6da3f69f401f65b7fd22806eb9bc7fb3aa01bd212",
+      "bytes": 1941
+    },
+    {
+      "path": "probe.py",
+      "sha256": "c8b68647683e9a99c464f484814808e9aeaa9b6c06484d6c774d8d694de304d7",
+      "bytes": 19222
+    },
+    {
+      "path": "report.json",
+      "sha256": "a4f9e924b5d0319f5e3ada1941ac5e9c88d496a2976dd22f081dfc9a16f05f87",
+      "bytes": 11081
+    },
+    {
+      "path": "report.md",
+      "sha256": "e15be90b8c504cee499b9b6fb99e9e190c0cb1a197441a9293cb085edb63262c",
+      "bytes": 2323
+    },
+    {
+      "path": "scope-controls.json",
+      "sha256": "fe2b0071bdc27b44c2c2b0ba5e26d8c118d29c5369ef78487b84df13f0f7778f",
+      "bytes": 2136
+    },
+    {
+      "path": "scope_controls.py",
+      "sha256": "4a1e5008875fe9676dfa97f24ec5e189b457862a832b8e57b29d9b8414a3c4cf",
+      "bytes": 13021
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+________ test_authority_omitted_required_cases_cannot_be_declared_away ________
+
+    def test_authority_omitted_required_cases_cannot_be_declared_away():
+        report=frozen_report()
+        report["cases"]=[c for c in report["cases"] if c["result"]=="PASS"]
+        report["required_cases"]=[c["id"] for c in report["cases"]]
+>       assert any(f.vector=="coverage_gap" for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_omitted_required_cases_cannot_be_declared_away.<locals>.<genexpr> at 0x000001DE7ECFE8E0>)
+
+tests\test_w06_case_authority.py:28: AssertionError
+________ test_authority_removed_cutoff_expectation_cannot_remove_check ________
+
+    def test_authority_removed_cutoff_expectation_cannot_remove_check():
+        report=frozen_report()
+        case(report,"call_past_cutoff")["expected"]={}
+        findings=oracle.audit(report)
+>       assert any(f.vector=="wrong_cutoff" and f.case_id=="call_past_cutoff" for f in findings)
+E       assert False
+E        +  where False = any(<generator object test_authority_removed_cutoff_expectation_cannot_remove_check.<locals>.<genexpr> at 0x000001DE7ECFF100>)
+
+tests\test_w06_case_authority.py:34: AssertionError
+__________ test_authority_hashed_wrong_market_request_is_still_wrong __________
+
+tmp_path = WindowsPath('C:/Users/֣����/Projects/company-wiki/.tmp/w06-authority-red/test_authority_hashed_wrong_ma0')
+
+    def test_authority_hashed_wrong_market_request_is_still_wrong(tmp_path):
+        report=frozen_report()
+        shutil.copytree(FIXTURE/"artifacts",tmp_path/"artifacts")
+        report["evidence_root"]=str(tmp_path/"artifacts")
+        run=case(report,"fin_cn_annual_hit")["actual"]["runs"][0]
+        path=tmp_path/"artifacts"/run["request_ref"]
+        request=json.loads(path.read_text(encoding="utf-8"))
+        request.update(company_query="Tencent Holdings Limited",market="HK")
+        raw=json.dumps(request,ensure_ascii=False).encode("utf-8")
+        path.write_bytes(raw);run["request_sha256"]=hashlib.sha256(raw).hexdigest()
+>       assert any(f.vector=="case_request_mismatch" and f.case_id=="fin_cn_annual_hit" for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_hashed_wrong_market_request_is_still_wrong.<locals>.<genexpr> at 0x000001DE7EEB3850>)
+
+tests\test_w06_case_authority.py:46: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_w06_case_authority.py::test_authority_omitted_required_cases_cannot_be_declared_away
+FAILED tests/test_w06_case_authority.py::test_authority_removed_cutoff_expectation_cannot_remove_check
+FAILED tests/test_w06_case_authority.py::test_authority_hashed_wrong_market_request_is_still_wrong
+3 failed, 92 deselected in 0.72s

@@ -1,0 +1,156 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.tmp\\cs-fdc081262\\pytest", "requested_basetemp_len": 59, "cwd_len": 71, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+FFFFF.F                                                                  [100%]
+================================== FAILURES ===================================
+_________ test_public_writer_old_annual_does_not_block_next_year[CN] __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x000001FD872D9550>
+market = 'CN'
+
+    @pytest.mark.parametrize("market", ["CN", "HK", "US"])
+    def test_public_writer_old_annual_does_not_block_next_year(lake, market):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+        old = ensure(svc, request(market))
+        assert old.status.value == "imported"
+        old_ref = old.canonical_import.source_ref
+        old_sha = hashlib.sha256(Path(old.canonical_import.canonical_path).read_bytes()).hexdigest()
+        assert ensure(svc, request(market)).status.value == "reused"
+        assert (adapter.discoveries, adapter.fetches) == (1, 1)
+        newer = ensure(svc, request(market, 2025))
+>       assert newer.status.value == "imported", newer.to_dict()
+E       AssertionError: {'schema_version': '1.0', 'status': 'missing', 'acquisition': {'schema_version': '1.0', 'status': 'missing', 'resoluti...d424e1c557b35bda20a2d557557fed230bd', 'status': 'missing', 'reason': 'no_existing_source_satisfies_request', ...}, ...}
+E       assert 'missing' == 'imported'
+E         
+E         - imported
+E         + missing
+
+tests\contract\test_canonical_acquisition_scope.py:125: AssertionError
+_________ test_public_writer_old_annual_does_not_block_next_year[HK] __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x000001FD8742A490>
+market = 'HK'
+
+    @pytest.mark.parametrize("market", ["CN", "HK", "US"])
+    def test_public_writer_old_annual_does_not_block_next_year(lake, market):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+        old = ensure(svc, request(market))
+        assert old.status.value == "imported"
+        old_ref = old.canonical_import.source_ref
+        old_sha = hashlib.sha256(Path(old.canonical_import.canonical_path).read_bytes()).hexdigest()
+        assert ensure(svc, request(market)).status.value == "reused"
+        assert (adapter.discoveries, adapter.fetches) == (1, 1)
+        newer = ensure(svc, request(market, 2025))
+>       assert newer.status.value == "imported", newer.to_dict()
+E       AssertionError: {'schema_version': '1.0', 'status': 'missing', 'acquisition': {'schema_version': '1.0', 'status': 'missing', 'resoluti...bd4a39261fb93842136fcfaef5756a910ae', 'status': 'missing', 'reason': 'no_existing_source_satisfies_request', ...}, ...}
+E       assert 'missing' == 'imported'
+E         
+E         - imported
+E         + missing
+
+tests\contract\test_canonical_acquisition_scope.py:125: AssertionError
+_________ test_public_writer_old_annual_does_not_block_next_year[US] __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x000001FD8742BED0>
+market = 'US'
+
+    @pytest.mark.parametrize("market", ["CN", "HK", "US"])
+    def test_public_writer_old_annual_does_not_block_next_year(lake, market):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+        old = ensure(svc, request(market))
+        assert old.status.value == "imported"
+        old_ref = old.canonical_import.source_ref
+        old_sha = hashlib.sha256(Path(old.canonical_import.canonical_path).read_bytes()).hexdigest()
+        assert ensure(svc, request(market)).status.value == "reused"
+        assert (adapter.discoveries, adapter.fetches) == (1, 1)
+        newer = ensure(svc, request(market, 2025))
+>       assert newer.status.value == "imported", newer.to_dict()
+E       AssertionError: {'schema_version': '1.0', 'status': 'missing', 'acquisition': {'schema_version': '1.0', 'status': 'missing', 'resoluti...0ebf2c1521c76fa2e18cfb1bceea9fe9854', 'status': 'missing', 'reason': 'no_existing_source_satisfies_request', ...}, ...}
+E       assert 'missing' == 'imported'
+E         
+E         - imported
+E         + missing
+
+tests\contract\test_canonical_acquisition_scope.py:125: AssertionError
+___ test_public_writer_nonannual_cross_period[quarterly_report-Q2-Q3-2024] ____
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x000001FD874096E0>
+kind = 'quarterly_report', old_period = 'Q2', new_period = 'Q3', new_year = 2024
+
+    @pytest.mark.parametrize("kind,old_period,new_period,new_year", [
+        ("quarterly_report", "Q2", "Q3", 2024),
+        ("semi_annual_report", "H1", "H1", 2025),
+    ])
+    def test_public_writer_nonannual_cross_period(lake, kind, old_period, new_period, new_year):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+        assert ensure(svc, request("HK", 2024, old_period, kind)).status.value == "imported"
+        new = ensure(svc, request("HK", new_year, new_period, kind))
+>       assert new.status.value == "imported", new.to_dict()
+E       AssertionError: {'schema_version': '1.0', 'status': 'missing', 'acquisition': {'schema_version': '1.0', 'status': 'missing', 'resoluti...bd418bf58ce9e4eb038d31a040c85dce270', 'status': 'missing', 'reason': 'no_existing_source_satisfies_request', ...}, ...}
+E       assert 'missing' == 'imported'
+E         
+E         - imported
+E         + missing
+
+tests\contract\test_canonical_acquisition_scope.py:143: AssertionError
+__ test_public_writer_nonannual_cross_period[semi_annual_report-H1-H1-2025] ___
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x000001FD8740A190>
+kind = 'semi_annual_report', old_period = 'H1', new_period = 'H1'
+new_year = 2025
+
+    @pytest.mark.parametrize("kind,old_period,new_period,new_year", [
+        ("quarterly_report", "Q2", "Q3", 2024),
+        ("semi_annual_report", "H1", "H1", 2025),
+    ])
+    def test_public_writer_nonannual_cross_period(lake, kind, old_period, new_period, new_year):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+        assert ensure(svc, request("HK", 2024, old_period, kind)).status.value == "imported"
+        new = ensure(svc, request("HK", new_year, new_period, kind))
+>       assert new.status.value == "imported", new.to_dict()
+E       AssertionError: {'schema_version': '1.0', 'status': 'missing', 'acquisition': {'schema_version': '1.0', 'status': 'missing', 'resoluti...7345574648218c7510c1dd1c67f84a81948', 'status': 'missing', 'reason': 'no_existing_source_satisfies_request', ...}, ...}
+E       assert 'missing' == 'imported'
+E         
+E         - imported
+E         + missing
+
+tests\contract\test_canonical_acquisition_scope.py:143: AssertionError
+_________ test_local_unknown_diagnostic_survives_pathless_projection __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x000001FD873FBCE0>
+
+    def test_local_unknown_diagnostic_survives_pathless_projection(lake):
+        source = lake.config.roots[0].path / "Acme" / "2024_annual_report.pdf"
+        source.parent.mkdir()
+        source.write_bytes(pdf_bytes("Acme 2024 report"))
+        source.with_name(source.name + ".source.json").write_text(json.dumps({
+            "company_name": "Acme", "document_kind": "annual_report", "fiscal_year": 2024,
+            "market": "CN", "security_id": "600000", "fiscal_period": "FY",
+        }), encoding="utf-8")
+        lake.scan()
+        adapter = PeriodAdapter()
+        result = ensure(service(lake, adapter), request(year=2025))
+        assert adapter.fetches == 0
+        dto = project_operation_result(result.to_dict(), operation="ensure", reader=SourceVersionReader(lake))
+>       assert dto["status"] in {"blocked", "unavailable"}
+E       AssertionError: assert 'not_found' in {'blocked', 'unavailable'}
+
+tests\contract\test_canonical_acquisition_scope.py:181: AssertionError
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_old_annual_does_not_block_next_year[CN]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_old_annual_does_not_block_next_year[HK]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_old_annual_does_not_block_next_year[US]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_nonannual_cross_period[quarterly_report-Q2-Q3-2024]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_nonannual_cross_period[semi_annual_report-H1-H1-2025]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_local_unknown_diagnostic_survives_pathless_projection
+6 failed, 1 passed, 1 warning in 3.03s

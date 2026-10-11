@@ -1,0 +1,27 @@
+Merge made by the 'ort' strategy.
+ .../ROOT-source-acceptance.md                      |  18 +
+ .../ROOT-source-scope-fix.md                       |  43 +++
+ .../author-plan/findings.md                        |  14 +
+ .../author-plan/progress.md                        |  29 ++
+ .../author-plan/task_plan.md                       |  76 ++++
+ src/company_wiki/source_catalog/acquisition.py     |   7 +-
+ .../source_catalog/acquisition_service.py          |  10 +
+ .../source_catalog/assertion_service.py            |   8 +-
+ src/company_wiki/source_catalog/canonical_scope.py | 176 +++++++++
+ .../source_catalog/canonical_writer.py             |  91 ++++-
+ src/company_wiki/source_catalog/local_reconcile.py |  25 +-
+ .../source_catalog/operation_contract.py           |  22 +-
+ .../source_catalog/operation_projection.py         |   4 +
+ .../source_catalog/registration_scope.py           |   5 +-
+ src/company_wiki/source_catalog/scanner.py         |   9 +-
+ tests/contract/test_canonical_acquisition_scope.py | 412 +++++++++++++++++++++
+ tests/unit/test_canonical_scope.py                 |  45 +++
+ 17 files changed, 981 insertions(+), 13 deletions(-)
+ create mode 100644 docs/handoffs/w06-cross-period-acquisition/ROOT-source-acceptance.md
+ create mode 100644 docs/handoffs/w06-cross-period-acquisition/ROOT-source-scope-fix.md
+ create mode 100644 docs/handoffs/w06-cross-period-acquisition/author-plan/findings.md
+ create mode 100644 docs/handoffs/w06-cross-period-acquisition/author-plan/progress.md
+ create mode 100644 docs/handoffs/w06-cross-period-acquisition/author-plan/task_plan.md
+ create mode 100644 src/company_wiki/source_catalog/canonical_scope.py
+ create mode 100644 tests/contract/test_canonical_acquisition_scope.py
+ create mode 100644 tests/unit/test_canonical_scope.py

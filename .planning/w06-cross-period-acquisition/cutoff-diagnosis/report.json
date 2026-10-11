@@ -1,0 +1,101 @@
+{
+  "schema_version": "cutoff-root-cause-review/1",
+  "verdict": "ROOT_CAUSE_CONFIRMED_NOT_REPAIRED",
+  "owner": "/root/portability_final_acceptance",
+  "independent_ff_diagnostician": "/root/portability_final_acceptance/cutoff_ff_mapping",
+  "matrix_attempt": "attempt-1f64f745d3a94506ae4bc35c8997b562",
+  "observed": {
+    "total_cases": 41,
+    "pass": 40,
+    "fail": 1,
+    "elapsed_seconds": 164.62,
+    "case": "call_past_cutoff",
+    "fiscal_period": "2025-Q2",
+    "as_of_date": "2026-12-31",
+    "call_date": "2027-06-01",
+    "et_status": "not_found",
+    "et_candidate_count": 0,
+    "et_cutoff_reason": null,
+    "ff_status": "provider_unavailable",
+    "ff_reason": "provider_unavailable",
+    "provider_requests": 1,
+    "provider_response_bytes": 512,
+    "usage_complete": true,
+    "cwp_import": false,
+    "eligible": false
+  },
+  "findings": [
+    {
+      "id": "ET_FILTER_CAUSE_ERASED",
+      "path": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/transcript_api.py",
+      "function": "_fetch_fmp_transcript",
+      "line": 759,
+      "reason": "Validated future call and actual empty list return indistinguishable not_found receipts."
+    },
+    {
+      "id": "FF_NONFETCH_OUTCOMES_COLLAPSED",
+      "path": "C:/Users/郑曾波/Projects/_harness_worktrees/w06/ff-contract-matrix-root/scripts/transcript_tool_transport.py",
+      "function": "EarningsTranscriptsTransport._et_result",
+      "line": 605,
+      "reason": "Every non-fetched outcome maps to provider_unavailable; unknown/absent diagnostics are erased."
+    },
+    {
+      "id": "TESTS_ONLY_VALIDATE_EXCLUSION",
+      "path": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts/tests/test_transcript_api.py",
+      "line": 478,
+      "reason": "Existing cutoff test only asserts not_found, not preserved cause through the final consumer."
+    }
+  ],
+  "compatibility_decisions": {
+    "keep_request_and_result_versions": true,
+    "keep_success_goldens": true,
+    "keep_original_matrix_tools_and_expectations": true,
+    "et_status": "not_found",
+    "diagnostic_field": "error_code",
+    "call_cutoff_code": "call_after_as_of",
+    "publication_cutoff_code": "publication_after_as_of",
+    "ordinary_or_legacy_ff_reason": "exact_transcript_missing",
+    "candidate_count_means_eligible_candidates": true,
+    "arbitrary_provider_string_passthrough": false,
+    "duplicate_reason_and_error_code": false,
+    "reuse_source_layer_identity_period_checks": true,
+    "publication_unknown_not_promoted_by_call_date": true,
+    "new_production_validator_or_permission": false,
+    "extra_provider_request_or_import": false
+  },
+  "suggested_product_write_set": [
+    "ET: transcript_api.py provider selection and bounded cutoff projection",
+    "FF: scripts/transcript_tool_transport.py response mapping",
+    "FF: scripts/et_v2_contract.py existing test boundary only; do not add redundant runtime validation"
+  ],
+  "suggested_test_write_set": [
+    "ET: tests/test_transcript_api.py",
+    "ET: tests/test_retrieval_cli_e2e.py",
+    "FF: tests/test_transcript_launch_contract.py",
+    "FF: tests/test_transcript_companion_transport.py",
+    "FF: tests/test_et_s0b_contract.py"
+  ],
+  "major_nodes": [
+    "A: actual public behavior RED preserving cutoff cause; no matrix repetition",
+    "B: shared implementation and one concentrated affected package plus unchanged success golden check",
+    "C: ROOT unchanged original 41-case matrix under existing caps, followed by one independent review and publishing"
+  ],
+  "read_only": {
+    "product_writes": 0,
+    "git_mutations": 0,
+    "key_reads": 0,
+    "tests_run": 0,
+    "matrix_reruns": 0,
+    "network_requests": 0,
+    "llm_calls": 0,
+    "scratch_created": false
+  },
+  "frozen_checks": {
+    "cwp_product_files": 12,
+    "matrix_module_bindings": 9,
+    "input_files": 21,
+    "details": ["inputs-before.json", "inputs-after.json"]
+  },
+  "not_claimed": ["product fix complete", "real FMP entitlement", "live network", "OCR", "LLM", "revenue model certification"],
+  "next_step": "ROOT assigns nonoverlapping ET/FF TDD scope; after implementation ROOT reruns unchanged 41 matrix. Diagnostician STOP."
+}

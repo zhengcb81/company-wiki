@@ -1,0 +1,18 @@
+{
+  "schema": "root-w06-ff-tool-publication/1",
+  "tool_commit": "88997b85ce5be20dc3d563b5c040706590df6dbb",
+  "main_commit": "4167dac46dae524157e567ac8f5a636c5010e180",
+  "remote_exact": "4167dac46dae524157e567ac8f5a636c5010e180",
+  "normal_hooks": true,
+  "freeze_unchanged": true,
+  "real_key_stat_unchanged": true,
+  "tool_acceptance": "195 focused + 28 independent PASS",
+  "product_matrix": "40 PASS / 1 FAIL; cutoff diagnostic repair remains open",
+  "install": "not needed; manual tools only",
+  "ci": {
+    "id": 38148263309,
+    "conclusion": "success",
+    "head_sha": "4167dac46dae524157e567ac8f5a636c5010e180",
+    "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/38148263309"
+  }
+}

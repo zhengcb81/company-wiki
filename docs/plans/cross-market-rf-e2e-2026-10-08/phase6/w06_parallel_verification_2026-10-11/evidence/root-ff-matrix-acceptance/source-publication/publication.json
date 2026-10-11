@@ -1,0 +1,27 @@
+{
+  "schema": "root-w06-source-publication/1",
+  "main_before": "eec8d26c662c6e3d036da4ac5bcf9791f35062fa",
+  "source_commit": "983c173244f99041a6cc02a610315dee92f69e16",
+  "main_commit": "8bd233443c7ef6d75aeb9f09cc62edcc10316b5e",
+  "remote_exact": "8bd233443c7ef6d75aeb9f09cc62edcc10316b5e",
+  "product_files": 12,
+  "product_lf_equal": true,
+  "normal_hooks": true,
+  "engineering": "191 PASS",
+  "independent": "13+1 PASS",
+  "root_static_fix": "dict[str, Any] annotation; normal mypy hook passed",
+  "matrix": "40/1; separate ET cutoff diagnostic fix pending",
+  "ci": {
+    "id": 38148948361,
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "8bd233443c7ef6d75aeb9f09cc62edcc10316b5e",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/38148948361"
+  },
+  "installation": "configured canonical CWP code root",
+  "push_tests": {
+    "pass": 2816,
+    "seconds": 208.66,
+    "scope": "affected unit files + existing CI smoke"
+  }
+}

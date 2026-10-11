@@ -1,0 +1,450 @@
+{
+  "schema_version": "w04-independent-novelty-engineering/1",
+  "verdict": "PASS_WITH_SCOPE",
+  "state": "FINAL_STOP",
+  "freeze_sha256": "b17fafe79199ccc2091356de1e2a012becfa6dd001a7d4a541b30b471a60a6db",
+  "engineering_only": true,
+  "checks": 30,
+  "passed": 30,
+  "failed": [],
+  "probes": [
+    {
+      "name": "FROZEN-SIX-PRODUCTS",
+      "pass": true,
+      "actual": {
+        "freeze_sha256": "b17fafe79199ccc2091356de1e2a012becfa6dd001a7d4a541b30b471a60a6db",
+        "products": {
+          "src/company_wiki/source_catalog/narrative_semantic_coverage.py": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca",
+          "src/company_wiki/source_catalog/narrative_budget.py": "ca2688d9cd11fe7fa3c25218488450e5d64d59926c31322f7de8354e98a8502d",
+          "src/company_wiki/source_catalog/narrative_finalize.py": "48083f0bd7c6862744667597a14818e20ef02979f1ec4615bec5670cb1f77f47",
+          "tests/unit/test_w04_semantic_budget.py": "7eb30ac41c05094958ee05479b4de039a777f7f1c546366b904073f0806f23e1",
+          "tests/unit/test_w04_novelty_budget.py": "cc710a1df6ff7410fc215e7f09538dca478c77d510605f2130b51a7f1f2139e8",
+          "tests/integration/test_w04_novelty_finalize.py": "3b239fc19f4c68aae0f9a97fd68a61a09bb1a34b5fc5336cf17b7b9b4b439931"
+        }
+      }
+    },
+    {
+      "name": "INITIAL-22-WIP-HEAD",
+      "pass": true,
+      "actual": {
+        "head": "35a9a64591169bf217f05e87aba633dc4204033a",
+        "protected_wip_files": 22
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-number-CN",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-number-Chinese",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-decimal-unit",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-percentage",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-range",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-unit",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-subject-total-vs-type",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-plan-vs-realized",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-ongoing-vs-completed",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-negation",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-English-number",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-English-phase",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-English-negation",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-PRISMO-new-stage",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "PUBLIC-FINALIZER-short-subset-new-fact",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "soft_repeats": false,
+        "complete": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "ACTUAL-TOKENIZER-NUMERIC-VECTORS",
+      "pass": true,
+      "actual": [
+        [
+          "300",
+          "500"
+        ],
+        [
+          "2.5",
+          "3.5"
+        ],
+        [
+          "85%",
+          "95%"
+        ],
+        [
+          "6-8",
+          "8-12"
+        ]
+      ]
+    },
+    {
+      "name": "NATIVE-9-10-SUBJECT-NUMBER-REJOIN",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          2
+        ],
+        "whole_groups": true,
+        "first_protected_sentences": [
+          "公司持续完善研发与工艺支持,扩展客户服务能力,提升技术水平及运营效率",
+          "lpcvd设备累计交付300反应台",
+          "ald设备累计交付500反应台"
+        ],
+        "per_group_shared_signature": true
+      }
+    },
+    {
+      "name": "LAYOUT-ONLY-POSITIVE-SOFT-REPEAT",
+      "pass": true,
+      "actual": {
+        "selected_pages": [
+          1,
+          3
+        ],
+        "planner_candidates": 3,
+        "hard_dedup_did_not_remove_candidate": true
+      }
+    },
+    {
+      "name": "HIGH-SYMMETRIC-85-PERCENT-ONLY",
+      "pass": true,
+      "actual": {
+        "tokens": [
+          24,
+          25,
+          12
+        ],
+        "complete": [
+          true,
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "name": "UNBOUND-OR-TRUNCATED-NO-PENALTY",
+      "pass": true,
+      "actual": {
+        "unbound_complete": false,
+        "truncated_complete": false,
+        "bounded_tokens": 2
+      }
+    },
+    {
+      "name": "96-CAP-WHOLE-GROUP-EXACT-PARTITION",
+      "pass": true,
+      "actual": {
+        "input_spans": 120,
+        "selected": 96,
+        "omitted": 24,
+        "whole_groups": true
+      }
+    },
+    {
+      "name": "ORIGINAL-ANNUAL-IPO-CAPS",
+      "pass": true,
+      "actual": {
+        "annual": 96,
+        "prospectus": 160
+      }
+    },
+    {
+      "name": "OWNED-MARKER-PRESERVED",
+      "pass": true,
+      "actual": {
+        "sha256": "c3a3ac01e1f9bbf77228e52e45cfb0d34e09d7464df366a61b166ca97256d87f"
+      }
+    },
+    {
+      "name": "FINAL-FREEZE-22-WIP-HEAD-INDEX-CONFIG",
+      "pass": true,
+      "actual": {
+        "freeze_sha256": "b17fafe79199ccc2091356de1e2a012becfa6dd001a7d4a541b30b471a60a6db",
+        "head": "35a9a64591169bf217f05e87aba633dc4204033a",
+        "protected_wip_files": 22,
+        "config_metadata_preserved": true
+      }
+    },
+    {
+      "name": "SCRATCH-RESTORED-ABSENCE",
+      "pass": true,
+      "actual": {
+        "initial_exists": false,
+        "final_exists": false
+      }
+    },
+    {
+      "name": "PUBLIC-DEFAULT-080-AND-BOUND-ONCE",
+      "pass": true,
+      "actual": {
+        "default_version": "0.8.0",
+        "bound_version": "0.8.0",
+        "public_routes": [
+          "semantic_coverage/1",
+          "semantic_coverage/1"
+        ],
+        "binding_retained_under_default_drift": true
+      }
+    },
+    {
+      "name": "EXPLICIT-071-ARCHIVED-FULL-FINGERPRINT-AND-LEGACY-ROUTE",
+      "pass": true,
+      "actual": {
+        "expected_full_ordered_sha256": "c5e498acbb5d5c158a030b6e4d3bcec3713f408f2c49baa85717b3d63b905478",
+        "actual_full_ordered_sha256": "c5e498acbb5d5c158a030b6e4d3bcec3713f408f2c49baa85717b3d63b905478",
+        "route": "legacy",
+        "scope": "one existing archived TXT fixture; not ROOT real six-original replay"
+      }
+    },
+    {
+      "name": "DIRECT-FINALIZER-AND-BUDGET-DEFAULT-LEGACY",
+      "pass": true,
+      "actual": {
+        "finalizer_default_equals_explicit_legacy": true,
+        "budget_default_equals_explicit_legacy": true
+      }
+    }
+  ],
+  "seconds": 0.8969,
+  "calls": {
+    "provider": 0,
+    "network": 0,
+    "LLM": 0
+  },
+  "fees_usd": 0,
+  "scratch": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w04nov-review-7bff1010e1",
+    "initial_exists": false,
+    "final_exists": false
+  },
+  "residual_scope": [
+    "ROOT unchanged six-original recall including exact and honestly bound whole-group equivalents",
+    "Six 0.7.1 full ordered package fingerprints",
+    "G2 summaries and downstream RF not evaluated",
+    "Three core real-recall gaps retained FAIL by ROOT; not evaluated or fixed here"
+  ],
+  "mutations": {
+    "product": 0,
+    "shared_PWF": 0,
+    "git": 0,
+    "config": 0
+  },
+  "findings": [
+    "Protected full-context sentences conservatively disable penalty for changed facts; they are overlap hints, not proof of claim equivalence.",
+    "Engineering pass alone does not certify LPCVD/tungsten/supply/PRISMO real recall; missing real checkpoints must remain FAIL."
+  ],
+  "initial_attempt": {
+    "report": "initial-27-of-28-report.json",
+    "sha256": "ed4abefb6ce6daae3799301750d64c41ea254e39db2998752f61e1708ac9f98e",
+    "passed": 27,
+    "checked": 28,
+    "superseded_scope_assertion": [
+      "LEGACY-DEFAULT-AND-080-OPTIN"
+    ]
+  },
+  "scope_correction": "Earlier ROOT plan said 0.8 opt-in; preexisting formal WP02 interface explicitly makes public selector default0.8 without permissions. Only direct finalizer/budget defaultlegacy.",
+  "supplement": "scope-controls.json",
+  "supplement_seconds": 1.7357
+}

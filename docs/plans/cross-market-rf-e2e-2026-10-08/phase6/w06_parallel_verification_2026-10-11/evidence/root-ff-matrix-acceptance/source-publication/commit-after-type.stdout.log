@@ -1,0 +1,10 @@
+[codex/root-w06-cwp-acquisition-scope-20261011 983c1732] fix(source): unify verified acquisition scope and raw reuse ownership
+ 17 files changed, 981 insertions(+), 13 deletions(-)
+ create mode 100644 docs/handoffs/w06-cross-period-acquisition/ROOT-source-acceptance.md
+ create mode 100644 docs/handoffs/w06-cross-period-acquisition/ROOT-source-scope-fix.md
+ create mode 100644 docs/handoffs/w06-cross-period-acquisition/author-plan/findings.md
+ create mode 100644 docs/handoffs/w06-cross-period-acquisition/author-plan/progress.md
+ create mode 100644 docs/handoffs/w06-cross-period-acquisition/author-plan/task_plan.md
+ create mode 100644 src/company_wiki/source_catalog/canonical_scope.py
+ create mode 100644 tests/contract/test_canonical_acquisition_scope.py
+ create mode 100644 tests/unit/test_canonical_scope.py

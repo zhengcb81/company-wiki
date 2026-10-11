@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "reviewer": "/root/w05_ocr_recovery_fix",
+  "role": "non_author_source_product_reviewer",
+  "verdict": "PASS_SOURCE_SCOPE_FIX_PENDING_ROOT_MATRIX",
+  "product_freeze_sha256": "1a753dd95c8e897891c48ee5e00e47bde0723a21741aae823af9806619ecdc91",
+  "product_files_verified": 12,
+  "author_evidence_files_verified": 43,
+  "tests": {
+    "independent_public": {
+      "passed": 13,
+      "failed": 0,
+      "pytest_seconds": 5.13,
+      "result": "independent-public-result.json"
+    },
+    "sec_native_cross_period_extension": {
+      "passed": 1,
+      "deselected": 12,
+      "pytest_seconds": 1.67,
+      "result": "sec-native-cross-period-result.json"
+    },
+    "initial_fixture_initialization_failure": {
+      "failed": 13,
+      "product_business_failure": false,
+      "cause": "reviewer fixture missing protocol discover/fetch and non-semver adapter_version",
+      "result": "probes-result.json"
+    }
+  },
+  "findings": [],
+  "blocking_findings": 0,
+  "scope": [
+    "CN/HK/US public capture/reuse/new period",
+    "HK same-year quarter and cross-year semiannual",
+    "actual SEC DEI priority/native cross period",
+    "historical successful journal/request/version binding without publication upgrade",
+    "unverified scanner declaration unknown and pathless diagnostic",
+    "same-size SHA corruption refused before success journal",
+    "same-byte fiscal-year conflict",
+    "post-fact and post-reactivation rollback"
+  ],
+  "not_claimed": [
+    "191 engineering suite rerun",
+    "41 FF ET CWP CLI matrix",
+    "actual supplier/network/OCR/LLM",
+    "independent review of own FF oracle",
+    "all-project completion"
+  ],
+  "scratch_restored": true,
+  "freeze_unchanged": true,
+  "network_calls": 0,
+  "llm_calls": 0,
+  "fee_usd": 0,
+  "real_credentials_read_or_inherited": false,
+  "product_git_install_config_writes": false,
+  "status": "STOP",
+  "frozen_at": "2026-10-11T14:33:30.056259+00:00"
+}

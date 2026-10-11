@@ -1,0 +1,37 @@
+{
+  "schema_version": "w06-independent-case-authority-final-freeze/1",
+  "state": "FINAL_STOP",
+  "verdict": "PASS_WITH_SCOPE",
+  "files": [
+    {
+      "path": "probe.py",
+      "bytes": 25646,
+      "sha256": "246d1b3798da320fec47e96b9f38bc5abcedae3656b5627a8eaf237736b8a289"
+    },
+    {
+      "path": "report.json",
+      "bytes": 23061,
+      "sha256": "e811f549ac4ae3de038c2dadcf78cf2efce95f54b62d267f22e307fa7706d4a1"
+    },
+    {
+      "path": "report.md",
+      "bytes": 3608,
+      "sha256": "10bcca2bf59aef7865e5d202e158e11b468f9931b41148b4aa7eeeaa95b898e7"
+    },
+    {
+      "path": "reviewer-attempt-1-manifest.json",
+      "bytes": 600,
+      "sha256": "7c4d1d41682e4bcd026dd6e6dd533c242cab3d28b8a0e7359a918c5c9a0e4102"
+    },
+    {
+      "path": "reviewer-attempt-1-report.json",
+      "bytes": 22442,
+      "sha256": "d8481909f40eab54b694c5469ab7af39719d3d603e3bd8994d6e552e29663ed2"
+    },
+    {
+      "path": "reviewer-attempt-1-report.md",
+      "bytes": 2948,
+      "sha256": "778de3a945e38db0b25fa7f30a8bf09e831f171e6bad92c5d0c0fe1cb8a35d3e"
+    }
+  ]
+}

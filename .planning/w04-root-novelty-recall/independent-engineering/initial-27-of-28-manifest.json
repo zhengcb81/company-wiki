@@ -1,0 +1,22 @@
+{
+  "schema_version": "w04-independent-novelty-engineering-freeze/1",
+  "state": "FINAL_STOP",
+  "verdict": "ENGINEERING_BLOCKER",
+  "files": [
+    {
+      "path": "probe.py",
+      "sha256": "c8b68647683e9a99c464f484814808e9aeaa9b6c06484d6c774d8d694de304d7",
+      "bytes": 19222
+    },
+    {
+      "path": "report.json",
+      "sha256": "ed4abefb6ce6daae3799301750d64c41ea254e39db2998752f61e1708ac9f98e",
+      "bytes": 9749
+    },
+    {
+      "path": "report.md",
+      "sha256": "dcd1ec6b8c0ebf47d3d7d6c6da3f69f401f65b7fd22806eb9bc7fb3aa01bd212",
+      "bytes": 1941
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "w06-independent-case-authority-final-freeze/1",
+  "state": "FINAL_STOP",
+  "verdict": "TOOL_BLOCKER",
+  "files": [
+    {
+      "path": "probe.py",
+      "bytes": 23291,
+      "sha256": "80c59163efd5efe4805d7285dc95381cfd1e56c037c2a67ae8ebec064b32c0eb"
+    },
+    {
+      "path": "report.json",
+      "bytes": 22442,
+      "sha256": "d8481909f40eab54b694c5469ab7af39719d3d603e3bd8994d6e552e29663ed2"
+    },
+    {
+      "path": "report.md",
+      "bytes": 2948,
+      "sha256": "778de3a945e38db0b25fa7f30a8bf09e831f171e6bad92c5d0c0fe1cb8a35d3e"
+    }
+  ]
+}

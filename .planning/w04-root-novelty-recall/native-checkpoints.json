@@ -1,0 +1,9 @@
+{
+  "schema": "root-w04-fixed-native-checkpoints/1",
+  "script_sha256": "15b06195a41a0694a8cf3ca996216686ddb3a7072ca2623eee7e4a68740b17b6",
+  "policy": "same six originals and 0.7.1 full ordered package hash; same 96/160 caps; complete groups only",
+  "before_result": true,
+  "no_new_result_observed": true,
+  "extra_fact_source": "Annual page 56 raw PDF text read before replay; PRISMO PD5, not UniMax or aggregate MOCVD",
+  "original_failure_preserved": ".planning/w04-root-selector-recall/native-budget-six-assertion-closure.json.gz"
+}

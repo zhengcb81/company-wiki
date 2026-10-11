@@ -1,0 +1,277 @@
+FFFFFFFFFFFFFFFFFFFFF                                                    [100%]
+================================== FAILURES ===================================
+_ test_authority_failed_response_cannot_be_laundered_as_pass[chainA_download_reuse] _
+
+cid = 'chainA_download_reuse'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D8FC97D0>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[fin_cn_annual_fetch] _
+
+cid = 'fin_cn_annual_fetch'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D8FCA0C0>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[fin_cn_semi_fetch] _
+
+cid = 'fin_cn_semi_fetch'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D9114860>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[fin_cn_quarterly_fetch] _
+
+cid = 'fin_cn_quarterly_fetch'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D911FAC0>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[fin_hk_annual_fetch] _
+
+cid = 'fin_hk_annual_fetch'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D91E4A00>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[fin_hk_semi_fetch] _
+
+cid = 'fin_hk_semi_fetch'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D908DFF0>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[fin_hk_quarterly_fetch] _
+
+cid = 'fin_hk_quarterly_fetch'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D9115560>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[fin_us_annual_fetch] _
+
+cid = 'fin_us_annual_fetch'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D9066CF0>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[fin_us_semi_fetch] _
+
+cid = 'fin_us_semi_fetch'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D9239A40>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[fin_us_quarterly_fetch] _
+
+cid = 'fin_us_quarterly_fetch'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D92C2810>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[call_fy_only_no_q] _
+
+cid = 'call_fy_only_no_q'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D9334A00>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[call_past_cutoff] _
+
+cid = 'call_past_cutoff'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D9448110>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[call_wrong_quarter] _
+
+cid = 'call_wrong_quarter'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D9478E10>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[err_402_entitlement] _
+
+cid = 'err_402_entitlement'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D94E9B10>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[err_missing_creds] _
+
+cid = 'err_missing_creds'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D9572810>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[err_unknown_usage] _
+
+cid = 'err_unknown_usage'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D95E31D0>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[call_wrong_symbol] _
+
+cid = 'call_wrong_symbol'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D96B46C0>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[call_wrong_mime] _
+
+cid = 'call_wrong_mime'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D955A810>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[call_max_bytes] __
+
+cid = 'call_max_bytes'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D94E8790>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[call_hard_timeout] _
+
+cid = 'call_hard_timeout'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D93B7E00>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+_ test_authority_failed_response_cannot_be_laundered_as_pass[request_after_failure_retry] _
+
+cid = 'request_after_failure_retry'
+
+    @pytest.mark.parametrize("cid",[c["id"] for c in frozen_report()["cases"] if c["result"]=="FAIL"])
+    def test_authority_failed_response_cannot_be_laundered_as_pass(cid):
+        report=frozen_report();c=case(report,cid);c["result"]="PASS"
+>       assert any(f.vector=="case_assertion_failed" and f.case_id==cid for f in oracle.audit(report))
+E       assert False
+E        +  where False = any(<generator object test_authority_failed_response_cannot_be_laundered_as_pass.<locals>.<genexpr> at 0x000001F0D92B3440>)
+
+tests\test_w06_case_authority.py:98: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[chainA_download_reuse]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[fin_cn_annual_fetch]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[fin_cn_semi_fetch]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[fin_cn_quarterly_fetch]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[fin_hk_annual_fetch]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[fin_hk_semi_fetch]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[fin_hk_quarterly_fetch]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[fin_us_annual_fetch]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[fin_us_semi_fetch]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[fin_us_quarterly_fetch]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[call_fy_only_no_q]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[call_past_cutoff]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[call_wrong_quarter]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[err_402_entitlement]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[err_missing_creds]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[err_unknown_usage]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[call_wrong_symbol]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[call_wrong_mime]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[call_max_bytes]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[call_hard_timeout]
+FAILED tests/test_w06_case_authority.py::test_authority_failed_response_cannot_be_laundered_as_pass[request_after_failure_retry]
+21 failed, 96 deselected in 1.04s

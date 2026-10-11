@@ -1,0 +1,29 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-d4a177513\\pytest",
+    "tests/contract/test_canonical_acquisition_scope.py",
+    "tests/unit/test_canonical_scope.py",
+    "tests/contract/test_source_catalog_canonical_writer.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-acquisition-scope-root",
+  "returncode": 0,
+  "elapsed_seconds": 9.151,
+  "environment": "allowlisted platform vars + synthetic HOME/TMP; dotenv disabled; pytest socket guard",
+  "actual_network_calls": 0,
+  "llm_calls": 0,
+  "fee_usd": 0,
+  "test_sha256": {
+    "tests/contract/test_canonical_acquisition_scope.py": "be2a8e7637b8e720e6a4c04c6033aef8bfd781401650983d0e93ca880cf0635a",
+    "tests/unit/test_canonical_scope.py": "32453803611055b7945d7b26aad40fbb95748fb2d1db1f09c76373d9edf61796",
+    "tests/contract/test_source_catalog_canonical_writer.py": "552a022cbf4d421b0bf4e3b4abb71d46af057d161c67cedcca3c04e29da32f6e"
+  },
+  "scratch_restored": true
+}

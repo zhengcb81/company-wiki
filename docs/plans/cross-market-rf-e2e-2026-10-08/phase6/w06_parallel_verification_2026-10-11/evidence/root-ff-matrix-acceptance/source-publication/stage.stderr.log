@@ -1,0 +1,4 @@
+warning: in the working copy of 'docs/handoffs/w06-cross-period-acquisition/author-plan/findings.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/handoffs/w06-cross-period-acquisition/author-plan/progress.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/handoffs/w06-cross-period-acquisition/author-plan/task_plan.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/contract/test_canonical_acquisition_scope.py', LF will be replaced by CRLF the next time Git touches it

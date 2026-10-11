@@ -1,0 +1,674 @@
+Merge made by the 'ort' strategy.
+ .planning/w06-ff-matrix/findings.md                |  108 +
+ .planning/w06-ff-matrix/progress.md                |   50 +
+ .planning/w06-ff-matrix/task_plan.md               |   94 +
+ docs/handoffs/w06-ff-matrix/ROOT-tool-reception.md |   16 +
+ .../artifacts/call_fy_only_no_q.run1.request.json  |   20 +
+ .../artifacts/call_fy_only_no_q.run1.response.json |   21 +
+ .../artifacts/call_fy_only_no_q.run1.stderr.txt    |    0
+ .../artifacts/call_past_cutoff.run1.request.json   |   21 +
+ .../artifacts/call_past_cutoff.run1.response.json  |   21 +
+ .../artifacts/call_past_cutoff.run1.stderr.txt     |    0
+ .../artifacts/call_wrong_quarter.run1.request.json |   21 +
+ .../call_wrong_quarter.run1.response.json          |   21 +
+ .../artifacts/call_wrong_quarter.run1.stderr.txt   |    0
+ .../chainA_download_reuse.run1.request.json        |   21 +
+ .../chainA_download_reuse.run1.response.json       |   21 +
+ .../chainA_download_reuse.run1.stderr.txt          |    0
+ .../chainA_download_reuse.run2.request.json        |   21 +
+ .../chainA_download_reuse.run2.response.json       |   21 +
+ .../chainA_download_reuse.run2.stderr.txt          |    0
+ .../err_402_entitlement.run1.request.json          |   21 +
+ .../err_402_entitlement.run1.response.json         |   21 +
+ .../artifacts/err_402_entitlement.run1.stderr.txt  |    0
+ .../artifacts/err_missing_creds.run1.request.json  |   21 +
+ .../artifacts/err_missing_creds.run1.response.json |   21 +
+ .../artifacts/err_missing_creds.run1.stderr.txt    |    0
+ .../artifacts/err_request_error.run1.request.json  |    8 +
+ .../artifacts/err_request_error.run1.response.json |   26 +
+ .../artifacts/err_request_error.run1.stderr.txt    |    0
+ .../artifacts/err_unknown_usage.run1.request.json  |   21 +
+ .../artifacts/err_unknown_usage.run1.response.json |   21 +
+ .../artifacts/err_unknown_usage.run1.stderr.txt    |    0
+ .../fin_cn_annual_fetch.run1.request.json          |   14 +
+ .../fin_cn_annual_fetch.run1.response.json         |   21 +
+ .../artifacts/fin_cn_annual_fetch.run1.stderr.txt  |    0
+ .../fin_cn_annual_fetch.run2.request.json          |   14 +
+ .../fin_cn_annual_fetch.run2.response.json         |   21 +
+ .../artifacts/fin_cn_annual_fetch.run2.stderr.txt  |    0
+ .../artifacts/fin_cn_annual_hit.run1.request.json  |   10 +
+ .../artifacts/fin_cn_annual_hit.run1.response.json |   21 +
+ .../artifacts/fin_cn_annual_hit.run1.stderr.txt    |    0
+ .../artifacts/fin_hk_semi_hit.run1.request.json    |   10 +
+ .../artifacts/fin_hk_semi_hit.run1.response.json   |   21 +
+ .../artifacts/fin_hk_semi_hit.run1.stderr.txt      |    0
+ .../fin_us_quarterly_hit.run1.request.json         |   10 +
+ .../fin_us_quarterly_hit.run1.response.json        |   21 +
+ .../artifacts/fin_us_quarterly_hit.run1.stderr.txt |    0
+ .../nonperiod_convertible_bond.run1.request.json   |   14 +
+ .../nonperiod_convertible_bond.run1.response.json  |   21 +
+ .../nonperiod_convertible_bond.run1.stderr.txt     |    0
+ .../nonperiod_equity_offering.run1.request.json    |   14 +
+ .../nonperiod_equity_offering.run1.response.json   |   21 +
+ .../nonperiod_equity_offering.run1.stderr.txt      |    0
+ .../nonperiod_investor_relations.run1.request.json |   14 +
+ ...nonperiod_investor_relations.run1.response.json |   21 +
+ .../nonperiod_investor_relations.run1.stderr.txt   |    0
+ .../nonperiod_prospectus.run1.request.json         |   14 +
+ .../nonperiod_prospectus.run1.response.json        |   21 +
+ .../artifacts/nonperiod_prospectus.run1.stderr.txt |    0
+ .../w06-ff-matrix/attempts/attempt-1/report.json   |  682 ++
+ .../w06-ff-matrix/attempts/attempt-1/restore.json  |    6 +
+ .../artifacts/call_fy_only_no_q.run1.request.json  |   20 +
+ .../artifacts/call_fy_only_no_q.run1.response.json |   34 +
+ .../artifacts/call_fy_only_no_q.run1.stderr.txt    |    0
+ .../artifacts/call_past_cutoff.result.json         |    1 +
+ .../artifacts/call_past_cutoff.run1.request.json   |   21 +
+ .../artifacts/call_past_cutoff.run1.response.json  |   39 +
+ .../artifacts/call_past_cutoff.run1.stderr.txt     |    0
+ .../artifacts/call_past_cutoff.usage.json          |    1 +
+ .../artifacts/call_wrong_quarter.result.json       |    1 +
+ .../artifacts/call_wrong_quarter.run1.request.json |   21 +
+ .../call_wrong_quarter.run1.response.json          |   39 +
+ .../artifacts/call_wrong_quarter.run1.stderr.txt   |    0
+ .../artifacts/call_wrong_quarter.usage.json        |    1 +
+ .../chainA_download_reuse.run1.request.json        |   21 +
+ .../chainA_download_reuse.run1.response.json       |   52 +
+ .../chainA_download_reuse.run1.stderr.txt          |    0
+ .../chainA_download_reuse.run2.request.json        |   21 +
+ .../chainA_download_reuse.run2.response.json       |   48 +
+ .../chainA_download_reuse.run2.stderr.txt          |    0
+ .../chainA_download_reuse_run1.result.json         |    1 +
+ .../chainA_download_reuse_run1.usage.json          |    1 +
+ .../artifacts/err_402_entitlement.result.json      |    1 +
+ .../err_402_entitlement.run1.request.json          |   21 +
+ .../err_402_entitlement.run1.response.json         |   39 +
+ .../artifacts/err_402_entitlement.run1.stderr.txt  |    0
+ .../artifacts/err_402_entitlement.usage.json       |    1 +
+ .../artifacts/err_missing_creds.run1.request.json  |   21 +
+ .../artifacts/err_missing_creds.run1.response.json |   39 +
+ .../artifacts/err_missing_creds.run1.stderr.txt    |    0
+ .../artifacts/err_request_error.run1.request.json  |    8 +
+ .../artifacts/err_request_error.run1.response.json |   26 +
+ .../artifacts/err_request_error.run1.stderr.txt    |    0
+ .../artifacts/err_unknown_usage.result.json        |    1 +
+ .../artifacts/err_unknown_usage.run1.request.json  |   21 +
+ .../artifacts/err_unknown_usage.run1.response.json |   39 +
+ .../artifacts/err_unknown_usage.run1.stderr.txt    |    0
+ .../artifacts/err_unknown_usage.usage.json         |    1 +
+ .../artifacts/fin_cn_annual_hit.run1.request.json  |   10 +
+ .../artifacts/fin_cn_annual_hit.run1.response.json |   33 +
+ .../artifacts/fin_cn_annual_hit.run1.stderr.txt    |    0
+ .../fin_hk_annual_fetch.run1.request.json          |   14 +
+ .../fin_hk_annual_fetch.run1.response.json         |   47 +
+ .../artifacts/fin_hk_annual_fetch.run1.stderr.txt  |    0
+ .../fin_hk_annual_fetch.run2.request.json          |   14 +
+ .../fin_hk_annual_fetch.run2.response.json         |   47 +
+ .../artifacts/fin_hk_annual_fetch.run2.stderr.txt  |    0
+ .../artifacts/fin_hk_semi_hit.run1.request.json    |   10 +
+ .../artifacts/fin_hk_semi_hit.run1.response.json   |   33 +
+ .../artifacts/fin_hk_semi_hit.run1.stderr.txt      |    0
+ .../fin_us_quarterly_hit.run1.request.json         |   10 +
+ .../fin_us_quarterly_hit.run1.response.json        |   33 +
+ .../artifacts/fin_us_quarterly_hit.run1.stderr.txt |    0
+ .../nonperiod_convertible_bond.run1.request.json   |   14 +
+ .../nonperiod_convertible_bond.run1.response.json  |   47 +
+ .../nonperiod_convertible_bond.run1.stderr.txt     |    0
+ .../nonperiod_equity_offering.run1.request.json    |   14 +
+ .../nonperiod_equity_offering.run1.response.json   |   47 +
+ .../nonperiod_equity_offering.run1.stderr.txt      |    0
+ .../nonperiod_investor_relations.run1.request.json |   14 +
+ ...nonperiod_investor_relations.run1.response.json |   47 +
+ .../nonperiod_investor_relations.run1.stderr.txt   |    0
+ .../nonperiod_prospectus.run1.request.json         |   14 +
+ .../nonperiod_prospectus.run1.response.json        |   47 +
+ .../artifacts/nonperiod_prospectus.run1.stderr.txt |    0
+ .../w06-ff-matrix/attempts/attempt-5/report.json   |  662 ++
+ .../w06-ff-matrix/attempts/attempt-5/restore.json  |    6 +
+ .../w06-ff-matrix/case-authority/handoff.json      |   26 +
+ .../w06-ff-matrix/case-authority/handoff.md        |   30 +
+ .../w06-ff-matrix/case-authority/manifest.json     | 1131 +++
+ docs/handoffs/w06-ff-matrix/handoff.json           |  215 +
+ docs/handoffs/w06-ff-matrix/handoff.md             |   41 +
+ docs/handoffs/w06-ff-matrix/logs/unit-tests.log    |    2 +
+ docs/handoffs/w06-ff-matrix/manifest.json          |   37 +
+ .../w06-ff-matrix/root_freeze_manifest.json        |  111 +
+ docs/handoffs/w06-ff-matrix/root_handoff.json      |  367 +
+ docs/handoffs/w06-ff-matrix/root_handoff.md        |   20 +
+ .../w06_contract_matrix/authority/.gitattributes   |    2 +
+ .../artifacts/call_fy_only_no_q.run1.request.json  |   20 +
+ .../artifacts/call_fy_only_no_q.run1.response.json |   30 +
+ .../artifacts/call_fy_only_no_q.run1.stderr.txt    |    0
+ .../artifacts/call_hard_timeout.run1.request.json  |   21 +
+ .../artifacts/call_hard_timeout.run1.response.json |   30 +
+ .../artifacts/call_hard_timeout.run1.stderr.txt    |    0
+ .../artifacts/call_max_bytes.run1.request.json     |   21 +
+ .../artifacts/call_max_bytes.run1.response.json    |   30 +
+ .../artifacts/call_max_bytes.run1.stderr.txt       |    0
+ .../artifacts/call_past_cutoff.run1.request.json   |   21 +
+ .../artifacts/call_past_cutoff.run1.response.json  |   30 +
+ .../artifacts/call_past_cutoff.run1.stderr.txt     |    0
+ .../artifacts/call_wrong_mime.run1.request.json    |   21 +
+ .../artifacts/call_wrong_mime.run1.response.json   |   30 +
+ .../artifacts/call_wrong_mime.run1.stderr.txt      |    0
+ .../artifacts/call_wrong_quarter.run1.request.json |   21 +
+ .../call_wrong_quarter.run1.response.json          |   30 +
+ .../artifacts/call_wrong_quarter.run1.stderr.txt   |    0
+ .../artifacts/call_wrong_symbol.run1.request.json  |   21 +
+ .../artifacts/call_wrong_symbol.run1.response.json |   30 +
+ .../artifacts/call_wrong_symbol.run1.stderr.txt    |    0
+ .../chainA_download_reuse.run1.request.json        |   21 +
+ .../chainA_download_reuse.run1.response.json       |   30 +
+ .../chainA_download_reuse.run1.stderr.txt          |    0
+ .../chainA_download_reuse.run2.request.json        |   21 +
+ .../chainA_download_reuse.run2.response.json       |   30 +
+ .../chainA_download_reuse.run2.stderr.txt          |    0
+ .../err_402_entitlement.run1.request.json          |   21 +
+ .../err_402_entitlement.run1.response.json         |   30 +
+ .../artifacts/err_402_entitlement.run1.stderr.txt  |    0
+ .../artifacts/err_missing_creds.run1.request.json  |   21 +
+ .../artifacts/err_missing_creds.run1.response.json |   30 +
+ .../artifacts/err_missing_creds.run1.stderr.txt    |    0
+ .../artifacts/err_request_error.run1.request.json  |    8 +
+ .../artifacts/err_request_error.run1.response.json |   26 +
+ .../artifacts/err_request_error.run1.stderr.txt    |    0
+ .../artifacts/err_unknown_usage.run1.request.json  |   21 +
+ .../artifacts/err_unknown_usage.run1.response.json |   30 +
+ .../artifacts/err_unknown_usage.run1.stderr.txt    |    0
+ .../fin_cn_annual_fetch.run1.request.json          |   15 +
+ .../fin_cn_annual_fetch.run1.response.json         |   44 +
+ .../artifacts/fin_cn_annual_fetch.run1.stderr.txt  |    0
+ .../fin_cn_annual_fetch.run2.request.json          |   15 +
+ .../fin_cn_annual_fetch.run2.response.json         |   44 +
+ .../artifacts/fin_cn_annual_fetch.run2.stderr.txt  |    0
+ .../artifacts/fin_cn_annual_hit.run1.request.json  |   10 +
+ .../artifacts/fin_cn_annual_hit.run1.response.json |   33 +
+ .../artifacts/fin_cn_annual_hit.run1.stderr.txt    |    0
+ .../fin_cn_quarterly_fetch.run1.request.json       |   15 +
+ .../fin_cn_quarterly_fetch.run1.response.json      |   44 +
+ .../fin_cn_quarterly_fetch.run1.stderr.txt         |    0
+ .../fin_cn_quarterly_fetch.run2.request.json       |   15 +
+ .../fin_cn_quarterly_fetch.run2.response.json      |   44 +
+ .../fin_cn_quarterly_fetch.run2.stderr.txt         |    0
+ .../fin_cn_quarterly_hit.run1.request.json         |   10 +
+ .../fin_cn_quarterly_hit.run1.response.json        |   33 +
+ .../artifacts/fin_cn_quarterly_hit.run1.stderr.txt |    0
+ .../artifacts/fin_cn_semi_fetch.run1.request.json  |   15 +
+ .../artifacts/fin_cn_semi_fetch.run1.response.json |   44 +
+ .../artifacts/fin_cn_semi_fetch.run1.stderr.txt    |    0
+ .../artifacts/fin_cn_semi_fetch.run2.request.json  |   15 +
+ .../artifacts/fin_cn_semi_fetch.run2.response.json |   44 +
+ .../artifacts/fin_cn_semi_fetch.run2.stderr.txt    |    0
+ .../artifacts/fin_cn_semi_hit.run1.request.json    |   10 +
+ .../artifacts/fin_cn_semi_hit.run1.response.json   |   33 +
+ .../artifacts/fin_cn_semi_hit.run1.stderr.txt      |    0
+ .../fin_hk_annual_fetch.run1.request.json          |   15 +
+ .../fin_hk_annual_fetch.run1.response.json         |   44 +
+ .../artifacts/fin_hk_annual_fetch.run1.stderr.txt  |    0
+ .../fin_hk_annual_fetch.run2.request.json          |   15 +
+ .../fin_hk_annual_fetch.run2.response.json         |   44 +
+ .../artifacts/fin_hk_annual_fetch.run2.stderr.txt  |    0
+ .../artifacts/fin_hk_annual_hit.run1.request.json  |   10 +
+ .../artifacts/fin_hk_annual_hit.run1.response.json |   33 +
+ .../artifacts/fin_hk_annual_hit.run1.stderr.txt    |    0
+ .../fin_hk_quarterly_fetch.run1.request.json       |   15 +
+ .../fin_hk_quarterly_fetch.run1.response.json      |   44 +
+ .../fin_hk_quarterly_fetch.run1.stderr.txt         |    0
+ .../fin_hk_quarterly_fetch.run2.request.json       |   15 +
+ .../fin_hk_quarterly_fetch.run2.response.json      |   44 +
+ .../fin_hk_quarterly_fetch.run2.stderr.txt         |    0
+ .../fin_hk_quarterly_hit.run1.request.json         |   10 +
+ .../fin_hk_quarterly_hit.run1.response.json        |   33 +
+ .../artifacts/fin_hk_quarterly_hit.run1.stderr.txt |    0
+ .../artifacts/fin_hk_semi_fetch.run1.request.json  |   15 +
+ .../artifacts/fin_hk_semi_fetch.run1.response.json |   44 +
+ .../artifacts/fin_hk_semi_fetch.run1.stderr.txt    |    0
+ .../artifacts/fin_hk_semi_fetch.run2.request.json  |   15 +
+ .../artifacts/fin_hk_semi_fetch.run2.response.json |   44 +
+ .../artifacts/fin_hk_semi_fetch.run2.stderr.txt    |    0
+ .../artifacts/fin_hk_semi_hit.run1.request.json    |   10 +
+ .../artifacts/fin_hk_semi_hit.run1.response.json   |   33 +
+ .../artifacts/fin_hk_semi_hit.run1.stderr.txt      |    0
+ .../fin_us_annual_fetch.run1.request.json          |   15 +
+ .../fin_us_annual_fetch.run1.response.json         |   44 +
+ .../artifacts/fin_us_annual_fetch.run1.stderr.txt  |    0
+ .../fin_us_annual_fetch.run2.request.json          |   15 +
+ .../fin_us_annual_fetch.run2.response.json         |   44 +
+ .../artifacts/fin_us_annual_fetch.run2.stderr.txt  |    0
+ .../artifacts/fin_us_annual_hit.run1.request.json  |   10 +
+ .../artifacts/fin_us_annual_hit.run1.response.json |   33 +
+ .../artifacts/fin_us_annual_hit.run1.stderr.txt    |    0
+ .../fin_us_quarterly_fetch.run1.request.json       |   15 +
+ .../fin_us_quarterly_fetch.run1.response.json      |   44 +
+ .../fin_us_quarterly_fetch.run1.stderr.txt         |    0
+ .../fin_us_quarterly_fetch.run2.request.json       |   15 +
+ .../fin_us_quarterly_fetch.run2.response.json      |   44 +
+ .../fin_us_quarterly_fetch.run2.stderr.txt         |    0
+ .../fin_us_quarterly_hit.run1.request.json         |   10 +
+ .../fin_us_quarterly_hit.run1.response.json        |   33 +
+ .../artifacts/fin_us_quarterly_hit.run1.stderr.txt |    0
+ .../artifacts/fin_us_semi_fetch.run1.request.json  |   15 +
+ .../artifacts/fin_us_semi_fetch.run1.response.json |   44 +
+ .../artifacts/fin_us_semi_fetch.run1.stderr.txt    |    0
+ .../artifacts/fin_us_semi_fetch.run2.request.json  |   15 +
+ .../artifacts/fin_us_semi_fetch.run2.response.json |   44 +
+ .../artifacts/fin_us_semi_fetch.run2.stderr.txt    |    0
+ .../artifacts/fin_us_semi_hit.run1.request.json    |   10 +
+ .../artifacts/fin_us_semi_hit.run1.response.json   |   33 +
+ .../artifacts/fin_us_semi_hit.run1.stderr.txt      |    0
+ .../authority/artifacts/fresh-source-proofs.json   |    1 +
+ .../artifacts/fresh-source-proofs.stderr.txt       |    0
+ ...complete_sidecar_metadata_gap.run1.request.json |   10 +
+ ...omplete_sidecar_metadata_gap.run1.response.json |   30 +
+ ...incomplete_sidecar_metadata_gap.run1.stderr.txt |    0
+ .../local_txt_exact_reuse.run1.request.json        |   16 +
+ .../local_txt_exact_reuse.run1.response.json       |   30 +
+ .../local_txt_exact_reuse.run1.stderr.txt          |    0
+ .../nonperiod_convertible_bond.run1.request.json   |   14 +
+ .../nonperiod_convertible_bond.run1.response.json  |   47 +
+ .../nonperiod_convertible_bond.run1.stderr.txt     |    0
+ .../nonperiod_equity_offering.run1.request.json    |   14 +
+ .../nonperiod_equity_offering.run1.response.json   |   47 +
+ .../nonperiod_equity_offering.run1.stderr.txt      |    0
+ .../nonperiod_investor_relations.run1.request.json |   14 +
+ ...nonperiod_investor_relations.run1.response.json |   47 +
+ .../nonperiod_investor_relations.run1.stderr.txt   |    0
+ .../nonperiod_prospectus.run1.request.json         |   14 +
+ .../nonperiod_prospectus.run1.response.json        |   47 +
+ .../artifacts/nonperiod_prospectus.run1.stderr.txt |    0
+ .../artifacts/original_max_bytes.run1.request.json |   14 +
+ .../original_max_bytes.run1.response.json          |   58 +
+ .../artifacts/original_max_bytes.run1.stderr.txt   |    0
+ .../original_wrong_mime.run1.request.json          |   14 +
+ .../original_wrong_mime.run1.response.json         |   58 +
+ .../artifacts/original_wrong_mime.run1.stderr.txt  |    0
+ .../artifacts/original_wrong_sha.run1.request.json |   14 +
+ .../original_wrong_sha.run1.response.json          |   58 +
+ .../artifacts/original_wrong_sha.run1.stderr.txt   |    0
+ .../request_after_failure_retry.retry.request.json |   21 +
+ ...request_after_failure_retry.retry.response.json |   30 +
+ .../request_after_failure_retry.retry.stderr.txt   |    0
+ .../request_after_failure_retry.run1.request.json  |   21 +
+ .../request_after_failure_retry.run1.response.json |   30 +
+ .../request_after_failure_retry.run1.stderr.txt    |    0
+ .../reuse_only_missing_period.run1.request.json    |   10 +
+ .../reuse_only_missing_period.run1.response.json   |   30 +
+ .../reuse_only_missing_period.run1.stderr.txt      |    0
+ .../authority/artifacts/seed-scan.stderr.txt       |    0
+ .../authority/artifacts/seed-scan.stdout.txt       |    1 +
+ .../seed_cn_annual_report_2024_FY.response.json    |    1 +
+ .../seed_cn_annual_report_2024_FY.stderr.txt       |    0
+ .../seed_cn_quarterly_report_2024_Q1.response.json |    1 +
+ .../seed_cn_quarterly_report_2024_Q1.stderr.txt    |    0
+ ...eed_cn_semi_annual_report_2024_S1.response.json |    1 +
+ .../seed_cn_semi_annual_report_2024_S1.stderr.txt  |    0
+ .../seed_hk_annual_report_2024_FY.response.json    |    1 +
+ .../seed_hk_annual_report_2024_FY.stderr.txt       |    0
+ .../seed_hk_quarterly_report_2024_Q1.response.json |    1 +
+ .../seed_hk_quarterly_report_2024_Q1.stderr.txt    |    0
+ ...eed_hk_semi_annual_report_2024_S1.response.json |    1 +
+ .../seed_hk_semi_annual_report_2024_S1.stderr.txt  |    0
+ .../seed_us_annual_report_2024_FY.response.json    |    1 +
+ .../seed_us_annual_report_2024_FY.stderr.txt       |    0
+ .../seed_us_annual_report_2025_FY.response.json    |    1 +
+ .../seed_us_annual_report_2025_FY.stderr.txt       |    0
+ .../seed_us_quarterly_report_2024_Q1.response.json |    1 +
+ .../seed_us_quarterly_report_2024_Q1.stderr.txt    |    0
+ ...eed_us_semi_annual_report_2024_S1.response.json |    1 +
+ .../seed_us_semi_annual_report_2024_S1.stderr.txt  |    0
+ .../authority/artifacts/warm-seed-receipts.json    | 1030 +++
+ .../authority/original-41-report.json              | 7945 ++++++++++++++++++++
+ tests/test_w06_case_authority.py                   |  240 +
+ tests/test_w06_contract_matrix.py                  |  239 +
+ tests/test_w06_matrix_runtime.py                   |  188 +
+ tools/offline_contract_matrix/README.md            |   97 +
+ tools/offline_contract_matrix/case_specs.py        |  848 +++
+ tools/offline_contract_matrix/cli_main.py          |  189 +
+ .../offline_contract_matrix/et_transcript_proxy.py |  154 +
+ tools/offline_contract_matrix/extended_cases.py    |  118 +
+ tools/offline_contract_matrix/fixture_builder.py   |  377 +
+ .../fixture_provider_adapter.py                    |  217 +
+ tools/offline_contract_matrix/matrix_cases.py      |  427 ++
+ tools/offline_contract_matrix/matrix_outcome.py    |   64 +
+ tools/offline_contract_matrix/oracle.py            |  395 +
+ tools/offline_contract_matrix/report.py            |   82 +
+ tools/offline_contract_matrix/run.py               |  313 +
+ tools/offline_contract_matrix/runtime.py           |  214 +
+ tools/offline_contract_matrix/source_proofs.py     |   76 +
+ 336 files changed, 21320 insertions(+)
+ create mode 100644 .planning/w06-ff-matrix/findings.md
+ create mode 100644 .planning/w06-ff-matrix/progress.md
+ create mode 100644 .planning/w06-ff-matrix/task_plan.md
+ create mode 100644 docs/handoffs/w06-ff-matrix/ROOT-tool-reception.md
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_fy_only_no_q.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_fy_only_no_q.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_fy_only_no_q.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_past_cutoff.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_past_cutoff.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_past_cutoff.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_wrong_quarter.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_wrong_quarter.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/call_wrong_quarter.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run2.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run2.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/chainA_download_reuse.run2.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_402_entitlement.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_402_entitlement.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_402_entitlement.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_missing_creds.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_missing_creds.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_missing_creds.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_request_error.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_request_error.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_request_error.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_unknown_usage.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_unknown_usage.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/err_unknown_usage.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run2.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run2.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_fetch.run2.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_hit.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_hit.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_cn_annual_hit.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_hk_semi_hit.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_hk_semi_hit.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_hk_semi_hit.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_us_quarterly_hit.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_us_quarterly_hit.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/fin_us_quarterly_hit.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_convertible_bond.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_convertible_bond.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_convertible_bond.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_equity_offering.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_equity_offering.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_equity_offering.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_investor_relations.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_investor_relations.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_investor_relations.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_prospectus.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_prospectus.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/artifacts/nonperiod_prospectus.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/report.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-1/restore.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_fy_only_no_q.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_fy_only_no_q.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_fy_only_no_q.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_past_cutoff.result.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_past_cutoff.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_past_cutoff.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_past_cutoff.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_past_cutoff.usage.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_wrong_quarter.result.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_wrong_quarter.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_wrong_quarter.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_wrong_quarter.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/call_wrong_quarter.usage.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run2.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run2.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse.run2.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse_run1.result.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/chainA_download_reuse_run1.usage.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_402_entitlement.result.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_402_entitlement.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_402_entitlement.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_402_entitlement.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_402_entitlement.usage.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_missing_creds.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_missing_creds.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_missing_creds.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_request_error.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_request_error.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_request_error.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_unknown_usage.result.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_unknown_usage.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_unknown_usage.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_unknown_usage.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/err_unknown_usage.usage.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_cn_annual_hit.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_cn_annual_hit.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_cn_annual_hit.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run2.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run2.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_annual_fetch.run2.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_semi_hit.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_semi_hit.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_hk_semi_hit.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_us_quarterly_hit.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_us_quarterly_hit.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/fin_us_quarterly_hit.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_convertible_bond.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_convertible_bond.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_convertible_bond.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_equity_offering.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_equity_offering.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_equity_offering.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_investor_relations.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_investor_relations.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_investor_relations.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_prospectus.run1.request.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_prospectus.run1.response.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/artifacts/nonperiod_prospectus.run1.stderr.txt
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/report.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/attempts/attempt-5/restore.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/case-authority/handoff.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/case-authority/handoff.md
+ create mode 100644 docs/handoffs/w06-ff-matrix/case-authority/manifest.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/handoff.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/handoff.md
+ create mode 100644 docs/handoffs/w06-ff-matrix/logs/unit-tests.log
+ create mode 100644 docs/handoffs/w06-ff-matrix/manifest.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/root_freeze_manifest.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/root_handoff.json
+ create mode 100644 docs/handoffs/w06-ff-matrix/root_handoff.md
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/.gitattributes
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_fy_only_no_q.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_fy_only_no_q.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_fy_only_no_q.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_hard_timeout.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_hard_timeout.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_hard_timeout.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_max_bytes.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_max_bytes.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_max_bytes.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_past_cutoff.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_past_cutoff.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_past_cutoff.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_wrong_mime.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_wrong_mime.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_wrong_mime.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_wrong_quarter.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_wrong_quarter.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_wrong_quarter.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_wrong_symbol.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_wrong_symbol.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/call_wrong_symbol.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/chainA_download_reuse.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/chainA_download_reuse.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/chainA_download_reuse.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/chainA_download_reuse.run2.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/chainA_download_reuse.run2.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/chainA_download_reuse.run2.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_402_entitlement.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_402_entitlement.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_402_entitlement.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_missing_creds.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_missing_creds.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_missing_creds.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_request_error.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_request_error.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_request_error.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_unknown_usage.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_unknown_usage.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/err_unknown_usage.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_annual_fetch.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_annual_fetch.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_annual_fetch.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_annual_fetch.run2.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_annual_fetch.run2.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_annual_fetch.run2.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_annual_hit.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_annual_hit.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_annual_hit.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_quarterly_fetch.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_quarterly_fetch.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_quarterly_fetch.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_quarterly_fetch.run2.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_quarterly_fetch.run2.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_quarterly_fetch.run2.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_quarterly_hit.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_quarterly_hit.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_quarterly_hit.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_semi_fetch.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_semi_fetch.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_semi_fetch.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_semi_fetch.run2.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_semi_fetch.run2.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_semi_fetch.run2.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_semi_hit.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_semi_hit.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_cn_semi_hit.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_annual_fetch.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_annual_fetch.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_annual_fetch.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_annual_fetch.run2.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_annual_fetch.run2.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_annual_fetch.run2.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_annual_hit.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_annual_hit.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_annual_hit.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_quarterly_fetch.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_quarterly_fetch.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_quarterly_fetch.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_quarterly_fetch.run2.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_quarterly_fetch.run2.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_quarterly_fetch.run2.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_quarterly_hit.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_quarterly_hit.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_quarterly_hit.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_semi_fetch.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_semi_fetch.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_semi_fetch.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_semi_fetch.run2.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_semi_fetch.run2.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_semi_fetch.run2.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_semi_hit.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_semi_hit.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_hk_semi_hit.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_annual_fetch.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_annual_fetch.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_annual_fetch.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_annual_fetch.run2.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_annual_fetch.run2.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_annual_fetch.run2.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_annual_hit.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_annual_hit.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_annual_hit.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_quarterly_fetch.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_quarterly_fetch.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_quarterly_fetch.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_quarterly_fetch.run2.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_quarterly_fetch.run2.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_quarterly_fetch.run2.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_quarterly_hit.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_quarterly_hit.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_quarterly_hit.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_semi_fetch.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_semi_fetch.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_semi_fetch.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_semi_fetch.run2.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_semi_fetch.run2.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_semi_fetch.run2.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_semi_hit.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_semi_hit.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fin_us_semi_hit.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fresh-source-proofs.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/fresh-source-proofs.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/incomplete_sidecar_metadata_gap.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/incomplete_sidecar_metadata_gap.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/incomplete_sidecar_metadata_gap.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/local_txt_exact_reuse.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/local_txt_exact_reuse.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/local_txt_exact_reuse.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_convertible_bond.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_convertible_bond.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_convertible_bond.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_equity_offering.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_equity_offering.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_equity_offering.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_investor_relations.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_investor_relations.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_investor_relations.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_prospectus.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_prospectus.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/nonperiod_prospectus.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/original_max_bytes.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/original_max_bytes.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/original_max_bytes.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/original_wrong_mime.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/original_wrong_mime.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/original_wrong_mime.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/original_wrong_sha.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/original_wrong_sha.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/original_wrong_sha.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/request_after_failure_retry.retry.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/request_after_failure_retry.retry.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/request_after_failure_retry.retry.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/request_after_failure_retry.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/request_after_failure_retry.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/request_after_failure_retry.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/reuse_only_missing_period.run1.request.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/reuse_only_missing_period.run1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/reuse_only_missing_period.run1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed-scan.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed-scan.stdout.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_cn_annual_report_2024_FY.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_cn_annual_report_2024_FY.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_cn_quarterly_report_2024_Q1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_cn_quarterly_report_2024_Q1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_cn_semi_annual_report_2024_S1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_cn_semi_annual_report_2024_S1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_hk_annual_report_2024_FY.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_hk_annual_report_2024_FY.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_hk_quarterly_report_2024_Q1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_hk_quarterly_report_2024_Q1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_hk_semi_annual_report_2024_S1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_hk_semi_annual_report_2024_S1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_us_annual_report_2024_FY.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_us_annual_report_2024_FY.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_us_annual_report_2025_FY.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_us_annual_report_2025_FY.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_us_quarterly_report_2024_Q1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_us_quarterly_report_2024_Q1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_us_semi_annual_report_2024_S1.response.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/seed_us_semi_annual_report_2024_S1.stderr.txt
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/artifacts/warm-seed-receipts.json
+ create mode 100644 tests/fixtures/w06_contract_matrix/authority/original-41-report.json
+ create mode 100644 tests/test_w06_case_authority.py
+ create mode 100644 tests/test_w06_contract_matrix.py
+ create mode 100644 tests/test_w06_matrix_runtime.py
+ create mode 100644 tools/offline_contract_matrix/README.md
+ create mode 100644 tools/offline_contract_matrix/case_specs.py
+ create mode 100644 tools/offline_contract_matrix/cli_main.py
+ create mode 100644 tools/offline_contract_matrix/et_transcript_proxy.py
+ create mode 100644 tools/offline_contract_matrix/extended_cases.py
+ create mode 100644 tools/offline_contract_matrix/fixture_builder.py
+ create mode 100644 tools/offline_contract_matrix/fixture_provider_adapter.py
+ create mode 100644 tools/offline_contract_matrix/matrix_cases.py
+ create mode 100644 tools/offline_contract_matrix/matrix_outcome.py
+ create mode 100644 tools/offline_contract_matrix/oracle.py
+ create mode 100644 tools/offline_contract_matrix/report.py
+ create mode 100644 tools/offline_contract_matrix/run.py
+ create mode 100644 tools/offline_contract_matrix/runtime.py
+ create mode 100644 tools/offline_contract_matrix/source_proofs.py

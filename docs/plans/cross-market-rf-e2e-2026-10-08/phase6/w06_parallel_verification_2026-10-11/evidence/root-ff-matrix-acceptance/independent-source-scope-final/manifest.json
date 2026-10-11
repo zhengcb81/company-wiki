@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "verdict": "PASS_SOURCE_SCOPE_FIX_PENDING_ROOT_MATRIX",
+  "product_freeze_sha256": "1a753dd95c8e897891c48ee5e00e47bde0723a21741aae823af9806619ecdc91",
+  "files": {
+    "independent-public-result.json": {
+      "sha256": "5b1754e05f308b5953bafbe7f9615381fe8cbc4a24b2bfe9c70c3c5ab2a629c8",
+      "bytes": 19898
+    },
+    "independent-public.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "independent-public.stdout.txt": {
+      "sha256": "f00dc70d8c1fea99cad85cbf98097dc73285b5c4c8d02b4012e738a5810ac7d1",
+      "bytes": 101
+    },
+    "probes-result.json": {
+      "sha256": "f0e93d2712ab1039c28a335af5ecc4de7373c04ccdd12dcd3473b3833060152f",
+      "bytes": 19662
+    },
+    "probes.py": {
+      "sha256": "d6968a26ac74a9595fe01f67955762a6c6cd622ed49e3315b47566ecb42962ea",
+      "bytes": 20541
+    },
+    "probes.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "probes.stdout.txt": {
+      "sha256": "fc4ff0173633d65bb6b1a5c1c3d84ceaa599b7b4a395cbec8c4db711e8374fb3",
+      "bytes": 20932
+    },
+    "public-api-trace.jsonl": {
+      "sha256": "0e9a5af630f10725644f17568715361919ca7e705b1995ddb5ebe0d9e261f6bb",
+      "bytes": 213558
+    },
+    "pytest.ini": {
+      "sha256": "fa33bd755b3735c508b3edfccbcfa472dadc11f8d1013a7e91c9eb3a6fe3cc16",
+      "bytes": 30
+    },
+    "report.json": {
+      "sha256": "fdbbe75a49de19aefd9a06720adf3ebee61554f9a50f3fcdd5b442c035608ec2",
+      "bytes": 2001
+    },
+    "report.md": {
+      "sha256": "9de0a7087f2d5fef730baaf5b2d773dc2f7c7954c5751b2d313cbbbc8aa179f7",
+      "bytes": 6301
+    },
+    "run_review.py": {
+      "sha256": "508b7f1d3c825126a63bb30991fda45c03a5803f07ec125448fe06624faa9bfc",
+      "bytes": 5151
+    },
+    "sec-native-cross-period-result.json": {
+      "sha256": "75b90205d6bb02a8f0a177669d60d9f7937a3dbacd5561efa43053a754b886b8",
+      "bytes": 19926
+    },
+    "sec-native-cross-period.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "sec-native-cross-period.stdout.txt": {
+      "sha256": "4b47a58d3c37fc9ed26b93192a4c6a6c2ac0764605f322ce2379f94dc385af3c",
+      "bytes": 115
+    }
+  },
+  "frozen_at": "2026-10-11T14:33:30.056259+00:00"
+}

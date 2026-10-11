@@ -1,0 +1,75 @@
+{
+  "schema": "root-w06-original-matrix-replay/1",
+  "exit_code": 1,
+  "seconds": 164.8546,
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "tools/offline_contract_matrix/run.py",
+    "--cwp-project",
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-acquisition-scope-root",
+    "--et-project",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts",
+    "--owned-root",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\mx-ea3b60ef",
+    "--out-root",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-root-matrix-evidence"
+  ],
+  "ff_case_authority_manifest_sha256": "e2bf72bde855935db1beeca45ad10d4a9b205f4ca1137dab07db4d827e3f7fe3",
+  "cwp_product_freeze_sha256": "1a753dd95c8e897891c48ee5e00e47bde0723a21741aae823af9806619ecdc91",
+  "actual_report": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-root-matrix-evidence\\attempt-1f64f745d3a94506ae4bc35c8997b562\\report.json",
+  "production_config_unchanged": true,
+  "real_key_stat_unchanged": true,
+  "scratch_restored_absent": true,
+  "budget": "Synthetic/offline; no project LLM or provider expense",
+  "report_sha256": "933a7cde8c6dc468226410190781c701b00d1c2b9781d091642699725dc63c01",
+  "counts": {
+    "PASS": 40,
+    "FAIL": 1
+  },
+  "oracle": {
+    "pass": false,
+    "findings": [
+      {
+        "vector": "case_not_passed",
+        "case_id": "call_past_cutoff",
+        "detail": "actual result FAIL cannot certify required case"
+      },
+      {
+        "vector": "wrong_cutoff",
+        "case_id": "call_past_cutoff",
+        "detail": "past-cutoff case did not report the actual cutoff diagnostic"
+      }
+    ]
+  },
+  "restore": {
+    "owned_parent_shape_preserved": true,
+    "output_parent_initially_existed": false,
+    "retained_output_is_explicit_evidence": true,
+    "scratch_torn_down": true,
+    "preexisting_parent_entries_preserved": true,
+    "restored": true,
+    "output": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\w06-root-matrix-evidence\\attempt-1f64f745d3a94506ae4bc35c8997b562",
+    "production_metadata_unchanged": true
+  },
+  "scope": {
+    "batch_elapsed_seconds": 164.6232,
+    "case_limit_seconds": 30,
+    "network_guard_boots": 264,
+    "network_attempts_denied": 0,
+    "translation_attempts": 0,
+    "provider_boundary": "fixture response only; real supplier reachability/coverage is not proven",
+    "error": null,
+    "production_baseline_scope": "stat only; no real key/config bytes read or hashed"
+  },
+  "cost": {
+    "real_provider_calls": 0,
+    "paid_usd": 0,
+    "unknown_charge": null,
+    "fixture_requests": 42,
+    "fixture_counter_scope": "observed local fixture GETs only; producer unknown usage stays null"
+  },
+  "frozen_product_files_unchanged": true
+}

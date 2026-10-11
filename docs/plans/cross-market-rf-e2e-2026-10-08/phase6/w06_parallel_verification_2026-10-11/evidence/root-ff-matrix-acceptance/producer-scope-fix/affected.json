@@ -1,0 +1,43 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-d992de4fa\\pytest",
+    "tests/contract/test_canonical_acquisition_scope.py",
+    "tests/unit/test_canonical_scope.py",
+    "tests/unit/test_acquisition_scope_responsibility.py",
+    "tests/unit/test_canonical_import_reference.py",
+    "tests/contract/test_source_catalog_canonical_writer.py",
+    "tests/contract/test_local_request_relevance.py",
+    "tests/contract/test_local_discovery_limits.py",
+    "tests/contract/test_source_operation_v2.py",
+    "tests/contract/test_single_intent_latest_acquisition.py",
+    "tests/contract/test_source_catalog_acquisition.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-acquisition-scope-root",
+  "returncode": 1,
+  "elapsed_seconds": 21.502,
+  "environment": "allowlisted platform vars + synthetic HOME/TMP; dotenv disabled; pytest socket guard",
+  "actual_network_calls": 0,
+  "llm_calls": 0,
+  "fee_usd": 0,
+  "test_sha256": {
+    "tests/contract/test_canonical_acquisition_scope.py": "3897e056020a25a9a254d4437738ca682eee0514d42046ba9bfeaf6995c6bab9",
+    "tests/unit/test_canonical_scope.py": "b20dff9b01f9029c67f6b976e3639b6682430e54580217dee16e5546ab5e5abd",
+    "tests/unit/test_acquisition_scope_responsibility.py": "9cf2e95cb3614082f6ae53492375cbfa1c5f911ff8a165522b15128e684eecd5",
+    "tests/unit/test_canonical_import_reference.py": "c92c0fb38a79d0350a7f8cdd34df61dc578978d4317f0065d0d576abdca848f9",
+    "tests/contract/test_source_catalog_canonical_writer.py": "552a022cbf4d421b0bf4e3b4abb71d46af057d161c67cedcca3c04e29da32f6e",
+    "tests/contract/test_local_request_relevance.py": "18c85868c81acaf19cc4725c104999bcc0c6611a03a26b03dc5ef047543d7bb2",
+    "tests/contract/test_local_discovery_limits.py": "f8acce499202e3025a68abc42189a84deab0a299a346e6cad26236d2f7e1171c",
+    "tests/contract/test_source_operation_v2.py": "fc50d0c5db00ede3cf938cd3c3076b75b15f5f7806c08af632b2cad8cbf4fb1d",
+    "tests/contract/test_single_intent_latest_acquisition.py": "b2d910c615d5b152cd9146f043ef8e6c3a741c87e78181ab8f00f3639a839578",
+    "tests/contract/test_source_catalog_acquisition.py": "47008f720b140d778f54a8bbca6d8ca2e6710a254f7b23df9f611535a92d3e32"
+  },
+  "scratch_restored": true
+}

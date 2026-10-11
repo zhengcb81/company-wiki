@@ -1,0 +1,51 @@
+{
+  "schema_version": "w04-independent-scope-positive-controls/1",
+  "controls": [
+    {
+      "name": "PUBLIC-DEFAULT-080-AND-BOUND-ONCE",
+      "pass": true,
+      "actual": {
+        "default_version": "0.8.0",
+        "bound_version": "0.8.0",
+        "public_routes": [
+          "semantic_coverage/1",
+          "semantic_coverage/1"
+        ],
+        "binding_retained_under_default_drift": true
+      }
+    },
+    {
+      "name": "EXPLICIT-071-ARCHIVED-FULL-FINGERPRINT-AND-LEGACY-ROUTE",
+      "pass": true,
+      "actual": {
+        "expected_full_ordered_sha256": "c5e498acbb5d5c158a030b6e4d3bcec3713f408f2c49baa85717b3d63b905478",
+        "actual_full_ordered_sha256": "c5e498acbb5d5c158a030b6e4d3bcec3713f408f2c49baa85717b3d63b905478",
+        "route": "legacy",
+        "scope": "one existing archived TXT fixture; not ROOT real six-original replay"
+      }
+    },
+    {
+      "name": "DIRECT-FINALIZER-AND-BUDGET-DEFAULT-LEGACY",
+      "pass": true,
+      "actual": {
+        "finalizer_default_equals_explicit_legacy": true,
+        "budget_default_equals_explicit_legacy": true
+      }
+    }
+  ],
+  "freeze_sha256": "b17fafe79199ccc2091356de1e2a012becfa6dd001a7d4a541b30b471a60a6db",
+  "preserved_six_products_22_WIP_HEAD_index_config": true,
+  "interface_amendment": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\WP02_SELECTOR_INTERFACE_AMENDMENT.md",
+  "interface_amendment_sha256": "7fe428141ef859e355581001f645b52dfa32d1a726d6385f29df98de0148f29d",
+  "seconds": 1.7357,
+  "scratch_initial_exists": false,
+  "scratch_final_exists": false,
+  "calls": {
+    "provider": 0,
+    "network": 0,
+    "LLM": 0
+  },
+  "fees_usd": 0,
+  "scope_correction": "Earlier ROOT plan said 0.8 opt-in; preexisting formal WP02 interface explicitly makes public selector default0.8 without permissions. Only direct finalizer/budget defaultlegacy.",
+  "root_real_recall_state": "Three core real-recall gaps retained FAIL by ROOT; not evaluated or fixed here"
+}

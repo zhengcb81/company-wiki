@@ -1,0 +1,385 @@
+diff --git a/src/company_wiki/source_catalog/acquisition.py b/src/company_wiki/source_catalog/acquisition.py
+index 43fc9fd2..8ee87185 100644
+--- a/src/company_wiki/source_catalog/acquisition.py
++++ b/src/company_wiki/source_catalog/acquisition.py
+@@ -280,6 +280,7 @@ class AcquisitionResult:
+     reason: str | None = None
+     gap_plan: GapPlan | None = None  # WU-4.2: metadata-only plan (status GAP)
+     acquisition_failure: dict[str, Any] | None = None
++    local_preparation: dict[str, Any] | None = None
+ 
+     def to_dict(self) -> dict[str, Any]:
+         result = {
+@@ -294,6 +295,8 @@ class AcquisitionResult:
+         }
+         if self.acquisition_failure is not None:
+             result["acquisition_failure"] = self.acquisition_failure
++        if self.local_preparation is not None:
++            result["local_preparation"] = self.local_preparation
+         return result
+ 
+ 
+@@ -421,7 +424,9 @@ class AcquisitionCoordinator:
+         elif local["blocks_download"]:
+             return AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
+                 status=AcquisitionStatus.AMBIGUOUS if local["status"] == "ambiguous" else AcquisitionStatus.MISSING,
+-                resolution=resolution, reason=local["reason"])
++                resolution=resolution, reason=local["reason"], local_preparation={
++                    "status":local["status"],"reason":local["reason"],"blocks_download":True,
++                    "causes":sorted({item["reason"] for item in local.get("diagnostics",())})})
+         if request.mode == "latest_as_of":
+             return self._gap_plan_result(request, resolution, budget=budget,
+                                          candidate_scope=candidate_scope)
+diff --git a/src/company_wiki/source_catalog/acquisition_service.py b/src/company_wiki/source_catalog/acquisition_service.py
+index 6217b399..c50791bd 100644
+--- a/src/company_wiki/source_catalog/acquisition_service.py
++++ b/src/company_wiki/source_catalog/acquisition_service.py
+@@ -214,6 +214,16 @@ class SourceAcquisitionService:
+             return self.journal.record(outcome=outcome, **common, **values)
+ 
+         if acquisition.status is AcquisitionStatus.REUSED:
++            from .source_reader import SourceVersionReader
++            reader = SourceVersionReader(self.coordinator.catalog)
++            if len(acquisition.resolution.matches) != 1:
++                raise RuntimeError("reuse requires one exact source version")
++            match = acquisition.resolution.matches[0]
++            ref = reader.query_ref(match.document_id,match.source_id,match.content_sha256)
++            # Verify the pinned source in its owner layer before recording successful reuse.
++            reader.verify_version(ref,purpose="filing_reuse")
++            if budget is not None:
++                budget.ensure_open()
+             outcome = (
+                 "reused_after_discovery"
+                 if acquisition.candidate is not None
+diff --git a/src/company_wiki/source_catalog/assertion_service.py b/src/company_wiki/source_catalog/assertion_service.py
+index d3e46b27..5deb510d 100644
+--- a/src/company_wiki/source_catalog/assertion_service.py
++++ b/src/company_wiki/source_catalog/assertion_service.py
+@@ -381,16 +381,18 @@ def record_source_facts(catalog: Any, *, ref: Any, facts: dict[str, Any],
+                 "assertion_id": assertion_id, "document_id": ref.document_id, "source_id": ref.source_id}
+ 
+ 
+-def _prepare_source_fact_write(catalog, ref, current, facts, evidence):
++def _prepare_source_fact_write(catalog, ref, current, facts, evidence, *, assertion_store=None, capture_evidence=None):
+     """One semantic correction builder shared by active updates and atomic restoration."""
+-    prior = get_verified_assertion(catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
++    prior = get_verified_assertion(assertion_store or catalog.reader, ref.source_id, ref.content_sha256, reader="steady")
+     previous_evidence = _evidence_payload(prior["evidence_json"], prior["assertion_id"]) if prior else {}
+     patch = dict(previous_evidence.get("source_fact_patch") or {})
+     field_evidence = dict(previous_evidence.get("source_fact_evidence") or {})
+     patch.update(facts)
+     field_evidence.update(evidence)
+     _validate_source_facts(patch, field_evidence)
+-    evidence_payload = {"source_fact_patch": patch, "source_fact_evidence": field_evidence}
++    evidence_payload = {**previous_evidence, "source_fact_patch": patch, "source_fact_evidence": field_evidence}
++    if capture_evidence is not None:
++        evidence_payload["canonical_commit"] = capture_evidence
+     def semantic_evidence(value: dict[str, Any]) -> dict[str, Any]:
+         fields = value.get("source_fact_evidence") or {}
+         return {"source_fact_patch": value.get("source_fact_patch"),
+diff --git a/src/company_wiki/source_catalog/canonical_writer.py b/src/company_wiki/source_catalog/canonical_writer.py
+index 6c765d6e..b2e1989f 100644
+--- a/src/company_wiki/source_catalog/canonical_writer.py
++++ b/src/company_wiki/source_catalog/canonical_writer.py
+@@ -267,10 +267,7 @@ class CanonicalSourceWriter:
+         ):
+             if budget is not None:
+                 budget.ensure_open()
+-            if reactivate_retired:
+-                # Explicit provider re-acquisition retains its existing contract.
+-                self._reactivate_if_retired(receipt.content_sha256)
+-            else:
++            if not reactivate_retired:
+                 # A local import cannot turn a withdrawal into fresh provider approval.
+                 document_id = source_id_for_sha256(receipt.content_sha256).replace(
+                     "urn:company-wiki:source:", "urn:company-wiki:document:")
+@@ -280,6 +277,10 @@ class CanonicalSourceWriter:
+                     raise CanonicalImportError("local import requires atomic metadata reconciliation")
+             existing = self._existing_original(receipt.content_sha256)
+             if existing is not None:
++                with self.catalog.store.coalesced_transactions():
++                    self._record_validated_capture(request,candidate,receipt,self.catalog.store)
++                    if reactivate_retired:
++                        self._reactivate_if_retired(receipt.content_sha256)
+                 source_ref = self.source_ref_for_import(request, candidate, receipt.content_sha256)
+                 if cleanup_staged:
+                     self._remove_staged(staged)
+@@ -330,6 +331,8 @@ class CanonicalSourceWriter:
+                 self.catalog.config, self.catalog.store,
+                 SourceRegistrationScope(self.company_root.root_id,
+                     frozenset({destination.relative_to(self.company_root.path).as_posix()})),
++                on_registered=lambda store: self._complete_registration(
++                    request,candidate,receipt,store,reactivate_retired=reactivate_retired),
+             )
+             source_ref = self.source_ref_for_import(request, candidate, receipt.content_sha256)
+             if cleanup_staged:
+@@ -420,6 +423,82 @@ class CanonicalSourceWriter:
+                                   provenance_extensions=dict(provenance_extensions),
+                                   reactivate_retired=False, cleanup_staged=cleanup_staged)
+ 
++    def _complete_registration(self,request,candidate,receipt,store,*,reactivate_retired):
++        self._record_validated_capture(request,candidate,receipt,store)
++        if reactivate_retired:
++            self._reactivate_if_retired(receipt.content_sha256)
++
++    def _record_validated_capture(self, request, candidate, receipt, store):
++        """Internal writer event, never reconstructed from a scanner-side declaration."""
++        if not isinstance(request, SourceRequest) or not isinstance(candidate, DownloadCandidate):
++            # Official JSON/shared source intake has its own source-fact owner.
++            return
++        from .assertion_service import (
++            _evidence_payload, _prepare_source_fact_write, _validate_source_facts,
++            _write_source_fact_projection, get_verified_assertion,
++        )
++        from .source_reader import SourceRef
++
++        source_id = source_id_for_sha256(receipt.content_sha256)
++        document_id = source_id.replace("urn:company-wiki:source:", "urn:company-wiki:document:")
++        row = store.fetchone("SELECT * FROM sources WHERE source_id=?", (source_id,))
++        if row is None or (row["content_sha256"], row["byte_size"]) != (
++                receipt.content_sha256, receipt.byte_size):
++            raise CanonicalImportError("canonical_registered_version_conflict")
++        if row["mime_type"] != receipt.mime_type:
++            # A previous scan may have guessed HTML from a .htm path containing
++            # these same PDF bytes. Intake has verified the complete SHA and PDF
++            # magic; fix only that actual type observation, not scope or identity.
++            if receipt.mime_type != "application/pdf":
++                raise CanonicalImportError("canonical_registered_version_conflict")
++            with store.transaction() as connection:
++                connection.execute("UPDATE sources SET mime_type=? WHERE source_id=?",
++                                   (receipt.mime_type,source_id))
++        ref = SourceRef(document_id, source_id, receipt.content_sha256, receipt.byte_size, receipt.mime_type)
++        facts = {"entity": request.entity, "market": candidate.market,
++            "security_id": request.security_id, "document_kind": candidate.document_kind,
++            "fiscal_year": candidate.fiscal_year, "fiscal_period": candidate.fiscal_period,
++            "form_type": candidate.form_type, "published_date": candidate.filing_date,
++            "filing_date": candidate.filing_date, "provider": candidate.provider,
++            "provider_document_id": candidate.provider_document_id, "source_url": candidate.source_url,
++            "language": candidate.language, "title": candidate.title}
++        claim = {"owner": "CanonicalSourceWriter", "schema_version": "1.0",
++            "request": request.identity_dict(),
++            "candidate": {key:getattr(candidate,key) for key in (
++                "candidate_id", "provider", "provider_document_id", "market", "entity",
++                "title", "source_url", "document_kind", "filing_date", "fiscal_year",
++                "fiscal_period", "form_type", "language")},
++            "receipt": {key:getattr(receipt,key) for key in (
++                "candidate_id", "provider", "provider_document_id", "source_url",
++                "content_sha256", "byte_size", "mime_type", "adapter_name", "adapter_version")}}
++        claim_sha = hashlib.sha256(canonical_json(claim).encode("utf-8")).hexdigest()
++        evidence = {key:{"locator":"canonical-commit:/" + (
++                "request/security_id" if key=="security_id" else "candidate/" + key),
++                "value":value, "content_sha256":ref.content_sha256,
++                "commit_sha256":claim_sha, "extraction_method":"provider-metadata-import/1"}
++            for key,value in facts.items()}
++        prior = get_verified_assertion(store, ref.source_id, ref.content_sha256, reader="steady")
++        if prior:
++            old = _evidence_payload(prior["evidence_json"],prior["assertion_id"])
++            previous = old.get("source_fact_patch") or {}
++            for key,value in previous.items():
++                if key in {"entity","market","security_id","document_kind","fiscal_year","fiscal_period","form_type"} and key in facts and value is not None and facts[key] is not None:
++                    left, right = str(value).casefold(), str(facts[key]).casefold()
++                    if left != right:
++                        raise CanonicalImportError("canonical_scope_conflict:" + key)
++            # An explicit correction/unknown is stronger than another provider declaration.
++            facts = {key:value for key,value in facts.items() if key not in previous}
++            evidence = {key:value for key,value in evidence.items() if key in facts}
++        if not facts:
++            return
++        _validate_source_facts(facts,evidence)
++        assertion, projection, _ = _prepare_source_fact_write(
++            self.catalog,ref,{"display_name":request.entity},facts,evidence,
++            assertion_store=store,capture_evidence={**claim,"sha256":claim_sha})
++        if assertion is not None:
++            with store.transaction() as connection:
++                _write_source_fact_projection(connection,ref,assertion,projection)
++
+     def source_ref_for_import(
+         self,
+         request: SourceRequest,
+@@ -467,6 +546,10 @@ class CanonicalSourceWriter:
+             raise CanonicalImportError("staged byte_size does not match receipt")
+         if _hash_file(staged) != receipt.content_sha256:
+             raise CanonicalImportError("staged SHA-256 does not match receipt")
++        if receipt.mime_type == "application/pdf":
++            with staged.open("rb") as stream:
++                if stream.read(5) != b"%PDF-":
++                    raise CanonicalImportError("staged PDF does not have PDF magic")
+         return staged
+ 
+     def _reactivate_if_retired(self, content_sha256: str) -> None:
+diff --git a/src/company_wiki/source_catalog/local_reconcile.py b/src/company_wiki/source_catalog/local_reconcile.py
+index 3439db68..66a576a1 100644
+--- a/src/company_wiki/source_catalog/local_reconcile.py
++++ b/src/company_wiki/source_catalog/local_reconcile.py
+@@ -33,6 +33,7 @@ from .resolver import (
+ from .source_reader import SourceReadError, SourceRef, SourceVersionReader
+ from .source_group_scope import SourceRegistrationScope
+ from .lock import CatalogOperationLockedError
++from .canonical_scope import HistoricalCaptureScopes, ScopeRelation, qualified_source_scope, scope_relatedness
+ 
+ SCHEMA = "local-source-prepare/1"
+ 
+@@ -494,8 +495,30 @@ def _prepare_local_source(
+     operations = []
+     qualified_documents = set()
+     targeted = False
++    historical = HistoricalCaptureScopes(catalog,budget)
++    eligible = []
++    known_identity = None
++    for candidate in candidates:
++        budget.check()
++        row = catalog.reader.exact_source_version(candidate["document_id"])
++        ref = SourceRef(row["document_id"],row["source_id"],row["content_sha256"],row["byte_size"],row["mime_type"])
++        scope = qualified_source_scope(catalog,ref,candidate,historical=historical)
++        relation = scope_relatedness(scope,request)
++        if relation is ScopeRelation.NOT_RELEVANT:
++            known_identity = known_identity or scope.identity()
++            diagnostics.append({"document_id":ref.document_id,"reason":"trusted_scope_not_relevant"})
++            continue
++        eligible.append(candidate)
++        if relation is ScopeRelation.MATCH and scope.authority == "source-facts":
++            known_identity = known_identity or scope.identity()
++    candidates = eligible
++    if not candidates:
++        if not _discovery_done and known_identity and _discover_source_groups(catalog,known_identity,budget):
++            return _prepare_local_source(catalog,request,identity_cache_dir=identity_cache_dir,
++                limits=limits,_discovery_done=True,_budget=budget)
++        return _result("not_found","no_matching_local_period",diagnostics=diagnostics)
+     try:
+-        identity = identity or _identity(catalog, request, identity_cache_dir)
++        identity = identity or known_identity or _identity(catalog, request, identity_cache_dir)
+     except (ValueError, SourceReadError) as exc:
+         return _result(
+             "blocked",
+diff --git a/src/company_wiki/source_catalog/operation_contract.py b/src/company_wiki/source_catalog/operation_contract.py
+index e27895b5..78de3583 100644
+--- a/src/company_wiki/source_catalog/operation_contract.py
++++ b/src/company_wiki/source_catalog/operation_contract.py
+@@ -33,6 +33,7 @@ class SourceOperationInput:
+     policy_hash: str | None
+     matches: tuple[dict[str, Any], ...]
+     gap_plan: dict[str, Any] | None
++    local_preparation: dict[str, Any] | None = None
+ 
+ 
+ def _object(value: object, name: str) -> dict[str, Any]:
+@@ -157,6 +158,23 @@ def _optional_text(value: object, name: str) -> str | None:
+     return value
+ 
+ 
++def _local_preparation(value):
++    if value is None:
++        return None
++    diagnostic = _object(value,"local_preparation")
++    if (set(diagnostic) != {"status","reason","blocks_download","causes"}
++        or diagnostic["status"] not in {"blocked","unavailable","ambiguous"}
++        or diagnostic["blocks_download"] is not True
++        or not isinstance(diagnostic["causes"],list)):
++        raise SourceOperationProjectionError("invalid local preparation diagnostic")
++    reasons = [diagnostic["reason"],*diagnostic["causes"]]
++    if not all(isinstance(reason,str) and re.fullmatch(r"[a-z][a-z0-9_]{0,79}",reason)
++               for reason in reasons):
++        raise SourceOperationProjectionError("local preparation reason must be a named code")
++    return {"status":diagnostic["status"],"reason":diagnostic["reason"],
++            "blocks_download":True,"causes":list(diagnostic["causes"])}
++
++
+ def parse_operation_payload(
+     payload: dict[str, Any], *, operation: str,
+ ) -> SourceOperationInput:
+@@ -173,8 +191,9 @@ def parse_operation_payload(
+     envelope = _envelope(result, resolution)
+     attempt = _optional_object(result.get("attempt"), "attempt")
+     gap = acquisition_resolution = None
++    acquisition = {}
+     if typed_operation == "ensure":
+-        _, gap, acquisition_resolution = _ensure_parts(result)
++        acquisition, gap, acquisition_resolution = _ensure_parts(result)
+         _validate_gap_status(status, gap)
+     ids = (
+         result.get("request_id"),
+@@ -197,6 +216,7 @@ def parse_operation_payload(
+         policy_hash=_policy_hash(envelope),
+         matches=_matches(resolution),
+         gap_plan=gap,
++        local_preparation=_local_preparation(acquisition.get("local_preparation")),
+     )
+ 
+ 
+diff --git a/src/company_wiki/source_catalog/operation_projection.py b/src/company_wiki/source_catalog/operation_projection.py
+index 2f8c84bf..a1c800fd 100644
+--- a/src/company_wiki/source_catalog/operation_projection.py
++++ b/src/company_wiki/source_catalog/operation_projection.py
+@@ -99,6 +99,8 @@ def _status_and_source(
+     operation_input: SourceOperationInput,
+     reader: VersionReader,
+ ) -> tuple[str, SourceRef | None, dict[str, object] | None]:
++    if operation_input.local_preparation is not None:
++        return operation_input.local_preparation["status"], None, None
+     if operation_input.producer_status == "gap":
+         return "gap", None, None
+     resolved = _resolved_source(operation_input, reader)
+@@ -138,6 +140,8 @@ def project_source_operation(
+         "candidate": candidate,
+         "gap_plan": _gap_projection(operation_input.gap_plan) if status == "gap" else None,
+     }
++    if operation_input.local_preparation is not None:
++        result["local_preparation"] = operation_input.local_preparation
+     if _contains_physical_field(result):
+         raise SourceOperationProjectionError(
+             "operation result contains a physical field"
+diff --git a/src/company_wiki/source_catalog/registration_scope.py b/src/company_wiki/source_catalog/registration_scope.py
+index b661e5b2..f3d7529f 100644
+--- a/src/company_wiki/source_catalog/registration_scope.py
++++ b/src/company_wiki/source_catalog/registration_scope.py
+@@ -28,7 +28,7 @@ def existing_group_locations(store: CatalogStore, root_id: str,
+ 
+ 
+ def register_catalog_sources(config: CatalogConfig, store: CatalogStore,
+-                             scope: SourceRegistrationScope, *, progress=None, budget=None) -> ScanReport:
++                             scope: SourceRegistrationScope, *, progress=None, budget=None, on_registered=None) -> ScanReport:
+     """Register explicit source groups; caller owns the existing catalog lock.
+ 
+     Uses the one scanner normalization/transaction implementation. Root adapter
+@@ -42,4 +42,5 @@ def register_catalog_sources(config: CatalogConfig, store: CatalogStore,
+         raise ValueError("registration root is not configured")
+     return scan_catalog(config, store, root_ids={scope.root_id},
+                         relative_paths=set(scope.relative_paths),
+-                        v2_scan_shadow=bool(selected.adapter_id), progress=progress, budget=budget)
++                        v2_scan_shadow=bool(selected.adapter_id), progress=progress, budget=budget,
++                         on_registered=on_registered)
+diff --git a/src/company_wiki/source_catalog/scanner.py b/src/company_wiki/source_catalog/scanner.py
+index 39857a87..9a0b3fec 100644
+--- a/src/company_wiki/source_catalog/scanner.py
++++ b/src/company_wiki/source_catalog/scanner.py
+@@ -2072,7 +2072,11 @@ def scan_catalog(
+     v2_scan_shadow: bool = False,
+     zero_diff_rounds: int | None = None,
+     budget=None,
++    on_registered=None,
+ ) -> ScanReport:
++    if on_registered is not None and (not callable(on_registered) or dry_run
++            or relative_paths is None or len(relative_paths) != 1):
++        raise ValueError("writer facts require one explicit registration group")
+     if relative_paths is not None:
+         if not root_ids or len(root_ids) != 1:
+             raise ValueError("registration requires exactly one root_id")
+@@ -2106,7 +2110,7 @@ def scan_catalog(
+     _begin_scan_run(store, run_id, scan_time)
+     try:
+         with store.coalesced_transactions(max_operations=250):
+-            return _scan_catalog_impl(
++            report = _scan_catalog_impl(
+                 config,
+                 store,
+                 dry_run=False,
+@@ -2120,6 +2124,9 @@ def scan_catalog(
+                 scan_run_started=True,
+                 budget=budget,
+             )
++            if on_registered is not None:
++                on_registered(store)
++            return report
+     except Exception:
+         _interrupt_scan_run(store, run_id)
+         raise

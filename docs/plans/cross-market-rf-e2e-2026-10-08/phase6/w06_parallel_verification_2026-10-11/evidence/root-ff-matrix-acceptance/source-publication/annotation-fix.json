@@ -1,0 +1,8 @@
+{
+  "file": "src\\company_wiki\\source_catalog\\operation_contract.py",
+  "before_sha256": "954c6cb5f0955c0246aecb12f62388f27f494dd3681305a1c967dd03bc17dbde",
+  "after_sha256": "580e89da8d3afc9dbacb34c6e6f0837c7e118ca5d0f57b14f946255d3b4491dd",
+  "change": "acquisition = {} -> acquisition: dict[str, Any] = {}",
+  "cause": "Normal mypy contract hook found empty container annotation missing",
+  "runtime_behavior_changed": false
+}

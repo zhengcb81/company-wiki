@@ -1,0 +1,260 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.tmp\\cs-53c5fddfe\\pytest", "requested_basetemp_len": 59, "cwd_len": 71, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+FFFFF.F                                                                  [100%]
+================================== FAILURES ===================================
+_________ test_public_writer_old_annual_does_not_block_next_year[CN] __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000013E9279D400>
+market = 'CN'
+
+    @pytest.mark.parametrize("market", ["CN", "HK", "US"])
+    def test_public_writer_old_annual_does_not_block_next_year(lake, market):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+>       old = ensure(svc, request(market))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:99: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:132: in _ensure
+    acquisition = self.coordinator.select(request, budget=budget, candidate_scope=candidate_scope)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition.py:441: in select
+    self._require_bounded_adapter(adapter)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+adapter = <test_canonical_acquisition_scope.PeriodAdapter object at 0x0000013E9279D550>
+
+    @staticmethod
+    def _require_bounded_adapter(adapter: Any) -> None:
+        if not callable(getattr(adapter, "discover_bounded", None)) or not callable(
+            getattr(adapter, "fetch_bounded", None)
+        ) or not getattr(adapter, "supports_acquisition_budget", False):
+>           raise AcquisitionError(
+                f"adapter {adapter.name} does not support bounded acquisition"
+            )
+E           company_wiki.source_catalog.acquisition.AcquisitionError: adapter scope-fixture does not support bounded acquisition
+
+src\company_wiki\source_catalog\acquisition.py:664: AcquisitionError
+_________ test_public_writer_old_annual_does_not_block_next_year[HK] __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000013E92901BD0>
+market = 'HK'
+
+    @pytest.mark.parametrize("market", ["CN", "HK", "US"])
+    def test_public_writer_old_annual_does_not_block_next_year(lake, market):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+>       old = ensure(svc, request(market))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:99: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:132: in _ensure
+    acquisition = self.coordinator.select(request, budget=budget, candidate_scope=candidate_scope)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition.py:441: in select
+    self._require_bounded_adapter(adapter)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+adapter = <test_canonical_acquisition_scope.PeriodAdapter object at 0x0000013E92902490>
+
+    @staticmethod
+    def _require_bounded_adapter(adapter: Any) -> None:
+        if not callable(getattr(adapter, "discover_bounded", None)) or not callable(
+            getattr(adapter, "fetch_bounded", None)
+        ) or not getattr(adapter, "supports_acquisition_budget", False):
+>           raise AcquisitionError(
+                f"adapter {adapter.name} does not support bounded acquisition"
+            )
+E           company_wiki.source_catalog.acquisition.AcquisitionError: adapter scope-fixture does not support bounded acquisition
+
+src\company_wiki\source_catalog\acquisition.py:664: AcquisitionError
+_________ test_public_writer_old_annual_does_not_block_next_year[US] __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000013E929034D0>
+market = 'US'
+
+    @pytest.mark.parametrize("market", ["CN", "HK", "US"])
+    def test_public_writer_old_annual_does_not_block_next_year(lake, market):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+>       old = ensure(svc, request(market))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:99: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:132: in _ensure
+    acquisition = self.coordinator.select(request, budget=budget, candidate_scope=candidate_scope)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition.py:441: in select
+    self._require_bounded_adapter(adapter)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+adapter = <test_canonical_acquisition_scope.PeriodAdapter object at 0x0000013E92903B10>
+
+    @staticmethod
+    def _require_bounded_adapter(adapter: Any) -> None:
+        if not callable(getattr(adapter, "discover_bounded", None)) or not callable(
+            getattr(adapter, "fetch_bounded", None)
+        ) or not getattr(adapter, "supports_acquisition_budget", False):
+>           raise AcquisitionError(
+                f"adapter {adapter.name} does not support bounded acquisition"
+            )
+E           company_wiki.source_catalog.acquisition.AcquisitionError: adapter scope-fixture does not support bounded acquisition
+
+src\company_wiki\source_catalog\acquisition.py:664: AcquisitionError
+___ test_public_writer_nonannual_cross_period[quarterly_report-Q2-Q3-2024] ____
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000013E928ED5B0>
+kind = 'quarterly_report', old_period = 'Q2', new_period = 'Q3', new_year = 2024
+
+    @pytest.mark.parametrize("kind,old_period,new_period,new_year", [
+        ("quarterly_report", "Q2", "Q3", 2024),
+        ("semi_annual_report", "H1", "H1", 2025),
+    ])
+    def test_public_writer_nonannual_cross_period(lake, kind, old_period, new_period, new_year):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+>       assert ensure(svc, request("HK", 2024, old_period, kind)).status.value == "imported"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:130: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:99: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:132: in _ensure
+    acquisition = self.coordinator.select(request, budget=budget, candidate_scope=candidate_scope)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition.py:441: in select
+    self._require_bounded_adapter(adapter)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+adapter = <test_canonical_acquisition_scope.PeriodAdapter object at 0x0000013E928ED810>
+
+    @staticmethod
+    def _require_bounded_adapter(adapter: Any) -> None:
+        if not callable(getattr(adapter, "discover_bounded", None)) or not callable(
+            getattr(adapter, "fetch_bounded", None)
+        ) or not getattr(adapter, "supports_acquisition_budget", False):
+>           raise AcquisitionError(
+                f"adapter {adapter.name} does not support bounded acquisition"
+            )
+E           company_wiki.source_catalog.acquisition.AcquisitionError: adapter scope-fixture does not support bounded acquisition
+
+src\company_wiki\source_catalog\acquisition.py:664: AcquisitionError
+__ test_public_writer_nonannual_cross_period[semi_annual_report-H1-H1-2025] ___
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000013E927D5F30>
+kind = 'semi_annual_report', old_period = 'H1', new_period = 'H1'
+new_year = 2025
+
+    @pytest.mark.parametrize("kind,old_period,new_period,new_year", [
+        ("quarterly_report", "Q2", "Q3", 2024),
+        ("semi_annual_report", "H1", "H1", 2025),
+    ])
+    def test_public_writer_nonannual_cross_period(lake, kind, old_period, new_period, new_year):
+        adapter = PeriodAdapter()
+        svc = service(lake, adapter)
+>       assert ensure(svc, request("HK", 2024, old_period, kind)).status.value == "imported"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:130: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:99: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:132: in _ensure
+    acquisition = self.coordinator.select(request, budget=budget, candidate_scope=candidate_scope)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition.py:441: in select
+    self._require_bounded_adapter(adapter)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+adapter = <test_canonical_acquisition_scope.PeriodAdapter object at 0x0000013E927D69E0>
+
+    @staticmethod
+    def _require_bounded_adapter(adapter: Any) -> None:
+        if not callable(getattr(adapter, "discover_bounded", None)) or not callable(
+            getattr(adapter, "fetch_bounded", None)
+        ) or not getattr(adapter, "supports_acquisition_budget", False):
+>           raise AcquisitionError(
+                f"adapter {adapter.name} does not support bounded acquisition"
+            )
+E           company_wiki.source_catalog.acquisition.AcquisitionError: adapter scope-fixture does not support bounded acquisition
+
+src\company_wiki\source_catalog\acquisition.py:664: AcquisitionError
+_________ test_local_unknown_diagnostic_survives_pathless_projection __________
+
+lake = <company_wiki.source_catalog.service.SourceCatalog object at 0x0000013E9290E470>
+
+    def test_local_unknown_diagnostic_survives_pathless_projection(lake):
+        source = lake.config.roots[0].path / "Acme" / "2024_annual_report.pdf"
+        source.parent.mkdir()
+        source.write_bytes(pdf_bytes("Acme 2024 report"))
+        lake.scan()
+        adapter = PeriodAdapter()
+>       result = ensure(service(lake, adapter), request(year=2025))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\contract\test_canonical_acquisition_scope.py:163: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\contract\test_canonical_acquisition_scope.py:99: in ensure
+    return svc.ensure(req, budget=AcquisitionBudget.from_limits(
+src\company_wiki\source_catalog\acquisition_service.py:119: in ensure
+    return self._ensure(request, budget=budget, candidate_scope=candidate_scope)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition_service.py:132: in _ensure
+    acquisition = self.coordinator.select(request, budget=budget, candidate_scope=candidate_scope)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\acquisition.py:441: in select
+    self._require_bounded_adapter(adapter)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+adapter = <test_canonical_acquisition_scope.PeriodAdapter object at 0x0000013E9290E8B0>
+
+    @staticmethod
+    def _require_bounded_adapter(adapter: Any) -> None:
+        if not callable(getattr(adapter, "discover_bounded", None)) or not callable(
+            getattr(adapter, "fetch_bounded", None)
+        ) or not getattr(adapter, "supports_acquisition_budget", False):
+>           raise AcquisitionError(
+                f"adapter {adapter.name} does not support bounded acquisition"
+            )
+E           company_wiki.source_catalog.acquisition.AcquisitionError: adapter scope-fixture does not support bounded acquisition
+
+src\company_wiki\source_catalog\acquisition.py:664: AcquisitionError
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_old_annual_does_not_block_next_year[CN]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_old_annual_does_not_block_next_year[HK]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_old_annual_does_not_block_next_year[US]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_nonannual_cross_period[quarterly_report-Q2-Q3-2024]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_public_writer_nonannual_cross_period[semi_annual_report-H1-H1-2025]
+FAILED tests/contract/test_canonical_acquisition_scope.py::test_local_unknown_diagnostic_survives_pathless_projection
+6 failed, 1 passed, 1 warning in 2.41s

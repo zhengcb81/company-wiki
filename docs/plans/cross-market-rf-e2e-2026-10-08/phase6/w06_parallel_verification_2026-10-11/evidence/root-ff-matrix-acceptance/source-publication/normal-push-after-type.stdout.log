@@ -1,0 +1,6 @@
+Push unit scope: affected unit tests (153 paths)
+
+=== affected units and CI contract smoke ===
+====================== 2816 passed in 208.66s (0:03:28) =======================
+
+pre-push gate GREEN ¡ª safe to push (then self-monitor CI).

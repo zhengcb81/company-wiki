@@ -1,0 +1,29 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-75dc98253\\pytest",
+    "tests/unit/test_canonical_scope.py::test_unverified_declaration_cannot_match_or_exclude_even_if_shape_complete",
+    "tests/contract/test_canonical_acquisition_scope.py::test_public_writer_pdf_receipt_with_html_bytes_is_rejected",
+    "tests/contract/test_canonical_acquisition_scope.py::test_failed_explicit_reacquisition_does_not_reactivate_retired_source"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-acquisition-scope-root",
+  "returncode": 1,
+  "elapsed_seconds": 1.894,
+  "environment": "allowlisted platform vars + synthetic HOME/TMP; dotenv disabled; pytest socket guard",
+  "actual_network_calls": 0,
+  "llm_calls": 0,
+  "fee_usd": 0,
+  "test_sha256": {
+    "tests/unit/test_canonical_scope.py::test_unverified_declaration_cannot_match_or_exclude_even_if_shape_complete": "32453803611055b7945d7b26aad40fbb95748fb2d1db1f09c76373d9edf61796",
+    "tests/contract/test_canonical_acquisition_scope.py::test_public_writer_pdf_receipt_with_html_bytes_is_rejected": "c381747468480411310934794730d69d06549be662623cad8a3759a4cd1d9a24",
+    "tests/contract/test_canonical_acquisition_scope.py::test_failed_explicit_reacquisition_does_not_reactivate_retired_source": "c381747468480411310934794730d69d06549be662623cad8a3759a4cd1d9a24"
+  },
+  "scratch_restored": true
+}

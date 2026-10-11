@@ -1,0 +1,225 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final
+configfile: ..\..\..\..\..\..\..\..\pytest.ini
+collected 13 items
+
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py F [  7%]
+FFFFFFFFFFFF                                                             [100%]
+
+================================== FAILURES ===================================
+__ test_public_capture_reuse_and_new_scope[CN-annual_report-FY-FY-2022-2023] __
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:172: in test_public_capture_reuse_and_new_scope
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+__ test_public_capture_reuse_and_new_scope[HK-annual_report-FY-FY-2025-2026] __
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:172: in test_public_capture_reuse_and_new_scope
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+__ test_public_capture_reuse_and_new_scope[US-annual_report-FY-FY-2023-2024] __
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:172: in test_public_capture_reuse_and_new_scope
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+_ test_public_capture_reuse_and_new_scope[HK-quarterly_report-Q1-Q2-2024-2024] _
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:172: in test_public_capture_reuse_and_new_scope
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+_ test_public_capture_reuse_and_new_scope[HK-semi_annual_report-H1-H1-2023-2024] _
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:172: in test_public_capture_reuse_and_new_scope
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+__________ test_legacy_genuine_success_scope_promotes_no_publication __________
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:205: in test_legacy_genuine_success_scope_promotes_no_publication
+    provider, svc, first = legacy(lake, monkeypatch)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:194: in legacy
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+____________ test_legacy_attempt_hash_is_not_a_declaration_receipt ____________
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:224: in test_legacy_attempt_hash_is_not_a_declaration_receipt
+    provider, svc, first = legacy(lake, monkeypatch)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:194: in legacy
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+______________ test_unverified_scanned_sidecar_cannot_be_trusted ______________
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:242: in test_unverified_scanned_sidecar_cannot_be_trusted
+    receipt = provider.fetch_bounded(candidate, lake.config.project_root / "loose", budget())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:114: in fetch_bounded
+    return DownloadReceipt(candidate_id=candidate.candidate_id, provider=candidate.provider,
+<string>:18: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:222: in __post_init__
+    raise ValueError("adapter_version must be semantic version text")
+E   ValueError: adapter_version must be semantic version text
+___________ test_bad_same_size_bytes_cannot_record_successful_reuse ___________
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:266: in test_bad_same_size_bytes_cannot_record_successful_reuse
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+___________ test_same_bytes_two_fiscal_years_reject_without_rewrite ___________
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:284: in test_same_bytes_two_fiscal_years_reject_without_rewrite
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+_______________ test_real_dei_rejects_provider_period_override ________________
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:305: in test_real_dei_rejects_provider_period_override
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+_______ test_callback_failure_rolls_back_new_registration_and_fact_row ________
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:331: in test_callback_failure_rolls_back_new_registration_and_fact_row
+    receipt = provider.fetch_bounded(candidate, writer.staging_root, budget())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:114: in fetch_bounded
+    return DownloadReceipt(candidate_id=candidate.candidate_id, provider=candidate.provider,
+<string>:18: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:222: in __post_init__
+    raise ValueError("adapter_version must be semantic version text")
+E   ValueError: adapter_version must be semantic version text
+__________ test_callback_failure_rolls_back_retirement_reactivation ___________
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:352: in test_callback_failure_rolls_back_retirement_reactivation
+    svc = service(lake, provider)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py:136: in service
+    adapters=AdapterRegistry(cn=provider, hk=provider, us=provider),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<string>:6: in __init__
+    ???
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:257: in __post_init__
+    object.__setattr__(self, "cn", _validate_adapter(self.cn, "cn"))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\_harness_worktrees\w06\cwp-acquisition-scope-root\src\company_wiki\source_catalog\acquisition.py:244: in _validate_adapter
+    raise TypeError(f"{name} must implement DownloadAdapter")
+E   TypeError: cn must implement DownloadAdapter
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_public_capture_reuse_and_new_scope[CN-annual_report-FY-FY-2022-2023]
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_public_capture_reuse_and_new_scope[HK-annual_report-FY-FY-2025-2026]
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_public_capture_reuse_and_new_scope[US-annual_report-FY-FY-2023-2024]
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_public_capture_reuse_and_new_scope[HK-quarterly_report-Q1-Q2-2024-2024]
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_public_capture_reuse_and_new_scope[HK-semi_annual_report-H1-H1-2023-2024]
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_legacy_genuine_success_scope_promotes_no_publication
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_legacy_attempt_hash_is_not_a_declaration_receipt
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_unverified_scanned_sidecar_cannot_be_trusted
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_bad_same_size_bytes_cannot_record_successful_reuse
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_same_bytes_two_fiscal_years_reject_without_rewrite
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_real_dei_rejects_provider_period_override
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_callback_failure_rolls_back_new_registration_and_fact_row
+FAILED ..\..\docs\plans\cross-market-rf-e2e-2026-10-08\phase6\w06_parallel_verification_2026-10-11\evidence\root-ff-matrix-acceptance\independent-source-scope-final\probes.py::test_callback_failure_rolls_back_retirement_reactivation
+======================== 13 failed, 1 warning in 2.48s ========================

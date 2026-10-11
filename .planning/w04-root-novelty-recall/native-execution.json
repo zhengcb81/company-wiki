@@ -1,0 +1,70 @@
+{
+  "schema": "root-w04-native-novelty-execution/1",
+  "verdict": "FAIL_CRITICAL_RECALL",
+  "physical_parse_count": 6,
+  "real_seconds": 77.681,
+  "legacy_all_preserved": true,
+  "source_sha_all_preserved": true,
+  "caps": {
+    "cn-h1": {
+      "selected": 96,
+      "limit": 96
+    },
+    "cn-annual": {
+      "selected": 96,
+      "limit": 96
+    },
+    "cn-ipo": {
+      "selected": 160,
+      "limit": 160
+    },
+    "hk-release": {
+      "selected": 12,
+      "limit": 96
+    },
+    "hk-deck": {
+      "selected": 69,
+      "limit": 96
+    },
+    "us-release": {
+      "selected": 14,
+      "limit": 96
+    }
+  },
+  "bound_fact_recall": {
+    "lpcvd_shipments": false,
+    "prismo_pd5_new_facts": false,
+    "supplier_lead_time_constraint": true,
+    "tungsten_validation_and_repeat_orders": false
+  },
+  "exact_native_original_locators": {
+    "lpcvd_shipments_and_repeat_orders": {
+      "complete": false,
+      "locators": [
+        "loc:v1/page:41/paragraph:19",
+        "loc:v1/page:41/paragraph:20",
+        "loc:v1/page:41/paragraph:21"
+      ]
+    },
+    "supplier_lead_time_constraint": {
+      "complete": true,
+      "locators": [
+        "loc:v1/page:62/paragraph:30",
+        "loc:v1/page:62/paragraph:31",
+        "loc:v1/page:62/paragraph:32"
+      ]
+    },
+    "tungsten_validation_and_repeat_orders": {
+      "complete": false,
+      "locators": [
+        "loc:v1/page:44/paragraph:11",
+        "loc:v1/page:44/paragraph:12",
+        "loc:v1/page:44/paragraph:13",
+        "loc:v1/page:44/paragraph:14",
+        "loc:v1/page:44/paragraph:15"
+      ]
+    }
+  },
+  "paid_http_llm_calls": 0,
+  "next": "common budget quality/fair-share ordering diagnosis; preserve all failures"
+}

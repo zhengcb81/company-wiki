@@ -24,16 +24,16 @@ ROOT新独立工作树 cwp-acquisition-scope-root，从最新master创建；作�
 
 - [x] 封存当前真实8秒复现、41矩阵和actual NULL patch；独立只读定位共因。
 - [x] 独立根因报告已冻结于 root-cause-review/；新工区/函数写集已授权，来源资格设计与真实RED由专属作者执行。
-- [ ] 公共真实writer→prepare/ensure反例：CN/HK/US年度旧2024→新2025；同年Q2→Q3；已验来源没有人工source-fact assertion也应按原入库事实识别非目标。
+- [x] 公共writer行为RED（6FAIL/1正控）已留证；CN/HK/US年度跨期、HK季度和半年度跨期、同期间复用与未知声明均覆盖。
 
 正控：相同期间零下载；冷启动一次下载；新期下载后再次零下载；latest_as_of仍按已有provider元数据规则；已存在目标坏SHA/错误类型/身份冲突与未知publication如实拒绝，不转为重复下载。未验scan侧车不得因伪造capture/acquisition标签成为可信scope。测试全用独立tmp和真实小PDF/HTML/TXT，没有生产配置。
 
 ### B：统一实现与一次集中工程节点
 
-- [ ] 复用 canonical_writer.py 的已验request/candidate/receipt，在一个共用纯边界解析已验来源事实；避免通过增加人工assertion补洞。
-- [ ] local_reconcile.py 先判断可信scope相关性，非目标不进入目标修复/阻断；未知声明仍走原文事实修复。相关来源的事实资格沿既有责任层复用，不重新解析无关旧期资料。
-- [ ] AcquisitionCoordinator保持发现/下载/入库预算和锁；ensure与FF诊断保留具体失败层与原因，不能只有笼统not_found或推断供应商调用。
-- [ ] RED转绿后一次集中受影响单元/集成；覆盖退休/恢复、篡改、schema兼容、scope冲突与真实byte读取。只为具体剩余风险扩测，不能添加逐小节点审查。
+- [x] canonical_writer统一绑定既有request/candidate/receipt并自动保存已验事实；canonical_scope区分MATCH/NOT_RELEVANT/UNKNOWN，没有第二事实库或人工许可。
+- [x] local_reconcile在旧原文解析、身份查询和retired恢复前排除可信非目标；历史提升只认绑定真实成功journal，不提升未知发表日或scan标签。
+- [x] 原预算/锁保留，来源注册/事实/reactivation同事务；复用先SourceReader验真实SHA再写成功journal；pathless local_preparation保留具体原因。
+- [x] 一次191PASS/50.947秒；非作者13PASS/5.13秒与SEC原生加强1PASS/1.67秒。12文件及43作者证据SHA不变，独立scratch全部恢复。
 
 ### C：原矩阵回放与正常发布
 
@@ -46,4 +46,4 @@ ROOT新独立工作树 cwp-acquisition-scope-root，从最新master创建；作�
 
 只创建unique自有scratch，基线不存在就恢复不存在，基线已有文件/空目录均保留。最终关闭全部SQLite/子进程并恢复配置、raw及输出目录。原始失败证据用小JSON/日志或压缩bundle保存，禁止完整数据湖副本和备份恢复演练。secret只允许stat，不读/hash/继承；测试环境用合成HOME/TEMP/假凭证，网络拒绝。
 
-Next Step：专属作者在 cwp-acquisition-scope-root 写公共writer行为RED并冻结，再实施共用scope责任层；ROOT接收后重放原矩阵。整个母PWF未完成。
+Next Step：原41回放已达40/1；单独定位ET→FF的past-cutoff诊断丢失，先共用边界TDD再修，原期望/180秒上限不变。完成后正常并线发布CWP12文件及FF工具；母W04/G2/G4/G5仍开放。

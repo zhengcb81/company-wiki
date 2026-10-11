@@ -1,0 +1,25 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\郑曾波\\Projects\\company-wiki\\.tmp\\cs-53c5fddfe\\pytest",
+    "tests/contract/test_canonical_acquisition_scope.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\cwp-acquisition-scope-root",
+  "returncode": 1,
+  "elapsed_seconds": 2.941,
+  "environment": "allowlisted platform vars + synthetic HOME/TMP; dotenv disabled; pytest socket guard",
+  "actual_network_calls": 0,
+  "llm_calls": 0,
+  "fee_usd": 0,
+  "test_sha256": {
+    "tests/contract/test_canonical_acquisition_scope.py": "84b93f391b7d15811fe3f5097a503e855adddef1a6331a08b28021863495a412"
+  },
+  "scratch_restored": true
+}

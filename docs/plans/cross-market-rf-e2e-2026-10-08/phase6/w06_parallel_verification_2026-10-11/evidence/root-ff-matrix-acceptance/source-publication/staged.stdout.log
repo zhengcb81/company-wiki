@@ -1,0 +1,17 @@
+docs/handoffs/w06-cross-period-acquisition/ROOT-source-acceptance.md
+docs/handoffs/w06-cross-period-acquisition/ROOT-source-scope-fix.md
+docs/handoffs/w06-cross-period-acquisition/author-plan/findings.md
+docs/handoffs/w06-cross-period-acquisition/author-plan/progress.md
+docs/handoffs/w06-cross-period-acquisition/author-plan/task_plan.md
+src/company_wiki/source_catalog/acquisition.py
+src/company_wiki/source_catalog/acquisition_service.py
+src/company_wiki/source_catalog/assertion_service.py
+src/company_wiki/source_catalog/canonical_scope.py
+src/company_wiki/source_catalog/canonical_writer.py
+src/company_wiki/source_catalog/local_reconcile.py
+src/company_wiki/source_catalog/operation_contract.py
+src/company_wiki/source_catalog/operation_projection.py
+src/company_wiki/source_catalog/registration_scope.py
+src/company_wiki/source_catalog/scanner.py
+tests/contract/test_canonical_acquisition_scope.py
+tests/unit/test_canonical_scope.py

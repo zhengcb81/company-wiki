@@ -1,0 +1,13 @@
+ M src/company_wiki/source_catalog/acquisition.py
+ M src/company_wiki/source_catalog/acquisition_service.py
+ M src/company_wiki/source_catalog/assertion_service.py
+ M src/company_wiki/source_catalog/canonical_writer.py
+ M src/company_wiki/source_catalog/local_reconcile.py
+ M src/company_wiki/source_catalog/operation_contract.py
+ M src/company_wiki/source_catalog/operation_projection.py
+ M src/company_wiki/source_catalog/registration_scope.py
+ M src/company_wiki/source_catalog/scanner.py
+?? .planning/w06-cross-period-acquisition/
+?? src/company_wiki/source_catalog/canonical_scope.py
+?? tests/contract/test_canonical_acquisition_scope.py
+?? tests/unit/test_canonical_scope.py

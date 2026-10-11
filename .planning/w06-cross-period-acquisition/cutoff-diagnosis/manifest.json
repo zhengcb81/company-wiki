@@ -1,0 +1,37 @@
+{
+  "schema_version": "cutoff-diagnosis-manifest/1",
+  "verdict": "ROOT_CAUSE_CONFIRMED_NOT_REPAIRED",
+  "input_pre_post_unchanged": true,
+  "cwp_frozen_files": 12,
+  "matrix_bound_modules": 9,
+  "files": [
+    {
+      "path": "capture.ps1",
+      "sha256": "693206c3be35d180df672d178f4e5b7bf7d072f7c4bd08df014db6a5c60a15bf",
+      "bytes": 4515
+    },
+    {
+      "path": "inputs-after.json",
+      "sha256": "f65d779eb5ec868ffd77865005b93e488be79c37253912cab0f32c996fd7a458",
+      "bytes": 18322
+    },
+    {
+      "path": "inputs-before.json",
+      "sha256": "490ad9e57e5e4cd3c59a6efb0eb49857a3dae1a36d2440cc92ddab6423db3b9a",
+      "bytes": 18291
+    },
+    {
+      "path": "report.json",
+      "sha256": "b986de0d6e909441609e6c5e7888f114c85d3a8b637ef285ad6ed1c44140f967",
+      "bytes": 4186
+    },
+    {
+      "path": "report.md",
+      "sha256": "60462dfd9f1af4d8d0e04dd65eb210528892872d89648f243276d3391313a3dc",
+      "bytes": 9565
+    }
+  ],
+  "product_writes": 0,
+  "network_requests": 0,
+  "tests_run": 0
+}

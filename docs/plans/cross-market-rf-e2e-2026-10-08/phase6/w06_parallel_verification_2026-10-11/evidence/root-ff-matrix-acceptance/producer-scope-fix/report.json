@@ -1,0 +1,16 @@
+{
+  "verdict": "AUTHOR_COMPLETE_PENDING_ROOT_ACCEPTANCE",
+  "root_cause": "normal verified capture omitted from repair-only facts channel",
+  "tests_passed": 191,
+  "elapsed_seconds": 50.947,
+  "lint_passed": true,
+  "diff_check_passed": true,
+  "product_files": 12,
+  "freeze_sha256": "1a753dd95c8e897891c48ee5e00e47bde0723a21741aae823af9806619ecdc91",
+  "scratch_restored": true,
+  "actual_network_calls": 0,
+  "llm_calls": 0,
+  "fee_usd": 0,
+  "committed": false,
+  "root_next": "original 41 matrix and non-author final acceptance"
+}
