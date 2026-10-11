@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "ruff_command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "ruff",
+    "check",
+    "scripts/filing_contracts.py",
+    "scripts/fetch_filing.py",
+    "scripts/ff_provider_cause.py",
+    "scripts/ff_v2_envelope.py",
+    "tests/test_w04_failure_observation.py"
+  ],
+  "ruff_exit": 0,
+  "ruff_log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+  "ast_parsed": [
+    "scripts/filing_contracts.py",
+    "scripts/fetch_filing.py",
+    "scripts/ff_provider_cause.py",
+    "scripts/ff_v2_envelope.py",
+    "tests/test_w04_failure_observation.py"
+  ],
+  "git_diff_check_exit": 0,
+  "diff_sha256": "c1b35ab2a2bfc367804ff73bc30718f84896d560f7641d4214296f36414ec1a3",
+  "base_sha256": "e1e3ad8679e21264258e48006786fbf01a6991bd",
+  "elapsed_seconds": 0.6462219000022742
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "w04-rf-normal-push/1",
+  "head": "b7fe04aabe1d2a53b67a385c97161af976031040",
+  "exit_code": 0,
+  "timed_out": false,
+  "elapsed_seconds": 37.4699,
+  "log_sha256": "1fefbac22fbabf9833afe43ac682ee0032a9010c1c5550690d8e2c5b242d15bd",
+  "protected_unchanged": true,
+  "ci": "pending_exact_head_observation"
+}

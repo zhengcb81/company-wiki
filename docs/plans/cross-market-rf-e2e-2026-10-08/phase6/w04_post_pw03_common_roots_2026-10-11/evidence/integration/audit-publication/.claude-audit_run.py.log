@@ -1,0 +1,50 @@
+usage: audit_run.py capture [-h] --run RUN
+                            --role {executor,storage,fetch,process,analyst,expert,coordinator}
+                            [--max-log-bytes MAX_LOG_BYTES]
+                            [--timeout-seconds TIMEOUT_SECONDS]
+                            [--freeze-input FREEZE_INPUT]
+                            [--freeze-arg-index FREEZE_ARG_INDEX]
+                            [--max-input-bytes MAX_INPUT_BYTES]
+                            [--expected-input-sha256 EXPECTED_INPUT_SHA256]
+                            [--stage-timeout-seconds STAGE_TIMEOUT_SECONDS]
+                            [--retention-mode {legacy,cas}]
+                            [--cas-root CAS_ROOT]
+                            [--cas-max-retained-bytes CAS_MAX_RETAINED_BYTES]
+                            [--cas-max-peak-bytes CAS_MAX_PEAK_BYTES]
+                            [--cas-other-owned-bytes CAS_OTHER_OWNED_BYTES]
+                            [--cas-scratch-reserve-bytes CAS_SCRATCH_RESERVE_BYTES]
+                            ...
+
+positional arguments:
+  command
+
+options:
+  -h, --help            show this help message and exit
+  --run RUN
+  --role {executor,storage,fetch,process,analyst,expert,coordinator}
+  --max-log-bytes MAX_LOG_BYTES
+  --timeout-seconds TIMEOUT_SECONDS
+  --freeze-input FREEZE_INPUT
+                        retain this explicit input and replace its argv path
+                        before launching
+  --freeze-arg-index FREEZE_ARG_INDEX
+                        explicit input argv index (executable=0), required for
+                        repeated paths
+  --max-input-bytes MAX_INPUT_BYTES
+                        aggregate byte cap for all explicit input snapshots
+  --expected-input-sha256 EXPECTED_INPUT_SHA256
+                        builder input identity INDEX:SHA256:BYTE_SIZE; checked
+                        while freezing
+  --stage-timeout-seconds STAGE_TIMEOUT_SECONDS
+                        opt-in deadline including freeze, child execution and
+                        postcheck
+  --retention-mode {legacy,cas}
+  --cas-root CAS_ROOT   explicit owned short durable CAS root
+  --cas-max-retained-bytes CAS_MAX_RETAINED_BYTES
+  --cas-max-peak-bytes CAS_MAX_PEAK_BYTES
+  --cas-other-owned-bytes CAS_OTHER_OWNED_BYTES
+                        observed owned baseline excluding the inventoried CAS
+                        root
+  --cas-scratch-reserve-bytes CAS_SCRATCH_RESERVE_BYTES
+                        explicit reservation for
+                        logs/results/SQLite/finalization outside CAS

@@ -1,0 +1,41 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__ test_locale_manifest_and_preserved_declared_language_match_worker_family ___
+
+    def test_locale_manifest_and_preserved_declared_language_match_worker_family():
+        request, body, raw = _valid()
+        bundle, receipt = json.loads(body), json.loads(raw)
+        bundle["source_metadata"]["declared_language"] = "en-US"
+        receipt["manifest"]["language"] = "en-US"
+        body, raw = _resign(request, bundle, receipt)
+>       value = validate_narrative_response(request, body, raw).to_dict()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_w04_public_consumer.py:240: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\company_wiki_narrative_contracts.py:762: in validate_narrative_response
+    return _validated_response(request, body, receipt_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:747: in _validated_response
+    bundle = _bundle(body, request, receipt, manifest)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:484: in _bundle
+    _bundle_contents(bundle, receipt, manifest)
+scripts\company_wiki_narrative_contracts.py:489: in _bundle_contents
+    metadata = _bundle_metadata(bundle, manifest)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:540: in _bundle_metadata
+    _require(metadata["document_kind"] == manifest["document_kind"] and
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, reason = 'bundle_manifest_mismatch'
+
+    def _require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise NarrativeTransportError("blocked", reason)
+E           company_wiki_narrative_contracts.NarrativeTransportError: blocked: bundle_manifest_mismatch
+
+scripts\company_wiki_narrative_contracts.py:76: NarrativeTransportError
+=========================== short test summary info ===========================
+FAILED tests/test_w04_public_consumer.py::test_locale_manifest_and_preserved_declared_language_match_worker_family
+1 failed, 21 deselected in 0.97s

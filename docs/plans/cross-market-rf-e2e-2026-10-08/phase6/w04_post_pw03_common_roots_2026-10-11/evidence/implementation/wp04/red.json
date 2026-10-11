@@ -1,0 +1,32 @@
+{
+  "stage": "RED",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_w04_failure_observation.py"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 4.192559200004325,
+  "source_sha256_before": {
+    "scripts/filing_contracts.py": "3dfe0a3fb2659acad155660b129f1d4adcfa4664ee3a3bf91df7cccf825493ff",
+    "scripts/fetch_filing.py": "6b12ee17ab2a01f1292eacf3598177ca959d2f5ab306c44b772abec6a648d12c",
+    "scripts/ff_provider_cause.py": "966a63d544a7f534e661b163b1b11cdfac07c8965449fe41bf3328a59fe35280",
+    "scripts/ff_v2_envelope.py": "c83b92dddba7cad223f64bc1aa573e88312a0676a85e073e05c43f1b9fae9ed3"
+  },
+  "source_sha256_after": {
+    "scripts/filing_contracts.py": "3dfe0a3fb2659acad155660b129f1d4adcfa4664ee3a3bf91df7cccf825493ff",
+    "scripts/fetch_filing.py": "6b12ee17ab2a01f1292eacf3598177ca959d2f5ab306c44b772abec6a648d12c",
+    "scripts/ff_provider_cause.py": "966a63d544a7f534e661b163b1b11cdfac07c8965449fe41bf3328a59fe35280",
+    "scripts/ff_v2_envelope.py": "c83b92dddba7cad223f64bc1aa573e88312a0676a85e073e05c43f1b9fae9ed3"
+  },
+  "log_sha256": "dd5b4e0eeae45415d798ad19623942ddc15184d0849bd89867385039846b712d",
+  "provider_calls": 0,
+  "model_calls": 0,
+  "cost_usd": "0",
+  "source_modified": false
+}

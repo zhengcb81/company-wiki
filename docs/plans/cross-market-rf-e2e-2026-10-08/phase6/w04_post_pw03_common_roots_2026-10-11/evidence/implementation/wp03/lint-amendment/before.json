@@ -1,0 +1,19 @@
+{
+  "source_files": {
+    "scripts/revenue_backtest.py": {
+      "sha256": "5a047717f28f33da0ff5bb6edf26606efd068f0b950617677f908446a8dced07",
+      "bytes": 30159
+    },
+    "tests/test_w04_public_consumer.py": {
+      "sha256": "fe2a22afa665d9fa7aa8c4834001b9096089810b5840ed44ec1c352be434ce37",
+      "bytes": 16578
+    },
+    "tests/test_w04_snapshot_delivery.py": {
+      "sha256": "5f490f746c96e760086254fdefc6febfd28031cec9e786bc438e1cabbbecd7c1",
+      "bytes": 2108
+    }
+  },
+  "git_index_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.git\\worktrees\\revenue-forecast6\\index",
+  "git_index_sha256": "f5d1226e3dd940b58591fcfe97368137a515623eb38e182b74dbcbd2d3d1d027",
+  "original_handoff_manifest_sha256": "f8caa96ce87de895dbd97057028ce10b74da13d9f3ad9a1e206661c56d4ccda8"
+}

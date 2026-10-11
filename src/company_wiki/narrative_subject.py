@@ -88,6 +88,42 @@ def _validate(value: Any) -> None:
         raise SubjectBindingError("invalid projection as-of date") from None
 
 
+NARRATIVE_SUBJECT_REF_SCHEMA = "narrative-subject-ref/1"
+
+
+@dataclass(frozen=True)
+class NarrativeSubjectRef:
+    """Compact projection identity; only the source resolver proves its lineage."""
+
+    schema_version: str
+    kind: str
+    item_key: str
+    subject_sha256: str
+
+    def __post_init__(self) -> None:
+        if (self.schema_version != NARRATIVE_SUBJECT_REF_SCHEMA
+                or self.kind != "official_json" or not _hash(self.subject_sha256)
+                or self.item_key != _PROJECTION_PREFIX + self.subject_sha256):
+            raise SubjectBindingError("invalid compact projection identity")
+
+    @classmethod
+    def from_dict(cls, value: object) -> NarrativeSubjectRef:
+        if not isinstance(value, dict) or set(value) != {
+            "schema_version", "kind", "item_key", "subject_sha256"
+        }:
+            raise SubjectBindingError("invalid compact projection fields")
+        return cls(**value)
+
+    @classmethod
+    def from_subject(cls, subject: NarrativeSubject) -> NarrativeSubjectRef:
+        return cls(NARRATIVE_SUBJECT_REF_SCHEMA, subject.kind,
+                   subject.item_key, subject.subject_sha256)
+
+    def to_dict(self) -> dict[str, str]:
+        return {"schema_version": self.schema_version, "kind": self.kind,
+                "item_key": self.item_key, "subject_sha256": self.subject_sha256}
+
+
 @dataclass(frozen=True)
 class NarrativeSubject:
     _binding_json: str

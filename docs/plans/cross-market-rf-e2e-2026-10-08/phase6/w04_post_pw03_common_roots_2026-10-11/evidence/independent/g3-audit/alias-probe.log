@@ -1,0 +1,2 @@
+{"probe": "conflicting_alias_caps", "scope_caps": {"max_final_bytes": 4, "final_artifact_bytes": 1000}, "result": {"observed": "builder accepted", "effective": {"final_artifact_bytes": 1000}, "native_observed": {"final_artifact_bytes": 1000}, "expected": "reject conflict or retain minimum 4"}}
+{"temp_cleanup_complete": true}

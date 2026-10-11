@@ -1,0 +1,177 @@
+{
+  "status": "PASS",
+  "stage": "real-FF-public-CLI-to-real-RF-consumer-offline",
+  "elapsed_seconds": 1.38433090000035,
+  "cases": [
+    {
+      "case": "exact_original",
+      "provenance": "sealed_exact",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch\\scripts\\fetch_filing.py",
+        "--request-file",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4ff-w1vb3_ks\\exact_original.json",
+        "--timeout-seconds",
+        "5"
+      ],
+      "exit_code": 2,
+      "request_sha256": "8641d64c47c579740b50cddfe356dbf2d2661414d2c7badd678c860dc4678f41",
+      "stdout_sha256": "72103c1bff9c2f04cc393f233f05249963e48fcfaa02e38acb654710cad4df88",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diagnostic": {
+        "schema_version": "filing-request-diagnostic/1",
+        "reason": "exact_requires_fiscal_year",
+        "field_path": "fiscal_year"
+      },
+      "rf_native_consumer": "resolve_filing_result",
+      "calls": 0,
+      "downloads": 0,
+      "acquisition_usage": "not_emitted",
+      "prior_invoice_cost_usd": null
+    },
+    {
+      "case": "latest_limits_original",
+      "provenance": "sealed_latest_limits",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch\\scripts\\fetch_filing.py",
+        "--request-file",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4ff-w1vb3_ks\\latest_limits_original.json",
+        "--timeout-seconds",
+        "5"
+      ],
+      "exit_code": 2,
+      "request_sha256": "d0409a35f691bd9e3648b3ea96fe17ebfe017005d4e4e5d3a6a09b250a1c31d9",
+      "stdout_sha256": "675a5284ebd39d7581c8a126eb958eb3b71572654e507ba95bac9a9eb1e17de2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diagnostic": {
+        "schema_version": "filing-request-diagnostic/1",
+        "reason": "latest_reuse_requires_acquisition_limits",
+        "field_path": "acquisition_limits"
+      },
+      "rf_native_consumer": "resolve_filing_result",
+      "calls": 0,
+      "downloads": 0,
+      "acquisition_usage": "not_emitted",
+      "prior_invoice_cost_usd": null
+    },
+    {
+      "case": "latest_year_derived",
+      "provenance": "derived_hk_base",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch\\scripts\\fetch_filing.py",
+        "--request-file",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4ff-w1vb3_ks\\latest_year_derived.json",
+        "--timeout-seconds",
+        "5"
+      ],
+      "exit_code": 2,
+      "request_sha256": "d3c44bb15c6d679aebcebd0b22fb839578e08eaf795ce80384b6315c976e9124",
+      "stdout_sha256": "66768389cb71e48d74d3b44a2c96399bd581a8f48fa10cf9c1a48c510c06de60",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diagnostic": {
+        "schema_version": "filing-request-diagnostic/1",
+        "reason": "latest_forbids_fiscal_year",
+        "field_path": "fiscal_year"
+      },
+      "rf_native_consumer": "resolve_filing_result",
+      "calls": 0,
+      "downloads": 0,
+      "acquisition_usage": "not_emitted",
+      "prior_invoice_cost_usd": null
+    },
+    {
+      "case": "invalid_limits_derived",
+      "provenance": "derived_hk_base",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\filing-fetch\\scripts\\fetch_filing.py",
+        "--request-file",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4ff-w1vb3_ks\\invalid_limits_derived.json",
+        "--timeout-seconds",
+        "5"
+      ],
+      "exit_code": 2,
+      "request_sha256": "d923ca67a853d5ff5ce9b2cceb90326ead252f412ef92a740801a41b3eb6c615",
+      "stdout_sha256": "4c814a8a6e1e49e5162b4c99b8f02b1c536cae2789a868b5bae89f76d33caf34",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diagnostic": {
+        "schema_version": "filing-request-diagnostic/1",
+        "reason": "acquisition_limits_invalid",
+        "field_path": "acquisition_limits.max_bytes"
+      },
+      "rf_native_consumer": "resolve_filing_result",
+      "calls": 0,
+      "downloads": 0,
+      "acquisition_usage": "not_emitted",
+      "prior_invoice_cost_usd": null
+    }
+  ],
+  "original_before": {
+    "exact": {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\execution\\source\\request-c02f4ea1a2719b74.json",
+      "sha256": "fd63ecb486be15d516b3c8f524ade6fa976383d94730f147ef9267a759e40e44",
+      "byte_size": 300
+    },
+    "latest_limits": {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\execution\\source\\request-c02f4ea1a2719b74-latest.json",
+      "sha256": "649804bf5d5fb23c90d40b3aa4a39530caaea5199a926904636e8be37c79ddca",
+      "byte_size": 307
+    },
+    "hk_base": {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\execution\\requests\\annual-2025.json",
+      "sha256": "4cf71bdfe26bad67ebffafb23549792acbb07ef15910310cdd2860569d75db9d",
+      "byte_size": 225
+    },
+    "us_sealed_validation": {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\roles\\fetch\\commands\\3929df60fb3e4b71b1e98c256d5310e2\\stdout.txt",
+      "sha256": "4b14731e38d8ed8b1072ddb230f9bd1aa0117d8586caf5f38e0adb38ff0247e3",
+      "byte_size": 5798
+    }
+  },
+  "original_after": {
+    "exact": {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\execution\\source\\request-c02f4ea1a2719b74.json",
+      "sha256": "fd63ecb486be15d516b3c8f524ade6fa976383d94730f147ef9267a759e40e44",
+      "byte_size": 300
+    },
+    "latest_limits": {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\execution\\source\\request-c02f4ea1a2719b74-latest.json",
+      "sha256": "649804bf5d5fb23c90d40b3aa4a39530caaea5199a926904636e8be37c79ddca",
+      "byte_size": 307
+    },
+    "hk_base": {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\execution\\requests\\annual-2025.json",
+      "sha256": "4cf71bdfe26bad67ebffafb23549792acbb07ef15910310cdd2860569d75db9d",
+      "byte_size": 225
+    },
+    "us_sealed_validation": {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\roles\\fetch\\commands\\3929df60fb3e4b71b1e98c256d5310e2\\stdout.txt",
+      "sha256": "4b14731e38d8ed8b1072ddb230f9bd1aa0117d8586caf5f38e0adb38ff0247e3",
+      "byte_size": 5798
+    }
+  },
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4ff-w1vb3_ks",
+  "cleanup": "restored_absent",
+  "model_calls": 0,
+  "provider_calls": 0,
+  "real_acquisition_http_calls": 0,
+  "local_test_cost_usd": "0",
+  "historical_acquisition_cost_usd": null,
+  "rf_consumer_source_sha256": {
+    "scripts/filing_fetch_client.py": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+    "scripts/filing_upstream_cause.py": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95"
+  },
+  "not_executed": [
+    "new GET",
+    "provider download",
+    "research economic acceptance",
+    "historical invoice settlement",
+    "115-byte remote version reconciliation"
+  ]
+}

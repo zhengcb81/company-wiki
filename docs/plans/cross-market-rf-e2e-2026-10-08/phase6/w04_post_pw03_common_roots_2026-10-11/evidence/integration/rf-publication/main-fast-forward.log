@@ -1,0 +1,103 @@
+Updating 47f497ad..b7fe04aa
+Fast-forward
+ .gitattributes                                     |   3 +
+ .planning/w04-wp03-public-consumer/findings.md     | Bin 0 -> 309 bytes
+ .planning/w04-wp03-public-consumer/green-final.log | Bin 0 -> 275 bytes
+ .../w04-wp03-public-consumer/green-final2.log      | Bin 0 -> 275 bytes
+ .../w04-wp03-public-consumer/green-final3.log      | Bin 0 -> 275 bytes
+ .planning/w04-wp03-public-consumer/green1.log      | Bin 0 -> 1704 bytes
+ .planning/w04-wp03-public-consumer/green2.log      | Bin 0 -> 4487 bytes
+ .planning/w04-wp03-public-consumer/green3.log      | Bin 0 -> 183 bytes
+ .planning/w04-wp03-public-consumer/green4.log      | Bin 0 -> 5516 bytes
+ .planning/w04-wp03-public-consumer/green5.log      | Bin 0 -> 193 bytes
+ .planning/w04-wp03-public-consumer/green6.log      | Bin 0 -> 101 bytes
+ .../lint-amendment/AMENDMENT_RECEIPT.md            | Bin 0 -> 2904 bytes
+ .../lint-amendment/artifact-manifest.json          | Bin 0 -> 8883 bytes
+ .../lint-amendment/ast-semantic-check.json         | Bin 0 -> 609 bytes
+ .../lint-amendment/check-results.json              | Bin 0 -> 2589 bytes
+ .../lint-amendment/diff-check.log                  | Bin
+ .../lint-amendment/lint-amendment.diff             | Bin 0 -> 2003 bytes
+ .../lint-amendment/mypy.log                        | Bin 0 -> 45 bytes
+ .../lint-amendment/owned-temp-cleanup.json         | Bin 0 -> 211 bytes
+ .../lint-amendment/pytest.log                      | Bin 0 -> 101 bytes
+ .../lint-amendment/ruff.log                        | Bin 0 -> 19 bytes
+ .../lint-amendment/source-amendment.json           | Bin 0 -> 1283 bytes
+ .planning/w04-wp03-public-consumer/progress.md     | Bin 0 -> 878 bytes
+ .planning/w04-wp03-public-consumer/red.log         | Bin 0 -> 12494 bytes
+ .planning/w04-wp03-public-consumer/red2.log        | Bin 0 -> 3580 bytes
+ .planning/w04-wp03-public-consumer/red3.log        | Bin 0 -> 2969 bytes
+ .planning/w04-wp03-public-consumer/red4.log        | Bin 0 -> 2379 bytes
+ .../root_acceptance/intake.json                    | Bin 0 -> 4343 bytes
+ .../lint-amendment/AMENDMENT_RECEIPT.md            | Bin 0 -> 2904 bytes
+ .../lint-amendment/artifact-manifest.json          | Bin 0 -> 8883 bytes
+ .../lint-amendment/ast-semantic-check.json         | Bin 0 -> 609 bytes
+ .../root_acceptance/lint-amendment/before.json     | Bin 0 -> 817 bytes
+ .../lint-amendment/check-results.json              | Bin 0 -> 2589 bytes
+ .../root_acceptance/lint-amendment/codegraph.json  | Bin 0 -> 1113 bytes
+ .../root_acceptance/lint-amendment/diff-check.log  | Bin
+ .../lint-amendment/lint-amendment.diff             | Bin 0 -> 2003 bytes
+ .../root_acceptance/lint-amendment/mypy.log        | Bin 0 -> 45 bytes
+ .../lint-amendment/owned-temp-cleanup.json         | Bin 0 -> 211 bytes
+ .../root_acceptance/lint-amendment/pytest.log      | Bin 0 -> 101 bytes
+ .../lint-amendment/reexport-reference-check.json   | Bin 0 -> 282 bytes
+ .../root_acceptance/lint-amendment/ruff.log        | Bin 0 -> 19 bytes
+ .../lint-amendment/source-amendment.json           | Bin 0 -> 1283 bytes
+ .../root_acceptance/review.json                    | Bin 0 -> 12833 bytes
+ .../root_acceptance/review.md                      | Bin 0 -> 4128 bytes
+ .planning/w04-wp03-public-consumer/task_plan.md    | Bin 0 -> 160 bytes
+ scripts/company_wiki_narrative_contracts.py        | 316 +++++++++++++++++++--
+ scripts/company_wiki_narrative_reader.py           |   2 +-
+ scripts/filing_fetch_client.py                     |   8 +-
+ scripts/filing_upstream_cause.py                   |  25 ++
+ scripts/revenue_backtest.py                        |  24 +-
+ scripts/source_narrative_context.py                |  62 +++-
+ scripts/source_preparation.py                      |  43 ++-
+ tests/test_w04_public_consumer.py                  | 267 +++++++++++++++++
+ tests/test_w04_snapshot_delivery.py                |  48 ++++
+ 54 files changed, 742 insertions(+), 56 deletions(-)
+ create mode 100644 .planning/w04-wp03-public-consumer/findings.md
+ create mode 100644 .planning/w04-wp03-public-consumer/green-final.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green-final2.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green-final3.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green1.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green2.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green3.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green4.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green5.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green6.log
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/AMENDMENT_RECEIPT.md
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/artifact-manifest.json
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/ast-semantic-check.json
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/check-results.json
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/diff-check.log
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/lint-amendment.diff
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/mypy.log
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/owned-temp-cleanup.json
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/pytest.log
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/ruff.log
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/source-amendment.json
+ create mode 100644 .planning/w04-wp03-public-consumer/progress.md
+ create mode 100644 .planning/w04-wp03-public-consumer/red.log
+ create mode 100644 .planning/w04-wp03-public-consumer/red2.log
+ create mode 100644 .planning/w04-wp03-public-consumer/red3.log
+ create mode 100644 .planning/w04-wp03-public-consumer/red4.log
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/intake.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/AMENDMENT_RECEIPT.md
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/artifact-manifest.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/ast-semantic-check.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/before.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/check-results.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/codegraph.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/diff-check.log
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/lint-amendment.diff
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/mypy.log
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/owned-temp-cleanup.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/pytest.log
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/reexport-reference-check.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/ruff.log
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/source-amendment.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/review.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/review.md
+ create mode 100644 .planning/w04-wp03-public-consumer/task_plan.md
+ create mode 100644 tests/test_w04_public_consumer.py
+ create mode 100644 tests/test_w04_snapshot_delivery.py

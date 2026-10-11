@@ -1,0 +1,51 @@
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy public contracts (FC-1204-c, mirrors CI).........................................Passed
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[codex/w04-rf-public-consumer-20261011 b7fe04aa] fix(rf): consume compact narrative lineage and native snapshots
+ 54 files changed, 742 insertions(+), 56 deletions(-)
+ create mode 100644 .planning/w04-wp03-public-consumer/findings.md
+ create mode 100644 .planning/w04-wp03-public-consumer/green-final.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green-final2.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green-final3.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green1.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green2.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green3.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green4.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green5.log
+ create mode 100644 .planning/w04-wp03-public-consumer/green6.log
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/AMENDMENT_RECEIPT.md
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/artifact-manifest.json
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/ast-semantic-check.json
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/check-results.json
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/diff-check.log
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/lint-amendment.diff
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/mypy.log
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/owned-temp-cleanup.json
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/pytest.log
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/ruff.log
+ create mode 100644 .planning/w04-wp03-public-consumer/lint-amendment/source-amendment.json
+ create mode 100644 .planning/w04-wp03-public-consumer/progress.md
+ create mode 100644 .planning/w04-wp03-public-consumer/red.log
+ create mode 100644 .planning/w04-wp03-public-consumer/red2.log
+ create mode 100644 .planning/w04-wp03-public-consumer/red3.log
+ create mode 100644 .planning/w04-wp03-public-consumer/red4.log
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/intake.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/AMENDMENT_RECEIPT.md
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/artifact-manifest.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/ast-semantic-check.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/before.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/check-results.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/codegraph.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/diff-check.log
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/lint-amendment.diff
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/mypy.log
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/owned-temp-cleanup.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/pytest.log
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/reexport-reference-check.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/ruff.log
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/lint-amendment/source-amendment.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/review.json
+ create mode 100644 .planning/w04-wp03-public-consumer/root_acceptance/review.md
+ create mode 100644 .planning/w04-wp03-public-consumer/task_plan.md
+ create mode 100644 tests/test_w04_public_consumer.py
+ create mode 100644 tests/test_w04_snapshot_delivery.py

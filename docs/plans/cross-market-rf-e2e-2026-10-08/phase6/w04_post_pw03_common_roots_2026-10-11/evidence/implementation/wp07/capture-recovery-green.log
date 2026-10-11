@@ -1,0 +1,18 @@
+test_builder_digest_mismatch_rejects_the_frozen_bytes (test_w04_capture_runtime.RootCaptureRuntimeTests.test_builder_digest_mismatch_rejects_the_frozen_bytes) ... ok
+test_capture_mismatch_does_not_start_child (test_w04_capture_runtime.RootCaptureRuntimeTests.test_capture_mismatch_does_not_start_child) ... ok
+test_cas_child_mutation_is_diagnostic_and_private_copy_is_cleaned (test_w04_capture_runtime.RootCaptureRuntimeTests.test_cas_child_mutation_is_diagnostic_and_private_copy_is_cleaned) ... ok
+test_cas_expected_mismatch_preserves_actual_failed_input (test_w04_capture_runtime.RootCaptureRuntimeTests.test_cas_expected_mismatch_preserves_actual_failed_input) ... ok
+test_cas_freeze_has_private_mutable_copy_and_resolvable_history (test_w04_capture_runtime.RootCaptureRuntimeTests.test_cas_freeze_has_private_mutable_copy_and_resolvable_history) ... ok
+test_cas_physical_peak_failure_does_not_start_child_or_erase_history (test_w04_capture_runtime.RootCaptureRuntimeTests.test_cas_physical_peak_failure_does_not_start_child_or_erase_history) ... ok
+test_cas_seal_deadline_reports_timeout_and_cleans_private_copy (test_w04_capture_runtime.RootCaptureRuntimeTests.test_cas_seal_deadline_reports_timeout_and_cleans_private_copy) ... ok
+test_cas_two_captures_reuse_one_blob_but_clean_each_private_copy (test_w04_capture_runtime.RootCaptureRuntimeTests.test_cas_two_captures_reuse_one_blob_but_clean_each_private_copy) ... ok
+test_cleanup_failure_preserves_primary_and_records_recoverable_paths (test_w04_capture_runtime.RootCaptureRuntimeTests.test_cleanup_failure_preserves_primary_and_records_recoverable_paths) ... ok
+test_equal_builder_digest_records_actual_frozen_input (test_w04_capture_runtime.RootCaptureRuntimeTests.test_equal_builder_digest_records_actual_frozen_input) ... ok
+test_expired_stage_deadline_does_not_start_child (test_w04_capture_runtime.RootCaptureRuntimeTests.test_expired_stage_deadline_does_not_start_child) ... ok
+test_expiry_after_freeze_is_checked_before_launch (test_w04_capture_runtime.RootCaptureRuntimeTests.test_expiry_after_freeze_is_checked_before_launch) ... ok
+test_legacy_defaults_keep_private_copy_and_frozen_history (test_w04_capture_runtime.RootCaptureRuntimeTests.test_legacy_defaults_keep_private_copy_and_frozen_history) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.143s
+
+OK

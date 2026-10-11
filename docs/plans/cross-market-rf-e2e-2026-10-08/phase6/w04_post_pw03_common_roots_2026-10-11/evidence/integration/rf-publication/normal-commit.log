@@ -1,0 +1,107 @@
+ruff check (WU-1.2, mirrors CI).......................................................Failed
+- hook id: ruff
+- exit code: 1
+
+F401 [*] `revenue_core.ENGINE_VERSION` imported but unused
+  --> scripts\revenue_backtest.py:18:5
+   |
+16 | from revenue_core import (
+17 |     ForecastInputError,
+18 |     ENGINE_VERSION,
+   |     ^^^^^^^^^^^^^^
+19 |     FORECAST_SCHEMA_VERSION,
+20 |     SUPPORTED_FORECAST_SCHEMA_VERSIONS,
+   |
+help: Remove unused import
+
+F401 [*] `revenue_core.FORECAST_SCHEMA_VERSION` imported but unused
+  --> scripts\revenue_backtest.py:19:5
+   |
+17 |     ForecastInputError,
+18 |     ENGINE_VERSION,
+19 |     FORECAST_SCHEMA_VERSION,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^
+20 |     SUPPORTED_FORECAST_SCHEMA_VERSIONS,
+21 |     calculate_cagr,
+   |
+help: Remove unused import
+
+Found 2 errors.
+[*] 2 fixable with the `--fix` option.
+E402 Module level import not at top of file
+  --> tests\test_w04_snapshot_delivery.py:10:1
+   |
+ 8 | ROOT = Path(__file__).resolve().parents[1]
+ 9 | sys.path.insert(0, str(ROOT / "scripts"))
+10 | from revenue_backtest import create_snapshot, validate_snapshot, write_new_json
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+11 | from test_recognition_bridge import forecast_document
+12 | from revenue_core import canonical_sha256
+   |
+
+E402 Module level import not at top of file
+  --> tests\test_w04_snapshot_delivery.py:11:1
+   |
+ 9 | sys.path.insert(0, str(ROOT / "scripts"))
+10 | from revenue_backtest import create_snapshot, validate_snapshot, write_new_json
+11 | from test_recognition_bridge import forecast_document
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+12 | from revenue_core import canonical_sha256
+13 | from publication_registry import _read_entries
+   |
+
+E402 Module level import not at top of file
+  --> tests\test_w04_snapshot_delivery.py:12:1
+   |
+10 | from revenue_backtest import create_snapshot, validate_snapshot, write_new_json
+11 | from test_recognition_bridge import forecast_document
+12 | from revenue_core import canonical_sha256
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+13 | from publication_registry import _read_entries
+   |
+
+E402 Module level import not at top of file
+  --> tests\test_w04_snapshot_delivery.py:13:1
+   |
+11 | from test_recognition_bridge import forecast_document
+12 | from revenue_core import canonical_sha256
+13 | from publication_registry import _read_entries
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+
+Found 4 errors.
+E402 Module level import not at top of file
+  --> tests\test_w04_public_consumer.py:13:1
+   |
+11 |   ROOT = Path(__file__).resolve().parents[1]
+12 |   sys.path.insert(0, str(ROOT / "scripts"))
+13 | / from company_wiki_narrative_contracts import (NarrativeTransportError, canonical_bytes,
+14 | |     validate_narrative_request, validate_narrative_response, validate_reference_response)
+   | |_________________________________________________________________________________________^
+15 |   from filing_upstream_cause import failure_observation
+16 |   from test_company_wiki_narrative_reader import _valid, _resign
+   |
+
+E402 Module level import not at top of file
+  --> tests\test_w04_public_consumer.py:15:1
+   |
+13 | from company_wiki_narrative_contracts import (NarrativeTransportError, canonical_bytes,
+14 |     validate_narrative_request, validate_narrative_response, validate_reference_response)
+15 | from filing_upstream_cause import failure_observation
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+16 | from test_company_wiki_narrative_reader import _valid, _resign
+   |
+
+E402 Module level import not at top of file
+  --> tests\test_w04_public_consumer.py:16:1
+   |
+14 |     validate_narrative_request, validate_narrative_response, validate_reference_response)
+15 | from filing_upstream_cause import failure_observation
+16 | from test_company_wiki_narrative_reader import _valid, _resign
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+
+Found 3 errors.
+
+mypy public contracts (FC-1204-c, mirrors CI).........................................Passed
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed

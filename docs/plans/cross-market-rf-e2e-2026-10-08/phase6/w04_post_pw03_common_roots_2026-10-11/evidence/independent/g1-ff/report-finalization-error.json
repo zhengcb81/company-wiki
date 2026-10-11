@@ -1,0 +1,12 @@
+{
+  "schema_version": "w04-review-tooling-error/1",
+  "phase": "report evidence-manifest finalization after all probes and cleanup",
+  "first_exec_exit_code": 1,
+  "error_type": "FileNotFoundError",
+  "cause": "report helper prepended \\?\\ to an already prefixed Windows long path while enumerating report files",
+  "first_exec_chunk": "69d62a",
+  "product_or_probe_failure": false,
+  "recovery": "metadata helper normalizes existing prefix; finalization only, no probe rerun",
+  "preserved_probe_log_sha256": "a1ddea63c91ed7f2b24c6fc9c203168802855bd6dc91ee77327589753473020a",
+  "owned_temp_still_absent": true
+}

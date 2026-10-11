@@ -1,0 +1,37 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 35.35423859999719,
+  "log_sha256": "6bbcc034fed1f9fffb45e0b8c256331852af5203f71f161658536b65d5302c6f",
+  "source_before": {
+    "skills\\revenue-forecast-audit\\scripts\\audit_run.py": "95b6951df70a841dee00db6c92c5cb45fb60806afe10c613070219da97923876",
+    "skills\\revenue-forecast-audit\\scripts\\audit_blob_store.py": "1dacc2aaba8fddd82ea951b9613410f6868f53586aaa087c8d5b0ff18a95ceaa",
+    "skills\\revenue-forecast-audit\\scripts\\execution_request.py": "de806ddeb70e5c751cd8caf1a747651ff6ce004805e9cbd5980ba4e77fb3294a",
+    "skills\\revenue-forecast-audit\\scripts\\audit_contracts.py": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+    "skills\\revenue-forecast-audit\\scripts\\document_status_join.py": "68f8799188218396bbad497e0fc54c19365a423d5bb8e3c8977fd4ebe103d85a",
+    "skills\\revenue-forecast-audit\\scripts\\authoring_provenance.py": "1bfd8a05fdf172550750f12d75850a5967e85c94ffa450531e9e4180ec7d3ae3"
+  },
+  "source_after": {
+    "skills\\revenue-forecast-audit\\scripts\\audit_run.py": "95b6951df70a841dee00db6c92c5cb45fb60806afe10c613070219da97923876",
+    "skills\\revenue-forecast-audit\\scripts\\audit_blob_store.py": "1dacc2aaba8fddd82ea951b9613410f6868f53586aaa087c8d5b0ff18a95ceaa",
+    "skills\\revenue-forecast-audit\\scripts\\execution_request.py": "de806ddeb70e5c751cd8caf1a747651ff6ce004805e9cbd5980ba4e77fb3294a",
+    "skills\\revenue-forecast-audit\\scripts\\audit_contracts.py": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+    "skills\\revenue-forecast-audit\\scripts\\document_status_join.py": "68f8799188218396bbad497e0fc54c19365a423d5bb8e3c8977fd4ebe103d85a",
+    "skills\\revenue-forecast-audit\\scripts\\authoring_provenance.py": "1bfd8a05fdf172550750f12d75850a5967e85c94ffa450531e9e4180ec7d3ae3"
+  },
+  "source_unchanged": true,
+  "provider_calls": 0,
+  "observed_at": "2026-10-11T04:23:11.931250+00:00",
+  "scope": "W04 changed audit recorder and P7 helpers default backward compatibility major G3; not company research acceptance"
+}

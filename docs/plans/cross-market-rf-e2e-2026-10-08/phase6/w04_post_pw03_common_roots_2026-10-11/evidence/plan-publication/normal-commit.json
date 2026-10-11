@@ -1,0 +1,206 @@
+{
+  "observed_at": "2026-10-11T04:04:25.986360+00:00",
+  "command": [
+    "git",
+    "commit"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 1.1689043000005768,
+  "head": "3d540797fd6e373bcae1409cc04e7a4ea0afc1c2",
+  "paths": 45,
+  "byteproof_count": 38,
+  "staged_exact_bytes": [
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/closed-review-publication/canonical-ff.json",
+      "sha256": "990d5666a4b328842d13e1893322ce42b6f33b80cb4626de43ff953ebe81b9c5",
+      "byte_size": 902
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/closed-review-publication/normal-commit.json",
+      "sha256": "f10265b5a47d92bf804cf0cfc2ac0e739d94838707ffcc73da23b741c86427b2",
+      "byte_size": 15821
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/closed-review-publication/normal-commit.log",
+      "sha256": "799747d0c6df1eff58a3971c092cbb67bedd73cf930811dcf6ffe529d279cdef",
+      "byte_size": 10136
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/closed-review-publication/normal-push.json",
+      "sha256": "073cc07f2c848959804285d7d6643d0de7335423bc81138da3adda87e7568d26",
+      "byte_size": 480
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/closed-review-publication/normal-push.log",
+      "sha256": "8a57107d089f6ed1871b592c480664df692543daa018971d2a82670f5afec607",
+      "byte_size": 327
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/root-w04-support-dispatch.json",
+      "sha256": "14f3c5870efc32eb27828707c16cc18bb3a34f1e2a5a6c20e7e0318451f45f4f",
+      "byte_size": 1111
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/root-w04-support-intake.json",
+      "sha256": "82a1aa5a1fa8337c169d21da09a51fb309f45c28a5a29445583aa52f6899969c",
+      "byte_size": 1005
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/root-worktree-baseline-preflight-error.json",
+      "sha256": "3ad401e341f165d1837ec1791ad3cae2b502cef188d1c1d894c1e197e95b3be2",
+      "byte_size": 847
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/root-worktree-baseline-reuse.json",
+      "sha256": "04c65290a903ebc4b44677c918861d8823cd1305b0f4dd36c46d3f852e0bff58",
+      "byte_size": 951
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/w04-config-readonly/handoff.json",
+      "sha256": "6b8964de31377bd8e6b5c326fe94279e78e73317e3383cf27d39a28e908cf9a8",
+      "byte_size": 10108
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/ROOT_EXECUTION_OVERLAY.md",
+      "sha256": "82b8596ddde2dc8a733c9a339284402407fb407bc971d2cb34aa04087732c509",
+      "byte_size": 6192
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/coverage.json",
+      "sha256": "3a189e4e6a6c1768d1c5cf939146acfbfb2be746bf1f5d22d7eef9b322aff116",
+      "byte_size": 698886
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/event_manifest_checks.json",
+      "sha256": "1caa53ab8cc876a4006124e85c83660ffc7bb730e6159fa075ec8fbaeab3eb44",
+      "byte_size": 13875
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/expert_tool_errors.json",
+      "sha256": "7c2d4219365b7ea084924bf539ccb4b00c6861f26f8b84724e055f0da9750718",
+      "byte_size": 1745
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/hk_raw2_retention_plan.json",
+      "sha256": "aaeddfc5cae082d62b7b93f2e8981bf279473493e21a52717460d259ca955b88",
+      "byte_size": 2627
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/input_read_manifest.json",
+      "sha256": "3b68896b58d0e79d2370c6ed1a24f85871d03beb234a7bbd9ff21b8e0fe12259",
+      "byte_size": 12553
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/native_contract_reads.json",
+      "sha256": "9f3d02aaa859d9311cb8d4674083b6c23b58065a56bcebc741d9999e6a8f6f46",
+      "byte_size": 8686
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/plan_validation.json",
+      "sha256": "852cae020f86fdb12ba87f2efffd09236802b736ff7346f42bd43874f4d3d933",
+      "byte_size": 850
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/root-implementation-branches.json",
+      "sha256": "2ee1f4a2f6aad37a7abc5f9ba25200a128b099d8261debdd6b9f2e334ff06cdc",
+      "byte_size": 899
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/root-plan-acceptance.json",
+      "sha256": "eb2b9b7a60e1275fd9afcec5a5e307718ab2bf30c90d980041ad77f51f93d4a1",
+      "byte_size": 1111
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/root-plan-intake.json",
+      "sha256": "78fa838735a5c1eccce1fc69f79eaae6c6beb7ebfc5e09f6ef4807e41a13c62f",
+      "byte_size": 1164
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/root-plan-interface-review/REVIEW.md",
+      "sha256": "0190a7c91dc04c12655e95411c85ca7c8758ad568ebd806bac9508de0d967198",
+      "byte_size": 7867
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/root-plan-interface-review/review.json",
+      "sha256": "a5a63674d18ccc14fe74153b2860cbd0bd3612651c3400618baa24ca062b332d",
+      "byte_size": 20101
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/findings.md",
+      "sha256": "0416f10e2d622619ae1cdbdf30d14bc01af001d5a95e70b3bef71aa25ab8acc6",
+      "byte_size": 5405
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/handoff.json",
+      "sha256": "cdc7f015d2e162ad9478a2be6fc05f06f69d3c5f208b02f870040c12bea0fef6",
+      "byte_size": 11919
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/implementation_details.md",
+      "sha256": "d196b886510f789dfb9282e067aa39b455a502a5ee2dddc55ea6fcd0d8c911ee",
+      "byte_size": 27330
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/progress.md",
+      "sha256": "fe107525e36f1c1d9447a516a0b0697e3a4c40c0cc85a9dcfe9d273d41fd19a0",
+      "byte_size": 1491
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/root_causes.json",
+      "sha256": "9cde25df26497eece6c8163c0eb900c3ddf695c97d8741e4253e254015d0b336",
+      "byte_size": 77051
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/task_plan.md",
+      "sha256": "e1ba786936560309d4275cddcd85717b3c246579adf9fc2896aad48b05ce1bb1",
+      "byte_size": 2899
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/test_matrix.md",
+      "sha256": "894955db59dc14f9a29322d216b505fbb52dc86d18ff25c2fe7e997beb860e32",
+      "byte_size": 8945
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/OWNER_MATRIX.json",
+      "sha256": "307eb384d7313659d17dd78c3bd2cb2c826bef44c7d5c59407e8b101ba9dec56",
+      "byte_size": 13841
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP01.md",
+      "sha256": "ca457ac34d5c8866ca8838612e0c58f88db2525a6b3e8233e4cf55a7660154f5",
+      "byte_size": 6918
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP02.md",
+      "sha256": "42d21847c2a51a93450c0c610cb8623d2f92bd3a14cf40a3069a52f1ced3684b",
+      "byte_size": 7510
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP03.md",
+      "sha256": "124077b2ecadddeef97ba1f28348a71a70703acdbf99659389772ed24d14f204",
+      "byte_size": 9460
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP04.md",
+      "sha256": "dde57f6449174025936c28bb4cd19675b5bfc382bde96ac0fe2c296a3879c1e0",
+      "byte_size": 8074
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP05.md",
+      "sha256": "e3c9e683672b3a425efc4b67532b86cba42bee99a27188e965ecb873837f27b6",
+      "byte_size": 14373
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP06.md",
+      "sha256": "7a399659beb77e8bb680bd8a453cba993b95e4830e5dda1402c63b4e0cc38b8c",
+      "byte_size": 12174
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP07.md",
+      "sha256": "f988653a155b4c41b7fa0e684fd09116f53774dfa7442b9cfc7d446a63b083ea",
+      "byte_size": 21511
+    }
+  ],
+  "log_sha256": "adde2b0cf486166c622d38d849cb5a5049cc8ca0db50a82745e44d7aebff194f",
+  "normal_hooks": true
+}

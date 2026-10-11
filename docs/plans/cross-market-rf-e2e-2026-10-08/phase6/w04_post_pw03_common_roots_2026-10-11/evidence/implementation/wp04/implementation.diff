@@ -1,0 +1,404 @@
+diff --git a/scripts/fetch_filing.py b/scripts/fetch_filing.py
+index 83211cc..1510dae 100644
+--- a/scripts/fetch_filing.py
++++ b/scripts/fetch_filing.py
+@@ -1790,6 +1790,7 @@ def main(argv: list[str] | None = None) -> int:
+                 stage=exc.stage,
+                 attempts=exc.attempts,
+                 acquisition_observation=exc.acquisition_observation,
++                request_diagnostic=exc.request_diagnostic,
+             )
+             json.dump(output, sys.stdout, ensure_ascii=False, indent=2)
+             sys.stdout.write("\n")
+@@ -1827,6 +1828,9 @@ def main(argv: list[str] | None = None) -> int:
+             error_response["upstream_cause"] = exc.upstream_cause
+         if exc.acquisition_failure is not None:
+             error_response["acquisition_failure"] = exc.acquisition_failure
++        diagnostic = ff_provider_cause.validated_request_diagnostic(exc.request_diagnostic)
++        if diagnostic is not None:
++            error_response["request_diagnostic"] = diagnostic
+         if "stats" in locals():
+             error_response["calls"] = stats["calls"]
+             error_response["downloads"] = stats["downloads"]
+diff --git a/scripts/ff_provider_cause.py b/scripts/ff_provider_cause.py
+index 013ccaa..d954252 100644
+--- a/scripts/ff_provider_cause.py
++++ b/scripts/ff_provider_cause.py
+@@ -38,6 +38,39 @@ from decimal import Decimal, InvalidOperation
+ from typing import Any
+ 
+ UPSTREAM_CAUSE_SCHEMA_VERSION = "filing-upstream-cause/1"
++REQUEST_DIAGNOSTIC_SCHEMA = "filing-request-diagnostic/1"
++REQUEST_DIAGNOSTIC_PATHS = {
++    "exact_requires_fiscal_year": frozenset({"fiscal_year"}),
++    "latest_forbids_fiscal_year": frozenset({"fiscal_year"}),
++    "latest_reuse_requires_acquisition_limits": frozenset({"acquisition_limits"}),
++    "acquisition_limits_invalid": frozenset({
++        "acquisition_limits", "acquisition_limits.max_bytes",
++        "acquisition_limits.timeout_seconds", "acquisition_limits.max_cost_usd",
++    }),
++}
++
++
++def validated_request_diagnostic(value: Any) -> dict[str, Any] | None:
++    """Copy an optional closed request sibling without inspecting error text."""
++    if not isinstance(value, dict) or set(value) != {"schema_version", "reason", "field_path"}:
++        return None
++    if value["schema_version"] != REQUEST_DIAGNOSTIC_SCHEMA or not isinstance(value["reason"], str):
++        return None
++    paths = REQUEST_DIAGNOSTIC_PATHS.get(value["reason"])
++    if paths is None or not isinstance(value["field_path"], str) or value["field_path"] not in paths:
++        return None
++    return dict(value)
++
++
++def build_request_diagnostic(reason: str, field_path: str) -> dict[str, Any]:
++    """Build only a named validator outcome; never copy request or provider data."""
++    value = validated_request_diagnostic({
++        "schema_version": REQUEST_DIAGNOSTIC_SCHEMA, "reason": reason, "field_path": field_path,
++    })
++    if value is None:
++        raise ValueError("unsupported request diagnostic reason or field path")
++    return value
++
+ OPERATIONS = frozenset({"identify", "ensure", "resolve", "close-gap", "query", "local_prepare"})
+ CAUSE_KEYS = frozenset(
+     {
+@@ -430,6 +463,10 @@ def validated_cause(value: Any) -> dict[str, Any] | None:
+ 
+ __all__ = [
+     "UPSTREAM_CAUSE_SCHEMA_VERSION",
++    "REQUEST_DIAGNOSTIC_SCHEMA",
++    "REQUEST_DIAGNOSTIC_PATHS",
++    "build_request_diagnostic",
++    "validated_request_diagnostic",
+     "ACQUISITION_FAILURE_CODES",
+     "ACQUISITION_OBSERVATION_SCHEMA",
+     "validated_acquisition_observation",
+diff --git a/scripts/ff_v2_envelope.py b/scripts/ff_v2_envelope.py
+index e704df2..5d6b937 100644
+--- a/scripts/ff_v2_envelope.py
++++ b/scripts/ff_v2_envelope.py
+@@ -11,6 +11,7 @@ from ff_provider_cause import (
+     validated_acquisition_failure,
+     validated_acquisition_observation,
+     validated_cause,
++    validated_request_diagnostic,
+ )
+ 
+ 
+@@ -172,9 +173,13 @@ def error_envelope(
+     stage: str | None = None,
+     attempts: int | None = None,
+     acquisition_observation: dict[str, Any] | None = None,
++    request_diagnostic: dict[str, Any] | None = None,
+ ) -> dict[str, Any]:
+     stats = stats or {"calls": 0, "downloads": 0}
+     filing: dict[str, Any] = {"status": code, "reason": reason, "retryable": retryable}
++    diagnostic = validated_request_diagnostic(request_diagnostic)
++    if diagnostic is not None:
++        filing["request_diagnostic"] = diagnostic
+     # R6-FF-CAUSE: the optional safe machine diagnostic rides inside filing
+     # (failures only; a diagnosed failure GAP may carry the same object).
+     if upstream_cause is not None:
+diff --git a/scripts/filing_contracts.py b/scripts/filing_contracts.py
+index f32b4c3..03be89b 100644
+--- a/scripts/filing_contracts.py
++++ b/scripts/filing_contracts.py
+@@ -15,6 +15,8 @@ from typing import Any, Sequence
+ # validator keeps this module free of parsing logic).
+ from ff_provider_cause import (
+     STAGES,
++    build_request_diagnostic,
++    validated_request_diagnostic,
+     validated_acquisition_failure,
+     validated_acquisition_observation,
+     validated_cause,
+@@ -69,6 +71,7 @@ class FilingFetchError(RuntimeError):
+         upstream_cause: dict[str, Any] | None = None,
+         acquisition_failure: dict[str, Any] | None = None,
+         acquisition_observation: dict[str, Any] | None = None,
++        request_diagnostic: dict[str, Any] | None = None,
+     ) -> None:
+         super().__init__(message)
+         self.code = code
+@@ -111,6 +114,12 @@ class FilingFetchError(RuntimeError):
+         # M3-USAGE: same fail-closed pass-through as the failure receipt —
+         # only a validated operation observation rides, garbage is dropped.
+         self.acquisition_observation = validated_acquisition_observation(acquisition_observation)
++        # A request subtype is separate from the unchanged producer cause.
++        # Keep a verified copy; serializers validate again before emission.
++        diagnostic = validated_request_diagnostic(request_diagnostic)
++        if request_diagnostic is not None and diagnostic is None:
++            raise TypeError("request_diagnostic must be a validated filing-request-diagnostic/1 object")
++        self.request_diagnostic = diagnostic
+ 
+ 
+ # ---------------------------------------------------------------------------
+@@ -266,6 +275,7 @@ def validate_request(request: dict[str, Any]) -> None:
+                 "schema 1.2 requests require mode or fiscal_year: pass "
+                 "mode=exact with fiscal_year, or mode=latest_as_of",
+                 code="request_error",
++                request_diagnostic=build_request_diagnostic("exact_requires_fiscal_year", "fiscal_year"),
+             )
+     elif mode == "latest_as_of":
+         if fiscal_year is not None:
+@@ -273,6 +283,7 @@ def validate_request(request: dict[str, Any]) -> None:
+                 "mode=latest_as_of forbids fiscal_year; the latest period is "
+                 "derived from as_of_date + document_kind",
+                 code="request_error",
++                request_diagnostic=build_request_diagnostic("latest_forbids_fiscal_year", "fiscal_year"),
+             )
+     if fiscal_year is not None:
+         if isinstance(fiscal_year, bool) or not isinstance(fiscal_year, int):
+@@ -285,42 +296,52 @@ def validate_request(request: dict[str, Any]) -> None:
+ 
+ 
+ def _validate_acquisition_limits(
+-    intent: Any, value: Any, *, required_for_reuse_only: bool = False
++    intent: Any, value: Any, *, required_for_reuse_only: bool = False,
++    request_diagnostics: bool = True,
+ ) -> None:
+     """Bind provider work to explicit byte, time and fee ceilings.
+ 
+     Ordinary reuse_only requests stay provider-free and forbid limits. A
+     latest_as_of reuse_only request performs a bounded metadata lookup to prove
+     whether the local filing is current, but still cannot download bytes.
++    Companion limits have no filing field_path in this sibling contract.
+     """
++    def invalid(message: str, reason: str, field_path: str) -> FilingFetchError:
++        diagnostic = build_request_diagnostic(reason, field_path) if request_diagnostics else None
++        return FilingFetchError(message, code="request_error", request_diagnostic=diagnostic)
++
+     if intent == "reuse_only" and not required_for_reuse_only:
+         if value is not None:
+-            raise FilingFetchError(
+-                "reuse_only forbids acquisition_limits", code="request_error"
+-            )
++            raise invalid("reuse_only forbids acquisition_limits",
++                          "acquisition_limits_invalid", "acquisition_limits")
+         return
+     if not isinstance(value, dict) or set(value) != {
+         "max_bytes", "timeout_seconds", "max_cost_usd"
+     }:
+         if intent == "reuse_only":
+             message = "latest_as_of reuse_only requires max_bytes, timeout_seconds and max_cost_usd limits"
++            reason = "latest_reuse_requires_acquisition_limits"
+         else:
+             message = "fetch_if_missing requires max_bytes, timeout_seconds and max_cost_usd"
+-        raise FilingFetchError(message, code="request_error")
++            reason = "acquisition_limits_invalid"
++        raise invalid(message, reason, "acquisition_limits")
+     size = value["max_bytes"]
+     if type(size) is not int or size <= 0:
+-        raise FilingFetchError("invalid acquisition_limits.max_bytes", code="request_error")
++        raise invalid("invalid acquisition_limits.max_bytes",
++                      "acquisition_limits_invalid", "acquisition_limits.max_bytes")
+     seconds = value["timeout_seconds"]
+     if (
+         isinstance(seconds, bool) or not isinstance(seconds, (int, float))
+         or not math.isfinite(seconds) or seconds <= 0
+     ):
+-        raise FilingFetchError("invalid acquisition_limits.timeout_seconds", code="request_error")
++        raise invalid("invalid acquisition_limits.timeout_seconds",
++                      "acquisition_limits_invalid", "acquisition_limits.timeout_seconds")
+     cost = value["max_cost_usd"]
+     if not isinstance(cost, str) or not re.fullmatch(
+         r"(?:0|[1-9][0-9]*)(?:\.[0-9]{1,2})?", cost
+     ):
+-        raise FilingFetchError("invalid acquisition_limits.max_cost_usd", code="request_error")
++        raise invalid("invalid acquisition_limits.max_cost_usd",
++                      "acquisition_limits_invalid", "acquisition_limits.max_cost_usd")
+ 
+ 
+ def _validate_companion_request(value: Any) -> None:
+@@ -347,11 +368,11 @@ def _validate_companion_request(value: Any) -> None:
+     intent = value["intent"]
+     limits = value.get("acquisition_limits")
+     if intent == "reuse_only":
+-        _validate_acquisition_limits(intent, limits)
++        _validate_acquisition_limits(intent, limits, request_diagnostics=False)
+     elif year is not None and quarter is not None:
+-        _validate_acquisition_limits(intent, limits)
++        _validate_acquisition_limits(intent, limits, request_diagnostics=False)
+     elif limits is not None:
+-        _validate_acquisition_limits(intent, limits)
++        _validate_acquisition_limits(intent, limits, request_diagnostics=False)
+     provider = value.get("provider")
+     if provider is not None and (
+         not isinstance(provider, str) or not re.fullmatch(r"[a-z][a-z0-9_]{1,63}", provider)
+diff --git a/tests/test_w04_failure_observation.py b/tests/test_w04_failure_observation.py
+new file mode 100644
+index 0000000..9ff324c
+--- /dev/null
++++ b/tests/test_w04_failure_observation.py
+@@ -0,0 +1,169 @@
++"""W04: named request failures are typed diagnostics, not retry permission."""
++from __future__ import annotations
++
++from copy import deepcopy
++from io import StringIO
++import json
++from pathlib import Path
++import sys
++
++import pytest
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT / "scripts"))
++import fetch_filing as fetch  # noqa: E402
++import ff_provider_cause as cause  # noqa: E402
++from filing_contracts import FilingFetchError, validate_request  # noqa: E402
++
++
++def request(**updates):
++    value = {
++        "schema_version": "2.0", "company_query": "Sample", "market": "US",
++        "document_kind": "annual_report", "as_of_date": "2026-10-08",
++        "filing_intent": "reuse_only", "mode": "exact", "fiscal_year": 2026,
++    }
++    value.update(updates)
++    return value
++
++
++def limits(**updates):
++    value = {"max_bytes": 41943040, "timeout_seconds": 180, "max_cost_usd": "0.00"}
++    value.update(updates)
++    return value
++
++
++def diagnostic(reason, field_path):
++    return {"schema_version": "filing-request-diagnostic/1",
++            "reason": reason, "field_path": field_path}
++
++
++CASES = [
++    (request(fiscal_year=None), "exact_requires_fiscal_year", "fiscal_year"),
++    (request(mode="latest_as_of", acquisition_limits=limits()),
++     "latest_forbids_fiscal_year", "fiscal_year"),
++    (request(mode="latest_as_of", fiscal_year=None),
++     "latest_reuse_requires_acquisition_limits", "acquisition_limits"),
++    (request(mode="latest_as_of", fiscal_year=None, acquisition_limits=limits(max_bytes=True)),
++     "acquisition_limits_invalid", "acquisition_limits.max_bytes"),
++    (request(filing_intent="fetch_if_missing", acquisition_limits=limits(timeout_seconds=0)),
++     "acquisition_limits_invalid", "acquisition_limits.timeout_seconds"),
++    (request(filing_intent="fetch_if_missing", acquisition_limits=limits(max_cost_usd="NaN")),
++     "acquisition_limits_invalid", "acquisition_limits.max_cost_usd"),
++    (request(filing_intent="fetch_if_missing", acquisition_limits={}),
++     "acquisition_limits_invalid", "acquisition_limits"),
++    (request(acquisition_limits=limits()), "acquisition_limits_invalid", "acquisition_limits"),
++]
++
++
++@pytest.mark.parametrize("value,reason,path", CASES)
++def test_request_validation_carries_exact_typed_reason_without_input_copy(value, reason, path):
++    with pytest.raises(FilingFetchError) as caught:
++        validate_request(value)
++    exc = caught.value
++    assert exc.code == "request_error"
++    assert exc.retryable is False
++    assert exc.request_diagnostic == diagnostic(reason, path)
++    assert exc.upstream_cause is None
++    assert exc.acquisition_observation is None
++    assert exc.acquisition_failure is None
++    assert "Sample" not in json.dumps(exc.request_diagnostic)
++
++
++@pytest.mark.parametrize("version,case", [(version, case) for version in ["1.2", "2.0"]
++    for case in CASES[:4] if not (version == "1.2" and case[1] == "latest_reuse_requires_acquisition_limits")])
++def test_public_failure_envelopes_keep_status_and_zero_calls(monkeypatch, version, case):
++    value, reason, path = case
++    value = deepcopy(value)
++    value["schema_version"] = version
++    if version == "1.2":
++        value.pop("filing_intent")
++    def forbidden(**kwargs):
++        pytest.fail("request validation must finish before any CWP process or provider")
++    monkeypatch.setattr(fetch, "_run_company_wiki_json_retry", forbidden)
++    monkeypatch.setattr(sys, "stdin", StringIO(json.dumps(value)))
++    output = StringIO()
++    monkeypatch.setattr(sys, "stdout", output)
++    assert fetch.main([]) == 2
++    payload = json.loads(output.getvalue())
++    detail = payload["filing"] if version == "2.0" else payload
++    assert detail["request_diagnostic"] == diagnostic(reason, path)
++    assert payload["status"] == detail["status"] == "request_error"
++    assert detail["retryable"] is False
++    assert payload["calls"] == payload["downloads"] == 0
++    assert "source_ref" not in detail
++    assert "upstream_cause" not in detail
++    assert "acquisition_observation" not in payload
++
++
++@pytest.mark.parametrize("bad", [
++    {"schema_version": "filing-request-diagnostic/1", "reason": "secret_token", "field_path": "fiscal_year"},
++    {"schema_version": "filing-request-diagnostic/1", "reason": "exact_requires_fiscal_year", "field_path": "acquisition_limits"},
++    {"schema_version": "filing-request-diagnostic/1", "reason": "acquisition_limits_invalid", "field_path": "authorization.token"},
++    {"schema_version": "filing-request-diagnostic/1", "reason": [], "field_path": "fiscal_year"},
++    {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "request_body": "SECRET"},
++    {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "schema_version": "bad"},
++])
++def test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields(bad):
++    assert cause.validated_request_diagnostic(bad) is None
++    with pytest.raises(TypeError):
++        FilingFetchError("generic", code="request_error", request_diagnostic=bad)
++
++
++def test_legacy_error_strings_are_never_parsed_into_a_typed_diagnostic(monkeypatch):
++    text = "schema 1.2 requests require mode or fiscal_year SECRET_TOKEN https://host/?token=secret"
++    exc = FilingFetchError(text, code="request_error")
++    assert exc.request_diagnostic is None
++    def fail(**kwargs):
++        raise exc
++    monkeypatch.setattr(fetch, "resolve_filing", fail)
++    monkeypatch.setattr(sys, "stdin", StringIO(json.dumps(request())))
++    output = StringIO()
++    monkeypatch.setattr(sys, "stdout", output)
++    assert fetch.main([]) == 2
++    detail = json.loads(output.getvalue())["filing"]
++    assert "request_diagnostic" not in detail
++    assert "upstream_cause" not in detail
++
++
++def test_diagnostic_does_not_expand_the_old_six_field_cause():
++    old = cause.build_cause("ensure", "unknown")
++    assert set(old) == cause.CAUSE_KEYS
++    assert old["provider_started"] is old["usage_complete"] is None
++    assert cause.validated_cause({**old, "field_path": "fiscal_year"}) is None
++    assert old["retry_scope"] == "none"
++
++
++def test_valid_latest_reuse_limits_preserve_discovery_route():
++    value = request(mode="latest_as_of", fiscal_year=None, acquisition_limits=limits())
++    validate_request(value)
++    assert fetch._use_source_query(True, False, value) is False
++    assert fetch._use_source_query(True, False, request()) is True
++
++
++def test_companion_limits_do_not_impersonate_filing_limits():
++    value = request(companion_transcript={
++        "intent": "fetch_if_missing", "fiscal_year": 2026, "fiscal_quarter": 4,
++        "acquisition_limits": limits(max_bytes=False),
++    })
++    with pytest.raises(FilingFetchError) as caught:
++        validate_request(value)
++    assert caught.value.request_diagnostic is None
++    assert caught.value.code == "request_error"
++
++
++def test_diagnostic_input_is_copied_and_revalidated_before_serialization(monkeypatch):
++    original = diagnostic("exact_requires_fiscal_year", "fiscal_year")
++    exc = FilingFetchError("fixed validation message", code="request_error", request_diagnostic=original)
++    original["field_path"] = "SECRET"
++    assert exc.request_diagnostic == diagnostic("exact_requires_fiscal_year", "fiscal_year")
++    exc.request_diagnostic["field_path"] = "SECRET"
++    def fail(**kwargs):
++        raise exc
++    monkeypatch.setattr(fetch, "resolve_filing", fail)
++    monkeypatch.setattr(sys, "stdin", StringIO(json.dumps(request())))
++    output = StringIO()
++    monkeypatch.setattr(sys, "stdout", output)
++    assert fetch.main([]) == 2
++    detail = json.loads(output.getvalue())["filing"]
++    assert "request_diagnostic" not in detail
++    assert "SECRET" not in output.getvalue()

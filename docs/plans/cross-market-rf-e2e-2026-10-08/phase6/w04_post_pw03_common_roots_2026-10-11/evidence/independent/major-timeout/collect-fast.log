@@ -1,0 +1,175 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\.codex\worktrees\m3-acceptance-20261010\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 137 items
+
+<Dir company-wiki>
+  <Dir tests>
+    <Package integration>
+      <Module test_m3_official_json_acceptance.py>
+        <Function test_persisted_projection_is_loadable_and_idempotent>
+        <Function test_public_cli_reloads_by_projection_id>
+        <Function test_multi_page_spans_are_bound_to_their_own_parent>
+        <Function test_latest_record_revision_cannot_leak_past_as_of[2026-10-09 10:00:00]>
+        <Function test_latest_record_revision_cannot_leak_past_as_of[unparseable]>
+        <Function test_precollected_answer_without_answer_availability_stays_unknown>
+        <Function test_self_hashed_derivative_claims_must_match_parent_semantics[role-replay_projection]>
+        <Function test_self_hashed_derivative_claims_must_match_parent_semantics[role-build_projection_export]>
+        <Function test_self_hashed_derivative_claims_must_match_parent_semantics[selected-replay_projection]>
+        <Function test_self_hashed_derivative_claims_must_match_parent_semantics[selected-build_projection_export]>
+        <Function test_self_hashed_derivative_claims_must_match_parent_semantics[times-replay_projection]>
+        <Function test_self_hashed_derivative_claims_must_match_parent_semantics[times-build_projection_export]>
+        <Function test_self_hashed_derivative_claims_must_match_parent_semantics[issuer-replay_projection]>
+        <Function test_self_hashed_derivative_claims_must_match_parent_semantics[issuer-build_projection_export]>
+        <Function test_distinct_question_and_answer_issuers_are_not_merged>
+        <Function test_container_sha_matches_its_final_token_bytes[{"left":{"x":1},"right":{"x":2}}-/left]>
+        <Function test_container_sha_matches_its_final_token_bytes[{"left":{"x":1},"right":{"x":2}}-/right]>
+        <Function test_container_sha_matches_its_final_token_bytes[{"rows":[1,2]}-/rows]>
+        <Function test_container_sha_matches_its_final_token_bytes[{"rows":[]}-/rows]>
+        <Function test_container_sha_matches_its_final_token_bytes[{"rows":{}}-/rows]>
+        <Function test_container_sha_matches_its_final_token_bytes[{"rows":[{"inner":{"x":1}},[]]}-]>
+        <Function test_container_sha_matches_its_final_token_bytes[{"rows":[{"inner":{"x":1}},[]]}-/rows]>
+        <Function test_container_sha_matches_its_final_token_bytes[{"rows":[{"inner":{"x":1}},[]]}-/rows/0]>
+        <Function test_container_sha_matches_its_final_token_bytes[{"rows":[{"inner":{"x":1}},[]]}-/rows/0/inner]>
+        <Function test_container_sha_matches_its_final_token_bytes[{"rows":[{"inner":{"x":1}},[]]}-/rows/1]>
+        <Function test_sealed_parser_100_payload_is_typed_unsupported_without_upgrade>
+        <Function test_pagination_metadata_drift_is_partial_without_losing_originals[changed0]>
+        <Function test_pagination_metadata_drift_is_partial_without_losing_originals[changed1]>
+        <Function test_repeated_record_across_adjacent_pages_is_not_complete_or_double_selected>
+        <Function test_conflicting_revisions_under_one_record_id_do_not_select_arbitrary_version>
+        <Function test_missing_record_id_is_observed_but_cannot_prove_full_page_coverage>
+        <Function test_consistent_complete_collection_can_arrive_in_either_page_order>
+        <Function test_non_integer_numeric_forms_never_become_issuer_identity_proof[1.9]>
+        <Function test_non_integer_numeric_forms_never_become_issuer_identity_proof[true]>
+        <Function test_non_integer_numeric_forms_never_become_issuer_identity_proof[1.0]>
+        <Function test_non_integer_numeric_forms_never_become_issuer_identity_proof[1e0]>
+        <Function test_non_integer_numeric_forms_never_become_issuer_identity_proof[9.007199254740993e15]>
+        <Function test_non_integer_numeric_forms_never_become_issuer_identity_proof[1e30]>
+        <Function test_lexical_integer_issuer_ids_keep_exact_arbitrary_precision[1]>
+        <Function test_lexical_integer_issuer_ids_keep_exact_arbitrary_precision[9007199254740993]>
+        <Function test_lexical_integer_issuer_ids_keep_exact_arbitrary_precision[1267650600228229401496703205376]>
+        <Function test_fractional_pagination_cannot_become_complete[page]>
+        <Function test_fractional_pagination_cannot_become_complete[page_size]>
+        <Function test_fractional_pagination_cannot_become_complete[page_count]>
+        <Function test_fractional_pagination_cannot_become_complete[item_total]>
+    <Package unit>
+      <Module test_runtime_dependencies.py>
+        <Function test_ci_requirements_include_declared_runtime_dependencies>
+      <Module test_automation_migrations.py>
+        <Function test_m14_classification_uses_one_snapshot_during_concurrent_init>
+    <Dir contract>
+      <Module test_zr203_reader_rewire.py>
+        <Function test_read_entrypoints_never_construct_catalog_store>
+      <Module test_zr1003_shadow_assertions.py>
+        <Function test_c2_recorded_review_is_diagnostic_metadata>
+      <Module test_zr1006_broker_cohort.py>
+        <Function test_c2_ramp_1_to_3_to_7>
+      <Module test_source_catalog_temp_worker_governance.py>
+        <Function test_owned_temp_worker_helper_detects_test_pid>
+        <Function test_stop_does_not_touch_unowned_live_workers_or_temporary_files>
+      <Module test_narrative_output_plan.py>
+        <Function test_96_span_compact_plan_is_material_excerpt_not_row_enumeration_and_preserves_every_source_row>
+        <Function test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[1200]>
+        <Function test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[2400]>
+        <Function test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[8192]>
+        <Function test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay>
+        <Function test_truncation_reaches_handler_static_diagnostics_with_original_source_identity_and_no_success>
+      <Module test_summary_group_coverage.py>
+        <Function test_model_envelope_has_stable_whole_groups_without_duplicate_text_or_source_changes>
+        <Function test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[HK]>
+        <Function test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-new-W02]>
+        <Function test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-sealed-old-group]>
+        <Function test_complete_multi_proposition_claim_keeps_exact_citations_and_no_group_wire_extensions>
+        <Function test_unrelated_adjacent_paragraph_is_never_added_to_close_the_business_group>
+        <Function test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[None]>
+        <Function test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[declaration1]>
+        <Function test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration0]>
+        <Function test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration1]>
+        <Function test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[g1]>
+        <Function test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration3]>
+        <Function test_one_incomplete_group_claim_is_discarded_whole_without_modifying_the_good_claim>
+        <Function test_handler_reports_static_group_reason_and_never_builds_a_success_artifact>
+        <Function test_nine_member_complete_atomic_sentence_is_representable_inside_existing_transport_caps>
+        <Function test_public_summary_result_roundtrips_without_new_group_alias_contract>
+        <Function test_explicit_null_group_declaration_is_malformed_not_a_legacy_absence>
+        <Function test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract[ids0]>
+        <Function test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract[ids1]>
+        <Function test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts>
+        <Function test_foreign_id_after_nine_valid_members_is_rejected_without_padding_or_new_source_identity>
+        <Function test_complete_us_group_closure_does_not_remove_ocr_uncertainty_or_borrow_consumer_bullet>
+        <Function test_group_alias_and_canonical_citation_mixing_cannot_create_duplicate_references>
+      <Module test_official_transcript_layouts.py>
+        <Function test_actual_issuer_natural_heading_colon_speakers_end_and_qa>
+        <Function test_second_layout_titled_speaker_labels_and_question_and_answer_heading>
+        <Function test_navigation_or_metrics_without_true_speaker_body_are_rejected[<title>Transcript</title><nav>Transcript</nav><p>Our products expand overseas.</p>]>
+        <Function test_navigation_or_metrics_without_true_speaker_body_are_rejected[<h1>Earnings Call Transcript</h1><p>Contact: Investor Relations</p><p>Download: PDF</p>]>
+        <Function test_navigation_or_metrics_without_true_speaker_body_are_rejected[<h2>Transcript</h2><p>Revenue: Our new products grew strongly.</p>]>
+        <Function test_ambiguous_empty_heading_body_is_not_success>
+        <Function test_call_page_title_cannot_promote_trace_id_or_navigation_to_a_speaker>
+        <Function test_natural_heading_incomplete_call_retains_named_coverage_failure>
+        <Function test_legacy_version_replays_original_heading_layout_and_new_identity_is_separate>
+        <Function test_closing_courtesy_before_operator_direction_remains_last_actual_speaker>
+      <Module test_transcript_speaker_affiliation.py>
+        <Function test_comma_affiliation_first_question_retains_actual_analyst[Alex Rivera-Westshore Research]>
+        <Function test_comma_affiliation_first_question_retains_actual_analyst[Priya Shah-NORTHBANK]>
+        <Function test_comma_affiliation_first_question_retains_actual_analyst[Jordan Lee-Independent Research]>
+        <Function test_comma_affiliation_first_question_retains_actual_analyst[Chris Jones-Southgate Capital]>
+        <Function test_comma_affiliation_first_question_retains_actual_analyst[Robin Khan-Regional Markets]>
+        <Function test_comma_affiliation_first_question_retains_actual_analyst[Dana Morris-Longview Partners]>
+        <Function test_six_questions_and_closing_courtesies_keep_six_parent_groups>
+        <Function test_prepared_management_identity_is_case_insensitive_without_changing_display>
+        <Function test_comma_title_can_start_a_real_prepared_management_turn>
+        <Function test_comma_does_not_promote_metrics_or_contact_into_speakers[Revenue, Europe]>
+        <Function test_comma_does_not_promote_metrics_or_contact_into_speakers[Financial Results, Europe]>
+        <Function test_comma_does_not_promote_metrics_or_contact_into_speakers[Contact, Relations]>
+        <Function test_legacy_natural_parser_fingerprint_is_frozen_and_replayable>
+      <Module test_source_scope_qualification.py>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[open-wrong_cik]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[open-wrong_year]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[open-wrong_company_binding]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[verify-wrong_cik]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[verify-wrong_year]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[verify-wrong_company_binding]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[resolver-wrong_cik]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[resolver-wrong_year]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[resolver-wrong_company_binding]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[ensure-wrong_cik]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[ensure-wrong_year]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[ensure-wrong_company_binding]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[stage-wrong_cik]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[stage-wrong_year]>
+        <Function test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[stage-wrong_company_binding]>
+        <Function test_unproven_correct_scope_uses_single_sha_buffer_under_remaining_budget[reader]>
+        <Function test_unproven_correct_scope_uses_single_sha_buffer_under_remaining_budget[resolver]>
+        <Function test_raw_preview_remains_byte_only_for_false_filing_labels>
+        <Function test_complete_original_scope_proof_streams_sha_without_master_or_reparse[reader]>
+        <Function test_complete_original_scope_proof_streams_sha_without_master_or_reparse[resolver]>
+        <Function test_complete_original_scope_proof_streams_sha_without_master_or_reparse[prepare]>
+        <Function test_registered_provenance_cannot_stand_in_for_actual_dei_scope[unknown]>
+        <Function test_registered_provenance_cannot_stand_in_for_actual_dei_scope[conflict]>
+        <Function test_conflicting_registered_issuer_observations_are_named>
+        <Function test_incomplete_issuer_record_binding_observes_registered_company_once[None]>
+        <Function test_incomplete_issuer_record_binding_observes_registered_company_once[another-record]>
+        <Function test_complete_original_company_proof_still_rejects_conflicting_url_provenance>
+    <Package unit>
+      <Module test_narrative_evidence.py>
+        <Function test_financial_table_rows_are_dropped_but_business_rows_are_selected>
+        <Function test_numbered_project_rationale_heading_survives_a_tight_budget>
+      <Module test_narrative_transport_contracts.py>
+        <Function test_frozen_producer_golden_contract_and_hash_bindings>
+    <Dir contract>
+      <Module test_fc905_receipt_envelope.py>
+        <Function test_pi03_no_review_is_explicit_not_reviewed>
+    <Package unit>
+      <Module test_narrative_retrieval.py>
+        <Function test_resolver_fails_closed_when_raw_source_hash_changes>
+    <Dir contract>
+      <Module test_b10_read_chain.py>
+        <Function test_b10_scan_is_not_vacuous>
+
+======================== 137 tests collected in 1.98s =========================

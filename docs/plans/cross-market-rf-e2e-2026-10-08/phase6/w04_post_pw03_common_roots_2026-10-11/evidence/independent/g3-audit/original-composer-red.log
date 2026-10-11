@@ -1,0 +1,3 @@
+{"sources": {"request": "de806ddeb70e5c751cd8caf1a747651ff6ce004805e9cbd5980ba4e77fb3294a", "runtime": "95b6951df70a841dee00db6c92c5cb45fb60806afe10c613070219da97923876"}}
+{"probe": "real_builder_to_cas_helper", "expected": "CAS frozen ref and private copy", "result": "FAIL", "error_type": "ValueError", "error": "input_snapshot_blob_store_mode_mismatch", "builder_sha256": "6675a2c4fe212306119c7077641bffedb23e565a4914145eb20f04e825d2461f", "builder_bytes": 13, "child_started": false, "temp_owned": true}
+{"temporary_cleanup_complete": true}

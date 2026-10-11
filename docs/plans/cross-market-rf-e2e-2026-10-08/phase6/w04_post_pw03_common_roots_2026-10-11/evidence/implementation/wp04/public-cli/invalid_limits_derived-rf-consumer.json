@@ -1,0 +1,15 @@
+{
+  "status": "request_error",
+  "error_code": null,
+  "retryable": false,
+  "calls": 0,
+  "downloads": 0,
+  "request_diagnostic": {
+    "schema_version": "filing-request-diagnostic/1",
+    "reason": "acquisition_limits_invalid",
+    "field_path": "acquisition_limits.max_bytes"
+  },
+  "upstream_cause": null,
+  "acquisition_observation": null,
+  "safe_message": "filing-fetch exited 2: status=request_error: unspecified"
+}

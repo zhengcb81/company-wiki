@@ -10,7 +10,7 @@ import json
 import sqlite3
 from typing import Any
 
-from company_wiki.narrative_subject import NarrativeSubject
+from company_wiki.narrative_subject import NarrativeSubject, NarrativeSubjectRef
 from company_wiki.source_catalog.official_json_projection import ProjectionError
 from company_wiki.source_catalog.narrative_artifact_store import (
     NarrativeArtifactError,
@@ -52,6 +52,9 @@ from .narrative_replay import (
 )
 from .narrative_transport_contracts import (
     MAX_RECEIPT_BYTES,
+    NARRATIVE_COMPACT_REF_SCHEMA,
+    NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA,
+    parse_compact_reference_request,
     NARRATIVE_READ_RECEIPT_SCHEMA,
     NARRATIVE_REF_SCHEMA,
     NARRATIVE_PROJECTED_REF_SCHEMA,
@@ -120,6 +123,7 @@ def _bound_bundle(
     version: NarrativeArtifactVersion,
     data: bytes,
     reference: NarrativeRef,
+    *, subject: NarrativeSubject | None = None,
 ) -> NarrativeBundle:
     if (
         version.content_sha256 != reference.artifact_sha256
@@ -137,7 +141,7 @@ def _bound_bundle(
             "unavailable", "narrative_bundle_invalid"
         ) from exc
     if (
-        bundle.subject != reference.subject
+        bundle.subject != (subject if subject is not None else reference.subject)
         or bundle.selection.status != version.selection_status
         or bundle.quality_status != version.quality_status
     ):
@@ -156,11 +160,14 @@ class NarrativeTransportReader:
         normalization: NarrativeNormalization | None = None,
         projection_loader: Callable[[NarrativeSubject], VerifiedProjectionView]
         | None = None,
+        projection_ref_resolver: Callable[[NarrativeSubjectRef], VerifiedProjectionView]
+        | None = None,
     ):
         self._artifacts = artifacts
         self._reader = reader
         self._normalization = normalization
         self._projection_loader = projection_loader
+        self._projection_ref_resolver = projection_ref_resolver
 
     def _current_ref(self, value: SourceRefValue) -> SourceRef:
         current = self._reader.query_ref(
@@ -249,6 +256,45 @@ class NarrativeTransportReader:
                 "blocked", "narrative_reference_invalid"
             ) from exc
 
+    def _resolve_subject_ref(self, subject_ref: NarrativeSubjectRef) -> VerifiedProjectionView:
+        if self._projection_ref_resolver is None:
+            raise NarrativeTransportError("unavailable", "projection_loader_unavailable")
+        view = self._projection_ref_resolver(subject_ref)
+        if NarrativeSubjectRef.from_subject(view.subject) != subject_ref:
+            raise NarrativeTransportError("blocked", "projection_identity_mismatch")
+        return view
+
+    def reference_subject_ref(
+        self, subject_ref: NarrativeSubjectRef, *, generation_sha256: str
+    ) -> NarrativeRef:
+        """Resolve compact identity using the existing catalog and exact parent port."""
+        try:
+            subject_ref, generation = parse_compact_reference_request({
+                "schema_version": "narrative-reference-request/3",
+                "subject_ref": subject_ref.to_dict(),
+                "generation_sha256": generation_sha256,
+            })
+            view = self._resolve_subject_ref(subject_ref)
+            reference = self.reference_subject(view.subject, generation_sha256=generation)
+            return NarrativeRef.from_dict({
+                "schema_version": NARRATIVE_COMPACT_REF_SCHEMA,
+                "artifact_version_id": reference.artifact_version_id,
+                "artifact_sha256": reference.artifact_sha256,
+                "byte_size": reference.byte_size,
+                "generation_sha256": generation,
+                "subject_ref": subject_ref.to_dict(),
+            })
+        except SourceReadError as exc:
+            raise NarrativeTransportError(exc.status, exc.reason) from exc
+        except ProjectionError as exc:
+            raise NarrativeTransportError("blocked", exc.code) from exc
+        except OfficialProjectionAdapterError as exc:
+            raise NarrativeTransportError("blocked", str(exc)) from exc
+        except (CatalogReaderUnavailable, OSError, sqlite3.Error) as exc:
+            raise NarrativeTransportError("unavailable", "narrative_store_unavailable") from exc
+        except NarrativeContractError as exc:
+            raise NarrativeTransportError("blocked", "narrative_reference_invalid") from exc
+
     def read(self, request: NarrativeReadRequest) -> NarrativeTransportRead:
         try:
             request = NarrativeReadRequest.from_dict(request.to_dict())
@@ -279,7 +325,7 @@ class NarrativeTransportReader:
 
     def _read(self, request: NarrativeReadRequest) -> NarrativeTransportRead:
         reference = request.narrative_ref
-        if reference.schema_version == NARRATIVE_PROJECTED_REF_SCHEMA:
+        if reference.schema_version in {NARRATIVE_PROJECTED_REF_SCHEMA, NARRATIVE_COMPACT_REF_SCHEMA}:
             return self._read_projected(request)
         source = reference.source_ref
         if source is None:
@@ -327,7 +373,17 @@ class NarrativeTransportReader:
 
     def _read_projected(self, request: NarrativeReadRequest) -> NarrativeTransportRead:
         reference = request.narrative_ref
-        subject = reference.subject
+        compact = reference.schema_version == NARRATIVE_COMPACT_REF_SCHEMA
+        # Resolve once: this view contains the exact verified parents and pointers
+        # used for both artifact subject binding and locator replay below.
+        view = None
+        if compact:
+            if reference.subject_ref is None:
+                raise NarrativeContractError("compact read requires subject_ref")
+            view = self._resolve_subject_ref(reference.subject_ref)
+            subject = view.subject
+        else:
+            subject = reference.subject
         generation = reference.generation_sha256
         if generation is None:
             raise NarrativeContractError("projected read requires generation")
@@ -349,15 +405,32 @@ class NarrativeTransportReader:
             expected_sha256=reference.artifact_sha256,
             expected_size=reference.byte_size,
         )
-        bundle = _bound_bundle(version, data, reference)
-        if self._projection_loader is None:
-            raise NarrativeTransportError(
-                "unavailable", "projection_loader_unavailable"
-            )
-        view = self._projection_loader(subject)
+        bundle = _bound_bundle(version, data, reference, subject=subject)
+        if view is None:
+            if self._projection_loader is None:
+                raise NarrativeTransportError("unavailable", "projection_loader_unavailable")
+            view = self._projection_loader(subject)
         if view.subject != subject:
             raise NarrativeTransportError("blocked", "projection_identity_mismatch")
         locator_count = replay_verified_projection(view, bundle)
+        if compact:
+            receipt = {
+                "schema_version": NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA,
+                "status": "ok",
+                "narrative_ref": reference.to_dict(),
+                "as_of_date": request.as_of_date,
+                "observed_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+                "locator_count": locator_count,
+                "parent_count": len(subject.parent_source_refs),
+                "lineage_sha256": hashlib.sha256(canonical_json(bundle.subject.to_dict()).encode("utf-8")).hexdigest(),
+                "selection_status": bundle.selection.status,
+                "quality_status": bundle.quality_status,
+                "replay_status": "verified",
+            }
+            assert_no_physical_paths(receipt)
+            if len(canonical_json(receipt).encode("utf-8")) + 1 > MAX_RECEIPT_BYTES:
+                raise NarrativeTransportError("blocked", "narrative_receipt_too_large")
+            return NarrativeTransportRead(data=data, receipt=receipt)
         receipt = {
             "schema_version": NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA,
             "status": "ok",

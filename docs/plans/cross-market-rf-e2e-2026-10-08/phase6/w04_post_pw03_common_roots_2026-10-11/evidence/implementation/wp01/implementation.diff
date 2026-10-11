@@ -1,0 +1,814 @@
+diff --git a/src/company_wiki/automation/narrative_evidence_view.py b/src/company_wiki/automation/narrative_evidence_view.py
+index a2a6d936..a7d7892f 100644
+--- a/src/company_wiki/automation/narrative_evidence_view.py
++++ b/src/company_wiki/automation/narrative_evidence_view.py
+@@ -21,7 +21,7 @@ from .models import canonical_json
+ from .narrative_contracts import BUNDLE_MAX_BYTES, NarrativeBundle
+ from .narrative_transport import NarrativeTransportRead, NarrativeTransportReader
+ from .narrative_transport_contracts import (
+-    MAX_RECEIPT_BYTES, NarrativeReadRequest, NarrativeTransportError,
++    MAX_RECEIPT_BYTES, NARRATIVE_COMPACT_REF_SCHEMA, NarrativeReadRequest, NarrativeTransportError,
+ )
+ 
+ 
+@@ -104,8 +104,9 @@ class NarrativeEvidenceViewReader:
+         bundle = NarrativeBundle.from_dict(json.loads(verified.data))
+         items = self._items(bundle, query)
+         projected = bundle.subject.kind == "official_json"
++        compact = request.narrative_ref.schema_version == NARRATIVE_COMPACT_REF_SCHEMA
+         view = {
+-            "schema_version": "narrative-evidence-view/2"
++            "schema_version": "narrative-evidence-view/3" if compact else "narrative-evidence-view/2"
+             if projected
+             else EVIDENCE_VIEW_SCHEMA,
+             "operation": query.operation,
+@@ -131,7 +132,7 @@ class NarrativeEvidenceViewReader:
+         if len(data) > MAX_EVIDENCE_VIEW_BYTES:
+             raise NarrativeTransportError("blocked", "evidence_view_too_large")
+         receipt = {
+-            "schema_version": "narrative-evidence-read-receipt/2"
++            "schema_version": "narrative-evidence-read-receipt/3" if compact else "narrative-evidence-read-receipt/2"
+             if projected
+             else EVIDENCE_VIEW_RECEIPT_SCHEMA,
+             "status": "ok",
+@@ -151,6 +152,11 @@ class NarrativeEvidenceViewReader:
+             "replay_status": verified.receipt["replay_status"],
+             "locator_count": verified.receipt["locator_count"],
+         }
++        if compact:
++            receipt.update(parent_count=verified.receipt["parent_count"],
++                           lineage_sha256=verified.receipt["lineage_sha256"])
++            if len(canonical_json(receipt).encode("utf-8")) + 1 > MAX_RECEIPT_BYTES:
++                raise NarrativeTransportError("blocked", "narrative_receipt_too_large")
+         return NarrativeTransportRead(data=data, receipt=receipt)
+ 
+     @staticmethod
+diff --git a/src/company_wiki/automation/narrative_transport.py b/src/company_wiki/automation/narrative_transport.py
+index 3e3a11ec..c20b93d0 100644
+--- a/src/company_wiki/automation/narrative_transport.py
++++ b/src/company_wiki/automation/narrative_transport.py
+@@ -10,7 +10,7 @@ import json
+ import sqlite3
+ from typing import Any
+ 
+-from company_wiki.narrative_subject import NarrativeSubject
++from company_wiki.narrative_subject import NarrativeSubject, NarrativeSubjectRef
+ from company_wiki.source_catalog.official_json_projection import ProjectionError
+ from company_wiki.source_catalog.narrative_artifact_store import (
+     NarrativeArtifactError,
+@@ -52,6 +52,9 @@ from .narrative_replay import (
+ )
+ from .narrative_transport_contracts import (
+     MAX_RECEIPT_BYTES,
++    NARRATIVE_COMPACT_REF_SCHEMA,
++    NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA,
++    parse_compact_reference_request,
+     NARRATIVE_READ_RECEIPT_SCHEMA,
+     NARRATIVE_REF_SCHEMA,
+     NARRATIVE_PROJECTED_REF_SCHEMA,
+@@ -120,6 +123,7 @@ def _bound_bundle(
+     version: NarrativeArtifactVersion,
+     data: bytes,
+     reference: NarrativeRef,
++    *, subject: NarrativeSubject | None = None,
+ ) -> NarrativeBundle:
+     if (
+         version.content_sha256 != reference.artifact_sha256
+@@ -137,7 +141,7 @@ def _bound_bundle(
+             "unavailable", "narrative_bundle_invalid"
+         ) from exc
+     if (
+-        bundle.subject != reference.subject
++        bundle.subject != (subject if subject is not None else reference.subject)
+         or bundle.selection.status != version.selection_status
+         or bundle.quality_status != version.quality_status
+     ):
+@@ -156,11 +160,14 @@ class NarrativeTransportReader:
+         normalization: NarrativeNormalization | None = None,
+         projection_loader: Callable[[NarrativeSubject], VerifiedProjectionView]
+         | None = None,
++        projection_ref_resolver: Callable[[NarrativeSubjectRef], VerifiedProjectionView]
++        | None = None,
+     ):
+         self._artifacts = artifacts
+         self._reader = reader
+         self._normalization = normalization
+         self._projection_loader = projection_loader
++        self._projection_ref_resolver = projection_ref_resolver
+ 
+     def _current_ref(self, value: SourceRefValue) -> SourceRef:
+         current = self._reader.query_ref(
+@@ -249,6 +256,45 @@ class NarrativeTransportReader:
+                 "blocked", "narrative_reference_invalid"
+             ) from exc
+ 
++    def _resolve_subject_ref(self, subject_ref: NarrativeSubjectRef) -> VerifiedProjectionView:
++        if self._projection_ref_resolver is None:
++            raise NarrativeTransportError("unavailable", "projection_loader_unavailable")
++        view = self._projection_ref_resolver(subject_ref)
++        if NarrativeSubjectRef.from_subject(view.subject) != subject_ref:
++            raise NarrativeTransportError("blocked", "projection_identity_mismatch")
++        return view
++
++    def reference_subject_ref(
++        self, subject_ref: NarrativeSubjectRef, *, generation_sha256: str
++    ) -> NarrativeRef:
++        """Resolve compact identity using the existing catalog and exact parent port."""
++        try:
++            subject_ref, generation = parse_compact_reference_request({
++                "schema_version": "narrative-reference-request/3",
++                "subject_ref": subject_ref.to_dict(),
++                "generation_sha256": generation_sha256,
++            })
++            view = self._resolve_subject_ref(subject_ref)
++            reference = self.reference_subject(view.subject, generation_sha256=generation)
++            return NarrativeRef.from_dict({
++                "schema_version": NARRATIVE_COMPACT_REF_SCHEMA,
++                "artifact_version_id": reference.artifact_version_id,
++                "artifact_sha256": reference.artifact_sha256,
++                "byte_size": reference.byte_size,
++                "generation_sha256": generation,
++                "subject_ref": subject_ref.to_dict(),
++            })
++        except SourceReadError as exc:
++            raise NarrativeTransportError(exc.status, exc.reason) from exc
++        except ProjectionError as exc:
++            raise NarrativeTransportError("blocked", exc.code) from exc
++        except OfficialProjectionAdapterError as exc:
++            raise NarrativeTransportError("blocked", str(exc)) from exc
++        except (CatalogReaderUnavailable, OSError, sqlite3.Error) as exc:
++            raise NarrativeTransportError("unavailable", "narrative_store_unavailable") from exc
++        except NarrativeContractError as exc:
++            raise NarrativeTransportError("blocked", "narrative_reference_invalid") from exc
++
+     def read(self, request: NarrativeReadRequest) -> NarrativeTransportRead:
+         try:
+             request = NarrativeReadRequest.from_dict(request.to_dict())
+@@ -279,7 +325,7 @@ class NarrativeTransportReader:
+ 
+     def _read(self, request: NarrativeReadRequest) -> NarrativeTransportRead:
+         reference = request.narrative_ref
+-        if reference.schema_version == NARRATIVE_PROJECTED_REF_SCHEMA:
++        if reference.schema_version in {NARRATIVE_PROJECTED_REF_SCHEMA, NARRATIVE_COMPACT_REF_SCHEMA}:
+             return self._read_projected(request)
+         source = reference.source_ref
+         if source is None:
+@@ -327,7 +373,17 @@ class NarrativeTransportReader:
+ 
+     def _read_projected(self, request: NarrativeReadRequest) -> NarrativeTransportRead:
+         reference = request.narrative_ref
+-        subject = reference.subject
++        compact = reference.schema_version == NARRATIVE_COMPACT_REF_SCHEMA
++        # Resolve once: this view contains the exact verified parents and pointers
++        # used for both artifact subject binding and locator replay below.
++        view = None
++        if compact:
++            if reference.subject_ref is None:
++                raise NarrativeContractError("compact read requires subject_ref")
++            view = self._resolve_subject_ref(reference.subject_ref)
++            subject = view.subject
++        else:
++            subject = reference.subject
+         generation = reference.generation_sha256
+         if generation is None:
+             raise NarrativeContractError("projected read requires generation")
+@@ -349,15 +405,32 @@ class NarrativeTransportReader:
+             expected_sha256=reference.artifact_sha256,
+             expected_size=reference.byte_size,
+         )
+-        bundle = _bound_bundle(version, data, reference)
+-        if self._projection_loader is None:
+-            raise NarrativeTransportError(
+-                "unavailable", "projection_loader_unavailable"
+-            )
+-        view = self._projection_loader(subject)
++        bundle = _bound_bundle(version, data, reference, subject=subject)
++        if view is None:
++            if self._projection_loader is None:
++                raise NarrativeTransportError("unavailable", "projection_loader_unavailable")
++            view = self._projection_loader(subject)
+         if view.subject != subject:
+             raise NarrativeTransportError("blocked", "projection_identity_mismatch")
+         locator_count = replay_verified_projection(view, bundle)
++        if compact:
++            receipt = {
++                "schema_version": NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA,
++                "status": "ok",
++                "narrative_ref": reference.to_dict(),
++                "as_of_date": request.as_of_date,
++                "observed_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
++                "locator_count": locator_count,
++                "parent_count": len(subject.parent_source_refs),
++                "lineage_sha256": hashlib.sha256(canonical_json(bundle.subject.to_dict()).encode("utf-8")).hexdigest(),
++                "selection_status": bundle.selection.status,
++                "quality_status": bundle.quality_status,
++                "replay_status": "verified",
++            }
++            assert_no_physical_paths(receipt)
++            if len(canonical_json(receipt).encode("utf-8")) + 1 > MAX_RECEIPT_BYTES:
++                raise NarrativeTransportError("blocked", "narrative_receipt_too_large")
++            return NarrativeTransportRead(data=data, receipt=receipt)
+         receipt = {
+             "schema_version": NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA,
+             "status": "ok",
+diff --git a/src/company_wiki/automation/narrative_transport_contracts.py b/src/company_wiki/automation/narrative_transport_contracts.py
+index 508ff35b..1438fe76 100644
+--- a/src/company_wiki/automation/narrative_transport_contracts.py
++++ b/src/company_wiki/automation/narrative_transport_contracts.py
+@@ -7,7 +7,7 @@ from datetime import date
+ import re
+ from typing import Any
+ 
+-from company_wiki.narrative_subject import NarrativeSubject
++from company_wiki.narrative_subject import NarrativeSubject, NarrativeSubjectRef
+ 
+ from .narrative_contracts import (
+     BUNDLE_MAX_BYTES,
+@@ -25,6 +25,10 @@ NARRATIVE_PROJECTED_REF_SCHEMA = "narrative-ref/2"
+ NARRATIVE_PROJECTED_REFERENCE_REQUEST_SCHEMA = "narrative-reference-request/2"
+ NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA = "narrative-read-request/2"
+ NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA = "narrative-read-receipt/2"
++NARRATIVE_COMPACT_REF_SCHEMA = "narrative-ref/3"
++NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA = "narrative-reference-request/3"
++NARRATIVE_COMPACT_READ_REQUEST_SCHEMA = "narrative-read-request/3"
++NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA = "narrative-read-receipt/3"
+ MAX_REQUEST_BYTES = 16 * 1024
+ MAX_RECEIPT_BYTES = 16 * 1024
+ EXPECTED_SOURCE_FIELDS = frozenset(
+@@ -116,6 +120,13 @@ def _projection_subject(value: object) -> NarrativeSubject:
+     return subject
+ 
+ 
++def _compact_subject(value: object) -> NarrativeSubjectRef:
++    try:
++        return NarrativeSubjectRef.from_dict(value)
++    except (TypeError, ValueError) as exc:
++        raise NarrativeContractError("invalid compact narrative subject") from exc
++
++
+ def _issuer_constraints(value: object) -> dict[str, str | int] | None:
+     if value is None:
+         return None
+@@ -167,6 +178,7 @@ class NarrativeRef:
+     source_ref: SourceRefValue | None = None
+     subject_binding: NarrativeSubject | None = None
+     generation_sha256: str | None = None
++    subject_ref: NarrativeSubjectRef | None = None
+ 
+     @property
+     def subject(self) -> NarrativeSubject:
+@@ -182,15 +194,21 @@ class NarrativeRef:
+             isinstance(value, dict)
+             and value.get("schema_version") == NARRATIVE_PROJECTED_REF_SCHEMA
+         )
++        compact = (
++            isinstance(value, dict)
++            and value.get("schema_version") == NARRATIVE_COMPACT_REF_SCHEMA
++        )
+         fields = (
++            (_REF_FIELDS - {"source_ref"}) | {"subject_ref", "generation_sha256"}
++            if compact else
+             (_REF_FIELDS - {"source_ref"}) | {"subject_binding", "generation_sha256"}
+-            if projected
+-            else _REF_FIELDS
++            if projected else _REF_FIELDS
+         )
+         item = _exact(value, frozenset(fields))
+         if item["schema_version"] not in {
+             NARRATIVE_REF_SCHEMA,
+             NARRATIVE_PROJECTED_REF_SCHEMA,
++            NARRATIVE_COMPACT_REF_SCHEMA,
+         }:
+             raise NarrativeContractError("unsupported narrative reference schema")
+         identifier, digest, size = (
+@@ -206,6 +224,12 @@ class NarrativeRef:
+             raise NarrativeContractError("artifact_sha256 must be lowercase SHA-256")
+         if type(size) is not int or not 0 < size <= BUNDLE_MAX_BYTES:
+             raise NarrativeContractError("narrative artifact size is invalid")
++        if compact:
++            return cls(
++                NARRATIVE_COMPACT_REF_SCHEMA, identifier, digest, size,
++                generation_sha256=_generation(item["generation_sha256"]),
++                subject_ref=_compact_subject(item["subject_ref"]),
++            )
+         if projected:
+             return cls(
+                 NARRATIVE_PROJECTED_REF_SCHEMA,
+@@ -230,8 +254,15 @@ class NarrativeRef:
+             "artifact_sha256": self.artifact_sha256,
+             "byte_size": self.byte_size,
+         }
+-        if self.schema_version == NARRATIVE_PROJECTED_REF_SCHEMA:
+-            if self.source_ref is not None or self.subject_binding is None:
++        if self.schema_version == NARRATIVE_COMPACT_REF_SCHEMA:
++            if (self.source_ref is not None or self.subject_binding is not None
++                    or self.subject_ref is None):
++                raise NarrativeContractError("compact reference requires only subject_ref")
++            value.update(subject_ref=self.subject_ref.to_dict(),
++                         generation_sha256=self.generation_sha256)
++        elif self.schema_version == NARRATIVE_PROJECTED_REF_SCHEMA:
++            if (self.source_ref is not None or self.subject_binding is None
++                    or self.subject_ref is not None):
+                 raise NarrativeContractError(
+                     "projected reference cannot contain a raw source reference"
+                 )
+@@ -244,6 +275,7 @@ class NarrativeRef:
+                 self.source_ref is None
+                 or self.subject_binding is not None
+                 or self.generation_sha256 is not None
++                or self.subject_ref is not None
+             ):
+                 raise NarrativeContractError(
+                     "raw reference cannot contain projected binding"
+@@ -264,7 +296,9 @@ class NarrativeReadRequest:
+     def from_dict(cls, value: object) -> NarrativeReadRequest:
+         projected = (
+             isinstance(value, dict)
+-            and value.get("schema_version") == NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA
++            and value.get("schema_version") in {
++                NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA, NARRATIVE_COMPACT_READ_REQUEST_SCHEMA
++            }
+         )
+         constraint_field = "expected_issuer" if projected else "expected_source"
+         item = _exact(
+@@ -274,14 +308,20 @@ class NarrativeReadRequest:
+             ),
+         )
+         expected_schema = (
+-            NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA
+-            if projected
++            NARRATIVE_COMPACT_READ_REQUEST_SCHEMA
++            if isinstance(value, dict) and value.get("schema_version") == NARRATIVE_COMPACT_READ_REQUEST_SCHEMA
++            else NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA if projected
+             else NARRATIVE_READ_REQUEST_SCHEMA
+         )
+         if item["schema_version"] != expected_schema:
+             raise NarrativeContractError("unsupported narrative read request schema")
+         reference = NarrativeRef.from_dict(item["narrative_ref"])
+-        if (reference.schema_version == NARRATIVE_PROJECTED_REF_SCHEMA) != projected:
++        expected_ref_schema = {
++            NARRATIVE_READ_REQUEST_SCHEMA: NARRATIVE_REF_SCHEMA,
++            NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA: NARRATIVE_PROJECTED_REF_SCHEMA,
++            NARRATIVE_COMPACT_READ_REQUEST_SCHEMA: NARRATIVE_COMPACT_REF_SCHEMA,
++        }[expected_schema]
++        if reference.schema_version != expected_ref_schema:
+             raise NarrativeContractError(
+                 "read schema must match narrative reference schema"
+             )
+@@ -305,7 +345,9 @@ class NarrativeReadRequest:
+             "narrative_ref": self.narrative_ref.to_dict(),
+             "as_of_date": self.as_of_date,
+         }
+-        if self.schema_version == NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA:
++        if self.schema_version in {
++            NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA, NARRATIVE_COMPACT_READ_REQUEST_SCHEMA
++        }:
+             if self.expected_source:
+                 raise NarrativeContractError(
+                     "projected read cannot contain raw identity constraints"
+@@ -340,3 +382,10 @@ def parse_projected_reference_request(value: object) -> tuple[NarrativeSubject,
+     return _projection_subject(item["subject_binding"]), _generation(
+         item["generation_sha256"]
+     )
++
++
++def parse_compact_reference_request(value: object) -> tuple[NarrativeSubjectRef, str]:
++    item = _exact(value, frozenset({"schema_version", "subject_ref", "generation_sha256"}))
++    if item["schema_version"] != NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA:
++        raise NarrativeContractError("unsupported compact narrative reference request schema")
++    return _compact_subject(item["subject_ref"]), _generation(item["generation_sha256"])
+diff --git a/src/company_wiki/narrative_subject.py b/src/company_wiki/narrative_subject.py
+index d7c1c5dd..fdc901af 100644
+--- a/src/company_wiki/narrative_subject.py
++++ b/src/company_wiki/narrative_subject.py
+@@ -88,6 +88,42 @@ def _validate(value: Any) -> None:
+         raise SubjectBindingError("invalid projection as-of date") from None
+ 
+ 
++NARRATIVE_SUBJECT_REF_SCHEMA = "narrative-subject-ref/1"
++
++
++@dataclass(frozen=True)
++class NarrativeSubjectRef:
++    """Compact projection identity; only the source resolver proves its lineage."""
++
++    schema_version: str
++    kind: str
++    item_key: str
++    subject_sha256: str
++
++    def __post_init__(self) -> None:
++        if (self.schema_version != NARRATIVE_SUBJECT_REF_SCHEMA
++                or self.kind != "official_json" or not _hash(self.subject_sha256)
++                or self.item_key != _PROJECTION_PREFIX + self.subject_sha256):
++            raise SubjectBindingError("invalid compact projection identity")
++
++    @classmethod
++    def from_dict(cls, value: object) -> NarrativeSubjectRef:
++        if not isinstance(value, dict) or set(value) != {
++            "schema_version", "kind", "item_key", "subject_sha256"
++        }:
++            raise SubjectBindingError("invalid compact projection fields")
++        return cls(**value)
++
++    @classmethod
++    def from_subject(cls, subject: NarrativeSubject) -> NarrativeSubjectRef:
++        return cls(NARRATIVE_SUBJECT_REF_SCHEMA, subject.kind,
++                   subject.item_key, subject.subject_sha256)
++
++    def to_dict(self) -> dict[str, str]:
++        return {"schema_version": self.schema_version, "kind": self.kind,
++                "item_key": self.item_key, "subject_sha256": self.subject_sha256}
++
++
+ @dataclass(frozen=True)
+ class NarrativeSubject:
+     _binding_json: str
+diff --git a/src/company_wiki/source_catalog/document_kinds.py b/src/company_wiki/source_catalog/document_kinds.py
+index ac3b9544..e4f6ab23 100644
+--- a/src/company_wiki/source_catalog/document_kinds.py
++++ b/src/company_wiki/source_catalog/document_kinds.py
+@@ -16,3 +16,10 @@ SIDECAR_KIND_MAP = {
+ }
+ SOURCE_FACT_KINDS = {kind: source_type.value for kind, (source_type, _) in SIDECAR_KIND_MAP.items()}
+ SOURCE_FACT_KINDS["other"] = SourceType.OTHER.value
++
++# These source families describe reporting periods. Presentations, research,
++# announcements and other nonperiodic originals do not acquire a fictitious FY.
++PERIODIC_DOCUMENT_KINDS = frozenset({
++    "annual_report", "semi_annual_report", "quarterly_report",
++    "regulatory_filing", "investor_call_transcript",
++})
+diff --git a/src/company_wiki/source_catalog/narrative_transport_cli.py b/src/company_wiki/source_catalog/narrative_transport_cli.py
+index 0a202ded..8150a5f8 100644
+--- a/src/company_wiki/source_catalog/narrative_transport_cli.py
++++ b/src/company_wiki/source_catalog/narrative_transport_cli.py
+@@ -24,6 +24,9 @@ from company_wiki.automation.narrative_transport import NarrativeTransportReader
+ from company_wiki.automation.narrative_transport_contracts import (
+     MAX_RECEIPT_BYTES,
+     MAX_REQUEST_BYTES,
++    NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA,
++    NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA,
++    parse_compact_reference_request,
+     NARRATIVE_READ_RECEIPT_SCHEMA,
+     NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA,
+     parse_projected_reference_request,
+@@ -105,14 +108,19 @@ def _dispatch(
+             isinstance(request, dict)
+             and request.get("schema_version") == "narrative-reference-request/2"
+         )
+-        if projected:
++        compact = (isinstance(request, dict)
++                   and request.get("schema_version") == NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA)
++        if compact:
++            subject_ref, generation = parse_compact_reference_request(request)
++            ref = reader.reference_subject_ref(subject_ref, generation_sha256=generation)
++        elif projected:
+             subject, generation = parse_projected_reference_request(request)
+             ref = reader.reference_subject(subject, generation_sha256=generation)
+         else:
+             ref = reader.reference(parse_reference_request(request))
+         return canonical_json(ref.to_dict()).encode("utf-8"), {
+-            "schema_version": NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA
+-            if projected
++            "schema_version": NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA if compact
++            else NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA if projected
+             else NARRATIVE_READ_RECEIPT_SCHEMA,
+             "status": "metadata_only",
+             "narrative_ref": ref.to_dict(),
+@@ -170,10 +178,16 @@ def main(argv: Sequence[str] | None = None) -> int:
+                 expected_projection_sha256=subject.subject_sha256,
+             )
+ 
+-        reader = (NarrativeTransportReader(artifacts, SourceVersionReader(catalog), projection_loader=projection_loader)
+-                  if isinstance(request,dict) and request.get("schema_version") in {
+-                      "narrative-reference-request/2","narrative-read-request/2"}
+-                  else NarrativeTransportReader(artifacts, SourceVersionReader(catalog)))
++        if isinstance(request, dict) and request.get("schema_version") in {
++            "narrative-reference-request/2", "narrative-read-request/2",
++            "narrative-reference-request/3", "narrative-read-request/3",
++        }:
++            reader = NarrativeTransportReader(
++                artifacts, SourceVersionReader(catalog), projection_loader=projection_loader,
++                projection_ref_resolver=projection_loader,
++            )
++        else:
++            reader = NarrativeTransportReader(artifacts, SourceVersionReader(catalog))
+         # Some PDF backends print optional-package notices. The two protocol
+         # streams belong exclusively to artifact bytes and the JSON receipt.
+         with open(os.devnull, "w", encoding="utf-8") as quiet:
+diff --git a/src/company_wiki/source_catalog/source_reader.py b/src/company_wiki/source_catalog/source_reader.py
+index 6c34d137..511b890f 100644
+--- a/src/company_wiki/source_catalog/source_reader.py
++++ b/src/company_wiki/source_catalog/source_reader.py
+@@ -17,6 +17,7 @@ from datetime import UTC, datetime
+ from pathlib import Path, PurePosixPath, PureWindowsPath
+ from typing import Any
+ 
++from .document_kinds import PERIODIC_DOCUMENT_KINDS
+ from .policy_2x import export_policy_2x
+ from .qualification import qualify_source
+ from .prompt_injection import (
+@@ -581,7 +582,7 @@ class SourceVersionReader:
+             "language": manifest["language"],
+             "capture_ready": bool(
+                 capture_complete and https_url and manifest["published_date"]
+-                and period_known
++                and (period_known or manifest["document_kind"] not in PERIODIC_DOCUMENT_KINDS)
+             ),
+             "prompt_injection_status": review_status,
+             "capture_provenance": "indexed_location_manifest" if capture else None,
+diff --git a/tests/unit/test_w04_source_transport.py b/tests/unit/test_w04_source_transport.py
+new file mode 100644
+index 00000000..bbdae7ed
+--- /dev/null
++++ b/tests/unit/test_w04_source_transport.py
+@@ -0,0 +1,288 @@
++"""W04 source facts and bounded projected transport; zero network/model calls."""
++from contextlib import contextmanager
++from dataclasses import asdict
++import hashlib
++import json
++from pathlib import Path
++from tempfile import TemporaryDirectory
++from types import SimpleNamespace
++
++import pytest
++
++from company_wiki.automation.models import canonical_json
++from company_wiki.automation.narrative_transport import NarrativeTransportReader
++from company_wiki.automation.narrative_transport_contracts import NarrativeReadRequest, NarrativeRef, NarrativeTransportError
++from company_wiki.automation.narrative_evidence_view import NarrativeEvidenceViewReader, NarrativeEvidenceViewQuery
++from company_wiki.source_catalog import CatalogConfig, RootSpec, SourceCatalog
++from company_wiki.source_catalog.resolver import SourceRequest
++from company_wiki.source_catalog.source_reader import SourceVersionReader
++from company_wiki.source_catalog.narrative_transport_cli import _dispatch
++from integration.test_official_json_transport_subject import owned_state, publish, loader_for, bundle_for
++from company_wiki.narrative_subject import NarrativeSubject
++from company_wiki.source_catalog.narrative_artifact_store import LocalNarrativeObjectStore, NarrativeArtifactStore
++from company_wiki.source_catalog.official_json_import import import_official_json_source
++from company_wiki.source_catalog.official_json_projection import build_projection_from_refs, persist_projection
++from company_wiki.automation.narrative_official_json import open_verified_projection, select_verified_projection
++from company_wiki.source_contract import EvidenceSpan
++
++
++def wire_bytes(value):
++    return canonical_json(value).encode("utf-8") + b"\n"
++
++
++def compact(subject):
++    return {"schema_version": "narrative-subject-ref/1", "kind": "official_json",
++            "item_key": subject.item_key, "subject_sha256": subject.subject_sha256}
++
++
++def read_request(reference, **constraints):
++    return NarrativeReadRequest.from_dict({
++        "schema_version": "narrative-read-request/3", "narrative_ref": reference,
++        "as_of_date": constraints.get("cutoff", "2026-10-08"),
++        "expected_issuer": constraints.get("issuer")})
++
++
++@pytest.mark.parametrize("kind,ready", [
++    ("investor_relations", True), ("broker_research", True),
++    ("annual_report", False), ("quarterly_report", False),
++    ("semi_annual_report", False), ("investor_call_transcript", False),
++])
++def test_capture_capability_requires_period_only_for_periodic_sources(tmp_path, kind, ready):
++    root = tmp_path / "companies" / "Acme" / "raw"
++    root.mkdir(parents=True)
++    raw = root / "source.pdf"
++    body = b"%PDF-1.4 Our product pipeline and customer qualification expanded."
++    raw.write_bytes(body)
++    digest = hashlib.sha256(body).hexdigest()
++    raw.with_name(raw.name + ".source.json").write_text(json.dumps({
++        "schema_version": "1.0", "company_name": "Acme", "canonical_entity_id": "ent-acme",
++        "display_name": "Acme", "market": "US", "security_id": "ACME",
++        "document_kind": kind, "source_title": "Acme source",
++        "published_date": "2026-09-01", "source_url": "https://example.org/source",
++        "retrieved_at": "2026-10-10T00:00:00Z", "collector_name": "offline-fixture",
++        "collector_version": "1", "content_sha256": digest,
++    }), encoding="utf-8")
++    catalog = SourceCatalog(CatalogConfig(tmp_path, tmp_path / "catalog", (
++        RootSpec("company_raw", tmp_path / "companies", "company_raw"),
++    )))
++    try:
++        catalog.scan()
++        row = catalog.reader.fetchone("SELECT d.document_id,d.primary_source_id FROM documents d "
++            "JOIN sources s ON s.source_id=d.primary_source_id WHERE s.content_sha256=?", (digest,))
++        reader = SourceVersionReader(catalog)
++        ref = reader.query_ref(row["document_id"], row["primary_source_id"], digest)
++        candidate = reader.describe_candidate(ref)
++        assert candidate["fiscal_year"] is None
++        assert candidate["fiscal_period"] is None
++        assert candidate["capture_ready"] is ready
++        assert reader.open_version(ref, purpose="source_export").data == body
++        assert reader.query_local(SourceRequest(entity="Acme", market="US", security_id="ACME",
++            document_kind=kind, fiscal_year=2026, as_of_date="2026-10-08")).matches == ()
++        assert asdict(ref) == candidate["source_ref"]
++    finally:
++        catalog.close()
++
++
++def test_compact_projected_public_operations_keep_full_lineage_and_verify_once(tmp_path, monkeypatch):
++    with owned_state(tmp_path) as state:
++        subject = state.subjects[0]
++        version, generation, payload = publish(state, subject, "w04-compact")
++        calls = []
++        transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog),
++            projection_ref_resolver=loader_for(state, calls))
++        request = {"schema_version": "narrative-reference-request/3", "subject_ref": compact(subject),
++                   "generation_sha256": generation}
++        reference_bytes, receipt = _dispatch("reference", request, transport)
++        reference = json.loads(reference_bytes)
++        assert set(reference) == {"schema_version", "artifact_version_id", "artifact_sha256",
++                                  "byte_size", "generation_sha256", "subject_ref"}
++        assert reference["schema_version"] == "narrative-ref/3"
++        assert reference["subject_ref"] == compact(subject)
++        assert receipt == {"schema_version": "narrative-read-receipt/3", "status": "metadata_only",
++                           "narrative_ref": reference}
++        assert NarrativeRef.from_dict(reference).to_dict() == reference
++        parsed = read_request(reference, issuer={"provider_company_id": 1})
++        opened = []
++        original_open = SourceVersionReader.open_version
++        def count_open(reader, source, **kwargs):
++            opened.append(source.content_sha256)
++            return original_open(reader, source, **kwargs)
++        monkeypatch.setattr(SourceVersionReader, "open_version", count_open)
++        result = transport.read(parsed)
++        assert result.data == payload
++        assert sorted(opened) == sorted(ref["content_sha256"] for ref in state.refs)
++        assert result.receipt["schema_version"] == "narrative-read-receipt/3"
++        assert set(result.receipt) == {"schema_version", "status", "narrative_ref", "as_of_date",
++            "observed_at", "locator_count", "parent_count", "lineage_sha256", "selection_status",
++            "quality_status", "replay_status"}
++        assert result.receipt["parent_count"] == 2
++        lineage = hashlib.sha256(canonical_json(subject.to_dict()).encode()).hexdigest()
++        assert result.receipt["lineage_sha256"] == lineage
++        assert json.loads(result.data)["subject_binding"] == subject.to_dict()
++        opened.clear()
++        view = NarrativeEvidenceViewReader(transport).read(parsed, NarrativeEvidenceViewQuery("evidence-list", limit=1))
++        body = json.loads(view.data)
++        assert body["schema_version"] == "narrative-evidence-view/3"
++        assert body["parent_source_refs"] == list(subject.parent_source_refs)
++        assert body["subject_binding"] == subject.to_dict()
++        assert body["total"] > len(body["items"]) == 1
++        assert view.receipt["schema_version"] == "narrative-evidence-read-receipt/3"
++        assert view.receipt["lineage_sha256"] == lineage
++        assert view.receipt["parent_count"] == 2
++        assert sorted(opened) == sorted(ref["content_sha256"] for ref in state.refs)
++        for wire in (request, reference, receipt, parsed.to_dict(), result.receipt, view.receipt):
++            assert len(wire_bytes(wire)) <= 16384
++        assert len(result.data) <= 1310720
++
++
++@pytest.mark.parametrize("mutation", ["extra", "wrong_kind", "wrong_id", "bad_sha", "raw_anchor"])
++def test_compact_reference_refuses_mixed_and_inconsistent_identity(mutation):
++    value = {"schema_version": "narrative-ref/3", "artifact_version_id": "w04-version",
++             "artifact_sha256": "a" * 64, "byte_size": 1024, "generation_sha256": "b" * 64,
++             "subject_ref": {"schema_version": "narrative-subject-ref/1", "kind": "official_json",
++                 "item_key": "urn:company-wiki:source-projection:sha256:" + "c" * 64,
++                 "subject_sha256": "c" * 64}}
++    if mutation == "extra":
++        value["subject_ref"]["parent_source_refs"] = []
++    elif mutation == "wrong_kind":
++        value["subject_ref"]["kind"] = "raw"
++    elif mutation == "wrong_id":
++        value["subject_ref"]["item_key"] += "d"
++    elif mutation == "bad_sha":
++        value["subject_ref"]["subject_sha256"] = "C" * 64
++    else:
++        value["source_ref"] = {}
++    with pytest.raises(ValueError):
++        NarrativeRef.from_dict(value)
++
++
++@contextmanager
++def large_owned_state(tmp_path):
++    before = tuple(tmp_path.iterdir())
++    with TemporaryDirectory(prefix="w04-65-", dir=tmp_path) as temporary:
++        root = Path(temporary)
++        (root / "companies").mkdir()
++        catalog = SourceCatalog(CatalogConfig(root, root / "catalog", (
++            RootSpec("company_raw", root / "companies", "company_raw"),)))
++        refs, originals = [], []
++        try:
++            for page in range(65):
++                first, last = page * 4, min((page + 1) * 4, 257)
++                body = canonical_json({"ok": True, "result": {"page": page + 1,
++                    "page_size": 4, "page_count": 65, "item_total": 257,
++                    "items": [{"ref": index, "org_id": index % 24 + 1,
++                        "org_name": "Company " + str(index % 24 + 1),
++                        "q": "When do new product qualification and overseas shipments begin?",
++                        "a": "Our new product completed customer qualification and overseas shipments begin in the fourth quarter.",
++                        "answered": True, "created_at": "2026-09-01 10:00:00",
++                        "updated_at": "2026-09-01 10:00:00"} for index in range(first, last)]}}).encode()
++                digest = hashlib.sha256(body).hexdigest()
++                imported = import_official_json_source(catalog, original=body, request={
++                    "schema_version": "official-source-import-request/2",
++                    "request_id": "w04-page-" + str(page), "max_bytes": 1048576,
++                    "content_sha256": digest, "mime_type": "application/json",
++                    "document_kind": "investor_relations", "source_subject": {
++                        "kind": "multi_issuer_event", "event_namespace": "w04-fixture",
++                        "event_id": "65", "issuer_refs": [], "attribution_status": "partial"},
++                    "capture_receipt": {"capture_method": "local_document", "tool_name": "synthetic",
++                        "tool_call_id": str(page), "captured_at": "2026-10-10T00:00:00Z",
++                        "response_bytes": len(body), "content_sha256": digest}})
++                refs.append(imported["source_ref"])
++                originals.append(body)
++            projection = build_projection_from_refs(catalog, refs=refs, layout_id="official-flat-list",
++                issuer={"provider_company_id": 1}, as_of_date="2026-10-08", projection_version="1.0.2")
++            assert len(projection.parent_source_refs) == 65 and len(projection.records) == 257
++            persist_projection(catalog, projection)
++            subject = NarrativeSubject.from_projection(projection)
++            view = open_verified_projection(catalog, projection_id=subject.item_key,
++                expected_projection_sha256=subject.subject_sha256)
++            selected = select_verified_projection(view, title="Business development Q&A")
++            selected_parents = {span.source_id for span in selected.evidence_spans}
++            state = SimpleNamespace(catalog=catalog, root=root,
++                refs=[ref for ref in refs if ref["source_id"] in selected_parents],
++                artifacts=NarrativeArtifactStore(catalog.store, LocalNarrativeObjectStore(catalog.config.catalog_dir)))
++            yield state, subject, refs
++            files = [path for path in (root / "companies").rglob("*.json")
++                     if not path.name.endswith(".source.json")]
++            assert sorted(hashlib.sha256(path.read_bytes()).hexdigest() for path in files) == sorted(
++                hashlib.sha256(body).hexdigest() for body in originals)
++        finally:
++            catalog.close()
++    assert tuple(tmp_path.iterdir()) == before
++
++
++def test_compact_65_parent_wire_stays_small_without_truncating_body(tmp_path, monkeypatch):
++    with large_owned_state(tmp_path) as (state, subject, all_refs):
++        wire = bundle_for(state, subject)
++        _, generation, payload = publish(state, subject, "w04-65", wire=wire)
++        assert len(wire_bytes(subject.to_dict())) > 16384
++        transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog),
++            projection_ref_resolver=loader_for(state, []))
++        data, metadata = _dispatch("reference", {"schema_version": "narrative-reference-request/3",
++            "subject_ref": compact(subject), "generation_sha256": generation}, transport)
++        parsed = read_request(json.loads(data))
++        calls = []
++        real_open = SourceVersionReader.open_version
++        def count(reader, source, **kwargs):
++            calls.append(source.content_sha256)
++            return real_open(reader, source, **kwargs)
++        monkeypatch.setattr(SourceVersionReader, "open_version", count)
++        result = transport.read(parsed)
++        assert result.data == payload and len(result.data) <= 1310720
++        assert sorted(calls) == sorted(ref["content_sha256"] for ref in all_refs)
++        assert result.receipt["parent_count"] == 65
++        assert json.loads(result.data)["subject_binding"] == subject.to_dict()
++        evidence = NarrativeEvidenceViewReader(transport).read(parsed, NarrativeEvidenceViewQuery("evidence-list", limit=1))
++        assert len(json.loads(evidence.data)["parent_source_refs"]) == 65
++        assert json.loads(evidence.data)["subject_binding"] == subject.to_dict()
++        for value in (json.loads(data), metadata, parsed.to_dict(), result.receipt, evidence.receipt):
++            assert len(wire_bytes(value)) <= 16384
++
++
++@pytest.mark.parametrize("mutation,reason", [
++    ("issuer", "projection_issuer_mismatch"), ("asof", "projection_after_as_of"),
++    ("generation", "artifact_reference_mismatch"), ("parent", "no_verified_location"),
++    ("pointer", "locator_replay_failed"),
++])
++def test_compact_read_preserves_native_refusals(tmp_path, mutation, reason):
++    with owned_state(tmp_path) as state:
++        subject = state.subjects[0]
++        wire = bundle_for(state, subject)
++        if mutation == "pointer":
++            original = EvidenceSpan.from_dict(wire["evidence_spans"][0])
++            fields = dict(original.structured_value)
++            fields["pointer"] = "/fabricated/pointer"
++            forged = EvidenceSpan.create(source_id=original.source_id,
++                coordinates=original.coordinates, raw_text=original.raw_text, structured_value=fields,
++                parser_name=original.parser_name, parser_version=original.parser_version,
++                parse_status=original.parse_status, quality_flags=original.quality_flags)
++            wire["evidence_spans"][0] = forged.to_dict()
++            for claim in wire["summary"]["draft"]["claims"]:
++                claim["evidence_ids"] = [forged.span_id if value == original.span_id else value
++                                         for value in claim["evidence_ids"]]
++        _, generation, _ = publish(state, subject, "w04-" + mutation, wire=wire)
++        transport = NarrativeTransportReader(state.artifacts, SourceVersionReader(state.catalog),
++            projection_ref_resolver=loader_for(state, []))
++        data, _ = _dispatch("reference", {"schema_version": "narrative-reference-request/3",
++            "subject_ref": compact(subject), "generation_sha256": generation}, transport)
++        reference = json.loads(data)
++        constraints = {}
++        if mutation == "issuer":
++            constraints["issuer"] = {"provider_company_id": 999}
++        elif mutation == "asof":
++            constraints["cutoff"] = "2026-10-07"
++        elif mutation == "generation":
++            reference["generation_sha256"] = "f" * 64
++        changed = None
++        if mutation == "parent":
++            changed = next(path for path in (state.root / "companies").rglob("*.json")
++                           if not path.name.endswith(".source.json"))
++            before = changed.read_bytes()
++            changed.write_bytes(before + b" ")
++        try:
++            with pytest.raises(NarrativeTransportError) as failure:
++                transport.read(read_request(reference, **constraints))
++            assert failure.value.reason == reason
++        finally:
++            if changed is not None:
++                changed.write_bytes(before)

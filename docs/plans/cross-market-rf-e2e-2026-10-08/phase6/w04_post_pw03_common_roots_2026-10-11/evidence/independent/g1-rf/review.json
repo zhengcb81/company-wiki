@@ -1,0 +1,280 @@
+{
+  "checks": [
+    {
+      "result": "PASS within pinned producer body trust boundary",
+      "scope": "public /3 exact outer keys, compact/full subject, generation/ref/receipt binding, all parent refs, each parent/pointer binding",
+      "source": "scripts/company_wiki_narrative_contracts.py:175,229,610,622,701,732,780"
+    },
+    {
+      "result": "PASS including actual CN H1 145904-byte /1, 96 spans, zh plus zh-CN",
+      "scope": "historical /1 four/five metadata and locale/family preservation",
+      "source": "scripts/company_wiki_narrative_contracts.py:505,527,547"
+    },
+    {
+      "result": "PASS; 3 offline positive cases, 9 supplied-constraint refusals; actual US originals reuse proof checked by sealed SHA",
+      "scope": "pinned nonperiod read, no fabricated FY, no FF acquisition metadata prerequisite or SEC fallback",
+      "source": "scripts/source_preparation.py:113,211,248,265,382,392"
+    },
+    {
+      "result": "RF consumer wrappers PASS; true FF producer remains pending",
+      "scope": "typed optional FF request diagnostic sibling",
+      "source": "scripts/filing_upstream_cause.py:134; scripts/filing_fetch_client.py:38,358; scripts/source_preparation.py:157"
+    },
+    {
+      "result": "PASS independent microprobe",
+      "scope": "native snapshot 3.7/3.8/3.9 and write-once compact delivery, historical metadata diagnostic only",
+      "source": "scripts/revenue_backtest.py:35,79,86"
+    },
+    {
+      "result": "PASS technical contract: existing /3 derived-ancestor fixture plus actual H1 read/capture/complete run_forecast. Full actual /3 economic input unverified due absent prior availability proof.",
+      "scope": "narrative rationale claim to existing used parameter, derived ancestor and segment formula; preserve numeric values and actual source identity",
+      "source": "scripts/source_narrative_context.py:37,55,77,94,124,129,138"
+    },
+    {
+      "result": "PASS: all 5 added kinds exist in actual SIDECAR_KIND_MAP; no invented document kind",
+      "scope": "only existing actual producer document kinds added to RF source_type mapping",
+      "source": "CWP src/company_wiki/source_catalog/document_kinds.py:4; RF scripts/source_preparation.py:96"
+    }
+  ],
+  "economic_acceptance": false,
+  "environment_restored": true,
+  "evidence_sha_checks": [
+    {
+      "actual_sha256": "279f6f6c13a3cbe123ee850f730ce53429e4c2061a393fc907c17bda32e38362",
+      "byte_size": 3028,
+      "expected_sha256": "279f6f6c13a3cbe123ee850f730ce53429e4c2061a393fc907c17bda32e38362",
+      "matches": true,
+      "name": "executed-commands.json"
+    },
+    {
+      "actual_sha256": "2579951667fd7af7591fedf16d4fbf56509498fcb939e6cb94b55582b73e10ea",
+      "byte_size": 275,
+      "expected_sha256": "2579951667fd7af7591fedf16d4fbf56509498fcb939e6cb94b55582b73e10ea",
+      "matches": true,
+      "name": "green-final3.log"
+    },
+    {
+      "actual_sha256": "3019d41da7440b0d7a35d3b45e0c15b0e7ead1db220bfe2926819b32b8dd251c",
+      "byte_size": 458,
+      "expected_sha256": "3019d41da7440b0d7a35d3b45e0c15b0e7ead1db220bfe2926819b32b8dd251c",
+      "matches": true,
+      "name": "h1-actual-red.json"
+    },
+    {
+      "actual_sha256": "21aa24d80ee9a6bc385c2d05eb1412d9b04b89a3030a6dcf4a7aa616f01ff36d",
+      "byte_size": 1580,
+      "expected_sha256": "21aa24d80ee9a6bc385c2d05eb1412d9b04b89a3030a6dcf4a7aa616f01ff36d",
+      "matches": true,
+      "name": "h1-and-constraints-green.json"
+    },
+    {
+      "actual_sha256": "ebcfb7f013ab8e9875b760456838849d694a58d4014a99c15d27c18354cc4f12",
+      "byte_size": 4611,
+      "expected_sha256": "ebcfb7f013ab8e9875b760456838849d694a58d4014a99c15d27c18354cc4f12",
+      "matches": true,
+      "name": "IMPLEMENTATION_RECEIPT.md"
+    },
+    {
+      "actual_sha256": "5e1fc91961a8a1368876cc7d55a3b8680eb1f0f67d01516e6f15e2b72f073cf5",
+      "byte_size": 2295,
+      "expected_sha256": "5e1fc91961a8a1368876cc7d55a3b8680eb1f0f67d01516e6f15e2b72f073cf5",
+      "matches": true,
+      "name": "local-static.json"
+    },
+    {
+      "actual_sha256": "25c955c2330919dc83fbb5ede8462733c79c3ada16d52c5cc94f170c6a1c61f7",
+      "byte_size": 1359,
+      "expected_sha256": "25c955c2330919dc83fbb5ede8462733c79c3ada16d52c5cc94f170c6a1c61f7",
+      "matches": true,
+      "name": "owned-temp-cleanup.json"
+    },
+    {
+      "actual_sha256": "323f7e81d132794ed64d6f36391812af6f8a7ec33467c3455358f2e4e007b3a1",
+      "byte_size": 6196,
+      "expected_sha256": "323f7e81d132794ed64d6f36391812af6f8a7ec33467c3455358f2e4e007b3a1",
+      "matches": true,
+      "name": "public-consumer-green.json"
+    },
+    {
+      "actual_sha256": "e795b0673c33d508be6b052c888db93df7fd0b239a1775bce4b795629efd7531",
+      "byte_size": 699,
+      "expected_sha256": "e795b0673c33d508be6b052c888db93df7fd0b239a1775bce4b795629efd7531",
+      "matches": true,
+      "name": "public-consumer-red.json"
+    },
+    {
+      "actual_sha256": "0e66f1b1e1d4f6cd1c2e93e03dd4aab2105291f591391b1daf26f25e70b081dd",
+      "byte_size": 12494,
+      "expected_sha256": "0e66f1b1e1d4f6cd1c2e93e03dd4aab2105291f591391b1daf26f25e70b081dd",
+      "matches": true,
+      "name": "red.log"
+    },
+    {
+      "actual_sha256": "0cdb0243e2eebd41af6bb238081975fe04418b0883ab50d394d0de26e4087192",
+      "byte_size": 3580,
+      "expected_sha256": "0cdb0243e2eebd41af6bb238081975fe04418b0883ab50d394d0de26e4087192",
+      "matches": true,
+      "name": "red2.log"
+    },
+    {
+      "actual_sha256": "c5029f5758c2cb81491ad04f975eedbac2ec91568073b5aa27f0e6e467037c7a",
+      "byte_size": 2969,
+      "expected_sha256": "c5029f5758c2cb81491ad04f975eedbac2ec91568073b5aa27f0e6e467037c7a",
+      "matches": true,
+      "name": "red3.log"
+    },
+    {
+      "actual_sha256": "5757182c596889f051a0e6f6a8a85434204e36525afd2732c0d3f44da34b21a4",
+      "byte_size": 2379,
+      "expected_sha256": "5757182c596889f051a0e6f6a8a85434204e36525afd2732c0d3f44da34b21a4",
+      "matches": true,
+      "name": "red4.log"
+    },
+    {
+      "actual_sha256": "e91d09016010aee0abf6099337e7f23e1eab719148d587b371d79cdcd00d15b6",
+      "byte_size": 66470,
+      "expected_sha256": "e91d09016010aee0abf6099337e7f23e1eab719148d587b371d79cdcd00d15b6",
+      "matches": true,
+      "name": "rf.diff"
+    },
+    {
+      "actual_sha256": "b5355c5419d3a1f7acb106c66985d38b213addc1e3d11bec043369126dc4300e",
+      "byte_size": 2155,
+      "expected_sha256": "b5355c5419d3a1f7acb106c66985d38b213addc1e3d11bec043369126dc4300e",
+      "matches": true,
+      "name": "snapshot-native-proof.json"
+    }
+  ],
+  "material_findings": [],
+  "microprobe_results_file": "microprobe-results.json",
+  "not_executed": [
+    "204-case local suite or prior RF 284/551 suites were not rerun",
+    "WP01 91-check producer suite was not rerun",
+    "No paid model/provider or network acquisition",
+    "No old snapshot/header/registry rewrite",
+    "No production config or canonical assurance/output writes",
+    "No full-company economic reacceptance"
+  ],
+  "operational_observations": {
+    "codegraph_canonical": "partial context used, then known-file reads",
+    "codegraph_isolated": "not initialized; per explicit instruction no init",
+    "default_registry_after": {
+      "byte_size": 2254,
+      "last_write_utc": "2026-10-10T22:34:56.559267+00:00",
+      "note": "default registry append attempted during first full-engine microprobe was denied before writing; last write predates this review",
+      "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast\\artifacts\\registry\\publications.jsonl",
+      "sha256_after": "05d911763851139a337beed8beb9590e282a4dcc6c556541d89b1ca728d84a72"
+    },
+    "first_full_engine_default_registry_attempt": "PermissionError before append; corrected by isolated owned TEMP environment before engine call",
+    "first_h1_candidate_attempt": "incomplete manually constructed capture_ready candidate was refused document_id mismatch; subsequent faithful public field copy used; this was probe setup, not product issue",
+    "git_cli": "sandbox git status/diff in isolated cwd failed; branch/head verified from direct HEAD/ref reads; reviewed actual bytes verified by seal SHA"
+  },
+  "owned_temporaries_remaining": [],
+  "probe_families": 4,
+  "remaining": [
+    {
+      "detail": "RF consumer four-reason wrapper evidence is not a real FF producer integration; must retain this remaining item.",
+      "id": "FF_REAL_TYPED_SIBLING_PRODUCER",
+      "owner": "WP02/G2",
+      "status": "NOT_IMPLEMENTED_OR_ACCEPTED_HERE"
+    },
+    {
+      "detail": "Actual management span parent c620... is refused at as_of 2026-10-08 for unknown publication/no reliable prior availability proof in both 2.1 and 2.2. Keep unknown; do not fabricate publication, receipt, fiscal year or source_ref.",
+      "id": "PROJECTED_REAL_CAPTURE_ECONOMIC_CHAIN",
+      "owner": "WP02/WP06/G2 and final cross-repository gates",
+      "status": "UNKNOWN_NOT_VERIFIED"
+    },
+    {
+      "detail": "Technical graphs and full synthetic formula execution do not sign economic forecast quality.",
+      "id": "COMPANY_ECONOMIC_REACCEPTANCE",
+      "status": "NOT_RUN"
+    },
+    {
+      "detail": "Normal publication/install, adjacent TRUST_BOUNDARY/report links and final cross-repository closure remain ROOT work.",
+      "id": "ROOT_FINAL_DELIVERY_INSTALL",
+      "status": "NOT_RUN"
+    }
+  ],
+  "reviewed_branch": "codex/w04-rf-public-consumer-20261011",
+  "reviewed_head": "47f497ad9dee9dc47f66fca37016e9ba6b6b6f33",
+  "reviewed_repository": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\revenue-forecast",
+  "rf_diff_sha256": "e91d09016010aee0abf6099337e7f23e1eab719148d587b371d79cdcd00d15b6",
+  "schema_version": "w04-g1-rf-independent-review/1",
+  "source_kind_compatibility_file": "source-kind-compatibility.json",
+  "source_sha_checks": [
+    {
+      "actual_sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+      "byte_size": 41228,
+      "expected_sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+      "matches": true,
+      "path": "scripts/company_wiki_narrative_contracts.py"
+    },
+    {
+      "actual_sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+      "byte_size": 3382,
+      "expected_sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+      "matches": true,
+      "path": "scripts/company_wiki_narrative_reader.py"
+    },
+    {
+      "actual_sha256": "ddb6b7224e1cf5141c04f6395f86390bbb898a52739de9763da6917e0dcfdab2",
+      "byte_size": 26650,
+      "expected_sha256": "ddb6b7224e1cf5141c04f6395f86390bbb898a52739de9763da6917e0dcfdab2",
+      "matches": true,
+      "path": "scripts/source_preparation.py"
+    },
+    {
+      "actual_sha256": "3bdb21c4b08e85f03ff190a1d43945a70ac272afe1000a5748d17d7f2b4f0223",
+      "byte_size": 8074,
+      "expected_sha256": "3bdb21c4b08e85f03ff190a1d43945a70ac272afe1000a5748d17d7f2b4f0223",
+      "matches": true,
+      "path": "scripts/source_narrative_context.py"
+    },
+    {
+      "actual_sha256": "5a047717f28f33da0ff5bb6edf26606efd068f0b950617677f908446a8dced07",
+      "byte_size": 30159,
+      "expected_sha256": "5a047717f28f33da0ff5bb6edf26606efd068f0b950617677f908446a8dced07",
+      "matches": true,
+      "path": "scripts/revenue_backtest.py"
+    },
+    {
+      "actual_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+      "byte_size": 16962,
+      "expected_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+      "matches": true,
+      "path": "scripts/filing_upstream_cause.py"
+    },
+    {
+      "actual_sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+      "byte_size": 19426,
+      "expected_sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+      "matches": true,
+      "path": "scripts/filing_fetch_client.py"
+    },
+    {
+      "actual_sha256": "fe2a22afa665d9fa7aa8c4834001b9096089810b5840ed44ec1c352be434ce37",
+      "byte_size": 16578,
+      "expected_sha256": "fe2a22afa665d9fa7aa8c4834001b9096089810b5840ed44ec1c352be434ce37",
+      "matches": true,
+      "path": "tests/test_w04_public_consumer.py"
+    },
+    {
+      "actual_sha256": "5f490f746c96e760086254fdefc6febfd28031cec9e786bc438e1cabbbecd7c1",
+      "byte_size": 2108,
+      "expected_sha256": "5f490f746c96e760086254fdefc6febfd28031cec9e786bc438e1cabbbecd7c1",
+      "matches": true,
+      "path": "tests/test_w04_snapshot_delivery.py"
+    }
+  ],
+  "source_stop_manifest_sha256": "f8caa96ce87de895dbd97057028ce10b74da13d9f3ad9a1e206661c56d4ccda8",
+  "source_writes": 0,
+  "status": "STOP",
+  "technical_verdict": "PASS_WITH_EXPLICIT_REMAINING",
+  "usage": {
+    "cost_usd": 0,
+    "http_calls": 0,
+    "model_calls": 0,
+    "provider_calls": 0
+  },
+  "worktree_head_and_ref_read_directly": true
+}

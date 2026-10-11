@@ -1,0 +1,28 @@
+OWNED_FIXTURE C:\Users\郑曾波\AppData\Local\Temp\w4p1-k4f7_7dv
+{
+  "owned_fixture": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4p1-k4f7_7dv",
+  "config": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4p1-k4f7_7dv\\CN-688012\\config.yaml",
+  "us_config": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4p1-k4f7_7dv\\US-MSFT\\config.yaml",
+  "selected_projection": {
+    "sha256": "b0c6bfb3faa447f292330ae9d73a27a09367184a820bb6f8c454ab60ead7e695",
+    "parents": 65,
+    "records": 195
+  },
+  "all_projection_records": 257,
+  "distinct_issuer_observations": 36,
+  "bundle_sha256": "970ce8774bbf7ab660a5562c7c299057b54648b2b412872c0480ad8aa4ff19ff",
+  "bundle_bytes": 59247,
+  "source_opens_per_read": 65,
+  "wire_bytes": {
+    "reference_stdin": 424,
+    "reference_stdout": 579,
+    "reference_stderr": 667,
+    "read_stdin": 725,
+    "read_stderr": 931,
+    "evidence_stderr": 981
+  },
+  "provider_calls": 0,
+  "http_calls": 0,
+  "model_calls": 0,
+  "cost_usd": 0
+}

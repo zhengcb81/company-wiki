@@ -1,0 +1,171 @@
+{
+  "schema_version": "w04-major-timeout-readonly-review/1",
+  "observed_at": "2026-10-11T06:30:58.539880+00:00",
+  "status": "DIAGNOSIS_COMPLETE_WITH_EVIDENCE_LIMITS_STOP",
+  "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "original_failure": {
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "tests/unit",
+      "tests/contract",
+      "-q",
+      "--tb=short"
+    ],
+    "timeout_seconds": 360,
+    "launch_tool_chunk": "9f1c4d",
+    "shell_session_id": 81595,
+    "final_tool_chunk": "ab1306",
+    "exception": "subprocess.TimeoutExpired",
+    "driver_used_stdout": "PIPE",
+    "partial_stdout_saved": false,
+    "receipt_saved": false,
+    "utc_start_end": null,
+    "pid": null,
+    "known_limit": "Driver wrote the log only after success; TimeoutExpired.stdout was not retained. No failing/stalled node or partial count can be reconstructed."
+  },
+  "accepted_baseline": {
+    "receipt_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\ci-docx-investigation\\evidence\\push-scope-publication\\normal-push.json",
+    "receipt_sha256": "1b579cf525674b6fe619ec9780dbb781b48df239b2a658e03fb8204f78886047",
+    "log_sha256": "7c43c7a76f39843acb00ab3f27cf636d973a56c9a0d1e57af8e6472d7c78afc2",
+    "head": "116a39d86ac0894786ea53a295c860c01f38a888",
+    "outer_command": [
+      "git",
+      "push",
+      "origin",
+      "HEAD:master"
+    ],
+    "scope": "ordinary push selected tests/unit plus curated FAST_CONTRACT_CASES, with unit duplication removed",
+    "reported_passed": 3206,
+    "pytest_elapsed_seconds": 195.93,
+    "outer_elapsed_seconds": 204.45422489999328,
+    "full_contract_directory": false
+  },
+  "collection": {
+    "all": {
+      "item_counts": {
+        "unit": 3103,
+        "contract": 2524
+      },
+      "module_counts": {
+        "unit": 178,
+        "contract": 240
+      },
+      "total": 5627,
+      "parser": "pytest collection tree, section indent=4; count Function/TestCaseFunction/Coroutine leaves",
+      "log_sha256": "b8965968b278622e9e115c90cdbb229f65454386e487e84ce2395c78a1f2b6a2"
+    },
+    "fast": {
+      "item_counts": {
+        "integration": 45,
+        "unit": 6,
+        "contract": 86
+      },
+      "module_counts": {
+        "integration": 1,
+        "unit": 5,
+        "contract": 11
+      },
+      "total": 137,
+      "parser": "pytest collection tree, section indent=4; count Function/TestCaseFunction/Coroutine leaves",
+      "log_sha256": "a4eb2f8275ce3705f2d1cfa44aa3979495512fb57ba055e0807eb6b4f98c7473"
+    }
+  },
+  "scope_comparison": {
+    "current_unit_items": 3103,
+    "current_full_contract_items": 2524,
+    "curated_contract_items": 86,
+    "curated_integration_items": 45,
+    "curated_unit_items_already_in_unit_suite": 6,
+    "current_combined_push_unique_items": 3234,
+    "ci_separate_steps_total_item_executions": 3240,
+    "extra_non_curated_contract_items_in_failed_manual_command": 2438,
+    "curated_integration_items_omitted_by_failed_manual_command": 45,
+    "net_extra_items_vs_current_combined_push": 2393,
+    "difference_vs_accepted_prior_push": 2421,
+    "new_unit_items_explain_prior_to_current_push_delta": 28,
+    "prior_unit_count_inferred_not_collected": 3075
+  },
+  "slow_contract_static_evidence": [
+    {
+      "path": "tests/contract/test_source_catalog_parser_liveness.py",
+      "lines": [
+        620,
+        624,
+        633,
+        650,
+        663,
+        664
+      ],
+      "observation": "Successful slow parser deliberately sleeps 45 seconds; separate over-timeout case gives that parser 10 seconds. These manual contracts are absent from FAST_CONTRACT_CASES. Static evidence only; no timing probe or test body executed."
+    },
+    {
+      "path": "tests/contract/test_close_gap_concurrency_fc804.py",
+      "lines": [
+        245,
+        272,
+        285,
+        287,
+        291,
+        292
+      ],
+      "observation": "Manual recovery tests spawn an owned process, wait for a checkpoint then terminate; intended sleep is not automatically 20 seconds because the parent normally terminates it. Therefore it is not counted as a 20-second measured delay."
+    }
+  ],
+  "environment": {
+    "local_collection": "Windows / Python 3.13.9 / pytest 9.1.1",
+    "ci_declared": "ubuntu-latest / Python 3.12",
+    "parallel_load_sampled": false,
+    "environment_contention_proven": false,
+    "deadlock_proven": false,
+    "same_full_scope_accepted_duration_baseline_found": false,
+    "expected_duration_conclusion": "The accepted 195.93-second baseline covers a materially smaller set. It cannot justify a 360-second wall deadline for 5627 items. The current full manual duration and stalled item remain unknown; no precise full-suite range is claimed."
+  },
+  "process_check": {
+    "default_sandbox_cim": "Get-CimInstance failed: 无法从客户端中访问 CIM 资源. This does not establish absence.",
+    "approved_cim_exact_filter": "python/pythonw Name; CommandLine contains exact pytest tests/unit tests/contract -q --tb=short signature",
+    "approved_result": "NO_EXACT_PYTEST_PROCESS",
+    "approved_tool_chunk": "e26321",
+    "only_matching_metadata_allowed": true,
+    "other_command_lines_output": false,
+    "cwd_of_process_verified": false,
+    "original_parent_pid_recorded": false,
+    "orphan_descendants_identified": false,
+    "processes_terminated": 0,
+    "limit": "No matching parent remains. Without original PID/time/cwd evidence, unrelated descendants cannot safely be attributed or terminated."
+  },
+  "conclusion": {
+    "proven_root": "The added manual major test orchestration broadened the contract scope far beyond current CI and accepted push baseline; the driver also failed to preserve partial timeout evidence. Neither is evidence that new source code deadlocked.",
+    "product_deadlock_or_specific_test_defect": "unverified; do not repair code or weaken tests based on this timeout",
+    "action": "Use ordinary CI-equivalent unit plus curated contract gate once at publication; preserve manual contracts for relevant risk-specific major checks. Do not repeat the entire tests/unit + tests/contract command."
+  },
+  "future_capture_recommendation": [
+    "Stream stdout/stderr to an owned file before launch; preserve bytes and SHA on success, failure and timeout.",
+    "Record command, cwd, UTC start/end, monotonic duration, owned PID and timed_out; retain current test or per-test durations where a relevant major manual suite is intentionally selected.",
+    "Keep existing normal hooks, test assertions, curated set and raw data protections; no changes are proposed to source, tests or gates in this diagnosis."
+  ],
+  "proof_source_sha256": {
+    "tools/pre_push_gate.py": "58f50f6467dfc52f67d9a2a7dbadb943e683313e5efe6f514d4ac9d95b6752d4",
+    ".github/workflows/ci.yml": "9f2864979058658089bb9d4edd879e05a733404f3d1a6d1de06ec012a63359b8",
+    "pytest.ini": "76a0dae330d88784dff727a5cbd7a08af06d9297a498689a9aaadba8cdf262af",
+    "tests/contract/test_source_catalog_parser_liveness.py": "3c6635fec88fa6be829cb24383a6795a94f9c1dd5d418ac2f4bc788439025b15",
+    "tests/contract/test_close_gap_concurrency_fc804.py": "d21087fca93c1bdff78c6bf6fbf24667b9effcdb3de2afdf251cfaaa6b730123"
+  },
+  "collection_receipt": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\independent\\major-timeout\\collection.json",
+    "sha256": "fb3163160e30e59df75f561014eb1da63442e09822b98e5a953babd578aa0d64"
+  },
+  "original_stdout_recovered": false,
+  "full_suite_repeated": false,
+  "single_test_timing_probe_run": false,
+  "product_or_test_or_configuration_changed": false,
+  "originals_changed": false,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "paid_calls": 0,
+  "owned_temp_cleanup": true
+}

@@ -1,0 +1,319 @@
+{
+  "schema_version": "w04-g3-independent-audit/1",
+  "phase": "original_frozen_source_review",
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/p7/audit",
+  "base_head": "40b38103f4b96860617e9bae98ec5b4ea8ee08d5",
+  "branch": "codex/w04-audit-capture-20261011",
+  "engineering_verdict": "FAIL",
+  "research_verdict": "NOT_EVALUATED",
+  "first_review_sources": [
+    {
+      "path": ".planning/w04-wp05/handoff.json",
+      "sha256": "cf4aac1a5da450a69c7870813a8ef79f4ec8cde1d83196ac51f96f20620d5e7b"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_run.py",
+      "sha256": "95b6951df70a841dee00db6c92c5cb45fb60806afe10c613070219da97923876"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/execution_request.py",
+      "sha256": "de806ddeb70e5c751cd8caf1a747651ff6ce004805e9cbd5980ba4e77fb3294a"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_blob_store.py",
+      "sha256": "1dacc2aaba8fddd82ea951b9613410f6868f53586aaa087c8d5b0ff18a95ceaa"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/document_status_join.py",
+      "sha256": "68f8799188218396bbad497e0fc54c19365a423d5bb8e3c8977fd4ebe103d85a"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/authoring_provenance.py",
+      "sha256": "1bfd8a05fdf172550750f12d75850a5967e85c94ffa450531e9e4180ec7d3ae3"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_contracts.py",
+      "sha256": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d"
+    },
+    {
+      "path": "tests/test_w04_capture_runtime.py",
+      "sha256": "fa4d10c2eb02b009134eb18e5a13f9b2890d6803d4f4fe6bc4107573fdf877e5"
+    },
+    {
+      "path": "tests/test_w04_request_capture.py",
+      "sha256": "4af6e58901ad3628e3245e6fc0a1797578234681d9e9969dd6dd26b245bf1ae2"
+    },
+    {
+      "path": "tests/test_w04_status_provenance.py",
+      "sha256": "7eda5f4a3ffc736b4a1e65209e71d786d388c78b5b2fac6a4e8c97560efb7772"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/execution-artifact-contract.md",
+      "sha256": "9e9a854d39c4ac02aa7e1789ba27375c72f9cd8a2003210249b97036d4cce1d5"
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "real_builder_to_cas_helper",
+      "status": "FAIL",
+      "evidence": "original-composer-red.log",
+      "detail": "Real built 13B request refused with input_snapshot_blob_store_mode_mismatch; no child. ROOT later amendment must be separately rechecked."
+    },
+    {
+      "check_id": "exact_builder_stream_digest",
+      "status": "PASS",
+      "evidence": "boundary-probes.log",
+      "detail": "Equal-size changed native bytes reject before child; actual complete failed bytes retained and resolvable."
+    },
+    {
+      "check_id": "money_zero_explicit_native_unknown",
+      "status": "PASS",
+      "evidence": "boundary-probes.log",
+      "detail": "Outer/FF money 0.00 accepted; unknown business controls remain unknown; explicit CWP amplification refused, owner_enforced remains null."
+    },
+    {
+      "check_id": "conflicting_alias_caps",
+      "status": "FAIL",
+      "evidence": "alias-probe.log",
+      "detail": "Scope max_final_bytes=4 + final_artifact_bytes=1000 silently collapses to 1000; native request 1000 accepted."
+    },
+    {
+      "check_id": "cas_no_replace_private_isolation",
+      "status": "PASS",
+      "evidence": "boundary-probes.log",
+      "detail": "Private copy is a distinct ordinary file; modifying it preserves CAS; corrupt existing blob refused and not overwritten."
+    },
+    {
+      "check_id": "physical_peak_and_restart_inventory",
+      "status": "PASS",
+      "evidence": "boundary-probes.log",
+      "detail": "Logical=8/unique=4/apparent=8/peak_reserved=10 with scratch2; restart baseline3+blob4+stale5 apparent12/scratch2 peak14; threshold13 rejects; allocation stays null."
+    },
+    {
+      "check_id": "failed_authoring_input_pin",
+      "status": "PASS",
+      "evidence": "pin-seal-probes.log",
+      "detail": "Invalid UTF8 build rejects normally while pinning all 3 exact inputs; correction creates second attempt; initial failed receipt unchanged."
+    },
+    {
+      "check_id": "partial_private_cleanup_recovery",
+      "status": "FAIL",
+      "evidence": "recovery-status-probes.log",
+      "detail": "Injected private fsync error + cleanup denial retains primary and CAS, but pending partial private exists only in blob observation; recovery rejects it."
+    },
+    {
+      "check_id": "same_stage_real_child_timeout",
+      "status": "PASS",
+      "evidence": "boundary-probes.log",
+      "detail": "100ms stage budget applied to actual child despite 5s child timeout; timed_out true, exit124, output incomplete."
+    },
+    {
+      "check_id": "seal_inventory_crosses_stage_deadline",
+      "status": "FAIL",
+      "evidence": "pin-seal-probes.log",
+      "detail": "Injected final physical observation advances same clock beyond deadline; seal returns success without completion guard."
+    },
+    {
+      "check_id": "source_identity_transport_business_status",
+      "status": "PASS",
+      "evidence": "recovery-status-probes.log",
+      "detail": "Wrong source acquisition does not join document; exit0 with acquisition failed stays transport ok/business failed; unopened artifact unverified; unknown cost null."
+    },
+    {
+      "check_id": "period_same_kind_substitution",
+      "status": "FAIL",
+      "evidence": "boundary-probes.log",
+      "detail": "Q1 2025 claimed Q4 2025 and H1 2025 claimed H2 2025 yield PASS/no diagnostics despite consumed metadata."
+    },
+    {
+      "check_id": "research_authority_boundary",
+      "status": "PASS",
+      "evidence": "boundary-probes.log; recovery-status-probes.log",
+      "detail": "All status/provenance outputs preserve quality_status=not_evaluated; no provider/model/company research performed."
+    }
+  ],
+  "findings": [
+    {
+      "issue_id": "G3-01",
+      "severity": "P1",
+      "location": {
+        "file": "skills/revenue-forecast-audit/scripts/execution_request.py",
+        "line": 230
+      },
+      "root_cause": "Composer forwards nonnull blob_store without retention_mode=cas into ROOT default legacy boundary.",
+      "repro": "Real build_execution_request; write returned native bytes; call freeze_built_request(...,blob_store=AuditBlobStore).",
+      "expected": "Opt-in CAS helper yields immutable ref/private copy.",
+      "actual": "input_snapshot_blob_store_mode_mismatch; no child.",
+      "check_id": "real_builder_to_cas_helper"
+    },
+    {
+      "issue_id": "G3-02",
+      "severity": "P2",
+      "location": {
+        "file": "skills/revenue-forecast-audit/scripts/authoring_provenance.py",
+        "line": 113
+      },
+      "root_cause": "Period comparison checks year and quarter/half to annual conversion, but omits same-year quarter/half identity.",
+      "repro_input": {
+        "items": [
+          {
+            "item_id": "quarter",
+            "kind": "period",
+            "composition": "verbatim_continuous",
+            "fragment": {
+              "artifact": "opened-fixture",
+              "locator": "/rows/0",
+              "text": "Q1 2025 revenue: 40"
+            },
+            "source_meta": {
+              "data_period": "Q1 2025"
+            },
+            "claimed": {
+              "period": "Q4 2025"
+            }
+          }
+        ]
+      },
+      "expected": "Period mismatch diagnostic.",
+      "actual": "PASS; diagnostics[]. H1->H2 also PASS.",
+      "check_id": "period_same_kind_substitution"
+    },
+    {
+      "issue_id": "G3-03",
+      "severity": "P2",
+      "location": {
+        "file": "skills/revenue-forecast-audit/scripts/audit_run.py",
+        "line": 627
+      },
+      "related_locations": [
+        {
+          "file": "skills/revenue-forecast-audit/scripts/audit_run.py",
+          "line": 865
+        },
+        {
+          "file": "skills/revenue-forecast-audit/scripts/audit_blob_store.py",
+          "line": 309
+        }
+      ],
+      "root_cause": "Rows append only after materialize succeeds; partial-copy cleanup failure goes only into store cleanup_pending. Capture pending paths/recovery recognize only completed snapshot rows.",
+      "repro": "Inject OSError on private-workcopy fsync (second os.fsync), PermissionError on c-* unlink; restore patches, call recover_capture_workcopies with sealed blob cleanup_pending.",
+      "expected": "Owned recorded partial copy can be recovered while CAS and primary failure remain.",
+      "actual": "input_snapshots[]; summary pending paths[]; sealed blob pending contains existing c-*.json; recovery rejects outside_owned_attempt.",
+      "check_id": "partial_private_cleanup_recovery"
+    },
+    {
+      "issue_id": "G3-04",
+      "severity": "P2",
+      "location": {
+        "file": "skills/revenue-forecast-audit/scripts/audit_blob_store.py",
+        "line": 362
+      },
+      "root_cause": "Seal checks at entry and during blob verification, then performs final physical inventory without a completion deadline guard.",
+      "repro": "Real ref; clock initially before D; wrapper runs actual _physical then advances clock to D+1; seal_attempt deadline D.",
+      "expected": "audit_stage_deadline refusal at seal completion.",
+      "actual": "Returns seal observation with no error after D.",
+      "check_id": "seal_inventory_crosses_stage_deadline"
+    },
+    {
+      "issue_id": "G3-05",
+      "severity": "P2",
+      "location": {
+        "file": "skills/revenue-forecast-audit/scripts/execution_request.py",
+        "line": 59
+      },
+      "root_cause": "Alias dict comprehension silently overwrites canonical dimension; conflicting equal-dimension bounds become insertion-order dependent.",
+      "repro_input": {
+        "scope": {
+          "profile": "bounded",
+          "resource_limits": {
+            "max_final_bytes": 4,
+            "final_artifact_bytes": 1000
+          }
+        },
+        "deploy": {
+          "profile": "bounded",
+          "caps": {
+            "final_artifact_bytes": 1000
+          }
+        },
+        "request": {
+          "schema_version": "narrative-batch-request/2",
+          "profile": "bounded",
+          "max_final_bytes": 1000,
+          "model": {}
+        }
+      },
+      "expected": "Refuse conflicting duplicate cap aliases or keep minimum4.",
+      "actual": "Effective and native observed1000 accepted.",
+      "check_id": "conflicting_alias_caps"
+    }
+  ],
+  "fees": {
+    "http_calls": 0,
+    "provider_calls": 0,
+    "project_model_calls": 0,
+    "new_cost_usd": "0.00"
+  },
+  "not_executed": [
+    "Historical unchanged 96/59 suite; centralized ROOT suite not duplicated.",
+    "Network/provider/model/public real-company RF or research acceptance.",
+    "Original native filing-upstream-cause/1 closed six-key producer verification; independent G3 reviewed audit diagnostics without asserting native producer acceptance.",
+    "Installation, commit, push, configuration or canonical/old-run edits.",
+    "CodeGraph init: known isolated directory not initialized; explicitly instructed not to initialize."
+  ],
+  "limitations": [
+    "Allocation unobservable on Windows; null retained, no RAM/global cross-process enforcement claim.",
+    "Initial sandbox TEMP write denied; same owned-TEMP operation approved via require_escalated. Directory absent on both final host and sandbox checks.",
+    "First invalid authoring probe expected a returned payload incorrectly; corrected probe catches intended refusal and verifies persisted receipts. This harness assumption is not a product defect.",
+    "git status consistently refused 'must be run in a work tree' in sandbox despite git rev-parse yielding worktree; source manifests used and ROOT-owned edits tracked separately."
+  ],
+  "cleanup": {
+    "all_successful_probe_temp_roots_removed": true,
+    "initial_denied_temp_absent": true
+  },
+  "status": "Original evidence retained; awaits separate final amendment readback",
+  "evidence_manifest": [
+    {
+      "command": "@'\nimport sys, tempfile, hashlib, json\nfrom pathlib import Path\nsys.path.insert(0, str(Path(\"skills/revenue-forecast-audit/scripts\").resolve()))\nimport execution_request as request\nfrom audit_blob_store import AuditBlobStore\nroot_source=Path(request.audit_run.__file__)\nprint(json.dumps({\"sources\":{\"request\":hashlib.sha256(Path(request.__file__).read_bytes()).hexdigest(),\"runtime\":hashlib.sha256(root_source.read_bytes()).hexdigest()}}))\nwith tempfile.TemporaryDirectory(prefix=\"w4g3-\") as temp:\n    root=Path(temp).resolve()\n    reqpath=root/\"request.json\"\n    body,record=request.build_execution_request({\"profile\":\"bounded\",\"resource_limits\":{\"max_request_bytes\":4096,\"max_cost_usd\":\"0.00\"}},{\"profile\":\"bounded\",\"caps\":{\"max_request_bytes\":4096,\"max_cost_usd\":\"0.00\"}},{\"request_id\":\"probe\",\"purpose\":\"g3 fixture\",\"command\":[sys.executable,\"-B\",\"-c\",\"import sys; print(open(sys.argv[1]).read())\",\"{request}\"],\"request\":{\"native\":1}},reqpath,environ={})\n    reqpath.write_bytes(body)\n    directory=root/\"freeze\"; directory.mkdir()\n    store=AuditBlobStore(root/\"cas\",max_input_bytes=4096,retained_bytes_limit=16384,peak_bytes_limit=32768)\n    try:\n        argv,rows=request.freeze_built_request(directory,record,[reqpath],4096,blob_store=store)\n        print(json.dumps({\"probe\":\"real_builder_to_cas_helper\",\"expected\":\"CAS frozen ref and private copy\",\"result\":\"PASS\",\"rows\":rows}))\n    except Exception as exc:\n        print(json.dumps({\"probe\":\"real_builder_to_cas_helper\",\"expected\":\"CAS frozen ref and private copy\",\"result\":\"FAIL\",\"error_type\":type(exc).__name__,\"error\":str(exc),\"builder_sha256\":record[\"request_sha256\"],\"builder_bytes\":record[\"request_bytes\"],\"child_started\":False,\"temp_owned\":True}))\nprint(json.dumps({\"temporary_cleanup_complete\":not root.exists()}))\n'@ | python -B -",
+      "exit_code": 1,
+      "log_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\independent\\g3-audit\\sandbox-setup-failure.log",
+      "log_sha256": "2a0c4ede46e599d814d87c49f7897b4153939074bb5b550e52cb2cd34e4720cf",
+      "log_bytes": 2619
+    },
+    {
+      "command": "$env:PYTHONUTF8='1'\n@'\nimport sys, tempfile, hashlib, json\nfrom pathlib import Path\nsys.path.insert(0, str(Path(\"skills/revenue-forecast-audit/scripts\").resolve()))\nimport execution_request as request\nfrom audit_blob_store import AuditBlobStore\nroot_source=Path(request.audit_run.__file__)\nprint(json.dumps({\"sources\":{\"request\":hashlib.sha256(Path(request.__file__).read_bytes()).hexdigest(),\"runtime\":hashlib.sha256(root_source.read_bytes()).hexdigest()}}))\nwith tempfile.TemporaryDirectory(prefix=\"w4g3-\") as temp:\n    root=Path(temp).resolve()\n    reqpath=root/\"request.json\"\n    body,record=request.build_execution_request({\"profile\":\"bounded\",\"resource_limits\":{\"max_request_bytes\":4096,\"max_cost_usd\":\"0.00\"}},{\"profile\":\"bounded\",\"caps\":{\"max_request_bytes\":4096,\"max_cost_usd\":\"0.00\"}},{\"request_id\":\"probe\",\"purpose\":\"g3 fixture\",\"command\":[sys.executable,\"-B\",\"-c\",\"import sys; print(open(sys.argv[1]).read())\",\"{request}\"],\"request\":{\"native\":1}},reqpath,environ={})\n    reqpath.write_bytes(body)\n    directory=root/\"freeze\"; directory.mkdir()\n    store=AuditBlobStore(root/\"cas\",max_input_bytes=4096,retained_bytes_limit=16384,peak_bytes_limit=32768)\n    try:\n        argv,rows=request.freeze_built_request(directory,record,[reqpath],4096,blob_store=store)\n        print(json.dumps({\"probe\":\"real_builder_to_cas_helper\",\"expected\":\"CAS frozen ref and private copy\",\"result\":\"PASS\",\"rows\":rows}))\n    except Exception as exc:\n        print(json.dumps({\"probe\":\"real_builder_to_cas_helper\",\"expected\":\"CAS frozen ref and private copy\",\"result\":\"FAIL\",\"error_type\":type(exc).__name__,\"error\":str(exc),\"builder_sha256\":record[\"request_sha256\"],\"builder_bytes\":record[\"request_bytes\"],\"child_started\":False,\"temp_owned\":True}))\nprint(json.dumps({\"temporary_cleanup_complete\":not root.exists()}))\n'@ | python -B -",
+      "exit_code": 0,
+      "log_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\independent\\g3-audit\\original-composer-red.log",
+      "log_sha256": "e1e0b8a446b05e3c76bc6e27b8883242b29a923e870a4f533aad2872e920b2ef",
+      "log_bytes": 548
+    },
+    {
+      "command": "$env:PYTHONUTF8='1'\n@'\nimport sys, tempfile, json, hashlib, argparse, time, copy\nfrom pathlib import Path\nfrom unittest.mock import patch\nsys.path.insert(0,str(Path(\"skills/revenue-forecast-audit/scripts\").resolve()))\nimport audit_run as run, execution_request as request, audit_blob_store as cas, authoring_provenance as prov, document_status_join as join\ndef probe(name,fn):\n    with tempfile.TemporaryDirectory(prefix=\"w4g3-\") as temp:\n        root=Path(temp).resolve()\n        try: result=fn(root)\n        except Exception as exc: result={\"unexpected_error\":type(exc).__name__+\": \"+str(exc)}\n    print(json.dumps({\"probe\":name,\"observation\":result,\"temp_cleanup_complete\":not root.exists()},ensure_ascii=False))\ndef controls(root):\n    scope={\"profile\":\"bounded\",\"resource_limits\":{\"max_tokens\":10,\"max_cost_usd\":\"0.00\",\"timeout_seconds\":10}}\n    deploy={\"profile\":\"bounded\",\"caps\":{\"max_tokens\":10,\"max_cost_usd\":\"0.00\",\"timeout_seconds\":10}}\n    tpl={\"request_id\":\"x\",\"purpose\":\"g3\",\"command\":[sys.executable,\"{request}\"],\"request\":{\"nested\":{\"max_tokens\":9999,\"max_cost_usd\":9999},\"profile\":\"foreign\"}}\n    body,record=request.build_execution_request(scope,deploy,tpl,root/\"r.json\",environ={})\n    before=record[\"control_binding\"][\"observed\"]\n    tpl[\"native_adapter\"]=\"filing-fetch/1\";tpl[\"request\"]={\"acquisition_limits\":{\"max_bytes\":4096,\"timeout_seconds\":10,\"max_cost_usd\":\"0.00\"}}\n    _,ff=request.build_execution_request(scope,deploy,tpl,root/\"r.json\",environ={})\n    tpl[\"native_adapter\"]=\"company-wiki/narrative-batch/1\";tpl[\"request\"]={\"schema_version\":\"narrative-batch-request/2\",\"profile\":\"bounded\",\"max_tokens\":11,\"model\":{}}\n    try: request.build_execution_request(scope,deploy,tpl,root/\"r.json\",environ={});error=None\n    except ValueError as e:error=str(e)\n    return {\"money_zero\":record[\"effective_scope\"][\"caps\"][\"max_cost_usd\"],\"unknown_business\":before,\"ff_zero\":ff[\"control_binding\"][\"observed\"],\"cwp_amplification\":error}\ndef store_checks(root):\n    src=root/\"src\";src.write_bytes(b\"four\")\n    st=cas.AuditBlobStore(root/\"b\",max_input_bytes=4,retained_bytes_limit=8,peak_bytes_limit=12,scratch_reserve_bytes=2)\n    a=st.freeze_file(src,max_bytes=4);b=st.freeze_file(src,max_bytes=4)\n    private=st.materialize_workcopy(a,root/\"w\",\".json\");isolated=not private.samefile(st.blob_path(a))\n    private.write_bytes(b\"five\")\n    with st.open_frozen(a) as h:immutable=h.read()==b\"four\"\n    obs=st.seal_attempt([a,b],{})\n    cleanup=st.cleanup_workcopies([private])\n    st.blob_path(a).write_bytes(b\"evil\")\n    try:st.freeze_file(src,max_bytes=4);error=None\n    except ValueError as exc:error=str(exc)\n    retained_corrupt=st.blob_path(a).read_bytes()==b\"evil\"\n    return {\"ordinary_copy\":isolated,\"cas_unchanged\":immutable,\"logical_reference_bytes\":obs[\"logical_reference_bytes\"],\"unique_content_bytes\":obs[\"unique_content_bytes\"],\"apparent_file_bytes\":obs[\"apparent_file_bytes\"],\"peak_reserved_bytes\":obs[\"peak_reserved_bytes\"],\"allocated_bytes\":obs[\"allocated_bytes\"],\"cleanup_failures\":cleanup,\"corrupt_existing_refused\":error,\"corrupt_existing_unmodified\":retained_corrupt}\ndef restart(root):\n    src=root/\"src\";src.write_bytes(b\"four\")\n    st=cas.AuditBlobStore(root/\"b\",max_input_bytes=4);ref=st.freeze_file(src,max_bytes=4)\n    (root/\"b\"/\".s-stale\").write_bytes(b\"stale\")\n    reopened=cas.AuditBlobStore(root/\"b\",max_input_bytes=4,baseline_apparent_bytes=3,scratch_reserve_bytes=2,peak_bytes_limit=14)\n    obs=reopened.seal_attempt([ref],{})\n    try:cas.AuditBlobStore(root/\"b\",max_input_bytes=4,baseline_apparent_bytes=3,scratch_reserve_bytes=2,peak_bytes_limit=13);error=None\n    except ValueError as exc:error=str(exc)\n    return {\"apparent_file_bytes\":obs[\"apparent_file_bytes\"],\"peak_reserved_bytes\":obs[\"peak_reserved_bytes\"],\"allocated_bytes\":obs[\"allocated_bytes\"],\"cleanup_pending_count\":len(obs[\"cleanup_pending\"]),\"stale_not_deleted\":(root/\"b\"/\".s-stale\").exists(),\"inventory_peak_refusal\":error}\ndef capture_checks(root):\n    runpath=Path(run.init_run(argparse.Namespace(root=str(root/\"runs\"),company=\"Fixture\",as_of=\"2026-10-11\",run_id=\"probe\"))[\"run\"])\n    src=root/\"r.json\";src.write_bytes(b\"before\")\n    expected={4:{\"sha256\":hashlib.sha256(b\"before\").hexdigest(),\"byte_size\":6}}\n    src.write_bytes(b\"after!\")\n    marker=root/\"started\";command=[sys.executable,\"-B\",\"-c\",\"from pathlib import Path; import sys; Path(sys.argv[2]).write_text('started')\",str(src),str(marker)]\n    st=cas.AuditBlobStore(root/\"b\",max_input_bytes=4096,retained_bytes_limit=16384,peak_bytes_limit=32768)\n    args=argparse.Namespace(run=str(runpath),role=\"executor\",command=command,freeze_input=[str(src)],freeze_arg_index=[4],max_input_bytes=4096,max_log_bytes=2048,timeout_seconds=5,retention_mode=\"cas\",blob_store=st,expected_digests=expected)\n    outcome=run.capture(args)\n    with st.open_frozen(outcome[\"failed_input_refs\"][0]) as h:raw=h.read()\n    return {\"child_started\":outcome[\"child_started\"],\"marker_exists\":marker.exists(),\"execution_error\":outcome[\"execution_error\"],\"failed_input_ref_count\":len(outcome[\"failed_input_refs\"]),\"complete_failed_raw\":raw==b\"after!\",\"input_cleanup_complete\":outcome[\"input_cleanup_complete\"]}\ndef stage_child(root):\n    runpath=Path(run.init_run(argparse.Namespace(root=str(root/\"runs\"),company=\"Fixture\",as_of=\"2026-10-11\",run_id=\"probe\"))[\"run\"])\n    src=root/\"r.json\";src.write_bytes(b\"{}\")\n    args=argparse.Namespace(run=str(runpath),role=\"executor\",command=[sys.executable,\"-B\",\"-c\",\"import time; time.sleep(1)\",str(src)],freeze_input=[str(src)],freeze_arg_index=[4],max_input_bytes=4096,max_log_bytes=2048,timeout_seconds=5,stage_timeout_seconds=.1)\n    start=time.monotonic();outcome=run.capture(args);elapsed=time.monotonic()-start\n    return {\"child_started\":outcome[\"child_started\"],\"timed_out\":outcome[\"timed_out\"],\"exit_code\":outcome[\"exit_code\"],\"elapsed\":elapsed,\"output_complete\":outcome[\"output_complete\"],\"error\":outcome[\"execution_error\"]}\ndef provenance_same_period_kind(root):\n    data={\"items\":[{\"item_id\":\"quarter\",\"kind\":\"period\",\"composition\":\"verbatim_continuous\",\"fragment\":{\"artifact\":\"opened-fixture\",\"locator\":\"/rows/0\",\"text\":\"Q1 2025 revenue: 40\"},\"source_meta\":{\"data_period\":\"Q1 2025\"},\"claimed\":{\"period\":\"Q4 2025\"}}]}\n    a=prov.check_provenance(data)\n    data[\"items\"][0][\"source_meta\"][\"data_period\"]=\"H1 2025\";data[\"items\"][0][\"fragment\"][\"text\"]=\"H1 2025 revenue: 40\";data[\"items\"][0][\"claimed\"][\"period\"]=\"H2 2025\"\n    b=prov.check_provenance(data)\n    return {\"q1_claimed_q4\":a,\"h1_claimed_h2\":b}\nfor name,fn in [(\"explicit_controls_and_zero_money\",controls),(\"cas_isolation_no_replace_physical_peak\",store_checks),(\"restart_owned_inventory\",restart),(\"real_stream_expected_digest_failure_pin\",capture_checks),(\"same_stage_real_child_timeout\",stage_child),(\"period_same_kind_substitution\",provenance_same_period_kind)]:probe(name,fn)\n'@ | python -B -",
+      "exit_code": 0,
+      "log_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\independent\\g3-audit\\boundary-probes.log",
+      "log_sha256": "93684da6a802f30f3e69660d6b0543b7ec587a9c1f7bf18603c2ea589af6e4d0",
+      "log_bytes": 2618
+    },
+    {
+      "command": "$env:PYTHONUTF8='1'\n@'\nimport sys,tempfile,json,hashlib,argparse,copy,os\nfrom pathlib import Path\nfrom unittest.mock import patch\nsys.path.insert(0,str(Path(\"skills/revenue-forecast-audit/scripts\").resolve()))\nimport audit_run as run,audit_blob_store as cas,execution_request as request,document_status_join as join\ndef probe(name,fn):\n    with tempfile.TemporaryDirectory(prefix=\"w4g3-\") as temp:\n        root=Path(temp).resolve()\n        try:answer=fn(root)\n        except Exception as exc:answer={\"unexpected_error\":type(exc).__name__+\": \"+str(exc)}\n    print(json.dumps({\"probe\":name,\"observation\":answer,\"temp_cleanup_complete\":not root.exists()},ensure_ascii=False))\ndef failed_authoring(root):\n    scope=root/\"scope.json\";deploy=root/\"deploy.json\";tpl=root/\"template.json\"\n    scope.write_bytes(b\"not-json\\xff\");deploy.write_bytes(b\"{}\");tpl.write_bytes(b\"{}\")\n    args=argparse.Namespace(scope=str(scope),deploy=str(deploy),template=str(tpl),out_root=str(root/\"attempts\"),blob_root=str(root/\"b\"),retention_mode=\"cas\",max_input_bytes=4096)\n    first=request.build_command(args)\n    scope.write_bytes(b\"{}\")\n    second=request.build_command(args)\n    data=json.loads(Path(first[\"attempt_dir\"],\"failed-input.json\").read_text())\n    firstrefs=data[\"inputs\"]\n    return {\"first_result\":first,\"second_attempt_distinct\":first[\"attempt_dir\"]!=second[\"attempt_dir\"],\"retained_refs\":len(firstrefs),\"failed_record\":data}\ndef partial_private_cleanup(root):\n    runpath=Path(run.init_run(argparse.Namespace(root=str(root/\"runs\"),company=\"Fixture\",as_of=\"2026-10-11\",run_id=\"probe\"))[\"run\"])\n    src=root/\"r.json\";src.write_bytes(b\"{}\")\n    st=cas.AuditBlobStore(root/\"b\",max_input_bytes=4096,retained_bytes_limit=16384,peak_bytes_limit=32768)\n    args=argparse.Namespace(run=str(runpath),role=\"executor\",command=[sys.executable,\"-B\",\"-c\",\"print('child')\",str(src)],freeze_input=[str(src)],freeze_arg_index=[4],max_input_bytes=4096,max_log_bytes=2048,timeout_seconds=5,retention_mode=\"cas\",blob_store=st)\n    fsync_original=os.fsync;unlink_original=Path.unlink;count=[0]\n    def fail_copy_fsync(fd):\n        count[0]+=1\n        if count[0]==2:raise OSError(\"private-workcopy-fsync-failure\")\n        return fsync_original(fd)\n    def fail_private_unlink(path,*a,**k):\n        if path.name.startswith(\"c-\"):raise PermissionError(\"private-cleanup-denied\")\n        return unlink_original(path,*a,**k)\n    with patch.object(cas.os,\"fsync\",fail_copy_fsync),patch.object(Path,\"unlink\",fail_private_unlink):\n        outcome=run.capture(args)\n    pending=outcome.get(\"blob_observation\",{}).get(\"cleanup_pending\",[])\n    try:recovered=run.recover_capture_workcopies(runpath,\"executor\",outcome[\"capture_id\"],pending);error=None\n    except ValueError as exc:recovered=None;error=str(exc)\n    return {\"child_started\":outcome[\"child_started\"],\"primary_error\":outcome[\"execution_error\"],\"input_snapshots\":outcome[\"input_snapshots\"],\"input_cleanup_complete\":outcome[\"input_cleanup_complete\"],\"summary_pending_paths\":outcome[\"input_cleanup_pending_paths\"],\"blob_pending_paths\":pending,\"orphan_exists\":all(Path(p).exists() for p in pending),\"recovery\":recovered,\"recovery_error\":error,\"failed_input_refs\":outcome[\"failed_input_refs\"]}\ndef status_identity(root):\n    payload={\"run_id\":\"fixture\",\"review_attempt\":\"a\",\"calls\":[{\"call_id\":\"call\",\"request_id\":\"req\",\"transport\":{\"exit_code\":0,\"output_complete\":True},\"cost\":{\"kind\":\"unknown\",\"usd\":None}}],\"documents\":[{\"document_id\":\"d\",\"source_id\":\"s1\",\"call_id\":\"call\",\"request_id\":\"req\",\"result\":{\"artifact\":\"opened\",\"locator\":\"/rows/0\"}}],\"acquisitions\":[{\"document_id\":\"d\",\"source_id\":\"s2\",\"call_id\":\"call\",\"request_id\":\"req\",\"observation\":{\"schema_version\":\"acquisition-observation/1\",\"usage_scope\":\"operation\",\"outcome\":\"downloaded_new\"}}]}\n    a=join.join_status_index(payload,artifact_resolver={\"opened\":{\"rows\":[{\"source_ref\":{\"source_id\":\"s1\",\"document_id\":\"d\"}}]}})\n    payload[\"acquisitions\"][0][\"source_id\"]=\"s1\";payload[\"acquisitions\"][0][\"observation\"][\"outcome\"]=\"failed\"\n    b=join.join_status_index(payload)\n    return {\"wrong_source\":a,\"stdout_business_failure\":b}\nfor name,fn in [(\"failed_authoring_input_retained\",failed_authoring),(\"partial_private_cleanup_recovery\",partial_private_cleanup),(\"source_identity_and_transport_business_separation\",status_identity)]:probe(name,fn)\nold=Path(r\"C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{646caf35-c99a-45a2-9dce-42a76518e77f}\\AC\\Temp\\w4g3-u8q1k99z\")\nassert old.parent.name==\"Temp\" and old.name==\"w4g3-u8q1k99z\"\nexisted=old.exists()\nif existed:old.rmdir()\nprint(json.dumps({\"initial_sandbox_empty_temp\":str(old),\"initial_sandbox_temp_existed\":existed,\"initial_sandbox_temp_cleanup_complete\":not old.exists()},ensure_ascii=False))\n'@ | python -B -",
+      "exit_code": 0,
+      "log_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\independent\\g3-audit\\recovery-status-probes.log",
+      "log_sha256": "2d3e1f3002b72b4c7ce1412204a9e396b98558039d6fca69cc6a92052132f5f7",
+      "log_bytes": 3872
+    },
+    {
+      "command": "$env:PYTHONUTF8='1'\n@'\nimport sys,tempfile,json,hashlib,argparse,time\nfrom pathlib import Path\nfrom unittest.mock import patch\nsys.path.insert(0,str(Path(\"skills/revenue-forecast-audit/scripts\").resolve()))\nimport execution_request as request,audit_blob_store as cas\ndef probe(name,fn):\n    with tempfile.TemporaryDirectory(prefix=\"w4g3-\") as temp:\n        root=Path(temp).resolve()\n        try:answer=fn(root)\n        except Exception as exc:answer={\"unexpected_error\":type(exc).__name__+\": \"+str(exc)}\n    print(json.dumps({\"probe\":name,\"observation\":answer,\"temp_cleanup_complete\":not root.exists()},ensure_ascii=False))\ndef invalid_authoring(root):\n    files=[root/\"scope.json\",root/\"deploy.json\",root/\"template.json\"]\n    for file,body in zip(files,[b\"bad-json\\xff\",b\"{}\",b\"{}\"]):file.write_bytes(body)\n    args=argparse.Namespace(scope=str(files[0]),deploy=str(files[1]),template=str(files[2]),out_root=str(root/\"attempts\"),blob_root=str(root/\"b\"),retention_mode=\"cas\",max_input_bytes=4096)\n    errors=[]\n    try:request.build_command(args)\n    except (ValueError,OSError) as exc:errors.append(type(exc).__name__)\n    first=next((root/\"attempts\").iterdir());data=json.loads((first/\"failed-input.json\").read_text())\n    st=cas.AuditBlobStore(root/\"b\",max_input_bytes=4096)\n    with st.open_frozen(data[\"inputs\"][0][\"frozen_ref\"]) as h:original=h.read()\n    files[0].write_bytes(b\"{}\")\n    try:request.build_command(args)\n    except (ValueError,OSError) as exc:errors.append(type(exc).__name__)\n    attempts=list((root/\"attempts\").iterdir())\n    return {\"first_error\":errors[0],\"retained_input_count\":len(data[\"inputs\"]),\"inputs_complete\":data[\"inputs_complete\"],\"child_started\":data[\"child_started\"],\"exact_invalid_bytes\":original==b\"bad-json\\xff\",\"attempt_count_after_correction\":len(attempts),\"original_receipt_preserved\":(first/\"failed-input.json\").read_text()==json.dumps(data,ensure_ascii=False,indent=2)+\"\\n\"}\ndef seal_expiry(root):\n    src=root/\"src\";src.write_bytes(b\"{}\")\n    st=cas.AuditBlobStore(root/\"b\",max_input_bytes=4096)\n    ref=st.freeze_file(src,max_bytes=4096)\n    clock=[time.monotonic()];deadline=clock[0]+10\n    original=st._physical\n    def physical():\n        result=original()\n        clock[0]=deadline+1\n        return result\n    with patch.object(st,\"_physical\",physical),patch.object(cas.time,\"monotonic\",lambda:clock[0]):\n        try:obs=st.seal_attempt([ref],{},deadline=deadline);error=None\n        except ValueError as exc:obs=None;error=str(exc)\n    return {\"deadline\":deadline,\"clock_after_physical\":clock[0],\"returned_seal_after_expiry\":obs is not None,\"error\":error,\"source_sha256\":hashlib.sha256(Path(cas.__file__).read_bytes()).hexdigest()}\nfor name,fn in [(\"invalid_authoring_expected_refusal_and_pin\",invalid_authoring),(\"seal_inventory_crosses_stage_deadline\",seal_expiry)]:probe(name,fn)\n'@ | python -B -",
+      "exit_code": 0,
+      "log_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\independent\\g3-audit\\pin-seal-probes.log",
+      "log_sha256": "c12e98d265f4a8fc35f3a15dca8ee4b44ba92ea8a2c9e13840c2f74602ae4d5f",
+      "log_bytes": 622
+    },
+    {
+      "command": "$env:PYTHONUTF8='1'\n@'\nimport sys,tempfile,json\nfrom pathlib import Path\nsys.path.insert(0,str(Path(\"skills/revenue-forecast-audit/scripts\").resolve()))\nimport execution_request as request\nwith tempfile.TemporaryDirectory(prefix=\"w4g3-\") as temp:\n    root=Path(temp).resolve()\n    scope={\"profile\":\"bounded\",\"resource_limits\":{\"max_final_bytes\":4,\"final_artifact_bytes\":1000}}\n    deploy={\"profile\":\"bounded\",\"caps\":{\"final_artifact_bytes\":1000}}\n    template={\"request_id\":\"alias\",\"purpose\":\"g3\",\"command\":[sys.executable,\"{request}\"],\"native_adapter\":\"company-wiki/narrative-batch/1\",\"request\":{\"schema_version\":\"narrative-batch-request/2\",\"profile\":\"bounded\",\"max_final_bytes\":1000,\"model\":{}}}\n    try:\n        _,record=request.build_execution_request(scope,deploy,template,root/\"request.json\",environ={})\n        result={\"observed\":\"builder accepted\",\"effective\":record[\"effective_scope\"][\"caps\"],\"native_observed\":record[\"control_binding\"][\"observed\"][\"caps\"],\"expected\":\"reject conflict or retain minimum 4\"}\n    except ValueError as exc:\n        result={\"observed\":\"rejected\",\"error\":str(exc)}\n    print(json.dumps({\"probe\":\"conflicting_alias_caps\",\"scope_caps\":scope[\"resource_limits\"],\"result\":result}))\nprint(json.dumps({\"temp_cleanup_complete\":not root.exists()}))\n'@ | python -B -",
+      "exit_code": 0,
+      "log_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\independent\\g3-audit\\alias-probe.log",
+      "log_sha256": "9b053b68ea6bcc9b407c1682571054fffc28d08cdfbd1e9fbc91df20a452c8e3",
+      "log_bytes": 329
+    }
+  ]
+}

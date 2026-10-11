@@ -1,0 +1,1149 @@
+diff --git a/scripts/company_wiki_narrative_contracts.py b/scripts/company_wiki_narrative_contracts.py
+index 806d20762..4eff42b5d 100644
+--- a/scripts/company_wiki_narrative_contracts.py
++++ b/scripts/company_wiki_narrative_contracts.py
+@@ -12,6 +12,7 @@ from datetime import date, datetime, timedelta
+ import hashlib
+ import json
+ import re
++from urllib.parse import quote
+ from typing import Any
+ 
+ BODY_LIMIT = 1_310_720
+@@ -21,6 +22,11 @@ SOURCE_PREFIX = "urn:company-wiki:source:sha256:"
+ SPAN_PREFIX = "urn:company-wiki:evidence-span:sha256:"
+ EXPECTED_FIELDS = {"canonical_entity_id", "market", "security_id", "document_kind",
+                    "fiscal_year", "fiscal_period"}
++PROJECTED_REF_FIELDS = {"schema_version", "artifact_version_id", "artifact_sha256", "byte_size", "generation_sha256", "subject_ref"}
++SUBJECT_REF_FIELDS = {"schema_version", "kind", "item_key", "subject_sha256"}
++PROJECTION_PREFIX = "urn:company-wiki:source-projection:sha256:"
++ISSUER_FIELDS = {"market", "security_id", "provider_company_id", "provider_activity_company_id", "canonical_name", "entity_name"}
++PROJECTED_RECEIPT_FIELDS = {"schema_version", "status", "narrative_ref", "as_of_date", "observed_at", "locator_count", "parent_count", "lineage_sha256", "selection_status", "quality_status", "replay_status"}
+ REF_FIELDS = {"schema_version", "artifact_version_id", "artifact_sha256", "byte_size", "source_ref"}
+ SOURCE_FIELDS = {"schema_version", "document_id", "source_id", "content_sha256", "byte_size", "mime_type"}
+ RECEIPT_FIELDS = {"schema_version", "status", "narrative_ref", "as_of_date", "manifest",
+@@ -158,14 +164,28 @@ def validate_source_ref(value: Any) -> dict:
+     return ref
+ 
+ 
++def validate_subject_ref(value: Any) -> dict:
++    ref = _exact(value, SUBJECT_REF_FIELDS, "invalid_subject_reference")
++    _require(ref["schema_version"] == "narrative-subject-ref/1" and
++             ref["kind"] == "official_json" and _sha(ref["subject_sha256"]) and
++             ref["item_key"] == PROJECTION_PREFIX + ref["subject_sha256"], "subject_hash_binding")
++    return ref
++
++
+ def validate_narrative_ref(value: Any) -> dict:
+-    ref = _exact(value, REF_FIELDS, "invalid_narrative_reference")
+-    _require(ref["schema_version"] == "narrative-ref/1", "unsupported_narrative_reference")
++    projected = isinstance(value, dict) and value.get("schema_version") == "narrative-ref/3"
++    ref = _exact(value, PROJECTED_REF_FIELDS if projected else REF_FIELDS, "invalid_narrative_reference")
++    _require(ref["schema_version"] == ("narrative-ref/3" if projected else "narrative-ref/1"),
++             "unsupported_narrative_reference")
+     _require(isinstance(ref["artifact_version_id"], str) and
+              _ID.fullmatch(ref["artifact_version_id"]) is not None, "invalid_artifact_id")
+     _require(_sha(ref["artifact_sha256"]), "invalid_artifact_sha")
+     _require(_integer(ref["byte_size"], 1) and ref["byte_size"] <= BODY_LIMIT, "invalid_artifact_size")
+-    validate_source_ref(ref["source_ref"])
++    if projected:
++        validate_subject_ref(ref["subject_ref"])
++        _require(_sha(ref["generation_sha256"]), "invalid_generation_sha")
++    else:
++        validate_source_ref(ref["source_ref"])
+     _pathless(ref)
+     return ref
+ 
+@@ -182,24 +202,52 @@ def _constraints(value: Any) -> dict:
+     return fields
+ 
+ 
++def _issuer_constraint(key: str, value: Any) -> None:
++    if key in {"provider_company_id", "provider_activity_company_id"} and type(value) is int:
++        return
++    _require(_text(value) and len(value) <= 256, "invalid_issuer_constraint")
++
++
++def _issuer_constraints(value: Any) -> dict | None:
++    if value is None:
++        return None
++    _require(isinstance(value, dict) and bool(value) and set(value) <= ISSUER_FIELDS,
++             "invalid_issuer_constraints")
++    for key, constraint in value.items():
++        _issuer_constraint(key, constraint)
++    return value
++
++
+ def validate_narrative_request(value: Any) -> dict:
+-    request = _exact(value, {"schema_version", "narrative_ref", "as_of_date", "expected_source"},
++    projected = isinstance(value, dict) and value.get("schema_version") == "narrative-read-request/3"
++    constraint_key = "expected_issuer" if projected else "expected_source"
++    request = _exact(value, {"schema_version", "narrative_ref", "as_of_date", constraint_key},
+                      "invalid_read_request")
+-    _require(request["schema_version"] == "narrative-read-request/1", "unsupported_read_request")
+-    validate_narrative_ref(request["narrative_ref"])
++    _require(request["schema_version"] == ("narrative-read-request/3" if projected else "narrative-read-request/1"),
++             "unsupported_read_request")
++    ref = validate_narrative_ref(request["narrative_ref"])
++    _require(ref["schema_version"] == ("narrative-ref/3" if projected else "narrative-ref/1"), "request_reference_kind_mismatch")
+     if request["as_of_date"] is not None:
+         _date(request["as_of_date"])
+-    _constraints(request["expected_source"])
++    (_issuer_constraints if projected else _constraints)(request[constraint_key])
+     _pathless(request)
+-    _require(len(canonical_bytes(request)) <= REQUEST_LIMIT, "request_size_limit")
++    _require(len(canonical_bytes(request)) + 1 <= REQUEST_LIMIT, "request_size_limit")
+     return deepcopy(request)
+ 
+ 
+ def validate_reference_request(value: Any) -> dict:
+-    request = _exact(value, {"schema_version", "source_ref"}, "invalid_reference_request")
+-    _require(request["schema_version"] == "narrative-reference-request/1", "unsupported_reference_request")
+-    validate_source_ref(request["source_ref"])
++    projected = isinstance(value, dict) and value.get("schema_version") == "narrative-reference-request/3"
++    fields = {"schema_version", "subject_ref", "generation_sha256"} if projected else {"schema_version", "source_ref"}
++    request = _exact(value, fields, "invalid_reference_request")
++    _require(request["schema_version"] == ("narrative-reference-request/3" if projected else "narrative-reference-request/1"),
++             "unsupported_reference_request")
++    if projected:
++        validate_subject_ref(request["subject_ref"])
++        _require(_sha(request["generation_sha256"]), "invalid_generation_sha")
++    else:
++        validate_source_ref(request["source_ref"])
+     _pathless(request)
++    _require(len(canonical_bytes(request)) + 1 <= REQUEST_LIMIT, "request_size_limit")
+     return deepcopy(request)
+ 
+ 
+@@ -268,10 +316,9 @@ def _coordinates(value: Any) -> str:
+     return "/".join(parts)
+ 
+ 
+-def _span(value: Any, source: dict) -> dict:
++def _span_core(value: Any) -> dict:
+     span = _exact(value, SPAN_FIELDS, "invalid_evidence_span")
+-    _require(span["schema_version"] == "1.0.0" and span["source_id"] == source["source_id"],
+-             "span_source_mismatch")
++    _require(span["schema_version"] == "1.0.0", "unsupported_evidence_span")
+     locator = _coordinates(span["coordinates"])
+     _require(span["locator"] == locator, "span_locator_mismatch")
+     _require(span["raw_text"] is None or isinstance(span["raw_text"], str), "invalid_span_text")
+@@ -287,6 +334,12 @@ def _span(value: Any, source: dict) -> dict:
+     return span
+ 
+ 
++def _span(value: Any, source: dict) -> dict:
++    span = _span_core(value)
++    _require(span["source_id"] == source["source_id"], "span_source_mismatch")
++    return span
++
++
+ def _span_quality(span: dict) -> None:
+     flags = span["quality_flags"]
+     _require(isinstance(flags, list) and all(_text(flag) for flag in flags)
+@@ -409,13 +462,13 @@ def _byte_binding(binding: Any, lineage: dict, source: dict) -> None:
+                  and part["end"] <= source["byte_size"], "invalid_transcript_binding")
+ 
+ 
+-def _diagnostics(bundle: dict) -> None:
++def _diagnostics(bundle: dict, source_sha256: str | None = None) -> None:
+     review = _exact(bundle["prompt_review"], {"status", "source_sha256", "evidence_sha256", "policy_hash",
+                                             "reviewed_at"}, "invalid_prompt_diagnostic")
+     _require(review["status"] in {"not_detected", "detected_and_ignored", "not_reviewed"},
+              "invalid_prompt_diagnostic")
+     if review["source_sha256"] is not None:
+-        _require(review["source_sha256"] == bundle["source_ref"]["content_sha256"], "prompt_source_mismatch")
++        _require(review["source_sha256"] == (source_sha256 or bundle["source_ref"]["content_sha256"]), "prompt_source_mismatch")
+     versions = _exact(bundle["versions"], {"parser", "selector", "material", "model", "prompt",
+                                          "bundle_producer"}, "invalid_bundle_versions")
+     _require(all(_text(versions[key]) for key in ("parser", "selector", "bundle_producer")),
+@@ -449,14 +502,53 @@ def _bundle_contents(bundle: dict, receipt: dict, manifest: dict) -> None:
+     _diagnostics(bundle)
+ 
+ 
++def _declared_language(metadata: dict) -> None:
++    declared = metadata.get("declared_language")
++    if declared is None:
++        return
++    _require(_text(declared), "invalid_declared_language")
++    if declared in {"zh", "en", "mixed"}:
++        family = declared
++    else:
++        family = _locale_family(declared)
++    _require(family == metadata["language"], "declared_language_family_mismatch")
++
++
++def _locale_family(declared: str) -> str:
++    match = re.fullmatch(r"(zh|en)(?:-(Hans|Hant|Latn))?(?:-([a-z]{2}|[0-9]{3}))?", declared, re.IGNORECASE)
++    _require(match is not None, "invalid_declared_language")
++    family, script, _region = match.groups()
++    family = family.lower()
++    scripts = {"hans", "hant"} if family == "zh" else {"latn"}
++    _require(not script or script.lower() in scripts, "invalid_declared_language")
++    return family
++
++
++def _metadata(value: Any, *, projected: bool = False) -> dict:
++    fields = {"source_class", "title", "document_kind", "language"}
++    if isinstance(value, dict) and "declared_language" in value:
++        fields.add("declared_language")
++    metadata = _exact(value, fields, "invalid_source_metadata")
++    _require(metadata["title"] is None or _text(metadata["title"]), "invalid_source_metadata")
++    _require(_text(metadata["document_kind"]), "invalid_source_metadata")
++    classes = {"official_json"} if projected else {"filing", "transcript"}
++    languages = {"en", "zh", "mixed", "unknown"} if projected else {"en", "zh", "mixed"}
++    _require(isinstance(metadata["source_class"], str) and metadata["source_class"] in classes, "invalid_source_metadata")
++    _require(isinstance(metadata["language"], str) and metadata["language"] in languages, "invalid_source_metadata")
++    _declared_language(metadata)
++    return metadata
++
++
++def _manifest_language_family(value: Any) -> str:
++    _require(_text(value), "invalid_manifest_language")
++    return value if value in {"en", "zh", "mixed"} else _locale_family(value)
++
++
+ def _bundle_metadata(bundle: dict, manifest: dict) -> dict:
+-    metadata = _exact(bundle["source_metadata"], {"source_class", "title", "document_kind", "language"},
+-                      "invalid_source_metadata")
+-    _require(metadata["document_kind"] == manifest["document_kind"] and
+-             (manifest["language"] is None or metadata["language"] == manifest["language"]),
+-             "bundle_manifest_mismatch")
+-    _require(metadata["source_class"] in {"filing", "transcript"} and metadata["language"] in {"en", "zh", "mixed"},
+-             "invalid_source_metadata")
++    metadata = _metadata(bundle["source_metadata"])
++    _require(metadata["document_kind"] == manifest["document_kind"], "bundle_manifest_mismatch")
++    if manifest["language"] is not None:
++        _require(metadata["language"] == _manifest_language_family(manifest["language"]), "bundle_manifest_mismatch")
+     return metadata
+ 
+ 
+@@ -493,9 +585,177 @@ class NarrativeContext:
+         return deepcopy(self.value)
+ 
+ 
++def _projection_parents(subject: dict, receipt: dict) -> None:
++    parents = subject["parent_source_refs"]
++    _require(isinstance(parents, list) and bool(parents), "invalid_parent_references")
++    for parent in parents:
++        validate_source_ref(parent)
++    _require(len({parent["source_id"] for parent in parents}) == len(parents), "duplicate_parent_reference")
++    _require(_integer(receipt["parent_count"], 1) and receipt["parent_count"] == len(parents), "projection_parent_count_mismatch")
++    _require(_sha(receipt["lineage_sha256"]) and receipt["lineage_sha256"] ==
++             hashlib.sha256(canonical_bytes(subject)).hexdigest(), "projection_lineage_mismatch")
++
++
++def _projection_constraints(subject: dict, request: dict) -> None:
++    _date(subject["as_of_date"])
++    _require(request["as_of_date"] is None or subject["as_of_date"] == request["as_of_date"],
++             "projection_as_of_mismatch")
++    for key in ("issuer", "adapter", "coverage"):
++        _require(isinstance(subject[key], dict), "invalid_subject_context")
++    for key, expected in (request["expected_issuer"] or {}).items():
++        actual = subject["issuer"].get(key)
++        _require(type(actual) is type(expected) and actual == expected, "projection_issuer_mismatch")
++
++
++def _projected_subject(value: Any, request: dict, receipt: dict) -> dict:
++    subject = _exact(value, {"kind", "item_key", "subject_sha256", "parent_source_refs",
++                            "issuer", "as_of_date", "adapter", "coverage"}, "invalid_subject_binding")
++    compact = {"schema_version": "narrative-subject-ref/1", **{key: subject[key]
++               for key in ("kind", "item_key", "subject_sha256")}}
++    _require(compact == request["narrative_ref"]["subject_ref"], "bundle_subject_mismatch")
++    validate_subject_ref(compact)
++    _projection_parents(subject, receipt)
++    _projection_constraints(subject, request)
++    return subject
++
++
++def _span_parent(span: dict, binding: dict, subject: dict) -> dict:
++    parent = next((item for item in subject["parent_source_refs"] if
++                   item["source_id"] == span["source_id"] and
++                   item["content_sha256"] == binding.get("parent_content_sha256")), None)
++    _require(parent is not None, "projection_span_parent_mismatch")
++    _require(binding.get("projection_id") == subject["item_key"], "projection_span_parent_mismatch")
++    return parent
++
++
++def _projection_pointer(binding: dict) -> str:
++    pointer, record = binding.get("pointer"), binding.get("record_pointer")
++    _require(_text(pointer) and _text(record), "invalid_projection_pointer")
++    _require(record.startswith("/") and pointer.startswith(record + "/"), "invalid_projection_pointer")
++    suffix = pointer[len(record) + 1:]
++    _require(bool(suffix) and "/" not in suffix, "invalid_projection_pointer")
++    _require(not re.search(r"~(?![01])", pointer), "invalid_projection_pointer")
++    return pointer
++
++
++def _projection_range(value: Any, parent: dict) -> list[int]:
++    _require(isinstance(value, list) and len(value) == 2, "invalid_projection_byte_range")
++    _require(_integer(value[0]) and _integer(value[1], value[0]), "invalid_projection_byte_range")
++    _require(value[1] <= parent["byte_size"], "invalid_projection_byte_range")
++    return value
++
++
++def _projection_byte_binding(binding: dict, parent: dict) -> list[int]:
++    token = _projection_range(binding.get("token_range"), parent)
++    encoded = _projection_range(binding.get("encoded_body_range"), parent)
++    _require(token[0] < token[1], "invalid_projection_byte_binding")
++    _require(token[0] <= encoded[0] <= encoded[1] <= token[1], "invalid_projection_byte_binding")
++    for key in ("encoded_token_sha256", "decoded_sha256"):
++        _require(_sha(binding.get(key)), "invalid_projection_byte_binding")
++    return token
++
++
++def _projection_locator(binding: dict, pointer: str, token: list[int]) -> None:
++    locator = binding.get("source_locator")
++    prefix = "cwp-json-pointer/1|p=" + quote(pointer, safe="") + "|b=" + str(token[0]) + ":" + str(token[1]) + "|d=0:"
++    _require(isinstance(locator, str) and locator.startswith(prefix), "projection_pointer_locator_mismatch")
++    _require(re.fullmatch(r"[0-9]+\|x=json-string-decode/1", locator[len(prefix):]) is not None,
++             "projection_pointer_locator_mismatch")
++
++
++def _projected_span(value: Any, subject: dict) -> dict:
++    """Each field retains its own parent and pointer; the first parent is no anchor."""
++    span = _span_core(value)
++    binding = span["structured_value"]
++    _require(isinstance(binding, dict), "invalid_projection_span_binding")
++    parent = _span_parent(span, binding, subject)
++    pointer = _projection_pointer(binding)
++    token = _projection_byte_binding(binding, parent)
++    _projection_locator(binding, pointer, token)
++    return span
++
++
++def _projected_summary_draft(value: Any, subject: dict, spans: dict[str, dict], language: str) -> None:
++    draft = _exact(value, {"subject_id", "subject_sha256", "language", "claims", "status"},
++                   "invalid_subject_summary_draft")
++    _require(draft["subject_id"] == subject["item_key"] and draft["subject_sha256"] == subject["subject_sha256"]
++             and draft["language"] == language, "summary_subject_mismatch")
++    _require(draft["status"] in {"draft", "needs_review"}, "invalid_summary_status")
++    _require(isinstance(draft["claims"], list) and bool(draft["claims"]), "invalid_summary_claims")
++    claims = [_claim(claim, spans) for claim in draft["claims"]]
++    _require(len({claim["claim_id"] for claim in claims}) == len(claims), "duplicate_summary_claim")
++
++
++def _projected_summary(value: Any, subject: dict, spans: dict[str, dict], language: str, skipped: bool) -> None:
++    summary = _exact(value, {"status", "translate", "draft", "model"}, "invalid_summary")
++    _require(summary["translate"] is False, "translated_summary_forbidden")
++    if skipped:
++        _require(summary["status"] == "summary_not_needed" and summary["draft"] is None and
++                 summary["model"] is None, "invalid_skip_summary")
++        return
++    _require(summary["status"] == "completed", "invalid_summary_status")
++    _projected_summary_draft(summary["draft"], subject, spans, language)
++    _summary_model(summary["model"])
++
++
++def _projected_receipt(receipt: dict, request: dict) -> None:
++    _exact(receipt, PROJECTED_RECEIPT_FIELDS, "invalid_read_receipt")
++    _require(receipt["schema_version"] == "narrative-read-receipt/3" and receipt["status"] == "ok" and
++             receipt["replay_status"] == "verified", "unverified_read_receipt")
++    validate_narrative_ref(receipt["narrative_ref"])
++    _require(receipt["narrative_ref"] == request["narrative_ref"] and
++             receipt["as_of_date"] == request["as_of_date"], "receipt_request_mismatch")
++    _utc(receipt["observed_at"])
++    _require(_integer(receipt["locator_count"]), "invalid_locator_count")
++
++
++def _projection_bundle(body: bytes, ref: dict) -> dict:
++    _require(len(body) == ref["byte_size"] and hashlib.sha256(body).hexdigest() == ref["artifact_sha256"],
++             "artifact_bytes_mismatch")
++    bundle = decode_object(body, limit=BODY_LIMIT)
++    _require(canonical_bytes(bundle) == body, "noncanonical_bundle")
++    fields = (BUNDLE_FIELDS - {"source_ref", "expected_read_policy_sha256", "transcript_lineage",
++                             "transcript_byte_bindings"}) | {"subject_binding"}
++    _exact(bundle, fields, "invalid_narrative_bundle")
++    _require(bundle["schema_version"] == "narrative-bundle/3.0", "unsupported_narrative_bundle")
++    return bundle
++
++
++def _projection_spans(bundle: dict, subject: dict) -> tuple[list[dict], dict[str, dict]]:
++    _require(isinstance(bundle["evidence_spans"], list), "invalid_evidence_spans")
++    spans = [_projected_span(span, subject) for span in bundle["evidence_spans"]]
++    by_id = {span["span_id"]: span for span in spans}
++    _require(len(by_id) == len(spans), "duplicate_evidence")
++    return spans, by_id
++
++
++def _projected_response(request: dict, body: bytes, receipt: dict) -> NarrativeContext:
++    _projected_receipt(receipt, request)
++    ref = request["narrative_ref"]
++    bundle = _projection_bundle(body, ref)
++    subject = _projected_subject(bundle["subject_binding"], request, receipt)
++    metadata = _metadata(bundle["source_metadata"], projected=True)
++    spans, by_id = _projection_spans(bundle, subject)
++    selection = _selection(bundle["selection"], len(spans))
++    _require(not selection["coverage_complete"] or (subject["coverage"].get("pagination_complete") is True and
++             subject["coverage"].get("page_envelope_complete") is True), "projection_coverage_mismatch")
++    _bundle_quality(bundle, receipt, selection, len(spans))
++    _projected_summary(bundle["summary"], subject, by_id, metadata["language"],
++                       selection["status"] == "skipped_no_narrative")
++    _replay(bundle["replay"], len(spans))
++    _diagnostics(bundle, subject["parent_source_refs"][0]["content_sha256"])
++    return NarrativeContext({"schema_version": "revenue-narrative-context/3", "narrative_ref": ref,
++        "subject_binding": subject, "parent_source_refs": subject["parent_source_refs"],
++        "as_of_date": request["as_of_date"], "source_metadata": metadata, "selection": selection,
++        "quality_status": bundle["quality_status"], "evidence_spans": spans,
++        "summary": bundle["summary"], "read_receipt": receipt})
++
++
+ def _validated_response(request: dict, body: bytes, receipt_bytes: bytes) -> NarrativeContext:
+     request = validate_narrative_request(request)
+     receipt = decode_object(receipt_bytes, limit=RECEIPT_LIMIT, one_line=True)
++    if request["schema_version"] == "narrative-read-request/3":
++        return _projected_response(request, body, receipt)
+     manifest = _receipt(receipt, request)
+     bundle = _bundle(body, request, receipt, manifest)
+     return NarrativeContext({
+@@ -522,8 +782,14 @@ def validate_reference_response(request: dict, body: bytes, receipt_bytes: bytes
+     ref = validate_narrative_ref(decode_object(body, limit=REQUEST_LIMIT))
+     receipt = decode_object(receipt_bytes, limit=RECEIPT_LIMIT, one_line=True)
+     _exact(receipt, {"schema_version", "status", "narrative_ref"}, "invalid_reference_receipt")
+-    _require(receipt["schema_version"] == "narrative-read-receipt/1" and
++    projected = request["schema_version"] == "narrative-reference-request/3"
++    _require(receipt["schema_version"] == ("narrative-read-receipt/3" if projected else "narrative-read-receipt/1") and
+              receipt["status"] == "metadata_only" and receipt["narrative_ref"] == ref,
+              "invalid_reference_receipt")
+-    _require(ref["source_ref"] == request["source_ref"], "reference_source_mismatch")
++    if projected:
++        _require(ref["schema_version"] == "narrative-ref/3" and ref["subject_ref"] == request["subject_ref"] and
++                 ref["generation_sha256"] == request["generation_sha256"], "reference_subject_mismatch")
++    else:
++        _require(ref["schema_version"] == "narrative-ref/1" and ref["source_ref"] == request["source_ref"],
++                 "reference_source_mismatch")
+     return deepcopy(ref)
+diff --git a/scripts/company_wiki_narrative_reader.py b/scripts/company_wiki_narrative_reader.py
+index a9d6d8a64..9591f5dd3 100644
+--- a/scripts/company_wiki_narrative_reader.py
++++ b/scripts/company_wiki_narrative_reader.py
+@@ -32,7 +32,7 @@ def _refused(returncode: int, stdout: bytes, stderr: bytes) -> None:
+         raise NarrativeTransportError("unavailable", "partial_body_on_refusal")
+     refusal = decode_object(stderr, limit=RECEIPT_LIMIT, one_line=True)
+     if set(refusal) != {"schema_version", "status", "reason"} or (
+-        refusal["schema_version"] != "narrative-read-receipt/1"
++        refusal["schema_version"] not in {"narrative-read-receipt/1", "narrative-read-receipt/3"}
+         or refusal["status"] not in {"blocked", "not_found", "not_indexed", "unavailable", "ambiguous"}
+         or not isinstance(refusal["reason"], str)
+     ):
+diff --git a/scripts/filing_fetch_client.py b/scripts/filing_fetch_client.py
+index c72d54fc7..1e6aee077 100644
+--- a/scripts/filing_fetch_client.py
++++ b/scripts/filing_fetch_client.py
+@@ -55,6 +55,7 @@ class _ClientError(RuntimeError):
+         downloads: int | None = None,
+         source_failure_reason: str | None = None,
+         acquisition_observation: dict[str, Any] | None = None,
++        request_diagnostic: dict[str, Any] | None = None,
+     ) -> None:
+         super().__init__(message)
+         self.status = status if isinstance(status, str) and status in FAILURE_STATUSES else None
+@@ -64,7 +65,8 @@ class _ClientError(RuntimeError):
+         observed = failure_observation({"upstream_cause": upstream_cause, "acquisition_failure": acquisition_failure,
+                                        "stage": stage, "attempts": attempts, "calls": calls, "downloads": downloads,
+                                        "source_failure_reason": source_failure_reason,
+-                                       "acquisition_observation": acquisition_observation})
++                                       "acquisition_observation": acquisition_observation, "request_diagnostic": request_diagnostic})
++        self.request_diagnostic = observed.get("request_diagnostic")
+         self.upstream_cause = observed.get("upstream_cause")
+         self.acquisition_failure = observed.get("acquisition_failure")
+         self.acquisition_observation = observed.get("acquisition_observation")
+@@ -360,6 +362,7 @@ def _emit_error(
+     downloads: int | None = None,
+     source_failure_reason: str | None = None,
+     acquisition_observation: dict[str, Any] | None = None,
++    request_diagnostic: dict[str, Any] | None = None,
+ ) -> None:
+     """Write a structured error document to stderr (success stream on stdout)."""
+     payload: dict[str, Any] = {
+@@ -373,7 +376,7 @@ def _emit_error(
+     payload.update(failure_observation({"upstream_cause": upstream_cause, "acquisition_failure": acquisition_failure,
+                                        "stage": stage, "attempts": attempts, "calls": calls, "downloads": downloads,
+                                        "source_failure_reason": source_failure_reason,
+-                                       "acquisition_observation": acquisition_observation}))
++                                       "acquisition_observation": acquisition_observation, "request_diagnostic": request_diagnostic}))
+     sys.stderr.write(json.dumps(payload, ensure_ascii=False))
+     sys.stderr.write("\n")
+ 
+@@ -461,6 +464,7 @@ def main(argv: list[str] | None = None) -> int:
+             stage=exc.stage, attempts=exc.attempts, calls=exc.calls, downloads=exc.downloads,
+             source_failure_reason=exc.source_failure_reason,
+             acquisition_observation=exc.acquisition_observation,
++            request_diagnostic=exc.request_diagnostic,
+         )
+         return 2
+ 
+diff --git a/scripts/filing_upstream_cause.py b/scripts/filing_upstream_cause.py
+index 07885cdfc..4cd1ebf10 100644
+--- a/scripts/filing_upstream_cause.py
++++ b/scripts/filing_upstream_cause.py
+@@ -131,6 +131,28 @@ def validated_cause(value: Any) -> dict[str, Any] | None:
+     return dict(value)
+ 
+ 
++REQUEST_DIAGNOSTIC_SCHEMA = "filing-request-diagnostic/1"
++REQUEST_DIAGNOSTIC_PATHS = {
++    "exact_requires_fiscal_year": frozenset({"fiscal_year"}),
++    "latest_forbids_fiscal_year": frozenset({"fiscal_year"}),
++    "latest_reuse_requires_acquisition_limits": frozenset({"acquisition_limits"}),
++    "acquisition_limits_invalid": frozenset({"acquisition_limits", "acquisition_limits.max_bytes",
++        "acquisition_limits.timeout_seconds", "acquisition_limits.max_cost_usd"}),
++}
++
++
++def validated_request_diagnostic(value: Any) -> dict[str, Any] | None:
++    """An optional closed sibling; the original six-field cause is unchanged."""
++    if not isinstance(value, dict) or set(value) != {"schema_version", "reason", "field_path"}:
++        return None
++    if value["schema_version"] != REQUEST_DIAGNOSTIC_SCHEMA or not isinstance(value["reason"], str):
++        return None
++    paths = REQUEST_DIAGNOSTIC_PATHS.get(value["reason"])
++    if paths is None or not isinstance(value["field_path"], str) or value["field_path"] not in paths:
++        return None
++    return dict(value)
++
++
+ def failure_detail(payload: dict[str, Any]) -> dict[str, Any]:
+     """A v2 filing's failure is independent of its transcript companion."""
+     child = payload.get("filing")
+@@ -255,6 +277,7 @@ def failure_observation(payload: Any) -> dict[str, Any]:
+     detail = failure_detail(payload)
+     result: dict[str, Any] = {}
+     cause = validated_cause(detail.get("upstream_cause"))
++    diagnostic = validated_request_diagnostic(detail.get("request_diagnostic"))
+     receipt = validated_acquisition_failure(detail.get("acquisition_failure"))
+     # M3-USAGE: the operation observation is an envelope-level account (like
+     # calls/downloads); the detail fallback keeps older flat shapes readable.
+@@ -263,6 +286,8 @@ def failure_observation(payload: Any) -> dict[str, Any]:
+         observation = validated_acquisition_observation(detail.get("acquisition_observation"))
+     if cause is not None:
+         result["upstream_cause"] = cause
++    if diagnostic is not None:
++        result["request_diagnostic"] = diagnostic
+     if receipt is not None:
+         result["acquisition_failure"] = receipt
+     if observation is not None:
+diff --git a/scripts/revenue_backtest.py b/scripts/revenue_backtest.py
+index 8f96d0536..237a59d1c 100644
+--- a/scripts/revenue_backtest.py
++++ b/scripts/revenue_backtest.py
+@@ -41,6 +41,9 @@ def create_snapshot(data: dict[str, Any], forecast_version: str) -> dict[str, An
+     frozen_input["forecast_version"] = forecast_version
+     result = run_forecast(frozen_input)
+     validate_published_forecast(result, frozen_input)
++    actual_schema = frozen_input["schema_version"]
++    require(result["schema_version"] == actual_schema, "snapshot input/result schema mismatch")
++    require_validating_engine(actual_schema, result["engine_version"], "formal")
+     input_hash = canonical_sha256(frozen_input)
+     result_hash = canonical_sha256(result)
+     identity = {
+@@ -49,8 +52,8 @@ def create_snapshot(data: dict[str, Any], forecast_version: str) -> dict[str, An
+         "forecast_version": forecast_version,
+         "input_sha256": input_hash,
+         "forecast_result_sha256": result_hash,
+-        "engine_version": ENGINE_VERSION,
+-        "forecast_schema_version": FORECAST_SCHEMA_VERSION,
++        "engine_version": result["engine_version"],
++        "forecast_schema_version": actual_schema,
+         "snapshot_schema_version": "2.0",
+     }
+     snapshot = {
+@@ -76,10 +79,23 @@ def create_snapshot(data: dict[str, Any], forecast_version: str) -> dict[str, An
+ def write_new_json(path: Path, data: dict[str, Any]) -> None:
+     """Write once. Existing forecast history must never be overwritten."""
+     with path.open("x", encoding="utf-8") as handle:
+-        json.dump(data, handle, ensure_ascii=False, indent=2)
++        json.dump(data, handle, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
+         handle.write("\n")
+ 
+ 
++def snapshot_schema_diagnostic(snapshot: dict[str, Any]) -> dict[str, Any]:
++    """Report historical header differences without changing frozen IDs or anchors."""
++    header = snapshot.get("forecast_schema_version")
++    input_schema = snapshot.get("input_document", {}).get("schema_version")
++    result_schema = snapshot.get("forecast_result", {}).get("schema_version")
++    known = all(isinstance(version, str) for version in (header, input_schema, result_schema))
++    status = ("consistent" if header == input_schema == result_schema else "metadata_mismatch") if known else "unknown"
++    return {"schema_version": "snapshot-schema-diagnostic/1",
++        "status": status,
++        "header_schema_version": header, "input_schema_version": input_schema,
++        "result_schema_version": result_schema, "snapshot_rewritten": False}
++
++
+ def validate_snapshot(snapshot: dict[str, Any]) -> None:
+     for key in (
+         "snapshot_schema_version",
+diff --git a/scripts/source_narrative_context.py b/scripts/source_narrative_context.py
+index 408de5544..b5d716891 100644
+--- a/scripts/source_narrative_context.py
++++ b/scripts/source_narrative_context.py
+@@ -16,12 +16,40 @@ from contracts.source_clock import utc_timestamp
+ from forecast.calc import collect_parameter_roles
+ 
+ 
++def _read_time(value: dict) -> str:
++    receipt = value["read_receipt"]
++    return receipt["observed_at"] if value["schema_version"] == "revenue-narrative-context/3" else receipt["read_at"]
++
++
+ def narrative_read_receipt(context: NarrativeContext) -> dict:
+     value = context.to_dict()
+-    return {"schema_version": "revenue-narrative-consumption/1", "status": "not_consumed",
+-            "narrative_ref": value["narrative_ref"], "read_at": value["read_receipt"]["read_at"],
+-            "quality_status": value["quality_status"], "selection": value["selection"],
+-            "dependencies": []}
++    projected = value["schema_version"] == "revenue-narrative-context/3"
++    receipt = {"schema_version": "revenue-narrative-consumption/3" if projected else "revenue-narrative-consumption/1",
++        "status": "not_consumed", "narrative_ref": value["narrative_ref"], "read_at": _read_time(value),
++        "quality_status": value["quality_status"], "selection": value["selection"], "dependencies": []}
++    if projected:
++        receipt.update(subject_ref=value["narrative_ref"]["subject_ref"],
++                       parent_count=value["read_receipt"]["parent_count"],
++                       lineage_sha256=value["read_receipt"]["lineage_sha256"])
++    return receipt
++
++
++def _captured_parent(value: dict, source: dict | None) -> dict:
++    if source is None:
++        raise ValueError("narrative source does not bind to the input source capture")
++    refs = value["parent_source_refs"] if value["schema_version"] == "revenue-narrative-context/3" else [value["source_ref"]]
++    matches = [ref for ref in refs if ref["content_sha256"] == source["capture"]["snapshot_sha256"]]
++    if len(matches) != 1:
++        raise ValueError("narrative source does not bind to the input source capture")
++    ref = matches[0]
++    trace = source.get("company_wiki_trace", {}).get("source_ref")
++    if trace is not None and trace != ref:
++        raise ValueError("narrative parent differs from the prepared SourceRef")
++    return ref
++
++
++def _source_locator(span: dict, *, projected: bool) -> str:
++    return span["structured_value"]["source_locator"] if projected else span["locator"]
+ 
+ 
+ def _formula_refs(data: dict, parameter_id: str, index: dict) -> list[dict]:
+@@ -46,7 +74,7 @@ def _formula_refs(data: dict, parameter_id: str, index: dict) -> list[dict]:
+     return refs
+ 
+ 
+-def _claim(binding: dict, span: dict, source: dict, verified_date: str, verified_by: str) -> dict:
++def _claim(binding: dict, span: dict, source: dict, verified_date: str, verified_by: str, *, projected: bool = False) -> dict:
+     excerpt = span["raw_text"]
+     if not isinstance(excerpt, str) or not excerpt.strip() or span["parse_status"] != "parsed":
+         raise ValueError("selected narrative span has no usable parsed text")
+@@ -55,7 +83,7 @@ def _claim(binding: dict, span: dict, source: dict, verified_date: str, verified
+         raise ValueError("narrative qualitative claim requires an explicit evidence role")
+     return {"claim_id": binding["claim_id"], "source_id": source["source_id"],
+             "target_type": "parameter", "target_id": binding["parameter_id"],
+-            "support_type": support, "locator": span["locator"], "excerpt": excerpt,
++            "support_type": support, "locator": _source_locator(span, projected=projected), "excerpt": excerpt,
+             "excerpt_sha256": text_sha256(excerpt),
+             "content_sha256": source["capture"]["snapshot_sha256"],
+             "capture_receipt_sha256": source["capture"]["receipt_sha256"],
+@@ -78,15 +106,15 @@ def consume_narrative_input(
+     value = context.to_dict()
+     updated = deepcopy(data)
+     source = next((item for item in updated.get("sources", []) if item["source_id"] == source_id), None)
+-    if source is None or source["capture"]["snapshot_sha256"] != value["source_ref"]["content_sha256"]:
+-        raise ValueError("narrative source does not bind to the input source capture")
++    parent = _captured_parent(value, source)
++    projected = value["schema_version"] == "revenue-narrative-context/3"
+     if data.get("as_of_date") != request["as_of_date"]:
+         raise ValueError("narrative information date does not match input")
+     index = {item["parameter_id"]: item for item in updated.get("parameters", [])}
+     used = collect_parameter_roles(updated, index)["used"]
+     spans = {item["span_id"]: item for item in value["evidence_spans"]}
+     receipt = narrative_read_receipt(context)
+-    verified_date = utc_timestamp(value["read_receipt"]["read_at"], "narrative read_at").date().isoformat()
++    verified_date = utc_timestamp(_read_time(value), "narrative read_at").date().isoformat()
+     claims = updated.setdefault("evidence_claims", [])
+     claim_ids = {item["claim_id"] for item in claims}
+     for binding in bindings:
+@@ -96,7 +124,12 @@ def consume_narrative_input(
+         if pid not in used or cid in claim_ids or binding["span_id"] not in spans:
+             raise ValueError("narrative binding requires a unique claim and a used parameter/span")
+         span = spans[binding["span_id"]]
+-        claims.append(_claim(binding, span, source, verified_date, verified_by))
++        if span["source_id"] != parent["source_id"]:
++            raise ValueError("selected narrative span differs from the captured parent source")
++        formula_refs = _formula_refs(updated, pid, index)
++        if not formula_refs:
++            raise ValueError("narrative binding does not reach an actual segment formula")
++        claims.append(_claim(binding, span, source, verified_date, verified_by, projected=projected))
+         claim_ids.add(cid)
+         parameter = index[pid]
+         parameter.setdefault("claim_ids", []).append(cid)
+@@ -105,10 +138,13 @@ def consume_narrative_input(
+         receipt["dependencies"].append({
+             "span_id": span["span_id"], "locator": span["locator"],
+             "parser_name": span["parser_name"], "parser_version": span["parser_version"],
+-            "source_id": value["source_ref"]["source_id"],
+-            "source_sha256": value["source_ref"]["content_sha256"],
+-            "claim_id": cid, "parameter_id": pid, "formula_refs": _formula_refs(updated, pid, index),
++            "source_id": parent["source_id"],
++            "source_sha256": parent["content_sha256"],
++            "claim_id": cid, "parameter_id": pid, "formula_refs": formula_refs,
+         })
++        if projected:
++            receipt["dependencies"][-1].update(source_locator=span["structured_value"]["source_locator"],
++                pointer=span["structured_value"]["pointer"], subject_ref=value["narrative_ref"]["subject_ref"])
+     if receipt["dependencies"]:
+         receipt["status"] = "consumed"
+     return updated, receipt
+diff --git a/scripts/source_preparation.py b/scripts/source_preparation.py
+index 43ec74dad..421de7505 100644
+--- a/scripts/source_preparation.py
++++ b/scripts/source_preparation.py
+@@ -93,6 +93,11 @@ _SOURCE_TYPE_BY_KIND = {
+     "company_release": "company_release",
+     "investor_relations": "company_release",
+     "investor_call_transcript": "earnings_transcript",
++    "broker_research": "specialist_research",
++    "prospectus": "regulatory_filing",
++    "equity_offering_prospectus": "regulatory_filing",
++    "convertible_bond_prospectus": "regulatory_filing",
++    "news": "reputable_news",
+ }
+ _SOURCE_LOCATION_FIELDS = {
+     "path",
+@@ -106,8 +111,10 @@ _SOURCE_LOCATION_FIELDS = {
+ 
+ 
+ def _revenue_source_type(handle: dict) -> str:
+-    kind = str(handle.get("document_kind") or "")
+-    return _SOURCE_TYPE_BY_KIND.get(kind, "regulatory_filing")
++    kind = handle.get("document_kind")
++    if not isinstance(kind, str) or kind not in _SOURCE_TYPE_BY_KIND:
++        raise RuntimeError("unsupported_revenue_document_kind")
++    return _SOURCE_TYPE_BY_KIND[kind]
+ 
+ 
+ def _catalog_config_for_reader(catalog_config: Path | None) -> Path:
+@@ -150,12 +157,13 @@ class FilingSourcePreparationError(RuntimeError):
+                  acquisition_failure: dict | None = None, stage: str | None = None,
+                  attempts: int | None = None, calls: int | None = None, downloads: int | None = None,
+                  source_failure_reason: str | None = None,
+-                 acquisition_observation: dict | None = None):
++                 acquisition_observation: dict | None = None, request_diagnostic: dict | None = None):
+         super().__init__(message)
+         observed = failure_observation({"upstream_cause": upstream_cause, "acquisition_failure": acquisition_failure,
+                                        "stage": stage, "attempts": attempts, "calls": calls, "downloads": downloads,
+                                        "source_failure_reason": source_failure_reason,
+-                                       "acquisition_observation": acquisition_observation})
++                                       "acquisition_observation": acquisition_observation, "request_diagnostic": request_diagnostic})
++        self.request_diagnostic = observed.get("request_diagnostic")
+         self.upstream_cause = observed.get("upstream_cause")
+         self.acquisition_failure = observed.get("acquisition_failure")
+         self.acquisition_observation = observed.get("acquisition_observation")
+@@ -260,6 +268,7 @@ def _prepare_source_ref_v2(
+     catalog_config: Path,
+     *,
+     timeout_seconds: float, source_reader_receipt_version: str = "2.1",
++    registered_read: bool = False,
+ ) -> dict:
+     """Open and record one pathless candidate using company-wiki's verifier."""
+     from company_wiki_source_reader_v2 import open_source_version_v2, validate_source_reader_receipt_version
+@@ -269,7 +278,7 @@ def _prepare_source_ref_v2(
+     deadline = _read_deadline(timeout_seconds)
+     reader_options = {"source_reader_receipt_version": version} if version == "2.2" else {}
+     fiscal_year = _validate_v2_candidate(request, handle)
+-    outcome, downloads = _v2_resolution_events(handle)
++    outcome, downloads = ("reused_existing", 0) if registered_read else _v2_resolution_events(handle)
+     body, receipt, manifest = open_source_version_v2(
+         source_ref=handle["source_ref"],
+         catalog_config=catalog_config,
+@@ -277,6 +286,8 @@ def _prepare_source_ref_v2(
+         expected_fiscal_year=fiscal_year,
+         timeout_seconds=_remaining_timeout(deadline), **reader_options,
+     )
++    if registered_read:
++        _registered_manifest_constraints(handle, manifest)
+     record = build_revenue_source_record_from_verified_read(
+         source_ref=handle["source_ref"],
+         read_receipt=receipt,
+@@ -344,7 +355,7 @@ def _prepare_legacy_source(request: dict, handle: dict) -> dict:
+     record = company_wiki_source.build_revenue_source_record(
+         handle,
+         as_of_date=str(request.get("as_of_date", "")),
+-        source_type=_revenue_source_type(handle),
++        source_type=_revenue_source_type({**request, **handle}),
+         publisher=str(handle.get("provider") or "unknown"),
+         page_or_section="1",
+         prompt_injection_status=prompt_injection_status,
+@@ -368,6 +379,16 @@ def _prepare_legacy_source(request: dict, handle: dict) -> dict:
+ 
+ 
+ 
++def _registered_manifest_constraints(candidate: dict, manifest: dict) -> None:
++    """Bind supplied period/issuer facts to the same public verified-open manifest."""
++    fields = ("document_kind", "fiscal_year", "fiscal_period", "market", "security_id", "canonical_entity_id")
++    for key in fields:
++        if key in candidate:
++            expected, actual = candidate[key], manifest[key]
++            if type(expected) is not type(actual) or expected != actual:
++                raise RuntimeError("registered_source_manifest_mismatch:" + key)
++
++
+ def prepare_registered_source_result(
+     candidate: dict, *, as_of_date: str, company_wiki_catalog_config: Path,
+     timeout_seconds: float = 30.0, source_reader_receipt_version: str = "2.1",
+@@ -383,7 +404,7 @@ def prepare_registered_source_result(
+     request["as_of_date"] = as_of_date
+     source = _prepare_source_ref_v2(request, candidate,
+         _catalog_config_for_reader(company_wiki_catalog_config), timeout_seconds=timeout_seconds,
+-        source_reader_receipt_version=source_reader_receipt_version)
++        source_reader_receipt_version=source_reader_receipt_version, registered_read=True)
+     return {"schema_version": "source-preparation-result/1", "source": source,
+             "filing_fetch": None, "narrative": None}
+ 
+@@ -438,7 +459,9 @@ def prepare_source_result(
+             from source_narrative_context import narrative_read_receipt
+             context = read_narrative_context(narrative_request, catalog_config=catalog_config,
+                                              timeout_seconds=_remaining_timeout(deadline))
+-            if context.to_dict()["source_ref"] != select_filing(filing_fetch)["source_ref"]:
++            value = context.to_dict()
++            refs = value["parent_source_refs"] if value.get("schema_version") == "revenue-narrative-context/3" else [value["source_ref"]]
++            if select_filing(filing_fetch)["source_ref"] not in refs:
+                 raise RuntimeError("narrative SourceRef does not match the prepared source")
+             narrative = narrative_read_receipt(context)
+     except (RuntimeError, ValueError, OSError) as exc:
+@@ -477,7 +500,7 @@ def main(argv: list[str] | None = None) -> int:
+     parser.add_argument("--result-envelope", action="store_true",
+                         help="retain filing-fetch result and explicit narrative read receipt")
+     parser.add_argument("--narrative-request-file", type=Path,
+-                        help="explicit existing narrative-read-request/1; never starts a model")
++                        help="explicit existing narrative-read-request/1 or projected /3; never starts a model")
+     parser.add_argument(
+         "--source-reader-v2",
+         action="store_true",
+@@ -530,7 +553,7 @@ def main(argv: list[str] | None = None) -> int:
+         failure = {"error_code": "upstream", "error": str(exc)}
+         failure.update(failure_observation({key: getattr(exc, key, None) for key in
+                        ("upstream_cause", "acquisition_failure", "stage", "attempts", "calls", "downloads",
+-                        "source_failure_reason", "acquisition_observation")}))
++                        "source_failure_reason", "acquisition_observation", "request_diagnostic")}))
+         sys.stderr.write(json.dumps(failure))
+         sys.stderr.write("\n")
+         return 3
+diff --git a/tests/test_w04_public_consumer.py b/tests/test_w04_public_consumer.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_w04_public_consumer.py
+@@ -0,0 +1,265 @@
++"""W04 consumer-only contract challenges; these are not producer receipts."""
++from copy import deepcopy
++import hashlib
++import json
++from pathlib import Path
++import sys
++from unittest.mock import patch
++
++import pytest
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT / "scripts"))
++from company_wiki_narrative_contracts import (NarrativeTransportError, canonical_bytes,
++    validate_narrative_request, validate_narrative_response, validate_reference_response)
++from filing_upstream_cause import failure_observation
++from test_company_wiki_narrative_reader import _valid, _resign
++
++
++def _sha(value):
++    return hashlib.sha256(canonical_bytes(value)).hexdigest()
++
++
++def projected_wire():
++    request, raw, _ = _valid()
++    bundle = json.loads(raw)
++    parents = [deepcopy(request["narrative_ref"]["source_ref"])]
++    parents[0]["mime_type"] = "application/json"
++    other = deepcopy(parents[0])
++    other.update(document_id="other-page", source_id="urn:company-wiki:source:sha256:" + "b" * 64,
++                 content_sha256="b" * 64, byte_size=4096)
++    parents.append(other)
++    subject = {"kind": "official_json", "item_key": "urn:company-wiki:source-projection:sha256:" + "c" * 64,
++        "subject_sha256": "c" * 64, "parent_source_refs": parents, "issuer": {"market": "US", "security_id": "ACME"},
++        "as_of_date": "2026-09-01", "adapter": {"parser": "cwp_official_json/1.0.1"},
++        "coverage": {"page_envelope_complete": True, "pagination_complete": True}}
++    bundle["schema_version"] = "narrative-bundle/3.0"
++    bundle["subject_binding"] = subject
++    for key in ("source_ref", "expected_read_policy_sha256", "transcript_lineage", "transcript_byte_bindings"):
++        del bundle[key]
++    bundle["source_metadata"].update(source_class="official_json", document_kind="investor_relations")
++    span = bundle["evidence_spans"][0]
++    span["source_id"] = other["source_id"]
++    binding = span["structured_value"]
++    binding.update(projection_id=subject["item_key"], parent_content_sha256=other["content_sha256"],
++        pointer="/records/0/answer", record_pointer="/records/0", source_locator="cwp-json-pointer/1|p=%2Frecords%2F0%2Fanswer|b=4:20|d=0:16|x=json-string-decode/1",
++        token_range=[4, 20], encoded_body_range=[5, 19], encoded_token_sha256="e" * 64,
++        decoded_sha256=hashlib.sha256(span["raw_text"].encode()).hexdigest())
++    span["output_sha256"] = _sha({"raw_text": span["raw_text"], "structured_value": binding})
++    span["span_id"] = "urn:company-wiki:evidence-span:sha256:" + _sha({"source_id": span["source_id"],
++        "locator": span["locator"], "output_sha256": span["output_sha256"]})
++    draft = bundle["summary"]["draft"]
++    draft["subject_id"], draft["subject_sha256"] = subject["item_key"], subject["subject_sha256"]
++    del draft["source_id"], draft["source_sha256"]
++    draft["claims"][0]["evidence_ids"] = [span["span_id"]]
++    bundle["prompt_review"]["source_sha256"] = parents[0]["content_sha256"]
++    body = canonical_bytes(bundle)
++    ref = {"schema_version": "narrative-ref/3", "artifact_version_id": "projection-v1",
++        "artifact_sha256": hashlib.sha256(body).hexdigest(), "byte_size": len(body), "generation_sha256": "d" * 64,
++        "subject_ref": {"schema_version": "narrative-subject-ref/1", "kind": subject["kind"],
++            "item_key": subject["item_key"], "subject_sha256": subject["subject_sha256"]}}
++    request = {"schema_version": "narrative-read-request/3", "narrative_ref": ref,
++        "as_of_date": subject["as_of_date"], "expected_issuer": subject["issuer"]}
++    receipt = {"schema_version": "narrative-read-receipt/3", "status": "ok", "narrative_ref": deepcopy(ref),
++        "as_of_date": request["as_of_date"], "observed_at": "2026-09-02T00:00:00Z", "locator_count": 1,
++        "parent_count": 2, "lineage_sha256": _sha(subject), "selection_status": bundle["selection"]["status"],
++        "quality_status": bundle["quality_status"], "replay_status": "verified"}
++    return request, body, canonical_bytes(receipt) + b"\n"
++
++
++def test_optional_declared_language_is_preserved_and_old_four_keys_read():
++    request, body, raw = _valid()
++    assert "declared_language" not in validate_narrative_response(request, body, raw).to_dict()["source_metadata"]
++    bundle, receipt = json.loads(body), json.loads(raw)
++    bundle["source_metadata"]["declared_language"] = "en-US"
++    body, raw = _resign(request, bundle, receipt)
++    assert validate_narrative_response(request, body, raw).to_dict()["source_metadata"]["declared_language"] == "en-US"
++
++
++@pytest.mark.parametrize("key,value", [("declared_language", "zh-Hant"), ("declared_language", True),
++    ("declared_language", "fr-FR"), ("title", 0), ("unexpected", "value")])
++def test_metadata_types_family_and_unknown_fields_refused(key, value):
++    request, body, raw = _valid()
++    bundle, receipt = json.loads(body), json.loads(raw)
++    bundle["source_metadata"][key] = value
++    body, raw = _resign(request, bundle, receipt)
++    with pytest.raises(NarrativeTransportError):
++        validate_narrative_response(request, body, raw)
++
++
++def test_compact_projected_read_preserves_all_parent_refs_and_original_pointer():
++    request, body, receipt = projected_wire()
++    context = validate_narrative_response(request, body, receipt).to_dict()
++    assert context["schema_version"] == "revenue-narrative-context/3"
++    assert "source_ref" not in context
++    assert context["subject_binding"] == json.loads(body)["subject_binding"]
++    assert len(context["parent_source_refs"]) == 2
++    assert context["evidence_spans"][0]["structured_value"]["pointer"] == "/records/0/answer"
++    assert context["narrative_ref"] == request["narrative_ref"]
++
++
++def test_compact_projected_reference_response_and_request_are_bounded():
++    request, _, _ = projected_wire()
++    ref = request["narrative_ref"]
++    lookup = {"schema_version": "narrative-reference-request/3", "subject_ref": ref["subject_ref"],
++              "generation_sha256": ref["generation_sha256"]}
++    raw = canonical_bytes({"schema_version": "narrative-read-receipt/3", "status": "metadata_only", "narrative_ref": ref}) + b"\n"
++    assert validate_reference_response(lookup, canonical_bytes(ref) + b"\n", raw) == ref
++    assert len(canonical_bytes(validate_narrative_request(request)) + b"\n") <= 16384
++
++
++@pytest.mark.parametrize("mutation", ["parent", "pointer", "issuer", "asof", "lineage", "generation"])
++def test_projected_binding_or_receipt_drift_refused_even_with_resigned_body(mutation):
++    request, body, raw = projected_wire()
++    bundle, receipt = json.loads(body), json.loads(raw)
++    if mutation == "parent":
++        bundle["subject_binding"]["parent_source_refs"].pop()
++    elif mutation == "pointer":
++        bundle["evidence_spans"][0]["structured_value"]["pointer"] = "/other/answer"
++    elif mutation == "issuer":
++        bundle["subject_binding"]["issuer"]["security_id"] = "OTHER"
++    elif mutation == "asof":
++        bundle["subject_binding"]["as_of_date"] = "2026-09-02"
++    elif mutation == "lineage":
++        receipt["lineage_sha256"] = "0" * 64
++    else:
++        receipt["narrative_ref"]["generation_sha256"] = "0" * 64
++    body, raw = _resign(request, bundle, receipt)
++    if mutation == "generation":
++        receipt = json.loads(raw)
++        receipt["narrative_ref"]["generation_sha256"] = "0" * 64
++        raw = canonical_bytes(receipt) + b"\n"
++    with pytest.raises(NarrativeTransportError):
++        validate_narrative_response(request, body, raw)
++
++
++def test_ff_typed_request_sibling_survives_without_changing_six_key_cause():
++    cause = {"schema_version": "filing-upstream-cause/1", "operation": "resolve", "code": "unknown",
++        "provider_started": False, "usage_complete": None, "retry_scope": "none"}
++    diagnostic = {"schema_version": "filing-request-diagnostic/1", "reason": "exact_requires_fiscal_year", "field_path": "fiscal_year"}
++    seen = failure_observation({"upstream_cause": cause, "request_diagnostic": diagnostic})
++    assert seen["upstream_cause"] == cause
++    assert seen["request_diagnostic"] == diagnostic
++    assert failure_observation({"upstream_cause": cause}) == {"upstream_cause": cause}
++    for key, value in (("reason", "secret=value"), ("field_path", "private_path"), ("extra", "x")):
++        bad = {**diagnostic, key: value}
++        assert "request_diagnostic" not in failure_observation({"request_diagnostic": bad})
++
++
++@pytest.mark.parametrize("kind", ["investor_presentation", "investor_relations", "broker_research"])
++def test_pinned_nonperiod_null_fy_passes_registered_path_without_ff(kind, tmp_path):
++    from source_preparation import prepare_registered_source_result
++    from test_company_wiki_source_v2 import _inputs, BODY
++    ref, receipt, manifest = _inputs()
++    manifest.update(document_kind=kind, fiscal_year=None, fiscal_period=None, period_end=None)
++    candidate = {"status": "source_candidate", "source_ref": ref,
++        "byte_verification": "pending_verified_open", "document_kind": kind, "fiscal_year": None,
++        "fiscal_period": None, "resolution_outcome": "reused_existing", "download_events": 0}
++    config = tmp_path / "catalog.json"
++    config.write_text("{}", encoding="utf-8")
++    with patch("company_wiki_source_reader_v2.open_source_version_v2", return_value=(BODY, receipt, manifest)) as opened, \
++         patch("source_preparation._run_filing_fetch", side_effect=AssertionError("pinned read must not acquire")):
++        result = prepare_registered_source_result(candidate, as_of_date="2026-09-27", company_wiki_catalog_config=config)
++    assert opened.call_args.kwargs["expected_fiscal_year"] is None
++    assert result["filing_fetch"] is None
++    assert result["source"]["capture"]["snapshot_sha256"] == ref["content_sha256"]
++    assert result["source"]["source_type"] == {"investor_presentation": "investor_presentation",
++        "investor_relations": "company_release", "broker_research": "specialist_research"}[kind]
++
++
++def test_unknown_kind_never_becomes_regulatory_filing():
++    from source_preparation import _revenue_source_type
++    with pytest.raises(RuntimeError, match="unsupported_revenue_document_kind"):
++        _revenue_source_type({"document_kind": "unknown"})
++
++
++def _consumption_data(parent):
++    return {"as_of_date": "2026-09-01", "sources": [{"source_id": "source-alias",
++        "capture": {"snapshot_sha256": parent["content_sha256"], "receipt_sha256": "f" * 64}}],
++        "parameters": [{"parameter_id": "qualitative", "kind": "analyst_assumption", "value": 2},
++            {"parameter_id": "derived", "kind": "derived_fact", "input_parameter_ids": ["qualitative"]},
++            {"parameter_id": "unused", "kind": "analyst_assumption", "value": 9}],
++        "segments": [{"name": "A", "scenarios": {"base": {"model": "direct_revenue",
++            "driver_parameter_ids": {"revenue": ["derived"]}}}}]}
++
++
++def test_projected_rationale_reaches_derived_ancestor_and_actual_segment_formula(tmp_path):
++    from source_narrative_context import consume_narrative_input
++    request, body, raw = projected_wire()
++    context = validate_narrative_response(request, body, raw)
++    value = context.to_dict()
++    data = _consumption_data(value["parent_source_refs"][1])
++    binding = {"span_id": value["evidence_spans"][0]["span_id"], "claim_id": "support-mechanism",
++        "parameter_id": "qualitative", "support_type": "rationale_support"}
++    with patch("source_narrative_context.read_narrative_context", return_value=context):
++        _, unread = consume_narrative_input(data, request=request, bindings=[], source_id="source-alias", catalog_config=tmp_path / "catalog.json")
++        assert unread["status"] == "not_consumed" and unread["dependencies"] == []
++        updated, receipt = consume_narrative_input(data, request=request, bindings=[binding], source_id="source-alias", catalog_config=tmp_path / "catalog.json")
++        assert receipt["status"] == "consumed"
++        dependency = receipt["dependencies"][0]
++        assert dependency["source_sha256"] == value["parent_source_refs"][1]["content_sha256"]
++        assert dependency["source_locator"] == value["evidence_spans"][0]["structured_value"]["source_locator"]
++        assert dependency["formula_refs"][0]["output"] == "recognized_revenue"
++        assert updated["parameters"][0]["value"] == data["parameters"][0]["value"]
++        assert updated["evidence_claims"][0]["locator"] == dependency["source_locator"]
++        for changed in ({**binding, "parameter_id": "unused"}, {**binding, "support_type": "numeric_support"}):
++            with pytest.raises(ValueError):
++                consume_narrative_input(data, request=request, bindings=[changed], source_id="source-alias", catalog_config=tmp_path / "catalog.json")
++        wrong_source = deepcopy(data)
++        wrong_source["sources"][0]["capture"]["snapshot_sha256"] = value["parent_source_refs"][0]["content_sha256"]
++        with pytest.raises(ValueError):
++            consume_narrative_input(wrong_source, request=request, bindings=[binding], source_id="source-alias", catalog_config=tmp_path / "catalog.json")
++        wrong_date = {**data, "as_of_date": "2026-09-02"}
++        with pytest.raises(ValueError):
++            consume_narrative_input(wrong_date, request=request, bindings=[binding], source_id="source-alias", catalog_config=tmp_path / "catalog.json")
++
++
++def test_public_registered_candidate_needs_no_filing_fetch_resolution_fields(tmp_path):
++    from source_preparation import prepare_registered_source_result
++    from test_company_wiki_source_v2 import _inputs, _candidate, BODY
++    ref, receipt, manifest = _inputs()
++    manifest.update(document_kind="broker_research", fiscal_year=None, fiscal_period=None, period_end=None)
++    candidate = _candidate(ref, manifest)
++    assert "download_events" not in candidate and "resolution_outcome" not in candidate
++    config = tmp_path / "catalog.json"
++    config.write_text("{}", encoding="utf-8")
++    with patch("company_wiki_source_reader_v2.open_source_version_v2", return_value=(BODY, receipt, manifest)), \
++         patch("source_preparation._run_filing_fetch", side_effect=AssertionError("pinned source cannot acquire")):
++        prepared = prepare_registered_source_result(candidate, as_of_date="2026-09-27", company_wiki_catalog_config=config)
++    assert prepared["source"]["reuse_receipt"]["download_calls"] == 0
++    assert prepared["source"]["reuse_receipt"]["outcome"] == "reused_existing"
++    assert prepared["filing_fetch"] is None
++
++
++def test_locale_manifest_and_preserved_declared_language_match_worker_family():
++    request, body, raw = _valid()
++    bundle, receipt = json.loads(body), json.loads(raw)
++    bundle["source_metadata"]["declared_language"] = "en-US"
++    receipt["manifest"]["language"] = "en-US"
++    body, raw = _resign(request, bundle, receipt)
++    value = validate_narrative_response(request, body, raw).to_dict()
++    assert value["source_metadata"]["language"] == "en"
++    assert value["source_metadata"]["declared_language"] == "en-US"
++    assert value["manifest"]["language"] == "en-US"
++    receipt["manifest"]["language"] = "zh-CN"
++    with pytest.raises(NarrativeTransportError):
++        validate_narrative_response(request, body, canonical_bytes(receipt) + b"\n")
++
++
++@pytest.mark.parametrize("reason,path", [("exact_requires_fiscal_year", "fiscal_year"),
++    ("latest_forbids_fiscal_year", "fiscal_year"), ("latest_reuse_requires_acquisition_limits", "acquisition_limits"),
++    ("acquisition_limits_invalid", "acquisition_limits.max_cost_usd")])
++def test_typed_request_sibling_crosses_both_rf_error_envelopes(reason, path, capsys):
++    import filing_fetch_client as client
++    import source_preparation as prep
++    diagnostic = {"schema_version": "filing-request-diagnostic/1", "reason": reason, "field_path": path}
++    cause = {"schema_version": "filing-upstream-cause/1", "operation": "resolve", "code": "unknown",
++             "provider_started": False, "usage_complete": None, "retry_scope": "none"}
++    exc = client._ClientError("request refused", upstream_cause=cause, request_diagnostic=diagnostic)
++    client._emit_error("request_error", str(exc), upstream_cause=exc.upstream_cause, request_diagnostic=exc.request_diagnostic)
++    emitted = json.loads(capsys.readouterr().err)
++    assert emitted["request_diagnostic"] == diagnostic and emitted["upstream_cause"] == cause
++    preparation = prep.FilingSourcePreparationError("request refused", **failure_observation(emitted))
++    assert preparation.request_diagnostic == diagnostic
++    assert preparation.upstream_cause["provider_started"] is False
++    assert preparation.upstream_cause["usage_complete"] is None
+diff --git a/tests/test_w04_snapshot_delivery.py b/tests/test_w04_snapshot_delivery.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_w04_snapshot_delivery.py
+@@ -0,0 +1,47 @@
++"""W04 native snapshot delivery challenges; all registry writes use pytest TEMP."""
++import json
++from pathlib import Path
++import sys
++
++import pytest
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT / "scripts"))
++from revenue_backtest import create_snapshot, validate_snapshot, write_new_json
++from test_recognition_bridge import forecast_document
++from revenue_core import canonical_sha256
++from publication_registry import _read_entries
++
++
++@pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
++def test_snapshot_header_uses_actual_native_schema_and_keeps_registry_binding(schema, tmp_path):
++    data = forecast_document()
++    data["schema_version"] = schema
++    snapshot = create_snapshot(data, "w04-native-" + schema)
++    assert snapshot["input_document"]["schema_version"] == schema
++    assert snapshot["forecast_result"]["schema_version"] == schema
++    assert snapshot["forecast_schema_version"] == schema
++    validate_snapshot(snapshot)
++    entry = next(e for e in _read_entries() if e["artifact_id"] == snapshot["snapshot_id"])
++    assert entry["input_sha256"] == snapshot["input_sha256"]
++    output = tmp_path / "snapshot.json"
++    write_new_json(output, snapshot)
++    encoded = output.read_bytes()
++    assert json.loads(encoded) == snapshot
++    assert len(encoded.splitlines()) == 1
++    assert canonical_sha256(json.loads(encoded)["input_document"]) == snapshot["input_sha256"]
++    with pytest.raises(FileExistsError):
++        write_new_json(output, snapshot)
++
++
++def test_historical_header_discrepancy_is_diagnostic_and_never_rewritten():
++    from copy import deepcopy
++    from revenue_backtest import snapshot_schema_diagnostic
++    # Synthetic legacy metadata challenge; no existing snapshot/registry is touched.
++    old = {"snapshot_id": "frozen-id", "forecast_schema_version": "3.7",
++           "input_document": {"schema_version": "3.9"}, "forecast_result": {"schema_version": "3.9"}}
++    before = deepcopy(old)
++    seen = snapshot_schema_diagnostic(old)
++    assert seen["status"] == "metadata_mismatch"
++    assert seen["snapshot_rewritten"] is False
++    assert old == before

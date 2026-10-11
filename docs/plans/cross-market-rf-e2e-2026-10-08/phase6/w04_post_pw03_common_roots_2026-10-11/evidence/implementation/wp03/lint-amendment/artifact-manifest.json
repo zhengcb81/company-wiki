@@ -1,0 +1,255 @@
+{
+  "status": "STOP",
+  "scope": "W04 WP03 three-file lint amendment",
+  "source_files": {
+    "scripts/company_wiki_narrative_contracts.py": {
+      "sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+      "bytes": 41228
+    },
+    "scripts/company_wiki_narrative_reader.py": {
+      "sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+      "bytes": 3382
+    },
+    "scripts/source_preparation.py": {
+      "sha256": "ddb6b7224e1cf5141c04f6395f86390bbb898a52739de9763da6917e0dcfdab2",
+      "bytes": 26650
+    },
+    "scripts/source_narrative_context.py": {
+      "sha256": "3bdb21c4b08e85f03ff190a1d43945a70ac272afe1000a5748d17d7f2b4f0223",
+      "bytes": 8074
+    },
+    "scripts/revenue_backtest.py": {
+      "sha256": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4",
+      "bytes": 30110
+    },
+    "scripts/filing_upstream_cause.py": {
+      "sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+      "bytes": 16962
+    },
+    "scripts/filing_fetch_client.py": {
+      "sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+      "bytes": 19426
+    },
+    "tests/test_w04_public_consumer.py": {
+      "sha256": "4fc999e3686fccec23b92f61788cabcc011339065236385b2ebe8c54ce0f85a7",
+      "bytes": 16706
+    },
+    "tests/test_w04_snapshot_delivery.py": {
+      "sha256": "707aa59248ba608312cddcafe488300e3f9ef57a94aa27c31c51263fcc510a98",
+      "bytes": 2245
+    }
+  },
+  "changed_files": [
+    "scripts/revenue_backtest.py",
+    "tests/test_w04_public_consumer.py",
+    "tests/test_w04_snapshot_delivery.py"
+  ],
+  "source_amendment": {
+    "git_index_sha256_before": "f5d1226e3dd940b58591fcfe97368137a515623eb38e182b74dbcbd2d3d1d027",
+    "git_index_sha256_after": "f5d1226e3dd940b58591fcfe97368137a515623eb38e182b74dbcbd2d3d1d027",
+    "git_index_unchanged": true,
+    "original_handoff_manifest_sha256": "f8caa96ce87de895dbd97057028ce10b74da13d9f3ad9a1e206661c56d4ccda8",
+    "original_handoff_manifest_unchanged": true,
+    "amendment_diff_sha256": "57af89fac165972192242ed7c361022c52db4c01041d98f558c85c6f42a86efd",
+    "changed_source_files": {
+      "scripts/revenue_backtest.py": {
+        "before_sha256": "5a047717f28f33da0ff5bb6edf26606efd068f0b950617677f908446a8dced07",
+        "after_sha256": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4",
+        "bytes": 30110
+      },
+      "tests/test_w04_public_consumer.py": {
+        "before_sha256": "fe2a22afa665d9fa7aa8c4834001b9096089810b5840ed44ec1c352be434ce37",
+        "after_sha256": "4fc999e3686fccec23b92f61788cabcc011339065236385b2ebe8c54ce0f85a7",
+        "bytes": 16706
+      },
+      "tests/test_w04_snapshot_delivery.py": {
+        "before_sha256": "5f490f746c96e760086254fdefc6febfd28031cec9e786bc438e1cabbbecd7c1",
+        "after_sha256": "707aa59248ba608312cddcafe488300e3f9ef57a94aa27c31c51263fcc510a98",
+        "bytes": 2245
+      }
+    }
+  },
+  "original_evidence_preserved": {
+    "artifact-manifest.json": {
+      "sha256": "f8caa96ce87de895dbd97057028ce10b74da13d9f3ad9a1e206661c56d4ccda8",
+      "bytes": 4327
+    },
+    "rf.diff": {
+      "sha256": "e91d09016010aee0abf6099337e7f23e1eab719148d587b371d79cdcd00d15b6",
+      "bytes": 66470
+    },
+    "IMPLEMENTATION_RECEIPT.md": {
+      "sha256": "ebcfb7f013ab8e9875b760456838849d694a58d4014a99c15d27c18354cc4f12",
+      "bytes": 4611
+    },
+    "green-final3.log": {
+      "sha256": "2579951667fd7af7591fedf16d4fbf56509498fcb939e6cb94b55582b73e10ea",
+      "bytes": 275
+    }
+  },
+  "evidence_files": {
+    "AMENDMENT_RECEIPT.md": {
+      "sha256": "5115674b05071c39750b32eb9b89a0184d1da7242809dbd50f48af15bac94ab8",
+      "bytes": 2904
+    },
+    "ast-semantic-check.json": {
+      "sha256": "a06ad60e4ca4fce4ec5132644a15ac5ef89bbee405ed7886867b9f17c9a93c46",
+      "bytes": 609
+    },
+    "before/scripts/revenue_backtest.py": {
+      "sha256": "5a047717f28f33da0ff5bb6edf26606efd068f0b950617677f908446a8dced07",
+      "bytes": 30159
+    },
+    "before/tests/test_w04_public_consumer.py": {
+      "sha256": "fe2a22afa665d9fa7aa8c4834001b9096089810b5840ed44ec1c352be434ce37",
+      "bytes": 16578
+    },
+    "before/tests/test_w04_snapshot_delivery.py": {
+      "sha256": "5f490f746c96e760086254fdefc6febfd28031cec9e786bc438e1cabbbecd7c1",
+      "bytes": 2108
+    },
+    "before.json": {
+      "sha256": "6ee484198491911a3c1fffdebddfc37e67c83c29036f522b25aecebfc88a57e1",
+      "bytes": 817
+    },
+    "check-results.json": {
+      "sha256": "e05e7f7c2750e763f22a5d2b88b48f6c611db90819ecd6f3edd81ca1c41d499c",
+      "bytes": 2589
+    },
+    "codegraph.json": {
+      "sha256": "523e9f66c0a5a164618be89870a8ca5e1dec0ccb2d91fc3b3fd0751e67d023de",
+      "bytes": 1113
+    },
+    "diff-check.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "lint-amendment.diff": {
+      "sha256": "57af89fac165972192242ed7c361022c52db4c01041d98f558c85c6f42a86efd",
+      "bytes": 2003
+    },
+    "mypy.log": {
+      "sha256": "e522fa370334927ac2ccb7106100045b572938dd238093267de825336e6704f2",
+      "bytes": 45
+    },
+    "owned-temp-cleanup.json": {
+      "sha256": "cc2dac37ca0ce1d9f0aa2763f11918206e21e01aa5e81b9469e1a80e95a2636c",
+      "bytes": 211
+    },
+    "pytest.log": {
+      "sha256": "5a3fc01b37acb32a9bdca232ca64f79dece44d168936023f0492248adf972b61",
+      "bytes": 101
+    },
+    "reexport-reference-check.json": {
+      "sha256": "b42fce49e97d992d3000852195e1739ac0e28c1cdf5dc0ebc59529c5d0b7bc23",
+      "bytes": 282
+    },
+    "ruff.log": {
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "source-amendment.json": {
+      "sha256": "333404566dc105ca52f4327f91d3b295842693804bce66f12a814cca1943f685",
+      "bytes": 1283
+    }
+  },
+  "verification": {
+    "versions": {
+      "ruff": {
+        "exit_code": 0,
+        "output": "ruff 0.15.18"
+      },
+      "mypy": {
+        "exit_code": 0,
+        "output": "mypy 1.19.0 (compiled: yes)"
+      },
+      "pytest": {
+        "exit_code": 0,
+        "output": "pytest 9.1.1"
+      }
+    },
+    "checks": {
+      "ruff": {
+        "command": [
+          "ruff",
+          "check",
+          "scripts/company_wiki_narrative_contracts.py",
+          "scripts/company_wiki_narrative_reader.py",
+          "scripts/source_preparation.py",
+          "scripts/source_narrative_context.py",
+          "scripts/revenue_backtest.py",
+          "scripts/filing_upstream_cause.py",
+          "scripts/filing_fetch_client.py",
+          "tests/test_w04_public_consumer.py",
+          "tests/test_w04_snapshot_delivery.py"
+        ],
+        "exit_code": 0,
+        "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "log_bytes": 19
+      },
+      "mypy": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "mypy",
+          "scripts/contracts/",
+          "scripts/schema_compatibility.py",
+          "scripts/filing_fetch_client.py",
+          "scripts/trust_anchor.py"
+        ],
+        "exit_code": 0,
+        "log_sha256": "e522fa370334927ac2ccb7106100045b572938dd238093267de825336e6704f2",
+        "log_bytes": 45
+      },
+      "pytest": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-X",
+          "utf8",
+          "-B",
+          "-m",
+          "pytest",
+          "-q",
+          "tests/test_w04_public_consumer.py",
+          "tests/test_w04_snapshot_delivery.py",
+          "--basetemp",
+          "C:/tmp/w04rf-lint-20261011"
+        ],
+        "exit_code": 0,
+        "log_sha256": "5a3fc01b37acb32a9bdca232ca64f79dece44d168936023f0492248adf972b61",
+        "log_bytes": 101
+      },
+      "diff-check": {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "log_bytes": 0
+      }
+    },
+    "owned_pytest_temp": "C:\\tmp\\w04rf-lint-20261011",
+    "ruff_scope": [
+      "scripts/company_wiki_narrative_contracts.py",
+      "scripts/company_wiki_narrative_reader.py",
+      "scripts/source_preparation.py",
+      "scripts/source_narrative_context.py",
+      "scripts/revenue_backtest.py",
+      "scripts/filing_upstream_cause.py",
+      "scripts/filing_fetch_client.py",
+      "tests/test_w04_public_consumer.py",
+      "tests/test_w04_snapshot_delivery.py"
+    ]
+  },
+  "calls": {
+    "http": 0,
+    "provider": 0,
+    "model": 0,
+    "paid": 0
+  }
+}

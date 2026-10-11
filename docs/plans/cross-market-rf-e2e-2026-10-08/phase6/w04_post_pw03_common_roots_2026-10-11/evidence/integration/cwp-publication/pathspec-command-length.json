@@ -1,0 +1,6 @@
+{
+  "schema_version": "w04-stage-prepare-error/1",
+  "first_attempt": "git add many explicit UTF-8 path argv exceeded Windows CreateProcess command line limit (WinError206)",
+  "git_process_started": false,
+  "recovery": "git add explicit NUL pathspec file, remove only that owned file afterward; same authorized paths"
+}

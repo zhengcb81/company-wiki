@@ -1,0 +1,27 @@
+{
+  "schema": "w04-major-timeout-evidence-manifest/1",
+  "files": {
+    "collection.json": {
+      "sha256": "fb3163160e30e59df75f561014eb1da63442e09822b98e5a953babd578aa0d64",
+      "byte_size": 5031
+    },
+    "collect-all.log": {
+      "sha256": "b8965968b278622e9e115c90cdbb229f65454386e487e84ce2395c78a1f2b6a2",
+      "byte_size": 507540
+    },
+    "collect-fast.log": {
+      "sha256": "a4eb2f8275ce3705f2d1cfa44aa3979495512fb57ba055e0807eb6b4f98c7473",
+      "byte_size": 15650
+    },
+    "review.json": {
+      "sha256": "f828ffebea85b290e4fe0f0260ac84cc4cab7c126b85684cfee79b1580c85523",
+      "byte_size": 8179
+    },
+    "review.md": {
+      "sha256": "55ac64992f31179bb6ac36a29f5ff03949a64dadb7cd0e45fd93f69516c2c7e3",
+      "byte_size": 2957
+    }
+  },
+  "status": "STOP",
+  "zero_external_calls": true
+}

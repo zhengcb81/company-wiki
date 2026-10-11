@@ -1,0 +1,14 @@
+{
+  "scripts/revenue_backtest.py": {
+    "ast_unchanged_after_expected_import_deletion": true,
+    "normalization": "Only expected deletion of the two unused revenue_core import aliases"
+  },
+  "tests/test_w04_public_consumer.py": {
+    "ast_unchanged_after_expected_import_deletion": true,
+    "normalization": "No AST normalization: only comment markers and import formatting changed"
+  },
+  "tests/test_w04_snapshot_delivery.py": {
+    "ast_unchanged_after_expected_import_deletion": true,
+    "normalization": "No AST normalization: only comment markers and import formatting changed"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "w04-rf-main-fast-forward/1",
+  "head": "b7fe04aabe1d2a53b67a385c97161af976031040",
+  "elapsed_seconds": 0.4353,
+  "protected_sha_before": {
+    "assurance/runs/daily_alert.jsonl": "afba37eca9ccd7e31b17d9d4ac2e3ce2abd677553d270fbfd7e1356f2369546c",
+    "assurance/runs/weekly_alert.jsonl": "0304c1de7d4ce35af30a349d322873b2dd625c26e50c309952dc00c1d835c70f",
+    "assurance/runs/weekly_manifest.json": "fd778d160d128b65e641c38daeb898e48515caaef30b9e0f38b050cb89d02d1b"
+  },
+  "protected_sha_after": {
+    "assurance/runs/daily_alert.jsonl": "afba37eca9ccd7e31b17d9d4ac2e3ce2abd677553d270fbfd7e1356f2369546c",
+    "assurance/runs/weekly_alert.jsonl": "0304c1de7d4ce35af30a349d322873b2dd625c26e50c309952dc00c1d835c70f",
+    "assurance/runs/weekly_manifest.json": "fd778d160d128b65e641c38daeb898e48515caaef30b9e0f38b050cb89d02d1b"
+  },
+  "untracked_output_preserved": true,
+  "status": " M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n?? output/\n"
+}

@@ -1,0 +1,23 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_w04_generation_identity.py",
+    "tests/unit/test_narrative_generation.py",
+    "tests/unit/test_official_json_projection_generation.py",
+    "tests/unit/test_generation_policy.py",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 0,
+  "log_sha256": "1a6348d47dadf17fc42a98bc83d2c938039d5abf34b235ea5d98775e107e99aa",
+  "provider_calls": 0,
+  "config_changed": false,
+  "raw_originals_changed": false
+}

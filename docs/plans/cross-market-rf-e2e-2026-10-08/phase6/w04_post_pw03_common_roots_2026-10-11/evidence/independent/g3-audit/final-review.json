@@ -1,0 +1,451 @@
+{
+  "schema_version": "w04-g3-independent-final-review/1",
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/p7/audit",
+  "base_head": "40b38103f4b96860617e9bae98ec5b4ea8ee08d5",
+  "branch": "codex/w04-audit-capture-20261011",
+  "original_review": {
+    "path": "original-review.json",
+    "sha256": "a60736daee334910b2442ffc8ca09f99cd3634cef3e540c775a176847bb9d6c0",
+    "engineering_verdict": "FAIL",
+    "finding_count": 5,
+    "evidence_preserved": true
+  },
+  "first_review_sources": [
+    {
+      "path": ".planning/w04-wp05/handoff.json",
+      "sha256": "cf4aac1a5da450a69c7870813a8ef79f4ec8cde1d83196ac51f96f20620d5e7b"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_run.py",
+      "sha256": "95b6951df70a841dee00db6c92c5cb45fb60806afe10c613070219da97923876"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/execution_request.py",
+      "sha256": "de806ddeb70e5c751cd8caf1a747651ff6ce004805e9cbd5980ba4e77fb3294a"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_blob_store.py",
+      "sha256": "1dacc2aaba8fddd82ea951b9613410f6868f53586aaa087c8d5b0ff18a95ceaa"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/document_status_join.py",
+      "sha256": "68f8799188218396bbad497e0fc54c19365a423d5bb8e3c8977fd4ebe103d85a"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/authoring_provenance.py",
+      "sha256": "1bfd8a05fdf172550750f12d75850a5967e85c94ffa450531e9e4180ec7d3ae3"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_contracts.py",
+      "sha256": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d"
+    },
+    {
+      "path": "tests/test_w04_capture_runtime.py",
+      "sha256": "fa4d10c2eb02b009134eb18e5a13f9b2890d6803d4f4fe6bc4107573fdf877e5"
+    },
+    {
+      "path": "tests/test_w04_request_capture.py",
+      "sha256": "4af6e58901ad3628e3245e6fc0a1797578234681d9e9969dd6dd26b245bf1ae2"
+    },
+    {
+      "path": "tests/test_w04_status_provenance.py",
+      "sha256": "7eda5f4a3ffc736b4a1e65209e71d786d388c78b5b2fac6a4e8c97560efb7772"
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/execution-artifact-contract.md",
+      "sha256": "9e9a854d39c4ac02aa7e1789ba27375c72f9cd8a2003210249b97036d4cce1d5"
+    }
+  ],
+  "composer_intermediate_sha256": "41454b5b7e2d3c61a0ebcbf0ba56fa4c48884214522b5a7595e243f0bce34817",
+  "final_readback_sources": [
+    {
+      "path": ".planning/w04-wp05/handoff.json",
+      "sha256": "cf4aac1a5da450a69c7870813a8ef79f4ec8cde1d83196ac51f96f20620d5e7b",
+      "bytes": 5239
+    },
+    {
+      "path": ".planning/w04-wp05/handoff-amendment.json",
+      "sha256": "e03fb7e574d21b2beeab83dc013067190780e9566ce9038734071eefee8c357f",
+      "bytes": 4955
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_run.py",
+      "sha256": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca",
+      "bytes": 53804
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/execution_request.py",
+      "sha256": "48fcc4a3a5eb84fed49a886a394f9d7058721c32a47237cd4f95ef13d976a2fa",
+      "bytes": 21060
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_blob_store.py",
+      "sha256": "ae2317875aaf064d396ac536c7e68838251c24370b6308abb245b4aa5cf966ad",
+      "bytes": 18222
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/authoring_provenance.py",
+      "sha256": "20d18f1ed4fc8adf65661f429738db64d81a025ed72b35f5b4e5a97b3d2c192c",
+      "bytes": 15043
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/document_status_join.py",
+      "sha256": "68f8799188218396bbad497e0fc54c19365a423d5bb8e3c8977fd4ebe103d85a",
+      "bytes": 19239
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/audit_contracts.py",
+      "sha256": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+      "bytes": 5168
+    },
+    {
+      "path": "tests/test_w04_capture_runtime.py",
+      "sha256": "406661c3f3d785b374ec47c9da7ba94dac3023d58553705a46eb7609ed4ff3da",
+      "bytes": 13299
+    },
+    {
+      "path": "tests/test_w04_request_capture.py",
+      "sha256": "0f9a85a30402f81542f35869474981741a6d2c4b5db024a76603995e821cb0c7",
+      "bytes": 16678
+    },
+    {
+      "path": "tests/test_w04_status_provenance.py",
+      "sha256": "c1f90b9454d7d7424d6e11f8fee1d2ec4549d35dd519c303a240469238932d27",
+      "bytes": 6764
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/execution-artifact-contract.md",
+      "sha256": "9e9a854d39c4ac02aa7e1789ba27375c72f9cd8a2003210249b97036d4cce1d5",
+      "bytes": 7586
+    }
+  ],
+  "source_sha_stable_during_final_probe": true,
+  "engineering_verdict": "PASS_TARGETED_FIX_RECHECK",
+  "research_verdict": "NOT_EVALUATED",
+  "checks": [
+    {
+      "probe": "composer_cas_real_child",
+      "status": "PASS",
+      "observation": {
+        "real_builder_to_freeze_to_child": true,
+        "builder_sha256": "6675a2c4fe212306119c7077641bffedb23e565a4914145eb20f04e825d2461f",
+        "same_size_postbuild_mutation_refused": "BlobStoreError: input_snapshot_expected_sha256_mismatch; cleanup_failures=0",
+        "unknown_controls": {
+          "status": "unknown",
+          "profile": null,
+          "caps": {},
+          "fields": {},
+          "generation": null
+        },
+        "money_zero": "0.00"
+      },
+      "temp_cleanup_complete": true
+    },
+    {
+      "probe": "same_kind_period_identity",
+      "status": "PASS",
+      "observation": [
+        {
+          "source": "Q1 2025",
+          "claimed": "Q4 2025",
+          "result": {
+            "item_id": "period",
+            "status": "DIAGNOSTIC",
+            "kind": "period",
+            "composition": "verbatim_continuous",
+            "diagnostics": [
+              {
+                "code": "period_part_mismatch",
+                "detail": "claimed quarter/half differs from source data_period"
+              }
+            ]
+          }
+        },
+        {
+          "source": "H1 2025",
+          "claimed": "H2 2025",
+          "result": {
+            "item_id": "period",
+            "status": "DIAGNOSTIC",
+            "kind": "period",
+            "composition": "verbatim_continuous",
+            "diagnostics": [
+              {
+                "code": "period_part_mismatch",
+                "detail": "claimed quarter/half differs from source data_period"
+              }
+            ]
+          }
+        },
+        {
+          "source": "Q1 2025",
+          "claimed": "2025Q1",
+          "result": {
+            "item_id": "period",
+            "status": "PASS",
+            "kind": "period",
+            "composition": "verbatim_continuous",
+            "diagnostics": []
+          }
+        },
+        {
+          "source": "H1 2025",
+          "claimed": "2025H1",
+          "result": {
+            "item_id": "period",
+            "status": "PASS",
+            "kind": "period",
+            "composition": "verbatim_continuous",
+            "diagnostics": []
+          }
+        }
+      ],
+      "temp_cleanup_complete": true
+    },
+    {
+      "probe": "alias_caps_order_independence",
+      "status": "PASS",
+      "observation": [
+        {
+          "declared": {
+            "max_final_bytes": 4,
+            "final_artifact_bytes": 1000
+          },
+          "effective": {
+            "final_artifact_bytes": 4
+          },
+          "amplification_refused": "native_cap_amplification: max_final_bytes exceeds effective final_artifact_bytes"
+        },
+        {
+          "declared": {
+            "final_artifact_bytes": 1000,
+            "max_final_bytes": 4
+          },
+          "effective": {
+            "final_artifact_bytes": 4
+          },
+          "amplification_refused": "native_cap_amplification: max_final_bytes exceeds effective final_artifact_bytes"
+        }
+      ],
+      "temp_cleanup_complete": true
+    },
+    {
+      "probe": "partial_private_recovery",
+      "status": "PASS",
+      "observation": {
+        "primary_error": "ValueError: InputSnapshotError: OSError: private-workcopy-fsync-failure; cleanup_failures=1",
+        "snapshot_count": 0,
+        "recorded_pending_count": 1,
+        "recovered": true,
+        "cas_pinned": true,
+        "cas_recovery_refused": "capture_cleanup_path_outside_owned_attempt"
+      },
+      "temp_cleanup_complete": true
+    },
+    {
+      "probe": "seal_completion_deadline",
+      "status": "PASS",
+      "observation": {
+        "final_physical_observation_exceeds_deadline": true,
+        "refused": "audit_stage_deadline: seal_attempt_complete"
+      },
+      "temp_cleanup_complete": true
+    }
+  ],
+  "findings": [
+    {
+      "issue_id": "G3-01",
+      "severity": "P1",
+      "original_status": "FAIL",
+      "final_targeted_status": "PASS",
+      "final_check_id": "composer_cas_real_child",
+      "root_cause": "Composer forwards nonnull blob_store without retention_mode=cas into ROOT default legacy boundary.",
+      "original_location": {
+        "file": "skills/revenue-forecast-audit/scripts/execution_request.py",
+        "line": 230
+      },
+      "original_repro": "Real build_execution_request; write returned native bytes; call freeze_built_request(...,blob_store=AuditBlobStore).",
+      "remaining_issue_on_rechecked_case": false
+    },
+    {
+      "issue_id": "G3-02",
+      "severity": "P2",
+      "original_status": "FAIL",
+      "final_targeted_status": "PASS",
+      "final_check_id": "same_kind_period_identity",
+      "root_cause": "Period comparison checks year and quarter/half to annual conversion, but omits same-year quarter/half identity.",
+      "original_location": {
+        "file": "skills/revenue-forecast-audit/scripts/authoring_provenance.py",
+        "line": 113
+      },
+      "original_repro": {
+        "items": [
+          {
+            "item_id": "quarter",
+            "kind": "period",
+            "composition": "verbatim_continuous",
+            "fragment": {
+              "artifact": "opened-fixture",
+              "locator": "/rows/0",
+              "text": "Q1 2025 revenue: 40"
+            },
+            "source_meta": {
+              "data_period": "Q1 2025"
+            },
+            "claimed": {
+              "period": "Q4 2025"
+            }
+          }
+        ]
+      },
+      "remaining_issue_on_rechecked_case": false
+    },
+    {
+      "issue_id": "G3-03",
+      "severity": "P2",
+      "original_status": "FAIL",
+      "final_targeted_status": "PASS",
+      "final_check_id": "partial_private_recovery",
+      "root_cause": "Rows append only after materialize succeeds; partial-copy cleanup failure goes only into store cleanup_pending. Capture pending paths/recovery recognize only completed snapshot rows.",
+      "original_location": {
+        "file": "skills/revenue-forecast-audit/scripts/audit_run.py",
+        "line": 627
+      },
+      "original_repro": "Inject OSError on private-workcopy fsync (second os.fsync), PermissionError on c-* unlink; restore patches, call recover_capture_workcopies with sealed blob cleanup_pending.",
+      "remaining_issue_on_rechecked_case": false
+    },
+    {
+      "issue_id": "G3-04",
+      "severity": "P2",
+      "original_status": "FAIL",
+      "final_targeted_status": "PASS",
+      "final_check_id": "seal_completion_deadline",
+      "root_cause": "Seal checks at entry and during blob verification, then performs final physical inventory without a completion deadline guard.",
+      "original_location": {
+        "file": "skills/revenue-forecast-audit/scripts/audit_blob_store.py",
+        "line": 362
+      },
+      "original_repro": "Real ref; clock initially before D; wrapper runs actual _physical then advances clock to D+1; seal_attempt deadline D.",
+      "remaining_issue_on_rechecked_case": false
+    },
+    {
+      "issue_id": "G3-05",
+      "severity": "P2",
+      "original_status": "FAIL",
+      "final_targeted_status": "PASS",
+      "final_check_id": "alias_caps_order_independence",
+      "root_cause": "Alias dict comprehension silently overwrites canonical dimension; conflicting equal-dimension bounds become insertion-order dependent.",
+      "original_location": {
+        "file": "skills/revenue-forecast-audit/scripts/execution_request.py",
+        "line": 59
+      },
+      "original_repro": {
+        "scope": {
+          "profile": "bounded",
+          "resource_limits": {
+            "max_final_bytes": 4,
+            "final_artifact_bytes": 1000
+          }
+        },
+        "deploy": {
+          "profile": "bounded",
+          "caps": {
+            "final_artifact_bytes": 1000
+          }
+        },
+        "request": {
+          "schema_version": "narrative-batch-request/2",
+          "profile": "bounded",
+          "max_final_bytes": 1000,
+          "model": {}
+        }
+      },
+      "remaining_issue_on_rechecked_case": false
+    }
+  ],
+  "original_pass_checks_not_rerun": [
+    {
+      "check_id": "exact_builder_stream_digest",
+      "status": "PASS",
+      "evidence": "boundary-probes.log",
+      "detail": "Equal-size changed native bytes reject before child; actual complete failed bytes retained and resolvable."
+    },
+    {
+      "check_id": "money_zero_explicit_native_unknown",
+      "status": "PASS",
+      "evidence": "boundary-probes.log",
+      "detail": "Outer/FF money 0.00 accepted; unknown business controls remain unknown; explicit CWP amplification refused, owner_enforced remains null."
+    },
+    {
+      "check_id": "cas_no_replace_private_isolation",
+      "status": "PASS",
+      "evidence": "boundary-probes.log",
+      "detail": "Private copy is a distinct ordinary file; modifying it preserves CAS; corrupt existing blob refused and not overwritten."
+    },
+    {
+      "check_id": "physical_peak_and_restart_inventory",
+      "status": "PASS",
+      "evidence": "boundary-probes.log",
+      "detail": "Logical=8/unique=4/apparent=8/peak_reserved=10 with scratch2; restart baseline3+blob4+stale5 apparent12/scratch2 peak14; threshold13 rejects; allocation stays null."
+    },
+    {
+      "check_id": "failed_authoring_input_pin",
+      "status": "PASS",
+      "evidence": "pin-seal-probes.log",
+      "detail": "Invalid UTF8 build rejects normally while pinning all 3 exact inputs; correction creates second attempt; initial failed receipt unchanged."
+    },
+    {
+      "check_id": "same_stage_real_child_timeout",
+      "status": "PASS",
+      "evidence": "boundary-probes.log",
+      "detail": "100ms stage budget applied to actual child despite 5s child timeout; timed_out true, exit124, output incomplete."
+    },
+    {
+      "check_id": "source_identity_transport_business_status",
+      "status": "PASS",
+      "evidence": "recovery-status-probes.log",
+      "detail": "Wrong source acquisition does not join document; exit0 with acquisition failed stays transport ok/business failed; unopened artifact unverified; unknown cost null."
+    },
+    {
+      "check_id": "research_authority_boundary",
+      "status": "PASS",
+      "evidence": "boundary-probes.log; recovery-status-probes.log",
+      "detail": "All status/provenance outputs preserve quality_status=not_evaluated; no provider/model/company research performed."
+    }
+  ],
+  "not_executed": [
+    "No repeat of centralized initial 141/legacy96/59 whole suites. ROOT initial141 evidence was on original95b6951d/de806 snapshots; it is not final-version whole-suite evidence.",
+    "No network/provider/project model/acquisition/real-company or research-quality acceptance.",
+    "No direct producer acceptance test for original native filing-upstream-cause/1 closed6keys; G3 audit reads did not claim that native producer gate.",
+    "No install/commit/push/production config/canonical/old-run edits.",
+    "CodeGraph initialization deliberately not executed in known not-initialized isolation directory."
+  ],
+  "fees": {
+    "http_calls": 0,
+    "provider_calls": 0,
+    "project_model_calls": 0,
+    "new_cost_usd": "0.00"
+  },
+  "cleanup": {
+    "probe_roots_owned": true,
+    "all_five_temp_roots_removed": true,
+    "initial_denied_sandbox_temp_absent": true
+  },
+  "tool_observation": {
+    "report_write_auto_review_timeout": "One remaining original-report write approval timed out; formally retried once successfully with the same report action. In-memory gzip only reduced Windows command length; all writes used exec require_escalated.",
+    "sandbox_status": "git status read attempted, repeatedly refused 'must be run in a work tree'; no code or config was written by reviewer. Before/after source SHA manifests stable."
+  },
+  "limitations": [
+    "This final verdict covers the five discovered counterexamples and inspected fixes.",
+    "All status/provenance diagnostics remain quality_status=not_evaluated; supplied metadata and fragments are not independent source truth.",
+    "Windows allocation observations remain null; no measured RAM or crossprocess global budget claim."
+  ],
+  "status": "STOP",
+  "final_probe_evidence": {
+    "command": "$env:PYTHONUTF8='1'\n@'\nimport sys,tempfile,json,hashlib,argparse,time,os,subprocess\nfrom pathlib import Path\nfrom unittest.mock import patch\nsys.path.insert(0,str(Path(\"skills/revenue-forecast-audit/scripts\").resolve()))\nimport execution_request as request,audit_run as run,audit_blob_store as cas,authoring_provenance as prov\npaths=[\".planning/w04-wp05/handoff.json\",\".planning/w04-wp05/handoff-amendment.json\",\"skills/revenue-forecast-audit/scripts/audit_run.py\",\"skills/revenue-forecast-audit/scripts/execution_request.py\",\"skills/revenue-forecast-audit/scripts/audit_blob_store.py\",\"skills/revenue-forecast-audit/scripts/authoring_provenance.py\",\"skills/revenue-forecast-audit/scripts/document_status_join.py\",\"skills/revenue-forecast-audit/scripts/audit_contracts.py\",\"tests/test_w04_capture_runtime.py\",\"tests/test_w04_request_capture.py\",\"tests/test_w04_status_provenance.py\",\"skills/revenue-forecast-audit/references/execution-artifact-contract.md\"]\ndef manifest():\n    return [{\"path\":p,\"sha256\":hashlib.sha256(Path(p).read_bytes()).hexdigest(),\"bytes\":Path(p).stat().st_size} for p in paths]\nbefore=manifest();print(json.dumps({\"sources_before\":before}))\nfailed=[]\ndef probe(name,fn):\n    with tempfile.TemporaryDirectory(prefix=\"w4g3-\") as temp:\n        root=Path(temp).resolve()\n        try:answer=fn(root);status=\"PASS\"\n        except Exception as exc:answer={\"error\":type(exc).__name__+\": \"+str(exc)};status=\"FAIL\";failed.append(name)\n    print(json.dumps({\"probe\":name,\"status\":status,\"observation\":answer,\"temp_cleanup_complete\":not root.exists()},ensure_ascii=False))\ndef composer(root):\n    reqpath=root/\"r.json\";marker=root/\"consumed\"\n    tpl={\"request_id\":\"x\",\"purpose\":\"g3-final\",\"command\":[sys.executable,\"-B\",\"-c\",\"from pathlib import Path; import sys; Path(sys.argv[2]).write_bytes(Path(sys.argv[1]).read_bytes())\",\"{request}\",str(marker)],\"request\":{\"native\":1}}\n    body,record=request.build_execution_request({\"profile\":\"bounded\",\"resource_limits\":{\"max_request_bytes\":4096,\"max_cost_usd\":\"0.00\"}},{\"profile\":\"bounded\",\"caps\":{\"max_request_bytes\":4096,\"max_cost_usd\":\"0.00\"}},tpl,reqpath,environ={})\n    reqpath.write_bytes(body);directory=root/\"f\";directory.mkdir()\n    st=cas.AuditBlobStore(root/\"b\",max_input_bytes=4096,retained_bytes_limit=16384,peak_bytes_limit=32768)\n    argv,rows=request.freeze_built_request(directory,record,[reqpath],4096,blob_store=st)\n    child=subprocess.run(argv,capture_output=True,timeout=5)\n    assert child.returncode==0 and marker.read_bytes()==body and rows[0][\"frozen_ref\"][\"sha256\"]==record[\"request_sha256\"]\n    st.cleanup_workcopies([rows[0][\"consumed_path\"]])\n    reqpath.write_bytes(b'{\"native\":2}\\n');other=root/\"g\";other.mkdir()\n    try:request.freeze_built_request(other,record,[reqpath],4096,blob_store=st);assert False,\"changed request accepted\"\n    except ValueError as exc:assert \"input_snapshot_expected_sha256_mismatch\" in str(exc);error=str(exc)\n    return {\"real_builder_to_freeze_to_child\":True,\"builder_sha256\":record[\"request_sha256\"],\"same_size_postbuild_mutation_refused\":error,\"unknown_controls\":record[\"control_binding\"][\"observed\"],\"money_zero\":record[\"effective_scope\"][\"caps\"][\"max_cost_usd\"]}\ndef periods(root):\n    values=[]\n    for source,claimed,expect in [(\"Q1 2025\",\"Q4 2025\",\"DIAGNOSTIC\"),(\"H1 2025\",\"H2 2025\",\"DIAGNOSTIC\"),(\"Q1 2025\",\"2025Q1\",\"PASS\"),(\"H1 2025\",\"2025H1\",\"PASS\")]:\n        data={\"items\":[{\"item_id\":\"period\",\"kind\":\"period\",\"composition\":\"verbatim_continuous\",\"fragment\":{\"artifact\":\"opened-fixture\",\"locator\":\"/rows/0\",\"text\":source+\" revenue: 40\"},\"source_meta\":{\"data_period\":source},\"claimed\":{\"period\":claimed}}]}\n        answer=prov.check_provenance(data);row=answer[\"rows\"][0]\n        assert row[\"status\"]==expect and answer[\"quality_status\"]==\"not_evaluated\"\n        if expect==\"DIAGNOSTIC\":assert \"period_part_mismatch\" in [d[\"code\"] for d in row[\"diagnostics\"]]\n        values.append({\"source\":source,\"claimed\":claimed,\"result\":row})\n    return values\ndef aliases(root):\n    results=[]\n    for limits in [{\"max_final_bytes\":4,\"final_artifact_bytes\":1000},{\"final_artifact_bytes\":1000,\"max_final_bytes\":4}]:\n        scope={\"profile\":\"bounded\",\"resource_limits\":limits};deploy={\"profile\":\"bounded\",\"caps\":{\"final_artifact_bytes\":1000}}\n        tpl={\"request_id\":\"x\",\"purpose\":\"g3\",\"command\":[sys.executable,\"{request}\"],\"native_adapter\":\"company-wiki/narrative-batch/1\",\"request\":{\"schema_version\":\"narrative-batch-request/2\",\"profile\":\"bounded\",\"max_final_bytes\":1000,\"model\":{}}}\n        try:request.build_execution_request(scope,deploy,tpl,root/\"r.json\",environ={});assert False,\"cap amplification accepted\"\n        except ValueError as exc:assert \"native_cap_amplification\" in str(exc);error=str(exc)\n        tpl[\"request\"][\"max_final_bytes\"]=4\n        _,record=request.build_execution_request(scope,deploy,tpl,root/\"r.json\",environ={})\n        assert record[\"effective_scope\"][\"caps\"][\"final_artifact_bytes\"]==4\n        results.append({\"declared\":limits,\"effective\":record[\"effective_scope\"][\"caps\"],\"amplification_refused\":error})\n    return results\ndef recovery(root):\n    runpath=Path(run.init_run(argparse.Namespace(root=str(root/\"runs\"),company=\"Fixture\",as_of=\"2026-10-11\",run_id=\"probe\"))[\"run\"])\n    src=root/\"r.json\";src.write_bytes(b\"{}\")\n    st=cas.AuditBlobStore(root/\"b\",max_input_bytes=4096,retained_bytes_limit=16384,peak_bytes_limit=32768)\n    args=argparse.Namespace(run=str(runpath),role=\"executor\",command=[sys.executable,\"-B\",\"-c\",\"print('child')\",str(src)],freeze_input=[str(src)],freeze_arg_index=[4],max_input_bytes=4096,max_log_bytes=2048,timeout_seconds=5,retention_mode=\"cas\",blob_store=st)\n    fsync_original=os.fsync;unlink_original=Path.unlink;count=[0]\n    def bad_fsync(fd):\n        count[0]+=1\n        if count[0]==2:raise OSError(\"private-workcopy-fsync-failure\")\n        return fsync_original(fd)\n    def bad_unlink(path,*a,**k):\n        if path.name.startswith(\"c-\"):raise PermissionError(\"private-cleanup-denied\")\n        return unlink_original(path,*a,**k)\n    with patch.object(cas.os,\"fsync\",bad_fsync),patch.object(Path,\"unlink\",bad_unlink):outcome=run.capture(args)\n    pending=outcome[\"input_cleanup_pending_paths\"]\n    assert not outcome[\"child_started\"] and \"private-workcopy-fsync-failure\" in outcome[\"execution_error\"] and len(pending)==1 and Path(pending[0]).exists()\n    recovered=run.recover_capture_workcopies(runpath,\"executor\",outcome[\"capture_id\"],pending)\n    assert recovered[\"cleanup_complete\"] and not Path(pending[0]).exists()\n    with st.open_frozen(outcome[\"failed_input_refs\"][0]) as h:assert h.read()==b\"{}\"\n    try:run.recover_capture_workcopies(runpath,\"executor\",outcome[\"capture_id\"],[st.blob_path(outcome[\"failed_input_refs\"][0])]);assert False,\"CAS recovery allowed\"\n    except ValueError as exc:assert \"outside_owned_attempt\" in str(exc);outside=str(exc)\n    return {\"primary_error\":outcome[\"execution_error\"],\"snapshot_count\":len(outcome[\"input_snapshots\"]),\"recorded_pending_count\":len(pending),\"recovered\":recovered[\"cleanup_complete\"],\"cas_pinned\":True,\"cas_recovery_refused\":outside}\ndef sealing(root):\n    src=root/\"src\";src.write_bytes(b\"{}\")\n    st=cas.AuditBlobStore(root/\"b\",max_input_bytes=4096);ref=st.freeze_file(src,max_bytes=4096)\n    clock=[time.monotonic()];deadline=clock[0]+10;physical=st._physical\n    def late_physical():\n        value=physical();clock[0]=deadline+1;return value\n    with patch.object(st,\"_physical\",late_physical),patch.object(cas.time,\"monotonic\",lambda:clock[0]):\n        try:st.seal_attempt([ref],{},deadline=deadline);assert False,\"expired seal accepted\"\n        except ValueError as exc:assert \"audit_stage_deadline: seal_attempt_complete\" in str(exc);error=str(exc)\n    return {\"final_physical_observation_exceeds_deadline\":True,\"refused\":error}\nfor name,fn in [(\"composer_cas_real_child\",composer),(\"same_kind_period_identity\",periods),(\"alias_caps_order_independence\",aliases),(\"partial_private_recovery\",recovery),(\"seal_completion_deadline\",sealing)]:probe(name,fn)\nafter=manifest();stable=before==after\nprint(json.dumps({\"sources_after\":after,\"source_sha_stable_during_final_probe\":stable,\"checks\":5,\"failed\":failed,\"http_calls\":0,\"provider_calls\":0,\"project_model_calls\":0,\"new_cost_usd\":\"0.00\"}))\nsys.exit(1 if failed or not stable else 0)\n'@ | python -B -",
+    "exit_code": 0,
+    "log_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\independent\\g3-audit\\final-combined-probe.log",
+    "log_sha256": "67482a697e2f5e61a9c321e32d6bdd4e612c8afdfebd701edd096842bbd4a7e6",
+    "log_bytes": 6574
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "observed_at": "2026-10-11T04:12:07.564484+00:00",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/test_w04_generation_identity.py",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "tool_chunk_id": "d149b6",
+  "exit_code": 1,
+  "failed": 3,
+  "passed": 7,
+  "failures": [
+    "optional-null/thinking",
+    "optional-null/temperature",
+    "optional-null/reasoning_split"
+  ],
+  "reason": "Raw generation manifest stored null fields that the actual projection/HTTP effective options omit. Effort already correctly omitted null.",
+  "full_stdout_saved": false,
+  "old_run_rewritten": false,
+  "provider_calls": 0
+}

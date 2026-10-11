@@ -1,0 +1,51 @@
+--- a/scripts/revenue_backtest.py
++++ b/scripts/revenue_backtest.py
+@@ -15,8 +15,6 @@
+ 
+ from revenue_core import (
+     ForecastInputError,
+-    ENGINE_VERSION,
+-    FORECAST_SCHEMA_VERSION,
+     SUPPORTED_FORECAST_SCHEMA_VERSIONS,
+     calculate_cagr,
+     canonical_sha256,
+--- a/tests/test_w04_public_consumer.py
++++ b/tests/test_w04_public_consumer.py
+@@ -8,12 +8,14 @@
+ 
+ import pytest
+ 
++# Import standalone scripts and test fixtures after the explicit path bootstrap.
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "scripts"))
+-from company_wiki_narrative_contracts import (NarrativeTransportError, canonical_bytes,
++from company_wiki_narrative_contracts import (  # noqa: E402
++    NarrativeTransportError, canonical_bytes,
+     validate_narrative_request, validate_narrative_response, validate_reference_response)
+-from filing_upstream_cause import failure_observation
+-from test_company_wiki_narrative_reader import _valid, _resign
++from filing_upstream_cause import failure_observation  # noqa: E402
++from test_company_wiki_narrative_reader import _valid, _resign  # noqa: E402
+ 
+ 
+ def _sha(value):
+--- a/tests/test_w04_snapshot_delivery.py
++++ b/tests/test_w04_snapshot_delivery.py
+@@ -5,12 +5,13 @@
+ 
+ import pytest
+ 
++# Import standalone scripts and test fixtures after the explicit path bootstrap.
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "scripts"))
+-from revenue_backtest import create_snapshot, validate_snapshot, write_new_json
+-from test_recognition_bridge import forecast_document
+-from revenue_core import canonical_sha256
+-from publication_registry import _read_entries
++from revenue_backtest import create_snapshot, validate_snapshot, write_new_json  # noqa: E402
++from test_recognition_bridge import forecast_document  # noqa: E402
++from revenue_core import canonical_sha256  # noqa: E402
++from publication_registry import _read_entries  # noqa: E402
+ 
+ 
+ @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])

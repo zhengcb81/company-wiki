@@ -1,0 +1,130 @@
+{
+  "schema_version": "w04-audit-point-install/1",
+  "source_head": "c0993332623637d53f059350a382d99a95ef731d",
+  "elapsed_seconds": 1.1382,
+  "installations": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "package_files": 22,
+      "changed_files": [
+        "SKILL.md",
+        "references/artifact-contract.md",
+        "references/execution-artifact-contract.md",
+        "references/executor.md",
+        "references/remediation.md",
+        "references/review-analyst.md",
+        "references/review-fetch.md",
+        "references/review-process.md",
+        "references/review-storage.md",
+        "references/rf-checkpoints.md",
+        "references/workflow.md",
+        "scripts/audit_blob_store.py",
+        "scripts/audit_contracts.py",
+        "scripts/audit_run.py",
+        "scripts/authoring_provenance.py",
+        "scripts/document_status_join.py",
+        "scripts/execution_request.py",
+        "scripts/review_protocol.py"
+      ],
+      "verified": true,
+      "other_preserved_sha": {
+        "agents/openai.yaml": "b81a556d2424002ea561ba9c124ccbe8b888b6fb27300df0d0c0c4c554af319f",
+        "references/company-pool-loop.md": "8e96452ccb94b458832171855200b29214f2a106265a33eb3610d9292493794c",
+        "references/numeric-ledger-example.json": "2f793ef0b2ec633a7a31bd8b42c7d7a0c8759667c928122d721e0677f4f33890",
+        "scripts/numeric_audit.py": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec"
+      },
+      "manifest_sha": "abf424d7b5c045f035b4dff716d7e7d497d4757c9de3ffd1f1860f4f8e7c6195"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "package_files": 22,
+      "changed_files": [
+        "SKILL.md",
+        "references/artifact-contract.md",
+        "references/execution-artifact-contract.md",
+        "references/executor.md",
+        "references/remediation.md",
+        "references/review-analyst.md",
+        "references/review-fetch.md",
+        "references/review-process.md",
+        "references/review-storage.md",
+        "references/rf-checkpoints.md",
+        "references/workflow.md",
+        "scripts/audit_blob_store.py",
+        "scripts/audit_contracts.py",
+        "scripts/audit_run.py",
+        "scripts/authoring_provenance.py",
+        "scripts/document_status_join.py",
+        "scripts/execution_request.py",
+        "scripts/review_protocol.py"
+      ],
+      "verified": true,
+      "other_preserved_sha": {
+        "agents/openai.yaml": "b81a556d2424002ea561ba9c124ccbe8b888b6fb27300df0d0c0c4c554af319f",
+        "references/company-pool-loop.md": "8e96452ccb94b458832171855200b29214f2a106265a33eb3610d9292493794c",
+        "references/numeric-ledger-example.json": "2f793ef0b2ec633a7a31bd8b42c7d7a0c8759667c928122d721e0677f4f33890",
+        "scripts/numeric_audit.py": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec"
+      },
+      "manifest_sha": "abf424d7b5c045f035b4dff716d7e7d497d4757c9de3ffd1f1860f4f8e7c6195"
+    }
+  ],
+  "cli_operations": [
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "log": ".claude-execution_request.py.log",
+      "sha256": "2b6f8677b061d9d34325afad609df675a76e68585f6a28ef68500366c642bf67"
+    },
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "capture",
+        "--help"
+      ],
+      "exit_code": 0,
+      "log": ".claude-audit_run.py.log",
+      "sha256": "d57afe20fdb6b0e2da271a483d1a3abed6c2c76d0b81d370c2b838e6efb6f323"
+    },
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "log": ".agents-execution_request.py.log",
+      "sha256": "2b6f8677b061d9d34325afad609df675a76e68585f6a28ef68500366c642bf67"
+    },
+    {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "capture",
+        "--help"
+      ],
+      "exit_code": 0,
+      "log": ".agents-audit_run.py.log",
+      "sha256": "d57afe20fdb6b0e2da271a483d1a3abed6c2c76d0b81d370c2b838e6efb6f323"
+    }
+  ],
+  "provider_calls": 0,
+  "model_calls": 0,
+  "new_cost_usd": 0
+}

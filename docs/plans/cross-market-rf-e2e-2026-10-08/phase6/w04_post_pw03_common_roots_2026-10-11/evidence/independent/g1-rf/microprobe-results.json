@@ -1,0 +1,190 @@
+{
+  "probes": [
+    {
+      "id": "G1-P1",
+      "interpretation": "Re-signing both caller reference and body is not a reachable pinned-public-body attack. Raw display is NFC while decoded_sha pins original decoded value; producer owns original replay. These fixture mutations are not findings.",
+      "kind": "pure-memory contract/hash checks",
+      "manifest_sha256": "f8caa96ce87de895dbd97057028ce10b74da13d9f3ad9a1e206661c56d4ccda8",
+      "observed_resigned_fixture_cases": [
+        {
+          "mutation": "decoded_sha256_mismatch",
+          "status": "accepted"
+        },
+        {
+          "mutation": "decoded_end_mismatch",
+          "status": "accepted"
+        },
+        {
+          "mutation": "raw_text_mismatch",
+          "status": "accepted"
+        },
+        {
+          "mutation": "receipt_lineage_mismatch",
+          "reason": "projection_lineage_mismatch",
+          "status": "refused"
+        }
+      ],
+      "projected_fixture_parent_count": 2,
+      "sealed_evidence_matches": 15,
+      "sealed_source_matches": 9,
+      "true_public_artifact_sha256": "970ce8774bbf7ab660a5562c7c299057b54648b2b412872c0480ad8aa4ff19ff",
+      "true_public_parent_count": 65,
+      "true_public_span_count": 6
+    },
+    {
+      "acquisition_calls": 0,
+      "configs_written": 0,
+      "filing_fetch_result": null,
+      "id": "G1-P2",
+      "invalid_resolution_event_cases_refused": 3,
+      "kind": "offline mocks at source-read boundary",
+      "legacy_four_key_metadata": "accepted",
+      "metadata_wrong_family_bad_type_extra_key_refused": 3,
+      "optional_five_key_metadata": {
+        "declaration": "en-Latn-US",
+        "family": "en",
+        "manifest_language": "en-US"
+      },
+      "positive_nonperiod_cases": 3,
+      "registered_nonperiod_fy": null,
+      "six_field_upstream_cause_unchanged": true,
+      "source_types": {
+        "broker_research": "specialist_research",
+        "investor_presentation": "investor_presentation",
+        "investor_relations": "company_release"
+      },
+      "typed_sibling_preserved_through_two_rf_wrappers": [
+        "exact_requires_fiscal_year",
+        "latest_forbids_fiscal_year",
+        "latest_reuse_requires_acquisition_limits",
+        "acquisition_limits_invalid"
+      ],
+      "typed_sibling_wrong_field_path": "discarded",
+      "unknown_kind_named_refusal_cases": 3,
+      "unknown_kind_reason": "unsupported_revenue_document_kind",
+      "wrong_fy_period_security_cases_refused": 9
+    },
+    {
+      "all_parameter_values_unchanged": true,
+      "base_annual_revenue": {
+        "2026": 165.00000000000003,
+        "2027": 181.50000000000003
+      },
+      "capture_actual_verified_read": true,
+      "capture_host_receipt_sha256": "08b5b2e81db755ab104d54bb09afafe3b3f5ba28bb5090d5310324009892dd7a",
+      "capture_receipt_sha256": "8e6e17e46954adc5abc1e3b2e5af7692d7f552d2f8409493e245ef4476c9e19e",
+      "capture_timestamp": "2026-10-11T06:15:08.662789+00:00",
+      "consolidated_forecast_unchanged": true,
+      "dependency": {
+        "claim_id": "g1-actual-h1-rationale",
+        "formula_refs": [
+          {
+            "driver": "revenue",
+            "model": "direct_revenue",
+            "output": "recognized_revenue",
+            "scenario": "base",
+            "segment": "Segment A"
+          }
+        ],
+        "locator": "loc:v1/page:10/paragraph:11",
+        "parameter_id": "0_base_2026",
+        "parser_name": "selective_narrative_parser",
+        "parser_version": "0.1.1",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "span_id": "urn:company-wiki:evidence-span:sha256:49c65390eec2d728b35c4fc98b7eb8410f5341f1f061430dac17515ec40f8b41"
+      },
+      "environment_restored": true,
+      "filing_fetch": null,
+      "h1_as_of_date": "2026-10-08",
+      "h1_narrative_ref": {
+        "artifact_sha256": "42a1fd4aef2d714f7ff81164419005a042d1becce2284733833680eb991753e6",
+        "artifact_version_id": "narrative-4251e7103fff410dbeb42e2734fc498f",
+        "byte_size": 145904,
+        "schema_version": "narrative-ref/1",
+        "source_ref": {
+          "byte_size": 3149962,
+          "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+        }
+      },
+      "h1_source_metadata": {
+        "declared_language": "zh-CN",
+        "document_kind": "semi_annual_report",
+        "language": "zh",
+        "source_class": "filing",
+        "title": "2026年半年度报告"
+      },
+      "h1_source_ref": {
+        "byte_size": 3149962,
+        "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "mime_type": "application/pdf",
+        "schema_version": "2.0",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+      },
+      "id": "G1-P3",
+      "input_role": "Complete synthetic forecast_document formula input, with actual H1 public narrative and actual verified SourceCapture; not a company economic forecast or research acceptance.",
+      "kind": "actual local public read plus complete technical engine fixture",
+      "native_schema": "3.7",
+      "original_input_unchanged": true,
+      "owned_temp": "C:/Users/郑曾波/Projects/company-wiki/g1h_qrzadbc0",
+      "owned_temp_removed": true,
+      "projected_parent_capture_probe": {
+        "as_of_date": "2026-10-08",
+        "both_status": "refused",
+        "interpretation": "Correct unknown/refusal; does not establish a consumer defect. Full actual projected-source economic input chain remains unverified.",
+        "reason": "source_availability_unknown: publication unknown and no reliable prior availability proof",
+        "receipt_versions_tested": [
+          "2.1",
+          "2.2"
+        ],
+        "source_sha256": "c620093812d9e420a4847ea0348906e5d167b9dc429a181f223c730c00064271"
+      },
+      "registry_audit": [],
+      "source_records_unchanged": true,
+      "status": "consumed",
+      "temporary_registry_entries": 2
+    },
+    {
+      "compact_line_count": 1,
+      "engine_version": "4.2.1",
+      "first_bytes_unchanged": true,
+      "first_default_temp_attempt": {
+        "failure": "first r.jsonl open(a) PermissionError Errno 13; cleanup WinError 5",
+        "path": "C:/Users/郑曾波/AppData/Local/Packages/sandbox.{3a007aa6-f6d9-4c2e-b44d-ed44b1c5ba09}/AC/Temp/g1s_amg6_01y",
+        "registry_write_completed": false,
+        "subsequent_exact_path_test_exists": false
+      },
+      "historical_diagnostic": {
+        "complete_object_unchanged": true,
+        "header": "3.7",
+        "input": "3.9",
+        "registry_bytes_unchanged": true,
+        "result": "3.9",
+        "snapshot_rewritten": false,
+        "status": "metadata_mismatch"
+      },
+      "id": "G1-P4",
+      "input_result_hash_and_snapshot_id_equal": true,
+      "input_result_header_equal": true,
+      "kind": "delegated independent native snapshot microprobe",
+      "owned_workspace_temp_removed": true,
+      "registry_anchors_equal": true,
+      "registry_audit": [],
+      "registry_entries": 6,
+      "registry_environment_restored": true,
+      "reviewer": "/root/w04_g1_rf_consumer_review/snapshot_check",
+      "schemas": [
+        "3.7",
+        "3.8",
+        "3.9"
+      ],
+      "write_once_second_write_refused": true
+    }
+  ],
+  "schema_version": "w04-g1-microprobe-results/1"
+}

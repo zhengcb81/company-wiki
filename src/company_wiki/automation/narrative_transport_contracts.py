@@ -7,7 +7,7 @@ from datetime import date
 import re
 from typing import Any
 
-from company_wiki.narrative_subject import NarrativeSubject
+from company_wiki.narrative_subject import NarrativeSubject, NarrativeSubjectRef
 
 from .narrative_contracts import (
     BUNDLE_MAX_BYTES,
@@ -25,6 +25,10 @@ NARRATIVE_PROJECTED_REF_SCHEMA = "narrative-ref/2"
 NARRATIVE_PROJECTED_REFERENCE_REQUEST_SCHEMA = "narrative-reference-request/2"
 NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA = "narrative-read-request/2"
 NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA = "narrative-read-receipt/2"
+NARRATIVE_COMPACT_REF_SCHEMA = "narrative-ref/3"
+NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA = "narrative-reference-request/3"
+NARRATIVE_COMPACT_READ_REQUEST_SCHEMA = "narrative-read-request/3"
+NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA = "narrative-read-receipt/3"
 MAX_REQUEST_BYTES = 16 * 1024
 MAX_RECEIPT_BYTES = 16 * 1024
 EXPECTED_SOURCE_FIELDS = frozenset(
@@ -116,6 +120,13 @@ def _projection_subject(value: object) -> NarrativeSubject:
     return subject
 
 
+def _compact_subject(value: object) -> NarrativeSubjectRef:
+    try:
+        return NarrativeSubjectRef.from_dict(value)
+    except (TypeError, ValueError) as exc:
+        raise NarrativeContractError("invalid compact narrative subject") from exc
+
+
 def _issuer_constraints(value: object) -> dict[str, str | int] | None:
     if value is None:
         return None
@@ -167,6 +178,7 @@ class NarrativeRef:
     source_ref: SourceRefValue | None = None
     subject_binding: NarrativeSubject | None = None
     generation_sha256: str | None = None
+    subject_ref: NarrativeSubjectRef | None = None
 
     @property
     def subject(self) -> NarrativeSubject:
@@ -182,15 +194,21 @@ class NarrativeRef:
             isinstance(value, dict)
             and value.get("schema_version") == NARRATIVE_PROJECTED_REF_SCHEMA
         )
+        compact = (
+            isinstance(value, dict)
+            and value.get("schema_version") == NARRATIVE_COMPACT_REF_SCHEMA
+        )
         fields = (
+            (_REF_FIELDS - {"source_ref"}) | {"subject_ref", "generation_sha256"}
+            if compact else
             (_REF_FIELDS - {"source_ref"}) | {"subject_binding", "generation_sha256"}
-            if projected
-            else _REF_FIELDS
+            if projected else _REF_FIELDS
         )
         item = _exact(value, frozenset(fields))
         if item["schema_version"] not in {
             NARRATIVE_REF_SCHEMA,
             NARRATIVE_PROJECTED_REF_SCHEMA,
+            NARRATIVE_COMPACT_REF_SCHEMA,
         }:
             raise NarrativeContractError("unsupported narrative reference schema")
         identifier, digest, size = (
@@ -206,6 +224,12 @@ class NarrativeRef:
             raise NarrativeContractError("artifact_sha256 must be lowercase SHA-256")
         if type(size) is not int or not 0 < size <= BUNDLE_MAX_BYTES:
             raise NarrativeContractError("narrative artifact size is invalid")
+        if compact:
+            return cls(
+                NARRATIVE_COMPACT_REF_SCHEMA, identifier, digest, size,
+                generation_sha256=_generation(item["generation_sha256"]),
+                subject_ref=_compact_subject(item["subject_ref"]),
+            )
         if projected:
             return cls(
                 NARRATIVE_PROJECTED_REF_SCHEMA,
@@ -230,8 +254,15 @@ class NarrativeRef:
             "artifact_sha256": self.artifact_sha256,
             "byte_size": self.byte_size,
         }
-        if self.schema_version == NARRATIVE_PROJECTED_REF_SCHEMA:
-            if self.source_ref is not None or self.subject_binding is None:
+        if self.schema_version == NARRATIVE_COMPACT_REF_SCHEMA:
+            if (self.source_ref is not None or self.subject_binding is not None
+                    or self.subject_ref is None):
+                raise NarrativeContractError("compact reference requires only subject_ref")
+            value.update(subject_ref=self.subject_ref.to_dict(),
+                         generation_sha256=self.generation_sha256)
+        elif self.schema_version == NARRATIVE_PROJECTED_REF_SCHEMA:
+            if (self.source_ref is not None or self.subject_binding is None
+                    or self.subject_ref is not None):
                 raise NarrativeContractError(
                     "projected reference cannot contain a raw source reference"
                 )
@@ -244,6 +275,7 @@ class NarrativeRef:
                 self.source_ref is None
                 or self.subject_binding is not None
                 or self.generation_sha256 is not None
+                or self.subject_ref is not None
             ):
                 raise NarrativeContractError(
                     "raw reference cannot contain projected binding"
@@ -264,7 +296,9 @@ class NarrativeReadRequest:
     def from_dict(cls, value: object) -> NarrativeReadRequest:
         projected = (
             isinstance(value, dict)
-            and value.get("schema_version") == NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA
+            and value.get("schema_version") in {
+                NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA, NARRATIVE_COMPACT_READ_REQUEST_SCHEMA
+            }
         )
         constraint_field = "expected_issuer" if projected else "expected_source"
         item = _exact(
@@ -274,14 +308,20 @@ class NarrativeReadRequest:
             ),
         )
         expected_schema = (
-            NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA
-            if projected
+            NARRATIVE_COMPACT_READ_REQUEST_SCHEMA
+            if isinstance(value, dict) and value.get("schema_version") == NARRATIVE_COMPACT_READ_REQUEST_SCHEMA
+            else NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA if projected
             else NARRATIVE_READ_REQUEST_SCHEMA
         )
         if item["schema_version"] != expected_schema:
             raise NarrativeContractError("unsupported narrative read request schema")
         reference = NarrativeRef.from_dict(item["narrative_ref"])
-        if (reference.schema_version == NARRATIVE_PROJECTED_REF_SCHEMA) != projected:
+        expected_ref_schema = {
+            NARRATIVE_READ_REQUEST_SCHEMA: NARRATIVE_REF_SCHEMA,
+            NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA: NARRATIVE_PROJECTED_REF_SCHEMA,
+            NARRATIVE_COMPACT_READ_REQUEST_SCHEMA: NARRATIVE_COMPACT_REF_SCHEMA,
+        }[expected_schema]
+        if reference.schema_version != expected_ref_schema:
             raise NarrativeContractError(
                 "read schema must match narrative reference schema"
             )
@@ -305,7 +345,9 @@ class NarrativeReadRequest:
             "narrative_ref": self.narrative_ref.to_dict(),
             "as_of_date": self.as_of_date,
         }
-        if self.schema_version == NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA:
+        if self.schema_version in {
+            NARRATIVE_PROJECTED_READ_REQUEST_SCHEMA, NARRATIVE_COMPACT_READ_REQUEST_SCHEMA
+        }:
             if self.expected_source:
                 raise NarrativeContractError(
                     "projected read cannot contain raw identity constraints"
@@ -340,3 +382,10 @@ def parse_projected_reference_request(value: object) -> tuple[NarrativeSubject, 
     return _projection_subject(item["subject_binding"]), _generation(
         item["generation_sha256"]
     )
+
+
+def parse_compact_reference_request(value: object) -> tuple[NarrativeSubjectRef, str]:
+    item = _exact(value, frozenset({"schema_version", "subject_ref", "generation_sha256"}))
+    if item["schema_version"] != NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA:
+        raise NarrativeContractError("unsupported compact narrative reference request schema")
+    return _compact_subject(item["subject_ref"]), _generation(item["generation_sha256"])

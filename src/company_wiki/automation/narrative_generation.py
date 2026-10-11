@@ -25,6 +25,15 @@ from .narrative_transport_contracts import NarrativeReadRequest, EXPECTED_SOURCE
 from .narrative_verify import BUNDLE_PRODUCER_VERSION
 
 
+def _effective_optional_generation(options: Mapping[str, Any]) -> dict[str, Any]:
+    """Match HTTP omission rules without resigning existing omitted identities."""
+    return {
+        key: options[key]
+        for key in ("thinking", "reasoning_effort", "temperature", "reasoning_split")
+        if options.get(key) is not None
+    }
+
+
 def generation_manifest(
     request, payload, *, execution_versions, parser_components=None
 ):
@@ -48,19 +57,9 @@ def generation_manifest(
         parser_name = parser_components["parser_name"]
         parser_version = parser_components["parser_version"]
     model = request.model_options
-    generation_fields = (
-        "model_id",
-        "endpoint",
-        "max_output_tokens",
-        "thinking",
-        "temperature",
-        "reasoning_split",
-    )
+    generation_fields = ("model_id", "endpoint", "max_output_tokens")
     effective_model = {key: model[key] for key in generation_fields if key in model}
-    # An omitted/null effort preserves historical generation identity.
-    # Explicit effort affects the real HTTP request and must invalidate reuse.
-    if model.get("reasoning_effort") is not None:
-        effective_model["reasoning_effort"] = model["reasoning_effort"]
+    effective_model.update(_effective_optional_generation(model))
     effective_model["output_token_field"] = model.get(
         "output_token_field", "max_tokens"
     )
@@ -193,10 +192,7 @@ def _projection_effective_model(options: Mapping[str, Any]) -> dict[str, Any]:
         "max_output_tokens": limit,
         "output_token_field": token_field,
     }
-    for key in ("thinking", "reasoning_effort", "temperature", "reasoning_split"):
-        value = options.get(key)
-        if value is None:
-            continue  # The HTTP adapter omits null optional generation fields.
+    for key, value in _effective_optional_generation(options).items():
         if key == "thinking" and (
             not isinstance(value, str) or value not in {"enabled", "disabled", "adaptive"}
         ):

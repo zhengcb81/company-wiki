@@ -24,6 +24,9 @@ from company_wiki.automation.narrative_transport import NarrativeTransportReader
 from company_wiki.automation.narrative_transport_contracts import (
     MAX_RECEIPT_BYTES,
     MAX_REQUEST_BYTES,
+    NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA,
+    NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA,
+    parse_compact_reference_request,
     NARRATIVE_READ_RECEIPT_SCHEMA,
     NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA,
     parse_projected_reference_request,
@@ -105,14 +108,19 @@ def _dispatch(
             isinstance(request, dict)
             and request.get("schema_version") == "narrative-reference-request/2"
         )
-        if projected:
+        compact = (isinstance(request, dict)
+                   and request.get("schema_version") == NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA)
+        if compact:
+            subject_ref, generation = parse_compact_reference_request(request)
+            ref = reader.reference_subject_ref(subject_ref, generation_sha256=generation)
+        elif projected:
             subject, generation = parse_projected_reference_request(request)
             ref = reader.reference_subject(subject, generation_sha256=generation)
         else:
             ref = reader.reference(parse_reference_request(request))
         return canonical_json(ref.to_dict()).encode("utf-8"), {
-            "schema_version": NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA
-            if projected
+            "schema_version": NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA if compact
+            else NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA if projected
             else NARRATIVE_READ_RECEIPT_SCHEMA,
             "status": "metadata_only",
             "narrative_ref": ref.to_dict(),
@@ -170,10 +178,16 @@ def main(argv: Sequence[str] | None = None) -> int:
                 expected_projection_sha256=subject.subject_sha256,
             )
 
-        reader = (NarrativeTransportReader(artifacts, SourceVersionReader(catalog), projection_loader=projection_loader)
-                  if isinstance(request,dict) and request.get("schema_version") in {
-                      "narrative-reference-request/2","narrative-read-request/2"}
-                  else NarrativeTransportReader(artifacts, SourceVersionReader(catalog)))
+        if isinstance(request, dict) and request.get("schema_version") in {
+            "narrative-reference-request/2", "narrative-read-request/2",
+            "narrative-reference-request/3", "narrative-read-request/3",
+        }:
+            reader = NarrativeTransportReader(
+                artifacts, SourceVersionReader(catalog), projection_loader=projection_loader,
+                projection_ref_resolver=projection_loader,
+            )
+        else:
+            reader = NarrativeTransportReader(artifacts, SourceVersionReader(catalog))
         # Some PDF backends print optional-package notices. The two protocol
         # streams belong exclusively to artifact bytes and the JSON receipt.
         with open(os.devnull, "w", encoding="utf-8") as quiet:

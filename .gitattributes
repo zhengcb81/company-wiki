@@ -19,3 +19,13 @@
 # This sealed expert package declares SHA for every byte of its plan artifacts.
 # Shared implementation progress stays outside the sealed package files.
 /docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/** -text -diff
+
+# Exact W04 reviewed source bytes. Other runtime files keep their existing rules.
+/src/company_wiki/automation/narrative_evidence_view.py -text -eol
+/src/company_wiki/automation/narrative_transport.py -text -eol
+/src/company_wiki/automation/narrative_transport_contracts.py -text -eol
+/src/company_wiki/narrative_subject.py -text -eol
+/src/company_wiki/source_catalog/document_kinds.py -text -eol
+/src/company_wiki/source_catalog/narrative_transport_cli.py -text -eol
+/src/company_wiki/source_catalog/source_reader.py -text -eol
+/tests/unit/test_w04_source_transport.py -text -eol

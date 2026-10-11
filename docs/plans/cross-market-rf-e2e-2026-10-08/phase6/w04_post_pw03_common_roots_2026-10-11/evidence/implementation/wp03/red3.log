@@ -1,0 +1,45 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__ test_public_registered_candidate_needs_no_filing_fetch_resolution_fields ___
+
+tmp_path = WindowsPath('C:/tmp/w04rf-red3-20261011/test_public_registered_candida0')
+
+    def test_public_registered_candidate_needs_no_filing_fetch_resolution_fields(tmp_path):
+        from source_preparation import prepare_registered_source_result
+        from test_company_wiki_source_v2 import _inputs, _candidate, BODY
+        ref, receipt, manifest = _inputs()
+        manifest.update(document_kind="broker_research", fiscal_year=None, fiscal_period=None, period_end=None)
+        candidate = _candidate(ref, manifest)
+        assert "download_events" not in candidate and "resolution_outcome" not in candidate
+        config = tmp_path / "catalog.json"
+        config.write_text("{}", encoding="utf-8")
+        with patch("company_wiki_source_reader_v2.open_source_version_v2", return_value=(BODY, receipt, manifest)), \
+             patch("source_preparation._run_filing_fetch", side_effect=AssertionError("pinned source cannot acquire")):
+>           prepared = prepare_registered_source_result(candidate, as_of_date="2026-09-27", company_wiki_catalog_config=config)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_w04_public_consumer.py:228: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\source_preparation.py:392: in prepare_registered_source_result
+    source = _prepare_source_ref_v2(request, candidate,
+scripts\source_preparation.py:280: in _prepare_source_ref_v2
+    outcome, downloads = _v2_resolution_events(handle)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+handle = {'capture_ready': True, 'source_ref': {'schema_version': '2.0', 'document_id': 'urn:company-wiki:document:sha256:bbbbb...', 'source_id': 'urn:company-wiki:source:sha256:90c4f96e0727f7bc7b1c2eeab61091d021d0fe8db243e64d7408fd844d48b740', ...}
+
+    def _v2_resolution_events(handle: dict) -> tuple[str, int]:
+        outcome = handle.get("resolution_outcome")
+        if not isinstance(outcome, str) or outcome not in {
+            "reused_existing",
+            "reused_after_discovery",
+            "downloaded_new",
+        }:
+>           raise RuntimeError("filing-fetch SourceRef resolution_outcome is invalid")
+E           RuntimeError: filing-fetch SourceRef resolution_outcome is invalid
+
+scripts\source_preparation.py:255: RuntimeError
+=========================== short test summary info ===========================
+FAILED tests/test_w04_public_consumer.py::test_public_registered_candidate_needs_no_filing_fetch_resolution_fields
+1 failed, 20 deselected in 0.48s

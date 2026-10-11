@@ -1,0 +1,71 @@
+{
+  "no_large_suite_rerun": true,
+  "probe_families": [
+    {
+      "entrypoints": [
+        "test_w04_public_consumer.projected_wire",
+        "company_wiki_narrative_contracts.validate_narrative_response"
+      ],
+      "id": "G1-P1",
+      "steps": [
+        "SHA-256 every implementation manifest source/evidence item and compare to seal",
+        "Validate actual sealed wp01 real-read3 stdin/stdout/stderr",
+        "Deepcopy synthetic /3, mutate decoded hash/d-end/raw_text, recompute output/span/bundle ref and receipt lineage hashes; observe acceptance only under resigned synthetic ref; lineage zero hash refused"
+      ]
+    },
+    {
+      "entrypoints": [
+        "source_preparation.prepare_registered_source_result",
+        "source_preparation._v2_resolution_events",
+        "company_wiki_narrative_contracts.validate_narrative_response",
+        "filing_fetch_client._ClientError",
+        "source_preparation.FilingSourcePreparationError"
+      ],
+      "id": "G1-P2",
+      "steps": [
+        "Use _inputs/_candidate BODY, patch verified source open and config function only, forbid FF acquisition by AssertionError",
+        "Read investor_presentation/investor_relations/broker_research with null FY and missing FF event fields, then change FY/period/security",
+        "Challenge invalid event and unknown document-kind, four/five metadata and typed optional sibling field-path closure"
+      ]
+    },
+    {
+      "actual_read_request": "C:/Users/郑曾波/Projects/revenue-forecast-audit/runs/pw03-20261011T010657Z-cn-688012/execution/narrative/h126-read-request.json",
+      "actual_read_request_sha256": "79849e9c1a136b9cc8781688cdc78ba2249884e85cb0104423d9a2f408a22680",
+      "entrypoints": [
+        "company_wiki_narrative_reader.read_narrative_context",
+        "source_preparation.prepare_registered_source_result",
+        "source_narrative_context.consume_narrative_input",
+        "revenue_core.run_forecast"
+      ],
+      "h1_catalog_config": "C:/Users/郑曾波/AppData/Local/Temp/mW03-ahg078jp/CN-688012/config/source_catalog.yaml",
+      "id": "G1-P3",
+      "projected_catalog_config": "C:/Users/郑曾波/AppData/Local/Temp/w4p1-k4f7_7dv/CN-688012/config.yaml",
+      "steps": [
+        "Temporarily set PYTHONPATH to isolated CWP/src, never call acquisition/model",
+        "Copy actual public H1 candidate fields from validated manifest using _candidate; retain FY2026/H1 and market/security facts",
+        "Set REVENUE_PUBLICATION_REGISTRY to unique workspace tempfile before run_forecast; append actual SourceCapture to complete forecast_document fixture, set fixture as_of_date to actual request",
+        "Run baseline, consume actual span as explicit rationale_support to 0_base_2026, run again; compare parameters/source records/original input/consolidated forecasts; audit temporary registry",
+        "Finally restore PYTHONPATH and registry environment, remove owned TEMP",
+        "Separately try real /3 management parent c620 with both receipt2.1/2.2; retain named source_availability_unknown refusal"
+      ]
+    },
+    {
+      "entrypoints": [
+        "revenue_backtest.create_snapshot",
+        "revenue_backtest.validate_snapshot",
+        "revenue_backtest.write_new_json",
+        "revenue_backtest.snapshot_schema_diagnostic"
+      ],
+      "id": "G1-P4",
+      "steps": [
+        "Subagent independently sets registry environment to owned workspace tempfile",
+        "For 3.7/3.8/3.9: actual native forecast_document snapshot, verify full input/result/header hashes, ID and registry anchors; compact/write-once check",
+        "Historical error-header object only diagnostic; compare complete object and registry bytes",
+        "Audit 6 temporary entries, restore environment and clean TEMP"
+      ]
+    }
+  ],
+  "python": "python -X utf8 -B -",
+  "schema_version": "w04-g1-executed-probes/1",
+  "working_directory": "C:/Users/郑曾波/Projects/company-wiki"
+}

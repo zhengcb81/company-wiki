@@ -1,0 +1,319 @@
+{
+  "actual_public_wire": {
+    "real-evidence-page": {
+      "exit": 0,
+      "stderr_bytes": 981,
+      "stdin_bytes": 725,
+      "stdout_bytes": 67822
+    },
+    "real-read": {
+      "exit": 0,
+      "stderr_bytes": 931,
+      "stdin_bytes": 725,
+      "stdout_bytes": 59247
+    },
+    "real-reference": {
+      "exit": 0,
+      "stderr_bytes": 667,
+      "stdin_bytes": 424,
+      "stdout_bytes": 579
+    },
+    "refusal-artifact": {
+      "exit": 2,
+      "stderr_bytes": 108,
+      "stdin_bytes": 725,
+      "stdout_bytes": 0
+    },
+    "refusal-asof": {
+      "exit": 2,
+      "stderr_bytes": 99,
+      "stdin_bytes": 725,
+      "stdout_bytes": 0
+    },
+    "refusal-generation": {
+      "exit": 2,
+      "stderr_bytes": 108,
+      "stdin_bytes": 725,
+      "stdout_bytes": 0
+    },
+    "refusal-issuer": {
+      "exit": 2,
+      "stderr_bytes": 103,
+      "stdin_bytes": 725,
+      "stdout_bytes": 0
+    },
+    "refusal-last-parent-bytes": {
+      "exit": 2,
+      "stderr_bytes": 101,
+      "stdin_bytes": 725,
+      "stdout_bytes": 0
+    },
+    "refusal-wire-over-LF-cap": {
+      "exit": 2,
+      "stderr_bytes": 92,
+      "stdin_bytes": 16385,
+      "stdout_bytes": 0
+    }
+  },
+  "artifact_sha256": {
+    "checks.json": {
+      "bytes": 28640,
+      "sha256": "02c20d19b9ecf7f237d405e165d12fba062b0b31df0a60e35ba855d09fa4b6d2"
+    },
+    "checks.log": {
+      "bytes": 4054,
+      "sha256": "e466cfb4a08499766d09d12662aa91f1f331c5ffa43a1e09e667837f9ebe5c7e"
+    },
+    "probe.py": {
+      "bytes": 17396,
+      "sha256": "b995d39d4a50327359b985364e784427b76c4e22c534e73ca128d8285eb14e77"
+    },
+    "real-evidence-page.stderr.json": {
+      "bytes": 981,
+      "sha256": "c812a40d956131bd0bf94d038b71a40ac03f92ad7a9d0bd71e4031e3d93ab919"
+    },
+    "real-evidence-page.stdin.json": {
+      "bytes": 725,
+      "sha256": "79551fec0f003efcf05d5f6f06ea3a7ad3cf741ac89d1a0631fd75d7467fd71b"
+    },
+    "real-evidence-page.stdout.json": {
+      "bytes": 67822,
+      "sha256": "67b25cdeb7dd16a4333b03531a3aa52784a383344fe3f9f5691616c58f4e5da5"
+    },
+    "real-read.stderr.json": {
+      "bytes": 931,
+      "sha256": "f54d865cdb706fb09aa35cf3f30bd2bf84d6d7d37a6c3f720f5fa164fe14f8ee"
+    },
+    "real-read.stdin.json": {
+      "bytes": 725,
+      "sha256": "79551fec0f003efcf05d5f6f06ea3a7ad3cf741ac89d1a0631fd75d7467fd71b"
+    },
+    "real-read.stdout.json": {
+      "bytes": 59247,
+      "sha256": "970ce8774bbf7ab660a5562c7c299057b54648b2b412872c0480ad8aa4ff19ff"
+    },
+    "real-reference.stderr.json": {
+      "bytes": 667,
+      "sha256": "d2b5a08fd5ebb4c774c3a885fc90b580427e2604968a02b468ca15669ca09bc9"
+    },
+    "real-reference.stdin.json": {
+      "bytes": 424,
+      "sha256": "1bfe03c296fbe5ac4ba1662af30144681045973c83f6126854f05a387e9dcbad"
+    },
+    "real-reference.stdout.json": {
+      "bytes": 579,
+      "sha256": "e2c4316f337128a0d60960d6825a369ed16162793e22115d4c746ec9114a2d07"
+    },
+    "refusal-artifact.stderr.json": {
+      "bytes": 108,
+      "sha256": "0acb6130f81b934e402548faa50ee67bd6be3f78dc58d8bd4f75e0a0ad836a89"
+    },
+    "refusal-artifact.stdin.json": {
+      "bytes": 725,
+      "sha256": "057c38b9bece8e45dd02dcca3391ea597da9a26fbe2b64eb1b291e09afe8470c"
+    },
+    "refusal-artifact.stdout.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "refusal-asof.stderr.json": {
+      "bytes": 99,
+      "sha256": "b40dac746decc9466d1505ca58953cf55f9ebd4c64ba1b946edb3b45d4e7b0f9"
+    },
+    "refusal-asof.stdin.json": {
+      "bytes": 725,
+      "sha256": "8f5079eb6d83f18997140af6ff68db1362b489b4fd68986a7dd3b90fc596fee5"
+    },
+    "refusal-asof.stdout.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "refusal-generation.stderr.json": {
+      "bytes": 108,
+      "sha256": "0acb6130f81b934e402548faa50ee67bd6be3f78dc58d8bd4f75e0a0ad836a89"
+    },
+    "refusal-generation.stdin.json": {
+      "bytes": 725,
+      "sha256": "638e2781b1366fd9aeef3fe4fc26a3fba469c1de47c2225cff1794188a32a704"
+    },
+    "refusal-generation.stdout.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "refusal-issuer.stderr.json": {
+      "bytes": 103,
+      "sha256": "f516402ec0893a3f9c93e4cf3e6972a0ac02b40a32f843075089ff69c3826ed0"
+    },
+    "refusal-issuer.stdin.json": {
+      "bytes": 725,
+      "sha256": "bb1873bbbbd98687881f4138414b6b77352c2f81d166982ad88179eb5ffdd11e"
+    },
+    "refusal-issuer.stdout.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "refusal-last-parent-bytes.stderr.json": {
+      "bytes": 101,
+      "sha256": "dcb623154fdac41ef6e44b0e4673b2b0168615cfa16d4d9dbfef480025de9411"
+    },
+    "refusal-last-parent-bytes.stdin.json": {
+      "bytes": 725,
+      "sha256": "79551fec0f003efcf05d5f6f06ea3a7ad3cf741ac89d1a0631fd75d7467fd71b"
+    },
+    "refusal-last-parent-bytes.stdout.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "refusal-wire-over-LF-cap.stderr.json": {
+      "bytes": 92,
+      "sha256": "6da0851d9d751ebfeea42b0fac60955b133be09efa82c376217f32b16903e805"
+    },
+    "refusal-wire-over-LF-cap.stdin.json": {
+      "bytes": 16385,
+      "sha256": "db1abda6885ea7567fa812419cc1522ffcf832739d9ef11ba1a5b9219465e344"
+    },
+    "refusal-wire-over-LF-cap.stdout.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "checks": {
+    "actual_checks_sha256": "02c20d19b9ecf7f237d405e165d12fba062b0b31df0a60e35ba855d09fa4b6d2",
+    "actual_log_sha256": "e466cfb4a08499766d09d12662aa91f1f331c5ffa43a1e09e667837f9ebe5c7e",
+    "includes_source_and_evidence_hashes": true,
+    "independent_assertions": 91,
+    "probe_sha256": "b995d39d4a50327359b985364e784427b76c4e22c534e73ca128d8285eb14e77"
+  },
+  "economics_and_quality": {
+    "cost_usd": 0,
+    "economic_research_acceptance": "NOT_EXECUTED; RF WP03 engineering and real economic quality outside scope",
+    "http_calls": 0,
+    "model_calls": 0,
+    "provider_calls": 0
+  },
+  "handoff": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\implementation\\wp01\\handoff.json",
+    "sha256": "e5c71592eec4bcbee9cc26a08cc89e0483536a13133f9161ab3f09e650acaa66"
+  },
+  "legacy_compatibility": {
+    "historical_artifacts_and_ledgers": "No writes by reviewer; no resigning/rewriting. Real /3 read equals sealed original bundle bytes.",
+    "old_1_2": "Static diff review preserves schemas, fields, default projection_loader and branches; owner 110 log SHA verified, not reexecuted.",
+    "owner_110_log_sha256": "6123410cd4b66390fc7304e53ed7d8ea488d34e1e5ffd72ec3944081a4df3718",
+    "root_98_log_sha256": "1a6348d47dadf17fc42a98bc83d2c938039d5abf34b235ea5d98775e107e99aa"
+  },
+  "limitations": [
+    "Ordinary git status/diff in isolated checkout returned worktree/permission errors; review uses frozen diff, base generation git show, source/evidence SHA. Unrelated WIP cleanliness not attested.",
+    "CodeGraph not initialized as supplied by ROOT; no init performed; specified files read directly.",
+    "Owner 110 and ROOT 98 logs independently SHA-verified, not reexecuted; 9 paid model calls not repeated.",
+    "ROOT RED JSON records 3 failed/7 passed with full_stdout_saved=false; no claim of a complete preserved RED stdout transcript.",
+    "RF consumer integration, real paid-summary quality, new-company research and cross-repository final G1 remain outside this CWP review."
+  ],
+  "material_findings": [],
+  "not_executed": [
+    "network/acquisition",
+    "paid models/summaries",
+    "old 110/98 suites",
+    "full CWP suite",
+    "RF WP03 tests or consumer integration",
+    "research/economic quality G2/G4/G5",
+    "CodeGraph init",
+    "source/config repairs",
+    "commit/push/install",
+    "canonical/Dayu/StockWiki writes"
+  ],
+  "observed_at": "2026-10-11T04:30:25.220495+00:00",
+  "overlay": {
+    "path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\ROOT_EXECUTION_OVERLAY.md",
+    "sha256": "82b8596ddde2dc8a733c9a339284402407fb407bc971d2cb34aa04087732c509"
+  },
+  "repository": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+  "requested_base_head": "3d540797fd6e373bcae1409cc04e7a4ea0afc1c2",
+  "requested_branch": "codex/main-auto-official-json-20261010",
+  "resolved_root_causes": [
+    {
+      "file": "src/company_wiki/automation/narrative_transport_contracts.py",
+      "line": 202,
+      "root_cause": "Full projected subject/65-parent embedding in /2 exceeds compact request budget. Explicit /3 carries neutral compact identity; full lineage stays in pinned body."
+    },
+    {
+      "file": "src/company_wiki/source_catalog/source_reader.py",
+      "line": 585,
+      "root_cause": "capture_ready previously required period_known for every kind. Nonperiodic kinds now retain genuine missing periods and qualify through capture metadata."
+    },
+    {
+      "file": "src/company_wiki/automation/narrative_generation.py",
+      "line": 28,
+      "root_cause": "Raw manifest copied thinking/temperature/reasoning_split null while HTTP omitted them. Shared optional seam follows emitted options and preserves historical omitted identity."
+    }
+  ],
+  "reviewer": "/root/w04_g1_cwp_review",
+  "schema_version": "w04-g1-cwp-independent-review/1",
+  "scope": "WP01 CWP producer /3 and ROOT narrative_generation identity only",
+  "source_sha256": {
+    "src/company_wiki/automation/narrative_contracts.py": "6a3b4a262dac4079d7ec6a21c1e09e7ec238d55db3253483f11a69365e76faf3",
+    "src/company_wiki/automation/narrative_evidence_view.py": "840c6e22fc75297b0c28a8b82301add67d1796c0402d3511e45ee5f08162153d",
+    "src/company_wiki/automation/narrative_generation.py": "b8621f835b0480fd79ab2f0a7ef33a2e3427e5b3d494f126612538be5411b1a8",
+    "src/company_wiki/automation/narrative_http_model.py": "112bfe3e494c3eeb46f76f883ec31794f38de71af46924b9665f952c6c345028",
+    "src/company_wiki/automation/narrative_official_json.py": "3dd559f183e065fbce68daa870b83c0249e34eaadff99a661a962e329693d7b3",
+    "src/company_wiki/automation/narrative_transport.py": "3ed321a97bbf7bfef60dbb5719554924fbd84d3a3e917cd399c7e98e84451fc2",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "6fca7f092e3f4441e9a92b2f6ddcefbb08fc0553fd70bf36409ea1b51ae456b5",
+    "src/company_wiki/narrative_subject.py": "d87194b4f7a0b4d9eaccca7135133308fbd051dc7ef8c1a98d63d3b5473f60c0",
+    "src/company_wiki/source_catalog/document_kinds.py": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+    "src/company_wiki/source_catalog/narrative_transport_cli.py": "8a2cbc088581496a8b48094cb53767f12b7a58448831f715c9cfb6397d41138e",
+    "src/company_wiki/source_catalog/official_json_projection.py": "3a0f7844f86eb07876812e5b8015c5179022762a3c25adc59b565a4f4f010adf",
+    "src/company_wiki/source_catalog/source_reader.py": "be753a61cafd1b5d876f59c7e3f63f5f3724dc537d18e9cac58ff35795fab472",
+    "tests/unit/test_w04_generation_identity.py": "d81e14b9a6895d5f395a107bb8b72479de1eec3bd539942a1c1e06004e4d159b",
+    "tests/unit/test_w04_source_transport.py": "bc4cccc1d327e89bcfdefd8b91ec0b0e51591c44148f186970a79d72e4f02fb6"
+  },
+  "status": "PASS_WITH_SCOPE_LIMITS_STOP",
+  "verified_current_behaviors": [
+    {
+      "behavior": "Compact ref exact six keys, subject ref exact four, no fictitious single raw SourceRef",
+      "file": "src/company_wiki/narrative_subject.py",
+      "line": 95
+    },
+    {
+      "behavior": "All 65 parent refs and pointers remain in exact 59247B pinned bundle and evidence page",
+      "file": "src/company_wiki/automation/narrative_transport.py",
+      "line": 408
+    },
+    {
+      "behavior": "Public read/evidence resolver each opens all 65 parents once; lineage SHA from full subject",
+      "file": "src/company_wiki/automation/narrative_transport.py",
+      "line": 383
+    },
+    {
+      "behavior": "Public issuer, earlier cutoff, generation/artifact mismatches, last-parent byte corruption refuse with empty stdout",
+      "file": "src/company_wiki/source_catalog/official_json_projection.py",
+      "line": 848
+    },
+    {
+      "behavior": "LF counts toward 16384B request/receipt cap; 16385B request refused; 1310720B body cap unchanged",
+      "file": "src/company_wiki/source_catalog/narrative_transport_cli.py",
+      "line": 71
+    },
+    {
+      "behavior": "Actual PPTX IR and HTML research remain capture_ready with null fiscal_year/period/period_end; 2027 query does not borrow published date",
+      "file": "src/company_wiki/source_catalog/source_reader.py",
+      "line": 582
+    },
+    {
+      "behavior": "Projected official_json unknown language and optional declared_language retain type validation",
+      "file": "src/company_wiki/automation/narrative_contracts.py",
+      "line": 238
+    },
+    {
+      "behavior": "Actual HTTP bytes agree for four null/omitted fields; concrete changes invalidate identity; purpose label ignored; old omitted base SHA preserved",
+      "file": "src/company_wiki/automation/narrative_generation.py",
+      "line": 28
+    }
+  ],
+  "write_boundary": {
+    "67_originals_and_2_fixture_configs_SHA_unchanged": true,
+    "old_run_or_artifact_edits": false,
+    "only_reports_under": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\independent\\g1-cwp",
+    "owned_TEMP_removed": true,
+    "reviewed_source_SHA_unchanged": true,
+    "source_or_config_edits": false
+  }
+}

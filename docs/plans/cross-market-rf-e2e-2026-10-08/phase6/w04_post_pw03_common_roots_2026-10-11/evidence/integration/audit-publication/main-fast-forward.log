@@ -1,0 +1,237 @@
+Updating 78c2b10..c099333
+Fast-forward
+ .gitattributes                                     |   13 +
+ .planning/p7-audit-execution-review/HANDOFF.md     |   46 +
+ .../p7-audit-execution-review/HANDOFF_FORMAT.md    |   22 +
+ .../IMPLEMENTATION_CARD.md                         |   95 +
+ .planning/p7-audit-execution-review/INTERFACES.md  |   38 +
+ .../p7-audit-execution-review/cleanup_receipt.json |   23 +
+ .../evidence/build_handoff.py                      |  183 ++
+ .../evidence/latest_e2e_attempt.txt                |    1 +
+ .../evidence/latest_final_attempt.txt              |    1 +
+ .../evidence/latest_green_attempt.txt              |    1 +
+ .../evidence/latest_m2_attempt.txt                 |    1 +
+ .../evidence/latest_red_attempt.txt                |    1 +
+ .../evidence/latest_reviews_attempt.txt            |    1 +
+ .../m1-red-20261010T215258Z-49765253/red.log       |   49 +
+ .../m1-red-20261010T215328Z-c992dcb4/red.log       |   49 +
+ .../m2-final-20261010T220955Z-32c4a1fc/green.log   |  104 ++
+ .../m2-final-20261010T220955Z-32c4a1fc/static.log  |    3 +
+ .../m2-green-20261010T220402Z-369ede0a/green.log   |  103 ++
+ .../m3-e2e-20261010T221502Z-1172ac9c/e2e.log       |   38 +
+ .../m3-e2e-20261010T221502Z-1172ac9c/e2e_driver.py |  141 ++
+ .../m3-e2e-20261010T221838Z-cc073b16/e2e.log       |   38 +
+ .../m3-e2e-20261010T221838Z-cc073b16/e2e_driver.py |  141 ++
+ .../m3-final-20261010T234447Z-c1b05984/green.log   |  104 ++
+ .../coverage_input_pass1.json                      |    1 +
+ .../coverage_input_pass2.json                      |    1 +
+ .../coverage_pass1.log                             |    4 +
+ .../20261010T225522Z-13b7551f/attempt.json         |   20 +
+ .../20261010T225522Z-13b7551f/coverage.json        | 1850 ++++++++++++++++++++
+ .../20261010T225541Z-9bec8745/attempt.json         |   20 +
+ .../20261010T225541Z-9bec8745/coverage.json        | 1850 ++++++++++++++++++++
+ .../coverage_pass2.log                             |    4 +
+ .../20261010T234345Z-d30ace3b/attempt.json         |   20 +
+ .../20261010T234345Z-d30ace3b/coverage.json        | 1274 ++++++++++++++
+ .../expert/dispositions.json                       |   50 +
+ .../expert/expert.md                               |  124 ++
+ .../expert/root_causes_map.json                    |  271 +++
+ .../reviews/analyst.json                           |  387 ++++
+ .../reviews/analyst.md                             |  137 ++
+ .../reviews/fetch.json                             |  256 +++
+ .../reviews/fetch.md                               |  110 ++
+ .../reviews/process.json                           |  432 +++++
+ .../reviews/process.md                             |  128 ++
+ .../reviews/storage.json                           |  321 ++++
+ .../reviews/storage.md                             |  173 ++
+ .../seed_key.json                                  |   88 +
+ .planning/p7-audit-execution-review/findings.md    |   20 +
+ .../p7-audit-execution-review/handoff.example.json |   41 +
+ .planning/p7-audit-execution-review/handoff.json   |  272 +++
+ .../p7-audit-execution-review/handoff.schema.json  |  219 +++
+ .planning/p7-audit-execution-review/progress.md    |   17 +
+ .../samples/authoring_provenance/sample_io.json    |   46 +
+ .../samples/document_status_join/sample_io.json    |   74 +
+ .../samples/review_protocol/sample_io.json         |   53 +
+ .../samples/scope_request_binding/sample_io.json   |   76 +
+ .../synthetic_package/ABOUT.md                     |   13 +
+ .../synthetic_package/deploy.json                  |   12 +
+ .../synthetic_package/execution/facts.json         |   78 +
+ .../synthetic_package/execution/step_ledger.json   |   21 +
+ .../synthetic_package/raw/annual-2024.txt          |    5 +
+ .../synthetic_package/raw/call-2024h1.txt          |    7 +
+ .../synthetic_package/requests/template.json       |   16 +
+ .../synthetic_package/scope.json                   |   18 +
+ .../tool_inputs/authoring_input.json               |  100 ++
+ .../synthetic_package/tool_inputs/join_input.json  |  116 ++
+ .planning/p7-audit-execution-review/task_plan.md   |   29 +
+ .planning/w04-wp05/HANDOFF-AMENDMENT.md            |  Bin 0 -> 1605 bytes
+ .planning/w04-wp05/HANDOFF.md                      |  Bin 0 -> 2355 bytes
+ .planning/w04-wp05/acceptance/ACCEPTANCE.md        |  Bin 0 -> 933 bytes
+ .planning/w04-wp05/acceptance/acceptance.json      |  Bin 0 -> 4133 bytes
+ .../w04-wp05/acceptance/final-accepted-major.json  |  Bin 0 -> 2922 bytes
+ .../w04-wp05/acceptance/final-accepted-major.log   |  Bin 0 -> 24385 bytes
+ .planning/w04-wp05/acceptance/final-review.json    |  Bin 0 -> 26185 bytes
+ .planning/w04-wp05/acceptance/final-review.md      |  Bin 0 -> 1854 bytes
+ .planning/w04-wp05/amendment-before.json           |  Bin 0 -> 1671 bytes
+ .../amendment-before/00-authoring_provenance.py    |  Bin 0 -> 13640 bytes
+ .../amendment-before/01-audit_blob_store.py        |  Bin 0 -> 18130 bytes
+ .../amendment-before/02-execution_request.py       |  Bin 0 -> 20787 bytes
+ .../03-test_w04_status_provenance.py               |  Bin 0 -> 5148 bytes
+ .../04-test_w04_request_capture.py                 |  Bin 0 -> 14529 bytes
+ .planning/w04-wp05/amendment-diff.patch            |  Bin 0 -> 9016 bytes
+ .planning/w04-wp05/amendment-green-request.log     |  Bin 0 -> 129 bytes
+ .planning/w04-wp05/amendment-green-status.log      |  Bin 0 -> 115 bytes
+ .planning/w04-wp05/amendment-red-request.log       |  Bin 0 -> 1673 bytes
+ .planning/w04-wp05/amendment-red-status.log        |  Bin 0 -> 2434 bytes
+ .planning/w04-wp05/amendment-static.json           |  Bin 0 -> 1602 bytes
+ .planning/w04-wp05/diff.patch                      |  Bin 0 -> 69513 bytes
+ .planning/w04-wp05/findings.md                     |  Bin 0 -> 902 bytes
+ .planning/w04-wp05/green-intermediate.log          |  Bin 0 -> 6506 bytes
+ .planning/w04-wp05/green-request-intermediate.log  |  Bin 0 -> 1435 bytes
+ .planning/w04-wp05/green-request.log               |  Bin 0 -> 127 bytes
+ .planning/w04-wp05/green-status.log                |  Bin 0 -> 112 bytes
+ .planning/w04-wp05/handoff-amendment.json          |  Bin 0 -> 4955 bytes
+ .planning/w04-wp05/handoff.json                    |  Bin 0 -> 5239 bytes
+ .planning/w04-wp05/progress.md                     |  Bin 0 -> 882 bytes
+ .planning/w04-wp05/red.log                         |  Bin 0 -> 19691 bytes
+ .planning/w04-wp05/static.json                     |  Bin 0 -> 1750 bytes
+ .planning/w04-wp05/task_plan.md                    |  Bin 0 -> 505 bytes
+ skills/revenue-forecast-audit/SKILL.md             |    2 +
+ .../references/artifact-contract.md                |    6 +-
+ .../references/execution-artifact-contract.md      |   44 +
+ .../revenue-forecast-audit/references/executor.md  |    2 +
+ .../references/remediation.md                      |    4 +
+ .../references/review-analyst.md                   |    8 +-
+ .../references/review-fetch.md                     |    5 +
+ .../references/review-process.md                   |   25 +
+ .../references/review-storage.md                   |    6 +
+ .../references/rf-checkpoints.md                   |    3 +-
+ .../revenue-forecast-audit/references/workflow.md  |   11 +
+ .../scripts/audit_blob_store.py                    |  384 ++++
+ .../scripts/audit_contracts.py                     |  136 ++
+ skills/revenue-forecast-audit/scripts/audit_run.py |  261 ++-
+ .../scripts/authoring_provenance.py                |  315 ++++
+ .../scripts/document_status_join.py                |  394 +++++
+ .../scripts/execution_request.py                   |  409 +++++
+ .../scripts/review_protocol.py                     |  283 +++
+ tests/fixtures/p7_audit/fake_native_child.py       |   33 +
+ tests/test_authoring_provenance.py                 |  202 +++
+ tests/test_document_status_join.py                 |  251 +++
+ tests/test_review_protocol.py                      |  279 +++
+ tests/test_scope_request_binding.py                |  308 ++++
+ tests/test_w04_capture_runtime.py                  |  231 +++
+ tests/test_w04_request_capture.py                  |  255 +++
+ tests/test_w04_status_provenance.py                |   88 +
+ 123 files changed, 13886 insertions(+), 9 deletions(-)
+ create mode 100644 .planning/p7-audit-execution-review/HANDOFF.md
+ create mode 100644 .planning/p7-audit-execution-review/HANDOFF_FORMAT.md
+ create mode 100644 .planning/p7-audit-execution-review/IMPLEMENTATION_CARD.md
+ create mode 100644 .planning/p7-audit-execution-review/INTERFACES.md
+ create mode 100644 .planning/p7-audit-execution-review/cleanup_receipt.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/build_handoff.py
+ create mode 100644 .planning/p7-audit-execution-review/evidence/latest_e2e_attempt.txt
+ create mode 100644 .planning/p7-audit-execution-review/evidence/latest_final_attempt.txt
+ create mode 100644 .planning/p7-audit-execution-review/evidence/latest_green_attempt.txt
+ create mode 100644 .planning/p7-audit-execution-review/evidence/latest_m2_attempt.txt
+ create mode 100644 .planning/p7-audit-execution-review/evidence/latest_red_attempt.txt
+ create mode 100644 .planning/p7-audit-execution-review/evidence/latest_reviews_attempt.txt
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m1-red-20261010T215258Z-49765253/red.log
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m1-red-20261010T215328Z-c992dcb4/red.log
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m2-final-20261010T220955Z-32c4a1fc/green.log
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m2-final-20261010T220955Z-32c4a1fc/static.log
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m2-green-20261010T220402Z-369ede0a/green.log
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-e2e-20261010T221502Z-1172ac9c/e2e.log
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-e2e-20261010T221502Z-1172ac9c/e2e_driver.py
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-e2e-20261010T221838Z-cc073b16/e2e.log
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-e2e-20261010T221838Z-cc073b16/e2e_driver.py
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-final-20261010T234447Z-c1b05984/green.log
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/coverage_input_pass1.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/coverage_input_pass2.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/coverage_pass1.log
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/coverage_pass1/20261010T225522Z-13b7551f/attempt.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/coverage_pass1/20261010T225522Z-13b7551f/coverage.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/coverage_pass1/20261010T225541Z-9bec8745/attempt.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/coverage_pass1/20261010T225541Z-9bec8745/coverage.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/coverage_pass2.log
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/coverage_pass2/20261010T234345Z-d30ace3b/attempt.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/coverage_pass2/20261010T234345Z-d30ace3b/coverage.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/expert/dispositions.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/expert/expert.md
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/expert/root_causes_map.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/reviews/analyst.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/reviews/analyst.md
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/reviews/fetch.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/reviews/fetch.md
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/reviews/process.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/reviews/process.md
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/reviews/storage.json
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/reviews/storage.md
+ create mode 100644 .planning/p7-audit-execution-review/evidence/m3-reviews-20261010T221926Z-e640582d/seed_key.json
+ create mode 100644 .planning/p7-audit-execution-review/findings.md
+ create mode 100644 .planning/p7-audit-execution-review/handoff.example.json
+ create mode 100644 .planning/p7-audit-execution-review/handoff.json
+ create mode 100644 .planning/p7-audit-execution-review/handoff.schema.json
+ create mode 100644 .planning/p7-audit-execution-review/progress.md
+ create mode 100644 .planning/p7-audit-execution-review/samples/authoring_provenance/sample_io.json
+ create mode 100644 .planning/p7-audit-execution-review/samples/document_status_join/sample_io.json
+ create mode 100644 .planning/p7-audit-execution-review/samples/review_protocol/sample_io.json
+ create mode 100644 .planning/p7-audit-execution-review/samples/scope_request_binding/sample_io.json
+ create mode 100644 .planning/p7-audit-execution-review/synthetic_package/ABOUT.md
+ create mode 100644 .planning/p7-audit-execution-review/synthetic_package/deploy.json
+ create mode 100644 .planning/p7-audit-execution-review/synthetic_package/execution/facts.json
+ create mode 100644 .planning/p7-audit-execution-review/synthetic_package/execution/step_ledger.json
+ create mode 100644 .planning/p7-audit-execution-review/synthetic_package/raw/annual-2024.txt
+ create mode 100644 .planning/p7-audit-execution-review/synthetic_package/raw/call-2024h1.txt
+ create mode 100644 .planning/p7-audit-execution-review/synthetic_package/requests/template.json
+ create mode 100644 .planning/p7-audit-execution-review/synthetic_package/scope.json
+ create mode 100644 .planning/p7-audit-execution-review/synthetic_package/tool_inputs/authoring_input.json
+ create mode 100644 .planning/p7-audit-execution-review/synthetic_package/tool_inputs/join_input.json
+ create mode 100644 .planning/p7-audit-execution-review/task_plan.md
+ create mode 100644 .planning/w04-wp05/HANDOFF-AMENDMENT.md
+ create mode 100644 .planning/w04-wp05/HANDOFF.md
+ create mode 100644 .planning/w04-wp05/acceptance/ACCEPTANCE.md
+ create mode 100644 .planning/w04-wp05/acceptance/acceptance.json
+ create mode 100644 .planning/w04-wp05/acceptance/final-accepted-major.json
+ create mode 100644 .planning/w04-wp05/acceptance/final-accepted-major.log
+ create mode 100644 .planning/w04-wp05/acceptance/final-review.json
+ create mode 100644 .planning/w04-wp05/acceptance/final-review.md
+ create mode 100644 .planning/w04-wp05/amendment-before.json
+ create mode 100644 .planning/w04-wp05/amendment-before/00-authoring_provenance.py
+ create mode 100644 .planning/w04-wp05/amendment-before/01-audit_blob_store.py
+ create mode 100644 .planning/w04-wp05/amendment-before/02-execution_request.py
+ create mode 100644 .planning/w04-wp05/amendment-before/03-test_w04_status_provenance.py
+ create mode 100644 .planning/w04-wp05/amendment-before/04-test_w04_request_capture.py
+ create mode 100644 .planning/w04-wp05/amendment-diff.patch
+ create mode 100644 .planning/w04-wp05/amendment-green-request.log
+ create mode 100644 .planning/w04-wp05/amendment-green-status.log
+ create mode 100644 .planning/w04-wp05/amendment-red-request.log
+ create mode 100644 .planning/w04-wp05/amendment-red-status.log
+ create mode 100644 .planning/w04-wp05/amendment-static.json
+ create mode 100644 .planning/w04-wp05/diff.patch
+ create mode 100644 .planning/w04-wp05/findings.md
+ create mode 100644 .planning/w04-wp05/green-intermediate.log
+ create mode 100644 .planning/w04-wp05/green-request-intermediate.log
+ create mode 100644 .planning/w04-wp05/green-request.log
+ create mode 100644 .planning/w04-wp05/green-status.log
+ create mode 100644 .planning/w04-wp05/handoff-amendment.json
+ create mode 100644 .planning/w04-wp05/handoff.json
+ create mode 100644 .planning/w04-wp05/progress.md
+ create mode 100644 .planning/w04-wp05/red.log
+ create mode 100644 .planning/w04-wp05/static.json
+ create mode 100644 .planning/w04-wp05/task_plan.md
+ create mode 100644 skills/revenue-forecast-audit/references/execution-artifact-contract.md
+ create mode 100644 skills/revenue-forecast-audit/scripts/audit_blob_store.py
+ create mode 100644 skills/revenue-forecast-audit/scripts/audit_contracts.py
+ create mode 100644 skills/revenue-forecast-audit/scripts/authoring_provenance.py
+ create mode 100644 skills/revenue-forecast-audit/scripts/document_status_join.py
+ create mode 100644 skills/revenue-forecast-audit/scripts/execution_request.py
+ create mode 100644 skills/revenue-forecast-audit/scripts/review_protocol.py
+ create mode 100644 tests/fixtures/p7_audit/fake_native_child.py
+ create mode 100644 tests/test_authoring_provenance.py
+ create mode 100644 tests/test_document_status_join.py
+ create mode 100644 tests/test_review_protocol.py
+ create mode 100644 tests/test_scope_request_binding.py
+ create mode 100644 tests/test_w04_capture_runtime.py
+ create mode 100644 tests/test_w04_request_capture.py
+ create mode 100644 tests/test_w04_status_provenance.py

@@ -16,3 +16,10 @@ SIDECAR_KIND_MAP = {
 }
 SOURCE_FACT_KINDS = {kind: source_type.value for kind, (source_type, _) in SIDECAR_KIND_MAP.items()}
 SOURCE_FACT_KINDS["other"] = SourceType.OTHER.value
+
+# These source families describe reporting periods. Presentations, research,
+# announcements and other nonperiodic originals do not acquire a fictitious FY.
+PERIODIC_DOCUMENT_KINDS = frozenset({
+    "annual_report", "semi_annual_report", "quarterly_report",
+    "regulatory_filing", "investor_call_transcript",
+})

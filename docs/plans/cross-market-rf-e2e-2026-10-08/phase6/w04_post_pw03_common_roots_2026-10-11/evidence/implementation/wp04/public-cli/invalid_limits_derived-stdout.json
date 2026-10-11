@@ -1,0 +1,26 @@
+{
+  "schema_version": "2.0",
+  "status": "request_error",
+  "request_period": {
+    "mode": "latest_as_of",
+    "fiscal_year": null,
+    "fiscal_period": null,
+    "as_of_date": "2026-10-08"
+  },
+  "filing": {
+    "status": "request_error",
+    "reason": "invalid acquisition_limits.max_bytes",
+    "retryable": false,
+    "request_diagnostic": {
+      "schema_version": "filing-request-diagnostic/1",
+      "reason": "acquisition_limits_invalid",
+      "field_path": "acquisition_limits.max_bytes"
+    }
+  },
+  "transcript": {
+    "status": "not_requested",
+    "retryable": false
+  },
+  "calls": 0,
+  "downloads": 0
+}

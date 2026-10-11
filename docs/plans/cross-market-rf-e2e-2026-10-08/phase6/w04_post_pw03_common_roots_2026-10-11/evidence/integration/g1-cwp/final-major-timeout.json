@@ -1,0 +1,29 @@
+{
+  "schema_version": "w04-cwp-extra-manual-suite-timeout/1",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit",
+    "tests/contract",
+    "-q",
+    "--tb=short"
+  ],
+  "timeout_seconds": 360,
+  "status": "TIMEOUT_NOT_PASS",
+  "stdout_saved": false,
+  "utc_and_pid_saved": false,
+  "driver_failure": "subprocess.run TimeoutExpired occurred before planned log/receipt write",
+  "actual_tool_chunks": {
+    "launch": "9f1c4d",
+    "exit": "ab1306",
+    "session_id": 81595
+  },
+  "root_cause_observed": "wrong wider selection:5627=3103unit+2524contract, ordinary push scope expected3234=3103unit+131unique nonunit; 2438extra manualcontracts and missing45selectedintegration",
+  "no_deadlock_evidence": true,
+  "recovery": "Use existing normal push CI-scope gate. Future ROOT publication commands stream stdout directly to exclusive files and write timeout receipt in exception path. No weaker assertions, test deletion or hook bypass.",
+  "new_paid_calls": 0
+}

@@ -1,0 +1,204 @@
+F...F.FF......FFFF                                                       [100%]
+================================== FAILURES ===================================
+_____ test_optional_declared_language_is_preserved_and_old_four_keys_read _____
+
+    def test_optional_declared_language_is_preserved_and_old_four_keys_read():
+        request, body, raw = _valid()
+        assert "declared_language" not in validate_narrative_response(request, body, raw).to_dict()["source_metadata"]
+        bundle, receipt = json.loads(body), json.loads(raw)
+        bundle["source_metadata"]["declared_language"] = "en-US"
+        body, raw = _resign(request, bundle, receipt)
+>       assert validate_narrative_response(request, body, raw).to_dict()["source_metadata"]["declared_language"] == "en-US"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_w04_public_consumer.py:76: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\company_wiki_narrative_contracts.py:515: in validate_narrative_response
+    return _validated_response(request, body, receipt_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:500: in _validated_response
+    bundle = _bundle(body, request, receipt, manifest)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:435: in _bundle
+    _bundle_contents(bundle, receipt, manifest)
+scripts\company_wiki_narrative_contracts.py:440: in _bundle_contents
+    metadata = _bundle_metadata(bundle, manifest)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:453: in _bundle_metadata
+    metadata = _exact(bundle["source_metadata"], {"source_class", "title", "document_kind", "language"},
+scripts\company_wiki_narrative_contracts.py:89: in _exact
+    _require(isinstance(value, dict) and set(value) == fields, reason)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, reason = 'invalid_source_metadata'
+
+    def _require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise NarrativeTransportError("blocked", reason)
+E           company_wiki_narrative_contracts.NarrativeTransportError: blocked: invalid_source_metadata
+
+scripts\company_wiki_narrative_contracts.py:70: NarrativeTransportError
+_______ test_metadata_types_family_and_unknown_fields_refused[title-0] ________
+
+key = 'title', value = 0
+
+    @pytest.mark.parametrize("key,value", [("declared_language", "zh-Hant"), ("declared_language", True),
+        ("declared_language", "fr-FR"), ("title", 0), ("unexpected", "value")])
+    def test_metadata_types_family_and_unknown_fields_refused(key, value):
+        request, body, raw = _valid()
+        bundle, receipt = json.loads(body), json.loads(raw)
+        bundle["source_metadata"][key] = value
+        body, raw = _resign(request, bundle, receipt)
+>       with pytest.raises(NarrativeTransportError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE NarrativeTransportError
+
+tests\test_w04_public_consumer.py:86: Failed
+_ test_compact_projected_read_preserves_all_parent_refs_and_original_pointer __
+
+    def test_compact_projected_read_preserves_all_parent_refs_and_original_pointer():
+        request, body, receipt = projected_wire()
+>       context = validate_narrative_response(request, body, receipt).to_dict()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_w04_public_consumer.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\company_wiki_narrative_contracts.py:515: in validate_narrative_response
+    return _validated_response(request, body, receipt_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:497: in _validated_response
+    request = validate_narrative_request(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:186: in validate_narrative_request
+    request = _exact(value, {"schema_version", "narrative_ref", "as_of_date", "expected_source"},
+scripts\company_wiki_narrative_contracts.py:89: in _exact
+    _require(isinstance(value, dict) and set(value) == fields, reason)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, reason = 'invalid_read_request'
+
+    def _require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise NarrativeTransportError("blocked", reason)
+E           company_wiki_narrative_contracts.NarrativeTransportError: blocked: invalid_read_request
+
+scripts\company_wiki_narrative_contracts.py:70: NarrativeTransportError
+______ test_compact_projected_reference_response_and_request_are_bounded ______
+
+    def test_compact_projected_reference_response_and_request_are_bounded():
+        request, _, _ = projected_wire()
+        ref = request["narrative_ref"]
+        lookup = {"schema_version": "narrative-reference-request/3", "subject_ref": ref["subject_ref"],
+                  "generation_sha256": ref["generation_sha256"]}
+        raw = canonical_bytes({"schema_version": "narrative-read-receipt/3", "status": "metadata_only", "narrative_ref": ref}) + b"\n"
+>       assert validate_reference_response(lookup, canonical_bytes(ref) + b"\n", raw) == ref
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_w04_public_consumer.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\company_wiki_narrative_contracts.py:521: in validate_reference_response
+    request = validate_reference_request(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:199: in validate_reference_request
+    request = _exact(value, {"schema_version", "source_ref"}, "invalid_reference_request")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\company_wiki_narrative_contracts.py:89: in _exact
+    _require(isinstance(value, dict) and set(value) == fields, reason)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, reason = 'invalid_reference_request'
+
+    def _require(condition: bool, reason: str) -> None:
+        if not condition:
+>           raise NarrativeTransportError("blocked", reason)
+E           company_wiki_narrative_contracts.NarrativeTransportError: blocked: invalid_reference_request
+
+scripts\company_wiki_narrative_contracts.py:70: NarrativeTransportError
+____ test_ff_typed_request_sibling_survives_without_changing_six_key_cause ____
+
+    def test_ff_typed_request_sibling_survives_without_changing_six_key_cause():
+        cause = {"schema_version": "filing-upstream-cause/1", "operation": "resolve", "code": "unknown",
+            "provider_started": False, "usage_complete": None, "retry_scope": "none"}
+        diagnostic = {"schema_version": "filing-request-diagnostic/1", "reason": "exact_requires_fiscal_year", "field_path": "fiscal_year"}
+        seen = failure_observation({"upstream_cause": cause, "request_diagnostic": diagnostic})
+        assert seen["upstream_cause"] == cause
+>       assert seen["request_diagnostic"] == diagnostic
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'request_diagnostic'
+
+tests\test_w04_public_consumer.py:138: KeyError
+_ test_snapshot_header_uses_actual_native_schema_and_keeps_registry_binding[3.7] _
+
+schema = '3.7'
+tmp_path = WindowsPath('C:/tmp/w04rf-red-20261011/test_snapshot_header_uses_actu0')
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    def test_snapshot_header_uses_actual_native_schema_and_keeps_registry_binding(schema, tmp_path):
+        data = forecast_document()
+        data["schema_version"] = schema
+        snapshot = create_snapshot(data, "w04-native-" + schema)
+        assert snapshot["input_document"]["schema_version"] == schema
+        assert snapshot["forecast_result"]["schema_version"] == schema
+        assert snapshot["forecast_schema_version"] == schema
+        validate_snapshot(snapshot)
+        entry = next(e for e in _read_entries() if e["artifact_id"] == snapshot["snapshot_id"])
+        assert entry["input_sha256"] == snapshot["input_sha256"]
+        output = tmp_path / "snapshot.json"
+        write_new_json(output, snapshot)
+        encoded = output.read_bytes()
+        assert json.loads(encoded) == snapshot
+>       assert len(encoded.splitlines()) == 1
+E       assert 3812 == 1
+E        +  where 3812 = len([b'{', b'  "company_name": "Test Co",', b'  "as_of_date": "2026-07-12",', b'  "forecast_version": "w04-native-3.7",', ...da7919dc66",', b'  "forecast_result_sha256": "86aaeb7ced499e2bc863430480b8cf49c8afc8137e9e4990cd8da25bf77eb6a9",', ...])
+E        +    where [b'{', b'  "company_name": "Test Co",', b'  "as_of_date": "2026-07-12",', b'  "forecast_version": "w04-native-3.7",', ...da7919dc66",', b'  "forecast_result_sha256": "86aaeb7ced499e2bc863430480b8cf49c8afc8137e9e4990cd8da25bf77eb6a9",', ...] = <built-in method splitlines of bytes object at 0x000001AC552A2F20>()
+E        +      where <built-in method splitlines of bytes object at 0x000001AC552A2F20> = b'{\r\n  "company_name": "Test Co",\r\n  "as_of_date": "2026-07-12",\r\n  "forecast_version": "w04-native-3.7",\r\n  "..."\r\n    },\r\n    "result_sha256": "12f6a3c5763a389e7e05fe333033116de6074665b0a94c8883aa7c65692717d2"\r\n  }\r\n}\r\n'.splitlines
+
+tests\test_w04_snapshot_delivery.py:31: AssertionError
+_ test_snapshot_header_uses_actual_native_schema_and_keeps_registry_binding[3.8] _
+
+schema = '3.8'
+tmp_path = WindowsPath('C:/tmp/w04rf-red-20261011/test_snapshot_header_uses_actu1')
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    def test_snapshot_header_uses_actual_native_schema_and_keeps_registry_binding(schema, tmp_path):
+        data = forecast_document()
+        data["schema_version"] = schema
+        snapshot = create_snapshot(data, "w04-native-" + schema)
+        assert snapshot["input_document"]["schema_version"] == schema
+        assert snapshot["forecast_result"]["schema_version"] == schema
+>       assert snapshot["forecast_schema_version"] == schema
+E       AssertionError: assert '3.7' == '3.8'
+E         
+E         - 3.8
+E         + 3.7
+
+tests\test_w04_snapshot_delivery.py:23: AssertionError
+_ test_snapshot_header_uses_actual_native_schema_and_keeps_registry_binding[3.9] _
+
+schema = '3.9'
+tmp_path = WindowsPath('C:/tmp/w04rf-red-20261011/test_snapshot_header_uses_actu2')
+
+    @pytest.mark.parametrize("schema", ["3.7", "3.8", "3.9"])
+    def test_snapshot_header_uses_actual_native_schema_and_keeps_registry_binding(schema, tmp_path):
+        data = forecast_document()
+        data["schema_version"] = schema
+        snapshot = create_snapshot(data, "w04-native-" + schema)
+        assert snapshot["input_document"]["schema_version"] == schema
+        assert snapshot["forecast_result"]["schema_version"] == schema
+>       assert snapshot["forecast_schema_version"] == schema
+E       AssertionError: assert '3.7' == '3.9'
+E         
+E         - 3.9
+E         + 3.7
+
+tests\test_w04_snapshot_delivery.py:23: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_w04_public_consumer.py::test_optional_declared_language_is_preserved_and_old_four_keys_read
+FAILED tests/test_w04_public_consumer.py::test_metadata_types_family_and_unknown_fields_refused[title-0]
+FAILED tests/test_w04_public_consumer.py::test_compact_projected_read_preserves_all_parent_refs_and_original_pointer
+FAILED tests/test_w04_public_consumer.py::test_compact_projected_reference_response_and_request_are_bounded
+FAILED tests/test_w04_public_consumer.py::test_ff_typed_request_sibling_survives_without_changing_six_key_cause
+FAILED tests/test_w04_snapshot_delivery.py::test_snapshot_header_uses_actual_native_schema_and_keeps_registry_binding[3.7]
+FAILED tests/test_w04_snapshot_delivery.py::test_snapshot_header_uses_actual_native_schema_and_keeps_registry_binding[3.8]
+FAILED tests/test_w04_snapshot_delivery.py::test_snapshot_header_uses_actual_native_schema_and_keeps_registry_binding[3.9]
+8 failed, 10 passed in 1.07s

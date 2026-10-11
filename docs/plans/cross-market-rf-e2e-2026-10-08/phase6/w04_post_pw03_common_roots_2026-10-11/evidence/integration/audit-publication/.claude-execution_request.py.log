@@ -1,0 +1,16 @@
+usage: execution_request.py [-h] {build} ...
+
+Bind frozen scope, purpose and native request template into a real request.
+Contract A. The binding record is an audit-side request index, not an
+authorization file: it states the request boundary (profile, byte/time/token/
+cost caps, config fingerprints) and never selects a provider or model. Native
+request bytes stay exactly the supplied business fields; effective caps are
+the smaller of scope and deploy, and any attempted profile or cap
+amplification is refused with a specific diagnostic instead of being guessed
+or silently clamped.
+
+positional arguments:
+  {build}
+
+options:
+  -h, --help  show this help message and exit

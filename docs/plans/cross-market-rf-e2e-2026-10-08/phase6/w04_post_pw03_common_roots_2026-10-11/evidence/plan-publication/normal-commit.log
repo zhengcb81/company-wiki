@@ -1,0 +1,45 @@
+[codex/main-auto-official-json-20261010 3d540797] docs: accept W04 common-root implementation packages
+ 45 files changed, 83 insertions(+), 8 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/closed-review-publication/canonical-ff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/closed-review-publication/normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/closed-review-publication/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/closed-review-publication/normal-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/closed-review-publication/normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/root-w04-support-dispatch.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/root-w04-support-intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/root-worktree-baseline-preflight-error.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/root-worktree-baseline-reuse.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/w04-config-readonly/handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/ROOT_EXECUTION_OVERLAY.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/coverage.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/event_manifest_checks.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/expert_tool_errors.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/hk_raw2_retention_plan.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/input_read_manifest.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/native_contract_reads.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/plan_validation.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/root-implementation-branches.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/root-plan-acceptance.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/root-plan-intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/root-plan-interface-review/REVIEW.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/evidence/root-plan-interface-review/review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/findings.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/handoff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/implementation_details.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/progress.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/root_causes.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/task_plan.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/test_matrix.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/OWNER_MATRIX.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP01.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP02.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP03.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP04.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP05.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP06.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w04_post_pw03_common_roots_2026-10-11/work_packages/WP07.md
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped

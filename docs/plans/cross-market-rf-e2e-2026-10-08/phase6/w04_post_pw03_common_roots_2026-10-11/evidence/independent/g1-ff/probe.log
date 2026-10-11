@@ -1,0 +1,94 @@
+PASS evidence SHA git-status.txt
+PASS evidence SHA green.json
+PASS evidence SHA green.log
+PASS evidence SHA implementation.diff
+PASS evidence SHA public-cli/exact_original-request.json
+PASS evidence SHA public-cli/exact_original-rf-consumer.json
+PASS evidence SHA public-cli/exact_original-stderr.txt
+PASS evidence SHA public-cli/exact_original-stdout.json
+PASS evidence SHA public-cli/integration-receipt.json
+PASS evidence SHA public-cli/invalid_limits_derived-request.json
+PASS evidence SHA public-cli/invalid_limits_derived-rf-consumer.json
+PASS evidence SHA public-cli/invalid_limits_derived-stderr.txt
+PASS evidence SHA public-cli/invalid_limits_derived-stdout.json
+PASS evidence SHA public-cli/latest_limits_original-request.json
+PASS evidence SHA public-cli/latest_limits_original-rf-consumer.json
+PASS evidence SHA public-cli/latest_limits_original-stderr.txt
+PASS evidence SHA public-cli/latest_limits_original-stdout.json
+PASS evidence SHA public-cli/latest_year_derived-request.json
+PASS evidence SHA public-cli/latest_year_derived-rf-consumer.json
+PASS evidence SHA public-cli/latest_year_derived-stderr.txt
+PASS evidence SHA public-cli/latest_year_derived-stdout.json
+PASS evidence SHA pytest-cleanup-after.json
+PASS evidence SHA pytest-cleanup-before.json
+PASS evidence SHA red.json
+PASS evidence SHA red.log
+PASS evidence SHA static.json
+PASS evidence SHA static.log
+PASS product SHA scripts/filing_contracts.py
+PASS product SHA scripts/fetch_filing.py
+PASS product SHA scripts/ff_provider_cause.py
+PASS product SHA scripts/ff_v2_envelope.py
+PASS product SHA tests/test_w04_failure_observation.py
+PASS serializer non-error functions unchanged from base AST
+PASS legacy envelope encoded bytes unchanged case 0
+PASS legacy envelope encoded bytes unchanged case 1
+PASS legacy envelope encoded bytes unchanged case 2
+PASS legacy envelope encoded bytes unchanged case 3
+PASS legacy envelope encoded bytes unchanged case 4
+PASS current envelope parsed
+PASS FF/RF schema matches
+PASS FF/RF closed reason-path vocabulary matches
+PASS consumer copies valid exact_requires_fiscal_year/fiscal_year
+PASS extra body cannot enter sibling exact_requires_fiscal_year/fiscal_year
+PASS consumer copies valid latest_forbids_fiscal_year/fiscal_year
+PASS extra body cannot enter sibling latest_forbids_fiscal_year/fiscal_year
+PASS consumer copies valid latest_reuse_requires_acquisition_limits/acquisition_limits
+PASS extra body cannot enter sibling latest_reuse_requires_acquisition_limits/acquisition_limits
+PASS consumer copies valid acquisition_limits_invalid/acquisition_limits
+PASS extra body cannot enter sibling acquisition_limits_invalid/acquisition_limits
+PASS consumer copies valid acquisition_limits_invalid/acquisition_limits.timeout_seconds
+PASS extra body cannot enter sibling acquisition_limits_invalid/acquisition_limits.timeout_seconds
+PASS consumer copies valid acquisition_limits_invalid/acquisition_limits.max_cost_usd
+PASS extra body cannot enter sibling acquisition_limits_invalid/acquisition_limits.max_cost_usd
+PASS consumer copies valid acquisition_limits_invalid/acquisition_limits.max_bytes
+PASS extra body cannot enter sibling acquisition_limits_invalid/acquisition_limits.max_bytes
+PASS bad diagnostic dropped by producer and consumer 0
+PASS serializer drops invalid sibling 0
+PASS bad diagnostic dropped by producer and consumer 1
+PASS serializer drops invalid sibling 1
+PASS bad diagnostic dropped by producer and consumer 2
+PASS serializer drops invalid sibling 2
+PASS six legacy cause keys unchanged
+PASS unknown provider and usage not fabricated
+PASS request path cannot expand old cause
+PASS legacy schema 1.1 null year compatibility preserved
+PASS CLI typed early rejection nonfinite_time
+PASS CLI zero operation counts and no retry nonfinite_time
+PASS CLI exact sibling or companion absence nonfinite_time
+PASS CLI does not invent invoice/source/cause nonfinite_time
+PASS RF real subprocess error preserves failure nonfinite_time
+PASS RF sibling and operation counts nonfinite_time
+PASS RF legacy unknown remains unknown nonfinite_time
+PASS CLI typed early rejection noncanonical_money
+PASS CLI zero operation counts and no retry noncanonical_money
+PASS CLI exact sibling or companion absence noncanonical_money
+PASS CLI does not invent invoice/source/cause noncanonical_money
+PASS RF real subprocess error preserves failure noncanonical_money
+PASS RF sibling and operation counts noncanonical_money
+PASS RF legacy unknown remains unknown noncanonical_money
+PASS CLI typed early rejection companion_invalid
+PASS CLI zero operation counts and no retry companion_invalid
+PASS CLI exact sibling or companion absence companion_invalid
+PASS CLI does not invent invoice/source/cause companion_invalid
+PASS RF real subprocess error preserves failure companion_invalid
+PASS RF sibling and operation counts companion_invalid
+PASS RF legacy unknown remains unknown companion_invalid
+PASS owned short TEMP restored absent
+PASS sealed original JSON semantic replay exact
+PASS sealed original JSON semantic replay latest_limits
+PASS sealed original unchanged exact
+PASS sealed original unchanged latest_limits
+PASS sealed original unchanged hk_base
+PASS sealed original unchanged us_sealed_validation
+PASS reviewed FF/RF source bytes unchanged

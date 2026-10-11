@@ -17,6 +17,7 @@ from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
+from .document_kinds import PERIODIC_DOCUMENT_KINDS
 from .policy_2x import export_policy_2x
 from .qualification import qualify_source
 from .prompt_injection import (
@@ -581,7 +582,7 @@ class SourceVersionReader:
             "language": manifest["language"],
             "capture_ready": bool(
                 capture_complete and https_url and manifest["published_date"]
-                and period_known
+                and (period_known or manifest["document_kind"] not in PERIODIC_DOCUMENT_KINDS)
             ),
             "prompt_injection_status": review_status,
             "capture_provenance": "indexed_location_manifest" if capture else None,

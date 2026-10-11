@@ -1,0 +1,10 @@
+test_builder_digest_mismatch_rejects_the_frozen_bytes (test_w04_capture_runtime.RootCaptureRuntimeTests.test_builder_digest_mismatch_rejects_the_frozen_bytes) ... ok
+test_capture_mismatch_does_not_start_child (test_w04_capture_runtime.RootCaptureRuntimeTests.test_capture_mismatch_does_not_start_child) ... ok
+test_equal_builder_digest_records_actual_frozen_input (test_w04_capture_runtime.RootCaptureRuntimeTests.test_equal_builder_digest_records_actual_frozen_input) ... ok
+test_expired_stage_deadline_does_not_start_child (test_w04_capture_runtime.RootCaptureRuntimeTests.test_expired_stage_deadline_does_not_start_child) ... ok
+test_legacy_defaults_keep_private_copy_and_frozen_history (test_w04_capture_runtime.RootCaptureRuntimeTests.test_legacy_defaults_keep_private_copy_and_frozen_history) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.305s
+
+OK

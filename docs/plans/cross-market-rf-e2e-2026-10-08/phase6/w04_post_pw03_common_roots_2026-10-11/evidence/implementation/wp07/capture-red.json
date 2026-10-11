@@ -1,0 +1,20 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_w04_capture_runtime.py",
+    "-v"
+  ],
+  "exit_code": 1,
+  "log_sha256": "a96816b62e64e197e079947c998cd6b9e3244e1d0ef29599963d409515e932f8",
+  "provider_calls": 0,
+  "observed_at": "2026-10-11T04:13:22.755887+00:00"
+}

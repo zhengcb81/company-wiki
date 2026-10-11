@@ -1,0 +1,13 @@
+[
+  {
+    "root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4p1-_jkolj3p",
+    "status": "removed_after_exact_path_and_sha_verification",
+    "files": [
+      {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w4p1-_jkolj3p\\CN-688012\\catalog\\catalog.sqlite3",
+        "sha256": "eafafb64dfcb0ca7d7e55faf1ed6ccd6817bf03fdd0df430134714affa40a29e",
+        "bytes": 2301952
+      }
+    ]
+  }
+]

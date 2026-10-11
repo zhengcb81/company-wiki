@@ -1,0 +1,35 @@
+{
+  "added_consumer_kinds": [
+    {
+      "document_kind": "broker_research",
+      "existing_producer_source_family": "BROKER_RESEARCH",
+      "revenue_source_type": "specialist_research"
+    },
+    {
+      "document_kind": "prospectus",
+      "existing_producer_source_family": "PROSPECTUS",
+      "revenue_source_type": "regulatory_filing"
+    },
+    {
+      "document_kind": "equity_offering_prospectus",
+      "existing_producer_source_family": "PROSPECTUS",
+      "revenue_source_type": "regulatory_filing"
+    },
+    {
+      "document_kind": "convertible_bond_prospectus",
+      "existing_producer_source_family": "PROSPECTUS",
+      "revenue_source_type": "regulatory_filing"
+    },
+    {
+      "document_kind": "news",
+      "existing_producer_source_family": "ORIGINAL_NEWS",
+      "revenue_source_type": "reputable_news"
+    }
+  ],
+  "all_added_kinds_registered_in_actual_producer": true,
+  "consumer_sha256": "ddb6b7224e1cf5141c04f6395f86390bbb898a52739de9763da6917e0dcfdab2",
+  "producer_path": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\src\\company_wiki\\source_catalog\\document_kinds.py",
+  "producer_sha256": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+  "schema_version": "w04-g1-source-kind-compatibility/1",
+  "source_writes": 0
+}

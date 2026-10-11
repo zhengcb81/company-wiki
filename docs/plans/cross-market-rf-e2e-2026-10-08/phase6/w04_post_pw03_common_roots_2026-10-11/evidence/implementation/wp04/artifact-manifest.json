@@ -1,0 +1,170 @@
+{
+  "schema_version": "w04-evidence-manifest/1",
+  "evidence_root": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w04_post_pw03_common_roots_2026-10-11\\evidence\\implementation\\wp04",
+  "files": [
+    {
+      "path": "git-status.txt",
+      "sha256": "f7c908da9d594e4fd70cb51aefd704bf57029bf81ecfbfdfa3c4923805705aa7",
+      "byte_size": 183
+    },
+    {
+      "path": "green.json",
+      "sha256": "2dd78d775b02f7c14e37d58bbda34cd8d512d4588fdb68f42786e29529d5f922",
+      "byte_size": 1862
+    },
+    {
+      "path": "green.log",
+      "sha256": "32e370b1d5f47e2f9fec5d3ba2badbb72b604bbe460121c65d1329de9a473ebd",
+      "byte_size": 264
+    },
+    {
+      "path": "implementation.diff",
+      "sha256": "c1b35ab2a2bfc367804ff73bc30718f84896d560f7641d4214296f36414ec1a3",
+      "byte_size": 19285
+    },
+    {
+      "path": "public-cli/exact_original-request.json",
+      "sha256": "8641d64c47c579740b50cddfe356dbf2d2661414d2c7badd678c860dc4678f41",
+      "byte_size": 292
+    },
+    {
+      "path": "public-cli/exact_original-rf-consumer.json",
+      "sha256": "cbc249bf28ad850f72a668c306b793f0be24c52f08eecacf948f7822c3b51bec",
+      "byte_size": 422
+    },
+    {
+      "path": "public-cli/exact_original-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "public-cli/exact_original-stdout.json",
+      "sha256": "72103c1bff9c2f04cc393f233f05249963e48fcfaa02e38acb654710cad4df88",
+      "byte_size": 689
+    },
+    {
+      "path": "public-cli/integration-receipt.json",
+      "sha256": "dd2fd2508df7541851816c1106123722d145b31f94a4ccd210b3ac3267fdec44",
+      "byte_size": 7837
+    },
+    {
+      "path": "public-cli/invalid_limits_derived-request.json",
+      "sha256": "d923ca67a853d5ff5ce9b2cceb90326ead252f412ef92a740801a41b3eb6c615",
+      "byte_size": 310
+    },
+    {
+      "path": "public-cli/invalid_limits_derived-rf-consumer.json",
+      "sha256": "39cbe9ca9a5d2e350f2c4a2fabf04487c199cb32578f2be3dfd6d4a677977b3d",
+      "byte_size": 439
+    },
+    {
+      "path": "public-cli/invalid_limits_derived-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "public-cli/invalid_limits_derived-stdout.json",
+      "sha256": "4c814a8a6e1e49e5162b4c99b8f02b1c536cae2789a868b5bae89f76d33caf34",
+      "byte_size": 646
+    },
+    {
+      "path": "public-cli/latest_limits_original-request.json",
+      "sha256": "d0409a35f691bd9e3648b3ea96fe17ebfe017005d4e4e5d3a6a09b250a1c31d9",
+      "byte_size": 299
+    },
+    {
+      "path": "public-cli/latest_limits_original-rf-consumer.json",
+      "sha256": "88af82f3e64ffddd16902948ce3b0772f46ff91218c615bd9c34493f4939ed53",
+      "byte_size": 443
+    },
+    {
+      "path": "public-cli/latest_limits_original-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "public-cli/latest_limits_original-stdout.json",
+      "sha256": "675a5284ebd39d7581c8a126eb958eb3b71572654e507ba95bac9a9eb1e17de2",
+      "byte_size": 697
+    },
+    {
+      "path": "public-cli/latest_year_derived-request.json",
+      "sha256": "d3c44bb15c6d679aebcebd0b22fb839578e08eaf795ce80384b6315c976e9124",
+      "byte_size": 337
+    },
+    {
+      "path": "public-cli/latest_year_derived-rf-consumer.json",
+      "sha256": "f7818d1970500a3f3edcb088749b3c0e8c5c6d82e006dc82fd8e7343a1b93eb0",
+      "byte_size": 422
+    },
+    {
+      "path": "public-cli/latest_year_derived-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_size": 0
+    },
+    {
+      "path": "public-cli/latest_year_derived-stdout.json",
+      "sha256": "66768389cb71e48d74d3b44a2c96399bd581a8f48fa10cf9c1a48c510c06de60",
+      "byte_size": 692
+    },
+    {
+      "path": "pytest-cleanup-after.json",
+      "sha256": "b4bf170672dd18026fe1f6e61f6b0fc09b5946f973daeaeab3f136a2a3c4a1dd",
+      "byte_size": 341
+    },
+    {
+      "path": "pytest-cleanup-before.json",
+      "sha256": "ee14bf07f957eca7c17b6c7feba8feaf9b7220e321ed8b396d686ed238f958d4",
+      "byte_size": 7284
+    },
+    {
+      "path": "red.json",
+      "sha256": "1007f28e7718ae6f7e2df447409cc9f68ec5040f6f78c38c49fa511e1e0d8150",
+      "byte_size": 1337
+    },
+    {
+      "path": "red.log",
+      "sha256": "dd5b4e0eeae45415d798ad19623942ddc15184d0849bd89867385039846b712d",
+      "byte_size": 31984
+    },
+    {
+      "path": "static.json",
+      "sha256": "5d041da8660d0f1fe772991e2e5183365793c5a54c58202445f6793bd255893f",
+      "byte_size": 857
+    },
+    {
+      "path": "static.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "byte_size": 19
+    }
+  ],
+  "product_files": [
+    {
+      "path": "scripts/filing_contracts.py",
+      "sha256": "18745e3fb395c398e7b00530b5228c8ccdce0bdf6fc876c609d71cd97e3b3245",
+      "byte_size": 32231
+    },
+    {
+      "path": "scripts/fetch_filing.py",
+      "sha256": "ccdb9bff89b35dce0066df2804a716649213762017e3992f9a0c81896233f331",
+      "byte_size": 75954
+    },
+    {
+      "path": "scripts/ff_provider_cause.py",
+      "sha256": "351c7e3c6a917a4339a6a744eb009ca1ac8bef2449d054e4752ce618c320922a",
+      "byte_size": 20791
+    },
+    {
+      "path": "scripts/ff_v2_envelope.py",
+      "sha256": "6cade6e377fc01e680a88c2911e72099d095bada110b28e3c255d211eef89e34",
+      "byte_size": 8635
+    },
+    {
+      "path": "tests/test_w04_failure_observation.py",
+      "sha256": "4dc0c42bde27162faba12774dd6f0b8476561e7c57474af4730d1ef033d6c521",
+      "byte_size": 7786
+    }
+  ],
+  "byte_count": 76941,
+  "whole_lake_scan": false
+}

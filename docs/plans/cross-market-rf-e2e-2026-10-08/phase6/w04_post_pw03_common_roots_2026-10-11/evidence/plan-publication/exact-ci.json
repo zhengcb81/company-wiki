@@ -1,0 +1,12 @@
+{
+  "id": 38110440211,
+  "name": "CI",
+  "head_sha": "3d540797fd6e373bcae1409cc04e7a4ea0afc1c2",
+  "status": "completed",
+  "conclusion": "success",
+  "created_at": "2026-10-11T04:04:56Z",
+  "updated_at": "2026-10-11T04:07:11Z",
+  "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38110440211",
+  "observed_at": "2026-10-11T04:24:27.138451+00:00",
+  "method": "bounded public GitHub API exact head_sha"
+}

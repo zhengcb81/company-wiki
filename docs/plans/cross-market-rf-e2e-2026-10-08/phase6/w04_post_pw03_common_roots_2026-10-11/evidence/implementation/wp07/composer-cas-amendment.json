@@ -1,0 +1,29 @@
+{
+  "owner": "ROOT accepted stopped-WP05 specific composer amendment",
+  "parent_handoff_sha256": "cf4aac1a5da450a69c7870813a8ef79f4ec8cde1d83196ac51f96f20620d5e7b",
+  "source_path": "skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+  "source_before_sha256": "de806ddeb70e5c751cd8caf1a747651ff6ce004805e9cbd5980ba4e77fb3294a",
+  "source_after_sha256": "41454b5b7e2d3c61a0ebcbf0ba56fa4c48884214522b5a7595e243f0bce34817",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_w04_capture_runtime.py",
+    "-v"
+  ],
+  "red_exit_code": 1,
+  "red_log_sha256": "438d07db9a1551e2c34a572a59c618d5dd05cfe701c07e821d436381ee3ceb77",
+  "green_exit_code": 0,
+  "green_log_sha256": "4774c47ddc84e8f2f230f0fb36aa8db85b5cb354f8dc064ccc0cf07a42fb64e2",
+  "provider_calls": 0,
+  "old_handoff_rewritten": false,
+  "prior_major_141_version_unchanged_when_run": true,
+  "preflight_guard_error": "Two guarded patch attempts stopped before source write because LF needle did not match raw CRLF source (observed count0). Correct patch preserves all other raw bytes and scopes exact composer function."
+}

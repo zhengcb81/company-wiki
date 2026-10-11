@@ -21,7 +21,7 @@ from .models import canonical_json
 from .narrative_contracts import BUNDLE_MAX_BYTES, NarrativeBundle
 from .narrative_transport import NarrativeTransportRead, NarrativeTransportReader
 from .narrative_transport_contracts import (
-    MAX_RECEIPT_BYTES, NarrativeReadRequest, NarrativeTransportError,
+    MAX_RECEIPT_BYTES, NARRATIVE_COMPACT_REF_SCHEMA, NarrativeReadRequest, NarrativeTransportError,
 )
 
 
@@ -104,8 +104,9 @@ class NarrativeEvidenceViewReader:
         bundle = NarrativeBundle.from_dict(json.loads(verified.data))
         items = self._items(bundle, query)
         projected = bundle.subject.kind == "official_json"
+        compact = request.narrative_ref.schema_version == NARRATIVE_COMPACT_REF_SCHEMA
         view = {
-            "schema_version": "narrative-evidence-view/2"
+            "schema_version": "narrative-evidence-view/3" if compact else "narrative-evidence-view/2"
             if projected
             else EVIDENCE_VIEW_SCHEMA,
             "operation": query.operation,
@@ -131,7 +132,7 @@ class NarrativeEvidenceViewReader:
         if len(data) > MAX_EVIDENCE_VIEW_BYTES:
             raise NarrativeTransportError("blocked", "evidence_view_too_large")
         receipt = {
-            "schema_version": "narrative-evidence-read-receipt/2"
+            "schema_version": "narrative-evidence-read-receipt/3" if compact else "narrative-evidence-read-receipt/2"
             if projected
             else EVIDENCE_VIEW_RECEIPT_SCHEMA,
             "status": "ok",
@@ -151,6 +152,11 @@ class NarrativeEvidenceViewReader:
             "replay_status": verified.receipt["replay_status"],
             "locator_count": verified.receipt["locator_count"],
         }
+        if compact:
+            receipt.update(parent_count=verified.receipt["parent_count"],
+                           lineage_sha256=verified.receipt["lineage_sha256"])
+            if len(canonical_json(receipt).encode("utf-8")) + 1 > MAX_RECEIPT_BYTES:
+                raise NarrativeTransportError("blocked", "narrative_receipt_too_large")
         return NarrativeTransportRead(data=data, receipt=receipt)
 
     @staticmethod

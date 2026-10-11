@@ -1,0 +1,107 @@
+{
+  "schema": "w04-major-timeout-collection/1",
+  "observations": [
+    {
+      "label": "all",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/unit",
+        "tests/contract",
+        "--collect-only",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "started_utc": "2026-10-11T06:28:55.490057+00:00",
+      "timeout_seconds": 60,
+      "timed_out": false,
+      "exit_code": 0,
+      "elapsed_seconds": 15.358731000000262,
+      "log_bytes": 507540,
+      "log_sha256": "b8965968b278622e9e115c90cdbb229f65454386e487e84ce2395c78a1f2b6a2",
+      "node_counts": {},
+      "node_total": 0,
+      "tail": [
+        "        <Function test_c4_locator_bearing_body_offsets_stay_aligned>",
+        "",
+        "======================= 5627 tests collected in 10.95s ========================"
+      ]
+    },
+    {
+      "label": "fast",
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "tests/integration/test_m3_official_json_acceptance.py",
+        "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+        "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+        "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+        "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+        "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+        "tests/contract/test_narrative_output_plan.py",
+        "tests/contract/test_summary_group_coverage.py",
+        "tests/contract/test_official_transcript_layouts.py",
+        "tests/contract/test_transcript_speaker_affiliation.py",
+        "tests/contract/test_source_scope_qualification.py",
+        "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+        "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+        "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+        "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+        "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+        "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous",
+        "--collect-only",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "cwd": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki",
+      "started_utc": "2026-10-11T06:29:10.891068+00:00",
+      "timeout_seconds": 60,
+      "timed_out": false,
+      "exit_code": 0,
+      "elapsed_seconds": 4.79769810000289,
+      "log_bytes": 15650,
+      "log_sha256": "a4eb2f8275ce3705f2d1cfa44aa3979495512fb57ba055e0807eb6b4f98c7473",
+      "node_counts": {},
+      "node_total": 0,
+      "tail": [
+        "        <Function test_b10_scan_is_not_vacuous>",
+        "",
+        "======================== 137 tests collected in 1.98s ========================="
+      ]
+    }
+  ],
+  "before_sha256": {
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "tools\\pre_push_gate.py": "58f50f6467dfc52f67d9a2a7dbadb943e683313e5efe6f514d4ac9d95b6752d4",
+    ".github\\workflows\\ci.yml": "9f2864979058658089bb9d4edd879e05a733404f3d1a6d1de06ec012a63359b8",
+    "pytest.ini": "76a0dae330d88784dff727a5cbd7a08af06d9297a498689a9aaadba8cdf262af"
+  },
+  "after_sha256": {
+    "config.yaml": "2f4df37c3d39ef380caf476b6b678949a1e4b7604bdb95b73b0033804209c589",
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    "tools\\pre_push_gate.py": "58f50f6467dfc52f67d9a2a7dbadb943e683313e5efe6f514d4ac9d95b6752d4",
+    ".github\\workflows\\ci.yml": "9f2864979058658089bb9d4edd879e05a733404f3d1a6d1de06ec012a63359b8",
+    "pytest.ini": "76a0dae330d88784dff727a5cbd7a08af06d9297a498689a9aaadba8cdf262af"
+  },
+  "protected_files_unchanged": true,
+  "test_bodies_executed": false,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "paid_calls": 0,
+  "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwtm-0x1d7ca5",
+  "owned_temp_removed": true
+}

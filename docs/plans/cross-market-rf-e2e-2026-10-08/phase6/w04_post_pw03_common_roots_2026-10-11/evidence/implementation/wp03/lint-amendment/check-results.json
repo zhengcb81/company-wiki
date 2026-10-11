@@ -1,0 +1,93 @@
+{
+  "versions": {
+    "ruff": {
+      "exit_code": 0,
+      "output": "ruff 0.15.18"
+    },
+    "mypy": {
+      "exit_code": 0,
+      "output": "mypy 1.19.0 (compiled: yes)"
+    },
+    "pytest": {
+      "exit_code": 0,
+      "output": "pytest 9.1.1"
+    }
+  },
+  "checks": {
+    "ruff": {
+      "command": [
+        "ruff",
+        "check",
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/company_wiki_narrative_reader.py",
+        "scripts/source_preparation.py",
+        "scripts/source_narrative_context.py",
+        "scripts/revenue_backtest.py",
+        "scripts/filing_upstream_cause.py",
+        "scripts/filing_fetch_client.py",
+        "tests/test_w04_public_consumer.py",
+        "tests/test_w04_snapshot_delivery.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "log_bytes": 19
+    },
+    "mypy": {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "mypy",
+        "scripts/contracts/",
+        "scripts/schema_compatibility.py",
+        "scripts/filing_fetch_client.py",
+        "scripts/trust_anchor.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e522fa370334927ac2ccb7106100045b572938dd238093267de825336e6704f2",
+      "log_bytes": 45
+    },
+    "pytest": {
+      "command": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_w04_public_consumer.py",
+        "tests/test_w04_snapshot_delivery.py",
+        "--basetemp",
+        "C:/tmp/w04rf-lint-20261011"
+      ],
+      "exit_code": 0,
+      "log_sha256": "5a3fc01b37acb32a9bdca232ca64f79dece44d168936023f0492248adf972b61",
+      "log_bytes": 101
+    },
+    "diff-check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0
+    }
+  },
+  "owned_pytest_temp": "C:\\tmp\\w04rf-lint-20261011",
+  "ruff_scope": [
+    "scripts/company_wiki_narrative_contracts.py",
+    "scripts/company_wiki_narrative_reader.py",
+    "scripts/source_preparation.py",
+    "scripts/source_narrative_context.py",
+    "scripts/revenue_backtest.py",
+    "scripts/filing_upstream_cause.py",
+    "scripts/filing_fetch_client.py",
+    "tests/test_w04_public_consumer.py",
+    "tests/test_w04_snapshot_delivery.py"
+  ]
+}

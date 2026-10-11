@@ -1,0 +1,506 @@
+FFFFFFFFFFFFFFFFFFFFFF..FF                                               [100%]
+================================== FAILURES ===================================
+_ test_request_validation_carries_exact_typed_reason_without_input_copy[value0-exact_requires_fiscal_year-fiscal_year] _
+
+value = {'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}
+reason = 'exact_requires_fiscal_year', path = 'fiscal_year'
+
+    @pytest.mark.parametrize("value,reason,path", CASES)
+    def test_request_validation_carries_exact_typed_reason_without_input_copy(value, reason, path):
+        with pytest.raises(FilingFetchError) as caught:
+            validate_request(value)
+        exc = caught.value
+        assert exc.code == "request_error"
+        assert exc.retryable is False
+>       assert exc.request_diagnostic == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:65: AttributeError
+_ test_request_validation_carries_exact_typed_reason_without_input_copy[value1-latest_forbids_fiscal_year-fiscal_year] _
+
+value = {'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}
+reason = 'latest_forbids_fiscal_year', path = 'fiscal_year'
+
+    @pytest.mark.parametrize("value,reason,path", CASES)
+    def test_request_validation_carries_exact_typed_reason_without_input_copy(value, reason, path):
+        with pytest.raises(FilingFetchError) as caught:
+            validate_request(value)
+        exc = caught.value
+        assert exc.code == "request_error"
+        assert exc.retryable is False
+>       assert exc.request_diagnostic == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:65: AttributeError
+_ test_request_validation_carries_exact_typed_reason_without_input_copy[value2-latest_reuse_requires_acquisition_limits-acquisition_limits] _
+
+value = {'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}
+reason = 'latest_reuse_requires_acquisition_limits', path = 'acquisition_limits'
+
+    @pytest.mark.parametrize("value,reason,path", CASES)
+    def test_request_validation_carries_exact_typed_reason_without_input_copy(value, reason, path):
+        with pytest.raises(FilingFetchError) as caught:
+            validate_request(value)
+        exc = caught.value
+        assert exc.code == "request_error"
+        assert exc.retryable is False
+>       assert exc.request_diagnostic == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:65: AttributeError
+_ test_request_validation_carries_exact_typed_reason_without_input_copy[value3-acquisition_limits_invalid-acquisition_limits.max_bytes] _
+
+value = {'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}
+reason = 'acquisition_limits_invalid', path = 'acquisition_limits.max_bytes'
+
+    @pytest.mark.parametrize("value,reason,path", CASES)
+    def test_request_validation_carries_exact_typed_reason_without_input_copy(value, reason, path):
+        with pytest.raises(FilingFetchError) as caught:
+            validate_request(value)
+        exc = caught.value
+        assert exc.code == "request_error"
+        assert exc.retryable is False
+>       assert exc.request_diagnostic == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:65: AttributeError
+_ test_request_validation_carries_exact_typed_reason_without_input_copy[value4-acquisition_limits_invalid-acquisition_limits.timeout_seconds] _
+
+value = {'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}
+reason = 'acquisition_limits_invalid'
+path = 'acquisition_limits.timeout_seconds'
+
+    @pytest.mark.parametrize("value,reason,path", CASES)
+    def test_request_validation_carries_exact_typed_reason_without_input_copy(value, reason, path):
+        with pytest.raises(FilingFetchError) as caught:
+            validate_request(value)
+        exc = caught.value
+        assert exc.code == "request_error"
+        assert exc.retryable is False
+>       assert exc.request_diagnostic == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:65: AttributeError
+_ test_request_validation_carries_exact_typed_reason_without_input_copy[value5-acquisition_limits_invalid-acquisition_limits.max_cost_usd] _
+
+value = {'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}
+reason = 'acquisition_limits_invalid', path = 'acquisition_limits.max_cost_usd'
+
+    @pytest.mark.parametrize("value,reason,path", CASES)
+    def test_request_validation_carries_exact_typed_reason_without_input_copy(value, reason, path):
+        with pytest.raises(FilingFetchError) as caught:
+            validate_request(value)
+        exc = caught.value
+        assert exc.code == "request_error"
+        assert exc.retryable is False
+>       assert exc.request_diagnostic == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:65: AttributeError
+_ test_request_validation_carries_exact_typed_reason_without_input_copy[value6-acquisition_limits_invalid-acquisition_limits] _
+
+value = {'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}
+reason = 'acquisition_limits_invalid', path = 'acquisition_limits'
+
+    @pytest.mark.parametrize("value,reason,path", CASES)
+    def test_request_validation_carries_exact_typed_reason_without_input_copy(value, reason, path):
+        with pytest.raises(FilingFetchError) as caught:
+            validate_request(value)
+        exc = caught.value
+        assert exc.code == "request_error"
+        assert exc.retryable is False
+>       assert exc.request_diagnostic == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:65: AttributeError
+_ test_request_validation_carries_exact_typed_reason_without_input_copy[value7-acquisition_limits_invalid-acquisition_limits] _
+
+value = {'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}
+reason = 'acquisition_limits_invalid', path = 'acquisition_limits'
+
+    @pytest.mark.parametrize("value,reason,path", CASES)
+    def test_request_validation_carries_exact_typed_reason_without_input_copy(value, reason, path):
+        with pytest.raises(FilingFetchError) as caught:
+            validate_request(value)
+        exc = caught.value
+        assert exc.code == "request_error"
+        assert exc.retryable is False
+>       assert exc.request_diagnostic == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:65: AttributeError
+_____ test_public_failure_envelopes_keep_status_and_zero_calls[1.2-case0] _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000012E189CD5B0>
+version = '1.2'
+case = ({'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}, 'exact_requires_fiscal_year', 'fiscal_year')
+
+    @pytest.mark.parametrize("version,case", [(version, case) for version in ["1.2", "2.0"]
+        for case in CASES[:4] if not (version == "1.2" and case[1] == "latest_reuse_requires_acquisition_limits")])
+    def test_public_failure_envelopes_keep_status_and_zero_calls(monkeypatch, version, case):
+        value, reason, path = case
+        value = deepcopy(value)
+        value["schema_version"] = version
+        if version == "1.2":
+            value.pop("filing_intent")
+        def forbidden(**kwargs):
+            pytest.fail("request validation must finish before any CWP process or provider")
+        monkeypatch.setattr(fetch, "_run_company_wiki_json_retry", forbidden)
+        monkeypatch.setattr(sys, "stdin", StringIO(json.dumps(value)))
+        output = StringIO()
+        monkeypatch.setattr(sys, "stdout", output)
+        assert fetch.main([]) == 2
+        payload = json.loads(output.getvalue())
+        detail = payload["filing"] if version == "2.0" else payload
+>       assert detail["request_diagnostic"] == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:89: KeyError
+_____ test_public_failure_envelopes_keep_status_and_zero_calls[1.2-case1] _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000012E189CE780>
+version = '1.2'
+case = ({'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}, 'latest_forbids_fiscal_year', 'fiscal_year')
+
+    @pytest.mark.parametrize("version,case", [(version, case) for version in ["1.2", "2.0"]
+        for case in CASES[:4] if not (version == "1.2" and case[1] == "latest_reuse_requires_acquisition_limits")])
+    def test_public_failure_envelopes_keep_status_and_zero_calls(monkeypatch, version, case):
+        value, reason, path = case
+        value = deepcopy(value)
+        value["schema_version"] = version
+        if version == "1.2":
+            value.pop("filing_intent")
+        def forbidden(**kwargs):
+            pytest.fail("request validation must finish before any CWP process or provider")
+        monkeypatch.setattr(fetch, "_run_company_wiki_json_retry", forbidden)
+        monkeypatch.setattr(sys, "stdin", StringIO(json.dumps(value)))
+        output = StringIO()
+        monkeypatch.setattr(sys, "stdout", output)
+        assert fetch.main([]) == 2
+        payload = json.loads(output.getvalue())
+        detail = payload["filing"] if version == "2.0" else payload
+>       assert detail["request_diagnostic"] == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:89: KeyError
+_____ test_public_failure_envelopes_keep_status_and_zero_calls[1.2-case2] _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000012E18922E70>
+version = '1.2'
+case = ({'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}, 'acquisition_limits_invalid', 'acquisition_limits.max_bytes')
+
+    @pytest.mark.parametrize("version,case", [(version, case) for version in ["1.2", "2.0"]
+        for case in CASES[:4] if not (version == "1.2" and case[1] == "latest_reuse_requires_acquisition_limits")])
+    def test_public_failure_envelopes_keep_status_and_zero_calls(monkeypatch, version, case):
+        value, reason, path = case
+        value = deepcopy(value)
+        value["schema_version"] = version
+        if version == "1.2":
+            value.pop("filing_intent")
+        def forbidden(**kwargs):
+            pytest.fail("request validation must finish before any CWP process or provider")
+        monkeypatch.setattr(fetch, "_run_company_wiki_json_retry", forbidden)
+        monkeypatch.setattr(sys, "stdin", StringIO(json.dumps(value)))
+        output = StringIO()
+        monkeypatch.setattr(sys, "stdout", output)
+        assert fetch.main([]) == 2
+        payload = json.loads(output.getvalue())
+        detail = payload["filing"] if version == "2.0" else payload
+>       assert detail["request_diagnostic"] == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:89: KeyError
+_____ test_public_failure_envelopes_keep_status_and_zero_calls[2.0-case3] _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000012E18B38AF0>
+version = '2.0'
+case = ({'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}, 'exact_requires_fiscal_year', 'fiscal_year')
+
+    @pytest.mark.parametrize("version,case", [(version, case) for version in ["1.2", "2.0"]
+        for case in CASES[:4] if not (version == "1.2" and case[1] == "latest_reuse_requires_acquisition_limits")])
+    def test_public_failure_envelopes_keep_status_and_zero_calls(monkeypatch, version, case):
+        value, reason, path = case
+        value = deepcopy(value)
+        value["schema_version"] = version
+        if version == "1.2":
+            value.pop("filing_intent")
+        def forbidden(**kwargs):
+            pytest.fail("request validation must finish before any CWP process or provider")
+        monkeypatch.setattr(fetch, "_run_company_wiki_json_retry", forbidden)
+        monkeypatch.setattr(sys, "stdin", StringIO(json.dumps(value)))
+        output = StringIO()
+        monkeypatch.setattr(sys, "stdout", output)
+        assert fetch.main([]) == 2
+        payload = json.loads(output.getvalue())
+        detail = payload["filing"] if version == "2.0" else payload
+>       assert detail["request_diagnostic"] == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:89: KeyError
+_____ test_public_failure_envelopes_keep_status_and_zero_calls[2.0-case4] _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000012E18B38050>
+version = '2.0'
+case = ({'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}, 'latest_forbids_fiscal_year', 'fiscal_year')
+
+    @pytest.mark.parametrize("version,case", [(version, case) for version in ["1.2", "2.0"]
+        for case in CASES[:4] if not (version == "1.2" and case[1] == "latest_reuse_requires_acquisition_limits")])
+    def test_public_failure_envelopes_keep_status_and_zero_calls(monkeypatch, version, case):
+        value, reason, path = case
+        value = deepcopy(value)
+        value["schema_version"] = version
+        if version == "1.2":
+            value.pop("filing_intent")
+        def forbidden(**kwargs):
+            pytest.fail("request validation must finish before any CWP process or provider")
+        monkeypatch.setattr(fetch, "_run_company_wiki_json_retry", forbidden)
+        monkeypatch.setattr(sys, "stdin", StringIO(json.dumps(value)))
+        output = StringIO()
+        monkeypatch.setattr(sys, "stdout", output)
+        assert fetch.main([]) == 2
+        payload = json.loads(output.getvalue())
+        detail = payload["filing"] if version == "2.0" else payload
+>       assert detail["request_diagnostic"] == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:89: KeyError
+_____ test_public_failure_envelopes_keep_status_and_zero_calls[2.0-case5] _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000012E18B25F50>
+version = '2.0'
+case = ({'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}, 'latest_reuse_requires_acquisition_limits', 'acquisition_limits')
+
+    @pytest.mark.parametrize("version,case", [(version, case) for version in ["1.2", "2.0"]
+        for case in CASES[:4] if not (version == "1.2" and case[1] == "latest_reuse_requires_acquisition_limits")])
+    def test_public_failure_envelopes_keep_status_and_zero_calls(monkeypatch, version, case):
+        value, reason, path = case
+        value = deepcopy(value)
+        value["schema_version"] = version
+        if version == "1.2":
+            value.pop("filing_intent")
+        def forbidden(**kwargs):
+            pytest.fail("request validation must finish before any CWP process or provider")
+        monkeypatch.setattr(fetch, "_run_company_wiki_json_retry", forbidden)
+        monkeypatch.setattr(sys, "stdin", StringIO(json.dumps(value)))
+        output = StringIO()
+        monkeypatch.setattr(sys, "stdout", output)
+        assert fetch.main([]) == 2
+        payload = json.loads(output.getvalue())
+        detail = payload["filing"] if version == "2.0" else payload
+>       assert detail["request_diagnostic"] == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:89: KeyError
+_____ test_public_failure_envelopes_keep_status_and_zero_calls[2.0-case6] _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000012E18B26350>
+version = '2.0'
+case = ({'schema_version': '2.0', 'company_query': 'Sample', 'market': 'US', 'document_kind': 'annual_report', ...}, 'acquisition_limits_invalid', 'acquisition_limits.max_bytes')
+
+    @pytest.mark.parametrize("version,case", [(version, case) for version in ["1.2", "2.0"]
+        for case in CASES[:4] if not (version == "1.2" and case[1] == "latest_reuse_requires_acquisition_limits")])
+    def test_public_failure_envelopes_keep_status_and_zero_calls(monkeypatch, version, case):
+        value, reason, path = case
+        value = deepcopy(value)
+        value["schema_version"] = version
+        if version == "1.2":
+            value.pop("filing_intent")
+        def forbidden(**kwargs):
+            pytest.fail("request validation must finish before any CWP process or provider")
+        monkeypatch.setattr(fetch, "_run_company_wiki_json_retry", forbidden)
+        monkeypatch.setattr(sys, "stdin", StringIO(json.dumps(value)))
+        output = StringIO()
+        monkeypatch.setattr(sys, "stdout", output)
+        assert fetch.main([]) == 2
+        payload = json.loads(output.getvalue())
+        detail = payload["filing"] if version == "2.0" else payload
+>       assert detail["request_diagnostic"] == diagnostic(reason, path)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:89: KeyError
+_ test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad0] _
+
+bad = {'schema_version': 'filing-request-diagnostic/1', 'reason': 'secret_token', 'field_path': 'fiscal_year'}
+
+    @pytest.mark.parametrize("bad", [
+        {"schema_version": "filing-request-diagnostic/1", "reason": "secret_token", "field_path": "fiscal_year"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "exact_requires_fiscal_year", "field_path": "acquisition_limits"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "acquisition_limits_invalid", "field_path": "authorization.token"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": [], "field_path": "fiscal_year"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "request_body": "SECRET"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "schema_version": "bad"},
+    ])
+    def test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields(bad):
+>       assert cause.validated_request_diagnostic(bad) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_request_diagnostic'
+
+tests\test_w04_failure_observation.py:107: AttributeError
+_ test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad1] _
+
+bad = {'schema_version': 'filing-request-diagnostic/1', 'reason': 'exact_requires_fiscal_year', 'field_path': 'acquisition_limits'}
+
+    @pytest.mark.parametrize("bad", [
+        {"schema_version": "filing-request-diagnostic/1", "reason": "secret_token", "field_path": "fiscal_year"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "exact_requires_fiscal_year", "field_path": "acquisition_limits"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "acquisition_limits_invalid", "field_path": "authorization.token"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": [], "field_path": "fiscal_year"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "request_body": "SECRET"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "schema_version": "bad"},
+    ])
+    def test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields(bad):
+>       assert cause.validated_request_diagnostic(bad) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_request_diagnostic'
+
+tests\test_w04_failure_observation.py:107: AttributeError
+_ test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad2] _
+
+bad = {'schema_version': 'filing-request-diagnostic/1', 'reason': 'acquisition_limits_invalid', 'field_path': 'authorization.token'}
+
+    @pytest.mark.parametrize("bad", [
+        {"schema_version": "filing-request-diagnostic/1", "reason": "secret_token", "field_path": "fiscal_year"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "exact_requires_fiscal_year", "field_path": "acquisition_limits"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "acquisition_limits_invalid", "field_path": "authorization.token"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": [], "field_path": "fiscal_year"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "request_body": "SECRET"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "schema_version": "bad"},
+    ])
+    def test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields(bad):
+>       assert cause.validated_request_diagnostic(bad) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_request_diagnostic'
+
+tests\test_w04_failure_observation.py:107: AttributeError
+_ test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad3] _
+
+bad = {'schema_version': 'filing-request-diagnostic/1', 'reason': [], 'field_path': 'fiscal_year'}
+
+    @pytest.mark.parametrize("bad", [
+        {"schema_version": "filing-request-diagnostic/1", "reason": "secret_token", "field_path": "fiscal_year"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "exact_requires_fiscal_year", "field_path": "acquisition_limits"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "acquisition_limits_invalid", "field_path": "authorization.token"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": [], "field_path": "fiscal_year"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "request_body": "SECRET"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "schema_version": "bad"},
+    ])
+    def test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields(bad):
+>       assert cause.validated_request_diagnostic(bad) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_request_diagnostic'
+
+tests\test_w04_failure_observation.py:107: AttributeError
+_ test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad4] _
+
+bad = {'schema_version': 'filing-request-diagnostic/1', 'reason': 'exact_requires_fiscal_year', 'field_path': 'fiscal_year', 'request_body': 'SECRET'}
+
+    @pytest.mark.parametrize("bad", [
+        {"schema_version": "filing-request-diagnostic/1", "reason": "secret_token", "field_path": "fiscal_year"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "exact_requires_fiscal_year", "field_path": "acquisition_limits"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "acquisition_limits_invalid", "field_path": "authorization.token"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": [], "field_path": "fiscal_year"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "request_body": "SECRET"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "schema_version": "bad"},
+    ])
+    def test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields(bad):
+>       assert cause.validated_request_diagnostic(bad) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_request_diagnostic'
+
+tests\test_w04_failure_observation.py:107: AttributeError
+_ test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad5] _
+
+bad = {'schema_version': 'bad', 'reason': 'exact_requires_fiscal_year', 'field_path': 'fiscal_year'}
+
+    @pytest.mark.parametrize("bad", [
+        {"schema_version": "filing-request-diagnostic/1", "reason": "secret_token", "field_path": "fiscal_year"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "exact_requires_fiscal_year", "field_path": "acquisition_limits"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": "acquisition_limits_invalid", "field_path": "authorization.token"},
+        {"schema_version": "filing-request-diagnostic/1", "reason": [], "field_path": "fiscal_year"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "request_body": "SECRET"},
+        {**diagnostic("exact_requires_fiscal_year", "fiscal_year"), "schema_version": "bad"},
+    ])
+    def test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields(bad):
+>       assert cause.validated_request_diagnostic(bad) is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'ff_provider_cause' has no attribute 'validated_request_diagnostic'
+
+tests\test_w04_failure_observation.py:107: AttributeError
+_____ test_legacy_error_strings_are_never_parsed_into_a_typed_diagnostic ______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000012E18B22030>
+
+    def test_legacy_error_strings_are_never_parsed_into_a_typed_diagnostic(monkeypatch):
+        text = "schema 1.2 requests require mode or fiscal_year SECRET_TOKEN https://host/?token=secret"
+        exc = FilingFetchError(text, code="request_error")
+>       assert exc.request_diagnostic is None
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:115: AttributeError
+___________ test_companion_limits_do_not_impersonate_filing_limits ____________
+
+    def test_companion_limits_do_not_impersonate_filing_limits():
+        value = request(companion_transcript={
+            "intent": "fetch_if_missing", "fiscal_year": 2026, "fiscal_quarter": 4,
+            "acquisition_limits": limits(max_bytes=False),
+        })
+        with pytest.raises(FilingFetchError) as caught:
+            validate_request(value)
+>       assert caught.value.request_diagnostic is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'FilingFetchError' object has no attribute 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:150: AttributeError
+____ test_diagnostic_input_is_copied_and_revalidated_before_serialization _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000012E18B20230>
+
+    def test_diagnostic_input_is_copied_and_revalidated_before_serialization(monkeypatch):
+        original = diagnostic("exact_requires_fiscal_year", "fiscal_year")
+>       exc = FilingFetchError("fixed validation message", code="request_error", request_diagnostic=original)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: FilingFetchError.__init__() got an unexpected keyword argument 'request_diagnostic'
+
+tests\test_w04_failure_observation.py:156: TypeError
+=========================== short test summary info ===========================
+FAILED tests/test_w04_failure_observation.py::test_request_validation_carries_exact_typed_reason_without_input_copy[value0-exact_requires_fiscal_year-fiscal_year]
+FAILED tests/test_w04_failure_observation.py::test_request_validation_carries_exact_typed_reason_without_input_copy[value1-latest_forbids_fiscal_year-fiscal_year]
+FAILED tests/test_w04_failure_observation.py::test_request_validation_carries_exact_typed_reason_without_input_copy[value2-latest_reuse_requires_acquisition_limits-acquisition_limits]
+FAILED tests/test_w04_failure_observation.py::test_request_validation_carries_exact_typed_reason_without_input_copy[value3-acquisition_limits_invalid-acquisition_limits.max_bytes]
+FAILED tests/test_w04_failure_observation.py::test_request_validation_carries_exact_typed_reason_without_input_copy[value4-acquisition_limits_invalid-acquisition_limits.timeout_seconds]
+FAILED tests/test_w04_failure_observation.py::test_request_validation_carries_exact_typed_reason_without_input_copy[value5-acquisition_limits_invalid-acquisition_limits.max_cost_usd]
+FAILED tests/test_w04_failure_observation.py::test_request_validation_carries_exact_typed_reason_without_input_copy[value6-acquisition_limits_invalid-acquisition_limits]
+FAILED tests/test_w04_failure_observation.py::test_request_validation_carries_exact_typed_reason_without_input_copy[value7-acquisition_limits_invalid-acquisition_limits]
+FAILED tests/test_w04_failure_observation.py::test_public_failure_envelopes_keep_status_and_zero_calls[1.2-case0]
+FAILED tests/test_w04_failure_observation.py::test_public_failure_envelopes_keep_status_and_zero_calls[1.2-case1]
+FAILED tests/test_w04_failure_observation.py::test_public_failure_envelopes_keep_status_and_zero_calls[1.2-case2]
+FAILED tests/test_w04_failure_observation.py::test_public_failure_envelopes_keep_status_and_zero_calls[2.0-case3]
+FAILED tests/test_w04_failure_observation.py::test_public_failure_envelopes_keep_status_and_zero_calls[2.0-case4]
+FAILED tests/test_w04_failure_observation.py::test_public_failure_envelopes_keep_status_and_zero_calls[2.0-case5]
+FAILED tests/test_w04_failure_observation.py::test_public_failure_envelopes_keep_status_and_zero_calls[2.0-case6]
+FAILED tests/test_w04_failure_observation.py::test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad0]
+FAILED tests/test_w04_failure_observation.py::test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad1]
+FAILED tests/test_w04_failure_observation.py::test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad2]
+FAILED tests/test_w04_failure_observation.py::test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad3]
+FAILED tests/test_w04_failure_observation.py::test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad4]
+FAILED tests/test_w04_failure_observation.py::test_closed_diagnostic_rejects_unknown_reason_path_type_and_extra_fields[bad5]
+FAILED tests/test_w04_failure_observation.py::test_legacy_error_strings_are_never_parsed_into_a_typed_diagnostic
+FAILED tests/test_w04_failure_observation.py::test_companion_limits_do_not_impersonate_filing_limits
+FAILED tests/test_w04_failure_observation.py::test_diagnostic_input_is_copied_and_revalidated_before_serialization
+24 failed, 2 passed in 0.51s

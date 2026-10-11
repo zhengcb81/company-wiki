@@ -1,0 +1,15 @@
+{
+  "schema_version": "2.0",
+  "company_query": "00700",
+  "market": "HK",
+  "document_kind": "annual_report",
+  "mode": "latest_as_of",
+  "fiscal_year": 2025,
+  "as_of_date": "2026-10-08",
+  "filing_intent": "reuse_only",
+  "acquisition_limits": {
+    "max_bytes": 41943040,
+    "timeout_seconds": 180,
+    "max_cost_usd": "0.00"
+  }
+}

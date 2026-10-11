@@ -1,0 +1,10 @@
+{
+  "python_files": 466,
+  "searched_reexport_names": [
+    "ENGINE_VERSION",
+    "FORECAST_SCHEMA_VERSION"
+  ],
+  "public_reexport_consumers": [],
+  "parse_errors": [],
+  "method": "AST ImportFrom + Import alias and qualified Attribute access; CodeGraph queried first"
+}

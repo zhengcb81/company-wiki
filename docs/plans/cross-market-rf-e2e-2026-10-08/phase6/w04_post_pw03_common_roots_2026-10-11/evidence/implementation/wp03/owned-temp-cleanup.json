@@ -1,0 +1,59 @@
+{
+  "schema_version": "w04-wp03-owned-temp-cleanup/1",
+  "status": "complete",
+  "targets": [
+    {
+      "target": "C:\\tmp\\w04rf-red-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-green1-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-red2-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-green2-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-green3-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-green4-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-green5-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-red3-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-green6-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-red4-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-final-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-final2-20261011",
+      "status": "removed"
+    },
+    {
+      "target": "C:\\tmp\\w04rf-final3-20261011",
+      "status": "removed"
+    }
+  ],
+  "shared_wp01_fixture": "retained for ROOT cleanup"
+}

@@ -1,0 +1,50 @@
+...................F...                                                  [100%]
+================================== FAILURES ===================================
+_ test_projected_rationale_reaches_derived_ancestor_and_actual_segment_formula _
+
+tmp_path = WindowsPath('C:/tmp/w04rf-red2-20261011/test_projected_rationale_reach0')
+
+    def test_projected_rationale_reaches_derived_ancestor_and_actual_segment_formula(tmp_path):
+        from source_narrative_context import consume_narrative_input
+        request, body, raw = projected_wire()
+        context = validate_narrative_response(request, body, raw)
+        value = context.to_dict()
+        data = _consumption_data(value["parent_source_refs"][1])
+        binding = {"span_id": value["evidence_spans"][0]["span_id"], "claim_id": "support-mechanism",
+            "parameter_id": "qualitative", "support_type": "rationale_support"}
+        with patch("source_narrative_context.read_narrative_context", return_value=context):
+>           _, unread = consume_narrative_input(data, request=request, bindings=[], source_id="source-alias", catalog_config=tmp_path / "catalog.json")
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_w04_public_consumer.py:195: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+data = {'as_of_date': '2026-09-01', 'sources': [{'source_id': 'source-alias', 'capture': {'snapshot_sha256': 'bbbbbbbbbbbbbbb...ents': [{'name': 'A', 'scenarios': {'base': {'model': 'direct_revenue', 'driver_parameter_ids': {'revenue': [...]}}}}]}
+request = {'schema_version': 'narrative-read-request/3', 'narrative_ref': {'schema_version': 'narrative-ref/3', 'artifact_versio...2e36', 'byte_size': 4625, ...}, 'as_of_date': '2026-09-01', 'expected_issuer': {'market': 'US', 'security_id': 'ACME'}}
+bindings = [], source_id = 'source-alias'
+catalog_config = WindowsPath('C:/tmp/w04rf-red2-20261011/test_projected_rationale_reach0/catalog.json')
+timeout_seconds = 30, verified_by = 'RF narrative reader'
+
+    def consume_narrative_input(
+        data: dict, *, request: dict, bindings: list[dict], source_id: str,
+        catalog_config: Path, timeout_seconds: float = 30, verified_by: str = "RF narrative reader",
+    ) -> tuple[dict, dict]:
+        """Read a bundle once and bind selected spans to existing used parameters.
+    
+        A metadata reference or an unreferenced summary yields not_consumed. No
+        assumption value or evidence role is inferred from a summary's existence.
+        Invalid/unavailable references propagate the existing bounded read failure.
+        """
+        context = read_narrative_context(request, catalog_config=catalog_config,
+                                         timeout_seconds=timeout_seconds)
+        value = context.to_dict()
+        updated = deepcopy(data)
+        source = next((item for item in updated.get("sources", []) if item["source_id"] == source_id), None)
+>       if source is None or source["capture"]["snapshot_sha256"] != value["source_ref"]["content_sha256"]:
+                                                                     ^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'source_ref'
+
+scripts\source_narrative_context.py:81: KeyError
+=========================== short test summary info ===========================
+FAILED tests/test_w04_public_consumer.py::test_projected_rationale_reaches_derived_ancestor_and_actual_segment_formula
+1 failed, 22 passed in 1.07s
