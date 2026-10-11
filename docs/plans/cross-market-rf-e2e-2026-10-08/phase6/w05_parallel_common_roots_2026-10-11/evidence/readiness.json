@@ -1,0 +1,63 @@
+{
+  "schema_version": "w05-readiness/1",
+  "status": "READY_FOR_THREE_INDEPENDENT_HARNESSES",
+  "checked_at": "2026-10-11T08:29:31.988644+00:00",
+  "lanes": [
+    {
+      "lane": "W05-CWP-OCR",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr",
+      "base": "159b993e2f4d36c7e86dc12c9d6028f4a31b353a",
+      "tracked_source_unchanged": true,
+      "fixed_input_directory": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr\\docs\\handoffs\\w05-cwp-ocr\\input",
+      "input_files": 5,
+      "input_bytes": 76651,
+      "manifest_sha256": "862d630a608fa81324830ccb759363aecc5066d50c41e504b7d1a3e2a9bc9556"
+    },
+    {
+      "lane": "W05-RF-FLOW",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow",
+      "base": "1b616622763ece6549676f2a74f596e6c65244af",
+      "tracked_source_unchanged": true,
+      "fixed_input_directory": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow\\docs\\handoffs\\w05-rf-flow\\input",
+      "input_files": 7,
+      "input_bytes": 83197,
+      "manifest_sha256": "e8a6d52dd7495088929090cdcdf15cecea7fd3b6336fc5b25c847aa3bc5e2a46"
+    },
+    {
+      "lane": "W05-AUDIT-LOOP",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\audit-loop",
+      "base": "c0993332623637d53f059350a382d99a95ef731d",
+      "tracked_source_unchanged": true,
+      "fixed_input_directory": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\audit-loop\\docs\\handoffs\\w05-audit-loop\\input",
+      "input_files": 5,
+      "input_bytes": 46284,
+      "manifest_sha256": "43645e0e62dddc74eaa1c0e39a88e328fb286a3fdde7832ffe6903761e71fca0"
+    }
+  ],
+  "card_review_original_sha256": "cb0b250efb3fb0b3db003cc993dacb1fc0666106d1e328f83f68eb6211ee0814",
+  "review_findings_closed": [
+    {
+      "id": "COMMON-04",
+      "resolution": "3 fixed input directories exist, files byte-verified"
+    },
+    {
+      "id": "RF-02",
+      "resolution": "drivers.py exact schema-family seam included + role-aware test required"
+    }
+  ],
+  "rf_latest_exact_ci": {
+    "id": 38123160491,
+    "head_sha": "1b616622763ece6549676f2a74f596e6c65244af",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/38123160491",
+    "created_at": "2026-10-11T07:58:10Z",
+    "updated_at": "2026-10-11T07:58:55Z"
+  },
+  "provider_calls": 0,
+  "model_calls": 0,
+  "paid_usd": "0",
+  "does_not_prove": "implementation or real company research quality",
+  "relative_links_fixed": true,
+  "rf_additional_template_schema_seam": "generate_input_template.py included, old semantics preserved"
+}

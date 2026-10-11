@@ -1,0 +1,36 @@
+{
+  "schema_version": "w05-input-delivery/1",
+  "status": "READY",
+  "lanes": [
+    {
+      "lane": "W05-CWP-OCR",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr",
+      "base": "159b993e2f4d36c7e86dc12c9d6028f4a31b353a",
+      "tracked_source_unchanged": true,
+      "fixed_input_directory": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\cwp-ocr\\docs\\handoffs\\w05-cwp-ocr\\input",
+      "input_files": 5,
+      "input_bytes": 76651,
+      "manifest_sha256": "862d630a608fa81324830ccb759363aecc5066d50c41e504b7d1a3e2a9bc9556"
+    },
+    {
+      "lane": "W05-RF-FLOW",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow",
+      "base": "1b616622763ece6549676f2a74f596e6c65244af",
+      "tracked_source_unchanged": true,
+      "fixed_input_directory": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\rf-flow\\docs\\handoffs\\w05-rf-flow\\input",
+      "input_files": 7,
+      "input_bytes": 83197,
+      "manifest_sha256": "e8a6d52dd7495088929090cdcdf15cecea7fd3b6336fc5b25c847aa3bc5e2a46"
+    },
+    {
+      "lane": "W05-AUDIT-LOOP",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\audit-loop",
+      "base": "c0993332623637d53f059350a382d99a95ef731d",
+      "tracked_source_unchanged": true,
+      "fixed_input_directory": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w05\\audit-loop\\docs\\handoffs\\w05-audit-loop\\input",
+      "input_files": 5,
+      "input_bytes": 46284,
+      "manifest_sha256": "43645e0e62dddc74eaa1c0e39a88e328fb286a3fdde7832ffe6903761e71fca0"
+    }
+  ]
+}

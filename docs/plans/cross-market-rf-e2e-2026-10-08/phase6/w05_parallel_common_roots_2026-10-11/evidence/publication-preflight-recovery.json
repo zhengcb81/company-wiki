@@ -1,0 +1,20 @@
+{
+  "schema_version": "w05-publication-preflight-recovery/1",
+  "first_exit_code": 2,
+  "commit_started_before_failure": false,
+  "fixed": [
+    {
+      "path": "workspace-receipt.json",
+      "previous_sha256": "c72410ba76c25d58954767f8fac99c9214286ea12fb57e636e203bace551c028",
+      "sha256": "88eb0d6b8377fcbcb181d92c6e42c12090c2daf3d147222d7cac00356b99bd72",
+      "reason": "own mutable new receipt CRLF rejected by git whitespace check; semantic JSON unchanged"
+    },
+    {
+      "path": "input-delivery-receipt.json",
+      "previous_sha256": "e329366314afc3a19fb4b6788d7f0a830470285ad20654260f26ca094d19e968",
+      "sha256": "062f23c918d4af210909c62f2577e88274a2512d75bac5da5f07ffa85a28999c",
+      "reason": "own mutable new receipt CRLF rejected by git whitespace check; semantic JSON unchanged"
+    }
+  ],
+  "historical_reports_modified": false
+}

@@ -1,3 +1,69 @@
+## W05独立施工包已准备／主线仍active（2026-10-11T08:28:04.098652+00:00）
+
+三卡：[W05总计划](../w05_parallel_common_roots_2026-10-11/task_plan.md)。CWP来源OCR、RF真实短贡献schema3.10、Audit公司池进度恢复，各有已创建排他稀疏树、固定input/manifest、独立PWF与测试交接；可同时开工。ROOT owns共享接口、并线、安装、母账及G2/G4/G5，不让各线改共享六PWF或彼此代码。卡片独审两项发布前准备缺口已落实，READY不是实现/经济PASS。
+
+RF已发布1b616622（财务日期快测接线），push299PASS/10subtests29.43s，精确CI38123160491 success；原WIP保留。71raw持久保全已完成158文件/11,683,687B及6原生读，仍不删整个protected TEMP。
+
+W04分类叶STOP_PARTIAL，310focused绿、真实三源回放；裸未/没有的阶段否定两处误判及部分候选预算落选仍归ROOT，尚未发布0.8。不让OCR分包写selector/LLM配置。G2真实provider/G4/G5研究尚未签通过。累计仍413778tokens/334463µUSD+FX2764，本轮0项目供应商/模型/token/新费用。
+
+## Next Step
+
+普通提交推送本次计划后交用户分派；ROOT修通用阶段否定/预算召回并集中验收配置及0.8源码，随后G2有限摘要真实消费、G4原三家12审查、G5新三家/池loop。目标继续active。
+
+以下为历史记录。
+
+## 已发布进度与剩余（2026-10-11T07:55:58.075946+00:00）
+
+RF WP06 + 共用财务日期修复已正常commit/main快进/push：03e8a6595dbdcfc6e39c6c6afc89f9d97c3104ea；284PASS/2subtests30.03s，远端精确CI38122865909 success。原assurance/output WIP字节和git status不变。三文件定点安装到一套物理目录，两逻辑入口6条SHA一致；真实revenue_forecast CLI usage已观察。此前误调用库revenue_core --help空stdout保留为NOT_PROVEN，未冒签。
+
+G2 LLM-only独审10检查点无本次阻断、3纯probe及5providers selected-only凭证PASS、102收据核SHA。common import dotenv是旧行为，显式load_llm不追加加载并不保证整个import不读dotenv；原交接不改，新范围以本记录为准。旧生产配置/profile不变。
+
+ROOT路由10新TDD全部GREEN5.29s，证明公开0.8分派/恢复接口/旧0.6与0.7指纹；不证明原件或经济召回。WP02分类叶独立重新施工（先正负RED，再修真实阶段信号），保留原STOP_PARTIAL报告；ROOT这些叶暂不写。原件保全按71精确清单开始，durable .source-preservation/w04-temp-20261011未签保存完成；ROOT集成树仅增加该ignore边界，不扩复制全湖/不删TEMP。
+
+本轮仍0项目supplier/model/token/新费用。工具错误已另记current-command-diagnostics.json；CodeGraph旧索引找不到现pre_push模块时转已知文件读，不init/不重扫全仓。
+
+## Next Step
+
+确认RF新快速回归是否进入共享pre-push/CI范围；接收WP02真实分类回放及原件保全STOP。集中正常发布关闭源码，然后G2三provider实际有限summary/read/rationale，G4与G5研究审查。主目标active。
+
+以下为历史记录。
+
+## 最新执行状态（2026-10-11T07:49:48.708278+00:00）
+
+P7-AUDIT 已验收 main c0993332/147 PASS/两处安装，CWP159b、RFb7fe、FF08ec精确远端CI成功。新WP06文档已按原字节接收且独审通过，研究仍NOT_RUN。
+
+财务窗口大节点独审找到真实nullable publication共用缺陷：合法prior_verified_capture通过SourceRecord/validate_sources后仍被日期解析阻断。ROOT先新增7反例：5FAIL2PASS；修复后87PASS8subtests/2.42s、lint绿，独立8向量复验 ACCEPTED。只记录 financial_filing_anchor_publication_unknown/source_publication_unknown，不伪造发表日、不新增身份或许可。旧55GREEN和before-report保持历史，最终源96e4b63a/testb4e469e0。RF这部分可正常集中发布。
+
+WP02 STOP_PARTIAL 已接收两叶及最终证据；247 focused GREEN不代表完整原件召回。真实IPO 160span预算回归及H1 96span新产品遗漏仍未闭环。先修通用阶段分类（旧宽交付模式把收款/权利条款提成商业化里程碑），再依据全原件回放决定预算升级；ROOT与worker目录排他，见WP02_STAGE_CLASSIFICATION_AMENDMENT。旧selector指纹/caps/原文不可变。
+
+Config.load_llm四文件已接收，102集中测试绿；独立审查正在收尾，初步无新阻断，common导入的既有dotenv副作用不能冒称“显式配置完全不读dotenv”。生产config原SHA不动。真实G2模型尚未外发，费用母账仍413778tokens/334463µUSD+FX2764。
+
+原件保全调查STOP：71raw/71sidecars，最小预计11,490,968B（含3 consistent SQLite snapshots），尚NOT_PRESERVED；不据此清理整个mW03/w4p/mFresh。已归档六份自有发布日志的TEMP已恢复。沙箱git status返回not a work tree后改用明确已授权unsandboxed读取，未触及WIP。
+
+## Next Step
+
+集中正常发布RF已独审关闭的文档/financial-window；并行继续WP02通用阶段分类与持久原件保全。完成新版源码集中验收/发布后进入三provider有限G2、G4原三家12独审、G5新三家与公司池loop。目标active，工程PASS不代研究PASS。
+
+以下为不可覆盖的历史记录。
+
+## 当前收尾状态（2026-10-11T07:32:31.317325+00:00）
+
+P7-AUDIT已验收/main c0993332/两处安装/147 PASS。CWP159b、RFb7fe、FF08ec已推远端；精确源码CI均成功。WP06三文档独审通过（87keys、12sealed SHA保持），已按交接精确字节进入RF集成树，经济验收仍NOT_RUN。
+
+新增的共用根因已先验证：RF把较晚招股/增发/可转债误当最新财报，ROOT已消费已有verified manifest细类型修复，55测试+8subtests绿；首轮测试缺路径bootstrap和3E702格式错误真实保留，最终lint绿。旧无细类型legacy继续回放，未新增身份/人工门。
+
+WP02新0.8语义路径正在六原件回放；恢复的经营段还被前序excluded union挡住，ROOT已保存1FAIL/1PASS再修共享路由。旧0.6/0.7指纹不变是验收条件。单页OCR漏识别原文字行归上游解析缺口，不由selector编造。
+
+G2准备已STOP并查明摘要入口错误依赖TAVILY/全Wiki配置；新独立TDD修Config.load_llm共享LLM责任层，旧production配置不动，测试不再以pytest宽松掩盖生产。仅两个旧mock转新接口且保留断言。真实G2将保持既有3家model/endpoint/8192caps，在新有限tmp YAML明确记录MiMo/DeepSeek narrative thinking disabled（官方文档及旧空final证据见policy-decision.json），MiniMax不猜开关。尚未外发/分配母账实际费用。
+
+只归档六份已STOP发布日志并删除其已核SHA的自有TEMP，protected mW03/w4p/mFresh原件不删。只读原件保全计划仍在进行；69目标及G2额外两件不代表整个原件湖。当前0项目模型/provider/新费用；母账仍413778tokens/334463µUSD+FX2764。
+
+## Next Step
+
+接收WP02完整native回放及LLM-only配置STOP交接，集中集成/独审/正常发布；然后三provider实际有界G2与真实read/rationale链，G4原三家公司新研究及12独审、G5新三家。预算与旧失败不改，工程绿不等于研究完成。
+
+以下带日期内容为历史记录。
+
 ## 当前执行与发布状态（2026-10-11T06:56:13.845649+00:00）
 
 - P7-AUDIT已正式接收：main c0993332，最终147 PASS/38.226s、独立5/5复验绿、两个独立安装目录已同步；没有remote，CI=not_triggered。CWP32a412bb、RFb7fe04aa、FF08ec85b2均已普通commit/main快进/push，精确源码CI38118943063/38118272390/38119051847均success。

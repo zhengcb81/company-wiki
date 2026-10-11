@@ -1,0 +1,297 @@
+{
+  "schema_version": "w05-card-readonly-review/1",
+  "status": "STOP_REQUIRES_PREPARATION_AND_RF_SCOPE_FIX",
+  "review_kind": "construction_readiness_not_engineering_or_research_acceptance",
+  "checks": [
+    {
+      "id": "COMMON-01",
+      "status": "PASS",
+      "finding": "三张卡起点与各树实际HEAD一致",
+      "evidence": [
+        "cwp-ocr 159b993e2f4d36c7e86dc12c9d6028f4a31b353a",
+        "rf-flow 1b616622763ece6549676f2a74f596e6c65244af",
+        "audit-loop c0993332623637d53f059350a382d99a95ef731d"
+      ]
+    },
+    {
+      "id": "COMMON-02",
+      "status": "PASS",
+      "finding": "三个仓库独立工作树和排他产品写集；CWP禁止分类/narrative/config/AUTO/scheduler，RF禁止CWP/FF适配和配置，Audit只新增叶子",
+      "evidence": [
+        "cards三份排他集合",
+        "task_plan.md ROOT负责W04分类/预算/LLM及最后接线"
+      ]
+    },
+    {
+      "id": "COMMON-03",
+      "status": "PASS",
+      "finding": "三大节点与正常hooks；无逐材料许可/private-public/canary/人工签收新增；资源/原文一致性要求属于测试及事实正确性",
+      "evidence": [
+        "handoff_contract.md 记录接口，不是人工许可",
+        "各卡只有A/B/C，真实研究仍ROOT大节点"
+      ]
+    },
+    {
+      "id": "COMMON-04",
+      "status": "BLOCKER_PREPARATION",
+      "finding": "当前三工作树的docs/handoffs/<lane>/input目录都不存在，与“可立即开工/只交卡自包含”不一致",
+      "evidence": [
+        {
+          "lane": "cwp-ocr",
+          "input_exists": false,
+          "input_names": [],
+          "agents_exists": true
+        },
+        {
+          "lane": "rf-flow",
+          "input_exists": false,
+          "input_names": [],
+          "agents_exists": false
+        },
+        {
+          "lane": "audit-loop",
+          "input_exists": false,
+          "input_names": [],
+          "agents_exists": true
+        }
+      ],
+      "required_action": "ROOT补齐已承诺的固定输入/收据/handoff_contract副本，再发布；这是启动资料准备，不能转成要求用户新的许可",
+      "affects": [
+        "W05-CWP-OCR",
+        "W05-RF-FLOW",
+        "W05-AUDIT-LOOP"
+      ]
+    },
+    {
+      "id": "OCR-01",
+      "status": "PASS",
+      "finding": "根因定位有真实单页独立证据：两definition检测存在但rec乱码低分后被过滤，25→22；卡没有把selector错误当根因",
+      "evidence": [
+        "既有slide7-extraction-root-cause/report.json 31a993a34a0b032933d2a189569a9f9625b9ab791db75e26a5fbc251a89f6204",
+        "卡准确列OCR score/source/media SHA与更细识别机制未知"
+      ]
+    },
+    {
+      "id": "OCR-02",
+      "status": "PASS",
+      "finding": "public transcribe(data,*,limits)/OCRLine/ImageOCRResult兼容要求与实际baseline一致；添加默认诊断及composer接线可在许可写集完成",
+      "evidence": [
+        "local_ocr.py:33-113,367-412",
+        "ocr_composition.py:23-35,38-54,103-167,210-265"
+      ]
+    },
+    {
+      "id": "OCR-03",
+      "status": "PASS",
+      "finding": "ROI/变换/几何/过滤诊断/总预算/硬截止/旧版本/真实单页验证均明确；不保证未知细节一定能恢复，未恢复可PARTIAL且不阻断可用原文",
+      "evidence": [
+        "卡最多4region×2额外attempt、no云/LLM/新权重",
+        "单页90秒，真实恢复两定义否则PARTIAL；fake/真实边界分别说明"
+      ]
+    },
+    {
+      "id": "OCR-04",
+      "status": "NONBLOCKER_IMPLEMENTATION_NOTE",
+      "finding": "现有composer只累加原始image像素；ROI额外像素必须在adapter诊断中可观测并由composer累计到原总预算，不可只把同一OCRLimits完整额度反复传入",
+      "evidence": [
+        "ocr_composition.py:79,103-108",
+        "OCRLimits为frozen配置/阈值，现无mutable累计用量；card已要求所有恢复计原总像素时间"
+      ],
+      "required_action": "实现阶段由结果中的实际累计字段/统一budget对象接线，TDD跨多个image+多个ROI验证不重置；属于卡内方案细化，不需扩大写集/人工许可"
+    },
+    {
+      "id": "OCR-05",
+      "status": "PASS",
+      "finding": "列出的旧集中测试实际存在，新测试为明确新增；集成必须parse→enrich→NormalizedDocument，非只测helper；未运行本轮测试",
+      "evidence": [
+        "test_local_ocr_adapter.py/test_local_pptx_ocr.py/test_pptx.py存在",
+        "卡真实E2E初末SHA、owned清理和留小日志"
+      ]
+    },
+    {
+      "id": "RF-01",
+      "status": "PASS",
+      "finding": "短区间能力缺口与实际基线一致：helper限制3/6/12，未知起点不得猜，年化禁令/窗口内FY/旧schema留义合理",
+      "evidence": [
+        "contracts/period_flow.py:64-134",
+        "contracts/constants.py:18-34当前skill4.2.1/default3.7/period3.9",
+        "period_flow金额语义与annual_consumption规则"
+      ]
+    },
+    {
+      "id": "RF-02",
+      "status": "BLOCKER_SCOPE",
+      "finding": "schema3.10作为3.9的additive扩展还需继承role-aware机制triangulation；scripts/research/drivers.py当前仅schema==3.9才启用，但该文件未纳入卡写集",
+      "evidence": [
+        "scripts/research/drivers.py:376-385 role_aware=data.get('schema_version')==PERIOD_EVIDENCE_SCHEMA_VERSION",
+        "constants.py:30-34明确3.9同时含role-aware语义",
+        "RF卡research允许target_measurement/timing_bridge，不允许drivers.py"
+      ],
+      "required_action": "ROOT在卡中精确纳入drivers.py的schema族接线；新增3.10不得把history/financing/peer/direction-only证据当mechanism的回归。保留3.7/3.8/3.9语义；仅该一接缝，不扩大研究重构",
+      "impact": "按现写集合实现任意日期可能静默退回旧driver语义，无法独立交付所称整链additive兼容"
+    },
+    {
+      "id": "RF-03",
+      "status": "PASS",
+      "finding": "新schema/version有明确定义，保留4.2.1历史emit集合非常必要；否则registry动态ENGINE_VERSION升级将抹除旧emit",
+      "evidence": [
+        "schema_compatibility.py:50-52引用当前ENGINE_VERSION",
+        "卡明确4.2.1合法历史矩阵仍保留；默认仍3.7、3.10显式 opt-in"
+      ]
+    },
+    {
+      "id": "RF-04",
+      "status": "NONBLOCKER_STARTUP_DOC",
+      "finding": "RF工作树AGENTS.md不存在，SKILL.md/CHANGELOG及指定旧测试都存在；卡要求先读AGENTS可能误导较弱harness",
+      "evidence": [
+        "精确RF AGENTS.md.is_file()==False",
+        "其余已列旧测试/入口真实存在"
+      ],
+      "required_action": "ROOT改成AGENTS若存在则读；实际规则以随卡输入/SKILL/CHANGELOG为准。不能把不存在文件当业务RED或需要用户批准"
+    },
+    {
+      "id": "RF-05",
+      "status": "NONBLOCKER_CLARIFICATION",
+      "finding": "重hash拒篡改应固定为相对冻结bound-input/evidence reference的输出篡改；不能承诺把输入和所有输出一致重写后仍凭hash自动判定事实伪造",
+      "evidence": [
+        "卡'bound-input输出重hash后篡改日期/币种/范围仍拒'",
+        "schema_compatibility.requires_bound_input_schema/output重算保障数学与声明一致，不独立证明原文事实"
+      ],
+      "required_action": "测试明确输入/来源引用保持冻结，只改输出或与输入不一致的window；真实事实校验留ROOT来源实读/四审。该说明防夸大验收，不是新许可"
+    },
+    {
+      "id": "RF-06",
+      "status": "PASS",
+      "finding": "单元/集成/CLI E2E大节点、synthetic金额、非12-31财年、owned清理和不宣称买方质量PASS已定义；旧测试路径存在",
+      "evidence": [
+        "tests/test_m3_period_flow_contract.py等五文件存在",
+        "C节点说明真实公司经济验收ROOT G4/G5，0下载/LLM"
+      ]
+    },
+    {
+      "id": "AUDIT-01",
+      "status": "PASS",
+      "finding": "新卡准确引用已验证工具缺口，明确现有手工协调合法、没有观察到真实丢样/收费事故；不重复P7",
+      "evidence": [
+        "W05只读readiness报告",
+        "卡P7已具备vs8脚本/12tests能力缺口说明"
+      ]
+    },
+    {
+      "id": "AUDIT-02",
+      "status": "PASS",
+      "finding": "只新增文件写集、不改旧PWF/campaign/runs/SKILL/安装，纯reducer+init/plan/apply/migrate-preview接口清楚，与ROOT分类/LLM/RF均无产品路径重叠",
+      "evidence": [
+        "卡写集/public接口、动作枚举与ROOT最终接线"
+      ]
+    },
+    {
+      "id": "AUDIT-03",
+      "status": "PASS",
+      "finding": "revision+短OS互斥用于数据原子性，unknown费用先reconcile且原账为真值，不增加长lease/许可链或外部exactly-once承诺",
+      "evidence": [
+        "卡并发原子进度与费用段",
+        "卡网络拒绝/真实paid0/合成账不进母账"
+      ]
+    },
+    {
+      "id": "AUDIT-04",
+      "status": "PASS_WITH_LIMITATION",
+      "finding": "跨进程kill/resume、只补一个reviewer、未知收费0重发、版本归零/旧复测/三不同样本测试可施工；一次最终约38秒audit全套不构成每小commit门",
+      "evidence": [
+        "卡B/C命令与18类边界矩阵",
+        "旧P7接口不重写/只能诊断不判经济质量"
+      ],
+      "limitation": "本审查未运行新工具/测试，算法schema详细fixture由A节点设计实现；初始RED应由最小接口stub导致行为assert失败，而不是只保留ImportError"
+    },
+    {
+      "id": "COMMON-05",
+      "status": "NOT_RUN",
+      "finding": "本轮仅静态卡片与真实基线检查；没有原件OCR、产品单测、离线E2E、真实公司研究或付费调用",
+      "evidence": [
+        "工具只read/CodeGraph/AST/GitHEAD；产品写0"
+      ]
+    }
+  ],
+  "blockers": [
+    "COMMON-04 三树input未落地",
+    "RF-02 3.10继承role-aware需drivers.py精确写集"
+  ],
+  "nonblockers": [
+    "OCR-04 累计ROI资源计量细化",
+    "RF-04 不存在AGENTS启动措辞",
+    "RF-05 冻结输入相对的重hash反例明确",
+    "AUDIT-04 最小stub业务RED而不是ImportError"
+  ],
+  "input_cards": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\cards\\W05-CWP-OCR.md",
+      "sha256": "c5457658cf98f85a22e04ade4716daa05a3783df90ffc254ed6e02c814f58fc9",
+      "bytes": 6213
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\cards\\W05-RF-FLOW.md",
+      "sha256": "8ac56cb5b7ed150b584fde0c79ed8d9396fed0b3438512145d7a99b6f9a89822",
+      "bytes": 6616
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\cards\\W05-AUDIT-LOOP.md",
+      "sha256": "b59545a3bc2449952033e489e77cd460d356252b3c694726b790c812f23ec71d",
+      "bytes": 8569
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\handoff_contract.md",
+      "sha256": "45e10c161731aa108e3dc0df8262786f968a2bc8d7fa517b72ff6d17d6bb4835",
+      "bytes": 3497
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\task_plan.md",
+      "sha256": "83e4f36958ce036eeddc0bc2ba8e423dd67c1fba6a20110851346e360b28bc25",
+      "bytes": 4197
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w05_parallel_common_roots_2026-10-11\\workspace-receipt.json",
+      "sha256": "c72410ba76c25d58954767f8fac99c9214286ea12fb57e636e203bace551c028",
+      "bytes": 1727
+    }
+  ],
+  "observed_workspace_metadata": [
+    {
+      "lane": "cwp-ocr",
+      "input_exists": false,
+      "input_names": [],
+      "agents_exists": true
+    },
+    {
+      "lane": "rf-flow",
+      "input_exists": false,
+      "input_names": [],
+      "agents_exists": false
+    },
+    {
+      "lane": "audit-loop",
+      "input_exists": false,
+      "input_names": [],
+      "agents_exists": true
+    }
+  ],
+  "scope": {
+    "product_writes": 0,
+    "card_writes": 0,
+    "pwf_writes": 0,
+    "report_writes": 1,
+    "ocr_calls": 0,
+    "product_tests_run": 0,
+    "provider_calls": 0,
+    "model_calls": 0,
+    "new_cost_usd": "0",
+    "temp_files_created": 0
+  },
+  "limitations": [
+    "CodeGraph canonical CWP/RF返回旧索引片段，具体卡基线以已知工作树文件只读AST/source定位；未对旧Graph结果冒签fresh状态。",
+    "input缺失是本次快照，ROOT仍在准备；补齐后可消除此发布前准备阻塞。",
+    "准确SHA绑定当前读取卡片；ROOT后续修卡另记新版本，不改本报告旧观察。",
+    "这里不是公司研究质量PASS，也没有证明本地OCR两定义已恢复。"
+  ],
+  "created_at_utc": "2026-10-11T08:25:15.805220+00:00"
+}

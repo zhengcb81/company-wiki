@@ -75,3 +75,6 @@ source_manifests/archive/
 # build/ is a build output: a tracked copy carried stale product code (B.VR-ba1 F-BA1-07),
 # including the pre-fix unguarded manifest parse, outside every gate's scan root.
 build/
+
+# Durable original-only preservation packs; not disposable caches or Git payload.
+.source-preservation/

@@ -1,0 +1,60 @@
+{
+  "schema_version": "w05-workspaces/1",
+  "status": "READY_CLEAN",
+  "lanes": [
+    {
+      "lane": "W05-CWP-OCR",
+      "repository": "C:/Users/郑曾波/Projects/company-wiki",
+      "workdir": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/cwp-ocr",
+      "branch": "codex/w05-cwp-ocr",
+      "base": "159b993e2f4d36c7e86dc12c9d6028f4a31b353a",
+      "clean": true,
+      "sparse_directories": [
+        "src",
+        "scripts",
+        "tests",
+        "config",
+        "tools",
+        ".githooks",
+        ".github"
+      ],
+      "materialized_files": 1175,
+      "materialized_bytes": 16477278
+    },
+    {
+      "lane": "W05-RF-FLOW",
+      "repository": "C:/Users/郑曾波/Projects/revenue-forecast",
+      "workdir": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/rf-flow",
+      "branch": "codex/w05-rf-flow",
+      "base": "1b616622763ece6549676f2a74f596e6c65244af",
+      "clean": true,
+      "sparse_directories": [
+        "scripts",
+        "tests",
+        "references",
+        "tools",
+        ".githooks",
+        ".github"
+      ],
+      "materialized_files": 343,
+      "materialized_bytes": 3894822
+    },
+    {
+      "lane": "W05-AUDIT-LOOP",
+      "repository": "C:/Users/郑曾波/Projects/revenue-forecast-audit",
+      "workdir": "C:/Users/郑曾波/Projects/_harness_worktrees/w05/audit-loop",
+      "branch": "codex/w05-audit-loop",
+      "base": "c0993332623637d53f059350a382d99a95ef731d",
+      "clean": true,
+      "sparse_directories": [
+        "skills",
+        "tests",
+        "tools",
+        ".githooks",
+        ".github"
+      ],
+      "materialized_files": 44,
+      "materialized_bytes": 417782
+    }
+  ]
+}
