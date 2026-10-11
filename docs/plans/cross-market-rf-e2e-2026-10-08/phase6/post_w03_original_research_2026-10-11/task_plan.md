@@ -1,3 +1,14 @@
+## 当前施工入口（2026-10-11T03:26:44.846769+00:00）
+
+- P7-RF已验收/主线47f497ad/CI38096229764/18定点安装；CWP DOCX精确d3CI38106925215绿。
+- 推送范围责任修复116a39d8 normalcommit8.82秒，48责任测试+6独立probe通过，43files/26原evidence暂存字节相同；普通ff/push3206PASS/195.93秒，精确CI38108528804success，master/远端一致。工程大节点已关闭。
+- 原三公司sealed partial，12不同context四审全部真实封存FAIL，共229checks/89新finding；155 company旧key逐角色映射+2expert carryover=157。原预算/费用不重置，末3HK本地review如实晚于execution旧截止，原executors在窗口内。
+- 下一唯一主线行动：fresh expert已派，按 [专家卡](expert_handoff_card.md) 归并157旧+全部新→兄弟独立W04完整PWF/TDD/排他施工包，再实施；ROOT完成正常发布。P7-AUDIT独立技术已接收foundation、3材料缺陷纳W04，当前audit runtime不切，不直接改其源码。
+- 研究后续：原三家新执行四审→没参与修复A300750/HK00175/USCOST→NVDA/池loop；后置8公司目标尚未激活。执行/本地审查stage今后合理分别有界，不伪造旧时间或质量PASS。
+- 母账413778tokens/334463µUSD+FX2764保持，余额1586222tokens/$19.662773；本轮四审/CI0新付费。原件/config/Dayu/邻仓ownerWIP保护。TEMP mW03保留至专家已取得可复现必要输入/原件再按基线清理。
+
+以下带日期的旧状态为历史账，依此入口与真实queue执行。
+
 ## 2026-10-11T03:08:17.102343+00:00 — P7-RF主线保持；DOCX精确CI通过，12四审全部真实派出
 
 P7-RF47f497ad/CI38096229764/18定点安装已接受，不重复跑已验节点。CWP d3d80769正常commit25.620s/push3198PASS/191.38s（whole198.676s），精确CI38106925215 success，跨平台ZIP旧原字节修复关闭。gate效率根因是docs/plans归档probe.py进live dependency；TDD5FAIL/43PASS→48PASS/1.35s、Ruff绿，真实ee→d3区间只选DOCX unit，源/config/未知/dynamic既有fallback保持，等待一次独立定点与正常发布。

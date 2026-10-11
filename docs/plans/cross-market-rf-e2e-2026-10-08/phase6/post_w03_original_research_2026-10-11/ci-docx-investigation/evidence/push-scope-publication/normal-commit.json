@@ -1,0 +1,148 @@
+{
+  "observed_at": "2026-10-11T03:24:33.890504+00:00",
+  "command": [
+    "git",
+    "commit",
+    "-m",
+    "fix: select push tests by live code responsibility"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 8.819484999999986,
+  "head": "116a39d86ac0894786ea53a295c860c01f38a888",
+  "staged_files": 43,
+  "evidence_exact_blob_count": 26,
+  "evidence": [
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/actual-range-green.json",
+      "sha256": "dac2b5116a86d100b71d4535776ae358dff218417098bed3c6e42caf0c00cf3f",
+      "bytes": 6186
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/green.json",
+      "sha256": "00f6e7d570739a3beb7f2edb011a9074dd634b79094985bb1e0969c468fcb525",
+      "bytes": 380
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/green.log",
+      "sha256": "95d6a63ec47b7d7a0191fea6dea6211adb8ff9125618dfa66bcbdad23e4c33d0",
+      "bytes": 1198
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/old-tests-preserved.json",
+      "sha256": "7d6a43d48b04f19c82ade6257371da7765d2054803476e903714ce7ab582fa07",
+      "bytes": 672
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/prepublication-inspection.json",
+      "sha256": "58c6fd99076a316f1feff4dce1035927f6b6aec6a7276fa94ac12fe2a1d0d7b1",
+      "bytes": 1767
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/prepublication-whitespace-retry.json",
+      "sha256": "0ec897127661352425751b652b3462a97bca5f09b1648e4296ee796015b5edce",
+      "bytes": 316
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/red.json",
+      "sha256": "60627746766fcda7535e0173f218c6f05de7ac7283a523642c5d35a4b4974f2b",
+      "bytes": 370
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/red.log",
+      "sha256": "451f4e968bd07a4f00b0461efd89f0e84443fe05001f1625444593405a1fe471",
+      "bytes": 4345
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/ruff.json",
+      "sha256": "5896278addc58737b6cb9e900bfddcf2ece600db1499d68831c3d7f2d656bcb1",
+      "bytes": 416
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-independent-review/review.json",
+      "sha256": "594766d67881884527f5534d180f776ba2524e8a8798374d0c0014d599db494e",
+      "bytes": 47623
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-independent-review/review.md",
+      "sha256": "beff7d16ca79551322625fb62d4f31b9c73abef68dc6be31d27e813427deff52",
+      "bytes": 2413
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/exact-ci-observation-1.json",
+      "sha256": "2ab48ca9d4d2af3976eed9ff07563a6a59059bb1f45557924d8fc1ddbd32bda6",
+      "bytes": 671
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/exact-ci-observation-2.json",
+      "sha256": "92cec0e9ac3d32afecaee0ff9b514e5ea3437da718e0f323afea184c712fd286",
+      "bytes": 472
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/normal-commit.json",
+      "sha256": "b9081964e31aae858f463e61fb4e7c0435fb63f1752ffd59ee79c0f5a3be87e2",
+      "bytes": 13946
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/normal-commit.log",
+      "sha256": "a655fa5dc18db428d3d3a450e735310104754b341302aebc5d078f323b4ada32",
+      "bytes": 5597
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/normal-push.json",
+      "sha256": "1d89aa29837f5314a0d7b1720e4b406b5ad676328e12c4f11aef24d6a201d00d",
+      "bytes": 2687
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/normal-push.log",
+      "sha256": "884fe93c05e8cd0283e1c2d337739f3841baadc2f6ebfb04b5965633abcd9a1c",
+      "bytes": 337
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/push-selection-cause.json",
+      "sha256": "3fe47a743c25f0d42f40619f086fa62c05b1e1e2beb9fbc0d3aff857c7be6f4c",
+      "bytes": 602
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/CN-688012_analyst-intake.json",
+      "sha256": "d06972f9ff3e1a8b1ec9b0108e6beabfb859a5ee215e8d2f3dc0f79dc5a3dd6e",
+      "bytes": 4704
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/CN-688012_process-intake.json",
+      "sha256": "7486671d00fd95e39f6539150819b6531ef80bee7d86ecd24bc2f26324ed4059",
+      "bytes": 4635
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_analyst-dispatch.json",
+      "sha256": "d5c2ddca289802db2379f982cfce0ea9c03f7ce8b3b8693decff2b4a0ab186d1",
+      "bytes": 774
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_analyst-intake.json",
+      "sha256": "d58583993a39c14d3dba59e47ad9b3dba748742300190e9842c4b0bbb7b12401",
+      "bytes": 3980
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_fetch-dispatch.json",
+      "sha256": "9aa6cb845627cf8ee68d55ee0190c6135d2a221822b187d0948a70902bf438b7",
+      "bytes": 768
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_process-dispatch.json",
+      "sha256": "8f01ff1e676987728bd6aeee299074ff67f3f5a11768113adeee1397ac17dc3e",
+      "bytes": 774
+    },
+    {
+      "path": "docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_storage-intake.json",
+      "sha256": "739fdad298744c8a07812799cb77b75194a342e3555651e5ed05221e16f77862",
+      "bytes": 4806
+    }
+  ],
+  "log_sha256": "c202279722c41b4a23378729029d42a28a2e0149c2fefb99b937a8a18316b8cb",
+  "normal_hooks": true
+}

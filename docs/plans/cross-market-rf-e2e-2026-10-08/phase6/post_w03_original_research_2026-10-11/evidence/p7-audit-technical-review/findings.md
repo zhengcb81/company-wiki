@@ -1,0 +1,9 @@
+# Findings
+
+- HANDOFF SHA matches assigned 946afe381eced7697e849ee535480017c48d791b68bce58fa9d1fa1aaaa12f2d. Docs HEAD 40b38103f4b96860617e9bae98ec5b4ea8ee08d5 and code delivery 18a52f16e605e2ca33bcf5dff5b7d4176077aa1c match.
+- Escalated read-only Git status is clean. Git diff base→HEAD and base→working tree is empty for audit_run.py/numeric_audit.py and all five old test modules (59 old tests); old fixtures are unchanged. Default sandbox status gave fake must-be-run-in-work-tree; escalated read-only query resolves it without Git config changes.
+- Supplied final 96-test log SHA and E2E log SHA match handoff; no suite rerun.
+- CodeGraph is not initialized for assigned worktree; initialization would mutate the read-only task. Read specific material-listed files directly.
+- Five helpers and nine references read. Builder derives effective scope from outer scope/deploy/template; native bytes are independently serialized template.request. A body profile/cap mismatch can remain undiagnosed. Probe must distinguish bookkeeping from native cap enforcement.
+- max_cost_usd currently rejects zero via number <= 0, unlike cost observation accepting nonnegative zero; need native free-budget compatibility check by owner contract read.
+- APIs preserve small opt-in diagnostics and not_evaluated. Native owners retain real identity/provider/resource enforcement; W01–W08 remain within current expert root-cause adjudication.Completed six semantic probes: zero incompatible; negative/NaN correctly rejected; outer/body mismatch accepted; unchanged chain exact SHA equality; pre-capture mutation creates builder mismatch while frozen==child and existing W11 input integrity remains true. Three findings mapped to two root mechanisms, limited to owner contract corrections; no live enforcement or provider overspend claim.

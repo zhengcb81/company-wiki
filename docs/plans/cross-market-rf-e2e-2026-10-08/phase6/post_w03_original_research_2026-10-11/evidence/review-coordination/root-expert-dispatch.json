@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-10-11T03:29:18.995898+00:00",
+  "actual_spawned_agent": "/root/w04_pw03_common_root_expert",
+  "card": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\expert_handoff_card.md",
+  "input_index": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\review-coordination\\all-twelve-sealed.json",
+  "input_index_sha256": "a811d4fc08972f1331c60294fc22f24cea5068d408b2ccda07694b6595c7e49e",
+  "exclusive_output": "phase6/w04_post_pw03_common_roots_2026-10-11/",
+  "observation_not_child_start_time": true,
+  "new_external_gets": 0,
+  "new_model_calls": 0,
+  "new_project_fees": 0,
+  "goal_status": "active"
+}

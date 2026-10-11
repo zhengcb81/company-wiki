@@ -1,0 +1,462 @@
+{
+  "schema_version": "p7-audit-technical-probes/1",
+  "observed_at": "2026-10-11T03:26:31.521702+00:00",
+  "source_worktree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit",
+  "source_delivery_head": "18a52f16e605e2ca33bcf5dff5b7d4176077aa1c",
+  "read_only_source": true,
+  "source_sha256": {
+    "execution_request.py": "1dc8ad4705011fa553c62e71e961d5a2a5912250d00cf117410f06391e21918f",
+    "audit_run.py": "2c30b29fe64c78deef194ace0650ad73d3402e22510995baa2cf184c5ae54c57",
+    "native_cwp_budget": "ea4a6541542a7c549e085fb51ccc121b283667568c7a0c999029ff8b744d46b5"
+  },
+  "probe_count": 6,
+  "probes": [
+    {
+      "probe_id": "P01",
+      "name": "explicit_zero_cost_compatibility",
+      "audit": {
+        "state": "rejected",
+        "error_type": "ValueError",
+        "error": "caps_invalid: max_cost_usd must be positive and finite"
+      },
+      "native_cwp_constructor": {
+        "state": "accepted",
+        "value": {
+          "max_cost_usd": "0.00",
+          "provider_started": false,
+          "cost_reported": false,
+          "note": "constructor only; no provider execution or fee observation"
+        }
+      },
+      "native_acquisition_executed": false
+    },
+    {
+      "probe_id": "P02",
+      "name": "negative_cost_rejection",
+      "audit": {
+        "state": "rejected",
+        "error_type": "ValueError",
+        "error": "caps_invalid: max_cost_usd must be positive and finite"
+      },
+      "native_cwp_constructor": {
+        "state": "rejected",
+        "error_type": "ValueError",
+        "error": "max_cost_usd must be a finite non-negative decimal"
+      },
+      "native_acquisition_executed": false
+    },
+    {
+      "probe_id": "P03",
+      "name": "nan_cost_rejection",
+      "audit": {
+        "state": "rejected",
+        "error_type": "ValueError",
+        "error": "caps_invalid: max_cost_usd must be positive and finite"
+      },
+      "native_cwp_constructor": {
+        "state": "rejected",
+        "error_type": "ValueError",
+        "error": "max_cost_usd must be a finite non-negative decimal"
+      },
+      "native_acquisition_executed": false
+    },
+    {
+      "probe_id": "P04",
+      "name": "outer_body_discrepancy",
+      "state": "accepted",
+      "request": {
+        "max_cost_usd": "10.00",
+        "max_response_bytes": 1000,
+        "max_tokens": 1000,
+        "profile": "P2"
+      },
+      "effective_scope": {
+        "profile": "P1",
+        "caps": {
+          "max_request_bytes": 4096,
+          "max_response_bytes": 100,
+          "max_tokens": 100,
+          "max_cost_usd": "1.00"
+        },
+        "config_fingerprint": []
+      },
+      "diagnostics": [],
+      "request_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "actual_request_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "native_acquisition_executed": false
+    },
+    {
+      "probe_id": "P05",
+      "name": "unchanged_discrepant_body_capture",
+      "synthetic_local_child": true,
+      "native_acquisition_executed": false,
+      "build_record": {
+        "schema_version": "execution-request/1",
+        "check_kind": "execution_request_binding_not_authorization",
+        "boundary_note": "scope_expresses_request_boundary_not_authorization",
+        "request_id": "TECH-P7-001",
+        "purpose": "local_record_boundary_probe",
+        "created_at": "2026-10-11T03:26:30.531234+00:00",
+        "request_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+        "request_bytes": 84,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\tests\\fixtures\\p7_audit\\fake_native_child.py",
+          "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\execution\\requests\\20261011T032630Z-81d865ec\\request.json"
+        ],
+        "input_argv_positions": [
+          3
+        ],
+        "effective_scope": {
+          "profile": "P1",
+          "caps": {
+            "max_request_bytes": 4096,
+            "max_response_bytes": 100,
+            "max_tokens": 100,
+            "max_cost_usd": "1.00"
+          },
+          "config_fingerprint": []
+        },
+        "env_presence": [],
+        "diagnostics": [],
+        "attempt_id": "20261011T032630Z-81d865ec",
+        "attempt_dir": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\execution\\requests\\20261011T032630Z-81d865ec",
+        "request_file": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\execution\\requests\\20261011T032630Z-81d865ec\\request.json"
+      },
+      "capture_summary": {
+        "capture_id": "dc673bb7c1da40feba5a0d809a7d336f",
+        "exit_code": 0,
+        "timed_out": false,
+        "child_started": true,
+        "input_snapshots": [
+          {
+            "original_path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\execution\\requests\\20261011T032630Z-81d865ec\\request.json",
+            "frozen_path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\roles\\executor\\commands\\dc673bb7c1da40feba5a0d809a7d336f\\input-0001-ee373648444a.json",
+            "consumed_path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\roles\\executor\\commands\\dc673bb7c1da40feba5a0d809a7d336f\\consume-0001-ee373648444a.json",
+            "sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+            "byte_size": 84,
+            "argument_indices": [
+              3
+            ],
+            "observed_at": "2026-10-11T03:26:30.749469+00:00",
+            "consumed_unchanged": true,
+            "consumed_after_bytes": 84,
+            "consumed_after_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377"
+          }
+        ],
+        "input_complete": true,
+        "input_cleanup_complete": true,
+        "input_cleanup_failures": 0,
+        "runtime_observation": {
+          "python_version": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+          "platform": "Windows",
+          "capture_tool_sha256": "2c30b29fe64c78deef194ace0650ad73d3402e22510995baa2cf184c5ae54c57",
+          "observed_at": "2026-10-11T03:26:30.732901+00:00",
+          "scope_ref": null,
+          "scope_sha256": null
+        },
+        "direct_child_pid": 19936,
+        "execution_error": null,
+        "output_complete": true,
+        "warnings": [],
+        "max_log_bytes": 1048576,
+        "timeout_seconds": 10.0,
+        "max_input_bytes": 4194304,
+        "stdout_total_bytes": 539,
+        "stdout_retained_bytes": 539,
+        "stdout_truncated": false,
+        "stdout_artifact": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\roles\\executor\\commands\\dc673bb7c1da40feba5a0d809a7d336f\\stdout.txt",
+        "stderr_total_bytes": 0,
+        "stderr_retained_bytes": 0,
+        "stderr_truncated": false,
+        "stderr_artifact": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\roles\\executor\\commands\\dc673bb7c1da40feba5a0d809a7d336f\\stderr.txt",
+        "events": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\roles\\executor\\events.jsonl"
+      },
+      "child": {
+        "synthetic": true,
+        "consumed_request_path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\roles\\executor\\commands\\dc673bb7c1da40feba5a0d809a7d336f\\consume-0001-ee373648444a.json",
+        "consumed_request_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+        "consumed_request_bytes": 84,
+        "env_presence": []
+      },
+      "builder_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "snapshot_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "actual_frozen_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "child_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "three_party_sha_equal": true,
+      "frozen_child_sha_equal": true,
+      "child_body": {
+        "max_cost_usd": "10.00",
+        "max_response_bytes": 1000,
+        "max_tokens": 1000,
+        "profile": "P2"
+      },
+      "builder_diagnostics": [],
+      "mutation_performed": false,
+      "mutation_scope": null
+    },
+    {
+      "probe_id": "P06",
+      "name": "post_build_mutation_capture",
+      "synthetic_local_child": true,
+      "native_acquisition_executed": false,
+      "build_record": {
+        "schema_version": "execution-request/1",
+        "check_kind": "execution_request_binding_not_authorization",
+        "boundary_note": "scope_expresses_request_boundary_not_authorization",
+        "request_id": "TECH-P7-001",
+        "purpose": "local_record_boundary_probe",
+        "created_at": "2026-10-11T03:26:31.147582+00:00",
+        "request_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+        "request_bytes": 84,
+        "argv": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\tests\\fixtures\\p7_audit\\fake_native_child.py",
+          "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\execution\\requests\\20261011T032631Z-54960259\\request.json"
+        ],
+        "input_argv_positions": [
+          3
+        ],
+        "effective_scope": {
+          "profile": "P1",
+          "caps": {
+            "max_request_bytes": 4096,
+            "max_response_bytes": 100,
+            "max_tokens": 100,
+            "max_cost_usd": "1.00"
+          },
+          "config_fingerprint": []
+        },
+        "env_presence": [],
+        "diagnostics": [],
+        "attempt_id": "20261011T032631Z-54960259",
+        "attempt_dir": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\execution\\requests\\20261011T032631Z-54960259",
+        "request_file": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\execution\\requests\\20261011T032631Z-54960259\\request.json"
+      },
+      "capture_summary": {
+        "capture_id": "a24556ec90bc43cf8847aa5fa16a211e",
+        "exit_code": 0,
+        "timed_out": false,
+        "child_started": true,
+        "input_snapshots": [
+          {
+            "original_path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\execution\\requests\\20261011T032631Z-54960259\\request.json",
+            "frozen_path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\roles\\executor\\commands\\a24556ec90bc43cf8847aa5fa16a211e\\input-0001-fcb8c8f39f63.json",
+            "consumed_path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\roles\\executor\\commands\\a24556ec90bc43cf8847aa5fa16a211e\\consume-0001-fcb8c8f39f63.json",
+            "sha256": "fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a",
+            "byte_size": 161,
+            "argument_indices": [
+              3
+            ],
+            "observed_at": "2026-10-11T03:26:31.378444+00:00",
+            "consumed_unchanged": true,
+            "consumed_after_bytes": 161,
+            "consumed_after_sha256": "fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a"
+          }
+        ],
+        "input_complete": true,
+        "input_cleanup_complete": true,
+        "input_cleanup_failures": 0,
+        "runtime_observation": {
+          "python_version": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+          "platform": "Windows",
+          "capture_tool_sha256": "2c30b29fe64c78deef194ace0650ad73d3402e22510995baa2cf184c5ae54c57",
+          "observed_at": "2026-10-11T03:26:31.362506+00:00",
+          "scope_ref": null,
+          "scope_sha256": null
+        },
+        "direct_child_pid": 66660,
+        "execution_error": null,
+        "output_complete": true,
+        "warnings": [],
+        "max_log_bytes": 1048576,
+        "timeout_seconds": 10.0,
+        "max_input_bytes": 4194304,
+        "stdout_total_bytes": 540,
+        "stdout_retained_bytes": 540,
+        "stdout_truncated": false,
+        "stdout_artifact": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\roles\\executor\\commands\\a24556ec90bc43cf8847aa5fa16a211e\\stdout.txt",
+        "stderr_total_bytes": 0,
+        "stderr_retained_bytes": 0,
+        "stderr_truncated": false,
+        "stderr_artifact": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\roles\\executor\\commands\\a24556ec90bc43cf8847aa5fa16a211e\\stderr.txt",
+        "events": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\roles\\executor\\events.jsonl"
+      },
+      "child": {
+        "synthetic": true,
+        "consumed_request_path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\roles\\executor\\commands\\a24556ec90bc43cf8847aa5fa16a211e\\consume-0001-fcb8c8f39f63.json",
+        "consumed_request_sha256": "fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a",
+        "consumed_request_bytes": 161,
+        "env_presence": []
+      },
+      "builder_sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "snapshot_sha256": "fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a",
+      "actual_frozen_sha256": "fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a",
+      "child_sha256": "fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a",
+      "three_party_sha_equal": false,
+      "frozen_child_sha_equal": true,
+      "child_body": {
+        "max_cost_usd": "10.00",
+        "max_response_bytes": 1000,
+        "max_tokens": 1000,
+        "profile": "P2",
+        "technical_review_mutation": "changed after builder before capture"
+      },
+      "builder_diagnostics": [],
+      "mutation_performed": true,
+      "mutation_scope": "reviewer-owned generated request only"
+    }
+  ],
+  "local_commands": [
+    {
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "init",
+        "--root",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs",
+        "--company",
+        "Technical Reception Synthetic",
+        "--as-of",
+        "2026-10-11",
+        "--run-id",
+        "p05"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"run\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P05\\\\runs\\\\p05\", \"run_id\": \"p05\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+        "build",
+        "--scope",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\scope.json",
+        "--deploy",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\deploy.json",
+        "--template",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\template.json",
+        "--out-root",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\execution\\requests"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\": \"execution-request/1\", \"check_kind\": \"execution_request_binding_not_authorization\", \"boundary_note\": \"scope_expresses_request_boundary_not_authorization\", \"request_id\": \"TECH-P7-001\", \"purpose\": \"local_record_boundary_probe\", \"created_at\": \"2026-10-11T03:26:30.531234+00:00\", \"request_sha256\": \"ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377\", \"request_bytes\": 84, \"argv\": [\"C:\\\\Miniconda\\\\python.exe\", \"-B\", \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\_harness_worktrees\\\\p7\\\\audit\\\\tests\\\\fixtures\\\\p7_audit\\\\fake_native_child.py\", \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P05\\\\runs\\\\p05\\\\execution\\\\requests\\\\20261011T032630Z-81d865ec\\\\request.json\"], \"input_argv_positions\": [3], \"effective_scope\": {\"profile\": \"P1\", \"caps\": {\"max_request_bytes\": 4096, \"max_response_bytes\": 100, \"max_tokens\": 100, \"max_cost_usd\": \"1.00\"}, \"config_fingerprint\": []}, \"env_presence\": [], \"diagnostics\": [], \"attempt_id\": \"20261011T032630Z-81d865ec\", \"attempt_dir\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P05\\\\runs\\\\p05\\\\execution\\\\requests\\\\20261011T032630Z-81d865ec\", \"request_file\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P05\\\\runs\\\\p05\\\\execution\\\\requests\\\\20261011T032630Z-81d865ec\\\\request.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "capture",
+        "--run",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05",
+        "--role",
+        "executor",
+        "--freeze-input",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\execution\\requests\\20261011T032630Z-81d865ec\\request.json",
+        "--timeout-seconds",
+        "10",
+        "--freeze-arg-index",
+        "3",
+        "--",
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\tests\\fixtures\\p7_audit\\fake_native_child.py",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\execution\\requests\\20261011T032630Z-81d865ec\\request.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"capture_id\": \"dc673bb7c1da40feba5a0d809a7d336f\", \"exit_code\": 0, \"timed_out\": false, \"child_started\": true, \"input_snapshots\": [{\"original_path\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P05\\\\runs\\\\p05\\\\execution\\\\requests\\\\20261011T032630Z-81d865ec\\\\request.json\", \"frozen_path\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P05\\\\runs\\\\p05\\\\roles\\\\executor\\\\commands\\\\dc673bb7c1da40feba5a0d809a7d336f\\\\input-0001-ee373648444a.json\", \"consumed_path\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P05\\\\runs\\\\p05\\\\roles\\\\executor\\\\commands\\\\dc673bb7c1da40feba5a0d809a7d336f\\\\consume-0001-ee373648444a.json\", \"sha256\": \"ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377\", \"byte_size\": 84, \"argument_indices\": [3], \"observed_at\": \"2026-10-11T03:26:30.749469+00:00\", \"consumed_unchanged\": true, \"consumed_after_bytes\": 84, \"consumed_after_sha256\": \"ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377\"}], \"input_complete\": true, \"input_cleanup_complete\": true, \"input_cleanup_failures\": 0, \"runtime_observation\": {\"python_version\": \"3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]\", \"platform\": \"Windows\", \"capture_tool_sha256\": \"2c30b29fe64c78deef194ace0650ad73d3402e22510995baa2cf184c5ae54c57\", \"observed_at\": \"2026-10-11T03:26:30.732901+00:00\", \"scope_ref\": null, \"scope_sha256\": null}, \"direct_child_pid\": 19936, \"execution_error\": null, \"output_complete\": true, \"warnings\": [], \"max_log_bytes\": 1048576, \"timeout_seconds\": 10.0, \"max_input_bytes\": 4194304, \"stdout_total_bytes\": 539, \"stdout_retained_bytes\": 539, \"stdout_truncated\": false, \"stdout_artifact\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P05\\\\runs\\\\p05\\\\roles\\\\executor\\\\commands\\\\dc673bb7c1da40feba5a0d809a7d336f\\\\stdout.txt\", \"stderr_total_bytes\": 0, \"stderr_retained_bytes\": 0, \"stderr_truncated\": false, \"stderr_artifact\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P05\\\\runs\\\\p05\\\\roles\\\\executor\\\\commands\\\\dc673bb7c1da40feba5a0d809a7d336f\\\\stderr.txt\", \"events\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P05\\\\runs\\\\p05\\\\roles\\\\executor\\\\events.jsonl\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "init",
+        "--root",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs",
+        "--company",
+        "Technical Reception Synthetic",
+        "--as-of",
+        "2026-10-11",
+        "--run-id",
+        "p06"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"run\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P06\\\\runs\\\\p06\", \"run_id\": \"p06\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+        "build",
+        "--scope",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\scope.json",
+        "--deploy",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\deploy.json",
+        "--template",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\template.json",
+        "--out-root",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\execution\\requests"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\": \"execution-request/1\", \"check_kind\": \"execution_request_binding_not_authorization\", \"boundary_note\": \"scope_expresses_request_boundary_not_authorization\", \"request_id\": \"TECH-P7-001\", \"purpose\": \"local_record_boundary_probe\", \"created_at\": \"2026-10-11T03:26:31.147582+00:00\", \"request_sha256\": \"ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377\", \"request_bytes\": 84, \"argv\": [\"C:\\\\Miniconda\\\\python.exe\", \"-B\", \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\_harness_worktrees\\\\p7\\\\audit\\\\tests\\\\fixtures\\\\p7_audit\\\\fake_native_child.py\", \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P06\\\\runs\\\\p06\\\\execution\\\\requests\\\\20261011T032631Z-54960259\\\\request.json\"], \"input_argv_positions\": [3], \"effective_scope\": {\"profile\": \"P1\", \"caps\": {\"max_request_bytes\": 4096, \"max_response_bytes\": 100, \"max_tokens\": 100, \"max_cost_usd\": \"1.00\"}, \"config_fingerprint\": []}, \"env_presence\": [], \"diagnostics\": [], \"attempt_id\": \"20261011T032631Z-54960259\", \"attempt_dir\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P06\\\\runs\\\\p06\\\\execution\\\\requests\\\\20261011T032631Z-54960259\", \"request_file\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P06\\\\runs\\\\p06\\\\execution\\\\requests\\\\20261011T032631Z-54960259\\\\request.json\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "capture",
+        "--run",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06",
+        "--role",
+        "executor",
+        "--freeze-input",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\execution\\requests\\20261011T032631Z-54960259\\request.json",
+        "--timeout-seconds",
+        "10",
+        "--freeze-arg-index",
+        "3",
+        "--",
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\tests\\fixtures\\p7_audit\\fake_native_child.py",
+        "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P06\\runs\\p06\\execution\\requests\\20261011T032631Z-54960259\\request.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"capture_id\": \"a24556ec90bc43cf8847aa5fa16a211e\", \"exit_code\": 0, \"timed_out\": false, \"child_started\": true, \"input_snapshots\": [{\"original_path\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P06\\\\runs\\\\p06\\\\execution\\\\requests\\\\20261011T032631Z-54960259\\\\request.json\", \"frozen_path\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P06\\\\runs\\\\p06\\\\roles\\\\executor\\\\commands\\\\a24556ec90bc43cf8847aa5fa16a211e\\\\input-0001-fcb8c8f39f63.json\", \"consumed_path\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P06\\\\runs\\\\p06\\\\roles\\\\executor\\\\commands\\\\a24556ec90bc43cf8847aa5fa16a211e\\\\consume-0001-fcb8c8f39f63.json\", \"sha256\": \"fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a\", \"byte_size\": 161, \"argument_indices\": [3], \"observed_at\": \"2026-10-11T03:26:31.378444+00:00\", \"consumed_unchanged\": true, \"consumed_after_bytes\": 161, \"consumed_after_sha256\": \"fcb8c8f39f6336b05ce9563a0e7a9457c73dad9e4e8709139ae06e9c55f7a70a\"}], \"input_complete\": true, \"input_cleanup_complete\": true, \"input_cleanup_failures\": 0, \"runtime_observation\": {\"python_version\": \"3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]\", \"platform\": \"Windows\", \"capture_tool_sha256\": \"2c30b29fe64c78deef194ace0650ad73d3402e22510995baa2cf184c5ae54c57\", \"observed_at\": \"2026-10-11T03:26:31.362506+00:00\", \"scope_ref\": null, \"scope_sha256\": null}, \"direct_child_pid\": 66660, \"execution_error\": null, \"output_complete\": true, \"warnings\": [], \"max_log_bytes\": 1048576, \"timeout_seconds\": 10.0, \"max_input_bytes\": 4194304, \"stdout_total_bytes\": 540, \"stdout_retained_bytes\": 540, \"stdout_truncated\": false, \"stdout_artifact\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P06\\\\runs\\\\p06\\\\roles\\\\executor\\\\commands\\\\a24556ec90bc43cf8847aa5fa16a211e\\\\stdout.txt\", \"stderr_total_bytes\": 0, \"stderr_retained_bytes\": 0, \"stderr_truncated\": false, \"stderr_artifact\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P06\\\\runs\\\\p06\\\\roles\\\\executor\\\\commands\\\\a24556ec90bc43cf8847aa5fa16a211e\\\\stderr.txt\", \"events\": \"\\\\\\\\?\\\\C:\\\\Users\\\\郑曾波\\\\.codex\\\\worktrees\\\\m3-acceptance-20261010\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\post_w03_original_research_2026-10-11\\\\evidence\\\\p7-audit-technical-review\\\\local-evidence-retry\\\\P06\\\\runs\\\\p06\\\\roles\\\\executor\\\\events.jsonl\"}\n",
+      "stderr": ""
+    }
+  ],
+  "get_calls": 0,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "cost_usd": "0.00",
+  "full_suite_rerun": false,
+  "ci": "not_triggered",
+  "remote": "no_remote",
+  "quality_claim": false
+}

@@ -1,0 +1,81 @@
+{
+  "observed_at": "2026-10-11T03:26:44.846769+00:00",
+  "company": "HK-00700",
+  "role": "fetch",
+  "report": {
+    "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\fetch.json",
+    "json_sha256": "fb3a09010f99c970407dfefcba62e53d97cbb52c904a61d2715dcad1bc49f9a3",
+    "md": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\fetch.md",
+    "md_sha256": "446c61b93d5c3b3358edcd99b5f88f909a38bc10dcbb592fb62c4c3cb9a2c176"
+  },
+  "start_event": {
+    "schema_version": "1.0",
+    "event_id": "7521406c1ecc47bbbc2f2a08f9bb69e3",
+    "run_id": "pw03-20261011T010657Z-hk-00700",
+    "role": "fetch",
+    "kind": "review_started",
+    "recorded_at": "2026-10-11T03:07:24.509694+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "initial",
+      "step_id": "FETCH-START",
+      "call_id": "readonly-local-fetch-review-001",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\handoffs\\execution.json",
+          "locator": "manifest.sha256"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\execution\\manifest.json",
+          "locator": "artifacts"
+        }
+      ],
+      "observation": "Fresh independent fetch reviewer began local readonly review after original execution deadline 2026-10-11T03:06:57.807570Z; no external GET, provider/model call, fee reset, executor continuation, or other reviewer draft read. Scope is F01-F12 plus 12 legacy fetch coverage keys."
+    }
+  },
+  "completed_event": {
+    "schema_version": "1.0",
+    "event_id": "28a7415e694644abb34846df39d78b13",
+    "run_id": "pw03-20261011T010657Z-hk-00700",
+    "role": "fetch",
+    "kind": "review_completed",
+    "recorded_at": "2026-10-11T03:20:53.956821+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "initial",
+      "step_id": "FETCH-COMPLETE",
+      "call_id": "readonly-local-fetch-review-completion",
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\fetch.json",
+          "locator": "checks/findings/legacy_retests",
+          "sha256": "fb3a09010f99c970407dfefcba62e53d97cbb52c904a61d2715dcad1bc49f9a3"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\fetch.md",
+          "locator": "all check/finding/legacy tables",
+          "sha256": "446c61b93d5c3b3358edcd99b5f88f909a38bc10dcbb592fb62c4c3cb9a2c176"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\roles\\fetch\\diagnostics\\local-read-diagnostics.json",
+          "locator": "manifest/originals/claim_original_mismatches"
+        }
+      ],
+      "observation": "Independent local readonly fetch review completed after original execution window. Quality FAIL; 16 checks, 6 findings, all 12 designated legacy keys retested with honest PASS/FAIL/BLOCKED/NOT_RUN limits. JSON/MD self-check agrees. 349 sealed artifact hashes and 16 raw hashes match. New reviewer GET/provider/model/fee=0; original 12718tokens/13347microUSD proxy, invoice unknown, HTTP788213bytes/0USD preserved. No other reviewer drafts or execution/source/install edits; cleanup deferred to ROOT after four reviews."
+    }
+  },
+  "checks": 16,
+  "findings": 6,
+  "old_key_count": 12,
+  "old_status": {
+    "BLOCKED": 3,
+    "NOT_RUN": 4,
+    "FAIL": 3,
+    "PASS": 2
+  },
+  "quality_pass": false,
+  "executor_deadline_not_reset": true,
+  "review_stage": "local_readonly_review_after_executor_deadline"
+}

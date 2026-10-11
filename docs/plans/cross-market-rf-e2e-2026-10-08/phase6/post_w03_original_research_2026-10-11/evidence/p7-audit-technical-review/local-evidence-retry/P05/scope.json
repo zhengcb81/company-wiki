@@ -1,0 +1,1 @@
+{"profile": "P1", "resource_limits": {"max_request_bytes": 4096, "max_response_bytes": 100, "max_tokens": 100, "max_cost_usd": "1.00"}, "config_refs": [], "env_refs": []}

@@ -1,0 +1,37 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI).......................................................Passed
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test).......................Passed
+[codex/main-auto-official-json-20261010 116a39d8] fix: select push tests by live code responsibility
+ 43 files changed, 299 insertions(+), 18 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/PUSH_SCOPE_CONTINUATION.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/actual-range-green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/green.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/old-tests-preserved.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/prepublication-inspection.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/prepublication-whitespace-retry.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/red.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/ruff.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-implementation/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-independent-review/probe.py
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-independent-review/review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/push-scope-independent-review/review.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/exact-ci-observation-1.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/exact-ci-observation-2.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/normal-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/evidence/zip-fixture-publication/push-selection-cause.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/ci-docx-investigation/push_scope_review_card.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/CN-688012_analyst-intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/CN-688012_process-intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_analyst-dispatch.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_analyst-intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_fetch-dispatch.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_process-dispatch.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/evidence/review-coordination/HK-00700_storage-intake.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/expert_handoff_card.md

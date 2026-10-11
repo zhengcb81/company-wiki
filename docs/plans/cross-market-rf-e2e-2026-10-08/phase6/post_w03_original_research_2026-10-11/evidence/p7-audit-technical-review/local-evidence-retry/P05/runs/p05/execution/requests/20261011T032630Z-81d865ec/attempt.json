@@ -1,0 +1,30 @@
+{
+  "schema_version": "audit-attempt/1",
+  "tool": "execution_request.py build",
+  "attempt_id": "20261011T032630Z-81d865ec",
+  "created_at": "2026-10-11T03:26:30.540134+00:00",
+  "inputs": [
+    {
+      "path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\scope.json",
+      "sha256": "5573d48437af4188a3c38521f41b74607278e69c56036518a575942958929209",
+      "byte_size": 170
+    },
+    {
+      "path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\deploy.json",
+      "sha256": "ad154e8a5c439417512db8496190a5294d49d6b0286d6b5907c7c1712838025c",
+      "byte_size": 124
+    },
+    {
+      "path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\template.json",
+      "sha256": "4a14897555afad168d6c78d64a6c5d167eff767899641c8272a349bf4b2bfd07",
+      "byte_size": 457
+    }
+  ],
+  "outputs": [
+    {
+      "path": "\\\\?\\C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\local-evidence-retry\\P05\\runs\\p05\\execution\\requests\\20261011T032630Z-81d865ec\\request.json",
+      "sha256": "ee373648444a7674c1309efe3a707ce8573a6f0e7d0480cc436f5c032a8e5377",
+      "byte_size": 84
+    }
+  ]
+}

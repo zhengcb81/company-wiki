@@ -1,0 +1,98 @@
+{
+  "observed_at": "2026-10-11T03:26:44.846769+00:00",
+  "company": "HK-00700",
+  "role": "process",
+  "report": {
+    "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\process.json",
+    "json_sha256": "bf648c17b00a65d5223738c9cc2b5343e60de13e7b4a80e1f2ca4e334bb65bfb",
+    "md": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\process.md",
+    "md_sha256": "a6285dca54781cc7a26dad181a52c4c39d9e200340616b29913221d754bebe31"
+  },
+  "start_event": {
+    "schema_version": "1.0",
+    "event_id": "591a41c80f074e3ba915a27a167f3276",
+    "run_id": "pw03-20261011T010657Z-hk-00700",
+    "role": "process",
+    "kind": "review_started",
+    "recorded_at": "2026-10-11T03:07:29.932513+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "invoice_cost_usd": null,
+      "observation": "Fresh independent reviewer actually read installed audit/RF/FF skills, artifact/review-process contract, responsibility AGENTS, role card and frozen scope/handoff. Local review starts after original execution deadline, no reset.",
+      "step_id": "PROCESS-REVIEW",
+      "additional_provider_calls": 0,
+      "call_id": "hk-process-review-start",
+      "original_deadline_at": "2026-10-11T03:06:57.807570Z",
+      "additional_cost_usd": "0.00",
+      "additional_get_calls": 0,
+      "stage": "post_deadline_local_independent_review",
+      "attempt_id": "initial",
+      "additional_model_calls": 0
+    }
+  },
+  "completed_event": {
+    "schema_version": "1.0",
+    "event_id": "ab222188901c4b13a0ae352c0ebd2a08",
+    "run_id": "pw03-20261011T010657Z-hk-00700",
+    "role": "process",
+    "kind": "review_completed",
+    "recorded_at": "2026-10-11T03:24:22.658183+00:00",
+    "usage": null,
+    "cost": null,
+    "data": {
+      "attempt_id": "initial",
+      "step_id": "PROCESS-REVIEW",
+      "call_id": "hk-process-review-completed",
+      "stage": "post_deadline_local_independent_review",
+      "original_deadline_at": "2026-10-11T03:06:57.807570Z",
+      "review_started_event_id": "591a41c80f074e3ba915a27a167f3276",
+      "executor_completion": "verified",
+      "execution_outcome": "partial",
+      "quality_verdict": "FAIL",
+      "checks": 29,
+      "findings": 8,
+      "old_coverage_keys_mapped": 13,
+      "numeric_comparisons": 861,
+      "numeric_mismatches": 0,
+      "derived_parameters_recomputed": 110,
+      "native_sensitivity_tests_recomputed": 27,
+      "raw_key_documents_reopened": 4,
+      "raw_key_physical_pages_reopened": 11,
+      "additional_get_calls": 0,
+      "additional_provider_calls": 0,
+      "additional_model_calls": 0,
+      "additional_cost_usd": "0.00",
+      "invoice_cost_usd": null,
+      "evidence": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\process.json",
+          "locator": "checks; findings; old_coverage_retests; numeric_coverage",
+          "sha256": "bf648c17b00a65d5223738c9cc2b5343e60de13e7b4a80e1f2ca4e334bb65bfb"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\reports\\process.md",
+          "locator": "whole independent process report",
+          "sha256": "a6285dca54781cc7a26dad181a52c4c39d9e200340616b29913221d754bebe31"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\roles\\process\\local-probe.json",
+          "locator": "counts; derived_checks; numeric_checks; claim_checks; freeze_checks",
+          "sha256": "d547c97e09465391e64f44743bbb558b81ca9292a79b34a353a61b0d15363b3a"
+        }
+      ],
+      "observation": "Actual independent local process review completed and role artifacts copied write-once with SHA verification. 861 numeric comparisons/110 derived/27 sensitivities match sealed native formulas; 54 reported parameters and 55 audit fact rows sourced; 4 originals and 11 key physical pages reopened. Eight findings remain: unsupported future amplitudes, latest announcement window, transcript provider gap, paid deck truncation, one undeclared non-contiguous claim, adjacent formal trust statement, snapshot schema mismatch, original snapshot and retained byte overruns. No other reviewer drafts read; no execution/source/install/PWF writes or new GET/provider/model/paid calls. Original deadline expired and was not reset. STOP after this event; ROOT receives artifact SHA and remaining findings; this is not all-project completion."
+    }
+  },
+  "checks": 29,
+  "findings": 8,
+  "old_key_count": 13,
+  "old_status": {
+    "FAIL": 6,
+    "PASS": 6,
+    "BLOCKED": 1
+  },
+  "quality_pass": false,
+  "executor_deadline_not_reset": true,
+  "review_stage": "local_readonly_review_after_executor_deadline"
+}

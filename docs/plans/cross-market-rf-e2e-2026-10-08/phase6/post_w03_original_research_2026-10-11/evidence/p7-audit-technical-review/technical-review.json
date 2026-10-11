@@ -1,0 +1,322 @@
+{
+  "schema_version": "p7-audit-technical-reception/1",
+  "observed_at": "2026-10-11T03:29:09.694249+00:00",
+  "kind": "independent engineering read-only reception; not company four-role review",
+  "identity": {
+    "worktree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit",
+    "base_head": "78c2b1089200937a9371548f3f8a212c501fdfcd",
+    "delivery_head": "18a52f16e605e2ca33bcf5dff5b7d4176077aa1c",
+    "docs_head": "40b38103f4b96860617e9bae98ec5b4ea8ee08d5",
+    "handoff_sha256": "946afe381eced7697e849ee535480017c48d791b68bce58fa9d1fa1aaaa12f2d",
+    "canonical_install_state": "Assigned canonical audit remains base; no install/runtime switch performed."
+  },
+  "acceptance": {
+    "state": "accept_foundation_with_material_request_binding_defects",
+    "accepted": [
+      "Opt-in five-helper/nine-reference engineering closure, bounded new attempt outputs and diagnostic/non-evaluated APIs.",
+      "Existing W11 audit_run/numeric_audit and all old test modules/fixtures are byte-compatible by clean worktree plus base diff.",
+      "Supplied 96-test log and supplied synthetic E2E log are hash-verified historical evidence; unchanged local chain independently confirmed frozen==consumed identity."
+    ],
+    "not_accepted": [
+      "An unconditional claim that effective_scope describes actual native request controls.",
+      "A claim that capture enforces builder identity across pre-capture modification without expected SHA handoff.",
+      "A positive-only fee cap as compatible with native free acquisition budgets."
+    ],
+    "not_claimed": [
+      "Live native/provider/model budget enforcement, provider overspend, real company RF completion, investment quality, CI success."
+    ]
+  },
+  "materials": {
+    "read": [
+      "HANDOFF.md",
+      "handoff.json",
+      "task_plan.md",
+      "findings.md",
+      "progress.md",
+      "scripts/audit_contracts.py",
+      "scripts/execution_request.py",
+      "scripts/document_status_join.py",
+      "scripts/authoring_provenance.py",
+      "scripts/review_protocol.py",
+      "references/workflow.md",
+      "references/executor.md",
+      "references/artifact-contract.md",
+      "references/remediation.md",
+      "references/rf-checkpoints.md",
+      "references/review-storage.md",
+      "references/review-fetch.md",
+      "references/review-process.md",
+      "references/review-analyst.md",
+      "tests/test_scope_request_binding.py",
+      "supplied fake_native_child.py",
+      "supplied E2E driver",
+      "supplied 96-test log",
+      "ROOT request-contract-diagnostics.json"
+    ],
+    "codegraph": "Uninitialized on assigned audit worktree; no init under read-only scope. Main CWP/FF native contract context used.",
+    "git": "Default sandbox status emitted must be run in a work tree. Authorized require_escalated read-only Git status clean, no config/environment alteration.",
+    "old_surface": {
+      "audit_run_and_numeric_audit_base_diff": "empty",
+      "old_tests_base_diff": "empty",
+      "old_test_modules": [
+        "test_audit_run.py",
+        "test_legacy_native_events.py",
+        "test_numeric_audit.py",
+        "test_precall_input_history.py",
+        "test_sync_skill.py"
+      ],
+      "old_test_count": 59,
+      "full_suite_rerun": false
+    },
+    "logs": [
+      {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\.planning\\p7-audit-execution-review\\evidence\\m3-final-20261010T234447Z-c1b05984\\green.log",
+        "sha256": "3a88257e4669c90601bc368972d7d01fe7ef336a44a602da468df98c165cfeb0",
+        "observed_tail": "Ran 96 tests in 37.167s; OK; SUITE_EXIT=0"
+      },
+      {
+        "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\.planning\\p7-audit-execution-review\\evidence\\m3-e2e-20261010T221838Z-cc073b16\\e2e.log",
+        "sha256": "26bc6547eff65072fe065cdff98c967721b428b29787541af695b2939ffa5e50"
+      }
+    ]
+  },
+  "public_interfaces": [
+    {
+      "helper": "audit_contracts",
+      "api": [
+        "new_attempt_dir",
+        "write_attempt",
+        "cli_main"
+      ],
+      "contract": "fresh bounded evidence attempts; W11 redactor reused"
+    },
+    {
+      "helper": "execution_request",
+      "api": [
+        "build_execution_request -> bytes,record",
+        "build CLI"
+      ],
+      "contract": "outer min scope/deploy and byte/hash/argv record; defects above"
+    },
+    {
+      "helper": "document_status_join",
+      "api": [
+        "join_status_index",
+        "join CLI"
+      ],
+      "contract": "transport/business distinct; each result located; once-per-call costs; unknown null; diagnostic index"
+    },
+    {
+      "helper": "authoring_provenance",
+      "api": [
+        "check_provenance",
+        "check CLI"
+      ],
+      "contract": "consumed fragment comparison; quote/actor/date/period diagnostics; not upstream truth"
+    },
+    {
+      "helper": "review_protocol",
+      "api": [
+        "aggregate_findings",
+        "check_coverage",
+        "coverage CLI"
+      ],
+      "contract": "4-tuple issue keys; numeric/crosscheck/scope gaps; not_evaluated; v1/old runs read-only"
+    }
+  ],
+  "probe_results": {
+    "artifact": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\probe-results.json",
+    "sha256": "9638b9ecd449f19a92663a1d7f601f75bd8c138057d7466d99d3d06af3ff5965",
+    "count": 6,
+    "cases": [
+      {
+        "id": "P01",
+        "name": "explicit_zero_cost_compatibility"
+      },
+      {
+        "id": "P02",
+        "name": "negative_cost_rejection"
+      },
+      {
+        "id": "P03",
+        "name": "nan_cost_rejection"
+      },
+      {
+        "id": "P04",
+        "name": "outer_body_discrepancy"
+      },
+      {
+        "id": "P05",
+        "name": "unchanged_discrepant_body_capture"
+      },
+      {
+        "id": "P06",
+        "name": "post_build_mutation_capture"
+      }
+    ],
+    "native_executed": "CWP pure budget constructor only; supplied local fake child only; no native acquisition",
+    "first_attempt_failure": "Windows path length at deep assigned evidence root; first failed driver/local attempt preserved; same semantic cases retried using extended-length paths."
+  },
+  "findings": [
+    {
+      "issue_id": "TECH-P7-001",
+      "severity": "P1",
+      "category": "code",
+      "root_cause_id": "P7-REQUEST-DOMAIN",
+      "summary": "Audit money-cap domain rejects explicit zero, incompatible with native free acquisition budgets.",
+      "actual": "P01 rejects max_cost_usd=0.00 before request construction; CWP native budget constructor accepts 0.00 without provider invocation. P02/P03 reject negative and NaN in both.",
+      "owner": "P7 execution_request.cap_value; FF/CWP remain owners of their native request validity and live cost enforcement.",
+      "references": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+          "line": 36,
+          "detail": "money cap parser"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+          "line": 44,
+          "detail": "finite and number<=0 rejection"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\download_budget.py",
+          "line": 15,
+          "detail": "native finite nonnegative Decimal helper"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py",
+          "line": 319,
+          "detail": "native acquisition_limits fee syntax permits 0 and 0.00"
+        }
+      ],
+      "evidence": {
+        "artifact": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\probe-results.json",
+        "locator": "probes[P01..P03]"
+      },
+      "minimum_correction": "For max_cost_usd only, permit finite nonnegative values (number < 0 rejected). Preserve bool rejection, non-finite rejection, positive integer byte/token/time rules, and min(scope,deploy). Use native accepted money syntax in the native owner adapter; do not coerce unknown/null into zero.",
+      "tdd": [
+        "RED: explicit scope/deploy/template 0.00 free request currently rejected; GREEN must preserve exact zero in effective scope.",
+        "Negative and NaN remain rejected; native pure constructor round-trip confirms compatibility. No provider claim."
+      ]
+    },
+    {
+      "issue_id": "TECH-P7-002",
+      "severity": "P1",
+      "category": "observability",
+      "root_cause_id": "P7-REQUEST-BINDING",
+      "summary": "The helper checks outer metadata but independently serializes native JSON, so effective_scope can describe a different request.",
+      "actual": "P04 accepts outer profile P1 / max_response_bytes=100 / max_tokens=100 / cost=1.00 while request bytes contain P2 / 1000 / 1000 / 10.00; diagnostics=[]; P05 faithfully carries those bytes to local fake child with three equal SHAs.",
+      "owner": "Native request producer/integration adapter plus P7 build_execution_request binding. Native FF/CWP retain provider, identity, byte/time/fee enforcement responsibility.",
+      "references": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+          "line": 152,
+          "detail": "outer effective scope"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+          "line": 157,
+          "detail": "only template.limits is checked"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+          "line": 170,
+          "detail": "independent template.request business object"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+          "line": 190,
+          "detail": "recorded effective_scope"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\references\\workflow.md",
+          "line": 51,
+          "detail": "scope-to-real-request binding claim"
+        }
+      ],
+      "evidence": {
+        "artifact": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\probe-results.json",
+        "locator": "probes[P04,P05]"
+      },
+      "minimum_correction": "Bind only resource/profile fields that the actual named native contract owns. Produce them once in the native request/config/argv producer; derive the audit observation from those actual values, compare against min(scope,deploy), and name discrepancies. For FF map acquisition_limits.max_bytes/timeout_seconds/max_cost_usd through existing contracts; do not recursively interpret arbitrary RF JSON numbers as controls. For a JSON contract with no resource controls, record declared versus observed/unknown binding scope without claiming native enforcement. Preserve supplied business fields and current opt-in diagnostics.",
+      "tdd": [
+        "RED: actual owner-shaped native request/config/argv contradicts outer limits or profile; record must expose/reject local binding invalidity under the existing contract rather than silently claim binding.",
+        "GREEN: zero-fee FF shape and cap-at/below-boundary match recorded actual controls, and ordinary RF forecast JSON lacking such controls remains compatible.",
+        "Generic P2 field in this probe is not evidence that any deployed native endpoint accepts it; a native owner adapter fixture is required for production integration."
+      ]
+    },
+    {
+      "issue_id": "TECH-P7-003",
+      "severity": "P2",
+      "category": "observability",
+      "root_cause_id": "P7-REQUEST-BINDING",
+      "summary": "P7 composition does not pass the builder digest into prelaunch freeze, so the documented build==capture identity is an assumption.",
+      "actual": "P06 changes only the reviewer-owned generated request after build. Capture freezes changed current bytes and child consumes them, with input_complete/output_complete=true and exit 0; builder SHA differs from frozen==child SHA. Existing W11 behavior is internally correct for freezing current inputs.",
+      "owner": "P7 builder→capture integration composer. W11 owns current-byte history and consumed-copy integrity, not a builder digest it never receives.",
+      "references": [
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\execution_request.py",
+          "line": 189,
+          "detail": "positions recorded but no digest handoff argument"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+          "line": 461,
+          "detail": "freeze function has no expected digest input"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+          "line": 513,
+          "detail": "hash of current source bytes"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+          "line": 598,
+          "detail": "capture invokes current-input freeze"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+          "line": 618,
+          "detail": "child launch after freeze"
+        },
+        {
+          "artifact": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\p7\\audit\\skills\\revenue-forecast-audit\\references\\executor.md",
+          "line": 45,
+          "detail": "documented same-SHA requirement"
+        }
+      ],
+      "evidence": {
+        "artifact": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review\\probe-results.json",
+        "locator": "probes[P06]"
+      },
+      "minimum_correction": "In the opt-in P7 composition path carry the builder expected digest to the frozen-byte comparison before child launch. Compare the exact retained snapshot SHA, rather than adding a separate pre-read with a race. An optional expected-digest parameter/hook on the existing freeze boundary is one small compatible implementation; legacy capture with no expectation keeps current semantics. Digest mismatch is local invalid input with a concrete record, not a human signature or global publication gate. Keep post-call consumed integrity and original failure precedence.",
+      "tdd": [
+        "RED/GREEN: builder artifact mutation before capture gives a named mismatch and child_started=false in the P7 opt-in path.",
+        "Unchanged file produces builder==frozen==consumed SHA; legacy capture without a builder record still freezes current bytes; 59 old assertions remain unchanged."
+      ]
+    }
+  ],
+  "expert_disposition": "TECH-P7-001/002/003 and handoff W01–W08 are inputs to the current root-cause expert adjudication. Reconcile existing owner plans and overlap before any implementation. No second remediation workflow created. RC-08 diagnostic/global-gate tension does not justify a new gate.",
+  "compatibility_and_boundaries": [
+    "Keep diagnostic not_evaluated status, SourceRef/acquisition-observation ownership, v1/old reports, old assertions and existing unknown/null semantics.",
+    "Zero fee is a configured resource cap; it does not authorize paid work. Native owners remain responsible for real pre/while-read caps and cost evidence.",
+    "No per-document permission JSON, human signature, new provider/source inventory, duplicate identity verification, cross-repository file writes or blanket JSON permission schema.",
+    "Do not install/switch during current company four-role review. Later integration belongs to MAIN and its existing owner plan."
+  ],
+  "remote": "no_remote",
+  "ci": "not_triggered",
+  "costs": {
+    "get_calls": 0,
+    "provider_calls": 0,
+    "project_model_calls": 0,
+    "new_cost_usd": "0.00"
+  },
+  "changes": {
+    "source": false,
+    "original_tests": false,
+    "installation": false,
+    "production_config": false,
+    "sealed_company_run": false,
+    "output_scope": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\evidence\\p7-audit-technical-review"
+  },
+  "stop": "Review completed; report is not implementation authorization or quality approval."
+}
