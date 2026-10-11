@@ -1,0 +1,137 @@
+Updating 1415e314..0f7540b5
+Fast-forward
+ .../cross-market-rf-e2e-2026-10-08/findings.md     |  20 ++
+ .../main_auto_official_json/W03_ACCEPTANCE.md      |   8 +
+ .../W08_PROVENANCE_ACCEPTANCE.md                   |   7 +
+ .../W08_PROVENANCE_CONTINUATION.md                 |  20 ++
+ .../main_auto_official_json/W09_EXECUTOR_BRIEF.md  | 120 +++++++++
+ .../source-09-publication/normal-commit.json       | Bin 0 -> 391 bytes
+ .../source-09-publication/normal-commit.log        | Bin 0 -> 6067 bytes
+ .../source-09-publication/normal-push.json         | Bin 0 -> 560 bytes
+ .../evidence/source-09-publication/normal-push.log | Bin 0 -> 25219 bytes
+ .../green-contract20.json                          | Bin 0 -> 2855 bytes
+ .../green-contract20.log                           | Bin 0 -> 1698 bytes
+ .../source-09-test-contract-repair/ruff.log        | Bin 0 -> 19 bytes
+ .../source-10-publication/source-snapshot.json     | Bin 0 -> 1801 bytes
+ .../HANDOFF-enumeration-supplement.md              | Bin 0 -> 4028 bytes
+ .../evidence/w03-default-gate-repair/HANDOFF.md    | Bin 0 -> 8577 bytes
+ .../w03-default-gate-repair/before-shas.json       | Bin 0 -> 45380 bytes
+ .../enumeration-before-shas.json                   | Bin 0 -> 1635 bytes
+ .../enumeration-final-receipt.json                 | Bin 0 -> 4115 bytes
+ .../enumeration-final-sha-index.json               | Bin 0 -> 708 bytes
+ .../w03-default-gate-repair/enumeration-green.log  | Bin 0 -> 1278 bytes
+ .../enumeration-node-receipt.json                  | Bin 0 -> 2404 bytes
+ .../w03-default-gate-repair/enumeration-red.log    | Bin 0 -> 5627 bytes
+ .../w03-default-gate-repair/enumeration-ruff.log   | Bin 0 -> 19 bytes
+ .../w03-default-gate-repair/final-sha-index.json   | Bin 0 -> 1051 bytes
+ .../green-targeted-attempt-01.log                  | Bin 0 -> 1152 bytes
+ .../node-pure-business-public.log                  | Bin 0 -> 1654 bytes
+ .../w03-default-gate-repair/node-receipt.json      | Bin 0 -> 3214 bytes
+ .../original-prepush-red.log                       | Bin 0 -> 25219 bytes
+ .../protection-receipt.json                        | Bin 0 -> 1620 bytes
+ .../w03-default-gate-repair/red-new-semantic.log   | Bin 0 -> 9065 bytes
+ .../red-original-targeted.log                      | Bin 0 -> 5481 bytes
+ .../w03-default-gate-repair/static-mypy.log        | Bin 0 -> 44 bytes
+ .../w03-default-gate-repair/static-ruff.log        | Bin 0 -> 19 bytes
+ .../w03-default-independent-review/FOLLOWUP.md     | Bin 0 -> 2350 bytes
+ .../w03-default-independent-review/REVIEW.md       | Bin 0 -> 6277 bytes
+ .../followup-native.log                            | Bin 0 -> 10213 bytes
+ .../followup-receipt.json                          | Bin 0 -> 4053 bytes
+ .../minimal-probe.json                             | Bin 0 -> 729 bytes
+ .../w03-default-independent-review/receipt.json    | Bin 0 -> 4732 bytes
+ .../evidence/w08-budget-refresh-20261011.json      | Bin 0 -> 18197 bytes
+ .../evidence/w08-operational-readiness-20261011.md | Bin 0 -> 25073 bytes
+ .../w08-provenance-independent-review/FOLLOWUP.md  | Bin 0 -> 1809 bytes
+ .../w08-provenance-independent-review/REVIEW.md    | Bin 0 -> 4459 bytes
+ .../followup-native.log                            | Bin 0 -> 4456 bytes
+ .../followup-receipt.json                          | Bin 0 -> 1917 bytes
+ .../minimal-probe.json                             | Bin 0 -> 1075 bytes
+ .../w08-provenance-independent-review/receipt.json | Bin 0 -> 1791 bytes
+ .../CONTROL_CHAR_SUPPLEMENT.md                     | Bin 0 -> 1555 bytes
+ .../evidence/w08-provenance-repair/GREEN.log       | Bin 0 -> 2073 bytes
+ .../w08-provenance-repair/GREEN_control_chars.log  | Bin 0 -> 1116 bytes
+ .../w08-provenance-repair/GREEN_final_targeted.log | Bin 0 -> 1115 bytes
+ .../evidence/w08-provenance-repair/HANDOFF.md      | Bin 0 -> 6164 bytes
+ .../evidence/w08-provenance-repair/RED.log         | Bin 0 -> 4978 bytes
+ .../w08-provenance-repair/RED_control_chars.log    | Bin 0 -> 2824 bytes
+ .../evidence/w08-provenance-repair/mypy.log        | Bin 0 -> 44 bytes
+ .../w08-provenance-repair/ruff-control-chars.log   | Bin 0 -> 19 bytes
+ .../evidence/w08-provenance-repair/ruff-final.log  | Bin 0 -> 19 bytes
+ .../evidence/w08-provenance-repair/ruff.log        | Bin 0 -> 19 bytes
+ .../evidence/w09-economic-readiness-20261011.md    | Bin 0 -> 25054 bytes
+ .../phase6/main_auto_official_json/task_plan.md    |  20 ++
+ .../findings.md                                    |   7 +
+ .../progress.md                                    |   3 +
+ .../task_plan.md                                   |  44 ++++
+ .../cross-market-rf-e2e-2026-10-08/progress.md     |  20 ++
+ .../cross-market-rf-e2e-2026-10-08/task_plan.md    |  20 ++
+ .../source_catalog/canonical_writer.py             |   4 +-
+ .../source_catalog/narrative_business_groups.py    |  36 ++-
+ .../source_catalog/narrative_business_policy.py    |  39 ++-
+ .../source_catalog/official_json_import.py         |  36 ++-
+ tests/contract/test_narrative_output_plan.py       |  22 +-
+ .../test_official_json_capture_provenance.py       | 267 +++++++++++++++++++++
+ tests/unit/test_narrative_evidence.py              | 105 ++++++++
+ tests/unit/test_transcript_boundary_versions.py    |   5 +-
+ 73 files changed, 787 insertions(+), 16 deletions(-)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/W08_PROVENANCE_ACCEPTANCE.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/W08_PROVENANCE_CONTINUATION.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/W09_EXECUTOR_BRIEF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-09-publication/normal-commit.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-09-publication/normal-commit.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-09-publication/normal-push.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-09-publication/normal-push.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-09-test-contract-repair/green-contract20.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-09-test-contract-repair/green-contract20.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-09-test-contract-repair/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/source-10-publication/source-snapshot.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/HANDOFF-enumeration-supplement.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/before-shas.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/enumeration-before-shas.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/enumeration-final-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/enumeration-final-sha-index.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/enumeration-green.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/enumeration-node-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/enumeration-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/enumeration-ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/final-sha-index.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/green-targeted-attempt-01.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/node-pure-business-public.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/node-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/original-prepush-red.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/protection-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/red-new-semantic.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/red-original-targeted.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/static-mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-gate-repair/static-ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-independent-review/FOLLOWUP.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-independent-review/REVIEW.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-independent-review/followup-native.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-independent-review/followup-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-independent-review/minimal-probe.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w03-default-independent-review/receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-budget-refresh-20261011.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-operational-readiness-20261011.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-independent-review/FOLLOWUP.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-independent-review/REVIEW.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-independent-review/followup-native.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-independent-review/followup-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-independent-review/minimal-probe.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-independent-review/receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/CONTROL_CHAR_SUPPLEMENT.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/GREEN.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/GREEN_control_chars.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/GREEN_final_targeted.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/HANDOFF.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/RED.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/RED_control_chars.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/mypy.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/ruff-control-chars.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/ruff-final.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w08-provenance-repair/ruff.log
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/main_auto_official_json/evidence/w09-economic-readiness-20261011.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/findings.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/progress.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/post_w03_original_research_2026-10-11/task_plan.md
+ create mode 100644 tests/integration/test_official_json_capture_provenance.py

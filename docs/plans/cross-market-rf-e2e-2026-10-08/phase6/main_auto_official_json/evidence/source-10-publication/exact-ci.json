@@ -1,0 +1,10 @@
+{
+  "id": 38100444473,
+  "name": "CI",
+  "head_sha": "0f7540b50e404eb1083192ad5412b9aa6fa4d4bc",
+  "status": "completed",
+  "conclusion": "success",
+  "created_at": "2026-10-11T01:02:00Z",
+  "updated_at": "2026-10-11T01:04:06Z",
+  "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38100444473"
+}

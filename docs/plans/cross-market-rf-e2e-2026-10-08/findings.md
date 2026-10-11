@@ -1,5 +1,21 @@
 # Findings
 
+## 2026-10-11T01:15:38.127724+00:00 — 来源真实准备封存；原三家独立执行 READY
+
+SOURCE 8 register/29 source-facts/3 public reader共40 capture全部exit0和输入输出完整；32/32 Ref2实字节读回，29/29旧patch+proof精确原样转用，新copy原件0B。70保护文件SHA和32原件stat未变；0 provider/model/新token/费。handoff SHA4554b035…与来源报告bf375dd7…冻结，source owner停写；随后ROOT只对自有scope作一次READY_SOURCE_PARTIAL冻结，保留CN FY24、HKoverview及无旧patch资格差异，不把PARTIAL当失败许可或强制PASS。
+
+每公司消费者pathless交接+独立施工卡已落地；deadline仍真实03:06:57Z，旧unknown母账保留。正常docs-only提交推送此真实进度后派3 fresh上下文，不读取旧forecast答案，之后每公司4独立审查/专家共因。工程0f7540b5/3163PASS/CI38100444473与RF47f497ad已接受，P7-AUDIT未交源不动。Next Step：正常归档当前已完成记录→三独立RF执行。
+
+## 2026-10-11T01:08:52.246654+00:00 — 修复普通发布闭环；原三家新隔离环境已初始化
+
+CWP本地/远端master一致`0f7540b50e404eb1083192ad5412b9aa6fa4d4bc`，normalcommit7.67秒/73文件/54原字节evidence核staged blob相同；normalpush实际3163PASS/174.85秒（全181.86秒），精确CI38100444473 success。生产config/source_catalog.yaml及config.yaml前后SHA保持，canonical clean；全部原RED/独立反例保留，没有绕hooks。真实回执[normalpush](phase6/main_auto_official_json/evidence/source-10-publication/normal-push.json)、[exactCI](phase6/main_auto_official_json/evidence/source-10-publication/exact-ci.json)。本机gh不在PATH，使用GitHub公开只读API核同HEAD；不是CI失败。
+
+按真实来源能力调查，旧readonly catalog+新AUTO无法隔离新artifact/projection写，故新ownedTEMP`mW03-ahg078jp`分三家公司新catalog/auto/work/registry/providerstate，旧原件用readonly roots精确register、不clone DB/整湖scan/复制PDF。新运行实际01:06:57Z开始，asof2026-10-08、CN/HK2026–28及US2027–29、7200s deadline沿cohort真实冻结。三小identity cache仅2238B同字节复制；资料32Ref/29旧SHA-bound field proof由来源owner原样转用到新publicsource-facts，不借文件名/目录或弱US sidecar推断事实。source owner内部agent独占新TEMP与coordinator记录，停写后才交3独立RF executor，ROOT不并写其记录。实际scope和run入口见[cohort](phase6/post_w03_original_research_2026-10-11/cohort.json)。当前来源登记进行、executor未启动、0外部provider/model/新增费。
+
+DeepSeek从实际Config.load(...,llm_provider=deepseek)读取deepseek-flash/https://api.deepseek.com/chat/completions/maxoutput8192/temperature1/max_tokens字段，凭证环境变量存在但值不记录；继续原versioned conservative pricing、母账332015tokens/250690µUSD含旧unknown+FX2764。新fresh每公司≤120k/$2，总≤360k/$6及真正累计余量；未知不自动重发。原件/config/Dayu/其他owner WIP保持；StockInfoDLSimple/v2-clean-rewrite另owner源WIP只读记录，不reset、不以HEAD冒称其dirty运行源纯净，若实际新下载消费须冻结真实runtime字节。
+
+Next Step：SOURCE新catalog32范围真实登记/29proof复用handoff→ROOT冻结ready scope并派3fresh RF上下文→各公司四不同reviewer/专家原157问题共因复验→新三家与既有loop。P7-RF47f497ad发布/安装/CI接受；P7-AUDIT未交付保持边界。工程PASS不等于研究PASS，goal active。
+
 ## 2026-10-11T00:57:24.703695+00:00 — source09根因修复与W08来源网址集中独立接受，正常发布准备
 
 先前normalpush真实7FAIL及原日志SHA389f0e29…保留，不绕hooks。五项pure0.7误选/邻接原断言保持：实际具体组件/用途/流程关系与明确指代的紧邻原子组替代泛经营标签，122PASS属于首次修复快照；独立审发现列表尾“等/等等/以及”通用词法遗漏，再真实RED3FAIL/2PASS→新5+原20定点25PASS/0.63s，不重跑122/public3。独立2原生负控/正控PASS，原文、locator、groups、旧策略和真实TXT全指纹保持。另两项ROOT职责测试20PASS仍有效，W04生产源码未改。最终集中[独立补充](phase6/main_auto_official_json/evidence/w03-default-independent-review/FOLLOWUP.md)接受，历史BLOCKER不覆盖。

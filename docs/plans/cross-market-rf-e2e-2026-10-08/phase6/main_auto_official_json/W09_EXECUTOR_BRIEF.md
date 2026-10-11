@@ -14,7 +14,7 @@
 |---|---|
 | 范围和期间 | 同as-of，记录实际财政年度及起止日；请求三年逐年显示支持期。H1/Q金额按新native period-flow口径，不给半年金额贴annual标签；原12月年度不能因季度增长年化。 |
 | 当前工程版本 | 从实际installed入口记录源码/版本SHA、schema/emitter、source selector/parser及model generationpolicy；本轮RF 4.2.1支持旧4.2.0只读，不重签旧产物。CWP新运行用实际0.7，旧0.6保留真实历史语义。发布/安装依据MAIN接受回执，不重开完整工程套件。 |
-| 原件复用 | 先用 [W08输入盘点](w08-readiness-20261011.md) 的actual SourceRef/ledger。32 refs已存在于原M3隔离scope；production未indexed或retired不等于没有原件。通过所属source层打开/登记实际bytes，不能SQL复活、重复GET或用文件名证明公开日期。 |
+| 原件复用 | 先用 [W08输入盘点](evidence/w08-readiness-20261011.md) 的actual SourceRef/ledger。32 refs已存在于原M3隔离scope；production未indexed或retired不等于没有原件。通过所属source层打开/登记实际bytes，不能SQL复活、重复GET或用文件名证明公开日期。 |
 | 新执行隔离 | 独立company/attempt/run/catalog/AUTO/work/registry，旧sealed M3保持；共享资料以真实ref读取，不整湖复制。原件直到四审完成可打开。source/raw不翻译。 |
 | 资料缺口 | SSE86小页已保存但尚待公开import成Ref，三流与issuer/parent/pointer/as-of分别保留；17目标命中页只是partial parent集，不能叫86页完整覆盖。403/204/entitlement/encoding取得失败必须区分。 |
 | 资源 | 使用当前配置provider/purpose和profile/caps，不临时猜模型、不逐材料许可。累计USD20/2M承接旧unknown，付费前查当前原生母账；旧已知下界不是当前最终可用余额。公司单轮≤原120k/USD2及当前更小界，加总≤实余量。 |
@@ -117,4 +117,4 @@ F. **交付/恢复**：formal native result +同renderer Markdown +registry/snap
 | W05/P7-AUDIT | 当前MAIN记录P7-AUDIT未交；其独占源码不动。 | 实际executor/checkscope及四review完整落盘，不能假定未交付的audit更新已安装。可使用已有正式流程，由MAIN按排他边界接线。 |
 
 研究GREEN需要重要未来幅度/时点/转换和falsifier能从原件复查，请求三年实质支持。工程通过、计划交付、预算耗尽、confidence0或“全部typed checked”不替代此结论。真实无法取得的数据列证据/影响/合法替代/未完成责任，保持overall partial；不靠输入调整绕门、不额外添加逐条人工审签。原三家实质问题复验后才按既定新A/H/US三家泛化，再NVDA/池loop；本只读准备不激活新目标。
-
+

@@ -1,5 +1,9 @@
 # W08 可执行入口与输入绑定（只读准备，2026-10-11）
 
+## 当前运行覆盖说明（2026-10-11T01:15:38.127724+00:00）
+
+历史准备内容下方保留。实际CWP0f7540b5已发布/exactCI绿，shared producer来源网址已修复为真实capture URL或诚实None；下面旧占位URL诊断不是当前代码。三家公司新mW03 catalogs已公开32Ref/29proof准备封存，scope READY_SOURCE_PARTIAL与消费者handoff为当前目录/资格依据，旧mFresh仅原件只读输入。ROOT实际Config.load已核DeepSeek-flash配置/环境凭证存在，值不记录；旧“未加载配置/未开始”只指原报告观察时刻。新执行仍未开始model/provider/研究。不要为旧叙述重复下载、修源码或退回旧output目录。
+
 状态：**OPERATIONAL_PREPARATION_ONLY**。承接同目录 `w08-readiness-20261011.md`（SHA050b43b6087bb49a6e624d4e2b6ccbae8ef0b450173f53996192380ac86f8f06）和既有 W08/MAJOR_NODE。未调用下面任何业务入口，没有新下载/模型、没有改源码/安装/配置/原件/数据库。只读刷新六个明确 AUTO 账本并新增独立 budget receipt。下一真实研究始终原三家公司、as-of2026-10-08；CN/HK2026–2028，US2027–2029。
 
 ## 1. 工程发布与真实研究分别记状态

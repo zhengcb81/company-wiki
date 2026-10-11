@@ -1,0 +1,58 @@
+{
+  "schema_version": "post-w03-original-cohort/1",
+  "started_at": "2026-10-11T01:06:57.807570+00:00",
+  "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp",
+  "baseline_owned_root_preparation": "New nonexistent TEMP root; original OS TEMP file set is restored when this exact owned root is removed after four reviews.",
+  "source_head": "0f7540b50e404eb1083192ad5412b9aa6fa4d4bc",
+  "ci": {
+    "id": 38100444473,
+    "name": "CI",
+    "head_sha": "0f7540b50e404eb1083192ad5412b9aa6fa4d4bc",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-10-11T01:02:00Z",
+    "updated_at": "2026-10-11T01:04:06Z",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38100444473"
+  },
+  "entries": [
+    {
+      "company": "CN-688012",
+      "prior_source_scope": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\CN-688012",
+      "source_environment": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\CN-688012",
+      "audit_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012",
+      "scope": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-cn-688012\\scope.json",
+      "run_id": "pw03-20261011T010657Z-cn-688012"
+    },
+    {
+      "company": "HK-00700",
+      "prior_source_scope": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700",
+      "source_environment": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\HK-00700",
+      "audit_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700",
+      "scope": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-hk-00700\\scope.json",
+      "run_id": "pw03-20261011T010657Z-hk-00700"
+    },
+    {
+      "company": "US-MSFT",
+      "prior_source_scope": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT",
+      "source_environment": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\US-MSFT",
+      "audit_run": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft",
+      "scope": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\pw03-20261011T010657Z-us-msft\\scope.json",
+      "run_id": "pw03-20261011T010657Z-us-msft"
+    }
+  ],
+  "external_provider_calls": 0,
+  "paid_model_calls": 0,
+  "new_cost_micro_usd": 0,
+  "status": "SOURCE_PREPARATION_COMPLETE_RESEARCH_READY",
+  "source_registration_report": "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\source_environment_handoff.json",
+  "source_handoff_sha256": "4554b035f37ff45a03646b21518cdc013bc0de6c6e5e427e1f96f693f7ecfbd7",
+  "source_preparation_execution_status": "PASS",
+  "source_readiness_status": "PARTIAL",
+  "source_owner_stopped_at": "2026-10-11T01:13:42.893071+00:00",
+  "ready_at": "2026-10-11T01:15:38.127724+00:00",
+  "executor_cards": [
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\CN-688012_EXECUTOR.md",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\HK-00700_EXECUTOR.md",
+    "C:\\Users\\郑曾波\\.codex\\worktrees\\m3-acceptance-20261010\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\US-MSFT_EXECUTOR.md"
+  ]
+}
