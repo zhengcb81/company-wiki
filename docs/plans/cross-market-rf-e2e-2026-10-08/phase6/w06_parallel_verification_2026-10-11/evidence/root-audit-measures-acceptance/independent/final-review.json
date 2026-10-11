@@ -1,0 +1,129 @@
+{
+  "schema_version": "w06-independent-final-review/1",
+  "reviewer": "/root/w05_ocr_acceptance_review",
+  "author_of_product": false,
+  "product_root": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root",
+  "frozen_files": [
+    {
+      "path": "skills/revenue-forecast-audit/scripts/financial_measure_audit.py",
+      "sha256": "b48e20bb9ecf88c1cb86821978c668cb83e963989dc4b1ca099b5d5bbad48020",
+      "bytes": 35965
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/financial-measure-audit.md",
+      "sha256": "f6bbe13d77d02c2601e9a00cb8c44b95ca96d4fe61b3753fdf7e21801f724bea",
+      "bytes": 12583
+    },
+    {
+      "path": "skills/revenue-forecast-audit/SKILL.md",
+      "sha256": "b256fb89e7bf1b6f975b26e062b21d0441223c20e2a6da55e3f2863f09775653",
+      "bytes": 10110
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/review-process.md",
+      "sha256": "afce9a432b087596cbb3f7bed5d01552ac93b4c63612d6882cb5d8e5bb599140",
+      "bytes": 5791
+    },
+    {
+      "path": "skills/revenue-forecast-audit/references/review-analyst.md",
+      "sha256": "beb18b08e02459cea0e08d8b300b07a12911eb0000538805a651af59e0352c85",
+      "bytes": 4094
+    },
+    {
+      "path": "tests/test_financial_measure_root_regressions.py",
+      "sha256": "36ceba626b7d54507e4bf70b9502c9540494542a7d0de1f76d6c2fca05b7570e",
+      "bytes": 1205
+    },
+    {
+      "path": "tests/test_financial_measure_typed_contract.py",
+      "sha256": "466fa7696666bbdd5f015c3261cbed3fa20db696939be65a52c8cb8dbca1c5c0",
+      "bytes": 7894
+    },
+    {
+      "path": "tests/test_financial_measure_report_boundary.py",
+      "sha256": "73e4dd8fbf2701e61ffe0b6ea69a6460a121f5308c78119d9228c77d92ac3e86",
+      "bytes": 1305
+    }
+  ],
+  "review_decision": "ACCEPT_WITH_SCOPED_LIMITS",
+  "engineering_status": "PASS_INDEPENDENT_FOCUSED_ACCEPTANCE",
+  "p1_findings": [],
+  "findings": [
+    {
+      "id": "W06-INDEPENDENT-01",
+      "priority": "P2",
+      "status": "CLOSED_AND_INDEPENDENTLY_VERIFIED",
+      "file": "skills/revenue-forecast-audit/scripts/financial_measure_audit.py",
+      "line": 587,
+      "title": "Invalid top-level report omits source_qualification_verified",
+      "cause": "_empty_report does not use the same nonattestation fields as the normal report factory.",
+      "impact": "Malformed-but-valid JSON is diagnosed without crashing and cannot return PASS; its report shape differs from the documented schema and a strict consumer can raise KeyError.",
+      "reproductions": [
+        "independent_nonobject_ledger_report_contract",
+        "independent_observations_object_report_contract",
+        "cli-structured-invalid.json"
+      ],
+      "fix": "Include source_qualification_verified:false in _empty_report; retain original failure evidence and do one focused schema verification. No additional permission or identity check is needed.",
+      "resolution": "ROOT added source_qualification_verified:false to _empty_report; three pure checks and one real CLI check verify the final frozen product. Prior failure evidence is preserved."
+    }
+  ],
+  "independent_checks": {
+    "unchanged_original_vectors": 19,
+    "independent_additional_vectors": 8,
+    "expected_arithmetic_statuses_passed": 27,
+    "unexpected_statuses_or_exceptions": [],
+    "cli": {
+      "exit_code": 2,
+      "structured_invalid_report": true,
+      "nonattestation_field_omission_reproduced": true
+    },
+    "scratch_restored": true,
+    "pre_schema_fix_product_sha256": "294af2a66f30334cd332b5e8e7210adb4d8793bf38959f2d902ee8db1474d808",
+    "pre_schema_fix_output_contract_failures_preserved": [
+      "independent_nonobject_ledger_report_contract",
+      "independent_observations_object_report_contract"
+    ],
+    "final_schema_fix": {
+      "pure_core_checks": 3,
+      "real_cli_checks": 1,
+      "pass": true,
+      "evidence": "report-boundary-verification.json",
+      "scratch_restored": true,
+      "final_delta_only_empty_factory_nonattestation_field": true,
+      "reconstructed_pre_fix_sha256": "294af2a66f30334cd332b5e8e7210adb4d8793bf38959f2d902ee8db1474d808"
+    }
+  },
+  "static_review": {
+    "typed_input_and_output_context": "Checked entity/definition/kind/currency/scale/time/arity and dependency validity propagation.",
+    "period": "Growth/CAGR preserve output anchor, require ordered comparable periods; temporal sums cannot silently concatenate overlaps/gaps.",
+    "roles": "Future guidance and explicit assumptions are legal; reported future facts and more-factual result promotions remain UNRESOLVED.",
+    "unknown_provenance": "Missing required fact source_ref remains UNRESOLVED. Optional unknown available_by is diagnostic-only; source qualification is never attested.",
+    "precision": "Decimal arithmetic; boolean rounding rejected, positive tolerance bounded by explicit display precision and actual expected magnitude, tiny values have no one-unit epsilon floor.",
+    "shape_schema": "Bad arity/schema/as-of/shape are structured non-PASS reports. The P2 finding affects a nonattestation field only, not overall status.",
+    "scope": "Explicitly scoped cross-entity market share is allowed; no identity reconstruction or permit chain added.",
+    "root_skill_wiring": "SKILL.md, review-process.md and review-analyst.md make the tool supplemental and preserve four independent source/process/model reviews."
+  },
+  "author_test_evidence_read_not_independently_repeated": {
+    "focused": "76 PASS",
+    "full_suite": "296 PASS in 75.047s",
+    "numeric_unchanged": "7 PASS",
+    "cli_e2e": "CN/HK/US synthetic ledgers, mutations, immutable attempts and cleanup",
+    "report": "../fix/repair-report.json",
+    "root_report_boundary": "One test with seven subcases; original six schema omissions RED and normal control PASS, final all financial 77 PASS; ROOT did not repeat 296.",
+    "root_report_boundary_logs": [
+      "../fix/report-boundary-red.log",
+      "../fix/report-boundary-green.log"
+    ]
+  },
+  "scope_limits": [
+    "PASS is declared arithmetic and typed-context consistency only. Source truth, source qualification, complete company numerical coverage, buy-side model quality and W04 economic reasonableness are not signed off.",
+    "source_ref, FX source, scope_inclusion, definition and display-precision basis are declared strings; reviewers must read actual evidence and validate their meanings.",
+    "Optional unavailable available_by does not block the math tool; the four-review workflow remains responsible for actual publication availability and as-of qualification.",
+    "The sum operation checks contiguous flow periods, not parallel business segments. Unequal 52/53-week comparability is not inferred.",
+    "No live providers, real-document content, LLM or paid resources were called in this independent review."
+  ],
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "charged_cost_usd": "0",
+  "original_intake_failures_preserved": true
+}

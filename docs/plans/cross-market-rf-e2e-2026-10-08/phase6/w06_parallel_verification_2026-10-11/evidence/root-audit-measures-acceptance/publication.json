@@ -1,0 +1,20 @@
+{
+  "schema_version": "w06-root-publication/1",
+  "status": "ACCEPTED_WITH_SCOPE",
+  "main_head": "9cd5ff8a2c8f9c1726c4047785164e3263673614",
+  "main_worktree_clean": true,
+  "remote": null,
+  "frozen_product_sha256": "b48e20bb9ecf88c1cb86821978c668cb83e963989dc4b1ca099b5d5bbad48020",
+  "canonical_product_sha256": "de7c7fe3764ce3678fecc51466a9dca84e2c14da84d215c472157c4fb8f9dced",
+  "normalized_source_equal": true,
+  "installed_copies": 2,
+  "files_per_copy": 26,
+  "changed_files_per_copy": 5,
+  "new_llm_calls": 0,
+  "new_cost_usd": 0,
+  "full_engineering_tests_before_output_field_delta": 296,
+  "final_financial_tests": 77,
+  "independent_review": "independent/final-review.md",
+  "scope": "Declared typed arithmetic; source truth and economic reasonableness are not certified.",
+  "whole_pwf_complete": false
+}

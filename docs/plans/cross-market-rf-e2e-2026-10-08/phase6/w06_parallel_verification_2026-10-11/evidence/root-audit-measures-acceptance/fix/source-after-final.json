@@ -1,0 +1,317 @@
+[
+  {
+    "path": "skills/revenue-forecast-audit/agents/openai.yaml",
+    "sha256": "b81a556d2424002ea561ba9c124ccbe8b888b6fb27300df0d0c0c4c554af319f",
+    "bytes": 316
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/artifact-contract.md",
+    "sha256": "4de59015c66a757ef73bca1855516c69fc3935c4ac71e4113382a8e7b7c36633",
+    "bytes": 13087
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/company-pool-loop.md",
+    "sha256": "aa7dfcc864f1c8e7e2d66e770ae199c251a003fc3836583422a8f24226c629db",
+    "bytes": 12019
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/execution-artifact-contract.md",
+    "sha256": "9e9a854d39c4ac02aa7e1789ba27375c72f9cd8a2003210249b97036d4cce1d5",
+    "bytes": 7586
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/executor.md",
+    "sha256": "c9acb192a7a921d15a3da450832a6cd5f4e09bbaa7b7387b156cb613c165ba8e",
+    "bytes": 6238
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/financial-measure-audit.md",
+    "sha256": "f6bbe13d77d02c2601e9a00cb8c44b95ca96d4fe61b3753fdf7e21801f724bea",
+    "bytes": 12583
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/numeric-ledger-example.json",
+    "sha256": "2f793ef0b2ec633a7a31bd8b42c7d7a0c8759667c928122d721e0677f4f33890",
+    "bytes": 347
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/pool-progress-contract.md",
+    "sha256": "b9004f3af394b211fb450c844faf166e4219c93f081fffb4a088da9c528a285b",
+    "bytes": 12567
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/remediation.md",
+    "sha256": "91baa2d3f19fa03696eee78b899a6a4e34310f07677d9c4afa3b9b943ab251cf",
+    "bytes": 5731
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-analyst.md",
+    "sha256": "beb18b08e02459cea0e08d8b300b07a12911eb0000538805a651af59e0352c85",
+    "bytes": 4094
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-fetch.md",
+    "sha256": "40f5ec6e95c301ba6a9011e379bfaf08b8244f8c9eea6427e8fe23f52914b1d8",
+    "bytes": 3847
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-process.md",
+    "sha256": "afce9a432b087596cbb3f7bed5d01552ac93b4c63612d6882cb5d8e5bb599140",
+    "bytes": 5791
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-storage.md",
+    "sha256": "885edfe6d2273c17b1adf6c1daf9ffe6605e7ce1bfe65d3d20d8b47bb1c4dcdc",
+    "bytes": 3831
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/rf-checkpoints.md",
+    "sha256": "76a91e6509c3b982ef967fb868f3cddaaadc77fa45d19360918d9f921bb1e54f",
+    "bytes": 6563
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/workflow.md",
+    "sha256": "407bc77900da1562c36ee15306a2f85ed8dec7688d712d43d84ca21440773d5f",
+    "bytes": 10272
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/audit_blob_store.py",
+    "sha256": "ae2317875aaf064d396ac536c7e68838251c24370b6308abb245b4aa5cf966ad",
+    "bytes": 18222
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/audit_contracts.py",
+    "sha256": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+    "bytes": 5168
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/audit_run.py",
+    "sha256": "bcac81b8fdd2c08362f84a0da70ad48b5c1c3f825e0b7be84585717c8ce222ca",
+    "bytes": 53804
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/authoring_provenance.py",
+    "sha256": "20d18f1ed4fc8adf65661f429738db64d81a025ed72b35f5b4e5a97b3d2c192c",
+    "bytes": 15043
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/document_status_join.py",
+    "sha256": "68f8799188218396bbad497e0fc54c19365a423d5bb8e3c8977fd4ebe103d85a",
+    "bytes": 19239
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/execution_request.py",
+    "sha256": "48fcc4a3a5eb84fed49a886a394f9d7058721c32a47237cd4f95ef13d976a2fa",
+    "bytes": 21060
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/financial_measure_audit.py",
+    "sha256": "294af2a66f30334cd332b5e8e7210adb4d8793bf38959f2d902ee8db1474d808",
+    "bytes": 35925
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/numeric_audit.py",
+    "sha256": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec",
+    "bytes": 5633
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/pool_progress.py",
+    "sha256": "821221f58fb38fd601a22cad6626f402eab8dcac0bfe6395b591ef48bad7792f",
+    "bytes": 67942
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/review_protocol.py",
+    "sha256": "1cfc07b6a2c8b322676d0d531e45dd72f1c6087bd55c79c267ef881a50a4327b",
+    "bytes": 13098
+  },
+  {
+    "path": "skills/revenue-forecast-audit/SKILL.md",
+    "sha256": "b256fb89e7bf1b6f975b26e062b21d0441223c20e2a6da55e3f2863f09775653",
+    "bytes": 10110
+  },
+  {
+    "path": "tests/fixtures/financial_measures/legal_cn.json",
+    "sha256": "8e69ac4c031af5b1ab4673a0e083cb88c7ab8b6fb86ccdfce24428093a699936",
+    "bytes": 2741
+  },
+  {
+    "path": "tests/fixtures/financial_measures/root_acceptance_regressions.json",
+    "sha256": "c6fb92eba9accd95e406cfbd5840a6499754038a57f80336100b19c4492e9f9f",
+    "bytes": 38079
+  },
+  {
+    "path": "tests/fixtures/financial_measures/unit_error_hk.json",
+    "sha256": "4b9bfb7c5035dbb1b547e42901545de55fab51c75d51c6bd8e56b71b323d24ca",
+    "bytes": 1187
+  },
+  {
+    "path": "tests/fixtures/financial_measures/unknown_us.json",
+    "sha256": "56d7873724ae484f4f791963d78bbba011e07ea033ead4bbdb9d3c8d7b9fb662",
+    "bytes": 535
+  },
+  {
+    "path": "tests/fixtures/forward_bundle/execution_seed.json",
+    "sha256": "dcef63057359c2ea04f31fc6f69ade81483cd6f1a993ea299b591aa28ffa61dc",
+    "bytes": 5035
+  },
+  {
+    "path": "tests/fixtures/forward_bundle/pipeline.py",
+    "sha256": "06e37016481a8e9b06ffddd19649c37215993751dac97add2e7d6fab88e26c86",
+    "bytes": 302
+  },
+  {
+    "path": "tests/fixtures/forward_bundle/raw.txt",
+    "sha256": "c65c7f973f3c70abedd37bcaf582d32e25b7c577cce37c56d1ac5a5abc7069ae",
+    "bytes": 551
+  },
+  {
+    "path": "tests/fixtures/p7_audit/fake_native_child.py",
+    "sha256": "f47fcf0a09a4b67f5508574ee379923845f684e46d2a7cc6c73e640453b87378",
+    "bytes": 964
+  },
+  {
+    "path": "tests/fixtures/pool_progress/budget_ref.json",
+    "sha256": "dbb5aeb89f13cc9b9dfacb2fcf5d67ffbafe0cead23f230f369aff9b683fcd2c",
+    "bytes": 205
+  },
+  {
+    "path": "tests/fixtures/pool_progress/old_campaign.json",
+    "sha256": "86523c040a59235b6eb18c884cf16e4f8275050a8c31d534ce64634a77775cd5",
+    "bytes": 459
+  },
+  {
+    "path": "tests/fixtures/pool_progress/pool_6_cn.json",
+    "sha256": "2359055b5f2b504d96337cb0ef91860c0eae4e6b2728e8905d6c682baa60c994",
+    "bytes": 477
+  },
+  {
+    "path": "tests/fixtures/pool_progress/pool_6_entities.json",
+    "sha256": "7f0d9a76a0f0a37853c347089ccba92490621ee48449f023cbd3bf844dafae50",
+    "bytes": 471
+  },
+  {
+    "path": "tests/fixtures/pool_progress/versions_ref.json",
+    "sha256": "928d11e60e358b33188509828a1c70c97c484f0e378c1366b3bc09bf0a8cb595",
+    "bytes": 245
+  },
+  {
+    "path": "tests/test_audit_run.py",
+    "sha256": "4d36750c3e8e85425b010cec64cb3ed01ead8dafb9a23761320f3654591fe2b6",
+    "bytes": 32723
+  },
+  {
+    "path": "tests/test_authoring_provenance.py",
+    "sha256": "43b00d309830cf031f5643e5e4caefad3b39d88f5bbd92b20e81115819bb3938",
+    "bytes": 9328
+  },
+  {
+    "path": "tests/test_document_status_join.py",
+    "sha256": "f8ab07fbc8122a85a118fe6f460e14c4cc02e8c2bc9e30e69503a3252d0b0559",
+    "bytes": 12428
+  },
+  {
+    "path": "tests/test_financial_measure_audit.py",
+    "sha256": "853311ddfcd4f16167c5a8c2e96aef272ce884966f6d74a8d63af831890b27fe",
+    "bytes": 21062
+  },
+  {
+    "path": "tests/test_financial_measure_audit_cli.py",
+    "sha256": "2bd27158f0c59cc030ecce1ad75123393be228be1a180e94a2cc0c2f1be0bab6",
+    "bytes": 6069
+  },
+  {
+    "path": "tests/test_financial_measure_root_regressions.py",
+    "sha256": "36ceba626b7d54507e4bf70b9502c9540494542a7d0de1f76d6c2fca05b7570e",
+    "bytes": 1205
+  },
+  {
+    "path": "tests/test_financial_measure_typed_contract.py",
+    "sha256": "466fa7696666bbdd5f015c3261cbed3fa20db696939be65a52c8cb8dbca1c5c0",
+    "bytes": 7894
+  },
+  {
+    "path": "tests/test_legacy_native_events.py",
+    "sha256": "33e0f2d4b8e1854590c49012f2d7a5f43e875eec202cbfb3b3f48c922397794c",
+    "bytes": 10896
+  },
+  {
+    "path": "tests/test_numeric_audit.py",
+    "sha256": "079412b7edba8f3b089b25734fa96719d5fdf418a7b23811a26a98f7d11a64e8",
+    "bytes": 4439
+  },
+  {
+    "path": "tests/test_pool_progress.py",
+    "sha256": "1028c5e1a0c0f2edd58f03a589f167a9d0e2c251baab375f5733527ef0fb914e",
+    "bytes": 37258
+  },
+  {
+    "path": "tests/test_pool_progress_cli.py",
+    "sha256": "abfce372bcaf764ed1c1e7538073a4638d4698cddc8478f5fa6ab59ea6e1fa7b",
+    "bytes": 14541
+  },
+  {
+    "path": "tests/test_precall_input_history.py",
+    "sha256": "4eceaead5d0c2a2f3beff2483e434fdd33e7548c1286b604e2a942639dd535e4",
+    "bytes": 16384
+  },
+  {
+    "path": "tests/test_review_protocol.py",
+    "sha256": "9ef1bf69290f845d8b8dcbc1dff6c9f4475e8782c991ff93584f87d2af8c58b7",
+    "bytes": 13686
+  },
+  {
+    "path": "tests/test_scope_request_binding.py",
+    "sha256": "0a1abc66632cd965e77eeb73a5090383893344fea6982ec0806034d8c12eeb69",
+    "bytes": 15037
+  },
+  {
+    "path": "tests/test_sync_skill.py",
+    "sha256": "ac034f0c6757ea20dff41eccd1ba89c3ba951012d6c803d94490be45c7020a5f",
+    "bytes": 2188
+  },
+  {
+    "path": "tests/test_w04_capture_runtime.py",
+    "sha256": "406661c3f3d785b374ec47c9da7ba94dac3023d58553705a46eb7609ed4ff3da",
+    "bytes": 13299
+  },
+  {
+    "path": "tests/test_w04_request_capture.py",
+    "sha256": "0f9a85a30402f81542f35869474981741a6d2c4b5db024a76603995e821cb0c7",
+    "bytes": 16678
+  },
+  {
+    "path": "tests/test_w04_status_provenance.py",
+    "sha256": "c1f90b9454d7d7424d6e11f8fee1d2ec4549d35dd519c303a240469238932d27",
+    "bytes": 6764
+  },
+  {
+    "path": "tests/test_w05_progress_closure.py",
+    "sha256": "18c30678ec0049321ee4267c84b61cd9b8584cd460f5de6dbe482743bc1792ec",
+    "bytes": 11638
+  },
+  {
+    "path": "tools/create_forward_fixture.py",
+    "sha256": "6cea2899ee1ef009f8f00f3d0369557995037fba0567e0d17c34c991628c574f",
+    "bytes": 2466
+  },
+  {
+    "path": "tools/run_event_compat_e2e.py",
+    "sha256": "770afd9a95d780d8f471fb056c2467d9c8349513fd53cba9d8c3d993d1e47bcb",
+    "bytes": 10587
+  },
+  {
+    "path": "tools/run_financial_measure_e2e.py",
+    "sha256": "637f55ed02a167862f6e587a1165b6165864b203161299a1654be5667de64f26",
+    "bytes": 8002
+  },
+  {
+    "path": "tools/run_pool_progress_e2e.py",
+    "sha256": "fda6a9ac335726937423a5cb1350c44e6f5026908c065b03bada0d548e0c6ba6",
+    "bytes": 25964
+  },
+  {
+    "path": "tools/sync_skill.py",
+    "sha256": "63242b9a78a5120b785c69b35fa6d3508fe2e6a61a1b83e48a4d704f313b97c7",
+    "bytes": 3840
+  }
+]

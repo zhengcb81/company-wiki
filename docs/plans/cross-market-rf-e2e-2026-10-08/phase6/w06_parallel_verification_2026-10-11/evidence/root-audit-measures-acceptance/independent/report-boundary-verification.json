@@ -1,0 +1,241 @@
+{
+  "schema_version": "w06-independent-report-boundary-verification/1",
+  "frozen_product_sha256": "b48e20bb9ecf88c1cb86821978c668cb83e963989dc4b1ca099b5d5bbad48020",
+  "previous_product_sha256": "294af2a66f30334cd332b5e8e7210adb4d8793bf38959f2d902ee8db1474d808",
+  "pure_checks": [
+    {
+      "id": "independent_legal_cross_entity_market_share",
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "source_qualification_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "PASS",
+        "exit_code": 0,
+        "observation_checks": [
+          {
+            "check_id": "obs:company-sales",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": "20",
+            "units": "CNY million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": [
+              {
+                "code": "source_availability_unknown",
+                "detail": "available_by not supplied; source qualification is not verified"
+              }
+            ]
+          },
+          {
+            "check_id": "obs:market-sales",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": "100",
+            "units": "CNY million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": [
+              {
+                "code": "source_availability_unknown",
+                "detail": "available_by not supplied; source qualification is not verified"
+              }
+            ]
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:market-share",
+            "kind": "relation",
+            "op": "share",
+            "status": "PASS",
+            "expected": "2E+1",
+            "actual": "20",
+            "units": "percent",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": [
+              {
+                "code": "source_availability_unknown",
+                "detail": "available_by not supplied; source qualification is not verified"
+              },
+              {
+                "code": "scope_inclusion_not_verified",
+                "detail": "declared inclusion is not independently source-verified"
+              }
+            ],
+            "arithmetic_status": "PASS",
+            "input_contexts": [
+              {
+                "id": "company-sales",
+                "entity_key": "hk-company",
+                "definition": "company_market_sales",
+                "measure_kind": "flow",
+                "units": "CNY million",
+                "time": "2024-01-01..2024-12-31",
+                "evidence_role": "reported_fact",
+                "source_ref": {
+                  "source_id": "SRC1",
+                  "locator": "p3 table"
+                }
+              },
+              {
+                "id": "market-sales",
+                "entity_key": "cn-market",
+                "definition": "defined_market_sales",
+                "measure_kind": "flow",
+                "units": "CNY million",
+                "time": "2024-01-01..2024-12-31",
+                "evidence_role": "reported_fact",
+                "source_ref": {
+                  "source_id": "SRC1",
+                  "locator": "p3 table"
+                }
+              }
+            ],
+            "result_evidence_role": "reported_fact",
+            "source_truth_verified": false
+          }
+        ],
+        "coverage": {
+          "observations_declared": 2,
+          "observation_denominator": 2,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "complete",
+          "coverage_pass": true
+        },
+        "diagnostics": []
+      },
+      "pass": true
+    },
+    {
+      "id": "independent_nonobject_ledger_report_contract",
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": null,
+        "source_truth_verified": false,
+        "source_qualification_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "INVALID",
+        "exit_code": 2,
+        "observation_checks": [],
+        "relation_checks": [],
+        "coverage": {
+          "observations_declared": 0,
+          "observation_denominator": 0,
+          "relations_declared": 0,
+          "relation_denominator": 0,
+          "relation_verification": "not_declared",
+          "coverage_pass": false
+        },
+        "diagnostics": [
+          {
+            "code": "ledger_not_object",
+            "detail": "ledger must be an object"
+          }
+        ]
+      },
+      "pass": true
+    },
+    {
+      "id": "independent_observations_object_report_contract",
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "source_qualification_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "INVALID",
+        "exit_code": 2,
+        "observation_checks": [],
+        "relation_checks": [],
+        "coverage": {
+          "observations_declared": 0,
+          "observation_denominator": 0,
+          "relations_declared": 0,
+          "relation_denominator": 0,
+          "relation_verification": "not_declared",
+          "coverage_pass": false
+        },
+        "diagnostics": [
+          {
+            "code": "invalid_ledger_shape",
+            "detail": "observations and relations must be lists"
+          }
+        ]
+      },
+      "pass": true
+    }
+  ],
+  "cli": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+      "--ledger",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\independent\\_schema_cli_scratch\\invalid-ledger.json",
+      "--out-root",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\independent\\_schema_cli_scratch\\attempts"
+    ],
+    "exit_code": 2,
+    "stdout": "{\"attempt_id\": \"20261011T115331Z-c0abaa7b\", \"attempt_dir\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\w06_parallel_verification_2026-10-11\\\\evidence\\\\root-audit-measures-acceptance\\\\independent\\\\_schema_cli_scratch\\\\attempts\\\\20261011T115331Z-c0abaa7b\", \"output_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\w06_parallel_verification_2026-10-11\\\\evidence\\\\root-audit-measures-acceptance\\\\independent\\\\_schema_cli_scratch\\\\attempts\\\\20261011T115331Z-c0abaa7b\\\\report.json\", \"overall\": \"INVALID\", \"exit_code\": 2, \"check_kind\": \"declared_measure_and_relation_checks_not_source_truth\", \"source_truth_verified\": false, \"economic_reasonableness\": \"not_evaluated\"}\n",
+    "stderr": "",
+    "reports": [
+      {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "source_qualification_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "INVALID",
+        "exit_code": 2,
+        "observation_checks": [],
+        "relation_checks": [],
+        "coverage": {
+          "observations_declared": 0,
+          "observation_denominator": 0,
+          "relations_declared": 0,
+          "relation_denominator": 0,
+          "relation_verification": "not_declared",
+          "coverage_pass": false
+        },
+        "diagnostics": [
+          {
+            "code": "invalid_ledger_shape",
+            "detail": "observations and relations must be lists"
+          }
+        ]
+      }
+    ],
+    "pass": true
+  },
+  "scratch_initially_absent": true,
+  "scratch_finally_absent": true,
+  "original_failure_evidence_preserved": true,
+  "provider_calls": 0,
+  "llm_calls": 0,
+  "charged_cost_usd": "0",
+  "pass": true
+}

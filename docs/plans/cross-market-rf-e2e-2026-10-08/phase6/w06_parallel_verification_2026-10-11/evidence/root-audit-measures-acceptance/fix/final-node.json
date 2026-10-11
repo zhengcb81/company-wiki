@@ -1,0 +1,118 @@
+{
+  "schema_version": "w06-root-measures-final-node/1",
+  "status": "PASS",
+  "failure": null,
+  "source_bytes_unchanged_during_test": true,
+  "runs": [
+    {
+      "phase": "final-full-unit",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 76.505596,
+      "log": "final-full-unit.log",
+      "log_sha256": "05e10d7c8a809c7e654dabb6b9b9834c94e1f20e2a358962e84d72786244ad6a"
+    },
+    {
+      "phase": "final-numeric-unchanged",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_numeric_audit.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.59632,
+      "log": "final-numeric-unchanged.log",
+      "log_sha256": "4d3cadfa0b07f702d4e36447cda07eebe24dbc0c64cbb8ad6d674f42ea3b9f53"
+    },
+    {
+      "phase": "final-offline-e2e",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\tools\\run_financial_measure_e2e.py",
+        "--owned-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cwpa-real-financial-e2e",
+        "--receipt",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\fix\\final-offline-e2e.json"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 5.82395,
+      "log": "final-offline-e2e.log",
+      "log_sha256": "347e214e850039b19b0ebc0d09e34cf7a01fd324690512ad94b6082b2556b681"
+    }
+  ],
+  "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c",
+  "before": "absent",
+  "after": "absent",
+  "restored": true,
+  "remaining_scratch_before_cleanup": [
+    {
+      "path": "cli-sentinel.txt",
+      "bytes": 22
+    },
+    {
+      "path": "conversion_result_missing_source_ref.json",
+      "bytes": 872
+    },
+    {
+      "path": "difference_one_operand_should_diagnose_not_crash.json",
+      "bytes": 885
+    },
+    {
+      "path": "sum_output_silently_relabels_currency_entity_definition.json",
+      "bytes": 1250
+    },
+    {
+      "path": "cli-attempts/20261011T113941Z-10bf431f/attempt.json",
+      "bytes": 748
+    },
+    {
+      "path": "cli-attempts/20261011T113941Z-10bf431f/report.json",
+      "bytes": 2406
+    },
+    {
+      "path": "cli-attempts/20261011T113941Z-1b5ba517/attempt.json",
+      "bytes": 768
+    },
+    {
+      "path": "cli-attempts/20261011T113941Z-1b5ba517/report.json",
+      "bytes": 3151
+    },
+    {
+      "path": "cli-attempts/20261011T113942Z-73af807a/attempt.json",
+      "bytes": 760
+    },
+    {
+      "path": "cli-attempts/20261011T113942Z-73af807a/report.json",
+      "bytes": 1678
+    }
+  ],
+  "actual_cli_checks": 3,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "paid_usd": 0,
+  "source_truth_verified": false,
+  "economic_reasonableness": "not_evaluated"
+}

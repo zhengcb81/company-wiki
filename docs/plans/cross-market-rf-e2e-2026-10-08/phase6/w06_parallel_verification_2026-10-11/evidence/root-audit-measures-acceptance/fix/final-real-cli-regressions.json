@@ -1,0 +1,351 @@
+{
+  "cases": [
+    {
+      "id": "conversion_result_missing_source_ref",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\conversion_result_missing_source_ref.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cli-attempts"
+      ],
+      "exit_code": 3,
+      "receipt": {
+        "attempt_id": "20261011T113941Z-10bf431f",
+        "attempt_dir": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cli-attempts\\20261011T113941Z-10bf431f",
+        "output_file": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cli-attempts\\20261011T113941Z-10bf431f\\report.json",
+        "overall": "UNRESOLVED",
+        "exit_code": 3,
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated"
+      },
+      "report_sha256": "885c567761436b82f4fa341c463de166554c54e46365c68169b3a7cf2fa14e32",
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "source_qualification_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "UNRESOLVED",
+        "exit_code": 3,
+        "observation_checks": [
+          {
+            "check_id": "obs:revenue",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": "1.2",
+            "units": "USD billion",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": [
+              {
+                "code": "source_availability_unknown",
+                "detail": "available_by not supplied; source qualification is not verified"
+              }
+            ]
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:conversion",
+            "kind": "relation",
+            "op": "scale_conversion",
+            "status": "UNRESOLVED",
+            "expected": null,
+            "actual": null,
+            "units": "USD 亿",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": null,
+            "diagnostics": [
+              {
+                "code": "missing_source_ref",
+                "detail": "reported_fact requires source_id+locator"
+              },
+              {
+                "code": "source_availability_unknown",
+                "detail": "available_by not supplied; source qualification is not verified"
+              },
+              {
+                "code": "unresolved_dependency",
+                "detail": "missing source/unit/role/time context cannot become an arithmetic PASS"
+              }
+            ],
+            "arithmetic_status": "NOT_CHECKED",
+            "input_contexts": [
+              {
+                "id": "revenue",
+                "entity_key": "acme",
+                "definition": "revenue",
+                "measure_kind": "flow",
+                "units": "USD billion",
+                "time": "2024-01-01..2024-12-31",
+                "evidence_role": "reported_fact",
+                "source_ref": {
+                  "source_id": "SRC1",
+                  "locator": "p3 table"
+                }
+              }
+            ],
+            "result_evidence_role": "reported_fact",
+            "source_truth_verified": false
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "incomplete",
+          "coverage_pass": false
+        },
+        "diagnostics": []
+      }
+    },
+    {
+      "id": "sum_output_silently_relabels_currency_entity_definition",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\sum_output_silently_relabels_currency_entity_definition.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cli-attempts"
+      ],
+      "exit_code": 2,
+      "receipt": {
+        "attempt_id": "20261011T113941Z-1b5ba517",
+        "attempt_dir": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cli-attempts\\20261011T113941Z-1b5ba517",
+        "output_file": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cli-attempts\\20261011T113941Z-1b5ba517\\report.json",
+        "overall": "INVALID",
+        "exit_code": 2,
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated"
+      },
+      "report_sha256": "3d28998cb3b5137a43ad1720953d4411072d245a31ae8967077d880666d94806",
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "source_qualification_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "INVALID",
+        "exit_code": 2,
+        "observation_checks": [
+          {
+            "check_id": "obs:h1",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": "100",
+            "units": "USD million",
+            "time": "2024-01-01..2024-06-30",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": [
+              {
+                "code": "source_availability_unknown",
+                "detail": "available_by not supplied; source qualification is not verified"
+              }
+            ]
+          },
+          {
+            "check_id": "obs:h2",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": "80",
+            "units": "USD million",
+            "time": "2024-07-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": [
+              {
+                "code": "source_availability_unknown",
+                "detail": "available_by not supplied; source qualification is not verified"
+              }
+            ]
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:sum",
+            "kind": "relation",
+            "op": "sum",
+            "status": "INVALID",
+            "expected": null,
+            "actual": null,
+            "units": "CNY million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": [
+              {
+                "code": "source_availability_unknown",
+                "detail": "available_by not supplied; source qualification is not verified"
+              },
+              {
+                "code": "incompatible_context",
+                "detail": "observations differ on entity_key"
+              }
+            ],
+            "arithmetic_status": "NOT_CHECKED",
+            "input_contexts": [
+              {
+                "id": "h1",
+                "entity_key": "acme",
+                "definition": "revenue",
+                "measure_kind": "flow",
+                "units": "USD million",
+                "time": "2024-01-01..2024-06-30",
+                "evidence_role": "reported_fact",
+                "source_ref": {
+                  "source_id": "SRC1",
+                  "locator": "p3 table"
+                }
+              },
+              {
+                "id": "h2",
+                "entity_key": "acme",
+                "definition": "revenue",
+                "measure_kind": "flow",
+                "units": "USD million",
+                "time": "2024-07-01..2024-12-31",
+                "evidence_role": "reported_fact",
+                "source_ref": {
+                  "source_id": "SRC1",
+                  "locator": "p3 table"
+                }
+              }
+            ],
+            "result_evidence_role": "reported_fact",
+            "source_truth_verified": false
+          }
+        ],
+        "coverage": {
+          "observations_declared": 2,
+          "observation_denominator": 2,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "incomplete",
+          "coverage_pass": false
+        },
+        "diagnostics": []
+      }
+    },
+    {
+      "id": "difference_one_operand_should_diagnose_not_crash",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\difference_one_operand_should_diagnose_not_crash.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cli-attempts"
+      ],
+      "exit_code": 2,
+      "receipt": {
+        "attempt_id": "20261011T113942Z-73af807a",
+        "attempt_dir": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cli-attempts\\20261011T113942Z-73af807a",
+        "output_file": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cli-attempts\\20261011T113942Z-73af807a\\report.json",
+        "overall": "INVALID",
+        "exit_code": 2,
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "source_truth_verified": false,
+        "economic_reasonableness": "not_evaluated"
+      },
+      "report_sha256": "a2bbdbdea21829274e1b5455f0e53a8cefb1061e15b3641113cecec03d393181",
+      "report": {
+        "schema_version": "financial-measure-audit/1",
+        "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+        "as_of_date": "2026-10-11",
+        "source_truth_verified": false,
+        "source_qualification_verified": false,
+        "economic_reasonableness": "not_evaluated",
+        "overall": "INVALID",
+        "exit_code": 2,
+        "observation_checks": [
+          {
+            "check_id": "obs:a",
+            "kind": "observation",
+            "op": null,
+            "status": "PASS",
+            "expected": null,
+            "actual": "120",
+            "units": "USD million",
+            "time": "2024-01-01..2024-12-31",
+            "source_ref": {
+              "source_id": "SRC1",
+              "locator": "p3 table"
+            },
+            "diagnostics": [
+              {
+                "code": "source_availability_unknown",
+                "detail": "available_by not supplied; source qualification is not verified"
+              }
+            ]
+          }
+        ],
+        "relation_checks": [
+          {
+            "check_id": "rel:d",
+            "kind": "relation",
+            "op": "difference",
+            "status": "INVALID",
+            "expected": null,
+            "actual": null,
+            "units": null,
+            "time": null,
+            "source_ref": null,
+            "diagnostics": [
+              {
+                "code": "invalid_arity",
+                "detail": "sum requires >=2 operands; conversions exactly 1; other fixed ops exactly 2"
+              }
+            ],
+            "arithmetic_status": "NOT_CHECKED",
+            "input_contexts": [],
+            "result_evidence_role": null,
+            "source_truth_verified": false
+          }
+        ],
+        "coverage": {
+          "observations_declared": 1,
+          "observation_denominator": 1,
+          "relations_declared": 1,
+          "relation_denominator": 1,
+          "relation_verification": "incomplete",
+          "coverage_pass": false
+        },
+        "diagnostics": []
+      }
+    }
+  ],
+  "sentinel_unchanged": true
+}

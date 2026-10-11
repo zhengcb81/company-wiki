@@ -1,0 +1,435 @@
+test_all_fixed_ops_enforce_exact_arity (test_financial_measure_typed_contract.TypedMeasureContractTests.test_all_fixed_ops_enforce_exact_arity) ... 
+  test_all_fixed_ops_enforce_exact_arity (test_financial_measure_typed_contract.TypedMeasureContractTests.test_all_fixed_ops_enforce_exact_arity) (op='scale_conversion', count=3) ... FAIL
+  test_all_fixed_ops_enforce_exact_arity (test_financial_measure_typed_contract.TypedMeasureContractTests.test_all_fixed_ops_enforce_exact_arity) (op='fx_conversion', count=3) ... FAIL
+  test_all_fixed_ops_enforce_exact_arity (test_financial_measure_typed_contract.TypedMeasureContractTests.test_all_fixed_ops_enforce_exact_arity) (op='difference', count=3) ... FAIL
+  test_all_fixed_ops_enforce_exact_arity (test_financial_measure_typed_contract.TypedMeasureContractTests.test_all_fixed_ops_enforce_exact_arity) (op='share', count=3) ... FAIL
+test_amount_difference_cannot_change_output_currency (test_financial_measure_typed_contract.TypedMeasureContractTests.test_amount_difference_cannot_change_output_currency) ... FAIL
+test_cagr_declared_two_point_six_years_for_three_years_fails (test_financial_measure_typed_contract.TypedMeasureContractTests.test_cagr_declared_two_point_six_years_for_three_years_fails) ... FAIL
+test_complete_declared_coverage_is_not_a_pass_when_values_fail (test_financial_measure_typed_contract.TypedMeasureContractTests.test_complete_declared_coverage_is_not_a_pass_when_values_fail) ... FAIL
+test_daytime_malformed_or_contradictory_anchors_are_diagnosed (test_financial_measure_typed_contract.TypedMeasureContractTests.test_daytime_malformed_or_contradictory_anchors_are_diagnosed) ... 
+  test_daytime_malformed_or_contradictory_anchors_are_diagnosed (test_financial_measure_typed_contract.TypedMeasureContractTests.test_daytime_malformed_or_contradictory_anchors_are_diagnosed) (changes={'period_start': '20240101'}) ... FAIL
+  test_daytime_malformed_or_contradictory_anchors_are_diagnosed (test_financial_measure_typed_contract.TypedMeasureContractTests.test_daytime_malformed_or_contradictory_anchors_are_diagnosed) (changes={'point_date': '2024-12-31'}) ... FAIL
+  test_daytime_malformed_or_contradictory_anchors_are_diagnosed (test_financial_measure_typed_contract.TypedMeasureContractTests.test_daytime_malformed_or_contradictory_anchors_are_diagnosed) (changes={'available_by': 'nonsense'}) ... FAIL
+test_declared_source_availability_after_asof_is_unresolved (test_financial_measure_typed_contract.TypedMeasureContractTests.test_declared_source_availability_after_asof_is_unresolved) ... FAIL
+test_duplicate_relation_ids_are_invalid (test_financial_measure_typed_contract.TypedMeasureContractTests.test_duplicate_relation_ids_are_invalid) ... FAIL
+test_each_conversion_output_context_field_is_checked (test_financial_measure_typed_contract.TypedMeasureContractTests.test_each_conversion_output_context_field_is_checked) ... 
+  test_each_conversion_output_context_field_is_checked (test_financial_measure_typed_contract.TypedMeasureContractTests.test_each_conversion_output_context_field_is_checked) (field='entity_key') ... FAIL
+  test_each_conversion_output_context_field_is_checked (test_financial_measure_typed_contract.TypedMeasureContractTests.test_each_conversion_output_context_field_is_checked) (field='definition') ... FAIL
+  test_each_conversion_output_context_field_is_checked (test_financial_measure_typed_contract.TypedMeasureContractTests.test_each_conversion_output_context_field_is_checked) (field='period_start') ... FAIL
+  test_each_conversion_output_context_field_is_checked (test_financial_measure_typed_contract.TypedMeasureContractTests.test_each_conversion_output_context_field_is_checked) (field='period_end') ... FAIL
+test_future_guidance_and_explicit_assumption_keep_their_roles (test_financial_measure_typed_contract.TypedMeasureContractTests.test_future_guidance_and_explicit_assumption_keep_their_roles) ... ok
+test_future_reported_fact_is_not_silently_actual (test_financial_measure_typed_contract.TypedMeasureContractTests.test_future_reported_fact_is_not_silently_actual) ... FAIL
+test_growth_result_must_be_growth_kind_and_end_time (test_financial_measure_typed_contract.TypedMeasureContractTests.test_growth_result_must_be_growth_kind_and_end_time) ... 
+  test_growth_result_must_be_growth_kind_and_end_time (test_financial_measure_typed_contract.TypedMeasureContractTests.test_growth_result_must_be_growth_kind_and_end_time) (changes={'measure_kind': 'ratio'}) ... FAIL
+  test_growth_result_must_be_growth_kind_and_end_time (test_financial_measure_typed_contract.TypedMeasureContractTests.test_growth_result_must_be_growth_kind_and_end_time) (changes={'period_start': '2023-01-01', 'period_end': '2023-12-31'}) ... FAIL
+test_guidance_and_assumptions_are_not_promoted_to_actual (test_financial_measure_typed_contract.TypedMeasureContractTests.test_guidance_and_assumptions_are_not_promoted_to_actual) ... 
+  test_guidance_and_assumptions_are_not_promoted_to_actual (test_financial_measure_typed_contract.TypedMeasureContractTests.test_guidance_and_assumptions_are_not_promoted_to_actual) (role='management_guidance') ... FAIL
+  test_guidance_and_assumptions_are_not_promoted_to_actual (test_financial_measure_typed_contract.TypedMeasureContractTests.test_guidance_and_assumptions_are_not_promoted_to_actual) (role='analyst_assumption') ... FAIL
+  test_guidance_and_assumptions_are_not_promoted_to_actual (test_financial_measure_typed_contract.TypedMeasureContractTests.test_guidance_and_assumptions_are_not_promoted_to_actual) (role='scenario_stress') ... FAIL
+test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) ... 
+  test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) (target='observation', field='id') ... ERROR
+  test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) (target='observation', field='scale') ... ERROR
+  test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) (target='observation', field='measure_kind') ... ERROR
+  test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) (target='observation', field='evidence_role') ... ERROR
+  test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) (target='relation', field='op') ... ERROR
+test_positive_base_can_fall_to_zero_or_negative (test_financial_measure_typed_contract.TypedMeasureContractTests.test_positive_base_can_fall_to_zero_or_negative) ... 
+  test_positive_base_can_fall_to_zero_or_negative (test_financial_measure_typed_contract.TypedMeasureContractTests.test_positive_base_can_fall_to_zero_or_negative) (end='0') ... FAIL
+  test_positive_base_can_fall_to_zero_or_negative (test_financial_measure_typed_contract.TypedMeasureContractTests.test_positive_base_can_fall_to_zero_or_negative) (end='-20') ... FAIL
+test_relative_precision_has_no_one_unit_absolute_floor (test_financial_measure_typed_contract.TypedMeasureContractTests.test_relative_precision_has_no_one_unit_absolute_floor) ... FAIL
+test_rounding_uses_integer_places_and_explicit_display_precision (test_financial_measure_typed_contract.TypedMeasureContractTests.test_rounding_uses_integer_places_and_explicit_display_precision) ... 
+  test_rounding_uses_integer_places_and_explicit_display_precision (test_financial_measure_typed_contract.TypedMeasureContractTests.test_rounding_uses_integer_places_and_explicit_display_precision) (places=True) ... FAIL
+  test_rounding_uses_integer_places_and_explicit_display_precision (test_financial_measure_typed_contract.TypedMeasureContractTests.test_rounding_uses_integer_places_and_explicit_display_precision) (places=2.4) ... FAIL
+  test_rounding_uses_integer_places_and_explicit_display_precision (test_financial_measure_typed_contract.TypedMeasureContractTests.test_rounding_uses_integer_places_and_explicit_display_precision) (places='2') ... FAIL
+test_structurally_invalid_dependency_cannot_have_pass_relation (test_financial_measure_typed_contract.TypedMeasureContractTests.test_structurally_invalid_dependency_cannot_have_pass_relation) ... FAIL
+
+======================================================================
+ERROR: test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) (target='observation', field='id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 94, in test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 636, in audit_measures
+    check, norm = _check_observation(row, seen_ids)
+                  ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 120, in _check_observation
+    seen_ids.add(oid)
+    ~~~~~~~~~~~~^^^^^
+TypeError: unhashable type: 'dict'
+
+======================================================================
+ERROR: test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) (target='observation', field='scale')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 94, in test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 636, in audit_measures
+    check, norm = _check_observation(row, seen_ids)
+                  ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 131, in _check_observation
+    if scale not in SCALES:
+       ^^^^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'dict'
+
+======================================================================
+ERROR: test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) (target='observation', field='measure_kind')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 94, in test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 636, in audit_measures
+    check, norm = _check_observation(row, seen_ids)
+                  ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 137, in _check_observation
+    if kind not in MEASURE_KINDS:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'dict'
+
+======================================================================
+ERROR: test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) (target='observation', field='evidence_role')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 94, in test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 636, in audit_measures
+    check, norm = _check_observation(row, seen_ids)
+                  ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 201, in _check_observation
+    if role not in EVIDENCE_ROLES:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'dict'
+
+======================================================================
+ERROR: test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes (test_financial_measure_typed_contract.TypedMeasureContractTests.test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes) (target='relation', field='op')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 94, in test_malformed_json_field_shapes_are_diagnostics_not_batch_crashes
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 641, in audit_measures
+    relation_checks = [_check_relation(rel, norms) for rel in relations]
+                       ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 294, in _check_relation
+    if op not in OPS:
+       ^^^^^^^^^^^^^
+TypeError: unhashable type: 'dict'
+
+======================================================================
+FAIL: test_all_fixed_ops_enforce_exact_arity (test_financial_measure_typed_contract.TypedMeasureContractTests.test_all_fixed_ops_enforce_exact_arity) (op='scale_conversion', count=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 49, in test_all_fixed_ops_enforce_exact_arity
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'INVALID'
+- PASS
++ INVALID
+
+
+======================================================================
+FAIL: test_all_fixed_ops_enforce_exact_arity (test_financial_measure_typed_contract.TypedMeasureContractTests.test_all_fixed_ops_enforce_exact_arity) (op='fx_conversion', count=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 49, in test_all_fixed_ops_enforce_exact_arity
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'UNRESOLVED' != 'INVALID'
+- UNRESOLVED
++ INVALID
+
+
+======================================================================
+FAIL: test_all_fixed_ops_enforce_exact_arity (test_financial_measure_typed_contract.TypedMeasureContractTests.test_all_fixed_ops_enforce_exact_arity) (op='difference', count=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 49, in test_all_fixed_ops_enforce_exact_arity
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'FAIL' != 'INVALID'
+- FAIL
++ INVALID
+
+
+======================================================================
+FAIL: test_all_fixed_ops_enforce_exact_arity (test_financial_measure_typed_contract.TypedMeasureContractTests.test_all_fixed_ops_enforce_exact_arity) (op='share', count=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 49, in test_all_fixed_ops_enforce_exact_arity
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'UNRESOLVED' != 'INVALID'
+- UNRESOLVED
++ INVALID
+
+
+======================================================================
+FAIL: test_amount_difference_cannot_change_output_currency (test_financial_measure_typed_contract.TypedMeasureContractTests.test_amount_difference_cannot_change_output_currency)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 27, in test_amount_difference_cannot_change_output_currency
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'INVALID'
+- PASS
++ INVALID
+
+
+======================================================================
+FAIL: test_cagr_declared_two_point_six_years_for_three_years_fails (test_financial_measure_typed_contract.TypedMeasureContractTests.test_cagr_declared_two_point_six_years_for_three_years_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 131, in test_cagr_declared_two_point_six_years_for_three_years_fails
+    self.assertTrue(any(d["code"] == "cagr_period_mismatch" for d in module.audit_measures(data)["relation_checks"][0]["diagnostics"]))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_complete_declared_coverage_is_not_a_pass_when_values_fail (test_financial_measure_typed_contract.TypedMeasureContractTests.test_complete_declared_coverage_is_not_a_pass_when_values_fail)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 136, in test_complete_declared_coverage_is_not_a_pass_when_values_fail
+    self.assertFalse(module.audit_measures(data)["coverage"]["coverage_pass"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_daytime_malformed_or_contradictory_anchors_are_diagnosed (test_financial_measure_typed_contract.TypedMeasureContractTests.test_daytime_malformed_or_contradictory_anchors_are_diagnosed) (changes={'period_start': '20240101'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 107, in test_daytime_malformed_or_contradictory_anchors_are_diagnosed
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'INVALID'
+- PASS
++ INVALID
+
+
+======================================================================
+FAIL: test_daytime_malformed_or_contradictory_anchors_are_diagnosed (test_financial_measure_typed_contract.TypedMeasureContractTests.test_daytime_malformed_or_contradictory_anchors_are_diagnosed) (changes={'point_date': '2024-12-31'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 107, in test_daytime_malformed_or_contradictory_anchors_are_diagnosed
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'INVALID'
+- PASS
++ INVALID
+
+
+======================================================================
+FAIL: test_daytime_malformed_or_contradictory_anchors_are_diagnosed (test_financial_measure_typed_contract.TypedMeasureContractTests.test_daytime_malformed_or_contradictory_anchors_are_diagnosed) (changes={'available_by': 'nonsense'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 107, in test_daytime_malformed_or_contradictory_anchors_are_diagnosed
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'INVALID'
+- PASS
++ INVALID
+
+
+======================================================================
+FAIL: test_declared_source_availability_after_asof_is_unresolved (test_financial_measure_typed_contract.TypedMeasureContractTests.test_declared_source_availability_after_asof_is_unresolved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 78, in test_declared_source_availability_after_asof_is_unresolved
+    self.assertEqual(module.audit_measures(data)["overall"], "UNRESOLVED")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'UNRESOLVED'
+- PASS
++ UNRESOLVED
+
+
+======================================================================
+FAIL: test_duplicate_relation_ids_are_invalid (test_financial_measure_typed_contract.TypedMeasureContractTests.test_duplicate_relation_ids_are_invalid)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 99, in test_duplicate_relation_ids_are_invalid
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'INVALID'
+- PASS
++ INVALID
+
+
+======================================================================
+FAIL: test_each_conversion_output_context_field_is_checked (test_financial_measure_typed_contract.TypedMeasureContractTests.test_each_conversion_output_context_field_is_checked) (field='entity_key')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 22, in test_each_conversion_output_context_field_is_checked
+    self.assertNotEqual(module.audit_measures(conversion(**{field: value}))["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS'
+
+======================================================================
+FAIL: test_each_conversion_output_context_field_is_checked (test_financial_measure_typed_contract.TypedMeasureContractTests.test_each_conversion_output_context_field_is_checked) (field='definition')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 22, in test_each_conversion_output_context_field_is_checked
+    self.assertNotEqual(module.audit_measures(conversion(**{field: value}))["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS'
+
+======================================================================
+FAIL: test_each_conversion_output_context_field_is_checked (test_financial_measure_typed_contract.TypedMeasureContractTests.test_each_conversion_output_context_field_is_checked) (field='period_start')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 22, in test_each_conversion_output_context_field_is_checked
+    self.assertNotEqual(module.audit_measures(conversion(**{field: value}))["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS'
+
+======================================================================
+FAIL: test_each_conversion_output_context_field_is_checked (test_financial_measure_typed_contract.TypedMeasureContractTests.test_each_conversion_output_context_field_is_checked) (field='period_end')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 22, in test_each_conversion_output_context_field_is_checked
+    self.assertNotEqual(module.audit_measures(conversion(**{field: value}))["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS'
+
+======================================================================
+FAIL: test_future_reported_fact_is_not_silently_actual (test_financial_measure_typed_contract.TypedMeasureContractTests.test_future_reported_fact_is_not_silently_actual)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 84, in test_future_reported_fact_is_not_silently_actual
+    self.assertEqual(module.audit_measures(data)["overall"], "UNRESOLVED")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'UNRESOLVED'
+- PASS
++ UNRESOLVED
+
+
+======================================================================
+FAIL: test_growth_result_must_be_growth_kind_and_end_time (test_financial_measure_typed_contract.TypedMeasureContractTests.test_growth_result_must_be_growth_kind_and_end_time) (changes={'measure_kind': 'ratio'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 34, in test_growth_result_must_be_growth_kind_and_end_time
+    self.assertNotEqual(module.audit_measures(data)["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS'
+
+======================================================================
+FAIL: test_growth_result_must_be_growth_kind_and_end_time (test_financial_measure_typed_contract.TypedMeasureContractTests.test_growth_result_must_be_growth_kind_and_end_time) (changes={'period_start': '2023-01-01', 'period_end': '2023-12-31'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 34, in test_growth_result_must_be_growth_kind_and_end_time
+    self.assertNotEqual(module.audit_measures(data)["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS'
+
+======================================================================
+FAIL: test_guidance_and_assumptions_are_not_promoted_to_actual (test_financial_measure_typed_contract.TypedMeasureContractTests.test_guidance_and_assumptions_are_not_promoted_to_actual) (role='management_guidance')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 63, in test_guidance_and_assumptions_are_not_promoted_to_actual
+    self.assertNotEqual(module.audit_measures(data)["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS'
+
+======================================================================
+FAIL: test_guidance_and_assumptions_are_not_promoted_to_actual (test_financial_measure_typed_contract.TypedMeasureContractTests.test_guidance_and_assumptions_are_not_promoted_to_actual) (role='analyst_assumption')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 63, in test_guidance_and_assumptions_are_not_promoted_to_actual
+    self.assertNotEqual(module.audit_measures(data)["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS'
+
+======================================================================
+FAIL: test_guidance_and_assumptions_are_not_promoted_to_actual (test_financial_measure_typed_contract.TypedMeasureContractTests.test_guidance_and_assumptions_are_not_promoted_to_actual) (role='scenario_stress')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 63, in test_guidance_and_assumptions_are_not_promoted_to_actual
+    self.assertNotEqual(module.audit_measures(data)["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS'
+
+======================================================================
+FAIL: test_positive_base_can_fall_to_zero_or_negative (test_financial_measure_typed_contract.TypedMeasureContractTests.test_positive_base_can_fall_to_zero_or_negative) (end='0')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 41, in test_positive_base_can_fall_to_zero_or_negative
+    self.assertEqual(module.audit_measures(data)["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'UNRESOLVED' != 'PASS'
+- UNRESOLVED
++ PASS
+
+
+======================================================================
+FAIL: test_positive_base_can_fall_to_zero_or_negative (test_financial_measure_typed_contract.TypedMeasureContractTests.test_positive_base_can_fall_to_zero_or_negative) (end='-20')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 41, in test_positive_base_can_fall_to_zero_or_negative
+    self.assertEqual(module.audit_measures(data)["overall"], "PASS")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'UNRESOLVED' != 'PASS'
+- UNRESOLVED
++ PASS
+
+
+======================================================================
+FAIL: test_relative_precision_has_no_one_unit_absolute_floor (test_financial_measure_typed_contract.TypedMeasureContractTests.test_relative_precision_has_no_one_unit_absolute_floor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 123, in test_relative_precision_has_no_one_unit_absolute_floor
+    self.assertEqual(module.audit_measures(data)["overall"], "FAIL")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'FAIL'
+- PASS
++ FAIL
+
+
+======================================================================
+FAIL: test_rounding_uses_integer_places_and_explicit_display_precision (test_financial_measure_typed_contract.TypedMeasureContractTests.test_rounding_uses_integer_places_and_explicit_display_precision) (places=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 114, in test_rounding_uses_integer_places_and_explicit_display_precision
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'INVALID'
+- PASS
++ INVALID
+
+
+======================================================================
+FAIL: test_rounding_uses_integer_places_and_explicit_display_precision (test_financial_measure_typed_contract.TypedMeasureContractTests.test_rounding_uses_integer_places_and_explicit_display_precision) (places=2.4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 114, in test_rounding_uses_integer_places_and_explicit_display_precision
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'INVALID'
+- PASS
++ INVALID
+
+
+======================================================================
+FAIL: test_rounding_uses_integer_places_and_explicit_display_precision (test_financial_measure_typed_contract.TypedMeasureContractTests.test_rounding_uses_integer_places_and_explicit_display_precision) (places='2')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 114, in test_rounding_uses_integer_places_and_explicit_display_precision
+    self.assertEqual(module.audit_measures(data)["overall"], "INVALID")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'INVALID'
+- PASS
++ INVALID
+
+
+======================================================================
+FAIL: test_structurally_invalid_dependency_cannot_have_pass_relation (test_financial_measure_typed_contract.TypedMeasureContractTests.test_structurally_invalid_dependency_cannot_have_pass_relation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_typed_contract.py", line 56, in test_structurally_invalid_dependency_cannot_have_pass_relation
+    self.assertNotEqual(report["relation_checks"][0]["status"], "PASS")
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS'
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.046s
+
+FAILED (failures=29, errors=5)

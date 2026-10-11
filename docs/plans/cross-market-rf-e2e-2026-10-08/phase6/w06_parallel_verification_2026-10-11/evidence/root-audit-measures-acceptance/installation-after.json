@@ -1,0 +1,40 @@
+{
+  "head": "9cd5ff8a2c8f9c1726c4047785164e3263673614",
+  "files_per_copy": 26,
+  "changed_per_copy": [
+    "SKILL.md",
+    "references/financial-measure-audit.md",
+    "references/review-analyst.md",
+    "references/review-process.md",
+    "scripts/financial_measure_audit.py"
+  ],
+  "installations": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "files": 26,
+      "changed": [
+        "SKILL.md",
+        "scripts/financial_measure_audit.py",
+        "references/financial-measure-audit.md",
+        "references/review-analyst.md",
+        "references/review-process.md"
+      ],
+      "mismatches": [],
+      "status": "MATCH"
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "files": 26,
+      "changed": [
+        "SKILL.md",
+        "scripts/financial_measure_audit.py",
+        "references/financial-measure-audit.md",
+        "references/review-analyst.md",
+        "references/review-process.md"
+      ],
+      "mismatches": [],
+      "status": "MATCH"
+    }
+  ],
+  "configuration_and_output_preserved": true
+}

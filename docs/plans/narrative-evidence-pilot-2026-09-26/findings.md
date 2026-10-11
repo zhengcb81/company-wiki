@@ -1,3 +1,13 @@
+## ROOT 当前状态 — W06 accepted / W05 resource finalization — 2026-10-11
+
+- **W06-AUDIT-MEASURES：完成。** 原交付6a50d7e在最新W05 audit main上整合并修复共因；main正常合并至9cd5ff8a2c8f9c1726c4047785164e3263673614，clean。296项大节点测试、最终77项及独立19+8+4探针通过；两份技能各26文件MATCH，仅5个包文件/份及manifest更新。Audit无remote。验收限声明的类型与算术，不能替代来源真值与经济模型审查。
+- **W05-CWP-OCR：最终资源收尾中，尚未并线。** 原85秒失败来自重复stdin监听与Windows CRT锁互阻，保留原FAIL；去掉冗余监听后22项集中通过、有效50ms产品硬截止通过；同一微软原件真实初次处理及独立回开总88.83秒（阶段各在原85/90秒上限），两定义恢复、22旧行完全一致。独审另发现ROI在PIL放大/拼接后才验像素，ROOT正在统一整数几何预检和预扣，禁止把native推理前已计预算误说成分配前也已计。
+- **W05-RF-FLOW：修复集中工程节点通过，尚待最终独审与并线。** 唯一现有pre-push节点356+36 subtests通过（33.20秒），可移植兼容/3.9节点52+7通过，隔离native CLI和三仓显式根集成通过。原FAIL与他人assurance/output WIP保留；不凭解释文字放宽时间窗口或重复贡献，不新增许可门。
+
+本批次没有供应商/LLM调用或新费用，原件与生产配置未改。下面旧状态只作历史；母PWF的W04、G2、G4、G5仍未全部完成，不能写整体完工。下一步：OCR分配前硬预算修复集中测试及真实E2E，RF非作者复核；达标后正常commit/merge/install/push，再返回母计划。
+
+W06精确证据：phase6/w06_parallel_verification_2026-10-11/evidence/root-audit-measures-acceptance/publication.json 与 independent/final-review.md；隔离ROOT接收计划为 .planning/w06-audit-measures-reception/。
+
 ## ROOT 接收状态：三交付已盘点、隔离修复中（2026-10-11）
 
 W05-AUDIT-LOOP 已并 main321d4c1、两技能同步，旧结论保持。新三交付均已核 Git/manifest；“worker 完成”仍需 ROOT 验证事实范围，不扩展人工许可。

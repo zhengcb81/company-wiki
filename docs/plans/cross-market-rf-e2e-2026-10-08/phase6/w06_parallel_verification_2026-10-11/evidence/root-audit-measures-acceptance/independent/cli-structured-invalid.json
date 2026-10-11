@@ -1,0 +1,55 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+    "--ledger",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\independent\\_cli_scratch\\malformed-but-valid-json.json",
+    "--out-root",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\independent\\_cli_scratch\\attempts"
+  ],
+  "exit_code": 2,
+  "stdout": "{\"attempt_id\": \"20261011T115021Z-2f54bb92\", \"attempt_dir\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\w06_parallel_verification_2026-10-11\\\\evidence\\\\root-audit-measures-acceptance\\\\independent\\\\_cli_scratch\\\\attempts\\\\20261011T115021Z-2f54bb92\", \"output_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\docs\\\\plans\\\\cross-market-rf-e2e-2026-10-08\\\\phase6\\\\w06_parallel_verification_2026-10-11\\\\evidence\\\\root-audit-measures-acceptance\\\\independent\\\\_cli_scratch\\\\attempts\\\\20261011T115021Z-2f54bb92\\\\report.json\", \"overall\": \"INVALID\", \"exit_code\": 2, \"check_kind\": \"declared_measure_and_relation_checks_not_source_truth\", \"source_truth_verified\": false, \"economic_reasonableness\": \"not_evaluated\"}\n",
+  "stderr": "",
+  "receipt": {
+    "attempt_id": "20261011T115021Z-2f54bb92",
+    "attempt_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\independent\\_cli_scratch\\attempts\\20261011T115021Z-2f54bb92",
+    "output_file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\independent\\_cli_scratch\\attempts\\20261011T115021Z-2f54bb92\\report.json",
+    "overall": "INVALID",
+    "exit_code": 2,
+    "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+    "source_truth_verified": false,
+    "economic_reasonableness": "not_evaluated"
+  },
+  "reports": [
+    {
+      "schema_version": "financial-measure-audit/1",
+      "check_kind": "declared_measure_and_relation_checks_not_source_truth",
+      "as_of_date": "2026-10-11",
+      "source_truth_verified": false,
+      "economic_reasonableness": "not_evaluated",
+      "overall": "INVALID",
+      "exit_code": 2,
+      "observation_checks": [],
+      "relation_checks": [],
+      "coverage": {
+        "observations_declared": 0,
+        "observation_denominator": 0,
+        "relations_declared": 0,
+        "relation_denominator": 0,
+        "relation_verification": "not_declared",
+        "coverage_pass": false
+      },
+      "diagnostics": [
+        {
+          "code": "invalid_ledger_shape",
+          "detail": "observations and relations must be lists"
+        }
+      ]
+    }
+  ],
+  "structured_invalid_report": true,
+  "required_nonattestation_fields_present": false
+}

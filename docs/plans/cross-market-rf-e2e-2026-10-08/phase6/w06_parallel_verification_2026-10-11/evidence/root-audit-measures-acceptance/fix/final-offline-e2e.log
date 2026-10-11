@@ -1,0 +1,1 @@
+{"receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w06_parallel_verification_2026-10-11\\evidence\\root-audit-measures-acceptance\\fix\\final-offline-e2e.json", "outcome": "complete", "exit_codes": {"legal_cn.json": 0, "unit_error_hk.json": 1, "unknown_us.json": 3}, "non_overwrite_verified": true, "cleanup_verified": true}

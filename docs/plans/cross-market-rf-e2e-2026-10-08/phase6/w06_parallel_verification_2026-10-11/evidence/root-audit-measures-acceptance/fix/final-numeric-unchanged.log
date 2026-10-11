@@ -1,0 +1,12 @@
+test_billion_and_chinese_yi_are_not_equal (test_numeric_audit.NumericAuditTests.test_billion_and_chinese_yi_are_not_equal) ... ok
+test_cli_preserves_json_decimal_precision (test_numeric_audit.NumericAuditTests.test_cli_preserves_json_decimal_precision) ... ok
+test_cli_reports_false_conversion_with_nonzero_exit_and_isolation (test_numeric_audit.NumericAuditTests.test_cli_reports_false_conversion_with_nonzero_exit_and_isolation) ... ok
+test_explicit_rounding_and_duplicate (test_numeric_audit.NumericAuditTests.test_explicit_rounding_and_duplicate) ... ok
+test_fx_is_explicit_and_directional (test_numeric_audit.NumericAuditTests.test_fx_is_explicit_and_directional) ... ok
+test_percent_conversion_and_percentage_points_ambiguity (test_numeric_audit.NumericAuditTests.test_percent_conversion_and_percentage_points_ambiguity) ... ok
+test_reject_nonfinite_bool_and_missing_evidence (test_numeric_audit.NumericAuditTests.test_reject_nonfinite_bool_and_missing_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.743s
+
+OK

@@ -1,0 +1,204 @@
+test_annual_vs_quarter_called_growth (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_annual_vs_quarter_called_growth) ... FAIL
+test_blank_relation_id_accepted (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_blank_relation_id_accepted) ... ok
+test_control_contiguous_sum (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_control_contiguous_sum) ... ok
+test_control_scale_conversion (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_control_scale_conversion) ... ok
+test_conversion_changes_company_definition_and_time (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_conversion_changes_company_definition_and_time) ... FAIL
+test_conversion_multiple_operands_ignored (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_conversion_multiple_operands_ignored) ... FAIL
+test_conversion_result_missing_source_ref (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_conversion_result_missing_source_ref) ... FAIL
+test_conversion_result_missing_window (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_conversion_result_missing_window) ... FAIL
+test_difference_one_operand_should_diagnose_not_crash (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_difference_one_operand_should_diagnose_not_crash) ... ERROR
+test_flow_revenue_divided_by_stock_cash_called_share (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_flow_revenue_divided_by_stock_cash_called_share) ... FAIL
+test_growth_between_different_companies (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_growth_between_different_companies) ... FAIL
+test_malformed_as_of_is_silently_accepted (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_malformed_as_of_is_silently_accepted) ... FAIL
+test_malformed_observation_id_list (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_malformed_observation_id_list) ... ERROR
+test_malformed_relation_input_object (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_malformed_relation_input_object) ... ERROR
+test_malformed_scale_list (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_malformed_scale_list) ... ERROR
+test_missing_flow_anchor_should_diagnose_not_crash (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_missing_flow_anchor_should_diagnose_not_crash) ... ERROR
+test_subunit_tolerance_masks_multimillion_factor_error (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_subunit_tolerance_masks_multimillion_factor_error) ... FAIL
+test_sum_output_silently_relabels_currency_entity_definition (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_sum_output_silently_relabels_currency_entity_definition) ... FAIL
+test_unsupported_schema_is_silently_accepted (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_unsupported_schema_is_silently_accepted) ... FAIL
+
+======================================================================
+ERROR: test_difference_one_operand_should_diagnose_not_crash (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_difference_one_operand_should_diagnose_not_crash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 18, in run
+    report = module.audit_measures(case["ledger"])
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 641, in audit_measures
+    relation_checks = [_check_relation(rel, norms) for rel in relations]
+                       ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 474, in _check_relation
+    a, b = resolved[0], resolved[1]
+                        ~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_malformed_observation_id_list (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_malformed_observation_id_list)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 18, in run
+    report = module.audit_measures(case["ledger"])
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 636, in audit_measures
+    check, norm = _check_observation(row, seen_ids)
+                  ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 120, in _check_observation
+    seen_ids.add(oid)
+    ~~~~~~~~~~~~^^^^^
+TypeError: unhashable type: 'list'
+
+======================================================================
+ERROR: test_malformed_relation_input_object (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_malformed_relation_input_object)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 18, in run
+    report = module.audit_measures(case["ledger"])
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 641, in audit_measures
+    relation_checks = [_check_relation(rel, norms) for rel in relations]
+                       ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 326, in _check_relation
+    if iid not in norms:
+       ^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'dict'
+
+======================================================================
+ERROR: test_malformed_scale_list (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_malformed_scale_list)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 18, in run
+    report = module.audit_measures(case["ledger"])
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 636, in audit_measures
+    check, norm = _check_observation(row, seen_ids)
+                  ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 131, in _check_observation
+    if scale not in SCALES:
+       ^^^^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'list'
+
+======================================================================
+ERROR: test_missing_flow_anchor_should_diagnose_not_crash (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_missing_flow_anchor_should_diagnose_not_crash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 18, in run
+    report = module.audit_measures(case["ledger"])
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 641, in audit_measures
+    relation_checks = [_check_relation(rel, norms) for rel in relations]
+                       ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\skills\revenue-forecast-audit\scripts\financial_measure_audit.py", line 440, in _check_relation
+    windows = sorted(((n["period_start"], n["period_end"]) for n in resolved),
+                     key=lambda w: w[0])
+TypeError: '<' not supported between instances of 'datetime.date' and 'NoneType'
+
+======================================================================
+FAIL: test_annual_vs_quarter_called_growth (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_annual_vs_quarter_called_growth)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['FAIL', 'INVALID', 'UNRESOLVED'] : annual_vs_quarter_called_growth
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "2026-10-11", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:now", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD million", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}, {"check_id": "obs:base", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD million", "time": "2023-01-01..2023-03-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:g", "kind": "relation", "op": "growth_rate", "status": "PASS", "expected": "2E+1", "actual": "20", "units": "percent", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "coverage": {"observations_declared": 2, "observation_denominator": 2, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+======================================================================
+FAIL: test_conversion_changes_company_definition_and_time (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_conversion_changes_company_definition_and_time)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['FAIL', 'INVALID', 'UNRESOLVED'] : conversion_changes_company_definition_and_time
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "2026-10-11", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:revenue", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD billion", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:conversion", "kind": "relation", "op": "scale_conversion", "status": "PASS", "expected": "12.0", "actual": "12", "units": "USD 亿", "time": "2025-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "coverage": {"observations_declared": 1, "observation_denominator": 1, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+======================================================================
+FAIL: test_conversion_multiple_operands_ignored (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_conversion_multiple_operands_ignored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['INVALID'] : conversion_multiple_operands_ignored
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "2026-10-11", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:revenue", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD billion", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:conversion", "kind": "relation", "op": "scale_conversion", "status": "PASS", "expected": "12.0", "actual": "12", "units": "USD 亿", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "coverage": {"observations_declared": 1, "observation_denominator": 1, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+======================================================================
+FAIL: test_conversion_result_missing_source_ref (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_conversion_result_missing_source_ref)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['FAIL', 'INVALID', 'UNRESOLVED'] : conversion_result_missing_source_ref
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "2026-10-11", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:revenue", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD billion", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:conversion", "kind": "relation", "op": "scale_conversion", "status": "PASS", "expected": "12.0", "actual": "12", "units": "USD 亿", "time": "2024-01-01..2024-12-31", "source_ref": null, "diagnostics": [{"code": "missing_source_ref", "detail": "reported_fact requires source_id+locator"}]}], "coverage": {"observations_declared": 1, "observation_denominator": 1, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+======================================================================
+FAIL: test_conversion_result_missing_window (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_conversion_result_missing_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['FAIL', 'INVALID', 'UNRESOLVED'] : conversion_result_missing_window
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "2026-10-11", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:revenue", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD billion", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:conversion", "kind": "relation", "op": "scale_conversion", "status": "PASS", "expected": "12.0", "actual": "12", "units": "USD 亿", "time": null, "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": [{"code": "missing_window", "detail": "flow requires period_start and period_end"}]}], "coverage": {"observations_declared": 1, "observation_denominator": 1, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+======================================================================
+FAIL: test_flow_revenue_divided_by_stock_cash_called_share (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_flow_revenue_divided_by_stock_cash_called_share)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['FAIL', 'INVALID', 'UNRESOLVED'] : flow_revenue_divided_by_stock_cash_called_share
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "2026-10-11", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:revenue", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD million", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}, {"check_id": "obs:cash", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD million", "time": "2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:s", "kind": "relation", "op": "share", "status": "PASS", "expected": "2E+1", "actual": "20", "units": "percent", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "coverage": {"observations_declared": 2, "observation_denominator": 2, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+======================================================================
+FAIL: test_growth_between_different_companies (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_growth_between_different_companies)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['INVALID', 'UNRESOLVED'] : growth_between_different_companies
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "2026-10-11", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:now", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD million", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}, {"check_id": "obs:base", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD million", "time": "2023-01-01..2023-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:g", "kind": "relation", "op": "growth_rate", "status": "PASS", "expected": "2E+1", "actual": "20", "units": "percent", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "coverage": {"observations_declared": 2, "observation_denominator": 2, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+======================================================================
+FAIL: test_malformed_as_of_is_silently_accepted (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_malformed_as_of_is_silently_accepted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['INVALID'] : malformed_as_of_is_silently_accepted
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "not-a-date", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:revenue", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD billion", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:conversion", "kind": "relation", "op": "scale_conversion", "status": "PASS", "expected": "12.0", "actual": "12", "units": "USD 亿", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "coverage": {"observations_declared": 1, "observation_denominator": 1, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+======================================================================
+FAIL: test_subunit_tolerance_masks_multimillion_factor_error (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_subunit_tolerance_masks_multimillion_factor_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['FAIL', 'INVALID'] : subunit_tolerance_masks_multimillion_factor_error
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "2026-10-11", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:tiny", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD million", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}, {"check_id": "obs:whole", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD million", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:s", "kind": "relation", "op": "share", "status": "PASS", "expected": "1E-7", "actual": "0.49", "units": "decimal", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "coverage": {"observations_declared": 2, "observation_denominator": 2, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+======================================================================
+FAIL: test_sum_output_silently_relabels_currency_entity_definition (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_sum_output_silently_relabels_currency_entity_definition)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['FAIL', 'INVALID'] : sum_output_silently_relabels_currency_entity_definition
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "2026-10-11", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:h1", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD million", "time": "2024-01-01..2024-06-30", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}, {"check_id": "obs:h2", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD million", "time": "2024-07-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:sum", "kind": "relation", "op": "sum", "status": "PASS", "expected": "180", "actual": "180", "units": "CNY million", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "coverage": {"observations_declared": 2, "observation_denominator": 2, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+======================================================================
+FAIL: test_unsupported_schema_is_silently_accepted (test_financial_measure_root_regressions.FrozenRootAcceptanceTests.test_unsupported_schema_is_silently_accepted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\_harness_worktrees\w06\audit-measures-root\tests\test_financial_measure_root_regressions.py", line 19, in run
+    self.assertIn(report["overall"], case["expected_statuses"], case["id"] + "\n" + json.dumps(report, ensure_ascii=False))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' not found in ['INVALID'] : unsupported_schema_is_silently_accepted
+{"schema_version": "financial-measure-audit/1", "check_kind": "declared_measure_and_relation_checks_not_source_truth", "as_of_date": "2026-10-11", "source_truth_verified": false, "economic_reasonableness": "not_evaluated", "overall": "PASS", "exit_code": 0, "observation_checks": [{"check_id": "obs:revenue", "kind": "observation", "op": null, "status": "PASS", "expected": null, "actual": null, "units": "USD billion", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "relation_checks": [{"check_id": "rel:conversion", "kind": "relation", "op": "scale_conversion", "status": "PASS", "expected": "12.0", "actual": "12", "units": "USD 亿", "time": "2024-01-01..2024-12-31", "source_ref": {"source_id": "SRC1", "locator": "p3 table"}, "diagnostics": []}], "coverage": {"observations_declared": 1, "observation_denominator": 1, "relations_declared": 1, "relation_denominator": 1, "relation_verification": "complete", "coverage_pass": true}, "diagnostics": []}
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.051s
+
+FAILED (failures=11, errors=5)

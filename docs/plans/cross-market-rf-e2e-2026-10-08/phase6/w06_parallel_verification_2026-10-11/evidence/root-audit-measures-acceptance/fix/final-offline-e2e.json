@@ -1,0 +1,94 @@
+{
+  "schema_version": "financial-measure-e2e/1",
+  "check_kind": "offline_real_cli_e2e_not_source_truth",
+  "ledgers": {
+    "legal_cn.json": 0,
+    "unit_error_hk.json": 1,
+    "unknown_us.json": 3
+  },
+  "exit_codes": {
+    "legal_cn.json": 0,
+    "unit_error_hk.json": 1,
+    "unknown_us.json": 3
+  },
+  "overall": {
+    "legal_cn.json": "PASS",
+    "unit_error_hk.json": "FAIL",
+    "unknown_us.json": "UNRESOLVED"
+  },
+  "report_paths": {
+    "legal_cn.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cwpa-real-financial-e2e\\attempts\\20261011T113937Z-39d7cc38\\report.json",
+    "unit_error_hk.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cwpa-real-financial-e2e\\attempts\\20261011T113938Z-7e690ed2\\report.json",
+    "unknown_us.json": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cwpa-real-financial-e2e\\attempts\\20261011T113939Z-b60dd1a9\\report.json"
+  },
+  "attempt_isolation_verified": true,
+  "non_overwrite_verified": true,
+  "sentinels": {
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cwpa-real-financial-e2e\\sentinel_a.txt": "7f8a9b3b1db707e7e1905057aab3cd6e5f53afca33f83b03a861a99f83870dd1",
+    "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cwpa-real-financial-e2e\\sentinel_b.txt": "2ed954573a1b4697b8f0cf7d7d4a82042d3b7af130605a0414608857a7614736"
+  },
+  "mutated_relation_exit": 1,
+  "provider_calls": 0,
+  "network_calls": 0,
+  "model_calls": 0,
+  "actual_usage": null,
+  "actual_cost": null,
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\tests\\fixtures\\financial_measures\\legal_cn.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.289267,
+      "stdout_sha256": "2732e636fb863ac8818f646fdf0cedff25b3afcb18f77c7972545e4e6d31c3ab"
+    },
+    {
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\tests\\fixtures\\financial_measures\\unit_error_hk.json"
+      ],
+      "exit_code": 1,
+      "seconds": 1.165962,
+      "stdout_sha256": "4cdc5de0c6c56eb93e7b2aaaa0a5101fce099c6462145e07f020e7f7ad9c6894"
+    },
+    {
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\tests\\fixtures\\financial_measures\\unknown_us.json"
+      ],
+      "exit_code": 3,
+      "seconds": 0.827876,
+      "stdout_sha256": "1208902ea452ed3a01526b94a22b0397f1e5a471423ebe23b4c54365d234ae5c"
+    },
+    {
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\tests\\fixtures\\financial_measures\\legal_cn.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.798718,
+      "stdout_sha256": "8e34196e3612bead7b593848f28d3c75ad3ec6e628cd5001984ac0381b1d69ec"
+    },
+    {
+      "argv": [
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w06\\audit-measures-root\\skills\\revenue-forecast-audit\\scripts\\financial_measure_audit.py",
+        "--ledger",
+        "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cwpa-real-financial-e2e\\legal_cn_mutated.json"
+      ],
+      "exit_code": 1,
+      "seconds": 0.417058,
+      "stdout_sha256": "412ab6e2cab4367510b9585b45b4c121dd81ab4072c70d7da0a31cb0694d7670"
+    }
+  ],
+  "owned_file_count": 13,
+  "owned_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwpa-w06-measures-final-4febb37c\\cwpa-real-financial-e2e",
+  "initial_state": "absent",
+  "final_state": "absent",
+  "cleanup_verified": true,
+  "seconds": 4.608118
+}
