@@ -33,6 +33,7 @@ class SourceOperationInput:
     policy_hash: str | None
     matches: tuple[dict[str, Any], ...]
     gap_plan: dict[str, Any] | None
+    local_preparation: dict[str, Any] | None = None
 
 
 def _object(value: object, name: str) -> dict[str, Any]:
@@ -157,6 +158,23 @@ def _optional_text(value: object, name: str) -> str | None:
     return value
 
 
+def _local_preparation(value):
+    if value is None:
+        return None
+    diagnostic = _object(value,"local_preparation")
+    if (set(diagnostic) != {"status","reason","blocks_download","causes"}
+        or diagnostic["status"] not in {"blocked","unavailable","ambiguous"}
+        or diagnostic["blocks_download"] is not True
+        or not isinstance(diagnostic["causes"],list)):
+        raise SourceOperationProjectionError("invalid local preparation diagnostic")
+    reasons = [diagnostic["reason"],*diagnostic["causes"]]
+    if not all(isinstance(reason,str) and re.fullmatch(r"[a-z][a-z0-9_]{0,79}",reason)
+               for reason in reasons):
+        raise SourceOperationProjectionError("local preparation reason must be a named code")
+    return {"status":diagnostic["status"],"reason":diagnostic["reason"],
+            "blocks_download":True,"causes":list(diagnostic["causes"])}
+
+
 def parse_operation_payload(
     payload: dict[str, Any], *, operation: str,
 ) -> SourceOperationInput:
@@ -173,8 +191,9 @@ def parse_operation_payload(
     envelope = _envelope(result, resolution)
     attempt = _optional_object(result.get("attempt"), "attempt")
     gap = acquisition_resolution = None
+    acquisition: dict[str, Any] = {}
     if typed_operation == "ensure":
-        _, gap, acquisition_resolution = _ensure_parts(result)
+        acquisition, gap, acquisition_resolution = _ensure_parts(result)
         _validate_gap_status(status, gap)
     ids = (
         result.get("request_id"),
@@ -197,6 +216,7 @@ def parse_operation_payload(
         policy_hash=_policy_hash(envelope),
         matches=_matches(resolution),
         gap_plan=gap,
+        local_preparation=_local_preparation(acquisition.get("local_preparation")),
     )
 
 

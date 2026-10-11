@@ -280,6 +280,7 @@ class AcquisitionResult:
     reason: str | None = None
     gap_plan: GapPlan | None = None  # WU-4.2: metadata-only plan (status GAP)
     acquisition_failure: dict[str, Any] | None = None
+    local_preparation: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         result = {
@@ -294,6 +295,8 @@ class AcquisitionResult:
         }
         if self.acquisition_failure is not None:
             result["acquisition_failure"] = self.acquisition_failure
+        if self.local_preparation is not None:
+            result["local_preparation"] = self.local_preparation
         return result
 
 
@@ -421,7 +424,9 @@ class AcquisitionCoordinator:
         elif local["blocks_download"]:
             return AcquisitionResult(schema_version=ACQUISITION_SCHEMA_VERSION,
                 status=AcquisitionStatus.AMBIGUOUS if local["status"] == "ambiguous" else AcquisitionStatus.MISSING,
-                resolution=resolution, reason=local["reason"])
+                resolution=resolution, reason=local["reason"], local_preparation={
+                    "status":local["status"],"reason":local["reason"],"blocks_download":True,
+                    "causes":sorted({item["reason"] for item in local.get("diagnostics",())})})
         if request.mode == "latest_as_of":
             return self._gap_plan_result(request, resolution, budget=budget,
                                          candidate_scope=candidate_scope)

@@ -2072,7 +2072,11 @@ def scan_catalog(
     v2_scan_shadow: bool = False,
     zero_diff_rounds: int | None = None,
     budget=None,
+    on_registered=None,
 ) -> ScanReport:
+    if on_registered is not None and (not callable(on_registered) or dry_run
+            or relative_paths is None or len(relative_paths) != 1):
+        raise ValueError("writer facts require one explicit registration group")
     if relative_paths is not None:
         if not root_ids or len(root_ids) != 1:
             raise ValueError("registration requires exactly one root_id")
@@ -2106,7 +2110,7 @@ def scan_catalog(
     _begin_scan_run(store, run_id, scan_time)
     try:
         with store.coalesced_transactions(max_operations=250):
-            return _scan_catalog_impl(
+            report = _scan_catalog_impl(
                 config,
                 store,
                 dry_run=False,
@@ -2120,6 +2124,9 @@ def scan_catalog(
                 scan_run_started=True,
                 budget=budget,
             )
+            if on_registered is not None:
+                on_registered(store)
+            return report
     except Exception:
         _interrupt_scan_run(store, run_id)
         raise

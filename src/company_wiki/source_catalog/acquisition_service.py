@@ -214,6 +214,16 @@ class SourceAcquisitionService:
             return self.journal.record(outcome=outcome, **common, **values)
 
         if acquisition.status is AcquisitionStatus.REUSED:
+            from .source_reader import SourceVersionReader
+            reader = SourceVersionReader(self.coordinator.catalog)
+            if len(acquisition.resolution.matches) != 1:
+                raise RuntimeError("reuse requires one exact source version")
+            match = acquisition.resolution.matches[0]
+            ref = reader.query_ref(match.document_id,match.source_id,match.content_sha256)
+            # Verify the pinned source in its owner layer before recording successful reuse.
+            reader.verify_version(ref,purpose="filing_reuse")
+            if budget is not None:
+                budget.ensure_open()
             outcome = (
                 "reused_after_discovery"
                 if acquisition.candidate is not None

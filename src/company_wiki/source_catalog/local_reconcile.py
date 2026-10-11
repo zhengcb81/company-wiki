@@ -33,6 +33,7 @@ from .resolver import (
 from .source_reader import SourceReadError, SourceRef, SourceVersionReader
 from .source_group_scope import SourceRegistrationScope
 from .lock import CatalogOperationLockedError
+from .canonical_scope import HistoricalCaptureScopes, ScopeRelation, qualified_source_scope, scope_relatedness
 
 SCHEMA = "local-source-prepare/1"
 
@@ -494,8 +495,30 @@ def _prepare_local_source(
     operations = []
     qualified_documents = set()
     targeted = False
+    historical = HistoricalCaptureScopes(catalog,budget)
+    eligible = []
+    known_identity = None
+    for candidate in candidates:
+        budget.check()
+        row = catalog.reader.exact_source_version(candidate["document_id"])
+        ref = SourceRef(row["document_id"],row["source_id"],row["content_sha256"],row["byte_size"],row["mime_type"])
+        scope = qualified_source_scope(catalog,ref,candidate,historical=historical)
+        relation = scope_relatedness(scope,request)
+        if relation is ScopeRelation.NOT_RELEVANT:
+            known_identity = known_identity or scope.identity()
+            diagnostics.append({"document_id":ref.document_id,"reason":"trusted_scope_not_relevant"})
+            continue
+        eligible.append(candidate)
+        if relation is ScopeRelation.MATCH and scope.authority == "source-facts":
+            known_identity = known_identity or scope.identity()
+    candidates = eligible
+    if not candidates:
+        if not _discovery_done and known_identity and _discover_source_groups(catalog,known_identity,budget):
+            return _prepare_local_source(catalog,request,identity_cache_dir=identity_cache_dir,
+                limits=limits,_discovery_done=True,_budget=budget)
+        return _result("not_found","no_matching_local_period",diagnostics=diagnostics)
     try:
-        identity = identity or _identity(catalog, request, identity_cache_dir)
+        identity = identity or known_identity or _identity(catalog, request, identity_cache_dir)
     except (ValueError, SourceReadError) as exc:
         return _result(
             "blocked",
