@@ -9,3 +9,5 @@
 三张卡已成稿、独立审查完毕。两条发布前准备项已落实；每树input有construction_card、共用交接格式、inputs.json、SHA manifest及本责任层小型实证。CWP读持久原件ref，RF有真实短贡献来源摘录/原生拒绝证据，Audit有真实能力库存；无公司原件二进制复制。READY仅指施工包可开工，未宣称实现完成。
 
 W04分类worker最终STOP_PARTIAL：310focused测试绿，真实年报/半年报/IPO回放执行；短板仍有裸“未/没有+完成谓词”两处通用否定误判及部分候选固定预算落选。ROOT负责这部分，W05只做来源OCR，不与分类工作叠写。不因此发布尚未关闭的0.8源码。
+
+施工计划已正常提交并推远端master：db6a72eecdcd7ff84ca89514789c6625b81a32dd，提交/推送exit0，remote实读同HEAD。pre-push见publication/published.json与原始日志。native Git stdout含非UTF8，推送完成后的展示wrapper失败；只读替代解码/remote验真，不重复push。三卡可开工；ROOT继续W04未闭环问题，费用仍0。

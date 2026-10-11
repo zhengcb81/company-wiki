@@ -1,0 +1,19 @@
+runtime dependency declaration parity.............................(no files to check)Skipped
+ruff check (WU-1.2, mirrors CI)...................................(no files to check)Skipped
+mypy contract modules (FC-1204-c, mirrors CI).....................(no files to check)Skipped
+config doctor (WU-7.1, mirrors CI)................................(no files to check)Skipped
+host assumption guard (FC-1307-a, mirrors the CI contract test)...(no files to check)Skipped
+[master db6a72ee] docs: dispatch three independent W05 root-cause work packages
+ 19 files changed, 825 insertions(+)
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/cards/W05-AUDIT-LOOP.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/cards/W05-CWP-OCR.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/cards/W05-RF-FLOW.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/card-review.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/publication-preflight-recovery.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/evidence/readiness.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/findings.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/handoff_contract.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/input-delivery-receipt.json
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/progress.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/task_plan.md
+ create mode 100644 docs/plans/cross-market-rf-e2e-2026-10-08/phase6/w05_parallel_common_roots_2026-10-11/workspace-receipt.json

@@ -18,3 +18,5 @@ ROOT集成树新cards父目录首次apply_patch创建失败，未写两卡；改
 独立审查报告 [evidence/card-review.json](evidence/card-review.json) 保留第一次快照。两项发布前缺口已处理：三树固定input已落地；RF drivers.py精确schema族接线已纳入排他写集并加role-aware反例。RF基线不存在AGENTS，卡改为optional；重hash反例限定相对冻结输入；OCR明确composer整请求累计ROI资源。ROOT最终readiness收据核输入实际SHA/树起点/写集合，不把卡准备通过说成实现或研究通过。
 
 发布前git diff --cached --check因两份新JSON的Windows CRLF报trailing whitespace，退出2；commit尚未启动。只将自己新生成的workspace/input-delivery两收据写为LF，JSON语义不变，不规范化历史PWF或封存审查报告。重新正常stage/check/commit，未绕过hooks。
+
+推送本身exit0，随后read_text UTF8展示日志抛UnicodeDecodeError；保留raw日志SHA，解码时errors=replace仅供展示并核实际remote，未重发推送。该异常不是测试/发布失败。
