@@ -1,0 +1,117 @@
+{
+  "schema_version": "w06-lane-handoff-manifest/1",
+  "lane": "W06-CWP-PORTABILITY",
+  "note": "paths relative to workdir; manifest does not hash itself",
+  "files": [
+    {
+      "path": "tools/source_root_portability/__init__.py",
+      "sha256": "6529565236eea8e010c18a8e64c74abe9460a547863311b85413ed8b231964ea",
+      "bytes": 309
+    },
+    {
+      "path": "tools/source_root_portability/README.md",
+      "sha256": "36ed9b93be71df7e89161be56fbe4790fd831c9a091d4d33a191b74a17e60d51",
+      "bytes": 4389
+    },
+    {
+      "path": "tools/source_root_portability/fixture_builder.py",
+      "sha256": "31e88bc98d45c6ad709fb94d8a09cdbd482ceab4adf207fadf855c0fb895c6f2",
+      "bytes": 11003
+    },
+    {
+      "path": "tools/source_root_portability/consumer_spy.py",
+      "sha256": "bc7222c9fbf412959476a509947393c43f62ba929425527790cdc889fed69e22",
+      "bytes": 8312
+    },
+    {
+      "path": "tools/source_root_portability/oracle.py",
+      "sha256": "480e195897fdc5052a8fad5d5b2e0b35bed69ea5a22d366691b2cb3a31df4a5f",
+      "bytes": 32824
+    },
+    {
+      "path": "tools/source_root_portability/report.py",
+      "sha256": "ee8ce8c556ef55f28593d3bfa4223c5af564fa396c02fd94bee4c962053c28aa",
+      "bytes": 3967
+    },
+    {
+      "path": "tools/source_root_portability/scenarios.py",
+      "sha256": "091838174d3ad7696ff26dea67d5c83bb41d130778e1da72f4de707bf7ba76cd",
+      "bytes": 34272
+    },
+    {
+      "path": "tools/source_root_portability/run.py",
+      "sha256": "4a1d2d9072ec459b9acb546f796ef17499927625917c2626b9a52f1b3536a0eb",
+      "bytes": 10304
+    },
+    {
+      "path": "tests/unit/test_w06_root_portability_oracle.py",
+      "sha256": "3a0ce4bd4378336d950826e08708c20526fcfd5ef92b56e085948ead4b0c0081",
+      "bytes": 19638
+    },
+    {
+      "path": "tests/integration/test_w06_root_portability.py",
+      "sha256": "22c0ae62795b68617c8ba949039718a11aac7bbdf1e891f2f626a6e793fd0b72",
+      "bytes": 8376
+    },
+    {
+      "path": ".planning/w06-cwp-portability/task_plan.md",
+      "sha256": "cb88e9ac38726910ff65f76df839f53f13d5cdc289ff08138ef170abdfb10d9b",
+      "bytes": 4861
+    },
+    {
+      "path": ".planning/w06-cwp-portability/findings.md",
+      "sha256": "273adc1f7c3f18946245c55917c21a2143ebc24b816bb6847b83457835497cee",
+      "bytes": 12972
+    },
+    {
+      "path": ".planning/w06-cwp-portability/progress.md",
+      "sha256": "fc94931b7ab40d00b05cfa21c36a9355a653995e9bf26cd9c496483a6a8b2e97",
+      "bytes": 1703
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/red-oracle.log",
+      "sha256": "d6e596376d78a3655be420c9aba99f1199caf296c384386843ca4a36a4bfc74c",
+      "bytes": 10524
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/green-unit-integration.log",
+      "sha256": "22abff98fcc084629647b5a75792ff8445aa47194c11c1243e331ccbb2397584",
+      "bytes": 1193
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/green-unit-integration-final.log",
+      "sha256": "c5fafcab1f4119be57353b1dc36b716fc09939c53d589c8e2ba2c1d468d75f43",
+      "bytes": 1193
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/e2e-runner.log",
+      "sha256": "41f5eab4da9c932233a2417004aaa2986c47dda78a97fd7794e7ff68fba0c00e",
+      "bytes": 344
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/e2e-runner-2.log",
+      "sha256": "e442ae31768be1252e2116698a7f5f4b4105e6a0ee623f67c419794077b2b9a2",
+      "bytes": 143
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/logs/e2e-runner-final.log",
+      "sha256": "8d49466e3215540fb9b98445c118a51c09ea9ca511fea674baa1e0ef4ed6351e",
+      "bytes": 143
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/e2e/attempt-0003-report.json",
+      "sha256": "0f5901777afbe9ef81d9e7241057d69f701494da23949a0bb18def498b88d3a2",
+      "bytes": 29459
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/handoff.md",
+      "sha256": "90cddb372b9ab760e1a44820a62d13d0f3b3f0b42ccd9f3d10518e49430d3eb9",
+      "bytes": 4477
+    },
+    {
+      "path": "docs/handoffs/w06-cwp-portability/handoff.json",
+      "sha256": "d2b6564198c45d962e89bcf0ccd0245b66df2a1e685b9a6e6b54a6fea8e93480",
+      "bytes": 13051
+    }
+  ]
+}
