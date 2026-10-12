@@ -16,7 +16,7 @@
 CWP来源层已正常并入master并推送8bd23344（实现983c1732），推送前2816PASS/208.66秒。唯一静态annotation问题由正常pre-commit发现并修复，原freeze保留；精确CI38148948361已成功。FF工具main4167dac4的精确CI38148263309已成功。来源代码并线不代表ET剩余诊断或W04真实召回已通过。
 
 1. FF工具已正常并线推送且CI绿；CWP来源12文件静态hook发现单处空dict annotation，补类型后正常并线发布。旧freeze与失败保留。
-2. ET/FF单一错误投影已修：集中独审7PASS，正常分支commit ETd0ac42c6/FF2d380a05。旧失败保留；原41第二完整attempt仍因180秒截止1/27/13，W07-FF-PERF负责运行共因，当前不并生产修复主线。
+2. ET/FF单一错误投影已修：集中独审7PASS，正常分支commit ETd0ac42c6/FF2d380a05。旧失败保留；原41第二完整attempt仍因180秒截止1/27/13，W07-FF-PERF负责运行共因，此条为前次失败历史；W07验收后已正常并线FF64b4d29/ETd0ac42c6，详最新接收条目。
 3. W04旧365工程绿与六原件3FAIL保留；新375工程/同六原件87.4409秒/非作者17＋4均绿。18文件已精确集成且51集中测试通过；正常hook发现18既有边界FAIL，远端尚未发布。ROOT先修共因并验收，不跳过hook、不盲目重跑全套；G2四文件仍独立后移。
 4. G2真实有界摘要及RF消费 → G4原三公司执行/四路独审 → G5另三公司和指定公司循环。W04/G2/G4/G5仍开放，不能声称整个PWF完成。
 
@@ -24,9 +24,9 @@ CWP来源层已正常并入master并推送8bd23344（实现983c1732），推送�
 
 详细证据：W05/evidence/root-{cwp-ocr,rf-flow}-acceptance/publication.json；W06/evidence/root-audit-measures-acceptance/publication.json，以及另两包独立ROOT接收目录。精选本地计划 .planning/w05-{cwp-ocr,rf-flow}-reception、.planning/w06-{cwp-portability,ff-matrix}-reception。
 
-## W07 当前可分发的三包
+## W07 已完成分发与接收（三包历史）
 
-[总览、三个独立卡与实际目录](../w07_parallel_quality_2026-10-11/README.md)：W07-FF-PERF（优先）、W07-RF-MODEL、W07-AUDIT-ANALYST。状态READY_NOT_STARTED，已有独立PWF/固定输入/交接合同，各包A/B/C大节点，无跨包依赖。ROOT并行推进W04→G2，接收后将新工具用于G4/G5，不把工程报告当真值/经济判断。
+[总览、三个独立卡与实际目录](../w07_parallel_quality_2026-10-11/README.md)：W07-FF-PERF（优先）、W07-RF-MODEL、W07-AUDIT-ANALYST。W07已交付并接收，RF组合覆盖仍PARTIAL；初始READY是准备历史。已有独立PWF/固定输入/交接接口。ROOT并行推进W04→G2，接收后将新工具用于G4/G5，不把工程报告当真值/经济判断。
 
 2026-10-11准备时再次只读核对：三条工作树HEAD分别为FF2d380a05、RF30ddae8e、Audit9cd5ff8a，分支与卡一致。这是准备历史，不是实时状态。
 
@@ -47,3 +47,9 @@ W07-FF-PERF已完成ROOT接收：原41场景全PASS/99.9624s、零oracle finding
 共因修复：Windows长路径重复编译/重复准备与proof饥饿由作者统一解决；ROOT补独占attempt缓存、proof失败不可覆盖/完整worker证明、子进程reap、异常清理和seed完整序列。ROOT自己的逻辑别名数过约束有反例修复；首轮28/13记录保持，最终原41重跑全绿。两轮原始证据仅490060-byte ZIP，隔离重放oracle零发现、自动恢复。长矩阵手动大节点；轻量测试走同一正常push/CI，未新增人工门禁。
 
 证据入口：company-wiki/.planning/w07-ff-perf-reception/publication.json、acceptance.json、offline-evidence.zip、replay_evidence.py。工程绿不认证真实供应商可达、来源真值或研究质量。预算母账保持413778tokens/334463µUSD+2764FXhold，累计$20/200万tokens。
+
+## W08 新三包 — 2026-10-12
+
+用户要求新的排他施工包；ROOT已核真实Git/PWF并准备三个固定工区，全部READY_NOT_STARTED，无worker开工。
+[总入口与三张施工卡](../w08_parallel_completion_2026-10-12/README.md)：RF补W07五组实际遗漏；Audit在已有coverage上补optional实读执行证据；CWP新tools做有限摘要→read→固定RF消费离线联调，不写ROOT的W04 src。各包不同repo/workdir、固定代码输入、独立PWF、接口/测试/交接合同，只有A/B/C大节点，不增加许可门。
+ROOT保留W04核心修复/当前主线/安装及真实G2/G4/G5；CWP工具可先开发并交如实PARTIAL，修W04后ROOT重跑同CaseSpec。三个包不等待彼此，也不运行收费模型/provider。

@@ -1,0 +1,74 @@
+{
+  "schema": "w08-root-dispatch/1",
+  "state": "READY_NOT_STARTED",
+  "lanes": [
+    {
+      "lane_id": "W08-RF-COMBOS",
+      "repo": "revenue-forecast",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08\\rf-combinations",
+      "branch": "codex/w08-rf-combinations",
+      "base_head": "8dc2671040f4330d3b54d1bea1d17246130f9c2a",
+      "plan_id": "w08-rf-combinations",
+      "status": "READY_NOT_STARTED",
+      "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w08_parallel_completion_2026-10-12\\cards\\W08-RF-COMBOS.md",
+      "start_here": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08\\rf-combinations\\.planning\\w08-rf-combinations\\START_HERE.md",
+      "card_sha256": "58ded4387dceb77c1dbe6ffa6744acb5c1577ddb1b813b6b83065c4f539fa06e",
+      "input_manifest_sha256": "c75bfdca0ad8f2e7386f81933961719c871bad33b514728a948974a0965f2884",
+      "readonly_files": 297,
+      "prepared_bytes": 4239002,
+      "write_set": [
+        "tools/model_generalization_matrix/**",
+        "tools/tests/test_w08_model_combinations.py",
+        "docs/handoffs/w08-rf-combinations/**",
+        ".planning/w08-rf-combinations/**"
+      ]
+    },
+    {
+      "lane_id": "W08-AUDIT-EVIDENCE",
+      "repo": "revenue-forecast-audit",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08\\audit-evidence",
+      "branch": "codex/w08-audit-evidence",
+      "base_head": "2c49491355bd68b7ab5ed664bfd8010d9dae5a84",
+      "plan_id": "w08-audit-evidence",
+      "status": "READY_NOT_STARTED",
+      "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w08_parallel_completion_2026-10-12\\cards\\W08-AUDIT-EVIDENCE.md",
+      "start_here": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08\\audit-evidence\\.planning\\w08-audit-evidence\\START_HERE.md",
+      "card_sha256": "5a3b72a55ec09f1385396d46967acd65ef3199b92c9c4d7cc9332a89f70a9a9b",
+      "input_manifest_sha256": "679f5a96c6a87153597617fd884442d375f3dcb726cb0a0ed02e06f461dc836b",
+      "readonly_files": 18,
+      "prepared_bytes": 885433,
+      "write_set": [
+        "skills/revenue-forecast-audit/scripts/review_protocol.py",
+        "skills/revenue-forecast-audit/scripts/review_evidence*.py",
+        "skills/revenue-forecast-audit/references/review-evidence-reconciliation.md",
+        "tests/test_w08_review_evidence.py",
+        "tests/fixtures/w08_review_evidence/**",
+        "tools/run_review_evidence_e2e.py",
+        "docs/handoffs/w08-audit-evidence/**",
+        ".planning/w08-audit-evidence/**"
+      ]
+    },
+    {
+      "lane_id": "W08-CWP-G2-REPLAY",
+      "repo": "company-wiki",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08\\cwp-g2-replay",
+      "branch": "codex/w08-cwp-g2-replay",
+      "base_head": "122bbe3ba142979a2e478f886eb25de76edf2e00",
+      "plan_id": "w08-cwp-g2-replay",
+      "status": "READY_NOT_STARTED",
+      "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w08_parallel_completion_2026-10-12\\cards\\W08-CWP-G2-REPLAY.md",
+      "start_here": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08\\cwp-g2-replay\\.planning\\w08-cwp-g2-replay\\START_HERE.md",
+      "card_sha256": "982f98e6f4a886630f62b1ad19ac2453205c50103d0997c5107f15df38385890",
+      "input_manifest_sha256": "5088e8724e96b0564a192e1474503a18a69bb010b52b119ce888d301362f44cf",
+      "readonly_files": 303,
+      "prepared_bytes": 21232573,
+      "write_set": [
+        "tools/narrative_g2_replay/**",
+        "tests/unit/test_w08_narrative_g2_replay.py",
+        "tests/fixtures/w08_narrative_g2/**",
+        "docs/handoffs/w08-cwp-g2-replay/**",
+        ".planning/w08-cwp-g2-replay/**"
+      ]
+    }
+  ]
+}

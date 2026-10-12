@@ -1,0 +1,71 @@
+{
+  "schema": "w08-root-interfaces/1",
+  "ownership": {
+    "workers": "one lane branch/write set only; no main/install/paid calls",
+    "ROOT": "shared PWF, native core remediation, version inputs, main/install/exact CI, real G2/G4/G5"
+  },
+  "handoff_schema": "w08-lane-handoff/1",
+  "lanes": [
+    {
+      "lane_id": "W08-RF-COMBOS",
+      "input": "own pinned native code/helpers; original16 + independent COMBINATION_CASES",
+      "entry": "python -B tools/model_generalization_matrix/run.py --owned-root ABS_NEW --out-root ABS_NEW --e2e",
+      "report_schema": "model-generalization-matrix/1 (preserve existing compatibility)",
+      "must_observe": [
+        "required_case_ids",
+        "per-case native request/result refs",
+        "expected derivation",
+        "actual native status",
+        "five group coverage/missing",
+        "actual CLI exit/schema",
+        "readonly fingerprints",
+        "cleanup"
+      ],
+      "ROOT_consumer": "G4/G5 model boundary verification; close remaining coverage, not economic accuracy",
+      "new_dependency_on_other_W08": false
+    },
+    {
+      "lane_id": "W08-AUDIT-EVIDENCE",
+      "input": "explicit coverage JSON + existing execution/report/event artifacts, old modes compatible",
+      "entry": "python -B skills/revenue-forecast-audit/scripts/review_protocol.py coverage --input INPUT --execution-root ABS --out-root ABS",
+      "report_schema": "review-coverage/1 + additive evidence_reconciliation",
+      "must_observe": [
+        "artifact_ref",
+        "locator",
+        "run/review_attempt/role when known",
+        "observed bytes/SHA",
+        "supplied hash comparison only if present",
+        "event/call/output binding",
+        "status/reasons/unchecked scope"
+      ],
+      "status_values": [
+        "OBSERVED",
+        "UNAVAILABLE",
+        "UNVERIFIABLE",
+        "MISMATCH"
+      ],
+      "quality_status": "not_evaluated",
+      "ROOT_consumer": "four reviewer briefing/closing diagnostics; no new permit or automatic forecast blocking",
+      "new_dependency_on_other_W08": false
+    },
+    {
+      "lane_id": "W08-CWP-G2-REPLAY",
+      "input": "own pinned CWP + code-only RF8dc26710 snapshot + small synthetic documents/model fixture",
+      "entry": "python -B tools/narrative_g2_replay/run.py --rf-project ABS_FIXED --owned-root ABS_NEW --out-root ABS_NEW",
+      "report_schema": "narrative-g2-replay/1",
+      "must_observe": [
+        "scope/code_binding",
+        "fixed typed CaseSpecs/actual executed IDs",
+        "real canonical/finite worker/read/RF entry",
+        "request/result/artifact refs",
+        "actual model POST and reuse counters",
+        "raw hash/locators",
+        "raw/derived bytes",
+        "cleanup/remaining",
+        "known W04 baseline failures"
+      ],
+      "ROOT_consumer": "rerun same package on accepted W04; then separate real configured G2, no fixture semantic-quality claim",
+      "new_dependency_on_other_W08": false
+    }
+  ]
+}

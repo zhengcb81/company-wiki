@@ -1,0 +1,3 @@
+# Findings
+
+RF五组缺口来自W07 ROOT已公开PARTIAL，不另造需求。Audit现check_coverage只声明核对，新增optional实际读取避免重复其已有checkpoint/issue逻辑。CWP现g2_acquisition_chain只采集，新包接有限摘要/复用/read/固定RF消费；已知W04产品FAIL由ROOT修，worker如实PARTIAL。三包排他写集与固定输入，无新provider/数据库/许可门。

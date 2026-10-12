@@ -1050,3 +1050,7 @@ W07-FF-PERF已完成ROOT接收：原41场景全PASS/99.9624s、零oracle finding
 共因修复：Windows长路径重复编译/重复准备与proof饥饿由作者统一解决；ROOT补独占attempt缓存、proof失败不可覆盖/完整worker证明、子进程reap、异常清理和seed完整序列。ROOT自己的逻辑别名数过约束有反例修复；首轮28/13记录保持，最终原41重跑全绿。两轮原始证据仅490060-byte ZIP，隔离重放oracle零发现、自动恢复。长矩阵手动大节点；轻量测试走同一正常push/CI，未新增人工门禁。
 
 证据入口：company-wiki/.planning/w07-ff-perf-reception/publication.json、acceptance.json、offline-evidence.zip、replay_evidence.py。工程绿不认证真实供应商可达、来源真值或研究质量。预算母账保持413778tokens/334463µUSD+2764FXhold，累计$20/200万tokens。
+
+## W08 独立包准备 — 2026-10-12
+
+[三个新包与实际目录](phase6/w08_parallel_completion_2026-10-12/README.md)已准备，可交三个harness现在独立启动；不同repo/目录/唯一写集，RF补已确认五组遗漏、Audit实读执行证据、CWP新联调工具不碰ROOT W04 core。原W07不重派。ROOT协调接收/主线/安装和真实G2/G4/G5；母目标当前暂停，本请求不自动恢复。0付费调用。

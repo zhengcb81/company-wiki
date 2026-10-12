@@ -1,0 +1,34 @@
+{
+  "schema": "w08-preparation-check/1",
+  "rows": [
+    {
+      "lane": "W08-RF-COMBOS",
+      "head_matches": true,
+      "card_matches": true,
+      "readonly_input_matches": true,
+      "status_only_prepared_pwf": true,
+      "prepared_bytes": 4239002
+    },
+    {
+      "lane": "W08-AUDIT-EVIDENCE",
+      "head_matches": true,
+      "card_matches": true,
+      "readonly_input_matches": true,
+      "status_only_prepared_pwf": true,
+      "prepared_bytes": 885433
+    },
+    {
+      "lane": "W08-CWP-G2-REPLAY",
+      "head_matches": true,
+      "card_matches": true,
+      "readonly_input_matches": true,
+      "status_only_prepared_pwf": true,
+      "prepared_bytes": 21232573
+    }
+  ],
+  "paths_and_repos_disjoint": true,
+  "no_worker_started": true,
+  "no_paid_calls": true,
+  "mother_goal_not_resumed": true,
+  "prepared_total_bytes": 26357008
+}
