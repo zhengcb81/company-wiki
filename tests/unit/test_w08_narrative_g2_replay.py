@@ -406,3 +406,84 @@ def test_coverage_report_flags_missing_and_unknown():
     coverage = specs.coverage_report(("annual-report", "bogus"))
     assert "prospectus" in coverage["missing_case_ids"]
     assert coverage["unknown_case_ids"] == ["bogus"]
+
+
+# ROOT independent observation boundaries
+def test_root_expired_deadline_never_becomes_an_extra_one_second():
+    import pytest
+    from tools.narrative_g2_replay.observations import remaining_seconds
+    with pytest.raises(TimeoutError):
+        remaining_seconds(10, now=10)
+    assert remaining_seconds(10, now=9.5) == 0.5
+
+
+def test_root_model_posts_are_observed_per_source_not_inferred_from_a_bundle():
+    from tools.narrative_g2_replay.observations import source_posts
+    requests = [{'data': {'source': {'source_id': 'A'}}},
+                {'data': {'source': {'source_id': 'B'}}},
+                {'data': {'source': {'source_id': 'A'}}}]
+    assert source_posts(requests, 'A') == 2
+    assert source_posts(requests, 'C') == 0
+
+
+def _root_observed_parts():
+    spec = specs.spec_by_id('annual-report')
+    fixture = {'content_sha256': _sha(), 'fiscal_year': 2025,
+               'fiscal_period': 'FY', 'period_end': '2025-12-31'}
+    manifest = {k: fixture[k] for k in ('fiscal_year', 'fiscal_period', 'period_end')}
+    bundle = {'source_ref': {'content_sha256': _sha()},
+              'evidence_spans': [{'span_id': 'E', 'raw_text': spec.required_span_text}],
+              'summary': {'draft': {'claims': [{'text': spec.required_span_text,
+                                              'evidence_ids': ['E']}]}}}
+    receipt = {'replay_status': 'verified', 'locator_count': 1}
+    return spec, bundle, receipt, fixture, manifest
+
+
+def test_root_nonempty_locators_do_not_prove_actual_replay():
+    from tools.narrative_g2_replay.observations import read_observations
+    spec, bundle, receipt, fixture, manifest = _root_observed_parts()
+    receipt['replay_status'] = 'needs_review'
+    assert read_observations(spec, bundle, receipt, fixture, manifest)['locator_verified'] is False
+
+
+def test_root_required_operating_fact_must_reach_selected_evidence():
+    from tools.narrative_g2_replay.observations import read_observations
+    spec, bundle, receipt, fixture, manifest = _root_observed_parts()
+    bundle['evidence_spans'][0]['raw_text'] = 'irrelevant prose'
+    assert read_observations(spec, bundle, receipt, fixture, manifest)['required_fact_present'] is False
+
+
+def test_root_boilerplate_must_not_be_the_published_claim():
+    from tools.narrative_g2_replay.observations import read_observations
+    spec, bundle, receipt, fixture, manifest = _root_observed_parts()
+    bundle['summary']['draft']['claims'][0]['text'] = '本报告经审计'
+    assert read_observations(spec, bundle, receipt, fixture, manifest)['summary_supported'] is False
+
+
+def test_root_claim_citation_has_to_exist_in_actual_spans():
+    from tools.narrative_g2_replay.observations import read_observations
+    spec, bundle, receipt, fixture, manifest = _root_observed_parts()
+    bundle['summary']['draft']['claims'][0]['evidence_ids'] = ['invented']
+    assert read_observations(spec, bundle, receipt, fixture, manifest)['summary_supported'] is False
+
+
+def test_root_nonempty_fiscal_period_survives_the_read():
+    from tools.narrative_g2_replay.observations import read_observations
+    spec, bundle, receipt, fixture, manifest = _root_observed_parts()
+    assert read_observations(spec, bundle, receipt, fixture, manifest)['period_preserved'] is True
+    manifest['fiscal_period'] = 'Q1'
+    assert read_observations(spec, bundle, receipt, fixture, manifest)['period_preserved'] is False
+
+
+def test_root_report_model_accounting_cannot_guess_post_count():
+    record = _record()
+    record['run_plan']['root_observation_contract'] = 'root-w08-observations/1'
+    record['cases'][0]['model']['observed_from'] = 'summary_status'
+    assert oracle.evaluate_run(record).overall != STATUS_PASS
+
+
+def test_root_changed_generation_needs_a_real_invalidation_result():
+    record = _record()
+    record['run_plan']['root_observation_contract'] = 'root-w08-observations/1'
+    record['invalidation'] = []
+    assert oracle.evaluate_run(record).overall != STATUS_PASS

@@ -592,6 +592,25 @@ def _evaluate_run(record: dict) -> OracleVerdict:
     _check_fixture_truth(record, findings)
     _check_rf_consumption(record, findings)
     _check_cleanup(record, findings)
+    if record["run_plan"].get("root_observation_contract") == "root-w08-observations/1":
+        for case in record["cases"]:
+            observed = case["evidence"].get("observations") or {}
+            if case["status"] == STATUS_PASS and (case["model"].get("observed_from") !=
+                    "loopback_request_source_id" or not all(observed.get(key) is True
+                    for key in ("required_fact_present", "summary_supported", "period_preserved"))):
+                findings.append(_finding("unproved_actual_observation", case["case_id"],
+                                         "missing actual source request/fact/citation/period proof"))
+        if sum(case["model"].get("posts", 0) for case in record["cases"]) != record["model_accounting"]["run1_posts"] or record["model_accounting"].get("stub_errors"):
+            findings.append(_finding("source_post_count_mismatch", None,
+                                     "per-source actual POSTs do not reconcile with first run"))
+        invalidation = record.get("invalidation") or []
+        if {item.get("kind") for item in invalidation} != {"source-version", "model-spec"} or any(
+                item.get("status") != STATUS_PASS or item.get("model_posts") != 1 or
+                item.get("pin_changed") is not True or item.get("original_unchanged") is not True
+                for item in invalidation):
+            findings.append(_finding("generation_invalidation_not_executed", None,
+                                     "source version and generation spec need actual fresh execution"))
+
 
     for case in record["cases"]:
         statuses[case["case_id"]] = case["status"]

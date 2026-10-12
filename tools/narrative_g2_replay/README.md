@@ -106,3 +106,32 @@ W04 to compare the same CaseSpec matrix.
 - `source_truth_verified` describes only what was verified locally
   (bytes/SHA/size/locator). Synthetic identity is **not** a real company.
 - No production config, installation, CI, hook, or other lane was modified.
+
+
+## ROOT observation upgrade (2026-10-12)
+
+The tables above preserve the author's pinned-base observations. ROOT runs the
+same CaseSpecs on the current integrated source; its receipt records actual
+core/tool module hashes. Historical failures are marked `historical_not_retested`,
+not falsely reported as failures reproduced on each new HEAD.
+
+The runner now counts each source's actual loopback requests, requires the
+public reader's real `replay_status=verified` and locator count, checks the fixed
+operating sentence is selected, checks published claims cite actual spans and
+exclude fixed boilerplate, and compares nonempty fiscal periods plus the cutoff
+`2026-10-12` in RF's returned context. This is evidence binding, not supplier
+semantic-quality certification; `needs_review` remains an observed quality.
+
+Two extra **real native batches** register a separate synthetic successor TXT
+(the old original stays byte-identical), then change `max_output_tokens` by one.
+Each must call the model once and publish a changed exact pin which is freshly
+read and replayed. Same-version reuse still must issue zero calls. Changing
+model generation settings is not a claim that every selector-policy version was
+tested. All child launches share the one deadline; no command starts after it.
+
+Actual requests, batch stdout/stderr, public bundles/receipts, RF contexts and
+loopback prompt/draft records are preserved in each attempt. Paths in the report
+refer to these real files. ROOT archives them as one small compressed receipt
+bundle and restores the whole independent test root. No original/company lake is
+copied and no real credential is read. This remains a **manual major-node** tool,
+not a new per-commit or CI requirement.

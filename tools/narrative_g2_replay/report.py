@@ -28,6 +28,14 @@ TRACKED_MODULES = (
     "src/company_wiki/source_catalog/narrative_transport_cli.py",
     "src/company_wiki/source_catalog/narrative_evidence.py",
     "src/company_wiki/source_catalog/narrative_normalization.py",
+    "src/company_wiki/source_catalog/narrative_business_groups.py",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py",
+    "src/company_wiki/source_catalog/narrative_stage_assertions.py",
+    "src/company_wiki/source_catalog/narrative_budget.py",
+    "tools/narrative_g2_replay/run.py",
+    "tools/narrative_g2_replay/specs.py",
+    "tools/narrative_g2_replay/oracle.py",
+    "tools/narrative_g2_replay/observations.py",
 )
 
 # The fixed RF code-only snapshot consumed read-only by this package.

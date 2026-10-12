@@ -33,6 +33,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import math
 import os
 import shutil
 import sys
@@ -51,7 +52,7 @@ for _entry in (str(_WORKTREE / "src"), str(_WORKTREE)):
     if _entry not in sys.path:
         sys.path.insert(0, _entry)
 
-from tools.narrative_g2_replay import fixtures, oracle, report, specs  # noqa: E402
+from tools.narrative_g2_replay import fixtures, observations, oracle, report, specs  # noqa: E402
 
 # The single absolute deadline for the whole batch (card section C).
 DEFAULT_DEADLINE_SECONDS = 180.0
@@ -454,7 +455,7 @@ def read_request_for(lake: SimpleNamespace, pin: dict) -> dict[str, Any]:
             "byte_size": pin["byte_size"],
             "source_ref": source_ref,
         },
-        "as_of_date": None,
+        "as_of_date": "2026-10-12",
         "expected_source": {
             "canonical_entity_id": manifest.get("canonical_entity_id"),
             "market": manifest.get("market"),
@@ -552,6 +553,8 @@ def summarize_public_read(read: dict[str, Any]) -> dict[str, Any]:
         "draft_language": ((bundle.get("summary") or {}).get("draft") or {}).get(
             "language"),
         "locator_count": len(spans),
+        "replay_status": (read.get("receipt") or {}).get("replay_status"),
+        "receipt_locator_count": (read.get("receipt") or {}).get("locator_count"),
         "locators": [
             {
                 "span_id": span.get("span_id"),
@@ -627,6 +630,8 @@ def consume_with_rf(*, rf_project: Path, lake: SimpleNamespace, pin: dict,
         if isinstance(span, dict) and span.get("locator")
     ]
     as_of = context.get("as_of_date")
+    expected_period = request["expected_source"]
+    manifest = context.get("manifest") or {}
     return {
         "consumer": "scripts/narrative_source_preparation.py",
         "read_ok": True,
@@ -637,11 +642,13 @@ def consume_with_rf(*, rf_project: Path, lake: SimpleNamespace, pin: dict,
         "locator_count": len(locators),
         "locators": locators[:8],
         "languages": sorted(languages),
-        # The request is period-neutral here (as_of_date=None) and the reader
-        # echoes that exact value, so period survival means "unchanged", not
-        # "invented".
-        "as_of_date_echoed": as_of is None,
-        "period_preserved": as_of is None,
+        # Compare the actual nonempty cutoff and fiscal period returned by RF.
+        "as_of_date_echoed": as_of == request["as_of_date"],
+        "period_preserved": as_of == request["as_of_date"] and all(
+            manifest.get(key) == expected_period[key] for key in ("fiscal_year", "fiscal_period")),
+        "fiscal_year": manifest.get("fiscal_year"),
+        "fiscal_period": manifest.get("fiscal_period"),
+        "context": context,
         "language_preserved": bool(languages),
         "gaps_reported": list(context.get("gaps") or []),
     }
@@ -674,6 +681,8 @@ def main(argv: list[str] | None = None) -> int:
     clock_start = time.monotonic()
 
     try:
+        if not all(math.isfinite(value) and value > 0 for value in (args.deadline_seconds, args.command_seconds)):
+            raise ValueError("deadline and command bound must be finite and positive")
         owned_root, out_root = validate_roots(args.owned_root, args.out_root)
         rf_project = checked_path(args.rf_project)
         if not (rf_project / "scripts" /
@@ -695,8 +704,8 @@ def main(argv: list[str] | None = None) -> int:
     remaining: list[str] = []
     model_calls = 0
 
+    root_preexisted = owned_root.exists()
     try:
-        root_preexisted = owned_root.exists()
         owned_root.mkdir(parents=True, exist_ok=True)
         owned_child = Path(tempfile.mkdtemp(prefix="w08-g2-", dir=owned_root))
         scratch = owned_child / "scratch"
@@ -805,7 +814,7 @@ def _execute(*, lake: SimpleNamespace, owned_child: Path, attempt: report.Attemp
     requests_dir.mkdir(parents=True, exist_ok=True)
 
     def remaining_budget() -> float:
-        return max(1.0, deadline - time.monotonic())
+        return observations.remaining_seconds(deadline)
 
     def bounded() -> float:
         return min(command_seconds, remaining_budget())
@@ -814,7 +823,9 @@ def _execute(*, lake: SimpleNamespace, owned_child: Path, attempt: report.Attemp
     request = build_request(lake, run_id="w08-g2-run1",
                             endpoint=model.endpoint, case_ids=case_ids)
     request_path = requests_dir / "run1.json"
+    request["max_seconds"] = bounded()
     request_path.write_text(json.dumps(request, ensure_ascii=False), encoding="utf-8")
+    observations.save_bytes(attempt.path, "requests/run1.json", request_path.read_bytes())
     posts_before = model.post_count
     try:
         process1 = invoke_batch(
@@ -839,6 +850,9 @@ def _execute(*, lake: SimpleNamespace, owned_child: Path, attempt: report.Attemp
             f"{type(exc).__name__}".encode()))
     run2_posts = model.post_count - posts_before2
     receipt2, receipt2_error = parse_receipt(process2)
+    for index, process in ((1, process1), (2, process2)):
+        observations.save_bytes(attempt.path, f"receipts/run{index}.json", process.stdout)
+        observations.save_bytes(attempt.path, f"receipts/run{index}.stderr", process.stderr)
 
     # ---- per-case assembly ---------------------------------------------
     docs1 = document_by_id(receipt1) if receipt1 else {}
@@ -850,7 +864,7 @@ def _execute(*, lake: SimpleNamespace, owned_child: Path, attempt: report.Attemp
         document = docs1.get(info["ref"].document_id)
         case = _assemble_case(
             spec=spec, info=info, document=document,
-            lake=lake, model=model, env=env, timeout_seconds=bounded(),
+            lake=lake, model=model, env=env, timeout_seconds=bounded(), attempt=attempt.path,
         )
         cases.append(case)
         if case["_rf_pin"] is not None:
@@ -858,6 +872,11 @@ def _execute(*, lake: SimpleNamespace, owned_child: Path, attempt: report.Attemp
                 rf_project=rf_project, lake=lake, pin=case["_rf_pin"],
                 env=env, timeout_seconds=bounded(),
             ))
+        if rf_records and rf_records[-1].get("document_id") == info["ref"].document_id:
+            context = rf_records[-1].pop("context", None)
+            if context is not None:
+                observations.save_bytes(attempt.path, f"rf/{case_id}.json",
+                    json.dumps(context, ensure_ascii=False).encode("utf-8"))
         case.pop("_rf_pin", None)
 
     # ---- second-run reuse check on the published pins -------------------
@@ -868,6 +887,13 @@ def _execute(*, lake: SimpleNamespace, owned_child: Path, attempt: report.Attemp
         pins2 = {i.get("document_id"): i.get("artifact_ref")
                  for i in receipt_documents(receipt2)}
         reuse_verified = pins1 == pins2 and bool(pins1)
+
+    invalidation = observations.invalidation_checks(
+        lake=lake, model=model, env=env, attempt=attempt.path, bounded=bounded,
+        original_request=request, original_pins={i["document_id"]: i["artifact_ref"]
+            for i in receipt_documents(receipt1 or {}) if i.get("artifact_ref")})
+    observations.save_bytes(attempt.path, "model/requests-and-drafts.json",
+        json.dumps(model.requests, ensure_ascii=False).encode("utf-8"))
 
     overall_rf = {
         "consumer": "scripts/narrative_source_preparation.py",
@@ -927,9 +953,11 @@ def _execute(*, lake: SimpleNamespace, owned_child: Path, attempt: report.Attemp
         "run_plan": {
             "deadline_seconds": float(planned_deadline_seconds),
             "per_command_seconds": command_seconds,
+            "root_observation_contract": "root-w08-observations/1",
             "second_run_reuse": True,
             "rf_consumption": True,
         },
+        "invalidation": invalidation,
         "runs": [
             {"run_index": 1, "model_posts": run1_posts,
              "status": (receipt1 or {}).get("status", "failed"),
@@ -938,13 +966,15 @@ def _execute(*, lake: SimpleNamespace, owned_child: Path, attempt: report.Attemp
              "status": (receipt2 or {}).get("status", "failed"),
              "exit_code": getattr(process2, "returncode", None),
              "reuse_pins_identical": reuse_verified},
-        ],
+        ] + [{"run_index": item["run_index"], "model_posts": item["model_posts"],
+              "status": "completed" if item["status"] == "PASS" else "failed",
+              "exit_code": item["exit_code"]} for item in invalidation],
         "model_accounting": {
             "run1_posts": run1_posts,
             "run2_posts": run2_posts,
-            "total_posts": run1_posts + run2_posts,
+            "total_posts": model.post_count,
             "provider_calls": 0,
-            "llm_calls": run1_posts + run2_posts,
+            "llm_calls": model.post_count,
             "paid_usd": 0.0,
             "stub_errors": list(model.errors),
             "loopback_endpoint_ref": "loopback://127.0.0.1/v1/chat/completions",
@@ -983,7 +1013,7 @@ def known_baseline_failures() -> list[dict[str, Any]]:
             "test_id": "tests/integration/test_narrative_batch_cli_e2e.py::"
                        "test_cli_infers_sparse_languages_from_verified_pdf_"
                        "and_transcript_bytes",
-            "status": "FAIL",
+            "status": "historical_not_retested",
             "root_cause": "real batch CLI exits 2 with status=failed where the "
                           "test expects completed",
             "owner": "ROOT",
@@ -994,7 +1024,7 @@ def known_baseline_failures() -> list[dict[str, Any]]:
             "test_id": "tests/integration/test_narrative_runtime_e2e.py::"
                        "test_runtime_e2e_read_identity_fails_automatically_and_"
                        "transcript_needs_no_receipt",
-            "status": "FAIL",
+            "status": "historical_not_retested",
             "root_cause": "attempt/job row count assertion 6 != 4",
             "owner": "ROOT",
             "reproduced_at": "122bbe3ba142979a2e478f886eb25de76edf2e00",
@@ -1002,32 +1032,9 @@ def known_baseline_failures() -> list[dict[str, Any]]:
     ]
 
 
-def _case_model_posts(spec: specs.CaseSpec, pin: dict | None,
-                      public_read: dict[str, Any],
-                      document: dict | None) -> int:
-    """Actual model POSTs attributable to one case; a skip costs zero.
-
-    The batch is one process over the whole matrix, so the per-case cost is
-    read from the observable outcome rather than assumed: a case whose bundle
-    selection was ``skipped_no_narrative`` never needed a summary, and a case
-    with no published artifact never reached the model at all.
-    """
-    if pin is None:
-        return 0
-    if public_read.get("selection_status") == "skipped_no_narrative":
-        return 0
-    if public_read.get("ok") and public_read.get("summary_status") in {
-        "completed", "draft", "needs_review",
-    }:
-        return 1
-    # A published artifact whose read we could not classify is reported as
-    # unknown rather than silently counted as a call.
-    return 1 if (document or {}).get("artifact_ref") else 0
-
-
 def _assemble_case(*, spec: specs.CaseSpec, info: dict, document: dict | None,
                    lake: SimpleNamespace, model: LoopbackModel,
-                   env: dict[str, str], timeout_seconds: float) -> dict[str, Any]:
+                   env: dict[str, str], timeout_seconds: float, attempt: Path) -> dict[str, Any]:
     """One case block, built only from observed facts."""
     fixture = info["fixture"]
     manifest = info["manifest"]
@@ -1044,11 +1051,18 @@ def _assemble_case(*, spec: specs.CaseSpec, info: dict, document: dict | None,
 
     public_read: dict[str, Any] = {"ok": False, "reason": "no published pin"}
     locator_verified = False
+    observed = {}
     if pin is not None:
         read = read_public_artifact(lake, pin, env,
                                     timeout_seconds=timeout_seconds)
         public_read = summarize_public_read(read)
-        locator_verified = bool(public_read.get("locators"))
+        if read.get("body_bytes"):
+            observations.save_bytes(attempt, f"bundles/{spec.case_id}.json", read["body_bytes"])
+            observations.save_bytes(attempt, f"reads/{spec.case_id}.json",
+                json.dumps(read.get("receipt") or {}, ensure_ascii=False).encode("utf-8"))
+            observed = observations.read_observations(spec, json.loads(read["body_bytes"]),
+                read.get("receipt") or {}, fixture, manifest)
+            locator_verified = observed["locator_verified"]
 
     summary_status = public_read.get("summary_status")
     if public_read.get("selection_status") == "skipped_no_narrative":
@@ -1096,12 +1110,14 @@ def _assemble_case(*, spec: specs.CaseSpec, info: dict, document: dict | None,
                          (public_read.get("locators") or [])],
             "locator_replay_verified": locator_verified,
         }] if pin is not None else []),
-        "model": {"posts": _case_model_posts(spec, pin, public_read, document)},
+        "model": {"posts": observations.source_posts(model.requests, info["ref"].source_id),
+                  "observed_from": "loopback_request_source_id"},
         "evidence": {
             "raw_receipt_present": True,
             "raw_sha256": raw_sha256,
             "raw_bytes_match_fixture": raw_bytes_ok,
             "public_read": public_read,
+            "observations": observed,
         },
         "failure": None if pin is not None else {
             "code": "no_published_pin", "detail": "case produced no artifact"},
