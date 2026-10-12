@@ -2346,10 +2346,10 @@ def test_distinct_pdf_bullets_are_independent_even_without_full_stop():
     assert len(result.summary_input()["evidence"])==2
 
 
-def test_long_fragment_chain_is_atomic_omission_not_head_only_recovery():
+def test_character_overrun_fragment_chain_is_atomic_omission_not_head_only_recovery():
     base=native("cn-h1",page=17)[0]
     members=tuple(replace(base,unit_id="urn:company-wiki:narrative-unit:sha256:"+f"{i:064x}",
-        raw_text=("公司产品通过现场验证并获得客户重复订单，" if i==0 else "这是同一句的连续限定内容，")+("仍受限。" if i==8 else ""),
+        raw_text=("公司产品通过现场验证并获得客户重复订单，" if i==0 else "这是同一句的连续限定内容，"*20)+("仍受限。" if i==8 else ""),
         coordinates=replace(base.coordinates,paragraph_index=i),
         metadata={"pdf_block":i,"block_sha256":f"{i:064x}","bbox":[0,20*i,400,20*i+10]})
         for i in range(9))
@@ -2357,7 +2357,7 @@ def test_long_fragment_chain_is_atomic_omission_not_head_only_recovery():
         rules=_candidate_rules(selector_version="0.8.0"),respect_native_structure=True,preserve_operating_context=True)
     assert {u.unit_id for u in members} <= result.excluded_unit_ids
     assert not result.restored_unit_ids
-    assert any(d.reason=="business_group_unit_limit" for d in result.diagnostics)
+    assert any(d.reason=="business_group_character_limit" for d in result.diagnostics)
     assert package(members).evidence_spans==()
 
 

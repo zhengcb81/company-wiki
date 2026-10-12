@@ -18,7 +18,8 @@ from .narrative_stage_assertions import commercialization_milestone
 
 from .narrative_candidates import CandidateRules, EvidenceCandidate, assess_unit
 from .narrative_document import NarrativeUnit
-from .narrative_visual_units import is_ocr_unit, ocr_continues, join_unit_text
+from .narrative_visual_units import is_ocr_unit, ocr_continues, ocr_identity, join_unit_text
+from .narrative_group_candidates import AtomicSentenceOwner
 from .narrative_pdf_groups import _bbox, _has_visual_overlap
 from .n6_candidate_operating_facts import OperatingFact
 
@@ -156,12 +157,13 @@ def _text_size(members: Sequence[NarrativeUnit]) -> int:
 def enrich_business_groups(units: Sequence[NarrativeUnit], *,
     initial_candidates: Sequence[EvidenceCandidate], initial_group_ids: Mapping[str, str],
     rules: CandidateRules, respect_native_structure: bool = False,
-    preserve_operating_context: bool = False) -> BusinessEnrichmentResult:
+    preserve_operating_context: bool = False,
+    atomic_owners: Sequence[AtomicSentenceOwner] = ()) -> BusinessEnrichmentResult:
     """Complete nearby meaning; frozen older policies retain their exact ordering."""
     if preserve_operating_context:
         return _enrich_operating_context(units, initial_candidates=initial_candidates,
             initial_group_ids=initial_group_ids, rules=rules,
-            respect_native_structure=respect_native_structure)
+            respect_native_structure=respect_native_structure, atomic_owners=atomic_owners)
     native_sources = {unit.source_id for unit in units
         if respect_native_structure and unit.parser_name == "cwp_document_normalization"}
     positions = {unit.unit_id: index for index, unit in enumerate(units)}
@@ -342,9 +344,8 @@ def _planned_operating_stage(text: str) -> bool:
 def _operating_fact(text: str, rules: CandidateRules | None = None) -> OperatingFact:
     milestone = _commercialization_milestone(text)
     planned = _planned_operating_stage(text)
-    if not (milestone or planned or business_objects(text) or _OPERATING_QUANTITY.search(text)
-        or _SERVICE_REVENUE.search(text) or _DEFINITION.search(text)):
-        return OperatingFact()
+    # Current recall extends established scope/operating facts; it cannot
+    # suppress valid reporting, M&A or platform metrics before evaluating them.
     old = detect_business_fact(text)
     reasons = [reason for reason in old.reasons
         if reason != "new_product_commercialization_milestone"]
@@ -368,7 +369,8 @@ def _operating_fact(text: str, rules: CandidateRules | None = None) -> Operating
 
 
 def _structural_barrier(unit: NarrativeUnit, rules: CandidateRules) -> bool:
-    return (unit.source_role in _EXCLUDED_ROLES or unit.unit_kind == "pdf_table_row"
+    return ((is_ocr_unit(unit) and ocr_identity(unit) is None)
+        or unit.source_role in _EXCLUDED_ROLES or unit.unit_kind == "pdf_table_row"
         or unit.coordinates.table_index is not None or unit.unit_kind.endswith("_table_cell")
         or unit.unit_kind.endswith("_heading") or bool(rules.table_of_contents.search(unit.raw_text)
         or rules.accounting_context.search(unit.raw_text)))
@@ -393,10 +395,14 @@ def _physical_link(left: NarrativeUnit, right: NarrativeUnit, rules: CandidateRu
 
 def _sentence_continues(left: NarrativeUnit, right: NarrativeUnit, rules: CandidateRules) -> bool:
     if (not _physical_link(left, right, rules) or _FULL_STOP.search(left.raw_text)
-        or right.raw_text.startswith(("•", "▪"))
-        or len(left.raw_text)>BUSINESS_CHARACTER_WINDOW
-        or len(right.raw_text)>BUSINESS_CHARACTER_WINDOW):
+        or right.raw_text.startswith(("•", "▪"))):
         return False
+    for paragraph, other in ((left, right), (right, left)):
+        if (len(paragraph.raw_text)>BUSINESS_CHARACTER_WINDOW
+            and paragraph.metadata.get("block_char_start")==0
+            and paragraph.metadata.get("block_char_end")==len(paragraph.raw_text)
+            and paragraph.metadata.get("pdf_block") != other.metadata.get("pdf_block")):
+            return False  # Whole native paragraph is not a clipped line fragment.
     if left.raw_text.rstrip().endswith((";", "；")):
         # A semicolon is not a terminal when the same original English block
         # continues a lower-case dependent clause. It remains a clause boundary
@@ -439,7 +445,8 @@ def _visual_title(body: NarrativeUnit, units: Sequence[NarrativeUnit], rules: Ca
 
 def _enrich_operating_context(units: Sequence[NarrativeUnit], *,
     initial_candidates: Sequence[EvidenceCandidate], initial_group_ids: Mapping[str, str],
-    rules: CandidateRules, respect_native_structure: bool) -> BusinessEnrichmentResult:
+    rules: CandidateRules, respect_native_structure: bool,
+    atomic_owners: Sequence[AtomicSentenceOwner]) -> BusinessEnrichmentResult:
     """0.8 native business recall; explicit old policies never enter this path."""
     legacy = enrich_business_groups(units, initial_candidates=initial_candidates,
         initial_group_ids=initial_group_ids, rules=rules,
@@ -452,6 +459,10 @@ def _enrich_operating_context(units: Sequence[NarrativeUnit], *,
     positions = {u.unit_id: i for i, u in enumerate(units)}
     ordered = tuple(sorted(units, key=lambda u: (u.source_id, positions[u.unit_id])
         if u.parser_name == "cwp_document_normalization" else _order(u)))
+    owners_by_unit: dict[str, list[int]] = {}
+    for index, owner in enumerate(atomic_owners):
+        for unit_id in owner.unit_ids:
+            owners_by_unit.setdefault(unit_id, []).append(index)
     visual_pages: dict[tuple, list[NarrativeUnit]] = {}
     for unit in ordered:
         if unit.unit_kind == "pdf_text_block":
@@ -459,8 +470,7 @@ def _enrich_operating_context(units: Sequence[NarrativeUnit], *,
             visual_pages.setdefault(key, []).append(unit)
     runs: list[list[NarrativeUnit]] = []
     for unit in ordered:
-        if (runs and len(runs[-1][0].raw_text) <= BUSINESS_CHARACTER_WINDOW
-            and _sentence_continues(runs[-1][-1], unit, rules)):
+        if runs and _sentence_continues(runs[-1][-1], unit, rules):
             runs[-1].append(unit)
         else:
             runs.append([unit])
@@ -474,7 +484,6 @@ def _enrich_operating_context(units: Sequence[NarrativeUnit], *,
             and _physical_link(sentences[-1][-1], members[0], rules)
             and business_objects(_classification_text(sentences[-1])).intersection(
                 business_objects(_classification_text(members)))
-            and len(sentences[-1]) + len(members) <= MAX_COMPLETION_UNITS
             and _text_size((*sentences[-1], *members)) <= BUSINESS_CHARACTER_WINDOW):
             sentences[-1].extend(members)
         else:
@@ -492,12 +501,22 @@ def _enrich_operating_context(units: Sequence[NarrativeUnit], *,
             continue  # Native project introduction + table is a separate atomic owner.
         if any(_structural_barrier(u, rules) for u in members):
             continue
+        ids = {u.unit_id for u in members}
+        owner_indices = {index for uid in ids for index in owners_by_unit.get(uid, ())}
+        owners = [atomic_owners[index] for index in sorted(owner_indices)]
+        if any(not set(owner.unit_ids) <= ids for owner in owners):
+            # A coarse layout split may not rewrite only part of a proved owner.
+            # Existing candidate/group membership stays intact.
+            continue
+        whole = len(members)==1 and not is_ocr_unit(members[0])
+        cap = _NATIVE_PARAGRAPH_LIMIT if whole else BUSINESS_CHARACTER_WINDOW
+        if (_text_size(members)>cap or any(owner.exclusion_reason for owner in owners)):
+            omit("business_group_character_limit", members)
+            continue  # Do not assemble/classify an unbounded original sentence.
         text = _classification_text(members)
         fact = _operating_fact(text, rules)
         if not fact.eligible:
             continue
-        whole = len(members)==1 and not is_ocr_unit(members[0])
-        cap = _NATIVE_PARAGRAPH_LIMIT if whole else BUSINESS_CHARACTER_WINDOW
         assessment = assess_unit(replace(members[0], raw_text=text), replace(rules,
             operating_facts=lambda _text: fact, reject_text=lambda _text: False))
         assessed = assessment.candidate
@@ -510,10 +529,6 @@ def _enrich_operating_context(units: Sequence[NarrativeUnit], *,
             by_id[unit.unit_id] = EvidenceCandidate(unit, topics,
                 tuple(dict.fromkeys((*old.reasons, *reasons))) if old else reasons,
                 max(old.score if old else 0, assessed.score if assessed is not None else fact.score + len(topics)))
-        if len(members)>MAX_COMPLETION_UNITS or _text_size(members)>cap:
-            omit("business_group_unit_limit" if len(members)>MAX_COMPLETION_UNITS
-                else "business_group_character_limit",members)
-            continue
         title = _visual_title(members[0], visual_pages.get((members[0].source_id,
             members[0].coordinates.page_number, members[0].source_role, members[0].language), ()),
             rules) if len(members)==1 else None

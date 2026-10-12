@@ -1700,7 +1700,7 @@ def select_narrative_evidence(
             group_options["preserve_operating_context"] = True
         business = enrich_business_groups(parsed.units, initial_candidates=final_candidates,
             initial_group_ids=final_group_ids, rules=_candidate_rules(selector_version=effective_version),
-            **group_options)
+            atomic_owners=enriched.atomic_owners if effective_version=="0.8.0" else (), **group_options)
         final_candidates = business.candidates
         final_group_ids = business.group_ids
         if effective_version == "0.8.0":

@@ -81,10 +81,19 @@ class GroupCandidateRules:
 
 
 @dataclass(frozen=True)
+class AtomicSentenceOwner:
+    """Complete physically validated statement, not a coarse page cluster."""
+    unit_ids: tuple[str, ...]
+    character_limit: int
+    exclusion_reason: str | None = None
+
+
+@dataclass(frozen=True)
 class GroupEnrichmentResult:
     candidates: tuple[EvidenceCandidate, ...]
     group_ids: Mapping[str, str]
     excluded_context_unit_ids: frozenset[str] = frozenset()
+    atomic_owners: tuple[AtomicSentenceOwner, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -110,6 +119,7 @@ class _CandidateStore:
     candidates: list[EvidenceCandidate]
     group_ids: dict[str, str]
     excluded_context_unit_ids: set[str] = field(default_factory=set)
+    atomic_owners: list[AtomicSentenceOwner] = field(default_factory=list)
 
     def index(self, unit_id: str) -> int | None:
         return next(
@@ -926,7 +936,18 @@ def _coalesce_sentences(
         seeds = [candidate for candidate in store.candidates if candidate.unit.unit_id in ids]
         if not seeds:
             continue
+        # Physical clustering alone does not prove a semantic sentence. Bullets
+        # and an indivisible full source paragraph retain their own owners.
+        if any(re.match(r"^\s*[•▪]", u.raw_text) for u in sentence_members[1:]):
+            continue
+        if any(len(u.raw_text)>BUSINESS_CHARACTER_WINDOW
+               and u.metadata.get("block_char_start")==0
+               and u.metadata.get("block_char_end")==len(u.raw_text)
+               for u in sentence_members):
+            continue
         if sum(len(u.raw_text) for u in sentence_members) > character_budget:
+            store.atomic_owners.append(AtomicSentenceOwner(tuple(u.unit_id for u in sentence_members),
+                                                          character_budget, "character_limit"))
             store.excluded_context_unit_ids.update(ids)
             continue
         old_groups = {store.group_ids[uid] for uid in ids if uid in store.group_ids}
@@ -936,6 +957,8 @@ def _coalesce_sentences(
         protected = {protected_groups[uid] for uid in ids if uid in protected_groups}
         if len(protected) > 1:
             continue
+        store.atomic_owners.append(AtomicSentenceOwner(tuple(u.unit_id for u in sentence_members),
+                                                      character_budget))
         anchor = (next(iter(protected)) if protected else next(iter(old_groups))
                   if len(old_groups) == 1 else f"{group_id}:sentence:{start}:{end}")
         topics = tuple(dict.fromkeys(topic for candidate in seeds for topic in candidate.topics))
@@ -1030,6 +1053,7 @@ def enrich_context_groups(
         candidates=tuple(store.candidates),
         group_ids=MappingProxyType(store.group_ids),
         excluded_context_unit_ids=frozenset(store.excluded_context_unit_ids),
+        atomic_owners=tuple(store.atomic_owners),
     )
 
 

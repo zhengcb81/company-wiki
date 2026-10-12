@@ -776,7 +776,23 @@ def test_pdf_candidate_budget_reserves_first_pass_coverage_across_pages() -> Non
     )
 
     assert package.candidate_count > 2
-    assert {span.coordinates.page_number for span in package.evidence_spans} == {1, 2}
+    # Default0.8 quality precedes page rotation: a weaker page cannot displace
+    # a realized stage/constraint. Comparable-quality page rotation remains.
+    assert {span.coordinates.page_number for span in package.evidence_spans} == {1}
+    assert lower_priority_other_page.raw_text not in {s.raw_text for s in package.evidence_spans}
+    legacy = select_narrative_evidence(parsed, title="首次公开发行招股说明书.pdf",
+                                      max_selected=2, selector_version="0.7.1")
+    assert {span.coordinates.page_number for span in legacy.evidence_spans} == {1, 2}
+    comparable = tuple(_unit(
+        f"公司已推出第{i}批产品并完成海外客户验证，形成订单交付进展。",
+        source_id=source_id, coords=EvidenceCoordinates(page_number=page, paragraph_index=i))
+        for page, i in ((1, 1), (1, 2), (2, 3)))
+    peers = select_narrative_evidence(NarrativeParseResult(source_id=source_id,
+        source_sha256=source_sha, language="zh", units=comparable, page_count=2, pages_read=2),
+        title="首次公开发行招股说明书.pdf", max_selected=2)
+    assert len(peers.evidence_spans)==2
+    assert {span.coordinates.page_number for span in peers.evidence_spans} == {1, 2}
+    assert peers.omitted_candidate_count == peers.candidate_count - 2
     assert package.omitted_candidate_count == package.candidate_count - 2
     assert any("产能已趋饱和" in (span.raw_text or "") for span in package.evidence_spans)
     assert package.status == "partial"
@@ -847,13 +863,18 @@ def test_visual_context_groups_are_atomic_and_never_exceed_the_span_budget(
     )
 
     assert len(package.evidence_spans) <= 2
-    selected_group_ids = {
-        span.structured_value.get("selection_group_id")
-        for span in package.evidence_spans
-        if span.structured_value.get("selection_group_id") is not None
-    }
-    assert body_group not in selected_group_ids
-    assert all(span.coordinates.page_number == 2 for span in package.evidence_spans)
+    body_ids = {group_first.unit_id, group_second.unit_id}
+    body_selected = {s.coordinates.paragraph_index for s in package.evidence_spans
+                     if s.structured_value.get("selection_group_id")==body_group}
+    assert body_selected in (set(), {1, 2})
+    # The original budget2 body is observed whole. A cap1 cannot publish a half.
+    tiny = select_narrative_evidence(parsed, title="向特定对象发行股票募集说明书.pdf", max_selected=1)
+    assert len(tiny.evidence_spans)<=1
+    assert not body_ids.intersection({s.structured_value.get("unit_id") for s in tiny.evidence_spans})
+    assert not any(s.structured_value.get("selection_group_id")==body_group for s in tiny.evidence_spans)
+    legacy = select_narrative_evidence(parsed, title="向特定对象发行股票募集说明书.pdf",
+                                      max_selected=2, selector_version="0.7.1")
+    assert all(s.coordinates.page_number==2 for s in legacy.evidence_spans)
 
     package_with_room = select_narrative_evidence(
         parsed,
@@ -900,10 +921,16 @@ def test_numbered_project_rationale_heading_survives_a_tight_budget() -> None:
     )
 
     assert len(package.evidence_spans) == 1
-    assert "航空产业形成" in (package.evidence_spans[0].raw_text or "")
-    assert "specific_project_rationale" in package.evidence_spans[0].structured_value[
-        "selection_reasons"
-    ]
+    assert package.evidence_spans[0].raw_text in {u.raw_text for u in generic_events}
+    assert "new_product_commercialization_milestone" in package.evidence_spans[0].structured_value["selection_reasons"]
+    room = select_narrative_evidence(parsed, title="向特定对象发行股票募集说明书.pdf", max_selected=4)
+    retained = next(s for s in room.evidence_spans if s.raw_text==rationale.raw_text)
+    assert "specific_project_rationale" in retained.structured_value["selection_reasons"]
+    assert retained.coordinates==rationale.coordinates
+    legacy = select_narrative_evidence(parsed, title="向特定对象发行股票募集说明书.pdf",
+                                      max_selected=1, selector_version="0.7.1")
+    assert "航空产业形成" in legacy.evidence_spans[0].raw_text
+    assert "specific_project_rationale" in legacy.evidence_spans[0].structured_value["selection_reasons"]
 
 
 def test_split_project_rationale_heading_keeps_its_short_continuation() -> None:
@@ -944,11 +971,22 @@ def test_split_project_rationale_heading_keeps_its_short_continuation() -> None:
     selected = [
         span for span in package.evidence_spans if span.coordinates.page_number == 101
     ]
-    assert [span.coordinates.paragraph_index for span in selected] == [3, 4]
-    assert "需求旺盛" in "".join(span.raw_text or "" for span in selected)
-    assert len(
-        {span.structured_value.get("selection_group_id") for span in selected[:3]}
-    ) == 1
+    assert selected == []  # Both realized facts precede the complete rationale.
+    # Both source locations repeat exactly the same disclosed fact.
+    assert len({u.raw_text for u in generic_events})==1
+    assert len(package.evidence_spans)==1
+    assert all("new_product_commercialization_milestone" in s.structured_value["selection_reasons"]
+               for s in package.evidence_spans)
+    room = select_narrative_evidence(parsed, title="向特定对象发行股票募集说明书.pdf", max_selected=4)
+    full = [s for s in room.evidence_spans if s.coordinates.page_number==101]
+    assert [s.coordinates.paragraph_index for s in full]==[3,4]
+    assert "需求旺盛" in "".join(s.raw_text or "" for s in full)
+    assert len({s.structured_value.get("selection_group_id") for s in full})==1
+    assert [s.raw_text for s in full]==[heading.raw_text,continuation.raw_text]
+    legacy = select_narrative_evidence(parsed, title="向特定对象发行股票募集说明书.pdf",
+                                      max_selected=2, selector_version="0.7.1")
+    assert [s.coordinates.paragraph_index for s in legacy.evidence_spans
+            if s.coordinates.page_number==101]==[3,4]
 
 
 def test_project_certification_timeline_is_selected_as_a_narrow_fragment_group() -> None:
