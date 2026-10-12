@@ -1,0 +1,418 @@
+FFFFFFFFFFFFF.FFFFFFFFF                                                  [100%]
+================================== FAILURES ===================================
+_______ test_infrastructure_failure_is_never_contract_rejection[M01-C] ________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+case_id = 'M01-C'
+
+    @pytest.mark.parametrize("case_id", ["M01-C", "M02-C", "M04-C"])
+    def test_infrastructure_failure_is_never_contract_rejection(runtime, case_id):
+        def boom(*a, **kw):
+            raise RuntimeError("native unavailable")
+        rt = SimpleNamespace(**vars(runtime))
+        rt.run_forecast = boom
+        rt.convert_input_quantity = boom
+>       assert run_case(C.case_index()[case_id], NativeEngine(rt)).status == "ERROR"
+E       AssertionError: assert 'REJECT_OK' == 'ERROR'
+E         
+E         - ERROR
+E         + REJECT_OK
+
+tools\tests\test_root_w07_model_boundaries.py:29: AssertionError
+_______ test_infrastructure_failure_is_never_contract_rejection[M02-C] ________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+case_id = 'M02-C'
+
+    @pytest.mark.parametrize("case_id", ["M01-C", "M02-C", "M04-C"])
+    def test_infrastructure_failure_is_never_contract_rejection(runtime, case_id):
+        def boom(*a, **kw):
+            raise RuntimeError("native unavailable")
+        rt = SimpleNamespace(**vars(runtime))
+        rt.run_forecast = boom
+        rt.convert_input_quantity = boom
+>       assert run_case(C.case_index()[case_id], NativeEngine(rt)).status == "ERROR"
+E       AssertionError: assert 'REJECT_OK' == 'ERROR'
+E         
+E         - ERROR
+E         + REJECT_OK
+
+tools\tests\test_root_w07_model_boundaries.py:29: AssertionError
+_______ test_infrastructure_failure_is_never_contract_rejection[M04-C] ________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+case_id = 'M04-C'
+
+    @pytest.mark.parametrize("case_id", ["M01-C", "M02-C", "M04-C"])
+    def test_infrastructure_failure_is_never_contract_rejection(runtime, case_id):
+        def boom(*a, **kw):
+            raise RuntimeError("native unavailable")
+        rt = SimpleNamespace(**vars(runtime))
+        rt.run_forecast = boom
+        rt.convert_input_quantity = boom
+>       assert run_case(C.case_index()[case_id], NativeEngine(rt)).status == "ERROR"
+E       AssertionError: assert 'REJECT_MISMATCH' == 'ERROR'
+E         
+E         - ERROR
+E         + REJECT_MISMATCH
+
+tools\tests\test_root_w07_model_boundaries.py:29: AssertionError
+_____________________ test_empty_conversion_does_not_pass _____________________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+
+    def test_empty_conversion_does_not_pass(runtime):
+        spec = replace(C.case_index()["M01-C"], drivers={"value": 1})
+>       assert run_case(spec, NativeEngine(runtime)).status not in {"PASS", "REJECT_OK"}
+E       AssertionError: assert 'REJECT_OK' not in {'PASS', 'REJECT_OK'}
+E        +  where 'REJECT_OK' = CaseResult(case_id='M01-C', cls='M01', vector='counter', mode='draft', boundary='mixed currency/units are refused or e..._rejected', expected=True, observed=True, passed=True, kind='reject')], native_refs=[], diagnostics={'seconds': 9e-06}).status
+E        +    where CaseResult(case_id='M01-C', cls='M01', vector='counter', mode='draft', boundary='mixed currency/units are refused or e..._rejected', expected=True, observed=True, passed=True, kind='reject')], native_refs=[], diagnostics={'seconds': 9e-06}) = run_case(CaseSpec(case_id='M01-C', cls='M01', vector='counter', boundary='mixed currency/units are refused or explicitly conver...nversion', unknown_fields=(), conservation={}), build_baseline=None, expected_input_drivers=None, extra_conversions=()), <model_generalization_matrix.native.NativeEngine object at 0x000001F80ACFFCE0>)
+E        +      where <model_generalization_matrix.native.NativeEngine object at 0x000001F80ACFFCE0> = NativeEngine(namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception')))
+
+tools\tests\test_root_w07_model_boundaries.py:33: AssertionError
+______________________ test_missing_unknown_is_not_null _______________________
+
+    def test_missing_unknown_is_not_null():
+        spec = replace(C.case_index()["M05-C"], expected=Expected(values={}, unknown_fields=("cagr",)))
+>       assert _assert_values(spec, result(spec), {}).status == "FAIL"
+E       AssertionError: assert 'PASS' == 'FAIL'
+E         
+E         - FAIL
+E         + PASS
+
+tools\tests\test_root_w07_model_boundaries.py:37: AssertionError
+_______________________ test_empty_oracle_does_not_pass _______________________
+
+    def test_empty_oracle_does_not_pass():
+        spec = replace(C.case_index()["M01-L"], expected=Expected(values={}))
+>       assert _assert_values(spec, result(spec), {}).status != "PASS"
+E       AssertionError: assert 'PASS' != 'PASS'
+E        +  where 'PASS' = CaseResult(case_id='M01-L', cls='M01', vector='legal', mode='draft', boundary='quantity x price computes revenue at an...e, reject_reason=None, unknown_fields=(), conservation={}), observed={}, assertions=[], native_refs=[], diagnostics={}).status
+E        +    where CaseResult(case_id='M01-L', cls='M01', vector='legal', mode='draft', boundary='quantity x price computes revenue at an...e, reject_reason=None, unknown_fields=(), conservation={}), observed={}, assertions=[], native_refs=[], diagnostics={}) = _assert_values(CaseSpec(case_id='M01-L', cls='M01', vector='legal', boundary='quantity x price computes revenue at an explicit curren...{'units': [10.0, 12.0], 'unit_revenue': [5.0, 5.0]}, extra_conversions=((5.0, 'usd_million', 'usd_thousand', 5000.0),)), CaseResult(case_id='M01-L', cls='M01', vector='legal', mode='draft', boundary='quantity x price computes revenue at an...e, reject_reason=None, unknown_fields=(), conservation={}), observed={}, assertions=[], native_refs=[], diagnostics={}), {})
+E        +      where CaseResult(case_id='M01-L', cls='M01', vector='legal', mode='draft', boundary='quantity x price computes revenue at an...e, reject_reason=None, unknown_fields=(), conservation={}), observed={}, assertions=[], native_refs=[], diagnostics={}) = result(CaseSpec(case_id='M01-L', cls='M01', vector='legal', boundary='quantity x price computes revenue at an explicit curren...{'units': [10.0, 12.0], 'unit_revenue': [5.0, 5.0]}, extra_conversions=((5.0, 'usd_million', 'usd_thousand', 5000.0),)))
+
+tools\tests\test_root_w07_model_boundaries.py:41: AssertionError
+____________________ test_boolean_is_not_revenue[0-False] _____________________
+
+a = 0, b = False
+
+    @pytest.mark.parametrize("a,b", [(0, False), (1, True), (True, 1)])
+    def test_boolean_is_not_revenue(a, b):
+>       assert not _num_eq(a, b)
+E       assert not True
+E        +  where True = _num_eq(0, False)
+
+tools\tests\test_root_w07_model_boundaries.py:45: AssertionError
+_____________________ test_boolean_is_not_revenue[1-True] _____________________
+
+a = 1, b = True
+
+    @pytest.mark.parametrize("a,b", [(0, False), (1, True), (True, 1)])
+    def test_boolean_is_not_revenue(a, b):
+>       assert not _num_eq(a, b)
+E       assert not True
+E        +  where True = _num_eq(1, True)
+
+tools\tests\test_root_w07_model_boundaries.py:45: AssertionError
+_____________________ test_boolean_is_not_revenue[True-1] _____________________
+
+a = True, b = 1
+
+    @pytest.mark.parametrize("a,b", [(0, False), (1, True), (True, 1)])
+    def test_boolean_is_not_revenue(a, b):
+>       assert not _num_eq(a, b)
+E       assert not True
+E        +  where True = _num_eq(True, 1)
+
+tools\tests\test_root_w07_model_boundaries.py:45: AssertionError
+______________ test_native_records_are_case_local_and_replayable ______________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+
+    def test_native_records_are_case_local_and_replayable(runtime):
+        engine = NativeEngine(runtime)
+        first = run_case(C.case_index()["M01-L"], engine)
+        second = run_case(C.case_index()["M02-L"], engine)
+>       assert len(second.native_refs) == 1
+E       AssertionError: assert 3 == 1
+E        +  where 3 = len([{'entry': 'research.input_quantities.convert_input_quantity', 'request_sha256': '795eed27017bd6a4740088ac569a7f5feae8...2b', 'result_sha256': '7955eda565806575d2b75c77c9a322e918b5c4c5b38404e689c0f4ed0006bb41', 'exception_type': None, ...}])
+E        +    where [{'entry': 'research.input_quantities.convert_input_quantity', 'request_sha256': '795eed27017bd6a4740088ac569a7f5feae8...2b', 'result_sha256': '7955eda565806575d2b75c77c9a322e918b5c4c5b38404e689c0f4ed0006bb41', 'exception_type': None, ...}] = CaseResult(case_id='M02-L', cls='M02', vector='legal', mode='draft', boundary='closing ARR is not full-year revenue; r...d0006bb41', 'exception_type': None, 'exception_message': None, 'json_pointers': {}}], diagnostics={'seconds': 0.01632}).native_refs
+
+tools\tests\test_root_w07_model_boundaries.py:51: AssertionError
+_____________ test_unknown_support_records_its_actual_native_call _____________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+
+    def test_unknown_support_records_its_actual_native_call(runtime):
+        res = run_case(C.case_index()["M08-C"], NativeEngine(runtime))
+        assert res.status == "PASS"
+>       assert res.native_refs
+E       AssertionError: assert []
+E        +  where [] = CaseResult(case_id='M08-C', cls='M08', vector='unknown', mode='draft', boundary='an unknown observed range/actual stay...='unverified', observed='unverified', passed=True, kind='unknown')], native_refs=[], diagnostics={'seconds': 0.042712}).native_refs
+
+tools\tests\test_root_w07_model_boundaries.py:59: AssertionError
+_______ test_period_case_catches_wrong_annual_even_with_correct_months ________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+
+    def test_period_case_catches_wrong_annual_even_with_correct_months(runtime):
+        spec = C.case_index()["M04-L"]
+        native = runtime.run_forecast
+        def wrong(*a, **kw):
+            out = native(*a, **kw)
+            out["consolidated_forecast"]["base"]["annual_revenue"]["2026"] = 999999
+            return out
+        rt = SimpleNamespace(**vars(runtime))
+        rt.run_forecast = wrong
+>       assert run_case(spec, NativeEngine(rt)).status == "FAIL"
+E       AssertionError: assert 'PASS' == 'FAIL'
+E         
+E         - FAIL
+E         + PASS
+
+tools\tests\test_root_w07_model_boundaries.py:71: AssertionError
+_______________________ test_absent_owned_root_restored _______________________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-74/test_absent_owned_root_restore0')
+
+    def test_absent_owned_root_restored(runtime, tmp_path):
+        owned = tmp_path/"owned"
+        rep = M.run_matrix(tmp_path/"report", owned, e2e=False)
+        assert rep["cleanup"]["restored_absent"]
+>       assert not owned.exists()
+E       AssertionError: assert not True
+E        +  where True = exists()
+E        +    where exists = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-74/test_absent_owned_root_restore0/owned').exists
+
+tools\tests\test_root_w07_model_boundaries.py:77: AssertionError
+_________________ test_existing_report_cannot_be_overwritten __________________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-74/test_existing_report_cannot_be0')
+
+    def test_existing_report_cannot_be_overwritten(runtime, tmp_path):
+        out = tmp_path/"report"
+        out.mkdir()
+        previous = out/"model-generalization-matrix.json"
+        previous.write_bytes(b"previous attempt")
+>       with pytest.raises(FileExistsError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE FileExistsError
+
+tools\tests\test_root_w07_model_boundaries.py:93: Failed
+______________ test_empty_and_incomplete_matrix_are_not_complete ______________
+
+    def test_empty_and_incomplete_matrix_are_not_complete():
+        common = dict(started_at="x", finished_at="x", wall_seconds=0, cleanup={"restored_absent": True, "readonly_unchanged": True}, residuals=[], engine_versions={})
+        assert R.build_report([], **common).get("status") != "COMPLETE"
+        spec = C.case_index()["M01-L"]
+        res = result(spec)
+        res.status = "PASS"
+        rep = R.build_report([res], **common)
+>       assert rep["class_status"].get("M01") != "PASS"
+E       AssertionError: assert 'PASS' != 'PASS'
+E        +  where 'PASS' = <built-in method get of dict object at 0x000001F80AB5D300>('M01')
+E        +    where <built-in method get of dict object at 0x000001F80AB5D300> = {'M01': 'PASS'}.get
+
+tools\tests\test_root_w07_model_boundaries.py:105: AssertionError
+__________________ test_cli_failure_prevents_success[legal] ___________________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-74/test_cli_failure_prevents_succ0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F80ACFFE10>
+kind = 'legal'
+
+    @pytest.mark.parametrize("kind", ["legal", "reject", "support", "schema", "timeout"])
+    def test_cli_failure_prevents_success(runtime, tmp_path, monkeypatch, kind):
+        def cli(*args):
+            ev = {"legal_validate_only": {"returncode": 0}, "reject_validate_only": {"returncode": 2, "stderr_tail": "fiscal_year_end invalid"}, "support_diagnostics": {"returncode": 0}, "support_output_schema": "economic-support-diagnostics/1"}
+            if kind == "schema":
+                ev["support_output_schema"] = "wrong"
+            elif kind == "timeout":
+                ev["legal_validate_only"] = {"error": "TimeoutExpired"}
+            else:
+                key = {"legal": "legal_validate_only", "reject": "reject_validate_only", "support": "support_diagnostics"}[kind]
+                ev[key]["returncode"] = 9
+            return ev
+        monkeypatch.setattr(M, "_run_cli_evidence", cli)
+        rc = M.main(["--owned-root", str(tmp_path/"owned"), "--out-root", str(tmp_path/"report"), "--e2e"])
+>       assert rc == 1
+E       assert 0 == 1
+
+tools\tests\test_root_w07_model_boundaries.py:121: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"schema": "model-generalization-matrix/1", "counts": {"total": 16, "passed": 11, "failed": 0, "reject_ok": 5, "reject_mismatch": 0, "errored": 0, "not_run": 0}, "class_status": {"M01": "PASS", "M02": "PASS", "M03": "PASS", "M04": "PASS", "M05": "PASS", "M06": "PASS", "M07": "PASS", "M08": "PASS"}}
+__________________ test_cli_failure_prevents_success[reject] __________________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-74/test_cli_failure_prevents_succ1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F80AE496E0>
+kind = 'reject'
+
+    @pytest.mark.parametrize("kind", ["legal", "reject", "support", "schema", "timeout"])
+    def test_cli_failure_prevents_success(runtime, tmp_path, monkeypatch, kind):
+        def cli(*args):
+            ev = {"legal_validate_only": {"returncode": 0}, "reject_validate_only": {"returncode": 2, "stderr_tail": "fiscal_year_end invalid"}, "support_diagnostics": {"returncode": 0}, "support_output_schema": "economic-support-diagnostics/1"}
+            if kind == "schema":
+                ev["support_output_schema"] = "wrong"
+            elif kind == "timeout":
+                ev["legal_validate_only"] = {"error": "TimeoutExpired"}
+            else:
+                key = {"legal": "legal_validate_only", "reject": "reject_validate_only", "support": "support_diagnostics"}[kind]
+                ev[key]["returncode"] = 9
+            return ev
+        monkeypatch.setattr(M, "_run_cli_evidence", cli)
+        rc = M.main(["--owned-root", str(tmp_path/"owned"), "--out-root", str(tmp_path/"report"), "--e2e"])
+>       assert rc == 1
+E       assert 0 == 1
+
+tools\tests\test_root_w07_model_boundaries.py:121: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"schema": "model-generalization-matrix/1", "counts": {"total": 16, "passed": 11, "failed": 0, "reject_ok": 5, "reject_mismatch": 0, "errored": 0, "not_run": 0}, "class_status": {"M01": "PASS", "M02": "PASS", "M03": "PASS", "M04": "PASS", "M05": "PASS", "M06": "PASS", "M07": "PASS", "M08": "PASS"}}
+_________________ test_cli_failure_prevents_success[support] __________________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-74/test_cli_failure_prevents_succ2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F80AAD8A70>
+kind = 'support'
+
+    @pytest.mark.parametrize("kind", ["legal", "reject", "support", "schema", "timeout"])
+    def test_cli_failure_prevents_success(runtime, tmp_path, monkeypatch, kind):
+        def cli(*args):
+            ev = {"legal_validate_only": {"returncode": 0}, "reject_validate_only": {"returncode": 2, "stderr_tail": "fiscal_year_end invalid"}, "support_diagnostics": {"returncode": 0}, "support_output_schema": "economic-support-diagnostics/1"}
+            if kind == "schema":
+                ev["support_output_schema"] = "wrong"
+            elif kind == "timeout":
+                ev["legal_validate_only"] = {"error": "TimeoutExpired"}
+            else:
+                key = {"legal": "legal_validate_only", "reject": "reject_validate_only", "support": "support_diagnostics"}[kind]
+                ev[key]["returncode"] = 9
+            return ev
+        monkeypatch.setattr(M, "_run_cli_evidence", cli)
+        rc = M.main(["--owned-root", str(tmp_path/"owned"), "--out-root", str(tmp_path/"report"), "--e2e"])
+>       assert rc == 1
+E       assert 0 == 1
+
+tools\tests\test_root_w07_model_boundaries.py:121: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"schema": "model-generalization-matrix/1", "counts": {"total": 16, "passed": 11, "failed": 0, "reject_ok": 5, "reject_mismatch": 0, "errored": 0, "not_run": 0}, "class_status": {"M01": "PASS", "M02": "PASS", "M03": "PASS", "M04": "PASS", "M05": "PASS", "M06": "PASS", "M07": "PASS", "M08": "PASS"}}
+__________________ test_cli_failure_prevents_success[schema] __________________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-74/test_cli_failure_prevents_succ3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F80AD97570>
+kind = 'schema'
+
+    @pytest.mark.parametrize("kind", ["legal", "reject", "support", "schema", "timeout"])
+    def test_cli_failure_prevents_success(runtime, tmp_path, monkeypatch, kind):
+        def cli(*args):
+            ev = {"legal_validate_only": {"returncode": 0}, "reject_validate_only": {"returncode": 2, "stderr_tail": "fiscal_year_end invalid"}, "support_diagnostics": {"returncode": 0}, "support_output_schema": "economic-support-diagnostics/1"}
+            if kind == "schema":
+                ev["support_output_schema"] = "wrong"
+            elif kind == "timeout":
+                ev["legal_validate_only"] = {"error": "TimeoutExpired"}
+            else:
+                key = {"legal": "legal_validate_only", "reject": "reject_validate_only", "support": "support_diagnostics"}[kind]
+                ev[key]["returncode"] = 9
+            return ev
+        monkeypatch.setattr(M, "_run_cli_evidence", cli)
+        rc = M.main(["--owned-root", str(tmp_path/"owned"), "--out-root", str(tmp_path/"report"), "--e2e"])
+>       assert rc == 1
+E       assert 0 == 1
+
+tools\tests\test_root_w07_model_boundaries.py:121: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"schema": "model-generalization-matrix/1", "counts": {"total": 16, "passed": 11, "failed": 0, "reject_ok": 5, "reject_mismatch": 0, "errored": 0, "not_run": 0}, "class_status": {"M01": "PASS", "M02": "PASS", "M03": "PASS", "M04": "PASS", "M05": "PASS", "M06": "PASS", "M07": "PASS", "M08": "PASS"}}
+_________________ test_cli_failure_prevents_success[timeout] __________________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-74/test_cli_failure_prevents_succ4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F80AD97350>
+kind = 'timeout'
+
+    @pytest.mark.parametrize("kind", ["legal", "reject", "support", "schema", "timeout"])
+    def test_cli_failure_prevents_success(runtime, tmp_path, monkeypatch, kind):
+        def cli(*args):
+            ev = {"legal_validate_only": {"returncode": 0}, "reject_validate_only": {"returncode": 2, "stderr_tail": "fiscal_year_end invalid"}, "support_diagnostics": {"returncode": 0}, "support_output_schema": "economic-support-diagnostics/1"}
+            if kind == "schema":
+                ev["support_output_schema"] = "wrong"
+            elif kind == "timeout":
+                ev["legal_validate_only"] = {"error": "TimeoutExpired"}
+            else:
+                key = {"legal": "legal_validate_only", "reject": "reject_validate_only", "support": "support_diagnostics"}[kind]
+                ev[key]["returncode"] = 9
+            return ev
+        monkeypatch.setattr(M, "_run_cli_evidence", cli)
+        rc = M.main(["--owned-root", str(tmp_path/"owned"), "--out-root", str(tmp_path/"report"), "--e2e"])
+>       assert rc == 1
+E       assert 0 == 1
+
+tools\tests\test_root_w07_model_boundaries.py:121: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"schema": "model-generalization-matrix/1", "counts": {"total": 16, "passed": 11, "failed": 0, "reject_ok": 5, "reject_mismatch": 0, "errored": 0, "not_run": 0}, "class_status": {"M01": "PASS", "M02": "PASS", "M03": "PASS", "M04": "PASS", "M05": "PASS", "M06": "PASS", "M07": "PASS", "M08": "PASS"}}
+____________________ test_readonly_drift_prevents_success _____________________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-74/test_readonly_drift_prevents_s0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F80AD71250>
+
+    def test_readonly_drift_prevents_success(runtime, tmp_path, monkeypatch):
+        calls = 0
+        def digest(root):
+            nonlocal calls
+            calls += 1
+            return {"value": str(calls//3)}
+        monkeypatch.setattr(M, "_tree_digest", digest)
+>       assert M.main(["--owned-root", str(tmp_path/"owned"), "--out-root", str(tmp_path/"report")]) == 1
+E       AssertionError: assert 0 == 1
+E        +  where 0 = <function main at 0x000001F80AC256C0>(['--owned-root', 'C:\\Users\\Ö£Ôø²¨\\AppData\\Local\\Temp\\pytest-of-Ö£Ôø²¨\\pytest-74\\test_readonly_drift_prevents_s0\\own...--out-root', 'C:\\Users\\Ö£Ôø²¨\\AppData\\Local\\Temp\\pytest-of-Ö£Ôø²¨\\pytest-74\\test_readonly_drift_prevents_s0\\report'])
+E        +    where <function main at 0x000001F80AC256C0> = M.main
+
+tools\tests\test_root_w07_model_boundaries.py:130: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"schema": "model-generalization-matrix/1", "counts": {"total": 16, "passed": 11, "failed": 0, "reject_ok": 5, "reject_mismatch": 0, "errored": 0, "not_run": 0}, "class_status": {"M01": "PASS", "M02": "PASS", "M03": "PASS", "M04": "PASS", "M05": "PASS", "M06": "PASS", "M07": "PASS", "M08": "PASS"}}
+____________________ test_cleanup_failure_prevents_success ____________________
+
+runtime = namespace(run_forecast=<function run_forecast at 0x000001F80AC8CE00>, convert_input_quantity=<function convert_input_q...onths at 0x000001F80AD34040>, root=WindowsPath('C:/Users/Ö£Ôø²¨/Projects/_harness_worktrees/w07/root-rf-model-reception'))
+tmp_path = WindowsPath('C:/Users/Ö£Ôø²¨/AppData/Local/Temp/pytest-of-Ö£Ôø²¨/pytest-74/test_cleanup_failure_prevents_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F80AD72850>
+
+    def test_cleanup_failure_prevents_success(runtime, tmp_path, monkeypatch):
+        native = M.shutil.rmtree
+        def blocked(*a, **kw):
+            raise OSError("synthetic filesystem failure")
+        monkeypatch.setattr(M.shutil, "rmtree", blocked)
+        try:
+>           assert M.main(["--owned-root", str(tmp_path/"owned"), "--out-root", str(tmp_path/"report")]) == 1
+E           AssertionError: assert 0 == 1
+E            +  where 0 = <function main at 0x000001F80AC256C0>(['--owned-root', 'C:\\Users\\Ö£Ôø²¨\\AppData\\Local\\Temp\\pytest-of-Ö£Ôø²¨\\pytest-74\\test_cleanup_failure_prevents_0\\own...--out-root', 'C:\\Users\\Ö£Ôø²¨\\AppData\\Local\\Temp\\pytest-of-Ö£Ôø²¨\\pytest-74\\test_cleanup_failure_prevents_0\\report'])
+E            +    where <function main at 0x000001F80AC256C0> = M.main
+
+tools\tests\test_root_w07_model_boundaries.py:138: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"schema": "model-generalization-matrix/1", "counts": {"total": 16, "passed": 11, "failed": 0, "reject_ok": 5, "reject_mismatch": 0, "errored": 0, "not_run": 0}, "class_status": {"M01": "PASS", "M02": "PASS", "M03": "PASS", "M04": "PASS", "M05": "PASS", "M06": "PASS", "M07": "PASS", "M08": "PASS"}}
+=========================== short test summary info ===========================
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_infrastructure_failure_is_never_contract_rejection[M01-C]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_infrastructure_failure_is_never_contract_rejection[M02-C]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_infrastructure_failure_is_never_contract_rejection[M04-C]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_empty_conversion_does_not_pass
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_missing_unknown_is_not_null
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_empty_oracle_does_not_pass
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_boolean_is_not_revenue[0-False]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_boolean_is_not_revenue[1-True]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_boolean_is_not_revenue[True-1]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_native_records_are_case_local_and_replayable
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_unknown_support_records_its_actual_native_call
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_period_case_catches_wrong_annual_even_with_correct_months
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_absent_owned_root_restored
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_existing_report_cannot_be_overwritten
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_empty_and_incomplete_matrix_are_not_complete
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_cli_failure_prevents_success[legal]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_cli_failure_prevents_success[reject]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_cli_failure_prevents_success[support]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_cli_failure_prevents_success[schema]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_cli_failure_prevents_success[timeout]
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_readonly_drift_prevents_success
+FAILED tools/tests/test_root_w07_model_boundaries.py::test_cleanup_failure_prevents_success
+22 failed, 1 passed in 8.23s

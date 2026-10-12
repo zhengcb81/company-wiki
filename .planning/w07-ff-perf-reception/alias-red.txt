@@ -1,0 +1,16 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_________ test_independent_catalog_alias_counts_are_not_byte_identity _________
+
+    def test_independent_catalog_alias_counts_are_not_byte_identity():
+        target={"proofs":{},"catalog_snapshot":[]}
+        for group, aliases in [("g1",1),("g2",2)]:
+            proof={"verified":True,"content_sha256":"a","byte_size":3,"source_versions":1,"physical_originals":1,"original_locations":aliases}
+            cli_main._merge_source_proofs(target,{"proofs":{"doc":proof},"catalog_snapshot":[]},group)
+>       assert target["proofs"]["doc"]["verified"] is True
+E       assert False is True
+
+..\_harness_worktrees\w07\root-ff-perf-reception\tests\test_root_w07_matrix_boundaries.py:109: AssertionError
+=========================== short test summary info ===========================
+FAILED ..\_harness_worktrees\w07\root-ff-perf-reception\tests\test_root_w07_matrix_boundaries.py::test_independent_catalog_alias_counts_are_not_byte_identity
+1 failed, 11 deselected in 0.39s

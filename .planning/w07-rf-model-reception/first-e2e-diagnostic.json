@@ -1,0 +1,96 @@
+{
+  "status": "FAILED",
+  "counts": {
+    "total": 16,
+    "passed": 10,
+    "failed": 1,
+    "reject_ok": 5,
+    "reject_mismatch": 0,
+    "errored": 0,
+    "not_run": 0
+  },
+  "cleanup": {
+    "scratch_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\root-w07-rf-model-e2e-owned\\w07-69172953320c4425aed3462db98a914c",
+    "baseline": {
+      "existed": false,
+      "sentinel": null
+    },
+    "restored_absent": true,
+    "owned_root_baseline": {
+      "existed": false,
+      "sentinel": null
+    },
+    "owned_root_restored": true,
+    "readonly_unchanged": true
+  },
+  "cli_evidence": {
+    "legal_validate_only": {
+      "command": "C:\\Miniconda\\python.exe -B C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\root-rf-model-reception\\scripts\\revenue_forecast.py C:\\Users\\郑曾波\\AppData\\Local\\Temp\\root-w07-rf-model-e2e-owned\\w07-69172953320c4425aed3462db98a914c\\cli_legal_input.json --validate-only",
+      "returncode": 0,
+      "stdout_tail": "valid\n",
+      "stderr_tail": ""
+    },
+    "reject_validate_only": {
+      "command": "C:\\Miniconda\\python.exe -B C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\root-rf-model-reception\\scripts\\revenue_forecast.py C:\\Users\\郑曾波\\AppData\\Local\\Temp\\root-w07-rf-model-e2e-owned\\w07-69172953320c4425aed3462db98a914c\\cli_reject_input.json --validate-only",
+      "returncode": 2,
+      "stdout_tail": "",
+      "stderr_tail": "error: fiscal_year_end is not a valid month-day\n"
+    },
+    "support_diagnostics": {
+      "command": "C:\\Miniconda\\python.exe -B C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w07\\root-rf-model-reception\\scripts\\research_support_diagnostics.py --input C:\\Users\\郑曾波\\AppData\\Local\\Temp\\root-w07-rf-model-e2e-owned\\w07-69172953320c4425aed3462db98a914c\\cli_support_input.json --output C:\\Users\\郑曾波\\AppData\\Local\\Temp\\root-w07-rf-model-e2e-owned\\w07-69172953320c4425aed3462db98a914c\\cli_support_output.json",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "support_output_schema": "economic-support-diagnostics/1"
+  },
+  "residuals": [],
+  "failed_cases": [
+    {
+      "case_id": "M04-L",
+      "expected": {
+        "values": {
+          "months": 6.0,
+          "annual": {
+            "2026": 144.0,
+            "2027": 172.8
+          }
+        },
+        "reject": false,
+        "reject_reason": null,
+        "unknown_fields": []
+      },
+      "observed": {
+        "months": 6.0,
+        "annual": {
+          "2026": 165.00000000000003,
+          "2027": 181.50000000000003
+        }
+      },
+      "assertions": [
+        {
+          "name": "months",
+          "kind": "value",
+          "expected": 6.0,
+          "observed": 6.0,
+          "passed": true
+        },
+        {
+          "name": "annual.2026",
+          "kind": "value",
+          "expected": 144.0,
+          "observed": 165.00000000000003,
+          "passed": false
+        },
+        {
+          "name": "annual.2027",
+          "kind": "value",
+          "expected": 172.8,
+          "observed": 181.50000000000003,
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "cause": "ROOT initially used wrong fixture constants (144/172.8). Native fixture is (100+50)*1.1^n. Corrected from fixture input arithmetic, not observed output. Full-matrix regression added."
+}

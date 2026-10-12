@@ -1,0 +1,450 @@
+{
+  "schema": "w08-lane-handoff/1",
+  "lane_id": "W08-CWP-G2-REPLAY",
+  "plan_id": "w08-cwp-g2-replay",
+  "repo": "company-wiki",
+  "workdir": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay",
+  "base_head": "122bbe3ba142979a2e478f886eb25de76edf2e00",
+  "branch": "codex/w08-cwp-g2-replay",
+  "implementation_commits": [],
+  "handoff_commit": "SEE_FINAL_MESSAGE",
+  "scope_status": "COMPLETE",
+  "changed_files": [
+    {
+      "path": "tools/narrative_g2_replay/__init__.py",
+      "sha256": "856075c88d331d5da059a8e49a42e5321eec56176149cc44f4d98dbfdbe64c48",
+      "byte_size": 229
+    },
+    {
+      "path": "tools/narrative_g2_replay/specs.py",
+      "sha256": "d9c2df66e9f6ba62ccb10f7b66857ecfc0b03c5a36fce7432eb5f0afa2eed5e1",
+      "byte_size": 12234
+    },
+    {
+      "path": "tools/narrative_g2_replay/fixtures.py",
+      "sha256": "eb4453be6810b9431aef58589f9eeb7c0c2e1c77cce3ac20bed2bf54dab4e192",
+      "byte_size": 12273
+    },
+    {
+      "path": "tools/narrative_g2_replay/oracle.py",
+      "sha256": "0518cc09e8baac7f1d1033dbd6c7a6f20bf22ff0ca4c4785c676e86c02db04dc",
+      "byte_size": 28749
+    },
+    {
+      "path": "tools/narrative_g2_replay/report.py",
+      "sha256": "76eb37de0f67467158009003bc6bc79561181d113bc14c439fbbe9079aa996fc",
+      "byte_size": 5276
+    },
+    {
+      "path": "tools/narrative_g2_replay/run.py",
+      "sha256": "471cc75fa7ac8844e4ac2a2e46f8acd166c87217154cd1087d6137fe11bd1ef1",
+      "byte_size": 46273
+    },
+    {
+      "path": "tools/narrative_g2_replay/README.md",
+      "sha256": "6c73fee49e8f0587101da0cf981fe54f8bebbe7feec0d2760c3add90a7ef6858",
+      "byte_size": 4898
+    },
+    {
+      "path": "tests/unit/test_w08_narrative_g2_replay.py",
+      "sha256": "ba84675326ffadd2b5987f785025492d862ad1d34be86201a2c6015b290f3544",
+      "byte_size": 16014
+    },
+    {
+      "path": "docs/handoffs/w08-cwp-g2-replay/handoff.md",
+      "sha256": "eb2290a3c827d2d5ea67afc000786005ca2c1994a030876a3f328c3b36f7ed52",
+      "byte_size": 7506
+    },
+    {
+      "path": ".planning/w08-cwp-g2-replay/findings.md",
+      "sha256": "cf9d6381714e20d75646469c55881dcb766f7569fc2e4bdb725ae041e52eb238",
+      "byte_size": 5361
+    },
+    {
+      "path": ".planning/w08-cwp-g2-replay/progress.md",
+      "sha256": "8d50ccaa054ba28c3a2d21bcfc3fb512e94b2a6b26f860efb16d42e1ed81528d",
+      "byte_size": 1527
+    },
+    {
+      "path": ".planning/w08-cwp-g2-replay/evidence/report-attempt-0001.json",
+      "sha256": "3906fb5711c6a10e4b22e9445c6e6fc4a002c64771e1a599f41ea8259cdfa3a0",
+      "byte_size": 49124
+    },
+    {
+      "path": ".planning/w08-cwp-g2-replay/evidence/report-attempt-0002.json",
+      "sha256": "05faedbec92c784ed2976345d3f812d46c9023ba365a087de378d7262ee3891d",
+      "byte_size": 49123
+    },
+    {
+      "path": ".planning/w08-cwp-g2-replay/evidence/report-final-acceptance.json",
+      "sha256": "20819f5c4a58b7053628a806362861bcfb5f8e6ed275dcfb98d5f3bbac8e6b34",
+      "byte_size": 49124
+    }
+  ],
+  "changed_files_all_additive": true,
+  "readonly_input_manifest_sha256": "3200dff537b1b6c439cd7004bd1037546947ddeab8a89713eae3bcbc822e8eab",
+  "readonly_input_file_count": 67,
+  "report_schema": "narrative-g2-replay/1",
+  "entry_command": "python -B tools/narrative_g2_replay/run.py --rf-project ABS_FIXED --owned-root ABS_NEW --out-root ABS_NEW",
+  "nodes": {
+    "A": {
+      "utc": "2026-10-12T19:20:00Z",
+      "commands": [
+        "python -B -m company_wiki.automation.narrative_batch_cli --help",
+        "python -B -m company_wiki.source_catalog.narrative_transport_cli --help",
+        "python -B -m pytest -q tests/unit/test_w08_narrative_g2_replay.py"
+      ],
+      "result": "real CLI help read (no invented flags); behaviour RED confirmed (ImportError oracle) then implemented",
+      "evidence_ref": "tests/unit/test_w08_narrative_g2_replay.py"
+    },
+    "B": {
+      "utc": "2026-10-12T19:30:00Z",
+      "commands": [
+        "python -B -m pytest -q tests/unit/test_w08_narrative_g2_replay.py",
+        "python -B -m pytest -q tests/unit -k narrative"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 141.1,
+      "result": "26 passed; neighbourhood 5 failed / 1097 passed, and those 5 are pre-existing baseline (proven by re-running with the new package moved away: still 5 failed / 60 passed)",
+      "evidence_ref": ".planning/w08-cwp-g2-replay/findings.md"
+    },
+    "C": {
+      "utc": "2026-10-12T19:38:02.338270Z",
+      "commands": [
+        "python -B tools/narrative_g2_replay/run.py --rf-project .planning/w08-cwp-g2-replay/input/runtime/rf --owned-root .tmp-e2e/owned --out-root .tmp-e2e/out"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 55.647,
+      "result": "overall PASS; run1 8 real loopback POSTs, run2 0 new POSTs with identical pins, 9/9 public reads verified, RF consume ok, owned container restored",
+      "evidence_ref": ".planning/w08-cwp-g2-replay/evidence/report-attempt-0001.json"
+    },
+    "C_rerun": {
+      "utc": "2026-10-12T19:39:53.405438Z",
+      "elapsed_seconds": 85.668,
+      "result": "second independent run also PASS; attempt-0001 not overwritten",
+      "evidence_ref": ".planning/w08-cwp-g2-replay/evidence/report-attempt-0002.json"
+    },
+    "C_final_acceptance": {
+      "result": "PASS from a clean tree after the pre-commit hook fixes; started_at/finished_at/elapsed consistent",
+      "elapsed_seconds": 45.965,
+      "evidence_ref": ".planning/w08-cwp-g2-replay/evidence/report-final-acceptance.json"
+    }
+  },
+  "case_coverage": {
+    "expected_ids": [
+      "annual-report",
+      "half-year-report",
+      "quarterly-report",
+      "prospectus",
+      "placement",
+      "convertible-bond",
+      "ir-policy",
+      "call-txt-zh",
+      "call-txt-en"
+    ],
+    "executed_ids": [
+      "annual-report",
+      "half-year-report",
+      "quarterly-report",
+      "prospectus",
+      "placement",
+      "convertible-bond",
+      "ir-policy",
+      "call-txt-zh",
+      "call-txt-en"
+    ],
+    "missing_ids": [],
+    "unknown_ids": [],
+    "group_coverage": {
+      "periodic-filings": {
+        "required": [
+          "annual-report",
+          "half-year-report",
+          "quarterly-report"
+        ],
+        "missing": []
+      },
+      "offering-documents": {
+        "required": [
+          "prospectus",
+          "placement",
+          "convertible-bond"
+        ],
+        "missing": []
+      },
+      "non-narrative": {
+        "required": [
+          "ir-policy"
+        ],
+        "missing": []
+      },
+      "original-language-calls": {
+        "required": [
+          "call-txt-zh",
+          "call-txt-en"
+        ],
+        "missing": []
+      }
+    }
+  },
+  "actual_code_binding": {
+    "base_head": "122bbe3ba142979a2e478f886eb25de76edf2e00",
+    "branch": "codex/w08-cwp-g2-replay",
+    "modules": [
+      {
+        "path": "src/company_wiki/automation/narrative_batch_cli.py",
+        "sha256": "17b7d3c04242340aabb132e8fbd4ce1f51cb5a245c2d84b028a51e72f681d8a2",
+        "byte_size": 5425,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_batch.py",
+        "sha256": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+        "byte_size": 91660,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_batch_request.py",
+        "sha256": "347e0bfc3e329f1e3d4d395863b6d13b03973aaf284c59ce3304089507879f41",
+        "byte_size": 14078,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_select.py",
+        "sha256": "436e2500362d5c9082bdf7748a53519b232b66a44f62bd81abb4353bb9979974",
+        "byte_size": 23546,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_summarize.py",
+        "sha256": "641f8d000f24c9c081be23be7f3e64acd347d2c5fd3934ab7e92554d5a8a0930",
+        "byte_size": 15319,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_verify.py",
+        "sha256": "dae39594f35a5f15c85c2b2398c596bd9b668df9cbc8d76b29fcc695ba579d08",
+        "byte_size": 19311,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_runtime.py",
+        "sha256": "3635775b4933b998a5b79a7047b326869815ff4e187c6af2531a2814acb64d9c",
+        "byte_size": 2806,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_formats.py",
+        "sha256": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+        "byte_size": 1882,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_transport_contracts.py",
+        "sha256": "6fca7f092e3f4441e9a92b2f6ddcefbb08fc0553fd70bf36409ea1b51ae456b5",
+        "byte_size": 15087,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_transport_cli.py",
+        "sha256": "8a2cbc088581496a8b48094cb53767f12b7a58448831f715c9cfb6397d41138e",
+        "byte_size": 8746,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+        "sha256": "5cd7fde85f695198a532e920e30423a7c8a6a35e5f15bd9eef2b9d9c7e587571",
+        "byte_size": 82935,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_normalization.py",
+        "sha256": "b29a4fe2069713800d171c30ecd09d7bcf3a35984ef2f872ed85d8d4986ccbfd",
+        "byte_size": 11492,
+        "source": "worktree"
+      }
+    ],
+    "python_binding": {
+      "company_wiki_file": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/src/company_wiki/__init__.py",
+      "bound_root": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/src"
+    },
+    "rf_snapshot_modules": [
+      {
+        "path": "scripts/company_wiki_narrative_reader.py",
+        "sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+        "byte_size": 3382,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/narrative_source_preparation.py",
+        "sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+        "byte_size": 2400,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_contracts.py",
+        "sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+        "byte_size": 41228,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_process.py",
+        "sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+        "byte_size": 8500,
+        "source": "worktree"
+      }
+    ],
+    "rf_project_ref": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/.planning/w08-cwp-g2-replay/input/runtime/rf"
+  },
+  "rf_snapshot_binding": {
+    "project_ref": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/.planning/w08-cwp-g2-replay/input/runtime/rf",
+    "modules": [
+      {
+        "path": "scripts/company_wiki_narrative_reader.py",
+        "sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+        "byte_size": 3382,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/narrative_source_preparation.py",
+        "sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+        "byte_size": 2400,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_contracts.py",
+        "sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+        "byte_size": 41228,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_process.py",
+        "sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+        "byte_size": 8500,
+        "source": "worktree"
+      }
+    ]
+  },
+  "observations": {
+    "run1_model_posts": 8,
+    "run2_model_posts": 0,
+    "provider_calls": 0,
+    "paid_usd": 0.0,
+    "public_reads_ok": 9,
+    "public_reads_with_evidence": 8,
+    "rf_read_ok": true,
+    "raw_bytes": 13846,
+    "derived_bytes": 753292,
+    "oracle_overall": "PASS",
+    "oracle_findings": 0
+  },
+  "cleanup": {
+    "before": {
+      "exists": true,
+      "sentinels": []
+    },
+    "after": {
+      "exists": true,
+      "sentinels": []
+    },
+    "remaining": [],
+    "restored": true,
+    "deleted_within_owned": true,
+    "scratch_created": [
+      ".tmp-e2e/ (created by this package; absent before this run)"
+    ],
+    "preserved": [
+      ".planning/w08-cwp-g2-replay/evidence/report-attempt-0001.json",
+      ".planning/w08-cwp-g2-replay/evidence/report-attempt-0002.json"
+    ]
+  },
+  "resource_usage": {
+    "peak_rss_bytes": null,
+    "peak_disk_bytes": null,
+    "report_bundle_bytes": 98247,
+    "note": "transient peaks not measured; null rather than guessed"
+  },
+  "provider_calls": 0,
+  "llm_calls": 8,
+  "cost": {
+    "paid_usd": 0.0,
+    "basis": "loopback model fixture only; no provider call, no real key"
+  },
+  "known_baseline_failures": [
+    {
+      "case_id": "w04-baseline-sparse-language",
+      "test_id": "tests/integration/test_narrative_batch_cli_e2e.py::test_cli_infers_sparse_languages_from_verified_pdf_and_transcript_bytes",
+      "status": "FAIL",
+      "root_cause": "real batch CLI exits 2 with status=failed where the test expects completed",
+      "owner": "ROOT",
+      "reproduced_at": "122bbe3ba142979a2e478f886eb25de76edf2e00"
+    },
+    {
+      "case_id": "w04-baseline-read-identity",
+      "test_id": "tests/integration/test_narrative_runtime_e2e.py::test_runtime_e2e_read_identity_fails_automatically_and_transcript_needs_no_receipt",
+      "status": "FAIL",
+      "root_cause": "attempt/job row count assertion 6 != 4",
+      "owner": "ROOT",
+      "reproduced_at": "122bbe3ba142979a2e478f886eb25de76edf2e00"
+    }
+  ],
+  "known_baseline_failures_extended": [
+    {
+      "test_id": "tests/unit/test_narrative_evidence.py::test_product_name_context_and_permit_milestone_survive_prospectus_budget",
+      "status": "FAIL",
+      "owner": "ROOT",
+      "proof": "same failure with tools/narrative_g2_replay moved away; no tracked file modified"
+    },
+    {
+      "test_id": "tests/unit/test_narrative_evidence.py::test_pdf_candidate_budget_reserves_first_pass_coverage_across_pages",
+      "status": "FAIL",
+      "owner": "ROOT"
+    },
+    {
+      "test_id": "tests/unit/test_narrative_evidence.py::test_visual_context_groups_are_atomic_and_never_exceed_the_span_budget",
+      "status": "FAIL",
+      "owner": "ROOT"
+    },
+    {
+      "test_id": "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+      "status": "FAIL",
+      "owner": "ROOT"
+    },
+    {
+      "test_id": "tests/unit/test_narrative_evidence.py::test_split_project_rationale_heading_keeps_its_short_continuation",
+      "status": "FAIL",
+      "owner": "ROOT"
+    }
+  ],
+  "new_defects": [
+    {
+      "id": "F5-ir-policy-skip-needs-full-table-scan",
+      "mechanism": "default parse_pdf leaves deferred_table_pages non-empty, so coverage_complete is False and narrative_finalize._status returns needs_review before reaching the skip branch",
+      "minimal_repro": "select_narrative_evidence(parse_pdf(policy_pdf)) -> needs_review with 0 spans; with full_table_scan=True -> skipped_no_narrative",
+      "owner_layer": "precondition, not a product defect: the real batch path already re-parses with full_table_scan=True when tables were deferred",
+      "suggested_fix": "none required",
+      "test_record": "recorded in .planning/w08-cwp-g2-replay/findings.md (F5)"
+    }
+  ],
+  "card_correction": {
+    "claim": "the card states 18 existing W04 core selector boundary FAILs",
+    "finding": "not reproducible as stated; the 26 failed / 13 errors first observed was a session-sandbox artefact (the worktree sits outside the writable root, so tempfile.mkdtemp failed with PermissionError), not W04 semantics",
+    "actual_baseline": "2 failed, 37 passed, 2 skipped across the narrative integration modules at base 122bbe3b",
+    "evidence_ref": ".planning/w08-cwp-g2-replay/findings.md (F1)"
+  },
+  "remaining": [
+    "no supplier model semantic-quality claim: the loopback stub returns a deterministic original-language draft only",
+    "real configured MiMo/DeepSeek/MiniMax G2 and real-company G4/G5 belong to ROOT",
+    "resource peaks not measured (null)"
+  ],
+  "root_integration_suggestions": [
+    "re-run this same CaseSpec matrix on the repaired W04 and compare known_baseline_failures",
+    "supply --rf-project pointing at the current verified fixed RF snapshot",
+    "keep this as a manual heavy node rather than a per-commit CI gate",
+    "if the real placement / convertible-bond kinds differ, align the scanner and routing vocabulary instead of mapping inside this tool"
+  ],
+  "hook_record": {
+    "ruff": "All checks passed (F401 unused pytest import and unused started_at were real fixes, not bypassed)",
+    "commit": "no --no-verify used"
+  }
+}

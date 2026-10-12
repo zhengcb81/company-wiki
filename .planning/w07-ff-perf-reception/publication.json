@@ -1,0 +1,40 @@
+{
+  "schema": "root-w07-ff-publication/1",
+  "ff_main": "64b4d294a1e61e595e330b4a7d4075c289f9fdc3",
+  "et_main": "d0ac42c60dcca992db78860b8469cfed3dd527e5",
+  "ff_ci": {
+    "id": 38170433893,
+    "head_sha": "64b4d294a1e61e595e330b4a7d4075c289f9fdc3",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/38170433893",
+    "name": "quality"
+  },
+  "et_ci": "no workflow configured in accepted tree",
+  "normal_push": true,
+  "hooks_bypassed": false,
+  "pre_push": {
+    "passed": 708,
+    "skipped": 7,
+    "subtests": 78,
+    "seconds": 78.85,
+    "isolated_default_config_doctor": "no RF sibling; skipped",
+    "actual_canonical_three_repo_config_doctor": "OK: three-repo configs healthy"
+  },
+  "focused_tests": 225,
+  "et_tests": 53,
+  "full_original_matrix": {
+    "PASS": 41,
+    "FAIL": 0,
+    "PARTIAL": 0,
+    "NOT_RUN": 0
+  },
+  "seconds": 99.9624,
+  "installed_physical_copies": 2,
+  "installed_runtime_files_per_copy": 2,
+  "installed_synthetic_checks_per_copy": 5,
+  "canonical_wip_metadata_preserved": true,
+  "cwp_remote_publication": "blocked by existing W04 18 failures; not retried or bypassed",
+  "mother_goal_tool_status": "paused",
+  "paid_calls": 0
+}

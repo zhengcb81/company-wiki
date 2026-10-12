@@ -1,0 +1,101 @@
+{
+  "plan": {
+    "schema_version": "ff-install-plan/1",
+    "scope": [
+      "scripts/et_v2_contract.py",
+      "scripts/transcript_tool_transport.py"
+    ],
+    "source_sha256": {
+      "scripts/et_v2_contract.py": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+      "scripts/transcript_tool_transport.py": "1e974dd54920355d57de21894c046f2fcfec6fc1554a3a8db782f85a9b6fea62"
+    },
+    "targets": [
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "destinations": [
+          "C:\\Users\\郑曾波\\.agents\\skills",
+          "C:\\Users\\郑曾波\\.claude\\skills"
+        ],
+        "needs_update": [
+          "scripts/et_v2_contract.py",
+          "scripts/transcript_tool_transport.py"
+        ],
+        "preserved_config": [],
+        "before_sha256": {
+          "scripts/et_v2_contract.py": "ee5b4e877b55b65b2aa86a3eb1d02a00e631ed79b60db1e4c1f2dbd18cd30def",
+          "scripts/transcript_tool_transport.py": "013c905b88e4d936d9fd0d2f88a67bb8204378a7e091b29f5ccfb58bed30e847"
+        },
+        "errors": []
+      },
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "destinations": [
+          "C:\\Users\\郑曾波\\.codex\\skills"
+        ],
+        "needs_update": [
+          "scripts/et_v2_contract.py",
+          "scripts/transcript_tool_transport.py"
+        ],
+        "preserved_config": [],
+        "before_sha256": {
+          "scripts/et_v2_contract.py": "ee5b4e877b55b65b2aa86a3eb1d02a00e631ed79b60db1e4c1f2dbd18cd30def",
+          "scripts/transcript_tool_transport.py": "013c905b88e4d936d9fd0d2f88a67bb8204378a7e091b29f5ccfb58bed30e847"
+        },
+        "errors": []
+      }
+    ]
+  },
+  "result": {
+    "schema_version": "ff-install-result/1",
+    "status": "completed",
+    "scope": [
+      "scripts/et_v2_contract.py",
+      "scripts/transcript_tool_transport.py"
+    ],
+    "targets": [
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "destinations": [
+          "C:\\Users\\郑曾波\\.agents\\skills",
+          "C:\\Users\\郑曾波\\.claude\\skills"
+        ],
+        "written": [
+          "scripts/et_v2_contract.py",
+          "scripts/transcript_tool_transport.py"
+        ],
+        "not_written": [],
+        "conflicts": [],
+        "preserved_config": [],
+        "errors": []
+      },
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "destinations": [
+          "C:\\Users\\郑曾波\\.codex\\skills"
+        ],
+        "written": [
+          "scripts/et_v2_contract.py",
+          "scripts/transcript_tool_transport.py"
+        ],
+        "not_written": [],
+        "conflicts": [],
+        "preserved_config": [],
+        "errors": []
+      }
+    ]
+  },
+  "checks": [
+    {
+      "physical_install": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "synthetic_checks": 5,
+      "passed": true
+    },
+    {
+      "physical_install": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "synthetic_checks": 5,
+      "passed": true
+    }
+  ],
+  "unselected_metadata_preserved": true,
+  "credential_read": false
+}

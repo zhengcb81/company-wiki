@@ -37,13 +37,21 @@ ROOT新独立工作树 cwp-acquisition-scope-root，从最新master创建；作�
 
 ### C：原矩阵回放与正常发布
 
-- [ ] W06-FF工具通过非作者范围验收后，用原41case/原期望/同180s批次上限对新ROOT代码回放；报告实际模块路径/HEAD/SHA和新attempt。不得覆盖旧19/21/1失败。
-- [ ] primary可用后，确认ET真实supervisor→worker HTTP测试seam→FF→CWP原语言TXT入库→第二次零下载→fresh SourceRef实读。错quarter/symbol、cutoff/unknown publication、坏SHA/MIME、402、费用未知和已调用失败均独立分类。
-- [ ] 一次大节点非作者复核；正常commit/main并线/push、精确SHA远端CI、必要的安装定点同步。不把离线合同绿当真实外网/经济模型认证。
-- [ ] 更新母W06当前状态，关闭本包后返回W04→G2→G4→G5。
+- [x] W06-FF工具通过非作者范围验收后，用原41case/原期望/同180s批次上限对新ROOT代码回放；报告实际模块路径/HEAD/SHA和新attempt。不得覆盖旧19/21/1失败。
+- [x] primary可用后，确认ET真实supervisor→worker HTTP测试seam→FF→CWP原语言TXT入库→第二次零下载→fresh SourceRef实读。错quarter/symbol、cutoff/unknown publication、坏SHA/MIME、402、费用未知和已调用失败均独立分类。
+- [x] 一次大节点非作者复核；正常commit/main并线/push、精确SHA远端CI、必要的安装定点同步。不把离线合同绿当真实外网/经济模型认证。
+- [x] 更新母W06当前状态，关闭本包后返回W04→G2→G4→G5。
 
 ## 恢复与空间
 
 只创建unique自有scratch，基线不存在就恢复不存在，基线已有文件/空目录均保留。最终关闭全部SQLite/子进程并恢复配置、raw及输出目录。原始失败证据用小JSON/日志或压缩bundle保存，禁止完整数据湖副本和备份恢复演练。secret只允许stat，不读/hash/继承；测试环境用合成HOME/TEMP/假凭证，网络拒绝。
 
-Next Step：CWP12来源文件与FF工具已正常并线、推送、精确CI成功；原41历史40/1保留。ET/FF截止日期已TDD修复，非作者39PASS/3FAIL找到坏JSON/非对象stdout与独立stderr usage混绑共因，作者定点修并重新冻结。最新完整41因原180秒批次截止为2PASS/31PARTIAL/8NOT_RUN，fresh downstream证明未执行；具体分类见matrix-deadline-diagnosis.md，不能算产品绿或31个独立故障。先完成用量集中复验，重型测试错开后原期望/原deadline新attempt，再发布ET/FF。W04真实6已PASS待复核并线；G2/G4/G5仍开放。
+Next Step：本包接收/FF及ET并线发布/安装完成；回母W04共因修复→G2→G4→G5。W07-FF-PERF已完成ROOT接收：原41场景全PASS/99.9624s、零oracle findings、26最终原文证明，原30/180秒上限与case/期望不减；225集中绿、ET53绿。FF main/origin/main64b4d29、ET main/origin/main d0ac42c6已正常发布，FF精确CI38170433893状态成功；ET没有配置workflow。两运行文件×两物理FF技能副本同步、各5实际安装后边界绿；三仓配置体检绿，非选文件元数据和原WIP保持。Audit已接收安装；RF工具已发布8dc26710/精确CI成功，整卡仍缺五组组合覆盖。W04已本地并线7a0b702a但正常push18FAIL，远端仍5c07f47c；ROOT后续W04共因→G2→G4→G5。目标工具当前paused，本次仅完成用户授权的接收，0付费调用。
+
+## 2026-10-11 W07-FF-PERF ROOT 最终接收
+
+W07-FF-PERF已完成ROOT接收：原41场景全PASS/99.9624s、零oracle findings、26最终原文证明，原30/180秒上限与case/期望不减；225集中绿、ET53绿。FF main/origin/main64b4d29、ET main/origin/main d0ac42c6已正常发布，FF精确CI38170433893状态成功；ET没有配置workflow。两运行文件×两物理FF技能副本同步、各5实际安装后边界绿；三仓配置体检绿，非选文件元数据和原WIP保持。Audit已接收安装；RF工具已发布8dc26710/精确CI成功，整卡仍缺五组组合覆盖。W04已本地并线7a0b702a但正常push18FAIL，远端仍5c07f47c；ROOT后续W04共因→G2→G4→G5。目标工具当前paused，本次仅完成用户授权的接收，0付费调用。
+
+共因修复：Windows长路径重复编译/重复准备与proof饥饿由作者统一解决；ROOT补独占attempt缓存、proof失败不可覆盖/完整worker证明、子进程reap、异常清理和seed完整序列。ROOT自己的逻辑别名数过约束有反例修复；首轮28/13记录保持，最终原41重跑全绿。两轮原始证据仅490060-byte ZIP，隔离重放oracle零发现、自动恢复。长矩阵手动大节点；轻量测试走同一正常push/CI，未新增人工门禁。
+
+证据入口：company-wiki/.planning/w07-ff-perf-reception/publication.json、acceptance.json、offline-evidence.zip、replay_evidence.py。工程绿不认证真实供应商可达、来源真值或研究质量。预算母账保持413778tokens/334463µUSD+2764FXhold，累计$20/200万tokens。
