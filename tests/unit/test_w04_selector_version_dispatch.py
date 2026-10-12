@@ -58,13 +58,14 @@ def test_new_selector_changes_content_generation_without_new_permission():
     ("0.8.0", {"context-unrestored", "business-removed"}),
 ])
 def test_restoration_crosses_the_selection_boundary_only_for_new_policy(monkeypatch, version, expected):
+    from dataclasses import replace
     from types import SimpleNamespace
     observed = []
     original_context = policy.enrich_context_groups
     original_finalize = policy.finalize_selection
     def context(*args, **kwargs):
         result = original_context(*args, **kwargs)
-        return SimpleNamespace(candidates=result.candidates, group_ids=result.group_ids,
+        return replace(result,
             excluded_context_unit_ids=frozenset({"context-restored", "context-unrestored"}))
     def business(*args, **kwargs):
         return SimpleNamespace(candidates=kwargs["initial_candidates"], group_ids=kwargs["initial_group_ids"],
