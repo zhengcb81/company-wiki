@@ -1,0 +1,35 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w4f-5090aee9\\p", "requested_basetemp_len": 46, "cwd_len": 67, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\.codex\worktrees\w04-selector-integration\company-wiki
+configfile: pytest.ini
+collected 473 items
+
+tests\unit\test_fresh_selection_semantics.py ......................      [  4%]
+tests\unit\test_root_w04_stage_boundaries.py ................            [  8%]
+tests\unit\test_main_ocr_selection.py .................................. [ 15%]
+.........                                                                [ 17%]
+tests\unit\test_w04_narrative_semantics.py ............................. [ 23%]
+........................................................................ [ 38%]
+...                                                                      [ 39%]
+tests\unit\test_w04_stage_predicate_scope.py ........................... [ 44%]
+................                                                         [ 48%]
+tests\unit\test_w04_stage_public_assertions.py ......................... [ 53%]
+....................................................                     [ 64%]
+tests\unit\test_narrative_evidence.py .................................. [ 71%]
+...............................                                          [ 78%]
+tests\unit\test_narrative_ocr_composition.py ........................    [ 83%]
+tests\unit\test_n6_candidate_main_boundaries.py .................        [ 86%]
+tests\unit\test_n6_candidate_recall.py ......                            [ 88%]
+tests\unit\test_narrative_business_recall.py ........................... [ 93%]
+.............................                                            [100%]
+
+============================== warnings summary ===============================
+..\..\..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\w04-selector-reception\root-fix\final-after-legacy-preservation\junit.xml -
+======================= 473 passed, 1 warning in 13.22s =======================

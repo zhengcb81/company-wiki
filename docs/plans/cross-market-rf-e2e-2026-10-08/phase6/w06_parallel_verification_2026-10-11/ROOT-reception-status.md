@@ -9,7 +9,7 @@
 | W06-AUDIT-MEASURES | main9cd5ff8a；296大节点/最终77/非作者反例绿，技能两份各26文件匹配。Audit无remote | 完成；算术审查不认证来源真值 |
 | W06-CWP-PORTABILITY | 共用Finding outcome单调聚合已修：69PASS1SKIP9.07s，七场景实际Reader/CLI4.051s；非作者53纯案例/原4输入SHA重放通过，11产品/8producer未变 | 正常ROOT5f10af0b并线发布master6dd7a119，精确CI38145427297成功/正常push3305PASS；ROOT干净checkout已移除。手动工具无需技能安装 |
 | W06-FF-MATRIX / W07-FF-PERF | 原41全PASS/99.9624秒；26fresh原文证明、零oracle、目录恢复。FF64b4d29/ETd0ac42c6本地与远端相同；FF精确CI38170433893 成功。225集中、ET53、正常push708＋78subtests；两文件×两安装/各5边界及三仓配置体检绿 | 接收、并线、同步完成；真实供应商/经济质量仍留G4/G5 |
-| W04业务信息召回 | 质量带375PASS、同六原件87.4409秒、非作者17＋4通过；18文件已接入本地主线7a0b702a，集中集成51PASS。正常推送前3098项暴露18FAIL/3080PASS，远端仍5c07f47c | ROOT在隔离接收树修复经营事实召回、OCR质量、完整句条件/预算等共同边界，区分明确排序迁移；正常测试通过后发布。摘要/研究尚未验收 |
+| W04业务信息召回 | 当前ROOT473集中绿/原六真实115.4879s PASS、6legacy一致/4绑定事实完整；正常本地merge c1d6ab92，旧18FAIL已根修 | 正常push/精确CI收尾；W08与G2/G4/G5仍开放 |
 
 ## 执行顺序
 
@@ -53,3 +53,7 @@ W07-FF-PERF已完成ROOT接收：原41场景全PASS/99.9624s、零oracle finding
 用户要求新的排他施工包；ROOT已核真实Git/PWF并准备三个固定工区，全部READY_NOT_STARTED，无worker开工。
 [总入口与三张施工卡](../w08_parallel_completion_2026-10-12/README.md)：RF补W07五组实际遗漏；Audit在已有coverage上补optional实读执行证据；CWP新tools做有限摘要→read→固定RF消费离线联调，不写ROOT的W04 src。各包不同repo/workdir、固定代码输入、独立PWF、接口/测试/交接合同，只有A/B/C大节点，不增加许可门。
 ROOT保留W04核心修复/当前主线/安装及真实G2/G4/G5；CWP工具可先开发并交如实PARTIAL，修W04后ROOT重跑同CaseSpec。三个包不等待彼此，也不运行收费模型/provider。
+
+## ROOT W04当前收尾 — 2026-10-12
+
+2026-10-12 ROOT W04完整owner/质量/stage共因已正常分支4e58e347＋2d9f9d12并入本地主线c1d6ab92；473集中PASS13.22s，原脚本同六原件PASS115.4879s、6legacy full hashes一致、4complete source-bound事实齐全，原件/三生产配置不变、临时metadata恢复absent。旧18FAIL及所有RED保留，正常主线push/精确CI待收尾；工程绿不认证完整召回/摘要或研究。三个W08均DELIVERED_NOT_ROOT_ACCEPTED，实际初始INPUTS均保持；先基础发布，再RF→Audit→CWP工具接收与G2真实配置摘要/RF消费→G4原三家四独审→G5新三及循环。本轮0收费，母累计预算不变。用户续行已授权完整目标，工具goal字段仍paused，不另建或缩小目标。

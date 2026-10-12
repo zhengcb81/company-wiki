@@ -1,0 +1,49 @@
+{
+  "schema": "root-w04-boundary-integration/1",
+  "main_merge_head": "c1d6ab926b775df96c689167e64f9fbe8af5cf68",
+  "implementation_commits": [
+    "4e58e347",
+    "2d9f9d12"
+  ],
+  "focused_passed": 473,
+  "focused_pytest_seconds": 13.22,
+  "native_seconds": 115.4879,
+  "native_checkpoint_sha256": "15b06195a41a0694a8cf3ca996216686ddb3a7072ca2623eee7e4a68740b17b6",
+  "six_legacy_full_fingerprints_equal": true,
+  "four_source_bound_facts_complete": true,
+  "production_config_originals_unchanged": true,
+  "native_metadata_restored_absent": true,
+  "normal_hooks_green": true,
+  "publication": "pending normal push/exact CI",
+  "actual_provider_llm_calls": 0,
+  "changed_files": {
+    "src/company_wiki/source_catalog/narrative_business_groups.py": {
+      "sha256": "dec939d3ba93c898c05322106a0b32d7bf644366596b657d3c552b7e108810d9",
+      "lf_sha256": "7e08429f9904b982e843592ffd427881db806545a069b0202a792846863b2083"
+    },
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": {
+      "sha256": "d308f060aef78301edc3baa64c0e842ad9fb3b096cda2afc1e030c70ec405115",
+      "lf_sha256": "59728bd07d285224ece04eccd48a74310d8cfff29fa6036e072ccb62fa5fe321"
+    },
+    "src/company_wiki/source_catalog/narrative_evidence.py": {
+      "sha256": "a05d1a8270a27e8858188d65b1e27ec7c566d59be1a14f2dc1f0bc059c9df2c2",
+      "lf_sha256": "30285131da3093361c59f59ce4437321fc92ab0ed87b53c91daf6657203cf42a"
+    },
+    "src/company_wiki/source_catalog/narrative_stage_assertions.py": {
+      "sha256": "fbb75ccd07016bcc70993f24bb38a1e2919c4398ba9ec79656f54013c8c3ec24",
+      "lf_sha256": "5825b9861db608a41a5c413696bc6319a4a7589a5a1c043582d04f4e609dec1d"
+    },
+    "tests/unit/test_narrative_evidence.py": {
+      "sha256": "03be35480eecdb308c19573299c6d33a96971c36f3fd0e8b5ef6e5f208c2ba1c",
+      "lf_sha256": "d4ddc929f7730b6acdc080f5bf02d5720bde6eeb32e99c91a9caa0fb455940e3"
+    },
+    "tests/unit/test_w04_narrative_semantics.py": {
+      "sha256": "9141e52483c6920f982619fe3e5e09d7862ffd1b5a5138eec4f909a7c61b3373",
+      "lf_sha256": "0f6372f8272909d5cf5637d23b9417075b3b8daf4b98ae942de4b01fb01d1a37"
+    },
+    "tests/unit/test_root_w04_stage_boundaries.py": {
+      "sha256": "0bd6b9f1ff67ea914f9fb358eb2e64122f2530f8d7d110e8528d8e0629db4a13",
+      "lf_sha256": "66ad5e32ad852c2eacae3509db023e58e23ceac8f9fd264773f3c045fcef834a"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "compressed_sha256": "40fe90f0eb4dd70341038955ec28702bf61425768e463e877af361a47d9f9c09",
+  "compressed_bytes": 304471,
+  "uncompressed_sha256": "948a6e47226026cb7306e93247192ba6b203a284736b78718fdb95d19a9af089",
+  "uncompressed_bytes": 1553668,
+  "roundtrip_verified": true
+}

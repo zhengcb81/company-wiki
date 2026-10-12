@@ -1,6 +1,6 @@
 # W08 三个可以现在独立启动的施工包 — 2026-10-12
 
-本批只发这三张新卡，工作目录已准备；不是前次W07的重复。ROOT负责总接口/共享PWF/最终验收并线安装；workers不推main。
+本批三张新卡均已由用户交付，目前DELIVERED_NOT_ROOT_ACCEPTED；不要重新开工或重复派卡。ROOT负责总接口/共享PWF/最终验收并线安装；workers不推main。
 
 | 卡 | 做什么 | 工作目录 | 施工卡 |
 |---|---|---|---|
@@ -21,3 +21,7 @@
 workers只在A/B/C三大节点审查；测试与下载资料归独立测试根并恢复原样。缺hash不新增签收，未知不PASS。各包0外网provider/LLM调用，ROOT累计预算仍$20/200万tokens。
 
 完成后给ROOT卡号、workdir/branch/HEAD和docs/handoffs/<plan_id>/handoff.json/md绝对路径；一包不需要等另一包。详各卡和[共用交接接口](HANDOFF_CONTRACT.md)。母当前状态见[ROOT入口](../w06_parallel_verification_2026-10-11/ROOT-reception-status.md)。
+
+## 用户全部交付 — 2026-10-12
+
+三真实HEAD和只读输入/writes见company-wiki/.planning/w08-root-reception/intake.json；ROOT将按实际覆盖与必要反例验收，元数据自引用空值不新增门禁。

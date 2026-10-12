@@ -1,0 +1,202 @@
+[
+  {
+    "lane_id": "W08-RF-COMBOS",
+    "head": "4d5c9f05835c46cc445288f2883c6bf215c39348",
+    "base": "8dc2671040f4330d3b54d1bea1d17246130f9c2a",
+    "branch": "codex/w08-rf-combinations",
+    "status": "?? .planning/w08-rf-combinations/",
+    "handoff_sha256": "03a3ee2f6390687e516ce4975492952b268d9974e4777e1a7374ba295b64a9c9",
+    "input_manifest_sha256": "c75bfdca0ad8f2e7386f81933961719c871bad33b514728a948974a0965f2884",
+    "input_manifest_lf_sha256": "c75bfdca0ad8f2e7386f81933961719c871bad33b514728a948974a0965f2884",
+    "expected_input_manifest_sha256": "c75bfdca0ad8f2e7386f81933961719c871bad33b514728a948974a0965f2884",
+    "input_manifest_byte_match": true,
+    "changed_paths": [
+      {
+        "path": "docs/handoffs/w08-rf-combinations/handoff.json",
+        "inside_write_set": true
+      },
+      {
+        "path": "docs/handoffs/w08-rf-combinations/handoff.md",
+        "inside_write_set": true
+      },
+      {
+        "path": "docs/handoffs/w08-rf-combinations/native-payload-summary.json",
+        "inside_write_set": true
+      },
+      {
+        "path": "docs/handoffs/w08-rf-combinations/native-payload.zip",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/model_generalization_matrix/bootstrap.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/model_generalization_matrix/combinations.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/model_generalization_matrix/native.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/model_generalization_matrix/report.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/model_generalization_matrix/run.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/model_generalization_matrix/runner.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/tests/test_w08_model_combinations.py",
+        "inside_write_set": true
+      }
+    ],
+    "author_scope_status": "COMPLETE",
+    "ROOT_acceptance": "pending"
+  },
+  {
+    "lane_id": "W08-AUDIT-EVIDENCE",
+    "head": "96889c6a6d0d85b9c0ff6f54e35c4ea73e648bb6",
+    "base": "2c49491355bd68b7ab5ed664bfd8010d9dae5a84",
+    "branch": "codex/w08-audit-evidence",
+    "status": "?? .planning/w08-audit-evidence/",
+    "handoff_sha256": "3ec349016bae1e5382c2027e21b100f8479772abb65c9ea2e1ecb2573f69d69c",
+    "input_manifest_sha256": "679f5a96c6a87153597617fd884442d375f3dcb726cb0a0ed02e06f461dc836b",
+    "input_manifest_lf_sha256": "679f5a96c6a87153597617fd884442d375f3dcb726cb0a0ed02e06f461dc836b",
+    "expected_input_manifest_sha256": "679f5a96c6a87153597617fd884442d375f3dcb726cb0a0ed02e06f461dc836b",
+    "input_manifest_byte_match": true,
+    "changed_paths": [
+      {
+        "path": "docs/handoffs/w08-audit-evidence/evidence/e2e-receipt.json",
+        "inside_write_set": true
+      },
+      {
+        "path": "docs/handoffs/w08-audit-evidence/evidence/focused_tests.log",
+        "inside_write_set": true
+      },
+      {
+        "path": "docs/handoffs/w08-audit-evidence/evidence/full_suite.log",
+        "inside_write_set": true
+      },
+      {
+        "path": "docs/handoffs/w08-audit-evidence/handoff.json",
+        "inside_write_set": true
+      },
+      {
+        "path": "docs/handoffs/w08-audit-evidence/handoff.md",
+        "inside_write_set": true
+      },
+      {
+        "path": "skills/revenue-forecast-audit/references/review-evidence-reconciliation.md",
+        "inside_write_set": true
+      },
+      {
+        "path": "skills/revenue-forecast-audit/scripts/review_evidence.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "skills/revenue-forecast-audit/scripts/review_evidence_reconcile.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "skills/revenue-forecast-audit/scripts/review_protocol.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tests/fixtures/w08_review_evidence/README.md",
+        "inside_write_set": true
+      },
+      {
+        "path": "tests/fixtures/w08_review_evidence/coverage_payload.json",
+        "inside_write_set": true
+      },
+      {
+        "path": "tests/fixtures/w08_review_evidence/input_manifest.json",
+        "inside_write_set": true
+      },
+      {
+        "path": "tests/fixtures/w08_review_evidence/ledger.json",
+        "inside_write_set": true
+      },
+      {
+        "path": "tests/fixtures/w08_review_evidence/raw_source.txt",
+        "inside_write_set": true
+      },
+      {
+        "path": "tests/fixtures/w08_review_evidence/report_notes.md",
+        "inside_write_set": true
+      },
+      {
+        "path": "tests/test_w08_review_evidence.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/run_review_evidence_e2e.py",
+        "inside_write_set": true
+      }
+    ],
+    "author_scope_status": "COMPLETE",
+    "ROOT_acceptance": "pending"
+  },
+  {
+    "lane_id": "W08-CWP-G2-REPLAY",
+    "head": "a60104801be78ec2b1c441ac45afec46508e9439",
+    "base": "122bbe3ba142979a2e478f886eb25de76edf2e00",
+    "branch": "codex/w08-cwp-g2-replay",
+    "status": "?? .planning/w08-cwp-g2-replay/",
+    "handoff_sha256": "2db41798920c52f8fd65db87c3bf7e77e268106f1baa1aebb16c5da83b773011",
+    "input_manifest_sha256": "5088e8724e96b0564a192e1474503a18a69bb010b52b119ce888d301362f44cf",
+    "input_manifest_lf_sha256": "5088e8724e96b0564a192e1474503a18a69bb010b52b119ce888d301362f44cf",
+    "expected_input_manifest_sha256": "5088e8724e96b0564a192e1474503a18a69bb010b52b119ce888d301362f44cf",
+    "input_manifest_byte_match": true,
+    "changed_paths": [
+      {
+        "path": "docs/handoffs/w08-cwp-g2-replay/handoff.json",
+        "inside_write_set": true
+      },
+      {
+        "path": "docs/handoffs/w08-cwp-g2-replay/handoff.md",
+        "inside_write_set": true
+      },
+      {
+        "path": "tests/unit/test_w08_narrative_g2_replay.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/narrative_g2_replay/README.md",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/narrative_g2_replay/__init__.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/narrative_g2_replay/fixtures.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/narrative_g2_replay/oracle.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/narrative_g2_replay/report.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/narrative_g2_replay/run.py",
+        "inside_write_set": true
+      },
+      {
+        "path": "tools/narrative_g2_replay/specs.py",
+        "inside_write_set": true
+      }
+    ],
+    "author_scope_status": "COMPLETE",
+    "ROOT_acceptance": "pending"
+  }
+]

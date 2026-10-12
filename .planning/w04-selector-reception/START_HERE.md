@@ -1,0 +1,7 @@
+# ROOT W04 当前入口
+
+2026-10-12 ROOT W04完整owner/质量/stage共因已正常分支4e58e347＋2d9f9d12并入本地主线c1d6ab92；473集中PASS13.22s，原脚本同六原件PASS115.4879s、6legacy full hashes一致、4complete source-bound事实齐全，原件/三生产配置不变、临时metadata恢复absent。旧18FAIL及所有RED保留，正常主线push/精确CI待收尾；工程绿不认证完整召回/摘要或研究。三个W08均DELIVERED_NOT_ROOT_ACCEPTED，实际初始INPUTS均保持；先基础发布，再RF→Audit→CWP工具接收与G2真实配置摘要/RF消费→G4原三家四独审→G5新三及循环。本轮0收费，母累计预算不变。用户续行已授权完整目标，工具goal字段仍paused，不另建或缩小目标。
+
+证据看integration-final.json、root-fix/final-after-legacy-preservation/execution.json、root-fix/fixed-six-native-inputs-complete/execution.json及root-fixed-six.json.gz。
+
+历史旧失败、context-review的独立机制审查和实际改断言依据保持；本文是当前入口。不要重跑一次性prepare/implement/fix/migrate/finalize/publish脚本；原publish_w04.py固定旧main5c仅为当时历史。完整项目尚未完成。

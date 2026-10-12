@@ -1,0 +1,9 @@
+# Findings
+
+实际交付：RF4d5c9f05（handoffimplementation=PENDING，机器Git为准），Audit实现e9146453/交接96889c6，CWP a6010480（handoff implementation空）。自引用commit字段可由ROOT补实际HEAD，不成为人工签收阻断。
+
+作者主张RF31case/五组CLOSED、71PASS6SKIP+24旧ROOT边界；但C02仅FYE/季度契约而非dated-composition、C05新增bootstrap.evaluate_draft_scope需独立确认不是第二计算/期待从actual造出。Audit50集中/427+122全量与真本地CLI，新增allow-evidence-root属于显式读入范围，不应做身份/许可门。CWP26工具测试、9读/RF读、第二run0POST，但初始INPUTS SHA声明3200与dispatch5088不同，需调查行尾/显式fixture修复/实际输入改动，不凭hash差一刀拒绝，也不静默接受改造证据。
+
+三包原型已核独立code commit；作者工区未提交都是自己的PWF初始准备，保留。尚未ROOT验收或并主线，不能把COMPLETE字段当质量证明。
+
+ROOT实际intake复核：三个INITIAL INPUTS.json逐字节均等于初始dispatch，CWP真实5088未变。handoff所写3200是报告字段不同，不代表输入被改；先前怀疑已被实际字节反证，应修准确metadata而不是追加审查许可。三个工区HEAD分别4d5c9f05835c46cc445288f2883c6bf215c39348、96889c6a6d0d85b9c0ff6f54e35c4ea73e648bb6、a60104801be78ec2b1c441ac45afec46508e9439；完整intake包含实际写集，未签收。

@@ -1,6 +1,6 @@
 {
   "schema": "w08-root-dispatch/1",
-  "state": "READY_NOT_STARTED",
+  "state": "DELIVERED_NOT_ROOT_ACCEPTED",
   "lanes": [
     {
       "lane_id": "W08-RF-COMBOS",
@@ -9,7 +9,7 @@
       "branch": "codex/w08-rf-combinations",
       "base_head": "8dc2671040f4330d3b54d1bea1d17246130f9c2a",
       "plan_id": "w08-rf-combinations",
-      "status": "READY_NOT_STARTED",
+      "status": "DELIVERED_NOT_ROOT_ACCEPTED",
       "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w08_parallel_completion_2026-10-12\\cards\\W08-RF-COMBOS.md",
       "start_here": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08\\rf-combinations\\.planning\\w08-rf-combinations\\START_HERE.md",
       "card_sha256": "58ded4387dceb77c1dbe6ffa6744acb5c1577ddb1b813b6b83065c4f539fa06e",
@@ -21,7 +21,9 @@
         "tools/tests/test_w08_model_combinations.py",
         "docs/handoffs/w08-rf-combinations/**",
         ".planning/w08-rf-combinations/**"
-      ]
+      ],
+      "delivered_head": "4d5c9f05835c46cc445288f2883c6bf215c39348",
+      "root_evidence": ".planning/w08-root-reception/intake.json"
     },
     {
       "lane_id": "W08-AUDIT-EVIDENCE",
@@ -30,7 +32,7 @@
       "branch": "codex/w08-audit-evidence",
       "base_head": "2c49491355bd68b7ab5ed664bfd8010d9dae5a84",
       "plan_id": "w08-audit-evidence",
-      "status": "READY_NOT_STARTED",
+      "status": "DELIVERED_NOT_ROOT_ACCEPTED",
       "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w08_parallel_completion_2026-10-12\\cards\\W08-AUDIT-EVIDENCE.md",
       "start_here": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08\\audit-evidence\\.planning\\w08-audit-evidence\\START_HERE.md",
       "card_sha256": "5a3b72a55ec09f1385396d46967acd65ef3199b92c9c4d7cc9332a89f70a9a9b",
@@ -46,7 +48,9 @@
         "tools/run_review_evidence_e2e.py",
         "docs/handoffs/w08-audit-evidence/**",
         ".planning/w08-audit-evidence/**"
-      ]
+      ],
+      "delivered_head": "96889c6a6d0d85b9c0ff6f54e35c4ea73e648bb6",
+      "root_evidence": ".planning/w08-root-reception/intake.json"
     },
     {
       "lane_id": "W08-CWP-G2-REPLAY",
@@ -55,7 +59,7 @@
       "branch": "codex/w08-cwp-g2-replay",
       "base_head": "122bbe3ba142979a2e478f886eb25de76edf2e00",
       "plan_id": "w08-cwp-g2-replay",
-      "status": "READY_NOT_STARTED",
+      "status": "DELIVERED_NOT_ROOT_ACCEPTED",
       "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w08_parallel_completion_2026-10-12\\cards\\W08-CWP-G2-REPLAY.md",
       "start_here": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08\\cwp-g2-replay\\.planning\\w08-cwp-g2-replay\\START_HERE.md",
       "card_sha256": "982f98e6f4a886630f62b1ad19ac2453205c50103d0997c5107f15df38385890",
@@ -68,7 +72,9 @@
         "tests/fixtures/w08_narrative_g2/**",
         "docs/handoffs/w08-cwp-g2-replay/**",
         ".planning/w08-cwp-g2-replay/**"
-      ]
+      ],
+      "delivered_head": "a60104801be78ec2b1c441ac45afec46508e9439",
+      "root_evidence": ".planning/w08-root-reception/intake.json"
     }
   ]
 }

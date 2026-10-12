@@ -1,0 +1,33 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "tests/unit/test_fresh_selection_semantics.py",
+    "tests/unit/test_root_w04_stage_boundaries.py",
+    "tests/unit/test_main_ocr_selection.py",
+    "tests/unit/test_w04_narrative_semantics.py",
+    "tests/unit/test_w04_stage_predicate_scope.py",
+    "tests/unit/test_w04_stage_public_assertions.py",
+    "tests/unit/test_narrative_evidence.py",
+    "tests/unit/test_narrative_ocr_composition.py",
+    "tests/unit/test_n6_candidate_main_boundaries.py",
+    "tests/unit/test_n6_candidate_recall.py",
+    "tests/unit/test_narrative_business_recall.py",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\w4f-5090aee9\\p",
+    "--junitxml",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w04-selector-reception\\root-fix\\final-after-legacy-preservation\\junit.xml"
+  ],
+  "exit": 0,
+  "seconds": 14.7271,
+  "scratch_restored_absent": true,
+  "provider_model_calls": 0
+}

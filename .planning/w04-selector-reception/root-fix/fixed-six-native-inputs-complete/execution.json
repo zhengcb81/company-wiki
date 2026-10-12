@@ -1,0 +1,38 @@
+{
+  "schema": "root-w04-fixed-six/1",
+  "exit": 0,
+  "seconds": 115.4879,
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w04-selector-reception\\root-fix\\fixed-six-native-inputs-complete\\native_novelty_replay.py",
+    "root-fixed-six"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\worktrees\\w04-selector-integration\\company-wiki",
+  "code_sha256": {
+    "narrative_business_groups.py": "dec939d3ba93c898c05322106a0b32d7bf644366596b657d3c552b7e108810d9",
+    "narrative_evidence.py": "a05d1a8270a27e8858188d65b1e27ec7c566d59be1a14f2dc1f0bc059c9df2c2",
+    "narrative_group_candidates.py": "d308f060aef78301edc3baa64c0e842ad9fb3b096cda2afc1e030c70ec405115",
+    "narrative_stage_assertions.py": "fbb75ccd07016bcc70993f24bb38a1e2919c4398ba9ec79656f54013c8c3ec24",
+    "narrative_budget.py": "ae68412ea81b8439284ee65305da440ac84b5ddb69fe69a2070920489e7b8a1b",
+    "narrative_finalize.py": "48083f0bd7c6862744667597a14818e20ef02979f1ec4615bec5670cb1f77f47",
+    "narrative_semantic_coverage.py": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca"
+  },
+  "checkpoint_sha256": "15b06195a41a0694a8cf3ca996216686ddb3a7072ca2623eee7e4a68740b17b6",
+  "production_configs_unchanged": true,
+  "raw_copies": 0,
+  "provider_model_calls": 0,
+  "fixed_input_metadata": {
+    "native-stage-replay.json": {
+      "sha256": "22f2435de03b5c439b9a56bb2b33708aac68a97b40edf1b6fc26f3589b958dc6",
+      "bytes": 1270519
+    },
+    "native-stage-final-focused.json.gz": {
+      "sha256": "94a3a1dafb499be2bc49643eae12e847ada93c655a8b040275e1a672533500bd",
+      "bytes": 444909
+    }
+  },
+  "fixed_input_metadata_restored_absent": true
+}
