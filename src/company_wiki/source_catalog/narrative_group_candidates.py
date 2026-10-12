@@ -938,16 +938,16 @@ def _coalesce_sentences(
             continue
         # Physical clustering alone does not prove a semantic sentence. Bullets
         # and an indivisible full source paragraph retain their own owners.
-        if any(re.match(r"^\s*[•▪]", u.raw_text) for u in sentence_members[1:]):
-            continue
-        if any(len(u.raw_text)>BUSINESS_CHARACTER_WINDOW
-               and u.metadata.get("block_char_start")==0
-               and u.metadata.get("block_char_end")==len(u.raw_text)
-               for u in sentence_members):
-            continue
+        owner_proved = not any(re.match(r"^\s*[•▪]", u.raw_text)
+                               for u in sentence_members[1:]) and not any(
+            len(u.raw_text)>BUSINESS_CHARACTER_WINDOW
+            and u.metadata.get("block_char_start")==0
+            and u.metadata.get("block_char_end")==len(u.raw_text)
+            for u in sentence_members)
         if sum(len(u.raw_text) for u in sentence_members) > character_budget:
-            store.atomic_owners.append(AtomicSentenceOwner(tuple(u.unit_id for u in sentence_members),
-                                                          character_budget, "character_limit"))
+            if owner_proved:
+                store.atomic_owners.append(AtomicSentenceOwner(tuple(u.unit_id for u in sentence_members),
+                                                              character_budget, "character_limit"))
             store.excluded_context_unit_ids.update(ids)
             continue
         old_groups = {store.group_ids[uid] for uid in ids if uid in store.group_ids}
@@ -957,8 +957,9 @@ def _coalesce_sentences(
         protected = {protected_groups[uid] for uid in ids if uid in protected_groups}
         if len(protected) > 1:
             continue
-        store.atomic_owners.append(AtomicSentenceOwner(tuple(u.unit_id for u in sentence_members),
-                                                      character_budget))
+        if owner_proved:
+            store.atomic_owners.append(AtomicSentenceOwner(tuple(u.unit_id for u in sentence_members),
+                                                          character_budget))
         anchor = (next(iter(protected)) if protected else next(iter(old_groups))
                   if len(old_groups) == 1 else f"{group_id}:sentence:{start}:{end}")
         topics = tuple(dict.fromkeys(topic for candidate in seeds for topic in candidate.topics))
