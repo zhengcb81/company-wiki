@@ -14,7 +14,33 @@
   "production_config_originals_unchanged": true,
   "native_metadata_restored_absent": true,
   "normal_hooks_green": true,
-  "publication": "pending normal push/exact CI",
+  "publication": {
+    "schema": "root-w08-cwp-publication/1",
+    "code_head": "d75e9698a3401854dfd4368bbe9b7c40f73c3263",
+    "remote_head": "d75e9698a3401854dfd4368bbe9b7c40f73c3263",
+    "normal_push_passed": 3648,
+    "normal_push_seconds": 197.96,
+    "ci": {
+      "id": 38304041971,
+      "name": "CI",
+      "head_sha": "d75e9698a3401854dfd4368bbe9b7c40f73c3263",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38304041971",
+      "updated_at": "2026-10-12T20:27:15Z"
+    },
+    "status": "PUBLISHED_CI_GREEN",
+    "provider_calls": 0,
+    "paid_usd": 0,
+    "artifact_bytes": 203690,
+    "own_duplicate_files_removed": 136,
+    "own_duplicate_bytes_removed": 187288,
+    "remaining": [
+      "W08 RF/Audit reception",
+      "configured provider G2",
+      "real-company G4/G5 and reviews"
+    ]
+  },
   "actual_provider_llm_calls": 0,
   "changed_files": {
     "src/company_wiki/source_catalog/narrative_business_groups.py": {

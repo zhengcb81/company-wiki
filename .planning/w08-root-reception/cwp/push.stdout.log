@@ -1,0 +1,6 @@
+Push unit scope: configuration or test entrypoint changed (1 paths)
+
+=== affected units and CI contract smoke ===
+====================== 3648 passed in 197.96s (0:03:17) =======================
+
+pre-push gate GREEN — safe to push (then self-monitor CI).

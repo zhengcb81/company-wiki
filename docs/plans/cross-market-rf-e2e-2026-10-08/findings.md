@@ -1,7 +1,7 @@
 ## ROOT 当前入口 — 2026-10-11
 
 当前状态、已发布SHA与下一步统一见 [ROOT接收状态](phase6/w06_parallel_verification_2026-10-11/ROOT-reception-status.md)，优先于本文旧状态。
-ROOT W04工程/六原件已绿且本地并线；W08-CWP工具35测试/最终真实50.3324秒绿，含版本/spec真失效及预存哨兵恢复，已本地并线，正常push/精确CI待做。W08 RF/Audit仍待独立接收；随后已验G2配置包、真实配置摘要/RF消费、G4原三/四独审→G5新三和循环。原件/配置/其他WIP保持，完整母目标未完成；本轮0付费。
+CWP已验收发布：代码主线/远端d75e9698a3401854dfd4368bbe9b7c40f73c3263，正常push3648PASS197.96秒，精确CI38304041971 success。35工具测试/50.3324秒真实九文档联调，复用0POST，版本/spec各1POST、70输入SHA/mtime不变，预存哨兵及独立测试目录恢复。证据203690字节ZIP，136自有重复文件187288字节已逐字节验证归档后移除。W04原件/legacy/四事实节点和CWP工具工程接收完成；真实供应商摘要、RF/Audit两包、G4/G5真实研究与循环仍待做，完整母目标未完成；本轮0付费。
 W07：[三包当前接收状态](phase6/w07_parallel_quality_2026-10-11/README.md)。仅A/B/C大节点；历史READY记录保留为历史。
 
 
@@ -1078,3 +1078,8 @@ W07-FF-PERF已完成ROOT接收：原41场景全PASS/99.9624s、零oracle finding
 可复现入口见 tools/narrative_g2_replay/README.md；参数使用独立测试目录和固定RF快照。
 不要重跑本目录一次性prepare/implement/accept脚本，不要改作者INITIAL INPUTS或旧失败报告。
 
+
+
+## CWP发布收尾 — 2026-10-12
+
+CWP已验收发布：代码主线/远端d75e9698a3401854dfd4368bbe9b7c40f73c3263，正常push3648PASS197.96秒，精确CI38304041971 success。35工具测试/50.3324秒真实九文档联调，复用0POST，版本/spec各1POST、70输入SHA/mtime不变，预存哨兵及独立测试目录恢复。证据203690字节ZIP，136自有重复文件187288字节已逐字节验证归档后移除。W04原件/legacy/四事实节点和CWP工具工程接收完成；真实供应商摘要、RF/Audit两包、G4/G5真实研究与循环仍待做，完整母目标未完成；本轮0付费。

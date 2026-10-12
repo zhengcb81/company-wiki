@@ -1,6 +1,6 @@
 {
   "schema": "w08-root-dispatch/1",
-  "state": "CWP_ACCEPTED_LOCAL_RF_AUDIT_PENDING",
+  "state": "CWP_PUBLISHED_RF_AUDIT_PENDING",
   "lanes": [
     {
       "lane_id": "W08-RF-COMBOS",
@@ -59,7 +59,7 @@
       "branch": "codex/w08-cwp-g2-replay",
       "base_head": "122bbe3ba142979a2e478f886eb25de76edf2e00",
       "plan_id": "w08-cwp-g2-replay",
-      "status": "ACCEPTED_LOCAL_PUBLICATION_PENDING",
+      "status": "ACCEPTED_PUBLISHED_CI_GREEN",
       "card": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\w08_parallel_completion_2026-10-12\\cards\\W08-CWP-G2-REPLAY.md",
       "start_here": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08\\cwp-g2-replay\\.planning\\w08-cwp-g2-replay\\START_HERE.md",
       "card_sha256": "982f98e6f4a886630f62b1ad19ac2453205c50103d0997c5107f15df38385890",
@@ -74,7 +74,8 @@
         ".planning/w08-cwp-g2-replay/**"
       ],
       "delivered_head": "a60104801be78ec2b1c441ac45afec46508e9439",
-      "root_evidence": ".planning/w08-root-reception/cwp/acceptance.json"
+      "root_evidence": ".planning/w08-root-reception/cwp/acceptance.json",
+      "publication": ".planning/w08-root-reception/cwp/publication.json"
     }
   ]
 }

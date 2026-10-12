@@ -10,6 +10,9 @@
 | W06-CWP-PORTABILITY | 共用Finding outcome单调聚合已修：69PASS1SKIP9.07s，七场景实际Reader/CLI4.051s；非作者53纯案例/原4输入SHA重放通过，11产品/8producer未变 | 正常ROOT5f10af0b并线发布master6dd7a119，精确CI38145427297成功/正常push3305PASS；ROOT干净checkout已移除。手动工具无需技能安装 |
 | W06-FF-MATRIX / W07-FF-PERF | 原41全PASS/99.9624秒；26fresh原文证明、零oracle、目录恢复。FF64b4d29/ETd0ac42c6本地与远端相同；FF精确CI38170433893 成功。225集中、ET53、正常push708＋78subtests；两文件×两安装/各5边界及三仓配置体检绿 | 接收、并线、同步完成；真实供应商/经济质量仍留G4/G5 |
 | W04业务信息召回 | 当前ROOT473集中绿/原六真实115.4879s PASS、6legacy一致/4绑定事实完整；正常本地merge c1d6ab92，旧18FAIL已根修 | 正常push/精确CI收尾；W08与G2/G4/G5仍开放 |
+| W08-CWP-G2-REPLAY | 作者a6010480，ROOT补实际观测/真缓存失效a90fada2；35集中/50.3324秒真实九文档链路绿，预存哨兵恢复、203690字节归档；main本地已并be963081 | 正常push/精确CI收尾；真实供应商摘要和公司审查仍留G2/G4/G5 |
+| W08-RF-COMBOS | 作者4d5c9f05已交，但C02仅年度标签、C05以预测当实际且入口记错，实际原生覆盖未闭；不照自报CLOSED接收 | ROOT优先补真实dated贡献及独立actual原生回测，再并线 |
+| W08-AUDIT-EVIDENCE | 作者96889c6/e9146453已交，初始INPUTS字节保持 | ROOT独立接收可选有界实读层，再正常并线/安装 |
 
 ## 执行顺序
 
@@ -57,3 +60,8 @@ ROOT保留W04核心修复/当前主线/安装及真实G2/G4/G5；CWP工具可先
 ## ROOT W04当前收尾 — 2026-10-12
 
 2026-10-12 ROOT W04完整owner/质量/stage共因已正常分支4e58e347＋2d9f9d12并入本地主线c1d6ab92；473集中PASS13.22s，原脚本同六原件PASS115.4879s、6legacy full hashes一致、4complete source-bound事实齐全，原件/三生产配置不变、临时metadata恢复absent。旧18FAIL及所有RED保留，正常主线push/精确CI待收尾；工程绿不认证完整召回/摘要或研究。三个W08均DELIVERED_NOT_ROOT_ACCEPTED，实际初始INPUTS均保持；先基础发布，再RF→Audit→CWP工具接收与G2真实配置摘要/RF消费→G4原三家四独审→G5新三及循环。本轮0收费，母累计预算不变。用户续行已授权完整目标，工具goal字段仍paused，不另建或缩小目标。
+
+
+## 当前发布结果
+
+CWP已验收发布：代码主线/远端d75e9698a3401854dfd4368bbe9b7c40f73c3263，正常push3648PASS197.96秒，精确CI38304041971 success。35工具测试/50.3324秒真实九文档联调，复用0POST，版本/spec各1POST、70输入SHA/mtime不变，预存哨兵及独立测试目录恢复。证据203690字节ZIP，136自有重复文件187288字节已逐字节验证归档后移除。W04原件/legacy/四事实节点和CWP工具工程接收完成；真实供应商摘要、RF/Audit两包、G4/G5真实研究与循环仍待做，完整母目标未完成；本轮0付费。

@@ -14,6 +14,8 @@
 
 基础主线 W04 已正常 merge c1d6ab92，21个明确验证文件正常记录提交72992376；自动审批先前拒绝的是整目录混入历史untracked，明确逐文件提交已通过。正常 push 的既有最后检查正在运行；本轮0付费调用。
 
+RF只读进一步证实两项覆盖缺口，详rf/scope-review.md：C02实际输入只是年度36/90与年结标签，没有dated-contribution；C05记录入口evaluate_snapshot，实际调用新tool wrapper且把forecast同值当actual生成零误差。复用原生算术不等于原生实际回测，不按五组CLOSED接收。工程测试绿不认证缺失的接口覆盖；下一主线先修真正日期/独立actual的观测与反例，再决定需不需要产品共因修复。作者树和RF主仓WIP保持。
+
 ROOT实际intake复核：三个INITIAL INPUTS.json逐字节均等于初始dispatch，CWP真实5088未变。handoff所写3200是报告字段不同，不代表输入被改；先前怀疑已被实际字节反证，应修准确metadata而不是追加审查许可。三个工区HEAD分别4d5c9f05835c46cc445288f2883c6bf215c39348、96889c6a6d0d85b9c0ff6f54e35c4ea73e648bb6、a60104801be78ec2b1c441ac45afec46508e9439；完整intake包含实际写集，未签收。
 
 
@@ -36,3 +38,8 @@ ROOT实际intake复核：三个INITIAL INPUTS.json逐字节均等于初始dispat
 可复现入口见 tools/narrative_g2_replay/README.md；参数使用独立测试目录和固定RF快照。
 不要重跑本目录一次性prepare/implement/accept脚本，不要改作者INITIAL INPUTS或旧失败报告。
 
+
+
+## CWP发布收尾 — 2026-10-12
+
+CWP已验收发布：代码主线/远端d75e9698a3401854dfd4368bbe9b7c40f73c3263，正常push3648PASS197.96秒，精确CI38304041971 success。35工具测试/50.3324秒真实九文档联调，复用0POST，版本/spec各1POST、70输入SHA/mtime不变，预存哨兵及独立测试目录恢复。证据203690字节ZIP，136自有重复文件187288字节已逐字节验证归档后移除。W04原件/legacy/四事实节点和CWP工具工程接收完成；真实供应商摘要、RF/Audit两包、G4/G5真实研究与循环仍待做，完整母目标未完成；本轮0付费。

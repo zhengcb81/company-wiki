@@ -1,7 +1,7 @@
 {
   "schema": "root-w08-cwp-acceptance/1",
   "lane_id": "W08-CWP-G2-REPLAY",
-  "status": "ACCEPTED_LOCAL_PUBLICATION_PENDING",
+  "status": "ACCEPTED_PUBLISHED_CI_GREEN",
   "author_commit": "a60104801be78ec2b1c441ac45afec46508e9439",
   "root_fix_commit": "a90fada21bcb2938ce2ceabb0d37f38b13d1db12",
   "main_merge_head": "be9630817b84fcd92332b532a80a37f4f119af61",
@@ -505,9 +505,35 @@
   },
   "known_failures": "author pinned-base observations only; not rerun by this tool on current main",
   "remaining": [
-    "normal push and exact CI",
-    "receive W08-RF/Audit independently",
-    "configured paid-provider G2",
-    "real-company G4/G5 and independent reviews"
-  ]
+    "W08 RF/Audit reception",
+    "configured provider G2",
+    "real-company G4/G5 and reviews"
+  ],
+  "publication": {
+    "schema": "root-w08-cwp-publication/1",
+    "code_head": "d75e9698a3401854dfd4368bbe9b7c40f73c3263",
+    "remote_head": "d75e9698a3401854dfd4368bbe9b7c40f73c3263",
+    "normal_push_passed": 3648,
+    "normal_push_seconds": 197.96,
+    "ci": {
+      "id": 38304041971,
+      "name": "CI",
+      "head_sha": "d75e9698a3401854dfd4368bbe9b7c40f73c3263",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38304041971",
+      "updated_at": "2026-10-12T20:27:15Z"
+    },
+    "status": "PUBLISHED_CI_GREEN",
+    "provider_calls": 0,
+    "paid_usd": 0,
+    "artifact_bytes": 203690,
+    "own_duplicate_files_removed": 136,
+    "own_duplicate_bytes_removed": 187288,
+    "remaining": [
+      "W08 RF/Audit reception",
+      "configured provider G2",
+      "real-company G4/G5 and reviews"
+    ]
+  }
 }

@@ -25,3 +25,12 @@ workers只在A/B/C三大节点审查；测试与下载资料归独立测试根�
 ## 用户全部交付 — 2026-10-12
 
 三真实HEAD和只读输入/writes见company-wiki/.planning/w08-root-reception/intake.json；ROOT将按实际覆盖与必要反例验收，元数据自引用空值不新增门禁。
+
+## ROOT 当前验收位置
+
+CWP已完成ROOT补验修复、35测试及50.3324秒真实联调，正常并入本地主线，发布/精确CI收尾中。实测8→0复用，新版本与生成spec各1次；原request/receipt/bundle/context已归档203690字节。详company-wiki/.planning/w08-root-reception/cwp/README.md及acceptance.json。RF/Audit仍待ROOT接收；不要重派三张卡。RF优先补dated贡献及独立actual原生回测两个明确缺口，不把工具自报五组CLOSED当签收。
+
+
+## 当前发布结果
+
+CWP已验收发布：代码主线/远端d75e9698a3401854dfd4368bbe9b7c40f73c3263，正常push3648PASS197.96秒，精确CI38304041971 success。35工具测试/50.3324秒真实九文档联调，复用0POST，版本/spec各1POST、70输入SHA/mtime不变，预存哨兵及独立测试目录恢复。证据203690字节ZIP，136自有重复文件187288字节已逐字节验证归档后移除。W04原件/legacy/四事实节点和CWP工具工程接收完成；真实供应商摘要、RF/Audit两包、G4/G5真实研究与循环仍待做，完整母目标未完成；本轮0付费。
