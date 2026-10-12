@@ -1,0 +1,513 @@
+{
+  "schema": "root-w08-cwp-acceptance/1",
+  "lane_id": "W08-CWP-G2-REPLAY",
+  "status": "ACCEPTED_LOCAL_PUBLICATION_PENDING",
+  "author_commit": "a60104801be78ec2b1c441ac45afec46508e9439",
+  "root_fix_commit": "a90fada21bcb2938ce2ceabb0d37f38b13d1db12",
+  "main_merge_head": "be9630817b84fcd92332b532a80a37f4f119af61",
+  "tests": {
+    "red_failed": 9,
+    "red_passed": 26,
+    "final_passed": 35,
+    "final_pytest_seconds": 0.26
+  },
+  "actual_e2e_seconds": 50.3324,
+  "runs": [
+    {
+      "run_index": 1,
+      "model_posts": 8,
+      "status": "completed",
+      "exit_code": 0
+    },
+    {
+      "run_index": 2,
+      "model_posts": 0,
+      "status": "completed",
+      "exit_code": 0,
+      "reuse_pins_identical": true
+    },
+    {
+      "run_index": 3,
+      "model_posts": 1,
+      "status": "completed",
+      "exit_code": 0
+    },
+    {
+      "run_index": 4,
+      "model_posts": 1,
+      "status": "completed",
+      "exit_code": 0
+    }
+  ],
+  "case_outcomes": {
+    "annual-report": {
+      "status": "PASS",
+      "actual": {
+        "document_kind": "annual_report",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "posts": 1,
+      "observations": {
+        "locator_verified": true,
+        "required_fact_present": true,
+        "summary_supported": true,
+        "period_preserved": true
+      }
+    },
+    "half-year-report": {
+      "status": "PASS",
+      "actual": {
+        "document_kind": "semi_annual_report",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "posts": 1,
+      "observations": {
+        "locator_verified": true,
+        "required_fact_present": true,
+        "summary_supported": true,
+        "period_preserved": true
+      }
+    },
+    "quarterly-report": {
+      "status": "PASS",
+      "actual": {
+        "document_kind": "quarterly_report",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "posts": 1,
+      "observations": {
+        "locator_verified": true,
+        "required_fact_present": true,
+        "summary_supported": true,
+        "period_preserved": true
+      }
+    },
+    "prospectus": {
+      "status": "PASS",
+      "actual": {
+        "document_kind": "prospectus",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "posts": 1,
+      "observations": {
+        "locator_verified": true,
+        "required_fact_present": true,
+        "summary_supported": true,
+        "period_preserved": true
+      }
+    },
+    "placement": {
+      "status": "PASS",
+      "actual": {
+        "document_kind": "equity_offering_prospectus",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "posts": 1,
+      "observations": {
+        "locator_verified": true,
+        "required_fact_present": true,
+        "summary_supported": true,
+        "period_preserved": true
+      }
+    },
+    "convertible-bond": {
+      "status": "PASS",
+      "actual": {
+        "document_kind": "convertible_bond_prospectus",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review"
+      },
+      "posts": 1,
+      "observations": {
+        "locator_verified": true,
+        "required_fact_present": true,
+        "summary_supported": true,
+        "period_preserved": true
+      }
+    },
+    "ir-policy": {
+      "status": "PASS",
+      "actual": {
+        "document_kind": "investor_relations",
+        "language": "zh",
+        "mime_type": "application/pdf",
+        "summary_status": "skipped_no_narrative",
+        "selection_status": "skipped_no_narrative",
+        "quality_status": "skipped_no_narrative"
+      },
+      "posts": 0,
+      "observations": {
+        "locator_verified": false,
+        "required_fact_present": true,
+        "summary_supported": true,
+        "period_preserved": true
+      }
+    },
+    "call-txt-zh": {
+      "status": "PASS",
+      "actual": {
+        "document_kind": "investor_call_transcript",
+        "language": "zh",
+        "mime_type": "text/plain",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review",
+        "converted_to_pdf": false,
+        "source_sha256_changed": false
+      },
+      "posts": 1,
+      "observations": {
+        "locator_verified": true,
+        "required_fact_present": true,
+        "summary_supported": true,
+        "period_preserved": true
+      }
+    },
+    "call-txt-en": {
+      "status": "PASS",
+      "actual": {
+        "document_kind": "investor_call_transcript",
+        "language": "en",
+        "mime_type": "text/plain",
+        "summary_status": "completed",
+        "selection_status": "selected",
+        "quality_status": "needs_review",
+        "converted_to_pdf": false,
+        "source_sha256_changed": false
+      },
+      "posts": 1,
+      "observations": {
+        "locator_verified": true,
+        "required_fact_present": true,
+        "summary_supported": true,
+        "period_preserved": true
+      }
+    }
+  },
+  "invalidation": [
+    {
+      "kind": "source-version",
+      "status": "PASS",
+      "run_index": 3,
+      "model_posts": 1,
+      "exit_code": 0,
+      "source_sha256": "a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+      "pin_changed": true,
+      "original_unchanged": true,
+      "public_receipt": {
+        "as_of_date": "2026-10-12",
+        "locator_count": 3,
+        "manifest": {
+          "byte_size": 420,
+          "canonical_entity_id": "ent-w08-synthetic-manufacturing",
+          "collector_name": "w08_narrative_g2_replay",
+          "collector_version": "1.0.0",
+          "content_sha256": "a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+          "display_name": "W08 Synthetic Manufacturing Co.",
+          "document_id": "urn:company-wiki:document:sha256:a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+          "document_kind": "investor_call_transcript",
+          "fiscal_period": "Q1",
+          "fiscal_year": 2026,
+          "form_type": null,
+          "language": "en",
+          "market": "CN",
+          "mime_type": "text/plain",
+          "period_end": "2026-03-31",
+          "provider": "w08_synthetic_fixture",
+          "provider_document_id": "w08-call-en.txt",
+          "published_date": "2026-05-02",
+          "retrieved_at": "2026-08-01T00:00:00Z",
+          "security_id": "W08SYN",
+          "source_id": "urn:company-wiki:source:sha256:a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+          "source_url": "https://fixtures.invalid/w08-call-en.txt",
+          "title": "w08-call-en.txt"
+        },
+        "narrative_ref": {
+          "artifact_sha256": "c14fb26356258fa8ff972a1f3fb3985b71eb0b03d9933cd17a3591eb1f83e5f5",
+          "artifact_version_id": "narrative-30a12a4279b441ffb096bb5688d4f3b2",
+          "byte_size": 7089,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 420,
+            "content_sha256": "a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+            "document_id": "urn:company-wiki:document:sha256:a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+            "mime_type": "text/plain",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28"
+          }
+        },
+        "quality_status": "needs_review",
+        "read_at": "2026-10-12T20:20:08.516884+00:00",
+        "replay_status": "verified",
+        "schema_version": "narrative-read-receipt/1",
+        "selection_status": "selected",
+        "source_read_policy_sha256": "5e96713340b238b0f0f34527f0c0371ef2d21505069d603964bc88767a46e777",
+        "status": "ok"
+      },
+      "receipt_ref": "receipts/run3.json"
+    },
+    {
+      "kind": "model-spec",
+      "status": "PASS",
+      "run_index": 4,
+      "model_posts": 1,
+      "exit_code": 0,
+      "source_sha256": "a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+      "pin_changed": true,
+      "original_unchanged": true,
+      "public_receipt": {
+        "as_of_date": "2026-10-12",
+        "locator_count": 3,
+        "manifest": {
+          "byte_size": 420,
+          "canonical_entity_id": "ent-w08-synthetic-manufacturing",
+          "collector_name": "w08_narrative_g2_replay",
+          "collector_version": "1.0.0",
+          "content_sha256": "a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+          "display_name": "W08 Synthetic Manufacturing Co.",
+          "document_id": "urn:company-wiki:document:sha256:a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+          "document_kind": "investor_call_transcript",
+          "fiscal_period": "Q1",
+          "fiscal_year": 2026,
+          "form_type": null,
+          "language": "en",
+          "market": "CN",
+          "mime_type": "text/plain",
+          "period_end": "2026-03-31",
+          "provider": "w08_synthetic_fixture",
+          "provider_document_id": "w08-call-en.txt",
+          "published_date": "2026-05-02",
+          "retrieved_at": "2026-08-01T00:00:00Z",
+          "security_id": "W08SYN",
+          "source_id": "urn:company-wiki:source:sha256:a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+          "source_url": "https://fixtures.invalid/w08-call-en.txt",
+          "title": "w08-call-en.txt"
+        },
+        "narrative_ref": {
+          "artifact_sha256": "c14fb26356258fa8ff972a1f3fb3985b71eb0b03d9933cd17a3591eb1f83e5f5",
+          "artifact_version_id": "narrative-b8c19e65097a49ceb435f607323a5bb3",
+          "byte_size": 7089,
+          "schema_version": "narrative-ref/1",
+          "source_ref": {
+            "byte_size": 420,
+            "content_sha256": "a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+            "document_id": "urn:company-wiki:document:sha256:a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28",
+            "mime_type": "text/plain",
+            "schema_version": "2.0",
+            "source_id": "urn:company-wiki:source:sha256:a993467f607d09e2d2732785cffc3c1b10def8318b7acb7ff06db6a2d2c81d28"
+          }
+        },
+        "quality_status": "needs_review",
+        "read_at": "2026-10-12T20:20:14.386486+00:00",
+        "replay_status": "verified",
+        "schema_version": "narrative-read-receipt/1",
+        "selection_status": "selected",
+        "source_read_policy_sha256": "5e96713340b238b0f0f34527f0c0371ef2d21505069d603964bc88767a46e777",
+        "status": "ok"
+      },
+      "receipt_ref": "receipts/run4.json"
+    }
+  ],
+  "rf_verified_reads": 9,
+  "rf_evidence_reads": 8,
+  "code_binding": {
+    "base_head": "a90fada21bcb2938ce2ceabb0d37f38b13d1db12",
+    "branch": "codex/root-w04-selector-integration-20261011",
+    "modules": [
+      {
+        "path": "src/company_wiki/automation/narrative_batch_cli.py",
+        "sha256": "17b7d3c04242340aabb132e8fbd4ce1f51cb5a245c2d84b028a51e72f681d8a2",
+        "byte_size": 5425,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_batch.py",
+        "sha256": "a483d786d99a7bef8f4420ada7770260b147c8048a9c1dceb4813d2f7d880df9",
+        "byte_size": 91660,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_batch_request.py",
+        "sha256": "347e0bfc3e329f1e3d4d395863b6d13b03973aaf284c59ce3304089507879f41",
+        "byte_size": 14078,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_select.py",
+        "sha256": "436e2500362d5c9082bdf7748a53519b232b66a44f62bd81abb4353bb9979974",
+        "byte_size": 23546,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_summarize.py",
+        "sha256": "641f8d000f24c9c081be23be7f3e64acd347d2c5fd3934ab7e92554d5a8a0930",
+        "byte_size": 15319,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_verify.py",
+        "sha256": "dae39594f35a5f15c85c2b2398c596bd9b668df9cbc8d76b29fcc695ba579d08",
+        "byte_size": 19311,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_runtime.py",
+        "sha256": "3635775b4933b998a5b79a7047b326869815ff4e187c6af2531a2814acb64d9c",
+        "byte_size": 2806,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_formats.py",
+        "sha256": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+        "byte_size": 1882,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_transport_contracts.py",
+        "sha256": "6fca7f092e3f4441e9a92b2f6ddcefbb08fc0553fd70bf36409ea1b51ae456b5",
+        "byte_size": 15087,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_transport_cli.py",
+        "sha256": "8a2cbc088581496a8b48094cb53767f12b7a58448831f715c9cfb6397d41138e",
+        "byte_size": 8746,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+        "sha256": "a05d1a8270a27e8858188d65b1e27ec7c566d59be1a14f2dc1f0bc059c9df2c2",
+        "byte_size": 83011,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_normalization.py",
+        "sha256": "b29a4fe2069713800d171c30ecd09d7bcf3a35984ef2f872ed85d8d4986ccbfd",
+        "byte_size": 11492,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_business_groups.py",
+        "sha256": "dec939d3ba93c898c05322106a0b32d7bf644366596b657d3c552b7e108810d9",
+        "byte_size": 30967,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_group_candidates.py",
+        "sha256": "d308f060aef78301edc3baa64c0e842ad9fb3b096cda2afc1e030c70ec405115",
+        "byte_size": 38394,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_stage_assertions.py",
+        "sha256": "fbb75ccd07016bcc70993f24bb38a1e2919c4398ba9ec79656f54013c8c3ec24",
+        "byte_size": 8955,
+        "source": "worktree"
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_budget.py",
+        "sha256": "ae68412ea81b8439284ee65305da440ac84b5ddb69fe69a2070920489e7b8a1b",
+        "byte_size": 20340,
+        "source": "worktree"
+      },
+      {
+        "path": "tools/narrative_g2_replay/run.py",
+        "sha256": "5c323d7db5c45f571615247a20c8cf58a87a7ac9ad02889900b69e0fd6e8353c",
+        "byte_size": 48073,
+        "source": "worktree"
+      },
+      {
+        "path": "tools/narrative_g2_replay/specs.py",
+        "sha256": "608ca539d0ace46e0dc916927c8a54a38c75d1c6e9f1813bb5ee04544608348d",
+        "byte_size": 12558,
+        "source": "worktree"
+      },
+      {
+        "path": "tools/narrative_g2_replay/oracle.py",
+        "sha256": "1de546505bca8a4b8814ff40ec31d53157726a864e3a3ada4078c38dc0e7f47f",
+        "byte_size": 30314,
+        "source": "worktree"
+      },
+      {
+        "path": "tools/narrative_g2_replay/observations.py",
+        "sha256": "9ee93e6a0b1d3ec79c2f8814f1cd1630568e1eefef628658ff4f64ea4fce2f04",
+        "byte_size": 6234,
+        "source": "worktree"
+      }
+    ],
+    "python_binding": {
+      "company_wiki_file": "C:/Users/郑曾波/.codex/worktrees/w04-selector-integration/company-wiki/src/company_wiki/__init__.py",
+      "bound_root": "C:/Users/郑曾波/.codex/worktrees/w04-selector-integration/company-wiki/src"
+    },
+    "rf_snapshot_modules": [
+      {
+        "path": "scripts/company_wiki_narrative_reader.py",
+        "sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+        "byte_size": 3382,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/narrative_source_preparation.py",
+        "sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+        "byte_size": 2400,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_contracts.py",
+        "sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+        "byte_size": 41228,
+        "source": "worktree"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_process.py",
+        "sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+        "byte_size": 8500,
+        "source": "worktree"
+      }
+    ],
+    "rf_project_ref": "C:/Users/郑曾波/Projects/_harness_worktrees/w08/cwp-g2-replay/.planning/w08-cwp-g2-replay/input/runtime/rf"
+  },
+  "raw_bytes": 13846,
+  "derived_bytes": 1085863,
+  "sentinel_restored": true,
+  "scratch_restored_absent": true,
+  "production_rf_unchanged": true,
+  "provider_calls": 0,
+  "paid_usd": 0,
+  "llm_semantic_quality": "not_evaluated",
+  "artifact": {
+    "path": ".planning/w08-root-reception/cwp/root-evidence.zip",
+    "bytes": 203690,
+    "sha256": "0ea84872292014ebaa4e6bb91900488c422978b68e5d6c94d79049d8c9cfccb9"
+  },
+  "known_failures": "author pinned-base observations only; not rerun by this tool on current main",
+  "remaining": [
+    "normal push and exact CI",
+    "receive W08-RF/Audit independently",
+    "configured paid-provider G2",
+    "real-company G4/G5 and independent reviews"
+  ]
+}

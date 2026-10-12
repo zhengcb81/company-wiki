@@ -6,4 +6,33 @@
 
 三包原型已核独立code commit；作者工区未提交都是自己的PWF初始准备，保留。尚未ROOT验收或并主线，不能把COMPLETE字段当质量证明。
 
+## CWP ROOT 实际接收检查
+
+最新 ROOT selector 上原26工具单元测试全部通过（0.28s）。正常隔离集成分支接收作者 a6010480；作者树不修改。原样九文档 E2E 启动，记录唯一进程，不能用这一轮证明尚未实施的缓存失效。
+
+查出工具层遗漏：_case_model_posts 根据摘要状态推算每文档 POST，而非读取 loopback 请求 source_id；locator_replay_verified 仅以 locators 非空判断，未消费真实公开 replay receipt；required_span_text/forbidden_summary_text 有固定声明却未使用；RF period_preserved 是 as_of=None 的回显，未验证非空期间；版本/spec 改变后的真实失效未跑；剩余 deadline 强制最少1s会在超限后继续启动命令；报告没有保存其 receipt_ref 指向的原始 receipt。以上是联调工具的观测可靠性问题，不得把它们归为生产权限门禁，也不得据作者 PASS 冒签。ROOT 按一次 RED→集中 GREEN→同公开入口 E2E 补齐，不加逐材料批准或新任务库。
+
+基础主线 W04 已正常 merge c1d6ab92，21个明确验证文件正常记录提交72992376；自动审批先前拒绝的是整目录混入历史untracked，明确逐文件提交已通过。正常 push 的既有最后检查正在运行；本轮0付费调用。
+
 ROOT实际intake复核：三个INITIAL INPUTS.json逐字节均等于初始dispatch，CWP真实5088未变。handoff所写3200是报告字段不同，不代表输入被改；先前怀疑已被实际字节反证，应修准确metadata而不是追加审查许可。三个工区HEAD分别4d5c9f05835c46cc445288f2883c6bf215c39348、96889c6a6d0d85b9c0ff6f54e35c4ea73e648bb6、a60104801be78ec2b1c441ac45afec46508e9439；完整intake包含实际写集，未签收。
+
+
+## CWP 大节点验收 — 2026-10-12
+
+# W08-CWP-G2-REPLAY ROOT 验收
+
+已接收作者 a6010480，ROOT 修复 a90fada2，正常并入本地主线 be9630817b84fcd92332b532a80a37f4f119af61。
+35集中测试通过；9独立RED保留。最终真实离线联调 50.3324 秒通过。
+9类文档均真实登记/批次/公开读取，RF 9读成功，8份有证据，IR管理办法正确跳过。
+首次8实际POST，同版本复用0；新TXT版本与模型生成参数变化各1次，原版本字节不变。
+非空截止日2026-10-12/财年/期间保留，真实公开locator回放，业务原句和claim引用检查。
+预存哨兵恢复、测试根恢复absent；70个生产配置/固定RF代码输入SHA和mtime不变。
+原始request/receipt/bundle/context/本地模型prompt/draft＋失败过程压缩归档 203690 字节。
+
+本包仅验证合成原件、原生链路、证据绑定和复用。模型语义质量未评估、真实公司未验，0付费。
+不会加入每次commit或CI重型门禁。作者pinned-base失败记录保留，不能当作当前HEAD已复现失败。
+正常push/精确CI尚待收尾；RF/Audit两包仍待ROOT接收，完整母目标未完成。
+
+可复现入口见 tools/narrative_g2_replay/README.md；参数使用独立测试目录和固定RF快照。
+不要重跑本目录一次性prepare/implement/accept脚本，不要改作者INITIAL INPUTS或旧失败报告。
+

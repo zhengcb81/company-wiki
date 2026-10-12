@@ -1,7 +1,7 @@
 ## ROOT 当前入口 — 2026-10-11
 
 当前状态、已发布SHA与下一步统一见 [ROOT接收状态](phase6/w06_parallel_verification_2026-10-11/ROOT-reception-status.md)，优先于本文旧状态。
-2026-10-12 ROOT W04完整owner/质量/stage共因已正常分支4e58e347＋2d9f9d12并入本地主线c1d6ab92；473集中PASS13.22s，原脚本同六原件PASS115.4879s、6legacy full hashes一致、4complete source-bound事实齐全，原件/三生产配置不变、临时metadata恢复absent。旧18FAIL及所有RED保留，正常主线push/精确CI待收尾；工程绿不认证完整召回/摘要或研究。三个W08均DELIVERED_NOT_ROOT_ACCEPTED，实际初始INPUTS均保持；先基础发布，再RF→Audit→CWP工具接收与G2真实配置摘要/RF消费→G4原三家四独审→G5新三及循环。本轮0收费，母累计预算不变。用户续行已授权完整目标，工具goal字段仍paused，不另建或缩小目标。
+ROOT W04工程/六原件已绿且本地并线；W08-CWP工具35测试/最终真实50.3324秒绿，含版本/spec真失效及预存哨兵恢复，已本地并线，正常push/精确CI待做。W08 RF/Audit仍待独立接收；随后已验G2配置包、真实配置摘要/RF消费、G4原三/四独审→G5新三和循环。原件/配置/其他WIP保持，完整母目标未完成；本轮0付费。
 W07：[三包当前接收状态](phase6/w07_parallel_quality_2026-10-11/README.md)。仅A/B/C大节点；历史READY记录保留为历史。
 
 
@@ -1289,3 +1289,23 @@ W07-FF-PERF已完成ROOT接收：原41场景全PASS/99.9624s、零oracle finding
 ## ROOT W04当前收尾 — 2026-10-12
 
 2026-10-12 ROOT W04完整owner/质量/stage共因已正常分支4e58e347＋2d9f9d12并入本地主线c1d6ab92；473集中PASS13.22s，原脚本同六原件PASS115.4879s、6legacy full hashes一致、4complete source-bound事实齐全，原件/三生产配置不变、临时metadata恢复absent。旧18FAIL及所有RED保留，正常主线push/精确CI待收尾；工程绿不认证完整召回/摘要或研究。三个W08均DELIVERED_NOT_ROOT_ACCEPTED，实际初始INPUTS均保持；先基础发布，再RF→Audit→CWP工具接收与G2真实配置摘要/RF消费→G4原三家四独审→G5新三及循环。本轮0收费，母累计预算不变。用户续行已授权完整目标，工具goal字段仍paused，不另建或缩小目标。
+
+## W08-CWP ROOT接收
+
+# W08-CWP-G2-REPLAY ROOT 验收
+
+已接收作者 a6010480，ROOT 修复 a90fada2，正常并入本地主线 be9630817b84fcd92332b532a80a37f4f119af61。
+35集中测试通过；9独立RED保留。最终真实离线联调 50.3324 秒通过。
+9类文档均真实登记/批次/公开读取，RF 9读成功，8份有证据，IR管理办法正确跳过。
+首次8实际POST，同版本复用0；新TXT版本与模型生成参数变化各1次，原版本字节不变。
+非空截止日2026-10-12/财年/期间保留，真实公开locator回放，业务原句和claim引用检查。
+预存哨兵恢复、测试根恢复absent；70个生产配置/固定RF代码输入SHA和mtime不变。
+原始request/receipt/bundle/context/本地模型prompt/draft＋失败过程压缩归档 203690 字节。
+
+本包仅验证合成原件、原生链路、证据绑定和复用。模型语义质量未评估、真实公司未验，0付费。
+不会加入每次commit或CI重型门禁。作者pinned-base失败记录保留，不能当作当前HEAD已复现失败。
+正常push/精确CI尚待收尾；RF/Audit两包仍待ROOT接收，完整母目标未完成。
+
+可复现入口见 tools/narrative_g2_replay/README.md；参数使用独立测试目录和固定RF快照。
+不要重跑本目录一次性prepare/implement/accept脚本，不要改作者INITIAL INPUTS或旧失败报告。
+
