@@ -174,7 +174,9 @@ def build_structure(
         for unit_id in draft.member_ids:
             member_of.setdefault(unit_id, draft.semantic_id)
 
-    semantic_units = _stabilise_semantic_ids(semantic_units)
+    semantic_units = _stabilise_semantic_ids(
+        semantic_units, {unit.unit_id: unit.ordinal for unit in units}
+    )
 
     builder = RelationBuilder(
         {unit.unit_id for unit in units}, max_relations=resolved["max_relations"]
@@ -257,16 +259,29 @@ def _resolve_project_overlap(projects, diagnostics: list[dict]):
     return kept
 
 
-def _stabilise_semantic_ids(semantic_units: list[dict]) -> list[dict]:
-    """Renumber ids deterministically and sort by first member ordinal."""
-    ordered = sorted(
-        semantic_units,
-        key=lambda unit: (
-            unit["member_unit_ids"][0] if unit["member_unit_ids"] else "",
-            unit["kind"],
-            unit["semantic_id"],
-        ),
-    )
+def _stabilise_semantic_ids(
+    semantic_units: list[dict], ordinal_of: Mapping[str, int] | None = None
+) -> list[dict]:
+    """Renumber ids deterministically, ordered by document position.
+
+    The ordering key is the input ordinal of the package's first member.  It
+    must not be the ``unit_id`` string: unit ids are content hashes, so sorting
+    on them orders packages by hash value, which is indistinguishable from
+    random.  That ordering is what a consumer sees when it reads packages in
+    order, so a hash order would make "read the important chapters first"
+    silently mean "read them in hash order".
+    """
+    ordinal_of = ordinal_of or {}
+
+    def position(unit: dict) -> tuple[int, str, str]:
+        members = unit.get("member_unit_ids") or []
+        first = min(
+            (ordinal_of.get(member, 1 << 30) for member in members),
+            default=1 << 30,
+        )
+        return (first, unit["kind"], unit["semantic_id"])
+
+    ordered = sorted(semantic_units, key=position)
     for index, unit in enumerate(ordered, start=1):
         unit["semantic_id"] = f"m{index}"
         for key in ("member_unit_ids", "anchor_unit_ids", "required_context_unit_ids"):

@@ -370,11 +370,17 @@ def test_packages_never_exceed_the_member_bound() -> None:
 
 
 def test_route_priorities_reorder_but_never_drop_a_package() -> None:
+    """Within one kind, the profile's chapter priority decides the order.
+
+    Both packages are ``paragraph_event`` so the kind band is equal and role
+    priority is the deciding key.  Dependency-bearing kinds outrank prose
+    regardless of chapter, which is asserted separately below.
+    """
     structure = _structure_with(
         [
             {
                 "semantic_id": "m1",
-                "kind": "background",
+                "kind": "paragraph_event",
                 "section_ids": ["s1"],
                 "member_unit_ids": ["u1"],
                 "anchor_unit_ids": ["u1"],
@@ -384,7 +390,7 @@ def test_route_priorities_reorder_but_never_drop_a_package() -> None:
             },
             {
                 "semantic_id": "m2",
-                "kind": "project",
+                "kind": "paragraph_event",
                 "section_ids": ["s2"],
                 "member_unit_ids": ["u2"],
                 "anchor_unit_ids": ["u2"],
@@ -410,6 +416,113 @@ def test_route_priorities_reorder_but_never_drop_a_package() -> None:
     )
     assert len(plain["packages"]) == len(routed["packages"]) == 2
     assert routed["packages"][0]["section_role"] == "administrative"
+
+
+def test_dependency_bearing_kind_outranks_prose_within_a_chapter_priority() -> None:
+    """Chapter priority decides the band; the kind decides the order inside it.
+
+    On a real offering memorandum every project package carried
+    ``section_role='unknown'`` because sub-sections did not inherit their
+    parent's role, so a role-first order buried all of them behind more than a
+    thousand prose packages and the construction schedule was never read.  With
+    inheritance fixed the projects share their chapter's band, and inside that
+    band a project must still beat prose.
+    """
+    structure = _structure_with(
+        [
+            {
+                "semantic_id": "m1",
+                "kind": "background",
+                "section_ids": ["s1"],
+                "member_unit_ids": ["u1"],
+                "anchor_unit_ids": ["u1"],
+                "required_context_unit_ids": [],
+                "completeness": "complete",
+                "diagnostics": [],
+            },
+            {
+                "semantic_id": "m2",
+                "kind": "project",
+                "section_ids": ["s2"],
+                "member_unit_ids": ["u2"],
+                "anchor_unit_ids": ["u2"],
+                "required_context_unit_ids": [],
+                "completeness": "complete",
+                "diagnostics": [],
+            },
+        ],
+        sections=[
+            {"section_id": "s1", "section_role": "fundraising"},
+            {"section_id": "s2", "section_role": "fundraising"},
+        ],
+    )
+    result = build_dependency_packages(structure)
+    assert [package["kind"] for package in result["packages"]] == ["project", "background"]
+    assert len(result["packages"]) == 2
+
+
+def test_member_ranking_uses_document_order_not_the_id_hash() -> None:
+    """Unit ids are content hashes; ordering on them would be ordering on noise."""
+    structure = _structure_with(
+        [
+            {
+                "semantic_id": "m1",
+                "kind": "paragraph_event",
+                "section_ids": [],
+                # Sorts LAST as a string but sits FIRST in the document.
+                "member_unit_ids": ["zzz-late-hash", "aaa-early-hash"],
+                "anchor_unit_ids": ["aaa-early-hash"],
+                "required_context_unit_ids": [],
+                "completeness": "complete",
+                "diagnostics": [],
+            },
+            {
+                "semantic_id": "m2",
+                "kind": "paragraph_event",
+                "section_ids": [],
+                "member_unit_ids": ["mmm-mid-hash"],
+                "anchor_unit_ids": ["mmm-mid-hash"],
+                "required_context_unit_ids": [],
+                "completeness": "complete",
+                "diagnostics": [],
+            },
+        ]
+    )
+    result = build_dependency_packages(
+        structure,
+        unit_order={"aaa-early-hash": 0, "zzz-late-hash": 1, "mmm-mid-hash": 50},
+    )
+    assert [package["package_id"] for package in result["packages"]] == ["m1", "m2"]
+    assert result["packages"][0]["first_ordinal"] == 0
+
+
+def test_package_limit_is_reported_when_it_cuts_the_tail() -> None:
+    """A cap silently dropping late pages is the failure this layer removes."""
+    structure = _structure_with(
+        [
+            {
+                "semantic_id": f"m{index}",
+                "kind": "paragraph_event",
+                "section_ids": [],
+                "member_unit_ids": [f"u{index}"],
+                "anchor_unit_ids": [f"u{index}"],
+                "required_context_unit_ids": [],
+                "completeness": "complete",
+                "diagnostics": [],
+            }
+            for index in range(10)
+        ]
+    )
+    bounded = build_dependency_packages(structure, max_packages=4)
+    assert bounded["package_count"] == 4
+    assert any(
+        item["code"] == "PACKAGE_LIMIT_REACHED" for item in bounded["diagnostics"]
+    )
+    unbounded = build_dependency_packages(structure)
+    assert unbounded["package_count"] == 10
+    assert not any(
+        item["code"] == "PACKAGE_LIMIT_REACHED" for item in unbounded["diagnostics"]
+    )
 
 
 def test_packages_without_a_route_still_produce_output() -> None:

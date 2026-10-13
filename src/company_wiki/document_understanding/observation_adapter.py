@@ -36,8 +36,39 @@ from typing import Any
 
 INPUT_SCHEMA_VERSION = "du-input/1"
 
-# The parser writes this role for units lifted out of a Q&A page.
+# --- Q&A page: the two role sets the parser emits (ROOT decision, DU-S-ADAPT-5) --------
+#
+# A Q&A page is emitted TWICE by the production parser:
+#
+# * once as flat ``pdf_text_block`` fragments whose ``source_role`` is ``qa_text_shadow``
+#   (the page's plain text layer, fragmented by sentence), and
+# * once as structured units built from the detected Q&A structure, whose roles are
+#   ``investor_question`` / ``management`` and which carry ``qa_state``/``qa_group_id``
+#   metadata giving the speaker and the turn.
+#
+# Measured on the real 万润 IR original (302 units): 219 shadow, 18 investor_question,
+# 55 management, 8 company_filing. Of the 74 packages the new layer produced from it,
+# 53 were built *entirely* from shadow units and only 14 entirely from structured roles,
+# while only 10 of 192 shadow strings were byte-identical to a structured string. The two
+# copies are therefore mostly the SAME content fragmented differently, not two documents.
+#
+# ROOT decision, matching what production selection already does
+# (``narrative_candidates._EXCLUDED_ROLES`` contains ``qa_text_shadow``):
+#
+# * BOTH copies stay in the observation. The structure lane needs them to pair a question
+#   with its answer across pages, and deleting either side would make coverage look better
+#   than it is. The lane is forbidden from dropping either copy.
+# * The shadow copy is NOT selectable evidence. It is the text layer, so selecting from it
+#   double-counts the same sentence and loses the speaker attribution that the structured
+#   roles carry. It is marked on the wire so selection can exclude it without having to
+#   know the parser's internal role name.
 QA_SHADOW_ROLE = "qa_text_shadow"
+
+#: Structured Q&A roles: these are the selectable ones.
+QA_STRUCTURED_ROLES: frozenset[str] = frozenset({"investor_question", "management"})
+
+#: ``hints`` key marking a unit as the non-selectable text-layer copy of a Q&A page.
+QA_SHADOW_HINT = "qa_text_shadow"
 
 _NUMBERED_HEADING = (
     # (regex, level)
@@ -267,6 +298,10 @@ def build_observation(
             )
         if unit.unit_kind == "html_heading" and isinstance(metadata.get("dom_path"), str):
             hints["dom_path"] = metadata["dom_path"]
+        # Mark the non-selectable text-layer copy explicitly, so a consumer does not have to
+        # know the parser's internal role name to avoid double-counting a Q&A page.
+        if unit.source_role == QA_SHADOW_ROLE:
+            hints[QA_SHADOW_HINT] = True
 
         kind = _wire_kind(unit, coordinates)
         emitted.append(
@@ -335,4 +370,38 @@ def _wire_kind(unit: Any, coordinates: Any) -> str:
     return "paragraph"
 
 
-__all__ = ["INPUT_SCHEMA_VERSION", "QA_SHADOW_ROLE", "build_observation"]
+def is_selectable(unit: Mapping[str, Any]) -> bool:
+    """True when a ``du-input/1`` unit may be selected as evidence.
+
+    The only exclusion today is the Q&A text-layer shadow: it duplicates the structured
+    Q&A units, so selecting from it double-counts a sentence and loses the speaker
+    attribution. Excluding it from *selection* is not deletion -- the unit stays in the
+    observation and in the structure lane's member lists, so a package's dependency closure
+    can still reach it.
+    """
+    if unit.get("role") == QA_SHADOW_ROLE:
+        return False
+    hints = unit.get("hints")
+    if isinstance(hints, Mapping) and hints.get(QA_SHADOW_HINT) is True:
+        return False
+    return True
+
+
+def selectable_unit_ids(observation: Mapping[str, Any]) -> list[str]:
+    """The selectable unit ids of an observation, in reading order."""
+    return [
+        str(unit["unit_id"])
+        for unit in observation.get("units", ())
+        if is_selectable(unit)
+    ]
+
+
+__all__ = [
+    "INPUT_SCHEMA_VERSION",
+    "QA_SHADOW_HINT",
+    "QA_SHADOW_ROLE",
+    "QA_STRUCTURED_ROLES",
+    "build_observation",
+    "is_selectable",
+    "selectable_unit_ids",
+]

@@ -266,11 +266,36 @@ def build_sections(
                 }
             )
 
+    _inherit_parent_role(sections)
+
     return SectionBuild(
         sections=tuple(sections),
         diagnostics=tuple(diagnostics),
         unit_section=unit_section,
     )
+
+
+def _inherit_parent_role(sections: Sequence[SectionDraft]) -> None:
+    """Give an unresolved sub-section its parent's role.
+
+    A sub-heading such as ``（一）项目投资计划`` names no chapter topic on its
+    own; what it is about is decided by the chapter it sits in.  Without
+    inheritance every sub-section of a fundraising chapter stayed ``unknown``,
+    which then ranked behind every known role and buried the project tables
+    that chapter exists to carry.  A role that was positively recognised is
+    never overwritten, and the inheritance is recorded in the section's basis
+    so a consumer can tell an inherited role from a matched one.
+    """
+    by_id = {section.section_id: section for section in sections}
+    for section in sections:
+        if section.section_role != "unknown" or section.parent_id is None:
+            continue
+        parent = by_id.get(section.parent_id)
+        if parent is None or parent.section_role == "unknown":
+            continue
+        section.section_role = parent.section_role
+        if "role_inherited" not in section.basis:
+            section.basis.append("role_inherited")
 
 
 def _layout_inconsistency(

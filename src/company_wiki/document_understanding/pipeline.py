@@ -100,6 +100,9 @@ def understand_units(
         route=route,
         profile=profile,
         max_packages=max_packages,
+        unit_order={
+            unit["unit_id"]: unit["ordinal"] for unit in observation["units"]
+        },
     )
 
     return {

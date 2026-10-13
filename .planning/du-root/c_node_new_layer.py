@@ -107,11 +107,12 @@ def _select_by_structure(observation, structure, packages, profile, *, budget: i
     }
 
     def rank(package):
-        # Chapter priority first (the profile says which chapters matter), then
-        # dependency-bearing kinds, then completeness, then document order.
+        # Dependency-bearing kinds first: a project or operating table is
+        # readable evidence whether or not its chapter role resolved. Chapter
+        # priority then orders within a kind, and document order breaks ties.
         return (
-            role_rank.get(package["section_role"], len(role_rank)),
             kind_band.get(package["kind"], 3),
+            role_rank.get(package["section_role"], len(role_rank)),
             0 if package["completeness"] == "complete" else 1,
             package["package_id"],
         )
@@ -169,7 +170,12 @@ def build_observed(path: Path, sample_id: str, *, gold: dict | None = None) -> d
     route = route_document(observation)
     profile = get_profile(route["profile_id"])
     structure = build_structure(observation)
-    packages = build_dependency_packages(structure, route=route, profile=profile)
+    packages = build_dependency_packages(
+        structure,
+        route=route,
+        profile=profile,
+        unit_order={unit["unit_id"]: unit["ordinal"] for unit in observation["units"]},
+    )
 
     budget = _budget_for(route["family"])
     selected_ids, taken = _select_by_structure(

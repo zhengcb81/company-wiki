@@ -52,6 +52,7 @@ def build_dependency_packages(
     profile: Mapping[str, Any] | None = None,
     max_packages: int | None = None,
     max_members: int = 64,
+    unit_order: Mapping[str, int] | None = None,
 ) -> dict[str, Any]:
     """Turn a ``du-structure/1`` result into budgetable atomic packages.
 
@@ -104,6 +105,10 @@ def build_dependency_packages(
                     keep.append(unit_id)
             members = keep
 
+        order = unit_order or {}
+        first_ordinal = min(
+            (order.get(unit_id, 1 << 30) for unit_id in members), default=1 << 30
+        )
         packages.append(
             {
                 "package_id": semantic["semantic_id"],
@@ -115,6 +120,7 @@ def build_dependency_packages(
                 "required_context_unit_ids": required,
                 "completeness": semantic.get("completeness", "unknown"),
                 "priority": role_priority.get(role, role_priority["unknown"]),
+                "first_ordinal": first_ordinal,
                 "diagnostics": [item.get("code") for item in semantic.get("diagnostics", ())],
                 "truncated": truncated,
             }
@@ -122,9 +128,16 @@ def build_dependency_packages(
 
     packages.sort(
         key=lambda package: (
+            # Section priority comes FIRST. The profile's whole purpose is to say which
+            # chapters matter for this document type, so a dependency-bearing unit in a
+            # low-priority chapter must not jump ahead of the chapter the profile nominated as
+            # read-first. Ranking kind ahead of priority would make reading order ignore the
+            # document type, which is the fixed-order failure this layer exists to remove.
             -int(package["priority"]),
+            # Within one priority band, structured dependency-bearing units beat free prose.
             _KIND_BAND.get(package["kind"], _KIND_BAND["background"]),
             0 if package["completeness"] == "complete" else 1,
+            package["first_ordinal"],
             package["package_id"],
         )
     )
