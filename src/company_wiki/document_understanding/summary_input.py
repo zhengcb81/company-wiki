@@ -31,6 +31,7 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from .observation_adapter import is_selectable
+from .selection_bridge import dependency_closure
 
 SCHEMA_VERSION = "du-summary-input/1"
 
@@ -58,6 +59,7 @@ _SHARED_CONSTRAINTS: tuple[str, ...] = (
 def build_summary_input(
     pipeline_result: Mapping[str, Any],
     *,
+    selected_unit_ids: Sequence[str] | None = None,
     max_packages: int = DEFAULT_MAX_PACKAGES,
     max_chars: int = DEFAULT_MAX_CHARS,
 ) -> dict[str, Any]:
@@ -65,6 +67,17 @@ def build_summary_input(
 
     ``pipeline_result`` is the output of
     :func:`company_wiki.document_understanding.understand_units`.
+
+    ``selected_unit_ids`` is what the *selector* chose, when the caller has it.
+    Supplying it applies the dependency closure before anything is sent: the
+    required context of every selected unit (a unit caption, a period header, a
+    table header) is restored, and a negation is kept with the package it
+    belongs to.  Without it the request is built from the ranked packages alone,
+    and that fact is reported as ``closure.applied = False`` rather than being
+    left for a reader to assume.
+
+    This matters because a number separated from its unit caption is not a
+    cheaper version of the evidence, it is a different and usually false claim.
     """
     observation = pipeline_result.get("observation") or {}
     route = pipeline_result.get("route") or {}
@@ -77,12 +90,19 @@ def build_summary_input(
         for unit in observation.get("units", ())
         if unit.get("unit_id") is not None
     }
+    texts = {
+        unit_id: str(unit.get("text") or "") for unit_id, unit in units_by_id.items()
+    }
+
+    closure = _apply_closure(packages, texts, selected_unit_ids)
+    units_for_summary = packages.get("packages", ())
 
     selected, dropped, used_chars, withheld = _materialise(
-        packages.get("packages", ()),
+        units_for_summary,
         units_by_id,
         max_packages=max_packages,
         max_chars=max_chars,
+        allowed_unit_ids=closure["allowed_unit_ids"],
     )
 
     return {
@@ -113,9 +133,53 @@ def build_summary_input(
             "chars_used": used_chars,
         },
         "excluded": {"not_selectable": withheld},
+        "closure": {
+            "applied": closure["applied"],
+            "reason": closure["reason"],
+            "added_unit_ids": closure["added_unit_ids"],
+            "added_count": len(closure["added_unit_ids"]),
+            "diagnostics": closure["diagnostics"],
+        },
         "deferred": dropped,
         "unread": _unread(structure, observation),
         "diagnostics": list(pipeline_result.get("diagnostics", ())),
+    }
+
+
+def _apply_closure(
+    packages: Mapping[str, Any],
+    texts: Mapping[str, str],
+    selected_unit_ids: Sequence[str] | None,
+) -> dict[str, Any]:
+    """Closure over the caller's selection, or an explicit "not applied".
+
+    Returns the set of unit ids the request may carry (``None`` meaning no
+    restriction) plus the closure's own record, so its diagnostics reach the
+    request instead of dying in a helper.
+    """
+    if selected_unit_ids is None:
+        return {
+            "applied": False,
+            "allowed_unit_ids": None,
+            "added_unit_ids": [],
+            "diagnostics": [],
+            "reason": "no selector selection was supplied",
+        }
+    closure = dependency_closure(selected_unit_ids, packages, texts)
+    allowed = set(closure["selected_unit_ids"])
+    # Units the closure neither selected nor added are still eligible when they
+    # belong to a package the closure touched: dropping them would silently
+    # shrink the evidence below what the packages already justify.
+    for package in packages.get("packages", ()):
+        members = {str(unit_id) for unit_id in package.get("member_unit_ids", ())}
+        if members & allowed:
+            allowed |= members
+    return {
+        "applied": True,
+        "allowed_unit_ids": allowed,
+        "added_unit_ids": list(closure["added_unit_ids"]),
+        "diagnostics": list(closure["diagnostics"]),
+        "reason": None,
     }
 
 
@@ -125,6 +189,7 @@ def _materialise(
     *,
     max_packages: int,
     max_chars: int,
+    allowed_unit_ids: set[str] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int, int]:
     """Copy the highest-priority packages, with text and provenance, inside the budget.
 
@@ -137,6 +202,9 @@ def _materialise(
     sentence and invite the model to report one fact as two.  Withholding is counted and
     returned, and a package left with nothing selectable is *deferred* rather than
     emitted empty, because an empty package is indistinguishable from "no content here".
+
+    ``allowed_unit_ids`` restricts the request to what the dependency closure endorsed.
+    It is ``None`` when no closure was applied, which is different from an empty set.
     """
     selected: list[dict[str, Any]] = []
     dropped: list[dict[str, Any]] = []
@@ -156,6 +224,8 @@ def _materialise(
             unit = units_by_id.get(str(unit_id))
             if unit is None:
                 # Never invent evidence: a unit the observation does not contain is skipped.
+                continue
+            if allowed_unit_ids is not None and str(unit_id) not in allowed_unit_ids:
                 continue
             if not is_selectable(unit):
                 package_withheld += 1
@@ -210,13 +280,22 @@ def _materialise(
 def _unread(
     structure: Mapping[str, Any], observation: Mapping[str, Any]
 ) -> dict[str, Any]:
-    """Report what this request does not cover, so a gap cannot read as completeness."""
+    """Report what this request does not cover, so a gap cannot read as completeness.
+
+    Two distinct kinds of "not read" are reported separately, because they mean different
+    things to a reader: pages that could not be read at all (opaque) versus pages/units the
+    caller deliberately deferred. Furniture the structure lane excluded (TOC entries,
+    repeated running headers) is *not* listed here: it was classified, not missed.
+    """
     coverage = dict(structure.get("coverage") or {})
     observation_coverage = observation.get("coverage") or {}
     return {
         "native_scan": coverage.get("native_scan") or observation_coverage.get("native_scan"),
         "opaque_pages": list(
             coverage.get("opaque_pages") or observation_coverage.get("opaque_pages") or ()
+        ),
+        "deferred_pages": list(
+            coverage.get("deferred_pages") or observation_coverage.get("deferred_pages") or ()
         ),
         "deferred_unit_ids": list(coverage.get("deferred_unit_ids", ())),
         "unassigned_unit_ids": list(coverage.get("unassigned_unit_ids", ())),

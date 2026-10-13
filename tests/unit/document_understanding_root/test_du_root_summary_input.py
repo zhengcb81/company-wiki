@@ -194,10 +194,36 @@ def test_unread_reports_scan_gaps():
         language="zh",
         native_scan="partial",
         opaque_pages=[7, 8],
+        deferred_pages=[9],
     )
     request = build_summary_input(result)
     assert request["unread"]["native_scan"] == "partial"
     assert request["unread"]["opaque_pages"] == [7, 8]
+    # Opaque and deferred are different facts about a page and must not be merged.
+    assert request["unread"]["deferred_pages"] == [9]
+
+
+def test_unread_keys_match_what_structure_actually_emits():
+    """A key this module reads but structure never emits would silently report an empty gap."""
+    result = understand_units(
+        _annual_units(),
+        source_id="s",
+        source_sha256="d",
+        title="某公司：2025年年度报告",
+        declared_kind="annual_report",
+        language="zh",
+    )
+    coverage = result["structure"]["coverage"]
+    request = build_summary_input(result)
+    assert set(request["unread"]) - {"structure_complete"} <= set(coverage) | {
+        "native_scan",
+        "opaque_pages",
+        "deferred_pages",
+        "deferred_unit_ids",
+        "unassigned_unit_ids",
+    }
+    for key in ("native_scan", "opaque_pages", "deferred_unit_ids", "unassigned_unit_ids"):
+        assert key in coverage, f"structure no longer emits {key!r}; summary_input reads it"
 
 
 def test_constraints_forbid_translation_and_investment_conclusions():
