@@ -1,3 +1,9 @@
+## 2026-10-13 旧三 DU 包 ROOT 接收
+
+最新 profile e74b9dcb / structure f8f456a3 / benchmark b891cf74 / ROOT 4b6a8599 全部整合；接收修复分别 7fa6dee2 / ead4aab6，ROOT e9af9ae9 / 1c5784cb / observer 8a5721db。一次联合491 PASS / 四原件11 PASS，追加 seam5 PASS，独立最终审查通过。来源/配置/测试恢复通过，0模型0费用。
+修复真正的策略消费、最终预算断链和自证式评测；gold 全保留。微软真实 baseline 4/8 关键业务漏读如实 FAIL，生产与母计划未完成。
+新 DU2 三卡用户已分发，独占目录零写。当前发布与精确 CI 记录见 [reception](reception/task_plan.md)，后续统一集成由 ROOT 承担。
+
 # 进度
 
 ## 2026-10-13 深化复审

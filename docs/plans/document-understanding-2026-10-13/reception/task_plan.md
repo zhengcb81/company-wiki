@@ -1,33 +1,39 @@
-# 旧DU三包接收与共用根因整合
+# 旧 DU 三包接收与共用根因整合
 
 PLAN_ID: reception
-PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans/document-understanding-2026-10-13
 Owner: ROOT
+状态：A/B 工程接收完成；C 正常并主线、推送与精确 CI 收尾中。
 
 ## 目标与边界
 
-接收DU-PROFILES/STRUCTURE/BENCH及已有ROOT整合成果，按review/root_implementation修复接收阻断，集中测试后并主线、推远端、更新PWF。新DU2-FAMILIES/FACETS/LAYOUT正在施工，独占目录和三个工作树不写。原件/生产配置/邻仓WIP保持；真实模型与完整公司G2/G4/G5仍归母计划。
+接收 DU-PROFILES / STRUCTURE / BENCH 和原 ROOT 整合，修复共用根因，集中测试后发布。
+新 DU2-FAMILIES / FACETS / LAYOUT 已由用户分发、正在排他目录施工，本轮不改它们。
+原件、生产配置和邻仓 WIP 保留；模块接收不代表生产摘要切换或真实研究验收完成。
 
 ## 阶段
 
-1. [complete] 最新交付/祖先/范围核对；ROOT接收树以主线5a297244合入旧整合及BENCH最终b891cf74，接收基线f734ef926，最新review及三仓架构改造保留。
-2. [in_progress] TDD集中修复：benchmark与profile互斥修复中；ROOT八RED及独审追加四RED已修，39相关PASS，独立七反例复核PASS。收到两叶后集中整合。
-3. [pending] 一次集中B测试及代表原件回放，独立审查核心修复；正常提交/合主线/推送，整理重复派生证据与更新总PWF。
+1. [complete] 核最新提交、祖先、范围；主线 review/架构改造保留，旧三包及 ROOT 最新分支已整合。
+2. [complete] TDD 修 profile / 子正文绑定、上下文不动点、最终预算裁剪、真实证据评测。独审追加反例修复完成。
+3. [complete] 集中 B：491 PASS / 18 real_data deselected，13.76 秒；四份真实原件 11 PASS / 0 FAIL，14.72 秒。追加最终切片→独立 oracle 接口 5 PASS；benchmark 147 PASS / 7 real_data deselected。两轮独立核心审查无剩余阻断。
+4. [in_progress] 正常合主线、推远端、精确 CI 留证；更新母计划，回收 ROOT 自有临时接收工作树。
 
-## Next Step
+## 统一验收记录
 
-接收两个互斥修复叶，合入ROOT核心修复；单次全DU集中测试＋代表原件回放，再正常并主线/推送。生产AUTO摘要接线与DU2布局/业务扩展、真实G2/G4/G5仍需后续大节点，不能把模块接收写成全项目完成。
+[接收汇总](acceptance.md)、[机器结果](evidence/acceptance.json)、[紧凑测试留证](evidence/test-receipts.zip)。
+真实回放使用本机绑定，4 原件及 6 配置 SHA/mtime 不变，预存哨兵不变，自有 tmp 删除；0 模型 / 0 新费用。
+旧 benchmark/root 的自证式命中率不再作为当前质量结论。微软独立真实 baseline 关键业务仅 4/8，4 条漏读仍是 FAIL；没有删 gold、降重要性或加付费/切片预算以换绿。
 
-## 初查
+## 后续顺序（不等待小节点签收）
 
-- 三作者树status均空；benchmark又有3e526033后的两个提交，handoff列ad77758d已过时，验收以最新实现与实际测试为准。
-- ROOT整合树未包含最新benchmark b891cf74；它已包含profiles和structure；生产尚未启用。
-- 原整合包含两个较大native summary和阶段重复记录；合入后集中整理，不删除原始公司资料。
+1. DU2 三包交付后 ROOT 一次接收并应用策略数据与布局辅助；R08 布局/来源行坐标、R09 业务价值预算继续开放。
+2. 生产摘要仅通过 `build_summary_input` 接既有选择器/AUTO Store/配置模型与预算；旧 `package_units_for_prompt` 不作为模型入口。模型调用消费子策略 focus、来源日期、角色和 deferred，不能只测试组装函数。
+3. 同一大节点做真实 source→读策略→选择→配置供应商摘要→locator 回开与独立业务 gold，保留无模型 producer-only 与模型质量的区别。新 Observer 未测整份 CID 乱码，不替代 native observer 该检查；TXT 行范围未提供时保持 unknown。
+4. 回到母计划真实 G2/G4 原三家公司/G5 新三家公司及审计循环。以已有预算和请求执行，不新增授权 JSON、canary、人工作业签收。
 
 ## 错误与修复
 
-- 接收merge只有README/task_plan/progress三文档冲突，保留主线review导航；作者记录仍完整在各自handoff。
-- diff --check发现旧STRUCTURE .gitignore EOF空行，接收树修正后正常merge commit。
-- 首批八RED全部复现；第一次相关回归暴露metadata参数被循环局部变量遮蔽和纯shadow包状态归因，修正后162PASS/11缺绑定SKIP。
-- 独立审查发现预算在materialize阶段再次切断跨包依赖/否定；追加四RED后用共享依赖定义对实发全集反查，39PASS，非必要缺失partial。独审七正反例PASS。
-- 外部工作树默认沙箱Git/ruff cache写入拒绝；必要操作用已授权require_escalated，ruff只读检查用--no-cache，未改Git注册或权限配置。
+- 首批 8 RED 复现别名/子正文失效、闭包顺序和限制、上下文缺失/误去重、元数据透传等问题；已有 8 反例保留。
+- 独审再发现最终 package/char/context 预算截断后断链，先追加 4 RED，再按真实实发全集做不动点反查；独立 7 正反例 PASS。
+- 初次 metadata 循环变量遮蔽、全 shadow 状态归因已修。公开 normalizer 回放测试曾遗漏 required limits，并误改 administrative 断言；最终行政 False / unknown None 两者均保留正确语义。
+- 本机 bindings 缺少产生的 skip 不当通过；集中真实节点已显式绑定并运行 11 项。
+- 外部 worktree Git/ruff cache 的沙箱写入限制用授权的 require_escalated 和 ruff --no-cache 处理，未更改仓库权限或 Git 注册。

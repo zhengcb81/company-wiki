@@ -1,0 +1,53 @@
+{
+  "schema_version": "du-root-reception/1",
+  "date": "2026-10-13",
+  "engineering": "ACCEPTED",
+  "production_summary_switch": false,
+  "publication": "pending",
+  "root_code_head": "8a5721db",
+  "tests": {
+    "combined_offline": {
+      "passed": 491,
+      "real_deselected": 18,
+      "seconds": 13.76
+    },
+    "bound_originals": {
+      "originals": 4,
+      "passed": 11,
+      "failed": 0,
+      "seconds": 14.72
+    },
+    "observer_final": {
+      "passed": 5,
+      "seconds": 1.9
+    },
+    "benchmark_after_observer": {
+      "passed": 147,
+      "real_deselected": 7,
+      "seconds": 6.11
+    }
+  },
+  "source_config_preservation": {
+    "originals": 4,
+    "configs": 6,
+    "sha_mtime_unchanged": true,
+    "preexisting_sentinel_unchanged": true,
+    "owned_tmp_removed": true
+  },
+  "network_calls": 0,
+  "model_calls": 0,
+  "paid_usd": 0,
+  "business_baseline_msft": {
+    "critical_recalled": 4,
+    "critical_total": 8,
+    "status": "FAIL"
+  },
+  "new_du2_owned_paths_written": [],
+  "remaining": [
+    "DU2 strategy/layout integration",
+    "business-value budget",
+    "production model consumption",
+    "real G2/G4/G5",
+    "CID/line coordinates where unavailable"
+  ]
+}
