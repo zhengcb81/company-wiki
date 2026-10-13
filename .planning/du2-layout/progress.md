@@ -17,10 +17,19 @@
   fixtures（23 文件 118 KiB）、测试、真实对照、handoff。
 - 下一步（本 lane 不做）：ROOT 接收并把输出映射到既有 parser/section/hints，删除被替代的重复几何推断。
 
+## 2026-10-13 会话2（完工后逐条复核）
+- 按卡片 7 条步骤 + 三节点 + 测试/恢复条款逐条自检（不只跑测试）。
+- 发现并修复 5 个遗漏/缺陷：表注 parent_table_id 不符接口、缺少"哨兵/finally 清理"测试、
+  缺少"原件只读"自动断言、`GROUP_LIMIT_EXCEEDED` 诊断不带受影响 unit、
+  续表上下文未传播到表区组；并修掉真实金禾 p224 续表误称表头（错误 high 类）。
+- 新增测试模块 `test_b_recovery_and_readonly.py`；测试数 37→40（离线 34 passed/6 skipped）。
+- 重新生成 c-evidence 与 perf_scale（work/unit 仍 5.78–5.79）。
+- 最终：离线集中命令 34 passed/6 skipped；`CW_DU2_LAYOUT_REAL=1` 40 passed；ruff 全绿。
+
 ## 验证命令与结果（最终一次）
 | 节点 | 命令 | exit | 结果 |
 |---|---|---|---|
-| A+B 离线（集中命令） | `python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints -q` | 0 | 32 passed, 5 skipped（真实原件 opt-in 未开） |
-| C 真实原件 | 同命令 + `CW_DU2_LAYOUT_REAL=1` | 0 | **37 passed** |
+| A+B 离线（集中命令） | `python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints -q` | 0 | 34 passed, 6 skipped（真实原件 opt-in 未开） |
+| C 真实原件 | 同命令 + `CW_DU2_LAYOUT_REAL=1` | 0 | **40 passed**（含原件 SHA/mtime 未变断言） |
 | lint（仅本包） | `python -X utf8 -m ruff check src/company_wiki/document_understanding/layout_hints tests/unit/document_understanding_layout_hints tests/fixtures/document_understanding_layout_hints` | 0 | All checks passed |
 | 规模观察 | `python -B -X utf8 tests/fixtures/document_understanding_layout_hints/scale_run.py --output .planning/du2-layout/perf_scale.json` | 0 | 见 perf_observations.md |

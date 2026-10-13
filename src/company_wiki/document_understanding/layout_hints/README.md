@@ -58,9 +58,11 @@ result = derive_layout_hints(observation, limits={"max_work_units": 2_000_000})
   `heading_level`（0 基不适用；1=最高层）、`text_column`（0 基正文栏，`null`=无分栏/不限栏）、
   `confidence`（high/medium/low/unknown）、`basis`（短代码，不复制正文）。
 - `groups`：`kind ∈ {heading, column_lane, table_region, table_row, caption, footnote}`。
-  行/题注/脚注组通过 `parent_table_id` 归属已存在的 `table_region`；
+  行与表注通过 `parent_table_id` 归属已存在的 `table_region`（表注=脚注组；题注是上下文组，
+  本身不是表注，`parent_table_id` 为 `null`，靠 `caption_for` 关联）；
   `member_unit_ids` 按阅读视图排序（缺失时按 `ordinal`）；
-  `required_context_unit_ids` 表示“若断言该行数值就必须同时保留”的表头/期间/单位/题注/脚注 unit；
+  `required_context_unit_ids` 表示“若断言该行数值就必须同时保留”的表头/期间/单位/题注/脚注 unit
+  （跨页续表还会带上原表的题注/表头上下文）；
   `cells` 行列为表内 0 基坐标，`row_span` 当前恒为 `null`，`column_span` 为覆盖列槽数。
 - `relations`：`header_for | caption_for | footnote_for | continuation`，
   一律 **from=上下文组 → to=被解释组**；`continuation` 从上一表区指向下一页续表；
@@ -71,7 +73,8 @@ result = derive_layout_hints(observation, limits={"max_work_units": 2_000_000})
   代码集：`BAD_GEOMETRY`、`COORDINATE_OUT_OF_BOUNDS`、`MISSING_GEOMETRY`、
   `UNIT_LIMIT_EXCEEDED`、`WORK_BUDGET_EXCEEDED`、`GROUP_LIMIT_EXCEEDED`、
   `NEEDS_UPSTREAM_GRANULARITY`、`LOGICAL_ROW_UNRESOLVED`、`CONTINUATION_CLAIMED`、
-  `UNORDERABLE_UNIT`、`WORK_UNITS`（累计工作计数，信息项）。
+  `CONTINUATION_ROWS_NOT_HEADER`、`UNORDERABLE_UNIT`、`WORK_UNITS`（累计工作计数，信息项）。
+  超限类诊断都带受影响 `unit_ids`（`GROUP_LIMIT_EXCEEDED` 列出因组上限而丢失结构的 unit）。
 
 ## 3. 判定规则（可复核）
 
@@ -95,6 +98,8 @@ result = derive_layout_hints(observation, limits={"max_work_units": 2_000_000})
 - **跨页续表**：仅当上一表区贴页底（≥70% 页高）、下一表区贴页顶（≤25% 页高）、
   下一页表区**没有新题注**、且存在 ≥2 个对齐列槽或重复表头时才成立；页差写入 `basis`。
   金额相同、内容相似都不作为延续依据。
+  仅有列对齐（无重复表头）的续表：其前导行带视为**续行**，不新称表头
+  （诊断 `CONTINUATION_ROWS_NOT_HEADER`）；只有重复表头才建立 `header_for`。
 - **整体降级**：整行单格（无格子坐标）→ 表区 `low` + `NEEDS_UPSTREAM_GRANULARITY`，`cells=[]`，
   绝不按空格虚构列；列内容跨行带折行无法判定逻辑行 → `LOGICAL_ROW_UNRESOLVED`，该行封顶 `medium`。
 
@@ -125,6 +130,7 @@ result = derive_layout_hints(observation, limits={"max_work_units": 2_000_000})
 - 折行逻辑行、跨行单元格交错 → 保留视觉行带并诊断，不猜逻辑行；
 - 双栏并不逐句对应时不做任何句级配对，双语只给栏与阅读顺序提示；
 - 表区无表头时不产出 `header_for`，表区置信度封顶 `medium`；
+  续表若没有重复表头证据，其前导行带只作续行，不新称表头；
 - 图注脚注只按“上方题注”归属，不连到其下方表格；
 - 预算/上限耗尽 → `coverage.complete=false` 且未分析 unit 进入 `deferred_unit_ids`。
 

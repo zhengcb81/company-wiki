@@ -50,11 +50,11 @@ cd C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-202610
 
 # A+B（集中命令，离线；真原件默认 opt-in 跳过）
 python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints -q
-# -> 32 passed, 5 skipped
+# -> 34 passed, 6 skipped
 
 # C（真原件只读，需本机 bindings）
 CW_DU2_LAYOUT_REAL=1 python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints -q
-# -> 37 passed（真实用例确实跑了，不是 skip）
+# -> 40 passed（真实用例确实跑了，不是 skip；含"原件 SHA+mtime 未变"断言）
 
 # 仅本包 ruff
 python -X utf8 -m ruff check src/company_wiki/document_understanding/layout_hints \
@@ -80,9 +80,10 @@ python -B -X utf8 tests/fixtures/document_understanding_layout_hints/scale_run.p
   另加程序化规模生成器（1k/10k/40k）。
 - 真实：4 份原件、7 个真实用例（名创 p12 门店表 span 级 + 整行单格两种输入、恒锋 p61-62、
   金禾 p223-224、中微 p41 负例，外加 2 个离线探针管道自检）。
-  结果：**充分输入下**名创 2 表区 high/3 列、金禾 3 表区 high/6 列且跨页续表成立（basis 含 page_gap=1）、
-  恒锋 4 表区含两列表；**当前生产式整行输入下**名创不虚构任何列并给出 NEEDS_UPSTREAM_GRANULARITY。
-- 原件只读保持：跑前/跑后 SHA-256 与 mtime 完全一致（4/4）。
+  结果：**充分输入下**名创 2 表区 high/3 列、金禾 3 表区 high/6 列且跨页续表成立
+  （basis 含 page_gap=1；无重复表头，故续表不新称表头）、恒锋 4 表区含两列表；
+  **当前生产式整行输入下**名创不虚构任何列并给出 NEEDS_UPSTREAM_GRANULARITY。
+- 原件只读保持：跑前/跑后 SHA-256 与 mtime 完全一致（4/4，且有 opt-in 测试锁定该断言）。
 - probe id ↔ 原页面坐标映射留证于 `.planning/du2-layout/c-evidence/probe_mapping.json`
   （每 source 引文 ≤8 KiB，并明确标注不是生产 locator）。
 
@@ -96,14 +97,17 @@ python -B -X utf8 tests/fixtures/document_understanding_layout_hints/scale_run.p
 5. 未在真实 5 万 unit 原件上跑满默认上限；40k 合成只测到 `max_groups=10000` 触顶 partial；
    并发/多进程内存叠加未测。
 6. 恒锋 p61 概况表尾行（跨页包住的"建设周期"值）被当作未认领行带，没有强行并成一个表区。
+7. 无数量表（纯文本表）只取首个行带作表头，因此其真实的两级表头不会被还原。
+8. `GROUP_LIMIT_EXCEEDED` 是**截断结构**而不是把 unit 标 deferred（unit 仍保留 unit_hints）；
+   诊断会列出所有丢失结构的 unit，便于消费侧判断影响范围。
 
 ## 复杂度与性能（集中节点观察，无脆弱毫秒断言）
 
 | units | groups | work_units | work/unit | 耗时 | 峰值 RSS | complete |
 |---|---|---|---|---|---|---|
 | 1,000 | 346 | 5,779 | 5.779 | 0.55s | 26.3 MB | true |
-| 10,000 | 3,471 | 57,904 | 5.790 | 6.09s | 84.0 MB | true |
-| 40,000 | 10,000（封顶） | 231,665 | 5.792 | 29.09s | 274.5 MB | false（GROUP_LIMIT_EXCEEDED） |
+| 10,000 | 3,471 | 57,904 | 5.790 | 5.60s | 84.3 MB | true |
+| 40,000 | 10,000（封顶） | 231,665 | 5.792 | 25.76s | 274.9 MB | false（GROUP_LIMIT_EXCEEDED，诊断列出丢失结构的 unit） |
 
 work/unit 三档稳定，近线性、无全量 N²、无无限跨页关联；详见 `perf_observations.md`。
 未测项在该文件中明确标注"未测"。

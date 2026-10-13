@@ -46,5 +46,10 @@
 python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints -q
 python -X utf8 -m ruff check src/company_wiki/document_understanding/layout_hints tests/unit/document_understanding_layout_hints tests/fixtures/document_understanding_layout_hints
 
+## 复核（会话2）
+- Status: complete
+- 按卡片逐条自检，修复 5 个遗漏/缺陷并补 2 个卡片条款测试（哨兵/finally、原件只读）。
+- 离线 34 passed/6 skipped；真实 opt-in 40 passed；ruff 全绿。
+
 ## Next Step
-实现已交付并验证；等待 ROOT 接收（本 lane 不合主线/push/安装）。
+实现与复核已交付并验证；等待 ROOT 接收（本 lane 不合主线/push/安装）。

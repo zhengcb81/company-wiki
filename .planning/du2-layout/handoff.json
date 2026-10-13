@@ -28,9 +28,11 @@
     "group.kind limited to the seven kinds in review/INTERFACES.md section 5; a table header is a table_row group whose basis contains header_row/header_block",
     "column_lane groups are emitted per page (cuts are learned document-wide so sparse pages reuse sibling gutter evidence); unit_hints.text_column uses the document-wide cut set",
     "relations target the table_region group (header_for/caption_for/footnote_for) or the next table_region (continuation); a footnote under a figure may point at the figure's caption group instead",
+    "footnote groups carry parent_table_id of the table_region they explain (INTERFACES: table notes belong to the region); caption groups are context groups and keep parent_table_id null, linked by caption_for instead",
+    "a continued region whose continuation basis lacks repeated_header does NOT claim a fresh header: its leading bands stay rows with basis continuation_rows_not_header (diagnostic CONTINUATION_ROWS_NOT_HEADER)",
     "cells.row_span is currently always null (row spanning is not claimed); column_span counts covered column slots",
     "diagnostic code WORK_UNITS (detail = accumulated work count) is an informational entry added for budget observability",
-    "additive diagnostics: CONTINUATION_CLAIMED, MISSING_GEOMETRY, UNORDERABLE_UNIT, LOGICAL_ROW_UNRESOLVED, NEEDS_UPSTREAM_GRANULARITY"
+    "additive diagnostics: CONTINUATION_CLAIMED, CONTINUATION_ROWS_NOT_HEADER, MISSING_GEOMETRY, UNORDERABLE_UNIT, LOGICAL_ROW_UNRESOLVED, NEEDS_UPSTREAM_GRANULARITY"
   ],
   "A_B_C": [
     {
@@ -45,17 +47,17 @@
       "node": "B",
       "command": "python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints -q",
       "exit_code": 0,
-      "elapsed_seconds": 7.84,
+      "elapsed_seconds": 8.38,
       "result_path": ".planning/du2-layout/progress.md",
-      "notes": "32 passed, 5 skipped (real-original cases opt-in). Covers referential integrity across all 17 fixtures, non-mutation, determinism, company-name independence, caller limits, work budget, group budget, near-linear work growth"
+      "notes": "34 passed, 6 skipped (real-original cases opt-in). Covers referential integrity across all 17 fixtures, non-mutation, determinism, company-name independence, caller limits, work budget, group budget (affected units named), lane scratch sentinel/finally-cleanup convention, offline read-only proof"
     },
     {
       "node": "C",
       "command": "$env:CW_DU2_LAYOUT_REAL='1'; python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints -q",
       "exit_code": 0,
-      "elapsed_seconds": 11.12,
+      "elapsed_seconds": 8.81,
       "result_path": ".planning/du2-layout/c-evidence/c_node_summary.json",
-      "notes": "37 passed (real cases actually ran, not skipped). Real originals read-only; SHA+mtime verified identical before/after"
+      "notes": "40 passed (real cases actually ran, not skipped), including a test asserting every bound original keeps SHA-256 and mtime across the real run. Real originals read-only"
     },
     {
       "node": "lint",
@@ -93,8 +95,8 @@
       "sample_id": "cn-jinhe-convertible-tables",
       "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
       "pages": [223, 224],
-      "span_mode": "3 regions (all high), 6 columns, 1 continuation (basis page_gap=1 + column_alignment), 2 LOGICAL_ROW_UNRESOLVED for the wrapped 备案 table",
-      "note": "second-company/generalization sample with a different layout"
+      "span_mode": "3 regions (all high), 6 columns, 1 continuation (basis page_gap=1 + column_alignment, no repeated header so the continued region claims NO fresh header), 2 LOGICAL_ROW_UNRESOLVED for the wrapped 备案 table",
+      "note": "second-company/generalization sample with a different layout; the p223 募投表 (6 columns) correctly does not continue into p224"
     },
     {
       "sample_id": "cn-amec-annual-narrative",
@@ -157,6 +159,8 @@
   "complexity": {
     "shape": "per-page banding O(n log n); cells and runs are local; column slots cluster intervals only; cross-page continuation checks are bounded to edge regions",
     "measured_work_units_per_unit": {"1000": 5.779, "10000": 5.79, "40000": 5.792},
+    "measured_elapsed_seconds": {"1000": 0.55, "10000": 5.6, "40000": 25.76},
+    "measured_peak_rss_bytes": {"1000": 26255360, "10000": 84275200, "40000": 274927616},
     "no_full_n_squared": true,
     "no_unbounded_cross_page_linking": true,
     "budget": "limits tighten-only; default max_units=50000, max_groups=10000, max_work_units=2000000"
@@ -168,7 +172,9 @@
     "real-geometry carriers limited to what PyMuPDF sampling in tests provides; HTML/PPT/DOCX geometry passthrough is ROOT work",
     "no real 50000-unit original was run at the default ceilings; only synthetic scale was observed",
     "concurrency/multi-process memory behaviour unmeasured",
-    "the p61 overview table tail and similar wrapped quantity-less tables may be reported as unclaimed bands rather than one region"
+    "the p61 overview table tail and similar wrapped quantity-less tables may be reported as unclaimed bands rather than one region",
+    "a quantity-less table keeps only its first band as a header, so a genuine two-level header on a quantity-less table is not reconstructed",
+    "GROUP_LIMIT_EXCEEDED truncates structure rather than deferring units (units keep their unit_hints); the diagnostic names every affected unit so a consumer can see what lost structure"
   ],
   "resources": {
     "model_calls": 0,

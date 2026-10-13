@@ -125,19 +125,14 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
     groups: list[dict] = []
     relation_items: list[dict] = []
     group_limit_hit = False
+    group_limit_dropped: set = set()
 
     def add_group(kind, members, required_context, cells, parent_tmp, confidence, basis):
         nonlocal group_limit_hit
         if len(groups) >= doc.limits["max_groups"]:
+            group_limit_dropped.update(members)
             if not group_limit_hit:
                 group_limit_hit = True
-                diagnostics.append(
-                    {
-                        "code": "GROUP_LIMIT_EXCEEDED",
-                        "unit_ids": [],
-                        "detail": f"more than max_groups={doc.limits['max_groups']} groups",
-                    }
-                )
             return None
         tmp_id = f"t{len(groups)}"
         groups.append(
@@ -253,7 +248,10 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
                     )
             footnote_units = band_unit_ids(page_bands, draft.trailing_context)
             if footnote_units:
-                footnote_tmp = add_group("footnote", footnote_units, [], [], None, "high", ["footnote_line"])
+                # a table note belongs to the table region it explains
+                footnote_tmp = add_group(
+                    "footnote", footnote_units, [], [], region_tmp, "high", ["footnote_line"]
+                )
                 if footnote_tmp:
                     relation_items.append(
                         {
@@ -401,14 +399,40 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
         carry = band_unit_ids(prev_entry[2], prev_draft.leading_context + prev_draft.header_indices)
         continuation_context[id(next_draft)] = carry
 
-    # continuation context reaches the rows of the continued table
+        if "repeated_header" not in claim["basis"]:
+            # A continued table without header-continuation evidence: its leading
+            # bands are continuation rows, not a fresh header claim.
+            target_region = next_entry[0]
+            demoted = [
+                item
+                for item in relation_items
+                if item["kind"] == "header_for" and item["to_group_id"] == target_region
+            ]
+            for item in demoted:
+                relation_items.remove(item)
+                header_group = next((g for g in groups if g["group_id"] == item["from_group_id"]), None)
+                if header_group is not None:
+                    header_group["confidence"] = "medium"
+                    header_group["basis"] = ["visual_row", "continuation_rows_not_header"]
+                diagnostics.append(
+                    {
+                        "code": "CONTINUATION_ROWS_NOT_HEADER",
+                        "unit_ids": list(header_group["member_unit_ids"]) if header_group else [],
+                        "detail": "continued table has no header-continuation evidence; leading bands kept as rows",
+                    }
+                )
+
+    # continuation context reaches the continued table's region and rows
     if continuation_context:
         for group in groups:
-            if group["kind"] != "table_row" or not group["parent_table_id"]:
+            if group["kind"] not in ("table_region", "table_row"):
+                continue
+            owning_region = group["group_id"] if group["kind"] == "table_region" else group["parent_table_id"]
+            if not owning_region:
                 continue
             for draft_key, carry in continuation_context.items():
                 entry = region_tmp_by_draft.get(draft_key)
-                if entry and group["parent_table_id"] == entry[0]:
+                if entry and owning_region == entry[0]:
                     group["required_context_unit_ids"] = member_order(
                         group["required_context_unit_ids"] + carry
                     )
@@ -470,6 +494,17 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
         and not any(diag["code"] == "UNIT_LIMIT_EXCEEDED" for diag in diagnostics)
         and not any(diag["code"] == "NEEDS_UPSTREAM_GRANULARITY" for diag in diagnostics)
     )
+    if group_limit_hit:
+        diagnostics.append(
+            {
+                "code": "GROUP_LIMIT_EXCEEDED",
+                "unit_ids": sorted(group_limit_dropped),
+                "detail": (
+                    f"more than max_groups={doc.limits['max_groups']} groups; "
+                    "structure stopped early, affected units keep their unit_hints"
+                ),
+            }
+        )
     diagnostics.append({"code": "WORK_UNITS", "unit_ids": [], "detail": str(budget.used)})
 
     return {

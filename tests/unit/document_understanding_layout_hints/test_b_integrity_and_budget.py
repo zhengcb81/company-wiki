@@ -117,6 +117,14 @@ def test_group_budget_is_reported_not_silently_dropped() -> None:
     codes = {diag["code"] for diag in result["diagnostics"]}
     assert "GROUP_LIMIT_EXCEEDED" in codes
     assert len(result["groups"]) <= 3
+    assert result["coverage"]["complete"] is False
+
+    # the truncation names the units that lost their structure
+    limited = next(diag for diag in result["diagnostics"] if diag["code"] == "GROUP_LIMIT_EXCEEDED")
+    assert limited["unit_ids"], "over-limit grouping must name the affected units"
+    assert set(limited["unit_ids"]) <= all_unit_ids(observation)
+    grouped = {uid for item in result["groups"] for uid in item["member_unit_ids"]}
+    assert set(limited["unit_ids"]) & grouped == set()
 
 
 def test_work_units_grow_about_linearly() -> None:

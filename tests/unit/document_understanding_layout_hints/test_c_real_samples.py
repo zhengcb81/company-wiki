@@ -253,6 +253,15 @@ def test_jinhe_second_company_layout_generalizes() -> None:
         if rel["kind"] == "continuation":
             assert any(b.startswith("page_gap=") for b in rel["basis"]), rel
             assert any(b.startswith(("column_alignment", "repeated_header")) for b in rel["basis"]), rel
+            # the p224 continuation has no repeated header: its leading bands are
+            # continuation rows, so no fresh header may be claimed for it
+            if "repeated_header" not in rel["basis"]:
+                target = rel["to_group_id"]
+                assert not [
+                    item
+                    for item in result["relations"]
+                    if item["kind"] == "header_for" and item["to_group_id"] == target
+                ], "continued table without header evidence must not claim a fresh header"
 
     # at least one region on the second page shows the continuation problem honestly
     codes = {diag["code"] for diag in result["diagnostics"]}

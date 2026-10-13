@@ -162,7 +162,6 @@
      "relations": [
       "continuation",
       "header_for",
-      "header_for",
       "caption_for",
       "header_for"
      ],
@@ -176,6 +175,7 @@
       "LOGICAL_ROW_UNRESOLVED",
       "LOGICAL_ROW_UNRESOLVED",
       "CONTINUATION_CLAIMED",
+      "CONTINUATION_ROWS_NOT_HEADER",
       "WORK_UNITS"
      ],
      "coverage": {

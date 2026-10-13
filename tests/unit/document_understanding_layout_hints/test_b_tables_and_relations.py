@@ -46,6 +46,10 @@ def test_header_period_unit_and_footnote_are_bound_to_the_table() -> None:
     assert {"u16"} <= {uid for item in footnotes for uid in item["member_unit_ids"]}
     footnote_relations = [rel for rel in relations_of_kind(result, "footnote_for") if rel["to_group_id"] == region["group_id"]]
     assert footnote_relations
+    # a table note belongs to the table region it explains (parent_table_id set)
+    for item in footnotes:
+        if "u16" in item["member_unit_ids"]:
+            assert item["parent_table_id"] == region["group_id"]
 
     for row in _rows_of(result, region):
         if row is header_rows[0]:
@@ -86,6 +90,9 @@ def test_cross_page_table_continuation_needs_column_or_header_evidence() -> None
     assert data_rows_p2
     for row in data_rows_p2:
         assert "u1" in set(row["required_context_unit_ids"])  # original title travels with the continuation
+    # the continued region itself keeps the original table context too
+    assert "u1" in set(page2["required_context_unit_ids"])
+    assert "u2" in set(page2["required_context_unit_ids"])
 
 
 def test_new_table_on_next_page_is_not_a_continuation() -> None:
