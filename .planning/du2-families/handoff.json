@@ -1,0 +1,83 @@
+{
+  "schema_version": "du2-handoff/1",
+  "lane": "du2-families",
+  "base_sha": "5a297244549d54c34f382835b876ec3d181fcd24",
+  "implementation_commits": ["99256072e1d9258862b99b28a47f06b53ed69c3d"],
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-20261013/families",
+  "owned_paths": [
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/**",
+    ".planning/du2-families/**"
+  ],
+  "status": "ready_for_root_intake",
+  "public_interfaces": [
+    "du2-family-spec/1 (records/*.json, 24 份)",
+    "du2-family-index/1 (index.json: records + coverage[shape,spec_status,evidence_status,integration_status,case_ids,gaps])",
+    "du2-reading-case/1 (cases/*.json, 39 份：31 真实摘录 + 8 合成)",
+    "tests/_support.py 小型结构校验 helper（非 registry/router）",
+    "tests/c_node_quote_check.py C 节点原文对照工具（非 pytest、非生产解析器）"
+  ],
+  "interface_deviations": [
+    "case_id 采用连字符命名（du2-reading-case/1 未定 id 语法；本包测试允许 [a-z0-9_-]）",
+    "execution_status 置于 case 顶层（接口只给语义未定字段位置）；值恒为 NOT_RUN_ROOT_INTEGRATION",
+    "candidate_claim/expected_missing_slots 按接口§4 可选项使用，仅两处真实 case 填写",
+    "observation.units[].hints 仅含说明键（unit_kind/relation/note/speaker 等），无可执行语义",
+    "index.coverage.shape 取值=规格 id，便于机器对齐（接口仅要求 shape 字符串）",
+    "native_text_empty 合法空值：anchor.exact_quote 允许空串并以 hints.native_text_empty 显式标记（case-admin-scan-empty-01）",
+    "引文比对规则：PDF 按 physical_page 页文本、HTML 按去标签正文，剔除空白后相等（PDF 抽取换行处插空格）"
+  ],
+  "A_B_C": [
+    {
+      "node": "A",
+      "command": "python -B -X utf8 -m pytest docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests -q",
+      "exit_code": 1,
+      "elapsed_seconds": 0.9,
+      "result_path": ".planning/du2-families/progress.md#RED",
+      "note": "测试先行 RED：16 failed / 14 passed；失败全部指向当时未补齐的数据（index.json、跨市场记录、case_id 校验过严）。随后交付 cn_annual_report、sec_10k 两份代表规格与正反例"
+    },
+    {
+      "node": "B",
+      "command": "python -B -X utf8 -m pytest docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests -q",
+      "exit_code": 0,
+      "elapsed_seconds": 3.6,
+      "result_path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests",
+      "note": "85 passed：唯一ID/引用存在/枚举/非空理由/scope与生命周期/同role别名合并不丢/每source≤8KiB 配额/跨市场反例显式差异/10-K/20-F/10-Q Part 不混"
+    },
+    {
+      "node": "C",
+      "command": "python -B -X utf8 docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests/c_node_quote_check.py",
+      "exit_code": 0,
+      "elapsed_seconds": 16.0,
+      "result_path": ".planning/du2-families/progress.md#C-node",
+      "note": "97 项原文对照 0 失败：31 真实 case 的引文/空文本/SHA 逐条回放到原件页或行；应读/不读含义逐形态对照见 README"
+    }
+  ],
+  "real_samples": [
+    "cn-annual", "cn-h1", "cn-q-business", "cn-q-sparse", "cn-ipo",
+    "cn-equity", "cn-convertible", "cn-ir", "cn-ir-policy", "cn-ipo-confirmation",
+    "hk-annual", "hk-interim", "hk-ipo", "hk-release", "hk-deck",
+    "us-10k", "us-10q", "us-20f", "us-release", "us-txt"
+  ],
+  "synthetic_cases": [
+    "case-synth-us-registration-01", "case-synth-feasibility-01",
+    "case-synth-project-change-01", "case-synth-container-8k-01",
+    "case-synth-revision-pair-01", "case-synth-admin-notice-01",
+    "case-synth-event-response-01", "case-synth-secondary-01"
+  ],
+  "known_gaps": [
+    "US S-1/F-1/424B4、8-K/6-K 容器+附件、募投变更版本对、独立可研、真制度/通知负例、问询/合同/收购、研报/新闻/政策均缺本地原件（见 acquisition_requests AR-01..AR-12），相关规格 evidence_status=synthetic_only",
+    "hk-release / hk-deck / us-release 原件位于临时目录（mFresh-*），易失；重取前先看 bindings.local.json",
+    "10-K Item 8 附注、20-F 业务章节、招股“业务与技术”逐节金标未建；摘要忠实度与语义召回未测（NOT_RUN_ROOT_INTEGRATION）",
+    "双栏阅读顺序、跨页断句闭包、图表 OCR 不在本包范围（归 LAYOUT/ROOT 共享链）",
+    "同一事件 release/deck/call 重复事实对照未做（hk-release/hk-deck 属同公司同期，留证据层去重验证）",
+    "实测两家公司验证覆盖 A 股半导体设备与 H 股零售；金融/医药等模式未测"
+  ],
+  "resources": {
+    "model_calls": 0,
+    "paid_usd": 0.0,
+    "persistent_bytes": 357012,
+    "scratch_peak_bytes": 0
+  },
+  "raw_preservation": "20/20 样本只读访问；构建结束后复核 SHA 全部与 sample_manifest.json 一致，无原件改动、无原件复制",
+  "scratch_restore": "无持久 scratch；未落整篇 MD/PDF 拷贝或截图集合；pytest 与 C 节点工具不写文件（-B 禁 pycache）",
+  "next_root_action": "1) 把 records/ 24 份规格导入唯一 profiles registry 并做实际消费测试（含同 role 别名合并不丢、child_routes、extent/revision 轴）；2) 把 39 个 case 的 mutations 映射 du-gold/1 做行为测试；3) 按 acquisition_requests AR-01..AR-12 补采缺样后回来补 real 证据；4) 未覆盖形态保持 proposed/missing 状态，不得按 generic 直接当无价值"
+}
