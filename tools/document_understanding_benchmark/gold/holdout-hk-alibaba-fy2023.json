@@ -1,0 +1,305 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "holdout-hk-alibaba-fy2023",
+  "source_sha256": "d2a9f3d14fe5eaa4c95885963eb6899fdd6c3f1e16e5ff8f1390e76585adf7c6",
+  "scope": "holdout",
+  "expected_route_families": ["annual", "annual_report"],
+  "notes": "HOLDOUT. 阿里巴巴集團控股 2023 財政年度報告（360 頁），物理頁 88-89、110-111。繁體中文，財政年度截至 3 月 31 日。該公司從未出現在 ROOT 調查、調參討論或設計發現中。事實逐字取自原件。",
+  "facts": [
+    {
+      "id": "h-seven-segments",
+      "importance": "critical",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 88,
+            "exact_quote": "我們按七個經營分部組織和報告業務",
+            "locator": "loc:v1/page:88/paragraph:2"
+          }
+        ]
+      ],
+      "must_preserve": ["七個經營分部"],
+      "must_not_assert": ["公司按六個經營分部報告業務"],
+      "reason": "2023 財年**按七個經營分部**報告：中國商業、國際商業、本地生活服務、菜鳥、雲業務、數字媒體及娛樂、創新業務及其他。同一節又說將推行六大業務集團的新結構——「六大業務集團」是**未來的組織/治理結構**，不是本財年的報告分部。把六當成報告分部數是本樣本最核心的陷阱。"
+    },
+    {
+      "id": "h-six-business-groups-is-future",
+      "importance": "critical",
+      "modality": "plan",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 89,
+            "exact_quote": "我們正在推行新的組織和治理結構。在新結構下，我們是六大業務集團和其他各項業務的控股公司。",
+            "locator": "loc:v1/page:89/paragraph:1"
+          }
+        ],
+        [
+          {
+            "page": 89,
+            "exact_quote": "因此，我們預計我們未來將更新分部報告，以反映將由首席經營決策者審閱的新報告結構。",
+            "locator": "loc:v1/page:89/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": ["六大業務集團", "預計我們未來將更新分部報告"],
+      "must_not_assert": [
+        "本財年公司已按六大業務集團報告分部業績",
+        "公司已完成分部報告結構調整"
+      ],
+      "reason": "「我們**正在推行**新的組織和治理結構」＋「我們**預計未來**將更新分部報告」是明確的計劃語態。六大業務集團（雲智能、淘天、阿里國際數字商業、本地生活、菜鳥、大文娛）是即將採用的結構，2023 財年實際報告的仍是七個分部。把計劃寫成本期既成事實是語態錯誤。"
+    },
+    {
+      "id": "h-total-revenue",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 88,
+            "exact_quote": "進一步增長2%至2023財年的人民幣868,687百萬元",
+            "locator": "loc:v1/page:88/paragraph:1"
+          }
+        ],
+        [
+          {
+            "page": 110,
+            "exact_quote": "總收入從2022財年的人民幣853,062百萬元增長2%至2023財年的人民幣868,687百萬元（126,491百萬美元）。",
+            "locator": "loc:v1/page:110/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": ["868687", "2%"],
+      "must_not_assert": ["2023財年總收入同比增長19%"],
+      "reason": "總收入 2023 財年 868,687 百萬元（126,491 百萬美元），同比 **+2%**。19% 是 2021→2022 財年的增速，2% 才是本期——同一句話裡列出三年增速，最易取錯年份。"
+    },
+    {
+      "id": "h-net-profit-three-year-path",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 88,
+            "exact_quote": "淨利潤從2021財年的人民幣143,284百萬元減少67%至2022財年的人民幣47,079百萬元",
+            "locator": "loc:v1/page:88/paragraph:1"
+          }
+        ],
+        [
+          {
+            "page": 88,
+            "exact_quote": "並增長39%至2023財年的人民幣65,573百萬元（9,548百萬美元）",
+            "locator": "loc:v1/page:88/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": ["143284", "47079", "65573", "39%"],
+      "must_not_assert": ["2023財年淨利潤同比增長67%"],
+      "reason": "淨利潤三年路徑：143,284 → 47,079（-67%）→ 65,573（+39%）。2023 財年 65,573 百萬元仍**低於** 2021 財年的 143,284；只說「+39%」而不說仍遠低於兩年前，是選擇性陈述。67% 是下降幅度，不能當成增長。"
+    },
+    {
+      "id": "h-nongaap-profit",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 88,
+            "exact_quote": "非公認會計準則淨利潤於2023財年增長4%至人民幣141,379百萬元（20,586百萬美元）。",
+            "locator": "loc:v1/page:88/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": ["141379", "4%", "非公認會計準則"],
+      "must_not_assert": ["2023財年淨利潤為人民幣141,379百萬元"],
+      "reason": "非公認會計準則淨利潤 141,379 百萬元、+4%，與公認會計準則淨利潤 65,573 百萬元、+39% 是兩個口徑，數值差一倍以上。混用 GAAP/non-GAAP 是本樣本第二個核心陷阱。"
+    },
+    {
+      "id": "h-china-commerce-ebita-is-profit",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 110,
+            "exact_quote": "中國商業分部的經調整EBITA為人民幣184,862百萬元（26,918百萬美元），相較2022財年的人民幣182,431百萬元增長1%",
+            "locator": "loc:v1/page:110/paragraph:2"
+          }
+        ]
+      ],
+      "must_preserve": ["184862", "182431", "1%"],
+      "must_not_assert": ["中國商業分部收入為人民幣184,862百萬元"],
+      "reason": "184,862 百萬元是中國商業的**經調整 EBITA（利潤口徑）**，+1%；同節的中國零售商業**收入**是 565,332 百萬元。把 EBITA 當收入是口徑錯。"
+    },
+    {
+      "id": "h-china-retail-revenue-down",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 110,
+            "exact_quote": "我們來自中國零售商業的收入為人民幣565,332百萬元（82,319百萬美元），相較2022財年的人民幣574,868百萬元下降2%",
+            "locator": "loc:v1/page:110/paragraph:3"
+          }
+        ]
+      ],
+      "must_preserve": ["565332", "574868", "下降2%"],
+      "must_not_assert": ["中國零售商業收入同比增長2%"],
+      "reason": "中國零售商業收入 565,332 百萬元，較 574,868 **下降 2%**。同頁相鄰的批發商業是「增長4%」、國際零售「增長17%」——方向在同一頁裡多處不同，取錯方向即錯。"
+    },
+    {
+      "id": "h-gmv-not-revenue",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 110,
+            "exact_quote": "引致淘寶和天貓的線上實物商品GMV（剔除未支付訂單）同比錄得中單位數下降",
+            "locator": "loc:v1/page:110/paragraph:3"
+          }
+        ]
+      ],
+      "must_preserve": ["GMV", "剔除未支付訂單", "中單位數下降"],
+      "must_not_assert": [
+        "淘寶和天貓線上實物商品收入同比中單位數下降",
+        "GMV與收入為同一口徑"
+      ],
+      "reason": "GMV 明確標注「**剔除未支付訂單**」，且只給方向（中單位數下降）不給金額；同段的收入是 565,332 百萬元（-2%）。把 GMV 說成收入，或把「中單位數下降」寫成具體收入降幅，都是口徑與精度雙重造假。"
+    },
+    {
+      "id": "h-international-retail-up",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 110,
+            "exact_quote": "國際零售商業收入為人民幣49,873百萬元（7,262百萬美元），相較2022財年的人民幣42,668百萬元增長17%",
+            "locator": "loc:v1/page:110/paragraph:4"
+          }
+        ]
+      ],
+      "must_preserve": ["49873", "42668", "17%"],
+      "must_not_assert": ["國際零售商業收入下降17%"],
+      "reason": "國際零售商業 49,873 百萬元、**+17%**，由 Trendyol 和 Lazada 增長帶動。與中國零售的 -2% 形成同頁反向對照。"
+    },
+    {
+      "id": "h-international-ebita-still-loss",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 110,
+            "exact_quote": "國際商業分部經調整EBITA為虧損人民幣5,620百萬元（818百萬美元），2022財年為虧損人民幣8,991百萬元",
+            "locator": "loc:v1/page:110/paragraph:5"
+          }
+        ]
+      ],
+      "must_preserve": ["5620", "8991", "虧損"],
+      "must_not_assert": ["國際商業分部已實現盈利", "國際商業經調整EBITA為正5,620百萬元"],
+      "reason": "國際商業經調整 EBITA **仍為虧損** 5,620 百萬元（上年虧損 8,991 百萬元）。虧損收窄 ≠ 盈利；正負號丟失會把虧損寫成利潤。"
+    },
+    {
+      "id": "h-local-services-up",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 111,
+            "exact_quote": "本地生活服務收入為人民幣50,112百萬元（7,297百萬美元），相較2022財年的人民幣44,616百萬元增長12%",
+            "locator": "loc:v1/page:111/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": ["50112", "44616", "12%"],
+      "must_not_assert": ["本地生活服務收入同比增長17%"],
+      "reason": "本地生活服務 50,112 百萬元、+12%，受餓了麼平均訂單金額提升與高德訂單增長推動。17% 是同頁國際零售的增速。"
+    },
+    {
+      "id": "h-fiscal-year-not-calendar",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 88,
+            "exact_quote": "我們的財政年度截至3月31日止，因此2021財年、2022財年及2023財年分別指截至2021年、2022年及2023年3月31日止的財政年度。",
+            "locator": "loc:v1/page:88/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": ["財政年度截至3月31日止"],
+      "must_not_assert": ["2023財年指截至2023年12月31日止年度"],
+      "reason": "財政年度截至 **3 月 31 日**，所以「2023 財年」= 2022-04-01 至 2023-03-31，**不是日曆年 2023**。把財年當日曆年是跨市場文件最常見的期間錯。"
+    },
+    {
+      "id": "h-annual-fee-terminated",
+      "importance": "normal",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 89,
+            "exact_quote": "螞蟻集團就中小企業貸款業務支付的年費自2015年起為期七年，並已於2021年12月終止。",
+            "locator": "loc:v1/page:89/paragraph:2"
+          }
+        ]
+      ],
+      "must_preserve": ["2021年12月終止", "為期七年"],
+      "must_not_assert": ["螞蟻集團仍向公司支付中小企業貸款業務年費"],
+      "reason": "該年費「自2015年起為期七年，並已於 **2021 年 12 月終止**」。這是本期不再有該收入的否定陳述；寫成仍在收取會虛增其他收入。"
+    },
+    {
+      "id": "h-segment-reclassification",
+      "importance": "normal",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 89,
+            "exact_quote": "我們把全能超市業務的業績由中國商業分部重分類至本地生活服務分部",
+            "locator": "loc:v1/page:89/paragraph:3"
+          }
+        ],
+        [
+          {
+            "page": 89,
+            "exact_quote": "可比期間數字亦已依據該列示方式作出相應的重分類。",
+            "locator": "loc:v1/page:89/paragraph:3"
+          }
+        ]
+      ],
+      "must_preserve": ["全能超市", "重分類", "自2022年10月1日起"],
+      "must_not_assert": ["分部數據未經重分類，可直接與上年比較"],
+      "reason": "自 2022-10-01 起把全能超市業績由中國商業重分類至本地生活服務，且**可比期間數字已相應重分類**。忽略重分類會讓分部同比看似自然增長或下滑，實際含口徑調整。"
+    }
+  ]
+}
