@@ -301,6 +301,9 @@ def test_adapter_seam_rejects_a_non_callable():
 # ---------------------------------------------------------------------------
 
 BINDINGS_CANDIDATES = (
+    # Preferred: kept outside the worktree so the repository stays clean.
+    Path.home() / ".du-bench" / "bindings.local.json",
+    # Legacy in-worktree location, still honoured.
     Path(__file__).resolve().parents[3] / ".du-bench-out" / "bindings.local.json",
 )
 
