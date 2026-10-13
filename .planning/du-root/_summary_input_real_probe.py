@@ -30,8 +30,11 @@ LABELS = {
 
 def main() -> int:
     bindings = json.loads(BINDINGS.read_text(encoding="utf-8"))
-    print(f"{'sample':14} {'route':14} {'pkgs':>5} {'used':>5} {'chars':>7} {'prov':>5} {'defer':>6}")
-    print("-" * 70)
+    print(
+        f"{'sample':14} {'route':14} {'used':>5} {'pkgs':>5} {'chars':>7} "
+        f"{'prov':>5} {'defer':>6} {'shdw':>5}"
+    )
+    print("-" * 78)
     for sample_id, label in LABELS.items():
         entry = bindings.get(sample_id)
         if not isinstance(entry, dict) or not pathlib.Path(entry["path"]).is_file():
@@ -68,8 +71,18 @@ def main() -> int:
             f"{len(request['evidence_packages']):>5} "
             f"{request['budget']['chars_used']:>7} "
             f"{'OK' if provenance_ok else 'FAIL':>5} "
-            f"{len(request['deferred']):>6}"
+            f"{len(request['deferred']):>6} "
+            f"{request['excluded']['not_selectable']:>5}"
         )
+
+        # The decision under audit: no non-selectable (text-layer) unit may be sent as
+        # evidence, while the same content must still reach the model through its
+        # structured counterpart.
+        sent_roles = {
+            m["role"] for p in request["evidence_packages"] for m in p["members"]
+        }
+        if "qa_text_shadow" in sent_roles:
+            print("   *** VIOLATION: a shadow unit was sent as evidence ***")
 
         # Show the focus actually selected for this document type.
         print(f"   focus: {request['focus'][:96]}")

@@ -45,7 +45,7 @@ worktree：`C:/Users/郑曾波/Projects/_harness_worktrees/document-understandin
    ⚠️ 注意：structure lane 自己的 `FIXTURE_ROOT = parents[2] / "fixtures" / ...` 在**同一深度**
    下是**正确**的，不要跟着一起改（改了就会变成 `<repo>/tests/fixtures`→错位）。
 
-合并后：**331 passed / 5 skipped**（同一调用，约 26s），`ruff check src tests/unit tools` 全绿。
+合并后：**371 passed / 5 skipped**（同一调用，约 26s），`ruff check src tests/unit tools` 全绿。
 
 ## 边界
 
@@ -89,7 +89,7 @@ PYTHONPATH=src python -X utf8 -m pytest tools/document_understanding_benchmark/t
 | ruff | All checks passed |
 | paid path | **not_run**（本 harness 从不调用模型/网络） |
 
-合计 **331 项通过，0 失败**。付费摘要路径明确标 `not_run`，绿色结果不构成付费路径证据。
+合计 **371 项通过，0 失败**。付费摘要路径明确标 `not_run`，绿色结果不构成付费路径证据。
 
 ## 集成中发现并修掉的真实缺陷
 
@@ -201,9 +201,9 @@ deferred 计数如实报告。
 |---|---:|
 | profiles | 150 |
 | structure | 47 |
-| root | 99 |
+| root | 109 |
 | benchmark | 65 |
-| **同一调用合计** | **361 passed / 5 skipped** |
+| **同一调用合计** | **371 passed / 5 skipped** |
 
 `ruff check src tests/unit tools` 全绿；`.planning/du-root/acceptance.py` 六项全 passed、
 0 skipped、exit 0；真实原件节点实际运行（不再 skip），原件 SHA/mtime 未变、0 份复制进 worktree。
