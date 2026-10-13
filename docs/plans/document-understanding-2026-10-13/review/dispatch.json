@@ -1,7 +1,8 @@
 {
   "schema_version": "du2-dispatch/1",
   "date": "2026-10-13",
-  "status": "READY",
+  "status": "DISPATCHED_IN_PROGRESS",
+  "dispatched_by_user": true,
   "root_code_base": "e802e8ac411715c07c025f576e376eed724cbec0",
   "plan_commit": "64c8547d4cb0d55a1d388084f8a69ce54267bf57",
   "checkout_verification": {"cards_exist":true,"three_status_clean":true,"raw_directory_absent":true,"total_bytes_before_final_receipt":62055650,"docs_scope":"docs/plans/document-understanding-2026-10-13","final_receipt_commit":"ROOT will fast-forward clean new trees to the final receipt commit before user handoff; verify actual HEAD at task start"},
