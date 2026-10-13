@@ -53,6 +53,7 @@ def build_dependency_packages(
     max_packages: int | None = None,
     max_members: int = 64,
     unit_order: Mapping[str, int] | None = None,
+    non_selectable_unit_ids: Sequence[str] = (),
 ) -> dict[str, Any]:
     """Turn a ``du-structure/1`` result into budgetable atomic packages.
 
@@ -72,7 +73,14 @@ def build_dependency_packages(
     Ranking within a chapter prefers dependency-bearing kinds (a project, an operating
     table, a QA exchange) over free prose, because those are the units that carry the
     subject, unit, period and footnote a fact needs to stay true.
+
+    ``non_selectable_unit_ids`` carries the observation's non-selectable units (today the
+    Q&A text-layer shadow) so the decision reaches the consumers that act on it. The units
+    are **not** removed from any package -- the structure lane needs both Q&A copies to pair
+    a question with its answer -- they are only labelled so a consumer never *adds* or
+    *sends* a duplicate.
     """
+    excluded = tuple(dict.fromkeys(str(item) for item in non_selectable_unit_ids))
     sections = {section["section_id"]: section for section in structure.get("sections", ())}
     role_priority = _role_priority(route, profile)
 
@@ -151,6 +159,7 @@ def build_dependency_packages(
         "source_ref": structure.get("source_ref", {}),
         "packages": packages,
         "package_count": len(packages),
+        "non_selectable_unit_ids": list(excluded),
         "coverage": structure.get("coverage", {}),
         "diagnostics": _package_diagnostics(
             packages, structure, truncated_by_limit=truncated_by_limit

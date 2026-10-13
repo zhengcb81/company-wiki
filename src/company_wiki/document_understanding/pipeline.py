@@ -29,7 +29,7 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from typing import Any
 
-from .observation_adapter import build_observation
+from .observation_adapter import build_observation, selectable_unit_ids
 from .orchestration import build_dependency_packages
 
 PIPELINE_SCHEMA_VERSION = "du-pipeline/1"
@@ -95,6 +95,15 @@ def understand_units(
     route = route_document(observation, limits=limits)
     profile = get_profile(route["profile_id"])
     structure = build_structure(observation, limits=limits)
+    # Carry the observation's non-selectable units into the packages, so the decision made
+    # in the adapter actually reaches the consumers that add and send evidence. A marking
+    # that nothing reads is the same no-op this layer exists to remove.
+    selectable = set(selectable_unit_ids(observation))
+    non_selectable = [
+        unit["unit_id"]
+        for unit in observation["units"]
+        if unit["unit_id"] not in selectable
+    ]
     packages = build_dependency_packages(
         structure,
         route=route,
@@ -103,6 +112,7 @@ def understand_units(
         unit_order={
             unit["unit_id"]: unit["ordinal"] for unit in observation["units"]
         },
+        non_selectable_unit_ids=non_selectable,
     )
 
     return {
@@ -113,6 +123,7 @@ def understand_units(
         "profile": profile,
         "structure": structure,
         "packages": packages,
+        "non_selectable_unit_ids": non_selectable,
         "plan": _plan(route, profile, structure, packages),
         "diagnostics": _pipeline_diagnostics(route, structure, packages),
     }

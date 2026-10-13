@@ -219,6 +219,38 @@ def _lane_for(x0: float, x1: float, gutter: float, text_span: tuple[float, float
     return 0 if x1 <= gutter else 1
 
 
+def _locator_of(unit: Any, metadata: Mapping[str, Any]) -> str:
+    """Return the unit's existing replay locator without inventing one.
+
+    Two real forms exist in this repository and both must survive:
+
+    * the format parsers (HTML/PPTX/DOCX) put their opaque locator in
+      ``metadata['source_locator']``;
+    * the narrative parser builds units from ``EvidenceCoordinates`` and the
+      canonical locator is derived from those coordinates, e.g.
+      ``loc:v1/page:62/paragraph:3``.  That derivation is what the read layer
+      validates against, so it must be used rather than the unit id.
+
+    A unit id is a content hash, so falling back to it would make a citation
+    un-replayable: nothing in the read layer can turn a hash back into a page and
+    paragraph.  The id is kept only as a last resort for stub units that carry
+    neither form.
+    """
+    existing = metadata.get("source_locator")
+    if isinstance(existing, str) and existing:
+        return existing
+    coordinates = getattr(unit, "coordinates", None)
+    derive = getattr(coordinates, "locator", None)
+    if callable(derive):
+        try:
+            derived = derive()
+        except Exception:  # pragma: no cover - defensive for foreign stubs
+            derived = None
+        if isinstance(derived, str) and derived:
+            return derived
+    return str(unit.unit_id)
+
+
 def build_observation(
     units: Sequence[Any],
     *,
@@ -308,7 +340,7 @@ def build_observation(
             {
                 "unit_id": unit.unit_id,
                 "ordinal": ordinal,
-                "locator": str(metadata.get("source_locator") or unit.unit_id),
+                "locator": _locator_of(unit, metadata),
                 "page": page,
                 "text": unit.raw_text,
                 "kind": kind,

@@ -30,6 +30,8 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from typing import Any
 
+from .observation_adapter import is_selectable
+
 SCHEMA_VERSION = "du-summary-input/1"
 
 #: Exported alias so callers can refer to the wire version without importing the constant
@@ -76,7 +78,7 @@ def build_summary_input(
         if unit.get("unit_id") is not None
     }
 
-    selected, dropped, used_chars = _materialise(
+    selected, dropped, used_chars, withheld = _materialise(
         packages.get("packages", ()),
         units_by_id,
         max_packages=max_packages,
@@ -110,6 +112,7 @@ def build_summary_input(
             "packages_used": len(selected),
             "chars_used": used_chars,
         },
+        "excluded": {"not_selectable": withheld},
         "deferred": dropped,
         "unread": _unread(structure, observation),
         "diagnostics": list(pipeline_result.get("diagnostics", ())),
@@ -122,16 +125,23 @@ def _materialise(
     *,
     max_packages: int,
     max_chars: int,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int]:
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int, int]:
     """Copy the highest-priority packages, with text and provenance, inside the budget.
 
     Packages arrive already ranked by the orchestrator (profile section priority first,
     then semantic kind), so this function preserves their order and never re-ranks: a
     summary must read the document in the order the profile chose.
+
+    A non-selectable member is withheld from the model-facing evidence.  It is the
+    text-layer duplicate of a Q&A page, so sending it would pay twice for the same
+    sentence and invite the model to report one fact as two.  Withholding is counted and
+    returned, and a package left with nothing selectable is *deferred* rather than
+    emitted empty, because an empty package is indistinguishable from "no content here".
     """
     selected: list[dict[str, Any]] = []
     dropped: list[dict[str, Any]] = []
     used_chars = 0
+    withheld_count = 0
 
     for index, package in enumerate(packages):
         package_id = str(package.get("package_id", ""))
@@ -141,10 +151,14 @@ def _materialise(
 
         members: list[dict[str, Any]] = []
         member_chars = 0
+        package_withheld = 0
         for unit_id in package.get("member_unit_ids", ()):
             unit = units_by_id.get(str(unit_id))
             if unit is None:
                 # Never invent evidence: a unit the observation does not contain is skipped.
+                continue
+            if not is_selectable(unit):
+                package_withheld += 1
                 continue
             text = str(unit.get("text") or "")
             members.append(
@@ -159,7 +173,16 @@ def _materialise(
             )
             member_chars += len(text)
 
-        if not members or not any(member["text"].strip() for member in members):
+        withheld_count += package_withheld
+        if not members:
+            dropped.append(
+                {
+                    "package_id": package_id,
+                    "reason": "NOT_SELECTABLE" if package_withheld else "EMPTY_TEXT",
+                }
+            )
+            continue
+        if not any(member["text"].strip() for member in members):
             dropped.append({"package_id": package_id, "reason": "EMPTY_TEXT"})
             continue
         if used_chars + member_chars > max_chars:
@@ -167,20 +190,21 @@ def _materialise(
             continue
 
         used_chars += member_chars
-        selected.append(
-            {
-                "package_id": package_id,
-                "rank": index,
-                "kind": package.get("kind"),
-                "section_role": package.get("section_role"),
-                "section_ids": list(package.get("section_ids", ())),
-                "completeness": package.get("completeness"),
-                "truncated": bool(package.get("truncated")),
-                "members": members,
-            }
-        )
+        entry: dict[str, Any] = {
+            "package_id": package_id,
+            "rank": index,
+            "kind": package.get("kind"),
+            "section_role": package.get("section_role"),
+            "section_ids": list(package.get("section_ids", ())),
+            "completeness": package.get("completeness"),
+            "truncated": bool(package.get("truncated")),
+            "members": members,
+        }
+        if package_withheld:
+            entry["not_selectable_withheld"] = package_withheld
+        selected.append(entry)
 
-    return selected, dropped, used_chars
+    return selected, dropped, used_chars, withheld_count
 
 
 def _unread(
