@@ -2,186 +2,582 @@
   "schema_version": "du-bench-evidence/1",
   "lane": "du-bench",
   "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
-  "collected": "2026-10-13",
-  "note": "Compact A/B/C evidence captured by the lane. The raw run outputs under .du-bench-out/ are regenerable scratch and are intentionally NOT committed; the authoritative numbers are reproduced here. Re-run the commands in handoff.md to regenerate.",
-
-  "A_B_node_offline": {
-    "command": "python -X utf8 -m tools.document_understanding_benchmark --mode offline --output .du-bench-out",
-    "exit_code": 3,
-    "elapsed_seconds": 0.437,
-    "fixtures_total": 5,
-    "fixture_bytes": 14309,
-    "fixture_budget_bytes": 204800,
-    "per_fixture_status": {
-      "offline-clean-annual": "PASS",
-      "offline-negation-qa": "PASS",
-      "offline-opaque-scan": "PARTIAL",
-      "offline-offering-plan": "PASS",
-      "offline-stage-progress": "PASS"
+  "generated_from": {
+    "native_summary": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du-bench-evidence\\native\\summary.json",
+    "offline_summary": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du-ctl3\\offline\\summary.json",
+    "note": "Numbers below are read back from the run artifacts, not transcribed by hand."
+  },
+  "gold_set": {
+    "records": 11,
+    "development_records": 6,
+    "holdout_records": 5,
+    "facts_total": 122,
+    "facts_critical": 86,
+    "max_quote_bytes_per_document": 2094,
+    "quote_budget_bytes_per_document": 8192,
+    "holdout_markets": {
+      "a_share": [
+        "holdout-cn-glodon-q1",
+        "holdout-cn-yake-q1"
+      ],
+      "h_share": [
+        "holdout-hk-alibaba-fy2023"
+      ],
+      "us": [
+        "holdout-us-mongodb-10k",
+        "holdout-us-nvidia-10k"
+      ]
+    }
+  },
+  "review_message_controls": {
+    "fixtures": 5,
+    "semantic_only_defects_injected": 3,
+    "defects_invisible_to_deterministic_checks": 3,
+    "review_caught_all": true,
+    "review_cannot_rescue_a_deterministic_fail": true,
+    "interpretation": "The reported count is the number of injected meaning-level defects that pass every deterministic check. For exactly those, an independent review is the only detector. An all-ENTAILED review still cannot upgrade a deterministic FAIL, so review can only add scrutiny.",
+    "rows": [
+      {
+        "fixture_id": "clean-annual",
+        "semantic_only": {
+          "controls_total": 3,
+          "deterministic_blind_count": 3,
+          "deterministic_blind": [
+            "quoting-as-company-view",
+            "omitted-qualifier",
+            "causal-attribution"
+          ],
+          "review_caught_all": true,
+          "rows": [
+            {
+              "control_id": "quoting-as-company-view",
+              "note": "Attaches an interpretation to a correct number without changing the number, unit, or basis.",
+              "claim_index": 0,
+              "mutated_text": "截至2024年12月31日，门店总数为7,504家，表明公司经营质量显著改善。",
+              "deterministic_caught": false,
+              "deterministic_status": "PASS",
+              "review_caught": true,
+              "review_status": "FAIL"
+            },
+            {
+              "control_id": "omitted-qualifier",
+              "note": "Keeps the number and basis but drops a qualifier that limited the statement's scope.",
+              "claim_index": 0,
+              "mutated_text": "门店总数为7,504家。",
+              "deterministic_caught": false,
+              "deterministic_status": "PASS",
+              "review_caught": true,
+              "review_status": "FAIL"
+            },
+            {
+              "control_id": "causal-attribution",
+              "note": "Adds a cause the evidence never states, leaving all numbers intact.",
+              "claim_index": 0,
+              "mutated_text": "截至2024年12月31日，门店总数为7,504家，主要由于海外市场放量。",
+              "deterministic_caught": false,
+              "deterministic_status": "PASS",
+              "review_caught": true,
+              "review_status": "FAIL"
+            }
+          ],
+          "interpretation": "deterministic_blind lists defects no deterministic check catches; for exactly those, the review layer is the only detector. review_caught_all shows the review path closes them."
+        },
+        "rescue": {
+          "controls": [
+            {
+              "defect": "total_restated_as_increment",
+              "unaided_status": "FAIL",
+              "with_review_status": "FAIL",
+              "review_cannot_rescue": true
+            }
+          ],
+          "all_rescues_blocked": true,
+          "interpretation": "an all-ENTAILED review cannot upgrade a deterministic FAIL; the review layer can only add scrutiny, never remove it."
+        }
+      },
+      {
+        "fixture_id": "negation-qa",
+        "semantic_only": {
+          "controls_total": 0,
+          "deterministic_blind_count": 0,
+          "deterministic_blind": [],
+          "review_caught_all": true,
+          "rows": [],
+          "interpretation": "deterministic_blind lists defects no deterministic check catches; for exactly those, the review layer is the only detector. review_caught_all shows the review path closes them."
+        },
+        "rescue": {
+          "controls": [],
+          "all_rescues_blocked": true,
+          "interpretation": "an all-ENTAILED review cannot upgrade a deterministic FAIL; the review layer can only add scrutiny, never remove it."
+        }
+      },
+      {
+        "fixture_id": "opaque-scan",
+        "semantic_only": {
+          "controls_total": 0,
+          "deterministic_blind_count": 0,
+          "deterministic_blind": [],
+          "review_caught_all": true,
+          "rows": [],
+          "interpretation": "deterministic_blind lists defects no deterministic check catches; for exactly those, the review layer is the only detector. review_caught_all shows the review path closes them."
+        },
+        "rescue": {
+          "controls": [],
+          "all_rescues_blocked": true,
+          "interpretation": "an all-ENTAILED review cannot upgrade a deterministic FAIL; the review layer can only add scrutiny, never remove it."
+        }
+      },
+      {
+        "fixture_id": "offering-plan",
+        "semantic_only": {
+          "controls_total": 0,
+          "deterministic_blind_count": 0,
+          "deterministic_blind": [],
+          "review_caught_all": true,
+          "rows": [],
+          "interpretation": "deterministic_blind lists defects no deterministic check catches; for exactly those, the review layer is the only detector. review_caught_all shows the review path closes them."
+        },
+        "rescue": {
+          "controls": [],
+          "all_rescues_blocked": true,
+          "interpretation": "an all-ENTAILED review cannot upgrade a deterministic FAIL; the review layer can only add scrutiny, never remove it."
+        }
+      },
+      {
+        "fixture_id": "stage-progress",
+        "semantic_only": {
+          "controls_total": 0,
+          "deterministic_blind_count": 0,
+          "deterministic_blind": [],
+          "review_caught_all": true,
+          "rows": [],
+          "interpretation": "deterministic_blind lists defects no deterministic check catches; for exactly those, the review layer is the only detector. review_caught_all shows the review path closes them."
+        },
+        "rescue": {
+          "controls": [],
+          "all_rescues_blocked": true,
+          "interpretation": "an all-ENTAILED review cannot upgrade a deterministic FAIL; the review layer can only add scrutiny, never remove it."
+        }
+      }
+    ]
+  },
+  "independent_review_artifact": {
+    "path": "tools/document_understanding_benchmark/reviews/fixtures-independent-review.json",
+    "reviewer": "independent-subagent",
+    "samples": 5,
+    "claims_reviewed": 11,
+    "verdicts": {
+      "ENTAILED": 11
     },
-    "mutations_detected": 53,
+    "reviewer_caveat": "The reviewer explicitly reported that this fixture set contains no seeded entailment defect, so it cannot serve as a discriminating negative control on its own. That gap is what review_message_controls above closes."
+  },
+  "carrier_reality": {
+    "supported": {
+      ".htm": {
+        "documents": 2,
+        "entry_point": null,
+        "kind": "html",
+        "reason": "the only HTML path is transcript_html, which expects a transcript layout; an SEC filing HTML has no route into the selector",
+        "supported": false,
+        "unavailable": 2
+      },
+      ".pdf": {
+        "documents": 9,
+        "entry_point": "parse_pdf_bytes",
+        "kind": "pdf",
+        "reason": null,
+        "supported": true,
+        "unavailable": 0
+      }
+    },
+    "unsupported_present": [
+      ".htm"
+    ],
+    "measured_html_evidence": {
+      "method": "probe_non_pdf_html() over two real 10-K HTML originals",
+      "result": "extract_transcript_material accepts the bytes, then parse_transcript_text returns 0 units with error transcript_start_missing",
+      "extracted_text_prefix_problem": "inline-XBRL taxonomy tokens (http://fasb.org/us-gaap/...#...) lead the extracted text",
+      "conclusion": "The existing public observation path offers exactly two replay formats (PDF, and transcript_txt/transcript_html). A non-transcript SEC filing HTML has no route into the selector, so US filings are reported UNAVAILABLE rather than scored as documents with no business content."
+    }
+  },
+  "native_run": {
+    "samples": 11,
+    "bindings_supplied": 25,
+    "resolved": 9,
+    "unavailable": 2,
+    "by_scope": {
+      "development": {
+        "critical_fact_recall": 0.21951219512195122,
+        "critical_facts_passed": 9,
+        "critical_facts_total": 41,
+        "critical_facts_unavailable": 4,
+        "documents": 6,
+        "fact_recall": 0.24,
+        "facts_passed": 12,
+        "facts_total": 50,
+        "statuses": {
+          "FAIL": 6
+        }
+      },
+      "holdout": {
+        "critical_fact_recall": 0.0,
+        "critical_facts_passed": 0,
+        "critical_facts_total": 45,
+        "critical_facts_unavailable": 23,
+        "documents": 5,
+        "fact_recall": 0.0,
+        "facts_passed": 0,
+        "facts_total": 36,
+        "statuses": {
+          "FAIL": 3,
+          "PARTIAL": 2
+        }
+      }
+    },
+    "raw_all_unchanged": true,
+    "config_unchanged": true,
+    "sentinel_restored": {
+      "preexisting": false,
+      "reason": "created_by_this_run",
+      "sha256": "b88f563191672aff7c95a3620c7bdacc635ac28aa0a236e92478f2240bfbd203",
+      "unchanged": true
+    },
+    "network_calls": 0,
+    "model_calls": 0,
+    "paid_calls": 0,
+    "raw_copies": 0,
+    "elapsed_seconds": 171.7,
+    "peak_rss_bytes": 301826048,
+    "per_sample": [
+      {
+        "sample_id": "cn-equity",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_denominator": 7,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      },
+      {
+        "sample_id": "cn-h1",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.25,
+        "critical_denominator": 8,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      },
+      {
+        "sample_id": "cn-ipo-confirmation",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_denominator": 4,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      },
+      {
+        "sample_id": "cn-ir",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.14285714285714285,
+        "critical_denominator": 7,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      },
+      {
+        "sample_id": "cn-q-business",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.6666666666666666,
+        "critical_denominator": 9,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      },
+      {
+        "sample_id": "hk-annual",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_denominator": 6,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      },
+      {
+        "sample_id": "holdout-cn-glodon-q1",
+        "scope": "holdout",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_denominator": 5,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      },
+      {
+        "sample_id": "holdout-cn-yake-q1",
+        "scope": "holdout",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_denominator": 7,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      },
+      {
+        "sample_id": "holdout-hk-alibaba-fy2023",
+        "scope": "holdout",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_denominator": 10,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      },
+      {
+        "sample_id": "holdout-us-mongodb-10k",
+        "scope": "holdout",
+        "status": "PARTIAL",
+        "critical_recall": 0.0,
+        "critical_denominator": 11,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      },
+      {
+        "sample_id": "holdout-us-nvidia-10k",
+        "scope": "holdout",
+        "status": "PARTIAL",
+        "critical_recall": 0.0,
+        "critical_denominator": 12,
+        "claims": 0,
+        "semantic_units": 0,
+        "review_supplied": false
+      }
+    ],
+    "per_sample_observation": [
+      {
+        "sample_id": "cn-equity",
+        "routed_kind": "unknown",
+        "selected": 96,
+        "candidates": 449,
+        "units": 3224,
+        "pages_read": 96,
+        "page_count": 96,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true
+      },
+      {
+        "sample_id": "cn-h1",
+        "routed_kind": "semi_annual_report",
+        "selected": 96,
+        "candidates": 369,
+        "units": 5500,
+        "pages_read": 210,
+        "page_count": 210,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true
+      },
+      {
+        "sample_id": "cn-ipo-confirmation",
+        "routed_kind": "prospectus",
+        "selected": 0,
+        "candidates": 0,
+        "units": 0,
+        "pages_read": 1,
+        "page_count": 1,
+        "native_scan": "partial",
+        "opaque_pages": [
+          1
+        ],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true
+      },
+      {
+        "sample_id": "cn-ir",
+        "routed_kind": "investor_relations",
+        "selected": 11,
+        "candidates": 11,
+        "units": 302,
+        "pages_read": 6,
+        "page_count": 6,
+        "native_scan": "complete",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true
+      },
+      {
+        "sample_id": "cn-q-business",
+        "routed_kind": "quarterly_report",
+        "selected": 28,
+        "candidates": 28,
+        "units": 579,
+        "pages_read": 15,
+        "page_count": 15,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true
+      },
+      {
+        "sample_id": "hk-annual",
+        "routed_kind": "annual_report",
+        "selected": 96,
+        "candidates": 254,
+        "units": 6502,
+        "pages_read": 246,
+        "page_count": 246,
+        "native_scan": "partial",
+        "opaque_pages": [
+          246
+        ],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true
+      },
+      {
+        "sample_id": "holdout-cn-glodon-q1",
+        "routed_kind": "quarterly_report",
+        "selected": 0,
+        "candidates": 0,
+        "units": 257,
+        "pages_read": 12,
+        "page_count": 12,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true
+      },
+      {
+        "sample_id": "holdout-cn-yake-q1",
+        "routed_kind": "quarterly_report",
+        "selected": 2,
+        "candidates": 2,
+        "units": 369,
+        "pages_read": 10,
+        "page_count": 10,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true
+      },
+      {
+        "sample_id": "holdout-hk-alibaba-fy2023",
+        "routed_kind": "annual_report",
+        "selected": 96,
+        "candidates": 2221,
+        "units": 18038,
+        "pages_read": 360,
+        "page_count": 360,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true
+      },
+      {
+        "sample_id": "holdout-us-mongodb-10k",
+        "routed_kind": null,
+        "selected": null,
+        "candidates": null,
+        "units": null,
+        "pages_read": null,
+        "page_count": null,
+        "native_scan": "unavailable",
+        "opaque_pages": [],
+        "carrier": ".htm",
+        "carrier_supported": false,
+        "raw_unchanged": true
+      },
+      {
+        "sample_id": "holdout-us-nvidia-10k",
+        "routed_kind": null,
+        "selected": null,
+        "candidates": null,
+        "units": null,
+        "pages_read": null,
+        "page_count": null,
+        "native_scan": "unavailable",
+        "opaque_pages": [],
+        "carrier": ".htm",
+        "carrier_supported": false,
+        "raw_unchanged": true
+      }
+    ]
+  },
+  "offline_run": {
+    "fixtures": 5,
+    "fixture_bytes": 14301,
+    "fixture_budget_bytes": 204800,
+    "by_scope": {
+      "development": {
+        "critical_fact_recall": 0.8571428571428571,
+        "critical_facts_passed": 6,
+        "critical_facts_total": 7,
+        "critical_facts_unavailable": 1,
+        "documents": 3,
+        "fact_recall": 1.0,
+        "facts_passed": 6,
+        "facts_total": 6,
+        "statuses": {
+          "PARTIAL": 1,
+          "PASS": 2
+        }
+      },
+      "holdout": {
+        "critical_fact_recall": 1.0,
+        "critical_facts_passed": 5,
+        "critical_facts_total": 5,
+        "critical_facts_unavailable": 0,
+        "documents": 2,
+        "fact_recall": 1.0,
+        "facts_passed": 5,
+        "facts_total": 5,
+        "statuses": {
+          "PASS": 2
+        }
+      }
+    },
     "mutations_applicable": 53,
+    "mutations_detected": 53,
     "mutations_not_applicable": 42,
     "network_calls": 0,
     "model_calls": 0,
     "paid_calls": 0,
-    "raw_copies": 0,
-    "sentinel_restored": true,
-    "sentinel_reason": "restored",
-    "peak_rss_bytes": 21049344
+    "peak_rss_bytes": 22233088
   },
-
-  "A_B_node_tests": {
-    "command": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q",
-    "exit_code": 0,
-    "result": "65 passed, 5 skipped",
-    "elapsed_seconds": 3.19,
-    "skipped_reason": "the 5 real-data replays are gated behind DU_BENCH_ALLOW_REAL_DATA=1 so the default suite stays fully offline"
-  },
-
-  "C_node_real_data_tests": {
-    "command": "DU_BENCH_ALLOW_REAL_DATA=1 python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q -m real_data",
-    "exit_code": 0,
-    "result": "5 passed",
-    "elapsed_seconds": 45.59
-  },
-
-  "C_node_bindings": {
-    "command": "python -X utf8 -m tools.document_understanding_benchmark.make_bindings --manifest <ROOT>/sample_manifest.json --out .du-bench-out/bindings.local.json --repo-root <company-wiki>",
-    "exit_code": 0,
-    "result": "bound 20/20 survey originals by SHA-256",
-    "copies_made": 0
-  },
-
-  "C_node_report": {
-    "command": "python -X utf8 -m tools.document_understanding_benchmark.report --bindings .du-bench-out/bindings.local.json --output .du-bench-out/native-report --probe-config config/source_catalog.yaml",
-    "exit_code": 0,
-    "raw_all_unchanged": true,
-    "config_unchanged": {"unchanged": true, "count": 1, "changes": []},
-    "network_calls": 0,
-    "model_calls": 0,
-    "paid_calls": 0,
-    "raw_copies": 0,
-    "samples": {
-      "cn-equity": {"status": "FAIL", "critical_recall": 0.0, "critical_denominator": 7, "resolved": "OK", "routed_kind": "unknown", "selected_spans": 96, "candidate_count": 449, "source_units": 3224, "pages_read": 96, "page_count": 96, "native_scan": "partial", "elapsed_s": 7.938, "raw_unchanged": true},
-      "cn-ir": {"status": "FAIL", "critical_recall": 0.143, "critical_denominator": 7, "resolved": "OK", "routed_kind": "investor_relations", "selected_spans": 11, "candidate_count": 11, "source_units": 302, "pages_read": 6, "page_count": 6, "native_scan": "complete", "elapsed_s": 0.39, "raw_unchanged": true},
-      "cn-q-business": {"status": "FAIL", "critical_recall": 0.667, "critical_denominator": 9, "resolved": "OK", "routed_kind": "quarterly_report", "selected_spans": 28, "candidate_count": 28, "source_units": 579, "pages_read": 15, "page_count": 15, "native_scan": "partial", "elapsed_s": 2.278, "raw_unchanged": true},
-      "hk-annual": {"status": "FAIL", "critical_recall": 0.0, "critical_denominator": 6, "resolved": "OK", "routed_kind": "annual_report", "selected_spans": 96, "candidate_count": 254, "source_units": 6502, "pages_read": 246, "page_count": 246, "native_scan": "partial", "opaque_pages": [246], "elapsed_s": 23.737, "raw_unchanged": true}
-    }
-  },
-
-  "C_node_native_cli": {
-    "command": "python -X utf8 -m tools.document_understanding_benchmark --mode native --bindings .du-bench-out/bindings.local.json --output .du-bench-out --probe-config config/source_catalog.yaml",
-    "exit_code": 1,
-    "elapsed_seconds": 48.786,
-    "bindings_supplied": 4,
-    "resolved": 4,
-    "unavailable": 0,
-    "raw_unchanged": true,
-    "config_unchanged": true,
-    "config_probes": 2,
-    "sentinel_restored": true,
-    "sentinel_reason": "restored",
-    "peak_rss_bytes": 121929728,
-    "raw_bytes_read": 6413909
-  },
-
-  "sentinel_preservation_proof": {
-    "method": "planted a pre-existing sentinel body in each owned child, ran the mode, compared SHA-256 and mtime_ns",
-    "offline": {
-      "planted_sha256": "D98FC286DF385604B9E78AB6D22B2A985A68A13A93A1A6C86ED1F4AFC9424D88",
-      "planted_mtime_ns": 639274754759568590,
-      "after_sha256": "D98FC286DF385604B9E78AB6D22B2A985A68A13A93A1A6C86ED1F4AFC9424D88",
-      "after_mtime_ns": 639274754759568590,
-      "content_preserved": true
-    },
-    "native": {
-      "planted_sha256": "404B754CA82F18AB6951CE28B0956BEE41E152AB889E8B563C0BA7A4EFD0CD51",
-      "planted_mtime_ns": 639274754759600862,
-      "after_sha256": "404B754CA82F18AB6951CE28B0956BEE41E152AB889E8B563C0BA7A4EFD0CD51",
-      "after_mtime_ns": 639274754759600862,
-      "content_preserved": true
-    },
-    "fix_note": "install_sentinel previously rewrote the sentinel every run, so sentinel_stable compared a fresh file against itself and reported false. Now the prior bytes+mtime are captured before the run and restored afterwards."
-  },
-
-  "originals_verification": {
-    "method": "resolve_original() per sample: binding + SHA-256 recomputed from disk, cross-checked against gold and the ROOT sample_manifest.json",
-    "all_four_match_gold_and_manifest": true,
-    "rows": [
-      {"sample_id": "cn-equity", "sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e", "size": 3812541, "mtime_ns": 1608820218000000000},
-      {"sample_id": "cn-ir", "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7", "size": 153851, "mtime_ns": 1779228233262998600},
-      {"sample_id": "cn-q-business", "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268", "size": 217264, "mtime_ns": 1779046989673803600},
-      {"sample_id": "hk-annual", "sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf", "size": 2230253, "mtime_ns": 1761392825000000000}
-    ],
-    "note": "mtime_ns values were identical before and after every read; no original was copied or written."
-  },
-
-  "known_misses_reproduced": {
-    "hengfeng_construction_phases": {
-      "claim": "恒锋 建设期/第一期/第二期 never reach the selected text",
-      "reproduced": true,
-      "detail": "token search over the observed selected_text: '建设期' absent, '第一期' absent, '第二期' absent, '募集资金' present. 96 of 449 candidates selected; omitted_candidate_count=353."
-    },
-    "miniso_p12_store_table": {
-      "claim": "名创 p12 store table / TOP TOY not selected",
-      "reproduced": true,
-      "detail": "All 7 hk-annual gold facts are ABSENT from the selected text, including 'Total 合計' / '7,504', the operating-model rows, and the TOP TOY store counts. Note: the bare token 'TOP TOY' does appear elsewhere in the selection, so the miss is the p12 table facts, not the brand string."
-    },
-    "span_cap_partial": {
-      "claim": "the 96-span cap is partial",
-      "reproduced": true,
-      "detail": "cn-equity 96/449 capped=True status=partial; hk-annual 96/254 capped=True status=partial. cn-ir and cn-q-business were NOT capped (11/11 and 28/28)."
-    }
-  },
-
-  "honest_counterfinding": {
-    "finding": "cn-ir recall failure is not a cap problem",
-    "detail": "cn-ir had only 11 candidates and the selector selected all 11, yet 9 of 10 gold facts remain absent. The candidate generator never produced those facts, so raising the selection cap cannot fix cn-ir recall.",
-    "support": "fact_recall 1/10 with selected_spans == candidate_count == 11, omitted_candidate_count=0"
-  },
-
-  "resource_totals": {
-    "network_calls": 0,
-    "model_calls": 0,
-    "paid_calls": 0,
-    "raw_copies": 0,
-    "originals_written": 0,
-    "db_writes": 0,
-    "production_config_writes": 0,
-    "offline_fixture_bytes": 14309,
-    "offline_fixture_budget_bytes": 204800,
-    "native_raw_bytes_read": 6413909,
-    "native_peak_rss_bytes": 121929728,
-    "offline_peak_rss_bytes": 21049344,
-    "kept_output_dir_bytes": 220351,
-    "largest_kept_output_file_bytes": 112579,
-    "smallest_original_bytes": 153851,
-    "full_text_copies_in_output": 0
-  },
-
-  "bugs_found_and_fixed_this_session": [
-    "recovery.peak_rss_bytes() returned None on Windows: ctypes called GetProcessMemoryInfo without argtypes/restype, so the 64-bit HANDLE was truncated and both psapi and K32 probes returned 0. Added prototypes; peak RSS is now really measured (12.2 MiB native, 21.0 MiB offline).",
-    "install_sentinel() unconditionally overwrote an existing sentinel, and the sentinel_stable check then compared that fresh file against itself, so it could never detect a clobbered pre-existing sentinel. Now the prior bytes+mtime are captured before the run and restored byte-identical afterwards; restoration.sentinel_restored reports 'restored' vs 'created_by_this_run'.",
-    "restore_sentinel() had a NameError typo ('preeexisting') that the new sentinel-preservation test caught before it shipped.",
-    "config_unchanged reported count=0 when no --probe-config was passed, which could look like a pass while proving nothing; the probe count is now printed and the sentinel is included in the probe set."
-  ],
-
-  "scratch_disposition": {
-    "removed": [
-      ".planning/du-bench/_scratch_bind.py",
-      ".planning/du-bench/_scratch_cmds.txt",
-      ".planning/du-bench/_scratch_gold.py",
-      ".planning/du-bench/_scratch_trace.py",
-      ".planning/du-bench/_scratch_rss.py",
-      ".planning/du-bench/_scratch_dump.py",
-      ".planning/du-bench/_scratch_mut.py",
-      ".planning/du-bench/_scratch_native.py",
-      ".planning/du-bench/_scratch_pages.py",
-      ".planning/du-bench/_scratch_slice.py",
-      "tools/document_understanding_benchmark/**/__pycache__"
-    ],
-    "kept_regenerable": [".du-bench-out/ (run scratch + local bindings; not committed, regenerable via make_bindings and the two modes)"],
-    "note": "The _scratch_* inspectors were one-off diagnostics; every number they produced is recorded in this file and in handoff.md."
+  "repo_state": {
+    "branch": "codex/du-benchmark-20261013",
+    "head": "cfb0544ee5a60aa6b9b2feb292c0dfc7bfe72535",
+    "commits_since_base": [
+      "cfb0544e ﻿feat(du-bench): add a real US holdout and split reporting by scope",
+      "9aa97dee ﻿feat(du-bench): add two real holdout gold records",
+      "16d8343f docs: keep DU-BENCH bindings outside the worktree",
+      "b294a5d6 docs: recommend writing DU-BENCH bindings outside the worktree",
+      "47c0b164 docs: log DU-BENCH session 2 native re-verification and benchmark self-fixes",
+      "00d0b8a5 docs: mark all DU-BENCH phases complete in the task plan",
+      "1d5cfaa5 docs: record measured peak RSS and real sentinel preservation in DU-BENCH handoff",
+      "aa817a4a docs: record measured peak RSS and sentinel-preservation evidence",
+      "ebb5453f docs: add compact DU-BENCH A/B/C evidence record",
+      "3b7aa7ab docs: close DU-BENCH phases 5-6 in the planning record",
+      "74872d03 docs: record DU-BENCH implementation commit SHA in handoff",
+      "ad77758d ﻿feat: add DU-BENCH independent document-understanding benchmark"
+    ]
   }
 }

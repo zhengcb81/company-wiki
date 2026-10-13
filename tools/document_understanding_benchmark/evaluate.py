@@ -18,6 +18,7 @@ from typing import Any
 
 from . import checkers
 from .records import validate_gold, validate_observed
+from .review import review_summary
 from .schema import (
     EVALUATION_SCHEMA_VERSION,
     FAIL,
@@ -127,6 +128,8 @@ def evaluate(
         "selected_span_count": len(checked_observed.get("selected_locators") or []),
         "claim_count": len(checked_observed.get("claims") or []),
         "semantic_unit_count": len(checked_observed.get("semantic_units") or []),
+        "review_supplied": bool(review),
+        "reviewed_claims": len((review or {}).get("claims") or []),
     }
     metrics.update(
         {
@@ -150,6 +153,7 @@ def evaluate(
         "dimensions": checkers.summarize_dimensions(checks),
         "not_evaluated": not_evaluated,
         "spot_read_list": checkers.spot_read_list(checked_observed, checked_gold),
+        "review": review_summary(review),
         "execution": {
             "entry_point": (checked_observed.get("execution") or {}).get("entry_point"),
             "parser_version": (checked_observed.get("execution") or {}).get("parser_version"),

@@ -320,6 +320,7 @@ def run_mutation_suite(
     gold: Mapping[str, Any],
     *,
     limits: Mapping[str, Any] | None = None,
+    review: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Apply every mutation and report whether the oracle detected it.
 
@@ -336,7 +337,7 @@ def run_mutation_suite(
         misses would inflate the gap; counting them as hits would fake it.
     """
 
-    baseline = evaluate(observed, gold, limits=limits)
+    baseline = evaluate(observed, gold, limits=limits, review=review)
     rows: list[dict[str, Any]] = []
     for mutation_id, label, mutator, expected_check_prefix in MUTATIONS:
         original = _clone(observed)
@@ -357,7 +358,7 @@ def run_mutation_suite(
                 }
             )
             continue
-        result = evaluate(mutated, gold, limits=limits)
+        result = evaluate(mutated, gold, limits=limits, review=review)
         detected = result["status"] != "PASS"
         failing = [row["check_id"] for row in result["checks"] if row["status"] == "FAIL"]
         not_pass = [

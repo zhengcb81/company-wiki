@@ -110,14 +110,15 @@ Append-only session log.
   `74872d03` (handoff SHA). `git diff --name-only <base>...HEAD` is exactly the
   30 owned files; `git status` clean.
 
-## Outcome
+## Outcome at end of session 1 (superseded by session 2 below)
 
-DU-BENCH is complete with recorded gaps. The measured real baseline recall on
-independently authored gold is 0.000 / 0.143 / 0.667 / 0.000, and the strongest
-single finding is that `cn-ir` exhausted no budget at all — 11 candidates,
-11 selected, 9 of 10 gold facts still absent — so recall failure there is a
-candidate-generation problem, not a cap problem. US holdout remains
-UNAVAILABLE by design rather than filled with synthetic samples.
+Session 1 closed with 4 development records and **zero** holdout, and reported
+US coverage as UNAVAILABLE. Both were later corrected: real US originals did
+exist locally, and holdout gold was authored in session 2. The measured recall
+at that point was cn-equity 0.000 / cn-ir 0.143 / cn-q-business 0.667 /
+hk-annual 0.000, and the strongest single finding — that `cn-ir` exhausted no
+budget at all (11 candidates, 11 selected, 9 of 10 facts still absent) — was
+confirmed and extended in session 2.
 
 
 ## 2026-10-13 — session 2: native replay re-verification + benchmark self-fixes
@@ -154,3 +155,49 @@ UNAVAILABLE by design rather than filled with synthetic samples.
   74872d03 / 3b7aa7ab / ebb5453f / aa817a4a / 1d5cfaa5 (handoff + evidence).
   31 files, all inside tools/document_understanding_benchmark/** and
   .planning/du-bench/**. .du-bench-out/ is regenerable scratch, not committed.
+
+## 2026-10-13 — session 2: full holdout coverage, review layer, carrier reality
+
+Session 1 left holdout at zero. This session closed it.
+
+- **Holdout gold authored (5 records, 68 facts).** A-share 广联达 2025Q1 and
+  雅克科技 2022Q1; H-share 阿里巴巴 FY2023 (360pp traditional Chinese); US
+  MongoDB FY2026 10-K and NVIDIA FY2025 10-K. The US pair was read by an
+  independent subagent that returned verbatim quotes plus documented traps.
+- **Correction to session 1:** US originals *did* exist locally — four real
+  10-Ks under `company-wiki/companies/{Alphabet,Apple,NVIDIA,MongoDB}`, none
+  previously used in the DU work. The earlier UNAVAILABLE was replaced with
+  real, SHA-bound gold rather than left as a request.
+- **Development gold extended:** `cn-h1` (中微 half-year — a five-year target
+  stated beside a present-tense coverage figure, and six distinct product
+  verification stages) and `cn-ipo-confirmation` (the scanned page, encoded as
+  an opacity/anti-fabrication test rather than a content test).
+- **Scope reporting added end to end.** `evaluate`, the CLI and the run report
+  separate development from holdout, and `test_gold_set.py` makes merging them
+  a test failure. Measured: dev **9/41 = 0.220**, holdout **0/45 = 0.000**.
+- **New findings, each measured:**
+  - `holdout-cn-glodon-q1` produced **0 candidates from 257 units**.
+  - `holdout-cn-yake-q1` produced 2 candidates from 369 units.
+  - `holdout-hk-alibaba-fy2023` produced 2,221 candidates and selected none of
+    its 14 facts; 18,038 units over 360 pages.
+  - `cn-ipo-confirmation` routes to `document_kind=prospectus` with 0 units and
+    an opaque page 1 — the documented title trap, now reproduced.
+  - All 11 documents yield **0 claims and 0 semantic units**, which is why
+    context/role/entailment stay structurally NOT_EVALUATED.
+- **Review layer built and negative-controlled.** `review.py` (`du-review/1`)
+  with a four-state entailment verdict; a real 5-fixture / 11-claim independent
+  review artifact; and `controls.py` proving 3/3 injected meaning-level defects
+  are invisible to deterministic checks and caught by review, while an
+  all-ENTAILED review cannot rescue a deterministic FAIL. A test asserts those
+  properties so a stale justification fails loudly.
+- **Carrier reality measured.** The existing public path supports only PDF and
+  transcript carriers: two real 10-Ks return `units=0` with
+  `transcript_start_missing`, and their extracted text is led by inline-XBRL
+  tokens. `observer.carrier_support()` and the native report now name
+  unsupported carriers explicitly, so "carrier unsupported" cannot be misread
+  as "document has no content".
+- Verification: **100 offline + 7 real-data tests pass**, ruff clean, 53/53
+  applicable mutations detected, `raw_unchanged` and `config_unchanged` true
+  across all 11 samples, 0 paid calls, bindings moved outside the worktree.
+- `evidence.json` is now **generated from the run artifacts**, so its recorded
+  numbers cannot drift from what was actually measured.

@@ -297,8 +297,61 @@ def test_adapter_seam_rejects_a_non_callable():
 
 
 # ---------------------------------------------------------------------------
-# real originals (opt-in)
+# carrier support
 # ---------------------------------------------------------------------------
+
+
+def test_pdf_and_transcript_carriers_are_supported():
+    from tools.document_understanding_benchmark.observer import carrier_support
+
+    for suffix in (".pdf", ".txt", ".md"):
+        info = carrier_support(Path(f"doc{suffix}"))
+        assert info["supported"] is True, suffix
+        assert info["entry_point"], suffix
+
+
+def test_sec_filing_html_is_reported_unsupported():
+    """A 10-K HTML is not a transcript, so it must not be claimed as observable."""
+
+    from tools.document_understanding_benchmark.observer import carrier_support
+
+    for suffix in (".htm", ".html"):
+        info = carrier_support(Path(f"filing{suffix}"))
+        assert info["supported"] is False, suffix
+        assert info["reason"], suffix
+
+
+def test_unknown_carrier_is_unsupported_not_guessed():
+    from tools.document_understanding_benchmark.observer import carrier_support
+
+    info = carrier_support(Path("doc.xlsx"))
+    assert info["supported"] is False
+
+
+@pytest.mark.real_data
+def test_real_10k_html_yields_no_units_through_the_transcript_path():
+    """Measured, not assumed: the only HTML path produces zero units for a 10-K.
+
+    This is the evidence behind reporting US filings as UNAVAILABLE rather than
+    as documents with no business content.
+    """
+
+    if os.environ.get("DU_BENCH_ALLOW_REAL_DATA") != "1":
+        pytest.skip("set DU_BENCH_ALLOW_REAL_DATA=1 to probe a real 10-K")
+    bindings = _available_bindings()
+    candidate = bindings.get("holdout-us-mongodb-10k") or bindings.get("us-10k")
+    if not candidate or not Path(candidate).is_file():
+        pytest.skip("no local US 10-K binding")
+
+    from tools.document_understanding_benchmark.observer import probe_non_pdf_html
+
+    report = probe_non_pdf_html(Path(candidate))
+    assert report["extracted"] is True, report
+    assert report["units"] == 0, report
+    assert report["usable"] is False
+    assert "transcript_start_missing" in " ".join(report["errors"])
+
+
 
 BINDINGS_CANDIDATES = (
     # Preferred: kept outside the worktree so the repository stays clean.

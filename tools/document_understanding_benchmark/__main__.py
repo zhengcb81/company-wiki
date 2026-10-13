@@ -25,6 +25,7 @@ from pathlib import Path
 from typing import Any
 
 from . import __name__ as package_name
+from .controls import run_rescue_controls, run_review_controls
 from .evaluate import evaluate
 from .fixtures import OFFLINE_FIXTURE_BUDGET, all_fixtures, fixture_bytes
 from .gold import GoldError, load_bindings, load_gold_dir, resolve_original, unavailable_observed
@@ -43,6 +44,7 @@ from .recovery import (
     restore_sentinel,
 )
 from .schema import BenchmarkSchemaError
+from .review import ReviewError, validate_review
 
 OFFLINE_FIXTURE_BUDGET_LOCAL = OFFLINE_FIXTURE_BUDGET
 EXIT_PASS = 0
@@ -80,6 +82,40 @@ def _print_scope_summary(summary: dict[str, Any]) -> None:
             f"critical={row['critical_facts_passed']}/{row['critical_facts_total']} "
             f"({recall_text}) statuses={row['statuses']}"
         )
+
+
+def _carrier_summary(observations: list[dict[str, Any]]) -> dict[str, Any]:
+    """Report which carriers this run could actually observe.
+
+    A carrier the existing public path cannot take in must be visible in the
+    report, because otherwise an unsupported carrier is indistinguishable from
+    a document with no business content.
+    """
+
+    counts: dict[str, dict[str, Any]] = {}
+    for observed in observations:
+        carrier = (observed.get("execution") or {}).get("carrier") or {}
+        suffix = carrier.get("suffix") or "unknown"
+        row = counts.setdefault(
+            suffix,
+            {
+                "kind": carrier.get("kind"),
+                "supported": carrier.get("supported"),
+                "entry_point": carrier.get("entry_point"),
+                "reason": carrier.get("reason"),
+                "documents": 0,
+                "unavailable": 0,
+            },
+        )
+        row["documents"] += 1
+        if (observed.get("coverage") or {}).get("native_scan") == "unavailable":
+            row["unavailable"] += 1
+    return {
+        "by_suffix": dict(sorted(counts.items())),
+        "unsupported_carriers_present": sorted(
+            suffix for suffix, row in counts.items() if row.get("supported") is False
+        ),
+    }
 
 
 def _overall_exit(results: list[dict[str, Any]]) -> int:
@@ -141,6 +177,41 @@ def _scope_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
     return summary
 
 
+def _load_reviews(path_value: str | None) -> dict[str, Any] | None:
+    """Load an optional independent-review file, keyed by sample_id.
+
+    Returns ``None`` to refuse the run when the file exists but is malformed: a
+    bad review must never be silently ignored, because ignoring it would report
+    ``NOT_EVALUATED`` where the operator believed a review had been applied.
+
+    Accepts either one review object or a list of them.
+    """
+
+    if not path_value:
+        return {}
+    path = Path(path_value)
+    try:
+        raw = json.loads(path.read_text(encoding="utf8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"refused: cannot read review file {path}: {exc}", file=sys.stderr)
+        return None
+    records = raw if isinstance(raw, list) else [raw]
+    reviews: dict[str, Any] = {}
+    for index, record in enumerate(records):
+        try:
+            checked = validate_review(record)
+        except ReviewError as exc:
+            print(f"refused: review[{index}] is invalid: {exc}", file=sys.stderr)
+            return None
+        sample_id = checked.get("sample_id")
+        if not sample_id:
+            print(f"refused: review[{index}] has no sample_id", file=sys.stderr)
+            return None
+        reviews[str(sample_id)] = checked
+    print(f"reviews loaded: {len(reviews)} ({sorted(reviews)})")
+    return reviews
+
+
 def run_offline(args: argparse.Namespace) -> int:
     size = fixture_bytes()
     if size > OFFLINE_FIXTURE_BUDGET:
@@ -155,13 +226,27 @@ def run_offline(args: argparse.Namespace) -> int:
     started = time.monotonic()
     results: list[dict[str, Any]] = []
     mutation_reports: list[dict[str, Any]] = []
+    review_reports: list[dict[str, Any]] = []
+    reviews = _load_reviews(args.review)
+    if reviews is None:
+        return EXIT_REFUSED
     for fixture in all_fixtures():
         gold = validate_gold(fixture["gold"])
         observed = validate_observed(fixture["observed"])
-        result = evaluate(observed, gold)
+        result = evaluate(observed, gold, review=reviews.get(gold["sample_id"]))
         result["fixture_id"] = fixture["fixture_id"]
         results.append(result)
         mutation_reports.append(run_mutation_suite(observed, gold))
+        # Measure what only a review can catch, and prove a review cannot mask
+        # a deterministic failure. Reported even when no review was supplied,
+        # because the controls inject their own verdicts.
+        review_reports.append(
+            {
+                "fixture_id": fixture["fixture_id"],
+                "semantic_only": run_review_controls(dict(observed), gold),
+                "rescue": run_rescue_controls(dict(observed), gold),
+            }
+        )
 
     elapsed = time.monotonic() - started
     exit_code = _overall_exit(results)
@@ -180,6 +265,7 @@ def run_offline(args: argparse.Namespace) -> int:
         "by_scope": _scope_summary(results),
         "results": results,
         "mutations": mutation_reports,
+        "review_controls": review_reports,
         "resources": resource_report(
             elapsed_seconds=elapsed,
             derived_bytes=directory_size(owned),
@@ -204,13 +290,21 @@ def run_offline(args: argparse.Namespace) -> int:
     )
     print("by scope:")
     _print_scope_summary(report["by_scope"])
+    blind = sum(row["semantic_only"]["deterministic_blind_count"] for row in review_reports)
+    controls = sum(row["semantic_only"]["controls_total"] for row in review_reports)
+    review_ok = all(row["semantic_only"]["review_caught_all"] for row in review_reports)
+    rescue_ok = all(row["rescue"]["all_rescues_blocked"] for row in review_reports)
+    print(
+        f"semantic-only defects invisible to deterministic checks: {blind}/{controls}; "
+        f"review caught all: {review_ok}; review cannot rescue a FAIL: {rescue_ok}"
+    )
     print(f"sentinel restored: {sentinel_restored['unchanged']} ({sentinel_restored['reason']})")
     print(f"summary: {owned / 'summary.json'}")
     return exit_code
 
 
 def run_native(args: argparse.Namespace) -> int:
-    from .observer import ObserverUnavailable, observe_native
+    from .observer import ObserverUnavailable, carrier_support, observe_native
 
     try:
         golds = load_gold_dir(Path(args.gold_dir) if args.gold_dir else None)
@@ -239,6 +333,10 @@ def run_native(args: argparse.Namespace) -> int:
     probes.append(Path(sentinel["path"]))
     before = fingerprint_many(probes)
 
+    reviews = _load_reviews(args.review)
+    if reviews is None:
+        return EXIT_REFUSED
+
     started = time.monotonic()
     results: list[dict[str, Any]] = []
     observations: list[dict[str, Any]] = []
@@ -261,11 +359,12 @@ def run_native(args: argparse.Namespace) -> int:
             finally:
                 original_after = file_fingerprint(path)
             observed["execution"]["resolved_path"] = str(path)
+            observed["execution"]["carrier"] = carrier_support(path)
             observed["execution"]["raw_unchanged"] = (
                 original_before.get("sha256") == original_after.get("sha256")
                 and original_before.get("mtime_ns") == original_after.get("mtime_ns")
             )
-        result = evaluate(observed, gold)
+        result = evaluate(observed, gold, review=reviews.get(gold["sample_id"]))
         results.append(result)
         observations.append(observed)
 
@@ -294,6 +393,7 @@ def run_native(args: argparse.Namespace) -> int:
         "paid_calls": 0,
         "elapsed_seconds": round(elapsed, 3),
         "by_scope": _scope_summary(results),
+        "carrier_support": _carrier_summary(observations),
         "results": results,
         "observations": observations,
         "restoration": {
@@ -322,6 +422,18 @@ def run_native(args: argparse.Namespace) -> int:
         print(_summary_line(result))
     print("by scope:")
     _print_scope_summary(report["by_scope"])
+    carriers = report["carrier_support"]
+    for suffix, row in carriers["by_suffix"].items():
+        state = "supported" if row["supported"] else "UNSUPPORTED"
+        print(
+            f"  carrier {suffix:<7} {state:<12} docs={row['documents']} "
+            f"unavailable={row['unavailable']}"
+        )
+    if carriers["unsupported_carriers_present"]:
+        print(
+            f"  unsupported carriers present: {carriers['unsupported_carriers_present']} "
+            "(no route into the existing selector; reported UNAVAILABLE, not a quality verdict)"
+        )
     print(f"raw unchanged: {raw_unchanged}")
     print(f"config unchanged: {restoration['unchanged']} (probes={restoration['count']})")
     print(f"sentinel restored: {sentinel_restored['unchanged']} ({sentinel_restored['reason']})")
@@ -370,6 +482,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--gold-dir", help="override the packaged gold directory")
     parser.add_argument("--sample", action="append", help="restrict to a sample_id (repeatable)")
     parser.add_argument("--adapter", help="path to a ROOT-injected observer adapter")
+    parser.add_argument(
+        "--review",
+        help=(
+            "independent semantic-review JSON (one object or a list, each with "
+            "sample_id and per-claim verdicts). Without it, semantics.entailment "
+            "stays NOT_EVALUATED rather than silently passing."
+        ),
+    )
     parser.add_argument(
         "--probe-file",
         action="append",
