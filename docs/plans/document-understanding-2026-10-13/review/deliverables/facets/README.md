@@ -38,8 +38,9 @@
 4. **常见误解**——`confusions`（原文含义 → 错误断言 → 为什么错 → 需要的槽位）；
 5. **未披露/未读/未答行为**——`absence_rules`（四态必须分开：未披露≠未答≠否定≠未读）。
 
-强事实、推测、指导目标、计划、假设风险通过 `modality` 槽位分开保存；管理层展望不升级成确定
-收入；缺字段标 unknown/null，不按模板造数。
+强事实、推测、指导目标、计划、假设风险通过 `modality` 槽位分开保存（五类语态的统一词表由两份
+A 级语义规格定义并由测试锁定）；管理层展望/目标不升级成确定收入；缺字段标 unknown/null，不按
+模板造数。
 
 ## 正反配对与合法退出
 
@@ -54,8 +55,9 @@ mutation 带 `expected_failure` 与 `reason`。三类语义级关键错误（缺
 python -B -X utf8 -m pytest docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests -q
 ```
 
-测试只查：schema/枚举、条件式槽位绑定、支持组引用完整（组内 AND、组间 OR）、mutation 维度
-覆盖、`candidate_claim`/`expected_missing_slots` 显式字段一致、引文预算（每 source ≤8KiB）、
+测试只查：schema/枚举、条件式槽位绑定、五类语态词表、summary_focus 问句形式、支持组引用完整
+（组内 AND、组间 OR）、mutation 维度覆盖、`candidate_claim`/`expected_missing_slots` 显式字段
+一致、引文预算（每 source ≤8KiB）、
 可移植（无绝对路径）、0 原件复制、持久数据 ≤512KiB、机制组合不互相覆盖（轴不交叠、无公司/
 产品专名、不重定义对方语义）、C记录与真实引文一一对应。测试用 pytest tmp_path 自带临时空间，
 不触碰仓库其他文件。

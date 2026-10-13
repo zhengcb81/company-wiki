@@ -9,6 +9,8 @@ judge natural-language entailment.
 
 from __future__ import annotations
 
+import json
+
 import pytest
 
 from helpers import (
@@ -106,6 +108,32 @@ def test_capacity_spec_conditional_coverage() -> None:
     for entry in record["required_context"]:
         slot_union.update(entry["slots"])
     assert {"project", "quantity", "unit", "period", "condition", "modality"} <= slot_union
+
+
+def test_semantic_specs_separate_the_five_modality_classes() -> None:
+    """卡片第5步：强事实、推测、指导目标、计划、假设风险分开；展望不升级成确定收入。"""
+    import re
+
+    markers = {
+        "强事实": re.compile(r"强事实"),
+        "推测/测算": re.compile(r"推测|测算"),
+        "指导目标": re.compile(r"指导"),
+        "计划": re.compile(r"计划"),
+        "假设性风险": re.compile(r"假设"),
+    }
+    for record_id in ("semantic_stage_progression", "semantic_capacity_project"):
+        record = load_record(record_id)
+        blob = json.dumps(record, ensure_ascii=False)
+        for name, marker in markers.items():
+            assert marker.search(blob), (
+                f"{record_id} must explicitly separate modality class {name}"
+            )
+        has_guidance_confusion = any(
+            "modality" in entry["required_context_slots"] for entry in record["confusions"]
+        )
+        assert has_guidance_confusion, (
+            f"{record_id} needs a confusion pinning modality (guidance/target != revenue)"
+        )
 
 
 def test_semantic_specs_have_key_error_counterexamples() -> None:

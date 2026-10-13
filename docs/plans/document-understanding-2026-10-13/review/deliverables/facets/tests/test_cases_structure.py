@@ -77,7 +77,13 @@ def test_observation_units_and_anchors(case_id: str) -> None:
             )
             assert isinstance(anchor["exact_quote"], str) and anchor["exact_quote"].strip()
             carrier = observation["metadata"].get("carrier", "pdf")
-            if carrier not in {"html", "htm", "txt"}:
+            if carrier in {"html", "htm"}:
+                pass  # HTML 无页/行，ROOT 以 quote anchor 解析定位（handoff 已记偏差）
+            elif carrier == "txt":
+                assert anchor["line"] is not None, (
+                    f"{case_id}: line-based TXT sources must give the quote line"
+                )
+            else:
                 assert anchor["physical_page"] is not None or anchor["line"] is not None, (
                     f"{case_id}: paged sources need page/line with the quote anchor"
                 )

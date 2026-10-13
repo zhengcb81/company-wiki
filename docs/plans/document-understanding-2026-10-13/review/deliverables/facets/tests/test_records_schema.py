@@ -122,6 +122,16 @@ def test_case_ids_reference_existing_case_files(record_id: str) -> None:
         assert case_path(case_id).exists(), f"{record_id} references missing case file {case_id}"
 
 
+@pytest.mark.parametrize("record_id", EXPECTED_RECORD_IDS)
+def test_summary_focus_is_phrased_as_business_questions(record_id: str) -> None:
+    """INTERFACES §3: summary_focus 是原语言业务问题，不产生投资结论。"""
+    record = load_record(record_id)
+    for item in record["summary_focus"]:
+        assert "？" in item or "?" in item, (
+            f"{record_id} summary_focus must be phrased as business questions, got {item!r}"
+        )
+
+
 def test_mechanism_records_have_no_company_product_lists() -> None:
     from helpers import load_json, record_path
 

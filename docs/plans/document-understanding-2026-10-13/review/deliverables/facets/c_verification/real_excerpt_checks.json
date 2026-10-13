@@ -163,7 +163,7 @@
       "sample_id": "us-txt",
       "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
       "page": null,
-      "quote": "Vice President of Investor Relations",
+      "quote": "It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations",
       "method": "txt_text_normalized",
       "normalized_match": true,
       "sha256_verified": true

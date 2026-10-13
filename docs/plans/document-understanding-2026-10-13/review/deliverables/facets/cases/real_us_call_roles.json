@@ -28,7 +28,7 @@
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": null, "line": null, "exact_quote": "intended to supplement our prepared remarks during today's call"},
+        "anchor": {"physical_page": null, "line": 128, "exact_quote": "intended to supplement our prepared remarks during today's call"},
         "page": null,
         "text": "Jonathan Neilson: Good afternoon, and thank you for joining us today. On the call with me are Satya Nadella, Chairman and Chief Executive Officer; Amy Hood, Chief Financial Officer; Alice Jolla, Chief Accounting Officer; and Brian DeFoe, Deputy General Counsel and Corporate Secretary. On the Microsoft Investor Relations website, you can find our earnings press release and financial summary slide deck, which is intended to supplement our prepared remarks during today's call.",
         "role": "call_opening",
@@ -37,7 +37,7 @@
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": null, "line": null, "exact_quote": "Vice President of Investor Relations"},
+        "anchor": {"physical_page": null, "line": 126, "exact_quote": "It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations"},
         "page": null,
         "text": "Operator: Greetings, and welcome to the Microsoft Fiscal Year 2026 Fourth Quarter Earnings Conference Call. As a reminder, this conference is being recorded. It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations. Please go ahead.",
         "role": "call_opening",
@@ -46,7 +46,7 @@
       {
         "unit_id": "u3",
         "locator": null,
-        "anchor": {"physical_page": null, "line": null, "exact_quote": "On this call, we will discuss certain non-GAAP items"},
+        "anchor": {"physical_page": null, "line": 128, "exact_quote": "On this call, we will discuss certain non-GAAP items"},
         "page": null,
         "text": "On this call, we will discuss certain non-GAAP items. The non-GAAP financial measures provided should not be considered as a substitute for or superior to the measures of financial performance prepared in accordance with GAAP. They are included as additional clarifying items to aid investors in further understanding the company's fourth quarter performance.",
         "role": "call_global_note",
