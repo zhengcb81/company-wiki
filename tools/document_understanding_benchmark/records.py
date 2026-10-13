@@ -139,6 +139,7 @@ def validate_gold(gold: Mapping[str, Any]) -> dict[str, Any]:
         "sample_id": _require_text(record.get("sample_id"), "gold.sample_id"),
         "source_sha256": _require_sha256(record.get("source_sha256"), "gold.source_sha256"),
         "scope": _require_enum(record.get("scope"), SCOPES, "gold.scope"),
+        "language": _optional_text(record.get("language"), "gold.language"),
         "expected_route_families": families,
         "facts": facts,
         "notes": _optional_text(record.get("notes"), "gold.notes") or "",

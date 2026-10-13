@@ -3,6 +3,7 @@
   "sample_id": "cn-q-sparse",
   "source_sha256": "a230adbc91f9987f439f0e5d5b46706f6d6c40a7d2046a4491e1e77ee4fcaea9",
   "scope": "development",
+  "language": "zh",
   "expected_route_families": [
     "quarterly",
     "quarterly_report"

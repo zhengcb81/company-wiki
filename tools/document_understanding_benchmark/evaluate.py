@@ -79,6 +79,7 @@ def evaluate(
     checks: list[dict[str, Any]] = [
         checkers.check_source_identity(checked_observed, checked_gold),
         checkers.check_route(checked_observed, checked_gold),
+        checkers.check_text_legibility(checked_observed, checked_gold),
     ]
 
     facts = checkers.collect_recall_facts(checked_gold)

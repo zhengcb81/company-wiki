@@ -3,6 +3,7 @@
   "sample_id": "cn-equity",
   "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
   "scope": "development",
+  "language": "zh",
   "expected_route_families": [
     "equity_offering_prospectus",
     "offering",

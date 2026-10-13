@@ -1,0 +1,364 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "holdout-hk-biren-fy2025",
+  "source_sha256": "7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+  "scope": "holdout",
+  "language": "zh-Hant",
+  "expected_route_families": [
+    "annual",
+    "annual_report"
+  ],
+  "notes": "HOLDOUT. 上海壁仞科技股份有限公司 2025 年度報告（港股，215 頁，繁體中文），物理頁 8-12。該公司從未出現在 ROOT 調查、任何調參討論或設計發現中。這是第二家 H 股 holdout，與阿里巴巴（電商）形成不同業態：初創期 AI 芯片設計公司，收入高速增長但仍大幅虧損，且虧損主要由非現金項目驅動。事實逐字取自原件。",
+  "facts": [
+    {
+      "id": "h-ifrs-loss-vs-adjusted-loss",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 12,
+            "exact_quote": "我們的年內虧損由2024年的人民幣1,538.1百萬元增加972.3%至2025年的人民幣16,493.0百萬元。"
+          }
+        ],
+        [
+          {
+            "page": 12,
+            "exact_quote": "我們於2024年及2025年分別錄得經調整年內虧損（非國際財務報告準則計量）人民幣767.3百萬元及人民幣873.8百萬元。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "16493.0",
+        "972.3%",
+        "873.8"
+      ],
+      "must_not_assert": [
+        "公司2025年经调整亏损为人民币16,493.0百万元",
+        "公司年内亏损为人民币873.8百万元",
+        "公司亏损同比扩大13.9%"
+      ],
+      "reason": "同一份文件里有两个相差约 19 倍的亏损口径：**國際財務報告準則年內虧損 16,493.0 百萬元**（+972.3%）与**經調整年內虧損（非國際財務報告準則）873.8 百萬元**（上年 767.3）。混用任一个都会把亏损说错一个数量级，或把 +972.3% 与 +13.9% 说反。这是本样本最核心的陷阱。"
+    },
+    {
+      "id": "h-loss-driver-is-non-cash",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 11,
+            "exact_quote": "我們的財務成本淨額由2024年人民幣703.0百萬元增加2,097.8%至2025年的人民幣15,451.2百萬元，主要是由於我們授予投資者的贖回權相關的贖回負債公允價值增加所致。"
+          }
+        ],
+        [
+          {
+            "page": 12,
+            "exact_quote": "贖回負債賬面值變動"
+          }
+        ],
+        [
+          {
+            "page": 12,
+            "exact_quote": "15,470,522"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "15451.2",
+        "2097.8%",
+        "15470522",
+        "贖回負債公允價值增加"
+      ],
+      "must_not_assert": [
+        "公司亏损大幅扩大反映主营业务恶化",
+        "财务成本上升源于借款利息增加"
+      ],
+      "reason": "亏损扩大的主因是**財務成本淨額 +2,097.8% 至 15,451.2 百萬元**，而公司明说原因是「贖回負債**公允價值**增加」——非现金的会计计量变动，且文件说明该赎回权**上市后不可撤回地终止**（2026-01-02 终止确认）。把 972.3% 的亏损扩大读成经营恶化是因果幻觉。"
+    },
+    {
+      "id": "h-rd-exceeds-revenue",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 11,
+            "exact_quote": "我們的研發開支由2024年人民幣827.0百萬元增加78.5%至2025年的人民幣1,476.1百萬元"
+          }
+        ],
+        [
+          {
+            "page": 10,
+            "exact_quote": "截至2025年12月31日止年度，收入同比增加207.2%至人民幣1,034.6百萬元。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "1476.1",
+        "78.5%"
+      ],
+      "must_not_assert": [
+        "公司研发开支低于同期收入"
+      ],
+      "reason": "研發開支 1,476.1 百萬元（+78.5%）**高于同年收入 1,034.6 百萬元（+207.2%）**。研发超过收入是这家公司的真实结构，把研读成「收入的某个比例」会得出小于 100% 的错误结论。"
+    },
+    {
+      "id": "h-revenue-growth-and-cost-growth",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 10,
+            "exact_quote": "截至2025年12月31日止年度，收入同比增加207.2%至人民幣1,034.6百萬元。"
+          }
+        ],
+        [
+          {
+            "page": 10,
+            "exact_quote": "我們的銷售成本由2024年的人民幣157.6百萬元增加203.0%至2025年的人民幣477.6百萬元"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "207.2%",
+        "203.0%"
+      ],
+      "must_not_assert": [
+        "收入同比增长203.0%",
+        "销售成本同比增长207.2%"
+      ],
+      "reason": "收入 +**207.2%**、銷售成本 +**203.0%** —— 两个增速极为接近（同一段相邻），方向相同、数值差 4.2 个百分点，最易互换。互换后「毛利率大幅改善」的错误结论就成立了。"
+    },
+    {
+      "id": "h-margin-improvement-is-tiny",
+      "importance": "critical",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 11,
+            "exact_quote": "我們的整體毛利由2024年的人民幣179.2百萬元增加210.8%至2025年的人民幣557.0百萬元，整體毛利率2025年為53.8%，同比增長63基點（bps）。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "53.8%",
+        "63基點"
+      ],
+      "must_not_assert": [
+        "毛利率同比提升63个百分点"
+      ],
+      "reason": "整體毛利率 53.8%、**同比僅增長 63 基點（bps）**。63 bps = 0.63 個百分點，不是 63 個百分點 —— 在收入增长 207% 的背景下把 63 bps 说成大幅提升，是把基点当百分点。"
+    },
+    {
+      "id": "h-government-subsidies-in-other-income",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 11,
+            "exact_quote": "我們的其他收入由2024年人民幣100.0百萬元增加189.6%至2025年的人民幣289.6百萬元，主要由於政府補助增加。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "289.6",
+        "189.6%",
+        "政府補助"
+      ],
+      "must_not_assert": [
+        "其他收入增长主要来自主营业务拓展"
+      ],
+      "reason": "其他收入 289.6 百萬元（+189.6%），主因是**政府補助增加**。它相当于收入的约 28%，但属于非经营性来源；把它当作业务收入会高估经营质量。"
+    },
+    {
+      "id": "h-segment-revenue-breakdown-thousands",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 10,
+            "exact_quote": "1,027,655"
+          }
+        ],
+        [
+          {
+            "page": 10,
+            "exact_quote": "336,794"
+          }
+        ],
+        [
+          {
+            "page": 10,
+            "exact_quote": "1,034,614"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "1027655",
+        "336794",
+        "1034614"
+      ],
+      "must_not_assert": [
+        "2025年智能计算解决方案收入为人民币1,027,655百万元",
+        "表格单位与正文同为百万元"
+      ],
+      "reason": "表内单位是**人民幣千元**（1,034,614 千元 = 1,034.6 百萬元），而正文用**百萬元**。同一数字在文件里以两种单位出现：把表内 1,034,614 当百萬元会放大 1,000 倍。这是本文档最直接的量纲陷阱。"
+    },
+    {
+      "id": "h-new-revenue-lines-from-zero",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 10,
+            "exact_quote": "提供委託研發服務"
+          }
+        ],
+        [
+          {
+            "page": 10,
+            "exact_quote": "智能計算集群的租金收入"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "提供委託研發服務",
+        "智能計算集群的租金收入"
+      ],
+      "must_not_assert": [
+        "公司委托研发服务收入同比增长"
+      ],
+      "reason": "「提供委託研發服務」4,631 千元与「智能計算集群的租金收入」1,414 千元在本期首次出现，上年同期栏位为「–」（无）。**首次出现没有同比可比基数**，写「同比增长」在这两条上没有意义。"
+    },
+    {
+      "id": "h-supply-chain-is-plan",
+      "importance": "critical",
+      "modality": "plan",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 9,
+            "exact_quote": "我們將通過戰略合作、多元佈局和技術協同，保障供應鏈的安全與穩定"
+          }
+        ],
+        [
+          {
+            "page": 8,
+            "exact_quote": "本公司將秉持長期主義，聚焦以下核心戰略，構築持久競爭力"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "我們將通過",
+        "核心戰略"
+      ],
+      "must_not_assert": [
+        "公司已实现供应链完全自主可控",
+        "公司供应链安全已得到保障"
+      ],
+      "reason": "主席報告里的供应链、研發方向、商業模式都是**前瞻战略**（「我們將」「展望未來」「聚焦」）。把战略意图写成已达成的能力，是语态错误；文件没有声称供应链安全已经实现。"
+    },
+    {
+      "id": "h-lightsphere-deployment-is-actual",
+      "importance": "critical",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 8,
+            "exact_quote": "並在國家級智算中心部署2,048卡光互連光交換GPU超節點智算集群"
+          }
+        ],
+        [
+          {
+            "page": 8,
+            "exact_quote": "該方案榮獲2025世界人工智能大會(WAIC)最高獎項「SAIL大獎」"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2,048卡",
+        "SAIL大獎"
+      ],
+      "must_not_assert": [
+        "光躍方案計劃部署2,048卡"
+      ],
+      "reason": "與上一条相对照：光躍 LightSphere X 方案「**已**在國家級智算中心**部署** 2,048 卡」并「**榮獲** SAIL 大獎」是**已完成事实**。同一份主席報告里既有可能态也有完成态，必须逐句区分。"
+    },
+    {
+      "id": "h-br20x-is-future",
+      "importance": "normal",
+      "modality": "plan",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 8,
+            "exact_quote": "BR20X系列將推出超節點方案，基於自研互連協議Blink2.0，最大可以支持千卡規模集群scale-up"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "BR20X",
+        "將推出"
+      ],
+      "must_not_assert": [
+        "BR20X系列已推出超节点方案"
+      ],
+      "reason": "BR20X 系列「**將**推出」超節點方案是计划（未来时），与已部署的 BR10X/光躍形成同页对照。"
+    },
+    {
+      "id": "h-report-period-and-signature",
+      "importance": "normal",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "page": 9,
+            "exact_quote": "2026年3月30日"
+          }
+        ],
+        [
+          {
+            "page": 10,
+            "exact_quote": "截至2025年12月31日止年度"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2025年12月31日",
+        "2026年3月30日"
+      ],
+      "must_not_assert": [
+        "本报告对应截至2026年3月31日止年度"
+      ],
+      "reason": "报告期为**截至 2025-12-31 止年度**，主席報告签署日为 **2026-03-30**。签署日晚于报告期结束属于正常，但把签署日当报告期末（或把两者混为一年）是期间错。财年与日历年一致，与阿里巴巴（3月年结）不同。"
+    }
+  ]
+}

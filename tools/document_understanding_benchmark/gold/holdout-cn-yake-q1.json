@@ -3,6 +3,7 @@
   "sample_id": "holdout-cn-yake-q1",
   "source_sha256": "f3931c6c88e60aac178ba8eb8fbcef8ec0b48b3c883a5eade92b263c56b99941",
   "scope": "holdout",
+  "language": "zh",
   "expected_route_families": [
     "quarterly",
     "quarterly_report"

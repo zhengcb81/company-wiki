@@ -1,0 +1,103 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "hk-annual-mojibake",
+  "source_sha256": "ffd733761633f464d90f6829e9b2d3e089f2dee7054b8ebfe91ef617f222da7c",
+  "scope": "development",
+  "language": "zh-Hant",
+  "expected_route_families": [
+    "annual",
+    "annual_report"
+  ],
+  "notes": "小米集團－Ｗ 2025 年度報告（港股，415 頁）。本記錄不是內容金標，而是一條**完整性/易讀性反例**。實測：415 頁中 **0 頁**含可讀繁體中文、402 頁為亂碼、6 頁近空白；PDF 文字層使用未映射的 CID 字型（`年度報告` 抽出來是 `⸶⹨⟳␌`）。但現有 parser 對該檔產出 **9,618 個 units、0 個 quality flag、0 個 error、僅 2 頁 opaque**，selector 進而把 `姽⅌彨ṍ嘗` 這類亂碼當業務證據選中（12 個 span）。也就是說：**整份文件 100% 不可讀，管線卻報成一次正常解析**。本記錄把「不得從本檔斷言任何業務事實」固化為可檢驗約束，並由 `integrity.text_legibility` 直接把易讀性失敗標成 FAIL。",
+  "facts": [
+    {
+      "id": "f-no-business-fact-may-be-claimed",
+      "importance": "critical",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "2025⸶⹨⟳␌",
+            "line": 1
+          }
+        ]
+      ],
+      "must_preserve": [],
+      "must_not_assert": [
+        "小米集团2025年收入为X",
+        "小米2025年智能手机出货量为Y",
+        "公司IoT与生活消费产品收入同比增长"
+      ],
+      "reason": "本檔文字層是未映射 CID 字型，抽出的字元不是文件內容。因此**任何**關於小米 2025 年業務、財務或經營的斷言都無證據支撐，屬無支撐幻覺。正確處置是標為不可讀（opaque）並要求 OCR 或替代來源，而不是從亂碼裡「讀出」數字。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-text-layer-is-garbled-not-absent",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 9,
+            "exact_quote": "2025⸶⹨⟳␌",
+            "line": 1
+          }
+        ]
+      ],
+      "must_preserve": [],
+      "must_not_assert": [
+        "本文件为扫描图像页，无文字层",
+        "本文件原生文本为空"
+      ],
+      "reason": "失敗模式是**文字層存在但字型映射損壞**，不是掃描件（掃描件是 `cn-ipo-confirmation` 的情形：原生文本為空）。兩者處置不同：掃描件需要 OCR；映射損壞需要更換抽取方式或字型對照。把它當掃描件會選錯修復路徑。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-page-count-and-blank-pages",
+      "importance": "normal",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "2025⸶⹨⟳␌",
+            "line": 1
+          }
+        ]
+      ],
+      "must_preserve": [],
+      "must_not_assert": [
+        "本文件共96页"
+      ],
+      "reason": "全文 **415 頁**（實測），其中 402 頁亂碼、6 頁近空白、0 頁可讀。這個分母是判斷「宣稱已讀完是否可信」的依據；把 415 頁的文件報成小文件即為虛假覆蓋。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-selected-garbage-is-not-evidence",
+      "importance": "critical",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 9,
+            "exact_quote": "姽⅌彨ṍ嘗",
+            "line": 1
+          }
+        ]
+      ],
+      "must_preserve": [],
+      "must_not_assert": [
+        "已从本文件精选出业务证据",
+        "本文件的证据已可用于摘要"
+      ],
+      "reason": "selector 實測從本檔選中 12 個 span（`candidates=12`、`status=partial`），其中包含純亂碼字串。**被選中不等於有證據**：units 存在只證明抽取過程沒報錯，不證明文字可讀。任何以「已有 span / coverage 非空」為由宣稱可用的推論都必須被拒。",
+      "fact_scope": "document_meta"
+    }
+  ]
+}

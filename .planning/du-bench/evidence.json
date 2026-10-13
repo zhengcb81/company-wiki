@@ -3,114 +3,89 @@
   "lane": "du-bench",
   "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
   "generated_from": {
-    "native_summary": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du-bench-final2\\native\\summary.json",
+    "native_summary": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du-final4\\native\\summary.json",
     "offline_summary": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du-off-audit\\offline\\summary.json",
-    "note": "Numbers are read back from the run artifacts, not transcribed by hand."
+    "note": "Read back from run artifacts, not transcribed by hand."
   },
   "gold_set": {
     "development": {
-      "records": 10,
-      "facts": 108,
-      "critical": 83,
+      "records": 11,
+      "facts": 112,
+      "critical": 86,
       "narrative": 93,
-      "document_meta": 15
+      "document_meta": 19
     },
     "holdout": {
-      "records": 5,
-      "facts": 68,
-      "critical": 45,
-      "narrative": 68,
-      "document_meta": 0
+      "records": 6,
+      "facts": 80,
+      "critical": 54,
+      "narrative": 79,
+      "document_meta": 1
     },
     "max_quote_bytes_per_document": 2094,
     "quote_budget_bytes_per_document": 8192,
-    "holdout_markets": {
+    "card_minimum_set_elements": 14,
+    "card_minimum_set_gaps": 0,
+    "holdout_by_market": {
       "a_share": [
         "holdout-cn-glodon-q1",
         "holdout-cn-yake-q1"
       ],
       "h_share": [
-        "holdout-hk-alibaba-fy2023"
+        "holdout-hk-alibaba-fy2023",
+        "holdout-hk-biren-fy2025"
       ],
       "us": [
         "holdout-us-mongodb-10k",
         "holdout-us-nvidia-10k"
       ]
-    },
-    "card_minimum_set_covered": 14,
-    "card_minimum_set_gaps": 0
-  },
-  "review_message_controls": {
-    "fixtures": 5,
-    "semantic_only_defects_injected": 3,
-    "defects_invisible_to_deterministic_checks": 3,
-    "review_caught_all": true,
-    "review_cannot_rescue_a_deterministic_fail": true,
-    "interpretation": "The count is the number of injected meaning-level defects that pass every deterministic check. For exactly those, an independent review is the only detector. An all-ENTAILED review still cannot upgrade a deterministic FAIL, so review can only add scrutiny."
-  },
-  "carrier_reality": {
-    "supported_this_run": {
-      ".pdf": "10 documents",
-      ".txt": "1 document"
-    },
-    "unsupported_this_run": {
-      ".htm": "4 documents, all UNAVAILABLE"
-    },
-    "measured_html_evidence": {
-      "method": "probe_non_pdf_html() over real 10-K HTML originals",
-      "result": "extract_transcript_material accepts the bytes, then parse_transcript_text returns units=0, page_count=0 with transcript_start_missing; the extracted text is led by inline-XBRL taxonomy tokens",
-      "production_path_checked": "narrative_retrieval.py offers exactly two replay formats: PDF and transcript_txt/transcript_html"
     }
   },
-  "repo_state": {
-    "branch": "codex/du-benchmark-20261013",
-    "head": "ef47fca38ec3603fcfecb694b14ff777d331501d"
-  },
   "native_run": {
-    "samples": 15,
-    "bindings_supplied": 25,
+    "samples": 17,
+    "bindings_supplied": 27,
     "by_scope": {
       "development": {
-        "critical_fact_coverage": 0.6867469879518072,
-        "critical_fact_recall": 0.17543859649122806,
-        "critical_facts_declared": 83,
-        "critical_facts_passed": 10,
-        "critical_facts_total": 57,
+        "critical_fact_coverage": 0.6976744186046512,
+        "critical_fact_recall": 0.18333333333333332,
+        "critical_facts_declared": 86,
+        "critical_facts_passed": 11,
+        "critical_facts_total": 60,
         "critical_facts_unavailable": 26,
-        "document_meta_fact_recall": 0.0,
-        "document_meta_facts_passed": 0,
-        "document_meta_facts_total": 9,
-        "documents": 10,
-        "fact_recall": 0.16883116883116883,
-        "facts_passed": 13,
-        "facts_total": 77,
+        "document_meta_fact_recall": 0.07692307692307693,
+        "document_meta_facts_passed": 1,
+        "document_meta_facts_total": 13,
+        "documents": 11,
+        "fact_recall": 0.1728395061728395,
+        "facts_passed": 14,
+        "facts_total": 81,
         "narrative_fact_recall": 0.19117647058823528,
         "narrative_facts_passed": 13,
         "narrative_facts_total": 68,
         "statuses": {
-          "FAIL": 8,
+          "FAIL": 9,
           "PARTIAL": 2
         }
       },
       "holdout": {
-        "critical_fact_coverage": 0.4888888888888889,
+        "critical_fact_coverage": 0.5740740740740741,
         "critical_fact_recall": 0.0,
-        "critical_facts_declared": 45,
+        "critical_facts_declared": 54,
         "critical_facts_passed": 0,
-        "critical_facts_total": 22,
+        "critical_facts_total": 31,
         "critical_facts_unavailable": 23,
-        "document_meta_fact_recall": null,
+        "document_meta_fact_recall": 0.0,
         "document_meta_facts_passed": 0,
-        "document_meta_facts_total": 0,
-        "documents": 5,
-        "fact_recall": 0.0,
-        "facts_passed": 0,
-        "facts_total": 36,
-        "narrative_fact_recall": 0.0,
-        "narrative_facts_passed": 0,
-        "narrative_facts_total": 36,
+        "document_meta_facts_total": 1,
+        "documents": 6,
+        "fact_recall": 0.020833333333333332,
+        "facts_passed": 1,
+        "facts_total": 48,
+        "narrative_fact_recall": 0.02127659574468085,
+        "narrative_facts_passed": 1,
+        "narrative_facts_total": 47,
         "statuses": {
-          "FAIL": 3,
+          "FAIL": 4,
           "PARTIAL": 2
         }
       }
@@ -123,12 +98,6 @@
       "sha256": "b88f563191672aff7c95a3620c7bdacc635ac28aa0a236e92478f2240bfbd203",
       "unchanged": true
     },
-    "network_calls": 0,
-    "model_calls": 0,
-    "paid_calls": 0,
-    "raw_copies": 0,
-    "elapsed_seconds": 180.727,
-    "peak_rss_bytes": 302997504,
     "carrier_support": {
       "by_suffix": {
         ".htm": {
@@ -140,7 +109,7 @@
           "unavailable": 4
         },
         ".pdf": {
-          "documents": 10,
+          "documents": 12,
           "entry_point": "parse_pdf_bytes",
           "kind": "pdf",
           "reason": null,
@@ -159,6 +128,145 @@
       "unsupported_carriers_present": [
         ".htm"
       ]
+    },
+    "network_calls": 0,
+    "model_calls": 0,
+    "paid_calls": 0,
+    "raw_copies": 0,
+    "elapsed_seconds": 192.495,
+    "peak_rss_bytes": 311087104,
+    "legibility": {
+      "cn-equity": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 78876,
+          "unusable_block_ratio": 6e-05
+        }
+      },
+      "cn-h1": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 162884,
+          "unusable_block_ratio": 0.0
+        }
+      },
+      "cn-ipo-confirmation": {
+        "status": "NOT_EVALUATED",
+        "observed": {
+          "basis": "selected_text",
+          "dense_chars": 0
+        }
+      },
+      "cn-ir": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 8299,
+          "unusable_block_ratio": 0.0
+        }
+      },
+      "cn-q-business": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 14716,
+          "unusable_block_ratio": 0.0002
+        }
+      },
+      "cn-q-sparse": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 8253,
+          "unusable_block_ratio": 0.0
+        }
+      },
+      "hk-annual-mojibake": {
+        "status": "FAIL",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 270005,
+          "unusable_block_ratio": 0.02663
+        }
+      },
+      "hk-annual": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 424156,
+          "unusable_block_ratio": 0.00032
+        }
+      },
+      "holdout-cn-glodon-q1": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 10376,
+          "unusable_block_ratio": 0.00116
+        }
+      },
+      "holdout-cn-yake-q1": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 8843,
+          "unusable_block_ratio": 0.0
+        }
+      },
+      "holdout-hk-alibaba-fy2023": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 367241,
+          "unusable_block_ratio": 0.00038
+        }
+      },
+      "holdout-hk-biren-fy2025": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 136212,
+          "unusable_block_ratio": 0.00076
+        }
+      },
+      "holdout-us-mongodb-10k": {
+        "status": "NOT_EVALUATED",
+        "observed": {
+          "basis": "selected_text",
+          "dense_chars": 0
+        }
+      },
+      "holdout-us-nvidia-10k": {
+        "status": "NOT_EVALUATED",
+        "observed": {
+          "basis": "selected_text",
+          "dense_chars": 0
+        }
+      },
+      "us-10k": {
+        "status": "NOT_EVALUATED",
+        "observed": {
+          "basis": "selected_text",
+          "dense_chars": 0
+        }
+      },
+      "us-20f": {
+        "status": "NOT_EVALUATED",
+        "observed": {
+          "basis": "selected_text",
+          "dense_chars": 0
+        }
+      },
+      "us-txt": {
+        "status": "PASS",
+        "observed": {
+          "basis": "parsed_text",
+          "dense_chars": 47746,
+          "unusable_block_ratio": 0.0
+        }
+      }
     },
     "per_sample": [
       {
@@ -246,6 +354,20 @@
         "semantic_units": 0
       },
       {
+        "sample_id": "hk-annual-mojibake",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.3333333333333333,
+        "critical_evaluable": 3,
+        "critical_declared": 3,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": null,
+        "document_meta_recall": 0.25,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
         "sample_id": "hk-annual",
         "scope": "development",
         "status": "FAIL",
@@ -298,6 +420,20 @@
         "critical_coverage": 1.0,
         "narrative_recall": 0.0,
         "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "holdout-hk-biren-fy2025",
+        "scope": "holdout",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_evaluable": 9,
+        "critical_declared": 9,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.09090909090909091,
+        "document_meta_recall": 0.0,
         "claims": 0,
         "semantic_units": 0
       },
@@ -384,7 +520,9 @@
         "carrier": ".pdf",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "partial"
+        "selector_status": "partial",
+        "read_text_dense_chars": 78876,
+        "unusable_block_ratio": 6e-05
       },
       {
         "sample_id": "cn-h1",
@@ -397,7 +535,9 @@
         "carrier": ".pdf",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "partial"
+        "selector_status": "partial",
+        "read_text_dense_chars": 162884,
+        "unusable_block_ratio": 0.0
       },
       {
         "sample_id": "cn-ipo-confirmation",
@@ -412,7 +552,9 @@
         "carrier": ".pdf",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "needs_review"
+        "selector_status": "needs_review",
+        "read_text_dense_chars": 0,
+        "unusable_block_ratio": null
       },
       {
         "sample_id": "cn-ir",
@@ -425,7 +567,9 @@
         "carrier": ".pdf",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "needs_review"
+        "selector_status": "needs_review",
+        "read_text_dense_chars": 8299,
+        "unusable_block_ratio": 0.0
       },
       {
         "sample_id": "cn-q-business",
@@ -438,7 +582,9 @@
         "carrier": ".pdf",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "partial"
+        "selector_status": "partial",
+        "read_text_dense_chars": 14716,
+        "unusable_block_ratio": 0.0002
       },
       {
         "sample_id": "cn-q-sparse",
@@ -451,7 +597,27 @@
         "carrier": ".pdf",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "needs_review"
+        "selector_status": "needs_review",
+        "read_text_dense_chars": 8253,
+        "unusable_block_ratio": 0.0
+      },
+      {
+        "sample_id": "hk-annual-mojibake",
+        "routed_kind": "annual_report",
+        "selected": 12,
+        "candidates": 12,
+        "units": 9618,
+        "native_scan": "partial",
+        "opaque_pages": [
+          5,
+          415
+        ],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "partial",
+        "read_text_dense_chars": 270005,
+        "unusable_block_ratio": 0.02663
       },
       {
         "sample_id": "hk-annual",
@@ -466,7 +632,9 @@
         "carrier": ".pdf",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "partial"
+        "selector_status": "partial",
+        "read_text_dense_chars": 424156,
+        "unusable_block_ratio": 0.00032
       },
       {
         "sample_id": "holdout-cn-glodon-q1",
@@ -479,7 +647,9 @@
         "carrier": ".pdf",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "needs_review"
+        "selector_status": "needs_review",
+        "read_text_dense_chars": 10376,
+        "unusable_block_ratio": 0.00116
       },
       {
         "sample_id": "holdout-cn-yake-q1",
@@ -492,7 +662,9 @@
         "carrier": ".pdf",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "partial"
+        "selector_status": "partial",
+        "read_text_dense_chars": 8843,
+        "unusable_block_ratio": 0.0
       },
       {
         "sample_id": "holdout-hk-alibaba-fy2023",
@@ -505,7 +677,24 @@
         "carrier": ".pdf",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "partial"
+        "selector_status": "partial",
+        "read_text_dense_chars": 367241,
+        "unusable_block_ratio": 0.00038
+      },
+      {
+        "sample_id": "holdout-hk-biren-fy2025",
+        "routed_kind": "annual_report",
+        "selected": 96,
+        "candidates": 229,
+        "units": 6055,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "partial",
+        "read_text_dense_chars": 136212,
+        "unusable_block_ratio": 0.00076
       },
       {
         "sample_id": "holdout-us-mongodb-10k",
@@ -518,7 +707,9 @@
         "carrier": ".htm",
         "carrier_supported": false,
         "raw_unchanged": true,
-        "selector_status": null
+        "selector_status": null,
+        "read_text_dense_chars": null,
+        "unusable_block_ratio": null
       },
       {
         "sample_id": "holdout-us-nvidia-10k",
@@ -531,7 +722,9 @@
         "carrier": ".htm",
         "carrier_supported": false,
         "raw_unchanged": true,
-        "selector_status": null
+        "selector_status": null,
+        "read_text_dense_chars": null,
+        "unusable_block_ratio": null
       },
       {
         "sample_id": "us-10k",
@@ -544,7 +737,9 @@
         "carrier": ".htm",
         "carrier_supported": false,
         "raw_unchanged": true,
-        "selector_status": null
+        "selector_status": null,
+        "read_text_dense_chars": null,
+        "unusable_block_ratio": null
       },
       {
         "sample_id": "us-20f",
@@ -557,7 +752,9 @@
         "carrier": ".htm",
         "carrier_supported": false,
         "raw_unchanged": true,
-        "selector_status": null
+        "selector_status": null,
+        "read_text_dense_chars": null,
+        "unusable_block_ratio": null
       },
       {
         "sample_id": "us-txt",
@@ -570,7 +767,9 @@
         "carrier": ".txt",
         "carrier_supported": true,
         "raw_unchanged": true,
-        "selector_status": "partial"
+        "selector_status": "partial",
+        "read_text_dense_chars": 47746,
+        "unusable_block_ratio": 0.0
       }
     ]
   },
@@ -630,5 +829,16 @@
     "model_calls": 0,
     "paid_calls": 0,
     "peak_rss_bytes": 21155840
+  },
+  "review_message_controls": {
+    "fixtures": 5,
+    "semantic_only_defects_injected": 3,
+    "defects_invisible_to_deterministic_checks": 3,
+    "review_caught_all": true,
+    "review_cannot_rescue_a_deterministic_fail": true
+  },
+  "repo_state": {
+    "branch": "codex/du-benchmark-20261013",
+    "head": "4f546b88c13af6753cf028e31c1db082cd0d0627"
   }
 }

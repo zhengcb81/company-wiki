@@ -3,6 +3,7 @@
   "sample_id": "cn-q-business",
   "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
   "scope": "development",
+  "language": "zh",
   "expected_route_families": [
     "quarterly_report",
     "cn_quarterly"
