@@ -11,8 +11,10 @@ CompanyRawAdapter and DayuAdapter their production callers.
 
 from __future__ import annotations
 
+from dataclasses import replace
 from typing import Any
 
+from .adapters.common import _ACQUISITION_SIDECAR_SUFFIX
 from .adapters.company_raw import CompanyRawAdapter
 from .adapters.dayu import DayuAdapter
 from .adapters.interface import NormalizedCandidate
@@ -33,9 +35,11 @@ _ADAPTER_FACTORIES = {
 }
 
 
-def adapter_for(root: RootSpec):
+def adapter_for(root: RootSpec, *, relative_path: str | None = None):
     """Resolve the registered adapter for a root by its effective route
     (adapter_id).  Fail closed on unknown or missing ids."""
+    if relative_path is not None:
+        root = root.effective_root_for_path(relative_path)
     if root.adapter_id is None:
         raise AdapterDispatchError(
             f"root {root.root_id!r} has no adapter_id (2.x policy required)"
@@ -62,17 +66,33 @@ _LEGACY_ISSUER_FACTORIES = {
 }
 
 
+def _configured_adapter_roots(root: RootSpec) -> list[RootSpec]:
+    """Each configured adapter enumerates once; route order assigns ownership."""
+    roots = [root] if root.adapter_id is not None else []
+    seen = {root.adapter_id} if roots else set()
+    for route in root.routes:
+        if route.adapter_id is not None and route.adapter_id not in seen:
+            roots.append(replace(root, adapter_id=route.adapter_id))
+            seen.add(route.adapter_id)
+    return roots
+
+
 def discover_issuer_paths(root: RootSpec, **ports) -> set[str]:
-    """Optional bounded discovery capability, resolved at the adapter boundary."""
-    if root.adapter_id is not None:
-        adapter = adapter_for(root)
-    else:
+    """Bounded discovery uses the same caller-owned ports across all adapters."""
+    configured = _configured_adapter_roots(root)
+    if not configured:
         factory = _LEGACY_ISSUER_FACTORIES.get(root.kind)
         if factory is None:
             return set()
-        adapter = factory()
-    discover = getattr(adapter, "discover_issuer_paths", None)
-    return discover(root.path, **ports) if callable(discover) else set()
+        discover = getattr(factory(), "discover_issuer_paths", None)
+        return discover(root.path, **ports) if callable(discover) else set()
+    selected = set()
+    for configured_root in configured:
+        discover = getattr(adapter_for(configured_root), "discover_issuer_paths", None)
+        if callable(discover):
+            selected.update(path for path in discover(root.path, **ports)
+                if root.effective_root_for_path(path).adapter_id == configured_root.adapter_id)
+    return selected
 
 
 def _to_scanner_candidate(root: RootSpec, item: NormalizedCandidate, company_names):
@@ -112,21 +132,64 @@ def scan_root_via_adapter(
     converted to the scanner's internal _Candidate shape; the v1 scanner
     path is unchanged.
     """
-    adapter = adapter_for(root)
-    # Discovery is layout/metadata work. The scanner owns manifest byte
-    # verification; adapter digests were discarded here and caused double I/O.
-    options = {}
-    if metadata_reader is not None:
-        options["metadata_reader"] = metadata_reader
-    if file_walker is not None and isinstance(adapter, DayuAdapter):
-        options["file_walker"] = file_walker
-    candidates = adapter.enumerate(root.path, relative_paths=relative_paths, compute_hash=False, **options)
+    configured = _configured_adapter_roots(root)
+    if not configured:
+        adapter_for(root)  # retain the explicit missing-adapter failure
+    groups = []
+    for configured_root in configured:
+        adapter = adapter_for(configured_root)
+        # One shared metadata/walker port retains aggregate caller limits.
+        options = {}
+        if metadata_reader is not None:
+            options["metadata_reader"] = metadata_reader
+        if file_walker is not None and isinstance(adapter, DayuAdapter):
+            options["file_walker"] = file_walker
+        scoped_paths = relative_paths
+        if root.routes:
+            def owned(relative, *, adapter_id=configured_root.adapter_id):
+                primary = relative.removesuffix(_ACQUISITION_SIDECAR_SUFFIX)
+                return root.effective_root_for_path(primary).adapter_id == adapter_id
+            options["primary_filter"] = owned
+            if relative_paths is not None:
+                scoped_paths = {path for path in relative_paths if owned(path)}
+                if not scoped_paths:
+                    continue
+        candidates = adapter.enumerate(root.path, relative_paths=scoped_paths,
+                                       compute_hash=False, **options)
+        primaries = {item.group_key: item.relative_path for item in candidates
+                     if isinstance(item, NormalizedCandidate)
+                     and item.role in {"original_primary", "indexed_only"}}
+        groups.append((configured_root, candidates, primaries))
+    attachment_owners = {}
+    for configured_root, candidates, primaries in groups:
+        for item in candidates:
+            if not isinstance(item, NormalizedCandidate) or item.role in {"original_primary", "indexed_only"}:
+                continue
+            effective = root.effective_root_for_path(primaries.get(item.group_key, item.group_key))
+            if effective.adapter_id == configured_root.adapter_id:
+                previous = attachment_owners.get(item.relative_path)
+                if previous is not None and previous != effective:
+                    raise AdapterDispatchError("source attachment has conflicting route owners")
+                attachment_owners[item.relative_path] = effective
     converted = []
-    for item in candidates:
-        if not isinstance(item, NormalizedCandidate):
-            converted.append(item)
-            continue
-        converted.append(_to_scanner_candidate(root, item, company_names))
+    seen = set()
+    for configured_root, candidates, primaries in groups:
+        for item in candidates:
+            if not isinstance(item, NormalizedCandidate):
+                if root.routes:
+                    raise AdapterDispatchError("routed adapter returned an invalid candidate")
+                converted.append(item)
+                continue
+            # Group membership from the owning adapter outranks another
+            # layout's attempt to treat that metadata file as a new original.
+            effective = attachment_owners.get(item.relative_path)
+            if effective is None:
+                effective = root.effective_root_for_path(primaries.get(item.group_key, item.group_key))
+            if effective.adapter_id == configured_root.adapter_id:
+                if root.routes and item.relative_path in seen:
+                    raise AdapterDispatchError("routed adapter emitted duplicate source path")
+                converted.append(_to_scanner_candidate(effective, item, company_names))
+                seen.add(item.relative_path)
     return converted
 
 

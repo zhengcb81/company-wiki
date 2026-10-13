@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -66,7 +66,7 @@ DOCUMENT_EXTENSIONS = frozenset(
 class RouteSpec:
     """WU-301: an ordered include/exclude glob route on a root.
 
-    First-match semantics; overlapping routes are rejected at load time.
+    List order is authoritative: first include match not excluded wins.
     """
 
     include: tuple[str, ...] = ()
@@ -77,10 +77,9 @@ class RouteSpec:
     def __post_init__(self) -> None:
         if not isinstance(self.include, tuple) or not isinstance(self.exclude, tuple):
             raise TypeError("include/exclude must be tuples of glob strings")
-        if self.include and not all(
-            isinstance(item, str) and item.strip() for item in self.include
-        ):
-            raise ValueError("include must be non-empty glob strings")
+        for name in ("include", "exclude"):
+            if not all(isinstance(item, str) and item.strip() for item in getattr(self, name)):
+                raise ValueError(f"{name} must contain non-empty glob strings")
 
 
 @dataclass(frozen=True)
@@ -110,26 +109,30 @@ class RootSpec:
 
 
 
-    def route_matches(self, relative_path: str) -> bool:
-        """WU-702: first-match route semantics for a relative path.
-
-        Returns False when the root has no routes (legacy behavior).  A path
-        matches when any route's include glob matches and no exclude glob
-        matches.  Route overlap is rejected at load time (CFG-06/08).
-        """
-        if not self.routes:
-            return False
+    def first_matching_route(self, relative_path: str) -> RouteSpec | None:
+        """One ordered include/exclude decision for discovery and dispatch."""
         normalized = relative_path.replace("\\", "/")
         for route in self.routes:
-            included = any(
-                _glob_matches(pattern, normalized) for pattern in route.include
-            ) if route.include else False
-            excluded = any(
-                _glob_matches(pattern, normalized) for pattern in route.exclude
-            )
-            if included and not excluded:
-                return True
-        return False
+            if (any(_glob_matches(pattern, normalized) for pattern in route.include)
+                    and not any(_glob_matches(pattern, normalized) for pattern in route.exclude)):
+                return route
+        return None
+
+    def route_matches(self, relative_path: str) -> bool:
+        """Compatibility focus-scope predicate using the same ordered matcher."""
+        return self.first_matching_route(relative_path) is not None
+
+    def effective_root_for_path(self, relative_path: str) -> "RootSpec":
+        """Route port overrides inherit missing values from the root default."""
+        route = self.first_matching_route(relative_path)
+        if route is None:
+            return self
+        adapter_id = route.adapter_id if route.adapter_id is not None else self.adapter_id
+        profile = (route.admission_profile_id if route.admission_profile_id is not None
+                   else self.admission_profile_id)
+        if (adapter_id, profile) == (self.adapter_id, self.admission_profile_id):
+            return self
+        return replace(self, adapter_id=adapter_id, admission_profile_id=profile)
 
     def __post_init__(self) -> None:
         if not isinstance(self.root_id, str) or not self.root_id.strip():

@@ -20,7 +20,7 @@ import yaml
 
 from .adapters.registry import admission_profile, registered_adapter
 from .config import (
-    CatalogConfigError, _expand_path, _mapping, _require_boolean, _unresolved_variables,
+    CatalogConfigError, _expand_path, _mapping, _require_boolean, _route_spec, _unresolved_variables,
 )
 from .models import ROOT_KINDS, CatalogConfig, RootSpec, RouteSpec
 
@@ -213,17 +213,7 @@ def _parse_route_2x(
             f"roots[{root_index}].routes[{route_index}] widens allowed kinds "
             f"beyond root policy: {sorted(extra)}"
         )
-    adapter_id = item.get("adapter_id")
-    if adapter_id is not None and registered_adapter(str(adapter_id)) is None:
-        raise CatalogConfigError(
-            f"routes[{route_index}] adapter_id {adapter_id!r} not registered"
-        )
-    return RouteSpec(
-        include=tuple(item.get("include", []) or []),
-        exclude=tuple(item.get("exclude", []) or []),
-        adapter_id=str(adapter_id) if adapter_id is not None else None,
-        admission_profile_id=item.get("admission_profile_id"),
-    )
+    return _route_spec(item, route_index)
 
 
 # --- 1.x -> 2.x doctor ------------------------------------------------------

@@ -896,7 +896,8 @@ def _scan_catalog_impl(
         # indexed `.source.json` sidecars as documents of their own.  The activation snapshot
         # keeps controlling the roots that declare NO adapter (company_raw / dayu_portfolio /
         # the plain directory roots), so the v1/v2 cutover for those is unchanged.
-        use_adapter = v2_scan_shadow or root.adapter_id is not None
+        use_adapter = (v2_scan_shadow or root.adapter_id is not None
+                       or any(route.adapter_id is not None for route in root.routes))
         strategies.append((root.root_id, "adapter" if use_adapter else "legacy"))
         try:
             candidates, excluded, policy_count = scan_root_strategy(

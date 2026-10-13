@@ -135,7 +135,7 @@ class DayuAdapter:
         return selected
 
     def enumerate(self, root_path: Path, *, limit: int | None = None,
-                  relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None, file_walker=None) -> list[NormalizedCandidate]:
+                  relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None, file_walker=None, primary_filter=None) -> list[NormalizedCandidate]:
         candidates: list[NormalizedCandidate] = []
         groups: dict[str, list[Path]] = {}
         paths_to_visit = (_selected_dayu_paths(root_path, relative_paths, file_walker=file_walker)
@@ -192,6 +192,8 @@ class DayuAdapter:
             if preferred is None:
                 # metadata-only group (no preferred file): never ingest a
                 # byte-less placeholder (v1 Phase 15.4 rule).
+                continue
+            if primary_filter is not None and not primary_filter(preferred.relative_to(root_path).as_posix()):
                 continue
             metadata = enrich_dayu_metadata(preferred, metadata, metadata_reader=metadata_reader)
             if not metadata.get("source_url") and not metadata.get("https_url"):

@@ -158,7 +158,6 @@ def load_catalog_config(path: Path, *, project_root: Path | None = None) -> Cata
             _parse_route(raw_route, index, route_index)
             for route_index, raw_route in enumerate(item.get("routes", []) or [])
         )
-        _check_route_overlap(routes, index)
         roots.append(
             RootSpec(
                 root_id=root_id,
@@ -217,50 +216,29 @@ def _parse_route(raw, root_index: int, route_index: int) -> RouteSpec:
         raise CatalogConfigError(
             f"roots[{root_index}].routes[{route_index}] unknown fields: {sorted(unknown)}"
         )
+    return _route_spec(item, route_index)
+
+
+def _route_spec(item: dict[str, Any], route_index: int) -> RouteSpec:
+    """Shared route shape/port validation; overlap is resolved by list order."""
+    patterns = {}
+    for name in ("include", "exclude"):
+        value = item.get(name, [])
+        if (not isinstance(value, list)
+                or not all(isinstance(pattern, str) and pattern.strip() for pattern in value)):
+            raise CatalogConfigError(f"routes[{route_index}] {name} must be an array of glob strings")
+        patterns[name] = tuple(value)
     adapter_id = item.get("adapter_id")
     if adapter_id is not None and registered_adapter(str(adapter_id)) is None:
-        raise CatalogConfigError(
-            f"routes[{route_index}] adapter_id {adapter_id!r} not registered (CFG-01)"
-        )
+        raise CatalogConfigError(f"routes[{route_index}] adapter_id {adapter_id!r} not registered")
+    profile = item.get("admission_profile_id")
+    if profile is not None and admission_profile(str(profile)) is None:
+        raise CatalogConfigError(f"routes[{route_index}] admission_profile_id {profile!r} unknown")
     return RouteSpec(
-        include=tuple(item.get("include", []) or []),
-        exclude=tuple(item.get("exclude", []) or []),
+        include=patterns["include"], exclude=patterns["exclude"],
         adapter_id=str(adapter_id) if adapter_id is not None else None,
-        admission_profile_id=item.get("admission_profile_id"),
+        admission_profile_id=str(profile) if profile is not None else None,
     )
-
-
-_OVERLAP_SAMPLES = (
-    "x.pdf", "a/b/c.pdf", "annual/2025.pdf", "financial_reports/x.pdf",
-    "report.md", "2025.pdf", "dir/x.pdf", "dir/annual/2025.pdf",
-    "互联网/哔哩哔哩/2025年报.pdf",
-)
-
-
-def _glob_overlap(a: tuple[str, ...], b: tuple[str, ...]) -> bool:
-    """Two route include sets overlap when some plausible relative path is
-    matched by both (CFG-06/08).  fnmatch on a fixed sample set keeps the
-    check deterministic and testable."""
-    import fnmatch
-
-    for sample in _OVERLAP_SAMPLES:
-        matches_a = any(fnmatch.fnmatch(sample, pattern) for pattern in a)
-        matches_b = any(fnmatch.fnmatch(sample, pattern) for pattern in b)
-        if matches_a and matches_b:
-            return True
-    return False
-
-
-def _check_route_overlap(routes: tuple[RouteSpec, ...], root_index: int) -> None:
-    """CFG-06/08: overlapping routes with no unique order would admit the
-    same physical file twice — reject at load time."""
-    for i in range(len(routes)):
-        for j in range(i + 1, len(routes)):
-            if _glob_overlap(routes[i].include, routes[j].include):
-                raise CatalogConfigError(
-                    f"roots[{root_index}] routes[{i}] and routes[{j}] overlap "
-                    f"(CFG-06/08)"
-                )
 
 
 __all__ = ["CatalogConfigError", "load_catalog_config"]

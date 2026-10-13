@@ -42,7 +42,7 @@ class SidecarFilingAdapter:
 
     def enumerate(
         self, root_path: Path, *, limit: int | None = None,
-        relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None
+        relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None, primary_filter=None
     ) -> list[NormalizedCandidate]:
         candidates: list[NormalizedCandidate] = []
         paths = (SourceRegistrationScope(self.adapter_id, frozenset(relative_paths)).paired_paths(root_path, self._suffix)
@@ -51,6 +51,8 @@ class SidecarFilingAdapter:
             if not path.is_file():
                 continue
             if path.name.endswith(self._suffix):
+                continue
+            if primary_filter is not None and not primary_filter(path.relative_to(root_path).as_posix()):
                 continue
             sidecar = path.with_name(path.name + self._suffix)
             if not sidecar.is_file():

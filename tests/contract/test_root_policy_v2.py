@@ -1,4 +1,4 @@
-"""WU-301 RED/audit tests: RootPolicy v2 config gates CFG-01..08."""
+"""RootPolicy shape checks; 2026-10-13 ROOT chose ordered first-match routes."""
 import sys
 from pathlib import Path
 
@@ -73,15 +73,15 @@ def test_cfg05_reusable_external_root_not_readonly_rejected(tmp_path):
         load_catalog_config(cfg, project_root=tmp_path)
 
 
-def test_cfg06_overlapping_routes_rejected(tmp_path):
+def test_cfg06_overlapping_routes_use_first_match(tmp_path):
     cfg = _write_config(tmp_path, [
         _root(routes=[
             {"include": ["**/*.pdf"], "adapter_id": "sidecar_filing_v1"},
             {"include": ["financial_reports/**"], "adapter_id": "sidecar_filing_v1"},
         ])
     ])
-    with pytest.raises(CatalogConfigError, match="overlap|route"):
-        load_catalog_config(cfg, project_root=tmp_path)
+    root = load_catalog_config(cfg, project_root=tmp_path).roots[0]
+    assert root.first_matching_route("financial_reports/2025.pdf") is root.routes[0]
 
 
 def test_cfg07_generic_document_as_filing_rejected(tmp_path):
@@ -92,15 +92,16 @@ def test_cfg07_generic_document_as_filing_rejected(tmp_path):
         load_catalog_config(cfg, project_root=tmp_path)
 
 
-def test_cfg08_same_physical_file_two_routes_rejected(tmp_path):
+def test_cfg08_same_physical_file_has_one_ordered_owner(tmp_path):
     cfg = _write_config(tmp_path, [
         _root(routes=[
             {"include": ["**/annual/*.pdf"], "adapter_id": "sidecar_filing_v1"},
             {"include": ["**/*.pdf"], "adapter_id": "generic_document_v1"},
         ])
     ])
-    with pytest.raises(CatalogConfigError, match="overlap|route"):
-        load_catalog_config(cfg, project_root=tmp_path)
+    root = load_catalog_config(cfg, project_root=tmp_path).roots[0]
+    assert root.first_matching_route("issuer/annual/2025.pdf") is root.routes[0]
+    assert root.effective_root_for_path("issuer/annual/2025.pdf").adapter_id == "sidecar_filing_v1"
 
 
 def test_v2_valid_config_loads(tmp_path):

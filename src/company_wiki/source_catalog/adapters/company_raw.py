@@ -69,7 +69,7 @@ class CompanyRawAdapter:
         return selected
 
     def enumerate(self, root_path: Path, *, limit: int | None = None,
-                  relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None) -> list[NormalizedCandidate]:
+                  relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None, primary_filter=None) -> list[NormalizedCandidate]:
         read_metadata = metadata_reader or _load_acquisition_metadata
         candidates: list[NormalizedCandidate] = []
         for company in sorted(
@@ -91,6 +91,8 @@ class CompanyRawAdapter:
             ]
             for path in primary_paths:
                 relative = _relative(path, root_path)
+                if primary_filter is not None and not primary_filter(relative):
+                    continue
                 sidecar = sidecars.get(str(path))
                 metadata = read_metadata(sidecar) if sidecar else {}
                 # Phase 16.1: sidecar without URL enriched from dayu meta
@@ -134,6 +136,8 @@ class CompanyRawAdapter:
                 if target in primary_names:
                     continue
                 relative = _relative(sidecar, root_path)
+                if primary_filter is not None and not primary_filter(relative):
+                    continue
                 candidates.append(NormalizedCandidate(
                     relative_path=relative,
                     content_sha256=_sha256_file(sidecar) if compute_hash else "",
