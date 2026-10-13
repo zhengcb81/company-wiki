@@ -1,0 +1,71 @@
+{
+  "schema_version": "du-benchmark-reception-handoff/1",
+  "branch": "codex/du-benchmark-fix-20261013",
+  "base": "f734ef926de9f64f530bc11f5254dd2f51de2665",
+  "implementation_commit": "20686760945c2792f86e4dee6507921e89532466",
+  "owned_paths": [
+    "tools/document_understanding_benchmark/**",
+    ".planning/du-benchmark-reception/**"
+  ],
+  "issues_fixed": [
+    "R04 original locator/source material and independent supporting groups",
+    "R05 business/context/if-emitted responsibility",
+    "R06 existing general format frontend",
+    "R10 alternative availability, missing context observations, review coverage and status",
+    "Additional R10 mutation detection must change a baseline check"
+  ],
+  "interface": "tools/document_understanding_benchmark/EVIDENCE_CONTRACT.md",
+  "verification": {
+    "unit_command": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q --junitxml=.planning/du-benchmark-reception/final-unit.xml",
+    "unit_passed": 143,
+    "unit_skipped": 7,
+    "unit_seconds": 3.47,
+    "new_contract_cases": 26,
+    "ruff": "PASS --no-cache",
+    "normal_git_hooks": "completed (all package paths outside configured hook scope; manual package pytest/ruff provided)",
+    "offline_cli": {
+      "exit_code": 3,
+      "status_reason": "PARTIAL unreviewed semantics, not engineering failure",
+      "mutation_applicable": 53,
+      "newly_adverse_detected": 53,
+      "targeted_newly_adverse_hits": 52,
+      "not_applicable": 42,
+      "synthetic_fixture_bytes": 16121,
+      "owned_tmp_restored": true
+    },
+    "real_html": {
+      "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "source_units": 5215,
+      "selected_locators": 96,
+      "source_evidence_rows": 96,
+      "entry_point": "normalize_document + select_narrative_evidence",
+      "raw_config_sha_and_mtime_unchanged": true,
+      "critical_business_recall": "4/8",
+      "business_quality_status": "FAIL remaining producer omissions"
+    }
+  },
+  "known_limits": [
+    "Real model summary fidelity NOT_EVALUATED; no paid models were called",
+    "ROOT DU adapter additive fields are not tested in this lane; ROOT must materialize actual required contexts",
+    "Real Microsoft existing selector misses four critical business facts; evidence report preserves failures",
+    "Historical holdout splits retained for paired regression; previously analyzed samples are not new blind validation",
+    "Standalone deterministic wording checks are bounded, not complete semantic entailment",
+    "Opaque TOC mutation is caught by integrity.selected_source_material, not recall; targeted hit count52 is explicit"
+  ],
+  "preserved": {
+    "production_code_changed": false,
+    "production_config_changed": false,
+    "author_worktrees_changed": false,
+    "DU2_changed": false,
+    "gold_quotes_importance_changed": false,
+    "second_HK_and_CID_tests": true
+  },
+  "usage": {
+    "model_calls": 0,
+    "paid_calls": 0,
+    "network_calls": 0,
+    "raws_copied": 0,
+    "raw_writes": 0
+  },
+  "next": "ROOT cherry-pick implementation and receipt commit to isolated integration tree; run combined B tests and native quality comparison; ROOT owns main/push/PWF publication."
+}

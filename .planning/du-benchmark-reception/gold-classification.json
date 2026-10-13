@@ -1,0 +1,1159 @@
+{
+  "schema_version": "du-gold-target-reclassification/1",
+  "facts": [
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-raise-total-cap",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-project-investment-total",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-project-raise-allocation",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-construction-two-phases",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-phase-one-timeline",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-phase-two-timeline",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-phase-two-condition",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-investment-breakdown",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-land-and-location",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-necessity-is-argument",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-five-year-target-is-plan",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-current-coverage-30",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-cmp-acquisition-completed",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-microled-sample-verification",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-gan-power-stage",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-sic-8inch-stage",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-inp-development-started",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-advanced-packaging-primo-matrix",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-tsv-300e-serving",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-third-gen-tsv-rd",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-catalog-is-toc-not-content",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "cn-h1",
+      "fact_id": "f-page-count-210",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "cn-ipo-confirmation",
+      "fact_id": "f-scan-is-opaque",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "cn-ipo-confirmation",
+      "fact_id": "f-title-is-misleading",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "cn-ipo-confirmation",
+      "fact_id": "f-single-page-not-full-prospectus",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "cn-ipo-confirmation",
+      "fact_id": "f-no-fabricated-confirmation-content",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "cn-ir",
+      "fact_id": "f-no-vc-production",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-ir",
+      "fact_id": "f-controller-contact-hope",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-ir",
+      "fact_id": "f-question-premise-vc",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-ir",
+      "fact_id": "f-domestic-revenue-share",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-ir",
+      "fact_id": "f-fy2025-revenue-profit",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-ir",
+      "fact_id": "f-q1-2026-revenue-profit",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-ir",
+      "fact_id": "f-zeolite-revenue-decline",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-ir",
+      "fact_id": "f-jiumu-suspension",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-ir",
+      "fact_id": "f-controller-increase",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-ir",
+      "fact_id": "f-increase-plan-window",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-q1-revenue",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-q1-net-profit-and-cause",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-q1-deducted-profit",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-rd-investment",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-icp-angnova-stage",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-epi-two-stages",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-atmospheric-epi-stage",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-metal-film-under-development",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-mocvd-new-products-stage",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-thin-film-growth",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "cn-q-business",
+      "fact_id": "f-selection-reason-not-financial",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-revenue-down",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-cashflow-up-is-not-growth",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-net-profit-down",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-deducted-profit-down-more",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-rd-up-while-revenue-down",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-roe-points-vs-rd-points",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-not-audited",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-other-reminders-not-applicable",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-low-business-density-is-a-measurement",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-controller-and-controlled-entities",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-shareholder-count",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-total-assets",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-eps-down",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "hk-annual-mojibake",
+      "fact_id": "f-no-business-fact-may-be-claimed",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "hk-annual-mojibake",
+      "fact_id": "f-text-layer-is-garbled-not-absent",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "hk-annual-mojibake",
+      "fact_id": "f-page-count-and-blank-pages",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "hk-annual-mojibake",
+      "fact_id": "f-selected-garbage-is-not-evidence",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "hk-annual",
+      "fact_id": "f-store-total-2024",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "hk-annual",
+      "fact_id": "f-store-mainland-overseas",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "hk-annual",
+      "fact_id": "f-store-operating-model",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "hk-annual",
+      "fact_id": "f-top-toy-total",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "hk-annual",
+      "fact_id": "f-top-toy-mainland",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "hk-annual",
+      "fact_id": "f-top-toy-overseas-commenced",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "hk-annual",
+      "fact_id": "f-store-network-approximate",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "fact_id": "h-revenue-down",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "fact_id": "h-net-profit-up",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "fact_id": "h-deducted-profit-from-negative",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "fact_id": "h-operating-cashflow-negative",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "fact_id": "h-ifrs-not-audited",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "fact_id": "h-no-restatement",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "fact_id": "h-admin-expense-down",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "fact_id": "h-securities-symbol",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "fact_id": "h-fair-value-other-equity",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-revenue-up",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-net-profit-up",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-deducted-profit-up",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-cashflow-down-despite-profit",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-not-audited",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-no-restatement",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-rd-expense-up",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-construction-in-progress",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-short-term-loan-up",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-investment-income-zero",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-top-shareholders",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-related-party-note",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "fact_id": "h-no-other-significant-matters",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-seven-segments",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-six-business-groups-is-future",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-total-revenue",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-net-profit-three-year-path",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-nongaap-profit",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-china-commerce-ebita-is-profit",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-china-retail-revenue-down",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-gmv-not-revenue",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-international-retail-up",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-international-ebita-still-loss",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-local-services-up",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-fiscal-year-not-calendar",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-annual-fee-terminated",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "fact_id": "h-segment-reclassification",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-ifrs-loss-vs-adjusted-loss",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-loss-driver-is-non-cash",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-rd-exceeds-revenue",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-revenue-growth-and-cost-growth",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-margin-improvement-is-tiny",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-government-subsidies-in-other-income",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-segment-revenue-breakdown-thousands",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-new-revenue-lines-from-zero",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-supply-chain-is-plan",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-lightsphere-deployment-is-actual",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-br20x-is-future",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "fact_id": "h-report-period-and-signature",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-single-segment",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-fiscal-year-misaligned",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-revenue-three-years",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-growth-rate-not-share",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-customers-stock-not-flow",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-atlas-customers-subset",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-customer-definition-excludes-free",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-rpo-not-disclosed",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-deferred-revenue",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-net-loss-not-profit",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-no-customer-concentration",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-net-arr-expansion-not-revenue-growth",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-subscription-share",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-enterprise-advanced-two-denominators",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-operating-cashflow-vs-net-loss",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "fact_id": "h-shares-outstanding",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-two-segments",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-four-markets-not-segments",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-total-revenue-and-growth",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-fiscal-year-misaligned",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-segment-vs-market-not-interchangeable",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-graphics-operating-income-down",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-data-center-growth-driver",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-no-nongaap-measure",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-rpo-scoped-to-long-contracts",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-rpo-recognition-timing",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-customer-concentration-direct",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-indirect-customer-estimate",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-geo-revenue-share",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-forward-looking-export-control",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-prose-vs-table-rounding",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "fact_id": "h-registrant-name-corruption",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-azure-is-consumption-based",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-azure-inside-intelligent-cloud",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-three-segments",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-segment-change-in-august-2024",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-m365-consumer-vs-commercial-metric",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-azure-growth-inside-combined-line",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-rpo-scope-and-amount",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-rpo-recognition-is-forward",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-total-revenue-consolidated",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-fiscal-year-not-calendar",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-uneared-revenue-rollforward",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "us-10k",
+      "fact_id": "f-html-tag-boundary-corruption",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-regulatory-term-is-not-double-reduction",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-cessation-is-completed-action",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-not-a-discontinued-operation",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-single-reportable-segment",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-still-offers-ast-outside-mainland-k9",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-nonprofit-registration-requirement",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-foreign-ownership-prohibited",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-no-listing-or-fundraising",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-preschool-and-overseas-prohibitions",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-publishing-is-separate-regime",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-pending-draft-not-effective-law",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-business-lines-are-two-disaggregations",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-product-wording-smart-books-not-smart-devices",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-fy2024-revenue-recovery",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-20f",
+      "fact_id": "f-segment-revenue-disaggregation",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-participants-are-management-only",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-analyst-firm-only-in-operator-line",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-qa-has-no-heading",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-editorial-digest-is-not-management-speech",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-source-is-third-party-and-llm-assisted",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-lines-are-truncated",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-fiscal-q4-not-calendar-q4",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-analyst-question-is-not-company-fact",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-management-answer-confirms-not-negates",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-prepared-remarks-speaker-order",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-guidance-is-forward-looking",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-discrete-items-adjusted-eps",
+      "target_kind": "correctness_if_emitted",
+      "reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-headcount-declined",
+      "target_kind": "required_business",
+      "reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+    },
+    {
+      "sample_id": "us-txt",
+      "fact_id": "f-operator-role",
+      "target_kind": "disposition_context",
+      "reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
+    }
+  ],
+  "quote_or_importance_changes": 0,
+  "method": "Static responsibility classification before new selector replay; originals and exact support quotes unchanged."
+}
