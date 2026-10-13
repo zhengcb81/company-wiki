@@ -1,0 +1,143 @@
+{
+  "schema_version": "du-input/1",
+  "name": "toc_repeated_heading",
+  "description": "TOC lists a heading whose body section repeats later; a running header repeats on every page.",
+  "source_ref": {
+    "source_id": "opaque-source-toc",
+    "source_sha256": "opaque-digest-toc"
+  },
+  "metadata": {
+    "title": "Synthetic TOC filing",
+    "declared_kind": "unknown",
+    "regime": "unknown",
+    "mime_type": "application/pdf",
+    "language": "zh"
+  },
+  "coverage": {
+    "native_scan": "complete",
+    "opaque_pages": [],
+    "deferred_pages": []
+  },
+  "units": [
+    {
+      "unit_id": "t1",
+      "ordinal": 0,
+      "locator": "opaque-loc-0001",
+      "page": 1,
+      "text": "目录",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 90, 300, 115], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "t2",
+      "ordinal": 1,
+      "locator": "opaque-loc-0002",
+      "page": 1,
+      "text": "第一节 释义 ......... 2",
+      "kind": "toc_entry",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 130, 500, 150], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "t3",
+      "ordinal": 2,
+      "locator": "opaque-loc-0003",
+      "page": 1,
+      "text": "第二节 管理层讨论与分析 ......... 5",
+      "kind": "toc_entry",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 155, 500, 175], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "t4",
+      "ordinal": 3,
+      "locator": "opaque-loc-0004",
+      "page": 2,
+      "text": "第一节 释义",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 90, 300, 115], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "t5",
+      "ordinal": 4,
+      "locator": "opaque-loc-0005",
+      "page": 2,
+      "text": "本公司指示例股份有限公司。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 130, 530, 175], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "t6",
+      "ordinal": 5,
+      "locator": "opaque-loc-0006",
+      "page": 5,
+      "text": "示例股份有限公司 2025 年年度报告",
+      "kind": "header",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 30, 530, 48], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "t7",
+      "ordinal": 6,
+      "locator": "opaque-loc-0007",
+      "page": 5,
+      "text": "第二节 管理层讨论与分析",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 90, 300, 115], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "t8",
+      "ordinal": 7,
+      "locator": "opaque-loc-0008",
+      "page": 5,
+      "text": "报告期内公司营业收入同比增长百分之十二。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 130, 530, 175], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "t9",
+      "ordinal": 8,
+      "locator": "opaque-loc-0009",
+      "page": 6,
+      "text": "示例股份有限公司 2025 年年度报告",
+      "kind": "header",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 30, 530, 48], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "t10",
+      "ordinal": 9,
+      "locator": "opaque-loc-0010",
+      "page": 6,
+      "text": "公司持续投入研发，年内新增授权专利三十项。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 130, 530, 175], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    }
+  ]
+}

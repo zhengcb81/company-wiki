@@ -1,0 +1,1459 @@
+{
+  "schema_version": "du-c-evidence/1",
+  "samples": [
+    {
+      "sample_id": "hk-miniso-annual-two-column",
+      "label": "名创优品 2024 港股年报（中英双栏）",
+      "pages": [
+        12
+      ],
+      "expect": "language_parallel + operating_table + cross-column separation",
+      "status": "OBSERVED",
+      "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "unit_count": 49,
+      "sections": 5,
+      "semantic_units": [
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "paragraph_event",
+          "completeness": "complete",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "paragraph_event",
+          "completeness": "complete",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "complete",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "paragraph_event",
+          "completeness": "complete",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "paragraph_event",
+          "completeness": "complete",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "complete",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        }
+      ],
+      "relations": [
+        "continuation",
+        "language_parallel"
+      ],
+      "coverage": {
+        "native_scan": "partial",
+        "structured_unit_count": 19,
+        "unassigned_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:01d719c1f5a3539db506bcac1516fab5cdc880c78c25e51cb4dd28220573a98e",
+          "urn:company-wiki:narrative-unit:sha256:050092b3737586bdab12eb8902599900f8cf6212344b1d22607d5ddcf38d84b1",
+          "urn:company-wiki:narrative-unit:sha256:0937c7cd88d5c16d003231caa2999945cf027ebb6bd0a0350e3f880b6d4927b6",
+          "urn:company-wiki:narrative-unit:sha256:285b6a068bcb820d368a0a3649c305c6d1d5f85a3e19c71d77420b131fc3b1c1",
+          "urn:company-wiki:narrative-unit:sha256:4d0e31d3a40463b3d52f32c68f1f2c1dca60bf3596414e6797e6e571f333c0e2",
+          "urn:company-wiki:narrative-unit:sha256:4e820d7c46cff49dfd62998bc1499cfe5c1774ecd436681007e40ee81d0cc5d5",
+          "urn:company-wiki:narrative-unit:sha256:66e408e758718b8cd32e3caccd5240037752ca78019c7ff780bc6d7b0449e512",
+          "urn:company-wiki:narrative-unit:sha256:752fe77df17c3816922d98f23b3bdcc36c1e948cb6b9e0e9263b33f0c0202496",
+          "urn:company-wiki:narrative-unit:sha256:7593b5b47cf61015e6abb2abf02d0e9410b6585d096011635085ae28e44d91cb",
+          "urn:company-wiki:narrative-unit:sha256:7a495b62347a945728aba29a7884cd1969c09397eaa6973ddff1784684ba68a4",
+          "urn:company-wiki:narrative-unit:sha256:820ff944c233c724baf9488c4c39a77d33c9dc881031bbd3d1befe771018f7da",
+          "urn:company-wiki:narrative-unit:sha256:88dbea9d60534230ba584bca18d0dd7822dde1b11ad8390d1ccc98e8a5bba024",
+          "urn:company-wiki:narrative-unit:sha256:8c0db28050ab513bb9bcda6279dc501d128ee641f3332601666b78ee6b8547d7",
+          "urn:company-wiki:narrative-unit:sha256:8ed34b3b622c3a969825e0c9decc4ff9708006f66cd20ecb2dc0ca1d0b820b71",
+          "urn:company-wiki:narrative-unit:sha256:9024d130e31d7f33692ef8bd2ef4a69eb9fd77fd883471b5b45d1a9751b265b5",
+          "urn:company-wiki:narrative-unit:sha256:9a96c4862ac3c1d04463848093ef8ebac5f79f47bd13a32ebaf0caa00faa37ab",
+          "urn:company-wiki:narrative-unit:sha256:b5cd337e8af641371b99f991d38724ddda625f2ae3083edffe77b743472ce181",
+          "urn:company-wiki:narrative-unit:sha256:bf9a1bda7f12e8ec35228676391d4a7d67886e4421acc61ebbf069013e6baca3",
+          "urn:company-wiki:narrative-unit:sha256:c02efd59233a431d8422c0fb1ed03db7c0e00d1b1f196345c0ba55125f050e8b",
+          "urn:company-wiki:narrative-unit:sha256:c3b1466f5dba36aaf29c27332c72046485303aeb46864399cb27c27aece61936",
+          "urn:company-wiki:narrative-unit:sha256:c8d0264723de6c52f868fc0f155aca9a4b9bda8c7bbdf8667bff754d048459c8",
+          "urn:company-wiki:narrative-unit:sha256:cbf02b3907cf94bf4af9925bfe2fe4bf424580f079254a065310c9923f06565e",
+          "urn:company-wiki:narrative-unit:sha256:d7fb4dd30cc4ec79521aa40b18728816a6e299001623b167f452e7414f0130f7",
+          "urn:company-wiki:narrative-unit:sha256:dee70f131e08d0bae20c8a5b0635b74998f4395ac214d32c6c7f2c16bd07af07",
+          "urn:company-wiki:narrative-unit:sha256:e9d5f36c1f50af7ba8a269372b894974b4841e48edeff94d122070d696ba1ad3",
+          "urn:company-wiki:narrative-unit:sha256:f621dfc60e67d55413e1803f0529605f953f701994de6577327ae94884bf79dc"
+        ],
+        "deferred_unit_ids": [],
+        "opaque_pages": [],
+        "deferred_pages": [],
+        "excluded_furniture_unit_ids": [],
+        "complete": true,
+        "limits": {
+          "max_units": 50000,
+          "max_relations": 100000,
+          "max_group_members": 64,
+          "max_work_units": 2000000
+        }
+      },
+      "diagnostic_codes": [
+        "NATIVE_SCAN_INCOMPLETE",
+        "NO_HEADING_EVIDENCE"
+      ],
+      "excerpt_bytes": 3216,
+      "excerpts": [
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:25dc34e3fbc8a37e6e1d5d19231654ed10b08dfe75fc1eed83585907b343c279",
+          "text": "2024年度報告  •  名創優品\n11"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e930568418446de751064037daa49ce9bfda84f8ead90becf8545c59128b694e",
+          "text": "Business Review and Outlook\n業務回顧及展望"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:5ae9967a4a47b96b745f1a73411af3ef0a0a52cb365fc376c7447e5d6c9bc7a5",
+          "text": "Store Network"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:99ba0a1973deda5f39f876d44b203a3d9254f7f1276822c3a0610812b6e2dc6d",
+          "text": "As of December 31, 2024, we served consumers primarily through \na network of over 7,500 MINISO stores, including nearly 4,400 \nMINISO stores in mainland China and over 3,100 MINISO stores in \noverseas markets. The following table shows the number of MINISO \nstores in mainland China and overseas as of the dates presented:"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e448bf563cfe34fba3f0086c87a7c61e1a352cebfd4b4f92f37429764fa188bb",
+          "text": "As of December 31,"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:50c07ebe5d72170509164ea1f19230958e45669d24cf0820dc406a0e84cb1eff",
+          "text": "截至12月31日"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f621dfc60e67d55413e1803f0529605f953f701994de6577327ae94884bf79dc",
+          "text": "2023\n2024"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:999d41bb15209637ab9ab93c759f5633441a6e54bd2b180ad05cec00a12334b5",
+          "text": "2023年\n2024年"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:46ec3c891c839680b3df508dd31bfd5292773e2a4afc5ce427c272169437c95b",
+          "text": "Number of MINISO stores 名創優品門店數量\nMainland China 中國內地\n3,926\n4,386\n Directly operated stores 直營店\n26\n25\n Stores operated under MINISO Retail Partner model 名創合夥人門店\n3,878\n4,335\n Stores operated under distributor model 代理門店\n22\n26\nOverseas 海外\n2,487\n3,118\n Directly operated stores 直營店\n238\n503\n Stores operated under MINISO Retail Partner model 名創合夥人門店\n283\n404\n Stores operated under distributor model 代理門店\n1,966\n2,211"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b67e0466e0efac2977dfc9c67e8c315c3fc4c1c281f92da40f29262af356b873",
+          "text": "Total 合計\n6,413\n7,504"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ecca8ea2f244d5a720c881e286ca61603c61cf90f78ff7c09acba8411e731ba5",
+          "text": "We have expanded our TOP TOY store network in mainland China \nsince 2020. TOP TOY has also begun to expand to overseas \nmarkets since 2024. This strategic move aligns with the Company’s \nplan to expand globally and strengthen its brand presence. As of \nDecember 31, 2024, we had a total of 276 TOP TOY stores, 272 \nof which located in mainland China. The following table shows the \nnumber of TOP TOY stores in mainland China and overseas as of \nthe dates presented:"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ce3e0257a9ee74fc6766966c0e88cdd44796c29b6f62536c2a8938cdf3acd9df",
+          "text": "As of December 31,"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c0499a52099ef94a5555b7d7723b0ba8e9ec4302907601bad1740684baf99660",
+          "text": "截至12月31日"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d7fb4dd30cc4ec79521aa40b18728816a6e299001623b167f452e7414f0130f7",
+          "text": "2023\n2024"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:81f6744e59f9d46d5e32ffd86a250288eedd53b7d91ce8f1edbd425e2c5e4179",
+          "text": "2023年\n2024年"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:975b1a0de38400f7e26e9c06f5862d0140aa3be783b72f0fd5f117bd76476cd5",
+          "text": "Number of TOP TOY stores TOP TOY門店數量\n Directly operated stores 直營店\n14\n40\n Stores operated under MINISO Retail Partner model 名創合夥人門店\n134\n236"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ecb97a000fac9aea3445d071c9b8e3270528781b38f9b38fa907b257d208b23e",
+          "text": "Total 合計\n148\n276"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:0e629f8a2ae385507e819b7a2fdb37c0af2d776fa6a0b3f9d025eb55c73fd700",
+          "text": "門店網絡"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:44f5a88102c5a7db6ce9dbb976557a725cf331d69f282ad45492268b8150f732",
+          "text": "截至2024年12月31日，我們主要通過7,500多家名\n創優品門店網絡為消費者提供服務，其中在中國內\n地有約4,400家名創優品門店，在海外市場有超過\n3,100家名創優品門店。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:a130f91b319aa1a3694f9c635f656fc643c646daae1dd52030a532c53f9ab8aa",
+          "text": "下表列示截至呈報日期，中\n國內地和海外的名創優品門店數量："
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f3ce99065d7ff8a4034693284a466f7487a8808f427d15c53a263566fe3ec485",
+          "text": "自2020年起，我們已擴展在中國內地的TOP TOY門\n店網絡。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:fc8cb1466eed877dad3e4ec5ad92da8635a8e1ea6aed98f120a54b14ba302d6f",
+          "text": "同時，TOP TOY亦於2024年開始擴展海外\n市場。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4b0558cd678fab2009b4c3fcea0c2c3bcae9ea130c9a6aec49d7dada3edee774",
+          "text": "這一戰略性舉措符合本公司全球擴張及鞏固\n品牌影響力的計劃。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:36f8ae488c7f68c05c22141c2979bd93105fa6e6c98cbc0c9af2e5560dbaab9b",
+          "text": "截至2024年12月31日，我們\n共有276家TOP TOY門店，272家位於中國內地。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:6ff8406a067ae978c47dfa77260f4db2eb83ade2af0a8bae1d2f8d940fa5aabf",
+          "text": "下表列示截至呈報日期，中國內地和海外的TOP \nTOY門店數量："
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:050092b3737586bdab12eb8902599900f8cf6212344b1d22607d5ddcf38d84b1",
+          "text": "As of December 31,"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:0937c7cd88d5c16d003231caa2999945cf027ebb6bd0a0350e3f880b6d4927b6",
+          "text": "截至12月31日"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:285b6a068bcb820d368a0a3649c305c6d1d5f85a3e19c71d77420b131fc3b1c1",
+          "text": "2023 | 2024"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e9d5f36c1f50af7ba8a269372b894974b4841e48edeff94d122070d696ba1ad3",
+          "text": "2023年 | 2024年"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4e820d7c46cff49dfd62998bc1499cfe5c1774ecd436681007e40ee81d0cc5d5",
+          "text": "Number of MINISO stores 名創優品門店數量\nMainland China 中國內地 3,926\nDirectly operated stores 直營店 26\nStores operated under MINISO Retail Partner model 名創合夥人門店 3,878\nStores operated under distributor model 代理門店 22\nOverseas 海外 2,487\nDirectly operated stores 直營店 238\nStores operated under MINISO Retail Partner model 名創合夥人門店 283\nStores operated under distributor model 代理門店 1,966"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c8d0264723de6c52f868fc0f155aca9a4b9bda8c7bbdf8667bff754d048459c8",
+          "text": "4,386"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4d0e31d3a40463b3d52f32c68f1f2c1dca60bf3596414e6797e6e571f333c0e2",
+          "text": "25"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:dee70f131e08d0bae20c8a5b0635b74998f4395ac214d32c6c7f2c16bd07af07",
+          "text": "4,335"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8c0db28050ab513bb9bcda6279dc501d128ee641f3332601666b78ee6b8547d7",
+          "text": "26"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:9a96c4862ac3c1d04463848093ef8ebac5f79f47bd13a32ebaf0caa00faa37ab",
+          "text": "3,118"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:88dbea9d60534230ba584bca18d0dd7822dde1b11ad8390d1ccc98e8a5bba024",
+          "text": "503"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c3b1466f5dba36aaf29c27332c72046485303aeb46864399cb27c27aece61936",
+          "text": "404"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c02efd59233a431d8422c0fb1ed03db7c0e00d1b1f196345c0ba55125f050e8b",
+          "text": "2,211"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:7a495b62347a945728aba29a7884cd1969c09397eaa6973ddff1784684ba68a4",
+          "text": "Total 合計 6,413"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:bf9a1bda7f12e8ec35228676391d4a7d67886e4421acc61ebbf069013e6baca3",
+          "text": "7,504"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:752fe77df17c3816922d98f23b3bdcc36c1e948cb6b9e0e9263b33f0c0202496",
+          "text": "As of December 31,"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b5cd337e8af641371b99f991d38724ddda625f2ae3083edffe77b743472ce181",
+          "text": "截至12月31日"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:7593b5b47cf61015e6abb2abf02d0e9410b6585d096011635085ae28e44d91cb",
+          "text": "2023 | 2024"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:66e408e758718b8cd32e3caccd5240037752ca78019c7ff780bc6d7b0449e512",
+          "text": "2023年 | 2024年"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:9024d130e31d7f33692ef8bd2ef4a69eb9fd77fd883471b5b45d1a9751b265b5",
+          "text": "Number of TOP TOY stores TOP TOY門店數量\nDirectly operated stores 直營店 14\nStores operated under MINISO Retail Partner model 名創合夥人門店 134"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:820ff944c233c724baf9488c4c39a77d33c9dc881031bbd3d1befe771018f7da",
+          "text": "40"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:01d719c1f5a3539db506bcac1516fab5cdc880c78c25e51cb4dd28220573a98e",
+          "text": "236"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:cbf02b3907cf94bf4af9925bfe2fe4bf424580f079254a065310c9923f06565e",
+          "text": "Total 合計 148"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8ed34b3b622c3a969825e0c9decc4ff9708006f66cd20ecb2dc0ca1d0b820b71",
+          "text": "276"
+        }
+      ]
+    },
+    {
+      "sample_id": "cn-hengfeng-offering-cross-page",
+      "label": "恒锋工具 2020 向特定对象发行募集说明书（跨页项目）",
+      "pages": [
+        62,
+        63
+      ],
+      "expect": "project package keeps subject across page 62 -> 63",
+      "status": "OBSERVED",
+      "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "unit_count": 77,
+      "sections": 16,
+      "semantic_units": [
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 4,
+          "diagnostics": []
+        },
+        {
+          "kind": "project",
+          "completeness": "complete",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 3,
+          "diagnostics": []
+        },
+        {
+          "kind": "project",
+          "completeness": "complete",
+          "member_count": 9,
+          "diagnostics": [
+            "CROSS_PAGE_CONTINUATION"
+          ]
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "project",
+          "completeness": "complete",
+          "member_count": 7,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "project",
+          "completeness": "complete",
+          "member_count": 21,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        }
+      ],
+      "relations": [
+        "continuation",
+        "footnote_for"
+      ],
+      "coverage": {
+        "native_scan": "partial",
+        "structured_unit_count": 14,
+        "unassigned_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:03ae7e5e186eb8d9055934f2c777dd57c131c5870929e4cf80674a0aafb6a62a",
+          "urn:company-wiki:narrative-unit:sha256:30e1e0bd5cac66734a416443e6f9330e45436ebcd5283b77fdf025b9bb61c57b",
+          "urn:company-wiki:narrative-unit:sha256:426676d8cb4763f70fcb85bea4a9fc56045c82dc12f89e80912cf8e451294fb4",
+          "urn:company-wiki:narrative-unit:sha256:4325985a56b954d51aaa187126227763d25f558f157e8cb27fa1f3727a8ede3f",
+          "urn:company-wiki:narrative-unit:sha256:4b472a06c081988593fb9473c5661c113066b885a43a97e41af35425b9c5e689",
+          "urn:company-wiki:narrative-unit:sha256:612544ccdf424fdb55e473031ae2c2973fe43e428afa28eae027b19ff2eeb885",
+          "urn:company-wiki:narrative-unit:sha256:6ec31069ccec0bb39d6e9cf264999574234443eb028320e9ff4f86585bf78ed0",
+          "urn:company-wiki:narrative-unit:sha256:7ced141a1ed125df6f9688b9e4122f89c4bee20b76c8515f8909ffdd3249989b",
+          "urn:company-wiki:narrative-unit:sha256:81c38e164dc7ac842c4e952774d12e346da99b5ebeb1efda326d4dbbae1ffc1e",
+          "urn:company-wiki:narrative-unit:sha256:8bbdfeb7899a9b63d76caa469bc0ffda4e61a0c6d095c3c69feafcd7e283ecf8",
+          "urn:company-wiki:narrative-unit:sha256:98cca5a75447a1d354d768d51a972f88b908df4a3ae604582ccdb5496ce0ae61",
+          "urn:company-wiki:narrative-unit:sha256:9e62a8ce0ef1483efc7f9973d5dbb81aef870a7f2cc9ea34f51d7d79185c88e8",
+          "urn:company-wiki:narrative-unit:sha256:b5148fb04c45348b2e89821acdcb9dcd399ec7e73ab8c05b1935920c20dc3989",
+          "urn:company-wiki:narrative-unit:sha256:d45f109b78e82bf8c977cb365585fbbf4781a7e0a99338a0b2039eebfb8a730b",
+          "urn:company-wiki:narrative-unit:sha256:e1ef3c820e161c67f5cff0e68bf1eeb85e69ce5992f214d79fa2b1d7773e8176",
+          "urn:company-wiki:narrative-unit:sha256:e2a3930681dfebecca5132f69c12845e589f88848b3282975904ecfbf77e24df",
+          "urn:company-wiki:narrative-unit:sha256:f5f04936f3921dba722c6870d87ae29c68ebdfc43b7ab671740e6579f7d8d70c",
+          "urn:company-wiki:narrative-unit:sha256:f7b41a1ccc4073b8a41187af683295a7dca97d34986302d9253996c41de6abd7",
+          "urn:company-wiki:narrative-unit:sha256:ffe2581194e53c6fbaaa8c8f044187a0df55073984a190ab009fc5233adfe2de"
+        ],
+        "deferred_unit_ids": [],
+        "opaque_pages": [],
+        "deferred_pages": [],
+        "excluded_furniture_unit_ids": [],
+        "complete": true,
+        "limits": {
+          "max_units": 50000,
+          "max_relations": 100000,
+          "max_group_members": 64,
+          "max_work_units": 2000000
+        }
+      },
+      "diagnostic_codes": [
+        "NATIVE_SCAN_INCOMPLETE",
+        "NO_HEADING_EVIDENCE",
+        "NO_RECOGNIZED_DISCOURSE"
+      ],
+      "excerpt_bytes": 4321,
+      "excerpts": [
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:994561a14b84f68ba8df0cd52c3d4787131559ceba49f97294be3a93c2bd6d5f",
+          "text": "恒锋工具股份有限公司                                                              募集说明书"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:380f2e8dfe556f49115765954067bbe57412b508d68134b86d6b1c969316c4f1",
+          "text": "1-1-62"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ae7a0eba903f68f68082f79a5dd8136e3612eb448c15327566a482ed23a9a4d1",
+          "text": "备"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:109ab3e887c3cf43383f5a668d69ba31bef3de11b6f64fb0caf1e50ba7657d44",
+          "text": "项目总投资 \n35,300.00 万元"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:a7d80f8775d653639bdfbc743036eeae599d06737d91778dfabce975513f88f6",
+          "text": "（二）项目投资计划"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:25e23a550f4d2268a13112f4de7abea6c3401d21ffca4585b1ed839f68919ca5",
+          "text": "1、项目实施主体"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c9a8063c52201ad5bf0fef9610f86a44683fa996bf0e5c0eca6454a93c406f66",
+          "text": "本项目由恒锋工具负责实施。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:7336aeb3593e09aadd6c5acbf4d0aebaac23c9fb706d2572404177e3ef688a3c",
+          "text": "2、项目资金额及明细"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:056972c1cb0ae440341cac6586a54f7c0e0553010f186e95480cf84f3117dc17",
+          "text": "本项目总投资为35,300.00 万元，其中工程费用29,779.00 万元，工程建设其"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:df426c91c0eb9dd0e9974fdd278a24dbc5666f40eea1722b6fd29538009b50fd",
+          "text": "它费用2,147.00 万元，预备费189.00 万元，铺底流动资金3,185.00 万元，具体"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:501f050b3aba616c77c2eef1da959ed0a89f68b963bb78136053526db44ad695",
+          "text": "情况如下表所示："
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:74febd852afee1a8a7f3907ea3495100850ba87ba04c29b732765420a028e591",
+          "text": "单位：万元"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:922b768c4e44bfe5e09970de8571a25aad1c36903759571d279c91d0d02084f1",
+          "text": "序号 \n项目名称 \n金额 \n占总投资比例"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:da37e60672d4f8cec4c72a52a3f31de5fd6a0f6ec8bb806f892b1897a157fd6b",
+          "text": "一 \n工程费用 \n29,779.00 \n84.36%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e1ef3c820e161c67f5cff0e68bf1eeb85e69ce5992f214d79fa2b1d7773e8176",
+          "text": "1 \n设备购置 \n18,445.00 \n52.25%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:30e1e0bd5cac66734a416443e6f9330e45436ebcd5283b77fdf025b9bb61c57b",
+          "text": "2 \n设备安装 \n184.00 \n0.52%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4325985a56b954d51aaa187126227763d25f558f157e8cb27fa1f3727a8ede3f",
+          "text": "3 \n厂房建造 \n11,150.00 \n31.59%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:fc044761e0dce5beb263877b690db25fdc6adee2cac4b07954a541490e263c30",
+          "text": "二 \n工程建设其它费用 \n2,147.00 \n6.08%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:81c38e164dc7ac842c4e952774d12e346da99b5ebeb1efda326d4dbbae1ffc1e",
+          "text": "1 \n土地款 \n2,053.00 \n5.82%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:03ae7e5e186eb8d9055934f2c777dd57c131c5870929e4cf80674a0aafb6a62a",
+          "text": "2 \n前期工作费 \n94.00 \n0.27%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4319d6229eae2d061708792d5523840307c05ef5b2f273f7e6838d7a7f13882e",
+          "text": "三 \n预备费 \n189.00 \n0.54%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:76971a4bacd26844da3715d08e22dda976433e4ea1e28a1ddf4715157bd81dea",
+          "text": "四 \n铺底流动资金 \n3,185.00 \n9.02%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8e49741e8637cb3e7cc9d7063053b74c07c3efbcbf2911808499cb87327074ca",
+          "text": "合计 \n35,300.00 \n100.00%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:3a18ea3b447cbb8c8ea5e0dcd8d2fde3902212cad7c0e632a638357ef1df388b",
+          "text": "（三）项目建设用地"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c96e6fa44032fe6bf2d582616060ce27fdaf0b4cbbaaafb5d6ed84d746cf24d5",
+          "text": "项目建设地点位于海盐县武原镇海兴东路68 号老厂区及古荡河对岸新厂区。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:55f0e578d7bbcba3054906d44d2bf83897d7d8ce853eb9c5304a69f1210f3da3",
+          "text": "（四）项目建设周期"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:1f89195d7eda4fa3af0d4f5b349db36c72e8cc7745401effd754f70a765eb1ca",
+          "text": "项目建设期两期，新建厂房为一期，老厂区改建为二期。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:baa2b5805e699f4042c135d980ac547e8230f196419f29ac1fe903365277cc7d",
+          "text": "一期2019 年1 月"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:402b3bdf326e6c88be7ba982ed85f1dd2ca5449d41f5430b6e4e2f32d111378f",
+          "text": "拿地，2020 年12 月建成厂房，2021 年1 月一期建成投产。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:aa532fd7629cd3f91c2b55dbb6aa4455dc00bea5800fbcd9392fd1cca9bb4a01",
+          "text": "二期在一期建设完成"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:3c78f67052196e858293fc2bd4269c3efd922932194f4ac20373b72ad97af5fd",
+          "text": "后，老厂区相关设备搬迁至一期新厂房后才启动改建，预计在2021 年1 月启动"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b5148fb04c45348b2e89821acdcb9dcd399ec7e73ab8c05b1935920c20dc3989",
+          "text": "备"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:7ced141a1ed125df6f9688b9e4122f89c4bee20b76c8515f8909ffdd3249989b",
+          "text": "项目总投资 | 35,300.00 万元"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8bbdfeb7899a9b63d76caa469bc0ffda4e61a0c6d095c3c69feafcd7e283ecf8",
+          "text": "序号 | 项目名称 | 金额 | 占总投资比例"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:612544ccdf424fdb55e473031ae2c2973fe43e428afa28eae027b19ff2eeb885",
+          "text": "一 | 工程费用 | 29,779.00 | 84.36%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f7b41a1ccc4073b8a41187af683295a7dca97d34986302d9253996c41de6abd7",
+          "text": "1 | 设备购置 | 18,445.00 | 52.25%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d45f109b78e82bf8c977cb365585fbbf4781a7e0a99338a0b2039eebfb8a730b",
+          "text": "2 | 设备安装 | 184.00 | 0.52%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:6ec31069ccec0bb39d6e9cf264999574234443eb028320e9ff4f86585bf78ed0",
+          "text": "3 | 厂房建造 | 11,150.00 | 31.59%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:98cca5a75447a1d354d768d51a972f88b908df4a3ae604582ccdb5496ce0ae61",
+          "text": "二 | 工程建设其它费用 | 2,147.00 | 6.08%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ffe2581194e53c6fbaaa8c8f044187a0df55073984a190ab009fc5233adfe2de",
+          "text": "1 | 土地款 | 2,053.00 | 5.82%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:9e62a8ce0ef1483efc7f9973d5dbb81aef870a7f2cc9ea34f51d7d79185c88e8",
+          "text": "2 | 前期工作费 | 94.00 | 0.27%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e2a3930681dfebecca5132f69c12845e589f88848b3282975904ecfbf77e24df",
+          "text": "三 | 预备费 | 189.00 | 0.54%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4b472a06c081988593fb9473c5661c113066b885a43a97e41af35425b9c5e689",
+          "text": "四 | 铺底流动资金 | 3,185.00 | 9.02%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f5f04936f3921dba722c6870d87ae29c68ebdfc43b7ab671740e6579f7d8d70c",
+          "text": "合计 | 35,300.00 | 100.00%"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f8a152b354f13e9253e35cdabeaf31ab955a088ad4ecdd71a30f672644c0c0fe",
+          "text": "恒锋工具股份有限公司                                                              募集说明书"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c784c992dec07530528f51c9e679313bb5c04aea86cd8daa62611df4684b3799",
+          "text": "1-1-63"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:5a3e4bbd68eb9b1337504a162dc5cc256e8d45f6056f4b2caa22fa54a0a7ce76",
+          "text": "建设，2021 年12 月完成建设，2022 年二期建成投产。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b7b4cbceacbe1af4173d46928d4605e7416c0aee48c545365cad2dbad221e69b",
+          "text": "（五）项目实施的必要性"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:1516bacbce0345c3f420118abf231faabd7c1d6a621a061f0a00d238a1bc7d76",
+          "text": "1、紧跟智能制造发展浪潮，提升核心业务竞争力"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b2769d651df11bc9b782e3417fb79600df474be898fbb62eecb8311ca790b925",
+          "text": "加快发展智能制造产业，是培育我国经济增长新动能的必由之路，是抢占未"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8362ee6e2adadc2ad486b06882859068a466930f9dd5dedbe43aa0adc9b1a420",
+          "text": "来经济和科技发展制高点的战略选择，对于推动我国制造业供给侧结构性改革，"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d3a3455bef89e4d8859c7c844871f8e43dab0d5adb77ff915e6942970833c31b",
+          "text": "打造我国制造业竞争新优势，实现制造强国具有重要战略意义。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8c239c725b41f5bdc3cf1ffee919117edcfe24ac5e3700bdd4b833ceffff701c",
+          "text": "为顺应全球现代制造业升级的需求，我国相继印发了《中国制造2025》、"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:20db997cb2b0fbb379e3f011bd62cf58f4088a1297c4213ab5f83328680db775",
+          "text": "《国务院关于加快培育和发展战略性新兴产业的决定》和《增强制造业核心竞争"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:7af3cc1a585a4e04b389b10095b68aa92161c4cc41d96040bfd48b6075eb98e4",
+          "text": "力三年行动计划（2018—2020 年）》等一系列战略规划、政策措施。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:30d1a0b1118eb2dacbcb213cd71ec7c1963b3a6f98235025dbe7f41a79def745",
+          "text": "上述指导"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:a76a8d31aef2e2198a1d72e3df81bf6aeac1ec326dc51f73893d7ce2e314f921",
+          "text": "文件中明确指出加快高端精密数控设备与智能加工中心研发与产业化，突破多轴、"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:0f92e8aeca671cc2f3e73a3ded0873d32ac9da035274c1c5b32126bba8f0c285",
+          "text": "多通道、高精度高档数控系统、伺服电机等主要功能部件及关键应用软件，开发"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:6c80876916a23897d73fcef360de880c58a37b6cea373c7ec1ecee3cf1fd383d",
+          "text": "和推广应用高端数控、高速、高效、柔性并具有网络通信等功能的高档数控设备、"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e942ed9e4df8d3fca433c7da37ee958967ceb3ccbc34b968ebb583b1aa228450",
+          "text": "基础制造装备及集成制造系统。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ed33912021b8bc02fd26578d896f7eec8a9a65f5d2cdd3962fd37cd7ee9355b9",
+          "text": "公司自成立以来一直专注于现代高效工具，主要包括精密复杂刀具、花键量"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e9313b5d8be70159d8d8786628d5753ac6f29aa6e96cc3ec0e0398e415c73ed8",
+          "text": "具（两者合称精密复杂刃量具）、精密高效刀具等高速切削刀具及高精度测量仪"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:876770ee600606ff585b54c01624c07ce444dcbcd5c978db18d400bd6ca46792",
+          "text": "器的研发、生产与销售。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8f4ac8f31334fee311dafe8a75d9f16a0b6c1d54e65a486b06b302f5f7f9568f",
+          "text": "本募投项目的顺利实施将通过建立独立完整的研发与制"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f477ac35f0a70b30564b7cebd9c19e9a9ca63d7ff840d189785b09743932e1d5",
+          "text": "备体系，紧跟智能制造的发展浪潮，进一步增强公司生产智能化水平，在现有刃"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:00024b0b036df43475a522d798447b2838e4df120dca351aed41d8b64994bb48",
+          "text": "量具业务的基础上形成新的业务增长点，打造公司的核心竞争力，帮助公司快速"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e951d5cbe4cd04a6dd905f53764843750707545fe852caf06bb4a06594aca479",
+          "text": "适应智能制造技术变革的发展节奏。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:872d8d300f5e9fd67d4db38df450a5d01a48c675075846afd5ee066a7f5cc981",
+          "text": "2、顺应“国内国际双循环相互促进的新发展”格局，构建供应链配置"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:426676d8cb4763f70fcb85bea4a9fc56045c82dc12f89e80912cf8e451294fb4",
+          "text": "2020 年5 月14 日中央政治局常委会会议上提出“加快形成以国内大循环为"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:a8c15fe6ef2669a86075ef06679ece75da4a2cae427c5bcfc683b4fd45ac7489",
+          "text": "主体、国内国际双循环相互促进的新发展格局”。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8d8613b2999c9ce181bf788551b8aa9dd8a424fb775a7ffb4ee8a9d99bc0040c",
+          "text": "当今世界正经历百年未有之大"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:84c1a39fabdac9db7a17ac7fcf92cb787f6cb536abfe67592c287ee99679dbfd",
+          "text": "变局，新一轮科技革命和产业变革蓬勃兴起。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:eaf6518d97b7db21b19771bd0e0e7ec7beae88769ed26d3a4b616cbd86c477f9",
+          "text": "由于国际交往受限、不稳定，因此"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:2b4ee59b76ffa1ed7840b03450f17a3fa69852fc2e297da91c66fb615a5626c3",
+          "text": "需要在不确定的世界环境中谋求发展。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:28708a8b16ed08fae1fd0a6913fdd70a88fc55eb0b325ded707ddfa7f27d5e38",
+          "text": "在当前保护主义上升、世界经济低迷、全球市场萎缩的外部环境下，集中力"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:290d5e19aa8c0a68bf11c51454866ec850a94ddd4564d0eb5bc1d3457362056b",
+          "text": "量办好自己的事，充分发挥国内超大规模市场优势，逐步形成以国内大循环为主"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:02331b1a0869c7df67b4a25fe74a13da8448a19db47116b050ec547f8587aacd",
+          "text": "体、国内国际双循环相互促进的新发展格局，提升产业链供应链现代化水平，大"
+        }
+      ]
+    },
+    {
+      "sample_id": "cn-wanrun-ir-qa",
+      "label": "万润股份 投资者关系活动记录表（QA 否定）",
+      "pages": [
+        2,
+        3
+      ],
+      "expect": "qa_exchange separates roles and preserves management denial",
+      "status": "OBSERVED",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "unit_count": 109,
+      "sections": 5,
+      "semantic_units": [
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "complete",
+          "member_count": 5,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "partial",
+          "member_count": 8,
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "paragraph_event",
+          "completeness": "complete",
+          "member_count": 2,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "partial",
+          "member_count": 1,
+          "diagnostics": [
+            "ANSWER_MISSING"
+          ]
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "partial",
+          "member_count": 1,
+          "diagnostics": [
+            "ANSWER_MISSING"
+          ]
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "complete",
+          "member_count": 5,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 3,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "partial",
+          "member_count": 1,
+          "diagnostics": [
+            "ANSWER_MISSING"
+          ]
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "complete",
+          "member_count": 15,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "partial",
+          "member_count": 5,
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "partial",
+          "member_count": 10,
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "complete",
+          "member_count": 3,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "partial",
+          "member_count": 11,
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 3,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "partial",
+          "member_count": 2,
+          "diagnostics": [
+            "ANSWER_MISSING"
+          ]
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 4,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "complete",
+          "member_count": 7,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "complete",
+          "member_count": 3,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "partial",
+          "member_count": 4,
+          "diagnostics": [
+            "ANSWER_MISSING"
+          ]
+        },
+        {
+          "kind": "background",
+          "completeness": "unknown",
+          "member_count": 1,
+          "diagnostics": []
+        },
+        {
+          "kind": "qa_exchange",
+          "completeness": "partial",
+          "member_count": 6,
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        }
+      ],
+      "relations": [
+        "continuation",
+        "question_answer"
+      ],
+      "coverage": {
+        "native_scan": "partial",
+        "structured_unit_count": 26,
+        "unassigned_unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:7e6fcdc5be7f634e8ca368b48a8d586d8849e8858061e59d4e840b6869a12c50",
+          "urn:company-wiki:narrative-unit:sha256:cad711f7d56e4d74ebe252f39153949daf2bb24b7362f2655203a22a66663824",
+          "urn:company-wiki:narrative-unit:sha256:f0963c1f048a38ab4c97415109bf5ae69498ed3246d9f8358ee49830e54c2d54"
+        ],
+        "deferred_unit_ids": [],
+        "opaque_pages": [],
+        "deferred_pages": [],
+        "excluded_furniture_unit_ids": [],
+        "complete": true,
+        "limits": {
+          "max_units": 50000,
+          "max_relations": 100000,
+          "max_group_members": 64,
+          "max_work_units": 2000000
+        }
+      },
+      "diagnostic_codes": [
+        "CONTINUATION_LIMIT",
+        "NATIVE_SCAN_INCOMPLETE",
+        "NO_HEADING_EVIDENCE"
+      ],
+      "excerpt_bytes": 8147,
+      "excerpts": [
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:0edc944dd8d3f380e2ecdcd1e42a1f438f037b43fce02a5460378326e5775e1f",
+          "text": "2"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:632f18dd54df3565ce4fd118adee654ad943915864914e6764eaf851990c8e66",
+          "text": "是三星，请问这个公司九目的影响？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:41fe596be086f3fdf1b9834985beeeefab49a390a1e3b48363a07005eeec9192",
+          "text": "九目化学目前北交所上市的进度？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:46c93a2429bee57d7ef3af1d94b0a7b1a2ae034178207ad03b36377caea87146",
+          "text": "年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:7c9aa04b0bdee414a7e18b785fc7c7d815a1092544f4f5f2cffcce5b2974c39a",
+          "text": "些障碍？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:9e058572570188d6958e0705a3bfa54399ee3717240eae4f2ee6d1b4103f3a4c",
+          "text": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:a1926fb21d9a7a7f3efc0e18c6ae64c005fcbc26c030f4ce278a9df444650234",
+          "text": "品，该事项未对九目化学经营构成重大影响。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:82cc599d9a44f66d970e42f508fef4dce4980ce38fae1d6ebd06e0dfa4ecf72f",
+          "text": "九目化学主要产品为OLED"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:12238b1643fda00184455ec73f3eeb403fa7c45b3880aac5143eb002bc99738b",
+          "text": "升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b5f55f20859c8a6df48cfea4ab400a7d260f96dfa70c921571d528d0c504523a",
+          "text": "企业下游主要为OLED 显示面板生产企业，OLED 显示面板生产企业下游为"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:7b78e586031ce7898a3ad4a915a1418d9b0a45daac08aa904b007d4a111a1854",
+          "text": "各类显示屏应用企业。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:18aa27cb969fcd65efb86b16c9d3c22d0a8a34d27ebc367965aac3e786f4e3d1",
+          "text": "九目化学已于3 月11 日收到北交所第二轮审核问"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b15250e5a809463b28d6eb0c6f74d2ac29cc50909c0152a1792e4770b05d8c0c",
+          "text": "询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:654a3f39fbec51aef21f48d0212ab0d3d287f992a7c3b70762fc24ac7c1212d6",
+          "text": "财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8009774e0012812c329b51126104af545c3fbd8f48aeeb135a430eb478e057cb",
+          "text": "感谢您对公"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:db3ddbf758f14df36c05fda6d08ee55d88c38f897b7d100248f96c68a341bf32",
+          "text": "司的关注！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4c33960e23d33a675311dabd913c780c892d31c1656f4b06923579c9621c7f59",
+          "text": "3、问：公司业绩在23 年度达到历史新高后，24 年度断崖式下降，"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:cad711f7d56e4d74ebe252f39153949daf2bb24b7362f2655203a22a66663824",
+          "text": "25 年仍未有明显起色，主要是因为沸石原因么？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:1191f18ec52816ceff23c5f79951f77554ced1c7969436abd09de2d56f2e2094",
+          "text": "公司有什么举措尽快恢"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:9f45bc495b0c277ea618c60bcc949ea2c80b0380e2ffcb5e7afd744d3c2f806d",
+          "text": "复乃至超过23 年度的经营业绩？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:1d1bc0460b8925a7786a610da3607134a8152eb1fead1963a40d0000b15003a7",
+          "text": "答：您好！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:0398ecfe6498be60bc54d0e7ee21cd814183e299890281cf4920236f47cfeb66",
+          "text": "公司2024 年度影响收入的主要原因为沸石系列环保材料"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:cd0711d01fd67813a46ff82418b3c7c82fe443ccda97e30c666503945bab8581",
+          "text": "业务及部分医药业务下游需求减少，公司2025 年度沸石分子筛产品收入"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4ce35a31a81b946063302d10318a3f83ee8aa7e307ce206a5e7864111f4a9d00",
+          "text": "略低于2024 年度。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:88b37fd172319dc8fa586c3d1cf7ba034a1c642068c50ab14ab5763824491171",
+          "text": "公司2025 年度及2026 年一季度收入及归属于上市公"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d7122a85971807e7ea6f7038690fa6f352fd41a5458d93d50f0fec27967f8baa",
+          "text": "司股东的净利润均实现同比增长，其中2025 年度公司实现营业收入37.17"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:22ac0d1fe73437763de946a452d19bf419e2cfc87f48172b391955d36ee53f58",
+          "text": "亿元，同比增长约0.63%，实现归属于上市公司股东的净利润约2.84 亿"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:007a62a15bf72754d45a927e7fe3981ee3adf332b4c2a446f2110f9f14e4179d",
+          "text": "元，同比增长约15.51%；"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:7e6fcdc5be7f634e8ca368b48a8d586d8849e8858061e59d4e840b6869a12c50",
+          "text": "2026 年一季度实现营业收入约10.15 亿元，同"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:267ace47ad55cd850312191615a21dd1b01d3ca1deb768e84c475a362b20d5be",
+          "text": "比增长约17.89%，实现归属于上市公司股东的净利润约0.88 亿元，同比"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:566e944508abb9b29f337a746f98e6c02b4b7c1dff30047f09a7ebba74cf2f7e",
+          "text": "增长约9.96%。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b39fc7b4237bc49ebf608fec434823d17d90d976f422994c81ec1e7000ef474a",
+          "text": "未来公司将持续推进现四大产业产品的研发与产业化，在"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c721eae0fcc1572f3fb64c75064e1cbc781c217115370b20d7fc574e73041141",
+          "text": "巩固现有业务领域优势地位的基础上，进一步优化新产品研发与产业化效"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:bb2073d49c2ca69b33fa16fa54278eb3b47bf6278b77f0ee93fa046ad01ca7df",
+          "text": "率，持续丰富产品线，提升公司核心竞争力，争取获得更多产品领域的业"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4ace941fe7b922ce1c57ed51f2ff291600bf8134d0ae31524c34df84a53b5b4e",
+          "text": "内优势地位，并也希望通过努力实现更好的业绩。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:33df379436e3f3804ab0c3911e48ebef5c3ea05e4a647b2f1979a35661c16d9d",
+          "text": "感谢您对公司的关注！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d82dde151471ca5acb25c95951f69cb8ea51424eb5e30b1be8fec7fa91530114",
+          "text": "4、问：公司的研发费用日益增长，占比已经超过营收的10%，但是"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e9a688821eb3b2efbc255ae561a8259e9380e6a8c6b737f39798df62cbdc99cb",
+          "text": "公司的新材料占比（PI 材料，PEEK 材料，光刻胶原料）等一直还是很低，"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ab80ca9a7f1970b77b45be513b199fdd9574c9e21d33bce934b2c42af59b28bd",
+          "text": "营收构成仍是原来沸石等，是核心厂家的验证还没结束，还是产品与国"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:6370afd63bcabcc7986a4b824d577bdbe7791bb604126599ff63b32bd78e3837",
+          "text": "内外竞争对手的性能还有差距，导致一直不能起量？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:110521476ead649d5dde293ae02cd620a5577c06f1de0f6b1cb5e1f87d8c03a7",
+          "text": "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b37e12f2febfc2c515c1ce6891a17034ec5dd1e9697494677ef8b7818e677303",
+          "text": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:28ae91b8e736ea03fb24160581349a5902095e25097a0e32fa1b76889c6ac551",
+          "text": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b88f61fa009e8b260ee48885cc3f0f55270a117b20ba7e638928d0dc69d77b92",
+          "text": "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d07ee8dc8c954d132ec40f35547ab568e8808d019c6af438770fbe9f38d585d0",
+          "text": "感谢您对公\n司的关注！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:b616fc283a679a8154f99c4bcf356c61dafc50c825b8a12fa611de7ace45b662",
+          "text": "3、问：公司业绩在 23 年度达到历史新高后，24 年度断崖式下降，\n25 年仍未有明显起色，主要是因为沸石原因么？公司有什么举措尽快恢\n复乃至超过 23 年度的经营业绩？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ff78d580a64d35b8026c5ab1cdfa5b1e24578023fa821416911eca67e1ecfcc1",
+          "text": "答：您好！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e9af9e2ef306fb2c4a526e8c838d4aace0df27ecffcdeccd7d25935122d73107",
+          "text": "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:a078e504aa9c2534fe083870938927205d82588116f60e8df86e563f54fd0f1f",
+          "text": "公司 2025 年度及2026 年一季度收入及归属于上市公\n司股东的净利润均实现同比增长，其中2025 年度公司实现营业收入37.17\n亿元，同比增长约 0.63%，实现归属于上市公司股东的净利润约 2.84 亿\n元，同比增长约 15.51%；"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:9c53a3a87a1aacee534c2f4615baa9883164e41dc15c2ebf0abaa603600c1a7c",
+          "text": "2026 年一季度实现营业收入约 10.15 亿元，同\n比增长约17.89%，实现归属于上市公司股东的净利润约0.88 亿元，同比\n增长约9.96%。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:37c041eb9aa4bb2446b050637773353a29f4ff5f51d7d67e226f97ff15a43d59",
+          "text": "未来公司将持续推进现四大产业产品的研发与产业化，在\n巩固现有业务领域优势地位的基础上，进一步优化新产品研发与产业化效\n率，持续丰富产品线，提升公司核心竞争力，争取获得更多产品领域的业\n内优势地位，并也希望通过努力实现更好的业绩。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c9c1fde9d49c09ab0922349e1c66aea2b990386ccaf1bcc814c898a637b71224",
+          "text": "感谢您对公司的关注！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:2a2f6bc3adde2706900a2fe46bd21634310b47b2f8983c23fd22469d13e9043e",
+          "text": "4、问：公司的研发费用日益增长，占比已经超过营收的 10%，但是\n公司的新材料占比（PI 材料，PEEK 材料，光刻胶原料）等一直还是很低，\n营收构成仍是原来沸石等，是核心厂家的验证还没结束，还是产品与国\n内外竞争对手的性能还有差距，导致一直不能起量？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f2f85b80597523778d7d7a5697f639608fff940deda4880f1d491339df8918da",
+          "text": "3"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d7d50b681bfacf2942f99baab2ad9e9b82e62edc4c66f9fb18db500e031d1693",
+          "text": "答：您好，公司是以研发创新驱动发展的平台型企业，为争取更多市"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f921dd23bba67fc9227e2f1e1e6df8ab07a5eba6f26f03d78465e6091604ec22",
+          "text": "场机会，公司持续增加研发投入，在半导体制造材料、电子与显示用聚酰"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d9c7cdfbe283643939c1a8a2d4beb112bd8224fbb8a979fc2be2026ef5586120",
+          "text": "亚胺材料、高性能聚合物材料、OLED 材料等领域持续丰富产品布局。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8161f88735351a13a67aad653f649f82a75d6a3abd56f866653c35818061d600",
+          "text": "公"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d0a06249e2f9c4dc24aea13fde36c78a2e48c26ac44425221fdced6b7e070aff",
+          "text": "司2025 年度及2026年一季度收入及归属于上市公司股东的净利润均实现"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:9efaaead4238938f9031c8bb0c7513c7be19f0c3bb0cae3f56f1b64cbb6a0ec7",
+          "text": "同比增长。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:589d18d0a5a873b8523b517d87a0876bab23488ada41bd961b61b42b46c95dba",
+          "text": "先进新材料的开发和应用很多是长期的过程，需要通过长时间"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:500b806a7dbada734da4d04c11e51be64c33431dc9a2c070d3ea56fc95d6a4d6",
+          "text": "的产品开发、技术积累以及下游验证支持，才可能在下游产业发展的过程"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f51f0614f21cd2038398461c39436d7304ced931c3775a027668f8f6b3bc5849",
+          "text": "中做出更多贡献。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:e82c9b633fc479db165f88f84388a5f3daf1d6343ea09a2e4a55bbd028d36109",
+          "text": "公司将继续积极推进先进新材料的开发与产业化，争取"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:0321a39cf982c30b8a4fb1c6b6c61faa839dfa470f7438db5ac06281db6c1968",
+          "text": "更多前沿材料领域的优势地位。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:0790ff12adcd03ad3542d5e7dc1f8f83a0c3e5fe83873a649405779d0ac5fb19",
+          "text": "谢谢！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:2d7eca32ec26bb27518ac83aaa0b58860fdb535d16dc262abee3fad8f4f1d70b",
+          "text": "5、问：控股股东在支持上市公司层面，具体做了哪些工作？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ab095d9ff234df62d2ab3f0ca1dcbfa08de867cce61b756ee3ac40d735554052",
+          "text": "有没有"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:30c2c674eb9f0652df232e3d15948625dd3f5d0cafda0f4ce47a50b4ccbe74d2",
+          "text": "能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d7caca6ce9d92bca80032848eb521aa43914a8cd6f9a2c8323d6f45c115fa214",
+          "text": "体业务，推动上市公司快速做大做强？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:772fa7cb7f6f64299e1a9945813104f47ef2300083a5586c41aeaa4a7de68780",
+          "text": "答：您好，公司现无生产VC（碳酸亚乙烯酯）的情况，根据公司控"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c797bda2756e3b154522adc534c0b97de06e5092564497c6e9bd1b173f326fef",
+          "text": "股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f05b1436c183ff685c0cd5381e01d1a213be252b1164111848ef346c25eb43fc",
+          "text": "业务协同与合作。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ffa66ac043668dd704a84dde0961eca198827b40979faad3eaedddd3c828760f",
+          "text": "公司控股股东中国节能基于对公司未来发展前景的信心"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:56eba3e86ef9b98de8fd7bd8460a68ec86438b962c294362203e19542afa1fe7",
+          "text": "和对公司长期投资价值的认可，为切实维护广大投资者利益，促进公司持"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ac32e39ab854d0e2adf91e91a61b6ae8758e251f869b3e760c52bbbe537c3116",
+          "text": "续、健康、稳定发展，增强投资者信心，计划自2025 年11 月24 日起6"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:6634cd0172dd8ed01525b7b8d77058e33b3ac4d412d027df1f8b62fddf6116e9",
+          "text": "个月内（即2025 年11 月24 日至2026 年5 月23 日），以自有资金及股"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f48ec98a6dbc8b4de9405d0408773863c6444a883ebb99dae51e1db26d781b62",
+          "text": "票增持专项贷款通过集中竞价交易方式，择机以适当的价格增持公司股"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ae90c646bdb1575518b722af23790ad1857d17b0f5410484e6bef8105b243802",
+          "text": "份，截至2026 年5 月14日，中国节能本次已累计增持公司股份3,594.5807"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:2d8ff1c471c46d66a28208668e1a29c0d1582f2745130155fa3fde6e379721e8",
+          "text": "万股，合计持股比例已经达29.08%，感谢您对公司的关注！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ac2ad1c4ce64da47ba447b978a96c9fc19f036cade91e7a7927e686af3691bd3",
+          "text": "6、问：公司目前账面价值17 个亿的库存，有没有存在今年化工产"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:06c274817db9cc4b66135164df92f433c7eb0596acc66bb247bd577b23358441",
+          "text": "品涨价的预期？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:226f87a5f4ff227c48ccb1a4809713d11d5ea4275a92cae1e361bf72d6575ca5",
+          "text": "还是说仍要进行计提？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f78f481c3fd36a9deb80855786ca9d083c9ec128cd923ab6e9e1c71cc1ed366c",
+          "text": "答：您好！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:d5dff45255e2c45fe5f83a501847128ab3804b6585f50772a9b7963010639401",
+          "text": "目前公司主要产品价格暂无大幅波动的情况。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:10c7297284df98c3dd0e7d139874347ddc98bb2bb5fe1b00f871f874b9aaa30e",
+          "text": "公司根据《企"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4f84a65d6c9562b767ea005bd62471a514b399579e38421ad4fa3193f7f1257f",
+          "text": "业会计准则》要求，基于谨慎性原则，每年末对各类资产进行减值测试，"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:4fed6e32698251fc9a079e9f5a071ce584bc885a01adf65752902c1228b2ba47",
+          "text": "依据测试结果计提减值准备。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:ffb3e2c2f93f7908e9510722145e6ee980cca81b6ec237363569005d26808cae",
+          "text": "感谢关注！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:8d323c9d8e0fa126503f43eac7c2500f37ab183cd71ce91ea354852145711a7a",
+          "text": "7、问：26 年一季报显示营收增速比利润明显高很多，增收不增利是"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:360bae44881813f1b19792d5b39fda4bd452a547cc6c6797ac2693722a42b086",
+          "text": "什么原因导致的？"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:2b052316fd4c9b3320a23e4f26453b90bc6aa9f561690219b3d33b928299de9e",
+          "text": "答：您好！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:f0963c1f048a38ab4c97415109bf5ae69498ed3246d9f8358ee49830e54c2d54",
+          "text": "2026 年一季度收入及归属于上市公司股东的净利润均实"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:5b9bbe5b34f4b3f7cdeb3755cdf7f4675b264a71f02a814d2f8839acd179e4ef",
+          "text": "答：您好，公司是以研发创新驱动发展的平台型企业，为争取更多市\n场机会，公司持续增加研发投入，在半导体制造材料、电子与显示用聚酰\n亚胺材料、高性能聚合物材料、OLED 材料等领域持续丰富产品布局。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:6a9049f450e5445944f76a29d6579e72d99e73d572ee78746272e7752f6f2404",
+          "text": "公\n司2025 年度及2026年一季度收入及归属于上市公司股东的净利润均实现\n同比增长。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:1ac3bd3d8a9b9ae86ed2fa067670d255c576941a8148f7a29359c076b9507abd",
+          "text": "先进新材料的开发和应用很多是长期的过程，需要通过长时间\n的产品开发、技术积累以及下游验证支持，才可能在下游产业发展的过程\n中做出更多贡献。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:3d19b0c53fcf822ce0451e04e40ab7d07f18e9ba357d86de25e0f3d772611750",
+          "text": "公司将继续积极推进先进新材料的开发与产业化，争取\n更多前沿材料领域的优势地位。"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:2170640988be3fe33061d95681c3d1d56072490e3b4384c65fbb463bf7af9c7c",
+          "text": "谢谢！"
+        },
+        {
+          "locator": "urn:company-wiki:narrative-unit:sha256:c1f4de2c6bd84a056d96b90b629a60a8af1de4d2c4bfdbc12350c6e31c55cd6d",
+          "text": "5、问：控股股东在支持上市公司层面，具体做了哪些工作？有没有\n能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具\n体业务，推动上市公司快速做大做强？"
+        }
+      ]
+    }
+  ]
+}

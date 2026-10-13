@@ -1,0 +1,418 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "us-txt",
+  "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+  "scope": "development",
+  "expected_route_families": [
+    "earnings_call",
+    "investor_call_transcript"
+  ],
+  "notes": "微软 FY2026 Q4 业绩电话会 TXT，340 行。开发集。本样本承载卡上要求的『电话会角色』：发言人角色、管理层 vs 分析师、编辑摘要 vs 真实发言、以及 Q&A 无标题的结构事实。注意来源是第三方聚合站（motley_fool）且文件自带 LLM 生成声明，行内容还被硬截断，因此它是第三方、部分机器撰写、不完整的记录——不能当作发行人原文。事实逐字取自原件。",
+  "facts": [
+    {
+      "id": "f-participants-are-management-only",
+      "importance": "critical",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "third_party",
+      "any_support_sets": [
+        [
+          {
+            "line": 14,
+            "exact_quote": "CALL PARTICIPANTS"
+          }
+        ],
+        [
+          {
+            "line": 16,
+            "exact_quote": "Chairman and Chief Executive Officer - Satya Nadella"
+          }
+        ],
+        [
+          {
+            "line": 18,
+            "exact_quote": "Chief Financial Officer - Amy Hood"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "CALL PARTICIPANTS",
+        "Satya Nadella",
+        "Amy Hood"
+      ],
+      "must_not_assert": [
+        "CALL PARTICIPANTS 列出了参与问答的分析师名单"
+      ],
+      "reason": "「CALL PARTICIPANTS」名单**只有管理层**：Satya Nadella（董事长兼 CEO）、Amy Hood（CFO）、Alice Jolla（CAO）、Brian DeFoe（副总法律顾问兼公司秘书）、Jonathan Neilson（IR 副总裁）。**分析师不在名单里**——他们的公司与姓名只出现在 operator 的引场句里。把参与者名单当成含分析师的花名册是角色错。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-analyst-firm-only-in-operator-line",
+      "importance": "critical",
+      "role": "third_party",
+      "modality": "actual",
+      "any_support_sets": [
+        [
+          {
+            "line": 234,
+            "exact_quote": "Operator:And our first question comes from the line of Karl Keirstead with UBS."
+          }
+        ],
+        [
+          {
+            "line": 236,
+            "exact_quote": "Karl Keirstead:Okay. Great. Satya, maybe I'll start away from the numbers"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Operator",
+        "Karl Keirstead",
+        "UBS"
+      ],
+      "must_not_assert": [
+        "Karl Keirstead 是微软管理层",
+        "UBS 的观点由公司披露"
+      ],
+      "reason": "分析师的**所属机构只出现在 operator 引场句**里（「comes from the line of Karl Keirstead with UBS」），分析师本人的发言行只写姓名、不带机构。所以「谁代表哪家机构」必须绑定 operator 行；把机构归错或把分析师当管理层都是角色错。文件里所有分析师（Karl Keirstead/UBS、Brent Thill/Jefferies、Mark Moerdler/Bernstein Research、Adam Wood/Morgan Stanley、Brad Zelnick/Deutsche Bank、Gabriela Borges/Goldman Sachs）都遵循这一模式。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-qa-has-no-heading",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_statement",
+      "any_support_sets": [
+        [
+          {
+            "line": 232,
+            "exact_quote": "Jonathan Neilson:Thanks, Amy. We'll now move over to Q&A."
+          }
+        ],
+        [
+          {
+            "line": 124,
+            "exact_quote": "Full Conference Call Transcript"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "move over to Q&A",
+        "Full Conference Call Transcript"
+      ],
+      "must_not_assert": [
+        "文件中存在 Questions and Answers 标题区段"
+      ],
+      "reason": "Q&A 的**开始没有标题**：全文唯一的标题是第 124 行的「Full Conference Call Transcript」，而预先发言转到问答只靠 IR 的一句口头过渡（Jonathan Neilson 说「We'll now move over to Q&A.」）。因此按标题切章节的结构构建器在这个文件上只会得到**一个** section —— 这是真实的结构事实，不是解析失败。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-editorial-digest-is-not-management-speech",
+      "importance": "critical",
+      "role": "editorial_summary",
+      "modality": "third_party",
+      "any_support_sets": [
+        [
+          {
+            "line": 58,
+            "exact_quote": "Q1 2027 Revenue Guidance-- Expected to be between $89.85 billion to $90.95 billion, representing 16% to 17% growth."
+          }
+        ],
+        [
+          {
+            "line": 28,
+            "exact_quote": "Non-GAAP EPS-- $4.74, a 23% increase when adjusted for the impact of investments in OpenAI."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Q1 2027 Revenue Guidance",
+        "Non-GAAP EPS"
+      ],
+      "must_not_assert": [
+        "管理层在电话会上说出『Non-GAAP EPS $4.74』这一原话",
+        "编辑摘要中的每条要点都是管理层原话引用"
+      ],
+      "reason": "第 26–122 行是**聚合站自己写的编辑要点与行业术语表**，位于「CALL PARTICIPANTS」之后、真正的逐字记录（第 124 行）之前。它的条目形式（「要点-- 说明」）看起来像引文，但**不是**管理层发言。把编辑摘要当管理层原话、或把其中的前瞻数字当公司口头指引，都是把第三方摘要冒充发行人陈述。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-source-is-third-party-and-llm-assisted",
+      "importance": "critical",
+      "modality": "negation",
+      "role": "editorial_summary",
+      "any_support_sets": [
+        [
+          {
+            "line": 334,
+            "exact_quote": "Parts of this article were created using Large Language Models (LLMs)"
+          }
+        ],
+        [
+          {
+            "line": 6,
+            "exact_quote": "Source: motley_fool"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "motley_fool",
+        "created using Large Language Models"
+      ],
+      "must_not_assert": [
+        "本文件为微软官方发布的电话会记录",
+        "本文件内容经过发行人审阅"
+      ],
+      "reason": "文件头自述来源为第三方聚合站（Source: motley_fool，带 URL 与 Scraped 时间戳），文末又声明**部分内容由大语言模型生成**。因此本文件是第三方、部分机器撰写的记录，不是发行人原文；把它当公司正式披露会高估权威性。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-lines-are-truncated",
+      "importance": "critical",
+      "role": "third_party",
+      "modality": "actual",
+      "any_support_sets": [
+        [
+          {
+            "line": 12,
+            "exact_quote": "Wednesday, July 29, 2026 at 5:30 p.m. ET"
+          }
+        ],
+        [
+          {
+            "line": 9,
+            "exact_quote": "Characters: 65572"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Wednesday, July 29, 2026"
+      ],
+      "must_not_assert": [
+        "本文件完整记录了电话会全部发言内容"
+      ],
+      "reason": "文件自称 65,572 字符，而实际正文 340 行、约 65,980 字符；发言人段落被**硬截断**（例如第 76、222 行在词中被切断）。所以引用不得越过截断点延伸，也不能声称这是完整逐字记录。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-fiscal-q4-not-calendar-q4",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "third_party",
+      "any_support_sets": [
+        [
+          {
+            "line": 126,
+            "exact_quote": "welcome to the Microsoft Fiscal Year 2026 Fourth Quarter Earnings Conference Call"
+          }
+        ],
+        [
+          {
+            "line": 12,
+            "exact_quote": "Wednesday, July 29, 2026 at 5:30 p.m. ET"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Fiscal Year 2026 Fourth Quarter"
+      ],
+      "must_not_assert": [
+        "电话会对应日历 2026 年第四季度",
+        "FY2026 Q4 指 2026 年 10 月至 12 月"
+      ],
+      "reason": "「Q4 2026」是**财年**第四季度（微软财年截至 6 月 30 日，会议日期为 2026-07-29），与日历 2026 年 Q4 完全不是一回事。把财季当自然季是跨市场文件的经典期间错。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-analyst-question-is-not-company-fact",
+      "importance": "critical",
+      "role": "analyst_question",
+      "modality": "question",
+      "any_support_sets": [
+        [
+          {
+            "line": 252,
+            "exact_quote": "Brent Thill:Amy, impressive acceleration in Azure up to 43% going to mid-40s."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Brent Thill",
+        "Azure"
+      ],
+      "must_not_assert": [
+        "公司确认 Azure 增速将达 45% 以上",
+        "公司将 Azure 增速上调至 mid-40s 是公司指引"
+      ],
+      "reason": "「Azure up to 43%, going to mid-40s」是**分析师 Brent Thill 的提问措辞**（含对未来的揣测），不是公司指引。公司自己的 Azure 展望在 Amy Hood 的 prepared remarks 里另有原话。把分析师提问里的数字当公司口径，是角色与来源双重错。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-management-answer-confirms-not-negates",
+      "importance": "critical",
+      "role": "management_answer",
+      "modality": "actual",
+      "any_support_sets": [
+        [
+          {
+            "line": 254,
+            "exact_quote": "Amy Hood:Thanks, Brent. First, there are still constraints in the system."
+          }
+        ],
+        [
+          {
+            "line": 254,
+            "exact_quote": "demand continues to exceed available supply"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "there are still constraints in the system",
+        "demand continues to exceed available supply"
+      ],
+      "must_not_assert": [
+        "管理层否认存在产能约束",
+        "管理层表示产能已不再受限"
+      ],
+      "reason": "Amy Hood 对 Brent Thill 的答复是**确认**而非否认：明确说「there are still constraints in the system」且「demand continues to exceed available supply」。提问给了两个备选解释（同环境 vs 执行更好），管理层肯定的是约束环境。把肯定读成否认会反转语义。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-prepared-remarks-speaker-order",
+      "importance": "normal",
+      "role": "management_prepared",
+      "modality": "actual",
+      "any_support_sets": [
+        [
+          {
+            "line": 136,
+            "exact_quote": "Satya Nadella:Thank you very much, Jonathan. It was a very strong close to what was a record fiscal year for us."
+          }
+        ],
+        [
+          {
+            "line": 182,
+            "exact_quote": "Amy Hood:Thank you, Satya, and good afternoon, everyone."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Satya Nadella",
+        "Amy Hood"
+      ],
+      "must_not_assert": [
+        "Amy Hood 先于 Satya Nadella 发言"
+      ],
+      "reason": "prepared remarks 顺序固定：先 IR（Jonathan Neilson）做免责声明，再 CEO（Satya Nadella），再 CFO（Amy Hood），然后才进 Q&A。发言顺序与内容归属必须绑定，不得把 CFO 的财务展望记到 CEO 名下。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-guidance-is-forward-looking",
+      "importance": "critical",
+      "modality": "plan",
+      "role": "management_prepared",
+      "any_support_sets": [
+        [
+          {
+            "line": 226,
+            "exact_quote": "revenue should be between USD 89.85 billion and USD 90.95 billion or growth of 16% to 17%"
+          }
+        ],
+        [
+          {
+            "line": 214,
+            "exact_quote": "we expect to remain free cash flow positive in FY '27"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "should be between",
+        "we expect"
+      ],
+      "must_not_assert": [
+        "微软 FY2027 第一季度收入为 898.5 亿至 909.5 亿美元",
+        "公司已实现 16% 至 17% 的收入增长"
+      ],
+      "reason": "「we expect」「should be」是**前瞻指引**（下季度/下财年），不是已实现结果。用「为」「已实现」等完成语态复述指引，会把预测写成事实——这是财务摘要里最常见的语态错误。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-discrete-items-adjusted-eps",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "management_prepared",
+      "any_support_sets": [
+        [
+          {
+            "line": 184,
+            "exact_quote": "resulting in a benefit of $0.27 on diluted earnings per share"
+          }
+        ],
+        [
+          {
+            "line": 184,
+            "exact_quote": "These included a $3.2 billion gain from our investment in Anthropic"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "0.27",
+        "3.2 billion",
+        "Anthropic"
+      ],
+      "must_not_assert": [
+        "公司每股收益 $4.74 全部来自主营业务",
+        "Anthropic 投资收益属于经常性经营收益"
+      ],
+      "reason": "EPS $4.74 含**一次性项目**带来的每股 $0.27 好处，其中含对 Anthropic 投资的 32 亿美元收益。把它读成持续经营成果会高估盈利能力；公司自己明说这些是「discrete items」。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-headcount-declined",
+      "importance": "normal",
+      "quantity_basis": "incremental",
+      "modality": "actual",
+      "role": "management_prepared",
+      "any_support_sets": [
+        [
+          {
+            "line": 186,
+            "exact_quote": "Total company head count declined 2% year-over-year."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "head count declined 2%"
+      ],
+      "must_not_assert": [
+        "公司总员工人数同比增长2%"
+      ],
+      "reason": "总员工人数**同比下降 2%**，与同段收入增长 18%、营业利润增长 21% 方向相反。把下降读成增长会得出「扩张」的错误结论。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-operator-role",
+      "importance": "normal",
+      "role": "operator",
+      "modality": "actual",
+      "any_support_sets": [
+        [
+          {
+            "line": 332,
+            "exact_quote": "Operator:Ladies and gentlemen, this does conclude today's conference."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Operator",
+        "this does conclude today's conference"
+      ],
+      "must_not_assert": [
+        "Operator 的发言属于公司管理层陈述"
+      ],
+      "reason": "Operator（会议主持人/接线员）是中立的流程角色：负责引场、介绍提问人、宣布结束。其发言既不是管理层陈述也不是分析师观点，混入任一方都会污染角色统计。",
+      "fact_scope": "narrative"
+    }
+  ]
+}

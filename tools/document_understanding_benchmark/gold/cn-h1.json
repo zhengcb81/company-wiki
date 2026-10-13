@@ -1,0 +1,313 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "cn-h1",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "scope": "development",
+  "expected_route_families": [
+    "interim",
+    "semi_annual_report"
+  ],
+  "notes": "中微公司 2026 年半年度报告（210 页），物理页 3、13、18。开发集（该样本参与过 ROOT 调查）。事实逐字取自原件。",
+  "facts": [
+    {
+      "id": "f-five-year-target-is-plan",
+      "importance": "critical",
+      "quantity_basis": "projected_output",
+      "modality": "plan",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 13,
+            "exact_quote": "未来五年，公司将通过自主开发与外延并购，覆盖60%以上的集成电路高端设备市场和70%以上的先进封装设备市场",
+            "locator": "loc:v1/page:13/paragraph:4"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "未来五年",
+        "60%",
+        "70%"
+      ],
+      "must_not_assert": [
+        "公司已覆盖60%以上的集成电路高端设备市场",
+        "公司已覆盖70%以上的先进封装设备市场"
+      ],
+      "reason": "60%/70% 是「**未来五年**」的目标，不是已达到的市占率。同一段前半句的「已经覆盖了超30%前道集成电路设备产品」是现状——30% 是现状、60%/70% 是目标，三者在同一段，最易互相顶替。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-current-coverage-30",
+      "importance": "critical",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 13,
+            "exact_quote": "目前公司的五十多种设备产品已经覆盖了超30%前道集成电路设备产品",
+            "locator": "loc:v1/page:13/paragraph:4"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "五十多种",
+        "超30%"
+      ],
+      "must_not_assert": [
+        "公司设备已覆盖60%以上前道集成电路设备产品"
+      ],
+      "reason": "现状是「五十多种设备产品已覆盖超 30% 前道集成电路设备产品」。这是**产品种类覆盖率**，不是市占率或收入占比。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-cmp-acquisition-completed",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 13,
+            "exact_quote": "公司于报告期内完成对众硅公司控股权的收购，完成了对化学机械抛光（CMP）设备的覆盖，实现从“干法”向“干法+湿法”整体解决方案的关键跨越",
+            "locator": "loc:v1/page:13/paragraph:2"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "报告期内完成",
+        "众硅公司",
+        "CMP"
+      ],
+      "must_not_assert": [
+        "公司正在筹划收购众硅公司"
+      ],
+      "reason": "收购**已在报告期内完成**（actual），不是筹划中。语态写反会把已完成的并表事件写成预期事项。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-microled-sample-verification",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 18,
+            "exact_quote": "公司于2023 年底付运Micro-LED 应用的设备样机Preciomo Udx 至国内领先客户开展生产验证。报告期内样机验证进展顺利，其性能与可靠性已满足客户产线要求，并获得客户的重复订单。",
+            "locator": "loc:v1/page:18/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Preciomo Udx",
+        "2023 年底",
+        "重复订单"
+      ],
+      "must_not_assert": [
+        "Micro-LED 设备已实现批量出货"
+      ],
+      "reason": "样机于 **2023 年底**付运，报告期内验证进展顺利并取得**重复订单**。付运/验证/重复订单都不是批量出货，且起始时点在前一年度。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-gan-power-stage",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 18,
+            "exact_quote": "已于2022 年推出了用于氮化镓功率器件生产应用的MOCVD 设备PRISMO PD5，目前已交付客户进行生产验证，并取得了重复订单",
+            "locator": "loc:v1/page:18/paragraph:2"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "PRISMO PD5",
+        "生产验证",
+        "重复订单"
+      ],
+      "must_not_assert": [
+        "PRISMO PD5 已完成生产验证"
+      ],
+      "reason": "PRISMO PD5 于 2022 年推出，**目前仍在客户处进行生产验证**并取得重复订单。取得订单 ≠ 验证完成。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-sic-8inch-stage",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 18,
+            "exact_quote": "该新型8 寸碳化硅外延设备已进入国内头部企业进行生产验证，并取得了重复订单",
+            "locator": "loc:v1/page:18/paragraph:3"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "8 寸碳化硅",
+        "生产验证"
+      ],
+      "must_not_assert": [
+        "8寸碳化硅外延设备已量产"
+      ],
+      "reason": "8 寸碳化硅外延设备「**已进入**国内头部企业**进行生产验证**」并取得重复订单。进入验证 ≠ 量产。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-inp-development-started",
+      "importance": "critical",
+      "modality": "plan",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 18,
+            "exact_quote": "于报告期内启动磷化铟（InP）材料体系专用MOCVD 设备的开发，实验室已取得良好进展。下半年将结合客户反馈意见，加快产品开发，尽早付运样机至客户端开展生产验证。",
+            "locator": "loc:v1/page:18/paragraph:4"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "磷化铟",
+        "启动",
+        "下半年"
+      ],
+      "must_not_assert": [
+        "磷化铟MOCVD设备已付运客户端验证"
+      ],
+      "reason": "InP 专用 MOCVD「报告期内**启动**开发」，且「**下半年将**…尽早付运样机」。整段是启动＋未来计划，尚未付运；写成已付运是语态错误。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-advanced-packaging-primo-matrix",
+      "importance": "normal",
+      "modality": "plan",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 18,
+            "exact_quote": "公司用于先进封装等离子体切割的Primo Matrix 即将发往国内头部客户产线验证",
+            "locator": "loc:v1/page:18/paragraph:5"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Primo Matrix",
+        "即将发往"
+      ],
+      "must_not_assert": [
+        "Primo Matrix 已完成产线验证"
+      ],
+      "reason": "Primo Matrix「**即将**发往」客户产线验证——连发运都还没发生。同段的 Primo TSV 300E 才是「持续服务客户，并获得重复订单」。同段两种状态必须分开。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-tsv-300e-serving",
+      "importance": "normal",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 18,
+            "exact_quote": "公司用于2.5D、SoIC WoW 及高深宽比深槽电容刻蚀的Primo TSV 300E 产品持续服务客户，并获得重复订单",
+            "locator": "loc:v1/page:18/paragraph:5"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Primo TSV 300E",
+        "持续服务客户"
+      ],
+      "must_not_assert": [
+        "Primo TSV 300E 尚未交付客户"
+      ],
+      "reason": "Primo TSV 300E「持续服务客户，并获得重复订单」是稳定在售状态，也是同段里唯一已量产在服的产品。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-third-gen-tsv-rd",
+      "importance": "normal",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 18,
+            "exact_quote": "先进封装所用的第三代TSV 刻蚀机研发顺利，获得优良的工艺结果，并且已得到多家客户订单，即将发往客户端验证",
+            "locator": "loc:v1/page:18/paragraph:5"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "第三代TSV 刻蚀机",
+        "即将发往客户端验证"
+      ],
+      "must_not_assert": [
+        "第三代TSV刻蚀机已完成客户端验证"
+      ],
+      "reason": "第三代 TSV 刻蚀机「已得到多家客户订单，**即将**发往客户端验证」——有订单但验证尚未开始。订单与验证是两个独立状态。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-catalog-is-toc-not-content",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "第一节 释义",
+            "locator": "loc:v1/page:3/paragraph:1"
+          },
+          {
+            "page": 3,
+            "exact_quote": "第三节 管理层讨论与分析",
+            "locator": "loc:v1/page:3/paragraph:3"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "目录"
+      ],
+      "must_not_assert": [
+        "报告第3页即为管理层讨论与分析正文"
+      ],
+      "reason": "第 3 页是**目录**（含页码点线「……9」），不是正文章节。目录里的「第三节 管理层讨论与分析」是导航条目；把目录当正文是「只有目录」类错误的正面样本。真实正文在物理页 9 之后。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-page-count-210",
+      "importance": "normal",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "3 / 210",
+            "locator": "loc:v1/page:3/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "210"
+      ],
+      "must_not_assert": [
+        "本半年度报告共96页"
+      ],
+      "reason": "页脚「3 / 210」表明全文 210 页。这个数字是判断「是否只读了极小比例就宣称完整」的分母。",
+      "fact_scope": "document_meta"
+    }
+  ]
+}

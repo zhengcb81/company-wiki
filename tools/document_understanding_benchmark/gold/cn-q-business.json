@@ -1,0 +1,304 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "cn-q-business",
+  "source_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+  "scope": "development",
+  "expected_route_families": [
+    "quarterly_report",
+    "cn_quarterly"
+  ],
+  "notes": "中微公司 2026 年第一季度报告，15 页，焦点物理页 2-4。开发集：该样本此前已参与调规则，明确不算 holdout。第 3 页同页混有产品验证阶段与财务变动原因，是「不得整类跳过季报」的现场。事实逐字取自原件。",
+  "facts": [
+    {
+      "id": "f-q1-revenue",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "公司本期营业收入为29.15 亿元，同比增长约34.13%",
+            "locator": "loc:v1/page:3/paragraph:9"
+          }
+        ],
+        [
+          {
+            "page": 2,
+            "exact_quote": "2,914,986,518.73",
+            "locator": "loc:v1/page:2/table:1"
+          },
+          {
+            "page": 2,
+            "exact_quote": "34.13%",
+            "locator": "loc:v1/page:2/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "29.15",
+        "34.13%"
+      ],
+      "must_not_assert": [
+        "本期营业收入同比增长197.20%"
+      ],
+      "reason": "本期（2026Q1）营业收入 29.15 亿元 / 2,914,986,518.73 元，同比 +34.13%。34.13% 与归母净利的 197.20% 相邻，易互换。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-q1-net-profit-and-cause",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "本期归属于上市公司股东的净利润为9.30 亿元，较上年同期增长约6.17 亿元，同比增长约197.20%",
+            "locator": "loc:v1/page:3/paragraph:10"
+          }
+        ],
+        [
+          {
+            "page": 3,
+            "exact_quote": "公司本期出售了部分持有的拓荆科技股份有限公司股票，产生税后净收益约3.97 亿元",
+            "locator": "loc:v1/page:3/paragraph:10"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "9.30",
+        "197.20%",
+        "3.97"
+      ],
+      "must_not_assert": [
+        "公司主营业务利润同比增长197.20%",
+        "公司盈利能力提升使净利润增长197.20%"
+      ],
+      "reason": "归母净利 9.30 亿元 / +197.20%，但公司列明主因之一是出售拓荆科技股票产生税后净收益约 3.97 亿元（非经常性）。把 197.20% 说成主营/经营改善是因果幻觉；扣非净利约 4.78 亿元 / +60.09% 才是经营性口径。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-q1-deducted-profit",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "归属于母公司所有者的扣除非经常性损益的净利润约4.78 亿元，较上年同期增加1.79 亿元（增长60.09%）",
+            "locator": "loc:v1/page:3/paragraph:11"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "4.78",
+        "60.09%"
+      ],
+      "must_not_assert": [
+        "扣非净利润9.30亿元"
+      ],
+      "reason": "扣非归母净利约 4.78 亿元 / +60.09%，与归母净利 9.30 亿元是两个口径，不得互相替代。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-rd-investment",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "本期公司研发支出较上年同期增长2.21 亿元（增长32.15%），研发支出占公司营业收入比例约为31.14%",
+            "locator": "loc:v1/page:3/paragraph:10"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2.21",
+        "32.15%",
+        "31.14%"
+      ],
+      "must_not_assert": [
+        "研发投入占营业收入比例同比下降"
+      ],
+      "reason": "研发支出增加 2.21 亿元（+32.15%），占比约 31.14%。p2 表列示占比由 31.60% 降至 31.14%（减少0.46个百分点）：绝对额增长与占比下降同时成立，不可互相否定。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-icp-angnova-stage",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "在3D DRAM 的应用中，取得了140:1 的高深宽刻蚀结果和形貌控制能力，并付运到国内领先存储客户端认证",
+            "locator": "loc:v1/page:3/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "140:1",
+        "付运到国内领先存储客户端认证"
+      ],
+      "must_not_assert": [
+        "Primo Angnova已通过客户认证并量产"
+      ],
+      "reason": "第二代 ICP 刻蚀设备 Primo Angnova™ 在 3D DRAM 取得 140:1 结果，并「付运到…客户端认证」——处于认证阶段，不是已通过认证、更不是量产。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-epi-two-stages",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "公司的减压EPI 设备已在成熟制程客户端验证成功，也已付运先进制程客户端，部分先进工艺已进入量产验证阶段",
+            "locator": "loc:v1/page:3/paragraph:5"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "减压EPI",
+        "验证成功",
+        "量产验证阶段"
+      ],
+      "must_not_assert": [
+        "减压EPI设备已实现量产"
+      ],
+      "reason": "同一台设备三种状态并存：成熟制程客户端「验证成功」、已付运先进制程客户端、部分先进工艺处于「量产验证阶段」。量产验证 ≠ 量产。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-atmospheric-epi-stage",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "常压外延设备现已完成开发，进入晶圆验证阶段",
+            "locator": "loc:v1/page:3/paragraph:5"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "常压外延",
+        "晶圆验证阶段"
+      ],
+      "must_not_assert": [
+        "常压外延设备已验证成功"
+      ],
+      "reason": "常压外延设备「已完成开发，进入晶圆验证阶段」——开发完成不等于验证通过。与减压 EPI 的「验证成功」是不同阶段。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-metal-film-under-development",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "可用于先进半导体器件制造的核心金属薄膜沉积产品正在开发，项目顺利推进中",
+            "locator": "loc:v1/page:3/paragraph:4"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "正在开发"
+      ],
+      "must_not_assert": [
+        "核心金属薄膜沉积产品已交付客户"
+      ],
+      "reason": "「正在开发，项目顺利推进中」是研发中状态；同一段中「多款核心介质沉积设备…与客户的各项验证工作也有良好的进展」也不等于验证完成。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-mocvd-new-products-stage",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "四款MOCVD 新产品包括用于SiC 和GaN 功率器件的MOCVD，用于Micro LED 的GaN MOCVD 和用于红黄光LED 的GaAs MOCVD 设备已进入客户端验证阶段，并且部分得到批量订货",
+            "locator": "loc:v1/page:3/paragraph:8"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "四款MOCVD 新产品",
+        "已进入客户端验证阶段",
+        "部分得到批量订货"
+      ],
+      "must_not_assert": [
+        "四款MOCVD新产品均已批量出货"
+      ],
+      "reason": "四款 MOCVD 新产品「已进入客户端验证阶段」，且「部分」得到批量订货——验证中与部分订货并存，不得写成全部量产/全部出货。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-thin-film-growth",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "2025 年薄膜设备营收同比大幅增长约224.23%",
+            "locator": "loc:v1/page:3/paragraph:3"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "224.23%",
+        "2025 年"
+      ],
+      "must_not_assert": [
+        "2026年一季度薄膜设备营收同比增长224.23%"
+      ],
+      "reason": "224.23% 是 2025 年薄膜设备营收同比增速，出现在 2026Q1 报告中；把它挂到本报告期是期间错配。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-selection-reason-not-financial",
+      "importance": "normal",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "公司以行业领先的研发速度，在短时间内成功开发出十多种薄膜设备",
+            "locator": "loc:v1/page:3/paragraph:3"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "十多种薄膜设备"
+      ],
+      "must_not_assert": [
+        "公司已开发出十多种薄膜设备并全部量产"
+      ],
+      "reason": "「成功开发出十多种薄膜设备」只说明开发数量，未说明量产或收入；同段另列 LPCVD/ALD/EPI/PVD CuBS/PECVD 五类在先进存储与先进逻辑市场新增付运量增长。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    }
+  ]
+}

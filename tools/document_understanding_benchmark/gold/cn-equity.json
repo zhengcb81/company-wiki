@@ -1,0 +1,341 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "cn-equity",
+  "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+  "scope": "development",
+  "expected_route_families": [
+    "equity_offering_prospectus",
+    "offering",
+    "prospectus"
+  ],
+  "notes": "恒锋工具 2020 年向特定对象发行 A 股股票募集说明书（注册稿），第三节募投可行性，物理页 61-63。开发集：基线在焦点 4 页只命中必要性套话段落（loc:v1/page:63/paragraph:19-22），全部金额与两期建设期均漏选。建设期句子跨 62→63 页。事实逐字取自原件。",
+  "facts": [
+    {
+      "id": "f-raise-total-cap",
+      "importance": "critical",
+      "quantity_basis": "investment",
+      "any_support_sets": [
+        [
+          {
+            "page": 61,
+            "exact_quote": "本次向特定对象发行A 股股票拟募集资金总额为不超过35,978.71 万元",
+            "locator": "loc:v1/page:61/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "35978.71",
+        "不超过"
+      ],
+      "must_not_assert": [
+        "公司已募集资金35,978.71万元",
+        "募集资金已到账35,978.71万元"
+      ],
+      "reason": "「拟募集…不超过」是发行计划上限，不是已完成的募集结果。金额跨行排版（拟募集资金总额为不超过35,978.71 万元）。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-project-investment-total",
+      "importance": "critical",
+      "quantity_basis": "investment",
+      "any_support_sets": [
+        [
+          {
+            "page": 61,
+            "exact_quote": "智能制造优化升级改造项目",
+            "locator": "loc:v1/page:61/table:1"
+          },
+          {
+            "page": 61,
+            "exact_quote": "35,300.00",
+            "locator": "loc:v1/page:61/table:1"
+          }
+        ],
+        [
+          {
+            "page": 62,
+            "exact_quote": "本项目总投资为35,300.00 万元",
+            "locator": "loc:v1/page:62/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "智能制造优化升级改造项目",
+        "35300"
+      ],
+      "must_not_assert": [
+        "项目预计实现收入35,300万元",
+        "项目已投产并实现35,300万元收益"
+      ],
+      "reason": "35,300.00 万元是项目总投资额（capex），不是项目收入或收益预测。表头「项目总投资」与「募集资金使用金额」是两列不同口径。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-project-raise-allocation",
+      "importance": "critical",
+      "quantity_basis": "investment",
+      "any_support_sets": [
+        [
+          {
+            "page": 61,
+            "exact_quote": "28,678.71",
+            "locator": "loc:v1/page:61/table:1"
+          },
+          {
+            "page": 61,
+            "exact_quote": "补充流动资金",
+            "locator": "loc:v1/page:61/table:1"
+          },
+          {
+            "page": 61,
+            "exact_quote": "7,300.00",
+            "locator": "loc:v1/page:61/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "28678.71",
+        "7300"
+      ],
+      "must_not_assert": [
+        "补充流动资金项目总投资为28,678.71万元"
+      ],
+      "reason": "同一项目「项目总投资」（35,300.00）与「募集资金使用金额」（28,678.71）不同；补充流动资金两项均为 7,300.00。合计 42,600.00 / 35,978.71。混用总投资与募集资金投入是典型口径错误。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-construction-two-phases",
+      "importance": "critical",
+      "quantity_basis": "projected_output",
+      "any_support_sets": [
+        [
+          {
+            "page": 61,
+            "exact_quote": "项目建设期两期，新建厂房为一期，老厂区改建为二期。",
+            "locator": "loc:v1/page:61/table:2/row:1"
+          }
+        ],
+        [
+          {
+            "page": 62,
+            "exact_quote": "项目建设期两期，新建厂房为一期，老厂区改建为二期。",
+            "locator": "loc:v1/page:62/paragraph:4"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "两期",
+        "一期",
+        "二期"
+      ],
+      "must_not_assert": [
+        "项目建设期为2021年一年"
+      ],
+      "reason": "建设期是「两期」：新建厂房为一期，老厂区改建为二期。该句在 p61 表格与 p62 正文重复出现，p62 末句续到 p63 页首。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-phase-one-timeline",
+      "importance": "critical",
+      "quantity_basis": "projected_output",
+      "any_support_sets": [
+        [
+          {
+            "page": 61,
+            "exact_quote": "一期2019 年1 月拿地，2020 年12 月建成厂房，2021 年1 月一期建成投产。",
+            "locator": "loc:v1/page:61/table:2/row:1"
+          }
+        ],
+        [
+          {
+            "page": 62,
+            "exact_quote": "一期2019 年1 月拿地，2020 年12 月建成厂房，2021 年1 月一期建成投产。",
+            "locator": "loc:v1/page:62/paragraph:4"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2019",
+        "2020",
+        "2021",
+        "建成投产"
+      ],
+      "must_not_assert": [
+        "一期2019年建成投产"
+      ],
+      "reason": "一期三个时点：2019-01 拿地、2020-12 建成厂房、2021-01 一期建成投产。把拿地时间当投产时间是最典型的日期错配。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-phase-two-timeline",
+      "importance": "critical",
+      "quantity_basis": "projected_output",
+      "any_support_sets": [
+        [
+          {
+            "page": 62,
+            "exact_quote": "预计在2021 年1 月启动建设，2021 年12 月完成建设，2022 年二期建成投产。",
+            "locator": "loc:v1/page:62/paragraph:4"
+          }
+        ],
+        [
+          {
+            "page": 63,
+            "exact_quote": "2021 年12 月完成建设，2022 年二期建成投产。",
+            "locator": "loc:v1/page:63/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2021 年1 月启动建设",
+        "2022",
+        "二期建成投产"
+      ],
+      "must_not_assert": [
+        "二期已于2021年建成投产",
+        "二期2021年1月建成投产"
+      ],
+      "reason": "二期是「预计」2021-01 启动、2021-12 完成建设、2022 建成投产；含计划语态，且句子跨 p62→p63 页界。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-phase-two-condition",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 61,
+            "exact_quote": "二期在一期建设完成后，老厂区相关设备搬迁至一期新厂房后才启动改建",
+            "locator": "loc:v1/page:61/table:2/row:1"
+          }
+        ],
+        [
+          {
+            "page": 62,
+            "exact_quote": "二期在一期建设完成后，老厂区相关设备搬迁至一期新厂房后才启动改建",
+            "locator": "loc:v1/page:62/paragraph:4"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "一期建设完成后",
+        "才启动改建"
+      ],
+      "must_not_assert": [
+        "二期与一期同步建设"
+      ],
+      "reason": "二期带前置条件（一期完成 + 设备搬迁后才启动）。丢掉「才启动」这个限定语会把有条件的顺序工程写成并按工程。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-investment-breakdown",
+      "importance": "normal",
+      "quantity_basis": "investment",
+      "any_support_sets": [
+        [
+          {
+            "page": 62,
+            "exact_quote": "工程费用29,779.00 万元",
+            "locator": "loc:v1/page:62/paragraph:2"
+          }
+        ],
+        [
+          {
+            "page": 62,
+            "exact_quote": "工程费用",
+            "locator": "loc:v1/page:62/table:1"
+          },
+          {
+            "page": 62,
+            "exact_quote": "29,779.00",
+            "locator": "loc:v1/page:62/table:1"
+          },
+          {
+            "page": 62,
+            "exact_quote": "84.36%",
+            "locator": "loc:v1/page:62/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "工程费用",
+        "29779",
+        "84.36%"
+      ],
+      "must_not_assert": [
+        "工程费用为项目投资总额"
+      ],
+      "reason": "投资明细：工程费用 29,779.00（84.36%），其中设备购置 18,445.00（52.25%）、设备安装 184.00、厂房建造 11,150.00；另有工程建设其它费用 2,147.00、预备费 189.00、铺底流动资金 3,185.00，合计 35,300.00。子项与合计不可混说。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-land-and-location",
+      "importance": "normal",
+      "quantity_basis": "investment",
+      "any_support_sets": [
+        [
+          {
+            "page": 62,
+            "exact_quote": "土地款",
+            "locator": "loc:v1/page:62/table:1"
+          },
+          {
+            "page": 62,
+            "exact_quote": "2,053.00",
+            "locator": "loc:v1/page:62/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "土地款",
+        "2053"
+      ],
+      "must_not_assert": [
+        "土地款为2,147.00万元"
+      ],
+      "reason": "土地款 2,053.00 是「工程建设其它费用 2,147.00」的子项（另一子项为前期工作费 94.00）。小计与子项易混。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-necessity-is-argument",
+      "importance": "normal",
+      "any_support_sets": [
+        [
+          {
+            "page": 63,
+            "exact_quote": "本募投项目的顺利实施将通过建立独立完整的研发与制备体系",
+            "locator": "loc:v1/page:63/paragraph:19"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "本募投项目"
+      ],
+      "must_not_assert": [
+        "公司已形成新的业务增长点"
+      ],
+      "reason": "「必要性」段落是论证性表述（将/帮助/进一步增强），不是既成事实。基线只命中这一段，正是「套话挤掉事实」的现场。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    }
+  ]
+}

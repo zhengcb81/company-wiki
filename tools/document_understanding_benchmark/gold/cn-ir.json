@@ -1,0 +1,297 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "cn-ir",
+  "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "scope": "development",
+  "expected_route_families": [
+    "investor_relations",
+    "investor_qa"
+  ],
+  "notes": "万润股份投资者关系活动记录表 20260515，物理页 1-3。开发集。第 5 问是核心反例：提问前提为「与宁德时代达成 VC 带量采购」，答复否定上市公司生产 VC，仅称控股股东中国节能希望建立合作。事实逐字取自原件，问答角色与否定保留为金标约束。",
+  "facts": [
+    {
+      "id": "f-no-vc-production",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "公司现无生产VC（碳酸亚乙烯酯）的情况",
+            "locator": "loc:v1/page:3/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "无生产VC",
+        "碳酸亚乙烯酯"
+      ],
+      "must_not_assert": [
+        "公司生产VC",
+        "公司已与宁德时代达成VC带量采购",
+        "公司与宁德时代就VC开展合作"
+      ],
+      "reason": "核心否定。答复明确「公司现无生产VC的情况」。把它读成公司生产 VC、或把提问前提（与宁德时代达成带量采购）当成已发生事实，是本基准必须检出的幻觉。",
+      "modality": "negation",
+      "role": "management_answer",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-controller-contact-hope",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "中国节能与宁德时代已经建立了联系，并希望建立业务协同与合作",
+            "locator": "loc:v1/page:3/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "中国节能",
+        "已经建立了联系",
+        "希望"
+      ],
+      "must_not_assert": [
+        "公司与宁德时代已建立业务协同",
+        "中国节能与宁德时代已达成合作"
+      ],
+      "reason": "建立联系的主体是控股股东中国节能，不是上市公司万润；且「希望建立业务协同与合作」是意愿，不是已达成的合作。主体与语态双重约束。",
+      "modality": "plan",
+      "role": "management_answer",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-question-premise-vc",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "有没有能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具体业务",
+            "locator": "loc:v1/page:3/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "带量采购",
+        "宁德时代"
+      ],
+      "must_not_assert": [
+        "公司已推动达成VC带量采购"
+      ],
+      "reason": "这是投资者提问，不是公司陈述。提问中「达成带量采购」是设问中的假设，任何把它写成公司已实现事实的摘要都违反角色约束。",
+      "modality": "question",
+      "role": "analyst_question",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-domestic-revenue-share",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "2025 年度公司境内收入约8.19 亿元，占比约22%",
+            "locator": "loc:v1/page:1/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "8.19",
+        "22%",
+        "2025"
+      ],
+      "must_not_assert": [
+        "2025年境内收入8.19亿元为净利润"
+      ],
+      "reason": "境内收入 2025 年度约 8.19 亿元、占比约 22%，且表述为「较比2024年度有所提升」（方向，不是具体增幅）。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-fy2025-revenue-profit",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "2025 年度公司实现营业收入37.17 亿元，同比增长约0.63%",
+            "locator": "loc:v1/page:2/paragraph:1"
+          }
+        ],
+        [
+          {
+            "page": 2,
+            "exact_quote": "实现归属于上市公司股东的净利润约2.84 亿元，同比增长约15.51%",
+            "locator": "loc:v1/page:2/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "37.17",
+        "0.63%",
+        "2.84",
+        "15.51%"
+      ],
+      "must_not_assert": [
+        "2025年度营业收入同比增长15.51%"
+      ],
+      "reason": "收入 37.17 亿元 / +0.63% 与归母净利 2.84 亿元 / +15.51% 是两组不同口径，两个百分比极易互换。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-q1-2026-revenue-profit",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "2026 年一季度实现营业收入约10.15 亿元，同比增长约17.89%",
+            "locator": "loc:v1/page:2/paragraph:1"
+          }
+        ],
+        [
+          {
+            "page": 2,
+            "exact_quote": "实现归属于上市公司股东的净利润约0.88 亿元，同比增长约9.96%",
+            "locator": "loc:v1/page:2/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "10.15",
+        "17.89%",
+        "0.88",
+        "9.96%"
+      ],
+      "must_not_assert": [
+        "2026年一季度营业收入同比增长9.96%"
+      ],
+      "reason": "2026Q1 收入 10.15 亿元 / +17.89%，归母净利 0.88 亿元 / +9.96%。与 2025 全年数字相邻，期间不可混。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-zeolite-revenue-decline",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "公司2025 年度沸石分子筛产品收入略低于2024 年度",
+            "locator": "loc:v1/page:2/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "沸石分子筛",
+        "略低于"
+      ],
+      "must_not_assert": [
+        "2025年度沸石分子筛产品收入高于2024年度"
+      ],
+      "reason": "沸石分子筛 2025 年收入略低于 2024 年（下降），而公司整体收入同比增长。分部方向与整体方向相反，不能一律写「均实现增长」。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-jiumu-suspension",
+      "importance": "normal",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "九目化学已于3 月11 日收到北交所第二轮审核问询函",
+            "locator": "loc:v1/page:2/paragraph:1"
+          }
+        ],
+        [
+          {
+            "page": 2,
+            "exact_quote": "因前期报送的财务数据有效期已过，九目化学申请了中止审核",
+            "locator": "loc:v1/page:2/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "九目化学",
+        "中止审核",
+        "3 月11 日"
+      ],
+      "must_not_assert": [
+        "九目化学北交所上市已被否决",
+        "九目化学已终止上市申请"
+      ],
+      "reason": "中止审核（因财务数据有效期已过）不等于终止或否决；公司表示待数据更新后申请恢复审核并回复问询。这是状态混淆的典型陷阱。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-controller-increase",
+      "importance": "normal",
+      "quantity_basis": "incremental",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "截至2026 年5 月14日，中国节能本次已累计增持公司股份3,594.5807 万股",
+            "locator": "loc:v1/page:3/paragraph:2"
+          }
+        ],
+        [
+          {
+            "page": 3,
+            "exact_quote": "合计持股比例已经达29.08%",
+            "locator": "loc:v1/page:3/paragraph:2"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "3594.5807",
+        "29.08%",
+        "2026 年5 月14日"
+      ],
+      "must_not_assert": [
+        "中国节能合计持股3,594.5807万股"
+      ],
+      "reason": "3,594.5807 万股是本次增持的累计增量，29.08% 是增持后的合计持股比例（存量）。增量与存量两个口径不得互换。",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-increase-plan-window",
+      "importance": "normal",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "计划自2025 年11 月24 日起6 个月内（即2025 年11 月24 日至2026 年5 月23 日）",
+            "locator": "loc:v1/page:3/paragraph:2"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2025 年11 月24 日",
+        "2026 年5 月23 日"
+      ],
+      "must_not_assert": [
+        "中国节能已完成增持计划"
+      ],
+      "reason": "增持是「计划」且有明确窗口 2025-11-24 至 2026-05-23；截至 2026-05-14 的累计数是窗口内的进行中数据，未表示计划已完成。",
+      "modality": "plan",
+      "role": "company_filing",
+      "fact_scope": "narrative"
+    }
+  ]
+}

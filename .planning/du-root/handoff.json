@@ -1,0 +1,280 @@
+{
+  "schema_version": "du-handoff/1",
+  "lane": "du-root",
+  "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
+  "implementation_commits": [
+    "dcf6f439",
+    "261a249f",
+    "5584e0b2",
+    "f957e731",
+    "150510b4",
+    "97772941",
+    "65962c68",
+    "1737ea88",
+    "cfb0544e",
+    "89f03367",
+    "b0ed5b93",
+    "76865360",
+    "3d1336d7",
+    "9aa97dee",
+    "1371907e",
+    "614e78e8",
+    "e74b9dcb",
+    "e5d531c5",
+    "76727f89",
+    "16d8343f",
+    "b294a5d6",
+    "47c0b164",
+    "00d0b8a5",
+    "f0545253",
+    "1d5cfaa5",
+    "aa817a4a",
+    "ebb5453f",
+    "3b7aa7ab",
+    "4d39a72b",
+    "74872d03",
+    "ad77758d",
+    "0082e2d8",
+    "f8f456a3",
+    "f35c5806"
+  ],
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/root",
+  "status": "integrated_and_tested_not_wired_to_production",
+  "owned_paths": [
+    "src/company_wiki/document_understanding/__init__.py",
+    "src/company_wiki/document_understanding/observation_adapter.py",
+    "src/company_wiki/document_understanding/orchestration.py",
+    "src/company_wiki/document_understanding/selection_bridge.py",
+    "src/company_wiki/document_understanding/pipeline.py",
+    "tests/unit/document_understanding_root/",
+    ".planning/du-root/",
+    "docs/ARCHITECTURE.md",
+    "docs/plans/document-understanding-2026-10-13/"
+  ],
+  "public_interfaces": [
+    {
+      "module": "company_wiki.document_understanding",
+      "signature": "understand_units(units, *, source_id, source_sha256, title='', declared_kind='unknown', mime_type='application/pdf', language=None, native_scan='complete', opaque_pages=(), deferred_pages=(), limits=None, max_packages=400) -> dict",
+      "symbol": "understand_units",
+      "output_schema": "du-pipeline/1"
+    },
+    {
+      "module": "company_wiki.document_understanding",
+      "signature": "build_observation(units, *, source_id, source_sha256, title='', declared_kind='unknown', mime_type='application/pdf', language=None, native_scan='complete', opaque_pages=(), deferred_pages=()) -> dict",
+      "symbol": "build_observation",
+      "output_schema": "du-input/1"
+    },
+    {
+      "module": "company_wiki.document_understanding.orchestration",
+      "signature": "build_dependency_packages(structure, *, route=None, profile=None, max_packages=400, max_members=64) -> dict",
+      "symbol": "build_dependency_packages",
+      "output_schema": "du-packages/1"
+    },
+    {
+      "module": "company_wiki.document_understanding.selection_bridge",
+      "signature": "dependency_closure(selected_unit_ids, packages, texts, *, max_added=64) -> dict",
+      "symbol": "dependency_closure",
+      "output_schema": "du-selection-closure/1"
+    }
+  ],
+  "interface_deviations": [
+    {
+      "field": "du-packages/1",
+      "detail": "ROOT-introduced packaging wire between structure and summary; additive, no frozen lane wire changed.",
+      "kind": "new_schema"
+    },
+    {
+      "field": "du-selection-closure/1",
+      "detail": "ROOT-introduced closure result; additive.",
+      "kind": "new_schema"
+    },
+    {
+      "field": "build_dependency_packages(profile=)",
+      "detail": "Section priorities live on the profile, not the route. The parameter was added after measuring that reading them off the route silently degraded every document to one generic order.",
+      "kind": "additive"
+    }
+  ],
+  "A_B_C_evidence": {
+    "C": {
+      "detail": "Hengfeng two-phase construction across p62-63; Wanrun denial restored in-package; MINISO two lanes kept apart; SMIC Q1 business text organised",
+      "command": "same harness with -m real_data",
+      "result": "11 passed on 4 real originals; measured recall dev 0.220->0.384, holdout 0.000->0.350 at the baseline budget",
+      "exit_code": 0
+    },
+    "B": {
+      "detail": "331 tests total across four suites",
+      "command": "python -X utf8 .planning/du-root/acceptance.py --bindings .planning/du-root/bindings.local.json",
+      "result": "6 checks passed, 0 failed, 1 not_run (paid path)",
+      "exit_code": 0
+    },
+    "A": {
+      "detail": "A-node counterexamples plus lane matrices",
+      "command": "python -X utf8 -m pytest tests/unit/document_understanding_profiles tests/unit/document_understanding_structure tests/unit/document_understanding_root -q",
+      "result": "266 passed",
+      "exit_code": 0
+    }
+  },
+  "tests_passed": 427,
+  "tests_failed": 0,
+  "tests_not_run": [
+    "real LLM summarisation",
+    "semantic entailment review",
+    "cross-document change detection",
+    "full recall measurement",
+    "production wiring",
+    "peak RSS for this layer",
+    "Paid model summary fidelity and cross-company G4/G5 acceptance (parent plan scope; the layer is not wired into the production parse/select entry point)."
+  ],
+  "known_gaps": [
+    "Unnumbered paper headings still cannot be recognised as sections: the PDF parser discards span font size and a geometry guess would misfire on equally short table fragments. Requires a parser-level change.",
+    "The MINISO store table (hk-annual, recall 0.000) is diagnosed but not solved: the parser extracts that bilingual layout table as degenerate single-cell rows instead of the regular multi-column rows the operating-table builder needs, and even a full table scan yields no operating-table package. Recovering it needs row/column reconstruction from geometry.",
+    "Three documents regress against the baseline (cn-h1 0.250->0.000, cn-q-business 0.667->0.444, holdout-us-nvidia 0.167->0.000). Structured evidence displaces prose within a fixed budget. Not tuned away, because tuning selection against the gold set is what the plan forbids.",
+    "Every real document returns route confidence=low because ROUTE_PROBE_LIMIT fires against the frozen 200-unit/64000-char probe budget; an honest budget state, not confident routing.",
+    "No production caller imports this layer.",
+    "US holdout now exists (two real 10-K records) and is reported separately from the development split; the 20 survey samples remain development seeds, not a blind holdout."
+  ],
+  "resource_observations": {
+    "model_calls": 0,
+    "scale_timings_ms": [
+      {
+        "units": 2000,
+        "ms": 78.1
+      },
+      {
+        "units": 10000,
+        "ms": 329.1
+      },
+      {
+        "units": 40000,
+        "ms": 1714.3
+      }
+    ],
+    "benchmark_peak_rss_bytes": {
+      "native": 121929728,
+      "offline": 21049344
+    },
+    "network_calls": 0,
+    "loglog_slope": 1.03,
+    "paid_calls": 0
+  },
+  "raw_preservation": {
+    "detail": "All four ROOT real originals and all seven PROFILES originals re-verified: SHA-256 and mtime unchanged. The benchmark measured the same for its four.",
+    "originals_copied_into_repo": false,
+    "originals_modified": false
+  },
+  "scratch_restore": {
+    "sentinel_content_preserved": true,
+    "detail": "Host-absolute bindings live in gitignored .planning/du-root/bindings.local.json; src and tests contain no host paths (repo host-assumption guard passes). __pycache__ removed before each commit. No download, screenshot, DB or full-text copy retained."
+  },
+  "install_actions": "none",
+  "next_root_action": "Decide the probe budget, add span font size to the parser, choose one QA role set, then run the paid model node and wire the layer into the default path.",
+  "merge_phase_findings": [
+    {
+      "defect": "routing-was-a-no-op-in-the-orchestrator",
+      "symptom": "build_dependency_packages read route['section_priorities'], but that key lives on the profile returned by get_profile(route['profile_id']); route_document does not return it. Every document therefore received the same generic priority order and routing had no effect on reading order. Nothing failed.",
+      "fix": "build_dependency_packages accepts profile= and _role_priority prefers the profile while still accepting a route; locked by tests/unit/document_understanding_root/test_du_root_lane_seam.py."
+    },
+    {
+      "defect": "lane-fixture-module-name-collision-breaks-combined-collection",
+      "symptom": "The structure lane prepended its fixture directory to sys.path and imported a bare module named 'fixtures'. The repository also has tests/fixtures on sys.path, so running the DU suites in ONE pytest invocation (which is what CI does) failed at collection: ImportError: cannot import name 'available_inputs' from 'fixtures'. Each lane passed when run alone.",
+      "fix": "Renamed the module to the unique tests/fixtures/document_understanding_structure/du_structure_fixtures.py and import it by that name."
+    },
+    {
+      "defect": "repo-root-path-wrong-in-four-test-modules",
+      "symptom": "tests/unit/<lane>/test_*.py computed REPO as Path(__file__).parents[2], which is <repo>/tests and not <repo>. The bindings file was therefore never found and the real-original node reported 10 SKIPPED instead of running -- an honest but misleading green.",
+      "fix": "Changed to parents[3] in the four ROOT modules. The real-original node now runs and passes (10 passed, plus the legacy-vs-new comparison). NOTE: the structure lane's own FIXTURE_ROOT uses parents[2]/'fixtures'/... at the same depth and is CORRECT; it must not be changed."
+    }
+  ],
+  "combined_invocation": "pytest tests/unit/document_understanding_profiles tests/unit/document_understanding_structure tests/unit/document_understanding_root tools/document_understanding_benchmark/tests -q  ->  331 passed, 5 skipped (one invocation, as CI runs it)",
+  "test_counts_by_suite": {
+    "profiles": 150,
+    "structure": 47,
+    "root": 118,
+    "benchmark": 112,
+    "combined_default": "420 passed, 7 skipped",
+    "combined_real_data": "427 passed, 0 skipped",
+    "note": "Same four suites in ONE pytest invocation. Default: 420 passed / 7 skipped (the benchmark's real-data replays are opt-in). With DU_BENCH_ALLOW_REAL_DATA=1 and bindings present: 427 passed / 0 skipped."
+  },
+  "public_interfaces_root": [
+    {
+      "module": "company_wiki.document_understanding",
+      "symbol": "build_observation",
+      "signature": "build_observation(units, *, source_id, source_sha256, title='', declared_kind='unknown', mime_type=..., language=None, native_scan='complete', opaque_pages=(), deferred_pages=()) -> dict  # du-input/1"
+    },
+    {
+      "module": "company_wiki.document_understanding",
+      "symbol": "understand_units",
+      "signature": "understand_units(units, *, source_id, source_sha256, ..., limits=None, max_packages=400) -> dict  # du-pipeline/1"
+    },
+    {
+      "module": "company_wiki.document_understanding",
+      "symbol": "build_summary_input",
+      "signature": "build_summary_input(pipeline_result, *, max_packages=40, max_chars=48000) -> dict  # du-summary-input/1"
+    },
+    {
+      "module": "company_wiki.document_understanding",
+      "symbol": "build_dependency_packages",
+      "signature": "build_dependency_packages(structure, *, route=None, profile=None, max_packages=None, max_members=64) -> dict  # du-packages/1"
+    },
+    {
+      "module": "company_wiki.document_understanding",
+      "symbol": "is_selectable / selectable_unit_ids",
+      "signature": "is_selectable(unit) -> bool; selectable_unit_ids(observation) -> list[str]"
+    }
+  ],
+  "completed": [
+    "Three lanes received by merge: DU-PROFILES (150 tests), DU-STRUCTURE (47), DU-BENCH (65).",
+    "Parent package written: src/company_wiki/document_understanding/__init__.py.",
+    "Adapter: existing NarrativeUnit -> du-input/1, including heading_level from numbering, measured columns, table header/caption/table_id, and the Q&A shadow marking.",
+    "Orchestration: structure -> du-packages/1 with profile-driven section priority first and semantic kind as the within-band tiebreak.",
+    "Selection bridge: dependency closure that only ever adds, keeping required context and negations attached.",
+    "End-to-end pipeline: understand_units (du-pipeline/1), one call for the whole chain.",
+    "Summary request: build_summary_input (du-summary-input/1), profile focus + ordered evidence with provenance + budget accounting + honest unread list. Never calls a model.",
+    "B node: offline cross-layer suite (no network, no model).",
+    "C node: real-original node runs and passes on the owner's originals (no skip), with SHA/mtime verified unchanged and zero copies into the worktree.",
+    "Plan docs updated: plan README/progress/task_plan, docs/ARCHITECTURE.md, and an 8-line navigation prepend to the mother PWF (existing bytes preserved)."
+  ],
+  "open_gate": {
+    "item": "implementation.md step 7 paid model node and step 8 production switch",
+    "status": "NOT RUN - deliberately deferred, with a concrete reason",
+    "reasons": [
+      "The plan itself sequences this work into the parent plan's G4/G5 window: '生产切换与真实模型大节点按母计划 G4/G5 另行执行'. The plan also states this layer's G4/G5 acceptance must not be replaced or marked complete by this lane.",
+      "The layer is intentionally not wired into the production parse/select/summarize entry point, so a 'same-config real summary' would first require the step-8 wiring that the plan places AFTER G4/G5.",
+      "No cumulative USD/token cap is present in config.yaml (only per-call limits: llm.max_tokens=8192, llm_max_input_chars=120000). The historical llm_cost_log.csv already records ~43.0 USD and ~282.7M tokens over 7025 rows, far above the plan's cited $20/2M figure, so headroom against the real cumulative cap cannot be established from the files available here. Spending without that cannot be justified."
+    ],
+    "provider_keys": "Model credentials do exist in the main checkout's .env (DEEPSEEK/MINIMAX/MIMO), so this is a budget-and-sequencing gate, NOT a missing-configuration gate.",
+    "how_to_proceed": "Confirm the current cumulative budget headroom, wire the layer into the production summary path, then run the real-model node and the parent plan G4/G5 reviews."
+  },
+  "self_audit": {
+    "method": "Audited this layer's own work rather than re-running the suites: for every public symbol, is it referenced anywhere in src outside the module that defines it (.planning/du-root/_audit_dead_decisions.py)? The first version of that audit was itself wrong -- it ignored 'from x import y', which made every export look unused -- and was corrected before any conclusion was drawn.",
+    "defects_found_in_our_own_work": [
+      {
+        "defect": "the Q&A selectability decision was declared but never applied",
+        "detail": "The adapter marked text-layer units (hints.qa_text_shadow) and is_selectable() existed with 8 tests, but no code path consulted either. Two consumers were reachable on a real Q&A original: selection_bridge.dependency_closure could *add* a shadow unit back as required context or as negation protection, and summary_input.build_summary_input materialised shadow members into the model-facing evidence, sending every answer twice.",
+        "impact_measured": "On the real 万润 IR original: 213 shadow units were being sent as evidence, and 53 of 74 packages were built purely from the duplicate copy.",
+        "fix": "The decision now flows through the chain: understand_units derives the non-selectable ids, build_dependency_packages carries them, dependency_closure refuses to add them (reporting NOT_SELECTABLE_WITHHELD), and build_summary_input filters them, reports excluded.not_selectable, and defers a package left with nothing selectable as NOT_SELECTABLE.",
+        "verified_on_real_data": "万润 IR: 213 units withheld, packages 40 -> 21, evidence text 6968 -> 3983 chars (~43% of what would have been sent was duplicate), 0 shadow units in the request, and the real negation (公司现无生产VC) still present via its structured unit. The other three originals show shdw=0 and are unchanged.",
+        "regression_lock": "tests/unit/document_understanding_root/test_du_root_selectability_wiring.py (10 tests, written RED first: 6 failed before the fix)"
+      },
+      {
+        "defect": "summary_input dropped structure's deferred_pages signal",
+        "detail": "The honest 'what was not read' report listed opaque pages but silently omitted caller-deferred pages, which is a different fact about a page.",
+        "fix": "unread now reports opaque_pages and deferred_pages separately.",
+        "regression_lock": "test_unread_reports_scan_gaps, test_unread_keys_match_what_structure_actually_emits"
+      }
+    ],
+    "checked_and_found_correct": [
+      "Every key summary_input reads from structure.coverage is really emitted by the structure lane (asserted by a test, so a silent empty gap cannot reappear).",
+      "The 5 previously-skipped benchmark tests are honest opt-in skips: with bindings generated outside the worktree and DU_BENCH_ALLOW_REAL_DATA=1 they all pass.",
+      "HEAD was not broken during the session; two apparent failures (a missing _locator_of and a missing is_selectable import) were transient mid-write states of the concurrent writer, confirmed by re-reading after the files settled."
+    ],
+    "verification_numbers": {
+      "default_run": "371 passed, 5 skipped (real-data opt-ins off)",
+      "maximum_coverage": "383 passed, 0 skipped, with DU_BENCH_ALLOW_REAL_DATA=1 and DU_ROOT_BINDINGS set",
+      "ruff": "All checks passed over src tests/unit tools",
+      "acceptance_harness": "6 passed, 0 skipped, 0 failed, exit 0 (with real data enabled)",
+      "benchmark_real_data": "70 passed, 49.6s (was 65 passed + 5 skipped)"
+    },
+    "still_open": "No production caller imports this layer. That is step 8 by design, and it is the same gate recorded in open_gate (the paid model node and the production switch)."
+  }
+}

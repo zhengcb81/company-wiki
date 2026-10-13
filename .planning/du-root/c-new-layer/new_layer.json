@@ -1,0 +1,332 @@
+{
+  "schema_version": "du-c-new-layer/1",
+  "results": [
+    {
+      "sample_id": "cn-equity",
+      "scope": "development",
+      "status": "FAIL",
+      "critical_fact_recall": 0.8571428571428571,
+      "observed_metrics": {
+        "selected_unit_count": 160,
+        "candidate_unit_count": 3224,
+        "budget": 160
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "offering",
+        "route_confidence": "low",
+        "family": "offering",
+        "regime": "cn_exchange",
+        "elapsed_seconds": 6.399,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "cn-h1",
+      "scope": "development",
+      "status": "FAIL",
+      "critical_fact_recall": 0.0,
+      "observed_metrics": {
+        "selected_unit_count": 160,
+        "candidate_unit_count": 5500,
+        "budget": 160
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "offering",
+        "route_confidence": "low",
+        "family": "offering",
+        "regime": "cn_exchange",
+        "elapsed_seconds": 7.488,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "cn-ipo-confirmation",
+      "scope": "development",
+      "status": "FAIL",
+      "critical_fact_recall": null,
+      "observed_metrics": {
+        "selected_unit_count": 0,
+        "candidate_unit_count": 0,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "generic",
+        "route_confidence": "unknown",
+        "family": "unknown",
+        "regime": "unknown",
+        "elapsed_seconds": 0.011,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "cn-ir",
+      "scope": "development",
+      "status": "FAIL",
+      "critical_fact_recall": 1.0,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 302,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "investor_qa",
+        "route_confidence": "low",
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "elapsed_seconds": 1.007,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "cn-q-business",
+      "scope": "development",
+      "status": "FAIL",
+      "critical_fact_recall": 0.4444444444444444,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 579,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "cn_quarterly",
+        "route_confidence": "low",
+        "family": "quarterly",
+        "regime": "cn_exchange",
+        "elapsed_seconds": 1.748,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "scope": "development",
+      "status": "FAIL",
+      "critical_fact_recall": 0.4444444444444444,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 429,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "cn_quarterly",
+        "route_confidence": "low",
+        "family": "quarterly",
+        "regime": "cn_exchange",
+        "elapsed_seconds": 0.18,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "hk-annual",
+      "scope": "development",
+      "status": "FAIL",
+      "critical_fact_recall": 0.0,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 6502,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "hk_periodic",
+        "route_confidence": "low",
+        "family": "annual",
+        "regime": "hkex",
+        "elapsed_seconds": 8.526,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "scope": "holdout",
+      "status": "FAIL",
+      "critical_fact_recall": 0.8,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 257,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "cn_quarterly",
+        "route_confidence": "low",
+        "family": "quarterly",
+        "regime": "cn_exchange",
+        "elapsed_seconds": 0.217,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "scope": "holdout",
+      "status": "FAIL",
+      "critical_fact_recall": 0.8571428571428571,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 369,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "cn_quarterly",
+        "route_confidence": "low",
+        "family": "quarterly",
+        "regime": "cn_exchange",
+        "elapsed_seconds": 0.188,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "scope": "holdout",
+      "status": "FAIL",
+      "critical_fact_recall": 0.0,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 18038,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "hk_periodic",
+        "route_confidence": "low",
+        "family": "annual",
+        "regime": "hkex",
+        "elapsed_seconds": 22.681,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "scope": "holdout",
+      "status": "FAIL",
+      "critical_fact_recall": 0.09090909090909091,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 4047,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "generic",
+        "route_confidence": "low",
+        "family": "unknown",
+        "regime": "unknown",
+        "elapsed_seconds": 2.707,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "scope": "holdout",
+      "status": "FAIL",
+      "critical_fact_recall": 0.0,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 4176,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "generic",
+        "route_confidence": "low",
+        "family": "unknown",
+        "regime": "unknown",
+        "elapsed_seconds": 2.492,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "us-10k",
+      "scope": "development",
+      "status": "FAIL",
+      "critical_fact_recall": 0.0,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 5215,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "generic",
+        "route_confidence": "low",
+        "family": "unknown",
+        "regime": "unknown",
+        "elapsed_seconds": 5.634,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "us-20f",
+      "scope": "development",
+      "status": "FAIL",
+      "critical_fact_recall": 0.08333333333333333,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 6277,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "generic",
+        "route_confidence": "low",
+        "family": "unknown",
+        "regime": "unknown",
+        "elapsed_seconds": 4.002,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    },
+    {
+      "sample_id": "us-txt",
+      "scope": "development",
+      "status": "FAIL",
+      "critical_fact_recall": 0.09090909090909091,
+      "observed_metrics": {
+        "selected_unit_count": 96,
+        "candidate_unit_count": 489,
+        "budget": 96
+      },
+      "execution": {
+        "entry": "company_wiki.document_understanding",
+        "route_profile": "earnings_call",
+        "route_confidence": "low",
+        "family": "earnings_call",
+        "regime": "unknown",
+        "elapsed_seconds": 0.604,
+        "model_calls": 0,
+        "network_calls": 0
+      }
+    }
+  ],
+  "by_scope": {
+    "development": {
+      "documents": 10,
+      "scored": 9,
+      "critical_fact_recall": 0.324
+    },
+    "holdout": {
+      "documents": 5,
+      "scored": 5,
+      "critical_fact_recall": 0.35
+    }
+  }
+}

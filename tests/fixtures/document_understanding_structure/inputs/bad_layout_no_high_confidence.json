@@ -1,0 +1,71 @@
+{
+  "schema_version": "du-input/1",
+  "name": "bad_layout_no_high_confidence",
+  "description": "Hand-built adversarial layout: heading_level says 1 but the block sits at the bottom of the page below body text, bbox is degenerate, columns disagree with x positions. Structure must degrade to low/unknown rather than high.",
+  "source_ref": {
+    "source_id": "opaque-source-badlayout",
+    "source_sha256": "opaque-digest-badlayout"
+  },
+  "metadata": {
+    "title": "Synthetic contradictory layout",
+    "declared_kind": "unknown",
+    "regime": "unknown",
+    "mime_type": "application/pdf",
+    "language": "zh"
+  },
+  "coverage": {
+    "native_scan": "complete",
+    "opaque_pages": [],
+    "deferred_pages": []
+  },
+  "units": [
+    {
+      "unit_id": "x1",
+      "ordinal": 0,
+      "locator": "opaque-loc-7001",
+      "page": 1,
+      "text": "正文本段落在版面上位于最上方，却没有任何标题层级提示。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 90, 530, 140], "page_width": 595, "page_height": 842, "column": 1},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "x2",
+      "ordinal": 1,
+      "locator": "opaque-loc-7002",
+      "page": 1,
+      "text": "第五节 公司治理",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [500, 700, 400, 760], "page_width": 595, "page_height": 842, "column": 0},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "x3",
+      "ordinal": 2,
+      "locator": "opaque-loc-7003",
+      "page": 1,
+      "text": "本节说明公司治理结构及其运行情况。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [40, 200, 290, 250], "page_width": 595, "page_height": 842, "column": 0},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "x4",
+      "ordinal": 3,
+      "locator": "opaque-loc-7004",
+      "page": 1,
+      "text": "第六节 环境与社会责任",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [40, 160, 290, 190], "page_width": 595, "page_height": 842, "column": 1},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    }
+  ]
+}

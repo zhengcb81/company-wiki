@@ -1,0 +1,181 @@
+{
+  "schema_version": "du-holdout/1",
+  "generated": "2026-10-13",
+  "purpose": "Holdout coverage for DU-BENCH, kept separate from the development seeds that were already used to tune routing/selection rules. A sample is only holdout if it was NOT used to author rules or gold-fact iteration.",
+  "rules": [
+    "Never mix a holdout sample's facts into rule design or threshold tuning.",
+    "Prefer existing local originals; never download and never fabricate a substitute.",
+    "A holdout document whose carrier the pipeline cannot take in is reported UNAVAILABLE with an acquisition request, not replaced by a synthetic document.",
+    "Record SHA-256 at bind time so a later content change becomes UNAVAILABLE rather than a silent pass."
+  ],
+  "development_seeds": {
+    "note": "Already used in the ROOT survey and/or to tune rules. Explicitly NOT holdout.",
+    "samples": [
+      {"sample_id": "cn-h1", "company": "中微公司", "why_not_holdout": "used in ROOT survey and selector tuning"},
+      {"sample_id": "cn-annual", "company": "中微公司", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "cn-ipo", "company": "中微公司", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "cn-q-business", "company": "中微公司", "why_not_holdout": "carried a rule-tuning decision about quarterly reports"},
+      {"sample_id": "cn-q-sparse", "company": "世华科技", "why_not_holdout": "paired control for the quarterly rule decision"},
+      {"sample_id": "cn-equity", "company": "恒锋工具", "why_not_holdout": "subject of the routing/budget ablation"},
+      {"sample_id": "cn-convertible", "company": "金禾实业", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "cn-ipo-confirmation", "company": "鼎龙股份", "why_not_holdout": "used to diagnose the title-regex trap"},
+      {"sample_id": "cn-ir", "company": "万润股份", "why_not_holdout": "used to diagnose the negation/question case"},
+      {"sample_id": "cn-ir-policy", "company": "万润股份", "why_not_holdout": "used to identify the administrative-skip class"},
+      {"sample_id": "hk-annual", "company": "名创优品", "why_not_holdout": "subject of the bilingual store-table diagnosis"},
+      {"sample_id": "hk-interim", "company": "名创优品", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "hk-ipo", "company": "名创优品", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "hk-release", "company": "腾讯控股", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "hk-deck", "company": "腾讯控股", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "us-10k", "company": "MICROSOFT CORP", "why_not_holdout": "read into the design findings"},
+      {"sample_id": "us-10q", "company": "VRSK", "why_not_holdout": "read into the design findings"},
+      {"sample_id": "us-20f", "company": "TAL", "why_not_holdout": "read into the design findings"},
+      {"sample_id": "us-release", "company": "MICROSOFT CORP", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "us-txt", "company": "Microsoft", "why_not_holdout": "read into the design findings"}
+    ]
+  },
+  "holdout_authored": {
+    "note": "Gold authored and SHA-bound. None of these companies appears anywhere in the ROOT survey, the design findings, or any rule-tuning discussion.",
+    "A_share": [
+      {
+        "sample_id": "holdout-cn-glodon-q1",
+        "company": "广联达",
+        "segment": "software",
+        "document": "2025年第一季度报告",
+        "originals": ["companies/广联达/raw/financial_reports/广联达：2025年一季度报告.pdf"],
+        "facts": 9,
+        "critical": 7,
+        "trap_highlights": [
+          "revenue DOWN 5.24% while net profit UP 390.89% in the same table",
+          "deducted profit grew 1470.26% from a NEGATIVE prior-year base",
+          "operating cash flow still negative at -685,688,728.77 while reported as +8.58%"
+        ]
+      },
+      {
+        "sample_id": "holdout-cn-yake-q1",
+        "company": "雅克科技",
+        "segment": "manufacturing (materials)",
+        "document": "2022年第一季度报告",
+        "originals": ["companies/雅克科技/raw/financial_reports/雅克科技：2022年一季度报告.pdf"],
+        "facts": 13,
+        "critical": 8,
+        "trap_highlights": [
+          "construction-in-progress 420,898,852 is a year-end STOCK, not the period increment",
+          "operating cash flow positive but DOWN 31.89%, next to profit UP 22.14%",
+          "two different audit-checkbox layouts for the same meaning, versus the Glodon sample",
+          "'other significant matters: not applicable' plus no business narrative, so it tests that a sparse filing is not scored as contentless"
+        ]
+      }
+    ],
+    "H_share": [
+      {
+        "sample_id": "holdout-hk-alibaba-fy2023",
+        "company": "阿里巴巴",
+        "segment": "retail / e-commerce",
+        "document": "2023财政年度报告 (360 pages, traditional Chinese)",
+        "originals": ["companies/阿里巴巴/raw/financial_reports/20230722-阿里巴巴-2023财政年度报告.pdf"],
+        "facts": 14,
+        "critical": 10,
+        "trap_highlights": [
+          "seven reported segments now versus a SIX business-group structure announced as a future reorganisation",
+          "fiscal year ends March 31, so FY2023 is not calendar 2023",
+          "GMV explicitly excludes unpaid orders and is given as a direction, not an amount",
+          "segment adjusted EBITA presented next to segment revenue",
+          "International Commerce adjusted EBITA is still a LOSS that narrowed",
+          "a segment reclassification where comparatives were restated too"
+        ]
+      }
+    ],
+    "US_share": [
+      {
+        "sample_id": "holdout-us-mongodb-10k",
+        "company": "MongoDB, Inc.",
+        "segment": "software / database",
+        "document": "Form 10-K, fiscal year ended 2026-01-31",
+        "originals": ["companies/MongoDB, Inc/raw/financial_reports/annual/2026-03-11_sec_0001628280-26-016799_MongoDB, Inc. 10-K 2026-01-31.htm"],
+        "facts": 16,
+        "critical": 9,
+        "trap_highlights": [
+          "single operating and reportable segment, so 'Atlas segment' is wrong",
+          "fiscal year ends January 31, so FY2026 is almost entirely calendar 2025",
+          "customer counts are point-in-time STOCK totals, and Atlas customers are a SUBSET of them",
+          "the customer definition explicitly excludes free-tier users",
+          "no RPO figure is disclosed at all (practical expedient), so any RPO number is invented",
+          "Enterprise Advanced is stated against TWO different denominators: 20% of total revenue versus 21% of subscription revenue",
+          "net ARR expansion rate is a cohort metric, not revenue growth and not a margin"
+        ]
+      },
+      {
+        "sample_id": "holdout-us-nvidia-10k",
+        "company": "NVIDIA CORP",
+        "segment": "semiconductors / hardware",
+        "document": "Form 10-K, fiscal year ended 2025-01-26",
+        "originals": ["companies/NVIDIA CORP/raw/financial_reports/annual/2025-02-26_sec_0001045810-25-000023_NVIDIA CORP 10-K 2025-01-26.htm"],
+        "facts": 16,
+        "critical": 9,
+        "trap_highlights": [
+          "TWO reportable segments but FOUR markets: Data Center is a market, not a segment, and the two figures differ (115,186 market vs 116,193 segment)",
+          "Graphics operating income fell 13% while Gaming revenue rose 9%",
+          "zero occurrences of non-GAAP in the whole filing, so any non-GAAP figure is fabricated",
+          "RPO is scoped only to contracts longer than one year",
+          "indirect customer revenue is explicitly an estimate, not measured fact",
+          "a naive HTML tag-stripper renders the registrant as 'NVIDIA CORP ORATION' because the inline-XBRL element closes before the literal text 'ORATION'"
+        ]
+      }
+    ]
+  },
+  "coverage_by_market": {
+    "A_share": {"holdout_companies": 2, "status": "COMPLETE"},
+    "H_share": {"holdout_companies": 1, "status": "PARTIAL", "gap": "only one company, and it is e-commerce; a second H-share with a different model is requested"},
+    "US_share": {"holdout_companies": 2, "status": "GOLD_AUTHORED_BUT_UNSCORABLE", "gap": "the existing selector has no HTML route, measured: two real 10-Ks yield 0 units with transcript_start_missing"}
+  },
+  "segments_covered": ["software", "manufacturing/materials", "retail/e-commerce", "semiconductors/hardware"],
+  "acquisition_requests_for_root": [
+    {
+      "id": "REQ-1",
+      "priority": "high",
+      "what": "An HTML front-end for SEC filings in the existing normalization path.",
+      "why": "Measured, not inferred: narrative_retrieval.py supports only PDF and transcript_txt/transcript_html. Two real 10-K originals passed through the only HTML route return units=0, page_count=0, errors=('transcript_start_missing',), and the extracted text is led by inline-XBRL taxonomy tokens. US quality cannot be scored at all today.",
+      "acceptance": "a 10-K HTML produces non-zero units through the same public entry point the selector consumes"
+    },
+    {
+      "id": "REQ-2",
+      "priority": "high",
+      "what": "One real US S-1 or F-1 registration statement.",
+      "why": "design.md section 10 lists true S-1/F-1 as unverified; no local sample exists.",
+      "acceptance": "declared_kind verified from the cover page, not from the filename"
+    },
+    {
+      "id": "REQ-3",
+      "priority": "medium",
+      "what": "One real 8-K or 6-K container whose exhibit is itself a business document.",
+      "why": "parent plus sub-document routing is untested end to end.",
+      "acceptance": "attachment arrives as its own SourceRef; the container itself is not treated as read content"
+    },
+    {
+      "id": "REQ-4",
+      "priority": "medium",
+      "what": "One amended filing paired with its original for the same period.",
+      "why": "stale-version reuse and revision handling are only tested synthetically.",
+      "acceptance": "both versions retained, distinct source versions, no overwrite"
+    },
+    {
+      "id": "REQ-5",
+      "priority": "low",
+      "what": "One second H-share company with a recent annual report outside e-commerce.",
+      "why": "H-share holdout currently rests on a single company.",
+      "acceptance": "traditional-Chinese layout present, fiscal year end recorded"
+    }
+  ],
+  "coverage_by_dimension": {
+    "note": "Denominators the benchmark can actually support today, stated honestly rather than as a target.",
+    "route_type": {"development": 6, "holdout": 3, "holdout_unmeasurable": 2, "reason": "the two US holdout documents have no carrier route"},
+    "critical_fact_recall": {"development_documents": 6, "holdout_documents": 5, "gold_facts": 122, "critical_facts": 81},
+    "context_completeness": {"development": 0, "holdout": 0, "status": "NOT_EVALUATED on baseline; the baseline emits no semantic units"},
+    "citation_replay": {"development": 6, "holdout": 3},
+    "role_modality_quantity": {"development": 0, "holdout": 0, "status": "NOT_EVALUATED on baseline; the baseline emits no claims"},
+    "bilingual_redundancy": {"development": 1, "holdout": 1, "note": "hk-annual and holdout-hk-alibaba-fy2023"},
+    "derived_space": {"development": 6, "holdout": 3},
+    "time_resource": {"development": 6, "holdout": 3},
+    "untested_semantics": {"status": "NOT_EVALUATED on native output because the baseline emits 0 claims across all 11 documents; the review mechanism itself is exercised and negative-controlled on the fixtures"}
+  }
+}

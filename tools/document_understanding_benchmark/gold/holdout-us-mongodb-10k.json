@@ -1,0 +1,417 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "holdout-us-mongodb-10k",
+  "source_sha256": "84dcd298ff9c2bcea0ed49755219ae3209c7e9e2a451dd5be49fe41626a25513",
+  "scope": "holdout",
+  "expected_route_families": [
+    "annual",
+    "sec_10k"
+  ],
+  "notes": "HOLDOUT. MongoDB, Inc. Form 10-K, fiscal year ended 2026-01-31（财年与日历年错位：FY2026 ≈ 日历年 2025）。该公司从未出现在 ROOT 调查、调参讨论或设计发现中。事实由独立子代理逐字读取原件回报。",
+  "facts": [
+    {
+      "id": "h-single-segment",
+      "importance": "critical",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "manages the Company’s business activities as a single operating and reportable segment at the consolidated level"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "single operating and reportable segment"
+      ],
+      "must_not_assert": [
+        "MongoDB按多个经营分部报告业绩",
+        "Atlas是一个报告分部"
+      ],
+      "reason": "MongoDB 只有**一个**单一经营及报告分部；CODM 按合并层面管理。Atlas 是产品/收入来源，不是分部。把 Atlas 当分部是结构幻觉。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-fiscal-year-misaligned",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "For the fiscal year ended January 31 , 2026"
+          }
+        ],
+        [
+          {
+            "line": 1,
+            "exact_quote": "references to particular years, quarters, months or periods refer to the Company’s fiscal years ended January 31"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "fiscal year ended January 31",
+        "2026"
+      ],
+      "must_not_assert": [
+        "2026财年指截至2026年12月31日的年度"
+      ],
+      "reason": "财年截至 **1 月 31 日**，FY2026 = 2025-02-01 → 2026-01-31，几乎整个落在**日历年 2025**。把「fiscal year 2026」当 2026 日历年是期间错位。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-revenue-three-years",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "our total revenue was $2,463.8 million , $2,006.4 million and $1,683.0 million, respectively"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2463.8",
+        "2006.4",
+        "1683.0"
+      ],
+      "must_not_assert": [
+        "2026财年总收入为20.064亿美元"
+      ],
+      "reason": "三年总收入 2,463.8 / 2,006.4 / 1,683.0 百万美元。三个数字同句列出、量级相近，取错年份即错。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-growth-rate-not-share",
+      "importance": "critical",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "representing a 23%, 19%, and 31% growth rate, respectively"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "23%",
+        "19%",
+        "31%"
+      ],
+      "must_not_assert": [
+        "Atlas占总收入23%"
+      ],
+      "reason": "23%/19%/31% 是**增速**。同一文件里 Atlas 占总收入 **73%**、订阅占 97%——都是占比。把增速与占比互换是最典型的比率口径错。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-customers-stock-not-flow",
+      "importance": "critical",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "we had over 65,200 customers across a wide range of industries and in over 100 countries, compared to over 54,500 customers and over 47,800 customers as of January 31, 2025 and 2024, respectively"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "65,200",
+        "54,500",
+        "47,800"
+      ],
+      "must_not_assert": [
+        "2026财年新增65,200名客户",
+        "客户数同比增长65,200"
+      ],
+      "reason": "65,200 / 54,500 / 47,800 是各年末的**客户存量**（时点余额），不是新增数。「over」表示约数。把期末存量读成期间新增是最容易犯的存量/流量错。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-atlas-customers-subset",
+      "importance": "critical",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "We had over 63,900 Atlas customers as of January 31, 2026"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "63,900",
+        "Atlas"
+      ],
+      "must_not_assert": [
+        "Atlas客户63,900加上非Atlas客户合计超过129,100",
+        "公司客户总数为63,900"
+      ],
+      "reason": "63,900 名 Atlas 客户是 65,200 总客户的**子集**，二者不可相加，也不能用 63,900 替代总客户数。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-customer-definition-excludes-free",
+      "importance": "critical",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "our definition of “customer” excludes users of our free offerings"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "excludes users of our free offerings"
+      ],
+      "must_not_assert": [
+        "公司客户数包含免费产品用户"
+      ],
+      "reason": "公司对「客户」的定义**明确排除免费产品用户**，且同一实体的关联方计为一名客户。按直觉理解客户数会高估规模。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-rpo-not-disclosed",
+      "importance": "critical",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "The Company applies the practical expedient to omit disclosure with respect to the amount of the transaction price allocated to remaining performance obligations"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "practical expedient to omit disclosure"
+      ],
+      "must_not_assert": [
+        "MongoDB披露剩余履约义务为X百万美元",
+        "公司剩余履约义务金额为47.07亿美元"
+      ],
+      "reason": "MongoDB 采用实务便利**豁免**，**未披露** RPO 金额。任何具体 RPO 数字都是编造。47.07 亿美元是递延收入（deferred revenue），与 RPO 不是同一概念。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-deferred-revenue",
+      "importance": "normal",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "Deferred revenue, including current and non-current balances as of January 31, 2026, 2025 and 2024 was $ 470.7 million, $ 359.8 million and $ 377.4 million, respectively"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "470.7",
+        "359.8",
+        "377.4"
+      ],
+      "must_not_assert": [
+        "递延收入为2,463.8百万美元"
+      ],
+      "reason": "递延收入（含流动与非流动）470.7 / 359.8 / 377.4 百万美元，是**时点余额**。注意 2025 年（359.8）低于 2024 年（377.4）——并非逐年递增，不能默认单调增长。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-net-loss-not-profit",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "We have incurred net losses in each period since our inception, including net losses of $71.2 million,$129.1 million and $176.6 million"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "net losses",
+        "71.2",
+        "129.1",
+        "176.6"
+      ],
+      "must_not_assert": [
+        "MongoDB 2026财年实现净利润71.2百万美元",
+        "公司已实现盈利"
+      ],
+      "reason": "公司自成立以来**每一期均为净亏损**：71.2 / 129.1 / 176.6 百万美元（亏损在收窄）。收入增长 23% 与是否盈利是两件事，把它读成净利润是符号错误。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-no-customer-concentration",
+      "importance": "normal",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "No single customer represented more than 10% of our revenue in fiscal year 2026."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "No single customer",
+        "10%"
+      ],
+      "must_not_assert": [
+        "公司存在占收入10%以上的单一客户"
+      ],
+      "reason": "明确否定：2026 财年**没有**单一客户占收入 10% 以上。这是风险披露里少见的强否定，方向写反会凭空造出客户集中风险。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-net-arr-expansion-not-revenue-growth",
+      "importance": "critical",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "We calculate net ARR expansion rate by dividing the ARR at the close of a given period (the “measurement period”), from customers who were also customers at the close of the same period in the prior year (the “base period”), by the ARR from all customers at the close of the base period, including those who churned or reduced their subscriptions."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "net ARR expansion rate",
+        "ARR"
+      ],
+      "must_not_assert": [
+        "公司净ARR扩张率121%即收入增长率",
+        "净ARR扩张率是利润率"
+      ],
+      "reason": "净 ARR 扩张率是**同批次客户的自定义 ARR 队列指标**，分母含流失客户，与 23% 的收入增速无关，也不是利润率。三个比率口径必须分开。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-subscription-share",
+      "importance": "normal",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "which accounted for 97% of our total revenue for the year ended January 31, 2026"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "97%",
+        "subscriptions"
+      ],
+      "must_not_assert": [
+        "订阅收入同比增长97%"
+      ],
+      "reason": "97% 是订阅收入占**总收入的比例**（三年均为 97%），不是增速。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-enterprise-advanced-two-denominators",
+      "importance": "critical",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "MongoDB Enterprise Advanced represented 20%, 23% and 26% of our total revenue"
+          }
+        ],
+        [
+          {
+            "line": 1,
+            "exact_quote": "MongoDB Enterprise Advanced revenue represented 21%, 24% and 26% of our subscription revenue"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "20%",
+        "21%",
+        "total revenue",
+        "subscription revenue"
+      ],
+      "must_not_assert": [
+        "MongoDB Enterprise Advanced占总收入21%",
+        "文件中的20%与21%互相矛盾"
+      ],
+      "reason": "同一指标在文件里出现两组数：**占总收入** 20% / 23% / 26%，**占订阅收入** 21% / 24% / 26%。20% 与 21% 的差异来自分母不同，不是文件自相矛盾。引用任一组而不写分母即为口径缺失。这是本样本最有价值的发现。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-operating-cashflow-vs-net-loss",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "Cash provided by operating activities during the year ended January 31, 2026 was $505.1 million"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "505.1",
+        "operating activities"
+      ],
+      "must_not_assert": [
+        "公司经营活动现金流为净流出505.1百万美元"
+      ],
+      "reason": "经营活动现金流 **+505.1 百万美元（净流入）**，而净亏损 71.2 百万美元。二者方向相反且并存，不能互相替代，也不能把正号读成负号。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "h-shares-outstanding",
+      "importance": "normal",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "line": 1,
+            "exact_quote": "As of March 9, 2026, there were 80,369,527 shares of the registrant’s common stock, par value $0.001 per share, outstanding."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "80,369,527",
+        "March 9, 2026"
+      ],
+      "must_not_assert": [
+        "截至2026年1月31日已发行股份为80,369,527股"
+      ],
+      "reason": "80,369,527 股是**截至 2026-03-09**（封面日期，晚于财年末）的已发行股数，不是资产负债表日的股数。日期与股数必须绑定。",
+      "fact_scope": "narrative"
+    }
+  ]
+}

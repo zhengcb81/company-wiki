@@ -1,0 +1,104 @@
+[
+  {
+    "schema_version": "du-review/1",
+    "sample_id": "offline-clean-annual",
+    "reviewer": "independent-subagent",
+    "claims": [
+      {
+        "claim_index": 0,
+        "verdict": "ENTAILED",
+        "note": "Evidence span states '门店总数7,504家' — period-end stock (basis=total), and the claim keeps the total framing (总数为), not an increment. Unit 家, value 7504 preserved. The absolute date '截至2024年12月31日' is not visible in the quoted span (span only carries '本年度'); it matches the gold fact's declared period 2024-12-31, so it is a source-period label rather than a quantity-basis defect. Gold must_not_assert '净新增7,504家' is respected.",
+        "evidence_locators": ["loc:v1/page:12/paragraph:4"]
+      },
+      {
+        "claim_index": 1,
+        "verdict": "ENTAILED",
+        "note": "Verbatim match to the cited evidence span. Modality 'actual' with the inchoate phrasing '已开始拓展' preserved — it asserts expansion has begun (an accomplished initiation), not that expansion is complete. Gold must_preserve '海外' retained; nothing about scale, profitability or completion is added.",
+        "evidence_locators": ["loc:v1/page:12/paragraph:5"]
+      },
+      {
+        "claim_index": 2,
+        "verdict": "ENTAILED",
+        "note": "Verbatim match. Correctly typed as modality=plan with basis=investment (万元), so the 28,000万元 is neither presented as revenue (gold must_not_assert '项目收入28,000万元') nor as realized spend — '总投资为' reproduces the project-investment figure as stated. Unit 万元 matches. The '2020' period on the quantity is not a contradiction: the gold fact carries no date, and the claim text makes no date assertion. Residual gap: the evidence span alone does not prove the total is still an unspent plan rather than spend to date, but the claim asserts nothing beyond the plan figure, so the plan-vs-actual reading is not inverted.",
+        "evidence_locators": ["loc:v1/page:62/paragraph:1"]
+      }
+    ]
+  },
+  {
+    "schema_version": "du-review/1",
+    "sample_id": "offline-negation-qa",
+    "reviewer": "independent-subagent",
+    "claims": [
+      {
+        "claim_index": 0,
+        "verdict": "ENTAILED",
+        "note": "The claim is the analyst's question and is kept as a question (modality=question, role=analyst_question, trailing '？'), so the interrogative premise is never restated as a company assertion — the gold must_not_assert '公司已推动达成VC带量采购' is respected. Paraphrase drops the source's '等行业龙头' hedge, but this narrows rather than broadens the question and does not convert it into a fact; '带量采购' is preserved.",
+        "evidence_locators": ["loc:v1/page:3/paragraph:1"]
+      },
+      {
+        "claim_index": 1,
+        "verdict": "ENTAILED",
+        "note": "Negation is preserved intact: '现无生产VC' stays a present-tense denial of VC production, typed modality=negation / role=management_answer. It is not inverted into '公司生产VC', and the question's premise is not promoted into a company fact. Gold must_preserve '无生产VC' satisfied.",
+        "evidence_locators": ["loc:v1/page:3/paragraph:1"]
+      },
+      {
+        "claim_index": 2,
+        "verdict": "ENTAILED",
+        "note": "Verbatim match. Subject is correct — 中国节能, the controlling shareholder (控股股东), is named as the actor, so the affiliate's contact with 宁德时代 is not attributed to the listed company. Modality is right: '已经建立了联系' (contact established, actual) is separated from '希望建立业务协同与合作' (wish/intention), and the claim keeps the wish verb, so intent is not reported as an accomplished cooperation — gold must_not_assert '公司与宁德时代已建立业务协同' is respected.",
+        "evidence_locators": ["loc:v1/page:3/paragraph:1"]
+      }
+    ]
+  },
+  {
+    "schema_version": "du-review/1",
+    "sample_id": "offline-opaque-scan",
+    "reviewer": "independent-subagent",
+    "claims": [],
+    "note": "Zero claims in this fixture's observed block (selected_text is empty and coverage reports an opaque page 1), so there is nothing to entail-check. The absence of claims is the correct behaviour for an unscanned page: gold fact f-confirmation ('控股股东、实际控制人对招股说明书的确认意见') was not asserted as if it were prospectus body text. No review entries required.",
+    "evidence_locators": []
+  },
+  {
+    "schema_version": "du-review/1",
+    "sample_id": "offline-offering-plan",
+    "reviewer": "independent-subagent",
+    "claims": [
+      {
+        "claim_index": 0,
+        "verdict": "ENTAILED",
+        "note": "Verbatim match. '拟募集' + '不超过' are both preserved, and modality=plan, so a proposed fundraising ceiling is not reported as completed fundraising — gold must_not_assert '公司已募集资金35,978.71万元' is respected. Unit 万元 matches the source. The '2020' period on the quantity is unsupported by the span but the claim text asserts no date, so no temporal claim is being made.",
+        "evidence_locators": ["loc:v1/page:61/paragraph:1"]
+      },
+      {
+        "claim_index": 1,
+        "verdict": "ENTAILED",
+        "note": "Verbatim match: two construction phases with new-build as phase one and old-plant retrofit as phase two, modality=plan. It does not collapse the two phases into a single period (gold must_not_assert '项目建设期为一年'). Residual gap: the gold reason notes phase two '带前置条件' (carries a precondition) and the span does not disclose it, but the claim asserts no unconditionality or schedule, so nothing is overstated.",
+        "evidence_locators": ["loc:v1/page:61/paragraph:2"]
+      },
+      {
+        "claim_index": 2,
+        "verdict": "ENTAILED",
+        "note": "Verbatim match; value 2,053.00万元 and unit 万元 preserved (gold must_not_assert '土地款为2,147.00万元' respected). Note the figure is a sub-item — 土地款 is one component of 工程建设其它费用 rather than a project total — but the claim presents it as a bare line-item amount with no total or scope claim attached, so the part-vs-whole basis is not inflated.",
+        "evidence_locators": ["loc:v1/page:62/paragraph:1"]
+      }
+    ]
+  },
+  {
+    "schema_version": "du-review/1",
+    "sample_id": "offline-stage-progress",
+    "reviewer": "independent-subagent",
+    "claims": [
+      {
+        "claim_index": 0,
+        "verdict": "ENTAILED",
+        "note": "Verbatim match, and critically the verification stage is NOT collapsed into mass production: '已进入量产验证阶段' is retained, so the claim does not read '减压EPI设备已实现量产' (gold must_not_assert). Both gold must_preserve tokens ('验证成功', '量产验证阶段') survive. Minor wording only: the claim's '在成熟制程客户端' is a trivial rewording of the source's '在成熟制程客户端验证成功' construction and does not shift the achievement beyond what is stated.",
+        "evidence_locators": ["loc:v1/page:3/paragraph:1"]
+      },
+      {
+        "claim_index": 1,
+        "verdict": "ENTAILED",
+        "note": "Verbatim match. Development completion and wafer verification are kept as distinct, non-terminal stages — modality=actual, '现已完成开发，进入晶圆验证阶段' — so completing development is not upgraded to passing verification (gold must_not_assert '常压外延设备已验证成功'). Gold must_preserve '晶圆验证阶段' retained.",
+        "evidence_locators": ["loc:v1/page:3/paragraph:2"]
+      }
+    ]
+  }
+]

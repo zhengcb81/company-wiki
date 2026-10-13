@@ -1,0 +1,634 @@
+{
+  "schema_version": "du-bench-evidence/1",
+  "lane": "du-bench",
+  "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
+  "generated_from": {
+    "native_summary": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du-bench-final2\\native\\summary.json",
+    "offline_summary": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du-off-audit\\offline\\summary.json",
+    "note": "Numbers are read back from the run artifacts, not transcribed by hand."
+  },
+  "gold_set": {
+    "development": {
+      "records": 10,
+      "facts": 108,
+      "critical": 83,
+      "narrative": 93,
+      "document_meta": 15
+    },
+    "holdout": {
+      "records": 5,
+      "facts": 68,
+      "critical": 45,
+      "narrative": 68,
+      "document_meta": 0
+    },
+    "max_quote_bytes_per_document": 2094,
+    "quote_budget_bytes_per_document": 8192,
+    "holdout_markets": {
+      "a_share": [
+        "holdout-cn-glodon-q1",
+        "holdout-cn-yake-q1"
+      ],
+      "h_share": [
+        "holdout-hk-alibaba-fy2023"
+      ],
+      "us": [
+        "holdout-us-mongodb-10k",
+        "holdout-us-nvidia-10k"
+      ]
+    },
+    "card_minimum_set_covered": 14,
+    "card_minimum_set_gaps": 0
+  },
+  "review_message_controls": {
+    "fixtures": 5,
+    "semantic_only_defects_injected": 3,
+    "defects_invisible_to_deterministic_checks": 3,
+    "review_caught_all": true,
+    "review_cannot_rescue_a_deterministic_fail": true,
+    "interpretation": "The count is the number of injected meaning-level defects that pass every deterministic check. For exactly those, an independent review is the only detector. An all-ENTAILED review still cannot upgrade a deterministic FAIL, so review can only add scrutiny."
+  },
+  "carrier_reality": {
+    "supported_this_run": {
+      ".pdf": "10 documents",
+      ".txt": "1 document"
+    },
+    "unsupported_this_run": {
+      ".htm": "4 documents, all UNAVAILABLE"
+    },
+    "measured_html_evidence": {
+      "method": "probe_non_pdf_html() over real 10-K HTML originals",
+      "result": "extract_transcript_material accepts the bytes, then parse_transcript_text returns units=0, page_count=0 with transcript_start_missing; the extracted text is led by inline-XBRL taxonomy tokens",
+      "production_path_checked": "narrative_retrieval.py offers exactly two replay formats: PDF and transcript_txt/transcript_html"
+    }
+  },
+  "repo_state": {
+    "branch": "codex/du-benchmark-20261013",
+    "head": "ef47fca38ec3603fcfecb694b14ff777d331501d"
+  },
+  "native_run": {
+    "samples": 15,
+    "bindings_supplied": 25,
+    "by_scope": {
+      "development": {
+        "critical_fact_coverage": 0.6867469879518072,
+        "critical_fact_recall": 0.17543859649122806,
+        "critical_facts_declared": 83,
+        "critical_facts_passed": 10,
+        "critical_facts_total": 57,
+        "critical_facts_unavailable": 26,
+        "document_meta_fact_recall": 0.0,
+        "document_meta_facts_passed": 0,
+        "document_meta_facts_total": 9,
+        "documents": 10,
+        "fact_recall": 0.16883116883116883,
+        "facts_passed": 13,
+        "facts_total": 77,
+        "narrative_fact_recall": 0.19117647058823528,
+        "narrative_facts_passed": 13,
+        "narrative_facts_total": 68,
+        "statuses": {
+          "FAIL": 8,
+          "PARTIAL": 2
+        }
+      },
+      "holdout": {
+        "critical_fact_coverage": 0.4888888888888889,
+        "critical_fact_recall": 0.0,
+        "critical_facts_declared": 45,
+        "critical_facts_passed": 0,
+        "critical_facts_total": 22,
+        "critical_facts_unavailable": 23,
+        "document_meta_fact_recall": null,
+        "document_meta_facts_passed": 0,
+        "document_meta_facts_total": 0,
+        "documents": 5,
+        "fact_recall": 0.0,
+        "facts_passed": 0,
+        "facts_total": 36,
+        "narrative_fact_recall": 0.0,
+        "narrative_facts_passed": 0,
+        "narrative_facts_total": 36,
+        "statuses": {
+          "FAIL": 3,
+          "PARTIAL": 2
+        }
+      }
+    },
+    "raw_all_unchanged": true,
+    "config_unchanged": true,
+    "sentinel_restored": {
+      "preexisting": false,
+      "reason": "created_by_this_run",
+      "sha256": "b88f563191672aff7c95a3620c7bdacc635ac28aa0a236e92478f2240bfbd203",
+      "unchanged": true
+    },
+    "network_calls": 0,
+    "model_calls": 0,
+    "paid_calls": 0,
+    "raw_copies": 0,
+    "elapsed_seconds": 180.727,
+    "peak_rss_bytes": 302997504,
+    "carrier_support": {
+      "by_suffix": {
+        ".htm": {
+          "documents": 4,
+          "entry_point": null,
+          "kind": "html",
+          "reason": "the only HTML path is transcript_html, which expects a transcript layout; an SEC filing HTML has no route into the selector",
+          "supported": false,
+          "unavailable": 4
+        },
+        ".pdf": {
+          "documents": 10,
+          "entry_point": "parse_pdf_bytes",
+          "kind": "pdf",
+          "reason": null,
+          "supported": true,
+          "unavailable": 0
+        },
+        ".txt": {
+          "documents": 1,
+          "entry_point": "parse_transcript_text",
+          "kind": "transcript",
+          "reason": null,
+          "supported": true,
+          "unavailable": 0
+        }
+      },
+      "unsupported_carriers_present": [
+        ".htm"
+      ]
+    },
+    "per_sample": [
+      {
+        "sample_id": "cn-equity",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_evaluable": 7,
+        "critical_declared": 7,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.1,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "cn-h1",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.25,
+        "critical_evaluable": 8,
+        "critical_declared": 8,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.3,
+        "document_meta_recall": 0.0,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "cn-ipo-confirmation",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": null,
+        "critical_evaluable": 0,
+        "critical_declared": 4,
+        "critical_unavailable": 4,
+        "critical_coverage": 0.0,
+        "narrative_recall": null,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "cn-ir",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.14285714285714285,
+        "critical_evaluable": 7,
+        "critical_declared": 7,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.1,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "cn-q-business",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.6666666666666666,
+        "critical_evaluable": 9,
+        "critical_declared": 9,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.6363636363636364,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "cn-q-sparse",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_evaluable": 9,
+        "critical_declared": 9,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.0,
+        "document_meta_recall": 0.0,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "hk-annual",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_evaluable": 6,
+        "critical_declared": 6,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.0,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "holdout-cn-glodon-q1",
+        "scope": "holdout",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_evaluable": 5,
+        "critical_declared": 5,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.0,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "holdout-cn-yake-q1",
+        "scope": "holdout",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_evaluable": 7,
+        "critical_declared": 7,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.0,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "holdout-hk-alibaba-fy2023",
+        "scope": "holdout",
+        "status": "FAIL",
+        "critical_recall": 0.0,
+        "critical_evaluable": 10,
+        "critical_declared": 10,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.0,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "holdout-us-mongodb-10k",
+        "scope": "holdout",
+        "status": "PARTIAL",
+        "critical_recall": null,
+        "critical_evaluable": 0,
+        "critical_declared": 11,
+        "critical_unavailable": 11,
+        "critical_coverage": 0.0,
+        "narrative_recall": null,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "holdout-us-nvidia-10k",
+        "scope": "holdout",
+        "status": "PARTIAL",
+        "critical_recall": null,
+        "critical_evaluable": 0,
+        "critical_declared": 12,
+        "critical_unavailable": 12,
+        "critical_coverage": 0.0,
+        "narrative_recall": null,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "us-10k",
+        "scope": "development",
+        "status": "PARTIAL",
+        "critical_recall": null,
+        "critical_evaluable": 0,
+        "critical_declared": 10,
+        "critical_unavailable": 10,
+        "critical_coverage": 0.0,
+        "narrative_recall": null,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "us-20f",
+        "scope": "development",
+        "status": "PARTIAL",
+        "critical_recall": null,
+        "critical_evaluable": 0,
+        "critical_declared": 12,
+        "critical_unavailable": 12,
+        "critical_coverage": 0.0,
+        "narrative_recall": null,
+        "document_meta_recall": null,
+        "claims": 0,
+        "semantic_units": 0
+      },
+      {
+        "sample_id": "us-txt",
+        "scope": "development",
+        "status": "FAIL",
+        "critical_recall": 0.09090909090909091,
+        "critical_evaluable": 11,
+        "critical_declared": 11,
+        "critical_unavailable": 0,
+        "critical_coverage": 1.0,
+        "narrative_recall": 0.1111111111111111,
+        "document_meta_recall": 0.0,
+        "claims": 0,
+        "semantic_units": 0
+      }
+    ],
+    "per_sample_observation": [
+      {
+        "sample_id": "cn-equity",
+        "routed_kind": "unknown",
+        "selected": 96,
+        "candidates": 449,
+        "units": 3224,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "partial"
+      },
+      {
+        "sample_id": "cn-h1",
+        "routed_kind": "semi_annual_report",
+        "selected": 96,
+        "candidates": 369,
+        "units": 5500,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "partial"
+      },
+      {
+        "sample_id": "cn-ipo-confirmation",
+        "routed_kind": "prospectus",
+        "selected": 0,
+        "candidates": 0,
+        "units": 0,
+        "native_scan": "partial",
+        "opaque_pages": [
+          1
+        ],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "needs_review"
+      },
+      {
+        "sample_id": "cn-ir",
+        "routed_kind": "investor_relations",
+        "selected": 11,
+        "candidates": 11,
+        "units": 302,
+        "native_scan": "complete",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "needs_review"
+      },
+      {
+        "sample_id": "cn-q-business",
+        "routed_kind": "quarterly_report",
+        "selected": 28,
+        "candidates": 28,
+        "units": 579,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "partial"
+      },
+      {
+        "sample_id": "cn-q-sparse",
+        "routed_kind": "quarterly_report",
+        "selected": 0,
+        "candidates": 0,
+        "units": 429,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "needs_review"
+      },
+      {
+        "sample_id": "hk-annual",
+        "routed_kind": "annual_report",
+        "selected": 96,
+        "candidates": 254,
+        "units": 6502,
+        "native_scan": "partial",
+        "opaque_pages": [
+          246
+        ],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "partial"
+      },
+      {
+        "sample_id": "holdout-cn-glodon-q1",
+        "routed_kind": "quarterly_report",
+        "selected": 0,
+        "candidates": 0,
+        "units": 257,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "needs_review"
+      },
+      {
+        "sample_id": "holdout-cn-yake-q1",
+        "routed_kind": "quarterly_report",
+        "selected": 2,
+        "candidates": 2,
+        "units": 369,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "partial"
+      },
+      {
+        "sample_id": "holdout-hk-alibaba-fy2023",
+        "routed_kind": "annual_report",
+        "selected": 96,
+        "candidates": 2221,
+        "units": 18038,
+        "native_scan": "partial",
+        "opaque_pages": [],
+        "carrier": ".pdf",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "partial"
+      },
+      {
+        "sample_id": "holdout-us-mongodb-10k",
+        "routed_kind": null,
+        "selected": null,
+        "candidates": null,
+        "units": null,
+        "native_scan": "unavailable",
+        "opaque_pages": [],
+        "carrier": ".htm",
+        "carrier_supported": false,
+        "raw_unchanged": true,
+        "selector_status": null
+      },
+      {
+        "sample_id": "holdout-us-nvidia-10k",
+        "routed_kind": null,
+        "selected": null,
+        "candidates": null,
+        "units": null,
+        "native_scan": "unavailable",
+        "opaque_pages": [],
+        "carrier": ".htm",
+        "carrier_supported": false,
+        "raw_unchanged": true,
+        "selector_status": null
+      },
+      {
+        "sample_id": "us-10k",
+        "routed_kind": null,
+        "selected": null,
+        "candidates": null,
+        "units": null,
+        "native_scan": "unavailable",
+        "opaque_pages": [],
+        "carrier": ".htm",
+        "carrier_supported": false,
+        "raw_unchanged": true,
+        "selector_status": null
+      },
+      {
+        "sample_id": "us-20f",
+        "routed_kind": null,
+        "selected": null,
+        "candidates": null,
+        "units": null,
+        "native_scan": "unavailable",
+        "opaque_pages": [],
+        "carrier": ".htm",
+        "carrier_supported": false,
+        "raw_unchanged": true,
+        "selector_status": null
+      },
+      {
+        "sample_id": "us-txt",
+        "routed_kind": "investor_call_transcript",
+        "selected": 96,
+        "candidates": 107,
+        "units": 489,
+        "native_scan": "complete",
+        "opaque_pages": [],
+        "carrier": ".txt",
+        "carrier_supported": true,
+        "raw_unchanged": true,
+        "selector_status": "partial"
+      }
+    ]
+  },
+  "offline_run": {
+    "fixtures": 5,
+    "fixture_bytes": 14301,
+    "fixture_budget_bytes": 204800,
+    "by_scope": {
+      "development": {
+        "critical_fact_coverage": 0.8571428571428571,
+        "critical_fact_recall": 1.0,
+        "critical_facts_declared": 7,
+        "critical_facts_passed": 6,
+        "critical_facts_total": 6,
+        "critical_facts_unavailable": 1,
+        "document_meta_fact_recall": null,
+        "document_meta_facts_passed": 0,
+        "document_meta_facts_total": 0,
+        "documents": 3,
+        "fact_recall": 1.0,
+        "facts_passed": 6,
+        "facts_total": 6,
+        "narrative_fact_recall": 1.0,
+        "narrative_facts_passed": 6,
+        "narrative_facts_total": 6,
+        "statuses": {
+          "PARTIAL": 1,
+          "PASS": 2
+        }
+      },
+      "holdout": {
+        "critical_fact_coverage": 1.0,
+        "critical_fact_recall": 1.0,
+        "critical_facts_declared": 5,
+        "critical_facts_passed": 5,
+        "critical_facts_total": 5,
+        "critical_facts_unavailable": 0,
+        "document_meta_fact_recall": null,
+        "document_meta_facts_passed": 0,
+        "document_meta_facts_total": 0,
+        "documents": 2,
+        "fact_recall": 1.0,
+        "facts_passed": 5,
+        "facts_total": 5,
+        "narrative_fact_recall": 1.0,
+        "narrative_facts_passed": 5,
+        "narrative_facts_total": 5,
+        "statuses": {
+          "PASS": 2
+        }
+      }
+    },
+    "mutations_applicable": 53,
+    "mutations_detected": 53,
+    "mutations_not_applicable": 42,
+    "network_calls": 0,
+    "model_calls": 0,
+    "paid_calls": 0,
+    "peak_rss_bytes": 21155840
+  }
+}

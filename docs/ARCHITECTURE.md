@@ -1,6 +1,6 @@
 # 当前架构
 
-> 2026-10-06。以来源事实、精选证据和有界任务为中心。
+> 2026-10-13。以来源事实、精选证据和有界任务为中心。
 
 ## 分层与职责
 
@@ -13,7 +13,12 @@ flowchart TD
   RAW --> REF[SourceRef / SourceExport v2]
   REF --> READ[验证原件字节的读取层]
   READ --> TEMP[临时解析与业务叙述选择]
-  TEMP --> FINAL[一份原语言摘要与精选引用]
+  TEMP --> OBS[du-input/1 共享观察]
+  OBS --> ROUTE[du-route/1 文档路由]
+  OBS --> STRUCT[du-structure/1 章节与语义单元]
+  ROUTE --> PKG[du-packages/1 依赖闭合包]
+  STRUCT --> PKG
+  PKG --> FINAL[一份原语言摘要与精选引用]
   FINAL --> NREF[NarrativeRef / 版本化只读 transport]
   NREF --> SEARCH[精选 list / lookup / 内存 BM25]
   REF --> DOWN[StockWiki / RF / 其他消费者]
@@ -24,6 +29,57 @@ flowchart TD
 物理根、路径、文件打开与 SHA 由存储层负责。来源层负责公司/证券、期次、公开日期、版本与撤回事实；上层用逻辑引用，不为不同目录分叉业务代码。外部根只读，新下载由 CWP acquisition writer 入库；Dayu 不改代码。
 
 解析层临时读取原文，按年报、半年报、季报、招股书、增发/可转债、IR 和电话会规则选择业务证据。覆盖不全或解析失败不能当无叙述跳过；财务表格不全量建立永久 span。摘要层只生成来源描述，保留原语言、来源 SHA、稳定 locator 和 parser/prompt/version。
+
+## 文档理解层（2026-10-13）
+
+现有扁平 units 之上新增三个纯函数包，用冻结的 JSON wire 交换，互不依赖：
+
+- **du-input/1**：共享观察。由 `document_understanding.build_observation` 从既有 parser
+  units 投影而来，保留 bbox / pdf_block / heading / DOM / table / role，并补齐 parser
+  未输出的列号（几何实测）、表头与单位 caption（`row_index==0` 与 `单位：` 文本）、table_id。
+  不重编 locator、不重算 SHA、不写盘。
+- **du-route/1**（`document_understanding.profiles`）：披露制度＋文档用途＋内容形态路由，
+  输出 profile、置信度、理由与子区间。行政候选永不直接 skip 原件。
+- **du-structure/1**（`document_understanding.structure`）：逻辑章节树（父子、正文区间、
+  角色、语言、构造依据与不确定性）与六类语义单元（project / qa_exchange /
+  operating_table / paragraph_event / risk / background）及六类关系。跨页延续有界，
+  遇新同级标题停止；TOC 与重复页眉只进 diagnostics，不成为正文。
+- **du-packages/1**（`document_understanding.orchestration`）：把语义单元变成可预算的
+  依赖闭合包。`selection_bridge.dependency_closure` 只增不减——任何成员被选中时补回其
+  必需上下文，并让否定与其所属包同进同出。现有 selector 的预算权威不变。
+
+三个包已合并在同一分支上，并由 ROOT 的端到端入口串成一条链：
+
+```python
+company_wiki.document_understanding.understand_units(units, *, source_id, source_sha256, ...)
+# build_observation -> route_document -> get_profile -> build_structure
+#                   -> build_dependency_packages  =>  du-pipeline/1
+
+company_wiki.document_understanding.build_summary_input(pipeline_result, *, max_packages, max_chars)
+# profile.summary_focus + 有序证据包 + 回指 locator + 预算账 + 未读清单  =>  du-summary-input/1
+```
+
+`build_summary_input` 只组装"要问什么"：焦点取自 **profile**，证据按编排层给出的顺序排列，
+每个成员保留 `unit_id`/`locator`/`page`；observation 里不存在的单元一律丢弃而不是编造。
+预算截断记为 `deferred`、未读页/延后单元记为 `unread`，两者都不会变成对完整性的暗示。
+它**不调用模型**，付费预算仍由现有 transport 决定。
+
+该入口把路由结果与**其 profile** 一起交给编排层：章节优先级在 profile 上而不在 route 上，
+只读 route 会静默退回通用优先序、使路由等于没接（已由 `test_du_root_lane_seam.py` 锁死）。
+管道同时区分「应当有业务叙述却没有产出包」（记为覆盖缺口）与「行政/未知文档本就不期待叙述」，
+不把前者写成"没有内容可读"。
+
+结构侧信道按文档常规 ≤64KiB；不落地整篇 Markdown，不产生第二份全文。
+`du-structure` 的 `complete` 只表示构建过程完成，不代表业务召回或判断正确。
+本层**尚未接入生产解析/选择入口**：生产切换仍需 ROOT 把 `understand_units` 接到现有
+parse → select → summarize 链上，并按母计划跑真实模型大节点。
+
+### 已知适配缺口
+
+真实 PDF parser 丢弃 span 字号，因此无编号的纸质标题（如 `Store Network`）无法可靠
+判定为章节；几何猜测会误伤同页等高的表格片段，故不做猜测。补齐需在 parser 层保留字号证据。
+QA 页当前被 parser 输出两套角色单元（`investor_question`/`management` 与 `qa_text_shadow`），
+保留哪一套由 adapter/选择层决定；结构层不得删除任一侧。
 
 检索层固定 NarrativeRef 版本，实际验证原文并回放引用，提供精确定位与精选检索；不额外持久化全文。质量 v2 只返回来源/解析诊断，metadata_only 不触发全量转换。
 
@@ -42,5 +98,11 @@ StockWiki/RF 等独占研究模型与结论；company-wiki 不保存评级、目
 ## 自动验证
 
 各层测试针对自身职责：存储的字节与原件保护、来源的身份/时间、解析的选择与回放、摘要的原语言与绑定、调度的预算与恢复、消费者的 wire/收据。日常 commit 静态、push 短 smoke、CI 全 Unit；跨层真实 E2E 在大节点集中运行。旧 Reviewer/签收锁不参与运行。
+
+文档理解层另有一个独立基准（`tools/document_understanding_benchmark`）：自持金标与
+oracle，离线合成套件不联网，原生模式经本机 bindings 只读回放。它按类型正确率、关键事实
+召回、上下文完整、引用回放、角色/语态/数字口径、双语冗余、派生空间等维度分开计分，
+不用被检验实现的结果生成期待值，也不因基准不过而放宽阈值。源缺失或预算到限记
+UNAVAILABLE，不计 PASS；语义蕴含未审记 NOT_EVALUATED。
 
 Source Export v1 / IngestService v1 和 legacy Wiki 仅为明确兼容内容；历史架构可从 Git 查询，不作为新流水线施工指令。当前未完成项以[主计划](plans/narrative-evidence-pilot-2026-09-26/task_plan.md)为准。
