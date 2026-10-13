@@ -12,3 +12,9 @@
 - 完成design.md、INTERFACES.md、implementation.md与三独立卡。保留当前存储/来源/Worker/配置模型责任；新增结构和profile，不加权限/签收。
 - 原件0复制/改动，LLM0调用；四PNG已删除，原始观察压缩后删除自有JSON副本，摘要与压缩证据留本子计划。
 - 当前只写文档/调查脚本；无生产代码、配置和其他仓库改动。尚未分发或启动任何harness。
+
+## 分包准备与发布
+
+- 调查/设计已正常commit `7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8`，静态hooks通过/无适用代码检查；21文件1068行含两份紧凑压缩证据。
+- 三个稀疏worktree已在README路径准备，分别codex/du-profiles-20261013、codex/du-structure-20261013、codex/du-benchmark-20261013，共同base7f6f7cbd，干净；每份约20MiB代码/测试，原件不复制。
+- 文件链接/JSON/压缩回读检查通过；母PWF仅14行导航新增，原正文按HEAD字节保留。此轮无需运行完整业务测试套件，已有3份诊断用来验证设计问题，未声称修复。

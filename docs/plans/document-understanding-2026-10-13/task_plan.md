@@ -3,7 +3,7 @@
 PLAN_ID: document-understanding-2026-10-13
 PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans
 Owner: ROOT
-状态：调查/设计完成，分包准备中；生产解析链未切换。
+状态：调查/设计/三条分包准备完成，可由用户分发；生产解析链未切换。
 
 ## 目标与边界
 
@@ -13,12 +13,12 @@ Owner: ROOT
 
 1. [complete] 读当前路由/规范化/选择/摘要边界与历史设计；20份原件原生扫描/重点抽读、4页视觉核对、3份真实selector回放。
 2. [complete] 已写design、INTERFACES、implementation，明确共用结构/策略/语义证据、资源与A/B/C测试。
-3. [in_progress] 三卡已写；冻结互不重叠路径，准备独立worktree与发布计划。
+3. [complete] 三卡、冻结接口/交接格式和独立worktree已准备；共同基线7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8，三目录干净。
 4. [pending] 三包实施、ROOT接线、真实摘要/公司G2/G4/G5；本轮不执行生产重构。
 
 ## Next Step
 
-发布计划并准备DU-PROFILES、DU-STRUCTURE、DU-BENCH三个工作目录；由用户分发，ROOT不代为启动。
+用户可分发三张READY卡；ROOT继续接W08剩余两包，之后按implementation整合新文档层。未启动独立harness。
 
 ## Errors Encountered
 
@@ -28,3 +28,4 @@ Owner: ROOT
 - PyMuPDF原生save向沙箱Temp写PNG失败；改写工作区自有临时目录、tobytes写入后目视核查；四PNG已删除恢复。
 - HKEX年报编制指南打开失败，正文未核验；设计引用本地真实港股年报和官网摘要，不将搜索摘要当全文已读。
 - 母PWF首次prepend被Windows换行转换造成全文件diff；已按HEAD原字节保留正文、仅追加LF前缀恢复，diff仅14行新增。
+- 新worktree --no-checkout后稀疏规则未填入空索引；在三个刚创建的指定分支执行read-tree -mu HEAD完成检出，三者status均0，无原件目录复制。
