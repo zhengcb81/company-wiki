@@ -2,7 +2,7 @@
 
 PLAN_ID: reception
 Owner: ROOT
-状态：A/B 工程接收完成；C 正常并主线、推送与精确 CI 收尾中。
+状态：旧三包模块接收、主线发布与精确 CI 完成；原设计的生产摘要/真实业务 C 节点未完成。
 
 ## 目标与边界
 
@@ -15,7 +15,7 @@ Owner: ROOT
 1. [complete] 核最新提交、祖先、范围；主线 review/架构改造保留，旧三包及 ROOT 最新分支已整合。
 2. [complete] TDD 修 profile / 子正文绑定、上下文不动点、最终预算裁剪、真实证据评测。独审追加反例修复完成。
 3. [complete] 集中 B：491 PASS / 18 real_data deselected，13.76 秒；四份真实原件 11 PASS / 0 FAIL，14.72 秒。追加最终切片→独立 oracle 接口 5 PASS；benchmark 147 PASS / 7 real_data deselected。两轮独立核心审查无剩余阻断。
-4. [in_progress] 正常合主线、推远端、精确 CI 留证；更新母计划，回收 ROOT 自有临时接收工作树。
+4. [complete] 正常合主线、推远端 `9e9907cd7c013ecf0a6787dd0f591ba242eb223a`，精确 CI success；母计划已同步，回收 ROOT 自有三个临时接收树。
 
 ## 统一验收记录
 

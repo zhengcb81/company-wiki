@@ -3,7 +3,7 @@
   "date": "2026-10-13",
   "engineering": "ACCEPTED",
   "production_summary_switch": false,
-  "publication": "pending",
+  "publication": "MAIN_PUSHED_CI_GREEN",
   "root_code_head": "8a5721db",
   "tests": {
     "combined_offline": {
@@ -25,6 +25,16 @@
       "passed": 147,
       "real_deselected": 7,
       "seconds": 6.11
+    },
+    "normal_pre_push": {
+      "passed": 4064,
+      "skipped": 11,
+      "seconds": 350.43
+    },
+    "earlier_full_push_after_atomic": {
+      "passed": 4060,
+      "skipped": 11,
+      "seconds": 358.62
     }
   },
   "source_config_preservation": {
@@ -32,7 +42,8 @@
     "configs": 6,
     "sha_mtime_unchanged": true,
     "preexisting_sentinel_unchanged": true,
-    "owned_tmp_removed": true
+    "owned_tmp_removed": true,
+    "config_scope": "six isolated ROOT checkout config files"
   },
   "network_calls": 0,
   "model_calls": 0,
@@ -49,5 +60,98 @@
     "production model consumption",
     "real G2/G4/G5",
     "CID/line coordinates where unavailable"
-  ]
+  ],
+  "published_code_commit": "9e9907cd7c013ecf0a6787dd0f591ba242eb223a",
+  "ci": {
+    "id": 38462668903,
+    "head_sha": "9e9907cd7c013ecf0a6787dd0f591ba242eb223a",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38462668903",
+    "created_at": "2026-10-13T20:25:17Z",
+    "updated_at": "2026-10-13T20:27:49Z"
+  },
+  "portable_boundary_and_test_selection": {
+    "failed_ci": {
+      "id": 38460502816,
+      "head_sha": "07fff0a3610cb010d614ec05b1a8757417e94316",
+      "conclusion": "failure",
+      "failed_cases": 7,
+      "cause": "test wrongly rejects any POSIX separator, including legitimate du-route/1"
+    },
+    "same_test_reproduced_posix": {
+      "red": 7,
+      "marker": "/"
+    },
+    "profile_final": {
+      "passed": 180,
+      "seconds": 2.58
+    },
+    "independent_route_cases": {
+      "passed": 14,
+      "leakage_mutations_detected": 35,
+      "total_mutations": 35
+    },
+    "nested_selector": {
+      "red": 3,
+      "final_passed": 64,
+      "seconds": 2.38,
+      "reason": "recognise tests at any depth by filename; do not treat test_* directories as files"
+    }
+  },
+  "usage_scope": "DU document-processing batch; excludes Git/CI publication and loopback test HTTP",
+  "atomic_replacement_fix": {
+    "first_push_blocked": {
+      "failed": 1,
+      "passed": 4053,
+      "skipped": 11,
+      "seconds": 248.22
+    },
+    "cause": "Windows simultaneous same-target rename: errno13 / winerror5, distinct closed stages",
+    "deterministic_red": {
+      "failed": 4,
+      "passed": 1
+    },
+    "targeted_final": {
+      "passed": 15,
+      "seconds": 2.2
+    },
+    "independent_before": {
+      "cases": 1000,
+      "contention_failures": 582
+    },
+    "independent_after": {
+      "cases": 500,
+      "writers": 1000,
+      "first_attempt": 724,
+      "retry_success": 276,
+      "failed": 0,
+      "tmp_restored": true
+    },
+    "bound": "4 attempts / 35ms total backoff / winerror5,32,33 only; permanent failures still fail"
+  },
+  "root_worktrees_removed": [
+    {
+      "name": "profiles-fix",
+      "head": "7fa6dee2283f0be4edeab607c0a1ea63ae4e8f0d",
+      "bytes": 31112037,
+      "clean": true,
+      "merged": true
+    },
+    {
+      "name": "benchmark-fix",
+      "head": "ead4aab67cdab2d190dc478b698445f17fb86e67",
+      "bytes": 22538279,
+      "clean": true,
+      "merged": true
+    },
+    {
+      "name": "reception",
+      "head": "6f5cdb214a5d1c695fdd494390894962852d8347",
+      "bytes": 23461070,
+      "clean": true,
+      "merged": true
+    }
+  ],
+  "checkout_bytes_released": 77111386
 }

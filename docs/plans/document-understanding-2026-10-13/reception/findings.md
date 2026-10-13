@@ -1,3 +1,7 @@
+## Windows 共享文件提交根因
+
+独占 staging 只能防临时名冲突，不能保证 Windows 两个同目标 rename 都首次成功。无读者/文件均已关闭也有 winerror5；共享原语做极短有界退避，比加全局锁或取消并发测试更符合层级职责。永久错误保持失败，原件不改；测试 barrier 只同步每个stage首尝试，不能让 retry 等待已退出的另一writer。
+
 # 接收发现
 
 本轮沿 review/report 共用根因整改。两叶修复与 ROOT 代码完整并入接收树；benchmark 作者 handoff 过时，按真实 Git 最新 b891cf74 接收。

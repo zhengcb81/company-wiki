@@ -1,3 +1,7 @@
+## 当前发布状态 — 2026-10-13
+
+旧 DU 三包接收与 ROOT 共同修复已并 master、推送 `9e9907cd7c013ecf0a6787dd0f591ba242eb223a`，[精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/38462668903) success；[接收结果](reception/acceptance.md) / [下一步](reception/task_plan.md)。首次 push 抓到共享 Windows 同目标 rename 争用，已 TDD 根治并实际1000写入零失败，未跳过测试。新 DU2 三卡仍独立施工，生产模型摘要与真实业务漏读/G2/G4/G5保持开放。下方“发布中”是历史。
+
 ## 2026-10-13 旧三 DU 包 ROOT 接收
 
 最新 profile e74b9dcb / structure f8f456a3 / benchmark b891cf74 / ROOT 4b6a8599 全部整合；接收修复分别 7fa6dee2 / ead4aab6，ROOT e9af9ae9 / 1c5784cb / observer 8a5721db。一次联合491 PASS / 四原件11 PASS，追加 seam5 PASS，独立最终审查通过。来源/配置/测试恢复通过，0模型0费用。

@@ -1,3 +1,7 @@
+## 2026-10-13 旧 DU 模块主线发布已完成
+
+`9e9907cd7c013ecf0a6787dd0f591ba242eb223a` 已并 master/推远端，[精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/38462668903)绿；[当前接收和后续顺序](../document-understanding-2026-10-13/reception/task_plan.md)。共享策略/最终依赖/真实oracle以及Windows并发提交根因已修；工程491项、四原件11项与独审通过，新 DU2 独占目录零写。生产模型摘要、真实业务召回和G2/G4/G5未完成，不把本次并线当母目标完工。下一步ROOT接DU2三包→布局/业务价值预算→实际配置摘要和定位回开→真实跨市场研究节点。下方“发布中”是历史记录。
+
 ## 2026-10-13 当前入口：旧 DU 三包接收完成、主线发布中
 
 旧 DU-PROFILES / STRUCTURE / BENCH 最新分支及 ROOT 整合已并本地主线；[独立接收 PWF](../document-understanding-2026-10-13/reception/task_plan.md) 汇总共同修复与限制。一次集中491 PASS，四原件11 PASS，最终 oracle seam5 PASS，独立核心审查无并线阻断；原件/配置/测试目录恢复，0模型0费用。正常远端推送与精确CI收尾。

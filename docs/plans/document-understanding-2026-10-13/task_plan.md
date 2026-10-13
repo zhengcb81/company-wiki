@@ -1,3 +1,7 @@
+## 当前发布状态 — 2026-10-13
+
+旧 DU 三包接收与 ROOT 共同修复已并 master、推送 `9e9907cd7c013ecf0a6787dd0f591ba242eb223a`，[精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/38462668903) success；[接收结果](reception/acceptance.md) / [下一步](reception/task_plan.md)。首次 push 抓到共享 Windows 同目标 rename 争用，已 TDD 根治并实际1000写入零失败，未跳过测试。新 DU2 三卡仍独立施工，生产模型摘要与真实业务漏读/G2/G4/G5保持开放。下方“发布中”是历史。
+
 ## 当前执行入口 — 2026-10-13 旧三包接收
 
 [reception/task_plan](reception/task_plan.md) 优先于下方历史阶段表。旧 DU 三包/ROOT 最新成果及两条排他接收修复已整合；491 项集中与 11 项四原件回放通过，最终 oracle seam 5 PASS，独审无剩余并线阻断。正常并线/推送收尾。生产模型摘要与实际业务漏读不当完成；新 DU2 三卡仍正在施工。
