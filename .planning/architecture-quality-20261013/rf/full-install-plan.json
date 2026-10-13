@@ -1,0 +1,1481 @@
+{
+  "canonical": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "schema": "rf-install-plan/1",
+  "selected": [
+    ".gitignore",
+    "agents/openai.yaml",
+    "CHANGELOG.md",
+    "config/company_wiki.json",
+    "config/filing_fetch.json",
+    "references/accounting-boundaries.md",
+    "references/backtesting.md",
+    "references/buy-side-methodology.md",
+    "references/compliance-contract.md",
+    "references/data-governance.md",
+    "references/dated-contribution.md",
+    "references/economic-support-diagnostics.md",
+    "references/evidence-role-calibration.md",
+    "references/extended-models.md",
+    "references/growth-driver-tree.md",
+    "references/industry-lifecycle-routing.md",
+    "references/input-construction.md",
+    "references/input-schema.md",
+    "references/m3-period-evidence.md",
+    "references/management-targets.md",
+    "references/model-library.md",
+    "references/output-schema.md",
+    "references/research-coverage.md",
+    "references/resource-business-guidance.md",
+    "references/schema-migration-3.4-to-3.5.md",
+    "references/schema-migration-3.5-to-3.6.md",
+    "references/schema-migration-3.6-to-3.7.md",
+    "references/target-measurement-comparison.md",
+    "scripts/__init__.py",
+    "scripts/analysis/__init__.py",
+    "scripts/analysis/confidence.py",
+    "scripts/analysis/sensitivity.py",
+    "scripts/asset_ownership.py",
+    "scripts/commercial_terms.py",
+    "scripts/company_wiki_narrative_contracts.py",
+    "scripts/company_wiki_narrative_posix.py",
+    "scripts/company_wiki_narrative_process.py",
+    "scripts/company_wiki_narrative_reader.py",
+    "scripts/company_wiki_narrative_tree.py",
+    "scripts/company_wiki_source.py",
+    "scripts/company_wiki_source_reader_v2.py",
+    "scripts/company_wiki_source_v2.py",
+    "scripts/confidence_policy.py",
+    "scripts/contracts/__init__.py",
+    "scripts/contracts/annual_consumption.py",
+    "scripts/contracts/constants.py",
+    "scripts/contracts/document.py",
+    "scripts/contracts/evidence.py",
+    "scripts/contracts/period_flow.py",
+    "scripts/contracts/recognition.py",
+    "scripts/contracts/source_clock.py",
+    "scripts/filing_fetch_client.py",
+    "scripts/filing_upstream_cause.py",
+    "scripts/fix_hashes.py",
+    "scripts/forecast/calc.py",
+    "scripts/forecast/dependencies.py",
+    "scripts/forecast/segments.py",
+    "scripts/generate_input_template.py",
+    "scripts/installation_manifest.py",
+    "scripts/internal_flow.py",
+    "scripts/lint_input.py",
+    "scripts/mine_year_operation.py",
+    "scripts/mixed_recognition.py",
+    "scripts/model_extensions.py",
+    "scripts/model_registry.py",
+    "scripts/narrative_source_preparation.py",
+    "scripts/processed_artifact_canary.py",
+    "scripts/publication_registry.py",
+    "scripts/reconciliation.py",
+    "scripts/research/__init__.py",
+    "scripts/research/communication_scope.py",
+    "scripts/research/coverage.py",
+    "scripts/research/drivers.py",
+    "scripts/research/evidence_roles.py",
+    "scripts/research/input_evidence.py",
+    "scripts/research/input_quantities.py",
+    "scripts/research/input_targets.py",
+    "scripts/research/native_dependencies.py",
+    "scripts/research/target_measurement.py",
+    "scripts/research/targets.py",
+    "scripts/research/timing_bridge.py",
+    "scripts/research_support_diagnostics.py",
+    "scripts/revenue_backtest.py",
+    "scripts/revenue_constraints.py",
+    "scripts/revenue_core.py",
+    "scripts/revenue_forecast.py",
+    "scripts/revenue_publication.py",
+    "scripts/revenue_report.py",
+    "scripts/rolling_backtest.py",
+    "scripts/schema_compatibility.py",
+    "scripts/schema_fields.py",
+    "scripts/schema_optin.py",
+    "scripts/source_narrative_context.py",
+    "scripts/source_period_semantics.py",
+    "scripts/source_preparation.py",
+    "scripts/trust_anchor.py",
+    "SKILL.md"
+  ],
+  "targets": [
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills",
+      "files": [
+        {
+          "before_sha256": "41763ff5da36b80321f8c4204494b24d5b4d2856e1c255f0cdcf1f5808775397",
+          "operation": "unchanged",
+          "path": ".gitignore",
+          "size": 1840,
+          "source_sha256": "41763ff5da36b80321f8c4204494b24d5b4d2856e1c255f0cdcf1f5808775397"
+        },
+        {
+          "before_sha256": "41b5ba57fe21d94167281a786dad97c55396877b1669dfadabcfabd617600c8b",
+          "operation": "unchanged",
+          "path": "agents/openai.yaml",
+          "size": 331,
+          "source_sha256": "41b5ba57fe21d94167281a786dad97c55396877b1669dfadabcfabd617600c8b"
+        },
+        {
+          "before_sha256": "96bd2e8abcc5e202c87c968e5ef3046c329d8f4e20804db5889baaae668701b7",
+          "operation": "unchanged",
+          "path": "CHANGELOG.md",
+          "size": 31353,
+          "source_sha256": "96bd2e8abcc5e202c87c968e5ef3046c329d8f4e20804db5889baaae668701b7"
+        },
+        {
+          "before_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+          "operation": "unchanged",
+          "path": "config/company_wiki.json",
+          "size": 1443,
+          "source_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9"
+        },
+        {
+          "before_sha256": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+          "operation": "unchanged",
+          "path": "config/filing_fetch.json",
+          "size": 94,
+          "source_sha256": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7"
+        },
+        {
+          "before_sha256": "be72df88166b76558e997a9f42138f796fb953933dc4e7e38536622940967f60",
+          "operation": "unchanged",
+          "path": "references/accounting-boundaries.md",
+          "size": 2570,
+          "source_sha256": "be72df88166b76558e997a9f42138f796fb953933dc4e7e38536622940967f60"
+        },
+        {
+          "before_sha256": "84336ecb1373baecf079949155f891121e70612ad150811532c129c556055196",
+          "operation": "unchanged",
+          "path": "references/backtesting.md",
+          "size": 10191,
+          "source_sha256": "84336ecb1373baecf079949155f891121e70612ad150811532c129c556055196"
+        },
+        {
+          "before_sha256": "a55381c9519f13fbddd70d21d16d01a1229155d90a6a128fe9529d67ff80f89f",
+          "operation": "unchanged",
+          "path": "references/buy-side-methodology.md",
+          "size": 12669,
+          "source_sha256": "a55381c9519f13fbddd70d21d16d01a1229155d90a6a128fe9529d67ff80f89f"
+        },
+        {
+          "before_sha256": "d4509a54459c1471d4523e359eddb74147c84ce8d20138abd8b1107b3e8c7b18",
+          "operation": "unchanged",
+          "path": "references/compliance-contract.md",
+          "size": 7697,
+          "source_sha256": "d4509a54459c1471d4523e359eddb74147c84ce8d20138abd8b1107b3e8c7b18"
+        },
+        {
+          "before_sha256": "f2b22f786f8b0289ff7f1d1f075e67aef6315f27f1ceebdca224ea8f5ff37920",
+          "operation": "unchanged",
+          "path": "references/data-governance.md",
+          "size": 7020,
+          "source_sha256": "f2b22f786f8b0289ff7f1d1f075e67aef6315f27f1ceebdca224ea8f5ff37920"
+        },
+        {
+          "before_sha256": "68cd514189224f3335aca54f29fc8f198f8caba1ad5c3f255ab12da18688a2b0",
+          "operation": "unchanged",
+          "path": "references/dated-contribution.md",
+          "size": 10154,
+          "source_sha256": "68cd514189224f3335aca54f29fc8f198f8caba1ad5c3f255ab12da18688a2b0"
+        },
+        {
+          "before_sha256": "8dd299b5eedb2bc19598b0f38c6ad12f9ad33973b7586bf58ae782bf7241afc0",
+          "operation": "unchanged",
+          "path": "references/economic-support-diagnostics.md",
+          "size": 3880,
+          "source_sha256": "8dd299b5eedb2bc19598b0f38c6ad12f9ad33973b7586bf58ae782bf7241afc0"
+        },
+        {
+          "before_sha256": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21",
+          "operation": "unchanged",
+          "path": "references/evidence-role-calibration.md",
+          "size": 12765,
+          "source_sha256": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21"
+        },
+        {
+          "before_sha256": "831cf530a4d3260c25fe5d251f9621afe88b97708575f151bf922016e377c499",
+          "operation": "unchanged",
+          "path": "references/extended-models.md",
+          "size": 16741,
+          "source_sha256": "831cf530a4d3260c25fe5d251f9621afe88b97708575f151bf922016e377c499"
+        },
+        {
+          "before_sha256": "ce3b57f69dfe269f868187adbf24b1579d5e822dc88cabaf0378c16e8f32c621",
+          "operation": "unchanged",
+          "path": "references/growth-driver-tree.md",
+          "size": 7337,
+          "source_sha256": "ce3b57f69dfe269f868187adbf24b1579d5e822dc88cabaf0378c16e8f32c621"
+        },
+        {
+          "before_sha256": "826953f8adbb26c2ebf71253711fa6d73c3958e55cd7d01f4416ca8eb2a06b5b",
+          "operation": "unchanged",
+          "path": "references/industry-lifecycle-routing.md",
+          "size": 10202,
+          "source_sha256": "826953f8adbb26c2ebf71253711fa6d73c3958e55cd7d01f4416ca8eb2a06b5b"
+        },
+        {
+          "before_sha256": "ca1fb512031a61c8614245003f32cdf5c6ab07eed5ee4633ff5ba97c4802499f",
+          "operation": "unchanged",
+          "path": "references/input-construction.md",
+          "size": 15924,
+          "source_sha256": "ca1fb512031a61c8614245003f32cdf5c6ab07eed5ee4633ff5ba97c4802499f"
+        },
+        {
+          "before_sha256": "24394133fdd4d7f29f2ec1e84e2395922475254905769e1b0f10ddfc93fb3744",
+          "operation": "unchanged",
+          "path": "references/input-schema.md",
+          "size": 19274,
+          "source_sha256": "24394133fdd4d7f29f2ec1e84e2395922475254905769e1b0f10ddfc93fb3744"
+        },
+        {
+          "before_sha256": "234aad0dd46630ed70f25a926b021ba0881a14c78a5b9a3bd45f9545d2b423f8",
+          "operation": "unchanged",
+          "path": "references/m3-period-evidence.md",
+          "size": 5045,
+          "source_sha256": "234aad0dd46630ed70f25a926b021ba0881a14c78a5b9a3bd45f9545d2b423f8"
+        },
+        {
+          "before_sha256": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+          "operation": "unchanged",
+          "path": "references/management-targets.md",
+          "size": 7776,
+          "source_sha256": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15"
+        },
+        {
+          "before_sha256": "9b335522a5e956424260cca379e640eb484d52d0688cf3d44486d06ff4f1e921",
+          "operation": "unchanged",
+          "path": "references/model-library.md",
+          "size": 14308,
+          "source_sha256": "9b335522a5e956424260cca379e640eb484d52d0688cf3d44486d06ff4f1e921"
+        },
+        {
+          "before_sha256": "de434ae4d10454fba6d4235bf78762e23d67bbed13dcaf8d66b5e26d383412b6",
+          "operation": "unchanged",
+          "path": "references/output-schema.md",
+          "size": 6795,
+          "source_sha256": "de434ae4d10454fba6d4235bf78762e23d67bbed13dcaf8d66b5e26d383412b6"
+        },
+        {
+          "before_sha256": "269d9a30ca1e24ae1ff277f49da06d92fa6b7fafc4e40213239051865fec97e4",
+          "operation": "unchanged",
+          "path": "references/research-coverage.md",
+          "size": 33066,
+          "source_sha256": "269d9a30ca1e24ae1ff277f49da06d92fa6b7fafc4e40213239051865fec97e4"
+        },
+        {
+          "before_sha256": "93ebdadcc77a7f1fcc60dd64e7ece640b238b53e28fa93c793d84eddba7f27ba",
+          "operation": "unchanged",
+          "path": "references/resource-business-guidance.md",
+          "size": 6263,
+          "source_sha256": "93ebdadcc77a7f1fcc60dd64e7ece640b238b53e28fa93c793d84eddba7f27ba"
+        },
+        {
+          "before_sha256": "efee17cbaf33c688b23d2d32aca32d918c8e0a7e6dc734c4e59cc338b5408c04",
+          "operation": "unchanged",
+          "path": "references/schema-migration-3.4-to-3.5.md",
+          "size": 2927,
+          "source_sha256": "efee17cbaf33c688b23d2d32aca32d918c8e0a7e6dc734c4e59cc338b5408c04"
+        },
+        {
+          "before_sha256": "e7b1a589de8dce4bb319da8f62f6e903d31ade44c02da954eee968cf37701cbe",
+          "operation": "unchanged",
+          "path": "references/schema-migration-3.5-to-3.6.md",
+          "size": 2177,
+          "source_sha256": "e7b1a589de8dce4bb319da8f62f6e903d31ade44c02da954eee968cf37701cbe"
+        },
+        {
+          "before_sha256": "a292acf48db79f96071a81f286fb56d0abad35752c222499d649a0baabd1ad1d",
+          "operation": "unchanged",
+          "path": "references/schema-migration-3.6-to-3.7.md",
+          "size": 2149,
+          "source_sha256": "a292acf48db79f96071a81f286fb56d0abad35752c222499d649a0baabd1ad1d"
+        },
+        {
+          "before_sha256": "2a41d45f566f7a30508bf9bbf718f54b2182d426ecb33cf7d9b888a98dcd5464",
+          "operation": "unchanged",
+          "path": "references/target-measurement-comparison.md",
+          "size": 5537,
+          "source_sha256": "2a41d45f566f7a30508bf9bbf718f54b2182d426ecb33cf7d9b888a98dcd5464"
+        },
+        {
+          "before_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+          "operation": "unchanged",
+          "path": "scripts/__init__.py",
+          "size": 35,
+          "source_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459"
+        },
+        {
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "operation": "unchanged",
+          "path": "scripts/analysis/__init__.py",
+          "size": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "before_sha256": "0413b4d07ed19b976820d358c80d86f2780e9fe38113138ceb43ede5119cf05f",
+          "operation": "replace",
+          "path": "scripts/analysis/confidence.py",
+          "size": 14213,
+          "source_sha256": "8c1e6aca45b8698af0b734e833690a469bd56dc702724c41529dc8b68dae332b"
+        },
+        {
+          "before_sha256": "0b9f5f15bc14ac5a1ec8c58396ebb1379f8481d2a1e7d7ce02141bae7971b2c0",
+          "operation": "unchanged",
+          "path": "scripts/analysis/sensitivity.py",
+          "size": 13266,
+          "source_sha256": "0b9f5f15bc14ac5a1ec8c58396ebb1379f8481d2a1e7d7ce02141bae7971b2c0"
+        },
+        {
+          "before_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+          "operation": "unchanged",
+          "path": "scripts/asset_ownership.py",
+          "size": 10622,
+          "source_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0"
+        },
+        {
+          "before_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+          "operation": "unchanged",
+          "path": "scripts/commercial_terms.py",
+          "size": 4795,
+          "source_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005"
+        },
+        {
+          "before_sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_narrative_contracts.py",
+          "size": 41228,
+          "source_sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82"
+        },
+        {
+          "before_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_narrative_posix.py",
+          "size": 2824,
+          "source_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852"
+        },
+        {
+          "before_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_narrative_process.py",
+          "size": 8500,
+          "source_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d"
+        },
+        {
+          "before_sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_narrative_reader.py",
+          "size": 3382,
+          "source_sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5"
+        },
+        {
+          "before_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_narrative_tree.py",
+          "size": 6960,
+          "source_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba"
+        },
+        {
+          "before_sha256": "e6e1df861ea25d2a23ada3e7ca9e5c1c68fdfd25cea620bdd9354d553d3f1111",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_source.py",
+          "size": 20953,
+          "source_sha256": "e6e1df861ea25d2a23ada3e7ca9e5c1c68fdfd25cea620bdd9354d553d3f1111"
+        },
+        {
+          "before_sha256": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_source_reader_v2.py",
+          "size": 17186,
+          "source_sha256": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025"
+        },
+        {
+          "before_sha256": "f78940d7169b3d572aa29bc731f9efc0f0ac75ee6356b60f5aa0705cbdc9ce58",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_source_v2.py",
+          "size": 16571,
+          "source_sha256": "f78940d7169b3d572aa29bc731f9efc0f0ac75ee6356b60f5aa0705cbdc9ce58"
+        },
+        {
+          "before_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+          "operation": "unchanged",
+          "path": "scripts/confidence_policy.py",
+          "size": 7843,
+          "source_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f"
+        },
+        {
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "operation": "unchanged",
+          "path": "scripts/contracts/__init__.py",
+          "size": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "before_sha256": "7bba88869eb3edaae9a668d55d5287321c01c0cb259dafa189bdde548b3aa33a",
+          "operation": "unchanged",
+          "path": "scripts/contracts/annual_consumption.py",
+          "size": 7537,
+          "source_sha256": "7bba88869eb3edaae9a668d55d5287321c01c0cb259dafa189bdde548b3aa33a"
+        },
+        {
+          "before_sha256": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e",
+          "operation": "unchanged",
+          "path": "scripts/contracts/constants.py",
+          "size": 8718,
+          "source_sha256": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e"
+        },
+        {
+          "before_sha256": "8c26881c9d1d727029ea027069f94cd8d98c4687ea82ed48a41b50b5c2831dbd",
+          "operation": "unchanged",
+          "path": "scripts/contracts/document.py",
+          "size": 52038,
+          "source_sha256": "8c26881c9d1d727029ea027069f94cd8d98c4687ea82ed48a41b50b5c2831dbd"
+        },
+        {
+          "before_sha256": "cf200313135108d23ed803f6089bc2be7778a3a3ff4c91e892f461abd8bbaa6a",
+          "operation": "replace",
+          "path": "scripts/contracts/evidence.py",
+          "size": 16801,
+          "source_sha256": "a5f086f7be822acc01f82c53ecd05985cbeb65e095480572e1b059b4d23f4964"
+        },
+        {
+          "before_sha256": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf",
+          "operation": "unchanged",
+          "path": "scripts/contracts/period_flow.py",
+          "size": 26965,
+          "source_sha256": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf"
+        },
+        {
+          "before_sha256": "551ddb361d28ef8466051fa848d25a3bcc954fb998ef8e3c474c7140e91e0375",
+          "operation": "unchanged",
+          "path": "scripts/contracts/recognition.py",
+          "size": 4559,
+          "source_sha256": "551ddb361d28ef8466051fa848d25a3bcc954fb998ef8e3c474c7140e91e0375"
+        },
+        {
+          "before_sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b",
+          "operation": "unchanged",
+          "path": "scripts/contracts/source_clock.py",
+          "size": 9677,
+          "source_sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b"
+        },
+        {
+          "before_sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757",
+          "operation": "unchanged",
+          "path": "scripts/filing_fetch_client.py",
+          "size": 19426,
+          "source_sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757"
+        },
+        {
+          "before_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95",
+          "operation": "unchanged",
+          "path": "scripts/filing_upstream_cause.py",
+          "size": 16962,
+          "source_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95"
+        },
+        {
+          "before_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+          "operation": "unchanged",
+          "path": "scripts/fix_hashes.py",
+          "size": 8484,
+          "source_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd"
+        },
+        {
+          "before_sha256": "cac7c1fb3fd4a4b17701c691e0f621a5256048a63c90a9a25e882d4ee24d9faf",
+          "operation": "replace",
+          "path": "scripts/forecast/calc.py",
+          "size": 14166,
+          "source_sha256": "c5a86d843b0679a5292fa1e3ea27ebd2e628d9d19067047a228117e0e7b954a3"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/forecast/dependencies.py",
+          "size": 14498,
+          "source_sha256": "98bfda50e29b3a694f9e76c71ea49782c973afaea39586223915aa04399d6d14"
+        },
+        {
+          "before_sha256": "15ee89945da4ee05276af7393e4924ae39e1eeeccdc6d3d9659ebc577b355190",
+          "operation": "replace",
+          "path": "scripts/forecast/segments.py",
+          "size": 25486,
+          "source_sha256": "4039d0923f4d34251d5466dfe56b6599cbc54786a55a349599acd10061694949"
+        },
+        {
+          "before_sha256": "5fe3fc24c2a68069a6ea7827a6b0c93bec00d070fda7140f4e34c105c8da2c70",
+          "operation": "unchanged",
+          "path": "scripts/generate_input_template.py",
+          "size": 15970,
+          "source_sha256": "5fe3fc24c2a68069a6ea7827a6b0c93bec00d070fda7140f4e34c105c8da2c70"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/installation_manifest.py",
+          "size": 2038,
+          "source_sha256": "923b40645ca9d5fe06c9e713e4542b2028b0adde448b83db75bcd8260a05a492"
+        },
+        {
+          "before_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+          "operation": "unchanged",
+          "path": "scripts/internal_flow.py",
+          "size": 4841,
+          "source_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355"
+        },
+        {
+          "before_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+          "operation": "unchanged",
+          "path": "scripts/lint_input.py",
+          "size": 21589,
+          "source_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2"
+        },
+        {
+          "before_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+          "operation": "unchanged",
+          "path": "scripts/mine_year_operation.py",
+          "size": 4670,
+          "source_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986"
+        },
+        {
+          "before_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+          "operation": "unchanged",
+          "path": "scripts/mixed_recognition.py",
+          "size": 4034,
+          "source_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232"
+        },
+        {
+          "before_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+          "operation": "unchanged",
+          "path": "scripts/model_extensions.py",
+          "size": 16009,
+          "source_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92"
+        },
+        {
+          "before_sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+          "operation": "replace",
+          "path": "scripts/model_registry.py",
+          "size": 30858,
+          "source_sha256": "39da2c1201e8cfe66f8db6c4e378d44771763fd670ee2811c42136fddf427f38"
+        },
+        {
+          "before_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+          "operation": "unchanged",
+          "path": "scripts/narrative_source_preparation.py",
+          "size": 2400,
+          "source_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72"
+        },
+        {
+          "before_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+          "operation": "unchanged",
+          "path": "scripts/processed_artifact_canary.py",
+          "size": 4639,
+          "source_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc"
+        },
+        {
+          "before_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+          "operation": "unchanged",
+          "path": "scripts/publication_registry.py",
+          "size": 10936,
+          "source_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68"
+        },
+        {
+          "before_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+          "operation": "unchanged",
+          "path": "scripts/reconciliation.py",
+          "size": 4224,
+          "source_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5"
+        },
+        {
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "operation": "unchanged",
+          "path": "scripts/research/__init__.py",
+          "size": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "before_sha256": "96e4b63a3c90825241c395281ff5f3b4cf8496290a63757f150cb74244140a8e",
+          "operation": "unchanged",
+          "path": "scripts/research/communication_scope.py",
+          "size": 7654,
+          "source_sha256": "96e4b63a3c90825241c395281ff5f3b4cf8496290a63757f150cb74244140a8e"
+        },
+        {
+          "before_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+          "operation": "unchanged",
+          "path": "scripts/research/coverage.py",
+          "size": 5801,
+          "source_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470"
+        },
+        {
+          "before_sha256": "964fa1dba1429dd11321d52b6389a95803a09454f4ddcfa74821f15cdedb3456",
+          "operation": "replace",
+          "path": "scripts/research/drivers.py",
+          "size": 25818,
+          "source_sha256": "5ba825340431fc6ebf1f38e8facc1b23ae4ced9222312ccd63fbfe9199a9dd1f"
+        },
+        {
+          "before_sha256": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761",
+          "operation": "unchanged",
+          "path": "scripts/research/evidence_roles.py",
+          "size": 16538,
+          "source_sha256": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761"
+        },
+        {
+          "before_sha256": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "operation": "unchanged",
+          "path": "scripts/research/input_evidence.py",
+          "size": 14093,
+          "source_sha256": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865"
+        },
+        {
+          "before_sha256": "0217ce20bd3456122349d59dd49f4b471c4e6fc844878e561141d95a28d11f1a",
+          "operation": "unchanged",
+          "path": "scripts/research/input_quantities.py",
+          "size": 9970,
+          "source_sha256": "0217ce20bd3456122349d59dd49f4b471c4e6fc844878e561141d95a28d11f1a"
+        },
+        {
+          "before_sha256": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+          "operation": "unchanged",
+          "path": "scripts/research/input_targets.py",
+          "size": 14221,
+          "source_sha256": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f"
+        },
+        {
+          "before_sha256": "9dad832d2b6a8cbe3f2faf6e2e9f27b988319ae2d87f212fde26a6863a327dec",
+          "operation": "replace",
+          "path": "scripts/research/native_dependencies.py",
+          "size": 5588,
+          "source_sha256": "7bed36e63dfe61ce96dabbc1a675a5665a2dedea15964fa95aedf816998cfb83"
+        },
+        {
+          "before_sha256": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+          "operation": "unchanged",
+          "path": "scripts/research/target_measurement.py",
+          "size": 12423,
+          "source_sha256": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e"
+        },
+        {
+          "before_sha256": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+          "operation": "unchanged",
+          "path": "scripts/research/targets.py",
+          "size": 36535,
+          "source_sha256": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21"
+        },
+        {
+          "before_sha256": "1df60466342836611709c2e4d6d158dcf6fe8bc90301308e263c24908d4b186d",
+          "operation": "unchanged",
+          "path": "scripts/research/timing_bridge.py",
+          "size": 5578,
+          "source_sha256": "1df60466342836611709c2e4d6d158dcf6fe8bc90301308e263c24908d4b186d"
+        },
+        {
+          "before_sha256": "8ce8390fc201b9fedb081be7074a4f6ae236ef41d14bff59c4eaeb6dbd14e688",
+          "operation": "replace",
+          "path": "scripts/research_support_diagnostics.py",
+          "size": 6869,
+          "source_sha256": "397f40e59249e93e372d191e85a6ee2fbc68b266ff7b399972fbe000b955f085"
+        },
+        {
+          "before_sha256": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4",
+          "operation": "unchanged",
+          "path": "scripts/revenue_backtest.py",
+          "size": 30110,
+          "source_sha256": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4"
+        },
+        {
+          "before_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+          "operation": "unchanged",
+          "path": "scripts/revenue_constraints.py",
+          "size": 15064,
+          "source_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374"
+        },
+        {
+          "before_sha256": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c",
+          "operation": "unchanged",
+          "path": "scripts/revenue_core.py",
+          "size": 26101,
+          "source_sha256": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c"
+        },
+        {
+          "before_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+          "operation": "replace",
+          "path": "scripts/revenue_forecast.py",
+          "size": 4182,
+          "source_sha256": "1759dd25c094ed0c5be2d108b53de92ea22e6475b6fbad78573939713f455378"
+        },
+        {
+          "before_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+          "operation": "unchanged",
+          "path": "scripts/revenue_publication.py",
+          "size": 24917,
+          "source_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0"
+        },
+        {
+          "before_sha256": "7f12259cedfb232ea05118d3d29a3c75ba49732c1b9cc0fbaeed76fd50a3964d",
+          "operation": "replace",
+          "path": "scripts/revenue_report.py",
+          "size": 83024,
+          "source_sha256": "bc282e9c4ff7911820d322902d0c644999c1576863cb8c815397a9f5be667664"
+        },
+        {
+          "before_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+          "operation": "unchanged",
+          "path": "scripts/rolling_backtest.py",
+          "size": 8900,
+          "source_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b"
+        },
+        {
+          "before_sha256": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5",
+          "operation": "unchanged",
+          "path": "scripts/schema_compatibility.py",
+          "size": 5299,
+          "source_sha256": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5"
+        },
+        {
+          "before_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+          "operation": "unchanged",
+          "path": "scripts/schema_fields.py",
+          "size": 1526,
+          "source_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c"
+        },
+        {
+          "before_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+          "operation": "unchanged",
+          "path": "scripts/schema_optin.py",
+          "size": 2263,
+          "source_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3"
+        },
+        {
+          "before_sha256": "3bdb21c4b08e85f03ff190a1d43945a70ac272afe1000a5748d17d7f2b4f0223",
+          "operation": "replace",
+          "path": "scripts/source_narrative_context.py",
+          "size": 7248,
+          "source_sha256": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759"
+        },
+        {
+          "before_sha256": "d1c155189ccd631037e85f2f2005a8cf04cbe24c20497ede157a0d33e3d4c1ff",
+          "operation": "unchanged",
+          "path": "scripts/source_period_semantics.py",
+          "size": 423,
+          "source_sha256": "d1c155189ccd631037e85f2f2005a8cf04cbe24c20497ede157a0d33e3d4c1ff"
+        },
+        {
+          "before_sha256": "ddb6b7224e1cf5141c04f6395f86390bbb898a52739de9763da6917e0dcfdab2",
+          "operation": "replace",
+          "path": "scripts/source_preparation.py",
+          "size": 25553,
+          "source_sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5"
+        },
+        {
+          "before_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+          "operation": "unchanged",
+          "path": "scripts/trust_anchor.py",
+          "size": 1634,
+          "source_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c"
+        },
+        {
+          "before_sha256": "eb0182a2d659338e967d16ee9e6ec8159e598cfc7fbb3e1fc895519cb325e4a4",
+          "operation": "unchanged",
+          "path": "SKILL.md",
+          "size": 36352,
+          "source_sha256": "eb0182a2d659338e967d16ee9e6ec8159e598cfc7fbb3e1fc895519cb325e4a4"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 14,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    },
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills",
+      "files": [
+        {
+          "before_sha256": "41763ff5da36b80321f8c4204494b24d5b4d2856e1c255f0cdcf1f5808775397",
+          "operation": "unchanged",
+          "path": ".gitignore",
+          "size": 1840,
+          "source_sha256": "41763ff5da36b80321f8c4204494b24d5b4d2856e1c255f0cdcf1f5808775397"
+        },
+        {
+          "before_sha256": "41b5ba57fe21d94167281a786dad97c55396877b1669dfadabcfabd617600c8b",
+          "operation": "unchanged",
+          "path": "agents/openai.yaml",
+          "size": 331,
+          "source_sha256": "41b5ba57fe21d94167281a786dad97c55396877b1669dfadabcfabd617600c8b"
+        },
+        {
+          "before_sha256": "96bd2e8abcc5e202c87c968e5ef3046c329d8f4e20804db5889baaae668701b7",
+          "operation": "unchanged",
+          "path": "CHANGELOG.md",
+          "size": 31353,
+          "source_sha256": "96bd2e8abcc5e202c87c968e5ef3046c329d8f4e20804db5889baaae668701b7"
+        },
+        {
+          "before_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+          "operation": "unchanged",
+          "path": "config/company_wiki.json",
+          "size": 1443,
+          "source_sha256": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9"
+        },
+        {
+          "before_sha256": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+          "operation": "unchanged",
+          "path": "config/filing_fetch.json",
+          "size": 94,
+          "source_sha256": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7"
+        },
+        {
+          "before_sha256": "be72df88166b76558e997a9f42138f796fb953933dc4e7e38536622940967f60",
+          "operation": "unchanged",
+          "path": "references/accounting-boundaries.md",
+          "size": 2570,
+          "source_sha256": "be72df88166b76558e997a9f42138f796fb953933dc4e7e38536622940967f60"
+        },
+        {
+          "before_sha256": "84336ecb1373baecf079949155f891121e70612ad150811532c129c556055196",
+          "operation": "unchanged",
+          "path": "references/backtesting.md",
+          "size": 10191,
+          "source_sha256": "84336ecb1373baecf079949155f891121e70612ad150811532c129c556055196"
+        },
+        {
+          "before_sha256": "a55381c9519f13fbddd70d21d16d01a1229155d90a6a128fe9529d67ff80f89f",
+          "operation": "unchanged",
+          "path": "references/buy-side-methodology.md",
+          "size": 12669,
+          "source_sha256": "a55381c9519f13fbddd70d21d16d01a1229155d90a6a128fe9529d67ff80f89f"
+        },
+        {
+          "before_sha256": "d4509a54459c1471d4523e359eddb74147c84ce8d20138abd8b1107b3e8c7b18",
+          "operation": "unchanged",
+          "path": "references/compliance-contract.md",
+          "size": 7697,
+          "source_sha256": "d4509a54459c1471d4523e359eddb74147c84ce8d20138abd8b1107b3e8c7b18"
+        },
+        {
+          "before_sha256": "f2b22f786f8b0289ff7f1d1f075e67aef6315f27f1ceebdca224ea8f5ff37920",
+          "operation": "unchanged",
+          "path": "references/data-governance.md",
+          "size": 7020,
+          "source_sha256": "f2b22f786f8b0289ff7f1d1f075e67aef6315f27f1ceebdca224ea8f5ff37920"
+        },
+        {
+          "before_sha256": "68cd514189224f3335aca54f29fc8f198f8caba1ad5c3f255ab12da18688a2b0",
+          "operation": "unchanged",
+          "path": "references/dated-contribution.md",
+          "size": 10154,
+          "source_sha256": "68cd514189224f3335aca54f29fc8f198f8caba1ad5c3f255ab12da18688a2b0"
+        },
+        {
+          "before_sha256": "8dd299b5eedb2bc19598b0f38c6ad12f9ad33973b7586bf58ae782bf7241afc0",
+          "operation": "unchanged",
+          "path": "references/economic-support-diagnostics.md",
+          "size": 3880,
+          "source_sha256": "8dd299b5eedb2bc19598b0f38c6ad12f9ad33973b7586bf58ae782bf7241afc0"
+        },
+        {
+          "before_sha256": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21",
+          "operation": "unchanged",
+          "path": "references/evidence-role-calibration.md",
+          "size": 12765,
+          "source_sha256": "915a999b8c3f1f14d5da0c0a7def4b3892b3e309e62e89a9317ce9f45f396a21"
+        },
+        {
+          "before_sha256": "831cf530a4d3260c25fe5d251f9621afe88b97708575f151bf922016e377c499",
+          "operation": "unchanged",
+          "path": "references/extended-models.md",
+          "size": 16741,
+          "source_sha256": "831cf530a4d3260c25fe5d251f9621afe88b97708575f151bf922016e377c499"
+        },
+        {
+          "before_sha256": "ce3b57f69dfe269f868187adbf24b1579d5e822dc88cabaf0378c16e8f32c621",
+          "operation": "unchanged",
+          "path": "references/growth-driver-tree.md",
+          "size": 7337,
+          "source_sha256": "ce3b57f69dfe269f868187adbf24b1579d5e822dc88cabaf0378c16e8f32c621"
+        },
+        {
+          "before_sha256": "826953f8adbb26c2ebf71253711fa6d73c3958e55cd7d01f4416ca8eb2a06b5b",
+          "operation": "unchanged",
+          "path": "references/industry-lifecycle-routing.md",
+          "size": 10202,
+          "source_sha256": "826953f8adbb26c2ebf71253711fa6d73c3958e55cd7d01f4416ca8eb2a06b5b"
+        },
+        {
+          "before_sha256": "ca1fb512031a61c8614245003f32cdf5c6ab07eed5ee4633ff5ba97c4802499f",
+          "operation": "unchanged",
+          "path": "references/input-construction.md",
+          "size": 15924,
+          "source_sha256": "ca1fb512031a61c8614245003f32cdf5c6ab07eed5ee4633ff5ba97c4802499f"
+        },
+        {
+          "before_sha256": "24394133fdd4d7f29f2ec1e84e2395922475254905769e1b0f10ddfc93fb3744",
+          "operation": "unchanged",
+          "path": "references/input-schema.md",
+          "size": 19274,
+          "source_sha256": "24394133fdd4d7f29f2ec1e84e2395922475254905769e1b0f10ddfc93fb3744"
+        },
+        {
+          "before_sha256": "234aad0dd46630ed70f25a926b021ba0881a14c78a5b9a3bd45f9545d2b423f8",
+          "operation": "unchanged",
+          "path": "references/m3-period-evidence.md",
+          "size": 5045,
+          "source_sha256": "234aad0dd46630ed70f25a926b021ba0881a14c78a5b9a3bd45f9545d2b423f8"
+        },
+        {
+          "before_sha256": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+          "operation": "unchanged",
+          "path": "references/management-targets.md",
+          "size": 7776,
+          "source_sha256": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15"
+        },
+        {
+          "before_sha256": "9b335522a5e956424260cca379e640eb484d52d0688cf3d44486d06ff4f1e921",
+          "operation": "unchanged",
+          "path": "references/model-library.md",
+          "size": 14308,
+          "source_sha256": "9b335522a5e956424260cca379e640eb484d52d0688cf3d44486d06ff4f1e921"
+        },
+        {
+          "before_sha256": "de434ae4d10454fba6d4235bf78762e23d67bbed13dcaf8d66b5e26d383412b6",
+          "operation": "unchanged",
+          "path": "references/output-schema.md",
+          "size": 6795,
+          "source_sha256": "de434ae4d10454fba6d4235bf78762e23d67bbed13dcaf8d66b5e26d383412b6"
+        },
+        {
+          "before_sha256": "2c1abb034da0a5e86f71bf0a58414473938c74d474543fef5a1e3781c2d7785d",
+          "operation": "replace",
+          "path": "references/research-coverage.md",
+          "size": 33066,
+          "source_sha256": "269d9a30ca1e24ae1ff277f49da06d92fa6b7fafc4e40213239051865fec97e4"
+        },
+        {
+          "before_sha256": "93ebdadcc77a7f1fcc60dd64e7ece640b238b53e28fa93c793d84eddba7f27ba",
+          "operation": "unchanged",
+          "path": "references/resource-business-guidance.md",
+          "size": 6263,
+          "source_sha256": "93ebdadcc77a7f1fcc60dd64e7ece640b238b53e28fa93c793d84eddba7f27ba"
+        },
+        {
+          "before_sha256": "efee17cbaf33c688b23d2d32aca32d918c8e0a7e6dc734c4e59cc338b5408c04",
+          "operation": "unchanged",
+          "path": "references/schema-migration-3.4-to-3.5.md",
+          "size": 2927,
+          "source_sha256": "efee17cbaf33c688b23d2d32aca32d918c8e0a7e6dc734c4e59cc338b5408c04"
+        },
+        {
+          "before_sha256": "e7b1a589de8dce4bb319da8f62f6e903d31ade44c02da954eee968cf37701cbe",
+          "operation": "unchanged",
+          "path": "references/schema-migration-3.5-to-3.6.md",
+          "size": 2177,
+          "source_sha256": "e7b1a589de8dce4bb319da8f62f6e903d31ade44c02da954eee968cf37701cbe"
+        },
+        {
+          "before_sha256": "a292acf48db79f96071a81f286fb56d0abad35752c222499d649a0baabd1ad1d",
+          "operation": "unchanged",
+          "path": "references/schema-migration-3.6-to-3.7.md",
+          "size": 2149,
+          "source_sha256": "a292acf48db79f96071a81f286fb56d0abad35752c222499d649a0baabd1ad1d"
+        },
+        {
+          "before_sha256": "2a41d45f566f7a30508bf9bbf718f54b2182d426ecb33cf7d9b888a98dcd5464",
+          "operation": "unchanged",
+          "path": "references/target-measurement-comparison.md",
+          "size": 5537,
+          "source_sha256": "2a41d45f566f7a30508bf9bbf718f54b2182d426ecb33cf7d9b888a98dcd5464"
+        },
+        {
+          "before_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+          "operation": "unchanged",
+          "path": "scripts/__init__.py",
+          "size": 35,
+          "source_sha256": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459"
+        },
+        {
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "operation": "unchanged",
+          "path": "scripts/analysis/__init__.py",
+          "size": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "before_sha256": "0413b4d07ed19b976820d358c80d86f2780e9fe38113138ceb43ede5119cf05f",
+          "operation": "replace",
+          "path": "scripts/analysis/confidence.py",
+          "size": 14213,
+          "source_sha256": "8c1e6aca45b8698af0b734e833690a469bd56dc702724c41529dc8b68dae332b"
+        },
+        {
+          "before_sha256": "0b9f5f15bc14ac5a1ec8c58396ebb1379f8481d2a1e7d7ce02141bae7971b2c0",
+          "operation": "unchanged",
+          "path": "scripts/analysis/sensitivity.py",
+          "size": 13266,
+          "source_sha256": "0b9f5f15bc14ac5a1ec8c58396ebb1379f8481d2a1e7d7ce02141bae7971b2c0"
+        },
+        {
+          "before_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+          "operation": "unchanged",
+          "path": "scripts/asset_ownership.py",
+          "size": 10622,
+          "source_sha256": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0"
+        },
+        {
+          "before_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+          "operation": "unchanged",
+          "path": "scripts/commercial_terms.py",
+          "size": 4795,
+          "source_sha256": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005"
+        },
+        {
+          "before_sha256": "87217f45ac810b572f4fba114b1ee0574ea437de5e973ea23374365c1384fecf",
+          "operation": "replace",
+          "path": "scripts/company_wiki_narrative_contracts.py",
+          "size": 41228,
+          "source_sha256": "1ea755c8a8c7c2f513b70dd7a3d975c0bfbefa02d8ae55d959e83299718d0f82"
+        },
+        {
+          "before_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_narrative_posix.py",
+          "size": 2824,
+          "source_sha256": "669d268667d9e08a3d98ee1eec44ecc26fb4f142dd6d7310191169deba5dc852"
+        },
+        {
+          "before_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_narrative_process.py",
+          "size": 8500,
+          "source_sha256": "9664696ac23699ecf6b234cec3aa93ce475127d36a4bddf680edb711ccf92e3d"
+        },
+        {
+          "before_sha256": "8ff1cf553a8849330a41f74ae27bfcacd2515186b5fa58168cead91b6cfa7508",
+          "operation": "replace",
+          "path": "scripts/company_wiki_narrative_reader.py",
+          "size": 3382,
+          "source_sha256": "f62ff7cdca9d7594c31821770b8399a924e838df9d403ed77ebb49c85ed7f3a5"
+        },
+        {
+          "before_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_narrative_tree.py",
+          "size": 6960,
+          "source_sha256": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba"
+        },
+        {
+          "before_sha256": "e6e1df861ea25d2a23ada3e7ca9e5c1c68fdfd25cea620bdd9354d553d3f1111",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_source.py",
+          "size": 20953,
+          "source_sha256": "e6e1df861ea25d2a23ada3e7ca9e5c1c68fdfd25cea620bdd9354d553d3f1111"
+        },
+        {
+          "before_sha256": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_source_reader_v2.py",
+          "size": 17186,
+          "source_sha256": "dd238da96383da706a147fcea18f84ba54c84b2909a63ca9d2e5c59ab29fa025"
+        },
+        {
+          "before_sha256": "f78940d7169b3d572aa29bc731f9efc0f0ac75ee6356b60f5aa0705cbdc9ce58",
+          "operation": "unchanged",
+          "path": "scripts/company_wiki_source_v2.py",
+          "size": 16571,
+          "source_sha256": "f78940d7169b3d572aa29bc731f9efc0f0ac75ee6356b60f5aa0705cbdc9ce58"
+        },
+        {
+          "before_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+          "operation": "unchanged",
+          "path": "scripts/confidence_policy.py",
+          "size": 7843,
+          "source_sha256": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f"
+        },
+        {
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "operation": "unchanged",
+          "path": "scripts/contracts/__init__.py",
+          "size": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "before_sha256": "7bba88869eb3edaae9a668d55d5287321c01c0cb259dafa189bdde548b3aa33a",
+          "operation": "unchanged",
+          "path": "scripts/contracts/annual_consumption.py",
+          "size": 7537,
+          "source_sha256": "7bba88869eb3edaae9a668d55d5287321c01c0cb259dafa189bdde548b3aa33a"
+        },
+        {
+          "before_sha256": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e",
+          "operation": "unchanged",
+          "path": "scripts/contracts/constants.py",
+          "size": 8718,
+          "source_sha256": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e"
+        },
+        {
+          "before_sha256": "8c26881c9d1d727029ea027069f94cd8d98c4687ea82ed48a41b50b5c2831dbd",
+          "operation": "unchanged",
+          "path": "scripts/contracts/document.py",
+          "size": 52038,
+          "source_sha256": "8c26881c9d1d727029ea027069f94cd8d98c4687ea82ed48a41b50b5c2831dbd"
+        },
+        {
+          "before_sha256": "cf200313135108d23ed803f6089bc2be7778a3a3ff4c91e892f461abd8bbaa6a",
+          "operation": "replace",
+          "path": "scripts/contracts/evidence.py",
+          "size": 16801,
+          "source_sha256": "a5f086f7be822acc01f82c53ecd05985cbeb65e095480572e1b059b4d23f4964"
+        },
+        {
+          "before_sha256": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf",
+          "operation": "unchanged",
+          "path": "scripts/contracts/period_flow.py",
+          "size": 26965,
+          "source_sha256": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf"
+        },
+        {
+          "before_sha256": "551ddb361d28ef8466051fa848d25a3bcc954fb998ef8e3c474c7140e91e0375",
+          "operation": "unchanged",
+          "path": "scripts/contracts/recognition.py",
+          "size": 4559,
+          "source_sha256": "551ddb361d28ef8466051fa848d25a3bcc954fb998ef8e3c474c7140e91e0375"
+        },
+        {
+          "before_sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b",
+          "operation": "unchanged",
+          "path": "scripts/contracts/source_clock.py",
+          "size": 9677,
+          "source_sha256": "194abc751640892bd38d0ad84ee482ac6797859cf27508abb88131fcf3376c3b"
+        },
+        {
+          "before_sha256": "7f730131f4bad0e22e3e43b0ffac48475dd1c373a4bc8dec40ad21a6b8a1341b",
+          "operation": "replace",
+          "path": "scripts/filing_fetch_client.py",
+          "size": 19426,
+          "source_sha256": "c44ed08c7ebcc5ae41a88671fc4e535752d0ad0f5d91f5f28fdba514550d8757"
+        },
+        {
+          "before_sha256": "ea4df706c2f2ea05c5e36a04574ea464b0ce249255ec4bf3263efcdaba836ae7",
+          "operation": "replace",
+          "path": "scripts/filing_upstream_cause.py",
+          "size": 16962,
+          "source_sha256": "0663e7a9f9d5123a675dc80addcc350dc43c2d9c09a7f4e2c1eeb24181762a95"
+        },
+        {
+          "before_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+          "operation": "unchanged",
+          "path": "scripts/fix_hashes.py",
+          "size": 8484,
+          "source_sha256": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd"
+        },
+        {
+          "before_sha256": "cac7c1fb3fd4a4b17701c691e0f621a5256048a63c90a9a25e882d4ee24d9faf",
+          "operation": "replace",
+          "path": "scripts/forecast/calc.py",
+          "size": 14166,
+          "source_sha256": "c5a86d843b0679a5292fa1e3ea27ebd2e628d9d19067047a228117e0e7b954a3"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/forecast/dependencies.py",
+          "size": 14498,
+          "source_sha256": "98bfda50e29b3a694f9e76c71ea49782c973afaea39586223915aa04399d6d14"
+        },
+        {
+          "before_sha256": "15ee89945da4ee05276af7393e4924ae39e1eeeccdc6d3d9659ebc577b355190",
+          "operation": "replace",
+          "path": "scripts/forecast/segments.py",
+          "size": 25486,
+          "source_sha256": "4039d0923f4d34251d5466dfe56b6599cbc54786a55a349599acd10061694949"
+        },
+        {
+          "before_sha256": "5fe3fc24c2a68069a6ea7827a6b0c93bec00d070fda7140f4e34c105c8da2c70",
+          "operation": "unchanged",
+          "path": "scripts/generate_input_template.py",
+          "size": 15970,
+          "source_sha256": "5fe3fc24c2a68069a6ea7827a6b0c93bec00d070fda7140f4e34c105c8da2c70"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/installation_manifest.py",
+          "size": 2038,
+          "source_sha256": "923b40645ca9d5fe06c9e713e4542b2028b0adde448b83db75bcd8260a05a492"
+        },
+        {
+          "before_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+          "operation": "unchanged",
+          "path": "scripts/internal_flow.py",
+          "size": 4841,
+          "source_sha256": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355"
+        },
+        {
+          "before_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2",
+          "operation": "unchanged",
+          "path": "scripts/lint_input.py",
+          "size": 21589,
+          "source_sha256": "445b16603d157947a59a1f3a9b20978ae74f18cd445f63c78600236bda8330b2"
+        },
+        {
+          "before_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+          "operation": "unchanged",
+          "path": "scripts/mine_year_operation.py",
+          "size": 4670,
+          "source_sha256": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986"
+        },
+        {
+          "before_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+          "operation": "unchanged",
+          "path": "scripts/mixed_recognition.py",
+          "size": 4034,
+          "source_sha256": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232"
+        },
+        {
+          "before_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+          "operation": "unchanged",
+          "path": "scripts/model_extensions.py",
+          "size": 16009,
+          "source_sha256": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92"
+        },
+        {
+          "before_sha256": "62f864b9ab3f144eacff43448897d2c31abc217e17ed3b0e3f58894cdd985081",
+          "operation": "replace",
+          "path": "scripts/model_registry.py",
+          "size": 30858,
+          "source_sha256": "39da2c1201e8cfe66f8db6c4e378d44771763fd670ee2811c42136fddf427f38"
+        },
+        {
+          "before_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72",
+          "operation": "unchanged",
+          "path": "scripts/narrative_source_preparation.py",
+          "size": 2400,
+          "source_sha256": "4d848e286ca318f427d9001bb6243b98d9f91886f7931d7eb4796cf4cc4c2e72"
+        },
+        {
+          "before_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+          "operation": "unchanged",
+          "path": "scripts/processed_artifact_canary.py",
+          "size": 4639,
+          "source_sha256": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc"
+        },
+        {
+          "before_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68",
+          "operation": "unchanged",
+          "path": "scripts/publication_registry.py",
+          "size": 10936,
+          "source_sha256": "55914762ef0abb6db37055cb21616162712a6559ecd7e6e324c3162bd7fb0b68"
+        },
+        {
+          "before_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+          "operation": "unchanged",
+          "path": "scripts/reconciliation.py",
+          "size": 4224,
+          "source_sha256": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5"
+        },
+        {
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "operation": "unchanged",
+          "path": "scripts/research/__init__.py",
+          "size": 0,
+          "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "before_sha256": "ef802da4ed1e10778070fdc36c51098851322e8996fbd003e12d716049ee1994",
+          "operation": "replace",
+          "path": "scripts/research/communication_scope.py",
+          "size": 7654,
+          "source_sha256": "96e4b63a3c90825241c395281ff5f3b4cf8496290a63757f150cb74244140a8e"
+        },
+        {
+          "before_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+          "operation": "unchanged",
+          "path": "scripts/research/coverage.py",
+          "size": 5801,
+          "source_sha256": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470"
+        },
+        {
+          "before_sha256": "964fa1dba1429dd11321d52b6389a95803a09454f4ddcfa74821f15cdedb3456",
+          "operation": "replace",
+          "path": "scripts/research/drivers.py",
+          "size": 25818,
+          "source_sha256": "5ba825340431fc6ebf1f38e8facc1b23ae4ced9222312ccd63fbfe9199a9dd1f"
+        },
+        {
+          "before_sha256": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761",
+          "operation": "unchanged",
+          "path": "scripts/research/evidence_roles.py",
+          "size": 16538,
+          "source_sha256": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761"
+        },
+        {
+          "before_sha256": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865",
+          "operation": "unchanged",
+          "path": "scripts/research/input_evidence.py",
+          "size": 14093,
+          "source_sha256": "4cec4c2c4d43fea578be1261449724edb118cfeb18e08019effea27debfc1865"
+        },
+        {
+          "before_sha256": "0217ce20bd3456122349d59dd49f4b471c4e6fc844878e561141d95a28d11f1a",
+          "operation": "unchanged",
+          "path": "scripts/research/input_quantities.py",
+          "size": 9970,
+          "source_sha256": "0217ce20bd3456122349d59dd49f4b471c4e6fc844878e561141d95a28d11f1a"
+        },
+        {
+          "before_sha256": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+          "operation": "unchanged",
+          "path": "scripts/research/input_targets.py",
+          "size": 14221,
+          "source_sha256": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f"
+        },
+        {
+          "before_sha256": "9dad832d2b6a8cbe3f2faf6e2e9f27b988319ae2d87f212fde26a6863a327dec",
+          "operation": "replace",
+          "path": "scripts/research/native_dependencies.py",
+          "size": 5588,
+          "source_sha256": "7bed36e63dfe61ce96dabbc1a675a5665a2dedea15964fa95aedf816998cfb83"
+        },
+        {
+          "before_sha256": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+          "operation": "unchanged",
+          "path": "scripts/research/target_measurement.py",
+          "size": 12423,
+          "source_sha256": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e"
+        },
+        {
+          "before_sha256": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+          "operation": "unchanged",
+          "path": "scripts/research/targets.py",
+          "size": 36535,
+          "source_sha256": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21"
+        },
+        {
+          "before_sha256": "1df60466342836611709c2e4d6d158dcf6fe8bc90301308e263c24908d4b186d",
+          "operation": "unchanged",
+          "path": "scripts/research/timing_bridge.py",
+          "size": 5578,
+          "source_sha256": "1df60466342836611709c2e4d6d158dcf6fe8bc90301308e263c24908d4b186d"
+        },
+        {
+          "before_sha256": "8ce8390fc201b9fedb081be7074a4f6ae236ef41d14bff59c4eaeb6dbd14e688",
+          "operation": "replace",
+          "path": "scripts/research_support_diagnostics.py",
+          "size": 6869,
+          "source_sha256": "397f40e59249e93e372d191e85a6ee2fbc68b266ff7b399972fbe000b955f085"
+        },
+        {
+          "before_sha256": "4af7609f14ae27137b384df17e1f7a92bce616ea1634d1c087a6eb8ff8dd739b",
+          "operation": "replace",
+          "path": "scripts/revenue_backtest.py",
+          "size": 30110,
+          "source_sha256": "378219e53599cefe9abae7a5857d0dcdd6236f1746ccec3e98b99407fb39b8d4"
+        },
+        {
+          "before_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+          "operation": "unchanged",
+          "path": "scripts/revenue_constraints.py",
+          "size": 15064,
+          "source_sha256": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374"
+        },
+        {
+          "before_sha256": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c",
+          "operation": "unchanged",
+          "path": "scripts/revenue_core.py",
+          "size": 26101,
+          "source_sha256": "2f59cd2c72181e57a9fe8b6bc50e23d55c4ebc38e8beed44772af99bb52b190c"
+        },
+        {
+          "before_sha256": "068dbac5e9f1002f5b01316ef06520274bbd455af3134895ce6440bd4bfbc196",
+          "operation": "replace",
+          "path": "scripts/revenue_forecast.py",
+          "size": 4182,
+          "source_sha256": "1759dd25c094ed0c5be2d108b53de92ea22e6475b6fbad78573939713f455378"
+        },
+        {
+          "before_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+          "operation": "unchanged",
+          "path": "scripts/revenue_publication.py",
+          "size": 24917,
+          "source_sha256": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0"
+        },
+        {
+          "before_sha256": "7f12259cedfb232ea05118d3d29a3c75ba49732c1b9cc0fbaeed76fd50a3964d",
+          "operation": "replace",
+          "path": "scripts/revenue_report.py",
+          "size": 83024,
+          "source_sha256": "bc282e9c4ff7911820d322902d0c644999c1576863cb8c815397a9f5be667664"
+        },
+        {
+          "before_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+          "operation": "unchanged",
+          "path": "scripts/rolling_backtest.py",
+          "size": 8900,
+          "source_sha256": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b"
+        },
+        {
+          "before_sha256": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5",
+          "operation": "unchanged",
+          "path": "scripts/schema_compatibility.py",
+          "size": 5299,
+          "source_sha256": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5"
+        },
+        {
+          "before_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+          "operation": "unchanged",
+          "path": "scripts/schema_fields.py",
+          "size": 1526,
+          "source_sha256": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c"
+        },
+        {
+          "before_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+          "operation": "unchanged",
+          "path": "scripts/schema_optin.py",
+          "size": 2263,
+          "source_sha256": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3"
+        },
+        {
+          "before_sha256": "c499ae024e9013c165aa98650df624b9567dd8ee67465a7826a06b35cfc18bde",
+          "operation": "replace",
+          "path": "scripts/source_narrative_context.py",
+          "size": 7248,
+          "source_sha256": "c66eb197d26bb3bbec56b52a17fcfdf582433b0ed0475e8ec33fbe7f82828759"
+        },
+        {
+          "before_sha256": "d1c155189ccd631037e85f2f2005a8cf04cbe24c20497ede157a0d33e3d4c1ff",
+          "operation": "unchanged",
+          "path": "scripts/source_period_semantics.py",
+          "size": 423,
+          "source_sha256": "d1c155189ccd631037e85f2f2005a8cf04cbe24c20497ede157a0d33e3d4c1ff"
+        },
+        {
+          "before_sha256": "e8db267971f5c967ab6cd8e358e23423afe42f7af8ce19847be7b266cc00742d",
+          "operation": "replace",
+          "path": "scripts/source_preparation.py",
+          "size": 25553,
+          "source_sha256": "7b570ec7fed1ed2bfa5e34262d3f211cdde4bf79a9af6e8c83816ce0639e2be5"
+        },
+        {
+          "before_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c",
+          "operation": "unchanged",
+          "path": "scripts/trust_anchor.py",
+          "size": 1634,
+          "source_sha256": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c"
+        },
+        {
+          "before_sha256": "eb0182a2d659338e967d16ee9e6ec8159e598cfc7fbb3e1fc895519cb325e4a4",
+          "operation": "unchanged",
+          "path": "SKILL.md",
+          "size": 36352,
+          "source_sha256": "eb0182a2d659338e967d16ee9e6ec8159e598cfc7fbb3e1fc895519cb325e4a4"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 21,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schema_version": "architecture-quality-acceptance/1",
+  "date": "2026-10-13",
+  "engineering_status": "PASS",
+  "full_suite_status": "PARTIAL",
+  "code_shas": {
+    "rf": "f0d694d69a05ef3f7a449e87cd91cdb44d1ff8ce",
+    "ff": "e2efa81d7995836d457479eb528fa6f8cd5dc3f3",
+    "cwp": "1f9f0673b23513640ca9e0e3c46ace28fa1b1136",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "et": "d0ac42c60dcca992db78860b8469cfed3dd527e5"
+  },
+  "cross_market": {
+    "report": "final-full.json",
+    "seconds": 247.189,
+    "failures": 0,
+    "scope": "frozen source/official formal arithmetic/virtualization/FF-ET HTTP replay",
+    "real_supplier_economic_review": "NOT_EVALUATED"
+  },
+  "g2": {
+    "schema_version": "architecture-quality-g2/1",
+    "archive": "g2-evidence.zip",
+    "archive_sha256": "6fe750ebe90b863e10789e175bc26cce6458df29e519c55bb9aeed66920c39c4",
+    "archive_bytes": 60309,
+    "verified_original_bytes": 226324,
+    "verified_files": 38,
+    "report_member": "attempt-0001/report.json",
+    "status": "PASS",
+    "case_statuses": {
+      "annual-report": "PASS",
+      "half-year-report": "PASS",
+      "quarterly-report": "PASS",
+      "prospectus": "PASS",
+      "placement": "PASS",
+      "convertible-bond": "PASS",
+      "ir-policy": "PASS",
+      "call-txt-zh": "PASS",
+      "call-txt-en": "PASS"
+    },
+    "runs": [
+      {
+        "run_index": 1,
+        "model_posts": 8,
+        "status": "completed",
+        "exit_code": 0
+      },
+      {
+        "run_index": 2,
+        "model_posts": 0,
+        "status": "completed",
+        "exit_code": 0,
+        "reuse_pins_identical": true
+      },
+      {
+        "run_index": 3,
+        "model_posts": 1,
+        "status": "completed",
+        "exit_code": 0
+      },
+      {
+        "run_index": 4,
+        "model_posts": 1,
+        "status": "completed",
+        "exit_code": 0
+      }
+    ],
+    "model_accounting": {
+      "run1_posts": 8,
+      "run2_posts": 0,
+      "total_posts": 10,
+      "provider_calls": 0,
+      "llm_calls": 10,
+      "paid_usd": 0.0,
+      "stub_errors": [],
+      "loopback_endpoint_ref": "loopback://127.0.0.1/v1/chat/completions"
+    },
+    "rf_reads": 9,
+    "rf_read_ok": true,
+    "scratch_restored": true,
+    "removed_verified_duplicates": true,
+    "seconds": 66.658
+  },
+  "preserved_inputs": {
+    "company-wiki": {
+      "preserved_files": {
+        "checked_files": 0,
+        "changed": []
+      },
+      "production_config": {
+        "checked_files": 13,
+        "changed": []
+      }
+    },
+    "filing-fetch": {
+      "preserved_files": {
+        "checked_files": 1,
+        "changed": []
+      },
+      "production_config": {
+        "checked_files": 2,
+        "changed": []
+      }
+    },
+    "revenue-forecast": {
+      "preserved_files": {
+        "checked_files": 150,
+        "changed": []
+      },
+      "production_config": {
+        "checked_files": 2,
+        "changed": []
+      }
+    }
+  },
+  "du_ownership": {
+    "worktree_writes": 0,
+    "exclusive_module_changes": 0,
+    "frozen_interface_changes": 0
+  },
+  "model_external_calls": 0,
+  "paid_cost_usd": 0,
+  "publish": "normal push in progress",
+  "mother_G2_G4_G5": "open"
+}

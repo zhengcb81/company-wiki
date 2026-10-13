@@ -1,0 +1,32 @@
+{
+  "company-wiki": {
+    "preserved_files": {
+      "checked_files": 0,
+      "changed": []
+    },
+    "production_config": {
+      "checked_files": 13,
+      "changed": []
+    }
+  },
+  "filing-fetch": {
+    "preserved_files": {
+      "checked_files": 1,
+      "changed": []
+    },
+    "production_config": {
+      "checked_files": 2,
+      "changed": []
+    }
+  },
+  "revenue-forecast": {
+    "preserved_files": {
+      "checked_files": 150,
+      "changed": []
+    },
+    "production_config": {
+      "checked_files": 2,
+      "changed": []
+    }
+  }
+}

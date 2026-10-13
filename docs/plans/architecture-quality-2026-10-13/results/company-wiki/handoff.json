@@ -1,0 +1,436 @@
+{
+  "schema_version": "architecture-quality/1",
+  "repository": "company-wiki",
+  "baseline_sha": "eeca43dd876579e82f02f1bfaaa9126d597096a0",
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/architecture-quality-20261013/company-wiki",
+  "branch": "codex/aq-cwp-20261013",
+  "status": "IMPLEMENTED_TESTED_COMMITTED_AWAIT_ROOT_RECEPTION",
+  "findings": [
+    {
+      "id": "AQ-CWP-01",
+      "severity": "P1",
+      "root_cause": "Writer dedup reused historical absolute_path and stored root kind instead of current registered root-relative source location. Reader/resolver containment also lacked an owned low-level common boundary.",
+      "evidence": [
+        {
+          "path": "src/company_wiki/source_catalog/canonical_writer.py",
+          "symbol": "CanonicalSourceWriter._existing_original",
+          "line": 578
+        },
+        {
+          "path": "src/company_wiki/source_catalog/source_location.py",
+          "symbol": "resolve_source_location",
+          "line": 61
+        },
+        {
+          "path": "src/company_wiki/source_catalog/source_reader.py",
+          "symbol": "SourceVersionReader._verified_version",
+          "line": 633
+        }
+      ],
+      "disposition": "fixed",
+      "changed_paths": [
+        "src/company_wiki/source_catalog/canonical_writer.py",
+        "src/company_wiki/source_catalog/source_location.py",
+        "src/company_wiki/source_catalog/source_reader.py",
+        "src/company_wiki/source_catalog/resolver.py",
+        "tests/contract/test_architecture_quality_storage.py"
+      ],
+      "test_refs": [
+        "TDD-storage-atomic",
+        "FINAL267"
+      ]
+    },
+    {
+      "id": "AQ-CWP-02",
+      "severity": "P1",
+      "root_cause": "Repeated same-PID staging implementations collide within one process and finally deletes staging owned by another invocation.",
+      "evidence": [
+        {
+          "path": "src/company_wiki/_atomic_file.py",
+          "symbol": "atomic_output",
+          "line": 17
+        },
+        {
+          "path": "src/company_wiki/source_catalog/service.py",
+          "symbol": "SourceCatalog._atomic_write",
+          "line": 1327
+        },
+        {
+          "path": "src/company_wiki/source_catalog/normalizer.py",
+          "symbol": "_write_parser_envelope",
+          "line": 276
+        },
+        {
+          "path": "src/company_wiki/source_catalog/official_json_projection.py",
+          "symbol": "persist_projection",
+          "line": 805
+        }
+      ],
+      "disposition": "fixed",
+      "changed_paths": [
+        "src/company_wiki/_atomic_file.py",
+        "src/company_wiki/source_catalog/service.py",
+        "src/company_wiki/source_catalog/canonical_writer.py",
+        "src/company_wiki/source_catalog/normalizer.py",
+        "src/company_wiki/source_catalog/official_json_projection.py",
+        "tests/unit/test_architecture_quality_io.py"
+      ],
+      "test_refs": [
+        "TDD-storage-atomic",
+        "FINAL267",
+        "parser-isolation131"
+      ]
+    },
+    {
+      "id": "AQ-CWP-03",
+      "severity": "P1",
+      "root_cause": "Version-specific configuration loader copied shape rules and omitted boolean type checks/required subset; quoted false becomes truthy and missing required fields raise KeyError.",
+      "evidence": [
+        {
+          "path": "src/company_wiki/source_catalog/policy_2x.py",
+          "symbol": "load_root_policy_2x",
+          "line": 54
+        },
+        {
+          "path": "src/company_wiki/source_catalog/config.py",
+          "symbol": "_require_boolean",
+          "line": 52
+        }
+      ],
+      "disposition": "fixed",
+      "changed_paths": [
+        "src/company_wiki/source_catalog/policy_2x.py",
+        "tests/unit/test_architecture_quality_config.py"
+      ],
+      "test_refs": [
+        "TDD-config",
+        "FINAL267"
+      ]
+    },
+    {
+      "id": "AQ-CWP-04",
+      "severity": "P1",
+      "root_cause": "Local reconciliation duplicated layout-specific root.kind dispatch instead of using configured source adapters; same layout under directory root was not discovered.",
+      "evidence": [
+        {
+          "path": "src/company_wiki/source_catalog/local_reconcile.py",
+          "symbol": "_discover_source_groups",
+          "line": 325
+        },
+        {
+          "path": "src/company_wiki/source_catalog/adapter_dispatch.py",
+          "symbol": "discover_issuer_paths",
+          "line": 65
+        },
+        {
+          "path": "src/company_wiki/source_catalog/adapters/company_raw.py",
+          "symbol": "CompanyRawAdapter.discover_issuer_paths",
+          "line": 35
+        },
+        {
+          "path": "src/company_wiki/source_catalog/adapters/dayu.py",
+          "symbol": "DayuAdapter.discover_issuer_paths",
+          "line": 108
+        }
+      ],
+      "disposition": "fixed",
+      "changed_paths": [
+        "src/company_wiki/source_catalog/local_reconcile.py",
+        "src/company_wiki/source_catalog/adapter_dispatch.py",
+        "src/company_wiki/source_catalog/adapters/company_raw.py",
+        "src/company_wiki/source_catalog/adapters/dayu.py",
+        "tests/integration/test_architecture_quality_discovery.py"
+      ],
+      "test_refs": [
+        "TDD-discovery",
+        "FINAL267"
+      ]
+    },
+    {
+      "id": "AQ-CWP-05",
+      "severity": "P1",
+      "root_cause": "Legacy finite-sample overlap block disagreed with ordered match semantics, while scanner ignored route adapter/profile and wrong layouts could interpret original sidecars/metadata before ownership selection.",
+      "evidence": [
+        {
+          "path": "src/company_wiki/source_catalog/models.py",
+          "symbol": "RootSpec.first_matching_route",
+          "line": 112
+        },
+        {
+          "path": "src/company_wiki/source_catalog/models.py",
+          "symbol": "RootSpec.effective_root_for_path",
+          "line": 125
+        },
+        {
+          "path": "src/company_wiki/source_catalog/adapter_dispatch.py",
+          "symbol": "scan_root_via_adapter",
+          "line": 120
+        },
+        {
+          "path": "src/company_wiki/source_catalog/scanner.py",
+          "symbol": "_scan_catalog_impl",
+          "line": 843
+        }
+      ],
+      "disposition": "fixed-in-second-commit",
+      "changed_paths": [
+        "src/company_wiki/source_catalog/models.py",
+        "src/company_wiki/source_catalog/config.py",
+        "src/company_wiki/source_catalog/policy_2x.py",
+        "src/company_wiki/source_catalog/adapter_dispatch.py",
+        "src/company_wiki/source_catalog/scanner.py",
+        "src/company_wiki/source_catalog/adapters/company_raw.py",
+        "src/company_wiki/source_catalog/adapters/dayu.py",
+        "src/company_wiki/source_catalog/adapters/sidecar.py",
+        "tests/unit/test_architecture_quality_routes.py",
+        "tests/contract/test_root_policy_v2.py",
+        "tests/integration/test_architecture_quality_discovery.py",
+        "docs/source-catalog-routing.md"
+      ],
+      "test_refs": [
+        "TDD-routes-hook",
+        "route-scanner-real-RED",
+        "ROUTES-HOOK179"
+      ]
+    },
+    {
+      "id": "AQ-CWP-06",
+      "severity": "P2",
+      "root_cause": "Document parsing/selection has fragmented per-type heuristics and large orchestration modules; strategy convergence belongs to already dispatched DU lanes.",
+      "evidence": [
+        {
+          "path": "src/company_wiki/automation/narrative_batch.py",
+          "symbol": "_run_prepared",
+          "line": 1311
+        },
+        {
+          "path": "docs/plans/document-understanding-2026-10-13/task_plan.md",
+          "symbol": "shared engine + profiles approval"
+        }
+      ],
+      "disposition": "linked-DU-ROOT-integration",
+      "changed_paths": [],
+      "test_refs": []
+    },
+    {
+      "id": "AQ-CWP-07",
+      "severity": "P2",
+      "root_cause": "Generated hook hardcoded machine Python and bash arrays under a POSIX sh shebang instead of using the configured active environment.",
+      "disposition": "fixed-in-second-commit",
+      "evidence": [
+        {
+          "path": ".githooks/pre-commit",
+          "line": 1
+        }
+      ],
+      "changed_paths": [
+        ".githooks/pre-commit",
+        "tests/unit/test_architecture_quality_hook.py"
+      ],
+      "test_refs": [
+        "TDD-routes-hook",
+        "ROUTES-HOOK179",
+        "portable-normal-commit"
+      ]
+    }
+  ],
+  "commits": [
+    "d71c8e4f9ad38034dd0be5b80253116970481343",
+    "1f9f0673b23513640ca9e0e3c46ace28fa1b1136"
+  ],
+  "tests": [
+    {
+      "id": "TDD-storage-atomic",
+      "command": "python -X utf8 -m pytest -q tests/unit/test_architecture_quality_io.py tests/contract/test_architecture_quality_storage.py",
+      "result": "RED before implementation, subsequent focused GREEN",
+      "counts": {
+        "red_failed": 6,
+        "red_passed": 1
+      },
+      "duration_seconds": 2.54
+    },
+    {
+      "id": "TDD-config",
+      "command": "python -X utf8 -m pytest -q tests/unit/test_architecture_quality_config.py",
+      "result": "RED before implementation; all 30 pass in final",
+      "counts": {
+        "red_failed": 15,
+        "red_passed": 15
+      },
+      "duration_seconds": 1.23
+    },
+    {
+      "id": "TDD-discovery",
+      "command": "python -X utf8 -m pytest -q tests/integration/test_architecture_quality_discovery.py tests/contract/test_future_root_config_only.py::test_gate_no_root_id_hardcode_in_production",
+      "result": "RED before implementation; all 3 pass in final",
+      "counts": {
+        "red_failed": 3,
+        "red_passed": 0
+      },
+      "duration_seconds": 1.0
+    },
+    {
+      "id": "parser-isolation131",
+      "command": "python -X utf8 -m pytest -q tests/unit/test_architecture_quality_io.py tests/contract/test_architecture_quality_storage.py tests/contract/test_source_catalog_canonical_writer.py tests/contract/test_exact_source_read_policy.py tests/unit/test_default_steady_source_reader.py tests/unit/test_official_json_batch_identity.py tests/unit/test_p7_official_projection_identity.py tests/contract/test_source_export_v2.py tests/contract/test_source_export_v2_cli.py tests/contract/test_source_catalog_parser_liveness.py",
+      "result": "PASS",
+      "counts": {
+        "passed": 131
+      },
+      "duration_seconds": 86.33
+    },
+    {
+      "id": "FINAL267",
+      "command": "python -X utf8 -m pytest -q tests/unit/test_architecture_quality_io.py tests/contract/test_architecture_quality_storage.py tests/contract/test_source_catalog_canonical_writer.py tests/contract/test_exact_source_read_policy.py tests/unit/test_default_steady_source_reader.py tests/unit/test_official_json_batch_identity.py tests/unit/test_p7_official_projection_identity.py tests/contract/test_source_export_v2.py tests/contract/test_source_export_v2_cli.py tests/integration/test_architecture_quality_discovery.py tests/integration/test_legacy_local_reconcile.py tests/contract/test_future_root_config_only.py tests/contract/test_fc1201_root_hardcode_gate.py tests/contract/test_adapter_spi.py tests/contract/test_adapter_production_dispatch.py tests/unit/test_architecture_quality_config.py tests/contract/test_root_policy_2x.py tests/contract/test_root_policy_v2.py tests/contract/test_route_config.py tests/contract/test_zr405_policy_export_cli.py tests/contract/test_dropbox_root_policy_fc501.py tests/contract/test_zr402_adapter_route_contract.py --junitxml=\"C:/Users/郑曾波/Projects/company-wiki/docs/plans/architecture-quality-2026-10-13/results/company-wiki/pytest-final.xml\"",
+      "result": "PASS",
+      "counts": {
+        "passed": 266,
+        "skipped": 1,
+        "failed": 0,
+        "errors": 0
+      },
+      "duration_seconds": 23.08,
+      "evidence": "pytest-final.xml",
+      "skip_reason": "existing symlink test: symlinks not supported on this host"
+    },
+    {
+      "id": "ruff",
+      "command": "python -X utf8 -m ruff check src/company_wiki tests/unit tests/contract tests/integration/test_architecture_quality_discovery.py",
+      "result": "PASS",
+      "counts": {
+        "violations": 0
+      },
+      "duration_seconds": null
+    },
+    {
+      "id": "mypy",
+      "command": "python -X utf8 -m mypy src/company_wiki/source_catalog/source_reader.py src/company_wiki/source_catalog/policy_2x.py",
+      "result": "PASS",
+      "counts": {
+        "modules": 2,
+        "issues": 0
+      },
+      "duration_seconds": null
+    },
+    {
+      "id": "normal-commit-hooks",
+      "command": "git commit -m \"refactor: unify source locations, bounded adapter discovery and atomic outputs\"",
+      "result": "PASS: ruff/mypy-contract/host-assumption-guard; unaffected dependency/config hooks skipped",
+      "counts": {
+        "passed_hooks": 3
+      },
+      "duration_seconds": null
+    },
+    {
+      "id": "route-observations",
+      "command": "read-only _check_route_overlap versus RootSpec.route_matches over custom overlapping issuer scopes and excluded disjoint scopes",
+      "result": "REPRODUCED: false-negative allowed and false-positive rejected; unchanged legacy behavior",
+      "counts": {
+        "counterexamples": 2
+      },
+      "duration_seconds": null,
+      "evidence": "config-route-observations.json"
+    },
+    {
+      "id": "TDD-routes-hook",
+      "command": "python -X utf8 -m pytest -q tests/unit/test_architecture_quality_routes.py tests/unit/test_architecture_quality_hook.py",
+      "result": "RED before implementation:19 fail/3 pass; GREEN all22",
+      "counts": {
+        "red_failed": 19,
+        "red_passed": 3
+      },
+      "duration_seconds": 1.81
+    },
+    {
+      "id": "route-scanner-real-RED",
+      "command": "python -X utf8 -m pytest -q tests/integration/test_architecture_quality_discovery.py::test_real_scanner_and_discovery_share_first_route_owner_for_sidecar_group",
+      "result": "RED before actual adapter routing: indexed_only instead of original+metadata; GREEN actual public SourceRef read afterwards",
+      "counts": {
+        "red_failed": 1
+      },
+      "duration_seconds": 0.64
+    },
+    {
+      "id": "ROUTES-HOOK179",
+      "command": "python -X utf8 -m pytest -q tests/unit/test_architecture_quality_routes.py tests/unit/test_architecture_quality_hook.py tests/unit/test_architecture_quality_config.py tests/unit/test_commit_policy.py tests/integration/test_architecture_quality_discovery.py tests/integration/test_legacy_local_reconcile.py tests/contract/test_root_policy_2x.py tests/contract/test_root_policy_v2.py tests/contract/test_route_config.py tests/contract/test_future_root_config_only.py tests/contract/test_adapter_production_dispatch.py tests/contract/test_zr402_adapter_route_contract.py tests/contract/test_adapter_spi.py tests/contract/test_dropbox_root_policy_fc501.py tests/contract/test_zr405_policy_export_cli.py --junitxml=\"C:/Users/郑曾波/Projects/company-wiki/docs/plans/architecture-quality-2026-10-13/results/company-wiki/pytest-routes-hook-final.xml\"",
+      "result": "PASS",
+      "counts": {
+        "passed": 178,
+        "skipped": 1,
+        "failed": 0,
+        "errors": 0
+      },
+      "duration_seconds": 9.31,
+      "evidence": "pytest-routes-hook-final.xml",
+      "skip_reason": "existing symlink test: symlinks not supported on this host"
+    },
+    {
+      "id": "portable-normal-commit",
+      "command": "git commit -m \"refactor: make storage routes ordered and pre-commit portable\"",
+      "result": "PASS: real new current-PATH POSIX pre-commit executed; ruff/mypy/config-doctor/host guard pass; no dependency changes",
+      "counts": {
+        "passed_hooks": 4
+      },
+      "duration_seconds": 9.9837
+    }
+  ],
+  "public_interface_changes": {
+    "cli": [],
+    "SourceRef_SourceExport_NarrativeRef": [],
+    "optional_internal_adapter_capability": "CompanyRawAdapter/DayuAdapter.discover_issuer_paths; original enumerate signature unchanged; legacy no-adapter mapping confined to adapter_dispatch; no consumer repo changes; optional primary_filter added to all three scanner adapters, default None keeps old enumerate callers unchanged",
+    "storage_scan_routing": "ROOT confirmed ordered first matching include/exclude; old overlap rejection removed; real facade/source catalog/local discovery use same matcher; route without a port inherits root default; route-only roots scan assigned configured scopes."
+  },
+  "remaining": [
+    {
+      "id": "AQ-CWP-06",
+      "owner": "ROOT+DU",
+      "action": "integrate already-dispatched shared document engine/profile/structure/benchmark lanes, preserve DU/1"
+    },
+    {
+      "owner": "ROOT",
+      "action": "merge this commit, central FF→CWP→RF offline E2E, normal publish and exact-SHA CI; no repeated 86s parser liveness needed"
+    },
+    {
+      "owner": "ROOT",
+      "action": "real G2/G4/G5 fact/model quality remains separate mother-plan work"
+    }
+  ],
+  "preserved_inputs": {
+    "production_originals": "No production originals read/written; branch contains no companies/raw/data/config changes. Tests use independent temporary originals with byte/sentinel assertions.",
+    "production_configuration": "unchanged",
+    "DU_owned_paths": "zero changed paths",
+    "Dayu_project": "unchanged; only existing CWP DayuAdapter owns external layout read",
+    "other_repositories": "unchanged",
+    "credentials": "not read/printed/committed",
+    "network_model_calls": 0,
+    "cost_usd": 0
+  },
+  "cleanup": {
+    "worktree_clean": true,
+    "running_sessions": 0,
+    "temporary_staging_cleanup": "asserted complete; foreign staging untouched; replace/body failures preserve existing destination",
+    "production_migration": false,
+    "installed_skills_updated": false,
+    "pushed": false,
+    "large_evidence_copied": false
+  },
+  "report": "report.md",
+  "evidence": [
+    "pytest-final.xml",
+    "test-summary.json",
+    "config-route-observations.json",
+    "pytest-routes-hook-final.xml"
+  ],
+  "notes": [
+    "CodeGraph canonical index partially predates newest modules; no-callers is not taken as deletion proof.",
+    "Two guessed historical test paths caused no-collection errors and were corrected using rg --files; not counted as passing evidence.",
+    "Initial new fixture lifecycle and invalid semantic-version fields were fixed in tests without relaxing production rules.",
+    "ROOT review removed the newly introduced reverse dependency of pure location helper on resolver.",
+    "Second closeout removes hardcoded route samples and machine-Python hook; two legacy overlap tests intentionally changed to ROOT-confirmed ordered semantics, while real invalid-route checks remain."
+  ],
+  "accepted_commits": [
+    "d71c8e4f9ad38034dd0be5b80253116970481343"
+  ],
+  "pending_root_reception_commits": [
+    "1f9f0673b23513640ca9e0e3c46ace28fa1b1136"
+  ]
+}

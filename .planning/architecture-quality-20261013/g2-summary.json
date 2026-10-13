@@ -1,0 +1,63 @@
+{
+  "schema_version": "architecture-quality-g2/1",
+  "archive": "g2-evidence.zip",
+  "archive_sha256": "6fe750ebe90b863e10789e175bc26cce6458df29e519c55bb9aeed66920c39c4",
+  "archive_bytes": 60309,
+  "verified_original_bytes": 226324,
+  "verified_files": 38,
+  "report_member": "attempt-0001/report.json",
+  "status": "PASS",
+  "case_statuses": {
+    "annual-report": "PASS",
+    "half-year-report": "PASS",
+    "quarterly-report": "PASS",
+    "prospectus": "PASS",
+    "placement": "PASS",
+    "convertible-bond": "PASS",
+    "ir-policy": "PASS",
+    "call-txt-zh": "PASS",
+    "call-txt-en": "PASS"
+  },
+  "runs": [
+    {
+      "run_index": 1,
+      "model_posts": 8,
+      "status": "completed",
+      "exit_code": 0
+    },
+    {
+      "run_index": 2,
+      "model_posts": 0,
+      "status": "completed",
+      "exit_code": 0,
+      "reuse_pins_identical": true
+    },
+    {
+      "run_index": 3,
+      "model_posts": 1,
+      "status": "completed",
+      "exit_code": 0
+    },
+    {
+      "run_index": 4,
+      "model_posts": 1,
+      "status": "completed",
+      "exit_code": 0
+    }
+  ],
+  "model_accounting": {
+    "run1_posts": 8,
+    "run2_posts": 0,
+    "total_posts": 10,
+    "provider_calls": 0,
+    "llm_calls": 10,
+    "paid_usd": 0.0,
+    "stub_errors": [],
+    "loopback_endpoint_ref": "loopback://127.0.0.1/v1/chat/completions"
+  },
+  "rf_reads": 9,
+  "rf_read_ok": true,
+  "scratch_restored": true,
+  "removed_verified_duplicates": true,
+  "seconds": 66.658
+}

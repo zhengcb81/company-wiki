@@ -1,0 +1,35 @@
+{
+  "schema_version": "architecture-quality-installed/1",
+  "checks": [
+    {
+      "surface": ".agents",
+      "result": "PASS",
+      "calls": 0,
+      "downloads": 0,
+      "seconds": 0.1477
+    },
+    {
+      "surface": ".claude",
+      "result": "PASS",
+      "calls": 0,
+      "downloads": 0,
+      "seconds": 0.1428
+    },
+    {
+      "surface": ".codex",
+      "result": "PASS",
+      "calls": 0,
+      "downloads": 0,
+      "seconds": 0.1374
+    }
+  ],
+  "scratch_restored": true,
+  "full_runtime_matches": true,
+  "physical_target_count": 2,
+  "corrected_historical_dependency": "codex/scripts/ff_provider_cause.py",
+  "original_probe_errors": [
+    "ROOT expected stderr JSON rather than public stdout contract",
+    "codex historical dependency ImportError diagnosed; only missing owned dependency synchronized"
+  ],
+  "paid_cost_usd": 0
+}

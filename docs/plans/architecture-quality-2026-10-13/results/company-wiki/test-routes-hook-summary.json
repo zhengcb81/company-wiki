@@ -1,0 +1,12 @@
+{
+  "schema_version": "architecture-quality-tests/1",
+  "commit": "1f9f0673b23513640ca9e0e3c46ace28fa1b1136",
+  "counts": {
+    "tests": 179,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1
+  },
+  "duration_seconds": 9.31,
+  "source": "pytest-routes-hook-final.xml"
+}

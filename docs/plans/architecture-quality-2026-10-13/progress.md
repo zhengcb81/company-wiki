@@ -1,0 +1,17 @@
+# 进度
+
+2026-10-13 ROOT：收到三仓独立审查及全面改进要求，建立独立子计划，不覆盖文档理解施工或母计划；核实Git/CodeGraph。准备隔离worktree和三名agent，0下载、0模型调用、0原件写入。
+
+三worktree已按基线创建并稀疏检出代码/测试/配置/文档，创建时干净；三名独立agent已启动。RF原150份WIP字节及mtime已只读记录到ROOT baseline.json。ROOT检查既有跨市场回放和叙述G2回放，复用原大节点工具，避免再建并行权威测试链。
+
+阶段A反馈：CWP发现写入复用使用历史absolute_path与固定临时文件名并发碰撞；FF发现配置解析和query/ensure候选投影分叉、非法日历日期及本机解释器硬编码。ROOT已协调仓内范围，DU独占模块和跨仓DTO不变；FF进一步读共享验证后撤回“query缺hash检查”的初步判断，避免无证据重复校验。
+
+阶段A收口/B实施：RF报告DAG依赖消费分叉、运行包内容指纹与数值错误边界，ROOT已协调共用visitor/runtime package范围；三仓开始TDD实施。最终C使用既有跨市场正式原件/经济输出回放和九类型G2工具，不增加日常CI重测试或新许可门。
+
+ROOT A节点现主线三公司core基线已跑：43.562秒，32PASS/30NOT_RUN/7NOT_APPLICABLE/1BLOCKED/1FAIL，独立测试目录恢复，0模型费用。唯一FAIL为腾讯正/反证据引用同一含H1下降与Q2改善的业务表格，现validator仅以excerpt相同判矛盾；已向RF agent交叉报告，要求按真实claim/命题责任审查，保持伪反证反例，不改冻结input/SHA。NOT_RUN/BLOCKED是回放不覆盖真实研究/供应商的诚实范围。
+
+B收口：FF35新反例、742既有集中项已绿，准备最终commit；RF依赖/manifest/数值18新项已绿，shared-excerpt反例从基线失败转入实现。CWP131 reader/writer及30配置新项已绿，继续按既有失败架构契约把local_reconcile布局枚举下沉adapter。ROOT审查发现新source_location对上层resolver局部import形成反向依赖，已要求纯containment实现一并下沉、resolver兼容转发，不新建重复校验。三仓远端刷新确认仍各自基线，无外部并线冲突。
+
+FF已正常接收/推送main5cfad11，最终pre-push746PASS/7既有SKIP/78subtests，64.86秒。10个runtime文件定点同步后fresh CLI捕获.codex旧依赖ImportError；ROOT完整owned plan证明仅ff_provider_cause漂移，只补该1文件后三安装面fresh CLI正常、0calls/0downloads且tmp恢复，完整owned runtime均MATCH。ROOT首次错误假设诊断在stderr，已按既有stdout契约纠正探针，未改产品迁就探针。CWP第一commit d71c8e4f已接本地主线，266PASS/1平台skip；第二存储route/hook收口独立施工中。RF213相关＋31native双向精确＋三公司经济输出一致已验，删除无消费者队列/便携hook及peer风险收口进行中。整个B尚未整体关闭。
+
+用户再次明确继续全面根因收口；ROOT三仓agent保持独立，DU三工作树零写。第二收口在进行：CWP确定现存route.adapter_id未被scanner实际消费，不只是启发式误拒，新增22反例19在基线失败，按ordered group owner及共享预算修。RF独立peer两项已确认会误拒正确A→B最终收入归属，作者在共享依赖层传递有效收入/确认期，不另建金额计算器。FF定点安装完整runtime诊断纳入低层工具，避免scope完成误称整包就绪，仍不扩大写入。中期保护检查RF150文件、FF1文件、三仓17配置文件SHA/mtime全部保持；FF精确CI38373344334 success。

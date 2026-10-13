@@ -1,0 +1,17 @@
+{
+  "schema_version": "architecture-quality-tests/1",
+  "counts": {
+    "tests": 267,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1
+  },
+  "duration_seconds": 23.061,
+  "skips": [
+    {
+      "name": "test_dbx05_symlink_escape_rejected",
+      "reason": "symlinks not supported on this host"
+    }
+  ],
+  "source": "pytest-final.xml"
+}

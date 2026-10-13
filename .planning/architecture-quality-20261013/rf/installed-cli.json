@@ -1,0 +1,30 @@
+{
+  "schema_version": "architecture-quality-installed/1",
+  "checks": [
+    {
+      "surface": ".agents",
+      "version_manifest_matches": true,
+      "source_lineage_imports": true,
+      "ghost_queue_absent": true,
+      "seconds": 0.8645
+    },
+    {
+      "surface": ".claude",
+      "version_manifest_matches": true,
+      "source_lineage_imports": true,
+      "ghost_queue_absent": true,
+      "seconds": 1.3074
+    },
+    {
+      "surface": ".codex",
+      "version_manifest_matches": true,
+      "source_lineage_imports": true,
+      "ghost_queue_absent": true,
+      "seconds": 1.2338
+    }
+  ],
+  "scratch_restored": true,
+  "canonical_version": "revenue-forecast 4.3.0 manifest_sha256=3a0b7e9513994bec",
+  "model_calls": 0,
+  "downloads": 0
+}

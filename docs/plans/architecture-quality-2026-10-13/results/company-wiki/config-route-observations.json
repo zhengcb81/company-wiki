@@ -1,0 +1,28 @@
+{
+  "schema_version": "architecture-quality-route-observations/1",
+  "observations": [
+    {
+      "case": "false_negative_custom_issuer_scope",
+      "legacy_load_overlap_outcome": "allowed",
+      "actual_match_path": "issuer-x/report.pdf",
+      "actual_routes_match": [
+        true,
+        true
+      ],
+      "production_changes": 0
+    },
+    {
+      "case": "false_positive_excluded_disjoint_scope",
+      "legacy_load_overlap_outcome": "rejected",
+      "actual_match_path": "financial_reports/annual/2025.pdf",
+      "actual_routes_match": [
+        false,
+        true
+      ],
+      "production_changes": 0
+    }
+  ],
+  "status": "historical_RED_fixed_by_second_commit",
+  "baseline_sha": "d71c8e4f9ad38034dd0be5b80253116970481343",
+  "fixed_by_commit": "1f9f0673b23513640ca9e0e3c46ace28fa1b1136"
+}

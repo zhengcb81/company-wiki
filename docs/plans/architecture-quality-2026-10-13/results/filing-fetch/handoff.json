@@ -1,0 +1,374 @@
+{
+  "schema_version": "architecture-quality/1",
+  "repository": "filing-fetch",
+  "baseline_sha": "64b4d294a1e61e595e330b4a7d4075c289f9fdc3",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\architecture-quality-20261013\\filing-fetch",
+  "branch": "codex/aq-ff-20261013",
+  "findings": [
+    {
+      "id": "FF-AQ-01",
+      "severity": "high",
+      "root_cause": "Three independent configuration readers/token expanders disagree; unbounded root/doctor JSON reads and naked decode/path failures.",
+      "evidence": [
+        "baseline scripts/fetch_filing.py:168",
+        "baseline scripts/transcript_tool_transport.py:229",
+        "baseline tools/config_doctor.py:61",
+        "RED unknown-token literal directories/UTF8/stream-bound/cross-platform path failures"
+      ],
+      "disposition": "fixed",
+      "changed_paths": [
+        "scripts/ff_configuration.py",
+        "scripts/fetch_filing.py",
+        "scripts/transcript_tool_transport.py",
+        "tools/config_doctor.py"
+      ],
+      "test_refs": [
+        "tests/test_architecture_quality.py::test_literal_unknown_token_directory_cannot_make_runtime_green",
+        "tests/test_architecture_quality.py::test_config_is_bounded_while_reading_not_after_full_read",
+        "tests/test_architecture_quality.py::test_doctor_uses_runtime_rejection_for_invalid_utf8_and_literals",
+        "tests/test_architecture_quality.py::test_root_resolution_failure_is_consistently_a_config_error"
+      ]
+    },
+    {
+      "id": "FF-AQ-02",
+      "severity": "high",
+      "root_cause": "query and ensure duplicate logical candidate binding/projection; query leaks nested physical fields while broad substring filtering rejects legitimate business names.",
+      "evidence": [
+        "baseline scripts/fetch_filing.py:759",
+        "baseline scripts/fetch_filing.py:1026",
+        "RED nested canonical_path escape and growth_path false rejection"
+      ],
+      "disposition": "fixed",
+      "changed_paths": [
+        "scripts/ff_source_candidate.py",
+        "scripts/fetch_filing.py"
+      ],
+      "test_refs": [
+        "tests/test_architecture_quality.py::test_nested_physical_candidate_fields_never_escape",
+        "tests/test_architecture_quality.py::test_business_path_label_is_not_a_storage_location",
+        "tests/test_architecture_quality.py::test_candidate_projection_discards_unknown_metadata_consistently"
+      ]
+    },
+    {
+      "id": "FF-AQ-03",
+      "severity": "medium",
+      "root_cause": "Date syntax accepted nonexistent calendar dates at request and publication boundaries.",
+      "evidence": [
+        "baseline scripts/filing_contracts.py:223",
+        "baseline scripts/filing_contracts.py:586",
+        "RED invalid calendar cases in all 3 schemas and source metadata"
+      ],
+      "disposition": "fixed",
+      "changed_paths": [
+        "scripts/filing_contracts.py"
+      ],
+      "test_refs": [
+        "tests/test_architecture_quality.py::test_invalid_calendar_request_is_rejected_before_any_transport",
+        "tests/test_architecture_quality.py::test_invalid_producer_publication_is_an_upstream_error",
+        "tests/test_architecture_quality.py::test_valid_leap_day_is_accepted"
+      ]
+    },
+    {
+      "id": "FF-AQ-04",
+      "severity": "medium",
+      "root_cause": "Tracked Git hook fixes one machine Python path and uses bash arrays under a sh shebang; workflow docs retain retired execution stage/physical storage paths and invalid CLI example.",
+      "evidence": [
+        "baseline .githooks/pre-commit:16",
+        "baseline SKILL.md required workflow stage5/6",
+        "baseline scripts/fetch_filing.py module usage sample"
+      ],
+      "disposition": "fixed",
+      "changed_paths": [
+        ".githooks/pre-commit",
+        "SKILL.md",
+        "scripts/fetch_filing.py"
+      ],
+      "test_refs": [
+        "tests/test_architecture_quality.py::test_tracked_pre_commit_hook_has_no_machine_specific_python_path",
+        "tests/test_architecture_quality.py::test_portable_hook_executes_existing_check_module_in_active_path",
+        "normal commit pre_commit: ruff/mypy/host guard passed"
+      ]
+    },
+    {
+      "id": "FF-AQ-05",
+      "severity": "medium",
+      "root_cause": "Domain SourceRef validation belongs to serializer private helper while ET duplicates a weaker blank-field validator.",
+      "evidence": [
+        "baseline scripts/ff_v2_envelope.py:31-72",
+        "baseline scripts/transcript_tool_transport.py:385",
+        "RED ET blank document/source/MIME cases unlike filing serializer"
+      ],
+      "disposition": "fixed",
+      "changed_paths": [
+        "scripts/ff_source_ref.py",
+        "scripts/ff_v2_envelope.py",
+        "scripts/ff_source_candidate.py",
+        "scripts/ff_local_source_prepare.py",
+        "scripts/transcript_companion.py",
+        "scripts/transcript_tool_transport.py"
+      ],
+      "test_refs": [
+        "tests/test_architecture_quality.py::test_et_and_filing_reference_validation_reject_the_same_blank_fields",
+        "tests/test_cwp_s0b_source_ref_contract.py",
+        "GREEN final affected177 cases"
+      ]
+    },
+    {
+      "id": "FF-AQ-06",
+      "severity": "high",
+      "root_cause": "Partial deployment reported selected-file byte success but did not expose prior owned dependency drift; ROOT fresh CLI reproduced missing ff_provider_cause symbol in .codex although10changed files matched.",
+      "evidence": [
+        "ROOT actual installed CLI ImportError for build_request_diagnostic",
+        "tools/sync_installs_b3.py plan/result compared only selected scope",
+        "6 pre-implementation regression failures prove required state absent"
+      ],
+      "disposition": "fixed",
+      "changed_paths": [
+        "tools/sync_installs_b3.py",
+        "tools/ci_tests.py",
+        "tests/test_install_runtime_diagnostics.py"
+      ],
+      "test_refs": [
+        "tests/test_install_runtime_diagnostics.py",
+        "tests/test_selective_installation.py",
+        "tests/test_s3_install_surface.py"
+      ]
+    }
+  ],
+  "commits": [
+    {
+      "sha": "5cfad11b4ea533b4b1fadd081945e52018eb96e1",
+      "message": "refactor: unify filing-fetch configuration and source contracts",
+      "normal_commit_hooks": "ruff/mypy-public-contract/host-assumption passed; no skip/bypass"
+    },
+    {
+      "sha": "e2efa81d7995836d457479eb528fa6f8cd5dc3f3",
+      "message": "fix: distinguish scoped installs from full runtime byte diagnostics",
+      "parent_sha": "5cfad11b4ea533b4b1fadd081945e52018eb96e1",
+      "normal_commit_hooks": "ruff/host guard Passed; public-contract mypy no matching changed files Skipped; no bypass"
+    }
+  ],
+  "tests": [
+    {
+      "stage": "RED",
+      "command": "python -B -m pytest tests/test_architecture_quality.py -q --tb=no -p no:cacheprovider",
+      "result": "EXPECTED_FAIL",
+      "counts": {
+        "failed": 31,
+        "passed": 3
+      },
+      "duration_seconds": 0.48,
+      "scope": "34 initial pre-implementation regressions; portable-hook invocation added later"
+    },
+    {
+      "stage": "GREEN-related",
+      "command": "python -B -m pytest tests/test_architecture_quality.py tests/test_fetch_filing.py tests/test_config_doctor.py tests/test_transcript_launch_contract.py tests/test_source_ref_v2_db_query.py tests/test_source_ref_v2.py tests/test_ff_v2_contract.py tests/test_transcript_companion_transport.py tests/test_local_source_prepare.py -q --tb=short -p no:cacheprovider",
+      "result": "PASS",
+      "counts": {
+        "passed": 298,
+        "skipped": 5,
+        "subtests_passed": 39
+      },
+      "duration_seconds": 21.75
+    },
+    {
+      "stage": "GREEN-broad",
+      "command": "python -X utf8 -B tools/ci_tests.py",
+      "result": "PASS",
+      "counts": {
+        "passed": 742,
+        "skipped": 7,
+        "subtests_passed": 78
+      },
+      "duration_seconds": 66.21,
+      "scope": "Existing focused offline CI plus initial34 regressions; before final pure SourceRef module move and additional portable-hook case"
+    },
+    {
+      "stage": "GREEN-final-hook",
+      "command": "python -B -m pytest tests/test_architecture_quality.py -q --tb=short -p no:cacheprovider",
+      "result": "PASS",
+      "counts": {
+        "passed": 35,
+        "skipped": 0
+      },
+      "duration_seconds": 0.64
+    },
+    {
+      "stage": "GREEN-final-contracts",
+      "command": "python -B -m pytest tests/test_architecture_quality.py tests/test_cwp_s0b_source_ref_contract.py tests/test_ff_v2_contract.py tests/test_transcript_companion.py tests/test_local_source_prepare.py tests/test_et_s0b_contract.py tests/test_transcript_launch_contract.py -q --tb=short -p no:cacheprovider",
+      "result": "PASS",
+      "counts": {
+        "passed": 174,
+        "skipped": 3
+      },
+      "duration_seconds": 2.39,
+      "scope": "After final shared pure SourceRef module move"
+    },
+    {
+      "stage": "GREEN-static",
+      "command": "python -m ruff check scripts tests tools e2e; python -m mypy scripts/filing_contracts.py scripts/fetch_filing.py; python tools/host_assumption_guard.py --roots tests tools scripts e2e; git diff --check",
+      "result": "PASS",
+      "counts": {
+        "mypy_source_files": 2,
+        "host_new_violations": 0
+      },
+      "duration_seconds": null
+    },
+    {
+      "stage": "RED-platform-error",
+      "command": "python -B -m pytest tests/test_architecture_quality.py -k root_resolution_failure -q --tb=short -p no:cacheprovider",
+      "result": "EXPECTED_FAIL",
+      "counts": {
+        "failed": 1,
+        "passed": 1,
+        "deselected": 36
+      },
+      "duration_seconds": 0.43
+    },
+    {
+      "stage": "GREEN-final-platform-contracts",
+      "command": "python -B -m pytest tests/test_architecture_quality.py tests/test_cwp_s0b_source_ref_contract.py tests/test_ff_v2_contract.py tests/test_transcript_companion.py tests/test_local_source_prepare.py tests/test_et_s0b_contract.py tests/test_transcript_launch_contract.py -q --tb=short -p no:cacheprovider",
+      "result": "PASS",
+      "counts": {
+        "passed": 177,
+        "skipped": 3,
+        "new_architecture_regressions_included": 38
+      },
+      "duration_seconds": 2.54
+    },
+    {
+      "stage": "RED-runtime-install-diagnostics",
+      "command": "python -B -m pytest tests/test_install_runtime_diagnostics.py -q --tb=short -p no:cacheprovider --basetemp <owned TemporaryDirectory>",
+      "result": "EXPECTED_FAIL",
+      "counts": {
+        "failed": 6
+      },
+      "duration_seconds": 1.2,
+      "scratch_restored": true
+    },
+    {
+      "stage": "GREEN-runtime-install-diagnostics",
+      "command": "python -B -m pytest tests/test_install_runtime_diagnostics.py tests/test_selective_installation.py tests/test_s3_install_surface.py -q --tb=short -p no:cacheprovider --basetemp <owned TemporaryDirectory>",
+      "result": "PASS",
+      "counts": {
+        "passed": 33,
+        "skipped": 0
+      },
+      "duration_seconds": 8.59,
+      "scratch_restored": true
+    },
+    {
+      "stage": "GREEN-runtime-install-static",
+      "command": "python -m ruff check tools/sync_installs_b3.py tools/ci_tests.py tests/test_install_runtime_diagnostics.py; python tools/host_assumption_guard.py --roots tests tools scripts e2e; git diff --check",
+      "result": "PASS",
+      "counts": {
+        "host_new_violations": 0
+      },
+      "duration_seconds": null
+    }
+  ],
+  "public_interface_changes": [],
+  "internal_public_helpers": [
+    "ff_configuration.read_json_object",
+    "ff_configuration.expand_config_path",
+    "ff_configuration.load_connection_root",
+    "ff_source_ref.validate_source_ref",
+    "ff_source_candidate.validate_source_candidate"
+  ],
+  "compatibility_aliases": [
+    "fetch_filing.load_company_wiki_root signature and __all__ stable",
+    "fetch_filing._validate_company_wiki_root wrapper retained",
+    "ff_v2_envelope._reference alias retained",
+    "existing v1/v2 schemas and public CLI flags/resolve_filing kwargs unchanged"
+  ],
+  "install_runtime_files": [
+    "SKILL.md",
+    "scripts/fetch_filing.py",
+    "scripts/filing_contracts.py",
+    "scripts/ff_configuration.py",
+    "scripts/ff_source_candidate.py",
+    "scripts/ff_source_ref.py",
+    "scripts/ff_v2_envelope.py",
+    "scripts/ff_local_source_prepare.py",
+    "scripts/transcript_companion.py",
+    "scripts/transcript_tool_transport.py"
+  ],
+  "imports_closure": [
+    "fetch_filing -> ff_configuration -> filing_contracts -> ff_provider_cause",
+    "fetch_filing -> ff_source_candidate -> ff_source_ref -> filing_contracts",
+    "ff_v2_envelope/ff_local_source_prepare/transcript_companion/transcript_tool_transport -> ff_source_ref",
+    "transcript_tool_transport -> ff_configuration"
+  ],
+  "changed_paths": [
+    ".githooks/pre-commit",
+    "SKILL.md",
+    "docs/plans/architecture-quality-2026-10-13/checks.json",
+    "docs/plans/architecture-quality-2026-10-13/findings.md",
+    "docs/plans/architecture-quality-2026-10-13/progress.md",
+    "docs/plans/architecture-quality-2026-10-13/task_plan.md",
+    "scripts/fetch_filing.py",
+    "scripts/ff_configuration.py",
+    "scripts/ff_local_source_prepare.py",
+    "scripts/ff_source_candidate.py",
+    "scripts/ff_source_ref.py",
+    "scripts/ff_v2_envelope.py",
+    "scripts/filing_contracts.py",
+    "scripts/transcript_companion.py",
+    "scripts/transcript_tool_transport.py",
+    "tests/test_architecture_quality.py",
+    "tests/test_install_runtime_diagnostics.py",
+    "tools/ci_tests.py",
+    "tools/config_doctor.py",
+    "tools/sync_installs_b3.py"
+  ],
+  "remaining": [
+    "ROOT receives e2efa81 engineering-only followup and normal push; no skill runtime sync needed for this commit.",
+    "ROOT fresh process checks normal and lazy ET execution; installer byte_complete is not execution readiness.",
+    "RF independent peer P2 closure is described separately in rf-peer-review.md and coordinated by ROOT/author.",
+    "Mother true G2/G4/G5/DU work remains separate."
+  ],
+  "preserved_inputs": {
+    "production_config_sha256": "9f692a4f04f24501519b53a017592781f14466c75bf93f9fb7cfed6751e1b24d",
+    "production_config_matches_baseline": true,
+    "canonical_worktree_writes": 0,
+    "original_document_writes": 0,
+    "credential_writes": 0,
+    "dayu_writes": 0,
+    "other_harness_worktree_writes": 0,
+    "model_calls": 0,
+    "live_provider_downloads": 0,
+    "paid_cost_usd": 0,
+    "external_writes_only": [
+      "company-wiki/docs/plans/architecture-quality-2026-10-13/results/filing-fetch/report.md",
+      "company-wiki/docs/plans/architecture-quality-2026-10-13/results/filing-fetch/handoff.json"
+    ]
+  },
+  "cleanup": {
+    "production_sources_untouched": true,
+    "ci_runner_temporary_directory_restored": true,
+    "fixture_sources_only": true,
+    "installation_performed": false,
+    "push_performed": false,
+    "worktree_retained_for_root_reception": true,
+    "status": "CLEAN tracked/untracked git status; pytest host fixture retention is managed by pytest, no shared host temp swept.",
+    "followup_owned_tmp_restored": true,
+    "followup_real_installed_dir_writes": 0,
+    "followup_git_status": "clean"
+  },
+  "new_followup_runtime_sync_files": [],
+  "tool_result_additions": {
+    "schema_version_unchanged": [
+      "ff-install-plan/1",
+      "ff-install-result/1"
+    ],
+    "target_row_fields": [
+      "full_runtime_drift",
+      "outside_scope_runtime_drift",
+      "runtime_diagnostic_errors",
+      "runtime_byte_complete",
+      "runtime_execution_validation"
+    ],
+    "semantics": "Additive diagnostic fields only. Scope/status/check exits unchanged; runtime execution always NOT_EVALUATED. Result diagnoses actual post-apply state; configs/unknown/keys untouched.",
+    "ownership_source": "Existing manifest/installable; no AST dependency or second registry."
+  }
+}

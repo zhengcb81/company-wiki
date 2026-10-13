@@ -1,0 +1,473 @@
+{
+  "schema_version": "architecture-quality/1",
+  "repository": "revenue-forecast",
+  "baseline_sha": "b9208a2117b8423f4b355dfca885aaf0d56a05bb",
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/architecture-quality-20261013/revenue-forecast",
+  "branch": "codex/aq-rf-20261013",
+  "status": "B_COMPLETE_ROOT_C_PENDING",
+  "findings": [
+    {
+      "id": "RF-AQ-01",
+      "severity": "P1",
+      "root_cause": "CLI与安装工具维护不同runtime清单，version仅hash文件名而不绑定运行字节",
+      "evidence": [
+        "scripts/revenue_forecast.py:main --version",
+        "tools/sync_installations.py:installable_files/manifest",
+        "runtime byte-change RED"
+      ],
+      "disposition": "fixed shared installation_manifest runtime inventory and owned-byte hash",
+      "changed_paths": [
+        "scripts/installation_manifest.py",
+        "scripts/revenue_forecast.py",
+        "tools/sync_installations.py",
+        "tools/tests/test_g3_skill_package.py"
+      ],
+      "test_refs": [
+        "tools/tests/test_architecture_runtime_manifest.py",
+        "docs/implementation/architecture-quality-2026-10-13/verification.json"
+      ]
+    },
+    {
+      "id": "RF-AQ-02",
+      "severity": "P1",
+      "root_cause": "三个消费者各自猜原生DAG，漏短carry-in/progress/调整、跨segment约束与lag确认时钟；递归ancestry还会溢出",
+      "evidence": [
+        "source_narrative_context._formula_refs",
+        "research.native_dependencies.segment_roots",
+        "forecast.calc.base_segment_parameter_ids",
+        "peer linked ratio B44→48.4/proportional B50→46.875"
+      ],
+      "disposition": "fixed shared direct parameter-use visitor, iterative derived ancestry and ordered effective ID topology with distinct input/recognized clocks and value/control roles",
+      "changed_paths": [
+        "scripts/forecast/dependencies.py",
+        "scripts/forecast/calc.py",
+        "scripts/research/native_dependencies.py",
+        "scripts/source_narrative_context.py",
+        "scripts/model_registry.py",
+        "scripts/analysis/confidence.py",
+        "scripts/research_support_diagnostics.py"
+      ],
+      "test_refs": [
+        "tests/test_architecture_dependency_uses.py",
+        "tests/test_native_research_bindings.py",
+        "tools/tests/test_w08_root_native_scope.py"
+      ]
+    },
+    {
+      "id": "RF-AQ-03",
+      "severity": "P2",
+      "root_cause": "非法实数算术与大整数转换抛裸异常，绕过已有ForecastInputError契约",
+      "evidence": [
+        "finite_number huge integer overflow",
+        "negative fractional power complex",
+        "zero negative power",
+        "power overflow"
+      ],
+      "disposition": "fixed common numeric/formula error conversion without repairing values",
+      "changed_paths": [
+        "scripts/contracts/evidence.py",
+        "scripts/forecast/calc.py"
+      ],
+      "test_refs": [
+        "tests/test_architecture_numeric_errors.py"
+      ]
+    },
+    {
+      "id": "RF-AQ-04",
+      "severity": "P1",
+      "root_cause": "将物理引文身份当成proposition身份，误拒同表不同期间/方向事实",
+      "evidence": [
+        "frozen HK-00700 input two claims same SHA with H1 decline/Q2 recovery",
+        "shared table RED1/2"
+      ],
+      "disposition": "fixed same explicit proposition/claim opposite relabelling rejection, different conclusions disclose semantic NOT_EVALUATED",
+      "changed_paths": [
+        "scripts/research/drivers.py",
+        "tests/test_evidence_input_lineage.py"
+      ],
+      "test_refs": [
+        "tests/test_shared_excerpt_claim_semantics.py",
+        "docs/implementation/architecture-quality-2026-10-13/verification.json"
+      ]
+    },
+    {
+      "id": "RF-AQ-05",
+      "severity": "P2",
+      "root_cause": "RF生产成功准备后生成无消费者、无持久化且now=0的第二处理队列",
+      "evidence": [
+        "source_preparation._preparation_demands/_submit_preparation_demand",
+        "actual imports/callers only two tests read RF global; no CWP/FF caller",
+        "shadow-job tripwire RED"
+      ],
+      "disposition": "retired production queue/global/API; historical implementation moved outside runtime to tools/legacy; installed residue excluded",
+      "changed_paths": [
+        "scripts/source_preparation.py",
+        "scripts/processing_demand.py",
+        "tools/legacy/processing_demand.py",
+        "scripts/installation_manifest.py",
+        "tests/test_p5_source_default_v2.py",
+        "tests/test_zr701_f1_draft_formal.py",
+        "tests/test_message_contract_pins.py",
+        "tests/test_zr709_zijin_journey.py"
+      ],
+      "test_refs": [
+        "tests/test_p5_source_default_v2.py",
+        "tests/test_message_contract_pins.py",
+        "tools/tests/test_architecture_runtime_manifest.py"
+      ]
+    },
+    {
+      "id": "RF-AQ-06",
+      "severity": "P2",
+      "root_cause": "pre-commit固定个人Python/Git安装目录且sh shebang使用Bash数组",
+      "evidence": [
+        "baseline .githooks/pre-commit INSTALL_PYTHON and PATH literals"
+      ],
+      "disposition": "fixed POSIX shell and current-PATH tool discovery, kept all real checks",
+      "changed_paths": [
+        ".githooks/pre-commit"
+      ],
+      "test_refs": [
+        "sh -n .githooks/pre-commit",
+        "normal commit f0d694d6 ruff/mypy/host guard PASS"
+      ]
+    },
+    {
+      "id": "RF-AQ-07",
+      "severity": "P1",
+      "root_cause": "金额完全等价的cap paths出现1 ULP计算舍入，runtime/output两份严格scenario order误拒",
+      "evidence": [
+        "native A three paths mathematical103.125; low103.12500000000001 vs base/high103.125"
+      ],
+      "disposition": "fixed shared scenario_ordered allowing at most4 binary64 ULP; numbers and revenue reconciliation unchanged; >4 ULP/real reversal rejected",
+      "changed_paths": [
+        "scripts/contracts/evidence.py",
+        "scripts/forecast/segments.py",
+        "scripts/revenue_report.py"
+      ],
+      "test_refs": [
+        "tests/test_architecture_numeric_errors.py",
+        "tests/test_architecture_dependency_uses.py",
+        "tests/test_scenarios_confidence.py"
+      ]
+    }
+  ],
+  "commits": [
+    "f0d694d69a05ef3f7a449e87cd91cdb44d1ff8ce"
+  ],
+  "tests": [
+    {
+      "command": "pytest focused initial tests/test_architecture_dependency_uses.py tests/test_architecture_numeric_errors.py tools/tests/test_architecture_runtime_manifest.py",
+      "result": "RED",
+      "counts": {
+        "failed": 11,
+        "passed": 7
+      },
+      "duration_seconds": 4.4
+    },
+    {
+      "command": "pytest initial focused new three files",
+      "result": "GREEN",
+      "counts": {
+        "passed": 18
+      },
+      "duration_seconds": 6.65
+    },
+    {
+      "command": "pytest tests/test_shared_excerpt_claim_semantics.py before guard correction",
+      "result": "RED",
+      "counts": {
+        "failed": 1,
+        "passed": 2
+      },
+      "duration_seconds": 0.37
+    },
+    {
+      "command": "pytest test_repeated_default_preparation_reuses_without_shadow_jobs before queue retirement",
+      "result": "RED",
+      "counts": {
+        "failed": 1
+      },
+      "duration_seconds": 0.22
+    },
+    {
+      "command": "pytest architecture dependency peer cross_segment/fixed_weight/lagged_input before effective visitor",
+      "result": "RED",
+      "counts": {
+        "failed": 4
+      },
+      "duration_seconds": 0.51
+    },
+    {
+      "command": "pytest final core (14 files: dependency,numeric,shared-claim,source-default,legacy-draft/pins,recognition,native-bindings,constraints,growth,scenario,output,evidence-roles,runtime-manifest)",
+      "result": "GREEN",
+      "counts": {
+        "passed": 151,
+        "subtests_passed": 2
+      },
+      "duration_seconds": 13.37
+    },
+    {
+      "command": "pytest final affected scope/support/source-public/source-clock/model-registry/models/sensitivity/install/W07/W08 boundaries (13 files)",
+      "result": "GREEN",
+      "counts": {
+        "passed": 217,
+        "subtests_passed": 62,
+        "skipped": 8
+      },
+      "duration_seconds": 24.58
+    },
+    {
+      "command": "tools/model_generalization_matrix/run.py --e2e with independent temporary --owned-root/--out-root, baseline and final candidate",
+      "result": "GREEN",
+      "counts": {
+        "baseline_cases": 31,
+        "candidate_cases": 31,
+        "passed_each": 20,
+        "reject_ok_each": 11,
+        "errors": 0,
+        "not_run": 0,
+        "exact_observed_parity": 31
+      },
+      "duration_seconds": 3.959318
+    },
+    {
+      "command": "final run_forecast(mode=draft) on unchanged frozen CN-688012/HK-00700/US-MSFT input; compare saved formal forecast economic fields/complete segments",
+      "result": "GREEN",
+      "counts": {
+        "companies": 3,
+        "exact_economic_parity": 3
+      },
+      "duration_seconds": 1.249044
+    },
+    {
+      "command": "ruff check scripts tests tools; mypy public contract11 files; host_assumption_guard; sh -n pre-commit; git diff --check",
+      "result": "GREEN",
+      "counts": {
+        "mypy_source_files": 11,
+        "new_host_violations": 0
+      },
+      "duration_seconds": 3.57
+    },
+    {
+      "command": "normal git commit, portable pre-commit runs ruff/mypy/host-assumption",
+      "result": "GREEN",
+      "counts": {
+        "hooks_passed": 3
+      },
+      "duration_seconds": 4.22
+    }
+  ],
+  "public_interface_changes": [
+    {
+      "interface": "revenue_forecast --version manifest_sha256",
+      "change": "same output shape, now digest of current owned runtime path+real bytes; excludes retired queue residue",
+      "consumer_action": "ROOT sync14 runtime files; tools installer imports runtime shared inventory, runtime never imports tools"
+    },
+    {
+      "interface": "RF internal source_preparation preparation_demands",
+      "change": "removed internal ghost queue/global/API with no actual runtime consumer; public prepare_source/prepare_source_result and SourceRef wire unchanged",
+      "consumer_action": "historical tests explicitly import tools/legacy only; no production consumer adaptation needed"
+    },
+    {
+      "interface": "local narrative consumption formula_refs",
+      "change": "existing direct refs retained; explicit lag input/recognized period and output role, adds actual crosssegment effective path refs",
+      "consumer_action": "local sidecar diagnostics, not change to CWP/FF wire"
+    }
+  ],
+  "installation_files": [
+    "scripts/analysis/confidence.py",
+    "scripts/contracts/evidence.py",
+    "scripts/forecast/calc.py",
+    "scripts/forecast/dependencies.py",
+    "scripts/forecast/segments.py",
+    "scripts/installation_manifest.py",
+    "scripts/model_registry.py",
+    "scripts/research/drivers.py",
+    "scripts/research/native_dependencies.py",
+    "scripts/research_support_diagnostics.py",
+    "scripts/revenue_forecast.py",
+    "scripts/revenue_report.py",
+    "scripts/source_narrative_context.py",
+    "scripts/source_preparation.py"
+  ],
+  "retired_runtime_files": [
+    "scripts/processing_demand.py"
+  ],
+  "runtime_file_count": 97,
+  "remaining": [
+    {
+      "item": "ROOT cross-repo acceptance/main merge/push/exact-SHA CI and selected installation",
+      "reason": "coordinator-owned, this agent never writes canonical or installed copies"
+    },
+    {
+      "item": "engine patch release decision",
+      "reason": "current4.3.0/schemaunchanged; preserve historical4.3.0 emit history if version is later bumped, never rewrite historical snapshots/golden"
+    },
+    {
+      "item": "historical company_wiki_source/_prepare_legacy_source/processed_artifact_canary and attestation",
+      "reason": "actual replay/public compatibility callers remain; no evidence permits blind deletion"
+    },
+    {
+      "item": "old tools/ex05_chain_replay personal paths",
+      "reason": "engineering legacy entry outside default runtime/CI; requires separate fixture-root migration, not run here"
+    },
+    {
+      "item": "all source/economic truth and full skill/company loop",
+      "reason": "offline engineering/math parity does not replace independent source/numeric/buy-side reviews; G2/G4/G5 remain under mother plan"
+    }
+  ],
+  "preserved_inputs": {
+    "canonical_rf_wip": "no writes by agent; ROOT owns150file SHA/mtime check",
+    "production_config": "no edits",
+    "original_documents": "no edits",
+    "frozen_company_inputs_and_outputs": [
+      {
+        "company": "CN-688012",
+        "source_input_sha256": "478ae3345e6011079929c05f01b8adec959c974581c703239271c1f9ba4e7ea4",
+        "stored_forecast_sha256": "1913f5e376590c9a5d77999f8d9c4072a3114e5fc58288ac25f11b31b4ebdea1",
+        "seconds": 0.142273,
+        "field_exact_matches": {
+          "currency": true,
+          "unit": true,
+          "base_year": true,
+          "fiscal_year_end": true,
+          "forecast_years": true,
+          "historical_revenue": true,
+          "consolidated_forecast": true,
+          "sensitivities": true,
+          "management_target_coverage": true
+        },
+        "segment_exact_matches": [
+          {
+            "name": "Equipment",
+            "exact_match": true
+          },
+          {
+            "name": "NonEquipmentResidual",
+            "exact_match": true
+          },
+          {
+            "name": "CMP",
+            "exact_match": true
+          }
+        ],
+        "input_unchanged": true,
+        "stored_forecast_unchanged": true,
+        "semantic_diagnostics": []
+      },
+      {
+        "company": "HK-00700",
+        "source_input_sha256": "71990a6e6d2b4fd489a7c31b80c1892b3470ae96cabdfefc1693a01e978d1b5b",
+        "stored_forecast_sha256": "7d6fc7037ba34bc57a4f80dcef688f2f239db6a58c9aa7ee77cc00a5b1b4d27a",
+        "seconds": 0.580069,
+        "field_exact_matches": {
+          "currency": true,
+          "unit": true,
+          "base_year": true,
+          "fiscal_year_end": true,
+          "forecast_years": true,
+          "historical_revenue": true,
+          "consolidated_forecast": true,
+          "sensitivities": true,
+          "management_target_coverage": true
+        },
+        "segment_exact_matches": [
+          {
+            "name": "Games",
+            "exact_match": true
+          },
+          {
+            "name": "SocialNetworks",
+            "exact_match": true
+          },
+          {
+            "name": "MarketingServices",
+            "exact_match": true
+          },
+          {
+            "name": "FinTechBusinessServices",
+            "exact_match": true
+          },
+          {
+            "name": "Others",
+            "exact_match": true
+          }
+        ],
+        "input_unchanged": true,
+        "stored_forecast_unchanged": true,
+        "semantic_diagnostics": [
+          "Growth driver paid_social_stabilization shares a physical excerpt across different evidence conclusions; semantic relationship NOT_EVALUATED, factual interpretation belongs to independent economic review (claims: claim_growth_driver_paid_social_stabilization_checked_63, claim_growth_driver_paid_social_stabilization_contrary_64)"
+        ]
+      },
+      {
+        "company": "US-MSFT",
+        "source_input_sha256": "1fadabef5208df3438ea5202ba4524bb4d0fdfe9e923b0759c24dca8ff4165a3",
+        "stored_forecast_sha256": "4447f9c5390a429ba5f304bf496af36f24ae6d8354b3a4fea890223d0a27c605",
+        "seconds": 0.526702,
+        "field_exact_matches": {
+          "currency": true,
+          "unit": true,
+          "base_year": true,
+          "fiscal_year_end": true,
+          "forecast_years": true,
+          "historical_revenue": true,
+          "consolidated_forecast": true,
+          "sensitivities": true,
+          "management_target_coverage": true
+        },
+        "segment_exact_matches": [
+          {
+            "name": "Azure",
+            "exact_match": true
+          },
+          {
+            "name": "Microsoft 365 cloud",
+            "exact_match": true
+          },
+          {
+            "name": "Productivity and server licensing",
+            "exact_match": true
+          },
+          {
+            "name": "Industry solutions",
+            "exact_match": true
+          },
+          {
+            "name": "Frontier and support services",
+            "exact_match": true
+          },
+          {
+            "name": "Search and advertising",
+            "exact_match": true
+          },
+          {
+            "name": "XBOX",
+            "exact_match": true
+          },
+          {
+            "name": "Windows OEM and devices",
+            "exact_match": true
+          }
+        ],
+        "input_unchanged": true,
+        "stored_forecast_unchanged": true,
+        "semantic_diagnostics": []
+      }
+    ],
+    "du_worktrees": "no writes",
+    "other_repositories": "only readonly CWP/FF caller scan and own CWP results/report/handoff writes",
+    "paid_llm_calls": 0,
+    "network_downloads": 0,
+    "installation_writes": 0
+  },
+  "cleanup": {
+    "test_scratch": "TemporaryDirectory restored; matrix owned roots/restored_absent/readonly_unchanged all true",
+    "worktree": "clean after normal commit",
+    "old_runtime_queue": "moved within verified worktree boundaries; Git history preserved",
+    "installed_queue": "not deleted by agent; excluded from owned closure",
+    "residuals": []
+  },
+  "evidence_receipt": "docs/implementation/architecture-quality-2026-10-13/verification.json",
+  "report": "results/revenue-forecast/report.md"
+}
