@@ -1,0 +1,274 @@
+{
+ "schema_version": "du2-layout-c-evidence/1",
+ "samples": [
+  {
+   "sample_id": "hk-miniso-annual-store-table",
+   "label": "名创优品 2024 港股年报 p12 门店表（中英双栏，多列经营表）",
+   "pages": [
+    12
+   ],
+   "modes": {
+    "span": {
+     "status": "OBSERVED",
+     "groups": 23,
+     "table_regions": 2,
+     "table_rows": 14,
+     "region_confidences": [
+      "high",
+      "high"
+     ],
+     "rows_with_cells": 14,
+     "max_columns": 3,
+     "relations": [
+      "caption_for",
+      "header_for",
+      "caption_for",
+      "header_for"
+     ],
+     "continuations": [],
+     "diagnostics": [
+      "WORK_UNITS"
+     ],
+     "coverage": {
+      "processed_unit_count": 143,
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "complete": true
+     },
+     "work_units": "641"
+    },
+    "row_collapse": {
+     "status": "OBSERVED",
+     "groups": 21,
+     "table_regions": 2,
+     "table_rows": 12,
+     "region_confidences": [
+      "low",
+      "low"
+     ],
+     "rows_with_cells": 0,
+     "max_columns": 0,
+     "relations": [],
+     "continuations": [],
+     "diagnostics": [
+      "NEEDS_UPSTREAM_GRANULARITY",
+      "NEEDS_UPSTREAM_GRANULARITY",
+      "WORK_UNITS"
+     ],
+     "coverage": {
+      "processed_unit_count": 39,
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "complete": false
+     },
+     "work_units": "188"
+    }
+   }
+  },
+  {
+   "sample_id": "cn-hengfeng-offering-cross-page",
+   "label": "恒锋工具 2020 向特定对象发行募集说明书 p61-62（跨页项目概况表）",
+   "pages": [
+    61,
+    62
+   ],
+   "modes": {
+    "span": {
+     "status": "OBSERVED",
+     "groups": 38,
+     "table_regions": 4,
+     "table_rows": 25,
+     "region_confidences": [
+      "high",
+      "high",
+      "medium",
+      "high"
+     ],
+     "rows_with_cells": 25,
+     "max_columns": 4,
+     "relations": [
+      "header_for",
+      "caption_for",
+      "header_for",
+      "caption_for",
+      "header_for"
+     ],
+     "continuations": [],
+     "diagnostics": [
+      "WORK_UNITS"
+     ],
+     "coverage": {
+      "processed_unit_count": 173,
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "complete": true
+     },
+     "work_units": "831"
+    },
+    "row_collapse": {
+     "status": "OBSERVED",
+     "groups": 22,
+     "table_regions": 2,
+     "table_rows": 12,
+     "region_confidences": [
+      "low",
+      "low"
+     ],
+     "rows_with_cells": 0,
+     "max_columns": 0,
+     "relations": [
+      "header_for"
+     ],
+     "continuations": [],
+     "diagnostics": [
+      "NEEDS_UPSTREAM_GRANULARITY",
+      "NEEDS_UPSTREAM_GRANULARITY",
+      "WORK_UNITS"
+     ],
+     "coverage": {
+      "processed_unit_count": 60,
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "complete": false
+     },
+     "work_units": "283"
+    }
+   }
+  },
+  {
+   "sample_id": "cn-jinhe-convertible-tables",
+   "label": "金禾实业可转债募集说明书 p223-224（6列表 + 跨页备案表）",
+   "pages": [
+    223,
+    224
+   ],
+   "modes": {
+    "span": {
+     "status": "OBSERVED",
+     "groups": 34,
+     "table_regions": 3,
+     "table_rows": 23,
+     "region_confidences": [
+      "high",
+      "high",
+      "high"
+     ],
+     "rows_with_cells": 23,
+     "max_columns": 6,
+     "relations": [
+      "continuation",
+      "header_for",
+      "caption_for",
+      "header_for"
+     ],
+     "continuations": [
+      [
+       "page_gap=1",
+       "column_alignment"
+      ]
+     ],
+     "diagnostics": [
+      "LOGICAL_ROW_UNRESOLVED",
+      "LOGICAL_ROW_UNRESOLVED",
+      "CONTINUATION_CLAIMED",
+      "CONTINUATION_ROWS_NOT_HEADER",
+      "WORK_UNITS"
+     ],
+     "coverage": {
+      "processed_unit_count": 206,
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "complete": true
+     },
+     "work_units": "927"
+    },
+    "row_collapse": {
+     "status": "OBSERVED",
+     "groups": 28,
+     "table_regions": 2,
+     "table_rows": 19,
+     "region_confidences": [
+      "high",
+      "high"
+     ],
+     "rows_with_cells": 19,
+     "max_columns": 2,
+     "relations": [
+      "header_for",
+      "header_for"
+     ],
+     "continuations": [],
+     "diagnostics": [
+      "WORK_UNITS"
+     ],
+     "coverage": {
+      "processed_unit_count": 81,
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "complete": true
+     },
+     "work_units": "398"
+    }
+   }
+  },
+  {
+   "sample_id": "cn-amec-annual-narrative",
+   "label": "中微公司 2025 年报 p41（叙述页，行内数字负例）",
+   "pages": [
+    41
+   ],
+   "modes": {
+    "span": {
+     "status": "OBSERVED",
+     "groups": 0,
+     "table_regions": 0,
+     "table_rows": 0,
+     "region_confidences": [],
+     "rows_with_cells": 0,
+     "max_columns": 0,
+     "relations": [],
+     "continuations": [],
+     "diagnostics": [
+      "WORK_UNITS"
+     ],
+     "coverage": {
+      "processed_unit_count": 45,
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "complete": true
+     },
+     "work_units": "159"
+    },
+    "row_collapse": {
+     "status": "OBSERVED",
+     "groups": 0,
+     "table_regions": 0,
+     "table_rows": 0,
+     "region_confidences": [],
+     "rows_with_cells": 0,
+     "max_columns": 0,
+     "relations": [],
+     "continuations": [],
+     "diagnostics": [
+      "WORK_UNITS"
+     ],
+     "coverage": {
+      "processed_unit_count": 22,
+      "deferred_unit_ids": [],
+      "opaque_pages": [],
+      "deferred_pages": [],
+      "complete": true
+     },
+     "work_units": "92"
+    }
+   }
+  }
+ ]
+}

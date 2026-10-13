@@ -1,0 +1,459 @@
+{
+ "schema_version": "du2-layout-input/1",
+ "source_ref": {
+  "source_id": "synthetic-cross_page_table_continuation",
+  "source_sha256": null
+ },
+ "coverage": {
+  "opaque_pages": [],
+  "deferred_pages": []
+ },
+ "pages": [
+  {
+   "page": 1,
+   "width": 595.0,
+   "height": 842.0,
+   "units": [
+    {
+     "unit_id": "u1",
+     "ordinal": 0,
+     "locator": "synthetic-locator-u1",
+     "text": "表2 项目投资明细",
+     "bbox": [
+      70,
+      600,
+      180,
+      614
+     ],
+     "font_size": 11.0,
+     "font_weight": "bold",
+     "kind": "caption",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u2",
+     "ordinal": 1,
+     "locator": "synthetic-locator-u2",
+     "text": "单位：万元",
+     "bbox": [
+      455,
+      620,
+      520,
+      632
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u3",
+     "ordinal": 2,
+     "locator": "synthetic-locator-u3",
+     "text": "序号",
+     "bbox": [
+      80,
+      645,
+      120,
+      658
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u4",
+     "ordinal": 3,
+     "locator": "synthetic-locator-u4",
+     "text": "项目名称",
+     "bbox": [
+      180,
+      645,
+      240,
+      658
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u5",
+     "ordinal": 4,
+     "locator": "synthetic-locator-u5",
+     "text": "金额",
+     "bbox": [
+      350,
+      645,
+      390,
+      658
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u6",
+     "ordinal": 5,
+     "locator": "synthetic-locator-u6",
+     "text": "占比",
+     "bbox": [
+      470,
+      645,
+      510,
+      658
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u7",
+     "ordinal": 6,
+     "locator": "synthetic-locator-u7",
+     "text": "1",
+     "bbox": [
+      85,
+      670,
+      105,
+      683
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u8",
+     "ordinal": 7,
+     "locator": "synthetic-locator-u8",
+     "text": "智能制造项目",
+     "bbox": [
+      175,
+      670,
+      265,
+      683
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u9",
+     "ordinal": 8,
+     "locator": "synthetic-locator-u9",
+     "text": "29,779.00",
+     "bbox": [
+      330,
+      670,
+      395,
+      683
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u10",
+     "ordinal": 9,
+     "locator": "synthetic-locator-u10",
+     "text": "84.36%",
+     "bbox": [
+      455,
+      670,
+      510,
+      683
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u11",
+     "ordinal": 10,
+     "locator": "synthetic-locator-u11",
+     "text": "2",
+     "bbox": [
+      85,
+      695,
+      105,
+      708
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u12",
+     "ordinal": 11,
+     "locator": "synthetic-locator-u12",
+     "text": "技术中心项目",
+     "bbox": [
+      175,
+      695,
+      265,
+      708
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u13",
+     "ordinal": 12,
+     "locator": "synthetic-locator-u13",
+     "text": "3,185.00",
+     "bbox": [
+      335,
+      695,
+      395,
+      708
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u14",
+     "ordinal": 13,
+     "locator": "synthetic-locator-u14",
+     "text": "9.02%",
+     "bbox": [
+      462,
+      695,
+      510,
+      708
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    }
+   ]
+  },
+  {
+   "page": 2,
+   "width": 595.0,
+   "height": 842.0,
+   "units": [
+    {
+     "unit_id": "u15",
+     "ordinal": 14,
+     "locator": "synthetic-locator-u15",
+     "text": "序号",
+     "bbox": [
+      80,
+      80,
+      120,
+      93
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u16",
+     "ordinal": 15,
+     "locator": "synthetic-locator-u16",
+     "text": "项目名称",
+     "bbox": [
+      180,
+      80,
+      240,
+      93
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u17",
+     "ordinal": 16,
+     "locator": "synthetic-locator-u17",
+     "text": "金额",
+     "bbox": [
+      350,
+      80,
+      390,
+      93
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u18",
+     "ordinal": 17,
+     "locator": "synthetic-locator-u18",
+     "text": "占比",
+     "bbox": [
+      470,
+      80,
+      510,
+      93
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u19",
+     "ordinal": 18,
+     "locator": "synthetic-locator-u19",
+     "text": "3",
+     "bbox": [
+      85,
+      105,
+      105,
+      118
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u20",
+     "ordinal": 19,
+     "locator": "synthetic-locator-u20",
+     "text": "补充流动资金",
+     "bbox": [
+      175,
+      105,
+      265,
+      118
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u21",
+     "ordinal": 20,
+     "locator": "synthetic-locator-u21",
+     "text": "7,300.00",
+     "bbox": [
+      335,
+      105,
+      395,
+      118
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u22",
+     "ordinal": 21,
+     "locator": "synthetic-locator-u22",
+     "text": "20.62%",
+     "bbox": [
+      455,
+      105,
+      510,
+      118
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u23",
+     "ordinal": 22,
+     "locator": "synthetic-locator-u23",
+     "text": "4",
+     "bbox": [
+      85,
+      130,
+      105,
+      143
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u24",
+     "ordinal": 23,
+     "locator": "synthetic-locator-u24",
+     "text": "预备费",
+     "bbox": [
+      185,
+      130,
+      235,
+      143
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u25",
+     "ordinal": 24,
+     "locator": "synthetic-locator-u25",
+     "text": "189.00",
+     "bbox": [
+      345,
+      130,
+      395,
+      143
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u26",
+     "ordinal": 25,
+     "locator": "synthetic-locator-u26",
+     "text": "0.53%",
+     "bbox": [
+      462,
+      130,
+      510,
+      143
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u27",
+     "ordinal": 26,
+     "locator": "synthetic-locator-u27",
+     "text": "本节其余内容为项目可行性分析，与上表数据无关。",
+     "bbox": [
+      70,
+      300,
+      500,
+      314
+     ],
+     "font_size": 10.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    }
+   ]
+  }
+ ]
+}

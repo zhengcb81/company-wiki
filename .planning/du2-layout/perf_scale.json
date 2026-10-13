@@ -1,0 +1,60 @@
+{
+ "schema_version": "du2-layout-scale/1",
+ "runs": [
+  {
+   "requested_units": 1000,
+   "units": 1000,
+   "pages": 14,
+   "groups": 346,
+   "table_regions": 69,
+   "rows": 138,
+   "work_units": 5779,
+   "work_units_per_unit": 5.779,
+   "elapsed_seconds": 0.5287,
+   "peak_python_bytes": 2311949,
+   "peak_rss_bytes": 26460160,
+   "complete": true,
+   "deferred": 0,
+   "diagnostics": [
+    "WORK_UNITS"
+   ]
+  },
+  {
+   "requested_units": 10000,
+   "units": 10000,
+   "pages": 139,
+   "groups": 3471,
+   "table_regions": 694,
+   "rows": 1388,
+   "work_units": 57904,
+   "work_units_per_unit": 5.79,
+   "elapsed_seconds": 5.6005,
+   "peak_python_bytes": 23039046,
+   "peak_rss_bytes": 84275200,
+   "complete": true,
+   "deferred": 0,
+   "diagnostics": [
+    "WORK_UNITS"
+   ]
+  },
+  {
+   "requested_units": 40000,
+   "units": 40000,
+   "pages": 556,
+   "groups": 10000,
+   "table_regions": 2500,
+   "rows": 5000,
+   "work_units": 231665,
+   "work_units_per_unit": 5.792,
+   "elapsed_seconds": 25.7587,
+   "peak_python_bytes": 87798479,
+   "peak_rss_bytes": 274927616,
+   "complete": false,
+   "deferred": 0,
+   "diagnostics": [
+    "GROUP_LIMIT_EXCEEDED",
+    "WORK_UNITS"
+   ]
+  }
+ ]
+}

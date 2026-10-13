@@ -1,0 +1,190 @@
+{
+  "schema_version": "du2-handoff/1",
+  "lane": "DU2-LAYOUT",
+  "base_sha": "5a297244549d54c34f382835b876ec3d181fcd24",
+  "implementation_commits": [
+    "dc479732cb6818d1b41a4465e199ea2e5263ddb0",
+    "a7868ba75fc8450117e4e7cc88ee38d396cfe76e"
+  ],
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-20261013/layout",
+  "branch": "codex/du2-layout-20261013",
+  "status": "implemented_tested_not_integrated",
+  "owned_paths": [
+    "src/company_wiki/document_understanding/layout_hints/**",
+    "tests/unit/document_understanding_layout_hints/**",
+    "tests/fixtures/document_understanding_layout_hints/**",
+    ".planning/du2-layout/**"
+  ],
+  "public_interfaces": [
+    {
+      "symbol": "company_wiki.document_understanding.layout_hints.derive_layout_hints",
+      "signature": "derive_layout_hints(observation: Mapping, *, limits: Mapping | None = None) -> dict",
+      "input_schema": "du2-layout-input/1",
+      "output_schema": "du2-layout-hints/1",
+      "purity": "pure, deterministic, no config/filesystem/network/clock, no company special-casing",
+      "locator_policy": "no locator is ever allocated; the output wire contains no locator field"
+    }
+  ],
+  "interface_deviations": [
+    "group.kind limited to the seven kinds in review/INTERFACES.md section 5; a table header is a table_row group whose basis contains header_row/header_block",
+    "column_lane groups are emitted per page (cuts are learned document-wide so sparse pages reuse sibling gutter evidence); unit_hints.text_column uses the document-wide cut set",
+    "relations target the table_region group (header_for/caption_for/footnote_for) or the next table_region (continuation); a footnote under a figure may point at the figure's caption group instead",
+    "footnote groups carry parent_table_id of the table_region they explain (INTERFACES: table notes belong to the region); caption groups are context groups and keep parent_table_id null, linked by caption_for instead",
+    "a continued region whose continuation basis lacks repeated_header does NOT claim a fresh header: its leading bands stay rows with basis continuation_rows_not_header (diagnostic CONTINUATION_ROWS_NOT_HEADER)",
+    "cells.row_span is currently always null (row spanning is not claimed); column_span counts covered column slots",
+    "diagnostic code WORK_UNITS (detail = accumulated work count) is an informational entry added for budget observability",
+    "additive diagnostics: CONTINUATION_CLAIMED, CONTINUATION_ROWS_NOT_HEADER, MISSING_GEOMETRY, UNORDERABLE_UNIT, LOGICAL_ROW_UNRESOLVED, NEEDS_UPSTREAM_GRANULARITY"
+  ],
+  "A_B_C": [
+    {
+      "node": "A",
+      "command": "python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints/test_a_contract_and_shapes.py -q",
+      "exit_code": 0,
+      "elapsed_seconds": 7.84,
+      "result_path": ".planning/du2-layout/progress.md",
+      "notes": "RED first (ModuleNotFoundError for company_wiki.document_understanding), then green; wire, locator passthrough, input non-mutation, determinism, unnumbered heading vs short sentence, year-not-heading, cross-column header, bilingual lanes, isolated numeric row"
+    },
+    {
+      "node": "B",
+      "command": "python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints -q",
+      "exit_code": 0,
+      "elapsed_seconds": 8.38,
+      "result_path": ".planning/du2-layout/progress.md",
+      "notes": "34 passed, 6 skipped (real-original cases opt-in). Covers referential integrity across all 17 fixtures, non-mutation, determinism, company-name independence, caller limits, work budget, group budget (affected units named), lane scratch sentinel/finally-cleanup convention, offline read-only proof"
+    },
+    {
+      "node": "C",
+      "command": "$env:CW_DU2_LAYOUT_REAL='1'; python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints -q",
+      "exit_code": 0,
+      "elapsed_seconds": 8.81,
+      "result_path": ".planning/du2-layout/c-evidence/c_node_summary.json",
+      "notes": "40 passed (real cases actually ran, not skipped), including a test asserting every bound original keeps SHA-256 and mtime across the real run. Real originals read-only"
+    },
+    {
+      "node": "lint",
+      "command": "python -X utf8 -m ruff check src/company_wiki/document_understanding/layout_hints tests/unit/document_understanding_layout_hints tests/fixtures/document_understanding_layout_hints",
+      "exit_code": 0,
+      "elapsed_seconds": 0.5,
+      "result_path": null,
+      "notes": "All checks passed (lane paths only, per repository rule)"
+    },
+    {
+      "node": "perf-observation",
+      "command": "python -B -X utf8 tests/fixtures/document_understanding_layout_hints/scale_run.py --output .planning/du2-layout/perf_scale.json",
+      "exit_code": 0,
+      "elapsed_seconds": 40.0,
+      "result_path": ".planning/du2-layout/perf_observations.md",
+      "notes": "1k/10k/40k synthetic units; work_units/unit flat at 5.78-5.79 (near linear); 40k hits GROUP_LIMIT_EXCEEDED at the default 10000 group ceiling -> partial, complete=false"
+    }
+  ],
+  "real_samples": [
+    {
+      "sample_id": "hk-miniso-annual-store-table",
+      "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "pages": [12],
+      "span_mode": "2 table regions (high), 3 columns, header_for + caption_for, no granularity diagnostic",
+      "coarse_mode": "2 regions (low), max_columns=0, NEEDS_UPSTREAM_GRANULARITY, complete=false"
+    },
+    {
+      "sample_id": "cn-hengfeng-offering-cross-page",
+      "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "pages": [61, 62],
+      "span_mode": "4 regions (high/high/medium/high), 4 columns, 5 header/caption relations, no false continuation",
+      "note": "the p62 tail rows of the p61 overview table are not claimed as a region (only 1 multi-cell band); reported as honest partial, no wrong high claim"
+    },
+    {
+      "sample_id": "cn-jinhe-convertible-tables",
+      "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+      "pages": [223, 224],
+      "span_mode": "3 regions (all high), 6 columns, 1 continuation (basis page_gap=1 + column_alignment, no repeated header so the continued region claims NO fresh header), 2 LOGICAL_ROW_UNRESOLVED for the wrapped 备案 table",
+      "note": "second-company/generalization sample with a different layout; the p223 募投表 (6 columns) correctly does not continue into p224"
+    },
+    {
+      "sample_id": "cn-amec-annual-narrative",
+      "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "pages": [41],
+      "span_mode": "0 table regions (negative: inline narrative numbers are not a table)"
+    }
+  ],
+  "synthetic_cases": {
+    "fixtures": 17,
+    "fixture_files": 23,
+    "fixture_bytes": 120875,
+    "cases": [
+      "heading_unnumbered_vs_sentence",
+      "year_not_heading",
+      "cross_column_header",
+      "bilingual_two_column",
+      "table_isolated_numeric_row",
+      "table_header_period_unit_footnote",
+      "cross_page_table_continuation",
+      "cross_page_table_unrelated",
+      "bad_geometry_missing_font_empty_page",
+      "adjacent_tables_isolated",
+      "same_amounts_different_items",
+      "bilingual_not_sentence_aligned",
+      "table_without_header",
+      "footnote_belongs_to_previous_figure",
+      "coordinates_out_of_bounds",
+      "whole_row_units_no_cells",
+      "multi_period_columns"
+    ],
+    "scale_generator": "cases.scale_case(n) for 1000/10000/40000 units"
+  },
+  "input_geometry_requirements": [
+    "unit_id/ordinal: stable, unique, bound to the caller's own source units",
+    "bbox: span/cell level [x0,y0,x1,y1] in a single page coordinate system (NOT one bbox per wrapped row)",
+    "page/width/height: physical page number plus page size in the same unit as bbox",
+    "font_size: absolute size (pt or frontend-equivalent scale)",
+    "font_weight: bold/regular or numeric weight",
+    "locator: existing opaque parser locator, passed through untouched",
+    "coverage.opaque_pages/deferred_pages: passed through",
+    "minimum for column recovery: >=2 quantity rows whose cells carry their own bbox; a unit wrapping a whole row cannot prove column membership"
+  ],
+  "unsupported_carriers": [
+    "HTML: current document_normalization html_parser emits no bbox/font_size -> no real-geometry assertion; needs_upstream (DOM geometry passthrough)",
+    "PPT: current pptx_parser emits no bbox/font_size -> needs_upstream (shape geometry passthrough)",
+    "DOCX: same as PPT (no geometry emitted today)",
+    "scanned/OCR pages: no pixel or OCR reading in this package; pages without geometry degrade to text-only hints"
+  ],
+  "ambiguity_and_partial_conditions": [
+    "whole-row single units -> table region low + NEEDS_UPSTREAM_GRANULARITY, cells=[] (never fabricate columns from whitespace)",
+    "wrapped logical rows / interleaved multi-line cells -> LOGICAL_ROW_UNRESOLVED, affected rows capped at medium",
+    "table without a header row -> no header_for relation, region confidence capped at medium",
+    "quantity-less text table -> at most the first band is treated as header, the rest are rows",
+    "bilingual pages that are not sentence-aligned -> lane hints only, no sentence pairing",
+    "footnote below a figure -> attaches to the caption group above, never to the table below",
+    "budget/limit exhaustion -> coverage.complete=false plus deferred_unit_ids (UNIT_LIMIT_EXCEEDED / WORK_BUDGET_EXCEEDED / GROUP_LIMIT_EXCEEDED)",
+    "missing font_size -> heading confidence capped at medium (a short line alone is never high)"
+  ],
+  "complexity": {
+    "shape": "per-page banding O(n log n); cells and runs are local; column slots cluster intervals only; cross-page continuation checks are bounded to edge regions",
+    "measured_work_units_per_unit": {"1000": 5.779, "10000": 5.79, "40000": 5.792},
+    "measured_elapsed_seconds": {"1000": 0.55, "10000": 5.6, "40000": 25.76},
+    "measured_peak_rss_bytes": {"1000": 26255360, "10000": 84275200, "40000": 274927616},
+    "no_full_n_squared": true,
+    "no_unbounded_cross_page_linking": true,
+    "budget": "limits tighten-only; default max_units=50000, max_groups=10000, max_work_units=2000000"
+  },
+  "known_gaps": [
+    "not wired to production: no parser/section/selector consumes this package yet; recall or summary quality is NOT claimed to be fixed by it",
+    "logical-row recovery for interleaved wrapped cells is deliberately partial (flagged, not guessed)",
+    "row_span is never computed",
+    "real-geometry carriers limited to what PyMuPDF sampling in tests provides; HTML/PPT/DOCX geometry passthrough is ROOT work",
+    "no real 50000-unit original was run at the default ceilings; only synthetic scale was observed",
+    "concurrency/multi-process memory behaviour unmeasured",
+    "the p61 overview table tail and similar wrapped quantity-less tables may be reported as unclaimed bands rather than one region",
+    "a quantity-less table keeps only its first band as a header, so a genuine two-level header on a quantity-less table is not reconstructed",
+    "GROUP_LIMIT_EXCEEDED truncates structure rather than deferring units (units keep their unit_hints); the diagnostic names every affected unit so a consumer can see what lost structure"
+  ],
+  "resources": {
+    "model_calls": 0,
+    "paid_usd": 0,
+    "persistent_bytes": 424000,
+    "scratch_peak_bytes": 3200000,
+    "notes": "no vendor call, no new dependency; PyMuPDF/ruff were already installed; scratch stayed in %TEMP% and in the lane's own .planning directory"
+  },
+  "raw_preservation": "4 real originals read-only; SHA-256 and mtime identical before and after the C-node runs; no original copied into the repository",
+  "scratch_restore": "no scratch artifacts remain inside the worktree; probe mapping evidence is bounded (quotes <=8 KiB per source) and a probe id is never presented as a production locator",
+  "next_root_action": "Wire derive_layout_hints into the existing parser path: pass span-level bbox/font_size/font_weight and the caller's own locator through the format frontends, map unit_hints.heading_level/text_column and groups/relations onto the existing hints/section structures, and delete the duplicated column/heading inference that this package replaces. Treat NEEDS_UPSTREAM_GRANULARITY as a frontend granularity gap and coverage.complete=false as a partial-coverage signal downstream."
+}

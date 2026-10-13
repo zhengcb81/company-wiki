@@ -1,0 +1,276 @@
+{
+ "schema_version": "du2-layout-input/1",
+ "source_ref": {
+  "source_id": "synthetic-adjacent_tables_isolated",
+  "source_sha256": null
+ },
+ "coverage": {
+  "opaque_pages": [],
+  "deferred_pages": []
+ },
+ "pages": [
+  {
+   "page": 1,
+   "width": 595.0,
+   "height": 842.0,
+   "units": [
+    {
+     "unit_id": "u1",
+     "ordinal": 0,
+     "locator": "synthetic-locator-u1",
+     "text": "表1 收入构成",
+     "bbox": [
+      70,
+      90,
+      150,
+      104
+     ],
+     "font_size": 10.0,
+     "font_weight": "bold",
+     "kind": "caption",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u2",
+     "ordinal": 1,
+     "locator": "synthetic-locator-u2",
+     "text": "项目",
+     "bbox": [
+      70,
+      115,
+      110,
+      128
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u3",
+     "ordinal": 2,
+     "locator": "synthetic-locator-u3",
+     "text": "金额",
+     "bbox": [
+      350,
+      115,
+      390,
+      128
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u4",
+     "ordinal": 3,
+     "locator": "synthetic-locator-u4",
+     "text": "产品销售",
+     "bbox": [
+      70,
+      138,
+      130,
+      151
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u5",
+     "ordinal": 4,
+     "locator": "synthetic-locator-u5",
+     "text": "1,000.00",
+     "bbox": [
+      330,
+      138,
+      395,
+      151
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u6",
+     "ordinal": 5,
+     "locator": "synthetic-locator-u6",
+     "text": "服务收入",
+     "bbox": [
+      70,
+      160,
+      130,
+      173
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u7",
+     "ordinal": 6,
+     "locator": "synthetic-locator-u7",
+     "text": "500.00",
+     "bbox": [
+      340,
+      160,
+      395,
+      173
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u8",
+     "ordinal": 7,
+     "locator": "synthetic-locator-u8",
+     "text": "注：口径为合并报表。",
+     "bbox": [
+      70,
+      185,
+      200,
+      197
+     ],
+     "font_size": 8.0,
+     "font_weight": "regular",
+     "kind": "footnote",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u9",
+     "ordinal": 8,
+     "locator": "synthetic-locator-u9",
+     "text": "表2 成本构成",
+     "bbox": [
+      70,
+      240,
+      150,
+      254
+     ],
+     "font_size": 10.0,
+     "font_weight": "bold",
+     "kind": "caption",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u10",
+     "ordinal": 9,
+     "locator": "synthetic-locator-u10",
+     "text": "项目",
+     "bbox": [
+      70,
+      265,
+      110,
+      278
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u11",
+     "ordinal": 10,
+     "locator": "synthetic-locator-u11",
+     "text": "成本",
+     "bbox": [
+      350,
+      265,
+      390,
+      278
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u12",
+     "ordinal": 11,
+     "locator": "synthetic-locator-u12",
+     "text": "原材料",
+     "bbox": [
+      70,
+      288,
+      130,
+      301
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u13",
+     "ordinal": 12,
+     "locator": "synthetic-locator-u13",
+     "text": "1,000.00",
+     "bbox": [
+      330,
+      288,
+      395,
+      301
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u14",
+     "ordinal": 13,
+     "locator": "synthetic-locator-u14",
+     "text": "人工",
+     "bbox": [
+      70,
+      310,
+      110,
+      323
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u15",
+     "ordinal": 14,
+     "locator": "synthetic-locator-u15",
+     "text": "200.00",
+     "bbox": [
+      340,
+      310,
+      395,
+      323
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u16",
+     "ordinal": 15,
+     "locator": "synthetic-locator-u16",
+     "text": "注：数据为管理口径。",
+     "bbox": [
+      70,
+      335,
+      200,
+      347
+     ],
+     "font_size": 8.0,
+     "font_weight": "regular",
+     "kind": "footnote",
+     "upstream_hints": {}
+    }
+   ]
+  }
+ ]
+}
