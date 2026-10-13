@@ -4,6 +4,9 @@ Local, uncommitted helper: the bindings it writes are machine-specific absolute
 paths and must never be committed. It exists so a maintainer can rebuild the
 bindings after the ROOT survey manifest changes.
 
+Write it **outside the worktree** (for example ``~/.du-bench/bindings.local.json``)
+so the repository working tree stays clean.
+
 The survey manifest mixes absolute paths with paths relative to the **main
 company-wiki checkout**. This worktree is a sparse code checkout with no
 ``companies/`` directory, so a relative manifest path is resolved against the
@@ -15,7 +18,7 @@ Usage::
 
     python -X utf8 -m tools.document_understanding_benchmark.make_bindings \
         --manifest <path>/sample_manifest.json \
-        --out <local dir>/bindings.local.json \
+        --out ~/.du-bench/bindings.local.json \
         --repo-root C:/Users/<you>/Projects/company-wiki
 """
 
