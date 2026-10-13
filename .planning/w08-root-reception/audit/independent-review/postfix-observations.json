@@ -1,0 +1,731 @@
+[
+  {
+    "case": "baseline",
+    "identity": {
+      "declared": {
+        "run_id": "w08-evidence-run",
+        "review_attempt": "attempt-1"
+      },
+      "observed": {
+        "run_id": "w08-evidence-run",
+        "company_query": "W08 Synthetic Subject",
+        "as_of_date": "2026-10-12"
+      },
+      "run_json_present": true,
+      "run_id_match": true,
+      "review_attempt_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1",
+      "review_attempt_root_present": true,
+      "role_report_paths": {
+        "instruction_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1",
+        "roles": {
+          "storage": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.md"
+          },
+          "fetch": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.md"
+          },
+          "process": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1\\process.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1\\process.md"
+          },
+          "analyst": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.md"
+          }
+        }
+      },
+      "opaque_company_reference": "W08 Synthetic Subject",
+      "identity_resolution": "not_attempted",
+      "notes": []
+    },
+    "storage_report": {
+      "declared_json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+      "json_status": "OBSERVED",
+      "json_sha256": "042aa8a952c5cecead2f1543475e44edb8e1c4690c20d587ca73b78759326ab2",
+      "json_bytes": 539,
+      "md_status": "OBSERVED",
+      "md_sha256": "8cebed62a25f2221d0d8434f305a86f5ad825101a63d2e1865cb073cb69e079c",
+      "md_bytes": 59,
+      "binding_status": "MATCH",
+      "binding_details": []
+    },
+    "storage_events": {
+      "role": "storage",
+      "event_count": 2,
+      "kinds": {
+        "command_started": 1,
+        "command_finished": 1
+      },
+      "capture_ids": [
+        "storage-capture"
+      ],
+      "event_ids": [
+        "storage-finished",
+        "storage-started"
+      ],
+      "call_ids": [],
+      "command_started": 1,
+      "command_finished": 1,
+      "output_complete_false": 0,
+      "nonzero_exit": 0,
+      "timed_out": 0,
+      "matched_calls": 1,
+      "unmatched_starts": [],
+      "unmatched_finishes": [],
+      "unknown_call_ids": 0,
+      "identity_mismatches": [],
+      "declared_outputs": [
+        {
+          "call_id": "storage-capture",
+          "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-k9s0gnxs\\runs\\w08-evidence-run\\roles\\storage\\commands\\storage-capture\\stdout.txt"
+        }
+      ],
+      "legacy_observation_events": 0,
+      "present": true,
+      "lines": 2,
+      "parsed": 2
+    },
+    "unchecked": [],
+    "numeric": {
+      "declared_denominator": 3,
+      "verified_rows_declared": 3,
+      "recompute_rows_observed": 3,
+      "unique_value_ids": 3,
+      "unique_resolved_references": 3,
+      "shared_reference_value_ids": [],
+      "duplicate_value_ids": [],
+      "unresolved_recompute_value_ids": [],
+      "coverage_note": "unique references and declared value IDs are separate observations; shared references do not prove distinct calculations; this tool re-reads declared recompute locators and never re-derives a forecast number"
+    },
+    "quality_status": "not_evaluated"
+  },
+  {
+    "case": "unknown_actual_report_fields",
+    "identity": {
+      "declared": {
+        "run_id": "w08-evidence-run",
+        "review_attempt": "attempt-1"
+      },
+      "observed": {
+        "run_id": "w08-evidence-run",
+        "company_query": "W08 Synthetic Subject",
+        "as_of_date": "2026-10-12"
+      },
+      "run_json_present": true,
+      "run_id_match": true,
+      "review_attempt_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1",
+      "review_attempt_root_present": true,
+      "role_report_paths": {
+        "instruction_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1",
+        "roles": {
+          "storage": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.md"
+          },
+          "fetch": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.md"
+          },
+          "process": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1\\process.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1\\process.md"
+          },
+          "analyst": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.md"
+          }
+        }
+      },
+      "opaque_company_reference": "W08 Synthetic Subject",
+      "identity_resolution": "not_attempted",
+      "notes": []
+    },
+    "storage_report": {
+      "declared_json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+      "json_status": "OBSERVED",
+      "json_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "json_bytes": 2,
+      "md_status": "OBSERVED",
+      "md_sha256": "8cebed62a25f2221d0d8434f305a86f5ad825101a63d2e1865cb073cb69e079c",
+      "md_bytes": 59,
+      "binding_status": "UNKNOWN",
+      "binding_details": []
+    },
+    "storage_events": {
+      "role": "storage",
+      "event_count": 2,
+      "kinds": {
+        "command_started": 1,
+        "command_finished": 1
+      },
+      "capture_ids": [
+        "storage-capture"
+      ],
+      "event_ids": [
+        "storage-finished",
+        "storage-started"
+      ],
+      "call_ids": [],
+      "command_started": 1,
+      "command_finished": 1,
+      "output_complete_false": 0,
+      "nonzero_exit": 0,
+      "timed_out": 0,
+      "matched_calls": 1,
+      "unmatched_starts": [],
+      "unmatched_finishes": [],
+      "unknown_call_ids": 0,
+      "identity_mismatches": [],
+      "declared_outputs": [
+        {
+          "call_id": "storage-capture",
+          "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-sa2lnyzm\\runs\\w08-evidence-run\\roles\\storage\\commands\\storage-capture\\stdout.txt"
+        }
+      ],
+      "legacy_observation_events": 0,
+      "present": true,
+      "lines": 2,
+      "parsed": 2
+    },
+    "unchecked": [
+      "storage: actual report run/role binding unknown"
+    ],
+    "numeric": {
+      "declared_denominator": 3,
+      "verified_rows_declared": 3,
+      "recompute_rows_observed": 3,
+      "unique_value_ids": 3,
+      "unique_resolved_references": 3,
+      "shared_reference_value_ids": [],
+      "duplicate_value_ids": [],
+      "unresolved_recompute_value_ids": [],
+      "coverage_note": "unique references and declared value IDs are separate observations; shared references do not prove distinct calculations; this tool re-reads declared recompute locators and never re-derives a forecast number"
+    },
+    "quality_status": "not_evaluated"
+  },
+  {
+    "case": "legacy_events_without_run_id",
+    "identity": {
+      "declared": {
+        "run_id": "w08-evidence-run",
+        "review_attempt": "attempt-1"
+      },
+      "observed": {
+        "run_id": "w08-evidence-run",
+        "company_query": "W08 Synthetic Subject",
+        "as_of_date": "2026-10-12"
+      },
+      "run_json_present": true,
+      "run_id_match": true,
+      "review_attempt_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1",
+      "review_attempt_root_present": true,
+      "role_report_paths": {
+        "instruction_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1",
+        "roles": {
+          "storage": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.md"
+          },
+          "fetch": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.md"
+          },
+          "process": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1\\process.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1\\process.md"
+          },
+          "analyst": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.md"
+          }
+        }
+      },
+      "opaque_company_reference": "W08 Synthetic Subject",
+      "identity_resolution": "not_attempted",
+      "notes": []
+    },
+    "storage_report": {
+      "declared_json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+      "json_status": "OBSERVED",
+      "json_sha256": "042aa8a952c5cecead2f1543475e44edb8e1c4690c20d587ca73b78759326ab2",
+      "json_bytes": 539,
+      "md_status": "OBSERVED",
+      "md_sha256": "8cebed62a25f2221d0d8434f305a86f5ad825101a63d2e1865cb073cb69e079c",
+      "md_bytes": 59,
+      "binding_status": "MATCH",
+      "binding_details": []
+    },
+    "storage_events": {
+      "role": "storage",
+      "event_count": 2,
+      "kinds": {
+        "command_started": 1,
+        "command_finished": 1
+      },
+      "capture_ids": [
+        "storage-capture"
+      ],
+      "event_ids": [
+        "storage-finished",
+        "storage-started"
+      ],
+      "call_ids": [],
+      "command_started": 1,
+      "command_finished": 1,
+      "output_complete_false": 0,
+      "nonzero_exit": 0,
+      "timed_out": 0,
+      "matched_calls": 1,
+      "unmatched_starts": [],
+      "unmatched_finishes": [],
+      "unknown_call_ids": 0,
+      "identity_mismatches": [],
+      "declared_outputs": [
+        {
+          "call_id": "storage-capture",
+          "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-1odicydp\\runs\\w08-evidence-run\\roles\\storage\\commands\\storage-capture\\stdout.txt"
+        }
+      ],
+      "legacy_observation_events": 2,
+      "present": true,
+      "lines": 2,
+      "parsed": 2
+    },
+    "unchecked": [
+      "storage: legacy events are observation-only; current run binding unknown"
+    ],
+    "numeric": {
+      "declared_denominator": 3,
+      "verified_rows_declared": 3,
+      "recompute_rows_observed": 3,
+      "unique_value_ids": 3,
+      "unique_resolved_references": 3,
+      "shared_reference_value_ids": [],
+      "duplicate_value_ids": [],
+      "unresolved_recompute_value_ids": [],
+      "coverage_note": "unique references and declared value IDs are separate observations; shared references do not prove distinct calculations; this tool re-reads declared recompute locators and never re-derives a forecast number"
+    },
+    "quality_status": "not_evaluated"
+  },
+  {
+    "case": "old_explicit_attempt_events",
+    "identity": {
+      "declared": {
+        "run_id": "w08-evidence-run",
+        "review_attempt": "attempt-1"
+      },
+      "observed": {
+        "run_id": "w08-evidence-run",
+        "company_query": "W08 Synthetic Subject",
+        "as_of_date": "2026-10-12"
+      },
+      "run_json_present": true,
+      "run_id_match": true,
+      "review_attempt_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1",
+      "review_attempt_root_present": true,
+      "role_report_paths": {
+        "instruction_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1",
+        "roles": {
+          "storage": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.md"
+          },
+          "fetch": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.md"
+          },
+          "process": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1\\process.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1\\process.md"
+          },
+          "analyst": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.md"
+          }
+        }
+      },
+      "opaque_company_reference": "W08 Synthetic Subject",
+      "identity_resolution": "not_attempted",
+      "notes": []
+    },
+    "storage_report": {
+      "declared_json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-n2pwgq42\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+      "json_status": "OBSERVED",
+      "json_sha256": "042aa8a952c5cecead2f1543475e44edb8e1c4690c20d587ca73b78759326ab2",
+      "json_bytes": 539,
+      "md_status": "OBSERVED",
+      "md_sha256": "8cebed62a25f2221d0d8434f305a86f5ad825101a63d2e1865cb073cb69e079c",
+      "md_bytes": 59,
+      "binding_status": "MATCH",
+      "binding_details": []
+    },
+    "storage_events": {
+      "role": "storage",
+      "event_count": 2,
+      "kinds": {
+        "command_started": 1,
+        "command_finished": 1
+      },
+      "capture_ids": [],
+      "event_ids": [
+        "storage-finished",
+        "storage-started"
+      ],
+      "call_ids": [],
+      "command_started": 0,
+      "command_finished": 0,
+      "output_complete_false": 0,
+      "nonzero_exit": 0,
+      "timed_out": 0,
+      "matched_calls": 0,
+      "unmatched_starts": [],
+      "unmatched_finishes": [],
+      "unknown_call_ids": 0,
+      "identity_mismatches": [
+        {
+          "line": 1,
+          "detail": "event review_attempt differs"
+        },
+        {
+          "line": 2,
+          "detail": "event review_attempt differs"
+        }
+      ],
+      "declared_outputs": [],
+      "legacy_observation_events": 0,
+      "present": true,
+      "lines": 2,
+      "parsed": 2
+    },
+    "unchecked": [
+      "storage: event run/role identity mismatch"
+    ],
+    "numeric": {
+      "declared_denominator": 3,
+      "verified_rows_declared": 3,
+      "recompute_rows_observed": 3,
+      "unique_value_ids": 3,
+      "unique_resolved_references": 3,
+      "shared_reference_value_ids": [],
+      "duplicate_value_ids": [],
+      "unresolved_recompute_value_ids": [],
+      "coverage_note": "unique references and declared value IDs are separate observations; shared references do not prove distinct calculations; this tool re-reads declared recompute locators and never re-derives a forecast number"
+    },
+    "quality_status": "not_evaluated"
+  },
+  {
+    "case": "date_line_is_not_recompute",
+    "identity": {
+      "declared": {
+        "run_id": "w08-evidence-run",
+        "review_attempt": "attempt-1"
+      },
+      "observed": {
+        "run_id": "w08-evidence-run",
+        "company_query": "W08 Synthetic Subject",
+        "as_of_date": "2026-10-12"
+      },
+      "run_json_present": true,
+      "run_id_match": true,
+      "review_attempt_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1",
+      "review_attempt_root_present": true,
+      "role_report_paths": {
+        "instruction_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1",
+        "roles": {
+          "storage": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.md"
+          },
+          "fetch": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.md"
+          },
+          "process": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1\\process.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1\\process.md"
+          },
+          "analyst": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.md"
+          }
+        }
+      },
+      "opaque_company_reference": "W08 Synthetic Subject",
+      "identity_resolution": "not_attempted",
+      "notes": []
+    },
+    "storage_report": {
+      "declared_json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+      "json_status": "OBSERVED",
+      "json_sha256": "042aa8a952c5cecead2f1543475e44edb8e1c4690c20d587ca73b78759326ab2",
+      "json_bytes": 539,
+      "md_status": "OBSERVED",
+      "md_sha256": "8cebed62a25f2221d0d8434f305a86f5ad825101a63d2e1865cb073cb69e079c",
+      "md_bytes": 59,
+      "binding_status": "MATCH",
+      "binding_details": []
+    },
+    "storage_events": {
+      "role": "storage",
+      "event_count": 2,
+      "kinds": {
+        "command_started": 1,
+        "command_finished": 1
+      },
+      "capture_ids": [
+        "storage-capture"
+      ],
+      "event_ids": [
+        "storage-finished",
+        "storage-started"
+      ],
+      "call_ids": [],
+      "command_started": 1,
+      "command_finished": 1,
+      "output_complete_false": 0,
+      "nonzero_exit": 0,
+      "timed_out": 0,
+      "matched_calls": 1,
+      "unmatched_starts": [],
+      "unmatched_finishes": [],
+      "unknown_call_ids": 0,
+      "identity_mismatches": [],
+      "declared_outputs": [
+        {
+          "call_id": "storage-capture",
+          "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-_2v_4xqn\\runs\\w08-evidence-run\\roles\\storage\\commands\\storage-capture\\stdout.txt"
+        }
+      ],
+      "legacy_observation_events": 0,
+      "present": true,
+      "lines": 2,
+      "parsed": 2
+    },
+    "unchecked": [],
+    "numeric": {
+      "declared_denominator": 3,
+      "verified_rows_declared": 3,
+      "recompute_rows_observed": 2,
+      "unique_value_ids": 3,
+      "unique_resolved_references": 2,
+      "shared_reference_value_ids": [],
+      "duplicate_value_ids": [],
+      "unresolved_recompute_value_ids": [
+        "V1"
+      ],
+      "coverage_note": "unique references and declared value IDs are separate observations; shared references do not prove distinct calculations; this tool re-reads declared recompute locators and never re-derives a forecast number"
+    },
+    "quality_status": "not_evaluated"
+  },
+  {
+    "case": "capture_id_pair_fixed",
+    "identity": {
+      "declared": {
+        "run_id": "w08-evidence-run",
+        "review_attempt": "attempt-1"
+      },
+      "observed": {
+        "run_id": "w08-evidence-run",
+        "company_query": "W08 Synthetic Subject",
+        "as_of_date": "2026-10-12"
+      },
+      "run_json_present": true,
+      "run_id_match": true,
+      "review_attempt_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1",
+      "review_attempt_root_present": true,
+      "role_report_paths": {
+        "instruction_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1",
+        "roles": {
+          "storage": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.md"
+          },
+          "fetch": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.md"
+          },
+          "process": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1\\process.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1\\process.md"
+          },
+          "analyst": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.md"
+          }
+        }
+      },
+      "opaque_company_reference": "W08 Synthetic Subject",
+      "identity_resolution": "not_attempted",
+      "notes": []
+    },
+    "storage_report": {
+      "declared_json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+      "json_status": "OBSERVED",
+      "json_sha256": "042aa8a952c5cecead2f1543475e44edb8e1c4690c20d587ca73b78759326ab2",
+      "json_bytes": 539,
+      "md_status": "OBSERVED",
+      "md_sha256": "8cebed62a25f2221d0d8434f305a86f5ad825101a63d2e1865cb073cb69e079c",
+      "md_bytes": 59,
+      "binding_status": "MATCH",
+      "binding_details": []
+    },
+    "storage_events": {
+      "role": "storage",
+      "event_count": 2,
+      "kinds": {
+        "command_started": 1,
+        "command_finished": 1
+      },
+      "capture_ids": [
+        "other",
+        "storage-capture"
+      ],
+      "event_ids": [
+        "storage-finished",
+        "storage-started"
+      ],
+      "call_ids": [],
+      "command_started": 1,
+      "command_finished": 1,
+      "output_complete_false": 0,
+      "nonzero_exit": 0,
+      "timed_out": 0,
+      "matched_calls": 0,
+      "unmatched_starts": [
+        "storage-capture"
+      ],
+      "unmatched_finishes": [
+        "other"
+      ],
+      "unknown_call_ids": 0,
+      "identity_mismatches": [],
+      "declared_outputs": [
+        {
+          "call_id": "other",
+          "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-xuj3in4g\\runs\\w08-evidence-run\\roles\\storage\\commands\\storage-capture\\stdout.txt"
+        }
+      ],
+      "legacy_observation_events": 0,
+      "present": true,
+      "lines": 2,
+      "parsed": 2
+    },
+    "unchecked": [
+      "storage: unmatched or unknown call ids; starts and finishes are not paired"
+    ],
+    "numeric": {
+      "declared_denominator": 3,
+      "verified_rows_declared": 3,
+      "recompute_rows_observed": 3,
+      "unique_value_ids": 3,
+      "unique_resolved_references": 3,
+      "shared_reference_value_ids": [],
+      "duplicate_value_ids": [],
+      "unresolved_recompute_value_ids": [],
+      "coverage_note": "unique references and declared value IDs are separate observations; shared references do not prove distinct calculations; this tool re-reads declared recompute locators and never re-derives a forecast number"
+    },
+    "quality_status": "not_evaluated"
+  },
+  {
+    "case": "stale_run_event_fixed",
+    "identity": {
+      "declared": {
+        "run_id": "w08-evidence-run",
+        "review_attempt": "attempt-1"
+      },
+      "observed": {
+        "run_id": "w08-evidence-run",
+        "company_query": "W08 Synthetic Subject",
+        "as_of_date": "2026-10-12"
+      },
+      "run_json_present": true,
+      "run_id_match": true,
+      "review_attempt_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1",
+      "review_attempt_root_present": true,
+      "role_report_paths": {
+        "instruction_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1",
+        "roles": {
+          "storage": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.md"
+          },
+          "fetch": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.md"
+          },
+          "process": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1\\process.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1\\process.md"
+          },
+          "analyst": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.md"
+          }
+        }
+      },
+      "opaque_company_reference": "W08 Synthetic Subject",
+      "identity_resolution": "not_attempted",
+      "notes": []
+    },
+    "storage_report": {
+      "declared_json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-postfix-wtttuoue\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+      "json_status": "OBSERVED",
+      "json_sha256": "042aa8a952c5cecead2f1543475e44edb8e1c4690c20d587ca73b78759326ab2",
+      "json_bytes": 539,
+      "md_status": "OBSERVED",
+      "md_sha256": "8cebed62a25f2221d0d8434f305a86f5ad825101a63d2e1865cb073cb69e079c",
+      "md_bytes": 59,
+      "binding_status": "MATCH",
+      "binding_details": []
+    },
+    "storage_events": {
+      "role": "storage",
+      "event_count": 2,
+      "kinds": {},
+      "capture_ids": [],
+      "event_ids": [],
+      "call_ids": [],
+      "command_started": 0,
+      "command_finished": 0,
+      "output_complete_false": 0,
+      "nonzero_exit": 0,
+      "timed_out": 0,
+      "matched_calls": 0,
+      "unmatched_starts": [],
+      "unmatched_finishes": [],
+      "unknown_call_ids": 0,
+      "identity_mismatches": [
+        {
+          "line": 1,
+          "detail": "event identity mismatch: run_id"
+        },
+        {
+          "line": 2,
+          "detail": "event identity mismatch: run_id"
+        }
+      ],
+      "declared_outputs": [],
+      "legacy_observation_events": 0,
+      "present": true,
+      "lines": 2,
+      "parsed": 2
+    },
+    "unchecked": [
+      "storage: event run/role identity mismatch"
+    ],
+    "numeric": {
+      "declared_denominator": 3,
+      "verified_rows_declared": 3,
+      "recompute_rows_observed": 3,
+      "unique_value_ids": 3,
+      "unique_resolved_references": 3,
+      "shared_reference_value_ids": [],
+      "duplicate_value_ids": [],
+      "unresolved_recompute_value_ids": [],
+      "coverage_note": "unique references and declared value IDs are separate observations; shared references do not prove distinct calculations; this tool re-reads declared recompute locators and never re-derives a forecast number"
+    },
+    "quality_status": "not_evaluated"
+  }
+]

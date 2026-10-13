@@ -1,4 +1,17 @@
+## 2026-10-13 当前接收结果
+
+W08三包离线工程接收完成，RF main/origin b9208a21（精确CI38367459762绿）、Audit main e5189a0及两安装副本6CLI绿。详acceptance-2026-10-13.json及audit/independent-review/final-review.md。A/B/C本卡均完成，整个母目标仍开放。下一步G2准备/DU集成；旧pending为历史。
+
 # Findings
+
+## 2026-10-13 ROOT RF/Audit修复事实
+
+- 两包已进入独立ROOT worktree：`Projects/_harness_worktrees/w08-root/rf|audit`，不改作者或DU工作域。RF main的assurance三文件/output owner WIP保持。
+- RF公开create_snapshot/evaluate_snapshot在合成临时registry可直接运行，165/181.5对独立actual160/170的WAPE=0.05；之前工具零误差是自己把forecast当actual，未发现生产引擎同样缺陷。
+- RF7关键RED真实失败；工具改用3.10非日历FY控制窗/尾季/derived ancestry与实际adjustment_total/parameter_trace。缺窗/双计由原生拒绝，C05实读独立actual/空SegmentB WAPE null。76集中绿8skip（原工具scalar适配对无相应数值的拒绝/专用路径跳过；全31 native矩阵20PASS11REJECT_OK、0NOT_RUN/ERROR）；三真实CLI，独立scratch恢复、scripts/tests SHA未变。未改scripts/core、不需要同步RF技能。
+- Audit项目AGENTS要求独立agent大节点试读；独立审查实证事件ID/角色未配对、当前路径旧报告未诊断、free-text数字位置冒计、NaN与增长读取破限。共享pointer可合法复用，保留声明行并另报唯一位置，不新增权限门。
+- Audit13ROOT RED失败中两项是自己测试读UTF8忘编码，修为显式utf8后校验；产品集中修复事件/报告观测、实际numeric定位、预算finite/整数/有界stream与pointer上限。63集中PASS9.07s，真实14CLI链通过并恢复。原40测试仅更新一处过时诊断句子断言为唯一位置实际计数，合法fixture补实际声明stdout文件，不放松数值/来源要求。
+- Audit首次C节点工具入口要求cwpe-*目录，旧名字在入口退出未创建scratch；改为自有cwpe-w08-root-final后通过。完整工程测试正在跑；仍待正常commit/并线/安装/发布。
 
 实际交付：RF4d5c9f05（handoffimplementation=PENDING，机器Git为准），Audit实现e9146453/交接96889c6，CWP a6010480（handoff implementation空）。自引用commit字段可由ROOT补实际HEAD，不成为人工签收阻断。
 

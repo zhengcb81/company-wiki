@@ -1,0 +1,70 @@
+{
+  "schema_version": "w08-root-acceptance/1",
+  "status": "ACCEPTED_ENGINEERING_SCOPE",
+  "rf": {
+    "main_sha": "b9208a2117b8423f4b355dfca885aaf0d56a05bb",
+    "remote_sha": "b9208a2117b8423f4b355dfca885aaf0d56a05bb",
+    "focused_passed": 76,
+    "focused_skipped": 8,
+    "focused_seconds": 3.51,
+    "native_cases": 31,
+    "native_pass": 20,
+    "native_reject_ok": 11,
+    "native_errors": 0,
+    "public_cli_cases": 3,
+    "native_seconds": 2.988074,
+    "pre_push_passed": 390,
+    "pre_push_subtests": 36,
+    "pre_push_seconds": 46.25,
+    "ci_run": 38367459762,
+    "ci_conclusion": "success",
+    "ci_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/38367459762",
+    "owner_wip_files": 150,
+    "owner_wip_sha_mtime_unchanged": true,
+    "core_files_changed": 0,
+    "install_needed": false
+  },
+  "audit": {
+    "main_sha": "e5189a0614477d4d84c9cd4e0237f9b2a64a059a",
+    "remote": "none",
+    "focused_passed": 67,
+    "focused_seconds": 9.14,
+    "full_passed": 444,
+    "full_subtests": 122,
+    "full_seconds": 84.24,
+    "real_cli_calls": 14,
+    "independent_review": "audit/independent-review/final-review.md",
+    "installed_changed_files_per_copy": 6,
+    "installed_package_files_per_copy": 31,
+    "installed_copies": 2,
+    "installed_cli_checks": 6,
+    "installed_cli_seconds": 2.161965,
+    "scratch_restored": true,
+    "quality_status": "not_evaluated"
+  },
+  "archive": {
+    "path": "rf/native-evidence.zip",
+    "bytes": 927436,
+    "uncompressed_bytes": 11375295,
+    "sha256": "abe78525975d3ef8c24788da3d0ad55954aeb59f303b7d9d8cfb5ea58939bdc2",
+    "roundtrip_verified": true,
+    "duplicate_files_removed": 4
+  },
+  "preservation": {
+    "raw_originals_modified": 0,
+    "model_calls": 0,
+    "paid_calls": 0,
+    "du_worktrees_written": 0,
+    "authors_written": 0
+  },
+  "limits": "Engineering tests do not prove real source truth, four-agent independence or economic forecast quality; mother G2/G4/G5 and DU integration remain open.",
+  "cleanup": {
+    "root_worktrees_removed": true,
+    "root_worktree_code_bytes_removed": 9238740,
+    "transient_helpers_archived": 6,
+    "transient_helpers_uncompressed_bytes": 45150,
+    "transient_archive_bytes": 17040,
+    "transient_archive_sha256": "2f3d8d75fc515cc5430b0a6aaa7d276f98c5419b9f16512a58bbe4b5b5398def",
+    "replay_entry": "Use canonical revenue-forecast tools/model_generalization_matrix/run.py and revenue-forecast-audit tools/run_review_evidence_e2e.py; archived one-shots are history, never rerun."
+  }
+}

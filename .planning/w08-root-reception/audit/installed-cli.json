@@ -1,0 +1,57 @@
+{
+  "schema_version": "w08-installed-cli/1",
+  "checks": [
+    {
+      "installation": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "case": "legal",
+      "exit_code": 0,
+      "numeric_observed": 3,
+      "matched_calls": 1,
+      "unchecked": 0
+    },
+    {
+      "installation": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "case": "broken_pointer",
+      "exit_code": 0,
+      "numeric_observed": 2,
+      "matched_calls": 1,
+      "unchecked": 0
+    },
+    {
+      "installation": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+      "case": "unpaired_call",
+      "exit_code": 0,
+      "numeric_observed": 3,
+      "matched_calls": 0,
+      "unchecked": 1
+    },
+    {
+      "installation": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "case": "legal",
+      "exit_code": 0,
+      "numeric_observed": 3,
+      "matched_calls": 1,
+      "unchecked": 0
+    },
+    {
+      "installation": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "case": "broken_pointer",
+      "exit_code": 0,
+      "numeric_observed": 2,
+      "matched_calls": 1,
+      "unchecked": 0
+    },
+    {
+      "installation": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+      "case": "unpaired_call",
+      "exit_code": 0,
+      "numeric_observed": 3,
+      "matched_calls": 0,
+      "unchecked": 1
+    }
+  ],
+  "files_unchanged": true,
+  "scratch_restored": true,
+  "seconds": 2.161965,
+  "model_calls": 0
+}

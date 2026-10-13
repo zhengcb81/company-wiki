@@ -1,3 +1,7 @@
+## 2026-10-13 当前接收结果
+
+W08三包离线工程接收完成，RF main/origin b9208a21（精确CI38367459762绿）、Audit main e5189a0及两安装副本6CLI绿。详acceptance-2026-10-13.json及audit/independent-review/final-review.md。A/B/C本卡均完成，整个母目标仍开放。下一步G2准备/DU集成；旧pending为历史。
+
 # W08 ROOT 三包接收（2026-10-12）
 
 用户已交三包。ROOT保留完整母目标，不因作者COMPLETE签收。
@@ -7,6 +11,19 @@
 - A in_progress：冻结实际HEAD/初始dispatch/输入差异/写集与交接，检查已有证据真实覆盖而非自报。
 - B pending：逐包独立关键反例/必要共因修复，使用真实原生/公开CLI复验，保留失败，不造第二引擎或许可门。
 - C pending：正常接线/commit/main/安装/精确CI，母PWF更新。CWP接收与W04核心正常合并，不覆盖另两包或owner WIP。
+
+## 2026-10-13 恢复与排他范围
+
+用户已分发DU-PROFILES/STRUCTURE/BENCH，ROOT只处理W08 RF/Audit接收及母PWF，禁止写三条DU worktree或独占模块。CWP包已发布并验CI，直接沿用。
+
+- RF canonical 8dc26710，保留assurance三文件与output未提交资料。作者树4d5c9f05只读；在独立ROOT worktree接收/修工具，再并主线。
+- Audit canonical2c494913干净，作者96889c6只读；独立ROOT worktree修必要共因。依项目AGENTS在大节点安排独立只读agent审查。
+- A：实际Git/交接已重读。B：优先用实际dated贡献与独立actual/public回测复现RF两缺口，检查Audit读取预算真实边界；不造第二计算引擎。
+- C：正常commit/并线/push（RF有remote）/Audit定点技能同步，精确CI与安装后CLI；只做必要大节点，不逐helper追加测试。
+
+Next Step：创建RF/Audit隔离接收worktree，复用既有原生接口写关键RED并实施必要修复；本轮API/模型0调用。
+
+本轮沙箱git -C跨仓只读Permission denied，已按用户沙箱外操作授权使用require_escalated完成只读盘点；未修改owner工作。goal工具仍返回paused，没有API可恢复，实际按用户“继续主线”指令执行，不能把全母计划标complete。
 
 ## 顺序与Next Step
 

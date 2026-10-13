@@ -1,0 +1,647 @@
+{
+  "schema_version": "w08-review-evidence-e2e/1",
+  "check_kind": "offline_real_cli_e2e_not_four_way_company_review",
+  "claimed_as_real_company_review": false,
+  "declared_only_unchanged": true,
+  "additive_node_schema": "review-evidence-reconciliation/1",
+  "quality_status": "not_evaluated",
+  "total_rows": 11,
+  "row_counts": {
+    "OBSERVED": 11,
+    "UNAVAILABLE": 0,
+    "UNVERIFIABLE": 0,
+    "MISMATCH": 0
+  },
+  "budget": {
+    "files_read": 16,
+    "bytes_read": 11358,
+    "elapsed_seconds": 0.126402,
+    "exhausted": null,
+    "limits": {
+      "max_files": 128,
+      "max_file_bytes": 1048576,
+      "max_total_bytes": 8388608,
+      "max_seconds": 30.0,
+      "max_pointer_tokens": 128,
+      "max_line_span": 20000,
+      "max_events_per_role": 4096
+    }
+  },
+  "unchecked": [],
+  "event_summary": {
+    "role": "storage",
+    "event_count": 2,
+    "kinds": {
+      "command_started": 1,
+      "command_finished": 1
+    },
+    "capture_ids": [
+      "f43aaf9f8c234f589fb77b8b74921f45"
+    ],
+    "event_ids": [
+      "2d41c27e26274900aa04f570bc9690c0",
+      "4eebee82885f48f59eff8a94a9af1f6e"
+    ],
+    "call_ids": [],
+    "command_started": 1,
+    "command_finished": 1,
+    "output_complete_false": 1,
+    "nonzero_exit": 0,
+    "timed_out": 0,
+    "matched_calls": 1,
+    "unmatched_starts": [],
+    "unmatched_finishes": [],
+    "unknown_call_ids": 0,
+    "identity_mismatches": [],
+    "declared_outputs": [
+      {
+        "call_id": "f43aaf9f8c234f589fb77b8b74921f45",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\roles\\storage\\commands\\f43aaf9f8c234f589fb77b8b74921f45\\stdout.txt"
+      },
+      {
+        "call_id": "f43aaf9f8c234f589fb77b8b74921f45",
+        "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\roles\\storage\\commands\\f43aaf9f8c234f589fb77b8b74921f45\\stderr.txt"
+      }
+    ],
+    "present": true,
+    "lines": 2,
+    "parsed": 2
+  },
+  "counterexamples": {
+    "broken_pointer": "json_pointer_unresolved",
+    "bad_hash": "hash_mismatch",
+    "duplicate_numeric": [
+      "V1"
+    ],
+    "opaque_tool_call": "unsupported_scheme",
+    "stale_attempt": false,
+    "limit_exhausted": "file_count_limit"
+  },
+  "attempt_dirs": 8,
+  "attempt_isolation_verified": true,
+  "declared_fields_byte_identical": true,
+  "fixture_manifest_stable": true,
+  "sentinels": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\sentinel_a.txt": "7f8a9b3b1db707e7e1905057aab3cd6e5f53afca33f83b03a861a99f83870dd1",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\sentinel_b.txt": "2ed954573a1b4697b8f0cf7d7d4a82042d3b7af130605a0414608857a7614736"
+  },
+  "provider_calls": 0,
+  "network_calls": 0,
+  "model_calls": 0,
+  "actual_usage": null,
+  "actual_cost": null,
+  "steps": [
+    {
+      "step": "coverage_help",
+      "flags_present": true
+    },
+    {
+      "step": "package_built",
+      "run": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run",
+      "capture_id": "f43aaf9f8c234f589fb77b8b74921f45",
+      "stdout_total_bytes": 227003,
+      "stdout_retained_bytes": 4063,
+      "output_complete": false,
+      "input_complete": true
+    },
+    {
+      "step": "declared_only",
+      "output": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\attempts\\20261013T075456Z-be14336a\\coverage.json",
+      "gaps": 0,
+      "sufficiency": "records_complete"
+    },
+    {
+      "step": "reconciled",
+      "output": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\attempts\\20261013T075456Z-abfc8198\\coverage.json",
+      "row_counts": {
+        "OBSERVED": 11,
+        "UNAVAILABLE": 0,
+        "UNVERIFIABLE": 0,
+        "MISMATCH": 0
+      },
+      "budget": {
+        "files_read": 16,
+        "bytes_read": 11358,
+        "elapsed_seconds": 0.126402,
+        "exhausted": null,
+        "limits": {
+          "max_files": 128,
+          "max_file_bytes": 1048576,
+          "max_total_bytes": 8388608,
+          "max_seconds": 30.0,
+          "max_pointer_tokens": 128,
+          "max_line_span": 20000,
+          "max_events_per_role": 4096
+        }
+      },
+      "unchecked": [],
+      "rows": 11
+    },
+    {
+      "step": "capture_observed",
+      "role": "storage",
+      "event_count": 2,
+      "kinds": {
+        "command_started": 1,
+        "command_finished": 1
+      },
+      "capture_ids": [
+        "f43aaf9f8c234f589fb77b8b74921f45"
+      ],
+      "event_ids": [
+        "2d41c27e26274900aa04f570bc9690c0",
+        "4eebee82885f48f59eff8a94a9af1f6e"
+      ],
+      "call_ids": [],
+      "command_started": 1,
+      "command_finished": 1,
+      "output_complete_false": 1,
+      "nonzero_exit": 0,
+      "timed_out": 0,
+      "matched_calls": 1,
+      "unmatched_starts": [],
+      "unmatched_finishes": [],
+      "unknown_call_ids": 0,
+      "identity_mismatches": [],
+      "declared_outputs": [
+        {
+          "call_id": "f43aaf9f8c234f589fb77b8b74921f45",
+          "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\roles\\storage\\commands\\f43aaf9f8c234f589fb77b8b74921f45\\stdout.txt"
+        },
+        {
+          "call_id": "f43aaf9f8c234f589fb77b8b74921f45",
+          "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\roles\\storage\\commands\\f43aaf9f8c234f589fb77b8b74921f45\\stderr.txt"
+        }
+      ],
+      "present": true,
+      "lines": 2,
+      "parsed": 2
+    },
+    {
+      "step": "counterexample_broken_pointer",
+      "row_kind": "check_evidence",
+      "artifact": "execution/ledger.json",
+      "locator": "/rows/99/value",
+      "supplied_sha256": null,
+      "locator_shape": "json_pointer",
+      "reference_kind": "json_pointer_unresolved",
+      "status": "MISMATCH",
+      "reasons": [
+        "json pointer did not resolve: result_pointer_missing"
+      ],
+      "matrix_status": null,
+      "observed": {
+        "bytes": 341,
+        "sha256": "787a5a660d285b20412ff9b43c19656f3149a5001a1abfd437a54444564fe148",
+        "resolved_artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\execution\\ledger.json"
+      },
+      "scope": "reports",
+      "role": "storage",
+      "row_id": "S01"
+    },
+    {
+      "step": "counterexample_bad_hash",
+      "row_kind": "check_evidence",
+      "artifact": "execution/ledger.json",
+      "locator": "/rows/0/value",
+      "supplied_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator_shape": "json_pointer",
+      "reference_kind": "hash_mismatch",
+      "status": "MISMATCH",
+      "reasons": [
+        "supplied sha256 differs from the bytes read now (supplied=000000000000 observed=787a5a660d28)"
+      ],
+      "matrix_status": null,
+      "observed": {
+        "bytes": 341,
+        "sha256": "787a5a660d285b20412ff9b43c19656f3149a5001a1abfd437a54444564fe148",
+        "resolved_artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\execution\\ledger.json"
+      },
+      "scope": "reports",
+      "role": "process",
+      "row_id": "P03"
+    },
+    {
+      "step": "counterexample_duplicate_numeric",
+      "declared_denominator": 3,
+      "verified_rows_declared": 4,
+      "recompute_rows_observed": 3,
+      "unique_value_ids": 3,
+      "unique_resolved_references": 3,
+      "shared_reference_value_ids": [],
+      "duplicate_value_ids": [
+        "V1"
+      ],
+      "unresolved_recompute_value_ids": [],
+      "coverage_note": "unique references and declared value IDs are separate observations; shared references do not prove distinct calculations; this tool re-reads declared recompute locators and never re-derives a forecast number"
+    },
+    {
+      "step": "counterexample_opaque_tool_call",
+      "row_kind": "check_evidence",
+      "artifact": "execution/report_notes.md",
+      "locator": "tool-call:deadbeef",
+      "supplied_sha256": null,
+      "locator_shape": "scheme:tool-call",
+      "reference_kind": "unsupported_scheme",
+      "status": "UNVERIFIABLE",
+      "reasons": [
+        "locator scheme 'tool-call' needs a reader this reconciler does not call (no SourceReader/provider/OCR in this tool)"
+      ],
+      "matrix_status": null,
+      "observed": {
+        "bytes": null,
+        "sha256": null,
+        "resolved_artifact": null
+      },
+      "scope": "reports",
+      "role": "fetch",
+      "row_id": "F01"
+    },
+    {
+      "step": "counterexample_stale_attempt",
+      "declared": {
+        "run_id": "w08-evidence-run",
+        "review_attempt": "attempt-1"
+      },
+      "observed": {
+        "run_id": "w08-evidence-run",
+        "company_query": "W08 Synthetic Subject",
+        "as_of_date": "2026-10-12"
+      },
+      "run_json_present": true,
+      "run_id_match": true,
+      "review_attempt_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\reports\\attempt-1",
+      "review_attempt_root_present": false,
+      "role_report_paths": {
+        "instruction_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\reports\\attempt-1",
+        "roles": {
+          "storage": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.md"
+          },
+          "fetch": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\reports\\attempt-1\\fetch.md"
+          },
+          "process": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\reports\\attempt-1\\process.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\reports\\attempt-1\\process.md"
+          },
+          "analyst": {
+            "json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.json",
+            "md": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\reports\\attempt-1\\analyst.md"
+          }
+        }
+      },
+      "opaque_company_reference": "W08 Synthetic Subject",
+      "identity_resolution": "not_attempted",
+      "notes": [
+        "declared review_attempt report root does not exist; reports may be from another attempt"
+      ]
+    },
+    {
+      "step": "counterexample_limit_exhausted",
+      "budget": {
+        "files_read": 1,
+        "bytes_read": 221,
+        "elapsed_seconds": 0.010496,
+        "exhausted": "file_count_limit",
+        "limits": {
+          "max_files": 1,
+          "max_file_bytes": 1048576,
+          "max_total_bytes": 8388608,
+          "max_seconds": 30.0,
+          "max_pointer_tokens": 128,
+          "max_line_span": 20000,
+          "max_events_per_role": 4096
+        }
+      },
+      "unchecked": [
+        "current review_attempt report root is absent",
+        "storage: declared report JSON not observed",
+        "storage: events.jsonl has no parseable event",
+        "fetch: declared report JSON not observed",
+        "fetch: events.jsonl has no parseable event",
+        "process: declared report JSON not observed",
+        "process: events.jsonl has no parseable event",
+        "analyst: declared report JSON not observed",
+        "analyst: events.jsonl has no parseable event",
+        "resource limit reached: file_count_limit; later rows are unchecked"
+      ]
+    },
+    {
+      "step": "attempt_isolation",
+      "attempts": 8
+    },
+    {
+      "step": "input_manifest_stable",
+      "files": 5
+    },
+    {
+      "step": "sentinels_stable",
+      "count": 2
+    }
+  ],
+  "commands": [
+    {
+      "label": "coverage --help",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--help"
+      ],
+      "exit_code": 0,
+      "seconds": 0.19283,
+      "stdout_sha256": "1f7dbd77496de83b2c2847e816427f6c506e9aee757b04e6f09d4117ec5b24de"
+    },
+    {
+      "label": "audit_run init",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "init",
+        "--root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs",
+        "--company",
+        "W08 Synthetic Subject",
+        "--as-of",
+        "2026-10-12",
+        "--run-id",
+        "w08-evidence-run"
+      ],
+      "exit_code": 0,
+      "seconds": 0.176112,
+      "stdout_sha256": "b73a22e66d3af8d9f44815c1b875cbb97227148832fe16485b4b4eea8ddc9b4b"
+    },
+    {
+      "label": "audit_run capture (real child, bounded log)",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "capture",
+        "--run",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run",
+        "--role",
+        "storage",
+        "--max-log-bytes",
+        "4096",
+        "--timeout-seconds",
+        "60",
+        "--freeze-input",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\execution\\ledger.json",
+        "--freeze-arg-index",
+        "5",
+        "--",
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\child\\synthetic_review_child.py",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run\\execution\\ledger.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.392781,
+      "stdout_sha256": "b5028272b4bde04817c54bddecd906875b0cf52fab6227d7eb63fc73927c2dbb"
+    },
+    {
+      "label": "audit_run event (fetch)",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "event",
+        "--run",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run",
+        "--role",
+        "fetch",
+        "--kind",
+        "review_completed",
+        "--data-file",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\events\\fetch.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.149661,
+      "stdout_sha256": "7e4cd3da2cd3da618ddcfc0091b96891da9938482c41eedc429f805a47749270"
+    },
+    {
+      "label": "audit_run event (process)",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "event",
+        "--run",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run",
+        "--role",
+        "process",
+        "--kind",
+        "review_completed",
+        "--data-file",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\events\\process.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.169863,
+      "stdout_sha256": "7b806ab5f2f13176423166c57a235a0e335496ab7dda481b576048e566ffbc60"
+    },
+    {
+      "label": "audit_run event (analyst)",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\audit_run.py",
+        "event",
+        "--run",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run",
+        "--role",
+        "analyst",
+        "--kind",
+        "review_completed",
+        "--data-file",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\events\\analyst.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.159184,
+      "stdout_sha256": "3d20febabd00118cc06cdec9a0b0df2235a32c964387db29472df8d8acd4e046"
+    },
+    {
+      "label": "declared_only",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\input\\declared_only.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\attempts"
+      ],
+      "exit_code": 0,
+      "seconds": 0.188686,
+      "stdout_sha256": "2d2bc41bbc2a80317a5d78de547626492303f7946645c5a8e278535e865d966b"
+    },
+    {
+      "label": "reconciled",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\input\\reconciled.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\attempts",
+        "--execution-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run"
+      ],
+      "exit_code": 0,
+      "seconds": 0.311693,
+      "stdout_sha256": "bd56534f78f5812db223f76c3d15ef494844151d082adbfde8c11c42091c85f6"
+    },
+    {
+      "label": "broken_pointer",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\input\\broken_pointer.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\attempts",
+        "--execution-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run"
+      ],
+      "exit_code": 0,
+      "seconds": 0.234725,
+      "stdout_sha256": "686fcfe03386df079621321ceb4ee55329af29d1d6f46459f0af5b52e7d79ab5"
+    },
+    {
+      "label": "bad_hash",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\input\\bad_hash.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\attempts",
+        "--execution-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run"
+      ],
+      "exit_code": 0,
+      "seconds": 0.274612,
+      "stdout_sha256": "2795dc5545e5aaa8f75d6bd641a891dc04c1a7e00f48025b46c5978f94d2f11f"
+    },
+    {
+      "label": "duplicate_numeric",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\input\\duplicate_numeric.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\attempts",
+        "--execution-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run"
+      ],
+      "exit_code": 0,
+      "seconds": 0.231832,
+      "stdout_sha256": "0851440d050f29a054890f70c364977d135a19d6b385987df135a5ec12337615"
+    },
+    {
+      "label": "opaque_tool_call",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\input\\opaque_tool_call.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\attempts",
+        "--execution-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run"
+      ],
+      "exit_code": 0,
+      "seconds": 0.29268,
+      "stdout_sha256": "40fe94db21d468e7131cb47422dfe9b37e9458b3d891022a216d39597010c478"
+    },
+    {
+      "label": "stale_attempt",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\input\\stale_attempt.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\attempts",
+        "--execution-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run"
+      ],
+      "exit_code": 0,
+      "seconds": 0.28536,
+      "stdout_sha256": "cfefb3d465f5d54bbb3d3a8a58b35f93835e6bb16f423f3eff66bcd040fd9f90"
+    },
+    {
+      "label": "limit_exhausted",
+      "argv": [
+        "C:\\Miniconda\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\w08-root\\audit\\skills\\revenue-forecast-audit\\scripts\\review_protocol.py",
+        "coverage",
+        "--input",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\input\\limit_exhausted.json",
+        "--out-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\attempts",
+        "--execution-root",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final\\runs\\w08-evidence-run",
+        "--max-evidence-files",
+        "1"
+      ],
+      "exit_code": 0,
+      "seconds": 0.245988,
+      "stdout_sha256": "6d2f5fdfdad200e5ba30419da3579a77493ca4de349159e4beb0fed30186c923"
+    }
+  ],
+  "owned_file_count": 54,
+  "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\cwpe-w08-root-final",
+  "initial_state": "absent",
+  "final_state": "absent",
+  "cleanup_verified": true,
+  "seconds": 3.579373
+}

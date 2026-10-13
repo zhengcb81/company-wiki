@@ -1,0 +1,215 @@
+[
+  {
+    "case": "mismatched_capture_ids",
+    "actual": {
+      "storage_events": {
+        "role": "storage",
+        "event_count": 2,
+        "kinds": {
+          "command_started": 1,
+          "command_finished": 1
+        },
+        "capture_ids": [
+          "other-capture",
+          "storage-capture"
+        ],
+        "event_ids": [
+          "storage-started",
+          "storage-finished"
+        ],
+        "call_ids": [],
+        "command_started": 1,
+        "command_finished": 1,
+        "output_complete_false": 0,
+        "nonzero_exit": 0,
+        "timed_out": 0,
+        "present": true,
+        "lines": 2,
+        "parsed": 2
+      },
+      "unchecked": []
+    }
+  },
+  {
+    "case": "wrong_role_events",
+    "actual": {
+      "storage_events": {
+        "role": "storage",
+        "event_count": 2,
+        "kinds": {
+          "command_started": 1,
+          "command_finished": 1
+        },
+        "capture_ids": [
+          "storage-capture"
+        ],
+        "event_ids": [
+          "storage-started",
+          "storage-finished"
+        ],
+        "call_ids": [],
+        "command_started": 1,
+        "command_finished": 1,
+        "output_complete_false": 0,
+        "nonzero_exit": 0,
+        "timed_out": 0,
+        "present": true,
+        "lines": 2,
+        "parsed": 2
+      },
+      "unchecked": []
+    }
+  },
+  {
+    "case": "stale_current_report_contents",
+    "actual": {
+      "storage_report": {
+        "declared_json": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-independent-review-heju52nj\\runs\\w08-evidence-run\\reports\\attempt-1\\storage.json",
+        "json_status": "OBSERVED",
+        "json_sha256": "a67e824e4a6e0e48a40bcd98e0b78988fc743a7252be428cd8fece0f36b55959",
+        "json_bytes": 402,
+        "md_status": "OBSERVED",
+        "md_sha256": "8cebed62a25f2221d0d8434f305a86f5ad825101a63d2e1865cb073cb69e079c",
+        "md_bytes": 59
+      },
+      "unchecked": [],
+      "diagnostics": [
+        {
+          "code": "locator_not_resolved",
+          "detail": "at least one declared locator is not a JSON pointer or line range; the file was opened but the locator itself stays unresolved"
+        }
+      ]
+    }
+  },
+  {
+    "case": "unresolved_free_text_numeric",
+    "actual": {
+      "numeric": {
+        "declared_denominator": 3,
+        "verified_rows_declared": 3,
+        "recompute_rows_observed": 3,
+        "unique_value_ids": 3,
+        "duplicate_value_ids": [],
+        "unresolved_recompute_value_ids": [],
+        "coverage_note": "duplicate references never increase coverage; this tool re-reads declared recompute locators and never re-derives a forecast number"
+      },
+      "row": {
+        "row_kind": "recompute",
+        "artifact": "execution/ledger.json",
+        "locator": "invented result paragraph",
+        "supplied_sha256": null,
+        "locator_shape": "unstructured",
+        "reference_kind": "file_unstructured",
+        "status": "OBSERVED",
+        "reasons": [
+          "locator is free text; the file was opened but the locator itself was not resolved"
+        ],
+        "matrix_status": null,
+        "observed": {
+          "bytes": 341,
+          "sha256": "787a5a660d285b20412ff9b43c19656f3149a5001a1abfd437a54444564fe148",
+          "resolved_artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-independent-review-cikrgv_v\\runs\\w08-evidence-run\\execution\\ledger.json"
+        },
+        "scope": "numeric_coverage",
+        "role": "process",
+        "row_id": "V1"
+      }
+    }
+  },
+  {
+    "case": "same_locator_two_value_ids",
+    "actual": {
+      "numeric": {
+        "declared_denominator": 3,
+        "verified_rows_declared": 3,
+        "recompute_rows_observed": 3,
+        "unique_value_ids": 3,
+        "duplicate_value_ids": [],
+        "unresolved_recompute_value_ids": [],
+        "coverage_note": "duplicate references never increase coverage; this tool re-reads declared recompute locators and never re-derives a forecast number"
+      }
+    }
+  },
+  {
+    "case": "limits_normalization",
+    "actual": {
+      "max_seconds:nan": {
+        "max_files": 128,
+        "max_file_bytes": 1048576,
+        "max_total_bytes": 8388608,
+        "max_seconds": "nan",
+        "max_pointer_tokens": 128,
+        "max_line_span": 20000,
+        "max_events_per_role": 4096
+      },
+      "max_seconds:inf": {
+        "max_files": 128,
+        "max_file_bytes": 1048576,
+        "max_total_bytes": 8388608,
+        "max_seconds": "inf",
+        "max_pointer_tokens": 128,
+        "max_line_span": 20000,
+        "max_events_per_role": 4096
+      },
+      "max_files:999999": {
+        "max_files": 999999,
+        "max_file_bytes": 1048576,
+        "max_total_bytes": 8388608,
+        "max_seconds": 30.0,
+        "max_pointer_tokens": 128,
+        "max_line_span": 20000,
+        "max_events_per_role": 4096
+      },
+      "max_files:0.5": {
+        "max_files": 0,
+        "max_file_bytes": 1048576,
+        "max_total_bytes": 8388608,
+        "max_seconds": 30.0,
+        "max_pointer_tokens": 128,
+        "max_line_span": 20000,
+        "max_events_per_role": 4096
+      }
+    }
+  },
+  {
+    "case": "deep_json_row_isolation",
+    "actual": {
+      "row_kind": "evidence",
+      "artifact": "deep.json",
+      "locator": "/0",
+      "supplied_sha256": null,
+      "locator_shape": "json_pointer",
+      "reference_kind": "file_pointer",
+      "status": "OBSERVED",
+      "reasons": [],
+      "matrix_status": "resolved",
+      "observed": {
+        "bytes": 3001,
+        "sha256": "98ba95d50797aa344a32182ad1e03706625429100bf3ba23859fff64db6cff6d",
+        "resolved_artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w08-root-reception\\audit\\independent-review\\w08-independent-review-a6zpmtsj\\deep.json"
+      }
+    }
+  },
+  {
+    "case": "file_growth_between_stat_and_read",
+    "actual": {
+      "record_bytes": 40,
+      "error": null,
+      "budget": {
+        "files_read": 1,
+        "bytes_read": 40,
+        "elapsed_seconds": 0.002425,
+        "exhausted": null,
+        "limits": {
+          "max_files": 128,
+          "max_file_bytes": 4,
+          "max_total_bytes": 8,
+          "max_seconds": 30.0,
+          "max_pointer_tokens": 128,
+          "max_line_span": 20000,
+          "max_events_per_role": 4096
+        }
+      }
+    }
+  }
+]

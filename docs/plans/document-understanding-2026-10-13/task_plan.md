@@ -5,6 +5,8 @@ PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans
 Owner: ROOT
 状态：调查/设计/三条分包准备完成，可由用户分发；生产解析链未切换。
 
+2026-10-13：用户已发出三包，当前由各自harness施工。ROOT已完成W08 RF/Audit验收并线/必要安装，详母计划W08接收入口；现在准备主线真实G2及三DU包集成，三包代码与各自PWF不由ROOT代写。
+
 ## 目标与边界
 
 根据真实 A/H/US 文档及现有代码，设计文档类型/章节驱动的精选证据与摘要架构。原件不改，不增加逐材料授权、不复制全量 PDF/MD，不新增研究结论 writer。复用 SourceRef/SourceExport、AUTO Store、现有资源预算与配置供应商。W08 RF/Audit 接收和母计划真实 G2/G4/G5 不被替代或标成完成。

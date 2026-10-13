@@ -1,3 +1,7 @@
+## 2026-10-13 W08接收并线完成
+
+RF主线/远端b9208a21、精确CI38367459762绿；Audit主线e5189a0且两安装副本已实测。W08三包已关闭离线工程接收，详[当前接收结果](phase6/w08_parallel_completion_2026-10-12/README.md)。RF150文件WIP保持，DU三包仍各自独立施工；G2/G4/G5及完整母目标未完成。Next Step：准备真实G2输入/配置/预算及DU集成，使用一个大节点验证，不再派W08。
+
 ## 2026-10-13 文档理解升级子计划
 
 用户要求按A/H/US与文档种类优化读取/切片/摘要；已完成20原件调查及3份selector诊断。新[设计与三独立施工卡](../document-understanding-2026-10-13/README.md)已冻结边界，生产未切换。可并行做profiles/structure/benchmark；ROOT先接完W08 RF/Audit，再集成文档层并合并原G2/G4/G5验证，未完成项不重复标关闭。
