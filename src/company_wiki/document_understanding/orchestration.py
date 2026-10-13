@@ -33,13 +33,24 @@ PACKAGE_KINDS = (
 # unit/period is the classic "true quote, false claim" failure.
 _NEVER_DROPPABLE = ("required_context_unit_ids", "anchor_unit_ids")
 
+#: Ranking bands by semantic kind within one chapter.  Structured, dependency-bearing
+#: units come first; free prose fills whatever budget remains.
+_KIND_BAND: dict[str, int] = {
+    "project": 0,
+    "operating_table": 0,
+    "qa_exchange": 0,
+    "risk": 1,
+    "paragraph_event": 2,
+    "background": 3,
+}
+
 
 def build_dependency_packages(
     structure: Mapping[str, Any],
     *,
     route: Mapping[str, Any] | None = None,
     profile: Mapping[str, Any] | None = None,
-    max_packages: int = 400,
+    max_packages: int | None = None,
     max_members: int = 64,
 ) -> dict[str, Any]:
     """Turn a ``du-structure/1`` result into budgetable atomic packages.
@@ -49,6 +60,17 @@ def build_dependency_packages(
     ``get_profile(route["profile_id"])`` to apply that document type's own reading
     order; passing only the route leaves the generic order in place, which is a valid
     but less informed result.
+
+    ``max_packages`` defaults to ``None``, meaning every semantic unit is packaged. A
+    numeric cap truncates the tail of the ranked list, and because the last sort key is
+    the package id the tail is the *late pages*: a cap therefore keeps the front of the
+    document and drops the back. That is the same fixed-prefix failure this whole layer
+    exists to remove, so a cap is only applied when a caller explicitly asks for one and
+    it is always reported through ``PACKAGE_LIMIT_REACHED``.
+
+    Ranking within a chapter prefers dependency-bearing kinds (a project, an operating
+    table, a QA exchange) over free prose, because those are the units that carry the
+    subject, unit, period and footnote a fact needs to stay true.
     """
     sections = {section["section_id"]: section for section in structure.get("sections", ())}
     role_priority = _role_priority(route, profile)
@@ -101,11 +123,14 @@ def build_dependency_packages(
     packages.sort(
         key=lambda package: (
             -int(package["priority"]),
+            _KIND_BAND.get(package["kind"], _KIND_BAND["background"]),
             0 if package["completeness"] == "complete" else 1,
             package["package_id"],
         )
     )
-    if len(packages) > max_packages:
+    truncated_by_limit = False
+    if max_packages is not None and len(packages) > max_packages:
+        truncated_by_limit = True
         packages = packages[:max_packages]
 
     return {
@@ -114,7 +139,9 @@ def build_dependency_packages(
         "packages": packages,
         "package_count": len(packages),
         "coverage": structure.get("coverage", {}),
-        "diagnostics": _package_diagnostics(packages, structure),
+        "diagnostics": _package_diagnostics(
+            packages, structure, truncated_by_limit=truncated_by_limit
+        ),
     }
 
 
@@ -175,7 +202,10 @@ def _section_priority_entries(source: Mapping[str, Any] | None) -> list[Mapping[
 
 
 def _package_diagnostics(
-    packages: Sequence[Mapping[str, Any]], structure: Mapping[str, Any]
+    packages: Sequence[Mapping[str, Any]],
+    structure: Mapping[str, Any],
+    *,
+    truncated_by_limit: bool = False,
 ) -> list[dict[str, Any]]:
     diagnostics: list[dict[str, Any]] = []
     truncated = [package["package_id"] for package in packages if package["truncated"]]
@@ -185,6 +215,17 @@ def _package_diagnostics(
                 "code": "PACKAGE_TRUNCATED",
                 "package_ids": truncated,
                 "detail": "member list was bounded; required context was preserved",
+            }
+        )
+    if truncated_by_limit:
+        diagnostics.append(
+            {
+                "code": "PACKAGE_LIMIT_REACHED",
+                "package_ids": [],
+                "detail": (
+                    "max_packages cut the ranked tail, which is the late pages of the "
+                    "document; treat the omitted packages as unread, not as absent"
+                ),
             }
         )
     if not packages and structure.get("semantic_units"):

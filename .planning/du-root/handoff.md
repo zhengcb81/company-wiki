@@ -18,6 +18,35 @@ worktree：`C:/Users/郑曾波/Projects/_harness_worktrees/document-understandin
 
 三条 lane（profiles / structure / benchmark）由各自分支合入本分支，未改动其内部实现。
 
+## 合并阶段修掉的三个接线缺陷
+
+这三个都**只在三包并成一条链、且四个套件在同一次 pytest 调用下运行时**才暴露；
+每个 lane 单跑全绿时看不见它们。每个都补了回归锁，都没有靠放松断言过关。
+
+1. **路由对编排是 no-op（静默失效）。**
+   `build_dependency_packages` 从 `route["section_priorities"]` 读章节优先级，但该键在
+   **profile** 上而不在 route 上——`route_document` 并不返回它。结果每份文档都拿到同一套
+   通用优先序，"按文档类型决定先读什么"完全没生效，而且**不报错**。
+   修复：`build_dependency_packages` 接受 `profile=`，`_role_priority` 优先用 profile、
+   仍兼容只传 route；由 `test_du_root_lane_seam.py` 锁死（断言 profile 必须真的改变优先序，
+   且只传 route 时确实等于通用序）。
+
+2. **两 lane 的 fixtures 同名，四套件同跑直接收集失败（CI 的跑法）。**
+   structure lane 把自己的 fixture 目录插进 `sys.path` 后写 `from fixtures import ...`，
+   而仓库另有 `tests/fixtures` 也在 `sys.path` 上。单跑 structure 通过；与 profiles/root/bench
+   同跑即 `ImportError: cannot import name 'available_inputs' from 'fixtures'`。
+   修复：fixture 模块改名为唯一的 `tests/fixtures/document_understanding_structure/du_structure_fixtures.py`，
+   按该名导入。
+
+3. **四个测试模块算错仓库根路径，真实节点静默 skip。**
+   `tests/unit/<lane>/test_*.py` 用 `Path(__file__).parents[2]`，得到的是 `<repo>/tests`
+   而不是 `<repo>`，于是 bindings 永远找不到，真实原件节点报 **10 SKIPPED**——一个诚实但
+   误导的"绿"。修复为 `parents[3]` 后真实节点实际运行并通过。
+   ⚠️ 注意：structure lane 自己的 `FIXTURE_ROOT = parents[2] / "fixtures" / ...` 在**同一深度**
+   下是**正确**的，不要跟着一起改（改了就会变成 `<repo>/tests/fixtures`→错位）。
+
+合并后：**331 passed / 5 skipped**（同一调用，约 26s），`ruff check src tests/unit tools` 全绿。
+
 ## 边界
 
 ROOT 只写：上层 `document_understanding/__init__.py`、ROOT 自己的三个模块、

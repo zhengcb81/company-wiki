@@ -48,9 +48,23 @@ flowchart TD
   依赖闭合包。`selection_bridge.dependency_closure` 只增不减——任何成员被选中时补回其
   必需上下文，并让否定与其所属包同进同出。现有 selector 的预算权威不变。
 
+三个包已合并在同一分支上，并由 ROOT 的端到端入口串成一条链：
+
+```python
+company_wiki.document_understanding.understand_units(units, *, source_id, source_sha256, ...)
+# build_observation -> route_document -> get_profile -> build_structure
+#                   -> build_dependency_packages  =>  du-pipeline/1
+```
+
+该入口把路由结果与**其 profile** 一起交给编排层：章节优先级在 profile 上而不在 route 上，
+只读 route 会静默退回通用优先序、使路由等于没接（已由 `test_du_root_lane_seam.py` 锁死）。
+管道同时区分「应当有业务叙述却没有产出包」（记为覆盖缺口）与「行政/未知文档本就不期待叙述」，
+不把前者写成"没有内容可读"。
+
 结构侧信道按文档常规 ≤64KiB；不落地整篇 Markdown，不产生第二份全文。
 `du-structure` 的 `complete` 只表示构建过程完成，不代表业务召回或判断正确。
-三个包目前**未接入生产入口**，ROOT 接线属于后续步骤。
+本层**尚未接入生产解析/选择入口**：生产切换仍需 ROOT 把 `understand_units` 接到现有
+parse → select → summarize 链上，并按母计划跑真实模型大节点。
 
 ### 已知适配缺口
 

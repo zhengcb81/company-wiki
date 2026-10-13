@@ -11,11 +11,16 @@ import sys
 from pathlib import Path
 
 
+# ``parents[2]`` is the ``tests`` directory for this module's depth; the lane's fixtures
+# live under ``tests/fixtures/document_understanding_structure``.
 FIXTURE_ROOT = Path(__file__).resolve().parents[2] / "fixtures" / "document_understanding_structure"
 if str(FIXTURE_ROOT) not in sys.path:
     sys.path.insert(0, str(FIXTURE_ROOT))
 
-from fixtures import load_observation  # noqa: E402
+# Imported by its unique module name, not as a bare ``fixtures``: the repository's own
+# ``tests/fixtures`` directory is also on ``sys.path``, so a bare name resolves to whichever
+# wins the race and collection fails when the DU unit suites run in one invocation.
+from du_structure_fixtures import load_observation  # noqa: E402
 
 from company_wiki.document_understanding.structure import build_structure  # noqa: E402
 

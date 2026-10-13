@@ -1,16 +1,22 @@
 # 文档理解升级 — ROOT 总入口
 
-2026-10-13：调查和施工设计已形成，生产解析链尚未切换。与原跨市场母计划相连；W08 RF/Audit 接收、真实 G2/G4/G5 保持开放。本目录不是新的许可或人工签收系统。
+2026-10-13：三包已实现并合并到 ROOT 分支，跨层验收通过（331 tests，含真实原件节点）；
+**生产解析链尚未切换**。与原跨市场母计划相连；W08 RF/Audit 接收、真实 G2/G4/G5 保持开放。本目录不是新的许可或人工签收系统。
 
 先读 [实证 findings](findings.md)、[设计](design.md)、[实施及测试](implementation.md)。三条线共用 [接口](INTERFACES.md)，各自拥有独立 checkout 和写入目录。ROOT 负责生产适配、并线、跨层测试、母计划状态。
 
-| 可同时启动的施工卡 | 工作目录（各为独立 CWP worktree） | 独占产物 |
-|---|---|---|
-| [DU-PROFILES：文档路由与阅读策略](cards/DU-PROFILES.md) | `C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/profiles` | `src/company_wiki/document_understanding/profiles/` |
-| [DU-STRUCTURE：跨页章节与语义单元](cards/DU-STRUCTURE.md) | `C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/structure` | `src/company_wiki/document_understanding/structure/` |
-| [DU-BENCH：真实样本质量基准](cards/DU-BENCH.md) | `C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/benchmark` | `tools/document_understanding_benchmark/` |
+| 施工卡 | 工作目录（各为独立 CWP worktree） | 独占产物 | 状态 |
+|---|---|---|---|
+| [DU-PROFILES：文档路由与阅读策略](cards/DU-PROFILES.md) | `C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/profiles` | `src/company_wiki/document_understanding/profiles/` | 已交付 150 测试，已合并 |
+| [DU-STRUCTURE：跨页章节与语义单元](cards/DU-STRUCTURE.md) | `.../document-understanding-20261013/structure` | `src/company_wiki/document_understanding/structure/` | 已交付 47 测试，已合并 |
+| [DU-BENCH：真实样本质量基准](cards/DU-BENCH.md) | `.../document-understanding-20261013/benchmark` | `tools/document_understanding_benchmark/` | 已交付 65 测试，已合并 |
 
-各卡同时列出自己的 tests/fixtures/交接路径。施工期间不改对方代码，不改现有生产入口，不改母 PWF、依赖清单、hook/CI、生产配置。缺共享字段写入各自 `handoff.json`，由 ROOT 一次协调；不自创不兼容接口。三个包可用冻结 JSON 夹具独立施工，不等待彼此；ROOT 接入阶段才依赖三包。
+各卡同时列出自己的 tests/fixtures/交接路径。施工期间不改对方代码，不改现有生产入口，不改母 PWF、依赖清单、hook/CI、生产配置。缺共享字段写入各自 `handoff.json`，由 ROOT 一次协调；不自创不兼容接口。三个包用冻结 JSON 夹具独立施工，不等待彼此；ROOT 接入阶段才依赖三包。
+
+ROOT 的接线成果：`document_understanding/{observation_adapter,orchestration,selection_bridge,pipeline}.py`
+与端到端入口 `understand_units`（`du-pipeline/1`）。合并阶段修掉的三个"只有并成一条链才暴露"
+的接线缺陷记录在 [task_plan](task_plan.md) 中，其一（两 lane fixtures 同名）会导致 CI 的四套件
+同跑直接收集失败。
 
 ## 样本和边界
 

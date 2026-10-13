@@ -1,3 +1,11 @@
+## 文档理解升级并线状态 — 2026-10-13
+
+[文档理解升级（du-input/route/structure/packages）](../document-understanding-2026-10-13/README.md)
+三包已实现并合并到 `codex/du-root-integration-20261013`，跨层验收 331 tests 通过（含真实原件节点），
+原件 0 复制 0 修改、0 模型调用、0 费用；**尚未接入生产解析链**。母计划的 W04、G2、G4、G5
+保持开放，本计划不替代也不签收它们。生产切换与真实模型大节点按母计划 G4/G5 另行执行。
+下面内容为原有记录，按原字节保留。
+
 ## ROOT 当前入口 — 2026-10-11
 
 当前状态、已发布SHA与下一步统一见 [ROOT接收状态](../cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/ROOT-reception-status.md)，优先于本文旧状态。

@@ -3,7 +3,8 @@
 PLAN_ID: document-understanding-2026-10-13
 PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans
 Owner: ROOT
-状态：三包已实现并交付；ROOT 已完成观察适配、编排与选择桥（**未接入生产入口**）；生产解析链仍未切换。
+状态：三包已合并到 ROOT 分支并通过全量跨层验收（331 tests）；ROOT 已完成观察适配、编排、
+选择桥与端到端 pipeline（**未接入生产入口**）；生产解析链仍未切换。
 
 ## 目标与边界
 
@@ -16,19 +17,50 @@ Owner: ROOT
 3. [complete] 三卡、冻结接口/交接格式和独立worktree已准备；共同基线 7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8。
 4. [complete] 三包实施：DU-PROFILES（文档路由）、DU-STRUCTURE（章节与语义单元）、DU-BENCH（真实质量基准）各自实现并交付 handoff。
 5. [complete] ROOT 接线：du-input/1 观察适配、du-packages/1 依赖闭合编排、选择桥（只增不减，保住必需上下文与否定）；docs/ARCHITECTURE 更新。
-6. [pending] 真实模型摘要大节点与跨公司 G4/G5 验收；本层**未接入生产入口**，切换属后续步骤。
+6. [complete] 三包合并到 ROOT 分支 + 端到端 pipeline + 全量跨层验收（含真实原件，0 skip）。
+7. [pending] 真实模型摘要大节点与跨公司 G4/G5 验收；本层**未接入生产入口**，切换属后续步骤。
 
 ## 当前实现状态
 
+三包已 merge 到 `codex/du-root-integration-20261013`，四个套件在**同一次 pytest 调用**下通过。
+
 | 组件 | 位置 | 测试 | 生产接线 |
 |---|---|---:|---|
-| profiles | `src/company_wiki/document_understanding/profiles/` | 138 | 否 |
+| profiles | `src/company_wiki/document_understanding/profiles/` | 150 | 否 |
 | structure | `src/company_wiki/document_understanding/structure/` | 47 | 否 |
-| ROOT 适配/编排/选择桥 | `src/company_wiki/document_understanding/{observation_adapter,orchestration,selection_bridge}.py` | 35 | 否 |
-| benchmark | `tools/document_understanding_benchmark/` | 47 | 工具，非生产路径 |
+| ROOT 适配/编排/选择桥/pipeline | `src/company_wiki/document_understanding/{observation_adapter,orchestration,selection_bridge,pipeline}.py` | 68 | 否 |
+| benchmark | `tools/document_understanding_benchmark/` | 65 | 工具，非生产路径 |
 
-真实跨层验证（4 份原件，SHA/mtime 未变）：恒锋两期建设期跨页保留、万润“不生产VC”否定保留、
-名创双栏不混读、中微季报业务文本可组织。
+同一调用下合计 **331 passed / 5 skipped**（26.1s）；`ruff check src tests/unit tools` 全绿；
+真实原件节点 11 项实际运行并通过（不再 skip）。
+
+端到端入口（ROOT 独占）：
+`company_wiki.document_understanding.understand_units(units, ...)` →
+`build_observation` → `route_document` → `get_profile` → `build_structure` →
+`build_dependency_packages`，输出 `du-pipeline/1`。
+
+真实跨层验证（原件 SHA/mtime 未变）：恒锋两期建设期跨页保留、万润“不生产VC”否定保留、
+名创双栏不混读、中微季报业务文本可组织；恒锋 `发行A股股票募集说明书` 由 legacy `unknown`
+转为 `offering`，鼎龙确认函由 legacy `prospectus` 转为 `administrative_candidate`。
+
+## 合并阶段发现并修掉的接线缺陷
+
+这些缺陷在两包各自单测里都看不见，只有并到一条链上才暴露：
+
+1. **路由对编排完全无效（no-op）**：`orchestration._role_priority` 从 `route["section_priorities"]`
+   读优先级，但该键在 **profile** 上而不在 route 上（`route_document` 不返回它）。
+   结果每份文档都拿到同一套通用优先序，路由等于没接。
+   修复：`build_dependency_packages` 增加 `profile=`，优先级取 profile 优先、route 兜底；
+   并补 `test_du_root_lane_seam.py` 锁死该契约。
+2. **两 lane 的 fixtures 同名冲突，合并后 pytest 直接收集失败**：structure lane 把自身 fixture
+   目录插入 `sys.path` 后 `from fixtures import ...`，而仓库另有 `tests/fixtures` 也在 `sys.path`。
+   单跑 structure 能过，四套件同跑即 `ImportError: cannot import name 'available_inputs' from 'fixtures'`
+   —— 正是 CI 的跑法。修复：fixture 模块改名为唯一的 `du_structure_fixtures.py` 并按该名导入。
+3. **四个测试模块的仓库根路径算错**：`tests/unit/<lane>/test_*.py` 用 `parents[2]` 得到的是
+   `root/tests` 而不是 `root`，于是 bindings 永远找不到、真实节点**静默 skip**。
+   修复为 `parents[3]`；修复后真实节点由 10 skipped 变为 10 passed。
+   （注意：structure lane 的 fixture 路径 `parents[2]/fixtures/...` 在同一深度下是**正确**的，
+   不要一起改。）
 
 ## 需要后续处理的真实缺口
 
@@ -38,10 +70,17 @@ Owner: ROOT
   需在 adapter/选择层决定保留哪套；结构层不得删除任一侧。
 - **design.md 的名创双栏描述需更正**：实测为**左栏英文、右栏中文**（原文写“中英左右栏”），
   且两栏各自语言统一，跨栏不存在同位中英对；真实中英并排对在同一栏内相邻。
+- **benchmark 的 holdout 仍不完整**：US holdout 为 UNAVAILABLE（本机没有非开发集美股原件），
+  H 股 holdout 只有一家公司。`context_completeness`/`role_modality_quantity` 在原生基线上
+  仍是 NOT_EVALUATED，需要 ROOT 注入真实 adapter 后才有分母。
+- **探测预算**：真实文档 3000–4000 unit 对冻结的 200 unit / 64000 字符必然到限，
+  因此真实文档 confidence 一律 `low` 并报 `ROUTE_PROBE_LIMIT`。是否放宽属 ROOT 用既有
+  全局上限收敛的范围；profile 侧不允许自行提高。
 
 ## Next Step
 
-三包 handoff 收齐后合并到 ROOT 分支做最终全量验收。生产切换与真实模型大节点按母计划 G4/G5 另行执行。
+生产切换与真实模型大节点按母计划 G4/G5 另行执行；接入方式见
+`src/company_wiki/document_understanding/__init__.py` 的 `understand_units`。
 
 ## Errors Encountered
 
@@ -54,3 +93,6 @@ Owner: ROOT
 - 新worktree --no-checkout后稀疏规则未填入空索引；在三个刚创建的指定分支执行read-tree -mu HEAD完成检出，三者status均0，无原件目录复制。
 - ROOT 真实测试首次硬编码原件绝对路径，被仓库 host-assumption guard 拦下；改为本机未提交 bindings
   文件驱动，`src`/`tests` 内不再出现主机绝对路径，缺绑定则 skip 而非 PASS。
+- 合并阶段：`compileall` 生成的陈旧 `__pycache__` 会让编辑后的模块仍按旧代码运行，
+  出现"改了却仍失败"的假象；排查此类问题前先清理 `__pycache__`。
+
