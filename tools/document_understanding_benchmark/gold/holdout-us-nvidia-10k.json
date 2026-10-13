@@ -3,6 +3,7 @@
   "sample_id": "holdout-us-nvidia-10k",
   "source_sha256": "dae19486be264fd26eb00a7f920dc641041a261c81bc8c03b678eea947de4856",
   "scope": "holdout",
+  "language": "en",
   "expected_route_families": [
     "annual",
     "sec_10k"

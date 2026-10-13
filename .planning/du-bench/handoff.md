@@ -5,9 +5,10 @@ PLAN_ID=du-bench ｜ 分支 `codex/du-benchmark-20261013` ｜ base `7f6f7cbd`
 工作目录：`C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/benchmark`
 
 > **审计轮更新（第三轮）**：卡片要求的**最低关键集 14 项现已全部覆盖（0 缺口）**，
-> 金标 15 份（开发 10 / holdout 5）、176 事实、128 关键。本轮另查出并修复了
-> 4 个自身缺陷：召回分母把「读不到」当「没找到」、make_bindings 会覆盖掉 holdout
-> 绑定、金标缺少 fact_scope 区分（叙述 vs 文档元信息）、以及卡片最低集无人守护。
+> 金标 **17 份（开发 11 / holdout 6）**、**192 事实、137 关键**。
+> holdout 现满足卡片的「A/H/US 各两家」：A 股 2、**H 股 2**、US 2。
+> 本轮另查出并修复了 **6 个自身缺陷**，并发现一类**新缺陷：CID 字型亂碼**
+> （整份 415 页不可读，管線却报成正常解析）。
 
 ## 1. 做了什么
 
@@ -33,11 +34,11 @@ PLAN_ID=du-bench ｜ 分支 `codex/du-benchmark-20261013` ｜ base `7f6f7cbd`
 | `.../__main__.py` | offline / native / adapter 三模式 CLI |
 | `.planning/du-bench/evidence.json` | 由运行产物**程序生成**的证据记录 |
 
-金标事实全部**逐字读原件**写成。开发集（10）：恒锋 2020 增发、万润 IR、名创香港年报、
+金标事实全部**逐字读原件**写成。开发集（11）：恒锋 2020 增发、万润 IR、名创香港年报、
 中微 2026Q1、中微 2026 半年报、鼎龙扫描确认函、世华科技 2026Q1（财务季报负例）、
-微软 FY2025 10-K、MSFT FY2026Q4 电话会、TAL FY2024 20-F。
-holdout（5）：广联达 2025Q1、雅克科技 2022Q1、阿里巴巴 FY2023、MongoDB FY2026 10-K、
-NVIDIA FY2025 10-K —— 后两家美国公司由独立子代理逐字读取回报。
+微软 FY2025 10-K、MSFT FY2026Q4 电话会、TAL FY2024 20-F、小米香港年报（**CID 亂碼反例**）。
+holdout（6）：广联达 2025Q1、雅克科技 2022Q1、阿里巴巴 FY2023、**壁仞科技 FY2025**、
+MongoDB FY2026 10-K、NVIDIA FY2025 10-K。
 **没有**从 selector 输出反推期待值。
 
 ## 2. 边界
@@ -83,18 +84,19 @@ python -X utf8 -m tools.document_understanding_benchmark --mode native \
 
 ### A —— 金标与反例冻结，记录基线真实结果
 
-金标 15 份：开发 10、**holdout 5**（A 股 2、H 股 1、US 2），176 事实、128 关键。
+金标 17 份：开发 11、**holdout 6**（A 股 2、**H 股 2**、US 2），192 事实、137 关键。
 单份引文最大 2,094 字节，上限 8KiB。卡片最低关键集 **14/14 覆盖，0 缺口**（有测试守护）。
 
 **基线真实召回，开发与 holdout 分开报，从不合并：**
 
 | 划分 | 文档 | 关键召回 | 可评/声明 | 覆盖 | 叙述类(全事实) | 文档元信息 |
 |---|---:|---|---:|---:|---|---:|
-| development | 10 | **10/57 = 0.175** | 57/83 | 0.687 | 13/68 = 0.191 | **0/9 = 0.000** |
-| **holdout** | 5 | **0/22 = 0.000** | 22/45 | 0.489 | **0/36 = 0.000** | n/a |
+| development | 11 | **11/60 = 0.183** | 60/86 | 0.698 | 13/68 = 0.191 | 1/19 = 0.053 |
+| **holdout** | 6 | **0/31 = 0.000** | 31/54 | 0.574 | 1/79 = 0.013 | 0/1 |
 
-分母口径说明：`UNAVAILABLE`（读不到）**不计入分母**，另列 `coverage`。
-所以「读不到」不会被报成「没找到」——这正是本轮修掉的一个自身缺陷。
+分母口径说明：`UNAVAILABLE`（读不到）**不计入分母**，另列 `coverage`；
+`narrative`（业务内容）与 `document_meta`（文档属性）分开报。
+所以「读不到」不会被报成「没找到」，选择器也不会为前置层的事实背锅。
 
 逐份：
 
@@ -107,12 +109,14 @@ python -X utf8 -m tools.document_understanding_benchmark --mode native \
 | cn-q-business（中微Q1） | dev | `quarterly_report` | 28/28 | 579 | 0.667 |
 | cn-q-sparse（世华季报） | dev | `quarterly_report` | **0/0** | 429 | 0.000 |
 | hk-annual（名创） | dev | `annual_report` | 96/254 | 6,502 | 0.000 |
+| **hk-annual-mojibake（小米）** | dev | `annual_report` | **12/12** | 9,618 | n/a（易读性 FAIL） |
 | us-10k（微软10-K） | dev | — | — | — | n/a（载体不支持） |
 | us-txt（MSFT电话会） | dev | **`investor_call_transcript`** | 96/107 | 489 | **0.091** |
 | us-20f（TAL 20-F） | dev | — | — | — | n/a（载体不支持） |
 | holdout-cn-glodon-q1 | **HOLD** | `quarterly_report` | **0/0** | 257 | 0.000 |
 | holdout-cn-yake-q1 | **HOLD** | `quarterly_report` | **2/2** | 369 | 0.000 |
 | holdout-hk-alibaba | **HOLD** | `annual_report` | 96/2,221 | 18,038 | 0.000 |
+| **holdout-hk-biren** | **HOLD** | `annual_report` | — | — | 0.000 |
 | holdout-us-mongodb | **HOLD** | — | — | — | n/a（载体不支持） |
 | holdout-us-nvidia | **HOLD** | — | — | — | n/a（载体不支持） |
 
@@ -165,6 +169,34 @@ python -X utf8 -m tools.document_understanding_benchmark --mode native \
 
 一页扫描确认意见被判成 **`prospectus`**，0 units / 0 候选，唯一一页不透明。
 
+### 发现 6（新缺陷类）：CID 字型亂碼 —— 整份文件不可读，管線却报成正常解析
+
+`hk-annual-mojibake`（小米集團－Ｗ 2025 年度報告，415 页）实测：
+
+| 指标 | 数值 |
+|---|---|
+| 页数 | 415 |
+| 含可读繁體中文的页 | **0** |
+| 亂碼页 / 近空白页 | 402 / 6 |
+| parser 产出 | **9,618 units** |
+| **quality flags** | **0** |
+| **errors** | **0** |
+| opaque_pages | 2（仅 5、415） |
+| selector 结果 | 12 选中 / 12 候选，`status=partial`，其中含纯亂碼 `姽⅌彨ṍ嘗` |
+| 不可用区段字符占比 | **2.663%**（270,005 密集字符中 7,191 个） |
+
+对照（同一指标，干净原件）：恒锋 0.006%、中微Q1 0.020%、世华 0.000%、
+名创 0.032%、阿里巴巴 0.038%、壁仞 0.076% —— **最差干净件 0.076%，亂碼件 2.663%，差 35 倍**。
+
+也就是说：**整份文件 100% 不可讀，管線報成一次正常解析**，而且選中的是亂碼。
+这是本轮最有价值的发现之一，因为它的失败模式是**静默**的——没有任何 flag 或 error。
+基准为此新增 `integrity.text_legibility` 检查（阈值 0.5%，位于干净件与亂碼件之间），
+并把易读性度量放在**解析出的全部文本**上（只看选中文本会漏：本件只选中 195 字符）。
+
+**注意修法不同**：CID 映射損壞 ≠ 掃描件。掃描件原生文本為空（`cn-ipo-confirmation`），
+需要 OCR；映射損壞有文字層但字型對照壞了，OCR 不是唯一解，換抽取方式/字型對照也可行。
+把兩者混為一談會選錯修復路徑。
+
 ## 6. 独立语义复核（把 `semantics.entailment` 推进一步）
 
 - 真实复核产物：`.../reviews/fixtures-independent-review.json`，
@@ -190,22 +222,37 @@ python -X utf8 -m tools.document_understanding_benchmark --mode native \
 | document_meta（前置层） | 9 关键 | 0 | 可测且**全 0** —— 说明缺层 |
 | untested_semantics | 11 夹具 claim 已复核 | — | native 无 claim，仍 NOT_EVALUATED |
 
-## 7b. 本轮修掉的基准自身缺陷（4 个）
+## 7b. 本轮修掉的基准自身缺陷（6 个）
 
 1. **召回分母把「读不到」当「没找到」**：`critical_fact_recall` 用的是声明分母，
    而同一文件的 `fact_recall` 用的是扣掉 UNAVAILABLE 的有效分母 —— 同一概念两种口径。
    未读文档因此被报成 `0.000` 召回（读起来像「找了但一条没找到」）。
    已统一为有效分母，并新增 `coverage` 与 `*_denominator_declared`，两条回归测试守护。
 2. **`make_bindings` 会覆盖 holdout 绑定**：manifest 只有 20 份调查样本，
-   而 holdout 5 份不在其中；重建 bindings 会静默丢弃它们，丢绑定与「原件缺失」在报告里
+   而 holdout 不在其中；重建 bindings 会静默丢弃它们，丢绑定与「原件缺失」在报告里
    **无法区分**。改为默认保留非 manifest 条目（`--replace` 才清空），并有回归测试。
    *本轮真的踩到了这个坑*：一次重建把 5 条 holdout 绑定清掉，holdout 覆盖一度掉到 0.000。
-3. **金标缺叙述/元信息区分**：`us-txt` 的 14 条事实混了「业务内容」与「文档属性」
-   （参与者名单、来源出处、截断、财季 vs 日历年）。混在一个分母里会把
-   「选择器该带的事实」与「前置层该给的事实」算成同一个分数。新增 `fact_scope`
-   字段（默认 `narrative`）并分开报。
+3. **金标缺叙述/元信息区分**：`us-txt` 的 14 条事实混了「业务内容」与「文档属性」。
+   新增 `fact_scope` 字段（默认 `narrative`）并分开报。
 4. **卡片最低关键集无人守护**：审计发现 9 项里缺 4 项（`cn-q-sparse`、`us-10k`、
-   `us-txt`、`us-20f` 全无金标）。已补齐并加测试，改名/删档/掏空金标都会让它失败。
+   `us-txt`、`us-20f` 全无金标）。已补齐并加测试。
+5. **拒绝路径会把哨兵改坏**：`install_sentinel(preserve_existing=True)` 会先覆写已有哨兵，
+   再靠调用方 `restore_sentinel` 还原；但 `run_offline`/`run_native` 在
+   `return EXIT_REFUSED` 时**跳过了还原**。也就是说一次**被拒绝的运行**会留下它找到的内容
+   被改坏 —— 违反「不得修改发现的内容」。已改为 `try/finally`，任何退出路径都还原，
+   并新增针对拒绝路径的回归测试（先 RED 再修）。
+6. **易读性检查判错了对象**：初版只在「选中文本」上判易读性，而亂碼件 270,005 个密集字符里
+   只选中了 195 个，低于阈值 → 报 NOT_EVALUATED，缺陷**依然不可见**。
+   已改为优先使用 observer 在**解析出的全部文本**上的度量，并为「解析基准」补 3 条测试。
+   另外初版用「CJK 占比」判定，实测无效：本件的亂碼映射到**合法但错误**的 CJK 码位，
+   CJK 占比仍有 44%。最终改用「正常散文永不使用的字符区段占比」，并给出实测对照与阈值依据。
+
+## 7c. 仍不能自动检验的项（新增）
+
+- **CID 映射損壞无法从「文本本身」彻底证明**：新检查是**统计信号**（不可用区段占比），
+  能抓住这个 2.663% 的实例，但阈值是实测标定的，不是语义证明。占比低于 0.5% 的
+  轻度損壞仍会漏检——这类情形应报 NOT_EVALUATED 而非 PASS，目前实现会报 PASS，
+  **这是已知局限，记在此处而不是悄悄放过**。
 
 ## 8. 尚不能自动检验的语义项
 
@@ -235,16 +282,20 @@ python -X utf8 -m tools.document_understanding_benchmark --mode native \
 ## 11. 需要 ROOT 做的事
 
 1. **为 SEC 文件加 HTML 前端**（REQ-1）——否则 4 份 US 文档（含 2 份 holdout）无法评分。
-2. 通过 `observer.observe_du_adapter` 注入真实 `du-input/1` 适配器，
+2. **处理 CID 字型映射損壞**：实测一份真实 415 页港股年报 100% 不可读却被报成正常解析
+   （9,618 units / 0 flag / 0 error），selector 还选中了亂碼。需要的是**廉價的易读性前置判定**
+   并把判定失败的页标为 opaque，而不是等摘要阶段才发现。注意与扫描件区分开。
+3. 通过 `observer.observe_du_adapter` 注入真实 `du-input/1` 适配器，
    让 `context_completeness` 与 `role_modality_quantity` 不再是 NOT_EVALUATED；
    并接上摘要产出，`semantics.entailment` 才有 claim 可复核。
-3. **补一个文档元信息/前置层**：`document_meta` 召回实测 **0/9**，
-   说明「是否经审计、财年口径、目录 vs 正文、页数、来源出处」这类事实没有任何层承载。
-4. 用 `evaluate(limits=...)` 传 ROOT 的真实派生/时间上限。
-5. 决定五个补采请求。
+4. **补一个文档元信息/前置层**：`document_meta` 关键召回实测 **1/19**，
+   说明「是否经审计、财年口径、目录 vs 正文、页数、来源出处」这类事实几乎没有层承载。
+5. 用 `evaluate(limits=...)` 传 ROOT 的真实派生/时间上限。
+6. 决定补采请求。
 
-**需要 ROOT 注意的基线事实**：开发集关键召回 0.175（叙述类 0.191）、holdout 0.000（叙述类 0/36），
+**需要 ROOT 注意的基线事实**：开发集关键召回 0.183（叙述类 0.191）、holdout 0.000（叙述类 0.013），
 且**两份真实 A 股季报产出 0 个候选**（世华 429 units、广联达 257 units）——
 这是候选生成层的缺陷，不是上限问题。电话会通路虽可用，角色/语态事实召回仅 0.091。
+另有一份真实港股年报因 CID 字型映射損壞而**整份不可读**，管線却报成正常解析。
 
 本条线到此停止，不再自行推进；合主线、三包集成与真实摘要大节点归 ROOT。

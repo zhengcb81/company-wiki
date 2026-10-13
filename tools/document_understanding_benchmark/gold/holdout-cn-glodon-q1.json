@@ -3,6 +3,7 @@
   "sample_id": "holdout-cn-glodon-q1",
   "source_sha256": "cff8b658c5c925b733eb2dcf7b14e23454f76bf99cad499b953ee7a03912f6be",
   "scope": "holdout",
+  "language": "zh",
   "expected_route_families": [
     "quarterly",
     "quarterly_report"

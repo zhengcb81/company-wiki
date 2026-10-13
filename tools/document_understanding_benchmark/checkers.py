@@ -27,6 +27,13 @@ from .schema import (
     PASS,
     PARTIAL,
     UNAVAILABLE,
+    UNUSABLE_BLOCKS,
+)
+from .schema import (
+    MAX_UNUSABLE_BLOCK_RATIO as _schema_max_unusable_ratio,
+)
+from .schema import (
+    MIN_LEGIBILITY_CHARS as _schema_min_legibility_chars,
 )
 from .textutil import (
     anchor_matches,
@@ -45,6 +52,18 @@ from .textutil import (
 # A claim whose evidence covers less than this share of its own length is
 # treated as under-evidenced rather than fully evidenced.
 MIN_EVIDENCE_COVERAGE = 0.5
+
+# Legibility thresholds and the unusable-block list live in schema.py because the
+# observer measures legibility over everything it parsed while this module judges
+# it; both must use the same definition. See schema.UNUSABLE_BLOCKS for the
+# measured control behind the numbers.
+MAX_UNUSABLE_BLOCK_RATIO = _schema_max_unusable_ratio
+MIN_LEGIBILITY_CHARS = _schema_min_legibility_chars
+
+
+def _in_unusable_block(char: str) -> bool:
+    code = ord(char)
+    return any(low <= code <= high for low, high in UNUSABLE_BLOCKS)
 
 
 def _check(
@@ -964,6 +983,115 @@ def check_quantity_provenance(
         expected="each quantity carries unit and period",
         observed=stripped,
         dimension="role_modality_quantity",
+    )
+
+
+def check_text_legibility(
+    observed: Mapping[str, Any], gold: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Is the text actually readable, or is it a broken font mapping?
+
+    A PDF whose text layer uses an unmapped CID font yields characters that are
+    not the document's content. The parser reports no error for this: it emits
+    units and the selector picks spans, so a 100%-garbled document can look like
+    a clean parse. Measured on a real one: 415 pages, 0 pages of readable
+    Chinese, yet 9,618 units, zero quality flags and zero errors, and the
+    selector picked plain mojibake as narrative evidence.
+
+    The signal is the share of characters in blocks that legitimate prose never
+    uses (CJK radicals, Kangxi radicals, CJK strokes, control pictures, private
+    use, hexagrams, box drawing). Thresholds come from the measured control
+    documented at ``UNUSABLE_BLOCKS``.
+
+    Reports ``NOT_EVALUATED`` unless the gold declares a language and there is
+    enough text to judge, because a short or numeric-only selection is not
+    evidence of a broken text layer.
+    """
+
+    language = (gold.get("language") or "").casefold()
+    if not language:
+        return _check(
+            "integrity.text_legibility",
+            NOT_EVALUATED,
+            expected="text is readable rather than a broken font mapping",
+            observed=None,
+            dimension="observation_integrity",
+            detail="gold declares no language, so legibility is not judged",
+        )
+
+    # Prefer the observer's measurement over everything it parsed. Judging only
+    # the selection is not enough: a garbled document can have hundreds of
+    # thousands of unusable characters while the selector retains a couple of
+    # hundred, and the threshold would never fire.
+    metrics = observed.get("metrics") or {}
+    full_ratio = metrics.get("unusable_block_ratio")
+    if isinstance(full_ratio, (int, float)):
+        dense_chars = metrics.get("read_text_dense_chars") or 0
+        if dense_chars < MIN_LEGIBILITY_CHARS:
+            return _check(
+                "integrity.text_legibility",
+                NOT_EVALUATED,
+                expected=f"unusable-block ratio < {MAX_UNUSABLE_BLOCK_RATIO}",
+                observed={"dense_chars": dense_chars, "basis": "parsed_text"},
+                dimension="observation_integrity",
+                detail=f"fewer than {MIN_LEGIBILITY_CHARS} parsed characters to judge",
+            )
+        status = FAIL if float(full_ratio) >= MAX_UNUSABLE_BLOCK_RATIO else PASS
+        return _check(
+            "integrity.text_legibility",
+            status,
+            expected=f"unusable-block ratio < {MAX_UNUSABLE_BLOCK_RATIO}",
+            observed={
+                "unusable_block_ratio": round(float(full_ratio), 5),
+                "dense_chars": dense_chars,
+                "basis": "parsed_text",
+            },
+            dimension="observation_integrity",
+            detail=(
+                ""
+                if status == PASS
+                else "the parsed text is dominated by characters from blocks legitimate "
+                "prose never uses, so the text layer is a broken font mapping; any fact "
+                "read from it would be fabricated"
+            ),
+        )
+
+    text = observed.get("selected_text") or ""
+    dense = [char for char in text if not char.isspace()]
+    if len(dense) < MIN_LEGIBILITY_CHARS:
+        return _check(
+            "integrity.text_legibility",
+            NOT_EVALUATED,
+            expected=f"unusable-block ratio < {MAX_UNUSABLE_BLOCK_RATIO}",
+            observed={"dense_chars": len(dense), "basis": "selected_text"},
+            dimension="observation_integrity",
+            detail=(
+                f"fewer than {MIN_LEGIBILITY_CHARS} non-space selected characters to "
+                "judge, and the observation reports no parsed-text measurement"
+            ),
+        )
+
+    unusable = sum(1 for char in dense if _in_unusable_block(char))
+    ratio = unusable / len(dense)
+    status = FAIL if ratio >= MAX_UNUSABLE_BLOCK_RATIO else PASS
+    return _check(
+        "integrity.text_legibility",
+        status,
+        expected=f"unusable-block ratio < {MAX_UNUSABLE_BLOCK_RATIO}",
+        observed={
+            "unusable_block_ratio": round(ratio, 5),
+            "unusable_chars": unusable,
+            "dense_chars": len(dense),
+            "basis": "selected_text",
+        },
+        dimension="observation_integrity",
+        detail=(
+            ""
+            if status == PASS
+            else "selected text contains characters from blocks legitimate prose never "
+            "uses, so the text layer is probably a broken font mapping; any fact read "
+            "from it would be fabricated"
+        ),
     )
 
 

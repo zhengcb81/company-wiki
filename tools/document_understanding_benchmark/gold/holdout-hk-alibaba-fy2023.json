@@ -3,6 +3,7 @@
   "sample_id": "holdout-hk-alibaba-fy2023",
   "source_sha256": "d2a9f3d14fe5eaa4c95885963eb6899fdd6c3f1e16e5ff8f1390e76585adf7c6",
   "scope": "holdout",
+  "language": "zh-Hant",
   "expected_route_families": [
     "annual",
     "annual_report"

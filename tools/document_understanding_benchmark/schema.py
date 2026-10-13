@@ -124,6 +124,26 @@ DIMENSIONS = (
 # Coverage/native_scan enum shared with du-input/1.
 NATIVE_SCAN_VALUES = frozenset({"complete", "partial", "unavailable"})
 
+# Character blocks that appear in broken CID font mappings and essentially never
+# in legitimate prose of any language. Shared by the observer, which measures
+# legibility over everything the parser read, and the checker, which judges it.
+#
+# Chosen from a measured control rather than guessed: seven real originals were
+# scored on the share of characters in these blocks. Clean Chinese filings
+# measured 0.000%-0.076% (worst case a 136k-character traditional-Chinese annual
+# report); a genuinely garbled 415-page PDF measured 2.663%.
+UNUSABLE_BLOCKS: tuple[tuple[int, int], ...] = (
+    (0x2E80, 0x2EFF),  # CJK radicals supplement
+    (0x2F00, 0x2FDF),  # Kangxi radicals
+    (0x31C0, 0x31EF),  # CJK strokes
+    (0x2400, 0x243F),  # control pictures
+    (0xE000, 0xF8FF),  # private use area
+    (0x4DC0, 0x4DFF),  # Yijing hexagram symbols
+    (0x2500, 0x257F),  # box drawing
+)
+MAX_UNUSABLE_BLOCK_RATIO = 0.005
+MIN_LEGIBILITY_CHARS = 200
+
 
 class BenchmarkSchemaError(ValueError):
     """A record violates the frozen wire schema."""

@@ -255,3 +255,40 @@ narrative 0.191, document_meta 0.000); holdout critical 0/22 = **0.000**
 Verification: 105 offline tests + 7 real-data tests pass, ruff clean, 53/53
 applicable mutations detected, raw and config unchanged across all 15 samples,
 0 paid calls.
+
+## 2026-10-13 — session 4: second H-share, refusal-path bug, CID-mojibake class
+
+Continuing the audit. Three more real gaps closed and one new defect class found.
+
+- **Second H-share holdout added** (`holdout-hk-biren-fy2025`, 壁仞科技 FY2025,
+  215-page traditional-Chinese annual report). The card asks for two new
+  companies per market; H-share had one. Holdout is now A 2 / H 2 / US 2.
+- **Checked extraction quality before authoring**, which is how the next finding
+  surfaced: 小米集團－Ｗ's HK annual report extracts as **mojibake** (415 pages,
+  0 readable Chinese, 402 garbled), because its PDF text layer uses an unmapped
+  CID font. 壁仞科技 and 金山雲 extract cleanly, so 壁仞 was used.
+- **New defect class: a fully garbled document parses clean.** The mojibake file
+  yields **9,618 units, zero quality flags, zero errors, 2 opaque pages of 415**
+  and the selector picks `姽⅌彨ṍ嘗` as narrative evidence. Failure mode is silent.
+  Added `integrity.text_legibility` with a measured control: six clean filings
+  score 0.000–0.076% characters in never-in-prose blocks; the garbled file scores
+  **2.663%** (35x). A CJK-ratio test was tried first and **does not work** — this
+  mojibake maps to valid-but-wrong CJK codepoints and still scores 44% CJK.
+  Legibility is measured over **all parsed text**, not the selection: the garbled
+  file kept only 195 selected characters, below any workable threshold.
+- **Self-defect 5: a refused run clobbered the sentinel.** `install_sentinel`
+  overwrites what it finds and relies on the caller restoring it, but both CLI
+  modes `return EXIT_REFUSED` before `restore_sentinel`. Caught by writing the
+  failure-case test the card asks for (RED first), fixed with `try/finally`.
+- **Self-defect 6: the legibility check judged the wrong text** (selection rather
+  than everything parsed), which made the defect invisible. Fixed and covered by
+  three parsed-basis tests.
+- Also corrected my own audit script twice (a literal token match produced a
+  false "partial" for `hk-annual`, and a scratch `Set-Content` mangled a CJK path)
+  — both were tooling errors, not product errors, and neither reached a commit.
+
+Verification: **117 offline tests + 7 real-data tests pass**, ruff clean, 53/53
+applicable mutations detected, raw and config unchanged across all 17 samples,
+0 network / 0 model / 0 paid calls. Development critical 11/60 = 0.183
+(coverage 0.698; narrative 0.191, document_meta 0.053); holdout 0/31 = 0.000
+(coverage 0.574; narrative 0.013).

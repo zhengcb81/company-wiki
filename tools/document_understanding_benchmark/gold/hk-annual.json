@@ -3,6 +3,7 @@
   "sample_id": "hk-annual",
   "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
   "scope": "development",
+  "language": "zh-Hant",
   "expected_route_families": [
     "annual",
     "annual_report"

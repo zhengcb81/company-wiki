@@ -100,24 +100,32 @@
     "A": {
       "what": "gold and counterexamples frozen; current baseline real FAIL/PARTIAL recorded",
       "gold_set": {
-        "records": 15,
-        "development_records": 10,
-        "holdout_records": 5,
-        "facts_total": 176,
-        "facts_critical": 128,
-        "narrative_facts": 161,
-        "document_meta_facts": 15,
+        "development": {
+          "records": 11,
+          "facts": 112,
+          "critical": 86,
+          "narrative": 93,
+          "document_meta": 19
+        },
+        "holdout": {
+          "records": 6,
+          "facts": 80,
+          "critical": 54,
+          "narrative": 79,
+          "document_meta": 1
+        },
         "max_quote_bytes_per_document": 2094,
         "quote_budget_bytes_per_document": 8192,
         "card_minimum_set_elements": 14,
         "card_minimum_set_gaps": 0,
-        "holdout_markets": {
+        "holdout_by_market": {
           "a_share": [
             "holdout-cn-glodon-q1",
             "holdout-cn-yake-q1"
           ],
           "h_share": [
-            "holdout-hk-alibaba-fy2023"
+            "holdout-hk-alibaba-fy2023",
+            "holdout-hk-biren-fy2025"
           ],
           "us": [
             "holdout-us-mongodb-10k",
@@ -141,29 +149,31 @@
       ],
       "baseline_recall_by_scope": {
         "development": {
-          "documents": 10,
-          "critical_facts_passed": 10,
-          "critical_facts_evaluable": 57,
-          "critical_facts_declared": 83,
-          "critical_fact_coverage": 0.6867469879518072,
-          "critical_fact_recall": 0.17543859649122806,
+          "documents": 11,
+          "critical_facts_passed": 11,
+          "critical_facts_evaluable": 60,
+          "critical_facts_declared": 86,
+          "critical_fact_coverage": 0.6976744186046512,
+          "critical_fact_recall": 0.18333333333333332,
           "narrative_fact_recall": 0.19117647058823528,
           "narrative_facts": "13/68",
-          "document_meta_fact_recall": 0.0,
-          "document_meta_facts": "0/9"
+          "document_meta_fact_recall": 0.07692307692307693,
+          "document_meta_facts": "1/13"
         },
         "holdout": {
-          "documents": 5,
+          "documents": 6,
           "critical_facts_passed": 0,
-          "critical_facts_evaluable": 22,
-          "critical_facts_declared": 45,
-          "critical_fact_coverage": 0.4888888888888889,
+          "critical_facts_evaluable": 31,
+          "critical_facts_declared": 54,
+          "critical_fact_coverage": 0.5740740740740741,
           "critical_fact_recall": 0.0,
-          "narrative_fact_recall": 0.0,
-          "narrative_facts": "0/36"
+          "narrative_fact_recall": 0.02127659574468085,
+          "narrative_facts": "1/47",
+          "document_meta_fact_recall": 0.0,
+          "document_meta_facts": "0/1"
         }
       },
-      "headline": "Development critical recall 10/57 = 0.175 over 57 evaluable of 83 declared (coverage 0.687); holdout 0/22 = 0.000 over 22 evaluable of 45 declared (coverage 0.489). UNAVAILABLE facts leave the denominator and are reported as coverage instead, so 'could not read' is never reported as 'found none'. Development document_meta recall is 0/9: the pipeline has no front-matter layer. The two splits are never merged.",
+      "headline": "Development critical recall 11/60 = 0.183 over 60 evaluable of 86 declared (coverage 0.698); holdout 0/31 = 0.000 over 31 of 54 (coverage 0.574). UNAVAILABLE leaves the denominator and is reported as coverage, so 'could not read' is never reported as 'found none'. Splits are never merged.",
       "note": "The baseline was NOT required to be green first, and no production code was touched to change any of these numbers.",
       "baseline_recall_note": "Baseline was NOT required to be green first, and no production code was touched to change any of these numbers."
     },
@@ -435,7 +445,7 @@
     "reviewer_caveat_acted_on": "The reviewer reported that the fixture set contains no seeded entailment defect and therefore cannot act as a discriminating negative control. controls.py was added in response: it injects three defects that no deterministic check catches and shows the review stage closes them, and separately shows an all-ENTAILED review cannot upgrade a deterministic FAIL.",
     "native_semantics_status": "NOT_EVALUATED. The native baseline emits zero claims and zero semantic units across all 11 documents (measured), so there is nothing to entail-review end to end. Advancing this needs ROOT to wire a summary producer."
   },
-  "tests_passed": 105,
+  "tests_passed": 117,
   "tests_failed": 0,
   "tests_skipped": 7,
   "tests_real_data_passed": 7,
@@ -504,8 +514,8 @@
     "gold_quote_budget_per_document": 8192,
     "offline_fixture_bytes": 14301,
     "offline_fixture_budget": 204800,
-    "native_elapsed_seconds": 180.727,
-    "native_peak_rss_bytes": 302997504,
+    "native_elapsed_seconds": 192.495,
+    "native_peak_rss_bytes": 311087104,
     "offline_peak_rss_bytes": 21155840,
     "peak_rss_measured": true
   },
@@ -532,24 +542,32 @@
   "install_actions": "none",
   "next_root_action": "Five actions. (1) Wire an HTML front-end for SEC filings: 4 documents including 2 holdout records currently return 0 units, so the US leg is unscorable. (2) Inject a real du-input/1 adapter through observer.observe_du_adapter so context_completeness and role_modality_quantity stop being NOT_EVALUATED, then supply a summary producer so semantics.entailment has claims to review. (3) Add a document-metadata/front-matter layer: document_meta recall is measured at 0/9. (4) Pass ROOT's real derived/time limits via evaluate(limits=...). (5) Decide the acquisition requests, especially REQ-1. Measured baseline: development critical recall 0.175 (narrative 0.191), holdout 0.000 (narrative 0/36), with zero candidates generated for two real A-share quarterly reports.",
   "gold_set": {
-    "records": 15,
-    "development_records": 10,
-    "holdout_records": 5,
-    "facts_total": 176,
-    "facts_critical": 128,
-    "narrative_facts": 161,
-    "document_meta_facts": 15,
+    "development": {
+      "records": 11,
+      "facts": 112,
+      "critical": 86,
+      "narrative": 93,
+      "document_meta": 19
+    },
+    "holdout": {
+      "records": 6,
+      "facts": 80,
+      "critical": 54,
+      "narrative": 79,
+      "document_meta": 1
+    },
     "max_quote_bytes_per_document": 2094,
     "quote_budget_bytes_per_document": 8192,
     "card_minimum_set_elements": 14,
     "card_minimum_set_gaps": 0,
-    "holdout_markets": {
+    "holdout_by_market": {
       "a_share": [
         "holdout-cn-glodon-q1",
         "holdout-cn-yake-q1"
       ],
       "h_share": [
-        "holdout-hk-alibaba-fy2023"
+        "holdout-hk-alibaba-fy2023",
+        "holdout-hk-biren-fy2025"
       ],
       "us": [
         "holdout-us-mongodb-10k",

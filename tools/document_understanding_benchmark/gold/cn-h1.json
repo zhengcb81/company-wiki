@@ -3,6 +3,7 @@
   "sample_id": "cn-h1",
   "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
   "scope": "development",
+  "language": "zh",
   "expected_route_families": [
     "interim",
     "semi_annual_report"

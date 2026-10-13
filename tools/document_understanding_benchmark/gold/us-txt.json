@@ -3,6 +3,7 @@
   "sample_id": "us-txt",
   "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
   "scope": "development",
+  "language": "en",
   "expected_route_families": [
     "earnings_call",
     "investor_call_transcript"

@@ -3,6 +3,7 @@
   "sample_id": "cn-ipo-confirmation",
   "source_sha256": "0829538f0707650db99852c5e269abe9e0d7e558d54d93e0a2c0be15fe0d0fa7",
   "scope": "development",
+  "language": "zh",
   "expected_route_families": [
     "administrative"
   ],

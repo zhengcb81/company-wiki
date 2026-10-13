@@ -3,6 +3,7 @@
   "sample_id": "us-10k",
   "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
   "scope": "development",
+  "language": "en",
   "expected_route_families": [
     "annual",
     "sec_10k"

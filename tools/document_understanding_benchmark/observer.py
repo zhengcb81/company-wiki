@@ -15,6 +15,8 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
+from .schema import UNUSABLE_BLOCKS
+
 OBSERVED_ENTRY_POINT = "company_wiki.source_catalog.narrative_evidence"
 
 # The baseline selector may report a document kind, but it has no du-route/1
@@ -181,6 +183,13 @@ def observe_native(
     document_kind = getattr(package, "document_kind", None)
     family = _KIND_TO_FAMILY.get(document_kind or "")
 
+    # Measure legibility over everything the parser read, so a broken font
+    # mapping is visible even when the selector retains only a small sample. A
+    # real garbled PDF produced 9,618 units and 270k unusable characters while
+    # the selection held only 195 characters.
+    read_text = "".join(getattr(unit, "raw_text", "") or "" for unit in units)
+    unusable_ratio, unusable_chars, dense_chars = _unusable_block_ratio(read_text)
+
     # The baseline produces no du-route/1, no semantic units and no claims.
     # Reporting them as absent is the honest observation; it is what makes the
     # oracle return NOT_EVALUATED for those dimensions.
@@ -224,6 +233,11 @@ def observe_native(
             "page_count": page_count,
             "pages_read": pages_read,
             "selected_text_bytes": len(selected_text.encode("utf8")),
+            "read_text_dense_chars": dense_chars,
+            "unusable_block_ratio": (
+                round(unusable_ratio, 5) if unusable_ratio is not None else None
+            ),
+            "unusable_block_chars": unusable_chars,
             "parse_seconds": round(parse_seconds, 3),
             "select_seconds": round(select_seconds, 3),
             "selector_status": getattr(package, "status", None),
@@ -243,6 +257,27 @@ def observe_native(
             "selector_status": getattr(package, "status", None),
         },
     }
+
+
+def _unusable_block_ratio(text: str) -> tuple[float | None, int, int]:
+    """Share of characters in blocks legitimate prose never uses.
+
+    Measured over everything the parser read, not just what the selector kept:
+    a garbled document can have hundreds of thousands of unusable characters
+    while the selector retains only a couple of hundred, and judging only the
+    selection would miss it entirely.
+    """
+
+    dense = [char for char in text if not char.isspace()]
+    if not dense:
+        return (None, 0, 0)
+    unusable = sum(1 for char in dense if _in_unusable_block(char))
+    return (unusable / len(dense), unusable, len(dense))
+
+
+def _in_unusable_block(char: str) -> bool:
+    code = ord(char)
+    return any(low <= code <= high for low, high in UNUSABLE_BLOCKS)
 
 
 def observe_du_adapter(

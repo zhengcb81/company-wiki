@@ -3,6 +3,7 @@
   "sample_id": "us-20f",
   "source_sha256": "35eed9769ee33e687147c50e91b571ec2f19135dc483d4b5c1dcbdd7ce879164",
   "scope": "development",
+  "language": "en",
   "expected_route_families": [
     "annual",
     "sec_20f"

@@ -3,6 +3,7 @@
   "sample_id": "cn-ir",
   "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
   "scope": "development",
+  "language": "zh",
   "expected_route_families": [
     "investor_relations",
     "investor_qa"

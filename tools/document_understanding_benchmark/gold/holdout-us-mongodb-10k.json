@@ -3,6 +3,7 @@
   "sample_id": "holdout-us-mongodb-10k",
   "source_sha256": "84dcd298ff9c2bcea0ed49755219ae3209c7e9e2a451dd5be49fe41626a25513",
   "scope": "holdout",
+  "language": "en",
   "expected_route_families": [
     "annual",
     "sec_10k"
