@@ -1,0 +1,145 @@
+{
+  "schema_version": "du-holdout/1",
+  "generated": "2026-10-13",
+  "purpose": "Holdout candidates for DU-BENCH, kept separate from the development seeds that were already used to tune routing/selection rules. A sample is only holdout if it was NOT used to author rules or gold-fact iteration.",
+  "rules": [
+    "Never mix a holdout sample's facts into rule design or threshold tuning.",
+    "Prefer existing local originals; never download and never fabricate a substitute.",
+    "A holdout company with no usable original is listed as UNAVAILABLE with an acquisition request, not replaced by a synthetic document.",
+    "Record SHA-256 at bind time so a later content change becomes UNAVAILABLE rather than a silent pass."
+  ],
+  "development_seeds": {
+    "note": "Already used in the ROOT survey and/or to tune rules. Explicitly NOT holdout.",
+    "samples": [
+      {"sample_id": "cn-h1", "company": "中微公司", "why_not_holdout": "used in ROOT survey and selector tuning"},
+      {"sample_id": "cn-annual", "company": "中微公司", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "cn-ipo", "company": "中微公司", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "cn-q-business", "company": "中微公司", "why_not_holdout": "carried a rule-tuning decision about quarterly reports"},
+      {"sample_id": "cn-q-sparse", "company": "世华科技", "why_not_holdout": "paired control for the quarterly rule decision"},
+      {"sample_id": "cn-equity", "company": "恒锋工具", "why_not_holdout": "subject of the routing/budget ablation"},
+      {"sample_id": "cn-convertible", "company": "金禾实业", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "cn-ipo-confirmation", "company": "鼎龙股份", "why_not_holdout": "used to diagnose the title-regex trap"},
+      {"sample_id": "cn-ir", "company": "万润股份", "why_not_holdout": "used to diagnose the negation/question case"},
+      {"sample_id": "cn-ir-policy", "company": "万润股份", "why_not_holdout": "used to identify the administrative-skip class"},
+      {"sample_id": "hk-annual", "company": "名创优品", "why_not_holdout": "subject of the bilingual store-table diagnosis"},
+      {"sample_id": "hk-interim", "company": "名创优品", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "hk-ipo", "company": "名创优品", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "hk-release", "company": "腾讯控股", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "hk-deck", "company": "腾讯控股", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "us-10k", "company": "MICROSOFT CORP", "why_not_holdout": "read into the design findings"},
+      {"sample_id": "us-10q", "company": "VRSK", "why_not_holdout": "read into the design findings"},
+      {"sample_id": "us-20f", "company": "TAL", "why_not_holdout": "read into the design findings"},
+      {"sample_id": "us-release", "company": "MICROSOFT CORP", "why_not_holdout": "used in ROOT survey"},
+      {"sample_id": "us-txt", "company": "Microsoft", "why_not_holdout": "read into the design findings"}
+    ]
+  },
+  "holdout_planned": {
+    "A_share": {
+      "status": "CANDIDATES_FOUND",
+      "companies": [
+        {
+          "company": "广联达",
+          "segment": "software",
+          "candidate_originals": [
+            "companies/广联达/raw/financial_reports/广联达：2025年一季度报告.pdf",
+            "companies/广联达/raw/financial_reports/广联达：2011年年度报告.PDF"
+          ],
+          "why_holdout": "software model, never referenced in the DU survey or any tuning discussion"
+        },
+        {
+          "company": "雅克科技",
+          "segment": "manufacturing",
+          "candidate_originals": [
+            "companies/雅克科技/raw/financial_reports/雅克科技：2022年一季度报告.pdf",
+            "companies/雅克科技/raw/financial_reports/雅克科技：2012年年度报告.pdf"
+          ],
+          "why_holdout": "materials manufacturing, not used anywhere in the DU work"
+        }
+      ]
+    },
+    "H_share": {
+      "status": "PARTIAL",
+      "companies": [
+        {
+          "company": "阿里巴巴",
+          "segment": "retail/e-commerce",
+          "candidate_originals": [
+            "companies/阿里巴巴/raw/financial_reports/20230722-阿里巴巴-2023财政年度报告.pdf",
+            "companies/阿里巴巴/raw/financial_reports/20220806-阿里巴巴-2022财政年度报告.pdf"
+          ],
+          "why_holdout": "large bilingual HK annual report, retail/e-commerce, never used in the DU work",
+          "caveat": "33.2MiB / 28.2MiB and a March fiscal year end; the fiscal-vs-calendar labelling is itself a holdout test"
+        }
+      ],
+      "missing": [
+        "A second, non-Alibaba H-share company with a recent annual or interim report and a different business model (ideally HK-listed manufacturing or software)."
+      ]
+    },
+    "US_share": {
+      "status": "UNAVAILABLE",
+      "companies": [],
+      "missing": [
+        "US-domiciled annual/quarterly filings (10-K/10-Q) for companies never used in the DU survey.",
+        "A real US S-1/F-1 registration statement.",
+        "A real 8-K or 6-K with an attachment container (parent + sub-document routing).",
+        "A revision pair (amended vs original filing of the same period) to test stale-version reuse.",
+        "A Form 10-Q with a foreign private issuer 6-K counterpart for the same period."
+      ],
+      "why_unavailable": "The four US documents read during the DU survey (MSFT 10-K, MSFT call TXT, VRSK 10-Q, TAL 20-F) all belong to the development set, and no other US original exists in the local roots that were checked. Substituting a synthetic US filing would fake coverage, so these stay UNAVAILABLE."
+    }
+  },
+  "acquisition_requests_for_root": [
+    {
+      "id": "REQ-1",
+      "priority": "high",
+      "what": "Two US 10-K or 10-Q filings from companies not in the development set, one software and one industrial.",
+      "why": "The card requires A/H/US holdout coverage; US holdout is currently UNAVAILABLE.",
+      "route": "existing filing-fetch acquisition path into an isolated test company root",
+      "acceptance": "original present, SHA-256 recorded, kind confirmed from the document itself rather than the filename"
+    },
+    {
+      "id": "REQ-2",
+      "priority": "high",
+      "what": "One real US S-1 or F-1 registration statement.",
+      "why": "design.md section 10 lists true S-1/F-1 as unverified; no local sample exists.",
+      "route": "existing acquisition path",
+      "acceptance": "declared_kind verified from the cover page, not from the filename"
+    },
+    {
+      "id": "REQ-3",
+      "priority": "medium",
+      "what": "One real 8-K or 6-K container with an exhibit that is itself a business document.",
+      "why": "parent + sub-document routing is untested end to end.",
+      "route": "existing acquisition path",
+      "acceptance": "attachment arrives as its own SourceRef; the container itself is not treated as read content"
+    },
+    {
+      "id": "REQ-4",
+      "priority": "medium",
+      "what": "One amended filing paired with its original for the same period.",
+      "why": "stale-version reuse and revision handling are only tested synthetically.",
+      "route": "existing acquisition path",
+      "acceptance": "both versions retained, distinct source versions, no overwrite"
+    },
+    {
+      "id": "REQ-5",
+      "priority": "low",
+      "what": "A second H-share company with a recent annual report outside e-commerce.",
+      "why": "H-share holdout currently rests on a single company.",
+      "route": "existing acquisition path",
+      "acceptance": "bilingual layout present, fiscal year end recorded"
+    }
+  ],
+  "coverage_by_dimension": {
+    "note": "Denominators the benchmark can actually support today, stated honestly rather than as a target.",
+    "route_type": {"development": 4, "holdout": 0, "status": "holdout pending acquisition"},
+    "critical_fact_recall": {"development": 4, "holdout": 0, "gold_facts": 38, "critical_facts": 29},
+    "context_completeness": {"development": 0, "holdout": 0, "status": "NOT_EVALUATED on baseline; needs the DU-STRUCTURE package"},
+    "citation_replay": {"development": 4, "holdout": 0},
+    "role_modality_quantity": {"development": 4, "holdout": 0, "status": "NOT_EVALUATED on baseline; baseline emits no claims"},
+    "bilingual_redundancy": {"development": 1, "holdout": 0, "note": "hk-annual is the only bilingual gold"},
+    "derived_space": {"development": 4, "holdout": 0},
+    "time_resource": {"development": 4, "holdout": 0},
+    "untested_semantics": {"development": 4, "holdout": 0, "status": "NOT_EVALUATED without independent review"}
+  }
+}
