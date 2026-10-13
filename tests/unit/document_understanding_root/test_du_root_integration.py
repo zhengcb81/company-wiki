@@ -592,3 +592,50 @@ def test_packages_are_json_serialisable() -> None:
         ]
     )
     json.dumps(build_dependency_packages(structure))
+
+
+def test_a_kind_outside_the_frozen_vocabulary_is_reported() -> None:
+    """A new semantic kind must not be silently ranked as prose.
+
+    PACKAGE_KINDS is checked against every incoming unit rather than merely
+    published, so a structure lane that starts emitting a new kind is visible
+    instead of quietly losing its dependency-bearing rank.
+    """
+    structure = _structure_with(
+        [
+            {
+                "semantic_id": "m1",
+                "kind": "kind_the_lane_invented_later",
+                "section_ids": [],
+                "member_unit_ids": ["u1"],
+                "anchor_unit_ids": ["u1"],
+                "required_context_unit_ids": [],
+                "completeness": "complete",
+                "diagnostics": [],
+            }
+        ]
+    )
+    result = build_dependency_packages(structure)
+    codes = {item["code"] for item in result["diagnostics"]}
+    assert "UNKNOWN_SEMANTIC_KIND" in codes
+    assert result["package_count"] == 1, "the unit is still packaged, just reported"
+
+
+def test_a_known_kind_raises_no_such_diagnostic() -> None:
+    structure = _structure_with(
+        [
+            {
+                "semantic_id": "m1",
+                "kind": "operating_table",
+                "section_ids": [],
+                "member_unit_ids": ["u1"],
+                "anchor_unit_ids": ["u1"],
+                "required_context_unit_ids": [],
+                "completeness": "complete",
+                "diagnostics": [],
+            }
+        ]
+    )
+    result = build_dependency_packages(structure)
+    codes = {item["code"] for item in result["diagnostics"]}
+    assert "UNKNOWN_SEMANTIC_KIND" not in codes

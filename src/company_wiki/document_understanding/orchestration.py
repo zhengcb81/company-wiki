@@ -19,7 +19,10 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from typing import Any
 
-# Package kinds this layer emits, mirroring the structure lane's vocabulary.
+# Package kinds this layer emits, mirroring the structure lane's vocabulary.  The
+# constant is checked against every incoming semantic unit rather than merely
+# published, so a structure lane that starts emitting a new kind is reported
+# instead of being silently ranked as prose.
 PACKAGE_KINDS = (
     "project",
     "qa_exchange",
@@ -28,10 +31,6 @@ PACKAGE_KINDS = (
     "risk",
     "background",
 )
-
-# A package must never be split below its required context: a number without a
-# unit/period is the classic "true quote, false claim" failure.
-_NEVER_DROPPABLE = ("required_context_unit_ids", "anchor_unit_ids")
 
 #: Ranking bands by semantic kind within one chapter.  Structured, dependency-bearing
 #: units come first; free prose fills whatever budget remains.
@@ -83,12 +82,19 @@ def build_dependency_packages(
     excluded = tuple(dict.fromkeys(str(item) for item in non_selectable_unit_ids))
     sections = {section["section_id"]: section for section in structure.get("sections", ())}
     role_priority = _role_priority(route, profile)
+    unknown_kinds: list[str] = []
 
     packages: list[dict[str, Any]] = []
     for semantic in structure.get("semantic_units", ()):
         members = list(semantic.get("member_unit_ids", ()))
         if not members:
             continue
+        kind = str(semantic.get("kind") or "")
+        if kind not in PACKAGE_KINDS and kind not in unknown_kinds:
+            # An unrecognised kind would still be packaged, but it would rank as
+            # prose and no consumer would know it is dependency-bearing. Report
+            # it rather than degrade in silence.
+            unknown_kinds.append(kind)
         required = [
             unit_id
             for unit_id in semantic.get("required_context_unit_ids", ())
@@ -162,7 +168,10 @@ def build_dependency_packages(
         "non_selectable_unit_ids": list(excluded),
         "coverage": structure.get("coverage", {}),
         "diagnostics": _package_diagnostics(
-            packages, structure, truncated_by_limit=truncated_by_limit
+            packages,
+            structure,
+            truncated_by_limit=truncated_by_limit,
+            unknown_kinds=unknown_kinds,
         ),
     }
 
@@ -228,8 +237,20 @@ def _package_diagnostics(
     structure: Mapping[str, Any],
     *,
     truncated_by_limit: bool = False,
+    unknown_kinds: Sequence[str] = (),
 ) -> list[dict[str, Any]]:
     diagnostics: list[dict[str, Any]] = []
+    if unknown_kinds:
+        diagnostics.append(
+            {
+                "code": "UNKNOWN_SEMANTIC_KIND",
+                "package_ids": [],
+                "detail": (
+                    "structure emitted kind(s) outside the frozen vocabulary "
+                    f"{sorted(unknown_kinds)}; they are packaged but rank as prose"
+                ),
+            }
+        )
     truncated = [package["package_id"] for package in packages if package["truncated"]]
     if truncated:
         diagnostics.append(
