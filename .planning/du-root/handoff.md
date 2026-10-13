@@ -195,15 +195,74 @@ deferred 计数如实报告。
 
 见上文"合并阶段修掉的三个接线缺陷"。其中 fixtures 同名那一条会让 CI 的四套件同跑直接收集失败。
 
+## 自查（对自己已交工作的审计）
+
+不是重跑测试，而是问一个更难的问题：**每个公开符号，除了它自己的模块和测试，真的有人用吗？**
+（`.planning/du-root/_audit_dead_decisions.py`）
+
+> 这个审计脚本**第一版本身是错的**：它不统计 `from x import y`，于是每个导出都显得没人用。
+> 修正后才据此下结论——否则会得出一个听起来严重但完全错误的结论。
+
+### 查到并修掉的自己的缺陷（2 个）
+
+**1. QA 可选性决定"写了但没接"（正是本次合并中批评过的同类缺陷）**
+
+adapter 在 wire 上标了 `hints.qa_text_shadow`，`is_selectable()` 也有 8 个测试——
+但**没有任何代码路径读它**。真实问答原件上因此有两个可达的消费者出错：
+
+- `selection_bridge.dependency_closure` 会把 shadow 单元**重新加回来**（作为必需上下文或否定保护），
+  而 shadow 正是结构化答复的副本；
+- `summary_input.build_summary_input` 把 shadow 成员**发给了模型**，每个答复发两遍。
+
+**实测影响**（万润 IR 原件）：213 个 shadow 单元被当作证据送出，74 个包里 53 个完全由副本构成。
+
+**修复**：决定现在贯穿整条链——`understand_units` 算出不可选集合 → `build_dependency_packages`
+携带 → `dependency_closure` 拒绝添加（报 `NOT_SELECTABLE_WITHHELD`）→ `build_summary_input`
+过滤、报 `excluded.not_selectable`、并把只剩副本的包记为 `NOT_SELECTABLE` 延后。
+
+**真实数据复验**：213 个单元被扣下，包数 40 → 21，证据文本 6968 → 3983 字符
+（**约 43% 原本是重复内容**），请求中 0 个 shadow 单元，而真实否定（`公司现无生产VC`）
+仍通过其结构化单元保留。其余三份原件 `shdw=0`，行为不变。
+回归锁 `test_du_root_selectability_wiring.py`（10 项，**先写 RED**：修复前 6 项失败）。
+
+**2. `summary_input` 漏报 structure 的 `deferred_pages`**
+
+"未读"清单原本只报 opaque 页，静默漏掉调用方主动延后的页——两者是不同的"没读"。
+现在分开报告，并加了断言：本模块读取的每个 structure 字段都必须真实存在，
+避免再次出现"读一个不存在的键 → 静默报空缺口"。
+
+### 查过并确认没问题的
+
+- 5 个曾 skip 的 benchmark 测试是**诚实的 opt-in skip**：在 worktree 外生成 bindings
+  并设 `DU_BENCH_ALLOW_REAL_DATA=1` 后**全部通过**（70 passed，49.6s）。
+- 会话中两次看起来像"HEAD 坏了"（缺 `_locator_of`、缺 `is_selectable` 导入）
+  都是并发写入者的**写入中间态**；等文件稳定后复读即正常，HEAD 未被破坏。
+
+### 修正后的验证数字
+
+| 口径 | 结果 |
+|---|---|
+| 默认跑（真实数据 opt-in 关闭） | 371 passed / 5 skipped |
+| **拉满（`DU_BENCH_ALLOW_REAL_DATA=1` + bindings）** | **383 passed / 0 skipped** |
+| profiles / structure / root / benchmark | 150 / 47 / 116 / 70 |
+| ruff（`src tests/unit tools`） | All checks passed |
+| `acceptance.py`（真实数据开启） | **6 passed / 0 skipped / 0 failed，exit 0** |
+
+### 仍然开放的一项
+
+**没有任何生产调用方 import 本层**——这是计划里的第 8 步，与本交接 `open_gate` 记录的是同一个关卡
+（付费模型节点 + 生产接线）。审计确认这是"等待接线"，不是"实现遗漏"。
+
 ## 当前完成状态
 
 | 套件 | 测试 |
 |---|---:|
 | profiles | 150 |
 | structure | 47 |
-| root | 109 |
-| benchmark | 65 |
-| **同一调用合计** | **371 passed / 5 skipped** |
+| root | 116 |
+| benchmark | 70 |
+| **同一调用合计（真实数据开启）** | **383 passed / 0 skipped** |
+| 同一调用合计（opt-in 关闭） | 371 passed / 5 skipped |
 
 `ruff check src tests/unit tools` 全绿；`.planning/du-root/acceptance.py` 六项全 passed、
 0 skipped、exit 0；真实原件节点实际运行（不再 skip），原件 SHA/mtime 未变、0 份复制进 worktree。

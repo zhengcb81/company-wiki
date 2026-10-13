@@ -28,11 +28,16 @@ Owner: ROOT
 |---|---|---:|---|
 | profiles | `src/company_wiki/document_understanding/profiles/` | 150 | 否 |
 | structure | `src/company_wiki/document_understanding/structure/` | 47 | 否 |
-| ROOT 适配/编排/选择桥/pipeline/摘要请求 | `src/company_wiki/document_understanding/{observation_adapter,orchestration,selection_bridge,pipeline,summary_input}.py` | 109 | 否 |
-| benchmark | `tools/document_understanding_benchmark/` | 65 | 工具，非生产路径 |
+| ROOT 适配/编排/选择桥/pipeline/摘要请求 | `src/company_wiki/document_understanding/{observation_adapter,orchestration,selection_bridge,pipeline,summary_input}.py` | 116 | 否 |
+| benchmark | `tools/document_understanding_benchmark/` | 70 | 工具，非生产路径 |
 
-同一调用下合计 **371 passed / 5 skipped**；`ruff check src tests/unit tools` 全绿；
-真实原件节点 11 项实际运行并通过（不再 skip）。
+同一调用下合计：**383 passed / 0 skipped**（开启 benchmark 真实数据 opt-in 与 ROOT bindings）；
+关闭 opt-in 时为 371 passed / 5 skipped。`ruff check src tests/unit tools` 全绿；
+真实原件节点实际运行并通过（不再 skip）。
+
+自查另发现并修掉 2 个**自身**缺陷：QA 可选性决定"写了但没接"（shadow 单元曾被重新加入选择、
+并被发给模型；真实 万润 IR 原件上 213 个 shadow 单元被扣下后，证据文本减少约 43%），
+以及摘要请求漏报 structure 的 `deferred_pages`。详见 `.planning/du-root/handoff.md` 自查一节。
 
 实测对照（与基线同一证据预算，未多选提分）：development 关键事实召回 0.220 → **0.384**，
 holdout 0.000 → **0.350**；恒锋「建设期」0.000 → **0.857**，万润否定 0.143 → **1.000**。
