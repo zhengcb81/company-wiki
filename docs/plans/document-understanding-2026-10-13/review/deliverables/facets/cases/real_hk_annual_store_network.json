@@ -1,0 +1,168 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "real_hk_annual_store_network",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "hk-annual",
+    "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+    "origin": {
+      "document_title": "2024年度报告（港股）",
+      "publisher": "名创优品",
+      "document_kind": "annual_report",
+      "market": "HK",
+      "language": "zh-HK/en",
+      "verified_against_original": true
+    },
+    "local_binding_key": "hk-annual"
+  },
+  "observation": {
+    "metadata": {
+      "expected_family": "annual_report",
+      "market": "HK",
+      "language": "bilingual_en_zh",
+      "carrier": "pdf",
+      "read_scope": "Business Review and Outlook（第11-12页）、期后事项与展望（第24页）",
+      "note": "片段来自母计划 sample_observations 对同一 SHA 原件的只读侦察；引文经逐条对照原文核验"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 11, "line": null, "exact_quote": "the total number of MINISO stores in mainland China and overseas markets increased from 6,413 as of December 31, 2023 to 7,504 as of December 31, 2024"},
+        "page": 11,
+        "text": "For the fiscal year ended December 31, 2024, the total number of MINISO stores in mainland China and overseas markets increased from 6,413 as of December 31, 2023 to 7,504 as of December 31, 2024. The number of TOP TOY stores increased from 148 as of December 31, 2023 to 276 as of December 31, 2024. For the fiscal year, the aggregate GMV of the Group reached approximately RMB30.4 billion.",
+        "role": "business_review",
+        "hints": {"facet_ids": ["facet_operating_metrics", "facet_core_business"], "mechanism_ids": ["mechanism_store_network"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 12, "line": null, "exact_quote": "Stores operated under MINISO Retail Partner model"},
+        "page": 12,
+        "text": "As of December 31, 2024, we served consumers primarily through a network of over 7,500 MINISO stores, including nearly 4,400 MINISO stores in mainland China and over 3,100 MINISO stores in overseas markets. Store table by mode and geography: mainland China 3,926 to 4,386 (directly operated 26 to 25; MINISO Retail Partner model 3,878 to 4,335; distributor model 22 to 26); overseas 2,487 to 3,118 (directly operated 238 to 503; Retail Partner model 283 to 404; distributor model 1,966 to 2,211).",
+        "role": "operating_metric_table",
+        "hints": {"facet_ids": ["facet_operating_metrics", "facet_overseas"], "mechanism_ids": ["mechanism_store_network"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": 24, "line": null, "exact_quote": "there were no other significant events that might affect us since the end of the Reporting Period"},
+        "page": 24,
+        "text": "Share Repurchase Programs: repurchase of no more than HK$2 billion in value of Shares and/or ADSs over a 12-month period starting from August 30, 2024, extended to be valid until June 30, 2026; on March 28, 2025 the Company entered into share repurchase agreements for an aggregate repurchase amount of up to approximately HK$1.8 billion. Save as disclosed in this annual report, there were no other significant events that might affect us since the end of the Reporting Period and up to the date of this annual report.",
+        "role": "subsequent_events",
+        "hints": {"facet_ids": ["facet_risk_denial", "facet_operating_metrics"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "港股年报业务回顾：门店表是模式×地域二维矩阵，整表连同表头/单位读取",
+      "存量时点（截至12月31日）与期内净增分开；双语段落去重但不丢口径",
+      "期后事项与报告期严格分界"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "门店总数为时点存量：截至2024-12-31共7,504家，较2023-12-31的6,413家增加；TOP TOY单独口径由148家增至276家",
+        "importance": "required_business",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "时点=2023-12-31与2024-12-31存量对比",
+          "口径=MINISO门店总数（内地+海外）；TOP TOY独立口径",
+          "单位=家",
+          "集团GMV约304亿元为GMV口径（非收入）"
+        ],
+        "must_not_assert": [
+          "不得把7,504家说成期内新开或净增门店数",
+          "不得把TOP TOY门店数混入MINISO门店数",
+          "不得把GMV约304亿元说成公司收入"
+        ]
+      },
+      {
+        "id": "f2",
+        "objective": "门店结构是模式×地域二维拆分：内地（直营25、合伙人4,335、代理26）与海外（直营503、合伙人404、代理2,211）各有模式结构，海外直营由238增至503只是其中一格",
+        "importance": "required_business",
+        "any_support_sets": [["u2"]],
+        "must_preserve": [
+          "模式=直营/名创合伙人/代理三种并列",
+          "地域=中国内地/海外分开拆分",
+          "时点口径=截至各年12月31日",
+          "范围=『over 7,500/nearly 4,400/over 3,100』是约数表述"
+        ],
+        "must_not_assert": [
+          "不得把合伙人/代理门店当直营门店",
+          "不得把内地与海外数字互换、相加或当净增",
+          "不得由某一格（海外直营238→503）推断整体模式转变"
+        ]
+      },
+      {
+        "id": "f3",
+        "objective": "期后事项：回购为授权与协议上限（授权不超过20亿港元、协议合计约18亿港元上限），报告期结束后除已披露外无其他重大事项",
+        "importance": "required_business",
+        "any_support_sets": [["u3"]],
+        "must_preserve": [
+          "期后=报告期结束后至年报日期",
+          "语态=授权/协议上限（no more than / up to），非已执行金额",
+          "边界句=『除本年报披露外无其他重大事项』"
+        ],
+        "must_not_assert": [
+          "不得把回购授权/协议上限说成已回购金额",
+          "不得把期后事项放进2024报告期",
+          "不得把边界句反读成『肯定没有任何其他事项』之外的更强断言"
+        ]
+      },
+      {
+        "id": "f4",
+        "objective": "GMV约304亿元属 correctness_if_emitted：不要求抽取，一旦输出必须标口径（集团GMV、期间、币种），并保留非收入限定",
+        "importance": "correctness_if_emitted",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "口径=aggregate GMV of the Group（约数 approximately）",
+          "期间=2024财年",
+          "币种=人民币（RMB）"
+        ],
+        "must_not_assert": [
+          "不得把GMV当收入或营收",
+          "不得丢掉approximately约数限定"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "门店矩阵/期后语义是否被引擎正确保留：交ROOT（execution_status=NOT_RUN_ROOT_INTEGRATION）",
+      "MD&A、财务报表与附注不在本case评估",
+      "港股双栏几何恢复问题属LAYOUT包，本包不评"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1",
+      "change": "把『截至2024-12-31门店总数7,504家』说成2024年新开门店数",
+      "dimension": "period",
+      "expected_failure": "时点存量被当期内流量新增",
+      "reason": "存量/流量口径由 period 与比较基准决定"
+    },
+    {
+      "id": "m2",
+      "change": "把内地与海外×直营/合伙人/代理的二维拆分压平成单一『门店数』并互换地域归属",
+      "dimension": "scope",
+      "expected_failure": "地域×模式口径被压缩，门店结构错误归因",
+      "reason": "矩阵的行与列都是口径的一部分"
+    },
+    {
+      "id": "m3",
+      "change": "把2025年3月签署的回购协议当2024报告期内事项",
+      "dimension": "modality",
+      "expected_failure": "期后事项进入报告期，授权上限被当已执行事实",
+      "reason": "期后边界与授权/协议语态必须保留"
+    },
+    {
+      "id": "m4",
+      "change": "把约304亿元GMV说成公司2024年收入",
+      "dimension": "unit",
+      "expected_failure": "指标口径错：GMV被当收入（单位/口径维度变更）",
+      "reason": "GMV与收入是不同口径的量，不可互换"
+    }
+  ],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

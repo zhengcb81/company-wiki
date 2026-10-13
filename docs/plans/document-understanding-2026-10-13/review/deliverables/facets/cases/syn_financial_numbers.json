@@ -1,0 +1,67 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "syn_financial_numbers",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "syn-financial-numbers-01",
+    "source_sha256": null,
+    "origin": {"synthetic": true, "purpose": "纯财务数字的 correctness_if_emitted 例（合成文本）"},
+    "local_binding_key": null
+  },
+  "observation": {
+    "metadata": {
+      "synthetic": true,
+      "purpose": "纯财务季报摘要：不要求选数字，但选了不可错；0业务摘要是可接受输出"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 1, "exact_quote": "公司实现营业收入10.00亿元，同比增长12%"},
+        "page": 1,
+        "text": "报告期内，公司实现营业收入10.00亿元，同比增长12%；归属于母公司股东的净利润1.20亿元。（摘编自季度报告财务摘要）",
+        "role": "financial_summary",
+        "hints": {"facet_ids": ["facet_operating_metrics", "facet_core_business"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "纯财务数字：不要求选，但选了不可错",
+      "纯财务季报可以正确跳过业务派生，0 LLM、0 摘要为合法结果",
+      "防止基准反向逼引擎膨胀：不设强制召回这些数字的 gold"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "若输出营收/利润数字，必须带期间、主体、单位与口径（归母净利润≠净利润）",
+        "importance": "correctness_if_emitted",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "期间=报告期内（原文未细化则不得补造具体季度/年度）",
+          "主体=归属于母公司股东的净利润",
+          "单位=亿元；同比口径随数字"
+        ],
+        "must_not_assert": [
+          "不得补造未披露的期间（如擅自写成2026Q1）",
+          "不得把同比增速当环比",
+          "不得把归母净利润说成净利润、毛利或经营利润"
+        ]
+      },
+      {
+        "id": "f2",
+        "objective": "该文档无业务叙述：可合法不产出业务摘要（disposition 记录，不计业务召回）",
+        "importance": "disposition_context",
+        "any_support_sets": [["u1"]],
+        "must_preserve": ["文档性质=纯财务摘要"],
+        "must_not_assert": ["不得为凑业务摘要而从财务数字反推业务结论"]
+      }
+    ],
+    "disposition": "eligible_skip_after_read",
+    "not_evaluated": [
+      "三表常规数字抽取：本包不追求，属 correctness_if_emitted 范畴",
+      "数字反例不要求原模型必须抽该数字（不强制召回）"
+    ]
+  },
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

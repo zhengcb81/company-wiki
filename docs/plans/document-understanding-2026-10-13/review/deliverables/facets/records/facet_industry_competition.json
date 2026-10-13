@@ -1,0 +1,133 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "facet_industry_competition",
+  "version": "1.1.0",
+  "business_questions": [
+    "行业供需、技术路线或竞争格局发生了什么变化，是谁的陈述或统计",
+    "公司受到的具体影响是什么（区别于行业一般叙述）",
+    "行业数据的作者、样本、地域与统计期是什么",
+    "替代技术/竞争方式对公司产品的影响是否被具体说明"
+  ],
+  "applicable_mechanisms": [
+    "generic"
+  ],
+  "positive_evidence": [
+    {
+      "description": "保存对象：行业章节/行业概述中的供需、技术、竞争陈述，连同作者归属（公司陈述/第三方机构/行业顾问）、样本与统计期",
+      "unit_kinds": [
+        "pdf_text_block",
+        "html_paragraph",
+        "html_heading"
+      ],
+      "signals": [
+        "行业概况",
+        "市场规模",
+        "竞争格局",
+        "供需",
+        "渗透率",
+        "替代",
+        "行业地位"
+      ]
+    },
+    {
+      "description": "保存对象：公司陈述行业变化对自身业务的具体影响（订单、价格、份额、认证），与一般行业描述分开保存",
+      "unit_kinds": [
+        "pdf_text_block",
+        "transcript_speaker_block"
+      ],
+      "signals": [
+        "对公司的影响",
+        "市场份额",
+        "价格",
+        "竞争",
+        "下游需求"
+      ]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言行业数据或行业预测时保留作者（公司/第三方机构/行业顾问）、样本范围、地域与统计期",
+      "slots": [
+        "subject",
+        "role",
+        "geography",
+        "period"
+      ],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "第三方统计与预测不是公司事实；丢作者归属会把研究预测当公司承诺"
+    },
+    {
+      "assertion": "断言行业数量（市场规模、增速、产能）时保留数量、单位与统计口径",
+      "slots": [
+        "quantity",
+        "unit",
+        "denominator",
+        "period"
+      ],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/分母；口径不明的行业估算不得当作精确值引用"
+    },
+    {
+      "assertion": "断言行业变化对公司的具体影响时保留条件与范围（哪些产品、哪些地区、哪个期间）",
+      "slots": [
+        "condition",
+        "product",
+        "geography",
+        "period"
+      ],
+      "required_when": "explicit_condition_present",
+      "missing_behavior": "partial",
+      "reason": "行业叙述与公司受影响的事实是两类断言，范围不明时不得互相替代"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "招股书引用第三方机构的行业需求预测",
+      "wrong_assertion": "公司的订单或收入将按该预测增长",
+      "why_wrong": "行业预测是第三方口径的市场估计，不是公司获取份额的证据",
+      "required_context_slots": [
+        "subject",
+        "role",
+        "modality"
+      ]
+    },
+    {
+      "source_meaning": "行业产能正在扩张",
+      "wrong_assertion": "公司募投产能已有下游消化保障",
+      "why_wrong": "行业供给增加甚至可能加剧竞争；公司消化措施需公司自身披露",
+      "required_context_slots": [
+        "subject",
+        "condition"
+      ]
+    },
+    {
+      "source_meaning": "公司陈述『下游需求减少』",
+      "wrong_assertion": "行业整体需求已确认下行（公司口径即行业口径）",
+      "why_wrong": "公司陈述是其业务范围内的观察，样本与统计期不同不得当全行业统计",
+      "required_context_slots": [
+        "subject",
+        "geography",
+        "period"
+      ]
+    }
+  ],
+  "absence_rules": [
+    "未披露行业数据来源时标 unknown（未披露作者/统计期），不补写来源",
+    "管理层未回答行业竞争问题时记『未回答』，不把研究员观点当管理层判断",
+    "公司/报告明确否认某种行业判断时按否定作用域保存",
+    "未读取到行业章节（或仅读到目录）时标读取缺口（unread/deferred），不得当成无行业信息",
+    "行业短讯、宏观新闻只有第三方预测时按 disposition_context 保存来源属性，不进公司业务结论",
+    "纯行业信息且无公司内容时允许 generic_read 后合法退出"
+  ],
+  "summary_focus": [
+    "行业供需/技术/竞争发生了什么变化，出自谁的陈述、什么统计口径？",
+    "公司受行业变化影响的具体事实是什么？",
+    "第三方预测与公司陈述的边界在哪里？"
+  ],
+  "case_ids": [
+    "syn_exit_low_information",
+    "real_cn_convertible_capacity_funding"
+  ]
+}

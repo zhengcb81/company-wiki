@@ -1,0 +1,154 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "facet_new_business",
+  "version": "1.1.0",
+  "business_questions": [
+    "新产品/新业务处在哪个商业化阶段，证据何在（与 semantic_stage_progression 同用）",
+    "与主业的关系是什么（延伸、替换、独立第二曲线），主体归属是谁",
+    "客户验证、订单与收入贡献是否已出现，口径如何",
+    "管理层目标、计划与实际进展是否分开表述"
+  ],
+  "applicable_mechanisms": [
+    "generic",
+    "manufacturing",
+    "subscription",
+    "consumption",
+    "biopharma",
+    "cdmo"
+  ],
+  "positive_evidence": [
+    {
+      "description": "保存对象：新业务/新产品线的定位陈述（做什么、给谁、与主业关系）及其主体；第二曲线的『新』必须绑定具体产品或业务线",
+      "unit_kinds": [
+        "pdf_text_block",
+        "html_paragraph",
+        "transcript_speaker_block"
+      ],
+      "signals": [
+        "新产品",
+        "新业务",
+        "第二增长",
+        "新赛道",
+        "培育",
+        "产品线"
+      ]
+    },
+    {
+      "description": "保存对象：新业务的阶段进展与客户/订单/收入证据；未出现的环节明确记未披露，不补链",
+      "unit_kinds": [
+        "pdf_text_block",
+        "pdf_table_row",
+        "html_table_cell"
+      ],
+      "signals": [
+        "验证",
+        "导入",
+        "订单",
+        "收入贡献",
+        "占比",
+        "推广"
+      ]
+    },
+    {
+      "description": "保存对象：管理层对新业务的目标与规划原文，标注计划语态，与实际进展分开",
+      "unit_kinds": [
+        "pdf_text_block",
+        "transcript_speaker_block"
+      ],
+      "signals": [
+        "规划",
+        "目标",
+        "力争",
+        "有望",
+        "预计",
+        "未来"
+      ]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言『新业务X取得进展』时保留主体、产品/业务线、阶段、语态与披露时间",
+      "slots": [
+        "subject",
+        "product",
+        "stage",
+        "modality",
+        "period"
+      ],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "『进展』本身不是状态；缺阶段与语态就会把验证当量产、把目标当成果"
+    },
+    {
+      "assertion": "断言新业务的数量（收入、占比、出货、产能）时保留数量、单位、分母与期间",
+      "slots": [
+        "quantity",
+        "unit",
+        "denominator",
+        "period"
+      ],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/分母；收入占比必须带分母口径"
+    },
+    {
+      "assertion": "断言新业务实现条件（认证通过、获批、放量前提）时保留条件原文",
+      "slots": [
+        "condition",
+        "stage"
+      ],
+      "required_when": "explicit_condition_present",
+      "missing_behavior": "partial",
+      "reason": "条件是阶段含义的一部分，删条件会把门槛说成已达成"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "『先进新材料需要长期产品开发与下游验证』",
+      "wrong_assertion": "新产品即将贡献收入 / 新业务已失败",
+      "why_wrong": "长期验证是过程描述，既不是近期收入承诺也不是失败结论",
+      "required_context_slots": [
+        "stage",
+        "modality"
+      ]
+    },
+    {
+      "source_meaning": "研发投入增长、产品线丰富",
+      "wrong_assertion": "新业务已形成收入占比",
+      "why_wrong": "研发与布局不等于商业化收入；收入占比需单独披露",
+      "required_context_slots": [
+        "quantity",
+        "unit",
+        "denominator",
+        "stage"
+      ]
+    },
+    {
+      "source_meaning": "目标市场规模很大",
+      "wrong_assertion": "公司新业务可获取该市场规模",
+      "why_wrong": "目标市场是行业口径，公司获取份额需要公司自身的客户与订单证据",
+      "required_context_slots": [
+        "subject",
+        "modality"
+      ]
+    }
+  ],
+  "absence_rules": [
+    "未披露新产品/新业务时标 unknown（未披露），不因行业热点补写公司布局",
+    "管理层未回答新业务进展时记『未回答』，不推断进展好坏",
+    "管理层明确否认某新业务（如『目前未涉及、亦无相关计划』）按否定作用域与时点保存",
+    "未读取到业务/研发章节时标读取缺口（unread/deferred），不得当成无新业务",
+    "只有战略意向词（培育、布局）无阶段证据时按原文粒度保存，不细分成阶段阶梯",
+    "低信息文档允许合法退出，0新业务事实是可接受结果"
+  ],
+  "summary_focus": [
+    "新产品/新业务处在哪个商业化阶段，证据是什么？",
+    "与主业是什么关系，主体归属是谁？",
+    "客户验证、订单、收入贡献是否已经出现？",
+    "管理层目标/计划与实际进展的分界在哪里？"
+  ],
+  "case_ids": [
+    "syn_stage_ladder",
+    "real_cn_ir_premise_denial"
+  ]
+}

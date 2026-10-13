@@ -1,0 +1,127 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "real_us_call_roles",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "us-txt",
+    "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "origin": {
+      "document_title": "MSFT FY2026 Q4 earnings call transcript（原语言TXT）",
+      "publisher": "Microsoft Corp.",
+      "document_kind": "investor_call_transcript",
+      "market": "US",
+      "language": "en-US",
+      "verified_against_original": true
+    },
+    "local_binding_key": "us-txt"
+  },
+  "observation": {
+    "metadata": {
+      "expected_family": "investor_call_transcript",
+      "market": "US",
+      "language": "en-US",
+      "carrier": "txt",
+      "read_scope": "开场与全球性口径说明（行式TXT）",
+      "note": "片段来自母计划 sample_observations 对同一 SHA 原件的只读侦察；引文经逐条对照原文核验"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 128, "exact_quote": "intended to supplement our prepared remarks during today's call"},
+        "page": null,
+        "text": "Jonathan Neilson: Good afternoon, and thank you for joining us today. On the call with me are Satya Nadella, Chairman and Chief Executive Officer; Amy Hood, Chief Financial Officer; Alice Jolla, Chief Accounting Officer; and Brian DeFoe, Deputy General Counsel and Corporate Secretary. On the Microsoft Investor Relations website, you can find our earnings press release and financial summary slide deck, which is intended to supplement our prepared remarks during today's call.",
+        "role": "call_opening",
+        "hints": {"facet_ids": ["facet_risk_denial", "facet_core_business"], "mechanism_ids": ["mechanism_subscription_consumption"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 126, "exact_quote": "It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations"},
+        "page": null,
+        "text": "Operator: Greetings, and welcome to the Microsoft Fiscal Year 2026 Fourth Quarter Earnings Conference Call. As a reminder, this conference is being recorded. It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations. Please go ahead.",
+        "role": "call_opening",
+        "hints": {"facet_ids": ["facet_risk_denial"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 128, "exact_quote": "On this call, we will discuss certain non-GAAP items"},
+        "page": null,
+        "text": "On this call, we will discuss certain non-GAAP items. The non-GAAP financial measures provided should not be considered as a substitute for or superior to the measures of financial performance prepared in accordance with GAAP. They are included as additional clarifying items to aid investors in further understanding the company's fourth quarter performance.",
+        "role": "call_global_note",
+        "hints": {"facet_ids": ["facet_operating_metrics"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "财报电话会：Prepared Remarks 与 Q&A 分段读取，发言者角色随每段保留",
+      "主持人/IR开场介绍不是业务指引；分析师提问不是管理层陈述",
+      "non-GAAP 全局说明随所有局部数字保留"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "发言角色决定陈述归属：开场由 VP of Investor Relations 引介（Chairman&CEO、CFO等出席），新闻稿与补充材料是 prepared remarks 的补充而非替代",
+        "importance": "required_business",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": [
+          "角色=Operator / VP of Investor Relations / Chairman&CEO / CFO 分列",
+          "阶段=开场（引介）与 prepared remarks、Q&A 分开",
+          "范围=网站新闻稿与slide deck是补充材料"
+        ],
+        "must_not_assert": [
+          "不得把IR引介词当业务指引或业绩陈述",
+          "不得把分析师提问中的说法归给管理层",
+          "不得把网站/第三方takeaways当电话会原文"
+        ]
+      },
+      {
+        "id": "f2",
+        "objective": "non-GAAP 为全call适用的口径限定：不替代GAAP，作为补充说明；相关局部数字必须带此限定",
+        "importance": "required_business",
+        "any_support_sets": [["u3"]],
+        "must_preserve": [
+          "限定=non-GAAP不作为GAAP的替代或更优",
+          "作用域=整个电话会（全局），随局部事实保留",
+          "期间=FY26 Q4"
+        ],
+        "must_not_assert": [
+          "不得把non-GAAP数字说成GAAP数字",
+          "不得丢弃non-GAAP限定后单独引用数字"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "角色归属/全局限定的语义执行：交ROOT（execution_status=NOT_RUN_ROOT_INTEGRATION）",
+      "Q&A 正文与具体问答语义不在本case（属问答语义，见 syn_exit_no_answer 同类规则）",
+      "与 real_us_release_subscription 的重复事实识别在证据层做，本包不复制全文"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1",
+      "change": "把分析师/主持人的说法归给管理层（如把提问中的假设说成公司指引）",
+      "dimension": "role",
+      "expected_failure": "陈述归属错：非管理层发言被当公司陈述",
+      "reason": "role 决定陈述主体，电话会各角色必须分列"
+    },
+    {
+      "id": "m2",
+      "change": "删去『non-GAAP should not be considered as a substitute for GAAP』的全局限定",
+      "dimension": "condition",
+      "expected_failure": "口径限定丢失，non-GAAP数字被当GAAP数字",
+      "reason": "全局限定必须随局部事实移动"
+    },
+    {
+      "id": "m3",
+      "change": "把展望/outlook类前瞻表述说成已实现业绩",
+      "dimension": "modality",
+      "expected_failure": "前瞻语态被当已发生事实（未来当实际）",
+      "reason": "prepared remarks 中展望与业绩陈述语态不同"
+    }
+  ],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

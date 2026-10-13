@@ -1,0 +1,182 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "facet_risk_denial",
+  "version": "1.1.0",
+  "business_questions": [
+    "风险是已发生的事实、假设性风险提示，还是管理层对设想的否定",
+    "管理层明确否认了什么，否定的作用域（主体、产品、时点）是什么",
+    "延期、取消、监管约束、技术/客户限制的具体事实与原因是什么",
+    "问句前提、股东/集团行为、子公司事项与上市公司事实的边界在哪里"
+  ],
+  "applicable_mechanisms": [
+    "generic"
+  ],
+  "positive_evidence": [
+    {
+      "description": "保存对象：风险的原文并标注性质——已发生事件 vs 假设性风险因素 vs 一般套话提示；套话风险不当新事件",
+      "unit_kinds": [
+        "pdf_text_block",
+        "html_paragraph",
+        "html_heading"
+      ],
+      "signals": [
+        "风险提示",
+        "可能对",
+        "或将",
+        "不确定性",
+        "已发生",
+        "造成不利影响"
+      ]
+    },
+    {
+      "description": "保存对象：管理层明确否定句及其作用域（『目前未涉及』『现无生产』『未构成重大影响』『项目未取消』）",
+      "unit_kinds": [
+        "pdf_table_qa_fragment",
+        "transcript_speaker_block",
+        "pdf_text_block"
+      ],
+      "signals": [
+        "现无",
+        "未涉及",
+        "目前未",
+        "未构成",
+        "不涉及",
+        "未取消",
+        "否认"
+      ]
+    },
+    {
+      "description": "保存对象：延期/终止/监管事件的事实链——原计划、变化、原因、剩余承诺、影响范围",
+      "unit_kinds": [
+        "pdf_text_block",
+        "transcript_speaker_block"
+      ],
+      "signals": [
+        "延期",
+        "终止",
+        "中止",
+        "问询",
+        "监管",
+        "恢复审核"
+      ]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言风险或负面事件时保留性质（已发生/假设）、主体、作用域与时间",
+      "slots": [
+        "subject",
+        "modality",
+        "period",
+        "condition"
+      ],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "套话风险当新事件、假设风险当已发生是风险面的两大误读；语态与时点决定含义"
+    },
+    {
+      "assertion": "断言管理层否定时保留否定的作用域（主体、产品/业务、时点语态）",
+      "slots": [
+        "subject",
+        "product",
+        "modality",
+        "period"
+      ],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "『现无』是当前时点否定，不承诺永久；作用域扩大或缩小都会改写原意"
+    },
+    {
+      "assertion": "断言延期/终止/中止时保留条件与原因、剩余承诺及对子项目的影响",
+      "slots": [
+        "condition",
+        "period",
+        "project",
+        "modality"
+      ],
+      "required_when": "explicit_condition_present",
+      "missing_behavior": "partial",
+      "reason": "延期不等于取消、部分变更不等于全部终止；原因与剩余承诺是断言的一部分"
+    },
+    {
+      "assertion": "断言负面事件涉及的金额/比例时保留数量、单位、期间与口径",
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator"
+      ],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/分母；损失/影响数字缺口径不得输出"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "定期报告的通用风险提示『原材料价格波动可能影响毛利率』",
+      "wrong_assertion": "本期原材料涨价已导致毛利率下降",
+      "why_wrong": "假设性提示是条件式表述，不是本期已发生事件",
+      "required_context_slots": [
+        "modality",
+        "period"
+      ]
+    },
+    {
+      "source_meaning": "问句『是不是因为沸石业务导致业绩下滑？』及问句中的措辞",
+      "wrong_assertion": "公司确认业绩下滑由沸石业务导致",
+      "why_wrong": "问句前提与措辞属于提问者；只有答复才是公司陈述",
+      "required_context_slots": [
+        "role",
+        "subject"
+      ]
+    },
+    {
+      "source_meaning": "『公司现无生产VC的情况』（明确否定）",
+      "wrong_assertion": "公司有VC相关布局/在研",
+      "why_wrong": "否定被省略或软化后，问句设想升级为公司事实",
+      "required_context_slots": [
+        "modality",
+        "subject",
+        "product"
+      ]
+    },
+    {
+      "source_meaning": "控股股东增持股份、与第三方建立联系",
+      "wrong_assertion": "上市公司与该第三方达成业务合作",
+      "why_wrong": "股东行为与上市公司经营是不同主体的事件",
+      "required_context_slots": [
+        "subject",
+        "role"
+      ]
+    },
+    {
+      "source_meaning": "『该事项未对某子公司经营构成重大影响』",
+      "wrong_assertion": "该事项对集团完全没有影响 / 该事项有重大影响",
+      "why_wrong": "否定作用域限于该子公司经营与『重大』量级，双向都不得扩大或缩小",
+      "required_context_slots": [
+        "subject",
+        "condition",
+        "modality"
+      ]
+    }
+  ],
+  "absence_rules": [
+    "未披露风险是否发生时按原文性质保存（假设/已发生不明则 unknown），不合并两类",
+    "管理层未回答/回避敏感问题时记『未回答』：不回答既不是否定也不是肯定",
+    "管理层明确否定必须保留：不得省略否定、不得把『目前未』改写为『暂未但在推进』",
+    "未读取到风险章节/问答页时标读取缺口（unread/deferred），不得当成无风险无否定",
+    "问句、追问中的前提不得当作公司事实；提问者措辞与答复分开保存",
+    "低信息/纯程序性文件允许合法退出"
+  ],
+  "summary_focus": [
+    "风险是已发生事实、假设提示，还是管理层对设想的否定？",
+    "管理层明确否定了什么，作用域、主体与时点是什么？",
+    "延期/终止/监管事件的事实链（原因、剩余承诺）是什么？",
+    "问句前提、股东/子公司事项与上市公司事实的边界在哪里？"
+  ],
+  "case_ids": [
+    "real_cn_ir_premise_denial",
+    "syn_negation_scope",
+    "syn_exit_no_answer"
+  ]
+}

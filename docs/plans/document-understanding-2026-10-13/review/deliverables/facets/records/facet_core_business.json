@@ -1,0 +1,169 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "facet_core_business",
+  "version": "1.1.0",
+  "business_questions": [
+    "公司向谁卖什么、如何收费与交付（订阅、按量消费、产品销售、门店零售、服务外包）",
+    "本期主业有何进展或变化，证据出自哪个章节/发言",
+    "收入确认与履约义务的描述揭示了什么商业机制",
+    "哪些经营指标是商业机制的直接结果（GMV、RPO、订单、用户、门店），它们与收入的关系如何"
+  ],
+  "applicable_mechanisms": [
+    "generic",
+    "subscription",
+    "consumption",
+    "store_network",
+    "manufacturing",
+    "biopharma",
+    "cdmo"
+  ],
+  "positive_evidence": [
+    {
+      "description": "保存对象：商业模式/业务描述章节中『卖什么、怎么收钱、怎么交付』的机制陈述，连同主体、产品与期间；机制描述优先于财务数字",
+      "unit_kinds": [
+        "pdf_text_block",
+        "html_paragraph",
+        "html_heading"
+      ],
+      "signals": [
+        "主营业务",
+        "商业模式",
+        "收入来源",
+        "业务概览",
+        "我们的客户",
+        "交付"
+      ]
+    },
+    {
+      "description": "保存对象：收入确认与履约义务描述（用于解释机制，不抽三表常规数字）",
+      "unit_kinds": [
+        "pdf_text_block",
+        "html_paragraph"
+      ],
+      "signals": [
+        "履约义务",
+        "收入确认",
+        "递延收入",
+        "确认为收入",
+        "remaining performance obligations"
+      ]
+    },
+    {
+      "description": "保存对象：业务回顾/经营亮点段落中的业务事实与经营解释；财务标题不挤走业务叙述",
+      "unit_kinds": [
+        "pdf_text_block",
+        "html_paragraph",
+        "transcript_speaker_block"
+      ],
+      "signals": [
+        "业务回顾",
+        "经营情况",
+        "Business Highlights",
+        "业务进展",
+        "本期"
+      ]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言『公司通过X方式向Y类客户收费/交付』时保留主体、产品或服务、角色（卖方/买方/平台）与期间",
+      "slots": [
+        "subject",
+        "product",
+        "role",
+        "period"
+      ],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "商业机制由主体+对象+收费方式共同定义；缺任一项都会把机制说反（如把平台GMV当自营收入）"
+    },
+    {
+      "assertion": "断言机制相关数量（用户数、订阅数、门店数、订单额、GMV）时保留数量、单位与分母/口径",
+      "slots": [
+        "quantity",
+        "unit",
+        "denominator",
+        "period"
+      ],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/分母；指标口径不明时不得补造（用户≠付费客户、存量≠净增）"
+    },
+    {
+      "assertion": "断言GMV、RPO、订单额、合同额等机制指标时必须保留指标口径与『非当期收入』限定",
+      "slots": [
+        "quantity",
+        "unit",
+        "condition",
+        "modality"
+      ],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "partial",
+      "reason": "GMV/RPO/订单是机制中间量，直接换算成收入是最常见的机制误读"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "披露『平台GMV约304亿元』",
+      "wrong_assertion": "公司收入304亿元",
+      "why_wrong": "GMV是平台成交总额，与公司确认收入的口径不同",
+      "required_context_slots": [
+        "quantity",
+        "unit",
+        "condition"
+      ]
+    },
+    {
+      "source_meaning": "披露『商业剩余履约义务RPO增至678 billion』",
+      "wrong_assertion": "当期收入678 billion",
+      "why_wrong": "RPO是未来履约义务余额，按履约进度分期确认，不是当期收入",
+      "required_context_slots": [
+        "quantity",
+        "unit",
+        "modality"
+      ]
+    },
+    {
+      "source_meaning": "披露『新增订单/合同额X亿元』",
+      "wrong_assertion": "未来将实现收入X亿元",
+      "why_wrong": "订单可取消、可延期，履约期与收入确认规则决定实际确认节奏",
+      "required_context_slots": [
+        "quantity",
+        "unit",
+        "condition",
+        "modality"
+      ]
+    },
+    {
+      "source_meaning": "披露『用户数500万』",
+      "wrong_assertion": "付费客户500万",
+      "why_wrong": "用户口径未披露付费/注册/活跃之分，不得默认等同付费客户",
+      "required_context_slots": [
+        "quantity",
+        "unit",
+        "denominator",
+        "period"
+      ]
+    }
+  ],
+  "absence_rules": [
+    "未披露商业模式细节时标 unknown（未披露），不按行业通行模式补写收费方式",
+    "管理层未回答商业模式问题时记『未回答』，不把问句中的模式设想当公司事实",
+    "公司明确否认某业务/模式（如『目前未涉及』）按否定作用域保存，不得改写为在研或潜在",
+    "未读取到业务章节或正文不可读时标读取缺口（unread/deferred），不得当成无业务叙述",
+    "纯财务季报/摘要可以合法不作业务摘要（0切片、0 LLM），0业务事实是可接受结果",
+    "文档确属无经营内容的程序性文件时走 eligible_skip_after_read，只留来源与诊断"
+  ],
+  "summary_focus": [
+    "公司卖什么、向谁卖、怎么收钱、怎么交付？",
+    "本期主业有何关键进展或变化，证据在哪里？",
+    "收入确认与履约义务描述揭示了什么商业机制？",
+    "机制类指标（GMV/RPO/订单/用户/门店）的口径是什么，与收入是什么关系？"
+  ],
+  "case_ids": [
+    "real_hk_annual_store_network",
+    "real_us_release_subscription",
+    "syn_financial_numbers",
+    "syn_exit_no_business"
+  ]
+}

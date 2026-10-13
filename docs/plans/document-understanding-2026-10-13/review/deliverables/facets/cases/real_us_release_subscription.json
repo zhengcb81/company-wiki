@@ -1,0 +1,151 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "real_us_release_subscription",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "us-release",
+    "source_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+    "origin": {
+      "document_title": "Earnings Release FY26 Q4（官方通信）",
+      "publisher": "Microsoft Corp.",
+      "document_kind": "results_release",
+      "market": "US",
+      "language": "en-US",
+      "verified_against_original": true
+    },
+    "local_binding_key": "us-release"
+  },
+  "observation": {
+    "metadata": {
+      "expected_family": "results_release",
+      "market": "US",
+      "language": "en-US",
+      "carrier": "html",
+      "read_scope": "Business Highlights 段落（HTML正文）",
+      "note": "片段来自母计划 sample_observations 对同一 SHA 原件的只读侦察；引文经逐条对照原文核验"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": null, "exact_quote": "Microsoft 365 Commercial cloud revenue increased 16% when adjusted for the prior year comparable that benefited from 2 points of in-period revenue recognition"},
+        "page": null,
+        "text": "Revenue in Productivity and Business Processes was $37.8 billion and increased 14%, with the following business highlights: Microsoft 365 Commercial cloud revenue increased 16% when adjusted for the prior year comparable that benefited from 2 points of in-period revenue recognition. On a reported basis, Microsoft 365 Commercial cloud revenue increased 14%.",
+        "role": "release_business_highlights",
+        "hints": {"facet_ids": ["facet_core_business", "facet_operating_metrics"], "mechanism_ids": ["mechanism_subscription_consumption"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": null, "exact_quote": "Microsoft 365 Consumer cloud revenue increased 24%"},
+        "page": null,
+        "text": "Microsoft 365 Consumer cloud revenue increased 24% (up 22% in constant currency). LinkedIn revenue increased 12% (up 10% in constant currency). Dynamics 365 revenue increased 13% (up 12% in constant currency).",
+        "role": "release_business_highlights",
+        "hints": {"facet_ids": ["facet_operating_metrics", "facet_overseas"], "mechanism_ids": ["mechanism_subscription_consumption"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": null, "exact_quote": "commercial remaining performance obligation increased 84% to $678 billion"},
+        "page": null,
+        "text": "Microsoft Cloud revenue was $59.3 billion and increased 27%, and commercial remaining performance obligation increased 84% to $678 billion.",
+        "role": "release_business_highlights",
+        "hints": {"facet_ids": ["facet_core_business"], "mechanism_ids": ["mechanism_subscription_consumption"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "业绩新闻稿 Business Highlights：商业/消费分线读取，口径限定随局部事实",
+      "constant currency 与 adjusted 口径是全局限定，不得剥离",
+      "RPO 与当期收入分列"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "商业与消费订阅分线披露且各有口径：Microsoft 365 Commercial cloud +16% 是调整口径（上年同期含2点期内收入确认影响），报告口径为 +14%；Consumer cloud +24%（固定汇率 +22%）",
+        "importance": "required_business",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": [
+          "口径=Commercial 与 Consumer 分线，不可互换",
+          "语态/限定=16%为 adjusted 口径、14%为 reported basis，差异原因（2点期内收入确认）保留",
+          "限定=constant currency（up 22% in constant currency）随 Consumer 数字保留",
+          "期间=FY26 Q4（与上年可比期比较）"
+        ],
+        "must_not_assert": [
+          "不得把16%与14%混用或任选其一当唯一口径",
+          "不得把固定汇率增速当报告口径增速",
+          "不得把 Commercial 订阅增速说成 Consumer 或整个分部的增速"
+        ]
+      },
+      {
+        "id": "f2",
+        "objective": "commercial remaining performance obligation（RPO）增至678 billion、同比+84%：是未来履约义务余额，不是当期收入",
+        "importance": "required_business",
+        "any_support_sets": [["u3"]],
+        "must_preserve": [
+          "指标=commercial remaining performance obligation（履约义务余额）",
+          "数值与增速=$678 billion、+84%，与同句 Microsoft Cloud 收入$59.3 billion分列",
+          "口径=RPO为未来待确认金额"
+        ],
+        "must_not_assert": [
+          "不得把RPO 678 billion说成季度或年度收入",
+          "不得把84%说成收入增速",
+          "不得把RPO与Cloud收入相加或互换"
+        ]
+      },
+      {
+        "id": "f3",
+        "objective": "Consumer cloud +24%（up 22% in constant currency）属 correctness_if_emitted：不要求抽取，输出必须带口径限定",
+        "importance": "correctness_if_emitted",
+        "any_support_sets": [["u2"]],
+        "must_preserve": [
+          "口径=24%报告口径 / 22%固定汇率口径并列",
+          "主体=Microsoft 365 Consumer cloud",
+          "期间=FY26 Q4"
+        ],
+        "must_not_assert": [
+          "不得只报一个百分比而不标口径",
+          "不得把相邻产品线（LinkedIn/Dynamics 365）的数字安到 Consumer cloud"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "口径限定/指标边界的语义执行：交ROOT（execution_status=NOT_RUN_ROOT_INTEGRATION）",
+      "财务报表、Non-GAAP Definition 段与页面导航噪声不评估",
+      "同源电话会文本另见 real_us_call_roles，重复事实在证据层识别，本包不合并"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1",
+      "change": "删去『when adjusted for the prior year comparable that benefited from 2 points of in-period revenue recognition』的调整条件，只报16%",
+      "dimension": "condition",
+      "expected_failure": "调整口径16%被当报告口径，14%被丢弃",
+      "reason": "调整条件解释了两个增速并存的原因，删条件即错口径"
+    },
+    {
+      "id": "m2",
+      "change": "把『commercial remaining performance obligation increased 84% to $678 billion』说成『季度收入678 billion、同比84%』",
+      "dimension": "modality",
+      "expected_failure": "指标口径错：履约义务余额被当收入（未来待确认被当已实现）",
+      "reason": "RPO 与收入是不同性质的量，modality/口径限定必须保留"
+    },
+    {
+      "id": "m3",
+      "change": "把 Consumer cloud 的『up 22% in constant currency』当成报告口径增速并替换24%",
+      "dimension": "unit",
+      "expected_failure": "口径互换：固定汇率值被当报告值（数值/口径维度变更）",
+      "reason": "两个百分比属于同一事实的不同口径，不可互换"
+    },
+    {
+      "id": "m4",
+      "change": "把 Microsoft 365 Commercial cloud 的增速说成整个 Productivity and Business Processes 分部的增速",
+      "dimension": "scope",
+      "expected_failure": "产品口径被扩大到分部，收入$37.8 billion与产品线增速错配",
+      "reason": "scope 决定数字属于产品线还是分部"
+    }
+  ],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

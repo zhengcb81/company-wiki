@@ -1,0 +1,50 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "syn_exit_no_business",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "syn-exit-no-business-01",
+    "source_sha256": null,
+    "origin": {"synthetic": true, "purpose": "无业务内容文档的合法退出例（合成文本）"},
+    "local_binding_key": null
+  },
+  "observation": {
+    "metadata": {
+      "synthetic": true,
+      "purpose": "纯程序性文件：读过后确认无经营内容，0业务事实是可接受结果"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 1, "exact_quote": "关于调整董事会专门委员会委员的公告"},
+        "page": 1,
+        "text": "关于调整董事会专门委员会委员的公告（程序性公告，不含经营性内容）。",
+        "role": "administrative_notice",
+        "hints": {}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 2, "exact_quote": "本次调整不涉及经营方针或业务结构变化"},
+        "page": 1,
+        "text": "本次调整不涉及经营方针或业务结构变化。",
+        "role": "administrative_notice",
+        "hints": {}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "不按文件名跳过：读正文确认无业务后才退出",
+      "退出只留来源与诊断，不产生业务摘要"
+    ],
+    "facts": [],
+    "disposition": "eligible_skip_after_read",
+    "not_evaluated": [
+      "无经营内容：0业务事实为合法结果，不反向逼引擎膨胀",
+      "委员会委员变动本身属公司治理信息，本包不评估"
+    ]
+  },
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

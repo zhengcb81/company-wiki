@@ -1,0 +1,131 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "syn_negation_scope",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "syn-negation-scope-01",
+    "source_sha256": null,
+    "origin": {"synthetic": true, "purpose": "否定作用域、风险性质与延期语义正反配对（合成文本）"},
+    "local_binding_key": null
+  },
+  "observation": {
+    "metadata": {
+      "synthetic": true,
+      "mechanism_axes": ["generic"],
+      "purpose": "缺否定、假设风险当实际、延期当终止的语义反例"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 1, "exact_quote": "公司目前未涉及储能电池材料业务，亦无相关投资计划"},
+        "page": 1,
+        "text": "问：公司是否有意进入储能电池材料领域？答：公司目前未涉及储能电池材料业务，亦无相关投资计划。",
+        "role": "qa_exchange",
+        "hints": {"facet_ids": ["facet_risk_denial", "facet_customer_orders"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 3, "exact_quote": "原材料价格波动可能对毛利率产生影响"},
+        "page": 1,
+        "text": "公司在半年报风险提示中说明：原材料价格波动可能对毛利率产生影响（一般性风险提示）。",
+        "role": "risk_factor",
+        "hints": {"facet_ids": ["facet_risk_denial"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 5, "exact_quote": "原定2026年3月完工的产线延期至2026年9月"},
+        "page": 1,
+        "text": "公司公告：原定2026年3月完工的产线延期至2026年9月，原因是设备到货延迟；项目未取消，剩余承诺不变。",
+        "role": "project_change_notice",
+        "hints": {"facet_ids": ["facet_risk_denial", "facet_capacity_projects"], "semantic_ids": ["semantic_capacity_project"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "明确否定、假设风险、项目变更三类内容分开保存",
+      "否定作用域（主体、业务、时点）随否定保留",
+      "延期的原计划→变化→原因→剩余承诺构成事实链"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "管理层明确否定：公司目前未涉及储能电池材料业务，亦无相关投资计划（当前时点否定）",
+        "importance": "required_business",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "否定作用域=储能电池材料业务与相关投资计划",
+          "语态=『目前/亦无』为当前时点否定，不含永久承诺",
+          "角色=管理层答复（与问句分列）"
+        ],
+        "must_not_assert": [
+          "不得把否定改写为在研、储备或潜在布局",
+          "不得把否定扩大到其他材料领域或缩小到仅『暂未投产』",
+          "不得把问句中的意图当公司计划"
+        ]
+      },
+      {
+        "id": "f2",
+        "objective": "『原材料价格波动可能对毛利率产生影响』是假设性风险提示，不是本期已发生的经营事件",
+        "importance": "required_business",
+        "any_support_sets": [["u2"]],
+        "must_preserve": [
+          "性质=一般性风险提示（假设式：可能）",
+          "语态=条件式/假设式，非已发生"
+        ],
+        "must_not_assert": [
+          "不得说原材料涨价已发生并已导致毛利率下降",
+          "不得把套话风险当本期新事件"
+        ]
+      },
+      {
+        "id": "f3",
+        "objective": "产线由2026年3月延期至2026年9月，原因是设备到货延迟；项目未取消、剩余承诺不变",
+        "importance": "required_business",
+        "any_support_sets": [["u3"]],
+        "must_preserve": [
+          "变化=原定2026年3月→延期至2026年9月",
+          "原因=设备到货延迟",
+          "剩余承诺=项目未取消、承诺不变"
+        ],
+        "must_not_assert": [
+          "不得说项目终止或取消",
+          "不得说按原计划完工",
+          "不得把延期原因改成资金或技术问题"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "删否定/风险性质/延期语义是否被引擎正确保留：交ROOT（execution_status=NOT_RUN_ROOT_INTEGRATION）",
+      "本case为合成文本，不构成任何公司的事实依据"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1",
+      "change": "删去『未涉及储能电池材料业务，亦无相关投资计划』的否定，仅保留问句",
+      "dimension": "negation",
+      "expected_failure": "问句设想被当公司布局（缺否定）",
+      "reason": "否定是答复的核心信息，删否定直接翻转事实"
+    },
+    {
+      "id": "m2",
+      "change": "把『可能对毛利率产生影响』说成『已导致毛利率下降』",
+      "dimension": "modality",
+      "expected_failure": "假设风险被当已发生事实（未来/假设当实际）",
+      "reason": "风险提示的条件式语态必须保留"
+    },
+    {
+      "id": "m3",
+      "change": "删去延期原因与『项目未取消、剩余承诺不变』",
+      "dimension": "condition",
+      "expected_failure": "延期被误读为终止，或原因被编造",
+      "reason": "条件与剩余承诺是变更事实链的一部分"
+    }
+  ],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

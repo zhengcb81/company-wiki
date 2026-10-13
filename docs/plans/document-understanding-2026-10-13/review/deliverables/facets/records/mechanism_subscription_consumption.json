@@ -1,0 +1,174 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "mechanism_subscription_consumption",
+  "version": "1.1.0",
+  "business_questions": [
+    "收入引擎是订阅（席位/期限/续费）还是消费（用量/预付消耗），两者如何拆分",
+    "订阅侧指标（剩余履约义务、递延收入、续费率、席位数）与消费侧指标（用量增长、消耗额）分别如何变化",
+    "队列/同期群指标的口径、观察期与留存定义是什么",
+    "商业与消费两类客群的口径是否分开披露，各自的比较基期与汇率口径是什么"
+  ],
+  "applicable_mechanisms": [
+    "subscription",
+    "consumption"
+  ],
+  "positive_evidence": [
+    {
+      "description": "保存对象：订阅机制陈述——席位、期限、续费、递延收入、剩余履约义务的原文口径；订阅指标与当期收入分列",
+      "unit_kinds": [
+        "pdf_text_block",
+        "html_paragraph",
+        "transcript_speaker_block"
+      ],
+      "signals": [
+        "subscription",
+        "订阅",
+        "续费",
+        "席位",
+        "seats",
+        "per user",
+        "递延收入"
+      ]
+    },
+    {
+      "description": "保存对象：消费机制陈述——用量、消耗、按量计费、预付余额的原文口径；用量增长与订阅增长分列",
+      "unit_kinds": [
+        "pdf_text_block",
+        "html_paragraph",
+        "transcript_speaker_block"
+      ],
+      "signals": [
+        "consumption",
+        "用量",
+        "按量",
+        "消耗",
+        "pay as you go",
+        "预付"
+      ]
+    },
+    {
+      "description": "保存对象：队列/留存指标及其定义（同期群、留存率、净收入留存），定义不明按未披露处理",
+      "unit_kinds": [
+        "pdf_table_row",
+        "html_paragraph",
+        "pdf_text_block"
+      ],
+      "signals": [
+        "cohort",
+        "队列",
+        "留存",
+        "retention",
+        "net revenue retention"
+      ]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言订阅/消费数量（席位、用量、续费率、留存率）时保留数量、单位、分母与期间",
+      "slots": [
+        "quantity",
+        "unit",
+        "denominator",
+        "period"
+      ],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/分母；留存与续费率无分母定义不可解释"
+    },
+    {
+      "assertion": "断言商业/消费客群表现时保留客群口径、产品与期间",
+      "slots": [
+        "subject",
+        "product",
+        "period",
+        "condition"
+      ],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "商业与消费客群的基数、定价与增速口径不同，混用会互相冒充"
+    },
+    {
+      "assertion": "断言剩余履约义务、递延收入、合同额等机制指标时保留非当期收入限定与确认节奏语态",
+      "slots": [
+        "quantity",
+        "unit",
+        "condition",
+        "modality"
+      ],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "partial",
+      "reason": "机制中间量不是收入；限定丢失即口径错误"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "披露剩余履约义务余额增至X（未来待确认金额）",
+      "wrong_assertion": "当期收入X",
+      "why_wrong": "履约义务余额是未来期间的待确认金额",
+      "required_context_slots": [
+        "quantity",
+        "unit",
+        "modality"
+      ]
+    },
+    {
+      "source_meaning": "消费用量增长40%",
+      "wrong_assertion": "订阅收入增长40%",
+      "why_wrong": "用量增长是消费口径，定价与确认方式决定其收入转化",
+      "required_context_slots": [
+        "quantity",
+        "unit",
+        "condition"
+      ]
+    },
+    {
+      "source_meaning": "席位数增长",
+      "wrong_assertion": "付费客户数同比例增长",
+      "why_wrong": "席位是订阅计量单位，一个客户可持多席位",
+      "required_context_slots": [
+        "quantity",
+        "unit",
+        "denominator"
+      ]
+    },
+    {
+      "source_meaning": "『up 22% in constant currency』",
+      "wrong_assertion": "报告口径增长22%",
+      "why_wrong": "固定汇率是全局限定，报告口径另有其值",
+      "required_context_slots": [
+        "quantity",
+        "unit",
+        "condition"
+      ]
+    },
+    {
+      "source_meaning": "上年同期含一次性收入确认影响，本期增速按调整口径披露",
+      "wrong_assertion": "调整口径就是报告口径",
+      "why_wrong": "调整条件解释了两个增速并存的原因，删条件即错口径",
+      "required_context_slots": [
+        "condition",
+        "modality",
+        "period"
+      ]
+    }
+  ],
+  "absence_rules": [
+    "未披露订阅/消费拆分时标 unknown（未披露拆分），不按总量推算分部",
+    "管理层未回答指标口径问题时记『未回答』，不代为定义指标",
+    "公司明确否认某口径解读时按否定作用域保存",
+    "未读取到指标表格/脚注时标读取缺口（unread/deferred），不留半截口径",
+    "订阅/消费财务数字属 correctness_if_emitted：不要求选，选了必须带口径与期间",
+    "无相关机制内容的文档允许合法退出"
+  ],
+  "summary_focus": [
+    "订阅与消费如何划分，各自指标是什么？",
+    "队列/留存口径与观察期是什么？",
+    "商业/消费客群口径与汇率口径是什么？",
+    "机制指标与当期收入的边界在哪里？"
+  ],
+  "case_ids": [
+    "real_us_release_subscription",
+    "real_us_call_roles",
+    "syn_financial_numbers"
+  ]
+}

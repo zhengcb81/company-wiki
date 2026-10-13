@@ -1,0 +1,171 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "facet_customer_orders",
+  "version": "1.1.0",
+  "business_questions": [
+    "订单/合同是什么性质：正式订单、框架协议、意向、里程碑合同还是带量采购",
+    "可取消性、履约期、金额口径与收入确认的关系如何",
+    "客户身份披露到什么程度（实名、匿名、前五大、集中度），保密口径如何",
+    "本期客户/订单/需求转化发生了什么变化，证据何在"
+  ],
+  "applicable_mechanisms": [
+    "generic",
+    "manufacturing",
+    "biopharma",
+    "cdmo"
+  ],
+  "positive_evidence": [
+    {
+      "description": "保存对象：订单/合同/客户进展的原文陈述，含合同性质、金额口径、履约期、可取消性与生效条件",
+      "unit_kinds": [
+        "pdf_text_block",
+        "html_paragraph",
+        "transcript_speaker_block"
+      ],
+      "signals": [
+        "订单",
+        "合同",
+        "框架协议",
+        "意向",
+        "中标",
+        "带量采购",
+        "客户"
+      ]
+    },
+    {
+      "description": "保存对象：客户结构与集中度披露（前五大、匿名客户、集中风险），保留保密口径，不猜客户名字",
+      "unit_kinds": [
+        "pdf_table_row",
+        "pdf_text_block",
+        "html_table_cell"
+      ],
+      "signals": [
+        "前五大",
+        "客户集中",
+        "第一大客户",
+        "客户A",
+        "保密"
+      ]
+    },
+    {
+      "description": "保存对象：问答中关于客户/订单的管理层答复与否定，问句设想与答复分开",
+      "unit_kinds": [
+        "pdf_table_qa_fragment",
+        "transcript_speaker_block"
+      ],
+      "signals": [
+        "问：",
+        "答：",
+        "目前无",
+        "尚未签署",
+        "不构成"
+      ]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言『获得订单/与客户合作』时保留客户口径（实名/匿名/范围）、订单性质、金额口径与履约期",
+      "slots": [
+        "subject",
+        "quantity",
+        "unit",
+        "condition",
+        "period"
+      ],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "订单质量由性质与条件决定；框架协议与正式订单、意向与执行不可互换"
+    },
+    {
+      "assertion": "断言订单金额时保留数量、单位、期间与口径（合同总额/年度金额/含税）",
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "condition"
+      ],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/口径；合同额不是收入，金额口径不明不得输出"
+    },
+    {
+      "assertion": "断言客户身份或客户关系时保留主体与角色（上市公司/控股股东/子公司/被问公司）",
+      "slots": [
+        "subject",
+        "role"
+      ],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "unknown",
+      "reason": "股东或集团层面的联系不是上市公司的客户关系；主体错位是订单面的高危误读"
+    },
+    {
+      "assertion": "断言订单将带来的收入时保留条件（履约、验收、可取消性）与计划语态",
+      "slots": [
+        "condition",
+        "modality",
+        "quantity",
+        "unit"
+      ],
+      "required_when": "explicit_condition_present",
+      "missing_behavior": "deferred",
+      "reason": "意向订单转未来收入必须带条件；条件缺失时宁可 deferred"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "签署战略合作框架协议",
+      "wrong_assertion": "获得确定订单X亿元",
+      "why_wrong": "框架协议不锁定数量与金额，履约条款未定",
+      "required_context_slots": [
+        "modality",
+        "condition"
+      ]
+    },
+    {
+      "source_meaning": "控股股东与某行业龙头建立联系、希望建立业务协同",
+      "wrong_assertion": "上市公司已与该龙头达成业务/订单",
+      "why_wrong": "股东层面的关系不是上市公司的客户关系或合同",
+      "required_context_slots": [
+        "subject",
+        "role"
+      ]
+    },
+    {
+      "source_meaning": "问句『有没有可能推动带量采购等具体业务』",
+      "wrong_assertion": "公司正在推进带量采购业务",
+      "why_wrong": "问句设想不是公司事实；若未被正面回答须记未回答",
+      "required_context_slots": [
+        "role",
+        "modality"
+      ]
+    },
+    {
+      "source_meaning": "客户A认证通过/进入合格供应商名录",
+      "wrong_assertion": "已获得客户A批量订单",
+      "why_wrong": "认证是供货资格，不是订单；批量订单需另行证据",
+      "required_context_slots": [
+        "stage",
+        "modality"
+      ]
+    }
+  ],
+  "absence_rules": [
+    "未披露订单金额或客户名称时标 unknown（未披露），匿名客户不猜名字",
+    "管理层未回答订单问题时记『未回答』，不把问句中的订单设想当事实",
+    "公司明确否认某订单/客户关系（如『现无生产该产品』『不构成重大影响』）按否定作用域保存",
+    "未读取到合同/订单披露或附注时标读取缺口（unread/deferred），不得当成无订单",
+    "合同额与收入严格分开：合同额属 correctness_if_emitted，不要求选，选了必须带口径",
+    "低信息/纯程序性文件允许合法退出"
+  ],
+  "summary_focus": [
+    "订单/合同的性质、金额口径与履约条件是什么？",
+    "客户身份披露到什么程度，集中度如何？",
+    "本期客户/订单/需求发生了什么变化，证据是什么？",
+    "股东/集团层面关系与上市公司客户关系的边界在哪里？"
+  ],
+  "case_ids": [
+    "real_cn_ir_premise_denial",
+    "syn_negation_scope",
+    "real_us_release_subscription"
+  ]
+}

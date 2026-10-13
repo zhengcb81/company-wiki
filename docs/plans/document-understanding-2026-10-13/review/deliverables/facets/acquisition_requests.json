@@ -1,0 +1,105 @@
+{
+  "schema_version": "du2-acquisition-requests/1",
+  "note": "DU2-FACETS 缺样清单：交资料获取层按既有授权补齐真实原件；本包不自行采集、不新增人工许可/签收链。每项标注阻塞的覆盖格。",
+  "requests": [
+    {
+      "id": "ar_biopharma_pipeline_stage",
+      "shape": "生物医药公司定期报告/招股书中管线章节：临床前/I/II/III期、申报、获批、适应症与地区作用域的原文",
+      "why_needed": "mechanism_biopharma_cdmo 的阶段阶梯目前只有合成样本；阶段跨级与获批作用域是最易失真语义",
+      "preferred_market": "CN/US/HK 任一",
+      "preferred_kind": "annual_report/prospectus/regulatory_filing",
+      "blocking_coverage": ["mechanism_biopharma_cdmo/biopharma"],
+      "status": "open"
+    },
+    {
+      "id": "ar_cdmo_milestone_royalty",
+      "shape": "CDMO/CMO 订单披露：订单性质（临床批/商业化批）、里程碑付款、版税条款与收入确认分开表述的原文",
+      "why_needed": "里程碑/版税与经常性收入分开是机制核心规则，现无真实依据",
+      "preferred_market": "CN/US",
+      "preferred_kind": "annual_report/contract_announcement",
+      "blocking_coverage": ["mechanism_biopharma_cdmo/cdmo"],
+      "status": "open"
+    },
+    {
+      "id": "ar_fund_project_change",
+      "shape": "募投变更/延期/终止/进展公告：原计划→本次变化→原因→剩余承诺→对子项目影响的完整事实链",
+      "why_needed": "第二曲线与产能面的 delta 语义（延后≠取消、部分变更≠全部变化）缺真实对照",
+      "preferred_market": "CN",
+      "preferred_kind": "change_announcement/progress_announcement",
+      "blocking_coverage": ["facet_capacity_projects", "semantic_capacity_project", "facet_new_business"],
+      "status": "open"
+    },
+    {
+      "id": "ar_revision_pair",
+      "shape": "同一事实的原稿与修订/补充/更正版本对（摘要与全文亦可）",
+      "why_needed": "摘要未提≠全文没有、修订不覆盖原始版本等生命周期语义需要真实版本对验证",
+      "preferred_market": "CN/HK/US",
+      "preferred_kind": "amended_filing/supplement",
+      "blocking_coverage": ["facet_risk_denial（摘要/修订语义横切）"],
+      "status": "open"
+    },
+    {
+      "id": "ar_event_container_attachments",
+      "shape": "8-K/6-K 主表+附件（99.1 release、99.2 deck、图片）同源容器真实目录与附件",
+      "why_needed": "容器+独立业务附件的阅读深度（只读主表≠读过全部资料）需真实端到端样本",
+      "preferred_market": "US/HK",
+      "preferred_kind": "event_filing_with_exhibits",
+      "blocking_coverage": ["facet_risk_denial（事件更新）", "facet_core_business"],
+      "status": "open"
+    },
+    {
+      "id": "ar_true_negative_administrative",
+      "shape": "真正的制度/会议通知/确认函负例（纯程序性、无经营内容），以及『标题误导但正文有业务』的正例对照",
+      "why_needed": "cn-ir-policy 文件名像制度、正文实为投资者关系活动记录，不能当制度负例；合法退出需要真负例回归",
+      "preferred_market": "CN",
+      "preferred_kind": "administrative_notice/policy_document",
+      "blocking_coverage": ["syn_exit_no_business（合法退出回归）"],
+      "status": "open"
+    },
+    {
+      "id": "ar_subscription_queue_metrics",
+      "shape": "订阅型软件公司的队列指标定义原文：净收入留存、续费率、席位/付费用户口径、递延收入",
+      "why_needed": "mechanism_subscription_consumption 的队列指标规则缺真实定义依据",
+      "preferred_market": "US",
+      "preferred_kind": "annual_report/quarterly_release",
+      "blocking_coverage": ["mechanism_subscription_consumption/subscription"],
+      "status": "open"
+    },
+    {
+      "id": "ar_consumption_usage_metrics",
+      "shape": "纯消费型（用量计费/消耗额/预付余额）业务的真实披露片段",
+      "why_needed": "现有真实证据以订阅侧为主，消费侧机制只有口径规则",
+      "preferred_market": "US/CN",
+      "preferred_kind": "earnings_release/call_transcript",
+      "blocking_coverage": ["mechanism_subscription_consumption/consumption"],
+      "status": "open"
+    },
+    {
+      "id": "ar_same_store_metrics",
+      "shape": "零售同店（same-store）口径、开关店明细与净增计算的真实表格",
+      "why_needed": "同店可比性与存量/流量规则缺真实经营表对照",
+      "preferred_market": "HK/CN/US",
+      "preferred_kind": "annual_report/investor_presentation",
+      "blocking_coverage": ["mechanism_store_network/store_network"],
+      "status": "open"
+    },
+    {
+      "id": "ar_cert_utilization_table",
+      "shape": "制造业客户认证进度与产能利用率经营表（含分母定义、期间）真实片段",
+      "why_needed": "认证→订单边界与利用率分母规则缺真实经营表样本",
+      "preferred_market": "CN",
+      "preferred_kind": "annual_report/ir_record",
+      "blocking_coverage": ["mechanism_manufacturing/manufacturing"],
+      "status": "open"
+    },
+    {
+      "id": "ar_industry_signed_stats",
+      "shape": "带第三方署名、样本与统计期的行业章节（行业顾问/研究机构统计 vs 公司陈述并列）",
+      "why_needed": "行业面作者归属规则缺真实成对样本",
+      "preferred_market": "CN/HK",
+      "preferred_kind": "prospectus/annual_report",
+      "blocking_coverage": ["facet_industry_competition"],
+      "status": "open"
+    }
+  ]
+}

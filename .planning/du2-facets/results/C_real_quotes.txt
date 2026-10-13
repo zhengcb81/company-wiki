@@ -1,0 +1,1 @@
+﻿OK 20 quote checks verified against originals -> C:\Users\郑曾波\Projects\_harness_worktrees\document-reading-review-20261013\facets\docs\plans\document-understanding-2026-10-13\review\deliverables\facets\c_verification\real_excerpt_checks.json

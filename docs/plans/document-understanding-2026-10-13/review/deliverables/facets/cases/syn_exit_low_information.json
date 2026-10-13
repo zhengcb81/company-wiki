@@ -1,0 +1,66 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "syn_exit_low_information",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "syn-exit-low-info-01",
+    "source_sha256": null,
+    "origin": {"synthetic": true, "purpose": "低信息文档的合法退出例（合成文本）"},
+    "local_binding_key": null
+  },
+  "observation": {
+    "metadata": {
+      "synthetic": true,
+      "purpose": "行业宏观短讯：有第三方预测、无公司具体影响；低信息不等于无价值，但不产生业务事实"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 1, "exact_quote": "某研究机构预计全球某材料需求未来五年保持增长"},
+        "page": 1,
+        "text": "行业短讯：某研究机构预计全球某材料需求未来五年保持增长。（未提及具体公司）",
+        "role": "industry_news",
+        "hints": {"facet_ids": ["facet_industry_competition"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 2, "exact_quote": "未提及任何公司的经营数据或受影响情况"},
+        "page": 1,
+        "text": "本条短讯未提及任何公司的经营数据或受影响情况。",
+        "role": "coverage_note",
+        "hints": {"facet_ids": ["facet_industry_competition"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "低信息文档：先完整轻扫再判断价值，保留来源属性后可合法退出",
+      "第三方预测不得当公司事实"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "文档为行业宏观短讯：第三方机构预测，无公司内容；只保存来源属性与预测归属",
+        "importance": "disposition_context",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "作者=某研究机构（第三方）",
+          "性质=预测（未来五年）",
+          "范围=全球某材料需求"
+        ],
+        "must_not_assert": [
+          "不得把行业预测当任何公司的订单、收入或指引",
+          "不得为短讯补造公司受影响的结论"
+        ]
+      }
+    ],
+    "disposition": "generic_read",
+    "not_evaluated": [
+      "公司层面业务影响：无公司内容，不评估（合法空结果）",
+      "行业预测数值未核验，不作为业务事实"
+    ]
+  },
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

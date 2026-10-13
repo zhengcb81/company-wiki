@@ -1,0 +1,258 @@
+{
+  "schema_version": "du2-facet-c-checks/1",
+  "method_notes": [
+    "C节点人工对照原文：引文与原件逐条比对，空白归一化后要求逐字命中；不改写、不翻译引文。",
+    "PDF 用 PyMuPDF 按声明页提取只读文本；HTML/TXT 全文归一化匹配。",
+    "原件只读打开，不复制、不改写；读取前后核对 SHA-256 与 mtime。",
+    "本文件是核对记录，不是引擎语义验收；语义执行属 ROOT（NOT_RUN_ROOT_INTEGRATION）。",
+    "绝对路径只存于未提交的 .planning/du2-facets/bindings.local.json，不进入可移植fixture。"
+  ],
+  "checks": [
+    {
+      "check_id": "cn-convertible-u1",
+      "sample_id": "cn-convertible",
+      "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+      "page": 223,
+      "quote": "拟投资于年产400吨吡啶盐项目和年产1,500吨三氯蔗糖项目",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "cn-convertible-u2",
+      "sample_id": "cn-convertible",
+      "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+      "page": 223,
+      "quote": "募集资金不足部分由公司自筹解决",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "cn-convertible-u3",
+      "sample_id": "cn-convertible",
+      "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+      "page": 225,
+      "quote": "2016年上半年公司完成了年产500吨三氯蔗糖项目的建设",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "cn-equity-u1",
+      "sample_id": "cn-equity",
+      "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "page": 61,
+      "quote": "项目建设期两期，新建厂房为一期，老厂区改建为二期",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "cn-equity-u2",
+      "sample_id": "cn-equity",
+      "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "page": 61,
+      "quote": "在本次募集资金到位前，公司可根据项目进度的实际情况通过自有资金、银行贷款或其他途径进行部分投入",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "cn-equity-u3",
+      "sample_id": "cn-equity",
+      "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "page": 68,
+      "quote": "本项目建成达产后，公司将优化升级原有精密复杂刃量具类产品产能12万件套",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "cn-ir-u1",
+      "sample_id": "cn-ir",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "page": 2,
+      "quote": "公司业绩在23年度达到历史新高后，24年度断崖式下降",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "cn-ir-u2",
+      "sample_id": "cn-ir",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "page": 2,
+      "quote": "2024年度影响收入的主要原因为沸石系列环保材料业务及部分医药业务下游需求减少",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "cn-ir-u3",
+      "sample_id": "cn-ir",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "page": 3,
+      "quote": "公司现无生产VC（碳酸亚乙烯酯）的情况",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "cn-ir-u4",
+      "sample_id": "cn-ir",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "page": 2,
+      "quote": "该事项未对九目化学经营构成重大影响",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "cn-ir-u5",
+      "sample_id": "cn-ir",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "page": 3,
+      "quote": "先进新材料的开发和应用很多是长期的过程，需要通过长时间的产品开发、技术积累以及下游验证支持",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "hk-annual-u1",
+      "sample_id": "hk-annual",
+      "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "page": 11,
+      "quote": "the total number of MINISO stores in mainland China and overseas markets increased from 6,413 as of December 31, 2023 to 7,504 as of December 31, 2024",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "hk-annual-u2",
+      "sample_id": "hk-annual",
+      "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "page": 12,
+      "quote": "Stores operated under MINISO Retail Partner model",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "hk-annual-u3",
+      "sample_id": "hk-annual",
+      "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "page": 24,
+      "quote": "there were no other significant events that might affect us since the end of the Reporting Period",
+      "method": "pymupdf_page_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "us-txt-u1",
+      "sample_id": "us-txt",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "page": null,
+      "quote": "intended to supplement our prepared remarks during today's call",
+      "method": "txt_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "us-txt-u2",
+      "sample_id": "us-txt",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "page": null,
+      "quote": "It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations",
+      "method": "txt_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "us-txt-u3",
+      "sample_id": "us-txt",
+      "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "page": null,
+      "quote": "On this call, we will discuss certain non-GAAP items",
+      "method": "txt_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "us-release-u1",
+      "sample_id": "us-release",
+      "source_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "page": null,
+      "quote": "Microsoft 365 Commercial cloud revenue increased 16% when adjusted for the prior year comparable that benefited from 2 points of in-period revenue recognition",
+      "method": "html_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "us-release-u2",
+      "sample_id": "us-release",
+      "source_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "page": null,
+      "quote": "Microsoft 365 Consumer cloud revenue increased 24%",
+      "method": "html_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    },
+    {
+      "check_id": "us-release-u3",
+      "sample_id": "us-release",
+      "source_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "page": null,
+      "quote": "commercial remaining performance obligation increased 84% to $678 billion",
+      "method": "html_text_normalized",
+      "normalized_match": true,
+      "sha256_verified": true
+    }
+  ],
+  "raw_preservation": {
+    "originals": {
+      "cn-convertible": {
+        "sha256_recomputed": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+        "sha256_matches_manifest": true,
+        "mtime_unchanged_after_read": true,
+        "local_binding_key": "cn-convertible"
+      },
+      "cn-equity": {
+        "sha256_recomputed": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+        "sha256_matches_manifest": true,
+        "mtime_unchanged_after_read": true,
+        "local_binding_key": "cn-equity"
+      },
+      "cn-ir": {
+        "sha256_recomputed": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "sha256_matches_manifest": true,
+        "mtime_unchanged_after_read": true,
+        "local_binding_key": "cn-ir"
+      },
+      "hk-annual": {
+        "sha256_recomputed": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+        "sha256_matches_manifest": true,
+        "mtime_unchanged_after_read": true,
+        "local_binding_key": "hk-annual"
+      },
+      "us-txt": {
+        "sha256_recomputed": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "sha256_matches_manifest": true,
+        "mtime_unchanged_after_read": true,
+        "local_binding_key": "us-txt"
+      },
+      "us-release": {
+        "sha256_recomputed": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+        "sha256_matches_manifest": true,
+        "mtime_unchanged_after_read": true,
+        "local_binding_key": "us-release"
+      }
+    },
+    "raw_copies": 0,
+    "scratch_dir_removed": true
+  },
+  "resources": {
+    "model_calls": 0,
+    "paid_usd": 0
+  }
+}
