@@ -1,0 +1,326 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "holdout-cn-yake-q1",
+  "source_sha256": "f3931c6c88e60aac178ba8eb8fbcef8ec0b48b3c883a5eade92b263c56b99941",
+  "scope": "holdout",
+  "expected_route_families": ["quarterly", "quarterly_report"],
+  "notes": "HOLDOUT. 江苏雅克科技 2022 年第一季度报告（002409），物理页 1-3。该公司从未出现在 ROOT 调查、调参讨论或设计发现中。这份样本的特殊价值：正文以财务与股东信息为主，几乎没有业务叙述，因此它同时检验「不得把稀疏季报当成无业务」与「不得从财务变动原因里编造业务进展」。事实逐字取自原件。",
+  "facts": [
+    {
+      "id": "h-revenue-up",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "965,112,203.01",
+            "locator": "loc:v1/page:1/table:1"
+          },
+          {
+            "page": 1,
+            "exact_quote": "8.69%",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["965112203.01", "8.69%"],
+      "must_not_assert": ["本报告期营业收入同比下降8.69%"],
+      "reason": "营业收入 965,112,203.01 元，同比 **+8.69%**。与经营活动现金流量净额的 -31.89% 同表相邻，符号易串。"
+    },
+    {
+      "id": "h-net-profit-up",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "148,552,419.40",
+            "locator": "loc:v1/page:1/table:1"
+          },
+          {
+            "page": 1,
+            "exact_quote": "22.14%",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["148552419.40", "22.14%"],
+      "must_not_assert": ["归母净利润同比增长29.76%"],
+      "reason": "归母净利润 148,552,419.40 元、+22.14%；扣非归母净利润 +29.76%。两个增速相邻，且扣非（29.76%）高于归母（22.14%），互换即错。"
+    },
+    {
+      "id": "h-deducted-profit-up",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "137,563,953.95",
+            "locator": "loc:v1/page:1/table:1"
+          },
+          {
+            "page": 1,
+            "exact_quote": "29.76%",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["137563953.95", "29.76%"],
+      "must_not_assert": ["扣非净利润同比增长22.14%"],
+      "reason": "扣非归母净利润 137,563,953.95 元、+29.76%。与归母 22.14% 构成成对陷阱。"
+    },
+    {
+      "id": "h-cashflow-down-despite-profit",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "70,068,337.64",
+            "locator": "loc:v1/page:1/table:1"
+          },
+          {
+            "page": 1,
+            "exact_quote": "-31.89%",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["70068337.64", "-31.89%"],
+      "must_not_assert": ["经营活动现金流量净额同比增长31.89%"],
+      "reason": "经营活动现金流量净额 70,068,337.64 元（**为正**），但同比 **-31.89%（下降）**。这是「利润增长、经营现金流转弱」的组合：正负号与增减方向都不能读错。"
+    },
+    {
+      "id": "h-not-audited",
+      "importance": "critical",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "第一季度报告是否经过审计",
+            "locator": "loc:v1/page:1/paragraph:2"
+          },
+          {
+            "page": 1,
+            "exact_quote": "□ 是 √ 否",
+            "locator": "loc:v1/page:1/paragraph:3"
+          }
+        ]
+      ],
+      "must_preserve": ["是否经过审计"],
+      "must_not_assert": ["本季度报告已经审计"],
+      "reason": "「第一季度报告是否经过审计」勾选 √ 否。本文的勾选形式是「□ 是 √ 否」，与广联达的「□是 ☐否」排版不同——同一语义两种排版，正是 holdout 要覆盖的形态差异。"
+    },
+    {
+      "id": "h-no-restatement",
+      "importance": "normal",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "公司是否需追溯调整或重述以前年度会计数据",
+            "locator": "loc:v1/page:1/paragraph:4"
+          }
+        ]
+      ],
+      "must_preserve": ["追溯调整或重述"],
+      "must_not_assert": ["公司已追溯重述以前年度会计数据"],
+      "reason": "同样是否定勾选（√ 否），说明本期与上期口径可比。"
+    },
+    {
+      "id": "h-rd-expense-up",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "26,307,400",
+            "locator": "loc:v1/page:2/table:1"
+          },
+          {
+            "page": 2,
+            "exact_quote": "63.81%",
+            "locator": "loc:v1/page:2/table:1"
+          },
+          {
+            "page": 2,
+            "exact_quote": "主要是本报告期公司加大了对研发资金的投入。",
+            "locator": "loc:v1/page:2/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["26307400", "63.81%"],
+      "must_not_assert": ["研发费用下降"],
+      "reason": "研发费用 26,307,400 元、+63.81%，原因为「加大了对研发资金的投入」。变动原因表里的这一条是**真实的公司自述**，与「其他收益因补贴增加」等非经营性原因必须区分开。"
+    },
+    {
+      "id": "h-construction-in-progress",
+      "importance": "critical",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "420,898,852",
+            "locator": "loc:v1/page:2/table:1"
+          },
+          {
+            "page": 2,
+            "exact_quote": "77.99%",
+            "locator": "loc:v1/page:2/table:1"
+          },
+          {
+            "page": 2,
+            "exact_quote": "主要是母公司、江苏先科、华飞电子国产化项目新增投资。",
+            "locator": "loc:v1/page:2/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["420898852", "77.99%"],
+      "must_not_assert": [
+        "在建工程420,898,852元为报告期新增投入",
+        "国产化项目已完工投产"
+      ],
+      "reason": "在建工程期末 420,898,852 元、较期初 +77.99%，原因是国产化项目新增投资。420,898,852 是**期末余额（存量）**，不是本期新增额（新增额约为 184,429,712 元，原件未直接印出，故不作金标）；且「在建」不等于完工投产。这是本项目最有价值的 holdout 事实。"
+    },
+    {
+      "id": "h-short-term-loan-up",
+      "importance": "normal",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "424,106,185",
+            "locator": "loc:v1/page:2/table:1"
+          },
+          {
+            "page": 2,
+            "exact_quote": "72.79%",
+            "locator": "loc:v1/page:2/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["424106185", "72.79%"],
+      "must_not_assert": ["短期借款为报告期新增424,106,185元"],
+      "reason": "短期借款期末 424,106,185 元、+72.79%，原因为新增流动资金贷款。与在建工程同理：期末存量与期间增量不可混。"
+    },
+    {
+      "id": "h-investment-income-zero",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "-100.00%",
+            "locator": "loc:v1/page:2/table:1"
+          },
+          {
+            "page": 2,
+            "exact_quote": "主要是本季度未收到华泰瑞联基金分红。",
+            "locator": "loc:v1/page:2/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["-100.00%", "未收到华泰瑞联基金分红"],
+      "must_not_assert": ["本季度收到华泰瑞联基金分红"],
+      "reason": "投资收益本期为空、变动 -100.00%，公司原因为「本季度**未**收到华泰瑞联基金分红」。含明确否定，且本期单元格为空白——空白不等于零收入已实现。"
+    },
+    {
+      "id": "h-top-shareholders",
+      "importance": "normal",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "沈琦",
+            "locator": "loc:v1/page:3/table:1"
+          },
+          {
+            "page": 3,
+            "exact_quote": "22.00%",
+            "locator": "loc:v1/page:3/table:1"
+          },
+          {
+            "page": 3,
+            "exact_quote": "104,721,941",
+            "locator": "loc:v1/page:3/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["沈琦", "22.00%", "104721941"],
+      "must_not_assert": ["国家集成电路产业投资基金为第一大股东"],
+      "reason": "第一大股东沈琦持股 22.00%、104,721,941 股；国家集成电路产业投资基金 5.00% 为第三。股东名次易被按知名度重排。"
+    },
+    {
+      "id": "h-related-party-note",
+      "importance": "normal",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "沈锡强为沈琦、沈馥兄弟的父亲",
+            "locator": "loc:v1/page:3/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": ["沈锡强", "兄弟的父亲"],
+      "must_not_assert": ["沈锡强为沈琦、沈馥的兄弟"],
+      "reason": "公告原文是「沈锡强为沈琦、沈馥兄弟的**父亲**」——即沈锡强是父辈，沈琦沈馥是兄弟。这种亲属表述极易读反。"
+    },
+    {
+      "id": "h-no-other-significant-matters",
+      "importance": "critical",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "三、其他重要事项",
+            "locator": "loc:v1/page:3/paragraph:3"
+          },
+          {
+            "page": 3,
+            "exact_quote": "□ 适用 √ 不适用",
+            "locator": "loc:v1/page:3/paragraph:4"
+          }
+        ]
+      ],
+      "must_preserve": ["其他重要事项", "不适用"],
+      "must_not_assert": ["公司在报告中披露了其他重要事项"],
+      "reason": "「三、其他重要事项」勾选**不适用**。这与中微季报「其他提醒事项：不适用」同源：不适用是明确状态，不能据此编造事项，也不能因为整类为空就把整份季报判为无业务。"
+    }
+  ]
+}

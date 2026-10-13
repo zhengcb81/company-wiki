@@ -1,0 +1,247 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "holdout-cn-glodon-q1",
+  "source_sha256": "cff8b658c5c925b733eb2dcf7b14e23454f76bf99cad499b953ee7a03912f6be",
+  "scope": "holdout",
+  "expected_route_families": ["quarterly", "quarterly_report"],
+  "notes": "HOLDOUT. 广联达科技 2025 年第一季度报告（002410），物理页 2-4。该公司从未出现在 ROOT 调查、任何调参讨论或设计发现中，故为 holdout。事实逐字取自原件；写作前未查看任何 selector 输出。",
+  "facts": [
+    {
+      "id": "h-revenue-down",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "1,218,942,898.74",
+            "locator": "loc:v1/page:3/table:1"
+          },
+          {
+            "page": 3,
+            "exact_quote": "-5.24%",
+            "locator": "loc:v1/page:3/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["1218942898.74", "-5.24%"],
+      "must_not_assert": [
+        "本报告期营业收入同比增长5.24%",
+        "公司一季度营业收入实现增长"
+      ],
+      "reason": "本报告期营业收入 1,218,942,898.74 元，**同比下降 5.24%**。同一张表里净利润同比 +390.89%，所以「收入下降但利润大增」这一组合是最容易被摘要写成「全面增长」的地方。"
+    },
+    {
+      "id": "h-net-profit-up",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "29,836,965.24",
+            "locator": "loc:v1/page:3/table:1"
+          },
+          {
+            "page": 3,
+            "exact_quote": "390.89%",
+            "locator": "loc:v1/page:3/table:1"
+          }
+        ],
+        [
+          {
+            "page": 4,
+            "exact_quote": "主要为公司加强成本费用控制和应收账款管理，人力成本下降，减值损失减少等所致",
+            "locator": "loc:v1/page:4/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": ["29836965.24", "390.89%"],
+      "must_not_assert": [
+        "净利润增长主要由收入增长驱动",
+        "公司营业收入增长带动净利润增长390.89%"
+      ],
+      "reason": "归母净利润 29,836,965.24 元，同比 +390.89%，但**收入是下降的**；公司自述原因为成本费用控制、人力成本下降、减值损失减少。把 390.89% 归因于收入增长是因果幻觉。"
+    },
+    {
+      "id": "h-deducted-profit-from-negative",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "19,009,934.76",
+            "locator": "loc:v1/page:3/table:1"
+          },
+          {
+            "page": 3,
+            "exact_quote": "-1,387,324.03",
+            "locator": "loc:v1/page:3/table:1"
+          },
+          {
+            "page": 3,
+            "exact_quote": "1,470.26%",
+            "locator": "loc:v1/page:3/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["19009934.76", "1470.26%"],
+      "must_not_assert": [
+        "扣非净利润同比增长1470.26%证明主营业务大幅改善",
+        "扣非净利润由正转正"
+      ],
+      "reason": "扣非归母净利润 19,009,934.76 元，同比 +1,470.26%，**因为上年同期是负数 -1,387,324.03 元**。由负转正的百分比没有常规可读性：不能读成「增长 14.7 倍」，也不能据此断言主营大幅改善（同期收入还在下降）。"
+    },
+    {
+      "id": "h-operating-cashflow-negative",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "-685,688,728.77",
+            "locator": "loc:v1/page:3/table:1"
+          },
+          {
+            "page": 3,
+            "exact_quote": "8.58%",
+            "locator": "loc:v1/page:3/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["-685688728.77", "8.58%"],
+      "must_not_assert": [
+        "经营活动现金流量净额为正",
+        "经营活动产生的现金流量净额同比增长8.58%"
+      ],
+      "reason": "经营活动现金流量净额 **-685,688,728.77 元（仍为净流出）**，同比 8.58% 是「流出减少」而非「增长」。把负值配「增长」是符号与语态双重错误。"
+    },
+    {
+      "id": "h-ifrs-not-audited",
+      "importance": "critical",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "第一季度报告是否经审计",
+            "locator": "loc:v1/page:2/paragraph:5"
+          },
+          {
+            "page": 2,
+            "exact_quote": "□是 否",
+            "locator": "loc:v1/page:2/paragraph:6"
+          }
+        ]
+      ],
+      "must_preserve": ["是否经审计", "否"],
+      "must_not_assert": ["本季度报告已经审计"],
+      "reason": "重要内容提示明确「第一季度报告是否经审计」勾选**否**。勾选框文本是 □是 ☐否 形式，方向极易被读反；把未审计写成已审计是性质严重的错。"
+    },
+    {
+      "id": "h-no-restatement",
+      "importance": "normal",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "公司是否需追溯调整或重述以前年度会计数据",
+            "locator": "loc:v1/page:3/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": ["追溯调整或重述"],
+      "must_not_assert": ["公司对以前年度会计数据进行了追溯重述"],
+      "reason": "「是否需追溯调整或重述以前年度会计数据」同样是否定勾选。未重述意味着本期与上期可比；写成已重述会误导同比。"
+    },
+    {
+      "id": "h-admin-expense-down",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 4,
+            "exact_quote": "335,204,082.95",
+            "locator": "loc:v1/page:4/table:1"
+          },
+          {
+            "page": 4,
+            "exact_quote": "-20.28%",
+            "locator": "loc:v1/page:4/table:1"
+          },
+          {
+            "page": 4,
+            "exact_quote": "主要为报告期一次性补偿金和股份支付费用同比减少所致",
+            "locator": "loc:v1/page:4/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["335204082.95", "-20.28%"],
+      "must_not_assert": ["管理费用下降为经常性改善"],
+      "reason": "管理费用 335,204,082.95 元、-20.28%，公司自述原因是「一次性补偿金和股份支付费用同比减少」——含一次性因素，不能读成持续的经常性改善。"
+    },
+    {
+      "id": "h-securities-symbol",
+      "importance": "normal",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "证券代码：002410",
+            "locator": "loc:v1/page:2/paragraph:1"
+          },
+          {
+            "page": 2,
+            "exact_quote": "证券简称：广联达",
+            "locator": "loc:v1/page:2/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": ["002410", "广联达"],
+      "must_not_assert": ["广联达证券代码为0024100"],
+      "reason": "证券代码 002410（深市中小板/主板六位码）。深市代码是 6 位，写成 5 位或 7 位都是抄错。"
+    },
+    {
+      "id": "h-fair-value-other-equity",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 4,
+            "exact_quote": "917,404.02",
+            "locator": "loc:v1/page:4/table:1"
+          },
+          {
+            "page": 4,
+            "exact_quote": "主要为持有的明源云、京城佳业和筑友智造股权的公允价值变动所致",
+            "locator": "loc:v1/page:4/table:1"
+          }
+        ]
+      ],
+      "must_preserve": ["917404.02", "明源云"],
+      "must_not_assert": ["其他权益工具投资公允价值变动为-19,620,616.32元"],
+      "reason": "其他权益工具投资公允价值变动 917,404.02 元（本期为正），上年同期为 -19,620,616.32 元。两列数字相邻，正负号与期间都易互换。"
+    }
+  ]
+}
