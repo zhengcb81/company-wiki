@@ -3,7 +3,8 @@
 分支：`codex/du2-layout-20261013`　base：`5a297244549d54c34f382835b876ec3d181fcd24`
 （检查过：base 就是本 worktree 起点，`git diff --name-only 5a29724...HEAD` 只含本 lane 四个独占路径）
 worktree：`C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-20261013/layout`
-实现 commit：`dc479732cb6818d1b41a4465e199ea2e5263ddb0`（交接文件随后追加一次提交以准确记录 SHA）
+实现 commit：`dc479732cb6818d1b41a4465e199ea2e5263ddb0`（初版）、
+`a7868ba75fc8450117e4e7cc88ee38d396cfe76e`（完工后逐条复核的修复）；交接文件随后追加一次提交以准确记录 SHA。
 
 状态：**已实现、已测试、未接生产**。全 lane 只有一个公开函数，没有任何生产入口调用它。
 

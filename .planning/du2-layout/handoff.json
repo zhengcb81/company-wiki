@@ -3,7 +3,8 @@
   "lane": "DU2-LAYOUT",
   "base_sha": "5a297244549d54c34f382835b876ec3d181fcd24",
   "implementation_commits": [
-    "dc479732cb6818d1b41a4465e199ea2e5263ddb0"
+    "dc479732cb6818d1b41a4465e199ea2e5263ddb0",
+    "a7868ba75fc8450117e4e7cc88ee38d396cfe76e"
   ],
   "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-20261013/layout",
   "branch": "codex/du2-layout-20261013",
