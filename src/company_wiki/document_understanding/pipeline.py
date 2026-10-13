@@ -144,6 +144,14 @@ def understand_units(
     }
 
 
+
+def _narrative_expectation(route: Mapping[str, Any], packages: Mapping[str, Any]) -> bool | None:
+    if route["family"] in NARRATIVE_FAMILIES or any(
+        entry.get("reading_family") in NARRATIVE_FAMILIES for entry in packages.get("packages", ())
+    ):
+        return True
+    return False if route["family"] == "administrative" else None
+
 def _plan(
     route: Mapping[str, Any],
     profile: Mapping[str, Any],
@@ -158,7 +166,7 @@ def _plan(
         "regime": route["regime"],
         "confidence": route["confidence"],
         "disposition_hint": route["disposition_hint"],
-        "expects_business_narrative": route["family"] in NARRATIVE_FAMILIES,
+        "expects_business_narrative": _narrative_expectation(route, packages),
         "read_first_roles": [
             entry["section_role"]
             for entry in profile.get("section_priorities", ())
@@ -183,7 +191,7 @@ def _pipeline_diagnostics(
     into "there was nothing to read".
     """
     diagnostics: list[dict[str, Any]] = []
-    expects_narrative = route["family"] in NARRATIVE_FAMILIES
+    expects_narrative = _narrative_expectation(route, packages)
     package_count = packages.get("package_count", 0)
 
     if expects_narrative and not package_count:
@@ -197,7 +205,7 @@ def _pipeline_diagnostics(
                 ),
             }
         )
-    if not expects_narrative:
+    if expects_narrative is False:
         diagnostics.append(
             {
                 "code": "NO_NARRATIVE_EXPECTED",
@@ -207,6 +215,9 @@ def _pipeline_diagnostics(
                 ),
             }
         )
+    if expects_narrative is None:
+        diagnostics.append({"code": "NARRATIVE_EXPECTATION_UNKNOWN",
+                            "detail": "unclassified purpose; absence of business content has not been established"})
     if route["confidence"] in {"low", "unknown"}:
         diagnostics.append(
             {

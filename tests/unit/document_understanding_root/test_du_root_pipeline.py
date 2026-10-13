@@ -216,7 +216,8 @@ def test_unknown_document_is_still_readable():
         declared_kind="unknown",
     )
     assert result["route"]["disposition_hint"] == "generic_read"
-    assert result["plan"]["expects_business_narrative"] is False
+    # Unknown purpose is not evidence that business content is absent.
+    assert result["plan"]["expects_business_narrative"] is None
 
 
 def test_limits_are_forwarded_and_never_raised():

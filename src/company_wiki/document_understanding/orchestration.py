@@ -138,6 +138,7 @@ def build_dependency_packages(
                 "required_context_unit_ids": required,
                 "completeness": semantic.get("completeness", "unknown"),
                 "priority": 4 - int(anchor_plan["priority"]) if anchor_plan else role_priority.get(role, role_priority["unknown"]),
+                "reading_family": anchor_plan.get("family"),
                 "reading_profile_id": anchor_plan.get("profile_id"),
                 "reading_profile_version": anchor_plan.get("profile_version"),
                 "summary_focus": anchor_plan.get("summary_focus", ""),
