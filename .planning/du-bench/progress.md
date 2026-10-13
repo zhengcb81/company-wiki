@@ -119,3 +119,38 @@ single finding is that `cn-ir` exhausted no budget at all — 11 candidates,
 candidate-generation problem, not a cap problem. US holdout remains
 UNAVAILABLE by design rather than filled with synthetic samples.
 
+
+## 2026-10-13 — session 2: native replay re-verification + benchmark self-fixes
+
+- Re-ran the C node against all four real originals. Originals still SHA-match both
+  gold and the ROOT manifest; mtime_ns identical to session start
+  (1608820218000000000 / 1779228233262998600 / 1779046989673803600 /
+  1761392825000000000). No PDF was copied into the worktree.
+- Native replay reproduces exactly: cn-equity FAIL 0.000, cn-ir FAIL 0.143,
+  cn-q-business FAIL 0.667, hk-annual FAIL 0.000 (critical denominators 7/7/9/6).
+  Exit 1, 0 network / 0 model / 0 paid calls, raw_unchanged true, config unchanged.
+- Known misses reproduced by inspecting the selected text directly:
+  恒锋 建设期/第一期/第二期 all absent (募集资金 present), 449 candidates with
+  353 omitted; all 7 hk-annual facts absent including the p12 store table.
+- Two corrections to the plan's phrasing: the 名创 miss is the p12 store-table
+  facts (the bare string "TOP TOY" does appear elsewhere in the selection), and
+  the 96-span cap binds on only cn-equity and hk-annual, not on cn-ir/cn-q-business.
+- Found and fixed four real defects in the benchmark itself:
+  1. peak_rss_bytes() always returned None — ctypes called GetProcessMemoryInfo
+     without argtypes/restype, truncating the 64-bit HANDLE so both psapi and K32
+     returned 0. Now measured: 121,929,728 native / 21,049,344 offline.
+  2. install_sentinel() rewrote the sentinel unconditionally, so sentinel_stable
+     compared a fresh file against itself and could never detect a clobbered
+     pre-existing sentinel. Now captured pre-run and restored byte+mtime identical.
+  3. restore_sentinel() had a NameError typo, caught by the new sentinel test.
+  4. config_unchanged reported count=0 with no --probe-config, looking like a pass
+     while proving nothing; the probe count is now printed and includes the sentinel.
+- Added two regression tests (sentinel preservation across a real CLI run, peak-RSS
+  measurement). Suite: 65 passed / 5 skipped offline; 5 real-data replay tests pass
+  with DU_BENCH_ALLOW_REAL_DATA=1.
+- Removed all 10 _scratch_* inspectors and __pycache__; kept a compact
+  evidence.json so no measured number depends on throwaway scripts.
+- Commits on codex/du-benchmark-20261013: ad77758d (implementation),
+  74872d03 / 3b7aa7ab / ebb5453f / aa817a4a / 1d5cfaa5 (handoff + evidence).
+  31 files, all inside tools/document_understanding_benchmark/** and
+  .planning/du-bench/**. .du-bench-out/ is regenerable scratch, not committed.
