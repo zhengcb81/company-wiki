@@ -1,0 +1,51 @@
+﻿[
+    {
+        "sample_id":  "miniso-hk-annual",
+        "path":  "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\名创优品\\2024年度报告（港股）.pdf",
+        "sha256":  "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+        "bytes":  2230253,
+        "mtime_utc":  "2025-10-25T11:47:05.0000000Z"
+    },
+    {
+        "sample_id":  "hengfeng-offering",
+        "path":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\恒锋工具\\raw\\research\\恒锋工具：2020年向特定对象发行A股股票募集说明书（注册稿）.PDF",
+        "sha256":  "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+        "bytes":  3812541,
+        "mtime_utc":  "2020-12-24T14:30:18.0000000Z"
+    },
+    {
+        "sample_id":  "wanrun-ir",
+        "path":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万润股份\\raw\\research\\万润股份：投资者关系活动记录表20260515.pdf",
+        "sha256":  "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "bytes":  153851,
+        "mtime_utc":  "2026-05-19T22:03:53.2629986Z"
+    },
+    {
+        "sample_id":  "dinglong-confirmation",
+        "path":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\鼎龙股份\\raw\\prospectus\\鼎龙股份：控股股东、实际控制人对《湖北鼎龙化学股份有限公司首次公开发行股票并在创业板上市招股说明书》的确认意见.pdf",
+        "sha256":  "0829538f0707650db99852c5e269abe9e0d7e558d54d93e0a2c0be15fe0d0fa7",
+        "bytes":  287642,
+        "mtime_utc":  "2026-05-24T20:13:52.0670681Z"
+    },
+    {
+        "sample_id":  "amec-q1",
+        "path":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2026年第一季度报告.pdf",
+        "sha256":  "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+        "bytes":  217264,
+        "mtime_utc":  "2026-05-17T19:43:09.6738036Z"
+    },
+    {
+        "sample_id":  "msft-10k-html",
+        "path":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\微软\\raw\\financial_reports\\annual\\微软_10-K_2025.htm",
+        "sha256":  "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "bytes":  8158067,
+        "mtime_utc":  "2026-07-21T19:46:29.6163293Z"
+    },
+    {
+        "sample_id":  "msft-earnings-txt",
+        "path":  "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\Microsoft\\raw\\transcripts\\MSFT_Q4_2026_earnings_call.txt",
+        "sha256":  "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "bytes":  66324,
+        "mtime_utc":  "2026-10-08T00:10:13.6923490Z"
+    }
+]

@@ -1,0 +1,229 @@
+{
+  "schema_version": "du-handoff/1",
+  "lane": "du-profiles",
+  "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
+  "implementation_commits": [
+    "76727f896ab4280a0b1613929e94f7b6dad751ee"
+  ],
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/profiles",
+  "branch": "codex/du-profiles-20261013",
+  "status": "complete_not_wired_to_production",
+  "owned_paths": [
+    "src/company_wiki/document_understanding/profiles/**",
+    "tests/unit/document_understanding_profiles/**",
+    "tests/fixtures/document_understanding_profiles/**",
+    ".planning/du-profiles/**"
+  ],
+  "implementation_files": [
+    "src/company_wiki/document_understanding/profiles/__init__.py",
+    "src/company_wiki/document_understanding/profiles/vocabulary.py",
+    "src/company_wiki/document_understanding/profiles/model.py",
+    "src/company_wiki/document_understanding/profiles/registry.py",
+    "src/company_wiki/document_understanding/profiles/observation.py",
+    "src/company_wiki/document_understanding/profiles/signals.py",
+    "src/company_wiki/document_understanding/profiles/decision.py"
+  ],
+  "public_interfaces": {
+    "module": "company_wiki.document_understanding.profiles",
+    "route_document": "route_document(observation: Mapping, *, limits: Mapping | None = None) -> dict  # schema du-route/1",
+    "get_profile": "get_profile(profile_id: str) -> dict",
+    "list_profiles": "list_profiles() -> list[dict]",
+    "route_output_keys": [
+      "schema_version",
+      "profile_id",
+      "profile_version",
+      "regime",
+      "family",
+      "subtype",
+      "confidence",
+      "reasons",
+      "alternatives",
+      "child_routes",
+      "disposition_hint"
+    ],
+    "profiles_registered": 15,
+    "profile_ids": [
+      "cn_annual",
+      "cn_interim",
+      "cn_quarterly",
+      "hk_periodic",
+      "sec_10k",
+      "sec_10q",
+      "sec_20f",
+      "prospectus",
+      "offering",
+      "investor_qa",
+      "earnings_call",
+      "results_release",
+      "presentation",
+      "administrative",
+      "generic"
+    ],
+    "families_covered": [
+      "annual",
+      "interim",
+      "quarterly",
+      "prospectus",
+      "offering",
+      "results_release",
+      "presentation",
+      "investor_qa",
+      "earnings_call",
+      "administrative",
+      "unknown"
+    ],
+    "limits_defaults": {
+      "max_probe_units": 200,
+      "max_probe_chars": 64000,
+      "max_child_routes": 16
+    },
+    "notes": "Profiles cannot raise limits; only the caller can lower them. The package imports only the standard library and never mutates the input observation."
+  },
+  "interface_deviations": [
+    {
+      "field": "route_document.child_routes[].profile_id",
+      "deviation": "INTERFACES.md section 3 lists child_routes entries as {unit_ids, profile_id, reason}. In-document Q&A ranges emit profile_id='investor_qa'; unread external attachments emit profile_id='generic' with reason EXTERNAL_ATTACHMENT_NOT_READ.",
+      "impact": "Additive only; no field is missing or renamed. ROOT may ignore child_routes without breaking the wire."
+    },
+    {
+      "field": "route_document.reasons[].code",
+      "deviation": "Reason codes are a closed set defined in vocabulary.py. Three codes appear that INTERFACES.md section 3 does not name explicitly: IN_DOCUMENT_QA_RANGE (child-route reason), CHILD_RANGE_NOT_READ and LOW_INFORMATION.",
+      "impact": "INTERFACES.md fixes the reason *shape* {code, unit_ids, detail} but does not freeze the code vocabulary, so this is additive. ROOT should treat unknown codes as informational."
+    },
+    {
+      "field": "get_profile(profile_id)",
+      "deviation": "Raises KeyError for an unknown profile id and TypeError/ValueError for a malformed one, instead of returning a fallback profile.",
+      "impact": "Deliberate: inventing a profile would hide a real wiring mistake. Callers must handle KeyError."
+    }
+  ],
+  "A_evidence": {
+    "command": "python -X utf8 -m pytest tests/unit/document_understanding_profiles -q",
+    "exit_code": 0,
+    "elapsed_seconds": 4.34,
+    "result_path": "tests/unit/document_understanding_profiles/",
+    "result": "150 passed",
+    "notes": "A node froze the du-input/1 fixtures plus the expected-route matrix first and ran RED (64 failing) before any implementation existed. The oracle was never relaxed."
+  },
+  "B_evidence": {
+    "command": "python -X utf8 -m pytest tests/unit/document_understanding_profiles -q",
+    "exit_code": 0,
+    "elapsed_seconds": 4.34,
+    "result_path": "tests/unit/document_understanding_profiles/test_b_invariants.py",
+    "result": "150 passed (27 of them in test_b_invariants.py)",
+    "notes": "B node covers input immutability, determinism, JSON-serializability, vocabulary closure, budget monotonicity (a smaller probe may never raise confidence), contradiction survival under any budget, never-skip, no path/company leakage and 5k-unit scale trend."
+  },
+  "C_evidence": {
+    "command": "python -X utf8 .planning/du-profiles/_cnode_real_probe.py",
+    "exit_code": 0,
+    "elapsed_seconds": 22.652,
+    "result_path": ".planning/du-profiles/c-evidence/c-node-real-originals.json",
+    "result_summary_path": ".planning/du-profiles/c-evidence/C-NODE-SUMMARY.md",
+    "result": "7 documents probed, 7 OBSERVED, 0 UNAVAILABLE, 7/7 family agreement with the card, 0 headline-defect regressions",
+    "recorded_shape_command": "python -X utf8 .planning/du-profiles/_cnode_probe.py",
+    "recorded_shape_result_path": ".planning/du-profiles/_cnode_probe.py",
+    "recorded_shape_result": "20 recorded samples routed, 19/20 family agreement; the single non-agreement is the honest generic_read for the zero-readable-character confirmation page whose wording exists only in the filename",
+    "acceptance_command": "python -X utf8 .planning/du-profiles/_acceptance.py",
+    "acceptance_result": "ALL ACCEPTANCE CRITERIA SATISFIED (frozen functions callable; confirmation letter never a prospectus; A-share 发行A股股票 recognized; SEC/HK vocabularies separate; unknown readable; reasons traceable; no company name or path in executable logic)",
+    "headline_defects_on_real_originals": [
+      {
+        "defect": "defect-a",
+        "sample": "companies/鼎龙股份/raw/prospectus/鼎龙股份：控股股东、实际控制人对《…首次公开发行股票并在创业板上市招股说明书》的确认意见.pdf",
+        "sha256_verified": "0829538f0707650db99852c5e269abe9e0d7e558d54d93e0a2c0be15fe0d0fa7",
+        "legacy_title_route": "prospectus",
+        "this_package_route": "administrative / administrative_confirmation / administrative_candidate",
+        "real_observation": "The original is a single page whose native text is 0 characters (units_total=0, native_text_empty=true); the route reports NATIVE_SCAN_UNAVAILABLE, NO_READABLE_BODY, OPAQUE_PAGES, ADMINISTRATIVE_PURPOSE and DECLARED_KIND_CONFLICT with confidence=low.",
+        "verdict": "FIXED on the real original: not a prospectus, not silently skipped, conflict reported."
+      },
+      {
+        "defect": "defect-b",
+        "sample": "companies/恒锋工具/raw/research/恒锋工具：2020年向特定对象发行A股股票募集说明书（注册稿）.PDF",
+        "sha256_verified": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+        "legacy_title_route": "unknown",
+        "this_package_route": "offering / cn_exchange / equity_offering / read",
+        "real_observation": "96 pages, 3224 parsed units; evidence comes from the cover wording plus the 募投 section vocabulary, not from the title literal.",
+        "verdict": "FIXED on the real original: the A-share 发行A股股票 wording is recognized."
+      }
+    ],
+    "other_real_documents": [
+      {"sample": "名创优品 2024年度报告（港股）.pdf", "sha256_verified": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf", "route": "hk_periodic / hkex / annual", "verdict": "correct; SEC item numbering not applied"},
+      {"sample": "万润股份：投资者关系活动记录表20260515.pdf", "sha256_verified": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7", "route": "investor_qa / cn_exchange / ir_activity_record", "verdict": "correct"},
+      {"sample": "中微公司：2026年第一季度报告.pdf", "sha256_verified": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268", "route": "cn_quarterly / cn_exchange / quarterly", "verdict": "correct; not skipped as a whole"},
+      {"sample": "微软_10-K_2025.htm", "sha256_verified": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe", "route": "sec_10k / sec / annual / 10-k", "verdict": "correct; the legacy title router returns unknown for this file"},
+      {"sample": "MSFT_Q4_2026_earnings_call.txt", "sha256_verified": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a", "route": "earnings_call / transcript", "verdict": "correct"}
+    ],
+    "real_defects_found_and_fixed_by_c_node": [
+      "SPEAKER_TURN matched statement-footnote labels Notes:/Note: (33 occurrences in the real 246-page HK annual report), routing a genuine annual report to earnings_call. Fixed with is_speaker_turn() and the closed NON_SPEAKER_LABELS set.",
+      "A cross-regime QA/transcript candidate could outrank a regime-specific periodic candidate (_call_candidate 76 > _hk_candidate 70). Fixed with _regime_is_structural().",
+      "An SEC form label inside running prose ('...the risk factor section of our Form 10-K' on the real MSFT earnings call) was read as the document's own cover label, routing a transcript to annual. Fixed by requiring title evidence or real SEC item structure.",
+      "A 《募集资金管理办法》 heading cited inside a prospectus was read as that prospectus's own administrative purpose, routing a 429-page IPO prospectus to administrative. Fixed by separating the supplied-title channel from the in-body heading channel.",
+      "A bare 声明 section (mandatory front matter of every A-share report, and 发行人声明/特别提示 in offering documents) was read as an administrative purpose. Removed from the administrative vocabulary; 声明 is disclosure boilerplate, not a document purpose.",
+      "The plain English phrase 'annual report' fired the HK annual signal on a US filing. HK signals now require HK section vocabulary or a bilingual heading.",
+      "Traditional 中期報告 was missed because NFKC does not fold Traditional Chinese to Simplified, so a real HK interim report routed to the annual family. Both spellings are now listed explicitly, with a comment recording why NFKC is not sufficient.",
+      "Bare form names in prose were trusted, so a 10-Q's own 'our annual report on Form 10-K' sentence reclassified it as a 10-K. A form name now only counts from a printed form label or a cover line, never from a pointer to another filing.",
+      "An offering whose only offering evidence was a later fundraising unit (front matter alone in the probed window) fell into the periodic family. Fundraising structure now identifies an offering, while a real periodic report that names itself keeps its family."
+    ],
+    "unavailable": []
+  },
+  "tests_passed": 150,
+  "tests_failed": 0,
+  "tests_not_run": [
+    "Full repository suite (out of lane scope per the card: no full suite, no CI additions).",
+    "DU-STRUCTURE and DU-BENCH suites (separate lanes).",
+    "Any production end-to-end pipeline test (this lane is not wired to production).",
+    "OCR on the scan-only 鼎龙 confirmation page and the Miniso opaque page 246 (no OCR was runnable or in scope; those documents are routed honestly as low/administrative_candidate, not proven).",
+    "Real LLM summary fidelity and section/semantic recall (ROOT/DU-STRUCTURE scope)."
+  ],
+  "coordination_note": "Two writers touched this worktree concurrently during the session: the real-original probe (_cnode_real_probe.py + c-evidence/) and the recorded-shape recheck (_cnode_probe.py + test_c_real_shape_regressions.py) were developed in parallel, and parts of signals.py / decision.py were reformatted by the other writer while this session was editing them. After the last external write the tree was re-verified end to end: 150 tests pass, ruff over `src tests/unit` is clean, compileall exits 0, and _acceptance.py passes. The delivered state is coherent, but ROOT should treat `git diff --name-only <base>...HEAD` as the authority on what shipped and should expect two commits' worth of authorship on this branch.",
+  "known_gaps": [
+    "Every real document in C evidence carries confidence=low because ROUTE_PROBE_LIMIT fires: real documents have 3000-4000 units against the frozen 200-unit/64000-char probe budget. This is an honest budget state, not a claim of high-confidence routing. Raising it is ROOT's call via the existing global limits; the profile cannot raise it.",
+    "The scan-only 鼎龙 confirmation letter is routed from its supplied title only, because its native text is genuinely empty. No OCR proof exists, so the OCR path for scanned administrative material is unproven.",
+    "The Miniso HK annual report has one opaque page (246), so native_scan=partial. Opaque-page reading is not demonstrated.",
+    "Only the family/regime decision is verified against real originals. Section priorities, semantic-unit packs and summary focus are exercised by synthetic fixtures only.",
+    "The MSFT 10-K HTML was routed from the first 4000 of 5215 normalized units; the tail was not probed.",
+    "The package is implemented but NOT wired into production. No production caller imports it yet; ROOT owns that adaptation.",
+    "US S-1/F-1 and full 8-K/6-K attachment containers still have no real sample, consistent with design.md section 10."
+  ],
+  "resource_observations": {
+    "note": "Only this lane's own bounded run is reported; no production batch was executed.",
+    "real_parse_total_seconds": 22.652,
+    "real_parse_breakdown_seconds": {
+      "miniso_hk_annual_246p": 7.069,
+      "hengfeng_offering_96p": 5.579,
+      "others_combined": 10.004
+    },
+    "real_units_parsed": 12271,
+    "units_fed_to_router_max": 4000,
+    "evidence_excerpt_bytes": 15595,
+    "evidence_excerpt_cap_bytes": 57344,
+    "evidence_json_bytes": 72866,
+    "pytest_wall_seconds": 4.34,
+    "ruff_wall_seconds": 0.15,
+    "peak_rss": "NOT_MEASURED",
+    "model_calls": 0,
+    "network_calls": 0,
+    "paid_spend_usd": 0,
+    "new_persistent_sidecar": "none; nothing is written outside .planning/du-profiles/ and the owned test/source trees"
+  },
+  "raw_preservation": {
+    "originals_read": 7,
+    "originals_copied_into_worktree": 0,
+    "originals_written_or_modified": 0,
+    "sha256_verified_before_parse": true,
+    "sha256_verified_after_parse": true,
+    "mtime_verified_unchanged": true,
+    "byte_size_verified_unchanged": true,
+    "pre_snapshot": ".planning/du-profiles/c-evidence/originals-pre-snapshot.json",
+    "post_snapshot": ".planning/du-profiles/c-evidence/originals-post-snapshot.json",
+    "max_excerpt_chars_per_document": 8192,
+    "note": "Originals live in the read-only main CWP checkout and the Dropbox source root; this lane opened them read-only and copied none of them."
+  },
+  "scratch_restore": {
+    "created_scratch": ".planning/du-profiles/c-evidence/ (evidence JSON + snapshots + summary) and the probe scripts in .planning/du-profiles/",
+    "removed_scratch": "Temporary debugging scripts (.planning/du-profiles/_tmp_*.py, _inspect_two.py) were deleted; all __pycache__ directories under the owned paths were removed before the commit.",
+    "untouched": "No production config, no catalog, no AUTO store, no download directory and no other lane's directory was created, modified or deleted.",
+    "production_config_sha_or_mtime_changed": false,
+    "sentinel_check": "config/source_catalog.yaml and all other non-owned paths are unmodified; git status lists only this lane's four owned path prefixes."
+  },
+  "install_actions": "none",
+  "next_root_action": "ROOT should (1) pick up the real implementation commit(s) recorded in implementation_commits on branch codex/du-profiles-20261013, (2) write the parent src/company_wiki/document_understanding/__init__.py (owned by ROOT, deliberately not created here), (3) adapt the existing NarrativeUnit/DocumentStructure objects into du-input/1 and call route_document, and (4) decide whether to raise the probe budget above 200 units / 64000 chars, since every real document currently reports ROUTE_PROBE_LIMIT and confidence=low. Do not treat this lane as production-enabled until step 3 lands."
+}
