@@ -2,7 +2,9 @@
   "schema_version": "du-handoff/1",
   "lane": "du-structure",
   "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
-  "implementation_commits": [],
+  "implementation_commits": [
+    "f35c5806"
+  ],
   "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/structure",
   "status": "implemented_and_tested_not_wired",
   "owned_paths": [
