@@ -265,57 +265,63 @@ def run_offline(args: argparse.Namespace) -> int:
     results: list[dict[str, Any]] = []
     mutation_reports: list[dict[str, Any]] = []
     review_reports: list[dict[str, Any]] = []
-    reviews = _load_reviews(args.review)
-    if reviews is None:
-        return EXIT_REFUSED
-    for fixture in all_fixtures():
-        gold = validate_gold(fixture["gold"])
-        observed = validate_observed(fixture["observed"])
-        result = evaluate(observed, gold, review=reviews.get(gold["sample_id"]))
-        result["fixture_id"] = fixture["fixture_id"]
-        results.append(result)
-        mutation_reports.append(run_mutation_suite(observed, gold))
-        # Measure what only a review can catch, and prove a review cannot mask
-        # a deterministic failure. Reported even when no review was supplied,
-        # because the controls inject their own verdicts.
-        review_reports.append(
-            {
-                "fixture_id": fixture["fixture_id"],
-                "semantic_only": run_review_controls(dict(observed), gold),
-                "rescue": run_rescue_controls(dict(observed), gold),
-            }
-        )
+    # install_sentinel overwrites whatever it found and hands the prior bytes
+    # back for restoration. Wrapping the whole run means a refusal, a validation
+    # error or an unexpected exception all put it back: a run must never leave
+    # content it found modified, however it exits.
+    try:
+        reviews = _load_reviews(args.review)
+        if reviews is None:
+            return EXIT_REFUSED
+        for fixture in all_fixtures():
+            gold = validate_gold(fixture["gold"])
+            observed = validate_observed(fixture["observed"])
+            result = evaluate(observed, gold, review=reviews.get(gold["sample_id"]))
+            result["fixture_id"] = fixture["fixture_id"]
+            results.append(result)
+            mutation_reports.append(run_mutation_suite(observed, gold))
+            # Measure what only a review can catch, and prove a review cannot
+            # mask a deterministic failure. Reported even when no review was
+            # supplied, because the controls inject their own verdicts.
+            review_reports.append(
+                {
+                    "fixture_id": fixture["fixture_id"],
+                    "semantic_only": run_review_controls(dict(observed), gold),
+                    "rescue": run_rescue_controls(dict(observed), gold),
+                }
+            )
 
-    elapsed = time.monotonic() - started
-    exit_code = _overall_exit(results)
+        elapsed = time.monotonic() - started
+        exit_code = _overall_exit(results)
 
-    report = {
-        "schema_version": "du-bench-run/1",
-        "mode": "offline",
-        "entry_point": f"{package_name}.__main__",
-        "fixtures_total": len(results),
-        "fixture_bytes": size,
-        "fixture_budget_bytes": OFFLINE_FIXTURE_BUDGET,
-        "network_calls": 0,
-        "model_calls": 0,
-        "paid_calls": 0,
-        "elapsed_seconds": round(elapsed, 3),
-        "by_scope": _scope_summary(results),
-        "results": results,
-        "mutations": mutation_reports,
-        "review_controls": review_reports,
-        "resources": resource_report(
-            elapsed_seconds=elapsed,
-            derived_bytes=directory_size(owned),
-            scratch_bytes=directory_size(owned),
-            raw_bytes=0,
-            model_calls=0,
-            peak_rss=peak_rss_bytes(),
-        ),
-    }
-    _write_json(owned / "summary.json", report)
+        report = {
+            "schema_version": "du-bench-run/1",
+            "mode": "offline",
+            "entry_point": f"{package_name}.__main__",
+            "fixtures_total": len(results),
+            "fixture_bytes": size,
+            "fixture_budget_bytes": OFFLINE_FIXTURE_BUDGET,
+            "network_calls": 0,
+            "model_calls": 0,
+            "paid_calls": 0,
+            "elapsed_seconds": round(elapsed, 3),
+            "by_scope": _scope_summary(results),
+            "results": results,
+            "mutations": mutation_reports,
+            "review_controls": review_reports,
+            "resources": resource_report(
+                elapsed_seconds=elapsed,
+                derived_bytes=directory_size(owned),
+                scratch_bytes=directory_size(owned),
+                raw_bytes=0,
+                model_calls=0,
+                peak_rss=peak_rss_bytes(),
+            ),
+        }
+        _write_json(owned / "summary.json", report)
+    finally:
+        sentinel_restored = restore_sentinel(owned, sentinel)
 
-    sentinel_restored = restore_sentinel(owned, sentinel)
     print(f"offline fixtures: {len(results)} ({size} bytes)")
     for result in results:
         print(_summary_line(result))
@@ -363,7 +369,8 @@ def run_native(args: argparse.Namespace) -> int:
     mark_owned(owned)
 
     # Capture any pre-existing sentinel *before* touching it, then put it back
-    # byte-identical at the end. A run must never rewrite content it found.
+    # byte-identical however this function exits. A refusal, a validation error
+    # or an unexpected exception must not leave content this run found modified.
     sentinel = install_sentinel(owned, {"mode": "native"}, preserve_existing=True)
 
     probes = [Path(value) for value in (args.probe_file or [])]
@@ -371,57 +378,61 @@ def run_native(args: argparse.Namespace) -> int:
     probes.append(Path(sentinel["path"]))
     before = fingerprint_many(probes)
 
-    reviews = _load_reviews(args.review)
-    if reviews is None:
-        return EXIT_REFUSED
-
-    started = time.monotonic()
     results: list[dict[str, Any]] = []
     observations: list[dict[str, Any]] = []
-    for gold in golds:
-        resolved = resolve_original(gold["sample_id"], gold["source_sha256"], bindings)
-        if resolved["status"] != "OK":
-            observed = unavailable_observed(gold, resolved["reason"])
-            observed["execution"]["resolved_path"] = resolved.get("path")
-        else:
-            path = Path(resolved["path"])
-            original_before = file_fingerprint(path)
-            try:
-                observed = observe_native(
-                    path,
-                    sha256=gold["source_sha256"],
-                    sample_id=gold["sample_id"],
+    try:
+        reviews = _load_reviews(args.review)
+        if reviews is None:
+            return EXIT_REFUSED
+
+        started = time.monotonic()
+        for gold in golds:
+            resolved = resolve_original(gold["sample_id"], gold["source_sha256"], bindings)
+            if resolved["status"] != "OK":
+                observed = unavailable_observed(gold, resolved["reason"])
+                observed["execution"]["resolved_path"] = resolved.get("path")
+            else:
+                path = Path(resolved["path"])
+                original_before = file_fingerprint(path)
+                try:
+                    observed = observe_native(
+                        path,
+                        sha256=gold["source_sha256"],
+                        sample_id=gold["sample_id"],
+                    )
+                except ObserverUnavailable as exc:
+                    observed = unavailable_observed(gold, f"observer unavailable: {exc}")
+                finally:
+                    original_after = file_fingerprint(path)
+                observed["execution"]["resolved_path"] = str(path)
+                observed["execution"]["carrier"] = carrier_support(path)
+                observed["execution"]["raw_unchanged"] = (
+                    original_before.get("sha256") == original_after.get("sha256")
+                    and original_before.get("mtime_ns") == original_after.get("mtime_ns")
                 )
-            except ObserverUnavailable as exc:
-                observed = unavailable_observed(gold, f"observer unavailable: {exc}")
-            finally:
-                original_after = file_fingerprint(path)
-            observed["execution"]["resolved_path"] = str(path)
-            observed["execution"]["carrier"] = carrier_support(path)
-            observed["execution"]["raw_unchanged"] = (
-                original_before.get("sha256") == original_after.get("sha256")
-                and original_before.get("mtime_ns") == original_after.get("mtime_ns")
-            )
-        result = evaluate(observed, gold, review=reviews.get(gold["sample_id"]))
-        results.append(result)
-        observations.append(observed)
+            result = evaluate(observed, gold, review=reviews.get(gold["sample_id"]))
+            results.append(result)
+            observations.append(observed)
 
-    elapsed = time.monotonic() - started
-    after = fingerprint_many(probes)
-    restoration = compare_fingerprints(before, after)
-    sentinel_restored = restore_sentinel(owned, sentinel)
+        elapsed = time.monotonic() - started
+        after = fingerprint_many(probes)
+        restoration = compare_fingerprints(before, after)
+        # Restore before building the report so its restoration section is
+        # populated; the finally below is the safety net for every early exit.
+        sentinel_restored = restore_sentinel(owned, sentinel)
 
-    raw_unchanged = all(
-        observation.get("execution", {}).get("raw_unchanged", True) for observation in observations
-    )
+        raw_unchanged = all(
+            observation.get("execution", {}).get("raw_unchanged", True)
+            for observation in observations
+        )
 
-    exit_code = _overall_exit(results)
-    report = {
-        "schema_version": "du-bench-run/1",
-        "mode": "native",
-        "entry_point": f"{package_name}.__main__",
-        "samples_total": len(results),
-        "bindings_supplied": len(bindings),
+        exit_code = _overall_exit(results)
+        report = {
+            "schema_version": "du-bench-run/1",
+            "mode": "native",
+            "entry_point": f"{package_name}.__main__",
+            "samples_total": len(results),
+            "bindings_supplied": len(bindings),
         "resolved": sum(1 for o in observations if o.get("coverage", {}).get("native_scan") != "unavailable"),
         "unavailable": sum(
             1 for o in observations if o.get("coverage", {}).get("native_scan") == "unavailable"
@@ -453,7 +464,11 @@ def run_native(args: argparse.Namespace) -> int:
             peak_rss=peak_rss_bytes(),
         ),
     }
-    _write_json(owned / "summary.json", report)
+        _write_json(owned / "summary.json", report)
+    finally:
+        # Safety net: put a pre-existing sentinel back whatever happened above.
+        # Idempotent, so the normal path doing it first is harmless.
+        restore_sentinel(owned, sentinel)
 
     print(f"native samples: {len(results)} (bindings={len(bindings)})")
     for result in results:
