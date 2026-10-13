@@ -3,24 +3,24 @@
 PLAN_ID: document-understanding-2026-10-13
 PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans
 Owner: ROOT
-状态：调查/设计/三条分包准备完成，可由用户分发；生产解析链未切换。
+状态：用户已确认共享引擎＋多份阅读策略配置；三条分包已分发、独立施工中；生产解析链未切换。
 
 2026-10-13：用户已发出三包，当前由各自harness施工。ROOT已完成W08 RF/Audit验收并线/必要安装，详母计划W08接收入口；现在准备主线真实G2及三DU包集成，三包代码与各自PWF不由ROOT代写。
 
 ## 目标与边界
 
-根据真实 A/H/US 文档及现有代码，设计文档类型/章节驱动的精选证据与摘要架构。原件不改，不增加逐材料授权、不复制全量 PDF/MD，不新增研究结论 writer。复用 SourceRef/SourceExport、AUTO Store、现有资源预算与配置供应商。W08 RF/Audit 接收和母计划真实 G2/G4/G5 不被替代或标成完成。
+根据真实 A/H/US 文档及现有代码，实施已确认的共享引擎与文档类型/章节阅读策略。原件不改，不增加逐材料授权、不复制全量 PDF/MD，不新增研究结论 writer。复用 SourceRef/SourceExport、AUTO Store、现有资源预算与配置供应商。W08 RF/Audit 接收已完成；母计划真实 G2/G4/G5 保持开放，不能用模块交付或本轮调查替代。
 
 ## 阶段
 
 1. [complete] 读当前路由/规范化/选择/摘要边界与历史设计；20份原件原生扫描/重点抽读、4页视觉核对、3份真实selector回放。
 2. [complete] 已写design、INTERFACES、implementation，明确共用结构/策略/语义证据、资源与A/B/C测试。
-3. [complete] 三卡、冻结接口/交接格式和独立worktree已准备；共同基线7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8，三目录干净。
-4. [pending] 三包实施、ROOT接线、真实摘要/公司G2/G4/G5；本轮不执行生产重构。
+3. [complete] 三卡、冻结接口/交接格式和独立worktree已准备并分发；共同基线7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8，创建时已验证干净。
+4. [in_progress] 三包各自实施；ROOT准备现有units适配及G2真实输入/配置/预算。生产接线、真实摘要和公司G2/G4/G5验收仍待完成。
 
 ## Next Step
 
-用户可分发三张READY卡；ROOT继续接W08剩余两包，之后按implementation整合新文档层。未启动独立harness。
+三包按原卡和DU/1接口继续独立施工。ROOT不写它们的独占模块和各自PWF，准备共享生产适配及真实G2；收到交付后集中接收、并线、跨层离线验证，再合并母计划真实G2/G4/G5。新增文档类型先扩展策略，不建立另一套引擎或技能。
 
 ## Errors Encountered
 

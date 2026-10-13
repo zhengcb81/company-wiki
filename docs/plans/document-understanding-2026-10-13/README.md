@@ -1,10 +1,10 @@
 # 文档理解升级 — ROOT 总入口
 
-2026-10-13：调查和施工设计已形成，生产解析链尚未切换。与原跨市场母计划相连；W08 RF/Audit 接收、真实 G2/G4/G5 保持开放。本目录不是新的许可或人工签收系统。
+2026-10-13：用户已确认“一个共享引擎＋多份文档阅读策略配置”，三包已分发并独立施工，生产解析链尚未切换。与原跨市场母计划相连；W08 RF/Audit 接收并线已完成，真实 G2/G4/G5 保持开放。本目录不是新的许可或人工签收系统。
 
 先读 [实证 findings](findings.md)、[设计](design.md)、[实施及测试](implementation.md)。三条线共用 [接口](INTERFACES.md)，各自拥有独立 checkout 和写入目录。ROOT 负责生产适配、并线、跨层测试、母计划状态。
 
-| 可同时启动的施工卡 | 工作目录（各为独立 CWP worktree） | 独占产物 |
+| 已分发的独立施工卡 | 工作目录（各为独立 CWP worktree） | 独占产物 |
 |---|---|---|
 | [DU-PROFILES：文档路由与阅读策略](cards/DU-PROFILES.md) | `C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/profiles` | `src/company_wiki/document_understanding/profiles/` |
 | [DU-STRUCTURE：跨页章节与语义单元](cards/DU-STRUCTURE.md) | `C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/structure` | `src/company_wiki/document_understanding/structure/` |
@@ -12,7 +12,7 @@
 
 各卡同时列出自己的 tests/fixtures/交接路径。施工期间不改对方代码，不改现有生产入口，不改母 PWF、依赖清单、hook/CI、生产配置。缺共享字段写入各自 `handoff.json`，由 ROOT 一次协调；不自创不兼容接口。三个包可用冻结 JSON 夹具独立施工，不等待彼此；ROOT 接入阶段才依赖三包。
 
-三个工作目录已创建且干净，共同base为`7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8`。它们是稀疏代码checkout，各约20MiB，共享现有Git对象；没有复制公司原件/数据库/旧派生。已包含现有hooks与各自PWF路径。无需再建worktree或切分支，用户直接在表中工作目录启动harness即可。
+三个工作目录创建时已验证干净，现由各自harness施工，共同base为`7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8`。它们是稀疏代码checkout，创建时各约20MiB，共享现有Git对象；没有复制公司原件/数据库/旧派生。已包含现有hooks与各自PWF路径。继续使用表中工作目录，不重新建worktree或切分支。
 
 ## 样本和边界
 
@@ -24,4 +24,4 @@
 
 ## 当前顺序
 
-ROOT 先完成本目录方案；可分发三包。接收 W08 RF/Audit → 接收三包并完成章节适配/选择/摘要一体整合 → 合并原母计划真实 G2 → G4原三家公司 → G5新三家公司 → 后续审计循环。不会用这轮样本调查替代真实研究验收。
+W08 RF/Audit 已接收并线。当前三包独立施工，ROOT准备共享生产适配及真实G2输入/配置/预算 → 接收三包并完成章节适配/选择/摘要一体整合 → 合并原母计划真实 G2 → G4原三家公司 → G5新三家公司 → 后续审计循环。不会用这轮样本调查替代真实研究验收。
