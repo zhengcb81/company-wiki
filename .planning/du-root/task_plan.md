@@ -31,30 +31,36 @@ Branch: codex/du-root-integration-20261013
 ## 阶段
 
 ### Phase 1: 三包接收与核验 — Status: in_progress
-- 读三份 handoff，核验 base、范围、测试、真实证据
-- 确认三包可同时 import 且互不冲突
+- STRUCTURE：已接收并合并（f35c5806/f8f456a3），47 测试绿
+- PROFILES：子代理收尾中（C 节点 + handoff）
+- BENCH：子代理收尾中（native 回放 + handoff）
 
-### Phase 2: 生产结构适配 adapter — Status: pending
-- `observation_adapter.py`：现有 NarrativeUnit → du-input/1
-- 保留 bbox/pdf_block/heading/DOM/table/role/column/language
-- 补 DU-S-ADAPT-1..6：heading_level、column、表头/caption 独立单元、table_id
-- 不重编 locator、不重算 SHA、不写盘
+### Phase 2: 生产结构适配 adapter — Status: complete
+- `observation_adapter.build_observation`：NarrativeUnit → du-input/1
+- 关闭 DU-S-ADAPT-2/4/6；DU-S-ADAPT-1 部分（编号标题可判，无编号需改 parser）
 
-### Phase 3: 统一编排 — Status: pending
-- route + build_structure → 候选与原子依赖包
-- 现有否定/阶段规则接到 semantic unit
-- 低价值 skip 只看 administrative_candidate
+### Phase 3: 统一编排 — Status: complete
+- `orchestration.build_dependency_packages`：structure → du-packages/1
+- `selection_bridge.dependency_closure`：只增不减，保住必需上下文与否定
+- 真实万润 QA 端到端验证：否定被保留
 
-### Phase 4: B 跨层离线节点 — Status: pending
-- 来源 → parse → route → structure → 精选 → summary stub，缓存/失败恢复
-- 不向日常 CI 加真实网络/模型
+### Phase 4: B 跨层离线节点 — Status: complete
+- `tests/unit/document_understanding_root/test_du_root_integration.py` 25 项合成
+- 覆盖 adapter 纯函数性/确定性/locator 透传/表头识别/lane 判定/包边界
 
-### Phase 5: C 真实数据节点 — Status: pending
-- 真实原件跑通；记录真实结果与未证明项
-- 需要模型的部分按现有预算执行或明确 NOT_RUN
+### Phase 5: C 真实数据节点 — Status: complete
+- `test_du_root_real_samples.py` 10 项（-m real_data，bindings 驱动）
+- 4 份真实原件：恒锋两期建设跨页保留、万润否定、名创双栏、中微季报
+- 原件 SHA/mtime 未变；host-neutral（无硬编码路径）
 
-### Phase 6: 文档与母计划状态 — Status: pending
-- 更新本计划 task_plan/progress/findings 与 ARCHITECTURE
+### Phase 6: 文档与母计划状态 — Status: in_progress
+- 更新本计划 progress/findings
+- 更新母 PWF 与 docs/ARCHITECTURE
+
+### Phase 7: 三包合并与最终验收 — Status: pending
+- 合并 profiles/benchmark lane 到 ROOT
+- 全量测试 + ruff
+- 母计划状态收口
 
 ## Next Step
 
