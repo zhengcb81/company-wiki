@@ -39,7 +39,7 @@ Owner: ROOT
 并被发给模型；真实 万润 IR 原件上 213 个 shadow 单元被扣下后，证据文本减少约 43%），
 以及摘要请求漏报 structure 的 `deferred_pages`。详见 `.planning/du-root/handoff.md` 自查一节。
 
-实测对照（与基线同一证据预算，未多选提分）：development 关键事实召回 0.220 → **0.384**，
+实测对照（与基线同一证据预算，未多选提分）：development 关键事实召回 0.175 → **0.324**，
 holdout 0.000 → **0.350**；恒锋「建设期」0.000 → **0.857**，万润否定 0.143 → **1.000**。
 三份文档回退，如实记录未针对金标调参。详见 `.planning/du-root/c-node-results.md`。
 
