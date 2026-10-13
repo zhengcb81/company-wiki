@@ -1,0 +1,219 @@
+{
+ "schema_version": "du2-layout-input/1",
+ "source_ref": {
+  "source_id": "synthetic-cross_column_header",
+  "source_sha256": null
+ },
+ "coverage": {
+  "opaque_pages": [],
+  "deferred_pages": []
+ },
+ "pages": [
+  {
+   "page": 1,
+   "width": 595.0,
+   "height": 842.0,
+   "units": [
+    {
+     "unit_id": "u1",
+     "ordinal": 0,
+     "locator": "synthetic-locator-u1",
+     "text": "示例股份有限公司 2024 年年度报告",
+     "bbox": [
+      70,
+      30,
+      525,
+      44
+     ],
+     "font_size": 8.0,
+     "font_weight": "regular",
+     "kind": "header",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u3",
+     "ordinal": 2,
+     "locator": "synthetic-locator-u3",
+     "text": "Left column paragraph one discusses operations.",
+     "bbox": [
+      70,
+      120,
+      290,
+      134
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u4",
+     "ordinal": 3,
+     "locator": "synthetic-locator-u4",
+     "text": "右栏第一段叙述经营情况与订单变化。",
+     "bbox": [
+      310,
+      120,
+      525,
+      134
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u5",
+     "ordinal": 4,
+     "locator": "synthetic-locator-u5",
+     "text": "Left column paragraph two covers capacity.",
+     "bbox": [
+      70,
+      142,
+      290,
+      156
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u6",
+     "ordinal": 5,
+     "locator": "synthetic-locator-u6",
+     "text": "右栏第二段覆盖产能建设进度。",
+     "bbox": [
+      310,
+      142,
+      525,
+      156
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u7",
+     "ordinal": 6,
+     "locator": "synthetic-locator-u7",
+     "text": "Left column paragraph three adds risks.",
+     "bbox": [
+      70,
+      164,
+      280,
+      178
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u8",
+     "ordinal": 7,
+     "locator": "synthetic-locator-u8",
+     "text": "右栏第三段补充风险提示。",
+     "bbox": [
+      310,
+      164,
+      510,
+      178
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u9",
+     "ordinal": 8,
+     "locator": "synthetic-locator-u9",
+     "text": "第 1 页 共 10 页",
+     "bbox": [
+      70,
+      800,
+      525,
+      812
+     ],
+     "font_size": 8.0,
+     "font_weight": "regular",
+     "kind": "footer",
+     "upstream_hints": {}
+    }
+   ]
+  },
+  {
+   "page": 2,
+   "width": 595.0,
+   "height": 842.0,
+   "units": [
+    {
+     "unit_id": "u10",
+     "ordinal": 9,
+     "locator": "synthetic-locator-u10",
+     "text": "示例股份有限公司 2024 年年度报告",
+     "bbox": [
+      70,
+      30,
+      525,
+      44
+     ],
+     "font_size": 8.0,
+     "font_weight": "regular",
+     "kind": "header",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u11",
+     "ordinal": 10,
+     "locator": "synthetic-locator-u11",
+     "text": "Left column paragraph four discusses outlook.",
+     "bbox": [
+      70,
+      120,
+      290,
+      134
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u12",
+     "ordinal": 11,
+     "locator": "synthetic-locator-u12",
+     "text": "右栏第四段讨论后续展望。",
+     "bbox": [
+      310,
+      120,
+      525,
+      134
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u13",
+     "ordinal": 12,
+     "locator": "synthetic-locator-u13",
+     "text": "第 2 页 共 10 页",
+     "bbox": [
+      70,
+      800,
+      525,
+      812
+     ],
+     "font_size": 8.0,
+     "font_weight": "regular",
+     "kind": "footer",
+     "upstream_hints": {}
+    }
+   ]
+  }
+ ]
+}

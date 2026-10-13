@@ -1,0 +1,276 @@
+{
+ "schema_version": "du2-layout-input/1",
+ "source_ref": {
+  "source_id": "synthetic-table_header_period_unit_footnote",
+  "source_sha256": null
+ },
+ "coverage": {
+  "opaque_pages": [],
+  "deferred_pages": []
+ },
+ "pages": [
+  {
+   "page": 1,
+   "width": 595.0,
+   "height": 842.0,
+   "units": [
+    {
+     "unit_id": "u1",
+     "ordinal": 0,
+     "locator": "synthetic-locator-u1",
+     "text": "表1 门店数量分布",
+     "bbox": [
+      70,
+      110,
+      180,
+      124
+     ],
+     "font_size": 11.0,
+     "font_weight": "bold",
+     "kind": "caption",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u2",
+     "ordinal": 1,
+     "locator": "synthetic-locator-u2",
+     "text": "截至2024年12月31日",
+     "bbox": [
+      380,
+      130,
+      520,
+      142
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u3",
+     "ordinal": 2,
+     "locator": "synthetic-locator-u3",
+     "text": "单位：家",
+     "bbox": [
+      455,
+      150,
+      520,
+      162
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u4",
+     "ordinal": 3,
+     "locator": "synthetic-locator-u4",
+     "text": "地区",
+     "bbox": [
+      70,
+      175,
+      110,
+      188
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u5",
+     "ordinal": 4,
+     "locator": "synthetic-locator-u5",
+     "text": "2023年",
+     "bbox": [
+      370,
+      175,
+      430,
+      188
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u6",
+     "ordinal": 5,
+     "locator": "synthetic-locator-u6",
+     "text": "2024年",
+     "bbox": [
+      470,
+      175,
+      530,
+      188
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u7",
+     "ordinal": 6,
+     "locator": "synthetic-locator-u7",
+     "text": "中国内地",
+     "bbox": [
+      70,
+      198,
+      130,
+      211
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u8",
+     "ordinal": 7,
+     "locator": "synthetic-locator-u8",
+     "text": "3,926",
+     "bbox": [
+      380,
+      198,
+      425,
+      211
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u9",
+     "ordinal": 8,
+     "locator": "synthetic-locator-u9",
+     "text": "4,386",
+     "bbox": [
+      485,
+      198,
+      530,
+      211
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u10",
+     "ordinal": 9,
+     "locator": "synthetic-locator-u10",
+     "text": "海外",
+     "bbox": [
+      70,
+      220,
+      110,
+      233
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u11",
+     "ordinal": 10,
+     "locator": "synthetic-locator-u11",
+     "text": "2,487",
+     "bbox": [
+      380,
+      220,
+      425,
+      233
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u12",
+     "ordinal": 11,
+     "locator": "synthetic-locator-u12",
+     "text": "3,118",
+     "bbox": [
+      485,
+      220,
+      530,
+      233
+     ],
+     "font_size": 9.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u13",
+     "ordinal": 12,
+     "locator": "synthetic-locator-u13",
+     "text": "合计",
+     "bbox": [
+      70,
+      242,
+      110,
+      255
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u14",
+     "ordinal": 13,
+     "locator": "synthetic-locator-u14",
+     "text": "6,413",
+     "bbox": [
+      380,
+      242,
+      425,
+      255
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u15",
+     "ordinal": 14,
+     "locator": "synthetic-locator-u15",
+     "text": "7,504",
+     "bbox": [
+      485,
+      242,
+      530,
+      255
+     ],
+     "font_size": 9.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u16",
+     "ordinal": 15,
+     "locator": "synthetic-locator-u16",
+     "text": "注：数据来源于公司内部统计。",
+     "bbox": [
+      70,
+      268,
+      270,
+      280
+     ],
+     "font_size": 8.0,
+     "font_weight": "regular",
+     "kind": "footnote",
+     "upstream_hints": {}
+    }
+   ]
+  }
+ ]
+}

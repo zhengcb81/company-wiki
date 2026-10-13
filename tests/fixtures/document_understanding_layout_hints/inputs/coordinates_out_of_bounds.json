@@ -1,0 +1,84 @@
+{
+ "schema_version": "du2-layout-input/1",
+ "source_ref": {
+  "source_id": "synthetic-coordinates_out_of_bounds",
+  "source_sha256": null
+ },
+ "coverage": {
+  "opaque_pages": [],
+  "deferred_pages": []
+ },
+ "pages": [
+  {
+   "page": 1,
+   "width": 595.0,
+   "height": 842.0,
+   "units": [
+    {
+     "unit_id": "u1",
+     "ordinal": 0,
+     "locator": "synthetic-locator-u1",
+     "text": "正常单元一。",
+     "bbox": [
+      70,
+      100,
+      300,
+      114
+     ],
+     "font_size": 10.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u2",
+     "ordinal": 1,
+     "locator": "synthetic-locator-u2",
+     "text": "横向越界单元。",
+     "bbox": [
+      600,
+      100,
+      700,
+      120
+     ],
+     "font_size": 10.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u3",
+     "ordinal": 2,
+     "locator": "synthetic-locator-u3",
+     "text": "纵向越界单元。",
+     "bbox": [
+      70,
+      -20,
+      300,
+      10
+     ],
+     "font_size": 10.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u4",
+     "ordinal": 3,
+     "locator": "synthetic-locator-u4",
+     "text": "正常单元二。",
+     "bbox": [
+      70,
+      200,
+      300,
+      214
+     ],
+     "font_size": 10.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    }
+   ]
+  }
+ ]
+}

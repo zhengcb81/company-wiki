@@ -1,0 +1,100 @@
+{
+ "schema_version": "du2-layout-input/1",
+ "source_ref": {
+  "source_id": "synthetic-year_not_heading",
+  "source_sha256": null
+ },
+ "coverage": {
+  "opaque_pages": [],
+  "deferred_pages": []
+ },
+ "pages": [
+  {
+   "page": 1,
+   "width": 595.0,
+   "height": 842.0,
+   "units": [
+    {
+     "unit_id": "u1",
+     "ordinal": 0,
+     "locator": "synthetic-locator-u1",
+     "text": "经营情况讨论",
+     "bbox": [
+      70,
+      100,
+      190,
+      120
+     ],
+     "font_size": 14.0,
+     "font_weight": "bold",
+     "kind": "heading",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u2",
+     "ordinal": 1,
+     "locator": "synthetic-locator-u2",
+     "text": "2023年",
+     "bbox": [
+      70,
+      150,
+      120,
+      168
+     ],
+     "font_size": 13.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u3",
+     "ordinal": 2,
+     "locator": "synthetic-locator-u3",
+     "text": "2024",
+     "bbox": [
+      70,
+      190,
+      110,
+      208
+     ],
+     "font_size": 13.0,
+     "font_weight": "bold",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u4",
+     "ordinal": 3,
+     "locator": "synthetic-locator-u4",
+     "text": "报告期内公司经营规模稳步提升，市场份额保持稳定。",
+     "bbox": [
+      70,
+      230,
+      420,
+      244
+     ],
+     "font_size": 10.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    },
+    {
+     "unit_id": "u5",
+     "ordinal": 4,
+     "locator": "synthetic-locator-u5",
+     "text": "2023年12月31日",
+     "bbox": [
+      70,
+      270,
+      180,
+      284
+     ],
+     "font_size": 10.0,
+     "font_weight": "regular",
+     "kind": "paragraph",
+     "upstream_hints": {}
+    }
+   ]
+  }
+ ]
+}

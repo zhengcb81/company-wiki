@@ -1,0 +1,8029 @@
+{
+ "schema_version": "du2-layout-probe-mapping/1",
+ "note": "probe ids map to original page coordinates; they are NOT production locators",
+ "samples": [
+  {
+   "sample_id": "hk-miniso-annual-store-table",
+   "label": "名创优品 2024 港股年报 p12 门店表（中英双栏，多列经营表）",
+   "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+   "mode": "span",
+   "unit_count": 143,
+   "probe_mapping": [
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0000",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      354.78,
+      35.06,
+      552.84,
+      51.38
+     ],
+     "font_size": 14.0,
+     "bold": false,
+     "quote": "Business Review and Outlook"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0001",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      452.42,
+      49.07,
+      552.77,
+      67.01
+     ],
+     "font_size": 14.0,
+     "bold": false,
+     "quote": "業務回顧及展望"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0002",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      110.94,
+      121.12,
+      122.6
+     ],
+     "font_size": 10.0,
+     "bold": false,
+     "quote": "Store Network"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0003",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.66,
+      111.38,
+      388.66,
+      124.19
+     ],
+     "font_size": 10.0,
+     "bold": false,
+     "quote": "門店網絡"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0004",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      126.83,
+      331.34,
+      137.32
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "As of December 31, 2024, we served consumers primarily through"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0005",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.66,
+      129.3,
+      366.8,
+      138.3
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "截至"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0006",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      388.21,
+      129.3,
+      397.21,
+      138.3
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0007",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      408.34,
+      129.3,
+      417.34,
+      138.3
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "月"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0008",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      428.47,
+      129.3,
+      501.42,
+      138.3
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "日，我們主要通過"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0009",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      525.48,
+      129.3,
+      552.75,
+      138.3
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "多家名"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0010",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      367.2,
+      128.69,
+      387.62,
+      139.18
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "2024"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0011",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      397.61,
+      128.69,
+      407.76,
+      139.18
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "12"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0012",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      417.75,
+      128.69,
+      427.89,
+      139.18
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "31"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0013",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      501.83,
+      128.69,
+      524.89,
+      139.18
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "7,500"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0014",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      139.83,
+      331.32,
+      150.32
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "a network of over 7,500 MINISO stores, including nearly 4,400"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0015",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.65,
+      142.3,
+      552.7,
+      151.3
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "創優品門店網絡為消費者提供服務，其中在中國內"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0016",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      152.82,
+      331.29,
+      163.32
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "MINISO stores in mainland China and over 3,100 MINISO stores in"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0017",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.65,
+      155.29,
+      376.52,
+      164.29
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "地有約"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0018",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      402.32,
+      155.29,
+      552.8,
+      164.29
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "家名創優品門店，在海外市場有超過"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0019",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      377.21,
+      154.68,
+      401.46,
+      165.18
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "4,400"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0020",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      165.82,
+      331.43,
+      176.31
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "overseas markets. The following table shows the number of MINISO"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0021",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      371.85,
+      168.29,
+      552.71,
+      177.29
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "家名創優品門店。下表列示截至呈報日期，中"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0022",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.65,
+      167.68,
+      371.35,
+      178.17
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "3,100"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0023",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      178.81,
+      320.09,
+      189.31
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "stores in mainland China and overseas as of the dates presented:"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0024",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.65,
+      181.28,
+      492.65,
+      190.28
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "國內地和海外的名創優品門店數量："
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0025",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      425.72,
+      204.62,
+      509.72,
+      215.36
+     ],
+     "font_size": 9.0,
+     "bold": true,
+     "quote": "As of December 31,"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0026",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      440.42,
+      217.97,
+      457.52,
+      229.5
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "截至"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0027",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      467.72,
+      217.97,
+      476.27,
+      229.5
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "月"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0028",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      486.46,
+      217.97,
+      495.01,
+      229.5
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "日"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0029",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      457.78,
+      219.04,
+      467.29,
+      229.78
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "12"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0030",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      476.52,
+      219.04,
+      486.03,
+      229.78
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "31"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0031",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      527.07,
+      236.46,
+      547.09,
+      247.19
+     ],
+     "font_size": 9.0,
+     "bold": true,
+     "quote": "2024"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0032",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      442.03,
+      236.66,
+      462.05,
+      247.16
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "2023"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0033",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      538.54,
+      249.8,
+      547.09,
+      261.33
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0034",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      519.09,
+      250.87,
+      538.11,
+      261.61
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "2024"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0035",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      453.5,
+      251.89,
+      462.05,
+      260.66
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0036",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      434.05,
+      251.08,
+      453.07,
+      261.57
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "2023"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0037",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      169.53,
+      277.22,
+      237.93,
+      288.75
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "名創優品門店數量"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0038",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      278.29,
+      169.53,
+      289.02
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "Number of MINISO stores"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0039",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      525.69,
+      291.28,
+      547.09,
+      302.02
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "4,386"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0040",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      124.29,
+      292.3,
+      158.49,
+      301.07
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "中國內地"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0041",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      291.49,
+      124.29,
+      301.98
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "Mainland China"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0042",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      440.66,
+      291.49,
+      462.05,
+      301.98
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "3,926"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0043",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      537.58,
+      304.28,
+      547.09,
+      315.02
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "25"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0044",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      164.81,
+      305.3,
+      190.46,
+      314.07
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "直營店"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0045",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      304.49,
+      164.81,
+      314.98
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "Directly operated stores"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0046",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      452.54,
+      304.49,
+      462.05,
+      314.98
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "26"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0047",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      525.69,
+      317.28,
+      547.09,
+      328.01
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "4,335"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0048",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      272.02,
+      318.29,
+      331.87,
+      327.07
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "名創合夥人門店"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0049",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      317.48,
+      272.02,
+      327.98
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "Stores operated under MINISO Retail Partner model"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0050",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      440.65,
+      317.48,
+      462.05,
+      327.98
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "3,878"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0051",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      537.58,
+      330.27,
+      547.09,
+      341.01
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "26"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0052",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      226.74,
+      331.29,
+      260.94,
+      340.06
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "代理門店"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0053",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      330.48,
+      226.74,
+      340.97
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "Stores operated under distributor model"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0054",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      452.54,
+      330.48,
+      462.05,
+      340.97
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "22"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0055",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      525.69,
+      343.27,
+      547.09,
+      354.0
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "3,118"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0056",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      100.68,
+      344.29,
+      117.78,
+      353.06
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "海外"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0057",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      343.47,
+      100.68,
+      353.97
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "Overseas"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0058",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      440.65,
+      343.47,
+      462.05,
+      353.97
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "2,487"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0059",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      532.82,
+      356.26,
+      547.09,
+      367.0
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "503"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0060",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      164.81,
+      357.28,
+      190.46,
+      366.05
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "直營店"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0061",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      356.47,
+      164.81,
+      366.96
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "Directly operated stores"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0062",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      447.79,
+      356.47,
+      462.05,
+      366.96
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "238"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0063",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      532.82,
+      369.26,
+      547.09,
+      380.0
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "404"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0064",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      272.02,
+      370.28,
+      331.87,
+      379.05
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "名創合夥人門店"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0065",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      369.47,
+      272.02,
+      379.96
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "Stores operated under MINISO Retail Partner model"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0066",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      447.79,
+      369.47,
+      462.05,
+      379.96
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "283"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0067",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      525.69,
+      382.26,
+      547.09,
+      392.99
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "2,211"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0068",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      226.74,
+      383.27,
+      260.94,
+      392.05
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "代理門店"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0069",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      382.46,
+      226.74,
+      392.96
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "Stores operated under distributor model"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0070",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      440.65,
+      382.46,
+      462.05,
+      392.96
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "1,966"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0071",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      85.31,
+      410.23,
+      102.41,
+      421.76
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "合計"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0072",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      411.3,
+      85.31,
+      422.04
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "Total"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0073",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      525.7,
+      411.3,
+      547.09,
+      422.04
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "7,504"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0074",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      440.66,
+      411.51,
+      462.05,
+      422.0
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "6,413"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0075",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.65,
+      439.29,
+      357.65,
+      448.29
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "自"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0076",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      378.39,
+      439.29,
+      504.39,
+      448.29
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "年起，我們已擴展在中國內地的"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0077",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      543.75,
+      439.29,
+      552.75,
+      448.29
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "門"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0078",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      357.92,
+      438.68,
+      377.94,
+      449.17
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "2020"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0079",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      504.66,
+      438.68,
+      543.48,
+      449.17
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "TOP TOY"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0080",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      438.8,
+      331.32,
+      449.29
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "We have expanded our TOP TOY store network in mainland China"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0081",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.65,
+      452.28,
+      411.65,
+      461.28
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "店網絡。同時，"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0082",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      450.97,
+      452.28,
+      468.97,
+      461.28
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "亦於"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0083",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      489.73,
+      452.28,
+      552.73,
+      461.28
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "年開始擴展海外"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0084",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      411.65,
+      451.67,
+      450.66,
+      462.17
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "TOP TOY"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0085",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      469.25,
+      451.67,
+      489.27,
+      462.17
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "2024"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0086",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      451.8,
+      331.4,
+      462.29
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "since 2020. TOP TOY has also begun to expand to overseas"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0087",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.65,
+      465.28,
+      552.7,
+      474.28
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "市場。這一戰略性舉措符合本公司全球擴張及鞏固"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0088",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      464.31,
+      331.32,
+      475.29
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "markets since 2024. This strategic move aligns with the Company’s"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0089",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.65,
+      478.27,
+      451.34,
+      487.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "品牌影響力的計劃。截至"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0090",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      473.95,
+      478.27,
+      482.95,
+      487.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0091",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      494.79,
+      478.27,
+      503.79,
+      487.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "月"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0092",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      515.62,
+      478.27,
+      552.73,
+      487.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "日，我們"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0093",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      452.0,
+      477.66,
+      473.12,
+      488.16
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "2024"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0094",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      483.59,
+      477.66,
+      493.97,
+      488.16
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "12"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0095",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      504.42,
+      477.66,
+      514.8,
+      488.16
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "31"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0096",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      477.79,
+      331.45,
+      488.28
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "plan to expand globally and strengthen its brand presence. As of"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0097",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.63,
+      491.27,
+      366.91,
+      500.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "共有"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0098",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      383.78,
+      491.27,
+      392.78,
+      500.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "家"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0099",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      434.58,
+      491.27,
+      462.14,
+      500.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "門店，"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0100",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      478.75,
+      491.27,
+      552.7,
+      500.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "家位於中國內地。"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0101",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      367.47,
+      490.66,
+      383.04,
+      501.15
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "276"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0102",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      393.33,
+      490.66,
+      434.01,
+      501.15
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "TOP TOY"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0103",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      462.42,
+      490.66,
+      477.99,
+      501.15
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "272"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0104",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      490.78,
+      331.36,
+      501.28
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "December 31, 2024, we had a total of 276 TOP TOY stores, 272"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0105",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.63,
+      504.27,
+      532.43,
+      513.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "下表列示截至呈報日期，中國內地和海外的"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0106",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      533.47,
+      503.66,
+      555.23,
+      514.15
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "TOP"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0107",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      503.78,
+      331.3,
+      514.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "of which located in mainland China. The following table shows the"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0108",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      366.74,
+      517.26,
+      411.74,
+      526.26
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "門店數量："
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0109",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      348.63,
+      516.65,
+      366.47,
+      527.15
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "TOY"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0110",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      516.78,
+      331.31,
+      527.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "number of TOP TOY stores in mainland China and overseas as of"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0111",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      56.69,
+      529.77,
+      139.72,
+      540.27
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "the dates presented:"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0112",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      427.82,
+      555.59,
+      507.62,
+      566.33
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "As of December 31,"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0113",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      440.42,
+      568.94,
+      457.52,
+      580.47
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "截至"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0114",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      467.71,
+      568.94,
+      476.26,
+      580.47
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "月"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0115",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      486.45,
+      568.94,
+      495.0,
+      580.47
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "日"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0116",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      457.78,
+      570.01,
+      467.29,
+      580.75
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "12"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0117",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      476.52,
+      570.01,
+      486.03,
+      580.75
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "31"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0118",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      528.07,
+      587.43,
+      547.09,
+      598.16
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "2024"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0119",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      443.03,
+      587.63,
+      462.05,
+      598.13
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "2023"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0120",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      538.54,
+      600.77,
+      547.09,
+      612.3
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0121",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      519.09,
+      601.84,
+      538.11,
+      612.58
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "2024"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0122",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      453.5,
+      602.86,
+      462.05,
+      611.64
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0123",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      434.05,
+      602.05,
+      453.07,
+      612.55
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "2023"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0124",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      213.52,
+      628.19,
+      247.72,
+      639.72
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "門店數量"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0125",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      629.26,
+      213.27,
+      640.0
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "Number of TOP TOY stores TOP TOY"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0126",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      537.58,
+      642.25,
+      547.09,
+      652.99
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "40"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0127",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      164.81,
+      643.27,
+      190.46,
+      652.05
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "直營店"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0128",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      642.46,
+      164.81,
+      652.96
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "Directly operated stores"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0129",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      452.54,
+      642.46,
+      462.05,
+      652.96
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "14"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0130",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      532.82,
+      655.25,
+      547.09,
+      665.99
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "236"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0131",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      272.02,
+      656.27,
+      331.87,
+      665.04
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "名創合夥人門店"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0132",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      655.46,
+      272.02,
+      665.95
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "Stores operated under MINISO Retail Partner model"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0133",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      447.79,
+      655.46,
+      462.05,
+      665.95
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "134"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0134",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      85.31,
+      683.2,
+      102.41,
+      694.73
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "合計"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0135",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      62.36,
+      684.27,
+      85.31,
+      695.01
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "Total"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0136",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      532.83,
+      684.27,
+      547.09,
+      695.01
+     ],
+     "font_size": 8.77,
+     "bold": true,
+     "quote": "276"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0137",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      447.79,
+      684.48,
+      462.05,
+      694.97
+     ],
+     "font_size": 8.77,
+     "bold": false,
+     "quote": "148"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0138",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      507.73,
+      772.14,
+      518.85,
+      783.87
+     ],
+     "font_size": 10.0,
+     "bold": false,
+     "quote": "11"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0139",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      462.86,
+      773.1,
+      494.86,
+      783.35
+     ],
+     "font_size": 8.0,
+     "bold": true,
+     "quote": "名創優品"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0140",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      417.97,
+      774.78,
+      449.97,
+      782.78
+     ],
+     "font_size": 8.0,
+     "bold": false,
+     "quote": "年度報告"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0141",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      400.18,
+      774.24,
+      417.97,
+      783.56
+     ],
+     "font_size": 8.0,
+     "bold": false,
+     "quote": "2024"
+    },
+    {
+     "unit_id": "probe-hk-miniso-annual-store-table-p12-u0142",
+     "sample_id": "hk-miniso-annual-store-table",
+     "page": 12,
+     "bbox": [
+      449.97,
+      774.24,
+      462.86,
+      783.56
+     ],
+     "font_size": 8.0,
+     "bold": false,
+     "quote": "•"
+    }
+   ]
+  },
+  {
+   "sample_id": "hk-miniso-annual-store-table",
+   "label": "名创优品 2024 港股年报 p12 门店表（中英双栏，多列经营表）",
+   "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+   "mode": "row_collapse",
+   "unit_count": 39,
+   "probe_mapping_note": "derived from the same page spans as the span probe; row-collapsed ids share the page/coordinate provenance above",
+   "page_extent": {
+    "first_unit": "probe-hk-miniso-annual-store-table-p12-u0000",
+    "last_unit": "probe-hk-miniso-annual-store-table-p12-u0038"
+   }
+  },
+  {
+   "sample_id": "cn-hengfeng-offering-cross-page",
+   "label": "恒锋工具 2020 向特定对象发行募集说明书 p61-62（跨页项目概况表）",
+   "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+   "mode": "span",
+   "unit_count": 173,
+   "probe_mapping": [
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0000",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      90.7,
+      44.52,
+      180.75,
+      53.52
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "恒锋工具股份有限公司"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0001",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      460.65,
+      44.52,
+      505.65,
+      53.52
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "募集说明书"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0002",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      117.12,
+      79.16,
+      165.75,
+      95.36
+     ],
+     "font_size": 16.2,
+     "bold": false,
+     "quote": "第三节"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0003",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      173.58,
+      79.16,
+      479.32,
+      95.36
+     ],
+     "font_size": 16.2,
+     "bold": false,
+     "quote": "董事会关于本次募集资金使用的可行性分析"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0004",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      114.12,
+      116.39,
+      222.2,
+      128.39
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "本次向特定对象发行"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0005",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      233.89,
+      116.39,
+      404.63,
+      128.39
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "股股票拟募集资金总额为不超过"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0006",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      455.8,
+      116.39,
+      505.65,
+      128.39
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "万元，扣"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0007",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      225.23,
+      116.01,
+      233.89,
+      129.29
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "A"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0008",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      407.8,
+      116.01,
+      455.8,
+      129.29
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "35,978.71"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0009",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      90.1,
+      139.79,
+      294.1,
+      151.79
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "除相关发行费用后，拟投入如下项目："
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0010",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      453.45,
+      171.45,
+      506.24,
+      182.25
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "单位：万元"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0011",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      98.5,
+      194.87,
+      120.1,
+      205.67
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "序号"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0012",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      204.2,
+      194.87,
+      246.8,
+      205.67
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "项目名称"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0013",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      333.92,
+      194.87,
+      387.32,
+      205.67
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "项目总投资"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0014",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      416.23,
+      194.87,
+      500.82,
+      205.67
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "募集资金使用金额"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0015",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      138.75,
+      215.3,
+      265.33,
+      226.1
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "智能制造优化升级改造项目"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0016",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      106.3,
+      214.96,
+      114.4,
+      226.91
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0017",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      356.75,
+      214.96,
+      401.5,
+      226.91
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "35,300.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0018",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      464.27,
+      214.96,
+      509.0,
+      226.91
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "28,678.71"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0019",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      138.75,
+      236.3,
+      202.34,
+      247.1
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "补充流动资金"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0020",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      106.3,
+      235.96,
+      114.4,
+      247.91
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "2"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0021",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      362.15,
+      235.96,
+      401.5,
+      247.91
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "7,300.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0022",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      469.67,
+      235.96,
+      509.0,
+      247.91
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "7,300.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0023",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      190.4,
+      256.72,
+      212.0,
+      267.52
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "合计"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0024",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      356.75,
+      256.38,
+      401.5,
+      268.33
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "42,600.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0025",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      464.27,
+      256.38,
+      509.0,
+      268.33
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "35,978.71"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0026",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      114.12,
+      286.92,
+      505.32,
+      298.92
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "在本次募集资金到位前，公司可根据项目进度的实际情况通过自有资金、银"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0027",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      90.1,
+      310.32,
+      505.3,
+      322.32
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "行贷款或其他途径进行部分投入，并在募集资金到位后予以置换。如果实际募集"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0028",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      90.1,
+      333.74,
+      505.3,
+      345.74
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "资金低于项目投资总额，不足部分公司将通过自筹解决。在不改变本次募集资金"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0029",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      90.1,
+      357.17,
+      505.3,
+      369.17
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "投资项目的前提下，公司董事会可根据项目的实际需求，对上述项目的募集资金"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0030",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      90.1,
+      380.57,
+      210.1,
+      392.57
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "金额进行适当的调整。"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0031",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      118.32,
+      415.05,
+      399.41,
+      428.85
+     ],
+     "font_size": 13.8,
+     "bold": false,
+     "quote": "一、智能制造优化升级改造项目的可行性分析"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0032",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      108.1,
+      450.82,
+      216.76,
+      462.82
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "（一）项目基本情况"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0033",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      114.12,
+      482.04,
+      504.98,
+      494.04
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "智能制造优化升级改造项目包括古荡河对岸新建厂房以及恒锋工具老厂区"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0034",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      90.1,
+      505.47,
+      505.3,
+      517.47
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "改建项目，本项目将采用自主专利技术，淘汰落后设备同时引进国际及国产先进"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0035",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      90.1,
+      528.89,
+      198.1,
+      540.89
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "设备，项目总投资额"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0036",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      249.2,
+      528.89,
+      420.25,
+      540.89
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "万元。本项目的基本概况如下："
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0037",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      201.2,
+      528.51,
+      249.2,
+      541.79
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "35,300.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0038",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      130.33,
+      560.55,
+      151.93,
+      571.35
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "项目"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0039",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      343.55,
+      560.55,
+      365.15,
+      571.35
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "内容"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0040",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      120.12,
+      580.94,
+      162.72,
+      591.74
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "项目名称"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0041",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      291.3,
+      580.94,
+      417.88,
+      591.74
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "智能制造优化升级改造项目"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0042",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      120.12,
+      601.97,
+      162.72,
+      612.77
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "项目性质"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0043",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      301.5,
+      601.97,
+      407.08,
+      612.77
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "新建厂房及老厂区改建"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0044",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      109.3,
+      622.37,
+      172.89,
+      633.17
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "项目实施单位"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0045",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      333.33,
+      622.37,
+      375.93,
+      633.17
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "恒锋工具"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0046",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      203.0,
+      641.0,
+      482.57,
+      651.8
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "项目建设期两期，新建厂房为一期，老厂区改建为二期。一期"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0047",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      484.67,
+      640.66,
+      506.27,
+      652.61
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "2019"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0048",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      203.0,
+      656.6,
+      213.8,
+      667.4
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0049",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      221.63,
+      656.6,
+      266.62,
+      667.4
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "月拿地，"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0050",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      287.67,
+      656.6,
+      300.9,
+      667.4
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0051",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      314.1,
+      656.6,
+      379.51,
+      667.4
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "月建成厂房，"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0052",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      400.58,
+      656.6,
+      413.8,
+      667.4
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0053",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      421.63,
+      656.6,
+      508.61,
+      667.4
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "月一期建成投产。"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0054",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      216.23,
+      656.26,
+      221.63,
+      668.21
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0055",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      266.67,
+      656.26,
+      287.67,
+      668.21
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "2020"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0056",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      303.3,
+      656.26,
+      314.1,
+      668.21
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "12"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0057",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      379.58,
+      656.26,
+      400.58,
+      668.21
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "2021"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0058",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      416.23,
+      656.26,
+      421.63,
+      668.21
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0059",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      120.12,
+      672.22,
+      162.72,
+      683.02
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "建设周期"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0060",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      203.0,
+      672.22,
+      505.94,
+      683.02
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "二期在一期建设完成后，老厂区相关设备搬迁至一期新厂房后才启"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0061",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      203.0,
+      687.82,
+      271.99,
+      698.62
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "动改建，预计在"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0062",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      296.08,
+      687.82,
+      309.3,
+      698.62
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0063",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      317.1,
+      687.82,
+      382.51,
+      698.62
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "月启动建设，"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0064",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      398.17,
+      687.82,
+      411.4,
+      698.62
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0065",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      424.63,
+      687.82,
+      490.61,
+      698.62
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "月完成建设，"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0066",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      274.48,
+      687.48,
+      296.08,
+      699.43
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "2021"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0067",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      311.7,
+      687.48,
+      317.1,
+      699.43
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0068",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      377.17,
+      687.48,
+      398.17,
+      699.43
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "2021"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0069",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      413.83,
+      687.48,
+      424.63,
+      699.43
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "12"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0070",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      484.67,
+      687.48,
+      506.27,
+      699.43
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "2022"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0071",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      203.0,
+      703.44,
+      287.59,
+      714.24
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "年二期建成投产。"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0072",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      120.12,
+      722.05,
+      162.72,
+      732.85
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "建设地点"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0073",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      225.23,
+      722.05,
+      330.81,
+      732.85
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "海盐县武原镇海兴东路"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0074",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      344.13,
+      722.05,
+      483.42,
+      732.85
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "号老厂区及古荡河对岸新厂区"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0075",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      333.33,
+      721.71,
+      344.13,
+      733.66
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "68"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0076",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      120.12,
+      742.47,
+      162.72,
+      753.27
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "主要产品"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0077",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      203.0,
+      742.47,
+      506.16,
+      753.27
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "智能刀具、电子化信息化在线测量系统以及数控精密装备等智能装"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p61-u0078",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 61,
+     "bbox": [
+      283.48,
+      768.55,
+      314.4,
+      780.51
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "1-1-61"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0079",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      90.7,
+      44.52,
+      180.75,
+      53.52
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "恒锋工具股份有限公司"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0080",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      460.65,
+      44.52,
+      505.65,
+      53.52
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "募集说明书"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0081",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      348.95,
+      75.97,
+      359.75,
+      86.77
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "备"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0082",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      114.72,
+      98.19,
+      167.51,
+      108.99
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "项目总投资"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0083",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      363.9,
+      98.19,
+      387.38,
+      108.99
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "万元"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0084",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      321.33,
+      97.85,
+      363.9,
+      109.8
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "35,300.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0085",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      108.1,
+      128.39,
+      216.76,
+      140.39
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "（二）项目投资计划"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0086",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      120.12,
+      159.61,
+      204.13,
+      171.61
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "、项目实施主体"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0087",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      114.12,
+      159.23,
+      120.12,
+      172.51
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0088",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      114.12,
+      190.84,
+      270.12,
+      202.84
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "本项目由恒锋工具负责实施。"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0089",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      120.12,
+      222.07,
+      228.13,
+      234.07
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "、项目资金额及明细"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0090",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      114.12,
+      221.69,
+      120.12,
+      234.97
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "2"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0091",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      114.12,
+      253.29,
+      198.12,
+      265.29
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "本项目总投资为"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0092",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      249.2,
+      253.29,
+      357.85,
+      265.29
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "万元，其中工程费用"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0093",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      408.95,
+      253.29,
+      505.6,
+      265.29
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "万元，工程建设其"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0094",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      201.2,
+      252.91,
+      249.2,
+      266.19
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "35,300.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0095",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      360.95,
+      252.91,
+      408.95,
+      266.19
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "29,779.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0096",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      90.1,
+      276.69,
+      126.1,
+      288.69
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "它费用"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0097",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      171.73,
+      276.69,
+      247.38,
+      288.69
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "万元，预备费"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0098",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      284.05,
+      276.69,
+      395.7,
+      288.69
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "万元，铺底流动资金"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0099",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      441.4,
+      276.69,
+      505.05,
+      288.69
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "万元，具体"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0100",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      129.73,
+      276.31,
+      171.73,
+      289.59
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "2,147.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0101",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      251.05,
+      276.31,
+      284.05,
+      289.59
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "189.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0102",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      399.4,
+      276.31,
+      441.4,
+      289.59
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "3,185.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0103",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      90.1,
+      300.11,
+      186.1,
+      312.11
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "情况如下表所示："
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0104",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      453.45,
+      331.77,
+      506.24,
+      342.57
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "单位：万元"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0105",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      97.9,
+      355.2,
+      119.5,
+      366.0
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "序号"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0106",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      192.8,
+      355.2,
+      235.4,
+      366.0
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "项目名称"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0107",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      335.73,
+      355.2,
+      357.33,
+      366.0
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "金额"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0108",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      422.23,
+      355.2,
+      485.82,
+      366.0
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "占总投资比例"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0109",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      103.3,
+      376.2,
+      114.1,
+      387.0
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "一"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0110",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      192.8,
+      376.2,
+      235.4,
+      387.0
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "工程费用"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0111",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      350.15,
+      375.86,
+      394.9,
+      387.81
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "29,779.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0112",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      471.48,
+      375.86,
+      508.4,
+      387.81
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "84.36%"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0113",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      192.8,
+      396.62,
+      235.4,
+      407.42
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "设备购置"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0114",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      105.7,
+      396.28,
+      113.8,
+      408.23
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0115",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      350.15,
+      396.28,
+      394.9,
+      408.23
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "18,445.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0116",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      473.27,
+      396.28,
+      508.4,
+      408.23
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "52.25%"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0117",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      192.8,
+      417.02,
+      235.4,
+      427.82
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "设备安装"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0118",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      105.7,
+      416.68,
+      113.8,
+      428.63
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "2"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0119",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      363.38,
+      416.68,
+      394.9,
+      428.63
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "184.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0120",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      478.67,
+      416.68,
+      508.4,
+      428.63
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "0.52%"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0121",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      192.8,
+      438.05,
+      235.4,
+      448.85
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "厂房建造"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0122",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      105.7,
+      437.71,
+      113.8,
+      449.66
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "3"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0123",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      350.15,
+      437.71,
+      394.9,
+      449.66
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "11,150.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0124",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      473.27,
+      437.71,
+      508.4,
+      449.66
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "31.59%"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0125",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      103.3,
+      458.47,
+      114.1,
+      469.27
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "二"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0126",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      171.77,
+      458.47,
+      256.36,
+      469.27
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "工程建设其它费用"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0127",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      355.55,
+      458.13,
+      394.9,
+      470.08
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "2,147.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0128",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      476.88,
+      458.13,
+      508.4,
+      470.08
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "6.08%"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0129",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      198.2,
+      478.87,
+      230.0,
+      489.67
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "土地款"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0130",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      105.7,
+      478.53,
+      113.8,
+      490.48
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0131",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      355.55,
+      478.53,
+      394.9,
+      490.48
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "2,053.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0132",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      478.67,
+      478.53,
+      508.4,
+      490.48
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "5.82%"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0133",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      187.38,
+      499.89,
+      240.17,
+      510.69
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "前期工作费"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0134",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      105.7,
+      499.55,
+      113.8,
+      511.5
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "2"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0135",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      368.77,
+      499.55,
+      394.9,
+      511.5
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "94.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0136",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      478.67,
+      499.55,
+      508.4,
+      511.5
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "0.27%"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0137",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      103.3,
+      520.3,
+      114.1,
+      531.1
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "三"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0138",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      197.6,
+      520.3,
+      230.0,
+      531.1
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "预备费"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0139",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      363.38,
+      519.96,
+      394.9,
+      531.91
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "189.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0140",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      476.88,
+      519.96,
+      508.4,
+      531.91
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "0.54%"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0141",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      103.3,
+      540.72,
+      114.1,
+      551.52
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "四"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0142",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      181.98,
+      540.72,
+      245.57,
+      551.52
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "铺底流动资金"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0143",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      355.55,
+      540.38,
+      394.9,
+      552.33
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "3,185.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0144",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      476.88,
+      540.38,
+      508.4,
+      552.33
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "9.02%"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0145",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      178.98,
+      561.75,
+      200.58,
+      572.55
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "合计"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0146",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      350.15,
+      561.41,
+      394.9,
+      573.36
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "35,300.00"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0147",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      466.08,
+      561.41,
+      508.4,
+      573.36
+     ],
+     "font_size": 10.8,
+     "bold": true,
+     "quote": "100.00%"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0148",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      108.1,
+      591.91,
+      216.76,
+      603.91
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "（三）项目建设用地"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0149",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      114.12,
+      623.14,
+      330.2,
+      635.14
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "项目建设地点位于海盐县武原镇海兴东路"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0150",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      345.92,
+      623.14,
+      517.7,
+      635.14
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "号老厂区及古荡河对岸新厂区。"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0151",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      333.92,
+      622.76,
+      345.92,
+      636.04
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "68"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0152",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      108.1,
+      654.36,
+      216.76,
+      666.36
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "（四）项目建设周期"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0153",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      114.12,
+      685.59,
+      438.3,
+      697.59
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "项目建设期两期，新建厂房为一期，老厂区改建为二期。一期"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0154",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      466.05,
+      685.59,
+      481.08,
+      697.59
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0155",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      490.67,
+      685.59,
+      506.3,
+      697.59
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "月"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0156",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      442.05,
+      685.21,
+      466.05,
+      698.49
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "2019"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0157",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      484.67,
+      685.21,
+      490.67,
+      698.49
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0158",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      90.1,
+      709.02,
+      126.1,
+      721.02
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "拿地，"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0159",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      148.32,
+      709.02,
+      163.35,
+      721.02
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0160",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      178.38,
+      709.02,
+      253.38,
+      721.02
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "月建成厂房，"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0161",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      275.65,
+      709.02,
+      290.67,
+      721.02
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0162",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      299.7,
+      709.02,
+      504.9,
+      721.02
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "月一期建成投产。二期在一期建设完成"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0163",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      124.32,
+      708.64,
+      148.32,
+      721.92
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "2020"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0164",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      166.38,
+      708.64,
+      178.38,
+      721.92
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "12"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0165",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      251.65,
+      708.64,
+      275.65,
+      721.92
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "2021"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0166",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      293.7,
+      708.64,
+      299.7,
+      721.92
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0167",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      90.1,
+      732.44,
+      414.35,
+      744.44
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "后，老厂区相关设备搬迁至一期新厂房后才启动改建，预计在"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0168",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      442.02,
+      732.44,
+      457.05,
+      744.44
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0169",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      466.65,
+      732.44,
+      506.27,
+      744.44
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "月启动"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0170",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      418.02,
+      732.06,
+      442.02,
+      745.34
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "2021"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0171",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      460.65,
+      732.06,
+      466.65,
+      745.34
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-hengfeng-offering-cross-page-p62-u0172",
+     "sample_id": "cn-hengfeng-offering-cross-page",
+     "page": 62,
+     "bbox": [
+      283.48,
+      768.55,
+      314.4,
+      780.51
+     ],
+     "font_size": 10.8,
+     "bold": false,
+     "quote": "1-1-62"
+    }
+   ]
+  },
+  {
+   "sample_id": "cn-hengfeng-offering-cross-page",
+   "label": "恒锋工具 2020 向特定对象发行募集说明书 p61-62（跨页项目概况表）",
+   "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+   "mode": "row_collapse",
+   "unit_count": 60,
+   "probe_mapping_note": "derived from the same page spans as the span probe; row-collapsed ids share the page/coordinate provenance above",
+   "page_extent": {
+    "first_unit": "probe-cn-hengfeng-offering-cross-page-p61-u0000",
+    "last_unit": "probe-cn-hengfeng-offering-cross-page-p62-u0059"
+   }
+  },
+  {
+   "sample_id": "cn-jinhe-convertible-tables",
+   "label": "金禾实业可转债募集说明书 p223-224（6列表 + 跨页备案表）",
+   "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+   "mode": "span",
+   "unit_count": 206,
+   "probe_mapping": [
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0000",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      90.02,
+      43.87,
+      505.21,
+      52.87
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "安徽金禾实业股份有限公司            公开发行可转换公司债券募集说明书"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0001",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      193.82,
+      86.42,
+      247.94,
+      104.42
+     ],
+     "font_size": 18.0,
+     "bold": false,
+     "quote": "第八章"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0002",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      257.08,
+      86.42,
+      401.5,
+      104.42
+     ],
+     "font_size": 18.0,
+     "bold": false,
+     "quote": "本次募集资金运用"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0003",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      118.1,
+      127.37,
+      293.77,
+      141.35
+     ],
+     "font_size": 13.98,
+     "bold": false,
+     "quote": "一、本次募集资金运用概况"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0004",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      111.2,
+      155.73,
+      279.73,
+      167.73
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "（一）本次募集资金规模及投向"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0005",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      114.02,
+      179.13,
+      150.14,
+      191.13
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "经公司"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0006",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      174.2,
+      179.13,
+      186.2,
+      191.13
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0007",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      192.32,
+      179.13,
+      204.32,
+      191.13
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "月"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0008",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      216.38,
+      179.13,
+      372.72,
+      191.13
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "日第四届董事会第二次会议及"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0009",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      396.94,
+      179.13,
+      408.94,
+      191.13
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "年"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0010",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      415.02,
+      179.13,
+      427.02,
+      191.13
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "月"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0011",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      433.14,
+      179.13,
+      505.34,
+      191.13
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "日第二次临时"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0012",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      150.2,
+      178.75,
+      174.2,
+      192.03
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "2016"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0013",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      186.26,
+      178.75,
+      192.26,
+      192.03
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "3"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0014",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      204.38,
+      178.75,
+      216.38,
+      192.03
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "17"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0015",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      372.88,
+      178.75,
+      396.88,
+      192.03
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "2016"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0016",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      408.96,
+      178.75,
+      414.96,
+      192.03
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "4"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0017",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.08,
+      178.75,
+      433.08,
+      192.03
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "5"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0018",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      90.02,
+      202.53,
+      505.34,
+      214.53
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "股东大会审议表决通过本次公开发行可转换公司债券的议案，本次公开发行可转"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0019",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      90.02,
+      225.93,
+      234.36,
+      237.93
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "债拟募集资金不超过人民币"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0020",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      240.5,
+      225.93,
+      288.6,
+      237.93
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "亿元（含"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0021",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      294.7,
+      225.93,
+      505.34,
+      237.93
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "亿元），本次发行可转债募集的资金总额"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0022",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      234.5,
+      225.55,
+      240.5,
+      238.83
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "6"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0023",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      288.7,
+      225.55,
+      294.7,
+      238.83
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "6"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0024",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      90.02,
+      249.33,
+      246.02,
+      261.33
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "扣除发行费用后拟投资于年产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0025",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      264.04,
+      249.33,
+      372.04,
+      261.33
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "吨吡啶盐项目和年产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0026",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      399.04,
+      249.33,
+      505.36,
+      261.33
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "吨三氯蔗糖项目，项"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0027",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      246.04,
+      248.95,
+      264.04,
+      262.23
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "400"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0028",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      372.04,
+      248.95,
+      399.04,
+      262.23
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "1,500"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0029",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      90.02,
+      272.73,
+      210.02,
+      284.73
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "目实施主体为本公司。"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0030",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      114.02,
+      296.13,
+      498.02,
+      308.13
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "本次公开发行可转债募集的资金总额扣除发行费用后拟投资于以下项目："
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0031",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      452.88,
+      316.32,
+      505.38,
+      326.82
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "单位：万元"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0032",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      89.6,
+      335.28,
+      110.66,
+      345.78
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "序号"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0033",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      164.0,
+      335.28,
+      206.18,
+      345.78
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "项目名称"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0034",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      259.78,
+      335.28,
+      301.96,
+      345.78
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "项目品种"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0035",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      314.74,
+      335.28,
+      367.4,
+      345.78
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "项目总投资"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0036",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      379.6,
+      335.28,
+      453.31,
+      345.78
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "拟投入募集资金"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0037",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      465.42,
+      335.28,
+      507.6,
+      345.78
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "实施主体"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0038",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      123.2,
+      355.38,
+      144.2,
+      365.88
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "年产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0039",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      162.59,
+      355.38,
+      228.2,
+      365.88
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吨吡啶盐项目"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0040",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.12,
+      355.38,
+      296.62,
+      365.88
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吡啶盐"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0041",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      465.48,
+      355.38,
+      507.48,
+      365.88
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "金禾实业"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0042",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      97.52,
+      355.04,
+      105.36,
+      366.67
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0043",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      146.84,
+      355.04,
+      162.59,
+      366.67
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "400"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0044",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      320.08,
+      355.04,
+      364.7,
+      366.67
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "26,527.49"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0045",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      395.5,
+      355.04,
+      440.14,
+      366.67
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "20,000.00"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0046",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      123.2,
+      375.48,
+      144.2,
+      385.98
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "年产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0047",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      170.45,
+      375.48,
+      246.56,
+      385.98
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吨三氯蔗糖项目"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0048",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      259.84,
+      375.48,
+      301.84,
+      385.98
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "三氯蔗糖"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0049",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      465.48,
+      375.48,
+      507.48,
+      385.98
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "金禾实业"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0050",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      97.52,
+      375.14,
+      105.36,
+      386.77
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0051",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      146.84,
+      375.14,
+      170.45,
+      386.77
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "1,500"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0052",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      320.08,
+      375.14,
+      364.7,
+      386.77
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "46,220.20"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0053",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      395.5,
+      375.14,
+      440.14,
+      386.77
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "40,000.00"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0054",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      156.92,
+      395.58,
+      177.98,
+      406.08
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "合计"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0055",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      320.08,
+      395.36,
+      364.7,
+      406.99
+     ],
+     "font_size": 10.5,
+     "bold": true,
+     "quote": "72,747.69"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0056",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      395.5,
+      395.36,
+      440.14,
+      406.99
+     ],
+     "font_size": 10.5,
+     "bold": true,
+     "quote": "60,000.00"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0057",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      114.02,
+      417.77,
+      505.36,
+      429.77
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "如募集资金到位时间与项目进度不一致，公司将依据项目的实际情况以其他"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0058",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      90.02,
+      441.17,
+      505.34,
+      453.17
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "资金先行投入，募集资金到位后再予以置换。若本次发行实际募集资金净额低于"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0059",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      90.02,
+      464.57,
+      505.34,
+      476.57
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "拟投入项目的资金额，公司将根据实际募集资金净额，按照项目需要调整投资规"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0060",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      90.02,
+      487.97,
+      306.02,
+      499.97
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "模，募集资金不足部分由公司自筹解决。"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0061",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      111.2,
+      519.17,
+      363.97,
+      531.17
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "（二）募集资金投资项目的备案及环保批复情况"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0062",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      92.12,
+      541.58,
+      113.18,
+      552.08
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "序号"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0063",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      130.34,
+      541.58,
+      172.52,
+      552.08
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "项目名称"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0064",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      200.06,
+      541.58,
+      242.24,
+      552.08
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "备案单位"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0065",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      320.08,
+      541.58,
+      362.26,
+      552.08
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "备案情况"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0066",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      434.88,
+      541.58,
+      498.04,
+      552.08
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "环保审批情况"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0067",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      187.58,
+      558.62,
+      254.66,
+      569.12
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市发展和"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0068",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      558.62,
+      416.78,
+      569.12
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市发展改革委项目备案表"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0069",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      567.2,
+      505.34,
+      577.7
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市环境保护"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0070",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      187.58,
+      574.22,
+      240.08,
+      584.72
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "改革委员会"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0071",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      574.22,
+      339.04,
+      584.72
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "（滁发改备案【"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0072",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      360.1,
+      574.22,
+      370.6,
+      584.72
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "】"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0073",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      386.32,
+      574.22,
+      407.32,
+      584.72
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "号）"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0074",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      339.04,
+      573.88,
+      360.04,
+      585.51
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2015"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0075",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      370.54,
+      573.88,
+      386.29,
+      585.51
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "121"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0076",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      582.8,
+      467.94,
+      593.3
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "局《关于"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0077",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      473.88,
+      582.8,
+      505.38,
+      593.3
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "安徽金"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0078",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      467.94,
+      582.46,
+      473.86,
+      594.09
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "<"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0079",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      590.6,
+      416.92,
+      601.1
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市发展改革委关于安徽金禾"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0080",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      598.4,
+      505.34,
+      608.9
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "禾实业股份有限"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0081",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      126.08,
+      606.2,
+      148.22,
+      616.7
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "年产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0082",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      166.34,
+      606.2,
+      176.84,
+      616.7
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吨"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0083",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      187.58,
+      606.2,
+      254.66,
+      616.7
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市发展和"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0084",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      606.2,
+      377.5,
+      616.7
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "实业股份有限公司年产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0085",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      395.08,
+      606.2,
+      416.86,
+      616.7
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吨吡"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0086",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      149.36,
+      605.86,
+      165.17,
+      617.49
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "400"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0087",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      378.46,
+      605.86,
+      394.27,
+      617.49
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "400"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0088",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      614.0,
+      475.35,
+      624.5
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "公司年产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0089",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      492.99,
+      614.0,
+      505.38,
+      624.5
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吨"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0090",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      477.24,
+      613.66,
+      492.99,
+      625.29
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "400"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0091",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      126.08,
+      621.8,
+      176.72,
+      632.3
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吡啶盐项"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0092",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      187.58,
+      621.8,
+      240.08,
+      632.3
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "改革委员会"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0093",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      621.8,
+      416.83,
+      632.3
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "啶盐项目节能评估报告书的批复"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0094",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      100.04,
+      621.46,
+      107.89,
+      633.09
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0095",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      629.6,
+      505.34,
+      640.1
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吡啶盐项目环境"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0096",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      126.08,
+      637.4,
+      136.58,
+      647.9
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "目"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0097",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      637.4,
+      339.04,
+      647.9
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "（滁发改审批【"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0098",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      360.1,
+      637.4,
+      370.6,
+      647.9
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "】"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0099",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      381.04,
+      637.4,
+      402.04,
+      647.9
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "号）"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0100",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      339.04,
+      637.06,
+      360.04,
+      648.69
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2015"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0101",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      370.54,
+      637.06,
+      381.01,
+      648.69
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "91"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0102",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      645.2,
+      486.0,
+      655.7
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "影响报告书"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0103",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      494.88,
+      645.2,
+      505.38,
+      655.7
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "的"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0104",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      487.5,
+      644.86,
+      493.42,
+      656.49
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": ">"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0105",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      653.72,
+      416.83,
+      664.22
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "危险化学品建设项目安全条件审"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0106",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      660.8,
+      505.32,
+      671.3
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "批复》（滁环"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0107",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      187.58,
+      661.52,
+      254.66,
+      672.02
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市安全生"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0108",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      669.32,
+      416.83,
+      679.82
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "查意见书（滁安监危化项目安条"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0109",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      676.4,
+      438.18,
+      686.9
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "【"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0110",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      459.24,
+      676.4,
+      469.74,
+      686.9
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "】"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0111",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      485.4,
+      676.4,
+      506.4,
+      686.9
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "号）"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0112",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      438.18,
+      676.06,
+      459.18,
+      687.69
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2015"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0113",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      469.68,
+      676.06,
+      485.43,
+      687.69
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "648"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0114",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      187.58,
+      677.12,
+      250.58,
+      687.62
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "产监督管理局"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0115",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      684.92,
+      297.04,
+      695.42
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "审字【"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0116",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      318.04,
+      684.92,
+      328.54,
+      695.42
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "】"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0117",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      333.82,
+      684.92,
+      354.82,
+      695.42
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "号）"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0118",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      297.04,
+      684.58,
+      318.04,
+      696.21
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2015"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0119",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      328.54,
+      684.58,
+      333.79,
+      696.21
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "9"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0120",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      187.58,
+      701.32,
+      254.66,
+      711.82
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市发展和"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0121",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      701.32,
+      416.78,
+      711.82
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市发展改革委项目备案表"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0122",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      701.68,
+      505.34,
+      712.18
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市环境保护"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0123",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      126.08,
+      709.48,
+      150.14,
+      719.98
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "年产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0124",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      153.2,
+      709.14,
+      176.78,
+      720.77
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "1,500"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0125",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      187.58,
+      716.92,
+      240.08,
+      727.42
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "改革委员会"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0126",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      716.92,
+      339.04,
+      727.42
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "（滁发改备案【"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0127",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      360.1,
+      716.92,
+      370.6,
+      727.42
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "】"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0128",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      386.32,
+      716.92,
+      407.32,
+      727.42
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "号）"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0129",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      339.04,
+      716.58,
+      360.04,
+      728.21
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2015"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0130",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      370.54,
+      716.58,
+      386.29,
+      728.21
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "122"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0131",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      717.28,
+      467.94,
+      727.78
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "局《关于"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0132",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      473.88,
+      717.28,
+      505.38,
+      727.78
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "安徽金"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0133",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      467.94,
+      716.94,
+      473.86,
+      728.57
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "<"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0134",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      126.08,
+      725.08,
+      176.72,
+      735.58
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吨三氯蔗"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0135",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      100.04,
+      724.74,
+      107.89,
+      736.37
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0136",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      732.88,
+      505.34,
+      743.38
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "禾实业股份有限"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0137",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      187.58,
+      733.24,
+      254.66,
+      743.74
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市发展和"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0138",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      733.24,
+      416.92,
+      743.74
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市发展改革委关于安徽金禾"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0139",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      126.08,
+      740.68,
+      157.58,
+      751.18
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "糖项目"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0140",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      427.68,
+      748.48,
+      472.2,
+      758.98
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "公司年产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0141",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      494.88,
+      748.48,
+      505.38,
+      758.98
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吨"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0142",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      473.04,
+      748.14,
+      494.04,
+      759.77
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "1500"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0143",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      187.58,
+      748.84,
+      240.08,
+      759.34
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "改革委员会"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0144",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      265.54,
+      748.84,
+      373.78,
+      759.34
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "实业股份有限公司年产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0145",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      395.5,
+      748.84,
+      416.86,
+      759.34
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "吨三"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0146",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      374.14,
+      748.5,
+      395.14,
+      760.13
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "1500"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p223-u0147",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 223,
+     "bbox": [
+      281.08,
+      780.66,
+      316.94,
+      792.29
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2-2-222"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0148",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      43.87,
+      505.21,
+      52.87
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "安徽金禾实业股份有限公司            公开发行可转换公司债券募集说明书"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0149",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      265.54,
+      76.0,
+      416.83,
+      86.5
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "氯蔗糖项目节能评估报告书的批"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0150",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      427.68,
+      76.0,
+      505.34,
+      86.5
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "三氯蔗糖项目环"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0151",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      265.54,
+      91.6,
+      349.54,
+      102.1
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "复（滁发改审批【"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0152",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      370.54,
+      91.6,
+      381.04,
+      102.1
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "】"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0153",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      391.6,
+      91.6,
+      412.6,
+      102.1
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "号）"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0154",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      427.68,
+      91.6,
+      497.97,
+      102.1
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "境影响报告书"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0155",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      349.54,
+      91.26,
+      370.54,
+      102.89
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2015"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0156",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      381.04,
+      91.26,
+      391.57,
+      102.89
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "64"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0157",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      499.44,
+      91.26,
+      505.36,
+      102.89
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": ">"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0158",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      427.68,
+      107.2,
+      505.34,
+      117.7
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "的批复》（滁环"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0159",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      265.54,
+      107.92,
+      416.83,
+      118.42
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "危险化学品建设项目安全条件审"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0160",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      187.58,
+      115.72,
+      254.66,
+      126.22
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "滁州市安全生"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0161",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      427.68,
+      122.8,
+      438.18,
+      133.3
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "【"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0162",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      459.24,
+      122.8,
+      469.74,
+      133.3
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "】"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0163",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      485.4,
+      122.8,
+      506.4,
+      133.3
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "号）"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0164",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      438.18,
+      122.46,
+      459.18,
+      134.09
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2015"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0165",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      469.68,
+      122.46,
+      485.43,
+      134.09
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "650"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0166",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      265.54,
+      123.52,
+      416.83,
+      134.02
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "查意见书（滁安监危化项目安条"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0167",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      187.58,
+      131.34,
+      250.58,
+      141.84
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "产监督管理局"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0168",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      265.54,
+      139.14,
+      297.04,
+      149.64
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "审字【"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0169",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      318.04,
+      139.14,
+      328.54,
+      149.64
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "】"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0170",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      333.82,
+      139.14,
+      354.82,
+      149.64
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "号）"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0171",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      297.04,
+      138.8,
+      318.04,
+      150.43
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2015"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0172",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      328.54,
+      138.8,
+      333.79,
+      150.43
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "8"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0173",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      118.1,
+      162.31,
+      406.21,
+      176.29
+     ],
+     "font_size": 13.98,
+     "bold": false,
+     "quote": "二、本次募集资金投资项目的可行性与必要性"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0174",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      111.2,
+      190.65,
+      267.68,
+      202.65
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "（一）募投项目实施的可行性"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0175",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      120.14,
+      214.05,
+      228.48,
+      226.05
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "、国家产业政策支持"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0176",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      114.14,
+      213.67,
+      120.14,
+      226.95
+     ],
+     "font_size": 12.0,
+     "bold": true,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0177",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      114.02,
+      237.45,
+      505.34,
+      249.45
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "目前，精细化工已成为中国化学工业中一个重要的独立分支和新的经济效益"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0178",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      260.85,
+      505.36,
+      272.85
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "增长点。近年来，中国十分重视精细化工的发展，高度重视食品添加剂行业的发"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0179",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      284.25,
+      505.08,
+      296.25
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "展，提出了众多产业支持政策。《食品工业“十三五”发展规划》指出将鼓励产"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0180",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      307.65,
+      505.34,
+      319.65
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "业集聚发展，引导食品加工企业向产业园区集聚；推进重点行业兼并重组，培育"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0181",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      331.05,
+      312.75,
+      343.05
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "壮大自主品牌。《国家产业结构调整目录（"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0182",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      336.58,
+      331.05,
+      354.64,
+      343.05
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "）（"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0183",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      378.7,
+      331.05,
+      505.2,
+      343.05
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "修订）》鼓励允许“安全"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0184",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      313.0,
+      330.67,
+      336.52,
+      343.95
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "2011"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0185",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      354.7,
+      330.67,
+      378.7,
+      343.95
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "2013"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0186",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      354.45,
+      505.34,
+      366.45
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "型食品添加剂、饲料添加剂”和“高效、安全、环境友好的农药新品种、专用中"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0187",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      377.85,
+      505.34,
+      389.85
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "间体”的研发和生产。国民经济建设急需的化工新材料及中间体、新型专用化学"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0188",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      401.25,
+      505.34,
+      413.25
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "品等高端石化化工产品以及电子化学品、食品添加剂、饲料添加剂、水处理化学"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0189",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      424.67,
+      505.36,
+      436.67
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "品、环保型塑料添加剂等高性能、环境友好、本质安全的新型专用化学品已成为"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0190",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      448.07,
+      246.02,
+      460.07
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "高端石化化工产品发展重点。"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0191",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      120.14,
+      471.47,
+      300.67,
+      483.47
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "、符合国内精细化工行业发展方向"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0192",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      114.14,
+      471.09,
+      120.14,
+      484.37
+     ],
+     "font_size": 12.0,
+     "bold": true,
+     "quote": "2"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0193",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      114.02,
+      494.87,
+      505.34,
+      506.87
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "精细化工是当今化学工业中最具活力的新兴领域之一，是新材料的重要组成"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0194",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      518.27,
+      505.27,
+      530.27
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "部分。精细化工产品种类多、附加值高、用途广、产业关联度大，直接服务于国"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0195",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      541.67,
+      505.34,
+      553.67
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "民经济的诸多行业和高新技术产业的各个领域。大力发展精细化工己成为世界各"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0196",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      565.07,
+      486.02,
+      577.07
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "国调整化学工业结构、提升化学工业产业规模和扩大经济效益的战略重点。"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0197",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      114.02,
+      588.47,
+      505.34,
+      600.47
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "国内精细化工企业数量庞大，但生产规模普遍偏小，技术相对落后，环境污"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0198",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      611.87,
+      510.02,
+      623.87
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "染严重，大型精细化工企业较少，而且由于精细化工产品具有多品种、小批量，"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0199",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      635.27,
+      505.34,
+      647.27
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "生产上又经常需要更换或更新品种的特点，因而要求企业必须具有随市场需求调"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0200",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      658.67,
+      505.34,
+      670.67
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "整生产的高度灵活性，在生产上需要采用多品种综合的生产流程和多用途多功能"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0201",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      682.07,
+      505.34,
+      694.07
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "的生产装置，以便在生产成本上把握优势，从而导致行业内企业优胜劣汰，未来"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0202",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      705.49,
+      505.34,
+      717.49
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "精细化工行业将向拥有规模优势与技术优势的大企业集中。本次拟投资的吡啶盐"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0203",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      728.89,
+      510.02,
+      740.89
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "和三氯蔗糖项目将充分利用公司多品种多用途的生产装置与领先的技术等优势，"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0204",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      90.02,
+      752.29,
+      462.02,
+      764.29
+     ],
+     "font_size": 12.0,
+     "bold": false,
+     "quote": "继续大力发展精细化工产品，扩大企业规模，在行业内抢得市场先机。"
+    },
+    {
+     "unit_id": "probe-cn-jinhe-convertible-tables-p224-u0205",
+     "sample_id": "cn-jinhe-convertible-tables",
+     "page": 224,
+     "bbox": [
+      281.08,
+      780.66,
+      316.94,
+      792.29
+     ],
+     "font_size": 10.5,
+     "bold": false,
+     "quote": "2-2-223"
+    }
+   ]
+  },
+  {
+   "sample_id": "cn-jinhe-convertible-tables",
+   "label": "金禾实业可转债募集说明书 p223-224（6列表 + 跨页备案表）",
+   "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+   "mode": "row_collapse",
+   "unit_count": 81,
+   "probe_mapping_note": "derived from the same page spans as the span probe; row-collapsed ids share the page/coordinate provenance above",
+   "page_extent": {
+    "first_unit": "probe-cn-jinhe-convertible-tables-p223-u0000",
+    "last_unit": "probe-cn-jinhe-convertible-tables-p224-u0080"
+   }
+  },
+  {
+   "sample_id": "cn-amec-annual-narrative",
+   "label": "中微公司 2025 年报 p41（叙述页，行内数字负例）",
+   "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "mode": "span",
+   "unit_count": 45,
+   "probe_mapping": [
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0000",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      200.88,
+      44.16,
+      353.88,
+      53.16
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "中微半导体设备（上海）股份有限公司"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0001",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      372.11,
+      44.16,
+      419.4,
+      53.16
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "年年度报告"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0002",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      353.88,
+      42.66,
+      372.11,
+      54.7
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "2025"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0003",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      110.88,
+      332.95,
+      531.47,
+      343.4
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "报告期内公司持续提升综合竞争力，在技术进步、业务发展、业绩增长、规范治理等方面不"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0004",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      353.35,
+      425.76,
+      363.8
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "断向国际先进水平的方向努力，实现公司高速、稳定、健康、安全发展。"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0005",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      110.88,
+      385.87,
+      237.24,
+      396.32
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "报告期内重点任务完成情况"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0006",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      110.88,
+      406.27,
+      531.47,
+      416.72
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "报告期内，公司在研发创新、知识产权体系建设、生产经营、外延式生长等方面取得了积极"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0007",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      426.67,
+      121.33,
+      437.12
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "成果："
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0008",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      110.88,
+      445.14,
+      116.1,
+      459.59
+     ],
+     "font_size": 10.45,
+     "bold": true,
+     "quote": "1"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0009",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      116.04,
+      447.19,
+      242.4,
+      457.64
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "、产品研发及客户拓展方面"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0010",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      110.88,
+      467.59,
+      531.47,
+      478.04
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "公司坚持自主创新，产品布局及技术研发面向世界科技前沿。报告期内，公司继续保持较高"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0011",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      487.99,
+      531.47,
+      498.44
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "的研发投入，与国内外一流客户保持紧密合作，相关设备产品研发进展顺利、客户端验证情况良"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0012",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      508.39,
+      110.77,
+      518.84
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "好。"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0013",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      131.7,
+      508.39,
+      218.29,
+      518.84
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "年公司研发投入约"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0014",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      244.5,
+      508.39,
+      331.09,
+      518.84
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "亿元，较去年增长"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0015",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      357.42,
+      508.39,
+      444.01,
+      518.84
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "亿元，同比增长约"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0016",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      479.04,
+      508.39,
+      531.37,
+      518.84
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "，研发投入"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0017",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      110.76,
+      506.86,
+      131.7,
+      520.57
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "2025"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0018",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      221.04,
+      506.86,
+      244.5,
+      520.57
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "37.44"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0019",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      333.84,
+      506.86,
+      357.42,
+      520.57
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "12.91"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0020",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      446.64,
+      506.86,
+      478.86,
+      520.57
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "52.65%"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0021",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      528.91,
+      205.33,
+      539.36
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "占公司营业收入比例约为"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0022",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      240.24,
+      528.91,
+      460.68,
+      539.36
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "，远高于科创板上市公司的平均研发投入水平。"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0023",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      207.96,
+      527.38,
+      240.18,
+      541.09
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "30.23%"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0024",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      110.88,
+      549.31,
+      531.47,
+      559.76
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "公司主营产品等离子体刻蚀设备作为半导体前道核心设备之一，市场空间广阔，技术壁垒较"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0025",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      569.71,
+      531.47,
+      580.16
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "高。公司的等离子体刻蚀设备在国内外持续获得更多客户的认可，针对先进逻辑和存储器件制造"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0026",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      590.11,
+      531.47,
+      600.56
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "中关键刻蚀工艺的高端产品新增付运量显著提升，先进逻辑器件中段关键刻蚀工艺和先进存储器"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0027",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      610.51,
+      247.32,
+      620.96
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "件超高深宽比刻蚀工艺实现量产。"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0028",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      110.88,
+      630.91,
+      531.47,
+      641.36
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "公司在新产品开发方面取得了显著成效，近两年新开发出十多种导体和介质薄膜设备，目前"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0029",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      651.43,
+      402.37,
+      661.88
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "已有多款新型设备产品进入市场，其中部分设备已获得重复性订单，"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0030",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      434.26,
+      651.43,
+      531.49,
+      661.88
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "设备累计出货量突破"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0031",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      399.96,
+      649.9,
+      434.26,
+      663.61
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "LPCVD"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0032",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      671.83,
+      426.36,
+      682.28
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "三百个反应台，其他多个关键薄膜沉积设备研发项目正在顺利推进；公司"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0033",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      444.6,
+      671.83,
+      531.37,
+      682.28
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "设备已顺利进入客"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0034",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      429.0,
+      670.3,
+      444.6,
+      684.01
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "EPI"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0035",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      692.23,
+      184.33,
+      702.68
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "户端量产验证阶段。"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0036",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      110.88,
+      712.63,
+      236.77,
+      723.08
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "公司持续保持国际氮化镓基"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0037",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      278.38,
+      712.63,
+      531.48,
+      723.08
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "设备市场领先地位，积极布局用于碳化硅和氮化镓基功"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0038",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      239.4,
+      711.1,
+      278.38,
+      724.81
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "MOCVD"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0039",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      89.88,
+      733.15,
+      200.05,
+      743.6
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "率器件应用的市场，并在"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0040",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      251.26,
+      733.15,
+      357.85,
+      743.6
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "和其他显示领域的专用"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0041",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      398.5,
+      733.15,
+      536.65,
+      743.6
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "设备开发上取得了良好进展，"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0042",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      201.72,
+      731.62,
+      251.26,
+      745.33
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "Micro-LED"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0043",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      359.52,
+      731.62,
+      398.5,
+      745.33
+     ],
+     "font_size": 10.45,
+     "bold": false,
+     "quote": "MOCVD"
+    },
+    {
+     "unit_id": "probe-cn-amec-annual-narrative-p41-u0044",
+     "sample_id": "cn-amec-annual-narrative",
+     "page": 41,
+     "bbox": [
+      295.44,
+      769.62,
+      325.79,
+      781.78
+     ],
+     "font_size": 9.0,
+     "bold": false,
+     "quote": "41 / 259"
+    }
+   ]
+  },
+  {
+   "sample_id": "cn-amec-annual-narrative",
+   "label": "中微公司 2025 年报 p41（叙述页，行内数字负例）",
+   "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "mode": "row_collapse",
+   "unit_count": 22,
+   "probe_mapping_note": "derived from the same page spans as the span probe; row-collapsed ids share the page/coordinate provenance above",
+   "page_extent": {
+    "first_unit": "probe-cn-amec-annual-narrative-p41-u0000",
+    "last_unit": "probe-cn-amec-annual-narrative-p41-u0021"
+   }
+  }
+ ],
+ "unavailable": []
+}
