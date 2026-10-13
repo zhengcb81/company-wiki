@@ -32,4 +32,8 @@ LAYOUT：独立34PASS/6real未运行，发现明确覆盖误报与忽略工作�
 
 ## 最终候选模块签收
 
-联合1135 PASS（42.665秒pytest），四PDF658原文span全部回放通过，10Q同源6 checks真；原件/配置/临时环境不变。五项旧断言由独立探针确认过时后改为更强正反终态，不降低原文闭包或预算。候选模块接受，正常发布中，详情见acceptance.md；生产默认、真实模型/RF与母G2/G4/G5仍开放。
+联合1135 PASS（42.665秒pytest），四PDF658原文span全部回放通过，10Q同源6 checks真；原件/配置/临时环境不变。五项旧断言由独立探针确认过时后改为更强正反终态，不降低原文闭包或预算。候选模块接受，已并master/推送且精确源码CI成功，详情见acceptance.md；生产默认、真实模型/RF与母G2/G4/G5仍开放。
+
+## 正常发布完成
+
+源码deb7eb7d4aa7658de86b63f1c6572104f519e197已并master并推送，精确CI 38476678472 success；正常pre-push 4175 PASS/17 SKIP，379.81秒，没有绕过hook。发布收据见evidence/publication.json，母计划及ROOT导航同步；生产/真实模型/G2/G4/G5保持开放。

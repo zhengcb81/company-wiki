@@ -1,0 +1,60 @@
+{
+  "schema_version": "du2-publication/1",
+  "status": "SOURCE_PUBLISHED_CI_GREEN",
+  "repository": "company-wiki",
+  "branch": "master",
+  "code_sha": "deb7eb7d4aa7658de86b63f1c6572104f519e197",
+  "remote_source_sha_verified": "deb7eb7d4aa7658de86b63f1c6572104f519e197",
+  "author_heads": {
+    "families": "b48b6ede50826bb249009ee9ca71c330764317a6",
+    "facets": "400a9456708f1a8c376050012f9078359bfa9074",
+    "layout": "8cfd069cce2e829c5a95c7b64323629c6ca21dae"
+  },
+  "all_author_heads_ancestors": true,
+  "normal_pre_commit": {
+    "passed": true,
+    "bypassed": false,
+    "first_failure": "five new metadata type annotations; corrected before successful commit"
+  },
+  "normal_pre_push": {
+    "passed": 4175,
+    "skipped": 17,
+    "test_seconds": 379.81,
+    "bypassed": false
+  },
+  "ci": {
+    "id": 38476678472,
+    "head_sha": "deb7eb7d4aa7658de86b63f1c6572104f519e197",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38476678472",
+    "created_at": "2026-10-13T22:16:39Z",
+    "updated_at": "2026-10-13T22:19:16Z"
+  },
+  "receipt_archive": {
+    "bytes": 170202,
+    "entries": 106,
+    "sha256": "b9369e8227c6aaba834a0a59d0a6c46d3450917997c7320ff04c4ffcede529d6",
+    "integrity_verified": true,
+    "contains_real_replay_runners": true
+  },
+  "production_default_enabled": false,
+  "model_calls": 0,
+  "paid_usd": 0,
+  "original_writes": 0,
+  "production_config_writes": 0,
+  "cleanup": {
+    "status": "completed_ROOT_only",
+    "reception_worktree_removed": true,
+    "archived_scratch_bytes_removed": 889897.0,
+    "author_trees_and_local_bindings": "preserved",
+    "historical_other_ROOT_scratch": "preserved",
+    "canonical_ROOT_scratch_removed": true
+  },
+  "remaining": [
+    "B8 business-value selection and shared context transmission",
+    "B10-11 production consumer and locally scoped cache",
+    "C12-15 real model quality, G2/G4/G5 and audit loop",
+    "Fine PDF column/cell geometry not verified on four samples"
+  ]
+}

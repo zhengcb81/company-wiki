@@ -13,7 +13,7 @@ Owner: ROOT
 1. [complete] A：核当前主线/作者HEAD/实际范围/交接，三独立agent只读审查与有界数据复验；记录真实与合成、结构与语义界限。收到完整意见后冻结本轮修复范围。
 2. [complete] B：以主线独立稀疏ROOT树合三最新分支。先写反例，集中修复布局硬工作预算/覆盖诚实性及错误事实支持；规格规范化导入唯一运行registry，不在运行时同时读取docs和旧规则两套源。接实际读取/选择/摘要组装，复用既有闭包。
 3. [complete] B/C：一次联合离线节点及代表原件回放，验证策略实际生效、布局引用/坐标来源、预算停止、最终原文绑定和正常缺口；独立复核。原件/配置SHA+mtime与独立tmp/哨兵恢复，0费用节点先做。
-4. [in_progress] 发布：正常commit/并主线/push与精确CI；更新所有ROOT导航和母计划，回收自有重复scratch和整合树。生产模型默认切换、真实摘要/公司G2/G4/G5仍按母计划大节点，不把模块PASS当研究PASS。
+4. [complete] 发布：正常commit/并master/push与精确CI；更新所有ROOT导航和母计划，回收自有重复scratch和整合树。生产模型默认切换、真实摘要/公司G2/G4/G5仍按母计划大节点，不把模块PASS当研究PASS。
 
 ## 接收接口与并行所有权
 
@@ -31,4 +31,4 @@ Owner: ROOT
 
 ## Next Step
 
-1135联合离线及4PDF/10Q实际消费节点通过；独审无未闭合阻断。正常commit/main/push和精确CI，更新发布收据；下一主线是acceptance.md的B8→B10–11→C12–15，生产/模型/G2/G4/G5不当完成。
+DU2模块接收与源码发布完成；生产默认摘要未启用。下一主线依 acceptance.md：B8业务价值/主题多样性及共享上下文一次发送→B10–11正式消费者与局部缓存→C12–15真实模型与G2/G4/G5。旧微软baseline4/8 FAIL保留，细列/单元格几何尚未认证。源码SHA/CI和ROOT自有清理见evidence/publication.json。

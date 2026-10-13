@@ -1,6 +1,6 @@
 {
   "schema_version": "du2-root-acceptance/1",
-  "status": "MODULE_ACCEPTED_PUBLICATION_PENDING",
+  "status": "MODULE_ACCEPTED_SOURCE_PUBLISHED_CI_GREEN",
   "author_heads": {
     "families": "b48b6ede50826bb249009ee9ca71c330764317a6",
     "facets": "400a9456708f1a8c376050012f9078359bfa9074",
@@ -59,6 +59,7 @@
     "B10-11 production consumer and cache; C12-15 real model quality/G2/G4/G5 remain",
     "Existing MSFT critical business baseline 4/8 FAIL retained"
   ],
-  "receipt_zip_bytes": 166085,
-  "runtime_catalog_sha256": "32c693421c4744e4925d2cb45f32778b1fd6776a6f6cde840d2af2f0c6375de1"
+  "receipt_zip_bytes": 170202,
+  "runtime_catalog_sha256": "32c693421c4744e4925d2cb45f32778b1fd6776a6f6cde840d2af2f0c6375de1",
+  "publication_ref": "publication.json"
 }
