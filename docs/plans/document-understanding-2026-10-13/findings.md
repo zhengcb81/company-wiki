@@ -1,3 +1,13 @@
+## ROOT当前合并发现 — 2026-10-13
+
+本PWF的唯一执行状态为task_plan.md；全部剩余B8/B10–11/C12–15已合并为completion_implementation.md的A/B/C。旧DU/DU2已发布，不再等待作者。
+
+两独立只读agent核当前源码：DU ReadingPlan尚未进入production _run_selector/model.from_selection；生产预算不消费实际范围策略。DU中间members重复原文，但生产HTTP已有unique evidence rows＋group aliases，须复用而非另造传输。
+
+新增根因：仅最终sent-policy hash不足以保障选择缓存，败选候选策略/新增匹配信号变化能改变赢家。必须记录实际decision候选域与全digest，并在模型前用原Store/CAS冻结generation；旧未选但参与决策的策略变更也要失效，不按whole catalog盲目重建。
+
+未实施状态：当前仅核范围/合并实施细则，A行为测试与代码改造尚未开始。生产默认未切；旧MSFT4/8与细geometry缺口仍存在。本轮0模型/下载/原件/配置写入。以下调查与旧推进记录为历史证据，旧状态不作为施工指令。
+
 ## 当前执行入口 — 2026-10-13 DU2 接收
 
 [DU2候选模块验收/发布](du2-reception/acceptance.md)：三新包与共享ROOT修复已接收，1135联合离线PASS、四PDF658原文span验真、同源10Q六项PASS；唯一24/14运行catalog、层级策略与有界layout/原文上下文已实际消费。已并 master 并推送 `deb7eb7d`，[精确CI](https://github.com/zhengcb81/company-wiki/actions/runs/38476678472) success；发布收据见du2-reception/evidence/publication.json。生产默认模型尚未切换；粗几何/实际0列保持partial，旧MSFT4/8与B8/B10–11/C12–15、母G2/G4/G5开放。下面旧状态为历史。

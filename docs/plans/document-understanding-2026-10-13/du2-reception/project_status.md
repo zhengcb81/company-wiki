@@ -13,9 +13,9 @@ flowchart TD
     classDef done fill:#d9f2df,stroke:#258542,color:#173b21;
     classDef here fill:#ffe2a3,stroke:#d27c00,stroke-width:3px,color:#4a3000;
     classDef todo fill:#eeeeee,stroke:#888888,color:#333333;
-    class A,B,C done;
-    class D here;
-    class E,F,G todo;
+    class A,B,C,D done;
+    class E here;
+    class F,G todo;
 ```
 
 ## 用大白话说
@@ -37,4 +37,4 @@ flowchart TD
 
 原始文档和生产配置未修改；没有新增逐材料授权、canary或人工签收许可。本轮没有模型调用或费用。现有原件验证与资源上限继续由负责层执行。
 
-实施顺序及边界：[task_plan.md](task_plan.md)、[验收报告](acceptance.md)、[发布收据](evidence/publication.json)。
+实施顺序及边界：[统一ROOT PWF](../task_plan.md)、[完整施工细则](../completion_implementation.md)、[验收报告](acceptance.md)、[发布收据](evidence/publication.json)。

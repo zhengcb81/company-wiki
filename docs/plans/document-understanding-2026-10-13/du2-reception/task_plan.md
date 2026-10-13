@@ -31,4 +31,4 @@ Owner: ROOT
 
 ## Next Step
 
-DU2模块接收与源码发布完成；生产默认摘要未启用。下一主线依 acceptance.md：B8业务价值/主题多样性及共享上下文一次发送→B10–11正式消费者与局部缓存→C12–15真实模型与G2/G4/G5。旧微软baseline4/8 FAIL保留，细列/单元格几何尚未认证。源码SHA/CI和ROOT自有清理见evidence/publication.json。
+DU2模块接收与源码发布完成；生产默认摘要未启用。下一主线统一依 [ROOT PWF](../task_plan.md)和[施工细则](../completion_implementation.md)：B8业务价值/主题多样性及共享上下文一次发送→B10–11正式消费者与局部缓存→C12–15真实模型与G2/G4/G5。旧微软baseline4/8 FAIL保留，细列/单元格几何尚未认证。源码SHA/CI和ROOT自有清理见evidence/publication.json。

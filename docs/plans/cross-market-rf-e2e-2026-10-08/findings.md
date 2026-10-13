@@ -1,3 +1,7 @@
+## ROOT当前执行归总 — 2026-10-13 共享阅读升级
+
+[统一PWF执行表](../document-understanding-2026-10-13/task_plan.md)与[施工细则](../document-understanding-2026-10-13/completion_implementation.md)合并共享引擎＋文档策略全部剩余工作：A业务选择/唯一材料→B正式摘要与两阶段generation/cache→C真实质量/默认切换。DU2已并master推deb7eb7d且CI38476678472绿，不再等待或重派作者。原件保持，无新许可/签收；母G2/G4/G5复用一次窗口，仍开放。本节优先于下方历史“DU/DU2施工中”状态；不将模块绿当母目标全部完成。
+
 ## 2026-10-13 三仓架构质量已闭环
 
 [三仓独立架构改造](../architecture-quality-2026-10-13/README.md)A/B/C已完成：CWP验收536c8987、FFe2efa81d、RFf0d694d6已推送且精确CI绿；原31 native/三公司正式经济结果保持、跨仓48PASS/0FAIL、九型G2 PASS。完整离线PARTIAL的HK fresh出处/PPTX无OCR与真实供应商/研究不伪称完成。FF/RF完整owned安装与fresh入口核验；原件/150 RF WIP/17配置保持，三质量临时工作树释放145,244,701字节。DU三线零写/接口不变。Next Step：接收DU三包并由ROOT接共享引擎，沿原真实G2/G4/G5与审计循环，完整母目标尚未完成。

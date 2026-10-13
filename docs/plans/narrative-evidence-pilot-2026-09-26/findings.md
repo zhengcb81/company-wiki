@@ -1,3 +1,7 @@
+## ROOT当前执行归总 — 2026-10-13 共享阅读升级
+
+[统一PWF执行表](../document-understanding-2026-10-13/task_plan.md)与[施工细则](../document-understanding-2026-10-13/completion_implementation.md)合并共享引擎＋文档策略全部剩余工作：A业务选择/唯一材料→B正式摘要与两阶段generation/cache→C真实质量/默认切换。DU2已并master推deb7eb7d且CI38476678472绿，不再等待或重派作者。原件保持，无新许可/签收；母G2/G4/G5复用一次窗口，仍开放。本节优先于下方历史“DU/DU2施工中”状态；不将模块绿当母目标全部完成。
+
 ## ROOT最新入口 — 2026-10-13 DU2候选模块接收
 
 [文档理解升级最新签收](../document-understanding-2026-10-13/du2-reception/acceptance.md)：1135联合PASS、4PDF658证据span验真、同源10Q6项PASS；原件/配置/测试环境保持。三最新作者提交与ROOT共用根因修复已并 master 并推送deb7eb7d，精确CI 38476678472 success；详情见子计划publication.json。没有启用生产默认LLM摘要或签G2/G4/G5。优先继续B8旧selector硬编码/价值预算→B10–11正式消费与局部缓存→C12–15真实模型和原/新公司审查；无新许可/canary链。下方旧并线计数为历史。

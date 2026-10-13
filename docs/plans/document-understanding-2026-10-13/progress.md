@@ -1,3 +1,11 @@
+## ROOT当前收尾推进 — 2026-10-13
+
+用户要求完成共享引擎＋多份文档阅读策略并合入PWF。已将研究、DU/DU2接收和剩余生产工作统一成根task_plan＋completion_implementation；母跨市场与叙述计划只引用这一执行表。
+
+两个独立agent只读核入口、选择断点、缓存因果与现有factory/reuse/outbox/recovery测试。发现并纠正“旧最终HTTP重复全文”推断；明确select决策依赖不同于最终提示指纹，冻结两阶段CAS顺序以避免重复parse/select。
+
+此次是计划合并与施工细则完成，未运行新代码/模型；A待先RED，B/C保持pending，生产默认和真实研究未宣称完工。已完成模块证据仍引用DU2 receipt，不重复验收。以下旧进度为历史。
+
 ## 当前执行入口 — 2026-10-13 DU2 接收
 
 [DU2候选模块验收/发布](du2-reception/acceptance.md)：三新包与共享ROOT修复已接收，1135联合离线PASS、四PDF658原文span验真、同源10Q六项PASS；唯一24/14运行catalog、层级策略与有界layout/原文上下文已实际消费。已并 master 并推送 `deb7eb7d`，[精确CI](https://github.com/zhengcb81/company-wiki/actions/runs/38476678472) success；发布收据见du2-reception/evidence/publication.json。生产默认模型尚未切换；粗几何/实际0列保持partial，旧MSFT4/8与B8/B10–11/C12–15、母G2/G4/G5开放。下面旧状态为历史。

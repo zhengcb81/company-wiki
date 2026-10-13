@@ -1,42 +1,18 @@
-## 当前执行入口 — 2026-10-13 DU2 接收
+# 共享文档阅读升级 — ROOT总入口
 
-[DU2候选模块验收/发布](du2-reception/acceptance.md)：三新包与共享ROOT修复已接收，1135联合离线PASS、四PDF658原文span验真、同源10Q六项PASS；唯一24/14运行catalog、层级策略与有界layout/原文上下文已实际消费。已并 master 并推送 `deb7eb7d`，[精确CI](https://github.com/zhengcb81/company-wiki/actions/runs/38476678472) success；发布收据见du2-reception/evidence/publication.json。生产默认模型尚未切换；粗几何/实际0列保持partial，旧MSFT4/8与B8/B10–11/C12–15、母G2/G4/G5开放。下面旧状态为历史。
+**当前：共享模块与DU2三包已验收/并master/推远端；生产新选择、正式摘要与真实质量收尾已统一纳入本PWF。**
 
-## 当前发布状态 — 2026-10-13
+执行入口：[task_plan.md](task_plan.md)。施工细则：[completion_implementation.md](completion_implementation.md)。恢复顺序：task_plan→findings→progress→当前节点细则。三大节点A选择/唯一材料→B正式链/缓存恢复→C真实质量/默认切换，ROOT统一负责接线和并线。
 
-旧 DU 三包接收与 ROOT 共同修复已并 master、推送 `9e9907cd7c013ecf0a6787dd0f591ba242eb223a`，[精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/38462668903) success；[接收结果](reception/acceptance.md) / [下一步](reception/task_plan.md)。首次 push 抓到共享 Windows 同目标 rename 争用，已 TDD 根治并实际1000写入零失败，未跳过测试。新 DU2 三卡仍独立施工，生产模型摘要与真实业务漏读/G2/G4/G5保持开放。下方“发布中”是历史。
+- 一个共享引擎，唯一运行catalog含24文档规格、14业务策略。格式前端提供真实原文/坐标，文档策略指定阅读重点，既有预算/模型/Worker负责执行。
+- 原件、SourceRef与历史locator保持；无全库MD重建或新许可链。未读/opaque/预算到限与无业务内容分开。
+- 已交付卡不再派工。原作者树/local bindings只读保留；代码所有权与新接线在当前细则中明确。
+- 新链尚未成为生产默认；微软旧关键业务4/8 FAIL、四样本细列/细cells缺口保留，后续必须按业务质量验证。
 
-## 当前接收状态（2026-10-13）
+## 证据与设计
 
-**旧 DU 三包和 ROOT 共用修复已接收，集中工程测试及四份原件回放通过。** 详 [接收 PWF](reception/task_plan.md) / [结果与限制](reception/acceptance.md)。本轮正常并主线/推送收尾，生产摘要尚未切换；微软 baseline 关键业务 4/8 的漏读未清零。
-**新 DU2-FAMILIES / FACETS / LAYOUT 已分发、正在施工，ROOT 没有写它们的独占目录。** 接下来 ROOT 统一策略数据/布局/业务价值预算与实际模型接线，完成真实 G2/G4/G5。下方旧施工状态只作历史。
+[DU2验收](du2-reception/acceptance.md) / [精确发布](du2-reception/evidence/publication.json)：源码deb7eb7d、CI38476678472 success，1135联合PASS、四PDF658原文span验真、真实10-Q六项PASS。
 
-# 文档理解升级 — ROOT 总入口
+[设计](design.md)、[DU/1接口](INTERFACES.md)、[深化接口](review/INTERFACES.md)、[调查发现](findings.md)、[20样本清单](sample_manifest.json)、[旧DU验收](reception/acceptance.md)。implementation/review和原cards保留设计/历史；当前调度只看task_plan，避免按旧“正在施工”文字重开任务。
 
-**最新复审（2026-10-13）：** [共享引擎/策略深化复审与三张新卡](review/README.md)。实际三包已有交接，另有未并主线的 ROOT 整合分支；以下原状态是分发时记录。复审发现策略别名/子路由未完全生效、依赖闭包和基准目标/证据绑定问题，整改顺序见 [ROOT实施](review/root_implementation.md)。先修共用根因，新包在互斥新目录工作；原 DU/1、四个旧工作树和生产入口本轮未改。
-
-2026-10-13：用户已确认“一个共享引擎＋多份文档阅读策略配置”，三包已分发并独立施工，生产解析链尚未切换。与原跨市场母计划相连；W08 RF/Audit 接收并线已完成，真实 G2/G4/G5 保持开放。本目录不是新的许可或人工签收系统。
-
-先读 [实证 findings](findings.md)、[设计](design.md)、[实施及测试](implementation.md)。三条线共用 [接口](INTERFACES.md)，各自拥有独立 checkout 和写入目录。ROOT 负责生产适配、并线、跨层测试、母计划状态。
-
-| 已分发的独立施工卡 | 工作目录（各为独立 CWP worktree） | 独占产物 |
-|---|---|---|
-| [DU-PROFILES：文档路由与阅读策略](cards/DU-PROFILES.md) | `C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/profiles` | `src/company_wiki/document_understanding/profiles/` |
-| [DU-STRUCTURE：跨页章节与语义单元](cards/DU-STRUCTURE.md) | `C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/structure` | `src/company_wiki/document_understanding/structure/` |
-| [DU-BENCH：真实样本质量基准](cards/DU-BENCH.md) | `C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/benchmark` | `tools/document_understanding_benchmark/` |
-
-各卡同时列出自己的 tests/fixtures/交接路径。施工期间不改对方代码，不改现有生产入口，不改母 PWF、依赖清单、hook/CI、生产配置。缺共享字段写入各自 `handoff.json`，由 ROOT 一次协调；不自创不兼容接口。三个包可用冻结 JSON 夹具独立施工，不等待彼此；ROOT 接入阶段才依赖三包。
-
-三个工作目录创建时已验证干净，现由各自harness施工，共同base为`7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8`。它们是稀疏代码checkout，创建时各约20MiB，共享现有Git对象；没有复制公司原件/数据库/旧派生。已包含现有hooks与各自PWF路径。继续使用表中工作目录，不重新建worktree或切分支。
-
-## 样本和边界
-
-- 20份原件：**15 PDF + 4 HTML + 1 TXT**，PDF共2390页。原件总约63.89MiB，均只读、未复制。
-- `sample_manifest.json` 保存调查路径；`sample_observations.json.gz` 是有界抽读/路由观察；`selector_probe.json.gz` 是三份真实 selector 诊断；`routing_ablation.json` 是同一原件更改类型/上限的对照。
-- `inspect_samples.py` 和 `probe_selector.py` 仅调查复现入口；不代表生产 SourceRef 读取规范，不能被业务模块导入。前者需要解压/输出 observations 的正常 JSON，后者生成诊断 JSON；运行后可按记录归档，禁止留下整篇文本副本。
-- 原生文本扫描约7秒（第二次warm run）；三份生产解析/选择合计21.956秒。不是供应商摘要、完整召回率或普遍性能结论。
-- 样本中的临时测试根可能将来不存在。DU-BENCH 必须按 SHA＋本机 bindings 解析，缺源显示 UNAVAILABLE；不能直接把本清单绝对路径固化进产品或 CI。
-
-## 当前顺序
-
-W08 RF/Audit 已接收并线。当前三包独立施工，ROOT准备共享生产适配及真实G2输入/配置/预算 → 接收三包并完成章节适配/选择/摘要一体整合 → 合并原母计划真实 G2 → G4原三家公司 → G5新三家公司 → 后续审计循环。不会用这轮样本调查替代真实研究验收。
+[母跨市场PWF](../cross-market-rf-e2e-2026-10-08/task_plan.md)、[母叙述资料PWF](../narrative-evidence-pilot-2026-09-26/task_plan.md)。真实G2/G4/G5共享一次窗口，不重复测试或签收。

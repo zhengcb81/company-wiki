@@ -1,50 +1,62 @@
-## 当前执行入口 — 2026-10-13 DU2 接收
-
-[DU2候选模块验收/发布](du2-reception/acceptance.md)：三新包与共享ROOT修复已接收，1135联合离线PASS、四PDF658原文span验真、同源10Q六项PASS；唯一24/14运行catalog、层级策略与有界layout/原文上下文已实际消费。已并 master 并推送 `deb7eb7d`，[精确CI](https://github.com/zhengcb81/company-wiki/actions/runs/38476678472) success；发布收据见du2-reception/evidence/publication.json。生产默认模型尚未切换；粗几何/实际0列保持partial，旧MSFT4/8与B8/B10–11/C12–15、母G2/G4/G5开放。下面旧状态为历史。
-
-## 当前发布状态 — 2026-10-13
-
-旧 DU 三包接收与 ROOT 共同修复已并 master、推送 `9e9907cd7c013ecf0a6787dd0f591ba242eb223a`，[精确 CI](https://github.com/zhengcb81/company-wiki/actions/runs/38462668903) success；[接收结果](reception/acceptance.md) / [下一步](reception/task_plan.md)。首次 push 抓到共享 Windows 同目标 rename 争用，已 TDD 根治并实际1000写入零失败，未跳过测试。新 DU2 三卡仍独立施工，生产模型摘要与真实业务漏读/G2/G4/G5保持开放。下方“发布中”是历史。
-
-## 当前执行入口 — 2026-10-13 旧三包接收
-
-[reception/task_plan](reception/task_plan.md) 优先于下方历史阶段表。旧 DU 三包/ROOT 最新成果及两条排他接收修复已整合；491 项集中与 11 项四原件回放通过，最终 oracle seam 5 PASS，独审无剩余并线阻断。正常并线/推送收尾。生产模型摘要与实际业务漏读不当完成；新 DU2 三卡仍正在施工。
-ROOT 后续按 review/root_implementation 接策略/布局/业务价值预算→真实配置摘要与回开→母计划 G2/G4/G5。仅大节点测试审查，不添加小节点许可。
-
-# 文档理解架构升级：调查与实施计划
-
-## 最新优先事项（2026-10-13 深化复审）
-
-本轮复审与增量施工由 [review/task_plan](review/task_plan.md) 跟踪。三条旧卡及 ROOT 整合分支已有交接，尚未主线启用；旧阶段表保留为分发时状态。ROOT下一步是核对最新分支接收并按 [root_implementation](review/root_implementation.md) 修评价目标/证据绑定、完整依赖闭包、配置实际消费，再做正式接线与B/C；新三卡可独立准备文档策略/业务策略/布局辅助。不要依据旧oracle分数调高切片数量或另建HTML前端。
+# 共享引擎＋多份文档阅读策略 — ROOT统一执行PWF
 
 PLAN_ID: document-understanding-2026-10-13
 PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans
 Owner: ROOT
-状态：用户已确认共享引擎＋多份阅读策略配置；三条分包已分发、独立施工中；生产解析链未切换。
+Current Phase: A — 生产选择与唯一材料，接口/TDD准备
 
-2026-10-13：用户已发出三包，当前由各自harness施工。ROOT已完成W08 RF/Audit验收并线/必要安装，详母计划W08接收入口；现在准备主线真实G2及三DU包集成，三包代码与各自PWF不由ROOT代写。
+## Goal
 
-## 目标与边界
+完成一个共享文档阅读引擎与多份市场/文档/业务策略，并接入正式资料处理、原语言摘要和缓存。与母PWF共用G2/G4/G5真实验证；不另建引擎、任务库、全篇MD副本、权限或人工签收链。原件保留，IO/身份/预算各由负责层执行。
 
-根据真实 A/H/US 文档及现有代码，实施已确认的共享引擎与文档类型/章节阅读策略。原件不改，不增加逐材料授权、不复制全量 PDF/MD，不新增研究结论 writer。复用 SourceRef/SourceExport、AUTO Store、现有资源预算与配置供应商。W08 RF/Audit 接收已完成；母计划真实 G2/G4/G5 保持开放，不能用模块交付或本轮调查替代。
+此表是唯一当前执行状态；详细施工见 [completion_implementation.md](completion_implementation.md)。旧DU/DU2接收已关闭，旧卡和阶段文字只供历史/设计参考，不再等待交付或重发同卡。改前先读本表、findings、progress及所做节点细则。
 
-## 阶段
+## 已完成基础
 
-1. [complete] 读当前路由/规范化/选择/摘要边界与历史设计；20份原件原生扫描/重点抽读、4页视觉核对、3份真实selector回放。
-2. [complete] 已写design、INTERFACES、implementation，明确共用结构/策略/语义证据、资源与A/B/C测试。
-3. [complete] 三卡、冻结接口/交接格式和独立worktree已准备并分发；共同基线7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8，创建时已验证干净。
-4. [in_progress] 三包各自实施；ROOT准备现有units适配及G2真实输入/配置/预算。生产接线、真实摘要和公司G2/G4/G5验收仍待完成。
+- [complete] 20原件调查、设计与DU/1接口、原三包和独立接收整改。三仓本轮架构质量改造已发布。
+- [complete] DU2三最新作者＋ROOT整合：一个运行catalog含24文档规格/14业务策略；层级/实际范围、原文闭包、字体/粗几何和有界布局实际消费。
+- [complete] 联合1135 PASS，四PDF658原文span验真，真实10-Q六项PASS，独审共同根因关闭；原件/配置/测试环境保持。
+- [complete] 源码deb7eb7d并master并推送，CI38476678472 success；正常pre-push4175 PASS/17 SKIP。收尾9e4faf2a已推送，ROOT整合树/临时材料已归档回收，作者bindings保持。
+
+## 剩余阶段（仅三大节点）
+
+### Phase A: 生产选择与唯一材料
+
+**Status:** in_progress
+
+统一ReadingPlan进入既有candidate/finalize/budget流程，业务价值/主题多样性/新信息和完整闭合边际成本共同决定选择。根治旧活跃题材/固定4–9个月优待，不能仅改排序或提高cap。共享上下文唯一材料＋组引用，复用生产eN/gN形式。先写行为RED，集中实现并跑A受影响测试。
+
+责任范围：source_catalog的候选/预算/最终选择；document_understanding的选择桥/摘要组装。旧版本仅供必要回放，新默认在C达标后切换。
+
+### Phase B: 正式摘要、generation与缓存恢复
+
+**Status:** pending
+
+同一次parser→DU→正式SelectResult→ModelRequest→NarrativeRef，只有最终实际采用提示进入模型。selection-decision指纹与final-sent-policy指纹分开；未选但参与决策的策略变化也失效，无关策略不全库重建。
+
+采用base归属→正式select一次→final generation CAS→模型任务顺序，复用原AUTO/Store/outbox与计费。production factory/loopback、相关/无关变更0POST、取消/丢ACK/重启、旧ref回放和消费者在一次集中工程E2E节点验收，独立复核后正常发布。不新建canary或人工许可。
+
+### Phase C: 真实质量、泛化、默认切换和清理
+
+**Status:** pending
+
+同原件同范围同预算旧/新比较，精确使用配置的MiMo/DeepSeek/MiniMax和原累计账$20/200万token；与母G2真实摘要、G4原三公司、G5新A/H/US三公司共用一个验证窗口。包含文档类型覆盖、关键业务gold、原文回开、数字/角色/阶段、空间/时间/并发观察。
+
+细分栏/细表不足及缺样诚实记录；关键经营信息漏读不能用partial标签放行。达标后一次切正式默认、清理被替代运行逻辑和自有scratch，保留历史ref回放、原件及必要usage，正常并线/推送/精确CI与技能定点同步。
 
 ## Next Step
 
-三包按原卡和DU/1接口继续独立施工。ROOT不写它们的独占模块和各自PWF，准备共享生产适配及真实G2；收到交付后集中接收、并线、跨层离线验证，再合并母计划真实G2/G4/G5。新增文档类型先扩展策略，不建立另一套引擎或技能。
+在既有A测试包先冻结并写“实际策略影响生产选中、未列题材可入选、共享闭包唯一成本、超限整体deferred”的反例；记录RED，再实现同一个预算planner的新策略。当前生产默认尚未切换，不能据DU2模块PASS标全升级完成。
 
-## Errors Encountered
+## 完成标准与注意事项
 
-- 首次 CodeGraph 用宽泛自然语言命中旧 ClaimRouter，后续改用明确符号；未据此推断新解析链。
-- 历史 W04 source_rows JSON 已归档不在原路径；改读已发布压缩回放定位六份原件，无重新生成历史证据。
-- Python 首次输出中文编码失配；后续统一 `-X utf8` / PYTHONIOENCODING=utf-8，原文件不受影响。
-- PyMuPDF原生save向沙箱Temp写PNG失败；改写工作区自有临时目录、tobytes写入后目视核查；四PNG已删除恢复。
-- HKEX年报编制指南打开失败，正文未核验；设计引用本地真实港股年报和官网摘要，不将搜索摘要当全文已读。
-- 母PWF首次prepend被Windows换行转换造成全文件diff；已按HEAD原字节保留正文、仅追加LF前缀恢复，diff仅14行新增。
-- 新worktree --no-checkout后稀疏规则未填入空索引；在三个刚创建的指定分支执行read-tree -mu HEAD完成检出，三者status均0，无原件目录复制。
+- A/B/C全部有真实证据，正式默认启用且发布后才关闭共享阅读升级。母研究循环按原计划继续，不将模块PASS当经济研究PASS。
+- 旧微软关键业务baseline4/8 FAIL保持；真实/合成/不可评分别报告，不降gold或删失败收据。
+- 生产HTTP原已unique evidence rows；重复正文在DU中间package视图。接线复用既有传输，不能误修正确的HTTP机制。
+- 原件与生产配置不写穿；测试独立tmp/sentinel/owned清单，成功/失败都恢复。Dayu/IQS和他人WIP不动。
+- ROOT统一共有接口/状态/Git。作者卡全部已交付，不自动重派；未来分包需排他目录与冻结接口。
+- 既有静态/快速hooks正常执行；只在A/B/C大节点做集中复核，不新增小节点门禁。
+
+## 依据和历史
+
+[已发布DU2验收](du2-reception/acceptance.md)、[发布收据](du2-reception/evidence/publication.json)、[旧DU验收](reception/acceptance.md)、[设计](design.md)、[接口](INTERFACES.md)、[旧细则](review/root_implementation.md)、[母跨市场PWF](../cross-market-rf-e2e-2026-10-08/task_plan.md)。原ROOT阶段表保留在Git 9e4faf2a；本表已合并其完成事实与全部剩余任务，历史不再作为当前指令。
