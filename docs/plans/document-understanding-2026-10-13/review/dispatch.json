@@ -1,0 +1,14 @@
+{
+  "schema_version": "du2-dispatch/1",
+  "date": "2026-10-13",
+  "status": "WORKTREES_CREATED_PLAN_CHECKOUT_PENDING",
+  "root_code_base": "e802e8ac411715c07c025f576e376eed724cbec0",
+  "plan_commit": null,
+  "repository": "company-wiki",
+  "lanes": [
+    {"id":"DU2-FAMILIES","branch":"codex/du2-families-20261013","worktree":"C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-20261013/families","card":"cards/DU2-FAMILIES.md","owned":["docs/plans/document-understanding-2026-10-13/review/deliverables/families/",".planning/du2-families/"]},
+    {"id":"DU2-FACETS","branch":"codex/du2-facets-20261013","worktree":"C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-20261013/facets","card":"cards/DU2-FACETS.md","owned":["docs/plans/document-understanding-2026-10-13/review/deliverables/facets/",".planning/du2-facets/"]},
+    {"id":"DU2-LAYOUT","branch":"codex/du2-layout-20261013","worktree":"C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-20261013/layout","card":"cards/DU2-LAYOUT.md","owned":["src/company_wiki/document_understanding/layout_hints/","tests/unit/document_understanding_layout_hints/","tests/fixtures/document_understanding_layout_hints/",".planning/du2-layout/"]}
+  ],
+  "constraints": {"old_du_worktrees_modified":false,"raw_documents_copied":0,"new_production_permissions":0,"baseline_mode":"sparse code/docs checkout, shared Git objects","root_next":"publish plans then fast-forward only these clean new worktrees; no old DU merge in this review task"}
+}

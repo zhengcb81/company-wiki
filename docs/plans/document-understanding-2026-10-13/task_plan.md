@@ -1,5 +1,9 @@
 # 文档理解架构升级：调查与实施计划
 
+## 最新优先事项（2026-10-13 深化复审）
+
+本轮复审与增量施工由 [review/task_plan](review/task_plan.md) 跟踪。三条旧卡及 ROOT 整合分支已有交接，尚未主线启用；旧阶段表保留为分发时状态。ROOT下一步是核对最新分支接收并按 [root_implementation](review/root_implementation.md) 修评价目标/证据绑定、完整依赖闭包、配置实际消费，再做正式接线与B/C；新三卡可独立准备文档策略/业务策略/布局辅助。不要依据旧oracle分数调高切片数量或另建HTML前端。
+
 PLAN_ID: document-understanding-2026-10-13
 PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans
 Owner: ROOT

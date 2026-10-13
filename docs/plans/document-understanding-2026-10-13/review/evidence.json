@@ -1,0 +1,42 @@
+{
+  "schema_version": "du-review-evidence/1",
+  "date": "2026-10-13",
+  "scope": "Read-only architecture, strategy and evaluation review; not production acceptance",
+  "snapshot": {
+    "main": "e802e8ac411715c07c025f576e376eed724cbec0",
+    "profiles": "e74b9dcbc1c58204c01df583fadaa98dbd7156ff",
+    "structure": "f8f456a3475ef7ff56b15f0984f812535e5ebf75",
+    "benchmark": "3e5260339992b65bbad0141d94fcb55f657cd829",
+    "integration_branch": "codex/du-root-integration-20261013",
+    "integration_short_sha": "257b6c1f",
+    "note": "Worktrees clean at snapshot; branches advanced during initial inspection, handoff values are not assumed to equal HEAD"
+  },
+  "root_probes": [
+    {"id":"R03","script":"probes/closure_probe.py","target":"du-root checkout","exit_code":1,"expected_failure":true,"observed":"p1 has c but not required d, marked complete, deferred empty; closure reports b added"},
+    {"id":"R01_R07","script":"probes/strategy_probe.py","target":"du-profiles checkout","exit_code":0,"observed":"prospectus/offering business aliases only CN block; synthetic S-1/F-1/8-K/6-K all generic unknown with no children","note":"exit 0 means observation finished, not product correct"},
+    {"id":"R04_R10","script":"probes/oracle_probe.py","target":"du-benchmark checkout","exit_code":0,"observed":{"ungrounded_text":"PASS","different_page_claims":"PASS","one_valid_alternative":"UNAVAILABLE"},"note":"Direct recall checks, not overall evaluate result. Future fixed regression needs genuine locator-text mappings"}
+  ],
+  "independent_agent_real_probe": {
+    "id":"R06",
+    "source":"companies/微软/raw/financial_reports/annual/微软_10-K_2025.htm",
+    "sha256":"99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "entry":"document_normalization.normalize_document -> select_narrative_evidence(existing_kind=annual_report)",
+    "parser":"1.0.0","format":"html","units":5215,"candidates":195,"selected":96,"status":"partial","seconds":9.162,
+    "limit":"Existing frontend works for this source; not recall or LLM fidelity. ROOT did not repeat the parse",
+    "resolved_probe_error":"Initial artificial source URN rejected; rerun with valid SHA source URN. Not production defect"
+  },
+  "source_locations": {
+    "combine":"profiles/src/company_wiki/document_understanding/profiles/model.py:351",
+    "form_mapping":"profiles/src/company_wiki/document_understanding/profiles/decision.py:235",
+    "sampling":"profiles/src/company_wiki/document_understanding/profiles/observation.py:182",
+    "strategy_binding":"root/src/company_wiki/document_understanding/pipeline.py:95",
+    "closure":"root/src/company_wiki/document_understanding/selection_bridge.py:132",
+    "completeness":"root/src/company_wiki/document_understanding/summary_input.py:223",
+    "metadata":"root/src/company_wiki/document_understanding/observation_adapter.py:254",
+    "recall":"benchmark/tools/document_understanding_benchmark/checkers.py:205",
+    "availability":"benchmark/tools/document_understanding_benchmark/checkers.py:243",
+    "wrong_objective":"benchmark/tools/document_understanding_benchmark/gold/cn-q-sparse.json",
+    "wrong_frontend":"benchmark/tools/document_understanding_benchmark/observer.py"
+  },
+  "limits": {"model_calls":0,"paid_provider_usd":0,"raw_writes":0,"production_code_changes":0,"existing_du_worktree_writes":0,"official_web_structure_research":true,"real_model_semantic_review":"NOT_RUN","old_improvement_rates":"NOT_RELIABLE_PENDING_ORACLE_AND_SCOPE_REPAIR"}
+}
