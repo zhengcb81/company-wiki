@@ -1,0 +1,132 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-hk-annual-stores-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "hk-annual",
+    "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+    "origin": {
+      "doc_title": "名创优品2024年度报告（港股）",
+      "issuer_market": "hkex",
+      "document_date": "2025",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample hk-annual；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "hk-annual"
+  },
+  "observation": {
+    "metadata": {
+      "title": "2024年度报告（港股）",
+      "declared_kind": "annual_report",
+      "regime": "hkex",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": "2024-12-31",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 11,
+          "line": null,
+          "exact_quote": "截至2024年12月31日止財政年度，本集團於中國內地和海外市場的名創優品門店總數由截至2023年12月31日的6,413家增加至截至2024年12月31日的7,504家。"
+        },
+        "page": 11,
+        "text": "截至2024年12月31日止財政年度，本集團於中國內地和海外市場的名創優品門店總數由截至2023年12月31日的6,413家增加至截至2024年12月31日的7,504家。",
+        "role": "operating_metrics",
+        "hints": {"heading_path": ["業務回顧及展望", "門店網絡"], "language": "zh-Hant"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 11,
+          "line": null,
+          "exact_quote": "TOP TOY門店數量由截至2023年12月31日的148家增加至截至2024年12月31日的276家。"
+        },
+        "page": 11,
+        "text": "TOP TOY門店數量由截至2023年12月31日的148家增加至截至2024年12月31日的276家。",
+        "role": "operating_metrics",
+        "hints": {"heading_path": ["業務回顧及展望", "門店網絡"], "language": "zh-Hant"}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {
+          "physical_page": 13,
+          "line": null,
+          "exact_quote": "Stores operated under MINISO Retail Partner model 名創合夥人門店"
+        },
+        "page": 13,
+        "text": "Stores operated under MINISO Retail Partner model 名創合夥人門店 Number of stores at the beginning of the period/year 期╱年初門店數量",
+        "role": "operating_metrics",
+        "hints": {"unit_kind": "operating_table", "note": "门店表行标签原文：经营模式维度 + 期初门店数量行（表格另有净增/期末行，未摘入本 case）"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "经营表/门店指标是港股年报 P1 目标，不能因“数字多”被排除",
+      "英文栏标题与繁体中文为同一表格的双语行标签，合并而不是双计"
+    ],
+    "facts": [
+      {
+        "id": "f1-store-count-stock-not-flow",
+        "objective": "识别门店总数的存量口径与期间",
+        "importance": "critical",
+        "any_support_sets": [["u1"], ["u2"]],
+        "must_preserve": [
+          "口径：期末门店总数（存量），对比期初存量 6,413 家→7,504 家（另一品牌 148→276）",
+          "范围：中国内地和海外市场合计；主体：本集团",
+          "期间：截至2024-12-31 止财政年度 vs 2023-12-31"
+        ],
+        "must_not_assert": [
+          "总数变化不等于净增（净增需扣关店，表内另有淨增加行）",
+          "不得把不同品牌的门店数合并成一个品牌口径"
+        ]
+      },
+      {
+        "id": "f2-operating-model-scope",
+        "objective": "识别门店表的经营模式维度",
+        "importance": "normal",
+        "any_support_sets": [["u3"]],
+        "must_preserve": ["模式维度：合伙人门店等经营模式单列", "表行含期初门店数量（存量口径起点）"],
+        "must_not_assert": ["不得把某一模式的门店数当全渠道总数", "不得由行标签推出未摘录的净增/期末数值"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "双栏阅读顺序恢复（归 LAYOUT/ROOT）",
+      "语义蕴含判定交 ROOT 行为测试（execution_status=NOT_RUN_ROOT_INTEGRATION）"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1-stock-as-net-add",
+      "change": "把 7,504 家写成“本年净增 7,504 家门店”",
+      "expected_failure": "denominator_mismatch",
+      "reason": "存量被当作净增流量"
+    },
+    {
+      "id": "m2-brand-collapse",
+      "change": "把两个品牌的门店数相加成单一品牌口径",
+      "expected_failure": "subject_mismatch",
+      "reason": "不同品牌主体被合并"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "本集团（某品牌）",
+    "modality": "actual",
+    "quantity": "7,504",
+    "unit": "家",
+    "period": "截至2024-12-31止财政年度",
+    "condition": null
+  },
+  "expected_missing_slots": ["geography"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-synth-feasibility-01",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "synth-feasibility",
+    "source_sha256": null,
+    "origin": {
+      "doc_title": "合成：募投项目可行性研究报告",
+      "issuer_market": "cn_exchange",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "synthetic fixture；本地缺独立可研原件，已入 acquisition_requests"
+    },
+    "local_binding_key": "synthetic:feasibility"
+  },
+  "observation": {
+    "metadata": {
+      "title": "合成：XX项目可行性研究报告",
+      "declared_kind": "feasibility_study",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": null, "exact_quote": "[SYNTHETIC] 项目建设期1年，生产期10年，投运首年负荷70%，次年100%。"},
+        "page": 1,
+        "text": "[SYNTHETIC] 项目建设期1年，生产期10年，投运首年负荷70%，次年100%。",
+        "role": "operating_metrics",
+        "hints": {"synthetic": true}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 2, "line": null, "exact_quote": "[SYNTHETIC] 经测算，项目达产后年销售收入约X万元（测算值，非承诺）。"},
+        "page": 2,
+        "text": "[SYNTHETIC] 经测算，项目达产后年销售收入约X万元（测算值，非承诺）。",
+        "role": "financial_notes",
+        "hints": {"synthetic": true}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": 3, "line": null, "exact_quote": "[SYNTHETIC] 本项目已取得备案，环评批复尚在办理。"},
+        "page": 3,
+        "text": "[SYNTHETIC] 本项目已取得备案，环评批复尚在办理。",
+        "role": "risk",
+        "hints": {"synthetic": true}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": ["可研是假设性研究，测算与许可条件整包保留"],
+    "facts": [
+      {
+        "id": "f1-feasibility-is-assumption",
+        "objective": "测算值与假设/许可条件绑定",
+        "importance": "critical",
+        "any_support_sets": [["u1", "u2", "u3"]],
+        "must_preserve": ["假设：建设期/生产期/负荷", "测算口径：达产后年销售收入（预测）", "许可状态：备案已取得、环评在办"],
+        "must_not_assert": ["测算收入不得当实际或承诺", "许可未齐备不得写成可开工"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["真实可研结构核对（缺样）", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-forecast-as-actual",
+      "change": "把测算销售收入写成达产后实际收入",
+      "expected_failure": "modality_changed",
+      "reason": "预测被当实际"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

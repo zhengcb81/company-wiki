@@ -1,0 +1,116 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "cn_quarterly_report",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["cn_exchange"],
+    "forms": [],
+    "family": "quarterly",
+    "purposes": ["periodic_review", "event_scan"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["pdf"],
+    "language": ["zh"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "季度报告", "field": null},
+        "location": "cover",
+        "reason": "A股季报封面标题形如《……年第X季度报告》"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "重要内容提示", "field": null},
+        "location": "body",
+        "reason": "A股季报模板首节，支持季报识别"
+      },
+      {
+        "signal": {"kind": "metadata_equals", "value": "cn_exchange", "field": "regime"},
+        "location": "metadata",
+        "reason": "A股披露制度；与标题/正文证据组合"
+      }
+    ],
+    "counterexamples": [
+      "季度财务报表附注或业绩快报不是季度报告正文",
+      "把归母利润变动原因当产品/业务进展：财务解释与业务进展要分开标注",
+      "稀疏季报（无业务叙述）不能整类跳过，也不能强求生成业务摘要",
+      "半年报中的季度比较数据不构成独立季报"
+    ]
+  },
+  "sections": [
+    {
+      "role": "management_discussion",
+      "aliases": ["重要事项", "经营情况", "重要事项、经营情况"],
+      "heading_path": [["重要事项", "经营情况", "重要事项、经营情况"]],
+      "priority": 1,
+      "questions": ["本期重要事项与变动原因中的业务信息"]
+    },
+    {
+      "role": "business",
+      "aliases": ["业务进展", "经营情况的其他重要信息", "其他"],
+      "heading_path": [["经营情况的其他重要信息", "其他", "三、其他"]],
+      "priority": 2,
+      "questions": ["是否有产品验证、订单、项目等短业务叙述"]
+    },
+    {
+      "role": "outlook",
+      "aliases": ["其他提醒事项", "需提醒投资者关注的其他重要信息"],
+      "heading_path": [["其他提醒事项", "需提醒投资者关注的关于公司报告期经营情况的其他重要信息"]],
+      "priority": 2,
+      "questions": ["需提醒事项中是否有业务/经营事件"]
+    },
+    {
+      "role": "financial_notes",
+      "aliases": ["季度财务报表", "合并财务报表"],
+      "heading_path": [["季度财务报表", "财务报表"]],
+      "priority": 3,
+      "questions": ["变动原因中的经营驱动解释"]
+    }
+  ],
+  "reading_questions": [
+    "先完整轻扫再判断价值：业务密度低可不摘要",
+    "重要事项/变动原因中的短业务进展",
+    "财务变动原因的经营解释（区别于纯会计原因）",
+    "是否存在需提醒投资者的经营事件"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period"],
+      "missing_behavior": "unknown",
+      "reason": "季报是单季口径且通常未经审计，断言必须绑定主体与期间"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "missing_behavior": "partial",
+      "reason": "单季/累计/同比基期分开，数值缺口径不得引用"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "变动原因常带假设与限定语，必须随事实保留"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "季度财务报表与常规附注",
+      "unless": "其中含业务/经营驱动解释"
+    },
+    {
+      "content": "股东数、前十大股东等纯统计表格",
+      "unless": "问题明确要求股权结构且不与业务进展混淆"
+    }
+  ],
+  "fallback": {
+    "unread": "扫描/缺文本走 needs_source，不因空文本判定无业务",
+    "ambiguous": "季报与业绩快报/预告混淆时按正文模板判型",
+    "no_business": "完整轻扫后确认无业务叙述（如其他提醒事项为不适用）时 eligible_skip_after_read，0 派生 0 模型调用"
+  },
+  "evidence_status": {
+    "design": "verified",
+    "real_samples": ["case-cn-quarterly-business-01", "case-cn-quarterly-sparse-02"],
+    "missing_shapes": ["含重大经营事件的季报更多行业样本"]
+  },
+  "case_ids": ["case-cn-quarterly-business-01", "case-cn-quarterly-sparse-02"]
+}

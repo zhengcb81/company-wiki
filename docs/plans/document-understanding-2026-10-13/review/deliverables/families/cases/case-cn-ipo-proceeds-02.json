@@ -1,0 +1,111 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-cn-ipo-proceeds-02",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-ipo",
+    "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "origin": {
+      "doc_title": "中微公司首次公开发行股票并在科创板上市招股说明书",
+      "issuer_market": "cn_exchange",
+      "document_date": "2019-07-16",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample cn-ipo；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "cn-ipo"
+  },
+  "observation": {
+    "metadata": {
+      "title": "中微公司：首次公开发行股票并在科创板上市招股说明书",
+      "declared_kind": "prospectus",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": "2019-07-16",
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 34,
+          "line": null,
+          "exact_quote": "本次募集资金将严格按照规定存储在董 事会指定的专门账户集中管理，专款专用"
+        },
+        "page": 34,
+        "text": "本次募集资金将严格按照规定存储在董 事会指定的专门账户集中管理，专款专用，规范使用募集资金。",
+        "role": "fundraising",
+        "hints": {"heading_path": ["募集资金运用"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 34,
+          "line": null,
+          "exact_quote": "1  高端半导体设备扩产升级项目  40,058.96  40,000.00"
+        },
+        "page": 34,
+        "text": "序号  募集资金运用方向  项目总投资  拟投入募集资金  1  高端半导体设备扩产升级项目  40,058.96  40,000.00  2  技术研发中心建设升级项目  40,097.22  40,000.00  3  补充流动资金  20,000.00  20,000.00  合计  100,156.18  100,000.00",
+        "role": "fundraising",
+        "hints": {"unit_kind": "operating_table", "note": "募资用途表：项目总投资 vs 拟投入募集资金两列口径"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "募资用途表是招股书 P1 阅读目标，项目行必须整包保留",
+      "总投资与拟投入募集资金是两列不同口径"
+    ],
+    "facts": [
+      {
+        "id": "f1-proceeds-structure",
+        "objective": "识别募资用途的项目结构与双口径",
+        "importance": "critical",
+        "any_support_sets": [["u2"]],
+        "must_preserve": [
+          "三个用途方向：扩产升级、研发中心建设、补充流动资金（补流单列）",
+          "列口径：项目总投资 vs 拟投入募集资金（如 40,058.96 vs 40,000.00）",
+          "期间/as-of：2019 年招股时点"
+        ],
+        "must_not_assert": [
+          "拟投入募集资金不等于项目实际投入或已建成",
+          "补流金额不得并入项目投资额",
+          "不得把募投项目投资额当项目收益"
+        ]
+      },
+      {
+        "id": "f2-proceeds-earmarking",
+        "objective": "募资专户管理约束",
+        "importance": "normal",
+        "any_support_sets": [["u1"]],
+        "must_preserve": ["约束：专款专用、专户集中管理"],
+        "must_not_assert": ["资金用途承诺不等于项目执行进度"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["项目后续执行情况（超出本文件范围）", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-merge-columns",
+      "change": "把项目总投资与拟投入募集资金合并成一个“募资额”数字",
+      "expected_failure": "denominator_mismatch",
+      "reason": "两列口径被合并"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "募投项目（扩产升级）",
+    "modality": "plan",
+    "quantity": "40,000.00",
+    "unit": null,
+    "period": "2019年招股时点",
+    "condition": "拟投入募集资金"
+  },
+  "expected_missing_slots": ["unit", "geography"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "prospectus_hk",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["hkex"],
+    "forms": [],
+    "family": "prospectus",
+    "purposes": ["fundraising", "business_baseline", "historical_context"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["pdf"],
+    "language": ["zh", "en"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "招股章程", "field": null},
+        "location": "cover",
+        "reason": "港股招股章程封面标题；常与全球發售并列"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "行業概覽", "field": null},
+        "location": "toc",
+        "reason": "港股招股章节体系（業務/行業概覽/未來計劃及所得款項用途）是正文证据"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "未來計劃及所得款項用途", "field": null},
+        "location": "toc",
+        "reason": "所得款項用途章节是募资与项目结构的来源"
+      },
+      {
+        "signal": {"kind": "metadata_equals", "value": "hkex", "field": "regime"},
+        "location": "metadata",
+        "reason": "港股披露制度"
+      }
+    ],
+    "counterexamples": [
+      "全球發售公告、配售结果公告、上市文件补充函件不是招股章程正文",
+      "繁体/简体/英文版本是同一文档的语言版本，简繁英别名要合并而不是互相覆盖",
+      "行业顾问报告的市场规模与预测由第三方作者负责，不得当公司实际业绩",
+      "未商业化产品必须保留研发/验证阶段，不得写成已产生收入",
+      "招股章程记录的是上市时点事实，历史计划不得当现状"
+    ]
+  },
+  "sections": [
+    {
+      "role": "business",
+      "aliases": ["業務", "业务", "BUSINESS", "我們的業務"],
+      "heading_path": [["業務", "BUSINESS"], ["業務", "Our Business", "概覽", "業務模式"]],
+      "priority": 1,
+      "questions": ["品牌/产品/渠道与商业模式", "收入与加盟/合伙人机制"]
+    },
+    {
+      "role": "industry",
+      "aliases": ["行業概覽", "行业概览", "INDUSTRY OVERVIEW"],
+      "heading_path": [["行業概覽", "INDUSTRY OVERVIEW"]],
+      "priority": 1,
+      "questions": ["市场规模与竞争格局的作者/口径", "公司份额的证据来源"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["門店網絡", "我们的门店网络", "經營數據", "店舖數目", "Same-store"],
+      "heading_path": [["業務", "BUSINESS"], ["門店網絡", "我们的门店网络", "經營數據", "店舖數目"]],
+      "priority": 1,
+      "questions": ["门店/用户的存量与净增、地域与模式口径", "同店定义与可比范围"]
+    },
+    {
+      "role": "outlook",
+      "aliases": ["未來計劃", "未來計劃及所得款項用途", "FUTURE PLANS"],
+      "heading_path": [["未來計劃及所得款項用途", "FUTURE PLANS"], ["未來計劃", "Future Plans", "所得款項用途", "Use of Proceeds"]],
+      "priority": 1,
+      "questions": ["扩张/募资计划与条件", "所得款項用途与项目的对应"]
+    },
+    {
+      "role": "fundraising",
+      "aliases": ["所得款項用途", "USE OF PROCEEDS", "全球發售"],
+      "heading_path": [["未來計劃及所得款項用途"], ["所得款項用途", "Use of Proceeds"]],
+      "priority": 1,
+      "questions": ["募资净额用途、包销与老股安排的区别"]
+    },
+    {
+      "role": "risk",
+      "aliases": ["風險因素", "RISK FACTORS"],
+      "heading_path": [["風險因素", "RISK FACTORS"]],
+      "priority": 2,
+      "questions": ["具体风险与一般风险、客户/供应商依赖的量化口径"]
+    },
+    {
+      "role": "financial_notes",
+      "aliases": ["財務資料", "FINANCIAL INFORMATION", "會計政策"],
+      "heading_path": [["財務資料", "FINANCIAL INFORMATION"], ["財務資料", "收入確認", "會計政策"]],
+      "priority": 2,
+      "questions": ["收入确认与商业机制描述"]
+    }
+  ],
+  "reading_questions": [
+    "业务/品牌/渠道与商业模式（历史上市时点）",
+    "行业口径与第三方顾问归属",
+    "门店/经营指标的模式与地域口径",
+    "未來計劃及所得款項用途与项目条件",
+    "客户/供应商依赖与集中度",
+    "繁简英语言版本的别名合并与去重"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period"],
+      "missing_behavior": "unknown",
+      "reason": "招股信息是上市时点事实，断言必须带 as-of 期间"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator", "geography"],
+      "missing_behavior": "partial",
+      "reason": "门店/市场规模等数值必须带口径、地域与作者"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "stage", "condition"],
+      "missing_behavior": "partial",
+      "reason": "扩张计划/募资项目必须带阶段与条件"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "第三方预测与公司计划的限定语与归属必须保留"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "包销架构、基石投资、股份发售机制",
+      "unless": "涉及老股转售/公司实收募资的区分"
+    },
+    {
+      "content": "董事履历、公司治理、股本附录",
+      "unless": "含重大经营事实"
+    }
+  ],
+  "fallback": {
+    "unread": "600+ 页长文档按缺口补读，禁头部抽样即称完整；双栏串读记 deferred",
+    "ambiguous": "语言版本/公告/章程混淆时按封面与章节体系判型，保留 alternatives",
+    "no_business": "确无业务内容时 eligible_skip_after_read"
+  },
+  "evidence_status": {
+    "design": "verified",
+    "real_samples": ["case-hk-ipo-chapters-01", "case-hk-ipo-stores-02"],
+    "missing_shapes": ["招股章程中英版本对的逐段对照", "聆讯后资料集/申请版本形态"]
+  },
+  "case_ids": ["case-hk-ipo-chapters-01", "case-hk-ipo-stores-02"]
+}

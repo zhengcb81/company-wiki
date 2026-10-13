@@ -1,0 +1,79 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-synth-secondary-01",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "synth-secondary",
+    "source_sha256": null,
+    "origin": {
+      "doc_title": "合成：券商研报 + 政策发文 + 媒体报道组合",
+      "issuer_market": "other",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "synthetic fixture；研报/新闻/政策不在母计划 20 份样本内，已入 acquisition_requests"
+    },
+    "local_binding_key": "synthetic:secondary"
+  },
+  "observation": {
+    "metadata": {
+      "title": "合成：行业点评（研究员署名）",
+      "declared_kind": "research_note",
+      "regime": "other",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": null, "exact_quote": "[SYNTHETIC] 研究员观点：预计该公司明年出货量同比增长30%（预测，非公司指引）。"},
+        "page": 1,
+        "text": "[SYNTHETIC] 研究员观点：预计该公司明年出货量同比增长30%（预测，非公司指引）。",
+        "role": "outlook",
+        "hints": {"synthetic": true, "author_role": "研究员"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 2, "line": null, "exact_quote": "[SYNTHETIC] 政策发文：某部委发布产能置换实施办法，自发布之日起施行。"},
+        "page": 2,
+        "text": "[SYNTHETIC] 政策发文：某部委发布产能置换实施办法，自发布之日起施行。",
+        "role": "industry",
+        "hints": {"synthetic": true, "author_role": "监管/政府"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": ["第三方作者/发文主体保留；研究预测不当公司承诺"],
+    "facts": [
+      {
+        "id": "f1-third-party-attribution",
+        "objective": "第三方内容的作者与语态保留",
+        "importance": "critical",
+        "any_support_sets": [["u1"], ["u2"]],
+        "must_preserve": ["u1 作者为研究员、内容为预测", "u2 发文主体为部委、含生效期"],
+        "must_not_assert": [
+          "研究员预测不得当公司指引或承诺",
+          "政策影响不得直接当公司业绩"
+        ]
+      }
+    ],
+    "disposition": "generic_read",
+    "not_evaluated": ["回链公司披露验证（缺样）", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-forecast-as-guidance",
+      "change": "把研究员预测写成公司出货指引",
+      "expected_failure": "source_role_mismatch",
+      "reason": "第三方观点被当公司披露"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

@@ -1,0 +1,126 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-cn-annual-metrics-02",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-annual",
+    "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "origin": {
+      "doc_title": "中微公司2025年年度报告",
+      "issuer_market": "cn_exchange",
+      "document_date": "2026",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample cn-annual；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "cn-annual"
+  },
+  "observation": {
+    "metadata": {
+      "title": "中微公司：2025年年度报告",
+      "declared_kind": "annual_report",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": "2025-12-31",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 25,
+          "line": null,
+          "exact_quote": "2025 年公司营业收入约123.85 亿元，较上年增加约33.19 亿元，同比增长约36.62%。其中，2025 年刻蚀设备销售约98.32 亿元，同比增长约35.12%；LPCVD 设备销售约5.06 亿元，同比增长约224.23%"
+        },
+        "page": 25,
+        "text": "2025 年公司营业收入约123.85 亿元，较上年增加约33.19 亿元，同比增长约36.62%。其中，2025 年刻蚀设备销售约98.32 亿元，同比增长约35.12%；LPCVD 设备销售约5.06 亿元，同比增长约224.23%",
+        "role": "management_discussion",
+        "hints": {"heading_path": ["管理层讨论与分析", "报告期末公司前三年主要会计数据和财务指标的说明"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 25,
+          "line": null,
+          "exact_quote": "研发投入约37.44 亿元，同比增加约12.91 亿元（增长约52.65%），2025 年研发投入占公司营业收入比例约为30.23%"
+        },
+        "page": 25,
+        "text": "研发投入约37.44 亿元，同比增加约12.91 亿元（增长约52.65%），2025 年研发投入占公司营业收入比例约为30.23%",
+        "role": "management_discussion",
+        "hints": {"heading_path": ["管理层讨论与分析", "主要会计数据和财务指标"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "数字出现在 MD&A 解释中，属经营驱动证据，不应因“数字多”被排除",
+      "本 case 只验证数字随附限定的完整性，不要求模型抽取全部财务值"
+    ],
+    "facts": [
+      {
+        "id": "f1-revenue-split",
+        "objective": "识别公司总收入与产品线销售口径的层级关系",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "期间：2025年度；基期：上年（2024年）",
+          "单位/币种：人民币亿元；数值为“约”的概数口径",
+          "层级：公司营业收入 123.85 亿元为总口径，刻蚀设备 98.32 亿元、LPCVD 5.06 亿元为产品线子口径"
+        ],
+        "must_not_assert": [
+          "不得把刻蚀设备销售额当作公司营业收入",
+          "不得把概数“约”改写为精确值或推算未披露的小数",
+          "LPCVD 同比 224.23% 不得外推为公司整体增速"
+        ]
+      },
+      {
+        "id": "f2-rnd-intensity",
+        "objective": "识别研发投入及其占收入比例的分母口径",
+        "importance": "normal",
+        "any_support_sets": [["u2"]],
+        "must_preserve": ["期间：2025年度", "分母：公司营业收入，比例约30.23%"],
+        "must_not_assert": ["研发投入不得当作利润或现金流口径", "占比分母不得换成单一产品线收入"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "三表数值抽取不在本 case 评价范围",
+      "语义蕴含判定交 ROOT 行为测试（execution_status=NOT_RUN_ROOT_INTEGRATION）"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1-drop-period",
+      "change": "u1 删除“2025 年”与“较上年”",
+      "expected_failure": "required_context_missing:period",
+      "reason": "期间与同比基期被删除后数值断言不可核"
+    },
+    {
+      "id": "m2-unit-collapse",
+      "change": "u1 将“亿元”改写为“元”",
+      "expected_failure": "unit_mismatch",
+      "reason": "单位被改变，数值含义完全不同"
+    },
+    {
+      "id": "m3-hierarchy-collapse",
+      "change": "u1 将“其中”删除并把产品线销售说成公司营业收入",
+      "expected_failure": "denominator_mismatch",
+      "reason": "总口径与子口径混淆"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "本公司",
+    "modality": "actual",
+    "quantity": "98.32",
+    "unit": "亿元",
+    "period": "2025年度",
+    "condition": null
+  },
+  "expected_missing_slots": ["geography"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

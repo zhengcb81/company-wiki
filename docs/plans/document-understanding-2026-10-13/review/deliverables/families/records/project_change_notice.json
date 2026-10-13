@@ -1,0 +1,132 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "project_change_notice",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["cn_exchange", "hkex", "other"],
+    "forms": [],
+    "family": "offering",
+    "purposes": ["event_update", "project_evidence"],
+    "modifiers": {"extent": "summary", "revision": "supplement"},
+    "carrier": ["pdf", "html"],
+    "language": ["zh", "en"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "部分募集资金投资项目", "field": null},
+        "location": "body",
+        "reason": "募投变更公告的固定表述"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "延期", "field": null},
+        "location": "body",
+        "reason": "项目延期公告的标题/正文短语；须与取消区分"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "终止实施", "field": null},
+        "location": "body",
+        "reason": "项目终止公告的固定表述"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "募集资金投资项目进展", "field": null},
+        "location": "body",
+        "reason": "项目进展公告的固定表述"
+      }
+    ],
+    "counterexamples": [
+      "延后不等于取消：延期公告不得读成项目终止",
+      "部分变更不等于全部项目变化：变更范围必须按子项目圈定",
+      "没有旧版（原募集说明书/前次公告）不得编造变化量（delta）",
+      "变更原因中的管理层解释与客观条件要分开标注",
+      "股东大会决议公告不是募投变更正文，但可作为决策程序证据"
+    ]
+  },
+  "sections": [
+    {
+      "role": "fundraising",
+      "aliases": ["变更前后情况", "本次变更内容", "原计划", "调整后"],
+      "heading_path": [["变更前后情况", "本次变更内容", "变更募集资金投资项目"], ["原计划", "调整前", "调整后", "变更后"]],
+      "priority": 1,
+      "questions": ["原计划→本次变化的具体内容", "受影响子项目范围"]
+    },
+    {
+      "role": "business",
+      "aliases": ["变更原因", "背景及原因", "影响分析"],
+      "heading_path": [["变更原因", "背景及原因", "本次变更的原因"], ["原因", "影响分析", "必要性"]],
+      "priority": 1,
+      "questions": ["变化原因的客观条件与管理层解释", "对业务/第二曲线的影响"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["项目进度", "投资进度", "产能", "达产"],
+      "heading_path": [["项目进度", "投资进度", "募集资金使用"], ["项目进度", "产能", "达产", "建设期"]],
+      "priority": 1,
+      "questions": ["剩余承诺、已投入与未投入口径", "达产时间的变化"]
+    },
+    {
+      "role": "risk",
+      "aliases": ["风险", "影响分析", "对公司的影响"],
+      "heading_path": [["风险", "对公司的影响", "影响分析"]],
+      "priority": 2,
+      "questions": ["变更带来的新条件与风险"]
+    }
+  ],
+  "reading_questions": [
+    "原计划 vs 本次变化（无旧版则标 not_compared）",
+    "变化范围：全部还是部分子项目",
+    "剩余承诺与资金安排",
+    "变更原因的归因（客观条件 vs 管理层解释）",
+    "对达产时间/产能口径的影响"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period"],
+      "missing_behavior": "unknown",
+      "reason": "公告是事件时点事实，断言必须绑定主体与公告日期"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "stage", "condition"],
+      "missing_behavior": "partial",
+      "reason": "变化断言必须同时保留原计划与现计划（缺原计划则 unknown/deferred）"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "missing_behavior": "partial",
+      "reason": "已投入/剩余/调整后金额与产能变化必须带口径"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "新承诺/新计划的条件语气保留"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "审议程序、独立董事意见、股东大会安排",
+      "unless": "程序本身构成变更生效条件"
+    },
+    {
+      "content": "备查文件清单",
+      "unless": "需要定位旧版文件证据"
+    }
+  ],
+  "fallback": {
+    "unread": "公告为扫描/缺文本时 needs_source，不因空结果判为无变化",
+    "ambiguous": "变更/进展/延期/终止混淆时按正文动词与前后对照判型，保守标 unknown",
+    "no_business": "纯程序性公告核实后 eligible_skip_after_read"
+  },
+  "evidence_status": {
+    "design": "proposed",
+    "real_samples": [],
+    "missing_shapes": [
+      "募投变更/延期/终止/进展公告真实样本缺失（已入 acquisition_requests）",
+      "与原募集说明书的版本对缺失，delta 无法真实验证"
+    ]
+  },
+  "case_ids": ["case-synth-project-change-01"]
+}

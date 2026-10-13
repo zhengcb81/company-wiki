@@ -1,0 +1,133 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-cn-ir-qa-binding-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-ir",
+    "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "origin": {
+      "doc_title": "万润股份投资者关系活动记录表20260515",
+      "issuer_market": "cn_exchange",
+      "document_date": "2026-05-15",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample cn-ir；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "cn-ir"
+  },
+  "observation": {
+    "metadata": {
+      "title": "投资者关系活动记录表 编号：20260515",
+      "declared_kind": "investor_relations",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": "2026-05-15",
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 1,
+          "line": null,
+          "exact_quote": "问：公司主要业务80%多都在国外，目前公司在国内业务开拓面 临哪些挑战和机遇？"
+        },
+        "page": 1,
+        "text": "1、问：公司主要业务80%多都在国外，目前公司在国内业务开拓面 临哪些挑战和机遇？公司如何服务国内统一大市场？",
+        "role": "questions",
+        "hints": {"unit_kind": "qa_exchange", "speaker": "提问者（投资者）"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 1,
+          "line": null,
+          "exact_quote": "2025 年度公司境内收入约8.19 亿元，占比约22%， 较比2024 年度有所提升。"
+        },
+        "page": 1,
+        "text": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%， 较比2024 年度有所提升。",
+        "role": "business",
+        "hints": {"unit_kind": "qa_exchange", "speaker": "公司（管理层）", "answers": "u1"}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {
+          "physical_page": 5,
+          "line": null,
+          "exact_quote": "该项目包含半导体光刻胶用相关材料产 能约751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能 保障。"
+        },
+        "page": 5,
+        "text": "产能方面积极布局，2025 年公司启动 了万润工业园二期C05 建设项目，该项目包含半导体光刻胶用相关材料产 能约751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能 保障。",
+        "role": "operating_metrics",
+        "hints": {"unit_kind": "project", "speaker": "公司（管理层）", "answers": "u4(未摘录问题)"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "Q+A 与追问绑定为一个单元；问题内容与回答内容角色分离",
+      "回答中的子公司/项目归属要保留"
+    ],
+    "facts": [
+      {
+        "id": "f1-question-premise-not-fact",
+        "objective": "提问者内容不是公司事实",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": ["来源角色：提问者（投资者）", "问句中的“80%多在国外”是问句前提"],
+        "must_not_assert": [
+          "不得把问句中的比例/客户/合作设想当作公司披露事实",
+          "“股东联系”不等于上市公司客户关系"
+        ]
+      },
+      {
+        "id": "f2-answer-figures-with-scope",
+        "objective": "回答中的数字带期间与口径",
+        "importance": "critical",
+        "any_support_sets": [["u2"]],
+        "must_preserve": ["来源角色：公司回答", "期间：2025年度；口径：境内收入约8.19亿元、占比约22%（较2024年度提升）"],
+        "must_not_assert": ["占比22%不得写成海外占比口径的补数推断值", "约数不得写成精确值"]
+      },
+      {
+        "id": "f3-project-capacity-condition",
+        "objective": "产能计划带条件与阶段",
+        "importance": "normal",
+        "any_support_sets": [["u3"]],
+        "must_preserve": ["项目：工业园二期C05 建设项目（2025年启动）", "口径：包含相关材料产能约751吨/年", "条件：项目建成后（modality=plan）"],
+        "must_not_assert": ["“建成后”产能不得当期已投产产能"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["活动参与人员名单处理", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-question-as-fact",
+      "change": "把 u1 问句前提写成公司披露的海外收入占比",
+      "expected_failure": "source_role_mismatch",
+      "reason": "提问者内容被当作公司事实"
+    },
+    {
+      "id": "m2-built-as-operating",
+      "change": "把 u3 的“建成后”产能写成现有产能",
+      "expected_failure": "stage_changed",
+      "reason": "计划产能被当成已投产"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "本公司",
+    "modality": "actual",
+    "quantity": "8.19",
+    "unit": "亿元",
+    "period": "2025年度",
+    "condition": "境内收入，占比约22%"
+  },
+  "expected_missing_slots": ["geography"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

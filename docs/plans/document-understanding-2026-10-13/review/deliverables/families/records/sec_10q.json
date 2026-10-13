@@ -1,0 +1,138 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "sec_10q",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["sec"],
+    "forms": ["10-Q"],
+    "family": "quarterly",
+    "purposes": ["periodic_review"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["html"],
+    "language": ["en"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "metadata_equals", "value": "10-Q", "field": "form_type"},
+        "location": "metadata",
+        "reason": "SEC form_type 为 10-Q"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "QUARTERLY REPORT", "field": null},
+        "location": "cover",
+        "reason": "封面固定 Form 10-Q / Quarterly Report 字样"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "PART I", "field": null},
+        "location": "body",
+        "reason": "10-Q 以 Part I/Part II 两层组织，Part 层级是结构证据"
+      }
+    ],
+    "counterexamples": [
+      "10-Q 的 Item 编号在 Part I 与 Part II 各自从头编号，Part 层级不可丢、两处 Item 1A 不可混",
+      "Part I Item 2 MD&A 与 Part II Item 1A 风险更新是不同读取范围",
+      "10-Q 不是 A股式短季报：MD&A、业务附注信息量大，不能整类降权",
+      "10-K 的 Item 7/Item 8 结构不能套到 10-Q 上",
+      "季度（three months）与年初至今（year-to-date）口径分开，同比基期不可混"
+    ]
+  },
+  "sections": [
+    {
+      "role": "management_discussion",
+      "aliases": ["Item 2. Management's Discussion and Analysis", "Management's Discussion and Analysis"],
+      "heading_path": [["PART I", "Part I"], ["Item 2. Management's Discussion and Analysis", "Item 2 Management's Discussion and Analysis"]],
+      "priority": 1,
+      "questions": ["本季与 YTD 经营结果的业务驱动", "同比/环比基期与口径"]
+    },
+    {
+      "role": "business",
+      "aliases": ["Our Business", "Business", "Overview"],
+      "heading_path": [["PART I", "Part I"], ["Item 2. Management's Discussion and Analysis", "Item 2 Management's Discussion and Analysis"], ["Our Business", "Business", "Overview"]],
+      "priority": 1,
+      "questions": ["业务模式、分部与收入机制的本期变化"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["Key metrics", "Subscriptions", "Segment", "Operating segment"],
+      "heading_path": [["PART I", "Part I"], ["Item 2. Management's Discussion and Analysis", "Item 2 Management's Discussion and Analysis"], ["Key metrics", "Subscriptions", "Segment", "Operating segment"]],
+      "priority": 2,
+      "questions": ["订阅/消耗/订单等指标定义与分母"]
+    },
+    {
+      "role": "financial_notes",
+      "aliases": ["Notes to Condensed Financial Statements", "Revenue Recognition"],
+      "heading_path": [["PART I", "Part I"], ["Item 1. Financial Statements", "Notes to Condensed Financial Statements"], ["Revenue Recognition", "Notes"]],
+      "priority": 2,
+      "questions": ["收入确认与履约义务的商业机制"]
+    },
+    {
+      "role": "risk",
+      "aliases": ["Item 1A. Risk Factors", "Risk Factors"],
+      "heading_path": [["PART II", "Part II"], ["Item 1A. Risk Factors", "Item 1A Risk Factors"]],
+      "priority": 2,
+      "questions": ["相对年报新增/更新的业务风险"]
+    },
+    {
+      "role": "administrative",
+      "aliases": ["Item 4. Controls", "Item 2. Unregistered Sales", "Legal Proceedings"],
+      "heading_path": [["PART II", "Part II"], ["Item 4. Controls and Procedures", "Item 2. Unregistered Sales of Equity Securities and Use of Proceeds", "Item 3. Legal Proceedings"]],
+      "priority": 3,
+      "questions": ["是否有影响经营的诉讼/回购/控制事实"]
+    }
+  ],
+  "reading_questions": [
+    "Part I Item 2 MD&A 的本季与 YTD 解释",
+    "业务附注中的收入机制与履约义务",
+    "Part II 风险更新相对年报的变化",
+    "重复 Item 编号必须带 Part 层级",
+    "同期基期（prior-year quarter / YTD）的准确对应"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period"],
+      "missing_behavior": "unknown",
+      "reason": "10-Q 数值区分 quarter 与 year-to-date，断言必须绑定主体与期间口径"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "missing_behavior": "partial",
+      "reason": "GAAP/non-GAAP、单季/YTD、同比基期分开，缺一不得引用"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "指引与全局限定语（如 constant currency）随局部事实保留"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "stage", "geography"],
+      "missing_behavior": "partial",
+      "reason": "项目/产能/产品进度断言保留阶段与地域"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "精简财务报表与常规附注",
+      "unless": "含收入机制、分部或经营解释"
+    },
+    {
+      "content": "Controls and Procedures 等程序章节",
+      "unless": "含对经营的实际约束"
+    }
+  ],
+  "fallback": {
+    "unread": "HTML ix 元数据与内嵌样式不计正文；不可读部分 deferred",
+    "ambiguous": "form_type 缺失时用 Part/Item 正文结构判型，保留 alternatives",
+    "no_business": "纯财务季报可正确跳过派生，0 LLM 调用，仅留来源与覆盖记录"
+  },
+  "evidence_status": {
+    "design": "verified",
+    "real_samples": ["case-sec-10q-parts-01", "case-sec-10q-revenue-mechanism-02"],
+    "missing_shapes": ["10-Q/A 修订版本对", "银行/保险类 10-Q 附注形态"]
+  },
+  "case_ids": ["case-sec-10q-parts-01", "case-sec-10q-revenue-mechanism-02"]
+}

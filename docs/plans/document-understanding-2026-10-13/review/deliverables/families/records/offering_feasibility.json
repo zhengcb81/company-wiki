@@ -1,0 +1,127 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "offering_feasibility",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["cn_exchange", "other"],
+    "forms": [],
+    "family": "offering",
+    "purposes": ["project_evidence", "fundraising"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["pdf"],
+    "language": ["zh"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "可行性研究报告", "field": null},
+        "location": "cover",
+        "reason": "募投可研封面标题短语"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "可行性研究论证", "field": null},
+        "location": "body",
+        "reason": "募集说明书/公告引用可研结论时的固定表述"
+      },
+      {
+        "signal": {"kind": "metadata_equals", "value": "cn_exchange", "field": "regime"},
+        "location": "metadata",
+        "reason": "A股语境；其他语境（集团内部可研）保留 regime=other"
+      }
+    ],
+    "counterexamples": [
+      "可研的市场预测与效益测算由编制方假设得出，不是公司承诺也不是实际业绩",
+      "可研结论在募集说明书中被引用时，两处口径要分开标注来源",
+      "项目申请报告、备案通知书不是可研正文",
+      "可研的建设期与实际执行期不一致时不得覆盖实际进度证据",
+      "环评、能评等专项批复不是可研，但可作为许可条件证据"
+    ]
+  },
+  "sections": [
+    {
+      "role": "business",
+      "aliases": ["项目背景", "现有业务", "产品方案", "市场分析"],
+      "heading_path": [["项目背景", "总论", "项目概况"], ["现有业务", "产品方案", "市场分析", "市场预测"]],
+      "priority": 1,
+      "questions": ["项目与现有业务的关系", "产品方案与市场假设的作者"]
+    },
+    {
+      "role": "fundraising",
+      "aliases": ["投资估算", "资金筹措", "财务评价", "投资构成"],
+      "heading_path": [["投资估算", "资金筹措", "财务评价"], ["投资构成", "资金来源", "经济效益"]],
+      "priority": 1,
+      "questions": ["投资构成、资金来源与自筹比例", "效益测算的假设与口径"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["建设规模", "生产纲领", "产能", "建设进度"],
+      "heading_path": [["建设规模", "生产纲领", "建设进度", "项目实施方案"], ["建设规模", "生产纲领", "产能", "建设期"]],
+      "priority": 1,
+      "questions": ["建设规模/产能口径与分期", "建设期与达产假设"]
+    },
+    {
+      "role": "risk",
+      "aliases": ["风险分析", "不确定性分析", "风险与对策"],
+      "heading_path": [["风险分析", "不确定性分析", "风险与对策"]],
+      "priority": 2,
+      "questions": ["敏感性假设与失败条件"]
+    }
+  ],
+  "reading_questions": [
+    "项目背景与现有业务的关系",
+    "产品/产能口径（新增 vs 总量）与分期",
+    "投资估算构成与资金筹措",
+    "效益测算假设（负荷、价格、建设期）",
+    "审批/许可条件与不确定性分析"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period"],
+      "missing_behavior": "unknown",
+      "reason": "可研是编制时点的假设性研究，断言必须绑定主体与 as-of"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "stage", "condition", "geography"],
+      "missing_behavior": "partial",
+      "reason": "项目断言整包保留主体、建设阶段、地点与条件"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "missing_behavior": "partial",
+      "reason": "产能、投资额、测算收入必须带单位与测算标记"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "假设与免责声明随测算保留"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "厂址比选、设备清单、总图运输等工程细节",
+      "unless": "涉及产能口径、投资构成或许可条件"
+    },
+    {
+      "content": "组织机构与劳动定员章节",
+      "unless": "涉及成本口径或实施能力"
+    }
+  ],
+  "fallback": {
+    "unread": "不可读部分 deferred，不以封面结论代替正文",
+    "ambiguous": "可研与项目申请/备案/环评混淆时按正文结构判型",
+    "no_business": "确无业务内容时 eligible_skip_after_read"
+  },
+  "evidence_status": {
+    "design": "proposed",
+    "real_samples": [],
+    "missing_shapes": [
+      "独立可研报告原件缺失（当前仅在募集说明书内见到可研结论引用；已入 acquisition_requests）",
+      "可研与募投变更公告的版本对缺失"
+    ]
+  },
+  "case_ids": ["case-synth-feasibility-01"]
+}

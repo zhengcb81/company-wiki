@@ -1,0 +1,95 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-synth-project-change-01",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "synth-project-change",
+    "source_sha256": null,
+    "origin": {
+      "doc_title": "合成：募投项目延期/部分变更公告 + 原募集说明书节选",
+      "issuer_market": "cn_exchange",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "synthetic fixture；本地缺募投变更公告真实版本对，已入 acquisition_requests"
+    },
+    "local_binding_key": "synthetic:project-change"
+  },
+  "observation": {
+    "metadata": {
+      "title": "合成：关于部分募集资金投资项目延期及变更实施主体的公告",
+      "declared_kind": "project_change_notice",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": null,
+      "revision": "supplement"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": null, "exact_quote": "[SYNTHETIC] 原计划：项目A于2025年12月达到预定可使用状态。"},
+        "page": 1,
+        "text": "[SYNTHETIC] 原计划：项目A于2025年12月达到预定可使用状态。",
+        "role": "fundraising",
+        "hints": {"synthetic": true, "relation": "original_plan"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": null, "exact_quote": "[SYNTHETIC] 本次调整：项目A延期至2026年12月，项目B实施主体由母公司变更为全资子公司。"},
+        "page": 1,
+        "text": "[SYNTHETIC] 本次调整：项目A延期至2026年12月，项目B实施主体由母公司变更为全资子公司。",
+        "role": "fundraising",
+        "hints": {"synthetic": true, "relation": "changed_plan"}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": 2, "line": null, "exact_quote": "[SYNTHETIC] 变更原因：设备交付周期延长；项目B建设内容与投资总额不变。"},
+        "page": 2,
+        "text": "[SYNTHETIC] 变更原因：设备交付周期延长；项目B建设内容与投资总额不变。",
+        "role": "business",
+        "hints": {"synthetic": true}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": ["变化断言必须成对保留原计划与现计划；无旧版则 not_compared"],
+    "facts": [
+      {
+        "id": "f1-delta-needs-both-versions",
+        "objective": "变化量必须同时有原计划与现计划",
+        "importance": "critical",
+        "any_support_sets": [["u1", "u2", "u3"]],
+        "must_preserve": ["原计划 2025-12 → 调整后 2026-12（延期，非取消）", "项目B仅实施主体变更，内容/投资不变", "原因：设备交付周期延长"],
+        "must_not_assert": [
+          "延期不得写成终止或取消",
+          "部分变更不得泛化为全部项目变化",
+          "不得在无旧版时编造变化量"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["真实公告版本对照（缺样）", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-delay-as-cancel",
+      "change": "把延期写成项目终止",
+      "expected_failure": "event_semantics_changed",
+      "reason": "延期/终止语义混淆"
+    },
+    {
+      "id": "m2-drop-old-plan",
+      "change": "删除 u1 只留新计划",
+      "expected_failure": "delta_unverifiable",
+      "reason": "缺原计划无法核对变化"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

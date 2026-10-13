@@ -1,0 +1,125 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "container_attachment",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["sec", "hkex"],
+    "forms": ["8-K", "6-K"],
+    "family": "unknown",
+    "purposes": ["event_update", "container_routing"],
+    "modifiers": {"extent": "unknown", "revision": "unknown"},
+    "carrier": ["html", "pdf"],
+    "language": ["en"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "metadata_equals", "value": "8-K", "field": "form_type"},
+        "location": "metadata",
+        "reason": "8-K 是事件容器；主表列事项与附件清单"
+      },
+      {
+        "signal": {"kind": "metadata_equals", "value": "6-K", "field": "form_type"},
+        "location": "metadata",
+        "reason": "6-K 是外国发行人事件容器，附件常为新闻稿/展示材料"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "Item 2.02", "field": null},
+        "location": "body",
+        "reason": "8-K 事项编号（经营成果与财务状况）常对应业绩附件"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "EX-99", "field": null},
+        "location": "attachment",
+        "reason": "附件编号前缀，提示附件需按其自身用途读取"
+      }
+    ],
+    "counterexamples": [
+      "只读主表不等于读过全部资料：主件与附件是不同读取范围、不同 SourceRef",
+      "附件是独立业务文件（release/deck/协议）时按其自身 family 策略读取",
+      "未下载/未取到的附件记 needs_source，不当已读也不编造内容",
+      "同原件内的子范围才可用 child_routes；外链附件不凭空生成 SourceRef",
+      "图片/图表附件缺依赖文件时不声称完整读取"
+    ]
+  },
+  "sections": [
+    {
+      "role": "administrative",
+      "aliases": ["Item 1.01", "Item 2.02", "Item 8.01", "Signature", "附件清单"],
+      "heading_path": [["Item 1.01", "Item 2.02", "Item 8.01", "SIGNATURE", "附件清单"]],
+      "priority": 1,
+      "questions": ["主表确定了什么事项、列出了哪些附件"]
+    },
+    {
+      "role": "business",
+      "aliases": ["EX-99.1", "Press Release", "99.1", "附件正文"],
+      "heading_path": [["EX-99.1", "EX-99.2", "Press Release"]],
+      "priority": 1,
+      "questions": ["附件正文（按 release/deck/事件正文策略读取）"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["EX-99.2", "Presentation", "业绩展示"],
+      "heading_path": [["EX-99.2", "Presentation"]],
+      "priority": 2,
+      "questions": ["业绩展示附件的指标与脚注"]
+    }
+  ],
+  "reading_questions": [
+    "主件：事项编号、确定的事项、附件清单",
+    "每个附件按其用途走对应 family 策略",
+    "主件/附件的 SourceRef 区分与引用关系",
+    "缺附件时的 needs_source 表达",
+    "图片/图表依赖的完整性标注"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period", "role"],
+      "missing_behavior": "unknown",
+      "reason": "主件与附件角色不同，断言必须注明取自主件还是哪个附件"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period"],
+      "missing_behavior": "partial",
+      "reason": "附件数值的期间与口径随附件保留"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "stage", "condition"],
+      "missing_behavior": "partial",
+      "reason": "事件涉及项目/协议时整包保留主体与条件"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "协议生效条件、前瞻限定语随事件保留"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "主表签名、附件索引格式性内容",
+      "unless": "用于确定附件清单与版本"
+    },
+    {
+      "content": "纯程序事项（高管任免、股东大会通知）",
+      "unless": "事项本身构成重大经营事件"
+    }
+  ],
+  "fallback": {
+    "unread": "附件未取得/图片缺依赖时 needs_source 或 partial，主件与附件覆盖分开记录",
+    "ambiguous": "主件与附件内容重复时保留双引用并在事实层去重",
+    "no_business": "纯程序性主件且无业务附件时 eligible_skip_after_read"
+  },
+  "evidence_status": {
+    "design": "verified",
+    "real_samples": [],
+    "missing_shapes": [
+      "本地 8-K/6-K 容器+附件真实原件缺失（已入 acquisition_requests）",
+      "本规格的证据仅来自官方公开目录结构核对（见 README 官方资料核对），非本地原件"
+    ]
+  },
+  "case_ids": ["case-synth-container-8k-01"]
+}

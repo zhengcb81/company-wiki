@@ -1,0 +1,99 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-synth-container-8k-01",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "synth-container-8k",
+    "source_sha256": null,
+    "origin": {
+      "doc_title": "合成：8-K 主件 + EX-99.1 业绩发布 + EX-99.2 业绩展示（含图片依赖）",
+      "issuer_market": "sec",
+      "carrier": "html",
+      "language": "en",
+      "verified_via": "synthetic fixture；结构依据官方 8-K 目录核对（见 README），本地缺容器原件，已入 acquisition_requests"
+    },
+    "local_binding_key": "synthetic:container-8k"
+  },
+  "observation": {
+    "metadata": {
+      "title": "合成：FORM 8-K (container) with EX-99.1 / EX-99.2",
+      "declared_kind": "container_filing",
+      "regime": "sec",
+      "form_type": "8-K",
+      "mime_type": "text/html",
+      "language": "en",
+      "published_at": null,
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 1, "exact_quote": "[SYNTHETIC] Item 2.02 Results of Operations and Financial Condition."},
+        "page": null,
+        "text": "[SYNTHETIC] Item 2.02 Results of Operations and Financial Condition.",
+        "role": "administrative",
+        "hints": {"synthetic": true, "scope": "main_filing"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 2, "exact_quote": "[SYNTHETIC] Exhibit 99.1 press release (separate reading scope)."},
+        "page": null,
+        "text": "[SYNTHETIC] Exhibit 99.1 press release (separate reading scope).",
+        "role": "business",
+        "hints": {"synthetic": true, "scope": "attachment", "relation": "attachment_of:u1"}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 3, "exact_quote": "[SYNTHETIC] Exhibit 99.2 earnings presentation with image charts (dependencies not fetched)."},
+        "page": null,
+        "text": "[SYNTHETIC] Exhibit 99.2 earnings presentation with image charts (dependencies not fetched).",
+        "role": "operating_metrics",
+        "hints": {"synthetic": true, "scope": "attachment", "relation": "attachment_of:u1", "images_missing": true}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "主件定事项与附件清单；附件按各自 family 读取",
+      "主件/附件不同 SourceRef；缺附件或图片依赖时 needs_source/partial"
+    ],
+    "facts": [
+      {
+        "id": "f1-container-scope-split",
+        "objective": "容器主件与附件的读取范围分离",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": ["主件只载明事项（Item 2.02）与附件清单", "附件 u2/u3 各自独立读取范围"],
+        "must_not_assert": [
+          "只读主件不得声称读过附件内容",
+          "外链/缺附件不得凭空生成 SourceRef 或编造内容"
+        ]
+      },
+      {
+        "id": "f2-image-dependency-honesty",
+        "objective": "图表依赖缺失时的诚实表达",
+        "importance": "normal",
+        "any_support_sets": [["u3"]],
+        "must_preserve": ["附件含图片图表且依赖未取到（images_missing）", "处置：needs_source/partial 并记缺口"],
+        "must_not_assert": ["不得猜图上数字或宣称完整读取"]
+      }
+    ],
+    "disposition": "needs_source",
+    "not_evaluated": ["真实 8-K 全流程（缺样）", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-main-only-complete",
+      "change": "只读主件即标记整份文件 complete",
+      "expected_failure": "coverage_overstated",
+      "reason": "附件范围未读却报完整"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

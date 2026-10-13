@@ -1,0 +1,80 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-synth-revision-pair-01",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "synth-revision-pair",
+    "source_sha256": null,
+    "origin": {
+      "doc_title": "合成：原件 + 更正公告/摘要件版本对",
+      "issuer_market": "cn_exchange",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "synthetic fixture；本地缺真实版本对，已入 acquisition_requests"
+    },
+    "local_binding_key": "synthetic:revision-pair"
+  },
+  "observation": {
+    "metadata": {
+      "title": "合成：关于2025年年度报告的更正公告（摘要口径）",
+      "declared_kind": "correction_notice",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": "2025-12-31",
+      "revision": "supplement"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": null, "exact_quote": "[SYNTHETIC] 更正内容：原披露的产能单位“万件”更正为“万只”。"},
+        "page": 1,
+        "text": "[SYNTHETIC] 更正内容：原披露的产能单位“万件”更正为“万只”。",
+        "role": "unknown",
+        "hints": {"synthetic": true, "relation": "corrects:original"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": null, "exact_quote": "[SYNTHETIC] 除上述更正外，原公告其他内容不变。"},
+        "page": 1,
+        "text": "[SYNTHETIC] 除上述更正外，原公告其他内容不变。",
+        "role": "unknown",
+        "hints": {"synthetic": true, "relation": "scope_limit"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": ["修订/摘要是正交修饰：不复制 family 策略，只声明覆盖范围与版本关系"],
+    "facts": [
+      {
+        "id": "f1-revision-scoped",
+        "objective": "更正只覆盖被更正部分",
+        "importance": "critical",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": ["更正范围：仅产能单位口径", "其余内容以原件为准", "两个版本各自固定 SHA"],
+        "must_not_assert": [
+          "更正件不得覆盖原件成为唯一版本",
+          "摘要/更正未提及不得当全文没有",
+          "不得把单位更正当业务变化"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["真实版本对核验（缺样）", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-overwrite-original",
+      "change": "用更正件覆盖原件并只留一个版本",
+      "expected_failure": "version_lineage_lost",
+      "reason": "版本链断裂"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

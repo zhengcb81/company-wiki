@@ -1,0 +1,108 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-hk-annual-samestore-footnote-02",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "hk-annual",
+    "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+    "origin": {
+      "doc_title": "名创优品2024年度报告（港股）",
+      "issuer_market": "hkex",
+      "document_date": "2025",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample hk-annual；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "hk-annual"
+  },
+  "observation": {
+    "metadata": {
+      "title": "2024年度报告（港股）",
+      "declared_kind": "annual_report",
+      "regime": "hkex",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": "2024-12-31",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 18,
+          "line": null,
+          "exact_quote": "同店(2) GMV增長率(%)"
+        },
+        "page": 18,
+        "text": "同店(2) GMV增長率(%)　35%~40%　30%~35%　Down high-single digit 下降高個位數",
+        "role": "operating_metrics",
+        "hints": {"unit_kind": "operating_table", "note": "同店GMV增长率行，含(2)脚注引用"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 18,
+          "line": null,
+          "exact_quote": "Notes: (1) Includes GMV generated through MINISO offline stores and Online to Offline"
+        },
+        "page": 18,
+        "text": "Notes: (1) Includes GMV generated through MINISO offline stores and Online to Offline (“O2O”) platforms.",
+        "role": "financial_notes",
+        "hints": {"unit_kind": "footnote", "relation": "footnote_for:u1"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "经营表的脚注是必要上下文：口径定义随指标一起读",
+      "关系：u2 footnote_for u1（同组内 AND）"
+    ],
+    "facts": [
+      {
+        "id": "f1-samestore-definition",
+        "objective": "同店 GMV 增长率必须带口径定义",
+        "importance": "critical",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": [
+          "指标：同店 GMV 增长率（非收入、非同店销售）",
+          "脚注(1)口径：GMV 含线下门店与 O2O 平台",
+          "同店定义依赖脚注(2)（可比店范围）"
+        ],
+        "must_not_assert": [
+          "GMV 不等于收入",
+          "不得省略脚注口径单独引用增长率区间"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["表格数值抽取", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-drop-footnote",
+      "change": "只保留 u1，删除 u2 脚注",
+      "expected_failure": "required_context_missing:denominator",
+      "reason": "指标口径定义被丢弃"
+    },
+    {
+      "id": "m2-gmv-as-revenue",
+      "change": "把“同店 GMV 增长率”写成“同店收入增长率”",
+      "expected_failure": "quantity_semantics_changed",
+      "reason": "GMV 与收入口径混淆"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "本集团（可比店）",
+    "modality": "actual",
+    "quantity": null,
+    "unit": "%",
+    "period": "2024年度",
+    "condition": "含线下门店与O2O平台GMV口径"
+  },
+  "expected_missing_slots": ["quantity"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

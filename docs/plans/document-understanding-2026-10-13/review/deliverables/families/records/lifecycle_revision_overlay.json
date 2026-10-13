@@ -1,0 +1,107 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "lifecycle_revision_overlay",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["cn_exchange", "hkex", "sec", "other", "unknown"],
+    "forms": ["10-K/A", "10-Q/A", "20-F/A", "8-K/A", "6-K"],
+    "family": "unknown",
+    "purposes": ["lifecycle_overlay"],
+    "modifiers": {"extent": "summary", "revision": "amended"},
+    "carrier": ["pdf", "html"],
+    "language": ["zh", "en"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "摘要", "field": null},
+        "location": "cover",
+        "reason": "标题/封面带“摘要”标记 extent=summary，只覆盖摘要范围"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "更正", "field": null},
+        "location": "cover",
+        "reason": "标题/封面带“更正/更正公告”标记 revision=supplement 的更正语义"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "Amendment", "field": null},
+        "location": "cover",
+        "reason": "SEC 修订件标题/表单后缀 /A"
+      },
+      {
+        "signal": {"kind": "metadata_equals", "value": "amended", "field": "revision"},
+        "location": "metadata",
+        "reason": "来源层已判定的修订标记直接透传"
+      }
+    ],
+    "counterexamples": [
+      "摘要件未提及不等于全文没有：缺章节是覆盖范围问题，不是事实否定",
+      "修订件不覆盖原始版本：两个版本各自固定来源 SHA，证据引用到具体版本",
+      "仅签字/格式修订的修订件可以合法无业务内容",
+      "更正只说明被更正的部分与原因，未被更正的内容仍以原件为准",
+      "补充公告与原公告是同一事实链的两个版本，不得把补充当成全新事件"
+    ]
+  },
+  "sections": [
+    {
+      "role": "unknown",
+      "aliases": ["修订说明", "更正内容", "摘要", "Amendment", "Supplement"],
+      "heading_path": [["修订说明", "更正内容", "摘要", "Amendment", "Supplement"]],
+      "priority": 1,
+      "questions": ["本件覆盖范围是什么、修改原因是什么、变化部分与被引用旧文的关系"]
+    }
+  ],
+  "reading_questions": [
+    "本件是全文、摘要、修订、补充还是更正（extent/revision 轴）",
+    "修改/更正的原因与变化部分",
+    "与原件（旧版本）的引用关系与 as-of",
+    "摘要缺失部分不得当作全文无内容",
+    "仅签字修订可合法无业务"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period", "modality"],
+      "missing_behavior": "unknown",
+      "reason": "修订/更正断言必须绑定被修改的原版本、修改范围与语气"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "修订原因与生效条件随变化部分保留"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period"],
+      "missing_behavior": "partial",
+      "reason": "更正前后的数值口径必须成对保留"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "stage"],
+      "missing_behavior": "partial",
+      "reason": "涉及项目变化时整包保留项目主体与阶段"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "签字页、格式更正、报备文件清单",
+      "unless": "更正内容涉及经营事实"
+    }
+  ],
+  "fallback": {
+    "unread": "修订件不可读时 needs_source，并保留原件引用",
+    "ambiguous": "版本关系不清时保留 alternatives，两个版本分别固定 SHA，不覆盖彼此",
+    "no_business": "仅签字/格式修订时 eligible_skip_after_read，合法无业务"
+  },
+  "evidence_status": {
+    "design": "proposed",
+    "real_samples": [],
+    "missing_shapes": [
+      "真实“原件+修订件/摘要件”版本对缺失（已入 acquisition_requests）",
+      "extent/revision 路由轴在现有 router 未落地（归 ROOT）"
+    ]
+  },
+  "case_ids": ["case-synth-revision-pair-01"]
+}

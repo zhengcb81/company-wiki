@@ -1,0 +1,115 @@
+{
+  "schema_version": "du2-acquisition-requests/1",
+  "lane": "du2-families",
+  "note": "缺样补采需求，交 ROOT 按既有 acquisition 流程处理。本包不直接下载入生产、不把搜索摘要当正文、不因缺样编造事实。所有请求都是资料获取请求，不是审批。",
+  "requests": [
+    {
+      "id": "AR-01",
+      "shape": "prospectus_us",
+      "requested_artifacts": ["同一发行人的 S-1 注册说明书完整 HTML", "对应 424B4 最终招股说明书", "含 selling stockholders 转售小节的版本"],
+      "reason": "本地无任何美国注册/招股原件，当前规格仅依据官方表单说明与真实 S-1 正文结构研究（只读网页），无真实引文",
+      "preferred_scope": "优先完整 HTML 原件，保留 form_type 与 filing date 元数据",
+      "non_goals": "不需要财务建模；不需要第三方研报",
+      "related_case_ids": ["case-synth-us-registration-01"]
+    },
+    {
+      "id": "AR-02",
+      "shape": "container_attachment",
+      "requested_artifacts": ["一份 8-K 主件（含 Item 事项与附件清单）", "其 EX-99.1 业绩发布", "其 EX-99.2 业绩展示（含图片依赖）"],
+      "reason": "容器+附件的真实 SourceRef 关系与 child_routes 编排需要本地原件验证；目前仅有官方公开目录结构核对",
+      "preferred_scope": "同一 accession 的完整目录（index + 主件 + 全部附件），图片附件一并保留",
+      "non_goals": "不要求附件之外的关联申报",
+      "related_case_ids": ["case-synth-container-8k-01"]
+    },
+    {
+      "id": "AR-03",
+      "shape": "offering_feasibility",
+      "requested_artifacts": ["一份募投项目可行性研究报告全文", "如可得：对应募集说明书引用可研的版本"],
+      "reason": "独立可研形态缺真实样本；当前仅在募集说明书内见到可研结论引用",
+      "preferred_scope": "含投资估算、资金筹措、效益测算与风险分析章节的完整件",
+      "non_goals": "不需要工程图纸",
+      "related_case_ids": ["case-synth-feasibility-01"]
+    },
+    {
+      "id": "AR-04",
+      "shape": "project_change_notice",
+      "requested_artifacts": ["募投项目变更/延期/终止/进展公告各一", "对应原募集说明书或前次公告（构成版本对）"],
+      "reason": "delta（原计划→现计划）必须有旧版才能真实验证；当前只有合成版本对",
+      "preferred_scope": "同一公司同一项目链的原件集合",
+      "non_goals": "不需要后续跟踪报道",
+      "related_case_ids": ["case-synth-project-change-01"]
+    },
+    {
+      "id": "AR-05",
+      "shape": "lifecycle_revision_overlay",
+      "requested_artifacts": ["原件+修订件（10-K/A 或 A股更正公告）成对", "原件+摘要件成对"],
+      "reason": "extent/revision 正交修饰需要真实版本对验证引用关系与覆盖范围",
+      "preferred_scope": "同源同 SHA 链可核的版本对",
+      "non_goals": "不需要转录稿",
+      "related_case_ids": ["case-synth-revision-pair-01"]
+    },
+    {
+      "id": "AR-06",
+      "shape": "administrative_document",
+      "requested_artifacts": ["真正的投资者关系管理制度/内控制度类文件", "会议通知/确认函各一（最好含扫描件）"],
+      "reason": "真正制度/通知负例缺失；cn-ir-policy 文件名像制度但正文是活动记录，不能作负例；扫描确认函需 OCR 路径验证",
+      "preferred_scope": "至少一份纯程序性负例 + 一份需 OCR 的扫描件",
+      "non_goals": "不需要法律意见书",
+      "related_case_ids": ["case-admin-scan-empty-01", "case-synth-admin-notice-01"]
+    },
+    {
+      "id": "AR-07",
+      "shape": "event_response",
+      "requested_artifacts": ["监管问询函+公司回复（成对）", "重大合同公告一", "重组/收购公告一"],
+      "reason": "问询/合同/收购是高信息密度形态，缺样不编造；提问方与回复方角色需要真实样本",
+      "preferred_scope": "问询与回复保持同一 PDF 链或两个独立原件",
+      "non_goals": "不需要股价反应材料",
+      "related_case_ids": ["case-synth-event-response-01"]
+    },
+    {
+      "id": "AR-08",
+      "shape": "secondary_research",
+      "requested_artifacts": ["券商研报一", "监管政策发文一", "媒体报道一", "ESG 报告节选"],
+      "reason": "第三方来源的作者/角色标注与回链验证缺样本",
+      "preferred_scope": "能与公司披露原件对照的第三方材料",
+      "non_goals": "不用于生成投资结论；不需要评级数据库",
+      "related_case_ids": ["case-synth-secondary-01"]
+    },
+    {
+      "id": "AR-09",
+      "shape": "shareholder_letter",
+      "requested_artifacts": ["致股东信/股东信一封（公司原文）"],
+      "reason": "results_release 的相邻形态，语言风格与业务密度不同，值得单列验证",
+      "preferred_scope": "公司官方发布版本",
+      "non_goals": "不需要媒体转载版",
+      "related_case_ids": []
+    },
+    {
+      "id": "AR-10",
+      "shape": "hk_placing_or_rights_announcement",
+      "requested_artifacts": ["港股配售公告一", "港股供股/公开发售公告一"],
+      "reason": "融资类公告与招股章程/定增的口径差异需真实样本确认",
+      "preferred_scope": "含折价、股数、募资净额与用途的公告",
+      "non_goals": "不需要券商配售报告",
+      "related_case_ids": []
+    },
+    {
+      "id": "AR-11",
+      "shape": "cn_report_summary_digest",
+      "requested_artifacts": ["年报摘要件与对应年报全文", "半年报摘要件与对应半年报全文"],
+      "reason": "摘要件覆盖范围（extent=summary）需要版本对验证“未提及≠没有”",
+      "preferred_scope": "同一公司同一期的摘要+全文",
+      "non_goals": "不需要媒体摘要",
+      "related_case_ids": []
+    },
+    {
+      "id": "AR-12",
+      "shape": "sec_40f_or_6k_body",
+      "requested_artifacts": ["40-F 一", "6-K 主件与正文附件一"],
+      "reason": "外国发行人年报/报告正文形态与 20-F 相邻但结构不同，暂列提案",
+      "preferred_scope": "完整 HTML/文档原件",
+      "non_goals": "不需要 20-F 重复采集",
+      "related_case_ids": []
+    }
+  ]
+}

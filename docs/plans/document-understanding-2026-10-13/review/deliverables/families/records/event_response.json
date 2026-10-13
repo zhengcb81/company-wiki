@@ -1,0 +1,132 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "event_response",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["cn_exchange", "hkex", "sec", "other"],
+    "forms": [],
+    "family": "unknown",
+    "purposes": ["event_update", "regulatory_response"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["pdf", "html"],
+    "language": ["zh", "en"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "问询函回复", "field": null},
+        "location": "cover",
+        "reason": "监管问询回复的标题短语"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "重大合同", "field": null},
+        "location": "body",
+        "reason": "重大合同/中标公告的正文短语"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "收购", "field": null},
+        "location": "body",
+        "reason": "重组/收购公告的正文短语；需整包读取标的、对价与条件"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "问询函", "field": null},
+        "location": "body",
+        "reason": "监管问询函原文/引用部分是提问方内容"
+      }
+    ],
+    "counterexamples": [
+      "监管问询的问题不是事实前提，必须绑定提问方",
+      "合同金额不等于确认收入，履约进度与结算条件分开",
+      "收购对价不等于标的资产的经营收入",
+      "公告引用的问询函内容与公司回复是两个来源角色",
+      "重组终止/合同终止与延期、部分变更的语义不同"
+    ]
+  },
+  "sections": [
+    {
+      "role": "business",
+      "aliases": ["事件概述", "基本情况", "标的资产", "合同主要内容"],
+      "heading_path": [["事件概述", "基本情况", "标的资产", "合同主要内容", "交易概况"]],
+      "priority": 1,
+      "questions": ["事件主体、标的、金额、条件与时间", "对经营的实际影响"]
+    },
+    {
+      "role": "questions",
+      "aliases": ["问询函", "问询问题", "问题", "回复"],
+      "heading_path": [["问询函", "问询问题", "关于问询函的回复"], ["问题", "问询问题", "回复"]],
+      "priority": 1,
+      "questions": ["被询问的业务细节；提问方内容与公司回复分离"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["履约进度", "产能", "经营数据", "测算"],
+      "heading_path": [["履约进度", "经营数据", "测算", "产能"], ["履约进度", "产能", "收入"]],
+      "priority": 2,
+      "questions": ["合同额/对价/收入的口径区分", "经营资产/产能的实际数据"]
+    },
+    {
+      "role": "risk",
+      "aliases": ["风险提示", "不确定性", "终止", "变更"],
+      "heading_path": [["风险提示", "不确定性", "重大风险", "终止"]],
+      "priority": 2,
+      "questions": ["终止/变更/延期的具体条件与作用域"]
+    }
+  ],
+  "reading_questions": [
+    "事件的主体、标的、金额、条件与时间",
+    "被询问的业务细节与公司回复的来源角色",
+    "合同额 vs 确认收入、对价 vs 经营收入",
+    "履约/建设进度与项目成本口径",
+    "终止/变更/延期的语义区分"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period", "role"],
+      "missing_behavior": "unknown",
+      "reason": "问询/公告内容有来源角色（监管提问 vs 公司回复），断言必须绑定主体、时点与角色"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "missing_behavior": "partial",
+      "reason": "合同额、对价、投资额、收入是不同口径，必须带定义与期间"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "stage", "condition"],
+      "missing_behavior": "partial",
+      "reason": "项目/标的断言整包保留阶段与条件"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "生效条件、先决条件与假设必须随事实保留"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "备查文件、法律顾问声明、程序性决议",
+      "unless": "构成事件生效条件"
+    },
+    {
+      "content": "问询函中的重复背景叙述",
+      "unless": "包含新的业务细节问题"
+    }
+  ],
+  "fallback": {
+    "unread": "长回复不可读部分 deferred，问答对/引用不拆散",
+    "ambiguous": "事件类型（重组/合同/问询/终止）混判时保留 alternatives，按正文动词与条件判型",
+    "no_business": "纯程序性事件核实后 eligible_skip_after_read"
+  },
+  "evidence_status": {
+    "design": "proposed",
+    "real_samples": [],
+    "missing_shapes": [
+      "问询回复/重组收购/重大合同真实样本缺失（已入 acquisition_requests）",
+      "多期问询-回复链的版本关系未验证"
+    ]
+  },
+  "case_ids": ["case-synth-event-response-01"]
+}

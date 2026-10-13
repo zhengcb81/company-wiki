@@ -1,0 +1,102 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-synth-us-registration-01",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "synth-us-registration",
+    "source_sha256": null,
+    "origin": {
+      "doc_title": "合成：S-1 注册说明书（含转售）+ 424B4 最终招股说明书",
+      "issuer_market": "sec",
+      "carrier": "html",
+      "language": "en",
+      "verified_via": "synthetic fixture；本地缺真实 S-1/F-1/424B4 原件，已入 acquisition_requests"
+    },
+    "local_binding_key": "synthetic:us-registration"
+  },
+  "observation": {
+    "metadata": {
+      "title": "FORM S-1 REGISTRATION STATEMENT (synthetic)",
+      "declared_kind": "prospectus",
+      "regime": "sec",
+      "form_type": "S-1",
+      "mime_type": "text/html",
+      "language": "en",
+      "published_at": null,
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 1, "exact_quote": "[SYNTHETIC] Use of Proceeds: the company intends to use the net proceeds for working capital and capital expenditures."},
+        "page": null,
+        "text": "[SYNTHETIC] Use of Proceeds: the company intends to use the net proceeds for working capital and capital expenditures.",
+        "role": "fundraising",
+        "hints": {"synthetic": true}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 2, "exact_quote": "[SYNTHETIC] Shares being offered by the selling stockholders: 12,000,000 shares."},
+        "page": null,
+        "text": "[SYNTHETIC] Shares being offered by the selling stockholders: 12,000,000 shares.",
+        "role": "administrative",
+        "hints": {"synthetic": true}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 3, "exact_quote": "[SYNTHETIC] PROSPECTUS (424B4) final terms table: price to public $19.00 per share."},
+        "page": null,
+        "text": "[SYNTHETIC] PROSPECTUS (424B4) final terms table: price to public $19.00 per share.",
+        "role": "administrative",
+        "hints": {"synthetic": true}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "S-1 注册说明书、424B4 最终 prospectus 内容范围不同，不能只贴 form 标签",
+      "旧股转售与公司发行分开：募资归属不同"
+    ],
+    "facts": [
+      {
+        "id": "f1-proceeds-vs-resale",
+        "objective": "公司募资用途与旧股转售的区分",
+        "importance": "critical",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": ["u1 是公司募资用途（Use of Proceeds）", "u2 是 selling stockholders 转售股数"],
+        "must_not_assert": [
+          "转售股数对应的金额不归公司",
+          "不得把转售规模写成公司募资净额"
+        ]
+      },
+      {
+        "id": "f2-form-scope-difference",
+        "objective": "注册说明书与最终 prospectus 的范围差异",
+        "importance": "normal",
+        "any_support_sets": [["u3"]],
+        "must_preserve": ["424B4 为最终条款版本，as-of 定价时点"],
+        "must_not_assert": ["注册说明书的初步条款不得冒充最终定价"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "真实表单全文结构（缺样，见 acquisition_requests）",
+      "语义蕴含判定交 ROOT 行为测试（execution_status=NOT_RUN_ROOT_INTEGRATION）"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1-resale-as-company-proceeds",
+      "change": "把 u2 转售股数计入公司募资",
+      "expected_failure": "subject_mismatch",
+      "reason": "发行类型混淆"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

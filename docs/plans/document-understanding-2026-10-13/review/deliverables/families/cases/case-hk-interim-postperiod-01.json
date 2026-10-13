@@ -1,0 +1,119 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-hk-interim-postperiod-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "hk-interim",
+    "source_sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+    "origin": {
+      "doc_title": "名创优品2025半年报（港股）",
+      "issuer_market": "hkex",
+      "document_date": "2025",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample hk-interim；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "hk-interim"
+  },
+  "observation": {
+    "metadata": {
+      "title": "2025半年报（港股）",
+      "declared_kind": "semi_annual_report",
+      "regime": "hkex",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": "2025-06-30",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 10,
+          "line": null,
+          "exact_quote": "於截至2025年6月30日止六個月，本集團於中國內地和海外市場的名創優品門店總數由截至2024"
+        },
+        "page": 10,
+        "text": "於截至2025年6月30日止六個月，本集團於中國內地和海外市場的名創優品門店總數由截至2024",
+        "role": "operating_metrics",
+        "hints": {"heading_path": ["業務回顧及展望"], "note": "引文按原文行截断；期初 7,504 家与年报期末口径衔接，续行未入引文"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 19,
+          "line": null,
+          "exact_quote": "期後的近期發展  TOP TOY的最新情況"
+        },
+        "page": 19,
+        "text": "期後的近期發展  TOP TOY的最新情況",
+        "role": "outlook",
+        "hints": {"heading_path": ["業務回顧及展望", "期後的近期發展"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {
+          "physical_page": 19,
+          "line": null,
+          "exact_quote": "TOP TOY近期完成了由總部位於新加坡的全球投資公司淡馬錫領投的一輪戰略融資。"
+        },
+        "page": 19,
+        "text": "TOP TOY近期完成了由總部位於新加坡的全球投資公司淡馬錫領投的一輪戰略融資。",
+        "role": "outlook",
+        "hints": {"heading_path": ["業務回顧及展望", "期後的近期發展"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "港股中期与年报共用模板但周期是六个月，period 不可复用年报年度口径",
+      "期后融资事件与报告期内经营数据分开"
+    ],
+    "facts": [
+      {
+        "id": "f1-interim-period-scope",
+        "objective": "六个月累计口径与期初衔接",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": ["期间：截至2025-06-30 止六个月", "期初口径与年报期末 7,504 家衔接", "主体/范围：本集团，中国内地和海外市场合计"],
+        "must_not_assert": ["不得把六个月数据写成年度口径或单季口径"]
+      },
+      {
+        "id": "f2-postperiod-financing",
+        "objective": "期后融资事件单列并保留估值口径",
+        "importance": "normal",
+        "any_support_sets": [["u2", "u3"]],
+        "must_preserve": ["时点：期後（近期发展）", "事件：子公司品牌完成战略融资，领投方为外部投资机构", "口径：交易后估值（非收入、非母公司市值）"],
+        "must_not_assert": [
+          "融资估值不得写成公司收入或母公司市值",
+          "不得把期后事件写成报告期内经营成果"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["估值数字本身正确性", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-period-scope-collapse",
+      "change": "把 u1 的六个月口径写成“全年门店增长”",
+      "expected_failure": "period_mismatch",
+      "reason": "中期口径被年度化"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "本集团（某品牌）",
+    "modality": "actual",
+    "quantity": null,
+    "unit": "家",
+    "period": "截至2025-06-30止六个月",
+    "condition": null
+  },
+  "expected_missing_slots": ["quantity"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

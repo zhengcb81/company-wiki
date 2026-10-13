@@ -1,0 +1,138 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "sec_20f",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["sec"],
+    "forms": ["20-F"],
+    "family": "annual",
+    "purposes": ["periodic_review", "business_baseline"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["html"],
+    "language": ["en"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "metadata_equals", "value": "20-F", "field": "form_type"},
+        "location": "metadata",
+        "reason": "SEC form_type 为 20-F（外国私人发行人年报）"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "Item 4. Information on the Company", "field": null},
+        "location": "body",
+        "reason": "20-F 章节体系与 10-K 不同，Item 4 承载公司/业务信息"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "Item 5. Operating and Financial Review", "field": null},
+        "location": "body",
+        "reason": "20-F 经营回顾在 Item 5，不是 10-K 的 Item 7"
+      }
+    ],
+    "counterexamples": [
+      "20-F 的 Item 编号与 10-K 不同（Item 4/Item 5 vs Item 1/Item 7），不得互相照搬",
+      "注册地、上市地与业务市场是三件事，不能按上市市场猜国家或币种",
+      "VIE/公司结构描述不是经营 KPI，监管影响需归因到具体业务",
+      "20-F/A 是修订件，与原版分开处理",
+      "40-F/6-K 等其他外国发行人披露不适用本规格"
+    ]
+  },
+  "sections": [
+    {
+      "role": "business",
+      "aliases": ["Item 4. Information on the Company", "Business Overview", "A. History and Development"],
+      "heading_path": [["Item 4. Information on the Company", "Item 4 Information on the Company"], ["Business", "Business Overview", "B. Business Overview"]],
+      "priority": 1,
+      "questions": ["业务模式、产品与服务、收费方式", "组织结构与经营主体归属"]
+    },
+    {
+      "role": "industry",
+      "aliases": ["Industry Overview", "C. Industry Overview", "Regulations"],
+      "heading_path": [["Item 4. Information on the Company", "Item 4 Information on the Company"], ["Industry Overview", "C. Industry Overview", "Regulations"]],
+      "priority": 2,
+      "questions": ["监管/行业变化对业务的具体约束", "行业数据的作者与口径"]
+    },
+    {
+      "role": "management_discussion",
+      "aliases": ["Item 5. Operating and Financial Review", "Operating and Financial Review and Prospects"],
+      "heading_path": [["Item 5. Operating and Financial Review", "Item 5 Operating and Financial Review"]],
+      "priority": 1,
+      "questions": ["经营回顾中的业务驱动与解释"]
+    },
+    {
+      "role": "outlook",
+      "aliases": ["Prospects", "Operating Results Outlook"],
+      "heading_path": [["Item 5. Operating and Financial Review", "Item 5 Operating and Financial Review"], ["Prospects", "Operating Results Outlook"]],
+      "priority": 2,
+      "questions": ["展望与计划的条件语气"]
+    },
+    {
+      "role": "risk",
+      "aliases": ["Item 3D. Risk Factors", "Risk Factors"],
+      "heading_path": [["Item 3D. Risk Factors", "Item 3D Risk Factors", "Item 3. Risk Factors"]],
+      "priority": 1,
+      "questions": ["具体风险（含监管、结构、业务）与一般套话的区分"]
+    },
+    {
+      "role": "financial_notes",
+      "aliases": ["Item 18. Financial Statements", "Notes to Financial Statements"],
+      "heading_path": [["Item 18. Financial Statements", "Item 18 Financial Statements"], ["Notes to Financial Statements"]],
+      "priority": 3,
+      "questions": ["收入确认与业务机制描述"]
+    }
+  ],
+  "reading_questions": [
+    "业务与组织结构（含注册地/上市地/业务市场的区分）",
+    "经营回顾中的业务驱动",
+    "监管约束对业务的事实影响及归因",
+    "具体风险与一般风险的区分",
+    "币种、会计准则与报告期口径"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period", "geography"],
+      "missing_behavior": "unknown",
+      "reason": "20-F 主体常跨注册地/上市地/经营地，断言必须绑定主体、期间与地域"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "missing_behavior": "partial",
+      "reason": "币种、会计准则与分母口径必须随数值保留"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "监管条件、VIE 结构与展望的限定语随事实保留"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "geography", "stage"],
+      "missing_behavior": "partial",
+      "reason": "区域扩张/学校/中心等项目断言保留地域与阶段"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "公司结构图、VIE 合同清单等法律结构描述",
+      "unless": "其中含对经营的实际约束或监管事实"
+    },
+    {
+      "content": "董事履历、薪酬、股本变动等常规章节",
+      "unless": "含重大经营事实"
+    }
+  ],
+  "fallback": {
+    "unread": "不可读部分 deferred 并记录，不以空结果判无业务",
+    "ambiguous": "20-F 与 10-K/40-F 混淆时用 Item 编号与 form_type 正文证据判型",
+    "no_business": "核实无业务内容后 eligible_skip_after_read"
+  },
+  "evidence_status": {
+    "design": "verified",
+    "real_samples": ["case-sec-20f-item-map-01"],
+    "missing_shapes": ["20-F 业务章节金标未建", "20-F/A 修订版本对"]
+  },
+  "case_ids": ["case-sec-20f-item-map-01"]
+}

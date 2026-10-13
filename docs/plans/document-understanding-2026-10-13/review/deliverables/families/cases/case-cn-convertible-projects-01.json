@@ -1,0 +1,90 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-cn-convertible-projects-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-convertible",
+    "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+    "origin": {
+      "doc_title": "金禾实业公开发行可转换公司债券募集说明书",
+      "issuer_market": "cn_exchange",
+      "document_date": null,
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample cn-convertible；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "cn-convertible"
+  },
+  "observation": {
+    "metadata": {
+      "title": "公开发行可转换公司债券募集说明书",
+      "declared_kind": "convertible_bond_prospectus",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 7,
+          "line": null,
+          "exact_quote": "本次可转债发行的募集资金拟投资于年产400 吨吡啶盐项目和年产1,500 吨三氯蔗糖项目。"
+        },
+        "page": 7,
+        "text": "本次可转债发行的募集资金拟投资于年产400 吨吡啶盐项目和年产1,500 吨三氯蔗糖项目。",
+        "role": "fundraising",
+        "hints": {"heading_path": ["风险因素", "募集资金投资项目的风险"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "两个募投项目必须独立成包；产品与产能口径不可合并",
+      "可转债条款一般降权，但项目绑定关系保留"
+    ],
+    "facts": [
+      {
+        "id": "f1-projects-kept-separate",
+        "objective": "多项目募投的独立口径",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "项目A：年产400吨吡啶盐项目",
+          "项目B：年产1,500吨三氯蔗糖项目",
+          "modality：拟投资（计划，未建成）"
+        ],
+        "must_not_assert": [
+          "不得把两个项目的产能/产品合并成一个项目口径",
+          "“拟投资”不得写成已建成或已投产产能",
+          "不得与既有产能（如原生产线产量）混算"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["项目建设后续进展", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-merge-projects",
+      "change": "把两个项目写成“合计1,900吨新产能”",
+      "expected_failure": "project_binding_broken",
+      "reason": "不同产品的项目口径被合并"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "募投项目B",
+    "modality": "plan",
+    "quantity": "1,500",
+    "unit": "吨/年",
+    "period": "编制时点",
+    "condition": "拟投资（未建成）"
+  },
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

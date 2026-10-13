@@ -1,0 +1,104 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-sec-20f-item-map-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "us-20f",
+    "source_sha256": "35eed9769ee33e687147c50e91b571ec2f19135dc483d4b5c1dcbdd7ce879164",
+    "origin": {
+      "doc_title": "Form 20-F (annual report, HTML)",
+      "issuer_market": "sec",
+      "document_date": "2024-02-29",
+      "carrier": "html",
+      "language": "en",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample us-20f；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "us-20f"
+  },
+  "observation": {
+    "metadata": {
+      "title": "Form 20-F",
+      "declared_kind": "annual_report",
+      "regime": "sec",
+      "form_type": "20-F",
+      "mime_type": "text/html",
+      "language": "en",
+      "published_at": null,
+      "period_end": "2024-02-29",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": null,
+          "line": 9,
+          "exact_quote": "Item 4. Information on the Company 66 Item 4A Unresolved Staff Comments 99 Item 5. Operating and Financial Review and Prospects 99"
+        },
+        "page": null,
+        "text": "Item 4. Information on the Company 66 Item 4A Unresolved Staff Comments 99 Item 5. Operating and Financial Review and Prospects 99 Item 6. Directors, Senior Management and Employees 114 Item 7. Major Shareholders and Related Party Transactions 123",
+        "role": "unknown",
+        "hints": {"unit_kind": "toc", "note": "20-F 目录：Item 5=经营回顾；Item 7=主要股东（与 10-K 的 Item 7 MD&A 同号不同义）"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": null,
+          "line": 10,
+          "exact_quote": "Our financial statements are expressed in U.S. dollars, which is our reporting currency."
+        },
+        "page": null,
+        "text": "Our financial statements are expressed in U.S. dollars, which is our reporting currency.",
+        "role": "financial_notes",
+        "hints": {"heading_path": ["Item 3. Key Information"], "dom_line": 10}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "20-F 章节映射与 10-K 不同：Item 4 公司/业务、Item 5 经营回顾",
+      "同一 Item 编号在不同表单含义不同，编号本身不能当语义"
+    ],
+    "facts": [
+      {
+        "id": "f1-item-map-not-10k",
+        "objective": "20-F 与 10-K 章节编号不可互套",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "Item 4=公司信息/业务；Item 5=经营回顾与展望",
+          "本 unit 为目录（toc），非正文",
+          "20-F 的 Item 7=主要股东与关联方交易"
+        ],
+        "must_not_assert": [
+          "不得把 20-F Item 5 当 10-K Item 7 MD&A",
+          "不得把 20-F Item 7（主要股东）读成 MD&A",
+          "不得以目录命中宣称已读业务正文"
+        ]
+      },
+      {
+        "id": "f2-reporting-currency",
+        "objective": "币种口径必须保留",
+        "importance": "normal",
+        "any_support_sets": [["u2"]],
+        "must_preserve": ["报告币种：美元（reporting currency）", "主体：该公司财务报表"],
+        "must_not_assert": ["不得按上市地或业务地推断记账本位币", "报表币种与经营地币种不得混同"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["业务章节正文内容", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-copy-10k-item-map",
+      "change": "按 10-K 的 Item 1/7 结构去索引 20-F 正文",
+      "expected_failure": "form_mapping_mismatch",
+      "reason": "跨表单编号体系混用"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}
