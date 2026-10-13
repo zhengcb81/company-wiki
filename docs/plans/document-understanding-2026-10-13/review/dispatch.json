@@ -1,14 +1,15 @@
 {
   "schema_version": "du2-dispatch/1",
   "date": "2026-10-13",
-  "status": "WORKTREES_CREATED_PLAN_CHECKOUT_PENDING",
+  "status": "READY",
   "root_code_base": "e802e8ac411715c07c025f576e376eed724cbec0",
-  "plan_commit": null,
+  "plan_commit": "64c8547d4cb0d55a1d388084f8a69ce54267bf57",
+  "checkout_verification": {"cards_exist":true,"three_status_clean":true,"raw_directory_absent":true,"total_bytes_before_final_receipt":62055650,"docs_scope":"docs/plans/document-understanding-2026-10-13","final_receipt_commit":"ROOT will fast-forward clean new trees to the final receipt commit before user handoff; verify actual HEAD at task start"},
   "repository": "company-wiki",
   "lanes": [
     {"id":"DU2-FAMILIES","branch":"codex/du2-families-20261013","worktree":"C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-20261013/families","card":"cards/DU2-FAMILIES.md","owned":["docs/plans/document-understanding-2026-10-13/review/deliverables/families/",".planning/du2-families/"]},
     {"id":"DU2-FACETS","branch":"codex/du2-facets-20261013","worktree":"C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-20261013/facets","card":"cards/DU2-FACETS.md","owned":["docs/plans/document-understanding-2026-10-13/review/deliverables/facets/",".planning/du2-facets/"]},
     {"id":"DU2-LAYOUT","branch":"codex/du2-layout-20261013","worktree":"C:/Users/郑曾波/Projects/_harness_worktrees/document-reading-review-20261013/layout","card":"cards/DU2-LAYOUT.md","owned":["src/company_wiki/document_understanding/layout_hints/","tests/unit/document_understanding_layout_hints/","tests/fixtures/document_understanding_layout_hints/",".planning/du2-layout/"]}
   ],
-  "constraints": {"old_du_worktrees_modified":false,"raw_documents_copied":0,"new_production_permissions":0,"baseline_mode":"sparse code/docs checkout, shared Git objects","root_next":"publish plans then fast-forward only these clean new worktrees; no old DU merge in this review task"}
+  "constraints": {"old_du_worktrees_modified":false,"raw_documents_copied":0,"new_production_permissions":0,"baseline_mode":"sparse code/docs checkout, shared Git objects","root_next":"receive existing DU branches and implement root_implementation; no old DU merge performed in this review task"}
 }
