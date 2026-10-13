@@ -10,7 +10,28 @@ from contextlib import contextmanager
 import os
 from pathlib import Path
 import tempfile
+import time
 from typing import IO, Iterator, Literal
+
+
+def _replace_closed_stage(source: Path, destination: Path) -> None:
+    """Windows can reject simultaneous renames even when all files are closed.
+
+    Retry only known Windows contention codes, on this same owned staging file.
+    Four attempts and 35ms total backoff bound persistent access/sharing errors;
+    ordinary permission failures propagate immediately. This does not arbitrate
+    immutable writes or change a caller's transaction/lock responsibility.
+    """
+    delays = (0.0, 0.005, 0.010, 0.020)
+    for attempt, delay in enumerate(delays):
+        if delay:
+            time.sleep(delay)
+        try:
+            os.replace(source, destination)
+            return
+        except OSError as exc:
+            if getattr(exc, "winerror", None) not in {5, 32, 33} or attempt == len(delays) - 1:
+                raise
 
 
 @contextmanager
@@ -36,7 +57,7 @@ def atomic_output(
             stream.flush()
             if sync:
                 os.fsync(stream.fileno())
-        os.replace(temporary, path)
+        _replace_closed_stage(temporary, path)
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)

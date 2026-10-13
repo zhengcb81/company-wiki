@@ -21,8 +21,12 @@ def test_catalog_export_same_process_writers_own_distinct_staging(tmp_path, monk
     def coordinated_replace(source, target):
         if Path(target) == destination:
             with lock:
-                staged.append(Path(source))
-            barrier.wait(timeout=5)
+                first_attempt = Path(source) not in staged
+                if first_attempt:
+                    staged.append(Path(source))
+            # Synchronise first submissions, not a retry after its peer exits.
+            if first_attempt:
+                barrier.wait(timeout=5)
         return real_replace(source, target)
 
     monkeypatch.setattr(os, "replace", coordinated_replace)
