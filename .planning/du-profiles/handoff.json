@@ -3,7 +3,7 @@
   "lane": "du-profiles",
   "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
   "implementation_commits": [
-    "PENDING_SET_BY_FOLLOWUP_COMMIT"
+    "76727f896ab4280a0b1613929e94f7b6dad751ee"
   ],
   "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/profiles",
   "branch": "codex/du-profiles-20261013",

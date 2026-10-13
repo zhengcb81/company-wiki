@@ -4,7 +4,7 @@
 - **分支**：`codex/du-profiles-20261013`
 - **worktree**：`C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/profiles`
 - **base SHA**：`7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8`
-- **实现 commit**：`PENDING_SET_BY_FOLLOWUP_COMMIT`
+- **实现 commit**：`76727f896ab4280a0b1613929e94f7b6dad751ee`
 - **状态**：实现完成、测试与 C 节点真实复核通过，但**尚未接入生产**（生产接线属 ROOT）
 
 ---
