@@ -28,6 +28,7 @@ from .model import (
     SEC_10K_SECTIONS,
     SEC_10Q_SECTIONS,
     SEC_20F_SECTIONS,
+    SEC_REGISTRATION_SECTIONS,
     SHARED_FOCUS,
     Profile,
     SectionPriority,
@@ -155,7 +156,7 @@ def _build_profiles() -> tuple[Profile, ...]:
             profile_id="prospectus",
             family="prospectus",
             regime="cn_exchange",
-            section_priorities=combine(CN_FUNDRAISING_SECTIONS, HK_OFFERING_SECTIONS),
+            section_priorities=combine(CN_FUNDRAISING_SECTIONS, HK_OFFERING_SECTIONS, SEC_REGISTRATION_SECTIONS),
             semantic_units=("paragraph_event", "project", "operating_table", "risk", "background"),
             summary_focus=(
                 "招股书建立业务基础知识与发行当时事实包：产品与收入机制、行业与市场口径、"
@@ -170,7 +171,7 @@ def _build_profiles() -> tuple[Profile, ...]:
             profile_id="offering",
             family="offering",
             regime="cn_exchange",
-            section_priorities=combine(CN_FUNDRAISING_SECTIONS, HK_OFFERING_SECTIONS),
+            section_priorities=combine(CN_FUNDRAISING_SECTIONS, HK_OFFERING_SECTIONS, SEC_REGISTRATION_SECTIONS),
             semantic_units=("project", "operating_table", "risk", "paragraph_event", "background"),
             summary_focus=(
                 "再融资与募投按项目绑定产品、实施主体、地点、投入金额、新增与总产能、"

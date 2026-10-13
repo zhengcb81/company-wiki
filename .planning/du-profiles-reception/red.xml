@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="18" skipped="0" tests="20" time="0.994" timestamp="2026-10-13T20:09:43.091075+01:00" hostname="DESKTOP-156V213"><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_composed_aliases_retain_all_markets_and_last_priority_is_explicit" time="0.149"><failure message="AssertionError: assert ('业务', 'Business') == ('业务', 'Business', '業務')&#10;  &#10;  Right contains one more item: '業務'&#10;  Use -v to get more diff">tests\unit\document_understanding_profiles\test_reception_root_causes.py:26: in test_composed_aliases_retain_all_markets_and_last_priority_is_explicit
+    assert merged[0].aliases == ("业务", "Business", "業務")
+E   AssertionError: assert ('业务', 'Business') == ('业务', 'Business', '業務')
+E
+E     Right contains one more item: '業務'
+E     Use -v to get more diff</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_offering_profiles_retain_combined_english_and_traditional_aliases[prospectus]" time="0.001"><failure message="AssertionError: assert {'future plan...ds', '所得款項用途'} &lt;= {'募投项目', '募集资...'所得款项用途', ...}&#10;  &#10;  Extra items in the left set:&#10;  '所得款項用途'&#10;  'future plans and use of proceeds'">tests\unit\document_understanding_profiles\test_reception_root_causes.py:33: in test_offering_profiles_retain_combined_english_and_traditional_aliases
+    assert {"所得款項用途", "future plans and use of proceeds"} &lt;= set(roles["fundraising"]["aliases"])
+E   AssertionError: assert {'future plan...ds', '所得款項用途'} &lt;= {'募投项目', '募集资...'所得款项用途', ...}
+E
+E     Extra items in the left set:
+E     '所得款項用途'
+E     'future plans and use of proceeds'</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_offering_profiles_retain_combined_english_and_traditional_aliases[offering]" time="0.001"><failure message="AssertionError: assert {'future plan...ds', '所得款項用途'} &lt;= {'募投项目', '募集资...'所得款项用途', ...}&#10;  &#10;  Extra items in the left set:&#10;  '所得款項用途'&#10;  'future plans and use of proceeds'">tests\unit\document_understanding_profiles\test_reception_root_causes.py:33: in test_offering_profiles_retain_combined_english_and_traditional_aliases
+    assert {"所得款項用途", "future plans and use of proceeds"} &lt;= set(roles["fundraising"]["aliases"])
+E   AssertionError: assert {'future plan...ds', '所得款項用途'} &lt;= {'募投项目', '募集资...'所得款项用途', ...}
+E
+E     Extra items in the left set:
+E     '所得款項用途'
+E     'future plans and use of proceeds'</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_front_heavy_headings_cannot_starve_tail_or_plain_body" time="0.008"><failure message="AssertionError: assert ('h0' in {'h0', 'h1', 'h10', 'h11', 'h2', 'h3', ...} and 'tail' in {'h0', 'h1', 'h10', 'h11', 'h2', 'h3', ...})">tests\unit\document_understanding_profiles\test_reception_root_causes.py:44: in test_front_heavy_headings_cannot_starve_tail_or_plain_body
+    assert "h0" in ids and "tail" in ids
+E   AssertionError: assert ('h0' in {'h0', 'h1', 'h10', 'h11', 'h2', 'h3', ...} and 'tail' in {'h0', 'h1', 'h10', 'h11', 'h2', 'h3', ...})</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_character_budget_keeps_span_opportunity_and_never_reads_over_limit" time="0.001" /><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_registration_form_keeps_issuer_business_and_offering_reading[S-1]" time="0.008"><failure message="AssertionError: assert 'unknown' == 'sec'&#10;  &#10;  - sec&#10;  + unknown">tests\unit\document_understanding_profiles\test_reception_root_causes.py:65: in test_registration_form_keeps_issuer_business_and_offering_reading
+    assert route["regime"] == "sec"
+E   AssertionError: assert 'unknown' == 'sec'
+E
+E     - sec
+E     + unknown</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_registration_form_keeps_issuer_business_and_offering_reading[F-1]" time="0.003"><failure message="AssertionError: assert 'unknown' == 'sec'&#10;  &#10;  - sec&#10;  + unknown">tests\unit\document_understanding_profiles\test_reception_root_causes.py:65: in test_registration_form_keeps_issuer_business_and_offering_reading
+    assert route["regime"] == "sec"
+E   AssertionError: assert 'unknown' == 'sec'
+E
+E     - sec
+E     + unknown</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_registration_form_keeps_issuer_business_and_offering_reading[S-1/A]" time="0.002"><failure message="AssertionError: assert 'unknown' == 'sec'&#10;  &#10;  - sec&#10;  + unknown">tests\unit\document_understanding_profiles\test_reception_root_causes.py:65: in test_registration_form_keeps_issuer_business_and_offering_reading
+    assert route["regime"] == "sec"
+E   AssertionError: assert 'unknown' == 'sec'
+E
+E     - sec
+E     + unknown</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_registration_form_keeps_issuer_business_and_offering_reading[F-1/A]" time="0.003"><failure message="AssertionError: assert 'unknown' == 'sec'&#10;  &#10;  - sec&#10;  + unknown">tests\unit\document_understanding_profiles\test_reception_root_causes.py:65: in test_registration_form_keeps_issuer_business_and_offering_reading
+    assert route["regime"] == "sec"
+E   AssertionError: assert 'unknown' == 'sec'
+E
+E     - sec
+E     + unknown</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_sec_current_report_container_has_complete_inline_attachment_ranges[8-K]" time="0.003"><failure message="AssertionError: assert ('unknown' == 'sec'&#10;  &#10;  - sec&#10;  + unknown)">tests\unit\document_understanding_profiles\test_reception_root_causes.py:80: in test_sec_current_report_container_has_complete_inline_attachment_ranges
+    assert route["regime"] == "sec" and route["family"] == "unknown"
+E   AssertionError: assert ('unknown' == 'sec'
+E
+E     - sec
+E     + unknown)</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_sec_current_report_container_has_complete_inline_attachment_ranges[6-K]" time="0.003"><failure message="AssertionError: assert ('unknown' == 'sec'&#10;  &#10;  - sec&#10;  + unknown)">tests\unit\document_understanding_profiles\test_reception_root_causes.py:80: in test_sec_current_report_container_has_complete_inline_attachment_ranges
+    assert route["regime"] == "sec" and route["family"] == "unknown"
+E   AssertionError: assert ('unknown' == 'sec'
+E
+E     - sec
+E     + unknown)</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_external_exhibit_link_does_not_claim_read_business_attachment" time="0.003"><failure message="AssertionError: assert ('unknown' == 'sec'&#10;  &#10;  - sec&#10;  + unknown)">tests\unit\document_understanding_profiles\test_reception_root_causes.py:93: in test_external_exhibit_link_does_not_claim_read_business_attachment
+    assert route["regime"] == "sec" and route["family"] == "unknown"
+E   AssertionError: assert ('unknown' == 'sec'
+E
+E     - sec
+E     + unknown)</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_exhibit_mentioned_in_running_prose_creates_no_child_range" time="0.003" /><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_probe_gap_in_inline_attachment_is_not_reported_complete" time="0.003"><failure message="assert False&#10; +  where False = any(&lt;generator object test_probe_gap_in_inline_attachment_is_not_reported_complete.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000020155B229B0&gt;)">tests\unit\document_understanding_profiles\test_reception_root_causes.py:107: in test_probe_gap_in_inline_attachment_is_not_reported_complete
+    assert any(r["code"] == "CHILD_RANGE_NOT_READ" for r in route["reasons"])
+E   assert False
+E    +  where False = any(&lt;generator object test_probe_gap_in_inline_attachment_is_not_reported_complete.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000020155B229B0&gt;)</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_extent_and_revision_are_separate_additive_axes[2025 \u5e74\u5e74\u5ea6\u62a5\u544a\u6458\u8981\uff08\u4fee\u8ba2\u7248\uff09-None-summary-amended]" time="0.003"><failure message="KeyError: 'modifiers'">tests\unit\document_understanding_profiles\test_reception_root_causes.py:119: in test_extent_and_revision_are_separate_additive_axes
+    assert route["modifiers"] == {"extent": extent, "revision": expected_revision}
+           ^^^^^^^^^^^^^^^^^^
+E   KeyError: 'modifiers'</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_extent_and_revision_are_separate_additive_axes[2025 \u5e74\u5e74\u5ea6\u62a5\u544a-original-full-original]" time="0.002"><failure message="KeyError: 'modifiers'">tests\unit\document_understanding_profiles\test_reception_root_causes.py:119: in test_extent_and_revision_are_separate_additive_axes
+    assert route["modifiers"] == {"extent": extent, "revision": expected_revision}
+           ^^^^^^^^^^^^^^^^^^
+E   KeyError: 'modifiers'</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_extent_and_revision_are_separate_additive_axes[2025 \u5e74\u5e74\u5ea6\u62a5\u544a-supplement-full-supplement]" time="0.002"><failure message="KeyError: 'modifiers'">tests\unit\document_understanding_profiles\test_reception_root_causes.py:119: in test_extent_and_revision_are_separate_additive_axes
+    assert route["modifiers"] == {"extent": extent, "revision": expected_revision}
+           ^^^^^^^^^^^^^^^^^^
+E   KeyError: 'modifiers'</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_extent_and_revision_are_separate_additive_axes[2025 \u5e74\u5e74\u5ea6\u62a5\u544a-None-full-unknown]" time="0.003"><failure message="KeyError: 'modifiers'">tests\unit\document_understanding_profiles\test_reception_root_causes.py:119: in test_extent_and_revision_are_separate_additive_axes
+    assert route["modifiers"] == {"extent": extent, "revision": expected_revision}
+           ^^^^^^^^^^^^^^^^^^
+E   KeyError: 'modifiers'</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_body_summary_and_referred_amendment_do_not_modify_whole_document" time="0.002"><failure message="KeyError: 'modifiers'">tests\unit\document_understanding_profiles\test_reception_root_causes.py:126: in test_body_summary_and_referred_amendment_do_not_modify_whole_document
+    assert route["modifiers"] == {"extent": "full", "revision": "unknown"}
+           ^^^^^^^^^^^^^^^^^^
+E   KeyError: 'modifiers'</failure></testcase><testcase classname="tests.unit.document_understanding_profiles.test_reception_root_causes" name="test_limited_probe_retains_strong_type_reason_and_distinct_coverage_diagnostic" time="0.004"><failure message="AssertionError: assert ('generic' == 'prospectus'&#10;  &#10;  - prospectus&#10;  + generic)">tests\unit\document_understanding_profiles\test_reception_root_causes.py:132: in test_limited_probe_retains_strong_type_reason_and_distinct_coverage_diagnostic
+    assert route["profile_id"] == "prospectus" and route["confidence"] in {"low", "unknown"}
+E   AssertionError: assert ('generic' == 'prospectus'
+E
+E     - prospectus
+E     + generic)</failure></testcase></testsuite></testsuites>

@@ -13,7 +13,7 @@ TOC while the business narrative sits far later.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any, Iterable, Mapping
 
 from . import vocabulary as v
@@ -65,6 +65,7 @@ class UnitRef:
     language: str | None
     role: str | None
     heading_level: int | None
+    text_clipped: bool = False
 
 
 @dataclass(frozen=True)
@@ -179,53 +180,80 @@ def _parse_units(raw_units: Any) -> tuple[UnitRef, ...]:
     return tuple(units)
 
 
+def _spread_sample(units: list[UnitRef], count: int) -> list[UnitRef]:
+    """Deterministic endpoints and evenly spaced interior positions."""
+    if count <= 0 or not units:
+        return []
+    if len(units) <= count:
+        return units
+    if count == 1:
+        return [units[len(units) // 2]]
+    return [units[index * (len(units) - 1) // (count - 1)] for index in range(count)]
+
+
 def _stratified_probes(units: tuple[UnitRef, ...], limit: int) -> tuple[UnitRef, ...]:
-    """Pick probe units across the document span, not just from the front.
+    """Reserve opportunities for cover, span headings and ordinary body.
 
-    The strategy is deliberately simple and deterministic:
-
-    1. keep every heading-like unit while the budget allows -- headings carry the
-       section vocabulary that decides the family;
-    2. fill the remainder with a stratified sample across the document span so a
-       259-page report contributes evidence from the middle and the end, not only the
-       cover and TOC.
-
-    Ties keep the original order, so the same input always yields the same probes.
+    A dense front TOC cannot exhaust the heading allocation. Sampling each lane
+    across its own span retains tail headings and non-heading paragraphs within
+    the same caller budget. Ordinal values and IDs do not affect this allocation.
     """
     if limit <= 0:
         return ()
     if len(units) <= limit:
         return units
-    selected: list[UnitRef] = []
-    selected_ids: set[str] = set()
+    cover_count = min(3, max(1, limit // 4))
+    selected = {unit.unit_id for unit in units[:cover_count]}
+    remainder = list(units[cover_count:])
+    headings = [unit for unit in remainder if _is_heading_like(unit)]
+    body = [unit for unit in remainder if not _is_heading_like(unit)]
+    available = limit - len(selected)
+    heading_count = min(len(headings), (available + 1) // 2)
+    body_count = min(len(body), available - heading_count)
+    # If one lane is short, transfer its unused places to the other lane.
+    heading_count = min(len(headings), available - body_count)
+    body_count = min(len(body), available - heading_count)
+    selected.update(unit.unit_id for unit in _spread_sample(headings, heading_count))
+    selected.update(unit.unit_id for unit in _spread_sample(body, body_count))
+    return tuple(unit for unit in units if unit.unit_id in selected)
 
-    def add(unit: UnitRef) -> None:
-        if len(selected) >= limit or unit.unit_id in selected_ids:
-            return
-        selected_ids.add(unit.unit_id)
-        selected.append(unit)
 
-    for unit in units:
-        if _is_heading_like(unit):
-            add(unit)
+def _bounded_probe_texts(
+    probes: tuple[UnitRef, ...], budget: int
+) -> tuple[tuple[UnitRef, ...], int, bool]:
+    """Share character budget before consuming any front unit's long text.
 
-    remaining = limit - len(selected)
-    if remaining > 0:
-        unfilled = [unit for unit in units if unit.unit_id not in selected_ids]
-        if unfilled:
-            step = len(unfilled) / remaining
-            for index in range(remaining):
-                offset = min(int(index * step), len(unfilled) - 1)
-                add(unfilled[offset])
-
-    for unit in units:
-        if len(selected) >= limit:
+    Short units retain their full text. Long units receive a bounded prefix under
+    fair allocation; any prefix is explicitly reported as limited coverage. No
+    copy of the caller observation is altered and only consumed characters count.
+    """
+    costs = [len(unit.text) for unit in probes]
+    total = sum(costs)
+    if total <= budget:
+        return probes, total, False
+    allowances = [0] * len(probes)
+    remaining = budget
+    pending = list(range(len(probes)))
+    while pending and remaining:
+        share = remaining // len(pending)
+        if share == 0:
+            for index in pending[:remaining]:
+                allowances[index] += 1
             break
-        add(unit)
-
-    order = {unit.unit_id: position for position, unit in enumerate(units)}
-    selected.sort(key=lambda unit: order[unit.unit_id])
-    return tuple(selected)
+        next_pending = []
+        for index in pending:
+            consumed = min(costs[index] - allowances[index], share)
+            allowances[index] += consumed
+            remaining -= consumed
+            if allowances[index] < costs[index]:
+                next_pending.append(index)
+        pending = next_pending
+    kept = tuple(
+        replace(unit, text=unit.text[:allowed], text_clipped=True) if allowed < len(unit.text) else unit
+        for unit, allowed in zip(probes, allowances)
+        if allowed or not unit.text
+    )
+    return kept, sum(len(unit.text) for unit in kept), True
 
 
 def _is_heading_like(unit: UnitRef) -> bool:
@@ -261,16 +289,9 @@ def parse_observation(
     native_scan = native_scan if isinstance(native_scan, str) and native_scan else "unknown"
 
     probes = _stratified_probes(units, resolved_limits.max_probe_units)
-    probed_chars = 0
-    kept: list[UnitRef] = []
-    char_limited = False
-    for unit in probes:
-        cost = len(unit.text)
-        if probed_chars + cost > resolved_limits.max_probe_chars:
-            char_limited = True
-            continue
-        probed_chars += cost
-        kept.append(unit)
+    kept, probed_chars, char_limited = _bounded_probe_texts(
+        probes, resolved_limits.max_probe_chars
+    )
 
     return Observation(
         source_id=_optional_str(source_ref.get("source_id")),
@@ -286,7 +307,7 @@ def parse_observation(
         opaque_pages=_int_pages(coverage.get("opaque_pages")),
         deferred_pages=_int_pages(coverage.get("deferred_pages")),
         units=units,
-        probes=tuple(kept),
+        probes=kept,
         probed_chars=probed_chars,
         probe_limited=len(probes) < len(units) or char_limited,
         char_limited=char_limited,

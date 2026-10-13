@@ -1,0 +1,52 @@
+{
+  "schema_version": "du-profiles-reception-test/1",
+  "A_red": [
+    {
+      "command": "python -m pytest tests/unit/document_understanding_profiles/test_reception_root_causes.py -q",
+      "file": "red.xml",
+      "tests": 20,
+      "failures": 18,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_seconds": 0.994
+    },
+    {
+      "command": "python -m pytest tests/unit/document_understanding_profiles/test_reception_root_causes.py -q",
+      "file": "red-coverage.xml",
+      "tests": 30,
+      "failures": 9,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_seconds": 4.563
+    }
+  ],
+  "B_C_final": {
+    "command": "python -m pytest tests/unit/document_understanding_profiles -q",
+    "file": "green-final.xml",
+    "tests": 180,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_seconds": 1.972
+  },
+  "static_checks": {
+    "ruff": "PASS",
+    "mypy_files": 9,
+    "mypy": "PASS"
+  },
+  "old_assertions_modified": 0,
+  "new_tests": 30,
+  "test_environment": "pytest hermetic network guard; synthetic in-memory inputs plus retained bounded real shape cases",
+  "resources": {
+    "paid_model_calls": 0,
+    "paid_usd": 0,
+    "download_calls": 0,
+    "raw_writes": 0,
+    "new_dependencies": 0
+  },
+  "not_run": [
+    "production selector/summary alias and child consumption (ROOT)",
+    "full real-original DU quality/LLM semantic evaluation",
+    "DU2 families/facets/layout integration"
+  ]
+}

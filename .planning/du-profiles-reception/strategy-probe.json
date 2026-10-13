@@ -1,0 +1,256 @@
+{
+  "profile_sections": {
+    "prospectus": [
+      {
+        "section_role": "fundraising",
+        "aliases": [
+          "募集资金运用",
+          "本次募集资金运用",
+          "募集资金使用",
+          "募集资金投资项目",
+          "募集资金使用金额",
+          "项目投资计划",
+          "项目建设周期",
+          "项目建设用地",
+          "项目投资回报",
+          "项目备案",
+          "所得款项用途",
+          "募投项目",
+          "future plans and use of proceeds",
+          "未來計劃及所得款項用途",
+          "所得款項用途",
+          "全球發售",
+          "全球发售",
+          "Use of Proceeds",
+          "Selling Stockholders",
+          "Underwriting"
+        ],
+        "priority": 1
+      },
+      {
+        "section_role": "business",
+        "aliases": [
+          "业务与技术",
+          "主营业务",
+          "经营模式",
+          "竞争优势",
+          "業務",
+          "业务",
+          "our business",
+          "Business",
+          "Description of Business"
+        ],
+        "priority": 1
+      },
+      {
+        "section_role": "industry",
+        "aliases": [
+          "行业概览",
+          "行业情况",
+          "行业发展趋势",
+          "市场规模",
+          "行業概覽",
+          "industry overview",
+          "Market and Industry Data"
+        ],
+        "priority": 2
+      },
+      {
+        "section_role": "outlook",
+        "aliases": [
+          "未来发展规划",
+          "发展战略",
+          "未来计划"
+        ],
+        "priority": 2
+      },
+      {
+        "section_role": "risk",
+        "aliases": [
+          "风险因素",
+          "重大事项提示",
+          "风险提示",
+          "風險因素",
+          "risk factors"
+        ],
+        "priority": 1
+      },
+      {
+        "section_role": "financial_notes",
+        "aliases": [
+          "财务会计信息",
+          "管理层分析",
+          "财务报告",
+          "历史及公司架构",
+          "公司架构",
+          "歷史及公司架構",
+          "法規",
+          "法规",
+          "會計師報告",
+          "会计师报告",
+          "Notes to Financial Statements"
+        ],
+        "priority": 3
+      },
+      {
+        "section_role": "management_discussion",
+        "aliases": [
+          "Management's Discussion and Analysis"
+        ],
+        "priority": 1
+      }
+    ],
+    "offering": [
+      {
+        "section_role": "fundraising",
+        "aliases": [
+          "募集资金运用",
+          "本次募集资金运用",
+          "募集资金使用",
+          "募集资金投资项目",
+          "募集资金使用金额",
+          "项目投资计划",
+          "项目建设周期",
+          "项目建设用地",
+          "项目投资回报",
+          "项目备案",
+          "所得款项用途",
+          "募投项目",
+          "future plans and use of proceeds",
+          "未來計劃及所得款項用途",
+          "所得款項用途",
+          "全球發售",
+          "全球发售",
+          "Use of Proceeds",
+          "Selling Stockholders",
+          "Underwriting"
+        ],
+        "priority": 1
+      },
+      {
+        "section_role": "business",
+        "aliases": [
+          "业务与技术",
+          "主营业务",
+          "经营模式",
+          "竞争优势",
+          "業務",
+          "业务",
+          "our business",
+          "Business",
+          "Description of Business"
+        ],
+        "priority": 1
+      },
+      {
+        "section_role": "industry",
+        "aliases": [
+          "行业概览",
+          "行业情况",
+          "行业发展趋势",
+          "市场规模",
+          "行業概覽",
+          "industry overview",
+          "Market and Industry Data"
+        ],
+        "priority": 2
+      },
+      {
+        "section_role": "outlook",
+        "aliases": [
+          "未来发展规划",
+          "发展战略",
+          "未来计划"
+        ],
+        "priority": 2
+      },
+      {
+        "section_role": "risk",
+        "aliases": [
+          "风险因素",
+          "重大事项提示",
+          "风险提示",
+          "風險因素",
+          "risk factors"
+        ],
+        "priority": 1
+      },
+      {
+        "section_role": "financial_notes",
+        "aliases": [
+          "财务会计信息",
+          "管理层分析",
+          "财务报告",
+          "历史及公司架构",
+          "公司架构",
+          "歷史及公司架構",
+          "法規",
+          "法规",
+          "會計師報告",
+          "会计师报告",
+          "Notes to Financial Statements"
+        ],
+        "priority": 3
+      },
+      {
+        "section_role": "management_discussion",
+        "aliases": [
+          "Management's Discussion and Analysis"
+        ],
+        "priority": 1
+      }
+    ]
+  },
+  "synthetic_form_routes": {
+    "S-1": {
+      "profile_id": "prospectus",
+      "family": "prospectus",
+      "subtype": "sec_registration_s1",
+      "confidence": "high",
+      "child_routes": []
+    },
+    "F-1": {
+      "profile_id": "prospectus",
+      "family": "prospectus",
+      "subtype": "sec_registration_f1",
+      "confidence": "high",
+      "child_routes": []
+    },
+    "8-K": {
+      "profile_id": "generic",
+      "family": "unknown",
+      "subtype": "sec_current_report_8k",
+      "confidence": "low",
+      "child_routes": [
+        {
+          "unit_ids": [
+            "u3",
+            "u4",
+            "u5",
+            "u6"
+          ],
+          "profile_id": "results_release",
+          "reason": "IN_DOCUMENT_ATTACHMENT_RANGE"
+        }
+      ]
+    },
+    "6-K": {
+      "profile_id": "generic",
+      "family": "unknown",
+      "subtype": "sec_current_report_6k",
+      "confidence": "low",
+      "child_routes": [
+        {
+          "unit_ids": [
+            "u3",
+            "u4",
+            "u5",
+            "u6"
+          ],
+          "profile_id": "results_release",
+          "reason": "IN_DOCUMENT_ATTACHMENT_RANGE"
+        }
+      ]
+    }
+  }
+}

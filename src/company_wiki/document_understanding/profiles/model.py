@@ -18,6 +18,7 @@ from dataclasses import dataclass, field
 from hashlib import sha256
 import json
 from typing import Iterable
+import unicodedata
 
 from . import vocabulary as v
 
@@ -317,6 +318,16 @@ HK_OFFERING_SECTIONS: tuple[SectionPriority, ...] = (
     ),
 )
 
+SEC_REGISTRATION_SECTIONS: tuple[SectionPriority, ...] = (
+    SectionPriority("business", ("Business", "Description of Business"), 1),
+    SectionPriority("fundraising", ("Use of Proceeds", "Selling Stockholders", "Underwriting"), 1),
+    SectionPriority("industry", ("Market and Industry Data",), 2),
+    SectionPriority("risk", ("Risk Factors",), 1),
+    SectionPriority("management_discussion", ("Management's Discussion and Analysis",), 1),
+    SectionPriority("financial_notes", ("Notes to Financial Statements",), 3),
+)
+
+
 GENERIC_SECTIONS: tuple[SectionPriority, ...] = (
     SectionPriority(
         "business",
@@ -349,16 +360,25 @@ ADMINISTRATIVE_SECTIONS: tuple[SectionPriority, ...] = (
 
 
 def combine(*blocks: Iterable[SectionPriority]) -> tuple[SectionPriority, ...]:
-    """Concatenate section blocks, keeping the first entry for a repeated role."""
-    merged: list[SectionPriority] = []
-    seen: set[str] = set()
+    """Compose generic-to-specific blocks without losing aliases.
+
+    Role order and the first spelling of each normalized alias are stable. Later
+    blocks explicitly override the role priority; they add aliases rather than
+    replacing the vocabulary of an earlier market or purpose block.
+    """
+    merged: dict[str, SectionPriority] = {}
     for block in blocks:
         for entry in block:
-            if entry.section_role in seen:
-                continue
-            seen.add(entry.section_role)
-            merged.append(entry)
-    return tuple(merged)
+            existing = merged.get(entry.section_role)
+            aliases = (*existing.aliases, *entry.aliases) if existing else entry.aliases
+            unique: dict[str, str] = {}
+            for alias in aliases:
+                key = " ".join(unicodedata.normalize("NFKC", alias).casefold().split())
+                unique.setdefault(key, alias)
+            merged[entry.section_role] = SectionPriority(
+                entry.section_role, tuple(unique.values()), entry.priority
+            )
+    return tuple(merged.values())
 
 
 @dataclass(frozen=True)

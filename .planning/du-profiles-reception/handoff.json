@@ -1,0 +1,125 @@
+{
+  "schema_version": "du-handoff/1",
+  "lane": "DU-PROFILES-RECEPTION-FIX",
+  "base_sha": "f734ef926de9f64f530bc11f5254dd2f51de2665",
+  "implementation_commits": [
+    "e033b4bef8a33676e05208843075d4826e1b3525"
+  ],
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/profiles-fix",
+  "status": "READY_ROOT_RECEPTION",
+  "owned_paths": [
+    "src/company_wiki/document_understanding/profiles/**",
+    "tests/unit/document_understanding_profiles/**",
+    "tests/fixtures/document_understanding_profiles/**",
+    ".planning/du-profiles-reception/**"
+  ],
+  "public_interfaces": [
+    "route_document(observation, *, limits=None) -> du-route/1",
+    "get_profile(profile_id) -> dict",
+    "list_profiles() -> list[dict]"
+  ],
+  "interface_deviations": [
+    {
+      "field": "modifiers",
+      "change": "additive route extent/revision axes",
+      "root_coordination": "ROOT confirmed in team message; ReadingPlan/summary to consume",
+      "core_du1_keys": "unchanged"
+    },
+    {
+      "field": "container subtype",
+      "change": "existing generic/unknown + regime sec + sec_current_report_8k/6k",
+      "reason": "closed DU/1 family set preserved"
+    }
+  ],
+  "A/B/C_evidence": {
+    "A": [
+      {
+        "command": "python -m pytest tests/unit/document_understanding_profiles/test_reception_root_causes.py -q",
+        "file": "red.xml",
+        "tests": 20,
+        "failures": 18,
+        "errors": 0,
+        "skipped": 0,
+        "elapsed_seconds": 0.994
+      },
+      {
+        "command": "python -m pytest tests/unit/document_understanding_profiles/test_reception_root_causes.py -q",
+        "file": "red-coverage.xml",
+        "tests": 30,
+        "failures": 9,
+        "errors": 0,
+        "skipped": 0,
+        "elapsed_seconds": 4.563
+      }
+    ],
+    "B": {
+      "command": "python -m pytest tests/unit/document_understanding_profiles -q",
+      "file": "green-final.xml",
+      "tests": 180,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_seconds": 1.972
+    },
+    "C": {
+      "command": "ruff check profiles + new test; mypy profiles; strategy_probe.py; git commit normal hooks",
+      "exit_code": 0,
+      "ruff": "PASS",
+      "mypy_checked_files": 9,
+      "mypy": "PASS",
+      "normal_commit_hooks": "PASS",
+      "result_paths": [
+        "strategy-probe.json",
+        "observations.json",
+        "test-summary.json"
+      ]
+    }
+  },
+  "tests_passed": 180,
+  "tests_failed": 0,
+  "tests_not_run": [
+    "production selector/summary alias and child consumption (ROOT)",
+    "full real-original DU quality/LLM semantic evaluation",
+    "DU2 families/facets/layout integration"
+  ],
+  "changed_code_paths": [
+    "src/company_wiki/document_understanding/profiles/__init__.py",
+    "src/company_wiki/document_understanding/profiles/child_ranges.py",
+    "src/company_wiki/document_understanding/profiles/decision.py",
+    "src/company_wiki/document_understanding/profiles/lifecycle.py",
+    "src/company_wiki/document_understanding/profiles/model.py",
+    "src/company_wiki/document_understanding/profiles/observation.py",
+    "src/company_wiki/document_understanding/profiles/registry.py",
+    "src/company_wiki/document_understanding/profiles/signals.py",
+    "tests/unit/document_understanding_profiles/test_reception_root_causes.py"
+  ],
+  "known_gaps": [
+    "This pure routing lane does not validate production selector/summary consumes aliases/child policies or economic fact quality.",
+    "Inline attachments require explicit Exhibit/attachment boundaries; missing/clipped/opaque/deferred range is a diagnostic rather than a claimed complete child.",
+    "Old QA-marker child behavior is unchanged; ROOT structure/context closure must make actual question/answer units complete.",
+    "Extended document forms/families/facets/layout are dispatched DU2 packages; no claim they are integrated here.",
+    "Budget-limited confidence remains low/unknown under frozen DU/1; strong form evidence and reading coverage are separate reasons."
+  ],
+  "resource_observations": {
+    "paid_model_calls": 0,
+    "paid_usd": 0,
+    "download_calls": 0,
+    "new_dependencies": 0,
+    "persistent_evidence_bytes_before_handoff": 69231,
+    "probe_limits_defaults": "200 units/64000 chars/16 children unchanged"
+  },
+  "raw_preservation": {
+    "raw_files_opened_or_written": 0,
+    "only_owned_paths_modified": true,
+    "production_config_writes": 0,
+    "original_author_tree_writes": 0,
+    "DU2_writes": 0
+  },
+  "scratch_restore": {
+    "ephemeral_intermediate_xml_removed": 3,
+    "input_observation_mutation": false,
+    "durable_evidence_own_directory": true
+  },
+  "install_actions": "none",
+  "next_root_action": "Receive implementation plus receipt commits; bind alias priorities/child scopes/modifiers in ROOT shared engine; run cross-layer node before main publication."
+}
