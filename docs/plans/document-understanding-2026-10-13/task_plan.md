@@ -28,7 +28,7 @@ Owner: ROOT
 |---|---|---:|---|
 | profiles | `src/company_wiki/document_understanding/profiles/` | 150 | 否 |
 | structure | `src/company_wiki/document_understanding/structure/` | 47 | 否 |
-| ROOT 适配/编排/选择桥/pipeline | `src/company_wiki/document_understanding/{observation_adapter,orchestration,selection_bridge,pipeline}.py` | 68 | 否 |
+| ROOT 适配/编排/选择桥/pipeline/摘要请求 | `src/company_wiki/document_understanding/{observation_adapter,orchestration,selection_bridge,pipeline,summary_input}.py` | 99 | 否 |
 | benchmark | `tools/document_understanding_benchmark/` | 65 | 工具，非生产路径 |
 
 同一调用下合计 **331 passed / 5 skipped**（26.1s）；`ruff check src tests/unit tools` 全绿；
@@ -38,6 +38,10 @@ Owner: ROOT
 `company_wiki.document_understanding.understand_units(units, ...)` →
 `build_observation` → `route_document` → `get_profile` → `build_structure` →
 `build_dependency_packages`，输出 `du-pipeline/1`。
+
+摘要请求入口：`build_summary_input(pipeline_result, ...)` → `du-summary-input/1`。
+焦点取自 profile（此前 `summary_focus` 无任何消费者），证据包按编排顺序排列并保留
+`locator`/`page` 回指，预算截断记 `deferred`、未读记 `unread`；**不调用模型**。
 
 真实跨层验证（原件 SHA/mtime 未变）：恒锋两期建设期跨页保留、万润“不生产VC”否定保留、
 名创双栏不混读、中微季报业务文本可组织；恒锋 `发行A股股票募集说明书` 由 legacy `unknown`

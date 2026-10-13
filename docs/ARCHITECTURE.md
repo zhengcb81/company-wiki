@@ -54,7 +54,15 @@ flowchart TD
 company_wiki.document_understanding.understand_units(units, *, source_id, source_sha256, ...)
 # build_observation -> route_document -> get_profile -> build_structure
 #                   -> build_dependency_packages  =>  du-pipeline/1
+
+company_wiki.document_understanding.build_summary_input(pipeline_result, *, max_packages, max_chars)
+# profile.summary_focus + 有序证据包 + 回指 locator + 预算账 + 未读清单  =>  du-summary-input/1
 ```
+
+`build_summary_input` 只组装"要问什么"：焦点取自 **profile**，证据按编排层给出的顺序排列，
+每个成员保留 `unit_id`/`locator`/`page`；observation 里不存在的单元一律丢弃而不是编造。
+预算截断记为 `deferred`、未读页/延后单元记为 `unread`，两者都不会变成对完整性的暗示。
+它**不调用模型**，付费预算仍由现有 transport 决定。
 
 该入口把路由结果与**其 profile** 一起交给编排层：章节优先级在 profile 上而不在 route 上，
 只读 route 会静默退回通用优先序、使路由等于没接（已由 `test_du_root_lane_seam.py` 锁死）。
