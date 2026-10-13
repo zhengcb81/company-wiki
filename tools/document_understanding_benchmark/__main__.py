@@ -63,11 +63,23 @@ def _summary_line(result: dict[str, Any]) -> str:
     metrics = result.get("metrics") or {}
     recall = metrics.get("critical_fact_recall")
     recall_text = "n/a" if recall is None else f"{recall:.3f}"
+    scope = "HOLDOUT" if result.get("scope") == "holdout" else "dev"
     return (
-        f"  {result['sample_id']:<20} {result['status']:<12} "
+        f"  [{scope:<7}] {result['sample_id']:<28} {result['status']:<12} "
         f"critical_recall={recall_text} "
         f"checks={len(result['checks'])} not_evaluated={len(result['not_evaluated'])}"
     )
+
+
+def _print_scope_summary(summary: dict[str, Any]) -> None:
+    for scope, row in summary.items():
+        recall = row["critical_fact_recall"]
+        recall_text = "n/a" if recall is None else f"{recall:.3f}"
+        print(
+            f"  {scope:<12} docs={row['documents']} "
+            f"critical={row['critical_facts_passed']}/{row['critical_facts_total']} "
+            f"({recall_text}) statuses={row['statuses']}"
+        )
 
 
 def _overall_exit(results: list[dict[str, Any]]) -> int:
@@ -77,6 +89,56 @@ def _overall_exit(results: list[dict[str, Any]]) -> int:
     if statuses & {"PARTIAL", "UNAVAILABLE"}:
         return EXIT_PARTIAL
     return EXIT_PASS
+
+
+def _scope_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
+    """Aggregate by development/holdout.
+
+    Development and holdout must never be merged into one headline number: the
+    development samples were used to tune rules, so only the holdout split is
+    evidence about generalisation. Both are reported with their own denominator.
+    """
+
+    by_scope: dict[str, list[dict[str, Any]]] = {}
+    for result in results:
+        by_scope.setdefault(result.get("scope") or "development", []).append(result)
+
+    summary: dict[str, Any] = {}
+    for scope, rows in sorted(by_scope.items()):
+        critical_pass = 0
+        critical_total = 0
+        critical_unavailable = 0
+        fact_pass = 0
+        fact_total = 0
+        statuses: dict[str, int] = {}
+        for row in rows:
+            statuses[row["status"]] = statuses.get(row["status"], 0) + 1
+            metrics = row.get("metrics") or {}
+            denominator = metrics.get("critical_fact_recall_denominator") or 0
+            recall = metrics.get("critical_fact_recall")
+            if recall is not None and denominator:
+                critical_pass += round(recall * denominator)
+            critical_total += denominator
+            critical_unavailable += metrics.get("critical_fact_unavailable") or 0
+            fact_denominator = metrics.get("fact_recall_denominator") or 0
+            fact_recall = metrics.get("fact_recall")
+            if fact_recall is not None and fact_denominator:
+                fact_pass += round(fact_recall * fact_denominator)
+            fact_total += fact_denominator
+        summary[scope] = {
+            "documents": len(rows),
+            "statuses": dict(sorted(statuses.items())),
+            "critical_facts_passed": critical_pass,
+            "critical_facts_total": critical_total,
+            "critical_facts_unavailable": critical_unavailable,
+            "critical_fact_recall": (
+                critical_pass / critical_total if critical_total else None
+            ),
+            "facts_passed": fact_pass,
+            "facts_total": fact_total,
+            "fact_recall": (fact_pass / fact_total) if fact_total else None,
+        }
+    return summary
 
 
 def run_offline(args: argparse.Namespace) -> int:
@@ -115,6 +177,7 @@ def run_offline(args: argparse.Namespace) -> int:
         "model_calls": 0,
         "paid_calls": 0,
         "elapsed_seconds": round(elapsed, 3),
+        "by_scope": _scope_summary(results),
         "results": results,
         "mutations": mutation_reports,
         "resources": resource_report(
@@ -139,6 +202,8 @@ def run_offline(args: argparse.Namespace) -> int:
         f"mutations detected: {detected}/{applicable} "
         f"({not_applicable} not applicable to these fixtures)"
     )
+    print("by scope:")
+    _print_scope_summary(report["by_scope"])
     print(f"sentinel restored: {sentinel_restored['unchanged']} ({sentinel_restored['reason']})")
     print(f"summary: {owned / 'summary.json'}")
     return exit_code
@@ -228,6 +293,7 @@ def run_native(args: argparse.Namespace) -> int:
         "model_calls": 0,
         "paid_calls": 0,
         "elapsed_seconds": round(elapsed, 3),
+        "by_scope": _scope_summary(results),
         "results": results,
         "observations": observations,
         "restoration": {
@@ -254,6 +320,8 @@ def run_native(args: argparse.Namespace) -> int:
     print(f"native samples: {len(results)} (bindings={len(bindings)})")
     for result in results:
         print(_summary_line(result))
+    print("by scope:")
+    _print_scope_summary(report["by_scope"])
     print(f"raw unchanged: {raw_unchanged}")
     print(f"config unchanged: {restoration['unchanged']} (probes={restoration['count']})")
     print(f"sentinel restored: {sentinel_restored['unchanged']} ({sentinel_restored['reason']})")
