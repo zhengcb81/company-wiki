@@ -270,3 +270,104 @@ def observe_du_adapter(
     merged.setdefault("sample_id", sample_id)
     merged.setdefault("source_sha256", sha256)
     return dict(merged)
+
+
+# Carriers the existing public observation path can actually take in. Measured,
+# not assumed: `narrative_retrieval` offers exactly two replay formats (PDF, and
+# transcript_txt/transcript_html), so a non-transcript HTML document has no
+# route into the selector.
+SUPPORTED_CARRIERS: dict[str, dict[str, Any]] = {
+    ".pdf": {"entry_point": "parse_pdf_bytes", "kind": "pdf", "supported": True},
+    ".txt": {"entry_point": "parse_transcript_text", "kind": "transcript", "supported": True},
+    ".md": {"entry_point": "parse_transcript_text", "kind": "transcript", "supported": True},
+    ".htm": {
+        "entry_point": None,
+        "kind": "html",
+        "supported": False,
+        "reason": (
+            "the only HTML path is transcript_html, which expects a transcript "
+            "layout; an SEC filing HTML has no route into the selector"
+        ),
+    },
+    ".html": {
+        "entry_point": None,
+        "kind": "html",
+        "supported": False,
+        "reason": "same as .htm",
+    },
+    ".pptx": {"entry_point": None, "kind": "presentation", "supported": False, "reason": "no public entry point"},
+}
+
+
+def carrier_support(path: Path) -> dict[str, Any]:
+    """Report whether the current public path can observe this carrier."""
+
+    suffix = _suffix(Path(path))
+    info = SUPPORTED_CARRIERS.get(
+        suffix,
+        {
+            "entry_point": None,
+            "kind": "unknown",
+            "supported": False,
+            "reason": f"unrecognized carrier {suffix!r}",
+        },
+    )
+    return {"suffix": suffix, **info}
+
+
+def probe_non_pdf_html(path: Path) -> dict[str, Any]:
+    """Measure what the transcript path does with a non-transcript HTML document.
+
+    Returns a truthful verdict instead of an exception: the existing extractor
+    does not refuse a 10-K, it yields **zero units** and reports
+    ``transcript_start_missing``. That distinction matters, because a
+    zero-unit parse looks like a document with no content rather than an
+    unsupported carrier.
+    """
+
+    module = _import_evidence()
+    target = Path(path)
+    data = target.read_bytes()
+    sha = hashlib.sha256(data).hexdigest()
+    try:
+        from company_wiki.source_catalog.transcript_text_extract import (
+            TranscriptMaterialError,
+            extract_transcript_material,
+        )
+    except ImportError as exc:  # pragma: no cover - environment dependent
+        raise ObserverUnavailable(f"cannot import the HTML extractor: {exc}") from exc
+
+    report: dict[str, Any] = {
+        "path": str(target),
+        "suffix": _suffix(target),
+        "sha256": sha,
+        "extracted": False,
+        "units": None,
+        "page_count": None,
+        "errors": [],
+        "text_prefix": "",
+    }
+    try:
+        material = extract_transcript_material(data, mime_type="text/html")
+        material.verify(data)
+    except TranscriptMaterialError as exc:
+        report["refused"] = True
+        report["errors"] = [f"transcript_material_refused: {exc}"]
+        return report
+
+    report["extracted"] = True
+    text = material.text_utf8
+    report["text_prefix"] = text[:200]
+    report["text_chars"] = len(text)
+    parsed = module.parse_transcript_text(
+        text,
+        source_id=f"urn:company-wiki:source:sha256:{sha}",
+        source_sha256=sha,
+        language="en",
+    )
+    report["units"] = len(parsed.units)
+    report["page_count"] = parsed.page_count
+    report["line_count"] = parsed.line_count
+    report["errors"] = list(parsed.errors)
+    report["usable"] = bool(parsed.units)
+    return report

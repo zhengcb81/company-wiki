@@ -3,7 +3,10 @@
   "sample_id": "holdout-us-nvidia-10k",
   "source_sha256": "dae19486be264fd26eb00a7f920dc641041a261c81bc8c03b678eea947de4856",
   "scope": "holdout",
-  "expected_route_families": ["annual", "sec_10k"],
+  "expected_route_families": [
+    "annual",
+    "sec_10k"
+  ],
   "notes": "HOLDOUT. NVIDIA CORP Form 10-K, fiscal year ended 2025-01-26（财年与日历年错位：FY2025 ≈ 日历年 2024）。该公司从未出现在 ROOT 调查、调参讨论或设计发现中。事实由独立子代理逐字读取原件回报；子代理另发现朴素 HTML 去标签会把注册人读成「NVIDIA CORP ORATION」（ix:nonNumeric 元素在 ORATION 前闭合），该发现记录在 handoff 中。",
   "facts": [
     {
@@ -26,9 +29,17 @@
           }
         ]
       ],
-      "must_preserve": ["two segments", "Compute & Networking", "Graphics"],
-      "must_not_assert": ["NVIDIA按四个分部报告业绩", "Data Center是一个报告分部"],
-      "reason": "NVIDIA 报告 **2 个分部**（Compute & Networking、Graphics），但按 **4 个市场**（Data Center、Gaming、Professional Visualization、Automotive）列示收入。两者是对同一总额的**不同切分**，不是同一套口径。"
+      "must_preserve": [
+        "two segments",
+        "Compute & Networking",
+        "Graphics"
+      ],
+      "must_not_assert": [
+        "NVIDIA按四个分部报告业绩",
+        "Data Center是一个报告分部"
+      ],
+      "reason": "NVIDIA 报告 **2 个分部**（Compute & Networking、Graphics），但按 **4 个市场**（Data Center、Gaming、Professional Visualization、Automotive）列示收入。两者是对同一总额的**不同切分**，不是同一套口径。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-four-markets-not-segments",
@@ -44,9 +55,16 @@
           }
         ]
       ],
-      "must_preserve": ["four large markets", "Data Center", "Automotive"],
-      "must_not_assert": ["Data Center分部收入为115,186百万美元"],
-      "reason": "Data Center 是**市场（end market）**，不是分部。115,186 百万美元是市场口径；Compute & Networking 分部是 116,193 百万美元。两个数都是 FY2025 的「NVIDIA 收入」，但口径不同、数值不同——写成「Data Center 分部」是双重错误。这是本样本最重要的陷阱。"
+      "must_preserve": [
+        "four large markets",
+        "Data Center",
+        "Automotive"
+      ],
+      "must_not_assert": [
+        "Data Center分部收入为115,186百万美元"
+      ],
+      "reason": "Data Center 是**市场（end market）**，不是分部。115,186 百万美元是市场口径；Compute & Networking 分部是 116,193 百万美元。两个数都是 FY2025 的「NVIDIA 收入」，但口径不同、数值不同——写成「Data Center 分部」是双重错误。这是本样本最重要的陷阱。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-total-revenue-and-growth",
@@ -62,9 +80,16 @@
           }
         ]
       ],
-      "must_preserve": ["130.5", "114%"],
-      "must_not_assert": ["NVIDIA 2025日历年收入为130.5亿美元", "总收入同比增长142%"],
-      "reason": "FY2025 总收入 130.5 十亿美元、同比 **+114%**。142% 是 **Data Center** 的增速，9% 是 **Gaming** 的增速——三个增速同段相邻，最易顶替。且 130.5 是**十亿**美元（表内 130,497 百万美元）。"
+      "must_preserve": [
+        "130.5",
+        "114%"
+      ],
+      "must_not_assert": [
+        "NVIDIA 2025日历年收入为130.5亿美元",
+        "总收入同比增长142%"
+      ],
+      "reason": "FY2025 总收入 130.5 十亿美元、同比 **+114%**。142% 是 **Data Center** 的增速，9% 是 **Gaming** 的增速——三个增速同段相邻，最易顶替。且 130.5 是**十亿**美元（表内 130,497 百万美元）。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-fiscal-year-misaligned",
@@ -79,9 +104,15 @@
           }
         ]
       ],
-      "must_preserve": ["fiscal year ended January 26", "2025"],
-      "must_not_assert": ["2025财年指截至2025年12月31日的年度"],
-      "reason": "财年截至 **2025-01-26**，FY2025 = 2024-01-29 → 2025-01-26，绝大部分落在**日历年 2024**。与 MongoDB 的 FY2026（≈日历年 2025）相比，两家公司的财年错位**方向相同但相差一年**；按日历年做跨公司对比会把两家都放错位置。"
+      "must_preserve": [
+        "fiscal year ended January 26",
+        "2025"
+      ],
+      "must_not_assert": [
+        "2025财年指截至2025年12月31日的年度"
+      ],
+      "reason": "财年截至 **2025-01-26**，FY2025 = 2024-01-29 → 2025-01-26，绝大部分落在**日历年 2024**。与 MongoDB 的 FY2026（≈日历年 2025）相比，两家公司的财年错位**方向相同但相差一年**；按日历年做跨公司对比会把两家都放错位置。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-segment-vs-market-not-interchangeable",
@@ -101,9 +132,15 @@
           }
         ]
       ],
-      "must_preserve": ["116193", "115186"],
-      "must_not_assert": ["Compute & Networking分部收入为115,186百万美元"],
-      "reason": "Compute & Networking（分部）116,193 与 Data Center（市场）115,186 相差 1,007 百万美元——因为 Graphics 分部里也有 Data Center 相关收入、Compute & Networking 里也有非 Data Center 收入。两者不可互换，也不可相加。"
+      "must_preserve": [
+        "116193",
+        "115186"
+      ],
+      "must_not_assert": [
+        "Compute & Networking分部收入为115,186百万美元"
+      ],
+      "reason": "Compute & Networking（分部）116,193 与 Data Center（市场）115,186 相差 1,007 百万美元——因为 Graphics 分部里也有 Data Center 相关收入、Compute & Networking 里也有非 Data Center 收入。两者不可互换，也不可相加。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-graphics-operating-income-down",
@@ -119,9 +156,15 @@
           }
         ]
       ],
-      "must_preserve": ["9%", "GeForce RTX 40"],
-      "must_not_assert": ["Graphics分部经营利润同比增长9%"],
-      "reason": "Gaming（市场）收入 +9%；而 Graphics（分部）**经营利润下降 13%**、收入增长 6%。收入增速与经营利润增速方向相反，行与行不可混用——混用会凭空造出利润率。"
+      "must_preserve": [
+        "9%",
+        "GeForce RTX 40"
+      ],
+      "must_not_assert": [
+        "Graphics分部经营利润同比增长9%"
+      ],
+      "reason": "Gaming（市场）收入 +9%；而 Graphics（分部）**经营利润下降 13%**、收入增长 6%。收入增速与经营利润增速方向相反，行与行不可混用——混用会凭空造出利润率。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-data-center-growth-driver",
@@ -137,9 +180,15 @@
           }
         ]
       ],
-      "must_preserve": ["142%", "Data Center"],
-      "must_not_assert": ["公司总收入同比增长142%"],
-      "reason": "142% 是 **Data Center 市场**的增速（114% 才是总收入）。把分部/市场增速当公司增速是层级错。"
+      "must_preserve": [
+        "142%",
+        "Data Center"
+      ],
+      "must_not_assert": [
+        "公司总收入同比增长142%"
+      ],
+      "reason": "142% 是 **Data Center 市场**的增速（114% 才是总收入）。把分部/市场增速当公司增速是层级错。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-no-nongaap-measure",
@@ -154,12 +203,16 @@
           }
         ]
       ],
-      "must_preserve": ["75.0%", "72.7%"],
+      "must_preserve": [
+        "75.0%",
+        "72.7%"
+      ],
       "must_not_assert": [
         "NVIDIA FY2025非GAAP毛利率为X%",
         "公司披露了非GAAP每股收益"
       ],
-      "reason": "本 10-K 中 **non-GAAP 出现次数为 0**（原始 HTML 与提取文本均为 0），只有 GAAP 毛利率 75.0%（上年 72.7%）。为 NVIDIA 编造任何 non-GAAP 指标都是无支撑幻觉——这是子代理用正则计数验证过的显式缺失。"
+      "reason": "本 10-K 中 **non-GAAP 出现次数为 0**（原始 HTML 与提取文本均为 0），只有 GAAP 毛利率 75.0%（上年 72.7%）。为 NVIDIA 编造任何 non-GAAP 指标都是无支撑幻觉——这是子代理用正则计数验证过的显式缺失。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-rpo-scoped-to-long-contracts",
@@ -181,9 +234,16 @@
           }
         ]
       ],
-      "must_preserve": ["1.7 billion", "greater than one year in length", "151 million"],
-      "must_not_assert": ["NVIDIA剩余履约义务总额为17亿美元"],
-      "reason": "1.7 十亿美元是「**合同期超过一年**」的 RPO，不是全部 RPO：含递延收入 1.6 十亿美元＋未开票未确认 151 百万美元。把它当总 RPO 会低估；把 151 百万美元当总额会错一个数量级。"
+      "must_preserve": [
+        "1.7 billion",
+        "greater than one year in length",
+        "151 million"
+      ],
+      "must_not_assert": [
+        "NVIDIA剩余履约义务总额为17亿美元"
+      ],
+      "reason": "1.7 十亿美元是「**合同期超过一年**」的 RPO，不是全部 RPO：含递延收入 1.6 十亿美元＋未开票未确认 151 百万美元。把它当总 RPO 会低估；把 151 百万美元当总额会错一个数量级。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-rpo-recognition-timing",
@@ -199,9 +259,15 @@
           }
         ]
       ],
-      "must_preserve": ["39 %", "next twelve months"],
-      "must_not_assert": ["39%的RPO已在报告期内确认收入"],
-      "reason": "39% 是**预计未来 12 个月将确认**的比例（前瞻语态），不是已确认。与 1.7 十亿美元同句相邻，时态写错即错。"
+      "must_preserve": [
+        "39 %",
+        "next twelve months"
+      ],
+      "must_not_assert": [
+        "39%的RPO已在报告期内确认收入"
+      ],
+      "reason": "39% 是**预计未来 12 个月将确认**的比例（前瞻语态），不是已确认。与 1.7 十亿美元同句相邻，时态写错即错。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-customer-concentration-direct",
@@ -217,9 +283,16 @@
           }
         ]
       ],
-      "must_preserve": ["12%", "11%", "direct Customers"],
-      "must_not_assert": ["NVIDIA FY2025最大客户占收入114%"],
-      "reason": "三个直接客户分别占 **12% / 11% / 11%**。与公司的 114% 收入增速数值形态相近，取错即荒谬；且这是**占总额**比例，不是增速。"
+      "must_preserve": [
+        "12%",
+        "11%",
+        "direct Customers"
+      ],
+      "must_not_assert": [
+        "NVIDIA FY2025最大客户占收入114%"
+      ],
+      "reason": "三个直接客户分别占 **12% / 11% / 11%**。与公司的 114% 收入增速数值形态相近，取错即荒谬；且这是**占总额**比例，不是增速。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-indirect-customer-estimate",
@@ -240,9 +313,15 @@
           }
         ]
       ],
-      "must_preserve": ["estimation", "may differ from our estimates"],
-      "must_not_assert": ["间接客户收入为经审计的精确数据"],
-      "reason": "间接客户收入是**估算**，公司明示实际值可能与估算不同。把估算当已测量事实陈述会高估精度——精度错也是一种幻觉。"
+      "must_preserve": [
+        "estimation",
+        "may differ from our estimates"
+      ],
+      "must_not_assert": [
+        "间接客户收入为经审计的精确数据"
+      ],
+      "reason": "间接客户收入是**估算**，公司明示实际值可能与估算不同。把估算当已测量事实陈述会高估精度——精度错也是一种幻觉。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-geo-revenue-share",
@@ -258,9 +337,16 @@
           }
         ]
       ],
-      "must_preserve": ["53%", "56%", "outside of the United States"],
-      "must_not_assert": ["美国境内收入占比53%"],
-      "reason": "53% / 56% 是**美国境外**收入占比（FY2025 低于 FY2024）。主体写反会把地域结构颠倒。"
+      "must_preserve": [
+        "53%",
+        "56%",
+        "outside of the United States"
+      ],
+      "must_not_assert": [
+        "美国境内收入占比53%"
+      ],
+      "reason": "53% / 56% 是**美国境外**收入占比（FY2025 低于 FY2024）。主体写反会把地域结构颠倒。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-forward-looking-export-control",
@@ -275,9 +361,15 @@
           }
         ]
       ],
-      "must_preserve": ["will, unless modified", "120-day delayed compliance period"],
-      "must_not_assert": ["全球许可要求已生效并已实施"],
-      "reason": "该出口管制规则是**附条件的前瞻陈述**：「will, unless modified」＋120 天延迟合规期。写成已生效是语态错误，且漏掉「unless modified」这一关键限定。"
+      "must_preserve": [
+        "will, unless modified",
+        "120-day delayed compliance period"
+      ],
+      "must_not_assert": [
+        "全球许可要求已生效并已实施"
+      ],
+      "reason": "该出口管制规则是**附条件的前瞻陈述**：「will, unless modified」＋120 天延迟合规期。写成已生效是语态错误，且漏掉「unless modified」这一关键限定。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-prose-vs-table-rounding",
@@ -299,9 +391,15 @@
           }
         ]
       ],
-      "must_preserve": ["130497", "130.5"],
-      "must_not_assert": ["FY2025总收入为130,497十亿美元"],
-      "reason": "正文写 130.5 十亿美元（四舍五入），表内是 130,497 **百万**美元。把表内的百万单位当十亿会放大一千倍；把正文的约数当精确值则损失精度。"
+      "must_preserve": [
+        "130497",
+        "130.5"
+      ],
+      "must_not_assert": [
+        "FY2025总收入为130,497十亿美元"
+      ],
+      "reason": "正文写 130.5 十亿美元（四舍五入），表内是 130,497 **百万**美元。把表内的百万单位当十亿会放大一千倍；把正文的约数当精确值则损失精度。",
+      "fact_scope": "narrative"
     },
     {
       "id": "h-registrant-name-corruption",
@@ -316,9 +414,14 @@
           }
         ]
       ],
-      "must_preserve": ["NVIDIA CORP"],
-      "must_not_assert": ["NVIDIA CORP ORATION"],
-      "reason": "独立子代理核实：朴素 HTML 去标签会把注册人渲染成「NVIDIA CORP ORATION」，因为 `ix:nonNumeric` 元素在字面文本 `ORATION` 之前闭合。正确名称为 **NVIDIA CORP**。这是文档理解本身的解析陷阱，不是内容陷阱——本基准把它固化为可检验约束。"
+      "must_preserve": [
+        "NVIDIA CORP"
+      ],
+      "must_not_assert": [
+        "NVIDIA CORP ORATION"
+      ],
+      "reason": "独立子代理核实：朴素 HTML 去标签会把注册人渲染成「NVIDIA CORP ORATION」，因为 `ix:nonNumeric` 元素在字面文本 `ORATION` 之前闭合。正确名称为 **NVIDIA CORP**。这是文档理解本身的解析陷阱，不是内容陷阱——本基准把它固化为可检验约束。",
+      "fact_scope": "narrative"
     }
   ]
 }

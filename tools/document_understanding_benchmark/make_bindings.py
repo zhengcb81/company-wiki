@@ -51,6 +51,14 @@ def main(argv: list[str] | None = None) -> int:
         default=[],
         help="additional root to resolve relative manifest paths against",
     )
+    parser.add_argument(
+        "--replace",
+        action="store_true",
+        help=(
+            "discard existing bindings the manifest does not mention "
+            "(default: keep them, because holdout records are not in the manifest)"
+        ),
+    )
     args = parser.parse_args(argv)
 
     repo_root = Path(args.repo_root).resolve()
@@ -82,12 +90,36 @@ def main(argv: list[str] | None = None) -> int:
         )
 
     out = Path(args.out)
+    preserved: dict[str, str] = {}
+    if out.is_file() and not args.replace:
+        try:
+            existing = json.loads(out.read_text(encoding="utf8"))
+        except (OSError, json.JSONDecodeError):
+            existing = {}
+        if isinstance(existing, dict):
+            preserved = {str(k): str(v) for k, v in existing.items()}
+
+    # Keep bindings the manifest knows nothing about (holdout records and any
+    # other real sample), then let manifest entries win on conflict. Overwriting
+    # would silently drop them, and a dropped binding is indistinguishable from
+    # a missing original: the run would report UNAVAILABLE instead of reporting
+    # that its own configuration had been clobbered.
+    carried = {
+        sample_id: path for sample_id, path in preserved.items() if sample_id not in bindings
+    }
+    merged = {**carried, **bindings}
+
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(bindings, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
+    out.write_text(json.dumps(merged, ensure_ascii=False, indent=2) + "\n", encoding="utf8")
 
     for row in rows:
         print(f"{row['sample_id']:<22} {row['state']:<13} {row['path']}")
-    print(f"\nbound {len(bindings)}/{len(rows)} -> {out}")
+    for sample_id in sorted(carried):
+        print(f"{sample_id:<22} {'PRESERVED':<13} {carried[sample_id]}")
+    print(
+        f"\nmanifest bound {len(bindings)}/{len(rows)}; "
+        f"preserved {len(carried)}; total {len(merged)} -> {out}"
+    )
     print("This file is machine-specific and must not be committed.")
     return 0
 

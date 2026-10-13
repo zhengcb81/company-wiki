@@ -43,6 +43,16 @@ DEVELOPMENT = "development"
 HOLDOUT = "holdout"
 SCOPES = frozenset({DEVELOPMENT, HOLDOUT})
 
+# fact scope: which layer of the pipeline is answerable for the fact.
+#   narrative     - business content the evidence selection is responsible for
+#   document_meta - front matter, provenance, carrier or period facts that a
+#                   metadata/front-end layer owns rather than the selector
+# Splitting these keeps a recall denominator interpretable: mixing them would
+# blame the selector for facts it was never scoped to carry.
+NARRATIVE = "narrative"
+DOCUMENT_META = "document_meta"
+FACT_SCOPES = frozenset({NARRATIVE, DOCUMENT_META})
+
 # claim modality: who is speaking and whether it happened
 MODALITY_VALUES = frozenset(
     {

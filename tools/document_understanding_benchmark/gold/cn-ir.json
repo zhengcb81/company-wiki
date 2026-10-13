@@ -32,7 +32,8 @@
       ],
       "reason": "核心否定。答复明确「公司现无生产VC的情况」。把它读成公司生产 VC、或把提问前提（与宁德时代达成带量采购）当成已发生事实，是本基准必须检出的幻觉。",
       "modality": "negation",
-      "role": "management_answer"
+      "role": "management_answer",
+      "fact_scope": "narrative"
     },
     {
       "id": "f-controller-contact-hope",
@@ -57,7 +58,8 @@
       ],
       "reason": "建立联系的主体是控股股东中国节能，不是上市公司万润；且「希望建立业务协同与合作」是意愿，不是已达成的合作。主体与语态双重约束。",
       "modality": "plan",
-      "role": "management_answer"
+      "role": "management_answer",
+      "fact_scope": "narrative"
     },
     {
       "id": "f-question-premise-vc",
@@ -80,7 +82,8 @@
       ],
       "reason": "这是投资者提问，不是公司陈述。提问中「达成带量采购」是设问中的假设，任何把它写成公司已实现事实的摘要都违反角色约束。",
       "modality": "question",
-      "role": "analyst_question"
+      "role": "analyst_question",
+      "fact_scope": "narrative"
     },
     {
       "id": "f-domestic-revenue-share",
@@ -105,7 +108,8 @@
       ],
       "reason": "境内收入 2025 年度约 8.19 亿元、占比约 22%，且表述为「较比2024年度有所提升」（方向，不是具体增幅）。",
       "modality": "actual",
-      "role": "company_filing"
+      "role": "company_filing",
+      "fact_scope": "narrative"
     },
     {
       "id": "f-fy2025-revenue-profit",
@@ -138,7 +142,8 @@
       ],
       "reason": "收入 37.17 亿元 / +0.63% 与归母净利 2.84 亿元 / +15.51% 是两组不同口径，两个百分比极易互换。",
       "modality": "actual",
-      "role": "company_filing"
+      "role": "company_filing",
+      "fact_scope": "narrative"
     },
     {
       "id": "f-q1-2026-revenue-profit",
@@ -171,7 +176,8 @@
       ],
       "reason": "2026Q1 收入 10.15 亿元 / +17.89%，归母净利 0.88 亿元 / +9.96%。与 2025 全年数字相邻，期间不可混。",
       "modality": "actual",
-      "role": "company_filing"
+      "role": "company_filing",
+      "fact_scope": "narrative"
     },
     {
       "id": "f-zeolite-revenue-decline",
@@ -194,7 +200,8 @@
       ],
       "reason": "沸石分子筛 2025 年收入略低于 2024 年（下降），而公司整体收入同比增长。分部方向与整体方向相反，不能一律写「均实现增长」。",
       "modality": "actual",
-      "role": "company_filing"
+      "role": "company_filing",
+      "fact_scope": "narrative"
     },
     {
       "id": "f-jiumu-suspension",
@@ -226,7 +233,8 @@
       ],
       "reason": "中止审核（因财务数据有效期已过）不等于终止或否决；公司表示待数据更新后申请恢复审核并回复问询。这是状态混淆的典型陷阱。",
       "modality": "actual",
-      "role": "company_filing"
+      "role": "company_filing",
+      "fact_scope": "narrative"
     },
     {
       "id": "f-controller-increase",
@@ -258,7 +266,8 @@
       ],
       "reason": "3,594.5807 万股是本次增持的累计增量，29.08% 是增持后的合计持股比例（存量）。增量与存量两个口径不得互换。",
       "modality": "actual",
-      "role": "company_filing"
+      "role": "company_filing",
+      "fact_scope": "narrative"
     },
     {
       "id": "f-increase-plan-window",
@@ -281,7 +290,8 @@
       ],
       "reason": "增持是「计划」且有明确窗口 2025-11-24 至 2026-05-23；截至 2026-05-14 的累计数是窗口内的进行中数据，未表示计划已完成。",
       "modality": "plan",
-      "role": "company_filing"
+      "role": "company_filing",
+      "fact_scope": "narrative"
     }
   ]
 }

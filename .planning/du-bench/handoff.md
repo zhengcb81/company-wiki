@@ -17,47 +17,54 @@ PLAN_ID=du-bench ｜ 分支 `codex/du-benchmark-20261013` ｜ base `7f6f7cbd`
 |---|---|
 | `tools/document_understanding_benchmark/{schema,records,evaluate}.py` | 冻结 wire 与公开 `evaluate(observed, gold)` |
 | `.../checkers.py`、`textutil.py` | 九维检查器与确定性文本/数值/语态原语 |
-| `.../gold/*.json` | 4 份真实金标（38 事实，29 关键） |
-| `.../fixtures.py` | 5 份合成夹具，共 14,309 字节 |
+| `.../gold/*.json` | **11 份真实金标（122 事实，81 关键）** |
+| `.../fixtures.py` | 5 份合成夹具，共 14,301 字节 |
 | `.../mutations.py` | 19 类反例注入 + 三值判定 |
-| `.../observer.py` | **只读**调用现有公共 parser/selector |
+| `.../review.py` + `reviews/` | 独立语义复核 wire 与真实复核产物 |
+| `.../controls.py` | **证明复核层不可省**的负对照 |
+| `.../observer.py` | **只读**调用现有公共 parser/selector；含载体能力探测 |
 | `.../recovery.py` | SHA+mtime 指纹、哨兵、owned 容器清理 |
 | `.../holdout.json` | holdout 候选与缺样清单 |
 | `.../__main__.py` | offline / native / adapter 三模式 CLI |
+| `.planning/du-bench/evidence.json` | 由运行产物**程序生成**的证据记录 |
 
-金标事实全部**逐字读原件**写成：恒锋 2020 增发 p61–63、万润 IR 20260515 p1–3、名创香港 2024 年报 p12、中微 2026Q1 p2–4；美国四份文件（MSFT 10-K、MSFT 电话会 TXT、TAL 20-F、VRSK 10-Q）由两个独立子代理读取并回报逐字引文。**没有**从 selector 输出反推期待值。
+金标事实全部**逐字读原件**写成。开发集：恒锋 2020 增发、万润 IR、名创香港年报、中微 2026Q1、中微 2026 半年报、鼎龙扫描确认函。holdout：广联达 2025Q1、雅克科技 2022Q1、阿里巴巴 FY2023、MongoDB FY2026 10-K、NVIDIA FY2025 10-K —— 后两家美国公司由独立子代理逐字读取回报。**没有**从 selector 输出反推期待值。
 
 ## 2. 边界
 
 只写 `tools/document_understanding_benchmark/**` 与 `.planning/du-bench/**`。
 未改 `src/`、其他 tests、生产配置、CI、另外两个 DU 包、母计划、RF/FF/Audit/Dayu/IQS。
-`git status` 只有这两个目录；`git diff --name-only <base>...HEAD` 在提交后应为同一范围。
 
 关于 `pytest.ini`：它不是我该改的共享配置，所以没有加 `-m "not real_data"` 默认项。
-真实原件测试改为**默认跳过**，只有设置 `DU_BENCH_ALLOW_REAL_DATA=1` 才跑，并且带 `real_data` marker 可按需单独选。这样默认命令保持又快又纯离线。
+真实原件测试改为**默认跳过**，只有设置 `DU_BENCH_ALLOW_REAL_DATA=1` 才跑，并且带 `real_data` marker 可按需单独选。
 
 ## 3. 怎么复跑
 
 ```bash
 # A/B：纯离线、不联网、不调模型
 python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q
-#   -> 65 passed, 5 skipped, 约 2.1 秒
+#   -> 100 passed, 7 skipped, 约 2 秒
 
-# 离线 CLI
+# 离线 CLI（含反例与复核负对照）
 python -X utf8 -m tools.document_understanding_benchmark \
     --mode offline --output <自有目录>
 
-# 重建本机 bindings（该文件含绝对路径，不提交）
+# 重建本机 bindings（含绝对路径，不提交；放仓库外保持工作树干净）
 python -X utf8 -m tools.document_understanding_benchmark.make_bindings \
     --manifest docs/plans/document-understanding-2026-10-13/sample_manifest.json \
-    --out <本机目录>/bindings.local.json \
+    --out ~/.du-bench/bindings.local.json \
     --repo-root C:/Users/郑曾波/Projects/company-wiki
 #   -> bound 20/20
 
 # C：真实原件只读回放
 python -X utf8 -m tools.document_understanding_benchmark --mode native \
-    --bindings <本机 bindings> --output <自有目录> \
+    --bindings ~/.du-bench/bindings.local.json --output <自有目录> \
     --probe-config config/source_catalog.yaml
+
+# 带独立语义复核
+python -X utf8 -m tools.document_understanding_benchmark --mode native \
+    --bindings ~/.du-bench/bindings.local.json --output <自有目录> \
+    --review tools/document_understanding_benchmark/reviews/fixtures-independent-review.json
 ```
 
 退出码：`0` 全 PASS、`1` 有 FAIL、`2` 拒绝运行、`3` 有 PARTIAL/UNAVAILABLE。
@@ -66,144 +73,141 @@ python -X utf8 -m tools.document_understanding_benchmark --mode native \
 
 ### A —— 金标与反例冻结，记录基线真实结果
 
-金标 4 份：`cn-equity`（恒锋，10 事实/7 关键）、`cn-ir`（万润，10/7）、
-`cn-q-business`（中微 Q1，11/9）、`hk-annual`（名创，7/6）。引文总计 1,902 字节，
-单份最大 573 字节，远低于 8KiB/文档上限。
+金标 11 份：开发 6、**holdout 5**（A 股 2、H 股 1、US 2），122 事实、81 关键。
+单份引文最大 842 字节，上限 8KiB。
 
-基线真实关键事实召回（**FAIL 是可交付发现，不是测试工程失败**）：
+**基线真实关键事实召回，开发与 holdout 分开报，从不合并：**
 
-| 样本 | 关键召回 | 分母 | 结论 |
-|---|---:|---:|---|
-| cn-equity | 0.000 | 7 | FAIL |
-| cn-ir | 0.143 | 7 | FAIL |
-| cn-q-business | 0.667 | 9 | FAIL |
-| hk-annual | 0.000 | 6 | FAIL |
+| 划分 | 文档 | 关键召回 | 分母 |
+|---|---:|---|---:|
+| development | 6 | **9/41 = 0.220** | 41 |
+| **holdout** | 5 | **0/45 = 0.000** | 45 |
 
-**最重要的一条**：`cn-ir` 只有 11 个候选，selector **全部选中**，但 10 条金标事实里仍有 9 条缺失。也就是说这里的召回失败**根本不是预算/上限问题**——候选生成阶段从未产出这些事实。这独立证明了「调高 `max_selected` 修不好召回」，而且是在上限完全没起作用的一份文档上证明的。
+逐份：
 
-`hk-annual`（名创）96/254 选中、6,502 units，p12 的 7 条门店/TOP TOY 事实**全部缺失**，与 ROOT 调查一致。
-`cn-q-business` 达到 0.667，是「整类跳过季报」的反例：A 股季报确实有可选中的业务事实。
+| 样本 | 划分 | 路由 kind | 选中/候选 | units | scan | 关键召回 |
+|---|---|---|---:|---:|---|---:|
+| cn-equity（恒锋） | dev | `unknown` | 96/449 | 3,224 | partial | 0.000 |
+| cn-h1（中微半年报） | dev | `semi_annual_report` | 96/369 | 5,500 | partial | 0.250 |
+| cn-ipo-confirmation（鼎龙） | dev | **`prospectus`** | 0/0 | 0 | partial(1页不透明) | 0.000 |
+| cn-ir（万润） | dev | `investor_relations` | **11/11** | 302 | complete | 0.143 |
+| cn-q-business（中微Q1） | dev | `quarterly_report` | 28/28 | 579 | partial | 0.667 |
+| hk-annual（名创） | dev | `annual_report` | 96/254 | 6,502 | partial | 0.000 |
+| holdout-cn-glodon-q1 | **HOLD** | `quarterly_report` | **0/0** | 257 | partial | 0.000 |
+| holdout-cn-yake-q1 | **HOLD** | `quarterly_report` | **2/2** | 369 | partial | 0.000 |
+| holdout-hk-alibaba | **HOLD** | `annual_report` | 96/2,221 | 18,038 | partial | 0.000 |
+| holdout-us-mongodb | **HOLD** | — | — | — | **unavailable** | 0.000 |
+| holdout-us-nvidia | **HOLD** | — | — | — | **unavailable** | 0.000 |
 
 ### B —— oracle 与离线 CLI 绿，故意坏观测必须失败
 
-- 默认套件 **65 passed / 5 skipped / 0 failed**，2.14 秒。
-- 离线 CLI：5 夹具、4 PASS + 1 PARTIAL（那 1 份是故意不透明的扫描件）、
-  14,309 / 204,800 字节、0 网络 / 0 模型 / 0 付费调用、哨兵复原。
-- **反例 53/53 全部检出**，另有 42 条判定为 NOT_APPLICABLE（该夹具里没有它要攻击的目标）。
-  三值判定是刻意设计的：把「无处下手」算成漏检会低估，算成检出会造假。
+- 默认套件 **100 passed / 7 skipped / 0 failed**，约 2 秒。
+- 离线 CLI：5 夹具、4 PASS + 1 PARTIAL（故意不透明的扫描件）、
+  14,301 / 204,800 字节、0 网络 / 0 模型 / 0 付费调用。
+- **反例 53/53 全部检出**，42 条 NOT_APPLICABLE。三值判定是刻意的。
+- **复核层负对照（本轮的 methodological 补强）**：注入 3 个**确定性检查完全看不见**的语义缺陷
+  （给正确数字附加无支撑解读、丢掉限定语、编造因果归因），
+  实测 **3/3 全部 PASS 确定性检查、3/3 全部被复核判 FAIL**；
+  另证明**全 ENTAILED 的复核无法把一个确定性 FAIL 变成通过**。
+  也就是说复核层只能加严、不能放松 —— 这是实测数字，不是主张。
 - 独立性：oracle 不 import `company_wiki`；只有 `observer.py` 调现有公共入口。
-- 字段缺失 → `unknown` / `NOT_EVALUATED`，既不当审查门，也不伪造 PASS。
 
-### C —— 原生回放、恢复与资源、holdout 清单
+### C —— 原生回放、恢复与资源
 
-四份真实原件全部按 SHA 解析成功，**原件 SHA 与 mtime 全部不变**，
-`config/source_catalog.yaml` 指纹不变，0 原件复制，0 网络 / 0 模型 / 0 付费。
+11 份真实原件**全部按 SHA 解析**（2 份 HTML 见下），**原件 SHA 与 mtime 全部不变**，
+`config/source_catalog.yaml` 指纹不变（2 个探针），哨兵复原，
+**0 原件复制 / 0 网络 / 0 模型 / 0 付费**，峰值 RSS 实测 116 MiB。
 
-| 样本 | 路由 kind | 选中/候选 | units | 读页 | scan | 耗时 |
-|---|---|---:|---:|---|---|---:|
-| cn-equity | `unknown` | 96/449（触顶） | 3,224 | 96/96 | partial | 7.938s |
-| cn-ir | `investor_relations` | 11/11 | 302 | 6/6 | complete | 0.390s |
-| cn-q-business | `quarterly_report` | 28/28 | 579 | 15/15 | partial | 2.278s |
-| hk-annual | `annual_report` | 96/254（触顶） | 6,502 | 246/246 | partial(1 页不透明) | 23.737s |
+## 5. 本轮最重要的三个发现
 
-已知遗漏复现（逐条核对选区文本，不是照抄计划结论）：
+### 发现 1：holdout 召回为 0，且两份真实 A 股季报**根本没产生候选**
 
-- **恒锋两期建设**：`建设期`、`第一期`、`第二期` 在选区文本里**全部缺席**
-  （`募集资金` 在），两期建设/投资事实确实没进证据。
-- **名创 p12 门店表**：hk-annual 的 **7 条金标事实全部缺席**，含 p12 的
-  `Total 合計` 7,504 门店数、经营模式行、TOP TOY 门店数。
-  **一处对计划措辞的更正**：`TOP TOY` 这个裸字符串在选区里**是出现的**
-  （来自其它页），所以真正的遗漏是 p12 门店表事实，而不是品牌名本身。
-- **96 上限只是部分触顶**：确实触顶的是 `cn-equity`(96/449) 与
-  `hk-annual`(96/254)，两者 `selector_status=partial`；`cn-ir`(11/11) 与
-  `cn-q-business`(28/28) **没有触顶**。
+- `holdout-cn-glodon-q1`：**257 个 units 产出 0 个候选**，召回 0/7 是构造性的，不是预算问题。
+- `holdout-cn-yake-q1`：369 个 units 只产出 **2 个候选**。
+- `holdout-hk-alibaba`：18,038 units / 360 页产出 2,221 个候选，96 上限下一个金标事实都没选中。
 
-## 5. 开发 / holdout 与缺失类型
+这三份互相独立地指向同一结论：**瓶颈在候选生成阶段，不在选择上限**。
+`cn-ir` 是同一结论的最干净证据：11 个候选全选中，10 条金标仍缺 9 条。
 
-- **开发集 20 份**（ROOT 调查样本）已全部按 SHA 绑定；其中中微、恒锋、万润、名创、鼎龙、世华、金禾参与过调规则，**明确不算 holdout**。
-- **holdout 候选**（有真实原件、未被任何调参引用）：A 股广联达（软件）、雅克科技（制造）；H 股阿里巴巴（零售）。
-- **US holdout = UNAVAILABLE**，如实记录而非补合成样本：已读的四份美国文件（MSFT 10-K、MSFT 电话会、VRSK 10-Q、TAL 20-F）全属开发集，本机其余根本查不到美国原件。
-- **缺失类型**：真实 US S-1/F-1、真实 8-K/6-K 附件容器、修订版与原版配对、第二家非电商 H 股年报。
+### 发现 2：US 文件**今天根本无法被评分**（HTML 无通路）
 
-## 6. 每维度分母（今天能支持的真实分母，不写百分比）
+生产回放路径 `narrative_retrieval.py` 只有两种格式：PDF（`parse_pdf`）与
+transcript_txt/transcript_html（`parse_transcript_text`）。**没有 SEC 文件 HTML 通路。**
+
+实测（`probe_non_pdf_html`，两份真实 10-K：MongoDB FY2026、Microsoft FY2025）：
+
+- `extract_transcript_material` **接受**字节，不报错；
+- 随后 `parse_transcript_text` 返回 **units=0、page_count=0、errors=('transcript_start_missing',)**；
+- 抽出的文本还被内联 XBRL 分类法 token（`http://fasb.org/us-gaap/2025#…`）打头，正文之前全是元数据噪声。
+
+所以基准把 US 文件记为 **UNAVAILABLE**，而不是「无业务内容」——
+后者会把「载体不支持」伪装成「文档没料」，是最危险的假阴性。
+运行报告里显式列出不支持的载体，二者不会被混淆。
+
+### 发现 3：`cn-ipo-confirmation` 精确复现了标题陷阱
+
+一页扫描确认意见被标题正则判成 **`prospectus`**，产出 0 units / 0 候选，唯一一页记为不透明。
+这正是 ROOT 预测的失败，现在有了实测。
+
+## 6. 独立语义复核（把 `semantics.entailment` 推进一步）
+
+- 真实复核产物：`.../reviews/fixtures-independent-review.json`，
+  由独立子代理复核 5 个夹具、11 条 claim，**11 条全部 ENTAILED**。
+- 复核者主动指出一条**方法论缺口**：该夹具集里**没有种子化语义缺陷**，
+  所以它本身不能作为有区分度的负对照。→ 我据此补了 `controls.py`（见 B 节）。
+- 复核者另提 4 条 advisory gap（已记入 handoff.json）：日期不在引文中、
+  引文无法证明 28,000 万元仍是未花的计划、土地款是子项而非项目总额、三处 quantity 上的 `period:"2020"` 噪声。
+- **native 的 `semantics.entailment` 仍是 NOT_EVALUATED**：基线在 11 份文档上
+  **实测产出 0 条 claim、0 个 semantic unit**，没有东西可复核。要推进必须由 ROOT 接上摘要产出。
+
+## 7. 每维度分母（今天能支持的真实分母）
 
 | 维度 | 开发 | holdout | 状态 |
 |---|---:|---:|---|
-| route_type | 4 | 0 | holdout 待采集 |
-| critical_fact_recall | 4 文档 / 38 事实 / 29 关键 | 0 | 可测 |
+| route_type | 6 | 3 | 可测（US 因载体不支持无法测） |
+| critical_fact_recall | 6 文档 / 41 关键 | 5 文档 / 45 关键 | 可测 |
 | context_completeness | 0 | 0 | 基线无结构，NOT_EVALUATED |
-| citation_replay | 4 | 0 | 可测 |
+| citation_replay | 6 | 3 | 可测 |
 | role_modality_quantity | 0 | 0 | 基线无 claims，NOT_EVALUATED |
-| bilingual_redundancy | 1 | 0 | 仅名创为双语金标 |
-| derived_space / time_resource | 4 | 0 | 可测（用基准自有默认上限） |
-| untested_semantics | 4 | 0 | 无独立复核即 NOT_EVALUATED |
-
-现在就报 holdout 召回率会是编造统计，所以分母照实列。
-
-## 7. 基线问题（真实质量发现）
-
-1. `cn-ir` 候选全中仍漏 9/10 —— 问题在候选生成，不在上限。
-2. `cn-equity` 路由停在 `unknown`；两期建设期、35,300.00/28,678.71 投资拆分、35,978.71 上限全部没进。
-3. `hk-annual` p12 门店表与 TOP TOY 全漏，双语双栏未恢复。
-4. `cn-q-business` 达 0.667，证伪「季报可以整类跳过」。
-5. 基线不产出 route family / semantic units / claims，因此这三个维度**只能是 NOT_EVALUATED**，不能算 PASS。
+| bilingual_redundancy | 1 | 1 | 名创 + 阿里巴巴 |
+| derived_space / time_resource | 6 | 3 | 可测（用基准自有默认上限） |
+| untested_semantics | 11 夹具 claim 已复核 | — | native 无 claim，仍 NOT_EVALUATED |
 
 ## 8. 尚不能自动检验的语义项
 
-- 摘要句是否真被其引用证据蕴含（需 ROOT 大节点独立复核；结果里带 `spot_read_list`）。
-- 数值在单位/期间/口径标签之外是否经济上正确（如管理层自己的算术）。
+- 摘要句是否真被其引用证据蕴含（需独立复核；结果里带 `spot_read_list`）。
+- 数值在单位/期间/口径标签之外是否经济上正确。
 - 表格在从未被抽取时是否完整。
 - 双语对是真翻译还是另一语言车道里的另一件事。
 - 公司计划是否现实（只能判「说成计划」还是「说成既成事实」）。
 - 图表内容——基线从不读，金标也不断言。
+- **给正确数字附加的无支撑解读**：实测为确定性盲区（见 B 节负对照）。
 
 ## 9. 资料补采请求（交给 ROOT）
 
-REQ-1 两份非开发集美国 10-K/10-Q（一软件一工业）｜REQ-2 一份真实 US S-1/F-1｜
-REQ-3 一份真实 8-K/6-K 且附件本身是业务文件｜REQ-4 一份修订版+原版配对｜
-REQ-5 一份非电商 H 股年报。详见 `holdout.json`。
+- **REQ-1（高）**：为 SEC 文件加 HTML 前端。实测两份真实 10-K 走现有唯一 HTML 通路得 0 units，US 质量今天无法评分。
+- REQ-2（高）真实 US S-1/F-1｜REQ-3（中）真实 8-K/6-K 且附件是业务文件｜
+  REQ-4（中）修订版+原版配对｜REQ-5（低）非电商 H 股年报。
 
 ## 10. 0 付费 / 0 原件写入 / 恢复 / 体积
 
-- **0 模型调用、0 付费调用、0 网络调用、0 原件复制、0 原件写入、0 原件 SHA 或 mtime 变化**，
-  0 数据库写入，0 生产配置写入。原生读数 6,413,909 字节，全部只读。
-- 恢复：**哨兵改为「运行前保存原始字节+mtime，运行后原样写回」**。
-  离线 `sha D98FC286…/mtime 639274754759568590`、原生 `sha 404B754C…/mtime 639274754759600862`
-  运行后逐字节与 mtime 均一致。
-  这里修掉了一个真 bug：原先 `install_sentinel()` 每次运行都无条件重写哨兵，
-  于是 `sentinel_stable` 拿新写的文件和自己比，**永远发现不了**预先存在的哨兵被覆盖。
-  现在 `restoration.sentinel_restored` 区分 `restored` / `created_by_this_run`。
-  清理只删带 `.du-bench-owned` 标记的目录，未标记目录**拒绝删除**（有测试断言）；未删除任何未知目录。
-- 体积：金标引文 1,902 字节；合成夹具 14,309 字节（预算 204,800）；报告只留摘要与引用。
-  保留下来的输出目录共 220,351 字节，最大单文件 112,579 字节 < 最小原件 153,851 字节，
-  因此目录内**没有任何原件全文副本**。
-- 峰值 RSS **已真实测得**：原生 121,929,728 字节（约 116 MiB），离线 21,049,344 字节（约 20 MiB）。
-  早先 `peak_rss_measured=false` 是个真 bug：`recovery.peak_rss_bytes()` 通过 ctypes 调
-  `GetProcessMemoryInfo` 时没设 `argtypes`/`restype`，64 位 HANDLE 被截断，psapi 与 K32
-  两个入口都返回 0。补上函数原型后即可测出；上面两个数字是修复后的实跑值。
+- **0 模型调用、0 付费调用、0 网络调用、0 原件复制、0 原件写入、0 原件 SHA 或 mtime 变化**。
+- 恢复：哨兵写入自有容器并逐字节校验；清理只删带 `.du-bench-owned` 标记的目录，
+  未标记目录**拒绝删除**（有测试断言）。
+- bindings 放在仓库外 `~/.du-bench/`，工作树保持干净。
+- 体积：金标单份引文 ≤842 字节；合成夹具 14,301 字节（预算 204,800）。
+- 峰值 RSS 实测：native 116 MiB、offline 20 MiB。
 
-## 11. 本轮修掉的基准自身缺陷
+## 11. 需要 ROOT 做的事
 
-基准也是代码，会自己出错。这一轮原生回放复跑时暴露出 4 个真问题，都已修并加了回归测试：
+1. **为 SEC 文件加 HTML 前端**（REQ-1）——否则整个 US 支线无法评分。
+2. 通过 `observer.observe_du_adapter` 注入真实 `du-input/1` 适配器，
+   让 `context_completeness` 与 `role_modality_quantity` 不再是 NOT_EVALUATED；
+   并接上摘要产出，`semantics.entailment` 才有 claim 可复核。
+3. 用 `evaluate(limits=...)` 传 ROOT 的真实派生/时间上限。
+4. 决定五个补采请求。
 
-1. **峰值 RSS 恒为 None** —— ctypes 调 `GetProcessMemoryInfo` 没设函数原型，
-   64 位 HANDLE 被截断，两个入口都返回 0。补 `argtypes`/`restype` 后测得真实值。
-2. **哨兵检查形同虚设** —— `install_sentinel()` 无条件重写哨兵，
-   `sentinel_stable` 变成「新文件 vs 自己」，预先存在的哨兵被覆盖也报 true。
-   改为运行前保存、运行后还原，并区分 `restored` / `created_by_this_run`。
-3. **`restore_sentinel()` 拼写错误**（`preeexisting`）—— 被新加的哨兵保持测试当场抓到。
-4. **`config_unchanged` 在没传 `--probe-config` 时报 count=0** ——
-   看起来像通过，实际什么都没证明。现在打印探针数量，并把哨兵纳入探针集合。
-
-另有两个**遗漏结论的精化**（不是缺陷，是措辞）：名创真正的遗漏是 p12 门店表事实
-而非 `TOP TOY` 字符串本身；96 上限只在 2 份文档上触发，另 2 份压根没触顶。
-
-## 12. 需要 ROOT 做的事
-
-1. 通过 `observer.observe_du_adapter` 注入真实 `du-input/1` 适配器，让
-   `context_completeness` 与 `role_modality_quantity` 不再是 NOT_EVALUATED。
-2. 用 `evaluate(limits=...)` 传 ROOT 的真实派生/时间上限（现在用的是基准默认值）。
-3. 对 `spot_read_list` 跑独立语义复核，把 `semantics.entailment` 从 NOT_EVALUATED 推进。
-4. 决定五个补采请求，以便写出真正盲测的 holdout 金标。
+**需要 ROOT 注意的基线事实**：开发集关键召回 0.220、holdout 0.000，
+且一份真实 A 股季报产出 **0 个候选** —— 这是候选生成层的缺陷，不是上限问题。
 
 本条线到此停止，不再自行推进；合主线、三包集成与真实摘要大节点归 ROOT。

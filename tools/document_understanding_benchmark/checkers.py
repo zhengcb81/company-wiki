@@ -970,7 +970,16 @@ def check_quantity_provenance(
 def check_semantics_entailment(
     observed: Mapping[str, Any], gold: Mapping[str, Any], review: Mapping[str, Any] | None
 ) -> dict[str, Any]:
-    """Entailment requires independent review. Regex/numeric agreement is not it."""
+    """Entailment requires independent review. Regex/numeric agreement is not it.
+
+    Three outcomes are kept distinct:
+
+    - no review at all -> ``NOT_EVALUATED`` (the honest default);
+    - a review whose verdicts are all entailed -> ``PASS``;
+    - a review that found an unsupported claim -> ``FAIL``;
+    - a review that could not decide every claim -> ``PARTIAL``, because "the
+      reviewer was unsure" is not the same as "the claim is wrong".
+    """
 
     if not review:
         return _check(
@@ -981,17 +990,42 @@ def check_semantics_entailment(
             dimension="untested_semantics",
             detail="no independent review supplied; deterministic checks cannot prove entailment",
         )
-    reviewed = review.get("claims") or []
-    failures = [
+
+    from .review import ENTAILED_VERDICTS, UNDECIDED_VERDICTS, UNSUPPORTED_VERDICTS
+
+    reviewed = list(review.get("claims") or [])
+    unsupported = [row for row in reviewed if row["verdict"] in UNSUPPORTED_VERDICTS]
+    undecided = [row for row in reviewed if row["verdict"] in UNDECIDED_VERDICTS]
+    unknown = [
         row
         for row in reviewed
-        if (row.get("verdict") or "").upper() not in {"ENTAILED", "PASS"}
+        if row["verdict"] not in ENTAILED_VERDICTS
+        and row["verdict"] not in UNSUPPORTED_VERDICTS
+        and row["verdict"] not in UNDECIDED_VERDICTS
     ]
+
+    if unsupported:
+        status = FAIL
+    elif undecided or unknown:
+        status = PARTIAL
+    else:
+        status = PASS
+
     return _check(
         "semantics.entailment",
-        FAIL if failures else PASS,
+        status,
         expected="every reviewed claim entailed by its evidence",
-        observed=failures,
+        observed={
+            "reviewed": len(reviewed),
+            "unsupported": unsupported,
+            "undecided": undecided,
+            "unrecognized_verdicts": unknown,
+        },
+        evidence_refs=[
+            locator
+            for row in unsupported
+            for locator in (row.get("evidence_locators") or [])
+        ],
         dimension="untested_semantics",
     )
 

@@ -95,6 +95,38 @@ actions ROOT needs to take.
   0 original writes, recovery and size.
 - Commit on this branch and stop. ROOT owns integration.
 
+### Phase 7 — Full holdout coverage
+**Status:** complete
+
+- Author real holdout gold for A/H/US: 广联达 2025Q1, 雅克科技 2022Q1,
+  阿里巴巴 FY2023, MongoDB FY2026 10-K, NVIDIA FY2025 10-K. Five records,
+  68 facts, none of these companies appears in the survey or any tuning
+  discussion.
+- Fill remaining development gold: `cn-h1` (中微 half-year) and
+  `cn-ipo-confirmation` (the scanned page, encoded as an opacity test).
+- Report development and holdout separately in `evaluate`, the CLI and the
+  run report, and add `test_gold_set.py` to make merging them a test failure.
+
+### Phase 8 — Independent review + negative controls
+**Status:** complete
+
+- `review.py`: the `du-review/1` wire and the four-state entailment check.
+- A real independent review artifact over 5 fixtures / 11 claims.
+- The reviewer reported that the fixture set contains no seeded entailment
+  defect, so it cannot discriminate. Acted on with `controls.py`: three
+  injected meaning-level defects that every deterministic check passes and
+  that review catches, plus proof an all-ENTAILED review cannot upgrade a
+  deterministic FAIL.
+
+### Phase 9 — Carrier reality
+**Status:** complete
+
+- Measured that the existing public path supports only PDF and transcript
+  carriers: two real 10-Ks yield `units=0` with `transcript_start_missing`, and
+  the extracted text is led by inline-XBRL tokens.
+- `observer.carrier_support()` and native run reports now name unsupported
+  carriers explicitly, so "carrier unsupported" cannot be read as "no content".
+
 ## Decisions Made
 
 | # | Decision | Why |
@@ -109,6 +141,31 @@ actions ROOT needs to take.
 | D8 | Mutation outcomes are three-valued: DETECTED / NOT_DETECTED / NOT_APPLICABLE | Counting inapplicable mutations as misses understates; counting them as hits fakes |
 | D9 | US holdout is recorded `UNAVAILABLE` with acquisition requests | No local US original exists outside the development set; a synthetic substitute would fake coverage |
 | D10 | Real-original tests need `DU_BENCH_ALLOW_REAL_DATA=1` | The card requires the offline suite and the native quality report to be separate, and shared `pytest.ini` is not mine to edit |
+| D11 | Development and holdout are never merged into one headline number | Development samples tuned the rules; only holdout speaks to generalisation |
+| D12 | An unsupported carrier is `UNAVAILABLE` and named in the report | Otherwise "the pipeline cannot read this" is indistinguishable from "this document has no content" |
+| D13 | Review verdicts are four-state, and a malformed review refuses the run | Ignoring a bad review would report `NOT_EVALUATED` where the operator believed a review was applied |
+| D14 | `controls.py` asserts the review layer is load-bearing | If deterministic checks ever caught everything, the review layer's justification would be stale, and a test should fail loudly |
+| D15 | Bindings live outside the worktree (`~/.du-bench/`) | Keeps the repository working tree clean while staying machine-local and uncommitted |
+
+## Outcome
+
+11 gold records (122 facts, 81 critical), 6 development and **5 holdout**
+covering A/H/US and software/manufacturing/retail/semiconductors.
+
+Measured baseline: **development critical recall 0.220 (9/41), holdout 0.000
+(0/45)**. Three findings matter more than the totals:
+
+1. **Candidate generation, not the selection cap, is the bottleneck.**
+   `cn-ir` selected all 11 of its candidates and still missed 9 of 10 gold
+   facts; `holdout-cn-glodon-q1` produced **zero candidates from 257 units**.
+2. **US filings cannot be scored at all.** Two real 10-Ks yield 0 units through
+   the only HTML route, so they are `UNAVAILABLE` by carrier, not by content.
+3. **The documented title trap reproduces.** The scanned confirmation opinion
+   routes to `prospectus` with 0 units on an opaque page.
+
+Verification: 100 offline tests and 7 real-data tests pass, ruff clean,
+53/53 applicable mutations detected, and every original plus the production
+config verified unchanged by SHA and mtime across all 11 samples.
 
 ## Errors Encountered
 

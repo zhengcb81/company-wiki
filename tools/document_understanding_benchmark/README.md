@@ -36,14 +36,68 @@ python -X utf8 -m tools.document_understanding_benchmark \
     --bindings <local bindings.json> \
     --output <owned-dir> \
     --probe-config config/source_catalog.yaml
+
+# with an independent semantic review applied
+python -X utf8 -m tools.document_understanding_benchmark \
+    --mode native --bindings <local bindings.json> --output <owned-dir> \
+    --review tools/document_understanding_benchmark/reviews/fixtures-independent-review.json
 ```
 
 Exit codes: `0` all evaluated samples PASS, `1` any FAIL, `2` refused to run
-(bad gold/bindings/adapter), `3` PARTIAL or UNAVAILABLE present.
+(bad gold/bindings/adapter/review), `3` PARTIAL or UNAVAILABLE present.
 
 `--bindings` is a **local, uncommitted** `{sample_id: absolute_path}` JSON file.
-Originals are never copied, and a missing binding or SHA-256 mismatch yields
-`UNAVAILABLE` — never a substituted or synthetic document.
+Keep it outside the worktree (for example `~/.du-bench/bindings.local.json`) so
+the repository stays clean. Originals are never copied, and a missing binding or
+SHA-256 mismatch yields `UNAVAILABLE` — never a substituted or synthetic document.
+
+## Measured baseline (development vs holdout)
+
+Reported separately and never merged: the development samples were used to tune
+rules, so only the holdout split speaks to generalisation.
+
+| split | documents | critical facts recalled | denominator |
+|---|---:|---|---:|
+| development | 6 | **9 (0.220)** | 41 |
+| holdout | 5 | **0 (0.000)** | 45 |
+
+Three findings from that measurement:
+
+- **Candidate generation is the bottleneck, not the selection cap.** `cn-ir` had
+  11 candidates, selected all 11, and still missed 9 of 10 gold facts.
+  `holdout-cn-glodon-q1` produced **zero candidates from 257 units**;
+  `holdout-cn-yake-q1` produced 2 from 369. Raising the cap cannot help any of them.
+- **US filings cannot be scored at all today.** The production replay path offers
+  only PDF and transcript HTML. Two real 10-Ks passed through the only HTML route
+  return `units=0` with `transcript_start_missing`, so they are reported
+  `UNAVAILABLE` rather than as documents with no business content. Run reports
+  name the unsupported carrier explicitly, and `observer.carrier_support()`
+  exposes the capability without needing an original.
+- **The documented title trap reproduces.** The one-page scanned confirmation
+  opinion routes to `document_kind=prospectus`, yields 0 units, and its single
+  page is reported opaque.
+
+## Independent semantic review
+
+`semantics.entailment` can never pass on regex or numeric agreement alone:
+
+| state | meaning |
+|---|---|
+| no review supplied | `NOT_EVALUATED` — the honest default |
+| review verdicts all entailed | `PASS` |
+| review found an unsupported claim | `FAIL` |
+| review could not decide | `PARTIAL` — uncertainty is not a defect |
+
+A malformed review refuses the run rather than being ignored, because ignoring it
+would report `NOT_EVALUATED` where the operator believed a review had been applied.
+
+`controls.py` measures whether the review layer earns its place. Three injected
+meaning-level defects — an unsupported interpretation attached to a correct
+number, a dropped qualifier, and an invented causal attribution — **all pass every
+deterministic check and all fail under review**. Separately, an all-`ENTAILED`
+review cannot upgrade a deterministic `FAIL`: the layer can only add scrutiny.
+A test asserts those properties, so the justification fails loudly if the
+deterministic checkers ever become strong enough to make review redundant.
 
 ## Modes
 
@@ -98,18 +152,30 @@ through it.
 - `role`: who is speaking (`company_filing`, `management_answer`, `analyst_question`, …)
 - `reason`: why the fact matters and what the trap is
 
-Quoted text per document is bounded to ≤8KiB; the four real records currently
-use 0.42–0.56KiB each.
+Quoted text per document is bounded to ≤8KiB; the largest current record uses 842 bytes.
 
-Current development gold (all `scope: development`; the survey samples were
-already used to tune rules, so none of them is holdout):
+Development gold — the 20 survey samples were already used to tune rules, so none
+of these is holdout:
 
 | sample | company | facts | critical |
 |---|---|---|---|
 | `cn-equity` | 恒锋工具 2020 equity offering | 10 | 7 |
+| `cn-h1` | 中微公司 2026 half-year | 12 | 8 |
+| `cn-ipo-confirmation` | 鼎龙股份 scanned confirmation opinion | 4 | 4 |
 | `cn-ir` | 万润股份 IR record 20260515 | 10 | 7 |
 | `cn-q-business` | 中微公司 2026 Q1 | 11 | 9 |
 | `hk-annual` | 名创优品 2024 HK annual | 7 | 6 |
+
+Holdout gold — none of these companies appears in the survey, the design
+findings, or any tuning discussion:
+
+| sample | company | segment | facts | critical |
+|---|---|---|---|---|
+| `holdout-cn-glodon-q1` | 广联达 2025 Q1 | software | 9 | 7 |
+| `holdout-cn-yake-q1` | 雅克科技 2022 Q1 | manufacturing | 13 | 8 |
+| `holdout-hk-alibaba-fy2023` | 阿里巴巴 FY2023 | retail | 14 | 10 |
+| `holdout-us-mongodb-10k` | MongoDB FY2026 10-K | software | 16 | 9 |
+| `holdout-us-nvidia-10k` | NVIDIA FY2025 10-K | semiconductors | 16 | 9 |
 
 ## Counterexample mutations
 
@@ -123,36 +189,68 @@ mutation, one of three outcomes:
 
 Current: **53/53 applicable mutations detected, 42 not applicable.**
 
-## Measured baseline on the four real originals (node C)
+## Carrier support
 
-Read-only replay through the existing public parser/selector, 2026-10-13:
+`observer.carrier_support()` reports what the existing public path can actually
+take in, without needing an original:
 
-| sample | status | critical recall | all-fact recall | route | spans | scan |
+| carrier | supported | entry point |
+|---|---|---|
+| `.pdf` | yes | `parse_pdf_bytes` |
+| `.txt` / `.md` | yes | `parse_transcript_text` (transcript layout) |
+| `.htm` / `.html` | **no** | none — the only HTML path expects a transcript |
+| `.pptx` | no | none |
+
+A carrier the path cannot take in is reported `UNAVAILABLE`, and native run
+reports list the unsupported suffixes explicitly, so "unsupported carrier" can
+never be mistaken for "document with no business content".
+
+## Measured baseline on the eleven real originals (node C)
+
+Read-only replay through the existing public parser/selector, 2026-10-13.
+Development and holdout are kept apart on purpose.
+
+| sample | split | status | critical recall | spans | candidates | scan |
 |---|---|---|---|---|---|---|
-| `cn-equity` | FAIL | 0/7 | 1/10 | family unknown → FAIL | 96/449 (capped) | partial |
-| `cn-ir` | FAIL | 1/7 | 1/10 | investor_qa → PASS | 11/11 | complete |
-| `cn-q-business` | FAIL | 6/9 | 7/11 | quarterly vs expected quarterly_report → FAIL | 28/28 | partial |
-| `hk-annual` | FAIL | 0/6 | 0/7 | annual → PASS | 96/254 (capped) | partial (p246 opaque) |
+| `cn-equity` | dev | FAIL | 0/7 | 96 (capped) | 449 | partial |
+| `cn-h1` | dev | FAIL | 2/8 | 96 (capped) | 369 | partial |
+| `cn-ipo-confirmation` | dev | FAIL | 0/4 | 0 | 0 | partial, p1 opaque |
+| `cn-ir` | dev | FAIL | 1/7 | 11 | 11 | complete |
+| `cn-q-business` | dev | FAIL | 6/9 | 28 | 28 | partial |
+| `hk-annual` | dev | FAIL | 0/6 | 96 (capped) | 254 | partial, p246 opaque |
+| `holdout-cn-glodon-q1` | **holdout** | FAIL | 0/7 | **0** | **0** | partial |
+| `holdout-cn-yake-q1` | **holdout** | FAIL | 0/8 | 2 | 2 | partial |
+| `holdout-hk-alibaba-fy2023` | **holdout** | FAIL | 0/10 | 96 (capped) | 2221 | partial |
+| `holdout-us-mongodb-10k` | **holdout** | PARTIAL | n/a | — | — | **unavailable (HTML)** |
+| `holdout-us-nvidia-10k` | **holdout** | PARTIAL | n/a | — | — | **unavailable (HTML)** |
 
-These FAILs are the deliverable, not a broken test. Confirmed known misses:
+Totals: development 9/41 = **0.220**, holdout 0/45 = **0.000**.
 
-- 恒锋 建设期/第一期/第二期 never reach the selected text (96-span cap,
-  353 of 449 candidates omitted);
-- 名创优品 p12 store table is entirely unselected — **all 7** hk-annual facts
-  are absent, including TOP TOY store counts and the operating-model breakdown;
-- the 96-span cap is genuinely partial on cn-equity and hk-annual
-  (`selector_status: partial`, `omitted_candidate_count` > 150 in both).
+These FAILs are the deliverable, not a broken test. Confirmed:
+
+- 恒锋 建设期/第一期/第二期 never reach the selected text;
+- 名创优品 p12 store table is entirely unselected — all 7 facts absent;
+- 广联达 Q1 produced **zero candidates from 257 units**;
+- 雅克科技 Q1 produced **2 candidates from 369 units**;
+- 阿里巴巴 FY2023 produced 2,221 candidates and selected none of the 14 facts;
+- 鼎龙 confirmation opinion routes to `prospectus` with 0 units on an opaque page;
+- the two US 10-Ks have no carrier route at all.
 
 ## Tests
 
 ```bash
-# default: fast, fully offline
+# default: fast, fully offline (100 tests, ~2s)
 python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q
 
 # real originals, opt-in (needs the local bindings file)
 $env:DU_BENCH_ALLOW_REAL_DATA = "1"
 python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q -m real_data
 ```
+
+The real-original tests are skipped rather than deselected by default, because
+`pytest.ini` is shared configuration this lane must not edit. That keeps the
+default suite fully offline while still allowing the native quality report to be
+run explicitly.
 
 ## Safety and restoration
 
@@ -172,6 +270,25 @@ python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q -m real
 
 `RAWS_COPIED: 0`, `MODEL_CALLS: 0`, `PAID_CALLS: 0` are asserted by the offline
 CLI test.
+
+## Package layout
+
+| module | role |
+|---|---|
+| `schema.py` | frozen wire constants and enums |
+| `records.py` | `du-gold/1` and `du-observed/1` validation |
+| `textutil.py` | deterministic text, number, unit, modality and stage primitives |
+| `checkers.py` | the nine check dimensions |
+| `evaluate.py` | public `evaluate(observed, gold)` |
+| `gold.py` | gold loading and SHA-bound original resolution |
+| `observer.py` | read-only observation plus carrier capability |
+| `mutations.py` | 19 counterexample mutations, three-valued outcome |
+| `review.py` | `du-review/1` independent semantic review |
+| `controls.py` | proof the review layer is load-bearing |
+| `recovery.py` | fingerprints, sentinel, owned-directory cleanup |
+| `fixtures.py` | offline synthetic fixtures |
+| `report.py`, `make_bindings.py` | maintainer helpers |
+| `gold/`, `reviews/`, `holdout.json` | data |
 
 ## Scope and ownership
 

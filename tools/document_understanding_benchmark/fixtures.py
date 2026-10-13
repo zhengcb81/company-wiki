@@ -4,6 +4,19 @@ Total budget ≤200KiB. Everything is a compact JSON observation paired with a
 tiny quoted gold, so the offline suite exercises the oracle's *logic* — route,
 recall, replay, role/modality/basis, bilingual redundancy, derived space — with
 no original, no network and no model call.
+
+Scope semantics inside this synthetic set (stated so the labels are not
+over-read):
+
+- ``development`` — authored while the checker logic was being designed, so the
+  checkers were tuned against them.
+- ``holdout`` — authored *after* the checker logic was frozen, purely to
+  exercise it. They therefore test the checkers rather than describe them.
+
+These are **synthetic** scope labels used to exercise the development/holdout
+reporting split. They are not claims about real-document generalisation; that
+evidence comes from the real gold records under ``gold/`` and is reported
+separately.
 """
 
 from __future__ import annotations
@@ -353,7 +366,7 @@ def fixture_offering_plan() -> dict[str, Any]:
             "schema_version": "du-gold/1",
             "sample_id": "offline-offering-plan",
             "source_sha256": "d" * 64,
-            "scope": "development",
+            "scope": "holdout",
             "expected_route_families": ["offering"],
             "facts": [
                 _fact(
@@ -480,7 +493,7 @@ def fixture_stage_progress() -> dict[str, Any]:
             "schema_version": "du-gold/1",
             "sample_id": "offline-stage-progress",
             "source_sha256": "e" * 64,
-            "scope": "development",
+            "scope": "holdout",
             "expected_route_families": ["quarterly"],
             "facts": [
                 _fact(
