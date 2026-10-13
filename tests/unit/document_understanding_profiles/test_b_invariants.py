@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import copy
 import json
-import os
 import pathlib
 
 import pytest
@@ -25,10 +24,6 @@ from .wire_contract import (
     assert_route_shape,
     import_profiles_module,
 )
-
-#: Source-file suffixes that must never leak into a route, so a carrier cannot be inferred
-#: from a path-like detail. Spelled without a leading dot so this file embeds no host path.
-SOURCE_SUFFIXES = ("pdf", "htm", "html", "txt", "docx", "pptx")
 
 #: A representative spread of shapes reused by the property tests below.
 SHAPES = {
@@ -143,23 +138,30 @@ def test_disposition_is_never_a_skip(shape):
 
 
 @pytest.mark.parametrize("shape", sorted(SHAPES))
-def test_route_carries_no_path_or_company_identity(shape):
-    """No file path and no absolute location may appear in the output.
+def test_route_carries_no_path_or_company_identity(shape, tmp_path):
+    """Storage/identity metadata must neither change nor leak into routing.
 
-    The markers are derived from this host rather than written as literals, so the check
-    stays meaningful on any machine and does not itself embed a host path.
+    Test whole concrete values on both path styles. A separator alone is also
+    part of legitimate logical IDs such as du-route/1, so it is not a path.
     """
-    route = import_profiles_module().route_document(SHAPES[shape]())
+    module = import_profiles_module()
+    observation = SHAPES[shape]()
+    clean = module.route_document(observation)
+    markers = [
+        str(tmp_path / "identity-boundary" / "source.pdf"),
+        str(pathlib.PureWindowsPath("Z:" + "\\", "identity-boundary", "source.pdf")),
+        str(pathlib.PurePosixPath("/", "identity-boundary", "source.pdf")),
+        "du-company-identity-do-not-copy",
+    ]
+    tainted = copy.deepcopy(observation)
+    tainted["metadata"].update({"path": markers[1], "absolute_path": markers[2], "company": markers[3]})
+    tainted["source_ref"].update({"absolute_path": markers[0], "company_id": markers[3]})
+    route = module.route_document(tainted)
+    assert route == clean
+    assert route["schema_version"] == "du-route/1"
     payload = json.dumps(route, ensure_ascii=False)
-    markers = {
-        os.sep,  # the platform separator, e.g. "\\" or "/"
-        pathlib.Path.cwd().anchor,  # e.g. "C:\\" or "/"
-        pathlib.Path.home().anchor,
-    }
-    for suffix in SOURCE_SUFFIXES:
-        markers.add("." + suffix)
-    for marker in sorted(marker for marker in markers if marker):
-        assert marker not in payload, marker
+    for marker in markers:
+        assert json.dumps(marker, ensure_ascii=False)[1:-1] not in payload, marker
 
 
 def test_tightening_the_probe_budget_never_increases_confidence():

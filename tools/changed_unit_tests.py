@@ -97,6 +97,15 @@ def _dynamic_execution(tree: ast.AST) -> bool:
     return False
 
 
+def _is_unit_test_path(name: str) -> bool:
+    """Recognise a test file at any depth, not a directory named test_*.
+
+    Paths come from Git's repository-relative POSIX names on either host OS.
+    """
+    filename = name.rsplit("/", 1)[-1]
+    return name.startswith("tests/unit/") and filename.startswith("test_") and filename.endswith(".py")
+
+
 def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], str]:
     """Select whole test files, never individual asserts, and explain fallbacks."""
     full = ["tests/unit"]
@@ -119,7 +128,7 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
         return full, "deleted or unknown dependency"
     # Changing a unit test does not alter the runtime used by unrelated CLI or
     # computed-import tests. Its known helper consumers still follow the graph.
-    unit_tests_only = all(name.startswith("tests/unit/test_") and name.endswith(".py") for name in relevant)
+    unit_tests_only = all(_is_unit_test_path(name) for name in relevant)
     modules = {alias: name for name in paths for alias in _aliases(name)}
     reverse: dict[str, set[str]] = {}
     uncertain = set()
@@ -156,7 +165,7 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
             if caller not in known:
                 known.add(caller)
                 pending.append(caller)
-    if not any(name.startswith("tests/unit/test_") for name in known):
+    if not any(_is_unit_test_path(name) for name in known):
         return full, "no known unit consumer"
-    tests = sorted(name for name in affected if name.startswith("tests/unit/test_"))
+    tests = sorted(name for name in affected if _is_unit_test_path(name))
     return tests, "affected unit tests"

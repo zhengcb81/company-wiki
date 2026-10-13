@@ -38,10 +38,30 @@ def test_changed_test_or_fixture_is_not_omitted(project, changed):
     assert select_unit_tests(project, {changed})[0] == ["tests/unit/test_reader.py"]
 
 
+def test_nested_test_only_change_keeps_its_consumers_without_unrelated_cli(project):
+    helper = _file(project, "tests/unit/du/test_helpers.py", "import subprocess\nsubprocess.run(argv)\n")
+    consumer = _file(project, "tests/unit/du/test_reader.py", "from . import test_helpers\n")
+    _file(project, "tests/unit/test_runtime.py", "import subprocess\nsubprocess.run(argv)\n")
+    assert select_unit_tests(project, {helper}) == ([helper, consumer], "affected unit tests")
+
+
+def test_nested_test_is_a_known_consumer_of_changed_source(tmp_path):
+    source = _file(tmp_path, "src/pkg/core.py", "value=1\n")
+    consumer = _file(tmp_path, "tests/unit/du/test_reader.py", "from pkg import core\n")
+    _file(tmp_path, "tests/integration/test_reader.py", "from pkg import core\n")
+    assert select_unit_tests(tmp_path, {source}) == ([consumer], "affected unit tests")
+
+
+def test_directory_named_test_helpers_does_not_turn_helper_into_a_unit(project):
+    _file(project, "tests/unit/test_helpers/helper.py", "from pkg import core\n")
+    assert select_unit_tests(project, {"src/pkg/core.py"}) == (
+        ["tests/unit/test_reader.py"], "affected unit tests")
+
+
 @pytest.mark.parametrize("changed", [
     "config/local_ocr.json", "requirements.txt", "pyproject.toml", "conftest.py",
     "tests/conftest.py", "tools/pre_push_gate.py", ".github/workflows/ci.yml",
-    "src/pkg/deleted.py", "tests/fixtures/input.json",
+    "src/pkg/deleted.py", "tests/fixtures/input.json", "tests/unit/du/conftest.py",
 ])
 def test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back(project, changed):
     assert select_unit_tests(project, {changed})[0] == ["tests/unit"]
