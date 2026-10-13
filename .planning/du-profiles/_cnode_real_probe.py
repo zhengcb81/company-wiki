@@ -531,7 +531,9 @@ def main() -> int:
         "note": (
             "Real-original C-node evidence. Excerpts are bounded to "
             f"{MAX_EVIDENCE_CHARS_PER_DOC} bytes per document; no original was copied into "
-            "this worktree. UNAVAILABLE rows mean the original could not be read, never PASS."
+            "this worktree. UNAVAILABLE rows mean the original could not be read, never PASS. "
+            "The *_seconds fields are wall-clock timings and therefore differ between runs; "
+            "the route decisions and SHA-256 values are deterministic and do not."
         ),
         "summary": summary,
         "documents": rows,

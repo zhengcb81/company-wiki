@@ -2,7 +2,7 @@
   "schema_version": "du-cnode-evidence/1",
   "generated_by": ".planning/du-profiles/_cnode_real_probe.py",
   "worktree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\document-understanding-20261013\\profiles",
-  "note": "Real-original C-node evidence. Excerpts are bounded to 8192 bytes per document; no original was copied into this worktree. UNAVAILABLE rows mean the original could not be read, never PASS.",
+  "note": "Real-original C-node evidence. Excerpts are bounded to 8192 bytes per document; no original was copied into this worktree. UNAVAILABLE rows mean the original could not be read, never PASS. The *_seconds fields are wall-clock timings and therefore differ between runs; the route decisions and SHA-256 values are deterministic and do not.",
   "summary": {
     "documents_probed": 7,
     "observed": 7,
@@ -10,7 +10,7 @@
     "family_agreement": 7,
     "family_disagreement": 0,
     "headline_defect_regressions": 0,
-    "elapsed_seconds": 15.201,
+    "elapsed_seconds": 14.313,
     "max_evidence_chars_per_doc": 8192,
     "originals_copied_into_worktree": 0
   },
@@ -29,7 +29,7 @@
       "mtime_utc": 1779653632.067068,
       "parse": {
         "parser": "company_wiki.source_catalog.narrative_evidence.parse_pdf",
-        "parse_seconds": 0.067,
+        "parse_seconds": 0.077,
         "page_count": 1,
         "pages_read": 1,
         "opaque_pages": [
@@ -44,7 +44,7 @@
       "units_non_blank": 0,
       "native_text_empty": true,
       "legacy_title_route": "prospectus",
-      "route_seconds": 0.0007,
+      "route_seconds": 0.0009,
       "route": {
         "schema_version": "du-route/1",
         "profile_id": "administrative",
@@ -109,7 +109,7 @@
       "mtime_utc": 1608820218.0,
       "parse": {
         "parser": "company_wiki.source_catalog.narrative_evidence.parse_pdf",
-        "parse_seconds": 3.65,
+        "parse_seconds": 3.693,
         "page_count": 96,
         "pages_read": 96,
         "opaque_pages": [],
@@ -122,7 +122,7 @@
       "units_non_blank": 3224,
       "native_text_empty": false,
       "legacy_title_route": "unknown",
-      "route_seconds": 0.0736,
+      "route_seconds": 0.0728,
       "route": {
         "schema_version": "du-route/1",
         "profile_id": "offering",
@@ -348,7 +348,7 @@
       "mtime_utc": 1761392825.0,
       "parse": {
         "parser": "company_wiki.source_catalog.narrative_evidence.parse_pdf",
-        "parse_seconds": 4.869,
+        "parse_seconds": 5.229,
         "page_count": 246,
         "pages_read": 246,
         "opaque_pages": [
@@ -363,7 +363,7 @@
       "units_non_blank": 4000,
       "native_text_empty": false,
       "legacy_title_route": "annual_report",
-      "route_seconds": 0.0509,
+      "route_seconds": 0.0676,
       "route": {
         "schema_version": "du-route/1",
         "profile_id": "hk_periodic",
@@ -609,7 +609,7 @@
       "mtime_utc": 1779228233.2629986,
       "parse": {
         "parser": "company_wiki.source_catalog.narrative_evidence.parse_pdf",
-        "parse_seconds": 0.332,
+        "parse_seconds": 0.522,
         "page_count": 6,
         "pages_read": 6,
         "opaque_pages": [],
@@ -622,7 +622,7 @@
       "units_non_blank": 302,
       "native_text_empty": false,
       "legacy_title_route": "investor_relations",
-      "route_seconds": 0.0331,
+      "route_seconds": 0.0575,
       "route": {
         "schema_version": "du-route/1",
         "profile_id": "investor_qa",
@@ -991,7 +991,7 @@
       "mtime_utc": 1779046989.6738036,
       "parse": {
         "parser": "company_wiki.source_catalog.narrative_evidence.parse_pdf",
-        "parse_seconds": 0.612,
+        "parse_seconds": 0.826,
         "page_count": 15,
         "pages_read": 15,
         "opaque_pages": [],
@@ -1004,7 +1004,7 @@
       "units_non_blank": 579,
       "native_text_empty": false,
       "legacy_title_route": "quarterly_report",
-      "route_seconds": 0.0364,
+      "route_seconds": 0.0403,
       "route": {
         "schema_version": "du-route/1",
         "profile_id": "cn_quarterly",
@@ -1229,7 +1229,7 @@
       "mtime_utc": 1784663189.6163292,
       "parse": {
         "parser": "company_wiki.document_normalization.normalize_document(text/html)",
-        "parse_seconds": 4.571,
+        "parse_seconds": 2.882,
         "page_count": null,
         "total_units": 5215,
         "units_fed": 4000,
@@ -1240,7 +1240,7 @@
       "units_non_blank": 4000,
       "native_text_empty": false,
       "legacy_title_route": "unknown",
-      "route_seconds": 0.084,
+      "route_seconds": 0.0446,
       "route": {
         "schema_version": "du-route/1",
         "profile_id": "sec_10k",
@@ -1460,7 +1460,7 @@
       "mtime_utc": 1791418213.692349,
       "parse": {
         "parser": "utf-8 read + blank-line blocking (carrier read only, no new parser)",
-        "parse_seconds": 0.001,
+        "parse_seconds": 0.0,
         "page_count": null,
         "total_units": 166,
         "units_fed": 166,
@@ -1471,7 +1471,7 @@
       "units_non_blank": 166,
       "native_text_empty": false,
       "legacy_title_route": "investor_call_transcript",
-      "route_seconds": 0.1368,
+      "route_seconds": 0.0676,
       "route": {
         "schema_version": "du-route/1",
         "profile_id": "earnings_call",
