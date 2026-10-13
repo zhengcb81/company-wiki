@@ -85,3 +85,37 @@ Append-only session log.
      `_BOUND_PHRASES` now strips quantity bounds before negation detection.
 - Test suite: **47 passed** (27 oracle + 20 mutation/fixture/CLI).
 - Next: Phase 5 native read-only replay + recovery evidence.
+
+## 2026-10-13 — session 1, Phases 5–6 (done, branch committed)
+
+- Native replay against 4 real originals: all resolved by SHA, **all four
+  `raw_unchanged: true`**, `config/source_catalog.yaml` unchanged, 0 raw copies,
+  0 network / 0 model / 0 paid calls. Real recall measured, not faked:
+  cn-equity 0.000, cn-ir 0.143, cn-q-business 0.667, hk-annual 0.000.
+- `make_bindings.py` bound **20/20** survey originals by SHA. It also proved the
+  card's warning concretely: relative manifest paths resolve against the main
+  checkout, not this sparse worktree, so the manifest alone cannot locate
+  originals and bindings are required.
+- Real-original tests made opt-in (`DU_BENCH_ALLOW_REAL_DATA=1`, plus the
+  `real_data` marker) rather than the default, because `pytest.ini` is shared
+  config this lane must not edit. Default suite stays fully offline at ~1.1s.
+- Holdout surveyed: 263 non-development companies available. Recorded 广联达
+  (software), 雅克科技 (manufacturing), 阿里巴巴 (retail) as candidates and
+  **US holdout as UNAVAILABLE** with five acquisition requests.
+- Wrote `README.md`, `holdout.json`, `handoff.md`, `handoff.json`.
+- Final verification: ruff clean, **65 passed / 5 skipped**, offline CLI green
+  with 53/53 applicable mutations detected, C-node report with
+  `raw_all_unchanged: true`.
+- Committed on `codex/du-benchmark-20261013`: `ad77758d` (implementation) and
+  `74872d03` (handoff SHA). `git diff --name-only <base>...HEAD` is exactly the
+  30 owned files; `git status` clean.
+
+## Outcome
+
+DU-BENCH is complete with recorded gaps. The measured real baseline recall on
+independently authored gold is 0.000 / 0.143 / 0.667 / 0.000, and the strongest
+single finding is that `cn-ir` exhausted no budget at all — 11 candidates,
+11 selected, 9 of 10 gold facts still absent — so recall failure there is a
+candidate-generation problem, not a cap problem. US holdout remains
+UNAVAILABLE by design rather than filled with synthetic samples.
+
