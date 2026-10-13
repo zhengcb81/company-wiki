@@ -27,6 +27,8 @@ from typing import Any, Mapping
 
 from . import vocabulary as v
 from .decision import decide
+from .child_ranges import attachment_routes
+from .lifecycle import lifecycle_modifiers
 from .observation import Limits, Observation, ObservationError, UnitRef, parse_observation
 from .registry import profile_by_id, profile_wire
 from .signals import Signal, SignalBag, detect_signals
@@ -88,7 +90,7 @@ def route_document(
     _extend_conflict_reasons(parsed, bag, winner, reasons)
 
     alternatives = _alternatives(parsed, bag, winner)
-    child_routes = _child_routes(parsed, bag, limits)
+    child_routes = _child_routes(parsed, bag, limits, reasons)
     disposition = _disposition(parsed, winner)
     confidence = _confidence(parsed, bag, winner, disposition)
 
@@ -104,6 +106,7 @@ def route_document(
         "alternatives": alternatives,
         "child_routes": child_routes,
         "disposition_hint": disposition,
+        "modifiers": lifecycle_modifiers(parsed, family=winner.family),
     }
 
 
@@ -328,7 +331,7 @@ def _profiles_for_family(family: str) -> tuple[str, ...]:
 
 
 def _child_routes(
-    parsed: Observation, bag: SignalBag, limits: Mapping[str, Any] | None
+    parsed: Observation, bag: SignalBag, limits: Mapping[str, Any] | None, reasons: list[dict]
 ) -> list[dict]:
     """In-document sub-ranges that need their own reading, plus unread external links.
 
@@ -355,6 +358,10 @@ def _child_routes(
                     "reason": v.REASON_EXTERNAL_ATTACHMENT_NOT_READ,
                 }
             )
+
+    attachments, gaps = attachment_routes(parsed, cap=cap - len(child_routes))
+    child_routes.extend(attachments)
+    reasons.extend(gaps)
 
     for signal in bag.all:
         if signal.code != v.REASON_QA_STRUCTURE:
@@ -398,7 +405,7 @@ def _disposition(parsed: Observation, winner) -> str:
 
 def _has_readable_body(parsed: Observation) -> bool:
     """True when at least one probed unit carries non-whitespace text."""
-    return any(unit.text.strip() for unit in parsed.units)
+    return any(unit.text.strip() for unit in parsed.probes)
 
 
 def _confidence(

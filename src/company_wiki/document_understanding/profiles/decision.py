@@ -232,6 +232,20 @@ def _sec_profile(observation: Observation, bag: SignalBag) -> Candidate | None:
             form = "10-k"
         elif "SEC 中期期间报告措辞" in structural:
             form = "10-q"
+    if form in {"s-1", "f-1"}:
+        return Candidate(
+            profile_id="prospectus", family="prospectus", regime="sec",
+            subtype="sec_registration_" + form.replace("-", ""), score=80,
+            reasons=[(v.REASON_COVER_HEADING, _units(bag, "COVER_HEADING"),
+                      f"SEC 表单: {form.upper()}；注册发行用途，不推断首次上市")],
+        )
+    if form in {"8-k", "6-k"}:
+        return Candidate(
+            profile_id="generic", family="unknown", regime="sec",
+            subtype="sec_current_report_" + form.replace("-", ""), score=90,
+            reasons=[(v.REASON_COVER_HEADING, _units(bag, "COVER_HEADING"),
+                      f"SEC 表单: {form.upper()}；保留容器，附件按实际同源范围阅读")],
+        )
     mapping = {"10-k": "sec_10k", "10-q": "sec_10q", "20-f": "sec_20f"}
     if form not in mapping:
         return None
@@ -272,7 +286,7 @@ def _hk_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
             score=75,
             reasons=offering,
         )
-    periodic = [
+    periodic: list[tuple[str, Sequence[str], str]] = [
         (v.REASON_COVER_HEADING, _units(bag, "COVER_HEADING"), "港股定期报告措辞"),
         (v.REASON_TOC_STRUCTURE, _units(bag, "TOC_STRUCTURE"), "港股双语章节"),
     ]
@@ -423,7 +437,7 @@ def _cn_periodic_candidate(observation: Observation, bag: SignalBag) -> Candidat
         for signal in bag.all
     ) and not _has_periodic_self_identification(bag):
         return None
-    structure = [
+    structure: list[tuple[str, Sequence[str], str]] = [
         (v.REASON_COVER_HEADING, _units(bag, "COVER_HEADING"), _cover_detail(bag, "定期报告")),
         (v.REASON_TOC_STRUCTURE, _units(bag, "TOC_STRUCTURE"), "A股第N节章节编号"),
     ]
@@ -433,7 +447,7 @@ def _cn_periodic_candidate(observation: Observation, bag: SignalBag) -> Candidat
     section_units = _units(bag, v.REASON_SECTION_VOCABULARY)
 
     def reasons_for(detail: str) -> list[tuple[str, Sequence[str], str]]:
-        listed = [(code, ids, text) for code, ids, text in structure if ids]
+        listed: list[tuple[str, Sequence[str], str]] = [(code, ids, text) for code, ids, text in structure if ids]
         if not listed and section_units:
             listed.append(
                 (v.REASON_SECTION_VOCABULARY, section_units, "A股章节结构与业务章节")
@@ -567,7 +581,7 @@ def _release_candidate(observation: Observation, bag: SignalBag) -> Candidate | 
 def _generic_candidate(observation: Observation, bag: SignalBag) -> Candidate:
     ids = _any_unit(bag)
     detail = "无足够类型特征，按通用来源策略保守阅读"
-    reasons = [(v.REASON_LOW_INFORMATION, ids, detail)]
+    reasons: list[tuple[str, Sequence[str], str]] = [(v.REASON_LOW_INFORMATION, ids, detail)]
     if observation.declared_kind and observation.declared_kind != "unknown":
         reasons.append(
             (

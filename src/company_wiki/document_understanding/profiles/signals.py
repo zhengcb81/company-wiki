@@ -109,6 +109,8 @@ def is_title_evidence(unit: UnitRef) -> bool:
         return False
     if unit.kind in {"heading", "title"} or unit.heading_level is not None:
         return True
+    if unit.text_clipped:
+        return False
     # A bare short line (a cover/letterhead fragment) also counts, but only when it does
     # not read as a sentence -- prose that merely mentions a document name is excluded by
     # the punctuation and length test below.
@@ -226,6 +228,8 @@ def _is_structural_line(unit: UnitRef) -> bool:
     """True when a unit reads as a heading/TOC line rather than a sentence of prose."""
     if unit.kind in {"heading", "title"} or unit.heading_level is not None:
         return True
+    if unit.text_clipped:
+        return False
     stripped = (unit.text or "").strip()
     if not stripped or len(stripped) > 60:
         return False
@@ -960,13 +964,21 @@ def _detect_sec(
     # body cannot decide the form.
     own_lines = [unit for unit in (*cover, *self_id_units) if _is_structural_line(unit)]
 
+    # The first printed own form identifies the containing filing. Registry
+    # order must not let an attached 10-K replace an earlier outer 8-K.
     form = None
-    for candidate, aliases in SEC_FORMS.items():
-        if any(
-            matches_any(normalize(unit.text), aliases) for unit in labelled_units
-        ) or matches_any(title_text, aliases):
-            form = candidate
+    chosen_label_ids: tuple[str, ...] = ()
+    for unit in labelled_units:
+        match = _SEC_FORM_LABEL.search(normalize(unit.text))
+        if match:
+            form = match.group(1)
+            chosen_label_ids = (unit.unit_id,)
             break
+    if form is None:
+        for candidate, aliases in SEC_FORMS.items():
+            if matches_any(title_text, aliases):
+                form = candidate
+                break
     if form is None:
         short_haystack = title_text + " " + " ".join(
             normalize(unit.text) for unit in own_lines
@@ -979,7 +991,7 @@ def _detect_sec(
         # Metadata may supply a form only when the body does not contradict it. An HK
         # bilingual report whose metadata claims 10-K is a metadata error, not a 10-K;
         # ``design.md`` section 4 puts cover/section evidence above the file metadata.
-        declared = normalize(observation.form_type)
+        declared = normalize(observation.form_type).removeprefix("form ").removesuffix("/a")
         for candidate in SEC_FORMS:
             if declared == candidate:
                 form = candidate
@@ -992,14 +1004,14 @@ def _detect_sec(
     # A 10-Q refers to its own 10-K, so a stray unlabelled form name in prose must never
     # decide the form. When the document reports an interim period and no printed label was
     # found, the interim-period path decides instead.
-    if form is not None and not labelled:
+    if form in {"10-k", "10-q", "20-f"} and not labelled:
         if _looks_like_interim_period_report(
             toc_text + " " + " ".join(normalize(unit.text) for unit in body)
         ):
             form = None
 
     if form:
-        label_ids = tuple(unit.unit_id for unit in labelled_units) or evidence_ids
+        label_ids = chosen_label_ids or evidence_ids
         bag.add(bag.cover_signals, "COVER_HEADING", label_ids, f"SEC 表单: {form.upper()}")
 
     if matches_any(haystack, SEC_ANNUAL_FORM_WORDS) and form is None:
@@ -1058,7 +1070,7 @@ def _detect_sec(
 
 
 #: A form *label*: the form name preceded by "form", as printed on a filing cover.
-_SEC_FORM_LABEL = re.compile(r"\bform\s+(?:10-k|10-q|20-f|s-1|f-1|8-k|6-k)\b")
+_SEC_FORM_LABEL = re.compile(r"\bform\s+(10-k|10-q|20-f|s-1|f-1|8-k|6-k)\b")
 
 #: Wording that turns a form label into a pointer at someone else's filing.
 _SEC_POINTER_CUES = (
@@ -1086,7 +1098,7 @@ def _has_sec_form_label(haystack: str) -> bool:
 
 def _has_sec_structure_evidence(combined: str) -> bool:
     """True when the observed text already carries explicit SEC item structure."""
-    return (
+    return bool(
         count_matches(combined, SEC_10K_VOCAB) >= 2
         or count_matches(combined, SEC_20F_VOCAB) >= 2
         or matches_any(combined, ("item 2. management's discussion and analysis",))
@@ -1298,7 +1310,7 @@ def _detect_attachments(bag: SignalBag, observation: Observation) -> None:
     link_units = [
         unit
         for unit in observation.probes
-        if (unit.kind in ATTACHMENT_KINDS) or URL_PATTERN.search(unit.text or "")
+        if unit.kind in {"link", "external_link"} or URL_PATTERN.search(unit.text or "")
     ]
     if link_units:
         bag.add(
