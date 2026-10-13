@@ -46,8 +46,21 @@
     ],
     "cli": {
       "command": "python -X utf8 -m tools.document_understanding_benchmark --mode offline|native|adapter --bindings <json> --output <owned dir> [--review <json>] [--probe-config <file>]",
-      "exit_codes": {"0": "all PASS", "1": "FAIL present", "2": "refused to run", "3": "PARTIAL/UNAVAILABLE present"},
-      "options": ["--gold-dir", "--sample", "--adapter", "--review", "--probe-file", "--probe-config", "--cleanup"]
+      "exit_codes": {
+        "0": "all PASS",
+        "1": "FAIL present",
+        "2": "refused to run",
+        "3": "PARTIAL/UNAVAILABLE present"
+      },
+      "options": [
+        "--gold-dir",
+        "--sample",
+        "--adapter",
+        "--review",
+        "--probe-file",
+        "--probe-config",
+        "--cleanup"
+      ]
     },
     "wire_schemas": [
       "du-gold/1",
@@ -87,17 +100,29 @@
     "A": {
       "what": "gold and counterexamples frozen; current baseline real FAIL/PARTIAL recorded",
       "gold_set": {
-        "records": 11,
-        "development_records": 6,
+        "records": 15,
+        "development_records": 10,
         "holdout_records": 5,
-        "facts_total": 122,
-        "facts_critical": 81,
-        "max_quote_bytes_per_document": 842,
+        "facts_total": 176,
+        "facts_critical": 128,
+        "narrative_facts": 161,
+        "document_meta_facts": 15,
+        "max_quote_bytes_per_document": 2094,
         "quote_budget_bytes_per_document": 8192,
+        "card_minimum_set_elements": 14,
+        "card_minimum_set_gaps": 0,
         "holdout_markets": {
-          "a_share": ["holdout-cn-glodon-q1", "holdout-cn-yake-q1"],
-          "h_share": ["holdout-hk-alibaba-fy2023"],
-          "us": ["holdout-us-mongodb-10k", "holdout-us-nvidia-10k"]
+          "a_share": [
+            "holdout-cn-glodon-q1",
+            "holdout-cn-yake-q1"
+          ],
+          "h_share": [
+            "holdout-hk-alibaba-fy2023"
+          ],
+          "us": [
+            "holdout-us-mongodb-10k",
+            "holdout-us-nvidia-10k"
+          ]
         }
       },
       "commands": [
@@ -116,20 +141,31 @@
       ],
       "baseline_recall_by_scope": {
         "development": {
-          "documents": 6,
-          "critical_facts_passed": 9,
-          "critical_facts_total": 41,
-          "critical_fact_recall": 0.22
+          "documents": 10,
+          "critical_facts_passed": 10,
+          "critical_facts_evaluable": 57,
+          "critical_facts_declared": 83,
+          "critical_fact_coverage": 0.6867469879518072,
+          "critical_fact_recall": 0.17543859649122806,
+          "narrative_fact_recall": 0.19117647058823528,
+          "narrative_facts": "13/68",
+          "document_meta_fact_recall": 0.0,
+          "document_meta_facts": "0/9"
         },
         "holdout": {
           "documents": 5,
           "critical_facts_passed": 0,
-          "critical_facts_total": 45,
-          "critical_fact_recall": 0.0
+          "critical_facts_evaluable": 22,
+          "critical_facts_declared": 45,
+          "critical_fact_coverage": 0.4888888888888889,
+          "critical_fact_recall": 0.0,
+          "narrative_fact_recall": 0.0,
+          "narrative_facts": "0/36"
         }
       },
-      "headline": "Development critical recall 9/41 = 0.220 versus holdout 0/45 = 0.000. The two are reported separately and never merged, because the development samples were used to tune rules and only the holdout split speaks to generalisation.",
-      "note": "The baseline was NOT required to be green first, and no production code was touched to change any of these numbers."
+      "headline": "Development critical recall 10/57 = 0.175 over 57 evaluable of 83 declared (coverage 0.687); holdout 0/22 = 0.000 over 22 evaluable of 45 declared (coverage 0.489). UNAVAILABLE facts leave the denominator and are reported as coverage instead, so 'could not read' is never reported as 'found none'. Development document_meta recall is 0/9: the pipeline has no front-matter layer. The two splits are never merged.",
+      "note": "The baseline was NOT required to be green first, and no production code was touched to change any of these numbers.",
+      "baseline_recall_note": "Baseline was NOT required to be green first, and no production code was touched to change any of these numbers."
     },
     "B": {
       "what": "oracle unit + offline CLI green; deliberately bad observations must fail; independence and missing-field states pass",
@@ -147,8 +183,16 @@
           "fixture_bytes": 14301,
           "fixture_budget_bytes": 204800,
           "by_scope": {
-            "development": {"docs": 3, "critical": "6/7", "recall": 0.857},
-            "holdout": {"docs": 2, "critical": "5/5", "recall": 1.0}
+            "development": {
+              "docs": 3,
+              "critical": "6/7",
+              "recall": 0.857
+            },
+            "holdout": {
+              "docs": 2,
+              "critical": "5/5",
+              "recall": 1.0
+            }
           }
         }
       ],
@@ -195,17 +239,135 @@
         }
       ],
       "native_rows": [
-        {"sample_id": "cn-equity", "scope": "development", "routed_kind": "unknown", "selected": 96, "candidates": 449, "units": 3224, "pages": "96/96", "native_scan": "partial", "critical_recall": 0.0},
-        {"sample_id": "cn-h1", "scope": "development", "routed_kind": "semi_annual_report", "selected": 96, "candidates": 369, "units": 5500, "pages": "210/210", "native_scan": "partial", "critical_recall": 0.25},
-        {"sample_id": "cn-ipo-confirmation", "scope": "development", "routed_kind": "prospectus", "selected": 0, "candidates": 0, "units": 0, "pages": "0/1", "native_scan": "partial", "opaque_pages": [1], "critical_recall": 0.0},
-        {"sample_id": "cn-ir", "scope": "development", "routed_kind": "investor_relations", "selected": 11, "candidates": 11, "units": 302, "pages": "6/6", "native_scan": "complete", "critical_recall": 0.143},
-        {"sample_id": "cn-q-business", "scope": "development", "routed_kind": "quarterly_report", "selected": 28, "candidates": 28, "units": 579, "pages": "15/15", "native_scan": "partial", "critical_recall": 0.667},
-        {"sample_id": "hk-annual", "scope": "development", "routed_kind": "annual_report", "selected": 96, "candidates": 254, "units": 6502, "pages": "246/246", "native_scan": "partial", "opaque_pages": [246], "critical_recall": 0.0},
-        {"sample_id": "holdout-cn-glodon-q1", "scope": "holdout", "routed_kind": "quarterly_report", "selected": 0, "candidates": 0, "units": 257, "pages": "12/12", "native_scan": "partial", "critical_recall": 0.0},
-        {"sample_id": "holdout-cn-yake-q1", "scope": "holdout", "routed_kind": "quarterly_report", "selected": 2, "candidates": 2, "units": 369, "pages": "10/10", "native_scan": "partial", "critical_recall": 0.0},
-        {"sample_id": "holdout-hk-alibaba-fy2023", "scope": "holdout", "routed_kind": "annual_report", "selected": 96, "candidates": 2221, "units": 18038, "pages": "360/360", "native_scan": "partial", "critical_recall": 0.0},
-        {"sample_id": "holdout-us-mongodb-10k", "scope": "holdout", "routed_kind": null, "selected": null, "candidates": null, "units": null, "pages": null, "native_scan": "unavailable", "carrier": ".htm", "critical_recall": 0.0},
-        {"sample_id": "holdout-us-nvidia-10k", "scope": "holdout", "routed_kind": null, "selected": null, "candidates": null, "units": null, "pages": null, "native_scan": "unavailable", "carrier": ".htm", "critical_recall": 0.0}
+        {
+          "sample_id": "cn-equity",
+          "scope": "development",
+          "routed_kind": "unknown",
+          "selected": 96,
+          "candidates": 449,
+          "units": 3224,
+          "pages": "96/96",
+          "native_scan": "partial",
+          "critical_recall": 0.0
+        },
+        {
+          "sample_id": "cn-h1",
+          "scope": "development",
+          "routed_kind": "semi_annual_report",
+          "selected": 96,
+          "candidates": 369,
+          "units": 5500,
+          "pages": "210/210",
+          "native_scan": "partial",
+          "critical_recall": 0.25
+        },
+        {
+          "sample_id": "cn-ipo-confirmation",
+          "scope": "development",
+          "routed_kind": "prospectus",
+          "selected": 0,
+          "candidates": 0,
+          "units": 0,
+          "pages": "0/1",
+          "native_scan": "partial",
+          "opaque_pages": [
+            1
+          ],
+          "critical_recall": 0.0
+        },
+        {
+          "sample_id": "cn-ir",
+          "scope": "development",
+          "routed_kind": "investor_relations",
+          "selected": 11,
+          "candidates": 11,
+          "units": 302,
+          "pages": "6/6",
+          "native_scan": "complete",
+          "critical_recall": 0.143
+        },
+        {
+          "sample_id": "cn-q-business",
+          "scope": "development",
+          "routed_kind": "quarterly_report",
+          "selected": 28,
+          "candidates": 28,
+          "units": 579,
+          "pages": "15/15",
+          "native_scan": "partial",
+          "critical_recall": 0.667
+        },
+        {
+          "sample_id": "hk-annual",
+          "scope": "development",
+          "routed_kind": "annual_report",
+          "selected": 96,
+          "candidates": 254,
+          "units": 6502,
+          "pages": "246/246",
+          "native_scan": "partial",
+          "opaque_pages": [
+            246
+          ],
+          "critical_recall": 0.0
+        },
+        {
+          "sample_id": "holdout-cn-glodon-q1",
+          "scope": "holdout",
+          "routed_kind": "quarterly_report",
+          "selected": 0,
+          "candidates": 0,
+          "units": 257,
+          "pages": "12/12",
+          "native_scan": "partial",
+          "critical_recall": 0.0
+        },
+        {
+          "sample_id": "holdout-cn-yake-q1",
+          "scope": "holdout",
+          "routed_kind": "quarterly_report",
+          "selected": 2,
+          "candidates": 2,
+          "units": 369,
+          "pages": "10/10",
+          "native_scan": "partial",
+          "critical_recall": 0.0
+        },
+        {
+          "sample_id": "holdout-hk-alibaba-fy2023",
+          "scope": "holdout",
+          "routed_kind": "annual_report",
+          "selected": 96,
+          "candidates": 2221,
+          "units": 18038,
+          "pages": "360/360",
+          "native_scan": "partial",
+          "critical_recall": 0.0
+        },
+        {
+          "sample_id": "holdout-us-mongodb-10k",
+          "scope": "holdout",
+          "routed_kind": null,
+          "selected": null,
+          "candidates": null,
+          "units": null,
+          "pages": null,
+          "native_scan": "unavailable",
+          "carrier": ".htm",
+          "critical_recall": 0.0
+        },
+        {
+          "sample_id": "holdout-us-nvidia-10k",
+          "scope": "holdout",
+          "routed_kind": null,
+          "selected": null,
+          "candidates": null,
+          "units": null,
+          "pages": null,
+          "native_scan": "unavailable",
+          "carrier": ".htm",
+          "critical_recall": 0.0
+        }
       ],
       "baseline_findings": [
         {
@@ -240,8 +402,12 @@
         }
       ],
       "carrier_reality": {
-        "supported_in_this_run": {".pdf": "supported, 9 documents"},
-        "unsupported_in_this_run": {".htm": "UNSUPPORTED, 2 documents, both UNAVAILABLE"},
+        "supported_in_this_run": {
+          ".pdf": "supported, 9 documents"
+        },
+        "unsupported_in_this_run": {
+          ".htm": "UNSUPPORTED, 2 documents, both UNAVAILABLE"
+        },
         "measured_evidence": {
           "method": "probe_non_pdf_html() over two real 10-K HTML originals (MongoDB FY2026, Microsoft FY2025)",
           "result": "extract_transcript_material accepts the bytes; parse_transcript_text then returns units=0, page_count=0, errors=('transcript_start_missing',)",
@@ -257,7 +423,9 @@
     "reviewer": "independent-subagent",
     "samples_reviewed": 5,
     "claims_reviewed": 11,
-    "verdicts": {"ENTAILED": 11},
+    "verdicts": {
+      "ENTAILED": 11
+    },
     "advisory_gaps_raised_by_reviewer": [
       "clean-annual claim 0 carries an absolute date (2024-12-31) that its quoted span does not show; it matches the gold's declared period, so it is a period label rather than a basis defect.",
       "clean-annual claim 2's span alone cannot prove the 28,000万元 is an unspent plan rather than spend-to-date.",
@@ -267,7 +435,7 @@
     "reviewer_caveat_acted_on": "The reviewer reported that the fixture set contains no seeded entailment defect and therefore cannot act as a discriminating negative control. controls.py was added in response: it injects three defects that no deterministic check catches and shows the review stage closes them, and separately shows an all-ENTAILED review cannot upgrade a deterministic FAIL.",
     "native_semantics_status": "NOT_EVALUATED. The native baseline emits zero claims and zero semantic units across all 11 documents (measured), so there is nothing to entail-review end to end. Advancing this needs ROOT to wire a summary producer."
   },
-  "tests_passed": 100,
+  "tests_passed": 105,
   "tests_failed": 0,
   "tests_skipped": 7,
   "tests_real_data_passed": 7,
@@ -278,16 +446,17 @@
     "Entailment review of native output - the baseline emits no claims, so there is nothing to review"
   ],
   "known_gaps": [
-    "The native baseline emits zero claims and zero semantic units for every document, so context_completeness, role_modality_quantity and semantics.entailment are structurally NOT_EVALUATED until ROOT wires in the DU-STRUCTURE/DU-PROFILES packages and a summary producer.",
-    "US SEC filings (HTML) have no route into the existing selector. This is measured, not inferred: parse_transcript_text returns 0 units with transcript_start_missing for two real 10-Ks. US quality therefore cannot be scored at all today.",
-    "No real US S-1/F-1, 8-K/6-K attachment container, or amended/original revision pair is covered in the gold.",
+    "US SEC filings (HTML) still have no route into the existing selector, so 4 documents including 2 holdout records cannot be scored at all. Measured: parse_transcript_text returns 0 units with transcript_start_missing for real 10-Ks.",
+    "document_meta recall is 0/9 in the development split: facts about audit status, fiscal vs calendar year, TOC-vs-body, page counts and provenance have no layer that carries them.",
+    "The native baseline emits zero claims and zero semantic units for every document, so context_completeness, role_modality_quantity and semantics.entailment stay structurally NOT_EVALUATED until ROOT wires in structure and a summary producer.",
+    "No real US S-1/F-1, 8-K/6-K attachment container, or amended/original revision pair is covered.",
     "H-share holdout rests on one company (Alibaba).",
     "The oracle detects quantity-unit mismatches, basis contradictions, subject swaps and lifecycle-stage advancement from a fixed vocabulary and a tracked-actor list. Paraphrases outside those vocabularies are reported as NOT_EVALUATED rather than guessed, so measured recall is a lower bound on the true defect set.",
     "The tracked-actor list in checkers.py is a fixed vocabulary by design; it will not catch a subject swap between two actors it does not know.",
     "derived_space and time_resource limits are the benchmark's own defaults, not ROOT's production budget; ROOT should pass its real limits.",
-    "The 20 survey samples are development seeds, not blind holdout. No blind-test claim is made. The 5 holdout records were authored by reading originals that were never used to tune rules, which is the strongest available claim here, but they are not a random sample.",
-    "cn-annual, cn-ipo, cn-q-sparse, cn-convertible, cn-ir-policy and the four remaining HK/US survey samples still have no gold.",
-    "holdout-us-* gold facts were authored from an independent subagent's verbatim extraction rather than by the lane reading the HTML directly, because the lane has no HTML text path. The quotes are verbatim but were not re-read page by page here."
+    "The 20 survey samples are development seeds, not blind holdout. The 5 holdout records were authored from originals never used to tune rules, which is the strongest claim available here, but they are not a random sample.",
+    "holdout-us-* gold facts were authored from an independent subagent's verbatim extraction rather than by this lane reading the HTML directly, because the lane has no HTML text path. The quotes are verbatim but were not re-read page by page here.",
+    "cn-annual, cn-ipo, cn-convertible, cn-ir-policy, cn-q-sparse-adjacent survey samples and the remaining HK/US survey documents still have no gold."
   ],
   "not_yet_automatically_checkable": [
     "Whether a summary sentence is semantically entailed by its cited evidence, unless an independent review is supplied; the result carries spot_read_list for it.",
@@ -299,24 +468,45 @@
     "Whether an unsupported interpretation attached to a correct number is wrong, without a reviewer; this is measured as deterministic-blind by controls.py."
   ],
   "acquisition_requests": [
-    {"id": "REQ-1", "priority": "high", "what": "an HTML front-end for SEC filings in the existing normalization path", "why": "measured: two real 10-Ks yield 0 units through the only HTML route, so US quality cannot be scored at all"},
-    {"id": "REQ-2", "priority": "high", "what": "one real US S-1 or F-1 registration statement"},
-    {"id": "REQ-3", "priority": "medium", "what": "one real 8-K or 6-K whose exhibit is itself a business document"},
-    {"id": "REQ-4", "priority": "medium", "what": "one amended filing paired with its original for the same period"},
-    {"id": "REQ-5", "priority": "low", "what": "one second H-share annual report outside e-commerce"}
+    {
+      "id": "REQ-1",
+      "priority": "high",
+      "what": "an HTML front-end for SEC filings in the existing normalization path",
+      "why": "measured: two real 10-Ks yield 0 units through the only HTML route, so US quality cannot be scored at all"
+    },
+    {
+      "id": "REQ-2",
+      "priority": "high",
+      "what": "one real US S-1 or F-1 registration statement"
+    },
+    {
+      "id": "REQ-3",
+      "priority": "medium",
+      "what": "one real 8-K or 6-K whose exhibit is itself a business document"
+    },
+    {
+      "id": "REQ-4",
+      "priority": "medium",
+      "what": "one amended filing paired with its original for the same period"
+    },
+    {
+      "id": "REQ-5",
+      "priority": "low",
+      "what": "one second H-share annual report outside e-commerce"
+    }
   ],
   "resource_observations": {
     "model_calls": 0,
     "paid_calls": 0,
     "network_calls": 0,
     "raw_copies": 0,
-    "gold_quote_bytes_max_per_document": 842,
+    "gold_quote_bytes_max_per_document": 2094,
     "gold_quote_budget_per_document": 8192,
     "offline_fixture_bytes": 14301,
     "offline_fixture_budget": 204800,
-    "native_elapsed_seconds": 48.8,
-    "native_peak_rss_bytes": 121929728,
-    "offline_peak_rss_bytes": 21049344,
+    "native_elapsed_seconds": 180.727,
+    "native_peak_rss_bytes": 302997504,
+    "offline_peak_rss_bytes": 21155840,
     "peak_rss_measured": true
   },
   "raw_preservation": {
@@ -340,5 +530,49 @@
     "note": "cleanup_owned refuses to delete a directory that lacks the .du-bench-owned marker; a test asserts this."
   },
   "install_actions": "none",
-  "next_root_action": "Four actions. (1) Wire an HTML front-end for SEC filings into the existing normalization path: two real 10-Ks currently yield 0 units, so the entire US leg is unscorable. (2) Inject a real du-input/1 adapter through observer.observe_du_adapter so context_completeness and role_modality_quantity stop being NOT_EVALUATED, and then supply a summary producer so semantics.entailment has claims to review. (3) Pass ROOT's real derived/time limits via evaluate(limits=...). (4) Decide the acquisition requests, especially REQ-1. Note the measured baseline: development critical recall 0.220 versus holdout 0.000, with zero candidates generated for one real A-share quarterly report."
+  "next_root_action": "Five actions. (1) Wire an HTML front-end for SEC filings: 4 documents including 2 holdout records currently return 0 units, so the US leg is unscorable. (2) Inject a real du-input/1 adapter through observer.observe_du_adapter so context_completeness and role_modality_quantity stop being NOT_EVALUATED, then supply a summary producer so semantics.entailment has claims to review. (3) Add a document-metadata/front-matter layer: document_meta recall is measured at 0/9. (4) Pass ROOT's real derived/time limits via evaluate(limits=...). (5) Decide the acquisition requests, especially REQ-1. Measured baseline: development critical recall 0.175 (narrative 0.191), holdout 0.000 (narrative 0/36), with zero candidates generated for two real A-share quarterly reports.",
+  "gold_set": {
+    "records": 15,
+    "development_records": 10,
+    "holdout_records": 5,
+    "facts_total": 176,
+    "facts_critical": 128,
+    "narrative_facts": 161,
+    "document_meta_facts": 15,
+    "max_quote_bytes_per_document": 2094,
+    "quote_budget_bytes_per_document": 8192,
+    "card_minimum_set_elements": 14,
+    "card_minimum_set_gaps": 0,
+    "holdout_markets": {
+      "a_share": [
+        "holdout-cn-glodon-q1",
+        "holdout-cn-yake-q1"
+      ],
+      "h_share": [
+        "holdout-hk-alibaba-fy2023"
+      ],
+      "us": [
+        "holdout-us-mongodb-10k",
+        "holdout-us-nvidia-10k"
+      ]
+    }
+  },
+  "benchmark_self_defects_fixed": [
+    {
+      "defect": "critical_fact_recall used the declared denominator while fact_recall used the effective one, so an unreadable document reported 0.000 recall instead of no figure.",
+      "fix": "both now exclude UNAVAILABLE from the denominator; coverage and *_denominator_declared are reported separately; two regression tests."
+    },
+    {
+      "defect": "make_bindings overwrote the bindings file, silently dropping the 5 holdout entries that the survey manifest does not list. A dropped binding is indistinguishable from a missing original, so holdout coverage silently fell to 0.000.",
+      "fix": "existing non-manifest bindings are preserved by default (--replace opts out); regression test added."
+    },
+    {
+      "defect": "gold facts did not distinguish business content from document/provenance facts, so us-txt recall mixed 'the selector should carry this' with 'the document says this'.",
+      "fix": "added an optional fact_scope field (narrative | document_meta, default narrative) and report both splits."
+    },
+    {
+      "defect": "the card's minimum critical set had no guard, so 4 of its 9 elements had no gold at all (cn-q-sparse, us-10k, us-txt, us-20f).",
+      "fix": "authored the 4 missing records and added tests that fail if any element is renamed, dropped or hollowed out."
+    }
+  ]
 }

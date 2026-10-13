@@ -89,7 +89,7 @@ def _print_scope_summary(summary: dict[str, Any]) -> None:
         narrative_text = "n/a" if narrative is None else f"{narrative:.3f}"
         meta_text = "n/a" if meta is None else f"{meta:.3f}"
         print(
-            f"  {'':<12} narrative={row.get('narrative_facts_passed', 0)}/"
+            f"  {'':<12} all-facts: narrative={row.get('narrative_facts_passed', 0)}/"
             f"{row.get('narrative_facts_total', 0)} ({narrative_text})  "
             f"document_meta={row.get('document_meta_facts_passed', 0)}/"
             f"{row.get('document_meta_facts_total', 0)} ({meta_text})"
