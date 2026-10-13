@@ -119,6 +119,38 @@
   },
   "model_external_calls": 0,
   "paid_cost_usd": 0,
-  "publish": "normal push in progress",
-  "mother_G2_G4_G5": "open"
+  "publish": "completed: normal push and exact code-SHA CI all success",
+  "mother_G2_G4_G5": "open",
+  "publication": {
+    "company-wiki": {
+      "acceptance_sha": "536c89870fa64197d0a19cb7a9ee4d7e97f009d0",
+      "ci_id": 38441883277,
+      "ci": "success",
+      "pre_push_passed": 3706,
+      "pre_push_test_seconds": 341.36
+    },
+    "filing-fetch": {
+      "sha": "e2efa81d7995836d457479eb528fa6f8cd5dc3f3",
+      "ci_id": 38440866717,
+      "ci": "success",
+      "pre_push_passed": 752,
+      "subtests": 78,
+      "pre_push_test_seconds": 75.86
+    },
+    "revenue-forecast": {
+      "sha": "f0d694d69a05ef3f7a449e87cd91cdb44d1ff8ce",
+      "ci_id": 38440788331,
+      "ci": "success",
+      "pre_push_passed": 416,
+      "subtests": 36,
+      "pre_push_test_seconds": 39.35
+    }
+  },
+  "cleanup": {
+    "removed_quality_worktrees": 3,
+    "freed_code_copy_bytes": 145244701,
+    "raw_document_deletions": 0,
+    "du_untouched": true,
+    "git_commits_retained": true
+  }
 }

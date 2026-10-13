@@ -1,0 +1,35 @@
+{
+  "schema_version": "architecture-quality-cleanup/1",
+  "rows": [
+    {
+      "repository": "company-wiki",
+      "worktree_sha": "1f9f0673b23513640ca9e0e3c46ace28fa1b1136",
+      "tracked_untracked_clean": true,
+      "merged_to_main": true,
+      "code_copy_bytes": 100813412,
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\architecture-quality-20261013\\company-wiki",
+      "removed": true
+    },
+    {
+      "repository": "filing-fetch",
+      "worktree_sha": "e2efa81d7995836d457479eb528fa6f8cd5dc3f3",
+      "tracked_untracked_clean": true,
+      "merged_to_main": true,
+      "code_copy_bytes": 14822046,
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\architecture-quality-20261013\\filing-fetch",
+      "removed": true
+    },
+    {
+      "repository": "revenue-forecast",
+      "worktree_sha": "f0d694d69a05ef3f7a449e87cd91cdb44d1ff8ce",
+      "tracked_untracked_clean": true,
+      "merged_to_main": true,
+      "code_copy_bytes": 29609243,
+      "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\architecture-quality-20261013\\revenue-forecast",
+      "removed": true
+    }
+  ],
+  "freed_code_copy_bytes": 145244701,
+  "du_worktrees_untouched": true,
+  "git_commits_retained": true
+}

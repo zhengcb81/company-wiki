@@ -15,3 +15,5 @@ B收口：FF35新反例、742既有集中项已绿，准备最终commit；RF依�
 FF已正常接收/推送main5cfad11，最终pre-push746PASS/7既有SKIP/78subtests，64.86秒。10个runtime文件定点同步后fresh CLI捕获.codex旧依赖ImportError；ROOT完整owned plan证明仅ff_provider_cause漂移，只补该1文件后三安装面fresh CLI正常、0calls/0downloads且tmp恢复，完整owned runtime均MATCH。ROOT首次错误假设诊断在stderr，已按既有stdout契约纠正探针，未改产品迁就探针。CWP第一commit d71c8e4f已接本地主线，266PASS/1平台skip；第二存储route/hook收口独立施工中。RF213相关＋31native双向精确＋三公司经济输出一致已验，删除无消费者队列/便携hook及peer风险收口进行中。整个B尚未整体关闭。
 
 用户再次明确继续全面根因收口；ROOT三仓agent保持独立，DU三工作树零写。第二收口在进行：CWP确定现存route.adapter_id未被scanner实际消费，不只是启发式误拒，新增22反例19在基线失败，按ordered group owner及共享预算修。RF独立peer两项已确认会误拒正确A→B最终收入归属，作者在共享依赖层传递有效收入/确认期，不另建金额计算器。FF定点安装完整runtime诊断纳入低层工具，避免scope完成误称整包就绪，仍不扩大写入。中期保护检查RF150文件、FF1文件、三仓17配置文件SHA/mtime全部保持；FF精确CI38373344334 success。
+
+最终C闭环：三仓精确CI全部success：CWP536c8987/run38441883277、FFe2efa81d/run38440866717、RFf0d694d6/run38440788331。正常pre-push分别3706PASS/341.36秒、752PASS+78subtests/75.86秒、416PASS+36subtests/39.35秒；CWP这次config+hook广泛变动才跑全部unit，不给每个小commit加重门。三个质量工作树干净、提交为main祖先，正常git worktree remove释放145,244,701字节；Git提交、原件、RF150WIP、17份生产配置及三DU工作树保留。最终证据约0.5MiB，无LLM费用。本轮A/B/C完成，母真实G2/G4/G5及DU集成仍开放。

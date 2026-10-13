@@ -1,0 +1,7 @@
+{
+  "acceptance_sha": "536c89870fa64197d0a19cb7a9ee4d7e97f009d0",
+  "ci_id": 38441883277,
+  "ci": "success",
+  "pre_push_passed": 3706,
+  "pre_push_test_seconds": 341.36
+}

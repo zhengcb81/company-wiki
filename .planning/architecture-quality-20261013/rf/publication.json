@@ -1,0 +1,26 @@
+{
+  "schema_version": "architecture-quality-publication/1",
+  "repository": "revenue-forecast",
+  "main_sha": "f0d694d69a05ef3f7a449e87cd91cdb44d1ff8ce",
+  "pushed": true,
+  "normal_pre_push": {
+    "passed": 416,
+    "subtests": 36,
+    "test_seconds": 39.35
+  },
+  "ci": {
+    "id": 38440788331,
+    "head_sha": "f0d694d69a05ef3f7a449e87cd91cdb44d1ff8ce",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/38440788331"
+  },
+  "installation": {
+    "selected_file_union": 21,
+    "current_changes": 14,
+    "historical_codex_dependencies": 7,
+    "full_owned_matches": true,
+    "fresh_checks": 6,
+    "physical_targets": 2
+  },
+  "wip_preserved_files": 150
+}

@@ -23,3 +23,5 @@
 九型finite G2全部PASS（66.658秒），9实际RF读取、8首批loopback POST/0复用/2版本失效POST；0远端模型费用。展开38文件226,324字节逐字节归档为60,309字节ZIP后删除自有展开副本，owned根恢复，原件没有删除。真实摘要质量仍由母计划供应商及独立四审验收。
 
 部署根因已系统收口：FF低层copy明确scope状态与完整runtime drift分开、执行NOT_EVALUATED；ROOT先完整plan再定点应用、fresh入口核验。发现.codex FF1旧依赖、RF7旧依赖/说明后分别定点补齐，未全目录覆盖或替换用户config。RF退休队列作为历史工具保留Git/legacy回放，生产无enqueue/发货；原schema/model会计常量及有实际调用的wire/attestation不盲删。
+
+最终发布事实：三仓全部主线/远端及精确CI通过，完整owned安装闭包和fresh运行已核。冻结旧实现只保留有实际legacy调用的边界，生产ghost queue已退休；协议/货币/数学模型常量没有任意配置化。ROOT不宣称逐行证明无任何缺陷：真实资料/模型语义、DU策略召回仍按母计划验收，避免工程绿取代业务质量。

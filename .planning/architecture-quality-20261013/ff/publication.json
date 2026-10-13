@@ -1,13 +1,13 @@
 {
   "schema_version": "architecture-quality-publication/1",
   "repository": "filing-fetch",
-  "main_sha": "5cfad11b4ea533b4b1fadd081945e52018eb96e1",
+  "main_sha": "e2efa81d7995836d457479eb528fa6f8cd5dc3f3",
   "pushed": true,
   "normal_pre_push": {
-    "passed": 746,
+    "passed": 752,
     "skipped": 7,
     "subtests": 78,
-    "test_seconds": 64.86
+    "test_seconds": 75.86
   },
   "installed_scope_files": 10,
   "logical_surfaces": [
@@ -17,17 +17,32 @@
   ],
   "physical_targets": 2,
   ".claude_aliases": ".agents",
-  "cross_repo_final_node": "pending",
+  "cross_repo_final_node": "PASS in scope; full suite PARTIAL honestly",
   "ci": {
-    "id": 38373344334,
+    "id": 38440866717,
+    "head_sha": "e2efa81d7995836d457479eb528fa6f8cd5dc3f3",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/38373344334",
-    "head_sha": "5cfad11b4ea533b4b1fadd081945e52018eb96e1"
+    "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/38440866717"
   },
   "dependency_repair": {
     "scope": "scripts/ff_provider_cause.py",
     "physical_target": ".codex/skills/filing-fetch",
     "full_runtime_check": "MATCH",
     "fresh_cli_surfaces": 3
+  },
+  "first_publication": {
+    "sha": "5cfad11b4ea533b4b1fadd081945e52018eb96e1",
+    "ci": {
+      "id": 38373344334,
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/38373344334",
+      "head_sha": "5cfad11b4ea533b4b1fadd081945e52018eb96e1"
+    },
+    "pre_push": {
+      "passed": 746,
+      "skipped": 7,
+      "subtests": 78,
+      "test_seconds": 64.86
+    }
   }
 }
