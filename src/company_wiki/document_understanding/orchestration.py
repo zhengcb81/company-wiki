@@ -38,16 +38,20 @@ def build_dependency_packages(
     structure: Mapping[str, Any],
     *,
     route: Mapping[str, Any] | None = None,
+    profile: Mapping[str, Any] | None = None,
     max_packages: int = 400,
     max_members: int = 64,
 ) -> dict[str, Any]:
     """Turn a ``du-structure/1`` result into budgetable atomic packages.
 
-    ``route`` is optional.  When present it only prioritises: routing never
-    removes a unit, and an unknown route still yields packages.
+    ``route`` and ``profile`` are both optional and only prioritise: routing never
+    removes a unit, and an unknown route still yields packages. Pass the profile from
+    ``get_profile(route["profile_id"])`` to apply that document type's own reading
+    order; passing only the route leaves the generic order in place, which is a valid
+    but less informed result.
     """
     sections = {section["section_id"]: section for section in structure.get("sections", ())}
-    role_priority = _role_priority(route)
+    role_priority = _role_priority(route, profile)
 
     packages: list[dict[str, Any]] = []
     for semantic in structure.get("semantic_units", ()):
@@ -124,8 +128,18 @@ def _dominant_role(sections: Mapping[str, Any], section_ids: Sequence[str]) -> s
     return max(sorted(counts), key=lambda role: counts[role])
 
 
-def _role_priority(route: Mapping[str, Any] | None) -> dict[str, int]:
-    """Priorities are a preference order only; they never delete a package."""
+def _role_priority(
+    route: Mapping[str, Any] | None,
+    profile: Mapping[str, Any] | None = None,
+) -> dict[str, int]:
+    """Priorities are a preference order only; they never delete a package.
+
+    The section priorities live on the *profile*, not on the route: ``route_document``
+    returns which document this is, while ``get_profile`` returns how to read it. Taking
+    them from the route (or from a route that has no such key) silently degrades every
+    document to the same generic order, so both objects are accepted here and the profile
+    wins when present.
+    """
     base = {
         "business": 3,
         "management_discussion": 3,
@@ -139,9 +153,8 @@ def _role_priority(route: Mapping[str, Any] | None) -> dict[str, int]:
         "administrative": 1,
         "unknown": 2,
     }
-    if not route:
-        return base
-    for entry in route.get("section_priorities", ()) or ():
+    entries = _section_priority_entries(profile) or _section_priority_entries(route)
+    for entry in entries:
         role = entry.get("section_role")
         priority = entry.get("priority")
         if isinstance(role, str) and isinstance(priority, int) and role in base:
@@ -149,6 +162,16 @@ def _role_priority(route: Mapping[str, Any] | None) -> dict[str, int]:
             # selection score, so invert it.
             base[role] = 4 - max(1, min(3, priority))
     return base
+
+
+def _section_priority_entries(source: Mapping[str, Any] | None) -> list[Mapping[str, Any]]:
+    """Return a source's section-priority entries, whichever shape it uses."""
+    if not source:
+        return []
+    entries = source.get("section_priorities")
+    if isinstance(entries, Sequence) and not isinstance(entries, (str, bytes)):
+        return [entry for entry in entries if isinstance(entry, Mapping)]
+    return []
 
 
 def _package_diagnostics(

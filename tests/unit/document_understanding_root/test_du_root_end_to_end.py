@@ -18,7 +18,7 @@ from pathlib import Path
 
 import pytest
 
-REPO = Path(__file__).resolve().parents[2]
+REPO = Path(__file__).resolve().parents[3]
 SOURCE = REPO / "src"
 if str(SOURCE) not in sys.path:
     sys.path.insert(0, str(SOURCE))
