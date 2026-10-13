@@ -1,0 +1,76 @@
+{
+  "dense_front_probe": {
+    "total_units": 701,
+    "selected_ids": [
+      "h0",
+      "h1",
+      "h2",
+      "h3",
+      "h77",
+      "h151",
+      "h225",
+      "p0",
+      "p133",
+      "p266",
+      "p399",
+      "tail"
+    ],
+    "probed_chars": 106,
+    "probe_limited": true
+  },
+  "sec_form_routes": {
+    "S-1": {
+      "profile_id": "prospectus",
+      "family": "prospectus",
+      "subtype": "sec_registration_s1",
+      "confidence": "high",
+      "child_routes": []
+    },
+    "F-1": {
+      "profile_id": "prospectus",
+      "family": "prospectus",
+      "subtype": "sec_registration_f1",
+      "confidence": "high",
+      "child_routes": []
+    },
+    "8-K": {
+      "profile_id": "generic",
+      "family": "unknown",
+      "subtype": "sec_current_report_8k",
+      "confidence": "low",
+      "child_routes": [
+        {
+          "unit_ids": [
+            "u3",
+            "u4",
+            "u5",
+            "u6"
+          ],
+          "profile_id": "results_release",
+          "reason": "IN_DOCUMENT_ATTACHMENT_RANGE"
+        }
+      ]
+    },
+    "6-K": {
+      "profile_id": "generic",
+      "family": "unknown",
+      "subtype": "sec_current_report_6k",
+      "confidence": "low",
+      "child_routes": [
+        {
+          "unit_ids": [
+            "u3",
+            "u4",
+            "u5",
+            "u6"
+          ],
+          "profile_id": "results_release",
+          "reason": "IN_DOCUMENT_ATTACHMENT_RANGE"
+        }
+      ]
+    }
+  },
+  "paid_calls": 0,
+  "paid_usd": 0,
+  "raw_writes": 0
+}
