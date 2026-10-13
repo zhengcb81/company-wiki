@@ -53,6 +53,11 @@ NARRATIVE = "narrative"
 DOCUMENT_META = "document_meta"
 FACT_SCOPES = frozenset({NARRATIVE, DOCUMENT_META})
 
+REQUIRED_BUSINESS = "required_business"
+DISPOSITION_CONTEXT = "disposition_context"
+CORRECTNESS_IF_EMITTED = "correctness_if_emitted"
+TARGET_KINDS = frozenset({REQUIRED_BUSINESS, DISPOSITION_CONTEXT, CORRECTNESS_IF_EMITTED})
+
 # claim modality: who is speaking and whether it happened
 MODALITY_VALUES = frozenset(
     {

@@ -208,7 +208,9 @@ def test_legibility_does_not_mask_a_missed_fact():
     """A passing legibility check must not rescue recall."""
 
     good = "本公司截至二零二五年十二月三十一日止年度的收入為人民幣一千零三十四點六百萬元。" * 20
-    result = evaluate(_observed(good), _gold())
+    observed = _observed(good)
+    observed["selected_evidence"] = []
+    result = evaluate(observed, _gold())
     assert _check(result)["status"] == "PASS"
     assert _check(result, "recall.f")["status"] == "FAIL"
     assert result["status"] == "FAIL"

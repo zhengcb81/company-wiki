@@ -1,0 +1,495 @@
+{
+  "schema_version": "du-bench-reception-real-html/1",
+  "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "source_units": 5215,
+  "selected_span_count": 96,
+  "selected_evidence_count": 96,
+  "entry": {
+    "entry_point": "company_wiki.source_catalog.narrative_evidence",
+    "parse_entry": "normalize_document",
+    "parser_version": "1.0.0",
+    "selector_version": "0.8.0",
+    "calls": 0,
+    "elapsed_seconds": 11.841,
+    "mode": "native"
+  },
+  "evaluation_status": "FAIL",
+  "dimensions": {
+    "bilingual_redundancy": {
+      "checks": 1,
+      "pass": 1,
+      "fail": 0,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 0
+    },
+    "citation_replay": {
+      "checks": 1,
+      "pass": 1,
+      "fail": 0,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 0
+    },
+    "context_completeness": {
+      "checks": 2,
+      "pass": 1,
+      "fail": 0,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 1
+    },
+    "critical_fact_recall": {
+      "checks": 8,
+      "pass": 4,
+      "fail": 4,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 0
+    },
+    "derived_space": {
+      "checks": 1,
+      "pass": 0,
+      "fail": 0,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 1
+    },
+    "disposition_context": {
+      "checks": 2,
+      "pass": 0,
+      "fail": 0,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 2
+    },
+    "observation_integrity": {
+      "checks": 4,
+      "pass": 4,
+      "fail": 0,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 0
+    },
+    "role_modality_quantity": {
+      "checks": 13,
+      "pass": 4,
+      "fail": 0,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 9
+    },
+    "route_type": {
+      "checks": 1,
+      "pass": 1,
+      "fail": 0,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 0
+    },
+    "time_resource": {
+      "checks": 1,
+      "pass": 1,
+      "fail": 0,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 0
+    },
+    "untested_semantics": {
+      "checks": 1,
+      "pass": 0,
+      "fail": 0,
+      "partial": 0,
+      "unavailable": 0,
+      "not_evaluated": 1
+    }
+  },
+  "metrics": {
+    "critical_fact_recall": 0.5,
+    "critical_fact_recall_denominator": 8,
+    "critical_fact_recall_denominator_declared": 8,
+    "critical_fact_unavailable": 0,
+    "critical_fact_not_evaluated": 0,
+    "optional_correctness_facts": 2,
+    "critical_fact_coverage": 1.0,
+    "narrative_fact_recall": 0.5,
+    "narrative_facts_passed": 4,
+    "narrative_facts_total": 8,
+    "document_meta_fact_recall": null,
+    "document_meta_facts_passed": 0,
+    "document_meta_facts_total": 0,
+    "fact_recall": 0.5,
+    "fact_recall_denominator": 8,
+    "fact_recall_denominator_declared": 8,
+    "route_accuracy": 1.0,
+    "evidence_validity": 1.0,
+    "basis_pass_rate": 1.0,
+    "context_completeness": null,
+    "selected_span_count": 96,
+    "claim_count": 0,
+    "semantic_unit_count": 0,
+    "review_supplied": false,
+    "reviewed_claims": 0,
+    "selected_spans": 96,
+    "candidate_count": 195,
+    "source_units": 5215,
+    "dropped_financial_count": 3378,
+    "omitted_candidate_count": 99,
+    "selection_limit": 96,
+    "page_count": 0,
+    "pages_read": 0,
+    "selected_text_bytes": 49353,
+    "read_text_dense_chars": 265789,
+    "unusable_block_ratio": 0.0,
+    "unusable_block_chars": 0,
+    "parse_seconds": 5.675,
+    "select_seconds": 6.167,
+    "selector_status": "partial"
+  },
+  "checks": [
+    {
+      "check_id": "integrity.source_identity",
+      "dimension": "observation_integrity",
+      "status": "PASS",
+      "expected": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "observed": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "integrity.selected_source_material",
+      "dimension": "observation_integrity",
+      "status": "PASS",
+      "expected": "every selected locator carries original source text",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "route.family",
+      "dimension": "route_type",
+      "status": "PASS",
+      "expected": [
+        "annual",
+        "sec_10k"
+      ],
+      "observed": "annual",
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "integrity.text_legibility",
+      "dimension": "observation_integrity",
+      "status": "PASS",
+      "expected": "unusable-block ratio < 0.005",
+      "observed": {
+        "unusable_block_ratio": 0.0,
+        "dense_chars": 265789,
+        "basis": "parsed_text"
+      },
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-azure-is-consumption-based",
+      "dimension": "critical_fact_recall",
+      "status": "FAIL",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "absent or unread",
+      "evidence_refs": [],
+      "detail": "Azure 的官方收入机制表述是「mainly affected by infrastructure-as-a-service and platform-as-a-service **consumption-based** services」——**消费制**（按用量）。与之相对，每用户/席位口径属于 **Microsoft 365 Commercial**（「average revenue per user expansion」）。把 Azure 说成席位制、或把两者的计费机制混为一谈，是本样本最核心的口径错。"
+    },
+    {
+      "check_id": "recall.f-azure-inside-intelligent-cloud",
+      "dimension": "critical_fact_recall",
+      "status": "FAIL",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "absent or unread",
+      "evidence_refs": [],
+      "detail": "Azure **不是独立报告行**：它是「Azure and other cloud services」的组成部分，后者又属于「Server products and cloud services」，再属于 **Intelligent Cloud** 分部 —— 三层嵌套。所以「Azure 分部收入」这一说法双重错误；把 Azure 等同于 Intelligent Cloud 会把合并口径当单一产品口径。"
+    },
+    {
+      "check_id": "recall.f-three-segments",
+      "dimension": "critical_fact_recall",
+      "status": "FAIL",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "absent or unread",
+      "evidence_refs": [],
+      "detail": "**三个**报告分部：Productivity and Business Processes、Intelligent Cloud、More Personal Computing。同文件还有「Microsoft Cloud」这一跨分部非分部 KPI，不能把它当第四个分部。"
+    },
+    {
+      "check_id": "recall.f-segment-change-in-august-2024",
+      "dimension": "critical_fact_recall",
+      "status": "FAIL",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "absent or unread",
+      "evidence_refs": [],
+      "detail": "2024 年 8 月**已宣布调整分部构成**（把 M365 商用组件并入 Productivity and Business Processes），且自 FY2025 起按新口径报告。因此跨 FY2024/FY2025 的分部对比含口径变更，直接比较会读出虚假的增减。"
+    },
+    {
+      "check_id": "recall.f-m365-consumer-vs-commercial-metric",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/paragraph:701"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-azure-growth-inside-combined-line",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/paragraph:707"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-rpo-scope-and-amount",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/paragraph:3845"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-rpo-recognition-is-forward",
+      "dimension": "critical_fact_recall",
+      "status": "PASS",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "recalled",
+      "evidence_refs": [
+        "loc:v1/paragraph:3845"
+      ],
+      "detail": ""
+    },
+    {
+      "check_id": "recall.f-fiscal-year-not-calendar",
+      "dimension": "disposition_context",
+      "status": "NOT_EVALUATED",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+    },
+    {
+      "check_id": "recall.f-html-tag-boundary-corruption",
+      "dimension": "disposition_context",
+      "status": "NOT_EVALUATED",
+      "expected": "fact present with source-bound selected evidence",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "context_evidence absent; legacy flat text and claims are not source evidence"
+    },
+    {
+      "check_id": "basis.f-azure-is-consumption-based",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "fact carried with correct role/modality/quantity basis",
+      "observed": "absent or unread",
+      "evidence_refs": [],
+      "detail": "not recalled, so basis is not assessable"
+    },
+    {
+      "check_id": "basis.f-azure-inside-intelligent-cloud",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "fact carried with correct role/modality/quantity basis",
+      "observed": "absent or unread",
+      "evidence_refs": [],
+      "detail": "not recalled, so basis is not assessable"
+    },
+    {
+      "check_id": "basis.f-three-segments",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "fact carried with correct role/modality/quantity basis",
+      "observed": "absent or unread",
+      "evidence_refs": [],
+      "detail": "not recalled, so basis is not assessable"
+    },
+    {
+      "check_id": "basis.f-segment-change-in-august-2024",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "fact carried with correct role/modality/quantity basis",
+      "observed": "absent or unread",
+      "evidence_refs": [],
+      "detail": "not recalled, so basis is not assessable"
+    },
+    {
+      "check_id": "basis.f-m365-consumer-vs-commercial-metric",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-azure-growth-inside-combined-line",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-rpo-scope-and-amount",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-rpo-recognition-is-forward",
+      "dimension": "role_modality_quantity",
+      "status": "PASS",
+      "expected": "role/modality/quantity basis preserved",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.f-total-revenue-consolidated",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "correct if emitted",
+      "observed": "not emitted",
+      "evidence_refs": [],
+      "detail": "optional fact was not output"
+    },
+    {
+      "check_id": "basis.f-fiscal-year-not-calendar",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "fact carried with correct role/modality/quantity basis",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "not recalled, so basis is not assessable"
+    },
+    {
+      "check_id": "basis.f-uneared-revenue-rollforward",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "correct if emitted",
+      "observed": "not emitted",
+      "evidence_refs": [],
+      "detail": "optional fact was not output"
+    },
+    {
+      "check_id": "basis.f-html-tag-boundary-corruption",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "fact carried with correct role/modality/quantity basis",
+      "observed": "no source-bound mapping",
+      "evidence_refs": [],
+      "detail": "not recalled, so basis is not assessable"
+    },
+    {
+      "check_id": "replay.evidence_locators",
+      "dimension": "citation_replay",
+      "status": "PASS",
+      "expected": "all cited locators were selected",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "integrity.unsupported_claims",
+      "dimension": "observation_integrity",
+      "status": "PASS",
+      "expected": "every claim cites at least one selected locator",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "context.semantic_units",
+      "dimension": "context_completeness",
+      "status": "NOT_EVALUATED",
+      "expected": "semantic units with complete member sets",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "baseline has no new structure; context completeness unmeasurable"
+    },
+    {
+      "check_id": "coverage.no_false_complete",
+      "dimension": "context_completeness",
+      "status": "PASS",
+      "expected": "complete only when no page/unit is unread",
+      "observed": {
+        "complete": true,
+        "native_scan": "complete",
+        "opaque_pages": [],
+        "deferred_unit_ids": [],
+        "unassigned_unit_ids": []
+      },
+      "evidence_refs": [],
+      "detail": ""
+    },
+    {
+      "check_id": "basis.quantity_provenance",
+      "dimension": "role_modality_quantity",
+      "status": "NOT_EVALUATED",
+      "expected": "each quantity carries unit and period",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "observation reports no quantities"
+    },
+    {
+      "check_id": "bilingual.duplicate_summary",
+      "dimension": "bilingual_redundancy",
+      "status": "PASS",
+      "expected": "no duplicated fact across languages",
+      "observed": [],
+      "evidence_refs": [],
+      "detail": "single language lane in observation"
+    },
+    {
+      "check_id": "derived_space.budget",
+      "dimension": "derived_space",
+      "status": "NOT_EVALUATED",
+      "expected": "derived_bytes <= 204800",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "observation reports no derived size"
+    },
+    {
+      "check_id": "resource.elapsed",
+      "dimension": "time_resource",
+      "status": "PASS",
+      "expected": "elapsed_seconds <= 900.0",
+      "observed": 11.841,
+      "evidence_refs": [],
+      "detail": "elapsed is reported, not a throughput claim"
+    },
+    {
+      "check_id": "semantics.entailment",
+      "dimension": "untested_semantics",
+      "status": "NOT_EVALUATED",
+      "expected": "independent semantic review of each claim against its evidence",
+      "observed": null,
+      "evidence_refs": [],
+      "detail": "no independent review supplied; deterministic checks cannot prove entailment"
+    }
+  ],
+  "seconds": 13.635122400010005,
+  "raw_unchanged": true,
+  "config_unchanged": true,
+  "network_calls": 0,
+  "model_calls": 0,
+  "paid_calls": 0,
+  "raw_writes": 0,
+  "production_config_writes": 0
+}

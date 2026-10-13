@@ -107,7 +107,7 @@ def _quote_set(fact: dict[str, Any], index: int = 0) -> list[dict[str, Any]]:
     return fact["any_support_sets"][index]
 
 
-def good_observed() -> dict[str, Any]:
+def _build_observed() -> dict[str, Any]:
     """An observation that genuinely carries every gold fact correctly."""
 
     facts = {fact["id"]: fact for fact in GOLD["facts"]}
@@ -228,6 +228,21 @@ def good_observed() -> dict[str, Any]:
             "mode": "offline",
         },
     }
+
+
+def good_observed() -> dict[str, Any]:
+    observed = _build_observed()
+    observed["selected_evidence"] = [
+        {"page": 3, "locator": "loc:v1/page:3/paragraph:12", "text": "公司不生产VC。"},
+        {"page": 12, "locator": "loc:v1/page:12/table:1/row:3", "text": "门店总数7,504家（2024年12月31日）。"},
+        {"page": 12, "locator": "loc:v1/page:12/paragraph:33", "text": "TOP TOY 海外门店于本年度开始拓展。"},
+        {"page": 14, "locator": "loc:v1/page:14/paragraph:5", "text": "TOP TOY overseas store expansion commenced during the year. 海外业务。"},
+        {"page": 62, "locator": "loc:v1/page:62/table:2/row:1", "text": "本项目总投资为28,000万元。"},
+    ]
+    for unit in observed["semantic_units"]:
+        unit["required_locators"] = list(unit["locators"])
+        unit["dependencies_resolved"] = True
+    return observed
 
 
 def mutated(**changes: Any) -> dict[str, Any]:

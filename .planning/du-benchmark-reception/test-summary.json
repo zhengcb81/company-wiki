@@ -1,0 +1,78 @@
+{
+  "schema_version": "du-bench-reception-tests/1",
+  "base": "f734ef926de9f64f530bc11f5254dd2f51de2665",
+  "unit_command": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q --junitxml=.planning/du-benchmark-reception/final-unit.xml",
+  "unit": {
+    "tests": 150,
+    "passed": 143,
+    "skipped": 7,
+    "failures": 0,
+    "errors": 0,
+    "reported_pytest_seconds": 3.47
+  },
+  "red": {
+    "initial": {
+      "failed": 12,
+      "passed": 5
+    },
+    "html_location_document": {
+      "failed": 1,
+      "passed": 21
+    },
+    "mutation_delta": {
+      "failed": 1,
+      "passed": 22
+    },
+    "source_material": {
+      "failed": 1,
+      "passed": 23
+    },
+    "review_coverage": {
+      "failed": 2,
+      "passed": 24
+    }
+  },
+  "new_cases": 26,
+  "gold_target_counts": {
+    "required_business": 101,
+    "disposition_context": 34,
+    "correctness_if_emitted": 57
+  },
+  "gold_support_quote_or_importance_changes": 0,
+  "ruff": "ruff check --no-cache tools/document_understanding_benchmark: PASS",
+  "code_sha256": {
+    "tools/document_understanding_benchmark/checkers.py": "9a0c50c6803db1dfddd5eb05e205d796618861d0217e76ef641ff65c9759307e",
+    "tools/document_understanding_benchmark/controls.py": "1904df9202ba4df3f0343ccedc972789a91d27f08d7508dc084f578b603037e1",
+    "tools/document_understanding_benchmark/evaluate.py": "64af59f7a612c479ec0064b3e81ca118d54f7312b906d7e22d28f92e72150fab",
+    "tools/document_understanding_benchmark/fixtures.py": "cd95385e0d05bf867d759b586affbc5ef4e76c8c0ba9d5c577e2446968e61089",
+    "tools/document_understanding_benchmark/gold.py": "b01b3efa6be3a7cf502756b094a87f8b14419399db2b03fc664f6c5d2afea553",
+    "tools/document_understanding_benchmark/make_bindings.py": "d07f1010ea9a64766ed5f287472627f05a6e23e302b69a38c8e4608ffd1b2f68",
+    "tools/document_understanding_benchmark/mutations.py": "73af6f745ff1444efce844f559f8d6ae53b615afee6181e3d2ccea36b8f33313",
+    "tools/document_understanding_benchmark/observer.py": "5554e69372cc5364ad351216ca9a02b70fb4614885ddd4862415a25be74cfd3c",
+    "tools/document_understanding_benchmark/records.py": "0caefb9b21056df7d32e735bc0b0e759f5761bc073f82c43a155397398e553fc",
+    "tools/document_understanding_benchmark/recovery.py": "b08528feb6310c6e48ccd9802d9588bdf11a42483c7ee01c8a7dc0ed4d5d4a9f",
+    "tools/document_understanding_benchmark/report.py": "072311acc8c21518ff3328479d0225798b7e2bb19ba44ace375a415c74e86967",
+    "tools/document_understanding_benchmark/review.py": "61802f0d871af4b04096b417bd17a1ca4e3540b0c55139bc768eba9f42fd2b92",
+    "tools/document_understanding_benchmark/schema.py": "0dbc9d84e891c56179b0fd6d84d14619740d063707e29ab4953eef5446e68212",
+    "tools/document_understanding_benchmark/textutil.py": "90abbc82012fded050020a6b2a68258c8b29add2a382f3be8340da37c917f8e1",
+    "tools/document_understanding_benchmark/__init__.py": "60b36a1be343cce2873c08dc3815ef80e88fd1f308d1c9d29170ebbdf919bc7d",
+    "tools/document_understanding_benchmark/__main__.py": "c0aa98d9a8bde327fab9ac0d83f0667dc1379c92133d8f7387452fda41316b57",
+    "tools/document_understanding_benchmark/tests/synthetic.py": "317d823c6368b26a7981a5321f452910553ae5fea70cdf874bf3937a28c7decd",
+    "tools/document_understanding_benchmark/tests/test_evaluate_red.py": "00627ea78ba4b360e3473cee92c2cd02f4e0d376e717af33913126382775203c",
+    "tools/document_understanding_benchmark/tests/test_gold_set.py": "003cf4b268bfff50ebc62be67dc1ccb4df52fde715b2dce60ebad720a23d21c5",
+    "tools/document_understanding_benchmark/tests/test_legibility.py": "40221c87751aa88e94a3843beb186ad0cb20109633508ab390fecdd1fda7e1a0",
+    "tools/document_understanding_benchmark/tests/test_mutations.py": "24c02dc774c98cef959f3f7b2b2e17de2e620f63bbb842b26fa09a4943864da8",
+    "tools/document_understanding_benchmark/tests/test_native.py": "35b4519b131a1da15733b4ca9ba656ead6b3a397f4b43274c4e080759ad3cd76",
+    "tools/document_understanding_benchmark/tests/test_reception_contract.py": "c7740db7e6176f6f3845aad521332058659f0ff9a32ae8e214f55dc6a4c78aaf",
+    "tools/document_understanding_benchmark/tests/test_review.py": "9e41c259a2e634c958b7c26ef54c9736e91a67eb55efe89aa4fe71593c6df08d",
+    "tools/document_understanding_benchmark/tests/test_review_controls.py": "a83c9bd56bd051d5d3f879758cec534a9e4f5ac6f4ffed0dcade939d7711e59d",
+    "tools/document_understanding_benchmark/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "interfaces": "tools/document_understanding_benchmark/EVIDENCE_CONTRACT.md",
+  "raw_writes": 0,
+  "production_config_writes": 0,
+  "new_DU2_writes": 0,
+  "model_calls": 0,
+  "paid_calls": 0,
+  "network_calls": 0
+}

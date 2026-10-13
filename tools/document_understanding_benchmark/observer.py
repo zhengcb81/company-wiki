@@ -84,6 +84,12 @@ def _parse(module: Any, path: Path, source_id: str, sha: str) -> tuple[Any, str]
             language="en",
         )
         return parsed, "parse_transcript_text"
+    mime_type = NORMALIZED_CARRIERS.get(suffix)
+    if mime_type:
+        from company_wiki.document_normalization import normalize_document
+        document = normalize_document(path.read_bytes(), source_id=source_id,
+                                      source_sha256=sha, mime_type=mime_type)
+        return document.structure, "normalize_document"
     raise ObserverUnavailable(f"no existing public parser for suffix {suffix!r}")
 
 
@@ -102,6 +108,33 @@ def _unit_locator(unit: Any) -> str:
     if coordinates is not None and hasattr(coordinates, "locator"):
         return coordinates.locator()
     return ""
+
+
+def _source_evidence(spans: Sequence[Any], units: Sequence[Any]) -> list[dict[str, Any]]:
+    indexed = {_unit_locator(unit): unit for unit in units}
+    rows = []
+    seen = set()
+    for span in spans:
+        locator = _span_locator(span)
+        unit = indexed.get(locator)
+        if unit is None or locator in seen:
+            continue
+        # Public selector may output only original parser text. An adapter which
+        # changes it cannot silently certify generated output as original evidence.
+        if getattr(span, "raw_text", None) != getattr(unit, "raw_text", None):
+            continue
+        seen.add(locator)
+        metadata = dict(getattr(unit, "metadata", {}) or {})
+        coordinate = getattr(unit, "coordinates", None)
+        rows.append({"locator": locator, "text": unit.raw_text,
+                     "page": getattr(coordinate, "page_number", None),
+                     "line": metadata.get("line_start"), "line_end": metadata.get("line_end"),
+                     "unit_id": getattr(unit, "unit_id", None),
+                     "source_role": getattr(unit, "source_role", None),
+                     "language": getattr(unit, "language", None),
+                     "scope_id": metadata.get("selection_group_id"),
+                     "period": metadata.get("period")})
+    return rows
 
 
 def observe_native(
@@ -213,6 +246,7 @@ def observe_native(
         "route": route,
         "selected_locators": selected_locators,
         "selected_text": selected_text,
+        "selected_evidence": _source_evidence(spans, units),
         "semantic_units": [],
         "claims": [],
         "coverage": {
@@ -220,6 +254,8 @@ def observe_native(
             "complete": bool(getattr(package, "coverage_complete", False)),
             "structured_unit_count": len(units),
             "opaque_pages": opaque_pages,
+            "read_pages": sorted({unit.coordinates.page_number for unit in units
+                                  if unit.coordinates.page_number is not None}) if page_count else None,
             "deferred_unit_ids": [],
             "unassigned_unit_ids": [],
         },
@@ -245,8 +281,8 @@ def observe_native(
         "execution": {
             "entry_point": OBSERVED_ENTRY_POINT,
             "parse_entry": parse_entry,
-            "parser_version": getattr(parsed, "parser_version", None)
-            or getattr(module, "NARRATIVE_PARSER_VERSION", None),
+            "parser_version": (next((unit.parser_version for unit in units), None)
+                               or getattr(module, "NARRATIVE_PARSER_VERSION", None)),
             "selector_version": getattr(module, "NARRATIVE_SELECTOR_VERSION", None),
             "calls": 0,
             "elapsed_seconds": round(parse_seconds + select_seconds, 3),
@@ -307,30 +343,19 @@ def observe_du_adapter(
     return dict(merged)
 
 
-# Carriers the existing public observation path can actually take in. Measured,
-# not assumed: `narrative_retrieval` offers exactly two replay formats (PDF, and
-# transcript_txt/transcript_html), so a non-transcript HTML document has no
-# route into the selector.
+# Existing configured native frontends; this observer supplies actual source
+# bytes and selects the resulting shared DocumentStructure. It adds no parser.
+NORMALIZED_CARRIERS = {
+    ".htm": "text/html", ".html": "text/html",
+    ".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+}
 SUPPORTED_CARRIERS: dict[str, dict[str, Any]] = {
     ".pdf": {"entry_point": "parse_pdf_bytes", "kind": "pdf", "supported": True},
     ".txt": {"entry_point": "parse_transcript_text", "kind": "transcript", "supported": True},
     ".md": {"entry_point": "parse_transcript_text", "kind": "transcript", "supported": True},
-    ".htm": {
-        "entry_point": None,
-        "kind": "html",
-        "supported": False,
-        "reason": (
-            "the only HTML path is transcript_html, which expects a transcript "
-            "layout; an SEC filing HTML has no route into the selector"
-        ),
-    },
-    ".html": {
-        "entry_point": None,
-        "kind": "html",
-        "supported": False,
-        "reason": "same as .htm",
-    },
-    ".pptx": {"entry_point": None, "kind": "presentation", "supported": False, "reason": "no public entry point"},
+    **{suffix: {"entry_point": "normalize_document", "kind": suffix.lstrip("."),
+                "supported": True, "mime_type": mime} for suffix, mime in NORMALIZED_CARRIERS.items()},
 }
 
 
@@ -351,58 +376,16 @@ def carrier_support(path: Path) -> dict[str, Any]:
 
 
 def probe_non_pdf_html(path: Path) -> dict[str, Any]:
-    """Measure what the transcript path does with a non-transcript HTML document.
-
-    Returns a truthful verdict instead of an exception: the existing extractor
-    does not refuse a 10-K, it yields **zero units** and reports
-    ``transcript_start_missing``. That distinction matters, because a
-    zero-unit parse looks like a document with no content rather than an
-    unsupported carrier.
-    """
-
-    module = _import_evidence()
+    """Measure the real HTML frontend without interpreting HTML as a transcript."""
+    from company_wiki.document_normalization import normalize_document
     target = Path(path)
-    data = target.read_bytes()
-    sha = hashlib.sha256(data).hexdigest()
-    try:
-        from company_wiki.source_catalog.transcript_text_extract import (
-            TranscriptMaterialError,
-            extract_transcript_material,
-        )
-    except ImportError as exc:  # pragma: no cover - environment dependent
-        raise ObserverUnavailable(f"cannot import the HTML extractor: {exc}") from exc
-
-    report: dict[str, Any] = {
-        "path": str(target),
-        "suffix": _suffix(target),
-        "sha256": sha,
-        "extracted": False,
-        "units": None,
-        "page_count": None,
-        "errors": [],
-        "text_prefix": "",
-    }
-    try:
-        material = extract_transcript_material(data, mime_type="text/html")
-        material.verify(data)
-    except TranscriptMaterialError as exc:
-        report["refused"] = True
-        report["errors"] = [f"transcript_material_refused: {exc}"]
-        return report
-
-    report["extracted"] = True
-    text = material.text_utf8
-    report["text_prefix"] = text[:200]
-    report["text_chars"] = len(text)
-    parsed = module.parse_transcript_text(
-        text,
-        source_id=f"urn:company-wiki:source:sha256:{sha}",
-        source_sha256=sha,
-        language="en",
-    )
-    report["units"] = len(parsed.units)
-    report["page_count"] = parsed.page_count
-    report["line_count"] = parsed.line_count
-    report["errors"] = list(parsed.errors)
-    report["usable"] = bool(parsed.units)
-    return report
+    original = target.read_bytes()
+    sha = hashlib.sha256(original).hexdigest()
+    document = normalize_document(original, source_id=f"urn:company-wiki:source:sha256:{sha}",
+                                  source_sha256=sha, mime_type="text/html")
+    return {"path": str(target), "suffix": _suffix(target), "sha256": sha,
+            "entry_point": "normalize_document", "extracted": True,
+            "units": len(document.units), "usable": bool(document.units),
+            "page_count": document.structure.page_count,
+            "errors": list(document.structure.errors),
+            "parser_version": document.parser_version}

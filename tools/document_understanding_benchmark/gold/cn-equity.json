@@ -35,7 +35,9 @@
       "reason": "「拟募集…不超过」是发行计划上限，不是已完成的募集结果。金额跨行排版（拟募集资金总额为不超过35,978.71 万元）。",
       "modality": "plan",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-project-investment-total",
@@ -73,7 +75,9 @@
       "reason": "35,300.00 万元是项目总投资额（capex），不是项目收入或收益预测。表头「项目总投资」与「募集资金使用金额」是两列不同口径。",
       "modality": "plan",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-project-raise-allocation",
@@ -108,7 +112,9 @@
       "reason": "同一项目「项目总投资」（35,300.00）与「募集资金使用金额」（28,678.71）不同；补充流动资金两项均为 7,300.00。合计 42,600.00 / 35,978.71。混用总投资与募集资金投入是典型口径错误。",
       "modality": "plan",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-construction-two-phases",
@@ -141,7 +147,9 @@
       "reason": "建设期是「两期」：新建厂房为一期，老厂区改建为二期。该句在 p61 表格与 p62 正文重复出现，p62 末句续到 p63 页首。",
       "modality": "plan",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-phase-one-timeline",
@@ -175,7 +183,9 @@
       "reason": "一期三个时点：2019-01 拿地、2020-12 建成厂房、2021-01 一期建成投产。把拿地时间当投产时间是最典型的日期错配。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-phase-two-timeline",
@@ -209,7 +219,9 @@
       "reason": "二期是「预计」2021-01 启动、2021-12 完成建设、2022 建成投产；含计划语态，且句子跨 p62→p63 页界。",
       "modality": "plan",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-phase-two-condition",
@@ -240,7 +252,9 @@
       "reason": "二期带前置条件（一期完成 + 设备搬迁后才启动）。丢掉「才启动」这个限定语会把有条件的顺序工程写成并按工程。",
       "modality": "plan",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-investment-breakdown",
@@ -283,7 +297,9 @@
       "reason": "投资明细：工程费用 29,779.00（84.36%），其中设备购置 18,445.00（52.25%）、设备安装 184.00、厂房建造 11,150.00；另有工程建设其它费用 2,147.00、预备费 189.00、铺底流动资金 3,185.00，合计 35,300.00。子项与合计不可混说。",
       "modality": "plan",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-land-and-location",
@@ -313,7 +329,9 @@
       "reason": "土地款 2,053.00 是「工程建设其它费用 2,147.00」的子项（另一子项为前期工作费 94.00）。小计与子项易混。",
       "modality": "plan",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-necessity-is-argument",
@@ -336,7 +354,9 @@
       "reason": "「必要性」段落是论证性表述（将/帮助/进一步增强），不是既成事实。基线只命中这一段，正是「套话挤掉事实」的现场。",
       "modality": "plan",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     }
   ]
 }

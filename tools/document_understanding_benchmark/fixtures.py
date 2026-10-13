@@ -70,7 +70,7 @@ def _fact(
     }
 
 
-def fixture_clean_annual() -> dict[str, Any]:
+def _build_clean_annual() -> dict[str, Any]:
     """A correct annual-report observation; the oracle must PASS it."""
 
     return {
@@ -187,7 +187,7 @@ def fixture_clean_annual() -> dict[str, Any]:
     }
 
 
-def fixture_negation_qa() -> dict[str, Any]:
+def _build_negation_qa() -> dict[str, Any]:
     """A QA document where the answer denies the question's premise."""
 
     return {
@@ -301,7 +301,7 @@ def fixture_negation_qa() -> dict[str, Any]:
     }
 
 
-def fixture_opaque_scan() -> dict[str, Any]:
+def _build_opaque_scan() -> dict[str, Any]:
     """A scanned page with no native text: recall must be UNAVAILABLE."""
 
     return {
@@ -353,7 +353,7 @@ def fixture_opaque_scan() -> dict[str, Any]:
     }
 
 
-def fixture_offering_plan() -> dict[str, Any]:
+def _build_offering_plan() -> dict[str, Any]:
     """An offering document: plan amounts, two-phase construction, capex.
 
     Created so the plan-vs-actual, scope and table-header mutations have a
@@ -484,7 +484,7 @@ def fixture_offering_plan() -> dict[str, Any]:
     }
 
 
-def fixture_stage_progress() -> dict[str, Any]:
+def _build_stage_progress() -> dict[str, Any]:
     """Product verification stages that must not be collapsed into mass production."""
 
     return {
@@ -577,6 +577,57 @@ def fixture_stage_progress() -> dict[str, Any]:
             },
         },
     }
+
+
+# Explicit synthetic ORIGINAL material. It is authored separately from both
+# generated claims and gold; do not reconstruct raw evidence from either one.
+_SYNTHETIC_SOURCE_ROWS = {
+    "clean-annual": [
+        (12, "loc:v1/page:12/paragraph:4", "门店总数7,504家（截至2024年12月31日）。"),
+        (12, "loc:v1/page:12/paragraph:5", "海外门店于本年度开始拓展。"),
+        (62, "loc:v1/page:62/paragraph:1", "本项目总投资为28,000万元。")],
+    "negation-qa": [
+        (3, "loc:v1/page:3/paragraph:1", "问：有没有能推动与宁德时代等行业龙头达成电池电解液添加剂VC的带量采购等具体业务？答：公司现无生产VC（碳酸亚乙烯酯）的情况，根据公司控股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立业务协同与合作。")],
+    "opaque-scan": [],
+    "offering-plan": [
+        (61, "loc:v1/page:61/paragraph:1", "本次拟募集资金总额为不超过35,978.71万元。"),
+        (61, "loc:v1/page:61/paragraph:2", "项目建设期两期，新建厂房为一期，老厂区改建为二期。"),
+        (62, "loc:v1/page:62/paragraph:1", "土地款2,053.00万元。")],
+    "stage-progress": [
+        (3, "loc:v1/page:3/paragraph:1", "减压EPI设备已在成熟制程客户端验证成功，部分先进工艺已进入量产验证阶段。"),
+        (3, "loc:v1/page:3/paragraph:2", "常压外延设备现已完成开发，进入晶圆验证阶段。")],
+}
+
+
+def _with_source_material(fixture: dict[str, Any]) -> dict[str, Any]:
+    observed = fixture["observed"]
+    observed["selected_evidence"] = [
+        {"page": page, "locator": locator, "text": text}
+        for page, locator, text in _SYNTHETIC_SOURCE_ROWS[fixture["fixture_id"]]]
+    for unit in observed.get("semantic_units") or []:
+        unit["required_locators"] = list(unit["locators"])
+        unit["dependencies_resolved"] = True
+    return fixture
+
+
+def fixture_clean_annual() -> dict[str, Any]:
+    return _with_source_material(_build_clean_annual())
+
+
+def fixture_negation_qa() -> dict[str, Any]:
+    return _with_source_material(_build_negation_qa())
+
+
+def fixture_opaque_scan() -> dict[str, Any]:
+    return _with_source_material(_build_opaque_scan())
+
+
+def fixture_offering_plan() -> dict[str, Any]:
+    return _with_source_material(_build_offering_plan())
+
+
+def fixture_stage_progress() -> dict[str, Any]:
+    return _with_source_material(_build_stage_progress())
 
 
 def all_fixtures() -> list[dict[str, Any]]:

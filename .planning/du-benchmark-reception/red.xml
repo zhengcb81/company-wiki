@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="12" skipped="0" tests="17" time="0.757" timestamp="2026-10-13T20:08:35.164014+01:00" hostname="DESKTOP-156V213"><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_flat_text_and_generated_claim_cannot_self_prove_source_recall" time="0.161"><failure message="AssertionError: assert 'PASS' == 'NOT_EVALUATED'&#10;  &#10;  - NOT_EVALUATED&#10;  + PASS">tools\document_understanding_benchmark\tests\test_reception_contract.py:51: in test_flat_text_and_generated_claim_cannot_self_prove_source_recall
+    assert check_recall_fact(f, o)['status'] == 'NOT_EVALUATED'
+E   AssertionError: assert 'PASS' == 'NOT_EVALUATED'
+E     
+E     - NOT_EVALUATED
+E     + PASS</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_correct_quotes_on_unrelated_pages_cannot_match_gold_support" time="0.001" /><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_unselected_source_rows_are_not_recalled" time="0.001" /><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_support_group_is_and_while_equivalent_groups_are_or" time="0.001"><failure message="AssertionError: assert 'FAIL' == 'PASS'&#10;  &#10;  - PASS&#10;  + FAIL">tools\document_understanding_benchmark\tests\test_reception_contract.py:70: in test_support_group_is_and_while_equivalent_groups_are_or
+    assert check_recall_fact(f, obs([row(12, 'Project Alpha'), row(13, 'two-year construction')]))['status'] == 'PASS'
+E   AssertionError: assert 'FAIL' == 'PASS'
+E     
+E     - PASS
+E     + FAIL</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_readable_alternative_not_dragged_down_by_an_opaque_alternative" time="0.002"><failure message="AssertionError: assert 'UNAVAILABLE' == 'PASS'&#10;  &#10;  - PASS&#10;  + UNAVAILABLE">tools\document_understanding_benchmark\tests\test_reception_contract.py:78: in test_readable_alternative_not_dragged_down_by_an_opaque_alternative
+    assert check_recall_fact(f, o)['status'] == 'PASS'
+E   AssertionError: assert 'UNAVAILABLE' == 'PASS'
+E     
+E     - PASS
+E     + UNAVAILABLE</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_only_unread_support_groups_are_unavailable" time="0.001" /><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_readable_miss_is_fail_even_when_other_group_is_opaque" time="0.001"><failure message="AssertionError: assert 'UNAVAILABLE' == 'FAIL'&#10;  &#10;  - FAIL&#10;  + UNAVAILABLE">tools\document_understanding_benchmark\tests\test_reception_contract.py:92: in test_readable_miss_is_fail_even_when_other_group_is_opaque
+    assert check_recall_fact(f, o)['status'] == 'FAIL'
+E   AssertionError: assert 'UNAVAILABLE' == 'FAIL'
+E     
+E     - FAIL
+E     + UNAVAILABLE</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_line_support_uses_actual_source_line_range" time="0.001"><failure message="AssertionError: assert 'FAIL' == 'PASS'&#10;  &#10;  - PASS&#10;  + FAIL">tools\document_understanding_benchmark\tests\test_reception_contract.py:98: in test_line_support_uses_actual_source_line_range
+    assert check_recall_fact(f, o)['status'] == 'PASS'
+E   AssertionError: assert 'FAIL' == 'PASS'
+E     
+E     - PASS
+E     + FAIL</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_optional_financial_fact_omission_has_no_business_recall_denominator" time="0.001"><failure message="assert 1 == 0">tools\document_understanding_benchmark\tests\test_reception_contract.py:106: in test_optional_financial_fact_omission_has_no_business_recall_denominator
+    assert result['metrics']['critical_fact_recall_denominator'] == 0
+E   assert 1 == 0</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_optional_financial_claim_still_rejects_explicit_contradiction" time="0.001" /><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_target_kind_is_validated_and_legacy_metadata_gets_context_default" time="0.001"><failure message="KeyError: 'target_kind'">tools\document_understanding_benchmark\tests\test_reception_contract.py:124: in test_target_kind_is_validated_and_legacy_metadata_gets_context_default
+    assert validate_gold(gold(f))['facts'][0]['target_kind'] == 'disposition_context'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'target_kind'</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_declared_complete_cannot_replace_actual_required_context" time="0.002"><failure message="AssertionError: assert 'PASS' == 'FAIL'&#10;  &#10;  - FAIL&#10;  + PASS">tools\document_understanding_benchmark\tests\test_reception_contract.py:135: in test_declared_complete_cannot_replace_actual_required_context
+    assert check_context(o, {})['status'] == 'FAIL'
+E   AssertionError: assert 'PASS' == 'FAIL'
+E     
+E     - FAIL
+E     + PASS</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_legacy_complete_without_dependency_observation_is_not_evaluated" time="0.001"><failure message="AssertionError: assert 'PASS' == 'NOT_EVALUATED'&#10;  &#10;  - NOT_EVALUATED&#10;  + PASS">tools\document_understanding_benchmark\tests\test_reception_contract.py:141: in test_legacy_complete_without_dependency_observation_is_not_evaluated
+    assert check_context(o, {})['status'] == 'NOT_EVALUATED'
+E   AssertionError: assert 'PASS' == 'NOT_EVALUATED'
+E     
+E     - NOT_EVALUATED
+E     + PASS</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_verified_context_requires_every_source_bound_locator" time="0.001" /><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_ordinary_business_miss_reports_recall_partial_not_false_full_failure" time="0.001"><failure message="AssertionError: assert 'FAIL' == 'PARTIAL'&#10;  &#10;  - PARTIAL&#10;  + FAIL">tools\document_understanding_benchmark\tests\test_reception_contract.py:155: in test_ordinary_business_miss_reports_recall_partial_not_false_full_failure
+    assert result['status'] == 'PARTIAL'
+E   AssertionError: assert 'FAIL' == 'PARTIAL'
+E     
+E     - PARTIAL
+E     + FAIL</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_unaudited_claims_do_not_produce_whole_quality_pass" time="0.002"><failure message="AssertionError: assert 'PASS' == 'PARTIAL'&#10;  &#10;  - PARTIAL&#10;  + PASS">tools\document_understanding_benchmark\tests\test_reception_contract.py:164: in test_unaudited_claims_do_not_produce_whole_quality_pass
+    assert result['status'] == 'PARTIAL'
+E   AssertionError: assert 'PASS' == 'PARTIAL'
+E     
+E     - PARTIAL
+E     + PASS</failure></testcase><testcase classname="tools.document_understanding_benchmark.tests.test_reception_contract" name="test_sec_html_uses_existing_public_normalization_and_emits_real_locator_rows" time="0.017"><failure message="assert False is True">tools\document_understanding_benchmark\tests\test_reception_contract.py:173: in test_sec_html_uses_existing_public_normalization_and_emits_real_locator_rows
+    assert carrier_support(path)['supported'] is True
+E   assert False is True</failure></testcase></testsuite></testsuites>

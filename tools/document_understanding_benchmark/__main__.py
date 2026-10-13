@@ -157,6 +157,7 @@ def _scope_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
         critical_total = 0
         critical_declared = 0
         critical_unavailable = 0
+        critical_not_evaluated = 0
         fact_pass = 0
         fact_total = 0
         narrative_pass = 0
@@ -176,6 +177,7 @@ def _scope_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
                 metrics.get("critical_fact_recall_denominator_declared") or denominator
             )
             critical_unavailable += metrics.get("critical_fact_unavailable") or 0
+            critical_not_evaluated += metrics.get("critical_fact_not_evaluated") or 0
             fact_denominator = metrics.get("fact_recall_denominator") or 0
             fact_recall = metrics.get("fact_recall")
             if fact_recall is not None and fact_denominator:
@@ -192,6 +194,7 @@ def _scope_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
             "critical_facts_total": critical_total,
             "critical_facts_declared": critical_declared,
             "critical_facts_unavailable": critical_unavailable,
+            "critical_facts_not_evaluated": critical_not_evaluated,
             "critical_fact_coverage": (
                 critical_total / critical_declared if critical_declared else None
             ),

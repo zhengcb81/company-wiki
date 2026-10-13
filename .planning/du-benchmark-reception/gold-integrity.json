@@ -1,0 +1,109 @@
+{
+  "schema_version": "du-bench-gold-integrity/1",
+  "base": "f734ef926de9f64f530bc11f5254dd2f51de2665",
+  "records": [
+    {
+      "sample_id": "cn-equity",
+      "facts": 10,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "cn-h1",
+      "facts": 12,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "cn-ipo-confirmation",
+      "facts": 4,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "cn-ir",
+      "facts": 10,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "cn-q-business",
+      "facts": 11,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "facts": 13,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "hk-annual-mojibake",
+      "facts": 4,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "hk-annual",
+      "facts": 7,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "facts": 9,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "holdout-cn-yake-q1",
+      "facts": 13,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "holdout-hk-alibaba-fy2023",
+      "facts": 14,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "holdout-hk-biren-fy2025",
+      "facts": 12,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "holdout-us-mongodb-10k",
+      "facts": 16,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "holdout-us-nvidia-10k",
+      "facts": 16,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "us-10k",
+      "facts": 12,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "us-20f",
+      "facts": 15,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    },
+    {
+      "sample_id": "us-txt",
+      "facts": 14,
+      "exact_quotes_unchanged": true,
+      "importance_unchanged": true
+    }
+  ],
+  "raw_originals_written": 0
+}

@@ -20,7 +20,6 @@ from . import checkers
 from .records import validate_gold, validate_observed
 from .review import review_summary
 from .schema import (
-    DOCUMENT_META,
     EVALUATION_SCHEMA_VERSION,
     FAIL,
     NARRATIVE,
@@ -34,11 +33,10 @@ from .schema import (
 def _overall(checks: list[dict[str, Any]], metrics: Mapping[str, Any]) -> str:
     """Derive the overall status.
 
-    ``NOT_EVALUATED`` on the semantic-entailment check is the *expected* state
-    for an unaudited run and must not, by itself, downgrade a healthy result:
-    the card requires honest ``NOT_EVALUATED`` reporting, not a permanently
-    PARTIAL benchmark. Unavailability of anything the benchmark claims to
-    measure (source identity, recall, route, replay) still downgrades.
+    Unmeasured claim semantics or declared semantic-unit context makes whole
+    quality PARTIAL. Empty optional dimensions (no claims, no quantities, no
+    semantic units) need no fabricated verification. Critical omission fails;
+    normal business recall shortfall remains visible as PARTIAL.
     """
 
     if any(
@@ -55,7 +53,14 @@ def _overall(checks: list[dict[str, Any]], metrics: Mapping[str, Any]) -> str:
     )
     if meaningfully_unavailable:
         return PARTIAL
-    if metrics.get("critical_fact_recall") not in (None, 1.0):
+    if PARTIAL in statuses.values() or metrics.get("critical_fact_recall") not in (None, 1.0):
+        return PARTIAL
+    if any(row["check_id"].startswith("recall.") and row["status"] == NOT_EVALUATED
+           and row["dimension"] == "critical_fact_recall" for row in checks):
+        return PARTIAL
+    if metrics.get("semantic_unit_count") and statuses.get("context.semantic_units") == NOT_EVALUATED:
+        return PARTIAL
+    if metrics.get("claim_count") and statuses.get("semantics.entailment") == NOT_EVALUATED:
         return PARTIAL
     return PASS
 
@@ -78,6 +83,7 @@ def evaluate(
 
     checks: list[dict[str, Any]] = [
         checkers.check_source_identity(checked_observed, checked_gold),
+        checkers.check_selected_source_material(checked_observed, checked_gold),
         checkers.check_route(checked_observed, checked_gold),
         checkers.check_text_legibility(checked_observed, checked_gold),
     ]
@@ -85,7 +91,9 @@ def evaluate(
     facts = checkers.collect_recall_facts(checked_gold)
     recall_rows = [checkers.check_recall_fact(fact, checked_observed) for fact in facts]
     checks.extend(recall_rows)
-    checks.extend(checkers.check_basis_fact(fact, checked_observed) for fact in facts)
+    checks.extend(checkers.check_recall_fact(fact, checked_observed)
+                  for fact in checked_gold["facts"] if fact["target_kind"] == "disposition_context")
+    checks.extend(checkers.check_basis_fact(fact, checked_observed) for fact in checked_gold["facts"])
 
     checks.append(checkers.check_replay(checked_observed, checked_gold))
     checks.append(checkers.check_unsupported_claims(checked_observed, checked_gold))
@@ -109,9 +117,10 @@ def evaluate(
     # recall of 0.000, which reads as a total miss rather than a gap in
     # coverage. Unavailable facts are reported in their own counter, and the
     # overall status still degrades to PARTIAL, so nothing is excused by this.
-    critical_total = critical_declared - critical_unavailable
+    critical_not_evaluated = sum(1 for row in critical_rows if row["status"] == NOT_EVALUATED)
+    critical_total = critical_declared - critical_unavailable - critical_not_evaluated
     all_pass = sum(1 for row in recall_rows if row["status"] == PASS)
-    effective_total = len(recall_rows) - sum(1 for row in recall_rows if row["status"] == UNAVAILABLE)
+    effective_total = len(recall_rows) - sum(1 for row in recall_rows if row["status"] in {UNAVAILABLE, NOT_EVALUATED})
     # Narrative facts are what the evidence selection is answerable for;
     # document_meta facts belong to a front-end/metadata layer. Reported apart
     # so neither denominator is read as the other's score.
@@ -120,15 +129,12 @@ def evaluate(
         for row, fact in zip(recall_rows, facts)
         if (fact.get("fact_scope") or NARRATIVE) == NARRATIVE
     ]
-    meta_rows = [
-        (row, fact)
-        for row, fact in zip(recall_rows, facts)
-        if (fact.get("fact_scope") or NARRATIVE) == DOCUMENT_META
-    ]
+    meta_rows = [(checkers.check_recall_fact(fact, checked_observed), fact)
+                 for fact in checked_gold["facts"] if fact["target_kind"] == "disposition_context"]
 
     def _scope_recall(pairs):
         evaluable = [
-            row for row, _fact in pairs if row["status"] != UNAVAILABLE
+            row for row, _fact in pairs if row["status"] not in {UNAVAILABLE, NOT_EVALUATED}
         ]
         passed = sum(1 for row in evaluable if row["status"] == PASS)
         return {
@@ -141,7 +147,7 @@ def evaluate(
 
     narrative_stats = _scope_recall(narrative_rows)
     meta_stats = _scope_recall(meta_rows)
-    evidence_rows = [row for row in checks if row["check_id"] in {"replay.evidence_locators", "integrity.unsupported_claims"}]
+    evidence_rows = [row for row in checks if row["check_id"] in {"replay.evidence_locators", "integrity.unsupported_claims", "integrity.selected_source_material"}]
     evidence_ok = sum(1 for row in evidence_rows if row["status"] == PASS)
 
     metrics = {
@@ -149,6 +155,8 @@ def evaluate(
         "critical_fact_recall_denominator": critical_total,
         "critical_fact_recall_denominator_declared": critical_declared,
         "critical_fact_unavailable": critical_unavailable,
+        "critical_fact_not_evaluated": critical_not_evaluated,
+        "optional_correctness_facts": sum(fact["target_kind"] == "correctness_if_emitted" for fact in checked_gold["facts"]),
         "critical_fact_coverage": (
             critical_total / critical_declared if critical_declared else None
         ),
@@ -168,10 +176,12 @@ def evaluate(
         "evidence_validity": (evidence_ok / len(evidence_rows)) if evidence_rows else None,
         "basis_pass_rate": (
             sum(1 for row in checks if row["check_id"].startswith("basis.") and row["status"] == PASS)
-            / max(1, sum(1 for row in checks if row["check_id"].startswith("basis.")))
+            / sum(1 for row in checks if row["check_id"].startswith("basis.") and row["status"] in {PASS, FAIL})
+            if any(row["check_id"].startswith("basis.") and row["status"] in {PASS, FAIL} for row in checks) else None
         ),
         "context_completeness": next(
-            (1.0 if row["status"] == PASS else 0.0 for row in checks if row["check_id"] == "context.semantic_units"),
+            (1.0 if row["status"] == PASS else 0.0 if row["status"] == FAIL else None
+             for row in checks if row["check_id"] == "context.semantic_units"),
             None,
         ),
         "selected_span_count": len(checked_observed.get("selected_locators") or []),

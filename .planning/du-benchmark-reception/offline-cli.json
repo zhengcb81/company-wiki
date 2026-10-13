@@ -1,0 +1,61 @@
+{
+  "schema_version": "du-bench-reception-offline-cli/1",
+  "exit_code": 3,
+  "fixture_bytes": 16121,
+  "scope_summary": {
+    "development": {
+      "critical_fact_coverage": 0.8571428571428571,
+      "critical_fact_recall": 1.0,
+      "critical_facts_declared": 7,
+      "critical_facts_not_evaluated": 0,
+      "critical_facts_passed": 6,
+      "critical_facts_total": 6,
+      "critical_facts_unavailable": 1,
+      "document_meta_fact_recall": null,
+      "document_meta_facts_passed": 0,
+      "document_meta_facts_total": 0,
+      "documents": 3,
+      "fact_recall": 1.0,
+      "facts_passed": 6,
+      "facts_total": 6,
+      "narrative_fact_recall": 1.0,
+      "narrative_facts_passed": 6,
+      "narrative_facts_total": 6,
+      "statuses": {
+        "PARTIAL": 3
+      }
+    },
+    "holdout": {
+      "critical_fact_coverage": 1.0,
+      "critical_fact_recall": 1.0,
+      "critical_facts_declared": 5,
+      "critical_facts_not_evaluated": 0,
+      "critical_facts_passed": 5,
+      "critical_facts_total": 5,
+      "critical_facts_unavailable": 0,
+      "document_meta_fact_recall": null,
+      "document_meta_facts_passed": 0,
+      "document_meta_facts_total": 0,
+      "documents": 2,
+      "fact_recall": 1.0,
+      "facts_passed": 5,
+      "facts_total": 5,
+      "narrative_fact_recall": 1.0,
+      "narrative_facts_passed": 5,
+      "narrative_facts_total": 5,
+      "statuses": {
+        "PARTIAL": 2
+      }
+    }
+  },
+  "network_calls": 0,
+  "model_calls": 0,
+  "paid_calls": 0,
+  "pre_existing_sentinel_unchanged": true,
+  "mutations_applicable": 53,
+  "mutations_detected": 53,
+  "mutations_not_applicable": 42,
+  "targeted_newly_adverse_hits": 52,
+  "semantics": "NOT_EVALUATED without independent current summary review",
+  "owned_tmp_restored": true
+}

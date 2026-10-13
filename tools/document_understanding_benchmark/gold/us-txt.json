@@ -45,7 +45,9 @@
         "CALL PARTICIPANTS 列出了参与问答的分析师名单"
       ],
       "reason": "「CALL PARTICIPANTS」名单**只有管理层**：Satya Nadella（董事长兼 CEO）、Amy Hood（CFO）、Alice Jolla（CAO）、Brian DeFoe（副总法律顾问兼公司秘书）、Jonathan Neilson（IR 副总裁）。**分析师不在名单里**——他们的公司与姓名只出现在 operator 的引场句里。把参与者名单当成含分析师的花名册是角色错。",
-      "fact_scope": "document_meta"
+      "fact_scope": "document_meta",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "f-analyst-firm-only-in-operator-line",
@@ -76,7 +78,9 @@
         "UBS 的观点由公司披露"
       ],
       "reason": "分析师的**所属机构只出现在 operator 引场句**里（「comes from the line of Karl Keirstead with UBS」），分析师本人的发言行只写姓名、不带机构。所以「谁代表哪家机构」必须绑定 operator 行；把机构归错或把分析师当管理层都是角色错。文件里所有分析师（Karl Keirstead/UBS、Brent Thill/Jefferies、Mark Moerdler/Bernstein Research、Adam Wood/Morgan Stanley、Brad Zelnick/Deutsche Bank、Gabriela Borges/Goldman Sachs）都遵循这一模式。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-qa-has-no-heading",
@@ -105,7 +109,9 @@
         "文件中存在 Questions and Answers 标题区段"
       ],
       "reason": "Q&A 的**开始没有标题**：全文唯一的标题是第 124 行的「Full Conference Call Transcript」，而预先发言转到问答只靠 IR 的一句口头过渡（Jonathan Neilson 说「We'll now move over to Q&A.」）。因此按标题切章节的结构构建器在这个文件上只会得到**一个** section —— 这是真实的结构事实，不是解析失败。",
-      "fact_scope": "document_meta"
+      "fact_scope": "document_meta",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "f-editorial-digest-is-not-management-speech",
@@ -135,7 +141,9 @@
         "编辑摘要中的每条要点都是管理层原话引用"
       ],
       "reason": "第 26–122 行是**聚合站自己写的编辑要点与行业术语表**，位于「CALL PARTICIPANTS」之后、真正的逐字记录（第 124 行）之前。它的条目形式（「要点-- 说明」）看起来像引文，但**不是**管理层发言。把编辑摘要当管理层原话、或把其中的前瞻数字当公司口头指引，都是把第三方摘要冒充发行人陈述。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-source-is-third-party-and-llm-assisted",
@@ -165,7 +173,9 @@
         "本文件内容经过发行人审阅"
       ],
       "reason": "文件头自述来源为第三方聚合站（Source: motley_fool，带 URL 与 Scraped 时间戳），文末又声明**部分内容由大语言模型生成**。因此本文件是第三方、部分机器撰写的记录，不是发行人原文；把它当公司正式披露会高估权威性。",
-      "fact_scope": "document_meta"
+      "fact_scope": "document_meta",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "f-lines-are-truncated",
@@ -193,7 +203,9 @@
         "本文件完整记录了电话会全部发言内容"
       ],
       "reason": "文件自称 65,572 字符，而实际正文 340 行、约 65,980 字符；发言人段落被**硬截断**（例如第 76、222 行在词中被切断）。所以引用不得越过截断点延伸，也不能声称这是完整逐字记录。",
-      "fact_scope": "document_meta"
+      "fact_scope": "document_meta",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "f-fiscal-q4-not-calendar-q4",
@@ -222,7 +234,9 @@
         "FY2026 Q4 指 2026 年 10 月至 12 月"
       ],
       "reason": "「Q4 2026」是**财年**第四季度（微软财年截至 6 月 30 日，会议日期为 2026-07-29），与日历 2026 年 Q4 完全不是一回事。把财季当自然季是跨市场文件的经典期间错。",
-      "fact_scope": "document_meta"
+      "fact_scope": "document_meta",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "f-analyst-question-is-not-company-fact",
@@ -246,7 +260,9 @@
         "公司将 Azure 增速上调至 mid-40s 是公司指引"
       ],
       "reason": "「Azure up to 43%, going to mid-40s」是**分析师 Brent Thill 的提问措辞**（含对未来的揣测），不是公司指引。公司自己的 Azure 展望在 Amy Hood 的 prepared remarks 里另有原话。把分析师提问里的数字当公司口径，是角色与来源双重错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-management-answer-confirms-not-negates",
@@ -276,7 +292,9 @@
         "管理层表示产能已不再受限"
       ],
       "reason": "Amy Hood 对 Brent Thill 的答复是**确认**而非否认：明确说「there are still constraints in the system」且「demand continues to exceed available supply」。提问给了两个备选解释（同环境 vs 执行更好），管理层肯定的是约束环境。把肯定读成否认会反转语义。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-prepared-remarks-speaker-order",
@@ -305,7 +323,9 @@
         "Amy Hood 先于 Satya Nadella 发言"
       ],
       "reason": "prepared remarks 顺序固定：先 IR（Jonathan Neilson）做免责声明，再 CEO（Satya Nadella），再 CFO（Amy Hood），然后才进 Q&A。发言顺序与内容归属必须绑定，不得把 CFO 的财务展望记到 CEO 名下。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-guidance-is-forward-looking",
@@ -335,7 +355,9 @@
         "公司已实现 16% 至 17% 的收入增长"
       ],
       "reason": "「we expect」「should be」是**前瞻指引**（下季度/下财年），不是已实现结果。用「为」「已实现」等完成语态复述指引，会把预测写成事实——这是财务摘要里最常见的语态错误。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-discrete-items-adjusted-eps",
@@ -367,7 +389,9 @@
         "Anthropic 投资收益属于经常性经营收益"
       ],
       "reason": "EPS $4.74 含**一次性项目**带来的每股 $0.27 好处，其中含对 Anthropic 投资的 32 亿美元收益。把它读成持续经营成果会高估盈利能力；公司自己明说这些是「discrete items」。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-headcount-declined",
@@ -390,7 +414,9 @@
         "公司总员工人数同比增长2%"
       ],
       "reason": "总员工人数**同比下降 2%**，与同段收入增长 18%、营业利润增长 21% 方向相反。把下降读成增长会得出「扩张」的错误结论。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-operator-role",
@@ -413,7 +439,9 @@
         "Operator 的发言属于公司管理层陈述"
       ],
       "reason": "Operator（会议主持人/接线员）是中立的流程角色：负责引场、介绍提问人、宣布结束。其发言既不是管理层陈述也不是分析师观点，混入任一方都会污染角色统计。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     }
   ]
 }

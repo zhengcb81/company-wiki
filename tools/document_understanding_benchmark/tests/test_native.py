@@ -351,15 +351,15 @@ def test_pdf_and_transcript_carriers_are_supported():
         assert info["entry_point"], suffix
 
 
-def test_sec_filing_html_is_reported_unsupported():
-    """A 10-K HTML is not a transcript, so it must not be claimed as observable."""
+def test_sec_filing_html_uses_existing_normalization_frontend():
+    """Public general HTML normalization is distinct from transcript parsing."""
 
     from tools.document_understanding_benchmark.observer import carrier_support
 
     for suffix in (".htm", ".html"):
         info = carrier_support(Path(f"filing{suffix}"))
-        assert info["supported"] is False, suffix
-        assert info["reason"], suffix
+        assert info["supported"] is True, suffix
+        assert info["entry_point"] == "normalize_document", suffix
 
 
 def test_unknown_carrier_is_unsupported_not_guessed():
@@ -370,12 +370,8 @@ def test_unknown_carrier_is_unsupported_not_guessed():
 
 
 @pytest.mark.real_data
-def test_real_10k_html_yields_no_units_through_the_transcript_path():
-    """Measured, not assumed: the only HTML path produces zero units for a 10-K.
-
-    This is the evidence behind reporting US filings as UNAVAILABLE rather than
-    as documents with no business content.
-    """
+def test_real_10k_html_yields_units_through_public_normalization():
+    """The shared format frontend really parses the immutable 10-K HTML."""
 
     if os.environ.get("DU_BENCH_ALLOW_REAL_DATA") != "1":
         pytest.skip("set DU_BENCH_ALLOW_REAL_DATA=1 to probe a real 10-K")
@@ -388,9 +384,9 @@ def test_real_10k_html_yields_no_units_through_the_transcript_path():
 
     report = probe_non_pdf_html(Path(candidate))
     assert report["extracted"] is True, report
-    assert report["units"] == 0, report
-    assert report["usable"] is False
-    assert "transcript_start_missing" in " ".join(report["errors"])
+    assert report["units"] > 0, report
+    assert report["usable"] is True
+    assert report["entry_point"] == "normalize_document"
 
 
 
