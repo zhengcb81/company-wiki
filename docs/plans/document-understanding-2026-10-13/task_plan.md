@@ -28,11 +28,11 @@ Owner: ROOT
 |---|---|---:|---|
 | profiles | `src/company_wiki/document_understanding/profiles/` | 150 | 否 |
 | structure | `src/company_wiki/document_understanding/structure/` | 47 | 否 |
-| ROOT 适配/编排/选择桥/pipeline/摘要请求 | `src/company_wiki/document_understanding/{observation_adapter,orchestration,selection_bridge,pipeline,summary_input}.py` | 116 | 否 |
-| benchmark | `tools/document_understanding_benchmark/` | 70 | 工具，非生产路径 |
+| ROOT 适配/编排/选择桥/pipeline/摘要请求 | `src/company_wiki/document_understanding/{observation_adapter,orchestration,selection_bridge,pipeline,summary_input}.py` | 118 | 否 |
+| benchmark | `tools/document_understanding_benchmark/` | 112 | 工具，非生产路径 |
 
-同一调用下合计：**383 passed / 0 skipped**（开启 benchmark 真实数据 opt-in 与 ROOT bindings）；
-关闭 opt-in 时为 371 passed / 5 skipped。`ruff check src tests/unit tools` 全绿；
+同一调用下合计：**427 passed / 0 skipped**（开启 benchmark 真实数据 opt-in 与 ROOT bindings）；
+关闭 opt-in 时为 420 passed / 7 skipped。`ruff check src tests/unit tools` 全绿；
 真实原件节点实际运行并通过（不再 skip）。
 
 自查另发现并修掉 2 个**自身**缺陷：QA 可选性决定"写了但没接"（shadow 单元曾被重新加入选择、

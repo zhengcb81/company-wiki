@@ -242,9 +242,9 @@ adapter 在 wire 上标了 `hints.qa_text_shadow`，`is_selectable()` 也有 8 �
 
 | 口径 | 结果 |
 |---|---|
-| 默认跑（真实数据 opt-in 关闭） | 371 passed / 5 skipped |
-| **拉满（`DU_BENCH_ALLOW_REAL_DATA=1` + bindings）** | **383 passed / 0 skipped** |
-| profiles / structure / root / benchmark | 150 / 47 / 116 / 70 |
+| 默认跑（真实数据 opt-in 关闭） | 420 passed / 7 skipped |
+| **拉满（`DU_BENCH_ALLOW_REAL_DATA=1` + bindings）** | **427 passed / 0 skipped** |
+| profiles / structure / root / benchmark | 150 / 47 / 118 / 112 |
 | ruff（`src tests/unit tools`） | All checks passed |
 | `acceptance.py`（真实数据开启） | **6 passed / 0 skipped / 0 failed，exit 0** |
 
@@ -259,10 +259,10 @@ adapter 在 wire 上标了 `hints.qa_text_shadow`，`is_selectable()` 也有 8 �
 |---|---:|
 | profiles | 150 |
 | structure | 47 |
-| root | 116 |
-| benchmark | 70 |
-| **同一调用合计（真实数据开启）** | **383 passed / 0 skipped** |
-| 同一调用合计（opt-in 关闭） | 371 passed / 5 skipped |
+| root | 118 |
+| benchmark | 112 |
+| **同一调用合计（真实数据开启）** | **427 passed / 0 skipped** |
+| 同一调用合计（opt-in 关闭） | 420 passed / 7 skipped |
 
 `ruff check src tests/unit tools` 全绿；`.planning/du-root/acceptance.py` 六项全 passed、
 0 skipped、exit 0；真实原件节点实际运行（不再 skip），原件 SHA/mtime 未变、0 份复制进 worktree。

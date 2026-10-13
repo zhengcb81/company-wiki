@@ -63,12 +63,13 @@ def _parse_original(path: Path, sample_id: str, sha: str):
         )
         return list(document.units), "complete", []
     if suffix == ".txt":
-        from company_wiki.source_catalog.narrative_evidence import parse_transcript
+        from company_wiki.source_catalog.narrative_evidence import parse_transcript_text
 
-        parsed = parse_transcript(
+        parsed = parse_transcript_text(
             path.read_text(encoding="utf-8", errors="replace"),
             source_id=sample_id,
             source_sha256=sha,
+            language="en",
         )
         return list(parsed.units), "complete", []
     from company_wiki.source_catalog.narrative_evidence import parse_pdf

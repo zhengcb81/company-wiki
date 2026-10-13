@@ -114,7 +114,7 @@
       "exit_code": 0
     }
   },
-  "tests_passed": 383,
+  "tests_passed": 427,
   "tests_failed": 0,
   "tests_not_run": [
     "real LLM summarisation",
@@ -189,10 +189,11 @@
   "test_counts_by_suite": {
     "profiles": 150,
     "structure": 47,
-    "root": 116,
-    "benchmark": 70,
-    "total_with_real_data": 383,
-    "note": "383 passed / 0 skipped across the four suites in ONE invocation with real data enabled; 371 passed / 5 skipped without the benchmark's real-data opt-in"
+    "root": 118,
+    "benchmark": 112,
+    "combined_default": "420 passed, 7 skipped",
+    "combined_real_data": "427 passed, 0 skipped",
+    "note": "Same four suites in ONE pytest invocation. Default: 420 passed / 7 skipped (the benchmark's real-data replays are opt-in). With DU_BENCH_ALLOW_REAL_DATA=1 and bindings present: 427 passed / 0 skipped."
   },
   "public_interfaces_root": [
     {
