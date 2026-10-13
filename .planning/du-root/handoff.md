@@ -153,6 +153,76 @@ log-log 斜率 **1.03**（近线性）。基准另测峰值 RSS：原生 121.9 M
 1. 决定是否提高 profiles 的 200-unit / 64 000-char 探测预算——当前**每份真实文档**都因
    `ROUTE_PROBE_LIMIT` 返回 `confidence=low`，是诚实的预算状态而非健壮路由。
 2. 在 parser 层保留 span 字号，关闭无编号标题缺口。
-3. 定夺 QA 双套角色单元保留哪一套。
+3. ~~定夺 QA 双套角色单元保留哪一套。~~ **已在本次交接中定夺**，见下节。
 4. 按母计划跑真实模型摘要大节点与跨公司 G4/G5；付费前确认既有预算。
 5. 生产接线（默认路径切换）与缓存失效；本层当前不参与生产。
+
+## 本次收尾新增的内容
+
+### 1. QA 双套角色单元：已定夺（原第 3 项）
+
+真实 parser 把每个问答页输出**两遍**：扁平的 `qa_text_shadow`（正文文本层）与结构化的
+`investor_question`/`management`（带发言人与轮次）。
+
+实测万润 IR 原件（302 unit：219 shadow / 18 question / 55 management）：本层产出的 74 个包中
+**53 个完全由 shadow 构成**，只有 14 个完全由结构化角色构成；而 192 条 shadow 文本里只有 10 条
+与结构化文本逐字相同——两份拷贝是**同一内容的不同切分**，不是两份内容。
+
+决定（与生产选择器已有的 `_EXCLUDED_ROLES` 规则一致，不另立第二套约定）：
+
+- **两份都留在 observation**：结构层需要用它们跨页配对问答；删掉任一侧都会让覆盖率虚高。
+- **shadow 不可被选为证据**：它重复了结构化拷贝，选它会重复计数并丢掉发言人归属。
+  现在在 wire 上用 `hints.qa_text_shadow` 显式标注，消费者不必知道 parser 的内部角色名。
+- 新增 `is_selectable()` / `selectable_unit_ids()`；8 项测试锁定，其中包括
+  "结构层仍然看得到每一个 unit"。
+
+### 2. 摘要请求（implementation.md 第 5 步"按 profile 聚合摘要"）
+
+`profile.summary_focus` 此前**没有任何消费者**，摘要实际会由通用指令驱动。
+新增 `build_summary_input(pipeline_result, ...)` → `du-summary-input/1`：
+
+- 焦点取自 **profile**（不同文档类型得到不同焦点，已有测试断言）；
+- 证据包按编排层给出的顺序排列（profile 章节优先级在前、语义类型在后作为同带并列）；
+- 每个成员保留 `unit_id`/`locator`/`page`；observation 里没有的 unit **丢弃而不是编造**；
+- 预算截断记为 `deferred`、未读页/延后单元记为 `unread`——两者都不会变成对完整性的暗示；
+- 约束文本明令保留原语言、并禁止输出评级/目标价/仓位。
+
+它**不调用模型**，付费预算仍由现有 transport 决定。已在 4 份真实原件上验证
+（offering / investor_qa / hk_periodic / cn_quarterly）：各自拿到自己的焦点、provenance 全部可回指、
+deferred 计数如实报告。
+
+### 3. 合并阶段修掉的接线缺陷（3 项）
+
+见上文"合并阶段修掉的三个接线缺陷"。其中 fixtures 同名那一条会让 CI 的四套件同跑直接收集失败。
+
+## 当前完成状态
+
+| 套件 | 测试 |
+|---|---:|
+| profiles | 150 |
+| structure | 47 |
+| root | 99 |
+| benchmark | 65 |
+| **同一调用合计** | **361 passed / 5 skipped** |
+
+`ruff check src tests/unit tools` 全绿；`.planning/du-root/acceptance.py` 六项全 passed、
+0 skipped、exit 0；真实原件节点实际运行（不再 skip），原件 SHA/mtime 未变、0 份复制进 worktree。
+
+## 唯一未做的一项，及具体原因
+
+**implementation.md 第 7 步的付费模型大节点与第 8 步生产切换：未执行。**
+
+这不是"等待人工批准"，具体原因是：
+
+1. **计划本身把它排在母计划 G4/G5 窗口**：task_plan 写"生产切换与真实模型大节点按母计划
+   G4/G5 另行执行"，且明确本层不得替代或签收 G4/G5。
+2. **本层刻意未接入生产入口**，而"同配置真实摘要"要求先做第 8 步的生产接线，而计划把第 8 步
+   排在第 7 步之后。
+3. **无法确认累计预算余量**：`config.yaml` 只有单次调用上限（`llm.max_tokens=8192`、
+   `llm_max_input_chars=120000`），没有累计 USD/token 上限；而 `llm_cost_log.csv` 已有
+   7025 行、约 43.0 USD / 282.7M token，远超计划文本引用的 $20/2M 口径。在无法确认余量的
+   情况下支出，无法给出正当依据。
+
+**凭据是存在的**（主检出 `.env` 内有 DEEPSEEK/MINIMAX/MIMO），所以这是**预算与排序**上的关卡，
+不是缺配置的关卡。推进方式：确认当前累计预算余量 → 接入生产摘要路径 → 跑真实模型节点与
+母计划 G4/G5 审查。
