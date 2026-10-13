@@ -13,6 +13,7 @@ from typing import Any
 from .schema import (
     CRITICAL,
     DEVELOPMENT,
+    FACT_SCOPES,
     GOLD_SCHEMA_VERSION,
     IMPORTANCES,
     MODALITY_VALUES,
@@ -117,6 +118,11 @@ def validate_gold(gold: Mapping[str, Any]) -> dict[str, Any]:
                 ),
                 "role": _require_enum(
                     fact.get("role", "unknown"), ROLE_VALUES, f"{where}.role"
+                ),
+                "fact_scope": _require_enum(
+                    fact.get("fact_scope", "narrative"),
+                    FACT_SCOPES,
+                    f"{where}.fact_scope",
                 ),
             }
         )

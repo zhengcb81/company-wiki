@@ -131,6 +131,72 @@ def test_gold_json_files_are_the_only_scope_source():
 
 
 # ---------------------------------------------------------------------------
+# the card's required minimum critical set
+# ---------------------------------------------------------------------------
+
+# label -> (sample_id, token groups); a group is satisfied by any alternative.
+CARD_MINIMUM_SET = (
+    ("名创门店总量", "hk-annual", (("7504", "7,504"),)),
+    ("名创经营模式", "hk-annual", (("直營店", "Retail Partner", "名創合夥人", "代理門店"),)),
+    ("名创年份", "hk-annual", (("2024",), ("2023",))),
+    ("名创TOP TOY海外", "hk-annual", (("TOP TOY",), ("overseas", "海外"))),
+    ("恒锋两期建设", "cn-equity", (("两期",), ("一期",), ("二期",))),
+    ("恒锋投资", "cn-equity", (("35300", "35,300"), ("28678", "28,678"))),
+    ("中微产品验证阶段", "cn-q-business", (("量产验证",), ("晶圆验证",), ("验证成功",))),
+    ("万润不生产VC", "cn-ir", (("无生产VC",),)),
+    ("万润提问前提", "cn-ir", (("带量采购", "提问"),)),
+    ("扫描确认函", "cn-ipo-confirmation", (("确认意见",),)),
+    ("财务季报负例", "cn-q-sparse", (("其他提醒事项",), ("不适用",))),
+    ("微软消费制Azure", "us-10k", (("consumption-based",),)),
+    ("电话会角色", "us-txt", (("CALL PARTICIPANTS",), ("Operator",), ("analyst",))),
+    ("TAL监管业务约束", "us-20f", (("Alleviating Burden", "prohibited", "shall not"),)),
+)
+
+
+def test_card_minimum_critical_set_is_covered():
+    """The card names nine required elements across these samples.
+
+    If a gold record is renamed, dropped, or hollowed out, this fails rather
+    than the gap silently reopening.
+    """
+
+    have = {record["sample_id"]: record for record in load_gold_dir()}
+    gaps: list[str] = []
+    for label, sample_id, groups in CARD_MINIMUM_SET:
+        record = have.get(sample_id)
+        if record is None:
+            gaps.append(f"{label}: no gold for {sample_id}")
+            continue
+        corpus = " ".join(
+            str(token)
+            for fact in record["facts"]
+            for token in (fact.get("must_preserve") or [])
+            + [
+                anchor.get("exact_quote") or ""
+                for support in fact.get("any_support_sets") or []
+                for anchor in support
+            ]
+            + [fact.get("reason") or "", fact.get("role") or "", fact.get("modality") or ""]
+        ).casefold()
+        unmet = [
+            group
+            for group in groups
+            if not any(alt.casefold() in corpus for alt in group)
+        ]
+        if unmet:
+            gaps.append(f"{label} ({sample_id}): unmet {unmet}")
+    assert not gaps, "card minimum critical set has gaps: " + "; ".join(gaps)
+
+
+def test_card_minimum_set_samples_all_have_gold():
+    """Every sample the card names must exist as a gold record."""
+
+    have = {record["sample_id"] for record in load_gold_dir()}
+    required = {sample_id for _label, sample_id, _groups in CARD_MINIMUM_SET}
+    assert required <= have, f"missing gold for {sorted(required - have)}"
+
+
+# ---------------------------------------------------------------------------
 # scope summary
 # ---------------------------------------------------------------------------
 
@@ -145,11 +211,123 @@ def _fake_result(sample_id: str, scope: str, status: str, passed: int, total: in
         "metrics": {
             "critical_fact_recall": (passed / total) if total else None,
             "critical_fact_recall_denominator": total,
+            "critical_fact_recall_denominator_declared": total,
             "critical_fact_unavailable": 0,
             "fact_recall": (passed / total) if total else None,
             "fact_recall_denominator": total,
         },
     }
+
+
+def test_unreadable_facts_leave_the_recall_denominator():
+    """UNAVAILABLE means 'not read', not 'searched and not found'.
+
+    An unreadable document must not be reported as a recall of 0.000, because
+    that reads as a total miss rather than a coverage gap. The unavailable count
+    is reported separately and the overall status still degrades to PARTIAL.
+    """
+
+    observed = {
+        "schema_version": "du-observed/1",
+        "sample_id": "unreadable",
+        "source_sha256": "a" * 64,
+        "route": None,
+        "selected_locators": [],
+        "selected_text": "",
+        "semantic_units": [],
+        "claims": [],
+        "coverage": {
+            "native_scan": "unavailable",
+            "complete": False,
+            "opaque_pages": [],
+            "deferred_unit_ids": [],
+            "unassigned_unit_ids": [],
+        },
+        "metrics": {},
+        "execution": {"mode": "native", "calls": 0},
+    }
+    gold = {
+        "schema_version": "du-gold/1",
+        "sample_id": "unreadable",
+        "source_sha256": "a" * 64,
+        "scope": "holdout",
+        "expected_route_families": ["annual"],
+        "facts": [
+            {
+                "id": "f1",
+                "importance": "critical",
+                "any_support_sets": [[{"page": 1, "exact_quote": "x"}]],
+            },
+            {
+                "id": "f2",
+                "importance": "critical",
+                "any_support_sets": [[{"page": 2, "exact_quote": "y"}]],
+            },
+        ],
+    }
+    from tools.document_understanding_benchmark import evaluate
+
+    result = evaluate(observed, gold)
+    metrics = result["metrics"]
+    assert metrics["critical_fact_unavailable"] == 2
+    assert metrics["critical_fact_recall_denominator_declared"] == 2
+    assert metrics["critical_fact_recall_denominator"] == 0
+    assert metrics["critical_fact_recall"] is None, (
+        "an unreadable document must not report a recall figure at all"
+    )
+    assert metrics["critical_fact_coverage"] == 0.0
+    assert result["status"] != "PASS"
+
+
+def test_partially_unreadable_denominator_counts_only_readable_facts():
+    """One readable miss plus one unreadable fact must not average together."""
+
+    observed = {
+        "schema_version": "du-observed/1",
+        "sample_id": "partial",
+        "source_sha256": "a" * 64,
+        "route": None,
+        "selected_locators": [],
+        "selected_text": "",
+        "semantic_units": [],
+        "claims": [],
+        "coverage": {
+            "native_scan": "partial",
+            "complete": False,
+            "opaque_pages": [2],
+            "deferred_unit_ids": [],
+            "unassigned_unit_ids": [],
+        },
+        "metrics": {},
+        "execution": {"mode": "native", "calls": 0},
+    }
+    gold = {
+        "schema_version": "du-gold/1",
+        "sample_id": "partial",
+        "source_sha256": "a" * 64,
+        "scope": "development",
+        "expected_route_families": ["annual"],
+        "facts": [
+            {
+                "id": "f-readable",
+                "importance": "critical",
+                "any_support_sets": [[{"page": 1, "exact_quote": "x"}]],
+            },
+            {
+                "id": "f-unreadable",
+                "importance": "critical",
+                "any_support_sets": [[{"page": 2, "exact_quote": "y"}]],
+            },
+        ],
+    }
+    from tools.document_understanding_benchmark import evaluate
+
+    result = evaluate(observed, gold)
+    metrics = result["metrics"]
+    assert metrics["critical_fact_unavailable"] == 1
+    assert metrics["critical_fact_recall_denominator"] == 1
+    assert metrics["critical_fact_recall"] == 0.0
+    assert metrics["critical_fact_coverage"] == 0.5
 
 
 def test_scope_summary_never_merges_development_and_holdout():
@@ -200,3 +378,49 @@ def test_every_gold_record_binds_to_its_declared_sha():
         assert actual == record["source_sha256"], record["sample_id"]
         checked += 1
     assert checked > 0, "no gold record had a usable local binding"
+
+
+def test_make_bindings_preserves_entries_absent_from_the_manifest(tmp_path):
+    """A rebuild must not silently drop holdout bindings.
+
+    The manifest lists only the 20 survey samples. Holdout records are not in it,
+    so an overwriting rebuild would lose them, and a lost binding is
+    indistinguishable from a missing original: the run reports UNAVAILABLE
+    instead of reporting that its own configuration was clobbered.
+    """
+
+    import json as _json
+
+    from tools.document_understanding_benchmark.make_bindings import main as make_main
+
+    original = tmp_path / "orig.bin"
+    original.write_bytes(b"original bytes")
+    digest = hashlib.sha256(b"original bytes").hexdigest()
+
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        _json.dumps(
+            {
+                "samples": [
+                    {"id": "survey-a", "path": str(original), "sha256": digest},
+                ]
+            }
+        ),
+        encoding="utf8",
+    )
+
+    out = tmp_path / "bindings.json"
+    out.write_text(
+        _json.dumps({"holdout-x": "C:/some/holdout.pdf", "survey-a": "C:/stale.pdf"}),
+        encoding="utf8",
+    )
+
+    assert make_main(["--manifest", str(manifest), "--out", str(out)]) == 0
+    written = _json.loads(out.read_text(encoding="utf8"))
+    assert "holdout-x" in written, "holdout binding was dropped by a manifest rebuild"
+    assert written["survey-a"] == str(original), "manifest entry must win on conflict"
+
+    # --replace is the explicit opt-out
+    assert make_main(["--manifest", str(manifest), "--out", str(out), "--replace"]) == 0
+    replaced = _json.loads(out.read_text(encoding="utf8"))
+    assert replaced == {"survey-a": str(original)}

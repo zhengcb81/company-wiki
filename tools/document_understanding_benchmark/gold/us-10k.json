@@ -1,0 +1,321 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "us-10k",
+  "source_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+  "scope": "development",
+  "expected_route_families": [
+    "annual",
+    "sec_10k"
+  ],
+  "notes": "Microsoft CORP Form 10-K，财年截至 2025-06-30，HTML。开发集。本样本承载卡上要求的『微软消费制 Azure』：Azure 的**消费制（consumption-based）**收入机制、Azure 在三层嵌套口径中的位置、以及 M365 Consumer（订阅数）与 Commercial（席位）的度量差异。载体提醒：SEC 文件 HTML 在现有公共路径里没有入口（实测 units=0），因此本样本的观测为 UNAVAILABLE —— 金标先冻结事实，供 ROOT 接通 HTML 前端后直接评分。事实逐字取自原件。",
+  "facts": [
+    {
+      "id": "f-azure-is-consumption-based",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Azure revenue is mainly affected by infrastructure-as-a-service and platform-as-a-service consumption-based services."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "consumption-based services",
+        "infrastructure-as-a-service"
+      ],
+      "must_not_assert": [
+        "Azure 收入主要按每用户或每席位计费",
+        "Azure 与 Microsoft 365 Commercial 采用同一计费机制"
+      ],
+      "reason": "Azure 的官方收入机制表述是「mainly affected by infrastructure-as-a-service and platform-as-a-service **consumption-based** services」——**消费制**（按用量）。与之相对，每用户/席位口径属于 **Microsoft 365 Commercial**（「average revenue per user expansion」）。把 Azure 说成席位制、或把两者的计费机制混为一谈，是本样本最核心的口径错。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-azure-inside-intelligent-cloud",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Server products and cloud services, including Azure and other cloud services, comprising cloud and AI consumption-based services"
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "exact_quote": "Our Intelligent Cloud segment consists of our public, private, and hybrid server products and cloud services that power modern business and developers."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Azure and other cloud services",
+        "Server products and cloud services",
+        "Intelligent Cloud"
+      ],
+      "must_not_assert": [
+        "Azure 是独立报告分部",
+        "Azure 收入等于 Intelligent Cloud 分部收入"
+      ],
+      "reason": "Azure **不是独立报告行**：它是「Azure and other cloud services」的组成部分，后者又属于「Server products and cloud services」，再属于 **Intelligent Cloud** 分部 —— 三层嵌套。所以「Azure 分部收入」这一说法双重错误；把 Azure 等同于 Intelligent Cloud 会把合并口径当单一产品口径。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-three-segments",
+      "importance": "critical",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "We operate our business and report our financial performance using three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "three segments",
+        "Productivity and Business Processes",
+        "More Personal Computing"
+      ],
+      "must_not_assert": [
+        "公司按四个分部报告",
+        "公司只有一个报告分部"
+      ],
+      "reason": "**三个**报告分部：Productivity and Business Processes、Intelligent Cloud、More Personal Computing。同文件还有「Microsoft Cloud」这一跨分部非分部 KPI，不能把它当第四个分部。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-segment-change-in-august-2024",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "In August 2024, we announced changes to the composition of our segments."
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "exact_quote": "most notably bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "In August 2024",
+        "changes to the composition of our segments"
+      ],
+      "must_not_assert": [
+        "分部口径自2024年8月起未变，跨期可直接比较"
+      ],
+      "reason": "2024 年 8 月**已宣布调整分部构成**（把 M365 商用组件并入 Productivity and Business Processes），且自 FY2025 起按新口径报告。因此跨 FY2024/FY2025 的分部对比含口径变更，直接比较会读出虚假的增减。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-m365-consumer-vs-commercial-metric",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Microsoft 365 Consumer products and cloud services revenue increased 11% driven by Microsoft 365 Consumer cloud revenue growth of 11%."
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "exact_quote": "Microsoft 365 Commercial products and cloud services revenue increased 14% driven by Microsoft 365 Commercial cloud revenue growth of 15%."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Microsoft 365 Consumer",
+        "11%",
+        "Microsoft 365 Commercial",
+        "14%"
+      ],
+      "must_not_assert": [
+        "Microsoft 365 Consumer 与 Commercial 使用同一度量指标",
+        "Microsoft 365 商用云收入增长14%"
+      ],
+      "reason": "Consumer 与 Commercial 是**两个产品族**且度量不同：Consumer 以订阅者数计、Commercial 以**席位**计。增速也不同（Consumer products and cloud services +11%；Commercial products and cloud services +14%，其中 Commercial cloud +15%）。把 14% 与 15% 混用、或把两者当成同一指标，是嵌套口径错。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-azure-growth-inside-combined-line",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Server products and cloud services revenue increased 23% driven by Azure and other cloud services revenue growth of 34%."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Azure and other cloud services revenue growth of 34%",
+        "23%"
+      ],
+      "must_not_assert": [
+        "Azure 单独收入增长23%",
+        "Azure and other cloud services 增长23%"
+      ],
+      "reason": "34% 挂在「**Azure and other cloud services**」这条合并行上，23% 是上一层「Server products and cloud services」。本 10-K **不披露 Azure 单独的美元收入、也不披露 Azure 单独的增速**；任何 Azure-only 金额都是编造。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-rpo-scope-and-amount",
+      "importance": "critical",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "was $ 375 billion as of June 30, 2025, of which $ 368 billion is related to the commercial portion of revenue"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "375 billion",
+        "368 billion",
+        "June 30, 2025"
+      ],
+      "must_not_assert": [
+        "剩余履约义务为3,750亿美元且全部为商用部分",
+        "剩余履约义务金额为7,265百万美元"
+      ],
+      "reason": "剩余履约义务（RPO）**375 十亿美元**（截至 2025-06-30），其中商用部分 **368 十亿美元**。7,265 百万美元是**未实现收入的期末余额**，与 RPO 不是同一指标（RPO 还含「will be invoiced」部分）。把两者混用或丢掉「of which」的限定，都会读错。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-rpo-recognition-is-forward",
+      "importance": "critical",
+      "quantity_basis": "ratio",
+      "modality": "plan",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "We expect to recognize approximately 40 % of our total company remaining performance obligation revenue over the next 12 months"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "approximately 40 %",
+        "over the next 12 months"
+      ],
+      "must_not_assert": [
+        "公司已在报告期内确认40%的剩余履约义务"
+      ],
+      "reason": "约 40% 是**预计未来 12 个月将确认**的比例（前瞻语态「We expect to recognize ... over the next 12 months」），不是已确认。与 375 十亿美元同句相邻，时态写错即错。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-total-revenue-consolidated",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Microsoft Cloud revenue increased 23% to $168.9 billion."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "168.9 billion",
+        "23%"
+      ],
+      "must_not_assert": [
+        "Microsoft Cloud 是三个报告分部之一"
+      ],
+      "reason": "「Microsoft Cloud」168.9 十亿美元、+23% 是**跨分部的非分部 KPI**（由 M365 Commercial cloud、Azure and other cloud services、LinkedIn 商用部分与 Dynamics 365 组成），不是分部。同时它与 Azure 那条 34% 的合并行极易混淆——两个都是「cloud」字样、都是两位数增速、都在同段。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-fiscal-year-not-calendar",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "was $ 375 billion as of June 30, 2025"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "June 30, 2025"
+      ],
+      "must_not_assert": [
+        "本10-K对应日历2025年自然年度"
+      ],
+      "reason": "财年截至 **6 月 30 日**（余额日为 2025-06-30）。文件通篇以财年表述，因此「FY2025」= 2024-07-01 至 2025-06-30，跨两个日历年；说成「2025 日历年」是期间错。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-uneared-revenue-rollforward",
+      "importance": "normal",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Balance, end of period $ 67,265"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "67265"
+      ],
+      "must_not_assert": [
+        "未实现收入期末余额为375十亿美元"
+      ],
+      "reason": "未实现收入**期末余额** 67,265 百万美元（期初 60,184，本期递延 186,957，确认 179,876）。这是**时点余额**，且与 375 十亿美元的 RPO 是两个不同指标，不可互换。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-html-tag-boundary-corruption",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Item 1 OPERATING SEGMENTS"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "OPERATING SEGMENTS"
+      ],
+      "must_not_assert": [
+        "Azure 是独立报告分部并单独披露收入"
+      ],
+      "reason": "SEC HTML 含内联 XBRL 标签，朴素去标签会破坏词边界（同批次的 NVIDIA 10-K 会把注册人渲染成「NVIDIA CORP ORATION」，因为 ix:nonNumeric 元素在字面文本 ORATION 之前闭合）。因此从本文件抽取的实体名与标题必须与原文核对；解析产物不能直接当原文。",
+      "fact_scope": "document_meta"
+    }
+  ]
+}

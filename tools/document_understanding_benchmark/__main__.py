@@ -77,10 +77,22 @@ def _print_scope_summary(summary: dict[str, Any]) -> None:
     for scope, row in summary.items():
         recall = row["critical_fact_recall"]
         recall_text = "n/a" if recall is None else f"{recall:.3f}"
+        coverage = row.get("critical_fact_coverage")
+        coverage_text = "" if coverage in (None, 1.0) else f" coverage={coverage:.3f}"
         print(
             f"  {scope:<12} docs={row['documents']} "
             f"critical={row['critical_facts_passed']}/{row['critical_facts_total']} "
-            f"({recall_text}) statuses={row['statuses']}"
+            f"({recall_text}){coverage_text} statuses={row['statuses']}"
+        )
+        narrative = row.get("narrative_fact_recall")
+        meta = row.get("document_meta_fact_recall")
+        narrative_text = "n/a" if narrative is None else f"{narrative:.3f}"
+        meta_text = "n/a" if meta is None else f"{meta:.3f}"
+        print(
+            f"  {'':<12} narrative={row.get('narrative_facts_passed', 0)}/"
+            f"{row.get('narrative_facts_total', 0)} ({narrative_text})  "
+            f"document_meta={row.get('document_meta_facts_passed', 0)}/"
+            f"{row.get('document_meta_facts_total', 0)} ({meta_text})"
         )
 
 
@@ -143,9 +155,14 @@ def _scope_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
     for scope, rows in sorted(by_scope.items()):
         critical_pass = 0
         critical_total = 0
+        critical_declared = 0
         critical_unavailable = 0
         fact_pass = 0
         fact_total = 0
+        narrative_pass = 0
+        narrative_total = 0
+        meta_pass = 0
+        meta_total = 0
         statuses: dict[str, int] = {}
         for row in rows:
             statuses[row["status"]] = statuses.get(row["status"], 0) + 1
@@ -155,20 +172,41 @@ def _scope_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
             if recall is not None and denominator:
                 critical_pass += round(recall * denominator)
             critical_total += denominator
+            critical_declared += (
+                metrics.get("critical_fact_recall_denominator_declared") or denominator
+            )
             critical_unavailable += metrics.get("critical_fact_unavailable") or 0
             fact_denominator = metrics.get("fact_recall_denominator") or 0
             fact_recall = metrics.get("fact_recall")
             if fact_recall is not None and fact_denominator:
                 fact_pass += round(fact_recall * fact_denominator)
             fact_total += fact_denominator
+            narrative_pass += metrics.get("narrative_facts_passed") or 0
+            narrative_total += metrics.get("narrative_facts_total") or 0
+            meta_pass += metrics.get("document_meta_facts_passed") or 0
+            meta_total += metrics.get("document_meta_facts_total") or 0
         summary[scope] = {
             "documents": len(rows),
             "statuses": dict(sorted(statuses.items())),
             "critical_facts_passed": critical_pass,
             "critical_facts_total": critical_total,
+            "critical_facts_declared": critical_declared,
             "critical_facts_unavailable": critical_unavailable,
+            "critical_fact_coverage": (
+                critical_total / critical_declared if critical_declared else None
+            ),
             "critical_fact_recall": (
                 critical_pass / critical_total if critical_total else None
+            ),
+            "narrative_facts_passed": narrative_pass,
+            "narrative_facts_total": narrative_total,
+            "narrative_fact_recall": (
+                narrative_pass / narrative_total if narrative_total else None
+            ),
+            "document_meta_facts_passed": meta_pass,
+            "document_meta_facts_total": meta_total,
+            "document_meta_fact_recall": (
+                meta_pass / meta_total if meta_total else None
             ),
             "facts_passed": fact_pass,
             "facts_total": fact_total,

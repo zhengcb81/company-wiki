@@ -1,0 +1,418 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "cn-q-sparse",
+  "source_sha256": "a230adbc91f9987f439f0e5d5b46706f6d6c40a7d2046a4491e1e77ee4fcaea9",
+  "scope": "development",
+  "expected_route_families": [
+    "quarterly",
+    "quarterly_report"
+  ],
+  "notes": "世华科技（688093，科创板）2026 年第一季度报告，10 页。开发集。本样本是卡上要求的『财务季报负例』：正文全部为财务与股东信息，没有任何产品/业务叙述，且『三、其他提醒事项』勾选不适用。它的作用不是考抽取，而是考两件事：(1) 不得因为业务密度低就宣称整类季报可以跳过；(2) 不得从财务变动原因里编造业务进展。事实逐字取自原件。",
+  "facts": [
+    {
+      "id": "f-revenue-down",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "239,174,261.47",
+            "locator": "loc:v1/page:1/table:1"
+          },
+          {
+            "page": 1,
+            "exact_quote": "-6.45",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "239174261.47",
+        "-6.45"
+      ],
+      "must_not_assert": [
+        "本报告期营业收入同比增长6.45%",
+        "公司一季度营业收入实现增长"
+      ],
+      "reason": "营业收入 239,174,261.47 元，**同比下降 6.45%**。同一张表里经营活动现金流量净额是 **+53.28%**，一负一正相邻，方向极易取反。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-cashflow-up-is-not-growth",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "112,145,511.65",
+            "locator": "loc:v1/page:2/table:1"
+          },
+          {
+            "page": 2,
+            "exact_quote": "53.28",
+            "locator": "loc:v1/page:2/table:1"
+          }
+        ],
+        [
+          {
+            "page": 3,
+            "exact_quote": "主要系购买商品、接受劳务支付的现金同比减少所致",
+            "locator": "loc:v1/page:3/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "112145511.65",
+        "53.28",
+        "购买商品、接受劳务支付的现金同比减少"
+      ],
+      "must_not_assert": [
+        "经营现金流增长反映公司销售回款能力提升",
+        "公司经营质量改善带动现金流增长53.28%"
+      ],
+      "reason": "经营活动现金流量净额 112,145,511.65 元、+53.28%，但公司给出的原因是**「购买商品、接受劳务支付的现金同比减少」**——即支出减少，不是销售改善。在收入**下降 6.45%** 的同期把现金流增长归因于经营向好，是典型的因果幻觉。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-net-profit-down",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "85,363,260.21",
+            "locator": "loc:v1/page:1/table:1"
+          },
+          {
+            "page": 1,
+            "exact_quote": "-2.07",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "85363260.21",
+        "-2.07"
+      ],
+      "must_not_assert": [
+        "归母净利润同比增长2.07%"
+      ],
+      "reason": "归母净利润 85,363,260.21 元、**-2.07%**；扣非归母净利润 79,749,459.95 元、**-4.59%**。两个降幅相邻且扣非降幅更大，不得互换，也不得写成增长。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-deducted-profit-down-more",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "79,749,459.95",
+            "locator": "loc:v1/page:1/table:1"
+          },
+          {
+            "page": 1,
+            "exact_quote": "-4.59",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "79749459.95",
+        "-4.59"
+      ],
+      "must_not_assert": [
+        "扣非净利润同比下降2.07%"
+      ],
+      "reason": "扣非归母净利润 79,749,459.95 元、-4.59%。非经常性损益合计 5,613,800.26 元，正是它让归母降幅（-2.07%）小于扣非降幅（-4.59%）——把两者混用会读错主营趋势。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-rd-up-while-revenue-down",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "15,324,068.90",
+            "locator": "loc:v1/page:1/table:1"
+          },
+          {
+            "page": 1,
+            "exact_quote": "16.81",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "15324068.90",
+        "16.81"
+      ],
+      "must_not_assert": [
+        "研发投入同比下降16.81%"
+      ],
+      "reason": "研发投入 15,324,068.90 元、**+16.81%**，而收入是 -6.45%。研发上升与收入下降同时成立，方向相反，不得取反也不得互相解释。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-roe-points-vs-rd-points",
+      "importance": "critical",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "减少1.33 个百分点",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ],
+        [
+          {
+            "page": 1,
+            "exact_quote": "增加1.28 个百分点",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "1.33",
+        "1.28"
+      ],
+      "must_not_assert": [
+        "加权平均净资产收益率增加1.33个百分点",
+        "研发投入占营业收入比例减少1.28个百分点"
+      ],
+      "reason": "加权平均净资产收益率 3.02%，**减少 1.33 个百分点**；研发投入占收入比例 6.41%，**增加 1.28 个百分点**。两个「百分点」数值接近（1.33 / 1.28）、方向相反（减 / 增），是本样本最精密的互换陷阱。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-not-audited",
+      "importance": "critical",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "第一季度财务报表是否经审计",
+            "locator": "loc:v1/page:1/paragraph:3"
+          },
+          {
+            "page": 1,
+            "exact_quote": "□是√否",
+            "locator": "loc:v1/page:1/paragraph:4"
+          }
+        ],
+        [
+          {
+            "page": 4,
+            "exact_quote": "审计类型：未经审计",
+            "locator": "loc:v1/page:4/paragraph:5"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "未经审计"
+      ],
+      "must_not_assert": [
+        "本季度财务报表已经审计"
+      ],
+      "reason": "「第一季度财务报表是否经审计」勾选 √否，且财务报表页脚写明「审计类型：未经审计」。同一事实在文件里出现两处，都指向未审计。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-other-reminders-not-applicable",
+      "importance": "critical",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 4,
+            "exact_quote": "三、其他提醒事项",
+            "locator": "loc:v1/page:4/paragraph:1"
+          },
+          {
+            "page": 4,
+            "exact_quote": "需提醒投资者关注的关于公司报告期经营情况的其他重要信息",
+            "locator": "loc:v1/page:4/paragraph:2"
+          },
+          {
+            "page": 4,
+            "exact_quote": "□适用√不适用",
+            "locator": "loc:v1/page:4/paragraph:3"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "其他提醒事项",
+        "不适用"
+      ],
+      "must_not_assert": [
+        "公司在其他提醒事项中披露了经营情况的重要信息",
+        "本季报未披露其他提醒事项说明公司刻意隐瞒"
+      ],
+      "reason": "「三、其他提醒事项」明确勾选**不适用**。这既不能读成「有事没披露」，也不能反过来当作「整份季报没有内容所以可跳过」的依据——不适用是一个明确状态，不是空白。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-low-business-density-is-a-measurement",
+      "importance": "critical",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "一、主要财务数据",
+            "locator": "loc:v1/page:1/paragraph:5"
+          }
+        ],
+        [
+          {
+            "page": 3,
+            "exact_quote": "二、股东信息",
+            "locator": "loc:v1/page:3/paragraph:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "主要财务数据",
+        "股东信息"
+      ],
+      "must_not_assert": [
+        "本季报因无业务内容可整类跳过",
+        "A股季报均无业务价值"
+      ],
+      "reason": "本文件章节结构为：一、主要财务数据；二、股东信息；三、其他提醒事项（不适用）；四、季度财务报表。**没有**管理层讨论、产品进展或经营叙述——这是真实的低业务密度。正确结论是「本份季报业务密度低」，而不是「季报这一类可以跳过」：同批次的 `cn-q-business`（中微 2026Q1）关键召回达 0.667，证明季报可以承载可选中的业务事实。",
+      "fact_scope": "document_meta"
+    },
+    {
+      "id": "f-controller-and-controlled-entities",
+      "importance": "normal",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "顾正青为公司控制股东、实际控制人，耶弗有投资发展（苏州）有限公司、苏州世禄企业管理中心（有限合伙）系顾正青控制的企业",
+            "locator": "loc:v1/page:3/paragraph:3"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "顾正青",
+        "控制股东",
+        "实际控制人"
+      ],
+      "must_not_assert": [
+        "吕刚为公司实际控制人"
+      ],
+      "reason": "顾正青同时是**控制股东与实际控制人**（25.60%，71,778,269 股），另有两家由其控制的企业；吕刚为第二大股东（17.20%）但**不是**实际控制人。按持股名次推断控制权会错。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-shareholder-count",
+      "importance": "normal",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "9,042",
+            "locator": "loc:v1/page:3/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "9042"
+      ],
+      "must_not_assert": [
+        "报告期末普通股股东总数为9,042名以上"
+      ],
+      "reason": "报告期末普通股股东总数 9,042（精确值，非约数）。同页「表决权恢复的优先股股东总数」为**不适用**，两者不可混为一项。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-total-assets",
+      "importance": "normal",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "2,989,699,772.89",
+            "locator": "loc:v1/page:2/table:1"
+          },
+          {
+            "page": 2,
+            "exact_quote": "1.09",
+            "locator": "loc:v1/page:2/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2989699772.89",
+        "1.09"
+      ],
+      "must_not_assert": [
+        "总资产较上年度末增长11.09%"
+      ],
+      "reason": "总资产 2,989,699,772.89 元、较上年度末 +1.09%（**时点存量**，非期间流量）。归母权益 2,870,211,976.11 元、+2.85%。两者单位是元、增幅是个位数，量级接近易混。",
+      "fact_scope": "narrative"
+    },
+    {
+      "id": "f-eps-down",
+      "importance": "normal",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "0.30",
+            "locator": "loc:v1/page:1/table:1"
+          },
+          {
+            "page": 1,
+            "exact_quote": "-9.09",
+            "locator": "loc:v1/page:1/table:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "0.30",
+        "-9.09"
+      ],
+      "must_not_assert": [
+        "基本每股收益同比增长9.09%"
+      ],
+      "reason": "基本每股收益 0.30 元/股（上年同期 0.33），**-9.09%**。EPS 降幅（-9.09%）大于净利润降幅（-2.07%），因为股本变化；两者不可互相替代。",
+      "fact_scope": "narrative"
+    }
+  ]
+}
