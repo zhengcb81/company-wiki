@@ -1,0 +1,155 @@
+{
+  "schema_version": "du-input/1",
+  "name": "cross_page_project",
+  "description": "Fundraising project table whose last row continues onto the next page; the project subject must survive the page break.",
+  "source_ref": {
+    "source_id": "opaque-source-project",
+    "source_sha256": "opaque-digest-project"
+  },
+  "metadata": {
+    "title": "Synthetic offering memorandum",
+    "declared_kind": "unknown",
+    "regime": "unknown",
+    "mime_type": "application/pdf",
+    "language": "zh"
+  },
+  "coverage": {
+    "native_scan": "partial",
+    "opaque_pages": [],
+    "deferred_pages": []
+  },
+  "units": [
+    {
+      "unit_id": "p1",
+      "ordinal": 0,
+      "locator": "opaque-loc-1001",
+      "page": 62,
+      "text": "第三节 募集资金运用",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 90, 300, 115], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "p2",
+      "ordinal": 1,
+      "locator": "opaque-loc-1002",
+      "page": 62,
+      "text": "本次募集资金拟投资于以下项目：",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 130, 530, 155], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "p3",
+      "ordinal": 2,
+      "locator": "opaque-loc-1003",
+      "page": 62,
+      "text": "单位：万元",
+      "kind": "table_caption",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 160, 200, 178], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": "tbl-1", "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "p4",
+      "ordinal": 3,
+      "locator": "opaque-loc-1004",
+      "page": 62,
+      "text": "项目名称 | 投资总额 | 募集资金投入额 | 建设期",
+      "kind": "table_header",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 185, 530, 205], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": "tbl-1", "row": 0, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "p5",
+      "ordinal": 4,
+      "locator": "opaque-loc-1005",
+      "page": 62,
+      "text": "高端精密刀具扩产项目 | 28000 | 20000 | 24 个月",
+      "kind": "table_row",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 210, 530, 230], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": "tbl-1", "row": 1, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "p6",
+      "ordinal": 5,
+      "locator": "opaque-loc-1006",
+      "page": 62,
+      "text": "该项目计划用地 60 亩，其中新增用地 20 亩，利用现有厂房 40 亩。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 250, 530, 295], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "p7",
+      "ordinal": 6,
+      "locator": "opaque-loc-1007",
+      "page": 62,
+      "text": "项目建设期为 24 个月，自募集资金到位之日起计算，其中前 12 个月完成土建，",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 300, 530, 345], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "p8",
+      "ordinal": 7,
+      "locator": "opaque-loc-1008",
+      "page": 63,
+      "text": "后 12 个月完成设备安装调试并试生产。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 95, 530, 140], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "p9",
+      "ordinal": 8,
+      "locator": "opaque-loc-1009",
+      "page": 63,
+      "text": "项目达产后预计年新增产能 120 万件。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 145, 530, 190], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "p10",
+      "ordinal": 9,
+      "locator": "opaque-loc-1010",
+      "page": 63,
+      "text": "第四节 风险因素",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 240, 300, 265], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "p11",
+      "ordinal": 10,
+      "locator": "opaque-loc-1011",
+      "page": 63,
+      "text": "若下游需求不及预期，新增产能可能无法及时消化。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 280, 530, 325], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    }
+  ]
+}

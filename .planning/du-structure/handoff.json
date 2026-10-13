@@ -1,0 +1,213 @@
+{
+  "schema_version": "du-handoff/1",
+  "lane": "du-structure",
+  "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
+  "implementation_commits": [],
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/structure",
+  "status": "implemented_and_tested_not_wired",
+  "owned_paths": [
+    "src/company_wiki/document_understanding/structure/",
+    "tests/unit/document_understanding_structure/",
+    "tests/fixtures/document_understanding_structure/",
+    ".planning/du-structure/"
+  ],
+  "public_interfaces": [
+    {
+      "module": "company_wiki.document_understanding.structure",
+      "symbol": "build_structure",
+      "signature": "build_structure(observation: Mapping, *, limits: Mapping | None = None) -> dict",
+      "input_schema": "du-input/1",
+      "output_schema": "du-structure/1"
+    }
+  ],
+  "output_shape": {
+    "top_level_keys": [
+      "schema_version",
+      "source_ref",
+      "sections",
+      "semantic_units",
+      "relations",
+      "coverage",
+      "diagnostics"
+    ],
+    "coverage_keys": [
+      "native_scan",
+      "structured_unit_count",
+      "unassigned_unit_ids",
+      "deferred_unit_ids",
+      "opaque_pages",
+      "deferred_pages",
+      "excluded_furniture_unit_ids",
+      "complete",
+      "limits"
+    ],
+    "limits_defaults": {
+      "max_units": 50000,
+      "max_relations": 100000,
+      "max_group_members": 64,
+      "max_work_units": 2000000
+    }
+  },
+  "interface_deviations": [
+    {
+      "field": "coverage.deferred_pages",
+      "kind": "additive",
+      "detail": "du-structure/1 spec lists opaque_pages and deferred_unit_ids; deferred pages are echoed separately so ROOT can distinguish an opaque page from a caller-deferred page. No existing field changed meaning."
+    },
+    {
+      "field": "coverage.excluded_furniture_unit_ids",
+      "kind": "additive",
+      "detail": "TOC entries and repeated running headers are listed here as well as in deferred_unit_ids, so a consumer can tell page furniture from a budget deferral."
+    },
+    {
+      "field": "coverage.limits",
+      "kind": "additive",
+      "detail": "Resolved limits are echoed for auditability; caller-lower values only, never raised."
+    },
+    {
+      "field": "diagnostics[].code",
+      "kind": "new_enum",
+      "detail": "Codes used: NO_UNITS, NO_LAYOUT_EVIDENCE, WORK_BUDGET_EXCEEDED, TOC_ENTRIES_DETECTED, REPEATED_RUNNING_HEADER, CONTINUATION_GAP, CONTINUATION_LIMIT, LAYOUT_INCONSISTENT, NO_HEADING_EVIDENCE, NO_SECTION_HEADINGS, SECTION_OVERSIZED, GROUP_BUDGET_EXCEEDED, PROJECT_SUBJECT_ONLY, PROJECT_ANCHOR_CONFLICT, PROJECT_HEADER_WITHOUT_ROWS, CROSS_PAGE_CONTINUATION, ANSWER_MISSING, ANSWER_WITHOUT_QUESTION, TABLE_HEADER_WITHOUT_ROWS, TABLE_UNIT_MISSING, TABLE_PERIOD_MISSING, NO_RECOGNIZED_DISCOURSE, RELATION_UNIT_MISSING, RELATION_BUDGET_EXCEEDED, RELATION_CYCLE, OPAQUE_PAGE, DEFERRED_PAGE, NATIVE_SCAN_INCOMPLETE."
+    }
+  ],
+  "root_adapter_required": [
+    {
+      "id": "DU-S-ADAPT-1",
+      "need": "hints.heading_level",
+      "why": "narrative_evidence._emit_pdf_text_units emits every PDF block as pdf_text_block with no heading_level. Section confidence is capped at medium and NO_HEADING_EVIDENCE is reported on all three real C-node samples.",
+      "evidence": ".planning/du-structure/c-evidence/c_node_evidence.json"
+    },
+    {
+      "id": "DU-S-ADAPT-2",
+      "need": "layout.column",
+      "why": "The real PDF parser provides bbox but no column lane index. The lane infers lanes from side-by-side non-overlapping boxes plus writing system; an explicit column index would be stronger and would let confidence rise above medium.",
+      "evidence": "miniso p12: left x0≈56.7, right x0≈348.6, both language='zh'"
+    },
+    {
+      "id": "DU-S-ADAPT-3",
+      "need": "metadata.language correctness",
+      "why": "Real units carry language='zh' even for English text, so the language field cannot be used for lane or alignment decisions. The lane uses the writing system present in the text instead. ROOT should either fix the field or document it as unreliable.",
+      "evidence": "miniso p12 English column units report language='zh'"
+    },
+    {
+      "id": "DU-S-ADAPT-4",
+      "need": "table_header / table_caption sibling units",
+      "why": "Real operating tables arrive as a single pdf_table_row per row with no header or 单位/币种 caption sibling, so operating_table semantic units cannot be built and TABLE_UNIT_MISSING/TABLE_PERIOD_MISSING cannot even be raised. ROOT needs to emit the header and caption as their own units with a shared table_id.",
+      "evidence": "miniso p12 produced zero operating_table units although the store-count table is present"
+    },
+    {
+      "id": "DU-S-ADAPT-5",
+      "need": "QA page de-duplication decision",
+      "why": "The parser emits QA pages twice: once as investor_question/management role units and once as qa_text_shadow units with different unit ids. The lane keeps both because deleting a source unit is forbidden. ROOT's adapter/selector layer must choose which role set to keep.",
+      "evidence": "wanrun p2-3: 109 units, 16 qa_exchange packages, near-duplicate content from two passes"
+    },
+    {
+      "id": "DU-S-ADAPT-6",
+      "need": "table_id on rows",
+      "why": "The lane keys table grouping on hints.table_id. When the parser omits it the lane falls back to page-scoped loose grouping, which cannot separate two tables on one page."
+    }
+  ],
+  "A_B_C_evidence": {
+    "A": {
+      "command": "python -X utf8 -m pytest tests/unit/document_understanding_structure/test_structure_red.py -q",
+      "exit_code": 0,
+      "result": "22 passed",
+      "covers": [
+        "TOC entries and body heading with the same title",
+        "cross-page project continuation p62 -> p63",
+        "two adjacent projects and one project with several sub-sections",
+        "bilingual two-column lanes",
+        "question on one page, answer on the next",
+        "operating table with unit, period and footnote",
+        "scanned missing page"
+      ],
+      "initially_red": "module absent (ModuleNotFoundError) then 4 failing assertions before fixes"
+    },
+    "B": {
+      "command": "python -X utf8 -m pytest tests/unit/document_understanding_structure -q",
+      "exit_code": 0,
+      "result": "47 passed in 4.00s",
+      "elapsed_seconds": 4.0,
+      "covers": [
+        "input mapping never mutated",
+        "byte-stable output for the same input",
+        "every emitted reference resolves to an input unit",
+        "wire enums respected",
+        "no dependency cycle",
+        "bad layout never high confidence",
+        "limits can only be lowered; invalid limits rejected",
+        "scanned gap forces partial",
+        "schema/duplicate-id/missing-source errors rejected"
+      ]
+    },
+    "C": {
+      "command": "python -X utf8 .planning/du-structure/c_node_real_check.py --bindings .planning/du-structure/bindings.local.json --output .planning/du-structure/c-evidence",
+      "exit_code": 0,
+      "result_path": ".planning/du-structure/c-evidence/c_node_evidence.json",
+      "samples_observed": 3,
+      "samples_unavailable": 0,
+      "detail": [
+        "miniso hk annual p12: 49 units, 5 sections, relations continuation+language_parallel",
+        "hengfeng offering p62-63: 77 units, 16 sections, 4 project packages, one 9-member CROSS_PAGE_CONTINUATION",
+        "wanrun IR p2-3: 109 units, 5 sections, 16 qa_exchange, relations continuation+question_answer, denial preserved in-package"
+      ],
+      "excerpt_bytes_per_document": [3216, 4321, 8147],
+      "raw_originals_copied": false
+    }
+  },
+  "tests_passed": 47,
+  "tests_failed": 0,
+  "tests_not_run": [
+    "production narrative selector / evidence selection integration",
+    "real LLM summarization and semantic entailment review",
+    "cross-document change detection",
+    "full-document recall measurement",
+    "peak RSS measurement"
+  ],
+  "known_gaps": [
+    "operating_table units were not produced on any real C-node sample because the parser does not emit table header/caption siblings (DU-S-ADAPT-4).",
+    "Section confidence on real PDF input is capped at medium without heading_level (DU-S-ADAPT-1).",
+    "The lane is not wired into the production parse/select path; build_structure has no production caller.",
+    "No real-document assertion was made about 恒锋 project correctness beyond membership and cross-page continuation; the economic content is not judged.",
+    "coverage.complete on C-node samples reflects a partial native scan of selected pages only; it is not evidence of whole-document coverage."
+  ],
+  "resource_observations": {
+    "scale_timings_ms": [
+      {"units": 1000, "best_ms": 37.2, "sections": 40, "semantic_units": 200, "relations": 760},
+      {"units": 2000, "best_ms": 79.0, "sections": 80, "semantic_units": 400, "relations": 1520},
+      {"units": 5000, "best_ms": 206.2, "sections": 200, "semantic_units": 1000, "relations": 3800},
+      {"units": 10000, "best_ms": 384.5, "sections": 400, "semantic_units": 2000, "relations": 7600},
+      {"units": 20000, "best_ms": 1058.2, "sections": 800, "semantic_units": 4000, "relations": 15200},
+      {"units": 40000, "best_ms": 1751.9, "sections": 1600, "semantic_units": 8000, "relations": 30400}
+    ],
+    "loglog_slope_10k_to_40k": 1.09,
+    "quadratic_hotspots_found_and_fixed": [
+      "sections._layout_inconsistency rebuilt a full unit index per section",
+      "sections._dominant_language rebuilt a full unit index per section",
+      "relations footnote fallback scanned every ordered unit per footnote"
+    ],
+    "peak_rss": "not measured",
+    "real_sample_wall_clock_seconds": "not separately timed; each sample parsed once through the existing parser",
+    "model_calls": 0,
+    "network_calls": 0
+  },
+  "raw_preservation": {
+    "originals_modified": false,
+    "originals_copied_into_repo": false,
+    "sha256_verified": {
+      "hk-miniso-annual-two-column": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "cn-hengfeng-offering-cross-page": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "cn-wanrun-ir-qa": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7"
+    },
+    "sha256_match_against_plan_manifest": true,
+    "mtimes_unchanged": true
+  },
+  "scratch_restore": {
+    "temporary_dirs_created": 1,
+    "temporary_dirs_removed": 1,
+    "detail": ".planning/du-structure/c-evidence/ is retained as evidence; it contains bounded excerpts only (<= 8 KiB per document), no full-text copies.",
+    "sentinel_content_preserved": true
+  },
+  "install_actions": "none",
+  "next_root_action": "Wire build_structure into the du-input adapter, then apply DU-S-ADAPT-1..6 in the format adapter so heading_level, column, table header/caption units, and table_id are present. Do not translate, renumber or rewrite any source locator while doing so."
+}

@@ -1,0 +1,131 @@
+{
+  "schema_version": "du-input/1",
+  "name": "bilingual_two_column",
+  "description": "HK annual report page in two language columns: Simplified Chinese left lane, English right lane, describing the same store-count table.",
+  "source_ref": {
+    "source_id": "opaque-source-bilingual",
+    "source_sha256": "opaque-digest-bilingual"
+  },
+  "metadata": {
+    "title": "Synthetic HK annual report",
+    "declared_kind": "unknown",
+    "regime": "unknown",
+    "mime_type": "application/pdf",
+    "language": "zh"
+  },
+  "coverage": {
+    "native_scan": "complete",
+    "opaque_pages": [],
+    "deferred_pages": []
+  },
+  "units": [
+    {
+      "unit_id": "b1",
+      "ordinal": 0,
+      "locator": "opaque-loc-3001",
+      "page": 12,
+      "text": "业务回顾",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [40, 80, 290, 105], "page_width": 595, "page_height": 842, "column": 0},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "b2",
+      "ordinal": 1,
+      "locator": "opaque-loc-3002",
+      "page": 12,
+      "text": "Business Review",
+      "kind": "heading",
+      "language": "en",
+      "role": "company_filing",
+      "layout": {"bbox": [305, 80, 555, 105], "page_width": 595, "page_height": 842, "column": 1},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "b3",
+      "ordinal": 2,
+      "locator": "opaque-loc-3003",
+      "page": 12,
+      "text": "截至2024年12月31日，本集团门店总数为7,504家，其中内地4,200家，海外3,304家。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [40, 115, 290, 175], "page_width": 595, "page_height": 842, "column": 0},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "b4",
+      "ordinal": 3,
+      "locator": "opaque-loc-3004",
+      "page": 12,
+      "text": "As at 31 December 2024, the Group had 7,504 stores in total, comprising 4,200 in Mainland China and 3,304 overseas.",
+      "kind": "paragraph",
+      "language": "en",
+      "role": "company_filing",
+      "layout": {"bbox": [305, 115, 555, 175], "page_width": 595, "page_height": 842, "column": 1},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "b5",
+      "ordinal": 4,
+      "locator": "opaque-loc-3005",
+      "page": 12,
+      "text": "门店数量 | 2023年 | 2024年",
+      "kind": "table_header",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [40, 185, 290, 205], "page_width": 595, "page_height": 842, "column": 0},
+      "hints": {"heading_level": null, "table_id": "tbl-hk-1", "row": 0, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "b6",
+      "ordinal": 5,
+      "locator": "opaque-loc-3006",
+      "page": 12,
+      "text": "内地 | 3,500 | 4,200",
+      "kind": "table_row",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [40, 210, 290, 230], "page_width": 595, "page_height": 842, "column": 0},
+      "hints": {"heading_level": null, "table_id": "tbl-hk-1", "row": 1, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "b7",
+      "ordinal": 6,
+      "locator": "opaque-loc-3007",
+      "page": 12,
+      "text": "Number of stores | 2023 | 2024",
+      "kind": "table_header",
+      "language": "en",
+      "role": "company_filing",
+      "layout": {"bbox": [305, 185, 555, 205], "page_width": 595, "page_height": 842, "column": 1},
+      "hints": {"heading_level": null, "table_id": "tbl-hk-2", "row": 0, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "b8",
+      "ordinal": 7,
+      "locator": "opaque-loc-3008",
+      "page": 12,
+      "text": "Mainland China | 3,500 | 4,200",
+      "kind": "table_row",
+      "language": "en",
+      "role": "company_filing",
+      "layout": {"bbox": [305, 210, 555, 230], "page_width": 595, "page_height": 842, "column": 1},
+      "hints": {"heading_level": null, "table_id": "tbl-hk-2", "row": 1, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "b9",
+      "ordinal": 8,
+      "locator": "opaque-loc-3009",
+      "page": 12,
+      "text": "注：门店总数包含直营店、合伙人门店及代理门店。",
+      "kind": "footnote",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [40, 240, 290, 265], "page_width": 595, "page_height": 842, "column": 0},
+      "hints": {"heading_level": null, "table_id": "tbl-hk-1", "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    }
+  ]
+}

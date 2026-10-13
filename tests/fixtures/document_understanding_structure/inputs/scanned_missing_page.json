@@ -1,0 +1,59 @@
+{
+  "schema_version": "du-input/1",
+  "name": "scanned_missing_page",
+  "description": "Scanned filing whose page 2 produced no native text (opaque) and whose page 4 is deferred; structure must stay partial and never claim full coverage.",
+  "source_ref": {
+    "source_id": "opaque-source-scanned",
+    "source_sha256": "opaque-digest-scanned"
+  },
+  "metadata": {
+    "title": "Synthetic scanned confirmation",
+    "declared_kind": "unknown",
+    "regime": "unknown",
+    "mime_type": "application/pdf",
+    "language": "zh"
+  },
+  "coverage": {
+    "native_scan": "partial",
+    "opaque_pages": [2],
+    "deferred_pages": [4]
+  },
+  "units": [
+    {
+      "unit_id": "s1",
+      "ordinal": 0,
+      "locator": "opaque-loc-5001",
+      "page": 1,
+      "text": "控股股东、实际控制人对招股说明书的确认意见",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 90, 500, 115], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "s2",
+      "ordinal": 1,
+      "locator": "opaque-loc-5002",
+      "page": 1,
+      "text": "本人已阅读招股说明书全文，确认其中不存在虚假记载、误导性陈述或重大遗漏。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 130, 530, 200], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "s3",
+      "ordinal": 2,
+      "locator": "opaque-loc-5003",
+      "page": 3,
+      "text": "签名：",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 100, 300, 130], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    }
+  ]
+}

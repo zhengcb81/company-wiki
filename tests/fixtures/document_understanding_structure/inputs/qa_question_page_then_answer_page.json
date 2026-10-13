@@ -1,0 +1,83 @@
+{
+  "schema_version": "du-input/1",
+  "name": "qa_question_page_then_answer_page",
+  "description": "IR record where the question ends on one page and the management answer is on the next; the answer contains an explicit denial that must be preserved.",
+  "source_ref": {
+    "source_id": "opaque-source-qa",
+    "source_sha256": "opaque-digest-qa"
+  },
+  "metadata": {
+    "title": "Synthetic investor relations record",
+    "declared_kind": "unknown",
+    "regime": "unknown",
+    "mime_type": "application/pdf",
+    "language": "zh"
+  },
+  "coverage": {
+    "native_scan": "complete",
+    "opaque_pages": [],
+    "deferred_pages": []
+  },
+  "units": [
+    {
+      "unit_id": "q1",
+      "ordinal": 0,
+      "locator": "opaque-loc-4001",
+      "page": 2,
+      "text": "问：请问公司在新能源材料方面是否有与下游客户合作建设产能的设想，",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "qa_text_shadow",
+      "layout": {"bbox": [60, 100, 530, 145], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": "investor", "turn_id": "turn-1", "dom_path": null}
+    },
+    {
+      "unit_id": "q2",
+      "ordinal": 1,
+      "locator": "opaque-loc-4002",
+      "page": 3,
+      "text": "未来是否有进一步扩产安排？",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "qa_text_shadow",
+      "layout": {"bbox": [60, 95, 530, 130], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": "investor", "turn_id": "turn-1", "dom_path": null}
+    },
+    {
+      "unit_id": "q3",
+      "ordinal": 2,
+      "locator": "opaque-loc-4003",
+      "page": 3,
+      "text": "答：公司目前不生产 VC 产品，也未与下游客户就该产品合作建设产能。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "qa_text_shadow",
+      "layout": {"bbox": [60, 140, 530, 190], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": "management", "turn_id": "turn-1", "dom_path": null}
+    },
+    {
+      "unit_id": "q4",
+      "ordinal": 3,
+      "locator": "opaque-loc-4004",
+      "page": 3,
+      "text": "问：公司沸石系列产品的产能利用率如何？",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "qa_text_shadow",
+      "layout": {"bbox": [60, 200, 530, 240], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": "investor", "turn_id": "turn-2", "dom_path": null}
+    },
+    {
+      "unit_id": "q5",
+      "ordinal": 4,
+      "locator": "opaque-loc-4005",
+      "page": 3,
+      "text": "答：报告期内沸石系列产品产能利用率保持在较高水平。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "qa_text_shadow",
+      "layout": {"bbox": [60, 246, 530, 290], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": "management", "turn_id": "turn-2", "dom_path": null}
+    }
+  ]
+}

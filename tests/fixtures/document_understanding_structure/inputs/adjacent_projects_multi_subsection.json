@@ -1,0 +1,155 @@
+{
+  "schema_version": "du-input/1",
+  "name": "adjacent_projects_multi_subsection",
+  "description": "Two projects sit next to each other and one of them has several sub-sections; members must not cross between projects.",
+  "source_ref": {
+    "source_id": "opaque-source-adjacent",
+    "source_sha256": "opaque-digest-adjacent"
+  },
+  "metadata": {
+    "title": "Synthetic convertible bond memorandum",
+    "declared_kind": "unknown",
+    "regime": "unknown",
+    "mime_type": "application/pdf",
+    "language": "zh"
+  },
+  "coverage": {
+    "native_scan": "complete",
+    "opaque_pages": [],
+    "deferred_pages": []
+  },
+  "units": [
+    {
+      "unit_id": "a1",
+      "ordinal": 0,
+      "locator": "opaque-loc-2001",
+      "page": 10,
+      "text": "第三节 募集资金运用",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 90, 300, 115], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 1, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "a2",
+      "ordinal": 1,
+      "locator": "opaque-loc-2002",
+      "page": 10,
+      "text": "一、年产 5000 吨新材料建设项目",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 130, 400, 152], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 2, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "a3",
+      "ordinal": 2,
+      "locator": "opaque-loc-2003",
+      "page": 10,
+      "text": "（一）项目基本情况",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 158, 320, 178], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 3, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "a4",
+      "ordinal": 3,
+      "locator": "opaque-loc-2004",
+      "page": 10,
+      "text": "本项目为年产 5000 吨新材料建设项目，实施主体为全资子公司甲公司。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 184, 530, 226], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "a5",
+      "ordinal": 4,
+      "locator": "opaque-loc-2005",
+      "page": 10,
+      "text": "（二）项目投资概算",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 232, 320, 252], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 3, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "a6",
+      "ordinal": 5,
+      "locator": "opaque-loc-2006",
+      "page": 10,
+      "text": "本项目总投资 18000 万元，其中建设投资 15000 万元，铺底流动资金 3000 万元。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 258, 530, 300], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "a7",
+      "ordinal": 6,
+      "locator": "opaque-loc-2007",
+      "page": 10,
+      "text": "二、研发中心升级项目",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 320, 400, 342], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 2, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "a8",
+      "ordinal": 7,
+      "locator": "opaque-loc-2008",
+      "page": 10,
+      "text": "（一）项目基本情况",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 348, 320, 368], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 3, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "a9",
+      "ordinal": 8,
+      "locator": "opaque-loc-2009",
+      "page": 10,
+      "text": "本项目为研发中心升级项目，实施主体为上市公司本部。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 374, 530, 416], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "a10",
+      "ordinal": 9,
+      "locator": "opaque-loc-2010",
+      "page": 11,
+      "text": "三、补充流动资金",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 95, 300, 117], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 2, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "a11",
+      "ordinal": 10,
+      "locator": "opaque-loc-2011",
+      "page": 11,
+      "text": "公司拟使用募集资金 5000 万元补充流动资金。",
+      "kind": "paragraph",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 123, 530, 165], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    }
+  ]
+}

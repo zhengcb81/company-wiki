@@ -1,0 +1,107 @@
+{
+  "schema_version": "du-input/1",
+  "name": "operating_table_units_years_footnote",
+  "description": "Business operating table (capacity) whose rows depend on a unit caption, a period header and a footnote; a financial-only table on the same page must not be merged with it.",
+  "source_ref": {
+    "source_id": "opaque-source-table",
+    "source_sha256": "opaque-digest-table"
+  },
+  "metadata": {
+    "title": "Synthetic annual report operating table",
+    "declared_kind": "unknown",
+    "regime": "unknown",
+    "mime_type": "application/pdf",
+    "language": "zh"
+  },
+  "coverage": {
+    "native_scan": "complete",
+    "opaque_pages": [],
+    "deferred_pages": []
+  },
+  "units": [
+    {
+      "unit_id": "g1",
+      "ordinal": 0,
+      "locator": "opaque-loc-6001",
+      "page": 20,
+      "text": "（三）主要产品产能情况",
+      "kind": "heading",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 90, 340, 112], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": 3, "table_id": null, "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "g2",
+      "ordinal": 1,
+      "locator": "opaque-loc-6002",
+      "page": 20,
+      "text": "单位：吨/年",
+      "kind": "table_caption",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 118, 200, 136], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": "tbl-cap-1", "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "g3",
+      "ordinal": 2,
+      "locator": "opaque-loc-6003",
+      "page": 20,
+      "text": "产品名称 | 2023年产能 | 2024年产能 | 产能利用率",
+      "kind": "table_header",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 142, 530, 162], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": "tbl-cap-1", "row": 0, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "g4",
+      "ordinal": 3,
+      "locator": "opaque-loc-6004",
+      "page": 20,
+      "text": "沸石系列 | 8,000 | 12,000 | 92.5%",
+      "kind": "table_row",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 167, 530, 187], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": "tbl-cap-1", "row": 1, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "g5",
+      "ordinal": 4,
+      "locator": "opaque-loc-6005",
+      "page": 20,
+      "text": "注：产能利用率按实际产量除以设计产能计算。",
+      "kind": "footnote",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 192, 530, 215], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": "tbl-cap-1", "row": null, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "g6",
+      "ordinal": 5,
+      "locator": "opaque-loc-6006",
+      "page": 20,
+      "text": "项目 | 2024年12月31日 | 2023年12月31日",
+      "kind": "table_header",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 240, 530, 260], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": "tbl-fin-1", "row": 0, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    },
+    {
+      "unit_id": "g7",
+      "ordinal": 6,
+      "locator": "opaque-loc-6007",
+      "page": 20,
+      "text": "货币资金 | 1,234,567,890.00 | 987,654,321.00",
+      "kind": "table_row",
+      "language": "zh",
+      "role": "company_filing",
+      "layout": {"bbox": [60, 265, 530, 285], "page_width": 595, "page_height": 842, "column": null},
+      "hints": {"heading_level": null, "table_id": "tbl-fin-1", "row": 1, "column": null, "speaker": null, "turn_id": null, "dom_path": null}
+    }
+  ]
+}
