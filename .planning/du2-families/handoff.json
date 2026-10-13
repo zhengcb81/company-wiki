@@ -31,24 +31,21 @@
       "command": "python -B -X utf8 -m pytest docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests -q",
       "exit_code": 1,
       "elapsed_seconds": 0.9,
-      "result_path": ".planning/du2-families/progress.md#RED",
-      "note": "测试先行 RED：16 failed / 14 passed；失败全部指向当时未补齐的数据（index.json、跨市场记录、case_id 校验过严）。随后交付 cn_annual_report、sec_10k 两份代表规格与正反例"
+      "result_path": ".planning/du2-families/progress.md#RED"
     },
     {
       "node": "B",
       "command": "python -B -X utf8 -m pytest docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests -q",
       "exit_code": 0,
       "elapsed_seconds": 3.6,
-      "result_path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests",
-      "note": "85 passed：唯一ID/引用存在/枚举/非空理由/scope与生命周期/同role别名合并不丢/每source≤8KiB 配额/跨市场反例显式差异/10-K/20-F/10-Q Part 不混"
+      "result_path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests"
     },
     {
       "node": "C",
       "command": "python -B -X utf8 docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests/c_node_quote_check.py",
       "exit_code": 0,
       "elapsed_seconds": 16.0,
-      "result_path": ".planning/du2-families/progress.md#C-node",
-      "note": "97 项原文对照 0 失败：31 真实 case 的引文/空文本/SHA 逐条回放到原件页或行；应读/不读含义逐形态对照见 README"
+      "result_path": ".planning/du2-families/progress.md#C-node"
     }
   ],
   "real_samples": [
@@ -77,7 +74,7 @@
     "persistent_bytes": 357012,
     "scratch_peak_bytes": 0
   },
-  "raw_preservation": "20/20 样本只读访问；构建结束后复核 SHA 全部与 sample_manifest.json 一致，无原件改动、无原件复制",
+  "raw_preservation": "20/20 样本只读访问；构建结束后复核 SHA 全部与 sample_manifest.json 一致，复查轮再核 SHA/mtime 前后一致，无原件改动、无原件复制",
   "scratch_restore": "无持久 scratch；未落整篇 MD/PDF 拷贝或截图集合；pytest 与 C 节点工具不写文件（-B 禁 pycache）",
   "next_root_action": "1) 把 records/ 24 份规格导入唯一 profiles registry 并做实际消费测试（含同 role 别名合并不丢、child_routes、extent/revision 轴）；2) 把 39 个 case 的 mutations 映射 du-gold/1 做行为测试；3) 按 acquisition_requests AR-01..AR-12 补采缺样后回来补 real 证据；4) 未覆盖形态保持 proposed/missing 状态，不得按 generic 直接当无价值"
 }

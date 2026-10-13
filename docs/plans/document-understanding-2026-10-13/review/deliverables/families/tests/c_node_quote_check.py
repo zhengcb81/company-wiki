@@ -4,7 +4,8 @@
     python -B -X utf8 docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests/c_node_quote_check.py
 
 对 cases/ 中每个 real_excerpt case：
-1) 用未提交 bindings.local.json（或母计划 sample_manifest.json 的相对路径）定位原件，只读；
+1) 用未提交 bindings.local.json（.planning/du2-families/ 下，缺省回退 worktree 根；或母计划
+   sample_manifest.json 的相对路径）定位原件，只读；
 2) 核对 source_sha256 与原件一致；
 3) 逐 unit 把 exact_quote 与原文比对（PDF 按 anchor.physical_page 页文本、
    HTML 按 BeautifulSoup 去标签正文；空白全部剔除后比较，因 PDF 抽取在换行处插入空格）；
@@ -26,10 +27,13 @@ CASES_DIR = PKG_ROOT / "cases"
 
 
 def _load_bindings() -> dict[str, Path]:
-    bindings_path = WORKTREE_ROOT / "bindings.local.json"
-    if bindings_path.exists():
-        raw = json.loads(bindings_path.read_text(encoding="utf-8"))
-        return {k: Path(v) for k, v in raw["bindings"].items()}
+    for bindings_path in (
+        WORKTREE_ROOT / ".planning" / "du2-families" / "bindings.local.json",
+        WORKTREE_ROOT / "bindings.local.json",
+    ):
+        if bindings_path.exists():
+            raw = json.loads(bindings_path.read_text(encoding="utf-8"))
+            return {k: Path(v) for k, v in raw["bindings"].items()}
     manifest = WORKTREE_ROOT / "docs/plans/document-understanding-2026-10-13/sample_manifest.json"
     raw = json.loads(manifest.read_text(encoding="utf-8"))
     out: dict[str, Path] = {}

@@ -86,6 +86,10 @@ def test_sections_roles_aliases_and_questions():
             assert len(sections) <= 2, "摘要是正交修饰，不得复制全部章节策略"
         assert sections, f"{rid} sections 非空"
         seen_pairs = set()
+        all_aliases = [a for s in sections for a in s["aliases"]]
+        assert len(all_aliases) == len(set(all_aliases)), (
+            f"{rid} 同一记录内别名不得重复登记（重复规则要去重，别名合并不丢≠允许重复）"
+        )
         for section in sections:
             assert section["role"] in ROLES, f"{rid} role 只用 DU/1 角色，新 role 仅可提案"
             assert isinstance(section["aliases"], list) and section["aliases"], f"{rid} aliases 非空"

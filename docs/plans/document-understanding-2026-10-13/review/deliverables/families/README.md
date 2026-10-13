@@ -35,7 +35,7 @@ ROOT 负责把 records/ 导入唯一 profiles registry 并做实际消费测试�
 ## 证据要点（du2-reading-case/1）
 
 - 真实 case 均带 `source_sha256`（与母计划 sample_manifest 一致）、`origin`（含出处/纠正说明）、
-  `local_binding_key`（本机 `bindings.local.json`，不提交）。
+  `local_binding_key`（本机 `.planning/du2-families/bindings.local.json`，不提交）。
 - `locator` 一律 null + `anchor{physical_page|line, exact_quote}`（quote anchor 交 ROOT 解析为正式定位），不伪造 SourceRef。
 - 支持集外 OR、内 AND；`must_preserve`/`must_not_assert` 写明限定与误读；每 case 带 `mutations` 失败反例。
 - 语义生产执行一律 `execution_status=NOT_RUN_ROOT_INTEGRATION`：本包只证明数据结构与证据可回放，
@@ -54,6 +54,9 @@ python -B -X utf8 docs/plans/document-understanding-2026-10-13/review/deliverabl
 当前状态：pytest **85 passed**；C 节点对照 **97 项检查 0 失败**（引文/空文本/SHA）。
 引文比对规则：PDF 按 `physical_page` 页文本、HTML 按去标签正文，**剔除全部空白后**相等即算可回放
 （PDF 抽取在换行处插入空格，逐字节引文不可行）；原文引文均为原语言，不翻译。
+
+**输入/输出与测试目标均不强制财务抽取**：required_business 只含业务叙述/经营驱动，三表常规数字只做
+correctness_if_emitted（输出即查出处/单位/期间，不输出不扣分，见 case-cn-quarterly-sparse-02 的 m2 反例）。
 
 ## C 节点核实结论（应读/不读含义对照原文）
 
@@ -81,8 +84,8 @@ python -B -X utf8 docs/plans/document-understanding-2026-10-13/review/deliverabl
 - 原件只读：构建后复核 20 份样本 SHA 与 sample_manifest 全部一致（无改动）。
 - 无持久 scratch；测试不写文件（合法空值用数据内显式标记表达）。整包持久数据以短引文为主，
   远低于 512KiB 上限；未删任何证据凑体积。
-- `bindings.local.json` 为本机未提交绑定（sample_id→绝对路径，无密钥）；hk-release/hk-deck/us-release
-  原件位于临时目录（易失），已在 handoff 标注。
+- `bindings.local.json`（`.planning/du2-families/` 下）为本机未提交绑定（sample_id→绝对路径，无密钥）；
+  hk-release/hk-deck/us-release 原件位于临时目录（易失），已在 handoff 标注。
 
 ## 交给 ROOT 的边界
 

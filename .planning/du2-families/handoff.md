@@ -48,6 +48,22 @@ A 节点先有 RED 记录（16 failed/14 passed），失败原因与修正记录
 - 提案无样本：股东信、港股配售/供股、A股摘要件、40-F/6-K 正文（index 中 spec_status=proposed,
   evidence_status=missing）。
 
+## A/B/C 节点记录（详见 progress.md）
+
+- **A**：测试先行 RED（16 failed/14 passed，exit 1），失败全部指向当时未补齐的数据；
+  随后交付 cn_annual_report、sec_10k 两代表规格+正反例+覆盖清单。输入/输出与测试目标均不强制财务抽取
+  （required_business=业务叙述，三表数字仅 correctness_if_emitted）。
+- **B**：全量数据一致性与反例测试 85 passed（exit 0，3.6s）；多市场/生命周期变体显式差异；
+  重复规则扫描后清理（记录内重复别名 1 处，跨记录逐字重复反例 0）。
+- **C**：原文对照 97 项 0 失败（exit 0，16s）+ 未覆盖清单（acquisition_requests）+ 恢复/范围检查
+  （git diff --name-only base...HEAD 78 文件全在可写范围；原件 SHA/mtime 复查前后一致）+ 一次交接。
+
+## 接口偏差（handoff.json interface_deviations 同步）
+
+- case_id 连字符命名；execution_status 置于 case 顶层；units[].hints 仅说明键；
+  index.coverage.shape=规格 id；native_text_empty 合法空值（空 exact_quote 显式标记）；
+  引文比对剔除空白等价（PDF 抽取换行插空格）。公共字段语义均未改动。
+
 ## 仍没证明什么
 
 - 引擎（ROOT 共享链）能否按这些规格正确识别、选择与摘要：未测。
@@ -60,4 +76,4 @@ A 节点先有 RED 记录（16 failed/14 passed），失败原因与修正记录
 
 - 模型调用 0、付费 0；持久数据 357,012 字节（<512KiB 上限，未删证据凑体积）。
 - 20/20 原件只读，结束后复核 SHA 与 sample_manifest 一致；无 scratch 残留。
-- `bindings.local.json`（worktree 根）为本机绑定，不提交；hk-release/hk-deck/us-release 原件在临时目录（易失）。
+- `bindings.local.json`（`.planning/du2-families/` 下，未提交）为本机绑定；hk-release/hk-deck/us-release 原件在临时目录（易失）。

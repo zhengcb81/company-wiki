@@ -43,3 +43,24 @@
 - 两家公司验证：中微公司（A股年/半/季/招股）与名创优品（H股年/中/招股）上分别验证
   存量vs净增、计划≠承诺、测算≠实际、期后≠期内、问句≠事实；微软/腾讯/TAL/VRSK 佐证美股/港股形态。
 - 资源：模型调用 0、付费 0、持久数据 357,012 字节、scratch 0。
+
+### 交付后复查审计（2026-10-13，对照任务卡与 INTERFACES §2/§4/§6 逐条）
+
+- **范围检查**：`git diff --name-only 5a297244...HEAD` = 78 文件，全部在
+  deliverables/families/** 与 .planning/du2-families/** 内；`git status` 仅剩
+  bindings.local.json 未提交（本机绑定，接口明确要求不提交）；未触碰 profiles/structure/benchmark/ROOT、
+  FACETS、LAYOUT、共享接口/config/CI/其他仓。本 checkout AGENTS.md 与主仓一致（hash 相等）。
+- **原件 SHA/mtime 前后一致**：围绕一次 C 节点复跑做 20/20 原件 size+mtime_ns+SHA 前后快照比对，
+  差异=无（全程只读；开始时未留基线，此轮快照比对为可复核证据）。
+- **重复规则扫描**：记录内部重复项发现 1 处（project_change_notice 跨 section 重复别名“影响分析”）→
+  已清理并在 tests/test_family_specs.py 增加“同一记录别名不得重复登记”断言；跨记录逐字重复反例=0。
+- **HTML/TXT 行锚点核对**：全部 line anchor 在 ±5 行窗口内可定位（DOM 跨行者按空白归一）。
+- **引文配额实测**：最大 686 字符/source（配额 8192），全部远低于上限。
+- **A 节点补记**：输入/输出与测试目标均不强制财务抽取（required_business=业务叙述/经营驱动；
+  三表常规数字仅 correctness_if_emitted，反例 case-cn-quarterly-sparse-02 m2），已写入 README。
+- **接口偏差收紧**：handoff.json 的 A_B_C 条目恢复为接口规定的六个字段（说明移入 handoff.md）；
+  bindings.local.json 从 worktree 根移入 .planning/du2-families/（唯一可写目录内，仍不提交），
+  c_node_quote_check.py 查找顺序同步更新。
+- **复查后复跑**：pytest **85 passed**（1.7s，exit 0）；c_node_quote_check **97 项 0 失败**（exit 0）。
+- 结论：任务卡 7 项实施步骤、A/B/C 三节点、独立环境与交接条款均已覆盖；无遗漏交付物。
+  未证明项保持诚实标注（语义执行 NOT_RUN_ROOT_INTEGRATION；缺样形态见 AR-01..AR-12）。
