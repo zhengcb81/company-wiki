@@ -1,0 +1,311 @@
+{
+  "schema_version": "du-handoff/1",
+  "lane": "du-bench",
+  "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
+  "implementation_commits": [
+    "ad77758d"
+  ],
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/benchmark",
+  "branch": "codex/du-benchmark-20261013",
+  "status": "COMPLETE_WITH_RECORDED_GAPS",
+  "owned_paths": [
+    "tools/document_understanding_benchmark/**",
+    ".planning/du-bench/**"
+  ],
+  "public_interfaces": {
+    "python": [
+      {
+        "name": "evaluate",
+        "module": "tools.document_understanding_benchmark",
+        "signature": "evaluate(observed: Mapping, gold: Mapping, *, limits: Mapping|None = None, review: Mapping|None = None) -> dict",
+        "returns": "du-evaluation/1",
+        "note": "INTERFACES.md section 5 names evaluate(observed, gold); limits and review are additive keyword-only extensions with defaults, so the frozen call shape still works."
+      },
+      {
+        "name": "run_mutation_suite",
+        "module": "tools.document_understanding_benchmark.mutations",
+        "signature": "run_mutation_suite(observed, gold, *, limits=None) -> dict",
+        "returns": "du-mutation/1"
+      }
+    ],
+    "cli": {
+      "command": "python -X utf8 -m tools.document_understanding_benchmark --mode offline|native|adapter --bindings <json> --output <owned dir>",
+      "exit_codes": {
+        "0": "all PASS",
+        "1": "FAIL present",
+        "2": "refused to run",
+        "3": "PARTIAL/UNAVAILABLE present"
+      },
+      "options": [
+        "--gold-dir",
+        "--sample",
+        "--adapter",
+        "--probe-file",
+        "--probe-config",
+        "--cleanup"
+      ]
+    },
+    "wire_schemas": [
+      "du-gold/1",
+      "du-observed/1",
+      "du-evaluation/1",
+      "du-mutation/1",
+      "du-bench-run/1",
+      "du-holdout/1",
+      "du-bench-report/1"
+    ]
+  },
+  "interface_deviations": [
+    {
+      "what": "du-gold/1 fact gains two optional fields: quantity_basis and modality, and role.",
+      "why": "Without a declared modality the oracle cannot distinguish 'a plan restated as actual' from a legitimate actual, and without quantity_basis it cannot catch total-vs-increment paraphrases. Field absence still means unknown and does not trigger review.",
+      "impact_on_others": "none; additive and optional, both default to 'unknown'"
+    },
+    {
+      "what": "du-observed/1 is read with selected_text as a first-class replayable field.",
+      "why": "A fact carried only by replayed selection text is a real recall, not an omission. This is how the native baseline is scored fairly.",
+      "impact_on_others": "none; ROOT adapters may omit it, in which case recall falls back to locator evidence"
+    },
+    {
+      "what": "evaluate() returns extra top-level keys: dimensions, not_evaluated, spot_read_list.",
+      "why": "The card requires per-dimension denominators and an independent-review list for ROOT.",
+      "impact_on_others": "none; additive"
+    }
+  ],
+  "A_B_C_evidence": {
+    "A": {
+      "what": "gold and counterexamples frozen; current baseline real FAIL/PARTIAL recorded",
+      "commands": [
+        {
+          "cmd": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q",
+          "exit_code": 0,
+          "elapsed_s": 2.14,
+          "result": "65 passed, 5 skipped (real-data skipped by default)"
+        },
+        {
+          "cmd": "python -X utf8 -m tools.document_understanding_benchmark --mode native --bindings <local> --output <owned> --probe-config config/source_catalog.yaml",
+          "exit_code": 1,
+          "elapsed_s": 48.8,
+          "result": "4/4 FAIL on critical-fact recall; this is a real quality finding, not a test-engineering failure"
+        }
+      ],
+      "baseline_recall": {
+        "cn-equity": {
+          "critical_recall": 0.0,
+          "critical_denominator": 7
+        },
+        "cn-ir": {
+          "critical_recall": 0.143,
+          "critical_denominator": 7
+        },
+        "cn-q-business": {
+          "critical_recall": 0.667,
+          "critical_denominator": 9
+        },
+        "hk-annual": {
+          "critical_recall": 0.0,
+          "critical_denominator": 6
+        }
+      },
+      "note": "The baseline was NOT required to be green first, and no production code was touched to change any of these numbers."
+    },
+    "B": {
+      "what": "oracle unit + offline CLI green; deliberately bad observations must fail; independence and missing-field states pass",
+      "commands": [
+        {
+          "cmd": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q",
+          "exit_code": 0,
+          "elapsed_s": 2.14,
+          "result": "65 passed, 5 skipped"
+        },
+        {
+          "cmd": "python -X utf8 -m tools.document_understanding_benchmark --mode offline --output <owned>",
+          "exit_code": 3,
+          "result": "5 fixtures; 4 PASS, 1 PARTIAL (the intentionally opaque scan); mutations 53/53 applicable detected; sentinel stable",
+          "fixture_bytes": 14309,
+          "fixture_budget_bytes": 204800
+        }
+      ],
+      "mutation_result": {
+        "applicable": 53,
+        "detected": 53,
+        "not_detected": 0,
+        "not_applicable": 42,
+        "detection_rate": 1.0,
+        "mutation_kinds": 19
+      },
+      "independence": {
+        "oracle_imports_company_wiki": false,
+        "note": "Only observer.py imports company_wiki, and only to call the existing public parser/selector. The oracle itself is dependency-free."
+      },
+      "missing_field_behaviour": "Field absence yields unknown/NOT_EVALUATED, never a review gate and never a fake PASS."
+    },
+    "C": {
+      "what": "native representative-sample replay, restoration/resource report, holdout list",
+      "commands": [
+        {
+          "cmd": "python -X utf8 -m tools.document_understanding_benchmark.make_bindings --manifest docs/plans/document-understanding-2026-10-13/sample_manifest.json --out <local> --repo-root C:/Users/郑曾波/Projects/company-wiki",
+          "exit_code": 0,
+          "result": "bound 20/20 survey originals by SHA-256"
+        },
+        {
+          "cmd": "python -X utf8 -m tools.document_understanding_benchmark.report --bindings <local> --output <owned> --probe-config config/source_catalog.yaml",
+          "exit_code": 0,
+          "elapsed_s": 34.4,
+          "result": "raw_all_unchanged=true, config_unchanged=true, 0 network / 0 model / 0 paid calls, 0 raw copies"
+        },
+        {
+          "cmd": "DU_BENCH_ALLOW_REAL_DATA=1 python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q -m real_data",
+          "exit_code": 0,
+          "elapsed_s": 45.6,
+          "result": "5 passed"
+        }
+      ],
+      "native_rows": [
+        {
+          "sample_id": "cn-equity",
+          "routed_kind": "unknown",
+          "selected": 96,
+          "candidates": 449,
+          "units": 3224,
+          "pages": "96/96",
+          "native_scan": "partial",
+          "elapsed_s": 7.938
+        },
+        {
+          "sample_id": "cn-ir",
+          "routed_kind": "investor_relations",
+          "selected": 11,
+          "candidates": 11,
+          "units": 302,
+          "pages": "6/6",
+          "native_scan": "complete",
+          "elapsed_s": 0.39
+        },
+        {
+          "sample_id": "cn-q-business",
+          "routed_kind": "quarterly_report",
+          "selected": 28,
+          "candidates": 28,
+          "units": 579,
+          "pages": "15/15",
+          "native_scan": "partial",
+          "elapsed_s": 2.278
+        },
+        {
+          "sample_id": "hk-annual",
+          "routed_kind": "annual_report",
+          "selected": 96,
+          "candidates": 254,
+          "units": 6502,
+          "pages": "246/246",
+          "native_scan": "partial",
+          "opaque_pages": [
+            246
+          ],
+          "elapsed_s": 23.737
+        }
+      ],
+      "key_baseline_finding": "cn-ir had only 11 candidates and the selector took all 11, yet 9 of 10 gold facts are still absent. Recall failure there is NOT a budget/cap problem: the candidate generator never produced the facts. This independently confirms that raising max_selected cannot fix recall."
+    }
+  },
+  "tests_passed": 65,
+  "tests_failed": 0,
+  "tests_skipped": 5,
+  "tests_not_run": [
+    "The other two DU packages (profiles, structure) - not owned by this lane",
+    "Full repository test suite - the card says not to add the benchmark to daily CI and not to run the whole suite",
+    "Real LLM summary quality - needs ROOT's paid large node; 0 paid calls were made here",
+    "holdout recall - no holdout gold can be authored until the acquisition requests are fulfilled"
+  ],
+  "known_gaps": [
+    "US holdout is UNAVAILABLE: all four US documents read are development-set documents, and no other US original exists in the local roots checked.",
+    "No real US S-1/F-1, 8-K/6-K attachment container, or amended/original revision pair is covered.",
+    "H-share holdout rests on one company (Alibaba); a second H-share is requested.",
+    "context_completeness and role_modality_quantity are NOT_EVALUATED on the native baseline because the current selector emits no semantic units and no claims. They become measurable only after ROOT wires in the DU-STRUCTURE/DU-PROFILES packages.",
+    "Semantic entailment is NOT_EVALUATED without an independent review. Deterministic checks can prove absence and contradiction, never entailment.",
+    "The oracle detects quantity-unit mismatches, basis contradictions, subject swaps and lifecycle-stage advancement from a fixed vocabulary. Paraphrases outside that vocabulary are reported as NOT_EVALUATED rather than guessed, so recall measured here is a lower bound on the true defect set.",
+    "derived_space and time_resource limits are the benchmark's own defaults, not ROOT's production budget; ROOT should pass its real limits.",
+    "The 20 survey samples are development seeds, not blind holdout. No blind-test claim is made.",
+    "cn-h1, cn-annual, cn-ipo have no gold yet; gold was authored for the four samples where facts could be read from the original pages within budget."
+  ],
+  "not_yet_automatically_checkable": [
+    "Whether a summary sentence is semantically entailed by its cited evidence (needs the independent large-node review; the result carries spot_read_list for it).",
+    "Whether a value is economically correct beyond its unit/period/basis labels (e.g. whether management's own arithmetic is right).",
+    "Whether a table row is complete when the table itself was never extracted.",
+    "Whether a bilingual pair is a true translation versus a different fact in the other language lane.",
+    "Whether a company plan is realistic; only whether it was stated as a plan or as an accomplished fact.",
+    "Chart/figure content, which the baseline never reads and no gold fact asserts."
+  ],
+  "acquisition_requests": [
+    {
+      "id": "REQ-1",
+      "priority": "high",
+      "what": "two US 10-K/10-Q filings, one software and one industrial, from companies outside the development set"
+    },
+    {
+      "id": "REQ-2",
+      "priority": "high",
+      "what": "one real US S-1 or F-1 registration statement"
+    },
+    {
+      "id": "REQ-3",
+      "priority": "medium",
+      "what": "one real 8-K or 6-K whose exhibit is itself a business document"
+    },
+    {
+      "id": "REQ-4",
+      "priority": "medium",
+      "what": "one amended filing paired with its original for the same period"
+    },
+    {
+      "id": "REQ-5",
+      "priority": "low",
+      "what": "one second H-share annual report outside e-commerce"
+    }
+  ],
+  "resource_observations": {
+    "model_calls": 0,
+    "paid_calls": 0,
+    "network_calls": 0,
+    "raw_copies": 0,
+    "gold_quote_bytes_total": 1902,
+    "gold_quote_budget_per_document": 8192,
+    "gold_quote_max_observed": 573,
+    "offline_fixture_bytes": 14309,
+    "offline_fixture_budget": 204800,
+    "native_elapsed_seconds": 48.8,
+    "native_raw_bytes_read": 6413909,
+    "native_peak_rss_bytes": 121929728,
+    "offline_peak_rss_bytes": 21049344,
+    "peak_rss_measured": true,
+    "offline_elapsed_seconds": 0.437,
+    "kept_output_dir_bytes": 220351,
+    "largest_kept_output_file_bytes": 112579,
+    "smallest_original_bytes": 153851,
+    "full_text_copies_in_output": 0,
+    "note": "peak RSS is now really measured. An earlier revision reported peak_rss_measured=false because recovery.peak_rss_bytes() called GetProcessMemoryInfo through ctypes without argtypes/restype, so the 64-bit HANDLE was truncated and both the psapi and K32 probes returned 0. Adding the prototypes fixed it; the two figures above are from the offline and native runs after that fix."
+  },
+  "raw_preservation": {
+    "originals_copied": 0,
+    "originals_written": 0,
+    "originals_sha_changed": 0,
+    "originals_mtime_changed": 0,
+    "evidence": "raw_unchanged=true for all 4 native samples; raw_all_unchanged=true in the C-node report; the make_bindings helper verified 20/20 SHA matches without writing."
+  },
+  "scratch_restore": {
+    "sentinel_preserved": true,
+    "sentinel_preservation_evidence": "A sentinel body was planted in each owned child before the run; offline sha256 D98FC286.../mtime 639274754759568590 and native sha256 404B754C.../mtime 639274754759600862 were both byte- and mtime-identical afterwards. This required a fix: install_sentinel() used to rewrite the sentinel unconditionally, so the old sentinel_stable check compared a fresh file with itself and could never detect a clobbered pre-existing sentinel. The prior bytes+mtime are now captured before the run and restored by restore_sentinel(); restoration.sentinel_restored reports 'restored' vs 'created_by_this_run'.",
+    "cleaned": [
+      ".planning/du-bench/_scratch_*.py (10 throwaway inspectors, removed)",
+      "tools/document_understanding_benchmark/**/__pycache__ (removed)"
+    ],
+    "kept_regenerable": [
+      ".du-bench-out/ (run scratch and the local uncommitted bindings; not committed, regenerable via make_bindings plus the offline/native modes)"
+    ],
+    "unowned_directories_deleted": 0,
+    "note": "cleanup_owned refuses to delete a directory that lacks the .du-bench-owned marker; a test asserts this. Every number produced by the removed scratch inspectors is recorded in evidence.json."
+  },
+  "install_actions": "none",
+  "next_root_action": "Wire the benchmark into the ROOT integration: inject a real du-input/1 adapter through observer.observe_du_adapter so context_completeness and role_modality_quantity stop being NOT_EVALUATED, pass ROOT's real derived/time limits via evaluate(limits=...), run the independent semantic review over spot_read_list, and decide on the five acquisition requests so a real blind holdout can be authored."
+}

@@ -1,0 +1,187 @@
+{
+  "schema_version": "du-bench-evidence/1",
+  "lane": "du-bench",
+  "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
+  "collected": "2026-10-13",
+  "note": "Compact A/B/C evidence captured by the lane. The raw run outputs under .du-bench-out/ are regenerable scratch and are intentionally NOT committed; the authoritative numbers are reproduced here. Re-run the commands in handoff.md to regenerate.",
+
+  "A_B_node_offline": {
+    "command": "python -X utf8 -m tools.document_understanding_benchmark --mode offline --output .du-bench-out",
+    "exit_code": 3,
+    "elapsed_seconds": 0.437,
+    "fixtures_total": 5,
+    "fixture_bytes": 14309,
+    "fixture_budget_bytes": 204800,
+    "per_fixture_status": {
+      "offline-clean-annual": "PASS",
+      "offline-negation-qa": "PASS",
+      "offline-opaque-scan": "PARTIAL",
+      "offline-offering-plan": "PASS",
+      "offline-stage-progress": "PASS"
+    },
+    "mutations_detected": 53,
+    "mutations_applicable": 53,
+    "mutations_not_applicable": 42,
+    "network_calls": 0,
+    "model_calls": 0,
+    "paid_calls": 0,
+    "raw_copies": 0,
+    "sentinel_restored": true,
+    "sentinel_reason": "restored",
+    "peak_rss_bytes": 21049344
+  },
+
+  "A_B_node_tests": {
+    "command": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q",
+    "exit_code": 0,
+    "result": "65 passed, 5 skipped",
+    "elapsed_seconds": 3.19,
+    "skipped_reason": "the 5 real-data replays are gated behind DU_BENCH_ALLOW_REAL_DATA=1 so the default suite stays fully offline"
+  },
+
+  "C_node_real_data_tests": {
+    "command": "DU_BENCH_ALLOW_REAL_DATA=1 python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q -m real_data",
+    "exit_code": 0,
+    "result": "5 passed",
+    "elapsed_seconds": 45.59
+  },
+
+  "C_node_bindings": {
+    "command": "python -X utf8 -m tools.document_understanding_benchmark.make_bindings --manifest <ROOT>/sample_manifest.json --out .du-bench-out/bindings.local.json --repo-root <company-wiki>",
+    "exit_code": 0,
+    "result": "bound 20/20 survey originals by SHA-256",
+    "copies_made": 0
+  },
+
+  "C_node_report": {
+    "command": "python -X utf8 -m tools.document_understanding_benchmark.report --bindings .du-bench-out/bindings.local.json --output .du-bench-out/native-report --probe-config config/source_catalog.yaml",
+    "exit_code": 0,
+    "raw_all_unchanged": true,
+    "config_unchanged": {"unchanged": true, "count": 1, "changes": []},
+    "network_calls": 0,
+    "model_calls": 0,
+    "paid_calls": 0,
+    "raw_copies": 0,
+    "samples": {
+      "cn-equity": {"status": "FAIL", "critical_recall": 0.0, "critical_denominator": 7, "resolved": "OK", "routed_kind": "unknown", "selected_spans": 96, "candidate_count": 449, "source_units": 3224, "pages_read": 96, "page_count": 96, "native_scan": "partial", "elapsed_s": 7.938, "raw_unchanged": true},
+      "cn-ir": {"status": "FAIL", "critical_recall": 0.143, "critical_denominator": 7, "resolved": "OK", "routed_kind": "investor_relations", "selected_spans": 11, "candidate_count": 11, "source_units": 302, "pages_read": 6, "page_count": 6, "native_scan": "complete", "elapsed_s": 0.39, "raw_unchanged": true},
+      "cn-q-business": {"status": "FAIL", "critical_recall": 0.667, "critical_denominator": 9, "resolved": "OK", "routed_kind": "quarterly_report", "selected_spans": 28, "candidate_count": 28, "source_units": 579, "pages_read": 15, "page_count": 15, "native_scan": "partial", "elapsed_s": 2.278, "raw_unchanged": true},
+      "hk-annual": {"status": "FAIL", "critical_recall": 0.0, "critical_denominator": 6, "resolved": "OK", "routed_kind": "annual_report", "selected_spans": 96, "candidate_count": 254, "source_units": 6502, "pages_read": 246, "page_count": 246, "native_scan": "partial", "opaque_pages": [246], "elapsed_s": 23.737, "raw_unchanged": true}
+    }
+  },
+
+  "C_node_native_cli": {
+    "command": "python -X utf8 -m tools.document_understanding_benchmark --mode native --bindings .du-bench-out/bindings.local.json --output .du-bench-out --probe-config config/source_catalog.yaml",
+    "exit_code": 1,
+    "elapsed_seconds": 48.786,
+    "bindings_supplied": 4,
+    "resolved": 4,
+    "unavailable": 0,
+    "raw_unchanged": true,
+    "config_unchanged": true,
+    "config_probes": 2,
+    "sentinel_restored": true,
+    "sentinel_reason": "restored",
+    "peak_rss_bytes": 121929728,
+    "raw_bytes_read": 6413909
+  },
+
+  "sentinel_preservation_proof": {
+    "method": "planted a pre-existing sentinel body in each owned child, ran the mode, compared SHA-256 and mtime_ns",
+    "offline": {
+      "planted_sha256": "D98FC286DF385604B9E78AB6D22B2A985A68A13A93A1A6C86ED1F4AFC9424D88",
+      "planted_mtime_ns": 639274754759568590,
+      "after_sha256": "D98FC286DF385604B9E78AB6D22B2A985A68A13A93A1A6C86ED1F4AFC9424D88",
+      "after_mtime_ns": 639274754759568590,
+      "content_preserved": true
+    },
+    "native": {
+      "planted_sha256": "404B754CA82F18AB6951CE28B0956BEE41E152AB889E8B563C0BA7A4EFD0CD51",
+      "planted_mtime_ns": 639274754759600862,
+      "after_sha256": "404B754CA82F18AB6951CE28B0956BEE41E152AB889E8B563C0BA7A4EFD0CD51",
+      "after_mtime_ns": 639274754759600862,
+      "content_preserved": true
+    },
+    "fix_note": "install_sentinel previously rewrote the sentinel every run, so sentinel_stable compared a fresh file against itself and reported false. Now the prior bytes+mtime are captured before the run and restored afterwards."
+  },
+
+  "originals_verification": {
+    "method": "resolve_original() per sample: binding + SHA-256 recomputed from disk, cross-checked against gold and the ROOT sample_manifest.json",
+    "all_four_match_gold_and_manifest": true,
+    "rows": [
+      {"sample_id": "cn-equity", "sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e", "size": 3812541, "mtime_ns": 1608820218000000000},
+      {"sample_id": "cn-ir", "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7", "size": 153851, "mtime_ns": 1779228233262998600},
+      {"sample_id": "cn-q-business", "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268", "size": 217264, "mtime_ns": 1779046989673803600},
+      {"sample_id": "hk-annual", "sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf", "size": 2230253, "mtime_ns": 1761392825000000000}
+    ],
+    "note": "mtime_ns values were identical before and after every read; no original was copied or written."
+  },
+
+  "known_misses_reproduced": {
+    "hengfeng_construction_phases": {
+      "claim": "恒锋 建设期/第一期/第二期 never reach the selected text",
+      "reproduced": true,
+      "detail": "token search over the observed selected_text: '建设期' absent, '第一期' absent, '第二期' absent, '募集资金' present. 96 of 449 candidates selected; omitted_candidate_count=353."
+    },
+    "miniso_p12_store_table": {
+      "claim": "名创 p12 store table / TOP TOY not selected",
+      "reproduced": true,
+      "detail": "All 7 hk-annual gold facts are ABSENT from the selected text, including 'Total 合計' / '7,504', the operating-model rows, and the TOP TOY store counts. Note: the bare token 'TOP TOY' does appear elsewhere in the selection, so the miss is the p12 table facts, not the brand string."
+    },
+    "span_cap_partial": {
+      "claim": "the 96-span cap is partial",
+      "reproduced": true,
+      "detail": "cn-equity 96/449 capped=True status=partial; hk-annual 96/254 capped=True status=partial. cn-ir and cn-q-business were NOT capped (11/11 and 28/28)."
+    }
+  },
+
+  "honest_counterfinding": {
+    "finding": "cn-ir recall failure is not a cap problem",
+    "detail": "cn-ir had only 11 candidates and the selector selected all 11, yet 9 of 10 gold facts remain absent. The candidate generator never produced those facts, so raising the selection cap cannot fix cn-ir recall.",
+    "support": "fact_recall 1/10 with selected_spans == candidate_count == 11, omitted_candidate_count=0"
+  },
+
+  "resource_totals": {
+    "network_calls": 0,
+    "model_calls": 0,
+    "paid_calls": 0,
+    "raw_copies": 0,
+    "originals_written": 0,
+    "db_writes": 0,
+    "production_config_writes": 0,
+    "offline_fixture_bytes": 14309,
+    "offline_fixture_budget_bytes": 204800,
+    "native_raw_bytes_read": 6413909,
+    "native_peak_rss_bytes": 121929728,
+    "offline_peak_rss_bytes": 21049344,
+    "kept_output_dir_bytes": 220351,
+    "largest_kept_output_file_bytes": 112579,
+    "smallest_original_bytes": 153851,
+    "full_text_copies_in_output": 0
+  },
+
+  "bugs_found_and_fixed_this_session": [
+    "recovery.peak_rss_bytes() returned None on Windows: ctypes called GetProcessMemoryInfo without argtypes/restype, so the 64-bit HANDLE was truncated and both psapi and K32 probes returned 0. Added prototypes; peak RSS is now really measured (12.2 MiB native, 21.0 MiB offline).",
+    "install_sentinel() unconditionally overwrote an existing sentinel, and the sentinel_stable check then compared that fresh file against itself, so it could never detect a clobbered pre-existing sentinel. Now the prior bytes+mtime are captured before the run and restored byte-identical afterwards; restoration.sentinel_restored reports 'restored' vs 'created_by_this_run'.",
+    "restore_sentinel() had a NameError typo ('preeexisting') that the new sentinel-preservation test caught before it shipped.",
+    "config_unchanged reported count=0 when no --probe-config was passed, which could look like a pass while proving nothing; the probe count is now printed and the sentinel is included in the probe set."
+  ],
+
+  "scratch_disposition": {
+    "removed": [
+      ".planning/du-bench/_scratch_bind.py",
+      ".planning/du-bench/_scratch_cmds.txt",
+      ".planning/du-bench/_scratch_gold.py",
+      ".planning/du-bench/_scratch_trace.py",
+      ".planning/du-bench/_scratch_rss.py",
+      ".planning/du-bench/_scratch_dump.py",
+      ".planning/du-bench/_scratch_mut.py",
+      ".planning/du-bench/_scratch_native.py",
+      ".planning/du-bench/_scratch_pages.py",
+      ".planning/du-bench/_scratch_slice.py",
+      "tools/document_understanding_benchmark/**/__pycache__"
+    ],
+    "kept_regenerable": [".du-bench-out/ (run scratch + local bindings; not committed, regenerable via make_bindings and the two modes)"],
+    "note": "The _scratch_* inspectors were one-off diagnostics; every number they produced is recorded in this file and in handoff.md."
+  }
+}
