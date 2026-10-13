@@ -41,7 +41,7 @@ PLAN_ID=du-bench ｜ 分支 `codex/du-benchmark-20261013` ｜ base `7f6f7cbd`
 ```bash
 # A/B：纯离线、不联网、不调模型
 python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q
-#   -> 65 passed, 5 skipped, 约 1.3 秒
+#   -> 65 passed, 5 skipped, 约 2.1 秒
 
 # 离线 CLI
 python -X utf8 -m tools.document_understanding_benchmark \
@@ -86,9 +86,9 @@ python -X utf8 -m tools.document_understanding_benchmark --mode native \
 
 ### B —— oracle 与离线 CLI 绿，故意坏观测必须失败
 
-- 默认套件 **65 passed / 5 skipped / 0 failed**，1.23 秒。
+- 默认套件 **65 passed / 5 skipped / 0 failed**，2.14 秒。
 - 离线 CLI：5 夹具、4 PASS + 1 PARTIAL（那 1 份是故意不透明的扫描件）、
-  14,309 / 204,800 字节、0 网络 / 0 模型 / 0 付费调用、哨兵稳定。
+  14,309 / 204,800 字节、0 网络 / 0 模型 / 0 付费调用、哨兵复原。
 - **反例 53/53 全部检出**，另有 42 条判定为 NOT_APPLICABLE（该夹具里没有它要攻击的目标）。
   三值判定是刻意设计的：把「无处下手」算成漏检会低估，算成检出会造假。
 - 独立性：oracle 不 import `company_wiki`；只有 `observer.py` 调现有公共入口。
@@ -101,10 +101,22 @@ python -X utf8 -m tools.document_understanding_benchmark --mode native \
 
 | 样本 | 路由 kind | 选中/候选 | units | 读页 | scan | 耗时 |
 |---|---|---:|---:|---|---|---:|
-| cn-equity | `unknown` | 96/449 | 3,224 | 96/96 | partial | 9.133s |
-| cn-ir | `investor_relations` | 11/11 | 302 | 6/6 | complete | 0.679s |
-| cn-q-business | `quarterly_report` | 28/28 | 579 | 15/15 | partial | 4.473s |
-| hk-annual | `annual_report` | 96/254 | 6,502 | 246/246 | partial(1 页不透明) | 36.645s |
+| cn-equity | `unknown` | 96/449（触顶） | 3,224 | 96/96 | partial | 7.938s |
+| cn-ir | `investor_relations` | 11/11 | 302 | 6/6 | complete | 0.390s |
+| cn-q-business | `quarterly_report` | 28/28 | 579 | 15/15 | partial | 2.278s |
+| hk-annual | `annual_report` | 96/254（触顶） | 6,502 | 246/246 | partial(1 页不透明) | 23.737s |
+
+已知遗漏复现（逐条核对选区文本，不是照抄计划结论）：
+
+- **恒锋两期建设**：`建设期`、`第一期`、`第二期` 在选区文本里**全部缺席**
+  （`募集资金` 在），两期建设/投资事实确实没进证据。
+- **名创 p12 门店表**：hk-annual 的 **7 条金标事实全部缺席**，含 p12 的
+  `Total 合計` 7,504 门店数、经营模式行、TOP TOY 门店数。
+  **一处对计划措辞的更正**：`TOP TOY` 这个裸字符串在选区里**是出现的**
+  （来自其它页），所以真正的遗漏是 p12 门店表事实，而不是品牌名本身。
+- **96 上限只是部分触顶**：确实触顶的是 `cn-equity`(96/449) 与
+  `hk-annual`(96/254)，两者 `selector_status=partial`；`cn-ir`(11/11) 与
+  `cn-q-business`(28/28) **没有触顶**。
 
 ## 5. 开发 / holdout 与缺失类型
 
@@ -153,13 +165,40 @@ REQ-5 一份非电商 H 股年报。详见 `holdout.json`。
 
 ## 10. 0 付费 / 0 原件写入 / 恢复 / 体积
 
-- **0 模型调用、0 付费调用、0 网络调用、0 原件复制、0 原件写入、0 原件 SHA 或 mtime 变化**。
-- 恢复：哨兵写入自有容器并逐字节校验；清理只删带 `.du-bench-owned` 标记的目录，
-  未标记目录**拒绝删除**（有测试断言）；未删除任何未知目录。
+- **0 模型调用、0 付费调用、0 网络调用、0 原件复制、0 原件写入、0 原件 SHA 或 mtime 变化**，
+  0 数据库写入，0 生产配置写入。原生读数 6,413,909 字节，全部只读。
+- 恢复：**哨兵改为「运行前保存原始字节+mtime，运行后原样写回」**。
+  离线 `sha D98FC286…/mtime 639274754759568590`、原生 `sha 404B754C…/mtime 639274754759600862`
+  运行后逐字节与 mtime 均一致。
+  这里修掉了一个真 bug：原先 `install_sentinel()` 每次运行都无条件重写哨兵，
+  于是 `sentinel_stable` 拿新写的文件和自己比，**永远发现不了**预先存在的哨兵被覆盖。
+  现在 `restoration.sentinel_restored` 区分 `restored` / `created_by_this_run`。
+  清理只删带 `.du-bench-owned` 标记的目录，未标记目录**拒绝删除**（有测试断言）；未删除任何未知目录。
 - 体积：金标引文 1,902 字节；合成夹具 14,309 字节（预算 204,800）；报告只留摘要与引用。
-- 峰值 RSS 记为 `measured=false`，不编造数字。
+  保留下来的输出目录共 220,351 字节，最大单文件 112,579 字节 < 最小原件 153,851 字节，
+  因此目录内**没有任何原件全文副本**。
+- 峰值 RSS **已真实测得**：原生 121,929,728 字节（约 116 MiB），离线 21,049,344 字节（约 20 MiB）。
+  早先 `peak_rss_measured=false` 是个真 bug：`recovery.peak_rss_bytes()` 通过 ctypes 调
+  `GetProcessMemoryInfo` 时没设 `argtypes`/`restype`，64 位 HANDLE 被截断，psapi 与 K32
+  两个入口都返回 0。补上函数原型后即可测出；上面两个数字是修复后的实跑值。
 
-## 11. 需要 ROOT 做的事
+## 11. 本轮修掉的基准自身缺陷
+
+基准也是代码，会自己出错。这一轮原生回放复跑时暴露出 4 个真问题，都已修并加了回归测试：
+
+1. **峰值 RSS 恒为 None** —— ctypes 调 `GetProcessMemoryInfo` 没设函数原型，
+   64 位 HANDLE 被截断，两个入口都返回 0。补 `argtypes`/`restype` 后测得真实值。
+2. **哨兵检查形同虚设** —— `install_sentinel()` 无条件重写哨兵，
+   `sentinel_stable` 变成「新文件 vs 自己」，预先存在的哨兵被覆盖也报 true。
+   改为运行前保存、运行后还原，并区分 `restored` / `created_by_this_run`。
+3. **`restore_sentinel()` 拼写错误**（`preeexisting`）—— 被新加的哨兵保持测试当场抓到。
+4. **`config_unchanged` 在没传 `--probe-config` 时报 count=0** ——
+   看起来像通过，实际什么都没证明。现在打印探针数量，并把哨兵纳入探针集合。
+
+另有两个**遗漏结论的精化**（不是缺陷，是措辞）：名创真正的遗漏是 p12 门店表事实
+而非 `TOP TOY` 字符串本身；96 上限只在 2 份文档上触发，另 2 份压根没触顶。
+
+## 12. 需要 ROOT 做的事
 
 1. 通过 `observer.observe_du_adapter` 注入真实 `du-input/1` 适配器，让
    `context_completeness` 与 `role_modality_quantity` 不再是 NOT_EVALUATED。
