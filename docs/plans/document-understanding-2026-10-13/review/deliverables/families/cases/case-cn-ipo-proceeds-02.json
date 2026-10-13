@@ -39,7 +39,11 @@
         "page": 34,
         "text": "本次募集资金将严格按照规定存储在董 事会指定的专门账户集中管理，专款专用，规范使用募集资金。",
         "role": "fundraising",
-        "hints": {"heading_path": ["募集资金运用"]}
+        "hints": {
+          "heading_path": [
+            "募集资金运用"
+          ]
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +56,10 @@
         "page": 34,
         "text": "序号  募集资金运用方向  项目总投资  拟投入募集资金  1  高端半导体设备扩产升级项目  40,058.96  40,000.00  2  技术研发中心建设升级项目  40,097.22  40,000.00  3  补充流动资金  20,000.00  20,000.00  合计  100,156.18  100,000.00",
         "role": "fundraising",
-        "hints": {"unit_kind": "operating_table", "note": "募资用途表：项目总投资 vs 拟投入募集资金两列口径"}
+        "hints": {
+          "unit_kind": "operating_table",
+          "note": "募资用途表：项目总投资 vs 拟投入募集资金两列口径"
+        }
       }
     ]
   },
@@ -66,7 +73,11 @@
         "id": "f1-proceeds-structure",
         "objective": "识别募资用途的项目结构与双口径",
         "importance": "critical",
-        "any_support_sets": [["u2"]],
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "三个用途方向：扩产升级、研发中心建设、补充流动资金（补流单列）",
           "列口径：项目总投资 vs 拟投入募集资金（如 40,058.96 vs 40,000.00）",
@@ -76,19 +87,32 @@
           "拟投入募集资金不等于项目实际投入或已建成",
           "补流金额不得并入项目投资额",
           "不得把募投项目投资额当项目收益"
-        ]
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f2-proceeds-earmarking",
         "objective": "募资专户管理约束",
         "importance": "normal",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["约束：专款专用、专户集中管理"],
-        "must_not_assert": ["资金用途承诺不等于项目执行进度"]
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "约束：专款专用、专户集中管理"
+        ],
+        "must_not_assert": [
+          "资金用途承诺不等于项目执行进度"
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["项目后续执行情况（超出本文件范围）", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "项目后续执行情况（超出本文件范围）",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {
@@ -106,6 +130,9 @@
     "period": "2019年招股时点",
     "condition": "拟投入募集资金"
   },
-  "expected_missing_slots": ["unit", "geography"],
+  "expected_missing_slots": [
+    "unit",
+    "geography"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

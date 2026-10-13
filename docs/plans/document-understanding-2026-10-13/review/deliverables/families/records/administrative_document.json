@@ -1,35 +1,78 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "administrative_document",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["cn_exchange", "hkex", "sec", "other", "unknown"],
+    "regimes": [
+      "cn_exchange",
+      "hkex",
+      "sec",
+      "other",
+      "unknown"
+    ],
     "forms": [],
     "family": "administrative",
-    "purposes": ["administrative_check"],
-    "modifiers": {"extent": "unknown", "revision": "unknown"},
-    "carrier": ["pdf", "image", "html"],
-    "language": ["zh", "en"]
+    "purposes": [
+      "administrative_check"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf",
+      "image",
+      "html"
+    ],
+    "language": [
+      "zh",
+      "en"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "确认意见", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "确认意见",
+          "field": null
+        },
         "location": "cover",
         "reason": "中介机构/控股股东确认意见类文件的标题短语（常为扫描件）"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "管理制度", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "管理制度",
+          "field": null
+        },
         "location": "cover",
         "reason": "制度文件标题短语；但必须正文核实，标题可能误导"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "通知", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "通知",
+          "field": null
+        },
         "location": "cover",
         "reason": "会议通知/制度通知类标题短语"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "签字", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "签字",
+          "field": null
+        },
         "location": "body",
         "reason": "签章/签字页内容提示行政属性"
       }
@@ -45,17 +88,48 @@
   "sections": [
     {
       "role": "administrative",
-      "aliases": ["确认意见", "声明", "通知", "签章", "会议安排"],
-      "heading_path": [["确认意见", "声明", "通知", "签章", "会议安排"]],
+      "aliases": [
+        "确认意见",
+        "声明",
+        "通知",
+        "签章",
+        "会议安排"
+      ],
+      "heading_path": [
+        [
+          "确认意见",
+          "声明",
+          "通知",
+          "签章",
+          "会议安排"
+        ]
+      ],
       "priority": 1,
-      "questions": ["正文是否真为纯程序性", "是否包含经营议案/实质附件"]
+      "questions": [
+        "正文是否真为纯程序性",
+        "是否包含经营议案/实质附件"
+      ]
     },
     {
       "role": "business",
-      "aliases": ["问答记录", "经营情况", "附件", "议案内容"],
-      "heading_path": [["问答记录", "经营情况", "附件", "议案"]],
+      "aliases": [
+        "问答记录",
+        "经营情况",
+        "附件",
+        "议案内容"
+      ],
+      "heading_path": [
+        [
+          "问答记录",
+          "经营情况",
+          "附件",
+          "议案"
+        ]
+      ],
       "priority": 2,
-      "questions": ["若正文含经营内容（如活动记录、议案），按实际内容走对应 family"]
+      "questions": [
+        "若正文含经营内容（如活动记录、议案），按实际内容走对应 family"
+      ]
     }
   ],
   "reading_questions": [
@@ -67,13 +141,19 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period"],
+      "slots": [
+        "subject",
+        "period"
+      ],
       "missing_behavior": "unknown",
       "reason": "任何从行政件提取的断言都要绑定主体与文件时点"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "确认/声明的作用域与条件保留"
     }
@@ -91,11 +171,16 @@
   },
   "evidence_status": {
     "design": "verified",
-    "real_samples": ["case-admin-scan-empty-01"],
+    "real_samples": [
+      "case-admin-scan-empty-01"
+    ],
     "missing_shapes": [
       "真正制度/会议通知负例原件缺失（cn-ir-policy 不能作制度负例；已入 acquisition_requests）",
       "扫描件 OCR 路径未在本包验证"
     ]
   },
-  "case_ids": ["case-admin-scan-empty-01", "case-synth-admin-notice-01"]
+  "case_ids": [
+    "case-admin-scan-empty-01",
+    "case-synth-admin-notice-01"
+  ]
 }

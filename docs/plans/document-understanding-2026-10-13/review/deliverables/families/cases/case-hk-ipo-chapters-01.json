@@ -39,7 +39,10 @@
         "page": 8,
         "text": "行業概覽",
         "role": "unknown",
-        "hints": {"unit_kind": "toc", "note": "目录项（繁体）：行业概览章节"}
+        "hints": {
+          "unit_kind": "toc",
+          "note": "目录项（繁体）：行业概览章节"
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +55,10 @@
         "page": 8,
         "text": "未來計劃及所得款項用途",
         "role": "unknown",
-        "hints": {"unit_kind": "toc", "note": "目录项（繁体）：未来计划及所得款项用途章节"}
+        "hints": {
+          "unit_kind": "toc",
+          "note": "目录项（繁体）：未来计划及所得款项用途章节"
+        }
       },
       {
         "unit_id": "u3",
@@ -65,7 +71,13 @@
         "page": 17,
         "text": "競爭優勢 以下優勢成就了今天的我們，並將支持我們未來的成功： • 提供創意生活家居產品的全球零售商；",
         "role": "business",
-        "hints": {"heading_path": ["業務", "競爭優勢"], "language": "zh-Hant"}
+        "hints": {
+          "heading_path": [
+            "業務",
+            "競爭優勢"
+          ],
+          "language": "zh-Hant"
+        }
       }
     ]
   },
@@ -79,21 +91,49 @@
         "id": "f1-hk-prospectus-chapters",
         "objective": "港股招股章节定位与别名合并",
         "importance": "critical",
-        "any_support_sets": [["u1"], ["u2"]],
-        "must_preserve": ["繁体章节名：行業概覽、未來計劃及所得款項用途", "两节分别承载行业口径与募资用途"],
-        "must_not_assert": ["目录项不得当正文证据", "不得把繁体章节名当作另一份文档"]
+        "any_support_sets": [
+          [
+            "u1"
+          ],
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "繁体章节名：行業概覽、未來計劃及所得款項用途",
+          "两节分别承载行业口径与募资用途"
+        ],
+        "must_not_assert": [
+          "目录项不得当正文证据",
+          "不得把繁体章节名当作另一份文档"
+        ],
+        "target_kind": "disposition_context"
       },
       {
         "id": "f2-competitive-claims-as-company-view",
         "objective": "竞争优势是公司自述，非第三方结论",
         "importance": "normal",
-        "any_support_sets": [["u3"]],
-        "must_preserve": ["来源：公司招股章程自述（业务章）", "时点：上市时点（2022）"],
-        "must_not_assert": ["“竞争优势”不得当作第三方验证的市场地位", "历史表述不得当现状"]
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
+        "must_preserve": [
+          "来源：公司招股章程自述（业务章）",
+          "时点：上市时点（2022）"
+        ],
+        "must_not_assert": [
+          "“竞争优势”不得当作第三方验证的市场地位",
+          "历史表述不得当现状"
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["行业顾问数据核验", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "行业顾问数据核验",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

@@ -104,12 +104,26 @@ def test_every_profile_version_is_content_addressed():
     assert len(set(versions)) == len(versions)
 
 
+def _assert_reading_scope(profile):
+    text = json.dumps(profile, ensure_ascii=False).casefold()
+    # An offering can mention the original credit-rating report as a low-value
+    # source section. That document name is not an investment rating output.
+    text = text.replace("信用评级报告", "")
+    for forbidden in ("买入", "卖出", "目标价", "评级", "仓位"):
+        assert forbidden not in text, f"{profile['profile_id']} contains {forbidden}"
+
+
 def test_profiles_do_not_contain_investment_conclusions():
-    """Scope boundary: profiles describe reading strategy, not research conclusions."""
+    """Scope boundary: reading source sections is not producing investment conclusions."""
     for profile in import_profiles_module().list_profiles():
-        text = json.dumps(profile, ensure_ascii=False).casefold()
-        for forbidden in ("买入", "卖出", "目标价", "评级", "仓位"):
-            assert forbidden not in text, f"{profile['profile_id']} contains {forbidden}"
+        _assert_reading_scope(profile)
+
+
+def test_credit_document_name_does_not_hide_investment_output():
+    _assert_reading_scope({"profile_id": "test", "negative_hints": ["信用评级报告"]})
+    for forbidden in ("买入", "卖出", "目标价", "投资评级", "仓位"):
+        with pytest.raises(AssertionError):
+            _assert_reading_scope({"profile_id": "test", "summary_focus": "信用评级报告；" + forbidden})
 
 
 def test_profiles_do_not_leak_probe_budgets():

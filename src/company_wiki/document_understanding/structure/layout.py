@@ -25,12 +25,14 @@ from .contract import ObservationUnit
 MIN_RUNNING_HEADER_PAGES = 2
 
 _TOC_LEADER = re.compile(r"[.．·]{3,}\s*\d{1,4}\s*$")
-_TOC_ENTRY = re.compile(r"^\s*(?:第[一二三四五六七八九十百]+[节章部分]|[一二三四五六七八九十]+[、.]|\d+(?:\.\d+)*[、.]?)\s*\S.*[.．·]{2,}\s*\d{1,4}\s*$")
+_TOC_ENTRY = re.compile(
+    r"^\s*(?:第[一二三四五六七八九十百]+[节章部分]|[一二三四五六七八九十]+[、.]|\d+(?:\.\d+)*[、.]?)\s*\S.*[.．·]{2,}\s*\d{1,4}\s*$"
+)
 _PAGE_NUMBER = re.compile(r"^\s*[-—–]?\s*\d{1,4}\s*[-—–]?\s*$")
 _HEADING_NUMBER = re.compile(
     r"^\s*(?:第[一二三四五六七八九十百零]+[节章编]|[一二三四五六七八九十]+[、．.]|"
     r"（[一二三四五六七八九十]+）|\([一二三四五六七八九十]+\)|"
-    r"\d+(?:\.\d+){0,3}\s|[IVXLC]+\.\s|Item\s+\d+[A-Z]?\.?\s)",
+    r"\d+(?:\.\d+){1,3}\s|\d+[、．.](?!\d)\s*\S|[IVXLC]+\.\s|Item\s+\d+[A-Z]?\.?\s)",
 )
 _FOOTNOTE_MARK = re.compile(r"^\s*(?:注\s*[:：]|\*|\(\d+\)|（\d+）)")
 
@@ -174,7 +176,9 @@ def _toc_units(units: Sequence[ObservationUnit]) -> set[str]:
             continue
         if _TOC_ENTRY.match(unit.text):
             toc.add(unit.unit_id)
-    touched_pages = {unit.page for unit in units if unit.unit_id in toc and unit.page is not None}
+    touched_pages = {
+        unit.page for unit in units if unit.unit_id in toc and unit.page is not None
+    }
     if len(touched_pages) < 1:
         return toc
     # A page that is mostly TOC leaders is a contents page even if some entry
@@ -197,6 +201,8 @@ def is_heading(unit: ObservationUnit, *, toc_ids: frozenset[str] | None = None) 
         return True
     if unit.kind in {"heading", "html_heading"}:
         return True
+    if unit.is_table_furniture:
+        return False  # table values are not chapter numbering
     if _HEADING_NUMBER.match(unit.text) and len(unit.text) <= 80:
         return not unit.text.rstrip().endswith(("。", "；", ";", "."))
     return False

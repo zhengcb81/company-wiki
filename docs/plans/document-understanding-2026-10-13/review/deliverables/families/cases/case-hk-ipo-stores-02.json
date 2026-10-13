@@ -39,7 +39,13 @@
         "page": 15,
         "text": "我們的門店網絡 截至2021年12月31日，我們主要通過5,000多家名創優品門店網絡為消費者提供服務，其中在中國有3,100多家名創優品門店，在海外有約1,900家名創優品門店。",
         "role": "operating_metrics",
-        "hints": {"heading_path": ["業務", "我們的門店網絡"], "language": "zh-Hant"}
+        "hints": {
+          "heading_path": [
+            "業務",
+            "我們的門店網絡"
+          ],
+          "language": "zh-Hant"
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +58,10 @@
         "page": 15,
         "text": "下表列示截至呈報日期，中國和全球的名創優品門店數量： 截至6月30日 截至12月31日 2019年 2020年 2021年 2020年 2021年",
         "role": "operating_metrics",
-        "hints": {"unit_kind": "operating_table", "note": "门店表列头：两个截止日口径并列（6月30日/12月31日）"}
+        "hints": {
+          "unit_kind": "operating_table",
+          "note": "门店表列头：两个截止日口径并列（6月30日/12月31日）"
+        }
       }
     ]
   },
@@ -66,7 +75,11 @@
         "id": "f1-prospectus-asof-store-network",
         "objective": "上市时点门店网络的口径与分解",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "as-of：2021-12-31（招股时点历史数据）",
           "分解：中国 3,100+ 家、海外约 1,900 家，合计 5,000+ 家",
@@ -75,19 +88,33 @@
         "must_not_assert": [
           "不得把 2021 年数据当上市后现状",
           "不得把约数写成精确值或自行加总核对差额"
-        ]
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f2-table-period-columns",
         "objective": "经营表列头期间口径随数据保留",
         "importance": "normal",
-        "any_support_sets": [["u2"]],
-        "must_preserve": ["列头含截至6月30日与截至12月31日两种截止日", "另有“截至呈報日期”表列"],
-        "must_not_assert": ["不同截止日列不得混用或直接同比"]
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "列头含截至6月30日与截至12月31日两种截止日",
+          "另有“截至呈報日期”表列"
+        ],
+        "must_not_assert": [
+          "不同截止日列不得混用或直接同比"
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["门店表逐格数值", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "门店表逐格数值",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

@@ -8,7 +8,7 @@ import pytest
 from _support import (
     CASE_KINDS, CASE_SCHEMA, CONTEXT_SLOTS, DISPOSITIONS, ID_RE, IMPORTANCE,
     QUOTE_QUOTA_BYTES, ROLES, case_files, load_cases, load_records,
-    quote_chars_per_source,
+    quote_bytes_per_source,
 )
 
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -126,10 +126,10 @@ def test_mutations_and_candidate_claim():
 
 
 def test_quote_quota_per_source():
-    totals = quote_chars_per_source(load_cases())
-    for source_key, chars in totals.items():
-        assert chars <= QUOTE_QUOTA_BYTES, (
-            f"{source_key} 摘录 {chars} 字符超过每 source 8KiB 配额"
+    totals = quote_bytes_per_source(load_cases())
+    for source_key, byte_count in totals.items():
+        assert byte_count <= QUOTE_QUOTA_BYTES, (
+            f"{source_key} 摘录 {byte_count} UTF-8 bytes超过每 source 8KiB 配额"
         )
 
 

@@ -95,12 +95,12 @@ def merge_section_aliases(sections: list[dict]) -> dict[str, list[str]]:
     return merged
 
 
-def quote_chars_per_source(cases: dict[str, dict]) -> dict[str, int]:
+def quote_bytes_per_source(cases: dict[str, dict]) -> dict[str, int]:
     totals: dict[str, int] = {}
     for case in cases.values():
         key = case["source"].get("source_sha256") or f"synthetic:{case['case_id']}"
         for unit in case["observation"]["units"]:
-            totals[key] = totals.get(key, 0) + len(unit.get("text") or "")
+            totals[key] = totals.get(key, 0) + len((unit.get("text") or "").encode("utf-8"))
     return totals
 
 

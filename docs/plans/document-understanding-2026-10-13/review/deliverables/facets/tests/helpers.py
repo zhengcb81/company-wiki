@@ -164,6 +164,8 @@ EXPECTED_CASE_IDS = [
     "syn_exit_no_business",
     "syn_exit_no_answer",
     "syn_financial_numbers",
+    "syn_qualitative_cooperation",
+    "syn_qualitative_funding",
 ]
 
 RECORD_FILE_NAMES = {rid: f"{rid}.json" for rid in EXPECTED_RECORD_IDS}

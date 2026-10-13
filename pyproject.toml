@@ -75,6 +75,7 @@ include = ["company_wiki*"]
 
 [tool.setuptools.package-data]
 "company_wiki.source_contract.schemas" = ["*.json"]
+"company_wiki.document_understanding.profiles" = ["reading_catalog.json"]
 
 [tool.ruff.lint.per-file-ignores]
 "scripts/*.py" = ["E402", "E741", "F401"]

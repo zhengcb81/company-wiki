@@ -39,7 +39,12 @@
         "page": 239,
         "text": "本项目建设期预测为1年，生产期设定为14年，计算期共15年。投运当年生产负荷设定为85%，次年为100%，以后各年的生产负荷均设定为100%。",
         "role": "financial_notes",
-        "hints": {"heading_path": ["募集资金投资项目", "项目效益分析"]}
+        "hints": {
+          "heading_path": [
+            "募集资金投资项目",
+            "项目效益分析"
+          ]
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +57,12 @@
         "page": 239,
         "text": "经测算，本项目投产后生产期平均年销售收入19,785.71万元，生产期年均实现净利润4,941.99万元，本项目内部收益率为22.30%（税后），静态投资回收期（税后）5.42 年。",
         "role": "financial_notes",
-        "hints": {"heading_path": ["募集资金投资项目", "项目效益分析"]}
+        "hints": {
+          "heading_path": [
+            "募集资金投资项目",
+            "项目效益分析"
+          ]
+        }
       }
     ]
   },
@@ -66,7 +76,12 @@
         "id": "f1-forecast-numbers-with-assumptions",
         "objective": "项目测算数值必须与假设绑定",
         "importance": "critical",
-        "any_support_sets": [["u1", "u2"]],
+        "any_support_sets": [
+          [
+            "u1",
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "假设：建设期1年、生产期14年、投运当年负荷85%、次年起100%",
           "测算口径：投产后生产期平均年销售收入/年均净利润（预测值）、税后IRR与回收期",
@@ -76,11 +91,15 @@
           "年均销售收入/净利润测算值不得当实际收入或利润",
           "IRR/回收期不得当已实现回报",
           "不得脱离负荷假设单独引用数字"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["测算方法学评价", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "测算方法学评价",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

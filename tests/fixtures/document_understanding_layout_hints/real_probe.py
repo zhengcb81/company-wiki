@@ -68,7 +68,9 @@ def sample_spec(sample_id: str) -> dict:
     raise KeyError(sample_id)
 
 
-def load_probe_input(bindings: dict[str, str], sample_id: str, *, mode: str = "span") -> dict:
+def load_probe_input(
+    bindings: dict[str, str], sample_id: str, *, mode: str = "span"
+) -> dict:
     """Build a du2-layout-input/1 envelope from a real original (read-only).
 
     ``mode="span"`` keeps one unit per text span (fine granularity: columns can
@@ -77,16 +79,28 @@ def load_probe_input(bindings: dict[str, str], sample_id: str, *, mode: str = "s
     current production input (no cell coordinates survive).
     """
     if fitz is None:
-        return {"status": "unavailable", "reason": "PyMuPDF not installed", "sample_id": sample_id}
+        return {
+            "status": "unavailable",
+            "reason": "PyMuPDF not installed",
+            "sample_id": sample_id,
+        }
     if mode not in ("span", "row_collapse"):
         raise ValueError(f"unknown probe mode: {mode}")
     spec = sample_spec(sample_id)
     raw_path = bindings.get(sample_id)
     if not raw_path:
-        return {"status": "unavailable", "reason": f"binding missing for {sample_id}", "sample_id": sample_id}
+        return {
+            "status": "unavailable",
+            "reason": f"binding missing for {sample_id}",
+            "sample_id": sample_id,
+        }
     path = Path(raw_path)
     if not path.is_file():
-        return {"status": "unavailable", "reason": f"file not found: {path}", "sample_id": sample_id}
+        return {
+            "status": "unavailable",
+            "reason": f"file not found: {path}",
+            "sample_id": sample_id,
+        }
     actual_sha = sha256_of(path)
     if actual_sha != spec["sha256"]:
         return {
@@ -120,7 +134,9 @@ def load_probe_input(bindings: dict[str, str], sample_id: str, *, mode: str = "s
                                 "bold": bool(span["flags"] & 16),
                             }
                         )
-            spans.sort(key=lambda s: ((s["bbox"][1] + s["bbox"][3]) / 2.0, s["bbox"][0]))
+            spans.sort(
+                key=lambda s: ((s["bbox"][1] + s["bbox"][3]) / 2.0, s["bbox"][0])
+            )
             if mode == "span":
                 rows = [[s] for s in spans]
             else:
@@ -129,7 +145,9 @@ def load_probe_input(bindings: dict[str, str], sample_id: str, *, mode: str = "s
                     yc = (span["bbox"][1] + span["bbox"][3]) / 2.0
                     if rows:
                         last = rows[-1]
-                        ref_yc = sum((s["bbox"][1] + s["bbox"][3]) / 2.0 for s in last) / len(last)
+                        ref_yc = sum(
+                            (s["bbox"][1] + s["bbox"][3]) / 2.0 for s in last
+                        ) / len(last)
                         height = max(s["bbox"][3] - s["bbox"][1] for s in last + [span])
                         if abs(yc - ref_yc) <= 0.6 * max(height, 6.0):
                             last.append(span)
@@ -158,7 +176,12 @@ def load_probe_input(bindings: dict[str, str], sample_id: str, *, mode: str = "s
                         "font_size": size,
                         "font_weight": "bold" if bold else "regular",
                         "kind": "text",
-                        "upstream_hints": {"probe_mode": mode},
+                        "upstream_hints": {
+                            "probe_mode": mode,
+                            "geometry_granularity": "row"
+                            if mode == "row_collapse"
+                            else "span",
+                        },
                     }
                 )
                 mapping.append(
@@ -246,8 +269,12 @@ def write_mapping_evidence(path: Path, results: list[dict]) -> None:
                 "row-collapsed ids share the page/coordinate provenance above"
             )
             entry["page_extent"] = {
-                "first_unit": r["probe_mapping"][0]["unit_id"] if r["probe_mapping"] else None,
-                "last_unit": r["probe_mapping"][-1]["unit_id"] if r["probe_mapping"] else None,
+                "first_unit": r["probe_mapping"][0]["unit_id"]
+                if r["probe_mapping"]
+                else None,
+                "last_unit": r["probe_mapping"][-1]["unit_id"]
+                if r["probe_mapping"]
+                else None,
             }
         samples.append(entry)
     payload = {
@@ -261,4 +288,6 @@ def write_mapping_evidence(path: Path, results: list[dict]) -> None:
         ],
     }
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=1) + "\n", encoding="utf8")
+    path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=1) + "\n", encoding="utf8"
+    )

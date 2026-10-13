@@ -30,29 +30,47 @@
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 1, "exact_quote": "[SYNTHETIC] Use of Proceeds: the company intends to use the net proceeds for working capital and capital expenditures."},
+        "anchor": {
+          "physical_page": null,
+          "line": 1,
+          "exact_quote": "[SYNTHETIC] Use of Proceeds: the company intends to use the net proceeds for working capital and capital expenditures."
+        },
         "page": null,
         "text": "[SYNTHETIC] Use of Proceeds: the company intends to use the net proceeds for working capital and capital expenditures.",
         "role": "fundraising",
-        "hints": {"synthetic": true}
+        "hints": {
+          "synthetic": true
+        }
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 2, "exact_quote": "[SYNTHETIC] Shares being offered by the selling stockholders: 12,000,000 shares."},
+        "anchor": {
+          "physical_page": null,
+          "line": 2,
+          "exact_quote": "[SYNTHETIC] Shares being offered by the selling stockholders: 12,000,000 shares."
+        },
         "page": null,
         "text": "[SYNTHETIC] Shares being offered by the selling stockholders: 12,000,000 shares.",
         "role": "administrative",
-        "hints": {"synthetic": true}
+        "hints": {
+          "synthetic": true
+        }
       },
       {
         "unit_id": "u3",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 3, "exact_quote": "[SYNTHETIC] PROSPECTUS (424B4) final terms table: price to public $19.00 per share."},
+        "anchor": {
+          "physical_page": null,
+          "line": 3,
+          "exact_quote": "[SYNTHETIC] PROSPECTUS (424B4) final terms table: price to public $19.00 per share."
+        },
         "page": null,
         "text": "[SYNTHETIC] PROSPECTUS (424B4) final terms table: price to public $19.00 per share.",
         "role": "administrative",
-        "hints": {"synthetic": true}
+        "hints": {
+          "synthetic": true
+        }
       }
     ]
   },
@@ -66,20 +84,38 @@
         "id": "f1-proceeds-vs-resale",
         "objective": "公司募资用途与旧股转售的区分",
         "importance": "critical",
-        "any_support_sets": [["u1", "u2"]],
-        "must_preserve": ["u1 是公司募资用途（Use of Proceeds）", "u2 是 selling stockholders 转售股数"],
+        "any_support_sets": [
+          [
+            "u1",
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "u1 是公司募资用途（Use of Proceeds）",
+          "u2 是 selling stockholders 转售股数"
+        ],
         "must_not_assert": [
           "转售股数对应的金额不归公司",
           "不得把转售规模写成公司募资净额"
-        ]
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f2-form-scope-difference",
         "objective": "注册说明书与最终 prospectus 的范围差异",
         "importance": "normal",
-        "any_support_sets": [["u3"]],
-        "must_preserve": ["424B4 为最终条款版本，as-of 定价时点"],
-        "must_not_assert": ["注册说明书的初步条款不得冒充最终定价"]
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
+        "must_preserve": [
+          "424B4 为最终条款版本，as-of 定价时点"
+        ],
+        "must_not_assert": [
+          "注册说明书的初步条款不得冒充最终定价"
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "read",

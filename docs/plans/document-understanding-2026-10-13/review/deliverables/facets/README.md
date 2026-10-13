@@ -19,9 +19,9 @@
 | `records/semantic_stage_progression.json` | A级语义规格①：第二曲线阶段阶梯（含关键错误反例、合法空值规则） |
 | `records/semantic_capacity_project.json` | A级语义规格②：产能项目（分期/口径/资金/测算语态） |
 | `records/mechanism_*.json`（4） | 可组合经营模式：软件订阅/消费、零售店网、制造认证/利用率、生物医药/CDMO |
-| `cases/*.json`（14） | 6 个真实原文锚定 case（CN/HK/US）+ 8 个合成正反配对/合法退出 case |
-| `c_verification/real_excerpt_checks.json` | C节点人工对照原文记录（单列）：20 条引文逐字核对 + SHA/mtime 复核 |
-| `tests/` | 结构不变量测试（311 项），不含语义判定 |
+| `cases/*.json`（16） | 6 个真实原文锚定 case（CN/HK/US）+ 10 个合成正反配对/合法退出 case |
+| `c_verification/real_excerpt_checks.json` | C节点人工对照原文记录（单列）：22 条完整锚点逐字核对 + SHA/mtime 复核 |
+| `tests/` | 结构不变量测试（ROOT接收后356项结构测试），不含语义判定 |
 | `index.json` | du2-facet-index/1：记录清单与覆盖行 |
 | `coverage_matrix.md` | 面/机制/市场覆盖、缺口与合法退出矩阵 |
 | `acquisition_requests.json` | 缺样清单（11 项），交资料获取层按既有授权补齐 |
@@ -64,9 +64,9 @@ python -B -X utf8 -m pytest docs/plans/document-understanding-2026-10-13/review/
 
 ## C节点（真实原文核对）
 
-`tools/verify_real_quotes.py` 对 6 个真实 case 的每条引文做原件核对：SHA-256 复算、按页/全文
+`tools/verify_real_quotes.py` 对 6 个真实 case 的每条引文做原件核对：SHA-256 复算、按页/声明行/公共HTML正文
 空白归一化逐字比对、读取前后 mtime 不变（原件只读、0 复制、scratch 目录 finally 清理）。
-结果：20/20 命中（CN 募集说明书/可转债/投资者关系记录、港股双语年报、美股 HTML 业绩发布与
+结果：22/22 完整锚点命中（CN 募集说明书/可转债/投资者关系记录、港股双语年报、美股 HTML 业绩发布与
 TXT 电话会）。本机路径只存未提交的 `.planning/du2-facets/bindings.local.json`。
 
 ## 已知边界（诚实声明）
@@ -76,3 +76,13 @@ TXT 电话会）。本机路径只存未提交的 `.planning/du2-facets/bindings
   其余缺口见 `coverage_matrix.md` 与 `acquisition_requests.json`。
 - 机制记录只写通用机制，不含任何公司固定产品名单；真实公司事实仅存在于 case 的原文锚定中。
 - 本包持久数据全部为 JSON/MD/小工具，0 原件复制、0 模型调用、0 付费。
+
+## ROOT接收校准（2026-10-13）
+
+定性客户合作与条件自筹不要求未披露金额；普通计数不强制数学分母。两项合法反例已加入case。
+短关键词锚点扩成支持完整事实的原始段落/表格，IR可选数字与原有产能替换定义各有独立支持单位。
+原件不改，不翻译。手工unit.text保留设计语境并显式text_status/text_source/runtime_raw=false；
+ROOT只用公共解析器从固定SHA原件恢复正式unit/locator，绝不能把手工正文或gold作为observed。
+一期建设周期列示不得推成均已完成；门店事实不强制GMV；否定VC生产不要求虚构stage。
+Consumer客群不证明按用量计费，consumption证据诚实留缺样。
+版本化接收结果见 `.planning/du2-facets-reception/`；结构绿与实际生产语义仍分开记录。

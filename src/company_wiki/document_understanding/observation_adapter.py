@@ -5,26 +5,10 @@ re-hash an original, does not rewrite a locator, and does not touch disk: it
 projects the units the existing parser already produced onto the frozen
 ``du-input/1`` wire so the pure route/structure packages can consume them.
 
-What it adds that the parser does not emit, and why each addition is derived
-from evidence already present rather than guessed:
-
-``heading_level``
-    A PDF page arrives as ``pdf_text_block`` fragments with no level.  A
-    numbered heading (``第三节 …`` / ``一、…`` / ``（一）…`` / ``Item 1.``) is
-    real evidence in the text itself, so a level is assigned from that
-    numbering.  Nothing is assigned when no numbering is present.
-
-``column``
-    The parser gives a ``bbox`` per block but no lane index.  Lanes are
-    *measured*: blocks on a page are split at the page's widest sustained
-    horizontal gutter, and a block belongs to the lane its left edge falls in.
-    A page with no clear gutter gets ``None``, never a guessed ``0``.
-
-``table_header`` / ``table_caption`` kinds and ``table_id``
-    The parser already emits the header row as row 0 of a table and carries
-    ``table_headers``/``row_cells`` on every row.  Row 0 is therefore the
-    header, and ``(page, paragraph/table index)`` identifies the table.  A
-    ``单位：`` / ``币种：`` caption is recognized from its own text.
+The adapter projects actual parser geometry/font/page metadata and semantic
+hints. It performs no gutter inference; ROOT invokes the single shared layout
+engine through layout_bridge before structure building. Numbered text and
+explicit parser/DOM heading hints remain supported for compatibility.
 
 Everything else is passed through unchanged.
 """
@@ -33,6 +17,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from typing import Any
+import re
 
 INPUT_SCHEMA_VERSION = "du-input/1"
 
@@ -85,9 +70,53 @@ _NUMBERED_HEADING = (
 )
 
 _HEADING_TERMINATOR = ("。", "；", ";", "：", ":")
-_UNIT_CAPTION = ("单位：", "单位:", "币种：", "币种:", "单位: ", "人民币万元", "人民币元")
+_UNIT_CAPTION = (
+    "单位：",
+    "单位:",
+    "币种：",
+    "币种:",
+    "单位: ",
+    "人民币万元",
+    "人民币元",
+)
 
 _MAX_HEADING_CHARS = 60
+
+
+def _part_heading_level(text: str) -> int | None:
+    value = " ".join(text.strip().split())
+    match = re.fullmatch(
+        r"PART\s+(II|I)\b(?:\s*[.—–:−-]\s*|\s+)?(.*)", value, re.IGNORECASE
+    )
+    if not match or len(value) > 100:
+        return None
+    title = match.group(2).strip()
+    if not title:
+        return 1
+    if title.casefold() in {"financial information", "other information"}:
+        return 1
+    if (
+        title == title.upper()
+        and title.isascii()
+        and re.fullmatch(r"[A-Z][A-Z /&-]*", title)
+        and not title.startswith(("OF ", "IS ", "WAS ", "AND "))
+    ):
+        return 1
+    return None
+
+
+def _is_item_label(text: str) -> bool:
+    return (
+        re.fullmatch(r"Item\s+\d{1,2}[A-Za-z]?\.?", text.strip(), re.IGNORECASE)
+        is not None
+    )
+
+
+def _is_item_heading(text: str) -> bool:
+    return (
+        re.match(r"^Item\s+\d{1,2}[A-Za-z]?\b(?:\.|\s|$)", text.strip(), re.IGNORECASE)
+        is not None
+    )
 
 
 def _heading_level(text: str, metadata: Mapping[str, Any]) -> int | None:
@@ -105,10 +134,21 @@ def _heading_level(text: str, metadata: Mapping[str, Any]) -> int | None:
     the equally short table fragments on the same page.
     """
     explicit = metadata.get("heading_level")
+    tag = metadata.get("tag_name")
+    if (
+        explicit is None
+        and isinstance(tag, str)
+        and tag.lower() in {"h1", "h2", "h3", "h4", "h5", "h6"}
+    ):
+        explicit = int(tag[1])
     if isinstance(explicit, int) and not isinstance(explicit, bool) and explicit > 0:
         return explicit
     if metadata.get("heading_like") is True:
         return 2
+    if _part_heading_level(text) is not None:
+        return 1
+    if _is_item_label(text):
+        return 1
 
     stripped = text.strip()
     if not stripped or len(stripped) > _MAX_HEADING_CHARS or "\n" in stripped:
@@ -146,68 +186,22 @@ def _detect_gutter_x(
     blocks: Sequence[tuple[float, float, float, float]],
     page_width: float | None = None,
 ) -> float | None:
-    """Find a two-column gutter, ignoring blocks that span the whole text area.
+    """Compatibility query only; canonical observation performs no inference."""
+    from types import SimpleNamespace
+    from .layout_hints.columns import compute_cuts
+    from .layout_hints.contract import WorkBudget
 
-    A real filing page mixes narrow column blocks with full-width tables.  The
-    tables straddle any gutter, so they are excluded from the measurement; the
-    gutter is then the clear separation between the remaining left-edge and
-    right-edge block groups.  Returning ``None`` is the honest answer for a
-    single-column page.
-    """
-    if len(blocks) < 4:
+    if not blocks:
         return None
-    widths = sorted(x1 - x0 for x0, _y0, x1, _y1 in blocks)
-    median_width = widths[len(widths) // 2]
-    if median_width <= 0:
-        return None
-    # Text area is the union of all blocks; a block covering most of it spans
-    # the columns rather than sitting in one.
-    text_left = min(x0 for x0, _y0, _x1, _y1 in blocks)
-    text_right = max(x1 for _x0, _y0, x1, _y1 in blocks)
-    text_span = text_right - text_left
-    if text_span <= 0:
-        return None
-    narrow = [
-        (x0, x1)
-        for x0, _y0, x1, _y1 in blocks
-        if (x1 - x0) <= 0.75 * text_span and (x1 - x0) >= 0.10 * text_span
-    ]
-    if len(narrow) < 4:
-        return None
-
-    # Split the narrow blocks by their *left edge*, not by the page midpoint:
-    # a page header sitting in the right half would otherwise pull the split.
-    narrow.sort()
-    best: tuple[float, float] | None = None
-    for index in range(1, len(narrow)):
-        left_group = narrow[:index]
-        right_group = narrow[index:]
-        if len(left_group) < 2 or len(right_group) < 2:
-            continue
-        left_right_edge = max(block[1] for block in left_group)
-        right_left_edge = min(block[0] for block in right_group)
-        if right_left_edge <= left_right_edge:
-            continue
-        clear_gap = right_left_edge - left_right_edge
-        narrower = min(
-            left_right_edge - min(block[0] for block in left_group),
-            max(block[1] for block in right_group) - right_left_edge,
-        )
-        if narrower <= 0:
-            continue
-        # A real gutter separates the groups by a meaningful share of the
-        # narrower column's width; a few points of kerning is not a boundary.
-        if clear_gap < 0.08 * narrower:
-            continue
-        if best is None or clear_gap > best[0]:
-            best = (clear_gap, (left_right_edge + right_left_edge) / 2)
-    if best is None:
-        return None
-    del page_width
-    return best[1]
+    units = [SimpleNamespace(bbox=box, ordinal=i) for i, box in enumerate(blocks)]
+    extent = max(box[2] for box in blocks) - min(box[0] for box in blocks)
+    cuts = compute_cuts(units, page_width or extent, WorkBudget(2000000))
+    return cuts[0] if len(cuts) == 1 else None
 
 
-def _lane_for(x0: float, x1: float, gutter: float, text_span: tuple[float, float]) -> int | None:
+def _lane_for(
+    x0: float, x1: float, gutter: float, text_span: tuple[float, float]
+) -> int | None:
     """Assign a lane only to a block that sits clearly on one side.
 
     A block that straddles the gutter (a full-width table, a banner) belongs to
@@ -274,23 +268,30 @@ def build_observation(
     if native_scan not in {"complete", "partial", "unavailable"}:
         native_scan = "unavailable"
 
-    # Pass 1: geometry per page, so lanes can be measured before emission.
-    by_page: dict[int, list[tuple[float, float, float, float]]] = {}
-    page_spans: dict[int, tuple[float, float]] = {}
-    for unit in units:
-        page = unit.coordinates.page_number
-        box = _bbox_of(unit)
-        if page is None or box is None:
-            continue
-        by_page.setdefault(page, []).append(box)
-    gutters: dict[int, float] = {}
-    for page, boxes in by_page.items():
-        text_left = min(box[0] for box in boxes)
-        text_right = max(box[2] for box in boxes)
-        page_spans[page] = (text_left, text_right)
-        gutter = _detect_gutter_x(boxes)
-        if gutter is not None:
-            gutters[page] = gutter
+    # A real body Part is not its earlier table-of-contents table copy.
+    body_parts = [
+        i
+        for i, unit in enumerate(units)
+        if unit.unit_kind != "html_table_cell"
+        and _part_heading_level(unit.raw_text) is not None
+    ]
+    has_body_parts = bool(body_parts)
+    toc_tables = set()
+    if body_parts:
+        first = body_parts[0]
+        toc_intro = any(
+            " ".join(unit.raw_text.casefold().split())
+            in {"table of contents", "contents", "目录"}
+            for unit in units[:first]
+        )
+        if toc_intro:
+            toc_tables = {
+                unit.metadata.get("table_index")
+                for unit in units[:first]
+                if unit.unit_kind == "html_table_cell"
+                and _part_heading_level(unit.raw_text) is not None
+            }
+            toc_tables.discard(None)
 
     emitted: list[dict[str, Any]] = []
     for ordinal, unit in enumerate(units):
@@ -308,13 +309,28 @@ def build_observation(
             page_height = metadata.get("page_height")
             if isinstance(page_height, (int, float)):
                 layout["page_height"] = float(page_height)
-        if page is not None and page in gutters and box is not None:
-            lane = _lane_for(box[0], box[2], gutters[page], page_spans[page])
-            if lane is not None:
-                layout["column"] = lane
-
+        for key in (
+            "font_size",
+            "font_weight",
+            "geometry_feature_version",
+            "geometry_granularity",
+        ):
+            if key in metadata:
+                layout[key] = metadata[key]
         hints: dict[str, Any] = {}
+        if metadata.get("geometry_granularity"):
+            hints["geometry_granularity"] = metadata["geometry_granularity"]
         level = _heading_level(unit.raw_text, metadata)
+        if (
+            has_body_parts
+            and unit.unit_kind == "html_paragraph"
+            and metadata.get("heading_level") is None
+            and metadata.get("tag_name") not in {"h1", "h2", "h3", "h4", "h5", "h6"}
+            and _part_heading_level(unit.raw_text) is None
+            and not _is_item_heading(unit.raw_text)
+        ):
+            # Text numbering is relative outline evidence, not native DOM depth.
+            level = None
         if level is not None and unit.unit_kind in {"pdf_text_block", "html_heading"}:
             hints["heading_level"] = level
         if coordinates.table_index is not None:
@@ -323,6 +339,17 @@ def build_observation(
             hints["row"] = coordinates.row_index
         if coordinates.column_index is not None:
             hints["column"] = coordinates.column_index
+        if unit.unit_kind.startswith("html_"):
+            table_index = metadata.get("table_index")
+            if isinstance(table_index, int) and not isinstance(table_index, bool):
+                hints["table_id"] = f"html:t{table_index}"
+            for source_key, target in (
+                ("row_index", "row"),
+                ("column_index", "column"),
+            ):
+                value = metadata.get(source_key)
+                if isinstance(value, int) and not isinstance(value, bool):
+                    hints[target] = value
         if metadata.get("qa_state"):
             hints["turn_id"] = str(metadata.get("qa_group_id") or "")
             hints["speaker"] = (
@@ -330,7 +357,9 @@ def build_observation(
                 if "answer" in str(metadata.get("qa_state"))
                 else "investor"
             )
-        if unit.unit_kind == "html_heading" and isinstance(metadata.get("dom_path"), str):
+        if unit.unit_kind.startswith("html_") and isinstance(
+            metadata.get("dom_path"), str
+        ):
             hints["dom_path"] = metadata["dom_path"]
         # Mark the non-selectable text-layer copy explicitly, so a consumer does not have to
         # know the parser's internal role name to avoid double-counting a Q&A page.
@@ -338,6 +367,25 @@ def build_observation(
             hints[QA_SHADOW_HINT] = True
 
         kind = _wire_kind(unit, coordinates)
+        if (
+            unit.unit_kind in {"pdf_text_block", "html_paragraph", "html_heading"}
+            and level is not None
+        ):
+            if (
+                has_body_parts
+                and _is_item_heading(unit.raw_text)
+                and metadata.get("heading_level") is None
+                and metadata.get("tag_name") not in {"h1", "h2", "h3", "h4", "h5", "h6"}
+            ):
+                level = 2
+            hints["heading_level"] = level
+            kind = "heading"
+        if (
+            unit.unit_kind == "html_table_cell"
+            and metadata.get("table_index") in toc_tables
+        ):
+            kind = "toc_entry"
+            hints.pop("heading_level", None)
         emitted.append(
             {
                 "unit_id": unit.unit_id,
@@ -367,8 +415,12 @@ def build_observation(
             "declared_kind": declared_kind,
             "mime_type": mime_type,
             "language": resolved_language,
-            **{key: value for key, value in source_metadata.items()
-               if key in {"regime", "form_type", "published_at", "period_end", "revision"}},
+            **{
+                key: value
+                for key, value in source_metadata.items()
+                if key
+                in {"regime", "form_type", "published_at", "period_end", "revision"}
+            },
         },
         "coverage": {
             "native_scan": native_scan,

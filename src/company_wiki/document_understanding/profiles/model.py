@@ -1,15 +1,8 @@
-"""Immutable profile objects and the shared building blocks they compose from.
+"""Common immutable profile/wire types plus archived compatibility building blocks.
 
-``design.md`` section 1 and 9 forbid one pipeline (or one skill) per document type. The
-model here is therefore *composition*: a small set of shared section blocks, shared
-semantic-unit sets and shared summary focus fragments, assembled into fifteen profiles.
-
-Two rules are enforced by construction rather than by convention:
-
-* every profile version is a digest of its own content, so a profile cannot drift
-  without the version changing;
-* ``get_profile`` output is a frozen mapping view, so a caller cannot mutate the shared
-  registry entry by accident.
+The runtime strategy source is the packaged reading_catalog.json. The blocks below remain
+for compatibility tests and generic construction, not a second live registry. A Profile is
+the legacy flattened wire view; full hierarchical rules live in the canonical catalog.
 """
 
 from __future__ import annotations

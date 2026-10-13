@@ -1,11 +1,9 @@
 {
   "schema_version": "du2-facet-c-checks/1",
   "method_notes": [
-    "C节点人工对照原文：引文与原件逐条比对，空白归一化后要求逐字命中；不改写、不翻译引文。",
-    "PDF 用 PyMuPDF 按声明页提取只读文本；HTML/TXT 全文归一化匹配。",
-    "原件只读打开，不复制、不改写；读取前后核对 SHA-256 与 mtime。",
-    "本文件是核对记录，不是引擎语义验收；语义执行属 ROOT（NOT_RUN_ROOT_INTEGRATION）。",
-    "绝对路径只存于未提交的 .planning/du2-facets/bindings.local.json，不进入可移植fixture。"
+    "ROOT接收：公共HTML normalize_document完整段落、PDF声明页完整段落/表格、TXT声明行；原语言不翻译。",
+    "22条完整锚点按SHA原件复核；手工text显式非raw，ROOT恢复原始units/locator后使用。",
+    "支持组含义集中对照；本工具只核来源引用，不是自然语言推理器，生产语义仍NOT_RUN_ROOT_INTEGRATION。"
   ],
   "checks": [
     {
@@ -13,215 +11,279 @@
       "sample_id": "cn-convertible",
       "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
       "page": 223,
-      "quote": "拟投资于年产400吨吡啶盐项目和年产1,500吨三氯蔗糖项目",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "本次公开发行可转\n债拟募集资金不超过人民币6亿元（含6亿元），本次发行可转债募集的资金总额\n扣除发行费用后拟投资于年产400吨吡啶盐项目和年产1,500吨三氯蔗糖项目，项\n目实施主体为本公司。 \n本次公开发行可转债募集的资金总额扣除发行费用后拟投资于以下项目： \n单位：万元 \n序号 \n项目名称 \n项目品种 \n项目总投资 \n拟投入募集资金 \n实施主体 \n1 \n年产400 吨吡啶盐项目 \n吡啶盐 \n26,527.49 \n20,000.00 \n金禾实业 \n2 \n年产1,500 吨三氯蔗糖项目 \n三氯蔗糖 \n46,220.20 \n40,000.00 \n金禾实业 \n合计 \n \n72,747.69 \n60,000.00",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "cn-convertible-u2",
       "sample_id": "cn-convertible",
       "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
       "page": 223,
-      "quote": "募集资金不足部分由公司自筹解决",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "如募集资金到位时间与项目进度不一致，公司将依据项目的实际情况以其他\n资金先行投入，募集资金到位后再予以置换。若本次发行实际募集资金净额低于\n拟投入项目的资金额，公司将根据实际募集资金净额，按照项目需要调整投资规\n模，募集资金不足部分由公司自筹解决。",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "cn-convertible-u3",
       "sample_id": "cn-convertible",
       "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
       "page": 225,
-      "quote": "2016年上半年公司完成了年产500吨三氯蔗糖项目的建设",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "公司通过多年市场需求调查，已投入相关资源进行内部研究开发，比如2016\n年上半年公司完成了年产500吨三氯蔗糖项目的建设，标志着公司研发的第五代\n甜味剂三氯蔗糖全套生产流程及系统试产成功，意味着公司已经掌握了成熟的产\n品制备技术，具有技术领先优势。",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "cn-equity-u1",
       "sample_id": "cn-equity",
       "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
       "page": 61,
-      "quote": "项目建设期两期，新建厂房为一期，老厂区改建为二期",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "项目建设期两期，新建厂房为一期，老厂区改建为二期。一期2019\n年1 月拿地，2020 年12 月建成厂房，2021 年1 月一期建成投产。\n二期在一期建设完成后，老厂区相关设备搬迁至一期新厂房后才启\n动改建，预计在2021 年1 月启动建设，2021 年12 月完成建设，2022\n年二期建成投产。",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "cn-equity-u2",
       "sample_id": "cn-equity",
       "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
       "page": 61,
-      "quote": "在本次募集资金到位前，公司可根据项目进度的实际情况通过自有资金、银行贷款或其他途径进行部分投入",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "本次向特定对象发行A 股股票拟募集资金总额为不超过35,978.71 万元，扣\n除相关发行费用后，拟投入如下项目： \n单位：万元 \n序号 \n项目名称 \n项目总投资 \n募集资金使用金额 \n1 \n智能制造优化升级改造项目 \n35,300.00 \n28,678.71 \n2 \n补充流动资金 \n7,300.00 \n7,300.00 \n合计 \n42,600.00 \n35,978.71 \n在本次募集资金到位前，公司可根据项目进度的实际情况通过自有资金、银\n行贷款或其他途径进行部分投入，并在募集资金到位后予以置换。如果实际募集\n资金低于项目投资总额，不足部分公司将通过自筹解决。",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "cn-equity-u3",
       "sample_id": "cn-equity",
       "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
       "page": 68,
-      "quote": "本项目建成达产后，公司将优化升级原有精密复杂刃量具类产品产能12万件套",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "本项目建成达产后，公司将优化升级原有精密复杂刃量具类产品产能12 万\n件套，可开展高端生产性服务，将年产数控精密装备50 台，年产智能自动化装\n备400 台套。年新增营业收入2.60 亿元，新增利润总额9,248.00 万元，财务内\n部收益率（税后）为22.16%，投资回收期（税后）为6.63 年，经济效益良好。",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
+    },
+    {
+      "check_id": "cn-equity-u3p",
+      "sample_id": "cn-equity",
+      "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "page": 68,
+      "line": null,
+      "quote": "智能制造优化升级改造项目，包括四方面内容：优化升级替换原有精密复杂\n刃量具类产品产能、深化现有的精磨改制等高端生产性服务、新增数控精密装备\n和智能自动化装备产能，具体情况如下：",
+      "method": "pymupdf_page_full_support_context",
+      "normalized_match": true,
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "cn-ir-u1",
       "sample_id": "cn-ir",
       "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
       "page": 2,
-      "quote": "公司业绩在23年度达到历史新高后，24年度断崖式下降",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "问：公司业绩在23 年度达到历史新高后，24 年度断崖式下降，\n25 年仍未有明显起色，主要是因为沸石原因么？公司有什么举措尽快恢\n复乃至超过23 年度的经营业绩？",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "cn-ir-u2",
       "sample_id": "cn-ir",
       "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
       "page": 2,
-      "quote": "2024年度影响收入的主要原因为沸石系列环保材料业务及部分医药业务下游需求减少",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "答：您好！公司2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司2025 年度沸石分子筛产品收入\n略低于2024 年度。公司2025 年度及2026 年一季度收入及归属于上市公\n司股东的净利润均实现同比增长",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "cn-ir-u3",
       "sample_id": "cn-ir",
       "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
       "page": 3,
-      "quote": "公司现无生产VC（碳酸亚乙烯酯）的情况",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "问：控股股东在支持上市公司层面，具体做了哪些工作？有没有\n能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具\n体业务，推动上市公司快速做大做强？\n答：您好，公司现无生产VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "cn-ir-u4",
       "sample_id": "cn-ir",
       "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
       "page": 2,
-      "quote": "该事项未对九目化学经营构成重大影响",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。九目化学主要产品为OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。九目化学已于3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "cn-ir-u5",
       "sample_id": "cn-ir",
       "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
       "page": 3,
-      "quote": "先进新材料的开发和应用很多是长期的过程，需要通过长时间的产品开发、技术积累以及下游验证支持",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "先进新材料的开发和应用很多是长期的过程，需要通过长时间\n的产品开发、技术积累以及下游验证支持，才可能在下游产业发展的过程\n中做出更多贡献。公司将继续积极推进先进新材料的开发与产业化，争取\n更多前沿材料领域的优势地位。",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
+    },
+    {
+      "check_id": "cn-ir-u2n",
+      "sample_id": "cn-ir",
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "page": 2,
+      "line": null,
+      "quote": "其中2025 年度公司实现营业收入37.17\n亿元，同比增长约0.63%，实现归属于上市公司股东的净利润约2.84 亿\n元，同比增长约15.51%；2026 年一季度实现营业收入约10.15 亿元，同\n比增长约17.89%，实现归属于上市公司股东的净利润约0.88 亿元，同比\n增长约9.96%。",
+      "method": "pymupdf_page_full_support_context",
+      "normalized_match": true,
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "hk-annual-u1",
       "sample_id": "hk-annual",
       "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
       "page": 11,
-      "quote": "the total number of MINISO stores in mainland China and overseas markets increased from 6,413 as of December 31, 2023 to 7,504 as of December 31, 2024",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "For the fiscal year ended December 31, 2024, the total number of \nMINISO stores in mainland China and overseas markets increased \nfrom 6,413 as of December 31, 2023 to 7,504 as of December 31, \n2024. The number of TOP TOY stores increased from 148 as of \nDecember 31, 2023 to 276 as of December 31, 2024. For the fiscal \nyear ended December 31, 2024, the aggregate GMV of the Group \nreached approximately RMB30.4 billion.",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "hk-annual-u2",
       "sample_id": "hk-annual",
       "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
       "page": 12,
-      "quote": "Stores operated under MINISO Retail Partner model",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "As of December 31, 2024, we served consumers primarily through \na network of over 7,500 MINISO stores, including nearly 4,400 \nMINISO stores in mainland China and over 3,100 MINISO stores in \noverseas markets. The following table shows the number of MINISO \nstores in mainland China and overseas as of the dates presented:\nAs of December 31,\n截至12月31日\n2023\n2024\n2023年\n2024年\nNumber of MINISO stores 名創優品門店數量\nMainland China 中國內地\n3,926\n4,386\n Directly operated stores 直營店\n26\n25\n Stores operated under MINISO Retail Partner model 名創合夥人門店\n3,878\n4,335\n Stores operated under distributor model 代理門店\n22\n26\nOverseas 海外\n2,487\n3,118\n Directly operated stores 直營店\n238\n503\n Stores operated under MINISO Retail Partner model 名創合夥人門店\n283\n404\n Stores operated under distributor model 代理門店\n1,966\n2,211\nTotal 合計\n6,413\n7,504",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "hk-annual-u3",
       "sample_id": "hk-annual",
       "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
       "page": 24,
-      "quote": "there were no other significant events that might affect us since the end of the Reporting Period",
-      "method": "pymupdf_page_text_normalized",
+      "line": null,
+      "quote": "Reference are made to the announcements of the Company dated \nAugust 30, 2024, March 21, 2025 and March 28, 2025 in relation to \nthe share repurchase program adopted by the Company to conduct \nshare repurchase no more than HK$2 billion in value of its Shares \nand/or ADSs from the open market over a 12-month period starting \nfrom August 30, 2024, and as extended to be valid until June 30, \n2026 (the “Repurchase Authorisation”).\nOn March 28, 2025, the Company has entered into share \nrepurchase agreements for an aggregate repurchase amount of up \nto approximately HK$1.8 billion, including up to a maximum amount \nof HK$900 million for an automatic share repurchase program for \nthe repurchase of Shares (the “Hong Kong Repurchase Program”) \non the HKEX and the repurchase of ADSs on the NYSE for up to a \nmaximum amount of approximately US$115 million under the Rule \n10b5-1 of the United States Securities Exchange Act of 1934 in \nthe U.S (the “Rule 10b5-1 Repurchase Program”, and together \nwith the Hong Kong Repurchase Program, the “Share Repurchase \nPrograms”), both of which will be covered by the Repurchase \nAuthorisation. The Company has applied for, and the HKEX has \ngranted, a waiver from strict compliance with the requirements \nunder Rule 10.06(2)(e) of the Listing Rules in respect of the share \nrepurchases to be made pursuant to the Hong Kong Repurchase \nProgram and an approval under Rule 10.06(3) of the Listing Rules in \nrelation to the Share Repurchase Programs.\nSave as disclosed in this annual report, there were no other \nsignificant events that might affect us since the end of the \nReporting Period and up to the date of this annual report.",
+      "method": "pymupdf_page_full_support_context",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "us-txt-u1",
       "sample_id": "us-txt",
       "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
       "page": null,
-      "quote": "intended to supplement our prepared remarks during today's call",
-      "method": "txt_text_normalized",
+      "line": 128,
+      "quote": "Jonathan Neilson:Good afternoon, and thank you for joining us today. On the call with me are Satya Nadella, Chairman and Chief Executive Officer; Amy Hood, Chief Financial Officer; Alice Jolla, Chief Accounting Officer; and Brian DeFoe, Deputy General Counsel and Corporate Secretary. On the Microsoft Investor Relations website, you can find our earnings press release and financial summary slide deck, which is intended to supplement our prepared remarks during today's call and provides the reconciliation of differences between GAAP and non-GAAP financial measures.",
+      "method": "original_txt_declared_line",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "us-txt-u2",
       "sample_id": "us-txt",
       "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
       "page": null,
-      "quote": "It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations",
-      "method": "txt_text_normalized",
+      "line": 126,
+      "quote": "Operator:Greetings, and welcome to the Microsoft Fiscal Year 2026 Fourth Quarter Earnings Conference Call. As a reminder, this conference is being recorded. It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations. Please go ahead.",
+      "method": "original_txt_declared_line",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "us-txt-u3",
       "sample_id": "us-txt",
       "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
       "page": null,
-      "quote": "On this call, we will discuss certain non-GAAP items",
-      "method": "txt_text_normalized",
+      "line": 130,
+      "quote": "The non-GAAP financial measures provided should not be considered as a substitute for or superior to the measures of financial performance prepared in accordance with GAAP. They are included as additional clarifying items to aid investors in further understanding the company's fourth quarter performance in addition to the impact these items and events have on the financial results.",
+      "method": "original_txt_declared_line",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "us-release-u1",
       "sample_id": "us-release",
       "source_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
       "page": null,
-      "quote": "Microsoft 365 Commercial cloud revenue increased 16% when adjusted for the prior year comparable that benefited from 2 points of in-period revenue recognition",
-      "method": "html_text_normalized",
+      "line": null,
+      "quote": "· Microsoft 365 Commercial cloud revenue increased 16% when adjusted for the prior year comparable that benefited from 2 points of in-period revenue recognition. On a reported basis, Microsoft 365 Commercial cloud revenue increased 14%.",
+      "method": "public_html_normalization_full_paragraph",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "us-release-u2",
       "sample_id": "us-release",
       "source_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
       "page": null,
-      "quote": "Microsoft 365 Consumer cloud revenue increased 24%",
-      "method": "html_text_normalized",
+      "line": null,
+      "quote": "· Microsoft 365 Consumer cloud revenue increased 24% (up 22% in constant currency)",
+      "method": "public_html_normalization_full_paragraph",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     },
     {
       "check_id": "us-release-u3",
       "sample_id": "us-release",
       "source_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
       "page": null,
-      "quote": "commercial remaining performance obligation increased 84% to $678 billion",
-      "method": "html_text_normalized",
+      "line": null,
+      "quote": "Microsoft Cloud revenue was $59.3 billion and increased 27%, and commercial remaining performance obligation increased 84% to $678 billion.",
+      "method": "public_html_normalization_full_paragraph",
       "normalized_match": true,
-      "sha256_verified": true
+      "sha256_verified": true,
+      "support_scope": "完整段落/表格经含义对照；不是生产模型语义PASS"
     }
   ],
   "raw_preservation": {
     "originals": {
-      "cn-convertible": {
-        "sha256_recomputed": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
-        "sha256_matches_manifest": true,
-        "mtime_unchanged_after_read": true,
-        "local_binding_key": "cn-convertible"
-      },
       "cn-equity": {
         "sha256_recomputed": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
         "sha256_matches_manifest": true,
         "mtime_unchanged_after_read": true,
         "local_binding_key": "cn-equity"
+      },
+      "cn-convertible": {
+        "sha256_recomputed": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+        "sha256_matches_manifest": true,
+        "mtime_unchanged_after_read": true,
+        "local_binding_key": "cn-convertible"
       },
       "cn-ir": {
         "sha256_recomputed": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
@@ -235,17 +297,17 @@
         "mtime_unchanged_after_read": true,
         "local_binding_key": "hk-annual"
       },
-      "us-txt": {
-        "sha256_recomputed": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
-        "sha256_matches_manifest": true,
-        "mtime_unchanged_after_read": true,
-        "local_binding_key": "us-txt"
-      },
       "us-release": {
         "sha256_recomputed": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
         "sha256_matches_manifest": true,
         "mtime_unchanged_after_read": true,
         "local_binding_key": "us-release"
+      },
+      "us-txt": {
+        "sha256_recomputed": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+        "sha256_matches_manifest": true,
+        "mtime_unchanged_after_read": true,
+        "local_binding_key": "us-txt"
       }
     },
     "raw_copies": 0,

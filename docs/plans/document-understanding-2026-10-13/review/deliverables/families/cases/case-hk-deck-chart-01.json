@@ -40,7 +40,13 @@
         "page": 16,
         "text": "GMV generated from centralised eCommerce gateway page grew significantly YoY, as we introduced brand and discount zones, and broadened product selection",
         "role": "operating_metrics",
-        "hints": {"unit_kind": "slide_bullet", "heading_path": ["Segment", "eCommerce"]}
+        "hints": {
+          "unit_kind": "slide_bullet",
+          "heading_path": [
+            "Segment",
+            "eCommerce"
+          ]
+        }
       },
       {
         "unit_id": "u2",
@@ -53,7 +59,11 @@
         "page": 2,
         "text": "forward-looking statements relating to the forecasts, targets, outlook, estimates of financial performance, opportunities, challenges, business developments, business plans and growth strategies",
         "role": "administrative",
-        "hints": {"heading_path": ["Disclaimer"]}
+        "hints": {
+          "heading_path": [
+            "Disclaimer"
+          ]
+        }
       }
     ]
   },
@@ -67,7 +77,11 @@
         "id": "f1-gmv-not-revenue",
         "objective": "演示材料中 GMV 口径不等于收入",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "指标：GMV（集中化电商入口页面口径）",
           "表述：显著同比增长（未给具体数值）",
@@ -77,15 +91,25 @@
           "GMV 不得当收入",
           "“grew significantly” 不得编造成具体增长率",
           "页面口径的 GMV 不得当全渠道 GMV"
-        ]
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f2-deck-disclaimer-scope",
         "objective": "演示材料的前瞻性范围",
         "importance": "normal",
-        "any_support_sets": [["u2"]],
-        "must_preserve": ["targets/outlook 属 forward-looking 范围"],
-        "must_not_assert": ["目标值不得当已实现事实"]
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "targets/outlook 属 forward-looking 范围"
+        ],
+        "must_not_assert": [
+          "目标值不得当已实现事实"
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "read",
@@ -110,6 +134,9 @@
     "period": "同比（YoY，未给具体期间）",
     "condition": null
   },
-  "expected_missing_slots": ["quantity", "period"],
+  "expected_missing_slots": [
+    "quantity",
+    "period"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

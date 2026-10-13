@@ -30,20 +30,33 @@
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": null, "exact_quote": "[SYNTHETIC] 会议时间、地点、股权登记日与审议事项清单如下。"},
+        "anchor": {
+          "physical_page": 1,
+          "line": null,
+          "exact_quote": "[SYNTHETIC] 会议时间、地点、股权登记日与审议事项清单如下。"
+        },
         "page": 1,
         "text": "[SYNTHETIC] 会议时间、地点、股权登记日与审议事项清单如下。",
         "role": "administrative",
-        "hints": {"synthetic": true}
+        "hints": {
+          "synthetic": true
+        }
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": 2, "line": null, "exact_quote": "[SYNTHETIC] 审议事项三：关于变更部分募投项目实施主体的议案（详见同日公告）。"},
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "[SYNTHETIC] 审议事项三：关于变更部分募投项目实施主体的议案（详见同日公告）。"
+        },
         "page": 2,
         "text": "[SYNTHETIC] 审议事项三：关于变更部分募投项目实施主体的议案（详见同日公告）。",
         "role": "fundraising",
-        "hints": {"synthetic": true, "relation": "cross_reference"}
+        "hints": {
+          "synthetic": true,
+          "relation": "cross_reference"
+        }
       }
     ]
   },
@@ -57,16 +70,30 @@
         "id": "f1-procedural-with-substantive-item",
         "objective": "程序性文件中夹带实质议案的处理",
         "importance": "critical",
-        "any_support_sets": [["u1"], ["u2"]],
-        "must_preserve": ["u1 为程序性内容（时间/地点/登记日）", "u2 是实质议案并交叉引用同日公告（needs_source 到该公告）"],
+        "any_support_sets": [
+          [
+            "u1"
+          ],
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "u1 为程序性内容（时间/地点/登记日）",
+          "u2 是实质议案并交叉引用同日公告（needs_source 到该公告）"
+        ],
         "must_not_assert": [
           "不得因整体是通知而连带丢弃实质议案",
           "议案标题不得当议案已通过或已执行"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "generic_read",
-    "not_evaluated": ["真实制度文件结构（缺样）", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "真实制度文件结构（缺样）",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

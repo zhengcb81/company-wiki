@@ -39,7 +39,11 @@
         "page": null,
         "text": "Item 1. Business 3 Information about our Executive Officers 14 Item 1A. Risk Factors 16 Item 1B. Unresolved Staff Comments 30 Item 1C. Cybersecurity 30 Item 2. Properties 32 Item 3. Legal Proceedings 32",
         "role": "unknown",
-        "hints": {"unit_kind": "toc", "dom_line": 255, "note": "目录条目在原始 HTML 中按行分布（Item 列表跨 255 附近多行）；引文按 DOM 文本空白归一"}
+        "hints": {
+          "unit_kind": "toc",
+          "dom_line": 255,
+          "note": "目录条目在原始 HTML 中跨约 255 附近多行，完整引文约需±20行窗口；line仅为起点附近提示，不是精确行范围；locator仍为null，ROOT经真实parser和quote解析正式定位"
+        }
       }
     ]
   },
@@ -53,12 +57,20 @@
         "id": "f1-toc-is-not-body",
         "objective": "区分目录与正文，防止以目录命中冒充已读",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["该 unit 性质为目录（toc）", "目录给出 Item 编号与页码定位"],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "该 unit 性质为目录（toc）",
+          "目录给出 Item 编号与页码定位"
+        ],
         "must_not_assert": [
           "不得以目录命中宣称已读 Item 1 Business 或 Item 1A 风险正文",
           "不得把目录页码当作文本证据"
-        ]
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "read",

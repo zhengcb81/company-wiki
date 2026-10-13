@@ -1,35 +1,73 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "hk_annual_report",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["hkex"],
+    "regimes": [
+      "hkex"
+    ],
     "forms": [],
     "family": "annual",
-    "purposes": ["periodic_review", "business_baseline"],
-    "modifiers": {"extent": "full", "revision": "original"},
-    "carrier": ["pdf"],
-    "language": ["zh", "en"]
+    "purposes": [
+      "periodic_review",
+      "business_baseline"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf"
+    ],
+    "language": [
+      "zh",
+      "en"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "年報", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "年報",
+          "field": null
+        },
         "location": "cover",
         "reason": "港股年报封面繁体标题《……年報》，常与 Annual Report 双语并列"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "業務回顧", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "業務回顧",
+          "field": null
+        },
         "location": "toc",
         "reason": "港股年报目录的 Business Review 極块是用途证据；简繁别名要合并"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "管理層討論與分析", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "管理層討論與分析",
+          "field": null
+        },
         "location": "toc",
         "reason": "MD&A 目录项，港股年报固定章节"
       },
       {
-        "signal": {"kind": "metadata_equals", "value": "hkex", "field": "regime"},
+        "signal": {
+          "kind": "metadata_equals",
+          "value": "hkex",
+          "field": "regime"
+        },
         "location": "metadata",
         "reason": "港股披露制度；不能用 SEC Item 编号索引"
       }
@@ -45,52 +83,168 @@
   "sections": [
     {
       "role": "business",
-      "aliases": ["業務回顧", "业务回顾", "Business Review", "主席報告", "主席报告"],
-      "heading_path": [["業務回顧及展望", "業務回顧", "Business Review", "Management Discussion and Analysis", "管理層討論與分析"], ["業務回顧", "业务回顾", "Business Review"]],
+      "aliases": [
+        "業務回顧",
+        "业务回顾",
+        "Business Review",
+        "主席報告",
+        "主席报告"
+      ],
+      "heading_path": [
+        [
+          "業務回顧及展望",
+          "業務回顧",
+          "Business Review",
+          "Management Discussion and Analysis",
+          "管理層討論與分析"
+        ],
+        [
+          "業務回顧",
+          "业务回顾",
+          "Business Review"
+        ]
+      ],
       "priority": 1,
-      "questions": ["品牌/产品/渠道构成与本期进展", "谁向谁卖什么、收费与交付方式"]
+      "questions": [
+        "品牌/产品/渠道构成与本期进展",
+        "谁向谁卖什么、收费与交付方式"
+      ]
     },
     {
       "role": "operating_metrics",
-      "aliases": ["門店網絡", "门店网络", "同店", "經營數據", "Operating Data", "店舖數目"],
-      "heading_path": [["業務回顧及展望", "業務回顧", "Management Discussion and Analysis", "管理層討論與分析"], ["門店網絡", "门店网络", "同店", "經營數據", "Operating Data", "店舖數目"]],
+      "aliases": [
+        "門店網絡",
+        "门店网络",
+        "同店",
+        "經營數據",
+        "Operating Data",
+        "店舖數目"
+      ],
+      "heading_path": [
+        [
+          "業務回顧及展望",
+          "業務回顧",
+          "Management Discussion and Analysis",
+          "管理層討論與分析"
+        ],
+        [
+          "門店網絡",
+          "门店网络",
+          "同店",
+          "經營數據",
+          "Operating Data",
+          "店舖數目"
+        ]
+      ],
       "priority": 1,
-      "questions": ["店数/同店/用户等指标的存量与净增口径", "直营/加盟/合伙人等模式范围与分母"]
+      "questions": [
+        "店数/同店/用户等指标的存量与净增口径",
+        "直营/加盟/合伙人等模式范围与分母"
+      ]
     },
     {
       "role": "management_discussion",
-      "aliases": ["管理層討論與分析", "管理层讨论与分析", "MD&A"],
-      "heading_path": [["管理層討論與分析", "Management Discussion and Analysis"]],
+      "aliases": [
+        "管理層討論與分析",
+        "管理层讨论与分析",
+        "MD&A"
+      ],
+      "heading_path": [
+        [
+          "管理層討論與分析",
+          "Management Discussion and Analysis"
+        ]
+      ],
       "priority": 1,
-      "questions": ["财务表现背后的经营解释", "同比基期与口径"]
+      "questions": [
+        "财务表现背后的经营解释",
+        "同比基期与口径"
+      ]
     },
     {
       "role": "outlook",
-      "aliases": ["展望", "Outlook", "業務展望", "未来计划"],
-      "heading_path": [["業務回顧及展望", "展望", "Outlook", "業務展望"]],
+      "aliases": [
+        "展望",
+        "Outlook",
+        "業務展望",
+        "未来计划"
+      ],
+      "heading_path": [
+        [
+          "業務回顧及展望",
+          "展望",
+          "Outlook",
+          "業務展望"
+        ]
+      ],
       "priority": 1,
-      "questions": ["下一阶段计划与条件", "计划非承诺的语气保留"]
+      "questions": [
+        "下一阶段计划与条件",
+        "计划非承诺的语气保留"
+      ]
     },
     {
       "role": "risk",
-      "aliases": ["風險因素", "风险因素", "主要風險", "Risk"],
-      "heading_path": [["風險因素", "Risk Management and Internal Control", "主要風險"]],
+      "aliases": [
+        "風險因素",
+        "风险因素",
+        "主要風險",
+        "Risk"
+      ],
+      "heading_path": [
+        [
+          "風險因素",
+          "Risk Management and Internal Control",
+          "主要風險"
+        ]
+      ],
       "priority": 2,
-      "questions": ["已发生风险事实与一般提示的区分"]
+      "questions": [
+        "已发生风险事实与一般提示的区分"
+      ]
     },
     {
       "role": "financial_notes",
-      "aliases": ["財務報表附註", "综合财务报表附注", "Notes"],
-      "heading_path": [["綜合財務報表", "Independent Auditor's Report"], ["附註", "Notes"]],
+      "aliases": [
+        "財務報表附註",
+        "综合财务报表附注",
+        "Notes"
+      ],
+      "heading_path": [
+        [
+          "綜合財務報表",
+          "Independent Auditor's Report"
+        ],
+        [
+          "附註",
+          "Notes"
+        ]
+      ],
       "priority": 3,
-      "questions": ["收入确认、分部、供应链等商业机制描述"]
+      "questions": [
+        "收入确认、分部、供应链等商业机制描述"
+      ]
     },
     {
       "role": "administrative",
-      "aliases": ["董事會報告", "企业管治", "Corporate Governance", "其他資料"],
-      "heading_path": [["董事會報告", "企業管治", "Corporate Governance", "其他資料"]],
+      "aliases": [
+        "董事會報告",
+        "企业管治",
+        "Corporate Governance",
+        "其他資料"
+      ],
+      "heading_path": [
+        [
+          "董事會報告",
+          "企業管治",
+          "Corporate Governance",
+          "其他資料"
+        ]
+      ],
       "priority": 3,
-      "questions": ["是否有影响经营的重大收购/出售/合约事实"]
+      "questions": [
+        "是否有影响经营的重大收购/出售/合约事实"
+      ]
     }
   ],
   "reading_questions": [
@@ -104,25 +258,42 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period"],
+      "slots": [
+        "subject",
+        "period"
+      ],
       "missing_behavior": "unknown",
       "reason": "港股年报数值都带止期（截至X月X日止年度），断言必须绑定主体与期间"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator", "geography"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator",
+        "geography"
+      ],
       "missing_behavior": "partial",
       "reason": "门店/用户等指标必须保留存量vs净增、地域、模式范围与分母"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "stage", "condition"],
+      "slots": [
+        "project",
+        "stage",
+        "condition"
+      ],
       "missing_behavior": "partial",
       "reason": "收购、开店计划、新市场进入必须保留阶段与条件"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality", "period"],
+      "slots": [
+        "condition",
+        "modality",
+        "period"
+      ],
       "missing_behavior": "deferred",
       "reason": "期后事项与展望自带时点限定，必须随事实保留"
     }
@@ -148,8 +319,15 @@
   },
   "evidence_status": {
     "design": "verified",
-    "real_samples": ["case-hk-annual-stores-01", "case-hk-annual-samestore-footnote-02", "case-hk-annual-postperiod-03"],
-    "missing_shapes": ["双栏阅读顺序恢复未在本包验证（归 LAYOUT/ROOT）", "金融/地产行业港股年报"]
+    "real_samples": [
+      "case-hk-annual-stores-01",
+      "case-hk-annual-samestore-footnote-02",
+      "case-hk-annual-postperiod-03"
+    ],
+    "missing_shapes": [
+      "双栏阅读顺序恢复未在本包验证（归 LAYOUT/ROOT）",
+      "金融/地产行业港股年报"
+    ]
   },
   "case_ids": [
     "case-hk-annual-stores-01",

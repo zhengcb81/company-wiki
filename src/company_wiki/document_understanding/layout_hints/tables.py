@@ -34,7 +34,9 @@ from .text_evidence import (
 
 SENTENCE_PUNCTUATION = set("，。；！？,.;!?:")
 
-NUMBERED_HEADING = re.compile(r"^(?:第[一二三四五六七八九十百零0-9]+[章节部篇]|[一二三四五六七八九十]+[、．.]|[（(][一二三四五六七八九十0-9]+[）)]|\d+[、．.](?!\d))")
+NUMBERED_HEADING = re.compile(
+    r"^(?:第[一二三四五六七八九十百零0-9]+[章节部篇]|[一二三四五六七八九十]+[、．.]|[（(][一二三四五六七八九十0-9]+[）)]|\d+[、．.](?!\d))"
+)
 
 
 def _stripped_of_numbers(text: str) -> str:
@@ -100,15 +102,19 @@ class RegionDraft:
     row_indices: list[int] = field(default_factory=list)
     slots: list[ColumnSlot] = field(default_factory=list)
     diagnostics: list[tuple] = field(default_factory=list)
+    wrapped_unit_ids: set = field(default_factory=set)
+    _cached_bbox: tuple | None = field(default=None, init=False, repr=False)
 
     def bbox(self) -> tuple[float, float, float, float]:
-        boxes = [self.bands[i].bbox for i in self.member_indices]
-        return (
-            min(b[0] for b in boxes),
-            min(b[1] for b in boxes),
-            max(b[2] for b in boxes),
-            max(b[3] for b in boxes),
-        )
+        if self._cached_bbox is None:
+            boxes = [self.bands[i].bbox for i in self.member_indices]
+            self._cached_bbox = (
+                min(b[0] for b in boxes),
+                min(b[1] for b in boxes),
+                max(b[2] for b in boxes),
+                max(b[3] for b in boxes),
+            )
+        return self._cached_bbox
 
 
 @dataclass
@@ -116,10 +122,14 @@ class PageBands:
     page: Page
     bands: list[Band] = field(default_factory=list)
     cells: dict = field(default_factory=dict)  # band index -> list[Cell]
-    meta: dict = field(default_factory=dict)  # band index -> {"context","prose","multi","quantity"}
+    meta: dict = field(
+        default_factory=dict
+    )  # band index -> {"context","prose","multi","quantity"}
 
 
-def analyse_page(page: Page, page_units: list[Unit], budget, furniture_ids: set | None = None) -> PageBands:
+def analyse_page(
+    page: Page, page_units: list[Unit], budget, furniture_ids: set | None = None
+) -> PageBands:
     furniture_ids = furniture_ids or set()
     result = PageBands(page=page)
     result.bands = band_geometry_units(page_units, budget)
@@ -187,7 +197,7 @@ def build_region_drafts(page_bands: PageBands, budget) -> list[RegionDraft]:
                 member_indices=list(run),
                 granularity=False,
             )
-            _attach_context(draft, page_bands, gap_tol)
+            _attach_context(draft, page_bands, gap_tol, budget)
             drafts.append(draft)
             continue
         for sub_run in _aligned_subruns(run, page_bands):
@@ -197,7 +207,7 @@ def build_region_drafts(page_bands: PageBands, budget) -> list[RegionDraft]:
                 member_indices=list(sub_run),
                 granularity=True,
             )
-            _attach_context(draft, page_bands, gap_tol)
+            _attach_context(draft, page_bands, gap_tol, budget)
             drafts.append(draft)
     return drafts
 
@@ -218,7 +228,10 @@ def _aligned_subruns(run: list[int], page_bands: PageBands) -> list[list[int]]:
         box = cells[index][0].bbox
         if current:
             reference = cells[current[0]][0].bbox
-            if abs(box[0] - reference[0]) <= tolerance and abs(box[2] - reference[2]) <= tolerance:
+            if (
+                abs(box[0] - reference[0]) <= tolerance
+                and abs(box[2] - reference[2]) <= tolerance
+            ):
                 current.append(index)
                 continue
             subruns.append(current)
@@ -240,19 +253,23 @@ def _run_gap_tolerance(bands: list[Band]) -> float:
     return max(22.0, 2.5 * median)
 
 
-def _attach_context(draft: RegionDraft, page_bands: PageBands, gap_tol: float) -> None:
+def _attach_context(
+    draft: RegionDraft, page_bands: PageBands, gap_tol: float, budget
+) -> None:
     bands, meta = page_bands.bands, page_bands.meta
     first = draft.member_indices[0]
     cursor = first - 1
     leading: list[int] = []
     reference_top = bands[first].bbox[1]
     while cursor >= 0 and meta.get(cursor, {}).get("context") in {"caption", "period"}:
+        budget.charge()
         gap = reference_top - bands[cursor].bbox[3]
         if gap > gap_tol:
             break
-        leading.insert(0, cursor)
+        leading.append(cursor)
         reference_top = bands[cursor].bbox[1]
         cursor -= 1
+    leading.reverse()
     draft.leading_context = leading
 
     last = draft.member_indices[-1]
@@ -260,6 +277,7 @@ def _attach_context(draft: RegionDraft, page_bands: PageBands, gap_tol: float) -
     trailing: list[int] = []
     reference_bottom = bands[last].bbox[3]
     while cursor < len(bands) and meta.get(cursor, {}).get("context") == "footnote":
+        budget.charge()
         gap = bands[cursor].bbox[1] - reference_bottom
         if gap > gap_tol:
             break
@@ -277,6 +295,17 @@ def _attach_context(draft: RegionDraft, page_bands: PageBands, gap_tol: float) -
 def analyse_region(draft: RegionDraft, page_bands: PageBands, budget) -> None:
     """Split member bands into header block / rows and map cells to slots."""
     cells, meta = page_bands.cells, page_bands.meta
+    # The parser knows whether a box wraps an entire row/block. Such an
+    # aggregate cannot prove cell membership, even if adjacent units align.
+    for index in draft.member_indices:
+        for unit in page_bands.bands[index].units:
+            budget.charge()
+            if unit.hints.get("geometry_granularity") in {
+                "row",
+                "block",
+                "table_region",
+            }:
+                draft.granularity = True
     quantity_members = [i for i in draft.member_indices if meta[i]["quantity"]]
     seed_cells = [cell for i in quantity_members for cell in cells[i]]
     if not seed_cells:
@@ -316,7 +345,7 @@ def _flag_wrapped_rows(draft: RegionDraft, page_bands: PageBands, budget) -> Non
     for index in draft.member_indices:
         for cell in cells[index]:
             budget.charge(1)
-            column, _span = assign_cell_columns(cell, draft.slots)
+            column, _span = assign_cell_columns(cell, draft.slots, budget=budget)
             if column is None:
                 continue
             slot_presence.setdefault(column, []).append((position[index], index, cell))
@@ -325,17 +354,25 @@ def _flag_wrapped_rows(draft: RegionDraft, page_bands: PageBands, budget) -> Non
     seen: set = set()
     for entries in slot_presence.values():
         entries.sort(key=lambda item: item[0])
-        for (pos_a, index_a, cell_a), (pos_b, index_b, cell_b) in zip(entries, entries[1:]):
+        for (pos_a, index_a, cell_a), (pos_b, index_b, cell_b) in zip(
+            entries, entries[1:]
+        ):
+            budget.charge()
             if pos_b - pos_a <= 1:
                 continue
             gap = cell_b.bbox[1] - cell_a.bbox[3]
             key = (index_a, index_b)
             if gap <= 2.0 * median_height and key not in seen:
                 seen.add(key)
+                draft.wrapped_unit_ids.update(u.unit_id for u in cell_a.members)
+                draft.wrapped_unit_ids.update(u.unit_id for u in cell_b.members)
                 draft.diagnostics.append(
                     (
                         "LOGICAL_ROW_UNRESOLVED",
-                        sorted({u.unit_id for u in cell_a.members} | {u.unit_id for u in cell_b.members}),
+                        sorted(
+                            {u.unit_id for u in cell_a.members}
+                            | {u.unit_id for u in cell_b.members}
+                        ),
                         "column content wraps across line bands; logical rows kept separate",
                     )
                 )

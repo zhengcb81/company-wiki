@@ -8,6 +8,7 @@ actual comparisons performed.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from heapq import heappop, heappush
 
 from .contract import Unit, WorkBudget
 from .text_evidence import normalize_ws
@@ -35,52 +36,94 @@ def unit_text(unit: Unit) -> str:
 @dataclass
 class Band:
     units: list[Unit] = field(default_factory=list)
+    _bbox: tuple | None = field(default=None, init=False, repr=False)
+    _y_sum: float = field(default=0.0, init=False, repr=False)
+    _height_sum: float = field(default=0.0, init=False, repr=False)
+
+    def __post_init__(self):
+        for unit in self.units:
+            self._observe(unit)
+
+    def _observe(self, unit):
+        box = unit.bbox
+        if box is None:
+            return
+        if self._bbox is None:
+            self._bbox = box
+        else:
+            old = self._bbox
+            self._bbox = (
+                min(old[0], box[0]),
+                min(old[1], box[1]),
+                max(old[2], box[2]),
+                max(old[3], box[3]),
+            )
+        self._y_sum += (box[1] + box[3]) / 2.0
+        self._height_sum += band_height(unit)
+
+    def append(self, unit):
+        self.units.append(unit)
+        self._observe(unit)
 
     @property
-    def bbox(self) -> tuple[float, float, float, float]:
-        boxes = [u.bbox for u in self.units if u.bbox is not None]
-        return (
-            min(b[0] for b in boxes),
-            min(b[1] for b in boxes),
-            max(b[2] for b in boxes),
-            max(b[3] for b in boxes),
+    def bbox(self):
+        return self._bbox
+
+    @property
+    def y_center(self):
+        return self._y_sum / len(self.units)
+
+    @property
+    def mean_height(self):
+        return self._height_sum / len(self.units)
+
+    @property
+    def text(self):
+        return " ".join(
+            unit_text(u)
+            for u in sorted(self.units, key=lambda u: (u.bbox[0], u.ordinal))
         )
-
-    @property
-    def y_center(self) -> float:
-        ys = [(u.bbox[1] + u.bbox[3]) / 2.0 for u in self.units if u.bbox is not None]
-        return sum(ys) / len(ys)
-
-    @property
-    def mean_height(self) -> float:
-        heights = [band_height(u) for u in self.units]
-        return sum(heights) / len(heights)
-
-    @property
-    def text(self) -> str:
-        return " ".join(unit_text(u) for u in sorted(self.units, key=lambda u: (u.bbox[0], u.ordinal)))
 
 
 @dataclass
 class Cell:
     members: list[Unit] = field(default_factory=list)
+    _bbox: tuple | None = field(default=None, init=False, repr=False)
+
+    def __post_init__(self):
+        for unit in self.members:
+            self._observe(unit)
+
+    def _observe(self, unit):
+        box = unit.bbox
+        if self._bbox is None:
+            self._bbox = box
+        else:
+            old = self._bbox
+            self._bbox = (
+                min(old[0], box[0]),
+                min(old[1], box[1]),
+                max(old[2], box[2]),
+                max(old[3], box[3]),
+            )
+
+    def append(self, unit):
+        self.members.append(unit)
+        self._observe(unit)
 
     @property
-    def bbox(self) -> tuple[float, float, float, float]:
-        boxes = [u.bbox for u in self.members if u.bbox is not None]
-        return (
-            min(b[0] for b in boxes),
-            min(b[1] for b in boxes),
-            max(b[2] for b in boxes),
-            max(b[3] for b in boxes),
+    def bbox(self):
+        return self._bbox
+
+    @property
+    def text(self):
+        return " ".join(
+            unit_text(u)
+            for u in sorted(self.members, key=lambda u: (u.bbox[0], u.ordinal))
         )
 
     @property
-    def text(self) -> str:
-        return " ".join(unit_text(u) for u in sorted(self.members, key=lambda u: (u.bbox[0], u.ordinal)))
-
-    @property
-    def font_size(self) -> float | None:
+    def font_size(self):
         sizes = [u.font_size for u in self.members if u.font_size]
         return max(sizes) if sizes else None
 
@@ -94,7 +137,9 @@ class ColumnSlot:
 def band_geometry_units(units: list[Unit], budget: WorkBudget) -> list[Band]:
     """Cluster geometry-bearing units into visual line bands."""
     usable = [u for u in units if u.bbox is not None and not u.deferred]
-    ordered = sorted(usable, key=lambda u: ((u.bbox[1] + u.bbox[3]) / 2.0, u.bbox[0], u.ordinal))
+    ordered = sorted(
+        usable, key=lambda u: ((u.bbox[1] + u.bbox[3]) / 2.0, u.bbox[0], u.ordinal)
+    )
     bands: list[Band] = []
     for unit in ordered:
         if not budget.charge(1):
@@ -103,9 +148,11 @@ def band_geometry_units(units: list[Unit], budget: WorkBudget) -> list[Band]:
             bands.append(Band(units=[unit]))
             continue
         band = bands[-1]
-        tolerance = BAND_TOLERANCE * max(unit.bbox[3] - unit.bbox[1], band.mean_height, MIN_BAND_HEIGHT)
+        tolerance = BAND_TOLERANCE * max(
+            unit.bbox[3] - unit.bbox[1], band.mean_height, MIN_BAND_HEIGHT
+        )
         if abs(unit.y_center - band.y_center) <= tolerance:
-            band.units.append(unit)
+            band.append(unit)
         else:
             bands.append(Band(units=[unit]))
     for band in bands:
@@ -129,67 +176,81 @@ def band_cells(band: Band, budget: WorkBudget) -> list[Cell]:
             prev_box = previous.bbox
             gap = unit.bbox[0] - prev_box[2]
             if gap <= _cell_gap_tolerance(previous.members[-1], unit):
-                previous.members.append(unit)
+                previous.append(unit)
                 continue
         cells.append(Cell(members=[unit]))
     return cells
 
 
-def cluster_column_slots(data_cells: list[Cell], budget: WorkBudget) -> list[ColumnSlot]:
-    """Cluster data cells by horizontal interval overlap into column slots.
+def cluster_column_slots(
+    data_cells: list[Cell], budget: WorkBudget
+) -> list[ColumnSlot]:
+    """Sweep only horizontally active cluster intervals; all visits are charged.
 
-    Only cells of quantity-bearing rows seed the slots, so spanning header
-    cells can never merge two neighbouring quantity columns.  Merging uses
-    cluster intervals only (never cell pairs) to stay near-linear.
+    Disjoint columns never enter an all-cluster closure scan. Dense ambiguous
+    overlaps are still bounded by the caller's single work budget.
     """
-    if not data_cells:
-        return []
     ordered = sorted(data_cells, key=lambda cell: (cell.bbox[0], cell.bbox[2]))
-    cluster_boxes: list[list] = []  # [interval, members]
+    clusters = {}
+    active = set()
+    ends = []
+    serial = 0
     for cell in ordered:
-        budget.charge(1)
+        budget.charge()
         box = cell.bbox
-        placed = False
-        for cluster in cluster_boxes:
-            budget.charge(1)
-            if _intervals_link(box, cluster[0]):
-                cluster[1].append(cell)
-                cluster[0] = (
-                    min(cluster[0][0], box[0]),
-                    min(cluster[0][1], box[1]),
-                    max(cluster[0][2], box[2]),
-                    max(cluster[0][3], box[3]),
-                )
-                placed = True
+        while ends and ends[0][0] <= box[0] + 0.5:
+            right, key, version = heappop(ends)
+            if key in clusters and clusters[key][1] == version:
+                active.discard(key)
+        target = None
+        for key in sorted(active):
+            budget.charge()
+            if _intervals_link(box, clusters[key][0]):
+                target = key
                 break
-        if not placed:
-            cluster_boxes.append([box, [cell]])
-
-    merged = True
-    while merged:  # transitive closure over cluster interval overlap
-        merged = False
-        for i in range(len(cluster_boxes)):
-            for j in range(i + 1, len(cluster_boxes)):
-                budget.charge(1)
-                if _intervals_link(cluster_boxes[i][0], cluster_boxes[j][0]):
-                    cluster_boxes[i][1].extend(cluster_boxes[j][1])
-                    cluster_boxes[i][0] = (
-                        min(cluster_boxes[i][0][0], cluster_boxes[j][0][0]),
-                        min(cluster_boxes[i][0][1], cluster_boxes[j][0][1]),
-                        max(cluster_boxes[i][0][2], cluster_boxes[j][0][2]),
-                        max(cluster_boxes[i][0][3], cluster_boxes[j][0][3]),
+        if target is None:
+            target = serial
+            serial += 1
+            clusters[target] = [box, 0]
+            active.add(target)
+        else:
+            old = clusters[target][0]
+            box = (
+                min(old[0], box[0]),
+                min(old[1], box[1]),
+                max(old[2], box[2]),
+                max(old[3], box[3]),
+            )
+            clusters[target][0] = box
+            clusters[target][1] += 1
+        changed = True
+        while changed:
+            changed = False
+            for key in sorted(active):
+                if key == target:
+                    continue
+                budget.charge()
+                other = clusters[key][0]
+                if _intervals_link(box, other):
+                    box = (
+                        min(box[0], other[0]),
+                        min(box[1], other[1]),
+                        max(box[2], other[2]),
+                        max(box[3], other[3]),
                     )
-                    del cluster_boxes[j]
-                    merged = True
+                    clusters[target][0] = box
+                    clusters[target][1] += 1
+                    del clusters[key]
+                    active.remove(key)
+                    changed = True
                     break
-            if merged:
-                break
-
-    boxes = [cluster[0] for cluster in cluster_boxes]
-    slots: list[ColumnSlot] = []
-    for order, box in sorted(enumerate(boxes), key=lambda item: (item[1][0], item[1][2], item[0])):
-        slots.append(ColumnSlot(index=order, bbox=box))
-    return [ColumnSlot(index=position, bbox=slot.bbox) for position, slot in enumerate(slots)]
+        heappush(ends, (box[2], target, clusters[target][1]))
+    return [
+        ColumnSlot(index=i, bbox=box)
+        for i, box in enumerate(
+            sorted((c[0] for c in clusters.values()), key=lambda box: (box[0], box[2]))
+        )
+    ]
 
 
 def _intervals_link(box_a: tuple, box_b: tuple) -> bool:
@@ -205,17 +266,35 @@ def _slot_overlap(slot: ColumnSlot, box: tuple[float, float, float, float]) -> f
     return min(slot.bbox[2], box[2]) - max(slot.bbox[0], box[0])
 
 
-def assign_cell_columns(cell: Cell, slots: list[ColumnSlot]) -> tuple[int | None, int | None]:
+def assign_cell_columns(
+    cell: Cell, slots: list[ColumnSlot], *, budget=None
+) -> tuple[int | None, int | None]:
     """Return (column, column_span).  span covers every slot the cell overlaps."""
     if not slots:
         return None, None
     box = cell.bbox
-    covered = [slot for slot in slots if _slot_overlap(slot, box) > 0.5]
+    covered = []
+    for slot in slots:
+        if budget is not None:
+            budget.charge()
+        if _slot_overlap(slot, box) > 0.5:
+            covered.append(slot)
     if covered:
         covered.sort(key=lambda slot: slot.index)
         span = len(covered)
         return covered[0].index, (span if span > 1 else 1)
-    nearest = min(slots, key=lambda slot: min(abs(slot.bbox[0] - box[0]), abs(slot.bbox[2] - box[2])))
+    distances = []
+    for slot in slots:
+        if budget is not None:
+            budget.charge()
+        distances.append(
+            (
+                min(abs(slot.bbox[0] - box[0]), abs(slot.bbox[2] - box[2])),
+                slot.index,
+                slot,
+            )
+        )
+    nearest = min(distances, key=lambda item: item[:2])[2]
     distance = min(abs(nearest.bbox[0] - box[0]), abs(nearest.bbox[2] - box[2]))
     if distance <= 8.0:
         return nearest.index, 1

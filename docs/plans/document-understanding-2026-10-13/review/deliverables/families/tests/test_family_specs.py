@@ -45,8 +45,10 @@ def test_record_required_fields_and_enums(rid):
     assert applies["purposes"], "purposes 非空"
     modifiers = applies["modifiers"]
     assert set(modifiers) == {"extent", "revision"}, "生命周期修饰只有 extent/revision 两条轴"
-    assert modifiers["extent"] in EXTENTS
-    assert modifiers["revision"] in REVISIONS
+    assert isinstance(modifiers["extent"], list) and modifiers["extent"]
+    assert set(modifiers["extent"]) <= EXTENTS
+    assert isinstance(modifiers["revision"], list) and modifiers["revision"]
+    assert set(modifiers["revision"]) <= REVISIONS
 
 
 def test_recognition_signals_are_phrases_not_dsl():

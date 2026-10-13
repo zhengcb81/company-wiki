@@ -39,7 +39,10 @@
         "page": 18,
         "text": "同店(2) GMV增長率(%)　35%~40%　30%~35%　Down high-single digit 下降高個位數",
         "role": "operating_metrics",
-        "hints": {"unit_kind": "operating_table", "note": "同店GMV增长率行，含(2)脚注引用"}
+        "hints": {
+          "unit_kind": "operating_table",
+          "note": "同店GMV增长率行，含(2)脚注引用"
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +55,10 @@
         "page": 18,
         "text": "Notes: (1) Includes GMV generated through MINISO offline stores and Online to Offline (“O2O”) platforms.",
         "role": "financial_notes",
-        "hints": {"unit_kind": "footnote", "relation": "footnote_for:u1"}
+        "hints": {
+          "unit_kind": "footnote",
+          "relation": "footnote_for:u1"
+        }
       }
     ]
   },
@@ -66,7 +72,12 @@
         "id": "f1-samestore-definition",
         "objective": "同店 GMV 增长率必须带口径定义",
         "importance": "critical",
-        "any_support_sets": [["u1", "u2"]],
+        "any_support_sets": [
+          [
+            "u1",
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "指标：同店 GMV 增长率（非收入、非同店销售）",
           "脚注(1)口径：GMV 含线下门店与 O2O 平台",
@@ -75,11 +86,15 @@
         "must_not_assert": [
           "GMV 不等于收入",
           "不得省略脚注口径单独引用增长率区间"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["表格数值抽取", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "表格数值抽取",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {
@@ -103,6 +118,8 @@
     "period": "2024年度",
     "condition": "含线下门店与O2O平台GMV口径"
   },
-  "expected_missing_slots": ["quantity"],
+  "expected_missing_slots": [
+    "quantity"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

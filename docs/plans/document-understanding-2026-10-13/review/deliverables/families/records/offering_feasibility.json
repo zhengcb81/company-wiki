@@ -1,30 +1,64 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "offering_feasibility",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["cn_exchange", "other"],
+    "regimes": [
+      "cn_exchange",
+      "other"
+    ],
     "forms": [],
     "family": "offering",
-    "purposes": ["project_evidence", "fundraising"],
-    "modifiers": {"extent": "full", "revision": "original"},
-    "carrier": ["pdf"],
-    "language": ["zh"]
+    "purposes": [
+      "project_evidence",
+      "fundraising"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf"
+    ],
+    "language": [
+      "zh"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "可行性研究报告", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "可行性研究报告",
+          "field": null
+        },
         "location": "cover",
         "reason": "募投可研封面标题短语"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "可行性研究论证", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "可行性研究论证",
+          "field": null
+        },
         "location": "body",
         "reason": "募集说明书/公告引用可研结论时的固定表述"
       },
       {
-        "signal": {"kind": "metadata_equals", "value": "cn_exchange", "field": "regime"},
+        "signal": {
+          "kind": "metadata_equals",
+          "value": "cn_exchange",
+          "field": "regime"
+        },
         "location": "metadata",
         "reason": "A股语境；其他语境（集团内部可研）保留 regime=other"
       }
@@ -40,31 +74,103 @@
   "sections": [
     {
       "role": "business",
-      "aliases": ["项目背景", "现有业务", "产品方案", "市场分析"],
-      "heading_path": [["项目背景", "总论", "项目概况"], ["现有业务", "产品方案", "市场分析", "市场预测"]],
+      "aliases": [
+        "项目背景",
+        "现有业务",
+        "产品方案",
+        "市场分析"
+      ],
+      "heading_path": [
+        [
+          "项目背景",
+          "总论",
+          "项目概况"
+        ],
+        [
+          "现有业务",
+          "产品方案",
+          "市场分析",
+          "市场预测"
+        ]
+      ],
       "priority": 1,
-      "questions": ["项目与现有业务的关系", "产品方案与市场假设的作者"]
+      "questions": [
+        "项目与现有业务的关系",
+        "产品方案与市场假设的作者"
+      ]
     },
     {
       "role": "fundraising",
-      "aliases": ["投资估算", "资金筹措", "财务评价", "投资构成"],
-      "heading_path": [["投资估算", "资金筹措", "财务评价"], ["投资构成", "资金来源", "经济效益"]],
+      "aliases": [
+        "投资估算",
+        "资金筹措",
+        "财务评价",
+        "投资构成"
+      ],
+      "heading_path": [
+        [
+          "投资估算",
+          "资金筹措",
+          "财务评价"
+        ],
+        [
+          "投资构成",
+          "资金来源",
+          "经济效益"
+        ]
+      ],
       "priority": 1,
-      "questions": ["投资构成、资金来源与自筹比例", "效益测算的假设与口径"]
+      "questions": [
+        "投资构成、资金来源与自筹比例",
+        "效益测算的假设与口径"
+      ]
     },
     {
       "role": "operating_metrics",
-      "aliases": ["建设规模", "生产纲领", "产能", "建设进度"],
-      "heading_path": [["建设规模", "生产纲领", "建设进度", "项目实施方案"], ["建设规模", "生产纲领", "产能", "建设期"]],
+      "aliases": [
+        "建设规模",
+        "生产纲领",
+        "产能",
+        "建设进度"
+      ],
+      "heading_path": [
+        [
+          "建设规模",
+          "生产纲领",
+          "建设进度",
+          "项目实施方案"
+        ],
+        [
+          "建设规模",
+          "生产纲领",
+          "产能",
+          "建设期"
+        ]
+      ],
       "priority": 1,
-      "questions": ["建设规模/产能口径与分期", "建设期与达产假设"]
+      "questions": [
+        "建设规模/产能口径与分期",
+        "建设期与达产假设"
+      ]
     },
     {
       "role": "risk",
-      "aliases": ["风险分析", "不确定性分析", "风险与对策"],
-      "heading_path": [["风险分析", "不确定性分析", "风险与对策"]],
+      "aliases": [
+        "风险分析",
+        "不确定性分析",
+        "风险与对策"
+      ],
+      "heading_path": [
+        [
+          "风险分析",
+          "不确定性分析",
+          "风险与对策"
+        ]
+      ],
       "priority": 2,
-      "questions": ["敏感性假设与失败条件"]
+      "questions": [
+        "敏感性假设与失败条件"
+      ]
     }
   ],
   "reading_questions": [
@@ -77,25 +183,41 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period"],
+      "slots": [
+        "subject",
+        "period"
+      ],
       "missing_behavior": "unknown",
       "reason": "可研是编制时点的假设性研究，断言必须绑定主体与 as-of"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "stage", "condition", "geography"],
+      "slots": [
+        "project",
+        "stage",
+        "condition",
+        "geography"
+      ],
       "missing_behavior": "partial",
       "reason": "项目断言整包保留主体、建设阶段、地点与条件"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator"
+      ],
       "missing_behavior": "partial",
       "reason": "产能、投资额、测算收入必须带单位与测算标记"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "假设与免责声明随测算保留"
     }
@@ -123,5 +245,7 @@
       "可研与募投变更公告的版本对缺失"
     ]
   },
-  "case_ids": ["case-synth-feasibility-01"]
+  "case_ids": [
+    "case-synth-feasibility-01"
+  ]
 }

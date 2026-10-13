@@ -5,42 +5,81 @@
   "source": {
     "sample_id": "syn-capacity-project-01",
     "source_sha256": null,
-    "origin": {"synthetic": true, "purpose": "产能项目语义正反配对（合成文本）"},
+    "origin": {
+      "synthetic": true,
+      "purpose": "产能项目语义正反配对（合成文本）"
+    },
     "local_binding_key": null
   },
   "observation": {
     "metadata": {
       "synthetic": true,
-      "mechanism_axes": ["manufacturing"],
+      "mechanism_axes": [
+        "manufacturing"
+      ],
       "purpose": "项目归属、分期依赖、资金口径与测算语态的必要槽位与反例"
     },
     "units": [
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": 1, "exact_quote": "二期在一期投产且设备搬迁后启动，预计2027年12月建成"},
+        "anchor": {
+          "physical_page": 1,
+          "line": 1,
+          "exact_quote": "二期在一期投产且设备搬迁后启动，预计2027年12月建成"
+        },
         "page": 1,
-        "text": "募投项目甲：新建智能装备厂房。建设期两期，一期2026年6月建成；二期在一期投产且设备搬迁后启动，预计2027年12月建成。项目甲总投资2.00亿元，拟投入募集资金1.20亿元，缺口由公司自筹。",
+        "text": "募投项目甲：新建智能装备厂房。建设期两期，一期已于2026年6月建成；二期在一期投产且设备搬迁后启动，预计2027年12月建成。项目甲总投资2.00亿元，拟投入募集资金1.20亿元，缺口由公司自筹。",
         "role": "project_description",
-        "hints": {"semantic_ids": ["semantic_capacity_project"], "facet_ids": ["facet_capacity_projects"]}
+        "hints": {
+          "semantic_ids": [
+            "semantic_capacity_project"
+          ],
+          "facet_ids": [
+            "facet_capacity_projects"
+          ]
+        }
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": 4, "exact_quote": "募投项目乙：精密量具扩产，项目总投资1.00亿元，拟投入募集资金0.80亿元"},
+        "anchor": {
+          "physical_page": 1,
+          "line": 4,
+          "exact_quote": "募投项目乙：精密量具扩产，项目总投资1.00亿元，拟投入募集资金0.80亿元"
+        },
         "page": 1,
         "text": "募投项目乙：精密量具扩产，项目总投资1.00亿元，拟投入募集资金0.80亿元，建设期一年。",
         "role": "project_description",
-        "hints": {"semantic_ids": ["semantic_capacity_project"], "facet_ids": ["facet_capacity_projects"]}
+        "hints": {
+          "semantic_ids": [
+            "semantic_capacity_project"
+          ],
+          "facet_ids": [
+            "facet_capacity_projects"
+          ]
+        }
       },
       {
         "unit_id": "u3",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": 6, "exact_quote": "项目甲达产后预计年新增营业收入1.50亿元"},
+        "anchor": {
+          "physical_page": 1,
+          "line": 6,
+          "exact_quote": "项目甲达产后预计年新增营业收入1.50亿元"
+        },
         "page": 1,
         "text": "项目甲达产后预计年新增营业收入1.50亿元（测算值，按现行价格与达产率假设）。",
         "role": "project_return_estimate",
-        "hints": {"semantic_ids": ["semantic_capacity_project"], "facet_ids": ["facet_capacity_projects", "facet_operating_metrics"]}
+        "hints": {
+          "semantic_ids": [
+            "semantic_capacity_project"
+          ],
+          "facet_ids": [
+            "facet_capacity_projects",
+            "facet_operating_metrics"
+          ]
+        }
       }
     ]
   },
@@ -55,7 +94,11 @@
         "id": "f1",
         "objective": "项目甲分两期且二期有前置条件（一期投产且设备搬迁后启动）；一期2026年6月建成为陈述时点的已完成，二期2027年12月建成为预计",
         "importance": "required_business",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "项目=甲",
           "分期=一期/二期",
@@ -72,7 +115,12 @@
         "id": "f2",
         "objective": "资金口径分列：项目甲总投资2.00亿元、拟投入募集资金1.20亿元、缺口自筹；项目乙总投资1.00亿元、拟投入募集资金0.80亿元",
         "importance": "required_business",
-        "any_support_sets": [["u1", "u2"]],
+        "any_support_sets": [
+          [
+            "u1",
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "项目归属=甲、乙各自独立",
           "口径=项目总投资 vs 拟投入募集资金 vs 自筹缺口分列",
@@ -88,7 +136,11 @@
         "id": "f3",
         "objective": "项目甲达产后预计年新增营业收入1.50亿元是测算值（含价格与达产率假设），属计划语态",
         "importance": "required_business",
-        "any_support_sets": [["u3"]],
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
         "must_preserve": [
           "语态=预计/测算值",
           "条件=达产后、按现行价格与达产率假设",
@@ -150,6 +202,9 @@
     "denominator": null,
     "condition": null
   },
-  "expected_missing_slots": ["subject"],
-  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+  "expected_missing_slots": [
+    "subject"
+  ],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION",
+  "version": "1.1.0"
 }

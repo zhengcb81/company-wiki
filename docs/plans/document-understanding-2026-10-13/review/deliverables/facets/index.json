@@ -23,7 +23,10 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["real_hk_annual_store_network", "real_us_release_subscription"],
+      "case_ids": [
+        "real_hk_annual_store_network",
+        "real_us_release_subscription"
+      ],
       "gaps": []
     },
     {
@@ -32,8 +35,12 @@
       "spec_status": "implemented",
       "evidence_status": "synthetic_only",
       "integration_status": "not_integrated",
-      "case_ids": ["syn_exit_low_information"],
-      "gaps": ["缺带署名与统计期的行业章节真实片段（第三方统计 vs 公司陈述成对样本）；可转债原文含产业政策叙述但未建行业面gold"]
+      "case_ids": [
+        "syn_exit_low_information"
+      ],
+      "gaps": [
+        "缺带署名与统计期的行业章节真实片段（第三方统计 vs 公司陈述成对样本）；可转债原文含产业政策叙述但未建行业面gold"
+      ]
     },
     {
       "facet": "facet_new_business",
@@ -41,8 +48,13 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["syn_stage_ladder", "real_cn_ir_premise_denial"],
-      "gaps": ["缺募投变更/延期/终止公告对第二曲线时效影响的真实片段"]
+      "case_ids": [
+        "syn_stage_ladder",
+        "real_cn_ir_premise_denial"
+      ],
+      "gaps": [
+        "缺募投变更/延期/终止公告对第二曲线时效影响的真实片段"
+      ]
     },
     {
       "facet": "facet_overseas",
@@ -50,8 +62,13 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["real_hk_annual_store_network", "real_us_release_subscription"],
-      "gaps": ["缺出海建厂/许可/渠道推进的独立真实片段（目前仅门店地域拆分与汇率口径）"]
+      "case_ids": [
+        "real_hk_annual_store_network",
+        "real_us_release_subscription"
+      ],
+      "gaps": [
+        "缺出海建厂/许可/渠道推进的独立真实片段（目前仅门店地域拆分与汇率口径）"
+      ]
     },
     {
       "facet": "facet_customer_orders",
@@ -59,8 +76,15 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["real_cn_ir_premise_denial", "syn_negation_scope", "real_us_release_subscription"],
-      "gaps": ["缺正式订单/框架协议/里程碑合同原文片段（合同额与收入确认对照）"]
+      "case_ids": [
+        "real_cn_ir_premise_denial",
+        "syn_negation_scope",
+        "real_us_release_subscription",
+        "syn_qualitative_cooperation"
+      ],
+      "gaps": [
+        "缺正式订单/框架协议/里程碑合同原文片段（合同额与收入确认对照）"
+      ]
     },
     {
       "facet": "facet_capacity_projects",
@@ -68,8 +92,15 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["real_cn_equity_capacity_phasing", "real_cn_convertible_capacity_funding", "syn_capacity_project"],
-      "gaps": ["缺募投变更/延期/终止/进展公告真实样本（原计划→变化 delta）"]
+      "case_ids": [
+        "real_cn_equity_capacity_phasing",
+        "real_cn_convertible_capacity_funding",
+        "syn_capacity_project",
+        "syn_qualitative_funding"
+      ],
+      "gaps": [
+        "缺募投变更/延期/终止/进展公告真实样本（原计划→变化 delta）"
+      ]
     },
     {
       "facet": "facet_operating_metrics",
@@ -77,7 +108,12 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["real_hk_annual_store_network", "real_us_release_subscription", "syn_quantity_slots", "syn_financial_numbers"],
+      "case_ids": [
+        "real_hk_annual_store_network",
+        "real_us_release_subscription",
+        "syn_quantity_slots",
+        "syn_financial_numbers"
+      ],
       "gaps": []
     },
     {
@@ -86,8 +122,14 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["real_cn_ir_premise_denial", "syn_negation_scope", "syn_exit_no_answer"],
-      "gaps": ["缺假设风险→已发生事件的年报真实对照（目前风险性质样本为合成）"]
+      "case_ids": [
+        "real_cn_ir_premise_denial",
+        "syn_negation_scope",
+        "syn_exit_no_answer"
+      ],
+      "gaps": [
+        "缺假设风险→已发生事件的年报真实对照（目前风险性质样本为合成）"
+      ]
     },
     {
       "facet": "semantic_stage_progression",
@@ -95,8 +137,15 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["syn_stage_ladder", "real_cn_equity_capacity_phasing", "real_cn_ir_premise_denial", "syn_exit_no_answer"],
-      "gaps": ["缺生物医药阶段阶梯真实原文（临床/申报/获批）"]
+      "case_ids": [
+        "syn_stage_ladder",
+        "real_cn_equity_capacity_phasing",
+        "real_cn_ir_premise_denial",
+        "syn_exit_no_answer"
+      ],
+      "gaps": [
+        "缺生物医药阶段阶梯真实原文（临床/申报/获批）"
+      ]
     },
     {
       "facet": "semantic_capacity_project",
@@ -104,8 +153,16 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["real_cn_equity_capacity_phasing", "real_cn_convertible_capacity_funding", "syn_capacity_project", "syn_quantity_slots"],
-      "gaps": ["缺项目变更/延期公告（delta 语义）真实样本"]
+      "case_ids": [
+        "real_cn_equity_capacity_phasing",
+        "real_cn_convertible_capacity_funding",
+        "syn_capacity_project",
+        "syn_quantity_slots",
+        "syn_qualitative_funding"
+      ],
+      "gaps": [
+        "缺项目变更/延期公告（delta 语义）真实样本"
+      ]
     },
     {
       "facet": "mechanism_subscription_consumption",
@@ -113,17 +170,24 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["real_us_release_subscription", "real_us_call_roles"],
-      "gaps": ["缺订阅侧队列指标（净收入留存/续费率）定义原文"]
+      "case_ids": [
+        "real_us_release_subscription",
+        "real_us_call_roles"
+      ],
+      "gaps": [
+        "缺订阅侧队列指标（净收入留存/续费率）定义原文"
+      ]
     },
     {
       "facet": "mechanism_subscription_consumption",
       "mechanism": "consumption",
       "spec_status": "implemented",
-      "evidence_status": "real",
+      "evidence_status": "missing",
       "integration_status": "not_integrated",
-      "case_ids": ["real_us_release_subscription"],
-      "gaps": ["缺纯消费型（用量计费/消耗额）真实片段，现有证据以订阅侧为主"]
+      "case_ids": [],
+      "gaps": [
+        "缺明确按量计费/消耗额原文；Consumer是客群，不等于consumption机制。"
+      ]
     },
     {
       "facet": "mechanism_store_network",
@@ -131,8 +195,13 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["real_hk_annual_store_network", "syn_quantity_slots"],
-      "gaps": ["缺同店口径（same-store）与开关店明细真实片段"]
+      "case_ids": [
+        "real_hk_annual_store_network",
+        "syn_quantity_slots"
+      ],
+      "gaps": [
+        "缺同店口径（same-store）与开关店明细真实片段"
+      ]
     },
     {
       "facet": "mechanism_manufacturing",
@@ -140,8 +209,14 @@
       "spec_status": "implemented",
       "evidence_status": "real",
       "integration_status": "not_integrated",
-      "case_ids": ["real_cn_equity_capacity_phasing", "real_cn_convertible_capacity_funding", "syn_stage_ladder"],
-      "gaps": ["缺客户认证/产能利用率经营表真实片段（认证→订单边界）"]
+      "case_ids": [
+        "real_cn_equity_capacity_phasing",
+        "real_cn_convertible_capacity_funding",
+        "syn_stage_ladder"
+      ],
+      "gaps": [
+        "缺客户认证/产能利用率经营表真实片段（认证→订单边界）"
+      ]
     },
     {
       "facet": "mechanism_biopharma_cdmo",
@@ -149,8 +224,12 @@
       "spec_status": "proposed",
       "evidence_status": "synthetic_only",
       "integration_status": "not_integrated",
-      "case_ids": ["syn_stage_ladder"],
-      "gaps": ["缺生物医药真实原文：临床阶段、申报/获批、适应症作用域"]
+      "case_ids": [
+        "syn_stage_ladder"
+      ],
+      "gaps": [
+        "缺生物医药真实原文：临床阶段、申报/获批、适应症作用域"
+      ]
     },
     {
       "facet": "mechanism_biopharma_cdmo",
@@ -158,8 +237,12 @@
       "spec_status": "proposed",
       "evidence_status": "synthetic_only",
       "integration_status": "not_integrated",
-      "case_ids": ["syn_stage_ladder"],
-      "gaps": ["缺CDMO真实原文：订单/里程碑/版税与收入分开的真实披露"]
+      "case_ids": [
+        "syn_stage_ladder"
+      ],
+      "gaps": [
+        "缺CDMO真实原文：订单/里程碑/版税与收入分开的真实披露"
+      ]
     }
   ]
 }

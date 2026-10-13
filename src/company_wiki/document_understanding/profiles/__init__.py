@@ -9,7 +9,7 @@ section 3)::
 
 Scope and non-goals:
 
-* pure functions only -- no network, no disk, no config, no clock, no model calls;
+* load one installed policy asset at import; calls are pure, with no docs/config/network/clock/model reads;
 * the input observation is never mutated;
 * identical input yields identical output, with stable ordering;
 * no company name, security code or file path is ever used as a routing rule;
@@ -30,7 +30,9 @@ from .decision import decide
 from .child_ranges import attachment_routes
 from .lifecycle import lifecycle_modifiers
 from .observation import Limits, Observation, ObservationError, UnitRef, parse_observation
-from .registry import profile_by_id, profile_wire
+from .registry import (
+    profile_by_id, profile_wire, resolve_reading_profile, select_business_facets,
+)
 from .signals import Signal, SignalBag, detect_signals
 
 SCHEMA_VERSION = v.SCHEMA_VERSION_ROUTE
@@ -475,4 +477,6 @@ __all__ = [
     "get_profile",
     "list_profiles",
     "route_document",
+    "resolve_reading_profile",
+    "select_business_facets",
 ]

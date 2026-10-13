@@ -1,30 +1,63 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "hk_interim_report",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["hkex"],
+    "regimes": [
+      "hkex"
+    ],
     "forms": [],
     "family": "interim",
-    "purposes": ["periodic_review"],
-    "modifiers": {"extent": "full", "revision": "original"},
-    "carrier": ["pdf"],
-    "language": ["zh", "en"]
+    "purposes": [
+      "periodic_review"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf"
+    ],
+    "language": [
+      "zh",
+      "en"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "中期報告", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "中期報告",
+          "field": null
+        },
         "location": "cover",
         "reason": "港股中期报告封面《……中期報告》，常与 Interim Report 双语并列"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "未經審計", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "未經審計",
+          "field": null
+        },
         "location": "body",
         "reason": "中期财务信息为未审计/未经审核，限定语必须保留"
       },
       {
-        "signal": {"kind": "metadata_equals", "value": "hkex", "field": "regime"},
+        "signal": {
+          "kind": "metadata_equals",
+          "value": "hkex",
+          "field": "regime"
+        },
         "location": "metadata",
         "reason": "港股披露制度"
       }
@@ -39,38 +72,115 @@
   "sections": [
     {
       "role": "business",
-      "aliases": ["業務回顧", "业务回顾", "Business Review"],
-      "heading_path": [["業務回顧及展望", "業務回顧", "Management Discussion and Analysis", "管理層討論與分析"], ["業務回顧", "Business Review"]],
+      "aliases": [
+        "業務回顧",
+        "业务回顾",
+        "Business Review"
+      ],
+      "heading_path": [
+        [
+          "業務回顧及展望",
+          "業務回顧",
+          "Management Discussion and Analysis",
+          "管理層討論與分析"
+        ],
+        [
+          "業務回顧",
+          "Business Review"
+        ]
+      ],
       "priority": 1,
-      "questions": ["本期（六个月）业务变化与新进展"]
+      "questions": [
+        "本期（六个月）业务变化与新进展"
+      ]
     },
     {
       "role": "operating_metrics",
-      "aliases": ["門店網絡", "门店网络", "同店", "經營數據", "Operating Data"],
-      "heading_path": [["業務回顧及展望", "業務回顧", "Management Discussion and Analysis", "管理層討論與分析"], ["門店網絡", "门店网络", "同店", "經營數據", "Operating Data"]],
+      "aliases": [
+        "門店網絡",
+        "门店网络",
+        "同店",
+        "經營數據",
+        "Operating Data"
+      ],
+      "heading_path": [
+        [
+          "業務回顧及展望",
+          "業務回顧",
+          "Management Discussion and Analysis",
+          "管理層討論與分析"
+        ],
+        [
+          "門店網絡",
+          "门店网络",
+          "同店",
+          "經營數據",
+          "Operating Data"
+        ]
+      ],
       "priority": 1,
-      "questions": ["期间经营指标的存量/净增与模式口径"]
+      "questions": [
+        "期间经营指标的存量/净增与模式口径"
+      ]
     },
     {
       "role": "management_discussion",
-      "aliases": ["管理層討論與分析", "Management Discussion and Analysis", "MD&A"],
-      "heading_path": [["管理層討論與分析", "Management Discussion and Analysis"]],
+      "aliases": [
+        "管理層討論與分析",
+        "Management Discussion and Analysis",
+        "MD&A"
+      ],
+      "heading_path": [
+        [
+          "管理層討論與分析",
+          "Management Discussion and Analysis"
+        ]
+      ],
       "priority": 1,
-      "questions": ["中期财务表现的经营解释"]
+      "questions": [
+        "中期财务表现的经营解释"
+      ]
     },
     {
       "role": "outlook",
-      "aliases": ["展望", "Outlook", "業務展望", "期後的近期發展"],
-      "heading_path": [["業務回顧及展望", "展望", "Outlook", "期後的近期發展"]],
+      "aliases": [
+        "展望",
+        "Outlook",
+        "業務展望",
+        "期後的近期發展"
+      ],
+      "heading_path": [
+        [
+          "業務回顧及展望",
+          "展望",
+          "Outlook",
+          "期後的近期發展"
+        ]
+      ],
       "priority": 1,
-      "questions": ["下半年展望与条件", "期后近期发展与报告期事实的分离"]
+      "questions": [
+        "下半年展望与条件",
+        "期后近期发展与报告期事实的分离"
+      ]
     },
     {
       "role": "risk",
-      "aliases": ["風險", "Risk", "主要風險"],
-      "heading_path": [["風險", "Risk Management", "主要風險"]],
+      "aliases": [
+        "風險",
+        "Risk",
+        "主要風險"
+      ],
+      "heading_path": [
+        [
+          "風險",
+          "Risk Management",
+          "主要風險"
+        ]
+      ],
       "priority": 2,
-      "questions": ["本期新增的风险事实"]
+      "questions": [
+        "本期新增的风险事实"
+      ]
     }
   ],
   "reading_questions": [
@@ -83,25 +193,42 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period"],
+      "slots": [
+        "subject",
+        "period"
+      ],
       "missing_behavior": "unknown",
       "reason": "中期数据为期末止六个月口径且未审计"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator", "geography"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator",
+        "geography"
+      ],
       "missing_behavior": "partial",
       "reason": "六个月/单季/同比基期、存量/净增、地域与模式范围分开"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality", "period"],
+      "slots": [
+        "condition",
+        "modality",
+        "period"
+      ],
       "missing_behavior": "deferred",
       "reason": "期后发展与展望的时点限定必须保留"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "stage", "condition"],
+      "slots": [
+        "project",
+        "stage",
+        "condition"
+      ],
       "missing_behavior": "partial",
       "reason": "融资、收购、新市场进入必须保留阶段与条件（如期后完成 vs 报告期内）"
     }
@@ -123,8 +250,15 @@
   },
   "evidence_status": {
     "design": "verified",
-    "real_samples": ["case-hk-interim-postperiod-01"],
-    "missing_shapes": ["无变化型中期报告样本", "中期报告摘要/更正版本对"]
+    "real_samples": [
+      "case-hk-interim-postperiod-01"
+    ],
+    "missing_shapes": [
+      "无变化型中期报告样本",
+      "中期报告摘要/更正版本对"
+    ]
   },
-  "case_ids": ["case-hk-interim-postperiod-01"]
+  "case_ids": [
+    "case-hk-interim-postperiod-01"
+  ]
 }

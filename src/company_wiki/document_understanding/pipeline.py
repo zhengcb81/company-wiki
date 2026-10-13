@@ -5,8 +5,9 @@ the three lanes without any of them importing another:
 
     existing parser units
         -> build_observation        (ROOT adapter)      du-input/1
+        -> apply_layout_hints       (ROOT bridge)       existing geometry
         -> route_document           (profiles lane)     du-route/1
-        -> get_profile              (profiles lane)     profile
+        -> resolve_reading_profile  (single catalog)    scoped policy
         -> build_structure          (structure lane)    du-structure/1
         -> build_dependency_packages(ROOT bridge)       du-packages/1
 
@@ -20,7 +21,8 @@ stages are called by hand:
 * **Nothing is deleted.** Routing only prioritises. Every stage keeps its own honest
   coverage/diagnostic record so a gap stays visible as a gap.
 
-This module does not call a model, read the disk, or raise a paid budget. It produces a
+This module uses the installed policy asset; it does not read original files, call a model,
+or raise a paid budget. It produces a
 plan; the existing selector and budget still decide what is actually sent.
 """
 
@@ -28,12 +30,14 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from typing import Any
+from hashlib import sha256
 
 from .observation_adapter import build_observation, selectable_unit_ids
 from .orchestration import build_dependency_packages
 from .strategy_binding import bind_reading_plan
 
 PIPELINE_SCHEMA_VERSION = "du-pipeline/1"
+PIPELINE_FEATURE_VERSION = "1.1.0"
 
 #: Families whose documents carry business narrative worth reading closely. A document that
 #: routes to ``administrative`` is *readable* but is not expected to yield narrative, so the
@@ -78,7 +82,8 @@ def understand_units(
     # Imported here rather than at module import time: the parent package must stay usable
     # when a lane is absent (for example a partial deployment), and a missing lane should
     # surface as a clear error at the call site rather than at import.
-    from .profiles import get_profile, route_document
+    from .profiles import get_profile, route_document, resolve_reading_profile
+    from .layout_bridge import apply_layout_hints, bind_layout_context
     from .structure import build_structure
 
     observation = build_observation(
@@ -95,16 +100,38 @@ def understand_units(
         deferred_pages=deferred_pages,
     )
 
+    observation, layout_hints = apply_layout_hints(observation, limits=limits)
     route = route_document(observation, limits=limits)
-    profile = get_profile(route["profile_id"])
-    structure = build_structure(observation, limits=limits)
+    profile = resolve_reading_profile(get_profile(route["profile_id"]), observation,
+                                      route, limits=limits)
+    route["profile_version"] = profile["profile_version"]
+    structure = bind_layout_context(build_structure(observation, limits=limits), layout_hints)
     child_profiles = {}
     for child in route.get("child_routes", ()):
         pid = child.get("profile_id")
+        reason = child.get("reason", "")
+        code = reason.get("code", "") if isinstance(reason, Mapping) else str(reason)
+        scope = set(child.get("unit_ids", ()))
+        if "EXTERNAL_ATTACHMENT_NOT_READ" in code or not scope:
+            continue
+        actual_units = [u for u in observation["units"] if u["unit_id"] in scope]
+        if {u["unit_id"] for u in actual_units} != scope:
+            continue
         try:
-            child_profiles[pid] = get_profile(pid)
+            child_base = get_profile(pid)
         except (KeyError, TypeError, ValueError):
             continue
+        # A child sees only its already-read range, including its own metadata.
+        # The parent's title/form cannot certify an attachment's purpose.
+        child_observation = {**observation, "units": actual_units,
+                             "metadata": {"mime_type": mime_type, "language": language}}
+        child_route = {**route, "profile_id": pid, "family": child_base["family"],
+                       "regime": child_base.get("regime", "unknown"), "child_routes": []}
+        key = f"{pid}:" + sha256("\0".join(sorted(scope)).encode()).hexdigest()[:16]
+        child["reading_profile_key"] = key
+        child_profiles[key] = resolve_reading_profile(child_base, child_observation,
+                                                     child_route, limits=limits)
+        child["profile_version"] = child_profiles[key]["profile_version"]
     reading_plan = bind_reading_plan(observation, structure, route=route,
                                      profile=profile, child_profiles=child_profiles)
     structure = reading_plan["structure"]
@@ -131,6 +158,7 @@ def understand_units(
 
     return {
         "schema_version": PIPELINE_SCHEMA_VERSION,
+        "feature_version": PIPELINE_FEATURE_VERSION,
         "source_ref": observation["source_ref"],
         "observation": observation,
         "route": route,
@@ -138,9 +166,12 @@ def understand_units(
         "structure": structure,
         "packages": packages,
         "reading_plan": reading_plan,
+        "layout_hints": layout_hints,
         "non_selectable_unit_ids": non_selectable,
         "plan": _plan(route, profile, structure, packages),
-        "diagnostics": _pipeline_diagnostics(route, structure, packages) + reading_plan["diagnostics"],
+        "diagnostics": _pipeline_diagnostics(route, structure, packages) + reading_plan["diagnostics"]
+        + list(profile.get("policy_diagnostics", ()))
+        + list(layout_hints.get("diagnostics", ())),
     }
 
 

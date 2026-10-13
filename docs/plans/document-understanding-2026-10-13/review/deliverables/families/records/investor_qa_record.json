@@ -1,30 +1,67 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "investor_qa_record",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["cn_exchange", "hkex", "other"],
+    "regimes": [
+      "cn_exchange",
+      "hkex",
+      "other"
+    ],
     "forms": [],
     "family": "investor_qa",
-    "purposes": ["management_qa", "event_update"],
-    "modifiers": {"extent": "full", "revision": "original"},
-    "carrier": ["pdf", "html"],
-    "language": ["zh", "en"]
+    "purposes": [
+      "management_qa",
+      "event_update"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf",
+      "html"
+    ],
+    "language": [
+      "zh",
+      "en"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "投资者关系活动记录表", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "投资者关系活动记录表",
+          "field": null
+        },
         "location": "cover",
         "reason": "A股投资者调研/接待活动记录的固定表头"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "问答记录", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "问答记录",
+          "field": null
+        },
         "location": "body",
         "reason": "Q+A 正文小节标题"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "业绩说明会", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "业绩说明会",
+          "field": null
+        },
         "location": "body",
         "reason": "活动类别栏勾选/表述，支持 investor_qa 识别"
       }
@@ -40,38 +77,124 @@
   "sections": [
     {
       "role": "questions",
-      "aliases": ["问答记录", "问答", "互动交流", "Q&A"],
-      "heading_path": [["问答记录", "问答", "互动交流", "Q&A"]],
+      "aliases": [
+        "问答记录",
+        "问答",
+        "互动交流",
+        "Q&A"
+      ],
+      "heading_path": [
+        [
+          "问答记录",
+          "问答",
+          "互动交流",
+          "Q&A"
+        ]
+      ],
       "priority": 1,
-      "questions": ["每组问题+回答+追问绑定为一个单元", "提问内容与回答内容的角色区分"]
+      "questions": [
+        "每组问题+回答+追问绑定为一个单元",
+        "提问内容与回答内容的角色区分"
+      ]
     },
     {
       "role": "business",
-      "aliases": ["答", "回答", "公司介绍", "经营情况"],
-      "heading_path": [["问答记录", "问答", "互动交流"], ["答", "回答"]],
+      "aliases": [
+        "答",
+        "回答",
+        "公司介绍",
+        "经营情况"
+      ],
+      "heading_path": [
+        [
+          "问答记录",
+          "问答",
+          "互动交流"
+        ],
+        [
+          "答",
+          "回答"
+        ]
+      ],
       "priority": 1,
-      "questions": ["回答中的业务事实、进展与明确否定"]
+      "questions": [
+        "回答中的业务事实、进展与明确否定"
+      ]
     },
     {
       "role": "operating_metrics",
-      "aliases": ["产能", "利用率", "订单", "收入占比", "项目建设"],
-      "heading_path": [["问答记录", "问答", "互动交流"], ["产能", "利用率", "订单", "项目", "收入"]],
+      "aliases": [
+        "产能",
+        "利用率",
+        "订单",
+        "收入占比",
+        "项目建设"
+      ],
+      "heading_path": [
+        [
+          "问答记录",
+          "问答",
+          "互动交流"
+        ],
+        [
+          "产能",
+          "利用率",
+          "订单",
+          "项目",
+          "收入"
+        ]
+      ],
       "priority": 2,
-      "questions": ["经营数字的期间、口径与主体归属（母公司/子公司）"]
+      "questions": [
+        "经营数字的期间、口径与主体归属（母公司/子公司）"
+      ]
     },
     {
       "role": "outlook",
-      "aliases": ["未来", "计划", "规划", "展望"],
-      "heading_path": [["问答记录", "问答", "互动交流"], ["未来", "计划", "规划", "展望"]],
+      "aliases": [
+        "未来",
+        "计划",
+        "规划",
+        "展望"
+      ],
+      "heading_path": [
+        [
+          "问答记录",
+          "问答",
+          "互动交流"
+        ],
+        [
+          "未来",
+          "计划",
+          "规划",
+          "展望"
+        ]
+      ],
       "priority": 2,
-      "questions": ["计划与承诺的区分、附带条件"]
+      "questions": [
+        "计划与承诺的区分、附带条件"
+      ]
     },
     {
       "role": "administrative",
-      "aliases": ["活动参与人员", "活动类别", "时间", "地点"],
-      "heading_path": [["活动参与人员", "活动类别", "时间", "地点"]],
+      "aliases": [
+        "活动参与人员",
+        "活动类别",
+        "时间",
+        "地点"
+      ],
+      "heading_path": [
+        [
+          "活动参与人员",
+          "活动类别",
+          "时间",
+          "地点"
+        ]
+      ],
       "priority": 3,
-      "questions": ["活动属性（调研/说明会/路演）与参与范围"]
+      "questions": [
+        "活动属性（调研/说明会/路演）与参与范围"
+      ]
     }
   ],
   "reading_questions": [
@@ -84,25 +207,42 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period", "role"],
+      "slots": [
+        "subject",
+        "period",
+        "role"
+      ],
       "missing_behavior": "unknown",
       "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator"
+      ],
       "missing_behavior": "partial",
       "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "subject", "stage", "condition"],
+      "slots": [
+        "project",
+        "subject",
+        "stage",
+        "condition"
+      ],
       "missing_behavior": "partial",
       "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "“建成后”“预计”等条件语气必须随事实保留"
     }
@@ -124,8 +264,17 @@
   },
   "evidence_status": {
     "design": "verified",
-    "real_samples": ["case-cn-ir-qa-binding-01", "case-cn-ir-title-mislead-02"],
-    "missing_shapes": ["业绩说明会直播实录/文字稿形态", "港股 analyst meeting 记录"]
+    "real_samples": [
+      "case-cn-ir-qa-binding-01",
+      "case-cn-ir-title-mislead-02"
+    ],
+    "missing_shapes": [
+      "业绩说明会直播实录/文字稿形态",
+      "港股 analyst meeting 记录"
+    ]
   },
-  "case_ids": ["case-cn-ir-qa-binding-01", "case-cn-ir-title-mislead-02"]
+  "case_ids": [
+    "case-cn-ir-qa-binding-01",
+    "case-cn-ir-title-mislead-02"
+  ]
 }

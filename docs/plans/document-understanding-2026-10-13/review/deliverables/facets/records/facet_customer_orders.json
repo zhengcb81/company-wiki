@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-facet-spec/1",
   "id": "facet_customer_orders",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "business_questions": [
     "订单/合同是什么性质：正式订单、框架协议、意向、里程碑合同还是带量采购",
     "可取消性、履约期、金额口径与收入确认的关系如何",
@@ -64,11 +64,9 @@
   ],
   "required_context": [
     {
-      "assertion": "断言『获得订单/与客户合作』时保留客户口径（实名/匿名/范围）、订单性质、金额口径与履约期",
+      "assertion": "断言定性获得订单/客户合作进展时保留客户口径（实名/匿名/范围）、合同性质、生效条件与履约期间；没有输出金额就不要求金额或单位",
       "slots": [
         "subject",
-        "quantity",
-        "unit",
         "condition",
         "period"
       ],
@@ -99,12 +97,10 @@
       "reason": "股东或集团层面的联系不是上市公司的客户关系；主体错位是订单面的高危误读"
     },
     {
-      "assertion": "断言订单将带来的收入时保留条件（履约、验收、可取消性）与计划语态",
+      "assertion": "断言订单收入转化的定性条件时保留履约、验收、可取消性与语态；没有输出金额时不要求数量或单位",
       "slots": [
         "condition",
-        "modality",
-        "quantity",
-        "unit"
+        "modality"
       ],
       "required_when": "explicit_condition_present",
       "missing_behavior": "deferred",
@@ -155,7 +151,8 @@
     "公司明确否认某订单/客户关系（如『现无生产该产品』『不构成重大影响』）按否定作用域保存",
     "未读取到合同/订单披露或附注时标读取缺口（unread/deferred），不得当成无订单",
     "合同额与收入严格分开：合同额属 correctness_if_emitted，不要求选，选了必须带口径",
-    "低信息/纯程序性文件允许合法退出"
+    "低信息/纯程序性文件允许合法退出",
+    "定性客户合作、资金安排或条件性自筹未披露金额时保存主体、项目、性质与条件；数量/单位不适用，不为模板补数。"
   ],
   "summary_focus": [
     "订单/合同的性质、金额口径与履约条件是什么？",
@@ -166,6 +163,7 @@
   "case_ids": [
     "real_cn_ir_premise_denial",
     "syn_negation_scope",
-    "real_us_release_subscription"
+    "real_us_release_subscription",
+    "syn_qualitative_cooperation"
   ]
 }

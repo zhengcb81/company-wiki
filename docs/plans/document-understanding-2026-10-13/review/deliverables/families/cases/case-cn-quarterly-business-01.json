@@ -39,7 +39,12 @@
         "page": 2,
         "text": "公司在过去14 年保持了营业收入年均增长大于35%、在2025 年比2024 增长36.62%的基础上，2026 年第一季度营业收入继续保持高速增长，同比增长34.13%，达到29.15 亿元。",
         "role": "management_discussion",
-        "hints": {"heading_path": ["重要内容提示", "主要财务数据"]}
+        "hints": {
+          "heading_path": [
+            "重要内容提示",
+            "主要财务数据"
+          ]
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +57,9 @@
         "page": 2,
         "text": "验证，公司已全面覆盖存储器刻蚀应",
         "role": "business",
-        "hints": {"note": "跨页断句原文片段（句首被分页切断）；完整语义须回连上一页单元，不得单独成断言"}
+        "hints": {
+          "note": "跨页断句原文片段（句首被分页切断）；完整语义须回连上一页单元，不得单独成断言"
+        }
       }
     ]
   },
@@ -66,24 +73,45 @@
         "id": "f1-quarterly-revenue",
         "objective": "识别单季营收及其同比基期",
         "importance": "normal",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["期间：2026年第一季度（单季）", "口径：营业收入 29.15 亿元，同比 +34.13%", "历史比较句的基期分别是过去14年年均、2025vs2024"],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "期间：2026年第一季度（单季）",
+          "口径：营业收入 29.15 亿元，同比 +34.13%",
+          "历史比较句的基期分别是过去14年年均、2025vs2024"
+        ],
         "must_not_assert": [
           "不得把 14 年年均增速、2025 年增速混作本季度增速",
           "不得把营业收入说成净利润"
-        ]
+        ],
+        "target_kind": "correctness_if_emitted"
       },
       {
         "id": "f2-cross-page-fragment",
         "objective": "跨页断句不得单独承载断言",
         "importance": "critical",
-        "any_support_sets": [["u2"]],
-        "must_preserve": ["该 unit 是跨页续句片段，须与前页合并成完整语义包"],
-        "must_not_assert": ["不得以“验证，公司已全面覆盖存储器刻蚀应用”片段单独断言验证阶段或覆盖范围"]
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "该 unit 是跨页续句片段，须与前页合并成完整语义包"
+        ],
+        "must_not_assert": [
+          "不得以“验证，公司已全面覆盖存储器刻蚀应用”片段单独断言验证阶段或覆盖范围"
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["财务表抽取", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "财务表抽取",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {
@@ -101,6 +129,8 @@
     "period": "2026年第一季度",
     "condition": null
   },
-  "expected_missing_slots": ["geography"],
+  "expected_missing_slots": [
+    "geography"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

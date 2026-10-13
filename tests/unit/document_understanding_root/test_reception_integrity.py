@@ -110,14 +110,25 @@ def test_final_package_budget_must_keep_transitive_context_or_defer():
     chain = [package("p1", ["a", "b"], ["b"]), package("p2", ["b", "c"], ["c"])]
     for selected in (["a"], None):
         request = build_summary_input(result(chain), selected_unit_ids=selected, max_packages=1)
-        assert request["evidence_packages"] == []
-        assert any(d["reason"] == "MISSING_TRANSITIVE_CONTEXT" for d in request["deferred"])
+        assert len(request["evidence_packages"]) == 1
+        members = request["evidence_packages"][0]["members"]
+        assert {m["unit_id"] for m in members} == {"a", "b", "c"}
+        assert {m["locator"] for m in members} == {"loc-a", "loc-b", "loc-c"}
+        assert request["budget"]["chars_used"] == sum(len(m["text"]) for m in members)
+        assert request["evidence_packages"][0]["dependencies_resolved"]
 
 
 def test_final_character_budget_must_keep_transitive_context_or_defer():
     chain = [package("p1", ["a", "b"], ["b"]), package("p2", ["b", "c"], ["c"])]
     request = build_summary_input(result(chain), selected_unit_ids=["a"], max_chars=20)
-    assert request["evidence_packages"] == []
+    # a needs b+c (30 characters), so it cannot fit. The independent b+c
+    # closed package may fit exactly; no dangling a or missing c may be sent.
+    members = [m for p in request["evidence_packages"] for m in p["members"]]
+    assert {m["unit_id"] for m in members} == {"b", "c"}
+    assert request["budget"]["chars_used"] == sum(len(m["text"]) for m in members) == 20
+    assert any(d["package_id"] == "p1" and d["reason"] == "CHAR_BUDGET" for d in request["deferred"])
+    smaller = build_summary_input(result(chain), selected_unit_ids=["a"], max_chars=19)
+    assert smaller["evidence_packages"] == []
 
 
 def test_negation_is_a_final_output_dependency_even_if_not_in_required_list():
@@ -126,7 +137,13 @@ def test_negation_is_a_final_output_dependency_even_if_not_in_required_list():
     pipeline["observation"]["units"][2]["text"] = "does not produce yet"
     request = build_summary_input(pipeline, selected_unit_ids=["a"], max_context_units=1)
     assert request["evidence_packages"] == []
-    assert any(d["reason"] == "MISSING_TRANSITIVE_CONTEXT" for d in request["deferred"])
+    assert any(d["reason"] in {"MISSING_REQUIRED_CONTEXT", "MISSING_TRANSITIVE_CONTEXT",
+                                "CONTEXT_BUDGET_EXCEEDED"} for d in request["deferred"])
+    enough = build_summary_input(pipeline, selected_unit_ids=["a"], max_context_units=2)
+    members = enough["evidence_packages"][0]["members"]
+    assert {m["unit_id"] for m in members} == {"a", "b", "c"}
+    assert next(m["text"] for m in members if m["unit_id"] == "c") == "does not produce yet"
+    assert enough["budget"]["chars_used"] == sum(len(m["text"]) for m in members)
 
 
 def test_missing_optional_member_is_partial_and_visible():

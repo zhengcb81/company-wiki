@@ -104,9 +104,16 @@ def test_profile_changes_package_priority_order():
     assert route_only == generic
     # The profile must actually move at least one section role.
     assert with_profile != generic
-    # A-share annual reports promote outlook and risk to top priority.
-    assert with_profile["outlook"] > generic["outlook"]
-    assert with_profile["risk"] > generic["risk"]
+    # Adopt the declared priorities; a data-only policy need not retain the
+    # old hardcoded risk band. A changed instruction must change the rank.
+    for entry in profile["section_priorities"]:
+        assert with_profile[entry["section_role"]] == 4 - entry["priority"]
+    changed = get_profile(route["profile_id"])
+    risk = next(row for row in changed["section_priorities"] if row["section_role"] == "risk")
+    risk["priority"] = 1 if risk["priority"] != 1 else 3
+    assert _role_priority(route, changed)["risk"] == 4 - risk["priority"]
+    assert _role_priority(route, changed)["risk"] != with_profile["risk"]
+    assert _role_priority(route, profile) == with_profile
 
 
 def test_build_dependency_packages_accepts_profile_and_reorders():

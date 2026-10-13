@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from .contract import Doc, Unit
 from .geometry import band_height
+from .neighbours import vertical_clearances as vertical_clearances
 from .text_evidence import (
     has_terminal_punctuation,
     heading_number_level,
@@ -25,6 +26,7 @@ def detect_repeated_furniture(doc: Doc) -> set:
     """Running headers/footers: same text near the edge on two or more pages."""
     positions: dict = {}
     for unit in doc.units:
+        doc.budget.charge()
         if unit.deferred or unit.bbox is None:
             continue
         if unit.page_height:
@@ -48,6 +50,7 @@ def detect_repeated_furniture(doc: Doc) -> set:
 def body_font_size(doc: Doc, excluded: set) -> float | None:
     sizes = []
     for unit in doc.units:
+        doc.budget.charge()
         if unit.deferred or unit.font_size is None or unit.unit_id in excluded:
             continue
         text = normalize_ws(unit.text)
@@ -60,30 +63,7 @@ def body_font_size(doc: Doc, excluded: set) -> float | None:
     return sizes[len(sizes) // 2]
 
 
-def _vertical_neighbors(unit: Unit, page_units: list[Unit]) -> tuple[float, float]:
-    """Vertical clearance above/below within the unit's horizontal span."""
-    above = 0.0
-    below = 0.0
-    box = unit.bbox
-    span = max(box[2] - box[0], 1.0)
-    gaps_above: list = []
-    gaps_below: list = []
-    for other in page_units:
-        if other is unit or other.bbox is None:
-            continue
-        overlap = min(box[2], other.bbox[2]) - max(box[0], other.bbox[0])
-        if overlap < 0.25 * span:
-            continue
-        if other.bbox[3] <= box[1]:
-            gaps_above.append(box[1] - other.bbox[3])
-        elif other.bbox[1] >= box[3]:
-            gaps_below.append(other.bbox[1] - box[3])
-    above = min(gaps_above) if gaps_above else float("inf")
-    below = min(gaps_below) if gaps_below else float("inf")
-    return above, below
-
-
-def heading_evidence(unit: Unit, page_units: list[Unit], body_font: float | None) -> dict:
+def heading_evidence(unit: Unit, clearances: dict, body_font: float | None) -> dict:
     """Return {level, confidence, basis} for one unit's heading claim."""
     text = normalize_ws(unit.text)
     basis: list = []
@@ -124,9 +104,10 @@ def heading_evidence(unit: Unit, page_units: list[Unit], body_font: float | None
         isolated = False
         basis.append("missing_geometry")
     else:
-        clearance_above, clearance_below = _vertical_neighbors(unit, page_units)
+        clearance_above, clearance_below = clearances.get(unit.unit_id, (0.0, 0.0))
         isolated = clearance_above >= 0.5 * height and clearance_below >= 0.5 * height
     if isolated:
+        basis.append("conservative_horizontal_clearance")
         score += 1.0
         basis.append("isolated")
     if len(text) <= 40:
@@ -136,7 +117,11 @@ def heading_evidence(unit: Unit, page_units: list[Unit], body_font: float | None
         basis.append("font_size_missing")
 
     if score < 2.5:
-        return {"level": None, "confidence": "low" if score >= 1.5 else "unknown", "basis": basis or ["no_heading_evidence"]}
+        return {
+            "level": None,
+            "confidence": "low" if score >= 1.5 else "unknown",
+            "basis": basis or ["no_heading_evidence"],
+        }
 
     if numbered_level is not None:
         level = numbered_level
@@ -148,7 +133,9 @@ def heading_evidence(unit: Unit, page_units: list[Unit], body_font: float | None
     if font_evidence and score >= 4.0 and (isolated or numbered_level is not None):
         confidence = "high"
     else:
-        confidence = "medium" if (font_evidence or numbered_level is not None) else "low"
+        confidence = (
+            "medium" if (font_evidence or numbered_level is not None) else "low"
+        )
     if unit.font_size is None and confidence == "high":
         confidence = "medium"
     return {"level": level, "confidence": confidence, "basis": basis}

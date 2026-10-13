@@ -1,35 +1,73 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "prospectus_cn",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["cn_exchange"],
+    "regimes": [
+      "cn_exchange"
+    ],
     "forms": [],
     "family": "prospectus",
-    "purposes": ["fundraising", "business_baseline", "historical_context"],
-    "modifiers": {"extent": "full", "revision": "original"},
-    "carrier": ["pdf"],
-    "language": ["zh"]
+    "purposes": [
+      "fundraising",
+      "business_baseline",
+      "historical_context"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf"
+    ],
+    "language": [
+      "zh"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "招股说明书", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "招股说明书",
+          "field": null
+        },
         "location": "cover",
         "reason": "A股招股说明书封面标题；需正文结构佐证"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "发行人基本情况", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "发行人基本情况",
+          "field": null
+        },
         "location": "toc",
         "reason": "A股招股章节体系（发行人情况/业务与技术/募集资金运用）是正文证据"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "业务与技术", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "业务与技术",
+          "field": null
+        },
         "location": "toc",
         "reason": "业务与技术章节是招股说明书的核心业务信息来源"
       },
       {
-        "signal": {"kind": "metadata_equals", "value": "cn_exchange", "field": "regime"},
+        "signal": {
+          "kind": "metadata_equals",
+          "value": "cn_exchange",
+          "field": "regime"
+        },
         "location": "metadata",
         "reason": "A股披露制度"
       }
@@ -45,52 +83,170 @@
   "sections": [
     {
       "role": "business",
-      "aliases": ["业务与技术", "发行人主营业务", "主要业务", "经营模式"],
-      "heading_path": [["业务与技术", "发行人主营业务经营情况"], ["业务与技术", "主要业务", "产品", "经营模式", "核心技术"]],
+      "aliases": [
+        "业务与技术",
+        "发行人主营业务",
+        "主要业务",
+        "经营模式"
+      ],
+      "heading_path": [
+        [
+          "业务与技术",
+          "发行人主营业务经营情况"
+        ],
+        [
+          "业务与技术",
+          "主要业务",
+          "产品",
+          "经营模式",
+          "核心技术"
+        ]
+      ],
       "priority": 1,
-      "questions": ["产品/服务与收入机制", "技术与产品线的商业化阶段"]
+      "questions": [
+        "产品/服务与收入机制",
+        "技术与产品线的商业化阶段"
+      ]
     },
     {
       "role": "industry",
-      "aliases": ["行业分析", "行业情况", "市场竞争格局"],
-      "heading_path": [["业务与技术", "行业分析", "所处行业情况"], ["行业分析", "行业情况", "市场规模", "竞争格局"]],
+      "aliases": [
+        "行业分析",
+        "行业情况",
+        "市场竞争格局"
+      ],
+      "heading_path": [
+        [
+          "业务与技术",
+          "行业分析",
+          "所处行业情况"
+        ],
+        [
+          "行业分析",
+          "行业情况",
+          "市场规模",
+          "竞争格局"
+        ]
+      ],
       "priority": 1,
-      "questions": ["行业口径与统计作者", "公司份额/地位的证据来源"]
+      "questions": [
+        "行业口径与统计作者",
+        "公司份额/地位的证据来源"
+      ]
     },
     {
       "role": "operating_metrics",
-      "aliases": ["客户与供应商", "销售模式", "生产模式", "产能", "主要产品的产销"],
-      "heading_path": [["业务与技术"], ["客户", "供应商", "销售模式", "生产模式", "产能", "产销量"]],
+      "aliases": [
+        "客户与供应商",
+        "销售模式",
+        "生产模式",
+        "产能",
+        "主要产品的产销"
+      ],
+      "heading_path": [
+        [
+          "业务与技术"
+        ],
+        [
+          "客户",
+          "供应商",
+          "销售模式",
+          "生产模式",
+          "产能",
+          "产销量"
+        ]
+      ],
       "priority": 1,
-      "questions": ["客户/供应商集中度与匿名口径", "产能、产销量与利用率的历史口径"]
+      "questions": [
+        "客户/供应商集中度与匿名口径",
+        "产能、产销量与利用率的历史口径"
+      ]
     },
     {
       "role": "fundraising",
-      "aliases": ["募集资金运用", "募集资金投资项目", "本次发行概况", "未来发展规划"],
-      "heading_path": [["募集资金运用", "本次募集资金运用"], ["募集资金运用概况", "募集资金运用情况", "募集资金投资项目"]],
+      "aliases": [
+        "募集资金运用",
+        "募集资金投资项目",
+        "本次发行概况",
+        "未来发展规划"
+      ],
+      "heading_path": [
+        [
+          "募集资金运用",
+          "本次募集资金运用"
+        ],
+        [
+          "募集资金运用概况",
+          "募集资金运用情况",
+          "募集资金投资项目"
+        ]
+      ],
       "priority": 1,
-      "questions": ["募投项目、投资额、建设期与达产条件", "补流与项目资金的区分"]
+      "questions": [
+        "募投项目、投资额、建设期与达产条件",
+        "补流与项目资金的区分"
+      ]
     },
     {
       "role": "risk",
-      "aliases": ["风险因素", "募集资金投资项目风险"],
-      "heading_path": [["风险因素"], ["风险因素", "募集资金投资项目风险"]],
+      "aliases": [
+        "风险因素",
+        "募集资金投资项目风险"
+      ],
+      "heading_path": [
+        [
+          "风险因素"
+        ],
+        [
+          "风险因素",
+          "募集资金投资项目风险"
+        ]
+      ],
       "priority": 2,
-      "questions": ["具体风险与一般风险的区分"]
+      "questions": [
+        "具体风险与一般风险的区分"
+      ]
     },
     {
       "role": "management_discussion",
-      "aliases": ["发行人基本情况", "董事、监事、高级管理人员", "公司治理"],
-      "heading_path": [["发行人基本情况", "发行人历史沿革", "公司治理"]],
+      "aliases": [
+        "发行人基本情况",
+        "董事、监事、高级管理人员",
+        "公司治理"
+      ],
+      "heading_path": [
+        [
+          "发行人基本情况",
+          "发行人历史沿革",
+          "公司治理"
+        ]
+      ],
       "priority": 3,
-      "questions": ["历史沿革、股权与治理对经营的影响"]
+      "questions": [
+        "历史沿革、股权与治理对经营的影响"
+      ]
     },
     {
       "role": "financial_notes",
-      "aliases": ["财务会计信息", "主要财务指标", "盈利预测"],
-      "heading_path": [["财务会计信息", "财务会计信息及管理层分析"], ["主要财务指标", "财务分析"]],
+      "aliases": [
+        "财务会计信息",
+        "主要财务指标",
+        "盈利预测"
+      ],
+      "heading_path": [
+        [
+          "财务会计信息",
+          "财务会计信息及管理层分析"
+        ],
+        [
+          "主要财务指标",
+          "财务分析"
+        ]
+      ],
       "priority": 2,
-      "questions": ["历史财务口径与会计政策的商业含义"]
+      "questions": [
+        "历史财务口径与会计政策的商业含义"
+      ]
     }
   ],
   "reading_questions": [
@@ -104,25 +260,41 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period"],
+      "slots": [
+        "subject",
+        "period"
+      ],
       "missing_behavior": "unknown",
       "reason": "招股信息是发行时点的历史基础，断言必须带 as-of 期间"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator"
+      ],
       "missing_behavior": "partial",
       "reason": "产销量、产能、集中度等数值必须带期间、单位与分母"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "stage", "condition", "geography"],
+      "slots": [
+        "project",
+        "stage",
+        "condition",
+        "geography"
+      ],
       "missing_behavior": "partial",
       "reason": "募投项目断言必须带主体、建设/达产阶段与实现条件"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "预测、估计、可行性结论自带条件，必须随事实保留"
     }
@@ -144,8 +316,17 @@
   },
   "evidence_status": {
     "design": "verified",
-    "real_samples": ["case-cn-ipo-offering-facts-01", "case-cn-ipo-proceeds-02"],
-    "missing_shapes": ["招股说明书注册稿/正式稿版本对", "更多行业（当前样本为半导体设备）"]
+    "real_samples": [
+      "case-cn-ipo-offering-facts-01",
+      "case-cn-ipo-proceeds-02"
+    ],
+    "missing_shapes": [
+      "招股说明书注册稿/正式稿版本对",
+      "更多行业（当前样本为半导体设备）"
+    ]
   },
-  "case_ids": ["case-cn-ipo-offering-facts-01", "case-cn-ipo-proceeds-02"]
+  "case_ids": [
+    "case-cn-ipo-offering-facts-01",
+    "case-cn-ipo-proceeds-02"
+  ]
 }

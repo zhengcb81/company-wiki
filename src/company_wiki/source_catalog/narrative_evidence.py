@@ -9,6 +9,7 @@ starts a model request.
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+from bisect import bisect_right
 from dataclasses import dataclass, field, replace
 import hashlib
 import json
@@ -61,6 +62,7 @@ from .transcript_versions import (
 
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = QA_FRAGMENT_VERSION
+PDF_GEOMETRY_FEATURE_VERSION = "pdf-geometry/1"
 
 
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
@@ -87,7 +89,10 @@ class NarrativeSelectorVersionError(ValueError):
 def resolve_narrative_selector_version(version: str | None = None) -> str:
     """Resolve the effective policy once; legacy/default behavior remains explicit."""
     effective = NARRATIVE_SELECTOR_VERSION if version is None else version
-    if not isinstance(effective, str) or effective not in SUPPORTED_NARRATIVE_SELECTOR_VERSIONS:
+    if (
+        not isinstance(effective, str)
+        or effective not in SUPPORTED_NARRATIVE_SELECTOR_VERSIONS
+    ):
         raise NarrativeSelectorVersionError("unsupported narrative selector version")
     return effective
 
@@ -105,51 +110,177 @@ _FINANCIAL_HEADERS = re.compile(
 )
 _SIGNALS: dict[str, tuple[str, ...]] = {
     "industry_dynamics": (
-        "行业趋势", "行业动态", "行业格局", "供需格局", "竞争格局", "市场需求变化",
-        "行业政策变化", "产业趋势", "industry trend", "market trend", "competitive landscape",
-        "景气度", "景气上行",
-        "泛半导体产业", "市场发展", "半导体产业",
-        "market expansion", "prescription trends", "supply constraints", "capacity constraints",
-        "available supply", "demand exceeds", "demand continues", "supply-demand imbalance",
+        "行业趋势",
+        "行业动态",
+        "行业格局",
+        "供需格局",
+        "竞争格局",
+        "市场需求变化",
+        "行业政策变化",
+        "产业趋势",
+        "industry trend",
+        "market trend",
+        "competitive landscape",
+        "景气度",
+        "景气上行",
+        "泛半导体产业",
+        "市场发展",
+        "半导体产业",
+        "market expansion",
+        "prescription trends",
+        "supply constraints",
+        "capacity constraints",
+        "available supply",
+        "demand exceeds",
+        "demand continues",
+        "supply-demand imbalance",
     ),
     "core_business": (
-        "主营业务", "核心业务", "业务进展", "业务布局", "生产经营", "主业发展",
-        "关键设备领域", "设备市场", "设备产品", "core business", "business development",
-        "生产装置", "装置运行", "产销量", "产销率", "产能利用率", "营业规模",
-        "commercial operations", "commercial deployment", "distribution network", "sales office",
-        "throughput", "operating efficiency",
+        "主营业务",
+        "核心业务",
+        "业务进展",
+        "业务布局",
+        "生产经营",
+        "主业发展",
+        "关键设备领域",
+        "设备市场",
+        "设备产品",
+        "core business",
+        "business development",
+        "生产装置",
+        "装置运行",
+        "产销量",
+        "产销率",
+        "产能利用率",
+        "营业规模",
+        "commercial operations",
+        "commercial deployment",
+        "distribution network",
+        "sales office",
+        "throughput",
+        "operating efficiency",
     ),
     "new_business": (
-        "新业务", "第二曲线", "新产品", "新市场", "业务开拓", "新兴业务",
-        "投资和并购", "投资并购", "产业链上下游", "新兴领域", "市场布局", "自主研发",
-        "new business", "new product", "new market", "pipeline", "model choice",
-        "open and custom models", "frontier models", "multiple models", "commercial approach",
-        "new model", "new service", "new platform", "new solution",
+        "新业务",
+        "第二曲线",
+        "新产品",
+        "新市场",
+        "业务开拓",
+        "新兴业务",
+        "投资和并购",
+        "投资并购",
+        "产业链上下游",
+        "新兴领域",
+        "市场布局",
+        "自主研发",
+        "new business",
+        "new product",
+        "new market",
+        "pipeline",
+        "model choice",
+        "open and custom models",
+        "frontier models",
+        "multiple models",
+        "commercial approach",
+        "new model",
+        "new service",
+        "new platform",
+        "new solution",
     ),
     "overseas": (
-        "出海", "海外市场", "境外市场", "国际化", "海外客户", "出口业务",
-        "海外业务", "境外业务", "海外收入", "境外收入", "出口订单", "境外基地", "海外基地",
-        "overseas", "international", "global expansion", "export market",
+        "出海",
+        "海外市场",
+        "境外市场",
+        "国际化",
+        "海外客户",
+        "出口业务",
+        "海外业务",
+        "境外业务",
+        "海外收入",
+        "境外收入",
+        "出口订单",
+        "境外基地",
+        "海外基地",
+        "overseas",
+        "international",
+        "global expansion",
+        "export market",
     ),
     "orders_customers": (
-        "订单", "客户验证", "客户导入", "重复订单", "新增客户", "客户需求",
-        "客户端验证", "批量订货", "批量订单", "付运量显著提升",
-        "order", "customer", "backlog", "qualification", "starter doses", "patient uptake",
-        "customer uptake", "prescription growth",
-        "pilot agreement", "supply agreement", "pilot deployment",
+        "订单",
+        "客户验证",
+        "客户导入",
+        "重复订单",
+        "新增客户",
+        "客户需求",
+        "客户端验证",
+        "批量订货",
+        "批量订单",
+        "付运量显著提升",
+        "order",
+        "customer",
+        "backlog",
+        "qualification",
+        "starter doses",
+        "patient uptake",
+        "customer uptake",
+        "prescription growth",
+        "pilot agreement",
+        "supply agreement",
+        "pilot deployment",
     ),
     "capacity_projects": (
-        "产能", "产线", "中试线", "扩产", "投产", "募投项目", "项目建设", "基地建设",
-        "项目以", "精密加工业务", "产业链延伸", "向下游延伸", "零件交付",
-        "capacity", "production line", "pilot line", "facility", "capital project",
-        "data center", "data centre", "manufacturing site",
+        "产能",
+        "产线",
+        "中试线",
+        "扩产",
+        "投产",
+        "募投项目",
+        "项目建设",
+        "基地建设",
+        "项目以",
+        "精密加工业务",
+        "产业链延伸",
+        "向下游延伸",
+        "零件交付",
+        "capacity",
+        "production line",
+        "pilot line",
+        "facility",
+        "capital project",
+        "data center",
+        "data centre",
+        "manufacturing site",
     ),
     "products_rd": (
-        "研发项目", "研发进展", "技术突破", "核心技术", "量产", "试产", "中试", "产品验证", "产品迭代", "临床",
-        "产品开发", "产品销售", "实现销售", "clinical trial", "trial", "trial results",
-        "phase 1", "phase 2", "phase 3", "clinical data", "too early to speculate",
-        "non-inferiority", "superiority",
-        "research and development", "technology breakthrough", "commercialization", "launched", "pilot line",
+        "研发项目",
+        "研发进展",
+        "技术突破",
+        "核心技术",
+        "量产",
+        "试产",
+        "中试",
+        "产品验证",
+        "产品迭代",
+        "临床",
+        "产品开发",
+        "产品销售",
+        "实现销售",
+        "clinical trial",
+        "trial",
+        "trial results",
+        "phase 1",
+        "phase 2",
+        "phase 3",
+        "clinical data",
+        "too early to speculate",
+        "non-inferiority",
+        "superiority",
+        "research and development",
+        "technology breakthrough",
+        "commercialization",
+        "launched",
+        "pilot line",
     ),
 }
 _PROGRESS = re.compile(
@@ -229,7 +360,8 @@ _ACCOUNTING_CONTEXT = re.compile(
     re.IGNORECASE,
 )
 _EXCLUDED_NARRATIVE_CONTEXT = re.compile(
-    _ACCOUNTING_CONTEXT.pattern + r"|\b(?:safe[ -]harbou?r|forward[ -]looking statements?)\b|"
+    _ACCOUNTING_CONTEXT.pattern
+    + r"|\b(?:safe[ -]harbou?r|forward[ -]looking statements?)\b|"
     r"\bactual results (?:may|could) differ materially\b",
     re.IGNORECASE,
 )
@@ -243,20 +375,31 @@ _ENGLISH_OPERATING_OBJECT = (
 )
 # A business noun alone is not a milestone. Keep a nearby operating action or
 # explicit current adoption count, and exclude a financial subject in the gap.
-_ENGLISH_FINANCIAL_MEASURE = r"(?:revenues?|earnings|income|profits?|margins?|EPS|dividends?)"
-_ENGLISH_OPERATING_GAP = r"(?:(?!\b" + _ENGLISH_FINANCIAL_MEASURE + r"\b)[^.!?;\n]){0,80}"
+_ENGLISH_FINANCIAL_MEASURE = (
+    r"(?:revenues?|earnings|income|profits?|margins?|EPS|dividends?)"
+)
+_ENGLISH_OPERATING_GAP = (
+    r"(?:(?!\b" + _ENGLISH_FINANCIAL_MEASURE + r"\b)[^.!?;\n]){0,80}"
+)
 _ENGLISH_OPERATING_EVENT = (
     r"\b(?:added|built|opened|expanded|launched|introduced|announced|released|"
     r"deployed|rolled out|increased|scaled|commissioned)\b"
-    + _ENGLISH_OPERATING_GAP + r"\b" + _ENGLISH_OPERATING_OBJECT
-    + r"\b(?!\s*(?:'s\s+)?" + _ENGLISH_FINANCIAL_MEASURE + r"\b)|"
-    r"(?:^|[.!?;\n])\s*" + _ENGLISH_OPERATING_GAP
+    + _ENGLISH_OPERATING_GAP
+    + r"\b"
+    + _ENGLISH_OPERATING_OBJECT
+    + r"\b(?!\s*(?:'s\s+)?"
+    + _ENGLISH_FINANCIAL_MEASURE
+    + r"\b)|"
+    r"(?:^|[.!?;\n])\s*"
+    + _ENGLISH_OPERATING_GAP
     + r"\b(?:customers?|users?|paid seats?|workloads?|throughput|capacity)\b"
-    + _ENGLISH_OPERATING_GAP + r"\b(?:increased|expanded|grew|doubled|tripled|scaled)\b|"
+    + _ENGLISH_OPERATING_GAP
+    + r"\b(?:increased|expanded|grew|doubled|tripled|scaled)\b|"
     r"\b(?:now|currently)\s+(?:have|serve|support)\s+"
     r"(?:(?:over|more than|approximately|about)\s+)?[\d,]+"
     r"(?:\s+\w+){0,6}\s+(?:customers?|users?|seats?|deployments?)\b|"
-    r"(?:^|[.!?;\n])\s*" + _ENGLISH_OPERATING_GAP
+    r"(?:^|[.!?;\n])\s*"
+    + _ENGLISH_OPERATING_GAP
     + r"\b(?:customers?|users?|seats?|deployments?)\b"
     + _ENGLISH_OPERATING_GAP
     + r"\b(?:surpassed|reached|crossed|now\s+(?:over|above))\s+[\d,]+\b|"
@@ -366,13 +509,17 @@ _NAMED_PRODUCT_CONTEXT = re.compile(
     r"(?:新产品|新型号|新设备|新系统).{0,12}(?:研发|开发|推出|实现|量产))",
     re.IGNORECASE,
 )
-_QA_QUESTION = re.compile(r"(?m)(?:^|\n|\s)(?P<number>\d{1,3}\s*[、.．]\s*)?(?:问|问题)\s*[:：]")
+_QA_QUESTION = re.compile(
+    r"(?m)(?:^|\n|\s)(?P<number>\d{1,3}\s*[、.．]\s*)?(?:问|问题)\s*[:：]"
+)
 _QA_ANSWER = re.compile(r"(?:答复|回答|答|回复)\s*[:：]")
 _QA_TRANSITION = re.compile(
     r"(?:move\s+over\s+to|move\s+to)\s+Q\s*&\s*A|questions\s*(?:&|and)\s*answers",
     re.IGNORECASE,
 )
-_QA_FIRST_REFERENCE = re.compile(r"\b(?:first|firstly)\s+(?:one|question)\b|\bon\s+the\s+first\b", re.I)
+_QA_FIRST_REFERENCE = re.compile(
+    r"\b(?:first|firstly)\s+(?:one|question)\b|\bon\s+the\s+first\b", re.I
+)
 _QA_SECOND_REFERENCE = re.compile(
     r"\b(?:second|secondly)\s+(?:one|question)\b|\bon\s+the\s+second\b", re.I
 )
@@ -406,8 +553,12 @@ class SummaryClaim:
     claim_id: str
     text: str
     evidence_ids: tuple[str, ...]
-    claim_type: Literal["company_statement", "analyst_question", "editorial", "uncertain"]
-    modality: Literal["actual", "planned", "forecast", "question", "negation", "uncertain"]
+    claim_type: Literal[
+        "company_statement", "analyst_question", "editorial", "uncertain"
+    ]
+    modality: Literal[
+        "actual", "planned", "forecast", "question", "negation", "uncertain"
+    ]
     needs_review: bool = False
 
 
@@ -436,20 +587,23 @@ def _make_unit(
     metadata: Mapping[str, Any],
     quality_flags: Sequence[str] = (),
 ) -> NarrativeUnit:
-    canonical_text = unicodedata.normalize("NFC", raw_text.replace("\r\n", "\n")).strip()
+    canonical_text = unicodedata.normalize(
+        "NFC", raw_text.replace("\r\n", "\n")
+    ).strip()
     if not canonical_text:
         raise ValueError("cannot create a narrative unit from blank text")
     identity_fields: dict[str, Any] = {
-            "coordinates": coordinates.locator(),
-            "parser_name": NARRATIVE_PARSER_NAME,
-            "parser_version": parser_version,
-            "source_id": source_id,
-            "text_sha256": hashlib.sha256(canonical_text.encode("utf-8")).hexdigest(),
-            "unit_kind": unit_kind,
-        }
+        "coordinates": coordinates.locator(),
+        "parser_name": NARRATIVE_PARSER_NAME,
+        "parser_version": parser_version,
+        "source_id": source_id,
+        "text_sha256": hashlib.sha256(canonical_text.encode("utf-8")).hexdigest(),
+        "unit_kind": unit_kind,
+    }
     if parser_version == QA_FRAGMENT_VERSION and unit_kind == "pdf_table_qa_fragment":
         identity_fields["cell_fragment_range"] = (
-            metadata.get("cell_fragment_start"), metadata.get("cell_fragment_end")
+            metadata.get("cell_fragment_start"),
+            metadata.get("cell_fragment_end"),
         )
         identity_fields["source_role"] = source_role
     identity = json.dumps(
@@ -458,9 +612,10 @@ def _make_unit(
         sort_keys=True,
         separators=(",", ":"),
     )
-    unit_id = "urn:company-wiki:narrative-unit:sha256:" + hashlib.sha256(
-        identity.encode("utf-8")
-    ).hexdigest()
+    unit_id = (
+        "urn:company-wiki:narrative-unit:sha256:"
+        + hashlib.sha256(identity.encode("utf-8")).hexdigest()
+    )
     return NarrativeUnit(
         unit_id=unit_id,
         source_id=source_id,
@@ -493,7 +648,10 @@ def _sentence_fragments(text: str) -> list[tuple[int, int, str]]:
 
 
 def _pdf_qa_parts(
-    text: str, *, group_prefix: str, parser_version: str = NARRATIVE_PARSER_VERSION,
+    text: str,
+    *,
+    group_prefix: str,
+    parser_version: str = NARRATIVE_PARSER_VERSION,
 ) -> list[dict[str, Any]]:
     """Split repeated investor Q&A markers inside one extracted table cell."""
     if parser_version == QA_FRAGMENT_VERSION:
@@ -517,42 +675,74 @@ def _unpaired_pdf_qa_parts(text: str) -> list[dict[str, Any]]:
     fragments: list[dict[str, Any]] = []
     prefix = text[: answer.start()].strip()
     if prefix:
-        fragments.append({
-            "text": prefix, "start": 0, "end": answer.start(),
-            "role": "investor_question", "state": "question_continuation",
-            "qa_group_id": None, "question_number": None,
-        })
-    fragments.append({
-        "text": text[answer.start() :].strip(), "start": answer.start(),
-        "end": len(text), "role": "management", "state": "answer_continuation",
-        "qa_group_id": None, "question_number": None,
-    })
+        fragments.append(
+            {
+                "text": prefix,
+                "start": 0,
+                "end": answer.start(),
+                "role": "investor_question",
+                "state": "question_continuation",
+                "qa_group_id": None,
+                "question_number": None,
+            }
+        )
+    fragments.append(
+        {
+            "text": text[answer.start() :].strip(),
+            "start": answer.start(),
+            "end": len(text),
+            "role": "management",
+            "state": "answer_continuation",
+            "qa_group_id": None,
+            "question_number": None,
+        }
+    )
     return fragments
 
 
-def _pdf_qa_prefix_parts(prefix: str, first_question_start: int) -> list[dict[str, Any]]:
+def _pdf_qa_prefix_parts(
+    prefix: str, first_question_start: int
+) -> list[dict[str, Any]]:
     if not prefix.strip():
         return []
     answer = _QA_ANSWER.search(prefix)
     if answer is None:
-        return [{
-            "text": prefix.strip(), "start": 0, "end": first_question_start,
-            "role": "unknown", "state": "before_first_question",
-            "qa_group_id": None, "question_number": None,
-        }]
+        return [
+            {
+                "text": prefix.strip(),
+                "start": 0,
+                "end": first_question_start,
+                "role": "unknown",
+                "state": "before_first_question",
+                "qa_group_id": None,
+                "question_number": None,
+            }
+        ]
     fragments: list[dict[str, Any]] = []
     question_tail = prefix[: answer.start()].strip()
     if question_tail:
-        fragments.append({
-            "text": question_tail, "start": 0, "end": answer.start(),
-            "role": "investor_question", "state": "question_continuation",
-            "qa_group_id": None, "question_number": None,
-        })
-    fragments.append({
-        "text": prefix[answer.start() :].strip(), "start": answer.start(),
-        "end": first_question_start, "role": "management",
-        "state": "answer_continuation", "qa_group_id": None, "question_number": None,
-    })
+        fragments.append(
+            {
+                "text": question_tail,
+                "start": 0,
+                "end": answer.start(),
+                "role": "investor_question",
+                "state": "question_continuation",
+                "qa_group_id": None,
+                "question_number": None,
+            }
+        )
+    fragments.append(
+        {
+            "text": prefix[answer.start() :].strip(),
+            "start": answer.start(),
+            "end": first_question_start,
+            "role": "management",
+            "state": "answer_continuation",
+            "qa_group_id": None,
+            "question_number": None,
+        }
+    )
     return fragments
 
 
@@ -565,20 +755,31 @@ def _paired_pdf_qa_parts(
     fragments: list[dict[str, Any]] = []
     question_text = text[question.start() : question_end].strip()
     if question_text:
-        fragments.append({
-            "text": question_text, "start": question.start(), "end": question_end,
-            "role": "investor_question",
-            "state": "question_paired" if answer else "question_unanswered",
-            "qa_group_id": group_id, "question_number": question_number,
-        })
+        fragments.append(
+            {
+                "text": question_text,
+                "start": question.start(),
+                "end": question_end,
+                "role": "investor_question",
+                "state": "question_paired" if answer else "question_unanswered",
+                "qa_group_id": group_id,
+                "question_number": question_number,
+            }
+        )
     if answer:
         answer_text = text[answer.start() : end].strip()
         if answer_text:
-            fragments.append({
-                "text": answer_text, "start": answer.start(), "end": end,
-                "role": "management", "state": "answer_paired",
-                "qa_group_id": group_id, "question_number": question_number,
-            })
+            fragments.append(
+                {
+                    "text": answer_text,
+                    "start": answer.start(),
+                    "end": end,
+                    "role": "management",
+                    "state": "answer_paired",
+                    "qa_group_id": group_id,
+                    "question_number": question_number,
+                }
+            )
     return fragments
 
 
@@ -604,9 +805,13 @@ class _CrossPageQaLinker:
             return True  # replay the historical linking policy unchanged
         lp, rp = left.coordinates.page_number, right.coordinates.page_number
         return bool(
-            left.source_id == right.source_id and left.language == right.language
-            and left.parser_name == right.parser_name and left.parser_version == right.parser_version
-            and lp is not None and rp is not None and 0 <= rp - lp <= 1
+            left.source_id == right.source_id
+            and left.language == right.language
+            and left.parser_name == right.parser_name
+            and left.parser_version == right.parser_version
+            and lp is not None
+            and rp is not None
+            and 0 <= rp - lp <= 1
         )
 
     def continue_answer(self, index: int, unit: NarrativeUnit) -> bool:
@@ -614,9 +819,11 @@ class _CrossPageQaLinker:
             return False
         previous = self.output[self.last_answer_index]
         if not (
-            self.compatible(previous, unit) and previous.coordinates == unit.coordinates
+            self.compatible(previous, unit)
+            and previous.coordinates == unit.coordinates
             and previous.metadata.get("cell_sha256") == unit.metadata.get("cell_sha256")
-            and unit.metadata["cell_fragment_start"] >= previous.metadata["cell_fragment_end"]
+            and unit.metadata["cell_fragment_start"]
+            >= previous.metadata["cell_fragment_end"]
         ):
             return False
         metadata = dict(unit.metadata)
@@ -656,18 +863,26 @@ class _CrossPageQaLinker:
             continuation_meta = dict(continuation.metadata)
             continuation_meta["qa_group_id"] = group_id
             continuation_meta["qa_state"] = "question_paired_cross_page"
-            self.output[continuation_index] = replace(continuation, metadata=continuation_meta)
+            self.output[continuation_index] = replace(
+                continuation, metadata=continuation_meta
+            )
         answer_meta = dict(unit.metadata)
         answer_meta["qa_group_id"] = group_id
         answer_meta["qa_state"] = "answer_paired_cross_page"
         if unit.parser_version == QA_FRAGMENT_VERSION:
-            answer_meta["qa_question_number"] = question.metadata.get("qa_question_number")
+            answer_meta["qa_question_number"] = question.metadata.get(
+                "qa_question_number"
+            )
             self.last_answer_index = index
             for continuation_index in self.continuation_indices:
                 continuation = self.output[continuation_index]
                 metadata = dict(continuation.metadata)
-                metadata["qa_question_number"] = question.metadata.get("qa_question_number")
-                self.output[continuation_index] = replace(continuation, metadata=metadata)
+                metadata["qa_question_number"] = question.metadata.get(
+                    "qa_question_number"
+                )
+                self.output[continuation_index] = replace(
+                    continuation, metadata=metadata
+                )
         self.output[index] = replace(unit, metadata=answer_meta)
         self.clear_pending()
 
@@ -675,8 +890,15 @@ class _CrossPageQaLinker:
         state = unit.metadata.get("qa_state")
         if state != "answer_continuation":
             self.last_answer_index = None
-        if self.pending_index is not None and state in {"question_continuation", "answer_continuation"}:
-            anchor = self.continuation_indices[-1] if self.continuation_indices else self.pending_index
+        if self.pending_index is not None and state in {
+            "question_continuation",
+            "answer_continuation",
+        }:
+            anchor = (
+                self.continuation_indices[-1]
+                if self.continuation_indices
+                else self.pending_index
+            )
             if not self.compatible(self.output[anchor], unit):
                 self.orphan_pending()
         if state == "question_unanswered":
@@ -694,7 +916,10 @@ class _CrossPageQaLinker:
                 self.output[index] = replace(unit, metadata=metadata)
             else:
                 self.pair_answer(index, unit)
-        elif state in {"question_paired", "answer_paired"} and self.pending_index is not None:
+        elif (
+            state in {"question_paired", "answer_paired"}
+            and self.pending_index is not None
+        ):
             self.orphan_pending()
 
 
@@ -710,13 +935,26 @@ class _PdfParseState:
     opaque_pages: list[int] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
     empty_pages: set[int] = field(default_factory=set)
-    page_blocks: list[tuple[int, list[tuple[int, tuple[float, ...], str]]]] = field(default_factory=list)
+    page_blocks: list[tuple[int, list[tuple[int, tuple[float, ...], str]]]] = field(
+        default_factory=list
+    )
     table_scan_pages: set[int] = field(default_factory=set)
+    page_geometry: dict[int, dict[str, Any]] = field(default_factory=dict)
 
 
-def _pdf_text_blocks(page: Any) -> list[tuple[int, tuple[float, ...], str]]:
+def _pdf_text_blocks(
+    page: Any,
+    *,
+    geometry_out: dict[str, Any] | None = None,
+) -> list[tuple[int, tuple[float, ...], str]]:
+    """One dict snapshot; preserve the historical three-tuple text interface.
+
+    Optional geometry is side output to the existing parse state. It never
+    changes text, block numbers, paragraph numbering or raw unit identities.
+    """
     snapshot = page.get_text("dict", sort=False)
     blocks: list[tuple[int, tuple[float, ...], str]] = []
+    block_fonts = {}
     for raw_block_no, block in enumerate(snapshot.get("blocks", ())):
         if block.get("type") != 0:
             continue
@@ -724,17 +962,120 @@ def _pdf_text_blocks(page: Any) -> list[tuple[int, tuple[float, ...], str]]:
             "".join(span.get("text", "") for span in line.get("spans", ()))
             for line in block.get("lines", ())
         ]
-        text = "\n".join(lines).strip()
+        full_text = "\n".join(lines)
+        text = full_text.strip()
         if text:
             bbox = tuple(float(value) for value in block.get("bbox", ()))
             blocks.append((raw_block_no, bbox, text))
+            if geometry_out is not None:
+                trim_start = len(full_text) - len(full_text.lstrip())
+                position = 0
+                fonts = []
+                for line in block.get("lines", ()):
+                    for span in line.get("spans", ()):
+                        span_text = span.get("text", "")
+                        end = position + len(span_text)
+                        size = span.get("size")
+                        flags = span.get("flags")
+                        valid_size = (
+                            float(size)
+                            if isinstance(size, (int, float))
+                            and not isinstance(size, bool)
+                            and size > 0
+                            else None
+                        )
+                        weight = (
+                            ("bold" if flags & 16 else "regular")
+                            if isinstance(flags, int) and not isinstance(flags, bool)
+                            else None
+                        )
+                        if span_text.strip():
+                            fonts.append(
+                                (
+                                    max(0, position - trim_start),
+                                    min(len(text), end - trim_start),
+                                    valid_size,
+                                    weight,
+                                )
+                            )
+                        position = end
+                    position += 1
+                # Coalesce equal adjacent styles once. Fragment lookup uses an
+                # interval index, so a long block is never rescanned per fragment.
+                runs: list[tuple[int, int, float | None, str | None]] = []
+                for start, end, size, weight in fonts:
+                    if start >= end:
+                        continue
+                    if (
+                        runs
+                        and runs[-1][2:] == (size, weight)
+                        and start <= runs[-1][1] + 1
+                    ):
+                        runs[-1] = (runs[-1][0], end, size, weight)
+                    else:
+                        runs.append((start, end, size, weight))
+                block_fonts[raw_block_no] = {
+                    "runs": runs,
+                    "ends": [run[1] for run in runs],
+                }
+    if geometry_out is not None:
+        geometry_out.update(
+            {
+                # The dict snapshot and its bboxes share the unrotated text
+                # frame. page.rect is rotated and can disagree (e.g. 90 degrees).
+                "page_width": snapshot.get("width"),
+                "page_height": snapshot.get("height"),
+                "block_fonts": block_fonts,
+            }
+        )
     return blocks
+
+
+def _pdf_geometry_metadata(
+    state: _PdfParseState,
+    page_number: int,
+    *,
+    block_no: int | None = None,
+    char_start: int = 0,
+    char_end: int = 0,
+) -> dict[str, Any]:
+    page = state.page_geometry.get(page_number, {})
+    result: dict[str, Any] = {
+        "geometry_feature_version": PDF_GEOMETRY_FEATURE_VERSION,
+        "geometry_granularity": "block" if block_no is not None else "table_region",
+    }
+    for key in ("page_width", "page_height"):
+        value = page.get(key)
+        if (
+            isinstance(value, (int, float))
+            and not isinstance(value, bool)
+            and value > 0
+        ):
+            result[key] = float(value)
+    if block_no is not None:
+        index = page.get("block_fonts", {}).get(block_no, {})
+        runs = index.get("runs", ())
+        first = bisect_right(index.get("ends", ()), char_start)
+        fonts = []
+        for position in range(first, len(runs)):
+            run = runs[position]
+            if run[0] >= char_end:
+                break
+            fonts.append(run)
+        sizes = {item[2] for item in fonts}
+        weights = {item[3] for item in fonts}
+        # A mixed-size/weight block fragment has no single measured style.
+        result["font_size"] = next(iter(sizes)) if len(sizes) == 1 else None
+        result["font_weight"] = next(iter(weights)) if len(weights) == 1 else None
+    return result
 
 
 def _scan_pdf_pages(state: _PdfParseState, document: Any) -> None:
     for page_number, page in enumerate(document, start=1):
         try:
-            blocks = _pdf_text_blocks(page)
+            geometry: dict[str, Any] = {}
+            blocks = _pdf_text_blocks(page, geometry_out=geometry)
+            state.page_geometry[page_number] = geometry
             state.page_blocks.append((page_number, blocks))
             if not blocks:
                 state.empty_pages.add(page_number)
@@ -752,14 +1093,18 @@ def _pdf_table_scan_pages(
         return set(range(1, state.page_count + 1))
     if table_pages is not None:
         selected = {int(value) for value in table_pages}
-        invalid = sorted(value for value in selected if not 1 <= value <= state.page_count)
+        invalid = sorted(
+            value for value in selected if not 1 <= value <= state.page_count
+        )
         if invalid:
             raise ValueError(f"table_pages outside document bounds: {invalid}")
         return selected
     selected = {
         number
         for number, blocks in state.page_blocks
-        if _table_scan_signal("\n".join(item[2] for item in blocks), parser_version=state.parser_version)
+        if _table_scan_signal(
+            "\n".join(item[2] for item in blocks), parser_version=state.parser_version
+        )
     }
     for page_number in tuple(selected):
         selected.update(
@@ -772,7 +1117,9 @@ def _pdf_table_scan_pages(
 
 
 def _emit_pdf_text_units(
-    state: _PdfParseState, page_number: int, blocks: Sequence[tuple[int, tuple[float, ...], str]]
+    state: _PdfParseState,
+    page_number: int,
+    blocks: Sequence[tuple[int, tuple[float, ...], str]],
 ) -> bool:
     qa_page = any(
         _has_pdf_question(text, state.parser_version) or _QA_ANSWER.search(text)
@@ -782,52 +1129,95 @@ def _emit_pdf_text_units(
     for raw_block_no, bbox, text in blocks:
         block_sha256 = hashlib.sha256(text.encode("utf-8")).hexdigest()
         for char_start, char_end, fragment_text in _sentence_fragments(text):
-            state.units.append(_make_unit(
-                source_id=state.source_id, parser_version=state.parser_version,
-                coordinates=EvidenceCoordinates(page_number=page_number, paragraph_index=paragraph_no),
-                raw_text=fragment_text, unit_kind="pdf_text_block",
-                source_role="qa_text_shadow" if qa_page else "company_filing",
-                language=state.language,
-                metadata={
-                    "bbox": bbox, "block_char_end": char_end, "block_char_start": char_start,
-                    "block_sha256": block_sha256, "pdf_block": raw_block_no,
-                },
-            ))
+            state.units.append(
+                _make_unit(
+                    source_id=state.source_id,
+                    parser_version=state.parser_version,
+                    coordinates=EvidenceCoordinates(
+                        page_number=page_number, paragraph_index=paragraph_no
+                    ),
+                    raw_text=fragment_text,
+                    unit_kind="pdf_text_block",
+                    source_role="qa_text_shadow" if qa_page else "company_filing",
+                    language=state.language,
+                    metadata={
+                        "bbox": bbox,
+                        "block_char_end": char_end,
+                        "block_char_start": char_start,
+                        "block_sha256": block_sha256,
+                        "pdf_block": raw_block_no,
+                        **_pdf_geometry_metadata(
+                            state,
+                            page_number,
+                            block_no=raw_block_no,
+                            char_start=char_start,
+                            char_end=char_end,
+                        ),
+                    },
+                )
+            )
             paragraph_no += 1
     return qa_page
 
 
 def _emit_pdf_qa_fragment(
-    state: _PdfParseState, page_number: int, table_index: int, row_index: int,
-    column_index: int, fragment: Mapping[str, Any], cell_sha: str,
-    bbox: tuple[float, ...], row: Sequence[str], headers: Sequence[str],
+    state: _PdfParseState,
+    page_number: int,
+    table_index: int,
+    row_index: int,
+    column_index: int,
+    fragment: Mapping[str, Any],
+    cell_sha: str,
+    bbox: tuple[float, ...],
+    row: Sequence[str],
+    headers: Sequence[str],
 ) -> None:
     fragment_text = str(fragment["text"]).strip()
     if not fragment_text:
         return
-    state.units.append(_make_unit(
-        source_id=state.source_id, parser_version=state.parser_version,
-        coordinates=EvidenceCoordinates(
-            page_number=page_number, table_index=table_index,
-            row_index=row_index, column_index=column_index,
-        ),
-        raw_text=fragment_text, unit_kind="pdf_table_qa_fragment",
-        source_role=str(fragment["role"]), language=state.language,
-        quality_flags=("locator_unstable",),
-        metadata={
-            "bbox": bbox, "cell_fragment_end": int(fragment["end"]),
-            "cell_fragment_sha256": hashlib.sha256(fragment_text.encode("utf-8")).hexdigest(),
-            "cell_fragment_start": int(fragment["start"]), "cell_sha256": cell_sha,
-            "column_index": column_index, "qa_group_id": fragment["qa_group_id"],
-            "qa_question_number": fragment["question_number"], "qa_state": fragment["state"],
-            "row_cells": tuple(row), "table_headers": tuple(headers),
-        },
-    ))
+    state.units.append(
+        _make_unit(
+            source_id=state.source_id,
+            parser_version=state.parser_version,
+            coordinates=EvidenceCoordinates(
+                page_number=page_number,
+                table_index=table_index,
+                row_index=row_index,
+                column_index=column_index,
+            ),
+            raw_text=fragment_text,
+            unit_kind="pdf_table_qa_fragment",
+            source_role=str(fragment["role"]),
+            language=state.language,
+            quality_flags=("locator_unstable",),
+            metadata={
+                "bbox": bbox,
+                "cell_fragment_end": int(fragment["end"]),
+                "cell_fragment_sha256": hashlib.sha256(
+                    fragment_text.encode("utf-8")
+                ).hexdigest(),
+                "cell_fragment_start": int(fragment["start"]),
+                "cell_sha256": cell_sha,
+                "column_index": column_index,
+                "qa_group_id": fragment["qa_group_id"],
+                "qa_question_number": fragment["question_number"],
+                "qa_state": fragment["state"],
+                "row_cells": tuple(row),
+                "table_headers": tuple(headers),
+                **_pdf_geometry_metadata(state, page_number),
+            },
+        )
+    )
 
 
 def _emit_pdf_row(
-    state: _PdfParseState, page_number: int, table_index: int, row_index: int,
-    row: Sequence[str], headers: Sequence[str], bbox: tuple[float, ...],
+    state: _PdfParseState,
+    page_number: int,
+    table_index: int,
+    row_index: int,
+    row: Sequence[str],
+    headers: Sequence[str],
+    bbox: tuple[float, ...],
 ) -> None:
     text = " | ".join(cell for cell in row if cell)
     if not text:
@@ -837,29 +1227,53 @@ def _emit_pdf_row(
         if not cell:
             continue
         group_prefix = f"p{page_number}:t{table_index}:r{row_index}:c{column_index}"
-        fragments = _pdf_qa_parts(cell, group_prefix=group_prefix, parser_version=state.parser_version)
+        fragments = _pdf_qa_parts(
+            cell, group_prefix=group_prefix, parser_version=state.parser_version
+        )
         if not fragments:
             continue
         qa_created = True
         cell_sha = hashlib.sha256(cell.encode("utf-8")).hexdigest()
         for fragment in fragments:
             _emit_pdf_qa_fragment(
-                state, page_number, table_index, row_index, column_index,
-                fragment, cell_sha, bbox, row, headers,
+                state,
+                page_number,
+                table_index,
+                row_index,
+                column_index,
+                fragment,
+                cell_sha,
+                bbox,
+                row,
+                headers,
             )
     if not qa_created:
-        state.units.append(_make_unit(
-            source_id=state.source_id, parser_version=state.parser_version,
-            coordinates=EvidenceCoordinates(
-                page_number=page_number, table_index=table_index, row_index=row_index,
-            ),
-            raw_text=text, unit_kind="pdf_table_row", source_role="company_filing",
-            language=state.language,
-            metadata={"bbox": bbox, "row_cells": tuple(row), "table_headers": tuple(headers)},
-        ))
+        state.units.append(
+            _make_unit(
+                source_id=state.source_id,
+                parser_version=state.parser_version,
+                coordinates=EvidenceCoordinates(
+                    page_number=page_number,
+                    table_index=table_index,
+                    row_index=row_index,
+                ),
+                raw_text=text,
+                unit_kind="pdf_table_row",
+                source_role="company_filing",
+                language=state.language,
+                metadata={
+                    "bbox": bbox,
+                    "row_cells": tuple(row),
+                    "table_headers": tuple(headers),
+                    **_pdf_geometry_metadata(state, page_number),
+                },
+            )
+        )
 
 
-def _emit_pdf_table(state: _PdfParseState, page_number: int, table_index: int, table: Any) -> None:
+def _emit_pdf_table(
+    state: _PdfParseState, page_number: int, table_index: int, table: Any
+) -> None:
     normalized_rows = [
         ["" if cell is None else str(cell).strip() for cell in row]
         for row in (table.extract() or [])
@@ -880,7 +1294,9 @@ def _emit_pdf_tables(state: _PdfParseState, document: Any, page_number: int) -> 
 
 
 def _emit_pdf_page(
-    state: _PdfParseState, document: Any, page_number: int,
+    state: _PdfParseState,
+    document: Any,
+    page_number: int,
     blocks: Sequence[tuple[int, tuple[float, ...], str]],
 ) -> None:
     page_unit_count = len(state.units)
@@ -889,7 +1305,8 @@ def _emit_pdf_page(
         qa_unit_start = len(state.units)
         _emit_pdf_tables(state, document, page_number)
         if qa_page and not any(
-            unit.unit_kind == "pdf_table_qa_fragment" for unit in state.units[qa_unit_start:]
+            unit.unit_kind == "pdf_table_qa_fragment"
+            for unit in state.units[qa_unit_start:]
         ):
             state.opaque_pages.append(page_number)
     if len(state.units) == page_unit_count and page_number not in state.opaque_pages:
@@ -919,19 +1336,21 @@ def _parse_pdf_document(
     state = _PdfParseState(source_id, source_sha256, parser_version, language)
     state.page_count = len(document)
     _scan_pdf_pages(state, document)
-    state.table_scan_pages = _pdf_table_scan_pages(
-        state, full_table_scan, table_pages
-    )
+    state.table_scan_pages = _pdf_table_scan_pages(state, full_table_scan, table_pages)
     for page_number, blocks in state.page_blocks:
         _emit_pdf_page(state, document, page_number, blocks)
     return NarrativeParseResult(
-        source_id=source_id, source_sha256=source_sha256, language=language,
-        units=_link_cross_page_qa(state.units), page_count=state.page_count,
-        pages_read=state.pages_read, opaque_pages=tuple(state.opaque_pages),
+        source_id=source_id,
+        source_sha256=source_sha256,
+        language=language,
+        units=_link_cross_page_qa(state.units),
+        page_count=state.page_count,
+        pages_read=state.pages_read,
+        opaque_pages=tuple(state.opaque_pages),
         table_scan_pages=tuple(sorted(state.table_scan_pages)),
-        deferred_table_pages=tuple(sorted(
-            set(range(1, state.page_count + 1)) - state.table_scan_pages
-        )),
+        deferred_table_pages=tuple(
+            sorted(set(range(1, state.page_count + 1)) - state.table_scan_pages)
+        ),
         errors=tuple(state.errors),
     )
 
@@ -986,18 +1405,26 @@ def parse_pdf_bytes(
         )
 
 
-def _speaker_role(name: str, title: str, *, qa_mode: bool, management_speakers: set[str],
-                  case_insensitive: bool = False) -> str:
+def _speaker_role(
+    name: str,
+    title: str,
+    *,
+    qa_mode: bool,
+    management_speakers: set[str],
+    case_insensitive: bool = False,
+) -> str:
     lowered = f"{name} {title}".casefold()
     if "operator" in lowered or "conference operator" in lowered:
         return "operator"
-    if case_insensitive and any(name.casefold() == actor.casefold()
-                                for actor in management_speakers):
+    if case_insensitive and any(
+        name.casefold() == actor.casefold() for actor in management_speakers
+    ):
         return "management"
     if re.search(r"analyst|j\.p\. morgan|ubs|goldman|morgan stanley|barclays", lowered):
         return "analyst"
     if name in management_speakers or re.search(
-        r"ceo|cfo|chief|president|executive|officer|investor relations|management", lowered
+        r"ceo|cfo|chief|president|executive|officer|investor relations|management",
+        lowered,
     ):
         return "management"
     return "analyst" if qa_mode else "management"
@@ -1039,7 +1466,9 @@ def _abbreviation_before_boundary(text: str, boundary: int) -> bool:
         return False
     token = prior_token.group(1)
     abbreviations = {"mr", "mrs", "ms", "dr", "prof", "inc", "ltd", "e.g", "i.e"}
-    return token.casefold().strip(".") in abbreviations or len(token.replace(".", "")) == 1
+    return (
+        token.casefold().strip(".") in abbreviations or len(token.replace(".", "")) == 1
+    )
 
 
 @dataclass
@@ -1054,7 +1483,9 @@ class _TranscriptParseState:
     qa_question_speaker: str | None = None
 
 
-def _transcript_speaker_fields(stripped: str) -> tuple[str | None, str | None, str | None]:
+def _transcript_speaker_fields(
+    stripped: str,
+) -> tuple[str | None, str | None, str | None]:
     label = _SPEAKER_LABEL.match(stripped)
     if label:
         return label.group("name").strip(), label.group("title").strip(), ""
@@ -1083,17 +1514,27 @@ def _transcript_answer_group(
 
 
 def _begin_transcript_speaker(
-    state: _TranscriptParseState, line_number: int,
-    name: str, title: str, body: str, *, stable_qa: bool = False,
+    state: _TranscriptParseState,
+    line_number: int,
+    name: str,
+    title: str,
+    body: str,
+    *,
+    stable_qa: bool = False,
 ) -> None:
     role = _speaker_role(
-        name, title, qa_mode=state.qa_mode,
-        management_speakers=state.management_speakers, case_insensitive=stable_qa,
+        name,
+        title,
+        qa_mode=state.qa_mode,
+        management_speakers=state.management_speakers,
+        case_insensitive=stable_qa,
     )
     if not state.qa_mode and role == "management":
         state.management_speakers.add(name)
-    if state.qa_mode and role == "analyst" and (
-        not stable_qa or state.qa_question_speaker != name.casefold()
+    if (
+        state.qa_mode
+        and role == "analyst"
+        and (not stable_qa or state.qa_question_speaker != name.casefold())
     ):
         state.qa_counter += 1
         state.current_qa_parent = state.qa_counter
@@ -1102,8 +1543,11 @@ def _begin_transcript_speaker(
     if state.qa_mode and role == "management":
         _transcript_answer_group(state, name, title, body)
     state.active = {
-        "line_start": line_number, "line_end": line_number,
-        "name": name, "title": title, "role": role,
+        "line_start": line_number,
+        "line_end": line_number,
+        "name": name,
+        "title": title,
+        "role": role,
         "qa_group_id": state.active_qa if state.qa_mode else None,
         "section": "qa" if state.qa_mode else "prepared_remarks",
         "lines": [body] if body else [],
@@ -1144,9 +1588,7 @@ def _consume_transcript_blank(state: _TranscriptParseState, stripped: str) -> bo
     return True
 
 
-def _consume_transcript_qa_heading(
-    state: _TranscriptParseState, stripped: str
-) -> bool:
+def _consume_transcript_qa_heading(state: _TranscriptParseState, stripped: str) -> bool:
     if _QA_HEADING.match(stripped) is None:
         return False
     state.qa_mode = True
@@ -1160,7 +1602,9 @@ def _enable_transcript_qa(state: _TranscriptParseState, enabled: bool) -> None:
 
 
 def _is_transcript_speaker(name: str | None) -> bool:
-    return bool(name and name.casefold() not in {"prepared remarks", "questions & answers"})
+    return bool(
+        name and name.casefold() not in {"prepared remarks", "questions & answers"}
+    )
 
 
 def _append_transcript_unattributed(
@@ -1171,10 +1615,14 @@ def _append_transcript_unattributed(
             return False
         # Keep unattributed text visible for review, but not as management evidence.
         state.active = {
-            "line_start": line_number, "line_end": line_number,
-            "name": "", "title": "", "role": "unknown",
+            "line_start": line_number,
+            "line_end": line_number,
+            "name": "",
+            "title": "",
+            "role": "unknown",
             "qa_group_id": state.active_qa if state.qa_mode else None,
-            "section": "qa" if state.qa_mode else "prepared_remarks", "lines": [],
+            "section": "qa" if state.qa_mode else "prepared_remarks",
+            "lines": [],
         }
         state.blocks.append(state.active)
     state.active["lines"].append(line)
@@ -1182,9 +1630,7 @@ def _append_transcript_unattributed(
     return True
 
 
-def _analyst_question_pieces(
-    body: str, role: str
-) -> list[tuple[int, int, str]]:
+def _analyst_question_pieces(body: str, role: str) -> list[tuple[int, int, str]]:
     pieces = [(0, len(body), body)]
     if role != "analyst":
         return pieces
@@ -1203,7 +1649,9 @@ def _analyst_question_pieces(
 
 
 def _transcript_piece_group(
-    block: Mapping[str, Any], pieces: Sequence[tuple[int, int, str]], question_index: int
+    block: Mapping[str, Any],
+    pieces: Sequence[tuple[int, int, str]],
+    question_index: int,
 ) -> int | str | None:
     raw_group = block["qa_group_id"]
     parent_group = raw_group if isinstance(raw_group, (int, str)) else None
@@ -1213,32 +1661,49 @@ def _transcript_piece_group(
 
 
 def _transcript_piece_units(
-    block: Mapping[str, Any], piece: tuple[int, int, str], group_id: int | str | None,
-    source_id: str, parser_version: str, language: str,
+    block: Mapping[str, Any],
+    piece: tuple[int, int, str],
+    group_id: int | str | None,
+    source_id: str,
+    parser_version: str,
+    language: str,
 ) -> list[NarrativeUnit]:
     question_start, _question_end, question_text = piece
     start_line = int(block["line_start"])
     end_line = int(block["line_end"])
     units: list[NarrativeUnit] = []
-    for local_start, local_end, piece_text in _transcript_sentence_fragments(question_text):
+    for local_start, local_end, piece_text in _transcript_sentence_fragments(
+        question_text
+    ):
         char_start = question_start + local_start
         char_end = question_start + local_end
         coords = EvidenceCoordinates(
-            paragraph_index=start_line - 1, char_start=char_start, char_end=char_end,
+            paragraph_index=start_line - 1,
+            char_start=char_start,
+            char_end=char_end,
         )
-        units.append(_make_unit(
-            source_id=source_id, parser_version=parser_version,
-            coordinates=coords, raw_text=piece_text,
-            unit_kind="transcript_speaker_block", source_role=block["role"],
-            language=language,
-            metadata={
-                "line_end": end_line, "line_start": start_line,
-                "text_char_end": char_end, "text_char_start": char_start,
-                "qa_group_id": group_id, "qa_parent_id": block["qa_group_id"],
-                "section": block["section"], "speaker": block["name"] or None,
-                "speaker_title": block["title"] or None,
-            },
-        ))
+        units.append(
+            _make_unit(
+                source_id=source_id,
+                parser_version=parser_version,
+                coordinates=coords,
+                raw_text=piece_text,
+                unit_kind="transcript_speaker_block",
+                source_role=block["role"],
+                language=language,
+                metadata={
+                    "line_end": end_line,
+                    "line_start": start_line,
+                    "text_char_end": char_end,
+                    "text_char_start": char_start,
+                    "qa_group_id": group_id,
+                    "qa_parent_id": block["qa_group_id"],
+                    "section": block["section"],
+                    "speaker": block["name"] or None,
+                    "speaker_title": block["title"] or None,
+                },
+            )
+        )
     return units
 
 
@@ -1252,9 +1717,16 @@ def _transcript_block_units(
     units: list[NarrativeUnit] = []
     for question_index, piece in enumerate(pieces, start=1):
         group_id = _transcript_piece_group(block, pieces, question_index)
-        units.extend(_transcript_piece_units(
-            block, piece, group_id, source_id, parser_version, language,
-        ))
+        units.extend(
+            _transcript_piece_units(
+                block,
+                piece,
+                group_id,
+                source_id,
+                parser_version,
+                language,
+            )
+        )
     return units
 
 
@@ -1273,21 +1745,41 @@ def parse_transcript_text(
     raw_lines = text.splitlines()
     legacy = contract.layout == "legacy"
     stable_boundaries = contract.layout == "natural_affiliation_boundary"
-    affiliation = contract.layout in {"natural_affiliation", "natural_affiliation_boundary"}
+    affiliation = contract.layout in {
+        "natural_affiliation",
+        "natural_affiliation_boundary",
+    }
     if legacy:
-        heading = next((i for i, line in enumerate(raw_lines) if _TRANSCRIPT_START.match(line.strip())), None)
+        heading = next(
+            (
+                i
+                for i, line in enumerate(raw_lines)
+                if _TRANSCRIPT_START.match(line.strip())
+            ),
+            None,
+        )
         start_index = None if heading is None else heading + 1
     else:
         from .transcript_layout import body_start
-        found = body_start(raw_lines, _TRANSCRIPT_START, _transcript_speaker_fields,
-                           allow_affiliation=affiliation,
-                           prefer_explicit=stable_boundaries)
+
+        found = body_start(
+            raw_lines,
+            _TRANSCRIPT_START,
+            _transcript_speaker_fields,
+            allow_affiliation=affiliation,
+            prefer_explicit=stable_boundaries,
+        )
         start_index = None if found is None else found[0]
         explicit_heading = False if found is None else found[1]
     if start_index is None:
-        return NarrativeParseResult(source_id=source_id, source_sha256=source_sha256,
-            language=language, units=(), line_count=len(raw_lines),
-            errors=("transcript_start_missing",))
+        return NarrativeParseResult(
+            source_id=source_id,
+            source_sha256=source_sha256,
+            language=language,
+            units=(),
+            line_count=len(raw_lines),
+            errors=("transcript_start_missing",),
+        )
     state = _TranscriptParseState()
     finished = False
     index = start_index
@@ -1298,6 +1790,7 @@ def parse_transcript_text(
             break
         if not legacy:
             from .transcript_layout import END, QA_HEADING, speaker_fields
+
             if END.fullmatch(line.strip()) and len(line.strip()) < 80:
                 finished = True
                 break
@@ -1307,13 +1800,23 @@ def parse_transcript_text(
                 index += 1
                 continue
             name, title, body, label_count = speaker_fields(
-                raw_lines,index,_transcript_speaker_fields, allow_affiliation=affiliation)
+                raw_lines,
+                index,
+                _transcript_speaker_fields,
+                allow_affiliation=affiliation,
+            )
             if name:
-                _begin_transcript_speaker(state,index+1,name,title or "",body or "",
-                                          stable_qa=affiliation)
+                _begin_transcript_speaker(
+                    state,
+                    index + 1,
+                    name,
+                    title or "",
+                    body or "",
+                    stable_qa=affiliation,
+                )
                 if label_count > 1 and state.active is not None:
                     state.active["line_end"] = index + label_count
-                _enable_transcript_qa(state,bool(_QA_TRANSITION.search(body or "")))
+                _enable_transcript_qa(state, bool(_QA_TRANSITION.search(body or "")))
                 # Inline speaker turns may contain the real end control too.
                 # Old parser versions keep their saved boundary semantics.
                 if stable_boundaries and END.search(line.strip()):
@@ -1322,20 +1825,36 @@ def parse_transcript_text(
                 index += label_count
                 continue
         if legacy:
-            _consume_transcript_line(state,index+1,line)
-        elif not _consume_transcript_control_line(state,line.strip()):
-            appended = _append_transcript_unattributed(state,index+1,line,line.strip())
-            _enable_transcript_qa(state,appended and bool(_QA_TRANSITION.search(line.strip())))
+            _consume_transcript_line(state, index + 1, line)
+        elif not _consume_transcript_control_line(state, line.strip()):
+            appended = _append_transcript_unattributed(
+                state, index + 1, line, line.strip()
+            )
+            _enable_transcript_qa(
+                state, appended and bool(_QA_TRANSITION.search(line.strip()))
+            )
         if not legacy and END.search(line.strip()):
             finished = True
             break
         index += 1
-    units = [unit for block in state.blocks
-             for unit in _transcript_block_units(block,source_id,parser_version,language)]
-    return NarrativeParseResult(source_id=source_id, source_sha256=source_sha256,
-        language=language,units=tuple(units),line_count=len(raw_lines),
+    units = [
+        unit
+        for block in state.blocks
+        for unit in _transcript_block_units(block, source_id, parser_version, language)
+    ]
+    return NarrativeParseResult(
+        source_id=source_id,
+        source_sha256=source_sha256,
+        language=language,
+        units=tuple(units),
+        line_count=len(raw_lines),
         errors=(() if legacy or units else ("transcript_body_missing",))
-        + (("transcript_end_missing",) if not legacy and not explicit_heading and not finished else ()),)
+        + (
+            ("transcript_end_missing",)
+            if not legacy and not explicit_heading and not finished
+            else ()
+        ),
+    )
 
 
 def verify_pdf_evidence_spans(
@@ -1412,10 +1931,14 @@ def verify_transcript_evidence_spans(
     )
     available = {_unit_roundtrip_key(unit) for unit in replay.units}
     verified = tuple(
-        span.span_id for span in evidence_spans if _span_roundtrip_key(span) in available
+        span.span_id
+        for span in evidence_spans
+        if _span_roundtrip_key(span) in available
     )
     failed = tuple(
-        span.span_id for span in evidence_spans if _span_roundtrip_key(span) not in available
+        span.span_id
+        for span in evidence_spans
+        if _span_roundtrip_key(span) not in available
     )
     return verified, failed
 
@@ -1434,10 +1957,16 @@ def _topics(text: str) -> tuple[str, ...]:
 
 
 def _has_pdf_question(text: str, parser_version: str) -> bool:
-    return bool(question_markers(text)) if parser_version == QA_FRAGMENT_VERSION else bool(_QA_QUESTION.search(text))
+    return (
+        bool(question_markers(text))
+        if parser_version == QA_FRAGMENT_VERSION
+        else bool(_QA_QUESTION.search(text))
+    )
 
 
-def _table_scan_signal(text: str, *, parser_version: str = NARRATIVE_PARSER_VERSION) -> bool:
+def _table_scan_signal(
+    text: str, *, parser_version: str = NARRATIVE_PARSER_VERSION
+) -> bool:
     """Limit expensive table discovery to pages with specific business events."""
     text = matching_text(text)
     if _has_pdf_question(text, parser_version) or _QA_ANSWER.search(text):
@@ -1445,17 +1974,24 @@ def _table_scan_signal(text: str, *, parser_version: str = NARRATIVE_PARSER_VERS
     topics = _topics(text)
     if not topics:
         return False
-    if any(pattern.search(text) for pattern in (_HIGH_VALUE_EVENT, _PROJECT_PLAN, _STRATEGIC_PLAN)):
+    if any(
+        pattern.search(text)
+        for pattern in (_HIGH_VALUE_EVENT, _PROJECT_PLAN, _STRATEGIC_PLAN)
+    ):
         return True
     return "industry_dynamics" in topics and bool(_RECENCY.search(text))
 
 
 def _financial_table(unit: NarrativeUnit, topics: Sequence[str]) -> bool:
     if unit.unit_kind in {"html_table_cell", "pptx_table_cell", "docx_table_cell"}:
-        return unit.metadata.get("table_class") == "financial" and not _has_business_table_topics(topics)
+        return unit.metadata.get(
+            "table_class"
+        ) == "financial" and not _has_business_table_topics(topics)
     if unit.unit_kind != "pdf_table_row":
         return False
-    numeric_cells, financial_label, financial_header, event_signal = _financial_row_signals(unit)
+    numeric_cells, financial_label, financial_header, event_signal = (
+        _financial_row_signals(unit)
+    )
     if _numeric_financial_row(numeric_cells, event_signal):
         return True
     if _unclassified_financial_row(topics, financial_label, financial_header):
@@ -1483,7 +2019,9 @@ def _financial_row_signals(unit: NarrativeUnit) -> tuple[int, bool, bool, bool]:
     numeric_cells = _numeric_financial_cells(cells)
     financial_label = bool(_FINANCIAL_TERMS.search(unit.raw_text))
     financial_header = bool(_FINANCIAL_HEADERS.search(headers))
-    event_signal = bool(_HIGH_VALUE_EVENT.search(unit.raw_text) or _PROJECT_PLAN.search(unit.raw_text))
+    event_signal = bool(
+        _HIGH_VALUE_EVENT.search(unit.raw_text) or _PROJECT_PLAN.search(unit.raw_text)
+    )
     return numeric_cells, financial_label, financial_header, event_signal
 
 
@@ -1523,25 +2061,44 @@ def _candidate_rules(*, selector_version: str | None = None) -> CandidateRules:
         static_definition=_STATIC_DEFINITION,
     )
     if effective == "0.8.0":
-        from .narrative_business_groups import _operating_fact, _commercialization_milestone
-        return replace(rules, operating_facts=_operating_fact,
-            new_product_detector=_commercialization_milestone, reject_text=reject_finance_only_text)
+        from .narrative_business_groups import (
+            _operating_fact,
+            _commercialization_milestone,
+        )
+
+        return replace(
+            rules,
+            operating_facts=_operating_fact,
+            new_product_detector=_commercialization_milestone,
+            reject_text=reject_finance_only_text,
+        )
     if effective in {"0.7.0", "0.7.1"}:
-        return replace(rules, operating_facts=detect_business_fact, reject_text=reject_finance_only_text)
+        return replace(
+            rules,
+            operating_facts=detect_business_fact,
+            reject_text=reject_finance_only_text,
+        )
     return rules
 
 
 def _base_candidates(
     parsed: NarrativeParseResult,
-    *, selector_version: str | None = None,
+    *,
+    selector_version: str | None = None,
 ) -> tuple[list[EvidenceCandidate], int]:
     candidates: list[EvidenceCandidate] = []
     dropped_financial = 0
     rules = _candidate_rules(selector_version=selector_version)
     for unit in parsed.units:
-        unit_rules = (replace(rules, operating_facts=detect_business_fact)
-            if rules.new_product_detector and (unit.unit_kind == "pdf_table_row"
-                or unit.unit_kind.endswith("_table_cell")) else rules)
+        unit_rules = (
+            replace(rules, operating_facts=detect_business_fact)
+            if rules.new_product_detector
+            and (
+                unit.unit_kind == "pdf_table_row"
+                or unit.unit_kind.endswith("_table_cell")
+            )
+            else rules
+        )
         assessment = assess_unit(unit, unit_rules)
         if assessment.dropped_financial:
             dropped_financial += 1
@@ -1580,7 +2137,9 @@ def _minimal_matching_unit_windows(
             if pattern.search("".join(pieces)):
                 matches.add((start, end))
                 break
-    minimal = [candidate for candidate in matches if _window_is_minimal(candidate, matches)]
+    minimal = [
+        candidate for candidate in matches if _window_is_minimal(candidate, matches)
+    ]
     return tuple(sorted(minimal, key=lambda item: (item[0], item[1])))
 
 
@@ -1588,9 +2147,7 @@ def _window_is_minimal(
     candidate: tuple[int, int], matches: set[tuple[int, int]]
 ) -> bool:
     return not any(
-        other != candidate
-        and candidate[0] <= other[0]
-        and other[1] <= candidate[1]
+        other != candidate and candidate[0] <= other[0] and other[1] <= candidate[1]
         for other in matches
     )
 
@@ -1610,7 +2167,9 @@ def select_narrative_evidence(
     route = route_document(
         matching_text(title), existing_kind=existing_kind, max_selected=max_selected
     )
-    candidates, dropped_financial = _base_candidates(parsed, selector_version=effective_version)
+    candidates, dropped_financial = _base_candidates(
+        parsed, selector_version=effective_version
+    )
     selection_group_ids: dict[str, str] = {}
 
     # PDF layout extraction often separates one logical sentence into several
@@ -1651,7 +2210,9 @@ def select_narrative_evidence(
             quantified_market_coverage_target=_QUANTIFIED_MARKET_COVERAGE_TARGET,
             permit_milestone=_PERMIT_ACQUIRED_MILESTONE,
             new_product_milestone=_NEW_PRODUCT_COMMERCIALIZATION,
-            new_product_detector=_candidate_rules(selector_version=effective_version).new_product_detector,
+            new_product_detector=_candidate_rules(
+                selector_version=effective_version
+            ).new_product_detector,
             project_rationale=_PROJECT_RATIONALE_SIGNAL,
             downstream_extension=_DOWNSTREAM_BUSINESS_EXTENSION,
             project_plan=_PROJECT_PLAN,
@@ -1681,26 +2242,43 @@ def select_narrative_evidence(
         ),
     )
     projects = enrich_fundraising_table_context(
-        parsed.units, pdf_groups, initial_candidates=neighbors.candidates,
+        parsed.units,
+        pdf_groups,
+        initial_candidates=neighbors.candidates,
         initial_group_ids=neighbors.group_ids,
     )
     previous_ids = {candidate.unit.unit_id for candidate in neighbors.candidates}
     dropped_financial -= sum(
-        assess_unit(candidate.unit, _candidate_rules(selector_version=effective_version)).dropped_financial
-        for candidate in projects.candidates if candidate.unit.unit_id not in previous_ids
+        assess_unit(
+            candidate.unit, _candidate_rules(selector_version=effective_version)
+        ).dropped_financial
+        for candidate in projects.candidates
+        if candidate.unit.unit_id not in previous_ids
     )
     final_candidates = projects.candidates
     final_group_ids = projects.group_ids
     excluded_ids = enriched.excluded_context_unit_ids
     if effective_version in {"0.7.0", "0.7.1", "0.8.0"}:
-        final_candidates = tuple(candidate for candidate in final_candidates
-            if not reject_finance_only_text(candidate.unit.raw_text))
-        group_options = {"respect_native_structure": effective_version in {"0.7.1", "0.8.0"}}
+        final_candidates = tuple(
+            candidate
+            for candidate in final_candidates
+            if not reject_finance_only_text(candidate.unit.raw_text)
+        )
+        group_options = {
+            "respect_native_structure": effective_version in {"0.7.1", "0.8.0"}
+        }
         if effective_version == "0.8.0":
             group_options["preserve_operating_context"] = True
-        business = enrich_business_groups(parsed.units, initial_candidates=final_candidates,
-            initial_group_ids=final_group_ids, rules=_candidate_rules(selector_version=effective_version),
-            atomic_owners=enriched.atomic_owners if effective_version=="0.8.0" else (), **group_options)
+        business = enrich_business_groups(
+            parsed.units,
+            initial_candidates=final_candidates,
+            initial_group_ids=final_group_ids,
+            rules=_candidate_rules(selector_version=effective_version),
+            atomic_owners=enriched.atomic_owners
+            if effective_version == "0.8.0"
+            else (),
+            **group_options,
+        )
         final_candidates = business.candidates
         final_group_ids = business.group_ids
         if effective_version == "0.8.0":
@@ -1714,7 +2292,9 @@ def select_narrative_evidence(
         heading_pattern=_HEADING_ONLY,
         dropped_financial_count=dropped_financial,
         excluded_context_unit_ids=excluded_ids,
-        budget_policy="semantic_coverage/1" if effective_version == "0.8.0" else "legacy",
+        budget_policy="semantic_coverage/1"
+        if effective_version == "0.8.0"
+        else "legacy",
     )
 
 
@@ -1728,7 +2308,10 @@ def validate_summary_draft(
 ) -> None:
     """Validate citations and roles; this is not a semantic truth review."""
     validate_summary_identity(
-        draft, source_id=source_id, source_sha256=source_sha256, language=language,
+        draft,
+        source_id=source_id,
+        source_sha256=source_sha256,
+        language=language,
     )
     known = {span.span_id: span for span in evidence_spans}
     if not draft.claims:
@@ -1741,7 +2324,11 @@ def validate_summary_draft(
 
 
 def validate_summary_identity(
-    draft: SourceSummaryDraft, *, source_id: str, source_sha256: str, language: str,
+    draft: SourceSummaryDraft,
+    *,
+    source_id: str,
+    source_sha256: str,
+    language: str,
 ) -> None:
     """Check the whole-draft binding before inspecting recoverable claims."""
     if draft.source_id != source_id or draft.source_sha256 != source_sha256:
@@ -1763,19 +2350,30 @@ def validate_summary_claim(
     _validate_claim_roles(claim, known)
 
 
-def _validate_claim_roles(claim: SummaryClaim, known: Mapping[str, EvidenceSpan]) -> None:
+def _validate_claim_roles(
+    claim: SummaryClaim, known: Mapping[str, EvidenceSpan]
+) -> None:
     roles = {
         known[evidence_id].structured_value.get("source_role", "unknown")
         for evidence_id in claim.evidence_ids
     }
-    if claim.claim_type == "company_statement" and not roles <= {"company_filing", "management"}:
-        raise SummaryValidationError("non-company evidence cannot support a company statement")
+    if claim.claim_type == "company_statement" and not roles <= {
+        "company_filing",
+        "management",
+    }:
+        raise SummaryValidationError(
+            "non-company evidence cannot support a company statement"
+        )
     if claim.claim_type == "analyst_question" and (
         not roles or not roles <= {"analyst", "investor_question"}
     ):
-        raise SummaryValidationError("analyst-question claims must cite question evidence only")
+        raise SummaryValidationError(
+            "analyst-question claims must cite question evidence only"
+        )
     if claim.claim_type == "analyst_question" and claim.modality != "question":
-        raise SummaryValidationError("analyst-question claims must preserve question modality")
+        raise SummaryValidationError(
+            "analyst-question claims must preserve question modality"
+        )
 
 
 def project_summary_quality(

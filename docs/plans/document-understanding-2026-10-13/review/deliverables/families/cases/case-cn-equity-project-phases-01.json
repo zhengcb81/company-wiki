@@ -39,7 +39,12 @@
         "page": 61,
         "text": "建设期两期，新建厂房为一期，老厂区改建为二期。一期2019 年1 月拿地，2020 年12 月建成厂房，2021 年1 月一期建成投产。",
         "role": "fundraising",
-        "hints": {"heading_path": ["募集资金投资项目", "项目实施进度"]}
+        "hints": {
+          "heading_path": [
+            "募集资金投资项目",
+            "项目实施进度"
+          ]
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +57,12 @@
         "page": 61,
         "text": "建设地点  海盐县武原镇海兴东路68 号老厂区及古荡河对岸新厂区  主要产品  智能刀具、电子化信息化在线测量系统以及数控精密装备等智能装",
         "role": "fundraising",
-        "hints": {"heading_path": ["募集资金投资项目", "项目基本情况"]}
+        "hints": {
+          "heading_path": [
+            "募集资金投资项目",
+            "项目基本情况"
+          ]
+        }
       },
       {
         "unit_id": "u3",
@@ -65,7 +75,12 @@
         "page": 62,
         "text": "1、项目实施主体  本项目由恒锋工具负责实施。",
         "role": "fundraising",
-        "hints": {"heading_path": ["募集资金投资项目", "项目实施主体"]}
+        "hints": {
+          "heading_path": [
+            "募集资金投资项目",
+            "项目实施主体"
+          ]
+        }
       }
     ]
   },
@@ -79,7 +94,13 @@
         "id": "f1-project-package-binding",
         "objective": "项目断言的整包绑定",
         "importance": "critical",
-        "any_support_sets": [["u1", "u2", "u3"]],
+        "any_support_sets": [
+          [
+            "u1",
+            "u2",
+            "u3"
+          ]
+        ],
         "must_preserve": [
           "实施主体：发行人（工具制造主体）",
           "地点：老厂区及对岸新厂区（分期）",
@@ -89,11 +110,15 @@
           "不得把一期时点当二期进度",
           "不得把该项目的主体/地点/时点与其他募投项目拼接",
           "“建成投产”不等于达产或满产"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["实际执行进度（超出本文件范围）", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "实际执行进度（超出本文件范围）",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {
@@ -117,6 +142,8 @@
     "period": "2021年1月（一期建成投产）",
     "condition": "二期在一期完成后启动"
   },
-  "expected_missing_slots": ["quantity"],
+  "expected_missing_slots": [
+    "quantity"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

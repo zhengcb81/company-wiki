@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-facet-spec/1",
   "id": "mechanism_subscription_consumption",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "business_questions": [
     "收入引擎是订阅（席位/期限/续费）还是消费（用量/预付消耗），两者如何拆分",
     "订阅侧指标（剩余履约义务、递延收入、续费率、席位数）与消费侧指标（用量增长、消耗额）分别如何变化",
@@ -158,7 +158,8 @@
     "公司明确否认某口径解读时按否定作用域保存",
     "未读取到指标表格/脚注时标读取缺口（unread/deferred），不留半截口径",
     "订阅/消费财务数字属 correctness_if_emitted：不要求选，选了必须带口径与期间",
-    "无相关机制内容的文档允许合法退出"
+    "无相关机制内容的文档允许合法退出",
+    "Consumer是消费客群，不证明按量消费consumption计费；须明确计费或用量证据，否则机制未披露。"
   ],
   "summary_focus": [
     "订阅与消费如何划分，各自指标是什么？",

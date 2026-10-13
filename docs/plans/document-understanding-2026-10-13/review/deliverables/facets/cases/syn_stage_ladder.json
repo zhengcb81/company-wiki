@@ -5,51 +5,99 @@
   "source": {
     "sample_id": "syn-stage-ladder-01",
     "source_sha256": null,
-    "origin": {"synthetic": true, "purpose": "第二曲线阶段语义正反配对（合成文本，不冒充任何公司事实）"},
+    "origin": {
+      "synthetic": true,
+      "purpose": "第二曲线阶段语义正反配对（合成文本，不冒充任何公司事实）"
+    },
     "local_binding_key": null
   },
   "observation": {
     "metadata": {
       "synthetic": true,
-      "mechanism_axes": ["manufacturing", "biopharma"],
+      "mechanism_axes": [
+        "manufacturing",
+        "biopharma"
+      ],
       "purpose": "阶段阶梯（开发→送样→验证→小批量→量产→规模化）与药物阶段（临床→申报→获批→商业化）的必要槽位与反例"
     },
     "units": [
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": 1, "exact_quote": "已完成客户送样，正在多家客户处进行验证测试"},
+        "anchor": {
+          "physical_page": 1,
+          "line": 1,
+          "exact_quote": "已完成客户送样，正在多家客户处进行验证测试"
+        },
         "page": 1,
         "text": "公司甲的新型电池材料X已完成客户送样，正在多家客户处进行验证测试，尚未形成批量订单。",
         "role": "business_update",
-        "hints": {"semantic_ids": ["semantic_stage_progression"], "facet_ids": ["facet_new_business"]}
+        "hints": {
+          "semantic_ids": [
+            "semantic_stage_progression"
+          ],
+          "facet_ids": [
+            "facet_new_business"
+          ]
+        }
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": 3, "exact_quote": "产线预计于2027年一季度投产，达产后年产能5,000吨"},
+        "anchor": {
+          "physical_page": 1,
+          "line": 3,
+          "exact_quote": "产线预计于2027年一季度投产，达产后年产能5,000吨"
+        },
         "page": 1,
         "text": "按照项目规划，产线预计于2027年一季度投产，达产后年产能5,000吨。",
         "role": "project_plan",
-        "hints": {"semantic_ids": ["semantic_stage_progression", "semantic_capacity_project"]}
+        "hints": {
+          "semantic_ids": [
+            "semantic_stage_progression",
+            "semantic_capacity_project"
+          ]
+        }
       },
       {
         "unit_id": "u3",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": 5, "exact_quote": "已完成II期临床入组，III期方案与监管沟通中"},
+        "anchor": {
+          "physical_page": 1,
+          "line": 5,
+          "exact_quote": "已完成II期临床入组，III期方案与监管沟通中"
+        },
         "page": 1,
         "text": "某创新药Y已完成II期临床入组，III期方案与监管沟通中；相关适应症尚未获批上市。",
         "role": "pipeline_update",
-        "hints": {"semantic_ids": ["semantic_stage_progression"], "mechanism_ids": ["mechanism_biopharma_cdmo"]}
+        "hints": {
+          "semantic_ids": [
+            "semantic_stage_progression"
+          ],
+          "mechanism_ids": [
+            "mechanism_biopharma_cdmo"
+          ]
+        }
       },
       {
         "unit_id": "u4",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": 7, "exact_quote": "目前仍处于客户验证阶段，具体情况请关注后续公告"},
+        "anchor": {
+          "physical_page": 1,
+          "line": 7,
+          "exact_quote": "目前仍处于客户验证阶段，具体情况请关注后续公告"
+        },
         "page": 1,
         "text": "问：听说X已经通过认证开始放量了？答：目前仍处于客户验证阶段，具体情况请关注后续公告。",
         "role": "qa_exchange",
-        "hints": {"semantic_ids": ["semantic_stage_progression"], "facet_ids": ["facet_risk_denial"]}
+        "hints": {
+          "semantic_ids": [
+            "semantic_stage_progression"
+          ],
+          "facet_ids": [
+            "facet_risk_denial"
+          ]
+        }
       }
     ]
   },
@@ -64,7 +112,11 @@
         "id": "f1",
         "objective": "材料X处于客户验证阶段（送样完成、验证进行中），未形成批量订单",
         "importance": "required_business",
-        "any_support_sets": [["u1"], ["u4"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "产品=新型电池材料X",
           "阶段=客户验证（送样已完成、验证进行中）",
@@ -80,7 +132,11 @@
         "id": "f2",
         "objective": "产线2027年一季度投产是规划/预计（计划语态），达产后年产能5,000吨带达产条件",
         "importance": "required_business",
-        "any_support_sets": [["u2"]],
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "语态=预计/规划（计划，非实际）",
           "时间=2027年一季度",
@@ -95,7 +151,11 @@
         "id": "f3",
         "objective": "创新药Y处于II期临床（入组完成、III期准备中），相关适应症尚未获批",
         "importance": "required_business",
-        "any_support_sets": [["u3"]],
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
         "must_preserve": [
           "产品/适应症=创新药Y及其相关适应症",
           "阶段=II期临床入组完成、III期方案与监管沟通中",
@@ -158,6 +218,10 @@
     "denominator": null,
     "condition": null
   },
-  "expected_missing_slots": ["modality", "period"],
-  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+  "expected_missing_slots": [
+    "modality",
+    "period"
+  ],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION",
+  "version": "1.1.0"
 }

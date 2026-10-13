@@ -39,7 +39,10 @@
         "page": null,
         "text": "Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations 23 Item 3. Quantitative and Qualitative Disclosures About Market Risk 30 Item 4. Controls and Procedures 30 PART II — OTHER INFORMATION",
         "role": "unknown",
-        "hints": {"unit_kind": "toc", "note": "目录：Part I 末尾 Item 2-4 后进入 PART II；Item 编号在 Part 内重复"}
+        "hints": {
+          "unit_kind": "toc",
+          "note": "目录：Part I 末尾 Item 2-4 后进入 PART II；Item 编号在 Part 内重复"
+        }
       }
     ]
   },
@@ -53,7 +56,11 @@
         "id": "f1-part-item-hierarchy",
         "objective": "10-Q 章节层级（Part/Item）不可混",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "Part I 内 Item 2 是 MD&A（页码23）",
           "PART II 从目录处开始，Item 编号在 Part 内重新计数",
@@ -63,11 +70,15 @@
           "不得把 Part I Item 2 与 Part II Item 2 合并成同一章节",
           "不得套用 10-K 的 Item 7 结构索引 10-Q",
           "不得以目录命中宣称已读 MD&A"
-        ]
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["正文 MD&A 内容（见 case-sec-10q-revenue-mechanism-02）", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "正文 MD&A 内容（见 case-sec-10q-revenue-mechanism-02）",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

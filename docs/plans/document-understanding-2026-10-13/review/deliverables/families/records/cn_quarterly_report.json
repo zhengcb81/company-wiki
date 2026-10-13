@@ -1,30 +1,63 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "cn_quarterly_report",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["cn_exchange"],
+    "regimes": [
+      "cn_exchange"
+    ],
     "forms": [],
     "family": "quarterly",
-    "purposes": ["periodic_review", "event_scan"],
-    "modifiers": {"extent": "full", "revision": "original"},
-    "carrier": ["pdf"],
-    "language": ["zh"]
+    "purposes": [
+      "periodic_review",
+      "event_scan"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf"
+    ],
+    "language": [
+      "zh"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "季度报告", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "季度报告",
+          "field": null
+        },
         "location": "cover",
         "reason": "A股季报封面标题形如《……年第X季度报告》"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "重要内容提示", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "重要内容提示",
+          "field": null
+        },
         "location": "body",
         "reason": "A股季报模板首节，支持季报识别"
       },
       {
-        "signal": {"kind": "metadata_equals", "value": "cn_exchange", "field": "regime"},
+        "signal": {
+          "kind": "metadata_equals",
+          "value": "cn_exchange",
+          "field": "regime"
+        },
         "location": "metadata",
         "reason": "A股披露制度；与标题/正文证据组合"
       }
@@ -39,31 +72,75 @@
   "sections": [
     {
       "role": "management_discussion",
-      "aliases": ["重要事项", "经营情况", "重要事项、经营情况"],
-      "heading_path": [["重要事项", "经营情况", "重要事项、经营情况"]],
+      "aliases": [
+        "重要事项",
+        "经营情况",
+        "重要事项、经营情况"
+      ],
+      "heading_path": [
+        [
+          "重要事项",
+          "经营情况",
+          "重要事项、经营情况"
+        ]
+      ],
       "priority": 1,
-      "questions": ["本期重要事项与变动原因中的业务信息"]
+      "questions": [
+        "本期重要事项与变动原因中的业务信息"
+      ]
     },
     {
       "role": "business",
-      "aliases": ["业务进展", "经营情况的其他重要信息", "其他"],
-      "heading_path": [["经营情况的其他重要信息", "其他", "三、其他"]],
+      "aliases": [
+        "业务进展",
+        "经营情况的其他重要信息",
+        "其他"
+      ],
+      "heading_path": [
+        [
+          "经营情况的其他重要信息",
+          "其他",
+          "三、其他"
+        ]
+      ],
       "priority": 2,
-      "questions": ["是否有产品验证、订单、项目等短业务叙述"]
+      "questions": [
+        "是否有产品验证、订单、项目等短业务叙述"
+      ]
     },
     {
       "role": "outlook",
-      "aliases": ["其他提醒事项", "需提醒投资者关注的其他重要信息"],
-      "heading_path": [["其他提醒事项", "需提醒投资者关注的关于公司报告期经营情况的其他重要信息"]],
+      "aliases": [
+        "其他提醒事项",
+        "需提醒投资者关注的其他重要信息"
+      ],
+      "heading_path": [
+        [
+          "其他提醒事项",
+          "需提醒投资者关注的关于公司报告期经营情况的其他重要信息"
+        ]
+      ],
       "priority": 2,
-      "questions": ["需提醒事项中是否有业务/经营事件"]
+      "questions": [
+        "需提醒事项中是否有业务/经营事件"
+      ]
     },
     {
       "role": "financial_notes",
-      "aliases": ["季度财务报表", "合并财务报表"],
-      "heading_path": [["季度财务报表", "财务报表"]],
+      "aliases": [
+        "季度财务报表",
+        "合并财务报表"
+      ],
+      "heading_path": [
+        [
+          "季度财务报表",
+          "财务报表"
+        ]
+      ],
       "priority": 3,
-      "questions": ["变动原因中的经营驱动解释"]
+      "questions": [
+        "变动原因中的经营驱动解释"
+      ]
     }
   ],
   "reading_questions": [
@@ -75,19 +152,30 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period"],
+      "slots": [
+        "subject",
+        "period"
+      ],
       "missing_behavior": "unknown",
       "reason": "季报是单季口径且通常未经审计，断言必须绑定主体与期间"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator"
+      ],
       "missing_behavior": "partial",
       "reason": "单季/累计/同比基期分开，数值缺口径不得引用"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "变动原因常带假设与限定语，必须随事实保留"
     }
@@ -109,8 +197,16 @@
   },
   "evidence_status": {
     "design": "verified",
-    "real_samples": ["case-cn-quarterly-business-01", "case-cn-quarterly-sparse-02"],
-    "missing_shapes": ["含重大经营事件的季报更多行业样本"]
+    "real_samples": [
+      "case-cn-quarterly-business-01",
+      "case-cn-quarterly-sparse-02"
+    ],
+    "missing_shapes": [
+      "含重大经营事件的季报更多行业样本"
+    ]
   },
-  "case_ids": ["case-cn-quarterly-business-01", "case-cn-quarterly-sparse-02"]
+  "case_ids": [
+    "case-cn-quarterly-business-01",
+    "case-cn-quarterly-sparse-02"
+  ]
 }

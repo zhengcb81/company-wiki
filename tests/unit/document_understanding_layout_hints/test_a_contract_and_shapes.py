@@ -27,6 +27,7 @@ from company_wiki.document_understanding.layout_hints import derive_layout_hints
 
 WIRE_KEYS = {
     "schema_version",
+    "feature_version",
     "source_ref",
     "unit_hints",
     "groups",
@@ -44,6 +45,7 @@ def test_output_is_du_layout_hints_wire() -> None:
     observation = load_case("heading_unnumbered_vs_sentence")
     result = derive_layout_hints(observation)
     assert result["schema_version"] == HINTS_SCHEMA
+    assert result["feature_version"] == "1.1.0"
     assert wire_keys(result) == WIRE_KEYS
     assert result["source_ref"] == observation["source_ref"]
     ids = all_unit_ids(observation)

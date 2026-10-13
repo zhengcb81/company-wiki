@@ -9,6 +9,7 @@ split a lane and are never forced into one.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from bisect import bisect_right
 
 from .contract import Page, Unit
 
@@ -26,7 +27,10 @@ def _in_edge_zone(unit: Unit) -> bool:
     """Running head/foot zone: never column evidence, even without repetition."""
     if not unit.page_height:
         return False
-    return unit.bbox[3] <= unit.page_height * 0.08 or unit.bbox[1] >= unit.page_height * 0.90
+    return (
+        unit.bbox[3] <= unit.page_height * 0.08
+        or unit.bbox[1] >= unit.page_height * 0.90
+    )
 
 
 def _usable(unit: Unit) -> bool:
@@ -38,36 +42,25 @@ def compute_cuts(units: list[Unit], page_width: float, budget) -> list[float]:
         return []
     gap_min = max(10.0, 0.02 * page_width)
     ordered = sorted(units, key=lambda u: (u.bbox[0], u.bbox[2], u.ordinal))
-    free_gaps: list[tuple[float, float]] = []
-    current_right = ordered[0].bbox[2]
-    for unit in ordered[1:]:
-        budget.charge(1)
-        if unit.bbox[0] > current_right + gap_min:
-            free_gaps.append((current_right, unit.bbox[0]))
-            current_right = unit.bbox[2]
+    islands = []
+    for unit in ordered:
+        budget.charge()
+        box = unit.bbox
+        if islands and box[0] <= islands[-1][1] + gap_min:
+            islands[-1][1] = max(islands[-1][1], box[2])
+            islands[-1][2] += 1
         else:
-            current_right = max(current_right, unit.bbox[2])
-
-    cuts: list[float] = []
-    for left, right in sorted(free_gaps, key=lambda gap: (gap[0] - gap[1], gap[0])):
-        candidate = cuts + [(left + right) / 2.0]
-        groups: dict = {}
-        for unit in usable_units(units):
-            bucket = 0
-            for cut in sorted(candidate):
-                if unit.bbox[0] >= cut:
-                    bucket += 1
-            groups.setdefault(bucket, []).append(unit)
-        if any(len(members) < 2 for members in groups.values()):
-            continue
-        crossing = [
-            unit
-            for unit in usable_units(units)
-            if any(unit.bbox[0] < cut < unit.bbox[2] for cut in candidate)
-        ]
-        if len(crossing) < max(1, len(usable_units(units)) // 4):
-            cuts = candidate
-    cuts.sort()
+            islands.append([box[0], box[2], 1])
+    cuts = []
+    pending = 0
+    remaining = len(ordered)
+    for current, next_island in zip(islands, islands[1:]):
+        budget.charge()
+        pending += current[2]
+        remaining -= current[2]
+        if pending >= 2 and remaining >= 2:
+            cuts.append((current[1] + next_island[0]) / 2.0)
+            pending = 0
     return cuts
 
 
@@ -75,7 +68,9 @@ def usable_units(units: list[Unit]) -> list[Unit]:
     return [unit for unit in units if _usable(unit)]
 
 
-def detect_document_lanes(page_units: list[tuple[Page, list[Unit]]], budget) -> list[LaneLayout]:
+def detect_document_lanes(
+    page_units: list[tuple[Page, list[Unit]]], budget
+) -> list[LaneLayout]:
     pooled = [unit for _page, units in page_units for unit in units if _usable(unit)]
     widths = [page.width for page, _units in page_units if page.width]
     page_width = max(widths) if widths else 595.0
@@ -86,18 +81,19 @@ def detect_document_lanes(page_units: list[tuple[Page, list[Unit]]], budget) -> 
         layout = LaneLayout(cuts=list(cuts))
         candidates = [unit for unit in units if _usable(unit)]
         if not cuts:
-            layout.basis = ["no_column_gap" if len(candidates) >= 4 else "insufficient_geometry"]
+            layout.basis = [
+                "no_column_gap" if len(candidates) >= 4 else "insufficient_geometry"
+            ]
             layouts.append(layout)
             continue
         for unit in candidates:
             budget.charge(1)
-            if any(unit.bbox[0] < cut < unit.bbox[2] for cut in cuts):
+            left = bisect_right(cuts, unit.bbox[0])
+            right = bisect_right(cuts, unit.bbox[2] - 1e-9)
+            if right > left:
                 layout.spanning.append(unit)
                 continue
-            bucket = 0
-            for cut in cuts:
-                if unit.bbox[0] >= cut:
-                    bucket += 1
+            bucket = left
             while len(layout.lanes) <= bucket:
                 layout.lanes.append([])
             layout.lanes[bucket].append(unit)
@@ -107,14 +103,14 @@ def detect_document_lanes(page_units: list[tuple[Page, list[Unit]]], budget) -> 
             if members
         ]
         layout.basis = ["lane_gap", "document_wide_cuts"]
-        if _parallel_bands(layout):
+        if _parallel_bands(layout, budget):
             layout.basis.append("parallel_bands")
         layout.confidence = "high" if len(cuts) == 1 else "medium"
         layouts.append(layout)
     return layouts
 
 
-def _parallel_bands(layout: LaneLayout) -> bool:
+def _parallel_bands(layout: LaneLayout, budget) -> bool:
     if len(layout.lanes) != 2:
         return False
 
@@ -125,8 +121,15 @@ def _parallel_bands(layout: LaneLayout) -> bool:
     right = tops(layout.lanes[1])
     if not left or not right:
         return False
+    left.sort()
+    right.sort()
     shared = 0
+    cursor = 0
     for value in left:
-        if any(abs(value - other) <= 6.0 for other in right):
+        budget.charge()
+        while cursor < len(right) and right[cursor] < value - 6.0:
+            budget.charge()
+            cursor += 1
+        if cursor < len(right) and right[cursor] <= value + 6.0:
             shared += 1
     return shared >= max(1, int(0.5 * min(len(left), len(right))))

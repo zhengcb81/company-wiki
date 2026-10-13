@@ -1,3 +1,7 @@
+## ROOT最新入口 — 2026-10-13 DU2候选模块接收
+
+[文档理解升级最新签收](../document-understanding-2026-10-13/du2-reception/acceptance.md)：1135联合PASS、4PDF658证据span验真、同源10Q6项PASS；原件/配置/测试环境保持。三最新作者提交与ROOT共用根因修复接收，正常发布中；精确主线SHA/CI写子计划publication.json。没有启用生产默认LLM摘要或签G2/G4/G5。优先继续B8旧selector硬编码/价值预算→B10–11正式消费与局部缓存→C12–15真实模型和原/新公司审查；无新许可/canary链。下方旧并线计数为历史。
+
 ## ROOT 当前入口 — 2026-10-11
 
 当前状态、已发布SHA与下一步统一见 [ROOT接收状态](../cross-market-rf-e2e-2026-10-08/phase6/w06_parallel_verification_2026-10-11/ROOT-reception-status.md)，优先于本文旧状态。

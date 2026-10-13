@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-facet-spec/1",
   "id": "facet_operating_metrics",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "business_questions": [
     "经营指标的定义与口径是什么：存量/流量、分母、期间、地域、直营/加盟/合伙人范围",
     "指标变化背后的经营解释是什么（谁在解释、依据什么）",
@@ -59,12 +59,11 @@
       "slots": [
         "quantity",
         "unit",
-        "denominator",
         "period"
       ],
       "required_when": "quantity_emitted",
       "missing_behavior": "unknown",
-      "reason": "只有输出数量才要求单位/分母；指标脱离口径后含义翻转（总数≠净增、用户≠付费客户）"
+      "reason": "只有输出数量才要求单位/分母；指标脱离口径后含义翻转（总数≠净增、用户≠付费客户）；普通计数保留范围口径，不强制数学分母。"
     },
     {
       "assertion": "断言直营/加盟/合伙人/代理等范围内的指标时保留范围与地域",

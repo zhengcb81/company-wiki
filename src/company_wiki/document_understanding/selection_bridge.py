@@ -57,6 +57,27 @@ def context_groups(packages: Mapping[str, Any], texts: Mapping[str, str]) -> lis
             for package in packages.get("packages", ())]
 
 
+
+def build_context_graph(packages: Mapping[str, Any], texts: Mapping[str, str], *,
+                        max_work_units: int = 2000000) -> dict[str, Any]:
+    """Index the shared original dependency graph once for selection and sending."""
+    if isinstance(max_work_units, bool) or not isinstance(max_work_units, int) or max_work_units < 0:
+        raise ValueError("max_work_units must be a non-negative integer")
+    items = list(packages.get("packages", ()))
+    groups = context_groups(packages, texts)
+    index: dict[str, list[int]] = {}
+    work = 0
+    for i, group in enumerate(groups):
+        for uid in group["member_unit_ids"]:
+            if work >= max_work_units:
+                return {"items": items, "groups": groups, "index": index, "work_units": work,
+                        "complete": False, "non_selectable": packages.get("non_selectable_unit_ids", ())}
+            work += 1
+            index.setdefault(uid, []).append(i)
+    return {"items": items, "groups": groups, "index": index, "work_units": work,
+            "complete": True, "non_selectable": packages.get("non_selectable_unit_ids", ())}
+
+
 def dependency_closure(
     selected_unit_ids: Sequence[str],
     packages: Mapping[str, Any],
@@ -65,6 +86,7 @@ def dependency_closure(
     max_added: int = 64,
     include_members: bool = False,
     max_work_units: int = 2000000,
+    context_graph: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Compute a bounded fixed point; package ranking cannot change dependencies.
 
@@ -82,24 +104,16 @@ def dependency_closure(
     selected = list(dict.fromkeys(uid for uid in selected_unit_ids if uid))
     present = set(selected)
     queue = deque(selected)
-    non_selectable = set(packages.get("non_selectable_unit_ids", ()))
-    index: dict[str, list[int]] = {}
-    items = list(packages.get("packages", ()))
-    groups = context_groups(packages, texts)
+    graph = context_graph if context_graph is not None else build_context_graph(packages, texts, max_work_units=max_work_units)
+    non_selectable = set(graph["non_selectable"])
+    index = graph["index"]
+    items = graph["items"]
+    groups = graph["groups"]
     processed: set[int] = set()
     diagnostics: list[dict[str, Any]] = []
     added: list[str] = []
-    work = 0
-    limited = False
-    for i, package in enumerate(items):
-        for uid in dict.fromkeys(package.get("member_unit_ids", ())):
-            work += 1
-            if work > max_work_units:
-                limited = True
-                break
-            index.setdefault(uid, []).append(i)
-        if limited:
-            break
+    work = graph["work_units"]
+    limited = not graph["complete"] or work > max_work_units
     while queue and not limited:
         uid = queue.popleft()
         touched = [i for i in index.get(uid, ()) if i not in processed]

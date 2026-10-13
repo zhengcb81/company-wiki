@@ -30,29 +30,53 @@
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 1, "exact_quote": "[SYNTHETIC] Item 2.02 Results of Operations and Financial Condition."},
+        "anchor": {
+          "physical_page": null,
+          "line": 1,
+          "exact_quote": "[SYNTHETIC] Item 2.02 Results of Operations and Financial Condition."
+        },
         "page": null,
         "text": "[SYNTHETIC] Item 2.02 Results of Operations and Financial Condition.",
         "role": "administrative",
-        "hints": {"synthetic": true, "scope": "main_filing"}
+        "hints": {
+          "synthetic": true,
+          "scope": "main_filing"
+        }
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 2, "exact_quote": "[SYNTHETIC] Exhibit 99.1 press release (separate reading scope)."},
+        "anchor": {
+          "physical_page": null,
+          "line": 2,
+          "exact_quote": "[SYNTHETIC] Exhibit 99.1 press release (separate reading scope)."
+        },
         "page": null,
         "text": "[SYNTHETIC] Exhibit 99.1 press release (separate reading scope).",
         "role": "business",
-        "hints": {"synthetic": true, "scope": "attachment", "relation": "attachment_of:u1"}
+        "hints": {
+          "synthetic": true,
+          "scope": "attachment",
+          "relation": "attachment_of:u1"
+        }
       },
       {
         "unit_id": "u3",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 3, "exact_quote": "[SYNTHETIC] Exhibit 99.2 earnings presentation with image charts (dependencies not fetched)."},
+        "anchor": {
+          "physical_page": null,
+          "line": 3,
+          "exact_quote": "[SYNTHETIC] Exhibit 99.2 earnings presentation with image charts (dependencies not fetched)."
+        },
         "page": null,
         "text": "[SYNTHETIC] Exhibit 99.2 earnings presentation with image charts (dependencies not fetched).",
         "role": "operating_metrics",
-        "hints": {"synthetic": true, "scope": "attachment", "relation": "attachment_of:u1", "images_missing": true}
+        "hints": {
+          "synthetic": true,
+          "scope": "attachment",
+          "relation": "attachment_of:u1",
+          "images_missing": true
+        }
       }
     ]
   },
@@ -66,24 +90,45 @@
         "id": "f1-container-scope-split",
         "objective": "容器主件与附件的读取范围分离",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["主件只载明事项（Item 2.02）与附件清单", "附件 u2/u3 各自独立读取范围"],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "主件只载明事项（Item 2.02）与附件清单",
+          "附件 u2/u3 各自独立读取范围"
+        ],
         "must_not_assert": [
           "只读主件不得声称读过附件内容",
           "外链/缺附件不得凭空生成 SourceRef 或编造内容"
-        ]
+        ],
+        "target_kind": "disposition_context"
       },
       {
         "id": "f2-image-dependency-honesty",
         "objective": "图表依赖缺失时的诚实表达",
         "importance": "normal",
-        "any_support_sets": [["u3"]],
-        "must_preserve": ["附件含图片图表且依赖未取到（images_missing）", "处置：needs_source/partial 并记缺口"],
-        "must_not_assert": ["不得猜图上数字或宣称完整读取"]
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
+        "must_preserve": [
+          "附件含图片图表且依赖未取到（images_missing）",
+          "处置：needs_source/partial 并记缺口"
+        ],
+        "must_not_assert": [
+          "不得猜图上数字或宣称完整读取"
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "needs_source",
-    "not_evaluated": ["真实 8-K 全流程（缺样）", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "真实 8-K 全流程（缺样）",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

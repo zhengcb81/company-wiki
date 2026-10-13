@@ -1,35 +1,76 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "secondary_research",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["other", "unknown"],
+    "regimes": [
+      "other",
+      "unknown"
+    ],
     "forms": [],
     "family": "unknown",
-    "purposes": ["secondary_context"],
-    "modifiers": {"extent": "unknown", "revision": "unknown"},
-    "carrier": ["pdf", "html", "md", "txt"],
-    "language": ["zh", "en"]
+    "purposes": [
+      "secondary_context"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf",
+      "html",
+      "md",
+      "txt"
+    ],
+    "language": [
+      "zh",
+      "en"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "证券研究报告", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "证券研究报告",
+          "field": null
+        },
         "location": "cover",
         "reason": "券商研报标题短语，提示第三方研究来源"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "研究员", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "研究员",
+          "field": null
+        },
         "location": "body",
         "reason": "研报署名区短语，来源角色为研究员"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "政策", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "政策",
+          "field": null
+        },
         "location": "cover",
         "reason": "政策文件标题短语，发文主体为监管/政府"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "ESG报告", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "ESG报告",
+          "field": null
+        },
         "location": "cover",
         "reason": "ESG/可持续发展报告标题短语，公司披露但口径特殊"
       }
@@ -45,31 +86,85 @@
   "sections": [
     {
       "role": "business",
-      "aliases": ["核心观点", "公司分析", "行业分析", "事件点评"],
-      "heading_path": [["核心观点", "公司分析", "行业分析", "事件点评", "主要内容"]],
+      "aliases": [
+        "核心观点",
+        "公司分析",
+        "行业分析",
+        "事件点评"
+      ],
+      "heading_path": [
+        [
+          "核心观点",
+          "公司分析",
+          "行业分析",
+          "事件点评",
+          "主要内容"
+        ]
+      ],
       "priority": 1,
-      "questions": ["与业务相关的新事实、约束或机会", "内容的作者/发文主体是谁"]
+      "questions": [
+        "与业务相关的新事实、约束或机会",
+        "内容的作者/发文主体是谁"
+      ]
     },
     {
       "role": "industry",
-      "aliases": ["行业研究", "政策解读", "监管", "市场规模"],
-      "heading_path": [["行业研究", "政策解读", "监管", "市场规模"]],
+      "aliases": [
+        "行业研究",
+        "政策解读",
+        "监管",
+        "市场规模"
+      ],
+      "heading_path": [
+        [
+          "行业研究",
+          "政策解读",
+          "监管",
+          "市场规模"
+        ]
+      ],
       "priority": 2,
-      "questions": ["政策/行业事实的发文主体、适用范围与生效期"]
+      "questions": [
+        "政策/行业事实的发文主体、适用范围与生效期"
+      ]
     },
     {
       "role": "outlook",
-      "aliases": ["预测", "展望", "投资建议", "盈利预测"],
-      "heading_path": [["预测", "展望", "投资建议", "盈利预测"]],
+      "aliases": [
+        "预测",
+        "展望",
+        "投资建议",
+        "盈利预测"
+      ],
+      "heading_path": [
+        [
+          "预测",
+          "展望",
+          "投资建议",
+          "盈利预测"
+        ]
+      ],
       "priority": 3,
-      "questions": ["预测与建议标注为第三方观点，不当公司承诺"]
+      "questions": [
+        "预测与建议标注为第三方观点，不当公司承诺"
+      ]
     },
     {
       "role": "risk",
-      "aliases": ["风险提示", "不确定性"],
-      "heading_path": [["风险提示", "不确定性"]],
+      "aliases": [
+        "风险提示",
+        "不确定性"
+      ],
+      "heading_path": [
+        [
+          "风险提示",
+          "不确定性"
+        ]
+      ],
       "priority": 2,
-      "questions": ["第三方提示的风险与公司披露风险的来源区分"]
+      "questions": [
+        "第三方提示的风险与公司披露风险的来源区分"
+      ]
     }
   ],
   "reading_questions": [
@@ -81,25 +176,41 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period", "role"],
+      "slots": [
+        "subject",
+        "period",
+        "role"
+      ],
       "missing_behavior": "unknown",
       "reason": "第三方内容必须绑定作者/发文主体、时点与角色"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator"
+      ],
       "missing_behavior": "partial",
       "reason": "第三方统计/预测数值必须带作者、口径与实际/预测标记"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "预测与政策适用条件随内容保留"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "stage", "condition"],
+      "slots": [
+        "project",
+        "stage",
+        "condition"
+      ],
       "missing_behavior": "partial",
       "reason": "项目相关表述保留阶段与条件，并回链公司披露"
     }
@@ -127,5 +238,7 @@
       "第三方转引与公司披露的回链验证未做"
     ]
   },
-  "case_ids": ["case-synth-secondary-01"]
+  "case_ids": [
+    "case-synth-secondary-01"
+  ]
 }

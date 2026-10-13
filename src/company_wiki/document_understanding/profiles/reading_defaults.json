@@ -1,0 +1,743 @@
+{
+  "schema_version": "du-reading-defaults/1",
+  "legacy_bindings": [
+    {
+      "profile_id": "cn_annual",
+      "family": "annual",
+      "regime": "cn_exchange",
+      "family_ids": [
+        "cn_annual_report"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "project",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "administrative": [
+          "第一节 释义",
+          "公司简介",
+          "公司资料",
+          "释义"
+        ],
+        "operating_metrics": [
+          "主要财务指标",
+          "主要会计数据和财务指标",
+          "非经常性损益项目",
+          "财务指标"
+        ],
+        "management_discussion": [
+          "第三节 管理层讨论与分析"
+        ],
+        "business": [
+          "公司业务",
+          "研发投入",
+          "技术与研发"
+        ],
+        "industry": [
+          "行业格局",
+          "所处行业",
+          "行业发展趋势"
+        ],
+        "outlook": [
+          "未来计划",
+          "展望"
+        ],
+        "risk": [
+          "重大风险提示",
+          "风险提示"
+        ],
+        "financial_notes": [
+          "财务报告",
+          "财务报表",
+          "重要事项",
+          "公司治理"
+        ]
+      }
+    },
+    {
+      "profile_id": "cn_interim",
+      "family": "interim",
+      "regime": "cn_exchange",
+      "family_ids": [
+        "cn_interim_report"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "project",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "administrative": [
+          "第一节 释义",
+          "公司简介",
+          "公司资料",
+          "释义"
+        ],
+        "operating_metrics": [
+          "主要财务指标",
+          "主要会计数据和财务指标",
+          "非经常性损益项目",
+          "财务指标"
+        ],
+        "management_discussion": [
+          "第三节 管理层讨论与分析"
+        ],
+        "business": [
+          "公司业务",
+          "业务概要",
+          "研发投入",
+          "技术与研发"
+        ],
+        "industry": [
+          "行业情况",
+          "行业格局",
+          "所处行业",
+          "行业发展趋势"
+        ],
+        "outlook": [
+          "未来发展",
+          "未来计划",
+          "展望"
+        ],
+        "risk": [
+          "重大风险提示",
+          "风险提示"
+        ],
+        "financial_notes": [
+          "财务报告",
+          "财务报表",
+          "重要事项",
+          "公司治理"
+        ]
+      }
+    },
+    {
+      "profile_id": "cn_quarterly",
+      "family": "quarterly",
+      "regime": "cn_exchange",
+      "family_ids": [
+        "cn_quarterly_report"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "administrative": [
+          "第一节 释义",
+          "公司简介",
+          "公司资料",
+          "释义"
+        ],
+        "operating_metrics": [
+          "主要财务指标",
+          "主要会计数据和财务指标",
+          "非经常性损益项目",
+          "财务指标"
+        ],
+        "management_discussion": [
+          "重要内容提示",
+          "其他提醒事项",
+          "经营情况说明",
+          "变动原因"
+        ],
+        "business": [
+          "主营业务",
+          "经营情况",
+          "产品进展"
+        ],
+        "risk": [
+          "风险提示",
+          "重大风险提示"
+        ],
+        "financial_notes": [
+          "主要财务数据",
+          "合并资产负债表",
+          "合并利润表"
+        ]
+      }
+    },
+    {
+      "profile_id": "hk_periodic",
+      "family": "annual",
+      "regime": "hkex",
+      "family_ids": [
+        "hk_annual_report",
+        "hk_interim_report"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "project",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "management_discussion": [
+          "management discussion and analysis"
+        ],
+        "business": [
+          "business review and outlook",
+          "業務回顧及展望",
+          "业务回顾及展望",
+          "business review"
+        ],
+        "outlook": [
+          "recent developments after the reporting period",
+          "報告期後事項",
+          "报告期后事项",
+          "business outlook"
+        ],
+        "operating_metrics": [
+          "store network",
+          "financial performance highlights",
+          "財務表現摘要",
+          "主要财务指标",
+          "主要会计数据和财务指标",
+          "非经常性损益项目",
+          "财务指标"
+        ],
+        "risk": [
+          "principal risks",
+          "risk management",
+          "風險管理"
+        ],
+        "financial_notes": [
+          "directors' report",
+          "董事會報告",
+          "corporate governance report",
+          "企業管治報告",
+          "independent auditor's report"
+        ],
+        "administrative": [
+          "第一节 释义",
+          "公司简介",
+          "公司资料",
+          "释义"
+        ]
+      }
+    },
+    {
+      "profile_id": "sec_10k",
+      "family": "annual",
+      "regime": "sec",
+      "family_ids": [
+        "sec_10k"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "business": [
+          "item 1. business",
+          "item 1 business",
+          "our segments"
+        ],
+        "risk": [
+          "item 1a. risk factors",
+          "item 1a risk factors"
+        ],
+        "management_discussion": [
+          "item 7. management's discussion and analysis",
+          "item 7 management's discussion and analysis"
+        ],
+        "operating_metrics": [
+          "remaining performance obligations",
+          "azure revenue",
+          "segment revenue"
+        ],
+        "financial_notes": [
+          "item 8. financial statements",
+          "notes to financial statements"
+        ]
+      }
+    },
+    {
+      "profile_id": "sec_10q",
+      "family": "quarterly",
+      "regime": "sec",
+      "family_ids": [
+        "sec_10q"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "management_discussion": [
+          "item 2. management's discussion and analysis",
+          "item 2 management's discussion and analysis"
+        ],
+        "business": [
+          "our business",
+          "reportable segment",
+          "one operating segment"
+        ],
+        "operating_metrics": [
+          "subscriptions",
+          "deferred revenues",
+          "revenues"
+        ],
+        "risk": [
+          "part ii",
+          "item 1a. risk factors",
+          "risk factors"
+        ],
+        "financial_notes": [
+          "item 1. financial statements",
+          "condensed consolidated"
+        ]
+      }
+    },
+    {
+      "profile_id": "sec_20f",
+      "family": "annual",
+      "regime": "sec",
+      "family_ids": [
+        "sec_20f"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "business": [
+          "item 4. information on the company",
+          "item 4. information",
+          "b. business overview",
+          "business overview"
+        ],
+        "management_discussion": [
+          "item 5. operating and financial review",
+          "item 5. operating",
+          "operating and financial review"
+        ],
+        "risk": [
+          "item 3. key information",
+          "item 3. key information—d. risk factors",
+          "d. risk factors"
+        ],
+        "operating_metrics": [
+          "organizational structure",
+          "vie subsidiaries"
+        ],
+        "financial_notes": [
+          "item 18. financial statements",
+          "consolidated financial statements"
+        ]
+      }
+    },
+    {
+      "profile_id": "prospectus",
+      "family": "prospectus",
+      "regime": "cn_exchange",
+      "family_ids": [
+        "prospectus_cn",
+        "prospectus_hk",
+        "prospectus_us"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "project",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "fundraising": [
+          "本次募集资金运用",
+          "募集资金使用",
+          "募集资金使用金额",
+          "项目投资计划",
+          "项目建设周期",
+          "项目建设用地",
+          "项目投资回报",
+          "项目备案",
+          "所得款项用途",
+          "募投项目",
+          "future plans and use of proceeds",
+          "未來計劃及所得款項用途",
+          "全球发售",
+          "Selling Stockholders",
+          "Underwriting"
+        ],
+        "business": [
+          "主营业务",
+          "竞争优势",
+          "our business",
+          "Description of Business"
+        ],
+        "industry": [
+          "行业发展趋势",
+          "市场规模",
+          "industry overview",
+          "Market and Industry Data"
+        ],
+        "outlook": [
+          "未来发展规划",
+          "发展战略",
+          "未来计划"
+        ],
+        "risk": [
+          "重大事项提示",
+          "风险提示",
+          "risk factors"
+        ],
+        "financial_notes": [
+          "管理层分析",
+          "财务报告",
+          "历史及公司架构",
+          "公司架构",
+          "歷史及公司架構",
+          "法規",
+          "法规",
+          "會計師報告",
+          "会计师报告",
+          "Notes to Financial Statements"
+        ]
+      }
+    },
+    {
+      "profile_id": "offering",
+      "family": "offering",
+      "regime": "cn_exchange",
+      "family_ids": [
+        "offering_cn_equity",
+        "offering_cn_convertible",
+        "offering_feasibility",
+        "project_change_notice"
+      ],
+      "semantic_units": [
+        "project",
+        "operating_table",
+        "risk",
+        "paragraph_event",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "fundraising": [
+          "本次募集资金运用",
+          "募集资金使用",
+          "募集资金使用金额",
+          "项目投资计划",
+          "项目建设周期",
+          "项目建设用地",
+          "项目投资回报",
+          "项目备案",
+          "所得款项用途",
+          "募投项目",
+          "future plans and use of proceeds",
+          "未來計劃及所得款項用途",
+          "所得款項用途",
+          "全球發售",
+          "全球发售",
+          "Use of Proceeds",
+          "Selling Stockholders",
+          "Underwriting"
+        ],
+        "business": [
+          "业务与技术",
+          "经营模式",
+          "竞争优势",
+          "業務",
+          "业务",
+          "our business",
+          "Business",
+          "Description of Business"
+        ],
+        "industry": [
+          "行业概览",
+          "行业情况",
+          "行业发展趋势",
+          "市场规模",
+          "行業概覽",
+          "industry overview",
+          "Market and Industry Data"
+        ],
+        "outlook": [
+          "未来发展规划",
+          "发展战略",
+          "未来计划"
+        ],
+        "risk": [
+          "重大事项提示",
+          "风险提示",
+          "風險因素",
+          "risk factors"
+        ],
+        "financial_notes": [
+          "财务会计信息",
+          "管理层分析",
+          "财务报告",
+          "历史及公司架构",
+          "公司架构",
+          "歷史及公司架構",
+          "法規",
+          "法规",
+          "會計師報告",
+          "会计师报告",
+          "Notes to Financial Statements"
+        ],
+        "management_discussion": [
+          "Management's Discussion and Analysis"
+        ]
+      }
+    },
+    {
+      "profile_id": "investor_qa",
+      "family": "investor_qa",
+      "regime": "cn_exchange",
+      "family_ids": [
+        "investor_qa_record"
+      ],
+      "semantic_units": [
+        "qa_exchange",
+        "paragraph_event",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "questions": [
+          "交流内容及具体问答记录",
+          "问：",
+          "互动易"
+        ],
+        "administrative": [
+          "投资者关系活动类别",
+          "形式",
+          "编号"
+        ],
+        "business": [
+          "主营业务"
+        ]
+      }
+    },
+    {
+      "profile_id": "earnings_call",
+      "family": "earnings_call",
+      "regime": "unknown",
+      "family_ids": [
+        "earnings_call_transcript"
+      ],
+      "semantic_units": [
+        "qa_exchange",
+        "paragraph_event",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "management_discussion": [
+          "prepared remarks",
+          "call participants",
+          "operator"
+        ],
+        "questions": [
+          "questions and answers",
+          "question-and-answer",
+          "q&a"
+        ],
+        "outlook": [
+          "guidance",
+          "outlook"
+        ],
+        "operating_metrics": [
+          "revenue",
+          "eps",
+          "margin"
+        ]
+      }
+    },
+    {
+      "profile_id": "results_release",
+      "family": "results_release",
+      "regime": "unknown",
+      "family_ids": [
+        "results_release"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "operating_table",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "operating_metrics": [
+          "highlights",
+          "business highlights",
+          "financial highlights"
+        ],
+        "business": [
+          "segment",
+          "business overview",
+          "about"
+        ],
+        "management_discussion": [
+          "commentary",
+          "ceo",
+          "chairman"
+        ],
+        "financial_notes": [
+          "condensed consolidated",
+          "statement of",
+          "balance sheet"
+        ]
+      }
+    },
+    {
+      "profile_id": "presentation",
+      "family": "presentation",
+      "regime": "unknown",
+      "family_ids": [
+        "investor_presentation"
+      ],
+      "semantic_units": [
+        "operating_table",
+        "paragraph_event",
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "operating_metrics": [
+          "in billion",
+          "total revenue",
+          "yoy",
+          "qoq"
+        ],
+        "business": [
+          "business review",
+          "strategy",
+          "product"
+        ],
+        "outlook": [
+          "outlook",
+          "roadmap",
+          "plan"
+        ],
+        "unknown": [
+          "appendix",
+          "notes"
+        ]
+      }
+    },
+    {
+      "profile_id": "administrative",
+      "family": "administrative",
+      "regime": "unknown",
+      "family_ids": [
+        "administrative_document"
+      ],
+      "semantic_units": [
+        "background"
+      ],
+      "legacy_alias_supplements": {
+        "administrative": [
+          "述职报告",
+          "管理制度",
+          "管理办法",
+          "会议通知",
+          "公告",
+          "承诺"
+        ],
+        "unknown": [
+          "其他"
+        ]
+      }
+    },
+    {
+      "profile_id": "generic",
+      "family": "unknown",
+      "regime": "unknown",
+      "family_ids": [],
+      "semantic_units": [
+        "paragraph_event",
+        "background"
+      ],
+      "legacy_alias_supplements": {}
+    }
+  ],
+  "fallback": {
+    "id": "generic_source_reading",
+    "version": "1.0.0",
+    "sections": [
+      {
+        "role": "business",
+        "aliases": [
+          "业务",
+          "主要内容",
+          "背景",
+          "概述",
+          "overview",
+          "summary"
+        ],
+        "heading_path": [],
+        "priority": 2,
+        "questions": [
+          "Read the actual source material, retain its author and uncertainty."
+        ]
+      },
+      {
+        "role": "management_discussion",
+        "aliases": [
+          "讨论",
+          "分析",
+          "discussion",
+          "analysis"
+        ],
+        "heading_path": [],
+        "priority": 2,
+        "questions": [
+          "Read the actual source material, retain its author and uncertainty."
+        ]
+      },
+      {
+        "role": "risk",
+        "aliases": [
+          "风险",
+          "risk"
+        ],
+        "heading_path": [],
+        "priority": 2,
+        "questions": [
+          "Read the actual source material, retain its author and uncertainty."
+        ]
+      },
+      {
+        "role": "unknown",
+        "aliases": [
+          "其他",
+          "附录",
+          "other",
+          "appendix"
+        ],
+        "heading_path": [],
+        "priority": 3,
+        "questions": [
+          "Read the actual source material, retain its author and uncertainty."
+        ]
+      }
+    ],
+    "reading_questions": [
+      "类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。"
+    ],
+    "context_requirements": [],
+    "negative_hints": [
+      "目录页与正文标题同名时以正文为准",
+      "重复页眉/页脚不构成新章节",
+      "签章、确认意见、封面落款不承载业务事实",
+      "三张主表与常规账龄表按财务口径处理",
+      "站点导航与页脚样板文字不是披露内容",
+      "交叉引用中提到的表单名称不构成本文档类型"
+    ]
+  },
+  "shared_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。"
+}

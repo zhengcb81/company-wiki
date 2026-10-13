@@ -32,38 +32,66 @@
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 16, "exact_quote": "Chairman and Chief Executive Officer - Satya Nadella"},
+        "anchor": {
+          "physical_page": null,
+          "line": 16,
+          "exact_quote": "Chairman and Chief Executive Officer - Satya Nadella"
+        },
         "page": null,
         "text": "CALL PARTICIPANTS … Chairman and Chief Executive Officer - Satya Nadella … Chief Financial Officer - Amy Hood",
         "role": "administrative",
-        "hints": {"unit_kind": "participants_list", "note": "参与人角色表（行14-24），提供发言者角色映射"}
+        "hints": {
+          "unit_kind": "participants_list",
+          "note": "参与人角色表（行14-24），提供发言者角色映射"
+        }
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 26, "exact_quote": "Revenue-- $90.0 billion in the fourth quarter, an 18% increase driven by strong demand across the Azure platform and first-party AI applications."},
+        "anchor": {
+          "physical_page": null,
+          "line": 26,
+          "exact_quote": "Revenue-- $90.0 billion in the fourth quarter, an 18% increase driven by strong demand across the Azure platform and first-party AI applications."
+        },
         "page": null,
         "text": "Revenue-- $90.0 billion in the fourth quarter, an 18% increase driven by strong demand across the Azure platform and first-party AI applications.",
         "role": "business",
-        "hints": {"unit_kind": "editor_summary", "note": "文件头 takeaways 块（行26-40），编辑/站点摘要，非管理层发言"}
+        "hints": {
+          "unit_kind": "editor_summary",
+          "note": "文件头 takeaways 块（行26-40），编辑/站点摘要，非管理层发言"
+        }
       },
       {
         "unit_id": "u3",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 132, "exact_quote": "Where growth rates are the same in constant currency, we will refer to the growth rate only."},
+        "anchor": {
+          "physical_page": null,
+          "line": 132,
+          "exact_quote": "Where growth rates are the same in constant currency, we will refer to the growth rate only."
+        },
         "page": null,
         "text": "Where growth rates are the same in constant currency, we will refer to the growth rate only.",
         "role": "management_discussion",
-        "hints": {"speaker": "投资者关系（开场声明）", "note": "全局限定语：后续所有增长率均带 constant currency 口径"}
+        "hints": {
+          "speaker": "投资者关系（开场声明）",
+          "note": "全局限定语：后续所有增长率均带 constant currency 口径"
+        }
       },
       {
         "unit_id": "u4",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 236, "exact_quote": "Karl Keirstead:Okay. Great. Satya, maybe I'll start away from the numbers and ask if you could spend a minute and elaborate on your opening comments"},
+        "anchor": {
+          "physical_page": null,
+          "line": 236,
+          "exact_quote": "Karl Keirstead:Okay. Great. Satya, maybe I'll start away from the numbers and ask if you could spend a minute and elaborate on your opening comments"
+        },
         "page": null,
         "text": "Karl Keirstead:Okay. Great. Satya, maybe I'll start away from the numbers and ask if you could spend a minute and elaborate on your opening comments",
         "role": "questions",
-        "hints": {"unit_kind": "qa_exchange", "speaker": "分析师（提问者）"}
+        "hints": {
+          "unit_kind": "qa_exchange",
+          "speaker": "分析师（提问者）"
+        }
       }
     ]
   },
@@ -77,7 +105,14 @@
         "id": "f1-editor-vs-management",
         "objective": "编辑摘要与管理层发言分离",
         "importance": "critical",
-        "any_support_sets": [["u2"], ["u3"]],
+        "any_support_sets": [
+          [
+            "u2"
+          ],
+          [
+            "u3"
+          ]
+        ],
         "must_preserve": [
           "u2 是聚合站点 takeaways 块（编辑内容）",
           "u3 是电话会开场的口径声明（来源角色：IR/管理层）"
@@ -85,31 +120,62 @@
         "must_not_assert": [
           "takeaways 中的数字/措辞不得当作管理层原话引用",
           "不得把编辑术语表内容当公司披露"
-        ]
+        ],
+        "target_kind": "disposition_context"
       },
       {
         "id": "f2-global-qualifier-follows-local-facts",
         "objective": "全局限定语随局部事实保留",
         "importance": "critical",
-        "any_support_sets": [["u3"]],
-        "must_preserve": ["constant currency 口径约定适用于其后全部增长率表述"],
-        "must_not_assert": ["不得在局部事实中剥离 constant currency 限定", "不得把 constant currency 增速写成 GAAP 增速"]
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
+        "must_preserve": [
+          "constant currency 口径约定适用于其后全部增长率表述"
+        ],
+        "must_not_assert": [
+          "不得在局部事实中剥离 constant currency 限定",
+          "不得把 constant currency 增速写成 GAAP 增速"
+        ],
+        "target_kind": "disposition_context"
       },
       {
         "id": "f3-analyst-question-not-fact",
         "objective": "分析师问题不是公司事实",
         "importance": "normal",
-        "any_support_sets": [["u4"]],
-        "must_preserve": ["来源角色：分析师提问", "问答对需绑定后续管理层回答"],
-        "must_not_assert": ["问题中的假设/数字不得当公司披露", "问题设想不得当已发生事实"]
+        "any_support_sets": [
+          [
+            "u4"
+          ]
+        ],
+        "must_preserve": [
+          "来源角色：分析师提问",
+          "问答对需绑定后续管理层回答"
+        ],
+        "must_not_assert": [
+          "问题中的假设/数字不得当公司披露",
+          "问题设想不得当已发生事实"
+        ],
+        "target_kind": "disposition_context"
       },
       {
         "id": "f4-speaker-attribution",
         "objective": "发言者角色映射",
         "importance": "normal",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["参与人表给出职务（CEO/CFO 等）"],
-        "must_not_assert": ["职务表不承载业务事实"]
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "参与人表给出职务（CEO/CFO 等）"
+        ],
+        "must_not_assert": [
+          "职务表不承载业务事实"
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "read",

@@ -1,35 +1,81 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "results_release",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["sec", "hkex", "cn_exchange", "other"],
-    "forms": ["8-K", "6-K", "EX-99"],
+    "regimes": [
+      "sec",
+      "hkex",
+      "cn_exchange",
+      "other"
+    ],
+    "forms": [
+      "8-K",
+      "6-K",
+      "EX-99"
+    ],
     "family": "results_release",
-    "purposes": ["event_update", "periodic_review"],
-    "modifiers": {"extent": "summary", "revision": "original"},
-    "carrier": ["pdf", "html"],
-    "language": ["en", "zh"]
+    "purposes": [
+      "event_update",
+      "periodic_review"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf",
+      "html"
+    ],
+    "language": [
+      "en",
+      "zh"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "Financial Highlights", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "Financial Highlights",
+          "field": null
+        },
         "location": "body",
         "reason": "业绩新闻稿固定小节"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "Business Highlights", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "Business Highlights",
+          "field": null
+        },
         "location": "body",
         "reason": "业绩新闻稿业务亮点小节"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "Forward-Looking Statements", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "Forward-Looking Statements",
+          "field": null
+        },
         "location": "body",
         "reason": "业绩发布固定免责声明小节，同时提示全局限定语"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "业绩新闻稿", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "业绩新闻稿",
+          "field": null
+        },
         "location": "cover",
         "reason": "中文语境的业绩新闻稿标题"
       }
@@ -45,38 +91,120 @@
   "sections": [
     {
       "role": "business",
-      "aliases": ["Business Highlights", "业务亮点", "Segment Results", "业务回顾"],
-      "heading_path": [["Business Highlights", "业务亮点", "Segment Results", "业务回顾"]],
+      "aliases": [
+        "Business Highlights",
+        "业务亮点",
+        "Segment Results",
+        "业务回顾"
+      ],
+      "heading_path": [
+        [
+          "Business Highlights",
+          "业务亮点",
+          "Segment Results",
+          "业务回顾"
+        ]
+      ],
       "priority": 1,
-      "questions": ["各业务线表现与解释", "产品/客户/渠道动态"]
+      "questions": [
+        "各业务线表现与解释",
+        "产品/客户/渠道动态"
+      ]
     },
     {
       "role": "management_discussion",
-      "aliases": ["Financial Highlights", "财务亮点", "Results", "CEO", "CFO"],
-      "heading_path": [["Financial Highlights", "财务亮点", "Results"], ["Financial Highlights", "Results", "Management Comment", "CEO"]],
+      "aliases": [
+        "Financial Highlights",
+        "财务亮点",
+        "Results",
+        "CEO",
+        "CFO"
+      ],
+      "heading_path": [
+        [
+          "Financial Highlights",
+          "财务亮点",
+          "Results"
+        ],
+        [
+          "Financial Highlights",
+          "Results",
+          "Management Comment",
+          "CEO"
+        ]
+      ],
       "priority": 1,
-      "questions": ["财务表现的经营解释与管理层引语的角色归属"]
+      "questions": [
+        "财务表现的经营解释与管理层引语的角色归属"
+      ]
     },
     {
       "role": "operating_metrics",
-      "aliases": ["KPI", "Operating Metrics", "用户", "门店", "RPO"],
-      "heading_path": [["Business Highlights", "Financial Highlights", "Operating Metrics"], ["KPI", "Operating Metrics", "指标"]],
+      "aliases": [
+        "KPI",
+        "Operating Metrics",
+        "用户",
+        "门店",
+        "RPO"
+      ],
+      "heading_path": [
+        [
+          "Business Highlights",
+          "Financial Highlights",
+          "Operating Metrics"
+        ],
+        [
+          "KPI",
+          "Operating Metrics",
+          "指标"
+        ]
+      ],
       "priority": 1,
-      "questions": ["经营指标口径、分母与期间"]
+      "questions": [
+        "经营指标口径、分母与期间"
+      ]
     },
     {
       "role": "outlook",
-      "aliases": ["Outlook", "Guidance", "展望", "业务展望"],
-      "heading_path": [["Outlook", "Guidance", "展望", "业务展望"]],
+      "aliases": [
+        "Outlook",
+        "Guidance",
+        "展望",
+        "业务展望"
+      ],
+      "heading_path": [
+        [
+          "Outlook",
+          "Guidance",
+          "展望",
+          "业务展望"
+        ]
+      ],
       "priority": 2,
-      "questions": ["展望/指引的期间与条件"]
+      "questions": [
+        "展望/指引的期间与条件"
+      ]
     },
     {
       "role": "administrative",
-      "aliases": ["Forward-Looking Statements", "About", "Investor Contacts", "免责声明"],
-      "heading_path": [["Forward-Looking Statements", "About", "Investor Contacts", "免责声明"]],
+      "aliases": [
+        "Forward-Looking Statements",
+        "About",
+        "Investor Contacts",
+        "免责声明"
+      ],
+      "heading_path": [
+        [
+          "Forward-Looking Statements",
+          "About",
+          "Investor Contacts",
+          "免责声明"
+        ]
+      ],
       "priority": 3,
-      "questions": ["全局限定语与联系信息；不承载业务事实"]
+      "questions": [
+        "全局限定语与联系信息；不承载业务事实"
+      ]
     }
   ],
   "reading_questions": [
@@ -89,25 +217,42 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period", "role"],
+      "slots": [
+        "subject",
+        "period",
+        "role"
+      ],
       "missing_behavior": "unknown",
       "reason": "新闻稿数值带季度/半年口径与基期；引语与公司事实角色不同"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator", "geography"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator",
+        "geography"
+      ],
       "missing_behavior": "partial",
       "reason": "分部/区域数值必须带口径、币种与基期（含 constant currency）"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "forward-looking 与指引限定语随事实保留"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "stage", "condition"],
+      "slots": [
+        "project",
+        "stage",
+        "condition"
+      ],
       "missing_behavior": "partial",
       "reason": "产品/项目进展断言保留阶段与条件"
     }
@@ -129,8 +274,17 @@
   },
   "evidence_status": {
     "design": "verified",
-    "real_samples": ["case-us-release-highlights-01", "case-hk-release-segment-02"],
-    "missing_shapes": ["股东信（shareholder letter）形态", "同一事件 release/deck/call 三件套的重复事实对照"]
+    "real_samples": [
+      "case-us-release-highlights-01",
+      "case-hk-release-segment-02"
+    ],
+    "missing_shapes": [
+      "股东信（shareholder letter）形态",
+      "同一事件 release/deck/call 三件套的重复事实对照"
+    ]
   },
-  "case_ids": ["case-us-release-highlights-01", "case-hk-release-segment-02"]
+  "case_ids": [
+    "case-us-release-highlights-01",
+    "case-hk-release-segment-02"
+  ]
 }

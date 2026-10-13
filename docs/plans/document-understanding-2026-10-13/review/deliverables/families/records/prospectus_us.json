@@ -1,35 +1,78 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "prospectus_us",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["sec"],
-    "forms": ["S-1", "F-1", "424B4", "424B1"],
+    "regimes": [
+      "sec"
+    ],
+    "forms": [
+      "S-1",
+      "F-1",
+      "424B4",
+      "424B1"
+    ],
     "family": "prospectus",
-    "purposes": ["fundraising", "business_baseline", "historical_context"],
-    "modifiers": {"extent": "full", "revision": "unknown"},
-    "carrier": ["html"],
-    "language": ["en"]
+    "purposes": [
+      "fundraising",
+      "business_baseline",
+      "historical_context"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "html"
+    ],
+    "language": [
+      "en"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "metadata_equals", "value": "S-1", "field": "form_type"},
+        "signal": {
+          "kind": "metadata_equals",
+          "value": "S-1",
+          "field": "form_type"
+        },
         "location": "metadata",
         "reason": "S-1 注册说明书；F-1 为外国私人发行人对应表单"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "PROSPECTUS", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "PROSPECTUS",
+          "field": null
+        },
         "location": "cover",
         "reason": "最终招股说明书封面固定 PROSPECTUS 字样"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "Use of Proceeds", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "Use of Proceeds",
+          "field": null
+        },
         "location": "toc",
         "reason": "发行材料固定小节，业务/风险/募资用途并列"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "Shares being offered by the selling", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "Shares being offered by the selling",
+          "field": null
+        },
         "location": "body",
         "reason": "转售结构小节的短语证据，用于区分发行类型"
       }
@@ -45,52 +88,149 @@
   "sections": [
     {
       "role": "business",
-      "aliases": ["Business", "Our Company", "Overview"],
-      "heading_path": [["Business", "PROSPECTUS SUMMARY"], ["Business", "Our Company", "Overview", "Business Model"]],
+      "aliases": [
+        "Business",
+        "Our Company",
+        "Overview"
+      ],
+      "heading_path": [
+        [
+          "Business",
+          "PROSPECTUS SUMMARY"
+        ],
+        [
+          "Business",
+          "Our Company",
+          "Overview",
+          "Business Model"
+        ]
+      ],
       "priority": 1,
-      "questions": ["业务模式、产品与收费方式", "客户与市场结构"]
+      "questions": [
+        "业务模式、产品与收费方式",
+        "客户与市场结构"
+      ]
     },
     {
       "role": "industry",
-      "aliases": ["Industry", "Market Opportunity", "Industry Data"],
-      "heading_path": [["Industry", "Market Opportunity", "Industry Data"]],
+      "aliases": [
+        "Industry",
+        "Market Opportunity",
+        "Industry Data"
+      ],
+      "heading_path": [
+        [
+          "Industry",
+          "Market Opportunity",
+          "Industry Data"
+        ]
+      ],
       "priority": 2,
-      "questions": ["行业数据的作者与统计口径"]
+      "questions": [
+        "行业数据的作者与统计口径"
+      ]
     },
     {
       "role": "risk",
-      "aliases": ["Risk Factors", "RISK FACTORS"],
-      "heading_path": [["Risk Factors", "RISK FACTORS"]],
+      "aliases": [
+        "Risk Factors",
+        "RISK FACTORS"
+      ],
+      "heading_path": [
+        [
+          "Risk Factors",
+          "RISK FACTORS"
+        ]
+      ],
       "priority": 1,
-      "questions": ["具体业务风险与一般风险的区分"]
+      "questions": [
+        "具体业务风险与一般风险的区分"
+      ]
     },
     {
       "role": "management_discussion",
-      "aliases": ["Management's Discussion and Analysis", "MD&A", "Operating Results"],
-      "heading_path": [["Management's Discussion and Analysis", "MD&A"], ["Operating Results", "Results of Operations", "Business"]],
+      "aliases": [
+        "Management's Discussion and Analysis",
+        "MD&A",
+        "Operating Results"
+      ],
+      "heading_path": [
+        [
+          "Management's Discussion and Analysis",
+          "MD&A"
+        ],
+        [
+          "Operating Results",
+          "Results of Operations",
+          "Business"
+        ]
+      ],
       "priority": 1,
-      "questions": ["经营结果的业务驱动与解释"]
+      "questions": [
+        "经营结果的业务驱动与解释"
+      ]
     },
     {
       "role": "fundraising",
-      "aliases": ["Use of Proceeds", "Dividend Policy", "Capitalization", "Dilution"],
-      "heading_path": [["Use of Proceeds", "Dividend Policy", "Capitalization", "Dilution"]],
+      "aliases": [
+        "Use of Proceeds",
+        "Dividend Policy",
+        "Capitalization",
+        "Dilution"
+      ],
+      "heading_path": [
+        [
+          "Use of Proceeds",
+          "Dividend Policy",
+          "Capitalization",
+          "Dilution"
+        ]
+      ],
       "priority": 1,
-      "questions": ["募资用途与项目对应", "公司发行与老股转售的区分"]
+      "questions": [
+        "募资用途与项目对应",
+        "公司发行与老股转售的区分"
+      ]
     },
     {
       "role": "outlook",
-      "aliases": ["Business Strategy", "Growth Strategy", "Management's Discussion"],
-      "heading_path": [["Business", "Business Strategy", "Growth Strategy"]],
+      "aliases": [
+        "Business Strategy",
+        "Growth Strategy",
+        "Management's Discussion"
+      ],
+      "heading_path": [
+        [
+          "Business",
+          "Business Strategy",
+          "Growth Strategy"
+        ]
+      ],
       "priority": 2,
-      "questions": ["增长策略与实现条件"]
+      "questions": [
+        "增长策略与实现条件"
+      ]
     },
     {
       "role": "administrative",
-      "aliases": ["Shares Being Offered", "Selling Stockholders", "Underwriting", "Legal Matters"],
-      "heading_path": [["Shares Being Offered by the Selling Stockholders", "Selling Stockholders", "Underwriting", "Legal Matters"]],
+      "aliases": [
+        "Shares Being Offered",
+        "Selling Stockholders",
+        "Underwriting",
+        "Legal Matters"
+      ],
+      "heading_path": [
+        [
+          "Shares Being Offered by the Selling Stockholders",
+          "Selling Stockholders",
+          "Underwriting",
+          "Legal Matters"
+        ]
+      ],
       "priority": 3,
-      "questions": ["发行结构与转售主体对募资归属的影响"]
+      "questions": [
+        "发行结构与转售主体对募资归属的影响"
+      ]
     }
   ],
   "reading_questions": [
@@ -104,25 +244,40 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period"],
+      "slots": [
+        "subject",
+        "period"
+      ],
       "missing_behavior": "unknown",
       "reason": "发行材料是登记/定价时点事实，断言必须带 as-of 期间"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator"
+      ],
       "missing_behavior": "partial",
       "reason": "发行股数、募资净额、转售股数必须带口径与归属"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "stage", "condition"],
+      "slots": [
+        "project",
+        "stage",
+        "condition"
+      ],
       "missing_behavior": "partial",
       "reason": "募资投向的项目断言必须带阶段与条件"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "假设性风险与增长策略的条件语气必须保留"
     }
@@ -150,5 +305,7 @@
       "IPO/转售/其他发行用途的真实版本对未建"
     ]
   },
-  "case_ids": ["case-synth-us-registration-01"]
+  "case_ids": [
+    "case-synth-us-registration-01"
+  ]
 }

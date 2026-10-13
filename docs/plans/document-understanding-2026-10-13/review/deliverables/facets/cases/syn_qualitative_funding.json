@@ -1,0 +1,96 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "version": "1.0.0",
+  "case_id": "syn_qualitative_funding",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "syn-qualitative-funding",
+    "source_sha256": null,
+    "origin": {
+      "synthetic": true,
+      "purpose": "定性经营事实无需未披露金额的合法反例"
+    },
+    "local_binding_key": null
+  },
+  "observation": {
+    "metadata": {
+      "synthetic": true,
+      "mechanism_axes": [
+        "generic"
+      ],
+      "purpose": "主体、性质、条件保存；数量和单位不适用"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 1,
+          "line": 1,
+          "exact_quote": "公司甲计划实施项目甲；若实际募集资金净额低于拟投入金额，不足部分将由公司自筹，未披露缺口金额。"
+        },
+        "page": 1,
+        "text": "公司甲计划实施项目甲；若实际募集资金净额低于拟投入金额，不足部分将由公司自筹，未披露缺口金额。",
+        "role": "qualitative_progress",
+        "hints": {
+          "facet_ids": [
+            "facet_capacity_projects"
+          ],
+          "semantic_ids": [
+            "semantic_capacity_project"
+          ]
+        }
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "保存定性经营事实与条件，无金额不补数字"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "项目甲不足资金自筹是条件性安排，未披露金额，不是已筹足资金。",
+        "importance": "required_business",
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "主体/项目=公司甲/项目甲",
+          "条件=实际募集资金净额低于拟投入金额",
+          "语态=将自筹，非已经筹足"
+        ],
+        "must_not_assert": [
+          "不得补造未披露的金额、订单或确定收入"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "生产语义执行交ROOT，NOT_RUN_ROOT_INTEGRATION；合成文本不是公司事实"
+    ]
+  },
+  "candidate_claim": {
+    "subject": "公司甲",
+    "product": null,
+    "project": "项目甲",
+    "geography": null,
+    "period": null,
+    "role": "公司陈述",
+    "modality": "conditional_plan",
+    "stage": null,
+    "quantity": null,
+    "unit": null,
+    "denominator": null,
+    "condition": "若实际募集资金净额低于拟投入金额，不足部分将自筹"
+  },
+  "expected_missing_slots": [],
+  "not_applicable_slots": [
+    "quantity",
+    "unit",
+    "denominator"
+  ],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

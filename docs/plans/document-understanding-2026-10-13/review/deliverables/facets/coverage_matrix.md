@@ -29,7 +29,7 @@
 | 机制 | 轴 | 规格 | 证据 | 锚定case | 缺口 |
 |---|---|---|---|---|---|
 | 软件订阅/消费 | subscription | implemented | real | real_us_release_subscription, real_us_call_roles | 缺队列指标（NRR/续费率）定义原文 |
-| 软件订阅/消费 | consumption | implemented | real | real_us_release_subscription | 缺纯用量计费真实片段 |
+| 软件订阅/消费 | consumption | implemented | missing | — | 缺明确用量计费/消耗额原文；Consumer客群不是consumption机制 |
 | 零售店网 | store_network | implemented | real | real_hk_annual_store_network, syn_quantity_slots | 缺同店/开关店明细 |
 | 制造认证/利用率 | manufacturing | implemented | real | real_cn_equity_capacity_phasing, real_cn_convertible_capacity_funding, syn_stage_ladder | 缺认证/利用率经营表 |
 | 生物医药/CDMO | biopharma | proposed | synthetic_only | syn_stage_ladder | 全缺：临床阶段/获批作用域 |
@@ -54,7 +54,7 @@
 
 ## 5. C节点：真实原文核对记录（单列）
 
-- 记录文件：c_verification/real_excerpt_checks.json（20条引文检查，全部 normalized_match=true）。
+- 记录文件：c_verification/real_excerpt_checks.json（22条完整锚点检查，全部 normalized_match=true）。
 - 方法：PyMuPDF 按声明页取只读文本（PDF）/全文归一化（HTML/TXT），空白归一化后逐字比对；
   逐条复算原件 SHA-256 并在读取前后核对 mtime（raw preservation）。
 - 结论边界：C记录只证明引文与原件一致、来源身份正确；不证明引擎语义正确（属ROOT B/C）。
@@ -81,3 +81,13 @@ project_emitted→project、explicit_condition_present→condition；always不�
 完整性（组内AND、组间OR）、正反配对维度（主体/时间/单位/范围/语态/删条件/错项目/缺否定）、
 引文预算（每source ≤8KiB）、可移植性（无绝对路径、0原件复制）、持久数据 ≤512KiB、
 机制组合不互相覆盖、C记录与真实引文一一对应。**不含**自然语言蕴含判定与摘要生成。
+
+## ROOT接收校准（2026-10-13）
+
+定性客户合作与条件自筹不要求未披露金额；普通计数不强制数学分母。两项合法反例已加入case。
+短关键词锚点扩成支持完整事实的原始段落/表格，IR可选数字与原有产能替换定义各有独立支持单位。
+原件不改，不翻译。手工unit.text保留设计语境并显式text_status/text_source/runtime_raw=false；
+ROOT只用公共解析器从固定SHA原件恢复正式unit/locator，绝不能把手工正文或gold作为observed。
+一期建设周期列示不得推成均已完成；门店事实不强制GMV；否定VC生产不要求虚构stage。
+Consumer客群不证明按用量计费，consumption证据诚实留缺样。
+版本化接收结果见 `.planning/du2-facets-reception/`；结构绿与实际生产语义仍分开记录。

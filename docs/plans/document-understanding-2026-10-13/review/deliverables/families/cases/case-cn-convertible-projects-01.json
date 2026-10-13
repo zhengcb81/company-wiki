@@ -39,7 +39,12 @@
         "page": 7,
         "text": "本次可转债发行的募集资金拟投资于年产400 吨吡啶盐项目和年产1,500 吨三氯蔗糖项目。",
         "role": "fundraising",
-        "hints": {"heading_path": ["风险因素", "募集资金投资项目的风险"]}
+        "hints": {
+          "heading_path": [
+            "风险因素",
+            "募集资金投资项目的风险"
+          ]
+        }
       }
     ]
   },
@@ -53,7 +58,11 @@
         "id": "f1-projects-kept-separate",
         "objective": "多项目募投的独立口径",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "项目A：年产400吨吡啶盐项目",
           "项目B：年产1,500吨三氯蔗糖项目",
@@ -63,11 +72,15 @@
           "不得把两个项目的产能/产品合并成一个项目口径",
           "“拟投资”不得写成已建成或已投产产能",
           "不得与既有产能（如原生产线产量）混算"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["项目建设后续进展", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "项目建设后续进展",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

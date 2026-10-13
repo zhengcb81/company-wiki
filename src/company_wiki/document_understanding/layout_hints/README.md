@@ -152,3 +152,17 @@ result = derive_layout_hints(observation, limits={"max_work_units": 2_000_000})
 4. `NEEDS_UPSTREAM_GRANULARITY` 出现时，ROOT 应触发前端补采细粒度几何（或标 partial），
    不要在下游按空格切列。
 5. 预算：ROOT 用既有全局上限收紧本包 `limits`；`complete=false` 必须原样传给下游覆盖报告。
+
+
+## 8. ROOT 接收修复（1.1.0）
+
+`feature_version=1.1.0` 记录算法版本；wire 的 du2-layout-hints/1 不变。
+
+- 唯一 WorkBudget 在操作前预留工作量；耗尽立即通过私有中止异常返回 partial。预算耗尽时不发布未完成表/高置信提示，所有输入 unit 明确 deferred，原件、ID、locator 不变，WORK_UNITS 不超过限额。
+- 标题上下留白通过两个方向扫描与压缩坐标区间索引查找；任何横向重叠均视作潜在邻居，属于保守证据（可降低标题置信，不制造留白）。表列只扫描水平活动区间；正文栏和上下文使用局部/顺序索引。密集歧义匹配仍受同一工作预算中止，不声称所有病理输入严格线性。
+- 多页续表必须唯一匹配，题名、期间、单位、表头、脚注和先前继承的上下文沿前向链传递；一对多/多对一匹配保留 CONTINUATION_AMBIGUOUS，不拼接项目。
+- 上游 opaque_pages/deferred_pages 使 complete=false。
+- 前端若知道 unit 的框是整行/整块/整表，应传 upstream_hints.geometry_granularity=row|block|table_region。此声明不证明表格列，不输出 cells；保留 NEEDS_UPSTREAM_GRANULARITY/partial。span/cell 只表示前端已实际提供该颗粒度，不应按空格造坐标。
+- 输入验证、结果序列化及原始文本处理仍随输入量线性工作；WORK_UNITS 计量布局分析遍历/比较，并非 CPU 指令/字节数或独立墙钟超时。
+
+接收证据见 .planning/du2-layout-reception：初始五项行为 RED；模块 41 PASS/6 real SKIP；最终八项根因测试 PASS；四份原件两种粒度回放 SHA/mtime/size 不变。完整模型摘要、OCR、生产定位适配、真实 50k 单元及多进程峰值内存尚未验证；作者旧 5.78 work/unit 数值不能代表修复后的计量。

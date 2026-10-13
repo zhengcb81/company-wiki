@@ -8,13 +8,14 @@
    sample_manifest.json 的相对路径）定位原件，只读；
 2) 核对 source_sha256 与原件一致；
 3) 逐 unit 把 exact_quote 与原文比对（PDF 按 anchor.physical_page 页文本、
-   HTML 按 BeautifulSoup 去标签正文；空白全部剔除后比较，因 PDF 抽取在换行处插入空格）；
+   HTML 按 BeautifulSoup 去标签正文（line仅提示，非精确范围）；空白全部剔除后比较，因 PDF 抽取在换行处插入空格）；
 4) native_text_empty 单元核对对应页确实无原生文本。
 
 输出逐条 PASS/FAIL 汇总。本工具不改原件、不写派生、不做语义判断。
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import re
@@ -26,7 +27,10 @@ WORKTREE_ROOT = Path(__file__).resolve().parents[7]
 CASES_DIR = PKG_ROOT / "cases"
 
 
-def _load_bindings() -> dict[str, Path]:
+def _load_bindings(bindings_path: Path | None = None) -> dict[str, Path]:
+    if bindings_path is not None:
+        raw = json.loads(bindings_path.read_text(encoding="utf-8"))
+        return {k: Path(v) for k, v in raw["bindings"].items()}
     for bindings_path in (
         WORKTREE_ROOT / ".planning" / "du2-families" / "bindings.local.json",
         WORKTREE_ROOT / "bindings.local.json",
@@ -61,8 +65,8 @@ def _html_text(path: Path) -> str:
     return soup.get_text(" ", strip=True)
 
 
-def main() -> int:
-    bindings = _load_bindings()
+def main(bindings_path: Path | None = None) -> int:
+    bindings = _load_bindings(bindings_path)
     checks: list[tuple[str, str, str, bool]] = []
     for case_file in sorted(CASES_DIR.glob("*.json")):
         case = json.loads(case_file.read_text(encoding="utf-8"))
@@ -87,7 +91,7 @@ def main() -> int:
                 where = f"p{anchor['physical_page']}"
             else:
                 haystack = html_text or ""
-                where = f"line{anchor['line']}"
+                where = f"document_quote (line_hint={anchor['line']}; not_exact_range)"
             checks.append((case["case_id"], unit["unit_id"], where, _squash(quote) in _squash(haystack)))
     failed = [c for c in checks if not c[3]]
     print(f"checks={len(checks)} failed={len(failed)}")
@@ -99,4 +103,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--bindings", type=Path, help="Explicit uncommitted source bindings; originals are read-only")
+    args = parser.parse_args()
+    sys.exit(main(args.bindings))

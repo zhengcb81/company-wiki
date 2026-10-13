@@ -32,20 +32,39 @@
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 873, "exact_quote": "Revenue was $90.0 billion and increased 18% (up 17% in constant currency)"},
+        "anchor": {
+          "physical_page": null,
+          "line": 873,
+          "exact_quote": "Revenue was $90.0 billion and increased 18% (up 17% in constant currency)"
+        },
         "page": null,
         "text": "Revenue was $90.0 billion and increased 18% (up 17% in constant currency) · Operating income was $40.6 billion and increased 18%",
         "role": "management_discussion",
-        "hints": {"heading_path": ["Financial Highlights"], "dom_line": 873}
+        "hints": {
+          "heading_path": [
+            "Financial Highlights"
+          ],
+          "dom_line": 873
+        }
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 1293, "exact_quote": "Microsoft Cloud revenue was $59.3 billion and increased 27%, and commercial remaining performance obligation increased 84% to $678 billion."},
+        "anchor": {
+          "physical_page": null,
+          "line": 1293,
+          "exact_quote": "Microsoft Cloud revenue was $59.3 billion and increased 27%, and commercial remaining performance obligation increased 84% to $678 billion."
+        },
         "page": null,
         "text": "Business Highlights Microsoft Cloud revenue was $59.3 billion and increased 27%, and commercial remaining performance obligation increased 84% to $678 billion.",
         "role": "business",
-        "hints": {"heading_path": ["Business Highlights"], "dom_line": 1293, "note": "anchor 行为引文起始行；引文按 DOM 文本空白归一"}
+        "hints": {
+          "heading_path": [
+            "Business Highlights"
+          ],
+          "dom_line": 1293,
+          "note": "anchor 行为引文起始行；引文按 DOM 文本空白归一"
+        }
       }
     ]
   },
@@ -59,21 +78,46 @@
         "id": "f1-cc-qualifier-stays",
         "objective": "增长率的 constant currency 限定随数值保留",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["期间：季度（截至2026-06-30）", "18% 为报告口径、up 17% in constant currency 为剔汇口径，两者并存"],
-        "must_not_assert": ["不得只留一个增长率而丢另一个口径", "不得把两种增速互换"]
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "期间：季度（截至2026-06-30）",
+          "18% 为报告口径、up 17% in constant currency 为剔汇口径，两者并存"
+        ],
+        "must_not_assert": [
+          "不得只留一个增长率而丢另一个口径",
+          "不得把两种增速互换"
+        ],
+        "target_kind": "disposition_context"
       },
       {
         "id": "f2-rpo-vs-revenue",
         "objective": "业务亮点中 RPO 与收入口径分离",
         "importance": "critical",
-        "any_support_sets": [["u2"]],
-        "must_preserve": ["云收入 $59.3B（+27%）与商业 RPO $678B（+84%）是两个不同指标", "RPO 为剩余履约义务口径"],
-        "must_not_assert": ["RPO 不得当收入或收入增速", "$678B 不得写成季度收入"]
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "云收入 $59.3B（+27%）与商业 RPO $678B（+84%）是两个不同指标",
+          "RPO 为剩余履约义务口径"
+        ],
+        "must_not_assert": [
+          "RPO 不得当收入或收入增速",
+          "$678B 不得写成季度收入"
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["其余分部数值", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "其余分部数值",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {
@@ -91,6 +135,8 @@
     "period": "FY2026 Q4",
     "condition": null
   },
-  "expected_missing_slots": ["geography"],
+  "expected_missing_slots": [
+    "geography"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

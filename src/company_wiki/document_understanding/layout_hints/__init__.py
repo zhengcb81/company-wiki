@@ -10,19 +10,86 @@ this package is not wired into production on its own.
 
 from __future__ import annotations
 
+from bisect import bisect_right
 from typing import Any, Mapping
 
 from . import columns, headings, ordering, relations, tables
-from .contract import SCHEMA_IN, SCHEMA_OUT, parse_observation
+from .contract import SCHEMA_IN, SCHEMA_OUT, WorkBudgetExceeded, parse_observation
 from .geometry import assign_cell_columns
 
-__all__ = ["derive_layout_hints", "SCHEMA_IN", "SCHEMA_OUT"]
+LAYOUT_HINTS_VERSION = "1.1.0"
+
+__all__ = ["derive_layout_hints", "SCHEMA_IN", "SCHEMA_OUT", "LAYOUT_HINTS_VERSION"]
 
 
-def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None) -> dict:
+def derive_layout_hints(
+    observation: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None
+) -> dict:
     doc = parse_observation(observation, limits=limits)
+    try:
+        return _derive(doc)
+    except WorkBudgetExceeded:
+        # Discard partially materialised hints: an interrupted context chain
+        # must never be published as a confident, independently usable table.
+        return _budget_partial(doc)
+
+
+def _budget_partial(doc) -> dict:
+    ids = [unit.unit_id for unit in doc.units]
+    return {
+        "schema_version": SCHEMA_OUT,
+        "feature_version": LAYOUT_HINTS_VERSION,
+        "source_ref": doc.source_ref,
+        "unit_hints": [
+            {
+                "unit_id": unit.unit_id,
+                "heading_level": None,
+                "text_column": None,
+                "confidence": "unknown",
+                "basis": ["deferred", unit.deferred_reason or "work_budget_exceeded"],
+            }
+            for unit in doc.units
+        ],
+        "groups": [],
+        "relations": [],
+        "reading_order": [],
+        "coverage": {
+            "processed_unit_count": 0,
+            "deferred_unit_ids": ids,
+            "opaque_pages": list(doc.coverage.get("opaque_pages", [])),
+            "deferred_pages": list(doc.coverage.get("deferred_pages", [])),
+            "complete": False,
+        },
+        "diagnostics": list(doc.diagnostics)
+        + [
+            {
+                "code": "WORK_BUDGET_EXCEEDED",
+                "unit_ids": ids,
+                "detail": f"analysis interrupted at max_work_units={doc.limits['max_work_units']}; no incomplete hints published",
+            },
+            {"code": "WORK_UNITS", "unit_ids": [], "detail": str(doc.budget.used)},
+        ],
+    }
+
+
+def _derive(doc) -> dict:
     diagnostics: list[dict] = list(doc.diagnostics)
     budget = doc.budget
+    declared_coarse = []
+    for unit in doc.units:
+        if unit.deferred:
+            continue
+        budget.charge()
+        if unit.hints.get("geometry_granularity") in {"row", "block", "table_region"}:
+            declared_coarse.append(unit.unit_id)
+    if declared_coarse:
+        diagnostics.append(
+            {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": declared_coarse,
+                "detail": "parser-declared aggregate boxes cannot prove table cell geometry",
+            }
+        )
 
     furniture_ids = headings.detect_repeated_furniture(doc)
     body_font = headings.body_font_size(doc, furniture_ids)
@@ -58,31 +125,6 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
         page_bands_list.append(page_bands)
         drafts_by_page.append(drafts)
 
-    if budget.exhausted:
-        diagnostics.append(
-            {
-                "code": "WORK_BUDGET_EXCEEDED",
-                "unit_ids": [],
-                "detail": f"work units exceeded max_work_units={doc.limits['max_work_units']}; analysis stopped early",
-            }
-        )
-        banded_ids = {
-            unit.unit_id
-            for page_bands in page_bands_list
-            for band in page_bands.bands
-            for unit in band.units
-        }
-        units_by_id = {unit.unit_id: unit for unit in doc.units}
-        still_processed: list = []
-        for unit_id in doc.processed_ids:
-            unit = units_by_id[unit_id]
-            if unit.bbox is not None and unit_id not in banded_ids:
-                object.__setattr__(unit, "deferred_reason", "work_budget_exceeded")
-                doc.deferred_ids.append(unit_id)
-            else:
-                still_processed.append(unit_id)
-        doc.processed_ids = still_processed
-
     # ---- classification sets -------------------------------------------------
     table_member_ids: set = set()
     context_ids: set = set()
@@ -90,9 +132,13 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
     for page_bands, drafts in zip(page_bands_list, drafts_by_page):
         for draft in drafts:
             for index in draft.member_indices:
-                table_member_ids.update(unit.unit_id for unit in page_bands.bands[index].units)
+                table_member_ids.update(
+                    unit.unit_id for unit in page_bands.bands[index].units
+                )
             for index in draft.leading_context + draft.trailing_context:
-                context_ids.update(unit.unit_id for unit in page_bands.bands[index].units)
+                context_ids.update(
+                    unit.unit_id for unit in page_bands.bands[index].units
+                )
                 attached_context.add((page_bands.page.page_index, index))
 
     orphan_context: list[tuple] = []
@@ -108,18 +154,27 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
         [
             (
                 page_bands.page,
-                [unit for unit in page_bands.page.units if not unit.deferred and unit.unit_id not in excluded_lane_ids],
+                [
+                    unit
+                    for unit in page_bands.page.units
+                    if not unit.deferred and unit.unit_id not in excluded_lane_ids
+                ],
             )
             for page_bands in page_bands_list
         ],
         budget,
     )
 
-    reading_order, rank = ordering.build_reading_order(page_bands_list, lane_layouts, diagnostics)
+    reading_order, rank = ordering.build_reading_order(
+        page_bands_list, lane_layouts, diagnostics, budget
+    )
     ordinal_by_id = {unit.unit_id: unit.ordinal for unit in doc.units}
 
     def member_order(unit_ids):
-        return sorted(set(unit_ids), key=lambda uid: (rank.get(uid, 10**9), ordinal_by_id.get(uid, 0)))
+        return sorted(
+            set(unit_ids),
+            key=lambda uid: (rank.get(uid, 10**9), ordinal_by_id.get(uid, 0)),
+        )
 
     # ---- group assembly -----------------------------------------------------
     groups: list[dict] = []
@@ -127,8 +182,11 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
     group_limit_hit = False
     group_limit_dropped: set = set()
 
-    def add_group(kind, members, required_context, cells, parent_tmp, confidence, basis):
+    def add_group(
+        kind, members, required_context, cells, parent_tmp, confidence, basis
+    ):
         nonlocal group_limit_hit
+        budget.charge()
         if len(groups) >= doc.limits["max_groups"]:
             group_limit_dropped.update(members)
             if not group_limit_hit:
@@ -156,16 +214,20 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
         return out
 
     def context_unit_ids(draft, page_bands):
-        return band_unit_ids(page_bands, draft.leading_context) + band_unit_ids(page_bands, draft.trailing_context)
+        return band_unit_ids(page_bands, draft.leading_context) + band_unit_ids(
+            page_bands, draft.trailing_context
+        )
 
     def build_cells(draft, page_bands, band_indices, row_offset):
         cells_out = []
         for row_position, index in enumerate(band_indices):
             for cell in page_bands.cells[index]:
-                column, span = assign_cell_columns(cell, draft.slots)
+                column, span = assign_cell_columns(cell, draft.slots, budget=budget)
                 cells_out.append(
                     {
-                        "member_unit_ids": member_order(unit.unit_id for unit in cell.members),
+                        "member_unit_ids": member_order(
+                            unit.unit_id for unit in cell.members
+                        ),
                         "row": row_offset + row_position,
                         "column": column,
                         "row_span": None,
@@ -201,10 +263,14 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
                     "table_row",
                     header_units,
                     context_units,
-                    [] if draft.granularity else build_cells(draft, page_bands, draft.header_indices, 0),
+                    []
+                    if draft.granularity
+                    else build_cells(draft, page_bands, draft.header_indices, 0),
                     region_tmp,
                     "high" if not draft.granularity else "low",
-                    ["header_block"] if len(draft.header_indices) > 1 else ["header_row"],
+                    ["header_block"]
+                    if len(draft.header_indices) > 1
+                    else ["header_row"],
                 )
                 if header_tmp:
                     relation_items.append(
@@ -219,12 +285,16 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
             row_offset = 1 if header_tmp else 0
             for position, index in enumerate(draft.row_indices):
                 row_units = band_unit_ids(page_bands, [index])
-                row_confidence, row_basis = _row_confidence(draft, page_bands, index)
+                row_confidence, row_basis = _row_confidence(
+                    draft, page_bands, index, budget
+                )
                 add_group(
                     "table_row",
                     row_units,
                     row_context,
-                    [] if draft.granularity else build_cells(draft, page_bands, [index], row_offset + position),
+                    []
+                    if draft.granularity
+                    else build_cells(draft, page_bands, [index], row_offset + position),
                     region_tmp,
                     row_confidence,
                     row_basis,
@@ -234,8 +304,12 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
             if caption_units:
                 caption_basis = ["caption_context"]
                 for index in draft.leading_context:
-                    caption_basis.append(f"context:{draft.context_kinds.get(index, 'caption')}")
-                caption_tmp = add_group("caption", caption_units, [], [], None, "high", caption_basis)
+                    caption_basis.append(
+                        f"context:{draft.context_kinds.get(index, 'caption')}"
+                    )
+                caption_tmp = add_group(
+                    "caption", caption_units, [], [], None, "high", caption_basis
+                )
                 if caption_tmp:
                     relation_items.append(
                         {
@@ -250,7 +324,13 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
             if footnote_units:
                 # a table note belongs to the table region it explains
                 footnote_tmp = add_group(
-                    "footnote", footnote_units, [], [], region_tmp, "high", ["footnote_line"]
+                    "footnote",
+                    footnote_units,
+                    [],
+                    [],
+                    region_tmp,
+                    "high",
+                    ["footnote_line"],
                 )
                 if footnote_tmp:
                     relation_items.append(
@@ -269,27 +349,45 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
         units = band_unit_ids(page_bands, [index])
         group_kind = "footnote" if kind == "footnote" else "caption"
         basis = ["footnote_line"] if kind == "footnote" else [f"context:{kind}"]
-        tmp = add_group(group_kind, units, [], [], None, "medium", basis + ["standalone"])
+        tmp = add_group(
+            group_kind, units, [], [], None, "medium", basis + ["standalone"]
+        )
         if tmp:
-            orphan_tmp_by_band[(page_bands.page.page_index, index)] = (tmp, page_bands, index, group_kind)
+            orphan_tmp_by_band[(page_bands.page.page_index, index)] = (
+                tmp,
+                page_bands,
+                index,
+                group_kind,
+            )
 
-    for (page_index, index), (tmp, page_bands, _index, group_kind) in sorted(orphan_tmp_by_band.items()):
+    caption_edges: dict = {}
+    for (page_index, index), (
+        tmp,
+        page_bands,
+        _index,
+        group_kind,
+    ) in orphan_tmp_by_band.items():
+        budget.charge()
+        if group_kind == "caption":
+            caption_edges.setdefault(page_index, []).append(
+                (page_bands.bands[index].bbox[3], tmp)
+            )
+    for entries in caption_edges.values():
+        entries.sort()
+    for (page_index, index), (tmp, page_bands, _index, group_kind) in sorted(
+        orphan_tmp_by_band.items()
+    ):
+        budget.charge()
         if group_kind != "footnote":
             continue
-        footnote_band = page_bands.bands[index]
-        best = None
-        for (other_page, other_index), (other_tmp, other_bands, _o, other_kind) in orphan_tmp_by_band.items():
-            if other_page != page_index or other_kind != "caption":
-                continue
-            caption_band = other_bands.bands[other_index]
-            gap = footnote_band.bbox[1] - caption_band.bbox[3]
-            if 0 <= gap <= 30.0 and (best is None or gap < best[0]):
-                best = (gap, other_tmp)
-        if best is not None:
+        edges = caption_edges.get(page_index, [])
+        top = page_bands.bands[index].bbox[1]
+        cursor = bisect_right(edges, (top, chr(0x10FFFF))) - 1
+        if cursor >= 0 and top - edges[cursor][0] <= 30.0:
             relation_items.append(
                 {
                     "from_group_id": tmp,
-                    "to_group_id": best[1],
+                    "to_group_id": edges[cursor][1],
                     "kind": "footnote_for",
                     "confidence": "medium",
                     "basis": ["below_caption_group"],
@@ -300,7 +398,9 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
     heading_evidence_by_id: dict = {}
     for page_bands in page_bands_list:
         page_units = [unit for unit in page_bands.page.units if not unit.deferred]
+        clearances = headings.vertical_clearances(page_units, budget)
         for unit in page_units:
+            budget.charge()
             if unit.unit_id in furniture_ids:
                 heading_evidence_by_id[unit.unit_id] = {
                     "level": None,
@@ -322,16 +422,30 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
                     "basis": ["context_line"],
                 }
                 continue
-            heading_evidence_by_id[unit.unit_id] = headings.heading_evidence(unit, page_units, body_font)
+            heading_evidence_by_id[unit.unit_id] = headings.heading_evidence(
+                unit, clearances, body_font
+            )
 
     for page_bands in page_bands_list:
-        for unit in sorted(page_bands.page.units, key=lambda u: (u.bbox is None, u.bbox[1] if u.bbox else 0, u.ordinal)):
+        for unit in sorted(
+            page_bands.page.units,
+            key=lambda u: (u.bbox is None, u.bbox[1] if u.bbox else 0, u.ordinal),
+        ):
+            budget.charge()
             if unit.deferred:
                 continue
             evidence = heading_evidence_by_id[unit.unit_id]
             if evidence["level"] is None:
                 continue
-            add_group("heading", [unit.unit_id], [], [], None, evidence["confidence"], list(evidence["basis"]))
+            add_group(
+                "heading",
+                [unit.unit_id],
+                [],
+                [],
+                None,
+                evidence["confidence"],
+                list(evidence["basis"]),
+            )
 
     # ---- column lane groups --------------------------------------------------
     for page_bands, lane_layout in zip(page_bands_list, lane_layouts):
@@ -356,30 +470,49 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
             if prev_page.page.height and prev_box[3] < 0.7 * prev_page.page.height:
                 continue
             for next_draft in drafts_by_page[page_index + 1]:
+                budget.charge()
                 next_box = next_draft.bbox()
                 if next_page.page.height and next_box[1] > 0.25 * next_page.page.height:
                     continue
-                gap = (next_page.page.page_value or 0) - (prev_page.page.page_value or 0)
+                gap = (next_page.page.page_value or 0) - (
+                    prev_page.page.page_value or 0
+                )
                 if gap < 1:
                     continue
                 claim = relations.continuation_claim(
-                    _region_descriptor(prev_draft, prev_page),
-                    _region_descriptor(next_draft, next_page),
+                    _region_descriptor(prev_draft, prev_page, budget),
+                    _region_descriptor(next_draft, next_page, budget),
                     page_gap=gap,
                     budget=budget,
                 )
                 if claim:
                     continuations.append((prev_draft, next_draft, claim))
-                    diagnostics.append(
-                        {
-                            "code": "CONTINUATION_CLAIMED",
-                            "unit_ids": sorted(
-                                {unit.unit_id for unit in prev_page.bands[prev_draft.member_indices[-1]].units}
-                                | {unit.unit_id for unit in next_page.bands[next_draft.member_indices[0]].units}
-                            ),
-                            "detail": "cross-page table continuation: " + ",".join(claim["basis"]),
-                        }
-                    )
+    # Geometry can fit more than one adjacent table. Preserve ambiguity instead
+    # of joining multiple tables or overwriting one predecessor's context.
+    targets = {}
+    sources = {}
+    for prev_draft, next_draft, _claim in continuations:
+        budget.charge()
+        targets.setdefault(id(prev_draft), set()).add(id(next_draft))
+        sources.setdefault(id(next_draft), set()).add(id(prev_draft))
+    unique = []
+    for prev_draft, next_draft, claim in continuations:
+        budget.charge()
+        if len(targets[id(prev_draft)]) == 1 and len(sources[id(next_draft)]) == 1:
+            unique.append((prev_draft, next_draft, claim))
+        else:
+            entry = region_tmp_by_draft.get(id(next_draft))
+            affected = (
+                band_unit_ids(entry[2], next_draft.member_indices) if entry else []
+            )
+            diagnostics.append(
+                {
+                    "code": "CONTINUATION_AMBIGUOUS",
+                    "unit_ids": affected,
+                    "detail": "multiple geometry-compatible neighbours; no continuation or inherited context claimed",
+                }
+            )
+    continuations = unique
 
     continuation_context: dict = {}
     for prev_draft, next_draft, claim in continuations:
@@ -396,8 +529,25 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
                 "basis": claim["basis"],
             }
         )
-        carry = band_unit_ids(prev_entry[2], prev_draft.leading_context + prev_draft.header_indices)
+        carry = member_order(
+            band_unit_ids(
+                prev_entry[2],
+                prev_draft.leading_context
+                + prev_draft.header_indices
+                + prev_draft.trailing_context,
+            )
+            + continuation_context.get(id(prev_draft), [])
+        )
+        budget.charge(len(carry))
         continuation_context[id(next_draft)] = carry
+        diagnostics.append(
+            {
+                "code": "CONTINUATION_CLAIMED",
+                "unit_ids": band_unit_ids(next_entry[2], next_draft.member_indices),
+                "detail": "accepted unique cross-page continuation: "
+                + ",".join(claim["basis"]),
+            }
+        )
 
         if "repeated_header" not in claim["basis"]:
             # A continued table without header-continuation evidence: its leading
@@ -410,32 +560,45 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
             ]
             for item in demoted:
                 relation_items.remove(item)
-                header_group = next((g for g in groups if g["group_id"] == item["from_group_id"]), None)
+                header_group = next(
+                    (g for g in groups if g["group_id"] == item["from_group_id"]), None
+                )
                 if header_group is not None:
                     header_group["confidence"] = "medium"
-                    header_group["basis"] = ["visual_row", "continuation_rows_not_header"]
+                    header_group["basis"] = [
+                        "visual_row",
+                        "continuation_rows_not_header",
+                    ]
                 diagnostics.append(
                     {
                         "code": "CONTINUATION_ROWS_NOT_HEADER",
-                        "unit_ids": list(header_group["member_unit_ids"]) if header_group else [],
+                        "unit_ids": list(header_group["member_unit_ids"])
+                        if header_group
+                        else [],
                         "detail": "continued table has no header-continuation evidence; leading bands kept as rows",
                     }
                 )
 
-    # continuation context reaches the continued table's region and rows
-    if continuation_context:
-        for group in groups:
-            if group["kind"] not in ("table_region", "table_row"):
-                continue
-            owning_region = group["group_id"] if group["kind"] == "table_region" else group["parent_table_id"]
-            if not owning_region:
-                continue
-            for draft_key, carry in continuation_context.items():
-                entry = region_tmp_by_draft.get(draft_key)
-                if entry and owning_region == entry[0]:
-                    group["required_context_unit_ids"] = member_order(
-                        group["required_context_unit_ids"] + carry
-                    )
+    # The continuation graph is forward-only. Carry earlier inherited context
+    # before publishing any region/row, using one region lookup per group.
+    inherited_by_region = {
+        region_tmp_by_draft[key][0]: carry
+        for key, carry in continuation_context.items()
+        if key in region_tmp_by_draft
+    }
+    for group in groups:
+        budget.charge()
+        owning = (
+            group["group_id"]
+            if group["kind"] == "table_region"
+            else group["parent_table_id"]
+        )
+        carry = inherited_by_region.get(owning, [])
+        if carry and group["kind"] in ("table_region", "table_row"):
+            budget.charge(len(carry))
+            group["required_context_unit_ids"] = member_order(
+                group["required_context_unit_ids"] + carry
+            )
 
     # ---- numbering, unit hints and final assembly ---------------------------
     kind_rank = {
@@ -454,14 +617,19 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
         return (order, kind_rank.get(group["kind"], 9), group["kind"])
 
     ordered_groups = sorted(groups, key=group_sort_key)
-    id_map = {group["group_id"]: f"g{position + 1}" for position, group in enumerate(ordered_groups)}
+    id_map = {
+        group["group_id"]: f"g{position + 1}"
+        for position, group in enumerate(ordered_groups)
+    }
     final_groups = []
     for group in ordered_groups:
         final_groups.append(
             {
                 "group_id": id_map[group["group_id"]],
                 "kind": group["kind"],
-                "parent_table_id": id_map.get(group["parent_table_id"]) if group["parent_table_id"] else None,
+                "parent_table_id": id_map.get(group["parent_table_id"])
+                if group["parent_table_id"]
+                else None,
                 "member_unit_ids": group["member_unit_ids"],
                 "required_context_unit_ids": group["required_context_unit_ids"],
                 "cells": group["cells"],
@@ -484,15 +652,27 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
         key=lambda item: (item["from_group_id"], item["to_group_id"], item["kind"]),
     )
 
-    unit_hints = _build_unit_hints(doc, heading_evidence_by_id, lane_layouts, table_member_ids, context_ids, furniture_ids)
+    unit_hints = _build_unit_hints(
+        doc,
+        heading_evidence_by_id,
+        lane_layouts,
+        table_member_ids,
+        context_ids,
+        furniture_ids,
+    )
 
     processed = set(doc.processed_ids)
     complete = (
         not doc.deferred_ids
+        and not doc.coverage.get("opaque_pages")
+        and not doc.coverage.get("deferred_pages")
         and not budget.exhausted
         and not group_limit_hit
         and not any(diag["code"] == "UNIT_LIMIT_EXCEEDED" for diag in diagnostics)
-        and not any(diag["code"] == "NEEDS_UPSTREAM_GRANULARITY" for diag in diagnostics)
+        and not any(
+            diag["code"] in {"NEEDS_UPSTREAM_GRANULARITY", "CONTINUATION_AMBIGUOUS"}
+            for diag in diagnostics
+        )
     )
     if group_limit_hit:
         diagnostics.append(
@@ -505,10 +685,13 @@ def derive_layout_hints(observation: Mapping[str, Any], *, limits: Mapping[str, 
                 ),
             }
         )
-    diagnostics.append({"code": "WORK_UNITS", "unit_ids": [], "detail": str(budget.used)})
+    diagnostics.append(
+        {"code": "WORK_UNITS", "unit_ids": [], "detail": str(budget.used)}
+    )
 
     return {
         "schema_version": SCHEMA_OUT,
+        "feature_version": LAYOUT_HINTS_VERSION,
         "source_ref": doc.source_ref,
         "unit_hints": unit_hints,
         "groups": final_groups,
@@ -536,7 +719,7 @@ def _region_confidence(draft) -> tuple[list[str], str]:
     return basis, "medium"
 
 
-def _row_confidence(draft, page_bands, index) -> tuple[str, list[str]]:
+def _row_confidence(draft, page_bands, index, budget) -> tuple[str, list[str]]:
     basis = ["visual_row"]
     if draft.granularity:
         return "low", basis + ["needs_upstream_granularity"]
@@ -546,17 +729,16 @@ def _row_confidence(draft, page_bands, index) -> tuple[str, list[str]]:
     assigned = 0
     wide_single = False
     for cell in cells:
-        column, _span = assign_cell_columns(cell, draft.slots)
+        column, _span = assign_cell_columns(cell, draft.slots, budget=budget)
         if column is not None:
             assigned += 1
     if len(cells) == 1 and (cells[0].bbox[2] - cells[0].bbox[0]) > 0.5 * region_width:
         wide_single = True
-    wrapped = False
-    for code, unit_ids, _detail in draft.diagnostics:
-        if code == "LOGICAL_ROW_UNRESOLVED":
-            row_units = {unit.unit_id for unit in page_bands.bands[index].units}
-            if row_units & set(unit_ids):
-                wrapped = True
+    wrapped = bool(
+        draft.wrapped_unit_ids.intersection(
+            unit.unit_id for unit in page_bands.bands[index].units
+        )
+    )
     if wide_single:
         return "low", basis + ["wide_row_unsplit"]
     if wrapped:
@@ -566,9 +748,10 @@ def _row_confidence(draft, page_bands, index) -> tuple[str, list[str]]:
     return "medium", basis + ["partial_cells"]
 
 
-def _region_descriptor(draft, page_bands) -> dict:
+def _region_descriptor(draft, page_bands, budget) -> dict:
     header_texts = []
     for index in draft.header_indices:
+        budget.charge()
         header_texts.append(page_bands.bands[index].text)
     return {
         "slots": draft.slots,
@@ -579,12 +762,23 @@ def _region_descriptor(draft, page_bands) -> dict:
     }
 
 
-def _build_unit_hints(doc, heading_evidence_by_id, lane_layouts, table_member_ids, context_ids, furniture_ids):
+def _build_unit_hints(
+    doc,
+    heading_evidence_by_id,
+    lane_layouts,
+    table_member_ids,
+    context_ids,
+    furniture_ids,
+):
     lane_by_unit: dict = {}
     for lane_layout in lane_layouts:
         for index, members in enumerate(lane_layout.lanes):
             for unit in members:
-                lane_by_unit[unit.unit_id] = (index, lane_layout.confidence, list(lane_layout.basis))
+                lane_by_unit[unit.unit_id] = (
+                    index,
+                    lane_layout.confidence,
+                    list(lane_layout.basis),
+                )
         for unit in lane_layout.spanning:
             lane_by_unit[unit.unit_id] = (None, "medium", ["spanning_lane"])
 
@@ -613,9 +807,17 @@ def _build_unit_hints(doc, heading_evidence_by_id, lane_layouts, table_member_id
         elif unit.unit_id in context_ids:
             column, lane_confidence, lane_basis = None, "low", ["context_line"]
         elif unit.unit_id in furniture_ids:
-            column, lane_confidence, lane_basis = None, "low", ["repeated_page_furniture"]
+            column, lane_confidence, lane_basis = (
+                None,
+                "low",
+                ["repeated_page_furniture"],
+            )
         else:
-            column, lane_confidence, lane_basis = None, evidence["confidence"], ["no_lane_split"]
+            column, lane_confidence, lane_basis = (
+                None,
+                evidence["confidence"],
+                ["no_lane_split"],
+            )
 
         if evidence["level"] is not None:
             confidence = evidence["confidence"]

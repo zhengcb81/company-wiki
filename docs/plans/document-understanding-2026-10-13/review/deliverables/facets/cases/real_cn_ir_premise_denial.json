@@ -22,53 +22,138 @@
       "language": "zh-CN",
       "carrier": "pdf",
       "read_scope": "问答第2-3页",
-      "note": "片段来自母计划 sample_observations 对同一 SHA 原件的只读侦察；引文经逐条对照原文核验"
+      "note": "设计语境正文显式标 provenance，不用于运行时raw；完整支持短锚点在ROOT接收时按固定SHA原件复核，正式unit/locator由公共解析器恢复。"
     },
     "units": [
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": 2, "line": null, "exact_quote": "公司业绩在23年度达到历史新高后，24年度断崖式下降"},
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "问：公司业绩在23 年度达到历史新高后，24 年度断崖式下降，\n25 年仍未有明显起色，主要是因为沸石原因么？公司有什么举措尽快恢\n复乃至超过23 年度的经营业绩？"
+        },
         "page": 2,
         "text": "问：公司业绩在23年度达到历史新高后，24年度断崖式下降，25年仍未有明显起色，主要是因为沸石原因么？公司有什么举措尽快恢复乃至超过23年度的经营业绩？",
         "role": "qa_question",
-        "hints": {"facet_ids": ["facet_risk_denial"], "semantic_ids": ["semantic_stage_progression"]}
+        "hints": {
+          "facet_ids": [
+            "facet_risk_denial"
+          ],
+          "semantic_ids": [
+            "semantic_stage_progression"
+          ]
+        },
+        "text_status": "original_excerpt",
+        "text_source": "原件短摘录；仍需公共解析器恢复正式unit/locator",
+        "runtime_raw": false
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": 2, "line": null, "exact_quote": "2024年度影响收入的主要原因为沸石系列环保材料业务及部分医药业务下游需求减少"},
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "答：您好！公司2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司2025 年度沸石分子筛产品收入\n略低于2024 年度。公司2025 年度及2026 年一季度收入及归属于上市公\n司股东的净利润均实现同比增长"
+        },
         "page": 2,
         "text": "答：您好！公司2024年度影响收入的主要原因为沸石系列环保材料业务及部分医药业务下游需求减少，公司2025年度沸石分子筛产品收入略低于2024年度。公司2025年度及2026年一季度收入及归属于上市公司股东的净利润均实现同比增长。",
         "role": "qa_answer",
-        "hints": {"facet_ids": ["facet_risk_denial", "facet_operating_metrics"]}
+        "hints": {
+          "facet_ids": [
+            "facet_risk_denial",
+            "facet_operating_metrics"
+          ]
+        },
+        "text_status": "explanatory_reconstruction",
+        "text_source": "手工重述/拼接设计语境；不是raw，不用于生产证据或评测observed",
+        "runtime_raw": false
       },
       {
         "unit_id": "u3",
         "locator": null,
-        "anchor": {"physical_page": 3, "line": null, "exact_quote": "公司现无生产VC（碳酸亚乙烯酯）的情况"},
+        "anchor": {
+          "physical_page": 3,
+          "line": null,
+          "exact_quote": "问：控股股东在支持上市公司层面，具体做了哪些工作？有没有\n能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具\n体业务，推动上市公司快速做大做强？\n答：您好，公司现无生产VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+        },
         "page": 3,
         "text": "问：控股股东在支持上市公司层面，具体做了哪些工作？有没有能推动与宁德时代等行业龙头达成电池电解液添加剂VC的带量采购等具体业务？答：您好，公司现无生产VC（碳酸亚乙烯酯）的情况，根据公司控股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立业务协同与合作。",
         "role": "qa_answer",
-        "hints": {"facet_ids": ["facet_risk_denial", "facet_customer_orders"]}
+        "hints": {
+          "facet_ids": [
+            "facet_risk_denial",
+            "facet_customer_orders"
+          ]
+        },
+        "text_status": "explanatory_reconstruction",
+        "text_source": "手工重述/拼接设计语境；不是raw，不用于生产证据或评测observed",
+        "runtime_raw": false
       },
       {
         "unit_id": "u4",
         "locator": null,
-        "anchor": {"physical_page": 2, "line": null, "exact_quote": "该事项未对九目化学经营构成重大影响"},
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。九目化学主要产品为OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。九目化学已于3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+        },
         "page": 2,
         "text": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产品，该事项未对九目化学经营构成重大影响。九目化学主要产品为OLED升华前材料，下游客户为国内外OLED成品材料企业。九目化学已于3月11日收到北交所第二轮审核问询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待财务数据按要求完成更新后，将申请恢复审核，并回复问询。",
         "role": "qa_answer",
-        "hints": {"facet_ids": ["facet_risk_denial", "facet_new_business"]}
+        "hints": {
+          "facet_ids": [
+            "facet_risk_denial",
+            "facet_new_business"
+          ]
+        },
+        "text_status": "explanatory_reconstruction",
+        "text_source": "手工重述/拼接设计语境；不是raw，不用于生产证据或评测observed",
+        "runtime_raw": false
       },
       {
         "unit_id": "u5",
         "locator": null,
-        "anchor": {"physical_page": 3, "line": null, "exact_quote": "先进新材料的开发和应用很多是长期的过程，需要通过长时间的产品开发、技术积累以及下游验证支持"},
+        "anchor": {
+          "physical_page": 3,
+          "line": null,
+          "exact_quote": "先进新材料的开发和应用很多是长期的过程，需要通过长时间\n的产品开发、技术积累以及下游验证支持，才可能在下游产业发展的过程\n中做出更多贡献。公司将继续积极推进先进新材料的开发与产业化，争取\n更多前沿材料领域的优势地位。"
+        },
         "page": 3,
         "text": "答：您好，公司是以研发创新驱动发展的平台型企业……先进新材料的开发和应用很多是长期的过程，需要通过长时间的产品开发、技术积累以及下游验证支持，才可能在下游产业发展的过程中做出更多贡献。公司将继续积极推进先进新材料的开发与产业化。",
         "role": "qa_answer",
-        "hints": {"facet_ids": ["facet_new_business"], "semantic_ids": ["semantic_stage_progression"]}
+        "hints": {
+          "facet_ids": [
+            "facet_new_business"
+          ],
+          "semantic_ids": [
+            "semantic_stage_progression"
+          ]
+        },
+        "text_status": "explanatory_reconstruction",
+        "text_source": "手工重述/拼接设计语境；不是raw，不用于生产证据或评测observed",
+        "runtime_raw": false
+      },
+      {
+        "unit_id": "u2n",
+        "locator": null,
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "其中2025 年度公司实现营业收入37.17\n亿元，同比增长约0.63%，实现归属于上市公司股东的净利润约2.84 亿\n元，同比增长约15.51%；2026 年一季度实现营业收入约10.15 亿元，同\n比增长约17.89%，实现归属于上市公司股东的净利润约0.88 亿元，同比\n增长约9.96%。"
+        },
+        "page": 2,
+        "text": "其中2025 年度公司实现营业收入37.17\n亿元，同比增长约0.63%，实现归属于上市公司股东的净利润约2.84 亿\n元，同比增长约15.51%；2026 年一季度实现营业收入约10.15 亿元，同\n比增长约17.89%，实现归属于上市公司股东的净利润约0.88 亿元，同比\n增长约9.96%。",
+        "role": "optional_financial_numbers",
+        "hints": {
+          "facet_ids": [
+            "facet_operating_metrics"
+          ],
+          "semantic_ids": []
+        },
+        "text_status": "original_excerpt",
+        "text_source": "原件短摘录；仍需公共解析器恢复正式unit/locator",
+        "runtime_raw": false
       }
     ]
   },
@@ -83,7 +168,12 @@
         "id": "f1",
         "objective": "问句措辞与前提（『断崖式下降』『主要是因为沸石原因么』）属于提问者；公司答复只确认2024年影响收入的主要原因是沸石系列环保材料业务及部分医药业务下游需求减少",
         "importance": "required_business",
-        "any_support_sets": [["u1", "u2"]],
+        "any_support_sets": [
+          [
+            "u1",
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "角色=提问者（投资者）措辞 vs 公司答复分列",
           "主体=万润股份（上市公司口径）",
@@ -100,7 +190,11 @@
         "id": "f2",
         "objective": "管理层明确否定：公司现无生产VC（碳酸亚乙烯酯）；控股股东中国节能与宁德时代建立联系属股东层面，不是上市公司业务",
         "importance": "required_business",
-        "any_support_sets": [["u3"]],
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
         "must_preserve": [
           "否定作用域=上市公司（『公司现无生产VC（碳酸亚乙烯酯）的情况』）",
           "语态=『现无』是当前时点否定，不含未来承诺",
@@ -117,7 +211,11 @@
         "id": "f3",
         "objective": "主体区分：被问事件涉及子公司九目化学——『未对九目化学经营构成重大影响』；北交所审核中止因财务数据更新需要，计划恢复审核",
         "importance": "required_business",
-        "any_support_sets": [["u4"]],
+        "any_support_sets": [
+          [
+            "u4"
+          ]
+        ],
         "must_preserve": [
           "主体=九目化学（被问公司），非万润股份自身",
           "否定作用域=该事项对九目化学经营『未构成重大影响』（量级限定）",
@@ -133,7 +231,11 @@
         "id": "f4",
         "objective": "先进新材料需要长期产品开发、技术积累与下游验证支持：这是阶段过程描述，不是收入承诺也不是失败结论",
         "importance": "required_business",
-        "any_support_sets": [["u5"]],
+        "any_support_sets": [
+          [
+            "u5"
+          ]
+        ],
         "must_preserve": [
           "阶段语义=长期开发/验证过程（未给具体阶段数字）",
           "语态=过程描述与公司意图（继续积极推进），非承诺产出时点"
@@ -148,7 +250,11 @@
         "id": "f5",
         "objective": "答复中出现的2025年度营业收入37.17亿元、归母净利润2.84亿元、2026年一季度收入10.15亿元等数字属 correctness_if_emitted：不要求抽取，一旦输出必须带期间、主体与口径",
         "importance": "correctness_if_emitted",
-        "any_support_sets": [["u2"]],
+        "any_support_sets": [
+          [
+            "u2n"
+          ]
+        ],
         "must_preserve": [
           "期间=2025年度 / 2026年一季度（分列）",
           "主体=归属于上市公司股东的净利润",
@@ -211,6 +317,13 @@
     "denominator": null,
     "condition": null
   },
-  "expected_missing_slots": ["stage"],
-  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION",
+  "not_applicable_slots": [
+    "stage",
+    "quantity",
+    "unit",
+    "denominator"
+  ],
+  "version": "1.1.0"
 }

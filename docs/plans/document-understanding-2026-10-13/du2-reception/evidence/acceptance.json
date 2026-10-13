@@ -1,0 +1,64 @@
+{
+  "schema_version": "du2-root-acceptance/1",
+  "status": "MODULE_ACCEPTED_PUBLICATION_PENDING",
+  "author_heads": {
+    "families": "b48b6ede50826bb249009ee9ca71c330764317a6",
+    "facets": "400a9456708f1a8c376050012f9078359bfa9074",
+    "layout": "8cfd069cce2e829c5a95c7b64323629c6ca21dae"
+  },
+  "joint": {
+    "schema_version": "du2-joint-receipt/1",
+    "exit_code": 0,
+    "elapsed_seconds": 48.699,
+    "test_counts": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1135",
+      "time": "42.665",
+      "timestamp": "2026-10-13T22:53:10.157221+01:00",
+      "hostname": "DESKTOP-156V213"
+    },
+    "targets": [
+      "tests/unit/document_understanding_profiles",
+      "tests/unit/document_understanding_structure",
+      "tests/unit/document_understanding_layout_hints",
+      "tests/unit/document_understanding_root",
+      "tools/document_understanding_benchmark/tests",
+      "docs/plans/document-understanding-2026-10-13/review/deliverables/families/tests",
+      "docs/plans/document-understanding-2026-10-13/review/deliverables/facets/tests",
+      "tests/unit/test_narrative_evidence.py",
+      "tests/unit/test_narrative_format_pipeline.py"
+    ],
+    "real_data_excluded": true,
+    "config_count": 7,
+    "config_unchanged": true,
+    "temporary_directory_removed": true,
+    "sentinel_unchanged": true,
+    "network_calls": 0,
+    "model_calls": 0,
+    "paid_usd": 0
+  },
+  "real_pdf_sources": 4,
+  "real_pdf_verified_spans": 658,
+  "real_pdf_failed_spans": 0,
+  "real_10q_scoped_hits_before": 0,
+  "real_10q_scoped_hits_final": 5,
+  "real_10q_checks_passed": 6,
+  "independent_findings_closed": 4,
+  "model_calls": 0,
+  "paid_usd": 0,
+  "original_writes": 0,
+  "production_config_writes": 0,
+  "production_default_enabled": false,
+  "known_gaps": [
+    "Coarse original block/table-region geometry has zero real column lanes/fine cells on four samples",
+    "Font heading counts are not manually scored precision",
+    "B8 legacy selector thematic/numeric hardcodes and diversity/value budgeting remain",
+    "B10-11 production consumer and cache; C12-15 real model quality/G2/G4/G5 remain",
+    "Existing MSFT critical business baseline 4/8 FAIL retained"
+  ],
+  "receipt_zip_bytes": 166085,
+  "runtime_catalog_sha256": "32c693421c4744e4925d2cb45f32778b1fd6776a6f6cde840d2af2f0c6375de1"
+}

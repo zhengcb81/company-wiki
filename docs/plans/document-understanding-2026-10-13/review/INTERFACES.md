@@ -89,3 +89,7 @@ text_column仅表示正文分栏；cells行列为表内0基坐标，不混用。
 各包自建 own PWF；只写 .planning/du2-<lane>/handoff.json、handoff.md，格式：{schema_version:"du2-handoff/1",lane,base_sha,implementation_commits,worktree,owned_paths,status,public_interfaces,interface_deviations,A_B_C:[{node,command,exit_code,elapsed_seconds,result_path}],real_samples,synthetic_cases,known_gaps,resources:{model_calls,paid_usd,persistent_bytes,scratch_peak_bytes},raw_preservation,scratch_restore,next_root_action}。
 
 handoff可在实现commit后再提交一次以准确记录SHA；不要求expectedHEAD许可。保持正常git hooks，提交本分支停止，不合主线/push主线/安装技能。缺真实样本可交诚实gap，不能把synthetic或结构PASS当模型语义PASS。
+
+## ROOT接收的兼容扩展（2026-10-13）
+
+布局输出同du2-layout-hints/1新增唯一feature_version=1.1.0，用于实际layout内容版本；不是来源locator或许可。upstream_hints.geometry_granularity=row|block|table_region明确聚合框，不能造cells。PDF同一次dict snapshot尺寸/字体与bbox同frame，原text/ID/locator/raw parser版本不改。公共pipeline和summary同schema/1 additive feature_version1.1.0；summary layout_coverage与原生来源覆盖分开。facet运行返回confusion_checks={risk:why_wrong,required_context_slots}和applicable_mechanisms作为指令，不发送case/source_meaning/wrong_assertion示例数。策略局部hash、source原文实物化和预算不放松。

@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-facet-spec/1",
   "id": "facet_industry_competition",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "business_questions": [
     "行业供需、技术路线或竞争格局发生了什么变化，是谁的陈述或统计",
     "公司受到的具体影响是什么（区别于行业一般叙述）",
@@ -62,12 +62,11 @@
       "slots": [
         "quantity",
         "unit",
-        "denominator",
         "period"
       ],
       "required_when": "quantity_emitted",
       "missing_behavior": "unknown",
-      "reason": "只有输出数量才要求单位/分母；口径不明的行业估算不得当作精确值引用"
+      "reason": "只有输出数量才要求单位/分母；口径不明的行业估算不得当作精确值引用；普通计数保留范围口径，不强制数学分母。"
     },
     {
       "assertion": "断言行业变化对公司的具体影响时保留条件与范围（哪些产品、哪些地区、哪个期间）",

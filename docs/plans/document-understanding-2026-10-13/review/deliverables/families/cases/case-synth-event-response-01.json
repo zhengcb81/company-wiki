@@ -30,40 +30,69 @@
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": null, "exact_quote": "[SYNTHETIC] 问询函问题二：请说明新签合同金额占最近一年收入的比例是否重大。"},
+        "anchor": {
+          "physical_page": 1,
+          "line": null,
+          "exact_quote": "[SYNTHETIC] 问询函问题二：请说明新签合同金额占最近一年收入的比例是否重大。"
+        },
         "page": 1,
         "text": "[SYNTHETIC] 问询函问题二：请说明新签合同金额占最近一年收入的比例是否重大。",
         "role": "questions",
-        "hints": {"synthetic": true, "speaker": "监管问询（提问方）"}
+        "hints": {
+          "synthetic": true,
+          "speaker": "监管问询（提问方）"
+        }
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": 2, "line": null, "exact_quote": "[SYNTHETIC] 回复：该合同金额为框架采购上限，不构成收入确认依据，实际收入以交付验收为准。"},
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "[SYNTHETIC] 回复：该合同金额为框架采购上限，不构成收入确认依据，实际收入以交付验收为准。"
+        },
         "page": 2,
         "text": "[SYNTHETIC] 回复：该合同金额为框架采购上限，不构成收入确认依据，实际收入以交付验收为准。",
         "role": "business",
-        "hints": {"synthetic": true, "speaker": "公司回复", "answers": "u1"}
+        "hints": {
+          "synthetic": true,
+          "speaker": "公司回复",
+          "answers": "u1"
+        }
       }
     ]
   },
   "expectations": {
-    "routing_notes": ["问询问题与公司回复是两个来源角色；合同金额≠收入"],
+    "routing_notes": [
+      "问询问题与公司回复是两个来源角色；合同金额≠收入"
+    ],
     "facts": [
       {
         "id": "f1-question-vs-reply-roles",
         "objective": "问询内容与回复内容分离",
         "importance": "critical",
-        "any_support_sets": [["u1", "u2"]],
-        "must_preserve": ["u1 为监管提问（含预设）", "u2 为公司回复：框架上限、非收入确认依据"],
+        "any_support_sets": [
+          [
+            "u1",
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "u1 为监管提问（含预设）",
+          "u2 为公司回复：框架上限、非收入确认依据"
+        ],
         "must_not_assert": [
           "不得把监管问题中的前提当事实",
           "框架合同金额不得当收入或订单全额转化"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["真实问询-回复链核验（缺样）", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "真实问询-回复链核验（缺样）",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

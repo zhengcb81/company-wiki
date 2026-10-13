@@ -40,7 +40,11 @@
         "page": 1,
         "text": "投资者关系活动记录表　编号：20230428　投资者关系活动类别 □特定对象调研 □分析师会议 □媒体采访 ☑业绩说明会",
         "role": "administrative",
-        "hints": {"heading_path": ["表头"]}
+        "hints": {
+          "heading_path": [
+            "表头"
+          ]
+        }
       },
       {
         "unit_id": "u2",
@@ -53,7 +57,10 @@
         "page": 2,
         "text": "答：您好，公司2022 年功能性材料整体产能利用率64.68%，具体情况详见公司《2022 年年度报告》第三节。",
         "role": "operating_metrics",
-        "hints": {"unit_kind": "qa_exchange", "speaker": "公司（管理层）"}
+        "hints": {
+          "unit_kind": "qa_exchange",
+          "speaker": "公司（管理层）"
+        }
       },
       {
         "unit_id": "u3",
@@ -66,7 +73,10 @@
         "page": 2,
         "text": "答：您好，公司控股子公司三月科技目前已有自主知识产权的OLED 成品材料与PI 成品材料通过下游客户验证并实现供应，三月科技收入规模呈增长态势。",
         "role": "business",
-        "hints": {"unit_kind": "qa_exchange", "speaker": "公司（管理层）"}
+        "hints": {
+          "unit_kind": "qa_exchange",
+          "speaker": "公司（管理层）"
+        }
       }
     ]
   },
@@ -80,35 +90,66 @@
         "id": "f1-body-over-filename",
         "objective": "识别以正文而非文件名为准",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["正文性质：投资者关系活动记录表（业绩说明会）", "日期：2023-04-28"],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "正文性质：投资者关系活动记录表（业绩说明会）",
+          "日期：2023-04-28"
+        ],
         "must_not_assert": [
           "不得按文件名把它当制度文件或负例",
           "不得因标题误导而跳过有价值正文"
-        ]
+        ],
+        "target_kind": "disposition_context"
       },
       {
         "id": "f2-utilization-scope",
         "objective": "产能利用率的范围与期间口径",
         "importance": "normal",
-        "any_support_sets": [["u2"]],
-        "must_preserve": ["期间：2022年；口径：功能性材料整体产能利用率64.68%", "公司指引到年报第三节作更细口径"],
-        "must_not_assert": ["“整体产能利用率”不得套到单一产品线", "不得省略期间"]
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "期间：2022年；口径：功能性材料整体产能利用率64.68%",
+          "公司指引到年报第三节作更细口径"
+        ],
+        "must_not_assert": [
+          "“整体产能利用率”不得套到单一产品线",
+          "不得省略期间"
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f3-subsidiary-attribution",
         "objective": "子公司验证供货事实的主体归属",
         "importance": "critical",
-        "any_support_sets": [["u3"]],
-        "must_preserve": ["主体：控股子公司（非母公司）", "阶段：通过下游客户验证并实现供应", "产品：OLED/PI 成品材料"],
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
+        "must_preserve": [
+          "主体：控股子公司（非母公司）",
+          "阶段：通过下游客户验证并实现供应",
+          "产品：OLED/PI 成品材料"
+        ],
         "must_not_assert": [
           "不得把子公司事实写成母公司整体业务",
           "“实现供应”不得扩写为规模量产或大额订单"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["数字真伪的外部核验", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "数字真伪的外部核验",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {
@@ -132,6 +173,8 @@
     "period": "截至2023-04-28",
     "condition": "通过下游客户验证并实现供应"
   },
-  "expected_missing_slots": ["quantity"],
+  "expected_missing_slots": [
+    "quantity"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

@@ -32,11 +32,19 @@
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": null, "exact_quote": ""},
+        "anchor": {
+          "physical_page": 1,
+          "line": null,
+          "exact_quote": ""
+        },
         "page": 1,
         "text": "",
         "role": "unknown",
-        "hints": {"native_text_empty": true, "page_image_only": true, "note": "合法空值：扫描页无原生文本，本 case 的证据就是“空文本观测”本身"}
+        "hints": {
+          "native_text_empty": true,
+          "page_image_only": true,
+          "note": "合法空值：扫描页无原生文本，本 case 的证据就是“空文本观测”本身"
+        }
       }
     ]
   },
@@ -50,7 +58,11 @@
         "id": "f1-empty-text-not-skip",
         "objective": "空原生文本的处置与命名",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "观测：单页扫描件，原生文本为空",
           "处置：有限 OCR 后再判，或 needs_source；原件与来源记录保留"
@@ -59,7 +71,8 @@
           "不得把标题“招股说明书”当正文性质",
           "不得因空文本判定无业务内容或删除原件",
           "不得声称已读其内容"
-        ]
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "needs_source",

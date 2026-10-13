@@ -39,7 +39,10 @@
         "page": null,
         "text": "Item 4. Information on the Company 66 Item 4A Unresolved Staff Comments 99 Item 5. Operating and Financial Review and Prospects 99 Item 6. Directors, Senior Management and Employees 114 Item 7. Major Shareholders and Related Party Transactions 123",
         "role": "unknown",
-        "hints": {"unit_kind": "toc", "note": "20-F 目录：Item 5=经营回顾；Item 7=主要股东（与 10-K 的 Item 7 MD&A 同号不同义）"}
+        "hints": {
+          "unit_kind": "toc",
+          "note": "20-F 目录：Item 5=经营回顾；Item 7=主要股东（与 10-K 的 Item 7 MD&A 同号不同义）"
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +55,12 @@
         "page": null,
         "text": "Our financial statements are expressed in U.S. dollars, which is our reporting currency.",
         "role": "financial_notes",
-        "hints": {"heading_path": ["Item 3. Key Information"], "dom_line": 10}
+        "hints": {
+          "heading_path": [
+            "Item 3. Key Information"
+          ],
+          "dom_line": 10
+        }
       }
     ]
   },
@@ -66,7 +74,11 @@
         "id": "f1-item-map-not-10k",
         "objective": "20-F 与 10-K 章节编号不可互套",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "Item 4=公司信息/业务；Item 5=经营回顾与展望",
           "本 unit 为目录（toc），非正文",
@@ -76,19 +88,34 @@
           "不得把 20-F Item 5 当 10-K Item 7 MD&A",
           "不得把 20-F Item 7（主要股东）读成 MD&A",
           "不得以目录命中宣称已读业务正文"
-        ]
+        ],
+        "target_kind": "disposition_context"
       },
       {
         "id": "f2-reporting-currency",
         "objective": "币种口径必须保留",
         "importance": "normal",
-        "any_support_sets": [["u2"]],
-        "must_preserve": ["报告币种：美元（reporting currency）", "主体：该公司财务报表"],
-        "must_not_assert": ["不得按上市地或业务地推断记账本位币", "报表币种与经营地币种不得混同"]
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "报告币种：美元（reporting currency）",
+          "主体：该公司财务报表"
+        ],
+        "must_not_assert": [
+          "不得按上市地或业务地推断记账本位币",
+          "报表币种与经营地币种不得混同"
+        ],
+        "target_kind": "correctness_if_emitted"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["业务章节正文内容", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "业务章节正文内容",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

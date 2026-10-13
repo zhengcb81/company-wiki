@@ -22,35 +22,81 @@
       "language": "zh-CN",
       "carrier": "pdf",
       "read_scope": "第八章 本次募集资金运用（第223-225页）、项目设备明细（第248页）",
-      "note": "片段来自母计划 sample_observations 对同一 SHA 原件的只读侦察；引文经逐条对照原文核验"
+      "note": "设计语境正文显式标 provenance，不用于运行时raw；完整支持短锚点在ROOT接收时按固定SHA原件复核，正式unit/locator由公共解析器恢复。"
     },
     "units": [
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": 223, "line": null, "exact_quote": "拟投资于年产400吨吡啶盐项目和年产1,500吨三氯蔗糖项目"},
+        "anchor": {
+          "physical_page": 223,
+          "line": null,
+          "exact_quote": "本次公开发行可转\n债拟募集资金不超过人民币6亿元（含6亿元），本次发行可转债募集的资金总额\n扣除发行费用后拟投资于年产400吨吡啶盐项目和年产1,500吨三氯蔗糖项目，项\n目实施主体为本公司。 \n本次公开发行可转债募集的资金总额扣除发行费用后拟投资于以下项目： \n单位：万元 \n序号 \n项目名称 \n项目品种 \n项目总投资 \n拟投入募集资金 \n实施主体 \n1 \n年产400 吨吡啶盐项目 \n吡啶盐 \n26,527.49 \n20,000.00 \n金禾实业 \n2 \n年产1,500 吨三氯蔗糖项目 \n三氯蔗糖 \n46,220.20 \n40,000.00 \n金禾实业 \n合计 \n \n72,747.69 \n60,000.00"
+        },
         "page": 223,
         "text": "本次公开发行可转债拟募集资金不超过人民币6亿元（含6亿元），本次发行可转债募集的资金总额扣除发行费用后拟投资于年产400吨吡啶盐项目和年产1,500吨三氯蔗糖项目，项目实施主体为本公司。年产400吨吡啶盐项目总投资26,527.49万元、拟投入募集资金20,000.00万元；年产1,500吨三氯蔗糖项目总投资46,220.20万元、拟投入募集资金40,000.00万元。",
         "role": "fund_use_overview",
-        "hints": {"facet_ids": ["facet_capacity_projects"], "semantic_ids": ["semantic_capacity_project"]}
+        "hints": {
+          "facet_ids": [
+            "facet_capacity_projects"
+          ],
+          "semantic_ids": [
+            "semantic_capacity_project"
+          ]
+        },
+        "text_status": "explanatory_reconstruction",
+        "text_source": "手工重述/拼接设计语境；不是raw，不用于生产证据或评测observed",
+        "runtime_raw": false
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": 223, "line": null, "exact_quote": "募集资金不足部分由公司自筹解决"},
+        "anchor": {
+          "physical_page": 223,
+          "line": null,
+          "exact_quote": "如募集资金到位时间与项目进度不一致，公司将依据项目的实际情况以其他\n资金先行投入，募集资金到位后再予以置换。若本次发行实际募集资金净额低于\n拟投入项目的资金额，公司将根据实际募集资金净额，按照项目需要调整投资规\n模，募集资金不足部分由公司自筹解决。"
+        },
         "page": 223,
         "text": "如募集资金到位时间与项目进度不一致，公司将依据项目的实际情况以其他资金先行投入，募集资金到位后再予以置换。若本次发行实际募集资金净额低于拟投入项目的资金额，公司将根据实际募集资金净额，按照项目需要调整投资规模，募集资金不足部分由公司自筹解决。",
         "role": "funding_gap_condition",
-        "hints": {"facet_ids": ["facet_capacity_projects"], "semantic_ids": ["semantic_capacity_project"]}
+        "hints": {
+          "facet_ids": [
+            "facet_capacity_projects"
+          ],
+          "semantic_ids": [
+            "semantic_capacity_project"
+          ]
+        },
+        "text_status": "original_excerpt",
+        "text_source": "原件短摘录；仍需公共解析器恢复正式unit/locator",
+        "runtime_raw": false
       },
       {
         "unit_id": "u3",
         "locator": null,
-        "anchor": {"physical_page": 225, "line": null, "exact_quote": "2016年上半年公司完成了年产500吨三氯蔗糖项目的建设"},
+        "anchor": {
+          "physical_page": 225,
+          "line": null,
+          "exact_quote": "公司通过多年市场需求调查，已投入相关资源进行内部研究开发，比如2016\n年上半年公司完成了年产500吨三氯蔗糖项目的建设，标志着公司研发的第五代\n甜味剂三氯蔗糖全套生产流程及系统试产成功，意味着公司已经掌握了成熟的产\n品制备技术，具有技术领先优势。"
+        },
         "page": 225,
         "text": "公司通过多年市场需求调查，已投入相关资源进行内部研究开发，比如2016年上半年公司完成了年产500吨三氯蔗糖项目的建设，标志着公司研发的第五代甜味剂三氯蔗糖全套生产流程及系统试产成功，意味着公司已经掌握了成熟的产品制备技术。",
         "role": "existing_capacity_background",
-        "hints": {"facet_ids": ["facet_capacity_projects"], "semantic_ids": ["semantic_capacity_project", "semantic_stage_progression"], "mechanism_ids": ["mechanism_manufacturing"]}
+        "hints": {
+          "facet_ids": [
+            "facet_capacity_projects"
+          ],
+          "semantic_ids": [
+            "semantic_capacity_project",
+            "semantic_stage_progression"
+          ],
+          "mechanism_ids": [
+            "mechanism_manufacturing"
+          ]
+        },
+        "text_status": "explanatory_reconstruction",
+        "text_source": "手工重述/拼接设计语境；不是raw，不用于生产证据或评测observed",
+        "runtime_raw": false
       }
     ]
   },
@@ -65,7 +111,11 @@
         "id": "f1",
         "objective": "募投资金投向两个独立项目：年产400吨吡啶盐项目（总投资26,527.49万元、拟投入募集资金20,000.00万元）与年产1,500吨三氯蔗糖项目（总投资46,220.20万元、拟投入募集资金40,000.00万元），实施主体为公司自身",
         "importance": "required_business",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "项目=两个项目独立：400吨吡啶盐 / 1,500吨三氯蔗糖",
           "口径=项目总投资与拟投入募集资金分列",
@@ -82,7 +132,11 @@
         "id": "f2",
         "objective": "既有产能背景：年产500吨三氯蔗糖项目已于2016年上半年完成建设、试产成功；这不是本次募投的新增产能",
         "importance": "required_business",
-        "any_support_sets": [["u3"]],
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
         "must_preserve": [
           "口径=原有已建成产能（年产500吨），非募投新增",
           "期间=2016年上半年",
@@ -98,7 +152,11 @@
         "id": "f3",
         "objective": "资金缺口是条件安排：募集到位时间与进度不一致时先行投入并置换；实际募集资金净额低于拟投入金额时按需调整投资规模、不足部分自筹",
         "importance": "required_business",
-        "any_support_sets": [["u2"]],
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "条件=『若本次发行实际募集资金净额低于拟投入项目的资金额』",
           "方式=先行投入、置换、调整投资规模、自筹解决",
@@ -147,5 +205,6 @@
       "reason": "period 槽位决定项目状态归属哪一时点"
     }
   ],
-  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION",
+  "version": "1.1.0"
 }

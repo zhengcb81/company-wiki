@@ -30,40 +30,70 @@
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": 1, "line": null, "exact_quote": "[SYNTHETIC] 研究员观点：预计该公司明年出货量同比增长30%（预测，非公司指引）。"},
+        "anchor": {
+          "physical_page": 1,
+          "line": null,
+          "exact_quote": "[SYNTHETIC] 研究员观点：预计该公司明年出货量同比增长30%（预测，非公司指引）。"
+        },
         "page": 1,
         "text": "[SYNTHETIC] 研究员观点：预计该公司明年出货量同比增长30%（预测，非公司指引）。",
         "role": "outlook",
-        "hints": {"synthetic": true, "author_role": "研究员"}
+        "hints": {
+          "synthetic": true,
+          "author_role": "研究员"
+        }
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": 2, "line": null, "exact_quote": "[SYNTHETIC] 政策发文：某部委发布产能置换实施办法，自发布之日起施行。"},
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "[SYNTHETIC] 政策发文：某部委发布产能置换实施办法，自发布之日起施行。"
+        },
         "page": 2,
         "text": "[SYNTHETIC] 政策发文：某部委发布产能置换实施办法，自发布之日起施行。",
         "role": "industry",
-        "hints": {"synthetic": true, "author_role": "监管/政府"}
+        "hints": {
+          "synthetic": true,
+          "author_role": "监管/政府"
+        }
       }
     ]
   },
   "expectations": {
-    "routing_notes": ["第三方作者/发文主体保留；研究预测不当公司承诺"],
+    "routing_notes": [
+      "第三方作者/发文主体保留；研究预测不当公司承诺"
+    ],
     "facts": [
       {
         "id": "f1-third-party-attribution",
         "objective": "第三方内容的作者与语态保留",
         "importance": "critical",
-        "any_support_sets": [["u1"], ["u2"]],
-        "must_preserve": ["u1 作者为研究员、内容为预测", "u2 发文主体为部委、含生效期"],
+        "any_support_sets": [
+          [
+            "u1"
+          ],
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "u1 作者为研究员、内容为预测",
+          "u2 发文主体为部委、含生效期"
+        ],
         "must_not_assert": [
           "研究员预测不得当公司指引或承诺",
           "政策影响不得直接当公司业绩"
-        ]
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "generic_read",
-    "not_evaluated": ["回链公司披露验证（缺样）", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "回链公司披露验证（缺样）",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

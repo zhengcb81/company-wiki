@@ -29,11 +29,14 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from typing import Any
+from hashlib import sha256
+import json
 
 from .observation_adapter import is_selectable
-from .selection_bridge import context_groups, dependency_closure
+from .selection_bridge import build_context_graph, dependency_closure
 
 SCHEMA_VERSION = "du-summary-input/1"
+SUMMARY_FEATURE_VERSION = "1.1.0"
 
 #: Exported alias so callers can refer to the wire version without importing the constant
 #: through a private path.
@@ -53,6 +56,7 @@ _SHARED_CONSTRAINTS: tuple[str, ...] = (
     "区分已发生事实、公司计划与预测；保留否定与限定条件。",
     "未读到的内容标注为未读到，不要写成“没有”。",
     "不输出评级、目标价、仓位或估值结论。",
+    "业务关注项只是阅读提示，不代表原文已经证明对应事实；定性陈述不强制补出数字。",
 )
 
 
@@ -82,7 +86,6 @@ def build_summary_input(
     """
     observation = pipeline_result.get("observation") or {}
     route = pipeline_result.get("route") or {}
-    profile = pipeline_result.get("profile") or {}
     packages = pipeline_result.get("packages") or {}
     structure = pipeline_result.get("structure") or {}
 
@@ -95,7 +98,9 @@ def build_summary_input(
         unit_id: str(unit.get("text") or "") for unit_id, unit in units_by_id.items()
     }
 
-    closure = _apply_closure(packages, texts, selected_unit_ids, max_added=max_context_units)
+    graph = build_context_graph(packages, texts)
+    closure = _apply_closure(packages, texts, selected_unit_ids, max_added=max_context_units,
+                             graph=graph)
     units_for_summary = packages.get("packages", ())
 
     selected, dropped, used_chars, withheld = _materialise(
@@ -104,13 +109,16 @@ def build_summary_input(
         max_packages=max_packages,
         max_chars=max_chars,
         allowed_unit_ids=closure["allowed_unit_ids"],
+        graph=graph, texts=texts, max_context_units=max_context_units,
     )
 
-    selected, unsafe = _validate_sent_context(selected, context_groups(packages, texts), units_by_id)
+    selected, unsafe = _validate_sent_context(selected, graph["groups"], units_by_id, index=graph["index"])
     dropped.extend(unsafe)
     used_chars = sum(len(member["text"]) for entry in selected for member in entry["members"])
+    policies, facets, policy_version = _sent_policies(pipeline_result, selected)
     return {
         "schema_version": SCHEMA_VERSION,
+        "feature_version": SUMMARY_FEATURE_VERSION,
         "source_ref": pipeline_result.get("source_ref", {}),
         "source_metadata": dict(observation.get("metadata") or {}),
         "profile_id": route.get("profile_id"),
@@ -119,19 +127,19 @@ def build_summary_input(
         "regime": route.get("regime"),
         "confidence": route.get("confidence"),
         "disposition_hint": route.get("disposition_hint"),
-        "focus": str(profile.get("summary_focus") or ""),
+        "focus": " ".join(_unique([str(p.get("summary_focus") or "") for p in policies
+                                   if p.get("summary_focus")])),
         "modifiers": dict(route.get("modifiers") or {}),
-        "prefer_semantic_units": list(profile.get("semantic_units", ())),
-        "section_priorities": [
-            {
-                "section_role": entry.get("section_role"),
-                "priority": entry.get("priority"),
-            }
-            for entry in profile.get("section_priorities", ())
-        ],
-        "negative_hints": list(profile.get("negative_hints", ())),
+        "prefer_semantic_units": _unique([kind for p in policies for kind in p.get("semantic_units") or ()]),
+        "section_priorities": _unique([row for p in policies for row in p.get("section_priorities") or ()]),
+        "negative_hints": _unique([hint for p in policies for hint in p.get("negative_hints") or ()]),
         "constraints": list(_SHARED_CONSTRAINTS),
         "evidence_packages": selected,
+        "reading_policies": policies,
+        "business_facets": facets,
+        "reading_policy_version": policy_version,
+        "layout_coverage": dict((pipeline_result.get("layout_hints") or {}).get("coverage") or {}),
+        "layout_feature_version": (pipeline_result.get("layout_hints") or {}).get("feature_version"),
         "budget": {
             "max_packages": max_packages,
             "max_chars": max_chars,
@@ -152,11 +160,63 @@ def build_summary_input(
     }
 
 
+
+def _unique(values: Sequence[Any]) -> list[Any]:
+    output = []
+    seen = set()
+    for value in values:
+        key = json.dumps(value, ensure_ascii=False, sort_keys=True)
+        if key not in seen:
+            seen.add(key)
+            output.append(value)
+    return output
+
+
+def _sent_policies(
+    pipeline: Mapping[str, Any], entries: Sequence[Mapping[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], str]:
+    """Version only used policies; select hints only from the final source material.
+
+    Deduplication here bounds *probing*; it does not claim that the existing
+    package transport sends shared text once. chars_used measures actual output.
+    """
+    from .profiles import select_business_facets
+
+    material = {member["unit_id"]: member for entry in entries for member in entry["members"]}
+    per_unit = (pipeline.get("reading_plan") or {}).get("unit_profiles") or {}
+    fallback = pipeline.get("profile") or {}
+    used: dict[str, dict[str, Any]] = {}
+    for uid in material:
+        chosen = per_unit.get(uid, fallback)
+        policy = {key: chosen.get(key) for key in (
+            "profile_id", "profile_version", "family", "summary_focus", "policy_components",
+            "reading_questions", "context_requirements", "family_policy", "negative_hints", "semantic_units")}
+        policy["section_priorities"] = ([{"section_role": chosen.get("section_role"),
+                                           "priority": chosen.get("priority", 2)}]
+                                        if "section_role" in chosen else chosen.get("section_priorities", []))
+        fingerprint = json.dumps(policy, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        used[fingerprint] = policy
+    policies = [used[key] for key in sorted(used)]
+    facets = [{key: item.get(key) for key in (
+        "id", "version", "content_digest", "selection_basis", "business_questions",
+        "summary_focus", "required_context", "absence_rules", "confusion_checks", "applicable_mechanisms")}
+        for item in select_business_facets(list(material.values()))]
+    manifest = {"schema_version": "du-sent-policy/1", "reading_policies": policies,
+                "pipeline_feature_version": pipeline.get("feature_version"),
+                "summary_feature_version": SUMMARY_FEATURE_VERSION,
+                "layout_feature_version": (pipeline.get("layout_hints") or {}).get("feature_version"),
+                "business_facets": [{k: v for k, v in f.items() if k != "selection_basis"}
+                                    for f in facets], "constraints": list(_SHARED_CONSTRAINTS)}
+    digest = sha256(json.dumps(manifest, ensure_ascii=False, sort_keys=True,
+                               separators=(",", ":")).encode()).hexdigest()
+    return policies, facets, "du-sent-policy/1+" + digest
+
+
 def _apply_closure(
     packages: Mapping[str, Any],
     texts: Mapping[str, str],
     selected_unit_ids: Sequence[str] | None,
-    *, max_added: int,
+    *, max_added: int, graph: Mapping[str, Any],
 ) -> dict[str, Any]:
     """Closure over the caller's selection, or an explicit "not applied".
 
@@ -173,7 +233,7 @@ def _apply_closure(
             "reason": "no selector selection was supplied",
         }
     closure = dependency_closure(selected_unit_ids, packages, texts,
-                                 max_added=max_added, include_members=True)
+                                 max_added=max_added, include_members=True, context_graph=graph)
     allowed = set(closure["selected_unit_ids"])
     return {
         "applied": True,
@@ -191,6 +251,9 @@ def _materialise(
     max_packages: int,
     max_chars: int,
     allowed_unit_ids: set[str] | None = None,
+    graph: Mapping[str, Any] | None = None,
+    texts: Mapping[str, str] | None = None,
+    max_context_units: int = 64,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int, int]:
     """Copy the highest-priority packages, with text and provenance, inside the budget.
 
@@ -211,6 +274,7 @@ def _materialise(
     dropped: list[dict[str, Any]] = []
     used_chars = 0
     withheld_count = 0
+    restored_sent: set[str] = set()
 
     for index, package in enumerate(packages):
         package_id = str(package.get("package_id", ""))
@@ -218,10 +282,29 @@ def _materialise(
             dropped.append({"package_id": package_id, "reason": "PACKAGE_BUDGET"})
             continue
 
+        original_members = list(dict.fromkeys(package.get("member_unit_ids", ())))
+        required_ids = list(package.get("required_context_unit_ids", ()))
+        candidate_ids = original_members
+        added_context = []
+        if graph is not None:
+            seeds = [uid for uid in original_members if allowed_unit_ids is None or uid in allowed_unit_ids]
+            recovered = dependency_closure(seeds, {"packages": graph["items"]}, texts or {},
+                                           max_added=max_context_units, context_graph=graph)
+            if not recovered["complete"]:
+                dropped.append({"package_id": package_id, "reason": "CONTEXT_BUDGET_EXCEEDED",
+                                "diagnostics": recovered["diagnostics"]})
+                continue
+            added_context = recovered["added_unit_ids"]
+            candidate_ids = list(dict.fromkeys(original_members + added_context))
+            required_ids = list(dict.fromkeys(required_ids + added_context))
+            if len(restored_sent | set(added_context)) > max_context_units:
+                dropped.append({"package_id": package_id, "reason": "CONTEXT_BUDGET_EXCEEDED"})
+                continue
+
         members: list[dict[str, Any]] = []
         member_chars = 0
         package_withheld = 0
-        for unit_id in package.get("member_unit_ids", ()):
+        for unit_id in candidate_ids:
             unit = units_by_id.get(str(unit_id))
             if unit is None:
                 # Never invent evidence: a unit the observation does not contain is skipped.
@@ -246,7 +329,7 @@ def _materialise(
 
         present_ids = {member["unit_id"] for member in members}
         missing_required = []
-        for required_id in package.get("required_context_unit_ids", ()):
+        for required_id in required_ids:
             required_id = str(required_id)
             if required_id in present_ids:
                 continue
@@ -281,6 +364,7 @@ def _materialise(
             continue
 
         used_chars += member_chars
+        restored_sent.update(added_context)
         entry: dict[str, Any] = {
             "package_id": package_id,
             "rank": index,
@@ -298,9 +382,10 @@ def _materialise(
             "members": members,
         }
         entry["required_locators"] = [units_by_id[uid]["locator"]
-            for uid in package.get("required_context_unit_ids", ())
+            for uid in required_ids
             if uid in units_by_id and is_selectable(units_by_id[uid])]
         entry["dependencies_resolved"] = True
+        entry["restored_context_unit_ids"] = added_context
         for key in ("reading_profile_id", "reading_profile_version", "summary_focus"):
             if key in package:
                 entry[key] = package[key]
@@ -313,7 +398,7 @@ def _materialise(
 
 def _validate_sent_context(
     entries: list[dict[str, Any]], groups: Sequence[Mapping[str, Any]],
-    units: Mapping[str, Mapping[str, Any]],
+    units: Mapping[str, Mapping[str, Any]], *, index: Mapping[str, list[int]] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Verify the actual output, including cuts made after initial closure.
 
@@ -323,10 +408,11 @@ def _validate_sent_context(
     """
     from collections import deque
 
-    index: dict[str, list[int]] = {}
-    for i, group in enumerate(groups):
-        for uid in group["member_unit_ids"]:
-            index.setdefault(uid, []).append(i)
+    if index is None:
+        index = {}
+        for i, group in enumerate(groups):
+            for uid in group["member_unit_ids"]:
+                index.setdefault(uid, []).append(i)
     kept = list(entries)
     dropped = []
     while kept:

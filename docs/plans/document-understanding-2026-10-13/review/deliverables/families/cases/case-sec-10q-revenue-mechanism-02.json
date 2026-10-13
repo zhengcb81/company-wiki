@@ -39,7 +39,14 @@
         "page": null,
         "text": "subscriptions, advisory/consulting services, and for transactional solutions, recurring and non-recurring. Subscriptions for our solutions are generally paid in advance of rendering services either quarterly or in full",
         "role": "financial_notes",
-        "hints": {"heading_path": ["PART I", "Item 1. Financial Statements", "Notes"], "dom_line": 2694}
+        "hints": {
+          "heading_path": [
+            "PART I",
+            "Item 1. Financial Statements",
+            "Notes"
+          ],
+          "dom_line": 2694
+        }
       }
     ]
   },
@@ -53,7 +60,11 @@
         "id": "f1-subscription-revenue-mechanism",
         "objective": "识别订阅收入的收费/履约机制",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "机制：订阅按季度或全额预付（paid in advance）",
           "服务组合：订阅、顾问/咨询、交易型（recurring 与 non-recurring 并存）",
@@ -62,11 +73,15 @@
         "must_not_assert": [
           "预付不等于当期确认收入",
           "不得由此推出未披露的递延收入、RPO 或留存率数值"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["财务数值抽取", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "财务数值抽取",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {
@@ -84,6 +99,8 @@
     "period": "2025年第一季度",
     "condition": "generally（一般性机制）"
   },
-  "expected_missing_slots": ["quantity"],
+  "expected_missing_slots": [
+    "quantity"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

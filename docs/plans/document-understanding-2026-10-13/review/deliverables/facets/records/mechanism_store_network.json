@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-facet-spec/1",
   "id": "mechanism_store_network",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "business_questions": [
     "门店网络按什么模式运营（直营、合伙人、代理/经销、加盟），各模式的经营与会计归属如何",
     "门店总数、净增、开关店的口径与时点是什么",
@@ -64,12 +64,11 @@
       "slots": [
         "quantity",
         "unit",
-        "period",
-        "denominator"
+        "period"
       ],
       "required_when": "quantity_emitted",
       "missing_behavior": "partial",
-      "reason": "存量与流量混用会把总数当净增；净增需同口径时点对比"
+      "reason": "存量与流量混用会把总数当净增；净增需同口径时点对比；普通计数保留范围口径，不强制数学分母。"
     },
     {
       "assertion": "断言门店模式带来的收入/利润时保留模式归属（直营/合伙人/代理）与确认方式",

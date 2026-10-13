@@ -1,30 +1,62 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "cn_interim_report",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["cn_exchange"],
+    "regimes": [
+      "cn_exchange"
+    ],
     "forms": [],
     "family": "interim",
-    "purposes": ["periodic_review"],
-    "modifiers": {"extent": "full", "revision": "original"},
-    "carrier": ["pdf"],
-    "language": ["zh"]
+    "purposes": [
+      "periodic_review"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf"
+    ],
+    "language": [
+      "zh"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "年半年度报告", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "年半年度报告",
+          "field": null
+        },
         "location": "cover",
         "reason": "A股半年报封面标题稳定形如《……年半年度报告》"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "本半年度报告未经审计", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "本半年度报告未经审计",
+          "field": null
+        },
         "location": "body",
         "reason": "半年报固定声明，同时给出未审计限定，属必须保留的口径"
       },
       {
-        "signal": {"kind": "metadata_equals", "value": "cn_exchange", "field": "regime"},
+        "signal": {
+          "kind": "metadata_equals",
+          "value": "cn_exchange",
+          "field": "regime"
+        },
         "location": "metadata",
         "reason": "A股披露制度；与标题/正文证据组合"
       }
@@ -39,45 +71,136 @@
   "sections": [
     {
       "role": "management_discussion",
-      "aliases": ["管理层讨论与分析", "经营情况讨论与分析"],
-      "heading_path": [["管理层讨论与分析"]],
+      "aliases": [
+        "管理层讨论与分析",
+        "经营情况讨论与分析"
+      ],
+      "heading_path": [
+        [
+          "管理层讨论与分析"
+        ]
+      ],
       "priority": 1,
-      "questions": ["上半年相比年初/上年同期发生了什么变化", "变动原因中的经营驱动"]
+      "questions": [
+        "上半年相比年初/上年同期发生了什么变化",
+        "变动原因中的经营驱动"
+      ]
     },
     {
       "role": "business",
-      "aliases": ["主要业务", "主营业务", "经营模式", "核心竞争力"],
-      "heading_path": [["管理层讨论与分析"], ["报告期内公司从事的主要业务", "主要业务", "主营业务", "核心竞争力分析"]],
+      "aliases": [
+        "主要业务",
+        "主营业务",
+        "经营模式",
+        "核心竞争力"
+      ],
+      "heading_path": [
+        [
+          "管理层讨论与分析"
+        ],
+        [
+          "报告期内公司从事的主要业务",
+          "主要业务",
+          "主营业务",
+          "核心竞争力分析"
+        ]
+      ],
       "priority": 1,
-      "questions": ["业务与产品线构成是否变化", "新产品/新订单的阶段证据"]
+      "questions": [
+        "业务与产品线构成是否变化",
+        "新产品/新订单的阶段证据"
+      ]
     },
     {
       "role": "operating_metrics",
-      "aliases": ["经营情况", "产销量", "产能", "订单", "项目进度"],
-      "heading_path": [["管理层讨论与分析"], ["经营情况", "产销量", "产能", "项目进度", "研发项目"]],
+      "aliases": [
+        "经营情况",
+        "产销量",
+        "产能",
+        "订单",
+        "项目进度"
+      ],
+      "heading_path": [
+        [
+          "管理层讨论与分析"
+        ],
+        [
+          "经营情况",
+          "产销量",
+          "产能",
+          "项目进度",
+          "研发项目"
+        ]
+      ],
       "priority": 2,
-      "questions": ["产能/订单/项目进度的主体、期间与阶段", "哪些是本期新增、哪些是存量"]
+      "questions": [
+        "产能/订单/项目进度的主体、期间与阶段",
+        "哪些是本期新增、哪些是存量"
+      ]
     },
     {
       "role": "outlook",
-      "aliases": ["下半年", "经营计划", "公司关于公司未来发展的讨论与分析"],
-      "heading_path": [["管理层讨论与分析"], ["下半年", "经营计划", "公司关于公司未来发展的讨论与分析"]],
+      "aliases": [
+        "下半年",
+        "经营计划",
+        "公司关于公司未来发展的讨论与分析"
+      ],
+      "heading_path": [
+        [
+          "管理层讨论与分析"
+        ],
+        [
+          "下半年",
+          "经营计划",
+          "公司关于公司未来发展的讨论与分析"
+        ]
+      ],
       "priority": 1,
-      "questions": ["下半年安排与实现条件", "计划相对年报是否变化"]
+      "questions": [
+        "下半年安排与实现条件",
+        "计划相对年报是否变化"
+      ]
     },
     {
       "role": "risk",
-      "aliases": ["可能面对的风险", "风险因素"],
-      "heading_path": [["管理层讨论与分析"], ["可能面对的风险", "风险因素"]],
+      "aliases": [
+        "可能面对的风险",
+        "风险因素"
+      ],
+      "heading_path": [
+        [
+          "管理层讨论与分析"
+        ],
+        [
+          "可能面对的风险",
+          "风险因素"
+        ]
+      ],
       "priority": 2,
-      "questions": ["风险提示中已发生事实与一般提示的区分"]
+      "questions": [
+        "风险提示中已发生事实与一般提示的区分"
+      ]
     },
     {
       "role": "financial_notes",
-      "aliases": ["合并财务报表附注", "财务报表附注"],
-      "heading_path": [["财务报告", "财务报表"], ["合并财务报表附注", "财务报表附注"]],
+      "aliases": [
+        "合并财务报表附注",
+        "财务报表附注"
+      ],
+      "heading_path": [
+        [
+          "财务报告",
+          "财务报表"
+        ],
+        [
+          "合并财务报表附注",
+          "财务报表附注"
+        ]
+      ],
       "priority": 3,
-      "questions": ["哪些附注含业务机制或经营解释"]
+      "questions": [
+        "哪些附注含业务机制或经营解释"
+      ]
     }
   ],
   "reading_questions": [
@@ -90,25 +213,40 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period"],
+      "slots": [
+        "subject",
+        "period"
+      ],
       "missing_behavior": "unknown",
       "reason": "半年报数据是上半年累计口径且未经审计，断言必须绑定主体与期间"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator"
+      ],
       "missing_behavior": "partial",
       "reason": "半年累计、单季、同比基期必须分开；缺口径不得单独引用数值"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "stage", "condition"],
+      "slots": [
+        "project",
+        "stage",
+        "condition"
+      ],
       "missing_behavior": "partial",
       "reason": "项目进度/送样验证/重复订单等断言必须保留项目主体与阶段"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "下半年计划、未审计声明等限定语随事实保留"
     }
@@ -130,8 +268,15 @@
   },
   "evidence_status": {
     "design": "verified",
-    "real_samples": ["case-cn-interim-stage-01"],
-    "missing_shapes": ["无预期变化的半年报样本", "半年报摘要件版本对"]
+    "real_samples": [
+      "case-cn-interim-stage-01"
+    ],
+    "missing_shapes": [
+      "无预期变化的半年报样本",
+      "半年报摘要件版本对"
+    ]
   },
-  "case_ids": ["case-cn-interim-stage-01"]
+  "case_ids": [
+    "case-cn-interim-stage-01"
+  ]
 }

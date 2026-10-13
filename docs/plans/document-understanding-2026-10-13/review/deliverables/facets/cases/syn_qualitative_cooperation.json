@@ -1,0 +1,93 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "version": "1.0.0",
+  "case_id": "syn_qualitative_cooperation",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "syn-qualitative-cooperation",
+    "source_sha256": null,
+    "origin": {
+      "synthetic": true,
+      "purpose": "定性经营事实无需未披露金额的合法反例"
+    },
+    "local_binding_key": null
+  },
+  "observation": {
+    "metadata": {
+      "synthetic": true,
+      "mechanism_axes": [
+        "generic"
+      ],
+      "purpose": "主体、性质、条件保存；数量和单位不适用"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 1,
+          "line": 1,
+          "exact_quote": "2026年6月，公司甲与匿名客户A签署合作框架协议，协议不锁定订单和金额；截至披露日未披露正式订单。"
+        },
+        "page": 1,
+        "text": "2026年6月，公司甲与匿名客户A签署合作框架协议，协议不锁定订单和金额；截至披露日未披露正式订单。",
+        "role": "qualitative_progress",
+        "hints": {
+          "facet_ids": [
+            "facet_customer_orders"
+          ]
+        }
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "保存定性经营事实与条件，无金额不补数字"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "签署合作框架协议是定性客户进展，不等于有正式订单或确定收入。",
+        "importance": "required_business",
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "主体=公司甲与匿名客户A",
+          "性质=合作框架协议已签署，非正式订单",
+          "条件=不锁定订单和金额；数字不适用"
+        ],
+        "must_not_assert": [
+          "不得补造未披露的金额、订单或确定收入"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "生产语义执行交ROOT，NOT_RUN_ROOT_INTEGRATION；合成文本不是公司事实"
+    ]
+  },
+  "candidate_claim": {
+    "subject": "公司甲与匿名客户A",
+    "product": null,
+    "project": null,
+    "geography": null,
+    "period": "2026年6月",
+    "role": "公司陈述",
+    "modality": "fact",
+    "stage": null,
+    "quantity": null,
+    "unit": null,
+    "denominator": null,
+    "condition": "框架协议不锁定订单和金额；未披露正式订单"
+  },
+  "expected_missing_slots": [],
+  "not_applicable_slots": [
+    "quantity",
+    "unit",
+    "denominator"
+  ],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

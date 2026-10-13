@@ -13,7 +13,7 @@ ROOT 负责把 records/ 导入唯一 profiles registry 并做实际消费测试�
 | 路径 | 内容 |
 |---|---|
 | `records/*.json` | 24 份 du2-family-spec/1 规格：A/H/US 定期（年/半/季）、A/H/US 招股、定增/可转债/可研/项目变更、IR/call、release/deck、8-K/6-K 容器、摘要/修订横切、行政负例、问询与重大经营事件、研报/新闻/政策 |
-| `cases/*.json` | 31 个真实摘录 case（13 份原件、两家 A/H 公司为主、美股佐证）+ 8 个合成正反例 case；每 case 带失败反例 mutation |
+| `cases/*.json` | 31 个真实摘录 case（20 份原件、两家 A/H 公司为主、美股佐证）+ 8 个合成正反例 case；每 case 带失败反例 mutation |
 | `tests/` | 结构不变量测试（85 项）+ `_support.py` 校验 helper + `c_node_quote_check.py`（C 节点原文对照工具，非 pytest） |
 | `index.json` | du2-family-index/1：records 相对路径 + 每形态独立 spec/evidence/integration 状态与 gaps |
 
@@ -93,3 +93,12 @@ correctness_if_emitted（输出即查出处/单位/期间，不输出不扣分�
 2. child_routes、依赖闭包、预算、actual 选择与摘要都归 ROOT；本包只给策略数据与证据。
 3. 语义反例（mutations）由 ROOT 映射到 du-gold/1 做行为测试；本包不写第二个 recall 检查器。
 4. 数据包工程通过不代表生产已支持全部类型；未覆盖形态见 coverage_matrix 与 acquisition_requests。
+
+## ROOT 接收修复（2026-10-13）
+
+- 24份规格 version=1.0.1：修正10-Q Controls/Legal的Part/Item路径。同role可有不同heading_path，不能扁平合并后丢掉语境。
+- applies_to.modifiers 两轴都是允许值数组，不给观察值赋值，不把summary/amended绑定成联合筛选。全文修订、摘要原件、补充均可套用用途策略；6-K本身不证明修订。
+- 66条原始fact内容、importance和支持集不变，新增target_kind。常规总季度收入/报表币种仅correctness_if_emitted；产品线/研发强度/RPO、门店、项目和商业化阶段仍为required_business；表单/来源日期/角色/处置是disposition_context。
+- 测试按UTF-8 bytes汇总同source全部cases，8KiB限制不再按字符数估计。
+- case手工text是阅读设计片段，null locator不是正式证据；C工具证明引文在所指原页或全文存在，不证明正式parser已生成locator、完整读取或语义召回。HTML/TXT行号只是查找提示，尤其10-K目录完整引文跨约±20行；ROOT须通过实际parser+quote锚点生成并回放正式locator。
+- 接线/召回/摘要执行仍为NOT_RUN_ROOT_INTEGRATION，缺样清单保留。原作者85项数据/97项引文检查是历史基线；新增接收结果见 .planning/du2-families-reception。

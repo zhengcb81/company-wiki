@@ -1,335 +1,341 @@
-"""Static profile registry.
+"""The single installed reading-policy catalog and its legacy wire projections.
 
-``design.md`` section 9 asks for a static registry, not a plugin framework. The registry
-is built once at import time from the shared blocks in :mod:`model`, so adding a family
-means composing existing blocks rather than copying a pipeline.
-
-Lookup is by exact ``profile_id``. An unknown id is a real data error and raises, because
-inventing a profile on demand would hide the mistake ROOT needs to see.
+One packaged asset is loaded at import. All calls thereafter are pure: no docs, directory,
+network, model, configuration, or clock reads. Legacy IDs are data bindings, not separate
+handwritten profiles. Full family sections retain their individual hierarchy and priority;
+the flattened old wire is a compatibility view, not the new ReadingPlan's rule source.
 """
-
 from __future__ import annotations
 
-from types import MappingProxyType
-from typing import Iterator, Mapping
+from collections.abc import Mapping, Sequence
+from copy import deepcopy
+from hashlib import sha256
+from importlib.resources import files
+import json
+import re
+from typing import Any, Iterator
+import unicodedata
 
-from .model import (
-    ADMINISTRATIVE_SECTIONS,
-    CN_BUSINESS_SECTIONS,
-    CN_COMMON_SECTIONS,
-    CN_FUNDRAISING_SECTIONS,
-    GENERIC_SECTIONS,
-    HK_BILINGUAL_SECTIONS,
-    HK_OFFERING_SECTIONS,
-    NEGATIVE_HINTS_BILINGUAL,
-    NEGATIVE_HINTS_COMMON,
-    NEGATIVE_HINTS_HTML,
-    NEGATIVE_HINTS_PAGINATED,
-    SEC_10K_SECTIONS,
-    SEC_10Q_SECTIONS,
-    SEC_20F_SECTIONS,
-    SEC_REGISTRATION_SECTIONS,
-    SHARED_FOCUS,
-    Profile,
-    SectionPriority,
-    combine,
-)
+from . import vocabulary as v
+from .model import Profile, SectionPriority
+from .observation import Limits, Observation, UnitRef, parse_observation
+
+_CATALOG = json.loads(files(__package__).joinpath("reading_catalog.json").read_text(encoding="utf-8"))
+if _CATALOG.get("schema_version") != "du-reading-catalog/1":
+    raise RuntimeError("unsupported installed reading catalog")
 
 
-def _periodic_focus(scope: str) -> str:
-    return f"{SHARED_FOCUS.business_and_risk} {scope}{SHARED_FOCUS.periodic_change}"
+def _digest(value: Any) -> str:
+    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return sha256(payload.encode("utf-8")).hexdigest()
 
 
-def _build_profiles() -> tuple[Profile, ...]:
-    """Compose the fifteen required profiles from the shared blocks."""
-    cn_periodic_negatives = NEGATIVE_HINTS_COMMON + NEGATIVE_HINTS_PAGINATED
-    sec_negatives = NEGATIVE_HINTS_COMMON + NEGATIVE_HINTS_PAGINATED + NEGATIVE_HINTS_HTML
-    hk_negatives = (
-        NEGATIVE_HINTS_COMMON + NEGATIVE_HINTS_PAGINATED + NEGATIVE_HINTS_BILINGUAL
-    )
-    return (
-        Profile(
-            profile_id="cn_annual",
-            family="annual",
-            regime="cn_exchange",
-            section_priorities=combine(CN_COMMON_SECTIONS, CN_BUSINESS_SECTIONS),
-            semantic_units=("paragraph_event", "project", "operating_table", "risk", "background"),
-            summary_focus=_periodic_focus(
-                "年度报告重点覆盖管理层讨论、业务概要、行业、研发、经营变化与未来计划，"
-                "并补读与业务相关的财务附注。"
-            ),
-            negative_hints=cn_periodic_negatives + ("年度报告摘要与独立董事述职报告不是完整年报",),
-        ),
-        Profile(
-            profile_id="cn_interim",
-            family="interim",
-            regime="cn_exchange",
-            section_priorities=combine(CN_COMMON_SECTIONS, CN_BUSINESS_SECTIONS),
-            semantic_units=("paragraph_event", "project", "operating_table", "risk", "background"),
-            summary_focus=_periodic_focus(
-                "半年度报告聚焦上半年变化、项目进度与下半年安排；未披露不等于停止。"
-            ),
-            negative_hints=cn_periodic_negatives + ("半年累计数不得写成单季度，也不得直接复用年报摘要",),
-        ),
-        Profile(
-            profile_id="cn_quarterly",
-            family="quarterly",
-            regime="cn_exchange",
-            section_priorities=combine(
-                CN_COMMON_SECTIONS,
-                (
-                    SectionPriority(
-                        "management_discussion",
-                        ("重要内容提示", "其他提醒事项", "经营情况说明", "变动原因"),
-                        1,
-                    ),
-                    SectionPriority("business", ("主营业务", "经营情况", "产品进展"), 2),
-                    SectionPriority("risk", ("风险提示", "重大风险提示"), 2),
-                    SectionPriority(
-                        "financial_notes",
-                        ("主要财务数据", "季度财务报表", "合并资产负债表", "合并利润表"),
-                        3,
-                    ),
-                ),
-            ),
-            semantic_units=("paragraph_event", "operating_table", "risk", "background"),
-            summary_focus=_periodic_focus(
-                "季度报告先稀疏扫描全部事实，再按价值选择；逐项核对后仍可判低业务密度并减少模型调用，"
-                "但不得整类跳过，也不得把归母利润变动原因当作产品进展。"
-            ),
-            negative_hints=cn_periodic_negatives
-            + ("其他提醒事项标注不适用时按无内容处理，不代表公司无经营",),
-        ),
-        Profile(
-            profile_id="hk_periodic",
-            family="annual",
-            regime="hkex",
-            section_priorities=combine(HK_BILINGUAL_SECTIONS, CN_COMMON_SECTIONS),
-            semantic_units=("paragraph_event", "project", "operating_table", "risk", "background"),
-            summary_focus=_periodic_focus(
-                "港股定期报告按真实语言分栏恢复阅读顺序，双语选一份原语言输出并保留另一语言对应关系；"
-                "门店数、用户数、订单表属于经营驱动而非财务三表。"
-            ),
-            negative_hints=hk_negatives
-            + ("期后事项与报告期内事实必须分开表述",),
-        ),
-        Profile(
-            profile_id="sec_10k",
-            family="annual",
-            regime="sec",
-            section_priorities=SEC_10K_SECTIONS,
-            semantic_units=("paragraph_event", "operating_table", "risk", "background"),
-            summary_focus=_periodic_focus(
-                "10-K 优先 Item 1 Business、Item 1A 风险与 Item 7 MD&A，并选择性补读分部、"
-                "合同与并购附注；业务分部、商业机制与消费/订阅 KPI 单独成包。"
-            ),
-            negative_hints=sec_negatives
-            + ("目录与交叉引用不是正文；不得套用 20-F 编号；有业务意义的 notes 不得省略",),
-        ),
-        Profile(
-            profile_id="sec_10q",
-            family="quarterly",
-            regime="sec",
-            section_priorities=SEC_10Q_SECTIONS,
-            semantic_units=("paragraph_event", "operating_table", "risk", "background"),
-            summary_focus=_periodic_focus(
-                "10-Q 先 Part I Item 2 MD&A 与业务附注，再补 Part II 风险更新；"
-                "本季度与年初至今必须分开，同环比与 GAAP/non-GAAP 不得混淆。"
-            ),
-            negative_hints=sec_negatives
-            + ("不得当成 A 股常见短季报；承接 10-K 背景但不复制其全文",),
-        ),
-        Profile(
-            profile_id="sec_20f",
-            family="annual",
-            regime="sec",
-            section_priorities=SEC_20F_SECTIONS,
-            semantic_units=("paragraph_event", "operating_table", "risk", "background"),
-            summary_focus=_periodic_focus(
-                "20-F 优先 Item 4 公司/业务、Item 5 经营回顾与 Item 3D 风险，"
-                "关注监管与公司结构对业务的事实约束。"
-            ),
-            negative_hints=sec_negatives
-            + ("不得使用 10-K 章节编号；不得按上市市场推断注册地或币种",),
-        ),
-        Profile(
-            profile_id="prospectus",
-            family="prospectus",
-            regime="cn_exchange",
-            section_priorities=combine(CN_FUNDRAISING_SECTIONS, HK_OFFERING_SECTIONS, SEC_REGISTRATION_SECTIONS),
-            semantic_units=("paragraph_event", "project", "operating_table", "risk", "background"),
-            summary_focus=(
-                "招股书建立业务基础知识与发行当时事实包：产品与收入机制、行业与市场口径、"
-                "客户与供应商依赖、竞争格局、扩产逻辑与募集资金用途；"
-                "外部行业统计不得表述为公司实际业绩，历史计划必须带原日期。"
-            ),
-            negative_hints=NEGATIVE_HINTS_COMMON
-            + NEGATIVE_HINTS_PAGINATED
-            + ("不得只抓最新事件，也不得把发行时点的历史事实写成当前现状",),
-        ),
-        Profile(
-            profile_id="offering",
-            family="offering",
-            regime="cn_exchange",
-            section_priorities=combine(CN_FUNDRAISING_SECTIONS, HK_OFFERING_SECTIONS, SEC_REGISTRATION_SECTIONS),
-            semantic_units=("project", "operating_table", "risk", "paragraph_event", "background"),
-            summary_focus=(
-                "再融资与募投按项目绑定产品、实施主体、地点、投入金额、新增与总产能、"
-                "建设与爬坡期、备案与环评前提；投资额与项目测算收入不是实际收入，"
-                "补充流动资金单列。"
-            ),
-            negative_hints=NEGATIVE_HINTS_COMMON
-            + NEGATIVE_HINTS_PAGINATED
-            + ("不得把债券条款当作业务信息耗尽预算，也不得只读标题含招股的章节",),
-        ),
-        Profile(
-            profile_id="investor_qa",
-            family="investor_qa",
-            regime="cn_exchange",
-            section_priorities=(
-                SectionPriority("questions", ("交流内容及具体问答记录", "问：", "问答", "互动易"), 1),
-                SectionPriority(
-                    "administrative",
-                    ("投资者关系活动类别", "活动参与人员", "时间", "地点", "形式", "编号"),
-                    3,
-                ),
-                SectionPriority("business", ("主营业务", "经营情况"), 2),
-            ),
-            semantic_units=("qa_exchange", "paragraph_event", "background"),
-            summary_focus=(
-                "问答记录把提问与答复连同追问组成一个语义单元，区分提问中的推测、"
-                "答复中的事实与避而不答；答复里的否定与限定条件必须保留。"
-            ),
-            negative_hints=NEGATIVE_HINTS_COMMON
-            + ("提问中假设的客户合作不得写成已发生事实；套话可以降权但不能删掉答复的否定",),
-        ),
-        Profile(
-            profile_id="earnings_call",
-            family="earnings_call",
-            regime="unknown",
-            section_priorities=(
-                SectionPriority(
-                    "management_discussion",
-                    ("prepared remarks", "management remarks", "call participants", "operator"),
-                    1,
-                ),
-                SectionPriority("questions", ("questions and answers", "question-and-answer", "q&a"), 1),
-                SectionPriority("outlook", ("guidance", "outlook"), 2),
-                SectionPriority("operating_metrics", ("revenue", "eps", "margin"), 2),
-            ),
-            semantic_units=("qa_exchange", "paragraph_event", "background"),
-            summary_focus=(
-                "电话会按发言轮次与角色组织，保留原语言；管理层 prepared remarks、"
-                "分析师提问与网站要点摘要必须分开，不得把提问或第三方要点写成管理层原话。"
-            ),
-            negative_hints=NEGATIVE_HINTS_COMMON
-            + ("编辑摘要与真实发言分开；不经角色识别不得重复摘要",),
-        ),
-        Profile(
-            profile_id="results_release",
-            family="results_release",
-            regime="unknown",
-            section_priorities=(
-                SectionPriority("operating_metrics", ("highlights", "business highlights", "financial highlights"), 1),
-                SectionPriority("business", ("segment", "business overview", "about"), 2),
-                SectionPriority("management_discussion", ("commentary", "ceo", "chairman"), 2),
-                SectionPriority("financial_notes", ("condensed consolidated", "statement of", "balance sheet"), 3),
-            ),
-            semantic_units=("paragraph_event", "operating_table", "background"),
-            summary_focus=(
-                "业绩发布按 highlights、业务分部与经营指标组织，每个指标说明连同单位、"
-                "期间与同比口径一起成包；公告期的数字不等于审计后年度数。"
-            ),
-            negative_hints=NEGATIVE_HINTS_COMMON
-            + NEGATIVE_HINTS_HTML
-            + ("业绩发布不是定期报告，不得按年报章节结构解读",),
-        ),
-        Profile(
-            profile_id="presentation",
-            family="presentation",
-            regime="unknown",
-            section_priorities=(
-                SectionPriority("operating_metrics", ("in billion", "total revenue", "yoy", "qoq"), 1),
-                SectionPriority("business", ("business review", "strategy", "product"), 2),
-                SectionPriority("outlook", ("outlook", "roadmap", "plan"), 2),
-                SectionPriority("unknown", ("appendix", "notes"), 3),
-            ),
-            semantic_units=("operating_table", "paragraph_event", "background"),
-            summary_focus=(
-                "演示稿一个 slide、一张图或一个指标说明构成一个语义包，单位与时间口径随包；"
-                "图表失读必须标为未读，不能宣称完整。"
-            ),
-            negative_hints=NEGATIVE_HINTS_COMMON
-            + ("空白提取不等于无内容；图表脚注属于该指标",),
-        ),
-        Profile(
-            profile_id="administrative",
-            family="administrative",
-            regime="unknown",
-            section_priorities=ADMINISTRATIVE_SECTIONS,
-            semantic_units=("background",),
-            summary_focus=(
-                "行政材料先由封面与正文确认用途；确认无业务内容后可作为跳过派生的候选，"
-                "但原件与来源记录必须保留。"
-            ),
-            negative_hints=NEGATIVE_HINTS_COMMON
-            + ("仅凭标题不得跳过；财报正文中混入的行政附件不得连带丢弃整份财报",),
-        ),
-        Profile(
-            profile_id="generic",
-            family="unknown",
-            regime="unknown",
-            section_priorities=GENERIC_SECTIONS,
-            semantic_units=("paragraph_event", "background"),
-            summary_focus=(
-                "类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，"
-                "只记录有原文支持的内容，不推断因果也不生成投资结论。"
-            ),
-            negative_hints=NEGATIVE_HINTS_COMMON + NEGATIVE_HINTS_HTML,
-        ),
-    )
+def _fold(value: Any) -> str:
+    return " ".join(unicodedata.normalize("NFKC", str(value)).casefold().split())
 
 
-_PROFILES: tuple[Profile, ...] = _build_profiles()
+def _binding(profile_id: str) -> dict:
+    if not isinstance(profile_id, str):
+        raise TypeError("profile_id must be a string")
+    if not profile_id:
+        raise ValueError("profile_id must be nonempty")
+    for binding in _CATALOG["legacy_bindings"]:
+        if binding["profile_id"] == profile_id:
+            return binding
+    raise KeyError(f"unknown profile_id: {profile_id!r}")
 
-_PROFILE_INDEX: Mapping[str, Profile] = MappingProxyType(
-    {profile.profile_id: profile for profile in _PROFILES}
-)
 
-if len(_PROFILE_INDEX) != len(_PROFILES):  # pragma: no cover - construction guard
-    raise RuntimeError("duplicate profile_id in the static registry")
+def _family_records(ids: Sequence[str]) -> list[dict]:
+    index = {record["id"]: record for record in _CATALOG["families"]}
+    return [index[identifier] for identifier in ids]
+
+
+def _unique(values: Sequence[Any]) -> list[Any]:
+    output = []
+    seen = set()
+    for value in values:
+        key = json.dumps(value, ensure_ascii=False, sort_keys=True)
+        if key not in seen:
+            seen.add(key)
+            output.append(deepcopy(value))
+    return output
+
+
+def _flatten(sections: Sequence[Mapping], supplements: Mapping | None = None) -> list[dict]:
+    """Legacy projection only; this intentionally never replaces full section_rules."""
+    roles: dict[str, dict] = {}
+    for section in sections:
+        role = str(section["role"])
+        entry = roles.setdefault(role, {"section_role": role, "aliases": [], "priority": 3})
+        entry["priority"] = min(entry["priority"], int(section["priority"]))
+        for alias in section["aliases"]:
+            if alias not in entry["aliases"]:
+                entry["aliases"].append(alias)
+    for role, aliases in (supplements or {}).items():
+        entry = roles.setdefault(role, {"section_role": role, "aliases": [], "priority": 2})
+        entry["aliases"] = list(dict.fromkeys(entry["aliases"] + list(aliases)))
+    return list(roles.values())
+
+
+def _sections(records: Sequence[Mapping]) -> list[dict]:
+    return [deepcopy(section) for record in records for section in record["sections"]]
+
+
+def _questions(records: Sequence[Mapping]) -> list[str]:
+    return _unique([question for record in records for question in record["reading_questions"]])
+
+
+def _focus(records: Sequence[Mapping]) -> str:
+    return " ".join([str(_CATALOG["shared_focus"]), *_questions(records)])
+
+
+def _negative(records: Sequence[Mapping]) -> list[str]:
+    return _unique([hint for record in records for hint in record.get("negative_hints", ())] +
+                   [f"{item['content']}；例外：{item['unless']}"
+                    for record in records for item in record.get("deprioritize", ())])
 
 
 def profile_by_id(profile_id: str) -> Profile:
-    """Return a registry profile; an unknown or malformed id is a real error."""
-    if not isinstance(profile_id, str):
-        raise TypeError(f"profile_id must be a string, got {type(profile_id)!r}")
-    if not profile_id:
-        raise ValueError("profile_id must be non-empty")
-    try:
-        return _PROFILE_INDEX[profile_id]
-    except KeyError:
-        raise KeyError(f"unknown profile_id: {profile_id!r}") from None
-
-
-def iter_profiles() -> Iterator[Profile]:
-    """Iterate the registry in a stable order (declaration order, which is stable)."""
-    return iter(_PROFILES)
-
-
-def listed_profiles() -> list[dict]:
-    """Wire view of the whole registry."""
-    return [profile.to_wire() for profile in _PROFILES]
+    """Typed compatibility view from the same installed data, not another rule registry."""
+    binding = _binding(profile_id)
+    records = _family_records(binding["family_ids"])
+    if not records:
+        records = [_CATALOG["fallback"]]
+    rows = _flatten(_sections(records), binding.get("legacy_alias_supplements"))
+    return Profile(profile_id=profile_id, family=binding["family"], regime=binding["regime"],
+                   section_priorities=tuple(SectionPriority(row["section_role"], tuple(row["aliases"]), row["priority"]) for row in rows),
+                   semantic_units=tuple(binding["semantic_units"]), summary_focus=_focus(records),
+                   negative_hints=tuple(_negative(records)))
 
 
 def profile_wire(profile_id: str) -> dict:
-    """Wire view of one profile."""
+    """Fresh JSON-compatible old profile shape."""
     return profile_by_id(profile_id).to_wire()
 
 
-__all__ = [
-    "iter_profiles",
-    "listed_profiles",
-    "profile_by_id",
-    "profile_wire",
-]
+def iter_profiles() -> Iterator[Profile]:
+    """Iterate the installed legacy bindings in deterministic declaration order."""
+    return (profile_by_id(binding["profile_id"]) for binding in _CATALOG["legacy_bindings"])
+
+
+def listed_profiles() -> list[dict]:
+    """Each returned mapping is fresh and cannot mutate shared policy data."""
+    return [profile.to_wire() for profile in iter_profiles()]
+
+
+def _component(record: Mapping, kind: str) -> dict:
+    return {"kind": kind, "id": record["id"], "version": record["version"],
+            "content_digest": _digest(record)}
+
+
+def _base_form(value: Any) -> str:
+    return _fold(value or "").removesuffix("/a")
+
+
+def _signal_matches(phrase: str, text: str) -> bool:
+    return _matches_folded(_fold(phrase), _fold(text))
+
+
+def _matches_folded(needle: str, haystack: str) -> bool:
+    if not needle or needle not in haystack:
+        return False
+    if re.fullmatch(r"[a-z0-9 _-]+", needle):
+        return re.search(r"(?<![a-z0-9])" + re.escape(needle) + r"(?![a-z0-9])", haystack) is not None
+    return needle in haystack
+
+
+def _policy_score(record: Mapping, parsed: Observation) -> tuple[int, int]:
+    """Recognition hints rank applicable policies; they do not assert business facts."""
+    metadata = {"title": parsed.title, "regime": parsed.regime_claim, "form_type": parsed.form_type,
+                "declared_kind": parsed.declared_kind, "mime_type": parsed.mime_type,
+                "language": parsed.language, "revision": parsed.revision}
+    score = matched = 0
+    for item in record["recognition"]["positive"]:
+        signal = item["signal"]
+        if signal["kind"] == "metadata_equals":
+            actual = metadata.get(signal["field"])
+            hit = actual is not None and (_base_form(actual) == _base_form(signal["value"])
+                                         if signal["field"] == "form_type" else _fold(actual) == _fold(signal["value"]))
+            weight = 6
+        else:
+            location = item["location"]
+            if location == "metadata":
+                texts = [parsed.title or ""]
+            elif location == "cover":
+                texts = [parsed.title or "", *(u.text for u in parsed.probes[:3] if not u.text_clipped)]
+            elif location == "toc":
+                texts = [u.text for u in parsed.probes if u.kind == "toc" and not u.text_clipped]
+            elif location == "attachment":
+                texts = [u.text for u in parsed.probes if u.kind in {"attachment", "heading", "title"} and not u.text_clipped]
+            else:
+                texts = [u.text for u in parsed.probes if u.kind not in {"toc", "reference", "metadata"} and not u.text_clipped]
+            hit = any(_signal_matches(signal["value"], text) for text in texts)
+            weight = 3
+        if hit:
+            score += weight
+            matched += 1
+    return score, matched
+
+
+def _bounded_observation(observation: Mapping, route: Mapping, limits: Mapping | None) -> Observation:
+    resolved = Limits.from_mapping(limits)
+    capped = {"max_probe_units": min(resolved.max_probe_units, v.DEFAULT_MAX_PROBE_UNITS),
+              "max_probe_chars": min(resolved.max_probe_chars, v.DEFAULT_MAX_PROBE_CHARS),
+              "max_child_routes": min(resolved.max_child_routes, v.DEFAULT_MAX_CHILD_ROUTES)}
+    scoped = observation
+    if "unit_ids" in route:
+        scope = route["unit_ids"]
+        if not isinstance(scope, (list, tuple)):
+            raise ValueError("policy scope unit_ids must be a sequence")
+        scoped = dict(observation)
+        scope_ids = set(scope)
+        scoped["units"] = [unit for unit in observation.get("units", ()) if unit.get("unit_id") in scope_ids]
+    return parse_observation(scoped, capped)
+
+
+def _choose_family(binding: Mapping, parsed: Observation, route: Mapping) -> tuple[dict | None, list[dict]]:
+    family = route.get("family", binding["family"])
+    regime = route.get("regime", parsed.regime_claim or binding["regime"])
+    form = _base_form(parsed.form_type)
+    ranked = []
+    for record in _CATALOG["families"]:
+        applies = record["applies_to"]
+        if "lifecycle_overlay" in applies["purposes"] or applies["family"] != family:
+            continue
+        if regime not in {None, "unknown"} and regime not in applies["regimes"]:
+            continue
+        forms = {_base_form(value) for value in applies["forms"]}
+        if form and forms and form not in forms:
+            continue
+        score, hits = _policy_score(record, parsed)
+        if family == "unknown" and (score < 6 or hits < 2):
+            continue
+        # A generic unknown market does not select one market's family by default.
+        if regime in {None, "unknown"} and not score and len(applies["regimes"]) == 1:
+            continue
+        ranked.append((score, record["id"], record))
+    if not ranked:
+        return None, [{"code": "READING_POLICY_UNKNOWN", "detail": "No applicable evidenced family policy; generic source reading retained."}]
+    ranked.sort(key=lambda row: (-row[0], row[1]))
+    best_score = ranked[0][0]
+    tied = [row for row in ranked if row[0] == best_score]
+    if len(tied) > 1:
+        return None, [{"code": "READING_POLICY_AMBIGUOUS", "candidate_ids": [row[1] for row in tied],
+                       "detail": "Family purpose is ambiguous; do not claim one proposal is source-proven."}]
+    return ranked[0][2], []
+
+
+def _family_state(record: Mapping | None) -> dict:
+    if record is None:
+        return {"id": None, "design_status": "proposed", "spec_status": "proposed",
+                "evidence_status": "missing", "integration_status": "not_integrated",
+                "gaps": ["Current purpose not resolved by bounded original evidence."]}
+    coverage = next((entry for entry in _CATALOG["family_coverage"] if entry["shape"] == record["id"]), {})
+    return {"id": record["id"], "design_status": record["evidence_status"]["design"],
+            "spec_status": coverage.get("spec_status", "proposed"),
+            "evidence_status": coverage.get("evidence_status", "missing"),
+            "integration_status": coverage.get("integration_status", "not_integrated"),
+            "gaps": deepcopy(coverage.get("gaps", record["evidence_status"]["missing_shapes"]))}
+
+
+def resolve_reading_profile(profile: Mapping, observation: Mapping, route: Mapping, *, limits: Mapping | None = None) -> dict:
+    """Resolve actual family instructions while retaining the existing strong route.
+
+    Only the router's already-bounded original probes participate. Lifecycle values stay
+    observational modifiers; allowed-value arrays never set or jointly constrain them.
+    Component-local hashes cover adopted instructions, never the entire catalog.
+    """
+    if not isinstance(profile, Mapping) or not isinstance(route, Mapping):
+        raise TypeError("profile and route must be mappings")
+    binding = _binding(profile["profile_id"])
+    parsed = _bounded_observation(observation, route, limits)
+    chosen, diagnostics = _choose_family(binding, parsed, route)
+    records = [chosen] if chosen is not None else [_CATALOG["fallback"]]
+    modifiers = deepcopy(route.get("modifiers") or {"extent": "unknown", "revision": "unknown"})
+    if modifiers.get("extent") == "summary" or modifiers.get("revision") in {"amended", "supplement"}:
+        overlay = next(record for record in _CATALOG["families"] if "lifecycle_overlay" in record["applies_to"]["purposes"])
+        records.append(overlay)
+    components = [_component(record, "modifier" if "lifecycle_overlay" in record.get("applies_to", {}).get("purposes", ())
+                             else "family" if "applies_to" in record else "fallback") for record in records]
+    sections = _sections(records)
+    result = deepcopy(dict(profile))
+    result.update({"family": route.get("family", binding["family"]), "regime": route.get("regime", parsed.regime_claim or binding["regime"]),
+                   "section_rules": [dict(section, section_role=section["role"]) for section in sections],
+                   "section_priorities": _flatten(sections), "summary_focus": _focus(records),
+                   "negative_hints": _negative(records), "reading_questions": _questions(records),
+                   "context_requirements": _unique([entry for record in records for entry in record["context_requirements"]]),
+                   "policy_components": components, "family_policy": _family_state(chosen), "modifiers": modifiers,
+                   "policy_probe": {"probed_unit_count": len(parsed.probes), "probed_chars": parsed.probed_chars, "limited": parsed.probe_limited},
+                   "policy_diagnostics": diagnostics})
+    instruction_payload = {key: result[key] for key in ("section_rules", "summary_focus", "negative_hints",
+                                                        "reading_questions", "context_requirements")}
+    instruction_payload.update({"components": components, "semantic_units": binding["semantic_units"]})
+    result["profile_version"] = f"{binding['profile_id']}/v2+{_digest(instruction_payload)[:16]}"
+    return result
+
+
+def _nonnegative(value: int, name: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise TypeError(f"{name} must be an integer")
+    if value < 0:
+        raise ValueError(f"{name} must be nonnegative")
+    return value
+
+
+def select_business_facets(material: Sequence[Mapping], *, max_facets: int = 4, max_probe_chars: int = 64000) -> list[dict]:
+    """Choose reading instructions from actual final original members, never facts.
+
+    Literal signals are hints. Mechanism lists only modify instructions and never infer
+    actual billing, stage or quantities. No number is required unless a claim emits it.
+    """
+    cap = _nonnegative(max_facets, "max_facets")
+    budget = min(_nonnegative(max_probe_chars, "max_probe_chars"), v.DEFAULT_MAX_PROBE_CHARS)
+    if not isinstance(material, Sequence) or isinstance(material, (str, bytes)):
+        raise TypeError("material must be a sequence of original-member mappings")
+    if not cap or not budget:
+        return []
+    originals = []
+    for index, member in enumerate(material):
+        if not isinstance(member, Mapping):
+            raise TypeError("material members must be mappings")
+        text = member.get("text", "")
+        if text is None:
+            text = ""
+        if not isinstance(text, str):
+            raise TypeError("original member text must be a string")
+        originals.append(UnitRef(str(member.get("unit_id") or index), index, member.get("locator"), None,
+                                 text, None, None, None, None))
+    # Fair bounded materialization reuses the source probe allocator, not a new selector.
+    from .observation import _bounded_probe_texts
+    probed, _, _ = _bounded_probe_texts(tuple(originals), budget)
+    folded_probes = [(unit, _fold(unit.text)) for unit in probed]
+    ranked = []
+    for facet in _CATALOG["facets"]:
+        basis = []
+        matches = set()
+        signals = [(signal, _fold(signal)) for signal in _unique([signal for evidence in facet["positive_evidence"] for signal in evidence["signals"]])]
+        for unit, folded_text in folded_probes:
+            hits = [signal for signal, needle in signals if _matches_folded(needle, folded_text)]
+            if hits:
+                basis.append({"unit_id": unit.unit_id, "matched_signals": hits})
+                matches.update(hits)
+        if matches:
+            ranked.append((-len(matches), facet["id"], facet, basis))
+    ranked.sort(key=lambda row: (row[0], row[1]))
+    output = []
+    for _, _, facet, basis in ranked[:cap]:
+        selected = {key: deepcopy(facet[key]) for key in ("id", "version", "business_questions",
+                                                        "applicable_mechanisms", "summary_focus",
+                                                        "required_context", "absence_rules")}
+        # Only universal risk instructions travel; example statements and
+        # numbers are not source facts and must never enter a source prompt.
+        selected["confusion_checks"] = [
+            {"risk": entry["why_wrong"], "required_context_slots": deepcopy(entry["required_context_slots"])}
+            for entry in facet.get("confusions", ())]
+        selected["content_digest"] = _digest(facet)
+        selected["selection_basis"] = basis
+        output.append(selected)
+    return output
+
+
+__all__ = ["iter_profiles", "listed_profiles", "profile_by_id", "profile_wire", "resolve_reading_profile", "select_business_facets"]

@@ -39,7 +39,13 @@
         "page": null,
         "text": "Our segments provide management with a comprehensive financial view of our key businesses. The segments enable the alignment of strategies and objectives across the development, sales, marketing, and services organizations.",
         "role": "operating_metrics",
-        "hints": {"heading_path": ["Item 1. Business", "Segments"], "dom_line": 723}
+        "hints": {
+          "heading_path": [
+            "Item 1. Business",
+            "Segments"
+          ],
+          "dom_line": 723
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +58,13 @@
         "page": null,
         "text": "Azure revenue is mainly affected by infrastructure-as-a-service and platform-as-a-service consumption-based services.",
         "role": "business",
-        "hints": {"heading_path": ["Item 1. Business", "Segments"], "dom_line": 731}
+        "hints": {
+          "heading_path": [
+            "Item 1. Business",
+            "Segments"
+          ],
+          "dom_line": 731
+        }
       }
     ]
   },
@@ -66,15 +78,30 @@
         "id": "f1-segment-view",
         "objective": "识别分部报告口径与管理视角",
         "importance": "normal",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["分部是管理层视角的财务划分（management financial view）", "作用域：开发、销售、市场与服务组织的战略对齐"],
-        "must_not_assert": ["分部划分不得当作法律实体或产品线边界", "不得据此推断未披露的分部收入数值"]
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "分部是管理层视角的财务划分（management financial view）",
+          "作用域：开发、销售、市场与服务组织的战略对齐"
+        ],
+        "must_not_assert": [
+          "分部划分不得当作法律实体或产品线边界",
+          "不得据此推断未披露的分部收入数值"
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f2-revenue-mechanism",
         "objective": "识别具体产品线的收入机制",
         "importance": "critical",
-        "any_support_sets": [["u2"]],
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "主体：该公司该产品线",
           "机制：收入主要受 IaaS/PaaS 消费计价服务影响（consumption-based）",
@@ -83,7 +110,8 @@
         "must_not_assert": [
           "不得把该产品线增速引申为公司整体增速",
           "不得把机制描述当作未来收入预测或指引"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
@@ -108,6 +136,8 @@
     "period": "2025财年",
     "condition": null
   },
-  "expected_missing_slots": ["quantity"],
+  "expected_missing_slots": [
+    "quantity"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

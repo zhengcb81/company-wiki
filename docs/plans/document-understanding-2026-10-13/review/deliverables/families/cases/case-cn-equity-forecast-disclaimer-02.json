@@ -39,7 +39,12 @@
         "page": 82,
         "text": "效益测算是公司基于当时的行业和公司业务的良好发展态势 以及当前的国家产业政策、国内外市场环境等因素得出的，并经过了可行性研究论证，但仍存在因市场环境发生较大变化、项目实施过程中发生不可预见因素等导致项目延期或无法实施，或者导致项目不能产生预期收益的可能性。",
         "role": "financial_notes",
-        "hints": {"heading_path": ["风险因素", "募集资金投资项目无法产生预期收益的风险"]}
+        "hints": {
+          "heading_path": [
+            "风险因素",
+            "募集资金投资项目无法产生预期收益的风险"
+          ]
+        }
       }
     ]
   },
@@ -53,7 +58,11 @@
         "id": "f1-forecast-has-conditions",
         "objective": "项目效益测算必须带假设与免责声明",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "modality：测算/预测（非实际业绩）",
           "假设基础：当时行业与业务态势、产业政策、市场环境，经可行性研究论证",
@@ -62,11 +71,15 @@
         "must_not_assert": [
           "测算收入/收益率不得当实际收入或承诺",
           "不得删除限定语单独引用效益数字"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["测算数字本身合理性", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "测算数字本身合理性",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {
@@ -90,6 +103,8 @@
     "period": "编制时点",
     "condition": "经可行性研究论证的测算值，可能延期或不达预期"
   },
-  "expected_missing_slots": ["quantity"],
+  "expected_missing_slots": [
+    "quantity"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

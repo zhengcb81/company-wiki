@@ -39,7 +39,13 @@
         "page": 11,
         "text": "截至2024年12月31日止財政年度，本集團於中國內地和海外市場的名創優品門店總數由截至2023年12月31日的6,413家增加至截至2024年12月31日的7,504家。",
         "role": "operating_metrics",
-        "hints": {"heading_path": ["業務回顧及展望", "門店網絡"], "language": "zh-Hant"}
+        "hints": {
+          "heading_path": [
+            "業務回顧及展望",
+            "門店網絡"
+          ],
+          "language": "zh-Hant"
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +58,13 @@
         "page": 11,
         "text": "TOP TOY門店數量由截至2023年12月31日的148家增加至截至2024年12月31日的276家。",
         "role": "operating_metrics",
-        "hints": {"heading_path": ["業務回顧及展望", "門店網絡"], "language": "zh-Hant"}
+        "hints": {
+          "heading_path": [
+            "業務回顧及展望",
+            "門店網絡"
+          ],
+          "language": "zh-Hant"
+        }
       },
       {
         "unit_id": "u3",
@@ -65,7 +77,10 @@
         "page": 13,
         "text": "Stores operated under MINISO Retail Partner model 名創合夥人門店 Number of stores at the beginning of the period/year 期╱年初門店數量",
         "role": "operating_metrics",
-        "hints": {"unit_kind": "operating_table", "note": "门店表行标签原文：经营模式维度 + 期初门店数量行（表格另有净增/期末行，未摘入本 case）"}
+        "hints": {
+          "unit_kind": "operating_table",
+          "note": "门店表行标签原文：经营模式维度 + 期初门店数量行（表格另有净增/期末行，未摘入本 case）"
+        }
       }
     ]
   },
@@ -79,7 +94,14 @@
         "id": "f1-store-count-stock-not-flow",
         "objective": "识别门店总数的存量口径与期间",
         "importance": "critical",
-        "any_support_sets": [["u1"], ["u2"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ],
+          [
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "口径：期末门店总数（存量），对比期初存量 6,413 家→7,504 家（另一品牌 148→276）",
           "范围：中国内地和海外市场合计；主体：本集团",
@@ -88,15 +110,27 @@
         "must_not_assert": [
           "总数变化不等于净增（净增需扣关店，表内另有淨增加行）",
           "不得把不同品牌的门店数合并成一个品牌口径"
-        ]
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f2-operating-model-scope",
         "objective": "识别门店表的经营模式维度",
         "importance": "normal",
-        "any_support_sets": [["u3"]],
-        "must_preserve": ["模式维度：合伙人门店等经营模式单列", "表行含期初门店数量（存量口径起点）"],
-        "must_not_assert": ["不得把某一模式的门店数当全渠道总数", "不得由行标签推出未摘录的净增/期末数值"]
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
+        "must_preserve": [
+          "模式维度：合伙人门店等经营模式单列",
+          "表行含期初门店数量（存量口径起点）"
+        ],
+        "must_not_assert": [
+          "不得把某一模式的门店数当全渠道总数",
+          "不得由行标签推出未摘录的净增/期末数值"
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
@@ -127,6 +161,8 @@
     "period": "截至2024-12-31止财政年度",
     "condition": null
   },
-  "expected_missing_slots": ["geography"],
+  "expected_missing_slots": [
+    "geography"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

@@ -8,17 +8,21 @@ diagnostic instead of being silently ordered by guesswork.
 from __future__ import annotations
 
 
-def build_reading_order(page_bands_list, lane_layouts, diagnostics: list) -> tuple[list[dict], dict]:
+def build_reading_order(
+    page_bands_list, lane_layouts, diagnostics: list, budget
+) -> tuple[list[dict], dict]:
     """Return (reading_order entries, global rank map unit_id -> rank)."""
     entries: list[dict] = []
     rank: dict = {}
     for page_bands, lanes in zip(page_bands_list, lane_layouts):
         ordered: list = []
         for band in page_bands.bands:
+            budget.charge(len(band.units))
             ordered.extend(sorted(band.units, key=lambda u: (u.bbox[0], u.ordinal)))
         seen: set = set()
         sequence: list = []
         for unit in ordered:
+            budget.charge()
             if unit.unit_id in seen:
                 continue
             seen.add(unit.unit_id)

@@ -1,35 +1,77 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "event_response",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["cn_exchange", "hkex", "sec", "other"],
+    "regimes": [
+      "cn_exchange",
+      "hkex",
+      "sec",
+      "other"
+    ],
     "forms": [],
     "family": "unknown",
-    "purposes": ["event_update", "regulatory_response"],
-    "modifiers": {"extent": "full", "revision": "original"},
-    "carrier": ["pdf", "html"],
-    "language": ["zh", "en"]
+    "purposes": [
+      "event_update",
+      "regulatory_response"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf",
+      "html"
+    ],
+    "language": [
+      "zh",
+      "en"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "问询函回复", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "问询函回复",
+          "field": null
+        },
         "location": "cover",
         "reason": "监管问询回复的标题短语"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "重大合同", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "重大合同",
+          "field": null
+        },
         "location": "body",
         "reason": "重大合同/中标公告的正文短语"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "收购", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "收购",
+          "field": null
+        },
         "location": "body",
         "reason": "重组/收购公告的正文短语；需整包读取标的、对价与条件"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "问询函", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "问询函",
+          "field": null
+        },
         "location": "body",
         "reason": "监管问询函原文/引用部分是提问方内容"
       }
@@ -45,31 +87,99 @@
   "sections": [
     {
       "role": "business",
-      "aliases": ["事件概述", "基本情况", "标的资产", "合同主要内容"],
-      "heading_path": [["事件概述", "基本情况", "标的资产", "合同主要内容", "交易概况"]],
+      "aliases": [
+        "事件概述",
+        "基本情况",
+        "标的资产",
+        "合同主要内容"
+      ],
+      "heading_path": [
+        [
+          "事件概述",
+          "基本情况",
+          "标的资产",
+          "合同主要内容",
+          "交易概况"
+        ]
+      ],
       "priority": 1,
-      "questions": ["事件主体、标的、金额、条件与时间", "对经营的实际影响"]
+      "questions": [
+        "事件主体、标的、金额、条件与时间",
+        "对经营的实际影响"
+      ]
     },
     {
       "role": "questions",
-      "aliases": ["问询函", "问询问题", "问题", "回复"],
-      "heading_path": [["问询函", "问询问题", "关于问询函的回复"], ["问题", "问询问题", "回复"]],
+      "aliases": [
+        "问询函",
+        "问询问题",
+        "问题",
+        "回复"
+      ],
+      "heading_path": [
+        [
+          "问询函",
+          "问询问题",
+          "关于问询函的回复"
+        ],
+        [
+          "问题",
+          "问询问题",
+          "回复"
+        ]
+      ],
       "priority": 1,
-      "questions": ["被询问的业务细节；提问方内容与公司回复分离"]
+      "questions": [
+        "被询问的业务细节；提问方内容与公司回复分离"
+      ]
     },
     {
       "role": "operating_metrics",
-      "aliases": ["履约进度", "产能", "经营数据", "测算"],
-      "heading_path": [["履约进度", "经营数据", "测算", "产能"], ["履约进度", "产能", "收入"]],
+      "aliases": [
+        "履约进度",
+        "产能",
+        "经营数据",
+        "测算"
+      ],
+      "heading_path": [
+        [
+          "履约进度",
+          "经营数据",
+          "测算",
+          "产能"
+        ],
+        [
+          "履约进度",
+          "产能",
+          "收入"
+        ]
+      ],
       "priority": 2,
-      "questions": ["合同额/对价/收入的口径区分", "经营资产/产能的实际数据"]
+      "questions": [
+        "合同额/对价/收入的口径区分",
+        "经营资产/产能的实际数据"
+      ]
     },
     {
       "role": "risk",
-      "aliases": ["风险提示", "不确定性", "终止", "变更"],
-      "heading_path": [["风险提示", "不确定性", "重大风险", "终止"]],
+      "aliases": [
+        "风险提示",
+        "不确定性",
+        "终止",
+        "变更"
+      ],
+      "heading_path": [
+        [
+          "风险提示",
+          "不确定性",
+          "重大风险",
+          "终止"
+        ]
+      ],
       "priority": 2,
-      "questions": ["终止/变更/延期的具体条件与作用域"]
+      "questions": [
+        "终止/变更/延期的具体条件与作用域"
+      ]
     }
   ],
   "reading_questions": [
@@ -82,25 +192,41 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period", "role"],
+      "slots": [
+        "subject",
+        "period",
+        "role"
+      ],
       "missing_behavior": "unknown",
       "reason": "问询/公告内容有来源角色（监管提问 vs 公司回复），断言必须绑定主体、时点与角色"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator"
+      ],
       "missing_behavior": "partial",
       "reason": "合同额、对价、投资额、收入是不同口径，必须带定义与期间"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "stage", "condition"],
+      "slots": [
+        "project",
+        "stage",
+        "condition"
+      ],
       "missing_behavior": "partial",
       "reason": "项目/标的断言整包保留阶段与条件"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "生效条件、先决条件与假设必须随事实保留"
     }
@@ -128,5 +254,7 @@
       "多期问询-回复链的版本关系未验证"
     ]
   },
-  "case_ids": ["case-synth-event-response-01"]
+  "case_ids": [
+    "case-synth-event-response-01"
+  ]
 }

@@ -382,6 +382,9 @@ def _emit(
     locator_path = ".".join(str(p) for p in path)
     source_locator = f"{HTML_LOCATOR_SCHEMA}|n={locator_path}"
     extra: dict[str, Any] = {"dom_path": locator_path, "backend": BACKEND}
+    if unit_kind == _UNIT_KINDS["heading"] and re.fullmatch(r"h[1-6]", owner.name or ""):
+        extra["tag_name"] = owner.name
+        extra["heading_level"] = int(owner.name[1])
     coordinates: EvidenceCoordinates
     if unit_kind == _UNIT_KINDS["table_cell"]:
         cell_coords = _cell_coordinates(owner, state)

@@ -39,7 +39,10 @@
         "page": 1,
         "text": "1、问：公司主要业务80%多都在国外，目前公司在国内业务开拓面 临哪些挑战和机遇？公司如何服务国内统一大市场？",
         "role": "questions",
-        "hints": {"unit_kind": "qa_exchange", "speaker": "提问者（投资者）"}
+        "hints": {
+          "unit_kind": "qa_exchange",
+          "speaker": "提问者（投资者）"
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +55,11 @@
         "page": 1,
         "text": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%， 较比2024 年度有所提升。",
         "role": "business",
-        "hints": {"unit_kind": "qa_exchange", "speaker": "公司（管理层）", "answers": "u1"}
+        "hints": {
+          "unit_kind": "qa_exchange",
+          "speaker": "公司（管理层）",
+          "answers": "u1"
+        }
       },
       {
         "unit_id": "u3",
@@ -65,7 +72,11 @@
         "page": 5,
         "text": "产能方面积极布局，2025 年公司启动 了万润工业园二期C05 建设项目，该项目包含半导体光刻胶用相关材料产 能约751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能 保障。",
         "role": "operating_metrics",
-        "hints": {"unit_kind": "project", "speaker": "公司（管理层）", "answers": "u4(未摘录问题)"}
+        "hints": {
+          "unit_kind": "project",
+          "speaker": "公司（管理层）",
+          "answers": "u4(未摘录问题)"
+        }
       }
     ]
   },
@@ -79,32 +90,65 @@
         "id": "f1-question-premise-not-fact",
         "objective": "提问者内容不是公司事实",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["来源角色：提问者（投资者）", "问句中的“80%多在国外”是问句前提"],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "来源角色：提问者（投资者）",
+          "问句中的“80%多在国外”是问句前提"
+        ],
         "must_not_assert": [
           "不得把问句中的比例/客户/合作设想当作公司披露事实",
           "“股东联系”不等于上市公司客户关系"
-        ]
+        ],
+        "target_kind": "disposition_context"
       },
       {
         "id": "f2-answer-figures-with-scope",
         "objective": "回答中的数字带期间与口径",
         "importance": "critical",
-        "any_support_sets": [["u2"]],
-        "must_preserve": ["来源角色：公司回答", "期间：2025年度；口径：境内收入约8.19亿元、占比约22%（较2024年度提升）"],
-        "must_not_assert": ["占比22%不得写成海外占比口径的补数推断值", "约数不得写成精确值"]
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "来源角色：公司回答",
+          "期间：2025年度；口径：境内收入约8.19亿元、占比约22%（较2024年度提升）"
+        ],
+        "must_not_assert": [
+          "占比22%不得写成海外占比口径的补数推断值",
+          "约数不得写成精确值"
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f3-project-capacity-condition",
         "objective": "产能计划带条件与阶段",
         "importance": "normal",
-        "any_support_sets": [["u3"]],
-        "must_preserve": ["项目：工业园二期C05 建设项目（2025年启动）", "口径：包含相关材料产能约751吨/年", "条件：项目建成后（modality=plan）"],
-        "must_not_assert": ["“建成后”产能不得当期已投产产能"]
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
+        "must_preserve": [
+          "项目：工业园二期C05 建设项目（2025年启动）",
+          "口径：包含相关材料产能约751吨/年",
+          "条件：项目建成后（modality=plan）"
+        ],
+        "must_not_assert": [
+          "“建成后”产能不得当期已投产产能"
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["活动参与人员名单处理", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "活动参与人员名单处理",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {
@@ -128,6 +172,8 @@
     "period": "2025年度",
     "condition": "境内收入，占比约22%"
   },
-  "expected_missing_slots": ["geography"],
+  "expected_missing_slots": [
+    "geography"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

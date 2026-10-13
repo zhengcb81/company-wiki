@@ -22,35 +22,102 @@
       "language": "zh-CN",
       "carrier": "pdf",
       "read_scope": "第三节 董事会关于本次募集资金使用的可行性分析（第61-63、68页）",
-      "note": "片段来自母计划 sample_observations 对同一 SHA 原件的只读侦察；引文经逐条对照原文核验"
+      "note": "设计语境正文显式标 provenance，不用于运行时raw；完整支持短锚点在ROOT接收时按固定SHA原件复核，正式unit/locator由公共解析器恢复。"
     },
     "units": [
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": 61, "line": null, "exact_quote": "项目建设期两期，新建厂房为一期，老厂区改建为二期"},
+        "anchor": {
+          "physical_page": 61,
+          "line": null,
+          "exact_quote": "项目建设期两期，新建厂房为一期，老厂区改建为二期。一期2019\n年1 月拿地，2020 年12 月建成厂房，2021 年1 月一期建成投产。\n二期在一期建设完成后，老厂区相关设备搬迁至一期新厂房后才启\n动改建，预计在2021 年1 月启动建设，2021 年12 月完成建设，2022\n年二期建成投产。"
+        },
         "page": 61,
         "text": "项目建设期两期，新建厂房为一期，老厂区改建为二期。一期2019年1月拿地，2020年12月建成厂房，2021年1月一期建成投产。二期在一期建设完成后，老厂区相关设备搬迁至一期新厂房后才启动改建，预计在2021年1月启动建设，2021年12月完成建设，2022年二期建成投产。",
         "role": "project_schedule",
-        "hints": {"facet_ids": ["facet_capacity_projects"], "semantic_ids": ["semantic_capacity_project", "semantic_stage_progression"]}
+        "hints": {
+          "facet_ids": [
+            "facet_capacity_projects"
+          ],
+          "semantic_ids": [
+            "semantic_capacity_project",
+            "semantic_stage_progression"
+          ]
+        },
+        "text_status": "original_excerpt",
+        "text_source": "原件短摘录；仍需公共解析器恢复正式unit/locator",
+        "runtime_raw": false
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": 61, "line": null, "exact_quote": "在本次募集资金到位前，公司可根据项目进度的实际情况通过自有资金、银行贷款或其他途径进行部分投入"},
+        "anchor": {
+          "physical_page": 61,
+          "line": null,
+          "exact_quote": "本次向特定对象发行A 股股票拟募集资金总额为不超过35,978.71 万元，扣\n除相关发行费用后，拟投入如下项目： \n单位：万元 \n序号 \n项目名称 \n项目总投资 \n募集资金使用金额 \n1 \n智能制造优化升级改造项目 \n35,300.00 \n28,678.71 \n2 \n补充流动资金 \n7,300.00 \n7,300.00 \n合计 \n42,600.00 \n35,978.71 \n在本次募集资金到位前，公司可根据项目进度的实际情况通过自有资金、银\n行贷款或其他途径进行部分投入，并在募集资金到位后予以置换。如果实际募集\n资金低于项目投资总额，不足部分公司将通过自筹解决。"
+        },
         "page": 61,
         "text": "在本次募集资金到位前，公司可根据项目进度的实际情况通过自有资金、银行贷款或其他途径进行部分投入，并在募集资金到位后予以置换。如果实际募集资金低于项目投资总额，不足部分公司将通过自筹解决。",
         "role": "funding_arrangement",
-        "hints": {"facet_ids": ["facet_capacity_projects"], "semantic_ids": ["semantic_capacity_project"]}
+        "hints": {
+          "facet_ids": [
+            "facet_capacity_projects"
+          ],
+          "semantic_ids": [
+            "semantic_capacity_project"
+          ]
+        },
+        "text_status": "explanatory_reconstruction",
+        "text_source": "手工重述/拼接设计语境；不是raw，不用于生产证据或评测observed",
+        "runtime_raw": false
       },
       {
         "unit_id": "u3",
         "locator": null,
-        "anchor": {"physical_page": 68, "line": null, "exact_quote": "本项目建成达产后，公司将优化升级原有精密复杂刃量具类产品产能12万件套"},
+        "anchor": {
+          "physical_page": 68,
+          "line": null,
+          "exact_quote": "本项目建成达产后，公司将优化升级原有精密复杂刃量具类产品产能12 万\n件套，可开展高端生产性服务，将年产数控精密装备50 台，年产智能自动化装\n备400 台套。年新增营业收入2.60 亿元，新增利润总额9,248.00 万元，财务内\n部收益率（税后）为22.16%，投资回收期（税后）为6.63 年，经济效益良好。"
+        },
         "page": 68,
         "text": "本项目建成达产后，公司将优化升级原有精密复杂刃量具类产品产能12万件套，可开展高端生产性服务，将年产数控精密装备50台，年产智能自动化装备400台套。年新增营业收入2.60亿元，新增利润总额9,248.00万元，财务内部收益率（税后）为22.16%，投资回收期（税后）为6.63年。",
         "role": "project_return_estimate",
-        "hints": {"facet_ids": ["facet_capacity_projects", "facet_operating_metrics"], "semantic_ids": ["semantic_capacity_project"]}
+        "hints": {
+          "facet_ids": [
+            "facet_capacity_projects",
+            "facet_operating_metrics"
+          ],
+          "semantic_ids": [
+            "semantic_capacity_project"
+          ]
+        },
+        "text_status": "explanatory_reconstruction",
+        "text_source": "手工重述/拼接设计语境；不是raw，不用于生产证据或评测observed",
+        "runtime_raw": false
+      },
+      {
+        "unit_id": "u3p",
+        "locator": null,
+        "anchor": {
+          "physical_page": 68,
+          "line": null,
+          "exact_quote": "智能制造优化升级改造项目，包括四方面内容：优化升级替换原有精密复杂\n刃量具类产品产能、深化现有的精磨改制等高端生产性服务、新增数控精密装备\n和智能自动化装备产能，具体情况如下："
+        },
+        "page": 68,
+        "text": "智能制造优化升级改造项目，包括四方面内容：优化升级替换原有精密复杂\n刃量具类产品产能、深化现有的精磨改制等高端生产性服务、新增数控精密装备\n和智能自动化装备产能，具体情况如下：",
+        "role": "capacity_scope_definition",
+        "hints": {
+          "facet_ids": [
+            "facet_capacity_projects"
+          ],
+          "semantic_ids": [
+            "semantic_capacity_project"
+          ]
+        },
+        "text_status": "original_excerpt",
+        "text_source": "原件短摘录；仍需公共解析器恢复正式unit/locator",
+        "runtime_raw": false
       }
     ]
   },
@@ -58,19 +125,23 @@
     "routing_notes": [
       "融资用途文件：项目基本情况表、建设周期、投资计划、回报测算依次读取",
       "智能制造优化升级改造项目与补充流动资金是两个资金用途，属性分开",
-      "分期事实（一期）与计划时间（二期）分列；回报测算属计划语态"
+      "一期建设周期列示与二期预计安排分列，日期不单独证明完成状态；回报测算属计划语态"
     ],
     "facts": [
       {
         "id": "f1",
         "objective": "项目分两期且有先后依赖：一期为新建厂房、二期为老厂区改建；二期以一期建设完成、老厂区设备搬迁至一期新厂房为启动条件",
         "importance": "required_business",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "主体=恒锋工具（项目实施单位）",
           "分期=一期（新建厂房）/二期（老厂区改建）",
           "条件=二期在一期建设完成后、老厂区相关设备搬迁至一期新厂房后才启动改建",
-          "语态=一期三个时点为已发生陈述，二期三个时点为『预计』计划",
+          "语态=一期时点属于建设周期列示，不额外证明均已完成；二期时点带『预计』计划；未明确完成不得升级为实际",
           "期间=2019年1月至2022年"
         ],
         "must_not_assert": [
@@ -83,7 +154,12 @@
         "id": "f2",
         "objective": "产能口径：项目是对原有精密复杂刃量具类产品产能12万件套的优化升级替换，另新增数控精密装备年产50台、智能自动化装备年产400台套；年新增营业收入2.60亿元是建成达产后的测算",
         "importance": "required_business",
-        "any_support_sets": [["u3"]],
+        "any_support_sets": [
+          [
+            "u3",
+            "u3p"
+          ]
+        ],
         "must_preserve": [
           "口径=『优化升级替换原有』而非净新增",
           "单位=万件套/台/台套；金额=亿元/万元",
@@ -100,7 +176,11 @@
         "id": "f3",
         "objective": "资金安排：募集资金到位前可用自有资金/银行贷款先行投入并置换；实际募集资金低于项目投资总额时不足部分自筹",
         "importance": "required_business",
-        "any_support_sets": [["u2"]],
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "条件=募集资金到位前/实际募集资金低于项目投资总额时",
           "方式=先行投入、到位后置换、自筹解决",
@@ -125,7 +205,7 @@
       "change": "把『二期……预计在2021年1月启动建设……2022年二期建成投产』当作已发生的实际",
       "dimension": "modality",
       "expected_failure": "输出『二期已于2022年建成投产』类断言，计划语态被升级为实际（未来当实际）",
-      "reason": "原文二期时间带『预计』，属计划语态；一期才是已发生陈述"
+      "reason": "二期带预计；一期建设周期列示也不得凭日期断言已全部实现。"
     },
     {
       "id": "m2",
@@ -156,6 +236,9 @@
     "denominator": null,
     "condition": "本项目建成达产后"
   },
-  "expected_missing_slots": ["period"],
-  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+  "expected_missing_slots": [
+    "period"
+  ],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION",
+  "version": "1.1.0"
 }

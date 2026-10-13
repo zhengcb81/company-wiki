@@ -39,7 +39,11 @@
         "page": 4,
         "text": "其他提醒事项 需提醒投资者关注的关于公司报告期经营情况的其他重要信息 □适用√不适用",
         "role": "outlook",
-        "hints": {"heading_path": ["其他提醒事项"]}
+        "hints": {
+          "heading_path": [
+            "其他提醒事项"
+          ]
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +56,11 @@
         "page": 1,
         "text": "单位：元 币种：人民币",
         "role": "financial_notes",
-        "hints": {"heading_path": ["主要财务数据"]}
+        "hints": {
+          "heading_path": [
+            "主要财务数据"
+          ]
+        }
       }
     ]
   },
@@ -66,20 +74,37 @@
         "id": "f1-legitimate-no-business",
         "objective": "识别“合法无业务”的季报处置",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["其他提醒事项勾选“不适用”", "disposition：eligible_skip_after_read（已读核实后跳过派生）"],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "其他提醒事项勾选“不适用”",
+          "disposition：eligible_skip_after_read（已读核实后跳过派生）"
+        ],
         "must_not_assert": [
           "不得把“不适用”读成业务不存在或经营恶化",
           "不得输出未披露的业务进展来“补齐”摘要"
-        ]
+        ],
+        "target_kind": "disposition_context"
       },
       {
         "id": "f2-financial-ordinary",
         "objective": "常规财务口径不强迫抽取",
         "importance": "normal",
-        "any_support_sets": [["u2"]],
-        "must_preserve": ["财务表口径：人民币元、未经审计（如引用必须带口径）"],
-        "must_not_assert": ["不得以凑数方式输出未被要求的财务派生值"]
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "财务表口径：人民币元、未经审计（如引用必须带口径）"
+        ],
+        "must_not_assert": [
+          "不得以凑数方式输出未被要求的财务派生值"
+        ],
+        "target_kind": "correctness_if_emitted"
       }
     ],
     "disposition": "eligible_skip_after_read",

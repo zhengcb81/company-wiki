@@ -1,30 +1,69 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "investor_presentation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["sec", "hkex", "cn_exchange", "other"],
+    "regimes": [
+      "sec",
+      "hkex",
+      "cn_exchange",
+      "other"
+    ],
     "forms": [],
     "family": "presentation",
-    "purposes": ["management_qa", "event_update"],
-    "modifiers": {"extent": "summary", "revision": "original"},
-    "carrier": ["pdf", "pptx", "image"],
-    "language": ["en", "zh"]
+    "purposes": [
+      "management_qa",
+      "event_update"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf",
+      "pptx",
+      "image"
+    ],
+    "language": [
+      "en",
+      "zh"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "Investor Presentation", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "Investor Presentation",
+          "field": null
+        },
         "location": "cover",
         "reason": "投资者演示封面"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "业绩展示", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "业绩展示",
+          "field": null
+        },
         "location": "cover",
         "reason": "中文语境的业绩展示/演示材料标题"
       },
       {
-        "signal": {"kind": "metadata_equals", "value": "application/pdf", "field": "mime_type"},
+        "signal": {
+          "kind": "metadata_equals",
+          "value": "application/pdf",
+          "field": "mime_type"
+        },
         "location": "metadata",
         "reason": "载体提示；PPT/PDF/图片都可能，不能只按载体判型"
       }
@@ -40,31 +79,89 @@
   "sections": [
     {
       "role": "business",
-      "aliases": ["Business Overview", "Company Overview", "Strategy", "业务概览"],
-      "heading_path": [["Business Overview", "Company Overview", "Strategy", "业务概览"]],
+      "aliases": [
+        "Business Overview",
+        "Company Overview",
+        "Strategy",
+        "业务概览"
+      ],
+      "heading_path": [
+        [
+          "Business Overview",
+          "Company Overview",
+          "Strategy",
+          "业务概览"
+        ]
+      ],
       "priority": 1,
-      "questions": ["一页一个主题：业务构成、战略与进展"]
+      "questions": [
+        "一页一个主题：业务构成、战略与进展"
+      ]
     },
     {
       "role": "operating_metrics",
-      "aliases": ["Operating Metrics", "KPI", "Store Network", "Financial Highlights"],
-      "heading_path": [["Operating Metrics", "KPI", "Store Network", "Financial Highlights", "经营指标"]],
+      "aliases": [
+        "Operating Metrics",
+        "KPI",
+        "Store Network",
+        "Financial Highlights"
+      ],
+      "heading_path": [
+        [
+          "Operating Metrics",
+          "KPI",
+          "Store Network",
+          "Financial Highlights",
+          "经营指标"
+        ]
+      ],
       "priority": 1,
-      "questions": ["图/表的单位、期间、口径与脚注", "指标定义（GMV/同店/RPO）"]
+      "questions": [
+        "图/表的单位、期间、口径与脚注",
+        "指标定义（GMV/同店/RPO）"
+      ]
     },
     {
       "role": "outlook",
-      "aliases": ["Outlook", "Guidance", "Targets", "展望"],
-      "heading_path": [["Outlook", "Guidance", "Targets", "展望"]],
+      "aliases": [
+        "Outlook",
+        "Guidance",
+        "Targets",
+        "展望"
+      ],
+      "heading_path": [
+        [
+          "Outlook",
+          "Guidance",
+          "Targets",
+          "展望"
+        ]
+      ],
       "priority": 2,
-      "questions": ["目标/展望的期间与假设"]
+      "questions": [
+        "目标/展望的期间与假设"
+      ]
     },
     {
       "role": "financial_notes",
-      "aliases": ["Notes", "Disclaimer", "Appendix", "脚注"],
-      "heading_path": [["Notes", "Disclaimer", "Appendix", "脚注"]],
+      "aliases": [
+        "Notes",
+        "Disclaimer",
+        "Appendix",
+        "脚注"
+      ],
+      "heading_path": [
+        [
+          "Notes",
+          "Disclaimer",
+          "Appendix",
+          "脚注"
+        ]
+      ],
       "priority": 2,
-      "questions": ["脚注限定语与数据定义随图保留"]
+      "questions": [
+        "脚注限定语与数据定义随图保留"
+      ]
     }
   ],
   "reading_questions": [
@@ -77,25 +174,40 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period"],
+      "slots": [
+        "subject",
+        "period"
+      ],
       "missing_behavior": "unknown",
       "reason": "演示图表都带截止期，断言必须绑定主体与期间"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator", "geography"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator",
+        "geography"
+      ],
       "missing_behavior": "partial",
       "reason": "图上数值必须带单位、口径与地域；缺任一标 partial"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "目标/展望与脚注限定语随数据保留"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "stage"],
+      "slots": [
+        "project",
+        "stage"
+      ],
       "missing_behavior": "partial",
       "reason": "路线图/产能图保留项目阶段与条件"
     }
@@ -117,8 +229,15 @@
   },
   "evidence_status": {
     "design": "verified",
-    "real_samples": ["case-hk-deck-chart-01"],
-    "missing_shapes": ["PPTX/图片形态本地原件", "图表 OCR 完整性验证（不在本包范围，归 ROOT/共享链）"]
+    "real_samples": [
+      "case-hk-deck-chart-01"
+    ],
+    "missing_shapes": [
+      "PPTX/图片形态本地原件",
+      "图表 OCR 完整性验证（不在本包范围，归 ROOT/共享链）"
+    ]
   },
-  "case_ids": ["case-hk-deck-chart-01"]
+  "case_ids": [
+    "case-hk-deck-chart-01"
+  ]
 }

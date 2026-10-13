@@ -22,35 +22,72 @@
       "language": "en-US",
       "carrier": "txt",
       "read_scope": "开场与全球性口径说明（行式TXT）",
-      "note": "片段来自母计划 sample_observations 对同一 SHA 原件的只读侦察；引文经逐条对照原文核验"
+      "note": "设计语境正文显式标 provenance，不用于运行时raw；完整支持短锚点在ROOT接收时按固定SHA原件复核，正式unit/locator由公共解析器恢复。"
     },
     "units": [
       {
         "unit_id": "u1",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 128, "exact_quote": "intended to supplement our prepared remarks during today's call"},
+        "anchor": {
+          "physical_page": null,
+          "line": 128,
+          "exact_quote": "Jonathan Neilson:Good afternoon, and thank you for joining us today. On the call with me are Satya Nadella, Chairman and Chief Executive Officer; Amy Hood, Chief Financial Officer; Alice Jolla, Chief Accounting Officer; and Brian DeFoe, Deputy General Counsel and Corporate Secretary. On the Microsoft Investor Relations website, you can find our earnings press release and financial summary slide deck, which is intended to supplement our prepared remarks during today's call and provides the reconciliation of differences between GAAP and non-GAAP financial measures."
+        },
         "page": null,
         "text": "Jonathan Neilson: Good afternoon, and thank you for joining us today. On the call with me are Satya Nadella, Chairman and Chief Executive Officer; Amy Hood, Chief Financial Officer; Alice Jolla, Chief Accounting Officer; and Brian DeFoe, Deputy General Counsel and Corporate Secretary. On the Microsoft Investor Relations website, you can find our earnings press release and financial summary slide deck, which is intended to supplement our prepared remarks during today's call.",
         "role": "call_opening",
-        "hints": {"facet_ids": ["facet_risk_denial", "facet_core_business"], "mechanism_ids": ["mechanism_subscription_consumption"]}
+        "hints": {
+          "facet_ids": [
+            "facet_risk_denial",
+            "facet_core_business"
+          ],
+          "mechanism_ids": [
+            "mechanism_subscription_consumption"
+          ]
+        },
+        "text_status": "explanatory_reconstruction",
+        "text_source": "手工重述/拼接设计语境；不是raw，不用于生产证据或评测observed",
+        "runtime_raw": false
       },
       {
         "unit_id": "u2",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 126, "exact_quote": "It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations"},
+        "anchor": {
+          "physical_page": null,
+          "line": 126,
+          "exact_quote": "Operator:Greetings, and welcome to the Microsoft Fiscal Year 2026 Fourth Quarter Earnings Conference Call. As a reminder, this conference is being recorded. It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations. Please go ahead."
+        },
         "page": null,
         "text": "Operator: Greetings, and welcome to the Microsoft Fiscal Year 2026 Fourth Quarter Earnings Conference Call. As a reminder, this conference is being recorded. It is now my pleasure to introduce Jonathan Neilson, Vice President of Investor Relations. Please go ahead.",
         "role": "call_opening",
-        "hints": {"facet_ids": ["facet_risk_denial"]}
+        "hints": {
+          "facet_ids": [
+            "facet_risk_denial"
+          ]
+        },
+        "text_status": "original_excerpt",
+        "text_source": "原件短摘录；仍需公共解析器恢复正式unit/locator",
+        "runtime_raw": false
       },
       {
         "unit_id": "u3",
         "locator": null,
-        "anchor": {"physical_page": null, "line": 128, "exact_quote": "On this call, we will discuss certain non-GAAP items"},
+        "anchor": {
+          "physical_page": null,
+          "line": 130,
+          "exact_quote": "The non-GAAP financial measures provided should not be considered as a substitute for or superior to the measures of financial performance prepared in accordance with GAAP. They are included as additional clarifying items to aid investors in further understanding the company's fourth quarter performance in addition to the impact these items and events have on the financial results."
+        },
         "page": null,
         "text": "On this call, we will discuss certain non-GAAP items. The non-GAAP financial measures provided should not be considered as a substitute for or superior to the measures of financial performance prepared in accordance with GAAP. They are included as additional clarifying items to aid investors in further understanding the company's fourth quarter performance.",
         "role": "call_global_note",
-        "hints": {"facet_ids": ["facet_operating_metrics"]}
+        "hints": {
+          "facet_ids": [
+            "facet_operating_metrics"
+          ]
+        },
+        "text_status": "explanatory_reconstruction",
+        "text_source": "手工重述/拼接设计语境；不是raw，不用于生产证据或评测observed",
+        "runtime_raw": false
       }
     ]
   },
@@ -65,7 +102,12 @@
         "id": "f1",
         "objective": "发言角色决定陈述归属：开场由 VP of Investor Relations 引介（Chairman&CEO、CFO等出席），新闻稿与补充材料是 prepared remarks 的补充而非替代",
         "importance": "required_business",
-        "any_support_sets": [["u1", "u2"]],
+        "any_support_sets": [
+          [
+            "u1",
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "角色=Operator / VP of Investor Relations / Chairman&CEO / CFO 分列",
           "阶段=开场（引介）与 prepared remarks、Q&A 分开",
@@ -81,7 +123,12 @@
         "id": "f2",
         "objective": "non-GAAP 为全call适用的口径限定：不替代GAAP，作为补充说明；相关局部数字必须带此限定",
         "importance": "required_business",
-        "any_support_sets": [["u3"]],
+        "any_support_sets": [
+          [
+            "u2",
+            "u3"
+          ]
+        ],
         "must_preserve": [
           "限定=non-GAAP不作为GAAP的替代或更优",
           "作用域=整个电话会（全局），随局部事实保留",
@@ -123,5 +170,6 @@
       "reason": "prepared remarks 中展望与业绩陈述语态不同"
     }
   ],
-  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION",
+  "version": "1.1.0"
 }

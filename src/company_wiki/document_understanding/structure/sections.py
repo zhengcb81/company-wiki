@@ -11,6 +11,9 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from dataclasses import dataclass, field
+from copy import copy
+import re
+from ..observation_adapter import _is_item_label, _is_item_heading, _part_heading_level
 
 from . import layout as layout_mod
 from .contract import (
@@ -21,18 +24,56 @@ from .contract import ObservationUnit
 
 _SECTION_ROLE_HINTS: tuple[tuple[tuple[str, ...], str], ...] = (
     (("募集资金", "募投", "发行", "可转债", "资金用途", "本次发行"), "fundraising"),
-    (("管理层讨论", "经营情况讨论", "董事会报告", "业务回顾", "business review",
-      "management discussion", "md&a"), "management_discussion"),
+    (
+        (
+            "管理层讨论",
+            "经营情况讨论",
+            "董事会报告",
+            "业务回顾",
+            "business review",
+            "management discussion",
+            "md&a",
+        ),
+        "management_discussion",
+    ),
     (("风险", "risk factor", "risk factors"), "risk"),
     (("行业", "industry", "competition", "竞争"), "industry"),
     (("展望", "outlook", "future plan", "未来", "发展战略"), "outlook"),
     (("业务", "主营业务", "产品", "经营模式", "business", "products"), "business"),
     (("投资者关系", "问答", "问题", "questions and answers", "q&a"), "questions"),
-    (("财务报表", "财务报告", "附注", "financial statements", "notes to"), "financial_notes"),
-    (("释义", "目录", "公司治理", "环境", "社会", "责任", "签字", "确认意见",
-      "definitions", "corporate governance"), "administrative"),
-    (("产能", "产量", "销量", "门店", "客户", "订单", "operating metrics",
-      "kpi", "key metrics"), "operating_metrics"),
+    (
+        ("财务报表", "财务报告", "附注", "financial statements", "notes to"),
+        "financial_notes",
+    ),
+    (
+        (
+            "释义",
+            "目录",
+            "公司治理",
+            "环境",
+            "社会",
+            "责任",
+            "签字",
+            "确认意见",
+            "definitions",
+            "corporate governance",
+        ),
+        "administrative",
+    ),
+    (
+        (
+            "产能",
+            "产量",
+            "销量",
+            "门店",
+            "客户",
+            "订单",
+            "operating metrics",
+            "kpi",
+            "key metrics",
+        ),
+        "operating_metrics",
+    ),
 )
 
 
@@ -81,6 +122,41 @@ def _dominant_language(
     return max(sorted(counts), key=lambda key: counts[key])
 
 
+def _display_heading_groups(units, excluded):
+    tables = {}
+    for unit in units:
+        if unit.table_id and unit.unit_id not in excluded:
+            tables.setdefault(unit.table_id, []).append(unit)
+    groups = {}
+    for members in tables.values():
+        if (
+            len(members) < 2
+            or len({u.row for u in members}) != 1
+            or any(u.row is None or u.column_index is None for u in members)
+        ):
+            continue
+        labels = [u for u in members if _is_item_label(u.text)]
+        if len(labels) != 1:
+            continue
+        label = labels[0]
+        titles = [u for u in members if u is not label]
+        if any(
+            u.column_index <= label.column_index
+            or not any(ch.isalpha() for ch in u.text)
+            or re.match(
+                r"^(?:USD|RMB|CNY|HKD|EUR|GBP|JPY|US\$|HK\$|人民币)\s*[\d$€£¥.,%+-]",
+                u.text,
+                re.IGNORECASE,
+            )
+            or u.text.strip().casefold()
+            in {"usd", "rmb", "cny", "hkd", "eur", "gbp", "jpy", "page", "page number"}
+            for u in titles
+        ):
+            continue
+        groups[label.unit_id] = [label] + sorted(titles, key=lambda u: u.column_index)
+    return groups
+
+
 def build_sections(
     units: Sequence[ObservationUnit],
     ordering: layout_mod.Ordering,
@@ -97,7 +173,8 @@ def build_sections(
     toc_ids = ordering.toc_ids
     furniture = ordering.running_header_ids
     has_heading_evidence = any(
-        unit.heading_level is not None or unit.dom_path is not None for unit in ordering.ordered
+        unit.heading_level is not None or unit.dom_path is not None
+        for unit in ordering.ordered
     )
 
     sections: list[SectionDraft] = []
@@ -106,11 +183,35 @@ def build_sections(
     counter = 0
     last_page: int | None = None
     carry_units = 0
+    display_headings = _display_heading_groups(
+        ordering.ordered, set(toc_ids) | set(furniture)
+    )
+    display_title_ids = {
+        unit.unit_id for group in display_headings.values() for unit in group[1:]
+    }
+    active_part_depth = None
+    active_item = None
 
-    def open_section(unit: ObservationUnit) -> SectionDraft:
+    def open_section(
+        unit: ObservationUnit,
+        heading_units=None,
+        depth_override=None,
+        contextual_outline=False,
+    ) -> SectionDraft:
         nonlocal counter
         counter += 1
-        depth = layout_mod.heading_depth(unit)
+        depth = (
+            depth_override
+            if contextual_outline and unit.dom_path is None
+            else unit.heading_level
+            if unit.heading_level is not None
+            else (
+                depth_override
+                if depth_override is not None
+                else layout_mod.heading_depth(unit)
+            )
+        )
+        heading_units = heading_units or [unit]
         basis = ["reading_order"]
         if unit.heading_level is not None:
             basis.append("heading_level")
@@ -129,7 +230,7 @@ def build_sections(
 
         draft = SectionDraft(
             section_id=f"s{counter}",
-            heading_ids=[unit.unit_id],
+            heading_ids=[heading.unit_id for heading in heading_units],
             parent_id=parent.section_id if parent is not None else None,
             depth=depth,
             language=unit.language,
@@ -137,9 +238,10 @@ def build_sections(
             basis=basis,
             pages=[unit.page] if unit.page is not None else [],
         )
-        draft.section_role = _role_for_heading(
-            unit.text, _role_for_heading(unit.text, "unknown")
-        )
+        heading_text = " ".join(heading.text for heading in heading_units)
+        draft.section_role = _role_for_heading(heading_text, "unknown")
+        if len(heading_units) > 1:
+            draft.basis.append("single_row_display_heading")
         sections.append(draft)
         stack.append(draft)
         return draft
@@ -147,11 +249,49 @@ def build_sections(
     for unit in ordering.ordered:
         if unit.unit_id in toc_ids:
             continue
-        if unit.unit_id in furniture:
+        if unit.unit_id in furniture or unit.unit_id in display_title_ids:
             continue
-
-        if layout_mod.is_heading(unit, toc_ids=toc_ids):
-            current = open_section(unit)
+        compound = display_headings.get(unit.unit_id)
+        is_heading = layout_mod.is_heading(unit, toc_ids=toc_ids)
+        if (
+            unit.table_id
+            and compound is None
+            and unit.heading_level is None
+            and unit.kind not in {"heading", "html_heading"}
+        ):
+            is_heading = False  # numeric/TOC/multi-row tables are not display headings
+        if compound is not None or is_heading:
+            part = _part_heading_level(unit.text)
+            item = _is_item_heading(unit.text)
+            relative_outline = False
+            if part is not None:
+                active_part_depth = unit.heading_level or part
+                active_item = None
+            override = (
+                (active_part_depth + 1 if active_part_depth is not None else 1)
+                if item
+                else None
+            )
+            if not item and part is None and active_part_depth is not None:
+                # Notes/numbered sub-outlines are relative to the explicit Item,
+                # never new document roots. Actual DOM heading levels win.
+                if active_item is not None and active_item in stack:
+                    numbered = copy(unit)
+                    numbered.heading_level = None
+                    own_depth = layout_mod.heading_depth(numbered)
+                    if own_depth is not None and active_item.depth is not None:
+                        override = active_item.depth + own_depth
+                        relative_outline = True
+            current = open_section(
+                unit,
+                heading_units=compound,
+                depth_override=override,
+                contextual_outline=relative_outline,
+            )
+            if relative_outline:
+                current.basis.append("relative_item_numbering")
+            if item:
+                active_item = current
             last_page = unit.page if unit.page is not None else last_page
             carry_units = 0
             continue
@@ -233,7 +373,9 @@ def build_sections(
     by_id = {unit.unit_id: unit for unit in units}
     for draft in sections:
         if draft.language is None:
-            draft.language = _dominant_language(by_id, draft.heading_ids + draft.body_ids)
+            draft.language = _dominant_language(
+                by_id, draft.heading_ids + draft.body_ids
+            )
         inconsistent = _layout_inconsistency(by_id, draft)
         if inconsistent is not None:
             draft.basis.append("layout_inconsistent")
@@ -254,7 +396,10 @@ def build_sections(
                 seen.add(basis)
                 deduped.append(basis)
         draft.basis = deduped
-        if limits["max_group_members"] and len(draft.body_ids) > limits["max_group_members"]:
+        if (
+            limits["max_group_members"]
+            and len(draft.body_ids) > limits["max_group_members"]
+        ):
             diagnostics.append(
                 {
                     "code": "SECTION_OVERSIZED",
@@ -314,9 +459,8 @@ def _layout_inconsistency(
     ]
     if not flagged:
         return None
-    return (
-        "declared layout contradicts itself for "
-        + ", ".join(unit.unit_id for unit in flagged)
+    return "declared layout contradicts itself for " + ", ".join(
+        unit.unit_id for unit in flagged
     )
 
 

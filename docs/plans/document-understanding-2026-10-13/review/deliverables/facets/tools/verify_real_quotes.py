@@ -53,8 +53,21 @@ def extract_text(path: Path, page: int | None) -> tuple[str, str]:
         with fitz.open(path) as doc:
             text = doc[page - 1].get_text() if page else "".join(p.get_text() for p in doc)
         return text, "pymupdf_page_text_normalized"
-    raw = path.read_text(encoding="utf-8", errors="replace")
-    return raw, ("html_text_normalized" if suffix in {".htm", ".html"} else "txt_text_normalized")
+    if suffix in {".htm", ".html"}:
+        # Reuse the production frontend; raw markup substrings are not body evidence.
+        sys.path.insert(0, str(WORKTREE_ROOT / "src"))
+        from company_wiki.document_normalization import normalize_document
+
+        original = path.read_bytes()
+        source_sha = hashlib.sha256(original).hexdigest()
+        document = normalize_document(
+            original,
+            source_id="urn:company-wiki:source:sha256:" + source_sha,
+            source_sha256=source_sha,
+            mime_type="text/html",
+        )
+        return "\n".join(unit.raw_text for unit in document.units), "public_html_normalization"
+    return path.read_text(encoding="utf-8", errors="replace"), "txt_text_normalized"
 
 
 def main() -> int:
@@ -92,6 +105,10 @@ def main() -> int:
                 page = anchor["physical_page"]
                 text, method = extract_text(original, page)
                 matched = normalized(quote) in normalized(text)
+                line = anchor.get("line")
+                if original.suffix.lower() == ".txt" and line is not None:
+                    lines = text.splitlines()
+                    matched = 0 < line <= len(lines) and normalized(quote) in normalized(lines[line - 1])
                 if not matched:
                     failures.append(f"{sample_id}: quote not found at page {page}: {quote[:40]!r}")
                 checks.append(
@@ -100,6 +117,7 @@ def main() -> int:
                         "sample_id": sample_id,
                         "source_sha256": pinned_sha,
                         "page": page,
+                        "line": line,
                         "quote": quote,
                         "method": method,
                         "normalized_match": matched,
@@ -121,8 +139,8 @@ def main() -> int:
         payload = {
             "schema_version": "du2-facet-c-checks/1",
             "method_notes": [
-                "C节点人工对照原文：引文与原件逐条比对，空白归一化后要求逐字命中；不改写、不翻译引文。",
-                "PDF 用 PyMuPDF 按声明页提取只读文本；HTML/TXT 全文归一化匹配。",
+                "来源核对：完整锚点与原件逐条比对，空白归一化后逐字命中；这是引用核查，不代替事实含义与生产语义审查。",
+                "PDF按声明页取原文；HTML用公共normalize_document正文；TXT按声明行核实完整锚点。",
                 "原件只读打开，不复制、不改写；读取前后核对 SHA-256 与 mtime。",
                 "本文件是核对记录，不是引擎语义验收；语义执行属 ROOT（NOT_RUN_ROOT_INTEGRATION）。",
                 "绝对路径只存于未提交的 .planning/du2-facets/bindings.local.json，不进入可移植fixture。",

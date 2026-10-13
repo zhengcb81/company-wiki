@@ -1,30 +1,63 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "offering_cn_convertible",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "applies_to": {
-    "regimes": ["cn_exchange"],
+    "regimes": [
+      "cn_exchange"
+    ],
     "forms": [],
     "family": "offering",
-    "purposes": ["fundraising", "project_evidence"],
-    "modifiers": {"extent": "full", "revision": "original"},
-    "carrier": ["pdf"],
-    "language": ["zh"]
+    "purposes": [
+      "fundraising",
+      "project_evidence"
+    ],
+    "modifiers": {
+      "extent": [
+        "full",
+        "summary",
+        "unknown"
+      ],
+      "revision": [
+        "original",
+        "amended",
+        "supplement",
+        "unknown"
+      ]
+    },
+    "carrier": [
+      "pdf"
+    ],
+    "language": [
+      "zh"
+    ]
   },
   "recognition": {
     "positive": [
       {
-        "signal": {"kind": "literal_phrase", "value": "可转换公司债券募集说明书", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "可转换公司债券募集说明书",
+          "field": null
+        },
         "location": "cover",
         "reason": "可转债募集说明书封面标题短语"
       },
       {
-        "signal": {"kind": "literal_phrase", "value": "本次发行", "field": null},
+        "signal": {
+          "kind": "literal_phrase",
+          "value": "本次发行",
+          "field": null
+        },
         "location": "body",
         "reason": "债券发行件的“本次发行”表述与发行条款绑定"
       },
       {
-        "signal": {"kind": "metadata_equals", "value": "cn_exchange", "field": "regime"},
+        "signal": {
+          "kind": "metadata_equals",
+          "value": "cn_exchange",
+          "field": "regime"
+        },
         "location": "metadata",
         "reason": "A股披露制度"
       }
@@ -40,45 +73,131 @@
   "sections": [
     {
       "role": "fundraising",
-      "aliases": ["募集资金投资项目", "本次募集资金投资项目", "募集资金运用"],
-      "heading_path": [["募集资金投资项目", "本次募集资金投资项目", "本次发行募集资金投资项目简介"]],
+      "aliases": [
+        "募集资金投资项目",
+        "本次募集资金投资项目",
+        "募集资金运用"
+      ],
+      "heading_path": [
+        [
+          "募集资金投资项目",
+          "本次募集资金投资项目",
+          "本次发行募集资金投资项目简介"
+        ]
+      ],
       "priority": 1,
-      "questions": ["每个募投项目的主体、产品、产能、建设期与投资构成"]
+      "questions": [
+        "每个募投项目的主体、产品、产能、建设期与投资构成"
+      ]
     },
     {
       "role": "business",
-      "aliases": ["现有业务", "主营业务", "本次发行的必要性"],
-      "heading_path": [["本次发行", "募集资金投资项目"], ["必要性", "现有业务", "主营业务", "与现有业务的关系"]],
+      "aliases": [
+        "现有业务",
+        "主营业务",
+        "本次发行的必要性"
+      ],
+      "heading_path": [
+        [
+          "本次发行",
+          "募集资金投资项目"
+        ],
+        [
+          "必要性",
+          "现有业务",
+          "主营业务",
+          "与现有业务的关系"
+        ]
+      ],
       "priority": 1,
-      "questions": ["新项目与现有业务的关系", "产品口径的独立性（原有产能 vs 拟建产能）"]
+      "questions": [
+        "新项目与现有业务的关系",
+        "产品口径的独立性（原有产能 vs 拟建产能）"
+      ]
     },
     {
       "role": "operating_metrics",
-      "aliases": ["产能", "产能利用率", "产销量", "负荷"],
-      "heading_path": [["募集资金投资项目", "本次发行募集资金投资项目简介"], ["产能", "产能利用率", "生产负荷", "产销量"]],
+      "aliases": [
+        "产能",
+        "产能利用率",
+        "产销量",
+        "负荷"
+      ],
+      "heading_path": [
+        [
+          "募集资金投资项目",
+          "本次发行募集资金投资项目简介"
+        ],
+        [
+          "产能",
+          "产能利用率",
+          "生产负荷",
+          "产销量"
+        ]
+      ],
       "priority": 1,
-      "questions": ["现有产能、新增产能与生产负荷假设的区分"]
+      "questions": [
+        "现有产能、新增产能与生产负荷假设的区分"
+      ]
     },
     {
       "role": "financial_notes",
-      "aliases": ["项目效益分析", "效益测算", "财务影响"],
-      "heading_path": [["募集资金投资项目", "本次发行募集资金投资项目简介"], ["项目效益分析", "效益测算", "对经营状况和财务状况的影响"]],
+      "aliases": [
+        "项目效益分析",
+        "效益测算",
+        "财务影响"
+      ],
+      "heading_path": [
+        [
+          "募集资金投资项目",
+          "本次发行募集资金投资项目简介"
+        ],
+        [
+          "项目效益分析",
+          "效益测算",
+          "对经营状况和财务状况的影响"
+        ]
+      ],
       "priority": 2,
-      "questions": ["测算假设（建设期/生产期/负荷）与免责声明"]
+      "questions": [
+        "测算假设（建设期/生产期/负荷）与免责声明"
+      ]
     },
     {
       "role": "risk",
-      "aliases": ["风险因素", "募集资金投资项目的风险"],
-      "heading_path": [["风险因素", "募集资金投资项目的风险"]],
+      "aliases": [
+        "风险因素",
+        "募集资金投资项目的风险"
+      ],
+      "heading_path": [
+        [
+          "风险因素",
+          "募集资金投资项目的风险"
+        ]
+      ],
       "priority": 2,
-      "questions": ["项目失败/延期风险的具体条件"]
+      "questions": [
+        "项目失败/延期风险的具体条件"
+      ]
     },
     {
       "role": "administrative",
-      "aliases": ["本次发行条款", "转股条款", "债券条款"],
-      "heading_path": [["本次发行条款", "转股价格", "债券条款"]],
+      "aliases": [
+        "本次发行条款",
+        "转股条款",
+        "债券条款"
+      ],
+      "heading_path": [
+        [
+          "本次发行条款",
+          "转股价格",
+          "债券条款"
+        ]
+      ],
       "priority": 3,
-      "questions": ["哪些条款影响项目融资或建设节奏"]
+      "questions": [
+        "哪些条款影响项目融资或建设节奏"
+      ]
     }
   ],
   "reading_questions": [
@@ -91,25 +210,41 @@
   "context_requirements": [
     {
       "when": "always_for_assertion",
-      "slots": ["subject", "period"],
+      "slots": [
+        "subject",
+        "period"
+      ],
       "missing_behavior": "unknown",
       "reason": "募集说明书数据带编制时点，断言绑定主体与 as-of 期间"
     },
     {
       "when": "project_emitted",
-      "slots": ["project", "subject", "stage", "condition"],
+      "slots": [
+        "project",
+        "subject",
+        "stage",
+        "condition"
+      ],
       "missing_behavior": "partial",
       "reason": "每个项目独立成包；建设期/负荷/达产条件必须随项目保留，禁止跨项目拼接"
     },
     {
       "when": "quantity_emitted",
-      "slots": ["quantity", "unit", "period", "denominator"],
+      "slots": [
+        "quantity",
+        "unit",
+        "period",
+        "denominator"
+      ],
       "missing_behavior": "partial",
       "reason": "产能单位（吨/年等）、投资额单位与测算/实际标记必须保留"
     },
     {
       "when": "explicit_condition_present",
-      "slots": ["condition", "modality"],
+      "slots": [
+        "condition",
+        "modality"
+      ],
       "missing_behavior": "deferred",
       "reason": "测算假设与风险条件必须随数值保留"
     }
@@ -131,8 +266,17 @@
   },
   "evidence_status": {
     "design": "verified",
-    "real_samples": ["case-cn-convertible-projects-01", "case-cn-convertible-forecast-02"],
-    "missing_shapes": ["募投项目进展/变更公告与募集说明书版本对", "赎回/回售影响项目的实例"]
+    "real_samples": [
+      "case-cn-convertible-projects-01",
+      "case-cn-convertible-forecast-02"
+    ],
+    "missing_shapes": [
+      "募投项目进展/变更公告与募集说明书版本对",
+      "赎回/回售影响项目的实例"
+    ]
   },
-  "case_ids": ["case-cn-convertible-projects-01", "case-cn-convertible-forecast-02"]
+  "case_ids": [
+    "case-cn-convertible-projects-01",
+    "case-cn-convertible-forecast-02"
+  ]
 }

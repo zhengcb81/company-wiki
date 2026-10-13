@@ -39,7 +39,12 @@
         "page": 10,
         "text": "於截至2025年6月30日止六個月，本集團於中國內地和海外市場的名創優品門店總數由截至2024",
         "role": "operating_metrics",
-        "hints": {"heading_path": ["業務回顧及展望"], "note": "引文按原文行截断；期初 7,504 家与年报期末口径衔接，续行未入引文"}
+        "hints": {
+          "heading_path": [
+            "業務回顧及展望"
+          ],
+          "note": "引文按原文行截断；期初 7,504 家与年报期末口径衔接，续行未入引文"
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +57,12 @@
         "page": 19,
         "text": "期後的近期發展  TOP TOY的最新情況",
         "role": "outlook",
-        "hints": {"heading_path": ["業務回顧及展望", "期後的近期發展"]}
+        "hints": {
+          "heading_path": [
+            "業務回顧及展望",
+            "期後的近期發展"
+          ]
+        }
       },
       {
         "unit_id": "u3",
@@ -65,7 +75,12 @@
         "page": 19,
         "text": "TOP TOY近期完成了由總部位於新加坡的全球投資公司淡馬錫領投的一輪戰略融資。",
         "role": "outlook",
-        "hints": {"heading_path": ["業務回顧及展望", "期後的近期發展"]}
+        "hints": {
+          "heading_path": [
+            "業務回顧及展望",
+            "期後的近期發展"
+          ]
+        }
       }
     ]
   },
@@ -79,24 +94,48 @@
         "id": "f1-interim-period-scope",
         "objective": "六个月累计口径与期初衔接",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
-        "must_preserve": ["期间：截至2025-06-30 止六个月", "期初口径与年报期末 7,504 家衔接", "主体/范围：本集团，中国内地和海外市场合计"],
-        "must_not_assert": ["不得把六个月数据写成年度口径或单季口径"]
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
+        "must_preserve": [
+          "期间：截至2025-06-30 止六个月",
+          "期初口径与年报期末 7,504 家衔接",
+          "主体/范围：本集团，中国内地和海外市场合计"
+        ],
+        "must_not_assert": [
+          "不得把六个月数据写成年度口径或单季口径"
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f2-postperiod-financing",
         "objective": "期后融资事件单列并保留估值口径",
         "importance": "normal",
-        "any_support_sets": [["u2", "u3"]],
-        "must_preserve": ["时点：期後（近期发展）", "事件：子公司品牌完成战略融资，领投方为外部投资机构", "口径：交易后估值（非收入、非母公司市值）"],
+        "any_support_sets": [
+          [
+            "u2",
+            "u3"
+          ]
+        ],
+        "must_preserve": [
+          "时点：期後（近期发展）",
+          "事件：子公司品牌完成战略融资，领投方为外部投资机构",
+          "口径：交易后估值（非收入、非母公司市值）"
+        ],
         "must_not_assert": [
           "融资估值不得写成公司收入或母公司市值",
           "不得把期后事件写成报告期内经营成果"
-        ]
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["估值数字本身正确性", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "估值数字本身正确性",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {
@@ -114,6 +153,8 @@
     "period": "截至2025-06-30止六个月",
     "condition": null
   },
-  "expected_missing_slots": ["quantity"],
+  "expected_missing_slots": [
+    "quantity"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }

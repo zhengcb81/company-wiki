@@ -40,7 +40,12 @@
         "page": 2,
         "text": "FinTech and Business Services rose by 9% year-on-year to RMB60.3 billion for 2Q2026.",
         "role": "business",
-        "hints": {"heading_path": ["Financial Highlights", "Segment"]}
+        "hints": {
+          "heading_path": [
+            "Financial Highlights",
+            "Segment"
+          ]
+        }
       },
       {
         "unit_id": "u2",
@@ -53,7 +58,13 @@
         "page": 2,
         "text": "FinTech Services revenue growth was mainly due to higher revenues from commercial payment, wealth management and consumer loan services",
         "role": "management_discussion",
-        "hints": {"heading_path": ["Financial Highlights", "Segment"], "relation": "explains:u1"}
+        "hints": {
+          "heading_path": [
+            "Financial Highlights",
+            "Segment"
+          ],
+          "relation": "explains:u1"
+        }
       },
       {
         "unit_id": "u3",
@@ -66,7 +77,11 @@
         "page": 4,
         "text": "Forward-Looking Statements  This press release contains forward-looking statements relating to the business outlook, estimates of financial performance, forecast business plans and growth strategies of the Group.",
         "role": "administrative",
-        "hints": {"heading_path": ["Forward-Looking Statements"]}
+        "hints": {
+          "heading_path": [
+            "Forward-Looking Statements"
+          ]
+        }
       }
     ]
   },
@@ -80,7 +95,12 @@
         "id": "f1-segment-growth-with-explanation",
         "objective": "分部业绩必须带口径、期间与解释",
         "importance": "critical",
-        "any_support_sets": [["u1", "u2"]],
+        "any_support_sets": [
+          [
+            "u1",
+            "u2"
+          ]
+        ],
         "must_preserve": [
           "口径：分部收入（FinTech and Business Services），RMB 60.3B，+9% YoY",
           "期间：2Q2026（单季）",
@@ -90,19 +110,32 @@
           "不得把分部增速当公司整体增速",
           "不得把解释句中的驱动因素当新增业务事实",
           "单季与半年口径不得互换"
-        ]
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f2-forwardlooking-boundary",
         "objective": "前瞻性声明的适用边界",
         "importance": "normal",
-        "any_support_sets": [["u3"]],
-        "must_preserve": ["forward-looking 范围：业务展望、业绩估计、计划与增长战略"],
-        "must_not_assert": ["被声明覆盖的计划/估计不得当已实现事实"]
+        "any_support_sets": [
+          [
+            "u3"
+          ]
+        ],
+        "must_preserve": [
+          "forward-looking 范围：业务展望、业绩估计、计划与增长战略"
+        ],
+        "must_not_assert": [
+          "被声明覆盖的计划/估计不得当已实现事实"
+        ],
+        "target_kind": "disposition_context"
       }
     ],
     "disposition": "read",
-    "not_evaluated": ["其余分部与半年合计口径", "语义蕴含判定交 ROOT 行为测试"]
+    "not_evaluated": [
+      "其余分部与半年合计口径",
+      "语义蕴含判定交 ROOT 行为测试"
+    ]
   },
   "mutations": [
     {

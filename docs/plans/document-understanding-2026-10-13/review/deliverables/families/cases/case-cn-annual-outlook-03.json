@@ -39,7 +39,12 @@
         "page": 76,
         "text": "2026 年，公司将继续瞄准世界科技前沿，秉承三维发展战略，持续锻造并提升经营管理能力，实现高速、稳定、健康和安全的发展。具体包括以下方面： 1、产品研发方面 公司将不断完善研发管理机制和创新激励机制",
         "role": "outlook",
-        "hints": {"heading_path": ["公司关于公司未来发展的讨论与分析", "经营计划"]}
+        "hints": {
+          "heading_path": [
+            "公司关于公司未来发展的讨论与分析",
+            "经营计划"
+          ]
+        }
       },
       {
         "unit_id": "u2",
@@ -52,7 +57,12 @@
         "page": 75,
         "text": "根据Gartner 发布的初步统计数据，2025 年全球半导体市场营收总额……（第三方行业统计，引用自 Gartner 初步数据）",
         "role": "industry",
-        "hints": {"heading_path": ["公司关于公司未来发展的讨论与分析", "行业格局和趋势"]}
+        "hints": {
+          "heading_path": [
+            "公司关于公司未来发展的讨论与分析",
+            "行业格局和趋势"
+          ]
+        }
       }
     ]
   },
@@ -66,7 +76,11 @@
         "id": "f1-plan-not-promise",
         "objective": "识别公司下一阶段计划及其语气",
         "importance": "critical",
-        "any_support_sets": [["u1"]],
+        "any_support_sets": [
+          [
+            "u1"
+          ]
+        ],
         "must_preserve": [
           "modality：公司计划/将继续（plan），非已实现事实",
           "期间：2026 年（计划期，非报告期）",
@@ -75,15 +89,28 @@
         "must_not_assert": [
           "不得把 2026 年计划写成 2025 年已发生事实或业绩承诺",
           "不得由计划推导未披露的收入、产能数字"
-        ]
+        ],
+        "target_kind": "required_business"
       },
       {
         "id": "f2-third-party-industry-stat",
         "objective": "区分第三方行业统计与公司自身数据",
         "importance": "normal",
-        "any_support_sets": [["u2"]],
-        "must_preserve": ["作者：Gartner（第三方）", "口径：全球半导体市场营收（行业口径，非公司收入）", "modality：初步统计数据"],
-        "must_not_assert": ["行业营收不得当作公司营业收入或订单", "不得省略第三方作者归属"]
+        "any_support_sets": [
+          [
+            "u2"
+          ]
+        ],
+        "must_preserve": [
+          "作者：Gartner（第三方）",
+          "口径：全球半导体市场营收（行业口径，非公司收入）",
+          "modality：初步统计数据"
+        ],
+        "must_not_assert": [
+          "行业营收不得当作公司营业收入或订单",
+          "不得省略第三方作者归属"
+        ],
+        "target_kind": "required_business"
       }
     ],
     "disposition": "read",
@@ -114,6 +141,9 @@
     "period": "2026年",
     "condition": null
   },
-  "expected_missing_slots": ["quantity", "geography"],
+  "expected_missing_slots": [
+    "quantity",
+    "geography"
+  ],
   "execution_status": "NOT_RUN_ROOT_INTEGRATION"
 }
