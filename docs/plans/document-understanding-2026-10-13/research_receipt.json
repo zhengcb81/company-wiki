@@ -1,0 +1,45 @@
+{
+  "schema_version": "du-research/1",
+  "source_count": 20,
+  "pdf_count": 15,
+  "pdf_pages": 2390,
+  "all_originals_unchanged": true,
+  "native_scan_seconds": 7.045,
+  "model_calls": 0,
+  "raw_copies": 0,
+  "archives": [
+    {
+      "path": "sample_observations.json.gz",
+      "compressed_bytes": 81416,
+      "uncompressed_bytes": 298562,
+      "sha256": "d33b2614b50ce9b43032c6629940bc08e3d44f9c3946f1ba97b07aed073817c5",
+      "roundtrip_verified": true
+    },
+    {
+      "path": "selector_probe.json.gz",
+      "compressed_bytes": 16564,
+      "uncompressed_bytes": 108997,
+      "sha256": "0a9a71b830016302517fd3c7d476b654cbd167d8ce5380d5b3c9550233f6cfed",
+      "roundtrip_verified": true
+    }
+  ],
+  "visual_pages_reviewed": [
+    {
+      "name": "cn-ipo-confirmation.png",
+      "bytes": 609870
+    },
+    {
+      "name": "cn-q-business.png",
+      "bytes": 202166
+    },
+    {
+      "name": "hk-annual.png",
+      "bytes": 150776
+    },
+    {
+      "name": "cn-equity.png",
+      "bytes": 117842
+    }
+  ],
+  "owned_visual_directory_restored": true
+}

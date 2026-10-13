@@ -1,3 +1,7 @@
+## 2026-10-13 文档理解升级子计划
+
+用户要求按A/H/US与文档种类优化读取/切片/摘要；已完成20原件调查及3份selector诊断。新[设计与三独立施工卡](../document-understanding-2026-10-13/README.md)已冻结边界，生产未切换。可并行做profiles/structure/benchmark；ROOT先接完W08 RF/Audit，再集成文档层并合并原G2/G4/G5验证，未完成项不重复标关闭。
+
 ## ROOT 当前入口 — 2026-10-11
 
 当前状态、已发布SHA与下一步统一见 [ROOT接收状态](phase6/w06_parallel_verification_2026-10-11/ROOT-reception-status.md)，优先于本文旧状态。

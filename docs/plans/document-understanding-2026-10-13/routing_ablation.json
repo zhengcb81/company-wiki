@@ -1,0 +1,65 @@
+{
+  "scope": "same native parse, vary known type/budget only; not a fix",
+  "elapsed_seconds": 10.317,
+  "raw_unchanged": true,
+  "rows": [
+    {
+      "kind": "unknown",
+      "cap": 96,
+      "candidates": 449,
+      "selected": 96,
+      "focus_selected": 4,
+      "focus": [
+        {
+          "locator": "loc:v1/page:63/paragraph:19",
+          "text": "本募投项目的顺利实施将通过建立独立完整的研发与制"
+        },
+        {
+          "locator": "loc:v1/page:63/paragraph:20",
+          "text": "备体系，紧跟智能制造的发展浪潮，进一步增强公司生产智能化水平，在现有刃"
+        },
+        {
+          "locator": "loc:v1/page:63/paragraph:21",
+          "text": "量具业务的基础上形成新的业务增长点，打造公司的核心竞争力，帮助公司快速"
+        },
+        {
+          "locator": "loc:v1/page:63/paragraph:22",
+          "text": "适应智能制造技术变革的发展节奏。"
+        }
+      ]
+    },
+    {
+      "kind": "equity_offering_prospectus",
+      "cap": 96,
+      "candidates": 478,
+      "selected": 96,
+      "focus_selected": 0,
+      "focus": []
+    },
+    {
+      "kind": "equity_offering_prospectus",
+      "cap": 160,
+      "candidates": 478,
+      "selected": 160,
+      "focus_selected": 4,
+      "focus": [
+        {
+          "locator": "loc:v1/page:63/paragraph:19",
+          "text": "本募投项目的顺利实施将通过建立独立完整的研发与制"
+        },
+        {
+          "locator": "loc:v1/page:63/paragraph:20",
+          "text": "备体系，紧跟智能制造的发展浪潮，进一步增强公司生产智能化水平，在现有刃"
+        },
+        {
+          "locator": "loc:v1/page:63/paragraph:21",
+          "text": "量具业务的基础上形成新的业务增长点，打造公司的核心竞争力，帮助公司快速"
+        },
+        {
+          "locator": "loc:v1/page:63/paragraph:22",
+          "text": "适应智能制造技术变革的发展节奏。"
+        }
+      ]
+    }
+  ]
+}

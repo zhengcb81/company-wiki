@@ -1,3 +1,7 @@
+## 2026-10-13 计划分包
+
+20份原件只读、4页目视、3份现有selector诊断21.956秒；0付费0原件改动，临时图片恢复。新增[文档理解PWF与三卡](../document-understanding-2026-10-13/README.md)，不改W08作者仓或生产配置。下一步可由用户分发独立卡，ROOT保留主线集成责任。
+
 ## ROOT 当前入口 — 2026-10-11
 
 当前状态、已发布SHA与下一步统一见 [ROOT接收状态](phase6/w06_parallel_verification_2026-10-11/ROOT-reception-status.md)，优先于本文旧状态。

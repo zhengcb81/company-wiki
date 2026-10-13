@@ -1,3 +1,7 @@
+## 2026-10-13 文档理解调查
+
+[新子计划实证](../document-understanding-2026-10-13/findings.md)：确认函误路由、增发A股措辞漏路由、名创p12业务表/叙述未选、恒锋建设期在known-kind/160cap对照仍未选。升级共享章节/语义表示与profile，保留存储/来源/预算职责；详见独立设计，非生产修复完成。
+
 ## ROOT 当前入口 — 2026-10-11
 
 当前状态、已发布SHA与下一步统一见 [ROOT接收状态](phase6/w06_parallel_verification_2026-10-11/ROOT-reception-status.md)，优先于本文旧状态。

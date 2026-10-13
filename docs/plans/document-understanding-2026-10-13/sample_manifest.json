@@ -1,0 +1,285 @@
+{
+  "schema_version": "document-understanding-samples/1",
+  "sample_scope": "purposive architecture sample; not representative recall statistics",
+  "samples": [
+    {
+      "id": "cn-h1",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\semi_annual\\2026-08-19_cninfo_1225482884_2026年半年度报告.pdf",
+      "expected_family": "semi_annual_report",
+      "pages": [
+        3,
+        13,
+        18
+      ],
+      "patterns": [
+        "Business Highlights",
+        "Azure"
+      ],
+      "sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "bytes": 3149962
+    },
+    {
+      "id": "cn-annual",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf",
+      "expected_family": "annual_report",
+      "pages": [
+        3,
+        41,
+        56
+      ],
+      "patterns": [
+        "Business Highlights",
+        "Azure"
+      ],
+      "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "bytes": 9165875
+    },
+    {
+      "id": "cn-ipo",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\prospectus\\中微公司：首次公开发行股票并在科创板上市招股说明书.pdf",
+      "expected_family": "prospectus",
+      "pages": [
+        114,
+        115,
+        353,
+        354
+      ],
+      "patterns": [
+        "Business Highlights",
+        "Azure"
+      ],
+      "sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+      "bytes": 11211796
+    },
+    {
+      "id": "hk-release",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\unknown-date_official_64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a_Tencent second-quarter and first-half 2026 results.pdf",
+      "expected_family": "results_release",
+      "pages": [
+        2,
+        4,
+        6
+      ],
+      "patterns": [
+        "Business Highlights",
+        "Azure"
+      ],
+      "sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+      "bytes": 412297
+    },
+    {
+      "id": "hk-deck",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\HK-00700\\companies\\騰訊控股\\raw\\investor_relations\\b9eeeb4d903d8a15f4a3df59fbf9b513845301665991012215b0956ff5874632.pdf",
+      "expected_family": "presentation",
+      "pages": [
+        4,
+        8,
+        12
+      ],
+      "patterns": [
+        "Business Highlights",
+        "Azure"
+      ],
+      "sha256": "b9eeeb4d903d8a15f4a3df59fbf9b513845301665991012215b0956ff5874632",
+      "bytes": 1593471
+    },
+    {
+      "id": "us-release",
+      "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mFresh-me8cejn4\\US-MSFT\\companies\\MICROSOFT CORP\\raw\\investor_relations\\unknown-date_official_8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e_results official communication.html",
+      "expected_family": "results_release",
+      "pages": [],
+      "patterns": [
+        "Business Highlights",
+        "Azure"
+      ],
+      "sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+      "bytes": 808850
+    },
+    {
+      "id": "cn-q-business",
+      "path": "companies/中微公司/raw/financial_reports/中微公司：2026年第一季度报告.pdf",
+      "expected_family": "quarterly_report",
+      "pages": [
+        2,
+        3,
+        4
+      ],
+      "patterns": [],
+      "sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "bytes": 217264
+    },
+    {
+      "id": "cn-q-sparse",
+      "path": "companies/世华科技/raw/financial_reports/世华科技：2026年第一季度报告.pdf",
+      "expected_family": "quarterly_report",
+      "pages": [
+        2,
+        4,
+        5
+      ],
+      "patterns": [],
+      "sha256": "a230adbc91f9987f439f0e5d5b46706f6d6c40a7d2046a4491e1e77ee4fcaea9",
+      "bytes": 184382
+    },
+    {
+      "id": "cn-convertible",
+      "path": "companies/金禾实业/raw/research/金禾实业：公开发行可转换公司债券募集说明书.PDF",
+      "expected_family": "convertible_bond_prospectus",
+      "pages": [
+        223,
+        224,
+        225,
+        248
+      ],
+      "patterns": [],
+      "sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+      "bytes": 7062482
+    },
+    {
+      "id": "cn-equity",
+      "path": "companies/恒锋工具/raw/research/恒锋工具：2020年向特定对象发行A股股票募集说明书（注册稿）.PDF",
+      "expected_family": "equity_offering_prospectus",
+      "pages": [
+        61,
+        62,
+        63,
+        68
+      ],
+      "patterns": [],
+      "sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "bytes": 3812541
+    },
+    {
+      "id": "cn-ipo-confirmation",
+      "path": "companies/鼎龙股份/raw/prospectus/鼎龙股份：控股股东、实际控制人对《湖北鼎龙化学股份有限公司首次公开发行股票并在创业板上市招股说明书》的确认意见.pdf",
+      "expected_family": "administrative_confirmation",
+      "pages": [
+        2
+      ],
+      "patterns": [],
+      "sha256": "0829538f0707650db99852c5e269abe9e0d7e558d54d93e0a2c0be15fe0d0fa7",
+      "bytes": 287642
+    },
+    {
+      "id": "cn-ir",
+      "path": "companies/万润股份/raw/research/万润股份：投资者关系活动记录表20260515.pdf",
+      "expected_family": "investor_relations",
+      "pages": [
+        2,
+        3
+      ],
+      "patterns": [],
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "bytes": 153851
+    },
+    {
+      "id": "cn-ir-policy",
+      "path": "companies/万润股份/raw/research/万润股份：002643万润股份投资者关系管理制度20230428.pdf",
+      "expected_family": "ir_policy",
+      "pages": [
+        2
+      ],
+      "patterns": [],
+      "sha256": "9b9c875f70146b2f7221940fed37fce5ceccd9edd646cd3012405119f4cd3200",
+      "bytes": 223234
+    },
+    {
+      "id": "hk-annual",
+      "path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\名创优品\\2024年度报告（港股）.pdf",
+      "expected_family": "annual_report",
+      "pages": [
+        2,
+        11,
+        12,
+        24
+      ],
+      "patterns": [],
+      "sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "bytes": 2230253
+    },
+    {
+      "id": "hk-interim",
+      "path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\名创优品\\2025半年报（港股）.pdf",
+      "expected_family": "semi_annual_report",
+      "pages": [
+        2,
+        10,
+        11,
+        19
+      ],
+      "patterns": [],
+      "sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+      "bytes": 2715618
+    },
+    {
+      "id": "hk-ipo",
+      "path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\名创优品\\2022063000040_c.pdf",
+      "expected_family": "prospectus",
+      "pages": [
+        8,
+        193,
+        234,
+        240,
+        400,
+        401
+      ],
+      "patterns": [],
+      "sha256": "33460fa3e02e115e7bd09e1c4c857e71afe54c332a22373d28a0d2e86c70b6d4",
+      "bytes": 9730088
+    },
+    {
+      "id": "us-10k",
+      "path": "companies/微软/raw/financial_reports/annual/微软_10-K_2025.htm",
+      "expected_family": "annual_report",
+      "pages": [],
+      "patterns": [
+        "ITEM 1. BUSINESS",
+        "Our segments",
+        "Azure revenue",
+        "remaining performance obligations"
+      ],
+      "sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "bytes": 8158067
+    },
+    {
+      "id": "us-10q",
+      "path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\VRSK\\filings\\fil_0001437749-25-014907\\vrsk20250331_10q.htm",
+      "expected_family": "quarterly_report",
+      "pages": [],
+      "patterns": [
+        "Item 2. Management",
+        "Our Business",
+        "subscriptions"
+      ],
+      "sha256": "5afe631934fce5d3e23b6aa393ec599cd89b290cde1fc1667ebe22025d2479eb",
+      "bytes": 1387702
+    },
+    {
+      "id": "us-20f",
+      "path": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\TAL\\filings\\fil_0001104659-24-067123\\tal-20240229x20f.htm",
+      "expected_family": "annual_report",
+      "pages": [],
+      "patterns": [
+        "ITEM 4. INFORMATION",
+        "ITEM 5. OPERATING",
+        "Business Overview"
+      ],
+      "sha256": "35eed9769ee33e687147c50e91b571ec2f19135dc483d4b5c1dcbdd7ce879164",
+      "bytes": 4425147
+    },
+    {
+      "id": "us-txt",
+      "path": "companies/Microsoft/raw/transcripts/MSFT_Q4_2026_earnings_call.txt",
+      "expected_family": "investor_call_transcript",
+      "pages": [],
+      "patterns": [
+        "Satya Nadella",
+        "Keith Weiss",
+        "Questions and Answers",
+        "question-and-answer"
+      ],
+      "sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "bytes": 66324
+    }
+  ]
+}
