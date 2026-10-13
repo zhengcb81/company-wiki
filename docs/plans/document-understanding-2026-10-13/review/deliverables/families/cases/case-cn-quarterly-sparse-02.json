@@ -1,0 +1,108 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-cn-quarterly-sparse-02",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-q-sparse",
+    "source_sha256": "a230adbc91f9987f439f0e5d5b46706f6d6c40a7d2046a4491e1e77ee4fcaea9",
+    "origin": {
+      "doc_title": "世华科技2026年第一季度报告",
+      "issuer_market": "cn_exchange",
+      "document_date": "2026",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample cn-q-sparse；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "cn-q-sparse"
+  },
+  "observation": {
+    "metadata": {
+      "title": "世华科技：2026年第一季度报告",
+      "declared_kind": "quarterly_report",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": "2026-03-31",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 4,
+          "line": null,
+          "exact_quote": "其他提醒事项 需提醒投资者关注的关于公司报告期经营情况的其他重要信息 □适用√不适用"
+        },
+        "page": 4,
+        "text": "其他提醒事项 需提醒投资者关注的关于公司报告期经营情况的其他重要信息 □适用√不适用",
+        "role": "outlook",
+        "hints": {"heading_path": ["其他提醒事项"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 1,
+          "line": null,
+          "exact_quote": "单位：元 币种：人民币"
+        },
+        "page": 1,
+        "text": "单位：元 币种：人民币",
+        "role": "financial_notes",
+        "hints": {"heading_path": ["主要财务数据"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "稀疏季报的正确处置是完整轻扫后跳过业务派生，而不是召回财务数值",
+      "本 case 纠正旧 gold 的错误目标：不得强制召回净利/EPS/ROE/股东数"
+    ],
+    "facts": [
+      {
+        "id": "f1-legitimate-no-business",
+        "objective": "识别“合法无业务”的季报处置",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": ["其他提醒事项勾选“不适用”", "disposition：eligible_skip_after_read（已读核实后跳过派生）"],
+        "must_not_assert": [
+          "不得把“不适用”读成业务不存在或经营恶化",
+          "不得输出未披露的业务进展来“补齐”摘要"
+        ]
+      },
+      {
+        "id": "f2-financial-ordinary",
+        "objective": "常规财务口径不强迫抽取",
+        "importance": "normal",
+        "any_support_sets": [["u2"]],
+        "must_preserve": ["财务表口径：人民币元、未经审计（如引用必须带口径）"],
+        "must_not_assert": ["不得以凑数方式输出未被要求的财务派生值"]
+      }
+    ],
+    "disposition": "eligible_skip_after_read",
+    "not_evaluated": [
+      "财务数值抽取正确性（correctness_if_emitted 才适用）",
+      "语义蕴含判定交 ROOT 行为测试（execution_status=NOT_RUN_ROOT_INTEGRATION）"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1-invented-progress",
+      "change": "为本 case 编造“新产品验证进展”摘要条目",
+      "expected_failure": "unsupported_business_claim",
+      "reason": "无来源业务断言；稀疏文档不得被补齐成有进展"
+    },
+    {
+      "id": "m2-mandatory-financial-recall",
+      "change": "把净利/EPS/ROE/股东数列为 required 业务 gold",
+      "expected_failure": "wrong_test_target",
+      "reason": "required_business 应是业务叙述，普通财务值只做 correctness_if_emitted"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

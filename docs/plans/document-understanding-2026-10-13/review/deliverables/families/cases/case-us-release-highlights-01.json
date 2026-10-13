@@ -1,0 +1,96 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-us-release-highlights-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "us-release",
+    "source_sha256": "8d63b8eaa344ed736f568473bd2569c4c13fcad37f56be91347e46244924ea4e",
+    "origin": {
+      "doc_title": "results official communication（公司业绩发布 HTML）",
+      "issuer_market": "sec",
+      "document_date": "2026-07-29",
+      "carrier": "html",
+      "language": "en",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample us-release；本机 SHA 与 manifest 一致",
+      "path_note": "原件位于临时目录（mFresh-*），易失；handoff 已注明"
+    },
+    "local_binding_key": "us-release"
+  },
+  "observation": {
+    "metadata": {
+      "title": "results official communication",
+      "declared_kind": "results_release",
+      "regime": "sec",
+      "form_type": null,
+      "mime_type": "text/html",
+      "language": "en",
+      "published_at": "2026-07-29",
+      "period_end": "2026-06-30",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 873, "exact_quote": "Revenue was $90.0 billion and increased 18% (up 17% in constant currency)"},
+        "page": null,
+        "text": "Revenue was $90.0 billion and increased 18% (up 17% in constant currency) · Operating income was $40.6 billion and increased 18%",
+        "role": "management_discussion",
+        "hints": {"heading_path": ["Financial Highlights"], "dom_line": 873}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 1293, "exact_quote": "Microsoft Cloud revenue was $59.3 billion and increased 27%, and commercial remaining performance obligation increased 84% to $678 billion."},
+        "page": null,
+        "text": "Business Highlights Microsoft Cloud revenue was $59.3 billion and increased 27%, and commercial remaining performance obligation increased 84% to $678 billion.",
+        "role": "business",
+        "hints": {"heading_path": ["Business Highlights"], "dom_line": 1293, "note": "anchor 行为引文起始行；引文按 DOM 文本空白归一"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "业绩发布里业务亮点与财务亮点并列，财务标题不挤走业务",
+      "RPO 与收入是两种口径，必须分开"
+    ],
+    "facts": [
+      {
+        "id": "f1-cc-qualifier-stays",
+        "objective": "增长率的 constant currency 限定随数值保留",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": ["期间：季度（截至2026-06-30）", "18% 为报告口径、up 17% in constant currency 为剔汇口径，两者并存"],
+        "must_not_assert": ["不得只留一个增长率而丢另一个口径", "不得把两种增速互换"]
+      },
+      {
+        "id": "f2-rpo-vs-revenue",
+        "objective": "业务亮点中 RPO 与收入口径分离",
+        "importance": "critical",
+        "any_support_sets": [["u2"]],
+        "must_preserve": ["云收入 $59.3B（+27%）与商业 RPO $678B（+84%）是两个不同指标", "RPO 为剩余履约义务口径"],
+        "must_not_assert": ["RPO 不得当收入或收入增速", "$678B 不得写成季度收入"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["其余分部数值", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-rpo-as-revenue",
+      "change": "把商业 RPO 增长 84% 写成收入增长 84%",
+      "expected_failure": "quantity_semantics_changed",
+      "reason": "指标口径混淆"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "该公司（云业务）",
+    "modality": "actual",
+    "quantity": "59.3",
+    "unit": "billion USD",
+    "period": "FY2026 Q4",
+    "condition": null
+  },
+  "expected_missing_slots": ["geography"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

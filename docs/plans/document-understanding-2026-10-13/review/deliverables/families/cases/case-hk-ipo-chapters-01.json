@@ -1,0 +1,109 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-hk-ipo-chapters-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "hk-ipo",
+    "source_sha256": "33460fa3e02e115e7bd09e1c4c857e71afe54c332a22373d28a0d2e86c70b6d4",
+    "origin": {
+      "doc_title": "港股招股章程（全球發售）",
+      "issuer_market": "hkex",
+      "document_date": "2022-06-30",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample hk-ipo；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "hk-ipo"
+  },
+  "observation": {
+    "metadata": {
+      "title": "招股章程（全球發售）",
+      "declared_kind": "prospectus",
+      "regime": "hkex",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": "2022-06-30",
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 8,
+          "line": null,
+          "exact_quote": "行業概覽"
+        },
+        "page": 8,
+        "text": "行業概覽",
+        "role": "unknown",
+        "hints": {"unit_kind": "toc", "note": "目录项（繁体）：行业概览章节"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 8,
+          "line": null,
+          "exact_quote": "未來計劃及所得款項用途"
+        },
+        "page": 8,
+        "text": "未來計劃及所得款項用途",
+        "role": "unknown",
+        "hints": {"unit_kind": "toc", "note": "目录项（繁体）：未来计划及所得款项用途章节"}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {
+          "physical_page": 17,
+          "line": null,
+          "exact_quote": "競爭優勢 以下優勢成就了今天的我們，並將支持我們未來的成功："
+        },
+        "page": 17,
+        "text": "競爭優勢 以下優勢成就了今天的我們，並將支持我們未來的成功： • 提供創意生活家居產品的全球零售商；",
+        "role": "business",
+        "hints": {"heading_path": ["業務", "競爭優勢"], "language": "zh-Hant"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "港股招股章节体系（業務/行業概覽/未來計劃及所得款項用途）与 A股/US 不同",
+      "繁体别名与简体/英文别名在规格层合并，case 保留原语言"
+    ],
+    "facts": [
+      {
+        "id": "f1-hk-prospectus-chapters",
+        "objective": "港股招股章节定位与别名合并",
+        "importance": "critical",
+        "any_support_sets": [["u1"], ["u2"]],
+        "must_preserve": ["繁体章节名：行業概覽、未來計劃及所得款項用途", "两节分别承载行业口径与募资用途"],
+        "must_not_assert": ["目录项不得当正文证据", "不得把繁体章节名当作另一份文档"]
+      },
+      {
+        "id": "f2-competitive-claims-as-company-view",
+        "objective": "竞争优势是公司自述，非第三方结论",
+        "importance": "normal",
+        "any_support_sets": [["u3"]],
+        "must_preserve": ["来源：公司招股章程自述（业务章）", "时点：上市时点（2022）"],
+        "must_not_assert": ["“竞争优势”不得当作第三方验证的市场地位", "历史表述不得当现状"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["行业顾问数据核验", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-toc-as-content",
+      "change": "把 u1/u2 目录项当行业与募资正文内容",
+      "expected_failure": "coverage_overstated",
+      "reason": "目录被当正文"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

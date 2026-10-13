@@ -1,0 +1,136 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "earnings_call_transcript",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["sec", "hkex", "other"],
+    "forms": [],
+    "family": "earnings_call",
+    "purposes": ["management_qa", "event_update"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["txt", "html"],
+    "language": ["en", "zh"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "Earnings Call Transcript", "field": null},
+        "location": "cover",
+        "reason": "电话会实录文件头/标题"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "CALL PARTICIPANTS", "field": null},
+        "location": "body",
+        "reason": "参与人列表小节，提供发言者角色证据"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "Prepared Remarks", "field": null},
+        "location": "body",
+        "reason": "管理层准备发言小节"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "Question-and-Answer", "field": null},
+        "location": "body",
+        "reason": "分析师问答小节"
+      }
+    ],
+    "counterexamples": [
+      "第三方平台的编辑摘要/takeaways/术语表不是管理层发言，不得当管理层原话",
+      "分析师问题中的数字与假设是提问者内容，须绑定问句与发言人",
+      "网站抓取件的来源是聚合平台（如 transcript 站点），原始披露是公司新闻稿/8-K，来源角色要分开",
+      "constant currency 等全局限定语随局部事实一起保留",
+      "Operator/主持人串词不含业务事实"
+    ]
+  },
+  "sections": [
+    {
+      "role": "management_discussion",
+      "aliases": ["Prepared Remarks", "开场发言", "management remarks"],
+      "heading_path": [["Full Conference Call Transcript", "Prepared Remarks", "开场"], ["Prepared Remarks"]],
+      "priority": 1,
+      "questions": ["管理层准备发言中的业务事实与展望", "发言人角色（CEO/CFO）"]
+    },
+    {
+      "role": "questions",
+      "aliases": ["Q&A", "Question-and-Answer", "Questions and Answers", "问答"],
+      "heading_path": [["Q&A", "Question-and-Answer", "Questions and Answers"]],
+      "priority": 1,
+      "questions": ["问答对绑定：分析师问题 vs 管理层回答", "管理层对问题前提的修正/否定"]
+    },
+    {
+      "role": "outlook",
+      "aliases": ["Guidance", "Outlook", "展望", "下一季度"],
+      "heading_path": [["Guidance", "Outlook", "Prepared Remarks"], ["Guidance", "Outlook"]],
+      "priority": 1,
+      "questions": ["指引的期间、口径与全局限定语"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["KPI", "Seats", "RPO", "growth rates", "指标"],
+      "heading_path": [["Prepared Remarks", "Q&A"], ["KPI", "Seats", "remaining performance obligation", "growth rates"]],
+      "priority": 2,
+      "questions": ["经营指标定义与口径", "增长率的基期与币种口径"]
+    },
+    {
+      "role": "administrative",
+      "aliases": ["CALL PARTICIPANTS", "Operator", "免责声明", "Glossary"],
+      "heading_path": [["CALL PARTICIPANTS", "Operator", "Glossary", "Forward-Looking Statements"]],
+      "priority": 3,
+      "questions": ["参与人角色表、编辑附加内容与真实发言的分界"]
+    }
+  ],
+  "reading_questions": [
+    "Prepared Remarks 与 Q&A 的发言者归属",
+    "编辑摘要/术语表与真实发言的分离",
+    "分析师问题内容不等于公司披露",
+    "管理层修正、补充与明确否定",
+    "全局限定语（constant currency、non-GAAP）随局部事实保留"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period", "role"],
+      "missing_behavior": "unknown",
+      "reason": "电话会内容必须绑定发言人角色（管理层/分析师/编辑/主持）与期间"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "missing_behavior": "partial",
+      "reason": "数值必须带期间、币种/constant currency 与分母口径"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "指引与展望的条件语气必须保留"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "geography", "stage"],
+      "missing_behavior": "partial",
+      "reason": "数据中心/产能/产品进度保留地域与阶段"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "Operator 串词、免责声明、参与人名单、术语表",
+      "unless": "用于角色归属与来源界定"
+    },
+    {
+      "content": "编辑 takeaways/摘要块",
+      "unless": "作为“第三方转述”标注保留，不当公司披露"
+    }
+  ],
+  "fallback": {
+    "unread": "TXT/HTML 不可读部分 deferred；问答对不拆散",
+    "ambiguous": "聚合平台抓取件与公司原始披露混淆时按来源角色分开标注，不当作公司发布原文",
+    "no_business": "确无业务内容时 eligible_skip_after_read"
+  },
+  "evidence_status": {
+    "design": "verified",
+    "real_samples": ["case-earnings-call-roles-01"],
+    "missing_shapes": ["公司原始发布版实录（当前样本为聚合平台 TXT）", "中英双语电话会实录"]
+  },
+  "case_ids": ["case-earnings-call-roles-01"]
+}

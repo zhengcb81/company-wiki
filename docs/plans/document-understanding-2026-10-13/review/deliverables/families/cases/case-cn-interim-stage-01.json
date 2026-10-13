@@ -1,0 +1,134 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-cn-interim-stage-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-h1",
+    "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "origin": {
+      "doc_title": "中微公司2026年半年度报告",
+      "issuer_market": "cn_exchange",
+      "document_date": "2026-08-19",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample cn-h1；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "cn-h1"
+  },
+  "observation": {
+    "metadata": {
+      "title": "中微公司：2026年半年度报告",
+      "declared_kind": "semi_annual_report",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": "2026-08-19",
+      "period_end": "2026-06-30",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 18,
+          "line": null,
+          "exact_quote": "公司用于先进封装等离子体切割的Primo Matrix 即将发往国内头部客户产线验证。"
+        },
+        "page": 18,
+        "text": "公司用于先进封装等离子体切割的Primo Matrix 即将发往国内头部客户产线验证。",
+        "role": "business",
+        "hints": {"heading_path": ["管理层讨论与分析", "研发项目"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 18,
+          "line": null,
+          "exact_quote": "公司用于2.5D、SoIC WoW 及高深宽比深槽电容刻蚀的Primo TSV 300E 产品持续服务客户，并获得重复订单。"
+        },
+        "page": 18,
+        "text": "公司用于2.5D、SoIC WoW 及高深宽比深槽电容刻蚀的Primo TSV 300E 产品持续服务客户，并获得重复订单。",
+        "role": "business",
+        "hints": {"heading_path": ["管理层讨论与分析", "研发项目"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {
+          "physical_page": 18,
+          "line": null,
+          "exact_quote": "下半年将结合客户反馈意见，加快产品开发，尽早付运样机至客户端开展生产验证。"
+        },
+        "page": 18,
+        "text": "下半年将结合客户反馈意见，加快产品开发，尽早付运样机至客户端开展生产验证。",
+        "role": "outlook",
+        "hints": {"heading_path": ["管理层讨论与分析", "研发项目"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "半年报的项目/产品进度是 P1 阅读目标，不能因年报模板相似而复用年报摘要",
+      "同一小节内三句分别处于不同阶段：送样验证前、已获重复订单、下半年计划"
+    ],
+    "facts": [
+      {
+        "id": "f1-stage-pre-validation",
+        "objective": "识别新产品所处商业化阶段",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "产品：先进封装等离子体切割设备",
+          "阶段：即将发往客户产线验证（尚未完成产线验证）",
+          "客户范围：国内头部客户（未披露具体客户名）"
+        ],
+        "must_not_assert": [
+          "不得说成已通过验证、已量产或已规模供货",
+          "不得猜测“国内头部客户”的具体公司名"
+        ]
+      },
+      {
+        "id": "f2-repeat-order",
+        "objective": "识别已有产品线的订单证据",
+        "importance": "normal",
+        "any_support_sets": [["u2"]],
+        "must_preserve": ["产品：TSV 刻蚀设备", "证据：持续服务客户并获得重复订单", "期间：2026年上半年"],
+        "must_not_assert": ["重复订单金额未披露，不得编造订单量或收入贡献"]
+      },
+      {
+        "id": "f3-plan-not-commitment",
+        "objective": "识别下半年计划的语气与条件",
+        "importance": "normal",
+        "any_support_sets": [["u3"]],
+        "must_preserve": ["modality：计划（将/尽早）", "条件：结合客户反馈意见", "期间：下半年"],
+        "must_not_assert": ["计划不得写成已实现进度或承诺"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "产品技术参数正确性不在本 case 评价范围",
+      "语义蕴含判定交 ROOT 行为测试（execution_status=NOT_RUN_ROOT_INTEGRATION）"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1-stage-escalation",
+      "change": "u1 将“即将发往国内头部客户产线验证”改写为“已通过客户验证并量产”",
+      "expected_failure": "stage_changed",
+      "reason": "验证前阶段被改写为量产阶段"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "本公司",
+    "modality": "actual",
+    "quantity": null,
+    "unit": null,
+    "period": "2026年上半年",
+    "condition": "即将发往客户产线验证"
+  },
+  "expected_missing_slots": ["quantity"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

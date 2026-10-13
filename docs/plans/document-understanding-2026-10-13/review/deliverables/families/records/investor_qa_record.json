@@ -1,0 +1,131 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "investor_qa_record",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["cn_exchange", "hkex", "other"],
+    "forms": [],
+    "family": "investor_qa",
+    "purposes": ["management_qa", "event_update"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["pdf", "html"],
+    "language": ["zh", "en"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "投资者关系活动记录表", "field": null},
+        "location": "cover",
+        "reason": "A股投资者调研/接待活动记录的固定表头"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "问答记录", "field": null},
+        "location": "body",
+        "reason": "Q+A 正文小节标题"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "业绩说明会", "field": null},
+        "location": "body",
+        "reason": "活动类别栏勾选/表述，支持 investor_qa 识别"
+      }
+    ],
+    "counterexamples": [
+      "问题中的设想、客户名、数字是提问者内容，不是公司事实，必须绑定问句",
+      "文件名像制度（如“投资者关系管理制度”）但正文是活动记录时，以正文为准，按活动记录处理",
+      "投资者提及的股东/关联方联系不等于上市公司客户关系",
+      "管理层“不回答/不了解”不等于事实不存在，也不等于否定",
+      "活动参与人员名单与公司披露内容分开"
+    ]
+  },
+  "sections": [
+    {
+      "role": "questions",
+      "aliases": ["问答记录", "问答", "互动交流", "Q&A"],
+      "heading_path": [["问答记录", "问答", "互动交流", "Q&A"]],
+      "priority": 1,
+      "questions": ["每组问题+回答+追问绑定为一个单元", "提问内容与回答内容的角色区分"]
+    },
+    {
+      "role": "business",
+      "aliases": ["答", "回答", "公司介绍", "经营情况"],
+      "heading_path": [["问答记录", "问答", "互动交流"], ["答", "回答"]],
+      "priority": 1,
+      "questions": ["回答中的业务事实、进展与明确否定"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["产能", "利用率", "订单", "收入占比", "项目建设"],
+      "heading_path": [["问答记录", "问答", "互动交流"], ["产能", "利用率", "订单", "项目", "收入"]],
+      "priority": 2,
+      "questions": ["经营数字的期间、口径与主体归属（母公司/子公司）"]
+    },
+    {
+      "role": "outlook",
+      "aliases": ["未来", "计划", "规划", "展望"],
+      "heading_path": [["问答记录", "问答", "互动交流"], ["未来", "计划", "规划", "展望"]],
+      "priority": 2,
+      "questions": ["计划与承诺的区分、附带条件"]
+    },
+    {
+      "role": "administrative",
+      "aliases": ["活动参与人员", "活动类别", "时间", "地点"],
+      "heading_path": [["活动参与人员", "活动类别", "时间", "地点"]],
+      "priority": 3,
+      "questions": ["活动属性（调研/说明会/路演）与参与范围"]
+    }
+  ],
+  "reading_questions": [
+    "完整 Q+A 与追问的绑定关系",
+    "管理层补充说明与明确否定",
+    "回避回答/不了解的诚实表达",
+    "主/子公司归属（如子公司验证供货不等于母公司）",
+    "数字的期间与口径"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period", "role"],
+      "missing_behavior": "unknown",
+      "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "missing_behavior": "partial",
+      "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "subject", "stage", "condition"],
+      "missing_behavior": "partial",
+      "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "“建成后”“预计”等条件语气必须随事实保留"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "活动通知、参与人员签到、接待程序",
+      "unless": "活动属性影响内容可信范围"
+    },
+    {
+      "content": "寒暄、致谢与套话",
+      "unless": "其中含明确否定或澄清"
+    }
+  ],
+  "fallback": {
+    "unread": "扫描/缺文本 needs_source；问答跨页读不全时 partial，不拆散问答对",
+    "ambiguous": "标题像制度但正文是活动记录时按正文判型；记录表与政策文件混淆时保留 alternatives",
+    "no_business": "纯寒暄/程序性记录核实后 eligible_skip_after_read"
+  },
+  "evidence_status": {
+    "design": "verified",
+    "real_samples": ["case-cn-ir-qa-binding-01", "case-cn-ir-title-mislead-02"],
+    "missing_shapes": ["业绩说明会直播实录/文字稿形态", "港股 analyst meeting 记录"]
+  },
+  "case_ids": ["case-cn-ir-qa-binding-01", "case-cn-ir-title-mislead-02"]
+}

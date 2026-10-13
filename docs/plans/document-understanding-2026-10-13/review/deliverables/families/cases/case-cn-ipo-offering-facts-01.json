@@ -1,0 +1,91 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-cn-ipo-offering-facts-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-ipo",
+    "source_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "origin": {
+      "doc_title": "中微公司首次公开发行股票并在科创板上市招股说明书",
+      "issuer_market": "cn_exchange",
+      "document_date": "2019-07-16",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample cn-ipo；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "cn-ipo"
+  },
+  "observation": {
+    "metadata": {
+      "title": "中微公司：首次公开发行股票并在科创板上市招股说明书",
+      "declared_kind": "prospectus",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": "2019-07-16",
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 3,
+          "line": null,
+          "exact_quote": "发行股数  53,486,224 股  每股面值  1.00 元  每股发行价格  29.01 元  发行日期  2019 年7 月10 日"
+        },
+        "page": 3,
+        "text": "本次发行概况  发行股票类型  人民币普通股（A 股）  发行股数  53,486,224 股  每股面值  1.00 元  每股发行价格  29.01 元  发行日期  2019 年7 月10 日",
+        "role": "administrative",
+        "hints": {"heading_path": ["本次发行概况"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 3,
+          "line": null,
+          "exact_quote": "招股说明书签署日期  2019 年7 月16 日"
+        },
+        "page": 3,
+        "text": "招股说明书签署日期  2019 年7 月16 日",
+        "role": "administrative",
+        "hints": {"heading_path": ["本次发行概况"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "发行概况是 disposition_context：确定 as-of 与文档性质，不属业务 gold",
+      "招股信息是 2019 年发行时点事实，用作历史背景时必须带日期"
+    ],
+    "facts": [
+      {
+        "id": "f1-offering-asof",
+        "objective": "确定文档 as-of 与发行时点口径",
+        "importance": "normal",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": ["发行日期 2019-07-10、签署日期 2019-07-16", "发行价/股数为发行口径，非业务经营数据"],
+        "must_not_assert": [
+          "不得把 2019 年发行信息当作当前状态",
+          "发行价格/募资额不等于公司经营收入或估值"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["发行定价合理性", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-historical-as-current",
+      "change": "把 u1 的 2019 年发行数据写成公司当前股本/价格",
+      "expected_failure": "asof_mismatch",
+      "reason": "历史发行时点被当作现状"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

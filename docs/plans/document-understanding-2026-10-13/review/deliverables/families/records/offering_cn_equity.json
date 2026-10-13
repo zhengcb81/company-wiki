@@ -1,0 +1,143 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "offering_cn_equity",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["cn_exchange"],
+    "forms": [],
+    "family": "offering",
+    "purposes": ["fundraising", "project_evidence"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["pdf"],
+    "language": ["zh"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "向特定对象发行", "field": null},
+        "location": "cover",
+        "reason": "定增募集说明书封面标题短语"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "募集资金投资项目", "field": null},
+        "location": "toc",
+        "reason": "募投项目章节是本规格的核心读取目标"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "新增产能的必要性", "field": null},
+        "location": "toc",
+        "reason": "定增特有小节：新增产能必要性与消化措施"
+      },
+      {
+        "signal": {"kind": "metadata_equals", "value": "cn_exchange", "field": "regime"},
+        "location": "metadata",
+        "reason": "A股披露制度"
+      }
+    ],
+    "counterexamples": [
+      "募集说明书（注册稿）与发行保荐书、法律意见书不是同一文件",
+      "项目甲的产能/投资/建设期不得并入项目乙",
+      "总投资、拟投入募集资金、实际投入是三个不同口径",
+      "项目效益测算（预测收入/收益率）不是实际经营结果",
+      "可转债募集说明书不适用本规格（融资工具不同，条款与项目绑定方式不同）"
+    ]
+  },
+  "sections": [
+    {
+      "role": "fundraising",
+      "aliases": ["募集资金投资项目", "本次募集资金投资项目", "募集资金运用"],
+      "heading_path": [["募集资金投资项目", "本次募集资金投资项目", "募集资金运用"]],
+      "priority": 1,
+      "questions": ["项目主体、投资额构成、建设期与达产条件", "资金缺口与自筹来源"]
+    },
+    {
+      "role": "business",
+      "aliases": ["现有业务", "主营业务", "项目实施的可行性", "新增产能的必要性"],
+      "heading_path": [["新增产能的必要性及消化新增产能的具体措施", "项目实施的可行性", "现有业务"], ["必要性", "可行性", "现有业务", "主要产品"]],
+      "priority": 1,
+      "questions": ["现有业务与新项目的关系", "新增产能与现有产能的口径区分"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["产能", "产能利用率", "产销量", "订单", "消化措施"],
+      "heading_path": [["新增产能的必要性及消化新增产能的具体措施", "项目实施的可行性"], ["产能", "产能利用率", "产销量", "消化措施"]],
+      "priority": 1,
+      "questions": ["总产能 vs 新增产能、现有利用率、消化措施的证据"]
+    },
+    {
+      "role": "fundraising",
+      "aliases": ["项目实施主体", "项目建设期", "项目投资明细"],
+      "heading_path": [["募集资金投资项目", "本次募集资金投资项目"], ["项目实施主体", "项目建设期", "项目投资明细", "投资概算"]],
+      "priority": 1,
+      "questions": ["每包项目必须绑定主体、地点、分期与建设期"]
+    },
+    {
+      "role": "risk",
+      "aliases": ["风险因素", "募集资金投资项目无法产生预期收益的风险"],
+      "heading_path": [["风险因素"], ["募集资金投资项目无法产生预期收益的风险", "风险因素"]],
+      "priority": 2,
+      "questions": ["项目风险的具体条件"]
+    },
+    {
+      "role": "financial_notes",
+      "aliases": ["效益测算", "项目效益", "财务指标"],
+      "heading_path": [["募集资金投资项目", "本次募集资金投资项目"], ["项目效益", "效益测算", "效益分析"]],
+      "priority": 2,
+      "questions": ["测算口径、假设与免责声明的保留"]
+    }
+  ],
+  "reading_questions": [
+    "每个项目的产品、主体、地点、分期与建设期",
+    "总产能 vs 新增产能 vs 现有产能的口径",
+    "投资构成（工程费用/设备/铺底流动资金）与资金来源",
+    "效益测算的假设、免责声明与实际结果的区分",
+    "许可、审批、消化措施等条件"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period"],
+      "missing_behavior": "unknown",
+      "reason": "募集说明书数据带编制时点，断言必须绑定主体与 as-of 期间"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "subject", "stage", "condition", "geography"],
+      "missing_behavior": "partial",
+      "reason": "项目断言必须整包保留项目名、实施主体、建设/投产阶段与条件，禁止跨项目拼接"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "missing_behavior": "partial",
+      "reason": "投资额、产能、效益测算数值必须带单位、口径与测算/实际标记"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "可行性结论与效益测算自带条件与免责表述，必须随事实保留"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "发行程序、定价原则、认购邀请安排",
+      "unless": "与募资规模/项目资金到位条件直接相关"
+    },
+    {
+      "content": "本次发行前后的股本摊薄明细",
+      "unless": "问题涉及股本或每股口径"
+    }
+  ],
+  "fallback": {
+    "unread": "跨页项目表读不全时记 partial/deferred，不得截半个项目冒充完整",
+    "ambiguous": "注册稿/申报稿/发行公告混淆时按正文与版本标注判型，保留 alternatives",
+    "no_business": "确无业务内容时 eligible_skip_after_read"
+  },
+  "evidence_status": {
+    "design": "verified",
+    "real_samples": ["case-cn-equity-project-phases-01", "case-cn-equity-forecast-disclaimer-02"],
+    "missing_shapes": ["定增发行结果公告与募投进展公告版本对", "配售（placing）形态"]
+  },
+  "case_ids": ["case-cn-equity-project-phases-01", "case-cn-equity-forecast-disclaimer-02"]
+}

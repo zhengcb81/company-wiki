@@ -1,0 +1,109 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-hk-annual-postperiod-03",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "hk-annual",
+    "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+    "origin": {
+      "doc_title": "名创优品2024年度报告（港股）",
+      "issuer_market": "hkex",
+      "document_date": "2025",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample hk-annual；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "hk-annual"
+  },
+  "observation": {
+    "metadata": {
+      "title": "2024年度报告（港股）",
+      "declared_kind": "annual_report",
+      "regime": "hkex",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": "2024-12-31",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 21,
+          "line": null,
+          "exact_quote": "期後的最新進展  有關收購永輝超市股份有限公司股份的非常重大收購事項"
+        },
+        "page": 21,
+        "text": "期後的最新進展  有關收購永輝超市股份有限公司股份的非常重大收購事項",
+        "role": "business",
+        "hints": {"heading_path": ["其他資料", "期後的最新進展"], "modality": "post_period_event"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 21,
+          "line": null,
+          "exact_quote": "於2024 年9 月23 日，本公司通過其全資附屬公司分別與獨立第三方訂立購股協議"
+        },
+        "page": 21,
+        "text": "於2024 年9 月23 日，本公司通過其全資附屬公司分別與獨立第三方訂立購股協議，以收購合共2,668,135,376股永輝超市股份有限公司股份（約佔其全部已發行股本的29.4%），對價為人民幣6,270,118,134元。",
+        "role": "business",
+        "hints": {"heading_path": ["其他資料", "期後的最新進展"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "期后事项是港股年报独立读取目标，不能写成报告期内事实",
+      "收购对价是交易金额，不是标的资产的经营收入"
+    ],
+    "facts": [
+      {
+        "id": "f1-post-period-separation",
+        "objective": "期后事件与报告期事实分离",
+        "importance": "critical",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": [
+          "时点：期後（post-period）章节，签约日 2024-09-23",
+          "主体链：本公司→全资附属公司→独立第三方",
+          "交易口径：29.4% 股权、对价人民币 6,270,118,134 元"
+        ],
+        "must_not_assert": [
+          "不得把期后事件写成报告期内已并表事实",
+          "收购对价不得当作标的经营收入或本公司收入",
+          "“订立购股协议”不等于交易已完成交割"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["交易后续进展（超出本文件范围）", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-postperiod-as-inperiod",
+      "change": "把 u1/u2 事件写成 2024 年度报告期内的经营事实",
+      "expected_failure": "period_mismatch",
+      "reason": "期后事项被并入报告期"
+    },
+    {
+      "id": "m2-consideration-as-revenue",
+      "change": "把对价 6,270,118,134 元写成收入",
+      "expected_failure": "quantity_semantics_changed",
+      "reason": "交易对价与经营收入混淆"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "本公司（经全资附属公司）",
+    "modality": "actual",
+    "quantity": "6,270,118,134",
+    "unit": "元人民币",
+    "period": "2024-09-23（期后）",
+    "condition": "订立购股协议，未完成交割"
+  },
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

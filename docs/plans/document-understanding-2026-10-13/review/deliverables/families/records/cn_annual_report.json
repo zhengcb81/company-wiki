@@ -1,0 +1,174 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "cn_annual_report",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["cn_exchange"],
+    "forms": [],
+    "family": "annual",
+    "purposes": ["periodic_review", "business_baseline"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["pdf"],
+    "language": ["zh"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "年年度报告", "field": null},
+        "location": "cover",
+        "reason": "A股年报封面标题稳定形如《……年年度报告》，是用途识别的第一证据"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "管理层讨论与分析", "field": null},
+        "location": "toc",
+        "reason": "目录含管理层讨论与分析章节，是定期经营回顾正文的结构证据"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "主要会计数据和财务指标", "field": null},
+        "location": "body",
+        "reason": "A股定期报告模板固定小节，支持定期报告识别"
+      },
+      {
+        "signal": {"kind": "metadata_equals", "value": "cn_exchange", "field": "regime"},
+        "location": "metadata",
+        "reason": "A股披露制度；上市地不能代替用途，仅与标题/正文证据组合"
+      }
+    ],
+    "counterexamples": [
+      "标题含“年度报告”但正文是独立董事述职报告、监事会工作报告或董事会工作报告的文件不是年报正文",
+      "《年度报告摘要》只是摘要件，缺失章节不得当作全文年报（见 lifecycle 修饰记录）",
+      "媒体、研究机构或数据商撰写的“年报点评/年报解读”不是公司披露原件",
+      "港股/美股年报封面 Annual Report 章节模板不同，不适用本规格，须走 hk_annual_report 或 sec_10k/sec_20f",
+      "以“年年度报告”为标题的募集资金专项说明、内部控制评价报告等附件不能替代年报正文"
+    ]
+  },
+  "sections": [
+    {
+      "role": "business",
+      "aliases": ["主要业务", "主营业务", "经营模式", "业务概要", "核心竞争力"],
+      "heading_path": [["管理层讨论与分析"], ["报告期内公司从事的主要业务", "主要业务", "主营业务", "经营模式", "核心竞争力分析"]],
+      "priority": 1,
+      "questions": ["谁向谁卖什么产品/服务，收费与交付方式是什么", "本期主业构成与收入机制有何变化"]
+    },
+    {
+      "role": "industry",
+      "aliases": ["所处行业情况", "行业格局和趋势", "行业情况"],
+      "heading_path": [["管理层讨论与分析"], ["所处行业情况", "行业格局和趋势", "行业情况"]],
+      "priority": 2,
+      "questions": ["行业供需/技术变化中公司自己受到的具体影响是什么", "行业数据的作者与统计口径是谁的"]
+    },
+    {
+      "role": "management_discussion",
+      "aliases": ["管理层讨论与分析", "经营情况讨论与分析"],
+      "heading_path": [["管理层讨论与分析"]],
+      "priority": 1,
+      "questions": ["报告期经营变化及其原因", "财务指标变动背后的经营驱动是什么"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["经营情况", "产销量", "主要产品产销量", "产能", "订单"],
+      "heading_path": [["管理层讨论与分析"], ["经营情况", "产销量", "主要产品产销量", "产能", "订单"]],
+      "priority": 2,
+      "questions": ["经营指标的存量/流量、分母与期间口径", "产能/利用率/订单的主体与阶段"]
+    },
+    {
+      "role": "outlook",
+      "aliases": ["公司关于公司未来发展的讨论与分析", "经营计划", "发展战略", "未来发展"],
+      "heading_path": [["管理层讨论与分析"], ["公司关于公司未来发展的讨论与分析", "经营计划", "发展战略", "未来发展"]],
+      "priority": 1,
+      "questions": ["公司下一阶段计划与实现条件", "哪些是承诺、哪些是愿景性表述"]
+    },
+    {
+      "role": "risk",
+      "aliases": ["可能面对的风险", "风险因素", "公司面临的风险"],
+      "heading_path": [["管理层讨论与分析"], ["可能面对的风险", "风险因素", "公司面临的风险"]],
+      "priority": 2,
+      "questions": ["哪些风险是本期已发生事实、哪些是一般性提示", "风险的作用域、主体与条件"]
+    },
+    {
+      "role": "financial_notes",
+      "aliases": ["合并财务报表附注", "财务报表附注"],
+      "heading_path": [["财务报告", "财务报表"], ["合并财务报表附注", "财务报表附注"]],
+      "priority": 3,
+      "questions": ["哪些附注含收入确认、分部、合同等商业机制描述"]
+    },
+    {
+      "role": "administrative",
+      "aliases": ["重要事项", "公司治理、环境和社会"],
+      "heading_path": [["重要事项", "公司治理、环境和社会"]],
+      "priority": 3,
+      "questions": ["是否存在影响经营的重大合同、诉讼、担保或股权变动事实"]
+    }
+  ],
+  "reading_questions": [
+    "报告期主营业务构成、主要产品与收入机制",
+    "相比上一报告期发生了哪些经营变化及其原因",
+    "新产品/第二曲线所处阶段与证据（开发→送样→验证→小批量→量产→规模化）",
+    "产能、订单、利用率、出货等经营指标及其口径",
+    "海外/新市场的实际进入程度与主体归属",
+    "公司下一阶段计划、附带条件与不确定性",
+    "风险因素中已发生事实与一般性提示的区分"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period"],
+      "missing_behavior": "unknown",
+      "reason": "年报所有经营与财务叙述都是报告期口径，断言必须绑定披露主体与报告期"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "geography"],
+      "missing_behavior": "partial",
+      "reason": "收入拆分、产销量等数值必须保留单位、期间与地域/合并范围，缺任一不得单独引用"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "stage", "condition"],
+      "missing_behavior": "partial",
+      "reason": "产能/募投/研发项目断言必须保留项目主体、建设或验证阶段与实现条件，计划不等于承诺"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "前瞻性陈述、计划与测算自带限定语，限定语必须随局部事实保留"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "合并财务报表、常规三表、账龄与税费明细等纯财务表",
+      "unless": "其中包含经营驱动解释、业务相关附注或经营指标"
+    },
+    {
+      "content": "董监高任职与薪酬、股东大会程序、公司治理常规披露",
+      "unless": "其中包含重大经营事项、股权变动或对经营的实际约束"
+    },
+    {
+      "content": "目录、页眉页脚、备查文件与签字盖章页",
+      "unless": "用于确认文档版本、完整性与真实来源"
+    }
+  ],
+  "fallback": {
+    "unread": "原生文本缺失或扫描页时记录缺口，进入 generic_read 或 needs_source，不因空文本判定无业务内容",
+    "ambiguous": "标题、元数据与正文证据冲突时保留 alternatives 与 reason，按保守 generic 阅读，不新增人工签收门",
+    "no_business": "正文完整读过并确认无经营内容后可 eligible_skip_after_read，仅保留来源、覆盖记录与诊断"
+  },
+  "evidence_status": {
+    "design": "verified",
+    "real_samples": [
+      "case-cn-annual-business-model-01",
+      "case-cn-annual-metrics-02",
+      "case-cn-annual-outlook-03"
+    ],
+    "missing_shapes": [
+      "A股年报扫描件/OCR 路径未测",
+      "当前真实样本行业集中于半导体设备，缺金融/周期行业年报"
+    ]
+  },
+  "case_ids": [
+    "case-cn-annual-business-model-01",
+    "case-cn-annual-metrics-02",
+    "case-cn-annual-outlook-03"
+  ]
+}

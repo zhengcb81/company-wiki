@@ -1,0 +1,137 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-cn-ir-title-mislead-02",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-ir-policy",
+    "source_sha256": "9b9c875f70146b2f7221940fed37fce5ceccd9edd646cd3012405119f4cd3200",
+    "origin": {
+      "doc_title": "万润股份投资者关系活动记录表（编号20230428，业绩说明会）",
+      "issuer_market": "cn_exchange",
+      "document_date": "2023-04-28",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample cn-ir-policy；本机 SHA 与 manifest 一致",
+      "correction_note": "母计划曾按文件名把它归为 ir_policy；正文核实为投资者关系活动记录表（业绩说明会），是“标题误导但正文有价值”的正例，不能作制度负例"
+    },
+    "local_binding_key": "cn-ir-policy"
+  },
+  "observation": {
+    "metadata": {
+      "title": "投资者关系活动记录表 编号：20230428",
+      "declared_kind": "investor_relations",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": "2023-04-28",
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 1,
+          "line": null,
+          "exact_quote": "投资者关系活动记录表                                                                      编号：20230428  投资者关系活动类别"
+        },
+        "page": 1,
+        "text": "投资者关系活动记录表　编号：20230428　投资者关系活动类别 □特定对象调研 □分析师会议 □媒体采访 ☑业绩说明会",
+        "role": "administrative",
+        "hints": {"heading_path": ["表头"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "公司2022 年功能性材料整体产能利用率64.68%"
+        },
+        "page": 2,
+        "text": "答：您好，公司2022 年功能性材料整体产能利用率64.68%，具体情况详见公司《2022 年年度报告》第三节。",
+        "role": "operating_metrics",
+        "hints": {"unit_kind": "qa_exchange", "speaker": "公司（管理层）"}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "公司控股子公司三月科技目前已有自主知识产权的OLED 成品材料与PI 成品材料通过下游客户验证并实现供应"
+        },
+        "page": 2,
+        "text": "答：您好，公司控股子公司三月科技目前已有自主知识产权的OLED 成品材料与PI 成品材料通过下游客户验证并实现供应，三月科技收入规模呈增长态势。",
+        "role": "business",
+        "hints": {"unit_kind": "qa_exchange", "speaker": "公司（管理层）"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "文件名像制度、正文是有价值的活动记录：识别以正文为准",
+      "本 case 同时是 investor_qa_record 的正例与 administrative_document 的反例证据"
+    ],
+    "facts": [
+      {
+        "id": "f1-body-over-filename",
+        "objective": "识别以正文而非文件名为准",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": ["正文性质：投资者关系活动记录表（业绩说明会）", "日期：2023-04-28"],
+        "must_not_assert": [
+          "不得按文件名把它当制度文件或负例",
+          "不得因标题误导而跳过有价值正文"
+        ]
+      },
+      {
+        "id": "f2-utilization-scope",
+        "objective": "产能利用率的范围与期间口径",
+        "importance": "normal",
+        "any_support_sets": [["u2"]],
+        "must_preserve": ["期间：2022年；口径：功能性材料整体产能利用率64.68%", "公司指引到年报第三节作更细口径"],
+        "must_not_assert": ["“整体产能利用率”不得套到单一产品线", "不得省略期间"]
+      },
+      {
+        "id": "f3-subsidiary-attribution",
+        "objective": "子公司验证供货事实的主体归属",
+        "importance": "critical",
+        "any_support_sets": [["u3"]],
+        "must_preserve": ["主体：控股子公司（非母公司）", "阶段：通过下游客户验证并实现供应", "产品：OLED/PI 成品材料"],
+        "must_not_assert": [
+          "不得把子公司事实写成母公司整体业务",
+          "“实现供应”不得扩写为规模量产或大额订单"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["数字真伪的外部核验", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-filename-routing",
+      "change": "按文件名判为制度文件并 eligible_skip",
+      "expected_failure": "misrouted_by_filename",
+      "reason": "标题误导导致有价值正文被跳过"
+    },
+    {
+      "id": "m2-subsidiary-to-parent",
+      "change": "把子公司验证供货写成母公司实现供货",
+      "expected_failure": "subject_mismatch",
+      "reason": "主体归属丢失"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "控股子公司",
+    "modality": "actual",
+    "quantity": null,
+    "unit": null,
+    "period": "截至2023-04-28",
+    "condition": "通过下游客户验证并实现供应"
+  },
+  "expected_missing_slots": ["quantity"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

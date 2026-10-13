@@ -1,0 +1,125 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-hk-release-segment-02",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "hk-release",
+    "source_sha256": "64d8d2038eeef993571b96bb3361b6f1a567d6e84157eb16af20d2fd9a095f0a",
+    "origin": {
+      "doc_title": "second-quarter and first-half 2026 results（业绩新闻稿 PDF）",
+      "issuer_market": "hkex",
+      "document_date": "2026",
+      "carrier": "pdf",
+      "language": "en",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample hk-release；本机 SHA 与 manifest 一致",
+      "path_note": "原件位于临时目录（mFresh-*），易失；handoff 已注明"
+    },
+    "local_binding_key": "hk-release"
+  },
+  "observation": {
+    "metadata": {
+      "title": "second-quarter and first-half 2026 results",
+      "declared_kind": "results_release",
+      "regime": "hkex",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "en",
+      "published_at": "2026",
+      "period_end": "2026-06-30",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "FinTech and Business Services rose by 9% year-on-year to RMB60.3 billion for 2Q2026."
+        },
+        "page": 2,
+        "text": "FinTech and Business Services rose by 9% year-on-year to RMB60.3 billion for 2Q2026.",
+        "role": "business",
+        "hints": {"heading_path": ["Financial Highlights", "Segment"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 2,
+          "line": null,
+          "exact_quote": "FinTech Services revenue growth was mainly due to higher revenues from commercial payment"
+        },
+        "page": 2,
+        "text": "FinTech Services revenue growth was mainly due to higher revenues from commercial payment, wealth management and consumer loan services",
+        "role": "management_discussion",
+        "hints": {"heading_path": ["Financial Highlights", "Segment"], "relation": "explains:u1"}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {
+          "physical_page": 4,
+          "line": null,
+          "exact_quote": "This press release contains forward-looking statements relating to the business outlook, estimates of financial performance, forecast business plans and growth strategies of the Group."
+        },
+        "page": 4,
+        "text": "Forward-Looking Statements  This press release contains forward-looking statements relating to the business outlook, estimates of financial performance, forecast business plans and growth strategies of the Group.",
+        "role": "administrative",
+        "hints": {"heading_path": ["Forward-Looking Statements"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "分部收入与解释句构成一个语义包（组内 AND）",
+      "Forward-Looking 声明是全局限定语来源"
+    ],
+    "facts": [
+      {
+        "id": "f1-segment-growth-with-explanation",
+        "objective": "分部业绩必须带口径、期间与解释",
+        "importance": "critical",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": [
+          "口径：分部收入（FinTech and Business Services），RMB 60.3B，+9% YoY",
+          "期间：2Q2026（单季）",
+          "解释：增长来自商业支付、财富管理、消费贷服务等驱动"
+        ],
+        "must_not_assert": [
+          "不得把分部增速当公司整体增速",
+          "不得把解释句中的驱动因素当新增业务事实",
+          "单季与半年口径不得互换"
+        ]
+      },
+      {
+        "id": "f2-forwardlooking-boundary",
+        "objective": "前瞻性声明的适用边界",
+        "importance": "normal",
+        "any_support_sets": [["u3"]],
+        "must_preserve": ["forward-looking 范围：业务展望、业绩估计、计划与增长战略"],
+        "must_not_assert": ["被声明覆盖的计划/估计不得当已实现事实"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["其余分部与半年合计口径", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-segment-to-total",
+      "change": "把分部 +9% 写成公司总收入 +9%",
+      "expected_failure": "subject_mismatch",
+      "reason": "分部口径被当整体"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "本公司（FinTech and Business Services 分部）",
+    "modality": "actual",
+    "quantity": "60.3",
+    "unit": "billion RMB",
+    "period": "2Q2026",
+    "condition": null
+  },
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

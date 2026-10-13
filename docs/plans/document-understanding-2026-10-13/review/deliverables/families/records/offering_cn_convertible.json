@@ -1,0 +1,138 @@
+{
+  "schema_version": "du2-family-spec/1",
+  "id": "offering_cn_convertible",
+  "version": "1.0.0",
+  "applies_to": {
+    "regimes": ["cn_exchange"],
+    "forms": [],
+    "family": "offering",
+    "purposes": ["fundraising", "project_evidence"],
+    "modifiers": {"extent": "full", "revision": "original"},
+    "carrier": ["pdf"],
+    "language": ["zh"]
+  },
+  "recognition": {
+    "positive": [
+      {
+        "signal": {"kind": "literal_phrase", "value": "可转换公司债券募集说明书", "field": null},
+        "location": "cover",
+        "reason": "可转债募集说明书封面标题短语"
+      },
+      {
+        "signal": {"kind": "literal_phrase", "value": "本次发行", "field": null},
+        "location": "body",
+        "reason": "债券发行件的“本次发行”表述与发行条款绑定"
+      },
+      {
+        "signal": {"kind": "metadata_equals", "value": "cn_exchange", "field": "regime"},
+        "location": "metadata",
+        "reason": "A股披露制度"
+      }
+    ],
+    "counterexamples": [
+      "债券条款（票面利率、转股价、赎回/回售）一般降权，但影响项目融资或建设的条件必须保留",
+      "定增募集说明书不适用本规格：融资工具与项目绑定方式不同",
+      "多个募投项目的产能、投资额、建设期必须独立成包，不得合并成单一项目",
+      "项目效益测算（年均销售收入、内部收益率、回收期）是预测不是实际业绩",
+      "可转债受托管理事务报告、付息公告不是募集说明书"
+    ]
+  },
+  "sections": [
+    {
+      "role": "fundraising",
+      "aliases": ["募集资金投资项目", "本次募集资金投资项目", "募集资金运用"],
+      "heading_path": [["募集资金投资项目", "本次募集资金投资项目", "本次发行募集资金投资项目简介"]],
+      "priority": 1,
+      "questions": ["每个募投项目的主体、产品、产能、建设期与投资构成"]
+    },
+    {
+      "role": "business",
+      "aliases": ["现有业务", "主营业务", "本次发行的必要性"],
+      "heading_path": [["本次发行", "募集资金投资项目"], ["必要性", "现有业务", "主营业务", "与现有业务的关系"]],
+      "priority": 1,
+      "questions": ["新项目与现有业务的关系", "产品口径的独立性（原有产能 vs 拟建产能）"]
+    },
+    {
+      "role": "operating_metrics",
+      "aliases": ["产能", "产能利用率", "产销量", "负荷"],
+      "heading_path": [["募集资金投资项目", "本次发行募集资金投资项目简介"], ["产能", "产能利用率", "生产负荷", "产销量"]],
+      "priority": 1,
+      "questions": ["现有产能、新增产能与生产负荷假设的区分"]
+    },
+    {
+      "role": "financial_notes",
+      "aliases": ["项目效益分析", "效益测算", "财务影响"],
+      "heading_path": [["募集资金投资项目", "本次发行募集资金投资项目简介"], ["项目效益分析", "效益测算", "对经营状况和财务状况的影响"]],
+      "priority": 2,
+      "questions": ["测算假设（建设期/生产期/负荷）与免责声明"]
+    },
+    {
+      "role": "risk",
+      "aliases": ["风险因素", "募集资金投资项目的风险"],
+      "heading_path": [["风险因素", "募集资金投资项目的风险"]],
+      "priority": 2,
+      "questions": ["项目失败/延期风险的具体条件"]
+    },
+    {
+      "role": "administrative",
+      "aliases": ["本次发行条款", "转股条款", "债券条款"],
+      "heading_path": [["本次发行条款", "转股价格", "债券条款"]],
+      "priority": 3,
+      "questions": ["哪些条款影响项目融资或建设节奏"]
+    }
+  ],
+  "reading_questions": [
+    "募投项目的独立口径：每个项目的产品、产能、投资额",
+    "资金缺口、自筹比例与分期投入",
+    "建设期、生产期与生产负荷假设",
+    "项目效益测算与实际业绩的区分",
+    "债券条款中影响融资/建设的条件"
+  ],
+  "context_requirements": [
+    {
+      "when": "always_for_assertion",
+      "slots": ["subject", "period"],
+      "missing_behavior": "unknown",
+      "reason": "募集说明书数据带编制时点，断言绑定主体与 as-of 期间"
+    },
+    {
+      "when": "project_emitted",
+      "slots": ["project", "subject", "stage", "condition"],
+      "missing_behavior": "partial",
+      "reason": "每个项目独立成包；建设期/负荷/达产条件必须随项目保留，禁止跨项目拼接"
+    },
+    {
+      "when": "quantity_emitted",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "missing_behavior": "partial",
+      "reason": "产能单位（吨/年等）、投资额单位与测算/实际标记必须保留"
+    },
+    {
+      "when": "explicit_condition_present",
+      "slots": ["condition", "modality"],
+      "missing_behavior": "deferred",
+      "reason": "测算假设与风险条件必须随数值保留"
+    }
+  ],
+  "deprioritize": [
+    {
+      "content": "纯债券条款：票面利率、付息、赎回回售、转股价格调整",
+      "unless": "该条款影响募投项目融资到位或建设节奏"
+    },
+    {
+      "content": "发行与承销程序、信用评级报告",
+      "unless": "与资金到位条件相关"
+    }
+  ],
+  "fallback": {
+    "unread": "跨页项目表读不全时 partial/deferred，不截半冒充完整",
+    "ambiguous": "可转债与定增/可转债条款摘要件混淆时按正文判型",
+    "no_business": "确无业务内容时 eligible_skip_after_read"
+  },
+  "evidence_status": {
+    "design": "verified",
+    "real_samples": ["case-cn-convertible-projects-01", "case-cn-convertible-forecast-02"],
+    "missing_shapes": ["募投项目进展/变更公告与募集说明书版本对", "赎回/回售影响项目的实例"]
+  },
+  "case_ids": ["case-cn-convertible-projects-01", "case-cn-convertible-forecast-02"]
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-admin-scan-empty-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-ipo-confirmation",
+    "source_sha256": "0829538f0707650db99852c5e269abe9e0d7e558d54d93e0a2c0be15fe0d0fa7",
+    "origin": {
+      "doc_title": "控股股东、实际控制人对招股说明书的确认意见（扫描件）",
+      "issuer_market": "cn_exchange",
+      "document_date": null,
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample cn-ipo-confirmation；本机 SHA 与 manifest 一致",
+      "correction_note": "标题含“招股说明书”但正文是确认意见；原生文本为空（扫描页），须有限 OCR 才能判读"
+    },
+    "local_binding_key": "cn-ipo-confirmation"
+  },
+  "observation": {
+    "metadata": {
+      "title": "对招股说明书的确认意见",
+      "declared_kind": "administrative_confirmation",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": null, "exact_quote": ""},
+        "page": 1,
+        "text": "",
+        "role": "unknown",
+        "hints": {"native_text_empty": true, "page_image_only": true, "note": "合法空值：扫描页无原生文本，本 case 的证据就是“空文本观测”本身"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "不按文件名把确认意见当招股正文；不按空 OCR 结果直接跳过",
+      "缺 OCR 能力时诚实记 needs_source/unread，而不是判无价值"
+    ],
+    "facts": [
+      {
+        "id": "f1-empty-text-not-skip",
+        "objective": "空原生文本的处置与命名",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "观测：单页扫描件，原生文本为空",
+          "处置：有限 OCR 后再判，或 needs_source；原件与来源记录保留"
+        ],
+        "must_not_assert": [
+          "不得把标题“招股说明书”当正文性质",
+          "不得因空文本判定无业务内容或删除原件",
+          "不得声称已读其内容"
+        ]
+      }
+    ],
+    "disposition": "needs_source",
+    "not_evaluated": [
+      "OCR 后的实际内容（本包未跑 OCR，需共享链有限 OCR 能力）",
+      "语义蕴含判定交 ROOT 行为测试（execution_status=NOT_RUN_ROOT_INTEGRATION）"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1-skip-by-filename",
+      "change": "按标题直接路由为 prospectus 正文",
+      "expected_failure": "misrouted_by_filename",
+      "reason": "确认意见被当招股说明书"
+    },
+    {
+      "id": "m2-drop-by-empty-ocr",
+      "change": "把空文本当无内容直接丢弃派生",
+      "expected_failure": "coverage_hidden",
+      "reason": "读取缺口被当成无业务内容"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

@@ -1,0 +1,145 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-earnings-call-roles-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "us-txt",
+    "source_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+    "origin": {
+      "doc_title": "MSFT FY2026 Q4 earnings call transcript（聚合平台抓取件）",
+      "issuer_market": "sec",
+      "document_date": "2026-07-29",
+      "carrier": "txt",
+      "language": "en",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample us-txt；本机 SHA 与 manifest 一致",
+      "source_role_note": "文件头自述 Source: motley_fool、URL 与抓取时间；原始披露为公司业绩发布/电话会，聚合件的编辑块须与真实发言分开"
+    },
+    "local_binding_key": "us-txt"
+  },
+  "observation": {
+    "metadata": {
+      "title": "Earnings Call Transcript (scraped)",
+      "declared_kind": "investor_call_transcript",
+      "regime": "sec",
+      "form_type": null,
+      "mime_type": "text/plain",
+      "language": "en",
+      "published_at": "2026-07-29",
+      "period_end": "2026-06-30",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 16, "exact_quote": "Chairman and Chief Executive Officer - Satya Nadella"},
+        "page": null,
+        "text": "CALL PARTICIPANTS … Chairman and Chief Executive Officer - Satya Nadella … Chief Financial Officer - Amy Hood",
+        "role": "administrative",
+        "hints": {"unit_kind": "participants_list", "note": "参与人角色表（行14-24），提供发言者角色映射"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 26, "exact_quote": "Revenue-- $90.0 billion in the fourth quarter, an 18% increase driven by strong demand across the Azure platform and first-party AI applications."},
+        "page": null,
+        "text": "Revenue-- $90.0 billion in the fourth quarter, an 18% increase driven by strong demand across the Azure platform and first-party AI applications.",
+        "role": "business",
+        "hints": {"unit_kind": "editor_summary", "note": "文件头 takeaways 块（行26-40），编辑/站点摘要，非管理层发言"}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 132, "exact_quote": "Where growth rates are the same in constant currency, we will refer to the growth rate only."},
+        "page": null,
+        "text": "Where growth rates are the same in constant currency, we will refer to the growth rate only.",
+        "role": "management_discussion",
+        "hints": {"speaker": "投资者关系（开场声明）", "note": "全局限定语：后续所有增长率均带 constant currency 口径"}
+      },
+      {
+        "unit_id": "u4",
+        "locator": null,
+        "anchor": {"physical_page": null, "line": 236, "exact_quote": "Karl Keirstead:Okay. Great. Satya, maybe I'll start away from the numbers and ask if you could spend a minute and elaborate on your opening comments"},
+        "page": null,
+        "text": "Karl Keirstead:Okay. Great. Satya, maybe I'll start away from the numbers and ask if you could spend a minute and elaborate on your opening comments",
+        "role": "questions",
+        "hints": {"unit_kind": "qa_exchange", "speaker": "分析师（提问者）"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "四个来源角色分开：参与人表 / 编辑摘要 / 管理层与IR声明 / 分析师问题",
+      "Q&A 的问句与回答绑定；编辑 takeaways 不冒充管理层原话"
+    ],
+    "facts": [
+      {
+        "id": "f1-editor-vs-management",
+        "objective": "编辑摘要与管理层发言分离",
+        "importance": "critical",
+        "any_support_sets": [["u2"], ["u3"]],
+        "must_preserve": [
+          "u2 是聚合站点 takeaways 块（编辑内容）",
+          "u3 是电话会开场的口径声明（来源角色：IR/管理层）"
+        ],
+        "must_not_assert": [
+          "takeaways 中的数字/措辞不得当作管理层原话引用",
+          "不得把编辑术语表内容当公司披露"
+        ]
+      },
+      {
+        "id": "f2-global-qualifier-follows-local-facts",
+        "objective": "全局限定语随局部事实保留",
+        "importance": "critical",
+        "any_support_sets": [["u3"]],
+        "must_preserve": ["constant currency 口径约定适用于其后全部增长率表述"],
+        "must_not_assert": ["不得在局部事实中剥离 constant currency 限定", "不得把 constant currency 增速写成 GAAP 增速"]
+      },
+      {
+        "id": "f3-analyst-question-not-fact",
+        "objective": "分析师问题不是公司事实",
+        "importance": "normal",
+        "any_support_sets": [["u4"]],
+        "must_preserve": ["来源角色：分析师提问", "问答对需绑定后续管理层回答"],
+        "must_not_assert": ["问题中的假设/数字不得当公司披露", "问题设想不得当已发生事实"]
+      },
+      {
+        "id": "f4-speaker-attribution",
+        "objective": "发言者角色映射",
+        "importance": "normal",
+        "any_support_sets": [["u1"]],
+        "must_preserve": ["参与人表给出职务（CEO/CFO 等）"],
+        "must_not_assert": ["职务表不承载业务事实"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "电话会全部问答的完整性",
+      "语义蕴含判定交 ROOT 行为测试（execution_status=NOT_RUN_ROOT_INTEGRATION）"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1-takeaways-as-quote",
+      "change": "把 u2 编辑 takeaways 标为管理层 prepared remarks 原话",
+      "expected_failure": "source_role_mismatch",
+      "reason": "编辑块被当公司发言"
+    },
+    {
+      "id": "m2-drop-cc-qualifier",
+      "change": "在引用增长率时删除 constant currency 口径",
+      "expected_failure": "required_context_missing:condition",
+      "reason": "全局限定语被剥离"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "该公司",
+    "modality": "actual",
+    "quantity": "90.0",
+    "unit": "billion USD",
+    "period": "FY2026 Q4",
+    "condition": "（该条出自编辑 takeaways，须标非管理层原话）"
+  },
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

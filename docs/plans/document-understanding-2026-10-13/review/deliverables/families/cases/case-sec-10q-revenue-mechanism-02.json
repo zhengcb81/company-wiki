@@ -1,0 +1,89 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-sec-10q-revenue-mechanism-02",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "us-10q",
+    "source_sha256": "5afe631934fce5d3e23b6aa393ec599cd89b290cde1fc1667ebe22025d2479eb",
+    "origin": {
+      "doc_title": "Form 10-Q (quarterly report, HTML)",
+      "issuer_market": "sec",
+      "document_date": "2025-03-31",
+      "carrier": "html",
+      "language": "en",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample us-10q；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "us-10q"
+  },
+  "observation": {
+    "metadata": {
+      "title": "Form 10-Q",
+      "declared_kind": "quarterly_report",
+      "regime": "sec",
+      "form_type": "10-Q",
+      "mime_type": "text/html",
+      "language": "en",
+      "published_at": null,
+      "period_end": "2025-03-31",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": null,
+          "line": 2694,
+          "exact_quote": "Subscriptions for our solutions are generally paid in advance of rendering services either quarterly or in full"
+        },
+        "page": null,
+        "text": "subscriptions, advisory/consulting services, and for transactional solutions, recurring and non-recurring. Subscriptions for our solutions are generally paid in advance of rendering services either quarterly or in full",
+        "role": "financial_notes",
+        "hints": {"heading_path": ["PART I", "Item 1. Financial Statements", "Notes"], "dom_line": 2694}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "10-Q 业务附注含收入机制描述，是必读业务信息而非纯财务",
+      "收入机制解释订阅制商业逻辑，但不能推出未披露的递延收入数值"
+    ],
+    "facts": [
+      {
+        "id": "f1-subscription-revenue-mechanism",
+        "objective": "识别订阅收入的收费/履约机制",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "机制：订阅按季度或全额预付（paid in advance）",
+          "服务组合：订阅、顾问/咨询、交易型（recurring 与 non-recurring 并存）",
+          "modality：一般性机制描述（generally）"
+        ],
+        "must_not_assert": [
+          "预付不等于当期确认收入",
+          "不得由此推出未披露的递延收入、RPO 或留存率数值"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["财务数值抽取", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-prepaid-as-revenue",
+      "change": "把“预付”改写为“当期确认为收入”",
+      "expected_failure": "period_semantics_changed",
+      "reason": "收费时点与收入确认时点混淆"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "该公司",
+    "modality": "actual",
+    "quantity": null,
+    "unit": null,
+    "period": "2025年第一季度",
+    "condition": "generally（一般性机制）"
+  },
+  "expected_missing_slots": ["quantity"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

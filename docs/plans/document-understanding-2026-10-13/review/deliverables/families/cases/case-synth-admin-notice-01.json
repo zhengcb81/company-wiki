@@ -1,0 +1,82 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-synth-admin-notice-01",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "synth-admin-notice",
+    "source_sha256": null,
+    "origin": {
+      "doc_title": "合成：股东大会会议通知（纯程序性）+ 混合议案附件示例",
+      "issuer_market": "cn_exchange",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "synthetic fixture；本地缺真正制度/通知负例（cn-ir-policy 不能作负例），已入 acquisition_requests"
+    },
+    "local_binding_key": "synthetic:admin-notice"
+  },
+  "observation": {
+    "metadata": {
+      "title": "合成：关于召开年度股东大会的通知",
+      "declared_kind": "meeting_notice",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": null, "exact_quote": "[SYNTHETIC] 会议时间、地点、股权登记日与审议事项清单如下。"},
+        "page": 1,
+        "text": "[SYNTHETIC] 会议时间、地点、股权登记日与审议事项清单如下。",
+        "role": "administrative",
+        "hints": {"synthetic": true}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 2, "line": null, "exact_quote": "[SYNTHETIC] 审议事项三：关于变更部分募投项目实施主体的议案（详见同日公告）。"},
+        "page": 2,
+        "text": "[SYNTHETIC] 审议事项三：关于变更部分募投项目实施主体的议案（详见同日公告）。",
+        "role": "fundraising",
+        "hints": {"synthetic": true, "relation": "cross_reference"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "纯程序性通知在核实后可跳过业务派生，但议案/交叉引用不连带丢弃",
+      "文件名/标题不作为跳过依据"
+    ],
+    "facts": [
+      {
+        "id": "f1-procedural-with-substantive-item",
+        "objective": "程序性文件中夹带实质议案的处理",
+        "importance": "critical",
+        "any_support_sets": [["u1"], ["u2"]],
+        "must_preserve": ["u1 为程序性内容（时间/地点/登记日）", "u2 是实质议案并交叉引用同日公告（needs_source 到该公告）"],
+        "must_not_assert": [
+          "不得因整体是通知而连带丢弃实质议案",
+          "议案标题不得当议案已通过或已执行"
+        ]
+      }
+    ],
+    "disposition": "generic_read",
+    "not_evaluated": ["真实制度文件结构（缺样）", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-skip-whole-file",
+      "change": "按“通知”标题整体跳过并丢弃 u2",
+      "expected_failure": "content_dropped",
+      "reason": "实质议案被连带丢弃"
+    }
+  ],
+  "candidate_claim": null,
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

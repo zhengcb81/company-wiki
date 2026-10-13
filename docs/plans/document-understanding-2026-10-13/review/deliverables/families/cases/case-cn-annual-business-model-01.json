@@ -1,0 +1,134 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-cn-annual-business-model-01",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-annual",
+    "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "origin": {
+      "doc_title": "中微公司2025年年度报告",
+      "issuer_market": "cn_exchange",
+      "document_date": "2026",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample cn-annual；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "cn-annual"
+  },
+  "observation": {
+    "metadata": {
+      "title": "中微公司：2025年年度报告",
+      "declared_kind": "annual_report",
+      "regime": "cn_exchange",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": null,
+      "period_end": "2025-12-31",
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 29,
+          "line": null,
+          "exact_quote": "公司主要从事半导体设备的研发、生产和销售，通过向下游集成电路、LED 外延片、先进封装、MEMS 等半导体产品的制造公司销售刻蚀设备、薄膜设备和MOCVD 设备、提供配件及服务实现收入和利润。"
+        },
+        "page": 29,
+        "text": "公司主要从事半导体设备的研发、生产和销售，通过向下游集成电路、LED 外延片、先进封装、MEMS 等半导体产品的制造公司销售刻蚀设备、薄膜设备和MOCVD 设备、提供配件及服务实现收入和利润。",
+        "role": "business",
+        "hints": {"heading_path": ["管理层讨论与分析", "主要经营模式", "盈利模式"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 30,
+          "line": null,
+          "exact_quote": "公司主要采用以销定产的生产模式，实行订单式生产为主，结合少量库存式生产为辅的生产方式。"
+        },
+        "page": 30,
+        "text": "公司主要采用以销定产的生产模式，实行订单式生产为主，结合少量库存式生产为辅的生产方式。",
+        "role": "business",
+        "hints": {"heading_path": ["管理层讨论与分析", "主要经营模式", "生产模式"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {
+          "physical_page": 30,
+          "line": null,
+          "exact_quote": "公司采取直销为主的销售模式，因欧洲市场的客户较为分散，公司在该区域通过代理商模式进行销售。"
+        },
+        "page": 30,
+        "text": "公司采取直销为主的销售模式，因欧洲市场的客户较为分散，公司在该区域通过代理商模式进行销售。",
+        "role": "business",
+        "hints": {"heading_path": ["管理层讨论与分析", "主要经营模式", "营销及销售模式"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "本 case 验证 cn_annual_report 规格中 business/management_discussion 章节的首读价值",
+      "“主要经营模式”是管理层讨论与分析下的子级标题，heading_path 层级 AND 不可丢"
+    ],
+    "facts": [
+      {
+        "id": "f1-business-model",
+        "objective": "识别披露主体的主营产品、客户群与收入机制",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "主体：本公司（半导体设备供应商）",
+          "客户群：下游集成电路、LED外延片、先进封装、MEMS 制造公司",
+          "收入来源：刻蚀设备、薄膜设备、MOCVD 设备销售及配件与服务"
+        ],
+        "must_not_assert": [
+          "不得把配件及服务收入说成设备主营收入主体",
+          "不得由公开描述推断未披露的客户名单、订单金额或合同"
+        ]
+      },
+      {
+        "id": "f2-production-mode",
+        "objective": "识别生产模式及其对产能/库存的含义",
+        "importance": "normal",
+        "any_support_sets": [["u2"]],
+        "must_preserve": ["以销定产；订单式为主、少量库存式为辅"],
+        "must_not_assert": ["不得把“以销定产”引申为零库存或产能永不闲置"]
+      },
+      {
+        "id": "f3-sales-mode",
+        "objective": "识别销售模式与地域差异",
+        "importance": "normal",
+        "any_support_sets": [["u3"]],
+        "must_preserve": ["直销为主；欧洲因客户分散采用代理商模式", "地域范围：欧洲"],
+        "must_not_assert": ["不得说公司在欧洲自建销售队伍或已建海外工厂"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "语义蕴含判定交 ROOT 行为测试（execution_status=NOT_RUN_ROOT_INTEGRATION）",
+      "本 case 不评价财务数字抽取正确性"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1-drop-region",
+      "change": "u3 删除“因欧洲市场的客户较为分散”",
+      "expected_failure": "required_context_missing:geography",
+      "reason": "销售模式差异的地域限定被丢弃后断言不再成立"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "本公司",
+    "modality": "actual",
+    "quantity": null,
+    "unit": null,
+    "period": "2025年度",
+    "condition": null
+  },
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

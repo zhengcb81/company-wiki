@@ -1,0 +1,110 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "case-hk-ipo-stores-02",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "hk-ipo",
+    "source_sha256": "33460fa3e02e115e7bd09e1c4c857e71afe54c332a22373d28a0d2e86c70b6d4",
+    "origin": {
+      "doc_title": "港股招股章程（全球發售）",
+      "issuer_market": "hkex",
+      "document_date": "2022-06-30",
+      "carrier": "pdf",
+      "language": "zh",
+      "verified_via": "docs/plans/document-understanding-2026-10-13/sample_manifest.json sample hk-ipo；本机 SHA 与 manifest 一致"
+    },
+    "local_binding_key": "hk-ipo"
+  },
+  "observation": {
+    "metadata": {
+      "title": "招股章程（全球發售）",
+      "declared_kind": "prospectus",
+      "regime": "hkex",
+      "form_type": null,
+      "mime_type": "application/pdf",
+      "language": "zh",
+      "published_at": "2022-06-30",
+      "period_end": null,
+      "revision": "original"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {
+          "physical_page": 15,
+          "line": null,
+          "exact_quote": "截至2021年12月31日，我們主要通過5,000多家名創優品門店網絡為消費者提供服務"
+        },
+        "page": 15,
+        "text": "我們的門店網絡 截至2021年12月31日，我們主要通過5,000多家名創優品門店網絡為消費者提供服務，其中在中國有3,100多家名創優品門店，在海外有約1,900家名創優品門店。",
+        "role": "operating_metrics",
+        "hints": {"heading_path": ["業務", "我們的門店網絡"], "language": "zh-Hant"}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {
+          "physical_page": 15,
+          "line": null,
+          "exact_quote": "下表列示截至呈報日期，中國和全球的名創優品門店數量："
+        },
+        "page": 15,
+        "text": "下表列示截至呈報日期，中國和全球的名創優品門店數量： 截至6月30日 截至12月31日 2019年 2020年 2021年 2020年 2021年",
+        "role": "operating_metrics",
+        "hints": {"unit_kind": "operating_table", "note": "门店表列头：两个截止日口径并列（6月30日/12月31日）"}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "招股时点的门店数据是历史基础，与年报当期数据口径不同",
+      "表格列头给出两种截止日，口径必须随数值保留"
+    ],
+    "facts": [
+      {
+        "id": "f1-prospectus-asof-store-network",
+        "objective": "上市时点门店网络的口径与分解",
+        "importance": "critical",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "as-of：2021-12-31（招股时点历史数据）",
+          "分解：中国 3,100+ 家、海外约 1,900 家，合计 5,000+ 家",
+          "口径为约数（多/约）"
+        ],
+        "must_not_assert": [
+          "不得把 2021 年数据当上市后现状",
+          "不得把约数写成精确值或自行加总核对差额"
+        ]
+      },
+      {
+        "id": "f2-table-period-columns",
+        "objective": "经营表列头期间口径随数据保留",
+        "importance": "normal",
+        "any_support_sets": [["u2"]],
+        "must_preserve": ["列头含截至6月30日与截至12月31日两种截止日", "另有“截至呈報日期”表列"],
+        "must_not_assert": ["不同截止日列不得混用或直接同比"]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": ["门店表逐格数值", "语义蕴含判定交 ROOT 行为测试"]
+  },
+  "mutations": [
+    {
+      "id": "m1-asof-lost",
+      "change": "删除“截至2021年12月31日”只保留门店数",
+      "expected_failure": "required_context_missing:period",
+      "reason": "历史时点丢失后被读成现状"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "本集团（某品牌门店网络）",
+    "modality": "actual",
+    "quantity": "5,000+",
+    "unit": "家",
+    "period": "2021-12-31（招股时点）",
+    "condition": null
+  },
+  "expected_missing_slots": [],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}
