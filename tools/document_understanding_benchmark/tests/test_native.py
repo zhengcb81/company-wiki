@@ -253,6 +253,47 @@ def test_sentinel_survives_a_real_offline_cli_run(tmp_path):
     assert (owned / "summary.json").is_file()
 
 
+def test_preserved_sentinel_survives_a_REFUSED_run(tmp_path):
+    """A run that refuses must still leave a pre-existing sentinel untouched.
+
+    The card asks for the tool *and* failure cases to be exercised. A refusal
+    happens after the sentinel has been installed, so anything that returns early
+    without restoring it leaves content it found overwritten -- a run must never
+    modify what it found, however it exits.
+    """
+
+    from tools.document_understanding_benchmark.__main__ import main
+    from tools.document_understanding_benchmark.recovery import SENTINEL_NAME, file_fingerprint
+
+    out_dir = tmp_path / "out"
+    owned = out_dir / "offline"
+    owned.mkdir(parents=True)
+    sentinel = owned / SENTINEL_NAME
+    sentinel.write_text("pre-existing sentinel body", encoding="utf8")
+    before = file_fingerprint(sentinel)
+
+    # A malformed review file makes the run refuse before it evaluates anything.
+    bad_review = tmp_path / "bad-review.json"
+    bad_review.write_text('{"schema_version": "du-review/9", "claims": []}', encoding="utf8")
+
+    exit_code = main(
+        [
+            "--mode",
+            "offline",
+            "--output",
+            str(out_dir),
+            "--review",
+            str(bad_review),
+        ]
+    )
+    assert exit_code == 2, "a malformed review must refuse the run"
+
+    after = file_fingerprint(sentinel)
+    assert after["sha256"] == before["sha256"], "a refusing run clobbered the sentinel"
+    assert after["mtime_ns"] == before["mtime_ns"]
+    assert sentinel.read_text(encoding="utf8") == "pre-existing sentinel body"
+
+
 def test_owned_marker_gates_cleanup(tmp_path):
     from tools.document_understanding_benchmark.recovery import cleanup_owned
 

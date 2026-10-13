@@ -201,3 +201,57 @@ Session 1 left holdout at zero. This session closed it.
   across all 11 samples, 0 paid calls, bindings moved outside the worktree.
 - `evidence.json` is now **generated from the run artifacts**, so its recorded
   numbers cannot drift from what was actually measured.
+
+## 2026-10-13 — session 3: audit against the card, four self-defects fixed
+
+The user asked whether the work was actually complete and whether it had
+problems. Both were true, so this session audited rather than asserted.
+
+**Audit result: the card's step-2 minimum critical set had 4 of 9 elements with
+no gold at all** — `cn-q-sparse` (财务季报负例), `us-10k` (微软消费制 Azure),
+`us-txt` (电话会角色), `us-20f` (TAL 监管业务约束). All four originals were bound
+and readable; the gap was mine. All four records are now authored and SHA-bound,
+and `test_gold_set.py` fails if any element is renamed, dropped or hollowed out.
+The set is now **14/14 covered, 0 gaps**.
+
+Four defects in the benchmark itself were found and fixed:
+
+1. **Recall denominator conflated "could not read" with "found none".**
+   `critical_fact_recall` used the declared denominator while `fact_recall` in
+   the same file excluded `UNAVAILABLE`. An unreadable document therefore
+   reported `0.000` recall, which reads as a total miss. Both now exclude
+   unavailable facts, `coverage` and `*_denominator_declared` are reported
+   separately, and two regression tests guard it. `cn-ipo-confirmation` now
+   reports `n/a` instead of a misleading `0.000`.
+2. **`make_bindings` destroyed holdout bindings.** The survey manifest lists only
+   the 20 survey samples; holdout records are not in it, so a rebuild silently
+   dropped all 5. A dropped binding is indistinguishable from a missing original
+   in the report, so holdout coverage silently collapsed to `0.000`. *This was
+   hit for real during the session.* Non-manifest bindings are now preserved by
+   default (`--replace` opts out), with a regression test.
+3. **Gold facts did not separate business content from document facts.** `us-txt`
+   mixed "the selector should carry this" with "the document says this", so its
+   recall figure blamed the selector for front-matter facts. Added an optional
+   `fact_scope` (`narrative` | `document_meta`, default `narrative`) and both
+   splits are reported.
+4. **No guard on the card's minimum set** (see above).
+
+New measured findings this round:
+
+- `cn-q-sparse` produced **0 candidates from 429 units** (`needs_review`) — a
+  second independent zero-candidate case beside `holdout-cn-glodon-q1`'s 0/257.
+- **`document_meta` recall is 0/9** in development: audit status, fiscal-year
+  definition, TOC-vs-body, page count and provenance facts reach no evidence at
+  all. That is a missing layer, not under-selection.
+- **`us-txt` measured for real** (TXT is a supported carrier): routing is correct
+  (`investor_call_transcript`), 96/107 selected, 489 units, scan complete — and
+  only **1 of 11** critical facts recalled (0.091), almost all of them role and
+  modality facts.
+
+Final numbers, development and holdout kept apart with coverage beside recall:
+development critical 10/57 = **0.175** (57 evaluable of 83, coverage 0.687;
+narrative 0.191, document_meta 0.000); holdout critical 0/22 = **0.000**
+(22 of 45, coverage 0.489; narrative 0/36).
+Verification: 105 offline tests + 7 real-data tests pass, ruff clean, 53/53
+applicable mutations detected, raw and config unchanged across all 15 samples,
+0 paid calls.

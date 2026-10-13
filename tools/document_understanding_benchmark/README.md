@@ -54,25 +54,41 @@ SHA-256 mismatch yields `UNAVAILABLE` — never a substituted or synthetic docum
 ## Measured baseline (development vs holdout)
 
 Reported separately and never merged: the development samples were used to tune
-rules, so only the holdout split speaks to generalisation.
+rules, so only the holdout split speaks to generalisation. Facts that could not
+be read (`UNAVAILABLE`) **leave the denominator** and are reported as `coverage`
+instead, so "could not read" is never reported as "found none".
 
-| split | documents | critical facts recalled | denominator |
-|---|---:|---|---:|
-| development | 6 | **9 (0.220)** | 41 |
-| holdout | 5 | **0 (0.000)** | 45 |
+| split | documents | critical recall | evaluable/declared | coverage | narrative (all facts) | document_meta |
+|---|---:|---|---:|---:|---|---:|
+| development | 10 | **10/57 = 0.175** | 57/83 | 0.687 | 13/68 = 0.191 | **0/9 = 0.000** |
+| holdout | 5 | **0/22 = 0.000** | 22/45 | 0.489 | **0/36 = 0.000** | n/a |
 
-Three findings from that measurement:
+`narrative` counts all facts (critical and normal) about business content;
+`document_meta` counts facts about the document as an artifact (audit status,
+fiscal-vs-calendar year, TOC-vs-body, page counts, provenance). They are split
+because the evidence selector owns the first and a front-end layer owns the
+second; mixing them would blame the selector for facts it was never scoped for.
+
+Findings from that measurement:
 
 - **Candidate generation is the bottleneck, not the selection cap.** `cn-ir` had
   11 candidates, selected all 11, and still missed 9 of 10 gold facts.
-  `holdout-cn-glodon-q1` produced **zero candidates from 257 units**;
-  `holdout-cn-yake-q1` produced 2 from 369. Raising the cap cannot help any of them.
+  `cn-q-sparse` produced **zero candidates from 429 units** and
+  `holdout-cn-glodon-q1` **zero from 257**; `holdout-cn-yake-q1` produced 2 from
+  369. Raising the cap cannot help any of them.
+- **There is no front-matter layer.** `document_meta` recall is **0/9**: facts
+  like audit status, fiscal-year definition, and TOC-vs-body reach no evidence at
+  all. That is a different failure from under-selection.
 - **US filings cannot be scored at all today.** The production replay path offers
-  only PDF and transcript HTML. Two real 10-Ks passed through the only HTML route
+  only PDF and transcript HTML. Real 10-Ks passed through the only HTML route
   return `units=0` with `transcript_start_missing`, so they are reported
   `UNAVAILABLE` rather than as documents with no business content. Run reports
   name the unsupported carrier explicitly, and `observer.carrier_support()`
   exposes the capability without needing an original.
+- **The transcript path works but loses role facts.** `us-txt` routes correctly
+  (`investor_call_transcript`), reads 489 units, completes its scan — and still
+  recalls only 1 of 11 critical facts (0.091), almost all of them role and
+  modality facts.
 - **The documented title trap reproduces.** The one-page scanned confirmation
   opinion routes to `document_kind=prospectus`, yields 0 units, and its single
   page is reported opaque.
@@ -150,6 +166,9 @@ through it.
 - `quantity_basis`: `total` / `incremental` / `period_flow` / `investment` / …
 - `modality`: `actual` / `plan` / `negation` / `question` / `third_party`
 - `role`: who is speaking (`company_filing`, `management_answer`, `analyst_question`, …)
+- `fact_scope`: `narrative` (business content the evidence selection owns) or
+  `document_meta` (audit status, fiscal-vs-calendar year, TOC-vs-body, page
+  counts, provenance — owned by a front-end layer). Defaults to `narrative`.
 - `reason`: why the fact matters and what the trap is
 
 Quoted text per document is bounded to ≤8KiB; the largest current record uses 842 bytes.
@@ -164,18 +183,25 @@ of these is holdout:
 | `cn-ipo-confirmation` | 鼎龙股份 scanned confirmation opinion | 4 | 4 |
 | `cn-ir` | 万润股份 IR record 20260515 | 10 | 7 |
 | `cn-q-business` | 中微公司 2026 Q1 | 11 | 9 |
+| `cn-q-sparse` | 世华科技 2026 Q1 (sparse quarter, negative example) | 13 | 9 |
 | `hk-annual` | 名创优品 2024 HK annual | 7 | 6 |
+| `us-10k` | Microsoft FY2025 10-K (consumption-based Azure) | 12 | 10 |
+| `us-txt` | MSFT FY2026 Q4 earnings call (speaker roles) | 14 | 11 |
+| `us-20f` | TAL FY2024 20-F (regulatory constraints) | 15 | 12 |
 
 Holdout gold — none of these companies appears in the survey, the design
 findings, or any tuning discussion:
 
 | sample | company | segment | facts | critical |
 |---|---|---|---|---|
-| `holdout-cn-glodon-q1` | 广联达 2025 Q1 | software | 9 | 7 |
-| `holdout-cn-yake-q1` | 雅克科技 2022 Q1 | manufacturing | 13 | 8 |
+| `holdout-cn-glodon-q1` | 广联达 2025 Q1 | software | 9 | 5 |
+| `holdout-cn-yake-q1` | 雅克科技 2022 Q1 | manufacturing | 13 | 7 |
 | `holdout-hk-alibaba-fy2023` | 阿里巴巴 FY2023 | retail | 14 | 10 |
-| `holdout-us-mongodb-10k` | MongoDB FY2026 10-K | software | 16 | 9 |
-| `holdout-us-nvidia-10k` | NVIDIA FY2025 10-K | semiconductors | 16 | 9 |
+| `holdout-us-mongodb-10k` | MongoDB FY2026 10-K | software | 16 | 11 |
+| `holdout-us-nvidia-10k` | NVIDIA FY2025 10-K | semiconductors | 16 | 12 |
+
+The nine elements the card names as its minimum critical set are all covered,
+and `test_gold_set.py` fails if any of them is renamed, dropped or hollowed out.
 
 ## Counterexample mutations
 
