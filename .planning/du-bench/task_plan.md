@@ -24,8 +24,9 @@ parent plan, RF/FF/Audit/Dayu/IQS.
 
 ## Next Step
 
-Write `.planning/du-bench/handoff.{md,json}`, run the scope self-check, and
-commit this branch. ROOT owns integration.
+None — all six phases are complete and the branch is committed. ROOT owns
+integration; see `.planning/du-bench/handoff.md` section 11 for the four
+actions ROOT needs to take.
 
 ## Phases
 
@@ -82,7 +83,7 @@ commit this branch. ROOT owns integration.
 - Missing new structure/model summary ⇒ `NOT_EVALUATED`, not a fake PASS.
 
 ### Phase 6 — Holdout + handoff
-**Status:** in_progress
+**Status:** complete
 
 - Prefer A/H/US holdout companies spanning manufacturing/retail/software.
 - Where real US S-1/F-1/8-K/6-K containers are missing, write `UNAVAILABLE`
