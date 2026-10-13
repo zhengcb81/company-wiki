@@ -2,7 +2,9 @@
   "schema_version": "du-handoff/1",
   "lane": "du-bench",
   "base_sha": "7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8",
-  "implementation_commits": [],
+  "implementation_commits": [
+    "ad77758d"
+  ],
   "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/document-understanding-20261013/benchmark",
   "branch": "codex/du-benchmark-20261013",
   "status": "COMPLETE_WITH_RECORDED_GAPS",
