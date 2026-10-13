@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import csv
 import hashlib
-import os
 from pathlib import Path
 from typing import Any, Callable
+
+from company_wiki._atomic_file import atomic_output
 
 from .models import CatalogConfig, ProcessingReport, ScanReport
 from .acquisition_journal import AcquisitionJournal
@@ -1324,12 +1325,8 @@ class SourceCatalog:
 
     @staticmethod
     def _atomic_write(path: Path, text: str) -> None:
-        temporary = path.with_name(path.name + f".{os.getpid()}.tmp")
-        try:
-            temporary.write_text(text, encoding="utf-8", newline="\n")
-            os.replace(temporary, path)
-        finally:
-            temporary.unlink(missing_ok=True)
+        with atomic_output(path, mode="w", encoding="utf-8", newline="\n") as stream:
+            stream.write(text)
 
     @staticmethod
     def _write_csv(
@@ -1339,15 +1336,10 @@ class SourceCatalog:
         fields: list[str] | None = None,
     ) -> None:
         output_fields = fields or (list(rows[0]) if rows else ["artifact_role"])
-        temporary = path.with_name(path.name + f".{os.getpid()}.tmp")
-        try:
-            with temporary.open("w", encoding="utf-8-sig", newline="") as stream:
-                writer = csv.DictWriter(stream, fieldnames=output_fields)
-                writer.writeheader()
-                writer.writerows(rows)
-            os.replace(temporary, path)
-        finally:
-            temporary.unlink(missing_ok=True)
+        with atomic_output(path, mode="w", encoding="utf-8-sig", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=output_fields)
+            writer.writeheader()
+            writer.writerows(rows)
 
 
 __all__ = ["SourceCatalog"]

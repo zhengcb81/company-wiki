@@ -13,6 +13,7 @@ import shutil
 import unicodedata
 from typing import TYPE_CHECKING, Any, Mapping
 
+from company_wiki._atomic_file import atomic_output
 from company_wiki.source_contract import source_id_for_sha256
 
 from .acquisition import DownloadCandidate, DownloadReceipt
@@ -22,6 +23,7 @@ from .resolver import SourceRequest
 from .registration_scope import SourceRegistrationScope, register_catalog_sources
 from .service import SourceCatalog
 from .store import canonical_json
+from .source_location import SourceLocationError, resolve_source_location
 
 if TYPE_CHECKING:
     from .source_reader import SourceRef
@@ -574,23 +576,23 @@ class CanonicalSourceWriter:
             )
 
     def _existing_original(self, content_sha256: str) -> Path | None:
-        # Only canonical company_raw locations are dedup targets: dayu
-        # portfolio ingestion lives outside the companies/ subtree and its
-        # paths are rejected by the filing-fetch handle contract (MongoDB
-        # finding).
+        # Reuse only the currently configured canonical root. DB root kinds
+        # and absolute paths are historical observations and may outlive a move.
         rows = self.catalog.store.fetchall(
-            """SELECT l.absolute_path FROM sources s
+            """SELECT l.relative_path FROM sources s
             JOIN locations l ON l.source_id=s.source_id
-            JOIN roots r ON r.root_id=l.root_id
             WHERE s.content_sha256=? AND l.role='original_primary'
-            AND l.location_status='active' AND r.kind='company_raw'
-            ORDER BY r.priority,l.root_id,l.relative_path""",
-            (content_sha256,),
+            AND l.location_status='active' AND l.root_id=?
+            ORDER BY l.relative_path,l.location_id""",
+            (content_sha256, self.company_root.root_id),
         )
         for row in rows:
-            path = Path(row["absolute_path"])
+            try:
+                path = resolve_source_location(self.company_root, row["relative_path"])
+            except SourceLocationError:
+                continue
             if path.is_file() and _hash_file(path) == content_sha256:
-                return path.resolve()
+                return path
         return None
 
     def _destination(
@@ -707,16 +709,8 @@ class CanonicalSourceWriter:
             if path.read_bytes() != encoded:
                 raise CanonicalImportError("immutable provenance sidecar conflict")
             return
-        temporary = path.with_name(path.name + f".{os.getpid()}.tmp")
-        try:
-            with temporary.open("wb") as stream:
-                stream.write(encoded)
-                stream.flush()
-                os.fsync(stream.fileno())
-            os.replace(temporary, path)
-        finally:
-            if temporary.exists():
-                temporary.unlink()
+        with atomic_output(path, sync=True) as stream:
+            stream.write(encoded)
 
     @staticmethod
     def _verify_committed_provenance(

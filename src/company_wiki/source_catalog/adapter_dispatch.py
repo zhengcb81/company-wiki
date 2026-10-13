@@ -54,6 +54,27 @@ def adapter_for(root: RootSpec):
     return factory()
 
 
+# Only old configs lacking an adapter need layout defaults. New roots use the
+# configured adapter_id; no downstream reconcile branch knows their kind/id.
+_LEGACY_ISSUER_FACTORIES = {
+    "company_raw": CompanyRawAdapter,
+    "dayu_portfolio": DayuAdapter,
+}
+
+
+def discover_issuer_paths(root: RootSpec, **ports) -> set[str]:
+    """Optional bounded discovery capability, resolved at the adapter boundary."""
+    if root.adapter_id is not None:
+        adapter = adapter_for(root)
+    else:
+        factory = _LEGACY_ISSUER_FACTORIES.get(root.kind)
+        if factory is None:
+            return set()
+        adapter = factory()
+    discover = getattr(adapter, "discover_issuer_paths", None)
+    return discover(root.path, **ports) if callable(discover) else set()
+
+
 def _to_scanner_candidate(root: RootSpec, item: NormalizedCandidate, company_names):
     """Convert a NormalizedCandidate to the scanner's internal _Candidate.
 
@@ -113,4 +134,5 @@ __all__ = [
     "AdapterDispatchError",
     "adapter_for",
     "scan_root_via_adapter",
+    "discover_issuer_paths",
 ]

@@ -24,6 +24,7 @@ import unicodedata
 from typing import Any, Callable, Iterable
 
 
+from company_wiki._atomic_file import atomic_output
 from company_wiki.canonical_ingest import ParserResult
 from company_wiki.parser_adapters import (
     PAGE_AWARE_PDF_PARSER_NAME,
@@ -296,12 +297,8 @@ def _write_parser_envelope(
             sort_keys=True,
             separators=(",", ":"),
         ).encode("utf-8")
-    temporary = result_path.with_name(result_path.name + f".{os.getpid()}.tmp")
-    try:
-        temporary.write_bytes(encoded)
-        os.replace(temporary, result_path)
-    finally:
-        temporary.unlink(missing_ok=True)
+    with atomic_output(result_path) as stream:
+        stream.write(encoded)
 
 
 def _terminate_windows_process_tree(pid: int) -> None:

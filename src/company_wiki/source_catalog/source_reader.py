@@ -8,13 +8,11 @@ and old read fingerprints are observations, never byte access prerequisites.
 
 from __future__ import annotations
 
-import os
 import re
 import sqlite3
 from collections.abc import Iterator
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
-from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
 from .document_kinds import PERIODIC_DOCUMENT_KINDS
@@ -31,7 +29,6 @@ from .metadata_observation import observe_metadata
 from .resolver import (
     _ReadBudget,
     _fiscal_year,
-    _inside_configured_roots,
     _provider_identity,
     _read_verified_bytes,
     _source_metadata,
@@ -40,6 +37,11 @@ from .resolver import (
 )
 from .service import SourceCatalog
 from .store import metadata_state
+from .source_location import (
+    SourceLocationError,
+    relative_segments as _relative_segments,
+    resolve_source_location,
+)
 
 
 SOURCE_REF_SCHEMA_VERSION = "2.0"
@@ -127,23 +129,6 @@ class SourceQueryResult:
     reason: str
     schema_version: str = SOURCE_REF_SCHEMA_VERSION
     excluded_candidates: tuple[dict[str, object], ...] = ()
-
-
-def _relative_segments(relative_path: str) -> tuple[str, ...] | None:
-    """Reject absolute, parent and drive paths before joining a configured root."""
-    normalized = relative_path.replace("\\", "/")
-    if (
-        not normalized
-        or any(ord(character) < 32 for character in normalized)
-        or PurePosixPath(normalized).is_absolute()
-    ):
-        return None
-    if PureWindowsPath(relative_path).drive:
-        return None
-    segments = tuple(normalized.split("/"))
-    if any(segment in {"", ".", ".."} for segment in segments):
-        return None
-    return segments
 
 
 class SourceVersionReader:
@@ -740,16 +725,10 @@ class SourceVersionReader:
         policy_sha256, _ = export_policy_2x(config)
         for location in sorted(candidates, key=lambda item: item["candidate_rank"]):
             root = roots[location["root_id"]]
-            segments = _relative_segments(str(location["relative_path"]))
-            if segments is None:
-                failures.append("invalid_relative_path")
-                continue
-            candidate = root.path.joinpath(*segments)
-            # Read the resolved in-root path, so replacing a symlink after this
-            # check cannot redirect the actual open outside the approved root.
-            resolved = Path(os.path.realpath(candidate))
-            if not _inside_configured_roots(resolved, (root,)):
-                failures.append("artifact_path_outside_allowed_root")
+            try:
+                resolved = resolve_source_location(root, str(location["relative_path"]))
+            except SourceLocationError as exc:
+                failures.append(exc.reason)
                 continue
             data, status, reason, detail = _read_verified_bytes(
                 resolved, expected_sha256=ref.content_sha256, budget=budget,

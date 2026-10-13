@@ -19,7 +19,9 @@ from typing import Any
 import yaml
 
 from .adapters.registry import admission_profile, registered_adapter
-from .config import CatalogConfigError, _expand_path, _unresolved_variables
+from .config import (
+    CatalogConfigError, _expand_path, _mapping, _require_boolean, _unresolved_variables,
+)
 from .models import ROOT_KINDS, CatalogConfig, RootSpec, RouteSpec
 
 POLICY_2X_SCHEMA_VERSION = "2.0"
@@ -49,12 +51,6 @@ ALLOWED_ROOT_FIELDS_2X = {
 _WRITABLE_KINDS = frozenset({"company_raw"})
 
 
-def _mapping(value: Any, field_name: str) -> dict[str, Any]:
-    if not isinstance(value, dict):
-        raise CatalogConfigError(f"{field_name} must be an object")
-    return value
-
-
 def load_root_policy_2x(
     path: Path, *, project_root: Path | None = None, yaml_schema_version: str = "1.0"
 ) -> CatalogConfig:
@@ -71,7 +67,7 @@ def load_root_policy_2x(
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
     data = _mapping(payload, "config")
     required = {"schema_version", "catalog_dir", "roots"}
-    if not set(data) <= (required | {"reusable_root_kinds"}):
+    if not set(data) <= (required | {"reusable_root_kinds"}) or not required <= set(data):
         raise CatalogConfigError(
             "2.x config must contain only schema_version/catalog_dir/roots"
         )
@@ -116,6 +112,7 @@ def load_root_policy_2x(
             raise CatalogConfigError(
                 f"roots[{index}] admission_profile_id {profile_id!r} unknown"
             )
+        _require_boolean(index, item, nullable=("reusable_for_filing",))
         read_only = item.get("read_only", True)
         reusable_for_filing = item.get("reusable_for_filing")
         write_target = item.get("canonical_write_target")

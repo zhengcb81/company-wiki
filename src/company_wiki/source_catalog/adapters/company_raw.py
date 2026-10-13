@@ -9,6 +9,7 @@ separate RED owners (WU-603).
 from __future__ import annotations
 
 import hashlib
+import os
 from pathlib import Path
 
 from .common import (
@@ -18,6 +19,8 @@ from .common import (
 )
 from .interface import NormalizedCandidate
 from ..source_group_scope import SourceRegistrationScope
+from ..models import DOCUMENT_EXTENSIONS
+from ..source_location import relative_segments
 
 
 class CompanyRawAdapter:
@@ -28,6 +31,42 @@ class CompanyRawAdapter:
 
     def __init__(self, *, portfolio_urls: dict[str, str] | None = None):
         self._portfolio_urls = portfolio_urls or {}
+
+    def discover_issuer_paths(
+        self, root_path: Path, *, names: tuple[str, ...], security_ids: tuple[str, ...],
+        is_local, metadata_reader, observe_group, observe_entry,
+    ) -> set[str]:
+        """Finite issuer-local originals; the caller owns I/O and budget checks."""
+        selected, seen_bases = set(), set()
+        for name in sorted(set(names)):
+            if relative_segments(name) != (name,):
+                continue
+            base = root_path / name
+            if not is_local(base, directory=True):
+                continue
+            base_key = os.path.normcase(os.path.realpath(base))
+            if base_key in seen_bases:
+                continue
+            seen_bases.add(base_key)
+            stack = [base]
+            while stack:
+                directory = stack.pop()
+                observe_group()
+                with os.scandir(directory) as entries:
+                    for entry in entries:
+                        observe_entry()
+                        path = Path(entry.path)
+                        if entry.is_dir(follow_symlinks=False):
+                            if ((directory != base or entry.name == "raw")
+                                    and entry.name != ".rejections"
+                                    and is_local(path, directory=True)):
+                                stack.append(path)
+                        elif (path.suffix.lower() in DOCUMENT_EXTENSIONS
+                              and not entry.name.endswith(_ACQUISITION_SIDECAR_SUFFIX)
+                              and entry.name != "meta.json"
+                              and is_local(path, directory=False)):
+                            selected.add(path.relative_to(root_path).as_posix())
+        return selected
 
     def enumerate(self, root_path: Path, *, limit: int | None = None,
                   relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None) -> list[NormalizedCandidate]:

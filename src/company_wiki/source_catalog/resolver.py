@@ -15,6 +15,7 @@ import sqlite3
 import stat
 from typing import Any
 
+from .source_location import inside_configured_roots as _inside_configured_roots
 from .policy import _effective_reusable
 from .qualification import SourceQualification, qualify_source
 from .runtime_policy import resolver_visibility_projection
@@ -356,34 +357,6 @@ def _handle_owning_root(handle: Any, path: Path, roots: tuple[Any, ...],
                 if root.root_id == root_id:
                     return root
     return _owning_root(path, roots)
-
-
-def _inside_configured_roots(path: Path, roots: tuple[Any, ...]) -> bool:
-    """B03/L05 — a locator may not lead the read path out of the configured
-    roots.  Compared on REAL paths (so a symlink or a junction that points
-    outside its root is refused before any byte is read) and case-insensitively
-    on Windows.
-
-    Containment uses ``commonpath``, not string prefixing: with a root
-    configured as a drive root, prefixing compares against ``"C:\\\\"`` and
-    refuses every file on that drive.  Hardlinks are NOT distinguished (the path
-    is inside the root and the bytes are still verified against the requested
-    digest) - recorded as a boundary rather than papered over.
-    """
-    target = os.path.normcase(os.path.normpath(os.path.realpath(path)))
-    for root in roots:
-        root_path = getattr(root, "path", None)
-        if not root_path:
-            continue
-        base = os.path.normcase(os.path.normpath(os.path.realpath(root_path)))
-        if target == base:
-            return True
-        try:
-            if os.path.commonpath([target, base]) == base:
-                return True
-        except ValueError:
-            continue  # different drives (or mixed absolute/relative): not inside
-    return False
 
 
 def _read_verified_bytes(

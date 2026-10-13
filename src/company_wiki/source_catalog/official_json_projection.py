@@ -14,11 +14,12 @@ from dataclasses import dataclass, field
 from datetime import datetime
 import hashlib
 import json
-import os
 from pathlib import Path
 import re
 import unicodedata
 from typing import Any
+
+from company_wiki._atomic_file import atomic_output
 
 from .official_json_layout import (
     FieldObservation,
@@ -815,16 +816,8 @@ def persist_projection(catalog, projection: SourceProjection) -> str:
         if path.read_bytes() != encoded + b"\n":
             raise ProjectionError("projection_store_conflict")
         return projection.projection_id
-    temporary = path.with_name(path.name + f".{os.getpid()}.tmp")
-    try:
-        with temporary.open("xb") as stream:
-            stream.write(encoded + b"\n")
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(temporary, path)
-    finally:
-        if temporary.exists():
-            temporary.unlink()
+    with atomic_output(path, sync=True) as stream:
+        stream.write(encoded + b"\n")
     return projection.projection_id
 
 

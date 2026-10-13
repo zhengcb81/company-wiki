@@ -13,11 +13,14 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 
 from .common import _walk_files
 from .interface import NormalizedCandidate
 from ..source_group_scope import SourceRegistrationScope, filing_group_key
+from ..models import DOCUMENT_EXTENSIONS
+from ..source_location import relative_segments
 
 
 def enrich_dayu_metadata(path: Path, metadata: dict, *, metadata_reader=None) -> dict:
@@ -101,6 +104,35 @@ class DayuAdapter:
 
     adapter_id = "dayu_filing_v1"
     version = "1.0.0"
+
+    def discover_issuer_paths(
+        self, root_path: Path, *, names: tuple[str, ...], security_ids: tuple[str, ...],
+        is_local, metadata_reader, observe_group, observe_entry,
+    ) -> set[str]:
+        """Finite issuer filing groups; no database, download or provider writes."""
+        selected = set()
+        for ticker in sorted(set(security_ids)):
+            if relative_segments(ticker) != (ticker,):
+                continue
+            base = root_path / ticker / "filings"
+            if not is_local(base, directory=True):
+                continue
+            with os.scandir(base) as entries:
+                for entry in entries:
+                    observe_entry()
+                    group = Path(entry.path)
+                    if not is_local(group, directory=True):
+                        continue
+                    observe_group()
+                    cached = metadata_reader(group / "meta.json")
+                    primary = cached.get("primary_document")
+                    if (not isinstance(primary, str) or relative_segments(primary) != (primary,)
+                            or Path(primary).suffix.lower() not in DOCUMENT_EXTENSIONS):
+                        continue
+                    path = group / primary
+                    if is_local(path, directory=False):
+                        selected.add(path.relative_to(root_path).as_posix())
+        return selected
 
     def enumerate(self, root_path: Path, *, limit: int | None = None,
                   relative_paths: set[str] | None = None, compute_hash: bool = True, metadata_reader=None, file_walker=None) -> list[NormalizedCandidate]:

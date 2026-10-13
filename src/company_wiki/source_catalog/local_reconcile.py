@@ -324,9 +324,8 @@ def _proven_facts(catalog, original, identity, request, budget, *, claimed_match
 
 def _discover_source_groups(catalog, identity, budget):
     """Finite issuer-layout metadata enumeration, separate from raw verification."""
-    from .source_reader import _relative_segments
+    from .adapter_dispatch import discover_issuer_paths
     from .policy import _effective_reusable
-    from .models import DOCUMENT_EXTENSIONS
 
     targets = []
     names = {identity.canonical_name, identity.ticker, identity.security_id}
@@ -347,59 +346,12 @@ def _discover_source_groups(catalog, identity, budget):
     for root in catalog.config.roots:
         if not _effective_reusable(root, catalog.config):
             continue
-        selected = set()
-        seen_bases = set()
-        if root.kind == "dayu_portfolio":
-            for ticker in sorted({identity.ticker, identity.security_id}):
-                if _relative_segments(ticker) != (ticker,):
-                    continue
-                base = root.path / ticker / "filings"
-                if not local_path(base, root, directory=True):
-                    continue
-                with os.scandir(base) as entries:
-                    for entry in entries:
-                        budget.observe_entry()
-                        group = Path(entry.path)
-                        if not local_path(group, root, directory=True):
-                            continue
-                        budget.observe_group()
-                        cached = _read_metadata(group / "meta.json", root, budget)
-                        if cached is None:
-                            continue
-                        primary = cached[0].get("primary_document")
-                        if (not isinstance(primary, str) or _relative_segments(primary) != (primary,)
-                                or Path(primary).suffix.lower() not in DOCUMENT_EXTENSIONS):
-                            continue
-                        path = group / primary
-                        if local_path(path, root, directory=False):
-                            selected.add(path.relative_to(root.path).as_posix())
-        elif root.kind == "company_raw":
-            for name in sorted(names):
-                if _relative_segments(name) != (name,):
-                    continue
-                base = root.path / name
-                if not local_path(base, root, directory=True):
-                    continue
-                base_key = os.path.normcase(os.path.realpath(base))
-                if base_key in seen_bases:
-                    continue
-                seen_bases.add(base_key)
-                stack = [base]
-                while stack:
-                    directory = stack.pop()
-                    budget.observe_group()
-                    with os.scandir(directory) as entries:
-                        for entry in entries:
-                            budget.observe_entry()
-                            path = Path(entry.path)
-                            if entry.is_dir(follow_symlinks=False):
-                                # Direct company content plus only the legacy raw tree.
-                                if (directory != base or entry.name == "raw") and entry.name != ".rejections" and local_path(path, root, directory=True):
-                                    stack.append(path)
-                            elif (path.suffix.lower() in DOCUMENT_EXTENSIONS
-                                    and not entry.name.endswith(".source.json") and entry.name != "meta.json"
-                                    and local_path(path, root, directory=False)):
-                                selected.add(path.relative_to(root.path).as_posix())
+        selected = discover_issuer_paths(
+            root, names=tuple(names), security_ids=(identity.ticker, identity.security_id),
+            is_local=lambda path, *, directory: local_path(path, root, directory=directory),
+            metadata_reader=budget.metadata_reader(root.path),
+            observe_group=budget.observe_group, observe_entry=budget.observe_entry,
+        )
         for relative in sorted(selected):
             if catalog.reader.fetchone("SELECT 1 FROM locations WHERE root_id=? AND relative_path=?", (root.root_id, relative)) is None:
                 targets.append((root.root_id, relative))
