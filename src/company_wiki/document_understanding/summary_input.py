@@ -31,7 +31,7 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from .observation_adapter import is_selectable
-from .selection_bridge import dependency_closure
+from .selection_bridge import context_groups, dependency_closure
 
 SCHEMA_VERSION = "du-summary-input/1"
 
@@ -62,6 +62,7 @@ def build_summary_input(
     selected_unit_ids: Sequence[str] | None = None,
     max_packages: int = DEFAULT_MAX_PACKAGES,
     max_chars: int = DEFAULT_MAX_CHARS,
+    max_context_units: int = 64,
 ) -> dict[str, Any]:
     """Turn a ``du-pipeline/1`` result into a ``du-summary-input/1`` request.
 
@@ -94,7 +95,7 @@ def build_summary_input(
         unit_id: str(unit.get("text") or "") for unit_id, unit in units_by_id.items()
     }
 
-    closure = _apply_closure(packages, texts, selected_unit_ids)
+    closure = _apply_closure(packages, texts, selected_unit_ids, max_added=max_context_units)
     units_for_summary = packages.get("packages", ())
 
     selected, dropped, used_chars, withheld = _materialise(
@@ -105,9 +106,13 @@ def build_summary_input(
         allowed_unit_ids=closure["allowed_unit_ids"],
     )
 
+    selected, unsafe = _validate_sent_context(selected, context_groups(packages, texts), units_by_id)
+    dropped.extend(unsafe)
+    used_chars = sum(len(member["text"]) for entry in selected for member in entry["members"])
     return {
         "schema_version": SCHEMA_VERSION,
         "source_ref": pipeline_result.get("source_ref", {}),
+        "source_metadata": dict(observation.get("metadata") or {}),
         "profile_id": route.get("profile_id"),
         "profile_version": route.get("profile_version"),
         "family": route.get("family"),
@@ -115,6 +120,7 @@ def build_summary_input(
         "confidence": route.get("confidence"),
         "disposition_hint": route.get("disposition_hint"),
         "focus": str(profile.get("summary_focus") or ""),
+        "modifiers": dict(route.get("modifiers") or {}),
         "prefer_semantic_units": list(profile.get("semantic_units", ())),
         "section_priorities": [
             {
@@ -150,6 +156,7 @@ def _apply_closure(
     packages: Mapping[str, Any],
     texts: Mapping[str, str],
     selected_unit_ids: Sequence[str] | None,
+    *, max_added: int,
 ) -> dict[str, Any]:
     """Closure over the caller's selection, or an explicit "not applied".
 
@@ -165,15 +172,9 @@ def _apply_closure(
             "diagnostics": [],
             "reason": "no selector selection was supplied",
         }
-    closure = dependency_closure(selected_unit_ids, packages, texts)
+    closure = dependency_closure(selected_unit_ids, packages, texts,
+                                 max_added=max_added, include_members=True)
     allowed = set(closure["selected_unit_ids"])
-    # Units the closure neither selected nor added are still eligible when they
-    # belong to a package the closure touched: dropping them would silently
-    # shrink the evidence below what the packages already justify.
-    for package in packages.get("packages", ()):
-        members = {str(unit_id) for unit_id in package.get("member_unit_ids", ())}
-        if members & allowed:
-            allowed |= members
     return {
         "applied": True,
         "allowed_unit_ids": allowed,
@@ -243,6 +244,26 @@ def _materialise(
             )
             member_chars += len(text)
 
+        present_ids = {member["unit_id"] for member in members}
+        missing_required = []
+        for required_id in package.get("required_context_unit_ids", ()):
+            required_id = str(required_id)
+            if required_id in present_ids:
+                continue
+            required_unit = units_by_id.get(required_id)
+            # An explicitly marked Q&A shadow may be represented by an exact
+            # structured copy in this same semantic package. No wording-only
+            # substitution is permitted for ordinary source units.
+            equivalent_shadow = bool(required_unit and not is_selectable(required_unit) and any(
+                member["text"] == str(required_unit.get("text") or "")
+                and member["page"] == required_unit.get("page") for member in members))
+            if not equivalent_shadow:
+                missing_required.append(required_id)
+        if missing_required and (members or not package_withheld):
+            dropped.append({"package_id": package_id, "reason": "MISSING_REQUIRED_CONTEXT",
+                            "unit_ids": missing_required})
+            withheld_count += package_withheld
+            continue
         withheld_count += package_withheld
         if not members:
             dropped.append(
@@ -266,15 +287,93 @@ def _materialise(
             "kind": package.get("kind"),
             "section_role": package.get("section_role"),
             "section_ids": list(package.get("section_ids", ())),
-            "completeness": package.get("completeness"),
+            "completeness": "partial" if package.get("truncated") or any(
+                str(uid) not in present_ids and not (
+                    uid in units_by_id and not is_selectable(units_by_id[uid]))
+                for uid in package.get("member_unit_ids", ())) else package.get("completeness"),
+            "omitted_unit_ids": [str(uid) for uid in package.get("member_unit_ids", ())
+                if str(uid) not in present_ids and not (
+                    uid in units_by_id and not is_selectable(units_by_id[uid]))],
             "truncated": bool(package.get("truncated")),
             "members": members,
         }
+        entry["required_locators"] = [units_by_id[uid]["locator"]
+            for uid in package.get("required_context_unit_ids", ())
+            if uid in units_by_id and is_selectable(units_by_id[uid])]
+        entry["dependencies_resolved"] = True
+        for key in ("reading_profile_id", "reading_profile_version", "summary_focus"):
+            if key in package:
+                entry[key] = package[key]
         if package_withheld:
             entry["not_selectable_withheld"] = package_withheld
         selected.append(entry)
 
     return selected, dropped, used_chars, withheld_count
+
+
+def _validate_sent_context(
+    entries: list[dict[str, Any]], groups: Sequence[Mapping[str, Any]],
+    units: Mapping[str, Mapping[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Verify the actual output, including cuts made after initial closure.
+
+    Removing one unsafe package can remove another package's context, so pruning
+    reaches a fixed point over this finite output list. The dependency graph is
+    source-owned and independent of package ranking or summary budget.
+    """
+    from collections import deque
+
+    index: dict[str, list[int]] = {}
+    for i, group in enumerate(groups):
+        for uid in group["member_unit_ids"]:
+            index.setdefault(uid, []).append(i)
+    kept = list(entries)
+    dropped = []
+    while kept:
+        sent = {member["unit_id"] for entry in kept for member in entry["members"]}
+        unsafe: set[str] = set()
+        for entry in kept:
+            queue = deque(member["unit_id"] for member in entry["members"])
+            visited_units = set(queue)
+            visited_groups: set[int] = set()
+            required = set()
+            missing = set()
+            while queue:
+                uid = queue.popleft()
+                for i in index.get(uid, ()):
+                    if i in visited_groups:
+                        continue
+                    visited_groups.add(i)
+                    group = groups[i]
+                    for dep in group["required_unit_ids"]:
+                        if dep not in sent:
+                            original = units.get(dep)
+                            # Only an explicit shadow can have a structured
+                            # substitute, within the same evidenced group/page.
+                            equivalents = [other for other in group["member_unit_ids"]
+                                if other in sent and original and not is_selectable(original)
+                                and units.get(other, {}).get("text") == original.get("text")
+                                and units.get(other, {}).get("page") == original.get("page")]
+                            if equivalents:
+                                dep = sorted(equivalents)[0]
+                            else:
+                                missing.add(dep)
+                                continue
+                        required.add(dep)
+                        if dep not in visited_units:
+                            visited_units.add(dep)
+                            queue.append(dep)
+            if missing:
+                unsafe.add(entry["package_id"])
+                dropped.append({"package_id": entry["package_id"],
+                                "reason": "MISSING_TRANSITIVE_CONTEXT", "unit_ids": sorted(missing)})
+            else:
+                entry["required_locators"] = [units[uid]["locator"] for uid in sorted(required)]
+                entry["dependencies_resolved"] = True
+        if not unsafe:
+            break
+        kept = [entry for entry in kept if entry["package_id"] not in unsafe]
+    return kept, dropped
 
 
 def _unread(

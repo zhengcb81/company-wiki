@@ -48,43 +48,13 @@ def _has_negation(text: str) -> bool:
     return any(marker in folded or marker in text for marker in _NEGATION_MARKERS)
 
 
-def _non_selectable_ids(
-    packages: Mapping[str, Any], texts: Mapping[str, str]
-) -> set[str]:
-    """Return the units this bridge must never *add* to a selection.
-
-    Two sources, in order of authority:
-
-    1. ``packages['non_selectable_unit_ids']``, which the packaging stage derives
-       from the adapter's role marking.  A non-selectable unit is the text-layer
-       copy of a Q&A page: the parser emits the same page twice, once with
-       structured ``investor_question``/``management`` roles and once as flat
-       ``qa_text_shadow`` fragments.
-    2. Duplicate text inside one package.  When two members of the same package
-       carry byte-identical text, the later one cannot add evidence -- the model
-       would receive the same sentence twice and the budget would pay for it
-       twice.  This is a fallback for callers that hand the bridge a packages
-       mapping with no marking, and it is deliberately conservative: it only
-       ever withholds an exact duplicate.
-    """
-    marked = packages.get("non_selectable_unit_ids")
-    result: set[str] = set()
-    if isinstance(marked, Sequence) and not isinstance(marked, (str, bytes)):
-        result.update(str(unit_id) for unit_id in marked)
-
-    for package in packages.get("packages", ()):
-        by_text: dict[str, str] = {}
-        for unit_id in package.get("member_unit_ids", ()):
-            text = texts.get(unit_id)
-            if not isinstance(text, str) or not text:
-                continue
-            first = by_text.get(text)
-            if first is None:
-                by_text[text] = unit_id
-            elif first not in result:
-                # Keep the earlier occurrence and withhold the later duplicate.
-                result.add(unit_id)
-    return result
+def context_groups(packages: Mapping[str, Any], texts: Mapping[str, str]) -> list[dict[str, Any]]:
+    """The shared dependency meaning used before and after output budgeting."""
+    return [{"package_id": package.get("package_id"),
+             "member_unit_ids": list(dict.fromkeys(package.get("member_unit_ids", ()))),
+             "required_unit_ids": sorted(set(package.get("required_context_unit_ids", ())) | {
+                 uid for uid in package.get("member_unit_ids", ()) if _has_negation(texts.get(uid, ""))})}
+            for package in packages.get("packages", ())]
 
 
 def dependency_closure(
@@ -93,119 +63,92 @@ def dependency_closure(
     texts: Mapping[str, str],
     *,
     max_added: int = 64,
+    include_members: bool = False,
+    max_work_units: int = 2000000,
 ) -> dict[str, Any]:
-    """Return ``selected + required context`` as a dependency-closed selection.
+    """Compute a bounded fixed point; package ranking cannot change dependencies.
 
-    ``texts`` maps ``unit_id -> text`` so a negation can be detected without
-    re-reading the document.
-
-    The bridge only ever *adds* units -- it never removes one the caller
-    selected.  What it will not add is a non-selectable duplicate: pulling the
-    text-layer copy of an answer back in as "required context" would hand the
-    model the same statement twice, and it would defeat the point of having
-    excluded it during selection.  Each withheld unit is reported through
-    ``NOT_SELECTABLE_WITHHELD`` so the omission stays visible.
+    Selectability comes from the adapter's explicit source-role marking. Equal
+    wording alone does not prove that two locators represent the same context.
+    Summary assembly can request full members as well as required dependencies;
+    both traverse this same graph and obey the same bound.
     """
-    selected = list(dict.fromkeys(unit_id for unit_id in selected_unit_ids if unit_id))
-    selected_set = set(selected)
-    added: list[str] = []
+    from collections import deque
+
+    if isinstance(max_added, bool) or not isinstance(max_added, int) or max_added < 0:
+        raise ValueError("max_added must be a non-negative integer")
+    if isinstance(max_work_units, bool) or not isinstance(max_work_units, int) or max_work_units < 0:
+        raise ValueError("max_work_units must be a non-negative integer")
+    selected = list(dict.fromkeys(uid for uid in selected_unit_ids if uid))
+    present = set(selected)
+    queue = deque(selected)
+    non_selectable = set(packages.get("non_selectable_unit_ids", ()))
+    index: dict[str, list[int]] = {}
+    items = list(packages.get("packages", ()))
+    groups = context_groups(packages, texts)
+    processed: set[int] = set()
     diagnostics: list[dict[str, Any]] = []
-    non_selectable = _non_selectable_ids(packages, texts)
-    withheld: set[str] = set()
-
-    def _withhold(package_id: str, unit_id: str) -> None:
-        if unit_id in withheld:
-            return
-        withheld.add(unit_id)
-        diagnostics.append(
-            {
-                "code": "NOT_SELECTABLE_WITHHELD",
-                "package_id": package_id,
-                "unit_ids": [unit_id],
-                "detail": (
-                    "not added: this unit is the non-selectable duplicate of a unit "
-                    "already in the selection"
-                ),
-            }
-        )
-
-    for package in packages.get("packages", ()):
-        members = list(package.get("member_unit_ids", ()))
-        if not members:
-            continue
-        present = [unit_id for unit_id in members if unit_id in selected_set]
-        if not present:
-            continue
-
-        # A package with any member selected must bring its required context.
-        for unit_id in package.get("required_context_unit_ids", ()):
-            if unit_id in selected_set or unit_id not in members:
+    added: list[str] = []
+    work = 0
+    limited = False
+    for i, package in enumerate(items):
+        for uid in dict.fromkeys(package.get("member_unit_ids", ())):
+            work += 1
+            if work > max_work_units:
+                limited = True
+                break
+            index.setdefault(uid, []).append(i)
+        if limited:
+            break
+    while queue and not limited:
+        uid = queue.popleft()
+        touched = [i for i in index.get(uid, ()) if i not in processed]
+        # Collect targets before applying them, so arbitrary package order cannot
+        # determine which dependencies survive a resource bound.
+        targets: dict[str, list[tuple[str, str]]] = {}
+        for i in touched:
+            processed.add(i)
+            package = items[i]
+            pid = str(package.get("package_id", ""))
+            required = set(groups[i]["required_unit_ids"])
+            members = set(package.get("member_unit_ids", ()))
+            negated = {member for member in members if _has_negation(texts.get(member, ""))}
+            for target in required | negated | (members if include_members else set()):
+                work += 1
+                if work > max_work_units:
+                    limited = True
+                    break
+                code = CODE_NEGATION_PROTECTED if target in negated else CODE_CONTEXT_RESTORED
+                targets.setdefault(target, []).append((pid, code))
+            if limited:
+                break
+        for target in sorted(targets):
+            if target in present:
                 continue
-            if unit_id in non_selectable:
-                _withhold(package["package_id"], unit_id)
+            if target in non_selectable:
+                for pid, _ in targets[target]:
+                    diagnostics.append({"code": CODE_NOT_SELECTABLE_WITHHELD,
+                                        "package_id": pid, "unit_ids": [target],
+                                        "detail": "adapter marked this duplicate non-selectable"})
                 continue
             if len(added) >= max_added:
-                diagnostics.append(
-                    {
-                        "code": "CONTEXT_BUDGET_EXCEEDED",
-                        "package_id": package["package_id"],
-                        "detail": f"max_added={max_added} reached while closing context",
-                    }
-                )
-                break
-            selected.append(unit_id)
-            selected_set.add(unit_id)
-            added.append(unit_id)
-        else:
-            if any(
-                unit_id in package.get("required_context_unit_ids", ())
-                for unit_id in present
-            ) or package.get("required_context_unit_ids"):
-                restored = [
-                    unit_id
-                    for unit_id in package.get("required_context_unit_ids", ())
-                    if unit_id in added
-                ]
-                if restored:
-                    diagnostics.append(
-                        {
-                            "code": CODE_CONTEXT_RESTORED,
-                            "package_id": package["package_id"],
-                            "detail": "restored required context for a partially selected package",
-                        }
-                    )
-
-        # A negation must not be separated from the thing it negates.  The
-        # protection still applies when the only copy of the negation is the
-        # non-selectable one: the unit is withheld from *addition*, but the
-        # caller's own selection is never reduced, and the structured answer
-        # carrying the same negation is protected by the loop below.
-        negated = [unit_id for unit_id in members if _has_negation(texts.get(unit_id, ""))]
-        if negated and present:
-            for unit_id in negated:
-                if unit_id in selected_set or len(added) >= max_added:
-                    continue
-                if unit_id in non_selectable:
-                    _withhold(package["package_id"], unit_id)
-                    continue
-                selected.append(unit_id)
-                selected_set.add(unit_id)
-                added.append(unit_id)
-                diagnostics.append(
-                    {
-                        "code": CODE_NEGATION_PROTECTED,
-                        "package_id": package["package_id"],
-                        "unit_ids": [unit_id],
-                        "detail": "kept a negation with the package it belongs to",
-                    }
-                )
-
-    return {
-        "selected_unit_ids": selected,
-        "added_unit_ids": added,
-        "added_count": len(added),
-        "diagnostics": _dedupe(diagnostics),
-    }
+                diagnostics.append({"code": "CONTEXT_BUDGET_EXCEEDED", "unit_ids": [target],
+                                    "detail": f"max_added={max_added}; required context remains unresolved"})
+                continue
+            present.add(target)
+            selected.append(target)
+            added.append(target)
+            queue.append(target)
+            for pid, code in targets[target]:
+                diagnostics.append({"code": code, "package_id": pid, "unit_ids": [target],
+                                    "detail": "restored dependency through the shared closure"})
+    if limited:
+        diagnostics.append({"code": "CONTEXT_WORK_BUDGET_EXCEEDED",
+                            "detail": f"max_work_units={max_work_units}"})
+    return {"selected_unit_ids": selected, "added_unit_ids": added,
+            "added_count": len(added), "diagnostics": _dedupe(diagnostics),
+            "work_units": min(work, max_work_units), "complete": not limited and not any(
+                d["code"] == "CONTEXT_BUDGET_EXCEEDED" for d in diagnostics)}
 
 
 def package_for_unit(packages: Mapping[str, Any], unit_id: str) -> Mapping[str, Any] | None:

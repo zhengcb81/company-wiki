@@ -53,6 +53,7 @@ def build_dependency_packages(
     max_members: int = 64,
     unit_order: Mapping[str, int] | None = None,
     non_selectable_unit_ids: Sequence[str] = (),
+    unit_reading_plan: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Turn a ``du-structure/1`` result into budgetable atomic packages.
 
@@ -98,7 +99,6 @@ def build_dependency_packages(
         required = [
             unit_id
             for unit_id in semantic.get("required_context_unit_ids", ())
-            if unit_id in members
         ]
         anchors = [unit_id for unit_id in semantic.get("anchor_unit_ids", ()) if unit_id in members]
         section_ids = [
@@ -107,6 +107,10 @@ def build_dependency_packages(
             if section_id in sections
         ]
         role = _dominant_role(sections, section_ids)
+        reading = unit_reading_plan or {}
+        anchor_plan = next((reading[uid] for uid in anchors + members if uid in reading), {})
+        if anchor_plan:
+            role = str(anchor_plan.get("section_role") or role)
         truncated = len(members) > max_members
         if truncated:
             # Never truncate below the required context; drop the tail instead
@@ -133,7 +137,10 @@ def build_dependency_packages(
                 "anchor_unit_ids": anchors,
                 "required_context_unit_ids": required,
                 "completeness": semantic.get("completeness", "unknown"),
-                "priority": role_priority.get(role, role_priority["unknown"]),
+                "priority": 4 - int(anchor_plan["priority"]) if anchor_plan else role_priority.get(role, role_priority["unknown"]),
+                "reading_profile_id": anchor_plan.get("profile_id"),
+                "reading_profile_version": anchor_plan.get("profile_version"),
+                "summary_focus": anchor_plan.get("summary_focus", ""),
                 "first_ordinal": first_ordinal,
                 "diagnostics": [item.get("code") for item in semantic.get("diagnostics", ())],
                 "truncated": truncated,

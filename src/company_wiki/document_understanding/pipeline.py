@@ -31,6 +31,7 @@ from typing import Any
 
 from .observation_adapter import build_observation, selectable_unit_ids
 from .orchestration import build_dependency_packages
+from .strategy_binding import bind_reading_plan
 
 PIPELINE_SCHEMA_VERSION = "du-pipeline/1"
 
@@ -61,11 +62,12 @@ def understand_units(
     declared_kind: str = "unknown",
     mime_type: str = "application/pdf",
     language: str | None = None,
+    metadata: Mapping[str, Any] | None = None,
     native_scan: str = "complete",
     opaque_pages: Sequence[int] = (),
     deferred_pages: Sequence[int] = (),
     limits: Mapping[str, Any] | None = None,
-    max_packages: int = 400,
+    max_packages: int | None = None,
 ) -> dict[str, Any]:
     """Run the full document-understanding chain over already-parsed units.
 
@@ -87,6 +89,7 @@ def understand_units(
         declared_kind=declared_kind,
         mime_type=mime_type,
         language=language,
+        metadata=metadata,
         native_scan=native_scan,
         opaque_pages=opaque_pages,
         deferred_pages=deferred_pages,
@@ -95,6 +98,16 @@ def understand_units(
     route = route_document(observation, limits=limits)
     profile = get_profile(route["profile_id"])
     structure = build_structure(observation, limits=limits)
+    child_profiles = {}
+    for child in route.get("child_routes", ()):
+        pid = child.get("profile_id")
+        try:
+            child_profiles[pid] = get_profile(pid)
+        except (KeyError, TypeError, ValueError):
+            continue
+    reading_plan = bind_reading_plan(observation, structure, route=route,
+                                     profile=profile, child_profiles=child_profiles)
+    structure = reading_plan["structure"]
     # Carry the observation's non-selectable units into the packages, so the decision made
     # in the adapter actually reaches the consumers that add and send evidence. A marking
     # that nothing reads is the same no-op this layer exists to remove.
@@ -113,6 +126,7 @@ def understand_units(
             unit["unit_id"]: unit["ordinal"] for unit in observation["units"]
         },
         non_selectable_unit_ids=non_selectable,
+        unit_reading_plan=reading_plan["unit_profiles"],
     )
 
     return {
@@ -123,9 +137,10 @@ def understand_units(
         "profile": profile,
         "structure": structure,
         "packages": packages,
+        "reading_plan": reading_plan,
         "non_selectable_unit_ids": non_selectable,
         "plan": _plan(route, profile, structure, packages),
-        "diagnostics": _pipeline_diagnostics(route, structure, packages),
+        "diagnostics": _pipeline_diagnostics(route, structure, packages) + reading_plan["diagnostics"],
     }
 
 

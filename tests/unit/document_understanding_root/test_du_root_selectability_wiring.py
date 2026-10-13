@@ -116,6 +116,7 @@ def _mixed_packages():
     """
     return {
         "schema_version": "du-packages/1",
+        "non_selectable_unit_ids": ["s_q", "s_a"],
         "packages": [
             {
                 "package_id": "m1",

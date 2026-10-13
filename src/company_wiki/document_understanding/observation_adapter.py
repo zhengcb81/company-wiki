@@ -260,6 +260,7 @@ def build_observation(
     declared_kind: str = "unknown",
     mime_type: str = "application/pdf",
     language: str | None = None,
+    metadata: Mapping[str, Any] | None = None,
     native_scan: str = "complete",
     opaque_pages: Sequence[int] = (),
     deferred_pages: Sequence[int] = (),
@@ -269,6 +270,7 @@ def build_observation(
     The function is pure with respect to the inputs: units are read, never
     modified, and no locator, id or byte digest is recomputed.
     """
+    source_metadata = dict(metadata or {})
     if native_scan not in {"complete", "partial", "unavailable"}:
         native_scan = "unavailable"
 
@@ -365,6 +367,8 @@ def build_observation(
             "declared_kind": declared_kind,
             "mime_type": mime_type,
             "language": resolved_language,
+            **{key: value for key, value in source_metadata.items()
+               if key in {"regime", "form_type", "published_at", "period_end", "revision"}},
         },
         "coverage": {
             "native_scan": native_scan,
