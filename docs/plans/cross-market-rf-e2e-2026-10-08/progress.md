@@ -1,3 +1,9 @@
+## 2026-10-13 当前入口：旧 DU 三包接收完成、主线发布中
+
+旧 DU-PROFILES / STRUCTURE / BENCH 最新分支及 ROOT 整合已并本地主线；[独立接收 PWF](../document-understanding-2026-10-13/reception/task_plan.md) 汇总共同修复与限制。一次集中491 PASS，四原件11 PASS，最终 oracle seam5 PASS，独立核心审查无并线阻断；原件/配置/测试目录恢复，0模型0费用。正常远端推送与精确CI收尾。
+策略真实消费、子正文/unknown语义、最终预算断链与自证式评测已修。真实微软 baseline 业务4/8漏读保持FAIL，不能将模块接收当真实摘要/研究完成。
+新 DU2 三卡用户已分发，ROOT 未写其独占目录；随后 ROOT 接策略/布局/业务价值预算与实际配置模型摘要，集中真实回开与gold，再沿本母计划G2/G4/G5及审计循环。生产入口未切换；不创建小节点许可/签收。
+
 ## 2026-10-13 三仓架构质量已闭环
 
 [三仓独立架构改造](../architecture-quality-2026-10-13/README.md)A/B/C已完成：CWP验收536c8987、FFe2efa81d、RFf0d694d6已推送且精确CI绿；原31 native/三公司正式经济结果保持、跨仓48PASS/0FAIL、九型G2 PASS。完整离线PARTIAL的HK fresh出处/PPTX无OCR与真实供应商/研究不伪称完成。FF/RF完整owned安装与fresh入口核验；原件/150 RF WIP/17配置保持，三质量临时工作树释放145,244,701字节。DU三线零写/接口不变。Next Step：接收DU三包并由ROOT接共享引擎，沿原真实G2/G4/G5与审计循环，完整母目标尚未完成。
