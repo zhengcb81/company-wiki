@@ -35,7 +35,9 @@
         "公司已覆盖70%以上的先进封装设备市场"
       ],
       "reason": "60%/70% 是「**未来五年**」的目标，不是已达到的市占率。同一段前半句的「已经覆盖了超30%前道集成电路设备产品」是现状——30% 是现状、60%/70% 是目标，三者在同一段，最易互相顶替。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-current-coverage-30",
@@ -60,7 +62,9 @@
         "公司设备已覆盖60%以上前道集成电路设备产品"
       ],
       "reason": "现状是「五十多种设备产品已覆盖超 30% 前道集成电路设备产品」。这是**产品种类覆盖率**，不是市占率或收入占比。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-cmp-acquisition-completed",
@@ -85,7 +89,9 @@
         "公司正在筹划收购众硅公司"
       ],
       "reason": "收购**已在报告期内完成**（actual），不是筹划中。语态写反会把已完成的并表事件写成预期事项。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-microled-sample-verification",
@@ -110,7 +116,9 @@
         "Micro-LED 设备已实现批量出货"
       ],
       "reason": "样机于 **2023 年底**付运，报告期内验证进展顺利并取得**重复订单**。付运/验证/重复订单都不是批量出货，且起始时点在前一年度。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-gan-power-stage",
@@ -135,7 +143,9 @@
         "PRISMO PD5 已完成生产验证"
       ],
       "reason": "PRISMO PD5 于 2022 年推出，**目前仍在客户处进行生产验证**并取得重复订单。取得订单 ≠ 验证完成。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-sic-8inch-stage",
@@ -159,7 +169,9 @@
         "8寸碳化硅外延设备已量产"
       ],
       "reason": "8 寸碳化硅外延设备「**已进入**国内头部企业**进行生产验证**」并取得重复订单。进入验证 ≠ 量产。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-inp-development-started",
@@ -184,7 +196,9 @@
         "磷化铟MOCVD设备已付运客户端验证"
       ],
       "reason": "InP 专用 MOCVD「报告期内**启动**开发」，且「**下半年将**…尽早付运样机」。整段是启动＋未来计划，尚未付运；写成已付运是语态错误。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-advanced-packaging-primo-matrix",
@@ -208,7 +222,9 @@
         "Primo Matrix 已完成产线验证"
       ],
       "reason": "Primo Matrix「**即将**发往」客户产线验证——连发运都还没发生。同段的 Primo TSV 300E 才是「持续服务客户，并获得重复订单」。同段两种状态必须分开。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-tsv-300e-serving",
@@ -232,7 +248,9 @@
         "Primo TSV 300E 尚未交付客户"
       ],
       "reason": "Primo TSV 300E「持续服务客户，并获得重复订单」是稳定在售状态，也是同段里唯一已量产在服的产品。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-third-gen-tsv-rd",
@@ -256,7 +274,9 @@
         "第三代TSV刻蚀机已完成客户端验证"
       ],
       "reason": "第三代 TSV 刻蚀机「已得到多家客户订单，**即将**发往客户端验证」——有订单但验证尚未开始。订单与验证是两个独立状态。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-catalog-is-toc-not-content",
@@ -284,7 +304,9 @@
         "报告第3页即为管理层讨论与分析正文"
       ],
       "reason": "第 3 页是**目录**（含页码点线「……9」），不是正文章节。目录里的「第三节 管理层讨论与分析」是导航条目；把目录当正文是「只有目录」类错误的正面样本。真实正文在物理页 9 之后。",
-      "fact_scope": "document_meta"
+      "fact_scope": "document_meta",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "f-page-count-210",
@@ -308,7 +330,9 @@
         "本半年度报告共96页"
       ],
       "reason": "页脚「3 / 210」表明全文 210 页。这个数字是判断「是否只读了极小比例就宣称完整」的分母。",
-      "fact_scope": "document_meta"
+      "fact_scope": "document_meta",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     }
   ]
 }

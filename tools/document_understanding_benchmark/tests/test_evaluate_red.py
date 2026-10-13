@@ -111,10 +111,10 @@ def test_observed_allows_missing_optional_fields():
 # ---------------------------------------------------------------------------
 
 
-def test_healthy_observation_passes():
+def test_healthy_observation_has_full_recall_but_unreviewed_semantics_is_partial():
     result = evaluate(good_observed(), GOLD)
     assert result["schema_version"] == "du-evaluation/1"
-    assert _status(result) == "PASS"
+    assert _status(result) == "PARTIAL"
     assert result["metrics"]["critical_fact_recall"] == 1.0
 
 
@@ -167,8 +167,8 @@ def test_dropped_critical_fact_fails():
     assert result["metrics"]["critical_fact_recall"] < 1.0
 
 
-def test_fact_present_only_as_selected_text_anchor_still_counts():
-    """A fact carried by replayed selection text is recall, not omission."""
+def test_fact_present_in_source_bound_selection_still_counts_without_a_claim():
+    """Actual locator-backed original text proves selection recall; claims are separate."""
 
     observed = good_observed()
     observed["claims"] = [
@@ -328,6 +328,7 @@ def test_coverage_complete_alone_does_not_pass():
     observed = good_observed()
     observed["claims"] = []
     observed["selected_text"] = ""
+    observed["selected_evidence"] = []
     observed["coverage"]["complete"] = True
     result = evaluate(observed, GOLD)
     assert _status(result) == "FAIL"

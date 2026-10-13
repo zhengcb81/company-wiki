@@ -45,7 +45,9 @@
       "reason": "本期（2026Q1）营业收入 29.15 亿元 / 2,914,986,518.73 元，同比 +34.13%。34.13% 与归母净利的 197.20% 相邻，易互换。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-q1-net-profit-and-cause",
@@ -79,7 +81,9 @@
       "reason": "归母净利 9.30 亿元 / +197.20%，但公司列明主因之一是出售拓荆科技股票产生税后净收益约 3.97 亿元（非经常性）。把 197.20% 说成主营/经营改善是因果幻觉；扣非净利约 4.78 亿元 / +60.09% 才是经营性口径。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-q1-deducted-profit",
@@ -104,7 +108,9 @@
       "reason": "扣非归母净利约 4.78 亿元 / +60.09%，与归母净利 9.30 亿元是两个口径，不得互相替代。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-rd-investment",
@@ -130,7 +136,9 @@
       "reason": "研发支出增加 2.21 亿元（+32.15%），占比约 31.14%。p2 表列示占比由 31.60% 降至 31.14%（减少0.46个百分点）：绝对额增长与占比下降同时成立，不可互相否定。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-icp-angnova-stage",
@@ -154,7 +162,9 @@
       "reason": "第二代 ICP 刻蚀设备 Primo Angnova™ 在 3D DRAM 取得 140:1 结果，并「付运到…客户端认证」——处于认证阶段，不是已通过认证、更不是量产。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-epi-two-stages",
@@ -179,7 +189,9 @@
       "reason": "同一台设备三种状态并存：成熟制程客户端「验证成功」、已付运先进制程客户端、部分先进工艺处于「量产验证阶段」。量产验证 ≠ 量产。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-atmospheric-epi-stage",
@@ -203,7 +215,9 @@
       "reason": "常压外延设备「已完成开发，进入晶圆验证阶段」——开发完成不等于验证通过。与减压 EPI 的「验证成功」是不同阶段。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-metal-film-under-development",
@@ -226,7 +240,9 @@
       "reason": "「正在开发，项目顺利推进中」是研发中状态；同一段中「多款核心介质沉积设备…与客户的各项验证工作也有良好的进展」也不等于验证完成。",
       "modality": "plan",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-mocvd-new-products-stage",
@@ -251,7 +267,9 @@
       "reason": "四款 MOCVD 新产品「已进入客户端验证阶段」，且「部分」得到批量订货——验证中与部分订货并存，不得写成全部量产/全部出货。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-thin-film-growth",
@@ -276,7 +294,9 @@
       "reason": "224.23% 是 2025 年薄膜设备营收同比增速，出现在 2026Q1 报告中；把它挂到本报告期是期间错配。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-selection-reason-not-financial",
@@ -299,7 +319,9 @@
       "reason": "「成功开发出十多种薄膜设备」只说明开发数量，未说明量产或收入；同段另列 LPCVD/ALD/EPI/PVD CuBS/PECVD 五类在先进存储与先进逻辑市场新增付运量增长。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     }
   ]
 }

@@ -8,7 +8,7 @@
     "quarterly",
     "quarterly_report"
   ],
-  "notes": "世华科技（688093，科创板）2026 年第一季度报告，10 页。开发集。本样本是卡上要求的『财务季报负例』：正文全部为财务与股东信息，没有任何产品/业务叙述，且『三、其他提醒事项』勾选不适用。它的作用不是考抽取，而是考两件事：(1) 不得因为业务密度低就宣称整类季报可以跳过；(2) 不得从财务变动原因里编造业务进展。事实逐字取自原件。",
+  "notes": "世华科技（688093，科创板）2026 年第一季度报告，10 页。开发集。本样本是卡上要求的『财务季报负例』：正文全部为财务与股东信息，没有任何产品/业务叙述，且『三、其他提醒事项』勾选不适用。它的作用不是考抽取，而是考两件事：(1) 不得因为业务密度低就宣称整类季报可以跳过；(2) 不得从财务变动原因里编造业务进展。事实逐字取自原件。\n2026-10-13 接收修正：本份可读原件没有具体业务叙述，允许0切片/0摘要/0模型调用；不得据此跳过所有季报。原数字与反例全部保留作if-emitted正确性检查。",
   "facts": [
     {
       "id": "f-revenue-down",
@@ -39,7 +39,9 @@
         "公司一季度营业收入实现增长"
       ],
       "reason": "营业收入 239,174,261.47 元，**同比下降 6.45%**。同一张表里经营活动现金流量净额是 **+53.28%**，一负一正相邻，方向极易取反。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-cashflow-up-is-not-growth",
@@ -78,7 +80,9 @@
         "公司经营质量改善带动现金流增长53.28%"
       ],
       "reason": "经营活动现金流量净额 112,145,511.65 元、+53.28%，但公司给出的原因是**「购买商品、接受劳务支付的现金同比减少」**——即支出减少，不是销售改善。在收入**下降 6.45%** 的同期把现金流增长归因于经营向好，是典型的因果幻觉。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-net-profit-down",
@@ -108,7 +112,9 @@
         "归母净利润同比增长2.07%"
       ],
       "reason": "归母净利润 85,363,260.21 元、**-2.07%**；扣非归母净利润 79,749,459.95 元、**-4.59%**。两个降幅相邻且扣非降幅更大，不得互换，也不得写成增长。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-deducted-profit-down-more",
@@ -138,7 +144,9 @@
         "扣非净利润同比下降2.07%"
       ],
       "reason": "扣非归母净利润 79,749,459.95 元、-4.59%。非经常性损益合计 5,613,800.26 元，正是它让归母降幅（-2.07%）小于扣非降幅（-4.59%）——把两者混用会读错主营趋势。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-rd-up-while-revenue-down",
@@ -168,7 +176,9 @@
         "研发投入同比下降16.81%"
       ],
       "reason": "研发投入 15,324,068.90 元、**+16.81%**，而收入是 -6.45%。研发上升与收入下降同时成立，方向相反，不得取反也不得互相解释。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-roe-points-vs-rd-points",
@@ -201,7 +211,9 @@
         "研发投入占营业收入比例减少1.28个百分点"
       ],
       "reason": "加权平均净资产收益率 3.02%，**减少 1.33 个百分点**；研发投入占收入比例 6.41%，**增加 1.28 个百分点**。两个「百分点」数值接近（1.33 / 1.28）、方向相反（减 / 增），是本样本最精密的互换陷阱。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-not-audited",
@@ -236,7 +248,9 @@
         "本季度财务报表已经审计"
       ],
       "reason": "「第一季度财务报表是否经审计」勾选 √否，且财务报表页脚写明「审计类型：未经审计」。同一事实在文件里出现两处，都指向未审计。",
-      "fact_scope": "document_meta"
+      "fact_scope": "document_meta",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "f-other-reminders-not-applicable",
@@ -271,7 +285,9 @@
         "本季报未披露其他提醒事项说明公司刻意隐瞒"
       ],
       "reason": "「三、其他提醒事项」明确勾选**不适用**。这既不能读成「有事没披露」，也不能反过来当作「整份季报没有内容所以可跳过」的依据——不适用是一个明确状态，不是空白。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "f-low-business-density-is-a-measurement",
@@ -303,7 +319,9 @@
         "A股季报均无业务价值"
       ],
       "reason": "本文件章节结构为：一、主要财务数据；二、股东信息；三、其他提醒事项（不适用）；四、季度财务报表。**没有**管理层讨论、产品进展或经营叙述——这是真实的低业务密度。正确结论是「本份季报业务密度低」，而不是「季报这一类可以跳过」：同批次的 `cn-q-business`（中微 2026Q1）关键召回达 0.667，证明季报可以承载可选中的业务事实。",
-      "fact_scope": "document_meta"
+      "fact_scope": "document_meta",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "f-controller-and-controlled-entities",
@@ -329,7 +347,9 @@
         "吕刚为公司实际控制人"
       ],
       "reason": "顾正青同时是**控制股东与实际控制人**（25.60%，71,778,269 股），另有两家由其控制的企业；吕刚为第二大股东（17.20%）但**不是**实际控制人。按持股名次推断控制权会错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-shareholder-count",
@@ -353,7 +373,9 @@
         "报告期末普通股股东总数为9,042名以上"
       ],
       "reason": "报告期末普通股股东总数 9,042（精确值，非约数）。同页「表决权恢复的优先股股东总数」为**不适用**，两者不可混为一项。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-total-assets",
@@ -383,7 +405,9 @@
         "总资产较上年度末增长11.09%"
       ],
       "reason": "总资产 2,989,699,772.89 元、较上年度末 +1.09%（**时点存量**，非期间流量）。归母权益 2,870,211,976.11 元、+2.85%。两者单位是元、增幅是个位数，量级接近易混。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "f-eps-down",
@@ -413,7 +437,9 @@
         "基本每股收益同比增长9.09%"
       ],
       "reason": "基本每股收益 0.30 元/股（上年同期 0.33），**-9.09%**。EPS 降幅（-9.09%）大于净利润降幅（-2.07%），因为股本变化；两者不可互相替代。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     }
   ]
 }

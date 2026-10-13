@@ -8,7 +8,7 @@
     "annual",
     "sec_20f"
   ],
-  "notes": "TAL Education Group Form 20-F，财年截至 2024-02-29，HTML。开发集。本样本承载卡上要求的『TAL 监管业务约束』：监管规则对业务线的**禁止性约束**、公司已完成的合规动作、以及单一分部结构。载体提醒：SEC 文件 HTML 在现有公共路径里没有入口（实测 units=0），本样本观测为 UNAVAILABLE；金标先冻结事实。事实逐字取自原件。",
+  "notes": "TAL Education Group Form 20-F，财年截至 2024-02-29，HTML。开发集。本样本承载卡上要求的『TAL 监管业务约束』：监管规则对业务线的**禁止性约束**、公司已完成的合规动作、以及单一分部结构。载体提醒：SEC 文件 HTML 在现有公共路径里没有入口（实测 units=0），本样本观测为 UNAVAILABLE；金标先冻结事实。事实逐字取自原件。\n2026-10-13 观察入口纠正：此前transcript-only路径的0units不证明HTML不支持。当前观察器使用既有normalize_document公共前端；旧无支持报告为历史错误归因，不再作为能力结论。\n原HTML金标page=1为历史虚拟页标注，现以location_kind=document明确无物理页；召回只检查SHA对应原文的真实被选DOM locator，不声称存在PDF页码。",
   "facts": [
     {
       "id": "f-regulatory-term-is-not-double-reduction",
@@ -19,7 +19,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "or the Alleviating Burden Opinion Regarding Compulsory Education"
+            "exact_quote": "or the Alleviating Burden Opinion Regarding Compulsory Education",
+            "location_kind": "document"
           }
         ]
       ],
@@ -30,7 +31,9 @@
         "公司将该政策称为双减政策（double reduction）"
       ],
       "reason": "文件对 2021 年 7 月该政策的**自定术语**是「Alleviating Burden Opinion Regarding Compulsory Education」（完整名：Opinions on Further Alleviating the Burden of Homework and After-School Tutoring for Students in Compulsory Education）。文件里**从未出现**「double reduction」字样；把它写成「公司所称的双减政策」是把外部俗称冒充原文术语。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-cessation-is-completed-action",
@@ -41,7 +44,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "we ceased offering the K-9 Academic AST Services in the mainland of China at the end of 2021"
+            "exact_quote": "we ceased offering the K-9 Academic AST Services in the mainland of China at the end of 2021",
+            "location_kind": "document"
           }
         ]
       ],
@@ -54,7 +58,9 @@
         "公司正在退出K-9学科类培训"
       ],
       "reason": "停止 K-9 学科类课外辅导是**已完成的既成事实**（「ceased ... at the end of 2021」，过去时），不是计划或进行中。文件另处给出同一事件的另一种日期表述「by the end of December 2021」，引用时须与所用表述一致。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-not-a-discontinued-operation",
@@ -65,7 +71,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "the cessation of the K-9 Academic AST Services in the mainland of China did not represent a discontinued operation"
+            "exact_quote": "the cessation of the K-9 Academic AST Services in the mainland of China did not represent a discontinued operation",
+            "location_kind": "document"
           }
         ]
       ],
@@ -76,7 +83,9 @@
         "公司将该业务停止列报为终止经营"
       ],
       "reason": "公司明确说明这次业务停止**不构成**终止经营（not a discontinued operation，因不符合 ASC 205-20-45 的组成部分定义）。把它写成终止经营是会计口径错，会改变报表可比性理解。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-single-reportable-segment",
@@ -88,7 +97,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "the Group has one single operating and reportable segment"
+            "exact_quote": "the Group has one single operating and reportable segment",
+            "location_kind": "document"
           }
         ]
       ],
@@ -100,7 +110,9 @@
         "公司按多个分部报告业绩"
       ],
       "reason": "公司**只有一个**经营及报告分部。「learning services and others」与「learning content solutions」是**收入分解类别**，不是报告分部；把它们称作分部是结构错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-still-offers-ast-outside-mainland-k9",
@@ -111,7 +123,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "we offer Academic AST Services for select age groups in select countries and regions (except the K-9 age group in the mainland of China)"
+            "exact_quote": "we offer Academic AST Services for select age groups in select countries and regions (except the K-9 age group in the mainland of China)",
+            "location_kind": "document"
           }
         ]
       ],
@@ -123,7 +136,9 @@
         "公司已全面退出所有学科类课外辅导业务"
       ],
       "reason": "公司**仍然**在「select countries and regions」为「select age groups」提供 Academic AST 服务，唯一例外是中国内地的 K-9 年龄段。把停止范围扩大成「全面退出学科类培训」是范围错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-nonprofit-registration-requirement",
@@ -134,7 +149,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "existing Academic AST Institutions need to be registered as non-profit institutions"
+            "exact_quote": "existing Academic AST Institutions need to be registered as non-profit institutions",
+            "location_kind": "document"
           }
         ]
       ],
@@ -145,7 +161,9 @@
         "TAL 已将所有业务整体转为非营利机构"
       ],
       "reason": "「现有学科类培训机构需登记为非营利性机构」是**监管规则**（third-party），不是公司自身已完成的动作。把监管要求写成公司的既成事实是主体与语态双错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-foreign-ownership-prohibited",
@@ -156,7 +174,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "foreign ownership in Academic AST Institutions is prohibited, including through contractual arrangements"
+            "exact_quote": "foreign ownership in Academic AST Institutions is prohibited, including through contractual arrangements",
+            "location_kind": "document"
           }
         ]
       ],
@@ -168,7 +187,9 @@
         "外资可以通过协议控制方式持有学科类培训机构"
       ],
       "reason": "规则明文**禁止**外资持有学科类培训机构，且**特别点名**包括通过协议安排（contractual arrangements，即 VIE）的方式。写成「可通过协议控制」会把禁止读成许可，方向完全相反。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-no-listing-or-fundraising",
@@ -179,7 +200,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "Academic AST Institutions shall not raise funds by listing on the stock market"
+            "exact_quote": "Academic AST Institutions shall not raise funds by listing on the stock market",
+            "location_kind": "document"
           }
         ]
       ],
@@ -190,7 +212,9 @@
         "学科类培训机构可以上市融资"
       ],
       "reason": "规则禁止学科类培训机构**通过上市融资**，并禁止上市公司以股市募资投资该类机构、或以发行股份/支付现金购买其资产。这一条直接影响上游来源里该类主体的融资类文件是否可能存在。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-preschool-and-overseas-prohibitions",
@@ -201,7 +225,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "the provision of overseas education courses by PRC after-school tutoring institutions is strictly prohibited"
+            "exact_quote": "the provision of overseas education courses by PRC after-school tutoring institutions is strictly prohibited",
+            "location_kind": "document"
           }
         ]
       ],
@@ -213,7 +238,9 @@
         "中国境内课外辅导机构可向境外提供教育课程"
       ],
       "reason": "规则禁止中国境内课外辅导机构提供**境外教育课程**；同段还禁止学龄前儿童的线上培训与线下学科类（含外语）培训。多条禁止并存，任一条写反都会得出错误的市场边界。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-publishing-is-separate-regime",
@@ -224,7 +251,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "our subsidiaries and VIEs are not permitted to engage in publishing business under these regulations"
+            "exact_quote": "our subsidiaries and VIEs are not permitted to engage in publishing business under these regulations",
+            "location_kind": "document"
           }
         ]
       ],
@@ -236,7 +264,9 @@
         "TAL 母公司被禁止从事出版业务"
       ],
       "reason": "出版禁令是一项**独立监管制度**（出版物管理），且约束主体是「our **subsidiaries and VIEs**」，不是开曼母公司。把它并入课外辅导监管叙事、或把主体换成母公司，都是主体与制度双重错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-pending-draft-not-effective-law",
@@ -247,7 +277,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "these draft administrative regulations were released for public comment only"
+            "exact_quote": "these draft administrative regulations were released for public comment only",
+            "location_kind": "document"
           }
         ]
       ],
@@ -259,7 +290,9 @@
         "《校外培训管理条例》已正式施行"
       ],
       "reason": "教育部 2024-02-08 发布的《校外培训管理条例》在本报告日**仅为公开征求意见稿**（released for public comment only），其条文与生效日期可能变动。把征求意见稿写成已生效法律是效力状态错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-business-lines-are-two-disaggregations",
@@ -270,7 +303,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "We have since realigned our business focus towards (i) learning services and others, and (ii) learning content solutions"
+            "exact_quote": "We have since realigned our business focus towards (i) learning services and others, and (ii) learning content solutions",
+            "location_kind": "document"
           }
         ]
       ],
@@ -282,7 +316,9 @@
         "公司业务分为学习服务与学习内容解决方案两个报告分部"
       ],
       "reason": "公司自述重新聚焦于 (i) learning services and others 与 (ii) learning content solutions 两条线，但结合上一条事实，这两条是**收入分解**口径而非报告分部（公司只有一个分部）。两句必须一起读。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-product-wording-smart-books-not-smart-devices",
@@ -293,7 +329,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "Our primary learning content solutions currently include print books, smart books, mobile apps, and AI-driven learning devices."
+            "exact_quote": "Our primary learning content solutions currently include print books, smart books, mobile apps, and AI-driven learning devices.",
+            "location_kind": "document"
           }
         ]
       ],
@@ -306,7 +343,9 @@
         "公司主要学习内容解决方案包括智能设备（smart devices）"
       ],
       "reason": "原文列举为「print books, **smart books**, mobile apps, and **AI-driven learning devices**」；文件中**不存在**「smart device(s)」这一表述。把 AI-driven learning devices 简写成「smart devices」是换词，会让产品口径与原文不符。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-fy2024-revenue-recovery",
@@ -318,7 +357,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "Our total net revenues increased by 46.2% to $1,490.4 million for the fiscal year ended February 29, 2024 from $1,019.8 million"
+            "exact_quote": "Our total net revenues increased by 46.2% to $1,490.4 million for the fiscal year ended February 29, 2024 from $1,019.8 million",
+            "location_kind": "document"
           }
         ]
       ],
@@ -331,7 +371,9 @@
         "公司FY2024收入已恢复至FY2022水平"
       ],
       "reason": "FY2024 总收入 1,490.4 百万美元、同比 **+46.2%**（FY2023 为 1,019.8）。但 FY2022 为 4,390.9 百万美元，FY2024 仍**远低于**疫情前水平；只说「+46.2%」而不给基数，会读成已恢复。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-segment-revenue-disaggregation",
@@ -343,7 +385,8 @@
         [
           {
             "page": 1,
-            "exact_quote": "increase of $198.2 million in learning services and others and increase of $272.5 million in learning content solutions"
+            "exact_quote": "increase of $198.2 million in learning services and others and increase of $272.5 million in learning content solutions",
+            "location_kind": "document"
           }
         ]
       ],
@@ -355,7 +398,9 @@
         "公司总收入增加272.5百万美元"
       ],
       "reason": "总收入增量是 **470.6** 百万美元，由 learning services and others 增 198.2 与 learning content solutions 增 272.5 两部分构成。把 272.5（其中一项）当总收入增量是分解与合计错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     }
   ]
 }

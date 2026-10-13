@@ -46,7 +46,9 @@
       "reason": "7,504 是 2024-12-31 的门店存量总量（合計），不是净新增。2023→2024 的实际增量为 1,091，原件未印出该数，不得由基准推算。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-store-mainland-overseas",
@@ -88,7 +90,9 @@
       "reason": "内地 4,386 与海外 3,118 是区域小计，二者相加为 7,504。4,386 是含直营/合伙人/代理的内地总量，不是直营店数（直营仅 25 家）。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-store-operating-model",
@@ -124,7 +128,9 @@
       "reason": "经营模式三分：直营 / 名創合夥人 / 代理。经营模式是业务驱动，不能因表内数字密集被当作财务三表过滤掉。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-top-toy-total",
@@ -161,7 +167,9 @@
       "reason": "276 是 2024-12-31 的 TOP TOY 门店总量；2023 年为 148，增量 128 未印出。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-top-toy-mainland",
@@ -186,7 +194,9 @@
       "reason": "276 家中 272 家在中国内地，含海外门店仅 4 家；海外数由减法得出，原件未直接印出，故只把 272 作为金标事实。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-top-toy-overseas-commenced",
@@ -218,7 +228,9 @@
       "reason": "「2024 年开始扩展海外市场」是已启动的拓展事实，既不是收入实现也不是盈利。中英两栏是同一事实的两个语言车道。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "f-store-network-approximate",
@@ -239,7 +251,9 @@
       "reason": "正文用约数 over 7,500 / 约4,400 / 超过3,100，与其精确表值 7,504/4,386/3,118 并存。把约数当精确值、或把精确值说成约数，都属口径混淆。",
       "modality": "actual",
       "role": "company_filing",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     }
   ]
 }

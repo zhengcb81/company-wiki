@@ -234,6 +234,7 @@ def test_unreadable_facts_leave_the_recall_denominator():
         "route": None,
         "selected_locators": [],
         "selected_text": "",
+        "selected_evidence": [],
         "semantic_units": [],
         "claims": [],
         "coverage": {
@@ -289,6 +290,7 @@ def test_partially_unreadable_denominator_counts_only_readable_facts():
         "route": None,
         "selected_locators": [],
         "selected_text": "",
+        "selected_evidence": [],
         "semantic_units": [],
         "claims": [],
         "coverage": {

@@ -3,9 +3,8 @@
 Design rules enforced here:
 
 1. A fact is recalled only when the observation carries it through *replayable*
-   evidence: a selected locator whose span text contains a gold anchor quote,
-   or a claim whose text contains the anchor and whose evidence locators were
-   actually selected.
+   original evidence: actual selected locator -> original text/coordinates.
+   Flattened text and generated claims cannot prove their own provenance.
 2. ``coverage.native_scan``/``opaque_pages`` gate recall. An unread page yields
    ``UNAVAILABLE`` (cannot prove either way), never ``FAIL`` and never ``PASS``.
 3. ``coverage.complete``, schema validity and "a citation exists" never
@@ -22,6 +21,9 @@ from typing import Any
 
 from .schema import (
     CRITICAL,
+    REQUIRED_BUSINESS,
+    DISPOSITION_CONTEXT,
+    CORRECTNESS_IF_EMITTED,
     FAIL,
     NOT_EVALUATED,
     PASS,
@@ -112,6 +114,18 @@ def _selected_locator_set(observed: Mapping[str, Any]) -> set[str]:
 
 def _claims(observed: Mapping[str, Any]) -> list[dict[str, Any]]:
     return list(observed.get("claims") or [])
+
+
+def check_selected_source_material(observed: Mapping[str, Any], gold: Mapping[str, Any]) -> dict[str, Any]:
+    rows = observed.get("selected_evidence")
+    if rows is None:
+        return _check("integrity.selected_source_material", NOT_EVALUATED,
+                      expected="every selected locator carries original source text", observed=None,
+                      dimension="observation_integrity", detail="legacy source mapping not provided")
+    missing = sorted(_selected_locator_set(observed) - {row["locator"] for row in rows})
+    return _check("integrity.selected_source_material", FAIL if missing else PASS,
+                  expected="every selected locator carries original source text", observed=missing,
+                  evidence_refs=missing, dimension="observation_integrity")
 
 
 def check_unsupported_claims(observed: Mapping[str, Any], gold: Mapping[str, Any]) -> dict[str, Any]:
@@ -212,80 +226,103 @@ def _unescaped_pages(observed: Mapping[str, Any]) -> set[int]:
     return pages
 
 
-def _anchor_pages(fact: Mapping[str, Any]) -> set[int]:
-    pages: set[int] = set()
-    for support_set in fact.get("any_support_sets") or []:
-        for anchor in support_set:
-            if anchor.get("page") is not None:
-                pages.add(int(anchor["page"]))
-    return pages
+def _selected_source_rows(observed: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    selected = _selected_locator_set(observed)
+    return [row for row in observed.get("selected_evidence") or []
+            if row.get("locator") in selected]
 
 
-def _support_set_recalled(support_set: Sequence[Mapping[str, Any]], observed: Mapping[str, Any]) -> bool:
-    """A support set is recalled when every anchor is carried by one claim."""
-
-    haystacks: list[str] = []
-    for claim in _claims(observed):
-        locators = set(claim.get("evidence_locators") or [])
-        selected = _selected_locator_set(observed)
-        if not locators.intersection(selected):
-            continue
-        haystacks.append(claim.get("text") or "")
-    selected_text = observed.get("selected_text") or ""
-    haystacks.append(selected_text)
-    # A single claim may carry the whole set; otherwise selected text may.
-    for haystack in haystacks:
-        if all(anchor_matches(anchor.get("exact_quote") or "", haystack) for anchor in support_set):
-            return True
-    # Mixed case: each anchor found somewhere in the replayable material.
-    combined = "\n".join(haystacks)
-    return all(anchor_matches(anchor.get("exact_quote") or "", combined) for anchor in support_set)
+def _anchor_location_matches(anchor: Mapping[str, Any], row: Mapping[str, Any]) -> bool:
+    # Gold locators may be hand-labelled table hints; actual page/line coordinates
+    # are authoritative. No generated claim or flattened text can supply them.
+    if anchor.get("location_kind") == "document":
+        return True
+    if anchor.get("page") is not None and row.get("page") != anchor["page"]:
+        return False
+    if anchor.get("line") is not None:
+        start = row.get("line")
+        end = row.get("line_end") or start
+        if start is None or not start <= anchor["line"] <= end:
+            return False
+    return True
 
 
-def check_recall_fact(
-    fact: Mapping[str, Any], observed: Mapping[str, Any]
-) -> dict[str, Any]:
-    unsupported_pages = _unescaped_pages(observed)
+def _support_set_status(support_set: Sequence[Mapping[str, Any]], observed: Mapping[str, Any],
+                        *, require_same_scope: bool = False,
+                        context: bool = False) -> tuple[str, list[str]]:
+    rows = list(observed.get("context_evidence") or []) if context else _selected_source_rows(observed)
+    candidates = []
+    missing_position = False
+    for anchor in support_set:
+        matches = [row for row in rows if _anchor_location_matches(anchor, row)
+                   and anchor_matches(anchor.get("exact_quote") or "", row.get("text") or "")]
+        if not matches:
+            if any(anchor_matches(anchor.get("exact_quote") or "", row.get("text") or "")
+                   and ((anchor.get("page") is not None and row.get("page") is None)
+                        or (anchor.get("line") is not None and row.get("line") is None)) for row in rows):
+                missing_position = True
+            return (NOT_EVALUATED if missing_position else FAIL), []
+        known = [row for row in matches if all(not anchor.get(key) or row.get(key) == anchor[key]
+                                             for key in ("scope_id", "source_role", "period"))]
+        if not known:
+            unknown = any(any(anchor.get(key) and row.get(key) is None
+                              for key in ("scope_id", "source_role", "period")) for row in matches)
+            return (NOT_EVALUATED if unknown else FAIL), []
+        candidates.append(known)
+    if require_same_scope:
+        shared = set.intersection(*[{row.get("scope_id") for row in group if row.get("scope_id")}
+                                    for group in candidates])
+        if not shared:
+            if any(any(not row.get("scope_id") for row in group) for group in candidates):
+                return NOT_EVALUATED, []
+            return FAIL, []
+        scope = sorted(shared)[0]
+        candidates = [[row for row in group if row.get("scope_id") == scope] for group in candidates]
+    return PASS, sorted({row["locator"] for group in candidates for row in group})
+
+
+def _group_unread(support_set: Sequence[Mapping[str, Any]], observed: Mapping[str, Any]) -> bool:
     coverage = observed.get("coverage") or {}
-    native_scan = coverage.get("native_scan")
-    anchor_pages = _anchor_pages(fact)
+    opaque = _unescaped_pages(observed)
+    read_pages = coverage.get("read_pages")
+    return any(anchor.get("location_kind") != "document" and
+               (anchor.get("page") in opaque or
+                (read_pages is not None and anchor.get("page") is not None
+                 and anchor["page"] not in read_pages)) for anchor in support_set)
 
-    if native_scan == "unavailable":
-        return _check(
-            f"recall.{fact['id']}",
-            UNAVAILABLE,
-            expected="fact recalled from read pages",
-            observed="no native scan",
-            dimension="critical_fact_recall",
-            detail="source text was not read, so recall is unprovable",
-        )
-    if anchor_pages and anchor_pages.intersection(unsupported_pages):
-        return _check(
-            f"recall.{fact['id']}",
-            UNAVAILABLE,
-            expected="fact recalled from read pages",
-            observed=sorted(anchor_pages.intersection(unsupported_pages)),
-            dimension="critical_fact_recall",
-            detail="evidence page is opaque/unread; recall unprovable",
-        )
 
-    for support_set in fact.get("any_support_sets") or []:
-        if _support_set_recalled(support_set, observed):
-            return _check(
-                f"recall.{fact['id']}",
-                PASS,
-                expected="fact present with replayable evidence",
-                observed="recalled",
-                dimension="critical_fact_recall",
-            )
-    return _check(
-        f"recall.{fact['id']}",
-        FAIL,
-        expected="fact present with replayable evidence",
-        observed="absent",
-        dimension="critical_fact_recall",
-        detail=fact.get("reason") or "",
-    )
+def check_recall_fact(fact: Mapping[str, Any], observed: Mapping[str, Any]) -> dict[str, Any]:
+    target = fact.get("target_kind", REQUIRED_BUSINESS)
+    dimension = "disposition_context" if target == DISPOSITION_CONTEXT else "critical_fact_recall"
+    base = dict(expected="fact present with source-bound selected evidence", dimension=dimension)
+    if target == CORRECTNESS_IF_EMITTED:
+        return _check(f"recall.{fact['id']}", NOT_EVALUATED, observed="optional output",
+                      detail="ordinary financial/context numbers are not mandatory business extraction", **base)
+    if (observed.get("coverage") or {}).get("native_scan") == "unavailable":
+        return _check(f"recall.{fact['id']}", UNAVAILABLE, observed="no native scan", **base)
+    field = "context_evidence" if target == DISPOSITION_CONTEXT else "selected_evidence"
+    if observed.get(field) is None:
+        return _check(f"recall.{fact['id']}", NOT_EVALUATED, observed="no source-bound mapping",
+                      detail=f"{field} absent; legacy flat text and claims are not source evidence", **base)
+    outcomes = []
+    for group in fact.get("any_support_sets") or []:
+        if _group_unread(group, observed):
+            outcomes.append(UNAVAILABLE)
+            continue
+        status, refs = _support_set_status(group, observed,
+                                           require_same_scope=bool(fact.get("require_same_scope")),
+                                           context=target == DISPOSITION_CONTEXT)
+        if status == PASS:
+            return _check(f"recall.{fact['id']}", PASS, observed="recalled", evidence_refs=refs, **base)
+        outcomes.append(status)
+    if FAIL in outcomes:
+        status = FAIL if is_critical(fact) else PARTIAL
+    elif NOT_EVALUATED in outcomes:
+        status = NOT_EVALUATED
+    else:
+        status = UNAVAILABLE
+    return _check(f"recall.{fact['id']}", status, observed="absent or unread",
+                  detail=fact.get("reason") or "", **base)
 
 
 # ---------------------------------------------------------------------------
@@ -539,10 +576,14 @@ def _token_preserved(token: str, haystack: str) -> bool:
 def check_basis_fact(fact: Mapping[str, Any], observed: Mapping[str, Any]) -> dict[str, Any]:
     check_id = f"basis.{fact['id']}"
     recall = check_recall_fact(fact, observed)
-    if recall["status"] != PASS:
+    related = _related_claims(fact, observed)
+    if fact.get("target_kind") == CORRECTNESS_IF_EMITTED and not related:
+        return _check(check_id, NOT_EVALUATED, expected="correct if emitted", observed="not emitted",
+                      dimension="role_modality_quantity", detail="optional fact was not output")
+    if recall["status"] != PASS and not related:
         return _check(
             check_id,
-            recall["status"],
+            NOT_EVALUATED,
             expected="fact carried with correct role/modality/quantity basis",
             observed=recall["observed"],
             dimension="role_modality_quantity",
@@ -568,9 +609,10 @@ def check_basis_fact(fact: Mapping[str, Any], observed: Mapping[str, Any]) -> di
             problems.append("question_modality_without_question_form")
 
     # must_preserve tokens must survive somewhere in the replayable material.
-    replayable = "\n".join(
-        [claim.get("text") or "" for claim in _claims(observed)] + [observed.get("selected_text") or ""]
-    )
+    fact_rows = [row for row in _selected_source_rows(observed)
+                 if any(_anchor_location_matches(anchor, row)
+                        for group in fact.get("any_support_sets") or [] for anchor in group)]
+    replayable = "\n".join(row.get("text") or "" for row in fact_rows)
     for token in fact.get("must_preserve") or []:
         if _token_preserved(token, replayable):
             continue
@@ -706,7 +748,7 @@ def check_basis_fact(fact: Mapping[str, Any], observed: Mapping[str, Any]) -> di
             elif declared == "question" and _shares_fact_subject(fact, text):
                 problems.append(f"question_premise_carried_as_claim:{role}")
 
-    status = FAIL if problems else PASS
+    status = FAIL if problems else PASS if fact_rows else NOT_EVALUATED
     return _check(
         check_id,
         status,
@@ -735,26 +777,32 @@ def check_context(observed: Mapping[str, Any], gold: Mapping[str, Any]) -> dict[
             dimension="context_completeness",
             detail="baseline has no new structure; context completeness unmeasurable",
         )
-    incomplete = [
-        unit.get("semantic_id")
-        for unit in units
-        if (unit.get("completeness") or "unknown") != "complete"
-    ]
     selected = _selected_locator_set(observed)
-    detached = [
-        unit.get("semantic_id")
-        for unit in units
-        if not set(unit.get("locators") or []).intersection(selected)
-    ]
-    problems = {"incomplete_units": incomplete, "units_without_selected_members": detached}
-    status = FAIL if incomplete or detached else PASS
-    return _check(
-        "context.semantic_units",
-        status,
-        expected="all semantic units complete and attached",
-        observed=problems,
-        dimension="context_completeness",
-    )
+    bound = {row["locator"] for row in _selected_source_rows(observed)}
+    incomplete = [unit.get("semantic_id") for unit in units
+                  if unit.get("completeness") not in {None, "unknown", "complete"}]
+    missing: dict[str, list[str]] = {}
+    unknown = []
+    for unit in units:
+        required = unit.get("required_locators")
+        members = set(unit.get("locators") or [])
+        if not members:
+            missing[unit["semantic_id"]] = ["semantic unit has no original members"]
+        if not members.issubset(selected):
+            missing[unit["semantic_id"]] = sorted(members - selected)
+        if required is None or unit.get("dependencies_resolved") is not True:
+            unknown.append(unit["semantic_id"])
+            continue
+        required_set = members | set(required)
+        absent = required_set - (selected & bound)
+        if absent:
+            missing[unit["semantic_id"]] = sorted(absent)
+    status = FAIL if incomplete or missing else NOT_EVALUATED if unknown else PASS
+    return _check("context.semantic_units", status,
+                  expected="all members and resolved required context have selected source text",
+                  observed={"incomplete_units": incomplete, "missing_context": missing,
+                            "dependency_observation_missing": unknown},
+                  dimension="context_completeness")
 
 
 # ---------------------------------------------------------------------------
@@ -1122,6 +1170,13 @@ def check_semantics_entailment(
     from .review import ENTAILED_VERDICTS, UNDECIDED_VERDICTS, UNSUPPORTED_VERDICTS
 
     reviewed = list(review.get("claims") or [])
+    indices = [row.get("claim_index") for row in reviewed]
+    expected_indices = set(range(len(_claims(observed))))
+    valid_indices = [index for index in indices if type(index) is int and index in expected_indices]
+    missing_review = sorted(expected_indices - set(valid_indices))
+    invalid_indices = [index for index in indices if type(index) is not int or index not in expected_indices]
+    duplicates = sorted({index for index in valid_indices if valid_indices.count(index) > 1})
+    wrong_sample = review.get("sample_id") not in (None, gold.get("sample_id"))
     unsupported = [row for row in reviewed if row["verdict"] in UNSUPPORTED_VERDICTS]
     undecided = [row for row in reviewed if row["verdict"] in UNDECIDED_VERDICTS]
     unknown = [
@@ -1132,9 +1187,11 @@ def check_semantics_entailment(
         and row["verdict"] not in UNDECIDED_VERDICTS
     ]
 
-    if unsupported:
+    if wrong_sample:
+        status = PARTIAL
+    elif unsupported:
         status = FAIL
-    elif undecided or unknown:
+    elif undecided or unknown or missing_review or invalid_indices or duplicates:
         status = PARTIAL
     else:
         status = PASS
@@ -1148,6 +1205,10 @@ def check_semantics_entailment(
             "unsupported": unsupported,
             "undecided": undecided,
             "unrecognized_verdicts": unknown,
+            "missing_claim_reviews": missing_review,
+            "invalid_claim_indices": invalid_indices,
+            "duplicate_claim_indices": duplicates,
+            "wrong_sample": wrong_sample,
         },
         evidence_refs=[
             locator
@@ -1188,7 +1249,8 @@ def spot_read_list(observed: Mapping[str, Any], gold: Mapping[str, Any]) -> list
 
 
 def collect_recall_facts(gold: Mapping[str, Any]) -> list[Mapping[str, Any]]:
-    return list(gold.get("facts") or [])
+    return [fact for fact in gold.get("facts") or []
+            if fact.get("target_kind", REQUIRED_BUSINESS) == REQUIRED_BUSINESS]
 
 
 def is_critical(fact: Mapping[str, Any]) -> bool:

@@ -8,7 +8,7 @@
     "annual",
     "sec_10k"
   ],
-  "notes": "HOLDOUT. NVIDIA CORP Form 10-K, fiscal year ended 2025-01-26（财年与日历年错位：FY2025 ≈ 日历年 2024）。该公司从未出现在 ROOT 调查、调参讨论或设计发现中。事实由独立子代理逐字读取原件回报；子代理另发现朴素 HTML 去标签会把注册人读成「NVIDIA CORP ORATION」（ix:nonNumeric 元素在 ORATION 前闭合），该发现记录在 handoff 中。",
+  "notes": "HOLDOUT. NVIDIA CORP Form 10-K, fiscal year ended 2025-01-26（财年与日历年错位：FY2025 ≈ 日历年 2024）。该公司从未出现在 ROOT 调查、调参讨论或设计发现中。事实由独立子代理逐字读取原件回报；子代理另发现朴素 HTML 去标签会把注册人读成「NVIDIA CORP ORATION」（ix:nonNumeric 元素在 ORATION 前闭合），该发现记录在 handoff 中。\n2026-10-13 观察入口纠正：此前transcript-only路径的0units不证明HTML不支持。当前观察器使用既有normalize_document公共前端；旧无支持报告为历史错误归因，不再作为能力结论。\n原HTML金标page=1为历史虚拟页标注，现以location_kind=document明确无物理页；召回只检查SHA对应原文的真实被选DOM locator，不声称存在PDF页码。",
   "facts": [
     {
       "id": "h-two-segments",
@@ -20,13 +20,15 @@
         [
           {
             "line": 1,
-            "exact_quote": "We report our business results in two segments."
+            "exact_quote": "We report our business results in two segments.",
+            "location_kind": "document"
           }
         ],
         [
           {
             "line": 1,
-            "exact_quote": "Our two operating segments are \"Compute & Networking\" and \"Graphics.\""
+            "exact_quote": "Our two operating segments are \"Compute & Networking\" and \"Graphics.\"",
+            "location_kind": "document"
           }
         ]
       ],
@@ -40,7 +42,9 @@
         "Data Center是一个报告分部"
       ],
       "reason": "NVIDIA 报告 **2 个分部**（Compute & Networking、Graphics），但按 **4 个市场**（Data Center、Gaming、Professional Visualization、Automotive）列示收入。两者是对同一总额的**不同切分**，不是同一套口径。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "h-four-markets-not-segments",
@@ -52,7 +56,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "Our platforms address four large markets where our expertise is critical: Data Center, Gaming, Professional Visualization, and Automotive."
+            "exact_quote": "Our platforms address four large markets where our expertise is critical: Data Center, Gaming, Professional Visualization, and Automotive.",
+            "location_kind": "document"
           }
         ]
       ],
@@ -65,7 +70,9 @@
         "Data Center分部收入为115,186百万美元"
       ],
       "reason": "Data Center 是**市场（end market）**，不是分部。115,186 百万美元是市场口径；Compute & Networking 分部是 116,193 百万美元。两个数都是 FY2025 的「NVIDIA 收入」，但口径不同、数值不同——写成「Data Center 分部」是双重错误。这是本样本最重要的陷阱。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "h-total-revenue-and-growth",
@@ -77,7 +84,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "Revenue for fiscal year 2025 was $130.5 billion, up 114% from a year ago."
+            "exact_quote": "Revenue for fiscal year 2025 was $130.5 billion, up 114% from a year ago.",
+            "location_kind": "document"
           }
         ]
       ],
@@ -90,7 +98,9 @@
         "总收入同比增长142%"
       ],
       "reason": "FY2025 总收入 130.5 十亿美元、同比 **+114%**。142% 是 **Data Center** 的增速，9% 是 **Gaming** 的增速——三个增速同段相邻，最易顶替。且 130.5 是**十亿**美元（表内 130,497 百万美元）。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-fiscal-year-misaligned",
@@ -101,7 +111,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "For the fiscal year ended January 26 , 2025"
+            "exact_quote": "For the fiscal year ended January 26 , 2025",
+            "location_kind": "document"
           }
         ]
       ],
@@ -113,7 +124,9 @@
         "2025财年指截至2025年12月31日的年度"
       ],
       "reason": "财年截至 **2025-01-26**，FY2025 = 2024-01-29 → 2025-01-26，绝大部分落在**日历年 2024**。与 MongoDB 的 FY2026（≈日历年 2025）相比，两家公司的财年错位**方向相同但相差一年**；按日历年做跨公司对比会把两家都放错位置。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "h-segment-vs-market-not-interchangeable",
@@ -125,11 +138,13 @@
         [
           {
             "line": 1,
-            "exact_quote": "116,193"
+            "exact_quote": "116,193",
+            "location_kind": "document"
           },
           {
             "line": 1,
-            "exact_quote": "115,186"
+            "exact_quote": "115,186",
+            "location_kind": "document"
           }
         ]
       ],
@@ -141,7 +156,9 @@
         "Compute & Networking分部收入为115,186百万美元"
       ],
       "reason": "Compute & Networking（分部）116,193 与 Data Center（市场）115,186 相差 1,007 百万美元——因为 Graphics 分部里也有 Data Center 相关收入、Compute & Networking 里也有非 Data Center 收入。两者不可互换，也不可相加。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "h-graphics-operating-income-down",
@@ -153,7 +170,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "Gaming revenue for fiscal year 2025 was up 9% from a year ago, driven by sales of our GeForce RTX 40 Series GPUs."
+            "exact_quote": "Gaming revenue for fiscal year 2025 was up 9% from a year ago, driven by sales of our GeForce RTX 40 Series GPUs.",
+            "location_kind": "document"
           }
         ]
       ],
@@ -165,7 +183,9 @@
         "Graphics分部经营利润同比增长9%"
       ],
       "reason": "Gaming（市场）收入 +9%；而 Graphics（分部）**经营利润下降 13%**、收入增长 6%。收入增速与经营利润增速方向相反，行与行不可混用——混用会凭空造出利润率。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-data-center-growth-driver",
@@ -177,7 +197,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "Data Center revenue for fiscal year 2025 was up 142% from a year ago."
+            "exact_quote": "Data Center revenue for fiscal year 2025 was up 142% from a year ago.",
+            "location_kind": "document"
           }
         ]
       ],
@@ -189,7 +210,9 @@
         "公司总收入同比增长142%"
       ],
       "reason": "142% 是 **Data Center 市场**的增速（114% 才是总收入）。把分部/市场增速当公司增速是层级错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "h-no-nongaap-measure",
@@ -200,7 +223,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "Gross margins increased to 75.0% in fiscal year 2025 from 72.7% in fiscal year 2024."
+            "exact_quote": "Gross margins increased to 75.0% in fiscal year 2025 from 72.7% in fiscal year 2024.",
+            "location_kind": "document"
           }
         ]
       ],
@@ -213,7 +237,9 @@
         "公司披露了非GAAP每股收益"
       ],
       "reason": "本 10-K 中 **non-GAAP 出现次数为 0**（原始 HTML 与提取文本均为 0），只有 GAAP 毛利率 75.0%（上年 72.7%）。为 NVIDIA 编造任何 non-GAAP 指标都是无支撑幻觉——这是子代理用正则计数验证过的显式缺失。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "h-rpo-scoped-to-long-contracts",
@@ -225,13 +251,15 @@
         [
           {
             "line": 1,
-            "exact_quote": "revenue related to remaining performance obligations from contracts greater than one year in length was $ 1.7 billion"
+            "exact_quote": "revenue related to remaining performance obligations from contracts greater than one year in length was $ 1.7 billion",
+            "location_kind": "document"
           }
         ],
         [
           {
             "line": 1,
-            "exact_quote": "which includes $ 1.6 billion from deferred revenue and $ 151 million which has not yet been billed nor recognized as revenue"
+            "exact_quote": "which includes $ 1.6 billion from deferred revenue and $ 151 million which has not yet been billed nor recognized as revenue",
+            "location_kind": "document"
           }
         ]
       ],
@@ -244,7 +272,9 @@
         "NVIDIA剩余履约义务总额为17亿美元"
       ],
       "reason": "1.7 十亿美元是「**合同期超过一年**」的 RPO，不是全部 RPO：含递延收入 1.6 十亿美元＋未开票未确认 151 百万美元。把它当总 RPO 会低估；把 151 百万美元当总额会错一个数量级。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "h-rpo-recognition-timing",
@@ -256,7 +286,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "Approximately 39 % of revenue from contracts greater than one year in length will be recognized over the next twelve months"
+            "exact_quote": "Approximately 39 % of revenue from contracts greater than one year in length will be recognized over the next twelve months",
+            "location_kind": "document"
           }
         ]
       ],
@@ -268,7 +299,9 @@
         "39%的RPO已在报告期内确认收入"
       ],
       "reason": "39% 是**预计未来 12 个月将确认**的比例（前瞻语态），不是已确认。与 1.7 十亿美元同句相邻，时态写错即错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "h-customer-concentration-direct",
@@ -280,7 +313,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "Sales to direct Customers A, B and C represented 12%, 11% and 11% of total revenue, respectively, for fiscal year 2025"
+            "exact_quote": "Sales to direct Customers A, B and C represented 12%, 11% and 11% of total revenue, respectively, for fiscal year 2025",
+            "location_kind": "document"
           }
         ]
       ],
@@ -293,7 +327,9 @@
         "NVIDIA FY2025最大客户占收入114%"
       ],
       "reason": "三个直接客户分别占 **12% / 11% / 11%**。与公司的 114% 收入增速数值形态相近，取错即荒谬；且这是**占总额**比例，不是增速。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "h-indirect-customer-estimate",
@@ -304,13 +340,15 @@
         [
           {
             "line": 1,
-            "exact_quote": "Indirect customer revenue is an estimation based upon multiple factors"
+            "exact_quote": "Indirect customer revenue is an estimation based upon multiple factors",
+            "location_kind": "document"
           }
         ],
         [
           {
             "line": 1,
-            "exact_quote": "Actual indirect customer revenue may differ from our estimates."
+            "exact_quote": "Actual indirect customer revenue may differ from our estimates.",
+            "location_kind": "document"
           }
         ]
       ],
@@ -322,7 +360,9 @@
         "间接客户收入为经审计的精确数据"
       ],
       "reason": "间接客户收入是**估算**，公司明示实际值可能与估算不同。把估算当已测量事实陈述会高估精度——精度错也是一种幻觉。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "h-geo-revenue-share",
@@ -334,7 +374,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "Revenue from sales to customers outside of the United States accounted for 53% and 56% of total revenue for fiscal years 2025 and 2024, respectively."
+            "exact_quote": "Revenue from sales to customers outside of the United States accounted for 53% and 56% of total revenue for fiscal years 2025 and 2024, respectively.",
+            "location_kind": "document"
           }
         ]
       ],
@@ -347,7 +388,9 @@
         "美国境内收入占比53%"
       ],
       "reason": "53% / 56% 是**美国境外**收入占比（FY2025 低于 FY2024）。主体写反会把地域结构颠倒。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "h-forward-looking-export-control",
@@ -358,7 +401,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "After a 120-day delayed compliance period, the IFR will, unless modified, impose a worldwide licensing requirement"
+            "exact_quote": "After a 120-day delayed compliance period, the IFR will, unless modified, impose a worldwide licensing requirement",
+            "location_kind": "document"
           }
         ]
       ],
@@ -370,7 +414,9 @@
         "全球许可要求已生效并已实施"
       ],
       "reason": "该出口管制规则是**附条件的前瞻陈述**：「will, unless modified」＋120 天延迟合规期。写成已生效是语态错误，且漏掉「unless modified」这一关键限定。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "required_business",
+      "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
     },
     {
       "id": "h-prose-vs-table-rounding",
@@ -382,13 +428,15 @@
         [
           {
             "line": 1,
-            "exact_quote": "130,497"
+            "exact_quote": "130,497",
+            "location_kind": "document"
           }
         ],
         [
           {
             "line": 1,
-            "exact_quote": "Revenue for fiscal year 2025 was $130.5 billion"
+            "exact_quote": "Revenue for fiscal year 2025 was $130.5 billion",
+            "location_kind": "document"
           }
         ]
       ],
@@ -400,7 +448,9 @@
         "FY2025总收入为130,497十亿美元"
       ],
       "reason": "正文写 130.5 十亿美元（四舍五入），表内是 130,497 **百万**美元。把表内的百万单位当十亿会放大一千倍；把正文的约数当精确值则损失精度。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-registrant-name-corruption",
@@ -411,7 +461,8 @@
         [
           {
             "line": 1,
-            "exact_quote": "NVIDIA CORP"
+            "exact_quote": "NVIDIA CORP",
+            "location_kind": "document"
           }
         ]
       ],
@@ -422,7 +473,9 @@
         "NVIDIA CORP ORATION"
       ],
       "reason": "独立子代理核实：朴素 HTML 去标签会把注册人渲染成「NVIDIA CORP ORATION」，因为 `ix:nonNumeric` 元素在字面文本 `ORATION` 之前闭合。正确名称为 **NVIDIA CORP**。这是文档理解本身的解析陷阱，不是内容陷阱——本基准把它固化为可检验约束。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     }
   ]
 }

@@ -13,6 +13,44 @@ The benchmark never derives expectations from the selector's output, never
 imports `company_wiki` into the oracle, and never edits production code to make
 a result pass.
 
+## Reception repair, 2026-10-13
+
+The previous recall implementation incorrectly accepted flattened selected text
+or generated claims as original evidence. Old recall rates and the statement
+that general HTML had no frontend are **superseded diagnostic observations**,
+not valid current quality measurements. Original sources, quotes, importance,
+the second HK sample and CID legibility checks are retained.
+
+Current recall uses only actual selected locator -> original-text rows, with
+source page/line constraints and AND within a support group / OR between groups.
+One opaque alternative cannot invalidate another readable complete group.
+Missing legacy source mappings report `NOT_EVALUATED`; claims cannot supply them.
+
+Gold target classes are `required_business`, `disposition_context` and
+`correctness_if_emitted`. Pure financial quarters can legitimately produce zero
+selected evidence, zero summary and zero model calls. Every financial claim that
+is emitted remains subject to direction/unit/period and contradiction checks.
+Normal business misses remain visible as `PARTIAL`; critical business misses fail.
+
+Declared `complete` is not context proof. Actual required original locators and
+resolved dependencies must be observed. An unaudited generated summary makes
+whole quality `PARTIAL`; an empty/incomplete/duplicate semantic review cannot
+certify all claims. Mutation detection compares individual checks against the
+baseline, so a pre-existing `PARTIAL` never counts as automatic detection.
+
+Read the additive [evidence contract](EVIDENCE_CONTRACT.md). The independent gold
+responsibility changes and reasons are in
+`.planning/du-benchmark-reception/gold-classification.json`; no support quote or
+importance was removed. Historical holdout split labels are preserved for paired
+regression, but samples already inspected by the project are **not a fresh blind
+validation set**.
+
+Real Microsoft FY2025 10-K HTML: existing normalization read 5,215 units;
+96 selected spans all mapped to original units, no new parser. The current
+baseline still misses four of eight required critical business facts (4/8 recall,
+`FAIL`). This is a measured remaining production quality gap, not a broken
+benchmark. Native baseline emits no summary, so model fidelity is untested.
+
 ## Entry points
 
 ```python
@@ -51,7 +89,7 @@ Keep it outside the worktree (for example `~/.du-bench/bindings.local.json`) so
 the repository stays clean. Originals are never copied, and a missing binding or
 SHA-256 mismatch yields `UNAVAILABLE` — never a substituted or synthetic document.
 
-## Measured baseline (development vs holdout)
+## Historical baseline before reception repair (not current quality acceptance)
 
 Reported separately and never merged: the development samples were used to tune
 rules, so only the holdout split speaks to generalisation. Facts that could not
@@ -130,7 +168,7 @@ deterministic checkers ever become strong enough to make review redundant.
 
 In `native` mode the benchmark **observes** the existing public surface
 (`source_catalog.narrative_evidence.parse_pdf_bytes` / `parse_transcript_text` /
-`select_narrative_evidence`) and never reimplements selection. When ROOT injects
+`document_normalization.normalize_document` / `select_narrative_evidence`) and never reimplements selection. When ROOT injects
 a real adapter, `observer.observe_du_adapter()` passes a `du-input/1` mapping
 through it.
 
@@ -223,7 +261,7 @@ mutation, one of three outcomes:
 
 Current: **53/53 applicable mutations detected, 42 not applicable.**
 
-## Carrier support
+## Current carrier support
 
 `observer.carrier_support()` reports what the existing public path can actually
 take in, without needing an original:
@@ -231,15 +269,15 @@ take in, without needing an original:
 | carrier | supported | entry point |
 |---|---|---|
 | `.pdf` | yes | `parse_pdf_bytes` |
-| `.txt` / `.md` | yes | `parse_transcript_text` (transcript layout) |
-| `.htm` / `.html` | **no** | none — the only HTML path expects a transcript |
-| `.pptx` | no | none |
+| `.txt` / `.md` | yes | `parse_transcript_text` |
+| `.htm` / `.html` | yes | existing `normalize_document` HTML frontend |
+| `.pptx` / `.docx` | yes | existing `normalize_document` frontends (opaque/OCR gaps stay explicit) |
 
 A carrier the path cannot take in is reported `UNAVAILABLE`, and native run
 reports list the unsupported suffixes explicitly, so "unsupported carrier" can
 never be mistaken for "document with no business content".
 
-## Measured baseline on the eleven real originals (node C)
+## Historical pre-repair baseline on real originals (do not reuse its HTML attribution)
 
 Read-only replay through the existing public parser/selector, 2026-10-13.
 Development and holdout are kept apart on purpose.
@@ -273,7 +311,7 @@ These FAILs are the deliverable, not a broken test. Confirmed:
 ## Tests
 
 ```bash
-# default: fast, fully offline (100 tests, ~2s)
+# default: fast, fully offline (143 passed / 7 real-data skips, 3.47s on reception host)
 python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q
 
 # real originals, opt-in (needs the local bindings file)

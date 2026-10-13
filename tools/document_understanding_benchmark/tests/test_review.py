@@ -186,6 +186,8 @@ def test_review_cannot_turn_a_missing_fact_into_a_pass():
     observed = good_observed()
     observed["claims"] = [c for c in observed["claims"] if "不生产VC" not in c["text"]]
     observed["selected_text"] = observed["selected_text"].replace("公司不生产VC。", "")
+    observed["selected_evidence"] = [row for row in observed["selected_evidence"] if "不生产VC" not in row["text"]]
+    observed["selected_locators"] = [loc for loc in observed["selected_locators"] if loc != "loc:v1/page:3/paragraph:12"]
     result = evaluate(
         observed,
         GOLD,

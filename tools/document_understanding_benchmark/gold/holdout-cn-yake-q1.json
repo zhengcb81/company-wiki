@@ -38,7 +38,9 @@
         "本报告期营业收入同比下降8.69%"
       ],
       "reason": "营业收入 965,112,203.01 元，同比 **+8.69%**。与经营活动现金流量净额的 -31.89% 同表相邻，符号易串。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-net-profit-up",
@@ -68,7 +70,9 @@
         "归母净利润同比增长29.76%"
       ],
       "reason": "归母净利润 148,552,419.40 元、+22.14%；扣非归母净利润 +29.76%。两个增速相邻，且扣非（29.76%）高于归母（22.14%），互换即错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-deducted-profit-up",
@@ -98,7 +102,9 @@
         "扣非净利润同比增长22.14%"
       ],
       "reason": "扣非归母净利润 137,563,953.95 元、+29.76%。与归母 22.14% 构成成对陷阱。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-cashflow-down-despite-profit",
@@ -128,7 +134,9 @@
         "经营活动现金流量净额同比增长31.89%"
       ],
       "reason": "经营活动现金流量净额 70,068,337.64 元（**为正**），但同比 **-31.89%（下降）**。这是「利润增长、经营现金流转弱」的组合：正负号与增减方向都不能读错。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-not-audited",
@@ -156,7 +164,9 @@
         "本季度报告已经审计"
       ],
       "reason": "「第一季度报告是否经过审计」勾选 √ 否。本文的勾选形式是「□ 是 √ 否」，与广联达的「□是 ☐否」排版不同——同一语义两种排版，正是 holdout 要覆盖的形态差异。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "h-no-restatement",
@@ -179,7 +189,9 @@
         "公司已追溯重述以前年度会计数据"
       ],
       "reason": "同样是否定勾选（√ 否），说明本期与上期口径可比。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     },
     {
       "id": "h-rd-expense-up",
@@ -214,7 +226,9 @@
         "研发费用下降"
       ],
       "reason": "研发费用 26,307,400 元、+63.81%，原因为「加大了对研发资金的投入」。变动原因表里的这一条是**真实的公司自述**，与「其他收益因补贴增加」等非经营性原因必须区分开。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-construction-in-progress",
@@ -250,7 +264,9 @@
         "国产化项目已完工投产"
       ],
       "reason": "在建工程期末 420,898,852 元、较期初 +77.99%，原因是国产化项目新增投资。420,898,852 是**期末余额（存量）**，不是本期新增额（新增额约为 184,429,712 元，原件未直接印出，故不作金标）；且「在建」不等于完工投产。这是本项目最有价值的 holdout 事实。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-short-term-loan-up",
@@ -280,7 +296,9 @@
         "短期借款为报告期新增424,106,185元"
       ],
       "reason": "短期借款期末 424,106,185 元、+72.79%，原因为新增流动资金贷款。与在建工程同理：期末存量与期间增量不可混。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-investment-income-zero",
@@ -310,7 +328,9 @@
         "本季度收到华泰瑞联基金分红"
       ],
       "reason": "投资收益本期为空、变动 -100.00%，公司原因为「本季度**未**收到华泰瑞联基金分红」。含明确否定，且本期单元格为空白——空白不等于零收入已实现。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-top-shareholders",
@@ -346,7 +366,9 @@
         "国家集成电路产业投资基金为第一大股东"
       ],
       "reason": "第一大股东沈琦持股 22.00%、104,721,941 股；国家集成电路产业投资基金 5.00% 为第三。股东名次易被按知名度重排。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-related-party-note",
@@ -370,7 +392,9 @@
         "沈锡强为沈琦、沈馥的兄弟"
       ],
       "reason": "公告原文是「沈锡强为沈琦、沈馥兄弟的**父亲**」——即沈锡强是父辈，沈琦沈馥是兄弟。这种亲属表述极易读反。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "普通财务/股东数字不是强制业务抽取目标；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "h-no-other-significant-matters",
@@ -399,7 +423,9 @@
         "公司在报告中披露了其他重要事项"
       ],
       "reason": "「三、其他重要事项」勾选**不适用**。这与中微季报「其他提醒事项：不适用」同源：不适用是明确状态，不能据此编造事项，也不能因为整类为空就把整份季报判为无业务。",
-      "fact_scope": "narrative"
+      "fact_scope": "narrative",
+      "target_kind": "disposition_context",
+      "classification_reason": "来源形态、期间、披露/读取状态属于路由与覆盖上下文，不强迫进入业务摘要。"
     }
   ]
 }

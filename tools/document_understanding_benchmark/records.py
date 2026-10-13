@@ -14,6 +14,9 @@ from .schema import (
     CRITICAL,
     DEVELOPMENT,
     FACT_SCOPES,
+    TARGET_KINDS,
+    DISPOSITION_CONTEXT,
+    REQUIRED_BUSINESS,
     GOLD_SCHEMA_VERSION,
     IMPORTANCES,
     MODALITY_VALUES,
@@ -40,7 +43,10 @@ def _validate_quote_anchor(anchor: Any, where: str) -> dict[str, Any]:
     mapping = _require_mapping(anchor, where)
     page = mapping.get("page")
     line = mapping.get("line")
-    if page is None and line is None:
+    location_kind = mapping.get("location_kind", "page" if page is not None else "line")
+    if location_kind not in {"page", "line", "document"}:
+        raise BenchmarkSchemaError(f"{where}.location_kind must be page, line or document")
+    if page is None and line is None and location_kind != "document":
         raise BenchmarkSchemaError(f"{where} needs either page or line")
     if page is not None and (isinstance(page, bool) or not isinstance(page, int) or page < 1):
         raise BenchmarkSchemaError(f"{where}.page must be a positive integer")
@@ -50,8 +56,11 @@ def _validate_quote_anchor(anchor: Any, where: str) -> dict[str, Any]:
     return {
         "page": page,
         "line": line,
+        "location_kind": location_kind,
         "exact_quote": quote,
         "locator": _optional_text(mapping.get("locator"), f"{where}.locator"),
+        **{key: _optional_text(mapping.get(key), f"{where}.{key}")
+           for key in ("scope_id", "source_role", "period")},
     }
 
 
@@ -93,6 +102,10 @@ def validate_gold(gold: Mapping[str, Any]) -> dict[str, Any]:
             {
                 "id": fact_id,
                 "importance": importance,
+                "target_kind": _require_enum(
+                    fact.get("target_kind", DISPOSITION_CONTEXT if fact.get("fact_scope") == "document_meta" else REQUIRED_BUSINESS),
+                    TARGET_KINDS, f"{where}.target_kind"),
+                "require_same_scope": _optional_boolean(fact.get("require_same_scope"), f"{where}.require_same_scope"),
                 "any_support_sets": support_sets,
                 "must_preserve": [
                     _require_text(item, f"{where}.must_preserve")
@@ -154,6 +167,38 @@ def gold_is_holdout(gold: Mapping[str, Any]) -> bool:
 # ---------------------------------------------------------------------------
 # observed
 # ---------------------------------------------------------------------------
+
+
+def _optional_boolean(value: Any, where: str) -> bool | None:
+    if value is not None and type(value) is not bool:
+        raise BenchmarkSchemaError(f"{where} must be a boolean or null")
+    return value
+
+
+def _source_rows(value: Any, where: str) -> list[dict[str, Any]] | None:
+    if value is None:
+        return None
+    rows = []
+    seen: set[str] = set()
+    for index, raw in enumerate(_require_sequence(value, where)):
+        label = f"{where}[{index}]"
+        item = _require_mapping(raw, label)
+        locator = _require_text(item.get("locator"), f"{label}.locator")
+        if locator in seen:
+            raise BenchmarkSchemaError(f"{where} has duplicate locator {locator}")
+        seen.add(locator)
+        row = {"locator": locator, "text": _require_text(item.get("text"), f"{label}.text")}
+        for key in ("page", "line", "line_end"):
+            number = item.get(key)
+            if number is not None and (type(number) is not int or number < 1):
+                raise BenchmarkSchemaError(f"{label}.{key} must be positive integer or null")
+            row[key] = number
+        if row["line_end"] is not None and (row["line"] is None or row["line_end"] < row["line"]):
+            raise BenchmarkSchemaError(f"{label}.line_end must follow line")
+        for key in ("unit_id", "source_role", "language", "scope_id", "period"):
+            row[key] = _optional_text(item.get(key), f"{label}.{key}")
+        rows.append(row)
+    return rows
 
 
 def _validate_route(route: Any, where: str) -> dict[str, Any] | None:
@@ -232,6 +277,7 @@ def _validate_coverage(coverage: Any, where: str) -> dict[str, Any]:
         "opaque_pages": [
             int(item) for item in _optional_sequence(mapping.get("opaque_pages"), f"{where}.opaque_pages")
         ],
+        "read_pages": None if mapping.get("read_pages") is None else [int(page) for page in _require_sequence(mapping["read_pages"], f"{where}.read_pages")],
         "raw": dict(mapping),
     }
 
@@ -264,6 +310,10 @@ def validate_observed(observed: Mapping[str, Any]) -> dict[str, Any]:
                     for item in _optional_sequence(unit.get("locators"), f"{where}.locators")
                 ],
                 "completeness": _optional_text(unit.get("completeness"), f"{where}.completeness"),
+                "required_locators": None if unit.get("required_locators") is None else [
+                    _require_text(item, f"{where}.required_locators")
+                    for item in _require_sequence(unit["required_locators"], f"{where}.required_locators")],
+                "dependencies_resolved": _optional_boolean(unit.get("dependencies_resolved"), f"{where}.dependencies_resolved"),
                 "diagnostics": [
                     _require_text(item, f"{where}.diagnostics")
                     for item in _optional_sequence(unit.get("diagnostics"), f"{where}.diagnostics")
@@ -285,6 +335,8 @@ def validate_observed(observed: Mapping[str, Any]) -> dict[str, Any]:
                 record.get("selected_locators"), "observed.selected_locators"
             )
         ],
+        "selected_evidence": _source_rows(record.get("selected_evidence"), "observed.selected_evidence"),
+        "context_evidence": _source_rows(record.get("context_evidence"), "observed.context_evidence"),
         "selected_text": _require_text(
             record.get("selected_text", ""),
             "observed.selected_text",

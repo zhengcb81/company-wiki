@@ -37,6 +37,11 @@ def _drop_claim(observed: dict[str, Any], needle: str) -> None:
         claim for claim in observed.get("claims") or [] if needle not in (claim.get("text") or "")
     ]
     observed["selected_text"] = (observed.get("selected_text") or "").replace(needle, "")
+    removed = {row["locator"] for row in observed.get("selected_evidence") or []
+               if needle in row["text"]}
+    observed["selected_evidence"] = [row for row in observed.get("selected_evidence") or []
+                                     if row["locator"] not in removed]
+    observed["selected_locators"] = [loc for loc in observed.get("selected_locators") or [] if loc not in removed]
 
 
 # --------------------------------------------------------------------------
@@ -294,7 +299,7 @@ MUTATIONS: tuple[tuple[str, str, Callable[[dict[str, Any], Mapping[str, Any]], d
     ("future_to_actual", "未来→实际", m_future_to_actual, "basis."),
     ("question_to_statement", "问题→公司陈述", m_question_to_statement, "basis."),
     ("drop_table_header", "丢表头", m_drop_table_header, "basis."),
-    ("missing_page_but_complete", "缺页却complete", m_missing_page_but_complete, "recall."),
+    ("missing_page_but_complete", "缺页却complete", m_missing_page_but_complete, "coverage.no_false_complete"),
     ("toc_only", "只有目录", m_toc_only, "recall."),
     ("stale_source_version", "同source新版本错复用", m_stale_source_version, "integrity.source_identity"),
     ("self_certifying_output", "测试输出自证", m_self_certifying_output, "integrity.unsupported_claims"),
@@ -327,7 +332,7 @@ def run_mutation_suite(
     Three outcomes are reported honestly and are **not** conflated:
 
     ``DETECTED``
-        the mutated observation no longer PASSes.
+        a check became newly adverse relative to the baseline.
     ``NOT_DETECTED``
         a real oracle coverage gap: the defect was injected and the oracle
         still passed. This is reported as a gap, never hidden.
@@ -359,12 +364,19 @@ def run_mutation_suite(
             )
             continue
         result = evaluate(mutated, gold, limits=limits, review=review)
-        detected = result["status"] != "PASS"
+        # A pre-existing PARTIAL/FAIL is not evidence that this mutation was
+        # detected. Compare individual checks with the baseline and count only
+        # newly adverse checks; semantic-only changes can remain NOT_DETECTED.
+        rank = {"PASS": 0, "NOT_EVALUATED": 0, "PARTIAL": 1, "UNAVAILABLE": 1, "FAIL": 2}
+        baseline_checks = {row["check_id"]: row["status"] for row in baseline["checks"]}
+        newly_adverse = [row["check_id"] for row in result["checks"]
+                         if rank[row["status"]] > rank[baseline_checks.get(row["check_id"], "NOT_EVALUATED")]]
+        detected = bool(newly_adverse)
         failing = [row["check_id"] for row in result["checks"] if row["status"] == "FAIL"]
         not_pass = [
             row["check_id"] for row in result["checks"] if row["status"] != "PASS"
         ]
-        targeted = [check_id for check_id in not_pass if check_id.startswith(expected_check_prefix)]
+        targeted = [check_id for check_id in newly_adverse if check_id.startswith(expected_check_prefix)]
         rows.append(
             {
                 "mutation_id": mutation_id,
@@ -376,6 +388,7 @@ def run_mutation_suite(
                 "targeted_check_hit": bool(targeted),
                 "failing_checks": failing,
                 "not_pass_checks": not_pass,
+                "newly_adverse_checks": newly_adverse,
                 "result_status": result["status"],
                 "detail": "",
             }
