@@ -1,0 +1,216 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "real_cn_ir_premise_denial",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-ir",
+    "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "origin": {
+      "document_title": "投资者关系活动记录表（2026-05-15）",
+      "publisher": "万润股份",
+      "document_kind": "investor_relations_activity_record",
+      "market": "CN",
+      "language": "zh-CN",
+      "verified_against_original": true
+    },
+    "local_binding_key": "cn-ir"
+  },
+  "observation": {
+    "metadata": {
+      "expected_family": "investor_relations",
+      "market": "CN",
+      "language": "zh-CN",
+      "carrier": "pdf",
+      "read_scope": "问答第2-3页",
+      "note": "片段来自母计划 sample_observations 对同一 SHA 原件的只读侦察；引文经逐条对照原文核验"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 2, "line": null, "exact_quote": "公司业绩在23年度达到历史新高后，24年度断崖式下降"},
+        "page": 2,
+        "text": "问：公司业绩在23年度达到历史新高后，24年度断崖式下降，25年仍未有明显起色，主要是因为沸石原因么？公司有什么举措尽快恢复乃至超过23年度的经营业绩？",
+        "role": "qa_question",
+        "hints": {"facet_ids": ["facet_risk_denial"], "semantic_ids": ["semantic_stage_progression"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 2, "line": null, "exact_quote": "2024年度影响收入的主要原因为沸石系列环保材料业务及部分医药业务下游需求减少"},
+        "page": 2,
+        "text": "答：您好！公司2024年度影响收入的主要原因为沸石系列环保材料业务及部分医药业务下游需求减少，公司2025年度沸石分子筛产品收入略低于2024年度。公司2025年度及2026年一季度收入及归属于上市公司股东的净利润均实现同比增长。",
+        "role": "qa_answer",
+        "hints": {"facet_ids": ["facet_risk_denial", "facet_operating_metrics"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": 3, "line": null, "exact_quote": "公司现无生产VC（碳酸亚乙烯酯）的情况"},
+        "page": 3,
+        "text": "问：控股股东在支持上市公司层面，具体做了哪些工作？有没有能推动与宁德时代等行业龙头达成电池电解液添加剂VC的带量采购等具体业务？答：您好，公司现无生产VC（碳酸亚乙烯酯）的情况，根据公司控股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立业务协同与合作。",
+        "role": "qa_answer",
+        "hints": {"facet_ids": ["facet_risk_denial", "facet_customer_orders"]}
+      },
+      {
+        "unit_id": "u4",
+        "locator": null,
+        "anchor": {"physical_page": 2, "line": null, "exact_quote": "该事项未对九目化学经营构成重大影响"},
+        "page": 2,
+        "text": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产品，该事项未对九目化学经营构成重大影响。九目化学主要产品为OLED升华前材料，下游客户为国内外OLED成品材料企业。九目化学已于3月11日收到北交所第二轮审核问询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待财务数据按要求完成更新后，将申请恢复审核，并回复问询。",
+        "role": "qa_answer",
+        "hints": {"facet_ids": ["facet_risk_denial", "facet_new_business"]}
+      },
+      {
+        "unit_id": "u5",
+        "locator": null,
+        "anchor": {"physical_page": 3, "line": null, "exact_quote": "先进新材料的开发和应用很多是长期的过程，需要通过长时间的产品开发、技术积累以及下游验证支持"},
+        "page": 3,
+        "text": "答：您好，公司是以研发创新驱动发展的平台型企业……先进新材料的开发和应用很多是长期的过程，需要通过长时间的产品开发、技术积累以及下游验证支持，才可能在下游产业发展的过程中做出更多贡献。公司将继续积极推进先进新材料的开发与产业化。",
+        "role": "qa_answer",
+        "hints": {"facet_ids": ["facet_new_business"], "semantic_ids": ["semantic_stage_progression"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "投资者关系活动记录：完整问答、追问与答复分开读取；提问者措辞不是公司事实",
+      "答复中的否定、主体归属（上市公司/控股股东/子公司）必须随事实保留",
+      "阶段类答复（新材料长期验证）按阶段语义保存，不升级为收入承诺"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "问句措辞与前提（『断崖式下降』『主要是因为沸石原因么』）属于提问者；公司答复只确认2024年影响收入的主要原因是沸石系列环保材料业务及部分医药业务下游需求减少",
+        "importance": "required_business",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": [
+          "角色=提问者（投资者）措辞 vs 公司答复分列",
+          "主体=万润股份（上市公司口径）",
+          "原因范围=沸石系列环保材料业务及部分医药业务下游需求减少（公司陈述）",
+          "期间=2024年度/2025年度/2026年一季度分列"
+        ],
+        "must_not_assert": [
+          "不得把『断崖式下降』等问句措辞当公司自述",
+          "不得把问句设想的因果（主要是沸石原因）当公司确认的结论",
+          "不得把不同期间的业绩陈述混成一句"
+        ]
+      },
+      {
+        "id": "f2",
+        "objective": "管理层明确否定：公司现无生产VC（碳酸亚乙烯酯）；控股股东中国节能与宁德时代建立联系属股东层面，不是上市公司业务",
+        "importance": "required_business",
+        "any_support_sets": [["u3"]],
+        "must_preserve": [
+          "否定作用域=上市公司（『公司现无生产VC（碳酸亚乙烯酯）的情况』）",
+          "语态=『现无』是当前时点否定，不含未来承诺",
+          "主体分层=控股股东中国节能与宁德时代的联系（股东层面）与上市公司业务分列",
+          "角色=管理层答复"
+        ],
+        "must_not_assert": [
+          "不得把控股股东与宁德时代的联系说成上市公司的客户、订单或合作",
+          "不得把『现无生产VC』改写为在研、储备或潜在布局",
+          "不得把问句中的『推动带量采购』设想说成已达成或在推进的业务"
+        ]
+      },
+      {
+        "id": "f3",
+        "objective": "主体区分：被问事件涉及子公司九目化学——『未对九目化学经营构成重大影响』；北交所审核中止因财务数据更新需要，计划恢复审核",
+        "importance": "required_business",
+        "any_support_sets": [["u4"]],
+        "must_preserve": [
+          "主体=九目化学（被问公司），非万润股份自身",
+          "否定作用域=该事项对九目化学经营『未构成重大影响』（量级限定）",
+          "语态=『申请了中止审核……将申请恢复审核』是计划安排"
+        ],
+        "must_not_assert": [
+          "不得把九目化学的审核进度说成万润股份的上市进度",
+          "不得把『未构成重大影响』扩大成完全无影响或缩小成有重大影响",
+          "不得把『中止审核』说成终止、被否或失败"
+        ]
+      },
+      {
+        "id": "f4",
+        "objective": "先进新材料需要长期产品开发、技术积累与下游验证支持：这是阶段过程描述，不是收入承诺也不是失败结论",
+        "importance": "required_business",
+        "any_support_sets": [["u5"]],
+        "must_preserve": [
+          "阶段语义=长期开发/验证过程（未给具体阶段数字）",
+          "语态=过程描述与公司意图（继续积极推进），非承诺产出时点"
+        ],
+        "must_not_assert": [
+          "不得据此断言新产品即将贡献收入",
+          "不得据此断言新业务已失败或已停",
+          "不得补造未披露的验证阶段、客户或时间表"
+        ]
+      },
+      {
+        "id": "f5",
+        "objective": "答复中出现的2025年度营业收入37.17亿元、归母净利润2.84亿元、2026年一季度收入10.15亿元等数字属 correctness_if_emitted：不要求抽取，一旦输出必须带期间、主体与口径",
+        "importance": "correctness_if_emitted",
+        "any_support_sets": [["u2"]],
+        "must_preserve": [
+          "期间=2025年度 / 2026年一季度（分列）",
+          "主体=归属于上市公司股东的净利润",
+          "单位=亿元；同比口径随数字"
+        ],
+        "must_not_assert": [
+          "不得把年度数字与季度数字混用",
+          "不得把『归属于上市公司股东的净利润』说成净利润或毛利"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "否定作用域、问句前提与主体分层的语义执行：交ROOT（execution_status=NOT_RUN_ROOT_INTEGRATION）",
+      "同文件其余问答（库存减值、增收不增利）未纳入本case",
+      "北交所审核事实的外部核实不在本包范围"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1",
+      "change": "删去『公司现无生产VC（碳酸亚乙烯酯）的情况』的否定，仅保留问句与股东联系描述",
+      "dimension": "negation",
+      "expected_failure": "问句设想（推动VC带量采购）与股东联系被升级为上市公司业务（缺否定）",
+      "reason": "否定是答复的核心信息；删否定直接翻转事实"
+    },
+    {
+      "id": "m2",
+      "change": "把控股股东中国节能与宁德时代的联系说成万润股份与宁德时代的合作/客户关系",
+      "dimension": "subject",
+      "expected_failure": "股东行为升级为上市公司业务，主体错位",
+      "reason": "答复明确区分控股股东层面与上市公司层面"
+    },
+    {
+      "id": "m3",
+      "change": "把提问者的『24年度断崖式下降、主要是因为沸石原因』说成管理层确认的结论",
+      "dimension": "role",
+      "expected_failure": "问句前提被当公司事实，角色归属错误",
+      "reason": "question 与 answer 角色必须分开保存"
+    },
+    {
+      "id": "m4",
+      "change": "把『该事项未对九目化学经营构成重大影响』扩大为『对集团完全没有影响』",
+      "dimension": "scope",
+      "expected_failure": "否定作用域被扩大，量级限定丢失",
+      "reason": "否定绑定主体（九目化学）、事项与『重大』量级"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "万润股份",
+    "product": "VC（碳酸亚乙烯酯）",
+    "project": null,
+    "geography": null,
+    "period": "2026-05-15记录时点",
+    "role": "管理层答复",
+    "modality": "denial",
+    "stage": null,
+    "quantity": null,
+    "unit": null,
+    "denominator": null,
+    "condition": null
+  },
+  "expected_missing_slots": ["stage"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

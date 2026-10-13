@@ -1,0 +1,101 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "facet_capacity_projects",
+  "version": "1.0.0",
+  "business_questions": [
+    "现有产能与新增产能分别是多少，口径是原有、新增、优化升级替换还是合计",
+    "项目处于建设、建成、投产、爬坡、达产哪个阶段；分期先后与依赖条件是什么",
+    "资金来源如何安排（募集资金、自筹、贷款、先行投入与置换），缺口条件是什么",
+    "产能消化措施与投资测算的前提是什么",
+    "项目是否发生变更、延期、终止，原因与剩余承诺是什么"
+  ],
+  "applicable_mechanisms": ["generic", "manufacturing", "biopharma", "cdmo", "store_network"],
+  "positive_evidence": [
+    {
+      "description": "保存对象：募投项目的项目表与基本情况表整行——项目名称、总投资、募集资金使用、实施主体、建设周期、建设地点、主要产品，连同表头与单位",
+      "unit_kinds": ["pdf_table_row", "html_table_cell"],
+      "signals": ["项目总投资", "募集资金使用", "建设周期", "实施主体", "主要产品", "建设地点"]
+    },
+    {
+      "description": "保存对象：产能构成与建设内容正文（新增/替换/优化升级、分期、搬迁、达产纲领）",
+      "unit_kinds": ["pdf_text_block", "html_paragraph"],
+      "signals": ["新增产能", "优化升级", "建成达产", "分期", "搬迁", "产能利用率"]
+    },
+    {
+      "description": "保存对象：项目进展/变更公告与承诺（原计划、变化、原因、剩余承诺、对子项目影响）",
+      "unit_kinds": ["pdf_text_block", "transcript_speaker_block"],
+      "signals": ["延期", "变更", "终止", "达到预定可使用状态", "承诺", "项目进度"]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言产能/产量数字时保留项目、数量、单位与产能口径（原有/新增/替换/合计）",
+      "slots": ["project", "quantity", "unit", "condition"],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/口径；不同项目与口径的产能互换或相加是募投面最常见的错误"
+    },
+    {
+      "assertion": "断言项目建设/投产状态时保留项目、实施主体、分期、阶段、语态与时间",
+      "slots": ["project", "subject", "stage", "modality", "period"],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "建成不等于达产，拟投不等于已投；分期先后是项目状态的组成部分"
+    },
+    {
+      "assertion": "断言分期依赖时保留前置条件（一期完成、设备搬迁后二期启动等）",
+      "slots": ["condition", "project", "stage"],
+      "required_when": "explicit_condition_present",
+      "missing_behavior": "partial",
+      "reason": "条件句定义分期先后；删条件会把依赖说成并行"
+    },
+    {
+      "assertion": "断言资金安排或资金缺口时保留项目、金额、单位与资金来源条件",
+      "slots": ["project", "quantity", "unit", "condition", "modality"],
+      "required_when": "project_emitted",
+      "missing_behavior": "partial",
+      "reason": "募集资金金额、项目总投资、自筹缺口是三个口径，缺口多为条件安排"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "『优化升级替换原有产能12万件套』",
+      "wrong_assertion": "新增产能12万件套",
+      "why_wrong": "替换/改造口径不是净新增",
+      "required_context_slots": ["condition", "quantity", "unit"]
+    },
+    {
+      "source_meaning": "一期已建成投产、二期预计明年建成",
+      "wrong_assertion": "项目已全部投产",
+      "why_wrong": "整项目状态取决于分期事实与计划语态",
+      "required_context_slots": ["stage", "modality", "period", "condition"]
+    },
+    {
+      "source_meaning": "达产后年新增收入2.60亿元（测算）",
+      "wrong_assertion": "已实现新增收入2.60亿元",
+      "why_wrong": "测算带达产前提与计划语态，不是实际收入",
+      "required_context_slots": ["quantity", "unit", "condition", "modality"]
+    },
+    {
+      "source_meaning": "项目延期至明年，项目未取消",
+      "wrong_assertion": "项目已终止 / 项目按原计划完工",
+      "why_wrong": "延期既不是终止也不是按期；剩余承诺必须保留",
+      "required_context_slots": ["period", "modality", "condition"]
+    }
+  ],
+  "absence_rules": [
+    "未披露产能、投资额或进度时标 unknown（未披露），不按行业惯例估算",
+    "管理层未回答项目进展时记『未回答』，不推断停滞或完成",
+    "公告/管理层明确否认（项目未取消、不涉及该产能）按否定作用域保存",
+    "未读取到项目表/可研附件/承诺页时标读取缺口（unread/deferred），不得当成项目不存在",
+    "纯财务数字（投资额、利息、偿债指标）属 correctness_if_emitted：不要求选，选了必须带项目/期间/单位",
+    "无经营内容的程序性文件允许合法退出"
+  ],
+  "summary_focus": [
+    "产能口径（原有/新增/替换/合计）与项目归属",
+    "分期、建设阶段与计划/实际语态",
+    "资金来源与缺口条件",
+    "消化措施、测算前提与变更/延期/终止"
+  ],
+  "case_ids": ["real_cn_equity_capacity_phasing", "real_cn_convertible_capacity_funding", "syn_capacity_project"]
+}

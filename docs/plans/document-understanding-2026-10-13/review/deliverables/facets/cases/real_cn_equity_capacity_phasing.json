@@ -1,0 +1,161 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "real_cn_equity_capacity_phasing",
+  "kind": "real_excerpt",
+  "source": {
+    "sample_id": "cn-equity",
+    "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+    "origin": {
+      "document_title": "向特定对象发行A股股票募集说明书（注册稿）",
+      "publisher": "恒锋工具股份有限公司",
+      "document_kind": "equity_offering_prospectus",
+      "market": "CN",
+      "language": "zh-CN",
+      "verified_against_original": true
+    },
+    "local_binding_key": "cn-equity"
+  },
+  "observation": {
+    "metadata": {
+      "expected_family": "equity_offering_prospectus",
+      "market": "CN",
+      "language": "zh-CN",
+      "carrier": "pdf",
+      "read_scope": "第三节 董事会关于本次募集资金使用的可行性分析（第61-63、68页）",
+      "note": "片段来自母计划 sample_observations 对同一 SHA 原件的只读侦察；引文经逐条对照原文核验"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 61, "line": null, "exact_quote": "项目建设期两期，新建厂房为一期，老厂区改建为二期"},
+        "page": 61,
+        "text": "项目建设期两期，新建厂房为一期，老厂区改建为二期。一期2019年1月拿地，2020年12月建成厂房，2021年1月一期建成投产。二期在一期建设完成后，老厂区相关设备搬迁至一期新厂房后才启动改建，预计在2021年1月启动建设，2021年12月完成建设，2022年二期建成投产。",
+        "role": "project_schedule",
+        "hints": {"facet_ids": ["facet_capacity_projects"], "semantic_ids": ["semantic_capacity_project", "semantic_stage_progression"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 61, "line": null, "exact_quote": "在本次募集资金到位前，公司可根据项目进度的实际情况通过自有资金、银行贷款或其他途径进行部分投入"},
+        "page": 61,
+        "text": "在本次募集资金到位前，公司可根据项目进度的实际情况通过自有资金、银行贷款或其他途径进行部分投入，并在募集资金到位后予以置换。如果实际募集资金低于项目投资总额，不足部分公司将通过自筹解决。",
+        "role": "funding_arrangement",
+        "hints": {"facet_ids": ["facet_capacity_projects"], "semantic_ids": ["semantic_capacity_project"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": 68, "line": null, "exact_quote": "本项目建成达产后，公司将优化升级原有精密复杂刃量具类产品产能12万件套"},
+        "page": 68,
+        "text": "本项目建成达产后，公司将优化升级原有精密复杂刃量具类产品产能12万件套，可开展高端生产性服务，将年产数控精密装备50台，年产智能自动化装备400台套。年新增营业收入2.60亿元，新增利润总额9,248.00万元，财务内部收益率（税后）为22.16%，投资回收期（税后）为6.63年。",
+        "role": "project_return_estimate",
+        "hints": {"facet_ids": ["facet_capacity_projects", "facet_operating_metrics"], "semantic_ids": ["semantic_capacity_project"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "融资用途文件：项目基本情况表、建设周期、投资计划、回报测算依次读取",
+      "智能制造优化升级改造项目与补充流动资金是两个资金用途，属性分开",
+      "分期事实（一期）与计划时间（二期）分列；回报测算属计划语态"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "项目分两期且有先后依赖：一期为新建厂房、二期为老厂区改建；二期以一期建设完成、老厂区设备搬迁至一期新厂房为启动条件",
+        "importance": "required_business",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "主体=恒锋工具（项目实施单位）",
+          "分期=一期（新建厂房）/二期（老厂区改建）",
+          "条件=二期在一期建设完成后、老厂区相关设备搬迁至一期新厂房后才启动改建",
+          "语态=一期三个时点为已发生陈述，二期三个时点为『预计』计划",
+          "期间=2019年1月至2022年"
+        ],
+        "must_not_assert": [
+          "不得断言二期已建成投产",
+          "不得把二期的预计年份说成已实现",
+          "不得删去条件把两期说成并行推进或无依赖"
+        ]
+      },
+      {
+        "id": "f2",
+        "objective": "产能口径：项目是对原有精密复杂刃量具类产品产能12万件套的优化升级替换，另新增数控精密装备年产50台、智能自动化装备年产400台套；年新增营业收入2.60亿元是建成达产后的测算",
+        "importance": "required_business",
+        "any_support_sets": [["u3"]],
+        "must_preserve": [
+          "口径=『优化升级替换原有』而非净新增",
+          "单位=万件套/台/台套；金额=亿元/万元",
+          "条件=『本项目建成达产后』",
+          "语态=回报测算（新增收入、利润总额、内部收益率、回收期均为测算值）"
+        ],
+        "must_not_assert": [
+          "不得把12万件套说成新增产能",
+          "不得把测算的年新增营业收入2.60亿元说成已实现收入或业绩承诺",
+          "不得把三个产品口径的产能数字互换"
+        ]
+      },
+      {
+        "id": "f3",
+        "objective": "资金安排：募集资金到位前可用自有资金/银行贷款先行投入并置换；实际募集资金低于项目投资总额时不足部分自筹",
+        "importance": "required_business",
+        "any_support_sets": [["u2"]],
+        "must_preserve": [
+          "条件=募集资金到位前/实际募集资金低于项目投资总额时",
+          "方式=先行投入、到位后置换、自筹解决",
+          "项目归属=智能制造优化升级改造项目（总投资35,300.00万元）与补充流动资金7,300.00万元分列"
+        ],
+        "must_not_assert": [
+          "不得说资金缺口已经解决或已自筹到位",
+          "不得混淆项目总投资、拟投入募集资金与补充流动资金金额"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "分期/计划/口径的语义保真是否被引擎正确执行：交ROOT（execution_status=NOT_RUN_ROOT_INTEGRATION）",
+      "同文件备案、环评、土地等章节未纳入本case",
+      "投资构成明细表（工程费用/设备购置等）属 correctness_if_emitted，不要求选，选了不能错"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1",
+      "change": "把『二期……预计在2021年1月启动建设……2022年二期建成投产』当作已发生的实际",
+      "dimension": "modality",
+      "expected_failure": "输出『二期已于2022年建成投产』类断言，计划语态被升级为实际（未来当实际）",
+      "reason": "原文二期时间带『预计』，属计划语态；一期才是已发生陈述"
+    },
+    {
+      "id": "m2",
+      "change": "删去『二期在一期建设完成后、老厂区相关设备搬迁至一期新厂房后才启动改建』的前置条件",
+      "dimension": "condition",
+      "expected_failure": "分期依赖消失，两期被说成并行或二期独立启动",
+      "reason": "条件句定义了分期先后顺序，是项目含义的一部分"
+    },
+    {
+      "id": "m3",
+      "change": "把『优化升级替换原有精密复杂刃量具类产品产能12万件套』说成新增产能12万件套",
+      "dimension": "scope",
+      "expected_failure": "原有产能改造口径被当净新增产能",
+      "reason": "口径限定『优化升级替换原有』改变数字含义"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "恒锋工具",
+    "product": null,
+    "project": "智能制造优化升级改造项目",
+    "geography": null,
+    "period": null,
+    "role": "项目实施单位",
+    "modality": "projection",
+    "stage": "建成达产后",
+    "quantity": "2.60",
+    "unit": "亿元",
+    "denominator": null,
+    "condition": "本项目建成达产后"
+  },
+  "expected_missing_slots": ["period"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

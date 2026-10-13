@@ -1,0 +1,88 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "facet_overseas",
+  "version": "1.0.0",
+  "business_questions": [
+    "海外/新市场进入了什么程度：注册、签约、渠道、建厂、许可、客户、收入，分别是哪一步",
+    "主体是集团、上市公司还是海外子公司；地域口径如何划分",
+    "海外经营指标（门店、用户、产能、订单）的地域拆分与币种/统计口径",
+    "期后或计划中的海外扩张与已执行部分如何区分"
+  ],
+  "applicable_mechanisms": ["generic", "store_network", "manufacturing", "subscription", "consumption"],
+  "positive_evidence": [
+    {
+      "description": "保存对象：海外业务的进入程度陈述（地区、渠道/工厂/许可/客户、签约或执行状态）及其主体；『出海』必须落到具体地区与具体动作",
+      "unit_kinds": ["pdf_text_block", "html_paragraph", "transcript_speaker_block"],
+      "signals": ["海外", "境外", "出海", "国际化", "overseas", "global", "本地化"]
+    },
+    {
+      "description": "保存对象：地域拆分的经营表（内地/海外、分地区收入或门店），连同表头、币种与期间口径",
+      "unit_kinds": ["pdf_table_row", "html_table_cell", "pptx_table_cell"],
+      "signals": ["中国内地", "海外", "分地区", "按地区", "Mainland China"]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言『海外业务/市场取得进展』时保留地区、动作（签约/建设/销售）、主体与期间",
+      "slots": ["geography", "subject", "period", "modality"],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "注册公司、签约、建厂、销售是不同进入程度；缺动作与语态会把意向说成执行"
+    },
+    {
+      "assertion": "断言海外数量（门店、用户、产能、收入、订单）时保留数量、单位、地域口径与币种/汇率口径",
+      "slots": ["quantity", "unit", "geography", "period"],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/分母；constant currency 等口径限定必须随数字保留"
+    },
+    {
+      "assertion": "断言海外收入或占比增长时保留口径（报告口径/固定汇率、内生/外延、分部/合计）与期间",
+      "slots": ["quantity", "unit", "denominator", "condition", "period"],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "partial",
+      "reason": "汇率与口径限定改变数字含义，拆分口径错误会把分部增速当整体增速"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "公司在海外注册了子公司",
+      "wrong_assertion": "海外收入已增长 / 海外业务已落地",
+      "why_wrong": "注册是进入准备动作，不等于有客户、有收入",
+      "required_context_slots": ["geography", "stage", "modality"]
+    },
+    {
+      "source_meaning": "海外门店3,118家（截至期末存量）",
+      "wrong_assertion": "本期新开海外门店3,118家",
+      "why_wrong": "存量时点口径被当成期内流量新增",
+      "required_context_slots": ["quantity", "unit", "period"]
+    },
+    {
+      "source_meaning": "『up 22% in constant currency』（固定汇率口径）",
+      "wrong_assertion": "报告口径增长22%",
+      "why_wrong": "constant currency 是全局限定，报告口径数字另有其值",
+      "required_context_slots": ["quantity", "unit", "condition"]
+    },
+    {
+      "source_meaning": "与海外客户签署意向书/备忘录",
+      "wrong_assertion": "海外订单已落地并可确认收入",
+      "why_wrong": "意向文件不是正式订单，履约与可取消性未定",
+      "required_context_slots": ["modality", "condition", "stage"]
+    }
+  ],
+  "absence_rules": [
+    "未披露海外收入/门店/产能拆分时标 unknown（未披露），不按总量减内地倒推精确值",
+    "管理层未回答海外拓展问题时记『未回答』，不把问句中的地区设想当公司计划",
+    "公司明确否认某海外动作时按否定作用域保存",
+    "未读取到地域拆分表或双语对应段落时标读取缺口（unread/deferred），双语重复内容去重但不丢口径",
+    "仅有海外注册主体信息而无经营内容时按 disposition_context 保存，不升级为海外增长事实",
+    "低信息文档允许合法退出"
+  ],
+  "summary_focus": [
+    "海外进入程度（注册/签约/建厂/许可/客户/收入）与地区",
+    "主体归属与地域口径",
+    "地域拆分指标及其币种/汇率口径",
+    "计划扩张与已执行动作的分界"
+  ],
+  "case_ids": ["real_hk_annual_store_network", "real_us_release_subscription"]
+}

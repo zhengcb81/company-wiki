@@ -1,0 +1,170 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "syn_quantity_slots",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "syn-quantity-slots-01",
+    "source_sha256": null,
+    "origin": {"synthetic": true, "purpose": "数量断言的单位/分母/期间槽位（合成文本）"},
+    "local_binding_key": null
+  },
+  "observation": {
+    "metadata": {
+      "synthetic": true,
+      "mechanism_axes": ["store_network", "manufacturing"],
+      "purpose": "只有输出数量才要求单位/分母；定性进度不强制补数字；candidate_claim 显式字段检查"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 1, "exact_quote": "公司门店数量为1,200家（其中直营300家、加盟900家），较2025年末净增120家"},
+        "page": 1,
+        "text": "截至2026年6月30日，公司门店数量为1,200家（其中直营300家、加盟900家），较2025年末净增120家。",
+        "role": "operating_metric",
+        "hints": {"facet_ids": ["facet_operating_metrics"], "mechanism_ids": ["mechanism_store_network"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 3, "exact_quote": "产能利用率为85%（设计产能10万吨/年，实际产量4.25万吨）"},
+        "page": 1,
+        "text": "2026年上半年产能利用率为85%（设计产能10万吨/年，实际产量4.25万吨）。",
+        "role": "operating_metric",
+        "hints": {"facet_ids": ["facet_operating_metrics", "facet_capacity_projects"], "mechanism_ids": ["mechanism_manufacturing"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 5, "exact_quote": "用户数为500万"},
+        "page": 1,
+        "text": "用户数为500万。（未说明期间与付费/注册口径）",
+        "role": "operating_metric",
+        "hints": {"facet_ids": ["facet_operating_metrics"], "mechanism_ids": ["mechanism_subscription_consumption"]}
+      },
+      {
+        "unit_id": "u4",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 7, "exact_quote": "新产品验证工作正在按计划推进"},
+        "page": 1,
+        "text": "新产品验证工作正在按计划推进。",
+        "role": "qualitative_progress",
+        "hints": {"semantic_ids": ["semantic_stage_progression"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "数量断言必须带单位/分母/期间；比率必须带分母定义",
+      "定性进度（u4）不要求补数字——不强制填数量槽位",
+      "口径缺失的数字宁可 unknown 或带限定输出"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "门店1,200家是2026-06-30时点存量（直营300+加盟900），净增120家是较2025年末的流量",
+        "importance": "required_business",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "时点=2026-06-30（存量）",
+          "拆分=直营300家+加盟900家",
+          "流量=较2025年末净增120家",
+          "单位=家"
+        ],
+        "must_not_assert": [
+          "不得把1,200家当净增数",
+          "不得把加盟门店当直营门店",
+          "不得把存量与流量混为一个数"
+        ]
+      },
+      {
+        "id": "f2",
+        "objective": "产能利用率85%的分母是设计产能10万吨/年、分子是2026年上半年实际产量4.25万吨；比率不可跨期外推",
+        "importance": "required_business",
+        "any_support_sets": [["u2"]],
+        "must_preserve": [
+          "分母=设计产能10万吨/年",
+          "分子=2026年上半年实际产量4.25万吨",
+          "期间=2026年上半年",
+          "单位=万吨/年与万吨的口径差异"
+        ],
+        "must_not_assert": [
+          "不得丢分母只报85%",
+          "不得把半年口径外推成全年利用率"
+        ]
+      },
+      {
+        "id": "f3",
+        "objective": "『用户数500万』无期间与付费/注册口径：属 correctness_if_emitted，输出必须标口径缺失，不得补造",
+        "importance": "correctness_if_emitted",
+        "any_support_sets": [["u3"]],
+        "must_preserve": [
+          "缺口=期间与付费/注册口径未披露",
+          "单位=万"
+        ],
+        "must_not_assert": [
+          "不得把用户数说成付费客户数",
+          "不得补造未披露的期间"
+        ]
+      },
+      {
+        "id": "f4",
+        "objective": "『新产品验证工作正在按计划推进』是定性进度：按原文粒度保存，不要求补阶段数字或百分比",
+        "importance": "required_business",
+        "any_support_sets": [["u4"]],
+        "must_preserve": [
+          "语态=进行中（定性）",
+          "粒度=原文粒度（未给阶段细分）"
+        ],
+        "must_not_assert": [
+          "不得补造验证百分比、批次数或完成时点",
+          "不得把『按计划推进』说成验证完成"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "槽位缺失判断的语义执行：交ROOT（execution_status=NOT_RUN_ROOT_INTEGRATION）",
+      "本case为合成文本，不构成任何公司的事实依据"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1",
+      "change": "只报『产能利用率85%』，删去分母定义与期间",
+      "dimension": "denominator",
+      "expected_failure": "比率失去分母与期间，含义不可解释",
+      "reason": "比率断言必须带分母/期间槽位"
+    },
+    {
+      "id": "m2",
+      "change": "把门店1,200家说成1,200万店或把存量当净增",
+      "dimension": "unit",
+      "expected_failure": "单位/口径错误导致数量级或含义失真",
+      "reason": "quantity 必须带 unit 与口径"
+    },
+    {
+      "id": "m3",
+      "change": "把2026-06-30的存量说成2025年末的数",
+      "dimension": "period",
+      "expected_failure": "期间错位，比较基准失效",
+      "reason": "period 槽位决定数字的时点归属"
+    }
+  ],
+  "candidate_claim": {
+    "subject": "公司",
+    "product": null,
+    "project": null,
+    "geography": null,
+    "period": null,
+    "role": null,
+    "modality": null,
+    "stage": null,
+    "quantity": "500",
+    "unit": "万",
+    "denominator": null,
+    "condition": null
+  },
+  "expected_missing_slots": ["period", "denominator"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

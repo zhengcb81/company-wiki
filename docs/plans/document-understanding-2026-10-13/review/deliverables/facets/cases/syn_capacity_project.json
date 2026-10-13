@@ -1,0 +1,155 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "syn_capacity_project",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "syn-capacity-project-01",
+    "source_sha256": null,
+    "origin": {"synthetic": true, "purpose": "产能项目语义正反配对（合成文本）"},
+    "local_binding_key": null
+  },
+  "observation": {
+    "metadata": {
+      "synthetic": true,
+      "mechanism_axes": ["manufacturing"],
+      "purpose": "项目归属、分期依赖、资金口径与测算语态的必要槽位与反例"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 1, "exact_quote": "二期在一期投产且设备搬迁后启动，预计2027年12月建成"},
+        "page": 1,
+        "text": "募投项目甲：新建智能装备厂房。建设期两期，一期2026年6月建成；二期在一期投产且设备搬迁后启动，预计2027年12月建成。项目甲总投资2.00亿元，拟投入募集资金1.20亿元，缺口由公司自筹。",
+        "role": "project_description",
+        "hints": {"semantic_ids": ["semantic_capacity_project"], "facet_ids": ["facet_capacity_projects"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 4, "exact_quote": "募投项目乙：精密量具扩产，项目总投资1.00亿元，拟投入募集资金0.80亿元"},
+        "page": 1,
+        "text": "募投项目乙：精密量具扩产，项目总投资1.00亿元，拟投入募集资金0.80亿元，建设期一年。",
+        "role": "project_description",
+        "hints": {"semantic_ids": ["semantic_capacity_project"], "facet_ids": ["facet_capacity_projects"]}
+      },
+      {
+        "unit_id": "u3",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 6, "exact_quote": "项目甲达产后预计年新增营业收入1.50亿元"},
+        "page": 1,
+        "text": "项目甲达产后预计年新增营业收入1.50亿元（测算值，按现行价格与达产率假设）。",
+        "role": "project_return_estimate",
+        "hints": {"semantic_ids": ["semantic_capacity_project"], "facet_ids": ["facet_capacity_projects", "facet_operating_metrics"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "两个募投项目并列于同一文件：项目甲、项目乙的数字各自独立",
+      "分期依赖（二期以一期投产+设备搬迁为前提）与计划时间分列",
+      "总投资/拟投入募集资金/自筹缺口三个口径分列；测算收入属计划语态"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "项目甲分两期且二期有前置条件（一期投产且设备搬迁后启动）；一期2026年6月建成为陈述时点的已完成，二期2027年12月建成为预计",
+        "importance": "required_business",
+        "any_support_sets": [["u1"]],
+        "must_preserve": [
+          "项目=甲",
+          "分期=一期/二期",
+          "条件=二期在一期投产且设备搬迁后启动",
+          "语态=一期已建成（2026年6月）vs 二期『预计』（2027年12月）"
+        ],
+        "must_not_assert": [
+          "不得说二期已建成",
+          "不得删去前置条件把两期说成并行",
+          "不得把预计时间当已完成时间"
+        ]
+      },
+      {
+        "id": "f2",
+        "objective": "资金口径分列：项目甲总投资2.00亿元、拟投入募集资金1.20亿元、缺口自筹；项目乙总投资1.00亿元、拟投入募集资金0.80亿元",
+        "importance": "required_business",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": [
+          "项目归属=甲、乙各自独立",
+          "口径=项目总投资 vs 拟投入募集资金 vs 自筹缺口分列",
+          "单位=亿元"
+        ],
+        "must_not_assert": [
+          "不得把项目乙的金额并入项目甲或反之",
+          "不得把拟投入募集资金当项目总投资",
+          "不得说缺口已补足"
+        ]
+      },
+      {
+        "id": "f3",
+        "objective": "项目甲达产后预计年新增营业收入1.50亿元是测算值（含价格与达产率假设），属计划语态",
+        "importance": "required_business",
+        "any_support_sets": [["u3"]],
+        "must_preserve": [
+          "语态=预计/测算值",
+          "条件=达产后、按现行价格与达产率假设",
+          "数量=1.50，单位=亿元/年"
+        ],
+        "must_not_assert": [
+          "不得当已实现收入或业绩承诺",
+          "不得丢掉假设条件"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "错项目/删条件/单位反例的语义执行：交ROOT（execution_status=NOT_RUN_ROOT_INTEGRATION）",
+      "本case为合成文本，不构成任何公司的事实依据"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1",
+      "change": "把项目乙的0.80亿元拟投入募集资金说成项目甲的募集资金",
+      "dimension": "project",
+      "expected_failure": "错项目：数字跨项目拼接",
+      "reason": "项目属性必须独立绑定，两项目数字不可互换"
+    },
+    {
+      "id": "m2",
+      "change": "把二期『预计2027年12月建成』说成2026年已完成",
+      "dimension": "period",
+      "expected_failure": "时间错位+未来当实际",
+      "reason": "period 与 modality 共同决定事件状态"
+    },
+    {
+      "id": "m3",
+      "change": "删去『二期在一期投产且设备搬迁后启动』的前置条件",
+      "dimension": "condition",
+      "expected_failure": "分期依赖消失，被说成两期并行",
+      "reason": "条件句定义分期先后"
+    },
+    {
+      "id": "m4",
+      "change": "把『年新增营业收入1.50亿元』说成1.50万元",
+      "dimension": "unit",
+      "expected_failure": "单位错误导致数量级失真",
+      "reason": "quantity 必须带 unit，单位不可变更"
+    }
+  ],
+  "candidate_claim": {
+    "subject": null,
+    "product": null,
+    "project": "项目乙",
+    "geography": null,
+    "period": "2027",
+    "role": null,
+    "modality": "plan",
+    "stage": "建设中",
+    "quantity": "0.80",
+    "unit": "亿元",
+    "denominator": null,
+    "condition": null
+  },
+  "expected_missing_slots": ["subject"],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

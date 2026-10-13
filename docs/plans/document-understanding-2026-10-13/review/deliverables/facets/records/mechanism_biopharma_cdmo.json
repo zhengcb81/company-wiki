@@ -1,0 +1,106 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "mechanism_biopharma_cdmo",
+  "version": "1.0.0",
+  "business_questions": [
+    "药物/疗法处在哪个研发或商业化阶段（临床前、临床各期、申报、获批、上市销售），适应症是什么",
+    "研发/商业化订单的性质是什么：临床批、商业化批、里程碑付款、版税，各自如何确认收入",
+    "管线权益归属如何：自研、授权引进、合作开发、权益分成",
+    "产能（反应/发酵/制剂线）与利用率、批次进展如何"
+  ],
+  "applicable_mechanisms": ["biopharma", "cdmo"],
+  "positive_evidence": [
+    {
+      "description": "保存对象：药物/疗法阶段的原文——临床前、I/II/III期、申报、获批、上市各阶段表述，连同适应症、地区与监管语态；无原文阶段依据一律unknown",
+      "unit_kinds": ["pdf_text_block", "html_paragraph", "transcript_speaker_block"],
+      "signals": ["临床前", "I期", "II期", "III期", "IND", "NDA", "BLA", "获批", "适应症", "上市申请"]
+    },
+    {
+      "description": "保存对象：CDMO/CMO订单与付款结构——临床批/商业化批、里程碑、版税、订单金额与收入确认分列保存",
+      "unit_kinds": ["pdf_text_block", "pdf_table_row", "html_paragraph"],
+      "signals": ["CDMO", "CMO", "里程碑", "milestone", "版税", "royalty", "订单金额", "商业化批"]
+    },
+    {
+      "description": "保存对象：管线权益与合作结构——自研/授权引进/合作开发、权益分成与主体归属",
+      "unit_kinds": ["pdf_text_block", "transcript_speaker_block"],
+      "signals": ["管线", "pipeline", "授权", "合作开发", "权益", "分成"]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言药物/疗法阶段时保留产品、阶段细分、适应症、主体与监管语态",
+      "slots": ["subject", "product", "stage", "modality", "condition"],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "unknown",
+      "reason": "阶段阶梯跨级即失真；获批与适应症/地区绑定，作用域不得扩大"
+    },
+    {
+      "assertion": "断言里程碑/版税/订单金额时保留数量、单位、期间与付款性质",
+      "slots": ["quantity", "unit", "period", "condition"],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/口径；里程碑与版税和产品销售收入是不同性质"
+    },
+    {
+      "assertion": "断言CDMO/CMO订单时保留项目/产品归属、订单性质与履约条件",
+      "slots": ["project", "product", "condition", "modality"],
+      "required_when": "project_emitted",
+      "missing_behavior": "partial",
+      "reason": "订单绑定具体产品与阶段（临床批/商业化批），不可跨项目拼接"
+    },
+    {
+      "assertion": "断言获批/申报进展时保留条件（适应症、剂型、地区）与时间语态",
+      "slots": ["condition", "geography", "period", "modality"],
+      "required_when": "explicit_condition_present",
+      "missing_behavior": "partial",
+      "reason": "获批作用域=适应症+剂型+地区；条件缺失会把一个适应症的获批扩大成全线获批"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "产品处于II期临床",
+      "wrong_assertion": "产品已完成III期/即将上市",
+      "why_wrong": "临床阶段不可跨级推断",
+      "required_context_slots": ["stage", "modality"]
+    },
+    {
+      "source_meaning": "收到里程碑付款",
+      "wrong_assertion": "形成经常性收入",
+      "why_wrong": "里程碑是一次性或节点性付款，与经常性收入性质不同",
+      "required_context_slots": ["quantity", "unit", "condition", "period"]
+    },
+    {
+      "source_meaning": "按销售额收取版税",
+      "wrong_assertion": "版税等同于自有产品销售收入",
+      "why_wrong": "版税是分成收入，归属与确认基础不同于产品销售",
+      "required_context_slots": ["quantity", "unit", "condition"]
+    },
+    {
+      "source_meaning": "CDMO订单覆盖某客户某管线的临床批 supply",
+      "wrong_assertion": "公司自有该管线产品并可确认产品收入",
+      "why_wrong": "受托生产订单不转移管线权益",
+      "required_context_slots": ["subject", "project", "modality"]
+    },
+    {
+      "source_meaning": "某适应症获批上市",
+      "wrong_assertion": "产品所有适应症均已获批",
+      "why_wrong": "获批作用域绑定适应症、剂型与地区",
+      "required_context_slots": ["condition", "geography", "modality"]
+    }
+  ],
+  "absence_rules": [
+    "无原文阶段依据时标 unknown（未披露阶段），严禁按所谓行业常识补写临床阶段",
+    "管理层未回答管线进展时记『未回答』，不推断入组/获批状态",
+    "公司/管理层明确否认某管线或业务（如现无生产某品种）按否定作用域保存",
+    "未读取到管线表/研发附注时标读取缺口（unread/deferred），不得当成无管线",
+    "试验阶段、订单、里程碑、版税与收入分开保存；数字属 correctness_if_emitted，不要求选，选了必须带性质与期间",
+    "无相关内容的文档允许合法退出"
+  ],
+  "summary_focus": [
+    "药物/疗法阶段、适应症与监管语态",
+    "CDMO订单性质、里程碑与版税的收入边界",
+    "管线权益归属与主体",
+    "产能/批次进展及其口径"
+  ],
+  "case_ids": ["syn_stage_ladder"]
+}

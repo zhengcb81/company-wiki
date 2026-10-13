@@ -1,0 +1,88 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "mechanism_manufacturing",
+  "version": "1.0.0",
+  "business_questions": [
+    "客户认证/验证处于什么状态，认证与批量订单的边界在哪里",
+    "产能口径（设计产能、实际产量、有效产能）与利用率的分母是什么",
+    "产线处于建设、试产、爬坡、达产哪个阶段，良率与批次进展如何",
+    "产能与订单的匹配关系（排产、交付、库存）如何表述"
+  ],
+  "applicable_mechanisms": ["manufacturing"],
+  "positive_evidence": [
+    {
+      "description": "保存对象：认证/验证状态的原文——客户导入、送样、审核通过、小批量、批量供货各阶段的表述及其客户口径",
+      "unit_kinds": ["pdf_text_block", "transcript_speaker_block", "html_paragraph"],
+      "signals": ["认证", "验证", "送样", "导入", "批量供货", "审核通过", "试产"]
+    },
+    {
+      "description": "保存对象：产能与利用率口径——设计产能、实际产量、产能利用率的分子分母、期间与单位",
+      "unit_kinds": ["pdf_table_row", "pdf_text_block", "html_table_cell"],
+      "signals": ["设计产能", "实际产量", "产能利用率", "达产", "爬坡", "排产", "良率"]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言认证/验证状态时保留客户口径、阶段、语态与时间",
+      "slots": ["subject", "stage", "modality", "period"],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "认证是供货资格不是订单；阶段与语态缺失会把验证当批量供货"
+    },
+    {
+      "assertion": "断言产能/产量/利用率数字时保留数量、单位与分母（设计产能口径）",
+      "slots": ["quantity", "unit", "denominator", "period"],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/分母；利用率无分母不可解释，设计产能≠实际产量"
+    },
+    {
+      "assertion": "断言产线状态（试产/爬坡/达产）时保留项目、阶段与计划/实际语态",
+      "slots": ["project", "stage", "modality"],
+      "required_when": "project_emitted",
+      "missing_behavior": "partial",
+      "reason": "建成、试产、达产是不同状态；项目属性错位会张冠李戴"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "产线建成",
+      "wrong_assertion": "产线达产/满产",
+      "why_wrong": "建成后还有调试与爬坡，达产是另一个状态",
+      "required_context_slots": ["stage", "modality"]
+    },
+    {
+      "source_meaning": "客户认证通过",
+      "wrong_assertion": "已获批量订单并出货",
+      "why_wrong": "认证解决供货资格，订单与出货需另行证据",
+      "required_context_slots": ["stage", "modality", "condition"]
+    },
+    {
+      "source_meaning": "产能利用率85%",
+      "wrong_assertion": "产能利用率85%（无分母、无期间）",
+      "why_wrong": "比率必须带分母口径与期间，跨期外推会失真",
+      "required_context_slots": ["denominator", "period", "quantity", "unit"]
+    },
+    {
+      "source_meaning": "优化升级替换既有产能",
+      "wrong_assertion": "净新增产能",
+      "why_wrong": "替换/改造口径与新增口径不同",
+      "required_context_slots": ["condition", "quantity", "unit"]
+    }
+  ],
+  "absence_rules": [
+    "未披露认证阶段或利用率口径时标 unknown（未披露），不按行业通行水平补写",
+    "管理层未回答认证/排产问题时记『未回答』，不推断通过或失败",
+    "公司明确否认某认证/订单状态时按否定作用域保存",
+    "未读取到产能表或经营表表头/脚注时标读取缺口（unread/deferred），表格格子不足以证明列归属时不虚构",
+    "产能/产量数字属 correctness_if_emitted：不要求选，选了必须带项目、单位、期间",
+    "无制造内容的文档允许合法退出"
+  ],
+  "summary_focus": [
+    "认证/验证阶段与订单边界",
+    "产能口径与利用率分母",
+    "试产/爬坡/达产状态与语态",
+    "产能与订单/排产的匹配"
+  ],
+  "case_ids": ["real_cn_equity_capacity_phasing", "real_cn_convertible_capacity_funding", "syn_stage_ladder"]
+}

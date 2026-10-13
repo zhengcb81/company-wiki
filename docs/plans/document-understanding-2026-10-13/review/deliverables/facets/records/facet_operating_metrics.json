@@ -1,0 +1,88 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "facet_operating_metrics",
+  "version": "1.0.0",
+  "business_questions": [
+    "经营指标的定义与口径是什么：存量/流量、分母、期间、地域、直营/加盟/合伙人范围",
+    "指标变化背后的经营解释是什么（谁在解释、依据什么）",
+    "同店/同口径比较是否可比（期数、范围、会计口径一致）",
+    "指标与财务结果的关系如何表述（领先、同步、非收入指标）"
+  ],
+  "applicable_mechanisms": ["generic", "subscription", "consumption", "store_network", "manufacturing", "biopharma", "cdmo"],
+  "positive_evidence": [
+    {
+      "description": "保存对象：经营指标表/门店表/用户表的整行——指标名、数值、单位、期间、拆分维度，连同表头与脚注归属",
+      "unit_kinds": ["pdf_table_row", "html_table_cell", "pptx_table_cell"],
+      "signals": ["门店数量", "同店", "用户数", "留存", "利用率", "出货", "净增", "SKUs"]
+    },
+    {
+      "description": "保存对象：指标变化的经营解释段落（增长/下滑原因、口径说明、比较基期）",
+      "unit_kinds": ["pdf_text_block", "transcript_speaker_block", "html_paragraph"],
+      "signals": ["主要由于", "环比", "同比", "口径", "剔除", "汇率影响"]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言任何经营指标数值时保留数量、单位、分母/口径与期间",
+      "slots": ["quantity", "unit", "denominator", "period"],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/分母；指标脱离口径后含义翻转（总数≠净增、用户≠付费客户）"
+    },
+    {
+      "assertion": "断言直营/加盟/合伙人/代理等范围内的指标时保留范围与地域",
+      "slots": ["subject", "geography", "condition", "period"],
+      "required_when": "explicit_condition_present",
+      "missing_behavior": "partial",
+      "reason": "范围限定改变分母与归属；内地/海外与门店模式是两个独立拆分维度"
+    },
+    {
+      "assertion": "断言利用率、同店、留存、占比等比率时必须带分母定义与比较基期",
+      "slots": ["denominator", "quantity", "unit", "period"],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "比率无分母不可解释；比较基期不同则不可比"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "截至期末门店总数7,504家（存量）",
+      "wrong_assertion": "本期新开门店7,504家 / 净增7,504家",
+      "why_wrong": "时点存量不是期内流量；净增需同口径时点对比",
+      "required_context_slots": ["quantity", "unit", "period", "denominator"]
+    },
+    {
+      "source_meaning": "用户数500万（未说明付费口径）",
+      "wrong_assertion": "付费用户500万",
+      "why_wrong": "用户口径未披露付费/注册/活跃之分",
+      "required_context_slots": ["denominator", "condition"]
+    },
+    {
+      "source_meaning": "产能利用率85%（设计产能10万吨/年、实际产量4.25万吨、半年）",
+      "wrong_assertion": "全年产能利用率85%",
+      "why_wrong": "分子分母期间不一致时比率不可跨期外推",
+      "required_context_slots": ["denominator", "period", "quantity", "unit"]
+    },
+    {
+      "source_meaning": "『收入增长14%（up 16% in constant currency）』",
+      "wrong_assertion": "报告口径增长16%",
+      "why_wrong": "固定汇率口径是全局限定，不得替换报告口径",
+      "required_context_slots": ["quantity", "unit", "condition"]
+    }
+  ],
+  "absence_rules": [
+    "未披露指标口径（分母、范围、期间）时标 unknown（未披露口径），不输出推算值",
+    "管理层未回答指标问题时记『未回答』，不把问句中的数字当公司数据",
+    "公司明确否认某指标口径（如否认把用户当客户）按否定作用域保存",
+    "未读取到指标表（表格退化、OCR不可读、跨页断表）时标读取缺口（unread/deferred）并注明需要更细粒度输入",
+    "指标数值属 correctness_if_emitted：不要求选，选了必须带单位/期间/分母，不能错",
+    "低信息文档允许合法退出"
+  ],
+  "summary_focus": [
+    "经营指标的口径：单位、分母、期间、范围、地域",
+    "指标变化的经营解释与解释者",
+    "可比性（同店/同口径/基期）",
+    "指标与财务结果的关系"
+  ],
+  "case_ids": ["real_hk_annual_store_network", "real_us_release_subscription", "syn_quantity_slots", "syn_financial_numbers"]
+}

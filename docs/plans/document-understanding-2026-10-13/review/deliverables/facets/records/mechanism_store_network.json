@@ -1,0 +1,88 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "mechanism_store_network",
+  "version": "1.0.0",
+  "business_questions": [
+    "门店网络按什么模式运营（直营、合伙人、代理/经销、加盟），各模式的经营与会计归属如何",
+    "门店总数、净增、开关店的口径与时点是什么",
+    "内地与海外、各地区的门店结构与同店表现如何",
+    "期后开店/关店/回购等事项与报告期事实如何分界"
+  ],
+  "applicable_mechanisms": ["store_network"],
+  "positive_evidence": [
+    {
+      "description": "保存对象：门店表整行——门店模式×地域的矩阵、时点存量、期初/期末对比，连同表头、单位（家）与脚注",
+      "unit_kinds": ["pdf_table_row", "html_table_cell", "pptx_table_cell"],
+      "signals": ["门店数量", "直营店", "合伙人", "代理门店", "distributor", "同店", "净增"]
+    },
+    {
+      "description": "保存对象：门店模式的机制说明（谁出资、谁经营、收入如何确认）与扩张计划原文（含计划语态）",
+      "unit_kinds": ["pdf_text_block", "html_paragraph", "transcript_speaker_block"],
+      "signals": ["门店网络", "store network", "经营模式", "开店计划", "扩张"]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言门店数量时保留数量、单位（家）、时点、地域与门店模式拆分",
+      "slots": ["quantity", "unit", "period", "geography", "condition"],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/分母；门店矩阵是模式×地域二维口径，压平即失真"
+    },
+    {
+      "assertion": "断言门店变化（净增、关闭、翻牌）时保留比较时点、范围与计算口径",
+      "slots": ["quantity", "unit", "period", "denominator"],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "partial",
+      "reason": "存量与流量混用会把总数当净增；净增需同口径时点对比"
+    },
+    {
+      "assertion": "断言门店模式带来的收入/利润时保留模式归属（直营/合伙人/代理）与确认方式",
+      "slots": ["subject", "condition", "modality"],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "不同门店模式的收入确认与并表口径不同，模式错位即归属错误"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "截至期末门店总数N家（时点存量）",
+      "wrong_assertion": "本期新开N家门店",
+      "why_wrong": "时点存量被当期内流量",
+      "required_context_slots": ["quantity", "unit", "period"]
+    },
+    {
+      "source_meaning": "海外直营店由a家增至b家（模式×地域矩阵中的一格）",
+      "wrong_assertion": "海外门店全部转为直营",
+      "why_wrong": "矩阵中的一格不代表整行或整列",
+      "required_context_slots": ["geography", "condition", "quantity", "unit"]
+    },
+    {
+      "source_meaning": "披露集团GMV约X亿元",
+      "wrong_assertion": "公司收入X亿元",
+      "why_wrong": "GMV是平台/渠道成交总额，与公司确认收入口径不同",
+      "required_context_slots": ["quantity", "unit", "condition"]
+    },
+    {
+      "source_meaning": "期后签署回购协议、授权回购上限",
+      "wrong_assertion": "报告期内已回购该金额",
+      "why_wrong": "期后事项与授权上限均非报告期已执行事实",
+      "required_context_slots": ["period", "modality", "quantity", "unit"]
+    }
+  ],
+  "absence_rules": [
+    "未披露门店模式拆分时标 unknown（未披露拆分），不把总数按臆测比例分配",
+    "管理层未回答开店计划时记『未回答』，不把扩张愿景当开店承诺",
+    "公司明确否认某门店/模式事实时按否定作用域保存",
+    "未读取到门店表（双栏对应、跨页表）时标读取缺口（unread/deferred），需要更细粒度表格输入时不虚构格子",
+    "门店/GMV数字属 correctness_if_emitted：不要求选，选了必须带时点、地域、模式、单位",
+    "无门店内容的文档允许合法退出"
+  ],
+  "summary_focus": [
+    "门店模式（直营/合伙人/代理）与地域结构",
+    "门店总数、净增与开关店的口径",
+    "同店表现与模式归属",
+    "期后事项与报告期的分界"
+  ],
+  "case_ids": ["real_hk_annual_store_network", "syn_quantity_slots"]
+}

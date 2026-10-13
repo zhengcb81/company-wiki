@@ -1,0 +1,84 @@
+{
+  "schema_version": "du2-reading-case/1",
+  "case_id": "syn_exit_no_answer",
+  "kind": "synthetic",
+  "source": {
+    "sample_id": "syn-exit-no-answer-01",
+    "source_sha256": null,
+    "origin": {"synthetic": true, "purpose": "管理层未回答的合法退出例（合成文本）"},
+    "local_binding_key": null
+  },
+  "observation": {
+    "metadata": {
+      "synthetic": true,
+      "purpose": "问句有具体设想、管理层回避实质回答：不回答≠否定≠事实"
+    },
+    "units": [
+      {
+        "unit_id": "u1",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 1, "exact_quote": "请说明新产品在北美大客户的认证进展"},
+        "page": 1,
+        "text": "问：请说明新产品在北美大客户的认证进展，是否已开始批量供货？",
+        "role": "qa_question",
+        "hints": {"facet_ids": ["facet_risk_denial", "facet_customer_orders"]}
+      },
+      {
+        "unit_id": "u2",
+        "locator": null,
+        "anchor": {"physical_page": 1, "line": 2, "exact_quote": "相关事项未达到披露标准，暂无应披露而未披露的信息"},
+        "page": 1,
+        "text": "答：相关事项未达到披露标准，暂无应披露而未披露的信息。",
+        "role": "qa_answer",
+        "hints": {"facet_ids": ["facet_risk_denial"]}
+      }
+    ]
+  },
+  "expectations": {
+    "routing_notes": [
+      "问答语义：问题与答复分列；回避回答如实记录为未回答",
+      "不把未回答升级为否定、肯定或失败"
+    ],
+    "facts": [
+      {
+        "id": "f1",
+        "objective": "管理层未正面回答认证进展问题，仅说明未达到披露标准：记『未回答』，保留问句与答复原文",
+        "importance": "required_business",
+        "any_support_sets": [["u1", "u2"]],
+        "must_preserve": [
+          "角色=提问者问句与管理层答复分列",
+          "状态=未回答/回避实质问题",
+          "语态=『暂无应披露而未披露的信息』是披露口径表述"
+        ],
+        "must_not_assert": [
+          "不得把不回答/未回答当否定（认证失败、不存在）",
+          "不得把不回答当肯定（认证通过、批量供货）",
+          "不得把问句中的『北美大客户』『批量供货』当已确认事实"
+        ]
+      }
+    ],
+    "disposition": "read",
+    "not_evaluated": [
+      "认证进展本身：管理层未答，无法评估（诚实缺口）",
+      "未回答语义是否被引擎正确处理：交ROOT（execution_status=NOT_RUN_ROOT_INTEGRATION）",
+      "本case为合成文本，不构成任何公司的事实依据"
+    ]
+  },
+  "mutations": [
+    {
+      "id": "m1",
+      "change": "把『暂无应披露而未披露的信息』说成『管理层确认认证尚未通过』",
+      "dimension": "negation",
+      "expected_failure": "未回答被升级为否定",
+      "reason": "不回答既不肯定也不否定，缺失的不是否定而是答案"
+    },
+    {
+      "id": "m2",
+      "change": "把问句中的『北美大客户』『批量供货』写成公司事实",
+      "dimension": "role",
+      "expected_failure": "问句设想被当公司陈述",
+      "reason": "question 与 answer 角色必须分开"
+    }
+  ],
+  "execution_status": "NOT_RUN_ROOT_INTEGRATION"
+}

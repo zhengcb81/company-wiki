@@ -1,0 +1,115 @@
+{
+  "schema_version": "du2-facet-spec/1",
+  "id": "semantic_stage_progression",
+  "version": "1.0.0",
+  "business_questions": [
+    "新产品/新业务当前处在哪个商业化阶段（开发/立项、送样、客户验证、小批量、量产、规模化），证据是什么",
+    "该阶段是实际达成、在推进中、还是管理层的计划或目标；披露时点是何时",
+    "阶段陈述属于哪个法人主体（上市公司自身、子公司、参股公司、控股股东）和哪个具体产品",
+    "进入下一阶段的条件（客户认证通过、审批、订单落地、良率达标）是否披露，当前完成度如何",
+    "阶段相关的数量（送样量、验证批次、小批量出货量、阶段客户数）以什么单位和口径披露"
+  ],
+  "applicable_mechanisms": ["generic", "subscription", "consumption", "store_network", "manufacturing", "biopharma", "cdmo"],
+  "positive_evidence": [
+    {
+      "description": "保存对象：新产品/新业务的阶段陈述本体及其证据单位——研发立项、送样、客户验证、小批量、量产、规模化各阶段的原文表述，连同主体、产品、时间、语态一起保存",
+      "unit_kinds": ["pdf_text_block", "html_paragraph", "transcript_speaker_block"],
+      "signals": ["送样", "验证", "小批量", "量产", "客户导入", "认证", "商业化", "研发立项", "扩量"]
+    },
+    {
+      "description": "保存对象：阶段进度表/经营表中的阶段、时间、产能或出货量行；表行必须连同表头、单位、脚注归属一起保存，禁止只抄数字",
+      "unit_kinds": ["pdf_table_row", "html_table_cell", "pptx_table_cell"],
+      "signals": ["阶段", "进度", "出货", "验证批次", "投产", "达产"]
+    },
+    {
+      "description": "保存对象：问答/电话会中的阶段答复、追问与管理层否定；提问者的设想与公司答复分开保存，否定按作用域保存",
+      "unit_kinds": ["pdf_table_qa_fragment", "transcript_speaker_block", "pdf_text_block"],
+      "signals": ["问：", "答：", "尚未", "暂无", "现无", "目前未"]
+    }
+  ],
+  "required_context": [
+    {
+      "assertion": "断言『产品X处于阶段S』时必须同时保留主体、产品、阶段、语态（实际/在推进/计划/目标）与披露时间",
+      "slots": ["subject", "product", "stage", "modality", "period"],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "partial",
+      "reason": "阶段是相对披露时点的进展状态；丢语态会把计划当实际、把验证当量产，丢主体会把子公司的成果当上市公司的"
+    },
+    {
+      "assertion": "断言阶段相关数量（送样量、验证批次数、小批量出货量、阶段客户数）时必须保留数量、单位与口径（期间/累计/单月）",
+      "slots": ["quantity", "unit", "denominator", "period"],
+      "required_when": "quantity_emitted",
+      "missing_behavior": "unknown",
+      "reason": "只有输出数量才要求单位/分母；描述定性进度时不强制补数字，禁止为凑数而推断"
+    },
+    {
+      "assertion": "断言『进入下一阶段的条件』时必须保留条件原文（客户认证通过、审批获批、订单落地、良率达标等）",
+      "slots": ["condition", "stage"],
+      "required_when": "explicit_condition_present",
+      "missing_behavior": "partial",
+      "reason": "条件决定该表述是门槛、正在进行的动作还是已达成状态；删条件会把依赖关系说成既成事实"
+    },
+    {
+      "assertion": "断言某客户/某产品的阶段进展时保留客户范围与披露口径（匿名客户不得猜名字，前五大客户不得推成唯一客户）",
+      "slots": ["subject", "product", "geography"],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "unknown",
+      "reason": "客户身份保密是常见披露口径，范围不明时补具体客户名是编造公司事实"
+    },
+    {
+      "assertion": "断言药物/疗法所处研发阶段时保留阶段细分、适应症/用途与监管语态（已获批/申报中/未获批）",
+      "slots": ["subject", "product", "stage", "modality", "condition"],
+      "required_when": "always_for_assertion",
+      "missing_behavior": "unknown",
+      "reason": "生物医药阶段阶梯（临床前/临床/申报/获批/商业化）跨级即失真；无原文阶段依据时必须 unknown"
+    }
+  ],
+  "confusions": [
+    {
+      "source_meaning": "公司披露『产品处于客户验证/送样阶段』",
+      "wrong_assertion": "产品已量产/已规模供货",
+      "why_wrong": "验证与送样是量产之前的阶段，原文未披露批量订单与规模出货",
+      "required_context_slots": ["stage", "modality"]
+    },
+    {
+      "source_meaning": "规划文件写『达产后将形成年产能N』",
+      "wrong_assertion": "公司当前已具备年产能N",
+      "why_wrong": "达产是建成并爬坡后的计划状态，附带达产条件与计划语态，不是当前实际产能",
+      "required_context_slots": ["stage", "modality", "quantity", "unit", "condition"]
+    },
+    {
+      "source_meaning": "管理层说『预计/计划2027年投产』",
+      "wrong_assertion": "2027年已投产 / 项目已投产",
+      "why_wrong": "未来时点的计划被当成已发生的实际；时间与语态同时丢失",
+      "required_context_slots": ["period", "modality"]
+    },
+    {
+      "source_meaning": "子公司/参股公司的研发或审核进展（如分拆上市进程）",
+      "wrong_assertion": "上市公司自身拥有该阶段成果或该上市进度",
+      "why_wrong": "主体不同：成果归属、并表范围与资本市场进程都属于被问的那家公司",
+      "required_context_slots": ["subject", "role"]
+    },
+    {
+      "source_meaning": "问句『是不是已经通过认证开始放量？』未被管理层正面回答",
+      "wrong_assertion": "认证已通过 / 认证未通过",
+      "why_wrong": "未回答既不是肯定也不是否定；问句里的前提（已开始放量）不是公司事实",
+      "required_context_slots": ["modality", "role", "stage"]
+    }
+  ],
+  "absence_rules": [
+    "未披露阶段或阶段证据时标 unknown（未披露），不按模板或行业惯例补阶段",
+    "管理层未回答/回避阶段问题时记『未回答』，既不推断阶段成立也不推断阶段失败",
+    "管理层明确否定（如『目前未涉及某业务』）按否定作用域和时点保存，不得改写为在研、储备或潜在布局",
+    "未读取到相关章节/页时标读取缺口（unread/deferred），不得当成『无业务』或『未披露』",
+    "原文只有『开发中/在研』粒度时按原文粒度保存，不细分成送样、验证、小批量",
+    "低信息或纯程序性文件可合法退出（eligible_skip_after_read），0 业务事实是可接受结果，不反向逼引擎膨胀"
+  ],
+  "summary_focus": [
+    "新产品/新业务的当前商业化阶段及其证据",
+    "阶段的主体、产品、披露时间与语态（实际/在推进/计划/目标）",
+    "进入下一阶段的条件与当前完成度",
+    "阶段相关数量的单位与口径（如披露）",
+    "管理层对阶段的明确否定或未回答，与问句前提分开"
+  ],
+  "case_ids": ["syn_stage_ladder", "real_cn_equity_capacity_phasing", "real_cn_ir_premise_denial", "syn_exit_no_answer"]
+}
