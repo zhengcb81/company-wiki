@@ -1,0 +1,1735 @@
+{
+  "schema_version": "du-cnode-evidence/1",
+  "generated_by": ".planning/du-profiles/_cnode_real_probe.py",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\document-understanding-20261013\\profiles",
+  "note": "Real-original C-node evidence. Excerpts are bounded to 8192 bytes per document; no original was copied into this worktree. UNAVAILABLE rows mean the original could not be read, never PASS.",
+  "summary": {
+    "documents_probed": 7,
+    "observed": 7,
+    "unavailable": 0,
+    "family_agreement": 7,
+    "family_disagreement": 0,
+    "headline_defect_regressions": 0,
+    "elapsed_seconds": 15.201,
+    "max_evidence_chars_per_doc": 8192,
+    "originals_copied_into_worktree": 0
+  },
+  "documents": [
+    {
+      "sample_id": "cn-ipo-confirmation-dinglong",
+      "carrier": "pdf",
+      "headline": "defect-a: confirmation letter mistyped as prospectus from its title",
+      "expected_family": "administrative",
+      "expected_not_family": "prospectus",
+      "manifest_sha256": "0829538f0707650db99852c5e269abe9e0d7e558d54d93e0a2c0be15fe0d0fa7",
+      "actual_sha256": "0829538f0707650db99852c5e269abe9e0d7e558d54d93e0a2c0be15fe0d0fa7",
+      "sha_matches_manifest": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\鼎龙股份\\raw\\prospectus\\鼎龙股份：控股股东、实际控制人对《湖北鼎龙化学股份有限公司首次公开发行股票并在创业板上市招股说明书》的确认意见.pdf",
+      "bytes": 287642,
+      "mtime_utc": 1779653632.067068,
+      "parse": {
+        "parser": "company_wiki.source_catalog.narrative_evidence.parse_pdf",
+        "parse_seconds": 0.067,
+        "page_count": 1,
+        "pages_read": 1,
+        "opaque_pages": [
+          1
+        ],
+        "total_units": 0,
+        "units_fed": 0,
+        "native_scan": "unavailable",
+        "errors": []
+      },
+      "units_total": 0,
+      "units_non_blank": 0,
+      "native_text_empty": true,
+      "legacy_title_route": "prospectus",
+      "route_seconds": 0.0007,
+      "route": {
+        "schema_version": "du-route/1",
+        "profile_id": "administrative",
+        "profile_version": "administrative/v1+2f423b5942d9",
+        "regime": "unknown",
+        "family": "administrative",
+        "subtype": "administrative_confirmation",
+        "confidence": "low",
+        "reasons": [
+          {
+            "code": "ADMINISTRATIVE_PURPOSE",
+            "unit_ids": [],
+            "detail": "行政用途措辞: 确认意见"
+          },
+          {
+            "code": "NATIVE_SCAN_UNAVAILABLE",
+            "unit_ids": [],
+            "detail": "原生文本不可用，需有限 OCR 后再判断"
+          },
+          {
+            "code": "OPAQUE_PAGES",
+            "unit_ids": [],
+            "detail": "1 个不可读页未参与判断"
+          },
+          {
+            "code": "NO_READABLE_BODY",
+            "unit_ids": [],
+            "detail": "没有可读正文，只能按有限证据保守判断"
+          },
+          {
+            "code": "DECLARED_KIND_CONFLICT",
+            "unit_ids": [],
+            "detail": "declared_kind=prospectus 暗示 prospectus，正文证据不同"
+          }
+        ],
+        "alternatives": [
+          {
+            "profile_id": "prospectus",
+            "reason": "标题含招股措辞但正文为行政用途"
+          }
+        ],
+        "child_routes": [],
+        "disposition_hint": "administrative_candidate"
+      },
+      "family_matches_expected": true,
+      "mislabels_expected_not_family": false,
+      "status": "OBSERVED",
+      "evidence_excerpts": [],
+      "evidence_excerpt_chars": 0
+    },
+    {
+      "sample_id": "cn-equity-offering-hengfeng",
+      "carrier": "pdf",
+      "headline": "defect-b: 发行A股股票募集说明书 routed to unknown from the title alone",
+      "expected_family": "offering",
+      "expected_not_family": null,
+      "manifest_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "actual_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "sha_matches_manifest": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\恒锋工具\\raw\\research\\恒锋工具：2020年向特定对象发行A股股票募集说明书（注册稿）.PDF",
+      "bytes": 3812541,
+      "mtime_utc": 1608820218.0,
+      "parse": {
+        "parser": "company_wiki.source_catalog.narrative_evidence.parse_pdf",
+        "parse_seconds": 3.65,
+        "page_count": 96,
+        "pages_read": 96,
+        "opaque_pages": [],
+        "total_units": 3224,
+        "units_fed": 3224,
+        "native_scan": "complete",
+        "errors": []
+      },
+      "units_total": 3224,
+      "units_non_blank": 3224,
+      "native_text_empty": false,
+      "legacy_title_route": "unknown",
+      "route_seconds": 0.0736,
+      "route": {
+        "schema_version": "du-route/1",
+        "profile_id": "offering",
+        "profile_version": "offering/v1+c9ba8d8cc896",
+        "regime": "cn_exchange",
+        "family": "offering",
+        "subtype": "equity_offering",
+        "confidence": "low",
+        "reasons": [
+          {
+            "code": "COVER_HEADING",
+            "unit_ids": [
+              "u1"
+            ],
+            "detail": "向特定对象发行A股股票募集说明书"
+          },
+          {
+            "code": "SECTION_VOCABULARY",
+            "unit_ids": [
+              "u2370",
+              "u3144"
+            ],
+            "detail": "募投/所得款项章节"
+          },
+          {
+            "code": "ROUTE_PROBE_LIMIT",
+            "unit_ids": [
+              "u1"
+            ],
+            "detail": "探测到预算上限：已探测 200/3224 单元、5239 字符"
+          }
+        ],
+        "alternatives": [],
+        "child_routes": [],
+        "disposition_hint": "read"
+      },
+      "family_matches_expected": true,
+      "mislabels_expected_not_family": false,
+      "status": "OBSERVED",
+      "evidence_excerpts": [
+        {
+          "unit_id": "u1",
+          "page": 1,
+          "locator": "urn:company-wiki:narrative-unit:sha256:b6f037136558b2747407b3202505eed2cc7c0567f1a9a956bdd31df853fd84c9",
+          "kind": "paragraph",
+          "excerpt": "1-1-1"
+        },
+        {
+          "unit_id": "u135",
+          "page": 6,
+          "locator": "urn:company-wiki:narrative-unit:sha256:9fb71b0e8b74f46d1704622c285af9a1a454bbf534f57f534fb969ee0da185e8",
+          "kind": "paragraph",
+          "excerpt": "七、现有业务发展安排及未来发展战略 .............................................................. 51"
+        },
+        {
+          "unit_id": "u269",
+          "page": 10,
+          "locator": "urn:company-wiki:narrative-unit:sha256:e3ef43c8d11bfc4267440285f1b86da0da14353dfba066b356d9e130d02d1675",
+          "kind": "paragraph",
+          "excerpt": "（依\n法须经批准的项目，经相关部门批准后方可开展经营活\n动）"
+        },
+        {
+          "unit_id": "u404",
+          "page": 15,
+          "locator": "urn:company-wiki:narrative-unit:sha256:7f607dfa2c2ee1460cb2eb5ad2ef8615e7180fdbea90b0edd070e355ac9bda42",
+          "kind": "paragraph",
+          "excerpt": "铣刀"
+        },
+        {
+          "unit_id": "u538",
+          "page": 18,
+          "locator": "urn:company-wiki:narrative-unit:sha256:dbcb1426420ac3cd4e40c69db8761a12971418491876238dbc3c7ef803975928",
+          "kind": "paragraph",
+          "excerpt": "将智能制造装备产业列为重点发展方向之一，\n“依托优势企业，紧扣关键工序智能化、关键\n岗位机器人替代、生产过程智能优化控制、供\n应链优化，建设重点领域智能工厂/数字化车\n间”。"
+        },
+        {
+          "unit_id": "u672",
+          "page": 22,
+          "locator": "urn:company-wiki:narrative-unit:sha256:08f623f16b6ebfc2ed73f2b8b12d865b820909e6a72fa5f329ed9ec14c2b1f32",
+          "kind": "paragraph",
+          "excerpt": "三、针对高端市场，厂家需具备为客户提供配套技术服务"
+        },
+        {
+          "unit_id": "u807",
+          "page": 26,
+          "locator": "urn:company-wiki:narrative-unit:sha256:b6faa2ee5bc3eb000c7251dfd6dc3e57f06a9bb97a9516beaaa0f182369e85c8",
+          "kind": "paragraph",
+          "excerpt": "结构上包括圆拉齿在\n前、圆拉齿在后、圆齿和花键齿\n交错排列，还包括同步器齿套的\n高低齿结构、AB结构、二拉花键\n交错导向结构、扩齿精刀套等。"
+        },
+        {
+          "unit_id": "u941",
+          "page": 30,
+          "locator": "urn:company-wiki:narrative-unit:sha256:ee1c2e7aa6cb7748624550bcc183a8dd1f37ede5c73de9d17317d95083cc33cb",
+          "kind": "paragraph",
+          "excerpt": "的净利润 \n3,803.32 \n-39.35% \n12,896.13 \n86.22%"
+        },
+        {
+          "unit_id": "u1075",
+          "page": 33,
+          "locator": "urn:company-wiki:narrative-unit:sha256:f3aeede063c005c5ab84e8bee9641dc05cfb82ed5e753073e6cee26aee79523d",
+          "kind": "paragraph",
+          "excerpt": "当前，中国新冠疫情得到有效控制，公司及国内上下游企业复工情况良好，"
+        },
+        {
+          "unit_id": "u1210",
+          "page": 36,
+          "locator": "urn:company-wiki:narrative-unit:sha256:c3653089061034a20de75f43420095d9c38dc25193d5ba03749c69c384f91ed7",
+          "kind": "paragraph",
+          "excerpt": "③公司为提高生产效益，将主要精力投入高精度产品中，将部分对生产精度"
+        },
+        {
+          "unit_id": "u1344",
+          "page": 38,
+          "locator": "urn:company-wiki:narrative-unit:sha256:8644cb78308be14e0df0bfe35bff8176befcaa54d7cec4fb86d3a938a872fec2",
+          "kind": "paragraph",
+          "excerpt": "单位成本"
+        },
+        {
+          "unit_id": "u1478",
+          "page": 41,
+          "locator": "urn:company-wiki:narrative-unit:sha256:409c0d4952db5aeb5cc67d65162c49bd498202c2b7697a2629a113b43063155e",
+          "kind": "paragraph",
+          "excerpt": "过单位成本的下降幅度，导致报告期内毛利率连续下滑。"
+        },
+        {
+          "unit_id": "u1613",
+          "page": 44,
+          "locator": "urn:company-wiki:narrative-unit:sha256:0344e27341aa815106bc3594836e252f06edc62ad10cb3e0e5dd1905ac5e26dd",
+          "kind": "paragraph",
+          "excerpt": "加工中心、加工\n流水线、专机等，\n进行汽车发动机\n及其零部件的高\n效、高速、高精\n度加工。"
+        },
+        {
+          "unit_id": "u1747",
+          "page": 47,
+          "locator": "urn:company-wiki:narrative-unit:sha256:6425bb555b5bbd831e2cc13897efb984a65ab4b97e0d1e63d2b50baf30193937",
+          "kind": "paragraph",
+          "excerpt": "月14 日"
+        },
+        {
+          "unit_id": "u1881",
+          "page": 50,
+          "locator": "urn:company-wiki:narrative-unit:sha256:5b62389a1092cbe4f3e7a448378e417acef6ffe2658191476bcae272bc026ddc",
+          "kind": "paragraph",
+          "excerpt": "恒锋工具股份有限公司 \n5.00%"
+        },
+        {
+          "unit_id": "u2016",
+          "page": 54,
+          "locator": "urn:company-wiki:narrative-unit:sha256:2eeab1eacf99666bcc374140f6946b7ba41933ab377a010fe553f13e02cc869f",
+          "kind": "paragraph",
+          "excerpt": "装备产业“十二五”发展规划》，到2020 年，我国智能制造装备产业将成为具有"
+        },
+        {
+          "unit_id": "u2150",
+          "page": 58,
+          "locator": "urn:company-wiki:narrative-unit:sha256:da71cc659fdd00b5e39507bbb2c45613fee0ca68095f8350450ec80c93dcdc7d",
+          "kind": "paragraph",
+          "excerpt": "者以及其他机构投资者、自然人等合计不超过35 名的特定投资者。"
+        },
+        {
+          "unit_id": "u2284",
+          "page": 62,
+          "locator": "urn:company-wiki:narrative-unit:sha256:caba8784eb899c84fa017cb77bb0e9bdd9ab49d2249619e32a2fe4e27b9ee05c",
+          "kind": "paragraph",
+          "excerpt": "合计 \n35,300.00 \n100.00%"
+        },
+        {
+          "unit_id": "u2419",
+          "page": 66,
+          "locator": "urn:company-wiki:narrative-unit:sha256:d9ff284c97ba4a321aa4bacdf895427c6173ffe7d1c25d70fd72176d61bbf369",
+          "kind": "paragraph",
+          "excerpt": "随着信息科技和先进制造技术的飞速发展，"
+        },
+        {
+          "unit_id": "u2553",
+          "page": 70,
+          "locator": "urn:company-wiki:narrative-unit:sha256:b4ee259a4b28102d4fb4797c84b81c9d1236a1d35eb55bc012372f74d67dfe7d",
+          "kind": "paragraph",
+          "excerpt": "（2）提升生产装备水平，巩固并提升公司的核心竞争优势"
+        },
+        {
+          "unit_id": "u2687",
+          "page": 73,
+          "locator": "urn:company-wiki:narrative-unit:sha256:91e388faf98bb71f74080ae85edf7093df01e9b085f8529c6322b0f0fd5d2330",
+          "kind": "paragraph",
+          "excerpt": "规划募投项目新增产能释放过程，产能消化压力并不会在短期内集中体现。"
+        },
+        {
+          "unit_id": "u2822",
+          "page": 78,
+          "locator": "urn:company-wiki:narrative-unit:sha256:2ab8245cd561483ffe73b0b5bdb9ecf56a01e32f8f3550a36725412be7effd08",
+          "kind": "paragraph",
+          "excerpt": "率等财务指标出现一定程度的下滑。"
+        },
+        {
+          "unit_id": "u2956",
+          "page": 82,
+          "locator": "urn:company-wiki:narrative-unit:sha256:5af6dfc6a74286280c5ef0eb73877a329e3b8f6c1689be5ac1a1839f2657280e",
+          "kind": "paragraph",
+          "excerpt": "计将新增销售收入及利润，但由于募集资金投资项目产生经济效益需要一定的时"
+        },
+        {
+          "unit_id": "u3090",
+          "page": 90,
+          "locator": "urn:company-wiki:narrative-unit:sha256:cb3e61f6374a2169a963de6946ed4c68ec4ebc56b6a94f1e63495e27ca9fad78",
+          "kind": "paragraph",
+          "excerpt": "1-1-90"
+        }
+      ],
+      "evidence_excerpt_chars": 1610
+    },
+    {
+      "sample_id": "hk-annual-miniso-2024",
+      "carrier": "pdf",
+      "headline": "HK bilingual annual report; must never be routed by SEC item numbering",
+      "expected_family": "annual",
+      "expected_not_family": null,
+      "manifest_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "actual_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "sha_matches_manifest": true,
+      "path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\名创优品\\2024年度报告（港股）.pdf",
+      "bytes": 2230253,
+      "mtime_utc": 1761392825.0,
+      "parse": {
+        "parser": "company_wiki.source_catalog.narrative_evidence.parse_pdf",
+        "parse_seconds": 4.869,
+        "page_count": 246,
+        "pages_read": 246,
+        "opaque_pages": [
+          246
+        ],
+        "total_units": 6502,
+        "units_fed": 4000,
+        "native_scan": "partial",
+        "errors": []
+      },
+      "units_total": 4000,
+      "units_non_blank": 4000,
+      "native_text_empty": false,
+      "legacy_title_route": "annual_report",
+      "route_seconds": 0.0509,
+      "route": {
+        "schema_version": "du-route/1",
+        "profile_id": "hk_periodic",
+        "profile_version": "hk_periodic/v1+4df09f5e3fd1",
+        "regime": "hkex",
+        "family": "annual",
+        "subtype": "hk_annual",
+        "confidence": "low",
+        "reasons": [
+          {
+            "code": "COVER_HEADING",
+            "unit_ids": [
+              "u1",
+              "u1101"
+            ],
+            "detail": "港股定期报告措辞"
+          },
+          {
+            "code": "TOC_STRUCTURE",
+            "unit_ids": [
+              "u21",
+              "u541",
+              "u881",
+              "u1221",
+              "u1561",
+              "u1701",
+              "u3621"
+            ],
+            "detail": "港股双语章节"
+          },
+          {
+            "code": "PARTIAL_NATIVE_SCAN",
+            "unit_ids": [
+              "u1"
+            ],
+            "detail": "原生扫描不完整，未覆盖页按未读处理"
+          },
+          {
+            "code": "OPAQUE_PAGES",
+            "unit_ids": [
+              "u1"
+            ],
+            "detail": "1 个不可读页未参与判断"
+          },
+          {
+            "code": "ROUTE_PROBE_LIMIT",
+            "unit_ids": [
+              "u1"
+            ],
+            "detail": "探测到预算上限：已探测 200/4000 单元、13984 字符"
+          }
+        ],
+        "alternatives": [],
+        "child_routes": [],
+        "disposition_hint": "read"
+      },
+      "family_matches_expected": true,
+      "mislabels_expected_not_family": false,
+      "status": "OBSERVED",
+      "evidence_excerpts": [
+        {
+          "unit_id": "u1",
+          "page": 1,
+          "locator": "urn:company-wiki:narrative-unit:sha256:72966efc351da91f5fc3c04bf6fdcec9b00def05e3111bde81af28210a8edd12",
+          "kind": "paragraph",
+          "excerpt": "MINISO"
+        },
+        {
+          "unit_id": "u167",
+          "page": 7,
+          "locator": "urn:company-wiki:narrative-unit:sha256:1282ae458a5ca8a1cd40d478e2a9af8b8db244d5dbbd2700ad784384304e3cfd",
+          "kind": "paragraph",
+          "excerpt": "shareholders of the Company"
+        },
+        {
+          "unit_id": "u334",
+          "page": 13,
+          "locator": "urn:company-wiki:narrative-unit:sha256:e0e37496f1e38a6ad6dc287504cc98d27d10994988c18cb955717c10cb6b28f6",
+          "kind": "paragraph",
+          "excerpt": "期╱年內門店數量的淨增加╱（減少）\n11\n10\n(1)"
+        },
+        {
+          "unit_id": "u501",
+          "page": 18,
+          "locator": "urn:company-wiki:narrative-unit:sha256:c3009452c0946ec5c5c01a606c76ee19e0161079b221c7066fdcb452f2da7c13",
+          "kind": "paragraph",
+          "excerpt": "(1) \n於指定日期的代理商數量乃根據在該日期與我們存\n在有效合同關係的個人和實體數量計算。"
+        },
+        {
+          "unit_id": "u667",
+          "page": 26,
+          "locator": "urn:company-wiki:narrative-unit:sha256:a5154249b8fe44035035fc37101afc9dd5dd271ba6894fd6daa53d7f0c0a9b44",
+          "kind": "paragraph",
+          "excerpt": "Gross profit 毛利\n3,241,039\n5,698,431\n7,637,060\nOther income 其他收入\n18,993\n22,617\n21,595\nSelling and distribution expenses 銷售及分銷開支\n(1,363,114)\n(2,281,080)\n(3,519,534)\nGeneral and administrative expenses 一般及行政開支\n(357,689)\n(677,394)\n(931,651)\nOther net income 其他淨收入\n21,105\n62,361\n114,696\n(Credit loss)/reversal of credit loss on trade and other receivables\n貿易及其他應收款項（信貸虧損）╱信貸虧損撥回\n(2,080)\n2,708\n2,469\nImpair"
+        },
+        {
+          "unit_id": "u834",
+          "page": 32,
+          "locator": "urn:company-wiki:narrative-unit:sha256:7ec4008b118cc0d5912f833a59c82e32617e6c16915e89810dc0b8caa73d95f3",
+          "kind": "paragraph",
+          "excerpt": "資本負債比率"
+        },
+        {
+          "unit_id": "u1001",
+          "page": 40,
+          "locator": "urn:company-wiki:narrative-unit:sha256:7b87c60c3cecb81d0079926e99cdcc54f31f8cc490a966bfce711de936c1f198",
+          "kind": "paragraph",
+          "excerpt": "及"
+        },
+        {
+          "unit_id": "u1167",
+          "page": 46,
+          "locator": "urn:company-wiki:narrative-unit:sha256:f7c87b1ee4aa7daf047b19e5b6f48c75a3cc71e733979603941d0e58ae5e07f8",
+          "kind": "paragraph",
+          "excerpt": "Our Group did not issue any debentures during the Reporting \nPeriod."
+        },
+        {
+          "unit_id": "u1334",
+          "page": 55,
+          "locator": "urn:company-wiki:narrative-unit:sha256:940acb3dc493b43d9bff74091136bda294383e81c098e78b4a81676dabec89e4",
+          "kind": "paragraph",
+          "excerpt": "高級管理層"
+        },
+        {
+          "unit_id": "u1501",
+          "page": 62,
+          "locator": "urn:company-wiki:narrative-unit:sha256:e4134d81123990eea78e0a20005d2e1df189929f7149e020cc5520e78f0f8200",
+          "kind": "paragraph",
+          "excerpt": "提名及企業管治委員會負責檢討董事會組\n成，並就董事的委任、重新委任及董事繼任計劃向\n董事會提出建議。"
+        },
+        {
+          "unit_id": "u1667",
+          "page": 68,
+          "locator": "urn:company-wiki:narrative-unit:sha256:65c6a40261cd494d33bd5ff77c4fc622f9ad4b3c79670d38b733466e72dc21e0",
+          "kind": "paragraph",
+          "excerpt": "The Company has established the Nominating and Corporate \nGovernance Committee in compliance with Rule 3.27A of the \nListing Rules and the Corporate Governance Code."
+        },
+        {
+          "unit_id": "u1834",
+          "page": 76,
+          "locator": "urn:company-wiki:narrative-unit:sha256:3782863a591af9112d4c9ec18a227bbb1921e5bff55d731b5c5bea46cd420717",
+          "kind": "paragraph",
+          "excerpt": "根據本公司的股息政策，在遵守適用法律法規及組\n織章程細則的前提下，本公司年度股息目標原則上\n不低於其年度經調整淨利潤（為一項非《國際財務報\n告準則》財務指標，並定義為不包括以權益結算的\n股份支付開支的期內利潤）的50%。"
+        },
+        {
+          "unit_id": "u2001",
+          "page": 82,
+          "locator": "urn:company-wiki:narrative-unit:sha256:3026fd770572dfa0803b48fac57e85e6899e95f0557d914057023622ceea317d",
+          "kind": "paragraph",
+          "excerpt": "根據《證券及期貨條例》，葉先生被視為\n在Mini Investment Limited持有本公司的所有權益中\n擁有權益。"
+        },
+        {
+          "unit_id": "u2167",
+          "page": 86,
+          "locator": "urn:company-wiki:narrative-unit:sha256:703ec49b86505d4c2e7c994494800ebdbf246b94fa92e898edd617b25691903c",
+          "kind": "paragraph",
+          "excerpt": "及股份數目的50%須於授予日期一"
+        },
+        {
+          "unit_id": "u2334",
+          "page": 88,
+          "locator": "urn:company-wiki:narrative-unit:sha256:a2bf45e036359535d070301c40552b1a2b20064ef16b8d1b212ca543e7132a28",
+          "kind": "paragraph",
+          "excerpt": "授予日期"
+        },
+        {
+          "unit_id": "u2501",
+          "page": 89,
+          "locator": "urn:company-wiki:narrative-unit:sha256:97f21980463781ffd012dd797a5c8f1d4994442527dc95cdadcdfe511f2a691f",
+          "kind": "paragraph",
+          "excerpt": "單位數"
+        },
+        {
+          "unit_id": "u2667",
+          "page": 92,
+          "locator": "urn:company-wiki:narrative-unit:sha256:f9d36ca127daf585497343b8b982d47ab81ecd67bd81aa097bac8069c9b6f77e",
+          "kind": "paragraph",
+          "excerpt": "(HK$ million)"
+        },
+        {
+          "unit_id": "u2834",
+          "page": 99,
+          "locator": "urn:company-wiki:narrative-unit:sha256:4551afe506b08f008f5a1504d7b9fbdc68fe7d8990a663e3116d7ad3358095f5",
+          "kind": "paragraph",
+          "excerpt": "Operating profit 經營利潤\n1,553,707\n3,315,789"
+        },
+        {
+          "unit_id": "u3001",
+          "page": 104,
+          "locator": "urn:company-wiki:narrative-unit:sha256:4e61972456913d74b9c1b839652aee1d72e1f75c05e5d20ae4502e9a413f7dc1",
+          "kind": "paragraph",
+          "excerpt": "以股份為"
+        },
+        {
+          "unit_id": "u3167",
+          "page": 108,
+          "locator": "urn:company-wiki:narrative-unit:sha256:0b5566be7df5f6e1ffbab48b933a64a171591a0fc44d317256ae598cc674a06a",
+          "kind": "paragraph",
+          "excerpt": "名創優品（香港）有限公司\n香港\n350,000,000 港元\n100%\n生活家居產品批發"
+        },
+        {
+          "unit_id": "u3334",
+          "page": 114,
+          "locator": "urn:company-wiki:narrative-unit:sha256:8988d6500a3d983183163b5d10d4759abd22ae27c81b9bf69ab9812a05a485a4",
+          "kind": "paragraph",
+          "excerpt": "(i) \n附屬公司及非控股權益（續）"
+        },
+        {
+          "unit_id": "u3501",
+          "page": 122,
+          "locator": "urn:company-wiki:narrative-unit:sha256:15abd16d6cb80355aac3d18200ee7e9f52500725ff2810b6c55e1b12b3f74614",
+          "kind": "paragraph",
+          "excerpt": "(g) \nLeased assets (continued)"
+        },
+        {
+          "unit_id": "u3667",
+          "page": 129,
+          "locator": "urn:company-wiki:narrative-unit:sha256:d01b9e172cc02f7582619b90a590a0c75472bc8282b8e79447bf00174ec23fee",
+          "kind": "paragraph",
+          "excerpt": "所撥回減值虧損\n於確認撥回的年度計入損益。"
+        },
+        {
+          "unit_id": "u3834",
+          "page": 137,
+          "locator": "urn:company-wiki:narrative-unit:sha256:cccc8b99ec939aafa7fed50d5f79517913666d131c2b8d62216e43c931480f00",
+          "kind": "paragraph",
+          "excerpt": "136\nMINISO  •  Annual Report 2024"
+        }
+      ],
+      "evidence_excerpt_chars": 2078
+    },
+    {
+      "sample_id": "cn-ir-wanrun-20260515",
+      "carrier": "pdf",
+      "headline": "IR activity record with a real negation in a Q&A pair",
+      "expected_family": "investor_qa",
+      "expected_not_family": null,
+      "manifest_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "actual_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "sha_matches_manifest": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万润股份\\raw\\research\\万润股份：投资者关系活动记录表20260515.pdf",
+      "bytes": 153851,
+      "mtime_utc": 1779228233.2629986,
+      "parse": {
+        "parser": "company_wiki.source_catalog.narrative_evidence.parse_pdf",
+        "parse_seconds": 0.332,
+        "page_count": 6,
+        "pages_read": 6,
+        "opaque_pages": [],
+        "total_units": 302,
+        "units_fed": 302,
+        "native_scan": "complete",
+        "errors": []
+      },
+      "units_total": 302,
+      "units_non_blank": 302,
+      "native_text_empty": false,
+      "legacy_title_route": "investor_relations",
+      "route_seconds": 0.0331,
+      "route": {
+        "schema_version": "du-route/1",
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v1+04e23b148d10",
+        "regime": "cn_exchange",
+        "family": "investor_qa",
+        "subtype": "ir_activity_record",
+        "confidence": "low",
+        "reasons": [
+          {
+            "code": "QA_STRUCTURE",
+            "unit_ids": [
+              "u25",
+              "u35",
+              "u46",
+              "u99",
+              "u127",
+              "u136",
+              "u145",
+              "u148",
+              "u153",
+              "u170",
+              "u186",
+              "u198",
+              "u201",
+              "u206",
+              "u209",
+              "u233",
+              "u245",
+              "u250",
+              "u266",
+              "u269",
+              "u28",
+              "u43",
+              "u52",
+              "u67",
+              "u88",
+              "u93",
+              "u117",
+              "u130",
+              "u138",
+              "u183",
+              "u188",
+              "u207",
+              "u210",
+              "u221",
+              "u235",
+              "u248",
+              "u256",
+              "u262",
+              "u298"
+            ],
+            "detail": "投资者关系问答记录"
+          },
+          {
+            "code": "ROUTE_PROBE_LIMIT",
+            "unit_ids": [
+              "u1"
+            ],
+            "detail": "探测到预算上限：已探测 200/302 单元、5798 字符"
+          }
+        ],
+        "alternatives": [],
+        "child_routes": [
+          {
+            "unit_ids": [
+              "u17"
+            ],
+            "profile_id": "generic",
+            "reason": "EXTERNAL_ATTACHMENT_NOT_READ"
+          },
+          {
+            "unit_ids": [
+              "u37"
+            ],
+            "profile_id": "generic",
+            "reason": "EXTERNAL_ATTACHMENT_NOT_READ"
+          },
+          {
+            "unit_ids": [
+              "u25"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u35"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u46"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u99"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u127"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u136"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u145"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u148"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u153"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u170"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u186"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u198"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u201"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          },
+          {
+            "unit_ids": [
+              "u206"
+            ],
+            "profile_id": "investor_qa",
+            "reason": "IN_DOCUMENT_QA_RANGE"
+          }
+        ],
+        "disposition_hint": "read"
+      },
+      "family_matches_expected": true,
+      "mislabels_expected_not_family": false,
+      "status": "OBSERVED",
+      "evidence_excerpts": [
+        {
+          "unit_id": "u1",
+          "page": 1,
+          "locator": "urn:company-wiki:narrative-unit:sha256:cb83c1326504041dd86ea4b008d5c9577f5a9080c5f9c69769a5fa4e0e8749d5",
+          "kind": "paragraph",
+          "excerpt": "1"
+        },
+        {
+          "unit_id": "u13",
+          "page": 1,
+          "locator": "urn:company-wiki:narrative-unit:sha256:625a24ea0e4ebc988b34c9f0c8c070839e43f2e11abbe219fd91cb1a970c03c3",
+          "kind": "paragraph",
+          "excerpt": "号、全景路演APP 方式参与“2026 年山东辖区上市公司投资者网上集体"
+        },
+        {
+          "unit_id": "u26",
+          "page": 1,
+          "locator": "urn:company-wiki:narrative-unit:sha256:141c4cc0f6d1a4fe1a463e4432dce1b3ebde3e072ad9aed83f3f6fcfc9638651",
+          "kind": "paragraph",
+          "excerpt": "临哪些挑战和机遇？"
+        },
+        {
+          "unit_id": "u38",
+          "page": 1,
+          "locator": "urn:company-wiki:narrative-unit:sha256:6c7e751070fda960526fdfbd6d039da8a636d6b21f5c3879608847eb596da71d",
+          "kind": "table_row",
+          "excerpt": "时间 | 2026 年5 月15 日 15:00-16:30"
+        },
+        {
+          "unit_id": "u51",
+          "page": 2,
+          "locator": "urn:company-wiki:narrative-unit:sha256:79f22770594a138f4bca4470b612835532d0f15e9c586a31a2ed587f66646cb3",
+          "kind": "paragraph",
+          "excerpt": "些障碍？"
+        },
+        {
+          "unit_id": "u63",
+          "page": 2,
+          "locator": "urn:company-wiki:narrative-unit:sha256:6ceb1d5968755d063170a480093934ff26e00baf9fca32b7341e54817190b048",
+          "kind": "paragraph",
+          "excerpt": "3、问：公司业绩在23 年度达到历史新高后，24 年度断崖式下降，"
+        },
+        {
+          "unit_id": "u76",
+          "page": 2,
+          "locator": "urn:company-wiki:narrative-unit:sha256:bef06597b6f2b4c497e72f7a53e405e67541899554232a53c82f7522f40c9385",
+          "kind": "paragraph",
+          "excerpt": "比增长约17.89%，实现归属于上市公司股东的净利润约0.88 亿元，同比"
+        },
+        {
+          "unit_id": "u89",
+          "page": 2,
+          "locator": "urn:company-wiki:narrative-unit:sha256:5aa7276706da92bf084baf1100a677b97df2400cf506458fc7b5f68bc1d8ad4d",
+          "kind": "table_row",
+          "excerpt": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。"
+        },
+        {
+          "unit_id": "u101",
+          "page": 3,
+          "locator": "urn:company-wiki:narrative-unit:sha256:a30f3b130b870ca60117a9b8c7949f691c5f4386343bb2d0af987f90d9d42917",
+          "kind": "paragraph",
+          "excerpt": "答：您好，公司是以研发创新驱动发展的平台型企业，为争取更多市"
+        },
+        {
+          "unit_id": "u114",
+          "page": 3,
+          "locator": "urn:company-wiki:narrative-unit:sha256:ac9bdd1dac563cfdf2df010511f8aec3f36978f3bfcf0028dbf84d1fc79bba34",
+          "kind": "paragraph",
+          "excerpt": "有没有"
+        },
+        {
+          "unit_id": "u126",
+          "page": 3,
+          "locator": "urn:company-wiki:narrative-unit:sha256:aef08fa09fb6cc63a65837ff70b02f638738661b543e54855910460a8f768df8",
+          "kind": "paragraph",
+          "excerpt": "万股，合计持股比例已经达29.08%，感谢您对公司的关注！"
+        },
+        {
+          "unit_id": "u139",
+          "page": 3,
+          "locator": "urn:company-wiki:narrative-unit:sha256:d22dd2581642deea91f537e2d70dcc83456964392adf03ef027cc67c98f72108",
+          "kind": "paragraph",
+          "excerpt": "2026 年一季度收入及归属于上市公司股东的净利润均实"
+        },
+        {
+          "unit_id": "u152",
+          "page": 3,
+          "locator": "urn:company-wiki:narrative-unit:sha256:0bffb6005971152c2b78ec344941df53a8904c44ce8fdd7ff6b49be3805c8232",
+          "kind": "table_row",
+          "excerpt": "感谢关注！"
+        },
+        {
+          "unit_id": "u164",
+          "page": 4,
+          "locator": "urn:company-wiki:narrative-unit:sha256:2572d7342ce333f3c8e69340630ac895e3447e61c1cd7e36e03b40a98fbe6b80",
+          "kind": "paragraph",
+          "excerpt": "请问是什么原因导致的？"
+        },
+        {
+          "unit_id": "u177",
+          "page": 4,
+          "locator": "urn:company-wiki:narrative-unit:sha256:ed9ab1589dabe19df5acf19045385bc9c05c77be52337e937ec01204584d4208",
+          "kind": "paragraph",
+          "excerpt": "公司持续稳定发展，公司每年实现的归属于母公司所有者的净利润在提取"
+        },
+        {
+          "unit_id": "u189",
+          "page": 4,
+          "locator": "urn:company-wiki:narrative-unit:sha256:b20625c85077342f3f02fed5ccaa078496dec6a54097be24b57ffee3404065cb",
+          "kind": "paragraph",
+          "excerpt": "公司一直坚持以现金分红方式回报广大投资者，《公司章"
+        },
+        {
+          "unit_id": "u202",
+          "page": 4,
+          "locator": "urn:company-wiki:narrative-unit:sha256:7fa11f5caacb23e6a0e2b9ada29585a71aff5398458ac2e079644ca33d28a61c",
+          "kind": "table_row",
+          "excerpt": "答：您好！"
+        },
+        {
+          "unit_id": "u214",
+          "page": 5,
+          "locator": "urn:company-wiki:narrative-unit:sha256:b4873ba5cbfbf539979652763ce2030c1d9b5fae7fa085d83ecfddb4bbc6e0be",
+          "kind": "paragraph",
+          "excerpt": "5"
+        },
+        {
+          "unit_id": "u227",
+          "page": 5,
+          "locator": "urn:company-wiki:narrative-unit:sha256:ef99d8eb0ed7d7a7d07fc34b6be92fd577e78eced3869d36ecc91c00a52b9971",
+          "kind": "paragraph",
+          "excerpt": "营业收入37.17 亿元，同比增长约0.63%，实现归属于上市公司股东的净"
+        },
+        {
+          "unit_id": "u240",
+          "page": 5,
+          "locator": "urn:company-wiki:narrative-unit:sha256:dcaa09876888c759d3b215f19b3cea7dd5a2796b393cc3f643b11a0bf616fd21",
+          "kind": "paragraph",
+          "excerpt": "合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动"
+        },
+        {
+          "unit_id": "u252",
+          "page": 5,
+          "locator": "urn:company-wiki:narrative-unit:sha256:6b22bfeec53437f5f001fb57678b54bef907198fa702fcbdf50543f3ee5e98fa",
+          "kind": "paragraph",
+          "excerpt": "请问董事"
+        },
+        {
+          "unit_id": "u265",
+          "page": 5,
+          "locator": "urn:company-wiki:narrative-unit:sha256:cbac60408f31df4cfb2455dc0991d359aa88af1746b41e604c4698daaf5c6457",
+          "kind": "table_row",
+          "excerpt": "谢谢！"
+        },
+        {
+          "unit_id": "u277",
+          "page": 6,
+          "locator": "urn:company-wiki:narrative-unit:sha256:750d73f63d1246071feb13ce8b79adc5d62486baaefe732a1f87631be5c050d6",
+          "kind": "paragraph",
+          "excerpt": "实现销售。"
+        },
+        {
+          "unit_id": "u290",
+          "page": 6,
+          "locator": "urn:company-wiki:narrative-unit:sha256:7017d9e195c3b00754f8f005dd511df113734cdf9f7f35f821ab2179d56c078b",
+          "kind": "paragraph",
+          "excerpt": "示文稿、提供的文档等附"
+        }
+      ],
+      "evidence_excerpt_chars": 1369
+    },
+    {
+      "sample_id": "cn-quarterly-amec-2026q1",
+      "carrier": "pdf",
+      "headline": "A-share quarterly with real product narrative; must not be skipped as a whole",
+      "expected_family": "quarterly",
+      "expected_not_family": "annual",
+      "manifest_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "actual_sha256": "ab7bb0076b2a3fb42ebca7b54d1b167a790221e394613ce544e275b249eb3268",
+      "sha_matches_manifest": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2026年第一季度报告.pdf",
+      "bytes": 217264,
+      "mtime_utc": 1779046989.6738036,
+      "parse": {
+        "parser": "company_wiki.source_catalog.narrative_evidence.parse_pdf",
+        "parse_seconds": 0.612,
+        "page_count": 15,
+        "pages_read": 15,
+        "opaque_pages": [],
+        "total_units": 579,
+        "units_fed": 579,
+        "native_scan": "complete",
+        "errors": []
+      },
+      "units_total": 579,
+      "units_non_blank": 579,
+      "native_text_empty": false,
+      "legacy_title_route": "quarterly_report",
+      "route_seconds": 0.0364,
+      "route": {
+        "schema_version": "du-route/1",
+        "profile_id": "cn_quarterly",
+        "profile_version": "cn_quarterly/v1+b1e824bb782b",
+        "regime": "cn_exchange",
+        "family": "quarterly",
+        "subtype": "cn_quarterly_report",
+        "confidence": "low",
+        "reasons": [
+          {
+            "code": "COVER_HEADING",
+            "unit_ids": [
+              "u1",
+              "u3",
+              "u6",
+              "u9",
+              "u12",
+              "u15",
+              "u18",
+              "u21"
+            ],
+            "detail": "封面/标题含季度报告"
+          },
+          {
+            "code": "ROUTE_PROBE_LIMIT",
+            "unit_ids": [
+              "u1"
+            ],
+            "detail": "探测到预算上限：已探测 200/579 单元、5702 字符"
+          }
+        ],
+        "alternatives": [],
+        "child_routes": [],
+        "disposition_hint": "read"
+      },
+      "family_matches_expected": true,
+      "mislabels_expected_not_family": false,
+      "status": "OBSERVED",
+      "evidence_excerpts": [
+        {
+          "unit_id": "u1",
+          "page": 1,
+          "locator": "urn:company-wiki:narrative-unit:sha256:829ae4e2c93fdcfa035e17d0c1ef44c597e7818826ae6993688b17d32d8663a8",
+          "kind": "paragraph",
+          "excerpt": "中微半导体设备（上海）股份有限公司2026 年第一季度报告"
+        },
+        {
+          "unit_id": "u25",
+          "page": 2,
+          "locator": "urn:company-wiki:narrative-unit:sha256:8c67426df81d4fda071dfe6dadab01b68fb7ecec006c4d3686798635593c071f",
+          "kind": "paragraph",
+          "excerpt": "项目\n本报告期\n上年同期"
+        },
+        {
+          "unit_id": "u49",
+          "page": 2,
+          "locator": "urn:company-wiki:narrative-unit:sha256:b832b579a4acebd40f617c7d3d1e374cea128f5a0f051ce1b102d6ccff555463",
+          "kind": "paragraph",
+          "excerpt": "本报告期末"
+        },
+        {
+          "unit_id": "u73",
+          "page": 2,
+          "locator": "urn:company-wiki:narrative-unit:sha256:73458646b5445a8b26c8afbff8fb5695ba48615153eddad1ace155d459f5fd45",
+          "kind": "table_row",
+          "excerpt": "营业收入 | 2,914,986,518.73 | 2,173,278,385.62 | 34.13%"
+        },
+        {
+          "unit_id": "u97",
+          "page": 3,
+          "locator": "urn:company-wiki:narrative-unit:sha256:1808a38ed67fa89313e9b06c84327f31c1ea3868edb616a174bbe9f70a4555f1",
+          "kind": "paragraph",
+          "excerpt": "薄膜设备营收同比大幅增长约224.23%，成为公司业绩增长的重要新引擎。"
+        },
+        {
+          "unit_id": "u121",
+          "page": 3,
+          "locator": "urn:company-wiki:narrative-unit:sha256:c54f77dbd17770d918c02513b84320c1f02c8b996ad0a052160fc3d92dbddbf4",
+          "kind": "paragraph",
+          "excerpt": "较上年同期增加1.79 亿元（增长60.09%），主要由于营业收入增长下毛利增加2.60 亿元，销售"
+        },
+        {
+          "unit_id": "u145",
+          "page": 4,
+          "locator": "urn:company-wiki:narrative-unit:sha256:42161f126e0169519b74663449b4d4e61e49be088976f60d5054fd70d64a7a17",
+          "kind": "paragraph",
+          "excerpt": "企业因相关经营活动不再持续而发生的一次\n性费用，如安置职工的支出等"
+        },
+        {
+          "unit_id": "u169",
+          "page": 4,
+          "locator": "urn:company-wiki:narrative-unit:sha256:2e46f20ad6817ad63fa51c35b182da99327a71929b3c1387a9ec1a1a8ca8c396",
+          "kind": "table_row",
+          "excerpt": "因税收、会计等法律、法规的调整对当期损\n益产生的一次性影响"
+        },
+        {
+          "unit_id": "u194",
+          "page": 5,
+          "locator": "urn:company-wiki:narrative-unit:sha256:4fafa1600dc464999ea53556749628bc4a8631eb568e40bf88c893db9f1336a9",
+          "kind": "paragraph",
+          "excerpt": "公司本期利润总额为9.77 亿元，同比增长约231.90%；"
+        },
+        {
+          "unit_id": "u218",
+          "page": 5,
+          "locator": "urn:company-wiki:narrative-unit:sha256:6f1ad61894de10f7d0706c7ae1fcc37ca6f4f7f7e345184f8c57369dcdd2d44a",
+          "kind": "table_row",
+          "excerpt": "研发投入合计 | 32.15 | 本期公司研发投入约9.08 亿元，较上年同期增长2.21\n亿元，同比增长约32.15%。"
+        },
+        {
+          "unit_id": "u242",
+          "page": 6,
+          "locator": "urn:company-wiki:narrative-unit:sha256:cfba59df37beeb031cc049a3d28aa3ed442fe922ff277f4f7645e1dc6159de26",
+          "kind": "paragraph",
+          "excerpt": "广发证券股份有限公司\n－国泰中证半导体材料\n设备主题交易型开放式\n指数证券投资基金"
+        },
+        {
+          "unit_id": "u266",
+          "page": 6,
+          "locator": "urn:company-wiki:narrative-unit:sha256:4f0399cff2cd6852ae45625e89ddbf6c5b67a59037a559842486127dfa5894ee",
+          "kind": "table_row",
+          "excerpt": "招商银行股份有限公司\n－银河创新成长混合型\n证券投资基金 | 其他 | 4,013,372 | 0.64 | 0 | 0 | 无 | 0"
+        },
+        {
+          "unit_id": "u290",
+          "page": 7,
+          "locator": "urn:company-wiki:narrative-unit:sha256:600488894c54c8d01042b0fdbdf7ce3108c59917a556ec6d075b56ab126ea1e8",
+          "kind": "paragraph",
+          "excerpt": "中信证券股份有限公司－嘉实\n上证科创板芯片交易型开放式\n指数证券投资基金"
+        },
+        {
+          "unit_id": "u314",
+          "page": 8,
+          "locator": "urn:company-wiki:narrative-unit:sha256:16b6f6481fb1c7d1571777c2240860e883931a06ccbe8f1ac23d7074840cc973",
+          "kind": "paragraph",
+          "excerpt": "需提醒投资者关注的关于公司报告期经营情况的其他重要信息\n□适用√不适用"
+        },
+        {
+          "unit_id": "u338",
+          "page": 8,
+          "locator": "urn:company-wiki:narrative-unit:sha256:e72c5922427a9f09f409011bdba67db7b8d05221c19a3c58c98c31984950fcdf",
+          "kind": "paragraph",
+          "excerpt": "买入返售金融资产"
+        },
+        {
+          "unit_id": "u362",
+          "page": 9,
+          "locator": "urn:company-wiki:narrative-unit:sha256:964946f2c458af4f5c491fa07685c02ce406e2c09b0e79f8e7abddf42745755e",
+          "kind": "paragraph",
+          "excerpt": "无形资产\n1,226,750,901.23\n1,285,841,936.37"
+        },
+        {
+          "unit_id": "u387",
+          "page": 9,
+          "locator": "urn:company-wiki:narrative-unit:sha256:d316235887972cd9d4436e7fa0710b324943f5aa3fce75ec2cf1d82a0134ae86",
+          "kind": "paragraph",
+          "excerpt": "应交税费\n149,641,699.26\n102,022,623.49"
+        },
+        {
+          "unit_id": "u411",
+          "page": 10,
+          "locator": "urn:company-wiki:narrative-unit:sha256:91cecfba5b33bab6b621f23db08c9594f8540430ec1c84e9cc1d68fcab3392b0",
+          "kind": "paragraph",
+          "excerpt": "其他非流动负债\n1,666,832.60\n1,648,385.00"
+        },
+        {
+          "unit_id": "u435",
+          "page": 11,
+          "locator": "urn:company-wiki:narrative-unit:sha256:cef1f4f5304f89285fe44ce8cb7127ab568d66e91395c4985e22554ceb7e5d4d",
+          "kind": "paragraph",
+          "excerpt": "单位：元\n币种:人民币\n审计类型：未经审计"
+        },
+        {
+          "unit_id": "u459",
+          "page": 11,
+          "locator": "urn:company-wiki:narrative-unit:sha256:705023b64938a0f5b9becbc13480c44ebb1ac759034e00251619d3d1ea697813",
+          "kind": "paragraph",
+          "excerpt": "投资收益（损失以“-”号填列）\n499,544,578.06\n-12,012,219.16"
+        },
+        {
+          "unit_id": "u483",
+          "page": 12,
+          "locator": "urn:company-wiki:narrative-unit:sha256:f0a095dbc4e4c14ece124c4cc0ea065cb3e5fbe5dd87258b587eff6abdd6f6f3",
+          "kind": "paragraph",
+          "excerpt": "（一）归属母公司所有者的其他综合\n收益的税后净额\n5,844,702.15\n10,010,526.31"
+        },
+        {
+          "unit_id": "u507",
+          "page": 13,
+          "locator": "urn:company-wiki:narrative-unit:sha256:862d49e504c6cb11b81dacda0a337e809a3a3c15944b79e4698e11be74d4ec9b",
+          "kind": "paragraph",
+          "excerpt": "公司负责人：尹志尧主管会计工作负责人：陈伟文会计机构负责人：陈伟文"
+        },
+        {
+          "unit_id": "u531",
+          "page": 13,
+          "locator": "urn:company-wiki:narrative-unit:sha256:4530e53f320e9d0e8e610d7aeee0e7b1f366806e6bd6c7c6a7d79412edc0f8bb",
+          "kind": "paragraph",
+          "excerpt": "拆出资金净增加额"
+        },
+        {
+          "unit_id": "u555",
+          "page": 14,
+          "locator": "urn:company-wiki:narrative-unit:sha256:fbea09b13c2787f9e2d9afe8842a7991ec78e9ef100e819818a4e74173ccad2e",
+          "kind": "paragraph",
+          "excerpt": "投资活动产生的现金流量净\n额\n-253,693,504.22\n-80,832,173.83"
+        }
+      ],
+      "evidence_excerpt_chars": 1690
+    },
+    {
+      "sample_id": "us-10k-msft-2025",
+      "carrier": "html",
+      "headline": "SEC 10-K HTML: SEC item numbering, never HK/A-share section vocabulary",
+      "expected_family": "annual",
+      "expected_not_family": null,
+      "manifest_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "actual_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+      "sha_matches_manifest": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\微软\\raw\\financial_reports\\annual\\微软_10-K_2025.htm",
+      "bytes": 8158067,
+      "mtime_utc": 1784663189.6163292,
+      "parse": {
+        "parser": "company_wiki.document_normalization.normalize_document(text/html)",
+        "parse_seconds": 4.571,
+        "page_count": null,
+        "total_units": 5215,
+        "units_fed": 4000,
+        "native_scan": "complete",
+        "errors": []
+      },
+      "units_total": 4000,
+      "units_non_blank": 4000,
+      "native_text_empty": false,
+      "legacy_title_route": "unknown",
+      "route_seconds": 0.084,
+      "route": {
+        "schema_version": "du-route/1",
+        "profile_id": "sec_10k",
+        "profile_version": "sec_10k/v1+7dd79ac9fcf5",
+        "regime": "sec",
+        "family": "annual",
+        "subtype": "10-k",
+        "confidence": "low",
+        "reasons": [
+          {
+            "code": "COVER_HEADING",
+            "unit_ids": [
+              "u1",
+              "u21",
+              "u41"
+            ],
+            "detail": "SEC 表单: 10-K"
+          },
+          {
+            "code": "ROUTE_PROBE_LIMIT",
+            "unit_ids": [
+              "u1"
+            ],
+            "detail": "探测到预算上限：已探测 200/4000 单元、14084 字符"
+          }
+        ],
+        "alternatives": [],
+        "child_routes": [],
+        "disposition_hint": "read"
+      },
+      "family_matches_expected": true,
+      "mislabels_expected_not_family": false,
+      "status": "OBSERVED",
+      "evidence_excerpts": [
+        {
+          "unit_id": "u1",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:ae15c44263f79a29828efa0714e42aff6ffcbd72b3beea37d878ddad1eec10f3",
+          "kind": "paragraph",
+          "excerpt": "UNITED STATES"
+        },
+        {
+          "unit_id": "u167",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:82cbde2853bc6732cd3e561a2bc15fa2ed3c00ea7ec40d9c37d5509563486fce",
+          "kind": "paragraph",
+          "excerpt": "•"
+        },
+        {
+          "unit_id": "u334",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:1fa72abaacc0419dcd45780fb8e0aea27c80f784121e5a365eb2b605652e410a",
+          "kind": "paragraph",
+          "excerpt": "Enterprise Agreement"
+        },
+        {
+          "unit_id": "u501",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:f92a92de7e665453fb39f3799b8c3a882c7f1fa2128307252a36623d2b71e48d",
+          "kind": "paragraph",
+          "excerpt": "Our products and services, how they are used by customers, and how third-party products and services interact with them, may present security, privacy, and execution risks. Our products and services may contain defects in design, manufacture, or operation that make them insecure or ineffective for their intended purposes. For example, customers control our products and services, including our AI p"
+        },
+        {
+          "unit_id": "u667",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:72bbb7d49900d6753ec8c709bbd7eb66261ed47630e1eaea1ce431ad62b696ed",
+          "kind": "paragraph",
+          "excerpt": "On September 16, 2024, our Board of Directors approved a share repurchase program authorizing up to $60.0 billion in share repurchases. This share repurchase program commenced in April 2025, following completion of the program approved on September 14, 2021, has no expiration date, and may be terminated at any time."
+        },
+        {
+          "unit_id": "u834",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:d3069339cfee27d41607366e5f3ef7db99639206278d15a6e09251acc5669e2e",
+          "kind": "table_row",
+          "excerpt": "27,548"
+        },
+        {
+          "unit_id": "u1001",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:4413c97471ef4121a86bfdd93c802afdc943f7b4f70e0f6fb713adb08bf24750",
+          "kind": "table_row",
+          "excerpt": "$"
+        },
+        {
+          "unit_id": "u1167",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:2af517bb4b085b8ed38ed6f31615ea2e6e93acdd2096e18e1cba9fb43bfa57d0",
+          "kind": "paragraph",
+          "excerpt": "CRITICAL ACCOUNTING ESTIMATES"
+        },
+        {
+          "unit_id": "u1334",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:5530b38378c42fdadf0a78f9fee136a1d04bd6fd83b6a06fc71fafaaf325758f",
+          "kind": "table_row",
+          "excerpt": "72,361"
+        },
+        {
+          "unit_id": "u1501",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:48288103aaa096253b69bf7fddc0f495ae55a2e91b33fa2ff2ccd1a5a614e234",
+          "kind": "table_row",
+          "excerpt": "2,835"
+        },
+        {
+          "unit_id": "u1667",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:1a7ded3e867d2cfdfd6b44b186b6851aa4845e62164c9f38b14fc9d58db367a2",
+          "kind": "table_row",
+          "excerpt": "Net cash used in financing"
+        },
+        {
+          "unit_id": "u1834",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:dc8eda6d123c672ef39b7ebcbd6e81739b63e0dc6c3704d0032637c24306ba99",
+          "kind": "table_row",
+          "excerpt": "$"
+        },
+        {
+          "unit_id": "u2001",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:273a4979289fa1f6bfacb48ce7b1b3d1cd8e64e77bde3784eb1fa06f1f3357bb",
+          "kind": "table_row",
+          "excerpt": "$"
+        },
+        {
+          "unit_id": "u2167",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:460b0a23812c3699089877fd84bbd89b488ba88e69b81039a4e84b7af09a9e30",
+          "kind": "table_row",
+          "excerpt": "$"
+        },
+        {
+          "unit_id": "u2334",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:d9db37f436beb38e2ebc630cd0577e11ce499e61f5052685faf29711cc8df7ed",
+          "kind": "table_row",
+          "excerpt": "June 30, 2024"
+        },
+        {
+          "unit_id": "u2501",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:3c51d1bd56368484ef2dd486a228b4cd58f64bc368b05778748677c75e7617eb",
+          "kind": "table_row",
+          "excerpt": "$"
+        },
+        {
+          "unit_id": "u2667",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:6ea10487e289ad5e78161a5b0f0e146e498dd098bff76ce533ac3e76ca3eb8c8",
+          "kind": "table_row",
+          "excerpt": "52,432"
+        },
+        {
+          "unit_id": "u2834",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:134d676e1e9788956067b9df5bc8df277a760650ec615eea97481a2a764b3745",
+          "kind": "table_row",
+          "excerpt": "$"
+        },
+        {
+          "unit_id": "u3001",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:2e2263036bcb8d563fc4a83139054de8d7fac99ff8d7e6b768b0cde737ada57c",
+          "kind": "table_row",
+          "excerpt": "2025"
+        },
+        {
+          "unit_id": "u3167",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:721607f13c3c018a188208b51c6d628431fade8e1bda7915dc03c7a593fce768",
+          "kind": "paragraph",
+          "excerpt": "Goodwill Impairment"
+        },
+        {
+          "unit_id": "u3334",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:dc4cf5f484413ab3f568a5ce7cf24396d9e5b2673dbbc6e43773a0c5c83696e6",
+          "kind": "table_row",
+          "excerpt": "718"
+        },
+        {
+          "unit_id": "u3501",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:004cd2fe699cdeb18969083e049ff426fdc3942587d9868212dacf355444762c",
+          "kind": "paragraph",
+          "excerpt": "73"
+        },
+        {
+          "unit_id": "u3667",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:c73c26d3526d0b31d64e80e56837c37890f38f5a8e79e9ed444f681079553390",
+          "kind": "table_row",
+          "excerpt": "12,874"
+        },
+        {
+          "unit_id": "u3834",
+          "page": null,
+          "locator": "urn:company-wiki:narrative-unit:sha256:39814072856f0feacd4807e524aa05e6b0c8ba42b197f3d1d82de2d72637b9eb",
+          "kind": "table_row",
+          "excerpt": "Year Ended June 30, 2025"
+        }
+      ],
+      "evidence_excerpt_chars": 1786
+    },
+    {
+      "sample_id": "us-earnings-call-msft-q4fy26",
+      "carrier": "txt",
+      "headline": "TXT transcript: speaker turns, analyst questions vs management answers",
+      "expected_family": "earnings_call",
+      "expected_not_family": null,
+      "manifest_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "actual_sha256": "4ac3b4f0fa1be928b56b4ef9775cac694a1712d46785bb1fa28d2a6a68d7852a",
+      "sha_matches_manifest": true,
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\Microsoft\\raw\\transcripts\\MSFT_Q4_2026_earnings_call.txt",
+      "bytes": 66324,
+      "mtime_utc": 1791418213.692349,
+      "parse": {
+        "parser": "utf-8 read + blank-line blocking (carrier read only, no new parser)",
+        "parse_seconds": 0.001,
+        "page_count": null,
+        "total_units": 166,
+        "units_fed": 166,
+        "native_scan": "complete",
+        "errors": []
+      },
+      "units_total": 166,
+      "units_non_blank": 166,
+      "native_text_empty": false,
+      "legacy_title_route": "investor_call_transcript",
+      "route_seconds": 0.1368,
+      "route": {
+        "schema_version": "du-route/1",
+        "profile_id": "earnings_call",
+        "profile_version": "earnings_call/v1+c29feb6dfc55",
+        "regime": "unknown",
+        "family": "earnings_call",
+        "subtype": "transcript",
+        "confidence": "low",
+        "reasons": [
+          {
+            "code": "SPEAKER_TURNS",
+            "unit_ids": [
+              "u1",
+              "u3",
+              "u58",
+              "u59",
+              "u60",
+              "u62",
+              "u63",
+              "u88",
+              "u113",
+              "u121",
+              "u123",
+              "u126",
+              "u136",
+              "u142",
+              "u146",
+              "u153",
+              "u159",
+              "u162",
+              "u43",
+              "u44",
+              "u45",
+              "u46",
+              "u47",
+              "u48",
+              "u49",
+              "u51",
+              "u52",
+              "u54",
+              "u55",
+              "u57",
+              "u64",
+              "u87",
+              "u112",
+              "u114",
+              "u115",
+              "u120",
+              "u122",
+              "u127",
+              "u128",
+              "u133",
+              "u137",
+              "u138",
+              "u144",
+              "u147",
+              "u148",
+              "u154",
+              "u155",
+              "u160",
+              "u161"
+            ],
+            "detail": "发言轮次与角色"
+          },
+          {
+            "code": "ROUTE_PROBE_LIMIT",
+            "unit_ids": [
+              "u1"
+            ],
+            "detail": "探测到预算上限：已探测 162/166 单元、63974 字符"
+          }
+        ],
+        "alternatives": [],
+        "child_routes": [
+          {
+            "unit_ids": [
+              "u1"
+            ],
+            "profile_id": "generic",
+            "reason": "EXTERNAL_ATTACHMENT_NOT_READ"
+          }
+        ],
+        "disposition_hint": "read"
+      },
+      "family_matches_expected": true,
+      "mislabels_expected_not_family": false,
+      "status": "OBSERVED",
+      "evidence_excerpts": [
+        {
+          "unit_id": "u1",
+          "page": null,
+          "locator": "line:1",
+          "kind": "paragraph",
+          "excerpt": "======================================================================\nEarnings Call Transcript\nCompany: Microsoft (微软)\nTicker: MSFT\nQuarter: Q4 2026\nSource: motley_fool\nURL: https://www.fool.com/earnings/call-transcripts/2026/08/07/microsoft-msft-q4-2026-earnings-call-transcript/\nScraped: 2026-09-03T22:44:45.464617\nCharacters: 65572\n================================================================"
+        },
+        {
+          "unit_id": "u7",
+          "page": null,
+          "locator": "line:7",
+          "kind": "paragraph",
+          "excerpt": "Deputy General Counsel and Corporate Secretary - Brian DeFoe"
+        },
+        {
+          "unit_id": "u14",
+          "page": null,
+          "locator": "line:14",
+          "kind": "paragraph",
+          "excerpt": "Microsoft 365 Copilot Seats-- Over 30 million paid seats, with net seat adds more than doubling sequentially."
+        },
+        {
+          "unit_id": "u21",
+          "page": null,
+          "locator": "line:21",
+          "kind": "paragraph",
+          "excerpt": "Productivity and Business Processes Revenue-- $37.8 billion, a 14% increase driven by Microsoft 365 Commercial cloud momentum."
+        },
+        {
+          "unit_id": "u28",
+          "page": null,
+          "locator": "line:28",
+          "kind": "paragraph",
+          "excerpt": "Investment Gains-- Included a $3.2 billion gain from an investment in Anthropic during the fourth quarter."
+        },
+        {
+          "unit_id": "u35",
+          "page": null,
+          "locator": "line:35",
+          "kind": "paragraph",
+          "excerpt": "Management reported total annual revenue exceeding $331 billion for the fiscal year, with growth driven by Azure and first-party AI applications. The company is transitioning its business model toward a per-seat plus consumption framework to broaden its addressable market. Nadella indicated that the architectural design focuses on model substitution and enterprise data control. Hood noted that cap"
+        },
+        {
+          "unit_id": "u42",
+          "page": null,
+          "locator": "line:42",
+          "kind": "paragraph",
+          "excerpt": "INDUSTRY GLOSSARY"
+        },
+        {
+          "unit_id": "u49",
+          "page": null,
+          "locator": "line:49",
+          "kind": "paragraph",
+          "excerpt": "SKU: Stock Keeping Unit is a distinct type of item for sale, such as a specific software license tier."
+        },
+        {
+          "unit_id": "u56",
+          "page": null,
+          "locator": "line:56",
+          "kind": "paragraph",
+          "excerpt": "E7: A premium Microsoft 365 licensing suite that includes advanced security and AI management tools."
+        },
+        {
+          "unit_id": "u63",
+          "page": null,
+          "locator": "line:63",
+          "kind": "paragraph",
+          "excerpt": "Actual results could materially differ because of factors discussed in today's earnings press release, in the comments made during this conference call, and in the risk factor section of our Form 10-K, Form 10-Q, and other reports and filings with the Securities and Exchange Commission. We do not undertake any duty to update any forward-looking statement. And with that, I'll turn the call over to "
+        },
+        {
+          "unit_id": "u70",
+          "page": null,
+          "locator": "line:70",
+          "kind": "paragraph",
+          "excerpt": "For example, millions of developers have used MAI-Code-1-Flash on GitHub Copilot achieving higher code acceptance rates and 10% lower median token usage, while still having access to frontier capabilities from OpenAI and Anthropic. In Excel, MAI-Code-1-Flash is delivering comparable quality to GPT-5.6 for the most common task while operating at significantly lower costs. In security, MAI-Cyber-1-F"
+        },
+        {
+          "unit_id": "u77",
+          "page": null,
+          "locator": "line:77",
+          "kind": "paragraph",
+          "excerpt": "And the time from deployment to what we think of as high usage, meaning monthly active usage about 80% across a customers' user base, has fallen from months to just days over the past year. The number of customers with more than 50,000 seats increased over 7x year-over-year, and the number of enterprise customers deploying Copilot to the majority of their information workers grew nearly 75% quarte"
+        },
+        {
+          "unit_id": "u84",
+          "page": null,
+          "locator": "line:84",
+          "kind": "paragraph",
+          "excerpt": "And we partnered with LSEG to embed AI into LSEG Workspace, helping finance professionals ask complex questions and quickly find answers across structured and unstructured financial content. Finally, let me talk about devices and consumer. When it comes to Xbox, we are making the necessary decisions required across our content portfolio, platform, and operations to reset the business for long-term"
+        },
+        {
+          "unit_id": "u90",
+          "page": null,
+          "locator": "line:90",
+          "kind": "paragraph",
+          "excerpt": "When adjusted for the impact of our investments in OpenAI, other income and expense was $2.8 billion, driven by the gain on investment in Anthropic noted earlier. Capital expenditures were $41 billion, including the impact from higher component pricing, as noted in our guide. Roughly 2/3 of our CapEx was for short-lived assets, primarily CPUs and GPUs as customers increasingly build solutions that"
+        },
+        {
+          "unit_id": "u97",
+          "page": null,
+          "locator": "line:97",
+          "kind": "paragraph",
+          "excerpt": "Segment gross margin dollars increased 24% and gross margin percentage decreased year-over-year, primarily driven by sales mix shift to Azure as well as the continued scaling of our AI infrastructure ahead of growing demand, partially offset by ongoing efficiency gains in Azure. Segment gross margins were also impacted by growing GitHub Copilot usage, though margins improved through the quarter wi"
+        },
+        {
+          "unit_id": "u104",
+          "page": null,
+          "locator": "line:104",
+          "kind": "paragraph",
+          "excerpt": "In commercial bookings, when adjusted for the impact from OpenAI, we expect healthy growth on a growing expiry base driven by strong execution across our core annuity sales motions. As a reminder, the significant OpenAI contracts signed in the prior year will result in some quarterly volatility in both bookings and RPO growth rates. Microsoft Cloud gross margin percentage should be relatively stab"
+        },
+        {
+          "unit_id": "u111",
+          "page": null,
+          "locator": "line:111",
+          "kind": "paragraph",
+          "excerpt": "As we begin FY '27, we remain focused on delivering products that create meaningful return on investment for our customers, which will result in durable long-term growth for Microsoft and our shareholders. With that, let's go to Q&A, Jonathan."
+        },
+        {
+          "unit_id": "u118",
+          "page": null,
+          "locator": "line:118",
+          "kind": "paragraph",
+          "excerpt": "That's really the enterprise design architecture that we are going to evangelize. We ourselves are using it. Copilot is built that way. GitHub Copilot is built that way. Our Security Copilot is built that way. And we want to democratize that design pattern so that every enterprise can use it. And within there, there will be a mix of open weights, closed weights. And by the way, one of the things t"
+        },
+        {
+          "unit_id": "u125",
+          "page": null,
+          "locator": "line:125",
+          "kind": "paragraph",
+          "excerpt": "And so those improvements, again, are very quickly monetized and we're able to do that. And at the scale that we're operating in terms of across the entire hyperscale fleet, making efficiency improvements that can be quickly monetized as a result and acceleration in the quarter, it's part of also what we expect to see and talk about with the Q1."
+        },
+        {
+          "unit_id": "u132",
+          "page": null,
+          "locator": "line:132",
+          "kind": "paragraph",
+          "excerpt": "So the cloud still provides a great ROI in those types of situations. And we're adding this capacity, to your point, but a lot of this, obviously, is also being sold in newer contracts, and we're able to have the pricing reflect it, but keep value where we -- listen, for the long term, you want to have pricing work for customers and for you. And so we're trying to stay focused on that as well."
+        },
+        {
+          "unit_id": "u139",
+          "page": null,
+          "locator": "line:139",
+          "kind": "paragraph",
+          "excerpt": "The usage intensity itself has gone up significantly. I mean we are talking about usage intensity that's sort of at the same level of what is an everyday communication tool like Outlook or Teams. The second thing I would say is the overall enterprise wiring of this, right? So it's not like a tool that's isolated somewhere, but it's wired in, whether it is you brought up E7, right? So it's wired in"
+        },
+        {
+          "unit_id": "u146",
+          "page": null,
+          "locator": "line:146",
+          "kind": "paragraph",
+          "excerpt": "Operator:The next question comes from the line of Brad Zelnick with Deutsche Bank."
+        },
+        {
+          "unit_id": "u153",
+          "page": null,
+          "locator": "line:153",
+          "kind": "paragraph",
+          "excerpt": "Operator:And the last question will come from the line of Gabriela Borges with Goldman Sachs."
+        },
+        {
+          "unit_id": "u160",
+          "page": null,
+          "locator": "line:160",
+          "kind": "paragraph",
+          "excerpt": "Satya Nadella:Thank you very much."
+        }
+      ],
+      "evidence_excerpt_chars": 7062
+    }
+  ]
+}
