@@ -2,8 +2,10 @@
 
 机器可读交接见同目录 `handoff.json`。分支 `codex/du2-facets-20261013`，
 base_sha `5a297244549d54c34f382835b876ec3d181fcd24`，实现提交
-`a58c4e09e6003c899607c1194ab1e3c834b20793`（交付物+tests+C记录），本文件为第二次提交以准确
-记录SHA。**未并主线、未push主线、未安装。**
+`a58c4e09e6003c899607c1194ab1e3c834b20793`（交付物+tests+C记录）与
+`930abd0a8a2cc73aa72ffc190937e466083d6846`（合规审计修复：五类语态显式化、summary_focus
+问句化、TXT行号锚点、version 1.1.0）。本文件为再次提交以准确记录SHA。
+**未并主线、未push主线、未安装。**
 
 ## 交付（独占路径内）
 
@@ -19,11 +21,12 @@ base_sha `5a297244549d54c34f382835b876ec3d181fcd24`，实现提交
 
 | 节点 | 内容 | 命令 | 结果 |
 |---|---|---|---|
-| A | 两份语义规格+关键错误反例+合法空值规则 | pytest tests -q -k "required_context or semantic_counterexamples or legal_exits" | 81 passed / 230 deselected，5.9s |
-| B | 八面/四机制集中数据+正反配对反例测试 | pytest tests -q | 311 passed，7.0s |
-| C | 真实原文核对（不同市场×经营模式） | tools/verify_real_quotes.py | 20/20 引文命中，SHA 6/6、mtime 未变，1.0s |
+| A | 两份语义规格+关键错误反例+合法空值规则 | pytest tests -q -k "required_context or semantic_counterexamples or legal_exits" | 82 passed / 244 deselected，5.7s |
+| B | 八面/四机制集中数据+正反配对反例测试 | pytest tests -q | 326 passed，6.0s |
+| C | 真实原文核对（不同市场×经营模式） | tools/verify_real_quotes.py | 20/20 引文命中，SHA 6/6、mtime 未变，1.1s |
 
-RED 记录：数据未写时同套件 308 failed / 3 passed（空包防线生效），随后补齐数据转GREEN。
+RED 记录：数据未写时同套件 308 failed / 3 passed（空包防线生效），随后补齐数据转GREEN；
+合规审计后补五类语态/问句/行号不变量再增至 326 passed。
 
 ## 语义边界（必须随交接保留）
 
