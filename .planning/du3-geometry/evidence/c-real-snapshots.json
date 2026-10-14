@@ -1,0 +1,174 @@
+{
+ "schema_version": "du3-geometry-c-evidence/1",
+ "note": "real pages are measurement oracles; reliable binding != fine-column/table recall passed",
+ "caps": {
+  "max_pages_per_sample": 2,
+  "max_words_per_page": 2000,
+  "max_cells_per_page": 2000,
+  "max_text_bytes": 65536,
+  "time_budget_s": 15.0
+ },
+ "samples": [
+  {
+   "sample_id": "hk-miniso-annual-store-table",
+   "label": "名创优品 2024 港股年报 p12 门店表（中英双栏多列经营表）",
+   "pages": [
+    12
+   ],
+   "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+   "status": "UNAVAILABLE",
+   "reason": "binding missing for hk-miniso-annual-store-table"
+  },
+  {
+   "sample_id": "cn-hengfeng-offering-cross-page",
+   "label": "恒锋工具 2020 向特定对象发行募集说明书 p61-62（跨页项目概况表）",
+   "pages": [
+    61,
+    62
+   ],
+   "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+   "status": "OBSERVED",
+   "elapsed_s": 0.245,
+   "pages_in_snapshot": 2,
+   "units_extracted": 197,
+   "bound_unit_count": 197,
+   "granularity_counts": {
+    "word": 139,
+    "block": 34,
+    "cell": 24
+   },
+   "fine_cells": 76,
+   "fine_words": 139,
+   "font_runs": 173,
+   "max_distinct_cell_columns": 4,
+   "coordinate_frames": [
+    "dict"
+   ],
+   "complete": false,
+   "diag_codes": [
+    "NO_FINE_GEOMETRY",
+    "WORK_UNITS"
+   ]
+  },
+  {
+   "sample_id": "cn-jinhe-convertible-tables",
+   "label": "金禾实业可转债募集说明书 p223-224（6列表+跨页备案表）",
+   "pages": [
+    223,
+    224
+   ],
+   "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+   "status": "OBSERVED",
+   "elapsed_s": 0.285,
+   "pages_in_snapshot": 2,
+   "units_extracted": 218,
+   "bound_unit_count": 218,
+   "granularity_counts": {
+    "word": 128,
+    "block": 78,
+    "cell": 12
+   },
+   "fine_cells": 51,
+   "fine_words": 130,
+   "font_runs": 206,
+   "max_distinct_cell_columns": 6,
+   "coordinate_frames": [
+    "dict"
+   ],
+   "complete": false,
+   "diag_codes": [
+    "NO_FINE_GEOMETRY",
+    "WORK_UNITS"
+   ]
+  },
+  {
+   "sample_id": "cn-amec-annual-narrative",
+   "label": "中微公司 2025 年报 p41（叙述页，行内数字负例）",
+   "pages": [
+    41
+   ],
+   "source_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "status": "OBSERVED",
+   "elapsed_s": 0.075,
+   "pages_in_snapshot": 1,
+   "units_extracted": 45,
+   "bound_unit_count": 45,
+   "granularity_counts": {
+    "word": 32,
+    "block": 13
+   },
+   "fine_cells": 0,
+   "fine_words": 34,
+   "font_runs": 45,
+   "max_distinct_cell_columns": 0,
+   "coordinate_frames": [
+    "dict"
+   ],
+   "complete": false,
+   "diag_codes": [
+    "NO_FINE_GEOMETRY",
+    "WORK_UNITS"
+   ]
+  },
+  {
+   "sample_id": "cn-shihua-annual-store-table",
+   "label": "世华科技 2020 年报 p5（新公司样本，未参与调试）",
+   "pages": [
+    5
+   ],
+   "source_sha256": "67aab7994dc03f90143ddb82088f91c9cf2fce95286ef434404b6498b47faa06",
+   "status": "OBSERVED",
+   "elapsed_s": 0.216,
+   "pages_in_snapshot": 1,
+   "units_extracted": 147,
+   "bound_unit_count": 147,
+   "granularity_counts": {
+    "word": 103,
+    "block": 13,
+    "cell": 31
+   },
+   "fine_cells": 91,
+   "fine_words": 131,
+   "font_runs": 116,
+   "max_distinct_cell_columns": 3,
+   "coordinate_frames": [
+    "dict"
+   ],
+   "complete": false,
+   "diag_codes": [
+    "NO_FINE_GEOMETRY",
+    "WORK_UNITS"
+   ]
+  }
+ ],
+ "original_fingerprints": [
+  {
+   "sample_id": "cn-hengfeng-offering-cross-page",
+   "sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+   "sha_preserved": true,
+   "mtime_preserved": true,
+   "size_preserved": true
+  },
+  {
+   "sample_id": "cn-jinhe-convertible-tables",
+   "sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+   "sha_preserved": true,
+   "mtime_preserved": true,
+   "size_preserved": true
+  },
+  {
+   "sample_id": "cn-amec-annual-narrative",
+   "sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "sha_preserved": true,
+   "mtime_preserved": true,
+   "size_preserved": true
+  },
+  {
+   "sample_id": "cn-shihua-annual-store-table",
+   "sha256": "67aab7994dc03f90143ddb82088f91c9cf2fce95286ef434404b6498b47faa06",
+   "sha_preserved": true,
+   "mtime_preserved": true,
+   "size_preserved": true
+  }
+ ]
+}

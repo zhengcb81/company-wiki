@@ -1,0 +1,104 @@
+{
+  "schema_version": "du3-handoff/1",
+  "lane": "geometry",
+  "base_sha": "195aba20b0aecc2d661d7d04c5ba72f982bc02d0",
+  "implementation_commits": ["PENDING_RECORDED_IN_FOLLOWUP_COMMIT"],
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/shared-reading-completion-20261014/geometry",
+  "branch": "codex/du3-geometry-20261014",
+  "owned_paths": [
+    "src/company_wiki/document_normalization/layout_snapshots/**",
+    "tests/unit/document_normalization_layout_snapshots/**",
+    "tests/fixtures/document_normalization_layout_snapshots/**",
+    ".planning/du3-geometry/**"
+  ],
+  "interfaces": {
+    "public_api": "project_layout_snapshot(snapshot, units, *, limits=None) -> dict",
+    "input_schema": "du-layout-snapshot/1",
+    "output_schema": "du-layout-projection/1",
+    "feature_version": "du3-geometry/1",
+    "cross_module_imports": "none; only baseline stdlib + existing layout_hints as read-only consumer"
+  },
+  "A_evidence": {
+    "method": "TDD RED first: contract + unit_binding counterexamples written before implementation",
+    "command": "python -B -X utf8 -m pytest tests/unit/document_normalization_layout_snapshots -q",
+    "exit": 1,
+    "red_result": "ModuleNotFoundError: No module named 'company_wiki.document_normalization.layout_snapshots' (2 collection errors)",
+    "receipt": ".planning/du3-geometry/evidence/a-red-receipt.md",
+    "counterexamples": [
+      "rotation frame 0/90/180/270", "unknown frame", "mixed font sizes/weights",
+      "cross-line offset", "NFC/trim misalignment", "repeated text in different blocks",
+      "missing/inverted bbox", "wrong page / missing unit", "whole-row without fine cells",
+      "zero/small work budget", "input immutability", "max_pages count vs page number"
+    ]
+  },
+  "B_evidence": {
+    "method": "metadata_projection/limits_identity centralized; per-unit atomic commit; budget truly stops",
+    "command": "python -B -X utf8 -m pytest tests/unit/document_normalization_layout_snapshots -q",
+    "exit": 0,
+    "green_result": "36 passed, 7 skipped (real cases opt-in)",
+    "layout_hints_readonly_consumer_regression": {
+      "command": "python -B -X utf8 -m pytest tests/unit/document_understanding_layout_hints -q",
+      "exit": 0,
+      "result": "42 passed, 6 skipped; old layout_hints unchanged"
+    },
+    "lint": {
+      "command": "python -X utf8 -m ruff check src/company_wiki/document_normalization/layout_snapshots tests/unit/document_normalization_layout_snapshots tests/fixtures/document_normalization_layout_snapshots",
+      "exit": 0,
+      "result": "All checks passed"
+    }
+  },
+  "C_evidence": {
+    "method": "read-only PyMuPDF real dict/words/find_tables cell snapshots reusing existing native probe; bounded pages/bytes/time",
+    "command": "CW_DU3_GEOMETRY_REAL=1 python -B -X utf8 -m pytest tests/unit/document_normalization_layout_snapshots/test_c_real_snapshots.py -q",
+    "exit": 0,
+    "result": "8 passed, 1 skipped (Miniso UNAVAILABLE)",
+    "receipt": ".planning/du3-geometry/evidence/c-real-snapshots.json",
+    "samples": [
+      {"sample_id": "hk-miniso-annual-store-table", "status": "UNAVAILABLE", "real": false, "note": "original not on this host; binding missing"},
+      {"sample_id": "cn-hengfeng-offering-cross-page", "status": "OBSERVED", "real": true, "units": 197, "fine_cells": 76, "max_distinct_cell_columns": 4},
+      {"sample_id": "cn-jinhe-convertible-tables", "status": "OBSERVED", "real": true, "units": 218, "fine_cells": 51, "max_distinct_cell_columns": 6},
+      {"sample_id": "cn-amec-annual-narrative", "status": "OBSERVED", "real": true, "units": 45, "fine_cells": 0, "note": "narrative page: no fabricated cells"},
+      {"sample_id": "cn-shihua-annual-store-table", "status": "OBSERVED", "real": true, "units": 147, "fine_cells": 91, "max_distinct_cell_columns": 3, "note": "new company sample not used in debugging"}
+    ],
+    "fine_geometry_sources": "pdf_dict spans (bbox+font_runs), get_text words (bbox+native_index), find_tables per-cell bboxes (row/column/table_id)",
+    "coordinate_frame": "dict (unrotated text frame); page.rect size carried alongside for frame reconciliation",
+    "synthetic_vs_real": "13 synthetic builders cover all card-A counterexamples; 4 real originals are measurement oracles only"
+  },
+  "tests_passed": {
+    "offline_suite": 36,
+    "real_opt_in": 8,
+    "layout_hints_regression": 42
+  },
+  "tests_failed": 0,
+  "not_run": [
+    "production integration (no parser/selector consumes this package yet)",
+    "real fine-column/fine-table recall benchmark (out of scope; binding reliability != recall)",
+    "Miniso real geometry (original unavailable on this host)"
+  ],
+  "known_gaps": [
+    "not wired into production; does not claim dual-column order / fine table header / key business recall solved",
+    "Miniso priority sample unavailable here (UNAVAILABLE, not a real pass)",
+    "HTML/PPTX/OCR frontends emit no bbox/word/cell coords today; kept unknown, never fabricated",
+    "coordinate frames handled declaratively (dict/rect/rotation/transform); arbitrary affine conversion not implemented; unknown frame -> partial, size never guessed",
+    "not run against a real 50k-unit original at the default ceiling (budget verified via synthetic zero/small work)"
+  ],
+  "resource_observations": {
+    "default_caps": {"max_units": 10000, "max_pages": 64, "max_fine_elements": 200000, "max_work_units": 1000000},
+    "caps_tighten_only": true,
+    "real_extraction_caps": {"max_pages_per_sample": 2, "max_words_per_page": 2000, "max_cells_per_page": 2000, "max_text_bytes": 65536, "time_budget_s": 15},
+    "output_hygiene": "no absolute paths, no whole-page repeated full text, no per-page snapshots persisted"
+  },
+  "raw_preservation": {
+    "originals_read_only": true,
+    "sha_mtime_size_preserved": "4/4 (see c-real-snapshots.json original_fingerprints)",
+    "production_config_untouched": true,
+    "sentinels_untouched": true
+  },
+  "scratch_restore": {
+    "temp_files_cleaned": true,
+    "committed_local_bindings": false,
+    "bindings_local_gitignored": true,
+    "unknown_dirs_deleted": false
+  },
+  "next_root_action": "ROOT passes the original parser's same snapshot/table read explicitly, binds to existing units, then connects observation_adapter/layout_hints to consume upstream_hints.words/cells/font_runs; additive wire gaps listed in handoff.md"
+}
