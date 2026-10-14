@@ -6,9 +6,13 @@
 
 新FF→CWP→RF离线CLI PASS：2正常localPOST＋1故意无效摘要，0供应商；完整body/context/sourceRef回开、旧Ref在新LATEST后读取、same/cross0POST和失败0输出额度且usage不退均实测。配置、原件、sentinel和临时测试目录保持/恢复。旧恢复集中节点的440文件在当时窗口SHA/mtime不漂移；相对资源补丁改变新validator因果，随后最新生产/单元节点绿，旧None/v1格式不变。不用旧版本快照冒充新权重节点。
 
-本窗口0新付费，母534629tokens/364387µUSD含FX和旧unknown保留，仍$20/200万tokens；默认0.8。原三原文25/25、新三原scope11/12（业务11/11）不等于正式供应商摘要质量或RF分析通过。A/C、真实类型/否定准入/IPO性能、并发2/4、默认切换及母G2/G4/G5/研究循环继续开放。
+真实三家已各1POST，均保持同一5a源码与实际配置：MiMo/CN完整JSON但GROUP_INCOMPLETE；DeepSeek/HK摘要成功后LOCATOR_REPLAY_FAILED；MiniMax/US终文多闭括号FINAL_JSON且把英文译成中文。三者旧0.8付费基线均因新路径失败而NOT_RUN，未盲重发/修JSON。原件/配置/sentinel不变、Temp全部清理；本轮46858tokens/17381µUSD，母581487tokens/381768µUSD含旧FX/unknown7，仍$20/200万tokens。详情：[实际三家冻结收据](common-root-quality-evidence/source-owned-v2-live-round1.json)。
 
-Next Step：沿同一账本按实际配置跑MiMo/DeepSeek/MiniMax三家摘要独审并恢复；类型共因按§7.6真实证据继续TDD，不能以模块绿宣布全部完成。证据：[本节点汇总](common-root-quality-evidence/source-owned-v2-acceptance.json)、[紧凑冻结收据](common-root-quality-evidence/source-owned-v2-receipts.zip)。以下保留历史失败/冻结记录。
+独审确认不能只修重复枚举：CN存在产品指代引用缺口和混合actual/planned；US混淆eN/gN独立编号及错组引用，直接展开g不能证明蕴含；HK后置失败丢了精确cause/typed snapshot，候选表格期间/双语引用还需认真复核。HK旧packet保持NOT_RETAINED；测试harness已RED1FAIL/13PASS→14PASS补齐“已付费summary成功、verify失败”的select+summary+实际generation留证，0新付费。
+
+Next Step：先实现单一citation-unit端口的新版本与PDF语言重放端口（各自RED、源码分工不重叠，统一SOURCE STOP后集中集成）；用已保存终文/真实原件做零重付费定位复现及恢复。保None/v1和已发/2格式与旧Ref，0.9新run才选新版本；模型只选一个含完整源上下文的引用单元，程序统一编译canonical spans。实际语言/主体/阶段/数字仍审，不将合法ID当语义成立。随后按配置重新真实验收，继续§7.6类型/经营状态/IPO共因。默认仍0.8。
+
+三份独审和逐claim证据已冻结：[审查/留证收据](common-root-quality-evidence/source-owned-v2-live-reviews.json)、[可复查紧凑资料](common-root-quality-evidence/source-owned-v2-live-reviews.zip)。ROOT新版本runtime已先RED6FAIL/1PASS；生产实现尚未开始，此为明确施工基线，不能签绿。
 
 正常pre-push对37b1a9c4发现3个既有cache-precheck失败（5492PASS/24SKIP，410.83s），未推远端。根因是无model work的缓存资料被强行读取prompt；按实际summarize jobs收窄同一绑定器，保留真实model job缺prompt拒绝和旧无generation默认。原3断言不变，新RED5FAIL/32PASS后118相关PASS(34.02s)，混合复用10PASS；修复已随5a8e895e正常补交/重推，全量检查和精确远端CI均绿，未跳hooks。详见[职责范围收尾](common-root-quality-evidence/prompt-owner-scope-recovery.json)。
 

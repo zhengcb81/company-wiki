@@ -1,0 +1,262 @@
+{
+  "schema_version": "shared-reading-failed-live-review/1",
+  "status": "QUALITY_GAPS_RECORDED_NOT_ACCEPTED",
+  "production_source_head": "5a8e895e38397dd9d529ca669dc64d7bbb6e1804",
+  "new_model_calls_for_reviews": 0,
+  "original_open_parse_for_reviews": 0,
+  "cn": "GROUP_INCOMPLETE plus actual product citation and mixed-modality gaps; 5 full /5 partial text-semantic targets, not accepted draft",
+  "hk": "paid summary succeeded then locator replay failed; numeric year/column mismatch, partial citations, EN-only citations translated; native snapshot not retained historically",
+  "us": "whole final invalid JSON and Chinese translation of English source; raw candidate observations only, wrong groups/duplicate aliases/causal gaps",
+  "capture_fix": {
+    "scope": "owned test harness only, post-round revision; historical packets unchanged",
+    "native_summary_failure": "12 pure probes plus actual invalid-loopback PASS",
+    "native_verify_failure": "RED 1 failed /13 passed then 14 passed; no extra supplier charge",
+    "fees_before_review_snapshot": true,
+    "finally_cleanup_not_blocked": true
+  },
+  "next_root_runtime_tdd": "6 failed /1 passed; new protocol/default/actual-language/validation binding not implemented at archive time",
+  "mother_tokens": 581487,
+  "mother_micro_usd": 381768,
+  "official_minimax_docs": {
+    "openai_compatibility": "https://platform.minimax.io/docs/api-reference/text-openai-api",
+    "chat_schema": "https://platform.minimax.io/docs/api-reference/text-chat-openai",
+    "observed": "M3 thinking disabled documented; response_format guarantee not declared on the two official pages. No inference that API has enforced structured output."
+  },
+  "archive": {
+    "name": "source-owned-v2-live-reviews.zip",
+    "bytes": 137073,
+    "sha256": "663e446cac5adc78ec4a9aee0671078aa79009858ff680b58e8dee5070e546c1",
+    "members": [
+      {
+        "name": "live/independent-quality/cn-v2-20261014/review.json",
+        "sha256": "cf0d0cd3b88cd905ad511ca42f4f790988412a5fb6372e4defcdece5f28e8da9",
+        "bytes": 48805
+      },
+      {
+        "name": "live/independent-quality/cn-v2-20261014/review.md",
+        "sha256": "6239593d0d6627ddeac148f9f97d8060f6fc17ecbe02bdc85aca613f8660cde0",
+        "bytes": 14387
+      },
+      {
+        "name": "live/independent-quality/us-v2-20261014/review.json",
+        "sha256": "66eb90cd84892c26e3161cc2479ecfa245394fe85aff6b78db3897180d8f6dd4",
+        "bytes": 41075
+      },
+      {
+        "name": "live/independent-quality/us-v2-20261014/review.md",
+        "sha256": "4a2e377cd70a1e626805a7749d23ba213155d0ddf4691125a0f2e78328576e7b",
+        "bytes": 12210
+      },
+      {
+        "name": "live/metadata-narrative-direct-20261014.json",
+        "sha256": "236159359aebf05071d1fdb31c6631d0d02bbb7fddb572d8f8d8393b9aa55e87",
+        "bytes": 20930
+      },
+      {
+        "name": "live/owned-runner/failure_review_material.py",
+        "sha256": "f5701babacd232b9df58a7ec1bf40950cc43ade1a0ee1b313b9e54b032a7f6c7",
+        "bytes": 6770
+      },
+      {
+        "name": "live/owned-runner/launcher.py",
+        "sha256": "12706413d2e7e6616c875fefee3a2b83633295a17aeb3ed95761168c0e9b487a",
+        "bytes": 269
+      },
+      {
+        "name": "live/owned-runner/phase_c_observer.py",
+        "sha256": "a53957f9bd06e725a9892220d1c9704868e61e8e0ad55e42f77b611bdeb01dec",
+        "bytes": 14241
+      },
+      {
+        "name": "live/owned-runner/phase_c_runner.py",
+        "sha256": "f3a518d72dae7a971f15ee87d69663024a20905cd1812523b162f2cca0e8c095",
+        "bytes": 53182
+      },
+      {
+        "name": "live/owned-runner/receipts/loopback-20261014T224055-e8b880/overall.json",
+        "sha256": "c8db4915acdda4869ab11ef26686f539188e66aef42f4c0398eaad1494b8e739",
+        "bytes": 83765
+      },
+      {
+        "name": "live/usage.jsonl",
+        "sha256": "f3eeb70951ea72bf32557c29071f37b1c85dcb8789a350ffe1b667fdc87f0dfe",
+        "bytes": 6632
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/baseline-red.json",
+        "sha256": "d88e8aa66ef9e7f18b55b15a991ab5fd9f8db003b6d8a50556259899eae7703b",
+        "bytes": 236
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/baseline-red.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/baseline-red.stdout.log",
+        "sha256": "14aa1ec178a897e21495f913f07e29dee8f54c0ea47527ea30f821ecbec6d14c",
+        "bytes": 2972
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/baseline-red.xml",
+        "sha256": "4c16f011d3633617922fcc95b1996831cebfb8a5c8fcffe7785c721933dcc3ed",
+        "bytes": 1227
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/final-green.json",
+        "sha256": "c72313685edf2079bc700ce79538df346832ae04974ca7dddefd3d7cf485d9c1",
+        "bytes": 236
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/final-green.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/final-green.stdout.log",
+        "sha256": "acfada884b07a1e2e60faf692ef5bc75a0dc5c10b5ca07f24239a0967b578538",
+        "bytes": 1906
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/final-green.xml",
+        "sha256": "794a5fe914955028fcbb49fce54f8063c28cec6a2525c3c85b67ae7cd6f31e6b",
+        "bytes": 3098
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/first-green.json",
+        "sha256": "fa188d940123c9363415e8cb449da09185aaeaf91905f85450bd05a6f1f80f47",
+        "bytes": 236
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/first-green.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/first-green.stdout.log",
+        "sha256": "c6ae49d275faea84600b029a92ed70dc51d042a9b6aba8af433b3c8d78753ecb",
+        "bytes": 3203
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/first-green.xml",
+        "sha256": "f6f21ad812fa34a893d0c46ad2736dc40e566435d05743f9f4220fb2a253195a",
+        "bytes": 4053
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/handoff.md",
+        "sha256": "5c2fca72434fc9e9d907ae7bd7e248a06ca74d2c9baff166d4af9307f5a9f991",
+        "bytes": 4634
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/missing-helper-red.json",
+        "sha256": "485361a7ca382fee05e5e479e4ff7d8ad6c1eb445ffafc2de29c05b0bd85eba5",
+        "bytes": 236
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/missing-helper-red.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/missing-helper-red.stdout.log",
+        "sha256": "9455d372fa20cb1359eb0abd556587f063504fa607c186aabaa86483a62ceb43",
+        "bytes": 11782
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/missing-helper-red.xml",
+        "sha256": "ea1039539772f66045e2d824c9113c7305667b302ca0fa8f589926c715f77d15",
+        "bytes": 12459
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/run_probe.py",
+        "sha256": "4e8e6f402028fc59c9137f386018a04ab57afcd50917084bcab4fde12454b155",
+        "bytes": 1605
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/test_failure_review_material.py",
+        "sha256": "224feef9c36cdc8f47a6aec9737e76611de475531381e77ec3fc15c5ee565012",
+        "bytes": 12791
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/verification-green.json",
+        "sha256": "33874c55c1d2e189bc7f7bf9b62f11434c475b0688ddd80ac4aabe6a06704331",
+        "bytes": 236
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/verification-green.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/verification-green.stdout.log",
+        "sha256": "a1939363e0d5c1a0e8d5e4f85a1eec410764fc81d3bb9a6b34e925a6974d0d98",
+        "bytes": 1913
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/verification-green.xml",
+        "sha256": "d9144440fa6a0588e8f609e19af949cb3700ae8791ed8d26d1453026a0dd6351",
+        "bytes": 3563
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/verification-red.json",
+        "sha256": "8f6d3261c6c3d38e06322a4fa44eb53cf27dd1a58ba28bb2eaa5c0674ef40730",
+        "bytes": 236
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/verification-red.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/verification-red.stdout.log",
+        "sha256": "ec2e349a4dfdef6acb50fd3c933501cee1f0ea70598c7bc041b6587990e1d655",
+        "bytes": 3146
+      },
+      {
+        "name": "model-projection-root/output-language/failure-review-material/verification-red.xml",
+        "sha256": "6d73d73c01c05821d999e010bf30933c8a8b64439fc8acd4ad6f96e89fba877e",
+        "bytes": 4937
+      },
+      {
+        "name": "model-projection-root/v3-runtime-red/junit.xml",
+        "sha256": "aea0cbf028316e48aeec00664abc428e83fcb3054a4acee7a2fa449980817f0e",
+        "bytes": 4328
+      },
+      {
+        "name": "model-projection-root/v3-runtime-red/receipt.json",
+        "sha256": "ec510f34482a688f2594bb80aa112db027cc4817abced75dbc3d26489eabc224",
+        "bytes": 261
+      },
+      {
+        "name": "model-projection-root/v3-runtime-red/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "name": "model-projection-root/v3-runtime-red/stdout.log",
+        "sha256": "701d25d001cdb4469a137ccaf4feec6f5845455dfa171a39158c2089fa491153",
+        "bytes": 5138
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/provider-review-design/hk-v2-review/review-resolved.json",
+        "sha256": "f008609c799f0352a0799f660eb2631a9ec53a0bb9411cbf38e452373de1e8fd",
+        "bytes": 33517
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/provider-review-design/hk-v2-review/review.json",
+        "sha256": "09376b0f882d184709438e5ea1b1d2c8944c347027eb9d9c4147b67efc027ff9",
+        "bytes": 32563
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/provider-review-design/hk-v2-review/review.md",
+        "sha256": "de08b8fbfe1cd44a492a24db59464aa64595e58123bc109e3cd2030ea586cd4a",
+        "bytes": 14635
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/provider-review-design/hk-v2-review/review_saved_hk.py",
+        "sha256": "0a8702fabff096a6c4c3ac6c21f86809eb8b7b17debc187d6268a27ac10902f6",
+        "bytes": 12570
+      }
+    ]
+  }
+}

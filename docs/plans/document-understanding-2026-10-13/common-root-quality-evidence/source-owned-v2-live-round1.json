@@ -1,0 +1,401 @@
+{
+  "schema_version": "shared-reading-v2-live-round/1",
+  "observed_at": "2026-10-14T22:54:44.795923+00:00",
+  "status": "THREE_REAL_RUNS_COMPLETED_QUALITY_NOT_ACCEPTED",
+  "production_source_head": "5a8e895e38397dd9d529ca669dc64d7bbb6e1804",
+  "selector": "0.9.0",
+  "model_projection": "reading-model-input/2",
+  "actual_source_quote_oracle": "25/25; not exact-field or summary semantic coverage",
+  "rows": [
+    {
+      "directory": "live-20261014T224232-993368",
+      "sample": "cn-h1",
+      "posts": 1,
+      "native_usage": {
+        "kind": "native_model_charge",
+        "mode": "live",
+        "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwplC-6z1sby2k\\AUTO.sqlite",
+        "attempt_id": "fd51f0caf5f64e7db8e46ba5d19e611e",
+        "run_id": "phaseC-090-7a8c5088f903",
+        "job_id": "4b289eec5f23774d",
+        "request_sha256": "8a0e39ad4929961968c0f146b70cdfc58d60fd9c0f2dc9cb2b1b6bffc6a0b4a7",
+        "input_tokens_bound": 58884,
+        "max_output_tokens": 8192,
+        "output_bytes_bound": 2097152,
+        "reserved_micro_usd": 12545,
+        "usage_status": "known",
+        "input_tokens": 13483,
+        "output_tokens": 2044,
+        "estimated_micro_usd": 2929,
+        "response_sha256": "fb3554aa148f69228469a2cf709922fdf79af369fc346aae2ddf41546a1f5ab7",
+        "error_code": null,
+        "output_bytes": 0,
+        "output_sha256": null,
+        "reserved_at": "2026-10-14T22:42:48Z",
+        "usage_settled_at": "2026-10-14T22:43:23Z",
+        "output_settled_at": "2026-10-14T22:43:23Z",
+        "charged_tokens": 15527,
+        "charged_micro_usd": 2929,
+        "cost_kind": "budget_proxy_or_unknown_hold_not_invoice"
+      },
+      "failures": [
+        {
+          "job_id": "4b289eec5f23774d",
+          "error_code": "SUMMARY_INVALID",
+          "error_detail": "model draft violates the summary contract (rule=GROUP_INCOMPLETE)"
+        }
+      ],
+      "protected_unchanged": true,
+      "sentinel_unchanged": true,
+      "temp_removed": true,
+      "old_0_8_baseline": "NOT_RUN_NEW_VERSION_FAILED_NO_BLIND_RESEND"
+    },
+    {
+      "directory": "live-20261014T224413-922d46",
+      "sample": "hk-annual",
+      "posts": 1,
+      "native_usage": {
+        "kind": "native_model_charge",
+        "mode": "live",
+        "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwplC-1xc7n1sp\\AUTO.sqlite",
+        "attempt_id": "7e85d4a23b5d473eb59c8baeff651b62",
+        "run_id": "phaseC-090-76236609f71c",
+        "job_id": "18af3f496e2f1f00",
+        "request_sha256": "64b067ebe5fab3f26b693608cad1dfaf6afc3cd357b424cd339ae0571caf61f4",
+        "input_tokens_bound": 55679,
+        "max_output_tokens": 8192,
+        "output_bytes_bound": 2097152,
+        "reserved_micro_usd": 29483,
+        "usage_status": "known",
+        "input_tokens": 13332,
+        "output_tokens": 1755,
+        "estimated_micro_usd": 6785,
+        "response_sha256": "1324c5685770fbabf2269e105b8a43b64c709a84800563ee50a895fd49c80756",
+        "error_code": null,
+        "output_bytes": null,
+        "output_sha256": null,
+        "reserved_at": "2026-10-14T22:44:43Z",
+        "usage_settled_at": "2026-10-14T22:44:51Z",
+        "output_settled_at": null,
+        "charged_tokens": 15087,
+        "charged_micro_usd": 6785,
+        "cost_kind": "budget_proxy_or_unknown_hold_not_invoice"
+      },
+      "failures": [
+        {
+          "job_id": "137aafcc06826c11",
+          "error_code": "LOCATOR_REPLAY_FAILED",
+          "error_detail": "selected evidence replay could not complete"
+        }
+      ],
+      "protected_unchanged": true,
+      "sentinel_unchanged": true,
+      "temp_removed": true,
+      "old_0_8_baseline": "NOT_RUN_NEW_VERSION_FAILED_NO_BLIND_RESEND"
+    },
+    {
+      "directory": "live-20261014T224522-926b23",
+      "sample": "us-10k",
+      "posts": 1,
+      "native_usage": {
+        "kind": "native_model_charge",
+        "mode": "live",
+        "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwplC-rbk34aoe\\AUTO.sqlite",
+        "attempt_id": "d22ce4a217a4497eaf52081668c187c3",
+        "run_id": "phaseC-090-e74008fed8b2",
+        "job_id": "525764b12f26b540",
+        "request_sha256": "f2a5eda3ce923cbf44325ba6bf6b77875858ff88b3c17a0757e3e8843e84d5f5",
+        "input_tokens_bound": 73687,
+        "max_output_tokens": 8192,
+        "output_bytes_bound": 2097152,
+        "reserved_micro_usd": 37260,
+        "usage_status": "known",
+        "input_tokens": 14357,
+        "output_tokens": 1887,
+        "estimated_micro_usd": 7667,
+        "response_sha256": "34a7d56a8a69fa3b54df6834ea9f7147563981778c533fbc5a6dec4f3d5cc63a",
+        "error_code": null,
+        "output_bytes": 0,
+        "output_sha256": null,
+        "reserved_at": "2026-10-14T22:45:37Z",
+        "usage_settled_at": "2026-10-14T22:45:57Z",
+        "output_settled_at": "2026-10-14T22:45:57Z",
+        "charged_tokens": 16244,
+        "charged_micro_usd": 7667,
+        "cost_kind": "budget_proxy_or_unknown_hold_not_invoice"
+      },
+      "failures": [
+        {
+          "job_id": "525764b12f26b540",
+          "error_code": "MODEL_RESPONSE_INVALID",
+          "error_detail": "model response violates its transport contract (rule=FINAL_JSON)"
+        }
+      ],
+      "protected_unchanged": true,
+      "sentinel_unchanged": true,
+      "temp_removed": true,
+      "old_0_8_baseline": "NOT_RUN_NEW_VERSION_FAILED_NO_BLIND_RESEND"
+    }
+  ],
+  "new_tokens": 46858,
+  "new_micro_usd": 17381,
+  "mother_tokens": 581487,
+  "mother_micro_usd": 381768,
+  "old_unknown7_retained": true,
+  "default_selector": "0.8.0",
+  "no_json_repair": true,
+  "no_automatic_resend": true,
+  "hk_native_failure_snapshot": "NOT_RETAINED; future harness corrected, historical packet unchanged",
+  "archive": {
+    "name": "source-owned-v2-live-round1.zip",
+    "bytes": 296809,
+    "sha256": "8df9d19b5786fc910f5dec99b1f67537a45b558c433fc4a32246cb1077456058",
+    "members": [
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/events.jsonl",
+        "bytes": 2835,
+        "sha256": "36f71360d2a3acbf55fe55811e1fb61e7729cad9e7a7f7ab7ded8e0619a636c6"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/import.command.json",
+        "bytes": 839,
+        "sha256": "884ecf37a48a7f83d8887fdfa3a47c1b054ca285d31e315ba0a7d5736e118fc6"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/import.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/import.stdout.json",
+        "bytes": 1860,
+        "sha256": "840deb0c0c3b57726915f3d1f0514eb5623e9dfe9d4ae06fd7e077eb3836d9d2"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/materials/phaseC-090-7a8c5088f903.fd51f0caf5f64e7db8e46ba5d19e611e.response.json.gz",
+        "bytes": 3160,
+        "sha256": "9d9304bf9ec9c8b026cc3184f627dd3950ba050ebe6d8898bbb54daa5c1d70be"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/materials/phaseC-090-7a8c5088f903.input.json.gz",
+        "bytes": 18469,
+        "sha256": "702692fa07803acf16761ce59428e56e5e5fd2a8be1395775068d0d61b67142f"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/mother-after.json",
+        "bytes": 185,
+        "sha256": "afd69e85f3ab59b67e18b89c3d736f8f6727cc5c084ebcd6731b3cce2476f8a1"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/overall.json",
+        "bytes": 13732,
+        "sha256": "37326f37605aef5d03094eeaabbc0e3b91dd7f9c4a45fad5b77a9ee889a5d6cf"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/phaseC-090-7a8c5088f903.command.json",
+        "bytes": 945,
+        "sha256": "ebad83b856b27df90efe218ddbcf0611e6ea0c891e708cb4e36ae12a65190d6a"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/phaseC-090-7a8c5088f903.failure-review-index.json",
+        "bytes": 310,
+        "sha256": "d461154d69310447fafa1e9fac94e94368a3bd39ac57d7bdc294a5ff349d3f59"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/phaseC-090-7a8c5088f903.failure-review.json.gz",
+        "bytes": 102462,
+        "sha256": "8943556642950b61af70972cd77273bfcf54a2640e731e4b6d0ca3c50e7cb366"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/phaseC-090-7a8c5088f903.native-failures.json",
+        "bytes": 10432,
+        "sha256": "86b3e7e348807e3767366f19186d6cd49be9d161cfa2bae73d91c818dec7887a"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/phaseC-090-7a8c5088f903.native-usage.json",
+        "bytes": 1079,
+        "sha256": "2fe26f66eefc8c72482e78c5627e3502d332dc7177c41ea14ff7cde4ee2068a4"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/phaseC-090-7a8c5088f903.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/phaseC-090-7a8c5088f903.stdout.json",
+        "bytes": 9394,
+        "sha256": "91d60a3234d053dddaa88e3701f506ab4809a45483971cd2dcadf46e00b95e3e"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/preparation.json",
+        "bytes": 2960,
+        "sha256": "dcadb88453b9b7699a2baed76df437043c6f7a78d09695f733150d24082cb4f3"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224232-993368/receipt.json",
+        "bytes": 13687,
+        "sha256": "b004a5dc3c5da922820037617c6d985a76cc6c9250ccbea5589e7ceed142c2af"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/events.jsonl",
+        "bytes": 2448,
+        "sha256": "647a7c3c422b98c2eb6bdb8a18890f62e2f09917d5995876cfdc2e7aae6ea5f5"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/import.command.json",
+        "bytes": 771,
+        "sha256": "f0052bd8b9f12f4bbda35fde01d5dd8545ad04c9627a5707bd7a6cbd4fd4139a"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/import.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/import.stdout.json",
+        "bytes": 1808,
+        "sha256": "4fa7f90b25e267ff16a39cf4989a459f1766f210672b576432b43d92cf1a6a53"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/materials/phaseC-090-76236609f71c.7e85d4a23b5d473eb59c8baeff651b62.response.json.gz",
+        "bytes": 2156,
+        "sha256": "a3f3b9f56361992986ffc2a52249960d8e1613cd9db89a5948b1832e5aafcc25"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/materials/phaseC-090-76236609f71c.input.json.gz",
+        "bytes": 18211,
+        "sha256": "27cbb7fae3b63adad1f6f3bb6a561146b9129150cf5c70f7d4776df3a09ed5d6"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/mother-after.json",
+        "bytes": 185,
+        "sha256": "e18ba0b948cd987e7c21bc2a68b9a40e3b390917546e3aec566b25f481e2e788"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/overall.json",
+        "bytes": 4407,
+        "sha256": "894a04590223f94b5d9db1dc1f0bf47f74653549e233c7d6e0ac8ffae01fff46"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/phaseC-090-76236609f71c.command.json",
+        "bytes": 948,
+        "sha256": "1833c8686d3c668bbef0496cbddbbb470aa7abf37f90b8df445c2cc0ca8ab1fa"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/phaseC-090-76236609f71c.native-failures.json",
+        "bytes": 525,
+        "sha256": "4006901831dacf71d0fc46239ccd25b0b2d8a8a5bc260f59c2dd542dba9680f0"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/phaseC-090-76236609f71c.native-usage.json",
+        "bytes": 1064,
+        "sha256": "2c2acc5adc02102008c3cfd22eed3f1cfdd47f201a990e48ea2d143139ced58c"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/phaseC-090-76236609f71c.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/phaseC-090-76236609f71c.stdout.json",
+        "bytes": 480,
+        "sha256": "7209641879ce874dae6ae36e9f3cad55936953ef98dec79831c01248158fde2c"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/preparation.json",
+        "bytes": 2960,
+        "sha256": "dcadb88453b9b7699a2baed76df437043c6f7a78d09695f733150d24082cb4f3"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224413-922d46/receipt.json",
+        "bytes": 4362,
+        "sha256": "b9e3c1fbd3eab17141383025346f686ae139f7e1b83b98b397f590024be97e46"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/events.jsonl",
+        "bytes": 2625,
+        "sha256": "79319b83cfd971391413b16cbb36856f4f2e9e11f861db5d3dfa13c85b901a4c"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/import.command.json",
+        "bytes": 793,
+        "sha256": "1bf27dfae4c0da6f022396cc18e9cee4eeb4eaa45cf1d5ce5db7a24ca73930db"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/import.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/import.stdout.json",
+        "bytes": 1775,
+        "sha256": "87b844fcbd43e2e0eb318d8584bce4a1bd80146be92749996e8f3a16afaf3ff8"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/materials/phaseC-090-e74008fed8b2.d22ce4a217a4497eaf52081668c187c3.response.json.gz",
+        "bytes": 3687,
+        "sha256": "06b20bf8ca0ec126e37f1e3d0258815cf914f47faf8739e99e4c07edd0238097"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/materials/phaseC-090-e74008fed8b2.input.json.gz",
+        "bytes": 20162,
+        "sha256": "66dbb32f4d0071347edde65846ea4c474a576b81119a7698417b7e52f663c9b6"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/mother-after.json",
+        "bytes": 185,
+        "sha256": "cbadeed162a857e80a622fb70ff0d979958ff14188775e255c846aaeb57327fa"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/overall.json",
+        "bytes": 14606,
+        "sha256": "e4cb12d10208514674a12d0879398b76102d4f2cfbc8642bc03a6cd0390223e2"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/phaseC-090-e74008fed8b2.command.json",
+        "bytes": 949,
+        "sha256": "24e8cf1128701466e7eb5a7138dc7dd363534448e1ed53e545190daa058f1acc"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/phaseC-090-e74008fed8b2.failure-review-index.json",
+        "bytes": 309,
+        "sha256": "854770128112fe89c981d7746c5f595b266097bb86955b17598ffb38d4ed5aeb"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/phaseC-090-e74008fed8b2.failure-review.json.gz",
+        "bytes": 61440,
+        "sha256": "545e1d5819651359aba26564d06a0d139af4e441b58d99f6dacf11985f2dcbf8"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/phaseC-090-e74008fed8b2.native-failures.json",
+        "bytes": 11242,
+        "sha256": "33b9f674bba41d3dd51afaa579548231ca1504be288a4da811a237b11e88319e"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/phaseC-090-e74008fed8b2.native-usage.json",
+        "bytes": 1079,
+        "sha256": "06381bbb5bca8529d516a63a6d854c8359ef0aa6133405c10cae5cb253777676"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/phaseC-090-e74008fed8b2.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/phaseC-090-e74008fed8b2.stdout.json",
+        "bytes": 10277,
+        "sha256": "3719d4deba6d7ad3eacb629de0482e5a3e218c5cb3da67394e466fa5c76a2511"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/preparation.json",
+        "bytes": 2960,
+        "sha256": "dcadb88453b9b7699a2baed76df437043c6f7a78d09695f733150d24082cb4f3"
+      },
+      {
+        "name": "live/owned-runner/receipts/live-20261014T224522-926b23/receipt.json",
+        "bytes": 14561,
+        "sha256": "dc366e84076dff28b0f5109b827257ecff2d4bde7423bb58c33edb2d050ab300"
+      }
+    ]
+  }
+}
