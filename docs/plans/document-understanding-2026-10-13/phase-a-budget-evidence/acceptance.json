@@ -1,0 +1,16 @@
+{
+  "exit_code": 0,
+  "elapsed_seconds": 4.029,
+  "tmp_removed": true,
+  "model_calls": 0,
+  "network_calls": 0,
+  "schema_version": "du-phase-a-budget-receipt/1",
+  "pytest_passed": 104,
+  "independent_probe_passed": 38,
+  "status": "PURE_PLANNER_ACCEPTED_PRODUCTION_CONNECTION_PENDING",
+  "source_sha256": "ae9e69f4c6d1bb51b47a2f23913924e3cbf9d2e5259f2e06efbb711265602814",
+  "defaults_unchanged": true,
+  "production_default_switched": false,
+  "phase_A_complete": false,
+  "receipt_zip_bytes": 39973
+}

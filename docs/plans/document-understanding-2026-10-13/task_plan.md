@@ -3,7 +3,7 @@
 PLAN_ID: document-understanding-2026-10-13
 PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans
 Owner: ROOT
-Current Phase: A — 生产选择与唯一材料，接口/TDD准备
+Current Phase: A — 阅读预算planner已实现，生产ReadingPlan接线继续
 
 ## Goal
 
@@ -46,7 +46,13 @@ Current Phase: A — 生产选择与唯一材料，接口/TDD准备
 
 ## Next Step
 
-在既有A测试包先冻结并写“实际策略影响生产选中、未列题材可入选、共享闭包唯一成本、超限整体deferred”的反例；记录RED，再实现同一个预算planner的新策略。当前生产默认尚未切换，不能据DU2模块PASS标全升级完成。
+把本次实际ReadingPlan/facets/依赖图接到正式candidate→finalize→reading_plan/1预算流程，同时替换新活跃路径的题材准入/固定4–9个月优待；然后验证真正production ModelRequest的唯一原文引用。纯planner已TDD实现，但Phase A全链未完成，生产默认尚未切换。
+
+## 并行施工（现在可独立启动）
+
+[DU3三卡总览与工作目录](parallel/du3-2026-10-14/README.md)。QUALITY仅拥有tools/document_understanding_benchmark；DEPENDENCIES仅拥有新decision_dependencies子包；GEOMETRY仅拥有新layout_snapshots子包，各自另有排他tests/ledger、独立稀疏worktree。ROOT保留source_catalog候选/预算/finalize、DU选择/summary与automation正式接线，三线不写这些共享目录、不重开旧DU/DU2卡。
+
+三卡当前READY_NOT_STARTED（由用户分发启动），技术接口冻结为DU3/1。ROOT接线依次DEPENDENCIES→GEOMETRY→QUALITY，但施工可同时进行，不等主线。A/B/C每卡只作三个大节点；原件只读、不调用付费模型或provider，真实模型与跨仓由ROOT共用母窗口。
 
 ## 完成标准与注意事项
 
@@ -60,3 +66,7 @@ Current Phase: A — 生产选择与唯一材料，接口/TDD准备
 ## 依据和历史
 
 [已发布DU2验收](du2-reception/acceptance.md)、[发布收据](du2-reception/evidence/publication.json)、[旧DU验收](reception/acceptance.md)、[设计](design.md)、[接口](INTERFACES.md)、[旧细则](review/root_implementation.md)、[母跨市场PWF](../cross-market-rf-e2e-2026-10-08/task_plan.md)。原ROOT阶段表保留在Git 9e4faf2a；本表已合并其完成事实与全部剩余任务，历史不再作为当前指令。
+
+## Phase A预算组件节点
+
+纯planner104集中PASS/38独立probe PASS，mypy/ruff通过；原RED、环境失败、测试fixture纠正及独审中间失败留证：[小归档](phase-a-budget-evidence/receipts.zip)/[组件收据](phase-a-budget-evidence/acceptance.json)。只签纯planner，生产ReadingPlan/候选/最终模型输入仍待接线；旧默认与原件/配置保持，0付费。

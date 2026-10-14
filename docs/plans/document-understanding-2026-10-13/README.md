@@ -16,3 +16,7 @@
 [设计](design.md)、[DU/1接口](INTERFACES.md)、[深化接口](review/INTERFACES.md)、[调查发现](findings.md)、[20样本清单](sample_manifest.json)、[旧DU验收](reception/acceptance.md)。implementation/review和原cards保留设计/历史；当前调度只看task_plan，避免按旧“正在施工”文字重开任务。
 
 [母跨市场PWF](../cross-market-rf-e2e-2026-10-08/task_plan.md)、[母叙述资料PWF](../narrative-evidence-pilot-2026-09-26/task_plan.md)。真实G2/G4/G5共享一次窗口，不重复测试或签收。
+
+## 当前可分包工作
+
+[DU3：三张独立施工卡与工作目录](parallel/du3-2026-10-14/README.md)，QUALITY/DEPENDENCIES/GEOMETRY排他模块可同时启动；ROOT继续Phase A生产选择/最终材料，不改它们的在制目录。

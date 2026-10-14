@@ -1,3 +1,11 @@
+## ROOT当前实施与并行拆分 — 2026-10-14
+
+主线实际开始Phase A：19项新阅读budget反例RED/2旧回放PASS后扩既有planner为reading_plan/1，共享依赖unique成本/主题多样性/完整闭包/字符与工作上限；旧默认和selector0.8.0不改。独审发现嵌套signature工作漏计、闭包实际扫描漏计、签名metadata未限、低预算误诊及依赖中已发value未记主题/签名，均按根因统一修复；最终38/38独立probe通过。尚未把ReadingPlan接正式生产，不标Phase A/B/C全部完成。
+
+受影响首轮87PASS/1sandbox tmp setup error，独立真实Temp88PASS并恢复；追加回归一项短fixture不足旧hint12-token门槛，实际只有8tokens/self-repeat=false，改为17tokens且加complete/min12前置断言，原失败保存，没有改旧算法或降低选择断言。类型检查与ruff通过；最终集中节点结果按随提交证据记录。
+
+三张新DU3卡READY_NOT_STARTED：真实质量benchmark、纯决策依赖manifest、真实版面快照投影，排他目录/独立worktree/DU3/1接口。ROOT继续source_catalog/DU选择和正式AUTO接线；两种fingerprint与几何实际消费缝留给ROOT，不让worker各建权威路由/布局/数据库。只在A/B/C大节点验收；原件/配置保持，0model/provider/network费用。下方历史不作为当前调度。
+
 ## ROOT当前收尾推进 — 2026-10-13
 
 用户要求完成共享引擎＋多份文档阅读策略并合入PWF。已将研究、DU/DU2接收和剩余生产工作统一成根task_plan＋completion_implementation；母跨市场与叙述计划只引用这一执行表。
@@ -56,3 +64,7 @@
 - 调查/设计已正常commit `7f6f7cbd5c438ecfd06f6ffb1241442f26ff43b8`，静态hooks通过/无适用代码检查；21文件1068行含两份紧凑压缩证据。
 - 三个稀疏worktree已在README路径准备，分别codex/du-profiles-20261013、codex/du-structure-20261013、codex/du-benchmark-20261013，共同base7f6f7cbd，干净；每份约20MiB代码/测试，原件不复制。
 - 文件链接/JSON/压缩回读检查通过；母PWF仅14行导航新增，原正文按HEAD字节保留。此轮无需运行完整业务测试套件，已有3份诊断用来验证设计问题，未声称修复。
+
+## Phase A预算组件节点
+
+纯planner104集中PASS/38独立probe PASS，mypy/ruff通过；原RED、环境失败、测试fixture纠正及独审中间失败留证：[小归档](phase-a-budget-evidence/receipts.zip)/[组件收据](phase-a-budget-evidence/acceptance.json)。只签纯planner，生产ReadingPlan/候选/最终模型输入仍待接线；旧默认与原件/配置保持，0付费。

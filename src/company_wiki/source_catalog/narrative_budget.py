@@ -28,6 +28,7 @@ Priority = tuple[int, int, OrderKey, str]
 PageKey = tuple[str, int | str]
 LEGACY_BUDGET_POLICY = "legacy"
 SEMANTIC_BUDGET_POLICY = "semantic_coverage/1"
+READING_BUDGET_POLICY = "reading_plan/1"
 
 _REASON_PRIORITY = (
     ("downstream_center_certification_timeline", -2),
@@ -138,6 +139,10 @@ class BudgetItem(Generic[PayloadT]):
     evidence_chars: int = 0
     semantic_tokens: tuple[str, ...] = ()
     coverage_signature: CoverageSignature | None = None
+    reading_priority: int = 2
+    reading_topics: tuple[str, ...] = ()
+    required_item_ids: tuple[str, ...] = ()
+    is_context_only: bool = False
 
 
 @dataclass(frozen=True)
@@ -336,8 +341,13 @@ def _over_share(taken: int, fair_share: int | None) -> bool:
 
 
 def _plan(
-    items: tuple[BudgetItem[PayloadT], ...], limit: int, policy: str = LEGACY_BUDGET_POLICY
+    items: tuple[BudgetItem[PayloadT], ...], limit: int, policy: str = LEGACY_BUDGET_POLICY,
+    *, max_chars: int | None = None, max_work_units: int = 2_000_000,
 ) -> tuple[tuple[BudgetItem[PayloadT], ...], tuple[BudgetDiagnostic, ...]]:
+    if policy == READING_BUDGET_POLICY:
+        return _reading_plan(items, limit, max_chars=max_chars, max_work_units=max_work_units)
+    if max_chars is not None or max_work_units != 2_000_000:
+        raise ValueError("reading budget limits require reading_plan/1")
     if policy not in {LEGACY_BUDGET_POLICY, SEMANTIC_BUDGET_POLICY}:
         raise ValueError(f"unknown budget policy: {policy}")
     semantic = policy == SEMANTIC_BUDGET_POLICY
@@ -469,9 +479,10 @@ def _plan(
 def select_budget_items(
     items: tuple[BudgetItem[PayloadT], ...], *, limit: int,
     policy: str = LEGACY_BUDGET_POLICY,
+    max_chars: int | None = None, max_work_units: int = 2_000_000,
 ) -> tuple[BudgetItem[PayloadT], ...]:
     """Select whole context groups within a hard span budget."""
-    return _plan(items, limit, policy)[0]
+    return _plan(items, limit, policy, max_chars=max_chars, max_work_units=max_work_units)[0]
 
 
 @dataclass(frozen=True)
@@ -491,9 +502,234 @@ class BudgetDiagnostic:
 def budget_diagnostics(
     items: tuple[BudgetItem[PayloadT], ...], *, limit: int,
     policy: str = LEGACY_BUDGET_POLICY,
+    max_chars: int | None = None, max_work_units: int = 2_000_000,
 ) -> tuple[BudgetDiagnostic, ...]:
     """Explain every bundle left outside the budget for the same inputs."""
-    return _plan(items, limit, policy)[1]
+    return _plan(items, limit, policy, max_chars=max_chars, max_work_units=max_work_units)[1]
+
+
+def _reading_plan(
+    items: tuple[BudgetItem[PayloadT], ...], limit: int, *,
+    max_chars: int | None, max_work_units: int,
+) -> tuple[tuple[BudgetItem[PayloadT], ...], tuple[BudgetDiagnostic, ...]]:
+    """Rank caller-owned reading intent and charge unique, closed original IDs.
+
+    Context belongs to the dependency graph, not to an independent value anchor.
+    A shared header never unions unrelated projects into one atomic group. Old
+    reason reservations and raw payload strings do not influence this policy.
+    Work is bounded across indexing, graph expansion and dynamic offers; an
+    interrupted closure is never admitted, even when every anchor fits the cap.
+    """
+    if type(limit) is not int or limit < 1:
+        raise ValueError("limit must be a positive integer")
+    if max_chars is not None and (type(max_chars) is not int or max_chars < 0):
+        raise ValueError("max_chars must be a nonnegative integer")
+    if type(max_work_units) is not int or max_work_units < 0:
+        raise ValueError("max_work_units must be a nonnegative integer")
+    used = 0
+
+    def charge(amount: int = 1) -> bool:
+        nonlocal used
+        if used + amount > max_work_units:
+            return False
+        used += amount
+        return True
+
+    def diagnostic(members: tuple[BudgetItem[PayloadT], ...], key: str,
+                   reason: str) -> BudgetDiagnostic:
+        first = min(members, key=lambda item: (item.order_key, item.item_id))
+        return BudgetDiagnostic(first.item_id, key, first.group_id, "reading",
+            len(members), tuple(item.item_id for item in members), first.locator, reason)
+
+    def work_stop() -> BudgetDiagnostic:
+        # A global limit is not evidence that a specific group was omitted:
+        # some of its members may already have entered through another closure.
+        return BudgetDiagnostic("", "reading-work", None, "reading", 0, (),
+                                "", "work_budget_exhausted")
+
+    # Reserve indexing work before traversing the input. A low work cap reports
+    # one global stop instead of allocating an unbounded per-item diagnostic.
+    if not charge(2 * len(items)):
+        return (), ((work_stop(),) if items else ())
+    by_id: dict[str, BudgetItem[PayloadT]] = {}
+    grouped: dict[str, list[BudgetItem[PayloadT]]] = {}
+    group_for: dict[str, str] = {}
+    signature_costs: dict[str, int] = {}
+    for item in items:
+        if not isinstance(item.item_id, str) or not item.item_id:
+            raise ValueError("item_id must be a nonempty string")
+        if item.item_id in by_id:
+            raise ValueError("item_id values must be unique")
+        if (not isinstance(item.order_key, tuple) or len(item.order_key) > 16
+                or any(type(value) is not int for value in item.order_key)):
+            raise ValueError("order_key must contain integer source coordinates")
+        if item.group_id is not None and (not isinstance(item.group_id, str) or not item.group_id):
+            raise ValueError("group_id must be a nonempty string or None")
+        if type(item.score) is not int:
+            raise ValueError("score must be an integer")
+        if type(item.reading_priority) is not int or item.reading_priority < 1:
+            raise ValueError("reading_priority must be a positive integer")
+        if type(item.evidence_chars) is not int or item.evidence_chars < 0:
+            raise ValueError("evidence_chars must be a nonnegative integer")
+        if type(item.is_context_only) is not bool:
+            raise ValueError("is_context_only must be a boolean")
+        for name, values, bound in (("reading_topics", item.reading_topics, 64),
+                                    ("required_item_ids", item.required_item_ids, 4096)):
+            if not isinstance(values, tuple) or len(values) > bound:
+                raise ValueError(f"{name} must be a bounded tuple of nonempty strings")
+            if not charge(len(values)):
+                return (), (work_stop(),)
+            if any(not isinstance(value, str) or not value for value in values):
+                raise ValueError(f"{name} must be a bounded tuple of nonempty strings")
+        signature = item.coverage_signature
+        signature_costs[item.item_id] = 0
+        if signature is not None:
+            if not isinstance(signature, CoverageSignature) or type(signature.complete) is not bool:
+                raise ValueError("coverage_signature must be finite CoverageSignature metadata")
+            if (not isinstance(signature.tokens, tuple) or len(signature.tokens) > 512
+                    or not isinstance(signature.protected_sentences, tuple)
+                    or len(signature.protected_sentences) > 512
+                    or not isinstance(signature.stage_signals, tuple) or len(signature.stage_signals) > 512):
+                raise ValueError("coverage_signature sequences must be bounded tuples")
+            cost = 1 + len(signature.tokens) + len(signature.protected_sentences) + 4 * len(signature.stage_signals)
+            if not charge(cost):
+                return (), (work_stop(),)
+            strings = (*signature.tokens, *signature.protected_sentences)
+            if any(not isinstance(value, str) or not value for value in strings):
+                raise ValueError("coverage_signature text must be nonempty strings")
+            for signal in signature.stage_signals:
+                if (not isinstance(signal, tuple) or len(signal) != 4 or type(signal[2]) is not bool
+                        or any(not isinstance(signal[index], str) or not signal[index] for index in (0, 1))
+                        or not isinstance(signal[3], str)):
+                    raise ValueError("coverage_signature stages must be typed four-tuples")
+            if (sum(len(value) for value in strings)
+                    + sum(len(signal[index]) for signal in signature.stage_signals for index in (0, 1, 3)) > 65536):
+                raise ValueError("coverage_signature text exceeds its finite bound")
+            signature_costs[item.item_id] = cost
+        by_id[item.item_id] = item
+        key = f"group:{item.group_id}" if item.group_id is not None else f"item:{item.item_id}"
+        grouped.setdefault(key, []).append(item)
+        group_for[item.item_id] = key
+
+    for group_members in grouped.values():
+        group_members.sort(key=lambda item: (item.order_key, item.item_id))
+
+    anchors = {key: tuple(sorted(members, key=lambda item: (item.order_key, item.item_id)))
+               for key, members in grouped.items() if any(not item.is_context_only for item in members)}
+    closures: dict[str, frozenset[str]] = {}
+    dropped: list[BudgetDiagnostic] = []
+    stopped = False
+    for key, members in sorted(anchors.items(), key=lambda row: (row[1][0].order_key, row[0])):
+        if stopped:
+            dropped.append(diagnostic(members, key, "work_budget_exhausted"))
+            continue
+        pending = [item.item_id for item in members]
+        visited: set[str] = set()
+        reason = None
+        while pending:
+            if not charge():
+                reason, stopped = "work_budget_exhausted", True
+                break
+            uid = pending.pop()
+            if uid in visited:
+                continue
+            dependency = by_id.get(uid)
+            if dependency is None:
+                reason = "missing_required_context"
+                break
+            visited.add(uid)
+            siblings = grouped[group_for[uid]]
+            if not charge(len(siblings) + len(dependency.required_item_ids)):
+                reason, stopped = "work_budget_exhausted", True
+                break
+            pending.extend(sibling.item_id for sibling in siblings if sibling.item_id not in visited)
+            pending.extend(dep for dep in sorted(set(dependency.required_item_ids)) if dep not in visited)
+        if reason is not None:
+            dropped.append(diagnostic(members, key, reason))
+        else:
+            closures[key] = frozenset(visited)
+
+    selected_ids: set[str] = set()
+    topic_visits: dict[str, int] = {}
+    selected_signatures: list[tuple[CoverageSignature, int]] = []
+    spent_chars = 0
+    remaining = set(closures)
+    while remaining:
+        offers: list[tuple[tuple[object, ...], str, set[str], int]] = []
+        for key in sorted(remaining):
+            members = anchors[key]
+            # A shared closure still costs work to traverse even when all its
+            # members were already charged to the unique evidence budget.
+            if not charge(1 + len(closures[key]) + len(members)):
+                stopped = True
+                break
+            if closures[key].issubset(selected_ids):
+                # It already entered intact as another anchor's dependency.
+                remaining.remove(key)
+                continue
+            added = set(closures[key]) - selected_ids
+            value_members = tuple(item for item in members if not item.is_context_only)
+            if not charge(len(added) + sum(len(item.reading_topics) for item in value_members)):
+                stopped = True
+                break
+            chars = sum(by_id[uid].evidence_chars for uid in added)
+            topics = {topic for item in value_members for topic in item.reading_topics}
+            if not charge(2 * len(topics)):
+                stopped = True
+                break
+            repeated = False
+            for item in value_members:
+                for old, old_cost in selected_signatures:
+                    # Reserve the real nested comparison work before calling
+                    # the existing bounded hint. No metadata payload is read.
+                    if not charge(1 + signature_costs[item.item_id] + old_cost):
+                        stopped = True
+                        break
+                    if softly_repeats(item.coverage_signature, old):
+                        repeated = True
+                        break
+                if repeated or stopped:
+                    break
+            if stopped:
+                break
+            first = members[0]
+            rank = (min(item.reading_priority for item in value_members),
+                    int(bool(topics) and all(topic in topic_visits for topic in topics)),
+                    repeated, sum(topic_visits.get(topic, 0) for topic in topics),
+                    -max(item.score for item in value_members), len(added),
+                    first.order_key, first.item_id, key)
+            offers.append((rank, key, added, chars))
+        if stopped:
+            dropped.append(work_stop())
+            break
+        if not offers:
+            break
+        _, key, added, chars = min(offers, key=lambda row: row[0])
+        remaining.remove(key)
+        if len(selected_ids) + len(added) > limit:
+            dropped.append(diagnostic(anchors[key], key, "group_exceeds_limit"
+                                      if len(closures[key]) > limit else "budget_full"))
+            continue
+        if max_chars is not None and spent_chars + chars > max_chars:
+            dropped.append(diagnostic(anchors[key], key, "character_budget"))
+            continue
+        if not charge(sum(1 + len(by_id[uid].reading_topics) for uid in added)):
+            dropped.append(work_stop())
+            break
+        selected_ids.update(added)
+        spent_chars += chars
+        # A value unit brought in as another anchor's dependency is already
+        # present in the real output. Count its topic/signature once as well.
+        for uid in sorted(added):
+            item = by_id[uid]
+            if not item.is_context_only:
+                for topic in set(item.reading_topics):
+                    topic_visits[topic] = topic_visits.get(topic, 0) + 1
+                if item.coverage_signature is not None:
+                    selected_signatures.append((item.coverage_signature, signature_costs[item.item_id]))
+    selected = tuple(sorted((by_id[uid] for uid in selected_ids),
+                            key=lambda item: (item.order_key, item.item_id)))
+    return selected, tuple(sorted(dropped, key=lambda row: (row.locator, row.bundle_key)))
 
 
 __all__ = [
@@ -502,6 +738,7 @@ __all__ = [
     "CATEGORY_ORDER",
     "LEGACY_BUDGET_POLICY",
     "SEMANTIC_BUDGET_POLICY",
+    "READING_BUDGET_POLICY",
     "budget_diagnostics",
     "select_budget_items",
 ]
