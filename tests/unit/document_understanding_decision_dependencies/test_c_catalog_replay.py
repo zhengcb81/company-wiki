@@ -330,6 +330,18 @@ def test_the_whole_catalog_is_not_a_usable_decision_domain(replay):
     """
     whole = cs.whole_catalog_domain(replay["snapshot"])
     assert len(whole["scopes"]) > 64, len(whole["scopes"])
+    # Pin the count against the snapshot itself so it cannot drift silently. This is the
+    # regression that produced an earlier "78" figure: scope ids omitted form_type, 20
+    # real tuples collided, and de-duplication then discarded 54 of the 132 applies rows.
+    distinct = {
+        cs.scope_id_for(row)
+        for family in replay["snapshot"]["families"]
+        for row in family["applies"]
+    }
+    assert len(whole["scopes"]) == len(distinct), (len(whole["scopes"]), len(distinct))
+    assert len(whole["components"]) == len(replay["snapshot"]["families"]) + len(
+        replay["snapshot"]["facets"]
+    )
     frozen = _freeze(whole)
     assert frozen["status"] == "partial"
     codes = {item["code"] for item in frozen["diagnostics"]}

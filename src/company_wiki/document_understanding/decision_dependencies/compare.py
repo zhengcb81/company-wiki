@@ -9,10 +9,14 @@ decision identity matched inside the input it was given. The caller's inventory
 completeness, the original bytes and the locator read check remain ROOT's responsibility;
 nothing here reads a catalog, a file, a clock or the network.
 
-Error handling mirrors :mod:`.trace` exactly: real data errors -- wrong types, duplicate
-ids, dangling references, malformed digests -- propagate as
-:class:`~.trace.DecisionTraceError`, while unknown or missing inputs become an explicit
-``unavailable`` verdict with diagnostics. Neither can ever be laundered into ``same``.
+Error handling mirrors :mod:`.trace` for the route that receives a *caller assertion*: a
+declared ``du-decision-trace/1`` with wrong types, duplicate ids, dangling references or a
+malformed digest propagates as :class:`~.trace.DecisionTraceError`. A *stored manifest* is
+a record rather than an assertion, so anything that makes it unusable -- an unknown or
+missing field, a duplicate id, a dangling or repeated reference, a malformed digest, a
+wrong-typed row, or a ``decision_digest`` that no longer matches its own rows -- comes back
+as ``unavailable`` with a diagnostic naming the problem. Both routes are equally incapable
+of producing ``same``.
 """
 
 from __future__ import annotations
@@ -33,6 +37,7 @@ from .contract import (
     FROZEN_SCHEMA_VERSION,
     FROZEN_STATUS_COMPLETE,
     Budget,
+    encoded_bytes,
     resolve_limits,
 )
 from .freeze import decision_digest, freeze_decision_dependencies
@@ -51,18 +56,27 @@ def _full_digest(value: Any) -> bool:
 
 
 def _reference_names(value: Any) -> list[str] | None:
-    """A list of unique non-empty strings, or None if the value is not one."""
+    """A list of unique non-empty strings, or None if the value is not one.
+
+    Duplicate detection uses a set: a list scan would make this quadratic and let a wide
+    manifest spend far more work than the caller's ``max_work_units`` admits.
+    """
     if not isinstance(value, list):
         return None
+    seen: set[str] = set()
     names: list[str] = []
     for item in value:
-        if not isinstance(item, str) or not item or item in names:
+        if not isinstance(item, str) or not item or item in seen:
             return None
+        seen.add(item)
         names.append(item)
     return names
 
 
-def _manifest_problem(manifest: Mapping[str, Any]) -> str | None:
+_BUDGET_REASON = "the caller's work or byte budget ran out while validating the manifest"
+
+
+def _manifest_problem(manifest: Mapping[str, Any], budget: Budget | None) -> str | None:
     """Everything wrong with a manifest's *content*, as a reason string.
 
     ``compare`` treats a stored manifest as a record, not as a caller assertion, so a
@@ -70,6 +84,10 @@ def _manifest_problem(manifest: Mapping[str, Any]) -> str | None:
     duplicate ids, dangling references, repeated references, malformed digests and wrong
     types all make the manifest unusable, and an unusable manifest is ``unavailable`` --
     never ``same``. Left unchecked these would let a malformed record read as unchanged.
+
+    The validation pass is charged against the same budget as the diff, so a wide
+    manifest cannot spend unbounded work here while the caller believes the call was
+    bounded.
     """
     expected = {
         "scopes": FROZEN_SCOPE_KEYS,
@@ -83,6 +101,8 @@ def _manifest_problem(manifest: Mapping[str, Any]) -> str | None:
         identity_key = {"scopes": "scope_id", "components": "component_id",
                         "candidates": "candidate_id"}[key]
         for index, row in enumerate(rows):
+            if budget is not None and not budget.charge():
+                return _BUDGET_REASON
             where = f"{key}[{index}]"
             for name in allowed:
                 if name in (identity_key, "version"):
@@ -98,6 +118,18 @@ def _manifest_problem(manifest: Mapping[str, Any]) -> str | None:
                 elif name == "eligible":
                     if not isinstance(row[name], bool):
                         return f"{where}.eligible must be a boolean"
+                elif name in ("regime", "family", "purpose"):
+                    # Same rule the trace side applies: these are declared strings, so a
+                    # numeric or boolean stand-in is a wrong type, not an unknown value.
+                    value = row[name]
+                    if not isinstance(value, str) or isinstance(value, bool) or not value:
+                        return f"{where}.{name} must be a non-empty string"
+                elif name == "form_type":
+                    value = row[name]
+                    if value is not None and (
+                        not isinstance(value, str) or isinstance(value, bool) or not value
+                    ):
+                        return f"{where}.form_type must be null or a non-empty string"
             identity = row[identity_key]
             if identity in seen:
                 return (
@@ -105,21 +137,31 @@ def _manifest_problem(manifest: Mapping[str, Any]) -> str | None:
                     f"something to collapse"
                 )
             seen.add(identity)
+            if budget is not None and not budget.charge_bytes(encoded_bytes(row)):
+                return _BUDGET_REASON
         identifiers[key] = seen
 
     for row in manifest["components"]:
         for name in row["scope_ids"]:
+            if budget is not None and not budget.charge():
+                return _BUDGET_REASON
             if name not in identifiers["scopes"]:
                 return f"component {row['component_id']!r} references unknown scope {name!r}"
     for row in manifest["candidates"]:
+        if budget is not None and not budget.charge():
+            return _BUDGET_REASON
         if row["scope_id"] not in identifiers["scopes"]:
             return f"candidate {row['candidate_id']!r} references unknown scope {row['scope_id']!r}"
         for name in row["component_ids"]:
+            if budget is not None and not budget.charge():
+                return _BUDGET_REASON
             if name not in identifiers["components"]:
                 return f"candidate {row['candidate_id']!r} references unknown component {name!r}"
 
     seen_versions: set[str] = set()
     for name, value in manifest["versions"].items():
+        if budget is not None and not budget.charge():
+            return _BUDGET_REASON
         if not isinstance(name, str) or not name:
             return "versions keys must be non-empty strings"
         if name in seen_versions:
@@ -130,7 +172,9 @@ def _manifest_problem(manifest: Mapping[str, Any]) -> str | None:
     return None
 
 
-def _identity_rows(manifest: Mapping[str, Any]) -> tuple[dict[str, Any] | None, str | None]:
+def _identity_rows(
+    manifest: Mapping[str, Any], budget: Budget | None = None
+) -> tuple[dict[str, Any] | None, str | None]:
     """Read the identity rows out of a frozen manifest.
 
     Returns ``(rows, None)`` for a valid manifest and ``(None, reason)`` otherwise. The
@@ -161,6 +205,8 @@ def _identity_rows(manifest: Mapping[str, Any]) -> tuple[dict[str, Any] | None, 
         if not isinstance(rows, list):
             return None, f"frozen {key} must be an array"
         for index, row in enumerate(rows):
+            if budget is not None and not budget.charge():
+                return None, _BUDGET_REASON
             if not isinstance(row, Mapping):
                 return None, f"frozen {key}[{index}] must be a mapping"
             row_unknown = sorted(set(row) - allowed)
@@ -171,7 +217,7 @@ def _identity_rows(manifest: Mapping[str, Any]) -> tuple[dict[str, Any] | None, 
                 return None, f"frozen {key}[{index}] is missing contract fields: {row_missing}"
     if not isinstance(manifest.get("versions"), Mapping):
         return None, "frozen versions must be a mapping"
-    problem = _manifest_problem(manifest)
+    problem = _manifest_problem(manifest, budget)
     if problem is not None:
         return None, problem
     # The manifest carries its own identity. A digest that no longer matches its rows is
@@ -180,7 +226,7 @@ def _identity_rows(manifest: Mapping[str, Any]) -> tuple[dict[str, Any] | None, 
     if not _full_digest(recorded):
         return None, "frozen decision_digest must be a full 64-character lowercase SHA-256"
     try:
-        recomputed = decision_digest(manifest)
+        recomputed = decision_digest(manifest, budget=budget)
     except (TypeError, ValueError) as error:
         return None, f"frozen decision_digest cannot be recomputed: {error}"
     if recorded != recomputed:
@@ -195,22 +241,22 @@ def _identity_rows(manifest: Mapping[str, Any]) -> tuple[dict[str, Any] | None, 
 
 
 def _spend_row(budget: Budget, row: Mapping[str, Any]) -> bool:
-    """Charge one row and its nested references against the budget.
+    """Charge one row against the budget.
 
-    Every row and every element inside a reference list is charged, so diffing a wide
-    inventory cannot run past ``max_work_units`` or ``max_input_bytes`` while the caller
-    believes the call was bounded.
+    Bytes come from the row's real canonical encoding, which already contains every
+    field and reference, plus one per-row envelope -- the same accounting the decode pass
+    uses. Charging per reference as well would double-count the row and quietly shrink
+    what fits inside the published byte budget.
     """
     if not budget.charge():
         return False
-    for value in row.values():
-        if isinstance(value, str) and not budget.charge_text(value):
-            return False
-        elif isinstance(value, list):
-            for item in value:
-                if isinstance(item, str) and not budget.charge_text(item):
-                    return False
-    return budget.charge_bytes(BYTES_PER_ROW_ENVELOPE)
+    try:
+        size = encoded_bytes(row)
+    except (TypeError, ValueError):
+        # An unencodable row has already been rejected by the manifest validation that
+        # runs before any diff; charge the envelope and let the caller see it there.
+        size = 0
+    return budget.charge_bytes(size + BYTES_PER_ROW_ENVELOPE)
 
 
 def _index(
@@ -288,6 +334,9 @@ def compare_decision_dependencies(
     effective, limits_error = resolve_limits(limits)
     if limits_error is not None:
         raise ValueError(f"{limits_error['code']}: {limits_error['detail']}")
+    # The budget covers validation as well as the diff: re-deriving a manifest's digest
+    # is work like any other walk, and a wide record must not do it for free.
+    budget = Budget(effective)
 
     if not isinstance(frozen, Mapping):
         return _unavailable(
@@ -299,8 +348,10 @@ def compare_decision_dependencies(
             ]
         )
 
-    frozen_identity, frozen_reason = _identity_rows(frozen)
+    frozen_identity, frozen_reason = _identity_rows(frozen, budget)
     if frozen_identity is None:
+        if frozen_reason == _BUDGET_REASON:
+            return _unavailable([_budget_diagnostic(budget, effective)])
         return _unavailable(
             [
                 {
@@ -328,8 +379,10 @@ def compare_decision_dependencies(
 
     # Which side is which is decided by schema_version alone.
     if isinstance(current, Mapping) and current.get("schema_version") == FROZEN_SCHEMA_VERSION:
-        current_identity, current_reason = _identity_rows(current)
+        current_identity, current_reason = _identity_rows(current, budget)
         if current_identity is None:
+            if current_reason == _BUDGET_REASON:
+                return _unavailable([_budget_diagnostic(budget, effective)])
             return _unavailable(
                 diagnostics
                 + [
@@ -380,8 +433,6 @@ def compare_decision_dependencies(
     # Any blocking condition means the honest answer is "cannot say", never "same".
     if diagnostics:
         return _unavailable(diagnostics)
-
-    budget = Budget(effective)
 
     frozen_components = _index(frozen_identity["components"], "component_id", budget)
     if frozen_components is None:

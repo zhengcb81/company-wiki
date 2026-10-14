@@ -46,10 +46,10 @@ Wire: `du-decision-trace/1` in; `du-decision-dependencies/1` and `du-decision-co
    all fixed and pinned with counter-examples; see findings.md section 8.
 
 Node runs after the fix round (`.planning/du3-dependencies/evidence/nodes.json`):
-A 55 passed / exit 0 / 2.813s, B 57 passed / exit 0 / 3.063s,
-C 19 passed / exit 0 / 2.526s, ALL 131 passed / exit 0 / 3.268s.
+A 55 passed / exit 0 / 2.765s, B 63 passed / exit 0 / 3.941s,
+C 19 passed / exit 0 / 2.569s, ALL 137 passed / exit 0 / 4.086s.
 ruff exit 0, mypy exit 0. Regression over the five pre-existing DU packages:
-496 passed, 17 skipped (627 passed / 17 skipped combined with this lane).
+496 passed, 17 skipped (633 passed / 17 skipped combined with this lane).
 
 Implementation commit `bc63a74eac1f73e6184a87a4b1bb65044840c1ad`;
 ledger commit `e430945fa8a536bac589be8ad6ddf3708379557c`.

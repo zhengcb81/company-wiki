@@ -183,6 +183,39 @@ rather than hidden:
   membership at all, and inspected components no candidate ever references -- both of
   which are refused as `complete`. The remainder is ROOT's instrumentation to establish.
 
+### Re-verification
+
+Both reviewers were asked to re-check the fix commit against their own reproductions, and
+both did so independently of my tests. The acceptance reviewer ran 12 fresh adversarial
+probes and returned **ACCEPTABLE, defects 1-8 all genuinely closed**, with four residual
+items: a dirty tree during the fix (since committed), one imprecise docstring sentence,
+duplicated per-node timings that drift between runs, and an under-pinned scope count in the
+C replay. All four are cleared -- the docstring states the record-vs-assertion split
+exactly, `nodes.json` is declared the single timing source, the C replay pins the scope
+count against the snapshot's own distinct applies tuples (the exact regression that
+produced the old "78"), and the tree is committed and clean.
+
+The adversarial reviewer re-ran every original reproduction and **all three digest
+mutants** -- which now fail, where they previously passed 111/111 -- and confirmed D-A
+through D-L closed with no regression and no migration break (a manifest produced by the
+old code still verifies under the new compare). It also found four residuals, all of which
+are now fixed and pinned:
+
+| # | Residual | Status |
+|---|---|---|
+| R1 | the manifest **validation** pass (field checks, reference checks and the `decision_digest` re-derive) ran uncharged before the diff, and its reference check was quadratic — 2x300k-row compare with `max_work_units=1` cost 4.321 s on the fix commit, *worse* than the 0.274 s it was meant to improve | fixed: validation is charged to the same budget and the reference check is set-based. 300k-row compare now returns `unavailable` in 0.000 s; 20 000 references validate in 0.234 s |
+| R2 | the per-row byte envelope was charged once per **reference**, so a 100 KB trace stopped fitting a 2 MiB cap — a ~20x shrink of the published budget for reference-heavy inputs | fixed: the envelope is charged once per row and the row's canonical encoding carries the references. A 135 KB / 12 000-reference trace freezes `complete` at 6.5% of the cap |
+| R3 | `decision_digest` silently skipped non-mapping rows, so `components=['garbage', 42]` hashed the same as `components=[]` | fixed: `ValueError` |
+| R4 | manifest scope rows were not type-checked beyond the id | fixed: `regime`/`family`/`purpose` are non-empty strings, `form_type` null-or-string, matching the trace side |
+
+R1 and R2 are worth recording because they were **regressions introduced by my own first
+fix** -- the reviewer's point that "charging more" is not the same as "charging correctly".
+Both are now covered by counter-examples (`test_the_manifest_validation_pass_is_charged_too`,
+`test_the_manifest_reference_check_is_linear`,
+`test_a_reference_heavy_trace_still_fits_the_published_byte_budget`,
+`test_decision_digest_refuses_rows_that_are_not_mappings`,
+`test_a_manifest_scope_row_with_a_wrong_typed_field_is_unavailable`).
+
 ### Measured effect of the fixes
 
 Every line below is a re-run of the reviewer's own reproduction, not a paraphrase.

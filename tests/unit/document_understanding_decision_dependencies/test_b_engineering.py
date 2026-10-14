@@ -723,6 +723,166 @@ def test_a_budget_stop_is_never_same():
         assert _compare(frozen, _wide_domain(50))["status"] != "same", limits
 
 
+def test_compare_charges_the_manifest_diff_against_the_byte_cap():
+    """The diff route has the same accounting as the decode route.
+
+    Two wide manifests that are genuinely equal must not come out ``same`` when the
+    caller only authorised a handful of bytes for the comparison.
+    """
+    frozen = _freeze(_wide_domain(200))
+    assert frozen["status"] == "complete"
+    assert _compare(frozen, frozen)["status"] == "same"
+    starved = _compare(frozen, frozen, max_input_bytes=1)
+    assert starved["status"] == "unavailable", starved
+    assert starved["diagnostics"], starved
+    assert _compare(frozen, frozen, max_work_units=1)["status"] == "unavailable"
+
+
+def _hand_manifest(rows: int) -> dict:
+    """A wide, valid manifest built the way a stored record arrives: by hand.
+
+    ``freeze`` caps its own output at the published row limits, so only a hand-built
+    record can be wide enough to make the *validation* pass matter.
+    """
+    manifest = {
+        "schema_version": "du-decision-dependencies/1",
+        "status": "complete",
+        "scopes": [
+            {"scope_id": "s", "regime": "r", "family": "f", "form_type": None, "purpose": "p"}
+        ],
+        "components": [
+            {"component_id": f"c{i}", "version": "1.0.0", "content_digest": "0" * 64,
+             "matcher_digest": "1" * 64, "scope_ids": ["s"]}
+            for i in range(rows)
+        ],
+        "candidates": [
+            {"candidate_id": f"n{i}", "scope_id": "s", "component_ids": [f"c{i}"], "eligible": True}
+            for i in range(rows)
+        ],
+        "versions": {"router": "1.0.0"},
+        "diagnostics": [],
+    }
+    manifest["decision_digest"] = _manifest_digest(manifest)
+    return manifest
+
+
+def test_the_manifest_validation_pass_is_charged_too():
+    """Re-deriving a manifest's digest is work; it must not run for free.
+
+    Validation happens before any diff. Left uncharged it was the one place a wide record
+    could spend unbounded time while the caller believed the call was bounded.
+    """
+    import time
+
+    wide = _hand_manifest(60_000)
+    started = time.perf_counter()
+    result = _compare(wide, wide, max_work_units=1)
+    elapsed = time.perf_counter() - started
+    assert result["status"] == "unavailable", result
+    assert result["diagnostics"], result
+    assert elapsed < 3.0, f"a one-work-unit compare of a wide manifest took {elapsed:.3f}s"
+
+
+def test_the_manifest_reference_check_is_linear():
+    """A wide reference list must not make validation quadratic."""
+    import time
+
+    scopes = [
+        {"scope_id": f"s{j}", "regime": "r", "family": "f", "form_type": None, "purpose": "p"}
+        for j in range(20_000)
+    ]
+    manifest = {
+        "schema_version": "du-decision-dependencies/1",
+        "status": "complete",
+        "scopes": scopes,
+        "components": [
+            {"component_id": "c0", "version": "1.0.0", "content_digest": "0" * 64,
+             "matcher_digest": "1" * 64,
+             "scope_ids": [f"s{j}" for j in range(20_000)]}
+        ],
+        "candidates": [
+            {"candidate_id": "n0", "scope_id": "s0", "component_ids": ["c0"], "eligible": True}
+        ],
+        "versions": {"router": "1.0.0"},
+        "diagnostics": [],
+    }
+    manifest["decision_digest"] = _manifest_digest(manifest)
+    started = time.perf_counter()
+    result = _compare(manifest, manifest)
+    elapsed = time.perf_counter() - started
+    assert result["status"] in {"same", "unavailable"}, result
+    assert elapsed < 3.0, f"validating 20k references took {elapsed:.3f}s"
+
+
+def test_a_reference_heavy_trace_still_fits_the_published_byte_budget():
+    """The per-row envelope must not be charged once per reference.
+
+    The row's canonical encoding already carries every reference, so charging an extra
+    envelope for each one shrank what fits inside the published ``max_input_bytes`` by an
+    order of magnitude -- a real capacity regression behind a conservative-looking count.
+    """
+    rows = 200
+    refs_per_row = 60
+    scope_ids = [f"s{j}" for j in range(refs_per_row)]
+    trace_value = {
+        "schema_version": "du-decision-trace/1",
+        "scopes": [
+            {"scope_id": name, "regime": "r", "family": "f", "form_type": None, "purpose": "p"}
+            for name in scope_ids
+        ],
+        "components": [
+            {"component_id": f"c{i}", "version": "1.0.0", "content_digest": "0" * 64,
+             "matcher_digest": "1" * 64, "scope_ids": list(scope_ids)}
+            for i in range(rows)
+        ],
+        "candidates": [
+            {"candidate_id": f"n{i}", "scope_id": "s0", "component_ids": [f"c{i}"], "eligible": True}
+            for i in range(rows)
+        ],
+        "versions": {"router": "1.0.0"},
+        "inventory_complete": True,
+    }
+    real_bytes = len(_canonical(trace_value).encode("utf-8"))
+    # Comfortably inside the published 2 MiB default: only a per-reference envelope
+    # charge would push it over.
+    assert real_bytes < 2 * 1024 * 1024, real_bytes
+    frozen = _freeze(trace_value)
+    assert frozen["status"] == "complete", frozen["diagnostics"]
+    assert real_bytes > 100_000, real_bytes
+
+
+def test_decision_digest_refuses_rows_that_are_not_mappings():
+    """Garbage rows must not hash the same as no rows at all."""
+    frozen = _complete_manifest()
+    digest = _manifest_digest(frozen)
+    for bad in (["garbage", 42], [None], [7]):
+        for key in ("scopes", "components", "candidates"):
+            broken = copy.deepcopy(frozen)
+            broken[key] = bad
+            with pytest.raises(ValueError):
+                _manifest_digest(broken)
+    assert _manifest_digest(frozen) == digest
+
+
+def test_a_manifest_scope_row_with_a_wrong_typed_field_is_unavailable():
+    """Scope rows are typed like the trace side: declared strings, not free values."""
+    frozen = _complete_manifest()
+    corruptions = [
+        {"regime": 42},
+        {"family": ["x"]},
+        {"purpose": True},
+        {"form_type": {"y": 1}},
+        {"form_type": 7},
+    ]
+    for changes in corruptions:
+        tampered = copy.deepcopy(frozen)
+        tampered["scopes"][0].update(changes)
+        tampered["decision_digest"] = _manifest_digest(tampered)  # isolate the type check
+        result = _compare(frozen, tampered)
+        assert result["status"] == "unavailable", changes
+        assert result["diagnostics"], changes
+
+
 # --- 10. a stored manifest is a record: unusable means unavailable, never same ----------
 
 

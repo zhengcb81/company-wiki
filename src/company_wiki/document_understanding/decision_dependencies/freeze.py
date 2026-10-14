@@ -52,9 +52,6 @@ def _freeze_scopes(trace: DecisionTrace, budget: Budget) -> tuple[list[dict[str,
         if budget.exhausted:
             complete = False
             break
-        if not budget.charge_text(scope["scope_id"] + scope["regime"] + scope["family"] + scope["purpose"]):
-            complete = False
-            break
         row = {
             "scope_id": scope["scope_id"],
             "regime": scope["regime"],
@@ -80,9 +77,6 @@ def _freeze_components(trace: DecisionTrace, budget: Budget) -> tuple[list[dict[
             break
         budget.charge()
         if budget.exhausted:
-            complete = False
-            break
-        if not budget.charge_text(component["component_id"] + component["version"]):
             complete = False
             break
         row = {
@@ -112,15 +106,12 @@ def _freeze_candidates(trace: DecisionTrace, budget: Budget) -> tuple[list[dict[
         if budget.exhausted:
             complete = False
             break
-        if not budget.charge_text(candidate["candidate_id"] + candidate["scope_id"]):
-            complete = False
-            break
-        for component_id in candidate["component_ids"]:
+        # Work is charged per reference, but bytes are not: the row's canonical encoding
+        # below already carries every reference, and charging an envelope per reference
+        # would quietly shrink what fits inside the published byte budget.
+        for _ in candidate["component_ids"]:
             budget.charge()
             if budget.exhausted:
-                complete = False
-                break
-            if not budget.charge_text(component_id):
                 complete = False
                 break
         if not complete:
@@ -259,33 +250,43 @@ def freeze_decision_dependencies(
 IDENTITY_FIELDS = ("schema_version", "scopes", "components", "candidates", "versions")
 
 
-def decision_digest(manifest: Mapping[str, Any]) -> str:
+def decision_digest(manifest: Mapping[str, Any], *, budget: Budget | None = None) -> str:
     """Digest the identity-bearing part of a manifest, independent of row order.
 
     Rows are sorted by their id key before hashing, so a manifest whose arrays were
     permuted keeps the same identity as :func:`compare_decision_dependencies` reports.
-    Missing identity fields are an error rather than an empty default: a digest that
-    treats "absent" and "empty" as the same thing would let a record with unhashed
+    Missing identity fields and non-mapping rows are errors rather than empty defaults: a
+    digest that treats "absent" or "garbage" as "empty" would let a record with unhashed
     content pass as unchanged.
+
+    ``budget`` is optional and charged per row; hashing a manifest is work like any other
+    walk, so a comparison that re-derives the digest must not do it for free.
     """
     missing = [name for name in IDENTITY_FIELDS if name not in manifest]
     if missing:
         raise ValueError(f"decision_digest needs the identity fields; missing {missing}")
     payload = {
         "schema_version": manifest["schema_version"],
-        "scopes": _sorted_rows(manifest["scopes"], "scope_id"),
-        "components": _sorted_rows(manifest["components"], "component_id"),
-        "candidates": _sorted_rows(manifest["candidates"], "candidate_id"),
+        "scopes": _sorted_rows(manifest["scopes"], "scope_id", budget),
+        "components": _sorted_rows(manifest["components"], "component_id", budget),
+        "candidates": _sorted_rows(manifest["candidates"], "candidate_id", budget),
         "versions": manifest["versions"],
     }
     return _digest_payload(payload)
 
 
-def _sorted_rows(rows: Any, key: str) -> list[Any]:
-    """Order-independent view of a row array; a non-array is a caller error."""
+def _sorted_rows(rows: Any, key: str, budget: Budget | None = None) -> list[Mapping[str, Any]]:
+    """Order-independent view of a row array.
+
+    A non-array or a non-mapping row is a caller error and is refused rather than
+    dropped: silently skipping one would make two materially different manifests share a
+    digest, which is exactly the collision this function exists to prevent.
+    """
     if not isinstance(rows, (list, tuple)):
         raise ValueError(f"{key} rows must be an array")
-    return sorted(
-        (dict(row) for row in rows if isinstance(row, Mapping)),
-        key=lambda row: str(row.get(key)),
-    )
+    for index, row in enumerate(rows):
+        if not isinstance(row, Mapping):
+            raise ValueError(f"{key}[{index}] must be a mapping, got {type(row).__name__}")
+        if budget is not None and not budget.charge():
+            raise ValueError("the caller's work budget ran out while hashing the manifest")
+    return sorted((dict(row) for row in rows), key=lambda row: str(row.get(key)))

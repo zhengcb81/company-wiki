@@ -55,28 +55,27 @@ def _spend(
     *,
     units: int = 1,
     payload: Any = None,
-    texts: tuple[str, ...] = (),
+    row: bool = False,
 ) -> None:
     """Charge work and bytes for one element; stop the decode when the budget runs out.
 
-    Every loop that touches a row, a reference or a large container spends here, so a
-    single call cannot do unbounded work while claiming a bounded budget. Bytes are
-    charged on the *real* canonical encoding of whatever was walked, plus a small
-    per-element envelope -- never a sampled subset, so ``max_input_bytes`` cannot be
-    bypassed by growing one row. Stopping is not an input error: it degrades the result to
-    ``partial`` and never to ``same``.
+    Every loop that touches a row, a reference or a large container spends work here, so
+    a single call cannot do unbounded work while claiming a bounded budget. Bytes come
+    from the *real canonical encoding* of the row being built, which already contains its
+    every field and reference -- so the per-row envelope is charged exactly once per row
+    (``row=True``) and never once per reference. Charging it per reference would shrink
+    the published ``max_input_bytes`` for reference-heavy inputs by an order of magnitude.
+
+    Stopping is not an input error: it degrades the result to ``partial`` and never to
+    ``same``.
     """
     if budget is None:
         return
     if not budget.charge(units):
         raise _BudgetStop
-    for text in texts:
-        if not budget.charge_text(text):
-            raise _BudgetStop
-    if payload is not None:
-        if not budget.charge_bytes(encoded_bytes(payload)):
-            raise _BudgetStop
-    if not budget.charge_bytes(BYTES_PER_ROW_ENVELOPE * max(1, units)):
+    if payload is not None and not budget.charge_bytes(encoded_bytes(payload)):
+        raise _BudgetStop
+    if row and not budget.charge_bytes(BYTES_PER_ROW_ENVELOPE):
         raise _BudgetStop
 
 
@@ -255,7 +254,7 @@ def _decode_scopes(raw: list[Mapping[str, Any]], budget: Budget | None) -> list[
             "form_type": _optional_text(row["form_type"], f"{where}.form_type"),
             "purpose": _text(row["purpose"], f"{where}.purpose"),
         }
-        _spend(budget, payload=built)
+        _spend(budget, payload=built, row=True)
         rows.append(built)
     return rows
 
@@ -275,7 +274,7 @@ def _decode_components(
             "matcher_digest": _digest(row["matcher_digest"], f"{where}.matcher_digest"),
             "scope_ids": _reference_list(row["scope_ids"], f"{where}.scope_ids", budget),
         }
-        _spend(budget, payload=built)
+        _spend(budget, payload=built, row=True)
         rows.append(built)
     return rows
 
@@ -301,7 +300,7 @@ def _decode_candidates(
             ),
             "eligible": eligible,
         }
-        _spend(budget, payload=built)
+        _spend(budget, payload=built, row=True)
         rows.append(built)
     return rows
 
@@ -328,7 +327,7 @@ def _decode_versions(value: Any, budget: Budget | None) -> dict[str, Any]:
             )
         if name in versions:
             raise DecisionTraceError(f"versions repeats key {name!r}")
-        _spend(budget, payload={name: item})
+        _spend(budget, payload={name: item}, row=True)
         versions[name] = item
     return versions
 

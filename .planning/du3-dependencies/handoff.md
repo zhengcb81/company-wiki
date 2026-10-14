@@ -90,10 +90,10 @@ mypy skipped、config doctor skipped、host-assumption-guard Passed）。
 
 | 节点 | 命令 | exit | 耗时 | 结果 |
 |---|---|---:|---:|---|
-| A | pytest test_a_completeness_honesty.py + test_a_mutation_matrix.py | 0 | 2.813s | 55 passed in 0.30s |
-| B | pytest test_b_engineering.py | 0 | 3.063s | 57 passed in 0.79s |
-| C | pytest test_c_catalog_replay.py | 0 | 2.526s | 19 passed in 0.28s |
-| ALL | pytest tests/unit/document_understanding_decision_dependencies | 0 | 3.268s | 131 passed in 1.03s |
+| A | pytest test_a_completeness_honesty.py + test_a_mutation_matrix.py | 0 | 2.765s | 55 passed in 0.34s |
+| B | pytest test_b_engineering.py | 0 | 3.941s | 63 passed in 1.60s |
+| C | pytest test_c_catalog_replay.py | 0 | 2.569s | 19 passed in 0.30s |
+| ALL | pytest tests/unit/document_understanding_decision_dependencies | 0 | 4.086s | 137 passed in 1.82s |
 
 **A 先 RED 后实现**：实现前跑同一组测试得 `51 failed in 1.80s`，根因 `ModuleNotFoundError:
 No module named 'company_wiki.document_understanding.decision_dependencies'`，收据
@@ -170,8 +170,8 @@ ROOT 正式 trace。
 - 临时目录只有 pytest `tmp_path`；无下载/截图/db/新数据库；无安装动作；无授权/签收/canary
   文件。
 - 测试运行同时跑了既有五个 DU 单元包（root/profiles/selection/structure/layout_hints）作
-  回归：`496 passed, 17 skipped`（11.85s），无回归；加上本 lane 自己的 131 项，合并
-  `627 passed, 17 skipped`。
+  回归：`496 passed, 17 skipped`（11.85s），无回归；加上本 lane 自己的 137 项，合并
+  `633 passed, 17 skipped`。
 
 ## 九、独立审查与修复
 
@@ -204,6 +204,22 @@ ROOT 正式 trace。
 一份形状完整、漏记参与者却自称 `inventory_complete: true` 的伪造清单，从输入内部确实无法识别
 —— 这正是卡要求“文档说明”的“不可认证的外部漏报”，已写进包 docstring、findings.md 与
 handoff.json 的 known_gaps，而不是遮掩。
+
+上面是第一轮的摘要。两位审查者合计提出 **17 项**，逐条的严重度、证据与修复对照表在
+`findings.md` 第 8 节，其中还有几项是第二位审查者独有的：`max_input_bytes` 的行计量少算
+1.95 倍（35 KB 输入在 25 KB 上限下被判 `complete`）、`decision_digest` 对 `versions`/
+`scopes`/`candidates` 的覆盖当时完全没有测试（删掉这两个 payload 字段的源码变体仍能 111/111
+通过）、`_reference_list` 用列表扫描去重导致平方复杂度、compare 的索引/求差预处理完全没计费、
+`decision_digest` 用 `.get()` 默认值且对行顺序敏感、limits 只在部分分支校验、AST 导入守卫可被
+`from 父包 import 子模块` 和 `__import__()` 绕过、C 夹具的 scope 身份漏了 `form_type`（撞了
+20 个真实 scope id、静默丢掉 132 行 applies 里的 54 行，这就是当初“78”的由来）。
+
+**复核结论**：两位审查者都被要求拿自己的复现脚本重新验证修复提交。验收审查者跑了 12 个新的
+对抗性探针，结论 **ACCEPTABLE，缺陷 1–8 全部确实关闭**，另提 4 条收尾项：修复期间工作树一度
+未提交、一句 docstring 不精确、每节点耗时在两个文件里重复且每次重跑都会漂移、C 回放的 scope
+数量断言太松。四条都已收掉：docstring 现在准确写出“记录 vs 断言”的分工，`nodes.json` 被声明为
+唯一耗时来源，C 回放现在把 scope 数量钉在快照自身的 distinct applies 元组上（正是当初产出
+“78”那个数字的回归），工作树已提交且干净。
 
 ## 十、ROOT 接下来做什么
 
