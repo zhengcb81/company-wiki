@@ -3,7 +3,7 @@
 PLAN_ID: document-understanding-2026-10-13
 PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans
 Owner: ROOT
-Current Phase: A/B — 生产选择/摘要与缓存恢复已接线，集中工程验收及真实质量继续
+Current Phase: A/C — 正式发布/恢复与跨仓工程联调通过，真实关键业务召回仍有两项遗漏
 
 ## Goal
 
@@ -30,7 +30,7 @@ Current Phase: A/B — 生产选择/摘要与缓存恢复已接线，集中工�
 
 ### Phase B: 正式摘要、generation与缓存恢复
 
-**Status:** in_progress
+**Status:** complete（工程节点；真实供应商摘要质量归 Phase C）
 
 同一次parser→DU→正式SelectResult→ModelRequest→NarrativeRef，只有最终实际采用提示进入模型。selection-decision指纹与final-sent-policy指纹分开；未选但参与决策的策略变化也失效，无关策略不全库重建。
 
@@ -46,7 +46,9 @@ Current Phase: A/B — 生产选择/摘要与缓存恢复已接线，集中工�
 
 ## Next Step
 
-下一步完成同原件 A/H/US 有界闭包回放及 RF 新 DTO 兼容，然后统一正式配置摘要、缓存恢复与真实质量验收。连续上下文、经营表筛页、英简繁机制已实现：相关257 PASS，原10个独审探针最终全 PASS；真实小PDF经营表与原文回开2 PASS。a117fafc 已正常推送，精确CI38554334091 success。实际CWP→FF→RF离线联调暴露RF消费者仍只识别旧Bundle/claim/versions，须完整保留并验证新 reading_context 与组引用；不删字段伪造通过。三个真实原件回放进行中；默认仍0.8，正式供应商调用尚未开始。三DU3已接收，作者树保留干净，RF仅在独立工作树施工，不触及旧assurance/output。
+本轮工程留证：[范围与当前缺项收据](native-range-source-evidence/acceptance.json)、[紧凑原始测试/独审/真实回放](native-range-source-evidence/receipts.zip)。保留原失败；未将 quote recall 当作供应商摘要或完整 RF 买方研究质量。
+
+下一步修复真实 CN 产品进展与 US 分部业务归属的遗漏，随后用配置中的三家供应商做同原件旧/新摘要与独审。当前真实生产语言回放：CN zh 9/10、HK mixed 7/7、US en 7/8，均保持 96 spans / 48K 字符上限；没有将两处遗漏标为完成。RF 新 reading_context 消费兼容已并 main/push 512e85bb，精确 CI38563752875 success；安装副本已按单文件定点同步，两物理副本与 claude junction 一致，旧 assurance/output WIP 保留。最新真实 CWP→FF→RF 离线 CLI 联调 PASS：0.8 成为 LATEST 后仍精确读取历史 0.9 Ref，完整 reading_context/spans/summary/sourceRef 一致，same/cross-run 0 新 POST。集中原文范围、公有接口和恢复 89 PASS；默认仍 0.8，付费摘要尚未开始。三 DU3 已接收，ROOT 没有写作者树。
 
 最新工程节点：[明确范围收据](production-selection-evidence/acceptance.json) / [压缩测试与独审证据](production-selection-evidence/receipts.zip)。真实CLI三载体已强制完整dependency和same/cross-run0POST，集中143PASS；统一A/H封面用途与历史发行信号溯源195PASS。当前质量阻点是PDF跨原生blocks断句/经营表筛页与多语言业务机制，不是再提高预算。正式摘要尚未付费运行，默认0.8保持。各历史FAIL和独立金标字面错误保留。
 

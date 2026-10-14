@@ -1,4 +1,16 @@
-## ROOT真实漏读共因与DU3接收 — 2026-10-14
+## 最新 ROOT 节点 — 原生范围、公平覆盖、正式恢复和跨仓消费（2026-10-14）
+
+正式源层新增 native-pdf-range/1：仅从已读取、明确版本的 native page view 取真实子串，原始 unit/span ID 不变；范围保存原文成员/locator/hash，不持久化全页副本。混合语言连接按实际字符边界解释，英文词和数字单位不拼造。reading_plan/3 在同价值层比较真实主题访次，未知标签也记录实际访次；旧 /1、/2 与 legacy 的 4,000 个结果及诊断逐项不变，不增加 96/48K/2M 上限。
+
+源层 142 PASS；畸形范围绑定 4 RED 后 36 PASS，独审 8/8 PASS。连续意义/语言边界 62 PASS，公平覆盖集中 119 PASS、独审 6/6 PASS；ROOT 公有接口/原文回开/缓存/批次恢复集中 **89 PASS / 80.38s**，生产原件、配置与独立 Temp 恢复，0 外部 POST。这些工程结果不代替真实摘要质量。
+
+冻结真实三原件各 parse/select 一次，canonical closed_group_support 验原文闭包：CN **9/10**（SiC 8英寸产品进展仍漏），HK actual mixed **7/7**，US en **7/8**（Azure 所属业务归属仍漏）；此前失败和 gold 字面修正证据保持。正在只读诊断两个共用根因，未花费新模型预算，不能默认切换。
+
+RF 消费者仅新增有界 reading_context 合同，真实 public Bundle 的 claim/versions 没有臆造新字段。独立作者 153 PASS / 2既有SKIP、ROOT 8/8独审；并 main/push **512e85bb**，正常 pre-push 416 PASS＋36 subtests，精确 [CI38563752875](https://github.com/zhengcb81/revenue-forecast/actions/runs/38563752875) success。单文件 LF SHA ca878e4d1b5cfa254ec1db2734596eab36c7d542d49b3b28b5a95097d5cfa10a 已同步 .agents/.codex 两物理副本（.claude 是前者 junction）；check selected/unselected均0。旧三 assurance文件和 output 未动。
+
+完整离线真实 CLI CWP→FF→RF **PASS / 41.293s**：两初次 POST 仅本机假服务，0 外部调用；0.8 成为 LATEST 后 pin 历史 0.9 Ref，消费者四项实际材料逐字精确一致；same/cross-run 均0新增 POST，两负例0 reservation/POST，三个独立 Temp finally 删除。原失败 RF reading_context 收据保留，不删字段凑通过。
+
+## ROOT真实漏读共因与DU3接收 — 2026-10-14（历史节点）
 
 实际form贯通family/strategy/unit scope/decision inventory，新增准入algorithm版本reading-business-policy/2；通用计费、分部变更、业务驱动、合同转化关系只进入0.9。旧0.8 detector与真实TXT指纹不改。相关439PASS/11SKIP、经营295PASS/45.76s；独立7个反例PASS/0.99s，无新增架构/跨parent/旧兼容阻断。源码本轮仍在统一收尾，未将未完成真实质量标绿。
 

@@ -54,6 +54,7 @@ class NarrativeUnit:
         # Rich native layout is transient reading input, not durable evidence.
         # Keeping it out also preserves existing span identities when boxes vary.
         structured.pop("reading_layout", None)
+        structured.pop("native_source_view", None)
         structured.update(
             {
                 "language": self.language,

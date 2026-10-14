@@ -146,6 +146,28 @@ def _matches_folded(needle: str, haystack: str) -> bool:
     return needle in haystack
 
 
+def configured_table_signal(text: str) -> bool:
+    """Triage a possible operating table using the one installed policy asset.
+
+    This never turns a whole page into a row or asserts any operating fact.
+    Expensive extraction is indicated only by configured strong row evidence;
+    weak region/amount signals still retain their ordinary facet meaning.
+    """
+    if not isinstance(text, str):
+        raise TypeError("table signal text must be a string")
+    folded = re.sub(r"(?<=[\u3400-\u9fff])\s+(?=[\u3400-\u9fff])", "", _fold(text))
+    matched = False
+    for facet in _CATALOG["facets"]:
+        for evidence in facet["positive_evidence"]:
+            enabled = evidence.get("table_scan", False)
+            if type(enabled) is not bool:
+                raise ValueError("table_scan must be a boolean")
+            if not enabled or "pdf_table_row" not in evidence["unit_kinds"]:
+                continue
+            matched = matched or any(_matches_folded(_fold(signal), folded) for signal in evidence["signals"])
+    return matched
+
+
 def _policy_score(record: Mapping, parsed: Observation) -> tuple[int, int]:
     """Recognition hints rank applicable policies; they do not assert business facts."""
     metadata = {"title": parsed.title, "regime": parsed.regime_claim, "form_type": parsed.form_type,
@@ -350,4 +372,5 @@ def select_business_facets(material: Sequence[Mapping], *, max_facets: int = 4, 
     return output
 
 
-__all__ = ["iter_profiles", "listed_profiles", "profile_by_id", "profile_wire", "resolve_reading_profile", "select_business_facets"]
+__all__ = ["iter_profiles", "listed_profiles", "profile_by_id", "profile_wire", "resolve_reading_profile", "select_business_facets",
+           "configured_table_signal"]

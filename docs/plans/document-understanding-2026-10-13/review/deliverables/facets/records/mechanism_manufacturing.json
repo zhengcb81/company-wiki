@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-facet-spec/1",
   "id": "mechanism_manufacturing",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "business_questions": [
     "客户认证/验证处于什么状态，认证与批量订单的边界在哪里",
     "产能口径（设计产能、实际产量、有效产能）与利用率的分母是什么",
@@ -45,6 +45,35 @@
         "排产",
         "良率"
       ]
+    },
+    {
+      "description": "经营表筛页的强原文信号；只表示可尝试读取，实际表头、期间、范围、行与脚注由共享结构层保留。",
+      "unit_kinds": [
+        "pdf_table_row",
+        "pdf_text_block",
+        "html_table_cell"
+      ],
+      "signals": [
+        "设计产能",
+        "設計產能",
+        "实际产量",
+        "實際產量",
+        "产能利用率",
+        "產能利用率",
+        "达产",
+        "達產",
+        "爬坡",
+        "排产",
+        "排產",
+        "良率",
+        "production capacity",
+        "designed capacity",
+        "actual output",
+        "utilization rate",
+        "yield",
+        "production schedule"
+      ],
+      "table_scan": true
     }
   ],
   "required_context": [

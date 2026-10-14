@@ -109,3 +109,11 @@ US S-1/F-1、8-K/6-K真实附件容器、修订版本对尚缺验证；独立hol
 真实US章节接线后先从7/8退到2/8：scope放宽会把页码/项目符号/空标题占满96槽，多标签访问总和也会惩罚同时解释多个业务机制的段落。以通用meaningful_fact/description两级价值、同一增量heap的价值→新主题→策略优先→平均访问次数修复，不增加公司规则、不改cap；最终同金标8/8。reading_plan/1及legacy保持逐seed selected/diagnostic一致，原FAIL保留。
 
 实际PDF已有words/cells/fonts必须同时接入publisher、neutral adapter和原共享layout_hints才有生产意义；仅快照组件PASS不足。真实HK整份0/7表明即使这些层工程PASS，经营表仍可能在结构/准入/预算中丢失，继续沿原单位逐层追踪，不花费模型掩盖漏选。native细几何的partial与正文native_scan独立，compact计数进入最终reading_context，fine arrays不进入EvidenceSpan身份或持久化正文。
+# 当前发现更新 — 2026-10-14 原生范围与实际语言
+
+PDF 碎 unit 的 span 槽位成本会使完整业务段落失去席位；源层必须从一次原生读取的命名 page view 形成可重新验真的范围，不能仅用模型或拼接字符串造长证据。新 source-owned range 已实现并通过公有回开及恢复。完整范围仍不保证召回：真实 CN 9/10、US 7/8 的两个未选事实继续调查，禁止改 gold、加公司词或抬 cap。
+
+主题公平只以已选真实事实计数；没有标签的事实也应获得真实访次，不能永久当零访次抢占。新版单 heap /3 已修，历史四策略 4,000 个结果与诊断保持。混合语言 PDF 不可假标 zh：CJK断行解释按原字，英文/数字/单位保边界；当前 HK mixed 7/7。
+
+RF 的实际公有 claim/versions 形状并未变化，真实破口仅是新增 reading_context。完整兼容已发布并定点安装；离线 CWP/FF/RF 真实 CLI 全绿且 pin 历史 Ref。canonical oracle 用实际 source-owned span/closed group，HTML 是 document locator；不能把历史错误的 page=1 比较器结果写成新生产结论。
+

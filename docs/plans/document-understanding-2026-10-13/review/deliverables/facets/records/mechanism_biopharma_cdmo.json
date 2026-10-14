@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-facet-spec/1",
   "id": "mechanism_biopharma_cdmo",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "business_questions": [
     "药物/疗法处在哪个研发或商业化阶段（临床前、临床各期、申报、获批、上市销售），适应症是什么",
     "研发/商业化订单的性质是什么：临床批、商业化批、里程碑付款、版税，各自如何确认收入",
@@ -65,6 +65,25 @@
         "权益",
         "分成"
       ]
+    },
+    {
+      "description": "经营表筛页的强原文信号；只表示可尝试读取，实际表头、期间、范围、行与脚注由共享结构层保留。",
+      "unit_kinds": [
+        "pdf_text_block",
+        "pdf_table_row",
+        "html_paragraph"
+      ],
+      "signals": [
+        "CDMO",
+        "CMO",
+        "里程碑",
+        "milestone",
+        "版税",
+        "royalty",
+        "订单金额",
+        "商业化批"
+      ],
+      "table_scan": true
     }
   ],
   "required_context": [

@@ -38,7 +38,8 @@ def ids(items):
 
 
 def test_current_reading_policy_is_versioned_and_value_is_neutral_additive_metadata():
-    assert budget.READING_BUDGET_POLICY == POLICY
+    assert budget.READING_BUDGET_POLICY == "reading_plan/3"
+    assert budget.REPLAY_VALUE_READING_BUDGET_POLICY == POLICY
     assert "value_band" in {field.name for field in fields(budget.BudgetItem)}
     assert item("a", 0).value_band == "meaningful_fact"
     assert next(field for field in fields(budget.BudgetItem) if field.name == "value_band").default == "description"
@@ -241,7 +242,7 @@ def test_qualified_operating_table_preserves_numeric_cells_and_their_context():
 def test_current_budget_version_is_an_actual_inventory_dependency(monkeypatch):
     from company_wiki.document_understanding.decision_inventory import _versions
 
-    assert _versions()["budget"] == POLICY
+    assert _versions()["budget"] == budget.READING_BUDGET_POLICY == "reading_plan/3"
     monkeypatch.setattr(budget, "READING_BUDGET_POLICY", "reading_plan/future")
     assert _versions()["budget"] == "reading_plan/future"
 

@@ -941,6 +941,10 @@ class _PdfParseState:
     table_scan_pages: set[int] = field(default_factory=set)
     page_geometry: dict[int, dict[str, Any]] = field(default_factory=dict)
     layout_collector: Any | None = None
+    native_views: dict[int, Mapping[str, Any]] = field(default_factory=dict)
+    native_view_limits: dict[str, int] | None = None
+    native_view_chars: int = 0
+    native_view_deferred: list[int] = field(default_factory=list)
 
 
 def _pdf_text_blocks(
@@ -1087,6 +1091,19 @@ def _scan_pdf_pages(state: _PdfParseState, document: Any) -> None:
             )
             state.page_geometry[page_number] = geometry
             state.page_blocks.append((page_number, blocks))
+            if state.native_view_limits is not None and blocks:
+                from .narrative_native_ranges import build_native_page_view
+                ceiling = min(state.native_view_limits["max_page_chars"],
+                              state.native_view_limits["max_total_chars"] - state.native_view_chars)
+                try:
+                    view = build_native_page_view(blocks, max_chars=ceiling)
+                except (TypeError, ValueError):
+                    view = None
+                if view is None:
+                    state.native_view_deferred.append(page_number)
+                else:
+                    state.native_views[page_number] = view
+                    state.native_view_chars += len(view["text"])
             if not blocks:
                 state.empty_pages.add(page_number)
             state.pages_read += 1
@@ -1097,7 +1114,8 @@ def _scan_pdf_pages(state: _PdfParseState, document: Any) -> None:
 
 
 def _pdf_table_scan_pages(
-    state: _PdfParseState, full_table_scan: bool, table_pages: Sequence[int] | None
+    state: _PdfParseState, full_table_scan: bool, table_pages: Sequence[int] | None,
+    *, selector_version: str | None = None,
 ) -> set[int]:
     if full_table_scan:
         return set(range(1, state.page_count + 1))
@@ -1109,12 +1127,17 @@ def _pdf_table_scan_pages(
         if invalid:
             raise ValueError(f"table_pages outside document bounds: {invalid}")
         return selected
+    if selector_version == "0.9.0":
+        from company_wiki.document_understanding.profiles.registry import configured_table_signal
+        reading_signal = configured_table_signal
+    else:
+        reading_signal = None
     selected = {
         number
         for number, blocks in state.page_blocks
         if _table_scan_signal(
-            "\n".join(item[2] for item in blocks), parser_version=state.parser_version
-        )
+            text := "\n".join(item[2] for item in blocks), parser_version=state.parser_version
+        ) or (reading_signal is not None and reading_signal(text))
     }
     for page_number in tuple(selected):
         selected.update(
@@ -1163,6 +1186,8 @@ def _emit_pdf_text_units(
                             char_start=char_start,
                             char_end=char_end,
                         ),
+                        **({"native_source_view": state.native_views[page_number]}
+                           if page_number in state.native_views else {}),
                     },
                 )
             )
@@ -1354,8 +1379,15 @@ def _parse_pdf_document(
     selector_version: str | None = None,
     layout_limits: Mapping[str, Any] | None = None,
     layout_max_seconds: float = 15,
+    native_ranges: bool = False,
+    native_range_limits: Mapping[str, int] | None = None,
 ) -> NarrativeParseResult:
     state = _PdfParseState(source_id, source_sha256, parser_version, language)
+    if type(native_ranges) is not bool:
+        raise TypeError("native_ranges must be a boolean")
+    if native_ranges or selector_version == "0.9.0":
+        from .narrative_native_ranges import native_range_limits as resolve_range_limits
+        state.native_view_limits = resolve_range_limits(native_range_limits)
     if selector_version == "0.9.0":
         from .narrative_pdf_layout import PdfLayoutCollector
 
@@ -1364,7 +1396,8 @@ def _parse_pdf_document(
         )
     state.page_count = len(document)
     _scan_pdf_pages(state, document)
-    state.table_scan_pages = _pdf_table_scan_pages(state, full_table_scan, table_pages)
+    state.table_scan_pages = _pdf_table_scan_pages(state, full_table_scan, table_pages,
+                                                 selector_version=selector_version)
     for page_number, blocks in state.page_blocks:
         _emit_pdf_page(state, document, page_number, blocks)
     units = _link_cross_page_qa(state.units)
@@ -1372,6 +1405,19 @@ def _parse_pdf_document(
         state.layout_collector.summary(units)
         if state.layout_collector is not None else (None, ())
     )
+    if state.native_view_limits is not None:
+        from .narrative_native_ranges import NATIVE_PAGE_VIEW_FEATURE_VERSION
+        layout_coverage = dict(layout_coverage or {})
+        layout_coverage["native_ranges"] = {
+            "feature_version": NATIVE_PAGE_VIEW_FEATURE_VERSION,
+            "complete": not state.native_view_deferred,
+            "captured_chars": state.native_view_chars,
+            "deferred_page_count": len(state.native_view_deferred),
+            "deferred_pages": state.native_view_deferred[:128],
+        }
+        layout_diagnostics = (*layout_diagnostics, *({
+            "code": "NATIVE_RANGE_VIEW_BUDGET", "page": page, "unit_ids": []}
+            for page in state.native_view_deferred[:128]))
     return NarrativeParseResult(
         source_id=source_id,
         source_sha256=source_sha256,
@@ -1402,6 +1448,8 @@ def parse_pdf(
     selector_version: str | None = None,
     layout_limits: Mapping[str, Any] | None = None,
     layout_max_seconds: float = 15,
+    native_ranges: bool = False,
+    native_range_limits: Mapping[str, int] | None = None,
 ) -> NarrativeParseResult:
     """Scan a PDF path without materializing a normalized full-text artifact."""
     with _fitz_module().open(path) as document:
@@ -1416,6 +1464,8 @@ def parse_pdf(
             selector_version=selector_version,
             layout_limits=layout_limits,
             layout_max_seconds=layout_max_seconds,
+            native_ranges=native_ranges,
+            native_range_limits=native_range_limits,
         )
 
 
@@ -1431,6 +1481,8 @@ def parse_pdf_bytes(
     selector_version: str | None = None,
     layout_limits: Mapping[str, Any] | None = None,
     layout_max_seconds: float = 15,
+    native_ranges: bool = False,
+    native_range_limits: Mapping[str, int] | None = None,
 ) -> NarrativeParseResult:
     """Parse verified PDF bytes in memory without a temporary file."""
     if not isinstance(data, bytes):
@@ -1449,6 +1501,8 @@ def parse_pdf_bytes(
             selector_version=selector_version,
             layout_limits=layout_limits,
             layout_max_seconds=layout_max_seconds,
+            native_ranges=native_ranges,
+            native_range_limits=native_range_limits,
         )
 
 
@@ -1925,6 +1979,7 @@ def verify_pdf_evidence_spans(
         source_sha256=source_sha256,
         parser_version=plan.parser_version,
         table_pages=plan.table_pages,
+        native_ranges=plan.native_ranges,
     )
     return verify_replayed_pdf_spans(evidence_spans, replay.units)
 
@@ -1950,6 +2005,7 @@ def verify_pdf_evidence_spans_bytes(
         source_sha256=source_sha256,
         parser_version=plan.parser_version,
         table_pages=plan.table_pages,
+        native_ranges=plan.native_ranges,
     )
     return verify_replayed_pdf_spans(evidence_spans, replay.units)
 

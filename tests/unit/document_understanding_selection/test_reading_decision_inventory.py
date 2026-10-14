@@ -73,6 +73,32 @@ def test_reading_business_admission_version_is_an_actual_cache_dependency(monkey
     }
 
 
+def test_changed_continuity_algorithm_invalidates_a_real_complete_manifest(monkeypatch):
+    from company_wiki.document_understanding import decision_inventory, narrative_continuity
+    from company_wiki.document_understanding.decision_dependencies import (
+        freeze_decision_dependencies, compare_decision_dependencies,
+    )
+    observed = _real_interim_pipeline()
+    # This fixture's actual carrier is explicit; the pure manifest cannot infer it.
+    observed['observation']['metadata']['mime_type'] = 'text/plain'
+    frozen = freeze_decision_dependencies(decision_inventory.build_decision_trace(observed))
+    assert frozen['status'] == 'complete'
+    assert compare_decision_dependencies(frozen, decision_inventory.current_decision_trace(frozen))['status'] == 'same'
+    monkeypatch.setattr(narrative_continuity, 'NARRATIVE_CONTINUITY_FEATURE_VERSION', 'native-narrative-continuity/next')
+    assert compare_decision_dependencies(frozen, decision_inventory.current_decision_trace(frozen))['status'] == 'changed'
+
+
+def test_native_source_range_algorithm_is_a_pdf_dependency_only(monkeypatch):
+    from company_wiki.source_catalog import narrative_native_ranges
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    before = module._versions(pdf_frontend=True)
+    unrelated = module._versions(pdf_frontend=False)
+    assert before.get("pdf_native_range") == narrative_native_ranges.NATIVE_PAGE_VIEW_FEATURE_VERSION
+    monkeypatch.setattr(narrative_native_ranges, "NATIVE_PAGE_VIEW_FEATURE_VERSION", "native-pdf-page-view/next")
+    assert module._versions(pdf_frontend=True) != before
+    assert module._versions(pdf_frontend=False) == unrelated
+
+
 @pytest.mark.parametrize("first", ["inventory", "policy", "source-selector"])
 def test_actual_business_version_import_chain_is_safe_from_fresh_entry_points(first):
     modules = {

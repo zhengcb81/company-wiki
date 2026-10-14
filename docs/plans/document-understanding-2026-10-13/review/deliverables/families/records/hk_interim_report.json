@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "hk_interim_report",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "hkex"
@@ -73,6 +73,25 @@
     {
       "role": "business",
       "aliases": [
+        "Business Review and Outlook",
+        "業務回顧及展望",
+        "业务回顾及展望"
+      ],
+      "heading_path": [
+        [
+          "Business Review and Outlook",
+          "業務回顧及展望",
+          "业务回顾及展望"
+        ]
+      ],
+      "priority": 1,
+      "questions": [
+        "本期（六个月）业务变化与新进展"
+      ]
+    },
+    {
+      "role": "business",
+      "aliases": [
         "業務回顧",
         "业务回顾",
         "Business Review"
@@ -82,7 +101,9 @@
           "業務回顧及展望",
           "業務回顧",
           "Management Discussion and Analysis",
-          "管理層討論與分析"
+          "管理層討論與分析",
+          "Business Review and Outlook",
+          "业务回顾及展望"
         ],
         [
           "業務回顧",
@@ -101,21 +122,33 @@
         "门店网络",
         "同店",
         "經營數據",
-        "Operating Data"
+        "Operating Data",
+        "Store Network",
+        "Store and Outlet Network",
+        "Retail Network",
+        "門店數量",
+        "门店数量"
       ],
       "heading_path": [
         [
           "業務回顧及展望",
           "業務回顧",
           "Management Discussion and Analysis",
-          "管理層討論與分析"
+          "管理層討論與分析",
+          "Business Review and Outlook",
+          "业务回顾及展望"
         ],
         [
           "門店網絡",
           "门店网络",
           "同店",
           "經營數據",
-          "Operating Data"
+          "Operating Data",
+          "Store Network",
+          "Store and Outlet Network",
+          "Retail Network",
+          "門店數量",
+          "门店数量"
         ]
       ],
       "priority": 1,

@@ -62,6 +62,10 @@ def compile_catalog(source_root: Path, defaults_path: Path | None = None) -> dic
         for entry in record["sections"]:
             if not all(key in entry for key in ("role", "aliases", "heading_path", "priority", "questions")):
                 raise ValueError("section must retain role, hierarchy, aliases and priority")
+    for record in facets:
+        for entry in record["positive_evidence"]:
+            if "table_scan" in entry and type(entry["table_scan"]) is not bool:
+                raise ValueError(f"{record['id']} table_scan must be a boolean")
     bindings = defaults["legacy_bindings"]
     legacy_ids = [binding["profile_id"] for binding in bindings]
     if len(legacy_ids) != len(set(legacy_ids)):

@@ -31,17 +31,21 @@ def _versions(*, pdf_frontend: bool = False) -> dict[str, str]:
     from company_wiki.source_catalog.narrative_budget import READING_BUDGET_POLICY
     from .strategy_binding import STRATEGY_BINDING_VERSION
     from .observation_adapter import OBSERVATION_ADAPTER_VERSION
+    from .narrative_continuity import NARRATIVE_CONTINUITY_FEATURE_VERSION
 
     versions = {"inventory": "1.2.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
             "business_policy": READING_BUSINESS_POLICY_VERSION,
             "strategy_binding": STRATEGY_BINDING_VERSION,
             "observation_adapter": OBSERVATION_ADAPTER_VERSION,
+            "continuity": NARRATIVE_CONTINUITY_FEATURE_VERSION,
             "pipeline": PIPELINE_FEATURE_VERSION, "summary": SUMMARY_FEATURE_VERSION,
             "layout": LAYOUT_HINTS_VERSION}
     if pdf_frontend:
         for key, module_name, attribute in (
             ("pdf_frontend", "company_wiki.source_catalog.narrative_pdf_layout", "PDF_READING_LAYOUT_FEATURE_VERSION"),
             ("pdf_projection", "company_wiki.document_normalization.layout_snapshots", "FEATURE_VERSION"),
+            ("pdf_native_range", "company_wiki.source_catalog.narrative_native_ranges", "NATIVE_PAGE_VIEW_FEATURE_VERSION"),
+            ("pdf_native_range_parser", "company_wiki.source_catalog.narrative_native_ranges", "NATIVE_RANGE_PARSER_VERSION"),
         ):
             try:
                 component = import_module(module_name)

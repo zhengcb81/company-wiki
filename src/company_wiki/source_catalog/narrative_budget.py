@@ -30,8 +30,9 @@ Priority = tuple[int, int, OrderKey, str]
 PageKey = tuple[str, int | str]
 LEGACY_BUDGET_POLICY = "legacy"
 SEMANTIC_BUDGET_POLICY = "semantic_coverage/1"
-READING_BUDGET_POLICY = "reading_plan/2"
+READING_BUDGET_POLICY = "reading_plan/3"
 REPLAY_READING_BUDGET_POLICY = "reading_plan/1"
+REPLAY_VALUE_READING_BUDGET_POLICY = "reading_plan/2"
 
 _REASON_PRIORITY = (
     ("downstream_center_certification_timeline", -2),
@@ -348,9 +349,10 @@ def _plan(
     items: tuple[BudgetItem[PayloadT], ...], limit: int, policy: str = LEGACY_BUDGET_POLICY,
     *, max_chars: int | None = None, max_work_units: int = 2_000_000,
 ) -> tuple[tuple[BudgetItem[PayloadT], ...], tuple[BudgetDiagnostic, ...]]:
-    if policy in {READING_BUDGET_POLICY, REPLAY_READING_BUDGET_POLICY}:
+    if policy in {READING_BUDGET_POLICY, REPLAY_READING_BUDGET_POLICY, REPLAY_VALUE_READING_BUDGET_POLICY}:
         return _reading_plan(items, limit, max_chars=max_chars, max_work_units=max_work_units,
-                             value_coverage=policy == READING_BUDGET_POLICY)
+                             value_coverage=policy != REPLAY_READING_BUDGET_POLICY,
+                             balanced_coverage=policy == READING_BUDGET_POLICY)
     if max_chars is not None or max_work_units != 2_000_000:
         raise ValueError("reading budget limits require a reading_plan policy")
     if policy not in {LEGACY_BUDGET_POLICY, SEMANTIC_BUDGET_POLICY}:
@@ -527,6 +529,7 @@ def plan_budget_items(
 def _reading_plan(
     items: tuple[BudgetItem[PayloadT], ...], limit: int, *,
     max_chars: int | None, max_work_units: int, value_coverage: bool = False,
+    balanced_coverage: bool = False,
 ) -> tuple[tuple[BudgetItem[PayloadT], ...], tuple[BudgetDiagnostic, ...]]:
     """Rank caller-owned reading intent and charge unique, closed original IDs.
 
@@ -690,6 +693,7 @@ def _reading_plan(
     # scanning every candidate against every previously selected signature.
     selected_ids: set[str] = set()
     topic_visits: dict[str, int] = {}
+    unlabelled_selection_visits = 0
     spent_chars = 0
     remaining = set(closures)
     costs = {key: len(ids) for key, ids in closures.items()}
@@ -748,6 +752,7 @@ def _reading_plan(
     bucket_values: dict[int, int] = {}
     bucket_versions: dict[int, int] = {}
     topic_buckets: dict[str, set[int]] = {}
+    unlabelled_buckets: set[int] = set()
     top_heap: list[tuple[Any, ...]] = []
 
     for key, ids in closures.items():
@@ -775,6 +780,8 @@ def _reading_plan(
             bucket_versions[bid] = 0
             for topic in topics:
                 topic_buckets.setdefault(topic, set()).add(bid)
+            if balanced_coverage and not topics:
+                unlabelled_buckets.add(bid)
         bid = bucket_ids[bucket_key]
         sigs = tuple(sorted({item_signature[item.item_id] for item in value_items if item.item_id in item_signature}))
         class_key = (bid, sigs)
@@ -841,8 +848,19 @@ def _reading_plan(
                 # topic visits so a richly labelled fact is not punished merely
                 # for explaining several operating mechanisms in the same span.
                 novelty = int(not topics or all(topic in topic_visits for topic in topics))
-                rank = (bucket_values[bid], novelty, bucket_priorities[bid],
-                        best[0], Fraction(visits, max(1, len(topics))), *best[1:6])
+                mean_visits = (Fraction(unlabelled_selection_visits, 1)
+                               if balanced_coverage and not topics
+                               else Fraction(visits, max(1, len(topics))))
+                if balanced_coverage:
+                    # Among equally valuable, already seen themes, many
+                    # high-priority details cannot permanently starve a less
+                    # visited theme. Real scope priority still decides equal
+                    # visitation; cost, signature work and closure are shared.
+                    rank = (bucket_values[bid], novelty, mean_visits,
+                            bucket_priorities[bid], best[0], *best[1:6])
+                else:
+                    rank = (bucket_values[bid], novelty, bucket_priorities[bid],
+                            best[0], mean_visits, *best[1:6])
             else:
                 rank = (bucket_priorities[bid], int(bool(topics) and all(topic in topic_visits for topic in topics)),
                         best[0], visits, *best[1:6])
@@ -937,6 +955,16 @@ def _reading_plan(
                 dropped.extend(diagnostic(anchors[other], other, "group_exceeds_limit"
                     if len(closures[other]) > limit else "budget_full") for other in remaining)
                 break
+            if balanced_coverage and not bucket_topics[bid]:
+                # Missing labels are not proof that every subsequent table or
+                # operating fact is a new theme. Count the accepted value bundle
+                # once, while all of its original rows still pay their real
+                # span/character costs. Only this finite index needs re-ranking.
+                unlabelled_selection_visits += 1
+                if not charge(len(unlabelled_buckets)):
+                    stopped = True
+                    break
+                dirty_buckets.update(unlabelled_buckets)
             for topic in changed_topics:
                 if not charge(len(topic_buckets[topic])):
                     stopped = True
@@ -999,6 +1027,7 @@ __all__ = [
     "SEMANTIC_BUDGET_POLICY",
     "READING_BUDGET_POLICY",
     "REPLAY_READING_BUDGET_POLICY",
+    "REPLAY_VALUE_READING_BUDGET_POLICY",
     "budget_diagnostics",
     "select_budget_items",
     "plan_budget_items",

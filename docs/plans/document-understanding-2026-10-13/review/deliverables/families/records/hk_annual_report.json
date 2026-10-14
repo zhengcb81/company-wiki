@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "hk_annual_report",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "hkex"
@@ -84,6 +84,26 @@
     {
       "role": "business",
       "aliases": [
+        "Business Review and Outlook",
+        "業務回顧及展望",
+        "业务回顾及展望"
+      ],
+      "heading_path": [
+        [
+          "Business Review and Outlook",
+          "業務回顧及展望",
+          "业务回顾及展望"
+        ]
+      ],
+      "priority": 1,
+      "questions": [
+        "品牌/产品/渠道构成与本期进展",
+        "谁向谁卖什么、收费与交付方式"
+      ]
+    },
+    {
+      "role": "business",
+      "aliases": [
         "業務回顧",
         "业务回顾",
         "Business Review",
@@ -96,7 +116,9 @@
           "業務回顧",
           "Business Review",
           "Management Discussion and Analysis",
-          "管理層討論與分析"
+          "管理層討論與分析",
+          "Business Review and Outlook",
+          "业务回顾及展望"
         ],
         [
           "業務回顧",
@@ -118,14 +140,21 @@
         "同店",
         "經營數據",
         "Operating Data",
-        "店舖數目"
+        "店舖數目",
+        "Store Network",
+        "Store and Outlet Network",
+        "Retail Network",
+        "門店數量",
+        "门店数量"
       ],
       "heading_path": [
         [
           "業務回顧及展望",
           "業務回顧",
           "Management Discussion and Analysis",
-          "管理層討論與分析"
+          "管理層討論與分析",
+          "Business Review and Outlook",
+          "业务回顾及展望"
         ],
         [
           "門店網絡",
@@ -133,7 +162,12 @@
           "同店",
           "經營數據",
           "Operating Data",
-          "店舖數目"
+          "店舖數目",
+          "Store Network",
+          "Store and Outlet Network",
+          "Retail Network",
+          "門店數量",
+          "门店数量"
         ]
       ],
       "priority": 1,
@@ -213,7 +247,10 @@
       "heading_path": [
         [
           "綜合財務報表",
-          "Independent Auditor's Report"
+          "Independent Auditor's Report",
+          "Business Review and Outlook",
+          "業務回顧及展望",
+          "业务回顾及展望"
         ],
         [
           "附註",

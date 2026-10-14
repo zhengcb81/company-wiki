@@ -212,7 +212,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/2"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/3"
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -264,6 +264,55 @@ _FORWARD_PERIOD = re.compile(
     r"\b(?:future periods?|thereafter|over the next|within the next|next\s+\d+\s+(?:months?|quarters?|years?))\b|"
     r"未来|未來|之后期间|之後期間|以后期间|以後期間", re.I)
 
+# Only the opt-in reader interprets these retail/network relations. A count is
+# a source stock statement, not an inferred opening/net-addition calculation.
+_STORE_OBJECT = re.compile(r"\b(?:stores?|outlets?|shops?|branches?|retail locations?)\b|"
+    r"门店|門店|店铺|店鋪|店舖|网点|網點|零售网络|零售網絡", re.I)
+_STORE_STOCK = re.compile(
+    r"\b(?:network\s+of|total\s+of|(?:operate[ds]?|had|have|has)\s+|"
+    r"compris\w*\s+|consist\w*\s+of)\s*"
+    r"(?:(?:a\s+)?total\s+of\s+)?(?:(?:over|nearly|about|approximately|more than)\s+)?"
+    r"\d[\d,.]*\s+(?:[a-z][a-z0-9-]*\s+){0,5}(?:stores?|outlets?|shops?|branches?)\b|"
+    r"(?:共有|共计|共計|总计|總計|合计|合計|拥有|擁有|设有|設有|营运|營運|运营|運營|经营|經營)"
+    r".{0,12}\d[\d,.]*.{0,20}(?:门店|門店|店铺|店鋪|店舖|网点|網點)", re.I)
+_STORE_MODE = re.compile(r"\b(?:directly operated|direct[- ]operations?|company[- ]owned|"
+    r"retail[- ]partners?|distributors?|franchisees?|franchis\w*)\b|"
+    r"直营|直營|合伙人|合夥人|加盟|代理|經銷|经销", re.I)
+_STORE_MODE_RELATION = re.compile(r"\b(?:through|via|under|by|using)\b|"
+    r"通过|通過|采用|採用|按照|由|以.{0,12}模式", re.I)
+_STORE_OPERATION = re.compile(r"\b(?:operat(?:e|es|ed|ing)|serv(?:e|es|ed|ing)|manage[ds]?|"
+    r"sell|sells|sold|own[eds]*|models?)\b|运营|運營|营运|營運|经营|經營|服務|服务|模式", re.I)
+_STORE_ACTIVITY = re.compile(r"\b(?:expand(?:s|ed|ing)?|open(?:s|ed|ing)?|clos(?:e|es|ed|ing)|"
+    r"contract(?:ed|ing)|relocat(?:e|es|ed|ing)|enter(?:s|ed|ing)?|extend(?:s|ed|ing)?|shut(?:s|ting)?)\b|"
+    r"拓展|扩展|擴展|扩张|擴張|开设|開設|新开|新開|"
+    r"关闭|關閉|收缩|收縮|迁移|遷移", re.I)
+_STORE_FINANCIAL_GAP = re.compile(r"\b(?:cash|accounts?|leases?|liabilit\w*|income|revenues?|"
+    r"profits?|assets?|balances?|tax(?:es)?|expenses?|rent|payments?|reimbursements?)\b|"
+    r"收入|利润|利潤|资产|資產|现金|現金|负债|負債|税款|稅款|租金", re.I)
+
+
+def _store_activity(clause: str) -> bool:
+    """The opening/closure/expansion acts on a network, not a nearby account."""
+    for activity in _STORE_ACTIVITY.finditer(clause):
+        for obj in _STORE_OBJECT.finditer(clause):
+            if activity.end() <= obj.start():
+                gap = clause[activity.end():obj.start()]
+                bound = 160
+            elif obj.end() <= activity.start():
+                gap = clause[obj.end():activity.start()]
+                bound = 60
+            else:
+                continue
+            if len(gap) <= bound and not _STORE_FINANCIAL_GAP.search(gap):
+                return True
+    return False
+
+
+def _reading_text(text: str) -> str:
+    """Interpret native wrapping only; original wording/coordinates stay intact."""
+    compact = re.sub(r"(?<=[\u3400-\u9fff])\s+(?=[\u3400-\u9fff])", "", text)
+    return compact.replace("\r\n", " ").replace("\n", " ").replace("\r", " ")
+
 
 def _measured_driver(explanation: str) -> bool:
     """A metric has a measure or observed change, not merely a customer noun."""
@@ -303,6 +352,14 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
         if (_CONTRACT_OBJECT.search(clause) and _CONTRACT_CONVERSION.search(clause)
                 and _FORWARD_PERIOD.search(clause)):
             reasons.append("contract_revenue_conversion")
+        if _STORE_OBJECT.search(clause):
+            if any(not _STORE_FINANCIAL_GAP.search(match.group()) for match in _STORE_STOCK.finditer(clause)):
+                reasons.append("store_network_stock")
+            if (_STORE_MODE.search(clause) and _STORE_MODE_RELATION.search(clause)
+                    and _STORE_OPERATION.search(clause)):
+                reasons.append("store_operating_model")
+            if _store_activity(clause):
+                reasons.append("store_network_progress")
     return tuple(dict.fromkeys(reasons))
 
 
@@ -314,7 +371,7 @@ def detect_reading_business_fact(text: str) -> OperatingFact:
     growth sentence alone is insufficient. Numeric amounts are never required.
     """
     fact = detect_business_fact(text)
-    clauses = tuple(clause for clause in _CLAUSES.split(text)
+    clauses = tuple(clause for clause in _CLAUSES.split(_reading_text(text))
                     if clause and len(clause) <= BUSINESS_CHARACTER_WINDOW)
     activity = any(_OBJECT.search(clause) and _ACTIVITY.search(clause) for clause in clauses)
     relations = _reading_relations(clauses)

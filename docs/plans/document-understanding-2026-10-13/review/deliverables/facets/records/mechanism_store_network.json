@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-facet-spec/1",
   "id": "mechanism_store_network",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "business_questions": [
     "门店网络按什么模式运营（直营、合伙人、代理/经销、加盟），各模式的经营与会计归属如何",
     "门店总数、净增、开关店的口径与时点是什么",
@@ -43,6 +43,41 @@
         "开店计划",
         "扩张"
       ]
+    },
+    {
+      "description": "经营表筛页的强原文信号；只表示可尝试读取，实际表头、期间、范围、行与脚注由共享结构层保留。",
+      "unit_kinds": [
+        "pdf_table_row",
+        "html_table_cell",
+        "pptx_table_cell"
+      ],
+      "signals": [
+        "门店数量",
+        "門店數量",
+        "門店網絡",
+        "门店网络",
+        "直营店",
+        "直營店",
+        "代理门店",
+        "代理門店",
+        "合伙人门店",
+        "合夥人門店",
+        "店舖數目",
+        "店铺数量",
+        "门店总数",
+        "門店總數",
+        "number of stores",
+        "store count",
+        "store network",
+        "outlet network",
+        "directly operated stores",
+        "retail partner stores",
+        "retail partner model",
+        "franchised stores",
+        "company-owned stores",
+        "same-store"
+      ],
+      "table_scan": true
     }
   ],
   "required_context": [

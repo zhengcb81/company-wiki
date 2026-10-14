@@ -11,7 +11,8 @@ from company_wiki.source_contract import EvidenceSpan
 
 from .n6_budget_dedup import deduplicate_candidates
 from .narrative_budget import (BudgetItem, LEGACY_BUDGET_POLICY, READING_BUDGET_POLICY,
-                               REPLAY_READING_BUDGET_POLICY, plan_budget_items)
+                               REPLAY_READING_BUDGET_POLICY, REPLAY_VALUE_READING_BUDGET_POLICY,
+                               plan_budget_items)
 from .narrative_semantic_coverage import CoverageSignature, group_coverage_signature
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
@@ -162,7 +163,7 @@ def finalize_selection(
                      and group_ids.get(candidate.unit.unit_id) not in excluded_groups)
     # New reading packages share original context across independent anchors.
     # Text-level deduplication cannot rewrite these dependency identities.
-    if budget_policy in {READING_BUDGET_POLICY, REPLAY_READING_BUDGET_POLICY}:
+    if budget_policy in {READING_BUDGET_POLICY, REPLAY_READING_BUDGET_POLICY, REPLAY_VALUE_READING_BUDGET_POLICY}:
         survivors = tuple({item.unit.unit_id: item for item in complete}.values())
         effective_groups = group_ids
     else:
@@ -184,7 +185,7 @@ def finalize_selection(
         counts[diagnostic.reason] = counts.get(diagnostic.reason, 0) + 1
     omitted = max(0, len(candidates) - len(selected))
     native_order = {unit.unit_id: index for index, unit in enumerate(structure.units)}
-    if budget_policy in {READING_BUDGET_POLICY, REPLAY_READING_BUDGET_POLICY}:
+    if budget_policy in {READING_BUDGET_POLICY, REPLAY_READING_BUDGET_POLICY, REPLAY_VALUE_READING_BUDGET_POLICY}:
         selected.sort(key=lambda item: native_order[item.unit.unit_id])
     else:
         selected.sort(key=lambda item: (item.unit.coordinates.locator(), item.unit.unit_id))
@@ -203,7 +204,8 @@ def finalize_selection(
         coverage_complete=structure.coverage_complete,
         selection_diagnostics=(tuple({"code": reason, "count": count}
                                      for reason, count in sorted(counts.items()))
-                               if budget_policy in {READING_BUDGET_POLICY, REPLAY_READING_BUDGET_POLICY} else ()),
+                               if budget_policy in {READING_BUDGET_POLICY, REPLAY_READING_BUDGET_POLICY,
+                                                    REPLAY_VALUE_READING_BUDGET_POLICY} else ()),
     )
 
 

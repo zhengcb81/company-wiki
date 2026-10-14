@@ -1,0 +1,183 @@
+{
+  "schema_version": "native-range-source-node/1",
+  "status": "PASS_ENGINEERING_NOT_REAL_QUALITY",
+  "default_selector": "0.8.0",
+  "caps_unchanged": {
+    "spans": 96,
+    "characters": 48000,
+    "planner_work": 2000000
+  },
+  "tests": {
+    "root_public_cache": 89,
+    "budget_affected": 119,
+    "budget_independent": 6,
+    "historic_exact_comparisons": 4000,
+    "native_malformed_final": 36,
+    "native_independent": 8,
+    "semantic_language_affected": 62
+  },
+  "actual_source_recall": {
+    "cn-h1": "9/10",
+    "hk-annual_actual_mixed": "7/7",
+    "us-10k_en": "7/8"
+  },
+  "open_facts": [
+    "f-sic-8inch-stage",
+    "f-azure-inside-intelligent-cloud"
+  ],
+  "external_posts": 0,
+  "paid_calls": 0,
+  "rf_commit": "512e85bbe274c357c780a78791f5784c3af66d2d",
+  "rf_ci": "https://github.com/zhengcb81/revenue-forecast/actions/runs/38563752875",
+  "rf_installed_script_sha256": "ca878e4d1b5cfa254ec1db2734596eab36c7d542d49b3b28b5a95097d5cfa10a",
+  "rf_sync_physical_destinations": 2,
+  "evidence": [
+    {
+      "path": "recall-root/native-ranges/handoff.md",
+      "sha256": "4eff67a0261e088f551df5416669d9f3945c233c18f4e9279ae2bb9478fbd187",
+      "bytes": 7851
+    },
+    {
+      "path": "recall-root/native-ranges/source-node-receipt.json",
+      "sha256": "a1344b9b0bc98a4d1a1ba08dedd15e6314e4e56b1f94a5eefbfd82d57538ee79",
+      "bytes": 1398
+    },
+    {
+      "path": "recall-root/native-carrier-review/report.md",
+      "sha256": "6c0f2209e1f3fcdb814d463ef700b05a3e137fad05a2f0a55c4a47e95bf5f6b9",
+      "bytes": 8769
+    },
+    {
+      "path": "recall-root/native-carrier-review/receipt.json",
+      "sha256": "35ab0ddbb9dc9595bbef760091067f028965e6809184be66a1745ffbb6e459a4",
+      "bytes": 6021
+    },
+    {
+      "path": "recall-root/native-range-malformed-red/result.json",
+      "sha256": "04f6ff02b9c9aca4ecf7abe18755d5b8590f7ee4388f1507bd6049d5cf4b4ae9",
+      "bytes": 247
+    },
+    {
+      "path": "recall-root/native-range-malformed-green/result.json",
+      "sha256": "b3cd35259045454d5a0c37e10dd40017fcf26c1f29bf175be72a58566d969e1a",
+      "bytes": 247
+    },
+    {
+      "path": "recall-root/semantic-value/handoff.md",
+      "sha256": "0afb9776a821733f42205cc469999e2fe018c64ab7fd254c2c1f73f1d7c36a97",
+      "bytes": 6919
+    },
+    {
+      "path": "recall-root/semantic-value/linguistic-boundary-node.xml",
+      "sha256": "2ff495e28d9dd05f7b499c57506aff10ea9a7162acc728374a61f25286aefd98",
+      "bytes": 13648
+    },
+    {
+      "path": "recall-root/balanced-budget/handoff.md",
+      "sha256": "f1da4fb2440fa648e5b2d39f72371824de286a3abf7689d7d19f1a15cf809724",
+      "bytes": 3953
+    },
+    {
+      "path": "recall-root/balanced-budget/pytest-final.json",
+      "sha256": "c30d248fbd4d05f66acfa3c58ec90a3047ed3fd08e99074c943ad9ccf859cf02",
+      "bytes": 1042
+    },
+    {
+      "path": "recall-root/balanced-budget/historical-parity.json",
+      "sha256": "f856ffd1c10c79d4658811c9807adc88c16841fd73444b92790e5bac0419835a",
+      "bytes": 569
+    },
+    {
+      "path": "recall-root/balanced-budget/fairness-red.json",
+      "sha256": "95ad2f2508c8482348fade3862983ca473e154a07c77d31c95537bc5ecf6d049",
+      "bytes": 214
+    },
+    {
+      "path": "recall-root/balanced-budget/unlabelled-red.json",
+      "sha256": "3b138dd93c45a7959e75a6be58813128ce9f0950913b9c733a70b12c6d6e9009",
+      "bytes": 986
+    },
+    {
+      "path": "recall-root/balanced-review/report.md",
+      "sha256": "c3149c56e5c60dafbb7e242bc506b1a6285a10d2b32d360c158ac43e34d6b4dd",
+      "bytes": 5341
+    },
+    {
+      "path": "recall-root/balanced-review/receipt.json",
+      "sha256": "6534dec754182a59dd750fd9d43e1aab29316e40fcc7dbb02140e03749817c33",
+      "bytes": 2899
+    },
+    {
+      "path": "recall-root/native-release-public-cache/junit.xml",
+      "sha256": "0921023ba00472286e21e7272a2a8044183259726383c100126a8dd4007331b7",
+      "bytes": 15306
+    },
+    {
+      "path": "recall-root/native-release-public-cache/result.json",
+      "sha256": "94e87e3062bcbb7f170924f1225e3814cef60404c6d0a491cb53f07261b7b2f6",
+      "bytes": 603
+    },
+    {
+      "path": "recall-root/native-release-public-cache/stdout.log",
+      "sha256": "1c961129fa28aa7aa1c49f8ca6ccdaa3a2558e1847c695d0959b3405327af3fc",
+      "bytes": 2111
+    },
+    {
+      "path": "recall-root/rf-contract-review/report.md",
+      "sha256": "4050a44a001f9128e7cb7baade12e7c5bdb9cbde4e3118a1f0f7eec82a60576d",
+      "bytes": 7115
+    },
+    {
+      "path": "recall-root/rf-contract-review/receipt.json",
+      "sha256": "69a91283295b8d3ca2e2432f1d2b99852324f444cce5389e36c3315b1589eb83",
+      "bytes": 8260
+    },
+    {
+      "path": "live/owned-runner/handoff.md",
+      "sha256": "9625d5610ca3fd1dc846e73ba8e7a681fff9025a30b8ae2919e0cd0ce5cd64bc",
+      "bytes": 12916
+    },
+    {
+      "path": "live/owned-runner/handoff-receipt.json",
+      "sha256": "647833362991ed6338671782e4299218d26eedf2ff8ea948b394efde26fa9101",
+      "bytes": 9940
+    },
+    {
+      "path": "live/owned-runner/failure-classification.json",
+      "sha256": "4ba1f53c87859c3bdaddef702dc4ef4a3aad4cae225791884514a7034a3459dc",
+      "bytes": 4530
+    },
+    {
+      "path": "live/owned-runner/receipts/frozen-node-20261014T135324/result.json",
+      "sha256": "4b1d569ea10579b30c558a81295aae428ef74083e12a32756703e608acf7ab46",
+      "bytes": 1218
+    },
+    {
+      "path": "live/owned-runner/receipts/loopback-20261014T135326-8cc547/overall.json",
+      "sha256": "91ffb03820eea4b05bee54a7a447628080ff4c36a7a81060eb06a856976c6678",
+      "bytes": 80300
+    },
+    {
+      "path": "recall-root/cn-h1-release-replay.json.gz",
+      "sha256": "daa8ef6d854ddf8ddd61612f1d05be4fcaca8a2fd7f1cd6cdb52db7ecbf464fb",
+      "bytes": 86335
+    },
+    {
+      "path": "recall-root/hk-annual-release-replay.json.gz",
+      "sha256": "ece00218317b4b0545d3b55acedf054464044ecd6180ec47e676f807f83ae098",
+      "bytes": 61837
+    },
+    {
+      "path": "recall-root/us-10k-release-replay.json.gz",
+      "sha256": "ac703d4787f428caeee1eaa2514d7a12cda4c7eb560d5f6b535330cce30ad86e",
+      "bytes": 62095
+    }
+  ],
+  "archive": {
+    "sha256": "3f50e8732e686ef97a002015bbc08f03788607015623e5cfa643635da79e660c",
+    "bytes": 270232
+  },
+  "unrelated_wip_preserved": true,
+  "du3_author_trees_written": false,
+  "archive_path_error_preserved": ".planning\\shared-reading-production\\recall-root\\archive-first-path-error.zip"
+}

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 import hashlib
 from pathlib import Path
@@ -11,6 +11,10 @@ from company_wiki.source_contract import EvidenceSpan
 
 from .narrative_document import NarrativeUnit
 from .narrative_pdf_qa import QA_FRAGMENT_VERSION
+from .narrative_native_ranges import (
+    NATIVE_RANGE_BASE_PARSER_VERSION, NATIVE_RANGE_PARSER_NAME,
+    NATIVE_RANGE_PARSER_VERSION, verify_native_range_span,
+)
 
 
 RoundtripKey = tuple[str, str, str, str]
@@ -20,6 +24,7 @@ RoundtripKey = tuple[str, str, str, str]
 class PdfReplayPlan:
     parser_version: str
     table_pages: tuple[int, ...]
+    native_ranges: bool = False
 
 
 def _file_sha256(path: Path) -> str:
@@ -56,10 +61,36 @@ def _validate_source_bytes_binding(
         raise ValueError("evidence source_id does not match the requested PDF")
 
 
+def _narrative_metadata(span: EvidenceSpan) -> Mapping:
+    if not isinstance(span.structured_value, Mapping):
+        raise ValueError("PDF evidence requires a narrative binding")
+    return span.structured_value
+
+
+def _has_native_range(span: EvidenceSpan) -> bool:
+    return span.parser_name == NATIVE_RANGE_PARSER_NAME or (
+        isinstance(span.structured_value, Mapping)
+        and span.structured_value.get("unit_kind") == "pdf_native_range")
+
+
 def _parser_version(
     evidence_spans: Sequence[EvidenceSpan], default_parser_version: str
 ) -> str:
-    versions = {span.parser_version for span in evidence_spans}
+    versions = set()
+    for span in evidence_spans:
+        metadata = _narrative_metadata(span)
+        native = _has_native_range(span)
+        if native:
+            binding = metadata.get("native_range", {})
+            if (span.parser_name != NATIVE_RANGE_PARSER_NAME
+                or span.parser_version != NATIVE_RANGE_PARSER_VERSION
+                or metadata.get("unit_kind") != "pdf_native_range"
+                or not isinstance(binding, Mapping)
+                or binding.get("base_parser_version") != NATIVE_RANGE_BASE_PARSER_VERSION):
+                raise ValueError("unverified native range parser version")
+            versions.add(NATIVE_RANGE_BASE_PARSER_VERSION)
+        else:
+            versions.add(span.parser_version)
     if len(versions) > 1:
         raise ValueError("round-trip verification requires one parser version")
     return next(iter(versions), default_parser_version)
@@ -87,6 +118,7 @@ def prepare_pdf_replay(
     return PdfReplayPlan(
         parser_version=_parser_version(evidence_spans, default_parser_version),
         table_pages=_table_pages(evidence_spans),
+        native_ranges=any(_has_native_range(span) for span in evidence_spans),
     )
 
 
@@ -103,6 +135,7 @@ def prepare_pdf_replay_bytes(
     return PdfReplayPlan(
         parser_version=_parser_version(evidence_spans, default_parser_version),
         table_pages=_table_pages(evidence_spans),
+        native_ranges=any(_has_native_range(span) for span in evidence_spans),
     )
 
 
@@ -127,11 +160,12 @@ def unit_roundtrip_key(unit: NarrativeUnit) -> RoundtripKey:
 
 
 def span_roundtrip_key(span: EvidenceSpan) -> RoundtripKey:
+    metadata = _narrative_metadata(span)
     return _roundtrip_key(
         locator=span.coordinates.locator(),
         raw_text=span.raw_text or "",
-        role=str(span.structured_value.get("source_role", "unknown")),
-        unit_kind=str(span.structured_value.get("unit_kind", "")),
+        role=str(metadata.get("source_role", "unknown")),
+        unit_kind=str(metadata.get("unit_kind", "")),
     )
 
 
@@ -175,9 +209,18 @@ def verify_replayed_pdf_spans(
 ) -> tuple[tuple[str, ...], tuple[str, ...]]:
     """Match selected spans against units reconstructed by the pinned parser."""
     available = _available_units(replay_units)
+    native_available = ({unit.unit_id: unit for unit in replay_units}
+                        if any(_has_native_range(span) for span in evidence_spans) else {})
     verified: list[str] = []
     failed: list[str] = []
     for span in evidence_spans:
+        if not isinstance(span.structured_value, Mapping):
+            failed.append(span.span_id)
+            continue
+        if _has_native_range(span):
+            target = verified if verify_native_range_span(span, native_available) else failed
+            target.append(span.span_id)
+            continue
         matches = available.get(span_roundtrip_key(span), ())
         target = verified if _span_matches(span, matches) else failed
         target.append(span.span_id)
