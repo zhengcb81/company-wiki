@@ -58,6 +58,20 @@ GEOMETRY作者final a8cc604d干净，三个排他提交本地接7e023a15/c6224a1
 
 # 进度
 
+## 2026-10-14 12:15 UTC — 原件回归结果与范围载体
+
+三份最终实际parse/select各一次，来源SHA/mtime/size保持：HK原单span判定7/7；独立共同oracle改正HTML document定位后US8/8。CN同原件/新gold为2/10，原strict0/10和保守oracle1/10均留历史receipt。96原生碎片仅3339字，核心候选大多已识别但budget_full；下一步不是给样本加boost，而是原生source range进入同一planner。
+
+实施细则已补具名native page view、原始range绑定/回开、历史0.8兼容、唯一carrier字符/槽费用与因果版本，来源/候选/RF/ROOT排他。源view只在内存共享，输出不保存页全文；不存在新的审批/签收/任务库。RF36新DTO TDD绿，旧相关集中验收中，尚未并线。
+
+## 2026-10-14 11:50 UTC — 连续性收尾与真实跨仓缺陷
+
+a117fafc已正常推送；精确CI38554334091 success。连续性作者最终STOP：43正式＋10原独审53 PASS（真实exit0）；ROOT独立重跑原10probe10 PASS/1.93s/SHA一致。旧相关257 PASS/39.06s，记录wrapper编码失败与真实后续exit0，未将前者改签PASS。经营表筛页使用唯一catalog可选bool强信号；小真实PDF经营矩阵及新span原解析器回开2 PASS，0.8保持。因果inventory纳入连续性FEATURE，18 PASS。
+
+同原件cn-h1/hk-annual/us-10k原生最终回放已启动，每份parse/select一次，无模型费用。CN金标已独立确认p18原文无“已于2022”首字，仅明确修正字面quote；旧金标压缩与十事实分母/原FAIL保留。跨块quote oracle独立校验中，不用同页全集提高召回。
+
+C runner真实离线CLI：新旧摘要各1本机POST，CWP Store/public read/same-run/cross-run及FF复用通过；RF新Bundle被旧消费者精确字段集合拒绝，保留原失败材料。RF独立worktree进行完整DTO/引用/投影兼容TDD，ROOT负责接收并线；不触碰RF已存在assurance/runs和output。正式模型仍0调用，默认仍0.8，A/B/C未全部完成。
+
 ## 2026-10-13 深化复审
 
 已做三份独立只读审查、三组ROOT纯函数复现和一份独立真实HTML反证。新增 [review](review/README.md) 的报告/矩阵/ROOT细则及三张目录排他的卡；保留原DU/1和四个旧工作树。实现缺陷尚待ROOT按新优先级修复，不把本次文档交付写成生产升级完成。新包准备与发布记录在review/progress。
@@ -110,6 +124,18 @@ TDD真实失败：生产首轮5FAIL/10PASS；追加sharedcontext字符1PASS；�
 
 根任务继续，不暂停、不标升级完成。下一节点：长文/经营表及新trace界面集中验收→正常commit/push；然后作者组件接收和真实同预算质量/消费者泛化。ROOT scratch均在.planning/shared-reading-production，最后压缩留证并恢复；外包与历史scratch保持。
 # 2026-10-14 ROOT — 真实价值准入、预算排序与细几何接线
+
+正常commit `a117fafc` 已完成（48文件，源码/测试与63,593B压缩节点证据）；正常push测试进行中，尚不声称远端已发布。pre-commit host-assumption拦了一个负例夹具的固定C:/路径，改用tmp_path保留“不迁移物理路径”断言，定点1PASS后全部hooks通过。三载体真实CLI跨run缓存强制complete并且0新增reservation/POST，集中143PASS/37.83s；A/H周期用途统一source信号修复195PASS/2.14s。
+
+随后正常push完成：master fc2a4513→a117fafc，prepush4771PASS/24SKIP/410.16s；[精确CI38554334091](https://github.com/zhengcb81/company-wiki/actions/runs/38554334091)于11:10:15UTC仍in_progress，不能提前称success。正式外包三线均已并线推送；下一节点开工解除的是测试冻结窗口，不是材料/权限批准。新native矩阵筛页真PDF反例RED1FAIL（old/new均未扫描），旧0.8不动，0.9接同asset强table信号正在施工。
+
+后续官方GitHub只读API回收该精确head的CI结果为completed/success，见publication收据；不是借其他提交的CI绿色。ROOT另独立只读原件p18核“于2022年推出”存在、“已于2022年推出”不存在，与agent视觉核对一致，下一冻结gold版本须显式修订并重算双算法，不抹旧FAIL。
+
+下一节点：只读CN p13/p18表明8类关键句跨2–4真实native blocks（甚至字断裂），background非first成员没有anchor机会，所有43已承认meaningful fact其实都入选，故不是加预算。有限连续上下文与配置经营表筛页接口已写INTERFACES。独审发现GAN金标多“已”字，原件视觉确无；保留冻结gold与FAIL，不悄改分母/重要性。正式摘要0外部调用，预算母账不变。
+
+金标字面修正已显式执行：[修订收据](gold-literal-revision/receipt.json)与旧字节gzip。cn-h1新gold SHA10d1dc12…a335，只去GAN支持quote开头的“已”；10required/7critical及阶段/数量全部不变，必须两算法用同新版gold重新冻结比较。旧e2602c66…金标、旧0/10 FAIL不改。配置经营表筛页实际小PDF反例从1FAIL→1PASS；新增实际四行table locator回放在修正测试API参数误用后2PASS，真实旧0.8无table、新0.9发现表、原正文定位不变，既有强制目标页回放全部spanIDs验真。
+
+真实摘要执行器的loopback中间FAIL诚实分类：Windows launcher缺main guard、向typed hash接口误传dict、误读不存在的receipt.body_sha256皆为测试执行器构造/接口误用；cross-run复用旧worker工作目录触发正确防覆盖，已纠正prep为每run独立worker-<run-id>（同catalog/AUTO不变），不改生产防覆盖。缺gold已实证0reservation/0POST，最终对照/恢复仍待执行器集中结束，不能把loopback称真实supplier质量。
 
 微软原件/金标未变，reading_plan/2在同48000字符/96span上限取得8/8 required_business、90spans/47999字符（parse2.75s、select6.19s、各一次）。原1/8、7/8、章节接线后2/8中间FAIL原样保留；2/8暴露纯页码/项目符号/空标题及多标签访问总和偏置，已从通用价值准入与同一heap排序修复。当前结果仅原文锚点召回，不是正式摘要语义PASS。
 

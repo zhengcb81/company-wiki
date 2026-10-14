@@ -104,6 +104,21 @@ A/B实现期间先集中受影响测试，修失效后只重跑受影响范围�
 
 ## 6. 完成判定与交接
 
+### 2026-10-14 真原件暴露的格式粒度共因（优先于真实付费）
+
+最终保存材料由统一独立oracle重新计分：US 8/8、HK 7/7、CN 2/10。US先前0/8是测试helper忽略HTML的`location_kind=document`，已用独立反例纠正，原失败收据不改。CN真实96 spans仅3339字符，69依赖/27锚点；p13现状/未来目标/收购与p18多个业务阶段已进入正确候选，仍因原生PDF半句碎片占槽落选。`_sentence_fragments`本身只按标点切，主要碎片来自PDF实际DICT块边界。提高score、去除必要依赖或按gold保留不能根治。
+
+实施顺序与排他接口：
+
+1. 来源层在既有一次DICT扫描内定义`native-pdf-page-view/1`：实际原序block文本及原换行构成一个可回开的格式视图，绑定每块SHA和视图字符范围。仅新0.9/确需native-range回开时构造；只在内存共享，不逐单位复制、写全篇MD或保存页正文。旧0.8原单位/Span身份不变。
+2. 共享连续性引擎仍负责真实字体/列/标题/表/主体/期间作用域与闭包。来源层`native_range_unit(original_members)`只把该已验证身体映射到原生视图的严格substring，使用`native_pdf_range_parser/0.1.0`、`pdf_native_range`和显式坐标空间/原member IDs、SHA/ranges；最多8原单位/4原块/2048字符。没有共同原生range证明保留旧多span并诊断，不能在selector拼造新正文。
+3. ROOT将有来源证明的carrier接入同一候选/planner：一个真正源range按一个span付槽成本，原字符/字节全照计，仍96/48000；同一身体不与旧碎片重复发送，标题/脚注共用唯一引用。原单位到carrier引用映射用于实际策略和context，不能重跑DU/另建排名器。原生范围不是模型摘要。必要否定/未来/阶段不得为了缩小闭包裁掉。
+4. 回开只由来源层验证原件与范围。native range的底层仍旧0.1.1 parser，兼容普通span、QA/table和旧ref；坏来源/页/range/member/SHA、截掉限定语或改词必须拒绝。不要求消费者重新推断几何或物理目录。
+5. 新carrier内容身份与producer feature进入现有selection-decision依赖，整体pipeline升级；旧缓存不能误用。RF仅消费版本化source-bound出口，不创建下载/几何/人工许可。四个owner排他：来源view/回开、候选语义、RF DTO、ROOT正式接线/PWF/发布。
+6. 先小真实PDF与历史定位TDD、旧QA兼容和篡改反例；集中源/选择/公开缓存工程节点后，同一CN原件/同gold/同cap一次新回放。原CN2/10不删除；若仍有漏读继续查共享原因。达到重点保留再花真实模型预算，不能以unit压缩本身签质量完成。
+
+以上属于A/B原步骤的根因修复，不增加审批、canary、小节点签收或第二parser/任务库；仍在三大节点验收。
+
 只有A的生产选择/唯一材料、B的正式链/缓存/恢复、C的真实质量与泛化都通过，并真实切默认发布，才标“共享阅读升级完成”。模块绿、引用存在、路由正确或loopback绿各有范围，均不能代替真实摘要忠实度。
 
 ROOT维护一个状态表、一个Next Step；三大节点汇总命令/退出码/耗时、版本、样本分母、实际调用/usage、原件/配置/目录恢复、失败及仍未测。沿原receipt格式复用小汇总，不增加审批JSON或每步手签。旧DU/DU2作者树与local bindings不动；FF/RF/StockWiki仅在消费接口确需更新时定点变更，Dayu/IQS及他人WIP不动。

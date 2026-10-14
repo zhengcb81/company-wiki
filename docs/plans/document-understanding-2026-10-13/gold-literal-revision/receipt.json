@@ -1,0 +1,16 @@
+{
+  "schema_version": "source-gold-literal-correction/1",
+  "sample_id": "cn-h1",
+  "old_gold_sha256": "e2602c66b535138b1a3824b627e189db90338c30bf20064eb812e3f69f173d2b",
+  "new_gold_sha256": "10d1dc12e251e57354599c58abd55d5ee3d010259a8bf04415a73fb55cb2a335",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "physical_page": 18,
+  "fact_id": "f-gan-power-stage",
+  "change": "remove one erroneous leading 已 from exact_quote; no fact or stage removed",
+  "required_business_count": 10,
+  "critical_business_count": 7,
+  "source_proof": "independent agent visual verification and ROOT actual native page read agree",
+  "prior_gold_preserved": "prior-cn-h1-gold.json.gz; prior failed replay receipts are untouched",
+  "paired_comparison_rule": "rerun both algorithms using this same revised frozen gold; never compare different gold SHAs",
+  "model_calls": 0
+}

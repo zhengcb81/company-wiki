@@ -40,6 +40,14 @@ ROOT只读精确Config loader：MiMo=mimo-v2.6-flash、DeepSeek=deepseek-flash�
 
 # 调查发现
 
+## 当前新实证 — 2026-10-14 11:50 UTC
+
+后续统一oracle8独立反例PASS；同一保存原件材料（不重parse/select）最终US8/8、HK7/7、CN2/10。US0/8是旧ROOT测试helper漏掉HTML document定位，已独立纠正；CN其余八项是真漏选，不能借oracle问题全部重分类。当前原预算96/48000照旧。新原生范围详[实施细则](completion_implementation.md)：真实DICT页面坐标视图里的严格substring，避免原生半句消耗槽，生产所属来源层回开验真；不是模型拼造原文。
+
+- 真实协议联调已经通过CWP公开读、同run恢复、跨run缓存零新增reservation/POST及FF真实CLI复用。RF原文SourceRecord链通过，但新摘要Bundle读取确实失败：消费者top-level、claim、diagnostic versions和NarrativeContext仍是旧字段集合。这是版本化消费者升级遗漏，不能通过删除reading_context、忽略未知字段或修改模型输出掩盖。RF独立工作树修完整additive DTO与组scope，旧0.8兼容和原文证明保留；生产来源/用户WIP不写。
+- 连续上下文独审发现cap切分后的单个未闭合尾片段仍可独立入选、正文冒号误作句末，两共因已正式RED后修复。原10独审10 PASS、SHA前后相同；257相关工程PASS不替代真实CN质量。
+- 单span字面quote oracle不能识别真实跨native blocks闭合句子。新测试oracle必须只消费经生产验证的native_continuity闭包、同来源/物理页/原序/有界原始单位，保留英语词边界；普通组不得任意跨块拼接、不同组不得同页flatten。原观察保留，oracle独立反例先验，不降低gold。
+
 ## 深化复审纠正（2026-10-13）
 
 最新证据见 [review/report](review/report.md)。原清单 cn-ir-policy 正文是有业务内容的投资者活动记录，不能作制度跳过负例；原件/调查记录保留。新分支基准部分财务必召回目标、证据匹配和HTML入口不正确，旧提升分数暂不作为验收依据。主线已有 normalize_document 能读取真实微软HTML，不应重新建立前端。旧DU三包及ROOT整合已有交接但未在主线启用，新增review不改它们的源码或DU/1。

@@ -8,7 +8,7 @@
     "interim",
     "semi_annual_report"
   ],
-  "notes": "中微公司 2026 年半年度报告（210 页），物理页 3、13、18。开发集（该样本参与过 ROOT 调查）。事实逐字取自原件。",
+  "notes": "中微公司 2026 年半年度报告（210 页），物理页 3、13、18。开发集（该样本参与过 ROOT 调查）。事实逐字取自原件。\n2026-10-14 source-literal revision: p18 GAN support quote removes an erroneous leading 已; independent visual plus ROOT native original check. Ten required facts, importance, stage, quantities and prior FAIL remain unchanged.",
   "facts": [
     {
       "id": "f-five-year-target-is-plan",
@@ -129,7 +129,7 @@
         [
           {
             "page": 18,
-            "exact_quote": "已于2022 年推出了用于氮化镓功率器件生产应用的MOCVD 设备PRISMO PD5，目前已交付客户进行生产验证，并取得了重复订单",
+            "exact_quote": "于2022 年推出了用于氮化镓功率器件生产应用的MOCVD 设备PRISMO PD5，目前已交付客户进行生产验证，并取得了重复订单",
             "locator": "loc:v1/page:18/paragraph:2"
           }
         ]

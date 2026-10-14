@@ -113,6 +113,16 @@ bindings为本机未提交{sample_id:absolute_path}，原件不复制，缺少�
 
 ## 6. 所有权
 
+### ROOT生产收尾新增纯接口（2026-10-14）
+
+`profiles.registry.configured_table_signal(text: str) -> bool`：仅从同一installed reading_catalog的positive_evidence entries读取显式bool `table_scan: true`与signals，判断是否值得执行原生经营表发现；它不是“表已存在”或“事实成立”的证明，不造row observation，不读文件，不调用模型。缺flag保持False、错误类型是asset错误，旧配置向后兼容。表头/时期/数值仍由原生parser提供，旧0.8筛页路径不变。strong与weak信号由配置表达，不在helper维护第二份黑白名单；flag进入已存在的facet matcher因果摘要。
+
+新增`document_understanding/narrative_continuity.py`纯共享上下文组件：消费已读unit/structure/scope与实际native字符、bbox/frame/font/阅读顺序，形成有上限的source-local continuity windows及required IDs。同原文block连续char范围可关联；跨block须同parent/page/列/风格和真实断句依据，heading/table/列/来源/未知frame边界阻断。最多有限2–4block，不拼全章、不从gold补原文、不建新EvidenceSpan。组合文本只辅助已有classifier准入，模型仍接唯一原unit与闭合ID组。实际FEATURE_VERSION进入同一生产decision trace，超限deferred不伪complete。普通background全部实际members均需有候选机会，不能只审第一个成员。
+
+两个接口施工与真实source窗口验收只由ROOT及明确排他子任务负责；旧DU3三卡已稳定接收，作者工作树不再被改。大节点集中验证，不增加人工小节点许可。
+
+2026-10-14 原件粒度补充：continuity helper仍只给原单位引用/物理闭包，不创建Span。其后来源层可用`source_catalog.narrative_native_ranges.native_range_unit(members)`将已验证身体映射为`native_pdf_range_parser/0.1.0`的一个真正源range，来源是`native-pdf-page-view/1`严格substring；具名格式视图不等同PDF原始字节坐标。原块文本/换行顺序与SHA/ranges可从单次DICT重建，所有否定/阶段原字保留；没证明则返回None、保旧多span。新增公开回开`verify_native_range_span`只核来源/范围，不再跑策略/几何或人工批准。范围身体最多8原units/4blocks/2048chars，仍按实际原文字符照计；总96/48000不增。原source-unit→carrier引用映射由ROOT消费，不跨源合并；派生metadata只存有界绑定，不存fullview。原0.8单位、旧parser/QA/Table和ref回放保留。
+
 | owner | 允许写 | 不允许写 |
 |---|---|---|
 | PROFILES | profiles子包；tests/unit/document_understanding_profiles/；tests/fixtures/document_understanding_profiles/；自身PWF/交接 | structure、benchmark、现有router/selector、共享INTERFACES |

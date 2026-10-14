@@ -46,7 +46,7 @@ Current Phase: A/B — 生产选择/摘要与缓存恢复已接线，集中工�
 
 ## Next Step
 
-下一步定位港股真实第12页经营表与正文从结构、准入到预算的共同遗漏原因；A股半年报同时只读回放。微软同源金标已8/8（旧4/8，保留1/8、7/8、章节接线后2/8的中间FAIL），90 spans/47999字符，未提高48000/96上限。共享引擎消费真实fine geometry，143集中PASS；ROOT原生覆盖与缓存夹具31PASS。三个DU3最终工作树均干净，GEOMETRY/QUALITY及DEPENDENCIES六个最终提交已本地接入，需完成ROOT真实跨run缓存验收。随后正式配置摘要及G2/G4/G5；正式默认仍0.8，不把锚点召回当摘要通过。
+下一步完成同原件 A/H/US 有界闭包回放及 RF 新 DTO 兼容，然后统一正式配置摘要、缓存恢复与真实质量验收。连续上下文、经营表筛页、英简繁机制已实现：相关257 PASS，原10个独审探针最终全 PASS；真实小PDF经营表与原文回开2 PASS。a117fafc 已正常推送，精确CI38554334091 success。实际CWP→FF→RF离线联调暴露RF消费者仍只识别旧Bundle/claim/versions，须完整保留并验证新 reading_context 与组引用；不删字段伪造通过。三个真实原件回放进行中；默认仍0.8，正式供应商调用尚未开始。三DU3已接收，作者树保留干净，RF仅在独立工作树施工，不触及旧assurance/output。
 
 最新工程节点：[明确范围收据](production-selection-evidence/acceptance.json) / [压缩测试与独审证据](production-selection-evidence/receipts.zip)。真实CLI三载体已强制完整dependency和same/cross-run0POST，集中143PASS；统一A/H封面用途与历史发行信号溯源195PASS。当前质量阻点是PDF跨原生blocks断句/经营表筛页与多语言业务机制，不是再提高预算。正式摘要尚未付费运行，默认0.8保持。各历史FAIL和独立金标字面错误保留。
 
