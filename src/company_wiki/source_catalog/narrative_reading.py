@@ -668,7 +668,8 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     else:
         from company_wiki.document_understanding.decision_inventory import build_decision_trace
         dependencies = dependency_port.freeze_decision_dependencies(build_decision_trace(
-            pipeline, used_facet_ids=[facet["id"] for facet in context["business_facets"]]))
+            pipeline, used_facet_ids=[facet["id"] for facet in context["business_facets"]],
+            source_parser_names=tuple({unit.parser_name for unit in parsed.units})))
     return replace(result, reading_context=context, reading_dependencies=dependencies)
 
 

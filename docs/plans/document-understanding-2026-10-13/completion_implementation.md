@@ -1,14 +1,14 @@
 ## ROOT 已接收工程节点／剩余共因 — 2026-10-14
 
-三DU3实收与工程修复可发布，默认仍0.8。正常pre-push四失败已根治：Worker一次冻结snapshot68PASS，瞬时geometry metadata36PASS；通用portfolio/source显示观察128PASS，narrative用途配置82PASS，统一post-model失败诊断143PASS。原三真实原文25/25、新三原金标11/12（业务范围11/11，普通分红计划原漏读保留）；全离线CWP→FF→RF恢复＋失败收尾PASS，2正常localPOST＋1故意无效摘要，0供应商费用。仅owned测试的只读SQLite未关闭导致一次Temp残留，已明确closing并恢复，原FAIL＋清理收据保留。
+三DU3全部实收并已发布至84abc55e，精确CI38638459783 SUCCESS。后续共同根因工程节点也已集中验收、SOURCE STOP，正在正常提交/推送：212Unit PASS(9.32s)、正式共享生产7E2E PASS(112.57s)、真实None/v1恢复4E2E PASS(133.42s)、15源mypy/全改动Ruff/依赖声明匹配。旧None/v1请求字节与原Ref保持，raw新代按真实job prompt冻结，same/cross数据库复用0额外POST，不重复费用；实际parser责任决定源准入缓存，partial可靠片段不再整份误拒；失败摘要输出额度同lease事务结清0，known/unknown费用保留。
 
-真实摘要不能签收：MiMo第一次完整请求缺post-model诊断，随后补齐；关闭narrative额外推理解决本次截断，但完整返回SUMMARY_INVALID；DeepSeek-HK因PDF存在opaque页被全份PARSER_INCOMPLETE阻断，0POST；MiniMax-US完整终文8,160B为西班牙语且JSON多brace，固定FINAL_JSON拒绝、未产生有效artifact。header标en不能证明正文英语，不能补JSON或盲重发。母账534629tokens/364387µUSD含FX/旧unknown保留（代理费非发票），继续同一$20/200万tokens总限。
+实际正文语言观察已接入v2，只比较各claim与自己引用的原文；强不同语言保留付费失败原因/终文SHA，不确定或组件缺失只是现needs_review诊断，无人工放行链。fingerprint绑定真实wrapper/decoder/observer代码与检测权重/版本。生产E2E抓到库的相对MODEL_FILE错按CWD查找，已按MODEL_DIR实际加载规则修正，真实权重4,586,720B/available，82相关PASS；历史absolute fake覆盖不足与4FAIL保持。沙箱loopback TCP10013与host0的对照保留，正常host7项绿；不修断言规避环境失败。
 
-下一实施优先级（沿同一A/B/C大节点，先TDD再集中验收）：(1)来源层统一可用片段准则：partial/opaque只是覆盖诊断，有闭合可回开业务证据可作excerpts；空/全opaque、blocked、非法字节/来源/引用依旧拒绝，不能伪称全文完整；(2)既有Store有效lease的终态事务结清失败摘要final-output槽位：已知付费失败仍保2MiB“额度”而非真实文件，无artifact/effect时由原输出预算负责层结清0，费用/unknown不退、成功/未决/旧lease不改；(3)模型只负责claims，源身份由pinned SelectResult确定，新版本统一renderer/schema/decoder/真实prompt与frozen generation，None/v1旧body保持；按配置支持的JSON格式与实际语言检查处理MM西语/虚构问题，不能只查header；(4)实际DEI 10-Q→earnings_call根路由、IR重要否定/原因漏读、HKIPO80s解析超时继续按原文探共因，不提高cap/按文件名硬判。
+新FF→CWP→RF离线CLI PASS：2正常localPOST＋1故意无效摘要，0供应商；完整body/context/sourceRef回开、旧Ref在新LATEST后读取、same/cross0POST和失败0输出额度且usage不退均实测。配置、原件、sentinel和临时测试目录保持/恢复。旧恢复集中节点的440文件在当时窗口SHA/mtime不漂移；相对资源补丁改变新validator因果，随后最新生产/单元节点绿，旧None/v1格式不变。不用旧版本快照冒充新权重节点。
 
-类型覆盖：20份架构样本只作purposive，不能称全量gold/未见holdout。标ir_policy的实际字节是调研Q&A，不能误修为行政skip。CNIPO补充完整54.10s通过，原全局剩22s timeout保留；HKIPO独立80s仍停PARSE_STARTED，缺真实S1/F1/附件/修订对照不认证。量测与后续摘要源码变更分开，只有本层实际依赖冻结才用于本层结果，不增全仓签收门禁。
+本窗口0新付费，母534629tokens/364387µUSD含FX和旧unknown保留，仍$20/200万tokens；默认0.8。原三原文25/25、新三原scope11/12（业务11/11）不等于正式供应商摘要质量或RF分析通过。A/C、真实类型/否定准入/IPO性能、并发2/4、默认切换及母G2/G4/G5/研究循环继续开放。
 
-证据：[本节点](common-root-quality-evidence/post-model-finalization.json)、[紧凑测试/独审/真实失败收据](common-root-quality-evidence/post-model-receipts.zip)。d9a13511已正常提交，尚未推送；正常pre-push为5264PASS/24SKIP/1FAIL（503.91s），唯一旧group失败结果空断言已按新有界诊断修正，失败状态/规则/无产物不变，集中47PASS。见[合同收尾](common-root-quality-evidence/group-contract-recovery.json)，下一窗口的[只读根因与测试设计](common-root-quality-evidence/next-common-root-designs.zip)及细则§7。正常commit曾由新增路径负例的Windows绝对路径字面量拒绝；已改为所属测试Temp的真实路径，物理路径拒绝断言不变。24项复验PASS，host-assumption guard新增违规0，未改baseline或跳hooks；见[跨平台夹具收尾](common-root-quality-evidence/host-neutral-recovery.json)。以下是历史冻结节点。
+Next Step：正常发布此节点、核精确CI，再沿同一账本按实际配置跑MiMo/DeepSeek/MiniMax三家摘要独审并恢复；类型共因按§7.6真实证据继续TDD，不能以模块绿宣布全部完成。证据：[本节点汇总](common-root-quality-evidence/source-owned-v2-acceptance.json)、[紧凑冻结收据](common-root-quality-evidence/source-owned-v2-receipts.zip)。以下保留历史失败/冻结记录。
 
 ## ROOT 当前接收与真实质量整改 — 2026-10-14
 
@@ -226,8 +226,21 @@ ROOT维护一个状态表、一个Next Step；三大节点汇总命令/退出码
 
 实际语言观察必须区分英文/西班牙语等同为拉丁脚本的正文；旧脚本计数器不满足。先用有界离线通用检测器做技术文本/品牌型号/短数字/英文改写/中文夹英文/mixed引用/第三语言反例，评估包体积、冷启动和不确定结果。只比较 claim prose 与实际 cited prose；短名/数字和未知结果明示诊断，不能默认英语或变成全面阻断。明确语言不匹配作为摘要质量问题处理，不翻译回去、发第二个 LLM 或用公司/西语关键词黑名单。是否采用依赖以真实试验决定，尚未实施。
 
+候选试验已完成：py3langid0.4.0官方wheel校SHA，三独立进程108样本，24泛化四语经营段落和20实际西语claims标签正确；13个短Item标题与中文夹品牌的wuu标签证明不能每span语言身份硬核。安装4,723,249B，冷import/初始化0.928–1.070s，热调用中位0.249–0.302ms；模型原件0重解析、0LLM，临时9.3MB与失败收据保持/恢复。采用为有限离线观察器，固定依赖0.4.0、已有NumPy不重装；ROOT负责声明与安装/调用/因果指纹，观察器线仅独占新module/test。按实质claims与实际所引prose的标签和aggregate共识观察强整份第三语；短/混合/近缘汉语/不确定结果不作材料许可。normalized posterior不当准确率，原语言和事实质量仍需真实大节点独审。依赖首次进入正式环境为施工安装，不伪称测试Temp未增内容。
+
 ### 7.5 类型覆盖与真实质量收尾
 
 已有20份 purposive样本：19份正式选择、HKIPO一次80s未完成；旧 timeout与原件保持。先确定 DEI 10-Q 为什么丢到 earnings_call、IR否定/原因到底在 admission/closure/rank 哪一层丢失；真实文件声明错不等于路由错。源 origin 与 speaker/attributed actor 的 role 含义先澄清，不能用unknown替换把gold凑绿。长招股先 profile 已定位工作，按共享parser责任修复，不抬上限重跑碰运气。
 
 集中工程通过后沿同一账本再跑三家配置模型、各自独审关键业务/数字/角色/阶段/语言/自身引用和恢复；原三25/25、新三原分母11/12及普通分红边界继续展示。源可运行、quote召回、正式摘要、RF/买方模型分开报告。质量通过才切默认，并完成原计划并发2/4、缺真实类型、原三/新三及母研究循环；这些尚未完成，不以组件PASS关闭目标。
+
+### 7.6 本窗口已证实的接线补漏与统一验收
+
+- 来源可用性依赖必须按实际已解析units的parser责任冻结；电话会TXT/JSON与filing PDF使用同一既有matcher，HTML同时可能是transcript或normalized filing。`source-matcher-used`进入原决策trace，不能仅看MIME。后续84项纯材料/因果测试通过，3个需解析旧fixture只在该窄节点明确排除，正式集中节点照常运行；旧0.9缺该因果证明只失效重读一次，不改历史Ref。
+- 每个model job的实际prompt由其generation负责；不得由请求容器/schema决定是否传给费用账。真实raw `/2`新代因缺map而误回run的1.7.0，调用前出现MODEL_RUN_BINDING_CONFLICT、0POST；新RED1FAIL/5PASS证实，按实际per-job差异冻结并在raw resume校验，旧None/v1 absent-map保持。87相关PASS；不放松ledger或重签旧run。
+- 供应商模拟器只根据真实request schema派发：schema3返回claims-only，None/v1保留完整header。共用raw/official helper由ROOT维护，历史恢复test不各自再造协议。两个真实格式反例RED后6PASS。正式production E2E默认新代应明确断言`reading-model-input/2`、实际prompt/descriptor和source-owned canonical identity；None/v1另有冻结bytes及真正显式generation接口验收，不能仅改常量假造旧代。
+- v2实际语言观察只作用于canonical claims的本条引用正文。明确different通过现post-model失败诊断保原metrics/终文SHA；uncertain/unavailable只投影现needs_review和有限静态日志，继续可消费，不是人工许可。新绑定RED5FAIL/3PASS后88相关PASS；observer组件67项含真实20西语样本。实际validator两模块、py3langid代码/权重与NumPy distribution因果绑定进同generation；缺模型资源/恢复必须改变identity，不能只信0.4.0标签。
+- 工程集中测试和真实CLI期间冻结所有实际因果source，不只最初7个automation文件。一次旧恢复节点2PASS/2FAIL的paid-tail尚未通过，保存NO_CERT；更改实际causal source时不可把测试结果当稳定实现验收。ROOT明确宣布所有source STOP后只跑同一集中节点、真实跨仓loopback及必要counterexample，不新增每helper门禁。
+- ROOT test runner使用workspace直属唯一短Temp、子进程TEMP/TMP和短`p` basetemp，finally恢复目录与sentinel/config。沙箱默认Temp拒写、深scratch导致WinError206分别保留，属于harness环境问题；短Temp后87PASS，不改生产代码或测试断言。正式验收还要原件SHA/mtime/大小不变，失效不表示可以丢原件。
+
+以下真实类型诊断取代先前只读设计里的未证实假说：VRSK10-Q的9字符FORM行未进入有限probe，Revenues表格冒号被误识别speaker turn；万润IR的否定及母公司联系/希望合作已在完整m41身体，实际经营predicate得0而被过滤，并非QA closure或budget漏失。两原文/实际units/0LLM探针留证于ROOT type-matrix-root/root-cause-followup，后续按共享FORM证据与经营状态语法TDD，不加公司/产品/英文Revenue黑名单。HKIPO仍需有界phase/page profiling，不能把80秒失败说成已定位具体瓶颈。

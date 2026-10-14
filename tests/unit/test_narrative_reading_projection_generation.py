@@ -22,7 +22,12 @@ def test_new_reading_generation_changes_but_legacy_omission_and_old_eight_stay_f
     versions = batch._execution_versions(request)
     current = generation.generation_manifest(request, original, execution_versions=versions)
     legacy = generation.generation_manifest(request, original, execution_versions=versions, reading_model_projection=None)
-    assert current["reading_model_projection"] == "reading-model-input/1"
+    assert current["reading_model_projection"] == "reading-model-input/2"
+    prior = generation.generation_manifest(request, original, execution_versions=versions,
+        reading_model_projection="reading-model-input/1")
+    assert prior["reading_model_projection"] == "reading-model-input/1"
+    assert prior["execution_versions"]["prompt"] == "1.7.0"
+    assert "reading_model_boundary" not in prior
     assert "reading_model_projection" not in legacy
     assert generation.generation_sha256(current) != generation.generation_sha256(legacy)
     old = generation.generation_manifest(request, original, execution_versions={**versions, "selector": "0.8.0"})
@@ -35,8 +40,11 @@ def test_worker_recovers_each_frozen_choice_instead_of_current_default():
     versions = batch._execution_versions(request)
     current = generation.generation_manifest(request, original, execution_versions=versions)
     legacy = generation.generation_manifest(request, original, execution_versions=versions, reading_model_projection=None)
-    frozen = batch._freeze_generations({"new": current, "old": legacy})
-    assert worker._reading_projection_versions(json.dumps(frozen)) == {"new": "reading-model-input/1", "old": None}
+    prior = generation.generation_manifest(request, original, execution_versions=versions,
+        reading_model_projection="reading-model-input/1")
+    frozen = batch._freeze_generations({"new": current, "v1": prior, "old": legacy})
+    assert worker._reading_projection_versions(json.dumps(frozen)) == {
+        "new": "reading-model-input/2", "v1": "reading-model-input/1", "old": None}
     assert worker._reading_projection_versions(None) == {}
 
 

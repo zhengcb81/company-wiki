@@ -1,14 +1,14 @@
 ## ROOT 已接收工程节点／剩余共因 — 2026-10-14
 
-三DU3实收与工程修复可发布，默认仍0.8。正常pre-push四失败已根治：Worker一次冻结snapshot68PASS，瞬时geometry metadata36PASS；通用portfolio/source显示观察128PASS，narrative用途配置82PASS，统一post-model失败诊断143PASS。原三真实原文25/25、新三原金标11/12（业务范围11/11，普通分红计划原漏读保留）；全离线CWP→FF→RF恢复＋失败收尾PASS，2正常localPOST＋1故意无效摘要，0供应商费用。仅owned测试的只读SQLite未关闭导致一次Temp残留，已明确closing并恢复，原FAIL＋清理收据保留。
+三DU3全部实收并已发布至84abc55e，精确CI38638459783 SUCCESS。后续共同根因工程节点也已集中验收、SOURCE STOP，正在正常提交/推送：212Unit PASS(9.32s)、正式共享生产7E2E PASS(112.57s)、真实None/v1恢复4E2E PASS(133.42s)、15源mypy/全改动Ruff/依赖声明匹配。旧None/v1请求字节与原Ref保持，raw新代按真实job prompt冻结，same/cross数据库复用0额外POST，不重复费用；实际parser责任决定源准入缓存，partial可靠片段不再整份误拒；失败摘要输出额度同lease事务结清0，known/unknown费用保留。
 
-真实摘要不能签收：MiMo第一次完整请求缺post-model诊断，随后补齐；关闭narrative额外推理解决本次截断，但完整返回SUMMARY_INVALID；DeepSeek-HK因PDF存在opaque页被全份PARSER_INCOMPLETE阻断，0POST；MiniMax-US完整终文8,160B为西班牙语且JSON多brace，固定FINAL_JSON拒绝、未产生有效artifact。header标en不能证明正文英语，不能补JSON或盲重发。母账534629tokens/364387µUSD含FX/旧unknown保留（代理费非发票），继续同一$20/200万tokens总限。
+实际正文语言观察已接入v2，只比较各claim与自己引用的原文；强不同语言保留付费失败原因/终文SHA，不确定或组件缺失只是现needs_review诊断，无人工放行链。fingerprint绑定真实wrapper/decoder/observer代码与检测权重/版本。生产E2E抓到库的相对MODEL_FILE错按CWD查找，已按MODEL_DIR实际加载规则修正，真实权重4,586,720B/available，82相关PASS；历史absolute fake覆盖不足与4FAIL保持。沙箱loopback TCP10013与host0的对照保留，正常host7项绿；不修断言规避环境失败。
 
-下一实施优先级（沿同一A/B/C大节点，先TDD再集中验收）：(1)来源层统一可用片段准则：partial/opaque只是覆盖诊断，有闭合可回开业务证据可作excerpts；空/全opaque、blocked、非法字节/来源/引用依旧拒绝，不能伪称全文完整；(2)既有Store有效lease的终态事务结清失败摘要final-output槽位：已知付费失败仍保2MiB“额度”而非真实文件，无artifact/effect时由原输出预算负责层结清0，费用/unknown不退、成功/未决/旧lease不改；(3)模型只负责claims，源身份由pinned SelectResult确定，新版本统一renderer/schema/decoder/真实prompt与frozen generation，None/v1旧body保持；按配置支持的JSON格式与实际语言检查处理MM西语/虚构问题，不能只查header；(4)实际DEI 10-Q→earnings_call根路由、IR重要否定/原因漏读、HKIPO80s解析超时继续按原文探共因，不提高cap/按文件名硬判。
+新FF→CWP→RF离线CLI PASS：2正常localPOST＋1故意无效摘要，0供应商；完整body/context/sourceRef回开、旧Ref在新LATEST后读取、same/cross0POST和失败0输出额度且usage不退均实测。配置、原件、sentinel和临时测试目录保持/恢复。旧恢复集中节点的440文件在当时窗口SHA/mtime不漂移；相对资源补丁改变新validator因果，随后最新生产/单元节点绿，旧None/v1格式不变。不用旧版本快照冒充新权重节点。
 
-类型覆盖：20份架构样本只作purposive，不能称全量gold/未见holdout。标ir_policy的实际字节是调研Q&A，不能误修为行政skip。CNIPO补充完整54.10s通过，原全局剩22s timeout保留；HKIPO独立80s仍停PARSE_STARTED，缺真实S1/F1/附件/修订对照不认证。量测与后续摘要源码变更分开，只有本层实际依赖冻结才用于本层结果，不增全仓签收门禁。
+本窗口0新付费，母534629tokens/364387µUSD含FX和旧unknown保留，仍$20/200万tokens；默认0.8。原三原文25/25、新三原scope11/12（业务11/11）不等于正式供应商摘要质量或RF分析通过。A/C、真实类型/否定准入/IPO性能、并发2/4、默认切换及母G2/G4/G5/研究循环继续开放。
 
-证据：[本节点](common-root-quality-evidence/post-model-finalization.json)、[紧凑测试/独审/真实失败收据](common-root-quality-evidence/post-model-receipts.zip)。d9a13511已正常提交，尚未推送；正常pre-push为5264PASS/24SKIP/1FAIL（503.91s），唯一旧group失败结果空断言已按新有界诊断修正，失败状态/规则/无产物不变，集中47PASS。见[合同收尾](common-root-quality-evidence/group-contract-recovery.json)，下一窗口的[只读根因与测试设计](common-root-quality-evidence/next-common-root-designs.zip)及细则§7。正常commit曾由新增路径负例的Windows绝对路径字面量拒绝；已改为所属测试Temp的真实路径，物理路径拒绝断言不变。24项复验PASS，host-assumption guard新增违规0，未改baseline或跳hooks；见[跨平台夹具收尾](common-root-quality-evidence/host-neutral-recovery.json)。以下是历史冻结节点。
+Next Step：正常发布此节点、核精确CI，再沿同一账本按实际配置跑MiMo/DeepSeek/MiniMax三家摘要独审并恢复；类型共因按§7.6真实证据继续TDD，不能以模块绿宣布全部完成。证据：[本节点汇总](common-root-quality-evidence/source-owned-v2-acceptance.json)、[紧凑冻结收据](common-root-quality-evidence/source-owned-v2-receipts.zip)。以下保留历史失败/冻结记录。
 
 ## ROOT 当前接收与真实质量整改 — 2026-10-14
 

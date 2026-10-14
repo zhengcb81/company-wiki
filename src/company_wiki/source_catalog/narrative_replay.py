@@ -197,6 +197,9 @@ def _qa_fragment_matches(unit: NarrativeUnit, span: EvidenceSpan) -> bool:
 
 
 def _span_matches(span: EvidenceSpan, matches: Sequence[NarrativeUnit]) -> bool:
+    matches = tuple(unit for unit in matches
+                    if (unit.source_id, unit.parser_name, unit.parser_version)
+                    == (span.source_id, span.parser_name, span.parser_version))
     if not matches:
         return False
     if span.structured_value.get("unit_kind") != "pdf_table_qa_fragment":

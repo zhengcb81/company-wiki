@@ -156,7 +156,11 @@ def _reading_projection_values(binding: dict[str, Any] | None) -> dict[str, str 
     if binding is None:
         return {}
     from .narrative_batch import _thaw_generations
-    from .narrative_model import ModelResponseError, validate_reading_model_projection_version
+    from .narrative_model import (
+        ModelResponseError, validate_reading_model_projection_version,
+        SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION,
+        reading_model_boundary_identity, resolve_model_boundary,
+    )
     if "generation_settings" not in binding:
         return {}
     manifests = _thaw_generations(binding)
@@ -166,6 +170,20 @@ def _reading_projection_values(binding: dict[str, Any] | None) -> dict[str, str 
         if "reading_model_projection" in manifest and version is None:
             raise ModelResponseError("READING_MODEL_PROJECTION_UNAVAILABLE")
         validate_reading_model_projection_version(version)
+        if version == SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION:
+            projected = manifest["schema_version"] == "narrative-generation/2"
+            boundary = resolve_model_boundary(version, projected=projected)
+            versions = manifest["execution_versions"]
+            if (
+                manifest.get("reading_model_boundary") != reading_model_boundary_identity(version, projected=projected)
+                or versions.get("prompt") != boundary.prompt_version
+                or versions.get("model_request_schema") != boundary.request_schema
+            ):
+                raise ModelResponseError("READING_MODEL_BOUNDARY_UNAVAILABLE")
+            from .narrative_summarize import reading_summary_validation_identity
+
+            if manifest.get("summary_validation") != reading_summary_validation_identity():
+                raise ModelResponseError("READING_SUMMARY_VALIDATION_UNAVAILABLE")
         result[key] = version
     return result
 

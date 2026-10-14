@@ -49,20 +49,22 @@ def sha(data):
 
 
 def model_draft(data):
-    projected = data["schema_version"] == "narrative-model-request/2"
+    source_owned = data["schema_version"] == "narrative-model-request/3"
+    projected = "subject" in data
     assert data["schema_version"] == (
+        "narrative-model-request/3" if source_owned else
         "narrative-model-request/2" if projected else "narrative-model-request/1.4"
     )
     identity = data["subject"] if projected else data["source"]
     if projected:
         assert "source" not in data
-        assert set(identity) == {
+        assert set(identity) == ({"language", "title", "document_kind"} if source_owned else {
             "subject_id",
             "subject_sha256",
             "language",
             "title",
             "document_kind",
-        }
+        })
     else:
         assert "subject" not in data
     assert "records" not in data and "parent_source_refs" not in data
@@ -87,6 +89,8 @@ def model_draft(data):
         ],
         "status": "draft",
     }
+    if source_owned:
+        return {"draft": {"claims": draft["claims"]}}
     if projected:
         draft.update(
             subject_id=identity["subject_id"], subject_sha256=identity["subject_sha256"]

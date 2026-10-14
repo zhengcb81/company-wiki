@@ -31,8 +31,8 @@ READING_PROJECTION_UNSET = object()
 
 def _bind_reading_projection(manifest, versions, reading_model_projection):
     if reading_model_projection is READING_PROJECTION_UNSET:
-        from .narrative_model import READING_MODEL_PROJECTION_VERSION
-        reading_model_projection = (READING_MODEL_PROJECTION_VERSION
+        from .narrative_model import SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION
+        reading_model_projection = (SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION
                                     if versions.get("selector") == "0.9.0" else None)
     if reading_model_projection is not None:
         # Historical identities can retain a future/retired software version.
@@ -42,6 +42,22 @@ def _bind_reading_projection(manifest, versions, reading_model_projection):
                 or len(reading_model_projection) > 256):
             raise ValueError("invalid reading model projection identity")
         manifest["reading_model_projection"] = reading_model_projection
+        from .narrative_model import (
+            SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION,
+            reading_model_boundary_identity,
+            resolve_model_boundary,
+        )
+        if reading_model_projection == SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION:
+            projected = manifest["schema_version"] == "narrative-generation/2"
+            boundary = resolve_model_boundary(reading_model_projection, projected=projected)
+            versions["prompt"] = boundary.prompt_version
+            versions["model_request_schema"] = boundary.request_schema
+            manifest["reading_model_boundary"] = reading_model_boundary_identity(
+                reading_model_projection, projected=projected,
+            )
+            from .narrative_summarize import reading_summary_validation_identity
+
+            manifest["summary_validation"] = reading_summary_validation_identity()
 
 
 def _effective_optional_generation(options: Mapping[str, Any]) -> dict[str, Any]:

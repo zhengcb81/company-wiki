@@ -7,6 +7,8 @@ from collections import Counter
 from collections.abc import Mapping
 import hashlib
 import json
+import logging
+from pathlib import Path
 from typing import Any, NoReturn, Protocol
 
 from .models import canonical_json, canonical_json_hash, require_sha256, _to_plain
@@ -29,6 +31,9 @@ NARRATIVE_PROMPT_VERSION = "1.7.0"
 PROJECTION_MODEL_REQUEST_SCHEMA = "narrative-model-request/2"
 PROJECTION_NARRATIVE_PROMPT_VERSION = "official-json/1.0.0"
 READING_MODEL_PROJECTION_VERSION = "reading-model-input/1"
+SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION = "reading-model-input/2"
+_SOURCE_OWNED_PROMPT_VERSION = "reading-source-owned/2.0.0"
+_SOURCE_OWNED_REQUEST_SCHEMA = "narrative-model-request/3"
 MODEL_RESPONSE_MAX_BYTES = 128 * 1024
 _GROUP_DECLARATION_ABSENT = object()
 
@@ -162,9 +167,55 @@ _READING_INSTRUCTION = (
 )
 
 
-def validate_reading_model_projection_version(version: str | None) -> None:
-    if version is not None and version != READING_MODEL_PROJECTION_VERSION:
+_SOURCE_OWNED_INSTRUCTION = (
+    _INSTRUCTION.replace("Keep source identity/language.",
+        "Keep the supplied source language. Source and subject metadata belong to the program.")
+    .replace("financial tables,", "pure financial statement totals,")
+    + _READING_INSTRUCTION
+    + " Return draft with only claims. Do not echo source_id, source_sha256, "
+      "subject_id, subject_sha256, language or status. The program supplies canonical "
+      "metadata from its pinned selection; generate only supported claims."
+)
+
+
+@dataclass(frozen=True)
+class ModelBoundary:
+    """One finite prompt/schema/decoder policy; no provider or source discovery."""
+
+    reading_projection_version: str | None
+    prompt_version: str
+    request_schema: str
+    decoder_version: str
+    source_owned: bool
+
+
+def resolve_model_boundary(version: str | None, *, projected: bool = False) -> ModelBoundary:
+    """Unknown renderers are errors; omission and v1 preserve historical bytes."""
+    if version is not None and (not isinstance(version, str) or version not in {
+            READING_MODEL_PROJECTION_VERSION, SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION}):
         raise ModelResponseError("READING_MODEL_PROJECTION_UNAVAILABLE")
+    if type(projected) is not bool:
+        raise ModelResponseError("MODEL_BOUNDARY_PROJECTED_INVALID")
+    if version == SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION:
+        return ModelBoundary(version, _SOURCE_OWNED_PROMPT_VERSION, _SOURCE_OWNED_REQUEST_SCHEMA,
+                             "reading-source-owned-decoder/2", True)
+    return ModelBoundary(version,
+        PROJECTION_NARRATIVE_PROMPT_VERSION if projected else NARRATIVE_PROMPT_VERSION,
+        PROJECTION_MODEL_REQUEST_SCHEMA if projected else MODEL_REQUEST_SCHEMA,
+        "narrative-model-decoder/1", False)
+
+
+def _boundary_instruction(boundary: ModelBoundary, *, projected: bool) -> str:
+    if boundary.source_owned:
+        return _SOURCE_OWNED_INSTRUCTION
+    instruction = _PROJECTION_INSTRUCTION if projected else _INSTRUCTION
+    if boundary.reading_projection_version is not None:
+        instruction = instruction.replace("financial tables,", "pure financial statement totals,") + _READING_INSTRUCTION
+    return instruction
+
+
+def validate_reading_model_projection_version(version: str | None) -> None:
+    resolve_model_boundary(version)
 
 
 def _semantic_records(rows, fields):
@@ -195,14 +246,14 @@ def _model_layout_coverage(value):
     return result
 
 
-def _reading_model_context(context, group_aliases):
+def _reading_model_context(context, group_aliases, *, version=READING_MODEL_PROJECTION_VERSION):
     plain = _to_plain(context)
     unread = plain["unread"]
     counts = unread.get("counts", {key: len(unread[key]) for key in (
         "opaque_pages", "deferred_pages", "deferred_unit_ids", "unassigned_unit_ids",
     )})
     return {
-        "schema_version": READING_MODEL_PROJECTION_VERSION,
+        "schema_version": version,
         "reading_policies": _semantic_records(plain["reading_policies"], (
             "family", "summary_focus", "reading_questions", "context_requirements", "negative_hints",
         )),
@@ -268,6 +319,40 @@ _RESPONSE_SCHEMA: dict[str, Any] = {
         },
     }},
 }
+
+
+_SOURCE_OWNED_RESPONSE_SCHEMA: dict[str, Any] = {
+    "type": "object", "required": ["draft"], "additionalProperties": False,
+    "properties": {"draft": {
+        "type": "object", "required": ["claims"], "additionalProperties": False,
+        "properties": {"claims": _RESPONSE_SCHEMA["properties"]["draft"]["properties"]["claims"]},
+    }},
+}
+
+
+def reading_model_boundary_identity(version: str | None, *, projected: bool = False) -> dict[str, Any]:
+    """Pathless causal identity, separate from each selection's exact HTTP bytes.
+
+    The base schema fixes the policy; request rendering binds its actual citation
+    cap separately. Source code uses LF bytes so installation line endings do
+    not create false decoder drift. No original or configuration is opened.
+    """
+    boundary = resolve_model_boundary(version, projected=projected)
+    schema = _SOURCE_OWNED_RESPONSE_SCHEMA if boundary.source_owned else _RESPONSE_SCHEMA
+    if projected and not boundary.source_owned:
+        schema = json.loads(json.dumps(schema))
+        draft = schema["properties"]["draft"]
+        draft["required"] = ["subject_id", "subject_sha256", "language", "claims"]
+        draft["properties"]["subject_id"] = draft["properties"].pop("source_id")
+        draft["properties"]["subject_sha256"] = draft["properties"].pop("source_sha256")
+    decoder_bytes = Path(__file__).read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return {"schema_version": "reading-model-boundary/1",
+        "reading_projection_version": boundary.reading_projection_version,
+        "prompt_version": boundary.prompt_version, "request_schema": boundary.request_schema,
+        "decoder_version": boundary.decoder_version,
+        "instruction_sha256": hashlib.sha256(_boundary_instruction(boundary, projected=projected).encode("utf-8")).hexdigest(),
+        "response_schema_sha256": canonical_json_hash(schema),
+        "decoder_sha256": hashlib.sha256(decoder_bytes).hexdigest()}
 
 
 class NarrativeModelError(RuntimeError):
@@ -337,9 +422,11 @@ def _output_plan(evidence_count: int, max_output_tokens: int | None = None) -> d
             "coverage": "selected_excerpts_only", "planning": "compact_target_not_token_estimate"}
 
 
-def _response_schema(evidence_count: int, *, projected: bool = False) -> dict[str, Any]:
-    schema = json.loads(json.dumps(_RESPONSE_SCHEMA))
-    if projected:
+def _response_schema(evidence_count: int, *, projected: bool = False,
+                     reading_projection_version: str | None = None) -> dict[str, Any]:
+    boundary = resolve_model_boundary(reading_projection_version, projected=projected)
+    schema = json.loads(json.dumps(_SOURCE_OWNED_RESPONSE_SCHEMA if boundary.source_owned else _RESPONSE_SCHEMA))
+    if projected and not boundary.source_owned:
         draft = schema["properties"]["draft"]
         draft["required"] = ["subject_id", "subject_sha256", "language", "claims"]
         properties = draft["properties"]
@@ -365,19 +452,17 @@ class NarrativeModelRequest:
 
     @classmethod
     def from_selection(cls, selected: NarrativeSelectResult, *, reading_projection_version: str | None = None) -> "NarrativeModelRequest":
-        validate_reading_model_projection_version(reading_projection_version)
+        projected = selected.subject.kind == "official_json"
+        boundary = resolve_model_boundary(reading_projection_version, projected=projected)
         reading_projection = reading_projection_version is not None
         if reading_projection and selected.reading_context is None:
             raise ModelResponseError("READING_MODEL_CONTEXT_UNAVAILABLE")
         if selected.reading_context is not None:
             selected = replace(selected, reading_context=_reading_context(selected.reading_context, selected.evidence_spans))
-        projected = selected.subject.kind == "official_json"
         if projected and (not selected.evidence_spans or selected.source_metadata.language not in {"zh", "en", "mixed"}):
             raise ModelResponseError("SUMMARY_INPUT_UNAVAILABLE")
-        prompt_version = PROJECTION_NARRATIVE_PROMPT_VERSION if projected else NARRATIVE_PROMPT_VERSION
-        instruction = _PROJECTION_INSTRUCTION if projected else _INSTRUCTION
-        if reading_projection:
-            instruction = instruction.replace("financial tables,", "pure financial statement totals,") + _READING_INSTRUCTION
+        prompt_version = boundary.prompt_version
+        instruction = _boundary_instruction(boundary, projected=projected)
         mapping = _citation_mapping(selected)
         groups = _group_mapping(selected)
         aliases = {span_id: alias for alias, span_id in mapping.items()}
@@ -387,7 +472,7 @@ class NarrativeModelRequest:
         flags = [span.quality_flags for span in selected.evidence_spans]
         default_flags = Counter(flags).most_common(1)[0][0] if flags else ()
         envelope = {
-            "schema_version": PROJECTION_MODEL_REQUEST_SCHEMA if projected else MODEL_REQUEST_SCHEMA,
+            "schema_version": boundary.request_schema,
             "subject" if projected else "source": {
                 "subject_id" if projected else "source_id": selected.subject.item_key if projected else selected.source_ref.source_id,
                 "subject_sha256" if projected else "source_sha256": selected.subject.subject_sha256 if projected else selected.source_ref.content_sha256,
@@ -413,15 +498,24 @@ class NarrativeModelRequest:
             "output_plan": _output_plan(len(mapping)),
             "selection": {key: selected.selection.to_dict()[key] for key in
                           ("status", "coverage_complete", "omitted_candidate_count")},
-            "response_schema": _response_schema(len(mapping), projected=projected),
+            "response_schema": _response_schema(len(mapping), projected=projected,
+                reading_projection_version=reading_projection_version),
         }
+        if boundary.source_owned:
+            # The source/subject remains fully pinned internally. Asking a model
+            # to reproduce its audit identity cannot add information or proof.
+            envelope["subject" if projected else "source"] = {
+                "language": selected.source_metadata.language,
+                "title": selected.source_metadata.title,
+                "document_kind": selected.source_metadata.document_kind,
+            }
         if selected.reading_context is not None:
             # Strategies are data, not a second instruction or a second evidence
             # body. The source selector already chose these policies from the
             # final selected original material. Group membership uses the one
             # existing alias table above, including shared context references.
             if reading_projection:
-                strategy = _reading_model_context(selected.reading_context, groups)
+                strategy = _reading_model_context(selected.reading_context, groups, version=reading_projection_version)
                 envelope["output_plan"] = _reading_output_plan(len(mapping), strategy["groups"])
             else:
                 strategy = _to_plain(selected.reading_context)
@@ -438,7 +532,7 @@ class NarrativeModelRequest:
                               for alias, (group_id, members) in groups.items()},
             "selection": selected.selection.to_dict(),
         }
-        if projected:
+        if projected or boundary.source_owned:
             identity["subject_binding"] = selected.subject.to_dict()
         return cls(
             prompt_version,
@@ -458,14 +552,15 @@ class NarrativeModelRequest:
             envelope = json.loads(self.data_json)
         except (ValueError, TypeError):
             return self
-        if not isinstance(envelope, dict) or envelope.get("schema_version") not in {MODEL_REQUEST_SCHEMA, PROJECTION_MODEL_REQUEST_SCHEMA}:
+        if not isinstance(envelope, dict) or envelope.get("schema_version") not in {
+                MODEL_REQUEST_SCHEMA, PROJECTION_MODEL_REQUEST_SCHEMA, _SOURCE_OWNED_REQUEST_SCHEMA}:
             return self
         evidence = envelope.get("evidence")
         if not isinstance(evidence, list):
             raise ModelResponseError("MODEL_REQUEST_INVALID")
         reading = envelope.get("reading_strategy", {})
         plan = (_reading_output_plan(len(evidence), reading["groups"], max_output_tokens)
-                if reading.get("schema_version") == READING_MODEL_PROJECTION_VERSION
+                if reading.get("schema_version") in {READING_MODEL_PROJECTION_VERSION, SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION}
                 else _output_plan(len(evidence), max_output_tokens))
         if envelope.get("output_plan") == plan:
             return self
@@ -544,6 +639,7 @@ def _invalid_json_number(_value: str) -> NoReturn:
 
 def decode_model_draft(
     response: NarrativeModelResponse, *, selected: NarrativeSelectResult,
+    reading_projection_version: str | None = None,
 ) -> dict[str, Any]:
     """Recover usable claims at the model boundary, then use strict canonical data.
 
@@ -554,8 +650,10 @@ def decode_model_draft(
     act as permission; the canonical public wire shape remains unchanged.
     """
     projected_subject = selected.subject.kind == "official_json"
-    expected_prompt = PROJECTION_NARRATIVE_PROMPT_VERSION if projected_subject else NARRATIVE_PROMPT_VERSION
-    if response.prompt_version != expected_prompt:
+    boundary = resolve_model_boundary(reading_projection_version, projected=projected_subject)
+    if boundary.source_owned and selected.reading_context is None:
+        raise ModelResponseError("READING_MODEL_CONTEXT_UNAVAILABLE")
+    if response.prompt_version != boundary.prompt_version:
         raise ModelResponseError("model response prompt version differs from request")
     try:
         decoded = response.response_bytes.decode("utf-8")
@@ -566,8 +664,18 @@ def decode_model_draft(
     if not isinstance(payload, dict) or "draft" not in payload:
         raise ModelResponseError("model response must contain a draft")
     _reject_translation(payload)
-    schema = _response_schema(len(selected.evidence_spans), projected=projected_subject)
+    schema = _response_schema(len(selected.evidence_spans), projected=projected_subject,
+                             reading_projection_version=reading_projection_version)
     draft = _model_projection(payload["draft"], list(schema["properties"]["draft"]["properties"]), "summary draft")
+    if boundary.source_owned:
+        echoed = {"source_id", "source_sha256", "subject_id", "subject_sha256", "language", "status"}
+        if echoed.intersection(payload) or echoed.intersection(payload["draft"]):
+            logging.getLogger(__name__).warning("SOURCE_OWNED_MODEL_METADATA_ECHO_IGNORED")
+        # Model extension/header values never replace pinned source metadata or
+        # program-derived quality. Citation/claim recovery below is shared.
+        draft.update({"language": selected.source_metadata.language,
+            "subject_id" if projected_subject else "source_id": selected.subject.item_key if projected_subject else selected.source_ref.source_id,
+            "subject_sha256" if projected_subject else "source_sha256": selected.subject.subject_sha256 if projected_subject else selected.source_ref.content_sha256})
     draft.setdefault("status", "draft")
     claims = draft.get("claims")
     if not isinstance(claims, list):
@@ -576,16 +684,17 @@ def decode_model_draft(
         raise NarrativeContractError("summary claims exceed twenty")
     header = (subject_draft_from_dict({**draft, "claims": []}) if projected_subject
               else _draft_from_dict({**draft, "claims": []}))
-    try:
-        if isinstance(header, SubjectSummaryDraft):
-            validate_subject_summary_identity(header, subject=selected.subject,
-                                              language=selected.source_metadata.language)
-        else:
-            validate_summary_identity(header, source_id=selected.source_ref.source_id,
-                                      source_sha256=selected.source_ref.content_sha256,
-                                      language=selected.source_metadata.language)
-    except SummaryValidationError as exc:
-        raise NarrativeContractError(str(exc)) from exc
+    if not boundary.source_owned:
+        try:
+            if isinstance(header, SubjectSummaryDraft):
+                validate_subject_summary_identity(header, subject=selected.subject,
+                                                  language=selected.source_metadata.language)
+            else:
+                validate_summary_identity(header, source_id=selected.source_ref.source_id,
+                                          source_sha256=selected.source_ref.content_sha256,
+                                          language=selected.source_metadata.language)
+        except SummaryValidationError as exc:
+            raise NarrativeContractError(str(exc)) from exc
     mapping = _citation_mapping(selected)
     groups = _group_mapping(selected)
     canonical = set(mapping.values())
@@ -677,6 +786,11 @@ def _model_projection(value: object, fields: list[str], name: str) -> dict[str, 
 
 
 __all__ = [
+    "ModelBoundary",
+    "READING_MODEL_PROJECTION_VERSION",
+    "SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION",
+    "resolve_model_boundary",
+    "reading_model_boundary_identity",
     "MODEL_REQUEST_SCHEMA",
     "MODEL_RESPONSE_MAX_BYTES",
     "NARRATIVE_PROMPT_VERSION",

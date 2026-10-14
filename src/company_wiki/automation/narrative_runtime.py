@@ -65,7 +65,7 @@ def register_narrative_handlers(
         "source.narrative_verify",
         NarrativeVerifyHandler(reader=dependencies.reader, normalization=dependencies.normalization,
             projection_catalog=dependencies.projection_catalog, generation_sha256=dependencies.generation_sha256,
-            selector_version=selector_version),
+            selector_version=selector_version, reading_model_projection=dependencies.reading_model_projection),
     )
 
 

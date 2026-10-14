@@ -1365,6 +1365,11 @@ class AutomationStore:
                 retry_not_before=retry_not_before,
                 result=result,
             )
+            if job.job_type == "source.narrative_summarize":
+                from .narrative_run_store import _settle_failed_summary_output_in_transaction
+
+                _settle_failed_summary_output_in_transaction(
+                    conn, attempt, job, result, finished_at=finished_at)
             publication_due = outbox_not_before or finished_at
             for effect in result.effects:
                 _insert_effect(conn, effect)

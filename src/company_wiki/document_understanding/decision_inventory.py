@@ -10,6 +10,7 @@ from collections.abc import Mapping, Sequence
 from hashlib import sha256
 from importlib import import_module
 import json
+from pathlib import Path
 from typing import Any
 
 from .profiles import registry
@@ -23,7 +24,35 @@ def _digest(value: Any) -> str:
                              separators=(",", ":")).encode()).hexdigest()
 
 
-def _versions(*, pdf_frontend: bool = False) -> dict[str, str]:
+_NORMALIZED_MATERIAL_MATCHER = "company_wiki.document_normalization.replay"
+_NARRATIVE_MATERIAL_MATCHER = "company_wiki.source_catalog.narrative_replay"
+_MATERIAL_MATCHERS = frozenset({_NORMALIZED_MATERIAL_MATCHER, _NARRATIVE_MATERIAL_MATCHER})
+
+
+def _source_usability_version(mime_type: str | None, material_matcher: str | None = None) -> str:
+    """Bind source-owner code actually used by this carrier, independent of host."""
+    from company_wiki.automation.narrative_formats import NORMALIZED_MIME_TYPES
+
+    modules = ["company_wiki.automation.narrative_select"]
+    if material_matcher is not None:
+        modules.append(material_matcher)
+    elif mime_type in NORMALIZED_MIME_TYPES:
+        modules.append(_NORMALIZED_MATERIAL_MATCHER)
+    elif mime_type in {"application/pdf", "text/plain", "application/json"}:
+        modules.append(_NARRATIVE_MATERIAL_MATCHER)
+    hashes = {}
+    for name in modules:
+        module = import_module(name)
+        source_file = module.__file__
+        if source_file is None:
+            raise ValueError("source usability module has no source file")
+        contents = Path(source_file).read_bytes().replace(b"\r\n", b"\n")
+        hashes[name] = sha256(contents).hexdigest()
+    return "source-usability/3+" + _digest(hashes)
+
+
+def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
+              material_matcher: str | None = None) -> dict[str, str]:
     # Resolve the producer's current constant after package initialization.
     # This avoids making source_catalog's package imports depend on an
     # inventory module that is still being initialized.
@@ -35,7 +64,9 @@ def _versions(*, pdf_frontend: bool = False) -> dict[str, str]:
     from .structure import table_purpose
     from company_wiki.document_normalization import text_matching
 
-    versions = {"inventory": "1.2.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+    versions = {"inventory": "1.3.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+            "source_usability": _source_usability_version(
+                mime_type or ("application/pdf" if pdf_frontend else None), material_matcher),
             "business_policy": READING_BUSINESS_POLICY_VERSION,
             "strategy_binding": STRATEGY_BINDING_VERSION,
             "observation_adapter": OBSERVATION_ADAPTER_VERSION,
@@ -65,7 +96,8 @@ def _versions(*, pdf_frontend: bool = False) -> dict[str, str]:
 
 def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
                used_facets: set[str], *, complete: bool = True,
-               carrier: str | None = None, actual_frontend: str | None = None) -> dict[str, Any]:
+               carrier: str | None = None, actual_frontend: str | None = None,
+               material_matcher: str | None = None) -> dict[str, Any]:
     components = []
     candidates = []
     if len(scopes) > 64:
@@ -122,8 +154,13 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
         components.append({"component_id": "carrier|" + carrier, "version": "source-carrier/1",
             "content_digest": proof, "matcher_digest": proof,
             "scope_ids": [scope["scope_id"] for scope in scopes]})
+    if material_matcher:
+        proof = _digest({"material_matcher": material_matcher})
+        components.append({"component_id": "source-matcher-used|" + material_matcher,
+            "version": "parsed-material-matcher/1", "content_digest": proof, "matcher_digest": proof,
+            "scope_ids": [scope["scope_id"] for scope in scopes]})
     pdf_used = carrier == "application/pdf" and bool(actual_frontend)
-    versions = _versions(pdf_frontend=pdf_used)
+    versions = _versions(pdf_frontend=pdf_used, mime_type=carrier, material_matcher=material_matcher)
     if carrier == "application/pdf":
         if not pdf_used or not versions.get("pdf_projection") or versions.get("pdf_frontend") != actual_frontend:
             complete = False
@@ -138,7 +175,8 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
             "inventory_complete": complete and bool(scopes) and bool(carrier)}
 
 
-def build_decision_trace(pipeline: Mapping[str, Any], *, used_facet_ids: Sequence[str] = ()) -> dict[str, Any]:
+def build_decision_trace(pipeline: Mapping[str, Any], *, used_facet_ids: Sequence[str] = (),
+                         source_parser_names: Sequence[str] | None = None) -> dict[str, Any]:
     route = pipeline["route"]
     metadata = pipeline.get("observation", {}).get("metadata", {})
     source = pipeline["source_ref"]["source_id"]
@@ -217,8 +255,16 @@ def build_decision_trace(pipeline: Mapping[str, Any], *, used_facet_ids: Sequenc
     carrier = carrier if isinstance(carrier, str) and 0 < len(carrier) <= 256 else None
     frontend = metadata.get("native_layout_frontend_version")
     frontend = frontend if isinstance(frontend, str) and 0 < len(frontend) <= 256 else None
+    material_matcher = None
+    if source_parser_names:
+        from company_wiki.document_normalization.units import PARSER_NAME
+        # The source owner's material check uses this exact branch. HTML MIME,
+        # document purpose and profile cannot distinguish DOM from call text.
+        material_matcher = (_NORMALIZED_MATERIAL_MATCHER
+                            if all(name == PARSER_NAME for name in source_parser_names)
+                            else _NARRATIVE_MATERIAL_MATCHER)
     return _inventory(scopes, bindings, set(used_facet_ids), complete=complete, carrier=carrier,
-                      actual_frontend=frontend)
+                      actual_frontend=frontend, material_matcher=material_matcher)
 
 
 def current_decision_trace(frozen: Mapping[str, Any]) -> dict[str, Any]:
@@ -262,9 +308,22 @@ def current_decision_trace(frozen: Mapping[str, Any]) -> dict[str, Any]:
                 and proof.get("content_digest") == digest and proof.get("matcher_digest") == digest
                 and set(proof.get("scope_ids", ())) == {scope["scope_id"] for scope in frozen.get("scopes", ())}):
             actual_frontend = actual
+    matcher_proofs = [component for component in frozen.get("components", ())
+                      if component["component_id"].startswith("source-matcher-used|")]
+    material_matcher = None
+    matcher_complete = not matcher_proofs  # Compatibility traces have no actual parser argument.
+    if len(matcher_proofs) == 1:
+        proof = matcher_proofs[0]
+        actual = proof["component_id"].removeprefix("source-matcher-used|")
+        digest = _digest({"material_matcher": actual})
+        if (actual in _MATERIAL_MATCHERS and proof.get("version") == "parsed-material-matcher/1"
+                and proof.get("content_digest") == digest and proof.get("matcher_digest") == digest
+                and set(proof.get("scope_ids", ())) == {scope["scope_id"] for scope in frozen.get("scopes", ())}):
+            material_matcher = actual
+            matcher_complete = True
     return _inventory(frozen.get("scopes", ()), bindings, used,
-                      complete=frozen.get("inventory_complete", frozen.get("status") == "complete"),
-                      carrier=carrier, actual_frontend=actual_frontend)
+                      complete=frozen.get("inventory_complete", frozen.get("status") == "complete") and matcher_complete,
+                      carrier=carrier, actual_frontend=actual_frontend, material_matcher=material_matcher)
 
 
 __all__ = ["build_decision_trace", "current_decision_trace"]

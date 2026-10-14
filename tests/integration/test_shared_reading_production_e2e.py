@@ -111,7 +111,10 @@ def _assert_formal_generation(root, catalog, imported, run_id, reference, bundle
     assert metadata["generation_manifest"] == final, "publication retained an obsolete base generation"
     assert metadata["generation_sha256"] == canonical_json_hash(final)
     strategy = data["reading_strategy"]
-    assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/1"
+    assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/2"
+    assert final["execution_versions"]["prompt"] == "reading-source-owned/2.0.0"
+    assert final["reading_model_boundary"]["prompt_version"] == final["execution_versions"]["prompt"]
+    assert final["summary_validation"]["language_observer"]["py3langid"]["model"]["status"] == "available"
     assert context["schema_version"] == "du-production-reading/1"
     # Public context is the full source audit view, bound by material_sha256
     # above; the model retains every actual semantic instruction independently.
@@ -291,7 +294,8 @@ def test_official_projection_shared_reading_publishes_the_final_generation_targe
         assert {span.structured_value["source_role"] for span in bundle.evidence_spans} == {"management", "investor_question"}
         assert final["selection_generation"]["evidence_sha256"] == canonical_json_hash([span.to_dict() for span in bundle.evidence_spans])
         strategy = server.requests[0]["reading_strategy"]
-        assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/1"
+        assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/2"
+        assert final["execution_versions"]["prompt"] == "reading-source-owned/2.0.0"
         assert bundle.reading_context["reading_policy_version"] == final["selection_generation"]["reading_policy_version"]
         assert strategy["constraints"] == list(bundle.reading_context["constraints"])
         assert final["selection_generation"]["material_sha256"] == reading_material_sha256(bundle)

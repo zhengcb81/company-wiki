@@ -15,7 +15,7 @@ from typing import Callable, TypeVar
 from company_wiki._id_scope import normalize_id_scope
 
 from . import migrations
-from .models import (RuntimeGate, RuntimeState, canonical_json, canonical_json_hash,
+from .models import (Attempt, HandlerOutcome, HandlerResult, Job, RuntimeGate, RuntimeState, canonical_json, canonical_json_hash,
                      require_canonical_json, require_sha256, require_utc_timestamp)
 from .store import (
     ConcurrentUpdateError, StoreBusyError, _read_runtime_gate_in_transaction,
@@ -410,6 +410,51 @@ def _required_reservation(
     if record is None:
         raise RunScopeError("attempt has no reservation in this run")
     return record
+
+
+def _settle_output_in_transaction(
+    connection: sqlite3.Connection, *, run_id: str, attempt_id: str,
+    output_bytes: int, output_sha256: str | None, settled_at: str,
+) -> ReservationRecord:
+    """Use the caller's transaction and validated output arguments exactly once."""
+    _required_run(connection, run_id)
+    record = _required_reservation(connection, run_id, attempt_id)
+    if record.output_bytes is not None:
+        if (record.output_bytes, record.output_sha256) != (output_bytes, output_sha256):
+            raise ReservationConflictError("final output differs from its durable receipt")
+        return record
+    connection.execute(
+        "UPDATE narrative_model_reservations SET output_bytes=?,output_sha256=?,output_settled_at=? WHERE run_id=? AND attempt_id=?",
+        (output_bytes, output_sha256, settled_at, run_id, attempt_id),
+    )
+    if output_bytes > record.output_bytes_bound:
+        _block(connection, run_id, "FINAL_OUTPUT_EXCEEDS_RESERVATION", settled_at)
+    return _required_reservation(connection, run_id, attempt_id)
+
+
+def _settle_failed_summary_output_in_transaction(
+    connection: sqlite3.Connection, attempt: Attempt, job: Job, result: HandlerResult,
+    *, finished_at: str,
+) -> None:
+    """An owned failed result proves no final artifact, never a free provider call.
+
+    Store already fenced this attempt and writes its result/status in the same
+    transaction. Lost/unreported attempts do not pass through this lifecycle rule.
+    """
+    if (job.job_type != "source.narrative_summarize"
+            or result.outcome is HandlerOutcome.SUCCEEDED or result.artifacts or result.effects):
+        return
+    row = connection.execute(
+        "SELECT run_id,job_id FROM narrative_model_reservations WHERE attempt_id=?",
+        (attempt.attempt_id,),
+    ).fetchone()
+    if row is None:
+        return  # Unmetered historical handlers have no output slot to settle.
+    if row["job_id"] != job.job_id or attempt.job_id != job.job_id:
+        raise RunScopeError("failed output reservation and owning attempt differ")
+    require_utc_timestamp(finished_at)
+    _settle_output_in_transaction(connection, run_id=row["run_id"], attempt_id=attempt.attempt_id,
+        output_bytes=0, output_sha256=None, settled_at=finished_at)
 
 
 def _budget(
@@ -977,29 +1022,9 @@ class NarrativeRunStore:
                 "positive final output bytes require a hash; zero output must have no hash"
             )
 
-        def write(connection):
-            _required_run(connection, run_id)
-            record = _required_reservation(connection, run_id, attempt_id)
-            if record.output_bytes is not None:
-                if (record.output_bytes, record.output_sha256) != (
-                    output_bytes,
-                    output_sha256,
-                ):
-                    raise ReservationConflictError(
-                        "final output differs from its durable receipt"
-                    )
-                return record
-            connection.execute(
-                "UPDATE narrative_model_reservations SET output_bytes=?,output_sha256=?,output_settled_at=? WHERE run_id=? AND attempt_id=?",
-                (output_bytes, output_sha256, settled_at, run_id, attempt_id),
-            )
-            if output_bytes > record.output_bytes_bound:
-                _block(
-                    connection, run_id, "FINAL_OUTPUT_EXCEEDS_RESERVATION", settled_at
-                )
-            return _required_reservation(connection, run_id, attempt_id)
-
-        return self._write(write)
+        return self._write(lambda connection: _settle_output_in_transaction(
+            connection, run_id=run_id, attempt_id=attempt_id, output_bytes=output_bytes,
+            output_sha256=output_sha256, settled_at=settled_at))
 
     def block_run(self, run_id: str, *, error_code: str, updated_at: str) -> RunRecord:
         _name(error_code, "error_code")

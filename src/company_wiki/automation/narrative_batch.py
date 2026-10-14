@@ -300,6 +300,12 @@ def _job_prompt_versions(jobs, manifests):
     }
 
 
+def _uses_distinct_job_prompts(manifests, default_prompt):
+    """Actual model versions belong to each job, not its request container."""
+    return any(manifest["execution_versions"]["prompt"] != default_prompt
+               for manifest in manifests.values())
+
+
 def _frozen_binding(request, binding, *, jobs=()):
     policies = {
         payload.item_key: payload.expected_read_policy_sha256
@@ -336,7 +342,9 @@ def _frozen_binding(request, binding, *, jobs=()):
             reused_artifact_pins=binding.reused_artifact_pins,
             normalization_config=binding.normalization_config,
         )
-    if request.schema_version == "narrative-batch-request/2":
+    if (request.schema_version == "narrative-batch-request/2"
+            or _uses_distinct_job_prompts(binding.generation_manifests,
+                frozen["execution_versions"]["prompt"])):
         frozen["job_prompt_versions"] = _job_prompt_versions(
             jobs, binding.generation_manifests
         )
@@ -636,6 +644,10 @@ def _resume_binding(
             or canonical_json_hash(list(sorted(run.job_ids))) != run.scope_sha256
         ):
             raise BatchResumeError("BATCH_FROZEN_MEMBERSHIP_INVALID")
+        if ("job_prompt_versions" in frozen
+                or _uses_distinct_job_prompts(manifests, versions["prompt"])):
+            if frozen.get("job_prompt_versions") != _job_prompt_versions(jobs, manifests):
+                raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
         event_ids = {job.created_from_event_id for job in jobs}
         events = tuple(store.get_event(event_id) for event_id in sorted(event_ids))
         if len(events) != len(request.work_items) - len(pins) or any(

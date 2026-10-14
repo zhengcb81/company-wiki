@@ -99,8 +99,12 @@ def _parse(
 
 
 def _by_locator(document):
+    return _index_units(document.units)
+
+
+def _index_units(units):
     index = {}
-    for unit in document.units:
+    for unit in units:
         locator = unit.metadata["source_locator"]
         if locator in index:
             raise ReplayError("ambiguous normalized source locator")
@@ -238,12 +242,33 @@ def replay_evidence_spans(
         ocr_limits=ocr_limits,
         locators=[s.structured_value.get("source_locator") for s in spans],
     )
-    index = _by_locator(document)
+    return verify_parsed_evidence_spans(
+        document.units, source_id=source_id, evidence_spans=spans
+    )
+
+
+def verify_parsed_evidence_spans(units, *, source_id, evidence_spans) -> int:
+    """Prove selected normalized spans against this already parsed source.
+
+    The caller owns verified bytes and parsing. This pure matching port is
+    shared by initial selection and later original replay; it never opens,
+    reparses, downloads or enriches a document.
+    """
+    spans = tuple(evidence_spans)
+    if not spans:
+        raise ReplayError("replay requires at least one evidence span")
+    index = _index_units(units)
     for span in spans:
+        if not isinstance(span.structured_value, Mapping):
+            raise ReplayError("selected span requires normalized source metadata")
         metadata = _plain(span.structured_value)
         candidate = index.get(metadata.get("source_locator"))
         if (
             candidate is None
+            or (span.source_id, span.parser_name, span.parser_version)
+            != (source_id, PARSER_NAME, candidate.parser_version)
+            or candidate.source_id != source_id
+            or candidate.parser_name != PARSER_NAME
             or span.raw_text != candidate.raw_text
             or span.coordinates != candidate.coordinates
             or set(span.quality_flags) != set(candidate.quality_flags)
@@ -262,4 +287,4 @@ def replay_evidence_spans(
     return len(spans)
 
 
-__all__ = ["replay_unit", "replay_units", "replay_evidence_spans"]
+__all__ = ["replay_unit", "replay_units", "replay_evidence_spans", "verify_parsed_evidence_spans"]

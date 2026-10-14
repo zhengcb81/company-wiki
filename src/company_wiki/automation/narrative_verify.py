@@ -45,7 +45,6 @@ from .narrative_contracts import (
     PromptReviewValue,
     SourceRevisionEventPayload,
 )
-from .narrative_model import NARRATIVE_PROMPT_VERSION, PROJECTION_NARRATIVE_PROMPT_VERSION
 from .narrative_official_json import OfficialProjectionAdapterError, open_verified_projection
 from .narrative_replay import (
     NarrativeReplayError,
@@ -145,6 +144,7 @@ def _validate_dependency_identity(
     summary: NarrativeSummaryResult,
     normalization=None,
     *, selector_version: str,
+    reading_projection_version: str | None = None,
 ) -> None:
     if (
         selected.subject != payload.subject
@@ -164,7 +164,8 @@ def _validate_dependency_identity(
             normalization=normalization, parser_version=selected.parser.version,
         )
         parser_current = selected.parser.name == parser_name and selected.parser.version == parser_version
-    active_prompt = PROJECTION_NARRATIVE_PROMPT_VERSION if projected else NARRATIVE_PROMPT_VERSION
+    from .narrative_model import resolve_model_boundary
+    active_prompt = resolve_model_boundary(reading_projection_version, projected=projected).prompt_version
     if (
         not parser_current
         or selected.selector.name != NARRATIVE_SELECTOR_NAME
@@ -189,6 +190,7 @@ class NarrativeVerifyHandler:
         projection_catalog: Any | None = None,
         generation_sha256: Callable[[NarrativeSubject], str] | None = None,
         selector_version: str | None = None,
+        reading_model_projection: Callable[[NarrativeSubject], str | None] | None = None,
     ) -> None:
         self._selector_version = resolve_narrative_selector_version(selector_version)
         self._reader = reader
@@ -196,6 +198,7 @@ class NarrativeVerifyHandler:
         self._normalization = normalization or NarrativeNormalization()
         self._projection_catalog = projection_catalog
         self._generation_sha256 = generation_sha256
+        self._reading_model_projection = reading_model_projection
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
@@ -230,7 +233,9 @@ class NarrativeVerifyHandler:
         payload = self._payload(context)
         selected, summary = _dependencies(context)
         _validate_dependency_identity(payload, selected, summary, self._normalization,
-            selector_version=self._selector_version)
+            selector_version=self._selector_version,
+            reading_projection_version=self._reading_model_projection(selected.subject)
+                if self._reading_model_projection is not None else None)
         if payload.subject.kind == "official_json":
             return self._execute_projection(context, payload, selected, summary)
         ref = source_ref(payload)

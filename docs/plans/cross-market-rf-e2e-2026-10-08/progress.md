@@ -1,6 +1,6 @@
 ## ROOT共享阅读当前进展 — 2026-10-14 DU3实收工程发布
 
-三DU3与工程修复已实收：68/36/128/82/143项相关PASS，真实原文原三25/25、新三11/12（业务11/11；原分红漏项保留），正式离线恢复/无效摘要诊断PASS。真实供应商质量开放：MiMo SUMMARY_INVALID，DeepSeek-HK0POST被全份opaque门拒，MM-US西语且JSON无效。534629tokens/364387µUSD含FX/旧unknown，默认0.8；优先片段可用性、失败输出额度、source-owned模型输出及类型/解析共因。CWP正常发布中；详见 ../document-understanding-2026-10-13/task_plan.md，不关闭母G2/G4/G5/公司循环。
+三DU3已发布，CWP84abc55e精确CI SUCCESS；新共同根因工程已212Unit/7生产E2E/4旧恢复E2E与跨仓离线PASS、SOURCE STOP，正常发布中。原件/配置/Temp恢复，失败输出额度结清但费用不退，None/v1旧bytes与Ref保持；实际语言/资源因果、partial和rawjobprompt已接线。母534629tokens/364387µUSD含FX/unknown，本窗口0新付费，默认0.8；真实供应商质量、类型共因、并发/默认切换/母G2/G4/G5/公司循环仍开放。详见 ../document-understanding-2026-10-13/task_plan.md。
 
 ## ROOT主线与独立施工 — 2026-10-14
 

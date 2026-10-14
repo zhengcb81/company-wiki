@@ -15,6 +15,11 @@ def response_draft(data):
                   else "analyst_question" if role in {"analyst", "investor_question"}
                   else "uncertain")
     review = claim_type == "uncertain" or "locator_unstable" in flags
+    if data["schema_version"] == "narrative-model-request/3":
+        return {"draft": {"claims": [{"claim_id": "claim-001", "text": row[1][:200],
+            "evidence_ids": [row[0]], "claim_type": claim_type,
+            "modality": "question" if claim_type == "analyst_question" else "uncertain",
+            "needs_review": review}]}}
     return {"draft": {
         "source_id": data["source"]["source_id"],
         "source_sha256": data["source"]["source_sha256"],

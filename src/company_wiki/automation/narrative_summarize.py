@@ -4,6 +4,10 @@ from __future__ import annotations
 
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+import hashlib
+from importlib.metadata import PackageNotFoundError, version
+import logging
+from pathlib import Path
 from typing import Any
 from company_wiki.narrative_subject import NarrativeSubject
 
@@ -30,11 +34,62 @@ from .narrative_model import (
     NarrativeModel,
     NarrativeModelRequest,
     NarrativeModelResponse,
+    SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION,
     decode_model_draft,
 )
 from .narrative_http_model import ModelHTTPError
 from .narrative_failed_final import fit_failed_final_result
 from .narrative_model_caller import NarrativeBudgetCallError, NarrativeModelCaller
+
+
+def reading_summary_validation_identity() -> dict[str, Any]:
+    """Freeze this summary boundary separately from the model's JSON decoder.
+
+    Only v2 consumes the observer. Old None/v1 generations retain their exact
+    identity and wire. Paths and line endings are installation details.
+    """
+    from . import narrative_output_language as observer
+
+    try:
+        detector = "py3langid/" + version("py3langid")
+    except PackageNotFoundError:
+        detector = "py3langid/unavailable"
+    return {
+        "schema_version": "narrative-summary-validation/2",
+        "summary_handler_sha256": hashlib.sha256(
+            Path(__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest(),
+        "observer_sha256": hashlib.sha256(
+            Path(observer.__file__).read_bytes().replace(b"\r\n", b"\n")).hexdigest(),
+        "detector_distribution": detector,
+        "language_observer": observer.language_observer_identity(),
+    }
+
+
+def _observe_output_language(
+    result: NarrativeSummaryResult, selected: NarrativeSelectResult,
+) -> NarrativeSummaryResult:
+    """Observe canonical claims against their own citations, without translating."""
+    from .narrative_output_language import observe_summary_language
+
+    assert result.draft is not None
+    observation = observe_summary_language(result.draft.claims,
+        evidence_spans=selected.evidence_spans)
+    if observation.state == "different":
+        raise _SummaryFailure("SUMMARY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
+            "model prose differs from its cited original language (rule=OUTPUT_LANGUAGE)")
+    if observation.state in {"uncertain", "unavailable"}:
+        # Existing quality metadata remains consumable without any human permit.
+        # Never log excerpts or presume English when an observer abstains.
+        logging.getLogger(__name__).warning(
+            "SUMMARY_LANGUAGE_UNCERTAIN" if observation.state == "uncertain"
+            else "SUMMARY_LANGUAGE_UNAVAILABLE")
+        wire = result.to_dict()
+        wire["draft"]["status"] = "needs_review"
+        for claim in wire["draft"]["claims"]:
+            claim["needs_review"] = True
+        result = NarrativeSummaryResult.from_dict(wire)
+        result.validate_against(selected)
+    return result
 
 
 @dataclass(frozen=True)
@@ -295,9 +350,12 @@ class NarrativeSummarizeHandler:
                 "narrative model is not configured",
             )
         review = selected.prompt_review
+        reading_projection_version = (
+            self._reading_model_projection(selected.subject)
+            if self._reading_model_projection is not None else None
+        )
         request = NarrativeModelRequest.from_selection(selected,
-            reading_projection_version=self._reading_model_projection(selected.subject)
-            if self._reading_model_projection is not None else None)
+            reading_projection_version=reading_projection_version)
         context.checkpoint()
         if self._model_caller is not None:
             response, metrics = self._model_caller.generate(context, request)
@@ -307,7 +365,8 @@ class NarrativeSummarizeHandler:
             metrics = HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0)
         context.checkpoint()
         try:
-            completed = self._completed_result(selected, review, response)
+            completed = self._completed_result(selected, review, response,
+                reading_projection_version=reading_projection_version)
         except _SummaryFailure as exc:
             return _post_model_failure(response, metrics, exc.code, exc.outcome, exc.detail)
         except ModelResponseError as exc:
@@ -371,9 +430,11 @@ class NarrativeSummarizeHandler:
         selected: NarrativeSelectResult,
         review: PromptReviewValue,
         response: NarrativeModelResponse,
+        *, reading_projection_version: str | None = None,
     ) -> NarrativeSummaryResult:
         try:
-            draft = decode_model_draft(response, selected=selected)
+            draft = decode_model_draft(response, selected=selected,
+                reading_projection_version=reading_projection_version)
         except ModelCitationError as exc:
             raise _SummaryFailure("SUMMARY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
                                   "model draft cites evidence outside its selection "
@@ -403,6 +464,8 @@ class NarrativeSummarizeHandler:
         try:
             result = NarrativeSummaryResult.from_dict(raw)
             result.validate_against(selected)
+            if reading_projection_version == SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION:
+                result = _observe_output_language(result, selected)
             return result
         except ContractSizeError as exc:
             raise _SummaryFailure(
