@@ -216,6 +216,28 @@ Both are now covered by counter-examples (`test_the_manifest_validation_pass_is_
 `test_decision_digest_refuses_rows_that_are_not_mappings`,
 `test_a_manifest_scope_row_with_a_wrong_typed_field_is_unavailable`).
 
+### Final pass
+
+The adversarial reviewer's last verdict: **good to hand to ROOT** -- R1-R4 closed by
+reproduction, no regression, no new defect, and cross-version compatible (a manifest built
+by the previous commit verifies under the current compare, and losing participants are
+still caught through an old record). All three digest/import mutants remain killed.
+
+It left two observations, both conservative and inside the documented contract. Both are
+now fixed rather than handed on:
+
+* *Compare was a stricter gate than freeze.* Each row was byte-charged on three passes
+  (validation, index, diff), so a domain that froze `complete` could still never compare
+  `same` -- a 456 KB trace froze complete yet compare returned `unavailable`. Rows are now
+  byte-measured **once**, in the validation pass; the index and diff passes charge work
+  only. Freeze and compare now agree: a 260 KB domain freezes `complete` and compares
+  `same`, and the boundary is where freeze itself stops.
+* *Two wording paths.* A budget stop was described as "while diffing" even when it
+  happened during validation, and a stop inside the digest recompute surfaced as
+  `FROZEN_NOT_A_DECISION_MANIFEST`. Both now report the budget reason.
+
+Pinned by `test_a_domain_that_freezes_complete_also_compares_same_at_the_same_limits`.
+
 ### Measured effect of the fixes
 
 Every line below is a re-run of the reviewer's own reproduction, not a paraphrase.

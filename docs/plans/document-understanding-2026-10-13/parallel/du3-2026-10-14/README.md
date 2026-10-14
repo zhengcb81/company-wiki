@@ -1,6 +1,6 @@
 # DU3 三条独立施工线 — 2026-10-14
 
-ROOT继续主线Phase A：source_catalog候选/预算/最终选择、DU orchestration/selection_bridge/summary_input；随后正式AUTO接线。以下三线只交付各自排他模块与测试，现在可开始，不等待ROOT实现或彼此交付。
+ROOT继续主线Phase A：source_catalog候选/预算/最终选择、DU orchestration/selection_bridge/summary_input；随后正式AUTO接线。以下三线已交付并由ROOT实收；不再启动或重发原卡。作者树只读保留，ROOT负责最终生产质量与发布。
 
 | 卡 | 独立工作目录（同CWP的不同稀疏worktree） | 排他代码目录 |
 |---|---|---|
@@ -18,4 +18,4 @@ ROOT接收顺序：DEPENDENCIES→GEOMETRY→QUALITY（只是最终接线次序�
 
 ## 已准备的启动基线
 
-三工作树已实际创建，共同base `195aba20b0aecc2d661d7d04c5ba72f982bc02d0`；各自约15.52MB，合计约46.56MB，只检出代码/测试/相关文档，没有companies/原件/数据库复制。三份独立PWF已放各自`.planning/du3-<lane>/`。清单见[worktrees.json](worktrees.json)，当前READY_NOT_STARTED。
+三工作树已实际创建，共同base `195aba20b0aecc2d661d7d04c5ba72f982bc02d0`；各自约15.52MB，合计约46.56MB，只检出代码/测试/相关文档，没有companies/原件/数据库复制。三份独立PWF已放各自`.planning/du3-<lane>/`。清单见[worktrees.json](worktrees.json)，当前已实收：QUALITY dcde9aae；GEOMETRY a8cc604d；DEPENDENCIES ef59a574（含282aee36补交，ROOT138 PASS）。作者树干净；主线发布状态以统一PWF为准。

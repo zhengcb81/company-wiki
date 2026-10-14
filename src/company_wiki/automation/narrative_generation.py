@@ -26,6 +26,23 @@ from .narrative_transport_contracts import NarrativeReadRequest, EXPECTED_SOURCE
 from .narrative_verify import BUNDLE_PRODUCER_VERSION
 from .narrative_selection_generation import reading_material_sha256, validate_selection_generation
 
+READING_PROJECTION_UNSET = object()
+
+
+def _bind_reading_projection(manifest, versions, reading_model_projection):
+    if reading_model_projection is READING_PROJECTION_UNSET:
+        from .narrative_model import READING_MODEL_PROJECTION_VERSION
+        reading_model_projection = (READING_MODEL_PROJECTION_VERSION
+                                    if versions.get("selector") == "0.9.0" else None)
+    if reading_model_projection is not None:
+        # Historical identities can retain a future/retired software version.
+        # Executability is checked by the model boundary before any new POST.
+        if (not isinstance(reading_model_projection, str) or not reading_model_projection
+                or reading_model_projection.strip() != reading_model_projection
+                or len(reading_model_projection) > 256):
+            raise ValueError("invalid reading model projection identity")
+        manifest["reading_model_projection"] = reading_model_projection
+
 
 def _effective_optional_generation(options: Mapping[str, Any]) -> dict[str, Any]:
     """Match HTTP omission rules without resigning existing omitted identities."""
@@ -37,7 +54,8 @@ def _effective_optional_generation(options: Mapping[str, Any]) -> dict[str, Any]
 
 
 def generation_manifest(
-    request, payload, *, execution_versions, parser_components=None
+    request, payload, *, execution_versions, parser_components=None,
+    reading_model_projection=READING_PROJECTION_UNSET,
 ):
     """Bind only this source's causal inputs; component fingerprints are pathless.
 
@@ -90,6 +108,7 @@ def generation_manifest(
 
         assert_no_physical_paths(parser_components)
         result["parser_components"] = json.loads(json.dumps(parser_components))
+    _bind_reading_projection(result, versions, reading_model_projection)
     return result
 
 
@@ -227,6 +246,7 @@ def projection_generation_manifest(
     bundle_producer: str,
     narrative_adapter_version: str,
     source_metadata: Mapping[str, Any] | None = None,
+    reading_model_projection: Any = READING_PROJECTION_UNSET,
 ) -> dict[str, Any]:
     """Bind one official projection's semantic generation inputs.
 
@@ -314,6 +334,7 @@ def projection_generation_manifest(
         if metadata["language"] != language:
             raise ValueError("projection generation metadata language differs")
         result["source_metadata"] = metadata
+    _bind_reading_projection(result, versions, reading_model_projection)
     return _projection_identity_json(result)
 
 

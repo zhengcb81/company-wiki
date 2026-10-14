@@ -90,10 +90,10 @@ mypy skipped、config doctor skipped、host-assumption-guard Passed）。
 
 | 节点 | 命令 | exit | 耗时 | 结果 |
 |---|---|---:|---:|---|
-| A | pytest test_a_completeness_honesty.py + test_a_mutation_matrix.py | 0 | 2.765s | 55 passed in 0.34s |
-| B | pytest test_b_engineering.py | 0 | 3.941s | 63 passed in 1.60s |
-| C | pytest test_c_catalog_replay.py | 0 | 2.569s | 19 passed in 0.30s |
-| ALL | pytest tests/unit/document_understanding_decision_dependencies | 0 | 4.086s | 137 passed in 1.82s |
+| A | pytest test_a_completeness_honesty.py + test_a_mutation_matrix.py | 0 | 2.743s | 55 passed in 0.32s |
+| B | pytest test_b_engineering.py | 0 | 4.154s | 64 passed in 1.84s |
+| C | pytest test_c_catalog_replay.py | 0 | 2.557s | 19 passed in 0.28s |
+| ALL | pytest tests/unit/document_understanding_decision_dependencies | 0 | 5.337s | 138 passed in 2.79s |
 
 **A 先 RED 后实现**：实现前跑同一组测试得 `51 failed in 1.80s`，根因 `ModuleNotFoundError:
 No module named 'company_wiki.document_understanding.decision_dependencies'`，收据
@@ -170,8 +170,8 @@ ROOT 正式 trace。
 - 临时目录只有 pytest `tmp_path`；无下载/截图/db/新数据库；无安装动作；无授权/签收/canary
   文件。
 - 测试运行同时跑了既有五个 DU 单元包（root/profiles/selection/structure/layout_hints）作
-  回归：`496 passed, 17 skipped`（11.85s），无回归；加上本 lane 自己的 137 项，合并
-  `633 passed, 17 skipped`。
+  回归：`496 passed, 17 skipped`（11.85s），无回归；加上本 lane 自己的 138 项，合并
+  `634 passed, 17 skipped`。
 
 ## 九、独立审查与修复
 

@@ -34,7 +34,7 @@ from .narrative_contracts import (
     SourceRevisionEventPayload,
 )
 from .narrative_model import FailedFinalDiagnostic, NARRATIVE_PROMPT_VERSION
-from .narrative_generation import generation_manifest, projection_generation_manifest, generation_sha256, find_reuse_pin, read_reuse_pin
+from .narrative_generation import generation_manifest, projection_generation_manifest, generation_sha256, find_reuse_pin, read_reuse_pin, READING_PROJECTION_UNSET
 from .narrative_official_json import open_verified_projection
 from .narrative_verify import BUNDLE_PRODUCER_VERSION
 from .narrative_formats import source_class_for
@@ -49,7 +49,7 @@ from .narrative_verify import EFFECT_TYPE
 from .policy import PolicyConfig
 from .registry import create_default_registry
 from .scheduler import AutomationScheduler
-from .store import AutomationStore
+from .store import AutomationStore, RuntimeGateClosedError
 from .supervisor import AutomationSupervisor, SupervisorConfig, profile_slots
 from .terminal_receipt_contracts import FinalArtifactPin
 from .terminal_receipts import compact_terminal_narrative_jobs
@@ -259,6 +259,37 @@ def _execution_versions(request):
     registry = create_default_registry()
     return {**request.execution_versions,
             "handlers": {kind: registry.get(kind).handler_version for kind in _NARRATIVE_JOB_TYPES}}
+
+
+def _effective_execution_versions(request, frozen_versions=None, *, require_available=False):
+    """Resolve the run's execution once; a changed default is not new intent.
+
+    Frozen history supplies metadata and generation locks even when it only
+    needs a public read. Unfinished execution additionally requires its real
+    implementations. Only an omitted selector can retain a supported old
+    policy; all other components must still match the installed runtime.
+    """
+    current = _execution_versions(request)
+    if frozen_versions is None:
+        return current
+    if require_available:
+        if request.selector_version is None:
+            from company_wiki.source_catalog.narrative_evidence import (
+                NarrativeSelectorVersionError,
+                resolve_narrative_selector_version,
+            )
+
+            try:
+                current["selector"] = resolve_narrative_selector_version(
+                    frozen_versions.get("selector")
+                )
+            except NarrativeSelectorVersionError as exc:
+                raise BatchResumeError(
+                    "BATCH_EXECUTION_VERSION_UNAVAILABLE_NEW_RUN_REQUIRED"
+                ) from exc
+        if frozen_versions != current:
+            raise BatchResumeError("BATCH_EXECUTION_VERSION_UNAVAILABLE_NEW_RUN_REQUIRED")
+    return frozen_versions
 
 
 def _job_prompt_versions(jobs, manifests):
@@ -674,6 +705,7 @@ def _resume_binding(
                     payload,
                     execution_versions=versions,
                     parser_components=manifest.get("parser_components"),
+                    reading_model_projection=manifest.get("reading_model_projection"),
                 )
                 # Preserve frozen parser/producer interpretation on completed
                 # history. The public reader must explicitly replay that version.
@@ -740,7 +772,8 @@ def _projection_loader(catalog):
     return load
 
 
-def _item_generation(request, payload, *, normalization=None, versions=None):
+def _item_generation(request, payload, *, normalization=None, versions=None,
+                     reading_model_projection=READING_PROJECTION_UNSET):
     versions = versions or _execution_versions(request)
     if payload.subject.kind == "raw":
         raw_versions = {
@@ -762,6 +795,7 @@ def _item_generation(request, payload, *, normalization=None, versions=None):
             and payload.source_ref.mime_type == PPTX_MIME
             and payload.source_metadata.source_class == "filing"
             else None,
+            reading_model_projection=reading_model_projection,
         )
     projected_versions = {k: versions[k] for k in ("adapter", "selector", "handlers")}
     projected_versions.update(
@@ -776,6 +810,7 @@ def _item_generation(request, payload, *, normalization=None, versions=None):
         bundle_producer=BUNDLE_PRODUCER_VERSION,
         narrative_adapter_version=versions["official_json_adapter"],
         source_metadata=payload.source_metadata.to_dict(),
+        reading_model_projection=reading_model_projection,
     )
 
 
@@ -903,6 +938,7 @@ def _resume_item_binding(
                     frozen.get("normalization_config"), deadline=deadline
                 ),
                 versions=versions,
+                reading_model_projection=manifest.get("reading_model_projection"),
             )
             for field in ("parser_component", "bundle_producer", "material_extractor"):
                 if field in manifest:
@@ -1255,8 +1291,12 @@ def _run_owned(
         if db_path.is_file()
         else None
     )
-    if previous is not None and previous.binding_json is not None:
-        frozen = json.loads(previous.binding_json)
+    frozen = (
+        json.loads(previous.binding_json)
+        if previous is not None and previous.binding_json is not None
+        else None
+    )
+    if frozen is not None:
         normalization = NarrativeNormalization.from_snapshot(
             frozen.get("normalization_config"), deadline=deadline
         )
@@ -1273,15 +1313,14 @@ def _run_owned(
         normalization=normalization,
         projection_catalog=catalog,
     )
-    read_versions = (
-        json.loads(previous.binding_json).get("execution_versions", {})
-        if previous is not None and previous.binding_json is not None
-        else request.execution_versions
+    effective_versions = _effective_execution_versions(
+        request,
+        frozen.get("execution_versions", {}) if frozen is not None else None,
     )
     for payload in prepared_sources[0]:
         _check_preparation_deadline(deadline)
         if (payload.subject.kind == "official_json"
-                or read_versions.get("selector") == "0.9.0"):
+                or effective_versions.get("selector") == "0.9.0"):
             # The actual select/public-read owner verifies source bytes. Avoid
             # reading them here too; metadata admission was checked above.
             continue
@@ -1298,9 +1337,9 @@ def _run_owned(
         )
         _check_preparation_deadline(deadline)
     _check_preparation_deadline(deadline)
-    manifests = {
+    manifests = _thaw_generations(frozen) if frozen is not None and "generation_settings" in frozen else {
         payload.item_key: _item_generation(
-            request, payload, normalization=normalization
+            request, payload, normalization=normalization, versions=effective_versions
         )
         for payload in prepared_sources[0]
     }
@@ -1331,6 +1370,7 @@ def _run_owned(
             prepared_sources=prepared_sources,
             manifests=manifests,
             normalization=normalization,
+            effective_versions=effective_versions,
         )
 
 
@@ -1346,12 +1386,13 @@ def _run_prepared(
     prepared_sources,
     manifests,
     normalization,
+    effective_versions,
 ):
     reader = SourceVersionReader(catalog)
     store = AutomationStore(db_path) if db_path.exists() else None
     runs = NarrativeRunStore(db_path) if store is not None else None
     previous = runs.get_run(request.run_id) if runs is not None else None
-    versions = None
+    versions = effective_versions
     current_jobs: tuple[Job, ...] = ()
     if previous is not None:
         binding, versions, current_jobs = _resume_binding(
@@ -1478,8 +1519,8 @@ def _run_prepared(
             if previous.blocked:
                 status = _blocked_status(previous)
             return _receipt(previous.run_id, status, documents, runs, guard)
-    if previous is not None and versions != _execution_versions(request):
-        raise BatchResumeError("BATCH_EXECUTION_VERSION_UNAVAILABLE_NEW_RUN_REQUIRED")
+    if previous is not None:
+        _effective_execution_versions(request, versions, require_available=True)
     if previous is not None and store.has_running_jobs_outside_scope(previous.job_ids):
         raise ValueError("AUTOMATION_FOREIGN_WORKER_ACTIVE")
     status = "partial"
@@ -1618,7 +1659,7 @@ def _run_prepared(
                         "max_final_bytes": request.max_final_bytes,
                         "normalization_config": binding.normalization_config,
                         "normalization_parsers": _normalization_parsers(
-                            binding, versions or _execution_versions(request)
+                            binding, versions
                         ),
                         "normalization_deadline": deadline,
                     }
@@ -1719,7 +1760,10 @@ def _run_prepared(
                     status = "budget_exhausted"
                 break
             time.sleep(0.05)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, RuntimeGateClosedError):
+        # Pause/cancel may occur after the loop's gate snapshot but before a
+        # dispatcher write. It is normal control flow; keep pending work and
+        # accounting, stop children in finally, and resume the frozen run.
         status = "paused"
     except ValueError as exc:
         if str(exc) not in {

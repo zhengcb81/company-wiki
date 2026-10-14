@@ -15,7 +15,6 @@ from company_wiki.automation.narrative_run_store import NarrativeRunStore
 from company_wiki.source_catalog.narrative_artifact_store import (
     LocalNarrativeObjectStore, NarrativeArtifactStore,
 )
-from company_wiki.source_catalog.narrative_evidence import NARRATIVE_PARSER_VERSION, NARRATIVE_SELECTOR_VERSION
 from integration import test_narrative_batch_cli_e2e as cli_fixtures
 from support import narrative_batch_fixtures as batch_fixtures
 
@@ -25,26 +24,45 @@ protected_inputs = cli_fixtures.r6_protected_inputs
 REPO = Path(__file__).resolve().parents[2]
 
 
-def _upgrade_launcher(root, monkeypatch, version_kind):
+def _upgrade_launcher(root, monkeypatch, version_kind, version):
     bootstrap = root / "upgrade-bootstrap"
-    bootstrap.mkdir()
+    bootstrap.mkdir(exist_ok=True)
     (bootstrap / "sitecustomize.py").write_text('''
+import json
 import os
+from pathlib import Path
+import sys
 from company_wiki.source_catalog import narrative_evidence
-from company_wiki.automation import narrative_batch_request, narrative_select
+from company_wiki.automation import narrative_batch_request, narrative_select, narrative_formats
+kind = os.environ["CWP_N6_TEST_UPGRADE_KIND"]
+version = os.environ["CWP_N6_TEST_UPGRADE_VERSION"]
 for module in (narrative_evidence, narrative_batch_request, narrative_select):
-    setattr(module, "NARRATIVE_" + os.environ["CWP_N6_TEST_UPGRADE_KIND"].upper() + "_VERSION",
-            os.environ["CWP_N6_TEST_UPGRADE_VERSION"])
+    setattr(module, "NARRATIVE_" + kind.upper() + "_VERSION", version)
+if kind == "parser":
+    # Use an actually supported legacy/current parser parameter, including the
+    # format identity owner; no fabricated parser callback or version marker.
+    narrative_formats.NARRATIVE_PARSER_VERSION = version
+    parser = narrative_evidence.parse_pdf_bytes
+    parser.__kwdefaults__["parser_version"] = version
+    def observed_parse(frame, event, result):
+        if frame.f_code is parser.__code__ and event == "return" and result is not None:
+            record = {"requested": version, "received": frame.f_locals["parser_version"],
+                      "unit_versions": sorted({unit.parser_version for unit in result.units}),
+                      "pages_read": result.pages_read, "pages_total": result.page_count}
+            with Path(os.environ["CWP_N6_PARSER_TRACE"]).open("a", encoding="utf-8") as stream:
+                stream.write(json.dumps(record) + "\\n")
+    sys.setprofile(observed_parse)
 ''', encoding="utf-8")
     launcher = root / "upgrade.py"
     launcher.write_text('''
 import os
 from pathlib import Path
+import runpy
 import sys
 bootstrap = str(Path(__file__).parent / "upgrade-bootstrap")
 sys.path.insert(0, bootstrap)
 os.environ["PYTHONPATH"] = bootstrap + os.pathsep + os.environ["PYTHONPATH"]
-import sitecustomize
+runpy.run_path(str(Path(bootstrap) / "sitecustomize.py"))
 from company_wiki.automation.narrative_batch_cli import main
 if __name__ == "__main__":
     args = sys.argv[1:]
@@ -52,10 +70,9 @@ if __name__ == "__main__":
         args[args.index("--work-dir") + 1] = os.environ["CWP_N6_TEST_UPGRADE_WORK_DIR"]
     raise SystemExit(main(args))
 ''', encoding="utf-8")
-    current = NARRATIVE_PARSER_VERSION if version_kind == "parser" else NARRATIVE_SELECTOR_VERSION
-    version = current + ".n6-test-next"
     monkeypatch.setenv("CWP_N6_TEST_UPGRADE_KIND", version_kind)
     monkeypatch.setenv("CWP_N6_TEST_UPGRADE_VERSION", version)
+    monkeypatch.setenv("CWP_N6_PARSER_TRACE", str(root / "actual-parser-calls.jsonl"))
     return launcher, version
 
 
@@ -71,7 +88,13 @@ def test_real_batches_keep_old_generation_and_create_separate_upgraded_jobs(
         state = cli_fixtures._prepare(root, loopback_model_server.endpoint)
         try:
             originals = cli_fixtures._originals(state)
-            first_process, first = cli_fixtures._invoke(state)
+            old_version, upgraded_version = {
+                "selector": ("0.8.0", "0.9.0"),
+                "parser": ("0.1.0", "0.1.1"),
+            }[version_kind]
+            assert all(ref.mime_type == "application/pdf" for ref, _language, _kind in state.indexed.values())
+            old_launcher, _ = _upgrade_launcher(root, monkeypatch, version_kind, old_version)
+            first_process, first = cli_fixtures._invoke(state, launcher=old_launcher)
             assert first_process.returncode == 0 and first["status"] == "completed"
             assert len(loopback_model_server.requests) == 0 and loopback_model_server.errors == []
             runs = NarrativeRunStore(state.store.db_path)
@@ -95,12 +118,13 @@ def test_real_batches_keep_old_generation_and_create_separate_upgraded_jobs(
                 },
             })
             old_bytes = transport.read(request).data
-            original_version = NARRATIVE_PARSER_VERSION if version_kind == "parser" else NARRATIVE_SELECTOR_VERSION
-            assert json.loads(old_bytes)["versions"][version_kind] == original_version
+            assert json.loads(old_bytes)["versions"][version_kind] == old_version
             jobs_before = tuple(state.store.list_jobs())
-            launcher, upgraded_version = _upgrade_launcher(root, monkeypatch, version_kind)
-            rejected_process, rejected = cli_fixtures._invoke(state, launcher=launcher)
-            assert rejected_process.returncode != 0 and rejected["status"] == "failed"
+            launcher, upgraded_version = _upgrade_launcher(root, monkeypatch, version_kind, upgraded_version)
+            historical_process, historical = cli_fixtures._invoke(state, launcher=launcher)
+            assert historical_process.returncode == 0 and historical["status"] == "completed"
+            assert historical["documents"] == first["documents"]
+            assert historical["budget"] == first["budget"]
             assert runs.get_run("cli-e2e") == old_run
             assert runs.budget_snapshot("cli-e2e") == old_budget
             assert tuple(state.store.list_jobs()) == jobs_before
@@ -137,8 +161,14 @@ def test_real_batches_keep_old_generation_and_create_separate_upgraded_jobs(
             assert repeat["budget"] == next_result["budget"] == first["budget"]
             assert tuple(state.store.list_jobs()) == after_jobs
             assert len(loopback_model_server.requests) == 0 and loopback_model_server.errors == []
+            if version_kind == "parser":
+                observations = [json.loads(line) for line in (root / "actual-parser-calls.jsonl").read_text(encoding="utf-8").splitlines()]
+                assert {row["received"] for row in observations} == {old_version, upgraded_version}
+                assert all(row["received"] == row["requested"] for row in observations)
+                assert all(row["unit_versions"] == [row["received"]] for row in observations)
+                assert all(row["pages_read"] == row["pages_total"] == 1 for row in observations)
             batch_fixtures.assert_originals_and_foreign_jobs_untouched(
-                state, originals, output=first_process.stdout + rejected_process.stdout
+                state, originals, output=first_process.stdout + historical_process.stdout
                 + next_process.stdout + repeat_process.stdout,
             )
         finally:

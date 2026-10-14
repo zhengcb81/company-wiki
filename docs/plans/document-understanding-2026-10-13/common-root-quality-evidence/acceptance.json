@@ -1,0 +1,197 @@
+{
+  "schema_version": "root-common-quality-evidence/1",
+  "scope": "DU3 component reception and shared A/B repairs; C remains in progress",
+  "component_results": {
+    "dependencies": 138,
+    "named_segments": 161,
+    "table_rows": 286,
+    "causal_inventory": 41,
+    "frozen_default_resume": 9,
+    "cli_json_boundary": 18
+  },
+  "original_development_recall": [
+    10,
+    7,
+    8
+  ],
+  "fresh_frozen_failure": [
+    3,
+    0,
+    2
+  ],
+  "fresh_frozen_required": [
+    5,
+    3,
+    4
+  ],
+  "literal_gold_correction_only": "Apple ASCII apostrophe→actual original U+2019; 12 targets/semantics unchanged",
+  "first_real_summary": "7 complete + 1 partial + 2 omitted; 4 own-citation gaps",
+  "known_new_usage": {
+    "tokens": 67004,
+    "budget_proxy_micro_usd": 11535,
+    "supplier_post": 1,
+    "invoice": false
+  },
+  "default_selector": "0.8.0",
+  "production_originals_or_config_modified": false,
+  "source_publication": "pending next ROOT node; no author-tree writes",
+  "entries": [
+    {
+      "entry": "recall-root/du3-dependencies-final-reception/result.json",
+      "sha256": "a043e83ff6fc4600df284363015c9e1a4e11619218bb5988f97509f81939899d",
+      "bytes": 260
+    },
+    {
+      "entry": "recall-root/du3-dependencies-final-reception/junit.xml",
+      "sha256": "4bde31aa5be71ad2a65776cc67c64f686c0b55ef794fca49082dd555a765b16f",
+      "bytes": 24605
+    },
+    {
+      "entry": "recall-root/du3-dependencies-final-reception/stdout.log",
+      "sha256": "e0fbec07b04611b0043f03efb086c2453fc204edde7351d196c3ab454d9e76ba",
+      "bytes": 1984
+    },
+    {
+      "entry": "recall-root/table-review/fix-handoff.md",
+      "sha256": "75f311c5b8c588529d131d03479b1d3f312354c7ec03521a68f4b707006882f3",
+      "bytes": 4778
+    },
+    {
+      "entry": "recall-root/table-review/pytest-fixed.json",
+      "sha256": "73c801ca533904902939feb10444ca87bf7005fa9952b77b6a966f8d8c0f7a56",
+      "bytes": 4012
+    },
+    {
+      "entry": "recall-root/table-review/pytest-fixed-junit.xml",
+      "sha256": "66461e7e43b1996a303bbab010359bc121b656dd9fd11632286e1454fc6c6473",
+      "bytes": 60958
+    },
+    {
+      "entry": "recall-root/table-review/report.md",
+      "sha256": "c1c533322fe544606b73ece5735f3368f18db78fee012197c0ec3452ff44d9e6",
+      "bytes": 5392
+    },
+    {
+      "entry": "recall-root/semantic-value/named-segment-handoff.md",
+      "sha256": "3af3e1185cfe624ac8f5ca3fef76501be947dd467899b914d691b9f76a5e175f",
+      "bytes": 3419
+    },
+    {
+      "entry": "recall-root/semantic-value/named-segment-final-node.json",
+      "sha256": "a1de64d81d3fb60e2e9f0eed8f592a01497cd683de82f001df26de657d685c19",
+      "bytes": 1097
+    },
+    {
+      "entry": "recall-root/semantic-value/named-segment-final-node.xml",
+      "sha256": "d9ca633eecc4fa3010ed497d8dd2f08cd24fee3db8b3828fbef4cae3cc0d826f",
+      "bytes": 40008
+    },
+    {
+      "entry": "recall-root/semantic-value/named-segment-red.xml",
+      "sha256": "f0899d5166e883d8053d85ff5cc94be00998898f668ee4ed0fba20140d3c29f5",
+      "bytes": 23713
+    },
+    {
+      "entry": "default-resume-root/source-stop-final.receipt.json",
+      "sha256": "694461135d0ee10e7dc9a23648514cf854bce16cf32a4ac627c3a4e7c4687e54",
+      "bytes": 1668
+    },
+    {
+      "entry": "default-resume-root/notes.md",
+      "sha256": "3bdc7ad1775f2ba12f07a16677649728ddbf5e914f8ee4d9900315975edd5137",
+      "bytes": 10544
+    },
+    {
+      "entry": "default-resume-root/supported-upgrade/junit.xml",
+      "sha256": "cc8b76509c02cbace8f3fd1c7883fc973ce981e2d126034ce52daacbffbe7a69",
+      "bytes": 1838
+    },
+    {
+      "entry": "recall-root/live-summary-review/cn-h1-quality-review.md",
+      "sha256": "4fbd7677b29492d747779343f3a02e10097d5433cd1caa6e912593bcc3e2851c",
+      "bytes": 10066
+    },
+    {
+      "entry": "recall-root/live-summary-review/cn-h1-quality-review.json",
+      "sha256": "8cc08645c3a14c72011d633c4fbda19d45ef63380d3e03f8675300f94870e32e",
+      "bytes": 13232
+    },
+    {
+      "entry": "recall-root/live-summary-review/cli-stdout-handoff.md",
+      "sha256": "e417bee9ae1c30d13d1c4fbcf4a3b5d8b21bbdb9beb5704cfe33bcda2eafe59d",
+      "bytes": 3651
+    },
+    {
+      "entry": "recall-root/live-summary-review/cli-stdout-final-node.json",
+      "sha256": "3ebf84435b6d318dd663c4839886bab13a528919e2d531e9434af14e8329cbe5",
+      "bytes": 586
+    },
+    {
+      "entry": "recall-root/live-summary-review/model-projection-design-review.md",
+      "sha256": "2fb0397f2747f3f83677a7e3b776745aecfb0c01520ecf454d2e57995e86d30d",
+      "bytes": 6910
+    },
+    {
+      "entry": "holdout-root/frozen-090/summary.json",
+      "sha256": "e26c928168cc553eddcd91860a12912afd62801528494031aefed2d6b568feb4",
+      "bytes": 3838
+    },
+    {
+      "entry": "holdout-root/fresh-hk-diagnosis/report.md",
+      "sha256": "4b1a22ec0b4e11e0fbcbc9faec1455081e9193d1d8a6d5f22b1bd76c979733f0",
+      "bytes": 13175
+    },
+    {
+      "entry": "holdout-root/fresh-hk-diagnosis/harness-failures.json",
+      "sha256": "03b3abfd81da2c31f8ba88a8002acc9ab548ebb5b130a524d9c9e83a1882a902",
+      "bytes": 1347
+    },
+    {
+      "entry": "holdout-root/fresh-hk-diagnosis/predicate-controls.json",
+      "sha256": "28c0bf05715c0ecc9686f68b1bf3ec917207f55226aa1e6d82434e032e9a64f4",
+      "bytes": 25188
+    },
+    {
+      "entry": "holdout-root/fresh-hk-diagnosis/cross-market-controls.json",
+      "sha256": "f949044ffaf030b88cb961fb4294aea831ce79e93727143d11a8c03f375e7093",
+      "bytes": 13377
+    },
+    {
+      "entry": "holdout-root/literal-correction/receipt.json",
+      "sha256": "1b5c6256a705a058c268077f4fa9387a783c2c540652fd68f86f69c8d89dec4e",
+      "bytes": 1208
+    },
+    {
+      "entry": "holdout-root/literal-correction/old-gold.json.gz",
+      "sha256": "543f98f29762426129b209cf3d9a70e0f633f2dc2f565e17fac55eb43c0f8f74",
+      "bytes": 2324
+    },
+    {
+      "entry": "recall-root/rf-aed-publication-ci.json",
+      "sha256": "6f3842c360f709a0f6985e3ed01f705d78e994d1f10944a799ff6a57305b09e2",
+      "bytes": 457
+    },
+    {
+      "entry": "root-errors.jsonl",
+      "sha256": "f9e224033fa27b82d04fe75ed4a6e736baab4426d28367d7c48bce259ccfd813",
+      "bytes": 556
+    },
+    {
+      "entry": "live/usage.jsonl",
+      "sha256": "41dc78d827da3006757cb1ee4ec207f1644295c6db60c2a9de449584d690968b",
+      "bytes": 1011
+    },
+    {
+      "entry": "live/owned-runner/receipts/live-20261014T175532-3a75e4/overall.json",
+      "sha256": "7db8ccf7a76ac1c7760c7c72a76fe1375af6b2ee0bc5709e132272d307339d48",
+      "bytes": 30594
+    },
+    {
+      "entry": "live/owned-runner/receipts/live-20261014T175532-3a75e4/phaseC-090-a6ef53b6228c-restart.stdout.json",
+      "sha256": "700fbaf80632cb4c4d20866d4cae61797e5e1ff1a773d479257558caa8798b5f",
+      "bytes": 1206
+    }
+  ],
+  "archive_bytes": 79960,
+  "archive_sha256": "a5f9b0170a6d9a5c7bddc12de1d489ea927772d0a16394a23fda7d5f00114d11"
+}

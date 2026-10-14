@@ -1,9 +1,23 @@
+## ROOT 冻结发布节点 — 2026-10-14
+
+三 DU3 已全部实收，DEPENDENCIES 补交 282aee36/ef59a574 已纳入暂存、138 PASS，作者树只读不变。SOURCE STOP 已覆盖所有 ROOT 子线；正常发布工程节点，正式默认仍0.8，真实质量尚未达标。
+
+源码因果版本：pipeline1.7、business-policy/5、table-purpose/3、source-script-match/1；唯一经营指标facet1.4同步源record与编译runtime，没有第二registry。简繁只作用于匹配，原文/ID/locator不改；混合表只保留实际经营行与必要上下文。264相关PASS＋新55/20Kcase共56PASS。实测同20K用例38.668→15.95s；2000 facts结果SHA逐项不变，宽正则seed快路是主因，固定配置词4096条/256字符有界缓存为次因，原文不缓存。
+
+正式模型由已冻 scalar reading_model_projection=reading-model-input/1选择一个语义视图；仅missing表示legacy，present-null/未知不能误降级。旧0.8及旧unfinished原指令/输入保持，new generation因果不同，same/cross0POST；真实暂停竞态统一作为paused正常控制处理。相关111PASS、最后恢复16PASS、静态检查通过。保存真实MiMo输入重构136913→52618字节（策略111932→27543），96证据/64组引用和公开全context原样；尚未测新真实tokens或摘要质量，不能按字节降幅宣布质量提高。
+
+ROOT因果＋生产选择42PASS；夹具真实HTML必须显式mime_type，不能用PDF默认或伪造frontend使partial假绿。CLI Python/native fd1诊断归stderr，JSON-only stdout18PASS。新正式离线CWP→FF→RF CLI联调PASS：0.8成为LATEST后精确历史0.9 Ref，完整body/context/spans/summary/sourceRef保持，same/cross0新增POST、两负例0预留，临时目录恢复，0真实供应商调用。
+
+真实源码冻结回放原三25/25；新三9/12（SMIC4/5、ANTA1/3、Apple4/4）。精确漏项是分红计划、品牌组合、周转天数；安踏已保留Amer Sports最大股东与独立上市身份，不得把参股关系和周转天数的支持结果说反。分红属于用户业务阅读范围争议，旧12分母保持。仅Apple原文字面引号按独立验证修订，旧金标与5/12失败保留。第一份真实MiMo摘要仍7完整1部分2漏及4引用不足；母账480782tokens，新增11535µUSD只是预算代理。默认切换与三家真实供应商质量、母G2/G4/G5仍开放。
+
+紧凑证据：[冻结节点与未完成范围](common-root-quality-evidence/finalization.json)、[23份实际测试/独审/回放收据](common-root-quality-evidence/final-receipts.zip)，另[前节点31份证据](common-root-quality-evidence/acceptance.json)保存原失败和第一次真实费用。RF aed581ac精确CI38609253663 success；CWP本节点正常commit/push后核精确CI，不跳hooks、不改他人WIP。
+
 # 共享引擎＋多份文档阅读策略 — ROOT统一执行PWF
 
 PLAN_ID: document-understanding-2026-10-13
 PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans
 Owner: ROOT
-Current Phase: A/C — 正式发布/恢复与跨仓工程联调通过，真实关键业务召回仍有两项遗漏
+Current Phase: A/B/C — DU3已实收；真实泛化与正式摘要共同根因整改中
 
 ## Goal
 
@@ -30,7 +44,7 @@ Current Phase: A/C — 正式发布/恢复与跨仓工程联调通过，真实�
 
 ### Phase B: 正式摘要、generation与缓存恢复
 
-**Status:** complete（工程节点；真实供应商摘要质量归 Phase C）
+**Status:** complete（工程节点；正式供应商质量归C，源与模型/缓存恢复根因已通过集中测试）
 
 同一次parser→DU→正式SelectResult→ModelRequest→NarrativeRef，只有最终实际采用提示进入模型。selection-decision指纹与final-sent-policy指纹分开；未选但参与决策的策略变化也失效，无关策略不全库重建。
 
@@ -38,21 +52,31 @@ Current Phase: A/C — 正式发布/恢复与跨仓工程联调通过，真实�
 
 ### Phase C: 真实质量、泛化、默认切换和清理
 
-**Status:** pending
+**Status:** in_progress（实际供应商摘要已执行，质量尚未通过）
 
 同原件同范围同预算旧/新比较，精确使用配置的MiMo/DeepSeek/MiniMax和原累计账$20/200万token；与母G2真实摘要、G4原三公司、G5新A/H/US三公司共用一个验证窗口。包含文档类型覆盖、关键业务gold、原文回开、数字/角色/阶段、空间/时间/并发观察。
 
 细分栏/细表不足及缺样诚实记录；关键经营信息漏读不能用partial标签放行。达标后一次切正式默认、清理被替代运行逻辑和自有scratch，保留历史ref回放、原件及必要usage，正常并线/推送/精确CI与技能定点同步。
 
+## 当前节点 — 2026-10-14 真实摘要之后
+
+三 DU3 已交付。QUALITY dcde9aae 与 GEOMETRY a8cc604d 的全部改动已收到；DEPENDENCIES ef59a574 的补交 282aee36/ef59a574 已实收暂存，ROOT 138 PASS。它们修复同一依赖文件被重复扣字节预算的问题；完整 cache 仍由正式 AUTO 链验收。ROOT 未修改三个作者工作树。
+
+本节点源码：business-policy/4 具名分部归属 161 PASS；唯一 operating-table-purpose/2 按实际经营行筛选、保留建设期/混合表经营行 286 PASS；其版本已进入决策依赖，因果测试 41 PASS；冻结代默认升级恢复 9 PASS（真实 selector 0.8→0.9 与 PDF parser 0.1.0→0.1.1）。旧升级测试实际未运行 bootstrap 的问题已纠正，不把基线失败直接当可删的断言。全部零真实 POST，独立临时目录与配置/原件约束保持。
+
+真实开发回归原文选择 CN 10/10、HK 7/7、US 8/8；换公司开发泛化 SMIC 3/5、ANTA 0/3、Apple 2/4，共 5/12。它们不是未见 holdout；不修改 gold 或隐藏范围边界来提高分数。HK 实际路由是 hkex/annual，不能凭市场 metadata 猜错路由；简繁 matching、品牌/股东关系及混合经营指标仍需根因整改。两次只读 observer 的后置测试工具故障保留，不能签为真实 window 观测通过。
+
+第一次实际配置 MiMo 摘要已生成、公开回开 verified、96 spans，67004 tokens（输入64804/输出2200），预算代理费用11535µUSD，非发票。母累计480782 tokens/已知345998µUSD＋FX hold2764；剩余1519218 tokens/$19.651238，旧 unknown 仍照账，不重记 reasoning。真实摘要独审为7完整/1部分/2遗漏（关键4/7完整），4 claims 引文范围不足，混合 actual/planned 需修。原文10/10不能替代摘要忠实度。
+
+实际请求暴露 reading_strategy 115003 字节，包含 matcher/UUID/未读诊断等程序信息；模型端应使用一个语义投影，公开完整上下文和来源身份保留。旧/新 prompt/generation 必须因果区分。随后同 run 恢复完成且0新增POST，但第三方 PDF 提示污染 JSON stdout，整体 runner FAIL；修 CLI 操作边界，不能在 harness 剥掉提示或把失败当模型失败。
+
+RF main/origin main 已到 aed581ac（源512e85bb精确CI38563752875 success）；正常push416 PASS＋36子测试。reading_context 消费完整，定点同步两物理安装副本完成；旧 assurance/output WIP 保留。CWP 8f1c607b 与 d240871d 待本节点正常提交/推送，默认仍0.8。
+
 ## Next Step
 
-本轮工程留证：[范围与当前缺项收据](native-range-source-evidence/acceptance.json)、[紧凑原始测试/独审/真实回放](native-range-source-evidence/receipts.zip)。保留原失败；未将 quote recall 当作供应商摘要或完整 RF 买方研究质量。
+正常提交/推送本冻结工程节点并核精确CI；随后只读查安踏品牌和周转天数的真实窗口/候选/闭包，按共同根因TDD，沿原累计账执行配置供应商新旧摘要及独审。原三源码25/25、新三9/12，摘要质量仍开放；不提高cap/改语义金标/灌引文凑绿，不增加许可或小节点签收。B工程complete；A/C继续，默认仍0.8。
 
-下一步修复真实 CN 产品进展与 US 分部业务归属的遗漏，随后用配置中的三家供应商做同原件旧/新摘要与独审。当前真实生产语言回放：CN zh 9/10、HK mixed 7/7、US en 7/8，均保持 96 spans / 48K 字符上限；没有将两处遗漏标为完成。RF 新 reading_context 消费兼容已并 main/push 512e85bb，精确 CI38563752875 success；安装副本已按单文件定点同步，两物理副本与 claude junction 一致，旧 assurance/output WIP 保留。最新真实 CWP→FF→RF 离线 CLI 联调 PASS：0.8 成为 LATEST 后仍精确读取历史 0.9 Ref，完整 reading_context/spans/summary/sourceRef 一致，same/cross-run 0 新 POST。集中原文范围、公有接口和恢复 89 PASS；默认仍 0.8，付费摘要尚未开始。三 DU3 已接收，ROOT 没有写作者树。
-
-最新工程节点：[明确范围收据](production-selection-evidence/acceptance.json) / [压缩测试与独审证据](production-selection-evidence/receipts.zip)。真实CLI三载体已强制完整dependency和same/cross-run0POST，集中143PASS；统一A/H封面用途与历史发行信号溯源195PASS。当前质量阻点是PDF跨原生blocks断句/经营表筛页与多语言业务机制，不是再提高预算。正式摘要尚未付费运行，默认0.8保持。各历史FAIL和独立金标字面错误保留。
-
-## 并行施工（现在可独立启动）
+## DU3 并行交付（已收到，不重发）
 
 [DU3三卡总览与工作目录](parallel/du3-2026-10-14/README.md)。QUALITY仅拥有tools/document_understanding_benchmark；DEPENDENCIES仅拥有新decision_dependencies子包；GEOMETRY仅拥有新layout_snapshots子包，各自另有排他tests/ledger、独立稀疏worktree。ROOT保留source_catalog候选/预算/finalize、DU选择/summary与automation正式接线，三线不写这些共享目录、不重开旧DU/DU2卡。
 

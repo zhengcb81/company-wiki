@@ -851,6 +851,69 @@ def test_a_reference_heavy_trace_still_fits_the_published_byte_budget():
     assert real_bytes > 100_000, real_bytes
 
 
+def test_a_domain_that_freezes_complete_also_compares_same_at_the_same_limits():
+    """Compare must not be a stricter gate than freeze.
+
+    Rows are byte-measured once, when the validation pass reads them; the index and diff
+    passes charge work only. Charged again per pass, a legitimately sized domain froze
+    ``complete`` and then could never compare ``same`` -- it would silently never get a
+    cache hit at the published limits.
+    """
+    rows, refs = 350, 60
+    scope_ids = [f"s{j}" for j in range(refs)]
+    trace_value = {
+        "schema_version": "du-decision-trace/1",
+        "scopes": [
+            {"scope_id": name, "regime": "r", "family": "f", "form_type": None, "purpose": "p"}
+            for name in scope_ids
+        ],
+        "components": [
+            {"component_id": f"c{i}", "version": "1.0.0", "content_digest": "0" * 64,
+             "matcher_digest": "1" * 64, "scope_ids": list(scope_ids)}
+            for i in range(rows)
+        ],
+        "candidates": [
+            {"candidate_id": f"n{i}", "scope_id": "s0", "component_ids": [f"c{i}"], "eligible": True}
+            for i in range(rows)
+        ],
+        "versions": {"router": "1.0.0"},
+        "inventory_complete": True,
+    }
+    real_bytes = len(_canonical(trace_value).encode("utf-8"))
+    assert 200_000 < real_bytes < 2 * 1024 * 1024, real_bytes
+
+    frozen = _freeze(trace_value)
+    assert frozen["status"] == "complete", frozen["diagnostics"]
+    assert _compare(frozen, trace_value)["status"] == "same"
+    assert _compare(frozen, frozen)["status"] == "same"
+
+    # And once the domain genuinely exceeds the byte cap, freeze and compare agree on
+    # that too rather than disagreeing in opposite directions.
+    wide_rows, wide_refs = 900, 90
+    wide_scopes = [f"w{j}" for j in range(wide_refs)]
+    wide = {
+        "schema_version": "du-decision-trace/1",
+        "scopes": [
+            {"scope_id": name, "regime": "r", "family": "f", "form_type": None, "purpose": "p"}
+            for name in wide_scopes
+        ],
+        "components": [
+            {"component_id": f"w{i}", "version": "1.0.0", "content_digest": "0" * 64,
+             "matcher_digest": "1" * 64, "scope_ids": list(wide_scopes)}
+            for i in range(wide_rows)
+        ],
+        "candidates": [
+            {"candidate_id": f"wn{i}", "scope_id": "w0", "component_ids": [f"w{i}"], "eligible": True}
+            for i in range(wide_rows)
+        ],
+        "versions": {"router": "1.0.0"},
+        "inventory_complete": True,
+    }
+    over = _freeze(wide)
+    assert over["status"] == "partial"
+    assert _compare(over, wide)["status"] != "same"
+
+
 def test_decision_digest_refuses_rows_that_are_not_mappings():
     """Garbage rows must not hash the same as no rows at all."""
     frozen = _complete_manifest()

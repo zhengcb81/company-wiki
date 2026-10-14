@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-facet-spec/1",
   "id": "facet_operating_metrics",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "business_questions": [
     "经营指标的定义与口径是什么：存量/流量、分母、期间、地域、直营/加盟/合伙人范围",
     "指标变化背后的经营解释是什么（谁在解释、依据什么）",
@@ -33,7 +33,11 @@
         "利用率",
         "出货",
         "净增",
-        "SKUs"
+        "SKUs",
+        "存货周转日数",
+        "存货周转天数",
+        "inventory turnover days",
+        "days inventory outstanding"
       ]
     },
     {
@@ -70,7 +74,11 @@
         "number of stores",
         "store count",
         "number of users",
-        "shipments"
+        "shipments",
+        "存货周转日数",
+        "存货周转天数",
+        "inventory turnover days",
+        "days inventory outstanding"
       ],
       "table_scan": true
     }
@@ -152,6 +160,16 @@
         "quantity",
         "unit",
         "condition"
+      ]
+    },
+    {
+      "source_meaning": "平均存货周转日数本年137天、上年123天",
+      "wrong_assertion": "存货周转率137% / 周转天数下降至123天",
+      "why_wrong": "周转日数是时间长度，不是比率；本年与上年列不能互换，天数增加不等于周转加快",
+      "required_context_slots": [
+        "quantity",
+        "unit",
+        "period"
       ]
     }
   ],

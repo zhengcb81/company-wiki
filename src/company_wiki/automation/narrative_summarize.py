@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from typing import Any
+from company_wiki.narrative_subject import NarrativeSubject
 
 
 from .execution_context import JobExecutionContext
@@ -183,9 +184,11 @@ class NarrativeSummarizeHandler:
         *,
         model: NarrativeModel | None,
         model_caller: NarrativeModelCaller | None = None,
+        reading_model_projection: Callable[[NarrativeSubject], str | None] | None = None,
     ) -> None:
         self._model = model
         self._model_caller = model_caller
+        self._reading_model_projection = reading_model_projection
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
@@ -254,7 +257,9 @@ class NarrativeSummarizeHandler:
                 "narrative model is not configured",
             )
         review = selected.prompt_review
-        request = NarrativeModelRequest.from_selection(selected)
+        request = NarrativeModelRequest.from_selection(selected,
+            reading_projection_version=self._reading_model_projection(selected.subject)
+            if self._reading_model_projection is not None else None)
         context.checkpoint()
         if self._model_caller is not None:
             response, metrics = self._model_caller.generate(context, request)

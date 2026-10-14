@@ -113,12 +113,12 @@ def test_preceding_qualification_cannot_be_detached_from_later_positive_statemen
 
 @pytest.mark.parametrize("order", [("table", "description"), ("description", "table")])
 def test_weaker_package_does_not_overwrite_source_owned_table_fact_value(order):
-    parsed, pipeline = fixture(["Product shipment units", "Period and unit caption"], same_block=False,
+    parsed, pipeline = fixture(["Device A | 15", "Product shipments | 2026 | thousand units"], same_block=False,
                                language="en")
     uid, header = [unit.unit_id for unit in parsed.units]
     packages = {
         "table": {"package_id": "operating-row", "kind": "operating_table",
-                  "member_unit_ids": [uid], "anchor_unit_ids": [uid],
+                  "member_unit_ids": [uid, header], "anchor_unit_ids": [uid],
                   "required_context_unit_ids": [header]},
         "description": {"package_id": "description", "kind": "project",
                         "member_unit_ids": [uid], "anchor_unit_ids": [uid],

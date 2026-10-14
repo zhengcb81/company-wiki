@@ -49,8 +49,10 @@ def _financial_only(text: str, fact: Any = None) -> bool:
 
 
 def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = None,
-              is_heading: bool = False) -> tuple[bool, Any]:
+              is_heading: bool = False, table_qualified: bool = False) -> tuple[bool, Any]:
     fact = fact or detect_reading_business_fact(unit.raw_text)
+    if kind == "operating_table" and not table_qualified:
+        return False, fact
     if unit.source_role in _CONTEXT_ROLES or (kind != "operating_table" and _financial_only(unit.raw_text, fact)):
         return False, fact
     # Glyphs/page counters are observed text, not operating descriptions. A
@@ -74,6 +76,23 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
     descriptive = reading.get("family") in {"prospectus", "offering"}
     return bool(fact.eligible or scoped or kind == "operating_table" or
                 (descriptive and kind in {"project", "operating_table"})), fact
+
+
+def _qualified_table(package: Mapping[str, Any], units: Mapping[str, Any]):
+    """Use the structure owner's one semantic service over actual table members."""
+    from company_wiki.document_understanding.structure.table_purpose import qualify_table
+
+    members = list(dict.fromkeys(package.get("member_unit_ids", ())))
+    required = set(package.get("required_context_unit_ids", ()))
+    # Outside headings remain real dependencies. They cannot supply a missing
+    # operating purpose to an unrelated financial table on the same page.
+    context = [units[uid] for uid in members if uid in required]
+    body = [units[uid] for uid in members if uid not in required]
+    return qualify_table(
+        [unit.raw_text for unit in context if unit.unit_kind not in {"footnote", "table_caption"}],
+        [unit.raw_text for unit in body],
+        caption_texts=[unit.raw_text for unit in context if unit.unit_kind == "table_caption"],
+    )
 
 
 def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, Any],
@@ -276,6 +295,33 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
             facts[text] = value
         return value
     packages, joint_facts, continuity, blocked = _prose_reading_packages(parsed, pipeline, classify)
+    # Qualify actual table rows before the context graph establishes cost and
+    # closure. Rejected account rows are neither facts nor borrowed context.
+    scoped_packages = []
+    for package in packages:
+        if package["kind"] != "operating_table":
+            scoped_packages.append(package)
+            continue
+        members = list(dict.fromkeys(package.get("member_unit_ids", ())))
+        required = set(package.get("required_context_unit_ids", ()))
+        all_ids = set(members) | required
+        if package.get("truncated") or not all_ids <= units.keys() or all_ids & excluded:
+            withheld.append({"package_id": str(package["package_id"]),
+                             "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+                             "known_unit_ids": sorted(all_ids & units.keys())})
+            continue
+        purpose = _qualified_table(package, units)
+        if not purpose.eligible:
+            if purpose.status == "incomplete":
+                withheld.append({"package_id": str(package["package_id"]),
+                                 "reason": purpose.reason, "known_unit_ids": sorted(all_ids)})
+            continue
+        body = [uid for uid in members if uid not in required]
+        admitted_rows = {body[index] for index in purpose.eligible_row_indices}
+        scoped_packages.append({**package,
+            "member_unit_ids": [uid for uid in members if uid in required or uid in admitted_rows],
+            "anchor_unit_ids": [uid for uid in body if uid in admitted_rows]})
+    packages = scoped_packages
     # Geometry/scope closure and meaning were established on the originals.
     # Only the source owner may now replace that body with one exact native
     # view range. The budget still charges every character, including native
@@ -341,6 +387,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
                              "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
                              "known_unit_ids": sorted(required & units.keys())})
             continue
+        table_qualified = package["kind"] == "operating_table"
         declared_anchors = list(package.get("anchor_unit_ids", ()))
         if package["kind"] == "qa_exchange":
             # The shared structure owner identifies actual answers even when a
@@ -364,7 +411,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
             view = reading.get(uid, {})
             admitted, fact = _admitted(unit, view, package["kind"],
                                        fact=joint_facts.get(package["package_id"]) or classify(unit.raw_text),
-                                       is_heading=uid in headings)
+                                       is_heading=uid in headings, table_qualified=table_qualified)
             if not admitted:
                 continue
             anchors.append(uid)

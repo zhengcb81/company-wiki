@@ -1,0 +1,153 @@
+{
+  "scope": "Frozen shared-engine source/model/cache engineering node; supplier/fresh quality remains open",
+  "pipeline": "1.7.0",
+  "business_policy": "reading-business-policy/5",
+  "table_purpose": "operating-table-purpose/3",
+  "script_matching": "source-script-match/1",
+  "reading_model_projection": "reading-model-input/1",
+  "default_selector": "0.8.0",
+  "source_case_results": {
+    "original_regression": "25/25",
+    "fresh_frozen": "9/12",
+    "fresh_missing": [
+      "smic-no-profit-distribution",
+      "anta-brand-portfolio",
+      "anta-inventory-days-up"
+    ]
+  },
+  "engineering": {
+    "model_related_pass": 111,
+    "frozen_recovery_pass": 16,
+    "matching_and_selection_pass": 42,
+    "cross_script_related_pass": 264,
+    "cross_script_new_and_20k_pass": 56,
+    "loopback_cwp_ff_rf": "PASS; original/current refs and complete public reading_context retained; no supplier POST"
+  },
+  "model_input_saved_actual_bytes": {
+    "old": 136913,
+    "new": 52618,
+    "semantics_quality": "NOT_EVALUATED for new supplier output"
+  },
+  "supplier_new_since_first_saved_mimo": 0,
+  "archive_bytes": 41179,
+  "archive_sha256": "d2ca89a349cb5b1765ab7108acd9260610e7a054a89f5eb814bf4763eba9efec",
+  "entries": [
+    {
+      "entry": "model-projection-root/handoff.md",
+      "bytes": 10043,
+      "sha256": "f12db30cb074e05a5ce443e7bcf8e28cc759cd4fe45a297fdec76a6f4b0a64f3"
+    },
+    {
+      "entry": "model-projection-root/owned-source-final.json",
+      "bytes": 2081,
+      "sha256": "841962685f7348f151f39f7c571be2914c3d3d04c672afb313f565591d3c5e9a"
+    },
+    {
+      "entry": "model-projection-root/static-final/receipt.json",
+      "bytes": 1479,
+      "sha256": "ac45bd775c4895b220dae0cfeca05e33b2ccafdd4cc5a721ba57ab3e8afe9fee"
+    },
+    {
+      "entry": "model-projection-root/recovery-final/receipt.json",
+      "bytes": 386,
+      "sha256": "27deba22e63f9e5fca47bced658d03e07262bb9ee37ed92e8edfd703e19c515d"
+    },
+    {
+      "entry": "model-projection-root/recovery-final/junit.xml",
+      "bytes": 3007,
+      "sha256": "355e3c36d77b950f44ef24b9d2c3c2579a1ef6e0e77b46fc74bf6e80241cf096"
+    },
+    {
+      "entry": "model-projection-root/concentrated-valid/receipt.json",
+      "bytes": 774,
+      "sha256": "9bc014e257dedc0129e95a358720a405cd4e573209c296f2bc0f84399fda5082"
+    },
+    {
+      "entry": "model-projection-root/concentrated-valid/junit.xml",
+      "bytes": 18214,
+      "sha256": "269deae9fc7258b767ec7913e814760cea31c185c91cb8885924f7a9f014cee7"
+    },
+    {
+      "entry": "model-projection-root/saved-mimo-semantic-sizing-final.json",
+      "bytes": 2244,
+      "sha256": "8f6f6b7400a4a8a5d394d7aa8767f4932bc9735ca9a83917c7f3b20ff00e7cd9"
+    },
+    {
+      "entry": "recall-root/matching-causal-binding/notes.json",
+      "bytes": 677,
+      "sha256": "f770bb66a8ed2e22d6f5de01ad884bc48e084b6c8be9ebcce5ca3375498f9a48"
+    },
+    {
+      "entry": "recall-root/matching-causal-binding/before.xml",
+      "bytes": 1961,
+      "sha256": "9dd6d179d3723eb1d8adf0bbc72c6e0ad22f423ff80cd29bf40b880f502007de"
+    },
+    {
+      "entry": "recall-root/matching-causal-binding/green.xml",
+      "bytes": 8980,
+      "sha256": "e5b5c64a6e509cc25b17378e960cbacb95613ecab7e4613597f02f43ce557168"
+    },
+    {
+      "entry": "recall-root/matching-causal-binding/real-carrier.xml",
+      "bytes": 851,
+      "sha256": "60d2782a6ec6fdcbd5fa2fbf2a48bd6a11aea8f16e5c22f62c51dbb0f49407f9"
+    },
+    {
+      "entry": "recall-root/matching-causal-binding/final-native.xml",
+      "bytes": 8500,
+      "sha256": "60d3e779d2fcf39c973100edd9958df10cb4089f817efe7b20fff1eed4fba1b0"
+    },
+    {
+      "entry": "recall-root/three-generalized-summary.json",
+      "bytes": 3152,
+      "sha256": "f6bab91e63489e066cf9386e671dde53ab55a947576ebbd6ef2ae7faa5aa1133"
+    },
+    {
+      "entry": "holdout-root/generalized-170/summary.json",
+      "bytes": 3838,
+      "sha256": "3eba4ce56f2b2925494a2cb2a785dec16995aebf86f519c86ab2b3f51e672731"
+    },
+    {
+      "entry": "holdout-root/generalized-170/missing-point-labels.json",
+      "bytes": 771,
+      "sha256": "d7d7203d6b69d387a2d8092cc3e3a153e9b64ea4e05b41cadad61dcb598bb7a4"
+    },
+    {
+      "entry": "holdout-root/fresh-hk-diagnosis/implementation-handoff.md",
+      "bytes": 5719,
+      "sha256": "8f2cd0f10084ae59ffffda49b913b7c8bccc22e4b779945493ae0a08d944870d"
+    },
+    {
+      "entry": "holdout-root/fresh-hk-diagnosis/implementation-source-freeze.json",
+      "bytes": 2032,
+      "sha256": "5cb87f6055d1c3d72064bb819cd452e977374ae8db7a9fdf5837d82e81fd42fe"
+    },
+    {
+      "entry": "holdout-root/fresh-hk-diagnosis/performance-facts-before.json",
+      "bytes": 144,
+      "sha256": "95b8c424432efe891dcd07d5d40b409175ed6f90cc600cf5b2d20578b52e0f7b"
+    },
+    {
+      "entry": "holdout-root/fresh-hk-diagnosis/performance-facts-after.json",
+      "bytes": 144,
+      "sha256": "291eaebe24da395d428d74d06fb9c0b191a2bab58038857dd1833e65a5e9c1aa"
+    },
+    {
+      "entry": "holdout-root/fresh-hk-diagnosis/predicate-profile-before.txt",
+      "bytes": 3144,
+      "sha256": "ef6377e23b1cdd0e88158a4c75287ca1a3c3125a8f93fcccbd00560a0053714e"
+    },
+    {
+      "entry": "holdout-root/fresh-hk-diagnosis/predicate-profile-after.txt",
+      "bytes": 2638,
+      "sha256": "49eaf3bfc197cb65b8b0f04d2abe892e42b2882adf11891e2753e91c2bd908a3"
+    },
+    {
+      "entry": "live/owned-runner/receipts/loopback-20261014T190406-ae8fba/overall.json",
+      "bytes": 80484,
+      "sha256": "e94572df4d91f7bdae0394c7a6a9f27495aefe02fb97ffd445c74faaca183b3b"
+    }
+  ],
+  "production_originals_and_config_unchanged": true,
+  "source_publication": "pending normal ROOT commit/push"
+}

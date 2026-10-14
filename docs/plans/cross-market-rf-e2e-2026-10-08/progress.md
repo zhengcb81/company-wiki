@@ -1,3 +1,7 @@
+## ROOT共享阅读当前进展 — 2026-10-14 冻结发布节点
+
+B工程完成：模型语义投影111PASS/恢复16PASS、JSON边界18PASS、CWP→FF→RF完整离线CLI PASS；三DU3补交已纳入。A/C继续，原三源码25/25，新三9/12（安踏品牌/周转、SMIC分红范围），第一份真实摘要质量缺口保持。默认0.8。母累计480782tokens，RF aed581ac CI38609253663 success，CWP正常commit/push中。详见 ../document-understanding-2026-10-13/task_plan.md；不关闭母G2/G4/G5/公司审计循环。
+
 ## ROOT主线与独立施工 — 2026-10-14
 
 [共享阅读当前PWF](../document-understanding-2026-10-13/task_plan.md)：pure reading budget组件已TDD实现，104集中与38独立probe通过、旧默认不变；正式ReadingPlan/生产模型链仍待接。三张新[DU3独立卡](../document-understanding-2026-10-13/parallel/du3-2026-10-14/README.md)和三个排他稀疏代码工作树已准备，ROOT继续source_catalog/DU选择及AUTO接线。原件/配置保持，0模型费用，不标母G2/G4/G5完成。

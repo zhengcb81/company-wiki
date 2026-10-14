@@ -1,5 +1,6 @@
 """Source-specific cache inventory includes decision losers, not whole catalog."""
 from copy import deepcopy
+from hashlib import sha256
 import importlib
 import json
 import os
@@ -58,6 +59,30 @@ def test_missing_inventory_cannot_claim_complete():
     assert module.current_decision_trace(trace)["inventory_complete"] is False
 
 
+def test_transient_script_matching_change_invalidates_actual_decision(monkeypatch):
+    from company_wiki.document_normalization import normalize_document, text_matching
+    from company_wiki.document_understanding import understand_units
+    from company_wiki.document_understanding.decision_dependencies import (
+        compare_decision_dependencies, freeze_decision_dependencies,
+    )
+
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    raw = b"<html><body><p>INTERIM REPORT 2026. Our company launched a new product for overseas customers.</p></body></html>"
+    digest = sha256(raw).hexdigest()
+    source_id = "urn:company-wiki:source:sha256:" + digest
+    parsed = normalize_document(raw, source_id=source_id, source_sha256=digest, mime_type="text/html")
+    observed = understand_units(parsed.structure.units, source_id=source_id, source_sha256=digest,
+                               title="INTERIM REPORT 2026", declared_kind="semi_annual_report", language="en",
+                               mime_type="text/html", metadata={"regime": "hkex"})
+    before = module.build_decision_trace(observed)
+    frozen = freeze_decision_dependencies(before)
+    assert frozen["status"] == "complete"
+    assert before["versions"].get("script_matching") == text_matching.SCRIPT_MATCHING_VERSION
+    assert compare_decision_dependencies(frozen, module.current_decision_trace(before))["status"] == "same"
+    monkeypatch.setattr(text_matching, "SCRIPT_MATCHING_VERSION", "source-script-match/next")
+    assert compare_decision_dependencies(frozen, module.current_decision_trace(before))["status"] == "changed"
+
+
 def test_reading_business_admission_version_is_an_actual_cache_dependency(monkeypatch):
     module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
     policy = importlib.import_module("company_wiki.source_catalog.narrative_business_policy")
@@ -97,6 +122,21 @@ def test_native_source_range_algorithm_is_a_pdf_dependency_only(monkeypatch):
     monkeypatch.setattr(narrative_native_ranges, "NATIVE_PAGE_VIEW_FEATURE_VERSION", "native-pdf-page-view/next")
     assert module._versions(pdf_frontend=True) != before
     assert module._versions(pdf_frontend=False) == unrelated
+
+
+def test_changed_table_meaning_invalidates_a_complete_manifest(monkeypatch):
+    from company_wiki.document_understanding import decision_inventory
+    from company_wiki.document_understanding.structure import table_purpose
+    from company_wiki.document_understanding.decision_dependencies import (
+        freeze_decision_dependencies, compare_decision_dependencies,
+    )
+    observed = _real_interim_pipeline()
+    observed["observation"]["metadata"]["mime_type"] = "text/html"
+    frozen = freeze_decision_dependencies(decision_inventory.build_decision_trace(observed))
+    assert frozen["status"] == "complete"
+    monkeypatch.setattr(table_purpose, "FEATURE_VERSION", "operating-table-purpose/next")
+    assert compare_decision_dependencies(
+        frozen, decision_inventory.current_decision_trace(frozen))["status"] == "changed"
 
 
 @pytest.mark.parametrize("first", ["inventory", "policy", "source-selector"])

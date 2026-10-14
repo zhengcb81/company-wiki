@@ -7,7 +7,7 @@
   "scope": "holdout",
   "language": "en",
   "support_set_frozen_before_output": true,
-  "support_set_digest": "aaa1088f2576fd3480c82875fd65d46108b34a84bd50f7e5c637de602fbade7c",
+  "support_set_digest": "202eafb966dc60827451ee2d271571740e9aad77562ffd9c2b42ef7070a8bdc4",
   "expected_route_families": [
     "annual",
     "us_10k",
@@ -162,7 +162,7 @@
         [
           {
             "location_kind": "document",
-            "exact_quote": "A significant majority of the Company's manufacturing is performed in whole or in part by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan and Vietnam"
+            "exact_quote": "A significant majority of the Company’s manufacturing is performed in whole or in part by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan and Vietnam"
           }
         ]
       ],

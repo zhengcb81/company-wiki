@@ -11,32 +11,32 @@
    "purpose": "TDD counter-examples: decision-dependency mutation matrix + honesty",
    "command": "-m pytest tests\\unit\\document_understanding_decision_dependencies/test_a_completeness_honesty.py tests\\unit\\document_understanding_decision_dependencies/test_a_mutation_matrix.py -q --no-header -p no:cacheprovider",
    "exit_code": 0,
-   "seconds": 2.765,
-   "summary": "============================= 55 passed in 0.34s =============================="
+   "seconds": 2.743,
+   "summary": "============================= 55 passed in 0.32s =============================="
   },
   {
    "node": "B",
    "purpose": "engineering: schema, finite JSON, cross-process digest, limits, 100-source size",
    "command": "-m pytest tests\\unit\\document_understanding_decision_dependencies/test_b_engineering.py -q --no-header -p no:cacheprovider",
    "exit_code": 0,
-   "seconds": 3.941,
-   "summary": "============================= 63 passed in 1.60s =============================="
+   "seconds": 4.154,
+   "summary": "============================= 64 passed in 1.84s =============================="
   },
   {
    "node": "C",
    "purpose": "independent read-only catalog snapshot replay + receipt",
    "command": "-m pytest tests\\unit\\document_understanding_decision_dependencies/test_c_catalog_replay.py -q --no-header -p no:cacheprovider",
    "exit_code": 0,
-   "seconds": 2.569,
-   "summary": "============================= 19 passed in 0.30s =============================="
+   "seconds": 2.557,
+   "summary": "============================= 19 passed in 0.28s =============================="
   },
   {
    "node": "ALL",
    "purpose": "the whole owned lane",
    "command": "-m pytest tests\\unit\\document_understanding_decision_dependencies -q --no-header -p no:cacheprovider",
    "exit_code": 0,
-   "seconds": 4.086,
-   "summary": "============================= 137 passed in 1.82s ============================="
+   "seconds": 5.337,
+   "summary": "============================= 138 passed in 2.79s ============================="
   }
  ]
 }

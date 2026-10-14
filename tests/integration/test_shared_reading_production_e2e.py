@@ -110,8 +110,25 @@ def _assert_formal_generation(root, catalog, imported, run_id, reference, bundle
     metadata = json.loads(row["metadata_json"])
     assert metadata["generation_manifest"] == final, "publication retained an obsolete base generation"
     assert metadata["generation_sha256"] == canonical_json_hash(final)
-    assert data["reading_strategy"]["reading_policy_version"] == context["reading_policy_version"]
-    assert data["reading_strategy"]["reading_policies"] == context["reading_policies"]
+    strategy = data["reading_strategy"]
+    assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/1"
+    assert context["schema_version"] == "du-production-reading/1"
+    # Public context is the full source audit view, bound by material_sha256
+    # above; the model retains every actual semantic instruction independently.
+    assert all("profile_version" in row and "policy_components" in row
+               for row in context["reading_policies"])
+    for policy in context["reading_policies"]:
+        assert any(all(row.get(key) == policy.get(key) for key in (
+            "family", "summary_focus", "reading_questions", "context_requirements", "negative_hints",
+        )) for row in strategy["reading_policies"])
+    for facet in context["business_facets"]:
+        assert any(all(row.get(key) == facet.get(key) for key in (
+            "id", "summary_focus", "business_questions", "required_context", "absence_rules",
+            "confusion_checks", "applicable_mechanisms",
+        )) for row in strategy["business_facets"])
+    assert strategy["constraints"] == context["constraints"]
+    assert all("selection_basis" not in row for row in strategy["business_facets"])
+    assert all("family_policy" not in row for row in strategy["reading_policies"])
     rows = data["evidence"]
     aliases = [row[0] for row in rows]
     assert len(aliases) == len(set(aliases)) == len(bundle["evidence_spans"])
@@ -273,7 +290,11 @@ def test_official_projection_shared_reading_publishes_the_final_generation_targe
         assert {span.source_id for span in bundle.evidence_spans} == {ref["source_id"] for ref in state.parent_refs}
         assert {span.structured_value["source_role"] for span in bundle.evidence_spans} == {"management", "investor_question"}
         assert final["selection_generation"]["evidence_sha256"] == canonical_json_hash([span.to_dict() for span in bundle.evidence_spans])
-        assert server.requests[0]["reading_strategy"]["reading_policy_version"] == bundle.reading_context["reading_policy_version"]
+        strategy = server.requests[0]["reading_strategy"]
+        assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/1"
+        assert bundle.reading_context["reading_policy_version"] == final["selection_generation"]["reading_policy_version"]
+        assert strategy["constraints"] == list(bundle.reading_context["constraints"])
+        assert final["selection_generation"]["material_sha256"] == reading_material_sha256(bundle)
         old_usage = tuple(asdict(record) for record in runs.reservations_for_run("reading-projection"))
         process, resumed = reuse.invoke(state.root, state.config_path, request, llm, "reading-projection",
                                         database=state.automation_db, launcher=launcher)

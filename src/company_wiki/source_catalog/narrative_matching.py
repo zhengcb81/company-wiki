@@ -4,24 +4,15 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from dataclasses import replace
-from functools import lru_cache
+from company_wiki.document_normalization.text_matching import matching_script_text
 
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeUnit
 
 
-@lru_cache(maxsize=1)
-def _converter():
-    import opencc  # Existing catalog dependency, also installed by CI.
-
-    return opencc.OpenCC("t2s.json")
-
-
 def matching_text(text: str) -> str:
     """Create a match-only representation; no normalized text is persisted."""
-    if not any("\u3400" <= char <= "\u9fff" for char in text):
-        return text
-    return str(_converter().convert(text))
+    return matching_script_text(text)
 
 
 def _matching_unit(unit: NarrativeUnit) -> NarrativeUnit:

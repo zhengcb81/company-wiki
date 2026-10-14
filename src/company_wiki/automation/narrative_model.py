@@ -28,6 +28,7 @@ MODEL_REQUEST_SCHEMA = "narrative-model-request/1.4"
 NARRATIVE_PROMPT_VERSION = "1.7.0"
 PROJECTION_MODEL_REQUEST_SCHEMA = "narrative-model-request/2"
 PROJECTION_NARRATIVE_PROMPT_VERSION = "official-json/1.0.0"
+READING_MODEL_PROJECTION_VERSION = "reading-model-input/1"
 MODEL_RESPONSE_MAX_BYTES = 128 * 1024
 _GROUP_DECLARATION_ABSENT = object()
 
@@ -137,6 +138,104 @@ _INSTRUCTION = (
 _PROJECTION_INSTRUCTION = _INSTRUCTION.replace(
     "Keep source identity/language.", "Keep subject identity/language. Each row keeps its own role."
 )
+
+_READING_INSTRUCTION = (
+    " Cover distinct material business/product updates and each material next action; "
+    "merge only duplicate propositions about the same subject/product/stage/period. "
+    "Each claim has a single modality: separate actual current progress from planned "
+    "or forecast next actions, including product_current_and_next groups. "
+    "Group count is a sizing hint, not a fact count or a claim quota. Same-product "
+    "ongoing validation and received repeat orders can remain one coherent actual "
+    "progress proposition; single modality does not mean a single verb. "
+    "Never merge different stages to meet a short-summary target. Every product identity, number, "
+    "period and condition must be supported by that claim's own evidence_ids; resolve "
+    "'the series' with its identity context. Other input rows are not implicit citations. "
+    "Use only the actual support; never attach all evidence IDs to hide a citation gap. "
+    "Respect the twenty-claim and configured output bounds, favor concise material "
+    "single-stage propositions rather than row enumeration or mixed-state claims. "
+    "Reading coverage limits are not proof of business absence. Layout-processing "
+    "coverage and unassigned structure are distinct from unread original content."
+    " Retain supplied operating metrics, operating tables and business causes "
+    "inside financial notes, with their actual period, unit, currency, denominator "
+    "and negation. Exclude pure financial statement totals and boilerplate; do not "
+    "discard selected business evidence just because it is numeric or in a financial section."
+)
+
+
+def validate_reading_model_projection_version(version: str | None) -> None:
+    if version is not None and version != READING_MODEL_PROJECTION_VERSION:
+        raise ModelResponseError("READING_MODEL_PROJECTION_UNAVAILABLE")
+
+
+def _semantic_records(rows, fields):
+    """Retain complete guidance, deduplicated by meaning rather than audit IDs."""
+    result, seen = [], set()
+    for row in rows:
+        projected = {key: row[key] for key in fields if key in row}
+        identity = canonical_json(projected)
+        if identity not in seen:
+            result.append(projected)
+            seen.add(identity)
+    return result
+
+
+def _model_layout_coverage(value):
+    result = {key: value[key] for key in (
+        "complete", "geometry_available", "deferred_page_count", "deferred_unit_count",
+        "deferred_limited",
+    ) if key in value}
+    for key, total in (("deferred_pages", "deferred_page_count"),
+                       ("deferred_unit_ids", "deferred_unit_count")):
+        if key in value and total not in result:
+            count_name = total.replace("_count", "_sample_count") if value.get("deferred_limited") else total
+            result[count_name] = len(value[key])
+    for key in ("native_frontend", "native_ranges"):
+        if isinstance(value.get(key), Mapping):
+            result[key] = _model_layout_coverage(value[key])
+    return result
+
+
+def _reading_model_context(context, group_aliases):
+    plain = _to_plain(context)
+    unread = plain["unread"]
+    counts = unread.get("counts", {key: len(unread[key]) for key in (
+        "opaque_pages", "deferred_pages", "deferred_unit_ids", "unassigned_unit_ids",
+    )})
+    return {
+        "schema_version": READING_MODEL_PROJECTION_VERSION,
+        "reading_policies": _semantic_records(plain["reading_policies"], (
+            "family", "summary_focus", "reading_questions", "context_requirements", "negative_hints",
+        )),
+        "business_facets": _semantic_records(plain["business_facets"], (
+            "id", "summary_focus", "business_questions", "required_context", "absence_rules",
+            "confusion_checks", "applicable_mechanisms",
+        )),
+        "constraints": plain["constraints"],
+        "groups": [{"id": alias, "kind": row["kind"], "section_role": row["section_role"]}
+                   for alias, row in zip(group_aliases, plain["groups"], strict=True)],
+        "coverage": {
+            "scope": "selected_excerpts_only",
+            "unread_counts": counts,
+            "unread_counts_limited": unread.get("limited", False),
+            "native_scan": unread["native_scan"],
+            "structure_complete": unread["structure_complete"],
+            "deferred": {"count": plain.get("deferred_count", len(plain["deferred"])),
+                         "catalog_limited": plain.get("deferred_limited", False),
+                         "observed_reasons": sorted({row["reason"] for row in plain["deferred"]})},
+            "layout": _model_layout_coverage(plain["layout_coverage"]),
+        },
+    }
+
+
+def _reading_output_plan(evidence_count, groups, max_output_tokens=None):
+    plan = _output_plan(evidence_count, max_output_tokens)
+    count = len(groups) + sum(row["kind"] == "product_current_and_next" for row in groups)
+    target = min(20, max(1, count if groups else evidence_count))
+    if max_output_tokens is not None:
+        target = min(target, max(1, (max_output_tokens - 256) // 320))
+    return {**plan, "target_claim_count": target, "target_text_chars": 240,
+            "claim_unit": "one_subject_product_stage_modality",
+            "coverage": "distinct_material_updates_and_next_actions_from_selected_excerpts"}
 
 
 _CLAIM_SCHEMA: dict[str, Any] = {
@@ -265,7 +364,11 @@ class NarrativeModelRequest:
     input_sha256: str
 
     @classmethod
-    def from_selection(cls, selected: NarrativeSelectResult) -> "NarrativeModelRequest":
+    def from_selection(cls, selected: NarrativeSelectResult, *, reading_projection_version: str | None = None) -> "NarrativeModelRequest":
+        validate_reading_model_projection_version(reading_projection_version)
+        reading_projection = reading_projection_version is not None
+        if reading_projection and selected.reading_context is None:
+            raise ModelResponseError("READING_MODEL_CONTEXT_UNAVAILABLE")
         if selected.reading_context is not None:
             selected = replace(selected, reading_context=_reading_context(selected.reading_context, selected.evidence_spans))
         projected = selected.subject.kind == "official_json"
@@ -273,6 +376,8 @@ class NarrativeModelRequest:
             raise ModelResponseError("SUMMARY_INPUT_UNAVAILABLE")
         prompt_version = PROJECTION_NARRATIVE_PROMPT_VERSION if projected else NARRATIVE_PROMPT_VERSION
         instruction = _PROJECTION_INSTRUCTION if projected else _INSTRUCTION
+        if reading_projection:
+            instruction = instruction.replace("financial tables,", "pure financial statement totals,") + _READING_INSTRUCTION
         mapping = _citation_mapping(selected)
         groups = _group_mapping(selected)
         aliases = {span_id: alias for alias, span_id in mapping.items()}
@@ -315,9 +420,13 @@ class NarrativeModelRequest:
             # body. The source selector already chose these policies from the
             # final selected original material. Group membership uses the one
             # existing alias table above, including shared context references.
-            strategy = _to_plain(selected.reading_context)
-            strategy["groups"] = [{"id": alias, "kind": row["kind"], "section_role": row["section_role"]}
-                                  for alias, row in zip(groups, strategy["groups"], strict=True)]
+            if reading_projection:
+                strategy = _reading_model_context(selected.reading_context, groups)
+                envelope["output_plan"] = _reading_output_plan(len(mapping), strategy["groups"])
+            else:
+                strategy = _to_plain(selected.reading_context)
+                strategy["groups"] = [{"id": alias, "kind": row["kind"], "section_role": row["section_role"]}
+                                      for alias, row in zip(groups, strategy["groups"], strict=True)]
             envelope["reading_strategy"] = strategy
         data_json = canonical_json(envelope)
         identity = {
@@ -354,7 +463,10 @@ class NarrativeModelRequest:
         evidence = envelope.get("evidence")
         if not isinstance(evidence, list):
             raise ModelResponseError("MODEL_REQUEST_INVALID")
-        plan = _output_plan(len(evidence), max_output_tokens)
+        reading = envelope.get("reading_strategy", {})
+        plan = (_reading_output_plan(len(evidence), reading["groups"], max_output_tokens)
+                if reading.get("schema_version") == READING_MODEL_PROJECTION_VERSION
+                else _output_plan(len(evidence), max_output_tokens))
         if envelope.get("output_plan") == plan:
             return self
         envelope["output_plan"] = plan

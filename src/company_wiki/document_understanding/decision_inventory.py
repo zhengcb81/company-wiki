@@ -32,12 +32,16 @@ def _versions(*, pdf_frontend: bool = False) -> dict[str, str]:
     from .strategy_binding import STRATEGY_BINDING_VERSION
     from .observation_adapter import OBSERVATION_ADAPTER_VERSION
     from .narrative_continuity import NARRATIVE_CONTINUITY_FEATURE_VERSION
+    from .structure import table_purpose
+    from company_wiki.document_normalization import text_matching
 
     versions = {"inventory": "1.2.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
             "business_policy": READING_BUSINESS_POLICY_VERSION,
             "strategy_binding": STRATEGY_BINDING_VERSION,
             "observation_adapter": OBSERVATION_ADAPTER_VERSION,
             "continuity": NARRATIVE_CONTINUITY_FEATURE_VERSION,
+            "table_purpose": table_purpose.FEATURE_VERSION,
+            "script_matching": text_matching.SCRIPT_MATCHING_VERSION,
             "pipeline": PIPELINE_FEATURE_VERSION, "summary": SUMMARY_FEATURE_VERSION,
             "layout": LAYOUT_HINTS_VERSION}
     if pdf_frontend:

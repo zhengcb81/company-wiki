@@ -11,11 +11,14 @@ from collections.abc import Mapping, Sequence
 from copy import deepcopy
 from dataclasses import replace
 from hashlib import sha256
+from functools import lru_cache
 from importlib.resources import files
 import json
 import re
 from typing import Any, Iterator
 import unicodedata
+
+from company_wiki.document_normalization.text_matching import matching_script_text
 
 from . import vocabulary as v
 from .model import Profile, SectionPriority
@@ -32,7 +35,20 @@ def _digest(value: Any) -> str:
 
 
 def _fold(value: Any) -> str:
-    return " ".join(unicodedata.normalize("NFKC", str(value)).casefold().split())
+    return " ".join(unicodedata.normalize("NFKC", matching_script_text(str(value))).casefold().split())
+
+
+@lru_cache(maxsize=4096)
+def _cached_signal_fold(phrase: str) -> str:
+    """Only catalog literals call this; never original document strings."""
+    return _fold(phrase)
+
+
+def _fold_signal(phrase: str) -> str:
+    # The bounded number AND length prevent injected oversized configuration
+    # strings from becoming a global full-text store. Content keys remain valid
+    # when a catalog record is replaced or mutated; flags are read each time.
+    return _cached_signal_fold(phrase) if len(phrase) <= 256 else _fold(phrase)
 
 
 def _binding(profile_id: str) -> dict:
@@ -135,7 +151,7 @@ def _base_form(value: Any) -> str:
 
 
 def _signal_matches(phrase: str, text: str) -> bool:
-    return _matches_folded(_fold(phrase), _fold(text))
+    return _matches_folded(_fold_signal(phrase), _fold(text))
 
 
 def _matches_folded(needle: str, haystack: str) -> bool:
@@ -164,7 +180,7 @@ def configured_table_signal(text: str) -> bool:
                 raise ValueError("table_scan must be a boolean")
             if not enabled or "pdf_table_row" not in evidence["unit_kinds"]:
                 continue
-            matched = matched or any(_matches_folded(_fold(signal), folded) for signal in evidence["signals"])
+            matched = matched or any(_matches_folded(_fold_signal(signal), folded) for signal in evidence["signals"])
     return matched
 
 
@@ -179,7 +195,7 @@ def _policy_score(record: Mapping, parsed: Observation) -> tuple[int, int]:
         if signal["kind"] == "metadata_equals":
             actual = metadata.get(signal["field"])
             hit = actual is not None and (_base_form(actual) == _base_form(signal["value"])
-                                         if signal["field"] == "form_type" else _fold(actual) == _fold(signal["value"]))
+                                         if signal["field"] == "form_type" else _fold(actual) == _fold_signal(str(signal["value"])))
             weight = 6
         else:
             location = item["location"]
@@ -347,7 +363,7 @@ def select_business_facets(material: Sequence[Mapping], *, max_facets: int = 4, 
     for facet in _CATALOG["facets"]:
         basis = []
         matches = set()
-        signals = [(signal, _fold(signal)) for signal in _unique([signal for evidence in facet["positive_evidence"] for signal in evidence["signals"]])]
+        signals = [(signal, _fold_signal(signal)) for signal in _unique([signal for evidence in facet["positive_evidence"] for signal in evidence["signals"]])]
         for unit, folded_text in folded_probes:
             hits = [signal for signal, needle in signals if _matches_folded(needle, folded_text)]
             if hits:

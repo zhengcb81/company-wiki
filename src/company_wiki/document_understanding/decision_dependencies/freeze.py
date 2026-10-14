@@ -259,8 +259,11 @@ def decision_digest(manifest: Mapping[str, Any], *, budget: Budget | None = None
     digest that treats "absent" or "garbage" as "empty" would let a record with unhashed
     content pass as unchanged.
 
-    ``budget`` is optional and charged per row; hashing a manifest is work like any other
-    walk, so a comparison that re-derives the digest must not do it for free.
+    ``budget`` is optional and charges one work unit per row; hashing a manifest is work
+    like any other walk, so a comparison that re-derives the digest must not do it for
+    free. Bytes are deliberately *not* charged here -- the validation pass has already
+    measured these rows, and re-charging them would shrink the effective byte budget for
+    every extra pass over the same data.
     """
     missing = [name for name in IDENTITY_FIELDS if name not in manifest]
     if missing:
@@ -275,12 +278,20 @@ def decision_digest(manifest: Mapping[str, Any], *, budget: Budget | None = None
     return _digest_payload(payload)
 
 
+class BudgetExhausted(ValueError):
+    """The caller's work or byte budget ran out; raised only from a hashing walk."""
+
+
 def _sorted_rows(rows: Any, key: str, budget: Budget | None = None) -> list[Mapping[str, Any]]:
     """Order-independent view of a row array.
 
     A non-array or a non-mapping row is a caller error and is refused rather than
     dropped: silently skipping one would make two materially different manifests share a
     digest, which is exactly the collision this function exists to prevent.
+
+    Only *work* is charged here. Bytes are charged once, in the validation pass that
+    inspects these rows first; re-walking them to hash them must not double-count a row
+    against ``max_input_bytes`` or a legitimately sized domain would stop fitting.
     """
     if not isinstance(rows, (list, tuple)):
         raise ValueError(f"{key} rows must be an array")
@@ -288,5 +299,5 @@ def _sorted_rows(rows: Any, key: str, budget: Budget | None = None) -> list[Mapp
         if not isinstance(row, Mapping):
             raise ValueError(f"{key}[{index}] must be a mapping, got {type(row).__name__}")
         if budget is not None and not budget.charge():
-            raise ValueError("the caller's work budget ran out while hashing the manifest")
+            raise BudgetExhausted("the caller's work budget ran out while hashing the manifest")
     return sorted((dict(row) for row in rows), key=lambda row: str(row.get(key)))

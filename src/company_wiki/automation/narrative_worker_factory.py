@@ -132,6 +132,26 @@ def _generation_values(binding_json: str | None) -> dict[str, str]:
     return _runtime_snapshot(binding_json)[0]
 
 
+def _reading_projection_versions(binding_json: str | None) -> dict[str, str | None]:
+    """Select the actual renderer from each frozen generation, never a default."""
+    if binding_json is None:
+        return {}
+    from .narrative_batch import _thaw_generations
+    from .narrative_model import ModelResponseError, validate_reading_model_projection_version
+    binding = json.loads(binding_json)
+    if "generation_settings" not in binding:
+        return {}
+    manifests = _thaw_generations(binding)
+    result = {}
+    for key, manifest in manifests.items():
+        version = manifest.get("reading_model_projection")
+        if "reading_model_projection" in manifest and version is None:
+            raise ModelResponseError("READING_MODEL_PROJECTION_UNAVAILABLE")
+        validate_reading_model_projection_version(version)
+        result[key] = version
+    return result
+
+
 def _frozen_models(binding_json: str | None) -> list[dict[str, Any]]:
     """Read the already signed settings without rebuilding source manifests."""
     if binding_json is None:
@@ -229,6 +249,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
         raise ValueError("NARRATIVE_RUN_BLOCKED")
 
     generation_values, selector_version = _runtime_snapshot(run.binding_json)
+    reading_projections = _reading_projection_versions(run.binding_json)
     project_root = Path(options["project_root"])
     config_path = Path(options["catalog_config_path"])
     catalog = SourceCatalog(load_catalog_config(config_path, project_root=project_root))
@@ -252,6 +273,8 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
         executor,
         NarrativeRuntimeDependencies(reader=reader, model=model, model_caller=caller, normalization=normalization,
             projection_catalog=catalog, selector_version=selector_version,
+            reading_model_projection=(lambda subject: reading_projections[subject.item_key])
+                if reading_projections else None,
             generation_sha256=_generation_resolver(run_store, options["run_id"], generation_values,
                                                    selector_version=selector_version) if generation_values else None),
     )

@@ -6,7 +6,9 @@
     "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\shared-reading-completion-20261014\\quality",
     "checkout_bytes": 15518494.0,
     "originals_copied": false,
-    "status": "READY_NOT_STARTED"
+    "status": "RECEIVED_COMPONENTS_ROOT_QUALITY_IN_PROGRESS",
+    "author_head": "dcde9aae",
+    "root_receipt": "common-root-quality-evidence/acceptance.json"
   },
   {
     "lane": "dependencies",
@@ -15,7 +17,9 @@
     "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\shared-reading-completion-20261014\\dependencies",
     "checkout_bytes": 15518529.0,
     "originals_copied": false,
-    "status": "READY_NOT_STARTED"
+    "status": "RECEIVED_COMPONENTS_ROOT_QUALITY_IN_PROGRESS",
+    "author_head": "ef59a574bfe6525e6d7dc1c123b2e9294e00ea5e",
+    "root_receipt": "common-root-quality-evidence/acceptance.json"
   },
   {
     "lane": "geometry",
@@ -24,6 +28,8 @@
     "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\shared-reading-completion-20261014\\geometry",
     "checkout_bytes": 15518501.0,
     "originals_copied": false,
-    "status": "READY_NOT_STARTED"
+    "status": "RECEIVED_COMPONENTS_ROOT_QUALITY_IN_PROGRESS",
+    "author_head": "a8cc604d",
+    "root_receipt": "common-root-quality-evidence/acceptance.json"
   }
 ]

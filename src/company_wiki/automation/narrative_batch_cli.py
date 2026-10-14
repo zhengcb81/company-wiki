@@ -3,8 +3,12 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Iterator
+from contextlib import contextmanager, redirect_stdout
 import json
+import os
 from pathlib import Path
+import sys
 from typing import Sequence
 
 from company_wiki.source_catalog.source_reader import SourceReadError
@@ -14,6 +18,43 @@ from .models import canonical_json
 from .narrative_batch import BatchPreparationDeadlineExceeded, BatchResumeError, run_batch
 from .narrative_batch_request import NarrativeBatchRequest
 from .narrative_run_store import NarrativeRunStore
+
+
+@contextmanager
+def _operation_diagnostics() -> Iterator[None]:
+    """Reserve stdout for the final receipt, including native FD writers.
+
+    This is the finite CLI process boundary, not a library-wide logging policy.
+    In-memory callers have no descriptors and use the Python-stream path.
+    Both descriptor and stream bindings are restored on success or exception.
+    """
+    output = sys.stdout
+    diagnostics = sys.stderr
+    output_fd = None
+    saved_fd = None
+    try:
+        output.flush()
+        # Native dependencies write the process stdout descriptor (1), which
+        # need not equal an embedding/capture stream's private descriptor.
+        output_fd = 1
+        saved_fd = os.dup(output_fd)
+        os.dup2(diagnostics.fileno(), output_fd)
+    except (AttributeError, OSError, ValueError):
+        if saved_fd is not None:
+            os.close(saved_fd)
+        saved_fd = None
+    try:
+        with redirect_stdout(diagnostics):
+            yield
+    finally:
+        try:
+            diagnostics.flush()
+        finally:
+            if saved_fd is not None and output_fd is not None:
+                try:
+                    os.dup2(saved_fd, output_fd)
+                finally:
+                    os.close(saved_fd)
 
 
 def _failure_receipt(request, db_path, status, error):
@@ -66,34 +107,36 @@ def main(
         print(canonical_json({"schema_version": "narrative-batch-result/1", "status": "failed",
                               "error": "NARRATIVE_BATCH_INVALID_REQUEST"}))
         return 1
-    try:
-        receipt = run_batch(request, project_root=args.project_root, catalog_config_path=args.catalog_config,
-                            db_path=args.automation_db, work_dir=args.work_dir)
-    except BatchPreparationDeadlineExceeded:
-        print(canonical_json(_failure_receipt(request, args.automation_db, "failed",
-                                              "BATCH_PREPARATION_DEADLINE_EXCEEDED")))
-        return 2
-    except NarrativeLanguageError as exc:
-        print(canonical_json(_failure_receipt(request, args.automation_db, "failed", exc.code)))
-        return 2
-    except SourceReadError as exc:
-        print(canonical_json(_failure_receipt(request, args.automation_db, "failed", exc.reason)))
-        return 2
-    except BatchResumeError as exc:
-        print(canonical_json(_failure_receipt(request, args.automation_db, "failed", exc.code)))
-        return 2
-    except ValueError as exc:
-        status = "storage_exhausted" if str(exc) in {
-            "PERSISTENT_BYTES_EXCEEDED", "SCRATCH_BYTES_EXCEEDED", "FINAL_BYTES_EXCEEDED",
-        } else "failed"
-        print(canonical_json(_failure_receipt(request, args.automation_db, status, "NARRATIVE_BATCH_" + type(exc).__name__)))
-        return 2
-    except Exception as exc:
-        # Provider bodies, paths and credentials never become a CLI error detail.
-        print(canonical_json(_failure_receipt(request, args.automation_db, "failed", "NARRATIVE_BATCH_" + type(exc).__name__)))
-        return 1
+    with _operation_diagnostics():
+        try:
+            receipt = run_batch(request, project_root=args.project_root, catalog_config_path=args.catalog_config,
+                                db_path=args.automation_db, work_dir=args.work_dir)
+            exit_code = 0 if receipt["status"] == "completed" else 2
+        except BatchPreparationDeadlineExceeded:
+            receipt = _failure_receipt(request, args.automation_db, "failed",
+                                       "BATCH_PREPARATION_DEADLINE_EXCEEDED")
+            exit_code = 2
+        except NarrativeLanguageError as exc:
+            receipt = _failure_receipt(request, args.automation_db, "failed", exc.code)
+            exit_code = 2
+        except SourceReadError as exc:
+            receipt = _failure_receipt(request, args.automation_db, "failed", exc.reason)
+            exit_code = 2
+        except BatchResumeError as exc:
+            receipt = _failure_receipt(request, args.automation_db, "failed", exc.code)
+            exit_code = 2
+        except ValueError as exc:
+            status = "storage_exhausted" if str(exc) in {
+                "PERSISTENT_BYTES_EXCEEDED", "SCRATCH_BYTES_EXCEEDED", "FINAL_BYTES_EXCEEDED",
+            } else "failed"
+            receipt = _failure_receipt(request, args.automation_db, status, "NARRATIVE_BATCH_" + type(exc).__name__)
+            exit_code = 2
+        except Exception as exc:
+            # Provider bodies, paths and credentials never become a CLI error detail.
+            receipt = _failure_receipt(request, args.automation_db, "failed", "NARRATIVE_BATCH_" + type(exc).__name__)
+            exit_code = 1
     print(canonical_json(receipt))
-    return 0 if receipt["status"] == "completed" else 2
+    return exit_code
 
 
 if __name__ == "__main__":

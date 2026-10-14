@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import re
 
+from company_wiki.document_normalization.text_matching import matching_reading_text, matching_script_text
+
 from .n6_candidate_operating_facts import OperatingFact, detect_operating_fact
 from .n6_candidate_completion import BUSINESS_CHARACTER_WINDOW
 
@@ -212,7 +214,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/3"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/5"
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -229,29 +231,63 @@ _BILLING_RELATION = re.compile(
     r"(?:收入|收费|收費|计费|計費|定价|定價).{0,45}(?:取决于|取決於|根据|根據|采用|採用|按照|按)|"
     r"(?:采用|採用).{0,35}(?:计费|計費|收费|收費)", re.I)
 _SEGMENT_OBJECT = re.compile(r"\b(?:reportable|reporting|operating|business)?\s*segments?\b|分部|业务板块|業務板塊", re.I)
+_OWNED_SEGMENT_SCOPE_TEXT = (
+    r"\b(?:our|(?:the|this)\s+company['’]s)\s+"
+    r"(?:(?:[a-z0-9][a-z0-9&()/\-]*|&)\s+){0,9}segments?\b|"
+    r"(?:本公司|公司|本集团|本集團|本企业|本企業|我们|我們)"
+    r"[^。！？!?;；,，]{0,35}?(?:分部|业务板块|業務板塊)"
+)
+_OWNED_SEGMENT_SCOPE = re.compile(_OWNED_SEGMENT_SCOPE_TEXT, re.I)
+_SEGMENT_SCOPE_BREAK = re.compile(
+    r"\b(?:says?|said|defines?|defined|describes?|described|mentions?|mentioned|"
+    r"explains?|explained|discuss(?:es|ed)?)\s+"
+    r"(?:a|an|the|that|business|reportable|reporting|operating)\b|"
+    r"说明|說明|介紹|介绍|描述|提及|泛指", re.I)
 _SEGMENT_SCOPE = re.compile(
     r"\b(?:reportable|reporting|operating|business)\s+segments?\b|"
     r"\bour\s+segments?\b|\b(?:our|the|company)\s+business\b|"
-    r"报告分部|報告分部|经营分部|經營分部|分部口径|分部口徑|业务板块|業務板塊", re.I)
+    r"报告分部|報告分部|经营分部|經營分部|分部口径|分部口徑|业务板块|業務板塊|"
+    + _OWNED_SEGMENT_SCOPE_TEXT, re.I)
 _SEGMENT_RELATION = re.compile(
-    r"\b(?:operate|manage|report)\b[^。.!?;]{0,100}\b(?:using|through|segments?)\b|"
-    r"\bsegments?\b[^。.!?;]{0,70}\b(?:consist|comprise|include|composition|changes?|changed|recast)\b|"
+    r"\b(?:operat(?:e|es|ed|ing)|manag(?:e|es|ed|ing)|report(?:s|ed|ing)?)\b"
+    r"[^。.!?;]{0,100}\b(?:using|through|segments?)\b|"
+    r"\bsegments?\b[^。.!?;]{0,70}\b(?:consist(?:s|ed|ing)?|compris(?:e|es|ed|ing)|"
+    r"includ(?:e|es|ed|ing)|composition|changes?|changed|recast)\b|"
     r"\b(?:composition|changes?|changed|recast|reclassif\w*)\b[^。.!?;]{0,100}\bsegments?\b|"
-    r"(?:分部|业务板块|業務板塊).{0,55}(?:由|分为|分為|组成|組成|调整|調整|重述|变更|變更)|"
+    r"(?:分部|业务板块|業務板塊).{0,55}(?:由|包括|包含|分为|分為|组成|組成|调整|調整|重述|变更|變更)|"
     r"(?:调整|調整|重述|变更|變更).{0,35}(?:分部|业务板块|業務板塊)", re.I)
+_SEGMENT_SELF_REPORTING = re.compile(
+    r"\b(?:we|our\s+company|(?:the|this)\s+company)\s+"
+    r"(?:(?:have|had|will|now|currently|also)\s+)*"
+    r"(?:operat(?:e|es|ed|ing)|manag(?:e|es|ed|ing)|report(?:s|ed|ing)?)\b", re.I)
+_SEGMENT_COMPOSITION = re.compile(r"\b(?:consist(?:s|ed|ing)?|compris(?:e|es|ed|ing)|"
+    r"includ(?:e|es|ed|ing))\b|由|包括|包含|分为|分為|组成|組成", re.I)
+_SEGMENT_FINANCIAL_WORD = re.compile(
+    r"\b(?:revenues?|profits?|income|earnings|cash\s+flow|tax(?:es)?|accruals?|"
+    r"assets?|liabilit\w*|expenses?|financing\s+cash|investing\s+cash)\b|"
+    r"营业收入|營業收入|收入|营收|營收|利润|利潤|税项|稅項|税款|稅款|资产|資產|负债|負債|现金流|現金流", re.I)
+_SEGMENT_FINANCIAL_PAYLOAD = re.compile(
+    r"^\s*(?:(?:of|the|a|domestic|foreign|overseas|national)\s+|國內|国内|海外|境外)*"
+    r"(?:[$€£¥]\s*)?(?:\d[\d,.]*\s*(?:billion|million|thousand|亿元|億元|万元|萬元|"
+    r"亿|億|万|萬|元|USD|CNY|HKD|%)?\s*(?:of\s+)?)?"
+    r"(?:revenues?|profits?|income|earnings|cash\s+flow|tax(?:es)?|accruals?|"
+    r"assets?|liabilit\w*|expenses?|financing\s+cash|investing\s+cash|"
+    r"营业收入|營業收入|收入|营收|營收|净利润|淨利潤|利润|利潤|税项|稅項|税款|稅款|资产|資產|负债|負債|现金流|現金流)", re.I)
 _PRODUCT_SUBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|segments?)\b|"
     r"产品|產品|服务|服務|软件|軟件|平台|业务|業務|分部", re.I)
 _REVENUE_GROWTH = re.compile(
     r"\b(?:revenue|sales)\b[^。.!?;]{0,45}\b(?:increas\w*|grew|growth|declin\w*|decreas\w*)\b|"
     r"(?:收入|销售|銷售).{0,20}(?:增长|增長|下降|减少|減少)", re.I)
-_DRIVER_LINK = re.compile(r"\b(?:driven by|due to|reflecting)\b|主要由|受.{0,12}带动|受.{0,12}帶動|得益于|得益於", re.I)
+_DRIVER_LINK = re.compile(r"\b(?:driven by|due to|reflecting)\b|主要由|由于|因为|受.{0,12}带动|得益于", re.I)
 _OPERATING_MEASURE = re.compile(
     r"\b(?:consumption|usage|subscribers?|seats?|customers?|users?|units?|volumes?|pricing)\b|"
-    r"使用量|用量|订阅|訂閱|席位|用户|用戶|客户|客戶|销量|銷量|价格|價格", re.I)
+    r"capacity utilization|product mix|使用量|用量|订阅|訂閱|席位|用户|用戶|客户|客戶|销量|銷量|价格|價格|"
+    r"产能利用率|产品组合", re.I)
 _MEASURE_CHANGE = re.compile(
     r"\b(?:higher|lower|growing|rising|falling|increas\w*|decreas\w*|grew|growth|"
-    r"declin\w*|expansion|adoption|mix)\b|增长|增長|上升|下降|提升|减少|減少|增加|扩张|擴張", re.I)
+    r"declin\w*|expansion|adoption|mix|improv\w*|changed|shift\w*|rose)\b|"
+    r"增长|增長|上升|下降|提升|减少|減少|增加|扩张|擴張|提高|变动|变化", re.I)
 _MEASURE_COUNT = re.compile(r"^\s*(?:(?:of|was|were|reached|at|to)\s+)?\d|"
                             r"\d[\d,.]*\s+(?:(?:million|billion|thousand|paid|active|licensed)\s+)*$", re.I)
 _CONTRACT_OBJECT = re.compile(
@@ -310,8 +346,75 @@ def _store_activity(clause: str) -> bool:
 
 def _reading_text(text: str) -> str:
     """Interpret native wrapping only; original wording/coordinates stay intact."""
-    compact = re.sub(r"(?<=[\u3400-\u9fff])\s+(?=[\u3400-\u9fff])", "", text)
-    return compact.replace("\r\n", " ").replace("\n", " ").replace("\r", " ")
+    return matching_reading_text(text)
+
+
+_BRAND_LIST = re.compile(
+    r"(?P<owner>[^。;!?]{0,80}?)(?:品牌(?:组合)?|brand portfolio|brands?)"
+    r"\s*(?:包括|包含|涵盖|compris\w*|includ\w*|consists? of)\s*(?P<members>[^。;!?]{1,160})", re.I)
+_BUSINESS_OWNER = re.compile(r"本公司|本集团|我们|我司|(?:公司|集团)(?:的)?|\b(?:our|we|the company's)\b", re.I)
+_MEMBER_SEPARATOR = re.compile(r"[,、]|以及|及|与|和|\b(?:and|or)\b", re.I)
+_GENERIC_BRAND_MEMBER = re.compile(
+    r"^(?:products?|services?|solutions?|brands?|产品|服务|方案|品牌|各类品牌|相关品牌)$", re.I)
+_OWNERSHIP = re.compile(
+    r"(?P<owner>[^，,。;!?]{1,80}?)(?:是|为|系)\s*(?P<target>[^，。;!?]{1,100})的"
+    r"(?:最大|控股|主要)股东|"
+    r"(?P<en_owner>[^。;!?]{1,80}?)\bis\s+(?:the\s+)?(?:largest|majority|controlling)\s+"
+    r"shareholder\s+of\s+(?P<en_target>[^。;!?]{2,100})", re.I)
+_HYPOTHETICAL_OWNER = re.compile(r"假如|假设|可能|拟|尚未|不是|并非|\b(?:if|may|might|could|would|not)\b", re.I)
+_SALES_COMPONENT_CHANGE = re.compile(
+    r"\b(?:higher|lower|increasing|decreasing|increased|decreased)\s+(?:net\s+)?sales\s+of\s+"
+    r"(?P<component>[^,。;.!?]{1,80})", re.I)
+_FINANCIAL_COMPONENT = re.compile(
+    r"^(?:financial assets?|shares?|bonds?|securities|equity|interest income|taxes?|"
+    r"外汇|证券|股票|债券|利息|税项)\b", re.I)
+_READING_ABBREVIATION = re.compile(r"\b(?:Inc|Ltd|Co|Corp)\.(?=\s)", re.I)
+
+
+def _reading_clauses(text: str) -> tuple[str, ...]:
+    # Company suffix punctuation is not a sentence boundary. Only this predicate
+    # view elides it; the source string and locator remain untouched.
+    interpreted = _READING_ABBREVIATION.sub(lambda match: match.group()[:-1], text)
+    return tuple(clause for clause in _CLAUSES.split(interpreted)
+                 if clause and len(clause) <= BUSINESS_CHARACTER_WINDOW)
+
+
+def _brand_portfolio(clause: str) -> tuple[bool, bool]:
+    """Return observed portfolio grammar and concrete source-owned membership."""
+    if '品牌' not in clause and 'brand' not in clause.casefold():
+        return False, False
+    for relation in _BRAND_LIST.finditer(clause):
+        if not _BUSINESS_OWNER.search(relation.group('owner')):
+            continue
+        if _HYPOTHETICAL_OWNER.search(relation.group('owner')):
+            return True, False
+        members = [part.strip(' .，') for part in _MEMBER_SEPARATOR.split(relation.group('members'))]
+        concrete = [part for part in members if part and not _GENERIC_BRAND_MEMBER.fullmatch(part)]
+        return True, len(concrete) >= 2
+    return False, False
+
+
+def _ownership_scope(clause: str) -> bool:
+    if '股东' not in clause and 'shareholder' not in clause.casefold():
+        return False
+    for relation in _OWNERSHIP.finditer(clause):
+        owner = relation.group('owner') or relation.group('en_owner') or ''
+        target = relation.group('target') or relation.group('en_target') or ''
+        if not _HYPOTHETICAL_OWNER.search(owner) and any(c.isalpha() for c in target):
+            return True
+    return False
+
+
+def _operating_causal_relation(clause: str) -> bool:
+    for link in _DRIVER_LINK.finditer(clause):
+        explanation = clause[link.end():]
+        if _measured_driver(explanation):
+            return True
+        for relation in _SALES_COMPONENT_CHANGE.finditer(explanation):
+            component = relation.group('component').strip()
+            if not _FINANCIAL_COMPONENT.search(component) and any(c.isalpha() for c in component):
+                return True
+    return False
 
 
 def _measured_driver(explanation: str) -> bool:
@@ -325,17 +428,58 @@ def _measured_driver(explanation: str) -> bool:
     return False
 
 
+def _segment_reporting_relation(clause: str) -> bool:
+    """Bind an issuer's actual segment to its composition/reporting relation.
+
+    A generic named category or a financial total is not reporting scope.
+    The existing clause/character bound applies before this helper; matching
+    the relation's target prevents borrowing another segment's predicate.
+    """
+    if not _SEGMENT_SCOPE.search(clause):
+        return False
+    owned = tuple(scope for scope in _OWNED_SEGMENT_SCOPE.finditer(clause)
+                  if not _SEGMENT_SCOPE_BREAK.search(scope.group()))
+    issuer_actions = tuple(_SEGMENT_SELF_REPORTING.finditer(clause))
+    for relation in _SEGMENT_RELATION.finditer(clause):
+        targets = tuple(_SEGMENT_OBJECT.finditer(relation.group()))
+        if not targets:
+            continue
+        target = targets[0]
+        start, end = relation.start() + target.start(), relation.start() + target.end()
+        ownership = next((scope for scope in owned if scope.end() == end), None)
+        reporting = any(action.start() <= relation.start() < action.end() for action in issuer_actions)
+        if ownership is None and not reporting:
+            continue
+        after = clause[end:]
+        composition = _SEGMENT_COMPOSITION.search(after[:70])
+        if composition is not None:
+            gap, payload = after[:composition.start()], after[composition.end():]
+            if _SEGMENT_OBJECT.search(gap) or _SEGMENT_FINANCIAL_WORD.search(gap):
+                continue
+            if _SEGMENT_FINANCIAL_PAYLOAD.search(payload):
+                continue
+        elif ownership is not None and _SEGMENT_FINANCIAL_WORD.search(clause[ownership.start():start]):
+            continue
+        return True
+    return False
+
+
 def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
     """Specific source relationships, not a bag of nouns across sentences."""
     reasons = []
     for clause in clauses:
         if _GENERIC_DEFINITION.search(clause) and not _COMPANY_ANCHOR.search(clause):
             continue
+        if _brand_portfolio(clause)[1]:
+            reasons.append("brand_portfolio_structure")
+        if _ownership_scope(clause):
+            reasons.append("business_ownership_scope")
+        if _operating_causal_relation(clause):
+            reasons.append("operating_causal_driver")
         if (_READING_OBJECT.search(clause) and _BILLING_BASIS.search(clause)
                 and _BILLING_RELATION.search(clause)):
             reasons.append("business_billing_basis")
-        if (_SEGMENT_OBJECT.search(clause) and _SEGMENT_SCOPE.search(clause)
-                and _SEGMENT_RELATION.search(clause)):
+        if _segment_reporting_relation(clause):
             reasons.append("business_reporting_scope")
         growth = _REVENUE_GROWTH.search(clause)
         link = _DRIVER_LINK.search(clause)
@@ -370,12 +514,19 @@ def detect_reading_business_fact(text: str) -> OperatingFact:
     general operating activity in the same bounded clause; a noun or a financial
     growth sentence alone is insufficient. Numeric amounts are never required.
     """
-    fact = detect_business_fact(text)
-    clauses = tuple(clause for clause in _CLAUSES.split(_reading_text(text))
-                    if clause and len(clause) <= BUSINESS_CHARACTER_WINDOW)
+    interpreted = _reading_text(text)
+    clauses = _reading_clauses(interpreted)
+    # A generic brand list must not borrow the legacy broad "comprises products"
+    # mechanism. Only the opt-in reader filters that clause; legacy stays exact.
+    source_clauses = tuple(clause for clause in clauses
+        if not (_brand_portfolio(clause)[0] and not _brand_portfolio(clause)[1]))
+    # Preserve the old bounded per-native-line recognizer for all unfiltered
+    # material. A long wrapped tail must not erase an already observed fact.
+    fact = detect_business_fact('. '.join(source_clauses) if len(source_clauses) != len(clauses)
+                                else matching_script_text(text))
     activity = any(_OBJECT.search(clause) and _ACTIVITY.search(clause) for clause in clauses)
     relations = _reading_relations(clauses)
-    if not relations and not activity and not _business_fact(text).eligible:
+    if not relations and not activity and not _business_fact(interpreted).eligible:
         # The historical English event recognizer can treat a product-labelled
         # financial growth clause as an event. Preserve legacy replay, but the
         # new path needs operating meaning rather than "revenue grew" plus an
@@ -386,7 +537,7 @@ def detect_reading_business_fact(text: str) -> OperatingFact:
             fact = detect_business_fact(". ".join(source_clauses))
     if not activity and not relations:
         return fact
-    families = business_objects(text)
+    families = business_objects(interpreted)
     topics = tuple(dict.fromkeys((*fact.topics, *relations,
         *(("business_progress",) if activity else ()),
         *(("capacity_projects",) if activity and "production" in families else ()))))

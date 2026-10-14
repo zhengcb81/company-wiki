@@ -40,7 +40,7 @@ from .contract import (
     encoded_bytes,
     resolve_limits,
 )
-from .freeze import decision_digest, freeze_decision_dependencies
+from .freeze import BudgetExhausted, decision_digest, freeze_decision_dependencies
 
 
 _SHA256_HEX = frozenset("0123456789abcdef")
@@ -137,7 +137,11 @@ def _manifest_problem(manifest: Mapping[str, Any], budget: Budget | None) -> str
                     f"something to collapse"
                 )
             seen.add(identity)
-            if budget is not None and not budget.charge_bytes(encoded_bytes(row)):
+            # This is the one pass that measures each row's bytes; every later walk over
+            # the same rows charges work only, so a domain is not billed once per pass.
+            if budget is not None and not budget.charge_bytes(
+                encoded_bytes(row) + BYTES_PER_ROW_ENVELOPE
+            ):
                 return _BUDGET_REASON
         identifiers[key] = seen
 
@@ -227,6 +231,10 @@ def _identity_rows(
         return None, "frozen decision_digest must be a full 64-character lowercase SHA-256"
     try:
         recomputed = decision_digest(manifest, budget=budget)
+    except BudgetExhausted:
+        # A budget stop is not a property of the record; report it as the budget reason
+        # so it does not masquerade as a malformed manifest.
+        return None, _BUDGET_REASON
     except (TypeError, ValueError) as error:
         return None, f"frozen decision_digest cannot be recomputed: {error}"
     if recorded != recomputed:
@@ -241,22 +249,15 @@ def _identity_rows(
 
 
 def _spend_row(budget: Budget, row: Mapping[str, Any]) -> bool:
-    """Charge one row against the budget.
+    """Charge the work of one re-walked row.
 
-    Bytes come from the row's real canonical encoding, which already contains every
-    field and reference, plus one per-row envelope -- the same accounting the decode pass
-    uses. Charging per reference as well would double-count the row and quietly shrink
-    what fits inside the published byte budget.
+    Only *work* is charged on the index and diff passes. Bytes were already charged for
+    this row when the validation pass read it, and charging them again on every re-walk
+    would shrink the effective ``max_input_bytes`` with each pass -- a legitimately sized
+    domain would stop fitting long before its published limit. The row count is bounded
+    by the validation that has already run, so work alone keeps the diff bounded.
     """
-    if not budget.charge():
-        return False
-    try:
-        size = encoded_bytes(row)
-    except (TypeError, ValueError):
-        # An unencodable row has already been rejected by the manifest validation that
-        # runs before any diff; charge the envelope and let the caller see it there.
-        size = 0
-    return budget.charge_bytes(size + BYTES_PER_ROW_ENVELOPE)
+    return budget.charge()
 
 
 def _index(
@@ -553,7 +554,7 @@ def _budget_diagnostic(budget: Budget, limits: Mapping[str, int]) -> dict[str, A
     return {
         "code": "WORK_LIMIT_REACHED" if limit == "max_work_units" else "BYTES_LIMIT_REACHED",
         "detail": (
-            f"{limit}={limits[limit]} reached while diffing the decision inventory; the comparison "
-            "stopped here and no verdict is issued"
+            f"{limit}={limits[limit]} reached while validating or diffing the decision "
+            "inventory; the comparison stopped here and no verdict is issued"
         ),
     }
