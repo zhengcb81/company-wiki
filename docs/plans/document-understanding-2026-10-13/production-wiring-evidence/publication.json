@@ -1,0 +1,27 @@
+{
+  "schema_version": "shared-reading-production-publication/1",
+  "date": "2026-10-14",
+  "implementation_commit": "d3c57b316062bf1af55314632ed21f4e684417dd",
+  "fixture_repair_commit": "fc2a4513c78edab99bb83786445bb7a277569151",
+  "branch": "master",
+  "remote_ref": "origin/master",
+  "remote_sha": "fc2a4513c78edab99bb83786445bb7a277569151",
+  "normal_push_exit": 0,
+  "pre_push": {"passed": 4379, "skipped": 17, "failed": 0, "seconds": 381.75},
+  "ci": {
+    "id": 38540579403,
+    "head_sha": "fc2a4513c78edab99bb83786445bb7a277569151",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/38540579403",
+    "observed_through": "official GitHub read-only REST API; gh unavailable; web open unavailable"
+  },
+  "default_selector": "0.8.0",
+  "explicit_public_request_selector": "0.9.0",
+  "source_quality_acceptance": "OPEN; true 1/8 MSFT diagnostic is under shared-root TDD repair",
+  "cross_run_production_cache": "OPEN; DU3 lane final working changes are not received",
+  "new_provider_calls": 0,
+  "new_external_model_calls": 0,
+  "raw_and_production_config_changes": 0,
+  "external_owned_writes": 0
+}

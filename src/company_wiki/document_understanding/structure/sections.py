@@ -13,6 +13,7 @@ from collections.abc import Sequence
 from dataclasses import dataclass, field
 from copy import copy
 import re
+from typing import cast
 from ..observation_adapter import _is_item_label, _is_item_heading, _part_heading_level
 
 from . import layout as layout_mod
@@ -123,7 +124,7 @@ def _dominant_language(
 
 
 def _display_heading_groups(units, excluded):
-    tables = {}
+    tables: dict[str, list[ObservationUnit]] = {}
     for unit in units:
         if unit.table_id and unit.unit_id not in excluded:
             tables.setdefault(unit.table_id, []).append(unit)
@@ -141,7 +142,7 @@ def _display_heading_groups(units, excluded):
         label = labels[0]
         titles = [u for u in members if u is not label]
         if any(
-            u.column_index <= label.column_index
+            cast(int, u.column_index) <= cast(int, label.column_index)
             or not any(ch.isalpha() for ch in u.text)
             or re.match(
                 r"^(?:USD|RMB|CNY|HKD|EUR|GBP|JPY|US\$|HK\$|人民币)\s*[\d$€£¥.,%+-]",
@@ -153,7 +154,7 @@ def _display_heading_groups(units, excluded):
             for u in titles
         ):
             continue
-        groups[label.unit_id] = [label] + sorted(titles, key=lambda u: u.column_index)
+        groups[label.unit_id] = [label] + sorted(titles, key=lambda u: cast(int, u.column_index))
     return groups
 
 
@@ -191,6 +192,8 @@ def build_sections(
     }
     active_part_depth = None
     active_item = None
+    previous_source: str | None = None
+    source_seen = False
 
     def open_section(
         unit: ObservationUnit,
@@ -202,7 +205,7 @@ def build_sections(
         counter += 1
         depth = (
             depth_override
-            if contextual_outline and unit.dom_path is None
+            if contextual_outline and (unit.dom_path is None or unit.heading_level_source == "numbering")
             else unit.heading_level
             if unit.heading_level is not None
             else (
@@ -247,6 +250,16 @@ def build_sections(
         return draft
 
     for unit in ordering.ordered:
+        if source_seen and unit.source_id != previous_source:
+            # Attribution changes are real boundaries even on a pageless
+            # projection. A prior parent's heading cannot classify this body.
+            stack.clear()
+            active_part_depth = None
+            active_item = None
+            last_page = None
+            carry_units = 0
+        previous_source = unit.source_id
+        source_seen = True
         if unit.unit_id in toc_ids:
             continue
         if unit.unit_id in furniture or unit.unit_id in display_title_ids:

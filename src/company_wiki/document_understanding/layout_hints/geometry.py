@@ -39,12 +39,22 @@ class Band:
     _bbox: tuple | None = field(default=None, init=False, repr=False)
     _y_sum: float = field(default=0.0, init=False, repr=False)
     _height_sum: float = field(default=0.0, init=False, repr=False)
+    _native_row: tuple[str, int] | None = field(default=None, init=False, repr=False)
+    _native_initialised: bool = field(default=False, init=False, repr=False)
+    _native_compatible: bool = field(default=True, init=False, repr=False)
 
     def __post_init__(self):
         for unit in self.units:
             self._observe(unit)
 
     def _observe(self, unit):
+        cell_key = native_unit_identity(unit)
+        row_key = cell_key[:2] if cell_key is not None else None
+        if not self._native_initialised:
+            self._native_row = row_key
+            self._native_initialised = True
+        elif row_key != self._native_row:
+            self._native_compatible = False
         box = unit.bbox
         if box is None:
             return
@@ -89,12 +99,23 @@ class Band:
 class Cell:
     members: list[Unit] = field(default_factory=list)
     _bbox: tuple | None = field(default=None, init=False, repr=False)
+    _native_cell: tuple[str, int, int] | None = field(
+        default=None, init=False, repr=False
+    )
+    _native_initialised: bool = field(default=False, init=False, repr=False)
+    _native_compatible: bool = field(default=True, init=False, repr=False)
 
     def __post_init__(self):
         for unit in self.members:
             self._observe(unit)
 
     def _observe(self, unit):
+        cell_key = native_unit_identity(unit)
+        if not self._native_initialised:
+            self._native_cell = cell_key
+            self._native_initialised = True
+        elif cell_key != self._native_cell:
+            self._native_compatible = False
         box = unit.bbox
         if self._bbox is None:
             self._bbox = box
@@ -128,6 +149,21 @@ class Cell:
         return max(sizes) if sizes else None
 
 
+def native_cell_identity(cell: Cell) -> tuple[str, int, int] | None:
+    return cell._native_cell if cell._native_compatible else None
+
+
+def native_unit_identity(unit: Unit) -> tuple[str, int, int] | None:
+    origin = unit.hints.get("_fine_origin") or {}
+    if origin.get("kind") == "cell":
+        return origin["table_id"], origin["row"], origin["column"]
+    return None
+
+
+def native_band_identity(band: Band) -> tuple[str, int] | None:
+    return band._native_row if band._native_compatible else None
+
+
 @dataclass
 class ColumnSlot:
     index: int
@@ -141,9 +177,21 @@ def band_geometry_units(units: list[Unit], budget: WorkBudget) -> list[Band]:
         usable, key=lambda u: ((u.bbox[1] + u.bbox[3]) / 2.0, u.bbox[0], u.ordinal)
     )
     bands: list[Band] = []
+    native_bands: dict[tuple[str, int], Band] = {}
     for unit in ordered:
         if not budget.charge(1):
             break
+        native = native_unit_identity(unit)
+        if native is not None:
+            # Native row identity survives wrapped cells with displaced centres
+            # and horizontally interleaved tables. Geometry supplies the order;
+            # it does not overwrite actual row/table provenance.
+            row_key = native[:2]
+            if row_key in native_bands:
+                native_bands[row_key].append(unit)
+            else:
+                native_bands[row_key] = Band(units=[unit])
+            continue
         if not bands:
             bands.append(Band(units=[unit]))
             continue
@@ -155,6 +203,15 @@ def band_geometry_units(units: list[Unit], budget: WorkBudget) -> list[Band]:
             band.append(unit)
         else:
             bands.append(Band(units=[unit]))
+    bands.extend(native_bands.values())
+    if native_bands:
+        bands.sort(
+            key=lambda band: (
+                band.bbox[1],
+                band.bbox[0],
+                min(unit.ordinal for unit in band.units),
+            )
+        )
     for band in bands:
         band.units.sort(key=lambda u: (u.bbox[0], u.ordinal))
     return bands
@@ -173,6 +230,14 @@ def band_cells(band: Band, budget: WorkBudget) -> list[Cell]:
         budget.charge(1)
         if cells:
             previous = cells[-1]
+            native = native_unit_identity(unit)
+            previous_native = native_cell_identity(previous)
+            if native is not None or previous_native is not None:
+                if native == previous_native:
+                    previous.append(unit)
+                else:
+                    cells.append(Cell(members=[unit]))
+                continue
             prev_box = previous.bbox
             gap = unit.bbox[0] - prev_box[2]
             if gap <= _cell_gap_tolerance(previous.members[-1], unit):
@@ -270,6 +335,11 @@ def assign_cell_columns(
     cell: Cell, slots: list[ColumnSlot], *, budget=None
 ) -> tuple[int | None, int | None]:
     """Return (column, column_span).  span covers every slot the cell overlaps."""
+    native = native_cell_identity(cell)
+    if native is not None:
+        if budget is not None:
+            budget.charge()
+        return native[2], None  # native column observed; merged span not guessed
     if not slots:
         return None, None
     box = cell.bbox

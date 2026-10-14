@@ -51,6 +51,9 @@ class NarrativeUnit:
         selection_group_id: str | None = None,
     ) -> EvidenceSpan:
         structured = dict(self.metadata)
+        # Rich native layout is transient reading input, not durable evidence.
+        # Keeping it out also preserves existing span identities when boxes vary.
+        structured.pop("reading_layout", None)
         structured.update(
             {
                 "language": self.language,
@@ -91,6 +94,8 @@ class DocumentStructure:
     line_count: int = 0
     errors: tuple[str, ...] = ()
     mime_type: str | None = None
+    layout_coverage: Mapping[str, Any] | None = None
+    layout_diagnostics: tuple[Mapping[str, Any], ...] = ()
 
     @property
     def coverage_complete(self) -> bool:

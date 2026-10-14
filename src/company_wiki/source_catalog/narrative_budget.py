@@ -17,8 +17,9 @@ actual span count. The default legacy policy stays replayable.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fractions import Fraction
 import heapq
-from typing import Any, Generic, TypeVar
+from typing import Any, Generic, Literal, TypeVar
 
 from .narrative_semantic_coverage import CoverageSignature, softly_repeats
 
@@ -29,7 +30,8 @@ Priority = tuple[int, int, OrderKey, str]
 PageKey = tuple[str, int | str]
 LEGACY_BUDGET_POLICY = "legacy"
 SEMANTIC_BUDGET_POLICY = "semantic_coverage/1"
-READING_BUDGET_POLICY = "reading_plan/1"
+READING_BUDGET_POLICY = "reading_plan/2"
+REPLAY_READING_BUDGET_POLICY = "reading_plan/1"
 
 _REASON_PRIORITY = (
     ("downstream_center_certification_timeline", -2),
@@ -144,6 +146,7 @@ class BudgetItem(Generic[PayloadT]):
     reading_topics: tuple[str, ...] = ()
     required_item_ids: tuple[str, ...] = ()
     is_context_only: bool = False
+    value_band: Literal["meaningful_fact", "description"] = "description"
 
 
 @dataclass(frozen=True)
@@ -345,10 +348,11 @@ def _plan(
     items: tuple[BudgetItem[PayloadT], ...], limit: int, policy: str = LEGACY_BUDGET_POLICY,
     *, max_chars: int | None = None, max_work_units: int = 2_000_000,
 ) -> tuple[tuple[BudgetItem[PayloadT], ...], tuple[BudgetDiagnostic, ...]]:
-    if policy == READING_BUDGET_POLICY:
-        return _reading_plan(items, limit, max_chars=max_chars, max_work_units=max_work_units)
+    if policy in {READING_BUDGET_POLICY, REPLAY_READING_BUDGET_POLICY}:
+        return _reading_plan(items, limit, max_chars=max_chars, max_work_units=max_work_units,
+                             value_coverage=policy == READING_BUDGET_POLICY)
     if max_chars is not None or max_work_units != 2_000_000:
-        raise ValueError("reading budget limits require reading_plan/1")
+        raise ValueError("reading budget limits require a reading_plan policy")
     if policy not in {LEGACY_BUDGET_POLICY, SEMANTIC_BUDGET_POLICY}:
         raise ValueError(f"unknown budget policy: {policy}")
     semantic = policy == SEMANTIC_BUDGET_POLICY
@@ -522,7 +526,7 @@ def plan_budget_items(
 
 def _reading_plan(
     items: tuple[BudgetItem[PayloadT], ...], limit: int, *,
-    max_chars: int | None, max_work_units: int,
+    max_chars: int | None, max_work_units: int, value_coverage: bool = False,
 ) -> tuple[tuple[BudgetItem[PayloadT], ...], tuple[BudgetDiagnostic, ...]]:
     """Rank caller-owned reading intent and charge unique, closed original IDs.
 
@@ -567,6 +571,10 @@ def _reading_plan(
     grouped: dict[str, list[BudgetItem[PayloadT]]] = {}
     group_for: dict[str, str] = {}
     signature_costs: dict[str, int] = {}
+    # The producer already shares frozen CoverageSignature objects for repeated
+    # original text. All items keep those objects alive for this call; reference
+    # identity can share validation work without merging any original IDs.
+    validated_signatures: dict[int, int] = {}
     for item in items:
         if not isinstance(item.item_id, str) or not item.item_id:
             raise ValueError("item_id must be a nonempty string")
@@ -585,6 +593,9 @@ def _reading_plan(
             raise ValueError("evidence_chars must be a nonnegative integer")
         if type(item.is_context_only) is not bool:
             raise ValueError("is_context_only must be a boolean")
+        if value_coverage and (not isinstance(item.value_band, str)
+                              or item.value_band not in {"meaningful_fact", "description"}):
+            raise ValueError("value_band must be meaningful_fact or description")
         for name, values, bound in (("reading_topics", item.reading_topics, 64),
                                     ("required_item_ids", item.required_item_ids, 4096)):
             if not isinstance(values, tuple) or len(values) > bound:
@@ -596,28 +607,37 @@ def _reading_plan(
         signature = item.coverage_signature
         signature_costs[item.item_id] = 0
         if signature is not None:
-            if not isinstance(signature, CoverageSignature) or type(signature.complete) is not bool:
-                raise ValueError("coverage_signature must be finite CoverageSignature metadata")
-            if (not isinstance(signature.tokens, tuple) or len(signature.tokens) > 512
-                    or not isinstance(signature.protected_sentences, tuple)
-                    or len(signature.protected_sentences) > 512
-                    or not isinstance(signature.stage_signals, tuple) or len(signature.stage_signals) > 512):
-                raise ValueError("coverage_signature sequences must be bounded tuples")
-            cost = 1 + len(signature.tokens) + len(signature.protected_sentences) + 4 * len(signature.stage_signals)
-            if not charge(cost):
-                return (), (work_stop(),)
-            strings = (*signature.tokens, *signature.protected_sentences)
-            if any(not isinstance(value, str) or not value for value in strings):
-                raise ValueError("coverage_signature text must be nonempty strings")
-            for signal in signature.stage_signals:
-                if (not isinstance(signal, tuple) or len(signal) != 4 or type(signal[2]) is not bool
-                        or any(not isinstance(signal[index], str) or not signal[index] for index in (0, 1))
-                        or not isinstance(signal[3], str)):
-                    raise ValueError("coverage_signature stages must be typed four-tuples")
-            if (sum(len(value) for value in strings)
-                    + sum(len(signal[index]) for signal in signature.stage_signals for index in (0, 1, 3)) > 65536):
-                raise ValueError("coverage_signature text exceeds its finite bound")
-            signature_costs[item.item_id] = cost
+            reference = id(signature)
+            if value_coverage and reference in validated_signatures:
+                if not charge():
+                    return (), (work_stop(),)
+                signature_costs[item.item_id] = validated_signatures[reference]
+            else:
+                if not isinstance(signature, CoverageSignature) or type(signature.complete) is not bool:
+                    raise ValueError("coverage_signature must be finite CoverageSignature metadata")
+                if (not isinstance(signature.tokens, tuple) or len(signature.tokens) > 512
+                        or not isinstance(signature.protected_sentences, tuple)
+                        or len(signature.protected_sentences) > 512
+                        or not isinstance(signature.stage_signals, tuple) or len(signature.stage_signals) > 512):
+                    raise ValueError("coverage_signature sequences must be bounded tuples")
+                cost = 1 + len(signature.tokens) + len(signature.protected_sentences) + 4 * len(signature.stage_signals)
+                if not charge(cost):
+                    return (), (work_stop(),)
+                strings = (*signature.tokens, *signature.protected_sentences)
+                if any(not isinstance(value, str) or not value for value in strings):
+                    raise ValueError("coverage_signature text must be nonempty strings")
+                for signal in signature.stage_signals:
+                    if (not isinstance(signal, tuple) or len(signal) != 4 or type(signal[2]) is not bool
+                            or any(not isinstance(signal[index], str) or not signal[index] for index in (0, 1))
+                            or not isinstance(signal[3], str)):
+                        raise ValueError("coverage_signature stages must be typed four-tuples")
+                if (sum(len(value) for value in strings)
+                        + sum(len(signal[0]) + len(signal[1]) + len(signal[3])
+                              for signal in signature.stage_signals) > 65536):
+                    raise ValueError("coverage_signature text exceeds its finite bound")
+                signature_costs[item.item_id] = cost
+                if value_coverage:
+                    validated_signatures[reference] = cost
         by_id[item.item_id] = item
         key = f"group:{item.group_id}" if item.group_id is not None else f"item:{item.item_id}"
         grouped.setdefault(key, []).append(item)
@@ -678,11 +698,20 @@ def _reading_plan(
     signatures: list[CoverageSignature] = []
     signature_weights: list[int] = []
     signature_intern: dict[CoverageSignature, int] = {}
+    interned_objects: dict[int, int | None] = {}
     item_signature: dict[str, int] = {}
     guards: dict[tuple[Any, ...], set[int]] = {}
     for uid, item in by_id.items():
         signature = item.coverage_signature
         if item.is_context_only or signature is None:
+            continue
+        reference = id(signature)
+        if value_coverage and reference in interned_objects:
+            if not charge():
+                return (), tuple((*dropped, work_stop()))
+            shared_index = interned_objects[reference]
+            if shared_index is not None:
+                item_signature[uid] = shared_index
             continue
         # Reserve the membership/insert/lookup operations of this finite tuple
         # interning step. Hashing tuples traverses their members on each lookup;
@@ -690,6 +719,8 @@ def _reading_plan(
         if not charge(3 * signature_costs[uid]):
             return (), tuple((*dropped, work_stop()))
         if not signature.complete or len(frozenset(signature.tokens)) < 12:
+            if value_coverage:
+                interned_objects[reference] = None
             continue
         if signature not in signature_intern:
             index = len(signatures)
@@ -699,6 +730,8 @@ def _reading_plan(
             guard = (signature.protected_sentences, signature.stage_signals)
             guards.setdefault(guard, set()).add(index)
         item_signature[uid] = signature_intern[signature]
+        if value_coverage:
+            interned_objects[reference] = item_signature[uid]
 
     candidate_class: dict[str, int] = {}
     revisions = {key: 0 for key in closures}
@@ -708,10 +741,11 @@ def _reading_plan(
     class_repeated: dict[int, bool] = {}
     class_versions: dict[int, int] = {}
     signature_classes: dict[int, set[int]] = {}
-    bucket_ids: dict[tuple[int, tuple[str, ...]], int] = {}
+    bucket_ids: dict[tuple[int, int, tuple[str, ...]], int] = {}
     bucket_heaps: dict[int, list[tuple[Any, ...]]] = {}
     bucket_topics: dict[int, tuple[str, ...]] = {}
     bucket_priorities: dict[int, int] = {}
+    bucket_values: dict[int, int] = {}
     bucket_versions: dict[int, int] = {}
     topic_buckets: dict[str, set[int]] = {}
     top_heap: list[tuple[Any, ...]] = []
@@ -726,13 +760,18 @@ def _reading_plan(
             dependents.setdefault(uid, set()).add(key)
         topics = tuple(sorted({topic for item in value_items for topic in item.reading_topics}))
         priority = min(item.reading_priority for item in value_items)
-        bucket_key = (priority, topics)
+        # Value is an explicit source assessment, never inferred from payload,
+        # headings, a topic name or a high numeric score by the budget planner.
+        value = (min(0 if item.value_band == "meaningful_fact" else 1 for item in value_items)
+                 if value_coverage else 0)
+        bucket_key = (value, priority, topics)
         if bucket_key not in bucket_ids:
             bid = len(bucket_ids)
             bucket_ids[bucket_key] = bid
             bucket_heaps[bid] = []
             bucket_topics[bid] = topics
             bucket_priorities[bid] = priority
+            bucket_values[bid] = value
             bucket_versions[bid] = 0
             for topic in topics:
                 topic_buckets.setdefault(topic, set()).add(bid)
@@ -796,8 +835,17 @@ def _reading_plan(
             topics = bucket_topics[bid]
             if not charge(1 + 2 * len(topics)) or not heap_work(len(top_heap) + 1):
                 return False
-            rank = (bucket_priorities[bid], int(bool(topics) and all(topic in topic_visits for topic in topics)),
-                    best[0], sum(topic_visits.get(topic, 0) for topic in topics), *best[1:6])
+            visits = sum(topic_visits.get(topic, 0) for topic in topics)
+            if value_coverage:
+                # A missing label is not proof of novelty. Normalize actual
+                # topic visits so a richly labelled fact is not punished merely
+                # for explaining several operating mechanisms in the same span.
+                novelty = int(not topics or all(topic in topic_visits for topic in topics))
+                rank = (bucket_values[bid], novelty, bucket_priorities[bid],
+                        best[0], Fraction(visits, max(1, len(topics))), *best[1:6])
+            else:
+                rank = (bucket_priorities[bid], int(bool(topics) and all(topic in topic_visits for topic in topics)),
+                        best[0], visits, *best[1:6])
             heapq.heappush(top_heap, (rank, bid, bucket_versions[bid]))
         return True
 
@@ -950,6 +998,7 @@ __all__ = [
     "LEGACY_BUDGET_POLICY",
     "SEMANTIC_BUDGET_POLICY",
     "READING_BUDGET_POLICY",
+    "REPLAY_READING_BUDGET_POLICY",
     "budget_diagnostics",
     "select_budget_items",
     "plan_budget_items",

@@ -139,6 +139,7 @@ class ObservationUnit:
         "page_height",
         "column",
         "heading_level",
+        "heading_level_source",
         "table_id",
         "row",
         "column_index",
@@ -177,6 +178,7 @@ class ObservationUnit:
         self.page_height = _optional_float(layout.get("page_height"))
         self.column = _optional_int(layout.get("column"))
         self.heading_level = _optional_int(hints.get("heading_level"))
+        self.heading_level_source = _optional_str(hints.get("heading_level_source"))
         self.table_id = _optional_str(hints.get("table_id"))
         self.row = _optional_int(hints.get("row"))
         self.column_index = _optional_int(hints.get("column"))

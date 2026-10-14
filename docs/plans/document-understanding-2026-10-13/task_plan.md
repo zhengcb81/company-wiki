@@ -46,13 +46,15 @@ Current Phase: A/B — 生产选择/摘要与缓存恢复已接线，集中工�
 
 ## Next Step
 
-正常发布已集中验收的显式0.9生产链/恢复代码，随后优先关闭真实微软原文关键业务1/8漏读的共用根因：实际表单→family policy、经营解释准入、闭合成本内的机制/主题覆盖。接收DU3依赖/几何/质量组件后做真实缓存与同预算摘要/G2/G4/G5，正式默认仍0.8。外包owned目录不改。
+下一步定位港股真实第12页经营表与正文从结构、准入到预算的共同遗漏原因；A股半年报同时只读回放。微软同源金标已8/8（旧4/8，保留1/8、7/8、章节接线后2/8的中间FAIL），90 spans/47999字符，未提高48000/96上限。共享引擎消费真实fine geometry，143集中PASS；ROOT原生覆盖与缓存夹具31PASS。三个DU3最终工作树均干净，GEOMETRY/QUALITY及DEPENDENCIES六个最终提交已本地接入，需完成ROOT真实跨run缓存验收。随后正式配置摘要及G2/G4/G5；正式默认仍0.8，不把锚点召回当摘要通过。
+
+最新工程节点：[明确范围收据](production-selection-evidence/acceptance.json) / [压缩测试与独审证据](production-selection-evidence/receipts.zip)。真实CLI三载体已强制完整dependency和same/cross-run0POST，集中143PASS；统一A/H封面用途与历史发行信号溯源195PASS。当前质量阻点是PDF跨原生blocks断句/经营表筛页与多语言业务机制，不是再提高预算。正式摘要尚未付费运行，默认0.8保持。各历史FAIL和独立金标字面错误保留。
 
 ## 并行施工（现在可独立启动）
 
 [DU3三卡总览与工作目录](parallel/du3-2026-10-14/README.md)。QUALITY仅拥有tools/document_understanding_benchmark；DEPENDENCIES仅拥有新decision_dependencies子包；GEOMETRY仅拥有新layout_snapshots子包，各自另有排他tests/ledger、独立稀疏worktree。ROOT保留source_catalog候选/预算/finalize、DU选择/summary与automation正式接线，三线不写这些共享目录、不重开旧DU/DU2卡。
 
-三卡已由用户分发施工，技术接口冻结为DU3/1；只读已看到DEPENDENCIES排他模块/测试未提交施工，当前尚未收到交付。ROOT接线依次DEPENDENCIES→GEOMETRY→QUALITY，但施工可同时进行，不等主线。A/B/C每卡只作三个大节点；原件只读、不调用付费模型或provider，真实模型与跨仓由ROOT共用母窗口。
+三卡已由用户分发，接口冻结DU3/1，ROOT不写作者工作目录。2026-10-14最新盘点三树干净：GEOMETRY接收为7e023a15/c6224a1a/ef69957a（ROOT89PASS/13SKIP）；QUALITY接收为016e3b4a/9f1a27bd/a8686990/804dfbb7（ROOT217PASS/7SKIP）；DEPENDENCIES接收完整六commit为c79e0c13/e5ad62af/f86aea25/7fd2f117/8a4e4cc4/d6e91356，含两轮独审根因修复。ROOT完整trace/current重建、实际0POST缓存与恢复仍须验证；这些组件PASS不代替生产PASS。A/B/C只作三个大节点，真实模型与跨仓共用母窗口。
 
 ## 完成标准与注意事项
 
@@ -60,7 +62,7 @@ Current Phase: A/B — 生产选择/摘要与缓存恢复已接线，集中工�
 - 旧微软关键业务baseline4/8 FAIL保持；真实/合成/不可评分别报告，不降gold或删失败收据。
 - 生产HTTP原已unique evidence rows；重复正文在DU中间package视图。接线复用既有传输，不能误修正确的HTTP机制。
 - 原件与生产配置不写穿；测试独立tmp/sentinel/owned清单，成功/失败都恢复。Dayu/IQS和他人WIP不动。
-- ROOT统一共有接口/状态/Git。作者卡全部已交付，不自动重派；未来分包需排他目录与冻结接口。
+- ROOT统一共有接口/状态/Git。旧DU/DU2作者卡已完成，不自动重派；DU3按上节最新状态接收，未来分包需排他目录与冻结接口。
 - 既有静态/快速hooks正常执行；只在A/B/C大节点做集中复核，不新增小节点门禁。
 
 ## 依据和历史
@@ -82,7 +84,7 @@ Current Phase: A/B — 生产选择/摘要与缓存恢复已接线，集中工�
 
 ## 2026-10-14 生产接线工程节点
 
-实现已本地commit d3c57b31，首次正常push被3个旧schema测试夹具拦住；30受影响修复全绿，正常补充commit/push中。[精确记录](production-wiring-evidence/push-repair.json)。当前没有远端更新，不把本地检查失败说成已推远端CI。
+实现d3c57b31和夹具修复fc2a4513已正常推master；正常pre-push4379PASS/17SKIP/381.75s，精确[CI38540579403](https://github.com/zhengcb81/company-wiki/actions/runs/38540579403) success。[发布收据](production-wiring-evidence/publication.json)。原3个旧schema夹具失败保留在[修复记录](production-wiring-evidence/push-repair.json)，未跳hooks。
 
 [节点收据](production-wiring-evidence/acceptance.json) / [紧凑原始证据](production-wiring-evidence/receipts.zip)。正式public request显式0.9、唯一原文/策略摘要、same-run/outbox/真实v5升级、原件篡改拒绝已验。集中1149 PASS/17 SKIP/3旧factory失败后，只复跑受影响51（50PASS/1新test参数失配）及最后18PASS；全部已知工程失败关闭，原FAIL保留。新7E2E：集中6PASS，1计数观察点过时，改为统一真实byte owner后1PASS；旧11E2E全PASS。没有反复重跑千项套件或降低断言。
 

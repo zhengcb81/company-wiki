@@ -1,5 +1,7 @@
 ## ROOT当前执行归总 — 2026-10-14 共享阅读生产接线
 
+接线d3c57b31、fixture修复fc2a4513已正常推master，4379 pre-push PASS，精确CI38540579403 success；[发布收据](../document-understanding-2026-10-13/production-wiring-evidence/publication.json)。当前继续真实策略绑定/业务意义共因TDD，默认0.8/G2/G4/G5开放。下段“正常发布中”为此前过程。
+
 [唯一当前PWF](../document-understanding-2026-10-13/task_plan.md)：显式0.9正式选择/摘要/同事务final/原件回开和v5恢复工程节点已验收，正常发布中。默认仍0.8；真实微软8业务事实新仅1/8、旧4/8，正在修实际策略绑定/经营解释准入/闭合预算覆盖共因。DU3三包独立施工、真实跨run缓存及真实摘要/G2/G4/G5开放；0新增供应商费用，不将工程绿当真实质量完成。
 
 ## ROOT当前执行归总 — 2026-10-13 共享阅读升级（历史）

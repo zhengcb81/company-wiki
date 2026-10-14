@@ -20,6 +20,7 @@ from .geometry import (
     band_cells,
     band_geometry_units,
     cluster_column_slots,
+    native_band_identity,
 )
 from .text_evidence import (
     has_quantity_token,
@@ -159,10 +160,19 @@ def analyse_page(
 def build_region_drafts(page_bands: PageBands, budget) -> list[RegionDraft]:
     bands = page_bands.bands
     meta = page_bands.meta
+    native_tables: dict[str, list[int]] = {}
+    native_indices = set()
+    for index, band in enumerate(bands):
+        budget.charge()
+        identity = native_band_identity(band)
+        if identity is not None:
+            native_tables.setdefault(identity[0], []).append(index)
+            native_indices.add(index)
     members = [
         i
         for i in range(len(bands))
         if meta.get(i)
+        and i not in native_indices
         and meta[i]["context"] is None
         and not meta[i]["prose"]
         and not meta[i]["furniture"]
@@ -188,6 +198,14 @@ def build_region_drafts(page_bands: PageBands, budget) -> list[RegionDraft]:
         runs.append(current)
 
     drafts: list[RegionDraft] = []
+    for indices in native_tables.values():
+        draft = RegionDraft(
+            page=page_bands.page, bands=bands, member_indices=indices, granularity=False
+        )
+        _attach_context(
+            draft, page_bands, _run_gap_tolerance([bands[i] for i in indices]), budget
+        )
+        drafts.append(draft)
     for run in runs:
         multi = [i for i in run if meta[i]["multi"]]
         if len(multi) >= 2:

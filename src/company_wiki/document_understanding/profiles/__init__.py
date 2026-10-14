@@ -103,6 +103,7 @@ def route_document(
         "regime": winner.regime,
         "family": winner.family,
         "subtype": winner.subtype,
+        "form_type": winner.form_type or "unknown",
         "confidence": confidence,
         "reasons": _bounded_reasons(reasons, parsed),
         "alternatives": alternatives,

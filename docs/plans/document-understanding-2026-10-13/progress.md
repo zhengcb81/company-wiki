@@ -1,4 +1,18 @@
-## ROOT生产接线工程验收 — 2026-10-14
+## ROOT真实漏读共因与DU3接收 — 2026-10-14
+
+实际form贯通family/strategy/unit scope/decision inventory，新增准入algorithm版本reading-business-policy/2；通用计费、分部变更、业务驱动、合同转化关系只进入0.9。旧0.8 detector与真实TXT指纹不改。相关439PASS/11SKIP、经营295PASS/45.76s；独立7个反例PASS/0.99s，无新增架构/跨parent/旧兼容阻断。源码本轮仍在统一收尾，未将未完成真实质量标绿。
+
+微软同源/SHA/gold且parse/select各一次：当前87spans/47880chars，8业务金标保留7，旧4/8及初新1/8保持。唯一计费候选入选前闭包1span/681chars，被character_budget拒绝；实际136候选、所有87selected仍priority2/section unknown。原HTML无h标签、标准Item编号以paragraph表示且续页重复；不能将TOC的BUSINESS当body标题，也不能先抬cap补此公司。正在修通用编号/续页策略绑定，再判预算根因。
+
+ROOT首joint receipt的字符cap字段误写50000，实际函数默认及真实planner observer均为48000，没有提高上限；原收据保留，correction明确记录。后续脚本从真实常量取cap，不凭手填。
+
+GEOMETRY作者final a8cc604d干净，三个排他提交本地接7e023a15/c6224a1a/ef69957a；ROOT集中89PASS/13SKIP/12.25s。首sandbox TEMP哨兵无法写是环境错误、未进入测试，真实独立TEMP重跑并恢复；失败空目录已不存在。生产配置保持，0supplier/模型/费用。正在接同一个TextPage的真实dict/WORDS和既有find_tables结果，不另开parser、不复制全页到持久层。其余两作者树WIP保持，未提前接最新施工。
+
+正式默认仍0.8；真实模型、跨run缓存与母G2/G4/G5仍开放。已发布工程CI success保持。下一步标准编号共因→同gold回放→统一A/B集中发布→DU3剩余接收/真实C。
+
+## ROOT生产接线工程验收 — 2026-10-14（已发布节点）
+
+实现d3c57b31＋fixture修复fc2a4513已正常推master；正常pre-push4379PASS/17SKIP/381.75s，精确CI38540579403 success（官方REST只读核，gh不可用不冒称未查）。[发布收据](production-wiring-evidence/publication.json)。ROOT继续下一批真实意义/策略绑定根因，不暂停。三外包树已有commits/handoff，但仍有收尾WIP，未修改/提前签最新交付。
 
 已完成显式0.9 request→正式select→实际策略与唯一原文→同事务final CAS→配置model→Bundle/Artifact/public read；v5旧AUTO先只读history再由唯一Store additive升级，旧费用/结果不重签。QA真实roles/记录/parent边界、HK实际family、结构化SEC form不依赖诊断文案、20K有界planner与多行经营表已修。
 
@@ -95,3 +109,12 @@ TDD真实失败：生产首轮5FAIL/10PASS；追加sharedcontext字符1PASS；�
 真实原件只读窄页probe：恒锋增发真实project anchor可用；名创p12经营表漏读实证新增计划；没有调用供应商、写原件或生产配置。长文20K负例基线只选2个且late漏读，context1.09MiB；优化后待集中复核。4新正式production loopback端到端PASS/65.91s，same-run恢复和付费后待activation不重复POST；真实供应商与完整decision-cache仍未签收。
 
 根任务继续，不暂停、不标升级完成。下一节点：长文/经营表及新trace界面集中验收→正常commit/push；然后作者组件接收和真实同预算质量/消费者泛化。ROOT scratch均在.planning/shared-reading-production，最后压缩留证并恢复；外包与历史scratch保持。
+# 2026-10-14 ROOT — 真实价值准入、预算排序与细几何接线
+
+微软原件/金标未变，reading_plan/2在同48000字符/96span上限取得8/8 required_business、90spans/47999字符（parse2.75s、select6.19s、各一次）。原1/8、7/8、章节接线后2/8中间FAIL原样保留；2/8暴露纯页码/项目符号/空标题及多标签访问总和偏置，已从通用价值准入与同一heap排序修复。当前结果仅原文锚点召回，不是正式摘要语义PASS。
+
+PDF原生前端同一次TextPage取得真实words/cells/fonts，独立36PASS、集中263PASS；真实四原件单页原unit/text/locator/旧EvidenceSpan保持。共享layout_hints1.2.0实际消费fine geometry，集中143PASS（143不是整仓），新模块类型检查绿，旧整包既存26项类型诊断未新增。ROOT新增compact native_frontend coverage，有效RED2FAIL/1PASS→31定点PASS（含28 cache tests），不把细坐标partial误标正文未读，诊断保完整计数及128样本，不持久化细metadata。
+
+真实港股whole-PDF新fine回放仍0/7、96spans/13786字符（parse7.23s、select12.75s），尚未通过。新oracle收紧为实际物理页和同一真实闭包组内AND，未调整金标或原件；定位第12页各层遗漏原因后再继续。A股cn-h1回放进行中。0付费/0下载；摘要与默认切换未验收。
+
+DU3三树最新均干净，QUALITY本地接收四commit至804dfbb7、ROOT217PASS/7SKIP；DEPENDENCIES正常接收六commit至d6e91356，排他owned目录核对，未覆盖外包WIP。PDF/projector因果版本独审有遗漏，作者在补实际used proof与独立projector版本（HTML不受影响），不凭MIME伪造实际使用。

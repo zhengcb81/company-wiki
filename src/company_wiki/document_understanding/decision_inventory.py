@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from hashlib import sha256
+from importlib import import_module
 import json
 from typing import Any
 
@@ -22,14 +23,41 @@ def _digest(value: Any) -> str:
                              separators=(",", ":")).encode()).hexdigest()
 
 
-def _versions() -> dict[str, str]:
-    return {"inventory": "1.1.0", "selector": "0.9.0", "budget": "reading_plan/1",
+def _versions(*, pdf_frontend: bool = False) -> dict[str, str]:
+    # Resolve the producer's current constant after package initialization.
+    # This avoids making source_catalog's package imports depend on an
+    # inventory module that is still being initialized.
+    from company_wiki.source_catalog.narrative_business_policy import READING_BUSINESS_POLICY_VERSION
+    from company_wiki.source_catalog.narrative_budget import READING_BUDGET_POLICY
+    from .strategy_binding import STRATEGY_BINDING_VERSION
+    from .observation_adapter import OBSERVATION_ADAPTER_VERSION
+
+    versions = {"inventory": "1.2.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+            "business_policy": READING_BUSINESS_POLICY_VERSION,
+            "strategy_binding": STRATEGY_BINDING_VERSION,
+            "observation_adapter": OBSERVATION_ADAPTER_VERSION,
             "pipeline": PIPELINE_FEATURE_VERSION, "summary": SUMMARY_FEATURE_VERSION,
             "layout": LAYOUT_HINTS_VERSION}
+    if pdf_frontend:
+        for key, module_name, attribute in (
+            ("pdf_frontend", "company_wiki.source_catalog.narrative_pdf_layout", "PDF_READING_LAYOUT_FEATURE_VERSION"),
+            ("pdf_projection", "company_wiki.document_normalization.layout_snapshots", "FEATURE_VERSION"),
+        ):
+            try:
+                component = import_module(module_name)
+            except ModuleNotFoundError as exc:
+                if exc.name != module_name:
+                    raise
+                continue
+            version = getattr(component, attribute, None)
+            if isinstance(version, str) and 0 < len(version) <= 256:
+                versions[key] = version
+    return versions
 
 
 def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
-               used_facets: set[str], *, complete: bool = True) -> dict[str, Any]:
+               used_facets: set[str], *, complete: bool = True,
+               carrier: str | None = None, actual_frontend: str | None = None) -> dict[str, Any]:
     components = []
     candidates = []
     if len(scopes) > 64:
@@ -81,9 +109,25 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
                 "matcher_digest": _digest(matcher), "scope_ids": [sid]})
             candidates.append({"candidate_id": identifier, "scope_id": sid,
                                "component_ids": [identifier], "eligible": used})
+    if carrier:
+        proof = _digest({"mime_type": carrier})
+        components.append({"component_id": "carrier|" + carrier, "version": "source-carrier/1",
+            "content_digest": proof, "matcher_digest": proof,
+            "scope_ids": [scope["scope_id"] for scope in scopes]})
+    pdf_used = carrier == "application/pdf" and bool(actual_frontend)
+    versions = _versions(pdf_frontend=pdf_used)
+    if carrier == "application/pdf":
+        if not pdf_used or not versions.get("pdf_projection") or versions.get("pdf_frontend") != actual_frontend:
+            complete = False
+        if actual_frontend:
+            proof = _digest({"mime_type": carrier, "native_layout_frontend_version": actual_frontend})
+            components.append({"component_id": "pdf-frontend-used|" + actual_frontend,
+                "version": "native-frontend-use/1", "content_digest": proof, "matcher_digest": proof,
+                "scope_ids": [scope["scope_id"] for scope in scopes]})
     return {"schema_version": "du-decision-trace/1", "scopes": list(scopes),
-            "components": components, "candidates": candidates, "versions": _versions(),
-            "inventory_complete": complete and bool(scopes)}
+            "components": components, "candidates": candidates,
+            "versions": versions,
+            "inventory_complete": complete and bool(scopes) and bool(carrier)}
 
 
 def build_decision_trace(pipeline: Mapping[str, Any], *, used_facet_ids: Sequence[str] = ()) -> dict[str, Any]:
@@ -141,7 +185,8 @@ def build_decision_trace(pipeline: Mapping[str, Any], *, used_facet_ids: Sequenc
             if not (resolved.get("family") or actual.get("family") or route.get("family")):
                 complete = False
             regime = field("regime", resolved, actual, route.get("regime"))
-            form = field("form_type", resolved, actual, metadata.get("form_type"))
+            form = field("form_type", resolved, actual,
+                         route.get("form_type") if "form_type" in route else metadata.get("form_type"))
         else:
             resolved = children.get(key, {})
             child_route: Mapping[str, Any] = next((row for row in route.get("child_routes", ())
@@ -160,7 +205,12 @@ def build_decision_trace(pipeline: Mapping[str, Any], *, used_facet_ids: Sequenc
         scopes.append({"scope_id": sid, "family": family, "regime": regime,
                        "form_type": form, "purpose": family})
         bindings[sid] = profile_id
-    return _inventory(scopes, bindings, set(used_facet_ids), complete=complete)
+    carrier = metadata.get("mime_type")
+    carrier = carrier if isinstance(carrier, str) and 0 < len(carrier) <= 256 else None
+    frontend = metadata.get("native_layout_frontend_version")
+    frontend = frontend if isinstance(frontend, str) and 0 < len(frontend) <= 256 else None
+    return _inventory(scopes, bindings, set(used_facet_ids), complete=complete, carrier=carrier,
+                      actual_frontend=frontend)
 
 
 def current_decision_trace(frozen: Mapping[str, Any]) -> dict[str, Any]:
@@ -178,8 +228,35 @@ def current_decision_trace(frozen: Mapping[str, Any]) -> dict[str, Any]:
             bindings[sid] = profile_id
     used = {row["candidate_id"].removeprefix("facet|") for row in frozen.get("candidates", ())
             if row["candidate_id"].startswith("facet|") and row["eligible"]}
+    # The actual observation carrier is persisted as a causal component. A
+    # source filename, market family or old global version cannot prove that
+    # this source used the PDF frontend; absent/conflicting proof stays partial.
+    proofs = [component for component in frozen.get("components", ())
+              if component["component_id"].startswith("carrier|")]
+    carrier = None
+    if len(proofs) == 1:
+        proof = proofs[0]
+        observed = proof["component_id"].removeprefix("carrier|")
+        digest = _digest({"mime_type": observed})
+        scope_ids = {scope["scope_id"] for scope in frozen.get("scopes", ())}
+        if (0 < len(observed) <= 256 and proof.get("version") == "source-carrier/1"
+                and proof.get("content_digest") == digest and proof.get("matcher_digest") == digest
+                and set(proof.get("scope_ids", ())) == scope_ids):
+            carrier = observed
+    native_proofs = [component for component in frozen.get("components", ())
+                     if component["component_id"].startswith("pdf-frontend-used|")]
+    actual_frontend = None
+    if carrier == "application/pdf" and len(native_proofs) == 1:
+        proof = native_proofs[0]
+        actual = proof["component_id"].removeprefix("pdf-frontend-used|")
+        digest = _digest({"mime_type": carrier, "native_layout_frontend_version": actual})
+        if (0 < len(actual) <= 256 and proof.get("version") == "native-frontend-use/1"
+                and proof.get("content_digest") == digest and proof.get("matcher_digest") == digest
+                and set(proof.get("scope_ids", ())) == {scope["scope_id"] for scope in frozen.get("scopes", ())}):
+            actual_frontend = actual
     return _inventory(frozen.get("scopes", ()), bindings, used,
-                      complete=frozen.get("inventory_complete", frozen.get("status") == "complete"))
+                      complete=frozen.get("inventory_complete", frozen.get("status") == "complete"),
+                      carrier=carrier, actual_frontend=actual_frontend)
 
 
 __all__ = ["build_decision_trace", "current_decision_trace"]

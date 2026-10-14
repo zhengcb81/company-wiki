@@ -110,6 +110,8 @@ def assert_route_shape(route: Any) -> None:
     assert route["regime"] in REGIMES, route["regime"]
     assert route["family"] in FAMILIES, route["family"]
     assert route["subtype"] is None or isinstance(route["subtype"], str)
+    if "form_type" in route:  # Additive actual route; legacy wire may omit it.
+        assert isinstance(route["form_type"], str) and route["form_type"]
     assert route["confidence"] in CONFIDENCES, route["confidence"]
     assert route["disposition_hint"] in DISPOSITIONS, route["disposition_hint"]
     assert route["disposition_hint"] != "skip"

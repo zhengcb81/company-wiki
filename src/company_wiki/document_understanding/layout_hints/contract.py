@@ -15,7 +15,12 @@ from typing import Any, Mapping
 SCHEMA_IN = "du2-layout-input/1"
 SCHEMA_OUT = "du2-layout-hints/1"
 
-DEFAULT_LIMITS = {"max_units": 50000, "max_groups": 10000, "max_work_units": 2000000}
+DEFAULT_LIMITS = {
+    "max_units": 50000,
+    "max_groups": 10000,
+    "max_work_units": 2000000,
+    "max_fine_elements": 200000,
+}
 
 GEOMETRY_EPS = 0.01
 
@@ -63,6 +68,7 @@ class Unit:
     page_width: float | None
     page_height: float | None
     deferred_reason: str | None = None
+    geometry_frame: Mapping[str, Any] = field(default_factory=dict)
 
     @property
     def deferred(self) -> bool:
@@ -131,12 +137,12 @@ def _is_number(value: Any) -> bool:
     )
 
 
-def resolve_limits(limits: Mapping[str, None] | None) -> dict:
+def resolve_limits(limits: Mapping[str, Any] | None) -> dict:
     """Caller limits may TIGHTEN the defaults, never widen them."""
     resolved = dict(DEFAULT_LIMITS)
     if limits is not None:
         _require(isinstance(limits, Mapping), "limits must be a mapping")
-        for key in ("max_units", "max_groups", "max_work_units"):
+        for key in DEFAULT_LIMITS:
             if key in limits and limits[key] is not None:
                 value = limits[key]
                 _require(
@@ -150,7 +156,7 @@ def resolve_limits(limits: Mapping[str, None] | None) -> dict:
 
 
 def parse_observation(
-    observation: Mapping[str, Any], *, limits: Mapping[str, None] | None = None
+    observation: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None
 ) -> Doc:
     _require(isinstance(observation, Mapping), "observation must be a mapping")
     _require(
@@ -250,6 +256,11 @@ def parse_observation(
                 hints is None or isinstance(hints, Mapping),
                 f"{unit_id}.upstream_hints must be a mapping or null",
             )
+            frame = unit_raw.get("layout") or {}
+            _require(
+                isinstance(frame, Mapping),
+                f"{unit_id}.layout must be a mapping or null",
+            )
             bbox_raw = unit_raw.get("bbox")
             ordered.append(
                 (
@@ -262,6 +273,7 @@ def parse_observation(
                     font_weight,
                     kind,
                     hints or {},
+                    dict(frame),
                 )
             )
 
@@ -275,6 +287,7 @@ def parse_observation(
             font_weight,
             kind,
             hints,
+            frame,
         ) in sorted(ordered, key=lambda item: item[0]):
             bbox: tuple[float, float, float, float] | None = None
             deferred_reason: str | None = None
@@ -334,12 +347,19 @@ def parse_observation(
                 font_weight=font_weight,
                 bold=bold,
                 kind=kind,
-                hints=hints,
+                # These names describe views constructed by this engine. They
+                # are not caller evidence and cannot bypass native validation.
+                hints={
+                    key: value
+                    for key, value in hints.items()
+                    if key not in {"_fine_origin", "_fine_font_coverage"}
+                },
                 page_value=page.page_value,
                 page_index=page_index,
                 page_width=width,
                 page_height=height,
                 deferred_reason=deferred_reason,
+                geometry_frame=frame,
             )
             page.units.append(unit)
             doc.units.append(unit)

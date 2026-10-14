@@ -870,23 +870,30 @@ def _detect_offering(
 ) -> None:
     cover_ids = tuple(unit.unit_id for unit in cover)
     toc_ids = tuple(unit.unit_id for unit in toc_units)
-    self_id_ids = tuple(unit.unit_id for unit in self_id_units)
-    self_id_text = normalize(" ".join(unit.text for unit in self_id_units))
-    # Offering wording must come from the document naming itself, not from a pointer.
-    haystack = title_text + " " + cover_text + " " + self_id_text
-    evidence_ids = cover_ids or self_id_ids
+    # Keep the actual evidence channel and matching IDs. A historical body
+    # heading cannot borrow an unrelated annual-report cover as its provenance.
+    def add_named_signal(aliases: Sequence[str], detail: str) -> bool:
+        cover_hits = [unit.unit_id for unit in cover
+                      if is_title_evidence(unit) and matches_any(normalize(unit.text), aliases)]
+        body_hits = [unit.unit_id for unit in (*self_id_units, *toc_units)
+                     if unit.unit_id not in cover_ids and matches_any(normalize(unit.text), aliases)]
+        if cover_hits:
+            bag.add(bag.cover_signals, "COVER_HEADING", cover_hits, detail)
+        elif matches_any(title_text, aliases):
+            bag.add(bag.body_signals, "SECTION_VOCABULARY", body_hits, detail)
+        elif body_hits:
+            bag.add(bag.body_signals, "SECTION_VOCABULARY", body_hits, detail)
+        return bool(cover_hits or body_hits or matches_any(title_text, aliases))
 
-    if matches_any(haystack, CN_CONVERTIBLE_WORDS) or matches_any(toc_text, CN_CONVERTIBLE_WORDS):
-        bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "可转换公司债券募集材料")
-    elif matches_any(haystack, CN_OFFERING_WORDS) or matches_any(toc_text, CN_OFFERING_WORDS):
-        bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "再融资募集说明书措辞")
-    elif matches_any(haystack, CN_IPO_WORDS) or matches_any(toc_text, CN_IPO_WORDS):
-        bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "首次公开发行/招股措辞")
-
-    if matches_any(haystack, HK_OFFERING_WORDS) or matches_any(toc_text, HK_OFFERING_WORDS):
-        bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "港股全球发售措辞")
-    elif matches_any(haystack, HK_PROSPECTUS_WORDS):
-        bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "港股招股章程措辞")
+    for aliases, detail in ((CN_CONVERTIBLE_WORDS, "可转换公司债券募集材料"),
+                            (CN_OFFERING_WORDS, "再融资募集说明书措辞"),
+                            (CN_IPO_WORDS, "首次公开发行/招股措辞")):
+        if add_named_signal(aliases, detail):
+            break
+    for aliases, detail in ((HK_OFFERING_WORDS, "港股全球发售措辞"),
+                            (HK_PROSPECTUS_WORDS, "港股招股章程措辞")):
+        if add_named_signal(aliases, detail):
+            break
 
     fundraising = (
         "募集资金运用",

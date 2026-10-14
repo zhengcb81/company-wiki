@@ -1,0 +1,53 @@
+{
+  "schema_version": "shared-reading-engineering-checkpoint/1",
+  "status": "ENGINEERING_PASS_REAL_QUALITY_PENDING",
+  "completed": [
+    "one heap value/novelty planner /2 with exact /1 replay",
+    "actual-form and source-provenance section binding",
+    "single-TextPage bounded PDF fine geometry into shared engine",
+    "compact native coverage separated from text readability",
+    "all three DU3 immutable deliveries locally received",
+    "real configured CLI HTML/PDF/TXT same/cross-run zero POST reuse"
+  ],
+  "tests": {
+    "value_node": 74,
+    "pdf_proof_inventory_node": 65,
+    "geometry_node": 143,
+    "all_profiles_node": 195,
+    "dependencies_public_cache_node": 143,
+    "cache_fixture_coverage_node": 31
+  },
+  "independent_reviews": [
+    "value9 independent probes PASS after fixes",
+    "PDF10 distinct probes: initial9PASS/1probe alias error; corrected cold-release single PASS"
+  ],
+  "not_summed": "Overlapping nodes are not a unique test total.",
+  "legacy_parity": {
+    "reading_plan_1_seeds": 1000,
+    "legacy_seeds": 200,
+    "semantic_seeds": 200
+  },
+  "real_development_recall": {
+    "us_10k": "8/8 source anchors; 90spans/47999chars",
+    "hk_annual": "0/7 before purpose-provenance fix; unresolved table/meaning",
+    "cn_h1": "0/10; cross-native-block continuity unresolved; independent gold typo retained"
+  },
+  "supplier_calls": 0,
+  "new_paid_usage": 0,
+  "default_selector": "0.8.0",
+  "raw_originals": "preserved",
+  "production_configs": "SHA/size/mtime unchanged",
+  "archive": {
+    "file": "receipts.zip",
+    "bytes": 63593,
+    "sha256": "5309470037b8e5bcfb86e09f6c67ebae41301932916281d6068006788274cdc1",
+    "files": 39
+  },
+  "remaining": [
+    "PDF source continuity and configured operating-table triage",
+    "new selection real oracle recall",
+    "configured paid summaries with fidelity review",
+    "real source FF/RF consumer end-to-end and fresh holdout quality",
+    "default switch and retirement only after genuine acceptance"
+  ]
+}

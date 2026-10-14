@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, replace
 from typing import Any, Protocol
 
@@ -78,6 +78,9 @@ class PdfBytesParser(Protocol):
         language: str = "zh",
         full_table_scan: bool = False,
         table_pages: Sequence[int] | None = None,
+        selector_version: str | None = None,
+        layout_limits: Mapping[str, Any] | None = None,
+        layout_max_seconds: float = 15,
     ) -> NarrativeParseResult: ...
 
 
@@ -467,6 +470,15 @@ class NarrativeSelectHandler:
         full_table_scan: bool = False,
     ) -> NarrativeParseResult:
         try:
+            if self._pdf_parser is parse_pdf_bytes and self._selector.selector_version == "0.9.0":
+                return parse_pdf_bytes(
+                    data,
+                    source_id=payload.source_ref.source_id,
+                    source_sha256=payload.source_ref.content_sha256,
+                    language=payload.source_metadata.language,
+                    full_table_scan=full_table_scan,
+                    selector_version="0.9.0",
+                )
             return self._pdf_parser(
                 data,
                 source_id=payload.source_ref.source_id,

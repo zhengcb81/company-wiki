@@ -1,5 +1,7 @@
 ## ROOT生产接线节点与真实漏读 — 2026-10-14
 
+生产接线d3c57b31与schema夹具修复fc2a4513已并master/远端，正常push4379PASS17skip；精确CI38540579403 success。主线可显式0.9，但质量/default切换仍开放。真实budget拥挤两通用探针PASS，所以先修实际family/form与业务意义，不能凭漏读就宣布planner有缺陷。
+
 正式selector请求、紧凑wire、同lease事务final CAS、实际model spec、public Bundle物料SHA、same-run/outbox/v5升级和篡改原件恢复均已集中工程验收。原UNIT和E2E失败及受影响修复均留证，不伪称单次全绿。详[节点收据](production-wiring-evidence/acceptance.json)。未知语言prepare仍重复实读一次，明确P2性能残项，不恢复许可/签收。
 
 三真实原件只parse一次的旧/新整篇native对照：CN6733units，选择21.048→6.569s；HK6502units，32.888→6.877s；US5215units，6.968→3.817s。单次观察非p95，正文量下降不能当召回通过。US8冻结required_business实际旧4/8、新1/8，逐原DOM排除拆句误报；全部critical实际section_role=unknown，sec_10k nominal route却family_policy缺失/fallback，六项未准入，消费制机制候选被字符预算挤出。已列三共因通用RED，不能只加Azure/公司词或降低gold。
@@ -94,3 +96,8 @@ US S-1/F-1、8-K/6-K真实附件容器、修订版本对尚缺验证；独立hol
 ## 设计产物与存储
 
 方案明确为单体内分阶段管线，不加新DB/全文副本/权限链。三个包只改独占新目录，生产接线归ROOT，兼容W08剩余RF/Audit。原件20/20 SHA及mtime不变；0模型调用。四临时PNG删除；两份较大观察JSON已逐字节验证压缩归档，仅保留一份。详见research_receipt.json。
+# 2026-10-14 ROOT 新实证：价值与布局信息必须经过同一生产链
+
+真实US章节接线后先从7/8退到2/8：scope放宽会把页码/项目符号/空标题占满96槽，多标签访问总和也会惩罚同时解释多个业务机制的段落。以通用meaningful_fact/description两级价值、同一增量heap的价值→新主题→策略优先→平均访问次数修复，不增加公司规则、不改cap；最终同金标8/8。reading_plan/1及legacy保持逐seed selected/diagnostic一致，原FAIL保留。
+
+实际PDF已有words/cells/fonts必须同时接入publisher、neutral adapter和原共享layout_hints才有生产意义；仅快照组件PASS不足。真实HK整份0/7表明即使这些层工程PASS，经营表仍可能在结构/准入/预算中丢失，继续沿原单位逐层追踪，不花费模型掩盖漏选。native细几何的partial与正文native_scan独立，compact计数进入最终reading_context，fine arrays不进入EvidenceSpan身份或持久化正文。

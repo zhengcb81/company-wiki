@@ -16,12 +16,64 @@ Everything else is passed through unchanged.
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
-from typing import Any
+from copy import deepcopy
+from typing import Any, cast
 import hashlib
 import json
 import re
 
 INPUT_SCHEMA_VERSION = "du-input/1"
+
+OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/2"
+
+_READING_LAYOUT_FIELDS = frozenset({"bbox", "page", "page_width", "page_height", "coordinate_frame", "rotation",
+                                  "granularity", "font_size", "font_weight", "frame_converted", "cropbox", "cropbox_position"})
+_FINE_LAYOUT_FIELDS = frozenset({"text", "bbox", "native_index", "char_start", "char_end", "char_start_supplied", "char_end_supplied",
+                               "char_alignment", "page", "coordinate_frame", "row", "column", "table_id", "font_size", "font_weight", "font",
+                               "span_index", "line_index", "block_index", "block", "line", "span", "partial_span",
+                               "native_cell_char_start", "native_cell_char_end", "partial_cell", "flags", "source"})
+
+
+def _fine_layout_field(key: str, value: Any) -> bool:
+    if key not in _FINE_LAYOUT_FIELDS:
+        return False
+    # The public projector emits a neutral producer label here. A physical
+    # location is not a source label and must not migrate from foreign metadata.
+    return key != "source" or (isinstance(value, str) and len(value) <= 256
+        and re.match(r"^(?:[A-Za-z]:[\\/]|\\\\|/|file:)", value) is None)
+
+
+def _reading_layout_fields(metadata: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Project the source owner's bounded transient geometry, never all metadata.
+
+    Public snapshot projection owns fine-element bounds/alignment. This bridge
+    neither truncates that original evidence nor replaces the source's old
+    bbox/fonts/locator. Unknown whole-text/path fields are not transported.
+    """
+    reading = metadata.get("reading_layout")
+    if not isinstance(reading, Mapping):
+        return {}, {}
+    supplied = reading.get("layout")
+    layout = {key: deepcopy(value) for key, value in supplied.items() if key in _READING_LAYOUT_FIELDS} if isinstance(supplied, Mapping) else {}
+    upstream = reading.get("upstream_hints")
+    hints: dict[str, Any] = {}
+    if isinstance(upstream, Mapping):
+        for name in ("words", "cells", "font_runs", "spans"):
+            entries = upstream.get(name)
+            if isinstance(entries, Sequence) and not isinstance(entries, (str, bytes)):
+                hints[name] = [{key: deepcopy(value) for key, value in entry.items() if _fine_layout_field(key, value)}
+                               for entry in entries if isinstance(entry, Mapping)]
+        if isinstance(upstream.get("geometry_granularity"), str):
+            hints["geometry_granularity"] = upstream["geometry_granularity"]
+    granularity = layout.get("granularity")
+    if isinstance(granularity, str):
+        layout["geometry_granularity"] = granularity
+        hints["geometry_granularity"] = granularity
+    version = reading.get("feature_version")
+    if isinstance(version, str) and version:
+        layout["reading_layout_feature_version"] = version
+        hints["reading_layout_feature_version"] = version
+    return layout, hints
 
 # --- Q&A page: the two role sets the parser emits (ROOT decision, DU-S-ADAPT-5) --------
 #
@@ -165,6 +217,15 @@ def _heading_level(text: str, metadata: Mapping[str, Any]) -> int | None:
     return None
 
 
+def _heading_level_source(metadata: Mapping[str, Any]) -> str:
+    explicit = metadata.get("heading_level")
+    tag = metadata.get("tag_name")
+    if (isinstance(explicit, int) and not isinstance(explicit, bool) and explicit > 0
+            or isinstance(tag, str) and tag.lower() in {"h1", "h2", "h3", "h4", "h5", "h6"}):
+        return "native"
+    return "layout" if metadata.get("heading_like") is True else "numbering"
+
+
 def _is_unit_caption(text: str) -> bool:
     stripped = text.strip().lstrip("（(")
     return stripped.startswith(_UNIT_CAPTION)
@@ -191,13 +252,15 @@ def _detect_gutter_x(
     """Compatibility query only; canonical observation performs no inference."""
     from types import SimpleNamespace
     from .layout_hints.columns import compute_cuts
-    from .layout_hints.contract import WorkBudget
+    from .layout_hints.contract import Unit, WorkBudget
 
     if not blocks:
         return None
     units = [SimpleNamespace(bbox=box, ordinal=i) for i, box in enumerate(blocks)]
     extent = max(box[2] for box in blocks) - min(box[0] for box in blocks)
-    cuts = compute_cuts(units, page_width or extent, WorkBudget(2000000))
+    # This legacy query supplies the two fields consumed by compute_cuts; it
+    # does not manufacture native/fine geometry or a second layout engine.
+    cuts = compute_cuts(cast(list[Unit], units), page_width or extent, WorkBudget(2000000))
     return cuts[0] if len(cuts) == 1 else None
 
 
@@ -359,12 +422,15 @@ def build_observation(
             if key in metadata:
                 layout[key] = metadata[key]
         hints: dict[str, Any] = {}
+        reading_layout, fine_hints = _reading_layout_fields(metadata)
+        layout.update(reading_layout)
+        hints.update(fine_hints)
         parent_source_id = getattr(unit, "source_id", None)
         if isinstance(parent_source_id, str) and parent_source_id:
             # One projection may contain units from several native originals.
             # This is attribution, not another source verification step.
             hints["source_id"] = parent_source_id
-        if metadata.get("geometry_granularity"):
+        if metadata.get("geometry_granularity") and "geometry_granularity" not in hints:
             hints["geometry_granularity"] = metadata["geometry_granularity"]
         level = _heading_level(unit.raw_text, metadata)
         if (
@@ -379,6 +445,7 @@ def build_observation(
             level = None
         if level is not None and unit.unit_kind in {"pdf_text_block", "html_heading"}:
             hints["heading_level"] = level
+            hints["heading_level_source"] = _heading_level_source(metadata)
         if coordinates.table_index is not None:
             hints["table_id"] = f"p{page}:t{coordinates.table_index}"
         if coordinates.row_index is not None:
@@ -419,6 +486,7 @@ def build_observation(
             ):
                 level = 2
             hints["heading_level"] = level
+            hints["heading_level_source"] = _heading_level_source(metadata)
             kind = "heading"
         if (
             unit.unit_kind == "html_table_cell"
@@ -426,6 +494,7 @@ def build_observation(
         ):
             kind = "toc_entry"
             hints.pop("heading_level", None)
+            hints.pop("heading_level_source", None)
         emitted.append(
             {
                 "unit_id": unit.unit_id,
@@ -459,7 +528,7 @@ def build_observation(
                 key: value
                 for key, value in source_metadata.items()
                 if key
-                in {"regime", "form_type", "published_at", "period_end", "revision"}
+                in {"regime", "form_type", "published_at", "period_end", "revision", "native_layout_frontend_version"}
             },
         },
         "coverage": {

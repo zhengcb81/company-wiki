@@ -162,16 +162,10 @@ def test_configured_shared_reading_reaches_summary_public_transport_and_same_run
             process, next_result = reuse.invoke(root, config, next_request, llm, "reading-b", launcher=launcher)
             assert process.returncode == 0 and next_result["status"] == "completed", next_result
             dependencies = final.get("reading_dependencies")
-            if not dependencies or dependencies.get("status") != "complete":
-                assert len(loopback_model_server.requests) == 2, "a missing decision trace was treated as reusable"
-                assert next_result["budget"]["tokens"] > 0
-                assert len(runs.reservations_for_run("reading-b")) == 1
-                current_ref, current_bundle, _ = reuse.public_read(root, config, imported, kind)
-                _assert_formal_generation(root, catalog, imported, "reading-b", current_ref, current_bundle,
-                                          loopback_model_server.requests[1][0])
-            else:
-                assert len(loopback_model_server.requests) == 1
-                assert next_result["budget"]["tokens"] == 0
+            assert dependencies and dependencies["status"] == "complete", dependencies
+            assert len(loopback_model_server.requests) == 1, "a new run did not reuse its exact causal material"
+            assert next_result["budget"]["tokens"] == 0
+            assert not runs.reservations_for_run("reading-b")
         finally:
             _assert_protected(root, protected)
     assert not root.exists(), "owned test lake was not removed"

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from copy import deepcopy
+from dataclasses import replace
 from hashlib import sha256
 from importlib.resources import files
 import json
@@ -129,7 +130,8 @@ def _component(record: Mapping, kind: str) -> dict:
 
 
 def _base_form(value: Any) -> str:
-    return _fold(value or "").removesuffix("/a")
+    form = _fold(value or "").removesuffix("/a")
+    return "" if form == "unknown" else form
 
 
 def _signal_matches(phrase: str, text: str) -> bool:
@@ -190,7 +192,16 @@ def _bounded_observation(observation: Mapping, route: Mapping, limits: Mapping |
         scoped = dict(observation)
         scope_ids = set(scope)
         scoped["units"] = [unit for unit in observation.get("units", ()) if unit.get("unit_id") in scope_ids]
-    return parse_observation(scoped, capped)
+    parsed = parse_observation(scoped, capped)
+    if "form_type" in route:
+        actual = route["form_type"]
+        if actual is not None and not isinstance(actual, str):
+            raise TypeError("route form_type must be text or None")
+        # This is the existing router's resolved signal, not another probe.
+        # A present unknown form must not borrow a conflicting metadata claim.
+        # An absent field retains the historical wire's metadata interpretation.
+        parsed = replace(parsed, form_type=actual if _base_form(actual) else None)
+    return parsed
 
 
 def _choose_family(binding: Mapping, parsed: Observation, route: Mapping) -> tuple[dict | None, list[dict]]:
@@ -230,7 +241,7 @@ def _family_state(record: Mapping | None) -> dict:
         return {"id": None, "design_status": "proposed", "spec_status": "proposed",
                 "evidence_status": "missing", "integration_status": "not_integrated",
                 "gaps": ["Current purpose not resolved by bounded original evidence."]}
-    coverage = next((entry for entry in _CATALOG["family_coverage"] if entry["shape"] == record["id"]), {})
+    coverage: Mapping[str, Any] = next((entry for entry in _CATALOG["family_coverage"] if entry["shape"] == record["id"]), {})
     return {"id": record["id"], "design_status": record["evidence_status"]["design"],
             "spec_status": coverage.get("spec_status", "proposed"),
             "evidence_status": coverage.get("evidence_status", "missing"),
@@ -260,6 +271,7 @@ def resolve_reading_profile(profile: Mapping, observation: Mapping, route: Mappi
     sections = _sections(records)
     result = deepcopy(dict(profile))
     result.update({"family": route.get("family", binding["family"]), "regime": route.get("regime", parsed.regime_claim or binding["regime"]),
+                   "form_type": parsed.form_type or "unknown",
                    "section_rules": [dict(section, section_role=section["role"]) for section in sections],
                    "section_priorities": _flatten(sections), "summary_focus": _focus(records),
                    "negative_hints": _negative(records), "reading_questions": _questions(records),

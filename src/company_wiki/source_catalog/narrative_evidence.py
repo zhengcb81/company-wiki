@@ -940,19 +940,26 @@ class _PdfParseState:
     )
     table_scan_pages: set[int] = field(default_factory=set)
     page_geometry: dict[int, dict[str, Any]] = field(default_factory=dict)
+    layout_collector: Any | None = None
 
 
 def _pdf_text_blocks(
     page: Any,
     *,
     geometry_out: dict[str, Any] | None = None,
+    layout_collector: Any | None = None,
+    page_number: int | None = None,
 ) -> list[tuple[int, tuple[float, ...], str]]:
     """One dict snapshot; preserve the historical three-tuple text interface.
 
     Optional geometry is side output to the existing parse state. It never
     changes text, block numbers, paragraph numbering or raw unit identities.
     """
-    snapshot = page.get_text("dict", sort=False)
+    snapshot = (
+        layout_collector.read_snapshot(page, page_number)
+        if layout_collector is not None
+        else page.get_text("dict", sort=False)
+    )
     blocks: list[tuple[int, tuple[float, ...], str]] = []
     block_fonts = {}
     for raw_block_no, block in enumerate(snapshot.get("blocks", ())):
@@ -1074,7 +1081,10 @@ def _scan_pdf_pages(state: _PdfParseState, document: Any) -> None:
     for page_number, page in enumerate(document, start=1):
         try:
             geometry: dict[str, Any] = {}
-            blocks = _pdf_text_blocks(page, geometry_out=geometry)
+            blocks = _pdf_text_blocks(
+                page, geometry_out=geometry,
+                layout_collector=state.layout_collector, page_number=page_number,
+            )
             state.page_geometry[page_number] = geometry
             state.page_blocks.append((page_number, blocks))
             if not blocks:
@@ -1278,6 +1288,11 @@ def _emit_pdf_table(
         ["" if cell is None else str(cell).strip() for cell in row]
         for row in (table.extract() or [])
     ]
+    if state.layout_collector is not None:
+        try:
+            state.layout_collector.capture_table(page_number, table_index, table, normalized_rows)
+        except Exception:
+            state.layout_collector.record_failure("NATIVE_TABLE_LAYOUT_CAPTURE_FAILED", page=page_number)
     headers = next((row for row in normalized_rows if any(cell for cell in row)), [])
     bbox = tuple(float(value) for value in table.bbox)
     for row_index, row in enumerate(normalized_rows):
@@ -1311,6 +1326,10 @@ def _emit_pdf_page(
             state.opaque_pages.append(page_number)
     if len(state.units) == page_unit_count and page_number not in state.opaque_pages:
         state.opaque_pages.append(page_number)
+    if state.layout_collector is not None:
+        state.units[page_unit_count:] = state.layout_collector.project_page(
+            page_number, state.units[page_unit_count:]
+        )
 
 
 def _fitz_module() -> Any:
@@ -1332,18 +1351,32 @@ def _parse_pdf_document(
     language: str = "zh",
     full_table_scan: bool = False,
     table_pages: Sequence[int] | None = None,
+    selector_version: str | None = None,
+    layout_limits: Mapping[str, Any] | None = None,
+    layout_max_seconds: float = 15,
 ) -> NarrativeParseResult:
     state = _PdfParseState(source_id, source_sha256, parser_version, language)
+    if selector_version == "0.9.0":
+        from .narrative_pdf_layout import PdfLayoutCollector
+
+        state.layout_collector = PdfLayoutCollector(
+            limits=layout_limits, max_seconds=layout_max_seconds,
+        )
     state.page_count = len(document)
     _scan_pdf_pages(state, document)
     state.table_scan_pages = _pdf_table_scan_pages(state, full_table_scan, table_pages)
     for page_number, blocks in state.page_blocks:
         _emit_pdf_page(state, document, page_number, blocks)
+    units = _link_cross_page_qa(state.units)
+    layout_coverage, layout_diagnostics = (
+        state.layout_collector.summary(units)
+        if state.layout_collector is not None else (None, ())
+    )
     return NarrativeParseResult(
         source_id=source_id,
         source_sha256=source_sha256,
         language=language,
-        units=_link_cross_page_qa(state.units),
+        units=units,
         page_count=state.page_count,
         pages_read=state.pages_read,
         opaque_pages=tuple(state.opaque_pages),
@@ -1352,6 +1385,8 @@ def _parse_pdf_document(
             sorted(set(range(1, state.page_count + 1)) - state.table_scan_pages)
         ),
         errors=tuple(state.errors),
+        layout_coverage=layout_coverage,
+        layout_diagnostics=layout_diagnostics,
     )
 
 
@@ -1364,6 +1399,9 @@ def parse_pdf(
     language: str = "zh",
     full_table_scan: bool = False,
     table_pages: Sequence[int] | None = None,
+    selector_version: str | None = None,
+    layout_limits: Mapping[str, Any] | None = None,
+    layout_max_seconds: float = 15,
 ) -> NarrativeParseResult:
     """Scan a PDF path without materializing a normalized full-text artifact."""
     with _fitz_module().open(path) as document:
@@ -1375,6 +1413,9 @@ def parse_pdf(
             language=language,
             full_table_scan=full_table_scan,
             table_pages=table_pages,
+            selector_version=selector_version,
+            layout_limits=layout_limits,
+            layout_max_seconds=layout_max_seconds,
         )
 
 
@@ -1387,6 +1428,9 @@ def parse_pdf_bytes(
     language: str = "zh",
     full_table_scan: bool = False,
     table_pages: Sequence[int] | None = None,
+    selector_version: str | None = None,
+    layout_limits: Mapping[str, Any] | None = None,
+    layout_max_seconds: float = 15,
 ) -> NarrativeParseResult:
     """Parse verified PDF bytes in memory without a temporary file."""
     if not isinstance(data, bytes):
@@ -1402,6 +1446,9 @@ def parse_pdf_bytes(
             language=language,
             full_table_scan=full_table_scan,
             table_pages=table_pages,
+            selector_version=selector_version,
+            layout_limits=layout_limits,
+            layout_max_seconds=layout_max_seconds,
         )
 
 

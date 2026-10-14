@@ -31,7 +31,7 @@ def _trace():
     return inventory.build_decision_trace({
         "source_ref": {"source_id": "urn:company-wiki:source:sha256:" + "a" * 64},
         "route": {"regime": "cn_exchange", "family": "offering"},
-        "observation": {"metadata": {"form_type": "unknown"}},
+        "observation": {"metadata": {"form_type": "unknown", "mime_type": "text/plain"}},
         "reading_plan": {"used_profiles": [{"profile_id": "offering"}]},
     })
 

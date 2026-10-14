@@ -36,13 +36,34 @@ _ACCOUNTING = re.compile(r"营业收入|营业成本|净利润|资产负债|每�
 
 
 def _financial_only(text: str, fact: Any = None) -> bool:
+    fact = fact or detect_reading_business_fact(text)
+    # A source-bound billing/scope/operating-driver/contract-conversion relation
+    # can contain revenue words. It is not a routine accounting total; the
+    # legacy rejector knows none of these opt-in relations.
+    if fact.financial_exempt:
+        return False
     return reject_finance_only_text(text) or bool(
-        _ACCOUNTING.search(text) and not (fact or detect_reading_business_fact(text)).eligible)
+        _ACCOUNTING.search(text) and not fact.eligible)
 
 
-def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = None) -> tuple[bool, Any]:
+def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = None,
+              is_heading: bool = False) -> tuple[bool, Any]:
     fact = fact or detect_reading_business_fact(unit.raw_text)
     if unit.source_role in _CONTEXT_ROLES or (kind != "operating_table" and _financial_only(unit.raw_text, fact)):
+        return False, fact
+    # Glyphs/page counters are observed text, not operating descriptions. A
+    # numeric cell of an already qualified operating table is different: its
+    # original headers, units and period travel in the complete dependency graph.
+    alphanumeric = "".join(character for character in unit.raw_text if character.isalnum())
+    numeric_marker = bool(alphanumeric) and all(character.isnumeric() for character in alphanumeric)
+    roman_marker = bool(re.fullmatch(r"[IVXLCDM]+", alphanumeric, re.IGNORECASE))
+    letter_marker = bool(re.fullmatch(r"\s*[(\[（【]\s*[A-Za-z]\s*[)\]）】]\s*[.、:]?\s*", unit.raw_text))
+    if not any(character.isalpha() for character in unit.raw_text) or numeric_marker:
+        if kind != "operating_table" or not any(character.isdigit() for character in unit.raw_text):
+            return False, fact
+    if not fact.eligible and (roman_marker or letter_marker):
+        return False, fact
+    if (is_heading or unit.unit_kind.endswith("_heading")) and not fact.eligible:
         return False, fact
     # Family/role are observed reading intent, not proof of any specific fact.
     # They permit descriptive business material without requiring a number or a
@@ -65,6 +86,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
     eligible_packages = []
     withheld = []
     facts: dict[str, Any] = {}
+    headings = {uid for section in pipeline.get("structure", {}).get("sections", ())
+                for uid in section.get("heading_unit_ids", ())}
 
     def classify(text: str):
         if text in facts:
@@ -106,16 +129,21 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
                 continue
             unit = units[uid]
             view = reading.get(uid, {})
-            admitted, fact = _admitted(unit, view, package["kind"], fact=classify(unit.raw_text))
+            admitted, fact = _admitted(unit, view, package["kind"], fact=classify(unit.raw_text),
+                                       is_heading=uid in headings)
             if not admitted:
                 continue
             anchors.append(uid)
-            topics = tuple(dict.fromkeys((*fact.topics, str(view.get("section_role") or "unknown"))))
+            meaningful = fact.eligible or package["kind"] == "operating_table"
+            role = view.get("section_role")
+            scope_topics = (role,) if not meaningful and role in _BUSINESS_ROLES else ()
+            topics = tuple(dict.fromkeys((*fact.topics, *scope_topics)))
             candidates[uid] = EvidenceCandidate(unit, topics,
                 ("reading_plan", *fact.reasons), fact.score)
             previous = metadata.get(uid, {})
             metadata[uid] = {"priority": max(1, int(view.get("priority", 2))),
                              "topics": topics, "context_only": False,
+                             "value_band": "meaningful_fact" if meaningful else "description",
                              "required": tuple(sorted(set(previous.get("required", ())) | (required - {uid})))}
         if not anchors:
             continue
@@ -127,6 +155,31 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
     # Stable source order, never text-only identity deduplication.
     ordered = tuple(candidates[unit.unit_id] for unit in parsed.units if unit.unit_id in candidates)
     return ordered, metadata, eligible_packages, graph["complete"], withheld
+
+
+def _native_layout_summary(parsed: DocumentStructure) -> dict[str, Any] | None:
+    """Persist bounded coverage, never transient words/cells or another inventory."""
+    coverage = parsed.layout_coverage
+    if coverage is None:
+        return None
+    result = {key: coverage[key] for key in (
+        "feature_version", "complete", "processed_unit_count", "processed_page_count",
+        "deferred_unit_count", "fine_element_count", "work_units") if key in coverage}
+    identifiers = coverage.get("deferred_unit_ids", ())
+    result["deferred_unit_ids"] = list(identifiers[:128])
+    result["deferred_limited"] = bool(coverage.get("deferred_limited") or len(identifiers) > 128)
+    counts: dict[str, dict[str, Any]] = {}
+    for entry in parsed.layout_diagnostics:
+        code = str(entry.get("code", "UNKNOWN"))
+        # Native producers already bound diagnostic codes; cap a malformed
+        # caller's distinct labels as well without dropping the total count.
+        if code not in counts and len(counts) >= 128:
+            code = "OTHER_DIAGNOSTICS"
+        row = counts.setdefault(code, {"code": code, "count": 0, "unit_count": 0})
+        row["count"] += 1
+        row["unit_count"] += int(entry.get("unit_count", len(entry.get("unit_ids", ()))))
+    result["diagnostics"] = list(counts.values())
+    return result
 
 
 def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
@@ -164,11 +217,14 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
     for key in list_keys:
         if len(unread[key]) > 128:
             unread[key] = unread[key][:128]
+    layout_coverage = dict(pipeline.get("layout_hints", {}).get("coverage", {}))
+    if pipeline.get("native_layout_frontend") is not None:
+        layout_coverage["native_frontend"] = pipeline["native_layout_frontend"]
     return {"schema_version": "du-production-reading/1", "reading_policy_version": version,
             "reading_policies": policies, "business_facets": facets,
             "constraints": list(_SHARED_CONSTRAINTS),
             "groups": groups, "unread": unread,
-            "deferred": deferred, "layout_coverage": dict(pipeline.get("layout_hints", {}).get("coverage", {}))}
+            "deferred": deferred, "layout_coverage": layout_coverage}
 
 
 def _understand(parsed: DocumentStructure, *, title: str, kind: str, mime_type: str):
@@ -183,12 +239,17 @@ def _understand(parsed: DocumentStructure, *, title: str, kind: str, mime_type: 
     if not parents:
         parents[parsed.source_id] = []
     parts = []
+    native_frontend = _native_layout_summary(parsed)
     for source_id, units in parents.items():
-        parts.append(understand_units(units, source_id=source_id,
+        part = understand_units(units, source_id=source_id,
             source_sha256=source_id.rsplit(":", 1)[-1], title=title, declared_kind=kind,
             mime_type=mime_type, language=parsed.language,
             native_scan="complete" if parsed.coverage_complete else "partial",
-            opaque_pages=parsed.opaque_pages, deferred_pages=parsed.deferred_table_pages))
+            opaque_pages=parsed.opaque_pages, deferred_pages=parsed.deferred_table_pages)
+        if native_frontend is not None:
+            part["native_layout_frontend"] = native_frontend
+            part["observation"]["metadata"]["native_layout_frontend_version"] = native_frontend.get("feature_version")
+        parts.append(part)
     if len(parts) == 1:
         return parts[0]
     combined = deepcopy(parts[0])

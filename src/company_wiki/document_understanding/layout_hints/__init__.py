@@ -15,9 +15,10 @@ from typing import Any, Mapping
 
 from . import columns, headings, ordering, relations, tables
 from .contract import SCHEMA_IN, SCHEMA_OUT, WorkBudgetExceeded, parse_observation
-from .geometry import assign_cell_columns
+from .geometry import assign_cell_columns, native_cell_identity
+from .fine_geometry import consume_fine_geometry
 
-LAYOUT_HINTS_VERSION = "1.1.0"
+LAYOUT_HINTS_VERSION = "1.2.0"
 
 __all__ = ["derive_layout_hints", "SCHEMA_IN", "SCHEMA_OUT", "LAYOUT_HINTS_VERSION"]
 
@@ -73,6 +74,7 @@ def _budget_partial(doc) -> dict:
 
 
 def _derive(doc) -> dict:
+    fine = consume_fine_geometry(doc)
     diagnostics: list[dict] = list(doc.diagnostics)
     budget = doc.budget
     declared_coarse = []
@@ -80,7 +82,12 @@ def _derive(doc) -> dict:
         if unit.deferred:
             continue
         budget.charge()
-        if unit.hints.get("geometry_granularity") in {"row", "block", "table_region"}:
+        if (
+            unit.unit_id not in fine.cells
+            and unit.unit_id not in fine.words
+            and unit.hints.get("geometry_granularity")
+            in {"row", "block", "table_region"}
+        ):
             declared_coarse.append(unit.unit_id)
     if declared_coarse:
         diagnostics.append(
@@ -99,7 +106,12 @@ def _derive(doc) -> dict:
     for page in doc.pages:
         if not budget.charge(1):
             break
-        page_units = [unit for unit in page.units if not unit.deferred]
+        page_units = [
+            view
+            for unit in page.units
+            if not unit.deferred
+            for view in fine.cells.get(unit.unit_id, [unit])
+        ]
         page_bands = tables.analyse_page(page, page_units, budget, furniture_ids)
         drafts = tables.build_region_drafts(page_bands, budget)
         for draft in drafts:
@@ -155,9 +167,10 @@ def _derive(doc) -> dict:
             (
                 page_bands.page,
                 [
-                    unit
+                    view
                     for unit in page_bands.page.units
                     if not unit.deferred and unit.unit_id not in excluded_lane_ids
+                    for view in fine.words.get(unit.unit_id, [unit])
                 ],
             )
             for page_bands in page_bands_list
@@ -223,12 +236,15 @@ def _derive(doc) -> dict:
         for row_position, index in enumerate(band_indices):
             for cell in page_bands.cells[index]:
                 column, span = assign_cell_columns(cell, draft.slots, budget=budget)
+                native = native_cell_identity(cell)
                 cells_out.append(
                     {
                         "member_unit_ids": member_order(
                             unit.unit_id for unit in cell.members
                         ),
-                        "row": row_offset + row_position,
+                        "row": native[1]
+                        if native is not None
+                        else row_offset + row_position,
                         "column": column,
                         "row_span": None,
                         "column_span": span,
@@ -663,7 +679,8 @@ def _derive(doc) -> dict:
 
     processed = set(doc.processed_ids)
     complete = (
-        not doc.deferred_ids
+        not fine.partial
+        and not doc.deferred_ids
         and not doc.coverage.get("opaque_pages")
         and not doc.coverage.get("deferred_pages")
         and not budget.exhausted
@@ -771,9 +788,11 @@ def _build_unit_hints(
     furniture_ids,
 ):
     lane_by_unit: dict = {}
+    columns_by_unit: dict = {}
     for lane_layout in lane_layouts:
         for index, members in enumerate(lane_layout.lanes):
             for unit in members:
+                columns_by_unit.setdefault(unit.unit_id, set()).add(index)
                 lane_by_unit[unit.unit_id] = (
                     index,
                     lane_layout.confidence,
@@ -781,6 +800,9 @@ def _build_unit_hints(
                 )
         for unit in lane_layout.spanning:
             lane_by_unit[unit.unit_id] = (None, "medium", ["spanning_lane"])
+    for uid, assigned in columns_by_unit.items():
+        if len(assigned) > 1:
+            lane_by_unit[uid] = (None, "medium", ["multiple_native_columns"])
 
     hints = []
     for unit in doc.units:

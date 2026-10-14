@@ -7,7 +7,7 @@ A missing geometry capability remains a diagnostic; original text stays readable
 from __future__ import annotations
 from copy import deepcopy
 from math import isfinite
-from typing import Mapping
+from typing import Any, Mapping
 from .layout_hints import derive_layout_hints, LAYOUT_HINTS_VERSION
 from .layout_hints.contract import WorkBudget, WorkBudgetExceeded
 
@@ -25,7 +25,7 @@ def _number(value):
 
 def apply_layout_hints(observation: Mapping, *, limits=None) -> tuple[dict, dict]:
     result = deepcopy(dict(observation))
-    pages = {}
+    pages: dict[int | None, dict[str, Any]] = {}
     diagnostics = []
     missing = []
     conflicting_dimensions = set()
@@ -70,6 +70,9 @@ def apply_layout_hints(observation: Mapping, *, limits=None) -> tuple[dict, dict
                 "font_weight": layout.get("font_weight"),
                 "kind": unit["kind"],
                 "upstream_hints": upstream,
+                "layout": {key: deepcopy(value) for key, value in layout.items()
+                           if key in {"coordinate_frame", "rotation", "frame_converted", "cropbox", "cropbox_position",
+                                      "reading_layout_feature_version", "geometry_granularity"}},
             }
         )
     coverage = result.get("coverage") or {}
@@ -107,6 +110,7 @@ def apply_layout_hints(observation: Mapping, *, limits=None) -> tuple[dict, dict
             and hint["heading_level"] is not None
         ):
             unit["hints"]["heading_level"] = hint["heading_level"]
+            unit["hints"]["heading_level_source"] = "numbering" if "numbered_heading" in hint["basis"] else "layout"
             if unit["kind"] == "paragraph":
                 unit["kind"] = "heading"
         if hint["text_column"] is not None and unit["layout"].get("bbox") is not None:
@@ -188,7 +192,7 @@ def _bind_context(result, layout_hints, budget):
                 if uid not in known:
                     raise ValueError("layout group references unknown source unit")
     semantics = result.get("semantic_units", ())
-    members = {}
+    members: dict[str, set[int]] = {}
     required = {}
     for i, semantic in enumerate(semantics):
         budget.charge()
@@ -197,7 +201,7 @@ def _bind_context(result, layout_hints, budget):
             budget.charge()
             members.setdefault(uid, set()).add(i)
     for group in groups.values():
-        touched = set()
+        touched: set[int] = set()
         for uid in group.get("member_unit_ids", ()):
             budget.charge()
             touched.update(members.get(uid, ()))

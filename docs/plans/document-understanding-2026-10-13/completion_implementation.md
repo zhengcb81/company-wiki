@@ -8,7 +8,7 @@ Owner: ROOT。状态由同目录 `task_plan.md` 唯一管理。此文合并原 `
 
 已完成：唯一运行 `profiles/reading_catalog.json`（24文档规格、14业务策略）、真实父子章节范围、实际采用策略指纹、布局工作预算、已有字体/粗geometry透传、最终原文上下文实物化。源码deb7eb7d已并master并推送，CI38476678472 success；PWF收尾9e4faf2a已推送。1135联合PASS、四PDF658span原文回放、真实10-Q六项通过。详情见 `du2-reception/acceptance.md`。
 
-尚未完成：新ReadingPlan进入生产span选择；正式模型请求消费新策略；生产generation/cache接线；同预算真实摘要质量及母G2/G4/G5。四PDF细列/单元格仍partial；微软关键业务旧baseline4/8 FAIL不得删改。
+生产接线已于d3c57b31/fc2a4513发布并通过精确CI：公开显式0.9、ReadingPlan进入正式span选择/模型请求、final generation CAS及same-run/outbox/v5恢复工程验收完成。剩余：真实依赖组件接入后的跨run缓存；同预算真实摘要质量及母G2/G4/G5；细geometry生产前端。微软关键业务旧baseline4/8与初新1/8 FAIL保留；实际form/意义修复后当前7/8，仍须关闭章节/预算共因才切默认。
 
 **接收后再核对的准确结论：** DU `summary_input.evidence_packages[*].members`重复物化共享正文；现有生产 `NarrativeModelRequest`已经使用唯一evidence行和group别名引用，最终HTTP不因group重复全文。修新链时复用这一正确传输机制，不能据DU重复视图重写另一套HTTP协议。
 

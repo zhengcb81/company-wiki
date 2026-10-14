@@ -210,25 +210,133 @@ _ACTIVITY = re.compile(
     r"拓展|扩张|擴張|扩建|擴建|认证|認證|验证|驗證|试产|試產|交付|商业化|商業化|"
     r"导入|導入|投产|投產|开拓|開拓|新增|转化|轉化", re.IGNORECASE)
 
+# Only the opt-in ReadingPlan detector consumes these relations. Explicit
+# legacy selectors keep detect_business_fact and its historical predicates.
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/2"
+_READING_OBJECT = re.compile(
+    r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
+    r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
+_BILLING_BASIS = re.compile(
+    r"\b(?:consumption[- ]based|usage[- ]based|metered|per[- ](?:seat|user)|"
+    r"(?:paid|licensed|active)\s+(?:seats?|users?)|average revenue per user|"
+    r"storage consumed|computation used)\b|"
+    r"按(?:量|使用量|用量|席位|用户|用戶|交易).{0,8}(?:计费|計費|收费|收費)|"
+    r"(?:客户|客戶|用户|用戶)(?:实际|實際)?(?:使用量|用量)|按席位|按量计费|按量計費", re.I)
+_BILLING_RELATION = re.compile(
+    r"\b(?:charges?|charging|billed|billing|pricing)\b[^。.!?;]{0,100}\b(?:based on|per|for|by)\b|"
+    r"\brevenue\b[^。.!?;]{0,100}\b(?:affected|depends? on|from|based on|driven by)\b|"
+    r"\b(?:billing|pricing|business)\s+(?:basis|model)\b|"
+    r"(?:收入|收费|收費|计费|計費|定价|定價).{0,45}(?:取决于|取決於|根据|根據|采用|採用|按照|按)|"
+    r"(?:采用|採用).{0,35}(?:计费|計費|收费|收費)", re.I)
+_SEGMENT_OBJECT = re.compile(r"\b(?:reportable|reporting|operating|business)?\s*segments?\b|分部|业务板块|業務板塊", re.I)
+_SEGMENT_SCOPE = re.compile(
+    r"\b(?:reportable|reporting|operating|business)\s+segments?\b|"
+    r"\bour\s+segments?\b|\b(?:our|the|company)\s+business\b|"
+    r"报告分部|報告分部|经营分部|經營分部|分部口径|分部口徑|业务板块|業務板塊", re.I)
+_SEGMENT_RELATION = re.compile(
+    r"\b(?:operate|manage|report)\b[^。.!?;]{0,100}\b(?:using|through|segments?)\b|"
+    r"\bsegments?\b[^。.!?;]{0,70}\b(?:consist|comprise|include|composition|changes?|changed|recast)\b|"
+    r"\b(?:composition|changes?|changed|recast|reclassif\w*)\b[^。.!?;]{0,100}\bsegments?\b|"
+    r"(?:分部|业务板块|業務板塊).{0,55}(?:由|分为|分為|组成|組成|调整|調整|重述|变更|變更)|"
+    r"(?:调整|調整|重述|变更|變更).{0,35}(?:分部|业务板块|業務板塊)", re.I)
+_PRODUCT_SUBJECT = re.compile(
+    r"\b(?:products?|services?|software|platforms?|hosting|cloud|segments?)\b|"
+    r"产品|產品|服务|服務|软件|軟件|平台|业务|業務|分部", re.I)
+_REVENUE_GROWTH = re.compile(
+    r"\b(?:revenue|sales)\b[^。.!?;]{0,45}\b(?:increas\w*|grew|growth|declin\w*|decreas\w*)\b|"
+    r"(?:收入|销售|銷售).{0,20}(?:增长|增長|下降|减少|減少)", re.I)
+_DRIVER_LINK = re.compile(r"\b(?:driven by|due to|reflecting)\b|主要由|受.{0,12}带动|受.{0,12}帶動|得益于|得益於", re.I)
+_OPERATING_MEASURE = re.compile(
+    r"\b(?:consumption|usage|subscribers?|seats?|customers?|users?|units?|volumes?|pricing)\b|"
+    r"使用量|用量|订阅|訂閱|席位|用户|用戶|客户|客戶|销量|銷量|价格|價格", re.I)
+_MEASURE_CHANGE = re.compile(
+    r"\b(?:higher|lower|growing|rising|falling|increas\w*|decreas\w*|grew|growth|"
+    r"declin\w*|expansion|adoption|mix)\b|增长|增長|上升|下降|提升|减少|減少|增加|扩张|擴張", re.I)
+_MEASURE_COUNT = re.compile(r"^\s*(?:(?:of|was|were|reached|at|to)\s+)?\d|"
+                            r"\d[\d,.]*\s+(?:(?:million|billion|thousand|paid|active|licensed)\s+)*$", re.I)
+_CONTRACT_OBJECT = re.compile(
+    r"\b(?:remaining (?:performance )?obligations?|contract(?:ed)? backlog|order backlog|"
+    r"unfulfilled customer contracts?)\b|剩余履约义务|剩餘履約義務|合同负债|合同負債|在手订单|在手訂單|未履行客户合同|未履行客戶合同", re.I)
+_CONTRACT_CONVERSION = re.compile(
+    r"\b(?:recogniz\w*|recognis\w*|invoic\w*|ship\w*|deliver\w*|convert\w*)\b|"
+    r"确认|確認|开票|開票|交付|转化|轉化", re.I)
+_FORWARD_PERIOD = re.compile(
+    r"\b(?:future periods?|thereafter|over the next|within the next|next\s+\d+\s+(?:months?|quarters?|years?))\b|"
+    r"未来|未來|之后期间|之後期間|以后期间|以後期間", re.I)
+
+
+def _measured_driver(explanation: str) -> bool:
+    """A metric has a measure or observed change, not merely a customer noun."""
+    for metric in _OPERATING_MEASURE.finditer(explanation):
+        before = explanation[max(0, metric.start() - 32):metric.start()]
+        after = explanation[metric.end():metric.end() + 60]
+        if (_MEASURE_CHANGE.search(before) or _MEASURE_CHANGE.search(after)
+                or _MEASURE_COUNT.search(before) or _MEASURE_COUNT.search(after)):
+            return True
+    return False
+
+
+def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
+    """Specific source relationships, not a bag of nouns across sentences."""
+    reasons = []
+    for clause in clauses:
+        if _GENERIC_DEFINITION.search(clause) and not _COMPANY_ANCHOR.search(clause):
+            continue
+        if (_READING_OBJECT.search(clause) and _BILLING_BASIS.search(clause)
+                and _BILLING_RELATION.search(clause)):
+            reasons.append("business_billing_basis")
+        if (_SEGMENT_OBJECT.search(clause) and _SEGMENT_SCOPE.search(clause)
+                and _SEGMENT_RELATION.search(clause)):
+            reasons.append("business_reporting_scope")
+        growth = _REVENUE_GROWTH.search(clause)
+        link = _DRIVER_LINK.search(clause)
+        if growth and link:
+            # The operating object belongs to the subject, and its explanation
+            # must give an actual operating measure or nested growth relation.
+            subject = clause[:growth.start()]
+            explanation = clause[link.end():]
+            if (_PRODUCT_SUBJECT.search(subject) and (
+                _measured_driver(explanation)
+                or (_PRODUCT_SUBJECT.search(explanation) and _REVENUE_GROWTH.search(explanation))
+            )):
+                reasons.append("product_operating_driver")
+        if (_CONTRACT_OBJECT.search(clause) and _CONTRACT_CONVERSION.search(clause)
+                and _FORWARD_PERIOD.search(clause)):
+            reasons.append("contract_revenue_conversion")
+    return tuple(dict.fromkeys(reasons))
+
 
 def detect_reading_business_fact(text: str) -> OperatingFact:
-    """Operating objects plus observed activity, with no theme/duration whitelist.
+    """Operating activity and bounded business relationships, independent of issuer.
 
     Legacy replay keeps its historical recognizer. The reading policy admits
     general operating activity in the same bounded clause; a noun or a financial
     growth sentence alone is insufficient. Numeric amounts are never required.
     """
     fact = detect_business_fact(text)
-    activity = any(_OBJECT.search(clause) and _ACTIVITY.search(clause)
-                   for clause in _CLAUSES.split(text) if len(clause) <= BUSINESS_CHARACTER_WINDOW)
-    if not activity:
+    clauses = tuple(clause for clause in _CLAUSES.split(text)
+                    if clause and len(clause) <= BUSINESS_CHARACTER_WINDOW)
+    activity = any(_OBJECT.search(clause) and _ACTIVITY.search(clause) for clause in clauses)
+    relations = _reading_relations(clauses)
+    if not relations and not activity and not _business_fact(text).eligible:
+        # The historical English event recognizer can treat a product-labelled
+        # financial growth clause as an event. Preserve legacy replay, but the
+        # new path needs operating meaning rather than "revenue grew" plus an
+        # unrelated happy-customer/product-philosophy noun. Other sentences can
+        # still carry independently proven source facts; raw spans are untouched.
+        source_clauses = tuple(clause for clause in clauses if not _REVENUE_GROWTH.search(clause))
+        if len(source_clauses) != len(clauses):
+            fact = detect_business_fact(". ".join(source_clauses))
+    if not activity and not relations:
         return fact
     families = business_objects(text)
-    topics = tuple(dict.fromkeys((*fact.topics, "business_progress",
-        *(("capacity_projects",) if "production" in families else ()))))
-    return OperatingFact(True, topics, tuple(dict.fromkeys((*fact.reasons, "operating_activity"))),
-                         max(fact.score, 3), fact.financial_exempt)
+    topics = tuple(dict.fromkeys((*fact.topics, *relations,
+        *(("business_progress",) if activity else ()),
+        *(("capacity_projects",) if activity and "production" in families else ()))))
+    return OperatingFact(True, topics, tuple(dict.fromkeys((*fact.reasons, *relations,
+                         *(("operating_activity",) if activity else ())))),
+                         max(fact.score, 3), fact.financial_exempt or bool(relations))
 
 
 __all__ = ["business_objects", "business_qualification", "detect_business_fact",
-           "detect_reading_business_fact", "reject_finance_only_text"]
+           "detect_reading_business_fact", "reject_finance_only_text", "READING_BUSINESS_POLICY_VERSION"]

@@ -22,7 +22,9 @@ from typing import Sequence
 
 from . import vocabulary as v
 from .observation import Observation
-from .signals import SignalBag, normalize
+from .signals import (SignalBag, normalize, _cover_units, self_identification_units,
+                      matches_any, HK_ANNUAL_WORDS, HK_INTERIM_WORDS,
+                      CN_PERIODIC_WORDS)
 
 
 @dataclass
@@ -273,6 +275,13 @@ def _sec_profile(observation: Observation, bag: SignalBag) -> Candidate | None:
     )
 
 
+def _observed_periodic_cover(observation: Observation, aliases: Sequence[str]) -> bool:
+    """The actual front-page self-name, independent of filename/metadata claims."""
+    actual = normalize(" ".join(unit.text for unit in
+                                self_identification_units(_cover_units(observation))))
+    return bool(matches_any(actual, aliases))
+
+
 def _hk_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
     """HK periodic vs. HK offering, decided from real bilingual vocabulary.
 
@@ -281,7 +290,8 @@ def _hk_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
     TOC/first heading, and a reconstruction may only carry the latter.
     """
     offering = _offering_evidence(bag, hk=True)
-    if offering:
+    periodic_cover = _observed_periodic_cover(observation, (*HK_ANNUAL_WORDS, *HK_INTERIM_WORDS))
+    if offering and not periodic_cover:
         return Candidate(
             profile_id="prospectus",
             family="prospectus",
@@ -355,6 +365,8 @@ def _cn_candidate(observation: Observation, bag: SignalBag) -> Candidate | None:
     later fundraising unit with the issue amount. Requiring cover wording alone routed it to
     the periodic family, so the fundraising-section evidence counts too.
     """
+    if _observed_periodic_cover(observation, CN_PERIODIC_WORDS):
+        return None
     details = " ".join(signal.detail for signal in bag.all)
     cover_units = _units(bag, "COVER_HEADING")
     fundraising_units = tuple(

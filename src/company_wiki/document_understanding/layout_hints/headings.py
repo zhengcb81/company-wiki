@@ -49,6 +49,8 @@ def detect_repeated_furniture(doc: Doc) -> set:
 
 def body_font_size(doc: Doc, excluded: set) -> float | None:
     sizes = []
+    weighted_sizes = []
+    has_native_font = False
     for unit in doc.units:
         doc.budget.charge()
         if unit.deferred or unit.font_size is None or unit.unit_id in excluded:
@@ -57,8 +59,21 @@ def body_font_size(doc: Doc, excluded: set) -> float | None:
         if len(text) < 12 or is_numeric_text(text):
             continue
         sizes.append(unit.font_size)
+        weighted_sizes.append((unit.font_size, len(text)))
+        has_native_font = (
+            has_native_font or unit.hints.get("_fine_font_coverage") == "exact"
+        )
     if not sizes:
         return None
+    if has_native_font:
+        # Exact native font ranges describe characters, not equally weighted
+        # blocks. A short title must not outweigh a longer body paragraph.
+        remaining = sum(length for _, length in weighted_sizes) / 2
+        for size, length in sorted(weighted_sizes):
+            doc.budget.charge()
+            remaining -= length
+            if remaining <= 0:
+                return size
     sizes.sort()
     return sizes[len(sizes) // 2]
 

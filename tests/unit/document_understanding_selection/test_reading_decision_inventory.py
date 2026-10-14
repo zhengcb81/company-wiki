@@ -1,6 +1,11 @@
 """Source-specific cache inventory includes decision losers, not whole catalog."""
 from copy import deepcopy
 import importlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
@@ -51,6 +56,44 @@ def test_missing_inventory_cannot_claim_complete():
     trace = {"schema_version": "du-decision-trace/1", "scopes": [], "components": [],
              "candidates": [], "versions": {}, "inventory_complete": False}
     assert module.current_decision_trace(trace)["inventory_complete"] is False
+
+
+def test_reading_business_admission_version_is_an_actual_cache_dependency(monkeypatch):
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    policy = importlib.import_module("company_wiki.source_catalog.narrative_business_policy")
+    before = module.build_decision_trace(_real_interim_pipeline())
+    assert before["versions"].get("business_policy") == policy.READING_BUSINESS_POLICY_VERSION
+    assert module.current_decision_trace(before) == before
+    monkeypatch.setattr(policy, "READING_BUSINESS_POLICY_VERSION", policy.READING_BUSINESS_POLICY_VERSION + "/next")
+    current = module.current_decision_trace(before)
+    assert current != before, "a changed admission algorithm cannot reuse the old decision"
+    assert current["versions"]["business_policy"] == policy.READING_BUSINESS_POLICY_VERSION
+    assert {key: value for key, value in current.items() if key != "versions"} == {
+        key: value for key, value in before.items() if key != "versions"
+    }
+
+
+@pytest.mark.parametrize("first", ["inventory", "policy", "source-selector"])
+def test_actual_business_version_import_chain_is_safe_from_fresh_entry_points(first):
+    modules = {
+        "inventory": "company_wiki.document_understanding.decision_inventory",
+        "policy": "company_wiki.source_catalog.narrative_business_policy",
+        "source-selector": "company_wiki.source_catalog.narrative_reading",
+    }
+    ordered = [modules[first], *(name for key, name in modules.items() if key != first)]
+    repo = Path(__file__).resolve().parents[3]
+    script = (
+        "import importlib,json,sys; "
+        "[importlib.import_module(name) for name in json.loads(sys.argv[1])]; "
+        "inventory=importlib.import_module('company_wiki.document_understanding.decision_inventory'); "
+        "policy=importlib.import_module('company_wiki.source_catalog.narrative_business_policy'); "
+        "assert inventory._versions()['business_policy']==policy.READING_BUSINESS_POLICY_VERSION"
+    )
+    result = subprocess.run([sys.executable, "-c", script, json.dumps(ordered)],
+                            cwd=repo, env={**os.environ, "PYTHONPATH": str(repo / "src"),
+                                           "PYTHONDONTWRITEBYTECODE": "1"},
+                            capture_output=True, text=True, timeout=20, check=False)
+    assert result.returncode == 0, result.stderr
 
 
 def _real_interim_pipeline():

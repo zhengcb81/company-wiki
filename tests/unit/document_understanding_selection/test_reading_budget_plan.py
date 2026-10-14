@@ -85,7 +85,7 @@ def _item(
 
 
 def _select(items, *, limit, **options):
-    assert getattr(budget, "READING_BUDGET_POLICY", None) == READING_POLICY, (
+    assert getattr(budget, "REPLAY_READING_BUDGET_POLICY", None) == READING_POLICY, (
         "Phase A RED: the additive reading_plan/1 policy is not exported"
     )
     return budget.select_budget_items(tuple(items), limit=limit, policy=READING_POLICY, **options)
@@ -115,7 +115,7 @@ def test_reading_metadata_is_additive_with_neutral_defaults():
     assert available["reading_topics"].default == ()
     assert available["required_item_ids"].default == ()
     assert available["is_context_only"].default is False
-    assert getattr(budget, "READING_BUDGET_POLICY", None) == READING_POLICY
+    assert getattr(budget, "REPLAY_READING_BUDGET_POLICY", None) == READING_POLICY
 
 
 def test_changing_only_the_reading_priority_changes_the_selected_scope():
