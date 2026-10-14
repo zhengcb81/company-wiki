@@ -88,7 +88,9 @@ def failed_body(selected, condition, *, physical_path=None):
     elif condition == "path":
         if physical_path is None:
             raise ValueError("physical-path control requires its owned test original")
-        claim["text"] = str(physical_path)
+        # An explicit filesystem reference has the same meaning on every host;
+        # a bare POSIX string also overlaps valid JSON-pointer/source notation.
+        claim["text"] = physical_path.as_uri()
     elif condition == "size":
         claim["claim_id"] = "claim-" + "a" * 70000
     return canonical_json(value).encode("utf-8"), prompt
@@ -154,6 +156,8 @@ def test_each_real_post_model_validation_failure_has_final_hash_rule_and_native_
     before = selected.to_dict()
     body, prompt = failed_body(selected, condition,
                                physical_path=isolated_original_and_config / "original.txt")
+    if condition == "path":
+        assert json.loads(body)["draft"]["claims"][0]["text"].startswith("file://")
     result = run_response(selected, body, prompt=prompt)
     assert_failure(result, body=body, code=code, rule=rule)
     assert selected.to_dict() == before
