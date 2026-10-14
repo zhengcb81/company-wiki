@@ -131,21 +131,6 @@ def assert_comparison_shape(result: Any) -> None:
         assert len(result[key]) == len(set(result[key])), key
 
 
-def walk_scalars(value: Any, prefix: str = "") -> list[tuple[str, str]]:
-    """Every string scalar in a JSON-shaped value, with a dotted path."""
-    found: list[tuple[str, str]] = []
-    if isinstance(value, dict):
-        for key, item in value.items():
-            found.extend(walk_scalars(item, f"{prefix}.{key}" if prefix else str(key)))
-            found.append((f"{prefix}.{key}@key" if prefix else f"{key}@key", str(key)))
-    elif isinstance(value, (list, tuple)):
-        for index, item in enumerate(value):
-            found.extend(walk_scalars(item, f"{prefix}[{index}]"))
-    elif isinstance(value, str):
-        found.append((prefix, value))
-    return found
-
-
 def keys_of(value: Any) -> set[str]:
     """Every mapping key anywhere in a JSON-shaped value."""
     found: set[str] = set()

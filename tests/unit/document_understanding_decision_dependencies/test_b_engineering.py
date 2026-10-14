@@ -141,20 +141,110 @@ def test_decision_digest_is_stable_across_processes():
         )
         assert run.returncode == 0, run.stderr
         child = json.loads(run.stdout)
-        # Guard against silently testing the *installed* package instead of this tree.
-        assert child["decision_digest"]
         outputs.append(child)
     local = _freeze(trace_value)
     assert outputs[0]["decision_digest"] == outputs[1]["decision_digest"] == local["decision_digest"]
     assert _canonical(outputs[0]) == _canonical(local)
 
 
-def test_digest_does_not_depend_on_array_ordering_across_processes():
+def test_array_ordering_does_not_move_the_digest():
     shuffled = copy.deepcopy(b.base_trace())
     shuffled["components"] = list(reversed(shuffled["components"]))
     shuffled["candidates"] = list(reversed(shuffled["candidates"]))
     shuffled["scopes"] = list(reversed(shuffled["scopes"]))
     assert _freeze(b.base_trace())["decision_digest"] == _freeze(shuffled)["decision_digest"]
+
+
+# --- 2b. the digest must actually cover every identity class ---------------------------
+#
+# The digest is the natural cache key, so a regression that quietly drops one of its
+# inputs would ship green unless each class is pinned separately.
+
+
+def test_the_decision_digest_covers_every_identity_class():
+    base_digest = _freeze(b.base_trace())["decision_digest"]
+
+    def mutate(fn):
+        def apply(trace_value):
+            fn(trace_value)
+            return trace_value
+
+        return apply
+
+    cases = {
+        "component content": mutate(
+            lambda t: t["components"][0].__setitem__("content_digest", "0" * 63 + "a")
+        ),
+        "component matcher": mutate(
+            lambda t: t["components"][0].__setitem__("matcher_digest", "0" * 63 + "b")
+        ),
+        "component display version": mutate(
+            lambda t: t["components"][0].__setitem__("version", "9.9.9")
+        ),
+        "component scope membership": mutate(
+            lambda t: t["components"][0].__setitem__("scope_ids", ["scope_child"])
+        ),
+        "scope field": mutate(lambda t: t["scopes"][0].__setitem__("regime", "sec")),
+        "scope form_type": mutate(lambda t: t["scopes"][0].__setitem__("form_type", "10-K")),
+        "scope purpose": mutate(lambda t: t["scopes"][0].__setitem__("purpose", "other")),
+        "algorithm version value": mutate(lambda t: t["versions"].__setitem__("router", "2.0.0")),
+        "algorithm version key added": mutate(lambda t: t["versions"].__setitem__("layout", "1")),
+        "algorithm version key removed": mutate(lambda t: t["versions"].pop("structure")),
+        "candidate eligibility": mutate(
+            lambda t: t["candidates"][1].__setitem__("eligible", not t["candidates"][1]["eligible"])
+        ),
+        "candidate scope": mutate(lambda t: t["candidates"][0].__setitem__("scope_id", "scope_child")),
+        "candidate component membership": mutate(
+            lambda t: t["candidates"][0].__setitem__("component_ids", ["c1"])
+        ),
+    }
+    for label, apply in cases.items():
+        mutated = apply(copy.deepcopy(b.base_trace()))
+        assert _freeze(mutated)["decision_digest"] != base_digest, label
+
+    # And the reverse control: reordering is not an identity class.
+    reordered = copy.deepcopy(b.base_trace())
+    for key in ("scopes", "components", "candidates"):
+        reordered[key] = list(reversed(reordered[key]))
+    assert _freeze(reordered)["decision_digest"] == base_digest
+
+
+def test_a_candidate_appearing_or_disappearing_moves_the_digest():
+    base_digest = _freeze(b.base_trace())["decision_digest"]
+    with_extra = copy.deepcopy(b.base_trace())
+    with_extra["candidates"].append(b.candidate("cand_z", scope_id="scope_parent", component_ids=["c3"]))
+    assert _freeze(with_extra)["decision_digest"] != base_digest
+
+    without = copy.deepcopy(b.base_trace())
+    without["candidates"] = [row for row in without["candidates"] if row["candidate_id"] != "cand_c"]
+    assert _freeze(without)["decision_digest"] != base_digest
+
+
+def test_the_digest_refuses_a_payload_with_missing_identity_fields():
+    frozen = _complete_manifest()
+    digest = _manifest_digest(frozen)
+    for key in ("schema_version", "scopes", "components", "candidates", "versions"):
+        trimmed = copy.deepcopy(frozen)
+        trimmed.pop(key)
+        with pytest.raises(ValueError):
+            _manifest_digest(trimmed)
+    assert _manifest_digest(frozen) == digest
+
+
+def test_equal_digests_are_identity_only_and_never_a_verdict():
+    """Same rows, different attestation: same identity, different status.
+
+    This is deliberate and documented -- the digest is identity so that the same decision
+    reached under a larger budget keeps its key -- but it means a consumer must check
+    ``status``. ``compare`` does, and never turns an unattested freeze into ``same``.
+    """
+    complete = _freeze(b.base_trace())
+    incomplete = _freeze({**b.base_trace(), "inventory_complete": False})
+    assert complete["decision_digest"] == incomplete["decision_digest"]
+    assert complete["status"] == "complete"
+    assert incomplete["status"] == "partial"
+    assert _compare(incomplete, b.base_trace())["status"] == "unavailable"
+    assert _compare(complete, incomplete)["status"] == "unavailable"
 
 
 # --- 3. nothing but content identity enters the manifest -------------------------------
@@ -416,7 +506,10 @@ def test_compare_refuses_an_arbitrary_mapping_as_frozen():
 # --- 7. the package cannot reach the rest of the system ---------------------------------
 
 #: Nothing in this package may import the selector, the registry, the Store or any
-#: filesystem/network/clock facility. It is a pure content-identity component.
+#: filesystem/network/clock facility. It is a pure content-identity component. The check
+#: covers plain imports, ``from x import y`` (including the *imported name*, so
+#: ``from company_wiki.document_understanding import profiles`` is caught even though the
+#: module string alone looks harmless) and the dynamic escapes.
 FORBIDDEN_IMPORTS = {
     "company_wiki.document_understanding.profiles",
     "company_wiki.document_understanding.structure",
@@ -430,6 +523,8 @@ FORBIDDEN_IMPORTS = {
     "company_wiki.source_catalog",
     "company_wiki.automation",
     "company_wiki.document_normalization",
+    "tools.document_understanding_benchmark",
+    "tools.document_normalization_layout_snapshots",
     "os",
     "sys",
     "io",
@@ -458,7 +553,16 @@ FORBIDDEN_IMPORTS = {
 }
 
 
+#: Call names that would reach a module without ever naming it in an import statement.
+FORBIDDEN_CALLS = {"__import__", "exec", "eval", "compile", "import_module", "run_module"}
+
+
 def _imported_modules(path: pathlib.Path) -> set[str]:
+    """Every module name reachable from this file, including imported *names*.
+
+    ``from a.b import c`` must contribute both ``a.b`` and ``a.b.c``: the second is what
+    catches a forbidden submodule pulled in through an innocent-looking parent.
+    """
     tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
     found: set[str] = set()
     for node in ast.walk(tree):
@@ -466,20 +570,55 @@ def _imported_modules(path: pathlib.Path) -> set[str]:
             for alias in node.names:
                 found.add(alias.name)
         elif isinstance(node, ast.ImportFrom):
-            if node.level == 0 and node.module:
-                found.add(node.module)
+            module = node.module or ""
+            if node.level == 0 and module:
+                found.add(module)
+            for alias in node.names:
+                found.add(f"{module}.{alias.name}" if module else alias.name)
+        elif isinstance(node, ast.Call):
+            name = node.func
+            target = name.id if isinstance(name, ast.Name) else getattr(name, "attr", "")
+            if target in FORBIDDEN_CALLS:
+                found.add(f"<dynamic:{target}>")
     return found
 
 
 def test_the_package_imports_no_selector_registry_store_or_io():
     sources = sorted(PACKAGE_DIR.glob("*.py"))
     assert sources, "the package must have sources to check"
+    checked = 0
     for source in sources:
         for module in _imported_modules(source):
+            checked += 1
+            if module.startswith("<dynamic:"):
+                raise AssertionError(f"{source.name} reaches a module dynamically: {module}")
             for forbidden in FORBIDDEN_IMPORTS:
                 assert not (module == forbidden or module.startswith(forbidden + ".")), (
                     f"{source.name} imports {module!r}, which is outside this pure component"
                 )
+    assert checked > 8, f"the guard only saw {checked} import names; it is not reading the package"
+
+
+def test_the_import_guard_would_reject_a_forbidden_child_import(tmp_path):
+    """A guard that cannot fail is not a guard: prove it on a synthetic offender."""
+    offender = tmp_path / "_synthetic_offender.py"
+    offender.write_text(
+        "from company_wiki.document_understanding import profiles  # forbidden\n",
+        encoding="utf-8",
+    )
+    names = _imported_modules(offender)
+    assert "company_wiki.document_understanding.profiles" in names, names
+    assert any(
+        name == "company_wiki.document_understanding.profiles"
+        or name.startswith("company_wiki.document_understanding.profiles.")
+        for name in names
+    ), names
+
+
+def test_the_import_guard_would_reject_a_dynamic_import(tmp_path):
+    offender = tmp_path / "_synthetic_dynamic.py"
+    offender.write_text('__import__("os")\n', encoding="utf-8")
+    assert "<dynamic:__import__>" in _imported_modules(offender)
 
 
 def test_the_public_surface_is_exactly_the_two_frozen_functions():
@@ -507,7 +646,277 @@ def test_the_package_does_not_call_into_the_selector_at_runtime():
     assert live == {"compare_decision_dependencies", "freeze_decision_dependencies"}
 
 
-# --- 8. 100-source manifest encoding size -----------------------------------------------
+# --- 9. the budget must bound the WORK, not just the final walk -------------------------
+
+
+def _wide_domain(rows: int) -> dict:
+    """A wide but cheaply built decision domain, straight off the frozen wire shape."""
+    return {
+        "schema_version": "du-decision-trace/1",
+        "scopes": [{"scope_id": "s", "regime": "r", "family": "f", "form_type": None, "purpose": "p"},
+                   {"scope_id": "s2", "regime": "r", "family": "g", "form_type": None, "purpose": "q"}],
+        "components": [
+            {"component_id": f"c{i}", "version": "1.0.0", "content_digest": "0" * 64,
+             "matcher_digest": "1" * 64, "scope_ids": ["s"]}
+            for i in range(rows)
+        ],
+        "candidates": [
+            {"candidate_id": f"n{i}", "scope_id": "s", "component_ids": [f"c{i}"], "eligible": True}
+            for i in range(rows)
+        ],
+        "versions": {"router": "1.0.0"},
+        "inventory_complete": True,
+    }
+
+
+def test_the_byte_cap_bounds_the_input_not_only_the_output():
+    """A caller may not hand over an input far past ``max_input_bytes`` and get it walked.
+
+    The cap is published as a limit on the input encoding, so an input that exceeds it
+    must stop the call, not merely truncate what is written out afterwards.
+    """
+    import time
+
+    wide = _wide_domain(40_000)
+    assert len(_canonical(wide).encode("utf-8")) > 2 * 1024 * 1024
+    started = time.perf_counter()
+    frozen = _freeze(wide)  # the frozen default max_input_bytes is 2 MiB
+    elapsed = time.perf_counter() - started
+    assert frozen["status"] == "partial"
+    codes = {item["code"] for item in frozen["diagnostics"]}
+    assert "BYTES_LIMIT_REACHED" in codes, codes
+    # A diagnostic trend, not a fragile millisecond assertion: the point is that the call
+    # stops early instead of decoding an over-cap input in full.
+    assert elapsed < 3.0, f"freezing an oversized input took {elapsed:.3f}s"
+    assert len(frozen["components"]) < 40_000, "the walk must not have reached the end"
+    assert _compare(frozen, wide)["status"] != "same"
+
+
+def test_the_work_budget_stops_the_decode_and_not_only_the_walk():
+    """``max_work_units`` must bound decoding too, not just the final manifest walk."""
+    import time
+
+    wide = _wide_domain(40_000)
+    started = time.perf_counter()
+    frozen = _freeze(wide, max_work_units=1)
+    elapsed = time.perf_counter() - started
+    assert frozen["status"] == "partial"
+    assert "WORK_LIMIT_REACHED" in {item["code"] for item in frozen["diagnostics"]}
+    assert elapsed < 3.0, f"a one-work-unit freeze of 40k rows took {elapsed:.3f}s"
+    assert frozen["components"] == []
+    assert _compare(frozen, _wide_domain(2))["status"] != "same"
+
+
+def test_a_budget_stop_is_never_same():
+    for limits in (
+        {"max_work_units": 1},
+        {"max_work_units": 0},
+        {"max_input_bytes": 1},
+        {"max_input_bytes": 0},
+        {"max_scopes": 1},
+        {"max_components": 1},
+        {"max_candidates": 1},
+    ):
+        frozen = _freeze(_wide_domain(50), **limits)
+        assert frozen["status"] == "partial", limits
+        assert frozen["diagnostics"], limits
+        assert _compare(frozen, _wide_domain(50))["status"] != "same", limits
+
+
+# --- 10. a stored manifest is a record: unusable means unavailable, never same ----------
+
+
+def _complete_manifest() -> dict:
+    return _freeze(b.base_trace())
+
+
+def _with(manifest, **changes) -> dict:
+    updated = copy.deepcopy(manifest)
+    updated.update(changes)
+    return updated
+
+
+def test_an_unknown_field_in_a_manifest_never_reads_as_same():
+    """A field this contract does not define may hold the very change being asked about.
+
+    Dropping it silently would let ``compare`` answer ``same`` over information it never
+    looked at. DU3/1: unknown items get an explicit diagnostic.
+    """
+    frozen = _complete_manifest()
+    for payload in (
+        {**copy.deepcopy(frozen), "junk": {"hidden": "change"}},
+        {**copy.deepcopy(frozen), "selection_summary": "extra"},
+    ):
+        result = _compare(frozen, payload)
+        assert result["status"] == "unavailable", payload.keys()
+        assert result["diagnostics"]
+        assert _compare(payload, frozen)["status"] == "unavailable"
+
+
+def test_a_manifest_missing_a_contract_field_is_unavailable():
+    frozen = _complete_manifest()
+    for key in ("decision_digest", "diagnostics", "scopes", "components", "candidates", "versions"):
+        trimmed = copy.deepcopy(frozen)
+        trimmed.pop(key)
+        result = _compare(frozen, trimmed)
+        assert result["status"] == "unavailable", key
+        assert _compare(trimmed, frozen)["status"] == "unavailable", key
+
+
+def test_a_manifest_row_with_an_unknown_field_is_unavailable():
+    frozen = _complete_manifest()
+    tampered = copy.deepcopy(frozen)
+    tampered["components"][0]["extra"] = "value"
+    assert _compare(frozen, tampered)["status"] == "unavailable"
+    assert _compare(tampered, frozen)["status"] == "unavailable"
+
+
+def test_a_manifest_with_duplicate_ids_is_unavailable_not_silently_collapsed():
+    frozen = _complete_manifest()
+    tampered = copy.deepcopy(frozen)
+    tampered["components"].append(copy.deepcopy(tampered["components"][0]))
+    assert _compare(frozen, tampered)["status"] == "unavailable"
+    assert _compare(tampered, tampered)["status"] == "unavailable"
+
+
+def test_a_manifest_with_dangling_references_is_unavailable():
+    frozen = _complete_manifest()
+    tampered = copy.deepcopy(frozen)
+    tampered["components"][0]["scope_ids"] = ["scope_not_here"]
+    assert _compare(frozen, tampered)["status"] == "unavailable"
+
+    tampered = copy.deepcopy(frozen)
+    tampered["candidates"][0]["component_ids"] = ["component_not_here"]
+    assert _compare(frozen, tampered)["status"] == "unavailable"
+
+    tampered = copy.deepcopy(frozen)
+    tampered["candidates"][0]["scope_id"] = "scope_not_here"
+    assert _compare(frozen, tampered)["status"] == "unavailable"
+
+
+def test_a_manifest_with_a_repeated_reference_is_unavailable():
+    frozen = _complete_manifest()
+    tampered = copy.deepcopy(frozen)
+    name = tampered["candidates"][0]["component_ids"][0]
+    tampered["candidates"][0]["component_ids"] = [name, name]
+    assert _compare(frozen, tampered)["status"] == "unavailable"
+
+
+def test_a_manifest_with_a_malformed_digest_is_unavailable():
+    frozen = _complete_manifest()
+    for field in ("content_digest", "matcher_digest"):
+        for bad in ("0" * 8, "0" * 63, "Z" * 64, 12345, None):
+            tampered = copy.deepcopy(frozen)
+            tampered["components"][0][field] = bad
+            assert _compare(frozen, tampered)["status"] == "unavailable", (field, bad)
+
+
+def test_a_manifest_with_wrong_typed_rows_is_unavailable_and_does_not_raise():
+    frozen = _complete_manifest()
+    corruptions = [
+        {"components": [{"component_id": 7}]},
+        {"scopes": ["s"]},
+        {"candidates": [{"candidate_id": "n", "scope_id": 1, "component_ids": [], "eligible": "yes"}]},
+        {"versions": ["router"]},
+        {"versions": {"router": 1.5}},
+        {"status": 5},
+        {"diagnostics": {}},
+    ]
+    for changes in corruptions:
+        tampered = _with(frozen, **changes)
+        try:
+            result = _compare(frozen, tampered)
+        except Exception as error:  # noqa: BLE001 - the point is which error escapes
+            raise AssertionError(f"{changes} escaped as {type(error).__name__}: {error}") from error
+        assert result["status"] == "unavailable", changes
+        assert result["diagnostics"], changes
+
+
+def test_a_manifest_whose_digest_no_longer_matches_its_rows_is_unavailable():
+    """A record whose identity digest is stale or edited must not read as unchanged.
+
+    ``freeze`` writes the digest over the identity rows; a stored manifest that has been
+    touched since then is exactly the case where ``same`` would be wrong.
+    """
+    frozen = _complete_manifest()
+
+    stale = copy.deepcopy(frozen)
+    stale["decision_digest"] = "9" * 64
+    assert _compare(frozen, stale)["status"] == "unavailable"
+    assert _compare(stale, frozen)["status"] == "unavailable"
+
+    # Editing rows without recomputing the digest is exactly the tampered/stale case.
+    edited = copy.deepcopy(frozen)
+    edited["components"][0]["content_digest"] = "0" * 63 + "a"
+    assert _compare(frozen, edited)["status"] == "unavailable"
+
+    # ... while the same edit with the digest honestly recomputed is an ordinary `changed`.
+    recomputed = copy.deepcopy(edited)
+    recomputed["decision_digest"] = _manifest_digest(recomputed)
+    assert _compare(frozen, recomputed)["status"] == "changed"
+
+
+def _manifest_digest(manifest) -> str:
+    from company_wiki.document_understanding.decision_dependencies.freeze import decision_digest
+
+    return decision_digest(manifest)
+
+
+def test_a_manifest_with_no_participating_component_is_unavailable():
+    """Components no candidate ever references show no decision link at all."""
+    trace_value = b.trace(
+        scopes=[b.scope("scope_parent")],
+        components=[b.component("c1", content={"policy": "x"}, matcher={"s": ["y"]},
+                                scope_ids=["scope_parent"])],
+        candidates=[b.candidate("cand_a", scope_id="scope_parent", component_ids=[])],
+        versions=b.VERSIONS,
+    )
+    frozen = _freeze(trace_value)
+    assert frozen["status"] == "partial"
+    assert "NO_PARTICIPATING_COMPONENT" in {item["code"] for item in frozen["diagnostics"]}
+    assert _compare(frozen, trace_value)["status"] == "unavailable"
+    assert _compare(frozen, frozen)["status"] == "unavailable"
+
+
+def test_compare_reports_changes_between_two_manifests_not_only_against_a_trace():
+    """The manifest-vs-manifest route is the one a cache actually takes.
+
+    Every earlier ``changed`` case handed a *trace* as ``current``; this walks the same
+    mutations through two frozen manifests so neither route can rot unnoticed.
+    """
+    frozen = _complete_manifest()
+    cases = {
+        "loser component content": lambda t: t["components"][1].__setitem__(
+            "content_digest", "0" * 63 + "a"
+        ),
+        "loser component matcher": lambda t: t["components"][1].__setitem__(
+            "matcher_digest", "0" * 63 + "b"
+        ),
+        "eligibility flip": lambda t: t["candidates"][1].__setitem__(
+            "eligible", not t["candidates"][1]["eligible"]
+        ),
+        "candidate membership": lambda t: t["candidates"][0].__setitem__("component_ids", ["c1"]),
+        "child scope purpose": lambda t: t["scopes"][1].__setitem__("purpose", "changed"),
+        "algorithm version": lambda t: t["versions"].__setitem__("selector", "9.9.9"),
+    }
+    for label, mutate in cases.items():
+        changed_trace = copy.deepcopy(b.base_trace())
+        mutate(changed_trace)
+        current = _freeze(changed_trace)
+        result = _compare(frozen, current)
+        assert result["status"] == "changed", label
+        assert result["diagnostics"] or result["changed_component_ids"], label
+
+    added = copy.deepcopy(b.base_trace())
+    added["candidates"].append(b.candidate("cand_z", scope_id="scope_parent", component_ids=["c3"]))
+    assert _compare(frozen, _freeze(added))["added_candidate_ids"] == ["cand_z"]
+
+    removed = copy.deepcopy(b.base_trace())
+    removed["candidates"] = [row for row in removed["candidates"] if row["candidate_id"] != "cand_c"]
+    assert _compare(frozen, _freeze(removed))["removed_candidate_ids"] == ["cand_c"]
+
+
+# --- 11. 100-source manifest encoding size -----------------------------------------------
 
 
 def _synthetic_source(index: int) -> dict:

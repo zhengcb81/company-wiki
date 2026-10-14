@@ -23,11 +23,16 @@ Boundaries this package deliberately keeps:
   inspected and the inventory it saw; nothing here routes, ranks, selects, or reads a
   catalog, a file, the clock or the network.
 * It does **not** certify the caller's inventory. ``inventory_complete`` is the caller's
-  claim, and an external omission it did not report cannot be detected from inside this
-  input; a complete-looking trace of winners only is caught by shape diagnostics, not by
-  reading the catalog.
-* ``same`` is not a cache hit. ROOT still performs the原文/locator read check and owns the
-  Store/CAS decision; this component only says whether the decision identity changed.
+  claim. What this package *can* catch are the degenerate shapes of a winners-only
+  trace -- no candidate membership at all, and inspected components that no candidate
+  ever references -- which are refused as ``complete``. What it cannot catch is a
+  fully-shaped forged inventory that omits participants and still asserts
+  ``inventory_complete: true``: the trace is the only evidence, and there is no catalog
+  read to cross-check it against. That external omission is the caller's responsibility
+  and is documented as such in the handoff.
+* ``same`` is not a cache hit. ROOT still performs the original-text/locator read check
+  and owns the Store/CAS decision; this component only says whether the decision
+  identity changed.
 """
 
 from __future__ import annotations

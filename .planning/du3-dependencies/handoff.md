@@ -90,10 +90,10 @@ mypy skipped、config doctor skipped、host-assumption-guard Passed）。
 
 | 节点 | 命令 | exit | 耗时 | 结果 |
 |---|---|---:|---:|---|
-| A | pytest test_a_completeness_honesty.py + test_a_mutation_matrix.py | 0 | 3.107s | 55 passed |
-| B | pytest test_b_engineering.py | 0 | 3.458s | 37 passed |
-| C | pytest test_c_catalog_replay.py | 0 | 3.156s | 19 passed |
-| ALL | pytest tests/unit/document_understanding_decision_dependencies | 0 | 3.554s | 111 passed |
+| A | pytest test_a_completeness_honesty.py + test_a_mutation_matrix.py | 0 | 2.813s | 55 passed in 0.30s |
+| B | pytest test_b_engineering.py | 0 | 3.063s | 57 passed in 0.79s |
+| C | pytest test_c_catalog_replay.py | 0 | 2.526s | 19 passed in 0.28s |
+| ALL | pytest tests/unit/document_understanding_decision_dependencies | 0 | 3.268s | 131 passed in 1.03s |
 
 **A 先 RED 后实现**：实现前跑同一组测试得 `51 failed in 1.80s`，根因 `ModuleNotFoundError:
 No module named 'company_wiki.document_understanding.decision_dependencies'`，收据
@@ -113,8 +113,13 @@ membership —— `partial`/`unavailable`，绝不给 `same`。
 封闭、无运行时/密钥字段可达、`versions` 键名筛查、把路径塞进 scope_id 也漏不出字段名；
 完整 SHA-256 才是身份、短版本仅展示、截断 digest 被拒；零 work / 1 字节上限 / 缺 inventory
 都 `partial` 且非 `same`，每行都计 work；limits 只能下调；两侧引用完整性；manifest 与 trace
-的类型辨别；AST 导入守卫（包无法触达 selector/registry/Store/IO）；100-source manifest 编码
-体积实测。
+的类型辨别；AST 导入守卫（包无法触达 selector/registry/Store/IO/两个兄弟 DU3 包）；
+100-source manifest 编码体积实测。
+
+独立审查后补的 B 节点反例（见第九节）：预算必须约束 **decode** 而不只是最后的写盘遍历；
+存下来的 manifest 必须和 trace 一样严格校验（未知字段/缺字段/重复 ID/悬空引用/重复引用/
+畸形 digest/错误类型/过期或被改过的 decision_digest 一律 `unavailable`，绝不 `same`，也不
+允许 AttributeError 逃逸）；`NO_PARTICIPATING_COMPONENT` 必须挡住 `complete`。
 
 **C 的独立快照回放**：用**真实**安装的 `reading_catalog.json`（SHA-256
 `29bfefbe270cb8d2035bcd203dcf9b1226934dce7d0fd338132d9d559e18b46c`，24 families /
@@ -127,14 +132,14 @@ inventory，实际跑相关/无关变化矩阵：
 | 败选候选 membership 改动（candidate:administrative） | `changed` |
 | 域外无关策略改动 | `same` |
 | 只调数组顺序 | `same` |
-| 整个 catalog 当一个决策域 | `partial`（78 scopes / 38 components，`SCOPES_LIMIT_REACHED`） |
+| 整个 catalog 当一个决策域 | `partial`（126 scopes / 38 components，`SCOPES_LIMIT_REACHED`） |
 
 小收据 `.planning/du3-dependencies/evidence/c_replay_receipt.json`。
 
 ## 六、真实覆盖 vs 合成覆盖
 
 **真实**：安装 catalog 的身份（组件 id、版本、content digest、matcher digest、applies-to
-元组）；整个 catalog 当决策域时 78 scopes 超出 64 上限这一实测事实；100-source manifest 编码
+元组）；整个 catalog 当决策域时 126 scopes 超出 64 上限这一实测事实；100-source manifest 编码
 体积实测（2 scopes / 4 components / 6 candidates 每源：mean 2042.2 B、min 1970 B、max
 2128 B、合计 204216 B）；两个独立 Python 进程 digest 一致。
 
@@ -151,7 +156,7 @@ ROOT 正式 trace。
    而不是遮掩；完整性由 ROOT 的 router/selector instrumentation 真正确立。
 2. **零候选 membership 的域永远不能 `complete`**。这是刻意的（它是 winners-only 清单的可检测
    形态，而且确实无可复用之物），代价是真正空决策会被记 `partial`、走重算而非复用。
-3. **整个 catalog 不能当依赖单元**：实测 78 scopes 超上限，必须按源建域。
+3. **整个 catalog 不能当依赖单元**：实测 126 scopes 超上限，必须按源建域。
 4. **compare 不读原文、不验 locator**；`equal` 不等于 CACHE_HIT，ROOT 仍要做 read_reuse_pin
    的原文/定位校验。
 5. **正式 0POST/CAS/恢复由 ROOT 的 B 节点验收**，本包不因 compare 绿就认证它们。
@@ -164,9 +169,43 @@ ROOT 正式 trace。
 - 安装的 `reading_catalog.json` 只读，回放前后 SHA-256 相同。
 - 临时目录只有 pytest `tmp_path`；无下载/截图/db/新数据库；无安装动作；无授权/签收/canary
   文件。
-- 测试运行同时跑了既有 DU 五个单元包作回归：`607 passed, 17 skipped`（20.26s），无回归。
+- 测试运行同时跑了既有五个 DU 单元包（root/profiles/selection/structure/layout_hints）作
+  回归：`496 passed, 17 skipped`（11.85s），无回归；加上本 lane 自己的 131 项，合并
+  `627 passed, 17 skipped`。
 
-## 九、ROOT 接下来做什么
+## 九、独立审查与修复
+
+按要求做了两个互不相识的独立审查（一个逐条对验收要求、一个对抗性读代码找缺陷），两人都不是
+本代码的作者。审查前结论：**不通过；补一个修复提交并保持工作树干净后可通过**。
+
+已修（每条都有反例钉住）：
+
+1. **MAJOR** — `compare` 的 manifest↔manifest 路径会**静默去重**重复组件 ID、**接受悬空引用**，
+   错误类型的行会抛 `AttributeError` 而不是被判定不可用，而且**从不校验 `decision_digest`**。
+   这几条都能让一份损坏的记录被判成 `same`，直接违反卡第 2 条“相同ID不同内容冲突、错误类型、
+   悬空引用明确拒绝，不静默去重/截断后给same”。已修：manifest 与 trace 同样严格校验
+   （未知/缺字段、未知行字段、重复 ID、悬空/重复引用、畸形 digest、错误类型、过期或被改过的
+   decision_digest 一律 `unavailable`）。
+2. **MAJOR** — 每个循环的实际工作计数不完整：`decode_trace` 整段遍历完全没计费，所以
+   `max_work_units` 约束不到 decode，而 `max_input_bytes` **根本没约束输入**。实测修复前
+   60k 行 + `max_work_units=1` 要 0.665s，60 MiB 输入在默认 2 MiB 上限下被完整解码 1.76s。
+   已修：`Budget` 移到 `contract.py` 并贯穿 decode 与 compare 的 diff 循环；修复后
+   60k 行 + `max_work_units=1` 只要 0.073s，40k 行 / >2 MiB 输入 0.053s 就 `BYTES_LIMIT_REACHED`
+   停下。
+3. **MINOR** — `NO_PARTICIPATING_COMPONENT`（组件没有任何候选引用）之前仍可 `complete`；已挡住。
+4. **MINOR** — 包 docstring 高估了 shape 诊断对伪造 winners-only 清单的拦截能力；已改写成准确
+   表述。
+5. **MINOR** — handoff 行数与一句回归描述不准确；已改成实测值。
+6. **MINOR** — AST 导入黑名单漏了两个兄弟 DU3 包；已补。
+7. **MINOR** — `contract.py` 注释高估了 `max_input_bytes` 的计量方式；已改成描述实际使用的
+   envelope 计量。
+
+接受但不改（原因写在 findings.md）：RED 先行是收据证据而非分提交证据（测试与实现同一提交）；
+一份形状完整、漏记参与者却自称 `inventory_complete: true` 的伪造清单，从输入内部确实无法识别
+—— 这正是卡要求“文档说明”的“不可认证的外部漏报”，已写进包 docstring、findings.md 与
+handoff.json 的 known_gaps，而不是遮掩。
+
+## 十、ROOT 接下来做什么
 
 在真实 router/registry/选择处记录完整的 `du-decision-trace/1`（含曾参与匹配但未匹配的组件与
 匹配但落败的候选），提供当前同域 inventory，把 `freeze_decision_dependencies` /

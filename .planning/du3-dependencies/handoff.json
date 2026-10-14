@@ -8,9 +8,9 @@
  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/shared-reading-completion-20261014/dependencies",
  "branch": "codex/du3-dependencies-20261014",
  "owned_paths": [
-  "src/company_wiki/document_understanding/decision_dependencies/** (5 modules, 1332 lines)",
-  "tests/unit/document_understanding_decision_dependencies/** (6 modules, 1754 lines)",
-  "tests/fixtures/document_understanding_decision_dependencies/** (3 modules, 428 lines)",
+  "src/company_wiki/document_understanding/decision_dependencies/** (5 modules)",
+  "tests/unit/document_understanding_decision_dependencies/** (6 modules)",
+  "tests/fixtures/document_understanding_decision_dependencies/** (3 modules)",
   ".planning/du3-dependencies/**"
  ],
  "interfaces": {
@@ -32,8 +32,8 @@
    "node": "TDD counter-examples",
    "command": "python -m pytest tests/unit/document_understanding_decision_dependencies/test_a_completeness_honesty.py tests/unit/document_understanding_decision_dependencies/test_a_mutation_matrix.py -q --no-header -p no:cacheprovider",
    "exit_code": 0,
-   "seconds": 3.107,
-   "result": "55 passed in 0.35s",
+   "seconds": 2.813,
+   "result": "55 passed in 0.30s",
    "red_first": {
     "command": "python -m pytest tests/unit/document_understanding_decision_dependencies -q --no-header -p no:cacheprovider",
     "exit_code": 1,
@@ -58,8 +58,8 @@
    "node": "implementation and engineering",
    "command": "python -m pytest tests/unit/document_understanding_decision_dependencies/test_b_engineering.py -q --no-header -p no:cacheprovider",
    "exit_code": 0,
-   "seconds": 3.458,
-   "result": "37 passed in 0.67s",
+   "seconds": 3.063,
+   "result": "57 passed in 0.79s",
    "receipts": [
     ".planning/du3-dependencies/evidence/b_size_report.json",
     ".planning/du3-dependencies/evidence/nodes.json"
@@ -76,15 +76,18 @@
     "type discrimination between manifest and trace; an arbitrary mapping is refused as frozen",
     "AST import guard: the package cannot import the selector, registry, Store, source_catalog, automation, document_normalization or any os/sys/time/pathlib/sqlite3/socket/urllib/http/requests/subprocess/tempfile/uuid/random/logging/threading/multiprocessing/pickle facility",
     "public surface is exactly the two frozen functions",
-    "100-source manifest encoding size measured"
+    "100-source manifest encoding size measured",
+    "REVIEW FIX: the work budget now bounds the decode too, and max_input_bytes bounds the input - a 40k-row / >2 MiB trace stops in 0.053s with BYTES_LIMIT_REACHED and a 60k-row trace with max_work_units=1 stops in 0.073s (both were fully decoded before the fix)",
+    "REVIEW FIX: a stored manifest is validated as strictly as a trace - unknown fields, missing fields, unknown row fields, duplicate ids, dangling references, repeated references, malformed digests, wrong-typed rows and a stale or edited decision_digest all make it unusable (unavailable), never same and never an AttributeError escape",
+    "REVIEW FIX: NO_PARTICIPATING_COMPONENT (components no candidate references) now blocks complete"
    ]
   },
   "C": {
    "node": "independent snapshot replay",
    "command": "python -m pytest tests/unit/document_understanding_decision_dependencies/test_c_catalog_replay.py -q --no-header -p no:cacheprovider",
    "exit_code": 0,
-   "seconds": 3.156,
-   "result": "19 passed in 0.37s",
+   "seconds": 2.526,
+   "result": "19 passed in 0.28s",
    "receipt": ".planning/du3-dependencies/evidence/c_replay_receipt.json",
    "catalog_snapshot": {
     "catalog_file": "src/company_wiki/document_understanding/profiles/reading_catalog.json",
@@ -100,7 +103,7 @@
     "losing_participant_membership_edit": "changed (candidate:administrative)",
     "irrelevant_out_of_domain_edit": "same",
     "array_order_irrelevant": "same",
-    "whole_catalog_domain": "partial, 78 derived scopes over 38 components > max_scopes=64, diagnostic SCOPES_LIMIT_REACHED"
+    "whole_catalog_domain": "partial, 126 derived scopes over 38 components > max_scopes=64, diagnostic SCOPES_LIMIT_REACHED"
    },
    "boundary": {
     "real": "the installed reading_catalog.json identities: component id, version, content digest, matcher digest, applies-to tuples",
@@ -109,7 +112,7 @@
    }
   }
  },
- "tests_passed": 111,
+ "tests_passed": 131,
  "tests_failed": 0,
  "not_run": [
   "No production reuse/recovery, 0POST or CAS path: out of this lane's scope and explicitly not certified (ROOT's B node).",
@@ -119,7 +122,7 @@
  "known_gaps": [
   "Uncertifiable external omission: if a caller asserts inventory_complete=true while genuinely leaving participants out, this package cannot detect it from inside the trace. The card asks for this to be documented rather than papered over; completeness is established by ROOT's router/selector instrumentation.",
   "A decision domain that records zero candidate membership can never freeze complete. That is deliberate (it is the detectable shape of a winners-only trace and there is nothing to reuse), but it means a genuinely empty decision is reported partial and will be recomputed rather than reused.",
-  "A whole-catalog decision domain is unusable as a dependency unit: 78 scopes derived from the real catalog exceed max_scopes=64 and freeze partial. ROOT must build the domain per source.",
+  "A whole-catalog decision domain is unusable as a dependency unit: 126 scopes derived from the real catalog exceed max_scopes=64 and freeze partial. ROOT must build the domain per source.",
   "compare does not read originals or verify locators; equal is not a cache hit and ROOT still performs the read_reuse_pin original/locator check before any reuse.",
   "The 100-source size measurement covers a representative shape (2 scopes / 4 components / 6 candidates per source); it is a size bound, not a production volume forecast."
  ],
@@ -141,7 +144,7 @@
    "max_bytes": 2128
   },
   "per_source_domain_observed": "the real-catalog-derived source domain (cn_annual) freezes complete at 2 scopes / 28 components / 9 candidates",
-  "wall_clock": "A 3.11s, B 3.46s, C 3.16s, ALL 3.55s including interpreter startup; python 3.13.9"
+  "wall_clock": "A 2.813s, B 3.063s, C 2.526s, ALL 3.268s including interpreter startup; python 3.13.9"
  },
  "raw_preservation": {
   "company_originals": "not read; none opened by the package or the tests",
@@ -156,5 +159,24 @@
   "install_actions": "none",
   "authorization_signoff_canary_files": "none created, per the card and the project authorization rules"
  },
- "next_root_action": "ROOT instruments the real router/registry/selection path to record a complete du-decision-trace/1 per source (including inspected-but-unmatched components and matching-but-losing candidates), supplies the current same-domain inventory, feeds freeze_decision_dependencies/compare_decision_dependencies into the existing AUTO two-stage generation CAS, and then accepts real 0POST/recovery in its own B node. compare green is not a production reuse certification."
+ "next_root_action": "ROOT instruments the real router/registry/selection path to record a complete du-decision-trace/1 per source (including inspected-but-unmatched components and matching-but-losing candidates), supplies the current same-domain inventory, feeds freeze_decision_dependencies/compare_decision_dependencies into the existing AUTO two-stage generation CAS, and then accepts real 0POST/recovery in its own B node. compare green is not a production reuse certification.",
+ "independent_review": {
+  "performed_by": "two independent agents, neither of which wrote any of this code",
+  "verdict_before_fixes": "two independent reviewers both found real defects; verdict was 'not acceptable as-is; acceptable after a fix commit and a clean tree'",
+  "findings_fixed": [
+   "MAJOR: compare() silently de-duplicated duplicate ids, accepted dangling references, crashed with AttributeError on wrong-typed rows and never verified decision_digest - all could yield same on a malformed record",
+   "MAJOR: decode_trace walked the whole input uncharged, so max_work_units did not bound decode",
+   "MAJOR: max_input_bytes was bypassable - accounting sampled a subset of each row (form_type, both digests and the reference lists went uncharged), a 1.95x undercount that let a 35 KB input freeze complete under a 25 KB cap",
+   "MAJOR (test gap): decision_digest coverage of versions/scopes/candidates was unproven - two mutants deleting those payload fields still passed all 111 tests; now pinned per identity class",
+   "MAJOR->minor: _reference_list de-duplicated with a list scan, O(n^2) inside a nominally bounded call",
+   "MINOR: compare's index/sort/set-diff pre-passes ran uncharged; limits were validated on only some routes; decision_digest used .get() defaults and was row-order sensitive while compare is order-insensitive",
+   "MINOR: the AST import guard missed 'from parent import forbidden_child' and __import__(); NO_PARTICIPATING_COMPONENT did not block complete; the package docstring overstated what shape diagnostics catch",
+   "MINOR/NIT: handoff numbers, a regression sentence, a misleading test name, a tautological assertion, dead code, and the C-node fixture's scope identity (form_type was dropped, colliding 20 real scope ids and silently discarding 54 of 132 applies rows)"
+  ],
+  "findings_accepted_not_changed": [
+   "RED-first ordering is evidenced by a receipt rather than by separate git commits, since tests and implementation landed in one commit; evidence/a_red.json records the original 51-failure run and the three post-RED assertion corrections",
+   "A fully-shaped forged winners-only trace that omits participants and still asserts inventory_complete=true is not detectable from inside the input. This is the card's uncertifiable external omission; documented in the package docstring, findings.md and handoff.json known_gaps rather than papered over"
+  ],
+  "regression_reproduced_by_reviewer": "the five pre-existing DU unit packages alone give 496 passed / 17 skipped; with this lane the combined run is 627 passed / 17 skipped"
+ }
 }

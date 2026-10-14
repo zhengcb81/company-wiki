@@ -38,13 +38,13 @@
    "SCOPES_LIMIT_REACHED"
   ],
   "whole_catalog_domain": "partial",
-  "whole_catalog_scope_count": 78
+  "whole_catalog_scope_count": 126
  },
  "receipt_schema": "du3-dependencies-c-receipt/1",
  "source_local_domain": {
   "candidates": 9,
   "components": 28,
-  "decision_digest": "404026c8e4470f66072728e00aad0c57a816f08ab1467cd762ca39f5a7d1c15e",
+  "decision_digest": "d59238ca9d0378eed7373c159dac9d6b21a8dd7aaeed2ce29441daf6673baf10",
   "profile_id": "cn_annual",
   "scopes": 2,
   "status": "complete"

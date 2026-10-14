@@ -41,13 +41,18 @@ Wire: `du-decision-trace/1` in; `du-decision-dependencies/1` and `du-decision-co
    (SHA-256 `29bfefbe...e18b46c`, unchanged) with synthetic legal scopes; relevant /
    irrelevant / ordering / whole-catalog matrix; small receipts; commit; handoff.
 
-Node runs (`.planning/du3-dependencies/evidence/nodes.json`):
-A 55 passed / exit 0 / 3.107s, B 37 passed / exit 0 / 3.458s,
-C 19 passed / exit 0 / 3.156s, ALL 111 passed / exit 0 / 3.554s.
-ruff exit 0, mypy exit 0, pre-commit 5/5 green. Regression over the existing DU suites:
-607 passed, 17 skipped.
+4. [complete] Independent review: two agents that did not write this code reviewed the
+   committed state against the card and adversarially against the source. 17 findings,
+   all fixed and pinned with counter-examples; see findings.md section 8.
 
-Implementation commit `bc63a74eac1f73e6184a87a4b1bb65044840c1ad`.
+Node runs after the fix round (`.planning/du3-dependencies/evidence/nodes.json`):
+A 55 passed / exit 0 / 2.813s, B 57 passed / exit 0 / 3.063s,
+C 19 passed / exit 0 / 2.526s, ALL 131 passed / exit 0 / 3.268s.
+ruff exit 0, mypy exit 0. Regression over the five pre-existing DU packages:
+496 passed, 17 skipped (627 passed / 17 skipped combined with this lane).
+
+Implementation commit `bc63a74eac1f73e6184a87a4b1bb65044840c1ad`;
+ledger commit `e430945fa8a536bac589be8ad6ddf3708379557c`.
 
 ## Next Step
 None for this lane. Handoff written (`handoff.md` / `handoff.json`). STOP waiting for

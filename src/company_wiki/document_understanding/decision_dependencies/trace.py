@@ -24,12 +24,15 @@ from collections.abc import Mapping, Sequence
 from typing import Any
 
 from .contract import (
+    BYTES_PER_ROW_ENVELOPE,
     CANDIDATE_KEYS,
     COMPONENT_KEYS,
     NON_CONTENT_FIELD_NAMES,
     SCOPE_KEYS,
     TRACE_KEYS,
     TRACE_SCHEMA_VERSION,
+    Budget,
+    encoded_bytes,
 )
 
 _SHA256_HEX = frozenset("0123456789abcdef")
@@ -41,6 +44,40 @@ REQUIRED_TRACE_KEYS = TRACE_KEYS - OPTIONAL_TRACE_KEYS
 
 class DecisionTraceError(ValueError):
     """A real input error: reject rather than guess."""
+
+
+class _BudgetStop(Exception):
+    """Internal: the caller's work/byte budget ran out mid-decode."""
+
+
+def _spend(
+    budget: Budget | None,
+    *,
+    units: int = 1,
+    payload: Any = None,
+    texts: tuple[str, ...] = (),
+) -> None:
+    """Charge work and bytes for one element; stop the decode when the budget runs out.
+
+    Every loop that touches a row, a reference or a large container spends here, so a
+    single call cannot do unbounded work while claiming a bounded budget. Bytes are
+    charged on the *real* canonical encoding of whatever was walked, plus a small
+    per-element envelope -- never a sampled subset, so ``max_input_bytes`` cannot be
+    bypassed by growing one row. Stopping is not an input error: it degrades the result to
+    ``partial`` and never to ``same``.
+    """
+    if budget is None:
+        return
+    if not budget.charge(units):
+        raise _BudgetStop
+    for text in texts:
+        if not budget.charge_text(text):
+            raise _BudgetStop
+    if payload is not None:
+        if not budget.charge_bytes(encoded_bytes(payload)):
+            raise _BudgetStop
+    if not budget.charge_bytes(BYTES_PER_ROW_ENVELOPE * max(1, units)):
+        raise _BudgetStop
 
 
 def _is_sequence(value: Any) -> bool:
@@ -84,22 +121,26 @@ def _exact_keys(value: Mapping[str, Any], allowed: frozenset[str], where: str) -
         raise DecisionTraceError(f"{where} is missing required fields: {missing}")
 
 
-def _rows(value: Any, where: str) -> list[Mapping[str, Any]]:
+def _rows(value: Any, where: str, budget: Budget | None) -> list[Mapping[str, Any]]:
     if value is None:
         raise DecisionTraceError(f"{where} is missing")
     if not _is_sequence(value):
         raise DecisionTraceError(f"{where} must be an array, got {type(value).__name__}")
+    rows: list[Mapping[str, Any]] = []
     for index, item in enumerate(value):
+        _spend(budget)
         if not isinstance(item, Mapping):
             raise DecisionTraceError(f"{where}[{index}] must be a mapping, got {type(item).__name__}")
-    return list(value)
+        rows.append(item)
+    return rows
 
 
 def _unique_by(
-    rows: Sequence[Mapping[str, Any]], key: str, where: str
+    rows: Sequence[Mapping[str, Any]], key: str, where: str, budget: Budget | None
 ) -> dict[str, Mapping[str, Any]]:
     indexed: dict[str, Mapping[str, Any]] = {}
     for row in rows:
+        _spend(budget)
         identifier = _text(row.get(key), f"{where}.{key}")
         if identifier in indexed:
             raise DecisionTraceError(
@@ -110,17 +151,24 @@ def _unique_by(
     return indexed
 
 
-def _reference_list(value: Any, where: str) -> list[str]:
-    """A list of references. Repeats are a caller error, never silently collapsed."""
+def _reference_list(value: Any, where: str, budget: Budget | None) -> list[str]:
+    """A list of unique references. Repeats are a caller error, never silently collapsed.
+
+    Duplicate detection uses a set so the check stays linear: a quadratic membership scan
+    would let a wide list do far more work than the caller's ``max_work_units`` admits.
+    """
     if not _is_sequence(value):
         raise DecisionTraceError(f"{where} must be an array of strings, got {type(value).__name__}")
-    seen: list[str] = []
+    seen: set[str] = set()
+    names: list[str] = []
     for index, item in enumerate(value):
+        _spend(budget)
         text = _text(item, f"{where}[{index}]")
         if text in seen:
             raise DecisionTraceError(f"{where}[{index}] repeats reference {text!r}")
-        seen.append(text)
-    return seen
+        seen.add(text)
+        names.append(text)
+    return names
 
 
 class DecisionTrace:
@@ -138,6 +186,7 @@ class DecisionTrace:
         "components",
         "diagnostics",
         "inventory_complete",
+        "participating",
         "scopes",
         "versions",
         "wire_ok",
@@ -153,6 +202,7 @@ class DecisionTrace:
         inventory_complete: bool,
         wire_ok: bool,
         diagnostics: Sequence[Mapping[str, Any]],
+        participating: int = 0,
     ) -> None:
         self.scopes: list[Mapping[str, Any]] = list(scopes)
         self.components: list[Mapping[str, Any]] = list(components)
@@ -161,13 +211,26 @@ class DecisionTrace:
         self.inventory_complete = inventory_complete
         self.wire_ok = wire_ok
         self.diagnostics: list[dict[str, Any]] = [dict(item) for item in diagnostics]
-        # A decision domain with no candidate at all recorded nothing that could be
-        # reused and nothing that could be compared, so it must never read as "complete".
-        self.can_be_complete = bool(wire_ok and inventory_complete and candidates)
+        self.participating = participating
+        # Three shapes record nothing that could be reused or compared, so none of them
+        # may read as "complete": no candidate membership at all (the shape a winners-only
+        # trace takes), and components that no candidate ever references (the decision
+        # links between them are simply absent).
+        self.can_be_complete = bool(
+            wire_ok
+            and inventory_complete
+            and candidates
+            and (not components or participating)
+        )
 
 
-def _degraded(detail: str, code: str) -> DecisionTrace:
+def _degraded(
+    detail: str, code: str, *, diagnostics: Sequence[Mapping[str, Any]] | None = None
+) -> DecisionTrace:
     """A trace we cannot interpret: identity is empty, and it is never complete."""
+    entries: list[dict[str, Any]] = [dict(item) for item in (diagnostics or ())]
+    if not any(item.get("code") == code for item in entries):
+        entries.append({"code": code, "detail": detail})
     return DecisionTrace(
         scopes=[],
         components=[],
@@ -175,66 +238,75 @@ def _degraded(detail: str, code: str) -> DecisionTrace:
         versions={},
         inventory_complete=False,
         wire_ok=False,
-        diagnostics=[{"code": code, "detail": detail}],
+        diagnostics=entries,
     )
 
 
-def _decode_scopes(raw: list[Mapping[str, Any]]) -> list[dict[str, Any]]:
+def _decode_scopes(raw: list[Mapping[str, Any]], budget: Budget | None) -> list[dict[str, Any]]:
     rows = []
     for index, row in enumerate(raw):
         where = f"scopes[{index}]"
+        _spend(budget)
         _exact_keys(row, SCOPE_KEYS, where)
-        rows.append(
-            {
-                "scope_id": _text(row["scope_id"], f"{where}.scope_id"),
-                "regime": _text(row["regime"], f"{where}.regime"),
-                "family": _text(row["family"], f"{where}.family"),
-                "form_type": _optional_text(row["form_type"], f"{where}.form_type"),
-                "purpose": _text(row["purpose"], f"{where}.purpose"),
-            }
-        )
+        built = {
+            "scope_id": _text(row["scope_id"], f"{where}.scope_id"),
+            "regime": _text(row["regime"], f"{where}.regime"),
+            "family": _text(row["family"], f"{where}.family"),
+            "form_type": _optional_text(row["form_type"], f"{where}.form_type"),
+            "purpose": _text(row["purpose"], f"{where}.purpose"),
+        }
+        _spend(budget, payload=built)
+        rows.append(built)
     return rows
 
 
-def _decode_components(raw: list[Mapping[str, Any]]) -> list[dict[str, Any]]:
+def _decode_components(
+    raw: list[Mapping[str, Any]], budget: Budget | None
+) -> list[dict[str, Any]]:
     rows = []
     for index, row in enumerate(raw):
         where = f"components[{index}]"
+        _spend(budget)
         _exact_keys(row, COMPONENT_KEYS, where)
-        rows.append(
-            {
-                "component_id": _text(row["component_id"], f"{where}.component_id"),
-                "version": _text(row["version"], f"{where}.version"),
-                "content_digest": _digest(row["content_digest"], f"{where}.content_digest"),
-                "matcher_digest": _digest(row["matcher_digest"], f"{where}.matcher_digest"),
-                "scope_ids": _reference_list(row["scope_ids"], f"{where}.scope_ids"),
-            }
-        )
+        built = {
+            "component_id": _text(row["component_id"], f"{where}.component_id"),
+            "version": _text(row["version"], f"{where}.version"),
+            "content_digest": _digest(row["content_digest"], f"{where}.content_digest"),
+            "matcher_digest": _digest(row["matcher_digest"], f"{where}.matcher_digest"),
+            "scope_ids": _reference_list(row["scope_ids"], f"{where}.scope_ids", budget),
+        }
+        _spend(budget, payload=built)
+        rows.append(built)
     return rows
 
 
-def _decode_candidates(raw: list[Mapping[str, Any]]) -> list[dict[str, Any]]:
+def _decode_candidates(
+    raw: list[Mapping[str, Any]], budget: Budget | None
+) -> list[dict[str, Any]]:
     rows = []
     for index, row in enumerate(raw):
         where = f"candidates[{index}]"
+        _spend(budget)
         _exact_keys(row, CANDIDATE_KEYS, where)
         eligible = row["eligible"]
         if not isinstance(eligible, bool):
             raise DecisionTraceError(
                 f"{where}.eligible must be a boolean, got {type(eligible).__name__}"
             )
-        rows.append(
-            {
-                "candidate_id": _text(row["candidate_id"], f"{where}.candidate_id"),
-                "scope_id": _text(row["scope_id"], f"{where}.scope_id"),
-                "component_ids": _reference_list(row["component_ids"], f"{where}.component_ids"),
-                "eligible": eligible,
-            }
-        )
+        built = {
+            "candidate_id": _text(row["candidate_id"], f"{where}.candidate_id"),
+            "scope_id": _text(row["scope_id"], f"{where}.scope_id"),
+            "component_ids": _reference_list(
+                row["component_ids"], f"{where}.component_ids", budget
+            ),
+            "eligible": eligible,
+        }
+        _spend(budget, payload=built)
+        rows.append(built)
     return rows
 
 
-def _decode_versions(value: Any) -> dict[str, Any]:
+def _decode_versions(value: Any, budget: Budget | None) -> dict[str, Any]:
     if not isinstance(value, Mapping):
         raise DecisionTraceError(
             f"versions must be a mapping of algorithm name to adopted version, "
@@ -242,6 +314,7 @@ def _decode_versions(value: Any) -> dict[str, Any]:
         )
     versions: dict[str, Any] = {}
     for key, item in value.items():
+        _spend(budget)
         name = _text(key, "versions key")
         if name.casefold() in NON_CONTENT_FIELD_NAMES:
             raise DecisionTraceError(
@@ -255,6 +328,7 @@ def _decode_versions(value: Any) -> dict[str, Any]:
             )
         if name in versions:
             raise DecisionTraceError(f"versions repeats key {name!r}")
+        _spend(budget, payload={name: item})
         versions[name] = item
     return versions
 
@@ -263,20 +337,24 @@ def _link(
     scopes: dict[str, Mapping[str, Any]],
     components: dict[str, Mapping[str, Any]],
     candidates: dict[str, Mapping[str, Any]],
+    budget: Budget | None,
 ) -> None:
     """Reject dangling references; the input must be internally closed."""
     for component_id, component in components.items():
         for scope_id in component["scope_ids"]:
+            _spend(budget)
             if scope_id not in scopes:
                 raise DecisionTraceError(
                     f"component {component_id!r} references unknown scope {scope_id!r}"
                 )
     for candidate_id, candidate in candidates.items():
+        _spend(budget)
         if candidate["scope_id"] not in scopes:
             raise DecisionTraceError(
                 f"candidate {candidate_id!r} references unknown scope {candidate['scope_id']!r}"
             )
         for component_id in candidate["component_ids"]:
+            _spend(budget)
             if component_id not in components:
                 raise DecisionTraceError(
                     f"candidate {candidate_id!r} references unknown component {component_id!r}"
@@ -287,14 +365,24 @@ def _shape_diagnostics(
     scopes: dict[str, Mapping[str, Any]],
     components: dict[str, Mapping[str, Any]],
     candidates: dict[str, Mapping[str, Any]],
-) -> list[dict[str, Any]]:
+    budget: Budget | None,
+) -> tuple[list[dict[str, Any]], int]:
     """Diagnostics for inputs that are legal but cannot show a decision was inspected.
 
     These are the anti-laundering checks available *inside* the input. They cannot prove
     the caller omitted an external fact -- see the package docstring and the handoff --
     but they do catch the shapes that say "I only recorded what won".
+
+    Also returns how many inspected components some candidate actually references, which
+    the caller folds into ``can_be_complete``.
     """
     diagnostics: list[dict[str, Any]] = []
+    for _ in scopes.values():
+        _spend(budget)
+    for _ in components.values():
+        _spend(budget)
+    for _ in candidates.values():
+        _spend(budget)
     if not scopes and not candidates:
         diagnostics.append(
             {
@@ -312,7 +400,11 @@ def _shape_diagnostics(
                 ),
             }
         )
-    referenced = {cid for candidate in candidates.values() for cid in candidate["component_ids"]}
+    referenced = set()
+    for candidate in candidates.values():
+        for cid in candidate["component_ids"]:
+            _spend(budget)
+            referenced.add(cid)
     inspected = set(components)
     if inspected and not referenced:
         diagnostics.append(
@@ -325,16 +417,20 @@ def _shape_diagnostics(
                 ),
             }
         )
-    return diagnostics
+    return diagnostics, len(inspected & referenced)
 
 
-def decode_trace(trace: Any) -> DecisionTrace:
+def decode_trace(trace: Any, budget: Budget | None = None) -> DecisionTrace:
     """Decode a caller trace into an order-normalized domain.
 
     Raises :class:`DecisionTraceError` for real data errors. Returns a
     ``DecisionTrace`` whose ``diagnostics`` carry everything that was unknown or missing,
     and whose ``can_be_complete`` is ``False`` whenever the input cannot support a
     ``complete`` freeze.
+
+    When a ``budget`` is supplied it is charged for every row, reference and version
+    entry this walks; running out stops the decode and degrades the result to
+    ``partial``. A budget stop is never an input error and never a ``same``.
     """
     if trace is None:
         return _degraded(
@@ -358,7 +454,20 @@ def decode_trace(trace: Any) -> DecisionTrace:
             "LEGACY_TRACE_VERSION",
         )
 
-    # Declared ``du-decision-trace/1``: the structure is now a contract, not a hint.
+    try:
+        return _decode_declared_trace(trace, budget)
+    except _BudgetStop:
+        assert budget is not None and budget.stopped_by is not None
+        return _degraded(
+            "the caller's work or byte budget ran out before the decision inventory could be "
+            "read in full; nothing here is reuse evidence",
+            budget.diagnostic()["code"],
+            diagnostics=[budget.diagnostic()],
+        )
+
+
+def _decode_declared_trace(trace: Mapping[str, Any], budget: Budget | None) -> DecisionTrace:
+    """Decode a mapping that declared ``du-decision-trace/1``: the structure is a contract."""
     extra = sorted(set(trace) - TRACE_KEYS)
     if extra:
         raise DecisionTraceError(f"trace carries unsupported fields: {extra}")
@@ -396,17 +505,18 @@ def decode_trace(trace: Any) -> DecisionTrace:
                 }
             )
 
-    scope_rows = _decode_scopes(_rows(trace["scopes"], "scopes"))
-    component_rows = _decode_components(_rows(trace["components"], "components"))
-    candidate_rows = _decode_candidates(_rows(trace["candidates"], "candidates"))
-    versions = _decode_versions(trace["versions"])
+    scope_rows = _decode_scopes(_rows(trace["scopes"], "scopes", budget), budget)
+    component_rows = _decode_components(_rows(trace["components"], "components", budget), budget)
+    candidate_rows = _decode_candidates(_rows(trace["candidates"], "candidates", budget), budget)
+    versions = _decode_versions(trace["versions"], budget)
 
-    scopes = _unique_by(scope_rows, "scope_id", "scopes")
-    components = _unique_by(component_rows, "component_id", "components")
-    candidates = _unique_by(candidate_rows, "candidate_id", "candidates")
-    _link(scopes, components, candidates)
+    scopes = _unique_by(scope_rows, "scope_id", "scopes", budget)
+    components = _unique_by(component_rows, "component_id", "components", budget)
+    candidates = _unique_by(candidate_rows, "candidate_id", "candidates", budget)
+    _link(scopes, components, candidates, budget)
 
-    diagnostics.extend(_shape_diagnostics(scopes, components, candidates))
+    shape_diagnostics, participating = _shape_diagnostics(scopes, components, candidates, budget)
+    diagnostics.extend(shape_diagnostics)
 
     return DecisionTrace(
         scopes=[scopes[key] for key in sorted(scopes)],
@@ -416,4 +526,5 @@ def decode_trace(trace: Any) -> DecisionTrace:
         inventory_complete=inventory_complete,
         wire_ok=True,
         diagnostics=diagnostics,
+        participating=participating,
     )

@@ -10,6 +10,7 @@ The limits are technical hard bounds, not permissions. Reaching one produces
 
 from __future__ import annotations
 
+import json
 from typing import Any, Final, Mapping
 
 TRACE_SCHEMA_VERSION: Final = "du-decision-trace/1"
@@ -83,10 +84,29 @@ DEFAULT_LIMITS: Final[Mapping[str, int]] = {
 WORK_UNIT: Final = 1
 WORK_PER_SCOPE: Final = 4
 
-#: ``max_input_bytes`` is charged on the observed canonical encoding of the whole input
-#: plus this per-array row envelope, which bounds serialization growth without making the
-#: accounting depend on dict-key spelling.
+#: ``max_input_bytes`` is charged on the **real canonical encoding** of every row this
+#: walks (decode pass and manifest walk alike), plus this envelope for each row and each
+#: standalone element. The envelope covers the bookkeeping around a row that the JSON
+#: encoding of the row itself does not carry, so the accounting can only over-count, never
+#: under-count what a caller sent. One call's byte use is therefore genuinely bounded and
+#: stops early, without re-encoding the whole document just to measure it.
 BYTES_PER_ROW_ENVELOPE: Final = 96
+
+
+def canonical_json(value: Any) -> str:
+    """The one canonical encoding used for digests and byte accounting.
+
+    Key order never matters, floats are refused outright, and non-ASCII is written through
+    so a digest is a property of the content rather than of this interpreter.
+    """
+    return json.dumps(
+        value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False
+    )
+
+
+def encoded_bytes(value: Any) -> int:
+    """The exact UTF-8 length of a value's canonical encoding."""
+    return len(canonical_json(value).encode("utf-8"))
 
 #: Names that can only describe a runtime setting or a secret handle. They are never an
 #: adopted *algorithm version*, so they may not enter the manifest through the one
@@ -134,6 +154,74 @@ NON_CONTENT_FIELD_NAMES: Final = frozenset(
 def default_limits() -> dict[str, int]:
     """A fresh copy, so a caller cannot mutate the module constant."""
     return dict(DEFAULT_LIMITS)
+
+
+class Budget:
+    """Charges work units and canonical bytes; reports the first limit it hit.
+
+    Every pass over a row, a reference or a large container is charged again, so an
+    implementation that walks the inventory repeatedly pays for it repeatedly and a
+    single call cannot do unbounded work while claiming a bounded budget. Byte
+    accounting uses the real UTF-8 length of each string plus
+    :data:`BYTES_PER_ROW_ENVELOPE` per row, which bounds growth without making the
+    accounting depend on dict-key spelling.
+    """
+
+    __slots__ = ("bytes_used", "limits", "stopped_by", "work_used")
+
+    def __init__(self, limits: Mapping[str, int]) -> None:
+        self.limits = limits
+        self.work_used = 0
+        self.bytes_used = 0
+        self.stopped_by: str | None = None
+
+    def charge(self, units: int = WORK_UNIT) -> bool:
+        """Charge work; return False once the budget is exhausted."""
+        if self.stopped_by is not None:
+            return False
+        self.work_used += units
+        if self.work_used > self.limits["max_work_units"]:
+            self.stopped_by = "max_work_units"
+            return False
+        return True
+
+    def charge_text(self, text: str) -> bool:
+        """Charge canonical bytes for a string the manifest will have to carry."""
+        return self.charge_bytes(len(text.encode("utf-8")))
+
+    def charge_bytes(self, count: int) -> bool:
+        if self.stopped_by is not None:
+            return False
+        self.bytes_used += count
+        if self.bytes_used > self.limits["max_input_bytes"]:
+            self.stopped_by = "max_input_bytes"
+            return False
+        return True
+
+    @property
+    def exhausted(self) -> bool:
+        return self.stopped_by is not None
+
+    def diagnostic(self) -> dict[str, Any]:
+        """The named reason this call stopped, for the result's diagnostics."""
+        limit = self.stopped_by or "max_work_units"
+        observed = self.work_used if limit == "max_work_units" else self.bytes_used
+        return {
+            "code": _LIMIT_CODES.get(limit, f"{limit.upper()}_REACHED"),
+            "detail": (
+                f"{limit}={self.limits[limit]} reached ({observed} observed); work stopped here "
+                "and the result is not reuse evidence"
+            ),
+        }
+
+
+_LIMIT_CODES: dict[str, str] = {
+    "max_work_units": "WORK_LIMIT_REACHED",
+    "max_input_bytes": "BYTES_LIMIT_REACHED",
+    "max_scopes": "SCOPES_LIMIT_REACHED",
+    "max_components": "COMPONENTS_LIMIT_REACHED",
+    "max_candidates": "CANDIDATES_LIMIT_REACHED",
+}
 
 
 def resolve_limits(limits: Mapping[str, Any] | None) -> tuple[dict[str, int], dict[str, Any] | None]:

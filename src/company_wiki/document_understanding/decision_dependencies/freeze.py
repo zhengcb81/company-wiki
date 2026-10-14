@@ -18,7 +18,6 @@ list is stored.
 from __future__ import annotations
 
 import hashlib
-import json
 from typing import Any, Mapping
 
 from .contract import (
@@ -27,84 +26,12 @@ from .contract import (
     FROZEN_STATUS_COMPLETE,
     FROZEN_STATUS_PARTIAL,
     WORK_PER_SCOPE,
-    WORK_UNIT,
+    Budget,
+    canonical_json,
+    encoded_bytes,
     resolve_limits,
 )
 from .trace import DecisionTrace, decode_trace
-
-_DIGEST_MARKER = "du-decision-dependencies/1"
-
-
-class Budget:
-    """Charges work units and canonical bytes; reports the first limit it hit."""
-
-    __slots__ = ("bytes_used", "limits", "stopped_by", "work_used")
-
-    def __init__(self, limits: Mapping[str, int]) -> None:
-        self.limits = limits
-        self.work_used = 0
-        self.bytes_used = 0
-        self.stopped_by: str | None = None
-
-    def charge(self, units: int = WORK_UNIT) -> bool:
-        """Charge work; return False once the budget is exhausted."""
-        if self.stopped_by is not None:
-            return False
-        self.work_used += units
-        if self.work_used > self.limits["max_work_units"]:
-            self.stopped_by = "max_work_units"
-            return False
-        return True
-
-    def charge_text(self, text: str) -> bool:
-        """Charge canonical bytes for a string the manifest will have to carry."""
-        if self.stopped_by is not None:
-            return False
-        self.bytes_used += len(text.encode("utf-8"))
-        if self.bytes_used > self.limits["max_input_bytes"]:
-            self.stopped_by = "max_input_bytes"
-            return False
-        return True
-
-    def charge_bytes(self, count: int) -> bool:
-        if self.stopped_by is not None:
-            return False
-        self.bytes_used += count
-        if self.bytes_used > self.limits["max_input_bytes"]:
-            self.stopped_by = "max_input_bytes"
-            return False
-        return True
-
-    @property
-    def exhausted(self) -> bool:
-        return self.stopped_by is not None
-
-
-_LIMIT_CODES: dict[str, str] = {
-    "max_work_units": "WORK_LIMIT_REACHED",
-    "max_input_bytes": "BYTES_LIMIT_REACHED",
-    "max_scopes": "SCOPES_LIMIT_REACHED",
-    "max_components": "COMPONENTS_LIMIT_REACHED",
-    "max_candidates": "CANDIDATES_LIMIT_REACHED",
-}
-
-
-def _limit_diagnostic(limit: str, allowed: int, observed: int) -> dict[str, Any]:
-    code = _LIMIT_CODES.get(limit, f"{limit.upper()}_REACHED")
-    return {
-        "code": code,
-        "detail": (
-            f"{limit}={allowed} reached ({observed} observed); the freeze stopped here and "
-            "the manifest is partial, so it is not reuse evidence"
-        ),
-    }
-
-
-def canonical_json(value: Any) -> str:
-    """The one canonical encoding used for digests and byte accounting."""
-    return json.dumps(
-        value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False
-    )
 
 
 def _digest_payload(payload: Any) -> str:
@@ -128,18 +55,17 @@ def _freeze_scopes(trace: DecisionTrace, budget: Budget) -> tuple[list[dict[str,
         if not budget.charge_text(scope["scope_id"] + scope["regime"] + scope["family"] + scope["purpose"]):
             complete = False
             break
-        if not budget.charge_bytes(BYTES_PER_ROW_ENVELOPE):
+        row = {
+            "scope_id": scope["scope_id"],
+            "regime": scope["regime"],
+            "family": scope["family"],
+            "form_type": scope["form_type"],
+            "purpose": scope["purpose"],
+        }
+        if not budget.charge_bytes(encoded_bytes(row) + BYTES_PER_ROW_ENVELOPE):
             complete = False
             break
-        kept.append(
-            {
-                "scope_id": scope["scope_id"],
-                "regime": scope["regime"],
-                "family": scope["family"],
-                "form_type": scope["form_type"],
-                "purpose": scope["purpose"],
-            }
-        )
+        kept.append(row)
     return kept, complete
 
 
@@ -159,18 +85,17 @@ def _freeze_components(trace: DecisionTrace, budget: Budget) -> tuple[list[dict[
         if not budget.charge_text(component["component_id"] + component["version"]):
             complete = False
             break
-        if not budget.charge_bytes(BYTES_PER_ROW_ENVELOPE):
+        row = {
+            "component_id": component["component_id"],
+            "version": component["version"],
+            "content_digest": component["content_digest"],
+            "matcher_digest": component["matcher_digest"],
+            "scope_ids": list(component["scope_ids"]),
+        }
+        if not budget.charge_bytes(encoded_bytes(row) + BYTES_PER_ROW_ENVELOPE):
             complete = False
             break
-        kept.append(
-            {
-                "component_id": component["component_id"],
-                "version": component["version"],
-                "content_digest": component["content_digest"],
-                "matcher_digest": component["matcher_digest"],
-                "scope_ids": list(component["scope_ids"]),
-            }
-        )
+        kept.append(row)
     return kept, complete
 
 
@@ -200,17 +125,16 @@ def _freeze_candidates(trace: DecisionTrace, budget: Budget) -> tuple[list[dict[
                 break
         if not complete:
             break
-        if not budget.charge_bytes(BYTES_PER_ROW_ENVELOPE):
+        row = {
+            "candidate_id": candidate["candidate_id"],
+            "scope_id": candidate["scope_id"],
+            "component_ids": list(candidate["component_ids"]),
+            "eligible": candidate["eligible"],
+        }
+        if not budget.charge_bytes(encoded_bytes(row) + BYTES_PER_ROW_ENVELOPE):
             complete = False
             break
-        kept.append(
-            {
-                "candidate_id": candidate["candidate_id"],
-                "scope_id": candidate["scope_id"],
-                "component_ids": list(candidate["component_ids"]),
-                "eligible": candidate["eligible"],
-            }
-        )
+        kept.append(row)
     return kept, complete
 
 
@@ -222,7 +146,7 @@ def _freeze_versions(trace: DecisionTrace, budget: Budget) -> tuple[dict[str, An
         if budget.exhausted:
             complete = False
             break
-        if not budget.charge_text(key + str(value)):
+        if not budget.charge_bytes(encoded_bytes({key: value}) + BYTES_PER_ROW_ENVELOPE):
             complete = False
             break
         versions[key] = value
@@ -234,17 +158,20 @@ def _inventory_error(trace: DecisionTrace) -> dict[str, Any] | None:
 
     The input-level diagnostic explains *why the caller's inventory is short*; this one
     explains *why the manifest is partial*, which is what a consumer must check before
-    treating the freeze as reuse evidence.
+    treating the freeze as reuse evidence. It is only reported when the caller really did
+    fail to attest completeness -- a call stopped by the budget, or an artefact this
+    version cannot interpret, already carries the accurate reason and must not be blamed
+    on the caller's inventory.
     """
-    if not trace.inventory_complete:
-        return {
-            "code": "INVENTORY_NOT_COMPLETE",
-            "detail": (
-                "the caller did not assert a complete inventory; partial freezes carry identity "
-                "for lineage but are not reuse evidence"
-            ),
-        }
-    return None
+    if not trace.wire_ok or trace.inventory_complete:
+        return None
+    return {
+        "code": "INVENTORY_NOT_COMPLETE",
+        "detail": (
+            "the caller did not assert a complete inventory; partial freezes carry identity "
+            "for lineage but are not reuse evidence"
+        ),
+    }
 
 
 def freeze_decision_dependencies(
@@ -266,10 +193,10 @@ def freeze_decision_dependencies(
         # A bad limits mapping is a caller error, not a silent downgrade.
         raise ValueError(f"{limits_error['code']}: {limits_error['detail']}")
 
-    trace_domain = decode_trace(trace)
+    budget = Budget(effective)
+    trace_domain = decode_trace(trace, budget)
 
     diagnostics: list[dict[str, Any]] = [dict(item) for item in trace_domain.diagnostics]
-    budget = Budget(effective)
 
     result_scopes, scopes_complete = _freeze_scopes(trace_domain, budget)
     if scopes_complete:
@@ -286,18 +213,9 @@ def freeze_decision_dependencies(
         result_versions, versions_complete = {}, False
 
     if budget.stopped_by is not None:
-        observed = {
-            "max_work_units": budget.work_used,
-            "max_input_bytes": budget.bytes_used,
-            "max_scopes": len(result_scopes),
-            "max_components": len(result_components),
-            "max_candidates": len(result_candidates),
-        }.get(budget.stopped_by, budget.work_used)
-        diagnostics.append(
-            _limit_diagnostic(
-                budget.stopped_by, effective[budget.stopped_by], observed
-            )
-        )
+        # One named reason per call, whether it stopped in decode or in the walk.
+        if not any(item.get("code") == budget.diagnostic()["code"] for item in diagnostics):
+            diagnostics.append(budget.diagnostic())
 
     walked = (
         len(result_scopes) == len(trace_domain.scopes)
@@ -332,18 +250,42 @@ def freeze_decision_dependencies(
     return manifest
 
 
-def decision_digest(manifest: Mapping[str, Any]) -> str:
-    """Digest the identity-bearing part of a manifest.
+#: The identity-bearing fields of a manifest. ``status`` and ``diagnostics`` are
+#: deliberately excluded: they are a verdict about completeness and a record of why a call
+#: stopped, and the same decision reached under a larger budget must keep the same
+#: identity. That makes digest equality an **identity** statement only -- it is never a
+#: verdict, and a consumer must check ``status == "complete"`` before treating two equal
+#: digests as anything at all.
+IDENTITY_FIELDS = ("schema_version", "scopes", "components", "candidates", "versions")
 
-    Everything except ``status``, ``diagnostics`` and the digest itself. Diagnostics
-    describe *why* a freeze stopped, and the same decision reached with a larger budget
-    must keep the same identity; the status is a verdict about completeness, not content.
+
+def decision_digest(manifest: Mapping[str, Any]) -> str:
+    """Digest the identity-bearing part of a manifest, independent of row order.
+
+    Rows are sorted by their id key before hashing, so a manifest whose arrays were
+    permuted keeps the same identity as :func:`compare_decision_dependencies` reports.
+    Missing identity fields are an error rather than an empty default: a digest that
+    treats "absent" and "empty" as the same thing would let a record with unhashed
+    content pass as unchanged.
     """
+    missing = [name for name in IDENTITY_FIELDS if name not in manifest]
+    if missing:
+        raise ValueError(f"decision_digest needs the identity fields; missing {missing}")
     payload = {
-        "schema_version": manifest.get("schema_version"),
-        "scopes": manifest.get("scopes", []),
-        "components": manifest.get("components", []),
-        "candidates": manifest.get("candidates", []),
-        "versions": manifest.get("versions", {}),
+        "schema_version": manifest["schema_version"],
+        "scopes": _sorted_rows(manifest["scopes"], "scope_id"),
+        "components": _sorted_rows(manifest["components"], "component_id"),
+        "candidates": _sorted_rows(manifest["candidates"], "candidate_id"),
+        "versions": manifest["versions"],
     }
     return _digest_payload(payload)
+
+
+def _sorted_rows(rows: Any, key: str) -> list[Any]:
+    """Order-independent view of a row array; a non-array is a caller error."""
+    if not isinstance(rows, (list, tuple)):
+        raise ValueError(f"{key} rows must be an array")
+    return sorted(
+        (dict(row) for row in rows if isinstance(row, Mapping)),
+        key=lambda row: str(row.get(key)),
+    )

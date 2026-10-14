@@ -40,6 +40,20 @@ return a diagnostic** ("未知/缺项显式返回诊断，不猜业务事实") a
 cases return `unavailable`/`partial`. Nothing in the right-hand column can degrade into
 `same`.
 
+One asymmetry is deliberate and is the difference between an *assertion* and a *record*:
+
+* a **caller-supplied `du-decision-trace/1`** is an assertion that the wire contract holds,
+  so a structural violation raises `DecisionTraceError`;
+* a **stored `du-decision-dependencies/1` manifest** is a record that may come from another
+  build or may have been touched since it was written, so anything that makes it unusable
+  -- an unknown or missing field, a duplicate id, a dangling or repeated reference, a
+  malformed digest, a wrong-typed row, or a `decision_digest` that no longer matches its
+  own rows -- returns `unavailable` with a diagnostic naming the problem.
+
+Both are equally incapable of producing `same`. The second path reports instead of raising
+because a cache precheck that crashes on an old record is worse than one that honestly
+says "cannot tell" and recomputes.
+
 ## 3. Design decisions worth ROOT's attention
 
 1. **`inventory_complete` is the one optional field of a declared `du-decision-trace/1`.**
@@ -75,14 +89,22 @@ cases return `unavailable`/`partial`. Nothing in the right-hand column can degra
 
 ## 4. Real finding from the C node (not synthetic)
 
-Deriving a decision domain from the **entire** installed reading catalog produces **78
-scopes** (the distinct regime/family/purpose tuples declared by all 24 families, over 38
-family + facet components), which exceeds the frozen default of `max_scopes=64`. Such a
+Deriving a decision domain from the **entire** installed reading catalog produces **126
+scopes** (the distinct regime/family/form/purpose tuples declared by all 24 families, over
+38 family + facet components), which exceeds the frozen default of `max_scopes=64`. Such a
 freeze is `partial` with `SCOPES_LIMIT_REACHED`. This is the concrete, measured reason the
 dependency unit must be the **source-local** decision domain: a whole-catalog hash would be
 both too strict (every unrelated edit invalidates everything) and, here, unusable. A
 source-local domain built from the same real catalog identities freezes `complete` at
 2 scopes / 28 components / 9 candidates.
+
+The count is worth a note because it moved during review. The first version of the C-node
+fixture derived scope ids from (regime, family, purpose) and dropped `form_type`; the real
+catalog declares several forms under one such tuple (a '6-K' and an '8-K' event update, four
+lifecycle-overlay revisions), so the ids collided and the de-duplication silently discarded
+54 of the 132 applies rows -- which is where an earlier "78 scopes" figure came from. With
+`form_type` in the id, 126 distinct scopes remain and the only collapse left is of genuinely
+identical tuples.
 
 ## 5. Corrections made during TDD (kept, not deleted)
 
@@ -118,3 +140,72 @@ None against DU3/1's "决策依赖组件" section. One addition is purely defens
 change any frozen field: `freeze`/`compare` reject a `versions` key that names a runtime
 setting or secret handle, which is how the card's "不把API密钥/env名、路径、run ID、当前
 时间、费用/timeout等非内容字段纳入manifest" is enforced on the only caller-supplied map.
+
+## 8. Independent review (two agents) and what it changed
+
+Two independent reviewers -- one checking the card and interface requirement by
+requirement, one reading the code adversarially -- were run after the first commit. They
+were not shown my own conclusions. Their verdict on the committed state was
+**"not acceptable as-is; acceptable after one fix commit and a clean tree"**. Everything
+they found that was real has been fixed and pinned with a counter-example:
+
+| # | Finding | Severity | Status |
+|---|---|---|---|
+| 1 | `compare`'s manifest-vs-manifest path silently de-duplicated duplicate component ids, accepted dangling references, raised `AttributeError` on wrong-typed rows and never verified `decision_digest` — all able to yield `same` on a malformed record | MAJOR | fixed + counter-examples |
+| 2 | `decode_trace` walked the whole input with **no** budget charged, so `max_work_units` did not bound decode and `max_input_bytes` never bounded the input at all | MAJOR | fixed + counter-examples |
+| 3 | `NO_PARTICIPATING_COMPONENT` did not block `complete` | MINOR | fixed + counter-example |
+| 4 | the package docstring overstated what shape diagnostics catch about a forged winners-only inventory | MINOR | rewritten to the exact limit |
+| 5 | handoff line counts were wrong | MINOR | corrected to measured values |
+| 6 | one handoff sentence mislabelled the regression scope | MINOR | corrected (496/17 for the five pre-existing packages) |
+| 7 | the AST import deny-list omitted the two sibling DU3 packages | MINOR | added |
+| 8 | the `contract.py` comment overstated what `max_input_bytes` accounting measures | MINOR | corrected to describe the accounting actually used |
+| 9 | `max_input_bytes` was **bypassable**: accounting sampled a subset of each row (`form_type`, both digests and the reference lists went uncharged), so a 35 KB input froze `complete` under a 25 KB cap — a 1.95x undercount | MAJOR | fixed: bytes are charged on the real canonical encoding of every row |
+| 10 | `_reference_list` de-duplicated with a list scan, O(n²) inside a nominally bounded call | MAJOR→minor | fixed: set-based, linear |
+| 11 | `compare`'s index/sort/set-diff pre-passes ran uncharged before the first `budget.charge()` | MINOR | fixed: every row charged while indexing, diffs charged by size |
+| 12 | `decision_digest` used `.get()` defaults, so missing arrays collided with empty ones, and it was row-order sensitive while `compare` is order-insensitive | MINOR | fixed: exact identity fields required (raises otherwise) and rows sorted before hashing |
+| 13 | `compare` validated `limits` only on some routes, so a bad limits mapping raised on one path and returned `unavailable` on another | MINOR | fixed: validated before any verdict path |
+| 14 | the AST import guard was defeatable by `from parent import forbidden_child` and by `__import__()` | MINOR | fixed: imported names and dynamic-import calls are checked, with synthetic-offender counter-tests |
+| 15 | `decision_digest`'s coverage of `versions`/`scopes`/`candidates` was unproven — two mutants deleting those payload fields still passed all 111 tests | MAJOR (test gap) | fixed: one digest-sensitivity assertion per identity class + a candidate add/remove case |
+| 16 | the manifest-vs-manifest `changed` route had no test at all; one cross-process test never crossed a process; one assertion was tautological; `walk_scalars` was dead | MINOR | fixed: manifest-vs-manifest mutation matrix added, tests corrected, dead code removed |
+| 17 | C-node fixture: `scope_id_for` dropped `form_type`, colliding 20 real scope ids and silently discarding 54 of 132 applies rows; `winners` mixed family ids with profile ids | NIT | fixed: identity includes `form_type`, `winners` is profile ids, and the facet population is documented as deliberately unreferenced |
+
+Two findings were **accepted without changing behaviour**, and the reason is recorded here
+rather than hidden:
+
+* *RED-first is evidenced by a receipt, not by separate commits*, because tests and
+  implementation landed in one commit. `evidence/a_red.json` records the original
+  `51 failed` run and the three post-RED assertion corrections, and the reviewer
+  independently confirmed the suite fails without the package.
+* *A fully-shaped forged winners-only trace that omits participants and still asserts
+  `inventory_complete: true` is not detectable from inside the input.* That is exactly the
+  card's "不可认证的外部漏报", which the card asks to be documented rather than papered over.
+  What the component *can* and now does catch are the degenerate shapes -- no candidate
+  membership at all, and inspected components no candidate ever references -- both of
+  which are refused as `complete`. The remainder is ROOT's instrumentation to establish.
+
+### Measured effect of the fixes
+
+Every line below is a re-run of the reviewer's own reproduction, not a paraphrase.
+
+| probe | before | after |
+|---|---|---|
+| 60 000 rows, `max_work_units=1` | 0.665 s of real work | 0.073 s, stops immediately |
+| 40 000 rows / >2 MiB input, default limits | fully decoded, 1.76 s | 0.053 s, `BYTES_LIMIT_REACHED` |
+| 35 KB input under a 25 KB `max_input_bytes` | `complete` (1.95x undercount) | `partial`, `BYTES_LIMIT_REACHED` |
+| 9 000 references, zero budget | 0.45 s (quadratic scan) | 0.006 s (linear) |
+| 60 000-row manifest vs itself, `max_work_units=1` | 0.25 s uncharged | 0.000 s, `unavailable` |
+| `compare(frozen, frozen + {"junk": ...})` | `same` | `unavailable` |
+| manifest with a duplicated component id | `same` | `unavailable` |
+| manifest with contradictory rows + stale digest | `same` | `unavailable` |
+| manifest with a dangling reference | `same` | `unavailable` |
+| manifest row that is a string | `AttributeError` | `unavailable` |
+| manifest with a stale `decision_digest` | accepted | `unavailable` |
+| manifest row values `1` vs `True`, `[1]` vs `["1"]` | `same` | rejected |
+| permuted manifest rows | `compare: same` but digests differ | `compare: same` and digests equal |
+| `decision_digest({})` | silent empty default | `ValueError` |
+| `compare(..., limits={"bogus": 1})` on a short-circuit route | `unavailable` | `ValueError` |
+| `from company_wiki.document_understanding import profiles` in a package module | guard passed | guard fails |
+| `__import__("os")` in a package module | guard passed | guard fails |
+| components referenced by no candidate | `complete` | `partial` |
+| digest mutants dropping `versions` / `scopes`+`candidates` from the payload | 111/111 still passed | pinned by per-class digest assertions |
+| whole-catalog decision domain | 78 scopes (54 rows silently discarded) | 126 scopes, 38 components |

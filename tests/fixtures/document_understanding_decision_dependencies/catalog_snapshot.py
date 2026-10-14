@@ -64,7 +64,14 @@ def _applies_rows(record: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def scope_id_for(row: dict[str, Any]) -> str:
-    return f"scope:{row['regime']}:{row['family']}:{row['purpose']}"
+    """Stable id for one applies-to tuple.
+
+    ``form_type`` is part of the identity on purpose: the real catalog declares several
+    forms under one (regime, family, purpose) -- a '6-K' and an '8-K' event update are
+    different decision scopes -- and dropping the field collapsed them into one id, which
+    silently discarded rows when this id was used for de-duplication.
+    """
+    return f"scope:{row['regime']}:{row['family']}:{row['form_type']}:{row['purpose']}"
 
 
 def build_snapshot(catalog: dict[str, Any], file_sha256: str) -> dict[str, Any]:
@@ -127,10 +134,18 @@ def source_domain(
 ) -> dict[str, Any]:
     """One source's decision domain, built from real catalog identities.
 
-    ``profile_id`` picks which legacy binding this source is. The *scope* is the one this
-    source actually entered; the *components* are every family/facet the matcher would
-    have had to look at inside that scope -- including the ones that matched and lost;
-    the *candidates* are the bindings that were weighed.
+    ``profile_id`` picks which legacy binding this source is. ``winners`` names *profile
+    ids* -- the same kind of id as ``profile_id`` -- for bindings that were admissible but
+    did not win; they stay in the inventory as losing participants.
+
+    The *scope* is the one this source actually entered; the *components* are every
+    family/facet the matcher would have had to look at inside that scope; the
+    *candidates* are the bindings that were weighed.
+
+    Facet components are deliberately left unreferenced by every candidate: the matcher
+    probes facet signals while deciding, but no candidate binds them. They are the
+    "inspected but never a decision participant" population the card requires to be
+    covered, and mutating one must still move the identity.
     """
     bindings = {item["profile_id"]: item for item in snapshot["bindings"]}
     families = {item["component_id"]: item for item in snapshot["families"]}
@@ -177,7 +192,7 @@ def source_domain(
         )
 
     inspected_ids = {item["component_id"] for item in inspected}
-    winners = winners or tuple(chosen["family_ids"])
+    admissible = {profile_id, *winners}
     candidates = []
     for binding in sorted(snapshot["bindings"], key=lambda item: item["profile_id"]):
         # Only the components this domain actually inspected belong here. A binding may
@@ -188,13 +203,12 @@ def source_domain(
         ]
         if not member_ids:
             continue
-        is_winner = binding["profile_id"] == profile_id
         candidates.append(
             {
                 "candidate_id": f"candidate:{binding['profile_id']}",
                 "scope_id": parent_id,
                 "component_ids": member_ids,
-                "eligible": is_winner or binding["profile_id"] in winners,
+                "eligible": binding["profile_id"] in admissible,
             }
         )
 
@@ -211,6 +225,10 @@ def whole_catalog_domain(snapshot: dict[str, Any]) -> dict[str, Any]:
 
     Kept so the C-node replay can show, with the real catalog, why the dependency unit
     has to be the *source-local* decision domain rather than a whole-catalog hash.
+
+    One scope row is emitted per distinct applies-to tuple (regime, family, form_type,
+    purpose); identical tuples declared by more than one family legitimately share a
+    scope id, and that is the only collapse here.
     """
     scopes: list[dict[str, Any]] = []
     seen: set[str] = set()

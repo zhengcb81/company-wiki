@@ -36,7 +36,25 @@
   in 20.26s over document_understanding_root/profiles/selection/structure/layout_hints
   plus the new lane. No regression.
 - 2026-10-14 **Committed.** Implementation commit
-  `bc63a74eac1f73e6184a87a4b1bb65044840c1ad` (14 files, 3807 insertions, code + tests).
-  Ledger/handoff committed separately afterwards.
-- 2026-10-14 **Handoff written.** `handoff.md` + `handoff.json`. STOP waiting for ROOT;
-  no master merge, no push, no production default change.
+  `bc63a74eac1f73e6184a87a4b1bb65044840c1ad` (14 files, 3807 insertions, code + tests);
+  ledger commit `e430945fa8a536bac589be8ad6ddf3708379557c`.
+- 2026-10-14 **Independent review round.** Two agents that did not write this code reviewed
+  it: one requirement-by-requirement against the card and DU3/1, one adversarial on the
+  source. Both verdicts: *not acceptable as-is; acceptable after a fix commit and a clean
+  tree*. 17 findings recorded in `findings.md` section 8; all of them fixed and pinned with
+  a counter-example, including two the author had also found independently (decode work
+  uncharged, manifest keys not validated) and three that were new and serious:
+  `max_input_bytes` was bypassable by a 1.95x row-accounting undercount; `decision_digest`
+  coverage of `versions`/`scopes`/`candidates` was unproven (two source mutants still passed
+  111/111); and `_reference_list` de-duplicated with a quadratic list scan.
+- 2026-10-14 **Fix round node runs.** `python .planning/du3-dependencies/run_nodes.py`:
+  A 55 passed (exit 0, 2.813s), B 57 passed (exit 0, 3.063s), C 19 passed (exit 0, 2.526s),
+  ALL 131 passed (exit 0, 3.268s). ruff exit 0, mypy exit 0.
+- 2026-10-14 **C-node count corrected.** The fixture's scope identity dropped `form_type`,
+  colliding 20 real catalog scope ids and silently discarding 54 of 132 applies rows. With
+  the fix the whole-catalog domain is **126 scopes / 38 components** (still far over the
+  64 default); the source-local domain stays 2 scopes / 28 components / 9 candidates,
+  `complete`.
+- 2026-10-14 **Handoff rewritten.** `handoff.md` + `handoff.json` carry the corrected
+  numbers, the review record and the honest statement of what remains uncertified. STOP
+  waiting for ROOT; no master merge, no push, no production default change.
