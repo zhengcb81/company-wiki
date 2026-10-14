@@ -30,6 +30,18 @@
   -> UNAVAILABLE (honest skip, never a real pass).
 - All 4 originals preserved SHA-256 + mtime + size (4/4) — locked by opt-in test + c-real-snapshots.json.
 
+## Bugs found by independent review (all fixed + regression-tested)
+- `complete` could be True while `incomplete_pages` non-empty (frame-problem page with zero bindings) and while
+  units on absent pages were unbound. Fixed: frame codes into PARTIAL_CODES + incomplete_pages/unbound folded
+  into complete; explicit UNREAD_PAGE for units on pages the snapshot never covered.
+- `max_units` lowered did NOT stop processing (only flagged). Fixed: only the first max_units units are bound;
+  the rest deferred (consistent with max_pages / fine-element caps).
+- Non-string `binding.unit_id` crashed with TypeError in `_diag`'s `sorted()`. Fixed: contract validates it as a
+  non-empty string -> ValueError; `_diag` hardened with `key=str`.
+- `MAX_TEXT_BYTES` was declared but never enforced. Fixed: enforced in native_probe span/table builders.
+- Non-mapping fine elements / duplicate unit ids were silently dropped. Fixed: FINE_ELEMENT_INVALID / DUPLICATE_UNIT_ID.
+- "relocated" char re-pins discarded the supplied range. Fixed: `char_start_supplied`/`char_end_supplied` retained.
+
 ## Honest unproven
 - Not wired to production; does not claim dual-column order / fine table header / key business recall solved.
 - Binding reliability != fine-column/table recall; no recall benchmark run.

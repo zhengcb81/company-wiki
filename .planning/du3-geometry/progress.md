@@ -11,3 +11,9 @@
   - Fixed max_pages count-vs-pagenumber bug caught by real jinhe p223 data; locked by synthetic test.
   - Handoff written (handoff.md / handoff.json). Git status clean: only the 4 exclusive paths.
 2026-10-14 NEXT: independent agent review of all card acceptance requirements, then STOP for ROOT.
+2026-10-14 independent review (ACCEPT_WITH_FIXES) completed; all findings fixed + regression-tested:
+  - complete-not-false-complete (frame codes + incomplete_pages/unbound folded in), UNREAD_PAGE for units on
+    absent pages, max_units truly stops processing, binding.unit_id ValueError (was TypeError crash),
+    MAX_TEXT_BYTES enforced, FINE_ELEMENT_INVALID + DUPLICATE_UNIT_ID diagnostics, relocated keeps supplied range.
+  - +9 regression tests (offline 38->47). Real 8 passed / 1 skipped, layout_hints 42 passed, ruff clean.
+  - Ledgers reconciled (handoff.md/.json + green-receipt all report 47 offline). READY for commit + ROOT.

@@ -123,6 +123,11 @@ def _span_units(page, page_no: int, sample_id: str, seq_start: int, words, budge
                 bbox = [round(float(v), 3) for v in span.get("bbox", ())]
                 if len(bbox) != 4:
                     continue
+                text_bytes = len(text.encode("utf8"))
+                if budget["bytes"] + text_bytes > MAX_TEXT_BYTES:
+                    budget["truncated"] = True
+                    return units, bindings, seq
+                budget["bytes"] += text_bytes
                 uid = f"probe-{sample_id}-p{page_no}-u{seq:04d}"
                 size = span.get("size")
                 flags = span.get("flags")
@@ -220,6 +225,11 @@ def _table_bindings(page, page_no: int, sample_id: str, seq_start: int, budget):
             if not cells:
                 continue
             row_text = " | ".join(row_text_parts)
+            row_bytes = len(row_text.encode("utf8"))
+            if budget["bytes"] + row_bytes > MAX_TEXT_BYTES:
+                budget["truncated"] = True
+                return units, bindings, seq
+            budget["bytes"] += row_bytes
             bbox = [round(float(v), 3) for v in getattr(row, "bbox", table.bbox)]
             uid = f"probe-{sample_id}-p{page_no}-u{seq:04d}"
             units.append(
@@ -262,7 +272,7 @@ def load_snapshot(bindings: dict[str, str], sample_id: str) -> dict:
         )
 
     deadline = time.monotonic() + TIME_BUDGET_S
-    budget = {"words": 0, "cells": 0, "bytes": 0}
+    budget = {"words": 0, "cells": 0, "bytes": 0, "truncated": False}
     pages_out = []
     all_units = []
     mapping = []
@@ -301,7 +311,7 @@ def load_snapshot(bindings: dict[str, str], sample_id: str) -> dict:
                         "quote": unit["text"][:60],
                     }
                 )
-                budget["bytes"] += len(unit["text"].encode("utf8"))
+                # byte accounting lives in the span/table builders (MAX_TEXT_BYTES enforced there)
             pages_out.append(
                 {
                     "page": page_no,

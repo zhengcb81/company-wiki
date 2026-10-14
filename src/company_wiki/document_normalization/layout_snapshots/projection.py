@@ -34,12 +34,17 @@ PARTIAL_CODES = frozenset(
         "MISSING_BINDING_BBOX",
         "BAD_ELEMENT_BBOX",
         "FINE_ELEMENT_NO_BASIS",
+        "FINE_ELEMENT_INVALID",
+        "DUPLICATE_UNIT_ID",
+        "UNREAD_PAGE",
         "NO_FINE_GEOMETRY",
         "NO_REAL_GEOMETRY",
         "UNKNOWN_COORDINATE_FRAME",
         "COORDINATE_OUT_OF_BOUNDS",
         "FRAME_SIZE_MISMATCH",
         "FRAME_LABEL_MISSING",
+        "FRAME_LABEL_UNKNOWN",
+        "ROTATION_MISSING",
         "ROTATION_INVALID",
         "PAGE_SIZE_UNKNOWN",
         "UNIT_LIMIT_EXCEEDED",
@@ -49,7 +54,9 @@ PARTIAL_CODES = frozenset(
 
 
 def _diag(code: str, unit_ids, detail: str) -> dict:
-    return {"code": code, "unit_ids": sorted({u for u in unit_ids if u is not None}), "detail": detail}
+    # key=str keeps this robust even if a malformed id slips through from a binding.
+    ids = sorted({u for u in unit_ids if u is not None}, key=str)
+    return {"code": code, "unit_ids": ids, "detail": detail}
 
 
 def project_layout_snapshot(
@@ -64,15 +71,18 @@ def project_layout_snapshot(
 
     unit_index: dict = {}
     unit_order: list = []
+    duplicate_ids: set = set()
     for pos, unit in enumerate(units):
         if not isinstance(unit, Mapping):
             raise ValueError(f"units[{pos}] must be a mapping")
         unit_id = unit.get("unit_id")
         if not isinstance(unit_id, str) or not unit_id:
             raise ValueError(f"units[{pos}].unit_id must be a non-empty string")
-        if unit_id not in unit_index:
-            unit_index[unit_id] = unit
-            unit_order.append(unit_id)
+        if unit_id in unit_index:
+            duplicate_ids.add(unit_id)
+            continue
+        unit_index[unit_id] = unit
+        unit_order.append(unit_id)
 
     unit_metadata: dict = {}
     diagnostics: list[dict] = []
@@ -84,6 +94,9 @@ def project_layout_snapshot(
     fine_hit = False
     page_limit_hit = False
     unit_limit_hit = len(unit_order) > resolved["max_units"]
+    # max_units bounds the COUNT of units processed (like max_pages): only the
+    # first max_units units are in scope; the rest are deferred, not silently bound.
+    eligible_ids = set(unit_order[: resolved["max_units"]])
 
     try:
         for pos, unit_id in enumerate(unit_order):
@@ -104,6 +117,7 @@ def project_layout_snapshot(
             _process_page(
                 page,
                 unit_index,
+                eligible_ids,
                 unit_metadata,
                 bound_ids,
                 units_with_binding,
@@ -120,6 +134,12 @@ def project_layout_snapshot(
     all_ids = list(unit_order)
     deferred_ids = [uid for uid in all_ids if uid in units_with_binding and uid not in unit_metadata]
     unbound_ids = [uid for uid in all_ids if uid not in units_with_binding]
+    # a caller unit on a page the snapshot never covered is an UNREAD page: it must
+    # not be reported complete ("未读页/deferred不伪complete").
+    snapshot_page_nos = {p.page_no for p in pages}
+    unread_page_ids = [
+        uid for uid in all_ids if unit_index[uid].get("page") not in snapshot_page_nos
+    ]
 
     if exhausted:
         diagnostics.append(
@@ -141,15 +161,29 @@ def project_layout_snapshot(
         diagnostics.append(
             _diag("UNIT_LIMIT_EXCEEDED", all_ids[resolved["max_units"] :], f"more than max_units={resolved['max_units']} units")
         )
+    if duplicate_ids:
+        diagnostics.append(
+            _diag("DUPLICATE_UNIT_ID", duplicate_ids, "unit_id appears more than once in units; first occurrence kept")
+        )
+    if unread_page_ids:
+        diagnostics.append(
+            _diag("UNREAD_PAGE", unread_page_ids, "unit sits on a page the snapshot never covered; not reported complete")
+        )
     if unknown_frame_ids:
         diagnostics.append(
             _diag("UNKNOWN_COORDINATE_FRAME", unknown_frame_ids, "page coordinate frame unknown; physical size not guessed")
         )
     diagnostics.append(_diag("WORK_UNITS", [], str(budget.used)))
 
+    incomplete_pages = [p.page_no for p in pages if _page_partial(p, unknown_frame_ids)]
+    # complete requires EVERY caller unit resolved and every page covered: a unit
+    # without metadata (deferred/unbound/unread) or a partial page forbids it.
     complete = (
         not deferred_ids
+        and not unbound_ids
+        and not unread_page_ids
         and not unknown_frame_ids
+        and not incomplete_pages
         and not exhausted
         and not fine_hit
         and not page_limit_hit
@@ -166,8 +200,9 @@ def project_layout_snapshot(
             "bound_unit_count": len(bound_ids),
             "deferred_unit_ids": deferred_ids,
             "unbound_unit_ids": unbound_ids,
-            "unknown_frame_unit_ids": sorted(unknown_frame_ids),
-            "incomplete_pages": [p.page_no for p in pages if _page_partial(p, unknown_frame_ids)],
+            "unread_page_unit_ids": unread_page_ids,
+            "unknown_frame_unit_ids": sorted(unknown_frame_ids, key=str),
+            "incomplete_pages": incomplete_pages,
             "complete": complete,
         },
         "diagnostics": diagnostics,
@@ -181,6 +216,7 @@ def _page_partial(page: PageEnvelope, unknown_frame_ids: set) -> bool:
 def _process_page(
     page: PageEnvelope,
     unit_index: dict,
+    eligible_ids: set,
     unit_metadata: dict,
     bound_ids: set,
     units_with_binding: set,
@@ -202,6 +238,9 @@ def _process_page(
             diagnostics.append(_diag("MISSING_UNIT", [unit_id], "binding references a unit not present in units"))
             continue
         units_with_binding.add(unit_id)
+        # beyond max_units: not processed (bounded), recorded as deferred above.
+        if unit_id not in eligible_ids:
+            continue
 
         # a unit may be bound at most once: a second binding is an ambiguous match
         if unit_id in unit_metadata or unit_id in bound_ids:

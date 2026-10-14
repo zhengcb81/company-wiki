@@ -52,6 +52,27 @@ def test_unknown_frame_is_partial_and_does_not_guess_size():
     assert meta["layout"]["bbox"] == [70.0, 120.0, 200.0, 140.0]
 
 
+def test_explicit_transform_is_recorded_without_shifting_coords():
+    snapshot, units = synth.transform_frame_case()
+    result = project_layout_snapshot(snapshot, units)
+    meta = _meta(result, "u-tf")
+    assert meta["layout"]["frame_converted"] is True
+    assert meta["layout"]["coordinate_frame"] == "transformed"
+    # bboxes stay in the declared frame; the transform is recorded, not blindly applied
+    assert meta["layout"]["bbox"] == [70.0, 120.0, 200.0, 140.0]
+    assert meta["upstream_hints"]["words"][0]["bbox"] == [70.0, 120.0, 160.0, 140.0]
+
+
+def test_cropbox_origin_keeps_coords_and_crop_size():
+    snapshot, units = synth.cropbox_origin_case()
+    result = project_layout_snapshot(snapshot, units)
+    meta = _meta(result, "u-crop")
+    assert meta["layout"]["coordinate_frame"] == "cropbox"
+    assert meta["layout"]["page_width"] == 400.0  # crop size, not guessed to media size
+    assert meta["layout"]["bbox"] == [10.0, 20.0, 120.0, 60.0]
+    assert result["coverage"]["bound_unit_count"] == 1
+
+
 # ------------------------------------------------------------------ font / text binding
 
 
@@ -64,6 +85,10 @@ def test_mixed_font_runs_bind_to_disjoint_char_ranges():
     for r in runs:
         assert r["char_start"] < r["char_end"]
         assert r.get("char_alignment") in {"exact", "relocated", "unknown"}
+    # the two styles must occupy DISJOINT char ranges (not overlap)
+    ranges = sorted((r["char_start"], r["char_end"]) for r in runs)
+    for (s1, e1), (s2, e2) in zip(ranges, ranges[1:]):
+        assert e1 <= s2, "mixed font runs must not overlap"
     # the unit's original text is preserved verbatim
     assert _meta(result, "u-fonts")["layout"] is not None
 
@@ -179,3 +204,53 @@ def test_frontend_without_geometry_stays_unknown():
     assert meta["upstream_hints"]["words"] == []
     assert meta["upstream_hints"]["cells"] == []
     assert "NO_REAL_GEOMETRY" in _codes(result)
+
+
+# ---- fixes from independent review ----
+
+
+def test_ambiguous_binding_is_diagnostic_and_partial():
+    snapshot, units = synth.mixed_fonts_case()
+    page = snapshot["pages"][0]
+    page["bindings"].append(dict(page["bindings"][0]))  # same unit matched twice
+    result = project_layout_snapshot(snapshot, units)
+    assert "AMBIGUOUS_BINDING" in _codes(result)
+    assert result["coverage"]["complete"] is False
+
+
+def test_frame_size_mismatch_is_partial():
+    snapshot = {
+        "schema_version": synth.SNAPSHOT_SCHEMA,
+        "pages": [
+            {
+                "page": 1, "width": 595.0, "height": 842.0, "coordinate_frame": "dict", "rotation": 90,
+                "dict_width": 595.0, "dict_height": 842.0,
+                # rotation 90 should swap these; they do not -> mismatch
+                "rect_width": 595.0, "rect_height": 842.0,
+                "bindings": [{"unit_id": "u1", "bbox": [10.0, 20.0, 30.0, 40.0]}],
+            }
+        ],
+    }
+    unit = {"unit_id": "u1", "ordinal": 0, "page": 1, "locator": "l", "text": "x", "kind": "paragraph", "role": "r", "parser": "p", "layout": {}}
+    result = project_layout_snapshot(snapshot, [unit])
+    assert "FRAME_SIZE_MISMATCH" in _codes(result)
+    assert result["coverage"]["complete"] is False
+
+
+def test_non_mapping_fine_element_is_diagnostic():
+    snapshot, units = synth.mixed_fonts_case()
+    snapshot["pages"][0]["bindings"][0]["words"] = ["not-a-mapping"]
+    result = project_layout_snapshot(snapshot, units)
+    assert "FINE_ELEMENT_INVALID" in _codes(result)
+
+
+def test_relocated_alignment_preserves_supplied_range():
+    snapshot, units = synth.nfc_trim_case()
+    result = project_layout_snapshot(snapshot, units)
+    words = _meta(result, "u-nfc")["upstream_hints"]["words"]
+    relocated = [w for w in words if w["char_alignment"] == "relocated"]
+    assert relocated, "the decomposed 'Café' re-aligns"
+    for w in relocated:
+        # the frontend-supplied range is retained even after re-pinning
+        assert w["char_start_supplied"] is not None
+        assert (w["char_start_supplied"], w["char_end_supplied"]) != (w["char_start"], w["char_end"])

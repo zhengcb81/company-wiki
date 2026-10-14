@@ -108,10 +108,15 @@ def validate_snapshot(snapshot: Mapping[str, Any], *, limits: Mapping[str, Any] 
                 isinstance(binding_raw, Mapping),
                 f"pages[{index}].bindings[{b_index}] must be a mapping",
             )
+            binding_unit_id = binding_raw.get("unit_id")
+            _require(
+                isinstance(binding_unit_id, str) and binding_unit_id,
+                f"pages[{index}].bindings[{b_index}].unit_id must be a non-empty string",
+            )
             bbox = legal_bbox(binding_raw.get("bbox"))
             bindings.append(
                 Binding(
-                    unit_id=binding_raw.get("unit_id"),
+                    unit_id=binding_unit_id,
                     bbox=bbox,
                     words=list(binding_raw.get("words") or []),
                     cells=list(binding_raw.get("cells") or []),

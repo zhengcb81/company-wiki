@@ -2,7 +2,7 @@
   "schema_version": "du3-handoff/1",
   "lane": "geometry",
   "base_sha": "195aba20b0aecc2d661d7d04c5ba72f982bc02d0",
-  "implementation_commits": ["PENDING_RECORDED_IN_FOLLOWUP_COMMIT"],
+  "implementation_commits": ["9570ea9a"],
   "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/shared-reading-completion-20261014/geometry",
   "branch": "codex/du3-geometry-20261014",
   "owned_paths": [
@@ -65,11 +65,29 @@
     "synthetic_vs_real": "13 synthetic builders cover all card-A counterexamples; 4 real originals are measurement oracles only"
   },
   "tests_passed": {
-    "offline_suite": 36,
+    "offline_suite": 47,
     "real_opt_in": 8,
     "layout_hints_regression": 42
   },
   "tests_failed": 0,
+  "independent_review": {
+    "verdict": "ACCEPT_WITH_FIXES",
+    "fixes_applied": [
+      "complete can no longer be True with non-empty incomplete_pages (frame codes added to PARTIAL_CODES + incomplete_pages folded in)",
+      "units on pages absent from the snapshot emit UNREAD_PAGE and forbid complete",
+      "max_units now truly stops processing (only first max_units units bound; rest deferred)",
+      "binding.unit_id validated as non-empty string -> ValueError (was a TypeError crash on malformed id); _diag sorted(key=str) hardened",
+      "MAX_TEXT_BYTES enforced in native_probe span/table builders",
+      "non-mapping fine elements -> FINE_ELEMENT_INVALID diagnostic; duplicate unit ids -> DUPLICATE_UNIT_ID diagnostic",
+      "relocated char re-pins preserve the frontend-supplied range (char_start_supplied/char_end_supplied)",
+      "added regression tests for AMBIGUOUS_BINDING / FRAME_SIZE_MISMATCH / UNIT_LIMIT_EXCEEDED / complete-not-false-complete / unread-page / max_units-stops / invalid unit_id / duplicate ids"
+    ],
+    "residual_known_risks": [
+      "RED-first not corroborable from git (tests+impl landed in one commit); RED receipt is import-level",
+      "source provenance falls back to element kind when binding.source absent",
+      "arbitrary affine/cropbox re-projection not performed (declared frame honored; transform recorded)"
+    ]
+  },
   "not_run": [
     "production integration (no parser/selector consumes this package yet)",
     "real fine-column/fine-table recall benchmark (out of scope; binding reliability != recall)",
@@ -86,8 +104,17 @@
     "default_caps": {"max_units": 10000, "max_pages": 64, "max_fine_elements": 200000, "max_work_units": 1000000},
     "caps_tighten_only": true,
     "real_extraction_caps": {"max_pages_per_sample": 2, "max_words_per_page": 2000, "max_cells_per_page": 2000, "max_text_bytes": 65536, "time_budget_s": 15},
-    "output_hygiene": "no absolute paths, no whole-page repeated full text, no per-page snapshots persisted"
+    "output_hygiene": "no absolute paths, no whole-page repeated full text, no per-page snapshots persisted",
+    "output_volume": "unit_metadata patch is compact (bbox + short word/cell text + provenance only); evidence/c-real-snapshots.json is a few KB of counts/summaries, no full text",
+    "real_elapsed_s_per_sample": "0.2-0.4s (bounded by the 15s budget; well within)"
   },
+  "unresolved_ambiguities": [
+    "char ranges that cannot be strictly aligned after NFC/trim are reported unknown (geometry kept, text untouched) rather than pinned to a guessed offset",
+    "a word/cell whose text occurs multiple times and whose range is invalid stays unknown (not relocated)",
+    "a unit matched by more than one binding is deferred (AMBIGUOUS_BINDING), not arbitrarily assigned",
+    "cropbox / non-zero origin / arbitrary affine transforms: declared frame is honored and a provided transform is recorded (frame_converted), but full affine re-projection is not performed; such frames are kept in their declared frame, never guessed",
+    "explicit transform is recorded but binding coords (already in the declared frame) are not silently shifted"
+  ],
   "raw_preservation": {
     "originals_read_only": true,
     "sha_mtime_size_preserved": "4/4 (see c-real-snapshots.json original_fingerprints)",

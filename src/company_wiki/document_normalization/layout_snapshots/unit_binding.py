@@ -79,6 +79,9 @@ def bind_binding(
     for item in binding.words:
         take_one()
         if not isinstance(item, Mapping):
+            diagnostics.append(
+                {"code": "FINE_ELEMENT_INVALID", "unit_ids": unit_ids, "detail": "word is not a mapping"}
+            )
             continue
         bbox = legal_bbox(item.get("bbox"))
         if bbox is None:
@@ -101,6 +104,8 @@ def bind_binding(
                 "native_index": item.get("native_index"),
                 "char_start": start,
                 "char_end": end,
+                "char_start_supplied": item.get("char_start"),
+                "char_end_supplied": item.get("char_end"),
                 "char_alignment": alignment,
                 **_element_provenance(kind="word", frame=frame, page_no=page_no, binding=binding),
             }
@@ -110,6 +115,9 @@ def bind_binding(
     for item in binding.cells:
         take_one()
         if not isinstance(item, Mapping):
+            diagnostics.append(
+                {"code": "FINE_ELEMENT_INVALID", "unit_ids": unit_ids, "detail": "cell is not a mapping"}
+            )
             continue
         bbox = legal_bbox(item.get("bbox"))
         if bbox is None:
@@ -131,6 +139,8 @@ def bind_binding(
             "native_index": item.get("native_index"),
             "char_start": start,
             "char_end": end,
+            "char_start_supplied": item.get("char_start"),
+            "char_end_supplied": item.get("char_end"),
             "char_alignment": alignment,
             **_element_provenance(kind="cell", frame=frame, page_no=page_no, binding=binding),
         }
@@ -145,6 +155,9 @@ def bind_binding(
     for item in binding.font_runs:
         take_one()
         if not isinstance(item, Mapping):
+            diagnostics.append(
+                {"code": "FINE_ELEMENT_INVALID", "unit_ids": unit_ids, "detail": "font run is not a mapping"}
+            )
             continue
         start = item.get("char_start")
         end = item.get("char_end")
@@ -158,6 +171,8 @@ def bind_binding(
             {
                 "char_start": start if alignment == "exact" else None,
                 "char_end": end if alignment == "exact" else None,
+                "char_start_supplied": start,
+                "char_end_supplied": end,
                 "font_size": item.get("font_size"),
                 "font_weight": item.get("font_weight"),
                 "font": item.get("font"),

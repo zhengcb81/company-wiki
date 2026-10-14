@@ -43,7 +43,7 @@ units，输出 `du-layout-projection/1`：`unit_metadata`（`unit_id→{layout,h
 
 - **A（RED first）**：`python -B -X utf8 -m pytest tests/unit/document_normalization_layout_snapshots -q`
   在实现前 → `ModuleNotFoundError: layout_snapshots`（2 collection errors）。收据：`evidence/a-red-receipt.md`。
-- **A+B（GREEN，离线）**：同命令 → **36 passed, 7 skipped**（real 用例默认 opt-in 跳过）。
+- **A+B（GREEN，离线）**：同命令 → **47 passed, 7 skipped**（real 用例默认 opt-in 跳过）。收据：`evidence/green-receipt.md`。
 - **B（只读消费者回归）**：`pytest tests/unit/document_understanding_layout_hints -q` → **42 passed, 6 skipped**
   （旧 `layout_hints` 无回归，其 real 用例因缺 du2 bindings 跳过）。
 - **C（真实原件 opt-in）**：`CW_DU3_GEOMETRY_REAL=1 pytest tests/unit/document_normalization_layout_snapshots/test_c_real_snapshots.py`
@@ -76,8 +76,20 @@ units，输出 `du-layout-projection/1`：`unit_metadata`（`unit_id→{layout,h
 4. HTML/PPTX/OCR 前端当前不产出 bbox/字/格坐标，本包对它们保持 unknown，未做真实几何断言
    （缺字段不凭空造坐标）。合成用例只锁定"不虚构"行为。
 5. 未在真实 5 万 unit 原件上跑满默认上限；预算上限用合成 large_case 验证 zero/small work 真停。
-6. 坐标 frame 只对显式声明 dict/rect/rotation 做一致性和 transform 记录；未实现任意仿射变换换算
-   （未知 frame 一律 partial、不猜物理尺寸）。
+6. 坐标 frame 只对显式声明 dict/rect/rotation 做一致性和 transform 记录；未实现任意仿射/裁剪框
+   原点的完整换算（未知 frame 一律 partial、不猜物理尺寸）。
+
+## caps / 体积 / 时间 / 未解歧义
+
+- **caps（只收紧）**：units 10000 / pages 64 / 细元素 200000 / work 1000000；真实提取再限
+  每样本 ≤2 页、每页 ≤2000 words / 2000 cells、文本 ≤64 KiB、≤15s。
+- **体积**：输出精简——unit_metadata 只带 bbox＋短 word/cell 文本＋来源，无绝对路径、无整页重复全文、
+  不持久保存每页快照；证据 `c-real-snapshots.json` 仅几 KB 计数/摘要。
+- **时间**：真实样本每份 0.2–0.4s（远低于 15s 上限）。
+- **未解歧义**（保留不猜）：NFC/trim 后无法严格对齐的字符区间→`unknown`（保留真实几何、不动文字）；
+  文本多次出现且区间非法的字/格→`unknown`（不瞎 pin）；被多个 binding 匹配的 unit→`AMBIGUOUS_BINDING` 延迟；
+  裁剪框/非零原点/任意仿射→按声明 frame 处理、显式 transform 记入 `frame_converted` 但不静默平移坐标，
+  完整仿射重投影不做、不猜。
 
 ## ROOT 接线建议（additive，本包不改其他包）
 
@@ -89,11 +101,30 @@ units，输出 `du-layout-projection/1`：`unit_metadata`（`unit_id→{layout,h
 3. `coverage.complete=false` / `unknown_frame_unit_ids` / `NO_FINE_GEOMETRY` 必须原样传给覆盖报告；
    看到 `NO_FINE_GEOMETRY`/`NO_REAL_GEOMETRY` 应触发前端补采细 geometry 或标 partial，不要下游按空格切列。
 
+## 独立审查与修复
+
+用户要求独立 agent 复审。独立审查判定 **ACCEPT_WITH_FIXES**，发现的问题已全部修复并加回归测试
+（离线套件 38→47）：
+
+- **complete 不再假真**：frame 问题码（FRAME_LABEL_UNKNOWN/ROTATION_MISSING 等）入 PARTIAL_CODES，
+  且 `incomplete_pages`/`unbound` 折入 complete；零 binding 的 frame 问题页、未读页都不会报 complete。
+- **未读页显式化**：unit 所在页未被 snapshot 覆盖 → `UNREAD_PAGE` 诊断 + 禁止 complete（"未读页不伪complete"）。
+- **max_units 真停**：只处理前 max_units 个 unit，其余 deferred（与 max_pages/细元素上限一致）。
+- **崩溃修复**：binding.unit_id 非字符串 → `ValueError`（原为 `_diag` 里 `sorted()` 的 TypeError）；`_diag` 用 `key=str` 加固。
+- **MAX_TEXT_BYTES 真执行**（原只声明未执行）：span/table builder 累计字节、超限截断。
+- **诊断补全**：非 mapping 细元素 → `FINE_ELEMENT_INVALID`；重复 unit_id → `DUPLICATE_UNIT_ID`。
+- **保留原字符区间**：`relocated` 重定位后仍保留前端原 `char_start_supplied/char_end_supplied`。
+- 新增回归测试：AMBIGUOUS_BINDING / FRAME_SIZE_MISMATCH / UNIT_LIMIT_EXCEEDED / complete-not-false-complete /
+  unread-page / max_units-stops / 非法 unit_id / 重复 id。
+
+残留已知风险（不阻塞，已记录）：RED-first 无法从 git 佐证（测试+实现同一 commit，RED 收据是 import 级）；
+binding.source 缺失时 provenance 退化为元素类型；任意仿射/裁剪框完整重投影不做（按声明 frame、transform 记录）。
+
 ## 复跑
 
 ```bash
 cd C:/Users/郑曾波/Projects/_harness_worktrees/shared-reading-completion-20261014/geometry
-python -B -X utf8 -m pytest tests/unit/document_normalization_layout_snapshots -q          # A+B 离线 36 passed
+python -B -X utf8 -m pytest tests/unit/document_normalization_layout_snapshots -q          # A+B 离线 47 passed
 CW_DU3_GEOMETRY_REAL=1 python -B -X utf8 -m pytest tests/unit/document_normalization_layout_snapshots/test_c_real_snapshots.py  # C 真实
 python -X utf8 -m ruff check src/company_wiki/document_normalization/layout_snapshots tests/unit/document_normalization_layout_snapshots tests/fixtures/document_normalization_layout_snapshots
 python -B -X utf8 .planning/du3-geometry/evidence/gen_c_evidence.py                        # 真实件证据

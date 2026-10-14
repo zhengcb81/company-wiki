@@ -182,6 +182,46 @@ def unknown_frame_case():
     return snapshot, [unit]
 
 
+def transform_frame_case():
+    """Explicit affine transform on the page: conversion is RECORDED, coords kept.
+
+    The binding bboxes are already in the declared frame, so the projection records
+    that a transform exists (``frame_converted``) but does NOT silently shift them.
+    """
+    unit = _unit("u-tf", 1, "Transformed page body", page_width=595.0, page_height=842.0)
+    binding = _binding("u-tf", (70.0, 120.0, 200.0, 140.0), words=[
+        _word("Transformed", (70.0, 120.0, 160.0, 140.0), native_index=0)
+    ])
+    snapshot = {
+        "schema_version": SNAPSHOT_SCHEMA,
+        "pages": [
+            _page(
+                1, 595.0, 842.0, [binding],
+                coordinate_frame="transformed", rotation=0,
+                transform=[1, 0, 0, 1, 10, 20],
+            )
+        ],
+    }
+    return snapshot, [unit]
+
+
+def cropbox_origin_case():
+    """Non-zero cropbox/origin: bbox coords are relative to the declared frame.
+
+    The declared size is the crop size (not media size); coordinates are kept
+    as-is and in-bounds is judged against the crop frame, never guessed.
+    """
+    unit = _unit("u-crop", 1, "Cropbox origin body", page_width=400.0, page_height=300.0)
+    binding = _binding("u-crop", (10.0, 20.0, 120.0, 60.0), words=[
+        _word("Cropbox", (10.0, 20.0, 80.0, 40.0), native_index=0)
+    ])
+    snapshot = {
+        "schema_version": SNAPSHOT_SCHEMA,
+        "pages": [_page(1, 400.0, 300.0, [binding], coordinate_frame="cropbox", rotation=0)],
+    }
+    return snapshot, [unit]
+
+
 def mixed_fonts_case():
     """One unit with two font sizes/weights bound to disjoint char ranges."""
     text = "BoldHeader and regular body"

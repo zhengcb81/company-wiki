@@ -116,6 +116,70 @@ def test_max_pages_count_budget_stops_extra_pages():
     assert result["coverage"]["bound_unit_count"] == 1  # only the first page binds
 
 
+# ---- fixes from independent review: no false-complete, unit cap really stops ----
+
+
+def test_complete_never_true_when_incomplete_pages_present():
+    # a frame-problem page with zero bindings must still forbid complete
+    snapshot = {
+        "schema_version": synth.SNAPSHOT_SCHEMA,
+        "pages": [
+            {"page": 1, "width": 595.0, "height": 842.0, "coordinate_frame": "mystery", "rotation": 0, "bindings": []}
+        ],
+    }
+    result = project_layout_snapshot(snapshot, [])
+    assert result["coverage"]["incomplete_pages"] == [1]
+    assert result["coverage"]["complete"] is False
+
+
+def test_unread_page_unit_is_reported_not_complete():
+    unit = {"unit_id": "u9", "ordinal": 0, "page": 9, "locator": "loc", "text": "orphan", "kind": "paragraph", "role": "r", "parser": "p", "layout": {}}
+    snapshot = {
+        "schema_version": synth.SNAPSHOT_SCHEMA,
+        "pages": [
+            {"page": 1, "width": 595.0, "height": 842.0, "coordinate_frame": "dict", "rotation": 0, "bindings": []}
+        ],
+    }
+    result = project_layout_snapshot(snapshot, [unit])
+    assert "UNREAD_PAGE" in {d["code"] for d in result["diagnostics"]}
+    assert "u9" in result["coverage"]["unread_page_unit_ids"]
+    assert result["coverage"]["complete"] is False
+
+
+def test_max_units_stops_processing():
+    snapshot, units = synth.large_case(6)
+    result = project_layout_snapshot(snapshot, units, limits={"max_units": 2})
+    assert result["coverage"]["bound_unit_count"] == 2
+    assert "UNIT_LIMIT_EXCEEDED" in {d["code"] for d in result["diagnostics"]}
+    assert result["coverage"]["complete"] is False
+
+
+def test_non_string_binding_unit_id_raises_valueerror_not_typeerror():
+    snapshot = {
+        "schema_version": synth.SNAPSHOT_SCHEMA,
+        "pages": [
+            {
+                "page": 1, "width": 595.0, "height": 842.0, "coordinate_frame": "dict", "rotation": 0,
+                "bindings": [{"unit_id": 123, "bbox": [0.0, 0.0, 10.0, 10.0]}],
+            }
+        ],
+    }
+    with pytest.raises(ValueError):
+        project_layout_snapshot(snapshot, [])
+
+
+def test_duplicate_unit_ids_are_diagnostic():
+    unit = {"unit_id": "u1", "ordinal": 0, "page": 1, "locator": "l", "text": "dup", "kind": "paragraph", "role": "r", "parser": "p", "layout": {}}
+    snapshot = {
+        "schema_version": synth.SNAPSHOT_SCHEMA,
+        "pages": [
+            {"page": 1, "width": 595.0, "height": 842.0, "coordinate_frame": "dict", "rotation": 0, "bindings": []}
+        ],
+    }
+    result = project_layout_snapshot(snapshot, [unit, dict(unit)])
+    assert "DUPLICATE_UNIT_ID" in {d["code"] for d in result["diagnostics"]}
+
+
 def test_input_snapshot_and_units_are_not_mutated():
     snapshot, units = synth.mixed_fonts_case()
     snap_before = copy.deepcopy(snapshot)
