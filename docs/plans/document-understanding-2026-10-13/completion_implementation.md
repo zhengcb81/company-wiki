@@ -1,6 +1,6 @@
 ## ROOT 已接收工程节点／剩余共因 — 2026-10-14
 
-三DU3全部实收并已发布至84abc55e，精确CI38638459783 SUCCESS。后续共同根因工程节点也已集中验收、SOURCE STOP，正在正常提交/推送：212Unit PASS(9.32s)、正式共享生产7E2E PASS(112.57s)、真实None/v1恢复4E2E PASS(133.42s)、15源mypy/全改动Ruff/依赖声明匹配。旧None/v1请求字节与原Ref保持，raw新代按真实job prompt冻结，same/cross数据库复用0额外POST，不重复费用；实际parser责任决定源准入缓存，partial可靠片段不再整份误拒；失败摘要输出额度同lease事务结清0，known/unknown费用保留。
+三DU3全部实收并已发布至84abc55e，精确CI38638459783 SUCCESS。最新工程5a8e895e正常pre-push 5499PASS/24SKIP(410.56s)，精确[CI38648265837](https://github.com/zhengcb81/company-wiki/actions/runs/38648265837) SUCCESS。后续共同根因工程节点也已集中验收、SOURCE STOP，已正常提交/推送37b1a9c4＋5a8e895e：212Unit PASS(9.32s)、正式共享生产7E2E PASS(112.57s)、真实None/v1恢复4E2E PASS(133.42s)、15源mypy/全改动Ruff/依赖声明匹配。旧None/v1请求字节与原Ref保持，raw新代按真实job prompt冻结，same/cross数据库复用0额外POST，不重复费用；实际parser责任决定源准入缓存，partial可靠片段不再整份误拒；失败摘要输出额度同lease事务结清0，known/unknown费用保留。
 
 实际正文语言观察已接入v2，只比较各claim与自己引用的原文；强不同语言保留付费失败原因/终文SHA，不确定或组件缺失只是现needs_review诊断，无人工放行链。fingerprint绑定真实wrapper/decoder/observer代码与检测权重/版本。生产E2E抓到库的相对MODEL_FILE错按CWD查找，已按MODEL_DIR实际加载规则修正，真实权重4,586,720B/available，82相关PASS；历史absolute fake覆盖不足与4FAIL保持。沙箱loopback TCP10013与host0的对照保留，正常host7项绿；不修断言规避环境失败。
 
@@ -8,9 +8,11 @@
 
 本窗口0新付费，母534629tokens/364387µUSD含FX和旧unknown保留，仍$20/200万tokens；默认0.8。原三原文25/25、新三原scope11/12（业务11/11）不等于正式供应商摘要质量或RF分析通过。A/C、真实类型/否定准入/IPO性能、并发2/4、默认切换及母G2/G4/G5/研究循环继续开放。
 
-Next Step：正常发布此节点、核精确CI，再沿同一账本按实际配置跑MiMo/DeepSeek/MiniMax三家摘要独审并恢复；类型共因按§7.6真实证据继续TDD，不能以模块绿宣布全部完成。证据：[本节点汇总](common-root-quality-evidence/source-owned-v2-acceptance.json)、[紧凑冻结收据](common-root-quality-evidence/source-owned-v2-receipts.zip)。以下保留历史失败/冻结记录。
+Next Step：沿同一账本按实际配置跑MiMo/DeepSeek/MiniMax三家摘要独审并恢复；类型共因按§7.6真实证据继续TDD，不能以模块绿宣布全部完成。证据：[本节点汇总](common-root-quality-evidence/source-owned-v2-acceptance.json)、[紧凑冻结收据](common-root-quality-evidence/source-owned-v2-receipts.zip)。以下保留历史失败/冻结记录。
 
-正常pre-push对37b1a9c4发现3个既有cache-precheck失败（5492PASS/24SKIP，410.83s），未推远端。根因是无model work的缓存资料被强行读取prompt；按实际summarize jobs收窄同一绑定器，保留真实model job缺prompt拒绝和旧无generation默认。原3断言不变，新RED5FAIL/32PASS后118相关PASS(34.02s)，混合复用10PASS；已更新当前施工，不跳hooks，正常补交/重推。详见[职责范围收尾](common-root-quality-evidence/prompt-owner-scope-recovery.json)。
+正常pre-push对37b1a9c4发现3个既有cache-precheck失败（5492PASS/24SKIP，410.83s），未推远端。根因是无model work的缓存资料被强行读取prompt；按实际summarize jobs收窄同一绑定器，保留真实model job缺prompt拒绝和旧无generation默认。原3断言不变，新RED5FAIL/32PASS后118相关PASS(34.02s)，混合复用10PASS；修复已随5a8e895e正常补交/重推，全量检查和精确远端CI均绿，未跳hooks。详见[职责范围收尾](common-root-quality-evidence/prompt-owner-scope-recovery.json)。
+
+发布证据：[精确CI与正常推送收据](common-root-quality-evidence/source-owned-v2-publication.json)。只读FORM/发言人路由及IR经营状态设计已纳入[同一紧凑归档](common-root-quality-evidence/source-owned-v2-publication.zip)，仍待真实RED和实施，不冒充已修复。
 
 ## ROOT 当前接收与真实质量整改 — 2026-10-14
 
@@ -246,3 +248,13 @@ ROOT维护一个状态表、一个Next Step；三大节点汇总命令/退出码
 - ROOT test runner使用workspace直属唯一短Temp、子进程TEMP/TMP和短`p` basetemp，finally恢复目录与sentinel/config。沙箱默认Temp拒写、深scratch导致WinError206分别保留，属于harness环境问题；短Temp后87PASS，不改生产代码或测试断言。正式验收还要原件SHA/mtime/大小不变，失效不表示可以丢原件。
 
 以下真实类型诊断取代先前只读设计里的未证实假说：VRSK10-Q的9字符FORM行未进入有限probe，Revenues表格冒号被误识别speaker turn；万润IR的否定及母公司联系/希望合作已在完整m41身体，实际经营predicate得0而被过滤，并非QA closure或budget漏失。两原文/实际units/0LLM探针留证于ROOT type-matrix-root/root-cause-followup，后续按共享FORM证据与经营状态语法TDD，不加公司/产品/英文Revenue黑名单。HKIPO仍需有界phase/page profiling，不能把80秒失败说成已定位具体瓶颈。
+
+
+### 7.7 下一实施窗口的文件归属与RED包（尚未实施）
+
+真实三家摘要及独立审查先完成，ROOT保持同一源版本；随后才开放以下互不重叠的代码窗口。详细设计已定点保存于[FORM/发言人路由实施细则](review/source_form_route_implementation.md)及[经营状态准入实施细则](review/operating_state_admission_implementation.md)，只读18项/32项观察不能当作已运行TDD。
+
+- FORM线负责一次HTML DOM读取时捕获真实可见FORM/DEI载体，走小型内部source-owned record→现有adapter→唯一router；探测仍200units/64000chars，载体先占既有限额。原因引用实际native ID/DOM；declared metadata不冒充observed；parent/child独立。转发kind/role/parent/turn后，真实发言成立才认call，财务表格冒号不是发言人。源码及A/B/C新RED包路径详见实施细则第6节。
+- IR线只改现有shared business predicate及专属新tests/unit/test_reading_operating_states.py：真实经营否定、未商业化、暂停/未获认证、已接洽与仅希望合作分别保留；定义/行政/纯财务总计/泛泛愿望不得借OBJECT×ACTIVITY或legacy OR变成经营事实。32正反例＋12独立反例先RED，再走完整QA/source-role/actor/stage和不抬cap的生产选择集成。已完整m41的QA/closure/budget不重写。
+- ROOT独占narrative_document的transient剔除、normalization/reading/pipeline胶水、版本和因果inventory、共享fixtures和生产E2E；不得两线同时改这些文件。旧0.8/None/v1 wire、Ref及原件保持。只做大节点集中审查、真实原件回放和正常发布，不增加小节点许可。
+- HKIPO先有界phase/page profiling确认真正耗时，不能把80秒超时猜成几何问题或无条件提限。缺真实材料的类型明确NOT_EVALUATED；原回归样本不再称holdout。

@@ -1,6 +1,6 @@
 ## ROOT 已接收工程节点／剩余共因 — 2026-10-14
 
-三DU3全部实收并已发布至84abc55e，精确CI38638459783 SUCCESS。后续共同根因工程节点也已集中验收、SOURCE STOP，正在正常提交/推送：212Unit PASS(9.32s)、正式共享生产7E2E PASS(112.57s)、真实None/v1恢复4E2E PASS(133.42s)、15源mypy/全改动Ruff/依赖声明匹配。旧None/v1请求字节与原Ref保持，raw新代按真实job prompt冻结，same/cross数据库复用0额外POST，不重复费用；实际parser责任决定源准入缓存，partial可靠片段不再整份误拒；失败摘要输出额度同lease事务结清0，known/unknown费用保留。
+三DU3全部实收并已发布至84abc55e，精确CI38638459783 SUCCESS。最新工程5a8e895e正常pre-push 5499PASS/24SKIP(410.56s)，精确[CI38648265837](https://github.com/zhengcb81/company-wiki/actions/runs/38648265837) SUCCESS。后续共同根因工程节点也已集中验收、SOURCE STOP，已正常提交/推送37b1a9c4＋5a8e895e：212Unit PASS(9.32s)、正式共享生产7E2E PASS(112.57s)、真实None/v1恢复4E2E PASS(133.42s)、15源mypy/全改动Ruff/依赖声明匹配。旧None/v1请求字节与原Ref保持，raw新代按真实job prompt冻结，same/cross数据库复用0额外POST，不重复费用；实际parser责任决定源准入缓存，partial可靠片段不再整份误拒；失败摘要输出额度同lease事务结清0，known/unknown费用保留。
 
 实际正文语言观察已接入v2，只比较各claim与自己引用的原文；强不同语言保留付费失败原因/终文SHA，不确定或组件缺失只是现needs_review诊断，无人工放行链。fingerprint绑定真实wrapper/decoder/observer代码与检测权重/版本。生产E2E抓到库的相对MODEL_FILE错按CWD查找，已按MODEL_DIR实际加载规则修正，真实权重4,586,720B/available，82相关PASS；历史absolute fake覆盖不足与4FAIL保持。沙箱loopback TCP10013与host0的对照保留，正常host7项绿；不修断言规避环境失败。
 
@@ -8,9 +8,11 @@
 
 本窗口0新付费，母534629tokens/364387µUSD含FX和旧unknown保留，仍$20/200万tokens；默认0.8。原三原文25/25、新三原scope11/12（业务11/11）不等于正式供应商摘要质量或RF分析通过。A/C、真实类型/否定准入/IPO性能、并发2/4、默认切换及母G2/G4/G5/研究循环继续开放。
 
-Next Step：正常发布此节点、核精确CI，再沿同一账本按实际配置跑MiMo/DeepSeek/MiniMax三家摘要独审并恢复；类型共因按§7.6真实证据继续TDD，不能以模块绿宣布全部完成。证据：[本节点汇总](common-root-quality-evidence/source-owned-v2-acceptance.json)、[紧凑冻结收据](common-root-quality-evidence/source-owned-v2-receipts.zip)。以下保留历史失败/冻结记录。
+Next Step：沿同一账本按实际配置跑MiMo/DeepSeek/MiniMax三家摘要独审并恢复；类型共因按§7.6真实证据继续TDD，不能以模块绿宣布全部完成。证据：[本节点汇总](common-root-quality-evidence/source-owned-v2-acceptance.json)、[紧凑冻结收据](common-root-quality-evidence/source-owned-v2-receipts.zip)。以下保留历史失败/冻结记录。
 
-正常pre-push对37b1a9c4发现3个既有cache-precheck失败（5492PASS/24SKIP，410.83s），未推远端。根因是无model work的缓存资料被强行读取prompt；按实际summarize jobs收窄同一绑定器，保留真实model job缺prompt拒绝和旧无generation默认。原3断言不变，新RED5FAIL/32PASS后118相关PASS(34.02s)，混合复用10PASS；已更新当前施工，不跳hooks，正常补交/重推。详见[职责范围收尾](common-root-quality-evidence/prompt-owner-scope-recovery.json)。
+正常pre-push对37b1a9c4发现3个既有cache-precheck失败（5492PASS/24SKIP，410.83s），未推远端。根因是无model work的缓存资料被强行读取prompt；按实际summarize jobs收窄同一绑定器，保留真实model job缺prompt拒绝和旧无generation默认。原3断言不变，新RED5FAIL/32PASS后118相关PASS(34.02s)，混合复用10PASS；修复已随5a8e895e正常补交/重推，全量检查和精确远端CI均绿，未跳hooks。详见[职责范围收尾](common-root-quality-evidence/prompt-owner-scope-recovery.json)。
+
+发布证据：[精确CI与正常推送收据](common-root-quality-evidence/source-owned-v2-publication.json)。只读FORM/发言人路由及IR经营状态设计已纳入[同一紧凑归档](common-root-quality-evidence/source-owned-v2-publication.zip)，仍待真实RED和实施，不冒充已修复。
 
 ## ROOT 当前接收与真实质量整改 — 2026-10-14
 
@@ -106,7 +108,7 @@ RF main/origin main 已到 aed581ac（源512e85bb精确CI38563752875 success）�
 
 ## Next Step
 
-正常提交/推送当前SOURCE STOP工程节点并核精确CI；随后按实际配置及同一母账运行三家真实摘要、独立质量审查和恢复，再实施§7.6类型/经营状态共因。默认0.8保持，原件/旧gold/费用收据不变。
+工程5a8e895e已正常发布且精确CI SUCCESS；按实际配置及同一母账运行三家真实摘要、独立质量审查和恢复，再实施§7.6类型/经营状态共因。默认0.8保持，原件/旧gold/费用收据不变。
 
 ## DU3 并行交付（已收到，不重发）
 

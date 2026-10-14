@@ -1,0 +1,123 @@
+{
+  "schema_version": "shared-reading-source-owned-v2-publication/1",
+  "observed_at": "2026-10-14T22:36:14.104482+00:00",
+  "status": "PUBLISHED_EXACT_CI_SUCCESS_ENGINEERING_ONLY",
+  "source_head": "5a8e895e38397dd9d529ca669dc64d7bbb6e1804",
+  "normal_push": {
+    "head": "5a8e895e38397dd9d529ca669dc64d7bbb6e1804",
+    "exit_code": 0,
+    "seconds": 419.42428930000096
+  },
+  "pre_push": {
+    "passed": 5499,
+    "skipped": 24,
+    "seconds": 410.56,
+    "bypass": false
+  },
+  "ci": {
+    "observed_at": "2026-10-14T22:35:51.065538+00:00",
+    "repo": "company-wiki",
+    "requested_head": "5a8e895e38397dd9d529ca669dc64d7bbb6e1804",
+    "runs": [
+      {
+        "id": 38648265837,
+        "head_sha": "5a8e895e38397dd9d529ca669dc64d7bbb6e1804",
+        "name": "CI",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38648265837"
+      }
+    ]
+  },
+  "default_selector": "0.8.0",
+  "supplier_quality": "NOT_ACCEPTED_PENDING_THREE_REAL_RUNS_AND_INDEPENDENT_REVIEW",
+  "new_supplier_calls": 0,
+  "next_type_designs": "READ_ONLY_DESIGN_NOT_IMPLEMENTED",
+  "archive": {
+    "file": "source-owned-v2-publication.zip",
+    "bytes": 57974,
+    "sha256": "f4307a1727c6fa1ed59d8a57beb5035c315dcf2860776b427285bb9562693c9c",
+    "members": [
+      {
+        "name": "publication-v2-normal/receipt.json",
+        "bytes": 111,
+        "sha256": "8543853cb5c20095b3e6275cc332cf34c4be08ea36bb4b1ff85af61af741d916"
+      },
+      {
+        "name": "publication-v2-normal/stdout.log",
+        "bytes": 265,
+        "sha256": "bf58e2f99a9c2dfbd60cd34c45b95b3e51ce3256ce00d6e9c2024ab51583ab6a"
+      },
+      {
+        "name": "publication-v2-normal/stderr.log",
+        "bytes": 91,
+        "sha256": "16354e6a18b8d4b0e769c2f42fce89acbe0738889a17f4fd4d72d141a2a40f20"
+      },
+      {
+        "name": "publication-v2-normal/jobs-01.json",
+        "bytes": 4222,
+        "sha256": "d3a1a3df843cce11d8f1c6a60328da6e763c381546df0f56d6235196afc48146"
+      },
+      {
+        "name": "publication-v2-normal/ci-06.json",
+        "bytes": 444,
+        "sha256": "fefab4365f57e06b728c2c05ea483b7c48dc016d6dd38290cf960a7261241e87"
+      },
+      {
+        "name": "live/preflight-v2-20261014.json",
+        "bytes": 646,
+        "sha256": "f362bbdfeca9197a5cfb86e53337c64bce35c313d8c7cdc22d1c657c3ce59130"
+      },
+      {
+        "name": "model-projection-root/output-language/integration-followup/type-routing-design/adapter-identity-observation.json",
+        "bytes": 2157,
+        "sha256": "2c0e7e81acd5635918a87fa4fd7244c8a24cfb4f3b084dffce81c54faefb747e"
+      },
+      {
+        "name": "model-projection-root/output-language/integration-followup/type-routing-design/adapter_probe.py",
+        "bytes": 2303,
+        "sha256": "495339f1f5ca5fa05f0a6b0834422282be1767b27da2ad15c87ff36cb4da647c"
+      },
+      {
+        "name": "model-projection-root/output-language/integration-followup/type-routing-design/handoff.json",
+        "bytes": 1209,
+        "sha256": "99548431415996ccacdaf346b044a2e9a0877f724c023622078984d63a9c7358"
+      },
+      {
+        "name": "model-projection-root/output-language/integration-followup/type-routing-design/implementation-design.md",
+        "bytes": 18674,
+        "sha256": "0d532f55b74f225ecab7e97adc78729f1343c451604cd4b7e11fe4de50da7619"
+      },
+      {
+        "name": "model-projection-root/output-language/integration-followup/type-routing-design/observations.json",
+        "bytes": 26787,
+        "sha256": "0b85d65082116f19cf0bab6df2fd70deaac492a7bc151d9fd8e16db7d8b16f6e"
+      },
+      {
+        "name": "model-projection-root/output-language/integration-followup/type-routing-design/probe.py",
+        "bytes": 10026,
+        "sha256": "0de10d4ffa83ce93b64919aea9c95475ec3e297de7672af12b511b710d7c4a0d"
+      },
+      {
+        "name": "model-projection-root/output-language/integration-followup/type-routing-design/protected.json",
+        "bytes": 69554,
+        "sha256": "43018827fe511a90ddb242f3389352aa5dec10699ecda7a4878b40229c1d7717"
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/ir-denial-design/baseline-observations.json",
+        "bytes": 20545,
+        "sha256": "7e93f6c42cab54eca95965c8f601a5a2cbef400b5c8f5c9fecef3208c0817519"
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/ir-denial-design/baseline_probe.py",
+        "bytes": 7625,
+        "sha256": "6939d7d049c2b3894b6b5ace16705f72f80fa4220199db19665cf885c520a652"
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/ir-denial-design/implementation-brief.md",
+        "bytes": 19376,
+        "sha256": "6d81084eaf1d54882c8321198651b6707026a0d92aea34814f50227ca9b31adb"
+      }
+    ]
+  }
+}

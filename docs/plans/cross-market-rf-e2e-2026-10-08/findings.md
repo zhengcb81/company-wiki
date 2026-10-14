@@ -1,6 +1,6 @@
 ## ROOT共享阅读当前进展 — 2026-10-14 DU3实收工程发布
 
-三DU3已发布，CWP84abc55e精确CI SUCCESS；新共同根因工程已212Unit/7生产E2E/4旧恢复E2E与跨仓离线PASS、SOURCE STOP，正常发布中。原件/配置/Temp恢复，失败输出额度结清但费用不退，None/v1旧bytes与Ref保持；实际语言/资源因果、partial和rawjobprompt已接线。母534629tokens/364387µUSD含FX/unknown，本窗口0新付费，默认0.8；真实供应商质量、类型共因、并发/默认切换/母G2/G4/G5/公司循环仍开放。详见 ../document-understanding-2026-10-13/task_plan.md。
+三DU3及共同根因工程已正常推CWP master 5a8e895e，pre-push5499PASS/24SKIP、精确CI38648265837 SUCCESS；212Unit/7生产E2E/4旧恢复E2E与跨仓离线PASS。原件/配置/Temp恢复，失败输出额度结清但费用不退，None/v1旧bytes与Ref保持；实际语言/资源因果、partial和实际model job prompt已接线。母534629tokens/364387µUSD含FX/unknown，本节点0新付费，默认0.8；真实供应商质量、类型共因、并发/默认切换/母G2/G4/G5/公司循环仍开放。详见 ../document-understanding-2026-10-13/task_plan.md。
 
 ## ROOT当前执行归总 — 2026-10-13 共享阅读升级
 
