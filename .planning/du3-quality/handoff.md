@@ -39,7 +39,7 @@ never semantic coverage), and fresh holdout gold for three new companies.
 | node | command | result |
 |---|---|---|
 | A (TDD RED) | `pytest tests/test_final_material.py tests/test_paired_comparison.py tests/test_fresh_split.py` | RED first (missing entries + gaps), then GREEN |
-| B (impl/eng) | `pytest tools/document_understanding_benchmark/tests` | **213 passed, 7 skipped (real-data opt-in), exit 0**, ~6s |
+| B (impl/eng) | `pytest tools/document_understanding_benchmark/tests` | **217 passed, 7 skipped (real-data opt-in), exit 0**, ~3s |
 | B (CLI) | `python -m tools.document_understanding_benchmark --mode offline` | 5 fixtures, **56/56 applicable mutations detected**, exit 3 (honest PARTIAL), sentinel restored, tmp cleaned |
 | C (real baseline) | `python .planning/du3-quality/_baseline_c.py` | 3 fresh originals replayed; **quote replay 9/9, 7/7, 7/7**; raw unchanged; semantics NOT_EVALUATED |
 
@@ -77,6 +77,14 @@ header / unit / risk qualifiers stay `required_business`.
 - `semantics.entailment` is `NOT_EVALUATED` until ROOT runs the independent G2/G4/G5 review.
 - Fresh-gold critical recall is low (0.5/0.0/0.333) on the baseline — re-measure after production
   selector wiring.
+
+## Independent review & fixes
+
+An independent review subagent scored the first delivery **ACCEPT-WITH-FIXES** and named 12 gaps. All HIGH and MED gaps are fixed and re-verified (the two HIGH scenarios were reproduced and confirmed no longer reachable):
+
+- **No fake improvement on a shrunken denominator** (HIGH): `compare_runs` now freezes *both* the declared and the effective gold denominator and requires the declared count to equal the frozen suite's gold facts → `INCOMPARABLE` otherwise; a fact moved `FAIL→NOT_EVALUATED` is surfaced (`moved_to_not_evaluated` / `weakened_gold`) and forces `FAIL`.
+- **No summary-quality PASS without a real model** (HIGH): `evaluate._overall` caps at `PARTIAL` when `semantics.entailment` is `NOT_EVALUATED` and there is selected evidence/claims; `compare_runs` caps at `PARTIAL` when semantics is unmeasured or gold is unverified. A pure financial quarter (no evidence, no claims) still legitimately `PASS`es.
+- Frozen-suite gold denominator enforced as `==`; unattested `gold_digest` caps at `PARTIAL`; company-reuse guard cross-checks the contamination list; coverage-matrix real rule reworded **and** enforced; `hk_quarterly` + `us_interim` shapes added; ANTA pure P&L de-forced to `correctness_if_emitted`; `originals.groups` closure reported as a diagnostic.
 
 ## Resources / restoration
 

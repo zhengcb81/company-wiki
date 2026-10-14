@@ -7,12 +7,12 @@
   "scope": "holdout",
   "language": "zh",
   "support_set_frozen_before_output": true,
-  "support_set_digest": "a5745bc34b834493fade9c529a5aeb357c2fe184dec75a8fa9dce5c99847fb7f",
+  "support_set_digest": "b309ee4b1706d341a28534e16a2ae375647daf1efd938efc434b9a1ed2958b4a",
   "expected_route_families": [
     "annual",
     "hk_annual"
   ],
-  "notes": "FRESH (2026-10-14). 安踏體育 二零二五年年報（繁体，港股）。公司与原件在本次任务前未出现在任何 gold、findings、规则或调参记录中；support set 在读取任何新输出前冻结。表内数字列为 [本年, 上年, 变动]，单位人民币百万元，股東應佔溢利受Amer Sports上市/配售一次性利得影响，附注已声明比较口径。",
+  "notes": "FRESH (2026-10-14). 安踏體育 二零二五年年報（繁体，港股）。公司与原件在本次任务前未出现在任何 gold、findings、规则或调参记录中；support set 在读取任何新输出前冻结。表内数字列为 [本年, 上年, 变动]，单位人民币百万元，股東應佔溢利受Amer Sports上市/配售一次性利得影响，附注已声明比较口径。 分级规则：一般损益/财务数值（经营溢利、毛利率、股東應佔溢利、收入）标 correctness_if_emitted，不强制摘要但若输出须核验方向/单位/期间；经营量（存貨周轉日數）、主体（Amer Sports）、品牌组合与风险/口径限定保留 required_business。",
   "facts": [
     {
       "id": "anta-amer-largest-shareholder",
@@ -89,7 +89,8 @@
       ],
       "reason": "經營溢利本年19,091、上年16,595（人民币百万元），同比**上升**约15%。单位是百万元不是万元，方向是升。",
       "fact_scope": "narrative",
-      "target_kind": "required_business"
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "一般财务/损益数值可由财务API替代，不强制进入摘要；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "anta-gross-margin-decline",
@@ -115,7 +116,8 @@
       ],
       "reason": "毛利率本年62.0、上年62.2，**下降**0.2个百分点。62.0是本年、62.2是上年，不得互换或称上升。",
       "fact_scope": "narrative",
-      "target_kind": "required_business"
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "一般财务/损益数值可由财务API替代，不强制进入摘要；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "anta-shareholders-profit-decline",
@@ -140,7 +142,8 @@
       ],
       "reason": "股東應佔溢利本年13,588、上年15,596（百万元），**下降**。上年含Amer Sports上市/配售一次性利得，附注已声明比较口径，不得据此称增长。",
       "fact_scope": "narrative",
-      "target_kind": "required_business"
+      "target_kind": "correctness_if_emitted",
+      "classification_reason": "一般财务/损益数值可由财务API替代，不强制进入摘要；若摘要输出仍必须核验方向、单位、期间与出处。"
     },
     {
       "id": "anta-inventory-days-up",

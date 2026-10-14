@@ -406,6 +406,7 @@ def observe_final_material(
     semantic_units: list[dict[str, Any]] = []
     shared_aliases: dict[str, int] = {}
     cross_scope_groups: dict[str, list[str]] = {}
+    closure_repackaged: dict[str, dict[str, list[str]]] = {}
     for row in group_rows:
         group_alias = _require_text(row.get("id"), "material evidence group id")
         members = [
@@ -436,6 +437,19 @@ def observe_final_material(
         # exhibit, creates one false "scope" out of two different ones.
         if len(scopes) > 1:
             cross_scope_groups[group_alias] = sorted(scopes)
+        # If the originals declare a source closure for this group, note when the
+        # material re-packages it into a different member set. Reported as a
+        # diagnostic (not a hard failure): the scope-span check above is the
+        # authoritative cross-subject guard, and a caller may legitimately
+        # re-slice a closure while staying inside one subject.
+        if group_alias in source.groups:
+            declared = set(source.groups[group_alias])
+            actual = set(members)
+            if declared != actual:
+                closure_repackaged[group_alias] = {
+                    "declared": sorted(declared),
+                    "material": sorted(actual),
+                }
         semantic_units.append(
             {
                 "semantic_id": group_alias,
@@ -471,6 +485,7 @@ def observe_final_material(
     )
     coverage["duplicate_body_alias_ids"] = source.body_duplicates()
     coverage["duplicate_material_alias_ids"] = sorted(set(duplicate_alias_ids))
+    coverage["closure_repackaged"] = closure_repackaged
     coverage["unread_is_not_absence"] = True
 
     observed = validate_observed(

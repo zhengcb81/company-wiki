@@ -81,9 +81,11 @@ REQUIRED_SHAPES = {
     "a_share_quarterly",
     "hk_annual",
     "hk_interim",
+    "hk_quarterly",
     "us_10k",
     "us_10q",
     "us_20f",
+    "us_interim",
     "ipo_prospectus",
     "us_s1_f1",
     "equity_offering",
@@ -249,20 +251,60 @@ def test_fresh_gold_binds_to_a_real_original_sha():
 
 
 def test_new_companies_do_not_reuse_a_company_already_in_the_benchmark():
-    """Fresh means a company, not just a new file for a known company."""
+    """Fresh means a company, not just a new file for a known company.
 
-    from tools.document_understanding_benchmark.contamination import fresh_sample_ids
+    The known set is taken from the contamination list (which names the company
+    of every previously inspected sample), not from the gold records: only the
+    fresh gold carries a ``company`` field, so building the known set from gold
+    would silently yield ``{None}`` and let any company through.
+    """
 
-    records = {record["sample_id"]: record for record in load_gold_dir()}
+    from tools.document_understanding_benchmark.contamination import (
+        CONTAMINATION,
+        contamination_by_id,
+        fresh_sample_ids,
+    )
+
+    fresh = fresh_sample_ids()
     known = {
-        record.get("company")
-        for sample_id, record in records.items()
-        if sample_id not in fresh_sample_ids()
+        row["company"]
+        for row in CONTAMINATION["samples"]
+        if row["status"] == "contaminated" and row.get("company")
     }
-    for sample_id in fresh_sample_ids():
+    assert known, "contamination list must name the companies already used"
+    records = {record["sample_id"]: record for record in load_gold_dir()}
+    for sample_id in fresh:
         record = records.get(sample_id)
         if record is None:
             continue
-        assert record.get("company") not in known, (
-            f"{sample_id} reuses {record.get('company')}, which the benchmark already used"
+        company = record.get("company") or contamination_by_id()[sample_id].get("company")
+        assert company not in known, (
+            f"{sample_id} reuses {company}, which the benchmark already used"
         )
+
+
+def test_every_real_coverage_row_names_a_known_real_sample():
+    """A 'real' coverage row must cite samples the project actually holds.
+
+    The matrix's rule is "real => a named sample on the contamination list with a
+    real local original". Enforced here so a row cannot claim real coverage from
+    an invented sample id; carrying gold facts is a separate axis.
+    """
+
+    from tools.document_understanding_benchmark.contamination import (
+        contraction_covered_sample_ids,
+    )
+    from tools.document_understanding_benchmark.coverage_matrix import (
+        DOCUMENT_COVERAGE,
+        REAL,
+    )
+
+    known = contraction_covered_sample_ids()
+    offenders: list[str] = []
+    for row in DOCUMENT_COVERAGE["rows"]:
+        if row["coverage"] != REAL:
+            continue
+        for sample_id in row["sample_ids"]:
+            if sample_id not in known:
+                offenders.append(f"{row['shape']}->{sample_id}")
+    assert not offenders, f"real coverage cites samples not on the contamination list: {offenders}"

@@ -60,7 +60,14 @@ def _overall(checks: list[dict[str, Any]], metrics: Mapping[str, Any]) -> str:
         return PARTIAL
     if metrics.get("semantic_unit_count") and statuses.get("context.semantic_units") == NOT_EVALUATED:
         return PARTIAL
-    if metrics.get("claim_count") and statuses.get("semantics.entailment") == NOT_EVALUATED:
+    # Without an independent review the summary's fidelity is unverified, and
+    # regex/numeric agreement is not entailment. A run that carried real selected
+    # evidence or emitted claims must not report an unqualified summary-quality
+    # PASS. A run with no evidence and no claims (a pure financial quarter) has
+    # nothing to verify and may still PASS.
+    if statuses.get("semantics.entailment") == NOT_EVALUATED and (
+        metrics.get("claim_count") or metrics.get("selected_span_count")
+    ):
         return PARTIAL
     return PASS
 

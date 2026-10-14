@@ -53,10 +53,11 @@ def _row(
 DOCUMENT_COVERAGE = {
     "schema_version": COVERAGE_SCHEMA_VERSION,
     "note": (
-        "real = a named gold sample with a bound real original. synthetic = a "
-        "fixture that exercises the shape's logic but is not a real document. "
-        "missing = no sample at all; the gap is named. schema validity is never "
-        "counted as semantic coverage."
+        "real = a named sample on the contamination list with a real local original "
+        "(whether it also carries gold facts is a separate axis, so a real row is not "
+        "claimed gold-backed). synthetic = a fixture that exercises the shape's logic "
+        "but is not a real document. missing = no sample at all; the gap is named. "
+        "schema validity is never counted as semantic coverage."
     ),
     "rows": [
         # --- A share -------------------------------------------------------
@@ -79,6 +80,9 @@ DOCUMENT_COVERAGE = {
              note="含繁体、双语与币种口径差异"),
         _row("hk_interim", "港股中期报告", REAL,
              sample_ids=("hk-interim",), evidence=_REAL_EVIDENCE),
+        _row("hk_quarterly", "港股季度报告", MISSING,
+             gap="香港主板一般不强制季度披露，本地无真实季度报告原件；"
+                 "现有A股季报不能替代港股季报的披露口径。"),
         # --- US share ------------------------------------------------------
         _row("us_10k", "美国 10-K 年报", REAL,
              sample_ids=("us-10k", "holdout-us-mongodb-10k",
@@ -87,6 +91,9 @@ DOCUMENT_COVERAGE = {
              note="真实 HTML 经既有 normalize_document 前端可读"),
         _row("us_10q", "美国 10-Q 季报", REAL,
              sample_ids=("us-10q",), evidence=_REAL_EVIDENCE),
+        _row("us_interim", "美国半年度/中期业绩（6-K）", MISSING,
+             gap="美国本土公司无半年报（10-Q即中期）；外国发行人半年业绩走6-K容器，"
+                 "本地无真实6-K原件（同 sec_8k_6k_exhibit 的 REQ-3 缺口）。"),
         _row("us_20f", "外国私人发行人 20-F", REAL,
              sample_ids=("us-20f",), evidence=_REAL_EVIDENCE),
         # --- offerings -----------------------------------------------------

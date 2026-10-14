@@ -32,18 +32,18 @@ def _evaluation(
     denominator: int = 8,
     passed: int | None = None,
     source_sha256: str = SHA,
-    gold_digest: str = "a" * 64,
+    gold_digest: str | None = "a" * 64,
+    reviewed: bool = False,
     checks: list[dict] | None = None,
     not_evaluated: list[dict] | None = None,
     sample_id: str = "s1",
 ) -> dict:
     if passed is None:
         passed = int(round((recall or 0.0) * denominator))
-    return {
+    payload = {
         "schema_version": "du-evaluation/1",
         "sample_id": sample_id,
         "source_sha256": source_sha256,
-        "gold_digest": gold_digest,
         "scope": "holdout",
         "status": status,
         "checks": checks if checks is not None else [],
@@ -57,9 +57,12 @@ def _evaluation(
         "dimensions": {},
         "not_evaluated": not_evaluated or [],
         "spot_read_list": [],
-        "review": {"supplied": False, "claims": 0},
+        "review": {"supplied": reviewed, "claims": 0},
         "execution": {},
     }
+    if gold_digest is not None:
+        payload["gold_digest"] = gold_digest
+    return payload
 
 
 def _suite(
@@ -112,10 +115,62 @@ def test_a_real_improvement_on_the_same_denominator_is_reported_as_such():
         frozen_suite=_suite(),
     )
     row = result["samples"][0]
-    assert result["status"] == "PASS"
+    # The improvement is real and comparable, but with no independent review the
+    # summary's fidelity is unverified, so this is PARTIAL and never a clean
+    # summary-quality PASS (the card: no real model -> no fidelity PASS).
+    assert result["status"] == "PARTIAL"
     assert row["comparable"] is True
     assert row["delta"]["critical_fact_recall"] == pytest.approx(0.75)
     assert row["delta"]["denominator"] == 0
+    assert "dimension:semantics.entailment" in row["unmeasured"]
+
+
+def test_a_reviewed_improvement_can_reach_pass():
+    """With an independent review of the semantics, a real improvement can PASS."""
+
+    reviewed = _evaluation(status="PASS", recall=1.0, denominator=8, passed=8,
+                           reviewed=True)
+    result = compare_runs(
+        {"runs": [_evaluation(status="FAIL", recall=0.25, denominator=8, passed=2,
+                              reviewed=True)]},
+        {"runs": [reviewed]},
+        frozen_suite=_suite(),
+    )
+    assert result["status"] == "PASS"
+    assert result["samples"][0]["outcome"] == "PASS"
+
+
+def test_an_attested_gold_is_required_for_a_clean_pass():
+    """A run that does not attest its gold cannot earn a clean PASS."""
+
+    result = compare_runs(
+        {"runs": [_evaluation(status="FAIL", recall=0.25, denominator=8, passed=2,
+                              reviewed=True)]},
+        {"runs": [_evaluation(status="PASS", recall=1.0, denominator=8, passed=8,
+                              reviewed=True, gold_digest=None)]},
+        frozen_suite=_suite(),
+    )
+    assert result["status"] == "PARTIAL"
+    assert result["samples"][0]["unverified_gold"] == ["candidate"]
+
+
+def test_a_fact_moved_to_not_evaluated_is_never_an_improvement():
+    """Hiding an evaluated gap by relabelling it NOT_EVALUATED is a defect."""
+
+    baseline = _evaluation(
+        status="FAIL", recall=0.5, denominator=8, passed=4, reviewed=True,
+        checks=[{"check_id": "recall.f1", "status": "FAIL"}],
+    )
+    candidate = _evaluation(
+        status="PASS", recall=1.0, denominator=6, passed=6, reviewed=True,
+        not_evaluated=[{"check_id": "recall.f1", "status": "NOT_EVALUATED"}],
+    )
+    result = compare_runs({"runs": [baseline]}, {"runs": [candidate]},
+                          frozen_suite=_suite())
+    row = result["samples"][0]
+    assert row["moved_to_not_evaluated"] == ["recall.f1"]
+    assert row["weakened_gold"] is True
+    assert result["status"] in {"INCOMPARABLE", "FAIL"}
 
 
 # ---------------------------------------------------------------------------

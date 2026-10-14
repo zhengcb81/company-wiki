@@ -208,7 +208,20 @@ def test_dropped_unit_is_a_quantity_provenance_failure():
 
 
 def test_every_card_named_risk_has_a_wired_check():
-    """The card's §3 risk register maps to a real check id, not just prose."""
+    """The card's §3 risk register maps to a real check id, not just prose.
+
+    This is a *wiring* assertion that the expected dimensions are present in an
+    actual ``evaluate``/``compare_runs`` result. Each named risk additionally has
+    an executable behaviour counterexample elsewhere in this package:
+
+      negation / stage / period / unit / currency / magnitude  -> this file
+      question + editorial as management fact                  -> this file
+      cross-subject / parent-source, shared body, bad alias,
+        unread-as-no_value                                     -> test_final_material
+      shrunk denominator / inflated budget                     -> test_paired_comparison
+
+    So a risk cannot disappear from the report without a behaviour test failing.
+    """
 
     from tools.document_understanding_benchmark.evaluate import evaluate
 

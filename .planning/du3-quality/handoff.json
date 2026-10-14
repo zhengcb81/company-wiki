@@ -14,6 +14,7 @@
       "signature": "observe_final_material(material, originals, *, sample_id, execution, limits=None) -> dict",
       "wire": "returns du-observed/1; additive coverage diagnostics lifted to top level",
       "module": "tools/document_understanding_benchmark/final_material.py",
+      "additive_extension": "keyword-only `limits` beyond the frozen DU3/1 signature is additive and optional (frozen call sites work unchanged); it only lowers assembly bounds and refuses rather than truncating on breach.",
       "rules": [
         "evidence rows / group aliases are the material's own; each resolved to a verified original unit",
         "text/locator/role come from the original, never from the envelope or gold",
@@ -39,7 +40,8 @@
     "A_tdd_red": {
       "command": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests/test_final_material.py tools/document_understanding_benchmark/tests/test_paired_comparison.py tools/document_understanding_benchmark/tests/test_fresh_split.py -q",
       "result": "RED first (ImportError on observe_final_material/compare_runs + fresh-split gaps), then GREEN after implementation",
-      "counterexamples": "38 tests across the three named modules: fabrication/bad-alias/cross-subject/shared-body/unread-as-absence/budget/denominator/INCOMPARABLE, contamination list, coverage matrix, fresh-gold freeze+digest"
+      "red_first_note": "RED-first is attested by this ledger: the RED run was executed before the implementation commit. The tests and implementation landed in one commit (44cbd62d), so RED-first is not reconstructible from git history alone.",
+      "counterexamples": "41 tests across the three named modules (plus test_risk_checks): fabrication/bad-alias/cross-subject/shared-body/unread-as-absence/budget/denominator/INCOMPARABLE, contamination list, coverage matrix, fresh-gold freeze+digest, currency/editorial/negation/stage/period/unit"
     },
     "B_implementation_engineering": {
       "command": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q",
@@ -62,8 +64,24 @@
       "note": "measured gaps are the deliverable (baseline selector under-carries business facts), not a broken benchmark; production summary not wired by this card"
     }
   },
-  "tests_passed": 213,
+  "tests_passed": 217,
   "tests_failed": 0,
+  "independent_review": {
+    "verdict_after_fixes": "ACCEPT",
+    "reviewer_finding": "independent subagent verdict ACCEPT-WITH-FIXES on the first delivery",
+    "high_gaps_fixed": [
+      "compare_runs now freezes BOTH declared and effective gold denominator and requires declared == frozen suite gold facts (INCOMPARABLE otherwise); a fact moved FAIL->NOT_EVALUATED is surfaced (moved_to_not_evaluated/weakened_gold) and forces FAIL, so a shrunken denominator can never read as PASS",
+      "no summary-quality PASS without a real model: evaluate._overall caps at PARTIAL when semantics.entailment is NOT_EVALUATED and there is selected evidence/claims; compare_runs._sample_outcome caps at PARTIAL when semantics is unmeasured or gold is unverified (reconciled with its docstring)"
+    ],
+    "med_gaps_fixed": [
+      "frozen-suite gold denominator enforced as == (not just <=)",
+      "unattested gold_digest caps the outcome at PARTIAL (unverified_gold)",
+      "company-reuse guard now cross-checks CONTAMINATION company names (was toothless)",
+      "coverage-matrix real rule reworded (real = contamination-listed sample with bound original, gold a separate axis) and enforced by test_every_real_coverage_row_names_a_known_real_sample",
+      "added hk_quarterly and us_interim (US 6-K half-year) shapes, both explicitly missing with named gaps; REQUIRED_SHAPES now the card's set"
+    ],
+    "low_gaps_addressed": "ANTA pure P&L de-forced to correctness_if_emitted (consistent with SMIC); originals.groups closure now reported as a diagnostic; meta risk test documented as a wiring check with behaviours in sibling tests; the additive `limits` extension and RED-first attestation recorded here."
+  },
   "not_run": [
     "real_data marked tests (7 skipped by default; run with DU_BENCH_ALLOW_REAL_DATA=1 and local bindings)",
     "semantic entailment (NOT_EVALUATED: no real model called anywhere in this card)"

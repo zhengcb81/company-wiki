@@ -245,31 +245,42 @@ def _compare_sample(
                 f"candidate source {candidate_sha} is not the frozen suite source {suite_sha}"
             )
 
-        baseline_denominator = _metrics(baseline).get(
-            "critical_fact_recall_denominator_declared"
-        )
-        if baseline_denominator is None:
-            baseline_denominator = _metrics(baseline).get("critical_fact_recall_denominator")
-        candidate_denominator = _metrics(candidate).get(
-            "critical_fact_recall_denominator_declared"
-        )
-        if candidate_denominator is None:
-            candidate_denominator = _metrics(candidate).get("critical_fact_recall_denominator")
-        if baseline_denominator != candidate_denominator:
+        # The gold denominator is FROZEN. Both the *declared* count and the
+        # *effective* evaluable count must match across the two runs and equal the
+        # frozen suite's gold facts. Moving a fact out of the denominator (a FAIL
+        # relabelled NOT_EVALUATED, or coverage quietly dropped) is the exact
+        # "shrink the denominator to fake an improvement" abuse, so it is never
+        # scored as a quality change.
+        def _denominators(run: Mapping[str, Any]) -> tuple[Any, Any]:
+            m = _metrics(run)
+            declared = m.get("critical_fact_recall_denominator_declared")
+            if declared is None:
+                declared = m.get("critical_fact_recall_denominator")
+            effective = m.get("critical_fact_recall_denominator")
+            return declared, effective
+
+        base_declared, base_effective = _denominators(baseline)
+        cand_declared, cand_effective = _denominators(candidate)
+        if base_declared != cand_declared:
+            reasons.append(
+                f"declared gold denominator changed: {base_declared} -> {cand_declared}; "
+                "a changed denominator is not a quality change"
+            )
+        if base_effective != cand_effective:
             direction = (
-                "shrunk" if (candidate_denominator or 0) < (baseline_denominator or 0)
-                else "grew"
+                "shrunk" if (cand_effective or 0) < (base_effective or 0) else "grew"
             )
             reasons.append(
-                f"gold denominator {direction}: {baseline_denominator} -> "
-                f"{candidate_denominator}; a changed denominator is not a quality change"
+                f"effective gold denominator {direction}: {base_effective} -> "
+                f"{cand_effective}; facts left the evaluable denominator"
             )
-        if type(suite_facts) is int and type(candidate_denominator) is int:
-            if candidate_denominator > suite_facts:
-                reasons.append(
-                    f"candidate denominator {candidate_denominator} exceeds the frozen "
-                    f"suite's {suite_facts} declared facts"
-                )
+        if type(suite_facts) is int:
+            for label, declared in (("baseline", base_declared), ("candidate", cand_declared)):
+                if type(declared) is int and declared != suite_facts:
+                    reasons.append(
+                        f"{label} was measured on {declared} declared facts, not the frozen "
+                        f"suite's {suite_facts} gold facts"
+                    )
 
     if baseline_scope != candidate_scope:
         reasons.append(
@@ -315,60 +326,63 @@ def _compare_sample(
         "unverified_gold": list(row_unverified_gold),
         "thresholds": dict(gold.get("thresholds") or {}),
     }
+
+    # Diagnostics are computed even for an incomparable row: a reader must see
+    # that a fact was moved to NOT_EVALUATED, that gold is unverified, or that
+    # checks regressed, even when the pair is not scored.
+    if baseline is not None and candidate is not None:
+        baseline_metrics = _metrics(baseline)
+        candidate_metrics = _metrics(candidate)
+        baseline_recall = baseline_metrics.get("critical_fact_recall")
+        candidate_recall = candidate_metrics.get("critical_fact_recall")
+        row["delta"] = {
+            "critical_fact_recall": (
+                None if baseline_recall is None or candidate_recall is None
+                else float(candidate_recall) - float(baseline_recall)
+            ),
+            "critical_fact_pass_count": _pass_count(candidate) - _pass_count(baseline),
+            "denominator": (
+                (candidate_metrics.get("critical_fact_recall_denominator") or 0)
+                - (baseline_metrics.get("critical_fact_recall_denominator") or 0)
+            ),
+            "selected_span_count": (
+                (candidate_metrics.get("selected_span_count") or 0)
+                - (baseline_metrics.get("selected_span_count") or 0)
+            ),
+        }
+
+        baseline_checks = _check_statuses(baseline)
+        candidate_checks = _check_statuses(candidate)
+        candidate_ne = _not_evaluated_ids(candidate)
+        baseline_ne = _not_evaluated_ids(baseline)
+        moved = sorted(
+            check_id for check_id in candidate_ne - baseline_ne
+            if baseline_checks.get(check_id) in {"FAIL", "PARTIAL"}
+        )
+        row["moved_to_not_evaluated"] = moved
+        row["weakened_gold"] = bool(moved)
+        row["unmeasured"] = _unmeasured(candidate)
+        row["newly_adverse_checks"] = sorted(
+            check_id for check_id, status in candidate_checks.items()
+            if _STATUS_RANK.get(status, 0) > _STATUS_RANK.get(baseline_checks.get(check_id, "NOT_EVALUATED"), 0)
+        )
+
+        thresholds = row["thresholds"]
+        recall_threshold = thresholds.get("critical_fact_recall")
+        if recall_threshold is not None and candidate_recall is not None:
+            if float(candidate_recall) < float(recall_threshold):
+                row["notes"].append(
+                    f"critical_fact_recall {float(candidate_recall):.3f} is below the frozen "
+                    f"threshold {recall_threshold}"
+                )
+        if candidate.get("status") == "FAIL" and baseline.get("status") == "FAIL":
+            row["notes"].append("both sides FAIL; an unchanged failure is not a pass")
+
     if not comparable:
+        row["outcome"] = INCOMPARABLE
         return row
 
     assert baseline is not None and candidate is not None
-    baseline_metrics = _metrics(baseline)
-    candidate_metrics = _metrics(candidate)
-    baseline_recall = baseline_metrics.get("critical_fact_recall")
-    candidate_recall = candidate_metrics.get("critical_fact_recall")
-    row["delta"] = {
-        "critical_fact_recall": (
-            None if baseline_recall is None or candidate_recall is None
-            else float(candidate_recall) - float(baseline_recall)
-        ),
-        "critical_fact_pass_count": _pass_count(candidate) - _pass_count(baseline),
-        "denominator": (
-            (candidate_metrics.get("critical_fact_recall_denominator") or 0)
-            - (baseline_metrics.get("critical_fact_recall_denominator") or 0)
-        ),
-        "selected_span_count": (
-            (candidate_metrics.get("selected_span_count") or 0)
-            - (baseline_metrics.get("selected_span_count") or 0)
-        ),
-    }
-
-    baseline_checks = _check_statuses(baseline)
-    candidate_checks = _check_statuses(candidate)
-    candidate_ne = _not_evaluated_ids(candidate)
-    baseline_ne = _not_evaluated_ids(baseline)
-    moved = sorted(
-        check_id for check_id in candidate_ne - baseline_ne
-        if baseline_checks.get(check_id) in {"FAIL", "PARTIAL"}
-    )
-    row["moved_to_not_evaluated"] = moved
-    row["weakened_gold"] = bool(moved)
-
-    row["unmeasured"] = _unmeasured(candidate)
-
-    newly_adverse = sorted(
-        check_id for check_id, status in candidate_checks.items()
-        if _STATUS_RANK.get(status, 0) > _STATUS_RANK.get(baseline_checks.get(check_id, "NOT_EVALUATED"), 0)
-    )
-    row["newly_adverse_checks"] = newly_adverse
-
-    thresholds = row["thresholds"]
-    recall_threshold = thresholds.get("critical_fact_recall")
-    if recall_threshold is not None and candidate_recall is not None:
-        if float(candidate_recall) < float(recall_threshold):
-            row["notes"].append(
-                f"critical_fact_recall {float(candidate_recall):.3f} is below the frozen "
-                f"threshold {recall_threshold}"
-            )
-    if candidate.get("status") == "FAIL" and baseline.get("status") == "FAIL":
-        row["notes"].append("both sides FAIL; an unchanged failure is not a pass")
-
     row["outcome"] = _sample_outcome(baseline, candidate, row)
     return row
 
@@ -397,6 +411,11 @@ def _sample_outcome(
     candidate_recall = candidate_metrics.get("critical_fact_recall")
     delta_recall = (row.get("delta") or {}).get("critical_fact_recall")
 
+    # Moving an evaluated gap into NOT_EVALUATED is the candidate hiding a known
+    # failure to shrink the denominator. That is a defect in its own right and can
+    # never read as an improvement, whatever the ratio says.
+    if row.get("moved_to_not_evaluated"):
+        return FAIL
     # A candidate that introduced an adverse check, or is still a hard FAIL, has
     # not improved anything whatever its ratio says.
     if row.get("newly_adverse_checks") or candidate.get("status") == FAIL:
@@ -407,8 +426,12 @@ def _sample_outcome(
     if recall_threshold is not None and candidate_recall is not None:
         if float(candidate_recall) < float(recall_threshold):
             return FAIL
-    # Comparable and not worse, but the grader degraded it for a reason it
-    # recorded: that is PARTIAL, never an unqualified PASS.
+    # Comparable and not worse, but unverified: the gold identity was not
+    # attested, or the summary's semantics are unmeasured without an independent
+    # review. Without a real model the benchmark must not emit a summary-fidelity
+    # PASS, so this is PARTIAL and never an unqualified PASS.
+    if row.get("unverified_gold") or row.get("unmeasured"):
+        return PARTIAL
     if candidate.get("status") == PARTIAL:
         return PARTIAL
     return PASS
