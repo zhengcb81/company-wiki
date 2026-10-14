@@ -1,0 +1,105 @@
+{
+  "schema_version": "du3-handoff/1",
+  "lane": "quality",
+  "base_sha": "195aba20b0aecc2d661d7d04c5ba72f982bc02d0",
+  "implementation_commits": ["44cbd62d6c93b8850f928e03e33fba12a4a034d5"],
+  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/shared-reading-completion-20261014/quality",
+  "branch": "codex/du3-quality-20261014",
+  "owned_paths": [
+    "tools/document_understanding_benchmark/**",
+    ".planning/du3-quality/**"
+  ],
+  "interfaces": {
+    "observe_final_material": {
+      "signature": "observe_final_material(material, originals, *, sample_id, execution, limits=None) -> dict",
+      "wire": "returns du-observed/1; additive coverage diagnostics lifted to top level",
+      "module": "tools/document_understanding_benchmark/final_material.py",
+      "rules": [
+        "evidence rows / group aliases are the material's own; each resolved to a verified original unit",
+        "text/locator/role come from the original, never from the envelope or gold",
+        "no gold parameter exists; gold cannot fill an observer answer",
+        "synthetic frozen-equivalent fixtures used where a real final ModelRequest is not yet wired"
+      ]
+    },
+    "compare_runs": {
+      "signature": "compare_runs(baseline, candidate, *, frozen_suite) -> dict",
+      "wire": "du-quality-comparison/1 with status PASS|FAIL|PARTIAL|INCOMPARABLE",
+      "module": "tools/document_understanding_benchmark/comparison.py",
+      "rules": [
+        "same source / read scope / assembly budget / gold denominator or INCOMPARABLE",
+        "a shrunken denominator never reads as an improvement; direction is reported",
+        "a fact moved FAIL->NOT_EVALUATED is named in moved_to_not_evaluated, not hidden",
+        "frozen_suite: suite_id + samples (sample_id/source_sha256/read_scope/budget/gold+thresholds)"
+      ]
+    },
+    "evaluate": "unchanged du-evaluation/1 public entry; no second evaluator built",
+    "no_production_wiring": "this card does not change production selector/summary; ROOT wires final material + G2/G4/G5"
+  },
+  "A_B_C_evidence": {
+    "A_tdd_red": {
+      "command": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests/test_final_material.py tools/document_understanding_benchmark/tests/test_paired_comparison.py tools/document_understanding_benchmark/tests/test_fresh_split.py -q",
+      "result": "RED first (ImportError on observe_final_material/compare_runs + fresh-split gaps), then GREEN after implementation",
+      "counterexamples": "38 tests across the three named modules: fabrication/bad-alias/cross-subject/shared-body/unread-as-absence/budget/denominator/INCOMPARABLE, contamination list, coverage matrix, fresh-gold freeze+digest"
+    },
+    "B_implementation_engineering": {
+      "command": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q",
+      "result": "213 passed, 7 skipped (real-data opt-in), exit 0",
+      "concentrated_offline_cli": {
+        "command": "python -X utf8 -m tools.document_understanding_benchmark --mode offline --output <tmp>",
+        "result": "5 fixtures, 56/56 applicable mutations detected (49 N/A), exit 3 (honest PARTIAL), sentinel restored, wrote only its own summary, tmp dir cleaned afterwards"
+      },
+      "mutation_integrity": "currency_swap + editorial_as_management added and DETECTED; malicious mutations cannot false-PASS (test_all_applicable_mutations_are_detected)"
+    },
+    "C_real_baseline": {
+      "command": "python -X utf8 .planning/du3-quality/_baseline_c.py",
+      "receipt": ".planning/du3-quality/baseline_c.json",
+      "result": "3 fresh originals (A/H/US) replayed through existing public parser/selector; quote replay 9/9, 7/7, 7/7; raw SHA/mtime/size unchanged; semantics NOT_EVALUATED (no real model)",
+      "measured_critical_recall": {
+        "fresh-cn-smic-fy2025": 0.5,
+        "fresh-hk-anta-fy2025": 0.0,
+        "fresh-us-apple-10k": 0.333
+      },
+      "note": "measured gaps are the deliverable (baseline selector under-carries business facts), not a broken benchmark; production summary not wired by this card"
+    }
+  },
+  "tests_passed": 213,
+  "tests_failed": 0,
+  "not_run": [
+    "real_data marked tests (7 skipped by default; run with DU_BENCH_ALLOW_REAL_DATA=1 and local bindings)",
+    "semantic entailment (NOT_EVALUATED: no real model called anywhere in this card)"
+  ],
+  "known_gaps": [
+    "no real US S-1/F-1, 8-K/6-K exhibit, or amended-filing pair on this host -> coverage_matrix marks them missing with the specific gap (not faked with old samples)",
+    "baseline selector recall on the fresh gold is low (0.5/0.0/0.333): a real production quality gap to be measured again after ROOT wires the new selector",
+    "final-material observation uses frozen-equivalent synthetic envelopes; ROOT must feed actual NarrativeModelRequest.data_json once a real producer is wired",
+    "semantics.entailment stays NOT_EVALUATED until ROOT runs the independent G2/G4/G5 review"
+  ],
+  "resource_observations": {
+    "model_calls": 0,
+    "paid_calls": 0,
+    "network_calls": 0,
+    "offline_fixture_bytes": 16121,
+    "full_suite_seconds": 6.0,
+    "node_c_baseline_seconds": 58.6,
+    "measured": "elapsed, spans, candidates, units, quote-replay, text/bytes, artifact sizes",
+    "not_measured": "RSS not recorded in this card; model usage is zero (no model called)"
+  },
+  "raw_preservation": {
+    "originals_readonly": true,
+    "original_sha_mtime_size_unchanged": true,
+    "verified": "baseline_c.json source_unchanged=true for all three fresh originals; test_gold_set binds every gold record to its real SHA",
+    "production_config_touched": false
+  },
+  "scratch_restore": {
+    "offline_cli_tmp_dir": "created, wrote only its own summary.json + owned marker + sentinel, sentinel restored, then removed",
+    "planning_scratch": ".planning/du3-quality helper scripts kept as reproducibility receipts; no originals/copies/DB/screenshots persisted",
+    "bindings": "local bindings at ~/.du-bench/bindings.local.json updated with the 3 fresh paths (machine-local, NOT committed)"
+  },
+  "next_root_action": [
+    "wire actual NarrativeModelRequest.data_json into observe_final_material once a real summary producer exists",
+    "run compare_runs over a frozen suite when a candidate selector is ready; do not report improvement on a changed denominator",
+    "run the independent G2/G4/G5 semantic review and feed it to evaluate(review=...) so semantics.entailment can move past NOT_EVALUATED",
+    "acquire the missing US S-1/F-1, 8-K/6-K exhibit, and amended-filing pair (coverage_matrix gaps) to close the real coverage holes",
+    "re-measure the fresh-gold critical recall after production selector wiring; current gaps (0.5/0.0/0.333) are the honest baseline"
+  ]
+}
