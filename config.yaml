@@ -21,6 +21,18 @@ llm:
   max_document_chars: 800000  # ~1M tokens，用于整篇文档分析
   temperature: 1.0
   reasoning_split: true
+  # 原文摘要是有界证据提取。供应商默认推理会挤占同一输出额度；
+  # 用已有用途配置显式选择，通用研究/编码用途仍沿各自配置。
+  generation_policy:
+    mimo:
+      narrative:
+        thinking: "disabled"
+    deepseek:
+      narrative:
+        thinking: "disabled"
+    minimax:
+      narrative:
+        thinking: "disabled"
   fallback:
     provider: "mimo"
     model: "mimo-v2.6-flash"

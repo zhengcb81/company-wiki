@@ -214,7 +214,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/5"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/6"
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -350,9 +350,11 @@ def _reading_text(text: str) -> str:
 
 
 _BRAND_LIST = re.compile(
-    r"(?P<owner>[^。;!?]{0,80}?)(?:品牌(?:组合)?|brand portfolio|brands?)"
-    r"\s*(?:包括|包含|涵盖|compris\w*|includ\w*|consists? of)\s*(?P<members>[^。;!?]{1,160})", re.I)
-_BUSINESS_OWNER = re.compile(r"本公司|本集团|我们|我司|(?:公司|集团)(?:的)?|\b(?:our|we|the company's)\b", re.I)
+    r"(?:品牌(?:组合)?|brand portfolio|brands?)"
+    r"\s*[,，]?\s*(?:包括|包含|涵盖|compris\w*|includ\w*|consists? of)\s*(?P<members>[^。;!?]{1,160})", re.I)
+_PORTFOLIO_DEFINITION_CONTEXT = re.compile(
+    r"术语表|词汇表|概念定义|例句|\b(?:glossary|example sentence)\b|"
+    r"(?:^|[\s:：])(?:定义|definition)\s*[:：]", re.I)
 _MEMBER_SEPARATOR = re.compile(r"[,、]|以及|及|与|和|\b(?:and|or)\b", re.I)
 _GENERIC_BRAND_MEMBER = re.compile(
     r"^(?:products?|services?|solutions?|brands?|产品|服务|方案|品牌|各类品牌|相关品牌)$", re.I)
@@ -380,13 +382,18 @@ def _reading_clauses(text: str) -> tuple[str, ...]:
 
 
 def _brand_portfolio(clause: str) -> tuple[bool, bool]:
-    """Return observed portfolio grammar and concrete source-owned membership."""
+    """Observe concrete disclosed membership; do not infer the actor is issuer.
+
+    Source identity/context already belongs to the source owner. A bounded
+    filing sentence need not repeat an issuer pronoun, and may describe another
+    actor. Its actual wording and qualifiers stay in the evidence unchanged.
+    """
     if '品牌' not in clause and 'brand' not in clause.casefold():
         return False, False
     for relation in _BRAND_LIST.finditer(clause):
-        if not _BUSINESS_OWNER.search(relation.group('owner')):
-            continue
-        if _HYPOTHETICAL_OWNER.search(relation.group('owner')):
+        context = clause[:relation.start('members')]
+        if (_HYPOTHETICAL_OWNER.search(context)
+                or _PORTFOLIO_DEFINITION_CONTEXT.search(context)):
             return True, False
         members = [part.strip(' .，') for part in _MEMBER_SEPARATOR.split(relation.group('members'))]
         concrete = [part for part in members if part and not _GENERIC_BRAND_MEMBER.fullmatch(part)]

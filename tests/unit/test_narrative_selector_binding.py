@@ -9,12 +9,14 @@ from types import SimpleNamespace
 
 import pytest
 
-from company_wiki.automation.models import HandlerOutcome, canonical_json
+from company_wiki.automation.models import HandlerOutcome, canonical_json, canonical_json_hash
 from company_wiki.automation.narrative_contracts import NarrativeBundle, NarrativeSelectResult
 from company_wiki.automation.narrative_runtime import NarrativeRuntimeDependencies, register_narrative_handlers
 from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.automation.narrative_verify import NarrativeVerifyHandler
 from company_wiki.automation import narrative_worker_factory as factory
+from company_wiki.automation.narrative_batch import _freeze_generations
+from company_wiki.automation.narrative_model import ModelResponseError
 from company_wiki.automation.worker_process import WorkerProcessSpec
 from company_wiki.source_catalog import narrative_evidence as policy
 from company_wiki.source_catalog.narrative_retrieval import NarrativeEvidenceResolver, NarrativeEvidenceResolveError
@@ -214,3 +216,124 @@ def test_factory_decodes_frozen_binding_once_and_pins_before_model(tmp_path, mon
                 factory.create_runtime(spec)
             assert captured == []
         assert len(decoded) == 1
+
+
+@pytest.mark.parametrize("projection,role,error", [
+    ("missing", "compute", None),
+    ("reading-model-input/1", "compute", None),
+    ("reading-model-input/1", "mixed", None),
+    ("reading-model-input/1", "model", "NARRATIVE_RUN_MODEL_CONFIG_MISMATCH"),
+    ("unavailable/99", "mixed", "READING_MODEL_PROJECTION_UNAVAILABLE"),
+    (None, "mixed", "READING_MODEL_PROJECTION_UNAVAILABLE"),
+    (False, "mixed", "READING_MODEL_PROJECTION_UNAVAILABLE"),
+])
+def test_factory_new_reading_binding_is_decoded_once_for_every_role_and_rejection(
+    tmp_path, monkeypatch, projection, role, error,
+):
+    """Actual constructed HTTP options and before-model rejection share one parse."""
+    with official.owned_catalog(tmp_path) as (catalog, root):
+        original = root / "existing-original.txt"
+        original.write_bytes(b"keep original fixture")
+        ref, _ = official.import_page(catalog, official.flat_page(1))
+        projected = official.persist(catalog, [ref])
+        subject = official.NarrativeSubject.from_projection(projected)
+        model_options = {"model_id": "fixture-model", "endpoint": "https://fixture.invalid/v1/chat/completions",
+                         "api_key_env": "UNREAD_KEY", "max_output_tokens": 1024}
+        manifest = {"schema_version": "narrative-generation/2", "subject_binding": subject.to_dict(),
+                    "source_adapter": "official-json-fixture", "language": "en", "parser_component": {},
+                    "model": {key: value for key, value in model_options.items() if key != "api_key_env"}}
+        manifest["model"]["output_token_field"] = "max_tokens"
+        if projection != "missing":
+            manifest["reading_model_projection"] = projection
+        frozen = {"schema_version": "narrative-run-binding/4", "execution_versions": {
+            "selector": "0.9.0", "projection_prompt": official.PROJECTION_NARRATIVE_PROMPT_VERSION,
+            "projection_model_request_schema": official.PROJECTION_MODEL_REQUEST_SCHEMA,
+            "official_json_adapter": official.NARRATIVE_OFFICIAL_JSON_ADAPTER_VERSION},
+            **_freeze_generations({subject.item_key: manifest})}
+        frozen_json = canonical_json(frozen)
+        run = SimpleNamespace(job_ids=("owned-job",), input_hash="2" * 64, model_id="fixture-model",
+                              prompt_version=official.NARRATIVE_PROMPT_VERSION, blocked=False, binding_json=frozen_json)
+        monkeypatch.setattr(factory, "NarrativeRunStore", lambda _path: SimpleNamespace(
+            get_run=lambda _id: run, final_generations=lambda _id: {subject.item_key: manifest}))
+        config = root / "factory.json"
+        config.write_text(json.dumps({"schema_version": "1.0", "catalog_dir": "catalog", "roots": [{
+            "root_id": "company_raw", "path": "companies", "kind": "company_raw", "adapter_id": "company_raw_v1",
+            "read_only": True, "reusable_for_filing": True}]}), encoding="utf-8")
+        options = {"project_root": str(root), "catalog_config_path": str(config), "run_id": "owned-run",
+                   "expected_run_input_hash": run.input_hash, "model": dict(model_options)}
+        if error == "NARRATIVE_RUN_MODEL_CONFIG_MISMATCH":
+            options["model"]["max_output_tokens"] = 1025
+        jobs = ("source.narrative_summarize",) if role == "model" else (
+            ("source.narrative_select", "source.narrative_verify") if role == "compute" else
+            ("source.narrative_select", "source.narrative_summarize", "source.narrative_verify"))
+        spec = WorkerProcessSpec(worker_id="owned-child", role=role, db_path=str(root / "unused.db"),
+            log_dir=str(root / "logs"), runtime_factory_path="company_wiki.automation.narrative_worker_factory:create_runtime",
+            runtime_options_json=canonical_json(options), allowed_job_types=jobs,
+            lease_seconds=30, heartbeat_interval_seconds=5, idle_sleep_seconds=0.05,
+            child_log_max_bytes=4096, allowed_job_ids=run.job_ids)
+        decoded, captured, models, callers = [], [], [], []
+        loads, register, http_model = factory.json.loads, factory.register_narrative_handlers, factory.NarrativeHTTPModel
+        def decode(value, *args, **kwargs):
+            if value == frozen_json:
+                decoded.append(value)
+            return loads(value, *args, **kwargs)
+        def capture(registrar, deps):
+            captured.append(deps)
+            register(registrar, deps)
+        def construct(**kwargs):
+            model = http_model(**kwargs)
+            models.append(model)
+            return model
+        def caller(**kwargs):
+            callers.append(kwargs)
+            return SimpleNamespace()
+        monkeypatch.setattr(factory.json, "loads", decode)
+        monkeypatch.setattr(factory, "register_narrative_handlers", capture)
+        monkeypatch.setattr(factory, "NarrativeHTTPModel", construct)
+        monkeypatch.setattr(factory, "BudgetedNarrativeCaller", caller)
+        monkeypatch.setenv("UNREAD_KEY", "synthetic-no-live-credential")
+        try:
+            if error is not None:
+                kind = ModelResponseError if error == "READING_MODEL_PROJECTION_UNAVAILABLE" else ValueError
+                with pytest.raises(kind, match=error):
+                    factory.create_runtime(spec)
+                assert not captured and not callers
+                assert len(models) == (1 if error == "NARRATIVE_RUN_MODEL_CONFIG_MISMATCH" else 0)
+            else:
+                factory.create_runtime(spec)
+                deps = captured[0]
+                assert deps.selector_version == "0.9.0"
+                assert deps.reading_model_projection(subject) == (None if projection == "missing" else projection)
+                assert deps.generation_sha256(subject) == canonical_json_hash(manifest)
+                assert len(models) == len(callers) == (0 if role == "compute" else 1)
+                if role != "compute":
+                    assert callers[0]["model"] is models[0] is deps.model
+                deps.projection_catalog.close()
+            assert len(decoded) == 1
+        finally:
+            assert original.read_bytes() == b"keep original fixture"
+
+
+def test_worker_binding_snapshot_is_immutable_without_redecoding(monkeypatch):
+    frozen_json = canonical_json({"execution_versions": {"selector": "0.8.0"},
+        "generation_manifests": {"old": {"generation_sha256": "1" * 64,
+            "model": {"model_id": "frozen", "endpoint": "https://fixture.invalid"}}}})
+    loads = factory.json.loads
+    decoded = []
+    def decode(value, *args, **kwargs):
+        if value == frozen_json:
+            decoded.append(value)
+        return loads(value, *args, **kwargs)
+    monkeypatch.setattr(factory.json, "loads", decode)
+    snapshot = factory._worker_binding_snapshot(frozen_json)
+    assert snapshot.selector_version == "0.8.0"
+    assert snapshot.generation_values["old"] == "1" * 64
+    assert snapshot.reading_projections == {}
+    assert snapshot.frozen_models[0]["model_id"] == "frozen"
+    with pytest.raises(TypeError):
+        snapshot.generation_values["old"] = "2" * 64
+    with pytest.raises(TypeError):
+        snapshot.reading_projections["old"] = "reading-model-input/1"
+    with pytest.raises(TypeError):
+        snapshot.frozen_models[0]["model_id"] = "changed"
+    assert len(decoded) == 1

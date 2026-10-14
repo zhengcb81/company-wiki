@@ -1,3 +1,33 @@
+## ROOT 已接收工程节点／剩余共因 — 2026-10-14
+
+三DU3实收与工程修复可发布，默认仍0.8。正常pre-push四失败已根治：Worker一次冻结snapshot68PASS，瞬时geometry metadata36PASS；通用portfolio/source显示观察128PASS，narrative用途配置82PASS，统一post-model失败诊断143PASS。原三真实原文25/25、新三原金标11/12（业务范围11/11，普通分红计划原漏读保留）；全离线CWP→FF→RF恢复＋失败收尾PASS，2正常localPOST＋1故意无效摘要，0供应商费用。仅owned测试的只读SQLite未关闭导致一次Temp残留，已明确closing并恢复，原FAIL＋清理收据保留。
+
+真实摘要不能签收：MiMo第一次完整请求缺post-model诊断，随后补齐；关闭narrative额外推理解决本次截断，但完整返回SUMMARY_INVALID；DeepSeek-HK因PDF存在opaque页被全份PARSER_INCOMPLETE阻断，0POST；MiniMax-US完整终文8,160B为西班牙语且JSON多brace，固定FINAL_JSON拒绝、未产生有效artifact。header标en不能证明正文英语，不能补JSON或盲重发。母账534629tokens/364387µUSD含FX/旧unknown保留（代理费非发票），继续同一$20/200万tokens总限。
+
+下一实施优先级（沿同一A/B/C大节点，先TDD再集中验收）：(1)来源层统一可用片段准则：partial/opaque只是覆盖诊断，有闭合可回开业务证据可作excerpts；空/全opaque、blocked、非法字节/来源/引用依旧拒绝，不能伪称全文完整；(2)既有Store有效lease的终态事务结清失败摘要final-output槽位：已知付费失败仍保2MiB“额度”而非真实文件，无artifact/effect时由原输出预算负责层结清0，费用/unknown不退、成功/未决/旧lease不改；(3)模型只负责claims，源身份由pinned SelectResult确定，新版本统一renderer/schema/decoder/真实prompt与frozen generation，None/v1旧body保持；按配置支持的JSON格式与实际语言检查处理MM西语/虚构问题，不能只查header；(4)实际DEI 10-Q→earnings_call根路由、IR重要否定/原因漏读、HKIPO80s解析超时继续按原文探共因，不提高cap/按文件名硬判。
+
+类型覆盖：20份架构样本只作purposive，不能称全量gold/未见holdout。标ir_policy的实际字节是调研Q&A，不能误修为行政skip。CNIPO补充完整54.10s通过，原全局剩22s timeout保留；HKIPO独立80s仍停PARSE_STARTED，缺真实S1/F1/附件/修订对照不认证。量测与后续摘要源码变更分开，只有本层实际依赖冻结才用于本层结果，不增全仓签收门禁。
+
+证据：[本节点](common-root-quality-evidence/post-model-finalization.json)、[紧凑测试/独审/真实失败收据](common-root-quality-evidence/post-model-receipts.zip)。870b0a78工程提交尚未推送；本节点正常commit/push/精确CI后更新发布收据，历史失败和原件/金标保持。正常commit曾由新增路径负例的Windows绝对路径字面量拒绝；已改为所属测试Temp的真实路径，物理路径拒绝断言不变。24项复验PASS，host-assumption guard新增违规0，未改baseline或跳hooks；见[跨平台夹具收尾](common-root-quality-evidence/host-neutral-recovery.json)。以下是历史冻结节点。
+
+## ROOT 当前接收与真实质量整改 — 2026-10-14
+
+19:47实际更新：原三portfolio6回放25/25，新三11/12（SMIC4/5、ANTA3/3、Apple4/4），各自一次parse/select，原件/金标不改。普通分红提案属于资本分配而非强制业务召回，原12项分母/FAIL继续展示，不能静默改gold。新配置完整离线CWP→FF→RF CLI PASS。用途配置82PASS。
+
+MiMo按已配置disabled第二次真实试验：input13626/output2103/reasoning0，transport完成但SUMMARY_INVALID，1POST已记15729tokens/2973µUSD；累计518327tokens/356737µUSD含FX。原件/sentinel保持、Temp移除，未执行旧0.8的后续支付，也不盲重发。尚不能猜具体违反规则：当前_summary_failure丢失了完整返回的有界诊断与下游失败原因。**优先补齐统一post-model失败诊断**：复用FailedFinalDiagnostic与现attempt/usage/handler result，给所有付费后decode/citation/contract失败保留具体规则、原metrics及最多16KiB UTF8终文前缀/hash，不接受失败摘要、不改guard、不建第二产物库；invalid/oversize/path异常各自负控，零付费先验证，随后才重新真实运行。失败回复与transport截断统一在所属摘要边界可查，不以不断重发找原因。
+
+三 DU3 已实收，本地工程提交870b0a78。正常pre-push发现3个Worker重复解码失败及1个旧瞬时元数据预期失败（5153 PASS/24 SKIP），因此未推送；不跳hooks。Worker统一一次冻结快照已68 PASS，原count=1不变；几何测试补验共享/不可变/持久ID及model/Bundle不泄漏，36 PASS，非源码泄漏。
+
+新真实MiMo请求输入13624 tokens（此前64804），但output8192中reasoning6547，最终JSON在c16截断；1次真实POST、21816 tokens、5002µUSD预算代理照账。没有原件修改、没有自动重发，独立测试目录已删除。母累计502598 tokens/353764µUSD（含旧FX保留），旧未知7项继续保留。原费用与FAIL收据不覆盖。
+
+安踏周转天数实际已选中，旧测试把native表格分隔符误作漏读；品牌组合是真实通用语法准入遗漏，另有源已验真的枚举换行观察缺口。分开修复policy和单一测试oracle，不修改金标语义/12项分母。source25/25、fresh9/12只是旧冻结结果，不能提前写新分数。默认仍0.8，A/C和母G2/G4/G5开放。
+
+接下来的统一实施顺序：①并行完成Worker/瞬时几何测试与通用portfolio/源表示观察修复，冻结后集中测试；②正式摘要使用已有generation_policy按narrative用途明确thinking设置，遵守真实配置，保留模型/endpoint/8192/temperature及旧代重放；③先原三零付费回归，再按同一母账进行三家供应商新旧真实摘要、各自独审关键业务/数字/引用/阶段及恢复；④质量达标才切默认，一次大节点验收、正常提交/推送和精确CI。若单次摘要仍不能满足覆盖，再设计复用现AUTO的有界分批，不凭提高cap或补截断JSON放行。
+
+配置依据：MiMo/DeepSeek/MiniMax-M3官方均支持thinking disabled，当前缺少narrative用途配置导致供应商默认推理。工程根因修复将把用途选择集中放在已有配置端口，HTTP只执行并绑定配置，不写供应商临时特判、不增加许可。一般研究推理不变。具体外部依据和下一批真实结果随后进入收据，不能用配置意图代替质量证明。
+
+以下保留此前冻结节点记录；当前状态以本节及阶段表为准。
+
 ## ROOT 冻结发布节点 — 2026-10-14
 
 三 DU3 已全部实收，DEPENDENCIES 补交 282aee36/ef59a574 已纳入暂存、138 PASS，作者树只读不变。SOURCE STOP 已覆盖所有 ROOT 子线；正常发布工程节点，正式默认仍0.8，真实质量尚未达标。

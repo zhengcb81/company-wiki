@@ -300,11 +300,48 @@ def test_feature_identity_is_explicit_and_no_entire_page_snapshot_is_persisted()
 
 
 def test_rich_layout_preserves_all_old_metadata_and_durable_evidence_identity():
+    import json
+    from types import MappingProxyType
+
+    from company_wiki.automation.narrative_contracts import (
+        NarrativeBundle,
+        NarrativeSelectResult,
+    )
+    from company_wiki.automation.narrative_model import NarrativeModelRequest
+    from company_wiki.source_catalog.narrative_native_ranges import (
+        NATIVE_PAGE_VIEW_FEATURE_VERSION,
+    )
+    from support.narrative_model_request_fixture import selection
+    from unit.test_narrative_job_contracts import _bundle
+
     raw = _bytes(table=True)
     legacy = _parse(raw, version="0.8.0", table_pages=(1,))
     rich = _parse(raw, table_pages=(1,))
+    shared_views = {}
+    durable = []
     for old, new in zip(legacy.units, rich.units, strict=True):
-        assert {k: v for k, v in new.metadata.items() if k != "reading_layout"} == dict(
+        transient = {"reading_layout"}
+        if new.unit_kind == "pdf_text_block":
+            transient.add("native_source_view")
+            view = new.metadata["native_source_view"]
+            assert isinstance(view, MappingProxyType)
+            assert set(view) == {"schema_version", "text", "page_view_sha256", "blocks", "by_block"}
+            assert view["schema_version"] == NATIVE_PAGE_VIEW_FEATURE_VERSION
+            assert view["page_view_sha256"] == hashlib.sha256(view["text"].encode()).hexdigest()
+            page = new.coordinates.page_number
+            if page in shared_views:
+                assert view is shared_views[page]
+            else:
+                shared_views[page] = view
+            with pytest.raises(TypeError):
+                view["text"] = "forbidden mutation"
+            with pytest.raises(TypeError):
+                view["blocks"][0]["source_text"] = "forbidden mutation"
+        # Only these defined transient fields may differ. Every old field and
+        # any unexpected new field remain part of the exact metadata contract.
+        assert not set(old.metadata).intersection(transient)
+        assert set(new.metadata) == set(old.metadata) | transient
+        assert {k: v for k, v in new.metadata.items() if k not in transient} == dict(
             old.metadata
         )
         options = {
@@ -316,13 +353,59 @@ def test_rich_layout_preserves_all_old_metadata_and_durable_evidence_identity():
             new.to_evidence_span(**options),
         )
         assert old_span == new_span
+        assert old.unit_id == new.unit_id
         assert "reading_layout" not in new_span.structured_value
+        assert "native_source_view" not in new_span.structured_value
+        durable.append(new_span)
         drifting = deepcopy(new.metadata["reading_layout"])
         drifting["upstream_hints"]["words"] = [
             {"bbox": [1, 2, 3, 4], "text": "irrelevant fine drift"}
         ]
         altered = replace(new, metadata=dict(new.metadata, reading_layout=drifting))
         assert altered.to_evidence_span(**options).span_id == old_span.span_id
+        if "native_source_view" in transient:
+            changed_view = replace(new, metadata=dict(new.metadata, native_source_view={
+                "text": "private-transient-canary-never-export",
+            }))
+            assert changed_view.to_evidence_span(**options) == old_span
+        unknown = replace(new, metadata=dict(new.metadata, unknown_metadata="must-remain-durable"))
+        unknown_span = unknown.to_evidence_span(**options)
+        assert unknown_span.structured_value["unknown_metadata"] == "must-remain-durable"
+        assert unknown_span.span_id != old_span.span_id
+
+    assert sum(unit.unit_kind == "pdf_text_block" for unit in rich.units) >= 2
+    assert len(shared_views) == 1
+    # Exercise actual public selection/model/Bundle serialization, without a
+    # supplier, so a private page view cannot silently escape via a wire port.
+    wire = selection(count=len(durable)).to_dict()
+    wire["source_ref"] = {"schema_version": "2.0", "document_id": "synthetic-layout-document",
+        "source_id": rich.source_id, "content_sha256": rich.source_sha256,
+        "byte_size": len(raw), "mime_type": "application/pdf"}
+    wire["source_metadata"] = {"source_class": "filing", "title": "Synthetic annual report",
+                               "document_kind": "annual_report", "language": "en"}
+    wire["parser"] = {"name": durable[0].parser_name, "version": durable[0].parser_version}
+    wire["selector"] = {"name": "selective-narrative-selector", "version": "0.9.0"}
+    wire["evidence_spans"] = [span.to_dict() for span in durable]
+    wire["selection"].update(status="selected", source_units=len(rich.units),
+        candidate_count=len(durable), omitted_candidate_count=0, dropped_financial_count=0,
+        pages_total=1, pages_read=1, tables_total=1, tables_scanned=1)
+    selected = NarrativeSelectResult.from_dict(wire)
+    model_wire = NarrativeModelRequest.from_selection(selected).data_json
+    bundle_wire = _bundle(evidence=wire["evidence_spans"])
+    for field in ("source_ref", "source_metadata", "selection", "prompt_review"):
+        bundle_wire[field] = wire[field]
+    bundle_wire["versions"].update(parser=wire["parser"]["version"],
+                                    selector=wire["selector"]["version"])
+    bundle_wire["summary"]["draft"].update(source_id=rich.source_id,
+        source_sha256=rich.source_sha256, language="en")
+    support = next(span for span in durable if "metered consumption" in span.raw_text)
+    bundle_wire["summary"]["draft"]["claims"][0].update(
+        text=support.raw_text, evidence_ids=[support.span_id])
+    bundle = NarrativeBundle.from_dict(bundle_wire)
+    for encoded in (json.dumps(selected.to_dict()), model_wire, json.dumps(bundle.to_dict())):
+        for private in ("native_source_view", "reading_layout", "page_view_sha256", "source_text",
+                        "private-transient-canary-never-export"):
+            assert private not in encoded
 
 
 def test_production_default_parser_gets_opt_in_but_legacy_custom_parser_keeps_its_interface():

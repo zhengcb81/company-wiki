@@ -33,6 +33,10 @@ def _range_fold(text: str) -> str:
     English words, decimal quantities and unit boundaries keep their spaces.
     This is quote observation after source-owner replay, not range creation.
     """
+    # Only actual source line layout after the CJK enumeration delimiter.
+    # Preserve intentional inline spaces, punctuation and all English/number
+    # boundaries. The caller already owns this range's native-byte proof.
+    text = re.sub(r"(?<=、)[^\S\r\n]*\r?\n[^\S\r\n]*(?=\S)", "", text)
     value = _fold(text)
     return re.sub(r"(?<=[\u3400-\u9fff。，！？；：“”‘’（）]) +(?=[\u3400-\u9fff。，！？；：“”‘’（）])", "", value)
 
@@ -156,7 +160,66 @@ def _eligible(span: EvidenceSpan, anchor: Mapping[str, Any], *, source_id: str, 
     kind = anchor.get("location_kind")
     if kind not in {None, "page", "document"}:
         return False
+    for key in ("table_index", "row_index"):
+        if key in anchor and (type(anchor[key]) is not int or getattr(span.coordinates, key) != anchor[key]):
+            return False
     return kind == "document" or anchor.get("page") is None or span.coordinates.page_number == anchor["page"]
+
+
+def _row_cells(span: EvidenceSpan) -> tuple[str, ...] | None:
+    """Observe one canonical row, not metadata borrowed from another source.
+
+    This checks representation agreement only. Source replay, byte/hash checks
+    and closure creation remain the caller/source owner's responsibility.
+    """
+    value = span.structured_value
+    cells = value.get("row_cells")
+    if (span.parser_name != "selective_narrative_parser"
+        or span.coordinates.page_number is None or span.coordinates.table_index is None
+        or span.coordinates.row_index is None or span.coordinates.column_index is not None
+        or not isinstance(cells, (tuple, list)) or not cells
+        or any(not isinstance(cell, str) for cell in cells)):
+        return None
+    source_row = " | ".join(cell for cell in cells if cell)
+    canonical = unicodedata.normalize("NFC", source_row.replace("\r\n", "\n")).strip()
+    if not canonical or canonical != span.raw_text:
+        return None
+    return tuple(_fold(cell) for cell in cells)
+
+
+def _row_supports(quote: str, cells: tuple[str, ...]) -> bool:
+    # Match whole contiguous cells in original order, including empty columns.
+    # Preserve pipes within cells; only source-rendered inter-cell separators
+    # have an equivalent native spacing view. Never combine rows or headers.
+    # Rendering omits empty columns. Retain the original cells on the span but
+    # skip empty references once here, avoiding quadratic work on sparse rows.
+    rendered = tuple(cell for cell in cells if cell)
+    for start in range(len(rendered)):
+        spaced = piped = ""
+        for index in range(start, len(rendered)):
+            cell = rendered[index]
+            spaced = spaced + " " + cell if spaced else cell
+            piped = piped + " | " + cell if piped else cell
+            if quote == spaced or quote == piped:
+                return True
+            if len(spaced) > len(quote):
+                break
+    return False
+
+
+def _span_supports(span: EvidenceSpan, anchor: Mapping[str, Any], quote: str,
+                   raw_quote: str, *, source_id: str, role: Any) -> bool:
+    if not _eligible(span, anchor, source_id=source_id, role=role):
+        return False
+    if span.structured_value.get("unit_kind") == "pdf_table_row":
+        cells = _row_cells(span)
+        # A declared table row with inconsistent body/cells must not pass the
+        # ordinary raw substring path after failing its table representation.
+        return cells is not None and _row_supports(quote, cells)
+    if (span.parser_name == "native_pdf_range_parser" and span.parser_version == "0.1.0"
+        and span.structured_value.get("unit_kind") == "pdf_native_range"):
+        return _range_fold(raw_quote) in _range_fold(span.raw_text or "")
+    return quote in _fold(span.raw_text or "")
 
 
 def _supports(anchor: Mapping[str, Any], material: Sequence[EvidenceSpan], kind: str, *, source_id: str, role: Any) -> bool:
@@ -164,11 +227,7 @@ def _supports(anchor: Mapping[str, Any], material: Sequence[EvidenceSpan], kind:
     if not isinstance(raw_quote, str) or not raw_quote or len(raw_quote) > 2048:
         return False
     quote = _fold(raw_quote)
-    if any(_eligible(span,anchor,source_id=source_id,role=role) and (
-            _range_fold(raw_quote) in _range_fold(span.raw_text or "")
-            if span.parser_name == "native_pdf_range_parser" and span.parser_version == "0.1.0"
-            and span.structured_value.get("unit_kind") == "pdf_native_range"
-            else quote in _fold(span.raw_text or ""))
+    if any(_span_supports(span, anchor, quote, raw_quote, source_id=source_id, role=role)
            for span in material):
         return True
     eligible = _native_body(material) if kind == "native_continuity" else tuple(material)

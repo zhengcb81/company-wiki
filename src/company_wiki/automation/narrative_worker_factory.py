@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
 import json
 from pathlib import Path
 import re
+from types import MappingProxyType
 from typing import Any
 from urllib.parse import urlsplit
 
@@ -91,12 +94,23 @@ def _contains_projected_work(binding: dict[str, Any], manifests: dict) -> bool:
     return False
 
 
-def _runtime_snapshot(binding_json: str | None) -> tuple[dict[str, str], str]:
-    """Read the coordinator-frozen snapshot; do not repeat manifest signing/parsing."""
+def _decode_binding(binding_json: str | None) -> dict[str, Any] | None:
+    """Decode the persisted coordinator identity at the worker composition edge."""
     if binding_json is None:
-        return {}, resolve_narrative_selector_version()
+        return None
     try:
         binding = json.loads(binding_json)
+    except (TypeError, json.JSONDecodeError):
+        raise ValueError("NARRATIVE_RUN_GENERATION_INVALID") from None
+    if not isinstance(binding, dict):
+        raise ValueError("NARRATIVE_RUN_GENERATION_INVALID")
+    return binding
+
+
+def _runtime_values(binding: dict[str, Any] | None) -> tuple[dict[str, str], str]:
+    if binding is None:
+        return {}, resolve_narrative_selector_version()
+    try:
         versions = binding.get("execution_versions", {})
         manifests = binding.get("generation_manifests", {})
         if not isinstance(versions, dict) or not isinstance(versions.get("selector"), str):
@@ -127,18 +141,22 @@ def _runtime_snapshot(binding_json: str | None) -> tuple[dict[str, str], str]:
         raise ValueError("NARRATIVE_RUN_GENERATION_INVALID") from None
 
 
+def _runtime_snapshot(binding_json: str | None) -> tuple[dict[str, str], str]:
+    """Compatibility seam for callers that only need generation and selector."""
+    return _runtime_values(_decode_binding(binding_json))
+
+
 def _generation_values(binding_json: str | None) -> dict[str, str]:
     """Compatibility seam; runtime reads the complete snapshot exactly once."""
     return _runtime_snapshot(binding_json)[0]
 
 
-def _reading_projection_versions(binding_json: str | None) -> dict[str, str | None]:
+def _reading_projection_values(binding: dict[str, Any] | None) -> dict[str, str | None]:
     """Select the actual renderer from each frozen generation, never a default."""
-    if binding_json is None:
+    if binding is None:
         return {}
     from .narrative_batch import _thaw_generations
     from .narrative_model import ModelResponseError, validate_reading_model_projection_version
-    binding = json.loads(binding_json)
     if "generation_settings" not in binding:
         return {}
     manifests = _thaw_generations(binding)
@@ -152,25 +170,56 @@ def _reading_projection_versions(binding_json: str | None) -> dict[str, str | No
     return result
 
 
-def _frozen_models(binding_json: str | None) -> list[dict[str, Any]]:
+def _reading_projection_versions(binding_json: str | None) -> dict[str, str | None]:
+    """Compatibility seam; the production factory uses the shared worker snapshot."""
+    return _reading_projection_values(_decode_binding(binding_json))
+
+
+def _frozen_model_values(binding: dict[str, Any] | None) -> list[dict[str, Any]]:
     """Read the already signed settings without rebuilding source manifests."""
-    if binding_json is None:
+    if binding is None:
         return []
     try:
-        binding = json.loads(binding_json)
         settings = binding.get("generation_settings", {})
         manifests = binding.get("generation_manifests", {})
         models = []
         for record in manifests.values():
             common = settings[record["settings_sha256"]] if "settings_sha256" in record else record
             if "model" in common:
+                if not isinstance(common["model"], dict):
+                    raise ValueError("NARRATIVE_RUN_GENERATION_INVALID")
                 models.append(common["model"])
         return models
     except (KeyError, TypeError, AttributeError, json.JSONDecodeError) as exc:
         raise ValueError("NARRATIVE_RUN_GENERATION_INVALID") from exc
 
 
-def _verify_effective_model(model: NarrativeHTTPModel, frozen_models: list[dict[str, Any]]) -> None:
+def _frozen_models(binding_json: str | None) -> list[dict[str, Any]]:
+    """Compatibility seam for isolated configuration validation."""
+    return _frozen_model_values(_decode_binding(binding_json))
+
+
+@dataclass(frozen=True)
+class _WorkerBindingSnapshot:
+    generation_values: Mapping[str, str]
+    selector_version: str
+    reading_projections: Mapping[str, str | None]
+    frozen_models: tuple[Mapping[str, Any], ...]
+
+
+def _worker_binding_snapshot(binding_json: str | None) -> _WorkerBindingSnapshot:
+    """All worker parameters derive from one decoded, immutable run snapshot."""
+    binding = _decode_binding(binding_json)
+    generations, selector = _runtime_values(binding)
+    readings = _reading_projection_values(binding)
+    models = _frozen_model_values(binding)
+    return _WorkerBindingSnapshot(
+        MappingProxyType(generations), selector, MappingProxyType(readings),
+        tuple(MappingProxyType(dict(model)) for model in models),
+    )
+
+
+def _verify_effective_model(model: NarrativeHTTPModel, frozen_models: Sequence[Mapping[str, Any]]) -> None:
     """Compare constructed HTTP behavior with frozen semantic configuration."""
     port = model._port
     authority = model._host
@@ -203,7 +252,7 @@ def _verify_effective_model(model: NarrativeHTTPModel, frozen_models: list[dict[
             raise ValueError("NARRATIVE_RUN_MODEL_CONFIG_MISMATCH")
 
 
-def _generation_resolver(run_store: NarrativeRunStore, run_id: str, base: dict[str, str], *, selector_version: str):
+def _generation_resolver(run_store: NarrativeRunStore, run_id: str, base: Mapping[str, str], *, selector_version: str):
     """Refresh final selection identities at use time, after compute commits."""
     if selector_version != "0.9.0":
         # Historical generations already have a complete immutable identity;
@@ -248,8 +297,9 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     if spec.role in {"model", "mixed"} and run.blocked:
         raise ValueError("NARRATIVE_RUN_BLOCKED")
 
-    generation_values, selector_version = _runtime_snapshot(run.binding_json)
-    reading_projections = _reading_projection_versions(run.binding_json)
+    snapshot = _worker_binding_snapshot(run.binding_json)
+    generation_values, selector_version = snapshot.generation_values, snapshot.selector_version
+    reading_projections = snapshot.reading_projections
     project_root = Path(options["project_root"])
     config_path = Path(options["catalog_config_path"])
     catalog = SourceCatalog(load_catalog_config(config_path, project_root=project_root))
@@ -264,7 +314,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             model = NarrativeHTTPModel(**model_options)
         except (TypeError, ValueError):
             raise ValueError("NARRATIVE_MODEL_CONFIG_INVALID") from None
-        _verify_effective_model(model, _frozen_models(run.binding_json))
+        _verify_effective_model(model, snapshot.frozen_models)
         caller = BudgetedNarrativeCaller(store=run_store, run_id=options["run_id"], model=model,
                                         final_output_bytes_bound=options.get("max_final_bytes", 2 * 1024 * 1024))
     registry = create_default_registry()

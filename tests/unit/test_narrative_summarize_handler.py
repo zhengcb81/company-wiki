@@ -346,7 +346,25 @@ def test_failed_summary_persists_a_static_contract_rule_without_provider_values(
     assert f"rule={rule}" in result.error.detail
     assert "secret-provider-field" not in result.error.detail
     assert "opaque-provider-body" not in result.error.detail
-    assert result.result == {} and result.artifacts == () and result.effects == ()
+    assert set(result.result) == {"failed_final"}
+    from company_wiki.automation.narrative_model import FailedFinalDiagnostic
+    observed = FailedFinalDiagnostic.from_dict(result.result["failed_final"])
+    original = canonical_json({"draft": {
+        "source_id": selected.source_ref.source_id,
+        "source_sha256": selected.source_ref.content_sha256,
+        "language": selected.source_metadata.language,
+        "claims": [{"claim_id": "claim-001", "text": selected.evidence_spans[0].raw_text,
+                    "evidence_ids": ["e1"], "claim_type": "company_statement",
+                    "modality": "actual", "needs_review": False}],
+        "status": "draft", **overrides,
+    }}).encode("utf-8")
+    assert observed.final_content_sha256 == _sha(original)
+    assert observed.final_content_bytes == len(original)
+    assert original.decode("utf-8").startswith(observed.final_prefix)
+    assert observed.prefix_bytes == len(observed.final_prefix.encode("utf-8"))
+    assert len(canonical_json(result.to_dict()).encode("utf-8")) < 16384
+    assert result.metrics == HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0)
+    assert result.artifacts == () and result.effects == ()
 
 
 @pytest.mark.parametrize("role,flags,rule", [

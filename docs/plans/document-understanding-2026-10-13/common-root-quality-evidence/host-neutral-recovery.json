@@ -1,0 +1,24 @@
+{
+  "schema_version": "shared-reading-host-neutral-recovery/1",
+  "failed_normal_commit": "host-assumption guard rejected a Windows absolute-path literal in the new negative fixture",
+  "correction": "negative physical-path case uses an actual owned temporary original path on each host; rejection expectation unchanged",
+  "test_sha256": "8ee6d3fbc44d8de053baa779c45ce3e4ff7c94f178ce7a6d7ac97dda10bb2da7",
+  "focused_tests": {
+    "exit_code": 0,
+    "seconds": 9.453840800000762,
+    "tests": [
+      "tests/unit/test_narrative_post_model_failure_diagnostics.py"
+    ],
+    "temp_removed": true,
+    "sentinel_unchanged": true,
+    "production_config_unchanged": true,
+    "supplier_calls": 0
+  },
+  "host_assumption_guard": {
+    "exit_code": 0,
+    "new_unbaselined_violations": 0,
+    "baseline_unchanged": true
+  },
+  "prior_archive_unchanged": true,
+  "hooks_bypassed": false
+}

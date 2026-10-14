@@ -1,6 +1,6 @@
-## ROOT共享阅读当前进展 — 2026-10-14 冻结发布节点
+## ROOT共享阅读当前进展 — 2026-10-14 DU3实收工程发布
 
-B工程完成：模型语义投影111PASS/恢复16PASS、JSON边界18PASS、CWP→FF→RF完整离线CLI PASS；三DU3补交已纳入。A/C继续，原三源码25/25，新三9/12（安踏品牌/周转、SMIC分红范围），第一份真实摘要质量缺口保持。默认0.8。母累计480782tokens，RF aed581ac CI38609253663 success，CWP正常commit/push中。详见 ../document-understanding-2026-10-13/task_plan.md；不关闭母G2/G4/G5/公司审计循环。
+三DU3与工程修复已实收：68/36/128/82/143项相关PASS，真实原文原三25/25、新三11/12（业务11/11；原分红漏项保留），正式离线恢复/无效摘要诊断PASS。真实供应商质量开放：MiMo SUMMARY_INVALID，DeepSeek-HK0POST被全份opaque门拒，MM-US西语且JSON无效。534629tokens/364387µUSD含FX/旧unknown，默认0.8；优先片段可用性、失败输出额度、source-owned模型输出及类型/解析共因。CWP正常发布中；详见 ../document-understanding-2026-10-13/task_plan.md，不关闭母G2/G4/G5/公司循环。
 
 ## ROOT当前执行归总 — 2026-10-14 共享阅读生产接线
 

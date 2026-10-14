@@ -46,7 +46,10 @@ class _SummaryFailure(Exception):
 
 def _summary_contract_rule(error: NarrativeContractError) -> str:
     """Return only a fixed rule label; never retain a provider key or value."""
-    message = str(error)
+    try:
+        message = str(error)
+    except Exception:
+        return "CONTRACT_INVALID"
     exact = {
         "summary draft status is invalid": "DRAFT_STATUS",
         "summary claim type is invalid": "CLAIM_TYPE",
@@ -90,6 +93,41 @@ def _summary_contract_rule(error: NarrativeContractError) -> str:
         if message.startswith(prefix):
             return rule
     return "CONTRACT_INVALID"
+
+
+def _model_response_rule(error: ModelResponseError) -> str:
+    """Name a known validation rule without retaining exception/provider text."""
+    if isinstance(error.__cause__, UnicodeDecodeError):
+        return "FINAL_UTF8"
+    try:
+        message = str(error)
+    except Exception:
+        return "MODEL_RESPONSE_CONTRACT"
+    return {
+        "model response is not strict UTF-8 JSON": "FINAL_JSON",
+        "model response contains duplicate JSON keys": "JSON_DUPLICATE_KEYS",
+        "model response contains a non-JSON numeric literal": "JSON_NUMBER",
+        "model response must contain a draft": "RESPONSE_SHAPE",
+        "model response prompt version differs from request": "PROMPT_IDENTITY",
+        "model response contradicts the untranslated source contract": "TRANSLATION",
+        "model response contains a physical path": "PHYSICAL_PATH",
+    }.get(message, "MODEL_RESPONSE_CONTRACT")
+
+
+def _post_model_failure(
+    response: NarrativeModelResponse, metrics: HandlerMetrics,
+    code: str, outcome: HandlerOutcome, detail: str,
+) -> HandlerResult:
+    """Observe only returned final bytes; optional diagnostics cannot hide usage."""
+    diagnostic = None
+    try:
+        diagnostic = FailedFinalDiagnostic.from_observation(
+            provider_body=None, content=response.response_bytes.decode("utf-8"))
+    except Exception:
+        # Invalid UTF-8 and optional observation failures keep the original
+        # failure and native metrics, without replacement text or invented wire.
+        pass
+    return _failure(code, outcome, detail, metrics, failed_final=diagnostic)
 
 
 def _failure(
@@ -271,13 +309,20 @@ class NarrativeSummarizeHandler:
         try:
             completed = self._completed_result(selected, review, response)
         except _SummaryFailure as exc:
-            return _failure(exc.code, exc.outcome, exc.detail, metrics)
-        except ModelResponseError:
-            return _failure(
+            return _post_model_failure(response, metrics, exc.code, exc.outcome, exc.detail)
+        except ModelResponseError as exc:
+            return _post_model_failure(
+                response, metrics,
                 "MODEL_RESPONSE_INVALID",
                 HandlerOutcome.TERMINAL_FAILURE,
-                "model response violates its transport contract",
-                metrics,
+                "model response violates its transport contract "
+                f"(rule={_model_response_rule(exc)})",
+            )
+        except UnicodeError:
+            return _post_model_failure(
+                response, metrics,
+                "MODEL_RESPONSE_INVALID", HandlerOutcome.TERMINAL_FAILURE,
+                "model response cannot form a UTF-8 summary (rule=FINAL_UTF8)",
             )
         return _success(completed, metrics)
 
@@ -331,7 +376,8 @@ class NarrativeSummarizeHandler:
             draft = decode_model_draft(response, selected=selected)
         except ModelCitationError as exc:
             raise _SummaryFailure("SUMMARY_INVALID", HandlerOutcome.TERMINAL_FAILURE,
-                                  "model draft cites evidence outside its selection") from exc
+                                  "model draft cites evidence outside its selection "
+                                  "(rule=EVIDENCE_REFERENCE)") from exc
         except PhysicalPathLeakError as exc:
             raise ModelResponseError("model response contains a physical path") from exc
         except NarrativeContractError as exc:
@@ -362,7 +408,7 @@ class NarrativeSummarizeHandler:
             raise _SummaryFailure(
                 "RESULT_TOO_LARGE",
                 HandlerOutcome.TERMINAL_FAILURE,
-                "summary result exceeds its byte budget",
+                "summary result exceeds its byte budget (rule=RESULT_SIZE)",
             ) from exc
         except PhysicalPathLeakError as exc:
             raise ModelResponseError("model response contains a physical path") from exc
