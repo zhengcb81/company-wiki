@@ -254,7 +254,7 @@ def select_verified_projection(view: VerifiedProjectionView, *, title: str,
             coverage_complete=view.coverage_complete)
     units = tuple(_unit(span) for span in native_spans)
     parsed = _ProjectionStructure(source_id=anchor["source_id"], source_sha256=anchor["content_sha256"],
-        language=view.language, units=units, _complete=view.coverage_complete)
+        language=view.language, units=units, _complete=view.coverage_complete, mime_type="application/json")
     package = bound_selector(parsed, title=title, existing_kind="investor_relations")
     if not view.coverage_complete and package.status != "blocked":
         return replace(package, coverage_complete=False, status="partial")

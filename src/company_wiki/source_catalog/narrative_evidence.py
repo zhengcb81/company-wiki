@@ -79,7 +79,7 @@ NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
 # 0.7.1 respects native document traversal, table and slide-shape boundaries.
 # 0.8.0 preserves bounded operating context in mixed narrative blocks.
 NARRATIVE_SELECTOR_VERSION = "0.8.0"
-SUPPORTED_NARRATIVE_SELECTOR_VERSIONS = frozenset({"0.6.0", "0.7.0", "0.7.1", "0.8.0"})
+SUPPORTED_NARRATIVE_SELECTOR_VERSIONS = frozenset({"0.6.0", "0.7.0", "0.7.1", "0.8.0", "0.9.0"})
 
 
 class NarrativeSelectorVersionError(ValueError):
@@ -2162,6 +2162,10 @@ def select_narrative_evidence(
 ) -> NarrativeEvidencePackage:
     """Select compact narrative spans with an explicit replayable policy version."""
     effective_version = resolve_narrative_selector_version(selector_version)
+    if effective_version == "0.9.0":
+        from .narrative_reading import select_reading_evidence
+        return select_reading_evidence(parsed, title=title, existing_kind=existing_kind,
+                                      max_selected=max_selected)
     original = parsed
     parsed = matching_document(parsed)
     route = route_document(

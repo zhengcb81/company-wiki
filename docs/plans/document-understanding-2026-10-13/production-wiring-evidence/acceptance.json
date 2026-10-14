@@ -1,0 +1,348 @@
+{
+  "schema_version": "shared-reading-production-node/1",
+  "date": "2026-10-14",
+  "status": "ENGINEERING_WIRING_ACCEPTED_QUALITY_OPEN",
+  "default_selector": "0.8.0",
+  "explicit_public_request_selector": "0.9.0",
+  "base_commit": "4204180aea5f5b4342189b1f05c83a97cbd4a741",
+  "unit_node": {
+    "first_passed": 1149,
+    "skipped": 17,
+    "initial_failed": 3,
+    "initial_seconds": 138.88,
+    "failure": "legacy factory unnecessarily accessed new final generation",
+    "affected_rerun": {
+      "total": 51,
+      "passed": 50,
+      "failed": 1,
+      "failure": "new private test omitted explicit frozen selector_version argument"
+    },
+    "final_resolver_tests": {
+      "passed": 18,
+      "failed": 0,
+      "seconds": 3.99
+    },
+    "initial_failures_preserved": true,
+    "all_known_engineering_failures_closed": true
+  },
+  "legacy_reuse_e2e": {
+    "passed": 11,
+    "failed": 0,
+    "seconds": 139.08
+  },
+  "pre_commit_repair": {
+    "initial": "host-assumption guard rejected a Windows-only literal in a negative fixture",
+    "fix": "derive the same absolute-path negative case from independent tmp_path",
+    "affected_tests": {
+      "passed": 13,
+      "failed": 0,
+      "seconds": 2.06
+    },
+    "hook_bypass": false
+  },
+  "new_e2e": {
+    "nodes": 7,
+    "concentrated_passed": 6,
+    "initial_failed": 1,
+    "failure": "test observed open_version while public reader uses open_described_version",
+    "focused_actual_byte_owner_test": {
+      "passed": 1,
+      "failed": 0,
+      "seconds": 10.45
+    },
+    "v5_real_upgrade": {
+      "passed": 1,
+      "failed": 0,
+      "seconds": 13.14
+    },
+    "cross_run_production_cache": "NOT_ACCEPTED; external dependency port not delivered"
+  },
+  "independent_review": "root-final-review.md; no new A/B blocker; unknown-language extra read P2",
+  "long_document_probe": {
+    "synthetic_units": 20000,
+    "selected": 96,
+    "late_critical": 3,
+    "all_late_critical_retained": true,
+    "context_bytes": 40492,
+    "deferred_sample": 128,
+    "full_deferred_count": 19904,
+    "selection_seconds": 16.3647
+  },
+  "real_native_compare": {
+    "samples": [
+      "cn-annual",
+      "hk-annual",
+      "us-10k"
+    ],
+    "same_original_single_parse_per_sample": true,
+    "summary_fidelity": "NOT_EVALUATED",
+    "original_sha_size_mtime_unchanged": true,
+    "msft_frozen_critical_quote_diagnostic": {
+      "new": "1/8",
+      "old": "4/8",
+      "status": "FAIL_OPEN",
+      "cause": "actual family policy fell back; operating explanations rejected; mechanism deferred by chars"
+    }
+  },
+  "new_provider_calls": 0,
+  "new_external_model_calls": 0,
+  "new_paid_usage": 0,
+  "production_config_unchanged": true,
+  "test_temp_restore": true,
+  "external_du3_owned_writes": 0,
+  "archive_roundtrip_verified": true,
+  "archive_bytes": 329252,
+  "evidence_files": [
+    {
+      "name": "native_compare.py",
+      "bytes": 4341,
+      "sha256": "dbd193cbfe2f8d04f996253094163255158a1fec35812e91a8fce3d0d4b628b6"
+    },
+    {
+      "name": "root/e2e-restore.json",
+      "bytes": 157,
+      "sha256": "e32ebd318fee0a175d58dff434fcb9c3a5cd858199a96f61e3bdd5f06ff82a34"
+    },
+    {
+      "name": "root/e2e.json",
+      "bytes": 442,
+      "sha256": "a5456df61dccd75fa67e144d172ec0838f2a338474bb54d4987638acd51f278b"
+    },
+    {
+      "name": "root/e2e.log",
+      "bytes": 1331,
+      "sha256": "06e14fe317700fd2b9382204701079a406301e949a3c64b9e2128571b65e4f3c"
+    },
+    {
+      "name": "root/e2e.xml",
+      "bytes": 2119,
+      "sha256": "de4dc7f3e8752db0fad89b7a27308ac8f9a2c82425e100b9fd26665faa6d670c"
+    },
+    {
+      "name": "root/factory-affected.xml",
+      "bytes": 9228,
+      "sha256": "a0f08a93a4d362c93ccb2a6cef77c60c25210de23ce99fb57d643e79ab300cea"
+    },
+    {
+      "name": "root/factory-resolver-final.xml",
+      "bytes": 3410,
+      "sha256": "9792e4f9f9b6e06756454584c238b988ea832abf10a36bbe773407742f6683e2"
+    },
+    {
+      "name": "root/native-comparison-storage.json",
+      "bytes": 263,
+      "sha256": "826c8e843cf3d3806f0b02b2003619632affebcf68908e82c27045615a112dcc"
+    },
+    {
+      "name": "root/native-comparison.json.gz",
+      "bytes": 237582,
+      "sha256": "948e80c7138b88a4c193a47448acc8161e4d60fc2a6865f9d66574cc9cde8963"
+    },
+    {
+      "name": "root/portable-path-final.xml",
+      "bytes": 2320,
+      "sha256": "db14df890934a670c72e55924d2bf3ffb6d1d1aaacebb34bd23948af3bf94aa8"
+    },
+    {
+      "name": "root/unit-restore.json",
+      "bytes": 157,
+      "sha256": "e32ebd318fee0a175d58dff434fcb9c3a5cd858199a96f61e3bdd5f06ff82a34"
+    },
+    {
+      "name": "root/unit.json",
+      "bytes": 2189,
+      "sha256": "ab8cdeb83e6e5f8e332696e84e32ff4ee64fe6ef32b238d374a401e82460b37b"
+    },
+    {
+      "name": "root/unit.log",
+      "bytes": 12937,
+      "sha256": "65640833343ef6430a6f0c50986cb8350328e199de2c86243be6ba488064b942"
+    },
+    {
+      "name": "root/unit.xml",
+      "bytes": 204601,
+      "sha256": "7b3ad71e7fe844f2c0fc453f03e627f7f460571a0227f9dd57fadc202c64ad38"
+    },
+    {
+      "name": "root-final-review.md",
+      "bytes": 6629,
+      "sha256": "d1ed57363415bc26ecc0b2c73ca8da2a794cb860369c360786fa4d4d2c406198"
+    },
+    {
+      "name": "root-production-receipt.json",
+      "bytes": 12462,
+      "sha256": "b4a43cd2efc10399f4885b7f5e5b2e5a32e3ae638d6920a7669e23c45ab12f17"
+    },
+    {
+      "name": "root_checks.py",
+      "bytes": 4058,
+      "sha256": "f69590a812e10f629ebbc08717521781be05a0ea629bcc81375e0f90b1854c13"
+    },
+    {
+      "name": "tests-agent/character-bound.log",
+      "bytes": 1125,
+      "sha256": "173eedd3f3d975e194a98354e830ae4d2aac4bf59d04d7232c4a44e53a6ae66f"
+    },
+    {
+      "name": "tests-agent/green-16.json",
+      "bytes": 384,
+      "sha256": "350ecadaed8a4e7b1807abd0e805bdd444f8abb49cd8b74e74571e9ecf049d56"
+    },
+    {
+      "name": "tests-agent/green-16.log",
+      "bytes": 1177,
+      "sha256": "ff9f49d0b1f51ddf17ac6b728c6e3fe07ec8d752186b57780396e7d373415dc2"
+    },
+    {
+      "name": "tests-agent/green-20.log",
+      "bytes": 1177,
+      "sha256": "617d6dc59f475d571f9cf018e8ef75189907277535a94f575d01741c00643b59"
+    },
+    {
+      "name": "tests-agent/handoff.json",
+      "bytes": 881,
+      "sha256": "792c405362e3065c87aff26707d978adab189b032a8de12f5d6ecf3422d320d2"
+    },
+    {
+      "name": "tests-agent/handoff.md",
+      "bytes": 1825,
+      "sha256": "a4906d7ded70aa31e320f1e67283dd6ce48fd5f2b2a104ac90c455c6b60f6e16"
+    },
+    {
+      "name": "tests-agent/independent-probes-red.log",
+      "bytes": 4712,
+      "sha256": "1ad327824aa1687532ce453b7ad31ba900d6b878b5fbe77ab7f3061c19ad0e03"
+    },
+    {
+      "name": "tests-agent/large-input-probe.json",
+      "bytes": 1452,
+      "sha256": "de5dd343c8a96d4f9dccf11d3402b279c6e723f75c2b4df450041bed41aec32d"
+    },
+    {
+      "name": "tests-agent/large-pool-red.log",
+      "bytes": 2141,
+      "sha256": "944533471b69cc42c2563356ccacf25e4fee89232d8b8d5d041b1965d7dfdf7f"
+    },
+    {
+      "name": "tests-agent/large_input_probe.py",
+      "bytes": 3330,
+      "sha256": "fc4d7106945e32f6d5f62e1cd1500bc20ae13ec1b2532a90eacb0c0732d429bb"
+    },
+    {
+      "name": "tests-agent/multiline-table-accounting-red.log",
+      "bytes": 2892,
+      "sha256": "ab37725af2ad6fde5853ca16fae8c935e9fff0e12a049365eb8e557adf10d5a4"
+    },
+    {
+      "name": "tests-agent/multiline-table-quantity-red.log",
+      "bytes": 2344,
+      "sha256": "0df82428281bf3f0cba27cdf248c3de07b4e231658998d27c19589bd014c4d63"
+    },
+    {
+      "name": "tests-agent/multiline-table-year-number-red.log",
+      "bytes": 1813,
+      "sha256": "7f0b6f25ecc56e63f852544d10d50dbe7beae1adf6afd70b8922809a0fd35b26"
+    },
+    {
+      "name": "tests-agent/multiline-tables-acceptance.json",
+      "bytes": 2048,
+      "sha256": "6a2d1760920d553ab20f2c090d337d8a0137d90efd8fc7f01de5634a5ac3bd3f"
+    },
+    {
+      "name": "tests-agent/multiline-tables-final-affected.log",
+      "bytes": 2310,
+      "sha256": "a269c4e850bfc09981c1c6dc1153acfe1e43296134473a9888f119db9e1bc912"
+    },
+    {
+      "name": "tests-agent/multiline-tables-first-green.log",
+      "bytes": 1498,
+      "sha256": "17d3bff27f1f7b33441a3bb72d5443452aa86b83507d0640a3e030b09773d0ba"
+    },
+    {
+      "name": "tests-agent/multiline-tables-green.log",
+      "bytes": 1498,
+      "sha256": "b0db3b8d9b5749f40fecfb38d3eba8e3204b3ef1471f6414aec20b6394fb0e3c"
+    },
+    {
+      "name": "tests-agent/multiline-tables-handoff.md",
+      "bytes": 3797,
+      "sha256": "ffffb8e4bb5f2631d20dc502779d367604fc994dcd57c3de311c758ac9274de9"
+    },
+    {
+      "name": "tests-agent/multiline-tables-real-final.log",
+      "bytes": 9944,
+      "sha256": "e0fe530a15b241702a6f3453c733d9be590e61dcc75d667a060a999c28ce54c0"
+    },
+    {
+      "name": "tests-agent/multiline-tables-real.json",
+      "bytes": 15322,
+      "sha256": "87192d0a378e62164fd56a4b3c2f02a680fc4a6d4f121a4e5396aaec6f6f81df"
+    },
+    {
+      "name": "tests-agent/multiline-tables-real.log",
+      "bytes": 6445,
+      "sha256": "9b3d5ceb9f2ad0e0fea02b081db1a3d47ce23e8a5becc3693a491331d1daba4e"
+    },
+    {
+      "name": "tests-agent/multiline-tables-red.log",
+      "bytes": 6256,
+      "sha256": "85dd663e1374d4de7239d0cb7d492a925be28eaf5155a8da34253a2b692cc473"
+    },
+    {
+      "name": "tests-agent/multiline_tables_real_probe.py",
+      "bytes": 4321,
+      "sha256": "207fc453383df8d557958afc4cdc8d49788d6d81b3edff11e82a5cba34aa2d1b"
+    },
+    {
+      "name": "tests-agent/real-anchor-probe.json",
+      "bytes": 9931,
+      "sha256": "6477eb5164b1f01c3a39413af71e75f05223cac016777fbdf782fbada9252fb3"
+    },
+    {
+      "name": "tests-agent/real_anchor_probe.py",
+      "bytes": 4291,
+      "sha256": "64b4112d6f2c8e3f6a077a02235afc57b253cb6a13c52ed54d65a2340bceedfc"
+    },
+    {
+      "name": "tests-agent/red.json",
+      "bytes": 692,
+      "sha256": "287c6d518117936884e655d3e6b71ed3baee2f1c8fc17f2b227436c72530d2ba"
+    },
+    {
+      "name": "tests-agent/red.log",
+      "bytes": 6079,
+      "sha256": "b018ea55cad799e18d5a00374ed158660f4262eb12f05b27a3fd9f18193e3548"
+    },
+    {
+      "name": "tests-agent/structured-qa-final-focused.log",
+      "bytes": 1992,
+      "sha256": "228de303a4eb55397a19b83862b42ec0b98e762a119393e5f2196ae87f8459c9"
+    },
+    {
+      "name": "tests-agent/structured-qa-green-focused.log",
+      "bytes": 2502,
+      "sha256": "6dc9f5b44705e3bc3ed0f85ac440cbf3cb8e5465fe94d94a8d95dea8f24ebe7f"
+    },
+    {
+      "name": "tests-agent/structured-qa-handoff.md",
+      "bytes": 3874,
+      "sha256": "a06caa0403082a4d4e610fb4ac8bde4070fccadacaa78f1d193302cce01e1682"
+    },
+    {
+      "name": "tests-agent/structured-qa-red.log",
+      "bytes": 6804,
+      "sha256": "5b92be0c8e778f9fce36812fd9cc7a89aabc917ad8ad5914a0cc9b0cab55bdf4"
+    },
+    {
+      "name": "tests-agent/structured-qa-standard-temp-escalated.log",
+      "bytes": 1158,
+      "sha256": "cd5110b779f9ad5200ab8f2bd40b39e2178c4f85412f3b9dd56c0372deaa92a0"
+    },
+    {
+      "name": "tests-agent/structured-qa-standard-temp.log",
+      "bytes": 1001,
+      "sha256": "5ca260ff2f21669a8798401687b5787f7b44006b80df5ce50219383e1af58445"
+    }
+  ],
+  "next": "close shared mechanism/coverage roots; receive DU3 dependencies/geometry/quality; real summaries and G2/G4/G5; default switch only after quality"
+}

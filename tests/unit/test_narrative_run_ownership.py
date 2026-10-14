@@ -315,13 +315,16 @@ def test_v3_upgrade_preserves_all_facts_and_leaves_old_owner_unbound(tmp_path):
         return shutil.copy2(source, tmp_path / "before-v3.db")
 
     report = migrations.migrate_database(database, backup_hook=backup)
-    assert report.to_version == 5 and report.applied_versions == (4, 5)
-    assert calls == [(3, 5)]
+    assert report.to_version == migrations.SCHEMA_VERSION
+    assert report.applied_versions == tuple(range(4, migrations.SCHEMA_VERSION + 1))
+    assert calls == [(3, migrations.SCHEMA_VERSION)]
     assert (tmp_path / "before-v3.db").read_bytes() == original_bytes
     after = _facts(database)
     assert after.keys() == before.keys()
-    for table in before.keys() - {"narrative_runs"}:
+    for table in before.keys() - {"narrative_runs", "narrative_run_jobs"}:
         assert after[table] == before[table]
+    assert [row[:-1] for row in after["narrative_run_jobs"]] == before["narrative_run_jobs"]
+    assert all(row[-1] is None for row in after["narrative_run_jobs"])
     assert [row[:-2] for row in after["narrative_runs"]] == before["narrative_runs"]
     assert after["narrative_runs"][0][-2:] == (None, None)
     auto = AutomationStore(database)

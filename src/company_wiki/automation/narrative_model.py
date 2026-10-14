@@ -9,7 +9,7 @@ import hashlib
 import json
 from typing import Any, NoReturn, Protocol
 
-from .models import canonical_json, canonical_json_hash, require_sha256
+from .models import canonical_json, canonical_json_hash, require_sha256, _to_plain
 from company_wiki.source_catalog.narrative_evidence import (
     SummaryValidationError, project_summary_claim_quality, validate_summary_claim,
     validate_summary_identity,
@@ -20,6 +20,7 @@ from .narrative_contracts import (
     NarrativeContractError, NarrativeSelectResult, _claim_from_dict, _draft_from_dict,
     assert_no_physical_paths, _draft_to_dict, SubjectSummaryDraft,
     subject_draft_from_dict, subject_draft_to_dict, validate_subject_summary_identity,
+    _reading_context,
 )
 
 
@@ -199,6 +200,9 @@ def _citation_mapping(selected: NarrativeSelectResult) -> dict[str, str]:
 
 def _group_mapping(selected: NarrativeSelectResult) -> dict[str, tuple[str, tuple[str, ...]]]:
     """Project the existing source read model; this is not another group registry."""
+    if selected.reading_context is not None:
+        return {f"g{index}": (row["group_id"], tuple(row["evidence_ids"]))
+                for index, row in enumerate(selected.reading_context["groups"], start=1)}
     if selected.subject.kind == "official_json":
         # Membership is separate from quotes and roles. Identical record labels
         # from different immutable parents must never create a shared group.
@@ -262,6 +266,8 @@ class NarrativeModelRequest:
 
     @classmethod
     def from_selection(cls, selected: NarrativeSelectResult) -> "NarrativeModelRequest":
+        if selected.reading_context is not None:
+            selected = replace(selected, reading_context=_reading_context(selected.reading_context, selected.evidence_spans))
         projected = selected.subject.kind == "official_json"
         if projected and (not selected.evidence_spans or selected.source_metadata.language not in {"zh", "en", "mixed"}):
             raise ModelResponseError("SUMMARY_INPUT_UNAVAILABLE")
@@ -304,6 +310,15 @@ class NarrativeModelRequest:
                           ("status", "coverage_complete", "omitted_candidate_count")},
             "response_schema": _response_schema(len(mapping), projected=projected),
         }
+        if selected.reading_context is not None:
+            # Strategies are data, not a second instruction or a second evidence
+            # body. The source selector already chose these policies from the
+            # final selected original material. Group membership uses the one
+            # existing alias table above, including shared context references.
+            strategy = _to_plain(selected.reading_context)
+            strategy["groups"] = [{"id": alias, "kind": row["kind"], "section_role": row["section_role"]}
+                                  for alias, row in zip(groups, strategy["groups"], strict=True)]
+            envelope["reading_strategy"] = strategy
         data_json = canonical_json(envelope)
         identity = {
             "prompt_version": prompt_version,

@@ -3,7 +3,7 @@
 PLAN_ID: document-understanding-2026-10-13
 PWF_PLAN_ROOT: C:/Users/郑曾波/Projects/company-wiki/docs/plans
 Owner: ROOT
-Current Phase: A — 阅读预算planner已实现，生产ReadingPlan接线继续
+Current Phase: A/B — 生产选择/摘要与缓存恢复已接线，集中工程验收及真实质量继续
 
 ## Goal
 
@@ -30,7 +30,7 @@ Current Phase: A — 阅读预算planner已实现，生产ReadingPlan接线继�
 
 ### Phase B: 正式摘要、generation与缓存恢复
 
-**Status:** pending
+**Status:** in_progress
 
 同一次parser→DU→正式SelectResult→ModelRequest→NarrativeRef，只有最终实际采用提示进入模型。selection-decision指纹与final-sent-policy指纹分开；未选但参与决策的策略变化也失效，无关策略不全库重建。
 
@@ -46,13 +46,13 @@ Current Phase: A — 阅读预算planner已实现，生产ReadingPlan接线继�
 
 ## Next Step
 
-把本次实际ReadingPlan/facets/依赖图接到正式candidate→finalize→reading_plan/1预算流程，同时替换新活跃路径的题材准入/固定4–9个月优待；然后验证真正production ModelRequest的唯一原文引用。纯planner已TDD实现，但Phase A全链未完成，生产默认尚未切换。
+正常发布已集中验收的显式0.9生产链/恢复代码，随后优先关闭真实微软原文关键业务1/8漏读的共用根因：实际表单→family policy、经营解释准入、闭合成本内的机制/主题覆盖。接收DU3依赖/几何/质量组件后做真实缓存与同预算摘要/G2/G4/G5，正式默认仍0.8。外包owned目录不改。
 
 ## 并行施工（现在可独立启动）
 
 [DU3三卡总览与工作目录](parallel/du3-2026-10-14/README.md)。QUALITY仅拥有tools/document_understanding_benchmark；DEPENDENCIES仅拥有新decision_dependencies子包；GEOMETRY仅拥有新layout_snapshots子包，各自另有排他tests/ledger、独立稀疏worktree。ROOT保留source_catalog候选/预算/finalize、DU选择/summary与automation正式接线，三线不写这些共享目录、不重开旧DU/DU2卡。
 
-三卡当前READY_NOT_STARTED（由用户分发启动），技术接口冻结为DU3/1。ROOT接线依次DEPENDENCIES→GEOMETRY→QUALITY，但施工可同时进行，不等主线。A/B/C每卡只作三个大节点；原件只读、不调用付费模型或provider，真实模型与跨仓由ROOT共用母窗口。
+三卡已由用户分发施工，技术接口冻结为DU3/1；只读已看到DEPENDENCIES排他模块/测试未提交施工，当前尚未收到交付。ROOT接线依次DEPENDENCIES→GEOMETRY→QUALITY，但施工可同时进行，不等主线。A/B/C每卡只作三个大节点；原件只读、不调用付费模型或provider，真实模型与跨仓由ROOT共用母窗口。
 
 ## 完成标准与注意事项
 
@@ -70,3 +70,18 @@ Current Phase: A — 阅读预算planner已实现，生产ReadingPlan接线继�
 ## Phase A预算组件节点
 
 纯planner104集中PASS/38独立probe PASS，mypy/ruff通过；原RED、环境失败、测试fixture纠正及独审中间失败留证：[小归档](phase-a-budget-evidence/receipts.zip)/[组件收据](phase-a-budget-evidence/acceptance.json)。只签纯planner，生产ReadingPlan/候选/最终模型输入仍待接线；旧默认与原件/配置保持，0付费。
+
+## 当前 ROOT 实施记录 — 2026-10-14
+
+- 0.9.0新路径实际运行共享understand_units→候选/闭包→既有reading_plan/1→canonical EvidenceSpan。旧题材/4–9月规则只留历史版本。明确anchor身份、被拒包deferred、结构工作停止已修；21边界反例通过（另20K效率反例正在修）。不同原件同locator+同文本保留各自source身份，结构按parent隔离、全局共同竞争预算。
+- 正式SelectResult→ModelRequest→Bundle保留紧凑策略；真实48K共享上下文只发一次且双组独立。30新传输测试/246相关集中通过；后续ROOT加bounded deferred全count、选择诊断与可选decision依赖，需统一复验。
+- AUTO schema6只增既有run_jobs的nullable final_generation_json；select成功与final CAS同lease事务。实际model有效配置核对、reservation前final-ready、动态runtime resolver已接。143 Store/migration/factory相关通过。
+- 新HTML/PDF/TXT正式CLI+子进程E2E和付费后待activation恢复4PASS/65.91s；loopback0真实供应商调用，原件/config/临时目录恢复。same-run0POST，缺完整decision trace跨run不能冒充缓存命中。
+- 独审发现20K候选扫描耗尽预算、deferred逾1MiB，及真实HK多行经营表漏读；分别改planner索引/工作计费/有限样本＋全量计数与通用多行header结构。旧失败收据保留，不提高限额或降低gold。真实供应商/质量泛化/default切换未完成。
+- 三DU3工作树只读核对仍在195aba20基线，无新commit；ROOT未修改它们owned路径。当前ROOT可选dependency hook缺模块会明确诊断，允许摘要但不允许新缓存有效复用，不重写外包freezer。
+
+## 2026-10-14 生产接线工程节点
+
+[节点收据](production-wiring-evidence/acceptance.json) / [紧凑原始证据](production-wiring-evidence/receipts.zip)。正式public request显式0.9、唯一原文/策略摘要、same-run/outbox/真实v5升级、原件篡改拒绝已验。集中1149 PASS/17 SKIP/3旧factory失败后，只复跑受影响51（50PASS/1新test参数失配）及最后18PASS；全部已知工程失败关闭，原FAIL保留。新7E2E：集中6PASS，1计数观察点过时，改为统一真实byte owner后1PASS；旧11E2E全PASS。没有反复重跑千项套件或降低断言。
+
+**A/B/C仍未全部完成：** 真实跨run缓存等待DU3依赖组件；同原件旧/新三市场native回放更快但不是摘要质量通过。实际微软8条required_business仅1/8在新选择中保留（旧4/8），三层共因已实证，不是拆句误报。新默认不能启用；下一批先通用RED再修，不在生产加公司词/样本特判。unknown语言准备仍有一次重复读，作为同责任层性能收尾，不新增审批。

@@ -12,6 +12,7 @@ from typing import Any
 from company_wiki.source_catalog.narrative_evidence import (
     NARRATIVE_PARSER_VERSION,
     NARRATIVE_SELECTOR_VERSION,
+    resolve_narrative_selector_version,
 )
 
 from .models import canonical_json, canonical_json_hash
@@ -138,6 +139,7 @@ class NarrativeBatchRequest:
     refresh: bool = False
     items: tuple[NarrativeBatchItem, ...] = ()
     schema_version: str = BATCH_REQUEST_SCHEMA
+    selector_version: str | None = None
 
     @classmethod
     def from_dict(cls, value: object) -> NarrativeBatchRequest:
@@ -166,6 +168,7 @@ class NarrativeBatchRequest:
                 "max_final_bytes",
                 "max_persistent_bytes",
                 "max_scratch_bytes",
+                "selector_version",
             }
         ):
             raise ValueError("unsupported projected batch request fields")
@@ -173,6 +176,9 @@ class NarrativeBatchRequest:
             raise ValueError("batch request is missing required fields")
         if type(value.get("refresh", False)) is not bool:
             raise ValueError("refresh must be a boolean")
+        selector = None
+        if "selector_version" in value:
+            selector = resolve_narrative_selector_version(_text(value["selector_version"], "selector_version"))
         membership = value[membership_field]
         if not isinstance(membership, list) or not 1 <= len(membership) <= 100:
             raise ValueError("batch must contain 1 to 100 explicit work items")
@@ -271,6 +277,7 @@ class NarrativeBatchRequest:
             value.get("refresh", False),
             tuple(items.values()) if projected else (),
             value["schema_version"],
+            selector,
         )
 
     @property
@@ -286,6 +293,7 @@ class NarrativeBatchRequest:
     def to_dict(self) -> dict[str, Any]:
         return {
             **({"refresh": True} if self.refresh else {}),
+            **({"selector_version": self.selector_version} if self.selector_version is not None else {}),
             "schema_version": self.schema_version,
             "run_id": self.run_id,
             **(
@@ -321,7 +329,7 @@ class NarrativeBatchRequest:
             "model_request_schema": MODEL_REQUEST_SCHEMA,
             "prompt": NARRATIVE_PROMPT_VERSION,
             "parser": NARRATIVE_PARSER_VERSION,
-            "selector": NARRATIVE_SELECTOR_VERSION,
+            "selector": self.selector_version or NARRATIVE_SELECTOR_VERSION,
         }
         if any(source.mime_type in NORMALIZED_MIME_TYPES for source in self.sources):
             versions["document_normalization"] = NORMALIZATION_PARSER_VERSION
@@ -342,7 +350,7 @@ class NarrativeBatchRequest:
             "adapter": NarrativeHTTPModel.adapter_id,
             "prompt": NARRATIVE_PROMPT_VERSION,
             "parser": NARRATIVE_PARSER_VERSION,
-            "selector": NARRATIVE_SELECTOR_VERSION,
+            "selector": self.execution_versions["selector"],
         }
         if any(source.mime_type in NORMALIZED_MIME_TYPES for source in self.sources):
             identity["document_normalization"] = NORMALIZATION_PARSER_VERSION

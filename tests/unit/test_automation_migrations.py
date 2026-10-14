@@ -55,7 +55,7 @@ def test_v4_binding_column_upgrade_is_atomic_and_preserves_historical_run(tmp_pa
     db = tmp_path / "existing.db"
     before = _frozen_v4_with_run(migrations, db)
     report = migrations.migrate_database(db)
-    assert (report.from_version, report.to_version, report.applied_versions) == (4, 5, (5,))
+    assert (report.from_version, report.to_version, report.applied_versions) == (4, migrations.SCHEMA_VERSION, tuple(range(5, migrations.SCHEMA_VERSION + 1)))
     assert report.backup_path is None
     with sqlite3.connect(db) as connection:
         after = connection.execute("SELECT * FROM narrative_runs").fetchone()
@@ -124,11 +124,11 @@ def test_m01_new_path_initializes_schema_at_version_5(tmp_path):
     conn = _connect_readonly(db)
     try:
         assert set(_user_tables(conn)) == EXPECTED_TABLES
-        assert _user_version(conn) == 5
+        assert _user_version(conn) == migrations.SCHEMA_VERSION
     finally:
         conn.close()
-    assert report.to_version == 5
-    assert report.applied_versions == (1, 2, 3, 4, 5)
+    assert report.to_version == migrations.SCHEMA_VERSION
+    assert report.applied_versions == tuple(range(1, migrations.SCHEMA_VERSION + 1))
 
 
 # --------------------------------------------------------------------------- #
@@ -383,8 +383,8 @@ def test_m04_repeated_v5_open_is_noop_with_stable_fingerprint(tmp_path):
     for _ in range(9):
         report = migrations.migrate_database(db)
         assert report.applied_versions == ()
-        assert report.from_version == 5
-        assert report.to_version == 5
+        assert report.from_version == migrations.SCHEMA_VERSION
+        assert report.to_version == migrations.SCHEMA_VERSION
         assert report.schema_fingerprint == fingerprint
         assert report.backup_path is None
 
@@ -406,13 +406,13 @@ def test_m05_preexisting_empty_v0_file_migrates_with_one_backup(tmp_path):
 
     report = migrations.migrate_database(db, backup_hook=backup_hook)
     assert report.from_version == 0
-    assert report.to_version == 5
-    assert report.applied_versions == (1, 2, 3, 4, 5)
+    assert report.to_version == migrations.SCHEMA_VERSION
+    assert report.applied_versions == tuple(range(1, migrations.SCHEMA_VERSION + 1))
     assert len(calls) == 1
-    assert calls[0][1] == 0 and calls[0][2] == 5
+    assert calls[0][1] == 0 and calls[0][2] == migrations.SCHEMA_VERSION
     conn = _connect_readonly(db)
     try:
-        assert _user_version(conn) == 5
+        assert _user_version(conn) == migrations.SCHEMA_VERSION
         assert set(_user_tables(conn)) == EXPECTED_TABLES
     finally:
         conn.close()
@@ -456,7 +456,7 @@ def test_m07_higher_user_version_is_unsupported(tmp_path):
     migrations = _migrations()
     db = tmp_path / "automation.db"
     conn = sqlite3.connect(db)
-    conn.execute("PRAGMA user_version = 6")
+    conn.execute(f"PRAGMA user_version = {migrations.SCHEMA_VERSION + 1}")
     conn.commit()
     conn.close()
     before = db.read_bytes()
@@ -465,7 +465,7 @@ def test_m07_higher_user_version_is_unsupported(tmp_path):
     # user_version must remain 6 (no downgrade/clear)
     conn = _connect_readonly(db)
     try:
-        assert _user_version(conn) == 6
+        assert _user_version(conn) == migrations.SCHEMA_VERSION + 1
     finally:
         conn.close()
     assert db.read_bytes() == before
@@ -663,7 +663,7 @@ def test_m14_concurrent_init_produces_one_v5_schema(tmp_path):
     assert errors == []
     conn = _connect_readonly(db)
     try:
-        assert _user_version(conn) == 5
+        assert _user_version(conn) == migrations.SCHEMA_VERSION
         assert set(_user_tables(conn)) == EXPECTED_TABLES
         report = migrations.validate_database(db)
         assert report.integrity_ok
@@ -788,11 +788,11 @@ def test_m14_classification_uses_one_snapshot_during_concurrent_init(
         assert not writer.is_alive(), "concurrent initializer leaked a thread"
 
     assert errors == []
-    assert writer_reports[0].applied_versions == (1, 2, 3, 4, 5)
+    assert writer_reports[0].applied_versions == tuple(range(1, migrations.SCHEMA_VERSION + 1))
     assert reader_report.applied_versions == ()
     assert reader_report.schema_fingerprint == writer_reports[0].schema_fingerprint
     report = migrations.validate_database(db)
-    assert report.user_version == 5
+    assert report.user_version == migrations.SCHEMA_VERSION
     assert set(report.tables) == EXPECTED_TABLES
     assert report.integrity_ok
 

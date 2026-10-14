@@ -121,7 +121,17 @@ def assert_route_shape(route: Any) -> None:
     for alternative in route["alternatives"]:
         assert set(alternative) == {"profile_id", "reason"}
     for child in route["child_routes"]:
-        assert set(child) == {"unit_ids", "profile_id", "reason"}
+        base = {"unit_ids", "profile_id", "reason"}
+        actual = {"family", "regime", "form_type", "subtype"}
+        assert base <= set(child) <= base | actual
+        # Older stored three-field views remain readable. A new resolved view
+        # carries the entire purpose/market/form tuple, never a partial guess.
+        if actual & set(child):
+            assert actual <= set(child)
+            assert child["family"] in FAMILIES
+            assert child["regime"] in REGIMES
+            assert isinstance(child["form_type"], str) and child["form_type"]
+            assert child["subtype"] is None or isinstance(child["subtype"], str)
         assert isinstance(child["unit_ids"], list) and child["unit_ids"]
 
 

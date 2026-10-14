@@ -1,4 +1,16 @@
-## ROOT当前实施与并行拆分 — 2026-10-14
+## ROOT生产接线工程验收 — 2026-10-14
+
+已完成显式0.9 request→正式select→实际策略与唯一原文→同事务final CAS→配置model→Bundle/Artifact/public read；v5旧AUTO先只读history再由唯一Store additive升级，旧费用/结果不重签。QA真实roles/记录/parent边界、HK实际family、结构化SEC form不依赖诊断文案、20K有界planner与多行经营表已修。
+
+集中UNIT1149PASS/17SKIP/3历史factory失败保留；旧版本改为静态已冻结generation，受影响51里50PASS/1新测试遗漏显式selector参数，补正确参数后18PASS。旧11E2E全绿；新7节点集中6绿/1计数observer错接，下沉统一byte owner后该case绿，tamper失败/0新POST/旧账不变断言未放宽。最终独立只读review无新A/B阻断，unknown语言重复读P2；Ruff/mypy通过。详[验收/原证据](production-wiring-evidence/acceptance.json)。
+
+真实whole native三市场同原件对照已跑，源SHA/mtime/size保持。US冻结8业务事实仅1/8新保留（旧4/8），是实际family policy没绑定、经营解释准入和机制预算分配共因，不是拆句；新通用RED先在owned recall-root留证，下一批TDD修，默认仍0.8。真实模型/跨run缓存/DU3几何及母G2/G4/G5均未假签完成。
+
+下一步：正常commit/push本批已完成工程代码/PWF，继续root真实业务覆盖共因；三个外包目录零写，旧他人scratch/Dayu/IQS不动。
+
+正常pre-commit捕获一条新负例用了Windows绝对路径字面量；改为独立tmp_path构造同义路径，13受影响断言全绿/2.06s。没有加基线例外或跳hook；本轮工程失败和自动检查修复一起留节点收据。
+
+## ROOT当前实施与并行拆分 — 2026-10-14（此前记录）
 
 主线实际开始Phase A：19项新阅读budget反例RED/2旧回放PASS后扩既有planner为reading_plan/1，共享依赖unique成本/主题多样性/完整闭包/字符与工作上限；旧默认和selector0.8.0不改。独审发现嵌套signature工作漏计、闭包实际扫描漏计、签名metadata未限、低预算误诊及依赖中已发value未记主题/签名，均按根因统一修复；最终38/38独立probe通过。尚未把ReadingPlan接正式生产，不标Phase A/B/C全部完成。
 
@@ -72,3 +84,12 @@
 ## 2026-10-14 正常发布
 
 实现195aba20与工作树清单36f15dd0已推master，精确CI38522896889 success；正常pre-push3268PASS/11SKIP（204.59秒）。104集中/38独立收据逐字节归档后清本次owned scratch，失败sandbox Temp已无残留。三harness树保留READY_NOT_STARTED，其他历史scratch不动；纯planner不冒称Phase A整体完成。精确发布见phase-a-budget-evidence/publication.json。
+# ROOT 正式接线实施 — 2026-10-14
+
+已读选定PWF并核对master4204180a tracked clean；三DU3作者树基线未变化，仅只读查看。ROOT分工互不写外包owned目录：生产选择TDD与结构经营表、正式wire后接planner效率、AUTO Store/factory后接独立生产E2E；ROOT统管源桥/trace producer/发布接线和PWF。
+
+TDD真实失败：生产首轮5FAIL/10PASS；追加sharedcontext字符1PASS；独审脚注/拒绝包/work停止4RED后20PASS；跨原件同文同locator1RED→1PASS；decision inventory3RED→3PASS。新transport首轮7RED/14PASS→30新PASS/246相关PASS；Store16有效RED→143相关PASS。临时SyntaxError、mypy lambda联合类型错误和fake fixture未加新optional字段均留记录后修，不能算业务缺陷已验收。脚注/拒绝包/work停止/父身份为真实代码缺陷已修。
+
+真实原件只读窄页probe：恒锋增发真实project anchor可用；名创p12经营表漏读实证新增计划；没有调用供应商、写原件或生产配置。长文20K负例基线只选2个且late漏读，context1.09MiB；优化后待集中复核。4新正式production loopback端到端PASS/65.91s，same-run恢复和付费后待activation不重复POST；真实供应商与完整decision-cache仍未签收。
+
+根任务继续，不暂停、不标升级完成。下一节点：长文/经营表及新trace界面集中验收→正常commit/push；然后作者组件接收和真实同预算质量/消费者泛化。ROOT scratch均在.planning/shared-reading-production，最后压缩留证并恢复；外包与历史scratch保持。

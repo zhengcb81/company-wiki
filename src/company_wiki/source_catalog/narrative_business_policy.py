@@ -204,4 +204,31 @@ def reject_finance_only_text(text: str) -> bool:
         and not detect_operating_fact(text).eligible)
 
 
-__all__ = ["business_objects", "business_qualification", "detect_business_fact", "reject_finance_only_text"]
+_ACTIVITY = re.compile(
+    r"\b(?:expand\w*|enter\w*|qualif\w*|certif\w*|commercializ\w*|"
+    r"scal\w*|convert\w*|adopt\w*|renew\w*|retain\w*|pilot\w*|ramp\w*)\b|"
+    r"拓展|扩张|擴張|扩建|擴建|认证|認證|验证|驗證|试产|試產|交付|商业化|商業化|"
+    r"导入|導入|投产|投產|开拓|開拓|新增|转化|轉化", re.IGNORECASE)
+
+
+def detect_reading_business_fact(text: str) -> OperatingFact:
+    """Operating objects plus observed activity, with no theme/duration whitelist.
+
+    Legacy replay keeps its historical recognizer. The reading policy admits
+    general operating activity in the same bounded clause; a noun or a financial
+    growth sentence alone is insufficient. Numeric amounts are never required.
+    """
+    fact = detect_business_fact(text)
+    activity = any(_OBJECT.search(clause) and _ACTIVITY.search(clause)
+                   for clause in _CLAUSES.split(text) if len(clause) <= BUSINESS_CHARACTER_WINDOW)
+    if not activity:
+        return fact
+    families = business_objects(text)
+    topics = tuple(dict.fromkeys((*fact.topics, "business_progress",
+        *(("capacity_projects",) if "production" in families else ()))))
+    return OperatingFact(True, topics, tuple(dict.fromkeys((*fact.reasons, "operating_activity"))),
+                         max(fact.score, 3), fact.financial_exempt)
+
+
+__all__ = ["business_objects", "business_qualification", "detect_business_fact",
+           "detect_reading_business_fact", "reject_finance_only_text"]

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import math
 from dataclasses import dataclass
 from typing import Any, Literal, Mapping, Sequence, cast, overload
 
@@ -21,7 +22,7 @@ from company_wiki.source_catalog.narrative_language import (
 
 from company_wiki.narrative_subject import NarrativeSubject, SubjectBindingError
 
-from .models import canonical_json, canonical_json_hash
+from .models import canonical_json, canonical_json_hash, _freeze_json, _to_plain
 
 
 SOURCE_REVISION_EVENT_SCHEMA = "source-revision-event/2.0"
@@ -36,6 +37,7 @@ SELECT_RESULT_MAX_BYTES = 1024 * 1024
 SUMMARY_RESULT_MAX_BYTES = 64 * 1024
 BUNDLE_MAX_BYTES = 1280 * 1024
 SKIP_BUNDLE_MAX_BYTES = 16 * 1024
+READING_CONTEXT_MAX_BYTES = 192 * 1024
 
 _SHA = re.compile(r"[0-9a-f]{64}\Z")
 _DRIVE_PATH = re.compile(r"[A-Za-z]:[\\/]")
@@ -677,6 +679,199 @@ def _subject_wire(
     return value
 
 
+_READING_POLICY_KEYS = {
+    "profile_id", "profile_version", "family", "summary_focus", "policy_components",
+    "reading_questions", "context_requirements", "family_policy", "negative_hints",
+    "semantic_units", "section_priorities",
+}
+_READING_FACET_KEYS = {
+    "id", "version", "content_digest", "selection_basis", "business_questions",
+    "summary_focus", "required_context", "absence_rules", "confusion_checks",
+    "applicable_mechanisms",
+}
+_READING_FORBIDDEN_KEYS = {
+    "raw_text", "body", "observation", "evidence_packages", "members",
+    "wrong_assertion", "correct_assertion", "source_meaning", "confusions", "examples", "example",
+}
+
+
+def _assert_pathless_reading_wire(value: object) -> None:
+    # The optional context has its own bounded walk below. Walking it here
+    # first would defeat that bound for deeply nested untrusted wire data.
+    if isinstance(value, Mapping) and ({"reading_context", "reading_dependencies"} & value.keys()):
+        assert_no_physical_paths({key: child for key, child in value.items()
+                                  if key not in {"reading_context", "reading_dependencies"}})
+    else:
+        assert_no_physical_paths(value)
+
+
+def _bounded_reading_json(value: object) -> Any:
+    """Detach finite policy data before recursion, storage and model projection.
+
+    This checks the transport shape, never selects policies or reads sources.
+    The shared reading engine owns their content and causal decision identity.
+    """
+    remaining = 30_000
+
+    def visit(item: object, depth: int) -> Any:
+        nonlocal remaining
+        remaining -= 1
+        if remaining < 0 or depth > 12:
+            raise NarrativeContractError("reading_context structural bound exceeded")
+        if item is None or type(item) is bool or type(item) is int:
+            return item
+        if type(item) is float:
+            if not math.isfinite(item):
+                raise NarrativeContractError("reading_context numbers must be finite")
+            return item
+        if isinstance(item, str):
+            if len(item) > 16_384:
+                raise NarrativeContractError("reading_context text bound exceeded")
+            return item
+        if isinstance(item, Mapping):
+            if len(item) > 256:
+                raise NarrativeContractError("reading_context object bound exceeded")
+            result = {}
+            for key, child in item.items():
+                if not isinstance(key, str) or len(key) > 128:
+                    raise NarrativeContractError("reading_context key is invalid")
+                if key in _READING_FORBIDDEN_KEYS:
+                    raise NarrativeContractError(f"reading_context forbidden field: {key}")
+                result[key] = visit(child, depth + 1)
+            return result
+        if isinstance(item, Sequence) and not isinstance(item, (str, bytes)):
+            if len(item) > 4096:
+                raise NarrativeContractError("reading_context array bound exceeded")
+            return [visit(child, depth + 1) for child in item]
+        raise NarrativeContractError("reading_context must contain JSON data only")
+
+    return visit(value, 0)
+
+
+def _reading_texts(value: object, name: str, *, limit: int = 4096) -> Sequence[Any]:
+    rows = _array(value, name)
+    if len(rows) > limit:
+        raise NarrativeContractError(f"{name} array bound exceeded")
+    for row in rows:
+        _text(row, name)
+    return rows
+
+
+def _reading_context(
+    value: object, spans: Sequence[EvidenceSpan],
+) -> Mapping[str, Any] | None:
+    if value is None:
+        return None
+    plain = _bounded_reading_json(value)
+    extra = ({"deferred_count", "deferred_limited", "selection_diagnostics"}
+             if isinstance(plain, Mapping) and "deferred_count" in plain else set())
+    item = _exact(plain, {
+        "schema_version", "reading_policy_version", "reading_policies", "business_facets",
+        "constraints", "groups", "unread", "deferred", "layout_coverage",
+    } | extra, "reading_context")
+    if item["schema_version"] != "du-production-reading/1":
+        raise NarrativeContractError("unsupported reading_context schema")
+    version = _text(item["reading_policy_version"], "reading_policy_version")
+    prefix = "du-sent-policy/1+"
+    if not version.startswith(prefix):
+        raise NarrativeContractError("invalid reading_policy_version")
+    _sha(version.removeprefix(prefix), "reading_policy_version digest")
+    policies = _array(item["reading_policies"], "reading_policies")
+    facets = _array(item["business_facets"], "business_facets")
+    if len(policies) > 128 or len(facets) > 16:
+        raise NarrativeContractError("reading_context policy bound exceeded")
+    for row in policies:
+        policy = _exact(row, _READING_POLICY_KEYS, "reading_policy")
+        for component in _array(policy["policy_components"] or [], "policy_components"):
+            component = _exact(component, {"kind", "id", "version", "content_digest"}, "policy_component")
+            _sha(component["content_digest"], "policy_component.content_digest")
+    for row in facets:
+        facet = _exact(row, _READING_FACET_KEYS, "business_facet")
+        _sha(facet["content_digest"], "business_facet.content_digest")
+        for check in _array(facet["confusion_checks"] or [], "confusion_checks"):
+            check = _exact(check, {"risk", "required_context_slots"}, "confusion_check")
+            _text(check["risk"], "confusion_check.risk")
+            _reading_texts(check["required_context_slots"], "required_context_slots")
+    _reading_texts(item["constraints"], "reading_context.constraints", limit=32)
+    sources = {span.span_id: span.source_id for span in spans}
+    group_ids: set[str] = set()
+    groups = _array(item["groups"], "reading_context.groups")
+    if len(groups) > 512:
+        raise NarrativeContractError("reading_context group bound exceeded")
+    for row in groups:
+        group = _exact(row, {"group_id", "kind", "section_role", "evidence_ids"}, "reading_group")
+        group_id = _text(group["group_id"], "reading_group.group_id")
+        if group_id in group_ids:
+            raise NarrativeContractError("duplicate reading_context group ids")
+        group_ids.add(group_id)
+        _text(group["kind"], "reading_group.kind")
+        _text(group["section_role"], "reading_group.section_role")
+        refs = _reading_texts(group["evidence_ids"], "reading_group.evidence_ids")
+        if not refs or len(refs) != len(set(refs)) or any(ref not in sources for ref in refs):
+            raise NarrativeContractError("reading_group requires unique selected evidence references")
+        if len({sources[ref] for ref in refs}) != 1:
+            raise NarrativeContractError("reading_group cannot cross original source parents")
+    unread_keys = {
+        "native_scan", "opaque_pages", "deferred_pages", "deferred_unit_ids",
+        "unassigned_unit_ids", "structure_complete",
+    }
+    sampled = isinstance(item["unread"], Mapping) and bool({"counts", "limited"} & set(item["unread"]))
+    unread = _exact(item["unread"], unread_keys | ({"counts", "limited"} if sampled else set()), "reading_context.unread")
+    _text(unread["native_scan"], "unread.native_scan", optional=True)
+    if unread["structure_complete"] is not None and type(unread["structure_complete"]) is not bool:
+        raise NarrativeContractError("unread.structure_complete must be boolean or null")
+    for name in ("opaque_pages", "deferred_pages"):
+        for number in _array(unread[name], "unread." + name):
+            _integer(number, "unread page", positive=True)
+    for name in ("deferred_unit_ids", "unassigned_unit_ids"):
+        _reading_texts(unread[name], "unread." + name)
+    if sampled:
+        array_names = {"opaque_pages", "deferred_pages", "deferred_unit_ids", "unassigned_unit_ids"}
+        counts = _exact(unread["counts"], array_names, "unread.counts")
+        for name, number in counts.items():
+            if _integer(number, "unread.count") < len(unread[name]):
+                raise NarrativeContractError("unread count cannot be smaller than its diagnostic sample")
+        if type(unread["limited"]) is not bool or unread["limited"] != any(
+            counts[name] > len(unread[name]) for name in array_names
+        ):
+            raise NarrativeContractError("unread.limited differs from its complete counts")
+    for row in _array(item["deferred"], "reading_context.deferred"):
+        deferred = _exact(row, {"package_id", "reason"}, "reading_deferred")
+        _text(deferred["package_id"], "reading_deferred.package_id")
+        _text(deferred["reason"], "reading_deferred.reason")
+    _object(item["layout_coverage"], "reading_context.layout_coverage")
+    if extra:
+        count = _integer(item["deferred_count"], "deferred_count")
+        rows = item["deferred"]
+        if count < len(rows) or type(item["deferred_limited"]) is not bool or item["deferred_limited"] != (count > len(rows)):
+            raise NarrativeContractError("deferred sampling differs from its complete count")
+        for row in _array(item["selection_diagnostics"], "selection_diagnostics"):
+            diagnostic = _exact(row, {"code", "count"}, "selection_diagnostic")
+            _text(diagnostic["code"], "selection_diagnostic.code")
+            _integer(diagnostic["count"], "selection_diagnostic.count")
+    _enforce_cap(item, READING_CONTEXT_MAX_BYTES, "reading_context")
+    return cast(Mapping[str, Any], _freeze_json(plain))
+
+
+def _reading_dependencies(value: object) -> Mapping[str, Any] | None:
+    if value is None:
+        return None
+    item = _exact(_bounded_reading_json(value), {
+        "schema_version", "status", "scopes", "components", "candidates", "versions",
+        "decision_digest", "diagnostics",
+    }, "reading_dependencies")
+    if item["schema_version"] != "du-decision-dependencies/1" or item["status"] not in {"complete", "partial"}:
+        raise NarrativeContractError("invalid reading dependency schema/status")
+    _sha(item["decision_digest"], "decision_digest", optional=item["status"] == "partial")
+    for key, bound in (("scopes", 64), ("components", 512), ("candidates", 4096)):
+        if len(_array(item[key], "reading_dependencies." + key)) > bound:
+            raise NarrativeContractError("reading dependency inventory exceeds its bound")
+    _object(item["versions"], "reading dependency versions")
+    assert_no_physical_paths(item)
+    _enforce_cap(item, READING_CONTEXT_MAX_BYTES, "reading_dependencies")
+    return cast(Mapping[str, Any], _freeze_json(item))
+
+
 @dataclass(frozen=True)
 class NarrativeSelectResult:
     schema_version: str
@@ -693,10 +888,12 @@ class NarrativeSelectResult:
     summary_scope: str
     encoded_size: int
     subject_binding: NarrativeSubject | None = None
+    reading_context: Mapping[str, Any] | None = None
+    reading_dependencies: Mapping[str, Any] | None = None
 
     @classmethod
     def from_dict(cls, value: object) -> "NarrativeSelectResult":
-        assert_no_physical_paths(value)
+        _assert_pathless_reading_wire(value)
         keys = {
             "schema_version",
             "source_ref",
@@ -725,6 +922,10 @@ class NarrativeSelectResult:
                     "transcript_byte_bindings",
                 }
             ) | {"subject_binding"}
+        if isinstance(value, Mapping) and "reading_context" in value:
+            keys.add("reading_context")
+        if isinstance(value, Mapping) and "reading_dependencies" in value:
+            keys.add("reading_dependencies")
         item = _exact(value, keys, "narrative select result")
         if item["schema_version"] not in {
             SELECT_RESULT_SCHEMA,
@@ -772,6 +973,8 @@ class NarrativeSelectResult:
             _text(item["summary_scope"], "summary_scope"),
             0,
             subject,
+            _reading_context(item.get("reading_context"), spans),
+            _reading_dependencies(item.get("reading_dependencies")),
         )
         result._validate()
         size = _enforce_cap(result.to_dict(), SELECT_RESULT_MAX_BYTES, "select")
@@ -857,6 +1060,10 @@ class NarrativeSelectResult:
             ],
             "summary_scope": self.summary_scope,
         }
+        if self.reading_context is not None:
+            value["reading_context"] = _to_plain(self.reading_context)
+        if self.reading_dependencies is not None:
+            value["reading_dependencies"] = _to_plain(self.reading_dependencies)
         return _subject_wire(
             value,
             self.subject_binding,
@@ -1363,10 +1570,11 @@ class NarrativeBundle:
     replay: ReplayValue
     encoded_size: int
     subject_binding: NarrativeSubject | None = None
+    reading_context: Mapping[str, Any] | None = None
 
     @classmethod
     def from_dict(cls, value: object) -> "NarrativeBundle":
-        assert_no_physical_paths(value)
+        _assert_pathless_reading_wire(value)
         keys = {
             "schema_version",
             "source_ref",
@@ -1396,6 +1604,8 @@ class NarrativeBundle:
                     "transcript_byte_bindings",
                 }
             ) | {"subject_binding"}
+        if isinstance(value, Mapping) and "reading_context" in value:
+            keys.add("reading_context")
         item = _exact(value, keys, "narrative bundle")
         if item["schema_version"] not in {BUNDLE_SCHEMA, PROJECTED_BUNDLE_SCHEMA}:
             raise NarrativeContractError("unsupported narrative bundle schema")
@@ -1436,6 +1646,7 @@ class NarrativeBundle:
             0,
             subject,
         )
+        object.__setattr__(result, "reading_context", _reading_context(item.get("reading_context"), result.evidence_spans))
         result._validate()
         cap = (
             SKIP_BUNDLE_MAX_BYTES
@@ -1506,6 +1717,7 @@ class NarrativeBundle:
             or self.source_metadata != selected.source_metadata
             or self.selection != selected.selection
             or self.evidence_spans != selected.evidence_spans
+            or self.reading_context != selected.reading_context
         ):
             raise NarrativeContractError("bundle selection differs from dependency")
         expected_summary = BundleSummaryValue(
@@ -1554,6 +1766,8 @@ class NarrativeBundle:
             "versions": self.versions.to_dict(),
             "replay": self.replay.to_dict(),
         }
+        if self.reading_context is not None:
+            value["reading_context"] = _to_plain(self.reading_context)
         return _subject_wire(
             value,
             self.subject_binding,

@@ -35,6 +35,7 @@ class Candidate:
     subtype: str | None
     score: int
     reasons: list[tuple[str, Sequence[str], str]] = field(default_factory=list)
+    form_type: str | None = None
 
     def to_wire_reasons(self) -> list[dict]:
         return [
@@ -130,8 +131,8 @@ def _regime_of(observation: Observation, bag: SignalBag) -> tuple[str, list[tupl
 
     for signal in bag.cover_signals:
         detail = signal.detail
-        if detail.startswith("SEC 表单"):
-            sec_form = detail.split(":", 1)[-1].strip()
+        if signal.form_type is not None:
+            sec_form = signal.form_type
             reasons.append((v.REASON_COVER_HEADING, signal.unit_ids, detail))
         elif "港股" in detail or "全球发售" in detail:
             hk_signal = True
@@ -219,8 +220,8 @@ def _sec_profile(observation: Observation, bag: SignalBag) -> Candidate | None:
     """
     form = None
     for signal in bag.all:
-        if signal.detail.startswith("SEC 表单"):
-            form = signal.detail.split(":", 1)[-1].strip().casefold()
+        if signal.form_type is not None:
+            form = signal.form_type.casefold()
             break
     structural = " ".join(signal.detail for signal in bag.all)
     if form is None:
@@ -238,6 +239,7 @@ def _sec_profile(observation: Observation, bag: SignalBag) -> Candidate | None:
             subtype="sec_registration_" + form.replace("-", ""), score=80,
             reasons=[(v.REASON_COVER_HEADING, _units(bag, "COVER_HEADING"),
                       f"SEC 表单: {form.upper()}；注册发行用途，不推断首次上市")],
+            form_type=form.upper(),
         )
     if form in {"8-k", "6-k"}:
         return Candidate(
@@ -245,6 +247,7 @@ def _sec_profile(observation: Observation, bag: SignalBag) -> Candidate | None:
             subtype="sec_current_report_" + form.replace("-", ""), score=90,
             reasons=[(v.REASON_COVER_HEADING, _units(bag, "COVER_HEADING"),
                       f"SEC 表单: {form.upper()}；保留容器，附件按实际同源范围阅读")],
+            form_type=form.upper(),
         )
     mapping = {"10-k": "sec_10k", "10-q": "sec_10q", "20-f": "sec_20f"}
     if form not in mapping:
@@ -264,8 +267,9 @@ def _sec_profile(observation: Observation, bag: SignalBag) -> Candidate | None:
         family=family,
         regime="sec",
         subtype=form,
-        score=80 if "SEC 表单" in structural else 66,
+        score=80 if any(signal.form_type is not None for signal in bag.all) else 66,
         reasons=[reason for reason in reasons if reason[1]],
+        form_type=form.upper(),
     )
 
 
@@ -689,7 +693,7 @@ def _regime_is_structural(observation: Observation, bag: SignalBag) -> bool:
             token in structural_details
             for token in ("港股", "全球发售", "A股", "再融资", "首次公开发行", "可转换")
         )
-        or "SEC 表单" in structural_details
+        or any(signal.form_type is not None for signal in (bag.cover_signals + bag.toc_signals))
         or "10-K Item" in structural_details
         or "10-Q Part I" in structural_details
         or "20-F Item" in structural_details

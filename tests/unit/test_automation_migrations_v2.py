@@ -53,7 +53,7 @@ def test_v5_new_database_preserves_v2_gate_generation_and_claim_indexes(tmp_path
 
     connection = sqlite3.connect(database)
     try:
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 5
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == migrations.SCHEMA_VERSION
         assert _table_names(connection) == EXPECTED_V2_TABLES | {
             "narrative_runs", "narrative_run_jobs", "narrative_model_reservations",
         }
@@ -81,8 +81,8 @@ def test_v5_new_database_preserves_v2_gate_generation_and_claim_indexes(tmp_path
         connection.close()
 
     assert report.from_version == 0
-    assert report.to_version == 5
-    assert report.applied_versions == (1, 2, 3, 4, 5)
+    assert report.to_version == migrations.SCHEMA_VERSION
+    assert report.applied_versions == tuple(range(1, migrations.SCHEMA_VERSION + 1))
 
 
 def test_v1_to_v5_backs_up_once_and_preserves_existing_rows(tmp_path: Path) -> None:
@@ -115,12 +115,12 @@ def test_v1_to_v5_backs_up_once_and_preserves_existing_rows(tmp_path: Path) -> N
 
     report = migrations.migrate_database(database, backup_hook=backup)
 
-    assert calls == [(1, 5)]
-    assert report.applied_versions == (2, 3, 4, 5)
+    assert calls == [(1, migrations.SCHEMA_VERSION)]
+    assert report.applied_versions == tuple(range(2, migrations.SCHEMA_VERSION + 1))
     assert report.backup_path == str(tmp_path / "automation.v1.backup.db")
     connection = sqlite3.connect(database)
     try:
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 5
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == migrations.SCHEMA_VERSION
         assert connection.execute(
             "SELECT event_id FROM events WHERE event_id='evt-existing'"
         ).fetchone() == ("evt-existing",)
@@ -207,8 +207,8 @@ def test_v5_reopen_is_a_read_only_noop_with_stable_fingerprint(tmp_path: Path) -
 
     second = migrations.migrate_database(database)
 
-    assert second.from_version == 5
-    assert second.to_version == 5
+    assert second.from_version == migrations.SCHEMA_VERSION
+    assert second.to_version == migrations.SCHEMA_VERSION
     assert second.applied_versions == ()
     assert second.backup_path is None
     assert second.schema_fingerprint == first.schema_fingerprint
@@ -217,7 +217,7 @@ def test_v5_reopen_is_a_read_only_noop_with_stable_fingerprint(tmp_path: Path) -
 def test_future_v6_is_rejected_without_downgrade(tmp_path: Path) -> None:
     database = tmp_path / "automation.db"
     connection = sqlite3.connect(database)
-    connection.execute("PRAGMA user_version = 6")
+    connection.execute(f"PRAGMA user_version = {migrations.SCHEMA_VERSION + 1}")
     connection.commit()
     connection.close()
 
@@ -226,7 +226,7 @@ def test_future_v6_is_rejected_without_downgrade(tmp_path: Path) -> None:
 
     connection = sqlite3.connect(database)
     try:
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 6
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == migrations.SCHEMA_VERSION + 1
     finally:
         connection.close()
 

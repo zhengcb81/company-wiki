@@ -5,12 +5,12 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 import json
 import re
-from typing import Literal
+from typing import Any, Literal
 
 from company_wiki.source_contract import EvidenceSpan
 
 from .n6_budget_dedup import deduplicate_candidates
-from .narrative_budget import BudgetItem, LEGACY_BUDGET_POLICY, select_budget_items
+from .narrative_budget import BudgetItem, LEGACY_BUDGET_POLICY, READING_BUDGET_POLICY, plan_budget_items
 from .narrative_semantic_coverage import CoverageSignature, group_coverage_signature
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
@@ -51,6 +51,7 @@ def _budget_item(
     group_ids: Mapping[str, str],
     heading_pattern: re.Pattern[str],
     *, signature: CoverageSignature | None = None,
+    reading: Mapping[str, Any] | None = None,
 ) -> BudgetItem[EvidenceCandidate]:
     unit = candidate.unit
     return BudgetItem(
@@ -66,6 +67,10 @@ def _budget_item(
         evidence_chars=len(unit.raw_text),
         semantic_tokens=signature.tokens if signature is not None else (),
         coverage_signature=signature,
+        reading_priority=(reading or {}).get("priority", 2),
+        reading_topics=tuple((reading or {}).get("topics", ())),
+        required_item_ids=tuple((reading or {}).get("required", ())),
+        is_context_only=(reading or {}).get("context_only", False),
     )
 
 
@@ -78,9 +83,15 @@ def _group_signatures(
         key = group_ids.get(candidate.unit.unit_id, candidate.unit.unit_id)
         groups.setdefault(key, []).append(candidate)
     signatures: dict[str, CoverageSignature] = {}
+    by_text: dict[tuple[str, ...], CoverageSignature] = {}
     for members in groups.values():
         ordered = sorted(members, key=lambda item: (_order_key(item), item.unit.unit_id))
-        signature = group_coverage_signature(candidate.unit.raw_text for candidate in ordered)
+        texts = tuple(candidate.unit.raw_text for candidate in ordered)
+        signature = by_text.get(texts)
+        if signature is None:
+            signature = group_coverage_signature(texts)
+            if len(by_text) < 4096:
+                by_text[texts] = signature
         for candidate in members:
             signatures[candidate.unit.unit_id] = signature
     return signatures
@@ -133,6 +144,8 @@ def finalize_selection(
     dropped_financial_count: int,
     excluded_context_unit_ids: frozenset[str] = frozenset(),
     budget_policy: str = LEGACY_BUDGET_POLICY,
+    reading_metadata: Mapping[str, Mapping[str, Any]] | None = None,
+    max_chars: int | None = None,
 ) -> NarrativeEvidencePackage:
     """Create the compact package after deterministic candidate enrichment.
 
@@ -145,21 +158,35 @@ def finalize_selection(
     complete = tuple(candidate for candidate in candidates
                      if candidate.unit.unit_id not in excluded_context_unit_ids
                      and group_ids.get(candidate.unit.unit_id) not in excluded_groups)
-    deduplicated = deduplicate_candidates(complete, group_ids)
-    signatures = (_group_signatures(deduplicated.candidates, deduplicated.group_ids)
+    # New reading packages share original context across independent anchors.
+    # Text-level deduplication cannot rewrite these dependency identities.
+    if budget_policy == READING_BUDGET_POLICY:
+        survivors = tuple({item.unit.unit_id: item for item in complete}.values())
+        effective_groups = group_ids
+    else:
+        deduplicated = deduplicate_candidates(complete, group_ids)
+        survivors, effective_groups = deduplicated.candidates, deduplicated.group_ids
+    signatures = (_group_signatures(survivors, effective_groups)
         if budget_policy != LEGACY_BUDGET_POLICY else {})
     budget_items = tuple(
-        _budget_item(candidate, deduplicated.group_ids, heading_pattern,
-            signature=signatures.get(candidate.unit.unit_id))
-        for candidate in deduplicated.candidates
+        _budget_item(candidate, effective_groups, heading_pattern,
+            signature=signatures.get(candidate.unit.unit_id),
+            reading=(reading_metadata or {}).get(candidate.unit.unit_id))
+        for candidate in survivors
     )
-    selected = [
-        item.payload
-        for item in select_budget_items(budget_items, limit=route.selection_limit, policy=budget_policy)
-    ]
+    planned, diagnostics = plan_budget_items(budget_items, limit=route.selection_limit,
+                                            policy=budget_policy, max_chars=max_chars)
+    selected = [item.payload for item in planned]
+    counts: dict[str, int] = {}
+    for diagnostic in diagnostics:
+        counts[diagnostic.reason] = counts.get(diagnostic.reason, 0) + 1
     omitted = max(0, len(candidates) - len(selected))
-    selected.sort(key=lambda item: (item.unit.coordinates.locator(), item.unit.unit_id))
-    spans = _evidence_spans(selected, deduplicated.group_ids)
+    native_order = {unit.unit_id: index for index, unit in enumerate(structure.units)}
+    if budget_policy == READING_BUDGET_POLICY:
+        selected.sort(key=lambda item: native_order[item.unit.unit_id])
+    else:
+        selected.sort(key=lambda item: (item.unit.coordinates.locator(), item.unit.unit_id))
+    spans = _evidence_spans(selected, effective_groups)
     return NarrativeEvidencePackage(
         source_id=structure.source_id,
         source_sha256=structure.source_sha256,
@@ -172,6 +199,9 @@ def finalize_selection(
         source_units=len(structure.units),
         omitted_candidate_count=omitted,
         coverage_complete=structure.coverage_complete,
+        selection_diagnostics=(tuple({"code": reason, "count": count}
+                                     for reason, count in sorted(counts.items()))
+                               if budget_policy == READING_BUDGET_POLICY else ()),
     )
 
 

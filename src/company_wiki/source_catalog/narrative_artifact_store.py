@@ -720,6 +720,48 @@ class NarrativeArtifactReader:
             self._require_row_current(row)
         return tuple(NarrativeArtifactVersion.from_row(row) for row in rows)
 
+    def visible_base_generation_candidates(
+        self, *, subject: NarrativeSubject, base_generation_sha256: str, limit: int = 32,
+    ) -> tuple[NarrativeArtifactVersion, ...]:
+        """Locate completed selections without parsing or sending another model request.
+
+        The consumer still compares the stored source-specific decision trace
+        and replays the actual artifact through the public source reader.
+        """
+        _require_generation_sha(base_generation_sha256)
+        if not isinstance(subject, NarrativeSubject):
+            raise TypeError("subject must be NarrativeSubject")
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise ValueError("generation candidate limit must be 1 to 100")
+        if subject.kind == "raw":
+            anchor = subject.anchor_ref
+            where = f"document_id=? AND source_id=? AND source_sha256=? AND {_RAW_SUBJECT_SQL}"
+            parameters = (anchor["document_id"], anchor["source_id"], anchor["content_sha256"])
+        else:
+            where = ("json_extract(metadata_json, '$.subject_binding.kind')=? "
+                     "AND json_extract(metadata_json, '$.subject_binding.item_key')=? "
+                     "AND json_extract(metadata_json, '$.subject_binding.subject_sha256')=?")
+            parameters = (subject.kind, subject.item_key, subject.subject_sha256)
+        rows = self._fetchall("SELECT * FROM narrative_artifact_versions WHERE status='visible' AND "
+            + where + " AND json_extract(metadata_json, '$.base_generation_sha256')=? "
+            "ORDER BY activated_at DESC, created_at DESC, artifact_version_id DESC LIMIT ?",
+            parameters + (base_generation_sha256, limit))
+        for row in rows:
+            self._require_row_current(row)
+        return tuple(NarrativeArtifactVersion.from_row(row) for row in rows)
+
+    def visible_subject_metadata(self, *, subject: NarrativeSubject,
+                                 artifact_version_id: str) -> NarrativeArtifactVersion:
+        """Read one pinned current metadata row; object bytes remain a read-port task."""
+        row = self._fetchone("SELECT * FROM narrative_artifact_versions "
+                             "WHERE artifact_version_id=? AND status='visible'", (artifact_version_id,))
+        if row is None:
+            raise NarrativeArtifactNotVisibleError("the exact subject artifact is not visible")
+        metadata = json.loads(row["metadata_json"])
+        _require_subject_match(row, subject, metadata.get("generation_sha256"))
+        self._require_row_current(row)
+        return NarrativeArtifactVersion.from_row(row)
+
     def read_current_subject(
         self, *, artifact_version_id: str, subject: NarrativeSubject,
         generation_sha256: str, expected_sha256: str | None = None,

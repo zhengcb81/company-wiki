@@ -144,6 +144,7 @@ class ObservationUnit:
         "column_index",
         "speaker",
         "turn_id",
+        "source_id",
         "dom_path",
         "has_layout",
         "has_hints",
@@ -181,6 +182,7 @@ class ObservationUnit:
         self.column_index = _optional_int(hints.get("column"))
         self.speaker = _optional_str(hints.get("speaker"))
         self.turn_id = _optional_str(hints.get("turn_id"))
+        self.source_id = _optional_str(hints.get("source_id"))
         self.dom_path = _optional_str(hints.get("dom_path"))
         self.has_layout = bool(layout)
         self.has_hints = bool(hints)

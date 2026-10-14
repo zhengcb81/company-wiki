@@ -37,7 +37,7 @@ from .orchestration import build_dependency_packages
 from .strategy_binding import bind_reading_plan
 
 PIPELINE_SCHEMA_VERSION = "du-pipeline/1"
-PIPELINE_FEATURE_VERSION = "1.1.0"
+PIPELINE_FEATURE_VERSION = "1.2.0"
 
 #: Families whose documents carry business narrative worth reading closely. A document that
 #: routes to ``administrative`` is *readable* but is not expected to yield narrative, so the
@@ -124,9 +124,13 @@ def understand_units(
         # A child sees only its already-read range, including its own metadata.
         # The parent's title/form cannot certify an attachment's purpose.
         child_observation = {**observation, "units": actual_units,
-                             "metadata": {"mime_type": mime_type, "language": language}}
-        child_route = {**route, "profile_id": pid, "family": child_base["family"],
-                       "regime": child_base.get("regime", "unknown"), "child_routes": []}
+                             "metadata": {"mime_type": mime_type, "language": language,
+                                          "form_type": child.get("form_type"),
+                                          "regime": child.get("regime")}}
+        child_route = {**route, "profile_id": pid,
+                       "family": child.get("family", child_base["family"]),
+                       "regime": child.get("regime", child_base.get("regime", "unknown")),
+                       "subtype": child.get("subtype"), "child_routes": []}
         key = f"{pid}:" + sha256("\0".join(sorted(scope)).encode()).hexdigest()[:16]
         child["reading_profile_key"] = key
         child_profiles[key] = resolve_reading_profile(child_base, child_observation,
@@ -163,6 +167,7 @@ def understand_units(
         "observation": observation,
         "route": route,
         "profile": profile,
+        "child_profiles": child_profiles,
         "structure": structure,
         "packages": packages,
         "reading_plan": reading_plan,

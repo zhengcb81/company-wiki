@@ -32,7 +32,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-SCHEMA_VERSION = 5
+SCHEMA_VERSION = 6
 
 EXPECTED_TABLES_V1 = frozenset(
     {
@@ -277,6 +277,10 @@ _DDL_V4_STATEMENTS: tuple[str, ...] = (
 
 _DDL_V5_STATEMENTS: tuple[str, ...] = (
     "ALTER TABLE narrative_runs ADD COLUMN binding_json TEXT",
+)
+
+_DDL_V6_STATEMENTS: tuple[str, ...] = (
+    "ALTER TABLE narrative_run_jobs ADD COLUMN final_generation_json TEXT",
 )
 
 
@@ -527,26 +531,29 @@ def _read_structure(
     return structure
 
 
-@functools.lru_cache(maxsize=5)
+@functools.lru_cache(maxsize=6)
 def _expected_structure(version: int) -> dict:
     connection = sqlite3.connect(":memory:")
     connection.row_factory = sqlite3.Row
     try:
         for statement in _DDL_V1_STATEMENTS:
             connection.execute(statement)
-        if version in (2, 3, 4, 5):
+        if version in (2, 3, 4, 5, 6):
             for statement in _DDL_V2_STATEMENTS:
                 connection.execute(statement)
             tables = EXPECTED_TABLES_V2
-            if version in (3, 4, 5):
+            if version in (3, 4, 5, 6):
                 for statement in _DDL_V3_STATEMENTS:
                     connection.execute(statement)
                 tables = EXPECTED_TABLES
-                if version in (4, 5):
+                if version in (4, 5, 6):
                     for statement in _DDL_V4_STATEMENTS:
                         connection.execute(statement)
-                if version == 5:
+                if version in (5, 6):
                     for statement in _DDL_V5_STATEMENTS:
+                        connection.execute(statement)
+                if version == 6:
+                    for statement in _DDL_V6_STATEMENTS:
                         connection.execute(statement)
         elif version == 1:
             tables = EXPECTED_TABLES_V1
@@ -630,7 +637,7 @@ def _tables_for_version(version: int) -> frozenset[str]:
         return EXPECTED_TABLES_V1
     if version == 2:
         return EXPECTED_TABLES_V2
-    if version in (3, 4, 5):
+    if version in (3, 4, 5, 6):
         return EXPECTED_TABLES
     raise ValueError(f"unsupported schema version: {version}")
 
@@ -763,7 +770,14 @@ def _apply_write_migration(
             for statement in _DDL_V5_STATEMENTS:
                 _execute_statement(connection, statement)
             connection.execute("PRAGMA user_version = 5")
+            version = 5
             applied_versions.append(5)
+        if version == 5:
+            _require_expected_structure(connection, version=5)
+            for statement in _DDL_V6_STATEMENTS:
+                _execute_statement(connection, statement)
+            connection.execute("PRAGMA user_version = 6")
+            applied_versions.append(6)
     except sqlite3.OperationalError as exc:
         raise MigrationExecutionError(
             f"DDL execution failed and was rolled back: {exc}"
@@ -782,7 +796,7 @@ def _apply_write_migration(
 def migrate_database(
     db_path: Path, *, backup_hook: BackupHook | None = None
 ) -> MigrationReport:
-    """Create or validate the automation database at schema v5.
+    """Create or validate the automation database at the current schema.
 
     A new file or empty v0 database applies v1 through v5 in one transaction. A
     frozen, valid v1/v2/v3 database requires a successful explicit backup hook before
@@ -804,16 +818,16 @@ def migrate_database(
     else:
         classification = "new"
 
-    if classification == "v5":
+    if classification == f"v{SCHEMA_VERSION}":
         return _validate_current_readonly(db_path)
 
-    from_version = {"v1": 1, "v2": 2, "v3": 3, "v4": 4}.get(classification, 0)
+    from_version = {f"v{version}": version for version in range(1, SCHEMA_VERSION)}.get(classification, 0)
     if classification in {"v1", "v2", "v3"} and backup_hook is None:
-        raise BackupError(f"v{from_version} to v5 upgrade requires an explicit backup hook")
+        raise BackupError(f"v{from_version} to v{SCHEMA_VERSION} upgrade requires an explicit backup hook")
     backup_path_str = _perform_backup(
         db_path,
         from_version=from_version,
-        pre_existing=(classification in {"v0_empty", "v1", "v2", "v3", "v4"}),
+        pre_existing=(classification == "v0_empty" or from_version > 0),
         backup_hook=backup_hook,
     )
 
@@ -838,7 +852,7 @@ def _inspect_schema(connection: sqlite3.Connection) -> SchemaStructure:
             f"user_version {version} is newer than supported {SCHEMA_VERSION}"
         )
     tables = _user_tables(connection)
-    if version in (1, 2, 3, 4, 5):
+    if version in (1, 2, 3, 4, 5, 6):
         _require_expected_structure(connection, version=version)
         fingerprint = _fingerprint(connection, version=version)
     else:

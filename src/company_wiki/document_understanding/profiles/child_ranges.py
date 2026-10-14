@@ -54,9 +54,15 @@ def attachment_routes(parsed: Observation, *, cap: int) -> tuple[list[dict], lis
                         units=tuple(members), probes=tuple(members),
                         probed_chars=sum(len(unit.text) for unit in members), probe_limited=False,
                         char_limited=False)
-        winner = decide(child, detect_signals(child))
+        signals = detect_signals(child)
+        winner = decide(child, signals)
+        # A shared compatibility profile ID does not identify the observed
+        # purpose. Keep the source-only route decision for the downstream
+        # policy resolver; never make it guess the family from that ID again.
         children.append({"unit_ids": [unit.unit_id for unit in members], "profile_id": winner.profile_id,
-                         "reason": "IN_DOCUMENT_ATTACHMENT_RANGE"})
+                         "family": winner.family, "regime": winner.regime,
+                         "form_type": winner.form_type or "unknown",
+                         "subtype": winner.subtype, "reason": "IN_DOCUMENT_ATTACHMENT_RANGE"})
         if len(children) >= cap:
             break
     return children, diagnostics

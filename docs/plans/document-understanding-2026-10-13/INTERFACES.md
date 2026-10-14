@@ -45,6 +45,8 @@ route输出必须含schema_version、profile_id、profile_version、regime、fam
 
 child_routes每项{unit_ids, profile_id, reason}，当前单原件范围，不凭空生成SourceRef；不认识的外链只reason `EXTERNAL_ATTACHMENT_NOT_READ`。disposition_hint为read/generic_read/administrative_candidate，路由阶段永不返回最终skip或删除原件。
 
+2026-10-14 additive：实际已读取附件范围的route同时携带`family, regime, form_type, subtype`（四项共同出现，未知值显式unknown/null）。legacy三个字段仍可读取；新`IN_DOCUMENT_ATTACHMENT_RANGE`必须带实际决策四项。相同legacy profile_id可能对应annual/interim，消费者直接使用实际route，不再从ID猜用途，也不能继承父8-K/6-K的表单当附件表单。
+
 get_profile输出：{profile_id, profile_version, family, section_priorities, semantic_units, summary_focus, negative_hints}。
 
 - section_priorities: 数组{section_role, aliases:[str], priority:1..3}。统一角色允许business/industry/management_discussion/outlook/risk/operating_metrics/fundraising/financial_notes/questions/administrative/unknown。
@@ -84,6 +86,8 @@ semantic_units每项：
 ```
 
 completeness为complete/partial/unknown；只表示结构关联完整，不代表经济事实正确。kind取上述六类。一个表/项目/长答复可拆多个semantic unit，但每个包保留主体/问句/表头/脚注等必要依赖。成员须存在、稳定去重排序、不能跨source；超预算返回未完成包及deferred诊断，不截掉否定/单位后宣称complete。
+
+QA的`anchor_unit_ids`是实际管理层答案，全部问句片段在`required_context_unit_ids`中，未答则anchors为空。问句只作上下文，不能用问题补造公司事实。真实role/原记录组/parent source由格式层透传，QA不能跨组、跨parent借答；关系方向仍是question→answer。旧源parser/locator回放保持。
 
 relations每项{from_unit_ids,to_unit_ids,kind,confidence}；kind为continuation/header_for/footnote_for/question_answer/language_parallel/section_cross_reference，均为同原件关系。不确定关联不强行输出high。双语仅结构对齐/别名，不能翻译或删原unit。依赖环若无语义必要须诊断，禁止无限展开。
 

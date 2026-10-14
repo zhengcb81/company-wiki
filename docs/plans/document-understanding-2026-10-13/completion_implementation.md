@@ -61,11 +61,15 @@ Owner: ROOT。状态由同目录 `task_plan.md` 唯一管理。此文合并原 `
 4. `register_narrative_handlers`提供可注入正式依赖；测试使用真实handler/runtime路径及loopback模型端口，不新立canary流程或另一个摘要服务。
 5. official_json、TXT/JSON电话会及普通normalize材料在同一类型接口下接入；记录/发言的原始父来源、role及group范围保留，不能跨父来源合包。PDF缺geometry可以partial，不能因此丢全部可读业务。
 
+公开有限批次请求新增可选 `selector_version: "0.9.0"`，由同一个request/execution binding保存；省略时沿正式默认，旧请求编码/身份保持。生产验收和真实批次直接用该字段，不通过sitecustomize修改默认或全局常量。该字段是算法版本选择，不是放行许可。
+
 ### B2 generation必须区分两种依赖
 
 - **selection依赖指纹**：本次路由、候选准入/排名实际查验的matcher与策略内容、相关父/子范围、结构/选择版本。包括可能改变赢家的败选候选；同family/form中新增加/修改的匹配信号亦纳入。不能仅hash旧版最终入选内容。
 - **model输入指纹**：最终实际发送的policy/facet/约束/原文引用及prompt版本。现 `reading_policy_version`适合这一层，不直接代替selection cache身份。
 - source/normalization、结构/选择/summary/layout feature、原语言、prompt实际内容/version、schema及output plan参数都沿实际执行绑定；实际model_id/endpoint/output tokens/thinking/reasoning/temperature/output_token_field沿现 `generation_manifest`配置及HTTP omission规则绑定。api_key/env名、pricing与runtime timeout不作为生成内容身份；P1/P2/P4是worker profile，不能冒充文档阅读profile。正式factory复核构造后的effective spec与冻结代一致。
+- final selection同时保存完整select结果SHA（Store审计）和`material_sha256`（SelectResult/Bundle共同实际材料：subject、source_metadata、selection、evidence、reading_context、电话会lineage/byte bindings）。Bundle省略parser name及select时的review诊断，不能伪造重建whole select hash；公开读缓存重算物料SHA，仍核final metadata和原始证据。partial dependency可有诊断用SHA，但不是cache-ready。
+- 原件实读由正式select/public read负责。当前0.9 cache命中在同一operation以非持久`verified_reuse_keys`复用已完成字节证明，不再二次实读；该字段不进binding，恢复/另一operation必须重新public read一次。自己已完成raw历史同样走public read，篡改原件不能返回完成。unknown-language探测或独立消费者回开分别计量，不伪称整个跨进程系统只读一次。
 - 原 `narrative_batch._run_owned/_run_prepared`、freeze/thaw和reuse pin只扩展本源因果字段。不得whole-catalog hash导致无关改动全库失效；也不能为复用先parse/select一次、进入worker再parse/select一次。
 - 明确采用**base归属→正式select一次→final generation CAS冻结→释放summarize/verify**的两阶段顺序。base归属不等于模型可运行的generation；未冻结前model不得运行。miss时只在原AUTO compute/select阶段解析/选择一次，后续消费同一个类型化select结果。不得在coordinator另跑DU副本后worker重跑。
 - cache precheck只比较已有候选的紧凑decision trace与当前相关组件/候选集合，不跑selector。trace须含曾参与匹配的候选集合membership及matcher/full-content digest，覆盖新增或移入适用范围；只存最终winner不够。与base一致并通过现有read_reuse_pin原文/定位校验才复用0POST。没有新trace的历史产物仍能回放，但不能冒充新策略缓存命中。

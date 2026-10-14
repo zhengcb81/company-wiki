@@ -62,13 +62,26 @@ def test_wrong_signature_object_is_rejected_before_scoring():
 
 def test_nested_signature_comparisons_respect_actual_work_cap(monkeypatch):
     items = []
+    guards = set()
     for group in range(20):
-        signature = coverage_signature(
-            f"The product project {group} remains in customer qualification before commercial delivery."
-        )
         for member in range(10):
+            # The previous fixture changed each group's protected factual
+            # sentence. Its comparisons are provably false before token work,
+            # so an indexed planner can correctly finish below this cap.
+            # Here the factual sentence is unchanged and an unprotected native
+            # annotation differs. All 200 signatures genuinely may overlap;
+            # they cannot be discarded using the protected-fact guard.
+            ordinal = group * 10 + member
+            annotation = chr(97 + ordinal // 26) + chr(97 + ordinal % 26)
+            signature = coverage_signature(
+                "Our company product remains in customer qualification before commercial delivery "
+                f"to overseas customers. {annotation}"
+            )
+            guards.add((signature.protected_sentences, signature.stage_signals))
             items.append(item(f"{group}-{member}", group * 10 + member,
                               topics=(f"topic-{group}",), group=f"group-{group}", signature=signature))
+    assert len(guards) == 1
+    assert budget.softly_repeats(items[0].coverage_signature, items[-1].coverage_signature)
     calls = 0
     original = budget.softly_repeats
 
@@ -78,10 +91,11 @@ def test_nested_signature_comparisons_respect_actual_work_cap(monkeypatch):
         return original(*args)
 
     monkeypatch.setattr(budget, "softly_repeats", counted)
-    selected = budget.select_budget_items(tuple(items), limit=200,
-                                         policy=budget.READING_BUDGET_POLICY, max_work_units=22000)
-    assert calls <= 22000
+    selected, diagnostics = budget.plan_budget_items(tuple(items), limit=200,
+        policy=budget.READING_BUDGET_POLICY, max_work_units=22000)
+    assert 0 < calls <= 22000
     assert len(selected) < 200
+    assert any(row.reason == "work_budget_exhausted" for row in diagnostics)
     assert all(sum(row.group_id == group for row in selected) == 10
                for group in {row.group_id for row in selected})
 

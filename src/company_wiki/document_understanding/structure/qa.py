@@ -16,7 +16,6 @@ from .contract import ObservationUnit
 
 _QUESTION_MARK = re.compile(r"^\s*(?:\d{1,3}\s*[、.．]\s*)?(?:问|问题)\s*[:：]")
 _ANSWER_MARK = re.compile(r"^\s*(?:答复|回答|答|回复)\s*[:：]")
-_QUESTION_WORD = re.compile(r"[？?]|请问|请介绍|如何|是否|多少|什么|怎样|吗|能否")
 _SENTENCE_END = re.compile(r"[。！？!?；;]+[”’\"'）】》」』]*")
 
 ROLE_INVESTOR = "investor_question"
@@ -39,8 +38,8 @@ class QaDraft:
             "kind": "qa_exchange",
             "section_ids": list(self.section_ids),
             "member_unit_ids": list(self.member_ids),
-            "anchor_unit_ids": list(self.question_ids[:1]),
-            "required_context_unit_ids": list(self.question_ids[:1]),
+            "anchor_unit_ids": list(self.answer_ids),
+            "required_context_unit_ids": list(self.question_ids),
             "completeness": self.completeness,
             "diagnostics": list(self.diagnostics),
         }
@@ -48,6 +47,12 @@ class QaDraft:
 
 def _is_question_start(unit: ObservationUnit) -> bool:
     if unit.kind in {"table_row", "table_header", "table_caption", "header", "footer"}:
+        return False
+    if unit.speaker == "prepared_statement":
+        return False
+    if unit.role == ROLE_INVESTOR:
+        return True
+    if unit.role == ROLE_MANAGEMENT or unit.speaker in {"management", "company"}:
         return False
     if _QUESTION_MARK.match(unit.text):
         return True
@@ -57,10 +62,18 @@ def _is_question_start(unit: ObservationUnit) -> bool:
 
 
 def _is_answer_start(unit: ObservationUnit) -> bool:
+    if unit.speaker == "prepared_statement" or unit.is_table_furniture or unit.is_header_furniture:
+        return False
+    if unit.role == ROLE_INVESTOR or unit.speaker in {"investor", "analyst", "questioner"}:
+        return False
     if _ANSWER_MARK.match(unit.text):
         return True
     if unit.speaker and unit.speaker.casefold() in {"management", "company", "speaker"}:
-        return _QUESTION_WORD.search(unit.text) is None
+        # Speaker attribution is source evidence. A manager's rhetorical
+        # question or denial must not become an unanswered investor question.
+        return True
+    if unit.role == ROLE_MANAGEMENT and unit.turn_id:
+        return True
     return False
 
 
@@ -83,6 +96,20 @@ def build_qa_exchanges(
     counter = 0
     current: QaDraft | None = None
     by_id = {unit.unit_id: unit for unit in units}
+    # Native record fields can be exported answer-first, and fragments of one
+    # source turn can be non-contiguous. An explicit source-owned association
+    # is stronger evidence than adjacency. Index it once (linear work), keeping
+    # native member order rather than rewriting the source into a fake quote.
+    bound: dict[str, list[ObservationUnit]] = {}
+    for unit in ordering.ordered:
+        if (
+            unit.turn_id
+            and unit.unit_id not in ordering.toc_ids
+            and unit.unit_id not in ordering.running_header_ids
+            and (_is_question_start(unit) or _is_answer_start(unit))
+        ):
+            bound.setdefault(unit.turn_id, []).append(unit)
+    emitted_turns: set[str] = set()
 
     def flush(draft: QaDraft | None) -> None:
         if draft is None:
@@ -114,6 +141,47 @@ def build_qa_exchanges(
         if unit.unit_id in ordering.toc_ids or unit.unit_id in ordering.running_header_ids:
             continue
         section_ids = [unit_section[unit.unit_id]] if unit.unit_id in unit_section else []
+
+        if current is not None and current.member_ids:
+            preceding = by_id[current.member_ids[-1]]
+            if preceding.source_id and unit.source_id and preceding.source_id != unit.source_id:
+                flush(current)
+                current = None
+
+        if unit.turn_id in bound:
+            flush(current)
+            current = None
+            if unit.turn_id in emitted_turns:
+                continue
+            emitted_turns.add(unit.turn_id)
+            members = bound[unit.turn_id]
+            questions = [member.unit_id for member in members if _is_question_start(member)]
+            answers = [member.unit_id for member in members if _is_answer_start(member)]
+            counter += 1
+            draft = QaDraft(
+                semantic_id=f"m{counter}",
+                member_ids=[member.unit_id for member in members],
+                question_ids=questions,
+                answer_ids=answers,
+                section_ids=list(dict.fromkeys(
+                    unit_section[member.unit_id] for member in members
+                    if member.unit_id in unit_section
+                )),
+            )
+            if not questions:
+                draft.completeness = "partial"
+                draft.diagnostics.append({
+                    "code": "ANSWER_WITHOUT_QUESTION", "unit_ids": answers,
+                    "detail": "source record contains an answer without a question",
+                })
+            consumed.update(draft.member_ids)
+            flush(draft)
+            continue
+
+        if unit.speaker == "prepared_statement":
+            flush(current)
+            current = None
+            continue
 
         is_answer = _is_answer_start(unit)
         is_question = _is_question_start(unit)
@@ -214,7 +282,7 @@ def _tail_open(draft: QaDraft, by_id: dict[str, ObservationUnit]) -> bool:
 
 def qa_available(units: Sequence[ObservationUnit]) -> bool:
     return any(
-        _is_question_start(unit) or _is_answer_start(unit) or unit.turn_id
+        _is_question_start(unit) or _is_answer_start(unit)
         for unit in units
     )
 

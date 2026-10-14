@@ -3,6 +3,7 @@
 from __future__ import annotations
 import json
 import math
+from importlib import import_module
 from collections.abc import Mapping, Sequence
 from typing import Any
 from urllib.parse import urlsplit
@@ -23,6 +24,7 @@ from company_wiki.source_catalog.transcript_text_extract import (
 from .narrative_transport import NarrativeTransportReader
 from .narrative_transport_contracts import NarrativeReadRequest, EXPECTED_SOURCE_FIELDS
 from .narrative_verify import BUNDLE_PRODUCER_VERSION
+from .narrative_selection_generation import reading_material_sha256, validate_selection_generation
 
 
 def _effective_optional_generation(options: Mapping[str, Any]) -> dict[str, Any]:
@@ -332,6 +334,8 @@ def artifact_pin(version):
 
 def read_reuse_pin(artifacts, reader, payload, pin, facts, manifest=None, *, normalization=None):
     """The public reader owns byte/hash/current-source and one locator replay."""
+    if manifest is not None and manifest.get("execution_versions", {}).get("selector") == "0.9.0" and "selection_generation" not in manifest:
+        manifest = pinned_reading_manifest(artifacts, payload, pin, manifest)
     ref = payload.source_ref
     if (pin["document_id"], pin["source_id"], pin["source_sha256"]) != (
         ref.document_id,
@@ -365,6 +369,8 @@ def read_reuse_pin(artifacts, reader, payload, pin, facts, manifest=None, *, nor
         )
     )
     bundle = NarrativeBundle.from_dict(json.loads(result.data))
+    if manifest is not None and "selection_generation" in manifest:
+        verify_reading_bundle_generation(bundle, manifest)
     if manifest is not None:
         if (
             bundle.source_metadata.to_dict() != manifest["source_metadata"]
@@ -406,6 +412,16 @@ def read_reuse_pin(artifacts, reader, payload, pin, facts, manifest=None, *, nor
 
 
 def find_reuse_pin(artifacts, reader, payload, manifest, facts, *, normalization=None):
+    if manifest.get("execution_versions", {}).get("selector") == "0.9.0":
+        for version in artifacts.visible_base_generation_candidates(
+                subject=payload.subject, base_generation_sha256=generation_sha256(manifest)):
+            stored = reading_candidate_manifest(version, manifest)
+            if not current_reading_decision_matches(stored):
+                continue
+            pin = artifact_pin(version)
+            if read_reuse_pin(artifacts, reader, payload, pin, facts, stored, normalization=normalization):
+                return pin
+        return None
     digest = generation_sha256(manifest)
     versions = artifacts.visible_generation_candidates(
         document_id=payload.source_ref.document_id,
@@ -426,3 +442,55 @@ def find_reuse_pin(artifacts, reader, payload, manifest, facts, *, normalization
         if complete:
             return pin
     return None
+
+
+def reading_candidate_manifest(version, base: Mapping[str, Any]) -> dict[str, Any]:
+    metadata = json.loads(version.metadata_json)
+    manifest = metadata.get("generation_manifest")
+    if (not isinstance(manifest, dict) or "selection_generation" not in manifest
+            or {key: value for key, value in manifest.items()
+                if key not in {"selection_generation", "reading_dependencies"}} != base
+            or metadata.get("generation_sha256") != generation_sha256(manifest)):
+        raise ValueError("BATCH_REUSE_MANIFEST_INVALID")
+    validate_selection_generation(manifest)
+    return manifest
+
+
+def pinned_reading_manifest(artifacts, payload, pin, base) -> dict[str, Any]:
+    version = artifacts.visible_subject_metadata(subject=payload.subject,
+                                                 artifact_version_id=pin["artifact_version_id"])
+    content = pin.get("content_sha256", pin.get("artifact_sha256"))
+    if version.content_sha256 != content or version.byte_size != pin["byte_size"]:
+        raise ValueError("BATCH_REUSE_PIN_ARTIFACT_MISMATCH")
+    return reading_candidate_manifest(version, base)
+
+
+def current_reading_decision_matches(manifest: Mapping[str, Any]) -> bool:
+    dependencies = manifest.get("reading_dependencies")
+    if not isinstance(dependencies, Mapping) or dependencies.get("status") != "complete":
+        return False
+    from .models import require_sha256
+    require_sha256(dependencies.get("decision_digest"), field_name="decision_digest")
+    if dependencies.get("decision_digest") != manifest.get("selection_generation", {}).get("decision_digest"):
+        raise ValueError("BATCH_REUSE_DECISION_DIGEST_INVALID")
+    try:
+        port = import_module("company_wiki.document_understanding.decision_dependencies")
+    except ModuleNotFoundError as exc:
+        if exc.name != "company_wiki.document_understanding.decision_dependencies":
+            raise
+        return False
+    from company_wiki.document_understanding.decision_inventory import current_decision_trace
+    current = current_decision_trace(dependencies)
+    if not current["inventory_complete"]:
+        return False
+    return port.compare_decision_dependencies(dependencies, current)["status"] == "same"
+
+
+def verify_reading_bundle_generation(bundle: NarrativeBundle, manifest: Mapping[str, Any]) -> None:
+    validate_selection_generation(manifest)
+    frozen = manifest["selection_generation"]
+    if (bundle.reading_context is None
+            or bundle.reading_context["reading_policy_version"] != frozen["reading_policy_version"]
+            or canonical_json_hash([span.to_dict() for span in bundle.evidence_spans]) != frozen["evidence_sha256"]
+            or reading_material_sha256(bundle) != frozen["material_sha256"]):
+        raise ValueError("BATCH_REUSE_SELECTION_GENERATION_MISMATCH")

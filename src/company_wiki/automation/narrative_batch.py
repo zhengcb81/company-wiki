@@ -63,6 +63,9 @@ class BatchEvents:
     generation_manifests: dict = field(default_factory=dict)
     reused_artifact_pins: dict = field(default_factory=dict)
     normalization_config: dict | None = None
+    # Operation-local proof only. Never serialize this into a resumable binding:
+    # another invocation must read the current original again.
+    verified_reuse_keys: frozenset[str] = frozenset()
 
 
 _NARRATIVE_JOB_TYPES = ("source.narrative_select", "source.narrative_summarize", "source.narrative_verify")
@@ -310,7 +313,8 @@ def _frozen_binding(request, binding, *, jobs=()):
 
 
 _GENERATION_SOURCE_FIELDS = frozenset({"source_ref", "source_metadata", "parser_component",
-                                     "parser_components", "material_extractor", "subject_binding", "source_adapter", "language"})
+                                     "parser_components", "material_extractor", "subject_binding", "source_adapter", "language",
+                                     "selection_generation", "reading_dependencies"})
 
 
 def _freeze_generations(manifests):
@@ -983,6 +987,9 @@ def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog):
     from .narrative_transport import NarrativeTransportReader
     from .narrative_transport_contracts import NarrativeReadRequest
     from .narrative_contracts import NarrativeBundle
+    if manifest.get("execution_versions", {}).get("selector") == "0.9.0" and "selection_generation" not in manifest:
+        from .narrative_generation import pinned_reading_manifest
+        manifest = pinned_reading_manifest(artifacts, payload, pin, manifest)
 
     if pin.get("subject_binding") != payload.subject.to_dict() or pin.get(
         "generation_sha256"
@@ -1001,6 +1008,9 @@ def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog):
         )
     )
     bundle = NarrativeBundle.from_dict(json.loads(result.data))
+    if "selection_generation" in manifest:
+        from .narrative_generation import verify_reading_bundle_generation
+        verify_reading_bundle_generation(bundle, manifest)
     if (
         bundle.source_metadata.to_dict() != manifest["source_metadata"]
         or bundle.versions.parser != manifest["parser_component"]["version"]
@@ -1038,12 +1048,20 @@ def _find_item_reuse_pin(
         return find_reuse_pin(
             artifacts, reader, payload, manifest, facts, normalization=normalization
         )
-    versions = artifacts.visible_subject_generation_candidates(
-        subject=payload.subject, generation_sha256=generation_sha256(manifest)
-    )
+    reading = manifest.get("execution_versions", {}).get("selector") == "0.9.0"
+    versions = (artifacts.visible_base_generation_candidates(subject=payload.subject,
+                base_generation_sha256=generation_sha256(manifest)) if reading else
+                artifacts.visible_subject_generation_candidates(subject=payload.subject,
+                    generation_sha256=generation_sha256(manifest)))
     for version in versions:
         metadata = json.loads(version.metadata_json)
-        if metadata.get("generation_manifest") != manifest:
+        effective = manifest
+        if reading:
+            from .narrative_generation import reading_candidate_manifest, current_reading_decision_matches
+            effective = reading_candidate_manifest(version, manifest)
+            if not current_reading_decision_matches(effective):
+                continue
+        elif metadata.get("generation_manifest") != manifest:
             raise ValueError("BATCH_REUSE_MANIFEST_INVALID")
         pin = {
             "schema_version": "narrative-ref/2",
@@ -1051,10 +1069,10 @@ def _find_item_reuse_pin(
             "artifact_sha256": version.content_sha256,
             "byte_size": version.byte_size,
             "subject_binding": payload.subject.to_dict(),
-            "generation_sha256": generation_sha256(manifest),
+            "generation_sha256": generation_sha256(effective),
         }
         if _read_projected_pin(
-            artifacts, reader, payload, pin, manifest, catalog=catalog
+            artifacts, reader, payload, pin, effective, catalog=catalog
         ):
             return pin
     return None
@@ -1233,7 +1251,7 @@ def _run_owned(
     # Complete pure source preparation before AUTO can initialize or migrate.
     # Reuse these facts on resume; code upgrades never re-sign persisted jobs.
     previous = (
-        NarrativeRunStore(db_path).get_run(request.run_id)
+        NarrativeRunStore.read_existing_run(db_path, request.run_id)
         if db_path.is_file()
         else None
     )
@@ -1255,10 +1273,18 @@ def _run_owned(
         normalization=normalization,
         projection_catalog=catalog,
     )
+    read_versions = (
+        json.loads(previous.binding_json).get("execution_versions", {})
+        if previous is not None and previous.binding_json is not None
+        else request.execution_versions
+    )
     for payload in prepared_sources[0]:
         _check_preparation_deadline(deadline)
-        if payload.subject.kind == "official_json":
-            continue  # The source port already verified every current parent exactly once.
+        if (payload.subject.kind == "official_json"
+                or read_versions.get("selector") == "0.9.0"):
+            # The actual select/public-read owner verifies source bytes. Avoid
+            # reading them here too; metadata admission was checked above.
+            continue
         opened = reader.open_version(
             source_ref(payload),
             purpose="narrative_derivation",
@@ -1393,6 +1419,8 @@ def _run_prepared(
             manifests,
             pins,
             normalization.snapshot(),
+            frozenset(key for key in pins
+                      if manifests[key].get("execution_versions", {}).get("selector") == "0.9.0"),
         )
         misses = len(request.work_items) - len(pins)
         if misses:
@@ -1972,11 +2000,18 @@ def _final_documents(
         key = payload.item_key
         projected = payload.subject.kind == "official_json"
         manifest = binding.generation_manifests.get(key)
+        if manifest is not None and manifest.get("execution_versions", {}).get("selector") == "0.9.0":
+            manifest = runs.final_generations(request.run_id).get(key, manifest)
         pin = binding.reused_artifact_pins.get(key)
         if pin is not None:
-            if reader is None:
+            already_verified = (
+                manifest is not None
+                and manifest.get("execution_versions", {}).get("selector") == "0.9.0"
+                and key in binding.verified_reuse_keys
+            )
+            if not already_verified and reader is None:
                 raise BatchResumeError("BATCH_REUSE_ARTIFACT_INVALID")
-            valid = (
+            valid = already_verified or (
                 _read_projected_pin(
                     artifacts,
                     reader,
@@ -2072,6 +2107,12 @@ def _final_documents(
                         "source_id": ref.source_id,
                         "source_sha256": ref.content_sha256,
                     }
+                    if (read_only and manifest is not None
+                            and manifest.get("execution_versions", {}).get("selector") == "0.9.0"
+                            and (reader is None or not read_reuse_pin(
+                                artifacts, reader, payload, artifact_ref, facts[key],
+                                manifest, normalization=normalization))):
+                        raise BatchResumeError("BATCH_REUSE_ARTIFACT_INVALID")
                 document_status = "completed"
                 if not read_only:
                     summary = next(

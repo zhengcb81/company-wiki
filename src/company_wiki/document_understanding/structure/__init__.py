@@ -224,10 +224,11 @@ class _ExchangeView:
     __slots__ = ("question_ids", "answer_ids")
 
     def __init__(self, wire: Mapping[str, Any]) -> None:
-        members = list(wire.get("member_unit_ids", ()))
-        anchors = list(wire.get("anchor_unit_ids", ()))
-        self.question_ids = anchors or members[:1]
-        self.answer_ids = [unit for unit in members if unit not in set(self.question_ids)]
+        # QaDraft's anchors are the actual answer evidence; every question
+        # fragment is required context. Do not infer roles from member order:
+        # native record fields can be emitted answer-first.
+        self.question_ids = list(wire.get("required_context_unit_ids", ()))
+        self.answer_ids = list(wire.get("anchor_unit_ids", ()))
 
 
 def _member_map(semantic_units) -> dict[str, str]:

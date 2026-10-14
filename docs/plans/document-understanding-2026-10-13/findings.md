@@ -1,4 +1,20 @@
-## ROOT当前实施与并行拆分 — 2026-10-14
+## ROOT生产接线节点与真实漏读 — 2026-10-14
+
+正式selector请求、紧凑wire、同lease事务final CAS、实际model spec、public Bundle物料SHA、same-run/outbox/v5升级和篡改原件恢复均已集中工程验收。原UNIT和E2E失败及受影响修复均留证，不伪称单次全绿。详[节点收据](production-wiring-evidence/acceptance.json)。未知语言prepare仍重复实读一次，明确P2性能残项，不恢复许可/签收。
+
+三真实原件只parse一次的旧/新整篇native对照：CN6733units，选择21.048→6.569s；HK6502units，32.888→6.877s；US5215units，6.968→3.817s。单次观察非p95，正文量下降不能当召回通过。US8冻结required_business实际旧4/8、新1/8，逐原DOM排除拆句误报；全部critical实际section_role=unknown，sec_10k nominal route却family_policy缺失/fallback，六项未准入，消费制机制候选被字符预算挤出。已列三共因通用RED，不能只加Azure/公司词或降低gold。
+
+ROOT只读精确Config loader：MiMo=mimo-v2.6-flash、DeepSeek=deepseek-flash、MiniMax=MiniMax-M3（api.minimaxi.com），三家凭证均存在；按配置实际8192输出/temperature1.0及token字段执行，未外发或调用。旧母账413778 tokens/334463µUSD与7 unknown及FX2764保留；本节点增量0，真实摘要尚待关键漏读修复和独立冻结质量交付。
+
+三DU3已分发施工；依赖worktree出现排他未提交模块/测试，不把“HEAD仍在base”误写未开工。ROOT不修改三线owned目录，真实跨run缓存尚未认证。
+
+## ROOT当前实施与并行拆分 — 2026-10-14（此前记录）
+
+本次推进到实际0.9选择/正式传输/同事务final generation，默认尚未切换。独立TDD分别发现并修anchor脚注巨包、拒绝包消失、工作停止伪skip、原件父身份碰撞；集中174相关PASS（沙箱首轮173PASS/1Temp权限setup error，正常Temp重跑全绿）。新正式4格式/恢复case只涉及HTML/PDF/TXT三格式＋activation边界，4PASS不能标真实模型质量PASS。
+
+新增必须集中关闭的共同根因：20K候选重复全扫耗2M work且漏晚页priority1；deferred诊断库存1.09MiB。已委派ROOT内部独占planner优化，不抬上限；保完整inventory选择但只持久化128诊断样例＋真实total/limited。真实名创p12多行期次header/中英经营行未组成operating_table，24原生表行0入选；用共享结构header累计修，不能按公司/页码补词或拿partial签收。GEOMETRY新子包仍排他，不冒称细geometry已解决。
+
+缓存ROOT producer与DU3 canonicalizer分工：新decision_inventory仅生成实际scope相关catalog候选域（含败选与零匹配matcher），不读取原件/重跑selector，不造第二registry/store/freezer；缺外包dependency模块时保存明确诊断、no valid new cross-run reuse。final manifest必须由既有AUTO事务freeze，dispatcher与batch最终读取须使用当前final snapshot，不能用初始化base发布。选择trace应仅metadata/store保存，不重复原文。
 
 主线实际开始Phase A：19项新阅读budget反例RED/2旧回放PASS后扩既有planner为reading_plan/1，共享依赖unique成本/主题多样性/完整闭包/字符与工作上限；旧默认和selector0.8.0不改。独审发现嵌套signature工作漏计、闭包实际扫描漏计、签名metadata未限、低预算误诊及依赖中已发value未记主题/签名，均按根因统一修复；最终38/38独立probe通过。尚未把ReadingPlan接正式生产，不标Phase A/B/C全部完成。
 

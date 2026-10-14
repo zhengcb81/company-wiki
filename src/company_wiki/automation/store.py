@@ -1349,6 +1349,10 @@ class AutomationStore:
                 now=finished_at,
             )
             _validate_result_effects(result, job.job_id)
+            if job.job_type == "source.narrative_select" and result.outcome is HandlerOutcome.SUCCEEDED:
+                from .narrative_run_store import _freeze_select_generation_in_transaction
+
+                _freeze_select_generation_in_transaction(conn, job, result)
             target = _finish_target(result, has_effects=bool(result.effects))
             _update_finished_attempt(
                 conn, attempt, finished_at=finished_at, result=result

@@ -159,7 +159,8 @@ class BudgetedNarrativeCaller:
             if isinstance(error, RunBudgetExceededError):
                 code = "MODEL_BUDGET_DENIED"
             elif isinstance(error, (RunConflictError, ReservationConflictError)):
-                code = "MODEL_RUN_BINDING_CONFLICT"
+                code = ("MODEL_SELECTION_NOT_FROZEN" if str(error) == "MODEL_SELECTION_NOT_FROZEN"
+                        else "MODEL_RUN_BINDING_CONFLICT")
             elif isinstance(error, RunScopeError):
                 code = "MODEL_RUN_SCOPE_MISMATCH"
             elif isinstance(error, LeaseLostError):

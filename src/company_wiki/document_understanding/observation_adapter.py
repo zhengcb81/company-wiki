@@ -17,6 +17,8 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from typing import Any
+import hashlib
+import json
 import re
 
 INPUT_SCHEMA_VERSION = "du-input/1"
@@ -245,6 +247,45 @@ def _locator_of(unit: Any, metadata: Mapping[str, Any]) -> str:
     return str(unit.unit_id)
 
 
+def _qa_hints(unit: Any, metadata: Mapping[str, Any]) -> dict[str, str]:
+    """Project source-owned speaker and association, without inventing a turn.
+
+    Native official JSON fields already identify the question and answer; they
+    do not carry the PDF parser's ``qa_state`` or an artificial Q:/A: prefix.
+    Association is scoped to the unit's actual parent, since one observation
+    may contain several source originals. Prepared remarks carry a speaker but
+    are explicitly not an answer to a neighbouring question.
+    """
+    state = str(metadata.get("qa_state") or "")
+    original_role = metadata.get("original_role")
+    group = (metadata.get("official_record_group_id")
+             or metadata.get("qa_group_id"))
+    speaker: str | None = None
+    if original_role == "company_statement":
+        speaker = "prepared_statement"
+    elif unit.source_role == "investor_question":
+        speaker = "investor"
+    elif unit.source_role == "management":
+        speaker = "management" if group or state else "prepared_statement"
+    elif original_role == "company_official_answer":
+        speaker = "company"
+    elif state:
+        speaker = "management" if "answer" in state else "investor"
+    hints = {"speaker": speaker} if speaker else {}
+    if group:
+        parent = getattr(unit, "source_id", None)
+        if parent:
+            # Include the native parent even if a provider reuses a record ID.
+            association = json.dumps([str(parent), str(group)], ensure_ascii=False)
+            hints["turn_id"] = "source-qa:" + hashlib.sha256(
+                association.encode("utf-8")
+            ).hexdigest()
+        else:
+            # Foreign legacy stubs have no parent beyond their envelope.
+            hints["turn_id"] = str(group)
+    return hints
+
+
 def build_observation(
     units: Sequence[Any],
     *,
@@ -318,6 +359,11 @@ def build_observation(
             if key in metadata:
                 layout[key] = metadata[key]
         hints: dict[str, Any] = {}
+        parent_source_id = getattr(unit, "source_id", None)
+        if isinstance(parent_source_id, str) and parent_source_id:
+            # One projection may contain units from several native originals.
+            # This is attribution, not another source verification step.
+            hints["source_id"] = parent_source_id
         if metadata.get("geometry_granularity"):
             hints["geometry_granularity"] = metadata["geometry_granularity"]
         level = _heading_level(unit.raw_text, metadata)
@@ -350,13 +396,7 @@ def build_observation(
                 value = metadata.get(source_key)
                 if isinstance(value, int) and not isinstance(value, bool):
                     hints[target] = value
-        if metadata.get("qa_state"):
-            hints["turn_id"] = str(metadata.get("qa_group_id") or "")
-            hints["speaker"] = (
-                "management"
-                if "answer" in str(metadata.get("qa_state"))
-                else "investor"
-            )
+        hints.update(_qa_hints(unit, metadata))
         if unit.unit_kind.startswith("html_") and isinstance(
             metadata.get("dom_path"), str
         ):

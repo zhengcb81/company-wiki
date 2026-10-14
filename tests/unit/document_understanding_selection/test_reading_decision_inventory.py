@@ -1,0 +1,191 @@
+"""Source-specific cache inventory includes decision losers, not whole catalog."""
+from copy import deepcopy
+import importlib
+
+import pytest
+
+from company_wiki.document_understanding.profiles import registry
+
+
+def _pipeline():
+    return {"source_ref": {"source_id": "urn:company-wiki:source:sha256:" + "a" * 64},
+            "route": {"family": "annual", "regime": "cn_exchange", "profile_id": "cn_annual"},
+            "observation": {"metadata": {}}, "reading_plan": {"used_profiles": [
+                {"profile_id": "cn_annual", "reading_profile_key": None}]}}
+
+
+def test_decision_inventory_changes_for_unselected_applicable_policy(monkeypatch):
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    # Use the actual installed binding ID rather than an imagined provider ID.
+    binding = next(row for row in registry._CATALOG["legacy_bindings"]
+                   if row["family"] == "annual" and row["regime"] == "cn_exchange")
+    pipeline = _pipeline()
+    pipeline["route"]["profile_id"] = binding["profile_id"]
+    pipeline["reading_plan"]["used_profiles"][0]["profile_id"] = binding["profile_id"]
+    before = module.build_decision_trace(pipeline)
+    changed = deepcopy(registry._CATALOG)
+    target = next(row for row in changed["families"] if row["applies_to"]["family"] == "annual"
+                  and "cn_exchange" in row["applies_to"]["regimes"])
+    target["sections"][0]["priority"] += 1
+    monkeypatch.setattr(registry, "_CATALOG", changed)
+    assert module.current_decision_trace(before) != before
+
+
+def test_unrelated_family_content_does_not_invalidate_this_source(monkeypatch):
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    binding = next(row for row in registry._CATALOG["legacy_bindings"]
+                   if row["family"] == "annual" and row["regime"] == "cn_exchange")
+    pipeline = _pipeline()
+    pipeline["route"]["profile_id"] = binding["profile_id"]
+    pipeline["reading_plan"]["used_profiles"][0]["profile_id"] = binding["profile_id"]
+    before = module.build_decision_trace(pipeline)
+    changed = deepcopy(registry._CATALOG)
+    target = next(row for row in changed["families"] if row["applies_to"]["family"] == "prospectus")
+    target["reading_questions"].append("Unrelated source question")
+    monkeypatch.setattr(registry, "_CATALOG", changed)
+    assert module.current_decision_trace(before) == before
+
+
+def test_missing_inventory_cannot_claim_complete():
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    trace = {"schema_version": "du-decision-trace/1", "scopes": [], "components": [],
+             "candidates": [], "versions": {}, "inventory_complete": False}
+    assert module.current_decision_trace(trace)["inventory_complete"] is False
+
+
+def _real_interim_pipeline():
+    from company_wiki.document_understanding import understand_units
+    from company_wiki.source_catalog.narrative_evidence import _make_unit
+    from company_wiki.source_contract import EvidenceCoordinates, source_id_for_sha256
+
+    digest = "a" * 64
+    source_id = source_id_for_sha256(digest)
+    unit = _make_unit(source_id=source_id, parser_version="0.1.0",
+        coordinates=EvidenceCoordinates(page_number=1, paragraph_index=0),
+        raw_text="INTERIM REPORT 2026. Our company launched a new product for overseas customers.",
+        unit_kind="pdf_text_block", source_role="company_filing", language="en", metadata={})
+    pipeline = understand_units((unit,), source_id=source_id, source_sha256=digest,
+        title="INTERIM REPORT 2026", declared_kind="semi_annual_report", language="en",
+        metadata={"regime": "hkex"})
+    assert pipeline["route"]["family"] == "interim"
+    assert pipeline["profile"]["family"] == "interim"
+    return pipeline
+
+
+def test_real_hk_interim_inventory_records_the_resolved_family_and_invalidates_changed_policy(monkeypatch):
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    pipeline = _real_interim_pipeline()
+    trace = module.build_decision_trace(pipeline)
+    assert trace["scopes"][0]["family"] == "interim"
+    names = {row["candidate_id"].rsplit("|", 1)[-1] for row in trace["candidates"]}
+    assert "hk_interim_report" in names and "hk_annual_report" not in names
+    assert module.current_decision_trace(trace) == trace
+    changed = deepcopy(registry._CATALOG)
+    record = next(row for row in changed["families"] if row["id"] == "hk_interim_report")
+    record["sections"][0]["priority"] += 1
+    monkeypatch.setattr(registry, "_CATALOG", changed)
+    assert module.current_decision_trace(trace) != trace
+
+
+def test_actual_child_unit_family_wins_over_legacy_binding_and_parent_form():
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    pipeline = _real_interim_pipeline()
+    child_key = "hk_periodic:actually-read-child"
+    pid = pipeline["profile"]["profile_id"]
+    pipeline["reading_plan"]["used_profiles"].append({"profile_id": pid, "reading_profile_key": child_key})
+    pipeline["reading_plan"]["unit_profiles"]["child-unit"] = {
+        "profile_id": pid, "reading_profile_key": child_key, "family": "interim", "regime": "hkex"}
+    # The child resolver explicitly clears the parent's form metadata.
+    pipeline["observation"]["metadata"]["form_type"] = "10-K"
+    trace = module.build_decision_trace(pipeline)
+    child = next(row for row in trace["scopes"] if row["scope_id"].endswith(child_key))
+    assert child["family"] == "interim" and child["regime"] == "hkex"
+    assert child["form_type"] == "unknown"
+    ids = {row["candidate_id"].rsplit("|", 1)[-1] for row in trace["candidates"] if row["scope_id"] == child["scope_id"]}
+    assert "hk_interim_report" in ids and "hk_annual_report" not in ids
+
+
+@pytest.mark.parametrize("origin", ["resolved_profile", "actual_units"])
+def test_resolved_parent_family_is_not_replaced_by_an_obsolete_route_or_binding(origin):
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    pipeline = _real_interim_pipeline()
+    pipeline["route"]["family"] = "annual"
+    if origin == "actual_units":
+        pipeline.pop("profile")
+    trace = module.build_decision_trace(pipeline)
+    assert trace["scopes"][0]["family"] == "interim"
+
+
+def test_actual_child_regime_does_not_inherit_the_parent_market_or_profile_default():
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    pipeline = _real_interim_pipeline()
+    child_key = "observed-sec-child"
+    # This is an actual resolved scoped view. The compatibility profile ID is
+    # deliberately shared, just as hk_periodic is shared by annual and interim.
+    pipeline["reading_plan"]["used_profiles"].append({"profile_id": "hk_periodic", "reading_profile_key": child_key})
+    pipeline["reading_plan"]["unit_profiles"]["child-unit"] = {
+        "profile_id": "hk_periodic", "reading_profile_key": child_key, "family": "quarterly", "regime": "sec"}
+    child = next(row for row in module.build_decision_trace(pipeline)["scopes"] if row["scope_id"].endswith(child_key))
+    assert child["family"] == "quarterly" and child["regime"] == "sec"
+
+
+def test_unresolved_child_scope_cannot_claim_complete_using_a_legacy_default():
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    pipeline = _real_interim_pipeline()
+    pipeline["reading_plan"]["used_profiles"].append({"profile_id": "hk_periodic", "reading_profile_key": "missing-child"})
+    assert module.build_decision_trace(pipeline)["inventory_complete"] is False
+
+
+def test_actual_scope_retains_ineligible_metadata_candidates_and_their_admission_matcher(monkeypatch):
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    trace = module.build_decision_trace(_real_interim_pipeline())
+    ineligible = [row for row in trace["candidates"] if row["candidate_id"].startswith("family|") and not row["eligible"]]
+    assert ineligible
+    name = ineligible[0]["candidate_id"].rsplit("|", 1)[-1]
+    changed = deepcopy(registry._CATALOG)
+    record = next(row for row in changed["families"] if row["id"] == name)
+    record["reading_questions"].append("Still inapplicable, do not invalidate unrelated content.")
+    monkeypatch.setattr(registry, "_CATALOG", changed)
+    assert module.current_decision_trace(trace) == trace
+    record["applies_to"]["regimes"].append("hkex")
+    assert module.current_decision_trace(trace) != trace
+
+
+def test_missing_actual_root_family_cannot_be_filled_from_the_compatibility_binding():
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    pipeline = _pipeline()
+    pipeline["route"].pop("family")
+    assert module.build_decision_trace(pipeline)["inventory_complete"] is False
+
+
+def test_conflicting_actual_unit_families_cannot_be_reused_as_an_arbitrary_first_scope():
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    pipeline = _real_interim_pipeline()
+    first = next(iter(pipeline["reading_plan"]["unit_profiles"].values()))
+    pipeline["reading_plan"]["unit_profiles"]["contradictory"] = {**first, "family": "annual"}
+    assert module.build_decision_trace(pipeline)["inventory_complete"] is False
+
+
+def test_real_multi_parent_reading_bridge_namespaces_actual_profiles_for_complete_inventory():
+    from company_wiki.automation.narrative_official_json import _unit
+    from company_wiki.source_catalog.narrative_document import DocumentStructure
+    from company_wiki.source_catalog.narrative_reading import _understand
+    from unit.test_official_json_model_subject import selection
+
+    module = importlib.import_module("company_wiki.document_understanding.decision_inventory")
+    original = selection()
+    units = tuple(_unit(span) for span in original.evidence_spans)
+    parsed = DocumentStructure(original.source_ref.source_id, original.source_ref.content_sha256,
+                               "en", units)
+    pipeline = _understand(parsed, title="Investor relations activity record",
+                           kind="investor_relations", mime_type="application/json")
+    trace = module.build_decision_trace(pipeline)
+    assert trace["inventory_complete"] is True
+    assert len(trace["scopes"]) == 2
+    actual = pipeline["child_profiles"]
+    for used in pipeline["reading_plan"]["used_profiles"]:
+        key = used["reading_profile_key"]
+        scope = next(row for row in trace["scopes"] if row["scope_id"].endswith(key))
+        assert scope["family"] == actual[key]["family"]
+        assert scope["regime"] == actual[key]["regime"]
+    assert {view["reading_profile_key"] for view in pipeline["reading_plan"]["unit_profiles"].values()} == set(actual)

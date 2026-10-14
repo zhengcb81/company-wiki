@@ -15,7 +15,7 @@ from typing import Callable, TypeVar
 from company_wiki._id_scope import normalize_id_scope
 
 from . import migrations
-from .models import (RuntimeGate, RuntimeState, canonical_json_hash,
+from .models import (RuntimeGate, RuntimeState, canonical_json, canonical_json_hash,
                      require_canonical_json, require_sha256, require_utc_timestamp)
 from .store import (
     ConcurrentUpdateError, StoreBusyError, _read_runtime_gate_in_transaction,
@@ -262,6 +262,137 @@ def _required_run(connection: sqlite3.Connection, run_id: str) -> RunRecord:
     return run
 
 
+def _base_generation(run: RunRecord, item_key: str) -> dict | None:
+    """Read this item's immutable base settings; never consult current config."""
+    if run.binding_json is None:
+        return None
+    try:
+        binding = json.loads(run.binding_json)
+        record = binding.get("generation_manifests", {}).get(item_key)
+        if record is None:
+            if binding.get("execution_versions", {}).get("selector") == "0.9.0":
+                raise ValueError("new selector has no bound base generation")
+            return None
+        if not isinstance(record, dict):
+            raise ValueError("invalid generation record")
+        if "settings_sha256" in record:
+            common = binding["generation_settings"][record["settings_sha256"]]
+            source = record["source_inputs"]
+            if (not isinstance(common, dict) or not isinstance(source, dict)
+                    or canonical_json_hash(common) != record["settings_sha256"]
+                    or common.keys() & source.keys()):
+                raise ValueError("invalid generation settings")
+            manifest = {**common, **source}
+            if canonical_json_hash(manifest) != record["generation_sha256"]:
+                raise ValueError("invalid generation digest")
+        else:
+            manifest = record
+        if (binding.get("execution_versions", {}).get("selector") == "0.9.0"
+                and manifest.get("execution_versions", {}).get("selector") != "0.9.0"):
+            raise ValueError("base selector differs from the owning run")
+        return manifest
+    except (KeyError, TypeError, ValueError, AttributeError) as exc:
+        raise RunConflictError("invalid immutable base generation") from exc
+
+
+def _freeze_select_generation_in_transaction(connection, job, result) -> None:
+    """CAS the final content identity beside its select result in one transaction.
+
+    The caller already fenced the owning attempt's lease and runtime generation.
+    Legacy unbound handlers and historical selectors retain their old behavior.
+    """
+    if job.job_type != "source.narrative_select" or result.outcome.value != "succeeded":
+        return
+    membership = connection.execute(
+        "SELECT run_id,final_generation_json FROM narrative_run_jobs WHERE job_id=?",
+        (job.job_id,),
+    ).fetchone()
+    if membership is None:
+        return
+    run = _required_run(connection, membership["run_id"])
+    base = _base_generation(run, job.subject_id)
+    if base is None or base.get("execution_versions", {}).get("selector") != "0.9.0":
+        return
+    from .narrative_contracts import NarrativeSelectResult
+
+    selected = NarrativeSelectResult.from_dict(result.to_dict()["result"])
+    if selected.selector.version != "0.9.0" or selected.reading_context is None:
+        raise RunConflictError("new selector requires its actual reading context")
+    subject_matches = (
+        selected.subject.to_dict() == base.get("subject_binding")
+        if selected.subject.kind == "official_json"
+        else selected.source_ref.to_dict() == base.get("source_ref")
+    )
+    if (selected.item_key != job.subject_id or not subject_matches
+            or selected.source_metadata.to_dict() != base.get("source_metadata")):
+        raise RunConflictError("select result differs from its immutable base generation")
+    selected_wire = selected.to_dict()
+    from .narrative_selection_generation import reading_material_sha256
+    final = {**base, "selection_generation": {
+        "schema_version": "narrative-selection-generation/1",
+        "select_result_sha256": canonical_json_hash(selected_wire),
+        "reading_policy_version": selected_wire["reading_context"]["reading_policy_version"],
+        "evidence_sha256": canonical_json_hash(selected_wire["evidence_spans"]),
+        "material_sha256": reading_material_sha256(selected),
+    }}
+    dependencies = selected_wire.get("reading_dependencies")
+    if dependencies is not None:
+        final["reading_dependencies"] = dependencies
+        if dependencies.get("status") == "complete":
+            digest = dependencies.get("decision_digest")
+            require_sha256(digest, field_name="reading_dependencies.decision_digest")
+            final["selection_generation"]["decision_digest"] = digest
+    encoded = canonical_json(final)
+    current = membership["final_generation_json"]
+    if current is not None:
+        if current != encoded:
+            raise RunConflictError("final generation differs from its frozen selection")
+        return
+    changed = connection.execute(
+        "UPDATE narrative_run_jobs SET final_generation_json=? "
+        "WHERE job_id=? AND run_id=? AND final_generation_json IS NULL",
+        (encoded, job.job_id, membership["run_id"]),
+    ).rowcount
+    if changed != 1:
+        raise RunConflictError("final generation CAS lost its owning row")
+
+
+def _final_generation_rows(connection, *, run_id: str, item_key: str | None = None):
+    run = _required_run(connection, run_id)
+    query = (
+        "SELECT j.subject_id,j.status,r.final_generation_json FROM narrative_run_jobs r "
+        "JOIN jobs j ON j.job_id=r.job_id WHERE r.run_id=? "
+        "AND j.job_type='source.narrative_select' AND r.final_generation_json IS NOT NULL"
+    )
+    parameters: tuple = (run_id,)
+    if item_key is not None:
+        query += " AND j.subject_id=?"
+        parameters += (item_key,)
+    values = {}
+    for row in connection.execute(query, parameters):
+        if row["status"] != "succeeded":
+            continue
+        try:
+            require_canonical_json(row["final_generation_json"])
+            final = json.loads(row["final_generation_json"])
+            from .narrative_selection_generation import validate_selection_generation
+            validate_selection_generation(final)
+            base = _base_generation(run, row["subject_id"])
+            extra = {"selection_generation"}
+            dependencies = final.get("reading_dependencies")
+            if dependencies is not None:
+                extra.add("reading_dependencies")
+            if (base is None
+                    or {key: value for key, value in final.items() if key not in extra} != base):
+                raise ValueError("final generation differs from its immutable base")
+        except (KeyError, TypeError, ValueError, AttributeError) as exc:
+            raise RunConflictError("stored final generation is invalid") from exc
+        if row["subject_id"] in values:
+            raise RunConflictError("multiple frozen selections for one run item")
+        values[row["subject_id"]] = final
+    return values
+
+
 def _reservation(
     connection: sqlite3.Connection, run_id: str, attempt_id: str
 ) -> ReservationRecord | None:
@@ -343,6 +474,24 @@ class NarrativeRunStore:
             )
         self.db_path = db_path
 
+    @classmethod
+    def read_existing_run(cls, db_path: Path, run_id: str) -> RunRecord | None:
+        """Inspect the prior run before the coordinator's additive upgrade.
+
+        The v5 run/binding/accounting schema is unchanged by v6's nullable
+        selection column. Pure preparation therefore reads that history
+        without migrating or re-signing it. AutomationStore remains the sole
+        migration owner before any job or accounting mutation.
+        """
+        report = migrations.inspect_schema(db_path)
+        if report.user_version not in {5, migrations.SCHEMA_VERSION}:
+            raise NarrativeRunError("run history requires an explicitly migrated AUTO database")
+        connection = migrations._open_readonly_connection(db_path)
+        try:
+            return _run(connection, run_id)
+        finally:
+            connection.close()
+
     def _read(self, operation: Callable[[sqlite3.Connection], T]) -> T:
         connection = migrations._open_readonly_connection(self.db_path)
         try:
@@ -379,6 +528,26 @@ class NarrativeRunStore:
                         "SELECT job_id,input_hash,handler_version FROM narrative_run_jobs WHERE run_id=?",
                         (run_id,),
                     )}
+        return self._read(read)
+
+    def final_generations(self, run_id: str) -> dict[str, dict]:
+        """Return completed select identities from the existing run membership."""
+        def read(connection):
+            _required_run(connection, run_id)
+            return _final_generation_rows(connection, run_id=run_id)
+        return self._read(read)
+
+    def final_generation_for_job(self, job_id: str) -> dict | None:
+        """Resolve select/summarize/verify through the same run and source item."""
+        def read(connection):
+            row = connection.execute(
+                "SELECT r.run_id,j.subject_id FROM narrative_run_jobs r "
+                "JOIN jobs j ON j.job_id=r.job_id WHERE r.job_id=?", (job_id,),
+            ).fetchone()
+            if row is None:
+                return None
+            return _final_generation_rows(connection, run_id=row["run_id"],
+                                          item_key=row["subject_id"]).get(row["subject_id"])
         return self._read(read)
 
     def activate_run(
@@ -688,6 +857,10 @@ class NarrativeRunStore:
                 membership["handler_version"],
             ):
                 raise RunConflictError("scoped job input or handler version changed")
+            base = _base_generation(run, job.subject_id)
+            if (base is not None and base.get("execution_versions", {}).get("selector") == "0.9.0"
+                    and not _final_generation_rows(connection, run_id=run_id, item_key=job.subject_id)):
+                raise RunConflictError("MODEL_SELECTION_NOT_FROZEN")
             budget = _budget(connection, run_id, output_reservation=(job_id, output_bytes_bound))
             if (
                 run.blocked

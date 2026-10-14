@@ -409,6 +409,8 @@ class NarrativeVerifyHandler:
                 "locator_count": len(selected.evidence_spans),
             },
         }
+        if selected.reading_context is not None:
+            raw["reading_context"] = selected.to_dict()["reading_context"]
         if selected.subject.kind == "official_json":
             raw["schema_version"] = PROJECTED_BUNDLE_SCHEMA
             raw["subject_binding"] = selected.subject.to_dict()

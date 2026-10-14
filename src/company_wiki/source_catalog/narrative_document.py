@@ -90,6 +90,7 @@ class DocumentStructure:
     deferred_table_pages: tuple[int, ...] = ()
     line_count: int = 0
     errors: tuple[str, ...] = ()
+    mime_type: str | None = None
 
     @property
     def coverage_complete(self) -> bool:
@@ -118,6 +119,9 @@ class NarrativeEvidencePackage:
     source_units: int
     omitted_candidate_count: int
     coverage_complete: bool
+    reading_context: Mapping[str, Any] | None = None
+    selection_diagnostics: tuple[Mapping[str, Any], ...] = ()
+    reading_dependencies: Mapping[str, Any] | None = None
 
     @property
     def selected_text_bytes(self) -> int:

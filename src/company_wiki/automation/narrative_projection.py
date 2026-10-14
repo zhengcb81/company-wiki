@@ -234,12 +234,16 @@ class NarrativeEffectDispatcher:
 
         try:
             effect, bundle, payload = self._prepare_effect(lease.effect_id)
-            manifest = self._generation_manifests.get(bundle.item_key)
+            manifest = self._publication_manifest(effect, bundle)
             draft = self._draft(effect, bundle, generation_manifest=manifest)
-            if manifest is not None and bundle.subject.kind == "raw":
+            if manifest is not None:
                 metadata = json.loads(draft.metadata_json)
                 metadata.update(generation_manifest=manifest,
                                 generation_sha256=canonical_json_hash(manifest))
+                if "selection_generation" in manifest:
+                    base = {key: value for key, value in manifest.items()
+                            if key not in {"selection_generation", "reading_dependencies"}}
+                    metadata["base_generation_sha256"] = canonical_json_hash(base)
                 draft = replace(draft, metadata_json=canonical_json(metadata))
             version = self._artifacts.prepare(draft, payload)
         except (
@@ -409,7 +413,7 @@ class NarrativeEffectDispatcher:
         bundle_hash = canonical_json_hash(bundle.to_dict())
         generation_sha = None
         if bundle.subject.kind == "official_json":
-            _, generation_sha = _projection_manifest(bundle, self._generation_manifests.get(bundle.item_key))
+            _, generation_sha = _projection_manifest(bundle, self._publication_manifest(effect, bundle))
         expected_target = publication_target(bundle.subject, generation_sha)
         if (
             effect.target != expected_target
@@ -420,6 +424,15 @@ class NarrativeEffectDispatcher:
         if not payload or canonical_json_hash(bundle.to_dict()) != effect.intended_after_hash:
             raise NarrativeProjectionError("bundle bytes do not match intended effect hash")
         return effect, bundle, payload
+
+    def _publication_manifest(self, effect: Effect, bundle: NarrativeBundle) -> dict | None:
+        if bundle.versions.selector == "0.9.0":
+            from .narrative_run_store import NarrativeRunStore
+            manifest = NarrativeRunStore(self._automation.db_path).final_generation_for_job(effect.job_id)
+            if manifest is None:
+                raise NarrativeProjectionError("publication selection generation is not frozen")
+            return manifest
+        return self._generation_manifests.get(bundle.item_key)
 
     @staticmethod
     def _draft(effect: Effect, bundle: NarrativeBundle, *,

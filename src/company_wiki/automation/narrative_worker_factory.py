@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 from typing import Any
+from urllib.parse import urlsplit
 
 from company_wiki.source_catalog import SourceCatalog
 from company_wiki.source_catalog.config import load_catalog_config
@@ -131,6 +132,73 @@ def _generation_values(binding_json: str | None) -> dict[str, str]:
     return _runtime_snapshot(binding_json)[0]
 
 
+def _frozen_models(binding_json: str | None) -> list[dict[str, Any]]:
+    """Read the already signed settings without rebuilding source manifests."""
+    if binding_json is None:
+        return []
+    try:
+        binding = json.loads(binding_json)
+        settings = binding.get("generation_settings", {})
+        manifests = binding.get("generation_manifests", {})
+        models = []
+        for record in manifests.values():
+            common = settings[record["settings_sha256"]] if "settings_sha256" in record else record
+            if "model" in common:
+                models.append(common["model"])
+        return models
+    except (KeyError, TypeError, AttributeError, json.JSONDecodeError) as exc:
+        raise ValueError("NARRATIVE_RUN_GENERATION_INVALID") from exc
+
+
+def _verify_effective_model(model: NarrativeHTTPModel, frozen_models: list[dict[str, Any]]) -> None:
+    """Compare constructed HTTP behavior with frozen semantic configuration."""
+    port = model._port
+    authority = model._host
+    if ":" in authority:
+        authority = "[" + authority + "]"
+    if port is not None:
+        authority += ":" + str(port)
+    effective = {
+        "model_id": model.model_id,
+        "endpoint": model._scheme + "://" + authority + model._path,
+        "max_output_tokens": model.max_output_tokens,
+        "output_token_field": model.output_token_field,
+    }
+    for key in ("thinking", "reasoning_effort", "temperature", "reasoning_split"):
+        value = getattr(model, key)
+        if value is not None:
+            effective[key] = value
+    for frozen in frozen_models:
+        # A historical omitted HTTP option stays omitted rather than gaining a
+        # provider default. Non-content settings and credentials never appear.
+        expected = {key: value for key, value in frozen.items() if value is not None}
+        endpoint = urlsplit(expected.get("endpoint", ""))
+        host = endpoint.hostname or ""
+        if ":" in host:
+            host = "[" + host + "]"
+        if endpoint.port is not None:
+            host += ":" + str(endpoint.port)
+        expected["endpoint"] = endpoint.scheme + "://" + host + (endpoint.path or "/")
+        if effective != expected:
+            raise ValueError("NARRATIVE_RUN_MODEL_CONFIG_MISMATCH")
+
+
+def _generation_resolver(run_store: NarrativeRunStore, run_id: str, base: dict[str, str], *, selector_version: str):
+    """Refresh final selection identities at use time, after compute commits."""
+    if selector_version != "0.9.0":
+        # Historical generations already have a complete immutable identity;
+        # they neither depend on nor need to reread the new selection column.
+        return lambda subject: base[subject.item_key]
+    def resolve(subject):
+        final = run_store.final_generations(run_id).get(subject.item_key)
+        if final is not None:
+            from .models import canonical_json_hash
+
+            return canonical_json_hash(final)
+        raise ValueError("NARRATIVE_RUN_SELECTION_NOT_FROZEN")
+    return resolve
+
+
 def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     """Verify run identity, then construct ports inside the owning worker child.
 
@@ -175,6 +243,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             model = NarrativeHTTPModel(**model_options)
         except (TypeError, ValueError):
             raise ValueError("NARRATIVE_MODEL_CONFIG_INVALID") from None
+        _verify_effective_model(model, _frozen_models(run.binding_json))
         caller = BudgetedNarrativeCaller(store=run_store, run_id=options["run_id"], model=model,
                                         final_output_bytes_bound=options.get("max_final_bytes", 2 * 1024 * 1024))
     registry = create_default_registry()
@@ -183,7 +252,8 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
         executor,
         NarrativeRuntimeDependencies(reader=reader, model=model, model_caller=caller, normalization=normalization,
             projection_catalog=catalog, selector_version=selector_version,
-            generation_sha256=(lambda subject: generation_values[subject.item_key]) if generation_values else None),
+            generation_sha256=_generation_resolver(run_store, options["run_id"], generation_values,
+                                                   selector_version=selector_version) if generation_values else None),
     )
     runtime = WorkerRuntime(registry=registry, executor=executor, model_client=model)
     validate_runtime(runtime, role=spec.role, allowed_job_types=spec.allowed_job_types)

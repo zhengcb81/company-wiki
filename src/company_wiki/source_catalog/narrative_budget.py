@@ -17,6 +17,7 @@ actual span count. The default legacy policy stays replayable.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import heapq
 from typing import Any, Generic, TypeVar
 
 from .narrative_semantic_coverage import CoverageSignature, softly_repeats
@@ -482,7 +483,8 @@ def select_budget_items(
     max_chars: int | None = None, max_work_units: int = 2_000_000,
 ) -> tuple[BudgetItem[PayloadT], ...]:
     """Select whole context groups within a hard span budget."""
-    return _plan(items, limit, policy, max_chars=max_chars, max_work_units=max_work_units)[0]
+    return plan_budget_items(items, limit=limit, policy=policy,
+                             max_chars=max_chars, max_work_units=max_work_units)[0]
 
 
 @dataclass(frozen=True)
@@ -505,7 +507,17 @@ def budget_diagnostics(
     max_chars: int | None = None, max_work_units: int = 2_000_000,
 ) -> tuple[BudgetDiagnostic, ...]:
     """Explain every bundle left outside the budget for the same inputs."""
-    return _plan(items, limit, policy, max_chars=max_chars, max_work_units=max_work_units)[1]
+    return plan_budget_items(items, limit=limit, policy=policy,
+                             max_chars=max_chars, max_work_units=max_work_units)[1]
+
+
+def plan_budget_items(
+    items: tuple[BudgetItem[PayloadT], ...], *, limit: int,
+    policy: str = LEGACY_BUDGET_POLICY,
+    max_chars: int | None = None, max_work_units: int = 2_000_000,
+) -> tuple[tuple[BudgetItem[PayloadT], ...], tuple[BudgetDiagnostic, ...]]:
+    """Return selection and its diagnostics from one deterministic planning pass."""
+    return _plan(items, limit, policy, max_chars=max_chars, max_work_units=max_work_units)
 
 
 def _reading_plan(
@@ -649,84 +661,283 @@ def _reading_plan(
         else:
             closures[key] = frozenset(visited)
 
+    if stopped:
+        return (), tuple(sorted((*dropped, work_stop()), key=lambda row: (row.locator, row.bundle_key)))
+
+    # Dynamic ranks have three independent causes: topic visits, repetition,
+    # and newly shared original context. Index those causes once. A two-level
+    # topic/signature heap changes only the affected offers, rather than
+    # scanning every candidate against every previously selected signature.
     selected_ids: set[str] = set()
     topic_visits: dict[str, int] = {}
-    selected_signatures: list[tuple[CoverageSignature, int]] = []
     spent_chars = 0
     remaining = set(closures)
-    while remaining:
-        offers: list[tuple[tuple[object, ...], str, set[str], int]] = []
-        for key in sorted(remaining):
-            members = anchors[key]
-            # A shared closure still costs work to traverse even when all its
-            # members were already charged to the unique evidence budget.
-            if not charge(1 + len(closures[key]) + len(members)):
+    costs = {key: len(ids) for key, ids in closures.items()}
+    chars: dict[str, int] = {}
+    dependents: dict[str, set[str]] = {}
+    signatures: list[CoverageSignature] = []
+    signature_weights: list[int] = []
+    signature_intern: dict[CoverageSignature, int] = {}
+    item_signature: dict[str, int] = {}
+    guards: dict[tuple[Any, ...], set[int]] = {}
+    for uid, item in by_id.items():
+        signature = item.coverage_signature
+        if item.is_context_only or signature is None:
+            continue
+        # Reserve the membership/insert/lookup operations of this finite tuple
+        # interning step. Hashing tuples traverses their members on each lookup;
+        # it is not a free replacement for the previous nested comparisons.
+        if not charge(3 * signature_costs[uid]):
+            return (), tuple((*dropped, work_stop()))
+        if not signature.complete or len(frozenset(signature.tokens)) < 12:
+            continue
+        if signature not in signature_intern:
+            index = len(signatures)
+            signature_intern[signature] = index
+            signatures.append(signature)
+            signature_weights.append(signature_costs[uid])
+            guard = (signature.protected_sentences, signature.stage_signals)
+            guards.setdefault(guard, set()).add(index)
+        item_signature[uid] = signature_intern[signature]
+
+    candidate_class: dict[str, int] = {}
+    revisions = {key: 0 for key in closures}
+    class_ids: dict[tuple[Any, ...], int] = {}
+    class_heaps: dict[int, list[tuple[Any, ...]]] = {}
+    class_bucket: dict[int, int] = {}
+    class_repeated: dict[int, bool] = {}
+    class_versions: dict[int, int] = {}
+    signature_classes: dict[int, set[int]] = {}
+    bucket_ids: dict[tuple[int, tuple[str, ...]], int] = {}
+    bucket_heaps: dict[int, list[tuple[Any, ...]]] = {}
+    bucket_topics: dict[int, tuple[str, ...]] = {}
+    bucket_priorities: dict[int, int] = {}
+    bucket_versions: dict[int, int] = {}
+    topic_buckets: dict[str, set[int]] = {}
+    top_heap: list[tuple[Any, ...]] = []
+
+    for key, ids in closures.items():
+        members = anchors[key]
+        value_items = tuple(item for item in members if not item.is_context_only)
+        if not charge(1 + 2 * len(ids) + len(members) + sum(len(item.reading_topics) for item in value_items)):
+            return (), tuple((*dropped, work_stop()))
+        chars[key] = sum(by_id[uid].evidence_chars for uid in ids)
+        for uid in ids:
+            dependents.setdefault(uid, set()).add(key)
+        topics = tuple(sorted({topic for item in value_items for topic in item.reading_topics}))
+        priority = min(item.reading_priority for item in value_items)
+        bucket_key = (priority, topics)
+        if bucket_key not in bucket_ids:
+            bid = len(bucket_ids)
+            bucket_ids[bucket_key] = bid
+            bucket_heaps[bid] = []
+            bucket_topics[bid] = topics
+            bucket_priorities[bid] = priority
+            bucket_versions[bid] = 0
+            for topic in topics:
+                topic_buckets.setdefault(topic, set()).add(bid)
+        bid = bucket_ids[bucket_key]
+        sigs = tuple(sorted({item_signature[item.item_id] for item in value_items if item.item_id in item_signature}))
+        class_key = (bid, sigs)
+        if class_key not in class_ids:
+            cid = len(class_ids)
+            class_ids[class_key] = cid
+            class_heaps[cid] = []
+            class_bucket[cid] = bid
+            class_repeated[cid] = False
+            class_versions[cid] = 0
+            for index in sigs:
+                signature_classes.setdefault(index, set()).add(cid)
+        cid = class_ids[class_key]
+        candidate_class[key] = cid
+        first = members[0]
+        class_heaps[cid].append((-max(item.score for item in value_items), costs[key],
+                                first.order_key, first.item_id, key, 0))
+
+    def heap_work(size: int) -> bool:
+        return charge(1 + size.bit_length())
+
+    def class_best(cid: int) -> tuple[Any, ...] | None:
+        heap = class_heaps[cid]
+        while heap and (heap[0][4] not in remaining or heap[0][5] != revisions[heap[0][4]]):
+            if not heap_work(len(heap)):
+                return None
+            heapq.heappop(heap)
+        return heap[0] if heap else None
+
+    def bucket_best(bid: int) -> tuple[Any, ...] | None:
+        heap = bucket_heaps[bid]
+        while heap and heap[0][-1] != class_versions[heap[0][-2]]:
+            if not heap_work(len(heap)):
+                return None
+            heapq.heappop(heap)
+        return heap[0] if heap else None
+
+    def refresh_class(cid: int, dirty: set[int]) -> bool:
+        best = class_best(cid)
+        # None can mean a real empty heap or a work stop while pruning.
+        if best is None and class_heaps[cid]:
+            return False
+        class_versions[cid] += 1
+        bid = class_bucket[cid]
+        dirty.add(bid)
+        if best is not None:
+            if not heap_work(len(bucket_heaps[bid]) + 1):
+                return False
+            heapq.heappush(bucket_heaps[bid], (class_repeated[cid], *best[:5], cid, class_versions[cid]))
+        return True
+
+    def refresh_bucket(bid: int) -> bool:
+        best = bucket_best(bid)
+        if best is None and bucket_heaps[bid]:
+            return False
+        bucket_versions[bid] += 1
+        if best is not None:
+            topics = bucket_topics[bid]
+            if not charge(1 + 2 * len(topics)) or not heap_work(len(top_heap) + 1):
+                return False
+            rank = (bucket_priorities[bid], int(bool(topics) and all(topic in topic_visits for topic in topics)),
+                    best[0], sum(topic_visits.get(topic, 0) for topic in topics), *best[1:6])
+            heapq.heappush(top_heap, (rank, bid, bucket_versions[bid]))
+        return True
+
+    # Linear heap construction avoids n log n re-insertion for a new document.
+    if not charge(2 * (len(closures) + len(class_heaps) + len(bucket_heaps))):
+        return (), tuple((*dropped, work_stop()))
+    for cid, heap in class_heaps.items():
+        heapq.heapify(heap)
+        bucket_heaps[class_bucket[cid]].append((False, *heap[0][:5], cid, 0))
+    for bid, heap in bucket_heaps.items():
+        heapq.heapify(heap)
+        if not refresh_bucket(bid):
+            return (), tuple((*dropped, work_stop()))
+
+    covered_signatures: set[int] = set()
+    repeated_signatures: set[int] = set()
+    while remaining and top_heap:
+        if not heap_work(len(top_heap)):
+            stopped = True
+            break
+        rank, bid, version = heapq.heappop(top_heap)
+        if version != bucket_versions[bid]:
+            continue
+        key = rank[-1]
+        remaining.remove(key)
+        cid = candidate_class[key]
+        dirty_classes = {cid}
+        dirty_buckets: set[int] = set()
+        reason = None
+        if len(selected_ids) + costs[key] > limit:
+            reason = "group_exceeds_limit" if len(closures[key]) > limit else "budget_full"
+        elif max_chars is not None and spent_chars + chars[key] > max_chars:
+            reason = "character_budget"
+        if reason is not None:
+            dropped.append(diagnostic(anchors[key], key, reason))
+        else:
+            # Only an accepted offer expands its actual original set again.
+            # Every accepted package is complete even if later index updates
+            # consume the remaining work budget.
+            if not charge(len(closures[key])):
+                remaining.add(key)
                 stopped = True
                 break
-            if closures[key].issubset(selected_ids):
-                # It already entered intact as another anchor's dependency.
-                remaining.remove(key)
-                continue
-            added = set(closures[key]) - selected_ids
-            value_members = tuple(item for item in members if not item.is_context_only)
-            if not charge(len(added) + sum(len(item.reading_topics) for item in value_members)):
+            added = closures[key] - selected_ids
+            if not charge(sum(1 + len(by_id[uid].reading_topics) for uid in added)):
+                remaining.add(key)
                 stopped = True
                 break
-            chars = sum(by_id[uid].evidence_chars for uid in added)
-            topics = {topic for item in value_members for topic in item.reading_topics}
-            if not charge(2 * len(topics)):
-                stopped = True
-                break
-            repeated = False
-            for item in value_members:
-                for old, old_cost in selected_signatures:
-                    # Reserve the real nested comparison work before calling
-                    # the existing bounded hint. No metadata payload is read.
-                    if not charge(1 + signature_costs[item.item_id] + old_cost):
-                        stopped = True
-                        break
-                    if softly_repeats(item.coverage_signature, old):
-                        repeated = True
-                        break
-                if repeated or stopped:
+            selected_ids.update(added)
+            spent_chars += chars[key]
+            changed_topics: set[str] = set()
+            new_signatures: set[int] = set()
+            for uid in sorted(added):
+                item = by_id[uid]
+                if not item.is_context_only:
+                    for topic in set(item.reading_topics):
+                        topic_visits[topic] = topic_visits.get(topic, 0) + 1
+                        changed_topics.add(topic)
+                    if uid in item_signature and item_signature[uid] not in covered_signatures:
+                        new_signatures.add(item_signature[uid])
+                if not charge(len(dependents[uid])):
+                    stopped = True
+                    break
+                for other_key in dependents[uid]:
+                    if other_key not in remaining:
+                        continue
+                    costs[other_key] -= 1
+                    chars[other_key] -= item.evidence_chars
+                    other_cid = candidate_class[other_key]
+                    dirty_classes.add(other_cid)
+                    if costs[other_key] == 0:
+                        remaining.remove(other_key)
+                    else:
+                        revisions[other_key] += 1
+                        first = anchors[other_key][0]
+                        value_items = tuple(row for row in anchors[other_key] if not row.is_context_only)
+                        if not charge(len(value_items)) or not heap_work(len(class_heaps[other_cid]) + 1):
+                            stopped = True
+                            break
+                        heapq.heappush(class_heaps[other_cid], (-max(row.score for row in value_items), costs[other_key],
+                            first.order_key, first.item_id, other_key, revisions[other_key]))
+                if stopped:
                     break
             if stopped:
                 break
-            first = members[0]
-            rank = (min(item.reading_priority for item in value_members),
-                    int(bool(topics) and all(topic in topic_visits for topic in topics)),
-                    repeated, sum(topic_visits.get(topic, 0) for topic in topics),
-                    -max(item.score for item in value_members), len(added),
-                    first.order_key, first.item_id, key)
-            offers.append((rank, key, added, chars))
+            # Once the hard span cap is full, no positive-cost closure can fit.
+            # Diagnose the rest without doing another repetition/ranking pass.
+            if len(selected_ids) == limit:
+                dropped.extend(diagnostic(anchors[other], other, "group_exceeds_limit"
+                    if len(closures[other]) > limit else "budget_full") for other in remaining)
+                break
+            for topic in changed_topics:
+                if not charge(len(topic_buckets[topic])):
+                    stopped = True
+                    break
+                dirty_buckets.update(topic_buckets[topic])
+            if stopped:
+                break
+            for index in sorted(new_signatures):
+                covered_signatures.add(index)
+                signature = signatures[index]
+                guard = (signature.protected_sentences, signature.stage_signals)
+                if not charge(1 + len(signature.protected_sentences) + 4 * len(signature.stage_signals)):
+                    stopped = True
+                    break
+                for other_index in sorted(guards[guard]):
+                    if not charge():
+                        stopped = True
+                        break
+                    if other_index in repeated_signatures:
+                        continue
+                    if not charge(1 + signature_weights[index] + signature_weights[other_index]):
+                        stopped = True
+                        break
+                    if softly_repeats(signatures[other_index], signature):
+                        repeated_signatures.add(other_index)
+                        if not charge(len(signature_classes.get(other_index, ()))):
+                            stopped = True
+                            break
+                        for other_cid in signature_classes.get(other_index, ()):
+                            class_repeated[other_cid] = True
+                            dirty_classes.add(other_cid)
+                if stopped:
+                    break
+            if stopped:
+                break
+        for other_cid in sorted(dirty_classes):
+            if not refresh_class(other_cid, dirty_buckets):
+                stopped = True
+                break
         if stopped:
-            dropped.append(work_stop())
             break
-        if not offers:
+        for other_bid in sorted(dirty_buckets):
+            if not refresh_bucket(other_bid):
+                stopped = True
+                break
+        if stopped:
             break
-        _, key, added, chars = min(offers, key=lambda row: row[0])
-        remaining.remove(key)
-        if len(selected_ids) + len(added) > limit:
-            dropped.append(diagnostic(anchors[key], key, "group_exceeds_limit"
-                                      if len(closures[key]) > limit else "budget_full"))
-            continue
-        if max_chars is not None and spent_chars + chars > max_chars:
-            dropped.append(diagnostic(anchors[key], key, "character_budget"))
-            continue
-        if not charge(sum(1 + len(by_id[uid].reading_topics) for uid in added)):
-            dropped.append(work_stop())
-            break
-        selected_ids.update(added)
-        spent_chars += chars
-        # A value unit brought in as another anchor's dependency is already
-        # present in the real output. Count its topic/signature once as well.
-        for uid in sorted(added):
-            item = by_id[uid]
-            if not item.is_context_only:
-                for topic in set(item.reading_topics):
-                    topic_visits[topic] = topic_visits.get(topic, 0) + 1
-                if item.coverage_signature is not None:
-                    selected_signatures.append((item.coverage_signature, signature_costs[item.item_id]))
+    if stopped:
+        dropped.append(work_stop())
     selected = tuple(sorted((by_id[uid] for uid in selected_ids),
                             key=lambda item: (item.order_key, item.item_id)))
     return selected, tuple(sorted(dropped, key=lambda row: (row.locator, row.bundle_key)))
@@ -741,4 +952,5 @@ __all__ = [
     "READING_BUDGET_POLICY",
     "budget_diagnostics",
     "select_budget_items",
+    "plan_budget_items",
 ]

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any, Protocol
 
 from company_wiki.source_catalog.narrative_document import (
@@ -352,7 +352,7 @@ class NarrativeSelectHandler:
             "pages_total": page_count, "pages_read": page_count,
             "lines_total": 0, "tables_total": 0, "tables_scanned": 0,
         })
-        result = NarrativeSelectResult.from_dict({
+        raw: dict[str, Any] = {
             "schema_version": "narrative-select-result/3.0",
             "subject_binding": view.subject.to_dict(),
             "source_metadata": payload.source_metadata.to_dict(),
@@ -361,7 +361,12 @@ class NarrativeSelectHandler:
             "selection": selection.to_dict(),
             "evidence_spans": [span.to_dict() for span in package.evidence_spans],
             "prompt_review": review.to_dict(), "summary_scope": "selected_evidence_only",
-        })
+        }
+        if package.reading_context is not None:
+            raw["reading_context"] = package.reading_context
+        if package.reading_dependencies is not None:
+            raw["reading_dependencies"] = package.reading_dependencies
+        result = NarrativeSelectResult.from_dict(raw)
         context.checkpoint()
         return HandlerResult(
             outcome=HandlerOutcome.SUCCEEDED, result=result.to_dict(), artifacts=(), effects=(),
@@ -509,7 +514,7 @@ class NarrativeSelectHandler:
         parsed: NarrativeParseResult,
     ) -> NarrativeEvidencePackage:
         return self._selector(
-            parsed,
+            replace(parsed, mime_type=payload.source_ref.mime_type),
             title=payload.source_metadata.title or "untitled",
             existing_kind=payload.source_metadata.document_kind,
         )
@@ -553,7 +558,7 @@ class NarrativeSelectHandler:
         parser_name, parser_version = work.parser_identity or parser_component(
             payload.source_ref.mime_type, payload.source_metadata.source_class,
         )
-        return {
+        raw: dict[str, Any] = {
             "schema_version": SELECT_RESULT_SCHEMA,
             "source_ref": payload.source_ref.to_dict(),
             "expected_read_policy_sha256": payload.expected_read_policy_sha256,
@@ -579,6 +584,11 @@ class NarrativeSelectHandler:
             "transcript_byte_bindings": [item.to_dict() for item in bindings],
             "summary_scope": "selected_evidence_only",
         }
+        if work.package.reading_context is not None:
+            raw["reading_context"] = work.package.reading_context
+        if work.package.reading_dependencies is not None:
+            raw["reading_dependencies"] = work.package.reading_dependencies
+        return raw
 
 
 __all__ = ["NarrativeSelectHandler", "NarrativeSourceReader"]

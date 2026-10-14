@@ -446,6 +446,7 @@ class Signal:
     code: str
     unit_ids: tuple[str, ...]
     detail: str
+    form_type: str | None = None
 
 
 @dataclass
@@ -459,7 +460,8 @@ class SignalBag:
     probe_limit_hit: bool = False
     char_limit_hit: bool = False
 
-    def add(self, bucket: list[Signal], code: str, unit_ids: Sequence[str], detail: str) -> None:
+    def add(self, bucket: list[Signal], code: str, unit_ids: Sequence[str], detail: str,
+            *, form_type: str | None = None) -> None:
         """Record a signal. Title-only evidence is valid and cites no unit.
 
         A real document can be unreadable end to end (the ``cn-ipo-confirmation`` sample
@@ -468,7 +470,7 @@ class SignalBag:
         than being dropped -- dropping it would turn a decidable case into ``generic``.
         """
         bucket.append(
-            Signal(code=code, unit_ids=tuple(dict.fromkeys(unit_ids)), detail=detail)
+            Signal(code=code, unit_ids=tuple(dict.fromkeys(unit_ids)), detail=detail, form_type=form_type)
         )
 
     @property
@@ -1012,7 +1014,7 @@ def _detect_sec(
 
     if form:
         label_ids = chosen_label_ids or evidence_ids
-        bag.add(bag.cover_signals, "COVER_HEADING", label_ids, f"SEC 表单: {form.upper()}")
+        bag.add(bag.cover_signals, "COVER_HEADING", label_ids, f"SEC 表单: {form.upper()}", form_type=form.upper())
 
     if matches_any(haystack, SEC_ANNUAL_FORM_WORDS) and form is None:
         bag.add(bag.cover_signals, "COVER_HEADING", evidence_ids, "年报式 SEC 封面语")
