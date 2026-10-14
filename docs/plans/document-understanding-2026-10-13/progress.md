@@ -68,3 +68,7 @@
 ## Phase A预算组件节点
 
 纯planner104集中PASS/38独立probe PASS，mypy/ruff通过；原RED、环境失败、测试fixture纠正及独审中间失败留证：[小归档](phase-a-budget-evidence/receipts.zip)/[组件收据](phase-a-budget-evidence/acceptance.json)。只签纯planner，生产ReadingPlan/候选/最终模型输入仍待接线；旧默认与原件/配置保持，0付费。
+
+## 2026-10-14 正常发布
+
+实现195aba20与工作树清单36f15dd0已推master，精确CI38522896889 success；正常pre-push3268PASS/11SKIP（204.59秒）。104集中/38独立收据逐字节归档后清本次owned scratch，失败sandbox Temp已无残留。三harness树保留READY_NOT_STARTED，其他历史scratch不动；纯planner不冒称Phase A整体完成。精确发布见phase-a-budget-evidence/publication.json。
