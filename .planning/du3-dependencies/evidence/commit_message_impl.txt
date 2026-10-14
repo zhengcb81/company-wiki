@@ -1,0 +1,47 @@
+feat(du3-dependencies): pure source-local decision dependency identity and diff
+
+Add company_wiki.document_understanding.decision_dependencies: a pure component
+that freezes a source's *selection decision* (decision scopes incl. parent/child,
+every inspected component including unmatched and losing ones, full candidate
+membership with eligibility, adopted algorithm versions) and compares two such
+freezes causally.
+
+Hashing only the payload finally sent to the model cannot justify a selection
+cache: a component that participated but lost can win after its priority or its
+matching signals move. This component records that population so ROOT's cache
+precheck can tell 'the decision is unchanged' from 'the decision could select
+differently', without hashing the whole catalog and invalidating everything.
+
+Frozen wire (DU3/1): du-decision-trace/1 in, du-decision-dependencies/1 and
+du-decision-comparison/1 out. Public surface is exactly:
+
+    freeze_decision_dependencies(trace, *, limits=None) -> dict
+    compare_decision_dependencies(frozen, current, *, limits=None) -> dict
+
+Boundaries kept: no candidate discovery, no router/selector/registry/Store call,
+no catalog/file/clock/network read, no policy body or document text in the
+manifest. Real data errors (wrong types, duplicate ids, same id with different
+content, dangling references, truncated digests) are rejected outright; unknown
+or missing items return an explicit diagnostic and a partial/unavailable verdict
+that can never degrade into 'same'. 'same' is not a cache hit: ROOT still owns
+the original-text/locator read check and the AUTO Store/CAS decision.
+
+Tests: 111 in tests/unit/document_understanding_decision_dependencies.
+A - causal mutation matrix incl. losing participants, zero-match matcher edits,
+   child scopes, version changes, membership add/remove/move, and the reversed
+   order-irrelevance and unrelated-domain cases; plus honesty about incomplete
+   inventories, legacy artefacts and winner-list laundering.
+B - determinism, finite JSON, cross-process digest stability, input immutability,
+   closed manifest key set, budget behaviour at zero work / tiny byte caps,
+   reference integrity, and the AST guard proving the package cannot reach the
+   selector, registry, Store or any IO.
+C - read-only replay against the real installed reading_catalog.json (SHA
+   29bfefbe270cb8d2035bcd203dcf9b1226934dce7d0fd338132d9d559e18b46c) with
+   synthetic legal scopes: relevant edits change the decision, out-of-domain
+   edits do not, array order does not, and a whole-catalog domain is unusable
+   (78 distinct regime/family/purpose scopes over 38 components exceed the 64
+   default) - the measured reason the dependency unit must be the source-local
+   decision domain.
+
+Production 0POST/CAS/recovery is explicitly NOT certified here; ROOT wires and
+accepts that in its own B node.

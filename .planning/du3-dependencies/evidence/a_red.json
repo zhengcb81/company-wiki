@@ -1,0 +1,15 @@
+{
+ "receipt_schema": "du3-dependencies-red/1",
+ "lane": "dependencies",
+ "node": "A",
+ "purpose": "TDD: the A-node counter-examples were run and failed BEFORE any implementation existed",
+ "command": "python -m pytest tests/unit/document_understanding_decision_dependencies -q --no-header -p no:cacheprovider",
+ "exit_code": 1,
+ "observed": "51 failed in 1.80s",
+ "root_cause": "ModuleNotFoundError: No module named 'company_wiki.document_understanding.decision_dependencies'",
+ "note": "Every A-node test failed on the missing package entry point, which is the intended RED: the tests state the expected behaviour of freeze_decision_dependencies / compare_decision_dependencies independently of any implementation, and no test computes a digest itself or mirrors the implementation.",
+ "later_refinements_kept_as_evidence": [
+  "Three A-node assertions were corrected after the first GREEN run because they encoded a stricter reading of the card than DU3/1 states: (a) an unsupported or missing wire schema_version is an unknown/missing item that must return an explicit diagnostic and a partial freeze, not raise; (b) a missing trace is an honest absence and must return partial/unavailable; (c) a whole decision domain with no candidate membership can never freeze complete, because that is the shape a winners-only inventory takes. The original failures are described in .planning/du3-dependencies/findings.md and were not deleted.",
+  "One fixture bug (a candidate component id computed without a modulo) and one test-shape bug (comparing a valid empty manifest as if it were invalid) were fixed in the tests, not by weakening an assertion about the component."
+ ]
+}

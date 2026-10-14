@@ -1,0 +1,13 @@
+{
+ "max_bytes": 2128,
+ "mean_bytes": 2042.2,
+ "min_bytes": 1970,
+ "report_schema": "du3-dependencies-size-report/1",
+ "shape_per_source": {
+  "candidates": 6,
+  "components": 4,
+  "scopes": 2
+ },
+ "sources": 100,
+ "total_bytes": 204216
+}

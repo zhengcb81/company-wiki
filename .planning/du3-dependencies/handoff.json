@@ -1,0 +1,160 @@
+{
+ "schema_version": "du3-handoff/1",
+ "lane": "dependencies",
+ "base_sha": "195aba20b0aecc2d661d7d04c5ba72f982bc02d0",
+ "implementation_commits": [
+  "bc63a74eac1f73e6184a87a4b1bb65044840c1ad"
+ ],
+ "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/shared-reading-completion-20261014/dependencies",
+ "branch": "codex/du3-dependencies-20261014",
+ "owned_paths": [
+  "src/company_wiki/document_understanding/decision_dependencies/** (5 modules, 1332 lines)",
+  "tests/unit/document_understanding_decision_dependencies/** (6 modules, 1754 lines)",
+  "tests/fixtures/document_understanding_decision_dependencies/** (3 modules, 428 lines)",
+  ".planning/du3-dependencies/**"
+ ],
+ "interfaces": {
+  "public": [
+   "freeze_decision_dependencies(trace: Mapping, *, limits: Mapping | None = None) -> dict",
+   "compare_decision_dependencies(frozen: Mapping, current: Mapping, *, limits: Mapping | None = None) -> dict"
+  ],
+  "wire_in": "du-decision-trace/1 {schema_version, scopes[{scope_id, regime, family, form_type, purpose}], components[{component_id, version, content_digest, matcher_digest, scope_ids}], candidates[{candidate_id, scope_id, component_ids, eligible}], versions, inventory_complete}",
+  "wire_out_freeze": "du-decision-dependencies/1 {schema_version, status: complete|partial, scopes, components, candidates, versions, decision_digest, diagnostics}",
+  "wire_out_compare": "du-decision-comparison/1 {schema_version, status: same|changed|unavailable, changed_component_ids, added_candidate_ids, removed_candidate_ids, diagnostics}",
+  "digest": "full lowercase SHA-256 over canonical JSON (sort_keys, separators=(',',':'), ensure_ascii=False, allow_nan=False) of {schema_version, scopes, components, candidates, versions}; status/diagnostics/digest excluded so the same decision reached with a bigger budget keeps the same identity",
+  "type_disambiguation": "compare tells a du-decision-dependencies/1 manifest from a du-decision-trace/1 trace by schema_version alone, never by shape",
+  "interface_deviations": [
+   "None against DU3/1 field meanings. One defensive addition: a versions key naming a runtime setting or secret handle (run_id, timeout, api_key_env, path, cost_usd, now, ...) is rejected, which is how the card's 'no API-key/env name, path, run id, current time, cost or timeout in the manifest' is enforced on the only caller-supplied map. Frozen fields and their meanings are unchanged."
+  ]
+ },
+ "A/B/C_evidence": {
+  "A": {
+   "node": "TDD counter-examples",
+   "command": "python -m pytest tests/unit/document_understanding_decision_dependencies/test_a_completeness_honesty.py tests/unit/document_understanding_decision_dependencies/test_a_mutation_matrix.py -q --no-header -p no:cacheprovider",
+   "exit_code": 0,
+   "seconds": 3.107,
+   "result": "55 passed in 0.35s",
+   "red_first": {
+    "command": "python -m pytest tests/unit/document_understanding_decision_dependencies -q --no-header -p no:cacheprovider",
+    "exit_code": 1,
+    "result": "51 failed in 1.80s, ModuleNotFoundError: No module named 'company_wiki.document_understanding.decision_dependencies'",
+    "receipt": ".planning/du3-dependencies/evidence/a_red.json"
+   },
+   "covered": [
+    "loser component priority/content/matcher change -> changed",
+    "zero-match component matcher change -> changed",
+    "display version change -> changed",
+    "component removed from the inventory -> changed",
+    "candidate added / removed / eligibility flipped / component membership changed / moved into a scope -> changed",
+    "child scope added / changed / removed -> changed",
+    "algorithm version added or changed -> changed",
+    "array reorder of scopes, components, candidates and reference lists -> same (reverse controls on every positive)",
+    "unrelated domain is not required in this trace and does not change this identity",
+    "duplicate ids, same id with different content, dangling scope/component references, repeated references, wrong types, truncated digests, stray fields -> rejected",
+    "missing/legacy trace, missing or false inventory_complete, zero candidate membership -> partial/unavailable and never same"
+   ]
+  },
+  "B": {
+   "node": "implementation and engineering",
+   "command": "python -m pytest tests/unit/document_understanding_decision_dependencies/test_b_engineering.py -q --no-header -p no:cacheprovider",
+   "exit_code": 0,
+   "seconds": 3.458,
+   "result": "37 passed in 0.67s",
+   "receipts": [
+    ".planning/du3-dependencies/evidence/b_size_report.json",
+    ".planning/du3-dependencies/evidence/nodes.json"
+   ],
+   "covered": [
+    "determinism of freeze and compare; finite JSON round-trip; non-finite algorithm version rejected",
+    "inputs never mutated (both sides, both entry points)",
+    "decision digest stable across two independent Python processes and across array reordering",
+    "closed manifest key set; no runtime/secret field name reachable; versions keys screened; a path-shaped scope id leaks no forbidden key",
+    "full SHA-256 is identity, the short version is display only, a truncated digest is rejected",
+    "zero work budget / 1 byte cap / missing inventory -> partial and never same; every row charged against the work budget",
+    "limits may only be lowered; raising, negative, non-integer, unknown or non-mapping limits rejected",
+    "reference integrity on both sides, incl. compare rejecting a dangling reference",
+    "type discrimination between manifest and trace; an arbitrary mapping is refused as frozen",
+    "AST import guard: the package cannot import the selector, registry, Store, source_catalog, automation, document_normalization or any os/sys/time/pathlib/sqlite3/socket/urllib/http/requests/subprocess/tempfile/uuid/random/logging/threading/multiprocessing/pickle facility",
+    "public surface is exactly the two frozen functions",
+    "100-source manifest encoding size measured"
+   ]
+  },
+  "C": {
+   "node": "independent snapshot replay",
+   "command": "python -m pytest tests/unit/document_understanding_decision_dependencies/test_c_catalog_replay.py -q --no-header -p no:cacheprovider",
+   "exit_code": 0,
+   "seconds": 3.156,
+   "result": "19 passed in 0.37s",
+   "receipt": ".planning/du3-dependencies/evidence/c_replay_receipt.json",
+   "catalog_snapshot": {
+    "catalog_file": "src/company_wiki/document_understanding/profiles/reading_catalog.json",
+    "catalog_sha256": "29bfefbe270cb8d2035bcd203dcf9b1226934dce7d0fd338132d9d559e18b46c",
+    "schema_version": "du-reading-catalog/1",
+    "families": 24,
+    "facets": 14,
+    "bindings": 15,
+    "catalog_unchanged_during_replay": true
+   },
+   "matrix": {
+    "relevant_policy_content_edit": "changed (family:administrative_document)",
+    "losing_participant_membership_edit": "changed (candidate:administrative)",
+    "irrelevant_out_of_domain_edit": "same",
+    "array_order_irrelevant": "same",
+    "whole_catalog_domain": "partial, 78 derived scopes over 38 components > max_scopes=64, diagnostic SCOPES_LIMIT_REACHED"
+   },
+   "boundary": {
+    "real": "the installed reading_catalog.json identities: component id, version, content digest, matcher digest, applies-to tuples",
+    "synthetic": "the decision scope ids, the inspected-component set and the candidate membership; the catalog does not record which policies a given source's router actually inspected",
+    "not_certified": "production 0POST/CAS reuse and recovery belong to ROOT's B node; a green compare here is not a certification of them"
+   }
+  }
+ },
+ "tests_passed": 111,
+ "tests_failed": 0,
+ "not_run": [
+  "No production reuse/recovery, 0POST or CAS path: out of this lane's scope and explicitly not certified (ROOT's B node).",
+  "No ROOT-produced du-decision-trace/1 exists yet; the C replay uses synthetic legal scopes bound to real catalog identities.",
+  "No company original, provider call or paid model call: forbidden by the card for this lane."
+ ],
+ "known_gaps": [
+  "Uncertifiable external omission: if a caller asserts inventory_complete=true while genuinely leaving participants out, this package cannot detect it from inside the trace. The card asks for this to be documented rather than papered over; completeness is established by ROOT's router/selector instrumentation.",
+  "A decision domain that records zero candidate membership can never freeze complete. That is deliberate (it is the detectable shape of a winners-only trace and there is nothing to reuse), but it means a genuinely empty decision is reported partial and will be recomputed rather than reused.",
+  "A whole-catalog decision domain is unusable as a dependency unit: 78 scopes derived from the real catalog exceed max_scopes=64 and freeze partial. ROOT must build the domain per source.",
+  "compare does not read originals or verify locators; equal is not a cache hit and ROOT still performs the read_reuse_pin original/locator check before any reuse.",
+  "The 100-source size measurement covers a representative shape (2 scopes / 4 components / 6 candidates per source); it is a size bound, not a production volume forecast."
+ ],
+ "resource_observations": {
+  "frozen_limits": {
+   "max_scopes": 64,
+   "max_components": 512,
+   "max_candidates": 4096,
+   "max_input_bytes": 2097152,
+   "max_work_units": 200000
+  },
+  "enforcement": "a caller may lower any limit; raising, negative, non-integer, unknown and non-mapping limits are rejected. Every pass over a scope/component/candidate/reference/version is charged against max_work_units, so a loop cannot run away; row counts and canonical bytes have their own caps. Reaching any cap yields partial with a named diagnostic and never a half-walked complete or a same.",
+  "manifest_encoding_100_sources": {
+   "shape_per_source": "2 scopes / 4 components / 6 candidates",
+   "sources": 100,
+   "total_bytes": 204216,
+   "mean_bytes": 2042.2,
+   "min_bytes": 1970,
+   "max_bytes": 2128
+  },
+  "per_source_domain_observed": "the real-catalog-derived source domain (cn_annual) freezes complete at 2 scopes / 28 components / 9 candidates",
+  "wall_clock": "A 3.11s, B 3.46s, C 3.16s, ALL 3.55s including interpreter startup; python 3.13.9"
+ },
+ "raw_preservation": {
+  "company_originals": "not read; none opened by the package or the tests",
+  "production_config": "not read and not written",
+  "installed_reading_catalog": "read-only; SHA-256 29bfefbe270cb8d2035bcd203dcf9b1226934dce7d0fd338132d9d559e18b46c identical before and after the C replay",
+  "git_status": "only the four owned paths; git diff --name-only <base>...HEAD touched no file outside the owned scope"
+ },
+ "scratch_restore": {
+  "temporary_directories": "pytest tmp_path only; no TemporaryDirectory left behind",
+  "test_outputs": "two small receipts written under .planning/du3-dependencies/evidence/ (owned scope); nothing written to companies/, config/, .source_catalog/ or any database",
+  "downloads_screenshots_db": "none created",
+  "install_actions": "none",
+  "authorization_signoff_canary_files": "none created, per the card and the project authorization rules"
+ },
+ "next_root_action": "ROOT instruments the real router/registry/selection path to record a complete du-decision-trace/1 per source (including inspected-but-unmatched components and matching-but-losing candidates), supplies the current same-domain inventory, feeds freeze_decision_dependencies/compare_decision_dependencies into the existing AUTO two-stage generation CAS, and then accepts real 0POST/recovery in its own B node. compare green is not a production reuse certification."
+}

@@ -1,0 +1,52 @@
+{
+ "boundary": {
+  "not_certified": [
+   "production 0POST/CAS reuse and recovery belong to ROOT's B node; a green compare here is not a certification of them"
+  ],
+  "real": [
+   "installed reading_catalog.json identities: component id, version, content digest, matcher digest, applies-to tuples"
+  ],
+  "synthetic": [
+   "the decision scope ids, the inspected-component set and the candidate membership are constructed here: the catalog does not record which policies a given source's router actually inspected"
+  ]
+ },
+ "catalog_snapshot": {
+  "bindings": 15,
+  "catalog_file": "src/company_wiki/document_understanding/profiles/reading_catalog.json",
+  "catalog_sha256": "29bfefbe270cb8d2035bcd203dcf9b1226934dce7d0fd338132d9d559e18b46c",
+  "facets": 14,
+  "families": 24,
+  "schema_version": "du-reading-catalog/1"
+ },
+ "catalog_unchanged_during_replay": true,
+ "certifies_production_reuse": false,
+ "lane": "dependencies",
+ "limits_used": "frozen DU3/1 defaults: 64 scopes / 512 components / 4096 candidates / 2 MiB input / 200000 work units",
+ "matrix": {
+  "array_order_irrelevant": "same",
+  "irrelevant_out_of_domain_edit": "same",
+  "losing_participant_ids": [
+   "candidate:administrative"
+  ],
+  "losing_participant_membership_edit": "changed",
+  "relevant_component_ids": [
+   "family:administrative_document"
+  ],
+  "relevant_policy_content_edit": "changed",
+  "whole_catalog_component_count": 38,
+  "whole_catalog_diagnostic_codes": [
+   "SCOPES_LIMIT_REACHED"
+  ],
+  "whole_catalog_domain": "partial",
+  "whole_catalog_scope_count": 78
+ },
+ "receipt_schema": "du3-dependencies-c-receipt/1",
+ "source_local_domain": {
+  "candidates": 9,
+  "components": 28,
+  "decision_digest": "404026c8e4470f66072728e00aad0c57a816f08ab1467cd762ca39f5a7d1c15e",
+  "profile_id": "cn_annual",
+  "scopes": 2,
+  "status": "complete"
+ }
+}
