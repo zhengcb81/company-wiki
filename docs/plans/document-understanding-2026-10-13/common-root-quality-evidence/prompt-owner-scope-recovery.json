@@ -1,0 +1,30 @@
+{
+  "schema_version": "reading-prompt-owner-scope-recovery/1",
+  "normal_pre_push": {
+    "commit": "37b1a9c4f6bcc20373a8aefecbf0440ebef6460f",
+    "exit": 1,
+    "passed": 5492,
+    "failed": 3,
+    "skipped": 24,
+    "seconds": 410.83
+  },
+  "cause": "A cached-source manifest is not a model job; prompt responsibility must follow actual summarize jobs",
+  "repair": "Uses the existing job prompt resolver over actual model jobs only; absent historical generations retain their default; missing prompt of a real model job still refuses",
+  "tests": {
+    "red": "5FAIL/32PASS/7.71s",
+    "related": "118PASS/34.02s",
+    "mixed_reuse": "10PASS/3.41s"
+  },
+  "existing_assertions_unchanged": true,
+  "new_permission_or_guard": false,
+  "supplier_calls": 0,
+  "source_sha256": {
+    "src/company_wiki/automation/narrative_batch.py": "63e4c916ad1487d68d5b7666568f0edc2a7f6ba835cb0d897836b137420635c9",
+    "tests/unit/test_narrative_raw_job_prompt_binding.py": "827b35decd2b532b9b6aa597bd3c7d5b5c819d487879328b982049cb7441108f"
+  },
+  "archive": {
+    "name": "prompt-owner-scope-recovery.zip",
+    "bytes": 10176,
+    "sha256": "c20511d913947ca71c973d06ae8131111292f15d8a4ae14156d923045b3f1db3"
+  }
+}

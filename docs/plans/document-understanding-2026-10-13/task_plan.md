@@ -10,6 +10,8 @@
 
 Next Step：正常发布此节点、核精确CI，再沿同一账本按实际配置跑MiMo/DeepSeek/MiniMax三家摘要独审并恢复；类型共因按§7.6真实证据继续TDD，不能以模块绿宣布全部完成。证据：[本节点汇总](common-root-quality-evidence/source-owned-v2-acceptance.json)、[紧凑冻结收据](common-root-quality-evidence/source-owned-v2-receipts.zip)。以下保留历史失败/冻结记录。
 
+正常pre-push对37b1a9c4发现3个既有cache-precheck失败（5492PASS/24SKIP，410.83s），未推远端。根因是无model work的缓存资料被强行读取prompt；按实际summarize jobs收窄同一绑定器，保留真实model job缺prompt拒绝和旧无generation默认。原3断言不变，新RED5FAIL/32PASS后118相关PASS(34.02s)，混合复用10PASS；已更新当前施工，不跳hooks，正常补交/重推。详见[职责范围收尾](common-root-quality-evidence/prompt-owner-scope-recovery.json)。
+
 ## ROOT 当前接收与真实质量整改 — 2026-10-14
 
 19:47实际更新：原三portfolio6回放25/25，新三11/12（SMIC4/5、ANTA3/3、Apple4/4），各自一次parse/select，原件/金标不改。普通分红提案属于资本分配而非强制业务召回，原12项分母/FAIL继续展示，不能静默改gold。新配置完整离线CWP→FF→RF CLI PASS。用途配置82PASS。

@@ -300,10 +300,12 @@ def _job_prompt_versions(jobs, manifests):
     }
 
 
-def _uses_distinct_job_prompts(manifests, default_prompt):
+def _uses_distinct_job_prompts(manifests, default_prompt, *, jobs):
     """Actual model versions belong to each job, not its request container."""
-    return any(manifest["execution_versions"]["prompt"] != default_prompt
-               for manifest in manifests.values())
+    if not manifests:
+        return False  # Historical unbound runs retain their immutable default.
+    return any(prompt != default_prompt
+               for prompt in _job_prompt_versions(jobs, manifests).values())
 
 
 def _frozen_binding(request, binding, *, jobs=()):
@@ -344,7 +346,7 @@ def _frozen_binding(request, binding, *, jobs=()):
         )
     if (request.schema_version == "narrative-batch-request/2"
             or _uses_distinct_job_prompts(binding.generation_manifests,
-                frozen["execution_versions"]["prompt"])):
+                frozen["execution_versions"]["prompt"], jobs=jobs)):
         frozen["job_prompt_versions"] = _job_prompt_versions(
             jobs, binding.generation_manifests
         )
@@ -645,7 +647,7 @@ def _resume_binding(
         ):
             raise BatchResumeError("BATCH_FROZEN_MEMBERSHIP_INVALID")
         if ("job_prompt_versions" in frozen
-                or _uses_distinct_job_prompts(manifests, versions["prompt"])):
+                or _uses_distinct_job_prompts(manifests, versions["prompt"], jobs=jobs)):
             if frozen.get("job_prompt_versions") != _job_prompt_versions(jobs, manifests):
                 raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
         event_ids = {job.created_from_event_id for job in jobs}

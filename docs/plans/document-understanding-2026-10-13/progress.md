@@ -10,6 +10,8 @@
 
 Next Step：正常发布此节点、核精确CI，再沿同一账本按实际配置跑MiMo/DeepSeek/MiniMax三家摘要独审并恢复；类型共因按§7.6真实证据继续TDD，不能以模块绿宣布全部完成。证据：[本节点汇总](common-root-quality-evidence/source-owned-v2-acceptance.json)、[紧凑冻结收据](common-root-quality-evidence/source-owned-v2-receipts.zip)。以下保留历史失败/冻结记录。
 
+正常pre-push对37b1a9c4发现3个既有cache-precheck失败（5492PASS/24SKIP，410.83s），未推远端。根因是无model work的缓存资料被强行读取prompt；按实际summarize jobs收窄同一绑定器，保留真实model job缺prompt拒绝和旧无generation默认。原3断言不变，新RED5FAIL/32PASS后118相关PASS(34.02s)，混合复用10PASS；已更新当前施工，不跳hooks，正常补交/重推。详见[职责范围收尾](common-root-quality-evidence/prompt-owner-scope-recovery.json)。
+
 ## ROOT 当前接收与真实质量整改 — 2026-10-14
 
 三 DU3 已实收，本地工程提交870b0a78。正常pre-push发现3个Worker重复解码失败及1个旧瞬时元数据预期失败（5153 PASS/24 SKIP），因此未推送；不跳hooks。Worker统一一次冻结快照已68 PASS，原count=1不变；几何测试补验共享/不可变/持久ID及model/Bundle不泄漏，36 PASS，非源码泄漏。
