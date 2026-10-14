@@ -8,7 +8,7 @@
 
 类型覆盖：20份架构样本只作purposive，不能称全量gold/未见holdout。标ir_policy的实际字节是调研Q&A，不能误修为行政skip。CNIPO补充完整54.10s通过，原全局剩22s timeout保留；HKIPO独立80s仍停PARSE_STARTED，缺真实S1/F1/附件/修订对照不认证。量测与后续摘要源码变更分开，只有本层实际依赖冻结才用于本层结果，不增全仓签收门禁。
 
-证据：[本节点](common-root-quality-evidence/post-model-finalization.json)、[紧凑测试/独审/真实失败收据](common-root-quality-evidence/post-model-receipts.zip)。870b0a78工程提交尚未推送；本节点正常commit/push/精确CI后更新发布收据，历史失败和原件/金标保持。正常commit曾由新增路径负例的Windows绝对路径字面量拒绝；已改为所属测试Temp的真实路径，物理路径拒绝断言不变。24项复验PASS，host-assumption guard新增违规0，未改baseline或跳hooks；见[跨平台夹具收尾](common-root-quality-evidence/host-neutral-recovery.json)。以下是历史冻结节点。
+证据：[本节点](common-root-quality-evidence/post-model-finalization.json)、[紧凑测试/独审/真实失败收据](common-root-quality-evidence/post-model-receipts.zip)。d9a13511已正常提交，尚未推送；正常pre-push为5264PASS/24SKIP/1FAIL（503.91s），唯一旧group失败结果空断言已按新有界诊断修正，失败状态/规则/无产物不变，集中47PASS。见[合同收尾](common-root-quality-evidence/group-contract-recovery.json)，下一窗口的[只读根因与测试设计](common-root-quality-evidence/next-common-root-designs.zip)及细则§7。正常commit曾由新增路径负例的Windows绝对路径字面量拒绝；已改为所属测试Temp的真实路径，物理路径拒绝断言不变。24项复验PASS，host-assumption guard新增违规0，未改baseline或跳hooks；见[跨平台夹具收尾](common-root-quality-evidence/host-neutral-recovery.json)。以下是历史冻结节点。
 
 ## ROOT 当前接收与真实质量整改 — 2026-10-14
 
@@ -182,3 +182,52 @@ A/B实现期间先集中受影响测试，修失效后只重跑受影响范围�
 ROOT维护一个状态表、一个Next Step；三大节点汇总命令/退出码/耗时、版本、样本分母、实际调用/usage、原件/配置/目录恢复、失败及仍未测。沿原receipt格式复用小汇总，不增加审批JSON或每步手签。旧DU/DU2作者树与local bindings不动；FF/RF/StockWiki仅在消费接口确需更新时定点变更，Dayu/IQS及他人WIP不动。
 
 可复跑步骤、真实配置绑定与预算账位置在节点开始记录；恢复时先读同目录task_plan/findings/progress，再读该节点收据。若测试失败，先判真实代码缺陷或oracle错误；只有独立反例证实oracle错误才能修断言，不能删失败测试/降低gold来完成。
+
+## 7. 真实摘要暴露共因的下一施工窗口（2026-10-14）
+
+这是 A/B/C 原节点的后续实施，不增加审批或小节点验收。DU3 QUALITY、DEPENDENCIES、GEOMETRY 已收，不再等待作者施工。先正常发布 `d9a13511` 工程节点，再开放下列不重叠写入窗口；未完成真实质量，正式默认保持 0.8。
+
+### 7.1 并行边界与接口
+
+| 责任人 | 独占写入范围 | 输入与交付 | 不重叠约束 |
+|---|---|---|---|
+| 输出预算线 | automation `store.py`、`narrative_run_store.py`，独立 `test_narrative_output_failure_finalization.py` | 已有有效 lease、实际 HandlerResult、同 connection；交付终态失败输出结清及 RED/GREEN 收据 | 不写 summarize/caller/batch/select/schema/config；不改收费或新建 Store |
+| 可用片段线 | automation `narrative_select.py` 与必要 source-owned parsed-material 准则、排他 `test_narrative_partial_source_admission.py` | 已开原件＋已解析 units＋最终 package；交付统一格式无关准入与真实 handler/DAG 测试 | 不写预算/排序/模型/身份库/消费者；如需其他源文件先向 ROOT 报精确范围 |
+| 类型根因线 | 先只读 route/QA/native parser 和已存材料 | 交付实际触发 unit、原文 SHA、候选/closure 原因、泛化反例与小范围 profiling 设计 | 此阶段不写代码；不得在集中测试时并行昂贵解析；不按文件名/manifest 标签强判 |
+| ROOT 模型边界 | narrative_model/summarize/generation/batch/factory/verify/register 接线及排他模型测试；统一 PWF/Git | 同 pinned SelectResult＋frozen renderer；有限 None/v1/v2 派发与程序身份组装 | 不重写前三线文件；共享接口先在本节固定，完成工程节点后集中验证与推送 |
+
+各线都只改 ROOT canonical checkout 的获分配文件；DU3 作者树、Dayu、IQS、其他 WIP 不动。没有其他 harness 要等待的交付。源代码和测试在正常 Git hooks 执行期间保持冻结；这属于写入协调，不是材料许可。
+
+### 7.2 失败输出槽位结清：复用原 Store 事务
+
+已证实失败摘要仍保留 2,097,152 bytes **额度**，不是实际新增文件或重复费用。唯一修复入口是 `AutomationStore.finish_attempt` 的现 active-lease 同事务；由 `NarrativeRunStore` 抽出已有 output settlement 的 connection 内核心并负责账务规则。只有 `source.narrative_summarize` 明确返回非 success、无 accepted artifact/effect 的**该 attempt**结清 `(output_bytes=0, output_sha256=null)`。成功/未决/丢失结果/旧 lease 不归零；reserved/unknown/known 的 tokens、cost、response SHA、错误与保守收费保持。
+
+先 RED：known terminal / retryable 失败额度归零；unknown 费用不退；其他 attempt/job 和 success 保留；旧 lease/paused/expired 被原 fence 拒绝；正输出冲突不覆盖；注入 SQL 后异常证明 attempt/status/output 同时回滚；已提交但丢 ACK 不重复结清。不得在当前事务内开启另一个 Store 连接。历史回填不在首个补丁内，旧真实收据不改。
+
+集中跑新增生命周期矩阵和受影响 store/run ownership/caller 测试，再在既有隔离失败摘要 CLI 收尾中断言额度已归零。0 真实模型；临时 DB、文件、sentinel 恢复。详细只读依据保存在 ROOT owned `post-model-ledger-readonly/implementation-brief.md`，接收节点归档到本 PWF。
+
+### 7.3 来源可用性：有界片段、真实覆盖、前置材料证明
+
+当前 PDF 的任何 errors/opaque 整份拒绝而 normalized carrier 跳过，是真实生产不一致；不能只删除条件或改标签。统一接受**可靠媒体里闭合、可回开且非空的片段**，保留真实 partial/unread/deferred 与 selected-excerpts 范围；只有完整空业务材料才可 `skipped_no_narrative`。全 opaque、空 incomplete、blocked、fatal media、真实原件或所选引用不符仍在模型前失败。模型返回坏引用已发生一次调用，必须照计 usage，不能伪报 0POST。
+
+复用本轮已解析 units 和原有 replay 匹配，不重新 parse、逐 span 打开 PDF、复制全篇 MD 或再造 ranker。必要上下文不可靠由原 context graph withheld whole package；不在末端删引用伪闭合。选中片段内的材料验真与最终 verify 的原件再回开职责不同，身份/字节只在所属层执行，不要求模型复制 SHA。
+
+先 RED：真实两页 PDF 一页可读/一页 opaque 贯穿 select→summary→verify；局部 text/table 异常与独立可读 prose；等价 HTML fragment；fatal/全 opaque/空 incomplete；跨源或篡改 locator/native-range；必需上下文缺失；partial 不能伪标 complete；完整纯财务 skip。至少一个真实注册 DAG 正例和两个前置负例观测模型次数。None/v1 固定输入的旧请求字节不变；源准入变化使用现 source 因果依赖进入新 generation，不重签历史 Ref。
+
+### 7.4 模型只生成 claims：一个有限边界派发
+
+模型不再回填程序已有的 source/subject ID、64位 SHA、language。下一内部 `reading-model-input/2` 返回 `{"draft":{"claims":[...]}}`，保留 claim_id、text、eN/gN、claim_type、modality。程序从**同一 pinned SelectResult**组装原 canonical header；official JSON 使用 subject SHA，各 immutable parent 的 role/group 保持独立。额外未消费 header 矛盾只作有限诊断，不覆盖 pinned 值，不作为许可阻断。
+
+一个内部版本派发同时选择 renderer、schema、decoder、实际 prompt；generation、per-job prompt freeze、budget reservation、verify、reuse 消费相同决定。None 与 `/1` 的 instruction/data/input SHA/完整 HTTP body 原字节保留，显式 null/未知版本不暗降级；不得直接修改旧全局模板后重签旧 run。新模板/schema/decoder 的实际因果改变进入现 generation，不只改字符串标签。公众 DTO、任务库、算法选择 flag 和人工审查链不增加。
+
+先冻旧 bytes 再 RED：仅 claims raw/official JSON；多回错 header不覆源身份；真实错误引用/角色/group 与 metadata 分开；新 prompt 真正进入 request/reservation/verify/reuse；旧 frozen unfinished run/default 变化仍使用原 renderer且0额外POST；strict JSON多括号/重复键/非法数拒绝并保留既有 final诊断和真实 usage。不得补 JSON 或自动换供应商重发。
+
+当前 HTTP 已发 `response_format=json_object`，不能把“再次加同一参数”当修复。MiMo与DeepSeek官方文档支持 JSON mode；MiniMax-M3 的实际响应已反证该字段能保证 JSON，不用其他供应商文档宣称其能力。若需调整参数，只经现配置用途端口绑定真实选项，保留旧 wire/hash。
+
+实际语言观察必须区分英文/西班牙语等同为拉丁脚本的正文；旧脚本计数器不满足。先用有界离线通用检测器做技术文本/品牌型号/短数字/英文改写/中文夹英文/mixed引用/第三语言反例，评估包体积、冷启动和不确定结果。只比较 claim prose 与实际 cited prose；短名/数字和未知结果明示诊断，不能默认英语或变成全面阻断。明确语言不匹配作为摘要质量问题处理，不翻译回去、发第二个 LLM 或用公司/西语关键词黑名单。是否采用依赖以真实试验决定，尚未实施。
+
+### 7.5 类型覆盖与真实质量收尾
+
+已有20份 purposive样本：19份正式选择、HKIPO一次80s未完成；旧 timeout与原件保持。先确定 DEI 10-Q 为什么丢到 earnings_call、IR否定/原因到底在 admission/closure/rank 哪一层丢失；真实文件声明错不等于路由错。源 origin 与 speaker/attributed actor 的 role 含义先澄清，不能用unknown替换把gold凑绿。长招股先 profile 已定位工作，按共享parser责任修复，不抬上限重跑碰运气。
+
+集中工程通过后沿同一账本再跑三家配置模型、各自独审关键业务/数字/角色/阶段/语言/自身引用和恢复；原三25/25、新三原分母11/12及普通分红边界继续展示。源可运行、quote召回、正式摘要、RF/买方模型分开报告。质量通过才切默认，并完成原计划并发2/4、缺真实类型、原三/新三及母研究循环；这些尚未完成，不以组件PASS关闭目标。

@@ -8,7 +8,7 @@
 
 类型覆盖：20份架构样本只作purposive，不能称全量gold/未见holdout。标ir_policy的实际字节是调研Q&A，不能误修为行政skip。CNIPO补充完整54.10s通过，原全局剩22s timeout保留；HKIPO独立80s仍停PARSE_STARTED，缺真实S1/F1/附件/修订对照不认证。量测与后续摘要源码变更分开，只有本层实际依赖冻结才用于本层结果，不增全仓签收门禁。
 
-证据：[本节点](common-root-quality-evidence/post-model-finalization.json)、[紧凑测试/独审/真实失败收据](common-root-quality-evidence/post-model-receipts.zip)。870b0a78工程提交尚未推送；本节点正常commit/push/精确CI后更新发布收据，历史失败和原件/金标保持。正常commit曾由新增路径负例的Windows绝对路径字面量拒绝；已改为所属测试Temp的真实路径，物理路径拒绝断言不变。24项复验PASS，host-assumption guard新增违规0，未改baseline或跳hooks；见[跨平台夹具收尾](common-root-quality-evidence/host-neutral-recovery.json)。以下是历史冻结节点。
+证据：[本节点](common-root-quality-evidence/post-model-finalization.json)、[紧凑测试/独审/真实失败收据](common-root-quality-evidence/post-model-receipts.zip)。d9a13511已正常提交，尚未推送；正常pre-push为5264PASS/24SKIP/1FAIL（503.91s），唯一旧group失败结果空断言已按新有界诊断修正，失败状态/规则/无产物不变，集中47PASS。见[合同收尾](common-root-quality-evidence/group-contract-recovery.json)，下一窗口的[只读根因与测试设计](common-root-quality-evidence/next-common-root-designs.zip)及细则§7。正常commit曾由新增路径负例的Windows绝对路径字面量拒绝；已改为所属测试Temp的真实路径，物理路径拒绝断言不变。24项复验PASS，host-assumption guard新增违规0，未改baseline或跳hooks；见[跨平台夹具收尾](common-root-quality-evidence/host-neutral-recovery.json)。以下是历史冻结节点。
 
 ## ROOT 当前接收与真实质量整改 — 2026-10-14
 
@@ -104,7 +104,7 @@ RF main/origin main 已到 aed581ac（源512e85bb精确CI38563752875 success）�
 
 ## Next Step
 
-正常提交/推送本冻结工程节点并核精确CI；随后只读查安踏品牌和周转天数的真实窗口/候选/闭包，按共同根因TDD，沿原累计账执行配置供应商新旧摘要及独审。原三源码25/25、新三9/12，摘要质量仍开放；不提高cap/改语义金标/灌引文凑绿，不增加许可或小节点签收。B工程complete；A/C继续，默认仍0.8。
+正常发布d9a13511及合同夹具收尾、核精确CI；之后按completion_implementation.md §7开放两个排他TDD写入窗口：失败输出槽位结清与统一可用片段。ROOT贯通claims-only模型边界和frozen prompt/generation；类型线先实证route/QA/native工作原因。已接收三DU3；原三25/25、新三原scope11/12/业务scope11/11；供应商摘要质量尚未通过，默认0.8保持。原件/旧gold/费用收据保留，不增小节点门禁。
 
 ## DU3 并行交付（已收到，不重发）
 

@@ -1,5 +1,6 @@
 """Mechanical group closure must not pretend to prove proposition entailment."""
 
+import hashlib
 import json
 import pytest
 from company_wiki.automation.narrative_model import (
@@ -173,13 +174,23 @@ def test_one_incomplete_group_claim_is_discarded_whole_without_modifying_the_goo
 
 def test_handler_reports_static_group_reason_and_never_builds_a_success_artifact():
     selected = grouped_selection()
+    response = reply(selected, [claim("技術服務費收入增長", ["e3"], ["g2"])])
 
     class Model:
         def generate(self, request):
-            return reply(selected, [claim("技術服務費收入增長", ["e3"], ["g2"])])
+            return response
 
     result = NarrativeSummarizeHandler(model=Model())(_context(selected))
-    assert result.outcome is HandlerOutcome.TERMINAL_FAILURE and result.result == {}
+    assert result.outcome is HandlerOutcome.TERMINAL_FAILURE
+    assert set(result.result) == {"failed_final"}
+    diagnostic = result.result["failed_final"]
+    assert diagnostic["final_content_sha256"] == hashlib.sha256(response.response_bytes).hexdigest()
+    assert diagnostic["final_content_bytes"] == len(response.response_bytes)
+    assert diagnostic["final_prefix"].encode("utf-8") == response.response_bytes
+    assert diagnostic["clipped"] is False
+    assert diagnostic["provider_response_sha256"] is None
+    assert diagnostic["provider_response_bytes"] is None
+    assert len(json.dumps(dict(diagnostic), ensure_ascii=False).encode("utf-8")) < 16 * 1024
     assert (
         result.error.code == "SUMMARY_INVALID"
         and "rule=GROUP_INCOMPLETE" in result.error.detail

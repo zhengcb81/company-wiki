@@ -8,7 +8,7 @@
 
 类型覆盖：20份架构样本只作purposive，不能称全量gold/未见holdout。标ir_policy的实际字节是调研Q&A，不能误修为行政skip。CNIPO补充完整54.10s通过，原全局剩22s timeout保留；HKIPO独立80s仍停PARSE_STARTED，缺真实S1/F1/附件/修订对照不认证。量测与后续摘要源码变更分开，只有本层实际依赖冻结才用于本层结果，不增全仓签收门禁。
 
-证据：[本节点](common-root-quality-evidence/post-model-finalization.json)、[紧凑测试/独审/真实失败收据](common-root-quality-evidence/post-model-receipts.zip)。870b0a78工程提交尚未推送；本节点正常commit/push/精确CI后更新发布收据，历史失败和原件/金标保持。正常commit曾由新增路径负例的Windows绝对路径字面量拒绝；已改为所属测试Temp的真实路径，物理路径拒绝断言不变。24项复验PASS，host-assumption guard新增违规0，未改baseline或跳hooks；见[跨平台夹具收尾](common-root-quality-evidence/host-neutral-recovery.json)。以下是历史冻结节点。
+证据：[本节点](common-root-quality-evidence/post-model-finalization.json)、[紧凑测试/独审/真实失败收据](common-root-quality-evidence/post-model-receipts.zip)。d9a13511已正常提交，尚未推送；正常pre-push为5264PASS/24SKIP/1FAIL（503.91s），唯一旧group失败结果空断言已按新有界诊断修正，失败状态/规则/无产物不变，集中47PASS。见[合同收尾](common-root-quality-evidence/group-contract-recovery.json)，下一窗口的[只读根因与测试设计](common-root-quality-evidence/next-common-root-designs.zip)及细则§7。正常commit曾由新增路径负例的Windows绝对路径字面量拒绝；已改为所属测试Temp的真实路径，物理路径拒绝断言不变。24项复验PASS，host-assumption guard新增违规0，未改baseline或跳hooks；见[跨平台夹具收尾](common-root-quality-evidence/host-neutral-recovery.json)。以下是历史冻结节点。
 
 ## ROOT 当前接收与真实质量整改 — 2026-10-14
 

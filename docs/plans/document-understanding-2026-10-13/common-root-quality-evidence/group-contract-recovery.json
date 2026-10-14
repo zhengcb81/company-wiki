@@ -1,0 +1,28 @@
+{
+  "schema_version": "shared-reading-group-contract-recovery/1",
+  "normal_pre_push": {
+    "exit_code": 1,
+    "passed": 5264,
+    "skipped": 24,
+    "failed": 1,
+    "seconds": 503.91,
+    "failure": "test_summary_group_coverage.py::test_handler_reports_static_group_reason_and_never_builds_a_success_artifact expected an empty failure result"
+  },
+  "correction": "same terminal outcome/static GROUP_INCOMPLETE/no artifacts or effects; assert exact final-only SHA/bytes/prefix and bounded diagnostic, provider bytes remain unobserved",
+  "focused": {
+    "exit_code": 0,
+    "seconds": 19.93779429999995,
+    "tests": [
+      "tests/contract/test_summary_group_coverage.py",
+      "tests/unit/test_narrative_post_model_failure_diagnostics.py"
+    ],
+    "temp_removed": true,
+    "sentinel_unchanged": true,
+    "production_config_unchanged": true,
+    "supplier_calls": 0
+  },
+  "contract_test_sha256": "19fc6aa8db3058b7fecf2d8a726ca199bad562355d513dcd164f531ed9a56b0b",
+  "supplier_calls": 0,
+  "hooks_bypassed": false,
+  "pre_push_full_green": false
+}
