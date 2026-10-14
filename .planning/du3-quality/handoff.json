@@ -2,7 +2,7 @@
   "schema_version": "du3-handoff/1",
   "lane": "quality",
   "base_sha": "195aba20b0aecc2d661d7d04c5ba72f982bc02d0",
-  "implementation_commits": ["44cbd62d6c93b8850f928e03e33fba12a4a034d5"],
+  "implementation_commits": ["44cbd62d6c93b8850f928e03e33fba12a4a034d5", "3cf590b7a29862d3a6f75dd8f182c4b4a10ebe65"],
   "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/shared-reading-completion-20261014/quality",
   "branch": "codex/du3-quality-20261014",
   "owned_paths": [
