@@ -10,6 +10,8 @@
 
 正常pre-commit捕获一条新负例用了Windows绝对路径字面量；改为独立tmp_path构造同义路径，13受影响断言全绿/2.06s。没有加基线例外或跳hook；本轮工程失败和自动检查修复一起留节点收据。
 
+本地代码已正常commit d3c57b31。首次正常pre-push扩大到202相关文件/3809items，3795PASS/11SKIP/3旧夹具FAIL（407.94s）阻止远端更新。两例无列名SQL INSERT及一例写死迁移版本；同类盘点后改具名列/当前版本范围，保deep一次、COMMIT前、rollback/unknown accounting等断言，受影响30PASS/8.08s与Ruff绿。详[推送修复](production-wiring-evidence/push-repair.json)。正常补充commit/push中，不重复把旧失败称远端CI。
+
 ## ROOT当前实施与并行拆分 — 2026-10-14（此前记录）
 
 主线实际开始Phase A：19项新阅读budget反例RED/2旧回放PASS后扩既有planner为reading_plan/1，共享依赖unique成本/主题多样性/完整闭包/字符与工作上限；旧默认和selector0.8.0不改。独审发现嵌套signature工作漏计、闭包实际扫描漏计、签名metadata未限、低预算误诊及依赖中已发value未记主题/签名，均按根因统一修复；最终38/38独立probe通过。尚未把ReadingPlan接正式生产，不标Phase A/B/C全部完成。

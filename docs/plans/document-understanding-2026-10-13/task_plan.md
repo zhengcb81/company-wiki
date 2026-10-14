@@ -82,6 +82,8 @@ Current Phase: A/B — 生产选择/摘要与缓存恢复已接线，集中工�
 
 ## 2026-10-14 生产接线工程节点
 
+实现已本地commit d3c57b31，首次正常push被3个旧schema测试夹具拦住；30受影响修复全绿，正常补充commit/push中。[精确记录](production-wiring-evidence/push-repair.json)。当前没有远端更新，不把本地检查失败说成已推远端CI。
+
 [节点收据](production-wiring-evidence/acceptance.json) / [紧凑原始证据](production-wiring-evidence/receipts.zip)。正式public request显式0.9、唯一原文/策略摘要、same-run/outbox/真实v5升级、原件篡改拒绝已验。集中1149 PASS/17 SKIP/3旧factory失败后，只复跑受影响51（50PASS/1新test参数失配）及最后18PASS；全部已知工程失败关闭，原FAIL保留。新7E2E：集中6PASS，1计数观察点过时，改为统一真实byte owner后1PASS；旧11E2E全PASS。没有反复重跑千项套件或降低断言。
 
 **A/B/C仍未全部完成：** 真实跨run缓存等待DU3依赖组件；同原件旧/新三市场native回放更快但不是摘要质量通过。实际微软8条required_business仅1/8在新选择中保留（旧4/8），三层共因已实证，不是拆句误报。新默认不能启用；下一批先通用RED再修，不在生产加公司词/样本特判。unknown语言准备仍有一次重复读，作为同责任层性能收尾，不新增审批。

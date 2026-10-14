@@ -1,0 +1,65 @@
+{
+  "schema_version": "shared-reading-push-repair/1",
+  "implementation_commit": "d3c57b316062bf1af55314632ed21f4e684417dd",
+  "first_push": {
+    "command": [
+      "git",
+      "push",
+      "origin",
+      "master"
+    ],
+    "exit_code": 1,
+    "passed": 3795,
+    "skipped": 11,
+    "failed": 3,
+    "seconds": 407.94,
+    "remote_updated": false,
+    "evidence": "tool-output-only; full output not saved, no invented log"
+  },
+  "cause": "old test fixture unqualified SQL values and fixed migration tuple after additive schema6",
+  "repair": {
+    "files": [
+      "tests/unit/test_replay_config_isolation.py",
+      "tests/unit/test_store_initialization.py"
+    ],
+    "production_changes": false,
+    "passed": 30,
+    "failed": 0,
+    "seconds": 8.08,
+    "assertions_preserved": [
+      "one deep check",
+      "deep before COMMIT",
+      "rollback/integrity",
+      "actual unknown-stage accounting"
+    ]
+  },
+  "archive_roundtrip_verified": true,
+  "archive_bytes": 4673,
+  "files": [
+    {
+      "name": "junit.xml",
+      "bytes": 11909,
+      "sha256": "8319438e4c085f498336eaea8c7d4d8e5010503578ad9002e7d428dd2a75c695"
+    },
+    {
+      "name": "result.json",
+      "bytes": 1144,
+      "sha256": "326b01038f35e3dd464812eaa4c177deb9b4a96503b0ca07884f0a18ed32c06f"
+    },
+    {
+      "name": "stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "stdout.log",
+      "bytes": 1955,
+      "sha256": "52247892671612600abaec9651bddeba2c3443c718542f3c00a6f6e1624df9e4"
+    }
+  ],
+  "normal_retry_pending": true,
+  "hook_bypass": false,
+  "default_selector": "0.8.0",
+  "real_business_quality": "OPEN_FAIL_1_OF_8",
+  "new_supplier_calls": 0
+}

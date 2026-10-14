@@ -103,7 +103,8 @@ def native_db(tmp_path):
         connection.execute("INSERT INTO jobs VALUES "
             "('j','jk','source.narrative_select','source_revision','s',?,'p1','1','low',"
             "'running',0,'t0',3,'event','t0','t0',NULL,NULL)", ("a" * 64,))
-        connection.execute("INSERT INTO narrative_run_jobs VALUES ('fixture','j',?,'1')", ("a" * 64,))
+        connection.execute("INSERT INTO narrative_run_jobs "
+            "(run_id,job_id,input_hash,handler_version) VALUES ('fixture','j',?,'1')", ("a" * 64,))
         result = {"result": {"schema_version": "narrative-select-result/1",
                   "selection": {"status": "partial", "selected_count": 2, "coverage_complete": False},
                   "evidence_spans": [{"raw_text": "PRIVATE ORIGINAL TEXT"}]}}

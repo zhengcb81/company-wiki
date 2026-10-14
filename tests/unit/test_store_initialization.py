@@ -111,7 +111,8 @@ def test_actual_auto_upgrade_runs_one_deep_check_before_commit(tmp_path, monkeyp
     _v4(db)
     statements = _trace(monkeypatch)
     report = migrations.migrate_database(db)
-    assert report.applied_versions == (5,)
+    assert report.from_version == 4 and report.to_version == migrations.SCHEMA_VERSION
+    assert report.applied_versions == tuple(range(5, migrations.SCHEMA_VERSION + 1))
     assert _deep(statements) == ["pragma integrity_check", "pragma foreign_key_check"]
     assert statements.index("pragma foreign_key_check") < statements.index("commit")
 
