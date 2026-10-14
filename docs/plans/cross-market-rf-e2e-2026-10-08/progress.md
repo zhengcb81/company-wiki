@@ -1,3 +1,7 @@
+## ROOT主线与独立施工 — 2026-10-14
+
+[共享阅读当前PWF](../document-understanding-2026-10-13/task_plan.md)：pure reading budget组件已TDD实现，104集中与38独立probe通过、旧默认不变；正式ReadingPlan/生产模型链仍待接。三张新[DU3独立卡](../document-understanding-2026-10-13/parallel/du3-2026-10-14/README.md)和三个排他稀疏代码工作树已准备，ROOT继续source_catalog/DU选择及AUTO接线。原件/配置保持，0模型费用，不标母G2/G4/G5完成。
+
 ## ROOT当前执行归总 — 2026-10-13 共享阅读升级
 
 [统一PWF执行表](../document-understanding-2026-10-13/task_plan.md)与[施工细则](../document-understanding-2026-10-13/completion_implementation.md)合并共享引擎＋文档策略全部剩余工作：A业务选择/唯一材料→B正式摘要与两阶段generation/cache→C真实质量/默认切换。DU2已并master推deb7eb7d且CI38476678472绿，不再等待或重派作者。原件保持，无新许可/签收；母G2/G4/G5复用一次窗口，仍开放。本节优先于下方历史“DU/DU2施工中”状态；不将模块绿当母目标全部完成。

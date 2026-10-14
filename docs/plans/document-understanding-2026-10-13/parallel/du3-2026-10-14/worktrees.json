@@ -1,0 +1,29 @@
+[
+  {
+    "lane": "quality",
+    "base_sha": "195aba20b0aecc2d661d7d04c5ba72f982bc02d0",
+    "branch": "codex/du3-quality-20261014",
+    "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\shared-reading-completion-20261014\\quality",
+    "checkout_bytes": 15518494.0,
+    "originals_copied": false,
+    "status": "READY_NOT_STARTED"
+  },
+  {
+    "lane": "dependencies",
+    "base_sha": "195aba20b0aecc2d661d7d04c5ba72f982bc02d0",
+    "branch": "codex/du3-dependencies-20261014",
+    "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\shared-reading-completion-20261014\\dependencies",
+    "checkout_bytes": 15518529.0,
+    "originals_copied": false,
+    "status": "READY_NOT_STARTED"
+  },
+  {
+    "lane": "geometry",
+    "base_sha": "195aba20b0aecc2d661d7d04c5ba72f982bc02d0",
+    "branch": "codex/du3-geometry-20261014",
+    "path": "C:\\Users\\郑曾波\\Projects\\_harness_worktrees\\shared-reading-completion-20261014\\geometry",
+    "checkout_bytes": 15518501.0,
+    "originals_copied": false,
+    "status": "READY_NOT_STARTED"
+  }
+]

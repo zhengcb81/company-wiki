@@ -15,3 +15,7 @@ ROOT继续主线Phase A：source_catalog候选/预算/最终选择、DU orchestr
 目录创建时不复制companies/数据湖、数据库、整篇MD或作者bindings；本机原件使用未提交的只读绑定。代码worktree共享Git对象。各自base/branch记录在工作树`.planning/du3-<lane>/task_plan.md`，恢复时以那份为准。
 
 ROOT接收顺序：DEPENDENCIES→GEOMETRY→QUALITY（只是最终接线次序，三线可同时施工）。纯组件/基准通过不等于生产已接线或真实摘要已通过；ROOT集中接线和母G2/G4/G5窗口验证，不给每个helper增审查。
+
+## 已准备的启动基线
+
+三工作树已实际创建，共同base `195aba20b0aecc2d661d7d04c5ba72f982bc02d0`；各自约15.52MB，合计约46.56MB，只检出代码/测试/相关文档，没有companies/原件/数据库复制。三份独立PWF已放各自`.planning/du3-<lane>/`。清单见[worktrees.json](worktrees.json)，当前READY_NOT_STARTED。
