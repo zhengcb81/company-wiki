@@ -1,0 +1,181 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "fresh-us-apple-10k",
+  "market": "US",
+  "company": "Apple Inc",
+  "source_sha256": "548ae59778cf08ee0f2ee088e7ece20d947076c3c01f74d2d65db4c2777e436a",
+  "scope": "holdout",
+  "language": "en",
+  "support_set_frozen_before_output": true,
+  "support_set_digest": "aaa1088f2576fd3480c82875fd65d46108b34a84bd50f7e5c637de602fbade7c",
+  "expected_route_families": [
+    "annual",
+    "us_10k",
+    "sec_10k"
+  ],
+  "notes": "FRESH (2026-10-14). Apple Inc Form 10-K, fiscal year ended 2025-09-27. 公司与原件在本次任务前未出现在任何 benchmark gold、findings、规则或调参记录中；support set 在读取任何新输出前冻结。原HTML无物理页，全部以 location_kind=document 用真实 DOM locator 匹配；不声称存在PDF页码。",
+  "facts": [
+    {
+      "id": "apple-five-geographic-segments",
+      "importance": "critical",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "location_kind": "document",
+            "exact_quote": "reportable segments consist of the Americas, Europe, Greater China, Japan and Rest of Asia Pacific"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Americas",
+        "Greater China",
+        "Rest of Asia Pacific"
+      ],
+      "must_not_assert": [
+        "Apple按产品分部报告业绩",
+        "Apple有两个报告分部"
+      ],
+      "reason": "Apple 按**地域**报告分部，共5个：Americas/Europe/Greater China/Japan/Rest of Asia Pacific。产品线（iPhone/Mac等）不是报告分部。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "apple-fiscal-year-not-calendar",
+      "importance": "critical",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "location_kind": "document",
+            "exact_quote": "fiscal year is the 52- or 53-week period that ends on the last Saturday of September"
+          }
+        ],
+        [
+          {
+            "location_kind": "document",
+            "exact_quote": "For the fiscal year ended September 27 , 2025"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "last Saturday of September",
+        "September 27"
+      ],
+      "must_not_assert": [
+        "2025财年指截至2025年12月31日的年度"
+      ],
+      "reason": "Apple财年止于**9月最后一个周六**（FY2025止于2025-09-27），不是日历年。把FY2025当2025日历年是期间错位。",
+      "fact_scope": "narrative",
+      "target_kind": "disposition_context"
+    },
+    {
+      "id": "apple-greater-china-decline",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "location_kind": "document",
+            "exact_quote": "Greater China net sales decreased during 2025 compared to 2024 primarily due to lower net sales of iPhone, partially offset by higher net sales of Mac"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Greater China",
+        "decreased",
+        "iPhone"
+      ],
+      "must_not_assert": [
+        "Greater China net sales increased in 2025",
+        "大中华区收入2025年增长"
+      ],
+      "reason": "大中华区净销售**下降**，因iPhone走弱、部分被Mac抵消。方向是降，主因是iPhone，不得翻成增长或主因换成服务。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "apple-tariffs-q2-2025",
+      "importance": "critical",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "location_kind": "document",
+            "exact_quote": "Beginning in the second quarter of 2025, new U.S. Tariffs were announced, including additional tariffs on imports from China, India, Japan, South Korea, Taiwan, Vietnam and the EU"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "second quarter of 2025",
+        "tariffs",
+        "China"
+      ],
+      "must_not_assert": [
+        "关税自2025年初起全面生效",
+        "关税对中国以外地区无影响"
+      ],
+      "reason": "新美国关税自**2025年第二季度**宣布，覆盖中国/印度/日本/韩国/台湾/越南/欧盟等。风险限定：起点是Q2 2025，范围是多国，不得简化为全年或单一国家。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "apple-fy-week-counts",
+      "importance": "normal",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "location_kind": "document",
+            "exact_quote": "fiscal years 2025 and 2024 spanned 52 weeks each, whereas fiscal year 2023 spanned 53 weeks"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "52 weeks",
+        "53 weeks"
+      ],
+      "must_not_assert": [
+        "2025财年为53周"
+      ],
+      "reason": "FY2025/FY2024各52周，FY2023为53周。周数差异影响同比可比性，不得把53周错配给2025。",
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted"
+    },
+    {
+      "id": "apple-outsourced-manufacturing",
+      "importance": "normal",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "location_kind": "document",
+            "exact_quote": "A significant majority of the Company's manufacturing is performed in whole or in part by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan and Vietnam"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "outsourcing partners",
+        "China mainland"
+      ],
+      "must_not_assert": [
+        "Apple制造全部位于美国本土"
+      ],
+      "reason": "制造主要由外包伙伴承担，集中在大陆/印度/日韩/台湾/越南。供应链地域限定属风险事实，不得说成全美国本土制造。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    }
+  ]
+}

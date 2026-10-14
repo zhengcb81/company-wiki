@@ -1,0 +1,196 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "fresh-hk-anta-fy2025",
+  "market": "HK",
+  "company": "安踏體育",
+  "source_sha256": "1297bbbca740983d862702370b3fa46f8e87d2913da295e23660e09e835689fd",
+  "scope": "holdout",
+  "language": "zh",
+  "support_set_frozen_before_output": true,
+  "support_set_digest": "a5745bc34b834493fade9c529a5aeb357c2fe184dec75a8fa9dce5c99847fb7f",
+  "expected_route_families": [
+    "annual",
+    "hk_annual"
+  ],
+  "notes": "FRESH (2026-10-14). 安踏體育 二零二五年年報（繁体，港股）。公司与原件在本次任务前未出现在任何 gold、findings、规则或调参记录中；support set 在读取任何新输出前冻结。表内数字列为 [本年, 上年, 变动]，单位人民币百万元，股東應佔溢利受Amer Sports上市/配售一次性利得影响，附注已声明比较口径。",
+  "facts": [
+    {
+      "id": "anta-amer-largest-shareholder",
+      "importance": "critical",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 4,
+            "exact_quote": "安踏體育亦為Amer Sports, Inc. 的最大股東"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Amer Sports",
+        "最大股東"
+      ],
+      "must_not_assert": [
+        "Amer Sports是安踏的全资子公司",
+        "Amer Sports并入安踏分部报表"
+      ],
+      "reason": "Amer Sports是独立上市公司（NYSE:AS），安踏是其**最大股东**，不是母公司/分部。把参股当并表或当分部是主体错。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "anta-brand-portfolio",
+      "importance": "normal",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 4,
+            "exact_quote": "包括安踏、FILA、DESCENTE、KOLON SPORT、JACK WOLFSKIN 及MAIA ACTIVE"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "安踏",
+        "FILA",
+        "MAIA ACTIVE"
+      ],
+      "must_not_assert": [
+        "安踏品牌组合仅包含安踏与FILA"
+      ],
+      "reason": "多品牌组合，含安踏/FILA/DESCENTE/KOLON SPORT/JACK WOLFSKIN/MAIA ACTIVE 等。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "anta-operating-profit-up",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 12,
+            "exact_quote": "經營溢利 19,091 16,595"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "19,091",
+        "16,595"
+      ],
+      "must_not_assert": [
+        "經營溢利同比下降15.0%"
+      ],
+      "reason": "經營溢利本年19,091、上年16,595（人民币百万元），同比**上升**约15%。单位是百万元不是万元，方向是升。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "anta-gross-margin-decline",
+      "importance": "critical",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 12,
+            "exact_quote": "毛利率 62.0 62.2"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "62.0",
+        "62.2"
+      ],
+      "must_not_assert": [
+        "毛利率提高0.2个百分点",
+        "毛利率上升至62.2%"
+      ],
+      "reason": "毛利率本年62.0、上年62.2，**下降**0.2个百分点。62.0是本年、62.2是上年，不得互换或称上升。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "anta-shareholders-profit-decline",
+      "importance": "critical",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 12,
+            "exact_quote": "股東應佔溢利 13,588 15,596"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "13,588",
+        "15,596"
+      ],
+      "must_not_assert": [
+        "股東應佔溢利同比增长12.9%"
+      ],
+      "reason": "股東應佔溢利本年13,588、上年15,596（百万元），**下降**。上年含Amer Sports上市/配售一次性利得，附注已声明比较口径，不得据此称增长。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "anta-inventory-days-up",
+      "importance": "normal",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 12,
+            "exact_quote": "平均存貨周轉日數(5) 137 123"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "137",
+        "123"
+      ],
+      "must_not_assert": [
+        "平均存货周转日数降至123天"
+      ],
+      "reason": "平均存货周转日数本年137、上年123，周转天数**增加**14天（周转变慢）。是天数不是比率，不得称改善。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "anta-all-other-brands-fastest",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 12,
+            "exact_quote": "所有其他品牌 16,996 10,678 59.2"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "16,996",
+        "59.2"
+      ],
+      "must_not_assert": [
+        "FILA是增长最快的品牌分部"
+      ],
+      "reason": "『所有其他品牌』收入16,996（上年10,678，+59.2%）是增速最快的分部，但基数最小。品牌分部数字不得张冠李戴。",
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted"
+    }
+  ]
+}

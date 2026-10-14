@@ -1,0 +1,210 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "fresh-cn-smic-fy2025",
+  "market": "CN",
+  "company": "中芯国际",
+  "source_sha256": "c022cf9323967f66a239ce4f60b30507bc341db6e660a53db9c2966a9ef35531",
+  "scope": "holdout",
+  "language": "zh",
+  "support_set_frozen_before_output": true,
+  "support_set_digest": "0bad92ddc1c9fcee4d6875f86f9189b630d6d8f74c905d09b3f2a2756924b761",
+  "expected_route_families": [
+    "annual",
+    "a_share_annual"
+  ],
+  "notes": "FRESH (2026-10-14). 中芯国际 2025年年度报告. 公司与原件在本次任务前未出现在任何 gold、findings、规则或调参记录中；support set 在读取任何新输出前冻结（见 support_set_frozen_before_output）。业务事实支持集由独立子代理逐字读取原件回报，未使用 gold 或生成 claim 填充。",
+  "facts": [
+    {
+      "id": "smic-monthly-capacity-8inch",
+      "importance": "critical",
+      "quantity_basis": "capacity_total",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 6,
+            "exact_quote": "折合8 英寸标准逻辑 的月产能规模超过了100 万片"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "8英寸",
+        "100万片",
+        "月产能"
+      ],
+      "must_not_assert": [
+        "12英寸月产能超过100万片",
+        "月产能超过100万片12英寸晶圆"
+      ],
+      "reason": "口径是『折合8英寸标准逻辑』的月产能，不是12英寸实物片数。把口径换掉或把单位换掉都是经营量错。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "smic-capacity-utilization-up",
+      "importance": "critical",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 6,
+            "exact_quote": "产能利用率增至93.5%，同比增长8 个百分点"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "93.5%",
+        "8个百分点"
+      ],
+      "must_not_assert": [
+        "产能利用率下降8个百分点",
+        "产能利用率93.5%同比下降"
+      ],
+      "reason": "产能利用率升**至**93.5%，同比**增加**8个百分点。方向必须保留为上升。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "smic-rd-ratio-decline",
+      "importance": "critical",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 6,
+            "exact_quote": "研发投入人民币55.19 亿元，占销售收入8.2%"
+          }
+        ],
+        [
+          {
+            "page": 17,
+            "exact_quote": "研发投入总额占营业收入比例（%） 8.2 9.4 减少1.2 个百分点"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "55.19亿元",
+        "8.2%",
+        "减少1.2个百分点"
+      ],
+      "must_not_assert": [
+        "研发投入占营业收入比例提高1.2个百分点",
+        "研发投入强度上升"
+      ],
+      "reason": "研发投入绝对额55.19亿元，但占营收比例**降至**8.2%（上年9.4%，减少1.2个百分点）。绝对上升不等于强度上升，方向相反。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "smic-revenue-growth",
+      "importance": "normal",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 24,
+            "exact_quote": "本集团实现营业收入人民币67,323.2 百万元，比上年同期增加16.5%"
+          }
+        ],
+        [
+          {
+            "page": 8,
+            "exact_quote": "营业收入 67,323,192"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "67,323",
+        "16.5%"
+      ],
+      "must_not_assert": [
+        "营业收入同比下降16.5%"
+      ],
+      "reason": "营业收入67,323.2百万元（=673.23亿元），同比增加16.5%。注意千元/百万元口径与方向。",
+      "fact_scope": "narrative",
+      "target_kind": "correctness_if_emitted"
+    },
+    {
+      "id": "smic-profit-driver-causal",
+      "importance": "normal",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 9,
+            "exact_quote": "主要是由于晶圆销量增加、产能利用率上升及产品组合变动所致"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "晶圆销量增加",
+        "产能利用率上升"
+      ],
+      "must_not_assert": [
+        "净利润增长主要由产品涨价驱动"
+      ],
+      "reason": "归母净利润增长的归因是晶圆销量增加、产能利用率上升、产品组合变动，不是涨价。因果归因不得替换。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    },
+    {
+      "id": "smic-audit-opinion",
+      "importance": "critical",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "安永华明会计师事务所（特殊普通合伙）为本公司出具了标准无保留意见的审计报告"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "标准无保留意见"
+      ],
+      "must_not_assert": [
+        "出具保留意见的审计报告",
+        "审计报告为非标准意见"
+      ],
+      "reason": "审计意见为**标准无保留意见**。审计状态属元数据/事实，不得误述为保留意见。",
+      "fact_scope": "document_meta",
+      "target_kind": "disposition_context"
+    },
+    {
+      "id": "smic-no-profit-distribution",
+      "importance": "critical",
+      "quantity_basis": "unknown",
+      "modality": "negation",
+      "role": "company_filing",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "公司2025年度拟不进行利润分配"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "拟不进行利润分配"
+      ],
+      "must_not_assert": [
+        "公司2025年度已进行利润分配",
+        "公司拟每10股派发现金红利"
+      ],
+      "reason": "计划是**不**进行利润分配（且尚需股东大会审议）。否定+计划双重限定，绝不能翻成已分配或拟分配。",
+      "fact_scope": "narrative",
+      "target_kind": "required_business"
+    }
+  ]
+}

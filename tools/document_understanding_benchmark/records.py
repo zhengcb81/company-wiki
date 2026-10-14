@@ -153,6 +153,17 @@ def validate_gold(gold: Mapping[str, Any]) -> dict[str, Any]:
         "source_sha256": _require_sha256(record.get("source_sha256"), "gold.source_sha256"),
         "scope": _require_enum(record.get("scope"), SCOPES, "gold.scope"),
         "language": _optional_text(record.get("language"), "gold.language"),
+        # Additive identity fields preserved so the fresh-split and coverage
+        # tooling can see *which* company/market a record is about without
+        # re-parsing the raw JSON. They carry no decision weight.
+        "market": _optional_text(record.get("market"), "gold.market"),
+        "company": _optional_text(record.get("company"), "gold.company"),
+        "support_set_frozen_before_output": bool(
+            record.get("support_set_frozen_before_output")
+        ),
+        "support_set_digest": _optional_text(
+            record.get("support_set_digest"), "gold.support_set_digest"
+        ),
         "expected_route_families": families,
         "facts": facts,
         "notes": _optional_text(record.get("notes"), "gold.notes") or "",

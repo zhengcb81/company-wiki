@@ -1,9 +1,15 @@
 """DU-BENCH: an independent document-understanding quality benchmark.
 
-Public entry point (INTERFACES.md §5)::
+Public entry points (INTERFACES.md §5)::
 
     from tools.document_understanding_benchmark import evaluate
     result = evaluate(observed, gold)
+
+    from tools.document_understanding_benchmark import observe_final_material
+    observed = observe_final_material(material, originals, sample_id=..., execution=...)
+
+    from tools.document_understanding_benchmark import compare_runs
+    comparison = compare_runs(baseline, candidate, frozen_suite=...)
 
 CLI (see README.md)::
 
@@ -17,6 +23,8 @@ instead of reimplementing selection.
 
 from __future__ import annotations
 
+from .comparison import compare_runs
 from .evaluate import evaluate
+from .final_material import observe_final_material
 
-__all__ = ["evaluate"]
+__all__ = ["compare_runs", "evaluate", "observe_final_material"]

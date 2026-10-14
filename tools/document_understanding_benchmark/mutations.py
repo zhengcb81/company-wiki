@@ -290,6 +290,29 @@ def m_scope_confusion(observed: dict[str, Any], gold: Mapping[str, Any]) -> dict
     return observed
 
 
+def m_editorial_as_management(observed: dict[str, Any], gold: Mapping[str, Any]) -> dict[str, Any]:
+    """问题/编辑文字当管理层事实：a question or an editor's wording restated as management fact."""
+
+    for claim in observed.get("claims") or []:
+        if claim.get("role") in {
+            "analyst_question", "analyst_statement", "editorial_summary", "third_party",
+        }:
+            claim["role"] = "management_answer"
+            claim["modality"] = "actual"
+            return observed
+    return observed
+
+
+def m_currency_swap(observed: dict[str, Any], gold: Mapping[str, Any]) -> dict[str, Any]:
+    """币种错：restate every amount in a different currency than its evidence carries."""
+
+    changed = False
+    for quantity in _all_quantities(observed):
+        quantity["currency"] = "USD"
+        changed = True
+    return observed
+
+
 MUTATIONS: tuple[tuple[str, str, Callable[[dict[str, Any], Mapping[str, Any]], dict[str, Any]], str], ...] = (
     ("drop_subject", "省主语", m_drop_subject, "basis."),
     ("delete_negation", "删否定", m_delete_negation, "basis.f-no-vc"),
@@ -310,6 +333,8 @@ MUTATIONS: tuple[tuple[str, str, Callable[[dict[str, Any], Mapping[str, Any]], d
     ("stage_collapse", "验证阶段坍缩为量产", m_stage_collapse, "basis."),
     ("plan_as_completed", "计划当成已完成", m_plan_as_completed, "basis."),
     ("scope_confusion", "主体串（关联方→上市公司）", m_scope_confusion, "basis."),
+    ("editorial_as_management", "问题/编辑文字当管理层事实", m_editorial_as_management, "basis."),
+    ("currency_swap", "币种错（人民币→美元）", m_currency_swap, "basis."),
 )
 
 

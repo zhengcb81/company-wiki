@@ -472,6 +472,46 @@ def _fact_is_question(fact: Mapping[str, Any]) -> bool:
     return False
 
 
+def _fact_is_noncompany_voice(fact: Mapping[str, Any]) -> bool:
+    """A fact that belongs to a third party or an editor, not the company.
+
+    ``analyst_question``/``analyst_statement``/``editorial_summary``/``third_party``
+    names whose voice the fact is. Restating such a fact with a company or
+    management role turns somebody's question or an editor's wording into a
+    management assertion — exactly the fabrication the card names.
+    """
+
+    return (fact.get("role") or "unknown") in {
+        "analyst_question",
+        "analyst_statement",
+        "editorial_summary",
+        "third_party",
+    }
+
+
+_COMPANY_ROLES = frozenset({
+    "company_filing",
+    "company_statement",
+    "management_answer",
+    "management_prepared",
+})
+
+_CURRENCY_MARKERS: tuple[tuple[str, str], ...] = (
+    ("人民币", "CNY"), ("CNY", "CNY"), ("元", "CNY"), ("¥", "CNY"),
+    ("美元", "USD"), ("USD", "USD"), ("$", "USD"),
+    ("港元", "HKD"), ("港币", "HKD"), ("HKD", "HKD"),
+    ("欧元", "EUR"), ("EUR", "EUR"),
+)
+
+
+def _currencies_in(text: str) -> set[str]:
+    found: set[str] = set()
+    for marker, currency in _CURRENCY_MARKERS:
+        if marker in text:
+            found.add(currency)
+    return found
+
+
 def _shares_fact_subject(fact: Mapping[str, Any], text: str) -> bool:
     """True when a claim is about the same subject as the fact.
 
@@ -697,6 +737,35 @@ def check_basis_fact(fact: Mapping[str, Any], observed: Mapping[str, Any]) -> di
                 "management_prepared",
             }:
                 problems.append(f"question_carried_as_company_fact:{role}")
+
+    # Editorial / third-party wording must not be laundered into management
+    # fact. If the gold says the fact is an analyst's or an editor's voice and a
+    # related claim re-voices it as the company's or management's, that is a
+    # fabricated attribution even when every word and number survive.
+    if _fact_is_noncompany_voice(fact):
+        for claim in related:
+            role = claim.get("role") or "unknown"
+            declared = claim.get("modality") or "unknown"
+            if role in _COMPANY_ROLES and declared in {"actual", "plan"}:
+                problems.append(
+                    f"noncompany_voice_carried_as_management_fact:"
+                    f"{fact.get('role')}->{role}"
+                )
+
+    # Currency is part of a quantity's identity. A number restated in a
+    # different currency than its evidence carries is wrong by ~7x even when the
+    # digits are unchanged, so it is checked against the replayable text.
+    for claim in related:
+        for quantity in claim.get("quantities") or []:
+            declared_currency = quantity.get("currency")
+            if not declared_currency:
+                continue
+            evidence_currencies = _currencies_in(replayable)
+            if evidence_currencies and declared_currency.upper() not in evidence_currencies:
+                problems.append(
+                    f"quantity_currency_mismatch:{declared_currency}"
+                    f" not in {sorted(evidence_currencies)}"
+                )
 
     # Quantity basis: a declared quantity whose basis contradicts the fact.
     for claim in related:
