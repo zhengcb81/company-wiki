@@ -4,7 +4,8 @@
  "base_sha": "195aba20b0aecc2d661d7d04c5ba72f982bc02d0",
  "implementation_commits": [
   "bc63a74eac1f73e6184a87a4b1bb65044840c1ad",
-  "2f1d6218abd66033e802189b00a31614c23033ee"
+  "2f1d6218abd66033e802189b00a31614c23033ee",
+  "88e9d2fe (review-fix commits: each contains real code and tests alongside the lane ledger update)"
  ],
  "worktree": "C:/Users/郑曾波/Projects/_harness_worktrees/shared-reading-completion-20261014/dependencies",
  "branch": "codex/du3-dependencies-20261014",
@@ -192,5 +193,5 @@
   ],
   "regression_reproduced_by_reviewer": "the five pre-existing DU unit packages alone give 496 passed / 17 skipped; with this lane the combined run is 627 passed / 17 skipped"
  },
- "commit_notes": "bc63a74e is the implementation commit (code + tests, 3807 insertions). 2f1d6218 is the review-fix commit: it contains the corrected code and tests together with the lane ledger update."
+ "commit_notes": "bc63a74e is the implementation commit (code + tests, 3807 insertions). 2f1d6218 and 88e9d2fe are the two independent-review fix commits: each contains the corrected code and tests together with the lane ledger update. e430945f and 23a14248 are ledger-only."
 }
