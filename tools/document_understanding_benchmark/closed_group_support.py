@@ -270,4 +270,74 @@ def score_facts(facts: Sequence[Mapping[str, Any]], *, evidence_spans: Sequence[
     return output
 
 
-__all__ = ["score_facts"]
+def _reviewed_anchors_present(fact, locations, *, source_id):
+    # The reviewer explicitly relates these anchors to ONE claim. Each anchor
+    # can be in a different actually cited unit. This does not join arbitrary
+    # source statements into a newly inferred proposition; _supports remains
+    # the sole quote/range/role matcher and its native continuity rules apply.
+    return any(support and all(any(
+        _supports(anchor, material, kind, source_id=source_id, role=fact.get("role"))
+        for material, kind in locations
+    ) for anchor in support) for support in fact["any_support_sets"])
+
+
+def score_claim_facts(
+    facts: Sequence[Mapping[str, Any]], *, claims: Sequence[Mapping[str, Any]],
+    evidence_spans: Sequence[EvidenceSpan], reading_context: Mapping[str, Any] | None,
+    source_id: str,
+) -> list[dict[str, Any]]:
+    """Observe explicit reviewed anchors in each claim's factual citations.
+
+    This is a benchmark observation, NOT a general natural-language entailment
+    test, source ingress validator, or production permission gate. `facts` must
+    supply the independently reviewed claim_id and OR-of-AND source anchors.
+    Context citations and other claims cannot lend factual support. Observing
+    all anchors in the whole selected input is reported separately and never
+    turns a claim with the wrong citations into a supported one.
+    """
+    all_locations = _locations(evidence_spans, reading_context)
+    known = {span.span_id: span for span in evidence_spans}
+    by_claim = {}
+
+    def references(value, *, required):
+        if (not isinstance(value, (tuple, list)) or required and not value
+                or any(not isinstance(sid, str) or sid not in known for sid in value)
+                or len(value) != len(set(value))):
+            raise ValueError("claim observation requires unique pinned evidence references")
+        return set(value)
+
+    for claim in claims:
+        if not isinstance(claim, Mapping):
+            raise ValueError("claim observations require canonical claim mappings")
+        claim_id = claim.get("claim_id")
+        if not isinstance(claim_id, str) or not claim_id or claim_id in by_claim:
+            raise ValueError("claim observation IDs must be known and unique")
+        cited = references(claim.get("evidence_ids"), required=True)
+        context = references(claim.get("context_evidence_ids", ()), required=False)
+        if cited.intersection(context):
+            raise ValueError("claim factual support and context must be disjoint")
+        rows = tuple(span for span in evidence_spans if span.span_id in cited)
+        # Retain only complete actual native groups. A partial citation cannot
+        # borrow a neighbor or context-only fragment to reconstruct a quote.
+        local_context = None if reading_context is None else {
+            "schema_version": reading_context["schema_version"],
+            "groups": [group for group in reading_context.get("groups", ())
+                       if set(group["evidence_ids"]).issubset(cited)],
+        }
+        by_claim[claim_id] = _locations(rows, local_context)
+
+    output = []
+    for fact in facts:
+        claim_id = fact.get("claim_id")
+        if not isinstance(claim_id, str) or claim_id not in by_claim:
+            raise ValueError("reviewed fact must reference an observed claim")
+        output.append({
+            "id": fact["id"], "claim_id": claim_id,
+            "supported": bool(_reviewed_anchors_present(fact, by_claim[claim_id], source_id=source_id)),
+            "selected_source_support_present": bool(_reviewed_anchors_present(fact, all_locations, source_id=source_id)),
+            "scope": "reviewed_anchors_in_claim_support",
+        })
+    return output
+
+
+__all__ = ["score_facts", "score_claim_facts"]

@@ -36,3 +36,27 @@ CWP 0b61bcd1正常push，5642PASS/24SKIP，精确CI38788268113 SUCCESS；RF caf7
 - 完成证据包须输出：原输入/输出及每个引用的SHA、逐命题支持矩阵、失败/提醒/覆盖未知、实际费用、选择代际/缓存命中与0新增POST、原件/配置/测试目录前后状态；审查一次集中进行。
 
 [独立逐条报告](cn_h1_live_summary_independent_review.md)。机器逐条证据、原始终文、引用和现有oracle测试适配均在[冻结材料](../common-root-quality-evidence/cn-h1-citation-unit3-live-receipts.zip)内按原仓库相对路径存放。仅做纯测试时解压到独立检出，再运行 `python -B -X utf8 -m pytest .planning/shared-reading-production/live/owned-runner/test_phase_c_observer.py tests/unit/document_understanding_selection/test_closed_group_support.py tests/unit/document_understanding_selection/test_attributed_context_quote_oracle.py -q -p no:cacheprovider --basetemp=.cw-obs-replay`，无需API凭证；测试后清理自己创建的空basetemp，不碰预先存在内容。真实runner不属于这条纯测试命令，不可在回放时误调用供应商。
+
+
+## B1 正在实施：统一quote oracle增加逐claim观察
+
+2026-10-15续跑：先将真实终文经正式decoder的引用和审查锚点固化为纯测试。新增 `score_claim_facts` 作为现有quote oracle的组合观察入口，仅按调用方明确提供的claim→gold命题映射评价自己的support；context与其他claim/全文selected不能借用。它不自动判定自由文本的语义，不进入生产许可/采集门禁，也不替代大节点独审。多unit命题的每个已知锚点可分别来自实际所引单元，必须同source/role/page范围；不凭字面数字宣布完整语义正确。旧score_facts的单一闭合group规则保持。
+
+测试应证明：旧summary即使20/20引用展开与96原文SHA通过，六个已知错引仍观察为未支撑；人工审查指定的真正支撑在selected中确实存在；只换测试候选引用后可分开观测，原付费response/SHA绝不改。未知/重复claim或证据引用、只在context的问题数字、跨产品/期间/角色的反例须明确失败。生产协议设计另由独立只读架构调查提供，当前尚未冻结新协议，不先修改旧请求字节。
+
+
+### B1 实测收尾
+
+- 已冻结123069字节真实精选fixture，SHA `13fcc0a584f0f5021c51282f119bfc7c7391b959914d57337b55f1eeb9e74c29`；从public bundle重建typed selection后，正式request instruction/data与原真实输入逐字相同；原付费response通过正式decoder仍还原原20条。
+- 新 `score_claim_facts` 只组合原有quote/range/role matcher，既有score_facts行为不改。原六条错引明确false，而其所需真实支撑在完整selected中true；跨claim/context/角色/期间/货币/否定及真正被引用的跨unit锚点都有反例。
+- RED为新观察入口缺失；首次26PASS/1FAIL是测试把投资者问题当成business-fact oracle可接受角色的错误预期。保留原matcher的角色范围，改为公司事实断言，并新增同company_filing角色context借数反例；最终28PASS/2.52秒。测试只观察已审查锚点，不认证一般语义。原件/生产配置/sentinel保持、Temp删除、0API，原失败输出和收据均保留。
+- 下一步采用独立架构报告的source-scoped一次请求设计；先在共享引擎做来源任务view，不选新provider，不用gold反推生产规则，不在renderer重新按公司/产品排名。详见[接口施工细则](source_scoped_summary_implementation.md)。
+
+
+## 来源任务＋纯编译节点实收（生产v4仍未接线）
+
+最终47组件PASS/4.30s，原None/v1/v2/v3/QA集中160PASS/8.08s是compact前快照；独立44PASS/2.88s同为compact前，最终defaults只读核对无阻断。无损回还测试覆盖实际角色/flags/kind/section/topics/all-parts与QA例外；实际source view30590B对旧同范围30758B，保留47813B退化初版和相应RED。完整v4 HTTP/token/真实语义尚未测。见[节点实证](../common-root-quality-evidence/source-scoped-foundation-acceptance.json)。
+
+审查找到的两项新增helper边界已TDD修复：可变kind/section标签影响不可变plan hash，改为有限str字段；JSON对象role先去重会TypeError，改为按已有规则非str→unknown再去重。不重新做来源身份/SHA或引入许可。原始quote oracle的matcher/业务角色边界保持；显式负控证明错误文本搭配合法锚点仍不能称一般蕴含成立。合成夹具改metadata未重建EvidenceSpan造成的hash错误已在夹具修复；mypy局部list标注、测试角色预期、所有RED与初版结果均保留。
+
+下一步必须注册显式v4正式renderer/decoder、因果依赖和现有worker/caller，不留作永久闲置模块；旧v3真实终文和None/v1/v2/v3 wire保持。source task的每个原文body只一次，共享refs是图；context不作事实，完整native scope闭包不表示所有命题真实。继续补共享引擎有证据的指代/对象和覆盖分配，再做离线正式E2E/恢复与真实配置供应商独审，原六错引与PD5/Matrix遗漏未关闭。

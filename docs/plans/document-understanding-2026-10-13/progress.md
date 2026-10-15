@@ -1,20 +1,20 @@
-## ROOT 当前状态 — 2026-10-15 真实摘要与发布收尾
+## ROOT 当前状态 — 2026-10-15 来源任务与逐命题回归
 
-**已发布：** CWP `0b61bcd1` 正常pre-push **5642PASS/24SKIP（518.41秒）**，精确CI **38788268113 SUCCESS**；RF `caf74c5f` 精确CI **38784099830 SUCCESS**。首次push的6项失败、所属职责修复与全部旧失败收据保留，未绕过hooks。工程发布见 [发布收据](common-root-quality-evidence/attribution-publication.json)。前述146单元/契约、7正式E2E、6历史恢复、110+20独审及74配置范围节点仍有效，数字有重叠不合计。
+当前已实施一段共同机制：原真实paid终文经正式decoder仍逐字还原20条；新的逐claim锚点观察会将六处错引用分开检出，不允许借其他claim、context或完整selected里的事实。该观察依赖独审明确的命题→原文锚点，不是通用自然语言蕴含证明。原20条8PASS/6WARN/6FAIL及PD5/Matrix等遗漏的正式语义FAIL保持，不改旧终文、不偷换分母。
 
-**真实质量仍未过：** 中微2026半年报按实际MiMo `mimo-v2.6-flash` 配置运行，新0.9一次POST完成、96/96原文回放、same/cross-run 0额外POST。独审20条为 **8PASS/6WARN/6FAIL**，20/20引用展开与canonical保持，排除decoder错配；6条正文使用了selected输入中有、但本claim实际未引用的数字/产品/阶段。不能把原文定位绿写成事实语义绿，也不应把这些全部说成外部捏造。若干新业务被摘要遗漏；WARN不全部等于数字错误或必须逐动词拆句。见 [真实材料、费用和独审](common-root-quality-evidence/cn-h1-citation-unit3-live-acceptance.json) 和 [共因整改细则](review/summary_grounding_implementation.md)。原付费输入/终文/bundle不改、不盲目重发。
+共享引擎已实现不可变 `SummaryTaskPlan`，新纯model-view编译器保留96原文/64来源组、QA双view、共享图与本地part绑定；不补邻居、不做第二排名、原文每source span只定义一次。缺少新v4正式注册/worker接线、source-owned指代/对象/覆盖分配和真实候选质量，组件完成不能当生产完成。
 
-**对照的测试适配故障：** 旧0.8尚未POST，observer将旧原文顺序组误当新selection顺序组。纯反例RED 1FAIL/16PASS；仅测试observer沿唯一quote oracle评估每个真实旧组，原新context/native order规则和旧HTTP字节不改，30PASS/3.62秒，临时测试目录恢复。整组FAIL与旧前置失败保留，不据此宣称产品旧解析缺陷或baseline通过。
+**集中证据：** ROOT最终组件47PASS/4.30秒；先前含旧None/v1/v2/v3/QA契约集中160PASS/8.08秒；独立44PASS/2.88秒是compact前快照，最终编码仅独立静态核对，不能混写成独立重跑47。Ruff六文件/mypy三责任源PASS。真实材料呈现初版47813B，压缩后30590B，旧同范围30758B，仅少168B；这不是完整HTTP、真实token、速度或语义提升结论。[验收与失败收据](common-root-quality-evidence/source-scoped-foundation-acceptance.json)。
 
-**长招股书性能根因：** 一次60秒真实profile证实：675页文字4.292秒已读完，230页只是表格候选计划，133次已完成native找表耗时50.163秒；后段已有文字被逐页昂贵table emit拖住。layout15秒不限制find_tables。独立只读架构调查16文件保持，分 B0文字可用/有界native、B1单次prepare/finalize按需增强、B2同AUTO完成单元恢复/容量、C原样本+另一长文档真实验收；这些实现尚未完成。见 [详细接口与TDD](review/hk_ipo_parser_performance_implementation.md)。不增加全MD/PDF副本、第二队列或每页重复传整份原件。
+**实施细则：** [逐命题根因](review/summary_grounding_implementation.md)、[source-scoped具体接口/测试/接线](review/source_scoped_summary_implementation.md)。新增代码仅两纯组件与原quote oracle的观察组合；旧production v3/model/generation/factory未改，默认仍0.8。新模块仍须正式接入，不能作为闲置替代品留在目标完成声明里。
 
-**并行边界：** 用户确认三条DU4均IN_PROGRESS：[调度与工作目录](parallel/du4-2026-10-15/README.md)。ROOT不改作者新组件/测试/独立PWF；只在既有parser/共享引擎、模型、恢复与主计划施工，最终由ROOT接线。
+上一工程发布CWP `0b61bcd1` CI38788268113 SUCCESS、RF `caf74c5f` CI38784099830 SUCCESS；PWF收尾CWP `c9c2f9b4`与RF `090a6310`均已推，RF文档CI38790621941 SUCCESS。当前源码节点正常提交/推送后核精确CI，不绕hooks；[上一发布证据](common-root-quality-evidence/attribution-publication.json)保留。
 
-**预算：** 本次实际18103tokens/3345µUSD预算代理；母累计 **599590tokens/385113µUSD代理**，旧unknown7保留，上限200万tokens/$20。原件、生产配置、sentinel保持，真实独立临时湖删除。金额不是供应商账单。
+三[DU4作者包](parallel/du4-2026-10-15/README.md)仍按用户通知IN_PROGRESS，ROOT未写其新组件/测试/独立PWF。门禁不新增，旧恢复/原文SHA/身份/期间/预算职责保持在所属层；审查仍只在原A/B/C及母G大节点。
 
-**未完成范围：** 默认仍0.8；正式摘要语义共因、DU4接线、HKIPO分阶段恢复、三配置供应商新旧质量、并发2/4、默认切换、母G2/G4/G5及原三/新三研究审计循环均继续开放。
+本轮供应商0调用，母累计599590tokens/385113µUSD预算代理，旧unknown7保留，累计限200万tokens/$20；原件/生产配置/sentinel保持，测试Temp删除。长招股书B0/B1/B2、三供应商正式语义质量、并发2/4、默认切换、母G2/G4/G5及原三→新三公司审计循环继续开放，目标未完成。
 
-**Next Step：** 将真实错引/跨产品/期间/单位/QA反例固化为ROOT零付费回归并在同一模型/共享结构边界整改；随后实施不与DU4重叠的HKIPO B0/B1/B2。仅原A/B/C和母G节点集中验收，不新增小节点签收。
+**Next Step：** 用已冻结来源task/本地view注册显式v4正式协议与decoder、来源依赖/覆盖，先写旧wire/本地scope/费用恢复/E2E反例，再接现有worker/caller和RF消费。只在候选冻结后真实调用，保留原失败与独审；随后推进HKIPO分阶段有界恢复。不能把合法basis或nested task当语义PASS。
 
 ---
 

@@ -1,0 +1,416 @@
+{
+  "schema_version": "source-scoped-summary-foundation-acceptance/1",
+  "status": "PURE_COMPONENTS_ACCEPTED; PRODUCTION_V4_NOT_WIRED; REAL_SEMANTIC_QUALITY_STILL_FAIL",
+  "implemented": [
+    "reviewed per-claim source-anchor observation using original quote oracle",
+    "source-owned immutable task plan from native groups and QA views",
+    "reference-only program binding and local model presentation with one body per original fragment",
+    "lossless defaults for source role/flags/task fields and explicit QA exceptions"
+  ],
+  "root_final_components": {
+    "pass": 47,
+    "seconds": 4.3,
+    "receipt": "scoped-view-compact-green/receipt.json"
+  },
+  "legacy_plus_initial_scoped_snapshot": {
+    "pass": 160,
+    "seconds": 8.08,
+    "receipt": "source-grounding-scoped-final/receipt.json",
+    "note": "before compact-only rendering; final compact/source/QA roundtrip covered by 47 above; existing v3 runtime was never edited"
+  },
+  "independent_review": {
+    "pass": 44,
+    "seconds": 2.88,
+    "snapshot": "before compact rendering; final compact delta statically reviewed",
+    "handoff": "claim-grounding-design-20261015/implementation-review/handoff.md"
+  },
+  "root_static": "Ruff six files, mypy three source files PASS",
+  "actual_presentation_bytes": {
+    "previous_material_plus_group_lookup": 30758,
+    "initial_verbose_view": 47813,
+    "final_compact_view": 30590,
+    "scope": "material only; no full v4 HTTP/token/latency/semantic-quality improvement claim"
+  },
+  "source_fixture": {
+    "bytes": 123069,
+    "sha256": "13fcc0a584f0f5021c51282f119bfc7c7391b959914d57337b55f1eeb9e74c29",
+    "actual_decoder_preserves_paid_claims": 20,
+    "reviewed_claims_missing_their_own_support": 6
+  },
+  "source_hashes": {
+    "src/company_wiki/document_understanding/summary_tasks.py": "341a846a066647efb357b363babbfd798c2a08b43649f1e8817d3154e55a35c7",
+    "src/company_wiki/automation/narrative_model_scoped.py": "99642046643f97c4e841cb998f40eecbf988e626107e57377ca6a4fcfce1f2ff",
+    "tools/document_understanding_benchmark/closed_group_support.py": "353484b4458e44f88bffee6a442e5c4de8adf084ffcbd7f55b13c7005cf9fea8",
+    "tests/unit/test_source_summary_tasks.py": "bb3ed03d430ea9b67dcd5c726c1981176eeef5eecdc0bd21e639b6964d4c097c",
+    "tests/unit/test_narrative_claim_grounding.py": "d1db2fae5e0f91ed2f013e75e003ecf0e4f0b52192f8b915eda80d17b71d0df0",
+    "tests/unit/test_narrative_scoped_model_view.py": "e6675ae26774d57d43e53cc1cfd04c2bca3b9671447c95795afaf7c47c6ff573",
+    "tests/fixtures/narrative_claim_grounding/manifest.json": "0c5181fd64069733c473d0e5cbea8478d821e9787dae3d081e44d3b7cd0953a0",
+    "tests/fixtures/narrative_claim_grounding/cn_h1_unit3.json.gz": "13fcc0a584f0f5021c51282f119bfc7c7391b959914d57337b55f1eeb9e74c29"
+  },
+  "runtime_model_files_unchanged": [
+    "automation/narrative_model.py",
+    "automation/narrative_generation.py",
+    "automation/narrative_worker_factory.py"
+  ],
+  "supplier_calls": 0,
+  "mother_tokens": 599590,
+  "mother_micro_usd_proxy": 385113,
+  "prior_unknown7_retained": true,
+  "originals_and_config_unchanged": true,
+  "test_temp_and_sentinel_restored": true,
+  "du4_author_files_edited": false,
+  "remaining": [
+    "register finite explicit v4 renderer/decoder and cause/version dependencies",
+    "source-owned referent/dependency and summary coverage allocation using the single shared engine",
+    "formal worker/verify/public read/RF offline E2E and paid-response recovery",
+    "actual configured providers and independent semantic review, original and fresh companies",
+    "HKIPO B0/B1/B2 and real long-document holdout; concurrency/default/mother G2/G4/G5"
+  ],
+  "archive": {
+    "name": "source-scoped-foundation-receipts.zip",
+    "bytes": 80609,
+    "sha256": "c3ba8341575c8f778f000097cf44a3a4078503ffe1ac18cad3793afbff2a951b",
+    "members": [
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/final-static.json",
+        "bytes": 1005,
+        "sha256": "2b86260aa3e56aa838eaacb136e677dc9395573690a0ec1741a6666148e356d1"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/implementation-review/edge-probes.json",
+        "bytes": 655,
+        "sha256": "9ee340f392793a2a4b8f03820f493d15e29dc60a60418e955498bd3439e5c885"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/implementation-review/final-junit.xml",
+        "bytes": 7279,
+        "sha256": "7db78a268e71645c68d36c32680e276e6198b24cd5472a1b0147470a88b2d575"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/implementation-review/handoff.json",
+        "bytes": 4866,
+        "sha256": "add932f15d2a3f3ed593d8b44c5cf78a09e56bb4a74092645f711eed7bff0478"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/implementation-review/handoff.md",
+        "bytes": 9578,
+        "sha256": "fbd2de2ca632dec156925bc618a166c0e80f3df23b9e7f7a7ed56fa1933f2737"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/implementation-review/junit.xml",
+        "bytes": 4686,
+        "sha256": "2e4f72bf591a7f9261fe679b295c0c5c35a5c13a30e08f24903da402b6a0b043"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/implementation-review/label-postfix.json",
+        "bytes": 268,
+        "sha256": "7f4e76efe5a907ab1ae779a24a8a62d83cd17bbef9e38201c2061e654a30b053"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/implementation-review/source-role-probe.json",
+        "bytes": 30,
+        "sha256": "774d713623c47ac4f3c71eb1a289c5fe532f39d1809d0498e10a74da0cf77c94"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/model-view-profile.json",
+        "bytes": 1446,
+        "sha256": "c0506b846451470737d1f390a828bc3819cd64d026f8abc7897b1e7db5951750"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/review/handoff.json",
+        "bytes": 1891,
+        "sha256": "c5947c8b4ba885f559b3261a6e6fb37e94af2fb0722aefe4c311f7f6fff9b5b5"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/review/handoff.md",
+        "bytes": 21138,
+        "sha256": "d8db1eb0c81062890ffbdebf1ce573459db457f3c27210824c2b9fa17a352aca"
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/review/observations.json",
+        "bytes": 2955,
+        "sha256": "9febbc484006eabbc5634a237496890f04157723e4b21bec0af85af087de7410"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-first/junit.xml",
+        "bytes": 5475,
+        "sha256": "5097a4f73a90b92c1bd91320f097104f186de7c4797f1e9b0d340049353db01c"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-first/receipt.json",
+        "bytes": 421,
+        "sha256": "5ce2de9cd0a2e81a1ebc996d7532ef846743e0f814580c65ba7364db5f895ba8"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-first/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-first/stdout.log",
+        "bytes": 2303,
+        "sha256": "fa895ef098bdbcaf6f042fbf1847f41748136c1cc58eb97d0f56c9ffe9b7a97d"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-green/junit.xml",
+        "bytes": 5334,
+        "sha256": "b3fe8d84a692663d59d219faca99537ec3409b30f6bf6b5d5ea21e5fd82dfeee"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-green/receipt.json",
+        "bytes": 418,
+        "sha256": "d5ac11b89cadbe055eaa7950c2dea4d33b96c1b22d0eae16421486bcbdb07c99"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-green/stdout.log",
+        "bytes": 1707,
+        "sha256": "93859232b3a293f0f4aa40a9b9a215323e11ab68d7172faa73dfe5151aa95678"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-red/junit.xml",
+        "bytes": 1184,
+        "sha256": "f1cca26ba5dbee4277f478671e995bc519cde97518fe2e5490397a61b74c4538"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-red/receipt.json",
+        "bytes": 246,
+        "sha256": "506d4aa175c3ed3a29589899c298a38176448aa8243e0af7449622a51961261b"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/claim-grounding-oracle-red/stdout.log",
+        "bytes": 2457,
+        "sha256": "5d92ef573d7a11098796801941dbb997a2a20d3d668b3ec11d96242dc95099a4"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-model-view-first/junit.xml",
+        "bytes": 7128,
+        "sha256": "ff10db3b244420152ff78f11a44b770914f755efb3f0b0d1e22d2cdc5f8049da"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-model-view-first/receipt.json",
+        "bytes": 350,
+        "sha256": "c83b27d8d9fdfa405030ce6a29a5994a0452216a8671d5301d3957dfe7b8cdd2"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-model-view-first/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-model-view-first/stdout.log",
+        "bytes": 1525,
+        "sha256": "201e1f321b49e1ca3e62dfb7820a986f1e6d7e343fa20a972ec5e8d69005c7c4"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-model-view-red/junit.xml",
+        "bytes": 1045,
+        "sha256": "335c7957018b46dc45f0eb7baabb8950d9b65e59e5f67970a41d5678fc46e091"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-model-view-red/receipt.json",
+        "bytes": 249,
+        "sha256": "7a9fa08d494c238f600a2aed68f30aae0745015be928c3d7a68debcdc00dbec1"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-model-view-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-model-view-red/stdout.log",
+        "bytes": 2313,
+        "sha256": "169e9cc7b2aa366dfc37e3384377a64da5c2d27a9861f0be7c47f94b99127ef6"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-view-compact-green/junit.xml",
+        "bytes": 7794,
+        "sha256": "6b21c58dceda0a9958091c2211173addcb9513739b28ccea5a31b2d0b80b9207"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-view-compact-green/receipt.json",
+        "bytes": 351,
+        "sha256": "16cb17fde6bbc0b4d28cc4d0037734e6a03d4ba3b66e60bd2bc4f82ebdda90dc"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-view-compact-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-view-compact-green/stdout.log",
+        "bytes": 1527,
+        "sha256": "c39f0bf56180e995a65063c96b088112b839bafc397ed5de1e41f938f7f0f095"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-view-compact-red/junit.xml",
+        "bytes": 8809,
+        "sha256": "85fb9cc101796a99f27d85153ea0e0ac1cb43c6b0d4e2d25a39743c0d8cc9d40"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-view-compact-red/receipt.json",
+        "bytes": 464,
+        "sha256": "1009de703f0df8e357394e47d026c1b2ecb051fbae80361146f31eb7a43826e0"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-view-compact-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/scoped-view-compact-red/stdout.log",
+        "bytes": 5913,
+        "sha256": "578deba0a5761536d0259de61f46548c3eabd24013417376609eec3712f52788"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-grounding-legacy-boundaries/junit.xml",
+        "bytes": 25222,
+        "sha256": "03430b8b3afa4f2e64993cc4b69382ead93a54200a5370c3afe43adda54bbc0f"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-grounding-legacy-boundaries/receipt.json",
+        "bytes": 667,
+        "sha256": "868df85d0e8422a230881cb2a0ad5c40b58f7ca8f981faeb150dd830a54b3485"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-grounding-legacy-boundaries/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-grounding-legacy-boundaries/stdout.log",
+        "bytes": 2281,
+        "sha256": "b6ac6bd6a1fb783c08a50a78b9ad8070ec8e72c130a72b77a5ea04d8c2c3fcd7"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-grounding-scoped-final/junit.xml",
+        "bytes": 27815,
+        "sha256": "8e3f65a46ab3d8930be974f0c6e8eaa88b542755c33c67c33151b2813d0f9c45"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-grounding-scoped-final/receipt.json",
+        "bytes": 722,
+        "sha256": "1d318a918c6eb44e6b84c16bc9cdabe5281dbed7a3583dfff256620c8651fe42"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-grounding-scoped-final/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-grounding-scoped-final/stdout.log",
+        "bytes": 2357,
+        "sha256": "61a0171d2613462a1297b26fc1f9a5c5276fbbada6bf05a42da71e461bc0d5ea"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-first/junit.xml",
+        "bytes": 5440,
+        "sha256": "ff23dd7f7bdbde38de2810823e30d1d1f639adeac73e0b6626e5d01364c86370"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-first/receipt.json",
+        "bytes": 295,
+        "sha256": "97f5671f4523b683a5a7de48eddf0b802b01a5a26e0daa274c24a29c89229e93"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-first/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-first/stdout.log",
+        "bytes": 2421,
+        "sha256": "8900f2c7a30cdcb2f27794d27a7e84146153e6fae0f18550fe3383fb1fa0a373"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-green/junit.xml",
+        "bytes": 7256,
+        "sha256": "f973a8549fdc7d812195362aa0be4ecae518c593fbee8b31b7cf165f72e5b556"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-green/receipt.json",
+        "bytes": 469,
+        "sha256": "7391b83303c3fc347bdf9610a726a8b295ec69fc2f6108ca52e014bc32b7e530"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-green/stdout.log",
+        "bytes": 1790,
+        "sha256": "2db864d963cde1b0eb03075800da3d3c81a234cbf87f18497c17fe1109fb6692"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-red/junit.xml",
+        "bytes": 1029,
+        "sha256": "a8c71d07e3f60c440a39823cecd9560971e398f0e7b2a83f4359c2f2c68080f1"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-red/receipt.json",
+        "bytes": 242,
+        "sha256": "b5f7d8d012d7d05aef022e9da067a151a00855980f9c6de062cbb8dbcbeec450"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-summary-task-plan-red/stdout.log",
+        "bytes": 2304,
+        "sha256": "2a4752366ce39140c96837e97944945c5ad0d18fb6ef2c0bfedc2c30716c582b"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-task-label-immutability-red/junit.xml",
+        "bytes": 1329,
+        "sha256": "3e71b77e335ecf07e06604ed969195032389c3a8ea4b60d4098410b700bf4d38"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-task-label-immutability-red/receipt.json",
+        "bytes": 439,
+        "sha256": "e07fb919810fbfcd7d4154b87acdb4178f542b06635ee78dbc1dbb12cd508ae4"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-task-label-immutability-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-task-label-immutability-red/stdout.log",
+        "bytes": 2504,
+        "sha256": "c9e07c4afb4146b6a22e84d01a406cfd930efbeeea20be4c38b9bf47daa68b15"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-task-role-normalization-red/junit.xml",
+        "bytes": 1269,
+        "sha256": "212624cbd1a02427191421385b65ff55d784b0df2e57a2e136d86da5bb5c1f5d"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-task-role-normalization-red/receipt.json",
+        "bytes": 312,
+        "sha256": "6a8585da6f9ed333b603a1c4489e5b3edfd18c172f7cd13e040d7b155369dd6b"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-task-role-normalization-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/source-task-role-normalization-red/stdout.log",
+        "bytes": 2530,
+        "sha256": "f4bb0e5fd9e271bc95fab67a790719c198c42cb75ebc4bbcd6d9afd45529f081"
+      }
+    ]
+  }
+}

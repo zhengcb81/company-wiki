@@ -1,12 +1,10 @@
-## ROOT 当前执行归总 — 2026-10-15 发布与真实质量
+## ROOT 当前执行归总 — 2026-10-15 来源任务组件与正式质量
 
-CWP `0b61bcd1`、RF `caf74c5f` 已正常推送，精确CI **38788268113 / 38784099830 均SUCCESS**；CWP正常pre-push5642PASS/24SKIP，未绕hooks。工程共因节点已发布，原失败保留。
+按[唯一共享阅读PWF](../document-understanding-2026-10-13/task_plan.md)推进：已冻结真实摘要六处错引的逐claim回归，实施共享引擎的来源task plan及局部model view（原文96/组64，QA/共享图/本地basis保留），最终47组件PASS，旧兼容集中160PASS；独立44PASS为compact前快照、最终编码静态核对。新v4正式协议/生产接线、指代/对象/覆盖分配与真实质量尚未完成，原语义FAIL保持，默认0.8。材料表示30590B对旧同范围30758B，仅少168B，不冒充真实token或质量收益。
 
-真实MiMo中微半年报新0.9完成1POST、96/96定位、same/cross 0额外POST；独审20条8PASS/6WARN/6FAIL，错引的是同一selected输入内其他片段，decoder展开20/20正确。正式质量未通过，不切默认；[真实验收和下一根因计划](../document-understanding-2026-10-13/review/summary_grounding_implementation.md)。旧0.8对照前置observer顺序适配失败在测试层，RED后30纯测试PASS，仍未跑实际baseline。母账 **599590tokens/385113µUSD代理**，旧unknown7保留，200万tokens/$20上限，原件/配置/Temp保持。
+[实际组件验收/失败/独审](../document-understanding-2026-10-13/common-root-quality-evidence/source-scoped-foundation-acceptance.json)和[下一接线细则](../document-understanding-2026-10-13/review/source_scoped_summary_implementation.md)。上一CWP/RF工程发布及CI已绿，收尾c9c2f9b4/090a6310已推，RF文档CI38790621941 SUCCESS。新节点正常commit/push后核精确CI。三DU4作者仍在独立目录IN_PROGRESS，ROOT不越界施工。
 
-[唯一共享阅读PWF](../document-understanding-2026-10-13/task_plan.md)列明其余主线。三[DU4作者包](../document-understanding-2026-10-13/parallel/du4-2026-10-15/README.md)均已开工，ROOT不动作者目录。ROOT先固化并修复正式语义引用共因，再推进已实测根因的长招股书分阶段/有界native/同AUTO恢复；已接收独立架构报告和具体TDD，仅大节点验收，不建许可链、第二队列或全文缓存。默认0.8、三供应商质量/并发/母G2/G4/G5和原三→新三公司审计循环仍开放，目标未完成。
-
-**Next Step：** ROOT按共享PWF实施零付费真实失败回归和共同根因修复；外包三组件交付后统一接线、集中真实验收。
+本轮供应商0，母账599590tokens/385113µUSD代理、旧unknown7保留、200万tokens/$20上限，原件/配置/Temp保持。下一步注册v4、正式worker→verify→public read→RF离线E2E与费用恢复，再做配置中的真实供应商摘要/独审；HKIPO B0/B1/B2、并发/默认/母G2/G4/G5及原三→新三研究审计继续开放，不将此子节点当整个目标完成。不新增材料许可或小节点签收。
 
 以下为历史记录；当前状态以本节与唯一共享PWF为准。
 

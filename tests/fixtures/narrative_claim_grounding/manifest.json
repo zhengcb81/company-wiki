@@ -1,0 +1,17 @@
+{
+  "fixture": "cn_h1_unit3.json.gz",
+  "sha256": "13fcc0a584f0f5021c51282f119bfc7c7391b959914d57337b55f1eeb9e74c29",
+  "bytes": 123069,
+  "frozen_paid_response_sha256": "b392819e51ba4e6ffa30ef17b2983ed13dd2d5facce6813b0a2c213676acf152",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "reviewed_false_claims": [
+    "c1",
+    "c10",
+    "c11",
+    "c12",
+    "c13",
+    "c14"
+  ],
+  "reconstruction_prompt_and_data_byte_equivalent": true,
+  "scope": "six explicit reviewed claim-to-source anchor checks; no generic semantic entailment or model-quality pass"
+}
