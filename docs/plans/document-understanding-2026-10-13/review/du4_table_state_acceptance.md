@@ -52,3 +52,10 @@ FORM已发布master cbfe3e7f，正常推送5784PASS/24SKIP321.47s、精确CI3880
 提交前diff --check发现作者RED日志保留pytest实际尾随空格，以及参考Markdown的硬换行双空格。原始RED不修剪，按既有fixtures/evidence的原始字节角色统一将PWF results声明为-text/-diff/-eol；不批量重写旧结果、不动源码检查。参考Markdown仅把两处等价硬换行改为反斜线。首次提交准备在check处停止，尚未commit，错误和修法如实保留。
 
 提交准备重试又遇到已从index移除的新conftest路径不再匹配；修复ROOT准备脚本只暂存仍存在或index仍跟踪的清单项，保持同一允许范围与精确最终文件集合断言。这是准备工具幂等问题，无源码/测试失败，也未产生commit。
+
+
+## 组件正式发布
+
+两包已正常合并并推送master `a4cb40c9`：**5948PASS/24SKIP，515.93秒**，精确CI **38810541475 SUCCESS**，作者完整history保留。[发布收据](../common-root-quality-evidence/du4-table-state-publication.json)。
+
+后续生产接线/真实质量仍开放；以task_plan当前状态及du4_production_integration.md为准，组件发布不是默认切换。

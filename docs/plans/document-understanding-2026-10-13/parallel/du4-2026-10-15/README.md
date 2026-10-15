@@ -36,6 +36,6 @@ ROOT 接收顺序：核对文件边界及接口 → 每包集中测试 → FORM 
 ## 当前状态
 
 - FORM：用户通知完成；四commit接入ROOT合并工作区，组件327集中PASS/独立11组探针PASS，ROOT已修复预算及不连续拼接共因，已正常推送master（cbfe3e7f，精确CI 38804974095 SUCCESS）；OCR边界最终96PASS。生产native/router/真实holdout尚未验收，见[接收细则](../../review/du4_form_acceptance.md)。
-- TABLE/STATE：均完成组件交付，ROOT原测试36/90复跑；7类共因整改及最终三包251集中PASS/独审通过，已保留history合入待提交工作区，正常发布待做。生产接线和真实holdout仍NOT_RUN，见[接收细则](../../review/du4_table_state_acceptance.md)。
+- TABLE/STATE：均完成组件交付，ROOT原测试36/90复跑；7类共因整改及最终三包251集中PASS/独审通过，已保留history合入待提交工作区，已正常推master a4cb40c9，精确CI 38810541475 SUCCESS。生产接线和真实holdout仍NOT_RUN，见[接收细则](../../review/du4_table_state_acceptance.md)。
 - 主线另一个节点已实测：新摘要生产 7 E2E、历史恢复 6 E2E 均通过，0 外部供应商调用；这不是 DU4 的验收结果。
 - 当前默认仍 0.8；三家真实摘要质量及默认切换继续开放，不能因组件测试绿直接宣布完成。

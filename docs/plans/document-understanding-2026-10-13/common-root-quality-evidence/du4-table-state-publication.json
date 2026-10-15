@@ -1,0 +1,74 @@
+{
+  "schema_version": "du4-table-state-publication/1",
+  "status": "PUBLISHED_CI_SUCCESS",
+  "head": "a4cb40c9b38500fb1bc0e89df16f2c51c70527d6",
+  "push": {
+    "head": "a4cb40c9b38500fb1bc0e89df16f2c51c70527d6",
+    "exit_code": 0,
+    "seconds": 552.6598684999917,
+    "observed_at": "2026-10-15T21:31:36.775168+00:00",
+    "hooks_bypassed": false
+  },
+  "ci": {
+    "observed_at": "2026-10-15T21:36:13.267070+00:00",
+    "repo": "company-wiki",
+    "requested_head": "a4cb40c9b38500fb1bc0e89df16f2c51c70527d6",
+    "runs": [
+      {
+        "id": 38810541475,
+        "head_sha": "a4cb40c9b38500fb1bc0e89df16f2c51c70527d6",
+        "name": "CI",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38810541475"
+      }
+    ]
+  },
+  "normal_push_tests": {
+    "passed": 5948,
+    "skipped": 24,
+    "seconds": 515.93
+  },
+  "author_heads": [
+    "fa1681c0514df4b1896857ff56baa60be5729fc7",
+    "284eea600764e0dfe98270c364c9c6cd2c095478"
+  ],
+  "history_preserved": true,
+  "supplier_calls": 0,
+  "production_config_unchanged": true,
+  "production_wiring": "NOT_IMPLEMENTED",
+  "v4_runtime": "NOT_IMPLEMENTED",
+  "default_selector": "0.8.0",
+  "archive": {
+    "path": "docs/plans/document-understanding-2026-10-13/common-root-quality-evidence/du4-table-state-publication-receipts.zip",
+    "bytes": 2485,
+    "sha256": "72f1db347c6d2639fd6ff0331023858dbbc59bc0357f0554a37a96b84d36c74c",
+    "members": [
+      {
+        "name": "du4-table-state-final-push/receipt.json",
+        "bytes": 187,
+        "sha256": "0047592430c4a03dfdbba062fa6812fa2c49bd9cdb5df83c08606ca20c9fe9c5"
+      },
+      {
+        "name": "du4-table-state-final-push/stdout.log",
+        "bytes": 246,
+        "sha256": "b50ae3f20512348248f2289adf7df03863f3fe429a1f5428fb928a1921d7cea9"
+      },
+      {
+        "name": "du4-table-state-final-push/stderr.log",
+        "bytes": 89,
+        "sha256": "e698db325ad8a2408f1898d3b8341c3b47e6c4fd0228b0a7e44c1084dfdb4a6a"
+      },
+      {
+        "name": "du4-table-state-final-push/ci-final.json",
+        "bytes": 444,
+        "sha256": "6e95a2f2b0c9f65d688fd8c894e87e8bdca573b45257aca85f1d063bf6ef1743"
+      },
+      {
+        "name": "du4-table-state-acceptance/merge-commit.json",
+        "bytes": 4891,
+        "sha256": "1e7cbbe57d8ca0c8e53d4ffdfb23c3dba4f1d61589fa7087edf8da736db96551"
+      }
+    ]
+  }
+}

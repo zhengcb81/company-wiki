@@ -1,12 +1,12 @@
 ## ROOT当前状态 — 2026-10-15 DU4三包组件集中接收
 
-FORM已发布master cbfe3e7f，正常推送5784PASS/24SKIP321.47s、精确CI38804974095 SUCCESS；文档收尾de6b4660已正常推送148PASS/26.54s，docs-only无workflow。TABLE/STATE用户均已交付，作者head fa1681c0/284eea60，36/90原测试ROOT复跑通过。两分支已合入ROOT待提交工作区，保留作者完整历史；独审发现的7类共因经集中RED/共同责任修复，最终三包+Git字节 **251PASS/6.42s**，独立纯探针复核通过，Ruff/mypy8源PASS。仍待正常提交/推送和精确CI，不能先称两包已发布。
+FORM已发布master cbfe3e7f，正常推送5784PASS/24SKIP321.47s、精确CI38804974095 SUCCESS；文档收尾de6b4660已正常推送148PASS/26.54s，docs-only无workflow。TABLE/STATE用户均已交付，作者head fa1681c0/284eea60，36/90原测试ROOT复跑通过。两分支已正式合入master并推送，保留作者完整历史；独审发现的7类共因经集中RED/共同责任修复，最终三包+Git字节 **251PASS/6.42s**，独立纯探针复核通过，Ruff/mypy8源PASS。两包已正常合并并推送master `a4cb40c9`：**5948PASS/24SKIP，515.93秒**，精确CI **38810541475 SUCCESS**，作者完整history保留。[发布收据](common-root-quality-evidence/du4-table-state-publication.json)。
 
 修复包括真实ref作用域与表头可用性、明确起止与同标签冲突、单位维度保留、稀疏原生列/一次label缓存；STATE限定词/条件/假设、主句与供应商从属描述的主体隔离、控制动词对象及原文偏移，原relative反例中取得类助动词也不再被当成对象。所有变量长工作先扣原WorkBudget，无第二预算或重复身份流程。23初始RED、后续4/3/6及aux1RED与旧失败均保留；foreign row仅剔除并partial为原绑定定义允许行为，不为此新增整表阻断。STATE真实fixture恢复原manifest准确字节，不改gold；作者目录不写。
 
 细则见[两包接收](review/du4_table_state_acceptance.md)，证据见[紧凑验收](common-root-quality-evidence/du4-table-state-acceptance.json)。**组件通过不等于生产接线或语义完成**：默认0.8、新0.9仍v3，新v4未实现；六错引/重要遗漏、真实holdout、HKIPO性能及母G2/G4/G5/公司循环继续开放。原件/配置/sentinel保持、测试Temp删除，0供应商，累计599590tokens/385113µUSD预算代理（旧unknown7；限2M/$20）不变。
 
-**Next Step：** 正常发布两包组件；三包均到齐后先统一source-owned生产接线（FORM native/carrier→原cap/router、STATE唯一经营谓词、TABLE原生槽/解释依赖），再完成v4正式边界/源任务覆盖/费用恢复和真实摘要验收。先修来源作用域可避免新协议绑定旧错误来源，不重复付费探路。只在原A/B/C和母G大节点集中验收，未完成不切默认。
+**Next Step：** 按[生产接线细则](review/du4_production_integration.md)统一source-owned生产接线（FORM native/carrier→原cap/router、STATE唯一经营谓词、TABLE原生槽/解释依赖），再完成v4正式边界/源任务覆盖/费用恢复和真实摘要验收。先修来源作用域可避免新协议绑定旧错误来源，不重复付费探路。只在原A/B/C和母G大节点集中验收，未完成不切默认。
 
 ---
 

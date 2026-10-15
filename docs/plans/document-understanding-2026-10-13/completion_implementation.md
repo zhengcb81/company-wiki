@@ -307,3 +307,10 @@ FORM源分支已并入ROOT合并工作区，组件/根因整改详见[接收细�
 ## 2026-10-15 DU4三包组件合流
 
 TABLE/STATE组件根因修复最终251集中PASS（含FORM/Git）、独审通过，正常发布待执行；生产接线、v4正式摘要和旧付费恢复/真实质量未完成。统一按[当前计划](task_plan.md)的source-owned接线顺序推进，不新增worker/费用库或审批链。
+
+
+## 组件正式发布
+
+两包已正常合并并推送master `a4cb40c9`：**5948PASS/24SKIP，515.93秒**，精确CI **38810541475 SUCCESS**，作者完整history保留。[发布收据](common-root-quality-evidence/du4-table-state-publication.json)。
+
+后续生产接线/真实质量仍开放；以task_plan当前状态及du4_production_integration.md为准，组件发布不是默认切换。

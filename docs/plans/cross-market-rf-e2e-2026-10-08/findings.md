@@ -1,6 +1,6 @@
 ## ROOT当前归总 — 2026-10-15 DU4三包组件与剩余生产接线
 
-FORM已正常发布cbfe3e7f且精确CI38804974095 SUCCESS，文档收尾de6b4660已推。TABLE/STATE作者36/90复跑后，ROOT保留history合入待提交区；独审7类来源/语义/预算共因先RED再修，三包+Git最终251PASS/6.42s、独审纯探针通过、Ruff/mypy8源PASS，正常并线发布待做。具体唯一执行入口与原始失败/证据见[共享PWF](../document-understanding-2026-10-13/task_plan.md)。
+FORM已正常发布cbfe3e7f且精确CI38804974095 SUCCESS，文档收尾de6b4660已推。TABLE/STATE作者36/90复跑后，ROOT保留history正式合入并推送master；独审7类来源/语义/预算共因先RED再修，三包+Git最终251PASS/6.42s、独审纯探针通过、Ruff/mypy8源PASS，两包已正常合并并推送master `a4cb40c9`：**5948PASS/24SKIP，515.93秒**，精确CI **38810541475 SUCCESS**，作者完整history保留。[发布收据](../document-understanding-2026-10-13/common-root-quality-evidence/du4-table-state-publication.json)。具体唯一执行入口与原始失败/证据见[共享PWF](../document-understanding-2026-10-13/task_plan.md)。
 
 三包组件不代表生产已接线。接下来先native源信号/唯一router与经营谓词/表格依赖统一接线，再新v4正式摘要/覆盖/恢复/真实质量，避免协议使用旧错误来源。默认0.8、新0.9v3、六错引/重要遗漏、长招股书性能、母G2/G4/G5及公司循环仍开放。原件/配置/作者目录不改、测试Temp恢复；0供应商，累计599590tokens/385113µUSD代理/旧unknown7/2M tokens与$20限额不变。
 
