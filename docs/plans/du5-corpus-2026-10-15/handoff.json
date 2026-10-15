@@ -3,7 +3,9 @@
   "card_id": "DU5-CORPUS",
   "base_commit": "8c027011037dc8c8659235fb65f529028dcd15ca",
   "branch": "codex/du5-corpus-20261015",
-  "implementation_commits": [],
+  "implementation_commits": [
+    "e347c2f2"
+  ],
   "changed_paths": [
     "tools/document_understanding_benchmark/gold/du5-*.json (9 new frozen gold records)",
     "tools/document_understanding_benchmark/du5_manifest.json (new: freeze record)",
