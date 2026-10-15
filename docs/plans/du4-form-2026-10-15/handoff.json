@@ -1,0 +1,96 @@
+{
+  "schema_version": "du4-handoff/1",
+  "lane": "DU4-FORM",
+  "base_commit": "8206e78d4087531b1d7ed57c45a73c942cc702e3",
+  "branch": "codex/du4-form-20261015",
+  "commits": [],
+  "changed_paths": [
+    "src/company_wiki/document_understanding/source_signals/__init__.py",
+    "src/company_wiki/document_understanding/source_signals/contract.py",
+    "tests/unit/du4_source_signals/conftest.py",
+    "tests/unit/du4_source_signals/builders.py",
+    "tests/unit/du4_source_signals/test_form_carriers.py",
+    "tests/unit/du4_source_signals/test_turn_signals.py",
+    "tests/unit/du4_source_signals/test_contract_budget.py",
+    "tests/unit/du4_source_signals/test_real_observation_fixtures.py",
+    "tests/unit/du4_source_signals/test_carrier_flow_assembly.py",
+    "docs/plans/du4-form-2026-10-15/"
+  ],
+  "interface_version": "du4-interfaces/1",
+  "entrypoint": "company_wiki.document_understanding.source_signals.collect_source_signals",
+  "tests": [
+    {
+      "command": "PYTHONPATH=src python -B -m pytest -q tests/unit/du4_source_signals",
+      "exit_code": 0,
+      "passed": 68,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/du4-form-2026-10-15/results/green-b-concentrated-tests.log"
+    },
+    {
+      "command": "python -m ruff check src/company_wiki/document_understanding/source_signals tests/unit/du4_source_signals",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/du4-form-2026-10-15/results/green-c-ruff.log"
+    },
+    {
+      "command": "MYPYPATH=tests/unit/du4_source_signals python -m mypy src/company_wiki/document_understanding/source_signals tests/unit/du4_source_signals",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/du4-form-2026-10-15/results/green-c-mypy.log"
+    }
+  ],
+  "fixtures": [
+    {
+      "path": "docs/plans/du4-form-2026-10-15/fixtures/us-10q-observation.json",
+      "sha256": "89568476732326dd4c7dd2ed146800547f8c3ea480ab4c50bf11dd95a8e50cbf",
+      "kind": "retained_real_observation",
+      "limits": [
+        "partial saved observation, not full original or complete native corpus",
+        "read-only test input; original never reopened in this lane",
+        "sha256 re-verified by test_saved_observations_match_manifest_hashes"
+      ]
+    },
+    {
+      "path": "docs/plans/du4-form-2026-10-15/fixtures/adapter-identity-observation.json",
+      "sha256": "2c0e7e81acd5635918a87fa4fd7244c8a24cfb4f3b084dffce81c54faefb747e",
+      "kind": "retained_real_observation",
+      "limits": [
+        "partial saved observation, not full original or complete native corpus",
+        "read-only test input; original never reopened in this lane",
+        "sha256 re-verified by test_saved_observations_match_manifest_hashes"
+      ]
+    }
+  ],
+  "red_receipt": "docs/plans/du4-form-2026-10-15/results/red-a-semantic-counterexamples.log",
+  "known_limits": [
+    "value concatenation is allowed only across spans of one native unit (one DOM owner); multi-owner split tokens are refused with SPLIT_OWNER_VALUE",
+    "turn body_refs are whole non-speaker carrier units; an inline single-unit turn (speaker and body in one unit) is admitted only through a source-owned turn_id and then reports empty body_refs",
+    "declared conflict detection is lexical on printed form literals only; non-literal declared kinds such as quarterly_report are never compared to literals and never become observed facts",
+    "hidden/excluded/external DEI is never certified visible; a replayable hidden-byte contract is NOT_EVALUATED",
+    "status semantics: complete = everything processed cleanly; partial = budget exhaustion, unresolved carriers or observed conflicts; unavailable = carriers present but nothing obtainable",
+    "UNRECOGNIZED_FORM_LITERAL is a limited lexical vocabulary check for diagnostics, not a family or route classification",
+    "observed_counts is advisory metering (carrier counts, evidence/reserved chars) for ROOT budget reservation inside the unchanged 200-unit/64000-char cap"
+  ],
+  "not_run": [
+    "production normalize -> structure -> adapter -> router -> selector E2E (ROOT owns wiring and acceptance)",
+    "fresh bounded replay of the VRSK owner original (ROOT owns; this lane never reopens originals)",
+    "real transcript and real 8-K attachment holdouts (no genuine specimens in this lane): NOT_EVALUATED",
+    "unseen SEC form variants beyond the printed-literal vocabulary: observed and kept with diagnostic, coverage NOT_EVALUATED",
+    "multilingual/split covers and hidden-only DEI: NOT_EVALUATED"
+  ],
+  "root_integration_steps": [
+    "1. In the existing single HTML walk, observe carriers during the same traversal (kind/unit_ids/value_refs/parent_id/attributes with only native concept/visibility/speaker/turn_id/turn_role); no second parse and no document-family decision in normalization.",
+    "2. Carry the observed carriers through the surviving native structure (parent/turn association) and the existing adapter into du4-source-signal-observation/1; declared source metadata stays a separate input.",
+    "3. Call collect_source_signals with the existing route WorkBudget instance (no second budget); reserve reserved_unit_ids first inside the unchanged 200-unit/64000-char probe cap, then fill with the existing deterministic spread.",
+    "4. Consume source_form_evidence/turn_evidence as scoped facts inside the single existing router/arbitration; the form reason must cite the actual carrier_unit_ids; conflicts remain diagnostics; parent/attachment scope must survive child_ranges arbitration.",
+    "5. Strip any transient reading-only carrier metadata before durable spans/ID/wire (follow the existing to_evidence_span transient-layout pattern); keep old durable span IDs and wire stable.",
+    "6. ROOT runs the real E2E, the VRSK replay and the transcript/8-K holdouts; missing real specimens stay NOT_EVALUATED rather than synthetic-green."
+  ],
+  "production_writes": 0,
+  "supplier_calls": 0
+}

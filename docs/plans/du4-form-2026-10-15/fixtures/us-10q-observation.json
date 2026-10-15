@@ -1,0 +1,189 @@
+{
+  "sample_id": "us-10q",
+  "source": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\VRSK\\filings\\fil_0001437749-25-014907\\vrsk20250331_10q.htm",
+  "source_before": {
+    "sha256": "5afe631934fce5d3e23b6aa393ec599cd89b290cde1fc1667ebe22025d2479eb",
+    "size": 1387702,
+    "mtime_ns": 1781969697399962700
+  },
+  "parse_count": 1,
+  "formal_selection_count": 1,
+  "model_calls": 0,
+  "supplier_calls": 0,
+  "source_writes": 0,
+  "status": "COMPLETE",
+  "parse_seconds": 1.5132278999990376,
+  "native_units": 2274,
+  "page_count": 0,
+  "native_complete": true,
+  "selection_seconds": 2.5282102999990457,
+  "route": {
+    "schema_version": "du-route/1",
+    "profile_id": "earnings_call",
+    "profile_version": "earnings_call/v2+7d7d4645f05bec9f",
+    "regime": "unknown",
+    "family": "earnings_call",
+    "subtype": "transcript",
+    "form_type": "unknown",
+    "confidence": "low",
+    "reasons": [
+      {
+        "code": "SPEAKER_TURNS",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:b07d38e4b17b78b87bb56bb0a096d4135931412a1b9b1c04e3f6d82d0ac4e01a",
+          "urn:company-wiki:narrative-unit:sha256:1bd8b04ea028a659cb3dbe2bb597121a76b45499cfd04ba982717d9c7e14a662"
+        ],
+        "detail": "发言轮次与角色"
+      },
+      {
+        "code": "ROUTE_PROBE_LIMIT",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9e9c63d1d50877e1f0f908208926479b0a91899a4d49f2b8081f9c4beec3b185"
+        ],
+        "detail": "探测到预算上限：已探测 200/2274 单元、6781 字符"
+      },
+      {
+        "code": "DECLARED_KIND_CONFLICT",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9e9c63d1d50877e1f0f908208926479b0a91899a4d49f2b8081f9c4beec3b185"
+        ],
+        "detail": "declared_kind=quarterly_report 暗示 quarterly，正文证据不同"
+      }
+    ],
+    "alternatives": [
+      {
+        "profile_id": "cn_quarterly",
+        "reason": "declared_kind=quarterly_report 指向 quarterly"
+      },
+      {
+        "profile_id": "sec_10q",
+        "reason": "declared_kind=quarterly_report 指向 quarterly"
+      }
+    ],
+    "child_routes": [],
+    "disposition_hint": "read",
+    "modifiers": {
+      "extent": "unknown",
+      "revision": "unknown"
+    }
+  },
+  "observation_metadata": {
+    "title": "vrsk20250331_10q",
+    "declared_kind": "quarterly_report",
+    "mime_type": "text/html",
+    "language": "und",
+    "layout_feature_version": "1.2.0"
+  },
+  "selected_spans": 26,
+  "selected_chars": 14687,
+  "candidate_count": 26,
+  "final_status": "selected",
+  "graph_complete": true,
+  "withheld_reasons": {},
+  "diagnostics": [],
+  "source_integrity_failures": [],
+  "reason_units": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b07d38e4b17b78b87bb56bb0a096d4135931412a1b9b1c04e3f6d82d0ac4e01a",
+      "kind": "html_table_cell",
+      "role": "company_filing",
+      "locator": "loc:v1/table:13/row:2/column:0",
+      "text": "Revenues:",
+      "text_length": 9,
+      "text_sha": "cb400b6c8acdad473a2fdef0c6fa72b05a6b15b49cb6987a0052fdc4194d7e86",
+      "metadata": {
+        "dom_path": "0.1.71.6.0.0.2.0",
+        "table_index": 13,
+        "row_index": 2,
+        "column_index": 0
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:1bd8b04ea028a659cb3dbe2bb597121a76b45499cfd04ba982717d9c7e14a662",
+      "kind": "html_table_cell",
+      "role": "company_filing",
+      "locator": "loc:v1/table:34/row:5/column:0",
+      "text": "Revenues:",
+      "text_length": 9,
+      "text_sha": "cb400b6c8acdad473a2fdef0c6fa72b05a6b15b49cb6987a0052fdc4194d7e86",
+      "metadata": {
+        "dom_path": "0.1.154.0.5.0",
+        "table_index": 34,
+        "row_index": 5,
+        "column_index": 0
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:9e9c63d1d50877e1f0f908208926479b0a91899a4d49f2b8081f9c4beec3b185",
+      "kind": "html_paragraph",
+      "role": "company_filing",
+      "locator": "loc:v1/paragraph:0",
+      "text": "Table of Contents",
+      "text_length": 17,
+      "text_sha": "a9360e0212a4d173581c91da68494d022ee55871188be00acf863d2ed0cf7a6a",
+      "metadata": {
+        "dom_path": "0.1.2.0"
+      }
+    }
+  ],
+  "actual_form_units": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:73ba6668bb9b633c2472632e7283ecadde0ca24c5727909b6e4275a0f7637d3a",
+      "kind": "html_paragraph",
+      "role": "company_filing",
+      "locator": "loc:v1/paragraph:4",
+      "text": "FORM 10-Q",
+      "text_length": 9,
+      "text_sha": "98e380081f26f7930ad8db42615ac384e2f49bb0c0872c49122827ea7c85ca56",
+      "metadata": {
+        "dom_path": "0.1.2.8"
+      }
+    }
+  ],
+  "actual_raw_dei": {
+    "byte_offset_name": 104115,
+    "excerpt": "nter;\"><b>FORM <ix:nonNumeric name=\"dei:DocumentType\" contextRef=\"d_2025-01-01_2025-03-31\" id=\"ixv-10477\">10-Q</ix:nonNumeric></b></p>\n<p style=\"font-family:'Times New Roman', Times, serif;f"
+  },
+  "route_same_units_actual_dei_metadata_comparison": {
+    "schema_version": "du-route/1",
+    "profile_id": "sec_10q",
+    "profile_version": "sec_10q/v1+1bf92c401dc4",
+    "regime": "sec",
+    "family": "quarterly",
+    "subtype": "10-q",
+    "form_type": "10-Q",
+    "confidence": "low",
+    "reasons": [
+      {
+        "code": "COVER_HEADING",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9e9c63d1d50877e1f0f908208926479b0a91899a4d49f2b8081f9c4beec3b185",
+          "urn:company-wiki:narrative-unit:sha256:613473dc38bc2e0f0a082798b91523f3a94b0489142c429b11f9e83626e92847",
+          "urn:company-wiki:narrative-unit:sha256:a339886767f49755a6e36a23a17cd94ff8a4ea78d940cee81cced246e25a7657"
+        ],
+        "detail": "SEC 表单: 10-Q"
+      },
+      {
+        "code": "ROUTE_PROBE_LIMIT",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9e9c63d1d50877e1f0f908208926479b0a91899a4d49f2b8081f9c4beec3b185"
+        ],
+        "detail": "探测到预算上限：已探测 200/2274 单元、5931 字符"
+      }
+    ],
+    "alternatives": [],
+    "child_routes": [],
+    "disposition_hint": "read",
+    "modifiers": {
+      "extent": "full",
+      "revision": "unknown"
+    }
+  },
+  "comparison_scope": "Pure router comparison only; metadata from original DEI, not manifest or filename. No extra parse/formal select.",
+  "source_after": {
+    "sha256": "5afe631934fce5d3e23b6aa393ec599cd89b290cde1fc1667ebe22025d2479eb",
+    "size": 1387702,
+    "mtime_ns": 1781969697399962700
+  },
+  "source_guard_pass": true
+}

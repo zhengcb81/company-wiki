@@ -1,0 +1,24 @@
+[
+  {
+    "path": "us-10q-observation.json",
+    "sha256": "89568476732326dd4c7dd2ed146800547f8c3ea480ab4c50bf11dd95a8e50cbf",
+    "bytes": 6725,
+    "kind": "retained_real_observation",
+    "original_receipt": "type-matrix-root/root-cause-followup/us-10q.json",
+    "limits": [
+      "partial saved observation, not full original or complete native corpus",
+      "new component and production integration NOT_RUN"
+    ]
+  },
+  {
+    "path": "adapter-identity-observation.json",
+    "sha256": "2c0e7e81acd5635918a87fa4fd7244c8a24cfb4f3b084dffce81c54faefb747e",
+    "bytes": 2157,
+    "kind": "retained_real_observation",
+    "original_receipt": "model-projection-root/output-language/integration-followup/type-routing-design/adapter-identity-observation.json",
+    "limits": [
+      "partial saved observation, not full original or complete native corpus",
+      "new component and production integration NOT_RUN"
+    ]
+  }
+]

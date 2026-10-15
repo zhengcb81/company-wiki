@@ -1,0 +1,60 @@
+{
+  "scope": "single saved shape with native identity recomputation, not a reparsed source",
+  "canonical_unit_id_matches_saved": true,
+  "saved_unit_id": "urn:company-wiki:narrative-unit:sha256:b07d38e4b17b78b87bb56bb0a096d4135931412a1b9b1c04e3f6d82d0ac4e01a",
+  "constructed_unit_id": "urn:company-wiki:narrative-unit:sha256:b07d38e4b17b78b87bb56bb0a096d4135931412a1b9b1c04e3f6d82d0ac4e01a",
+  "native_kind": "html_table_cell",
+  "wire": {
+    "schema_version": "du-input/1",
+    "source_ref": {
+      "source_id": "urn:company-wiki:source:sha256:5afe631934fce5d3e23b6aa393ec599cd89b290cde1fc1667ebe22025d2479eb",
+      "source_sha256": "5afe631934fce5d3e23b6aa393ec599cd89b290cde1fc1667ebe22025d2479eb"
+    },
+    "metadata": {
+      "title": "",
+      "declared_kind": "unknown",
+      "mime_type": "text/html",
+      "language": "und"
+    },
+    "coverage": {
+      "native_scan": "complete",
+      "opaque_pages": [],
+      "deferred_pages": []
+    },
+    "units": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:b07d38e4b17b78b87bb56bb0a096d4135931412a1b9b1c04e3f6d82d0ac4e01a",
+        "ordinal": 0,
+        "locator": "cwp-html-dom/1|n=0.1.71.6.0.0.2.0",
+        "page": null,
+        "text": "Revenues:",
+        "kind": "table_row",
+        "language": "und",
+        "role": "company_filing",
+        "layout": {},
+        "hints": {
+          "source_id": "urn:company-wiki:source:sha256:5afe631934fce5d3e23b6aa393ec599cd89b290cde1fc1667ebe22025d2479eb",
+          "table_id": "html:t13",
+          "row": 2,
+          "column": 0,
+          "dom_path": "0.1.71.6.0.0.2.0"
+        }
+      }
+    ]
+  },
+  "router_unit": {
+    "unit_id": "urn:company-wiki:narrative-unit:sha256:b07d38e4b17b78b87bb56bb0a096d4135931412a1b9b1c04e3f6d82d0ac4e01a",
+    "ordinal": 0,
+    "locator": "cwp-html-dom/1|n=0.1.71.6.0.0.2.0",
+    "page": null,
+    "text": "Revenues:",
+    "kind": "table_row",
+    "language": "und",
+    "role": "company_filing",
+    "heading_level": null,
+    "text_clipped": false
+  },
+  "normalizer_calls": 0,
+  "original_parses": 0,
+  "supplier_calls": 0
+}
