@@ -1,22 +1,14 @@
-## ROOT 已接收工程节点／剩余共因 — 2026-10-14
+## ROOT 当前状态与 DU4 并行分工 — 2026-10-15
 
-三DU3全部实收并已发布至84abc55e，精确CI38638459783 SUCCESS。最新工程5a8e895e正常pre-push 5499PASS/24SKIP(410.56s)，精确[CI38648265837](https://github.com/zhengcb81/company-wiki/actions/runs/38648265837) SUCCESS。后续共同根因工程节点也已集中验收、SOURCE STOP，已正常提交/推送37b1a9c4＋5a8e895e：212Unit PASS(9.32s)、正式共享生产7E2E PASS(112.57s)、真实None/v1恢复4E2E PASS(133.42s)、15源mypy/全改动Ruff/依赖声明匹配。旧None/v1请求字节与原Ref保持，raw新代按真实job prompt冻结，same/cross数据库复用0额外POST，不重复费用；实际parser责任决定源准入缓存，partial可靠片段不再整份误拒；失败摘要输出额度同lease事务结清0，known/unknown费用保留。
+当前已发布 master/origin 为 8206e78d；本地新引用归属/历史恢复工程尚未提交发布，不冒充当前远端 CI 已验。已完成集中工程验证：146 单元/契约 PASS（17.83s），正式生产 7 E2E PASS（85.63s），历史 None/v1/v2 恢复 6 E2E PASS（135.47s）；均 0 外部供应商调用，测试临时目录删除，配置/sentinel 保持。RF 新 context/2 与 claim context 引用的窄升级 145 PASS；安装副本仅定点同步一个契约脚本。全跨仓新版本联调及正常发布仍待 ROOT 收尾。
 
-实际正文语言观察已接入v2，只比较各claim与自己引用的原文；强不同语言保留付费失败原因/终文SHA，不确定或组件缺失只是现needs_review诊断，无人工放行链。fingerprint绑定真实wrapper/decoder/observer代码与检测权重/版本。生产E2E抓到库的相对MODEL_FILE错按CWD查找，已按MODEL_DIR实际加载规则修正，真实权重4,586,720B/available，82相关PASS；历史absolute fake覆盖不足与4FAIL保持。沙箱loopback TCP10013与host0的对照保留，正常host7项绿；不修断言规避环境失败。
+真实 HK 原件零付费重放 96/96，语言端口和逐 claim 语言聚合已修；原 source table 同时证实右列新年数据未被当前选择完整保留。旧付费失败收据不覆盖，工程测试不能代替摘要数字/经营质量通过。默认仍 0.8，三供应商正式质量、默认切换和母 G2/G4/G5 继续开放。预算未新增消耗：母 581487 tokens / 381768 µUSD 代理（含旧 unknown），累计上限 $20 / 200万 tokens。
 
-新FF→CWP→RF离线CLI PASS：2正常localPOST＋1故意无效摘要，0供应商；完整body/context/sourceRef回开、旧Ref在新LATEST后读取、same/cross0POST和失败0输出额度且usage不退均实测。配置、原件、sentinel和临时测试目录保持/恢复。旧恢复集中节点的440文件在当时窗口SHA/mtime不漂移；相对资源补丁改变新validator因果，随后最新生产/单元节点绿，旧None/v1格式不变。不用旧版本快照冒充新权重节点。
+新三份可立即开工的独立施工包见 [DU4 总计划](parallel/du4-2026-10-15/README.md) 与 [固定接口](parallel/du4-2026-10-15/INTERFACES.md)：TABLE 数字列/期间绑定、STATE 经营状态关系、FORM 原生表单/轮次信号。三个稀疏 worktree 已备好，源码/测试/作者 PWF 写入范围彼此不重叠；不复制原件或资料库。三包仅 A/RED、B/集中组件验证、C/交付三个大节点；没有小步骤人工签收。参考旧设计里宽泛的直接接线分工由本次卡的边界取代。ROOT 独占既有共享源码、真实接线/E2E/并线发布，作者可独立开始，不等待主线。
 
-真实三家已各1POST，均保持同一5a源码与实际配置：MiMo/CN完整JSON但GROUP_INCOMPLETE；DeepSeek/HK摘要成功后LOCATOR_REPLAY_FAILED；MiniMax/US终文多闭括号FINAL_JSON且把英文译成中文。三者旧0.8付费基线均因新路径失败而NOT_RUN，未盲重发/修JSON。原件/配置/sentinel不变、Temp全部清理；本轮46858tokens/17381µUSD，母581487tokens/381768µUSD含旧FX/unknown7，仍$20/200万tokens。详情：[实际三家冻结收据](common-root-quality-evidence/source-owned-v2-live-round1.json)。
+Next Step：ROOT 收尾新引用归属工程的跨仓联调/发布；外包三线独立实施其纯组件。接收后 ROOT 按同一共享引擎接线，做真实原件与其他公司 holdout、正式摘要及恢复的大节点验收。另记录 narrative CLI 全局配置误要求未使用 search/wiki 配置的责任范围问题，待主线单独修复，不把它描述成缺 LLM 凭证。
 
-独审确认不能只修重复枚举：CN存在产品指代引用缺口和混合actual/planned；US混淆eN/gN独立编号及错组引用，直接展开g不能证明蕴含；HK后置失败丢了精确cause/typed snapshot，候选表格期间/双语引用还需认真复核。HK旧packet保持NOT_RETAINED；测试harness已RED1FAIL/13PASS→14PASS补齐“已付费summary成功、verify失败”的select+summary+实际generation留证，0新付费。
-
-Next Step：先实现单一citation-unit端口的新版本与PDF语言重放端口（各自RED、源码分工不重叠，统一SOURCE STOP后集中集成）；用已保存终文/真实原件做零重付费定位复现及恢复。保None/v1和已发/2格式与旧Ref，0.9新run才选新版本；模型只选一个含完整源上下文的引用单元，程序统一编译canonical spans。实际语言/主体/阶段/数字仍审，不将合法ID当语义成立。随后按配置重新真实验收，继续§7.6类型/经营状态/IPO共因。默认仍0.8。
-
-三份独审和逐claim证据已冻结：[审查/留证收据](common-root-quality-evidence/source-owned-v2-live-reviews.json)、[可复查紧凑资料](common-root-quality-evidence/source-owned-v2-live-reviews.zip)。ROOT新版本runtime已先RED6FAIL/1PASS；生产实现尚未开始，此为明确施工基线，不能签绿。
-
-正常pre-push对37b1a9c4发现3个既有cache-precheck失败（5492PASS/24SKIP，410.83s），未推远端。根因是无model work的缓存资料被强行读取prompt；按实际summarize jobs收窄同一绑定器，保留真实model job缺prompt拒绝和旧无generation默认。原3断言不变，新RED5FAIL/32PASS后118相关PASS(34.02s)，混合复用10PASS；修复已随5a8e895e正常补交/重推，全量检查和精确远端CI均绿，未跳hooks。详见[职责范围收尾](common-root-quality-evidence/prompt-owner-scope-recovery.json)。
-
-发布证据：[精确CI与正常推送收据](common-root-quality-evidence/source-owned-v2-publication.json)。只读FORM/发言人路由及IR经营状态设计已纳入[同一紧凑归档](common-root-quality-evidence/source-owned-v2-publication.zip)，仍待真实RED和实施，不冒充已修复。
+以下为历史冻结记录；若与本节状态不同，以本节为准。
 
 ## ROOT 当前接收与真实质量整改 — 2026-10-14
 
@@ -66,7 +58,7 @@ RF main/origin main 已到 aed581ac（源512e85bb精确CI38563752875 success）�
 
 ## Next Step
 
-先关闭 CLI JSON stdout 与模型语义投影/引用和阶段覆盖共同根因；并修真实泛化的语言与业务关系准入。集中测试、正常提交推送后，沿同一账本继续配置供应商的真实同资料摘要和独立复审；没有关键漏读再切默认。A in_progress，B工程能力已通过但本次效率/恢复整改 in_progress，C in_progress 未达质量。真实供应商失败、旧金标、缺真实类型均保留；不增加人工签收/小节点门禁。
+ROOT 先收尾当前引用归属/恢复节点的跨仓联调与发布；三个 DU4 作者按各自独立卡开工。接收后执行 [DU4 总计划](parallel/du4-2026-10-15/README.md) 的生产接线及真实 holdout，不改默认或跳过质量验收。
 
 ## ROOT生产接线节点与真实漏读 — 2026-10-14
 

@@ -1,0 +1,82 @@
+[
+  {
+    "lane": "table",
+    "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-du4-table",
+    "branch": "codex/du4-table-20261015",
+    "base": "8206e78d4087531b1d7ed57c45a73c942cc702e3",
+    "entrypoint": "C:\\Users\\郑曾波\\Projects\\company-wiki-du4-table\\docs\\plans\\du4-table-2026-10-15\\task_plan.md",
+    "files": 1479,
+    "logical_bytes": 20763031,
+    "fixtures": [
+      {
+        "path": "hk-table-observation.json.gz",
+        "sha256": "6f3ce02a485572debf61277b27adf428601eeeb3507e8b63439e1ec8c1e25571",
+        "bytes": 13157,
+        "kind": "retained_real_observation",
+        "original_receipt": "recall-root/live-summary-review/partial-source-tdd/hk-offline-resume-20261014/table-observation.json.gz",
+        "limits": [
+          "partial saved observation, not full original or complete native corpus",
+          "new component and production integration NOT_RUN"
+        ]
+      }
+    ],
+    "git_common_dir": "C:/Users/郑曾波/Projects/company-wiki/.git"
+  },
+  {
+    "lane": "state",
+    "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-du4-state",
+    "branch": "codex/du4-state-20261015",
+    "base": "8206e78d4087531b1d7ed57c45a73c942cc702e3",
+    "entrypoint": "C:\\Users\\郑曾波\\Projects\\company-wiki-du4-state\\docs\\plans\\du4-state-2026-10-15\\task_plan.md",
+    "files": 1479,
+    "logical_bytes": 20904246,
+    "fixtures": [
+      {
+        "path": "cn-ir-observation.json",
+        "sha256": "f70cc6f4017bea976ea843acfc4061e96cf718e9abf25977791d62b5bfba086a",
+        "bytes": 153356,
+        "kind": "retained_real_observation",
+        "original_receipt": "type-matrix-root/root-cause-followup/cn-ir.json",
+        "limits": [
+          "partial saved observation, not full original or complete native corpus",
+          "new component and production integration NOT_RUN"
+        ]
+      }
+    ],
+    "git_common_dir": "C:/Users/郑曾波/Projects/company-wiki/.git"
+  },
+  {
+    "lane": "form",
+    "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-du4-form",
+    "branch": "codex/du4-form-20261015",
+    "base": "8206e78d4087531b1d7ed57c45a73c942cc702e3",
+    "entrypoint": "C:\\Users\\郑曾波\\Projects\\company-wiki-du4-form\\docs\\plans\\du4-form-2026-10-15\\task_plan.md",
+    "files": 1480,
+    "logical_bytes": 20759575,
+    "fixtures": [
+      {
+        "path": "us-10q-observation.json",
+        "sha256": "89568476732326dd4c7dd2ed146800547f8c3ea480ab4c50bf11dd95a8e50cbf",
+        "bytes": 6725,
+        "kind": "retained_real_observation",
+        "original_receipt": "type-matrix-root/root-cause-followup/us-10q.json",
+        "limits": [
+          "partial saved observation, not full original or complete native corpus",
+          "new component and production integration NOT_RUN"
+        ]
+      },
+      {
+        "path": "adapter-identity-observation.json",
+        "sha256": "2c0e7e81acd5635918a87fa4fd7244c8a24cfb4f3b084dffce81c54faefb747e",
+        "bytes": 2157,
+        "kind": "retained_real_observation",
+        "original_receipt": "model-projection-root/output-language/integration-followup/type-routing-design/adapter-identity-observation.json",
+        "limits": [
+          "partial saved observation, not full original or complete native corpus",
+          "new component and production integration NOT_RUN"
+        ]
+      }
+    ],
+    "git_common_dir": "C:/Users/郑曾波/Projects/company-wiki/.git"
+  }
+]
