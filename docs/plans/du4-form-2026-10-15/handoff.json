@@ -3,7 +3,7 @@
   "lane": "DU4-FORM",
   "base_commit": "8206e78d4087531b1d7ed57c45a73c942cc702e3",
   "branch": "codex/du4-form-20261015",
-  "commits": [],
+  "commits": ["28d90c9c"],
   "changed_paths": [
     "src/company_wiki/document_understanding/source_signals/__init__.py",
     "src/company_wiki/document_understanding/source_signals/contract.py",
