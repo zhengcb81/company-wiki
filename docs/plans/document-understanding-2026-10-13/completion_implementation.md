@@ -1,4 +1,24 @@
-## ROOT 当前工程接收与剩余任务 — 2026-10-15
+## ROOT 当前状态 — 2026-10-15 真实摘要与发布收尾
+
+**已发布：** CWP `0b61bcd1` 正常pre-push **5642PASS/24SKIP（518.41秒）**，精确CI **38788268113 SUCCESS**；RF `caf74c5f` 精确CI **38784099830 SUCCESS**。首次push的6项失败、所属职责修复与全部旧失败收据保留，未绕过hooks。工程发布见 [发布收据](common-root-quality-evidence/attribution-publication.json)。前述146单元/契约、7正式E2E、6历史恢复、110+20独审及74配置范围节点仍有效，数字有重叠不合计。
+
+**真实质量仍未过：** 中微2026半年报按实际MiMo `mimo-v2.6-flash` 配置运行，新0.9一次POST完成、96/96原文回放、same/cross-run 0额外POST。独审20条为 **8PASS/6WARN/6FAIL**，20/20引用展开与canonical保持，排除decoder错配；6条正文使用了selected输入中有、但本claim实际未引用的数字/产品/阶段。不能把原文定位绿写成事实语义绿，也不应把这些全部说成外部捏造。若干新业务被摘要遗漏；WARN不全部等于数字错误或必须逐动词拆句。见 [真实材料、费用和独审](common-root-quality-evidence/cn-h1-citation-unit3-live-acceptance.json) 和 [共因整改细则](review/summary_grounding_implementation.md)。原付费输入/终文/bundle不改、不盲目重发。
+
+**对照的测试适配故障：** 旧0.8尚未POST，observer将旧原文顺序组误当新selection顺序组。纯反例RED 1FAIL/16PASS；仅测试observer沿唯一quote oracle评估每个真实旧组，原新context/native order规则和旧HTTP字节不改，30PASS/3.62秒，临时测试目录恢复。整组FAIL与旧前置失败保留，不据此宣称产品旧解析缺陷或baseline通过。
+
+**长招股书性能根因：** 一次60秒真实profile证实：675页文字4.292秒已读完，230页只是表格候选计划，133次已完成native找表耗时50.163秒；后段已有文字被逐页昂贵table emit拖住。layout15秒不限制find_tables。独立只读架构调查16文件保持，分 B0文字可用/有界native、B1单次prepare/finalize按需增强、B2同AUTO完成单元恢复/容量、C原样本+另一长文档真实验收；这些实现尚未完成。见 [详细接口与TDD](review/hk_ipo_parser_performance_implementation.md)。不增加全MD/PDF副本、第二队列或每页重复传整份原件。
+
+**并行边界：** 用户确认三条DU4均IN_PROGRESS：[调度与工作目录](parallel/du4-2026-10-15/README.md)。ROOT不改作者新组件/测试/独立PWF；只在既有parser/共享引擎、模型、恢复与主计划施工，最终由ROOT接线。
+
+**预算：** 本次实际18103tokens/3345µUSD预算代理；母累计 **599590tokens/385113µUSD代理**，旧unknown7保留，上限200万tokens/$20。原件、生产配置、sentinel保持，真实独立临时湖删除。金额不是供应商账单。
+
+**未完成范围：** 默认仍0.8；正式摘要语义共因、DU4接线、HKIPO分阶段恢复、三配置供应商新旧质量、并发2/4、默认切换、母G2/G4/G5及原三/新三研究审计循环均继续开放。
+
+**Next Step：** 将真实错引/跨产品/期间/单位/QA反例固化为ROOT零付费回归并在同一模型/共享结构边界整改；随后实施不与DU4重叠的HKIPO B0/B1/B2。仅原A/B/C和母G节点集中验收，不新增小节点签收。
+
+---
+
+## 上一工程节点记录 — 2026-10-15（历史，发布状态以顶部为准）
 
 引用归属/恢复共因节点e1b3e234已正常提交；首次正常push由6项兼容问题拒绝（5610PASS/24SKIP），已按真实职责修复并88集中PASS，准备连同用途范围配置节点正常补交/重推。新显式0.9使用单一citation-unit/3，完整原文只发一份；原生QA的回答支撑与提问上下文分别传递，程序恢复canonical ID，不让模型回填来源。context/2和可选claim context字段由既有RF消费者接收，旧None/v1/v2请求字节与已存Ref保持。PDF重放传真实源语言；语言观察逐claim比较自己的事实支撑，避免其他中文段落掩盖英文被翻译。
 

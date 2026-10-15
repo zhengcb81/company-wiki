@@ -1,0 +1,65 @@
+{
+  "schema_version": "shared-reading-engineering-publication/1",
+  "company_wiki": {
+    "head": "0b61bcd131ebf5c2e4f439b5342f9ef545b33e6f",
+    "prepush_pass": 5642,
+    "prepush_skip": 24,
+    "prepush_seconds": 518.41,
+    "push_exit": 0,
+    "hooks_bypassed": false,
+    "exact_ci_id": 38788268113,
+    "exact_ci_status": "success"
+  },
+  "revenue_forecast": {
+    "head": "caf74c5f6c71e917a6320c37789ff18194c24dbd",
+    "exact_ci_id": 38784099830,
+    "exact_ci_status": "success",
+    "installed_physical_copies": 2
+  },
+  "first_push_failure_retained": true,
+  "archive": {
+    "archive": "attribution-publication-receipts.zip",
+    "bytes": 3454,
+    "sha256": "d94841275729c204ffa67e98b78544c304ce4b8311cc33bd0143dffebf60389d",
+    "members": [
+      {
+        "path": ".planning/shared-reading-production/attribution-release-exact-ci.json",
+        "bytes": 444,
+        "sha256": "9327d3299ec0c50197867365088fe37357b4e9f245f8a98081e5b94c0f25ba11"
+      },
+      {
+        "path": ".planning/shared-reading-production/attribution-release-repush/receipt.json",
+        "bytes": 187,
+        "sha256": "5e24ff57bbc2b0c8e85f8d83d28a2f7a91456569cda18d56c1284187f86b2970"
+      },
+      {
+        "path": ".planning/shared-reading-production/attribution-release-repush/stderr.log",
+        "bytes": 89,
+        "sha256": "68a98ac28e35c02b7b9266c3c28d88ce6f8081f79122e64372f98c7594ce02f3"
+      },
+      {
+        "path": ".planning/shared-reading-production/attribution-release-repush/stdout.log",
+        "bytes": 261,
+        "sha256": "e75b80fb23a5febdb6a0ad1d3a84d8b15860f4045f643c3142d125ebc5dc3f76"
+      },
+      {
+        "path": ".planning/shared-reading-production/first-attribution-push-failure.json",
+        "bytes": 1133,
+        "sha256": "b11f365bc7d15f9a5f5ba9fbf538507c6888cdf77008a522486d1c1ae97b594a"
+      },
+      {
+        "path": ".planning/shared-reading-production/rf-attribution-exact-ci.json",
+        "bytes": 457,
+        "sha256": "da0e3869b4629f227c3c8bb07ced98020d233df22dc9316b4ec5bbbd72b8bf16"
+      },
+      {
+        "path": ".planning/shared-reading-production/rf-attribution-installed-sync.json",
+        "bytes": 956,
+        "sha256": "fb94a6a271b984ffee6837664d650306c169a9d80a26f8b9c87b0c2b1d6f459a"
+      }
+    ]
+  },
+  "default_selector": "0.8.0",
+  "semantic_acceptance": "NOT_PASSED; see cn-h1-citation-unit3-live-acceptance.json",
+  "du4": "all three IN_PROGRESS; author source/tests/PWF not edited by ROOT"
+}

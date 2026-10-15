@@ -1,0 +1,270 @@
+{
+  "schema_version": "real-shared-reading-quality-acceptance/1",
+  "sample": "cn-h1",
+  "scope": "development regression; not holdout or full-document recall",
+  "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+  "run_id": "phaseC-090-b516fd38801c",
+  "engineering": "completed, 96/96 replay, same/cross-run 0 extra POST",
+  "semantic_status": "FAIL",
+  "semantic_counts": {
+    "PASS": 8,
+    "WARN": 6,
+    "FAIL": 6
+  },
+  "decoder_expansion_exact_claims": 20,
+  "all_key_fact_values_found_in_selected_input": true,
+  "model": "mimo-v2.6-flash",
+  "live_POST": 1,
+  "tokens": 18103,
+  "micro_usd_proxy_not_invoice": 3345,
+  "mother_tokens": 599590,
+  "mother_micro_usd_proxy": 385113,
+  "prior_unknown7_retained": 7,
+  "limits": {
+    "tokens": 2000000,
+    "micro_usd": 20000000
+  },
+  "old08_baseline": "NOT_RUN; observer order adaptation failed before POST, fixed with zero-API RED then 30PASS; old receipt retained",
+  "production_source_change_in_observer_fix": false,
+  "test_tmp_restored": true,
+  "original_config_sentinel_unchanged": true,
+  "temporary_lake_removed": true,
+  "archive": {
+    "archive": "cn-h1-citation-unit3-live-receipts.zip",
+    "bytes": 212581,
+    "sha256": "80080d67d82b758bb8053dfc65b08c8dbc85e4d0ff21f85b6e66513f23623f37",
+    "members": [
+      {
+        "path": ".planning/shared-reading-production/live/observer-order-acceptance.json",
+        "bytes": 580,
+        "sha256": "4f4154bbada20581e8bc4ae3dff2342936fedfe2642d06e822a2acf7a96e3a9b"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/observer-order-green.xml",
+        "bytes": 6045,
+        "sha256": "6e7d0761cc036d8537c968d2f7a1fbcaa9beb0be6e10a84fccb9eb1fc3185244"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/launcher.py",
+        "bytes": 269,
+        "sha256": "12706413d2e7e6616c875fefee3a2b83633295a17aeb3ed95761168c0e9b487a"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/phase_c_observer.py",
+        "bytes": 15784,
+        "sha256": "ce116bab3530e70ccfa6475b6f10ed66f180b88608682e9363691424bba33d3e"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/phase_c_runner.py",
+        "bytes": 54339,
+        "sha256": "e3bff6f48a9906a1deb41a036fc2f54a3fa8424441096c45e1f8815f563804c3"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/events.jsonl",
+        "bytes": 3308,
+        "sha256": "e8fa9db713d467a3a404fdea02355f14a5977aba2cdfb29ec37c2baad900d665"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/harness-fingerprint.json",
+        "bytes": 945,
+        "sha256": "b5da603a6df61d8b35876ce78f81005645863c9e74c9cabdad626c479e97c07b"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/import.command.json",
+        "bytes": 839,
+        "sha256": "4562415accaf2906a192bd9ed38c480289511457435eff4b2a901481cfe59654"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/import.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/import.stdout.json",
+        "bytes": 1860,
+        "sha256": "e224537ff3633f03f9749b114b259c3b9a9a4f1ce8daa3d10855e463be4cb137"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/independent-quality-review/build_review.py",
+        "bytes": 9613,
+        "sha256": "189977aaef2711de121d2e8f2ffcd9c527844c3fc0353d6df1178527921f9f06"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/independent-quality-review/claim-review.json",
+        "bytes": 67264,
+        "sha256": "ef2c6719452a7b58879f48b0e99ec3c64f6a7459842a861f7668016d08af7b07"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/independent-quality-review/handoff.json",
+        "bytes": 1456,
+        "sha256": "265edb3b995d0fadbf3f79ee213954562646feeb3e8de858f98bb4af92ee02da"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/independent-quality-review/handoff.md",
+        "bytes": 14555,
+        "sha256": "61099004279289d675a6e2f118c5f53385cdb5f3be4bc7326fe06aba26aac46c"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/materials/phaseC-090-b516fd38801c.8d169165f1ed424c939c9f499db48d01.response.json.gz",
+        "bytes": 2878,
+        "sha256": "04e8c3316797f3635fe421c289232f0ba64d288fd8822c8817bec83543b8c5a2"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/materials/phaseC-090-b516fd38801c.input.json.gz",
+        "bytes": 20630,
+        "sha256": "43402133e0f67e2d7ef0033be8112f7bd0d58ec7c3799ba36c1a3ab5cbf29e0d"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/mother-after.json",
+        "bytes": 185,
+        "sha256": "ac6b22bb88a5e6cc501217ad1785b8f28c345fa110295ae11b0db6ab6c560253"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/overall.json",
+        "bytes": 34349,
+        "sha256": "07a2536e500b04a7ad6568b837453fe3e9b6236e0f64bf8ec25b2598b94be645"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-080-e6eac21b7ee7.command.json",
+        "bytes": 944,
+        "sha256": "a259c49f808c30b82a5a8a3c49c182e533c48beb612c2941a42b6d16b5b78ea3"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-080-e6eac21b7ee7.native-failures.json",
+        "bytes": 531,
+        "sha256": "b3f510a301701b82c65d2a28253be3f710f564e03ca61c3f0c6d54510445403d"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-080-e6eac21b7ee7.native-usage.json",
+        "bytes": 4,
+        "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-080-e6eac21b7ee7.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-080-e6eac21b7ee7.stdout.json",
+        "bytes": 488,
+        "sha256": "41e82ee1e61283351e2ebaca0d731b6b9a16d0f81f55816ab07d6987d6b6e942"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-cache.native-failures.json",
+        "bytes": 4,
+        "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-cache.native-usage.json",
+        "bytes": 4,
+        "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-cross-run.command.json",
+        "bytes": 949,
+        "sha256": "c59bc2b28d3d30fabce3b3892268b578263eb7ef6dc6c6bd000b6bbbd5461673"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-cross-run.stderr.log",
+        "bytes": 88,
+        "sha256": "49e4ae7078b8159c99282d7c21cfed722675c41cf35b31d7c7c72ec1f87002d6"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-cross-run.stdout.json",
+        "bytes": 957,
+        "sha256": "70a4d895325201f085fa42259cbef0be914195034d4e4f65f2b0414d748cd8c3"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-read.command.json",
+        "bytes": 462,
+        "sha256": "3b1adaaa1859af6fdd6878501fbc174b820ae57a02c684ffc23f4727d670b967"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-read.stderr.log",
+        "bytes": 1981,
+        "sha256": "48a75511abe017a6f86fb0adfa58bd98528a94b599ccfd644e916e1edaf99b31"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-reference.command.json",
+        "bytes": 464,
+        "sha256": "c5c8a119d18f6541774e9fb5b1afa4710d237f1acedaa002464ceb5299302fe4"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-reference.stderr.log",
+        "bytes": 691,
+        "sha256": "fcfe56616ae648255a13e96caeba163e657c0963b999b33bd15c93e1b96d1664"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-reference.stdout.json",
+        "bytes": 603,
+        "sha256": "04c58cab61f53235f54872bf8417b8f299e4a4690db788d2d2fa3b431671e870"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-restart.command.json",
+        "bytes": 944,
+        "sha256": "45c2f22950623122ca947e1819dc72bc8e4ead5a2d94aedf168ff5267667e173"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-restart.stderr.log",
+        "bytes": 88,
+        "sha256": "49e4ae7078b8159c99282d7c21cfed722675c41cf35b31d7c7c72ec1f87002d6"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c-restart.stdout.json",
+        "bytes": 1115,
+        "sha256": "b5a55981931ee4201eab8d99402567889ad13a56bf3c3213d2434d944757e810"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c.bundle.json.gz",
+        "bytes": 100586,
+        "sha256": "7a73d97f7581ba5402ef63031fa648962638b407b71584e143fbefa48f0e6d34"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c.command.json",
+        "bytes": 945,
+        "sha256": "12d68625036b9d4d5e54d11f22ecd054f87c6d55ec2a56a4f29032130df16aa9"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c.native-failures.json",
+        "bytes": 4,
+        "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c.native-usage.json",
+        "bytes": 1146,
+        "sha256": "09b391cf24a8804b5b29db24620a7022ce43a8cb3dcd9b181a9627ef422648e9"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c.read-request.json",
+        "bytes": 1021,
+        "sha256": "f9abb62826ba23c93233912def068a45e292f5faa88e84dcfad3c6d1c4c910fa"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/phaseC-090-b516fd38801c.stdout.json",
+        "bytes": 1120,
+        "sha256": "c5c65e02707362ccee4ea132322a60b8d8b6ec5a566eb9d451c95f39a7deb325"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/preparation.json",
+        "bytes": 2960,
+        "sha256": "dcadb88453b9b7699a2baed76df437043c6f7a78d09695f733150d24082cb4f3"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/receipts/live-20261015T184634-4e0b40/receipt.json",
+        "bytes": 34304,
+        "sha256": "4aa40e232c0f2341e3f7e022cdcae9db2824a29b347a70e8b9769ae45dff3c36"
+      },
+      {
+        "path": ".planning/shared-reading-production/live/owned-runner/test_phase_c_observer.py",
+        "bytes": 9161,
+        "sha256": "967a0e5e213c1b28c9d5216710019bb49a771bde44fed78dcff29e12f15a958d"
+      }
+    ]
+  },
+  "next_plan": "../review/summary_grounding_implementation.md"
+}

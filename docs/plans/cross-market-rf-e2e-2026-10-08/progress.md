@@ -1,4 +1,16 @@
-## ROOT 当前执行归总 — 2026-10-15
+## ROOT 当前执行归总 — 2026-10-15 发布与真实质量
+
+CWP `0b61bcd1`、RF `caf74c5f` 已正常推送，精确CI **38788268113 / 38784099830 均SUCCESS**；CWP正常pre-push5642PASS/24SKIP，未绕hooks。工程共因节点已发布，原失败保留。
+
+真实MiMo中微半年报新0.9完成1POST、96/96定位、same/cross 0额外POST；独审20条8PASS/6WARN/6FAIL，错引的是同一selected输入内其他片段，decoder展开20/20正确。正式质量未通过，不切默认；[真实验收和下一根因计划](../document-understanding-2026-10-13/review/summary_grounding_implementation.md)。旧0.8对照前置observer顺序适配失败在测试层，RED后30纯测试PASS，仍未跑实际baseline。母账 **599590tokens/385113µUSD代理**，旧unknown7保留，200万tokens/$20上限，原件/配置/Temp保持。
+
+[唯一共享阅读PWF](../document-understanding-2026-10-13/task_plan.md)列明其余主线。三[DU4作者包](../document-understanding-2026-10-13/parallel/du4-2026-10-15/README.md)均已开工，ROOT不动作者目录。ROOT先固化并修复正式语义引用共因，再推进已实测根因的长招股书分阶段/有界native/同AUTO恢复；已接收独立架构报告和具体TDD，仅大节点验收，不建许可链、第二队列或全文缓存。默认0.8、三供应商质量/并发/母G2/G4/G5和原三→新三公司审计循环仍开放，目标未完成。
+
+**Next Step：** ROOT按共享PWF实施零付费真实失败回归和共同根因修复；外包三组件交付后统一接线、集中真实验收。
+
+以下为历史记录；当前状态以本节与唯一共享PWF为准。
+
+## 上一工程节点归总 — 2026-10-15（历史）
 
 主线共享阅读的引用归属/逐claim语言/PDF语言重放/阶段范围恢复共因工程已集中验收，CWP正常发布收尾、RF消费者caf74c5f正常提交。真实旧源码paid outbox恢复0新增POST；FF→CWP→RF离线CLI及原生QA→public /3→RF真实CLI均PASS，原件/config/Temp保持。细则与真实收据以[唯一共享阅读PWF](../document-understanding-2026-10-13/task_plan.md)及[节点证据](../document-understanding-2026-10-13/common-root-quality-evidence/source-attribution-recovery-acceptance.json)为准。
 

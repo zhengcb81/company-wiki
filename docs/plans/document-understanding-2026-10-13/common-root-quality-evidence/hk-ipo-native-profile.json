@@ -1,0 +1,28 @@
+{
+  "status": "BOUNDED_PROFILE_PARTIAL_DIAGNOSED",
+  "source_sha256": "33460fa3e02e115e7bd09e1c4c857e71afe54c332a22373d28a0d2e86c70b6d4",
+  "original_reads": 1,
+  "parse_calls": 1,
+  "page_count_observed": 675,
+  "text_scan_seconds": 4.29165009999997,
+  "planned_table_pages": 230,
+  "find_tables_completed": 133,
+  "find_tables_inclusive_seconds": 50.163458100068965,
+  "receipt": {
+    "observed_at": "2026-10-15T18:39:43.548079+00:00",
+    "exit_code": 124,
+    "elapsed_seconds": 60.060382700001355,
+    "status": "BOUNDED_PROFILE_PARTIAL",
+    "original_stat_unchanged": true,
+    "source_config_unchanged": true,
+    "temp_removed": true,
+    "network_or_supplier_calls": 0,
+    "scope": "one actual native parser timing observation; inclusive times overlap, not selection/quality certification"
+  },
+  "archive": {
+    "name": "hk-ipo-native-profile.zip",
+    "bytes": 4891,
+    "sha256": "07d664908627af8a11ca8ef4d98a326b4dc9e105436b93fa602c99229c84a2d0"
+  },
+  "implementation": "NOT_RUN"
+}

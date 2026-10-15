@@ -1,0 +1,30 @@
+{
+  "schema_version": "hk-ipo-architecture-review-acceptance/1",
+  "status": "design accepted; B0/B1/B2/C NOT_IMPLEMENTED",
+  "reviewed_sources": 16,
+  "source_unchanged": true,
+  "supplier_calls": 0,
+  "archive": {
+    "archive": "hk-ipo-parser-architecture-review.zip",
+    "bytes": 14647,
+    "sha256": "cf581d29dc54cc85e41e793802fe7e82a4dce2a87e08c39f4be7e5207424b277",
+    "members": [
+      {
+        "path": ".planning/shared-reading-production/hk-ipo-performance-20261015/architecture-review/handoff.json",
+        "bytes": 2644,
+        "sha256": "f7631d95052f51c43325e89a62b61b807d3a1b726b5a1367f8ec01d14ec1b1f2"
+      },
+      {
+        "path": ".planning/shared-reading-production/hk-ipo-performance-20261015/architecture-review/handoff.md",
+        "bytes": 22337,
+        "sha256": "e699128982776182602289f8a00e8ee9e431ee975dd2d6c378a1a7624668768f"
+      },
+      {
+        "path": ".planning/shared-reading-production/hk-ipo-performance-20261015/architecture-review/source-inventory.json",
+        "bytes": 5827,
+        "sha256": "e8417be00badda1d687bae452fd5ba36c0e3c2ba09530aa81af1d176c607f000"
+      }
+    ]
+  },
+  "plan": "../review/hk_ipo_parser_performance_implementation.md"
+}
