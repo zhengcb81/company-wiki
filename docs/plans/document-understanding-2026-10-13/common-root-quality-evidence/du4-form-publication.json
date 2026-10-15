@@ -1,0 +1,70 @@
+{
+  "schema_version": "du4-form-publication/1",
+  "status": "PUBLISHED_CI_SUCCESS",
+  "head": "cbfe3e7f780c349dc1ded212571f1a8e3a5e6691",
+  "push": {
+    "head": "cbfe3e7f780c349dc1ded212571f1a8e3a5e6691",
+    "exit_code": 0,
+    "seconds": 331.0070729999861,
+    "observed_at": "2026-10-15T20:48:53.386933+00:00",
+    "hooks_bypassed": false
+  },
+  "normal_push_tests": {
+    "passed": 5784,
+    "skipped": 24,
+    "seconds": 321.47
+  },
+  "ci": {
+    "observed_at": "2026-10-15T20:53:21.081156+00:00",
+    "repo": "company-wiki",
+    "requested_head": "cbfe3e7f780c349dc1ded212571f1a8e3a5e6691",
+    "runs": [
+      {
+        "id": 38804974095,
+        "head_sha": "cbfe3e7f780c349dc1ded212571f1a8e3a5e6691",
+        "name": "CI",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38804974095"
+      }
+    ]
+  },
+  "form_status": "PASS_COMPONENT; native route integration NOT_RUN",
+  "previous_failure": "retained in du4-form-ocr-receipts.zip; original first worker exit UNKNOWN",
+  "v4_runtime": "NOT_IMPLEMENTED",
+  "default_selector": "0.8.0",
+  "table_state_author_writes": 0,
+  "supplier_calls": 0,
+  "archive": {
+    "path": "docs/plans/document-understanding-2026-10-13/common-root-quality-evidence/du4-form-publication-receipts.zip",
+    "bytes": 3229,
+    "sha256": "10b39fcda5f5071515f20671c4800f5014120fc62ddea412d80a5f801b6c8726",
+    "members": [
+      {
+        "name": "du4-form-final-push/receipt.json",
+        "bytes": 187,
+        "sha256": "a6ea91f53dafc35fafa19f490b79124a5ad4061feb3a048095cb09d1896f3411"
+      },
+      {
+        "name": "du4-form-final-push/stdout.log",
+        "bytes": 261,
+        "sha256": "5af7fe4c9bc831169073dace879ff1ec40ca03a3db2fdb417b7bfae4577c8393"
+      },
+      {
+        "name": "du4-form-final-push/stderr.log",
+        "bytes": 89,
+        "sha256": "3cd283410f0e69390e0394a87775386cdd590b9064724227cbe339f2ff39ca2c"
+      },
+      {
+        "name": "du4-form-final-push/ci-final.json",
+        "bytes": 444,
+        "sha256": "7dcfb78acc0590eb97857c83a9537438d384f03c5faa2e087bda601141a679eb"
+      },
+      {
+        "name": "du4-form-acceptance/v4-request-owner-notes.md",
+        "bytes": 3664,
+        "sha256": "4eafcca4a334dd5f940e2548c7647f9c00a7b32c94011e1b5fd6d5e81e801227"
+      }
+    ]
+  }
+}

@@ -35,7 +35,7 @@ ROOT 接收顺序：核对文件边界及接口 → 每包集中测试 → FORM 
 
 ## 当前状态
 
-- FORM：用户通知完成；四commit接入ROOT合并工作区，组件327集中PASS/独立11组探针PASS，ROOT已修复预算及不连续拼接共因，正常发布进行中。生产native/router/真实holdout尚未验收，见[接收细则](../../review/du4_form_acceptance.md)。
-- TABLE/STATE：继续IN_PROGRESS，未收到用户完成通知，ROOT不修改作者目录。
+- FORM：用户通知完成；四commit接入ROOT合并工作区，组件327集中PASS/独立11组探针PASS，ROOT已修复预算及不连续拼接共因，已正常推送master（cbfe3e7f，精确CI 38804974095 SUCCESS）；OCR边界最终96PASS。生产native/router/真实holdout尚未验收，见[接收细则](../../review/du4_form_acceptance.md)。
+- TABLE/STATE：用户均已通知完成；作者head分别fa1681c0/284eea60，正常host只读status干净、范围合规，ROOT隔离复跑36/90PASS，进入独立审查和集中接收。STATE工作区夹具SHA符合原manifest但旧Git blob被换行转换，接收时按FORM已建立字节规则恢复准确原字节，不改gold；作者目录不写。
 - 主线另一个节点已实测：新摘要生产 7 E2E、历史恢复 6 E2E 均通过，0 外部供应商调用；这不是 DU4 的验收结果。
 - 当前默认仍 0.8；三家真实摘要质量及默认切换继续开放，不能因组件测试绿直接宣布完成。

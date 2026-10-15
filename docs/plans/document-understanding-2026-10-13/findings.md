@@ -1,10 +1,10 @@
 ## ROOT 当前状态 — 2026-10-15 DU4-FORM发布前共同边界收尾
 
-FORM组件已正常合并本地主线（作者head2cde9de9，ROOT merge8406461c）；327集中契约、独审11组及最终87项FORM/Git传输测试通过。正常prepush首次5775PASS/24SKIP/1FAIL，拦截旧Windows OCR worker退出，远端尚未更新；具体退出原因UNKNOWN，未盲重推。进一步集中测试真实发现response open的PermissionError。ROOT统一文件交接责任：只在原绝对deadline内复试Windows共享文件操作，成功后也复核到期，不重发native、不续期；保留输入/输出cap和真实退出码。受控read/publish先2RED，独审成功越期先2RED；最终冻结集中 **96PASS/55.64s**、Ruff/mypy通过，独审无剩余阻断。完整CRT矩阵保留。最终正常推送及精确CI待执行；本条不宣称发布成功。
+FORM组件已正常合并本地主线（作者head2cde9de9，ROOT merge8406461c）；327集中契约、独审11组及最终87项FORM/Git传输测试通过。正常prepush首次5775PASS/24SKIP/1FAIL，拦截旧Windows OCR worker退出，远端尚未更新；具体退出原因UNKNOWN，未盲重推。进一步集中测试真实发现response open的PermissionError。ROOT统一文件交接责任：只在原绝对deadline内复试Windows共享文件操作，成功后也复核到期，不重发native、不续期；保留输入/输出cap和真实退出码。受控read/publish先2RED，独审成功越期先2RED；最终冻结集中 **96PASS/55.64s**、Ruff/mypy通过，独审无剩余阻断。完整CRT矩阵保留。最终工程提交 `cbfe3e7f` 已正常推送：**5784PASS/24SKIP，321.47秒**；精确CI **38804974095 SUCCESS**。FORM作者history已在master，未跳hooks。[发布收据](common-root-quality-evidence/du4-form-publication.json)。
 
-证据：[FORM接收](review/du4_form_acceptance.md)、[OCR边界收据](common-root-quality-evidence/du4-form-ocr-acceptance.json)。组件不等于生产接线：FORM native→adapter→router/真实holdout、新v4协议/source依赖/覆盖、六错引及重要遗漏、HKIPO性能和母G2/G4/G5继续开放。默认0.8不变，TABLE/STATE作者目录仍隔离施工。0供应商，累计599590tokens/385113µUSD代理（旧unknown7；上限2M/$20）不变，原件/生产配置/sentinel保持、测试Temp删除。
+证据：[FORM接收](review/du4_form_acceptance.md)、[OCR边界收据](common-root-quality-evidence/du4-form-ocr-acceptance.json)。组件不等于生产接线：FORM native→adapter→router/真实holdout、新v4协议/source依赖/覆盖、六错引及重要遗漏、HKIPO性能和母G2/G4/G5继续开放。默认0.8不变，TABLE/STATE均已交付，作者测试36/90复跑通过，独审接收中；作者目录保持原样。0供应商，累计599590tokens/385113µUSD代理（旧unknown7；上限2M/$20）不变，原件/生产配置/sentinel保持、测试Temp删除。
 
-**Next Step：** 正常发布当前FORM与OCR边界最终提交，核对精确CI，然后继续v4正式摘要/恢复及统一DU4生产接线。目标未完成，不增加小节点许可。
+**Next Step：** 接收已交付TABLE/STATE，再继续v4正式摘要/恢复及统一DU4生产接线。目标未完成，不增加小节点许可。
 
 ---
 

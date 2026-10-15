@@ -59,3 +59,10 @@ ROOT先用原IsolatedOCRAdapter/NativeFake和原1s调用窗口做6次独立有�
 初次94PASS/69.47s期间最后做过一次cap分类归位，因此不把它当最终冻结证明：_read_bytes只读cap+1，由JSON调用方报RESULT超限、image调用方仍报INPUT超限。独审又用假钟发现成功文件操作返回时可能已过deadline；ROOT先2RED/6PASS，统一helper成功后也复核同一deadline，阻止下一阶段开始。不是每处调用加一份新校验。
 
 最终冻结源码的完整OCR、owned-file和CI选择集中 **96PASS/55.64s**；Ruff五路径、mypy一个责任源PASS。独立只读复核确认成功越期反例已关闭，输入/输出cap分类与POSIX目录参数保持。配置/sentinel未变、测试Temp已删除，0供应商。最初_fstat64退出具体根因仍UNKNOWN；这次修复有独立可复现的文件交接缺陷证据，不能将其冒称历史崩溃已定因。正常prepush仍需运行最终提交；没有跳过或删除完整CRT矩阵。
+
+
+## 发布收尾
+
+最终工程提交 `cbfe3e7f` 已正常推送：**5784PASS/24SKIP，321.47秒**；精确CI **38804974095 SUCCESS**。FORM作者history已在master，未跳hooks。[发布收据](../common-root-quality-evidence/du4-form-publication.json)。
+
+生产native/route/真实holdout和v4仍未接线，默认0.8；TABLE/STATE作者树保持。无新供应商消耗、原件或生产配置变更。
