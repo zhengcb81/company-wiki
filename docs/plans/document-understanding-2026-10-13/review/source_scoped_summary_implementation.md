@@ -272,3 +272,26 @@ decode_scoped_drafts(response, selected, frozen view)
 审查找到的两项新增helper边界已TDD修复：可变kind/section标签影响不可变plan hash，改为有限str字段；JSON对象role先去重会TypeError，改为按已有规则非str→unknown再去重。不重新做来源身份/SHA或引入许可。原始quote oracle的matcher/业务角色边界保持；显式负控证明错误文本搭配合法锚点仍不能称一般蕴含成立。合成夹具改metadata未重建EvidenceSpan造成的hash错误已在夹具修复；mypy局部list标注、测试角色预期、所有RED与初版结果均保留。
 
 下一步必须注册显式v4正式renderer/decoder、因果依赖和现有worker/caller，不留作永久闲置模块；旧v3真实终文和None/v1/v2/v3 wire保持。source task的每个原文body只一次，共享refs是图；context不作事实，完整native scope闭包不表示所有命题真实。继续补共享引擎有证据的指代/对象和覆盖分配，再做离线正式E2E/恢复与真实配置供应商独审，原六错引与PD5/Matrix遗漏未关闭。
+
+
+## ROOT下一正式协议接线细化（优先于报告中的示例字段）
+
+本来源view节点5f54f81b已发布，远端CI38796376285 SUCCESS；正式v4尚未实现。未来clause只需text/basis_parts/modality；摘要编号和来源角色由程序生成，不再让模型重复抄已知ID/类型。当前公开canonical SummaryClaim仍沿原合同，不引入新材料授权。
+
+# ROOT下一正式接线的已核源码接口（2026-10-15）
+
+当前commit5f54f81b源码冻结，正常push验证正在跑，不改工作树源码。以下是下一节点设计，不是已实现/验收。
+
+1. `narrative_generation._bind_reading_projection`在selector0.9且未显式冻结projection时，目前选v3。`generation_manifest(... reading_model_projection=...)`已有显式测试端口，不另造env override/config模型开关。新v4注册完成后才更新0.9新generation默认；历史manifest的projection按原值，公开selector默认0.8保持。
+2. `narrative_model.resolve_model_boundary`、`reading_model_boundary_identity`和request `from_selection/with_output_budget`需要有限v4独立分支；request schema用新版本，不就地改v3。新compiler/sourceplan实现哈希必须进入v4因果身份，最终HTTP字节沿原reservation hash；当前view.binding_sha只证明引用映射，不是完整wire或实现哈希。
+3. `_validate_model_software`在summarize前比较所需模型软件身份；已paid/verify/outbox阶段继续stage-scoped恢复。全narrative_model文件SHA会被新增v4改变，因此需要真实旧v3 paid/no-POST恢复反例，不能凭新metadata声称兼容。未知版本仍0POST拒绝；不得伪装修改后的软件等于旧SHA。
+4. `narrative_summarize`从subject冻结projection，先validate_model_execution，然后唯一caller.generate，再decode。复用这条线，不新增model任务/第二费用账。
+5. v4输出建议固定`sparse drafts_by_task: {tN: [clause...]}`，clause只含text/basis_parts/modality；claim_id按source plan/task+ordinal由程序生成，claim_type按source-owned support roles推导，source/hash/language/context全部来自程序。减少让模型重复抄已知字段；不把错误文字因task合法就当真。claim_type/modality必须复用原统一规则，不能再造分类分支。
+6. response_schema不要为64个task复制64份schema；使用有限object +同一clause schema，未知key由程序精确映射验证。所有clauses先计总数再校验，21条不能按任务拆开绕过20条限制；key重复由现有strict JSON reader拒绝。坏条整条恢复，不静默删错引用或补邻居。
+7. 当前source task仅保存原group scope；该系列定义/产品/阶段关系和重要方向分配仍需在唯一共享引擎native结构/策略层补有证据的依赖。native窗口8成员/4块等已有边界不能直接放大或把整章变事实。不要因source span原文相邻就自动归同一产品。
+8. v4 request observer/测试response fixture必须同步真实shape，不能旧schema假数据装作新正式调用。下一次真实MiMo/DeepSeek/MiniMax遵守已有配置、统一2M/$20账，先冻结候选、0盲目重发；同时检验原6错引和重要业务遗漏/新公司。
+
+正常prepush的全单元触发原因已经只读确认：changed_unit_tests将tools/及tests/fixtures/一律global；当前这批包含两者所以必走全suite。作为后续效率审视线索，不在推送过程中改规则或跳过检查。
+
+
+旧v3请求和HTTP raw/official两快照已先离线冻结，压缩12415字节、SHA789c3e64d4d73656b85864b44c258cc1e9626bc36e0693a1e2ce2c999bc84a79，存于本节点[发布材料](../common-root-quality-evidence/source-scoped-foundation-publication-receipts.zip)。下一节点从归档解压为自己测试fixture再改正式协议，不能改后重新生成旧金样。

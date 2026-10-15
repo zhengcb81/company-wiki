@@ -2,7 +2,7 @@
 
 按[唯一共享阅读PWF](../document-understanding-2026-10-13/task_plan.md)推进：已冻结真实摘要六处错引的逐claim回归，实施共享引擎的来源task plan及局部model view（原文96/组64，QA/共享图/本地basis保留），最终47组件PASS，旧兼容集中160PASS；独立44PASS为compact前快照、最终编码静态核对。新v4正式协议/生产接线、指代/对象/覆盖分配与真实质量尚未完成，原语义FAIL保持，默认0.8。材料表示30590B对旧同范围30758B，仅少168B，不冒充真实token或质量收益。
 
-[实际组件验收/失败/独审](../document-understanding-2026-10-13/common-root-quality-evidence/source-scoped-foundation-acceptance.json)和[下一接线细则](../document-understanding-2026-10-13/review/source_scoped_summary_implementation.md)。上一CWP/RF工程发布及CI已绿，收尾c9c2f9b4/090a6310已推，RF文档CI38790621941 SUCCESS。新节点正常commit/push后核精确CI。三DU4作者仍在独立目录IN_PROGRESS，ROOT不越界施工。
+[实际组件验收/失败/独审](../document-understanding-2026-10-13/common-root-quality-evidence/source-scoped-foundation-acceptance.json)和[下一接线细则](../document-understanding-2026-10-13/review/source_scoped_summary_implementation.md)。上一CWP/RF工程发布及CI已绿，收尾c9c2f9b4/090a6310已推，RF文档CI38790621941 SUCCESS。本节点代码5f54f81b已正常推master，pre-push5689PASS/24SKIP（456.05秒），精确CI38796376285 SUCCESS，未绕hooks。三DU4作者仍在独立目录IN_PROGRESS，ROOT不越界施工。
 
 本轮供应商0，母账599590tokens/385113µUSD代理、旧unknown7保留、200万tokens/$20上限，原件/配置/Temp保持。下一步注册v4、正式worker→verify→public read→RF离线E2E与费用恢复，再做配置中的真实供应商摘要/独审；HKIPO B0/B1/B2、并发/默认/母G2/G4/G5及原三→新三研究审计继续开放，不将此子节点当整个目标完成。不新增材料许可或小节点签收。
 

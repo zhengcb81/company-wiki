@@ -8,7 +8,7 @@
 
 **实施细则：** [逐命题根因](review/summary_grounding_implementation.md)、[source-scoped具体接口/测试/接线](review/source_scoped_summary_implementation.md)。新增代码仅两纯组件与原quote oracle的观察组合；旧production v3/model/generation/factory未改，默认仍0.8。新模块仍须正式接入，不能作为闲置替代品留在目标完成声明里。
 
-上一工程发布CWP `0b61bcd1` CI38788268113 SUCCESS、RF `caf74c5f` CI38784099830 SUCCESS；PWF收尾CWP `c9c2f9b4`与RF `090a6310`均已推，RF文档CI38790621941 SUCCESS。当前源码节点正常提交/推送后核精确CI，不绕hooks；[上一发布证据](common-root-quality-evidence/attribution-publication.json)保留。
+本节点代码 `5f54f81b` 已正常推master：pre-push **5689PASS/24SKIP，456.05秒**；精确CI **38796376285 SUCCESS**。没有绕hooks；[本节点发布和旧v3请求快照](common-root-quality-evidence/source-scoped-foundation-publication.json)。上一CWP/RF工程CI已绿，RF收尾090a6310/CI38790621941 SUCCESS。源码工作区已清，旧owned scratch与三作者目录保持。
 
 三[DU4作者包](parallel/du4-2026-10-15/README.md)仍按用户通知IN_PROGRESS，ROOT未写其新组件/测试/独立PWF。门禁不新增，旧恢复/原文SHA/身份/期间/预算职责保持在所属层；审查仍只在原A/B/C及母G大节点。
 

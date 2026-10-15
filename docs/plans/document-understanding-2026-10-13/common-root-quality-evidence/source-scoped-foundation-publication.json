@@ -1,0 +1,78 @@
+{
+  "schema_version": "source-scoped-foundation-publication/1",
+  "code_head": "5f54f81bb6d3df12835dc1eb1feb3c83a5131386",
+  "main_and_origin": "master",
+  "push_exit": 0,
+  "hooks_bypassed": false,
+  "prepush": {
+    "passed": 5689,
+    "skipped": 24,
+    "seconds": 456.05,
+    "scope": "full unit and CI contract smoke; tools/fixtures trigger global selection"
+  },
+  "ci": {
+    "observed_at": "2026-10-15T19:48:51.613061+00:00",
+    "repo": "company-wiki",
+    "requested_head": "5f54f81bb6d3df12835dc1eb1feb3c83a5131386",
+    "runs": [
+      {
+        "id": 38796376285,
+        "head_sha": "5f54f81bb6d3df12835dc1eb1feb3c83a5131386",
+        "name": "CI",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38796376285"
+      }
+    ]
+  },
+  "production_v4": "NOT_WIRED",
+  "original_real_semantic_quality": "FAIL; six incorrect claim citations and material omissions retained",
+  "default_selector": "0.8.0",
+  "supplier_calls_this_node": 0,
+  "mother_tokens": 599590,
+  "mother_micro_usd_proxy": 385113,
+  "prior_unknown7_retained": 7,
+  "old_v3_request_snapshots": {
+    "cases": 2,
+    "bytes": 12415,
+    "sha256": "789c3e64d4d73656b85864b44c258cc1e9626bc36e0693a1e2ce2c999bc84a79",
+    "scope": "offline synthetic raw/official HTTP request snapshots before production v4 changes; current real paid CN v3 fixture remains separately frozen"
+  },
+  "archive": {
+    "name": "source-scoped-foundation-publication-receipts.zip",
+    "sha256": "d4f753a449281d33eefce68be681fd640e5a3b64da4c070ac39ace234c83031e",
+    "bytes": 16566,
+    "members": [
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/frozen-v3-before-runtime.json.gz",
+        "sha256": "789c3e64d4d73656b85864b44c258cc1e9626bc36e0693a1e2ce2c999bc84a79",
+        "bytes": 12415
+      },
+      {
+        "path": ".planning/shared-reading-production/claim-grounding-design-20261015/v4-runtime-notes.md",
+        "sha256": "7f591062a88009a3cb8a59cb5a29cd57fc73417318a45bb63f61ebfc990c1867",
+        "bytes": 3069
+      },
+      {
+        "path": ".planning/shared-reading-production/source-scoped-foundation-exact-ci.json",
+        "sha256": "b49f3f3871433f89455ac68d7f91939c531242c4eb22252f4eb0be717f6c08a2",
+        "bytes": 444
+      },
+      {
+        "path": ".planning/shared-reading-production/source-scoped-foundation-push/receipt.json",
+        "sha256": "0e193907e37db38da39eb6c31424a096aa806adbc0f6b086d5035f1d67051877",
+        "bytes": 188
+      },
+      {
+        "path": ".planning/shared-reading-production/source-scoped-foundation-push/stderr.log",
+        "sha256": "79219a18c2e169832aed61f0263d63759b15c5948b50df4399c8ef7e5c66fe04",
+        "bytes": 89
+      },
+      {
+        "path": ".planning/shared-reading-production/source-scoped-foundation-push/stdout.log",
+        "sha256": "3d9b659e646d4dca56ca34e6d12a54cb710a1dddfe6d109130ad9450049d0b3e",
+        "bytes": 261
+      }
+    ]
+  }
+}
