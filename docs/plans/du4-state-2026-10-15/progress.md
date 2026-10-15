@@ -21,3 +21,5 @@
 
 未做（归 ROOT）：原件重放、真实选择/完整 QA/0.8 回归、真实摘要、下游 RF 验收、版本 bump。
 0 生产写入、0 供应商调用。提交后 STOP 等 ROOT 接收。
+
+实现 commit：`dfb5180f feat(du4): implement bounded operating-relation detection (DU4-STATE)`（本行为交接补记）。
