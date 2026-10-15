@@ -80,8 +80,8 @@
   },
   "archive": {
     "path": "docs/plans/document-understanding-2026-10-13/common-root-quality-evidence/du4-form-component-receipts.zip",
-    "bytes": 54181,
-    "sha256": "2386c4a011b41821efb53b2f080b6645ee5938a825c0fc3440a6eac98bde733b",
+    "bytes": 68622,
+    "sha256": "3d7ada50c57744ad5efabd418afdaddfb7823e5b68c2b83b8039e59a9614d353",
     "members": [
       {
         "path": ".planning/shared-reading-production/du4-form-acceptance/author-root-junit.xml",
@@ -104,14 +104,24 @@
         "sha256": "d61342ed4c4537041bc271e25dd5ce94ad58457e80b9368b91b098e4a86f6b35"
       },
       {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/final-namespace-ruff-stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/final-namespace-ruff-stdout.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
         "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/final-handoff.json",
-        "bytes": 4307,
-        "sha256": "90ff0f9668f57da18789cdc2efe9fb3ce5d3ec75017b3886d6df989444275faa"
+        "bytes": 5083,
+        "sha256": "39b2e4708e97f2290e71808ceb336d74e917553f00dfc58dab94841e2919c309"
       },
       {
         "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/final-handoff.md",
-        "bytes": 4240,
-        "sha256": "ddf2d63dfd098468f525c8b277a3fea35016c57231be022715a3ae475afd52c9"
+        "bytes": 6797,
+        "sha256": "088df1a9ce2b48bbdcaaf988e70462ee7626b87573762e6e5c6fd90b8f8f7517"
       },
       {
         "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/final-probe-results.json",
@@ -122,6 +132,11 @@
         "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/final-probe.py",
         "bytes": 7490,
         "sha256": "aef9f7a5c8e2894db2334e91b9a7d8e61e0a7aaf6acb932bce940c191c7342b4"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/git-byte-boundary-readonly.json",
+        "bytes": 1423,
+        "sha256": "a716408788b3eb46466462b0b9e5705e78d1913805b348b5adec5c82f434465e"
       },
       {
         "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/handoff.json",
@@ -182,6 +197,96 @@
         "path": ".planning/shared-reading-production/du4-form-acceptance/run_author_tests.py",
         "bytes": 1742,
         "sha256": "0274f68a81df02ae7ff16f42bba555da7c36eac52d8ca3a263c2285f32cd11e9"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/staged-byte-verification.json",
+        "bytes": 772,
+        "sha256": "25b1a3735ed0c9ff7fa57556182a57d23fa5aa6ba1350c5c4c50cb711891c3e9"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-component-push/cancelled.json",
+        "bytes": 325,
+        "sha256": "ce93fd7a9a37e2802d71c877b7f6cb7120ce749e9ec921a3b7e576c6d4211215"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/junit.xml",
+        "bytes": 12267,
+        "sha256": "eea9c9c67c612e84fbedae2ab9e77c60da538385838f7513404dcd55df94c2fc"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/receipt.json",
+        "bytes": 232,
+        "sha256": "0cb99d9dac223c5a83d7b3184d978f83cb2dedc400f2e33dee56428e6c47eb5e"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/stdout.log",
+        "bytes": 1931,
+        "sha256": "c49530a3255a63f4ec10b3b243ed2301f517fec419cb4345a7177b5fbe7b76c2"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-final/junit.xml",
+        "bytes": 13297,
+        "sha256": "1b381880294a4e1e9a02de283831656d46da5193b6282ed4c780a155517dabdf"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-final/receipt.json",
+        "bytes": 287,
+        "sha256": "38fc7bce61cc3c973d11877d24c276855bb136ac48643709b0ea7f20e73bef7a"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-final/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-final/stdout.log",
+        "bytes": 2011,
+        "sha256": "af7c788b8b2acf19d46bf47bbad457faeb3404c82812a0a1014be20d2157fd65"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-green/junit.xml",
+        "bytes": 12737,
+        "sha256": "a07a73dd7a874a59846fbd766911634aad24a8ca581c7eaa8ac064d3de1af302"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-green/receipt.json",
+        "bytes": 288,
+        "sha256": "3a28b0d72ef6f6805a7051494590f273d48deecd3a846e841120b13c95c9035d"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-green/stdout.log",
+        "bytes": 2011,
+        "sha256": "de2028a25ee156623c8785396d3887e2b7c5cbc5d5f313ed61242ddc8f3edaa1"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-red/junit.xml",
+        "bytes": 1775,
+        "sha256": "29a822b43eb64e3b8bcd3a740cd3f226dcd96e6e5229c89675754405f28f33f7"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-red/receipt.json",
+        "bytes": 249,
+        "sha256": "95547e28c019e22c5500d07092c2acdf5daedf64ad639f38f1c5ee852e768b9e"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-git-byte-red/stdout.log",
+        "bytes": 2581,
+        "sha256": "bf3a0a7029b6b825188089130cd20468fb684263474ec919fd7ecae7aadd4740"
       },
       {
         "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-contracts/junit.xml",
@@ -262,36 +367,6 @@
         "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-red-corrected/stdout.log",
         "bytes": 8535,
         "sha256": "1414be29ea8bfd8c2af638a5aaa17e9d26261caa4391caa1fab50b83b87df51a"
-      },
-      {
-        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/junit.xml",
-        "bytes": 12267,
-        "sha256": "eea9c9c67c612e84fbedae2ab9e77c60da538385838f7513404dcd55df94c2fc"
-      },
-      {
-        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/receipt.json",
-        "bytes": 232,
-        "sha256": "0cb99d9dac223c5a83d7b3184d978f83cb2dedc400f2e33dee56428e6c47eb5e"
-      },
-      {
-        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/stderr.log",
-        "bytes": 0,
-        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-      },
-      {
-        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/stdout.log",
-        "bytes": 1931,
-        "sha256": "c49530a3255a63f4ec10b3b243ed2301f517fec419cb4345a7177b5fbe7b76c2"
-      },
-      {
-        "path": ".planning/shared-reading-production/du4-form-acceptance/final-namespace-ruff-stdout.log",
-        "bytes": 19,
-        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
-      },
-      {
-        "path": ".planning/shared-reading-production/du4-form-acceptance/final-namespace-ruff-stderr.log",
-        "bytes": 0,
-        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       }
     ]
   },
@@ -312,5 +387,25 @@
     "initial": "Ruff E402 on fixture constant before external import",
     "final": "PASS; constant moved after imports; no behavior change",
     "submission_prepare": "missing manifest stopped before staging; fixed sequentially"
+  },
+  "git_byte_boundary": {
+    "initial": "Windows CRLF worktree matched manifest but Git LF blobs did not; known CI failure caught before publication",
+    "remote_before_fix": "a89467b02eb16b68095537b44f8e3c1cc73620a4",
+    "stopped_runner_pid": 22016,
+    "stopped_push_result": "NOT_CAPTURED_NOT_A_TEST_FAILURE",
+    "red_failed": 2,
+    "red_passed": 1,
+    "final_concentrated_passed": 87,
+    "final_seconds": 4.58,
+    "final_matrix_cases": 6,
+    "last_test_edit": "remove redundant same-platform checkout; final normal prepush verifies final file",
+    "attribute_role": "all docs/plans/**/fixtures byte evidence",
+    "no_manifest_or_gold_edits": true,
+    "renormalize_scope": "only docs/plans/du4-form-2026-10-15/fixtures (3 files)",
+    "actual_index_verified": true
+  },
+  "extra_source_sha256": {
+    ".gitattributes": "26b97b356e4f30782bc856e0dbb153433ca0bcc0bfd88b6dad67eebc5b0c5f58",
+    "tests/unit/test_retained_plan_fixture_bytes.py": "5aa0c527798b6356e7b9be49c845190a35e23aec8b5ad8fdb412ddb42c33705c"
   }
 }

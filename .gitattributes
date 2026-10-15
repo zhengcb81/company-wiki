@@ -39,3 +39,7 @@
 
 # Exact ROOT W04 integration receipts.
 /.planning/w04-selector-reception/** -text -diff
+
+# Retained native observations carry byte hashes in plan fixture manifests.
+# Preserve their original bytes through Git filters and cross-platform checkout.
+/docs/plans/**/fixtures/** -text -diff -eol

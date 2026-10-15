@@ -23,3 +23,14 @@ ROOT将源分支正常合入本工作树后，先加集中RED，再按单一载�
 ROOT已正常merge commit8406461c，推送前进一步去除测试专用重复bootstrap：仓库tests/conftest.py本来已把当前src插入首位，新包的conftest没有任何fixture，只重复改sys.path并存一个fixture目录常量。将常量迁入本包builders并删除这份新conftest，保持全局已有隔离fixture/网络拦截不变；避免新局部bootstrap不必要地触发全库prepush，也消除测试工作树进口分叉。不是修改CI选择器、跳测试或弱化断言。作者原工作树conftest保留不变，ROOT整合通过统一测试入口。最终集中组件和正常push重新验证。
 
 收尾静态检查曾发现新夹具常量放在第三方import前触发Ruff E402；已移动到所有import之后，最终Ruff通过。提交准备脚本随后因manifest未生成而停止，未产生误提交；已修正顺序。81项运行在常量搬移后的功能版本，最后仅调整该常量的模块声明位置。
+
+
+## Git字节边界：发布前发现并根治，不改gold
+
+ROOT在正常推送期间独立核验Git实际blob，发现作者两观察fixture在Windows工作区为CRLF且SHA符合manifest，Git却已规范为LF（189/59处换行），Linux CI必将失败。已停止唯一owned push runner PID22016，所属Windows Job退出清理；ls-remote确认远端仍a89467b0，未发布这个已知问题，未跳hook。取消收据明确NOT_CAPTURED，不伪造未完成的test结果。
+
+根因属于版本传输层：工作区测试没有覆盖clean filter→index→另一平台checkout。新增独立tmp Git repo测试先2RED/1PASS，统一PWF fixtures字节证据规则后84PASS；最终加有/无规则、true/input/false和Linux式checkout共6控制，加原组件共87PASS/4.58s。不改任何manifest/gold/原件；只定点renormalize这三份fixture，actual index blob已符合原SHA。
+
+.gitattributes按目录角色统一`/docs/plans/**/fixtures/** -text -diff -eol`，复用现有evidence原始字节职责，不新增逐公司/文件白名单。单纯-text保存CRLF后diff --check把原始CR视为空白错误（已实际观察）；故raw fixture按二进制证据diff对待，SHA/JSON语义/真实Git往返测试继续检查，源码和测试的diff/lint规则不变。未对其他历史fixture批量renormalize。后续TABLE/STATE接收同样必须先核实际blob对manifest，若作者Git已转换要从其已验SHA原始观察恢复，不能改gold迎合坏blob。
+
+独审已独立确认两组工作区/坏blob SHA，并认可通用fixtures角色规则设计；没有冒充重新执行ROOT新Git矩阵，具体证据分开记录。ROOT最终Git矩阵最后删除了一次冗余的同平台checkout，只留新目录的Linux式实际checkout；最终正常prepush会执行该文件最终版本。
