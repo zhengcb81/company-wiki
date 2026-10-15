@@ -1,0 +1,11 @@
+du5-cn-iflytek-h1            UNCHANGED
+du5-cn-fangbang-q1           UNCHANGED
+du5-cn-proya-q1              UNCHANGED
+du5-cn-zhongmi-offering      UNCHANGED
+du5-hk-kingsoft-interim      UNCHANGED
+du5-hk-kingsoft-q1           UNCHANGED
+du5-us-msft-8k               UNCHANGED
+du5-us-msft-ex991            UNCHANGED
+du5-cn-gbits-call            UNCHANGED
+originals changed: 0
+config/source_catalog.yaml exists: False size: None

@@ -306,10 +306,8 @@ def m_editorial_as_management(observed: dict[str, Any], gold: Mapping[str, Any])
 def m_currency_swap(observed: dict[str, Any], gold: Mapping[str, Any]) -> dict[str, Any]:
     """币种错：restate every amount in a different currency than its evidence carries."""
 
-    changed = False
     for quantity in _all_quantities(observed):
         quantity["currency"] = "USD"
-        changed = True
     return observed
 
 

@@ -1,0 +1,43 @@
+anchors checked: 321, matched: 280, unmatched: 41
+SHA mismatches: none
+PROBLEM: cn-equity f-phase-two-timeline page 62 预计在2021 年1 月启动建设，2021 年12 月完成建设，2022 年二期建成投产。
+PROBLEM: cn-ipo-confirmation f-scan-is-opaque page 1 确认意见
+PROBLEM: cn-ipo-confirmation f-title-is-misleading page 1 对《湖北鼎龙化学股份有限公司首次公开发行股票并在创业板上市招股说明书》的确认意见
+PROBLEM: cn-ipo-confirmation f-single-page-not-full-prospectus page 1 确认意见
+PROBLEM: cn-ipo-confirmation f-no-fabricated-confirmation-content page 1 确认意见
+PROBLEM: cn-q-sparse f-cashflow-up-is-not-growth page 2 112,145,511.65
+PROBLEM: cn-q-sparse f-cashflow-up-is-not-growth page 2 53.28
+PROBLEM: hk-annual-mojibake f-no-business-fact-may-be-claimed page 1 2025⸶⹨⟳␌
+PROBLEM: hk-annual-mojibake f-page-count-and-blank-pages page 1 2025⸶⹨⟳␌
+PROBLEM: hk-annual-mojibake f-selected-garbage-is-not-evidence page 9 姽⅌彨ṍ嘗
+PROBLEM: holdout-cn-glodon-q1 h-ifrs-not-audited page 2 □是 否
+PROBLEM: us-10k f-azure-is-consumption-based page 1 Azure revenue is mainly affected by infrastructure-as-a-serv
+PROBLEM: us-10k f-azure-inside-intelligent-cloud page 1 Server products and cloud services, including Azure and othe
+PROBLEM: us-10k f-azure-inside-intelligent-cloud page 1 Our Intelligent Cloud segment consists of our public, privat
+PROBLEM: us-10k f-three-segments page 1 We operate our business and report our financial performance
+PROBLEM: us-10k f-segment-change-in-august-2024 page 1 In August 2024, we announced changes to the composition of o
+PROBLEM: us-10k f-segment-change-in-august-2024 page 1 most notably bringing the commercial components of Microsoft
+PROBLEM: us-10k f-m365-consumer-vs-commercial-metric page 1 Microsoft 365 Consumer products and cloud services revenue i
+PROBLEM: us-10k f-m365-consumer-vs-commercial-metric page 1 Microsoft 365 Commercial products and cloud services revenue
+PROBLEM: us-10k f-azure-growth-inside-combined-line page 1 Server products and cloud services revenue increased 23% dri
+PROBLEM: us-10k f-rpo-scope-and-amount page 1 was $ 375 billion as of June 30, 2025, of which $ 368 billio
+PROBLEM: us-10k f-rpo-recognition-is-forward page 1 We expect to recognize approximately 40 % of our total compa
+PROBLEM: us-10k f-total-revenue-consolidated page 1 Microsoft Cloud revenue increased 23% to $168.9 billion.
+PROBLEM: us-10k f-fiscal-year-not-calendar page 1 was $ 375 billion as of June 30, 2025
+PROBLEM: us-10k f-uneared-revenue-rollforward page 1 Balance, end of period $ 67,265
+PROBLEM: us-10k f-html-tag-boundary-corruption page 1 Item 1 OPERATING SEGMENTS
+PROBLEM: us-20f f-regulatory-term-is-not-double-reduction page 1 or the Alleviating Burden Opinion Regarding Compulsory Educa
+PROBLEM: us-20f f-cessation-is-completed-action page 1 we ceased offering the K-9 Academic AST Services in the main
+PROBLEM: us-20f f-not-a-discontinued-operation page 1 the cessation of the K-9 Academic AST Services in the mainla
+PROBLEM: us-20f f-single-reportable-segment page 1 the Group has one single operating and reportable segment
+PROBLEM: us-20f f-still-offers-ast-outside-mainland-k9 page 1 we offer Academic AST Services for select age groups in sele
+PROBLEM: us-20f f-nonprofit-registration-requirement page 1 existing Academic AST Institutions need to be registered as 
+PROBLEM: us-20f f-foreign-ownership-prohibited page 1 foreign ownership in Academic AST Institutions is prohibited
+PROBLEM: us-20f f-no-listing-or-fundraising page 1 Academic AST Institutions shall not raise funds by listing o
+PROBLEM: us-20f f-preschool-and-overseas-prohibitions page 1 the provision of overseas education courses by PRC after-sch
+PROBLEM: us-20f f-publishing-is-separate-regime page 1 our subsidiaries and VIEs are not permitted to engage in pub
+PROBLEM: us-20f f-pending-draft-not-effective-law page 1 these draft administrative regulations were released for pub
+PROBLEM: us-20f f-business-lines-are-two-disaggregations page 1 We have since realigned our business focus towards (i) learn
+PROBLEM: us-20f f-product-wording-smart-books-not-smart-devices page 1 Our primary learning content solutions currently include pri
+PROBLEM: us-20f f-fy2024-revenue-recovery page 1 Our total net revenues increased by 46.2% to $1,490.4 millio
+PROBLEM: us-20f f-segment-revenue-disaggregation page 1 increase of $198.2 million in learning services and others a

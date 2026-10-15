@@ -148,12 +148,27 @@
     "US_share": {"holdout_companies": 2, "status": "GOLD_AUTHORED_BUT_UNSCORABLE", "gap": "the existing selector has no HTML route, measured: real 10-Ks yield 0 units with transcript_start_missing"}
   },
   "error_carrier_gap": {
-    "note": "Not a market gap but a carrier gap: the card asks for A/H/US holdout and separately for real US S-1/F-1/8-K/6-K containers. The S-1/F-1 and 8-K/6-K shapes are still absent.",
+    "note": "Not a market gap but a carrier gap: the card asks for A/H/US holdout and separately for real US S-1/F-1/8-K/6-K containers. Update 2026-10-15 (DU5-CORPUS): the 8-K container + business-exhibit shape is now held as a real paired original set (du5-us-msft-8k + du5-us-msft-ex991, independently gold-backed); REQ-3's production acceptance — the exhibit arriving as its own SourceRef, container not treated as read content — stays open. The S-1/F-1 and amended-pair gaps remain.",
     "missing": [
       "real US S-1 or F-1 registration statement",
-      "real 8-K or 6-K container whose exhibit is a business document",
       "amended filing paired with its original for the same period"
+    ],
+    "filled_by_du5": [
+      "real 8-K container with a business-document exhibit (du5-us-msft-8k + du5-us-msft-ex991, 2026-10-15); production SourceRef separation still untested"
     ]
+  },
+  "du5_corpus_2026_10_15": {
+    "note": "Second independent corpus, frozen before any candidate output was read. Full freeze record (gold SHA-256, support-set digests, reading scopes, source-side business targets, prior use) in tools/document_understanding_benchmark/du5_manifest.json. Old gold is byte-locked; measured anchor deviations in the old set are in gold_corrections.json as proposed corrections only.",
+    "samples": [
+      "du5-cn-iflytek-h1", "du5-cn-fangbang-q1", "du5-cn-proya-q1",
+      "du5-cn-zhongmi-offering", "du5-hk-kingsoft-interim", "du5-hk-kingsoft-q1",
+      "du5-us-msft-8k", "du5-us-msft-ex991", "du5-cn-gbits-call"
+    ],
+    "shapes_filled": [
+      "hk_quarterly (voluntary inside-information quarterly results announcement)",
+      "sec_8k_6k_exhibit (container + exhibit as two independent originals)"
+    ],
+    "rule": "once any du5 sample is used for rule tuning it becomes regression and must be relabelled; the frozen targets are compared as-is, never re-golded to wash a result green"
   },
   "document_integrity_cases": {
     "note": "Real documents whose defect is in the carrier or text layer rather than the content.",

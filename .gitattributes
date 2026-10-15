@@ -44,3 +44,10 @@
 # Preserve their original bytes through Git filters and cross-platform checkout.
 /docs/plans/**/fixtures/** -text -diff -eol
 /docs/plans/**/results/** -text -diff -eol
+
+# DU-BENCH gold/manifest JSON must roundtrip byte-identically through
+# add->blob->checkout on every platform (tests hash the git-normalized LF
+# content); same pattern as /tests/golden/source_v2/*.json above.
+/tools/document_understanding_benchmark/*.json text eol=lf
+/tools/document_understanding_benchmark/gold/*.json text eol=lf
+/tools/document_understanding_benchmark/reviews/*.json text eol=lf

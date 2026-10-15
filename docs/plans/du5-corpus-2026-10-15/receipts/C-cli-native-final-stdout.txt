@@ -1,0 +1,21 @@
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+native samples: 9 (bindings=9)
+  [HOLDOUT] du5-cn-fangbang-q1           FAIL         critical_recall=0.333 checks=35 not_evaluated=16
+  [HOLDOUT] du5-cn-gbits-call            FAIL         critical_recall=0.200 checks=37 not_evaluated=16
+  [HOLDOUT] du5-cn-iflytek-h1            FAIL         critical_recall=0.250 checks=34 not_evaluated=17
+  [HOLDOUT] du5-cn-proya-q1              PARTIAL      critical_recall=n/a checks=26 not_evaluated=16
+  [HOLDOUT] du5-cn-zhongmi-offering      FAIL         critical_recall=0.500 checks=35 not_evaluated=16
+  [HOLDOUT] du5-hk-kingsoft-interim      FAIL         critical_recall=0.167 checks=36 not_evaluated=18
+  [HOLDOUT] du5-hk-kingsoft-q1           FAIL         critical_recall=0.333 checks=32 not_evaluated=12
+  [HOLDOUT] du5-us-msft-8k               FAIL         critical_recall=0.000 checks=27 not_evaluated=16
+  [HOLDOUT] du5-us-msft-ex991            FAIL         critical_recall=0.667 checks=34 not_evaluated=15
+by scope:
+  holdout      docs=9 critical=12/37 (0.324) statuses={'FAIL': 8, 'PARTIAL': 1}
+               all-facts: narrative=15/55 (0.273)  document_meta=0/0 (n/a)
+  carrier .docx   supported    docs=1 unavailable=0
+  carrier .htm    supported    docs=2 unavailable=0
+  carrier .pdf    supported    docs=6 unavailable=0
+raw unchanged: True
+config unchanged: True (probes=2)
+sentinel restored: True (created_by_this_run)
+summary: docs\plans\du5-corpus-2026-10-15\receipts\native-run-final\native\summary.json

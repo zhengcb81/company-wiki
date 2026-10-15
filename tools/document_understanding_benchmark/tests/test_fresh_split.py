@@ -138,12 +138,30 @@ def test_schema_validity_is_never_accepted_as_semantic_coverage():
 
 
 def test_coverage_matrix_names_the_known_absent_us_containers():
+    """Old set preserved + new set validated (DU5-CORPUS, 2026-10-15).
+
+    ``us_s1_f1`` and ``amended_filing`` remain missing with their named gaps —
+    those old cases are kept, not deleted. ``sec_8k_6k_exhibit`` changed state
+    on evidence: DU5 froze a real 8-K container / EX-99.1 exhibit pair
+    (du5-us-msft-8k + du5-us-msft-ex991), so the row is now real-backed, and
+    the new assertion is that it keeps the container/exhibit separation
+    disclosure instead of pretending the gap never existed.
+    """
+
     from tools.document_understanding_benchmark.coverage_matrix import DOCUMENT_COVERAGE
 
     by_shape = {row["shape"]: row for row in DOCUMENT_COVERAGE["rows"]}
-    for shape in ("us_s1_f1", "sec_8k_6k_exhibit", "amended_filing"):
-        assert by_shape[shape]["coverage"] == "missing"
-        assert by_shape[shape]["gap"]
+    for shape in ("us_s1_f1", "amended_filing"):
+        assert by_shape[shape]["coverage"] == "missing", shape
+        assert by_shape[shape]["gap"], shape
+
+    exhibit_row = by_shape["sec_8k_6k_exhibit"]
+    assert exhibit_row["coverage"] == "real"
+    assert set(exhibit_row["sample_ids"]) == {"du5-us-msft-8k", "du5-us-msft-ex991"}
+    assert "REQ-3" in exhibit_row["note"], (
+        "the production-side container/attachment acceptance (REQ-3) must stay "
+        "open in the row's disclosure even though benchmark coverage is real"
+    )
 
 
 # ---------------------------------------------------------------------------

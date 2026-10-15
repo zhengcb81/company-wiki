@@ -16,7 +16,7 @@ counterexample and none is left to a hand-wave.
 
 from __future__ import annotations
 
-import pytest
+
 
 from tools.document_understanding_benchmark.checkers import (
     check_basis_fact,

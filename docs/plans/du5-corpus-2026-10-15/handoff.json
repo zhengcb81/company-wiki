@@ -1,0 +1,222 @@
+{
+  "schema_version": "du5-handoff/1",
+  "card_id": "DU5-CORPUS",
+  "base_commit": "8c027011037dc8c8659235fb65f529028dcd15ca",
+  "branch": "codex/du5-corpus-20261015",
+  "implementation_commits": [],
+  "changed_paths": [
+    "tools/document_understanding_benchmark/gold/du5-*.json (9 new frozen gold records)",
+    "tools/document_understanding_benchmark/du5_manifest.json (new: freeze record)",
+    "tools/document_understanding_benchmark/gold_corrections.json (new: anchor proposals + v2 content corrections + unverifiable)",
+    "tools/document_understanding_benchmark/coverage_matrix.py (five-axis SAMPLE_AXES extension; hk_quarterly/sec_8k_6k_exhibit real-backed; stale notes fixed)",
+    "tools/document_understanding_benchmark/contamination.py (9 du5 entries; USED_FOR_COMPANY_PRIOR_USE vocabulary)",
+    "tools/document_understanding_benchmark/holdout.json (du5 block; carrier-gap update)",
+    "tools/document_understanding_benchmark/README.md (DU5 section; test counts)",
+    "tools/document_understanding_benchmark/mutations.py (lint-only: unused local removed)",
+    "tools/document_understanding_benchmark/tests/anchor_verify.py (new)",
+    "tools/document_understanding_benchmark/tests/test_gold_anchor_integrity.py (new)",
+    "tools/document_understanding_benchmark/tests/test_du5_coverage_axes.py (new)",
+    "tools/document_understanding_benchmark/tests/test_du5_gold.py (new)",
+    "tools/document_understanding_benchmark/tests/test_fresh_split.py (container-gap assertion adapted to measured state; other cases kept)",
+    "tools/document_understanding_benchmark/tests/test_risk_checks.py (lint-only: unused import removed)",
+    ".gitattributes (benchmark JSON pinned text eol=lf, repo golden-JSON precedent)",
+    "docs/plans/du5-corpus-2026-10-15/** (PWF, receipts, reader reports, tools)"
+  ],
+  "entrypoints": [
+    "python -B -X utf8 -m tools.document_understanding_benchmark --mode native --bindings <local du5 bindings> --output <owned dir> --probe-config <production config> --sample du5-... (receipts/C-cli-native-final-stdout.txt)",
+    "python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q",
+    "DU_BENCH_ALLOW_REAL_DATA=1 python -X utf8 -m pytest tools/document_understanding_benchmark/tests/test_gold_anchor_integrity.py -q"
+  ],
+  "interfaces_reused": [
+    "du-gold/1 (records.validate_gold), du-observed/1, du-evaluation/1",
+    "evaluate(observed, gold) oracle; no matcher/schema fork",
+    "observer.observe_native / carrier_support (read-only public surface)",
+    "gold.load_gold_dir / load_bindings / resolve_original (SHA-bound originals)",
+    "contamination.support_set_digest (freeze digests)",
+    "review.py du-review/1 semantics stays NOT_EVALUATED without a review file"
+  ],
+  "red_receipts": [
+    "docs/plans/du5-corpus-2026-10-15/receipts/RED-coverage-axes.txt (3 failed: coverage five-axis collapse, real data)",
+    "docs/plans/du5-corpus-2026-10-15/receipts/RED-gold-anchors.txt (2 failed: wrong-page anchors on real gold + du5 set absent)"
+  ],
+  "tests": [
+    {
+      "command": "python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q",
+      "exit_code": 0,
+      "passed": 236,
+      "failed": 0,
+      "skipped": 9,
+      "receipt": "docs/plans/du5-corpus-2026-10-15/receipts/B-central-pytest-offline-final.txt"
+    },
+    {
+      "command": "DU_BENCH_ALLOW_REAL_DATA=1 python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q",
+      "exit_code": 0,
+      "passed": 245,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/du5-corpus-2026-10-15/receipts/B-central-pytest-realdata.txt"
+    },
+    {
+      "command": "python -m ruff check tools/document_understanding_benchmark docs/plans/du5-corpus-2026-10-15/tools",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "docs/plans/du5-corpus-2026-10-15/receipts/B-ruff.txt"
+    },
+    {
+      "command": "python -B -X utf8 -m tools.document_understanding_benchmark --mode native --bindings <du5> --output receipts/native-run-final --probe-config <prod source_catalog.yaml> --sample <9 du5>",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 8,
+      "skipped": 0,
+      "receipt": "docs/plans/du5-corpus-2026-10-15/receipts/native-run-final/native/summary.json"
+    }
+  ],
+  "fixtures": [
+    {
+      "path": "tools/document_understanding_benchmark/gold/du5-cn-fangbang-q1.json",
+      "sha256": "ebc1d3fecf0a58dd7f8eaaec40a8c0ef3d0c3df61643ccbbf6fbcb2aacd7d81d",
+      "kind": "real_original_binding",
+      "scope": "du5 frozen gold (v2 where reviewer-corrected)"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/gold/du5-cn-gbits-call.json",
+      "sha256": "fc4c9b5ebfec02646007b22bd303ea2c761f804e035213e72deefb5ad498081d",
+      "kind": "real_original_binding",
+      "scope": "du5 frozen gold (v2 where reviewer-corrected)"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/gold/du5-cn-iflytek-h1.json",
+      "sha256": "36e36b6f0add5d681dc687bb463357ffcd2f5ebd796fec4d41bbbd0c7e0b37e4",
+      "kind": "real_original_binding",
+      "scope": "du5 frozen gold (v2 where reviewer-corrected)"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/gold/du5-cn-proya-q1.json",
+      "sha256": "1eb273cb1bedefa2b9f1bf63d407ba95bbdc9bafc6683e3f44cffc6c8cdb271b",
+      "kind": "real_original_binding",
+      "scope": "du5 frozen gold (v2 where reviewer-corrected)"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/gold/du5-cn-zhongmi-offering.json",
+      "sha256": "a5e8596abb96f534f31d47c0d1c67e9818e3998d018f2e89cdf2b3a1a5c877f1",
+      "kind": "real_original_binding",
+      "scope": "du5 frozen gold (v2 where reviewer-corrected)"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/gold/du5-hk-kingsoft-interim.json",
+      "sha256": "14132a28c9bec873c6db86d537f56446b495ccc00240382fbfe5ca11efbd73b5",
+      "kind": "real_original_binding",
+      "scope": "du5 frozen gold (v2 where reviewer-corrected)"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/gold/du5-hk-kingsoft-q1.json",
+      "sha256": "8eaf4a18e759e25464d3eaa6eb0b6d7b2d99b0be5746b654f2c9bd2d750dbbda",
+      "kind": "real_original_binding",
+      "scope": "du5 frozen gold (v2 where reviewer-corrected)"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/gold/du5-us-msft-8k.json",
+      "sha256": "5693dc530bc0b24764ab900b949409f84c41d37dc1af3c1b175bc126f7386875",
+      "kind": "real_original_binding",
+      "scope": "du5 frozen gold (v2 where reviewer-corrected)"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/gold/du5-us-msft-ex991.json",
+      "sha256": "e7c4ad62c189135766b5ba189b234074c4c08ffe65a2c586ff9b8353e94dc9d5",
+      "kind": "real_original_binding",
+      "scope": "du5 frozen gold (v2 where reviewer-corrected)"
+    },
+    {
+      "path": "docs/plans/du5-corpus-2026-10-15/reader_reports/du5-cn-fangbang-q1.facts.json",
+      "sha256": "231c12ce95daa06560ac6778838a6d888d7b4fa290fd26ba2b06c74867254477",
+      "kind": "real_excerpt",
+      "scope": "independent reader verbatim source-side fact report"
+    },
+    {
+      "path": "docs/plans/du5-corpus-2026-10-15/reader_reports/du5-cn-gbits-call.facts.json",
+      "sha256": "5f6701b060a871992686de57ccb6c95d7717206e941da14783d227ee45810693",
+      "kind": "real_excerpt",
+      "scope": "independent reader verbatim source-side fact report"
+    },
+    {
+      "path": "docs/plans/du5-corpus-2026-10-15/reader_reports/du5-cn-iflytek-h1.facts.json",
+      "sha256": "74535029933f518a9eaec710bcdc5dfa16019b6ff50b5828113df2f82c1d10d0",
+      "kind": "real_excerpt",
+      "scope": "independent reader verbatim source-side fact report"
+    },
+    {
+      "path": "docs/plans/du5-corpus-2026-10-15/reader_reports/du5-cn-proya-q1.facts.json",
+      "sha256": "59506ef6c6eb50ad1c9f6bfb6eeab93d96e110e51a4e297c8b9897c0230e022a",
+      "kind": "real_excerpt",
+      "scope": "independent reader verbatim source-side fact report"
+    },
+    {
+      "path": "docs/plans/du5-corpus-2026-10-15/reader_reports/du5-cn-zhongmi-offering.facts.json",
+      "sha256": "c56e09af685082ae7f473c56c2e906cbc8773eea2f7bac8e5f569ad5e765bf2a",
+      "kind": "real_excerpt",
+      "scope": "independent reader verbatim source-side fact report"
+    },
+    {
+      "path": "docs/plans/du5-corpus-2026-10-15/reader_reports/du5-hk-kingsoft-interim.facts.json",
+      "sha256": "0c6159aca823121309805897e331cfd3769a84ad3f4825c9ec2c745d1ba98b87",
+      "kind": "real_excerpt",
+      "scope": "independent reader verbatim source-side fact report"
+    },
+    {
+      "path": "docs/plans/du5-corpus-2026-10-15/reader_reports/du5-hk-kingsoft-q1.facts.json",
+      "sha256": "cc3a437a86c2ac4bcc6363174da675074c3911f3d2662c721f06cbf016a6dd21",
+      "kind": "real_excerpt",
+      "scope": "independent reader verbatim source-side fact report"
+    },
+    {
+      "path": "docs/plans/du5-corpus-2026-10-15/reader_reports/du5-us-msft-8k.facts.json",
+      "sha256": "c34000a293d8eb20ae12f8cab385933c41648bb898da48369e3929b350076399",
+      "kind": "real_excerpt",
+      "scope": "independent reader verbatim source-side fact report"
+    },
+    {
+      "path": "docs/plans/du5-corpus-2026-10-15/reader_reports/du5-us-msft-ex991.facts.json",
+      "sha256": "e4030b7ce8fcdf6ac00e2ef7a706f71aa2f61a1d3c3558d0b72a5d19cbae7557",
+      "kind": "real_excerpt",
+      "scope": "independent reader verbatim source-side fact report"
+    }
+  ],
+  "independent_review": [
+    {
+      "reviewer": "fresh subagent, blind to freeze process, read only originals + gold",
+      "scope": [
+        "du5-cn-proya-q1",
+        "du5-cn-gbits-call"
+      ],
+      "result": "all facts reference_resolved; sample B clean (21/21 anchors, semantics faithful); sample A: 4 defective must_not_assert (true/ambiguous negative controls) + 1 modality mislabel",
+      "action": "recorded v2 content correction (gold_corrections.content_corrections; old values replayable; anchors/importance/denominators untouched)",
+      "receipt": "docs/plans/du5-corpus-2026-10-15/receipts/review-corrections-applied.txt"
+    }
+  ],
+  "old_failures_preserved": true,
+  "not_run": [
+    "adapter mode (ROOT-injected observer; no adapter supplied)",
+    "native replay of the 20 old samples (their preserved historical reports stand; this card re-measured only the du5 set)",
+    "reviewer additions suggested post-freeze (ROE own fact, gbits Q1-trend fact etc.) deliberately NOT added to frozen gold"
+  ],
+  "known_limits": [
+    "old gold wrong-page anchors (3) are recorded as proposed corrections; old gold bytes stay as-is until ROOT publishes an applied correction version",
+    "4 old anchors are unverifiable by independent extraction (scan/CID-mojibake/checkbox-glyph/iXBRL-boundary) and recorded as such, not silently passed",
+    "du5-us-msft-* fill shape coverage only: the company is already in benchmark history, never a fresh generalisation claim",
+    "us_10q/us_20f HTML originals are name-only rows (no gold, no recorded observation); readability on the current frontend is unmeasured",
+    "two reader subagent dispatches were rejected by the platform content filter (risk-wording on negative controls); re-dispatched with clarified phrasing, same scope",
+    "host core.autocrlf=true: byte locks hash git-normalized (LF) content; .gitattributes pins benchmark JSON to eol=lf"
+  ],
+  "root_integration_steps": [
+    "merge this package back into CWP; keep du5 gold and du5_manifest.json together",
+    "run formal wired candidates through the same CLI/du-observed; compare against the frozen du5 targets as-is (never re-gold to wash green)",
+    "once any du5 sample informs rule changes, relabel it regression (contamination list) — it is no longer a blind generalisation set",
+    "decide whether to publish an applied correction version for the 3 proposed old-gold wrong-page fixes (gold_corrections.json)",
+    "REQ-1..5 acquisition requests stay open at the source layer; REQ-3's exhibit-as-own-SourceRef acceptance is production work, not benchmark coverage"
+  ],
+  "production_writes": 0,
+  "supplier_calls": 0,
+  "cleanup_receipt": "docs/plans/du5-corpus-2026-10-15/receipts/originals-sha-after.txt (9 originals UNCHANGED; fresh-checkout temp dir removed after byte roundtrip; native runs wrote only their owned output dirs)"
+}

@@ -1,0 +1,5 @@
+applied v2: du5-cn-proya-q1/q1-revenue-yoy-decline.must_not_assert
+applied v2: du5-cn-proya-q1/eps-basic-diluted-unit.must_not_assert
+applied v2: du5-cn-proya-q1/share-capital-and-buyback-holdings.must_not_assert
+applied v2: du5-cn-gbits-call/yy-stabilize-target-uncertain.modality
+content_corrections total: 4

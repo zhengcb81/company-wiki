@@ -45,6 +45,50 @@ importance was removed. Historical holdout split labels are preserved for paired
 regression, but samples already inspected by the project are **not a fresh blind
 validation set**.
 
+## DU5-CORPUS set (frozen 2026-10-15)
+
+A second independent corpus, added by the DU5-CORPUS card without touching any
+old gold byte. Nine new originals, seven companies, A/H/US, nine document
+shapes; support sets were frozen **before any candidate output for these
+samples was read** (freeze digests and gold-file SHA-256 in
+`du5_manifest.json`, together with per-sample reading scope, source-side
+business targets and honest prior-use records):
+
+| sample | company | shape | facts | designated trap |
+|---|---|---|---:|---|
+| `du5-cn-iflytek-h1` | 科大讯飞 | A股半年报 | 12 | 亏损收窄方向、投资vs收入、计划vs实际 |
+| `du5-cn-fangbang-q1` | 方邦股份 | A股经营季报 | 11 | 双单位（元表/万叙述）、现金流与利润方向 |
+| `du5-cn-proya-q1` | 珀莱雅 | A股稀疏纯财务季报 | 10 | 期间/单位表（本报告期 vs 本报告期末 vs 上年度末） |
+| `du5-cn-zhongmi-offering` | 中密控股 | 增发募集说明书 | 12 | 投资vs收入、计划/条件vs已实现、承诺vs实际 |
+| `du5-hk-kingsoft-interim` | 金山雲 | 港股中期报告 | 13 | 千元表vs百萬元叙述、US GAAP 非 IFRS |
+| `du5-hk-kingsoft-q1` | 金山雲 | 港股季度业绩公告（內幕消息） | 10 | 季度vs年度口径、同比/环比方向 |
+| `du5-us-msft-8k` | Microsoft | 8-K 容器 | 8 | 容器≠附件、iXBRL 噪声、furnished≠filed |
+| `du5-us-msft-ex991` | Microsoft | 8-K 业务附件（EX-99.1） | 12 | 计划vs实际、指标定义、财年vs日历年 |
+| `du5-cn-gbits-call` | 吉比特 | 原语言电话会转写 | 12 | 否定/计划/问答角色、ASR 噪声保留 |
+
+Freshness is per company, not per file: 科大讯飞/方邦股份/珀莱雅/中密控股/吉比特
+are fresh (prior sightings recorded where they exist), 金山雲 is contaminated by
+the du-bench extraction probe, Microsoft by its us-10k/us-txt history. The
+samples are `scope=holdout` as a frozen new set — once used for rule tuning they
+become regression and must be relabelled.
+
+Two further mechanisms landed with the set:
+
+* **gold anchor integrity** (`tests/anchor_verify.py` +
+  `tests/test_gold_anchor_integrity.py`): every anchor's quote must be on the
+  page it claims, checked by independent extraction. Old gold stays byte-locked
+  (`tests/test_du5_gold.py::test_old_gold_set_is_byte_preserved`); its three
+  measured wrong-page anchors and four extraction-unverifiable anchors are
+  recorded in `gold_corrections.json` (proposed corrections only — ROOT
+  publishes any applied correction version, old values stay replayable).
+* **coverage axes** (`coverage_matrix.SAMPLE_AXES`): each cited sample now
+  declares `original` / `gold` / `readable` / `selected` /
+  `summary_reviewed` as separate yes/no/unknown axes with measurement
+  evidence. A named sample is not gold, gold is not readability, and none of it
+  is a reviewed summary. `hk_quarterly` and `sec_8k_6k_exhibit` became
+  real-backed on the new originals; `us_s1_f1` and `amended_filing` stay
+  explicitly missing.
+
 Real Microsoft FY2025 10-K HTML: existing normalization read 5,215 units;
 96 selected spans all mapped to original units, no new parser. The current
 baseline still misses four of eight required critical business facts (4/8 recall,
@@ -311,7 +355,7 @@ These FAILs are the deliverable, not a broken test. Confirmed:
 ## Tests
 
 ```bash
-# default: fast, fully offline (143 passed / 7 real-data skips, 3.47s on reception host)
+# default: fast, fully offline (236 passed / 9 real-data skips after DU5-CORPUS)
 python -X utf8 -m pytest tools/document_understanding_benchmark/tests -q
 
 # real originals, opt-in (needs the local bindings file)
@@ -360,7 +404,7 @@ CLI test.
 | `recovery.py` | fingerprints, sentinel, owned-directory cleanup |
 | `fixtures.py` | offline synthetic fixtures |
 | `report.py`, `make_bindings.py` | maintainer helpers |
-| `gold/`, `reviews/`, `holdout.json` | data |
+| `gold/`, `reviews/`, `holdout.json`, `du5_manifest.json`, `gold_corrections.json` | data |
 
 ## Scope and ownership
 

@@ -43,6 +43,11 @@ USED_FOR_THRESHOLD_TUNING = "threshold_tuning"
 USED_FOR_GOLD_ITERATION = "gold_iteration"
 USED_FOR_DIAGNOSIS = "diagnosis"
 USED_FOR_LEGIBILITY_CONTROL = "legibility_control"
+#: The *company* (not this document) was already used by the benchmark, so the
+#: document may add shape coverage but company-blind generalisation can never
+#: be claimed for it. Added by DU5-CORPUS for documents that are new while
+#: their issuer is not.
+USED_FOR_COMPANY_PRIOR_USE = "company_prior_use"
 
 CONTAMINATION = {
     "schema_version": CONTAMINATION_SCHEMA_VERSION,
@@ -149,6 +154,54 @@ CONTAMINATION = {
         {"sample_id": "fresh-us-apple-10k", "company": "Apple Inc", "market": "US",
          "status": "fresh", "used_for": [],
          "why": "company and original absent from every prior gold, finding and tuning note"},
+        # --- DU5-CORPUS set (frozen 2026-10-15, see du5_manifest.json) --------
+        {"sample_id": "du5-cn-iflytek-h1", "company": "科大讯飞", "market": "CN",
+         "status": "fresh", "used_for": [],
+         "why": "company and original absent from every prior gold, finding and "
+                "tuning note; searched .planning, docs/plans and docs/implementation "
+                "2026-10-15 before freezing"},
+        {"sample_id": "du5-cn-fangbang-q1", "company": "方邦股份", "market": "CN",
+         "status": "fresh", "used_for": [],
+         "why": "this Q1 original and its content were never read before freezing; "
+                "the company name only appears in a captured roadshow participant "
+                "list (cross-market-rf-e2e-2026-10-08) and in raw-duplicate-audit "
+                "path metadata for an unrelated research PDF"},
+        {"sample_id": "du5-cn-proya-q1", "company": "珀莱雅", "market": "CN",
+         "status": "fresh", "used_for": [],
+         "why": "company and original absent from every prior gold, finding and "
+                "tuning note; searched 2026-10-15 before freezing"},
+        {"sample_id": "du5-cn-zhongmi-offering", "company": "中密控股", "market": "CN",
+         "status": "fresh", "used_for": [],
+         "why": "this prospectus and its content were never read before freezing; a "
+                "different document of the company (a meeting audio) was processed by "
+                "the 2026-07-09 meeting-converter e2e (metadata + translation output "
+                "only, never benchmark tuning)"},
+        {"sample_id": "du5-cn-gbits-call", "company": "吉比特", "market": "CN",
+         "status": "fresh", "used_for": [],
+         "why": "this call transcript and its content were never read before freezing; "
+                "the company name only appears in raw-duplicate-audit path metadata "
+                "for annual reports"},
+        {"sample_id": "du5-hk-kingsoft-interim", "company": "金山雲", "market": "HK",
+         "status": "contaminated", "used_for": [USED_FOR_LEGIBILITY_CONTROL],
+         "why": "du-bench sample selection probed this company's extraction quality "
+                "(.planning/du-bench/progress.md: '壁仞科技 and 金山雲 extract cleanly, "
+                "so 壁仞 was used'); this interim report's content was never used for "
+                "rule or gold tuning — it fills the hk_interim shape, not a blind claim"},
+        {"sample_id": "du5-hk-kingsoft-q1", "company": "金山雲", "market": "HK",
+         "status": "contaminated", "used_for": [USED_FOR_LEGIBILITY_CONTROL],
+         "why": "same company-level inspection as du5-hk-kingsoft-interim "
+                "(.planning/du-bench/progress.md extraction probe); this quarterly "
+                "results announcement fills the hk_quarterly shape"},
+        {"sample_id": "du5-us-msft-8k", "company": "MICROSOFT CORP", "market": "US",
+         "status": "contaminated", "used_for": [USED_FOR_COMPANY_PRIOR_USE],
+         "why": "the 8-K file itself was never read before this card, but the company "
+                "already sits in benchmark gold/findings via us-10k/us-txt/us-release, "
+                "so it fills the sec_8k container shape and is never a fresh claim"},
+        {"sample_id": "du5-us-msft-ex991", "company": "MICROSOFT CORP", "market": "US",
+         "status": "contaminated", "used_for": [USED_FOR_COMPANY_PRIOR_USE],
+         "why": "the exhibit file itself was never read before this card, but the "
+                "company is already diagnosed in the benchmark; it fills the "
+                "sec_exhibit business-document shape"},
     ],
 }
 

@@ -1,0 +1,400 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "du5-cn-gbits-call",
+  "market": "CN",
+  "company": "吉比特",
+  "source_sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a",
+  "scope": "holdout",
+  "language": "zh",
+  "support_set_frozen_before_output": true,
+  "expected_route_families": [
+    "earnings_call",
+    "investor_call_transcript"
+  ],
+  "notes": "DU5-CORPUS（冻结于 2026-10-15，frozen_at=2026-10-15T23:54:38+01:00）。吉比特 earnings_call_transcript。prior_use=fresh：n5 raw-duplicate-audit 列过吉比特年报路径元数据；本电话会转写原件与内容在本次任务前从未被读取，也未进入任何 benchmark gold/findings/调参讨论。support set 在读取本样本任何候选输出前冻结（support_set_frozen_before_output）；事实由独立子代理逐字读取原件回报并经锚点逐条验证，重要性由原文阅读判断，未使用 selector 输出或生成 claim 填充。指定陷阱：否定/计划/问答角色（分析师前提≠公司事实、计划≠已实现、否定不得丢失、ASR 噪声保留）。（版本2，2026-10-15 C节点独审更正：仅负例字符串/一处 modality 标签，锚点与重要性、分母未动；旧值见 gold_corrections.json.content_corrections。）",
+  "facts": [
+    {
+      "id": "yy-flow-decline-premise",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "period_flow",
+      "modality": "question",
+      "role": "analyst_question",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "然后我们一念今年在如果相对趋缓一些竞争的一个环境下，流水是否还有一定的回升的空间？",
+            "location_kind": "document"
+          }
+        ],
+        [
+          {
+            "exact_quote": "就是5月和6月分别上线了一些比较火的休闲类产品，或者就是一些新品，像寻道包括凡人修仙传这一类的。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人1/分析师提问",
+        "流水是否还有一定的回升的空间",
+        "如果…趋缓"
+      ],
+      "must_not_assert": [
+        "公司确认一念逍遥流水下滑后将回升",
+        "公司称竞品趋缓使流水回升",
+        "公司披露5-6月竞品上线导致流水下滑"
+      ],
+      "reason": "Analyst's premise (visible decline + competitor easing) and its question must stay attributed to 说话人1; restating the premise or the hoped-for rebound as company fact is the trap. '一念' transcribed as 一念/一面/迎面."
+    },
+    {
+      "id": "steam-activity-premise",
+      "importance": "normal",
+      "target_kind": "disposition_context",
+      "quantity_basis": "count",
+      "modality": "question",
+      "role": "analyst_question",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "我们一直是有这样过万的一个活跃，从绝对值可能不太准确，但是趋势是相对稳定的。",
+            "location_kind": "document"
+          }
+        ],
+        [
+          {
+            "exact_quote": "不没有，因为就初期的大量的负面评价，然后我们用户的活跃出现明显滑坡",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人1/分析师监测",
+        "steam时代(≈SteamDB)监测",
+        "从绝对值可能不太准确"
+      ],
+      "must_not_assert": [
+        "公司披露日活跃人次过万",
+        "公司确认活跃用户明显滑坡",
+        "公司公布Steam活跃数据"
+      ],
+      "reason": "Third-party Steam-monitoring estimate ('steam时代'≈SteamDB) and analyst's premise about an activity slump; company never confirmed either. ASR '不没有' kept verbatim."
+    },
+    {
+      "id": "lei-ting-profit-analyst-inference",
+      "importance": "normal",
+      "target_kind": "disposition_context",
+      "quantity_basis": "period_flow",
+      "modality": "question",
+      "role": "analyst_question",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "我看了一下我们雷霆这边就是q三的利润是1.17亿，然后q4的话是1.8亿",
+            "location_kind": "document"
+          }
+        ],
+        [
+          {
+            "exact_quote": "但是我们从少数股东这边推出来，可以看到它三季度到四季度环比来看",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "说话人1推算",
+        "q三1.17亿/q4 1.8亿",
+        "从少数股东这边推出来"
+      ],
+      "must_not_assert": [
+        "公司披露雷霆Q3利润1.17亿、Q4利润1.8亿",
+        "公司确认Q4利润环比大幅提升是经营改善"
+      ],
+      "reason": "Quarterly profits are the analyst's back-solve from minority interests (雷霆 only reports half-yearly); numbers must not be attributed to company disclosure."
+    },
+    {
+      "id": "yy-roi-decline-actual",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "management_answer",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "但是去年上半年观察到 Oa明显的有比较大的下降",
+            "location_kind": "document"
+          }
+        ],
+        [
+          {
+            "exact_quote": "从二三年下半年我们是主动买了买量的一个支出",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "去年上半年",
+        "Oa(≈ROI)下降",
+        "二三年下半年主动…买量支出(ASR≈减了)"
+      ],
+      "must_not_assert": [
+        "ROI去年上半年明显上升",
+        "公司自21年上线起持续加大买量",
+        "二三年下半年主动增加了买量支出"
+      ],
+      "reason": "Core business state: ROI ('Oa') fell in H1 last year and buydown was actively cut from H2 2023; ASR '买了'≈'减了' must not be flipped into a spend increase."
+    },
+    {
+      "id": "buydown-cut-and-stock-operation-plan",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "investment",
+      "modality": "plan",
+      "role": "management_answer",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "往后的话其实整个产品的思路还是会延续，这个思路还是更多的去存量运营的一个思路去做。",
+            "location_kind": "document"
+          }
+        ],
+        [
+          {
+            "exact_quote": "因为大趋势上它肯定不是我们希望我们会尽量的去减少对买量的一个依赖。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "往后/会",
+        "尽量的去减少对买量的一个依赖",
+        "更多的去存量运营"
+      ],
+      "must_not_assert": [
+        "公司已停止买量并完成存量运营转型",
+        "买量依赖已消除",
+        "公司已不再投放广告"
+      ],
+      "reason": "Forward strategy (希望/会尽量), not accomplished fact; rephrasing as achieved traffic exit overstates execution."
+    },
+    {
+      "id": "buydown-no-return-negation",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "investment",
+      "modality": "negation",
+      "role": "management_answer",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "但整体来看的话，买量会不会再走到原来的水平了。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "买量",
+        "不会(再)",
+        "原来的水平"
+      ],
+      "must_not_assert": [
+        "买量会回到原来的水平",
+        "买量水平会随版本回升到历史高位",
+        "公司未对买量水平表态"
+      ],
+      "reason": "Explicit negation that buydown will NOT return to prior levels; ASR renders it '会不会再' — dropping or re-reading it as a possibility/rebound is the trap."
+    },
+    {
+      "id": "yy-stabilize-target-uncertain",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "plan",
+      "role": "management_answer",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "但具体能在什么样的一个情况下稳住，目前也不太好判断，我们再观察一段时间看一下。",
+            "location_kind": "document"
+          }
+        ],
+        [
+          {
+            "exact_quote": "所以后期的话我们希望能够在一个新的水平去稳住这款产品",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "希望",
+        "目前也不太好判断",
+        "再观察一段时间"
+      ],
+      "must_not_assert": [
+        "公司预计产品将在新水平企稳",
+        "公司承诺流水企稳时间表",
+        "公司判断产品已经稳定"
+      ],
+      "reason": "Plan (希望) explicitly paired with '目前也不太好判断' uncertainty; removing the hedge converts an open question into guidance."
+    },
+    {
+      "id": "outpost-update-plan-uncommitted",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "plan",
+      "role": "management_answer",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "希望在那个时候能够去再推一波，但具体的计划还没有，最终落地可能还会有所变化。",
+            "location_kind": "document"
+          }
+        ],
+        [
+          {
+            "exact_quote": "我们也会跟着这些节点再去集中推出一些更新迭代的版本",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "希望",
+        "具体的计划还没有",
+        "可能还会有所变化"
+      ],
+      "must_not_assert": [
+        "公司已排定后续更新版本计划",
+        "公司将在Steam活动节点确定推出大更新",
+        "重装前哨更新路线图已落地"
+      ],
+      "reason": "Explicitly uncommitted plan; presenting it as a set roadmap ignores the stated '计划还没有…可能还会有所变化'."
+    },
+    {
+      "id": "outpost-buyout-revenue-recognition",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "management_answer",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "他是当即确认收入，但是会做一个利息负债什么类似的处理",
+            "location_kind": "document"
+          }
+        ],
+        [
+          {
+            "exact_quote": "其他的消耗型道具一样，还要做一个递延。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "当即确认收入",
+        "利息负债(≈预计负债/退货)",
+        "道具…递延(对照)"
+      ],
+      "must_not_assert": [
+        "重装前哨收入按道具消耗递延确认",
+        "买断收入全额即时确认且无退货准备",
+        "公司披露了递延收入金额"
+      ],
+      "reason": "Accounting distinction (buyout sale vs consumable-item deferral) with ASR '利息负债'≈refund/return liability; misstating recognition basis corrupts any revenue timing reading."
+    },
+    {
+      "id": "outpost-stage-problems-resolved",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "management_answer",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "现在大部分的情况是可以解决了，还有一些少数的我们也会持续的去跟进跟调整。",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "大部分的情况…可以解决",
+        "少数…持续跟进"
+      ],
+      "must_not_assert": [
+        "技术卡顿问题已全部修复",
+        "重装前哨口碑已完全恢复",
+        "产品问题已经彻底解决"
+      ],
+      "reason": "Product-stage statement of partial (not full) recovery after launch issues; '大部分/少数' gradation must survive."
+    },
+    {
+      "id": "strategy-category-unchanged-negation",
+      "importance": "normal",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "negation",
+      "role": "management_answer",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "品类上来看的话，目前没有一个很大的变化",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "品类上",
+        "没有一个很大的变化"
+      ],
+      "must_not_assert": [
+        "公司今年将大幅调整品类战略",
+        "公司决定转型新品类",
+        "公司战略方向发生重大变化"
+      ],
+      "reason": "Explicit negation answering the analyst's strategy-pivot question; dropping '没有' invents a strategic shift that management denied."
+    },
+    {
+      "id": "yy-user-base-scale",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "management_answer",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "最开始我们现在整个大盘子有2000多用户，然后有一些流失再回来的",
+            "location_kind": "document"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "整个大盘子",
+        "2000多用户",
+        "流失再回来"
+      ],
+      "must_not_assert": [
+        "公司披露用户数2000万",
+        "公司公布月活/注册用户精确规模",
+        "用户规模为2000人"
+      ],
+      "reason": "User-scale statement with dropped unit ('2000多[万]用户' ASR-ambiguous); the number must not be promoted to a precise disclosed metric."
+    }
+  ],
+  "support_set_digest": "2571c60ee96c3c887e6ec5db50cf05018da77d41c4deed27bc9b27c04114cb93",
+  "support_set_digest_at_freeze": "6677d96044ca503c89a503db13a624c143d30252a163c11424299fcc75cbb909"
+}

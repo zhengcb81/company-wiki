@@ -1,0 +1,35 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: <HOME>\Projects\company-wiki-du5-corpus
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 5 items
+
+tools\document_understanding_benchmark\tests\test_du5_coverage_axes.py F [ 20%]
+..FF                                                                     [100%]
+
+================================== FAILURES ===================================
+______________ test_every_coverage_row_declares_per_sample_axes _______________
+tools\document_understanding_benchmark\tests\test_du5_coverage_axes.py:73: in test_every_coverage_row_declares_per_sample_axes
+    assert not problems, "coverage rows lack per-sample axes: " + "; ".join(problems)
+E   AssertionError: coverage rows lack per-sample axes: a_share_annual: no sample_axes declaration; a_share_interim: no sample_axes declaration; a_share_quarterly: no sample_axes declaration; hk_annual: no sample_axes declaration; hk_interim: no sample_axes declaration; hk_quarterly: no sample_axes declaration; us_10k: no sample_axes declaration; us_10q: no sample_axes declaration; us_interim: no sample_axes declaration; us_20f: no sample_axes declaration; ipo_prospectus: no sample_axes declaration; us_s1_f1: no sample_axes declaration; equity_offering: no sample_axes declaration; convertible_bond: no sample_axes declaration; investor_relations: no sample_axes declaration; earnings_call: no sample_axes declaration; results_release: no sample_axes declaration; presentation_deck: no sample_axes declaration; sec_8k_6k_exhibit: no sample_axes declaration; amended_filing: no sample_axes declaration; low_business_administrative: no sample_axes declaration
+E   assert not ['a_share_annual: no sample_axes declaration', 'a_share_interim: no sample_axes declaration', 'a_share_quarterly: no s...no sample_axes declaration', 'hk_interim: no sample_axes declaration', 'hk_quarterly: no sample_axes declaration', ...]
+________ test_no_real_row_presents_name_only_samples_as_gold_coverage _________
+tools\document_understanding_benchmark\tests\test_du5_coverage_axes.py:137: in test_no_real_row_presents_name_only_samples_as_gold_coverage
+    assert not problems, "collapsed coverage claims: " + "; ".join(problems)
+E   AssertionError: collapsed coverage claims: a_share_annual: note claims gold but no gold-backed sample; a_share_annual: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; a_share_interim: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; a_share_quarterly: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; hk_annual: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; hk_interim: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; us_10k: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; us_10q: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; us_20f: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; ipo_prospectus: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; equity_offering: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; convertible_bond: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; investor_relations: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; earnings_call: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; results_release: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; presentation_deck: real_original evidence without gold backing must disclose 无金标/name-only in note or gap; low_business_administrative: real_original evidence without gold backing must disclose 无金标/name-only in note or gap
+E   assert not ['a_share_annual: note claims gold but no gold-backed sample', 'a_share_annual: real_original evidence without gold ba...ote or gap', 'hk_interim: real_original evidence without gold backing must disclose 无金标/name-only in note or gap', ...]
+________ test_semantic_coverage_summary_reports_axis_counts_separately ________
+tools\document_understanding_benchmark\tests\test_du5_coverage_axes.py:145: in test_semantic_coverage_summary_reports_axis_counts_separately
+    assert isinstance(axis_counts, dict), "summary has no axis_counts"
+E   AssertionError: summary has no axis_counts
+E   assert False
+E    +  where False = isinstance(None, dict)
+=========================== short test summary info ===========================
+FAILED tools/document_understanding_benchmark/tests/test_du5_coverage_axes.py::test_every_coverage_row_declares_per_sample_axes
+FAILED tools/document_understanding_benchmark/tests/test_du5_coverage_axes.py::test_no_real_row_presents_name_only_samples_as_gold_coverage
+FAILED tools/document_understanding_benchmark/tests/test_du5_coverage_axes.py::test_semantic_coverage_summary_reports_axis_counts_separately
+========================= 3 failed, 2 passed in 1.39s =========================

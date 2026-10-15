@@ -1,0 +1,405 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "du5-cn-proya-q1",
+  "market": "CN",
+  "company": "珀莱雅",
+  "source_sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e",
+  "scope": "holdout",
+  "language": "zh",
+  "support_set_frozen_before_output": true,
+  "expected_route_families": [
+    "quarterly",
+    "a_share_quarterly",
+    "quarterly_report"
+  ],
+  "notes": "DU5-CORPUS（冻结于 2026-10-15，frozen_at=2026-10-15T23:54:38+01:00）。珀莱雅 a_share_quarterly_sparse。prior_use=fresh：none found in .planning, docs/plans, docs/implementation (searched 2026-10-15)。support set 在读取本样本任何候选输出前冻结（support_set_frozen_before_output）；事实由独立子代理逐字读取原件回报并经锚点逐条验证，重要性由原文阅读判断，未使用 selector 输出或生成 claim 填充。指定陷阱：期间/单位表（本报告期 vs 本报告期末 vs 上年度末；元 vs 元/股 vs 个百分点）。（版本2，2026-10-15 C节点独审更正：仅负例字符串/一处 modality 标签，锚点与重要性、分母未动；旧值见 gold_corrections.json.content_corrections。）",
+  "facts": [
+    {
+      "id": "report-period-unaudited-identity",
+      "importance": "critical",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "珀莱雅化妆品股份有限公司\n2026 年第一季度报告",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "合并利润表\n2026 年1—3 月",
+            "page": 8,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "特此公告\n珀莱雅化妆品股份有限公司董事会\n2026 年4 月20 日",
+            "page": 12,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2026 年第一季度报告",
+        "2026 年1—3 月",
+        "珀莱雅化妆品股份有限公司",
+        "2026 年4 月20 日"
+      ],
+      "must_not_assert": [
+        "报告期为2026年上半年或2026年3月单月",
+        "该报告于2026年3月31日发布",
+        "报告期为2025年第一季度"
+      ],
+      "reason": "Anchors the sample's period definition; a Q1 report's 1—3月 flow window is the reference every table number must be matched against."
+    },
+    {
+      "id": "statements-unaudited-no-new-standards",
+      "importance": "critical",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "第一季度财务报表是否经审计\n□是√否",
+            "page": 1,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "(一)审计意见类型\n□适用√不适用",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "2026 年3 月31 日\n编制单位：珀莱雅化妆品股份有限公司\n单位：元\n币种:人民币\n审计类型：未经审计",
+            "page": 6,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "□是√否",
+        "未经审计",
+        "2026 年3 月31 日"
+      ],
+      "must_not_assert": [
+        "财务报表已经过审计",
+        "审计意见为标准无保留意见",
+        "2026年起首次执行新会计准则并调整年初报表"
+      ],
+      "reason": "Unaudited status is disposition-critical; the √ marks are in the 否/不适用 boxes and are easy to invert."
+    },
+    {
+      "id": "q1-revenue-yoy-decline",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "营业收入\n2,305,344,625.43\n2,359,334,894.91\n-2.29",
+            "page": 1,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "一、营业总收入\n2,305,344,625.43\n2,359,334,894.91",
+            "page": 8,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2,305,344,625.43",
+        "2,359,334,894.91",
+        "-2.29",
+        "本报告期",
+        "元"
+      ],
+      "must_not_assert": [
+        "营业收入同比增长2.29%",
+        "2,305,344,625.43元为2026年3月单月收入或2026年上半年累计收入",
+        "营业收入23亿元",
+        "营业收入2,305,344,625.4元"
+      ],
+      "reason": "Q1-only flow in 元 with a NEGATIVE YoY; sign flip and period widening (YTD vs quarter) are the classic corruptions."
+    },
+    {
+      "id": "attributable-net-profit-q1",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "归属于上市公司股东的净\n利润\n366,686,734.14\n390,281,697.93\n-6.05",
+            "page": 1,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "1.归属于母公司股东的净利润（净\n亏损以“-”号填列）\n366,686,734.14\n390,281,697.93",
+            "page": 10,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "366,686,734.14",
+        "390,281,697.93",
+        "-6.05",
+        "归属于"
+      ],
+      "must_not_assert": [
+        "归母净利润为383,647,847.96元（合并净利润）",
+        "归母净利润同比增长6.05%",
+        "366,686,734.14元覆盖2026年1—3月与2025年全年比较"
+      ],
+      "reason": "合并净利润 383,647,847.96 (incl. 少数股东损益 16,961,113.82) vs 归母 366,686,734.14 — attribution mixing is the trap."
+    },
+    {
+      "id": "deducted-net-profit-and-nonrecurring-total",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "归属于上市公司股东的扣\n除非经常性损益的净利润\n341,157,237.18\n378,934,039.06\n-9.97",
+            "page": 2,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "(二)非经常性损益项目和金额\n√适用□不适用\n单位:元币种:人民币",
+            "page": 2,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "341,157,237.18",
+        "378,934,039.06",
+        "-9.97",
+        "扣除非经常性损益",
+        "本期金额"
+      ],
+      "must_not_assert": [
+        "扣非净利润为366,686,734.14元",
+        "非经常性损益合计25,529,496.96元是期末余额",
+        "扣非净利润同比下降9.97个百分点"
+      ],
+      "reason": "扣非 lags 归母 (−9.97% vs −6.05%); the 非经常性损益 table's 本期金额 column is a Q1 flow whose 合计 (25,529,496.96, p3) reconciles 归母 minus 扣非."
+    },
+    {
+      "id": "operating-cash-flow-collapse",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "经营活动产生的现金流量\n净额\n106,971,167.62\n675,490,380.59\n-84.16",
+            "page": 2,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "经营活动产生的现金流量净\n额\n106,971,167.62\n675,490,380.59",
+            "page": 11,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "106,971,167.62",
+        "675,490,380.59",
+        "-84.16",
+        "本报告期"
+      ],
+      "must_not_assert": [
+        "经营活动现金流量净额同比下降84.16元",
+        "现金流量净额为负或流出",
+        "675,490,380.59元为本报告期金额"
+      ],
+      "reason": "Cash flow is POSITIVE but down 84.16% while profit fell only ~6% — direction/period swaps here are high-impact; 675M is the PRIOR-year quarter."
+    },
+    {
+      "id": "cash-flow-drop-driver",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "主要系收回货款减少以及支付的\n推广费增加。",
+            "page": 3,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "项目名称\n变动比例（%）\n主要原因\n经营活动产生的现金流\n量净额\n-84.16",
+            "page": 3,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "收回货款减少",
+        "推广费增加",
+        "-84.16"
+      ],
+      "must_not_assert": [
+        "现金流量下降主要系采购支出增加",
+        "公司称报告期内经营情况无其他重要变化因而收入下降",
+        "推广费减少导致现金流出下降"
+      ],
+      "reason": "The only genuine business narrative in the filing; its cause direction (less collections + more promo spend) is easy to invert."
+    },
+    {
+      "id": "eps-basic-diluted-unit",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "基本每股收益（元/股）\n0.93\n0.99\n-6.06",
+            "page": 2,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "稀释每股收益（元/股）\n0.93\n0.99\n-6.06",
+            "page": 2,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "0.93",
+        "0.99",
+        "元/股",
+        "-6.06",
+        "基本",
+        "稀释"
+      ],
+      "must_not_assert": [
+        "基本每股收益为0.93元/股，较上年增长6.06%",
+        "每股收益0.93元为年化口径或2026年上半年累计口径",
+        "稀释每股收益高于基本每股收益"
+      ],
+      "reason": "Unit is 元/股, value is per-quarter; basic equals diluted (no dilution effect in Q1). Note ROE 5.78% vs 6.97% is '减少1.19 个百分点', not −1.19%."
+    },
+    {
+      "id": "total-assets-point-in-time",
+      "importance": "critical",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "total",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "总资产\n8,912,125,388.70\n8,487,416,240.25\n5.00",
+            "page": 2,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "本报告期末\n上年度末\n本报告期末比上\n年度末增减变动\n幅度(%)",
+            "page": 2,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "8,912,125,388.70",
+        "8,487,416,240.25",
+        "5.00",
+        "本报告期末",
+        "上年度末"
+      ],
+      "must_not_assert": [
+        "总资产8,912,125,388.70元为本报告期新增或季度流量",
+        "对比期为上年同期（2025年3月31日）",
+        "总资产较年初下降5.00%"
+      ],
+      "reason": "The period-mixing flagship: stock block compares 2026-03-31 with 2025-12-31 (year-start), never with 上年同期; it is a balance, not a flow."
+    },
+    {
+      "id": "share-capital-and-buyback-holdings",
+      "importance": "normal",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "count",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "实收资本（或股本）\n395,976,008.00\n395,975,998.00",
+            "page": 8,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "公司回购专用证券账户中持有公司股份3,757,848 股，占公司总股本的0.95%",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "395,976,008.00",
+        "395,975,998.00",
+        "3,757,848 股",
+        "0.95%",
+        "2026 年3 月31 日"
+      ],
+      "must_not_assert": [
+        "公司在报告期内增发了约100万股",
+        "回购专户持股3,757,848股占总股本9.5%",
+        "395,976,008.00为上年度末（2025年12月31日）的股本数"
+      ],
+      "reason": "股本 is a 2026-03-31 stock vs 2025-12-31 stock differing by only 10 shares (equity-incentive effect), easily misread as a new issuance; buyback % is 0.95%."
+    }
+  ],
+  "support_set_digest": "48b8084d7acb9e92477a6d4e0106e22157df316346de73aa5f1e760f88e8924e",
+  "support_set_digest_at_freeze": "73f0e369e0548d0baf3fc47afd0f0767ffeb1bf239b2a9b446f1d8a8fc70d229"
+}
