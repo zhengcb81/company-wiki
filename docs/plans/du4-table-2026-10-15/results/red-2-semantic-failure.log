@@ -1,0 +1,259 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki-du4-table
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 33 items
+
+tests\unit\du4_table_measurements\test_1_semantic_columns_periods.py FFF [  9%]
+FFF                                                                      [ 18%]
+tests\unit\du4_table_measurements\test_2_merged_and_unknown_slots.py FFF [ 27%]
+FFFFF                                                                    [ 42%]
+tests\unit\du4_table_measurements\test_3_headers_units_scope.py FFFFFFFF [ 66%]
+                                                                         [ 66%]
+tests\unit\du4_table_measurements\test_4_refs_budget_stability.py .FFF.F [ 84%]
+FF                                                                       [ 90%]
+tests\unit\du4_table_measurements\test_5_real_hk_packet.py FFF           [100%]
+
+================================== FAILURES ===================================
+_____ test_single_value_without_column_proof_is_not_moved_to_latest_year ______
+tests\unit\du4_table_measurements\test_1_semantic_columns_periods.py:64: in test_single_value_without_column_proof_is_not_moved_to_latest_year
+    m = measurement_for(result, value)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-v', 'char_start': 0, 'char_end': 3}
+_________ test_single_value_with_native_column_stays_on_its_own_year __________
+tests\unit\du4_table_measurements\test_1_semantic_columns_periods.py:94: in test_single_value_with_native_column_stays_on_its_own_year
+    m1 = measurement_for(result, v1)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-v1', 'char_start': 0, 'char_end': 3}
+____________ test_bare_year_headers_do_not_invent_period_semantics ____________
+tests\unit\du4_table_measurements\test_1_semantic_columns_periods.py:139: in test_bare_year_headers_do_not_invent_period_semantics
+    m_positioned = measurement_for(result, value2)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-v2', 'char_start': 0, 'char_end': 3}
+__ test_three_period_headers_two_values_keep_empty_slot_and_distinct_periods __
+tests\unit\du4_table_measurements\test_1_semantic_columns_periods.py:210: in test_three_period_headers_two_values_keep_empty_slot_and_distinct_periods
+    col6 = column_by_native(result, 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:126: in column_by_native
+    raise AssertionError(f"no native column {native_column}")
+E   AssertionError: no native column 1
+___________ test_values_on_left_two_columns_leave_fiscal_slot_empty ___________
+tests\unit\du4_table_measurements\test_1_semantic_columns_periods.py:256: in test_values_on_left_two_columns_leave_fiscal_slot_empty
+    col6 = column_by_native(result, 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:126: in column_by_native
+    raise AssertionError(f"no native column {native_column}")
+E   AssertionError: no native column 1
+_____________ test_row_label_of_bound_measurement_is_kept_as_ref ______________
+tests\unit\du4_table_measurements\test_1_semantic_columns_periods.py:268: in test_row_label_of_bound_measurement_is_kept_as_ref
+    m = measurement_for(result, values[1])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-v1', 'char_start': 0, 'char_end': 5}
+__ test_merged_cell_values_stay_ambiguous_and_positioned_right_column_binds ___
+tests\unit\du4_table_measurements\test_2_merged_and_unknown_slots.py:75: in test_merged_cell_values_stay_ambiguous_and_positioned_right_column_binds
+    m = measurement_for(result, refs[key])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-blob', 'char_start': 18, 'char_end': 21}
+___________ test_none_empty_and_merged_unknown_slots_stay_distinct ____________
+tests\unit\du4_table_measurements\test_2_merged_and_unknown_slots.py:111: in test_none_empty_and_merged_unknown_slots_stay_distinct
+    assert "slot_unavailable" in codes
+E   AssertionError: assert 'slot_unavailable' in ['not_implemented']
+____________ test_label_ref_used_as_header_is_never_a_measurement _____________
+tests\unit\du4_table_measurements\test_2_merged_and_unknown_slots.py:135: in test_label_ref_used_as_header_is_never_a_measurement
+    assert [m["value_ref"] for m in result["measurements"]] == [value]
+E   AssertionError: assert [] == [{'unit_id': ...char_end': 2}]
+E     
+E     Right contains one more item: {'unit_id': 'u-v', 'char_start': 0, 'char_end': 2}
+E     Use -v to get more diff
+____________ test_coarse_table_bbox_is_not_copied_into_fine_cells _____________
+tests\unit\du4_table_measurements\test_2_merged_and_unknown_slots.py:162: in test_coarse_table_bbox_is_not_copied_into_fine_cells
+    assert "coarse_geometry_ignored" in codes
+E   AssertionError: assert 'coarse_geometry_ignored' in ['not_implemented']
+__________ test_provenance_span_attribution_is_used_for_merged_cells __________
+tests\unit\du4_table_measurements\test_2_merged_and_unknown_slots.py:189: in test_provenance_span_attribution_is_used_for_merged_cells
+    m = measurement_for(result, value)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-v', 'char_start': 0, 'char_end': 3}
+__________ test_same_table_index_on_different_pages_is_not_stitched ___________
+tests\unit\du4_table_measurements\test_2_merged_and_unknown_slots.py:213: in test_same_table_index_on_different_pages_is_not_stitched
+    assert res_a["measurements"][0]["value_ref"] == ref_a
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range
+________ test_cross_parent_and_cross_page_refs_are_not_silently_bound _________
+tests\unit\du4_table_measurements\test_2_merged_and_unknown_slots.py:230: in test_cross_parent_and_cross_page_refs_are_not_silently_bound
+    m1 = measurement_for(result, value)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-v', 'char_start': 0, 'char_end': 3}
+______________ test_truncation_and_missing_page_are_diagnostics _______________
+tests\unit\du4_table_measurements\test_2_merged_and_unknown_slots.py:250: in test_truncation_and_missing_page_are_diagnostics
+    assert "observation_truncated" in codes
+E   AssertionError: assert 'observation_truncated' in ['not_implemented']
+___________ test_parallel_cn_en_labels_are_two_labels_of_one_period ___________
+tests\unit\du4_table_measurements\test_3_headers_units_scope.py:53: in test_parallel_cn_en_labels_are_two_labels_of_one_period
+    col = column_by_native(result, 1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:126: in column_by_native
+    raise AssertionError(f"no native column {native_column}")
+E   AssertionError: no native column 1
+____________ test_conflicting_parallel_labels_never_pick_one_side _____________
+tests\unit\du4_table_measurements\test_3_headers_units_scope.py:86: in test_conflicting_parallel_labels_never_pick_one_side
+    col = column_by_native(result, 1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:126: in column_by_native
+    raise AssertionError(f"no native column {native_column}")
+E   AssertionError: no native column 1
+____________ test_unit_and_footnote_rows_do_not_rewrite_the_period ____________
+tests\unit\du4_table_measurements\test_3_headers_units_scope.py:125: in test_unit_and_footnote_rows_do_not_rewrite_the_period
+    col = column_by_native(result, 1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:126: in column_by_native
+    raise AssertionError(f"no native column {native_column}")
+E   AssertionError: no native column 1
+______ test_units_stay_at_their_real_scope_and_never_mix_across_metrics _______
+tests\unit\du4_table_measurements\test_3_headers_units_scope.py:187: in test_units_stay_at_their_real_scope_and_never_mix_across_metrics
+    m_gmv = measurement_for(result, values["Total GMV(1) (RMB in millions)"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-l1-val', 'char_start': 0, 'char_end': 5}
+________ test_scope_refs_keep_original_region_channel_and_tier_labels _________
+tests\unit\du4_table_measurements\test_3_headers_units_scope.py:238: in test_scope_refs_keep_original_region_channel_and_tier_labels
+    m = measurement_for(result, value)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-s1-val', 'char_start': 0, 'char_end': 5}
+______________ test_cross_row_label_applies_to_every_covered_row ______________
+tests\unit\du4_table_measurements\test_3_headers_units_scope.py:261: in test_cross_row_label_applies_to_every_covered_row
+    m = measurement_for(result, v)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-v1', 'char_start': 0, 'char_end': 5}
+___________ test_identical_column_labels_do_not_auto_merge_columns ____________
+tests\unit\du4_table_measurements\test_3_headers_units_scope.py:282: in test_identical_column_labels_do_not_auto_merge_columns
+    col1 = column_by_native(result, 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:126: in column_by_native
+    raise AssertionError(f"no native column {native_column}")
+E   AssertionError: no native column 1
+__________ test_negative_bracketed_and_dash_values_are_kept_verbatim __________
+tests\unit\du4_table_measurements\test_3_headers_units_scope.py:310: in test_negative_bracketed_and_dash_values_are_kept_verbatim
+    m = measurement_for(result, ref)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:112: in measurement_for
+    raise AssertionError(f"no measurement for value_ref {value_ref}")
+E   AssertionError: no measurement for value_ref {'unit_id': 'u-v', 'char_start': 0, 'char_end': 7}
+__________ test_unknown_schema_and_malformed_refs_raise_value_error ___________
+tests\unit\du4_table_measurements\test_4_refs_budget_stability.py:90: in test_unknown_schema_and_malformed_refs_raise_value_error
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+________ test_duplicate_cell_ids_and_illegal_indices_raise_value_error ________
+tests\unit\du4_table_measurements\test_4_refs_budget_stability.py:108: in test_duplicate_cell_ids_and_illegal_indices_raise_value_error
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_______________ test_conflicting_slots_are_diagnosed_not_merged _______________
+tests\unit\du4_table_measurements\test_4_refs_budget_stability.py:153: in test_conflicting_slots_are_diagnosed_not_merged
+    assert "slot_conflict" in diagnostic_codes(result)
+E   AssertionError: assert 'slot_conflict' in ['not_implemented']
+E    +  where ['not_implemented'] = diagnostic_codes({'schema_version': 'du4-table-bindings/1', 'scope': {'parent_id': 'parent-1', 'table_id': 't1', 'page': 1}, 'status': 'unavailable', 'columns': [], ...})
+___________ test_zero_budget_returns_explicit_partial_without_work ____________
+tests\unit\du4_table_measurements\test_4_refs_budget_stability.py:172: in test_zero_budget_returns_explicit_partial_without_work
+    assert result["status"] == "partial"
+E   AssertionError: assert 'unavailable' == 'partial'
+E     
+E     - partial
+E     + unavailable
+_______ test_small_budget_keeps_determined_results_and_reports_partial ________
+tests\unit\du4_table_measurements\test_4_refs_budget_stability.py:182: in test_small_budget_keeps_determined_results_and_reports_partial
+    assert result["status"] == "partial"
+E   AssertionError: assert 'unavailable' == 'partial'
+E     
+E     - partial
+E     + unavailable
+________________ test_work_is_bounded_linearly_on_large_inputs ________________
+tests\unit\du4_table_measurements\test_4_refs_budget_stability.py:206: in test_work_is_bounded_linearly_on_large_inputs
+    assert result["status"] == "complete"
+E   AssertionError: assert 'unavailable' == 'complete'
+E     
+E     - complete
+E     + unavailable
+________ test_store_count_table_binds_only_the_positioned_right_column ________
+tests\unit\du4_table_measurements\test_5_real_hk_packet.py:49: in test_store_count_table_binds_only_the_positioned_right_column
+    col_2023 = column_by_native(result, 1)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:126: in column_by_native
+    raise AssertionError(f"no native column {native_column}")
+E   AssertionError: no native column 1
+_________ test_three_period_table_keeps_same_year_durations_distinct __________
+tests\unit\du4_table_measurements\test_5_real_hk_packet.py:86: in test_three_period_table_keeps_same_year_durations_distinct
+    col6 = column_by_native(result, 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\du4_table_measurements\builders.py:126: in column_by_native
+    raise AssertionError(f"no native column {native_column}")
+E   AssertionError: no native column 1
+_______________ test_every_retained_table_reports_honest_counts _______________
+tests\unit\du4_table_measurements\test_5_real_hk_packet.py:127: in test_every_retained_table_reports_honest_counts
+    assert counts == EXPECTED_COUNTS[(page, table_index)], (page, table_index)
+E   AssertionError: (14, 0)
+E   assert {'bound': 0, ...available': 0} == {'bound': 4, ...available': 0}
+E     
+E     Omitting 1 identical items, use -vv to show
+E     Differing items:
+E     {'bound': 0} != {'bound': 4}
+E     {'ambiguous': 0} != {'ambiguous': 2}
+E     Use -v to get more diff
+=========================== short test summary info ===========================
+FAILED tests/unit/du4_table_measurements/test_1_semantic_columns_periods.py::test_single_value_without_column_proof_is_not_moved_to_latest_year
+FAILED tests/unit/du4_table_measurements/test_1_semantic_columns_periods.py::test_single_value_with_native_column_stays_on_its_own_year
+FAILED tests/unit/du4_table_measurements/test_1_semantic_columns_periods.py::test_bare_year_headers_do_not_invent_period_semantics
+FAILED tests/unit/du4_table_measurements/test_1_semantic_columns_periods.py::test_three_period_headers_two_values_keep_empty_slot_and_distinct_periods
+FAILED tests/unit/du4_table_measurements/test_1_semantic_columns_periods.py::test_values_on_left_two_columns_leave_fiscal_slot_empty
+FAILED tests/unit/du4_table_measurements/test_1_semantic_columns_periods.py::test_row_label_of_bound_measurement_is_kept_as_ref
+FAILED tests/unit/du4_table_measurements/test_2_merged_and_unknown_slots.py::test_merged_cell_values_stay_ambiguous_and_positioned_right_column_binds
+FAILED tests/unit/du4_table_measurements/test_2_merged_and_unknown_slots.py::test_none_empty_and_merged_unknown_slots_stay_distinct
+FAILED tests/unit/du4_table_measurements/test_2_merged_and_unknown_slots.py::test_label_ref_used_as_header_is_never_a_measurement
+FAILED tests/unit/du4_table_measurements/test_2_merged_and_unknown_slots.py::test_coarse_table_bbox_is_not_copied_into_fine_cells
+FAILED tests/unit/du4_table_measurements/test_2_merged_and_unknown_slots.py::test_provenance_span_attribution_is_used_for_merged_cells
+FAILED tests/unit/du4_table_measurements/test_2_merged_and_unknown_slots.py::test_same_table_index_on_different_pages_is_not_stitched
+FAILED tests/unit/du4_table_measurements/test_2_merged_and_unknown_slots.py::test_cross_parent_and_cross_page_refs_are_not_silently_bound
+FAILED tests/unit/du4_table_measurements/test_2_merged_and_unknown_slots.py::test_truncation_and_missing_page_are_diagnostics
+FAILED tests/unit/du4_table_measurements/test_3_headers_units_scope.py::test_parallel_cn_en_labels_are_two_labels_of_one_period
+FAILED tests/unit/du4_table_measurements/test_3_headers_units_scope.py::test_conflicting_parallel_labels_never_pick_one_side
+FAILED tests/unit/du4_table_measurements/test_3_headers_units_scope.py::test_unit_and_footnote_rows_do_not_rewrite_the_period
+FAILED tests/unit/du4_table_measurements/test_3_headers_units_scope.py::test_units_stay_at_their_real_scope_and_never_mix_across_metrics
+FAILED tests/unit/du4_table_measurements/test_3_headers_units_scope.py::test_scope_refs_keep_original_region_channel_and_tier_labels
+FAILED tests/unit/du4_table_measurements/test_3_headers_units_scope.py::test_cross_row_label_applies_to_every_covered_row
+FAILED tests/unit/du4_table_measurements/test_3_headers_units_scope.py::test_identical_column_labels_do_not_auto_merge_columns
+FAILED tests/unit/du4_table_measurements/test_3_headers_units_scope.py::test_negative_bracketed_and_dash_values_are_kept_verbatim
+FAILED tests/unit/du4_table_measurements/test_4_refs_budget_stability.py::test_unknown_schema_and_malformed_refs_raise_value_error
+FAILED tests/unit/du4_table_measurements/test_4_refs_budget_stability.py::test_duplicate_cell_ids_and_illegal_indices_raise_value_error
+FAILED tests/unit/du4_table_measurements/test_4_refs_budget_stability.py::test_conflicting_slots_are_diagnosed_not_merged
+FAILED tests/unit/du4_table_measurements/test_4_refs_budget_stability.py::test_zero_budget_returns_explicit_partial_without_work
+FAILED tests/unit/du4_table_measurements/test_4_refs_budget_stability.py::test_small_budget_keeps_determined_results_and_reports_partial
+FAILED tests/unit/du4_table_measurements/test_4_refs_budget_stability.py::test_work_is_bounded_linearly_on_large_inputs
+FAILED tests/unit/du4_table_measurements/test_5_real_hk_packet.py::test_store_count_table_binds_only_the_positioned_right_column
+FAILED tests/unit/du4_table_measurements/test_5_real_hk_packet.py::test_three_period_table_keeps_same_year_durations_distinct
+FAILED tests/unit/du4_table_measurements/test_5_real_hk_packet.py::test_every_retained_table_reports_honest_counts
+======================== 31 failed, 2 passed in 2.24s =========================
+EXIT=1

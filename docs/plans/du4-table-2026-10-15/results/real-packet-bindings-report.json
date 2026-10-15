@@ -1,0 +1,1806 @@
+{
+  "tables": {
+    "p14t0": {
+      "facts": {
+        "page": 14,
+        "table_index": 0,
+        "capture": {
+          "captured_cells": 228,
+          "captured_rows": 64,
+          "extract_calls_all": 8,
+          "target_extract_calls": 5,
+          "truncated": true
+        },
+        "native_units": 10,
+        "cells_by_presence": {
+          "present": 12,
+          "empty": 9,
+          "unavailable": 0,
+          "merged_unknown": 18
+        },
+        "merged_extent_cells": 4,
+        "truncated": false
+      },
+      "status": "partial",
+      "counts": {
+        "bound": 4,
+        "ambiguous": 2,
+        "unavailable": 0
+      },
+      "columns": [
+        {
+          "native_column": 0,
+          "status": "unavailable",
+          "period": {
+            "kind": "unspecified",
+            "start": null,
+            "end": null,
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "header_refs": []
+        },
+        {
+          "native_column": 1,
+          "status": "bound",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2023-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:470d012cce39dc27f57a5e806ac7a4f2fcbf5a7cdfdc8909b2bbc0a4799c6266",
+              "char_start": 0,
+              "char_end": 18,
+              "text": "As of December 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:22fc71a83ef7f6f017e3b1fd72e14056c1089f521275b33c123f6fcb35c06e59",
+              "char_start": 0,
+              "char_end": 8,
+              "text": "截至12月31日"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b0c4b9709af79c2902f845b70f388335f986060b29015df88056ecd699bfc889",
+              "char_start": 0,
+              "char_end": 4,
+              "text": "2023"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:76060b37c7c676d6e13d5e6b48ecf1b5bc6b6c0473335728488ae7bf7f723fc3",
+              "char_start": 0,
+              "char_end": 5,
+              "text": "2023年"
+            }
+          ]
+        },
+        {
+          "native_column": 2,
+          "status": "bound",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:470d012cce39dc27f57a5e806ac7a4f2fcbf5a7cdfdc8909b2bbc0a4799c6266",
+              "char_start": 0,
+              "char_end": 18,
+              "text": "As of December 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:22fc71a83ef7f6f017e3b1fd72e14056c1089f521275b33c123f6fcb35c06e59",
+              "char_start": 0,
+              "char_end": 8,
+              "text": "截至12月31日"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b0c4b9709af79c2902f845b70f388335f986060b29015df88056ecd699bfc889",
+              "char_start": 7,
+              "char_end": 11,
+              "text": "2024"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:76060b37c7c676d6e13d5e6b48ecf1b5bc6b6c0473335728488ae7bf7f723fc3",
+              "char_start": 8,
+              "char_end": 13,
+              "text": "2024年"
+            }
+          ]
+        }
+      ],
+      "measurements": [
+        {
+          "binding_status": "ambiguous",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:367c8f008922102c83dc5e9a0fcd83d264367af124d78867b41a328a489a288c",
+            "char_start": 0,
+            "char_end": 154,
+            "text": "Number of MINISO stores in mainland China 中國內地的名創優品門店數量\nFirst-tier cities 一線城市 5"
+          },
+          "column_id": null,
+          "period": null,
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:fd3e8d8d665145f5845ea889585afde07f6755684d6d17dd66f677d72e5c1354",
+            "char_start": 0,
+            "char_end": 3,
+            "text": "587"
+          },
+          "column_id": "col-2",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:e1eaf573f23dd55068c459b946c04935632933e4f58b306263e841da6c50c687",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "1,822"
+          },
+          "column_id": "col-2",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:fffc71b369fa943f80c9430d4e363ee2ad1ee109d3f58344f6aa2c75cf95c804",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "1,977"
+          },
+          "column_id": "col-2",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "ambiguous",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:da026f89f2cc5fd8cd8829218924a2ae6d15fda9a3b2dbf203c0045e52f49de0",
+            "char_start": 0,
+            "char_end": 14,
+            "text": "Total 合計 3,926"
+          },
+          "column_id": null,
+          "period": null,
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:a29213d9968d162bd4bd73c9e4fce7a97febe0271c7b28d679afc90307c0907e",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "4,386"
+          },
+          "column_id": "col-2",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        }
+      ],
+      "unbound_value_refs": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:367c8f008922102c83dc5e9a0fcd83d264367af124d78867b41a328a489a288c",
+          "char_start": 0,
+          "char_end": 154,
+          "text": "Number of MINISO stores in mainland China 中國內地的名創優品門店數量\nFirst-tier cities 一線城市 5"
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:da026f89f2cc5fd8cd8829218924a2ae6d15fda9a3b2dbf203c0045e52f49de0",
+          "char_start": 0,
+          "char_end": 14,
+          "text": "Total 合計 3,926"
+        }
+      ],
+      "diagnostic_codes": [
+        "multi_column_value",
+        "no_header_path",
+        "slot_empty",
+        "slot_merged_unknown"
+      ],
+      "work_used": 148,
+      "elapsed_ms": 0.591
+    },
+    "p17t0": {
+      "facts": {
+        "page": 17,
+        "table_index": 0,
+        "capture": {
+          "captured_cells": 228,
+          "captured_rows": 64,
+          "extract_calls_all": 8,
+          "target_extract_calls": 5,
+          "truncated": true
+        },
+        "native_units": 12,
+        "cells_by_presence": {
+          "present": 14,
+          "empty": 9,
+          "unavailable": 0,
+          "merged_unknown": 22
+        },
+        "merged_extent_cells": 4,
+        "truncated": false
+      },
+      "status": "partial",
+      "counts": {
+        "bound": 6,
+        "ambiguous": 2,
+        "unavailable": 0
+      },
+      "columns": [
+        {
+          "native_column": 0,
+          "status": "unavailable",
+          "period": {
+            "kind": "unspecified",
+            "start": null,
+            "end": null,
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "header_refs": []
+        },
+        {
+          "native_column": 1,
+          "status": "bound",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2023-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:74eae3ae05e16217355f31c1eea22b942be445fcdf132a75dec78c463bf9c31b",
+              "char_start": 0,
+              "char_end": 18,
+              "text": "As of December 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b77c903cd8423fc1c6e95b9af18f94fd31c1eded48b619c6409f886bf81153ee",
+              "char_start": 0,
+              "char_end": 8,
+              "text": "截至12月31日"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:c2b328858de709e56acebfb11025a3012a86a3fdc27ee506c1426ae4a0955efa",
+              "char_start": 0,
+              "char_end": 4,
+              "text": "2023"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:599ff2c0ea70680184b1ef8602d9386f731f21bfaf621eb272ad6fcd5cd359ed",
+              "char_start": 0,
+              "char_end": 5,
+              "text": "2023年"
+            }
+          ]
+        },
+        {
+          "native_column": 2,
+          "status": "bound",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:74eae3ae05e16217355f31c1eea22b942be445fcdf132a75dec78c463bf9c31b",
+              "char_start": 0,
+              "char_end": 18,
+              "text": "As of December 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:b77c903cd8423fc1c6e95b9af18f94fd31c1eded48b619c6409f886bf81153ee",
+              "char_start": 0,
+              "char_end": 8,
+              "text": "截至12月31日"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:c2b328858de709e56acebfb11025a3012a86a3fdc27ee506c1426ae4a0955efa",
+              "char_start": 7,
+              "char_end": 11,
+              "text": "2024"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:599ff2c0ea70680184b1ef8602d9386f731f21bfaf621eb272ad6fcd5cd359ed",
+              "char_start": 8,
+              "char_end": 13,
+              "text": "2024年"
+            }
+          ]
+        }
+      ],
+      "measurements": [
+        {
+          "binding_status": "ambiguous",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:4bed68b93f3cb23e577864a499b788f18babb1d7bf2de86c8bcea8156dd4e1e5",
+            "char_start": 0,
+            "char_end": 166,
+            "text": "Number of MINISO stores in overseas markets 海外市場的名創優品門店數量\nAsia excluding China 亞"
+          },
+          "column_id": null,
+          "period": null,
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:95e8ffc6282f3a7a142cc32f1e4036cccc0d4405e921dda7a297ec850d2d28e3",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "1,611"
+          },
+          "column_id": "col-2",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:d69c17f08f4515cbdaf62854af0f21abe2f70e0990d2f91f2ba0c3e6826c723e",
+            "char_start": 0,
+            "char_end": 3,
+            "text": "350"
+          },
+          "column_id": "col-2",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:93f7f3bdf89bf273baa98080dae004132886759d014ce1e535ad75f264b1f73e",
+            "char_start": 0,
+            "char_end": 3,
+            "text": "637"
+          },
+          "column_id": "col-2",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:7f6203745fd15450d6d055f31a978fed4019ad708a372b8449e8a9720c155c3e",
+            "char_start": 0,
+            "char_end": 3,
+            "text": "295"
+          },
+          "column_id": "col-2",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:59bcd59afd7875f385f76fd3b01c43e9c883b394b507611c0099bf0b94ea43fc",
+            "char_start": 0,
+            "char_end": 3,
+            "text": "225"
+          },
+          "column_id": "col-2",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "ambiguous",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:387520dab5c69e427166be79d65fffc2c015549d3e57e2e415bae444ffc747aa",
+            "char_start": 0,
+            "char_end": 14,
+            "text": "Total 合計 2,487"
+          },
+          "column_id": null,
+          "period": null,
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:49b4f755c445c9df3fcf679c8fa551a039ed336727838be936b69cab8c484e4d",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "3,118"
+          },
+          "column_id": "col-2",
+          "period": {
+            "kind": "as_of",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        }
+      ],
+      "unbound_value_refs": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4bed68b93f3cb23e577864a499b788f18babb1d7bf2de86c8bcea8156dd4e1e5",
+          "char_start": 0,
+          "char_end": 166,
+          "text": "Number of MINISO stores in overseas markets 海外市場的名創優品門店數量\nAsia excluding China 亞"
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:387520dab5c69e427166be79d65fffc2c015549d3e57e2e415bae444ffc747aa",
+          "char_start": 0,
+          "char_end": 14,
+          "text": "Total 合計 2,487"
+        }
+      ],
+      "diagnostic_codes": [
+        "multi_column_value",
+        "no_header_path",
+        "slot_empty",
+        "slot_merged_unknown"
+      ],
+      "work_used": 172,
+      "elapsed_ms": 0.552
+    },
+    "p18t0": {
+      "facts": {
+        "page": 18,
+        "table_index": 0,
+        "capture": {
+          "captured_cells": 228,
+          "captured_rows": 64,
+          "extract_calls_all": 8,
+          "target_extract_calls": 5,
+          "truncated": true
+        },
+        "native_units": 11,
+        "cells_by_presence": {
+          "present": 19,
+          "empty": 8,
+          "unavailable": 0,
+          "merged_unknown": 29
+        },
+        "merged_extent_cells": 1,
+        "truncated": false
+      },
+      "status": "partial",
+      "counts": {
+        "bound": 6,
+        "ambiguous": 1,
+        "unavailable": 0
+      },
+      "columns": [
+        {
+          "native_column": 0,
+          "status": "unavailable",
+          "period": {
+            "kind": "unspecified",
+            "start": null,
+            "end": null,
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "header_refs": []
+        },
+        {
+          "native_column": 1,
+          "status": "bound",
+          "period": {
+            "kind": "duration",
+            "start": null,
+            "end": "2023-12-31",
+            "duration_months": 6,
+            "fiscal_label": null
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:9ac617d29b12b7970c556926a23b72f602cadd9e67bee662ce841614c0bac7f5",
+              "char_start": 0,
+              "char_end": 37,
+              "text": "For the six\nmonths ended\nDecember 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:a3f1568d9f25788a6412e5592e42d4fde4e30b7503d40c19cc59b9ae1169c366",
+              "char_start": 0,
+              "char_end": 13,
+              "text": "截至12月31日\n止六個月"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:7a4b7e7cd12450abf6f573268b6304625a7758a9ea5e8d332debeaa30b1f0fe3",
+              "char_start": 0,
+              "char_end": 4,
+              "text": "2023"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:f8c47ccdfdc83bcdb44f22cfaa54a517649a71978fd1317e02db93617a3dc2a3",
+              "char_start": 0,
+              "char_end": 5,
+              "text": "2023年"
+            }
+          ]
+        },
+        {
+          "native_column": 2,
+          "status": "bound",
+          "period": {
+            "kind": "duration",
+            "start": null,
+            "end": "2023-12-31",
+            "duration_months": 12,
+            "fiscal_label": null
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:9ac617d29b12b7970c556926a23b72f602cadd9e67bee662ce841614c0bac7f5",
+              "char_start": 40,
+              "char_end": 80,
+              "text": "For the twelve\nmonths ended\nDecember 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:a3f1568d9f25788a6412e5592e42d4fde4e30b7503d40c19cc59b9ae1169c366",
+              "char_start": 16,
+              "char_end": 30,
+              "text": "截至12月31日\n止十二個月"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:7a4b7e7cd12450abf6f573268b6304625a7758a9ea5e8d332debeaa30b1f0fe3",
+              "char_start": 7,
+              "char_end": 11,
+              "text": "2023"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:f8c47ccdfdc83bcdb44f22cfaa54a517649a71978fd1317e02db93617a3dc2a3",
+              "char_start": 8,
+              "char_end": 13,
+              "text": "2023年"
+            }
+          ]
+        },
+        {
+          "native_column": 3,
+          "status": "bound",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:9ac617d29b12b7970c556926a23b72f602cadd9e67bee662ce841614c0bac7f5",
+              "char_start": 83,
+              "char_end": 121,
+              "text": "For the fiscal\nyear ended\nDecember 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:a3f1568d9f25788a6412e5592e42d4fde4e30b7503d40c19cc59b9ae1169c366",
+              "char_start": 33,
+              "char_end": 47,
+              "text": "截至12月31日\n止財政年度"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:7a4b7e7cd12450abf6f573268b6304625a7758a9ea5e8d332debeaa30b1f0fe3",
+              "char_start": 14,
+              "char_end": 18,
+              "text": "2024"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:f8c47ccdfdc83bcdb44f22cfaa54a517649a71978fd1317e02db93617a3dc2a3",
+              "char_start": 16,
+              "char_end": 21,
+              "text": "2024年"
+            }
+          ]
+        }
+      ],
+      "measurements": [
+        {
+          "binding_status": "ambiguous",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+            "char_start": 0,
+            "char_end": 403,
+            "text": "MINISO stores in mainland China 中國內地的名創優品門店\nTotal GMV(1) (RMB in millions) 總GMV("
+          },
+          "column_id": null,
+          "period": null,
+          "row_label_refs": [],
+          "unit_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 58,
+              "char_end": 73,
+              "text": "RMB in millions"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 84,
+              "char_end": 89,
+              "text": "人民幣百萬"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 267,
+              "char_end": 270,
+              "text": "RMB"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 278,
+              "char_end": 282,
+              "text": "人民幣元"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 317,
+              "char_end": 320,
+              "text": "RMB"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 327,
+              "char_end": 331,
+              "text": "人民幣元"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 369,
+              "char_end": 370,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 385,
+              "char_end": 386,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 390,
+              "char_end": 391,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 394,
+              "char_end": 395,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 398,
+              "char_end": 399,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+              "char_start": 402,
+              "char_end": 403,
+              "text": "%"
+            }
+          ]
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:1bf32a95c7b5bf754aa19818918deb39fd2211bab680dfd991190336b2508269",
+            "char_start": 0,
+            "char_end": 6,
+            "text": "14,008"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:8a3c97942060e8ee1c4af8370f51ee1b8f20be8f50c9d1d32c0b928ed852bbe1",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "368.1"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:21ee303c8321a3c8eedff0ae28d4438d18dda3f58ded8f56d927e8f974046555",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "978.8"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:2cfc148f6115811bd0b75ee815fd90d45c2310f4f4229210d352f5fd14ee0e07",
+            "char_start": 0,
+            "char_end": 4,
+            "text": "38.1"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:c587c53852c8e1bad15205c8c6e2879d1a72b9976b63b4b3aace777891d1d151",
+            "char_start": 0,
+            "char_end": 4,
+            "text": "14.3"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:bccd9bf9053512cf59c295fea2980ff266c229e92920d31d16599a9686b2574a",
+            "char_start": 0,
+            "char_end": 30,
+            "text": "Down high-\nsingle digit\n下降高個位數"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        }
+      ],
+      "unbound_value_refs": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4fa4278eec7b7bc370c0794603fc13aa860c7b43bace0ee72afcb2050eed2ba5",
+          "char_start": 0,
+          "char_end": 403,
+          "text": "MINISO stores in mainland China 中國內地的名創優品門店\nTotal GMV(1) (RMB in millions) 總GMV("
+        }
+      ],
+      "diagnostic_codes": [
+        "multi_column_value",
+        "no_header_path",
+        "slot_empty",
+        "slot_merged_unknown"
+      ],
+      "work_used": 209,
+      "elapsed_ms": 1.989
+    },
+    "p19t0": {
+      "facts": {
+        "page": 19,
+        "table_index": 0,
+        "capture": {
+          "captured_cells": 228,
+          "captured_rows": 64,
+          "extract_calls_all": 8,
+          "target_extract_calls": 5,
+          "truncated": true
+        },
+        "native_units": 17,
+        "cells_by_presence": {
+          "present": 25,
+          "empty": 8,
+          "unavailable": 0,
+          "merged_unknown": 47
+        },
+        "merged_extent_cells": 1,
+        "truncated": false
+      },
+      "status": "partial",
+      "counts": {
+        "bound": 12,
+        "ambiguous": 1,
+        "unavailable": 0
+      },
+      "columns": [
+        {
+          "native_column": 0,
+          "status": "unavailable",
+          "period": {
+            "kind": "unspecified",
+            "start": null,
+            "end": null,
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "header_refs": []
+        },
+        {
+          "native_column": 1,
+          "status": "bound",
+          "period": {
+            "kind": "duration",
+            "start": null,
+            "end": "2023-12-31",
+            "duration_months": 6,
+            "fiscal_label": null
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:358ddd3a9491f8aea08531a21bbe7b09b47cf77361edda22134f918046bac6e4",
+              "char_start": 0,
+              "char_end": 37,
+              "text": "For the six\nmonths ended\nDecember 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:82de18a92bf4ae9a02dfc3917dc663caeab37df8e850002d1f4c88a1b1a635c5",
+              "char_start": 0,
+              "char_end": 13,
+              "text": "截至12月31日\n止六個月"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:a41b9e03c14cc61e5ecf5daeb1b15eb0c8a17deba768694884abd619a941a06f",
+              "char_start": 0,
+              "char_end": 4,
+              "text": "2023"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:cc526004927885d3d640df0204a2c9cdb11b4b9a673e4df9d1366fc57901977f",
+              "char_start": 0,
+              "char_end": 5,
+              "text": "2023年"
+            }
+          ]
+        },
+        {
+          "native_column": 2,
+          "status": "bound",
+          "period": {
+            "kind": "duration",
+            "start": null,
+            "end": "2023-12-31",
+            "duration_months": 12,
+            "fiscal_label": null
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:358ddd3a9491f8aea08531a21bbe7b09b47cf77361edda22134f918046bac6e4",
+              "char_start": 40,
+              "char_end": 80,
+              "text": "For the twelve\nmonths ended\nDecember 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:82de18a92bf4ae9a02dfc3917dc663caeab37df8e850002d1f4c88a1b1a635c5",
+              "char_start": 16,
+              "char_end": 30,
+              "text": "截至12月31日\n止十二個月"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:a41b9e03c14cc61e5ecf5daeb1b15eb0c8a17deba768694884abd619a941a06f",
+              "char_start": 7,
+              "char_end": 11,
+              "text": "2023"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:cc526004927885d3d640df0204a2c9cdb11b4b9a673e4df9d1366fc57901977f",
+              "char_start": 8,
+              "char_end": 13,
+              "text": "2023年"
+            }
+          ]
+        },
+        {
+          "native_column": 3,
+          "status": "bound",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:358ddd3a9491f8aea08531a21bbe7b09b47cf77361edda22134f918046bac6e4",
+              "char_start": 83,
+              "char_end": 121,
+              "text": "For the fiscal\nyear ended\nDecember 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:82de18a92bf4ae9a02dfc3917dc663caeab37df8e850002d1f4c88a1b1a635c5",
+              "char_start": 33,
+              "char_end": 47,
+              "text": "截至12月31日\n止財政年度"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:a41b9e03c14cc61e5ecf5daeb1b15eb0c8a17deba768694884abd619a941a06f",
+              "char_start": 14,
+              "char_end": 18,
+              "text": "2024"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:cc526004927885d3d640df0204a2c9cdb11b4b9a673e4df9d1366fc57901977f",
+              "char_start": 16,
+              "char_end": 21,
+              "text": "2024年"
+            }
+          ]
+        }
+      ],
+      "measurements": [
+        {
+          "binding_status": "ambiguous",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+            "char_start": 0,
+            "char_end": 553,
+            "text": "MINISO stores in overseas markets\n海外市場的名創優品門店\nTotal GMV (RMB in millions)\n總GMV（人"
+          },
+          "column_id": null,
+          "period": null,
+          "row_label_refs": [],
+          "unit_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 57,
+              "char_end": 72,
+              "text": "RMB in millions"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 79,
+              "char_end": 84,
+              "text": "人民幣百萬"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 263,
+              "char_end": 264,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 279,
+              "char_end": 280,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 284,
+              "char_end": 285,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 288,
+              "char_end": 289,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 292,
+              "char_end": 293,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 296,
+              "char_end": 297,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 389,
+              "char_end": 390,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 393,
+              "char_end": 394,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 397,
+              "char_end": 398,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 401,
+              "char_end": 402,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 424,
+              "char_end": 425,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 428,
+              "char_end": 429,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 432,
+              "char_end": 433,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+              "char_start": 436,
+              "char_end": 437,
+              "text": "%"
+            }
+          ]
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:35f4160d9458ce94924564aa5e91f4c739e3f3b63589741e506efc337a7d60a5",
+            "char_start": 0,
+            "char_end": 6,
+            "text": "14,001"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:065b4dd05978ccfc8a1085defa5e0f6ccf64f76497bde1c3daa3d47ea9f1658a",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "5,039"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:37a5eaecc47d70abe98ff29761ed9e7aeefa26029ad3bfceefc9eb77100ec422",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "2,141"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:20d00148ba8e381defb06e331bc03544d26ecdc0bb7374e93fc614661139ea1f",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "4,897"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:2cfa1f4e662c6e47a8b8d5b63022332887b852a66a604aef7d29a5276fc6714e",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "1,260"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:f66b28eb4833b2ccf04368575318ffdd536ad3889b7be79ab5210bde968c03be",
+            "char_start": 0,
+            "char_end": 3,
+            "text": "664"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:a7cc382f0760789ef05121026f6469efd21c4b124e8b0cc317ea2ff273e57d13",
+            "char_start": 0,
+            "char_end": 26,
+            "text": "up mid-single digit\n增加中個位數"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ee3881971715259428e07450a5858e7c703f8ae88f34f111e0d7607dc6bb070d",
+            "char_start": 0,
+            "char_end": 27,
+            "text": "up high-single digit\n增加高個位數"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:63b7b5ae99ef9573d3ec0fd7bedf37cd16aff02c8eac27b87ce3a9f604b50ba9",
+            "char_start": 0,
+            "char_end": 7,
+            "text": "flat\n持平"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:dfa0857d829a2411762557e8d9726d2c0ff1b2fecb54032015adff2fd91735ad",
+            "char_start": 0,
+            "char_end": 26,
+            "text": "up mid-single digit\n增加中個位數"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:5c59484dd2e7464c8d8c74642025881eafa8d8f9693a3975ff7a401da854d972",
+            "char_start": 0,
+            "char_end": 7,
+            "text": "flat\n持平"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:b9e65ea29f8638a6d2da5ed45156aef00185553808a06507de27a7d4a3203e32",
+            "char_start": 0,
+            "char_end": 28,
+            "text": "down mid-single digit\n下降中個位數"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        }
+      ],
+      "unbound_value_refs": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:e29d4956ce5f6255e9f1687e1c80de515ce4ca0bcc05fdcaac504cefb668ce34",
+          "char_start": 0,
+          "char_end": 553,
+          "text": "MINISO stores in overseas markets\n海外市場的名創優品門店\nTotal GMV (RMB in millions)\n總GMV（人"
+        }
+      ],
+      "diagnostic_codes": [
+        "multi_column_value",
+        "no_header_path",
+        "slot_empty",
+        "slot_merged_unknown"
+      ],
+      "work_used": 299,
+      "elapsed_ms": 1.804
+    },
+    "p20t1": {
+      "facts": {
+        "page": 20,
+        "table_index": 1,
+        "capture": {
+          "captured_cells": 228,
+          "captured_rows": 64,
+          "extract_calls_all": 8,
+          "target_extract_calls": 5,
+          "truncated": true
+        },
+        "native_units": 11,
+        "cells_by_presence": {
+          "present": 19,
+          "empty": 2,
+          "unavailable": 23,
+          "merged_unknown": 0
+        },
+        "merged_extent_cells": 0,
+        "truncated": true
+      },
+      "status": "partial",
+      "counts": {
+        "bound": 6,
+        "ambiguous": 1,
+        "unavailable": 0
+      },
+      "columns": [
+        {
+          "native_column": 0,
+          "status": "unavailable",
+          "period": {
+            "kind": "unspecified",
+            "start": null,
+            "end": null,
+            "duration_months": null,
+            "fiscal_label": null
+          },
+          "header_refs": []
+        },
+        {
+          "native_column": 1,
+          "status": "bound",
+          "period": {
+            "kind": "duration",
+            "start": null,
+            "end": "2023-12-31",
+            "duration_months": 6,
+            "fiscal_label": null
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:16d006ff78c08e96571a99ee13a1b89ad3d79b44fe54351ebbce63b870136166",
+              "char_start": 0,
+              "char_end": 37,
+              "text": "For the six\nmonths ended\nDecember 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3384c47518a8079f4a58c95186f6716d882e3307dd90d8c08ee5339645e2f3c7",
+              "char_start": 0,
+              "char_end": 13,
+              "text": "截至12月31日\n止六個月"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:57ee89fb9ac45baaa6f46cac588456cf258611464568c95bc69db9b883fdb3ae",
+              "char_start": 0,
+              "char_end": 4,
+              "text": "2023"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5447828a9250a9ef7f6c2d8a8ff833c096cea2723ef0267feedd5d819089faa4",
+              "char_start": 0,
+              "char_end": 5,
+              "text": "2023年"
+            }
+          ]
+        },
+        {
+          "native_column": 2,
+          "status": "bound",
+          "period": {
+            "kind": "duration",
+            "start": null,
+            "end": "2023-12-31",
+            "duration_months": 12,
+            "fiscal_label": null
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:16d006ff78c08e96571a99ee13a1b89ad3d79b44fe54351ebbce63b870136166",
+              "char_start": 40,
+              "char_end": 80,
+              "text": "For the twelve\nmonths ended\nDecember 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3384c47518a8079f4a58c95186f6716d882e3307dd90d8c08ee5339645e2f3c7",
+              "char_start": 16,
+              "char_end": 30,
+              "text": "截至12月31日\n止十二個月"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:57ee89fb9ac45baaa6f46cac588456cf258611464568c95bc69db9b883fdb3ae",
+              "char_start": 7,
+              "char_end": 11,
+              "text": "2023"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5447828a9250a9ef7f6c2d8a8ff833c096cea2723ef0267feedd5d819089faa4",
+              "char_start": 8,
+              "char_end": 13,
+              "text": "2023年"
+            }
+          ]
+        },
+        {
+          "native_column": 3,
+          "status": "bound",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "header_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:16d006ff78c08e96571a99ee13a1b89ad3d79b44fe54351ebbce63b870136166",
+              "char_start": 83,
+              "char_end": 121,
+              "text": "For the fiscal\nyear ended\nDecember 31,"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:3384c47518a8079f4a58c95186f6716d882e3307dd90d8c08ee5339645e2f3c7",
+              "char_start": 33,
+              "char_end": 47,
+              "text": "截至12月31日\n止財政年度"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:57ee89fb9ac45baaa6f46cac588456cf258611464568c95bc69db9b883fdb3ae",
+              "char_start": 14,
+              "char_end": 18,
+              "text": "2024"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5447828a9250a9ef7f6c2d8a8ff833c096cea2723ef0267feedd5d819089faa4",
+              "char_start": 16,
+              "char_end": 21,
+              "text": "2024年"
+            }
+          ]
+        }
+      ],
+      "measurements": [
+        {
+          "binding_status": "ambiguous",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+            "char_start": 0,
+            "char_end": 389,
+            "text": "TOP TOY stores in mainland China 中國大陸的TOP TOY門店\nTotal GMV (RMB in millions) 總GMV"
+          },
+          "column_id": "col-0",
+          "period": null,
+          "row_label_refs": [],
+          "unit_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 59,
+              "char_end": 74,
+              "text": "RMB in millions"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 81,
+              "char_end": 86,
+              "text": "人民幣百萬"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 252,
+              "char_end": 255,
+              "text": "RMB"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 263,
+              "char_end": 267,
+              "text": "人民幣元"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 304,
+              "char_end": 307,
+              "text": "RMB"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 314,
+              "char_end": 318,
+              "text": "人民幣元"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 356,
+              "char_end": 357,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 372,
+              "char_end": 373,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 380,
+              "char_end": 381,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 384,
+              "char_end": 385,
+              "text": "%"
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+              "char_start": 388,
+              "char_end": 389,
+              "text": "%"
+            }
+          ]
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:efb328e2bcaed7430bd1e968bb136887ae051aae4a1888a87a9b81d9e5ded599",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "1,148"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:001a2ed6e4bac647044e330c14d4a7627d56895a7a05ccc9f5501428997f23bc",
+            "char_start": 0,
+            "char_end": 4,
+            "text": "10.5"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:d6c97fc43b1854a541c998435497112c69c72cc16342501d706df21f9893f578",
+            "char_start": 0,
+            "char_end": 4,
+            "text": "19.9"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:5db7b23c0a438a4e28768110d07c12ae45cb24c7d2a8bb539cf3fd9d53d329dc",
+            "char_start": 0,
+            "char_end": 5,
+            "text": "109.5"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:bd44d84a4383fc100851ba262bb5d6480d3c0c481d9677095e9265d5688f06c7",
+            "char_start": 0,
+            "char_end": 4,
+            "text": "57.8"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        },
+        {
+          "binding_status": "bound",
+          "value_ref": {
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:8a4c47bcfa0457848bb80c45495389fe831656e12fa515b676064f8e46356c60",
+            "char_start": 0,
+            "char_end": 27,
+            "text": "up mid-\nsingle digit\n增加中個位數"
+          },
+          "column_id": "col-3",
+          "period": {
+            "kind": "fiscal_year",
+            "start": null,
+            "end": "2024-12-31",
+            "duration_months": null,
+            "fiscal_label": "2024"
+          },
+          "row_label_refs": [],
+          "unit_refs": []
+        }
+      ],
+      "unbound_value_refs": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:71ed0a36f0b01b19aebb9c6260168168e1652416cd404993f213715fda68e936",
+          "char_start": 0,
+          "char_end": 389,
+          "text": "TOP TOY stores in mainland China 中國大陸的TOP TOY門店\nTotal GMV (RMB in millions) 總GMV"
+        }
+      ],
+      "diagnostic_codes": [
+        "no_header_path",
+        "observation_truncated",
+        "slot_empty",
+        "slot_unavailable"
+      ],
+      "work_used": 150,
+      "elapsed_ms": 1.677
+    }
+  },
+  "budget_observations": [
+    {
+      "max_work_units": 0,
+      "status": "partial",
+      "work_used": 0,
+      "measurements_kept": 0,
+      "exhausted_diagnostic": true
+    },
+    {
+      "max_work_units": 5,
+      "status": "partial",
+      "work_used": 5,
+      "measurements_kept": 0,
+      "exhausted_diagnostic": true
+    },
+    {
+      "max_work_units": 50,
+      "status": "partial",
+      "work_used": 50,
+      "measurements_kept": 0,
+      "exhausted_diagnostic": true
+    },
+    {
+      "max_work_units": 400,
+      "status": "partial",
+      "work_used": 148,
+      "measurements_kept": 6,
+      "exhausted_diagnostic": false
+    }
+  ],
+  "totals": {
+    "bound": 34,
+    "ambiguous": 7,
+    "unavailable": 0
+  }
+}

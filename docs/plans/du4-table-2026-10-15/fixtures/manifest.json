@@ -1,0 +1,13 @@
+[
+  {
+    "path": "hk-table-observation.json.gz",
+    "sha256": "6f3ce02a485572debf61277b27adf428601eeeb3507e8b63439e1ec8c1e25571",
+    "bytes": 13157,
+    "kind": "retained_real_observation",
+    "original_receipt": "recall-root/live-summary-review/partial-source-tdd/hk-offline-resume-20261014/table-observation.json.gz",
+    "limits": [
+      "partial saved observation, not full original or complete native corpus",
+      "new component and production integration NOT_RUN"
+    ]
+  }
+]
