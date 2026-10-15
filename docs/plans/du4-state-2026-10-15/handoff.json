@@ -3,7 +3,10 @@
   "lane": "DU4-STATE",
   "base_commit": "8206e78d4087531b1d7ed57c45a73c942cc702e3",
   "branch": "codex/du4-state-20261015",
-  "commits": ["dfb5180f feat(du4): implement bounded operating-relation detection (DU4-STATE)"],
+  "commits": [
+    "dfb5180f feat(du4): implement bounded operating-relation detection (DU4-STATE)",
+    "aed593df fix(du4): keep determined relations on budget exhaustion and close review gaps"
+  ],
   "changed_paths": [
     "src/company_wiki/document_understanding/operating_states/__init__.py",
     "src/company_wiki/document_understanding/operating_states/text_view.py",
