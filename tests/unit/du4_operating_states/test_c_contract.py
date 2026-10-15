@@ -73,6 +73,45 @@ def test_duplicate_context_ids_raise_value_error() -> None:
         run(observation)
 
 
+def test_non_string_context_ids_raise_value_error() -> None:
+    units = _units("公司现无生产 VC。", "同上。")
+    observation = make_observation(units, target="u0", context_unit_ids=["u1"])
+    observation["context_unit_ids"] = [3]
+    with pytest.raises(ValueError):
+        run(observation)
+
+
+def test_enum_values_are_contract_legal() -> None:
+    texts = [
+        "公司现无生产 VC。",
+        "子公司暂停滤芯生产。",
+        "青梧设备尚未商业化。",
+        "公司与谷石已建立联系。",
+        "公司希望与谷石开展合作。",
+        "并非没有生产 QJ-11。",
+        "公司目前无法确定是否涉及该储能业务。",
+        "Arbor Ltd. does not manufacture Novalon filters.",
+    ]
+    for text in texts:
+        result, _, _ = run_text(text)
+        for relation in result["relations"]:
+            assert relation["activity"] in {
+                "production", "commercialization", "qualification", "shipment",
+                "capacity", "business_scope", "business_relationship", "other_operating",
+            }, (text, relation)
+            assert relation["polarity"] in {"positive", "negative", "unknown"}
+            assert relation["stage"] in {
+                "current", "not_yet", "suspended", "discontinued", "planned",
+                "conditional", "contact_established", "intended_cooperation", "unknown",
+            }
+            assert relation["attribution"] in {
+                "issuer", "quoted_related_party", "other", "unknown",
+            }
+            assert relation["modality"] in {
+                "actual", "planned", "conditional", "aspirational", "uncertain",
+            }
+
+
 def test_missing_context_unit_is_partial_not_rejection() -> None:
     units = _units("公司现无生产 VC。")
     observation = make_observation(units, target="u0", context_unit_ids=["gone"])
@@ -100,18 +139,25 @@ def test_zero_budget_returns_partial_with_zero_work() -> None:
 
 def test_partial_budget_keeps_determined_results() -> None:
     text = "公司现无生产 VC。子公司暂停滤芯生产。青梧设备尚未商业化。"
-    generous, _, _ = run_text(text)
-    assert generous["relations"]
     units = _units(text)
     observation = make_observation(units, target="u0")
-    budget = WorkBudget(2)
-    result = detect_operating_relations(observation, work_budget=budget)
-    assert result["status"] == "partial"
-    assert result["work_used"] == budget.used
-    assert budget.used <= 2
-    kept = {json.dumps(relation, sort_keys=True) for relation in result["relations"]}
-    full = {json.dumps(relation, sort_keys=True) for relation in generous["relations"]}
-    assert kept <= full
+    generous = detect_operating_relations(observation, work_budget=WorkBudget(1000))
+    full = [json.dumps(relation, sort_keys=True) for relation in generous["relations"]]
+    assert full
+    seen_non_empty = False
+    for limit in range(0, len(full) + 4):
+        budget = WorkBudget(limit)
+        result = detect_operating_relations(observation, work_budget=budget)
+        kept = [json.dumps(relation, sort_keys=True) for relation in result["relations"]]
+        assert result["work_used"] == budget.used
+        if result["status"] == "partial":
+            assert budget.exhausted
+        # Exhaustion keeps exactly a prefix of the full relations, never drops
+        # already-determined ones and never invents extras.
+        assert kept == full[: len(kept)]
+        if kept:
+            seen_non_empty = True
+    assert seen_non_empty
 
 
 def test_work_used_is_the_caller_budget_delta() -> None:

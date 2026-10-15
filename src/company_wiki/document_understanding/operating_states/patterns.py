@@ -26,8 +26,17 @@ _CJK_OBJ_SHORT = r"[㐀-鿿\w\-]{1,12}"
 _EN_OBJ = r"\s+(?:[A-Za-z][\w\-'&]*\s*){1,4}"
 
 _ABSENCE = (
-    r"现无|现無|现不|现在不|目前(?:並|并)?(?:未|无|不)|并不|并未|不再|"
-    r"尚未|还未|暂未|仍未|没有|没有再|未|无|不"
+    r"现无|现無|现不|现在不|目前(?:並|并)?(?:未|无|不)|不存在|并没有|并不|并未|不再|"
+    r"尚未|还未|暂未|仍未|从来没有|从未|未曾|不曾|没有再|没有|未|无|不"
+)
+# Abstract risk/issue nouns are never operating objects: "不存在经营风险"
+# is risk language, not a business-scope assertion.
+ABSTRACT_OBJECT = re.compile(
+    r"风险|風險|风险点|風險點|风险问题|问题|問題|难题|難題|挑战|挑戰|"
+    r"不确定性|不確定性|隐患|隱患|困难|困難|障碍|障礙|经营风险|經營風險|"
+    r"risk|risks|issue|issues|challenge|challenges|uncertainty|uncertainties|"
+    r"concern|concerns|problem|problems",
+    re.IGNORECASE,
 )
 _SUSPEND = r"暂停|中止|暂缓|暂时停止"
 _STOP = r"停产|停產|停止|终止|終止|关停|关闭"

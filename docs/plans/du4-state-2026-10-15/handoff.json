@@ -22,7 +22,7 @@
     {
       "command": "PYTHONPATH=src python -B -m pytest -q tests/unit/du4_operating_states",
       "exit_code": 0,
-      "passed": 86,
+      "passed": 90,
       "failed": 0,
       "skipped": 0,
       "receipt": "results/final-run.txt"
@@ -64,13 +64,16 @@
     "binary yes/no Q+A answers without an observed referent ('没有。' / 'No.') yield no relation; referent closure across units is not guessed — any source-consumer change stays ROOT-owned",
     "restriction-continuation ('仅用于试用') attaches only to the immediately preceding relation of the same unit",
     "no quantity/period/currency parsing; numbers stay in source wording",
-    "double negation and undeterminable scope emit modality=uncertain with polarity=unknown; they are never inverted into positives"
+    "double negation and undeterminable scope emit modality=uncertain with polarity=unknown; they are never inverted into positives",
+    "low-information guards (definition / administrative receipt / generic wish / vision / financial composition) act at clause granularity; a no-punctuation run-on mixing a definition and a real denial is guarded as a whole, so assertion-level guard scoping inside unpunctuated clauses is a future refinement",
+    "abstract risk/issue objects (风险/问题/挑战/uncertainty ...) never become operating objects, so negation-existence boilerplate ('公司不存在经营风险。') yields no relation instead of a polarity flip"
   ],
   "not_run": [
     "owner original reopen / real parse replay",
     "real selection (selector) integration and complete-QA/cap regression",
     "historical explicit 0.8 replay regression",
-    "real model summary and downstream revenue-forecast acceptance",
+    "real model summary generation AND its independent subject/stage claim review (the four-row meaning table: a parent->issuer change or hope->contract change is a quality failure even when JSON/citations validate)",
+    "downstream revenue-forecast acceptance",
     "another-company holdout on real documents",
     "READING_BUSINESS_POLICY_VERSION bump and cache invalidation (ROOT owns narrative_business_policy.py)"
   ],
@@ -80,7 +83,8 @@
     "Remove the reading-only bare OBJECT x ACTIVITY co-occurrence branch (narrative_business_policy.py near line 534: activity = any(_OBJECT.search(clause) and _ACTIVITY.search(clause) ...)) so the new relation semantics cannot be bypassed; keep legacy detect_business_fact, N6 recognition and explicit 0.8 replay untouched.",
     "Bump READING_BUSINESS_POLICY_VERSION (reading-business-policy/6 -> 7) with the existing inventory import; add the single cache invalidation assertion through the real inventory/freezer/comparator.",
     "Keep role admission at the source/structure boundary: the component is role-agnostic and its interrogative guard is text-level only; question/shadow roles must keep failing _admitted as they do today.",
-    "Pass context_unit_ids = the same-parent observed context (e.g. m41 siblings); never trim QA package members — the component only reads units and returns relations."
+    "Pass context_unit_ids = the same-parent observed context (e.g. m41 siblings); never trim QA package members — the component only reads units and returns relations.",
+    "After the live summary node, run the independent subject/stage claim review over the four-row meaning table: a parent->issuer change or a hope->contract/order/shipment change is a quality failure even when JSON and citations validate. This review is ROOT-owned and is NOT covered by this lane's tests."
   ],
   "production_writes": 0,
   "supplier_calls": 0

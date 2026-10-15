@@ -494,6 +494,11 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
                 polarity, stage = "positive", "current"
         event.polarity, event.stage, event.modality = polarity, stage, modality
         _bind_event(view, scan, clause, event, events[-1].end if events else None)
+        if any(
+            p.ABSTRACT_OBJECT.fullmatch(view.text[span[0]:span[1]].strip())
+            for span in event.obj_spans
+        ):
+            continue  # risk/issue language is not an operating assertion
         events.append(event)
     return events
 
@@ -573,18 +578,15 @@ def detect_operating_relations(
 
         scan = _UnitScan(target_view, name_classes)
         clauses = split_clauses(target_view)
-        pending: list[tuple[tuple[int, int], _Event]] = []
         for clause in clauses:
             work_budget.charge(1)
             clause_text = target_view.text[clause[0]:clause[1]]
             closing = target_view.text[clause[1]:clause[1] + 1]
             if _clause_guarded(clause_text, closing):
                 continue
-            if p.RESTRICTION_CONTINUATION.match(clause_text) and pending:
+            if p.RESTRICTION_CONTINUATION.match(clause_text) and relations:
                 span = (clause[0], clause[1])
-                clause_relations = [item for item in pending]
-                if clause_relations:
-                    clause_relations[-1][1].qual_spans.append(span)
+                relations[-1]["qualifier_refs"].append(_to_ref(target, target_view, span))
                 continue
             events = _clause_events(target_view, scan, clause, clause_text)
             if not events:
@@ -596,19 +598,18 @@ def detect_operating_relations(
                 continue
             for event in events:
                 work_budget.charge(1)
-                pending.append((clause, event))
-        relations = [
-            _relation_dict(target, target_view, clause, event, [])
-            for clause, event in pending
-        ]
-        relations.sort(
-            key=lambda item: (
-                item["assertion_refs"][0]["char_start"],
-                item["predicate_refs"][0]["char_start"],
-            )
-        )
+                # Assemble immediately: budget exhaustion keeps the relations
+                # already determined instead of dropping unconverted events.
+                relations.append(_relation_dict(target, target_view, clause, event, []))
     except WorkBudgetExceeded:
         exhausted = True
+
+    relations.sort(
+        key=lambda item: (
+            item["assertion_refs"][0]["char_start"],
+            item["predicate_refs"][0]["char_start"],
+        )
+    )
 
     status = "partial" if exhausted or diagnostics else "complete"
     if exhausted:

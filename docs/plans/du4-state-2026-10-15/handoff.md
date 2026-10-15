@@ -26,10 +26,15 @@ result = detect_operating_relations(observation, work_budget=budget)  # budget �
 ## 实际验证
 
 - RED（A）：`results/red-run.txt` — 真实 m41 首答三关系断言语义失败（`assert 0 == 3`），非导入错误；60 failed / 26 passed。
-- 最终（B/C）：`results/final-run.txt` — `PYTHONPATH=src python -B -m pytest -q tests/unit/du4_operating_states` → 86 passed，exit 0。
-- 静态（C）：`results/static-checks.txt` — ruff 0 remaining（14 个 F541 已修）、mypy `no issues found in 4 source files`。
-- 输入不变、零/部分预算 partial 与计数、确定性、长句有界、role 无关、跨 parent 不串联、精确 refs 都在
-  `test_c_contract.py` 断言。真实保存段落（test_a）与合成/holdout（test_b）分开报告，不宣称市场召回率。
+- 最终（B/C+审查修复）：`results/final-run.txt` — `PYTHONPATH=src python -B -m pytest -q tests/unit/du4_operating_states` → 90 passed，exit 0。
+- 静态（C）：`results/static-checks.txt` — ruff 0 remaining（14 个 F541 已修）、mypy `no issues found in 4 source files`（审查修复后复跑一致）。
+- 输入不变、零/部分预算 partial+计数（耗尽保留已确定结果的前缀）、确定性、长句有界、role 无关、
+  跨 parent 不串联、精确 refs 都在 `test_c_contract.py` 断言。真实保存段落（test_a）与合成/holdout（test_b）
+  分开报告，不宣称市场召回率。
+- 独立审查（2026-10-15）结论"有条件接收"→ 两个阻塞项已修：预算耗尽改为增量组装保留已确定关系
+  （部分预算测试改为非空洞前缀断言）；handoff 显式补"摘要主体/阶段独审"ROOT 工作项。另采纳 4 项建议：
+  否定存在式风险套话负控（`公司不存在经营风险。`→0 关系，抽象风险名词不作经营对象）、认证失败否定断言、
+  全枚举合法性契约断言、非字符串 context ValueError 断言。
 
 ## 真实 m41 首答的三条独立关系（test_a 逐条断言）
 
@@ -83,5 +88,7 @@ hope 不是合同/订单/发货；联系不是合同；R2 主体不改写成发�
 
 ## 未做（STOP 声明）
 
-原件重放、真实选择/完整 QA/预算与历史 0.8 回归、真实摘要、下游 RF 验收、另一公司真实 holdout、
-版本号 bump 与缓存失效——均由 ROOT 接收后执行。本卡 0 生产写入、0 供应商调用。**提交后 STOP 等 ROOT 接收。**
+原件重放、真实选择/完整 QA/预算与历史 0.8 回归、真实摘要**及其主体/阶段独审**（对四行含义表逐条独审：
+parent→issuer 或 hope→contract/订单/发货 即使 JSON/引用合法也算质量失败）、下游 RF 验收、
+另一公司真实 holdout、版本号 bump 与缓存失效——均由 ROOT 接收后执行；该独审不由本卡测试覆盖。
+本卡 0 生产写入、0 供应商调用。**提交后 STOP 等 ROOT 接收。**

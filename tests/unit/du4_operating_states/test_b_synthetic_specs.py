@@ -348,6 +348,22 @@ def test_ext_vision_statement_is_not_an_operating_assertion() -> None:
     assert result["relations"] == [], result
 
 
+def test_ext_abstract_risk_language_is_not_an_assertion() -> None:
+    """否定存在式风险套话不得翻转成正极性经营断言。"""
+    for text in ("公司不存在经营风险。", "公司目前不存在重大生产问题。"):
+        result, _, _ = run_text(text)
+        assert result["relations"] == [], (text, result)
+
+
+def test_ext_certification_failure_is_negative() -> None:
+    result, units, _ = run_text("青梧设备认证失败。")
+    assert result["relations"], result
+    relation = result["relations"][0]
+    assert relation["activity"] == "qualification"
+    assert relation["polarity"] == "negative"
+    assert relation["modality"] == "actual"
+
+
 def test_ext_bare_negation_and_declines_say_nothing() -> None:
     for text in ("没有。", "不便评论。", "We have nothing further to disclose."):
         result, _, _ = run_text(text)
