@@ -8,6 +8,13 @@ FORM已发布master cbfe3e7f，正常推送5784PASS/24SKIP321.47s、精确CI3880
 
 **Next Step：** 按[生产接线细则](review/du4_production_integration.md)统一source-owned生产接线（FORM native/carrier→原cap/router、STATE唯一经营谓词、TABLE原生槽/解释依赖），再完成v4正式边界/源任务覆盖/费用恢复和真实摘要验收。先修来源作用域可避免新协议绑定旧错误来源，不重复付费探路。只在原A/B/C和母G大节点集中验收，未完成不切默认。
 
+
+## DU5 并行施工窗口 — READY
+
+已准备[三张独立施工卡](parallel/du5-2026-10-15/README.md)：CORPUS只写DU-BENCH工具与自己PWF；AUDIT只写audit仓摘要双向审查包；RF只写金额单位责任层及直接consumer。各有独立稀疏工作树、源码基线、5份已提交启动PWF和实际import locality核对，逻辑新增共约29.90MB，0原件副本/0API。作者尚未开始实现，READY不是完成。
+
+ROOT继续统一准备/WorkBudget及FORM→STATE→TABLE/v4生产接线；接收前只读benchmark与RF卡列明文件，不写作者范围。只有A/B/C集中验收，不增加小节点签收。接口/分母/原失败保留及交接格式已冻结；三卡互不等待，不以新组件绿替代生产质量。[启动收据](parallel/du5-2026-10-15/launch.json)。
+
 ---
 
 ## ROOT 当前状态 — 2026-10-15 DU4-FORM发布前共同边界收尾

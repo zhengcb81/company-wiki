@@ -1,0 +1,65 @@
+{
+  "schema_version": "du5-launch-verification/1",
+  "lanes": [
+    {
+      "card_id": "DU5-CORPUS",
+      "status": "READY",
+      "head": "197d914949d953d32876783c82442996d25b609d",
+      "base": "8c027011037dc8c8659235fb65f529028dcd15ca",
+      "import": {
+        "module": "company_wiki.document_understanding.pipeline",
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-du5-corpus\\src\\company_wiki\\document_understanding\\pipeline.py"
+      },
+      "pwf_sha256": {
+        "docs/plans/du5-corpus-2026-10-15/INTERFACES.md": "2777f106b73fe9c3c788f302da10086c5bffa36de6b6e795e72d348be269cfce",
+        "docs/plans/du5-corpus-2026-10-15/construction_card.md": "b3eae6c16a966b5fb39e6dfc1eef81144dc1247fb41f9526501bc6ef92b9070a",
+        "docs/plans/du5-corpus-2026-10-15/findings.md": "09cb50cafe66248990f7356dd51018d3968635065499b581b472fc3fe7aecaa0",
+        "docs/plans/du5-corpus-2026-10-15/progress.md": "f61c912532a90583ab6dfc12c16e88ec4ebddc572121a99a1b7926ac5c326ec1",
+        "docs/plans/du5-corpus-2026-10-15/task_plan.md": "8e8918d2aad223781d3f5c117b0d6f356041cc8445bdb1e8b8485a2544bacd8a"
+      },
+      "logical_bytes": 24559847,
+      "worktree_clean": true
+    },
+    {
+      "card_id": "DU5-AUDIT-SUMMARY",
+      "status": "READY",
+      "head": "45e7f154148c4585b45e12bbb77006f50b133f89",
+      "base": "e5189a0614477d4d84c9cd4e0237f9b2a64a059a",
+      "import": {
+        "module": "review_evidence",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-du5-summary\\skills\\revenue-forecast-audit\\scripts\\review_evidence.py"
+      },
+      "pwf_sha256": {
+        "docs/plans/du5-summary-2026-10-15/INTERFACES.md": "2777f106b73fe9c3c788f302da10086c5bffa36de6b6e795e72d348be269cfce",
+        "docs/plans/du5-summary-2026-10-15/construction_card.md": "43a3d783e744fee174a81505da884976901b6617861412ba073bb1bb4708f16a",
+        "docs/plans/du5-summary-2026-10-15/findings.md": "09cb50cafe66248990f7356dd51018d3968635065499b581b472fc3fe7aecaa0",
+        "docs/plans/du5-summary-2026-10-15/progress.md": "f61c912532a90583ab6dfc12c16e88ec4ebddc572121a99a1b7926ac5c326ec1",
+        "docs/plans/du5-summary-2026-10-15/task_plan.md": "b178d6a689e34ec4799b56da935c2d28613e7a250cc57dd545cc093ce1e6906d"
+      },
+      "logical_bytes": 1015588,
+      "worktree_clean": true
+    },
+    {
+      "card_id": "DU5-RF-UNITS",
+      "status": "READY",
+      "head": "12560da9f16a8464771fbb65093437fbc0213ec5",
+      "base": "090a63109a62507a23adcaa774cf65021e7c4614",
+      "import": {
+        "module": "research.input_quantities",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-du5-units\\scripts\\research\\input_quantities.py"
+      },
+      "pwf_sha256": {
+        "docs/plans/du5-units-2026-10-15/INTERFACES.md": "2777f106b73fe9c3c788f302da10086c5bffa36de6b6e795e72d348be269cfce",
+        "docs/plans/du5-units-2026-10-15/construction_card.md": "457fd1cfab258388773644b72639d71eab1720f274dfdac575ebfa6272758f3f",
+        "docs/plans/du5-units-2026-10-15/findings.md": "09cb50cafe66248990f7356dd51018d3968635065499b581b472fc3fe7aecaa0",
+        "docs/plans/du5-units-2026-10-15/progress.md": "f61c912532a90583ab6dfc12c16e88ec4ebddc572121a99a1b7926ac5c326ec1",
+        "docs/plans/du5-units-2026-10-15/task_plan.md": "29e152bcc24f6765f4262492a362836c76d3472c56ca1f42ef9d177b0c4ec6e6"
+      },
+      "logical_bytes": 4324089,
+      "worktree_clean": true
+    }
+  ],
+  "supplier_calls": 0,
+  "tests_run": false,
+  "originals_copied": 0
+}

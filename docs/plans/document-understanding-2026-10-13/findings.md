@@ -8,6 +8,13 @@ FORM已发布master cbfe3e7f，正常推送5784PASS/24SKIP321.47s、精确CI3880
 
 **Next Step：** 按[生产接线细则](review/du4_production_integration.md)统一source-owned生产接线（FORM native/carrier→原cap/router、STATE唯一经营谓词、TABLE原生槽/解释依赖），再完成v4正式边界/源任务覆盖/费用恢复和真实摘要验收。先修来源作用域可避免新协议绑定旧错误来源，不重复付费探路。只在原A/B/C和母G大节点集中验收，未完成不切默认。
 
+
+## DU5 并行施工窗口 — READY
+
+已准备[三张独立施工卡](parallel/du5-2026-10-15/README.md)：CORPUS只写DU-BENCH工具与自己PWF；AUDIT只写audit仓摘要双向审查包；RF只写金额单位责任层及直接consumer。各有独立稀疏工作树、源码基线、5份已提交启动PWF和实际import locality核对，逻辑新增共约29.90MB，0原件副本/0API。作者尚未开始实现，READY不是完成。
+
+ROOT继续统一准备/WorkBudget及FORM→STATE→TABLE/v4生产接线；接收前只读benchmark与RF卡列明文件，不写作者范围。只有A/B/C集中验收，不增加小节点签收。接口/分母/原失败保留及交接格式已冻结；三卡互不等待，不以新组件绿替代生产质量。[启动收据](parallel/du5-2026-10-15/launch.json)。
+
 ---
 
 ## ROOT 当前状态 — 2026-10-15 DU4-FORM发布前共同边界收尾
@@ -239,3 +246,8 @@ PDF 碎 unit 的 span 槽位成本会使完整业务段落失去席位；源层�
 
 RF 的实际公有 claim/versions 形状并未变化，真实破口仅是新增 reading_context。完整兼容已发布并定点安装；离线 CWP/FF/RF 真实 CLI 全绿且 pin 历史 Ref。canonical oracle 用实际 source-owned span/closed group，HTML 是 document locator；不能把历史错误的 page=1 比较器结果写成新生产结论。
 
+
+
+### DU5调查纠错记录
+
+跨仓sandbox git status误报非worktree/Permission denied，已用正常宿主只读核对：RF仅原alert/output WIP、FF仅原凭证文件未跟踪（未读取）、audit干净。若干猜测的AGENTS/旧handoff/金标路径并不存在，改用rg inventory找实际文件，不据猜测判代码缺失。PWF初次PWF_PLAN_ROOT覆盖docs选择产生空输出，已清除该覆盖并以docs/plans+明确PLAN_ID正确解析。RF旧draft-backtest handoff已被后来代码实现，未重复发卡；HKD跨币旧反例仍必须拒绝，仅更新正确原因而不改成PASS。新三卡均未运行业务测试/真实供应商。
