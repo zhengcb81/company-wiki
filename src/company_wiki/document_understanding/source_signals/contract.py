@@ -100,8 +100,14 @@ def is_known_form_literal(normalized: str) -> bool:
 
 
 def declared_literal(normalized: str) -> str | None:
-    """Extract a form-literal token from declarative metadata, if any."""
-    for token in re.split(r"[\s,;|/]+", normalized):
+    """Extract a form-literal token from declarative metadata, if any.
+
+    The whole string is tried first so slashed literals such as ``10-Q/A``
+    are never split into a misleading prefix.
+    """
+    if normalized and is_known_form_literal(normalized):
+        return normalized
+    for token in re.split(r"[\s,;|]+", normalized):
         if token and is_known_form_literal(token):
             return token
     return None

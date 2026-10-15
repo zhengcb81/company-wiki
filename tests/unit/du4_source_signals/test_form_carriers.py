@@ -227,6 +227,62 @@ def test_declared_value_conflicting_with_observed_is_diagnostic_only():
     assert "DECLARED_FORM_CONFLICT" in code_set(result)
 
 
+def test_slashed_declared_literal_is_compared_whole():
+    text = "FORM 10-Q/A"
+    obs = observation(
+        [unit(FORM_UNIT, text)],
+        [carrier("visible_own_form_label", [FORM_UNIT], [ref(FORM_UNIT, 0, len(text))])],
+        declared_form="10-Q/A",
+    )
+    result = collect_source_signals(obs, work_budget=budget())
+    assert [entry["normalized_value"] for entry in result["source_form_evidence"]] == ["10-Q/A"]
+    assert "DECLARED_FORM_CONFLICT" not in code_set(result)
+
+    obs = observation(
+        [unit(FORM_UNIT, "FORM 10-Q")],
+        [carrier("visible_own_form_label", [FORM_UNIT], [ref(FORM_UNIT, 0, 9)])],
+        declared_form="10-Q/A",
+    )
+    result = collect_source_signals(obs, work_budget=budget())
+    assert "DECLARED_FORM_CONFLICT" in code_set(result)
+
+
+def test_many_leading_ordinary_units_do_not_distract_carriers():
+    units = _lead_units(120)
+    units.append(unit(FORM_UNIT, "FORM 10-Q", locator="loc:v1/paragraph:120"))
+    obs = observation(
+        units,
+        [
+            carrier("visible_own_form_label", [FORM_UNIT], [ref(FORM_UNIT, 0, 9)]),
+            carrier(
+                "visible_inline_xbrl_document_type",
+                [FORM_UNIT],
+                [ref(FORM_UNIT, 5, 9)],
+                attributes={"concept": "dei:DocumentType", "visibility": "visible"},
+            ),
+        ],
+    )
+    result = collect_source_signals(obs, work_budget=budget())
+    assert [entry["value"] for entry in result["source_form_evidence"]] == ["FORM 10-Q", "10-Q"]
+    assert result["reserved_unit_ids"] == [FORM_UNIT]
+
+
+def test_dei_without_visibility_attribute_is_visible_by_kind():
+    obs = observation(
+        [unit(FORM_UNIT, "FORM 10-Q")],
+        [
+            carrier(
+                "visible_inline_xbrl_document_type",
+                [FORM_UNIT],
+                [ref(FORM_UNIT, 5, 9)],
+                attributes={"concept": "dei:DocumentType"},
+            )
+        ],
+    )
+    result = collect_source_signals(obs, work_budget=budget())
+    assert [entry["value"] for entry in result["source_form_evidence"]] == ["10-Q"]
+
+
 def test_plain_declared_form_type_can_never_create_observed_evidence():
     obs = observation(
         _lead_units(4),

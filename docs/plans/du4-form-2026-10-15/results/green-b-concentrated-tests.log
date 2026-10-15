@@ -6,14 +6,14 @@ rootdir: C:\Users\郑曾波\Projects\company-wiki-du4-form
 configfile: pytest.ini
 plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
 asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
-collected 68 items
+collected 72 items
 
 tests\unit\du4_source_signals\test_carrier_flow_assembly.py .            [  1%]
-tests\unit\du4_source_signals\test_contract_budget.py .................. [ 27%]
-                                                                         [ 27%]
-tests\unit\du4_source_signals\test_form_carriers.py .................... [ 57%]
-......                                                                   [ 66%]
-tests\unit\du4_source_signals\test_real_observation_fixtures.py ....     [ 72%]
+tests\unit\du4_source_signals\test_contract_budget.py .................. [ 26%]
+.                                                                        [ 27%]
+tests\unit\du4_source_signals\test_form_carriers.py .................... [ 55%]
+.........                                                                [ 68%]
+tests\unit\du4_source_signals\test_real_observation_fixtures.py ....     [ 73%]
 tests\unit\du4_source_signals\test_turn_signals.py ...................   [100%]
 
-============================= 68 passed in 0.62s ==============================
+============================= 72 passed in 1.04s ==============================

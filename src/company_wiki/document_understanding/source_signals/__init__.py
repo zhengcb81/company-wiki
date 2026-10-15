@@ -111,6 +111,12 @@ class _Collector:
         self.turn_entries: list[dict] = []
         self.reserved_unit_ids: list[str] = []
         self.seen_carrier_keys: set[str] = set()
+        self.observed_form_values: set[str] = set()
+        self.observed_form_unit_ids: list[str] = []
+        self.form_values_by_parent: dict[str, set[str]] = {}
+        self.form_unit_ids_by_parent: dict[str, list[str]] = {}
+        self.conflict_parents: list[str] = []
+        self.conflict_parents_seen: set[str] = set()
         self.indexed_units = 0
         self.started_carriers = 0
         self.completed_carriers = 0
@@ -127,8 +133,6 @@ class _Collector:
         for position, raw in enumerate(self.carriers):
             self._process_carrier(position, raw)
             self.completed_carriers += 1
-        self._apply_declared_form()
-        self._report_value_conflicts()
 
     def _index_units(self) -> None:
         for unit_id, unit in self.units.items():
@@ -344,6 +348,7 @@ class _Collector:
             "concept": concept_str,
         }
         self.form_entries.append(entry)
+        self._note_form_value(entry)
         self._reserve(unit_ids)
         self._resolve_carrier()
 
@@ -403,6 +408,34 @@ class _Collector:
         self._resolve_carrier()
 
     # -- declared metadata and scope conflicts -------------------------
+    #
+    # Both passes are O(1) per emitted entry or per call: value conflicts are
+    # noted as entries arrive and the declared comparison reads precomputed
+    # sets.  They therefore run even when the work budget is already spent,
+    # so conflicts among determined evidence are never silently unreported.
+
+    def _note_form_value(self, entry: dict) -> None:
+        parent_id = entry["parent_id"]
+        normalized = entry["normalized_value"]
+        self.observed_form_values.add(normalized)
+        self.observed_form_unit_ids.extend(entry["carrier_unit_ids"])
+        self.form_unit_ids_by_parent.setdefault(parent_id, []).extend(
+            entry["carrier_unit_ids"]
+        )
+        values = self.form_values_by_parent.setdefault(parent_id, set())
+        values.add(normalized)
+        if len(values) > 1 and parent_id not in self.conflict_parents_seen:
+            self.conflict_parents_seen.add(parent_id)
+            self.conflict_parents.append(parent_id)
+
+    def _materialize_conflict_diagnostics(self) -> None:
+        for parent_id in self.conflict_parents:
+            self._diag(
+                "FORM_VALUE_CONFLICT",
+                self.form_unit_ids_by_parent[parent_id],
+                f"parent {parent_id!r} carries conflicting form values "
+                f"{sorted(self.form_values_by_parent[parent_id])}",
+            )
 
     def _apply_declared_form(self) -> None:
         declared = self.declared_form
@@ -416,38 +449,16 @@ class _Collector:
                 "declared metadata never manufactures observed facts",
             )
             return
-        normalized = normalize_form_value(declared)
-        literal = declared_literal(normalized)
+        literal = declared_literal(normalize_form_value(declared))
         if literal is None:
             return
-        observed = {entry["normalized_value"] for entry in self.form_entries}
-        if literal not in observed:
+        if literal not in self.observed_form_values:
             self._diag(
                 "DECLARED_FORM_CONFLICT",
-                [
-                    unit_id
-                    for entry in self.form_entries
-                    for unit_id in entry["carrier_unit_ids"]
-                ],
-                f"declared literal {literal!r} conflicts with observed {sorted(observed)}",
+                list(self.observed_form_unit_ids),
+                f"declared literal {literal!r} conflicts with observed "
+                f"{sorted(self.observed_form_values)}",
             )
-
-    def _report_value_conflicts(self) -> None:
-        by_parent: dict[str, list[dict]] = {}
-        for entry in self.form_entries:
-            by_parent.setdefault(entry["parent_id"], []).append(entry)
-        for parent_id, entries in by_parent.items():
-            values = {entry["normalized_value"] for entry in entries}
-            if len(values) > 1:
-                self._diag(
-                    "FORM_VALUE_CONFLICT",
-                    [
-                        unit_id
-                        for entry in entries
-                        for unit_id in entry["carrier_unit_ids"]
-                    ],
-                    f"parent {parent_id!r} carries conflicting form values {sorted(values)}",
-                )
 
     # -- output --------------------------------------------------------
 
@@ -471,6 +482,10 @@ class _Collector:
         self.resolved_carriers += 1
 
     def result(self) -> dict:
+        # O(1) passes over precomputed sets: they must run even after budget
+        # exhaustion so determined evidence is still fully reported.
+        self._apply_declared_form()
+        self._materialize_conflict_diagnostics()
         if self.exhausted:
             self._diag(
                 "WORK_BUDGET_EXCEEDED",

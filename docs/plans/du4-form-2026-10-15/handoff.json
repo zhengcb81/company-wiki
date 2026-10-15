@@ -22,7 +22,7 @@
     {
       "command": "PYTHONPATH=src python -B -m pytest -q tests/unit/du4_source_signals",
       "exit_code": 0,
-      "passed": 68,
+      "passed": 72,
       "failed": 0,
       "skipped": 0,
       "receipt": "docs/plans/du4-form-2026-10-15/results/green-b-concentrated-tests.log"
@@ -74,7 +74,8 @@
     "hidden/excluded/external DEI is never certified visible; a replayable hidden-byte contract is NOT_EVALUATED",
     "status semantics: complete = everything processed cleanly; partial = budget exhaustion, unresolved carriers or observed conflicts; unavailable = carriers present but nothing obtainable",
     "UNRECOGNIZED_FORM_LITERAL is a limited lexical vocabulary check for diagnostics, not a family or route classification",
-    "observed_counts is advisory metering (carrier counts, evidence/reserved chars) for ROOT budget reservation inside the unchanged 200-unit/64000-char cap"
+    "observed_counts is advisory metering (carrier counts, evidence/reserved chars) for ROOT budget reservation inside the unchanged 200-unit/64000-char cap",
+    "observed_counts.carriers_resolved counts a deduplicated duplicate carrier as resolved (the DUPLICATE_CARRIER diagnostic discloses the dedup)"
   ],
   "not_run": [
     "production normalize -> structure -> adapter -> router -> selector E2E (ROOT owns wiring and acceptance)",

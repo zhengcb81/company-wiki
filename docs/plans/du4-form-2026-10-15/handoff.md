@@ -54,11 +54,13 @@ LANE=DU4-FORM · PLAN_ID=du4-form-2026-10-15 · interface_version=du4-interfaces
 
 | 命令 | 结果 | 回执 |
 | --- | --- | --- |
-| `PYTHONPATH=src python -B -m pytest -q tests/unit/du4_source_signals` | 68 passed, 0 failed, 0 skipped | results/green-b-concentrated-tests.log |
+| `PYTHONPATH=src python -B -m pytest -q tests/unit/du4_source_signals` | 72 passed, 0 failed, 0 skipped | results/green-b-concentrated-tests.log |
 | `python -m ruff check src/…/source_signals tests/unit/du4_source_signals` | clean | results/green-c-ruff.log |
 | `MYPYPATH=tests/unit/du4_source_signals python -m mypy src/…/source_signals tests/unit/du4_source_signals` | no issues in 9 files | results/green-c-mypy.log |
 
 RED 回执：results/red-a-semantic-counterexamples.log（接口骨架后 54 项语义断言失败、0 import 错误；其中 14 项为先行通过的结构/负控断言）。真实夹具 sha256 由 `test_saved_observations_match_manifest_hashes` 对照 fixtures/manifest.json 复核。
+
+独立质量审查（review agent）结论：整体 PASS、无阻断项；2 个 minor 缺陷（`10-Q/A` 声明字面值被误拆分产生假冲突诊断；预算耗尽时已确定证据的冲突诊断被跳过）已修复并各加回归测试（`test_slashed_declared_literal_is_compared_whole`、`test_value_conflict_among_determined_evidence_survives_exhaustion`），另有 3 处加固（大量前导普通单元控制、无 visibility 的 DEI 语义钉死、空标签断言收紧）。
 
 ## 特别检查结论（卡 §B）
 

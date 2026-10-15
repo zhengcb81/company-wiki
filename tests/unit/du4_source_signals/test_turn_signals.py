@@ -105,7 +105,7 @@ def test_empty_label_carrier_is_rejected():
     obs = observation([unit("u-empty", "")], [entry])
     result = collect_source_signals(obs, work_budget=budget())
     assert result["turn_evidence"] == []
-    assert code_set(result)
+    assert "TURN_WITHOUT_BODY_OR_ASSOCIATION" in code_set(result)
 
 
 @pytest.mark.parametrize("turn_role", ["cfo", "operator", "analyst", "management"])

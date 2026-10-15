@@ -284,6 +284,33 @@ def test_never_route_family_or_confidence_fields():
     walk(result)
 
 
+def test_value_conflict_among_determined_evidence_survives_exhaustion():
+    units = [unit("u-a", "FORM 10-Q"), unit("u-b", "FORM 10-K"), unit("u-c", "FORM 8-K")]
+    obs = observation(
+        units,
+        [
+            carrier("visible_own_form_label", ["u-a"], [ref("u-a", 0, 9)]),
+            carrier("visible_own_form_label", ["u-b"], [ref("u-b", 0, 9)]),
+            carrier("visible_own_form_label", ["u-c"], [ref("u-c", 0, 8)]),
+        ],
+        declared_form="20-F",
+    )
+    # 3 unit-index charges + 2 full carriers (3 each) + the third carrier's own
+    # charge = 10; the third carrier's unit charge then exhausts the budget.
+    ledger = budget(10)
+    result = collect_source_signals(obs, work_budget=ledger)
+    assert result["work_used"] == 10
+    assert [entry["value"] for entry in result["source_form_evidence"]] == [
+        "FORM 10-Q",
+        "FORM 10-K",
+    ]
+    codes = code_set(result)
+    assert "WORK_BUDGET_EXCEEDED" in codes
+    assert "FORM_VALUE_CONFLICT" in codes
+    assert "DECLARED_FORM_CONFLICT" in codes
+    assert result["status"] == "partial"
+
+
 def test_second_budget_is_never_created_or_reset():
     ledger = budget(1_000)
     collect_source_signals(_simple_form_observation(), work_budget=ledger)
