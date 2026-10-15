@@ -37,7 +37,8 @@
     "list plus set for linear ordered reservations",
     "require contiguous same-owner form fragments; preserve adjacent inline positive control",
     "malformed carrier kinds raise ValueError",
-    "package-local test helpers avoid cross-lane import collision"
+    "package-local test helpers avoid cross-lane import collision",
+    "reuse tests/conftest.py; remove fixture-free per-lane sys.path bootstrap; local fixture path in builders"
   ],
   "independent_review": {
     "initial": "REQUEST_CHANGES_COMPONENT",
@@ -66,22 +67,21 @@
     "max_usd": 20
   },
   "source_sha256": {
-    "src/company_wiki/document_understanding/source_signals/__init__.py": "8e8aef3c031bcf14366d2bbf3c7758a6ea5424584c2282c8297c6f2f2913d4c7",
     "src/company_wiki/document_understanding/source_signals/contract.py": "d84d93b798e1e06cf58b551a71195e98f0726eaa501c4b70eab036e356052f39",
-    "tests/unit/du4_source_signals/__init__.py": "b01bf0316e68d8e0caccb7c18d257e349e1af75595ad4a55407b01cb109be63d",
-    "tests/unit/du4_source_signals/builders.py": "e00e6fa723b258a08189b4a20dcfdc6de2714911a6bd8a9d09cd3331fa0d8e97",
-    "tests/unit/du4_source_signals/conftest.py": "e6de9ba5f5921dcbf1063720e9c15a86f8c91329c2ed319afc032250f492bab7",
+    "src/company_wiki/document_understanding/source_signals/__init__.py": "8e8aef3c031bcf14366d2bbf3c7758a6ea5424584c2282c8297c6f2f2913d4c7",
+    "tests/unit/du4_source_signals/builders.py": "42c87e549a9f010cf84777b1424780895c494d591066ffdd9d959e702506ecf5",
     "tests/unit/du4_source_signals/test_carrier_flow_assembly.py": "99e19c390534201b6c6c1c9b96bafdc1c0cd8b2480be0e76708ffd8b4fccbd3b",
     "tests/unit/du4_source_signals/test_contract_budget.py": "6c77d97433eb931f16f6c9267fb238d434c2cdee44e08380c855c7dc7a9f2849",
     "tests/unit/du4_source_signals/test_form_carriers.py": "bec071365a11d281f93059b25e0b57ecb45e1be65e0730486c8e212c451b7a48",
-    "tests/unit/du4_source_signals/test_real_observation_fixtures.py": "2bbb9dd0cd3423dcb7778ba3772990edd453000995113d824d9095047b002dd4",
+    "tests/unit/du4_source_signals/test_real_observation_fixtures.py": "0c676e94a989dec4c3f8ffda17cf6be9c4fa19b5bc3525242be9ab5b187e5813",
     "tests/unit/du4_source_signals/test_root_bounded_carriers.py": "e414295d70b716a1fcd675d6d4a82c4bbb3cda2c2641015ae05722fa36e0c0b9",
-    "tests/unit/du4_source_signals/test_turn_signals.py": "03a11c61dbf72ad71c4ebf2e2cc4bb46282930a1cea43e2c7f62b67bd29768fc"
+    "tests/unit/du4_source_signals/test_turn_signals.py": "03a11c61dbf72ad71c4ebf2e2cc4bb46282930a1cea43e2c7f62b67bd29768fc",
+    "tests/unit/du4_source_signals/__init__.py": "b01bf0316e68d8e0caccb7c18d257e349e1af75595ad4a55407b01cb109be63d"
   },
   "archive": {
     "path": "docs/plans/document-understanding-2026-10-13/common-root-quality-evidence/du4-form-component-receipts.zip",
-    "bytes": 49667,
-    "sha256": "c56b075758dbf435113fdd9751db0da196a9022f46bc6a3def546efe356192c7",
+    "bytes": 54181,
+    "sha256": "2386c4a011b41821efb53b2f080b6645ee5938a825c0fc3440a6eac98bde733b",
     "members": [
       {
         "path": ".planning/shared-reading-production/du4-form-acceptance/author-root-junit.xml",
@@ -262,7 +262,55 @@
         "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-red-corrected/stdout.log",
         "bytes": 8535,
         "sha256": "1414be29ea8bfd8c2af638a5aaa17e9d26261caa4391caa1fab50b83b87df51a"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/junit.xml",
+        "bytes": 12267,
+        "sha256": "eea9c9c67c612e84fbedae2ab9e77c60da538385838f7513404dcd55df94c2fc"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/receipt.json",
+        "bytes": 232,
+        "sha256": "0cb99d9dac223c5a83d7b3184d978f83cb2dedc400f2e33dee56428e6c47eb5e"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-final-namespace/stdout.log",
+        "bytes": 1931,
+        "sha256": "c49530a3255a63f4ec10b3b243ed2301f517fec419cb4345a7177b5fbe7b76c2"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/final-namespace-ruff-stdout.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/final-namespace-ruff-stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       }
     ]
+  },
+  "final_namespace_component_tests": {
+    "exit_code": 0,
+    "seconds": 8.963790199995856,
+    "tests": [
+      "tests/unit/du4_source_signals"
+    ],
+    "temp_removed": true,
+    "sentinel_unchanged": true,
+    "production_config_unchanged": true,
+    "supplier_calls": 0,
+    "passed": 81,
+    "seconds_pytest": 1.36
+  },
+  "final_namespace_static": {
+    "initial": "Ruff E402 on fixture constant before external import",
+    "final": "PASS; constant moved after imports; no behavior change",
+    "submission_prepare": "missing manifest stopped before staging; fixed sequentially"
   }
 }

@@ -3,8 +3,12 @@
 from __future__ import annotations
 
 from typing import Any
+from pathlib import Path
+
 
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget
+
+PWF_FIXTURES = Path(__file__).resolve().parents[3] / "docs/plans/du4-form-2026-10-15/fixtures"
 
 DEFAULT_PARENT = "urn:company-wiki:source:sha256:synthetic-parent"
 

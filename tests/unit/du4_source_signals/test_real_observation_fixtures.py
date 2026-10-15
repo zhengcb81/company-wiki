@@ -15,7 +15,7 @@ import re
 
 from .builders import budget, carrier, observation, ref, unit
 
-from .conftest import PWF_FIXTURES
+from .builders import PWF_FIXTURES
 
 from company_wiki.document_understanding.source_signals import collect_source_signals
 

@@ -18,3 +18,8 @@ ROOT将源分支正常合入本工作树后，先加集中RED，再按单一载�
 测试目录额外做namespace隔离：新增__init__.py、builders/conftest改相对导入，避免将来兄弟包同时collection时共享全局helpers；不改业务断言。327运行早于该import-only变更，最终正常prepush负责复核此版本，不能误称327已跑最终文件。已预冻结的v3请求gzip继续保存在既有不可变归档/owned scratch，未把尚未使用的future fixture混入FORM提交。
 
 原工作预算每unit/carrier/unit-ref/value-ref的计费含义和已有精确计数不变（形状与parent检查合并一次）；没有新预算/门禁/身份检查。未知属性的值和任意扩展不遍历，去重只消费已确定entry；失败/hidden重复保持不可用。原FORM fixture SHA、span原文/locator不改。作者tree原样，ROOT当前merge包含作者完整history，正常提交后再核精确CI。生产E2E/真实原件回放仍NOT_RUN，不提前宣布完成。
+
+
+ROOT已正常merge commit8406461c，推送前进一步去除测试专用重复bootstrap：仓库tests/conftest.py本来已把当前src插入首位，新包的conftest没有任何fixture，只重复改sys.path并存一个fixture目录常量。将常量迁入本包builders并删除这份新conftest，保持全局已有隔离fixture/网络拦截不变；避免新局部bootstrap不必要地触发全库prepush，也消除测试工作树进口分叉。不是修改CI选择器、跳测试或弱化断言。作者原工作树conftest保留不变，ROOT整合通过统一测试入口。最终集中组件和正常push重新验证。
+
+收尾静态检查曾发现新夹具常量放在第三方import前触发Ruff E402；已移动到所有import之后，最终Ruff通过。提交准备脚本随后因manifest未生成而停止，未产生误提交；已修正顺序。81项运行在常量搬移后的功能版本，最后仅调整该常量的模块声明位置。
