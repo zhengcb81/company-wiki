@@ -295,3 +295,14 @@ decode_scoped_drafts(response, selected, frozen view)
 
 
 旧v3请求和HTTP raw/official两快照已先离线冻结，压缩12415字节、SHA789c3e64d4d73656b85864b44c258cc1e9626bc36e0693a1e2ce2c999bc84a79，存于本节点[发布材料](../common-root-quality-evidence/source-scoped-foundation-publication-receipts.zip)。下一节点从归档解压为自己测试fixture再改正式协议，不能改后重新生成旧金样。
+
+
+## 2026-10-15 ROOT正式协议接线决定（DU4继续独立施工）
+
+收尾a89467b0已正常推送（148PASS/35.83s），精确查询该docs-only SHA当前无workflow，不称CI通过。第一次commit受瞬时index.lock拒绝；检查后锁已自行消失，未删锁，正常重试成功。源码节点5f54f81b的5689/24与精确CI成功不变。
+
+下一段采用一个有限的 `narrative_model_runtime.py` 协议入口，旧 `narrative_model.py` 保持实际字节和类型归属，作为原None/v1/v2/v3的唯一实现；v4的独立模块承担新schema/局部草稿/绑定。这样新增协议不再使旧整文件decoder SHA无关失效，不复制旧引擎或伪造历史哈希。现有正式generation/factory/summarize/verify通过该入口选择；HTTP/caller仍使用同一request/response类型及费用机制。公开默认0.8、新0.9默认v3先保持，显式v4先集中TDD/真实恢复，source指代/覆盖尚未完成前不切生产默认。
+
+先固化旧v3 raw/official实际request与HTTP和boundary identity，再写新task request/decoder、局部scope/QA/20总量/整条恢复/程序ID及角色/未知版本反例。新协议按任务原顺序生成ID，clause只允许text/basis_parts/modality，模型不能回填ID/类型；角色集合由source_catalog单一规则同时供推导和验证。v4实现hash包含入口、新protocol/compiler/plan和所依赖旧公共工具及角色规则；旧identity仍由原实现计算。coverage仅是来源范围观测，语义不自动通过。
+
+现摘要handler whole-file validation identity在本节点接线后会如实变化；已完成typed摘要/verify/outbox不执行历史软件，仍按实际旧paid快照做0POST恢复。未完成且实际不可执行旧validator的任务继续明确不可用，不伪装兼容或盲目重付费。此段结束需报告真正覆盖到的恢复阶段。三个DU4作者目录/源码/测试/PWF只读，ROOT只改共享正式接线文件和自有测试。

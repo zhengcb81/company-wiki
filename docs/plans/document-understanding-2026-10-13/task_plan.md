@@ -1,3 +1,15 @@
+## ROOT 当前状态 — 2026-10-15 DU4-FORM组件接收
+
+DU4-FORM作者分支四个commit已接入ROOT合并工作区；原72测试复跑通过。独立审查发现两类P2（同owner不连续片段可拼出原文没有的表单值；预算前循环/raw JSON复制/平方级预留）及一个异常类型问题，ROOT先9个RED再共同根因修复，组件81PASS，含现有router/adapter/父子scope共327PASS（包含81，不累加）。独立11组纯探针复核PASS_COMPONENT，无剩余阻断；Ruff/mypy两源文件PASS。测试helpers已改包内导入避免各施工线同名helpers污染，最终正常prepush尚待运行。[接收细则](review/du4_form_acceptance.md)、[不可变组件证据](common-root-quality-evidence/du4-form-component-acceptance.json)。
+
+**组件接收不等于生产接线：** 一次native walk→carrier→adapter→原cap预留→唯一router、真实VRSK/电话会/8-K holdout仍待ROOT实施。TABLE/STATE仍按用户施工通知保持独立，不修改作者树。源原件/配置保持，测试Temp已删除，本节点0供应商，累计599590tokens/385113µUSD预算代理（旧unknown7；上限2M/$20）。
+
+来源任务/view5f54f81b已发布，5689/24正常推送测试及精确CI38796376285成功；PWF收尾a89467b0也已推送，148PASS，精确docs-only查询无workflow。新v4正式协议仍未实现，已付费摘要六处错引及重要遗漏仍未关闭，默认0.8；不得以FORM组件绿宣称共享引擎质量完成。
+
+**Next Step：** 完成本FORM合并正常提交/推送和精确CI；继续显式v4正式接线、source依赖与覆盖，再统一FORM native/route接线和真实摘要/恢复验收。HKIPO分阶段有界解析、供应商质量、母G2/G4/G5与原三→新三公司审计继续开放。旧模型模块保持字节，有限runtime入口设计见原施工细则；未实际接线不称完成。
+
+---
+
 ## ROOT 当前状态 — 2026-10-15 来源任务与逐命题回归
 
 当前已实施一段共同机制：原真实paid终文经正式decoder仍逐字还原20条；新的逐claim锚点观察会将六处错引用分开检出，不允许借其他claim、context或完整selected里的事实。该观察依赖独审明确的命题→原文锚点，不是通用自然语言蕴含证明。原20条8PASS/6WARN/6FAIL及PD5/Matrix等遗漏的正式语义FAIL保持，不改旧终文、不偷换分母。

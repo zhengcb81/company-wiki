@@ -297,3 +297,8 @@ ROOT维护一个状态表、一个Next Step；三大节点汇总命令/退出码
 ## §7.10 DU4 并行实施：固定接口与不重叠目录
 
 2026-10-15 新增三个纯组件施工包，详见 [总调度与接收顺序](parallel/du4-2026-10-15/README.md)。TABLE/STATE/FORM 各自独占新源码包、单元测试包、作者 PWF；ROOT 接线既有 normalizer/router/selector/context，并做原件及正式摘要的大节点测试。组件全部可以立即开始，接口不依赖彼此或 ROOT 未提交的新 context/2。作者提交本分支后 STOP，不自行并 master/同步技能/写生产数据。
+
+
+## 2026-10-15 DU4-FORM接收节点
+
+FORM源分支已并入ROOT合并工作区，组件/根因整改详见[接收细则](review/du4_form_acceptance.md)和[证据](common-root-quality-evidence/du4-form-component-acceptance.json)。独立两P2已修复，327集中PASS包含81组件，独立11组探针通过；正常提交/推送待完成。真实native walk→adapter→预留→唯一router仍未接线，后续沿现有source_form_route_implementation.md，不新增第二路由或全文扫描。TABLE/STATE施工边界不变。主线v4正式边界仍在规划阶段，不能以纯view或FORM组件代替生产完成。

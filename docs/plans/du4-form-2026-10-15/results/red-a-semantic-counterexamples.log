@@ -1,0 +1,394 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki-du4-form
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 68 items
+
+tests\unit\du4_source_signals\test_carrier_flow_assembly.py F            [  1%]
+tests\unit\du4_source_signals\test_contract_budget.py ..FFFFFFFFFF.FF.FF [ 27%]
+                                                                         [ 27%]
+tests\unit\du4_source_signals\test_form_carriers.py FFFFFFFFFFFFFFFFFFFF [ 57%]
+.FFFF.                                                                   [ 66%]
+tests\unit\du4_source_signals\test_real_observation_fixtures.py .FFF     [ 72%]
+tests\unit\du4_source_signals\test_turn_signals.py ......F.FFFFFFFFFFF   [100%]
+
+================================== FAILURES ===================================
+____________ test_carrier_stream_produces_complete_scoped_signals _____________
+tests\unit\du4_source_signals\test_carrier_flow_assembly.py:77: in test_carrier_stream_produces_complete_scoped_signals
+    assert [(entry["parent_id"], entry["value"]) for entry in forms] == [
+E   AssertionError: assert [] == [('urn:compan... 'FORM 10-K')]
+E     
+E     Right contains 3 more items, first extra item: ('urn:company-wiki:source:sha256:assembly-main', 'FORM 8-K')
+E     Use -v to get more diff
+_______________________ test_missing_unit_field_raises ________________________
+tests\unit\du4_source_signals\test_contract_budget.py:61: in test_missing_unit_field_raises
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____________________ test_illegal_reference_indices_raise _____________________
+tests\unit\du4_source_signals\test_contract_budget.py:68: in test_illegal_reference_indices_raise
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+____________________ test_duplicate_carrier_unit_id_raises ____________________
+tests\unit\du4_source_signals\test_contract_budget.py:83: in test_duplicate_carrier_unit_id_raises
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+______________________ test_unknown_carrier_kind_raises _______________________
+tests\unit\du4_source_signals\test_contract_budget.py:90: in test_unknown_carrier_kind_raises
+    with pytest.raises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_____________ test_ref_past_source_text_is_unresolved_not_clamped _____________
+tests\unit\du4_source_signals\test_contract_budget.py:101: in test_ref_past_source_text_is_unresolved_not_clamped
+    assert "REF_EXCEEDS_TEXT" in code_set(result)
+E   AssertionError: assert 'REF_EXCEEDS_TEXT' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+_____________________ test_empty_span_ref_is_not_a_value ______________________
+tests\unit\du4_source_signals\test_contract_budget.py:112: in test_empty_span_ref_is_not_a_value
+    assert "EMPTY_VALUE_REF" in code_set(result)
+E   AssertionError: assert 'EMPTY_VALUE_REF' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+_______________ test_ref_outside_carrier_units_is_not_borrowed ________________
+tests\unit\du4_source_signals\test_contract_budget.py:122: in test_ref_outside_carrier_units_is_not_borrowed
+    assert "REF_OUTSIDE_CARRIER" in code_set(result)
+E   AssertionError: assert 'REF_OUTSIDE_CARRIER' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+_______________ test_zero_budget_is_partial_and_claims_nothing ________________
+tests\unit\du4_source_signals\test_contract_budget.py:134: in test_zero_budget_is_partial_and_claims_nothing
+    assert "WORK_BUDGET_EXCEEDED" in code_set(result)
+E   AssertionError: assert 'WORK_BUDGET_EXCEEDED' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+_____________ test_low_budget_keeps_determined_results_and_counts _____________
+tests\unit\du4_source_signals\test_contract_budget.py:156: in test_low_budget_keeps_determined_results_and_counts
+    assert [entry["value"] for entry in result["source_form_evidence"]] == ["FORM 10-Q"]
+E   AssertionError: assert [] == ['FORM 10-Q']
+E     
+E     Right contains one more item: 'FORM 10-Q'
+E     Use -v to get more diff
+_____________ test_duplicate_carriers_deduplicate_with_diagnostic _____________
+tests\unit\du4_source_signals\test_contract_budget.py:167: in test_duplicate_carriers_deduplicate_with_diagnostic
+    assert [e["value"] for e in result["source_form_evidence"]] == ["FORM 10-Q"]
+E   AssertionError: assert [] == ['FORM 10-Q']
+E     
+E     Right contains one more item: 'FORM 10-Q'
+E     Use -v to get more diff
+_______________ test_large_observation_work_is_honestly_metered _______________
+tests\unit\du4_source_signals\test_contract_budget.py:199: in test_large_observation_work_is_honestly_metered
+    assert result["work_used"] == 50 + 5 + 5 * 2 + 5
+E   assert 0 == (((50 + 5) + (5 * 2)) + 5)
+__________________ test_status_complete_partial_unavailable ___________________
+tests\unit\du4_source_signals\test_contract_budget.py:207: in test_status_complete_partial_unavailable
+    assert clean["status"] == "complete"
+E   AssertionError: assert 'partial' == 'complete'
+E     
+E     - complete
+E     + partial
+________________ test_second_budget_is_never_created_or_reset _________________
+tests\unit\du4_source_signals\test_contract_budget.py:272: in test_second_budget_is_never_created_or_reset
+    assert used_once > 0
+E   assert 0 > 0
+__________________ test_no_parent_mismatch_is_silently_mixed __________________
+tests\unit\du4_source_signals\test_contract_budget.py:295: in test_no_parent_mismatch_is_silently_mixed
+    assert "CARRIER_PARENT_MISMATCH" in code_set(result)
+E   AssertionError: assert 'CARRIER_PARENT_MISMATCH' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+_________ test_real_nine_char_form_and_inline_dei_are_scoped_evidence _________
+tests\unit\du4_source_signals\test_form_carriers.py:65: in test_real_nine_char_form_and_inline_dei_are_scoped_evidence
+    assert [entry["value"] for entry in evidence] == ["FORM 10-Q", "10-Q"]
+E   AssertionError: assert [] == ['FORM 10-Q', '10-Q']
+E     
+E     Right contains 2 more items, first extra item: 'FORM 10-Q'
+E     Use -v to get more diff
+____________ test_real_carriers_reserved_not_cover_fallback_units _____________
+tests\unit\du4_source_signals\test_form_carriers.py:81: in test_real_carriers_reserved_not_cover_fallback_units
+    assert result["reserved_unit_ids"] == [FORM_UNIT]
+E   AssertionError: assert [] == ['u-form']
+E     
+E     Right contains one more item: 'u-form'
+E     Use -v to get more diff
+________ test_printed_form_literals_are_preserved_without_family[10-Q] ________
+tests\unit\du4_source_signals\test_form_carriers.py:105: in test_printed_form_literals_are_preserved_without_family
+    assert [entry["value"] for entry in evidence] == [text]
+E   AssertionError: assert [] == ['FORM 10-Q']
+E     
+E     Right contains one more item: 'FORM 10-Q'
+E     Use -v to get more diff
+_______ test_printed_form_literals_are_preserved_without_family[10-Q/A] _______
+tests\unit\du4_source_signals\test_form_carriers.py:105: in test_printed_form_literals_are_preserved_without_family
+    assert [entry["value"] for entry in evidence] == [text]
+E   AssertionError: assert [] == ['FORM 10-Q/A']
+E     
+E     Right contains one more item: 'FORM 10-Q/A'
+E     Use -v to get more diff
+________ test_printed_form_literals_are_preserved_without_family[10-K] ________
+tests\unit\du4_source_signals\test_form_carriers.py:105: in test_printed_form_literals_are_preserved_without_family
+    assert [entry["value"] for entry in evidence] == [text]
+E   AssertionError: assert [] == ['FORM 10-K']
+E     
+E     Right contains one more item: 'FORM 10-K'
+E     Use -v to get more diff
+________ test_printed_form_literals_are_preserved_without_family[20-F] ________
+tests\unit\du4_source_signals\test_form_carriers.py:105: in test_printed_form_literals_are_preserved_without_family
+    assert [entry["value"] for entry in evidence] == [text]
+E   AssertionError: assert [] == ['FORM 20-F']
+E     
+E     Right contains one more item: 'FORM 20-F'
+E     Use -v to get more diff
+________ test_printed_form_literals_are_preserved_without_family[40-F] ________
+tests\unit\du4_source_signals\test_form_carriers.py:105: in test_printed_form_literals_are_preserved_without_family
+    assert [entry["value"] for entry in evidence] == [text]
+E   AssertionError: assert [] == ['FORM 40-F']
+E     
+E     Right contains one more item: 'FORM 40-F'
+E     Use -v to get more diff
+________ test_printed_form_literals_are_preserved_without_family[8-K] _________
+tests\unit\du4_source_signals\test_form_carriers.py:105: in test_printed_form_literals_are_preserved_without_family
+    assert [entry["value"] for entry in evidence] == [text]
+E   AssertionError: assert [] == ['FORM 8-K']
+E     
+E     Right contains one more item: 'FORM 8-K'
+E     Use -v to get more diff
+________ test_printed_form_literals_are_preserved_without_family[6-K] _________
+tests\unit\du4_source_signals\test_form_carriers.py:105: in test_printed_form_literals_are_preserved_without_family
+    assert [entry["value"] for entry in evidence] == [text]
+E   AssertionError: assert [] == ['FORM 6-K']
+E     
+E     Right contains one more item: 'FORM 6-K'
+E     Use -v to get more diff
+________ test_printed_form_literals_are_preserved_without_family[S-1] _________
+tests\unit\du4_source_signals\test_form_carriers.py:105: in test_printed_form_literals_are_preserved_without_family
+    assert [entry["value"] for entry in evidence] == [text]
+E   AssertionError: assert [] == ['FORM S-1']
+E     
+E     Right contains one more item: 'FORM S-1'
+E     Use -v to get more diff
+________ test_printed_form_literals_are_preserved_without_family[F-1] _________
+tests\unit\du4_source_signals\test_form_carriers.py:105: in test_printed_form_literals_are_preserved_without_family
+    assert [entry["value"] for entry in evidence] == [text]
+E   AssertionError: assert [] == ['FORM F-1']
+E     
+E     Right contains one more item: 'FORM F-1'
+E     Use -v to get more diff
+_________ test_unseen_form_literal_keeps_fact_and_reports_diagnostic __________
+tests\unit\du4_source_signals\test_form_carriers.py:124: in test_unseen_form_literal_keeps_fact_and_reports_diagnostic
+    assert [entry["value"] for entry in evidence] == [text]
+E   AssertionError: assert [] == ['FORM DEF 14A']
+E     
+E     Right contains one more item: 'FORM DEF 14A'
+E     Use -v to get more diff
+________ test_same_owner_inline_wrapping_concatenates_within_one_unit _________
+tests\unit\du4_source_signals\test_form_carriers.py:143: in test_same_owner_inline_wrapping_concatenates_within_one_unit
+    assert [entry["value"] for entry in result["source_form_evidence"]] == ["FORM 10-Q"]
+E   AssertionError: assert [] == ['FORM 10-Q']
+E     
+E     Right contains one more item: 'FORM 10-Q'
+E     Use -v to get more diff
+________________ test_split_owner_tokens_are_not_concatenated _________________
+tests\unit\du4_source_signals\test_form_carriers.py:165: in test_split_owner_tokens_are_not_concatenated
+    assert "SPLIT_OWNER_VALUE" in code_set(result)
+E   AssertionError: assert 'SPLIT_OWNER_VALUE' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+________ test_hidden_excluded_external_dei_is_not_visible_fact[hidden] ________
+tests\unit\du4_source_signals\test_form_carriers.py:183: in test_hidden_excluded_external_dei_is_not_visible_fact
+    assert "NON_VISIBLE_DEI" in code_set(result)
+E   AssertionError: assert 'NON_VISIBLE_DEI' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+_______ test_hidden_excluded_external_dei_is_not_visible_fact[excluded] _______
+tests\unit\du4_source_signals\test_form_carriers.py:183: in test_hidden_excluded_external_dei_is_not_visible_fact
+    assert "NON_VISIBLE_DEI" in code_set(result)
+E   AssertionError: assert 'NON_VISIBLE_DEI' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+_______ test_hidden_excluded_external_dei_is_not_visible_fact[external] _______
+tests\unit\du4_source_signals\test_form_carriers.py:183: in test_hidden_excluded_external_dei_is_not_visible_fact
+    assert "NON_VISIBLE_DEI" in code_set(result)
+E   AssertionError: assert 'NON_VISIBLE_DEI' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+_______________ test_dei_concept_mismatch_is_not_form_evidence ________________
+tests\unit\du4_source_signals\test_form_carriers.py:201: in test_dei_concept_mismatch_is_not_form_evidence
+    assert "DEI_CONCEPT_MISMATCH" in code_set(result)
+E   AssertionError: assert 'DEI_CONCEPT_MISMATCH' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+______ test_declared_quarterly_without_observed_carrier_is_not_observed _______
+tests\unit\du4_source_signals\test_form_carriers.py:210: in test_declared_quarterly_without_observed_carrier_is_not_observed
+    assert "DECLARED_FORM_UNOBSERVED" in code_set(result)
+E   AssertionError: assert 'DECLARED_FORM_UNOBSERVED' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+______ test_declared_value_conflicting_with_observed_is_diagnostic_only _______
+tests\unit\du4_source_signals\test_form_carriers.py:226: in test_declared_value_conflicting_with_observed_is_diagnostic_only
+    assert [entry["value"] for entry in result["source_form_evidence"]] == ["FORM 10-Q"]
+E   AssertionError: assert [] == ['FORM 10-Q']
+E     
+E     Right contains one more item: 'FORM 10-Q'
+E     Use -v to get more diff
+_________ test_declarative_attribute_keys_are_ignored_with_diagnostic _________
+tests\unit\du4_source_signals\test_form_carriers.py:259: in test_declarative_attribute_keys_are_ignored_with_diagnostic
+    assert [entry["value"] for entry in result["source_form_evidence"]] == ["10-Q"]
+E   AssertionError: assert [] == ['10-Q']
+E     
+E     Right contains one more item: '10-Q'
+E     Use -v to get more diff
+________ test_same_parent_value_conflict_is_reported_both_values_kept _________
+tests\unit\du4_source_signals\test_form_carriers.py:274: in test_same_parent_value_conflict_is_reported_both_values_kept
+    assert values == ["FORM 10-Q", "FORM 10-K"]
+E   AssertionError: assert [] == ['FORM 10-Q', 'FORM 10-K']
+E     
+E     Right contains 2 more items, first extra item: 'FORM 10-Q'
+E     Use -v to get more diff
+___________ test_different_parent_values_stay_separate_scoped_facts ___________
+tests\unit\du4_source_signals\test_form_carriers.py:300: in test_different_parent_values_stay_separate_scoped_facts
+    assert by_parent == {DEFAULT_PARENT: "FORM 8-K", child_parent: "FORM 10-K"}
+E   AssertionError: assert {} == {'urn:company...: 'FORM 10-K'}
+E     
+E     Right contains 2 more items:
+E     {'urn:company-wiki:source:sha256:attachment-10k': 'FORM 10-K',
+E      'urn:company-wiki:source:sha256:synthetic-parent': 'FORM 8-K'}
+E     Use -v to get more diff
+______________ test_nonexistent_carrier_cannot_borrow_cover_ids _______________
+tests\unit\du4_source_signals\test_form_carriers.py:326: in test_nonexistent_carrier_cannot_borrow_cover_ids
+    assert "UNKNOWN_REF_UNIT" in code_set(result)
+E   AssertionError: assert 'UNKNOWN_REF_UNIT' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+__________ test_real_form_unit_id_and_dei_position_survive_verbatim ___________
+tests\unit\du4_source_signals\test_real_observation_fixtures.py:112: in test_real_form_unit_id_and_dei_position_survive_verbatim
+    assert [entry["value"] for entry in evidence] == ["FORM 10-Q", "10-Q"]
+E   AssertionError: assert [] == ['FORM 10-Q', '10-Q']
+E     
+E     Right contains 2 more items, first extra item: 'FORM 10-Q'
+E     Use -v to get more diff
+______ test_real_revenues_cell_without_native_turn_carrier_is_not_a_turn ______
+tests\unit\du4_source_signals\test_real_observation_fixtures.py:144: in test_real_revenues_cell_without_native_turn_carrier_is_not_a_turn
+    assert result["status"] == "complete"
+E   AssertionError: assert 'partial' == 'complete'
+E     
+E     - complete
+E     + partial
+________________ test_real_cover_units_are_never_form_carriers ________________
+tests\unit\du4_source_signals\test_real_observation_fixtures.py:194: in test_real_cover_units_are_never_form_carriers
+    assert cited == {FORM_UNIT_ID}
+E   AssertionError: assert set() == {'urn:company...75a0f7637d3a'}
+E     
+E     Extra items in the right set:
+E     'urn:company-wiki:narrative-unit:sha256:73ba6668bb9b633c2472632e7283ecadde0ca24c5727909b6e4275a0f7637d3a'
+E     Use -v to get more diff
+_______ test_label_only_carrier_without_body_or_association_is_rejected _______
+tests\unit\du4_source_signals\test_turn_signals.py:95: in test_label_only_carrier_without_body_or_association_is_rejected
+    assert "TURN_WITHOUT_BODY_OR_ASSOCIATION" in code_set(result)
+E   AssertionError: assert 'TURN_WITHOUT_BODY_OR_ASSOCIATION' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+_____________ test_named_prose_turns_with_body_are_evidence[cfo] ______________
+tests\unit\du4_source_signals\test_turn_signals.py:129: in test_named_prose_turns_with_body_are_evidence
+    assert len(turns) == 1
+E   assert 0 == 1
+E    +  where 0 = len([])
+___________ test_named_prose_turns_with_body_are_evidence[operator] ___________
+tests\unit\du4_source_signals\test_turn_signals.py:129: in test_named_prose_turns_with_body_are_evidence
+    assert len(turns) == 1
+E   assert 0 == 1
+E    +  where 0 = len([])
+___________ test_named_prose_turns_with_body_are_evidence[analyst] ____________
+tests\unit\du4_source_signals\test_turn_signals.py:129: in test_named_prose_turns_with_body_are_evidence
+    assert len(turns) == 1
+E   assert 0 == 1
+E    +  where 0 = len([])
+__________ test_named_prose_turns_with_body_are_evidence[management] __________
+tests\unit\du4_source_signals\test_turn_signals.py:129: in test_named_prose_turns_with_body_are_evidence
+    assert len(turns) == 1
+E   assert 0 == 1
+E    +  where 0 = len([])
+______ test_native_attributed_table_turn_is_not_excluded_by_table_shape _______
+tests\unit\du4_source_signals\test_turn_signals.py:169: in test_native_attributed_table_turn_is_not_excluded_by_table_shape
+    assert len(turns) == 1
+E   assert 0 == 1
+E    +  where 0 = len([])
+__________________ test_prepared_remarks_do_not_fabricate_qa __________________
+tests\unit\du4_source_signals\test_turn_signals.py:191: in test_prepared_remarks_do_not_fabricate_qa
+    assert len(turns) == 1
+E   assert 0 == 1
+E    +  where 0 = len([])
+__________ test_rhetorical_question_body_is_not_an_investor_question __________
+tests\unit\du4_source_signals\test_turn_signals.py:213: in test_rhetorical_question_body_is_not_an_investor_question
+    assert len(turns) == 1
+E   assert 0 == 1
+E    +  where 0 = len([])
+___________________ test_cross_parent_carrier_is_not_paired ___________________
+tests\unit\du4_source_signals\test_turn_signals.py:231: in test_cross_parent_carrier_is_not_paired
+    assert "CARRIER_PARENT_MISMATCH" in code_set(result)
+E   AssertionError: assert 'CARRIER_PARENT_MISMATCH' in {'NOT_IMPLEMENTED'}
+E    +  where {'NOT_IMPLEMENTED'} = code_set({'schema_version': 'du4-source-signals/1', 'source_form_evidence': [], 'turn_evidence': [], 'reserved_unit_ids': [], ...})
+___________________ test_distinct_turn_ids_are_never_paired ___________________
+tests\unit\du4_source_signals\test_turn_signals.py:259: in test_distinct_turn_ids_are_never_paired
+    assert len(turns) == 3
+E   assert 0 == 3
+E    +  where 0 = len([])
+________________ test_same_turn_id_across_parents_stays_scoped ________________
+tests\unit\du4_source_signals\test_turn_signals.py:286: in test_same_turn_id_across_parents_stays_scoped
+    assert len(turns) == 2
+E   assert 0 == 2
+E    +  where 0 = len([])
+_____________ test_unknown_turn_fields_are_none_not_empty_strings _____________
+tests\unit\du4_source_signals\test_turn_signals.py:302: in test_unknown_turn_fields_are_none_not_empty_strings
+    assert len(turns) == 1
+E   assert 0 == 1
+E    +  where 0 = len([])
+=========================== short test summary info ===========================
+FAILED tests/unit/du4_source_signals/test_carrier_flow_assembly.py::test_carrier_stream_produces_complete_scoped_signals
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_missing_unit_field_raises
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_illegal_reference_indices_raise
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_duplicate_carrier_unit_id_raises
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_unknown_carrier_kind_raises
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_ref_past_source_text_is_unresolved_not_clamped
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_empty_span_ref_is_not_a_value
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_ref_outside_carrier_units_is_not_borrowed
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_zero_budget_is_partial_and_claims_nothing
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_low_budget_keeps_determined_results_and_counts
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_duplicate_carriers_deduplicate_with_diagnostic
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_large_observation_work_is_honestly_metered
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_status_complete_partial_unavailable
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_second_budget_is_never_created_or_reset
+FAILED tests/unit/du4_source_signals/test_contract_budget.py::test_no_parent_mismatch_is_silently_mixed
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_real_nine_char_form_and_inline_dei_are_scoped_evidence
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_real_carriers_reserved_not_cover_fallback_units
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_printed_form_literals_are_preserved_without_family[10-Q]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_printed_form_literals_are_preserved_without_family[10-Q/A]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_printed_form_literals_are_preserved_without_family[10-K]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_printed_form_literals_are_preserved_without_family[20-F]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_printed_form_literals_are_preserved_without_family[40-F]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_printed_form_literals_are_preserved_without_family[8-K]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_printed_form_literals_are_preserved_without_family[6-K]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_printed_form_literals_are_preserved_without_family[S-1]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_printed_form_literals_are_preserved_without_family[F-1]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_unseen_form_literal_keeps_fact_and_reports_diagnostic
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_same_owner_inline_wrapping_concatenates_within_one_unit
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_split_owner_tokens_are_not_concatenated
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_hidden_excluded_external_dei_is_not_visible_fact[hidden]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_hidden_excluded_external_dei_is_not_visible_fact[excluded]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_hidden_excluded_external_dei_is_not_visible_fact[external]
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_dei_concept_mismatch_is_not_form_evidence
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_declared_quarterly_without_observed_carrier_is_not_observed
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_declared_value_conflicting_with_observed_is_diagnostic_only
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_declarative_attribute_keys_are_ignored_with_diagnostic
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_same_parent_value_conflict_is_reported_both_values_kept
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_different_parent_values_stay_separate_scoped_facts
+FAILED tests/unit/du4_source_signals/test_form_carriers.py::test_nonexistent_carrier_cannot_borrow_cover_ids
+FAILED tests/unit/du4_source_signals/test_real_observation_fixtures.py::test_real_form_unit_id_and_dei_position_survive_verbatim
+FAILED tests/unit/du4_source_signals/test_real_observation_fixtures.py::test_real_revenues_cell_without_native_turn_carrier_is_not_a_turn
+FAILED tests/unit/du4_source_signals/test_real_observation_fixtures.py::test_real_cover_units_are_never_form_carriers
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_label_only_carrier_without_body_or_association_is_rejected
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_named_prose_turns_with_body_are_evidence[cfo]
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_named_prose_turns_with_body_are_evidence[operator]
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_named_prose_turns_with_body_are_evidence[analyst]
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_named_prose_turns_with_body_are_evidence[management]
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_native_attributed_table_turn_is_not_excluded_by_table_shape
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_prepared_remarks_do_not_fabricate_qa
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_rhetorical_question_body_is_not_an_investor_question
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_cross_parent_carrier_is_not_paired
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_distinct_turn_ids_are_never_paired
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_same_turn_id_across_parents_stays_scoped
+FAILED tests/unit/du4_source_signals/test_turn_signals.py::test_unknown_turn_fields_are_none_not_empty_strings
+======================== 54 failed, 14 passed in 1.36s ========================

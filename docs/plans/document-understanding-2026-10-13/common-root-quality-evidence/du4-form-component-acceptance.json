@@ -1,0 +1,268 @@
+{
+  "schema_version": "du4-form-root-component-acceptance/1",
+  "status": "PASS_COMPONENT_PENDING_PUBLICATION",
+  "author_branch": "codex/du4-form-20261015",
+  "author_head": "2cde9de9118273b3e74b7612131cb635a6d016b0",
+  "author_implementation_commits": [
+    "28d90c9c58aa283843db1b243f6388ea2c5a0858",
+    "04dbeb33e78039269738e377b93f844659a8f01d"
+  ],
+  "root_parent": "a89467b02eb16b68095537b44f8e3c1cc73620a4",
+  "author_replay": {
+    "exit_code": 0,
+    "seconds": 13.634705000004033,
+    "author_source": "C:\\Users\\郑曾波\\Projects\\company-wiki-du4-form\\src",
+    "supplier_calls": 0,
+    "production_config_unchanged": true,
+    "temp_removed": true
+  },
+  "concentrated_component_tests": {
+    "passed": 81,
+    "seconds": 1.76
+  },
+  "combined_contract_tests": {
+    "passed": 327,
+    "seconds": 14.3,
+    "includes_component_tests": true,
+    "namespace_test_import_change_applied_after_run": true
+  },
+  "red": {
+    "original_failures": 9,
+    "corrected_instrumentation_failures": 9,
+    "fixture_correction": "builder copies lists; reinstall counted input and reset visited before collector; old and corrected RED both retained"
+  },
+  "root_fixes": [
+    "charge before variable-length carrier work; single shape/parent walk",
+    "deduplicate only finite successfully resolved evidence; ignored raw extensions not serialized",
+    "list plus set for linear ordered reservations",
+    "require contiguous same-owner form fragments; preserve adjacent inline positive control",
+    "malformed carrier kinds raise ValueError",
+    "package-local test helpers avoid cross-lane import collision"
+  ],
+  "independent_review": {
+    "initial": "REQUEST_CHANGES_COMPONENT",
+    "final": "PASS_COMPONENT",
+    "pure_probe_groups": 11,
+    "source_hashes_verified": true,
+    "namespace_only_test_import_delta": "recorded to reviewer; final normal pre-push pending"
+  },
+  "production_end_to_end": "NOT_RUN",
+  "v4_runtime": "NOT_IMPLEMENTED",
+  "selector_default": "0.8.0",
+  "supplier_calls": 0,
+  "production_config_unchanged": true,
+  "original_documents_modified": 0,
+  "author_worktree_modified": false,
+  "known_limits": [
+    "pure collector; single native walk/adapter/probe/router integration remains ROOT work",
+    "VRSK original replay and real transcript/8-K holdouts not run",
+    "TABLE and STATE user completion not received; author trees untouched"
+  ],
+  "budget": {
+    "tokens_cumulative": 599590,
+    "micro_usd_budget_proxy_cumulative": 385113,
+    "unknown_prior_entries": 7,
+    "max_tokens": 2000000,
+    "max_usd": 20
+  },
+  "source_sha256": {
+    "src/company_wiki/document_understanding/source_signals/__init__.py": "8e8aef3c031bcf14366d2bbf3c7758a6ea5424584c2282c8297c6f2f2913d4c7",
+    "src/company_wiki/document_understanding/source_signals/contract.py": "d84d93b798e1e06cf58b551a71195e98f0726eaa501c4b70eab036e356052f39",
+    "tests/unit/du4_source_signals/__init__.py": "b01bf0316e68d8e0caccb7c18d257e349e1af75595ad4a55407b01cb109be63d",
+    "tests/unit/du4_source_signals/builders.py": "e00e6fa723b258a08189b4a20dcfdc6de2714911a6bd8a9d09cd3331fa0d8e97",
+    "tests/unit/du4_source_signals/conftest.py": "e6de9ba5f5921dcbf1063720e9c15a86f8c91329c2ed319afc032250f492bab7",
+    "tests/unit/du4_source_signals/test_carrier_flow_assembly.py": "99e19c390534201b6c6c1c9b96bafdc1c0cd8b2480be0e76708ffd8b4fccbd3b",
+    "tests/unit/du4_source_signals/test_contract_budget.py": "6c77d97433eb931f16f6c9267fb238d434c2cdee44e08380c855c7dc7a9f2849",
+    "tests/unit/du4_source_signals/test_form_carriers.py": "bec071365a11d281f93059b25e0b57ecb45e1be65e0730486c8e212c451b7a48",
+    "tests/unit/du4_source_signals/test_real_observation_fixtures.py": "2bbb9dd0cd3423dcb7778ba3772990edd453000995113d824d9095047b002dd4",
+    "tests/unit/du4_source_signals/test_root_bounded_carriers.py": "e414295d70b716a1fcd675d6d4a82c4bbb3cda2c2641015ae05722fa36e0c0b9",
+    "tests/unit/du4_source_signals/test_turn_signals.py": "03a11c61dbf72ad71c4ebf2e2cc4bb46282930a1cea43e2c7f62b67bd29768fc"
+  },
+  "archive": {
+    "path": "docs/plans/document-understanding-2026-10-13/common-root-quality-evidence/du4-form-component-receipts.zip",
+    "bytes": 49667,
+    "sha256": "c56b075758dbf435113fdd9751db0da196a9022f46bc6a3def546efe356192c7",
+    "members": [
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/author-root-junit.xml",
+        "bytes": 10823,
+        "sha256": "c18743523a6504194655f3b1617096257e35af2e19744ec6a6c2ccb319149df7"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/author-root-receipt.json",
+        "bytes": 236,
+        "sha256": "6a89e90366e631180faf640a616e19f27e6ff913101affececd60faef81d3f17"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/author-root-stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/author-root-stdout.log",
+        "bytes": 1849,
+        "sha256": "d61342ed4c4537041bc271e25dd5ce94ad58457e80b9368b91b098e4a86f6b35"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/final-handoff.json",
+        "bytes": 4307,
+        "sha256": "90ff0f9668f57da18789cdc2efe9fb3ce5d3ec75017b3886d6df989444275faa"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/final-handoff.md",
+        "bytes": 4240,
+        "sha256": "ddf2d63dfd098468f525c8b277a3fea35016c57231be022715a3ae475afd52c9"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/final-probe-results.json",
+        "bytes": 3574,
+        "sha256": "f906ff8187d059b61da1b63dd72fa9d3a91f37d52b1bdcacb187890bfd778067"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/final-probe.py",
+        "bytes": 7490,
+        "sha256": "aef9f7a5c8e2894db2334e91b9a7d8e61e0a7aaf6acb932bce940c191c7342b4"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/handoff.json",
+        "bytes": 2697,
+        "sha256": "412aea8dab8f4406be9b358838de1c3866db6e2abb11315d96d1194b04c1e25e"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/handoff.md",
+        "bytes": 7690,
+        "sha256": "982a8b2c319348b5511ae487bea2a1419715c3ae8e2aa9b185845b0e315cc575"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/probe-results.json",
+        "bytes": 2499,
+        "sha256": "fcf6a365d5aa1b081b755639e22aedbc90254da1875ac941c12eb85e53d4ae24"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/independent-review/probe.py",
+        "bytes": 4522,
+        "sha256": "b5bdcbf4b8be093ad0b0b95fc7a9bbe10abc66bd829f3dee029c38d52d476b5d"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/probe_budget.json",
+        "bytes": 224,
+        "sha256": "10171fe746f9d71de5c057f05b9a32a1c671cfd3a07783c911a5bd0a864eeeef"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/probe_budget.py",
+        "bytes": 1435,
+        "sha256": "93ae39d28d188c6f9bd3d55ee7b9a4cd30e76436a85534ca8327b4a406cd5efe"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/root-mypy-stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/root-mypy-stdout.log",
+        "bytes": 44,
+        "sha256": "0c37c4158c91ef55c724ba017bf6465f26018199badb08e3ff13f98acdf056c2"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/root-ruff-stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/root-ruff-stdout.log",
+        "bytes": 19,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/root-static-receipt.json",
+        "bytes": 417,
+        "sha256": "3d30f8971bd529d276503497ce94acb84c6e7b80aa2eb5f38155c2dd76986b16"
+      },
+      {
+        "path": ".planning/shared-reading-production/du4-form-acceptance/run_author_tests.py",
+        "bytes": 1742,
+        "sha256": "0274f68a81df02ae7ff16f42bba555da7c36eac52d8ca3a263c2285f32cd11e9"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-contracts/junit.xml",
+        "bytes": 56689,
+        "sha256": "7c3b3cf962717a02ea2539a18ea983425e579d99635a2300e384a57cb36c25b0"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-contracts/receipt.json",
+        "bytes": 616,
+        "sha256": "2b750f153cc01b74e44902b30bcb686b498776093e6f783ce9320093d08d8cb2"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-contracts/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-contracts/stdout.log",
+        "bytes": 3671,
+        "sha256": "f476feeabec2003ff74514b2fa9af8ea63dc62108cdb8946adc8c9fbf6fcea2d"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-green/junit.xml",
+        "bytes": 12267,
+        "sha256": "65d4103339d6c739e54d193e9aa62a27b840f2385b58e38fb5e30cc63a3cf3c7"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-green/receipt.json",
+        "bytes": 232,
+        "sha256": "a73c1aa41d83e3768730b9d3cef70546db78d2c60b093ebdc5420970d77949d6"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-green/stdout.log",
+        "bytes": 1926,
+        "sha256": "7d30b46dd298c2c3c332abbd4b480302355f8b65657b025d26dbc515b2cfc664"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-red/junit.xml",
+        "bytes": 8682,
+        "sha256": "05b302f5a904e709fecc01b3b9c6a84c478b1dfb7b6286b5556a04bb1b0adf9f"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-red/receipt.json",
+        "bytes": 262,
+        "sha256": "826f4af23ade93115a940e3751de7807e77938542d0dba7b9ef929840153a619"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-red/stdout.log",
+        "bytes": 8525,
+        "sha256": "0f260467098b8dd78f89567dad504025bf75a1b55305c5cecde5363493f00d3f"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-red-corrected/junit.xml",
+        "bytes": 8682,
+        "sha256": "f71c98a0643bed9fc59a9241d6eb0837ee82e53751b3dffdcd53381386a0f670"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-red-corrected/receipt.json",
+        "bytes": 262,
+        "sha256": "2a957726a4958879d68169e0126af34470da161e72ddcff138c66c348e4e38b4"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-red-corrected/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": ".planning/shared-reading-production/model-projection-root/du4-form-root-red-corrected/stdout.log",
+        "bytes": 8535,
+        "sha256": "1414be29ea8bfd8c2af638a5aaa17e9d26261caa4391caa1fab50b83b87df51a"
+      }
+    ]
+  }
+}

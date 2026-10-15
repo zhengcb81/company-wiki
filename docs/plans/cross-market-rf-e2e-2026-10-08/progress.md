@@ -1,3 +1,11 @@
+## ROOT当前归总 — 2026-10-15 DU4-FORM已交付与组件修复
+
+FORM已接入ROOT合并工作区，原72复跑、ROOT9反例RED→81PASS，含既有路由/adapter/父子范围集中327PASS，独立11组探针复核PASS_COMPONENT；两P2预算/复杂度与非连续表单拼接根因已修复。正常发布进行中，详见[唯一共享PWF](../document-understanding-2026-10-13/task_plan.md)及[组件证据](../document-understanding-2026-10-13/common-root-quality-evidence/du4-form-component-acceptance.json)。TABLE/STATE作者目录保持施工隔离，0供应商/原件或生产配置变更，累计599590tokens/385113µUSD代理、旧unknown7、上限2M/$20不变。
+
+FORM生产native→router/真实holdout、新v4摘要协议与source依赖/覆盖、真实摘要六错引/重要遗漏、长招股书性能、默认切换和母G2/G4/G5/公司循环仍开放。先完成本次正常并线发布，再按共享PWF接线，不能把组件或CI通过等同全部目标完成。
+
+---
+
 ## ROOT 当前执行归总 — 2026-10-15 来源任务组件与正式质量
 
 按[唯一共享阅读PWF](../document-understanding-2026-10-13/task_plan.md)推进：已冻结真实摘要六处错引的逐claim回归，实施共享引擎的来源task plan及局部model view（原文96/组64，QA/共享图/本地basis保留），最终47组件PASS，旧兼容集中160PASS；独立44PASS为compact前快照、最终编码静态核对。新v4正式协议/生产接线、指代/对象/覆盖分配与真实质量尚未完成，原语义FAIL保持，默认0.8。材料表示30590B对旧同范围30758B，仅少168B，不冒充真实token或质量收益。
