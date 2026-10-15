@@ -1,0 +1,330 @@
+{
+  "schema_version": "du4-form-ocr-reception-followup/1",
+  "status": "ENGINEERING_ACCEPTED_PENDING_NORMAL_PUSH",
+  "previous_push": {
+    "head": "a6c9a111d3137b362368fbf5ed41e74f319bdfa0",
+    "passed": 5775,
+    "failed": 1,
+    "skipped": 24,
+    "seconds": 500.93,
+    "failure": "OCR_WORKER_FAILED in Windows _fstat64 probe",
+    "original_exit_root_cause": "UNKNOWN"
+  },
+  "concrete_product_defect": "Windows response-file open PermissionError; missing bounded file handoff recovery",
+  "red": {
+    "native_file_read_publish_failures": 2,
+    "late_success_deadline_failures": 2
+  },
+  "final_frozen_tests": {
+    "passed": 96,
+    "seconds": 55.64,
+    "receipt": "model-projection-root/du4-form-ocr-final-frozen/receipt.json"
+  },
+  "pre_final_94_test_run": "not final frozen evidence; cap classification edit occurred during run",
+  "independent_review": {
+    "schema_version": "independent-ocr-owned-file-review/1",
+    "reviewer": "attribution_release_review",
+    "date": "2026-10-15",
+    "status": "PASS_CODE_REVIEW",
+    "remaining_findings": [],
+    "original_first_worker_exit_cause": "UNKNOWN",
+    "second_observed_failure": "parent response open PermissionError",
+    "publish_failure_exit1": "ROOT_FAULT_INJECTION_EVIDENCE_NOT_PROOF_OF_ORIGINAL_EXIT",
+    "input_output_cap_code": "ROOT_RELOCATED_CHECKS; CURRENT_CODE_READ_COMPATIBLE",
+    "root_94_pass": "prior nonfinal source; superseded by final frozen 96 pass ROOT run",
+    "independent_native_calls": 0,
+    "api_calls": 0,
+    "original_reads": 0,
+    "source_test_pwf_config_git_author_writes": 0,
+    "initial_review_sha256": {
+      "src/company_wiki/document_normalization/isolated_ocr.py": "1749e405beb8c48ada390b2915c96db2a29b535af6808a7d7594e46e0c80d7bf",
+      "tests/unit/test_ocr_owned_file_io.py": "116c3e304fcd79c8f74c57f4f8fb0f811116a2d87c7c80c393daef352d5089e0",
+      "tests/document_normalization/test_isolated_ocr.py": "2996640b596b15fbca8ca07fa9ded041288119dccc05531b7b3445ac301967c4"
+    },
+    "artifacts": {
+      "ocr-file-handoff-final.md": {
+        "bytes": 6360,
+        "sha256": "c44b30efdd494155bb1013b73505b1dac7b0f50a887e9ea9a784dfac7ed0ef7a"
+      },
+      "ocr-file-probe.py": {
+        "bytes": 1912,
+        "sha256": "004d613d99d74e677ee4a3b4976da57d329cd82d6be2552571228778324520a0"
+      },
+      "ocr-file-probes.json": {
+        "bytes": 609,
+        "sha256": "1a48a611971866753f3a1ace246399b73e43151fcc00caa43207b34e77b89658"
+      },
+      "ocr-file-deadline-original-red.json": {
+        "bytes": 658,
+        "sha256": "939111ce5c745b85daaa016920d426f24ee7c18996a4a1ff53d9d4936c50b66a"
+      }
+    },
+    "closed_findings": [
+      {
+        "id": "OCR-IO-DEADLINE",
+        "priority": 2,
+        "fix": "single helper checks same absolute deadline after successful IO",
+        "independent_replay": "NormalizationLimitError",
+        "original_red": "ocr-file-deadline-original-red.json"
+      }
+    ],
+    "final_source_sha256": {
+      "src/company_wiki/document_normalization/isolated_ocr.py": "1749e405beb8c48ada390b2915c96db2a29b535af6808a7d7594e46e0c80d7bf",
+      "tests/unit/test_ocr_owned_file_io.py": "116c3e304fcd79c8f74c57f4f8fb0f811116a2d87c7c80c393daef352d5089e0",
+      "tests/document_normalization/test_isolated_ocr.py": "2996640b596b15fbca8ca07fa9ded041288119dccc05531b7b3445ac301967c4"
+    },
+    "root_final_regression": {
+      "passed": 96,
+      "seconds": 55.64,
+      "ruff_five_paths": "PASS_REPORTED_BY_ROOT",
+      "mypy_one_source": "PASS_REPORTED_BY_ROOT",
+      "configuration_and_sentinel_unchanged": true,
+      "owned_temp_removed": true,
+      "supplier_calls": 0,
+      "independently_rerun": false
+    },
+    "independent_final_probes": {
+      "late_success": "NormalizationLimitError",
+      "read_cap_plus_one": true,
+      "json_cap_error_code": "OCR_RESULT_BYTES_EXCEEDED",
+      "owned_temp_removed": true,
+      "api_calls": 0,
+      "native_calls": 0
+    },
+    "not_run_by_reviewer": [
+      "full OCR regression",
+      "whole suite",
+      "real native model",
+      "Linux runtime",
+      "real document quality"
+    ]
+  },
+  "ruff": "PASS: five changed source/test/tool paths",
+  "mypy": "PASS: isolated_ocr.py",
+  "same_absolute_deadline": true,
+  "native_operations_retried": 0,
+  "full_crt_matrix_retained": true,
+  "hooks_bypassed": false,
+  "default_smoke": "existing controlled os.isatty preflight replaces direct CRT ABI sample",
+  "supplier_calls": 0,
+  "original_documents_modified": 0,
+  "production_config_unchanged": true,
+  "test_temp_removed": true,
+  "form_native_route_integration": "NOT_RUN",
+  "v4_runtime": "NOT_IMPLEMENTED",
+  "table_state_author_trees_modified": false,
+  "source_sha256": {
+    "src/company_wiki/document_normalization/isolated_ocr.py": "1749e405beb8c48ada390b2915c96db2a29b535af6808a7d7594e46e0c80d7bf",
+    "tests/document_normalization/test_isolated_ocr.py": "2996640b596b15fbca8ca07fa9ded041288119dccc05531b7b3445ac301967c4",
+    "tests/unit/test_ocr_owned_file_io.py": "116c3e304fcd79c8f74c57f4f8fb0f811116a2d87c7c80c393daef352d5089e0",
+    "tests/unit/test_ci_push_selection.py": "a77e619101edcfeb4c1234abfee6319613748314f4701c0401c1af874ee5cee8",
+    "tools/pre_push_gate.py": "04af35d4c6a4f98f586ac33f87b5038256a4c2cb73978cbae5aa6518728cb1b0"
+  },
+  "archive": {
+    "path": "docs/plans/document-understanding-2026-10-13/common-root-quality-evidence/du4-form-ocr-receipts.zip",
+    "bytes": 45197,
+    "sha256": "7867ea1aab2a8bbd0f1a5afec58d55836097581d62e01aa77b1f9d1b6a67c3a5",
+    "members": [
+      {
+        "name": "du4-form-acceptance/independent-review/ocr-file-deadline-original-red.json",
+        "bytes": 658,
+        "sha256": "939111ce5c745b85daaa016920d426f24ee7c18996a4a1ff53d9d4936c50b66a"
+      },
+      {
+        "name": "du4-form-acceptance/independent-review/ocr-file-handoff-final.json",
+        "bytes": 3160,
+        "sha256": "0623b47e5b28903957c05a760018eee8c641d372396dad526100ce35e3572543"
+      },
+      {
+        "name": "du4-form-acceptance/independent-review/ocr-file-handoff-final.md",
+        "bytes": 6360,
+        "sha256": "c44b30efdd494155bb1013b73505b1dac7b0f50a887e9ea9a784dfac7ed0ef7a"
+      },
+      {
+        "name": "du4-form-acceptance/independent-review/ocr-file-probe.py",
+        "bytes": 1912,
+        "sha256": "004d613d99d74e677ee4a3b4976da57d329cd82d6be2552571228778324520a0"
+      },
+      {
+        "name": "du4-form-acceptance/independent-review/ocr-file-probes.json",
+        "bytes": 609,
+        "sha256": "1a48a611971866753f3a1ace246399b73e43151fcc00caa43207b34e77b89658"
+      },
+      {
+        "name": "du4-form-acceptance/independent-review/ocr-gate-followup.json",
+        "bytes": 2248,
+        "sha256": "5bd24ae429a28462fc003bcc465b9b54e717a0c6078ba77db210ee4fff97910f"
+      },
+      {
+        "name": "du4-form-acceptance/independent-review/ocr-gate-followup.md",
+        "bytes": 5935,
+        "sha256": "90409a983dcb9d77185e66f3af532bfa33ea309d8e3b6b857d83e00b925deaeb"
+      },
+      {
+        "name": "du4-form-component-fixed-push/receipt.json",
+        "bytes": 186,
+        "sha256": "5f062ef6c088e3c68cc3da05a52de5689868c05430e61d5690e3700c7375ed36"
+      },
+      {
+        "name": "du4-form-component-fixed-push/stderr.log",
+        "bytes": 173,
+        "sha256": "ecd4d9d5f45ab62b0c0ed21b1d3fe70015d14e79efabb610d94dc4065a65edd5"
+      },
+      {
+        "name": "du4-form-component-fixed-push/stdout.log",
+        "bytes": 38106,
+        "sha256": "a0c5bb469915a6e8a8c237c2132e70e962e46dcbd304dc44e46f5cde82be5d47"
+      },
+      {
+        "name": "du4-form-ocr-push-diagnosis/probe.json",
+        "bytes": 1045,
+        "sha256": "200f24a381670452ee4fcf84550593e3f850103ea21671deece0ad357a3da098"
+      },
+      {
+        "name": "du4-form-ocr-push-diagnosis/probe.py",
+        "bytes": 1542,
+        "sha256": "7fd14712fc62bc1e39c75539ed86449472c46e87bcc13eaef26948ab3f58c4ad"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-file-green/junit.xml",
+        "bytes": 15839,
+        "sha256": "df37c952b339aa8f1eeda036a29efe910ebdf7ba2ee847fb50e809fe342b2b16"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-file-green/receipt.json",
+        "bytes": 342,
+        "sha256": "729cfddfcb439b600a9ef955ffdc2d1d734095e56b4a5b8b4d61f9b7a8f2a9b3"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-file-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-file-green/stdout.log",
+        "bytes": 1687,
+        "sha256": "9f78e2dfd1cb9be979a4c9a440c389c4c5f646a5e1070a1ca2a5cfe618a2e331"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-file-red/junit.xml",
+        "bytes": 2350,
+        "sha256": "b7076279364e6248de11da8200f2ae94c176a6bd83f4c6dd9381525d1f657054"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-file-red/receipt.json",
+        "bytes": 322,
+        "sha256": "f914de8f373daaf22d13c920b179c8a0f8186d3586ad7cb2b7824fd75dcf7303"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-file-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-file-red/stdout.log",
+        "bytes": 3472,
+        "sha256": "37edabb2f9c116075625e8baf6340f87f30ec16c3427b3b04c72ee3cbb77354e"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-final-frozen/junit.xml",
+        "bytes": 16133,
+        "sha256": "e1fbaa3b84df45afb85cf8fbbc34d28ab1acb75e8966fc03e729a39b90d42dab"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-final-frozen/receipt.json",
+        "bytes": 342,
+        "sha256": "8bcf48168d22368babd1d72cb2e6dc6d54b5e9268b956ea746c4177dfefa39e3"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-final-frozen/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-final-frozen/stdout.log",
+        "bytes": 1689,
+        "sha256": "a7bf7de4eefa85d39ac17620ccb7b2b7ed169dd76d7f789501dcfd69e119fe38"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-isolated-failure/junit.xml",
+        "bytes": 748,
+        "sha256": "bddcec01be1397b01a21ee4767d3a57276cb9416996634b1d8297f01fc269488"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-isolated-failure/receipt.json",
+        "bytes": 316,
+        "sha256": "d1b34589a5a95a80d1d3387fe043eba19fe3de07506010799e4fb4218f18c887"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-isolated-failure/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-isolated-failure/stdout.log",
+        "bytes": 1368,
+        "sha256": "057600bf62401e59a4fc5d876fa6df878b8b9ababe9af9fabffdba3fd1c7b90d"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-smoke-green/junit.xml",
+        "bytes": 15828,
+        "sha256": "3c81aee04edf46b1bd4e9d74482cd505318ac0b1519b5af3e28e9f6174922010"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-smoke-green/receipt.json",
+        "bytes": 297,
+        "sha256": "1392a6f86f02d7de25e7097cf1d18d87cf01f01ed9b899f64ac5ff809f5549ac"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-smoke-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-smoke-green/stdout.log",
+        "bytes": 2854,
+        "sha256": "be4fd26636b37cbfae5df2218701246df48b02944dde10de7b8f98c495cbfd66"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-smoke-red/junit.xml",
+        "bytes": 4447,
+        "sha256": "8aecfa12463c6bb8a01ad9f7c36fbab0fb71f339098ff021997baf641b43a453"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-smoke-red/receipt.json",
+        "bytes": 417,
+        "sha256": "19bb3ef1be8bd765ec2185a2ce733c680881334f03e51635d006b7375faa1f1b"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-smoke-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-smoke-red/stdout.log",
+        "bytes": 3367,
+        "sha256": "b7a1f5c90e2e11c82859fd6c5fe2de209721b34365f39e03312a37c3cd26eb23"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-success-deadline-red/junit.xml",
+        "bytes": 2144,
+        "sha256": "59406d092cb62961a11ef0cc9d548a9d0de24544b8b2dc7706826fc2fd4aeb04"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-success-deadline-red/receipt.json",
+        "bytes": 239,
+        "sha256": "b8e4e8bc77b9b87ba6c80220ecef27430c62c5df67dc13069ba6afebd7e8d32a"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-success-deadline-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-form-ocr-success-deadline-red/stdout.log",
+        "bytes": 2514,
+        "sha256": "c597bda7b3fc983f543c675b693f243984e6b19bfe101501851f9ec42f0fe8fa"
+      }
+    ]
+  }
+}

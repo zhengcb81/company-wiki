@@ -1,3 +1,13 @@
+## ROOT 当前状态 — 2026-10-15 DU4-FORM发布前共同边界收尾
+
+FORM组件已正常合并本地主线（作者head2cde9de9，ROOT merge8406461c）；327集中契约、独审11组及最终87项FORM/Git传输测试通过。正常prepush首次5775PASS/24SKIP/1FAIL，拦截旧Windows OCR worker退出，远端尚未更新；具体退出原因UNKNOWN，未盲重推。进一步集中测试真实发现response open的PermissionError。ROOT统一文件交接责任：只在原绝对deadline内复试Windows共享文件操作，成功后也复核到期，不重发native、不续期；保留输入/输出cap和真实退出码。受控read/publish先2RED，独审成功越期先2RED；最终冻结集中 **96PASS/55.64s**、Ruff/mypy通过，独审无剩余阻断。完整CRT矩阵保留。最终正常推送及精确CI待执行；本条不宣称发布成功。
+
+证据：[FORM接收](review/du4_form_acceptance.md)、[OCR边界收据](common-root-quality-evidence/du4-form-ocr-acceptance.json)。组件不等于生产接线：FORM native→adapter→router/真实holdout、新v4协议/source依赖/覆盖、六错引及重要遗漏、HKIPO性能和母G2/G4/G5继续开放。默认0.8不变，TABLE/STATE作者目录仍隔离施工。0供应商，累计599590tokens/385113µUSD代理（旧unknown7；上限2M/$20）不变，原件/生产配置/sentinel保持、测试Temp删除。
+
+**Next Step：** 正常发布当前FORM与OCR边界最终提交，核对精确CI，然后继续v4正式摘要/恢复及统一DU4生产接线。目标未完成，不增加小节点许可。
+
+---
+
 ## ROOT 当前状态 — 2026-10-15 DU4-FORM组件接收
 
 DU4-FORM作者分支四个commit已接入ROOT合并工作区；原72测试复跑通过。独立审查发现两类P2（同owner不连续片段可拼出原文没有的表单值；预算前循环/raw JSON复制/平方级预留）及一个异常类型问题，ROOT先9个RED再共同根因修复，组件81PASS，含现有router/adapter/父子scope共327PASS（包含81，不累加）。独立11组纯探针复核PASS_COMPONENT，无剩余阻断；Ruff/mypy两源文件PASS。测试helpers已改包内导入避免各施工线同名helpers污染，最终namespace复核81PASS；另在推送前查出Git规范换行会使CI失败，已停止自有push且确认远端未变，不改gold，统一夹具字节角色与真实Git往返6控制共87PASS/4.58s。正常重推待执行。[接收细则](review/du4_form_acceptance.md)、[不可变组件证据](common-root-quality-evidence/du4-form-component-acceptance.json)。

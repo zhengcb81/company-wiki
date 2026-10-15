@@ -34,3 +34,28 @@ ROOT在正常推送期间独立核验Git实际blob，发现作者两观察fixtur
 .gitattributes按目录角色统一`/docs/plans/**/fixtures/** -text -diff -eol`，复用现有evidence原始字节职责，不新增逐公司/文件白名单。单纯-text保存CRLF后diff --check把原始CR视为空白错误（已实际观察）；故raw fixture按二进制证据diff对待，SHA/JSON语义/真实Git往返测试继续检查，源码和测试的diff/lint规则不变。未对其他历史fixture批量renormalize。后续TABLE/STATE接收同样必须先核实际blob对manifest，若作者Git已转换要从其已验SHA原始观察恢复，不能改gold迎合坏blob。
 
 独审已独立确认两组工作区/坏blob SHA，并认可通用fixtures角色规则设计；没有冒充重新执行ROOT新Git矩阵，具体证据分开记录。ROOT最终Git矩阵最后删除了一次冗余的同平台checkout，只留新目录的Linux式实际checkout；最终正常prepush会执行该文件最终版本。
+
+
+## 正常prepush实际拦截（不是FORM或Git矩阵失败）
+
+候选a6c9a111正常prepush全库5775PASS/24SKIP/1FAIL，500.93s，唯一失败为旧Windows UCRT `_fstat64`直接ctypes探针，报OCR_WORKER_FAILED（worker退出，非deadline）。正常push被拦，远端未更新，不能称已发布。真实receipt在owned du4-form-component-fixed-push。原有源/配置/产品deadline不改，不盲重推。
+
+ROOT先用原IsolatedOCRAdapter/NativeFake和原1s调用窗口做6次独立有界纯诊断，全部30–50ms通过；这不能解释或洗去全库失败。正在用同类Windows Job隔离pytest复核三种CRT probe，并独立审视测试责任：默认fast smoke应验证descriptor-lock/清理的产品不变量，完整Windows CRT/ABI矩阵保留在OCR大节点，不应让每次无关FORM发布依赖手写ctypes的所有环境兼容假设。若产品进程崩溃原因无法取回，保持UNKNOWN，并补有界退出码诊断而非猜成超时。下一修法须有具体职责/回归，不能通过删除断言或重试伪绿。
+
+
+同Job隔离的原CRT三种实际测试也3PASS/8.20s，未改1s窗口；不是复现根因，原全库失败继续保留。独审认可fast smoke改用既有os.isatty preflight，仍走真实owned子进程验证同fd0锁、worker存活和scratch清理；手写ucrtbase三函数矩阵保留在完整Windows OCR大节点。此更改不能宣称加快500s主unit，也不能宣称已修复未知worker退出。ROOT同步补窄的退出码诊断，保留原OCR_WORKER_FAILED机器码和原期限/清理；让下一次真正退出可以明确到进程状态，不猜是deadline。
+
+已先保存真实2RED/8PASS：默认smoke期望仍无controlled preflight，真实exit7错误丢失退出码。工程只新增LocalOCRError子类携带scalar worker_returncode并保留.code及原生命周期，默认smoke换现有preflight。完整CRT三个和全部OCR测试原样保留，正在本大节点运行。该诊断改进不表示修复未知退出。
+
+
+## 进一步集中复核实际抓到I/O交接缺陷
+
+完整OCR+CI选择86项跑得85PASS/1FAIL（44.52s），这次是_isatty，失败位置不是CRT调用而是父进程已看到response-0.json后open抛Windows PermissionError；不是deadline，也不是此前exit原因的直接证明。明确产品缺口是小文件IPC对短暂共享/占用错误没有有界恢复，parent open、child atomic replace、命令/结果读取和请求cleanup都直接I/O。下一修复集中在这一个transport责任：Windows PermissionError仅在原绝对deadline内重试，不能重发native操作/模型、延长deadline或新增预算；非Windows/非共享类型立即抛，永久占用到期诚实失败，真实worker退出码继续保留。逐项受控fault injection先RED，随后同大节点完整OCR/合并测试，保留两次不同原始失败。
+
+## 文件交接共同责任修复与最终冻结回归
+
+真实子进程父侧read/子侧atomic publish受控占用均先RED（2FAIL/5.85s）；统一owned I/O边界仅在Windows EACCES及共享/拒绝访问错误码内复试同一个文件操作，沿用既有绝对deadline。启动配置、ready、command、image、result、response、请求临时文件清理统一走该边界，不复发native、不更新原件、不续期。POSIX最后argv仍为owned目录，Job/guardian和2.5s退出清理职责保持。永久占用到期诚实报deadline，其他平台/其他I/O错误立即返回；真实worker退出保留OCR_WORKER_FAILED及标量退出码。
+
+初次94PASS/69.47s期间最后做过一次cap分类归位，因此不把它当最终冻结证明：_read_bytes只读cap+1，由JSON调用方报RESULT超限、image调用方仍报INPUT超限。独审又用假钟发现成功文件操作返回时可能已过deadline；ROOT先2RED/6PASS，统一helper成功后也复核同一deadline，阻止下一阶段开始。不是每处调用加一份新校验。
+
+最终冻结源码的完整OCR、owned-file和CI选择集中 **96PASS/55.64s**；Ruff五路径、mypy一个责任源PASS。独立只读复核确认成功越期反例已关闭，输入/输出cap分类与POSIX目录参数保持。配置/sentinel未变、测试Temp已删除，0供应商。最初_fstat64退出具体根因仍UNKNOWN；这次修复有独立可复现的文件交接缺陷证据，不能将其冒称历史崩溃已定因。正常prepush仍需运行最终提交；没有跳过或删除完整CRT矩阵。

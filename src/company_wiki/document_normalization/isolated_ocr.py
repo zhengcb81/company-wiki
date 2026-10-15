@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, replace
 import importlib
+import errno
 import json
 import math
 import os
@@ -60,9 +61,41 @@ _POSIX_BOOTSTRAP = (
 )
 
 
-def _read_json(path: Path, cap: int):
-    with path.open("rb") as stream:
-        raw = stream.read(cap + 1)
+def _retry_owned_io(operation, *, deadline):
+    """Retry only Windows owned-file sharing failures within the same deadline.
+
+    This never retries a native operation, allocates another request budget or
+    renews its timeout. A permanent lock expires honestly; other errors escape.
+    """
+    while True:
+        if time.monotonic() >= deadline:
+            raise NormalizationLimitError("deadline", deadline, "isolated OCR file handoff")
+        try:
+            result = operation()
+            if time.monotonic() >= deadline:
+                raise NormalizationLimitError("deadline", deadline, "isolated OCR file handoff")
+            return result
+        except PermissionError as error:
+            if (os.name != "nt" or error.errno != errno.EACCES
+                    or getattr(error, "winerror", None) not in {None, 5, 32, 33}):
+                raise
+            now = time.monotonic()
+            if now >= deadline:
+                raise NormalizationLimitError(
+                    "deadline", deadline, "isolated OCR file handoff"
+                ) from error
+            time.sleep(min(_POLL_SECONDS, deadline - now))
+
+
+def _read_bytes(path: Path, cap: int, *, deadline):
+    def read():
+        with path.open("rb") as stream:
+            return stream.read(cap + 1)
+    return _retry_owned_io(read, deadline=deadline)
+
+
+def _read_json(path: Path, cap: int, *, deadline):
+    raw = _read_bytes(path, cap, deadline=deadline)
     if len(raw) > cap:
         raise LocalOCRError("OCR_RESULT_BYTES_EXCEEDED")
     try:
@@ -71,22 +104,23 @@ def _read_json(path: Path, cap: int):
         raise LocalOCRError("OCR_RESULT_INVALID") from None
 
 
-def _write_json(path: Path, value, cap: int):
+def _write_json(path: Path, value, cap: int, *, deadline):
     pending = path.with_suffix(path.suffix + ".pending")
-    size = 0
-    try:
+    def write():
+        size = 0
         with pending.open("wb") as stream:
-            for chunk in json.JSONEncoder(
-                ensure_ascii=False, allow_nan=False
-            ).iterencode(value):
+            for chunk in json.JSONEncoder(ensure_ascii=False, allow_nan=False).iterencode(value):
+                if time.monotonic() >= deadline:
+                    raise NormalizationLimitError("deadline", deadline, "isolated OCR file handoff")
                 raw = chunk.encode("utf-8")
                 size += len(raw)
                 if size > cap:
                     raise LocalOCRError("OCR_RESULT_BYTES_EXCEEDED")
                 stream.write(raw)
-        pending.replace(path)
-    finally:
-        pending.unlink(missing_ok=True)
+    _retry_owned_io(write, deadline=deadline)
+    _retry_owned_io(lambda: pending.replace(path), deadline=deadline)
+    # Failure cleanup belongs to the existing owned worker-directory cleanup.
+    # A racing unlink here could mask the original error or renew its deadline.
 
 
 def _encode_result(result):
@@ -131,9 +165,10 @@ def _decode_result(value):
         raise LocalOCRError("OCR_RESULT_INVALID") from None
 
 
-def _worker_main(directory_text: str):
+def _worker_main(directory_text: str, startup_deadline: float):
+    OCRLimits(deadline=startup_deadline)
     directory = Path(directory_text)
-    payload = _read_json(directory / "config.json", 65536)
+    payload = _read_json(directory / "config.json", 65536, deadline=startup_deadline)
     config = LocalOCRConfig.from_dict(payload["config"])
     module_name, qualified_name = payload["factory"].split(":", 1)
     factory: Any = importlib.import_module(module_name)
@@ -143,7 +178,7 @@ def _worker_main(directory_text: str):
     # os.read(0) thread here would hold the Windows UCRT descriptor lock and
     # deadlock native initialization (for example NumPy/OpenBLAS fstat(0)).
     # Do not add native-worker stdin readers, even after engine import.
-    _write_json(directory / "ready.json", {"pid": os.getpid()}, MAX_CONTROL_BYTES)
+    _write_json(directory / "ready.json", {"pid": os.getpid()}, MAX_CONTROL_BYTES, deadline=startup_deadline)
     backend = None
     response: dict[str, Any]
     number = 0
@@ -151,7 +186,7 @@ def _worker_main(directory_text: str):
         command_path = directory / f"command-{number}.json"
         while not command_path.exists():
             time.sleep(_POLL_SECONDS)
-        command = _read_json(command_path, MAX_CONTROL_BYTES)
+        command = _read_json(command_path, MAX_CONTROL_BYTES, deadline=startup_deadline)
         response_path = directory / f"response-{number}.json"
         try:
             limits = OCRLimits(**command["limits"])
@@ -163,8 +198,7 @@ def _worker_main(directory_text: str):
                 limits.check_deadline()
             elif command["op"] == "infer":
                 input_path = directory / f"image-{number}.bin"
-                with input_path.open("rb") as stream:
-                    data = stream.read(MAX_TRANSFER_BYTES + 1)
+                data = _read_bytes(input_path, MAX_TRANSFER_BYTES, deadline=limits.deadline)
                 if len(data) > MAX_TRANSFER_BYTES:
                     raise LocalOCRError("OCR_INPUT_BYTES_EXCEEDED")
                 result = backend.transcribe(data, limits=limits)
@@ -172,7 +206,7 @@ def _worker_main(directory_text: str):
                 _write_json(
                     directory / f"result-{number}.json",
                     _encode_result(result),
-                    MAX_TRANSFER_BYTES,
+                    MAX_TRANSFER_BYTES, deadline=limits.deadline,
                 )
             else:
                 raise LocalOCRError("OCR_RESULT_INVALID")
@@ -187,8 +221,19 @@ def _worker_main(directory_text: str):
             response = {"ok": False, "error": error.code}
         except Exception:
             response = {"ok": False, "error": "OCR_INFERENCE_FAILED"}
-        _write_json(response_path, response, MAX_CONTROL_BYTES)
+        _write_json(response_path, response, MAX_CONTROL_BYTES, deadline=limits.deadline)
         number += 1
+
+
+class OCRWorkerExitedError(LocalOCRError):
+    """Retain a scalar exit observation without stderr, paths or model data."""
+
+    def __init__(self, worker_returncode: int):
+        self.worker_returncode = worker_returncode
+        super().__init__("OCR_WORKER_FAILED")
+        # The machine code stays stable; a real process exit must not be
+        # indistinguishable from a deadline or guessed to be one in diagnosis.
+        self.args = (f"OCR_WORKER_FAILED (worker_exit_code={worker_returncode})",)
 
 
 class IsolatedOCRAdapter:
@@ -268,8 +313,11 @@ class IsolatedOCRAdapter:
             if path.exists():
                 return
             process = self._process
-            if process is None or process.poll() is not None:
+            if process is None:
                 raise LocalOCRError("OCR_WORKER_FAILED")
+            returncode = process.poll()
+            if returncode is not None:
+                raise OCRWorkerExitedError(returncode)
             time.sleep(min(_POLL_SECONDS, max(0, deadline - time.monotonic())))
 
     def _ensure_worker(self, deadline):
@@ -293,13 +341,14 @@ class IsolatedOCRAdapter:
                     "config": self.config.to_dict(),
                     "factory": factory.__module__ + ":" + factory.__qualname__,
                 },
-                65536,
+                65536, deadline=deadline,
             )
             command = [
                 sys.executable,
                 "-B",
                 "-c",
-                "import sys; from company_wiki.document_normalization.isolated_ocr import _worker_main; _worker_main(sys.argv[1])",
+                "import sys; from company_wiki.document_normalization.isolated_ocr import _worker_main; _worker_main(sys.argv[2], float(sys.argv[1]))",
+                str(deadline),
                 str(directory),
             ]
             env = os.environ.copy()
@@ -332,7 +381,7 @@ class IsolatedOCRAdapter:
                 assert self._process.stdin is not None
                 self._process.stdin.write(b"\0")  # release only AFTER job assignment
             self._await_file(directory / "ready.json", deadline)
-            ready = _read_json(directory / "ready.json", MAX_CONTROL_BYTES)
+            ready = _read_json(directory / "ready.json", MAX_CONTROL_BYTES, deadline=deadline)
             if (
                 set(ready) != {"pid"}
                 or type(ready["pid"]) is not int
@@ -357,19 +406,21 @@ class IsolatedOCRAdapter:
                     raise LocalOCRError("OCR_IMAGE_INVALID")
                 if len(data) > MAX_TRANSFER_BYTES:
                     raise LocalOCRError("OCR_INPUT_BYTES_EXCEEDED")
-                with (directory / f"image-{number}.bin").open("wb") as stream:
-                    for offset in range(0, len(data), 65536):
-                        limits.check_deadline()
-                        stream.write(data[offset : offset + 65536])
+                def write_image():
+                    with (directory / f"image-{number}.bin").open("wb") as stream:
+                        for offset in range(0, len(data), 65536):
+                            limits.check_deadline()
+                            stream.write(data[offset : offset + 65536])
+                _retry_owned_io(write_image, deadline=limits.deadline)
             limits.check_deadline()
             _write_json(
                 directory / f"command-{number}.json",
                 {"op": operation, "limits": asdict(limits)},
-                MAX_CONTROL_BYTES,
+                MAX_CONTROL_BYTES, deadline=limits.deadline,
             )
             self._await_file(directory / f"response-{number}.json", limits.deadline)
             response = _read_json(
-                directory / f"response-{number}.json", MAX_CONTROL_BYTES
+                directory / f"response-{number}.json", MAX_CONTROL_BYTES, deadline=limits.deadline
             )
             limits.check_deadline()
             if response != {"ok": True}:
@@ -384,16 +435,14 @@ class IsolatedOCRAdapter:
                 None
                 if operation == "validate"
                 else _decode_result(
-                    _read_json(directory / f"result-{number}.json", MAX_TRANSFER_BYTES)
+                    _read_json(directory / f"result-{number}.json", MAX_TRANSFER_BYTES, deadline=limits.deadline)
                 )
             )
             limits.check_deadline()
             self._number += 1
             for name in ("image", "command", "response", "result"):
-                (
-                    directory
-                    / f"{name}-{number}.{'bin' if name == 'image' else 'json'}"
-                ).unlink(missing_ok=True)
+                path = directory / f"{name}-{number}.{'bin' if name == 'image' else 'json'}"
+                _retry_owned_io(lambda: path.unlink(missing_ok=True), deadline=limits.deadline)
             return result
         except BaseException:
             self._stop_worker()

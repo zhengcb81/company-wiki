@@ -1,3 +1,11 @@
+## ROOT当前归总 — 2026-10-15 FORM组件与OCR文件交接边界
+
+DU4-FORM本地已合并，预算/不连续文字拼接已修；组件327集中、独审11组、最终FORM/Git87项通过。正常prepush5775PASS/24SKIP/1FAIL拦截旧OCR worker退出（原因UNKNOWN）；继续复核找到真实Windows文件交接PermissionError，共同I/O边界按原deadline修复，先RED再最终冻结96PASS/55.64s，独审无剩余阻断，Ruff/mypy通过。未删完整CRT测试、未续期/重发native、未跳hooks。最终正常推送与精确CI待完成。
+
+实际细则/证据统一见[共享PWF](../document-understanding-2026-10-13/task_plan.md)。TABLE/STATE仍隔离施工；FORM真实native/route接线、新v4协议/依赖/覆盖、真实摘要语义、长文性能及母G2/G4/G5/公司循环开放。0供应商/原件或生产配置变更，测试Temp清理；累计599590tokens/385113µUSD代理、旧unknown7、上限2M/$20不变。先正常发布本节点，再按共享PWF主线推进。
+
+---
+
 ## ROOT当前归总 — 2026-10-15 DU4-FORM已交付与组件修复
 
 FORM已接入ROOT合并工作区，原72复跑、ROOT9反例RED→81PASS，含既有路由/adapter/父子范围集中327PASS，独立11组探针复核PASS_COMPONENT；两P2预算/复杂度与非连续表单拼接根因已修复。正常发布进行中，详见[唯一共享PWF](../document-understanding-2026-10-13/task_plan.md)及[组件证据](../document-understanding-2026-10-13/common-root-quality-evidence/du4-form-component-acceptance.json)。TABLE/STATE作者目录保持施工隔离，0供应商/原件或生产配置变更，累计599590tokens/385113µUSD代理、旧unknown7、上限2M/$20不变。

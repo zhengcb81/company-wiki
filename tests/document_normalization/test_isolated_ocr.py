@@ -59,6 +59,16 @@ class NativeFake:
             else:
                 getattr(crt, operation)(0)
             self.root.joinpath("crt-inspected").write_text(operation)
+        if self.mode == "busy-response-publish":
+            original_replace = Path.replace
+            attempts = [0]
+            def publish_after_sharing_release(path, target):
+                if path.name == "response-0.json.pending" and attempts[0] == 0:
+                    import errno
+                    attempts[0] += 1
+                    raise PermissionError(errno.EACCES, "injected owned-file sharing violation")
+                return original_replace(path, target)
+            Path.replace = publish_after_sharing_release
         if self.mode == "block-preflight":
             time.sleep(2)
         if self.mode == "error-preflight":
@@ -216,11 +226,15 @@ def test_failed_native_results_never_publish_and_worker_is_reaped(tmp_path, mode
     warm(adapter)
     pid = adapter.worker_pid
     try:
-        with pytest.raises(LocalOCRError, match=code):
+        with pytest.raises(LocalOCRError, match=code) as failure:
             if mode == "error-preflight":
                 adapter.validate_environment()
             else:
                 adapter.transcribe(tiny_png(), limits=OCRLimits())
+        if mode == "crash":
+            assert failure.value.worker_returncode == 7
+            assert "worker_exit_code=7" in str(failure.value)
+            assert failure.value.code == "OCR_WORKER_FAILED"
         assert not pid_is_alive(pid)
         assert adapter.worker_pid is None
     finally:
@@ -437,4 +451,34 @@ def test_native_crt_stdin_probe_does_not_deadlock_liveness_monitor(tmp_path, ope
         warm(adapter)
         adapter.validate_environment(deadline=time.monotonic() + 1.0)
         assert (tmp_path / "crt-inspected").read_text() == operation
+    assert not list(tmp_path.glob("cwp-ocr-*"))
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows owned-file sharing semantics")
+@pytest.mark.parametrize("side", ["read", "publish"])
+def test_owned_response_sharing_violation_recovers_within_same_deadline(tmp_path, monkeypatch, side):
+    mode = "busy-response-publish" if side == "publish" else "normal"
+    adapter = IsolatedOCRAdapter(cfg(tmp_path, mode), _backend_factory=NativeFake, scratch_dir=tmp_path)
+    warm(adapter)
+    pid = adapter.worker_pid
+    attempts = []
+    original_open = Path.open
+    def response_open(path, *args, **kwargs):
+        if side == "read" and path.name == "response-0.json" and not attempts:
+            import errno
+            attempts.append(path.name)
+            raise PermissionError(errno.EACCES, "injected owned-file sharing violation")
+        return original_open(path, *args, **kwargs)
+    monkeypatch.setattr(Path, "open", response_open)
+    deadline = time.monotonic() + 2.0
+    try:
+        adapter.validate_environment(deadline=deadline)
+        assert adapter.worker_pid == pid and pid_is_alive(pid)
+        assert adapter._effective_deadline == deadline
+        assert (tmp_path / "preflight-entered").exists()
+        if side == "read":
+            assert attempts == ["response-0.json"]
+    finally:
+        adapter.close()
+    assert not pid_is_alive(pid)
     assert not list(tmp_path.glob("cwp-ocr-*"))
