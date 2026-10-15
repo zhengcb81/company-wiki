@@ -157,10 +157,12 @@ def test_single_moderate_claim_is_uncertain_but_long_complete_prose_can_show_dif
     assert longer.state == "different"
 
 
-def test_mixed_output_is_uncertain_not_a_single_aggregate_language(observer):
+def test_mixed_output_preserves_strong_claim_difference_without_single_aggregate_language(observer):
     result = observe(observer, [_PROSE["synthetic-en-1"], _PROSE["synthetic-es-1"]],
                      [_PROSE["synthetic-en-2"]])
-    assert result.state == "uncertain"
+    # Claim-level proof supersedes the old whole-batch abstention: the Spanish
+    # claim has substantive English-only citations even beside native English.
+    assert result.state == "different"
     assert result.output_family is None
 
 
@@ -257,19 +259,22 @@ def test_empty_and_unknown_citation_are_not_language_success(observer):
     assert result.state == "uncertain"
 
 
-def test_another_claims_foreign_citation_cannot_supply_this_claims_language(observer):
+def test_another_claims_foreign_citation_cannot_hide_this_claims_strong_difference(observer):
     en, es = span(_PROSE["synthetic-en-1"]), span(_PROSE["synthetic-es-1"], 2)
     claims = (claim(_PROSE["synthetic-es-2"], (en,)), claim(_PROSE["synthetic-es-3"], (es,), 2))
     result = observer.observe_summary_language(claims, evidence_spans=(en, es))
-    assert result.state == "uncertain"
+    # The second Spanish-native claim cannot authorize the first translation.
+    assert result.state == "different"
     assert result.source_families == ("en", "es")
 
 
-def test_short_citations_cannot_borrow_a_second_claims_substantive_source(observer):
+def test_short_citations_do_not_hide_a_second_claims_own_strong_difference(observer):
     item, en = span("Item 1"), span(_PROSE["synthetic-en-1"], 2)
     claims = (claim(_PROSE["synthetic-es-2"], (item,)), claim(_PROSE["synthetic-es-3"], (en,), 2))
     result = observer.observe_summary_language(claims, evidence_spans=(item, en))
-    assert result.state == "uncertain"
+    # The short-citation claim still lacks proof. The other claim independently
+    # establishes a strong difference; no source evidence is borrowed by it.
+    assert result.state == "different"
 
 
 def test_foreign_quotation_not_present_in_own_citation_cannot_be_erased(observer):

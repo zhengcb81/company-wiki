@@ -49,9 +49,11 @@ def sha(data):
 
 
 def model_draft(data):
-    source_owned = data["schema_version"] == "narrative-model-request/3"
+    unit_citations = data["schema_version"] == "narrative-model-request/4"
+    source_owned = unit_citations or data["schema_version"] == "narrative-model-request/3"
     projected = "subject" in data
     assert data["schema_version"] == (
+        "narrative-model-request/4" if unit_citations else
         "narrative-model-request/3" if source_owned else
         "narrative-model-request/2" if projected else "narrative-model-request/1.4"
     )
@@ -75,6 +77,11 @@ def model_draft(data):
     row, role = next(
         (row, role) for row, role in rows if role in {"company_filing", "management"}
     )
+    if unit_citations:
+        assert data["citation_unit_columns"] == ["id", "evidence_ids", "support_evidence_ids"]
+        unit = next(unit[0] for unit in data["citation_units"] if row[0] in unit[2])
+        return {"claims": [{"claim_id": "business-update", "text": row[1][:180].strip(),
+            "citation_unit_ids": [unit], "claim_type": "company_statement", "modality": "planned"}]}
     draft = {
         "language": identity["language"],
         "claims": [
@@ -123,7 +130,6 @@ def official_json_loopback_model(monkeypatch, hermetic_runtime):
                     "system",
                     "user",
                 ]
-                assert "No translation" in envelope["messages"][0]["content"]
                 data = json.loads(envelope["messages"][1]["content"])
                 draft = model_draft(data)
                 with lock:

@@ -44,7 +44,6 @@ def loopback_model_server(monkeypatch, hermetic_runtime):
                 assert [message["role"] for message in request["messages"]] == ["system", "user"]
                 data = json.loads(request["messages"][1]["content"])
                 draft = response_draft(data)
-                assert "No translation" in request["messages"][0]["content"]
                 state.requests.append((data, body))
                 reply = json.dumps({
                     "model": "stub-model", "choices": [{"message": {"content": json.dumps(draft, ensure_ascii=False)},

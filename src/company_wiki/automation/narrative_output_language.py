@@ -264,8 +264,10 @@ def observe_summary_language(
 
         output_labels: set[str] = set()
         output_agrees = True
+        output_by_claim = []
         for text, _verbatim, _citations in observations:
             labels, agrees = families(text)
+            output_by_claim.append((labels, agrees))
             output_labels.update(labels)
             output_agrees = output_agrees and agrees and len(labels) == 1
         output_aggregate = classify("\n".join(text for text, _verbatim, _citations in observations))
@@ -286,7 +288,11 @@ def observe_summary_language(
         source_agrees = source_agrees and bool(source_labels) and source_aggregate in source_labels
         local_observable = True
         local_supported = True
-        for _text, _verbatim, citations in observations:
+        locally_compatible = True
+        strong_local_difference = False
+        for (text, verbatim, citations), (output, output_consensus) in zip(
+            observations, output_by_claim, strict=True
+        ):
             local_labels: set[str] = set()
             local_agrees = True
             for span_id in citations:
@@ -295,6 +301,18 @@ def observe_summary_language(
                 local_agrees = local_agrees and agrees
             local_observable = local_observable and bool(local_labels) and local_agrees
             local_supported = local_supported and output_family in local_labels
+            own_family = next(iter(output)) if output_consensus and len(output) == 1 else None
+            own_observable = bool(local_labels) and local_agrees and own_family is not None
+            # Each substantive claim owns its language proof. A different
+            # claim's native lane, abstention or output language cannot erase
+            # a strong mismatch here. Reuse this pass's source/output families;
+            # never run the whole source analysis again for every claim.
+            strong = own_observable and _long_prose(text)
+            if strong and not verbatim and own_family not in local_labels:
+                strong_local_difference = True
+            locally_compatible = locally_compatible and (
+                verbatim or strong and own_family in local_labels
+            )
     except Exception:
         # Missing library/model or internal classifier faults are observable;
         # they must not masquerade as English, compatibility, or translation.
@@ -302,6 +320,12 @@ def observe_summary_language(
 
     source_families = tuple(sorted(source_labels))
     if all(verbatim for _text, verbatim, _citations in observations):
+        return LanguageObservation("compatible", output_family, source_families, prose_claims)
+    if strong_local_difference:
+        return LanguageObservation("different", output_family, source_families, prose_claims)
+    if locally_compatible and source_agrees and output_aggregate in output_labels:
+        # Several independently supported native languages need no invented
+        # single output family; None honestly describes their aggregate.
         return LanguageObservation("compatible", output_family, source_families, prose_claims)
     enough_output = prose_claims >= 2 or any(_long_prose(text) for text, _verbatim, _citations in observations)
     if not output_agrees or not source_agrees or not enough_output or not local_observable:

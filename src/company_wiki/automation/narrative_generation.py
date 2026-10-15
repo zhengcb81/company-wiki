@@ -29,10 +29,30 @@ from .narrative_selection_generation import reading_material_sha256, validate_se
 READING_PROJECTION_UNSET = object()
 
 
+def with_frozen_model_identity(current, recorded):
+    """Validate resume inputs without executing unrelated model software.
+
+    These are historical causal observations, not claims that today's decoder
+    is identical. A pending summarize job checks its actual implementation at
+    its model boundary. Source, model options and other inputs stay current.
+    """
+    result = {key: value for key, value in current.items()
+              if key not in {"reading_model_boundary", "summary_validation"}}
+    for key in ("reading_model_boundary", "summary_validation"):
+        if key in recorded:
+            result[key] = recorded[key]
+    versions = dict(result["execution_versions"])
+    for key in ("prompt", "model_request_schema"):
+        if key in recorded["execution_versions"]:
+            versions[key] = recorded["execution_versions"][key]
+    result["execution_versions"] = versions
+    return result
+
+
 def _bind_reading_projection(manifest, versions, reading_model_projection):
     if reading_model_projection is READING_PROJECTION_UNSET:
-        from .narrative_model import SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION
-        reading_model_projection = (SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION
+        from .narrative_model import CITATION_UNIT_READING_MODEL_PROJECTION_VERSION
+        reading_model_projection = (CITATION_UNIT_READING_MODEL_PROJECTION_VERSION
                                     if versions.get("selector") == "0.9.0" else None)
     if reading_model_projection is not None:
         # Historical identities can retain a future/retired software version.
@@ -43,13 +63,18 @@ def _bind_reading_projection(manifest, versions, reading_model_projection):
             raise ValueError("invalid reading model projection identity")
         manifest["reading_model_projection"] = reading_model_projection
         from .narrative_model import (
-            SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION,
+            ModelResponseError,
             reading_model_boundary_identity,
             resolve_model_boundary,
         )
-        if reading_model_projection == SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION:
-            projected = manifest["schema_version"] == "narrative-generation/2"
+        projected = manifest["schema_version"] == "narrative-generation/2"
+        try:
             boundary = resolve_model_boundary(reading_model_projection, projected=projected)
+        except ModelResponseError:
+            # Preserve historical unavailable identities without pretending that
+            # the current software can execute them. The factory owns that check.
+            return
+        if boundary.source_owned:
             versions["prompt"] = boundary.prompt_version
             versions["model_request_schema"] = boundary.request_schema
             manifest["reading_model_boundary"] = reading_model_boundary_identity(

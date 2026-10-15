@@ -125,7 +125,7 @@ def _locations(evidence_spans: Sequence[EvidenceSpan], reading_context: Mapping[
     output = [(tuple([span]), "single") for span in rows]
     if reading_context is None:
         return output
-    if reading_context.get("schema_version") != "du-production-reading/1":
+    if reading_context.get("schema_version") not in {"du-production-reading/1", "du-production-reading/2"}:
         raise ValueError("oracle requires canonical production reading context")
     seen = set()
     for group in reading_context.get("groups", ()):

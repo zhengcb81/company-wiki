@@ -69,3 +69,7 @@ QA由原生`QaDraft.answer_ids/question_ids`经现dependency package传递两个
 - 至少一条真实原生QA selection→request→decode→verify→publication，并走RF消费；全程loopback、0供应商，Temp/原件/config/sentinel恢复。
 - None/v1/v2冻结HTTP字节、旧canonical不增加空字段；真旧源码paid outbox及same/cross复用0新增POST、费用与attempt保持。
 - 表格期间绑定是独立未完成项：HK已证原件存在2024右列，native大merged-cell含旧列而选择漏掉后续右列行。保留该失败，不拿引用/语言通过当错年已修。
+
+## 2026-10-15 工程实施结果
+
+上述context/2、claim support/context、citation-unit/3、阶段范围恢复与RF消费已TDD实施；集中测试、原生QA跨仓公共CLI与真实旧源码activation_pending恢复通过。收据：[工程验收](../common-root-quality-evidence/source-attribution-recovery-acceptance.json)。输入/模型/profile/selector/adapter真实变化的拒绝，以及旧未用decoder不阻断已完成摘要的发布，由独立反例覆盖。真实摘要语义、表格错年/状态/FORM及默认切换未关闭；三DU4负责组件，ROOT接线。

@@ -560,6 +560,7 @@ class SummaryClaim:
         "actual", "planned", "forecast", "question", "negation", "uncertain"
     ]
     needs_review: bool = False
+    context_evidence_ids: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -1964,6 +1965,7 @@ def verify_pdf_evidence_spans(
     source_id: str,
     source_sha256: str,
     evidence_spans: Sequence[EvidenceSpan],
+    language: str = "zh",
 ) -> tuple[tuple[str, ...], tuple[str, ...]]:
     """Re-read the hashed PDF and verify selected page/table snippets exactly."""
     plan = prepare_pdf_replay(
@@ -1978,6 +1980,7 @@ def verify_pdf_evidence_spans(
         source_id=source_id,
         source_sha256=source_sha256,
         parser_version=plan.parser_version,
+        language=language,
         table_pages=plan.table_pages,
         native_ranges=plan.native_ranges,
     )
@@ -1990,6 +1993,7 @@ def verify_pdf_evidence_spans_bytes(
     source_id: str,
     source_sha256: str,
     evidence_spans: Sequence[EvidenceSpan],
+    language: str = "zh",
 ) -> tuple[tuple[str, ...], tuple[str, ...]]:
     """Replay verified PDF bytes and verify selected locators without disk."""
     plan = prepare_pdf_replay_bytes(
@@ -2004,6 +2008,7 @@ def verify_pdf_evidence_spans_bytes(
         source_id=source_id,
         source_sha256=source_sha256,
         parser_version=plan.parser_version,
+        language=language,
         table_pages=plan.table_pages,
         native_ranges=plan.native_ranges,
     )
@@ -2454,6 +2459,13 @@ def validate_summary_claim(
         raise SummaryValidationError("every summary claim requires evidence IDs")
     if set(claim.evidence_ids) - set(known):
         raise SummaryValidationError("summary claim refers to unknown evidence IDs")
+    context = claim.context_evidence_ids
+    if (len(context) != len(set(context)) or set(context) & set(claim.evidence_ids)
+            or set(context) - set(known)):
+        raise SummaryValidationError("summary context requires unique separate known evidence IDs")
+    support_sources = {known[ref].source_id for ref in claim.evidence_ids}
+    if any(known[ref].source_id not in support_sources for ref in context):
+        raise SummaryValidationError("summary context cannot cross unsupported original parents")
     _validate_claim_roles(claim, known)
 
 
@@ -2507,7 +2519,7 @@ def project_summary_claim_quality(
     projected = []
     for claim in claims:
         validate_summary_claim(claim, known, "draft")
-        cited = [known[evidence_id] for evidence_id in claim.evidence_ids]
+        cited = [known[evidence_id] for evidence_id in (*claim.evidence_ids, *claim.context_evidence_ids)]
         needs_review = (
             claim.claim_type == "uncertain"
             or claim.modality == "uncertain"

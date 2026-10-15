@@ -1,0 +1,1003 @@
+{
+  "schema_version": "source-attribution-recovery-acceptance/1",
+  "observed_at": "2026-10-15T18:14:18.678188+00:00",
+  "status": "ENGINEERING_ACCEPTED_PENDING_NORMAL_PUBLICATION",
+  "base_head": "4f065af218eb9422953678a7c483c11d9d3c25a3",
+  "paths": [
+    "src/company_wiki/automation/narrative_batch.py",
+    "src/company_wiki/automation/narrative_contracts.py",
+    "src/company_wiki/automation/narrative_generation.py",
+    "src/company_wiki/automation/narrative_model.py",
+    "src/company_wiki/automation/narrative_model_citations.py",
+    "src/company_wiki/automation/narrative_output_language.py",
+    "src/company_wiki/automation/narrative_replay.py",
+    "src/company_wiki/automation/narrative_runtime.py",
+    "src/company_wiki/automation/narrative_summarize.py",
+    "src/company_wiki/automation/narrative_worker_factory.py",
+    "src/company_wiki/document_understanding/orchestration.py",
+    "src/company_wiki/document_understanding/pipeline.py",
+    "src/company_wiki/source_catalog/narrative_evidence.py",
+    "src/company_wiki/source_catalog/narrative_reading.py",
+    "tests/integration/test_reading_projection_generation_e2e.py",
+    "tests/integration/test_shared_reading_production_e2e.py",
+    "tests/support/narrative_batch_fixtures.py",
+    "tests/support/narrative_model_request_fixture.py",
+    "tests/support/official_json_batch_fixture.py",
+    "tests/support/reading_citation_v2_snapshots.json.gz",
+    "tests/unit/document_understanding_selection/test_attributed_context_quote_oracle.py",
+    "tests/unit/test_narrative_citation_attribution_contract.py",
+    "tests/unit/test_narrative_citation_unit_model_boundary.py",
+    "tests/unit/test_narrative_citation_unit_runtime_binding.py",
+    "tests/unit/test_narrative_frozen_software_responsibility.py",
+    "tests/unit/test_narrative_loopback_model_boundaries.py",
+    "tests/unit/test_narrative_output_language_claim_scope.py",
+    "tests/unit/test_narrative_output_language_observer.py",
+    "tests/unit/test_narrative_pdf_language_replay.py",
+    "tests/unit/test_narrative_raw_job_prompt_binding.py",
+    "tests/unit/test_narrative_reading_projection_generation.py",
+    "tests/unit/test_narrative_source_owned_runtime_binding.py",
+    "tools/document_understanding_benchmark/closed_group_support.py"
+  ],
+  "source_test_sha256": {
+    "src/company_wiki/automation/narrative_batch.py": "35276638167c5fcb85638588804edb65b5271b1930817a9356f7e425ecd8c02b",
+    "src/company_wiki/automation/narrative_contracts.py": "1593b455633d4d26604df27d6f0daf307446dbdca4fb6cbbfb3eb46a184b72fa",
+    "src/company_wiki/automation/narrative_generation.py": "33873788bb5a1d722c6ec9a9d5bc32e212e67a372487b787cf664df4fd7378d1",
+    "src/company_wiki/automation/narrative_model.py": "2306aa70f532e508f8a470fb03088bce52bf1e340f4a44dc623f3d7d95e4f702",
+    "src/company_wiki/automation/narrative_model_citations.py": "f6bdb80c4e789504311f044ccc69a6c3266d508b31d17b1c88ce23eb93d69d7e",
+    "src/company_wiki/automation/narrative_output_language.py": "91cc43343b2c191048136875973d0ad44e3b5b17c854991e237bab9489b671e4",
+    "src/company_wiki/automation/narrative_replay.py": "9a6f4eab2ff7ad8681c315f3153e764faf2a494d6fcc8512ac225b6d10132843",
+    "src/company_wiki/automation/narrative_runtime.py": "56a59d334c6dcbcf017d0dbdbe926bbb97da1f47f7a8e98d443c8054a65ba5f3",
+    "src/company_wiki/automation/narrative_summarize.py": "ffffa3e627b751fc71f77329f5a8f148df1e0fa239cd2badcaed05d11b3ef197",
+    "src/company_wiki/automation/narrative_worker_factory.py": "d76ca89136e0f8245fec52049ac2531bc469206e71c20d8f5d1c0b1ef1a6a456",
+    "src/company_wiki/document_understanding/orchestration.py": "64a929fa743a23078f621fe1f706bc036c414597e601def1368f3454b5165987",
+    "src/company_wiki/document_understanding/pipeline.py": "a7997541f5f1b920be655c9132c9b341f6d30568b5a6417dc37ebf2253c0dbb7",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "bf58d9a5df1115c506b1875d12529d1393b5c0ed2295f9768778573dab9fbb95",
+    "src/company_wiki/source_catalog/narrative_reading.py": "ab920307dfca8dd91bc87b88424a50d4fe71faf7560fd45f16052846ee471199",
+    "tests/integration/test_reading_projection_generation_e2e.py": "a159523469746fb9de4b7c0b762036ae8974ebb1ad4973a08abece8260ab2e41",
+    "tests/integration/test_shared_reading_production_e2e.py": "eee1ef0b11436ef339ec0fe3ec9ada9bf16a20de0ec6b5f466357a3b8fd8881a",
+    "tests/support/narrative_batch_fixtures.py": "61526bf39a7af1ff60957074c70e3c2c6f3f10a704f6e881c31e9bdb48791517",
+    "tests/support/narrative_model_request_fixture.py": "7bcfcf05fc71981c8c71aa5284d5e00cae1b913feca34853c3dc92593cca8c24",
+    "tests/support/official_json_batch_fixture.py": "47423c123ce4670f0b873848a63f8d52a2a91411c08b05f1d9b91b743268defc",
+    "tests/support/reading_citation_v2_snapshots.json.gz": "010a09825ca73c3b0ffea5f7208be7dddee76917eba3fa5f74f52d73a8b5f8a4",
+    "tests/unit/document_understanding_selection/test_attributed_context_quote_oracle.py": "91ed3acdaf4eeb1a8854c7db63d32494cc2de369481218ec5545d1051bfaaa09",
+    "tests/unit/test_narrative_citation_attribution_contract.py": "06a6b0f936ef7be72ab9ab76ddcc75030fcfefe7a093c28823164804072ed8a8",
+    "tests/unit/test_narrative_citation_unit_model_boundary.py": "55dce4a72f7966e6547f93addb8e5b6563fb6d6b0a89904dd0e88471ab1eeeed",
+    "tests/unit/test_narrative_citation_unit_runtime_binding.py": "14fbb246d828b9365a3687db022f9808bfceb1eee4288b4e4a00c997eae989c3",
+    "tests/unit/test_narrative_frozen_software_responsibility.py": "d61b9435f8f04d59e24ee6a4504eadf661bd4186444b7897529a3d8924860e2f",
+    "tests/unit/test_narrative_loopback_model_boundaries.py": "8b4304fbcee06007e71d3bc34b783d40c0908713508f1c4be99bc27208777a70",
+    "tests/unit/test_narrative_output_language_claim_scope.py": "3f1d0e5e4b5139c05f3463aa999dd7bd96636ec3a00120ff1425bde093f7b15a",
+    "tests/unit/test_narrative_output_language_observer.py": "b6f7bbbad7078ffd73c9b5cbc935cc39ac0251cd61de34326faf289f853a690b",
+    "tests/unit/test_narrative_pdf_language_replay.py": "7c99bccd82861587c40aa98c8cdd408bbef7347de6fc573af834233da2f54de4",
+    "tests/unit/test_narrative_raw_job_prompt_binding.py": "0fc889ca1d7f586c8a519bdf98ffe9f8d4555d26f421adb149d70023f610c0f4",
+    "tests/unit/test_narrative_reading_projection_generation.py": "61383984ec249b90ef9145eaf6d57819266ffcc20b94491b20448c6912d5e280",
+    "tests/unit/test_narrative_source_owned_runtime_binding.py": "6c1618a2cc2cc13a60f66ee3b9730ae50c38de6dcd296781f125b5a086d34932",
+    "tools/document_understanding_benchmark/closed_group_support.py": "642d86f3d1ce03226b2da60409ee15b1f8f30300492635e2c9a8e7f962f05e5a"
+  },
+  "nodes": {
+    "attribution-root-combined": {
+      "exit_code": 0,
+      "seconds": 28.247627600008855,
+      "tests": [
+        "tests/unit/test_narrative_citation_attribution_contract.py",
+        "tests/unit/test_narrative_citation_unit_model_boundary.py",
+        "tests/unit/test_narrative_citation_unit_runtime_binding.py",
+        "tests/unit/test_narrative_source_owned_model_boundary.py",
+        "tests/unit/test_narrative_source_owned_runtime_binding.py",
+        "tests/unit/test_narrative_reading_projection_generation.py",
+        "tests/unit/test_narrative_reading_model_projection.py",
+        "tests/unit/test_narrative_raw_job_prompt_binding.py",
+        "tests/unit/test_narrative_loopback_model_boundaries.py",
+        "tests/unit/test_narrative_output_language_binding.py",
+        "tests/unit/test_narrative_output_language_observer.py",
+        "tests/unit/test_narrative_output_language_claim_scope.py",
+        "tests/unit/test_narrative_pdf_language_replay.py",
+        "tests/unit/test_narrative_pdf_bytes.py",
+        "tests/unit/test_narrative_post_model_failure_diagnostics.py",
+        "tests/unit/test_narrative_worker_factory.py",
+        "tests/unit/test_narrative_versioned_resume.py",
+        "tests/unit/test_shared_reading_cache_precheck.py",
+        "tests/unit/test_narrative_reading_transport.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "419",
+        "time": "24.112",
+        "timestamp": "2026-10-15T18:21:42.487546+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "frozen-software-final": {
+      "exit_code": 0,
+      "seconds": 21.952189900010126,
+      "tests": [
+        "tests/unit/test_narrative_frozen_software_responsibility.py",
+        "tests/unit/test_narrative_citation_attribution_contract.py",
+        "tests/unit/test_narrative_worker_factory.py",
+        "tests/unit/test_narrative_versioned_resume.py",
+        "tests/unit/test_narrative_citation_unit_runtime_binding.py",
+        "tests/unit/test_narrative_source_owned_runtime_binding.py",
+        "tests/unit/test_shared_reading_cache_precheck.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "146",
+        "time": "17.828",
+        "timestamp": "2026-10-15T18:38:44.689848+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "final-production-e2e": {
+      "exit_code": 0,
+      "seconds": 89.70379640000465,
+      "tests": [
+        "tests/integration/test_shared_reading_production_e2e.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "7",
+        "time": "85.632",
+        "timestamp": "2026-10-15T18:47:55.519659+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "final-legacy-recovery-e2e": {
+      "exit_code": 0,
+      "seconds": 138.4800213999988,
+      "tests": [
+        "tests/integration/test_reading_projection_generation_e2e.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "6",
+        "time": "135.474",
+        "timestamp": "2026-10-15T18:53:41.728404+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "attribution-oracle-green": {
+      "exit_code": 0,
+      "seconds": 4.977092700006324,
+      "tests": [
+        "tests/unit/document_understanding_selection/test_attributed_context_quote_oracle.py",
+        "tests/unit/document_understanding_selection/test_closed_group_support.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "13",
+        "time": "0.657",
+        "timestamp": "2026-10-15T18:50:08.285927+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "qa-rf-public-e2e-canonical-summary": {
+      "exit_code": 0,
+      "seconds": 19.318423599994276,
+      "tests": [
+        ".planning/shared-reading-production/model-projection-root/test_qa_rf_public_boundary.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "1",
+        "time": "15.854",
+        "timestamp": "2026-10-15T19:11:57.431897+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    }
+  },
+  "counting_note": "Overlapping test suites are separate observations; never summed as unique coverage.",
+  "cross_repo_offline": {
+    "status": "PASS",
+    "normal_posts": 2,
+    "invalid_summary_negative": {
+      "status": "PASS",
+      "local_POSTs": 1,
+      "production_rejected": true,
+      "complete_final_captured_before_decode": true,
+      "production_failure_rule_preserved": true,
+      "bounded_diagnostic_matches_final": true,
+      "failed_output_slot_settled_zero_without_usage_refund": true,
+      "native_failure_material_preserved_before_cleanup": true,
+      "temporary_lake_removed": true,
+      "external_POSTs": 0
+    },
+    "mother_ledger_changed": false,
+    "external_POSTs": 0
+  },
+  "official_qa_rf": {
+    "status": "PASS",
+    "observations": [
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\narrative_source_preparation.py",
+          "--company-wiki-catalog-config",
+          "C:\\Users\\郑曾波\\Projects\\company-wiki\\.cw-2zu609nf\\p\\test_real_qa_public_bundle_cro0\\official-batch-bip5koa5\\config\\catalog.json",
+          "--operation",
+          "read",
+          "--timeout-seconds",
+          "45"
+        ],
+        "exit_code": 0,
+        "claims": 1,
+        "attributed_claims": 1,
+        "full_context_preserved": true,
+        "replay_verified": true
+      }
+    ],
+    "local_model_POSTs": 1,
+    "external_POSTs": 0
+  },
+  "genuine_old_code_resume": {
+    "old_commit": "5a8e895e",
+    "status": "PASS",
+    "paid_accounting_unchanged": true,
+    "extra_model_posts": 0,
+    "output_accounting": "settled to actual published bytes/SHA, legitimately changed three output-only fields"
+  },
+  "independent_review": {
+    "engineering_status": "PASS",
+    "blocking_findings": [],
+    "independent_successful_unit_cases": 110,
+    "pure_probe_checks": 20,
+    "scope_note": "No source/test/config/Git/DU4 files changed; report directory only. Previous old-code receipt inspected, not re-executed."
+  },
+  "static": {
+    "results": [
+      {
+        "label": "ruff",
+        "exit": 0,
+        "seconds": 0.23390659999859054,
+        "files": [
+          "src/company_wiki/automation/narrative_batch.py",
+          "src/company_wiki/automation/narrative_contracts.py",
+          "src/company_wiki/automation/narrative_generation.py",
+          "src/company_wiki/automation/narrative_model.py",
+          "src/company_wiki/automation/narrative_output_language.py",
+          "src/company_wiki/automation/narrative_replay.py",
+          "src/company_wiki/automation/narrative_runtime.py",
+          "src/company_wiki/automation/narrative_summarize.py",
+          "src/company_wiki/automation/narrative_worker_factory.py",
+          "src/company_wiki/document_understanding/orchestration.py",
+          "src/company_wiki/document_understanding/pipeline.py",
+          "src/company_wiki/source_catalog/narrative_evidence.py",
+          "src/company_wiki/source_catalog/narrative_reading.py",
+          "tests/integration/test_reading_projection_generation_e2e.py",
+          "tests/integration/test_shared_reading_production_e2e.py",
+          "tests/support/narrative_batch_fixtures.py",
+          "tests/support/narrative_model_request_fixture.py",
+          "tests/support/official_json_batch_fixture.py",
+          "tests/unit/test_narrative_loopback_model_boundaries.py",
+          "tests/unit/test_narrative_output_language_observer.py",
+          "tests/unit/test_narrative_raw_job_prompt_binding.py",
+          "tests/unit/test_narrative_reading_projection_generation.py",
+          "tests/unit/test_narrative_source_owned_runtime_binding.py",
+          "tools/document_understanding_benchmark/closed_group_support.py",
+          "src/company_wiki/automation/narrative_model_citations.py",
+          "tests/unit/test_narrative_citation_attribution_contract.py",
+          "tests/unit/test_narrative_citation_unit_model_boundary.py",
+          "tests/unit/test_narrative_citation_unit_runtime_binding.py",
+          "tests/unit/test_narrative_frozen_software_responsibility.py",
+          "tests/unit/test_narrative_output_language_claim_scope.py",
+          "tests/unit/test_narrative_pdf_language_replay.py"
+        ]
+      },
+      {
+        "label": "mypy",
+        "exit": 0,
+        "seconds": 3.723654899993562,
+        "files": [
+          "src/company_wiki/automation/narrative_batch.py",
+          "src/company_wiki/automation/narrative_contracts.py",
+          "src/company_wiki/automation/narrative_generation.py",
+          "src/company_wiki/automation/narrative_model.py",
+          "src/company_wiki/automation/narrative_output_language.py",
+          "src/company_wiki/automation/narrative_replay.py",
+          "src/company_wiki/automation/narrative_runtime.py",
+          "src/company_wiki/automation/narrative_summarize.py",
+          "src/company_wiki/automation/narrative_worker_factory.py",
+          "src/company_wiki/document_understanding/orchestration.py",
+          "src/company_wiki/document_understanding/pipeline.py",
+          "src/company_wiki/source_catalog/narrative_evidence.py",
+          "src/company_wiki/source_catalog/narrative_reading.py",
+          "src/company_wiki/automation/narrative_model_citations.py"
+        ]
+      }
+    ],
+    "source_unchanged": true,
+    "cache_temp_removed": true,
+    "external_calls": 0
+  },
+  "new_supplier_calls": 0,
+  "mother_tokens": 581487,
+  "mother_micro_usd_proxy": 381768,
+  "prior_unknown7_retained": true,
+  "token_limit": 2000000,
+  "micro_usd_limit": 20000000,
+  "default_selector": "0.8.0",
+  "explicit_selector": "0.9.0",
+  "model_projection": "reading-model-input/3",
+  "incidents": [
+    "Combined 13 E2E node exceeded 240s; retained failure, removed only verified owned temp after child exit; bounded-process Job owner reused; independent 7 and 6 nodes passed.",
+    "mypy tuple/string variable collision corrected by local rename; original failure retained.",
+    "Loopback initial metadata was pre-purpose config; used existing exact narrative configuration revision, no config writes.",
+    "QA probe missing fixture then conftest-name collision fixed by explicit existing fixture load; legacy /2 request replaced with actual public /3 discovery; summary.draft.claims observer path corrected. No production workaround.",
+    "Independent sandbox tmp-path setup errors retained; same assertions passed on normal host, temps cleaned.",
+    "Old-source probe initial config harness and third-run full-row accounting oracle errors retained; correct output settlement differs from paid charge identity."
+  ],
+  "remaining": [
+    "DU4 table/period selection and business state/form source components + ROOT wiring",
+    "purpose-scoped Config loading",
+    "HK IPO bounded performance",
+    "configured three supplier real summary quality/new-old comparison",
+    "concurrency2/4",
+    "default cutover",
+    "mother G2/G4/G5 and fresh company forecast/audit loop"
+  ],
+  "archive": {
+    "name": "source-attribution-recovery-receipts.zip",
+    "bytes": 194156,
+    "sha256": "b78d5debffbddce84ee0c7accbcc32989a8ab5cc039eee6ac4aac5f95f0fdf21",
+    "members": [
+      {
+        "name": "live/independent-quality/language-claim-scope/handoff.json",
+        "bytes": 6876,
+        "sha256": "b970c086806945b9b72d8c75e967fba4f13a487ebd2b2174f28e8d3128d6890e"
+      },
+      {
+        "name": "live/independent-quality/language-claim-scope/handoff.md",
+        "bytes": 3367,
+        "sha256": "f46876ac9845ab6053926724b4d29388f76aebb4b2de934752529aff71df9ecb"
+      },
+      {
+        "name": "live/independent-quality/language-claim-scope/postfix-observation.json",
+        "bytes": 2403,
+        "sha256": "621aa4b882a1b8000fe8525e6d3ee44fc7950a46d2a503c10603b4768f6df8fb"
+      },
+      {
+        "name": "live/independent-quality/language-claim-scope/source-stop.json",
+        "bytes": 853,
+        "sha256": "baccdd5d1ade72521aa9762c4fa090e1e4011a80d844f49a84e2bc6500339474"
+      },
+      {
+        "name": "live/metadata-narrative-direct-20261014.json",
+        "bytes": 20930,
+        "sha256": "236159359aebf05071d1fdb31c6631d0d02bbb7fddb572d8f8d8393b9aa55e87"
+      },
+      {
+        "name": "live/owned-runner/receipts/loopback-20261015T180657-cc53a6/overall.json",
+        "bytes": 84414,
+        "sha256": "9dd16cdca8be0dfc10f22e64386e299a7cf35a1cb133ba2c45f713a766004316"
+      },
+      {
+        "name": "model-projection-root/attribution-contract-red/junit.xml",
+        "bytes": 10904,
+        "sha256": "46c7957d624a099b65347df65049540b5698e58bd5e5662346880d7ee9a45ab0"
+      },
+      {
+        "name": "model-projection-root/attribution-contract-red/receipt.json",
+        "bytes": 261,
+        "sha256": "9765eafdfff221eaec3bfc1249cc78f07ee39a97331d77fc84c012d283f6a32e"
+      },
+      {
+        "name": "model-projection-root/attribution-contract-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/attribution-contract-red/stdout.log",
+        "bytes": 8843,
+        "sha256": "8ebd2d2ebb02529063fec48c94f35d2011f45d435505021581acc0cb445ce6fd"
+      },
+      {
+        "name": "model-projection-root/attribution-oracle-green/junit.xml",
+        "bytes": 2822,
+        "sha256": "9f2af6d5104926655434150b7a16c7c20ff7c379bacc6965c7b7960c5e36bc72"
+      },
+      {
+        "name": "model-projection-root/attribution-oracle-green/receipt.json",
+        "bytes": 367,
+        "sha256": "663af14a0c369b0967f998b7f54e18953c028f21b89762a443f29d3ca29562e2"
+      },
+      {
+        "name": "model-projection-root/attribution-oracle-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/attribution-oracle-green/stdout.log",
+        "bytes": 1622,
+        "sha256": "ed1fb332572cc58616ddc33153f89a2efba22b45fa0297fb7ffc850dc7901df8"
+      },
+      {
+        "name": "model-projection-root/attribution-oracle-red/junit.xml",
+        "bytes": 2858,
+        "sha256": "a0a185f115c71918d25a015607dcd47c4fc59ad9d4b6627356daeb2812a6399d"
+      },
+      {
+        "name": "model-projection-root/attribution-oracle-red/receipt.json",
+        "bytes": 287,
+        "sha256": "2cefde583bcb71a7c8d7b393e49e1f658942e30b4ce0099103171f9fd7a89e71"
+      },
+      {
+        "name": "model-projection-root/attribution-oracle-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/attribution-oracle-red/stdout.log",
+        "bytes": 4091,
+        "sha256": "8e487bec2ce5730498f4a7ea88074db15d78085b746bbe04d495e4972148b3c4"
+      },
+      {
+        "name": "model-projection-root/attribution-root-combined/junit.xml",
+        "bytes": 72691,
+        "sha256": "12a5a0244bdf6fd92642c6c4ad91e3f23b7d97fccd256d5bbfb6f5fc083e28ed"
+      },
+      {
+        "name": "model-projection-root/attribution-root-combined/receipt.json",
+        "bytes": 1356,
+        "sha256": "70462ab64acfdc6d6d5e6b03b9d15be9828051408a22cef791177910f7174d88"
+      },
+      {
+        "name": "model-projection-root/attribution-root-combined/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/attribution-root-combined/stdout.log",
+        "bytes": 3472,
+        "sha256": "4f137ace0fc10c35199c4bbbd258978920b54a078e7a1860243862ed26e51182"
+      },
+      {
+        "name": "model-projection-root/final-attribution-release-static/mypy.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/final-attribution-release-static/mypy.stdout.log",
+        "bytes": 45,
+        "sha256": "e903677c248a6ca6ac9094eed21b5350be088d014c43570c553f047d8f487a0a"
+      },
+      {
+        "name": "model-projection-root/final-attribution-release-static/receipt.json",
+        "bytes": 3287,
+        "sha256": "1b233c48390e47894cccde1439f095a1e36871ec9c2d376722f62561876ed602"
+      },
+      {
+        "name": "model-projection-root/final-attribution-release-static/ruff.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/final-attribution-release-static/ruff.stdout.log",
+        "bytes": 20,
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+      },
+      {
+        "name": "model-projection-root/final-attribution-static/mypy.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/final-attribution-static/mypy.stdout.log",
+        "bytes": 229,
+        "sha256": "6996db1c1a7a632a795045bfd9cfacf485224f4bb17fe108b9dbcc6131108fec"
+      },
+      {
+        "name": "model-projection-root/final-attribution-static/receipt.json",
+        "bytes": 3213,
+        "sha256": "ba51e34594ad05fcceb908cf74fd6a3d8d3994300769124cdaf2acb54118595d"
+      },
+      {
+        "name": "model-projection-root/final-attribution-static/ruff.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/final-attribution-static/ruff.stdout.log",
+        "bytes": 20,
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+      },
+      {
+        "name": "model-projection-root/final-attribution-static-fixed/mypy.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/final-attribution-static-fixed/mypy.stdout.log",
+        "bytes": 45,
+        "sha256": "e903677c248a6ca6ac9094eed21b5350be088d014c43570c553f047d8f487a0a"
+      },
+      {
+        "name": "model-projection-root/final-attribution-static-fixed/receipt.json",
+        "bytes": 3213,
+        "sha256": "b3329623c545825b2ffdc6c648f057c93aaa6167db7335b71c1e2d5c57984188"
+      },
+      {
+        "name": "model-projection-root/final-attribution-static-fixed/ruff.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/final-attribution-static-fixed/ruff.stdout.log",
+        "bytes": 20,
+        "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+      },
+      {
+        "name": "model-projection-root/final-legacy-recovery-e2e/junit.xml",
+        "bytes": 1405,
+        "sha256": "e2aac4efea9df144e6095cc0dac530200d8baac8e6d184d15ceccf3d89820075"
+      },
+      {
+        "name": "model-projection-root/final-legacy-recovery-e2e/receipt.json",
+        "bytes": 262,
+        "sha256": "758d1c930c1e651a8c69de89f29d5fd2693a2f7986f6b670a25bbfd360f6c069"
+      },
+      {
+        "name": "model-projection-root/final-legacy-recovery-e2e/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/final-legacy-recovery-e2e/stdout.log",
+        "bytes": 1364,
+        "sha256": "2aada88577ac99a2dff07f9ec70ed2f66d19044b2d8307009c7fb8e5ebba8b53"
+      },
+      {
+        "name": "model-projection-root/final-production-e2e/junit.xml",
+        "bytes": 1550,
+        "sha256": "f2e3ec3dca4ab6086bfeda090cbf203027e888596f50c6759c8f672972b25d4d"
+      },
+      {
+        "name": "model-projection-root/final-production-e2e/receipt.json",
+        "bytes": 258,
+        "sha256": "b455fbd5ec5827c0c8667e4a19f1888900877aa54df6f506ff24248c000bd3c3"
+      },
+      {
+        "name": "model-projection-root/final-production-e2e/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/final-production-e2e/stdout.log",
+        "bytes": 1359,
+        "sha256": "cf3bdeff2c10c0607342e48fca67981527097e9c2529926fbded092aecefeff7"
+      },
+      {
+        "name": "model-projection-root/frozen-software-final/junit.xml",
+        "bytes": 25514,
+        "sha256": "7d09102645a968874806e45d8e84d0c286766f47c9b553b34cff0822d95804d9"
+      },
+      {
+        "name": "model-projection-root/frozen-software-final/receipt.json",
+        "bytes": 626,
+        "sha256": "66795861435aaaf1aa7d85b8f665e1bc274bf405444e897d211f4909c10732f1"
+      },
+      {
+        "name": "model-projection-root/frozen-software-final/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/frozen-software-final/stdout.log",
+        "bytes": 2091,
+        "sha256": "573fd253cbcf92cea06af998f158de6fc0ea8cde87b1af6c165937e31caea24d"
+      },
+      {
+        "name": "model-projection-root/frozen-software-red-valid/junit.xml",
+        "bytes": 9219,
+        "sha256": "ec0f49e901d37d2acec663c3f85cba2fb652f86aac206c500e96e75db494d727"
+      },
+      {
+        "name": "model-projection-root/frozen-software-red-valid/receipt.json",
+        "bytes": 262,
+        "sha256": "2f0241b847331f74f5eea1346cdf05b24a1bc424e84638d23928fda06a034681"
+      },
+      {
+        "name": "model-projection-root/frozen-software-red-valid/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/frozen-software-red-valid/stdout.log",
+        "bytes": 9490,
+        "sha256": "016d546b86d76a1af2882c0ffd5533cd0b618f9138e182e6add5043807a9a714"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/handoff.md",
+        "bytes": 6508,
+        "sha256": "186809eab0cc25a5bcaae626a24dace81e57250055397e6f201dd730d83313c8"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execute.py",
+        "bytes": 10156,
+        "sha256": "8a8bf92132316330f75c3af68e010ae85300a2357cda0bdb1bb9d42429734dc2"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-first/old-paid.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-first/old-paid.stdout.json",
+        "bytes": 106,
+        "sha256": "4b1a0fba0ba52da438fa898c067f02da8d36f3099f6e1657d91f042816d8a0af"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-first/overall.json",
+        "bytes": 488,
+        "sha256": "6c8e3244b426792291013ac8e61935c4cd6b515e8ce10dabc52879befda7ed7c"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-fourth/new-resume.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-fourth/new-resume.stdout.json",
+        "bytes": 920,
+        "sha256": "da467c5a2776153d4c5d9b173c24e66af7fbe9bf3db08ebce9ef4e5a96c21033"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-fourth/old-paid.http.json",
+        "bytes": 10833,
+        "sha256": "2b1b87c9561f119e66f60441278b0d91b2bcfdb4fec44e9a67c257be4bd3ee69"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-fourth/old-paid.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-fourth/old-paid.stdout.json",
+        "bytes": 458,
+        "sha256": "240364fa47f67eb7f065b760790437cfe2e1ac75f07f7b079d5b394893466220"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-fourth/overall.json",
+        "bytes": 7733,
+        "sha256": "2c2facc0c32e171c5c9366fb4acad81b367b4529ff4530782ebf7dbb7ad89467"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-second/new-resume.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-second/new-resume.stdout.json",
+        "bytes": 401,
+        "sha256": "2bbde2864e7ae313c5bfd0bdd2b92a92d219efe2d6381072722ccb8a6c170099"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-second/old-paid.http.json",
+        "bytes": 10833,
+        "sha256": "2b1b87c9561f119e66f60441278b0d91b2bcfdb4fec44e9a67c257be4bd3ee69"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-second/old-paid.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-second/old-paid.stdout.json",
+        "bytes": 458,
+        "sha256": "240364fa47f67eb7f065b760790437cfe2e1ac75f07f7b079d5b394893466220"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-second/overall.json",
+        "bytes": 5802,
+        "sha256": "6c74b66cc5033465b7939c13e5668c4e64381df0923d87fbdbc702232d7ebffb"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-third/new-resume.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-third/new-resume.stdout.json",
+        "bytes": 920,
+        "sha256": "efccd30fab88b14fe80478e61617f7060347c4325c6971c8f2d4d5256ff79b38"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-third/old-paid.http.json",
+        "bytes": 10833,
+        "sha256": "2b1b87c9561f119e66f60441278b0d91b2bcfdb4fec44e9a67c257be4bd3ee69"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-third/old-paid.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-third/old-paid.stdout.json",
+        "bytes": 458,
+        "sha256": "240364fa47f67eb7f065b760790437cfe2e1ac75f07f7b079d5b394893466220"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/execution-third/overall.json",
+        "bytes": 6376,
+        "sha256": "d8cf0fef902e5cffe373b462e059d5522369042c7681a7aaa6c562ef7d70f3b8"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/old-code-resume/prepare.py",
+        "bytes": 2634,
+        "sha256": "3e0413d963910a461d23d3e13c679efdb38734e4332b5df9cec0897120644776"
+      },
+      {
+        "name": "model-projection-root/group-citation-design/v3/v2-freeze-receipt.json",
+        "bytes": 355,
+        "sha256": "149a4e5c2733e532222667e01c71be35b1c8ae06dbedfc4e6e27c793d674d228"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e/junit.xml",
+        "bytes": 4140,
+        "sha256": "5e3c2798d32edf042a871a51555ee9ee75c7185b0bb04bede9406b02ae8dcdad"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e/receipt.json",
+        "bytes": 290,
+        "sha256": "3b670e50cdbf548efd3fb00ded260b12d17745c2023ed3b7ac131d39f6d7330a"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e/stdout.log",
+        "bytes": 3578,
+        "sha256": "bdc34d11084fac4abd5e6f81c88d6d1909927323fd5ac2ccc9429f360fc94b91"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-canonical-summary/junit.xml",
+        "bytes": 447,
+        "sha256": "2cf57e8654d70e807c50fe982406f437d11039278c074e9a3f4e1c9005cdb35b"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-canonical-summary/receipt.json",
+        "bytes": 291,
+        "sha256": "b9d6a7818296c5d51feedaa08109a11768b10500b74668ac850123662ed93b9a"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-canonical-summary/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-canonical-summary/stdout.log",
+        "bytes": 1389,
+        "sha256": "7826dd149b29bfc0063e786e18afa28735b54f8ec03101584578482f1294b5a9"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-current-transport/junit.xml",
+        "bytes": 1310,
+        "sha256": "e91ae79f77fe962a563041125cda43f32175644e81a6fd04b9c99faf695e2b1f"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-current-transport/receipt.json",
+        "bytes": 291,
+        "sha256": "f5cf2e9a20569b375e5294a7305d1062bf07e8ffe64d4cfe9c9eb6cb20434a8f"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-current-transport/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-current-transport/stdout.log",
+        "bytes": 2602,
+        "sha256": "953d921f11375f0fdd178e690ad2a89efa86ac814b0ad6b665a644a1d3334005"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-owned-fixture/junit.xml",
+        "bytes": 2229,
+        "sha256": "4234da149653c624cd47dfc207cd3ea1e7ac39bbd8cb29fcd98cff8fdbfbdcf9"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-owned-fixture/receipt.json",
+        "bytes": 291,
+        "sha256": "ec667c5161b248f4e057d2d15b6f62559227081a6c9072df0f2fd5a90d6777ef"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-owned-fixture/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-owned-fixture/stdout.log",
+        "bytes": 3000,
+        "sha256": "5765937dd3044eab21f62bffd23825c78b13daba9e0ef7577a9b1d5854ed7243"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-valid-fixture/junit.xml",
+        "bytes": 1158,
+        "sha256": "e63816dbffe5afbc865d8dd6bc5acc83bcf20a33112229ea48059569d72b692a"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-valid-fixture/receipt.json",
+        "bytes": 290,
+        "sha256": "2e0689d342ec508a986f33844fbd05b0bf2a702e198f19e6bec5aefd4eb267ee"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-valid-fixture/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-e2e-valid-fixture/stdout.log",
+        "bytes": 2464,
+        "sha256": "974ebb5fd22a4a911c7399e9eccdb817d2216c9f43a54083d9b29a5b1cf5f24c"
+      },
+      {
+        "name": "model-projection-root/qa-rf-public-observation.json",
+        "bytes": 761,
+        "sha256": "527534da0d08c8b406ce80485cb5f6d77bf1b4791d609e45d052a95aa13733b9"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/compat-junit.xml",
+        "bytes": 7963,
+        "sha256": "c97e03565c59d5aade98dab7781a445f524d923d21f116b866bf4d9ad1955045"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/handoff.json",
+        "bytes": 2759,
+        "sha256": "62eb806a03b78f81c7e673637497ac4257bbee016f6caac3972a172e3c350c42"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/handoff.md",
+        "bytes": 7283,
+        "sha256": "90b38d2d084ec6608ea7d583c8c7e4bc1cba6411110ec27cd8f122a25dfd9bf9"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/host-junit.xml",
+        "bytes": 11268,
+        "sha256": "d9349b820b58c85af3740ef6bee93a3b1ad7e8274bafd2139f4aee8ed8f19796"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/junit.xml",
+        "bytes": 13299,
+        "sha256": "7fb82906001187546392c09704560d7743952d4c9c0904de2efc7c862a993637"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/probe.json",
+        "bytes": 1816,
+        "sha256": "d9ed149f1b6540f5d3421a1f61c098741031b705a400a1210db13c90740e1bc0"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/probe.py",
+        "bytes": 5250,
+        "sha256": "d2dd294c481db86792b784c4387d23fccb8b4f534d069e9c527ae701c21d83dd"
+      },
+      {
+        "name": "model-projection-root/rf-attribution-green/junit.xml",
+        "bytes": 25941,
+        "sha256": "44fe8d167d1390587162a26758599f89a5a46d6eead4427a7b06595d71c7a0a9"
+      },
+      {
+        "name": "model-projection-root/rf-attribution-green/receipt.json",
+        "bytes": 622,
+        "sha256": "31519519f7246519dbd853dd661dd1cca6a28cbf4f712c847a631e898b7f88e1"
+      },
+      {
+        "name": "model-projection-root/rf-attribution-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/rf-attribution-green/stdout.log",
+        "bytes": 264,
+        "sha256": "67af98f982d01c9eb97665c7ecf13ac546059f30508e825be74de641dd648149"
+      },
+      {
+        "name": "model-projection-root/rf-attribution-red-valid/junit.xml",
+        "bytes": 9448,
+        "sha256": "58fc59710151817896a03d0f1a0e984e2ecda58ff9514c73070af19dbc0b63f4"
+      },
+      {
+        "name": "model-projection-root/rf-attribution-red-valid/receipt.json",
+        "bytes": 311,
+        "sha256": "d4bbdf84b7f0c8d5e08208451815c9126b17e8a90e39c019c8e29decfe7926b2"
+      },
+      {
+        "name": "model-projection-root/rf-attribution-red-valid/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/rf-attribution-red-valid/stdout.log",
+        "bytes": 7043,
+        "sha256": "aacc192d55f865b0a49f19fcf8b6e09d26d3e7dd235e67d19cfe550ce6fac403"
+      },
+      {
+        "name": "model-projection-root/run_node.py",
+        "bytes": 2667,
+        "sha256": "ed57155304147b940e270227a37636c4790c5db7fec18544a521dee06a9ab11f"
+      },
+      {
+        "name": "model-projection-root/test_qa_rf_public_boundary.py",
+        "bytes": 4661,
+        "sha256": "a5c2cffa8d83d39dd25f532b88eefdcd0a07f49e14d75382b92f823c170fa982"
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/hk-offline-resume-20261014/handoff.md",
+        "bytes": 6374,
+        "sha256": "b16b22a5d3abf866df6e34bc159d9c4659cca0817e3c110164932c184e40db5b"
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/hk-offline-resume-20261014/matcher.json",
+        "bytes": 12818,
+        "sha256": "c395292a609a7aaace7b0f49285c413eb80ea0921faeb731f07ced12da49490d"
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/hk-offline-resume-20261014/overall.json",
+        "bytes": 108996,
+        "sha256": "05179f5707ad210ea7900a9e7f44d643d801604235a37b33ff7fc6d3632daf16"
+      },
+      {
+        "name": "recall-root/live-summary-review/partial-source-tdd/hk-offline-resume-20261014/table-observation.json.gz",
+        "bytes": 13157,
+        "sha256": "6f3ce02a485572debf61277b27adf428601eeeb3507e8b63439e1ec8c1e25571"
+      },
+      {
+        "name": "rf-attribution-implementation.json",
+        "bytes": 376,
+        "sha256": "86ffbd185a4799209ed5e801b8cff8846d69a30cab5e52411fc90f621467e3e3"
+      },
+      {
+        "name": "rf-attribution-installed-sync.json",
+        "bytes": 956,
+        "sha256": "fb94a6a271b984ffee6837664d650306c169a9d80a26f8b9c87b0c2b1d6f459a"
+      },
+      {
+        "name": "run_current_static.py",
+        "bytes": 2552,
+        "sha256": "634711e68787c30110370b18c43828533ef823982e54af9e7c3740f36ad9407d"
+      }
+    ]
+  }
+}

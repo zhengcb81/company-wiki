@@ -42,6 +42,7 @@ class NarrativeRuntimeDependencies:
     generation_sha256: Callable[[NarrativeSubject], str] | None = None
     selector_version: str | None = None
     reading_model_projection: Callable[[NarrativeSubject], str | None] | None = None
+    validate_model_execution: Callable[[NarrativeSubject], None] | None = None
 
 
 def register_narrative_handlers(
@@ -59,7 +60,8 @@ def register_narrative_handlers(
     registrar.register(
         "source.narrative_summarize",
         NarrativeSummarizeHandler(model=dependencies.model, model_caller=dependencies.model_caller,
-            reading_model_projection=dependencies.reading_model_projection),
+            reading_model_projection=dependencies.reading_model_projection,
+            validate_model_execution=dependencies.validate_model_execution),
     )
     registrar.register(
         "source.narrative_verify",

@@ -34,8 +34,8 @@ from .narrative_model import (
     NarrativeModel,
     NarrativeModelRequest,
     NarrativeModelResponse,
-    SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION,
     decode_model_draft,
+    resolve_model_boundary,
 )
 from .narrative_http_model import ModelHTTPError
 from .narrative_failed_final import fit_failed_final_result
@@ -45,7 +45,7 @@ from .narrative_model_caller import NarrativeBudgetCallError, NarrativeModelCall
 def reading_summary_validation_identity() -> dict[str, Any]:
     """Freeze this summary boundary separately from the model's JSON decoder.
 
-    Only v2 consumes the observer. Old None/v1 generations retain their exact
+    Source-owned boundaries consume the observer. Old None/v1 retain their exact
     identity and wire. Paths and line endings are installation details.
     """
     from . import narrative_output_language as observer
@@ -278,10 +278,12 @@ class NarrativeSummarizeHandler:
         model: NarrativeModel | None,
         model_caller: NarrativeModelCaller | None = None,
         reading_model_projection: Callable[[NarrativeSubject], str | None] | None = None,
+        validate_model_execution: Callable[[NarrativeSubject], None] | None = None,
     ) -> None:
         self._model = model
         self._model_caller = model_caller
         self._reading_model_projection = reading_model_projection
+        self._validate_model_execution = validate_model_execution
 
     def __call__(self, context: JobExecutionContext) -> HandlerResult:
         try:
@@ -354,6 +356,12 @@ class NarrativeSummarizeHandler:
             self._reading_model_projection(selected.subject)
             if self._reading_model_projection is not None else None
         )
+        if self._validate_model_execution is not None:
+            try:
+                self._validate_model_execution(selected.subject)
+            except ModelResponseError as exc:
+                raise _SummaryFailure("MODEL_GENERATION_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
+                                      str(exc)) from exc
         request = NarrativeModelRequest.from_selection(selected,
             reading_projection_version=reading_projection_version)
         context.checkpoint()
@@ -464,7 +472,9 @@ class NarrativeSummarizeHandler:
         try:
             result = NarrativeSummaryResult.from_dict(raw)
             result.validate_against(selected)
-            if reading_projection_version == SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION:
+            if resolve_model_boundary(
+                reading_projection_version, projected=selected.subject.kind == "official_json",
+            ).source_owned:
                 result = _observe_output_language(result, selected)
             return result
         except ContractSizeError as exc:

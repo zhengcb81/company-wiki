@@ -15,6 +15,7 @@ import pytest
 
 from company_wiki.automation.models import canonical_json_hash, require_sha256
 from company_wiki.automation.narrative_contracts import NarrativeBundle
+from company_wiki.automation.narrative_model import resolve_model_boundary
 from company_wiki.automation.narrative_selection_generation import reading_material_sha256
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
 from integration import test_narrative_generation_reuse as reuse
@@ -111,11 +112,12 @@ def _assert_formal_generation(root, catalog, imported, run_id, reference, bundle
     assert metadata["generation_manifest"] == final, "publication retained an obsolete base generation"
     assert metadata["generation_sha256"] == canonical_json_hash(final)
     strategy = data["reading_strategy"]
-    assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/2"
-    assert final["execution_versions"]["prompt"] == "reading-source-owned/2.0.0"
+    assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/3"
+    assert data["schema_version"] == "narrative-model-request/4"
+    assert final["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/3").prompt_version
     assert final["reading_model_boundary"]["prompt_version"] == final["execution_versions"]["prompt"]
     assert final["summary_validation"]["language_observer"]["py3langid"]["model"]["status"] == "available"
-    assert context["schema_version"] == "du-production-reading/1"
+    assert context["schema_version"] == "du-production-reading/2"
     # Public context is the full source audit view, bound by material_sha256
     # above; the model retains every actual semantic instruction independently.
     assert all("profile_version" in row and "policy_components" in row
@@ -136,10 +138,20 @@ def _assert_formal_generation(root, catalog, imported, run_id, reference, bundle
     aliases = [row[0] for row in rows]
     assert len(aliases) == len(set(aliases)) == len(bundle["evidence_spans"])
     assert [row[1] for row in rows] == [span["raw_text"] for span in bundle["evidence_spans"]]
-    assert all(len(group[1]) == len(set(group[1])) and set(group[1]) <= set(aliases)
-               for group in data["evidence_groups"])
-    groups = {group[0] for group in data["evidence_groups"]}
-    assert {group["id"] for group in data["reading_strategy"]["groups"]} == groups
+    assert "evidence_groups" not in data and "evidence_group_columns" not in data
+    assert data["citation_unit_columns"] == ["id", "evidence_ids", "support_evidence_ids"]
+    units = {row[0]: row[1] for row in data["citation_units"]}
+    assert all(row[2] and set(row[2]) <= set(row[1]) for row in data["citation_units"])
+    assert len(units) == len(data["citation_units"])
+    assert not set(units).intersection(aliases)
+    assert all(members and len(members) == len(set(members)) and set(members) <= set(aliases)
+               for members in units.values())
+    assert set().union(*(set(members) for members in units.values())) == set(aliases)
+    alias_by_span = {span["span_id"]: alias for span, alias in zip(bundle["evidence_spans"], aliases, strict=True)}
+    native_groups = {tuple(alias_by_span[sid] for sid in group["evidence_ids"])
+                     for group in context["groups"]}
+    assert native_groups <= {tuple(members) for members in units.values()}
+    assert {group["id"] for group in strategy["groups"]} <= set(units)
     assert "raw_text" not in json.dumps(data["reading_strategy"]), "strategy duplicated original quote bodies"
     assert "wrong_assertion" not in json.dumps(data["reading_strategy"])
     run = runs.get_run(run_id)
@@ -294,8 +306,8 @@ def test_official_projection_shared_reading_publishes_the_final_generation_targe
         assert {span.structured_value["source_role"] for span in bundle.evidence_spans} == {"management", "investor_question"}
         assert final["selection_generation"]["evidence_sha256"] == canonical_json_hash([span.to_dict() for span in bundle.evidence_spans])
         strategy = server.requests[0]["reading_strategy"]
-        assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/2"
-        assert final["execution_versions"]["prompt"] == "reading-source-owned/2.0.0"
+        assert final["reading_model_projection"] == strategy["schema_version"] == "reading-model-input/3"
+        assert final["execution_versions"]["prompt"] == resolve_model_boundary("reading-model-input/3").prompt_version
         assert bundle.reading_context["reading_policy_version"] == final["selection_generation"]["reading_policy_version"]
         assert strategy["constraints"] == list(bundle.reading_context["constraints"])
         assert final["selection_generation"]["material_sha256"] == reading_material_sha256(bundle)

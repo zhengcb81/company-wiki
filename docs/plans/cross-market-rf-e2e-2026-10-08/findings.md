@@ -1,3 +1,11 @@
+## ROOT 当前执行归总 — 2026-10-15
+
+主线共享阅读的引用归属/逐claim语言/PDF语言重放/阶段范围恢复共因工程已集中验收，CWP正常发布收尾、RF消费者caf74c5f正常提交。真实旧源码paid outbox恢复0新增POST；FF→CWP→RF离线CLI及原生QA→public /3→RF真实CLI均PASS，原件/config/Temp保持。细则与真实收据以[唯一共享阅读PWF](../document-understanding-2026-10-13/task_plan.md)及[节点证据](../document-understanding-2026-10-13/common-root-quality-evidence/source-attribution-recovery-acceptance.json)为准。
+
+三独立[DU4施工包](../document-understanding-2026-10-13/parallel/du4-2026-10-15/README.md)已经准备并推送：表格期间、经营状态、原生FORM/轮次，作者目录无重叠；ROOT负责既有引擎接线。当前另修narrative-only配置误要求search/wiki的共同责任范围。默认仍0.8，真实供应商质量/并发/默认切换、母G2/G4/G5及原三→新三研究/独审循环继续开放，不能将工程测试写成目标完成。累计581487 tokens/381768µUSD代理，旧unknown7保留，上限$20/200万tokens，本节点0供应商新增消耗。
+
+以下为历史记录，不作为当前完成声明。
+
 ## ROOT共享阅读当前进展 — 2026-10-14 三家真实摘要共因修复
 
 DU3和工程主线5a8e895e已发布，精确CI38648265837 SUCCESS；PWF收尾8d799991已推。三真实provider各1POST：CN引用协议重复/语义缺口，HK后置定位重放，US无效JSON+翻译，均未签质量通过；原件/配置/Temp恢复。母581487tokens/381768µUSD、旧unknown7保留，默认0.8。当前先新单一citation-unit协议+PDF language重放端口，RED→独立文件施工→统一冻结集中E2E→保存终文零重付费复现→真实独审。类型/并发/默认切换/母G2/G4/G5/公司循环继续开放。见 ../document-understanding-2026-10-13/completion_implementation.md §7.8。

@@ -46,7 +46,7 @@ def versioned_replies(monkeypatch):
 
 def _historical_manifest_binding(version):
     # Call the real explicit software-generation API. Never change either
-    # projection constant: the production default /2 must remain /2.
+    # projection constant: the current default must remain independently bound.
     return '''from company_wiki.automation import narrative_batch
 from company_wiki.automation.narrative_generation import generation_manifest
 def historical_generation(*args, **kwargs):
@@ -65,9 +65,17 @@ def _assert_historical_manifest(run, key, version):
 
 
 def _assert_historical_wire(data, version):
+    if version == "reading-model-input/2":
+        assert data["schema_version"] == "narrative-model-request/3"
+        assert data["reading_strategy"]["schema_version"] == version
+        assert set(data["response_schema"]["properties"]["draft"]["properties"]) == {"claims"}
+        return
     assert data["schema_version"] == "narrative-model-request/1.4"
+    # This test freezes a legacy projection choice against today's native
+    # selection. Exact pre-upgrade context/1 bytes are covered by immutable
+    # golden packets and the separate old-code lifecycle replay.
     assert data["reading_strategy"]["schema_version"] == (
-        "du-production-reading/1" if version is None else version)
+        "du-production-reading/2" if version is None else version)
     assert {"source_id", "source_sha256", "language"} <= set(
         data["response_schema"]["properties"]["draft"]["properties"])
 
@@ -86,7 +94,8 @@ def _proof(root, server, result, projection, phase):
     })
 
 
-@pytest.mark.parametrize("historical_projection", [None, "reading-model-input/1"], ids=["missing", "reading-v1"])
+@pytest.mark.parametrize("historical_projection", [None, "reading-model-input/1", "reading-model-input/2"],
+                         ids=["missing", "reading-v1", "reading-v2"])
 def test_old_missing_projection_pauses_before_model_and_resumes_exact_legacy_bytes(
     loopback_model_server, monkeypatch, versioned_replies, historical_projection,
 ):
@@ -154,7 +163,8 @@ if __name__ == "__main__":
             actual = json.loads(loopback_model_server.requests[0][1])
             assert actual["messages"][0]["content"] == recorded["instruction"]
             assert actual["messages"][1]["content"] == recorded["data_json"]
-            assert set(versioned_replies[0][1]["draft"]) == {"source_id", "source_sha256", "language", "claims", "status"}
+            assert set(versioned_replies[0][1]["draft"]) == ({"claims"} if historical_projection == "reading-model-input/2"
+                else {"source_id", "source_sha256", "language", "claims", "status"})
             assert runs.get_run("unpaid-old-input").binding_json == old.binding_json
             ref, bundle, _ = public_read(root, config, imported, kind)
             usage = tuple(asdict(row) for row in runs.reservations_for_run("unpaid-old-input"))
@@ -168,7 +178,8 @@ if __name__ == "__main__":
             assert all(_fingerprint(p) == body for p, body in protected.items())
 
 
-@pytest.mark.parametrize("historical_projection", [None, "reading-model-input/1"], ids=["missing", "reading-v1"])
+@pytest.mark.parametrize("historical_projection", [None, "reading-model-input/1", "reading-model-input/2"],
+                         ids=["missing", "reading-v1", "reading-v2"])
 def test_old_missing_projection_paid_outbox_recovers_then_new_generation_is_cached(
     loopback_model_server, monkeypatch, versioned_replies, historical_projection,
 ):
@@ -202,7 +213,8 @@ if __name__ == "__main__":
             old_body = json.loads(loopback_model_server.requests[0][1])
             old_data = json.loads(old_body["messages"][1]["content"])
             _assert_historical_wire(old_data, historical_projection)
-            assert set(versioned_replies[0][1]["draft"]) == {"source_id", "source_sha256", "language", "claims", "status"}
+            assert set(versioned_replies[0][1]["draft"]) == ({"claims"} if historical_projection == "reading-model-input/2"
+                else {"source_id", "source_sha256", "language", "claims", "status"})
             process, restored = invoke(root, config, old_path, llm, "old-input")
             _proof(root, loopback_model_server, restored, historical_projection, "legacy-outbox-restored")
             assert process.returncode == 0 and restored["status"] == "completed", restored
@@ -213,16 +225,18 @@ if __name__ == "__main__":
             legacy_ref, legacy_bundle, _ = public_read(root, config, imported, kind)
             new_path = request_path(root, imported, loopback_model_server.endpoint, "new-input", selector_version="0.9.0")
             process, current = invoke(root, config, new_path, llm, "new-input")
-            _proof(root, loopback_model_server, current, historical_projection, "current-v2-miss")
+            _proof(root, loopback_model_server, current, historical_projection, "current-v3-miss")
             assert process.returncode == 0 and current["status"] == "completed", current
             assert len(loopback_model_server.requests) == 2
             manifest = _thaw_generations(json.loads(runs.get_run("new-input").binding_json))[key]
-            assert manifest["reading_model_projection"] == "reading-model-input/2"
-            assert manifest["reading_model_boundary"]["reading_projection_version"] == "reading-model-input/2"
+            assert manifest["reading_model_projection"] == "reading-model-input/3"
+            assert manifest["reading_model_boundary"]["reading_projection_version"] == "reading-model-input/3"
             data = json.loads(json.loads(loopback_model_server.requests[1][1])["messages"][1]["content"])
-            assert data["schema_version"] == "narrative-model-request/3"
-            assert data["reading_strategy"]["schema_version"] == "reading-model-input/2"
-            assert set(versioned_replies[1][1]["draft"]) == {"claims"}
+            assert data["schema_version"] == "narrative-model-request/4"
+            assert data["reading_strategy"]["schema_version"] == "reading-model-input/3"
+            assert set(versioned_replies[1][1]) == {"claims"}
+            assert "evidence_groups" not in data
+            assert data["citation_unit_columns"] == ["id", "evidence_ids", "support_evidence_ids"]
             assert data["evidence"] == old_data["evidence"]
             assert runs.reservations_for_run("new-input")[0].request_sha256 != after[0]["request_sha256"]
             assert current["documents"][0]["artifact_ref"] != restored["documents"][0]["artifact_ref"]

@@ -151,41 +151,50 @@ def _generation_values(binding_json: str | None) -> dict[str, str]:
     return _runtime_snapshot(binding_json)[0]
 
 
-def _reading_projection_values(binding: dict[str, Any] | None) -> dict[str, str | None]:
-    """Select the actual renderer from each frozen generation, never a default."""
-    if binding is None:
-        return {}
-    from .narrative_batch import _thaw_generations
+def _reading_projection_identity(manifest: Mapping[str, Any]) -> str | None:
+    """Decode a historical choice without requiring its implementation now."""
+    from .narrative_model import ModelResponseError
+
+    version = manifest.get("reading_model_projection")
+    if (("reading_model_projection" in manifest and version is None)
+            or (version is not None and (not isinstance(version, str) or not version
+                or version != version.strip() or len(version) > 128))):
+        raise ModelResponseError("READING_MODEL_PROJECTION_UNAVAILABLE")
+    return version
+
+
+def _validate_model_software(manifest: Mapping[str, Any]) -> str | None:
+    """Validate only the implementation a particular summarize job will use."""
     from .narrative_model import (
-        ModelResponseError, validate_reading_model_projection_version,
-        SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION,
+        ModelResponseError,
         reading_model_boundary_identity, resolve_model_boundary,
     )
-    if "generation_settings" not in binding:
-        return {}
-    manifests = _thaw_generations(binding)
-    result = {}
-    for key, manifest in manifests.items():
-        version = manifest.get("reading_model_projection")
-        if "reading_model_projection" in manifest and version is None:
-            raise ModelResponseError("READING_MODEL_PROJECTION_UNAVAILABLE")
-        validate_reading_model_projection_version(version)
-        if version == SOURCE_OWNED_READING_MODEL_PROJECTION_VERSION:
-            projected = manifest["schema_version"] == "narrative-generation/2"
-            boundary = resolve_model_boundary(version, projected=projected)
-            versions = manifest["execution_versions"]
-            if (
-                manifest.get("reading_model_boundary") != reading_model_boundary_identity(version, projected=projected)
-                or versions.get("prompt") != boundary.prompt_version
-                or versions.get("model_request_schema") != boundary.request_schema
-            ):
-                raise ModelResponseError("READING_MODEL_BOUNDARY_UNAVAILABLE")
-            from .narrative_summarize import reading_summary_validation_identity
 
-            if manifest.get("summary_validation") != reading_summary_validation_identity():
-                raise ModelResponseError("READING_SUMMARY_VALIDATION_UNAVAILABLE")
-        result[key] = version
-    return result
+    version = _reading_projection_identity(manifest)
+    projected = manifest.get("schema_version") == "narrative-generation/2"
+    boundary = resolve_model_boundary(version, projected=projected)
+    if boundary.source_owned:
+        versions = manifest["execution_versions"]
+        if (
+            manifest.get("reading_model_boundary") != reading_model_boundary_identity(version, projected=projected)
+            or versions.get("prompt") != boundary.prompt_version
+            or versions.get("model_request_schema") != boundary.request_schema
+        ):
+            raise ModelResponseError("READING_MODEL_BOUNDARY_UNAVAILABLE")
+        from .narrative_summarize import reading_summary_validation_identity
+
+        if manifest.get("summary_validation") != reading_summary_validation_identity():
+            raise ModelResponseError("READING_SUMMARY_VALIDATION_UNAVAILABLE")
+    return version
+
+
+def _reading_projection_values(binding: dict[str, Any] | None) -> dict[str, str | None]:
+    """Compatibility inspection explicitly requests every model capability."""
+    if binding is None or "generation_settings" not in binding:
+        return {}
+    from .narrative_batch import _thaw_generations
+
+    return {key: _validate_model_software(manifest) for key, manifest in _thaw_generations(binding).items()}
 
 
 def _reading_projection_versions(binding_json: str | None) -> dict[str, str | None]:
@@ -223,17 +232,22 @@ class _WorkerBindingSnapshot:
     selector_version: str
     reading_projections: Mapping[str, str | None]
     frozen_models: tuple[Mapping[str, Any], ...]
+    frozen_generations: Mapping[str, Mapping[str, Any]]
 
 
 def _worker_binding_snapshot(binding_json: str | None) -> _WorkerBindingSnapshot:
     """All worker parameters derive from one decoded, immutable run snapshot."""
     binding = _decode_binding(binding_json)
     generations, selector = _runtime_values(binding)
-    readings = _reading_projection_values(binding)
+    from .narrative_batch import _thaw_generations
+
+    manifests = _thaw_generations(binding) if binding is not None and "generation_settings" in binding else {}
+    readings = {key: _reading_projection_identity(manifest) for key, manifest in manifests.items()}
     models = _frozen_model_values(binding)
     return _WorkerBindingSnapshot(
         MappingProxyType(generations), selector, MappingProxyType(readings),
         tuple(MappingProxyType(dict(model)) for model in models),
+        MappingProxyType(manifests),
     )
 
 
@@ -318,6 +332,9 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
     snapshot = _worker_binding_snapshot(run.binding_json)
     generation_values, selector_version = snapshot.generation_values, snapshot.selector_version
     reading_projections = snapshot.reading_projections
+
+    def validate_model_execution(subject) -> None:
+        _validate_model_software(snapshot.frozen_generations[subject.item_key])
     project_root = Path(options["project_root"])
     config_path = Path(options["catalog_config_path"])
     catalog = SourceCatalog(load_catalog_config(config_path, project_root=project_root))
@@ -343,6 +360,7 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             projection_catalog=catalog, selector_version=selector_version,
             reading_model_projection=(lambda subject: reading_projections[subject.item_key])
                 if reading_projections else None,
+            validate_model_execution=validate_model_execution if snapshot.frozen_generations else None,
             generation_sha256=_generation_resolver(run_store, options["run_id"], generation_values,
                                                    selector_version=selector_version) if generation_values else None),
     )

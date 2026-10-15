@@ -34,7 +34,7 @@ from .narrative_contracts import (
     SourceRevisionEventPayload,
 )
 from .narrative_model import FailedFinalDiagnostic, NARRATIVE_PROMPT_VERSION
-from .narrative_generation import generation_manifest, projection_generation_manifest, generation_sha256, find_reuse_pin, read_reuse_pin, READING_PROJECTION_UNSET
+from .narrative_generation import generation_manifest, projection_generation_manifest, generation_sha256, find_reuse_pin, read_reuse_pin, READING_PROJECTION_UNSET, with_frozen_model_identity
 from .narrative_official_json import open_verified_projection
 from .narrative_verify import BUNDLE_PRODUCER_VERSION
 from .narrative_formats import source_class_for
@@ -727,6 +727,7 @@ def _resume_binding(
                 expected["bundle_producer"] = manifest["bundle_producer"]
                 if "material_extractor" in manifest:
                     expected["material_extractor"] = manifest["material_extractor"]
+                expected = with_frozen_model_identity(expected, manifest)
                 if expected != manifest and not (
                     _completed_history_generation_matches(
                         expected, manifest, completed_history=True
@@ -957,6 +958,7 @@ def _resume_item_binding(
             for field in ("parser_component", "bundle_producer", "material_extractor"):
                 if field in manifest:
                     expected[field] = manifest[field]
+            expected = with_frozen_model_identity(expected, manifest)
             if expected != manifest and not (
                 _completed_history_generation_matches(
                     expected, manifest, completed_history=True

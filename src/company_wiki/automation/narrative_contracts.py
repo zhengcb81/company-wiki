@@ -769,8 +769,9 @@ def _reading_context(
         "schema_version", "reading_policy_version", "reading_policies", "business_facets",
         "constraints", "groups", "unread", "deferred", "layout_coverage",
     } | extra, "reading_context")
-    if item["schema_version"] != "du-production-reading/1":
+    if item["schema_version"] not in {"du-production-reading/1", "du-production-reading/2"}:
         raise NarrativeContractError("unsupported reading_context schema")
+    attributed = item["schema_version"] == "du-production-reading/2"
     version = _text(item["reading_policy_version"], "reading_policy_version")
     prefix = "du-sent-policy/1+"
     if not version.startswith(prefix):
@@ -799,7 +800,8 @@ def _reading_context(
     if len(groups) > 512:
         raise NarrativeContractError("reading_context group bound exceeded")
     for row in groups:
-        group = _exact(row, {"group_id", "kind", "section_role", "evidence_ids"}, "reading_group")
+        group = _exact(row, {"group_id", "kind", "section_role", "evidence_ids"}
+                       | ({"citation_views"} if attributed else set()), "reading_group")
         group_id = _text(group["group_id"], "reading_group.group_id")
         if group_id in group_ids:
             raise NarrativeContractError("duplicate reading_context group ids")
@@ -811,6 +813,22 @@ def _reading_context(
             raise NarrativeContractError("reading_group requires unique selected evidence references")
         if len({sources[ref] for ref in refs}) != 1:
             raise NarrativeContractError("reading_group cannot cross original source parents")
+        if attributed:
+            views = _array(group["citation_views"], "reading_group.citation_views")
+            if not 1 <= len(views) <= 2:
+                raise NarrativeContractError("reading_group requires one or two citation views")
+            seen_support: set[frozenset[str]] = set()
+            for value in views:
+                view = _exact(value, {"support_evidence_ids", "context_evidence_ids"}, "citation_view")
+                support = _reading_texts(view["support_evidence_ids"], "citation_view.support_evidence_ids")
+                context = _reading_texts(view["context_evidence_ids"], "citation_view.context_evidence_ids")
+                if (not support or len(support) != len(set(support)) or len(context) != len(set(context))
+                        or set(support) & set(context) or set(support) | set(context) != set(refs)):
+                    raise NarrativeContractError("citation_view must partition its complete original group")
+                identity = frozenset(support)
+                if identity in seen_support:
+                    raise NarrativeContractError("duplicate reading_group citation views")
+                seen_support.add(identity)
     unread_keys = {
         "native_scan", "opaque_pages", "deferred_pages", "deferred_unit_ids",
         "unassigned_unit_ids", "structure_complete",
@@ -1079,7 +1097,8 @@ class NarrativeSelectResult:
 def _claim_from_dict(value: object) -> SummaryClaim:
     item = _exact(
         value,
-        {"claim_id", "text", "evidence_ids", "claim_type", "modality", "needs_review"},
+        {"claim_id", "text", "evidence_ids", "claim_type", "modality", "needs_review"}
+        | ({"context_evidence_ids"} if isinstance(value, Mapping) and "context_evidence_ids" in value else set()),
         "summary claim",
     )
     evidence_ids = tuple(
@@ -1126,6 +1145,8 @@ def _claim_from_dict(value: object) -> SummaryClaim:
             modality,
         ),
         needs_review=item["needs_review"],
+        context_evidence_ids=tuple(_text(raw, "summary claim context evidence_id")
+            for raw in _array(item.get("context_evidence_ids", ()), "summary claim context_evidence_ids")),
     )
 
 
@@ -1150,22 +1171,21 @@ def _draft_from_dict(value: object) -> SourceSummaryDraft:
     )
 
 
+def _claim_to_dict(claim: SummaryClaim) -> dict[str, Any]:
+    result: dict[str, Any] = {"claim_id": claim.claim_id, "text": claim.text,
+        "evidence_ids": list(claim.evidence_ids), "claim_type": claim.claim_type,
+        "modality": claim.modality, "needs_review": claim.needs_review}
+    if claim.context_evidence_ids:
+        result["context_evidence_ids"] = list(claim.context_evidence_ids)
+    return result
+
+
 def _draft_to_dict(value: SourceSummaryDraft) -> dict[str, Any]:
     return {
         "source_id": value.source_id,
         "source_sha256": value.source_sha256,
         "language": value.language,
-        "claims": [
-            {
-                "claim_id": claim.claim_id,
-                "text": claim.text,
-                "evidence_ids": list(claim.evidence_ids),
-                "claim_type": claim.claim_type,
-                "modality": claim.modality,
-                "needs_review": claim.needs_review,
-            }
-            for claim in value.claims
-        ],
+        "claims": [_claim_to_dict(claim) for claim in value.claims],
         "status": value.status,
     }
 
@@ -1205,17 +1225,7 @@ def subject_draft_to_dict(value: SubjectSummaryDraft) -> dict[str, Any]:
         "subject_sha256": value.subject_sha256,
         "language": value.language,
         "status": value.status,
-        "claims": [
-            {
-                "claim_id": c.claim_id,
-                "text": c.text,
-                "evidence_ids": list(c.evidence_ids),
-                "claim_type": c.claim_type,
-                "modality": c.modality,
-                "needs_review": c.needs_review,
-            }
-            for c in value.claims
-        ],
+        "claims": [_claim_to_dict(claim) for claim in value.claims],
     }
 
 

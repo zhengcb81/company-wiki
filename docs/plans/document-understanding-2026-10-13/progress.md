@@ -1,12 +1,16 @@
-## ROOT 当前状态与 DU4 并行分工 — 2026-10-15
+## ROOT 当前工程接收与剩余任务 — 2026-10-15
 
-当前已发布 master/origin 为 8206e78d；本地新引用归属/历史恢复工程尚未提交发布，不冒充当前远端 CI 已验。已完成集中工程验证：146 单元/契约 PASS（17.83s），正式生产 7 E2E PASS（85.63s），历史 None/v1/v2 恢复 6 E2E PASS（135.47s）；均 0 外部供应商调用，测试临时目录删除，配置/sentinel 保持。RF 新 context/2 与 claim context 引用的窄升级 145 PASS；安装副本仅定点同步一个契约脚本。全跨仓新版本联调及正常发布仍待 ROOT 收尾。
+引用归属/恢复共因节点已集中验收，源码冻结，准备正常提交发布。新显式0.9使用单一citation-unit/3，完整原文只发一份；原生QA的回答支撑与提问上下文分别传递，程序恢复canonical ID，不让模型回填来源。context/2和可选claim context字段由既有RF消费者接收，旧None/v1/v2请求字节与已存Ref保持。PDF重放传真实源语言；语言观察逐claim比较自己的事实支撑，避免其他中文段落掩盖英文被翻译。
 
-真实 HK 原件零付费重放 96/96，语言端口和逐 claim 语言聚合已修；原 source table 同时证实右列新年数据未被当前选择完整保留。旧付费失败收据不覆盖，工程测试不能代替摘要数字/经营质量通过。默认仍 0.8，三供应商正式质量、默认切换和母 G2/G4/G5 继续开放。预算未新增消耗：母 581487 tokens / 381768 µUSD 代理（含旧 unknown），累计上限 $20 / 200万 tokens。
+实际验收：ROOT 146单元/契约、7正式生产E2E、6历史恢复E2E通过；独立审查另跑110单元及20纯反例，无阻断发现。各测试集可能重叠，不相加冒充唯一覆盖数。真实旧5a源码生成activation_pending，由新代码正常恢复，额外模型POST=0，费用/attempt保持；输出结算三字段正常变成真实已发布字节/SHA。新的FF→CWP→RF完整离线CLI PASS；另有原生QA→正式选择/模型/验证/发布→公共compact /3→RF真实CLI PASS，管理层支撑/投资者问题上下文和完整正文逐字段保持。静态Ruff/mypy通过。
 
-新三份可立即开工的独立施工包见 [DU4 总计划](parallel/du4-2026-10-15/README.md) 与 [固定接口](parallel/du4-2026-10-15/INTERFACES.md)：TABLE 数字列/期间绑定、STATE 经营状态关系、FORM 原生表单/轮次信号。三个稀疏 worktree 已备好，源码/测试/作者 PWF 写入范围彼此不重叠；不复制原件或资料库。三包仅 A/RED、B/集中组件验证、C/交付三个大节点；没有小步骤人工签收。参考旧设计里宽泛的直接接线分工由本次卡的边界取代。ROOT 独占既有共享源码、真实接线/E2E/并线发布，作者可独立开始，不等待主线。
+新测试全部为隔离loopback，0供应商、母账不变；配置/原件/sentinel保持，临时目录清理。真实HK source-only重放96/96另有收据；旧付费HK的typed snapshot缺失仍NOT_RETAINED，不用新重放冒充旧任务恢复。初始配置快照选错、探针夹具/版本/summary路径错误、13E2E合并超时、mypy及sandbox失败均保留，在所属测试工具修复，未放宽产品断言。详见[验收收据](common-root-quality-evidence/source-attribution-recovery-acceptance.json)和[123份紧凑证据](common-root-quality-evidence/source-attribution-recovery-receipts.zip)。
 
-Next Step：ROOT 收尾新引用归属工程的跨仓联调/发布；外包三线独立实施其纯组件。接收后 ROOT 按同一共享引擎接线，做真实原件与其他公司 holdout、正式摘要及恢复的大节点验收。另记录 narrative CLI 全局配置误要求未使用 search/wiki 配置的责任范围问题，待主线单独修复，不把它描述成缺 LLM 凭证。
+RF消费者代码caf74c5f已正常提交，推送/精确CI收尾；两份物理安装副本只定点同步一个脚本。DU4卡/PWF4f065af2已推远端，三个作者目录独立READY；ROOT不写它们的新组件/测试/PWF。[DU4总调度](parallel/du4-2026-10-15/README.md)与[固定接口](parallel/du4-2026-10-15/INTERFACES.md)有效，只有A/B/C大节点。
+
+**仍未完成：** DU4表格期间/选择、经营状态、真实FORM/turn信号及ROOT接线；narrative CLI用途范围配置（当前全局Config.load误要求未用search/wiki）；HKIPO有界性能；三配置供应商正式摘要新旧质量、并发2/4、默认切换、母G2/G4/G5和原三/新三公司研究审计循环。默认仍0.8；工程通过不等于正式摘要或买方研究通过。累计581487 tokens /381768µUSD代理（旧unknown7保留），上限$20/200万tokens，本节点新增供应商消耗0。
+
+Next Step：正常发布本次CWP/RF工程节点并核精确CI；随后TDD修narrative-only配置责任范围，再处理不与DU4重叠的有界性能/真实验收准备。接收DU4后统一接线并重新跑真实摘要质量，保留失败和原分母。
 
 以下为历史冻结记录；若与本节状态不同，以本节为准。
 

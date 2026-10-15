@@ -136,6 +136,8 @@ def build_dependency_packages(
                 "member_unit_ids": members,
                 "anchor_unit_ids": anchors,
                 "required_context_unit_ids": required,
+                **({"citation_support_views": [view for view in (anchors, required) if view]}
+                   if kind == "qa_exchange" else {}),
                 "completeness": semantic.get("completeness", "unknown"),
                 "priority": 4 - int(anchor_plan["priority"]) if anchor_plan else role_priority.get(role, role_priority["unknown"]),
                 "reading_family": anchor_plan.get("family"),

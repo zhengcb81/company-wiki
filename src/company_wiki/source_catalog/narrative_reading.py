@@ -505,9 +505,23 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
         ids = list(dict.fromkeys(pipeline["selected_span_ids"][uid]
                                  for uid in original if uid in required))
         digest = sha256(json.dumps(ids, separators=(",", ":")).encode()).hexdigest()
+        citation_views = []
+        seen_support = set()
+        native_views = entry.get("citation_support_views")
+        for native_support in native_views if native_views is not None else [list(required)]:
+            if not native_support or not set(native_support) <= required:
+                raise ValueError("native citation support must belong to its complete source package")
+            support_set = {pipeline["selected_span_ids"][uid] for uid in native_support}
+            support = [sid for sid in ids if sid in support_set]
+            support_key = tuple(support)
+            if support_key in seen_support:
+                continue
+            seen_support.add(support_key)
+            citation_views.append({"support_evidence_ids": support,
+                "context_evidence_ids": [sid for sid in ids if sid not in support_set]})
         groups.append({"group_id": "urn:company-wiki:reading-group:sha256:" + digest,
                        "kind": str(entry["kind"]), "section_role": str(entry.get("section_role") or "unknown"),
-                       "evidence_ids": ids})
+                       "evidence_ids": ids, "citation_views": citation_views})
     unread = _unread(pipeline["structure"], observation)
     # Coverage lists are diagnostic examples, not a second all-unit inventory.
     # Preserve full counts and mark truncation rather than persisting huge IDs.
@@ -520,7 +534,7 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
     layout_coverage = dict(pipeline.get("layout_hints", {}).get("coverage", {}))
     if pipeline.get("native_layout_frontend") is not None:
         layout_coverage["native_frontend"] = pipeline["native_layout_frontend"]
-    return {"schema_version": "du-production-reading/1", "reading_policy_version": version,
+    return {"schema_version": "du-production-reading/2", "reading_policy_version": version,
             "reading_policies": policies, "business_facets": facets,
             "constraints": list(_SHARED_CONSTRAINTS),
             "groups": groups, "unread": unread,

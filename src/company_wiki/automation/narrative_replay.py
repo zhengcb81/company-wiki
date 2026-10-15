@@ -38,6 +38,7 @@ class PdfEvidenceReplayer(Protocol):
         source_id: str,
         source_sha256: str,
         evidence_spans: Sequence[EvidenceSpan],
+        language: str = "zh",
     ) -> tuple[tuple[str, ...], tuple[str, ...]]: ...
 
 
@@ -165,6 +166,7 @@ def replay_narrative_evidence(
                 source_id=source.source_id,
                 source_sha256=source.content_sha256,
                 evidence_spans=selected.evidence_spans,
+                language=selected.source_metadata.language,
             )
             _require_full_replay(selected.evidence_spans, verified, failed)
         else:

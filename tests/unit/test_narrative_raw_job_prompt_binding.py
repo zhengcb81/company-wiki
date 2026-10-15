@@ -13,7 +13,7 @@ from unit.test_narrative_batch import Reader, _request
 
 
 @pytest.mark.parametrize("request_schema", ["narrative-batch-request/1", "narrative-batch-request/2"])
-@pytest.mark.parametrize("projection", [None, "reading-model-input/1", "reading-model-input/2"])
+@pytest.mark.parametrize("projection", [None, "reading-model-input/1", "reading-model-input/2", "reading-model-input/3"])
 def test_actual_job_prompt_is_frozen_for_raw_new_generation_and_old_bindings_stay_exact(request_schema, projection):
     request = replace(_request(), schema_version=request_schema, selector_version="0.9.0")
     binding = batch.build_batch_events(request, Reader(), now="2026-10-14T00:00:00Z")
@@ -25,10 +25,14 @@ def test_actual_job_prompt_is_frozen_for_raw_new_generation_and_old_bindings_sta
         SimpleNamespace(job_id="summary", job_type="source.narrative_summarize", subject_id=payload.item_key))
     frozen_wire = batch._frozen_binding(request, binding, jobs=jobs)
     frozen = json.loads(frozen_wire)
-    expected = "reading-source-owned/2.0.0" if projection == "reading-model-input/2" else "1.7.0"
+    expected = manifest["execution_versions"]["prompt"]
+    if projection == "reading-model-input/2":
+        assert expected == "reading-source-owned/2.0.0"
+    elif projection in (None, "reading-model-input/1"):
+        assert expected == "1.7.0"
     assert frozen["execution_versions"]["prompt"] == "1.7.0"
     assert model_prompt_version(frozen_wire, job_id="summary", default_prompt="1.7.0") == expected
-    if projection == "reading-model-input/2" or request_schema == "narrative-batch-request/2":
+    if projection in ("reading-model-input/2", "reading-model-input/3") or request_schema == "narrative-batch-request/2":
         assert frozen["job_prompt_versions"] == {"summary": expected}
     else:
         assert "job_prompt_versions" not in frozen
