@@ -629,7 +629,13 @@ def test_real_shared_context_groups_keep_original_span_ids_and_native_order():
     assert context["groups"][0]["evidence_ids"] == [
         s.span_id for s in selected.evidence_spans
     ]
-    assert "text" not in str(context["groups"])
+    assert all(set(group) == {
+        "group_id", "kind", "section_role", "evidence_ids", "citation_views",
+    } for group in context["groups"])
+    assert all(set(view) == {"support_evidence_ids", "context_evidence_ids"}
+               for group in context["groups"] for view in group["citation_views"])
+    assert not any(span.raw_text in str(context["groups"])
+                   for span in selected.evidence_spans)
 
 
 def test_independent_english_billing_relation_uses_originals_without_guessing_word_repair():

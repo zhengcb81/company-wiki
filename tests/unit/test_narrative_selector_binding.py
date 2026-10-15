@@ -293,7 +293,20 @@ def test_factory_new_reading_binding_is_decoded_once_for_every_role_and_rejectio
         monkeypatch.setattr(factory, "BudgetedNarrativeCaller", caller)
         monkeypatch.setenv("UNREAD_KEY", "synthetic-no-live-credential")
         try:
-            if error is not None:
+            if projection == "unavailable/99":
+                # Construction may restore an already completed canonical
+                # summary. Only a pending model execution needs its decoder.
+                factory.create_runtime(spec)
+                deps = captured[0]
+                try:
+                    assert deps.reading_model_projection(subject) == projection
+                    assert deps.validate_model_execution is not None
+                    with pytest.raises(ModelResponseError, match=error):
+                        deps.validate_model_execution(subject)
+                    assert len(models) == len(callers) == 1
+                finally:
+                    deps.projection_catalog.close()
+            elif error is not None:
                 kind = ModelResponseError if error == "READING_MODEL_PROJECTION_UNAVAILABLE" else ValueError
                 with pytest.raises(kind, match=error):
                     factory.create_runtime(spec)

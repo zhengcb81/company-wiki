@@ -187,7 +187,8 @@ class Config:
     
     @classmethod
     def load(cls, config_path: Optional[Path] = None, *,
-             llm_provider: Optional[str] = None) -> 'Config':
+             llm_provider: Optional[str] = None,
+             validation_scope: str = "all") -> 'Config':
         """
         加载配置
         
@@ -204,6 +205,10 @@ class Config:
             FileNotFoundError: 配置文件不存在
             ValueError: 配置验证失败
         """
+        if validation_scope not in ("all", "llm"):
+            raise ValueError("unsupported configuration validation scope")
+        llm_only = validation_scope == "llm"
+
         # 确定配置文件路径
         if config_path is None:
             config_path = WIKI_ROOT / "config.yaml"
@@ -219,15 +224,16 @@ class Config:
             logger.warning(f"配置文件不存在: {config_path}，使用默认值")
         
         # 应用环境变量覆盖
-        raw_config = cls._apply_env_overrides(raw_config)
+        raw_config = cls._apply_env_overrides(raw_config, llm_only=llm_only)
         
         # 构建配置对象
-        config = cls._build_config(raw_config, config_path.parent)
+        config = cls._build_config(raw_config, config_path.parent, llm_only=llm_only,
+                                   llm_provider=llm_provider if llm_only else None)
         config.llm = config.llm_for_provider(llm_provider)
         
         # 验证配置（测试模式下使用宽松验证）
         is_test = os.getenv("PYTEST_CURRENT_TEST") is not None
-        config.validate(strict=not is_test)
+        config.validate(strict=llm_only or not is_test, llm_only=llm_only)
         
         config._raw = raw_config
         return config
@@ -256,7 +262,7 @@ class Config:
         return replace(selected.llm, fallback=fallback)
     
     @staticmethod
-    def _apply_env_overrides(raw: Dict[str, Any]) -> Dict[str, Any]:
+    def _apply_env_overrides(raw: Dict[str, Any], *, llm_only: bool = False) -> Dict[str, Any]:
         """Apply non-secret overrides and remove repository-stored LLM keys."""
         raw = copy.deepcopy(raw)
         llm_raw = raw.get("llm")
@@ -269,17 +275,18 @@ class Config:
                 fallback_raw.pop("api_key", None)
         
         # Search API Key
-        if os.getenv("TAVILY_API_KEY"):
+        if not llm_only and os.getenv("TAVILY_API_KEY"):
             raw.setdefault("search", {})["tavily_api_key"] = os.getenv("TAVILY_API_KEY")
         
         # Wiki Root
-        if os.getenv("WIKI_ROOT"):
+        if not llm_only and os.getenv("WIKI_ROOT"):
             raw.setdefault("paths", {})["wiki_root"] = os.getenv("WIKI_ROOT")
         
         return raw
     
     @staticmethod
-    def _build_config(raw: Dict[str, Any], base_dir: Path) -> 'Config':
+    def _build_config(raw: Dict[str, Any], base_dir: Path, *, llm_only: bool = False,
+                      llm_provider: Optional[str] = None) -> 'Config':
         """构建配置对象"""
         # LLM 配置
         llm_raw = raw.get("llm", {})
@@ -291,23 +298,46 @@ class Config:
             "claude": ("ANTHROPIC_API_KEY", "claude-3-opus-20240229", "https://api.anthropic.com"),
         }
         provider = llm_raw.get("provider", "minimax")
+        if llm_only:
+            # Select the actual profile before constructing its credentials or
+            # unrelated components. Defaults remain in this one provider table.
+            selected_provider = llm_provider or provider
+            if selected_provider != provider:
+                configured_fallback = llm_raw.get("fallback", {})
+                selected = {
+                    name: llm_raw[name] for name in (
+                        "max_tokens", "max_document_chars", "temperature",
+                        "reasoning_split", "generation_policy",
+                    ) if name in llm_raw
+                }
+                if (isinstance(configured_fallback, dict)
+                        and configured_fallback.get("provider", "mimo") == selected_provider):
+                    if not configured_fallback.get("enabled", True):
+                        raise ValueError("configured fallback is disabled")
+                    for name in ("model", "base_url"):
+                        if name in configured_fallback:
+                            selected[name] = configured_fallback[name]
+                llm_raw = {**selected, "provider": selected_provider}
+                provider = selected_provider
         api_key_env, default_model, default_base_url = provider_defaults.get(
             provider, provider_defaults["minimax"]
         )
-        fallback_raw = llm_raw.get("fallback", {})
-        fallback_provider = fallback_raw.get("provider", "mimo")
-        fallback_env, fallback_model, fallback_base_url = provider_defaults.get(
-            fallback_provider, provider_defaults["mimo"]
-        )
-        fallback = LLMFallbackConfig(
-            provider=fallback_provider,
-            api_key=os.getenv(fallback_env, ""),
-            api_key_env=fallback_env,
-            model=fallback_raw.get("model", fallback_model),
-            base_url=fallback_raw.get("base_url", fallback_base_url),
-            enabled=bool(fallback_raw.get("enabled", True)),
-            usage_scope=fallback_raw.get("usage_scope", "general"),
-        )
+        fallback = LLMFallbackConfig()
+        if not llm_only:
+            fallback_raw = llm_raw.get("fallback", {})
+            fallback_provider = fallback_raw.get("provider", "mimo")
+            fallback_env, fallback_model, fallback_base_url = provider_defaults.get(
+                fallback_provider, provider_defaults["mimo"]
+            )
+            fallback = LLMFallbackConfig(
+                provider=fallback_provider,
+                api_key=os.getenv(fallback_env, ""),
+                api_key_env=fallback_env,
+                model=fallback_raw.get("model", fallback_model),
+                base_url=fallback_raw.get("base_url", fallback_base_url),
+                enabled=bool(fallback_raw.get("enabled", True)),
+                usage_scope=fallback_raw.get("usage_scope", "general"),
+            )
         llm = LLMConfig(
             provider=provider,
             api_key=os.getenv(api_key_env, ""),
@@ -322,6 +352,9 @@ class Config:
             generation_policy=copy.deepcopy(llm_raw.get("generation_policy", {})),
         )
         
+        if llm_only:
+            return Config(llm=llm)
+
         # 搜索配置
         search_raw = raw.get("search", {})
         search = SearchConfig(
@@ -368,7 +401,7 @@ class Config:
             paths=paths,
         )
     
-    def validate(self, strict: bool = True) -> None:
+    def validate(self, strict: bool = True, *, llm_only: bool = False) -> None:
         """
         验证配置
 
@@ -388,12 +421,13 @@ class Config:
         valid_providers = {"minimax", "mimo", "deepseek", "openai", "claude"}
         if self.llm.provider and self.llm.provider not in valid_providers:
             errors.append(f"不支持的 LLM provider: {self.llm.provider} (支持: {valid_providers})")
-        if self.llm.fallback.provider not in valid_providers:
-            errors.append(f"不支持的备用 LLM provider: {self.llm.fallback.provider}")
-        if self.llm.fallback.usage_scope != "general":
-            errors.append(
-                f"不支持的备用 LLM usage_scope: {self.llm.fallback.usage_scope}"
-            )
+        if not llm_only:
+            if self.llm.fallback.provider not in valid_providers:
+                errors.append(f"不支持的备用 LLM provider: {self.llm.fallback.provider}")
+            if self.llm.fallback.usage_scope != "general":
+                errors.append(
+                    f"不支持的备用 LLM usage_scope: {self.llm.fallback.usage_scope}"
+                )
 
         try:
             self.llm.generation_options()
@@ -406,21 +440,22 @@ class Config:
         if self.llm.max_tokens is not None and self.llm.max_tokens < 1:
             errors.append(f"max_tokens 必须为正数: {self.llm.max_tokens}")
 
-        # 验证搜索配置
-        if strict and not self.search.api_key:
-            errors.append("缺少搜索 API Key (设置 TAVILY_API_KEY 环境变量)")
+        if not llm_only:
+            # 验证搜索配置
+            if strict and not self.search.api_key:
+                errors.append("缺少搜索 API Key (设置 TAVILY_API_KEY 环境变量)")
 
-        # 验证调度配置白名单
-        valid_intervals = {"hourly", "daily", "weekly", "monthly"}
-        if hasattr(self, '_raw'):
-            schedule = self._raw.get("schedule", {})
-            for task, interval in schedule.items():
-                if isinstance(interval, str) and interval not in valid_intervals:
-                    errors.append(f"不支持的调度间隔: {task}={interval} (支持: {valid_intervals})")
+            # 验证调度配置白名单
+            valid_intervals = {"hourly", "daily", "weekly", "monthly"}
+            if hasattr(self, '_raw'):
+                schedule = self._raw.get("schedule", {})
+                for task, interval in schedule.items():
+                    if isinstance(interval, str) and interval not in valid_intervals:
+                        errors.append(f"不支持的调度间隔: {task}={interval} (支持: {valid_intervals})")
 
-        # 验证路径（仅在严格模式下检查）
-        if strict and not self.paths.wiki_root.exists():
-            errors.append(f"Wiki 根目录不存在: {self.paths.wiki_root}")
+            # 验证路径（仅在严格模式下检查）
+            if strict and not self.paths.wiki_root.exists():
+                errors.append(f"Wiki 根目录不存在: {self.paths.wiki_root}")
 
         if errors:
             error_msg = "配置验证失败:\n" + "\n".join(f"  - {e}" for e in errors)

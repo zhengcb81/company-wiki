@@ -25,7 +25,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return batch_main(["--help"])
     try:
         options = model_options_from_config(
-            Config.load(args.llm_config, llm_provider=args.llm_provider).llm)
+            Config.load(args.llm_config, llm_provider=args.llm_provider,
+                        validation_scope="llm").llm)
         if args.allow_local_model_http:
             options["allow_local_http"] = True  # HTTP adapter still requires a loopback IP.
     except (OSError, TypeError, ValueError):

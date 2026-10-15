@@ -208,8 +208,8 @@ def test_configured_entrypoint_selects_provider_through_authoritative_loader(mon
     captured = []
     loaded = []
 
-    def load(path, *, llm_provider=None):
-        loaded.append((path, llm_provider))
+    def load(path, *, llm_provider=None, validation_scope="all"):
+        loaded.append((path, llm_provider, validation_scope))
         config = Config()
         config.llm = config.llm_for_provider(llm_provider)
         return config
@@ -221,7 +221,7 @@ def test_configured_entrypoint_selects_provider_through_authoritative_loader(mon
     monkeypatch.setattr(entrypoint.Config, "load", load)
     monkeypatch.setattr(entrypoint, "batch_main", batch)
     assert entrypoint.main(["--llm-provider", provider, "--request", "fixture.json"]) == 0
-    assert loaded == [(None, provider)]
+    assert loaded == [(None, provider, "llm")]
     assert captured[0][0] == ["--request", "fixture.json"]
     assert captured[0][1]["api_key_env"] == provider.upper() + "_API_KEY"
     assert captured[0][1]["max_output_tokens"] == 8192

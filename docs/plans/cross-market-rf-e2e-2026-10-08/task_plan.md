@@ -2,7 +2,7 @@
 
 主线共享阅读的引用归属/逐claim语言/PDF语言重放/阶段范围恢复共因工程已集中验收，CWP正常发布收尾、RF消费者caf74c5f正常提交。真实旧源码paid outbox恢复0新增POST；FF→CWP→RF离线CLI及原生QA→public /3→RF真实CLI均PASS，原件/config/Temp保持。细则与真实收据以[唯一共享阅读PWF](../document-understanding-2026-10-13/task_plan.md)及[节点证据](../document-understanding-2026-10-13/common-root-quality-evidence/source-attribution-recovery-acceptance.json)为准。
 
-三独立[DU4施工包](../document-understanding-2026-10-13/parallel/du4-2026-10-15/README.md)已经准备并推送：表格期间、经营状态、原生FORM/轮次，作者目录无重叠；ROOT负责既有引擎接线。当前另修narrative-only配置误要求search/wiki的共同责任范围。默认仍0.8，真实供应商质量/并发/默认切换、母G2/G4/G5及原三→新三研究/独审循环继续开放，不能将工程测试写成目标完成。累计581487 tokens/381768µUSD代理，旧unknown7保留，上限$20/200万tokens，本节点0供应商新增消耗。
+三独立[DU4施工包](../document-understanding-2026-10-13/parallel/du4-2026-10-15/README.md)已经准备并推送：表格期间、经营状态、原生FORM/轮次，作者目录无重叠；ROOT负责既有引擎接线。narrative-only配置责任范围已完成74集中/真实CLI恢复/独审，首次CWP正常push发现6项兼容问题已88集中修复，正常补交重推中。默认仍0.8，真实供应商质量/并发/默认切换、母G2/G4/G5及原三→新三研究/独审循环继续开放，不能将工程测试写成目标完成。累计581487 tokens/381768µUSD代理，旧unknown7保留，上限$20/200万tokens，本节点0供应商新增消耗。
 
 以下为历史记录，不作为当前完成声明。
 

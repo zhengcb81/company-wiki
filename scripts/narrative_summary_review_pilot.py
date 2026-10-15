@@ -138,6 +138,7 @@ def build_report(
         evidence_objects = [
             SimpleNamespace(
                 span_id=evidence_id,
+                source_id=source_id,
                 structured_value={"source_role": preview_by_id[evidence_id]["source_role"]},
                 quality_flags=tuple(preview_by_id[evidence_id]["quality_flags"]),
             )

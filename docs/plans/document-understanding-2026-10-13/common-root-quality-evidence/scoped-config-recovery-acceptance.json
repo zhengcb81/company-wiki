@@ -1,0 +1,651 @@
+{
+  "schema_version": "scoped-config-recovery-acceptance/1",
+  "observed_at": "2026-10-15T18:35:23.394808+00:00",
+  "status": "ENGINEERING_ACCEPTED_PENDING_NORMAL_REPUSH",
+  "base_head": "e1b3e234fbc1a57588d90775825e96dfecac7360",
+  "source_sha256": {
+    "scripts\\config.py": "78059cd84e89f5f976157b9b4e87b4f422a3c04cb519fc6ab607ec367e4dd7a6",
+    "scripts\\narrative_batch_configured.py": "e4c11491efb439296d7f569f2387d1d80540a31322303f3c0372348745a4b2d5",
+    "scripts\\narrative_summary_review_pilot.py": "79e7c91af93acca10296c996e1bd9c7c2cdb48a479c6718acec2876d3a44f81b"
+  },
+  "nodes": {
+    "push-compatibility-six-fixed": {
+      "exit_code": 0,
+      "seconds": 33.82990360000986,
+      "tests": [
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+        "tests/unit/test_narrative_selector_binding.py",
+        "tests/unit/test_narrative_summary_review_pilot.py",
+        "tests/unit/test_narrative_frozen_software_responsibility.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "88",
+        "time": "28.111",
+        "timestamp": "2026-10-15T19:27:24.073822+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "scoped-config-real-red": {
+      "exit_code": 1,
+      "seconds": 9.990567300003022,
+      "tests": [
+        ".planning/shared-reading-production/model-projection-root/test_narrative_config_scope.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "16",
+        "skipped": "0",
+        "tests": "17",
+        "time": "2.496",
+        "timestamp": "2026-10-15T19:19:48.110952+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "scoped-config-real-cli-red": {
+      "exit_code": 1,
+      "seconds": 19.841631899995264,
+      "tests": [
+        ".planning/shared-reading-production/model-projection-root/test_narrative_config_scope.py::test_configured_narrative_cli_uses_real_llm_scope",
+        ".planning/shared-reading-production/model-projection-root/test_narrative_config_scope.py::test_full_configuration_still_checks_search_and_legacy_path"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "1",
+        "skipped": "0",
+        "tests": "2",
+        "time": "5.868",
+        "timestamp": "2026-10-15T19:20:42.609970+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "scoped-config-production-red": {
+      "exit_code": 1,
+      "seconds": 19.208891100002802,
+      "tests": [
+        ".planning/shared-reading-production/model-projection-root/test_config_scope_e2e.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "1",
+        "skipped": "0",
+        "tests": "1",
+        "time": "11.657",
+        "timestamp": "2026-10-15T19:25:59.852520+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "scoped-config-production-green": {
+      "exit_code": 0,
+      "seconds": 7.168109499994898,
+      "tests": [
+        "tests/unit/test_narrative_config_scope.py",
+        "tests/unit/test_config.py",
+        "tests/unit/test_narrative_model_config.py",
+        "tests/unit/test_narrative_purpose_policy.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "68",
+        "time": "2.970",
+        "timestamp": "2026-10-15T19:28:07.779444+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "scoped-config-formal-e2e": {
+      "exit_code": 1,
+      "seconds": 39.06165509999846,
+      "tests": [
+        "tests/integration/test_narrative_config_scope_e2e.py",
+        "tests/integration/test_shared_reading_production_e2e.py::test_official_projection_shared_reading_publishes_the_final_generation_target"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "1",
+        "skipped": "0",
+        "tests": "2",
+        "time": "34.724",
+        "timestamp": "2026-10-15T19:28:30.194427+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "scoped-config-formal-e2e-public-ref": {
+      "exit_code": 0,
+      "seconds": 19.298982899999828,
+      "tests": [
+        "tests/integration/test_narrative_config_scope_e2e.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "1",
+        "time": "15.547",
+        "timestamp": "2026-10-15T19:29:32.575166+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "scoped-config-fallback-red": {
+      "exit_code": 1,
+      "seconds": 15.081726499993238,
+      "tests": [
+        "tests/unit/test_narrative_config_scope.py::test_unselected_fallback_is_not_constructed",
+        "tests/unit/test_narrative_config_scope.py::test_explicit_fallback_keeps_configured_profile_and_enabled_policy"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "3",
+        "skipped": "0",
+        "tests": "5",
+        "time": "6.098",
+        "timestamp": "2026-10-15T19:31:20.743935+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "scoped-config-owner-final": {
+      "exit_code": 0,
+      "seconds": 8.295878399992944,
+      "tests": [
+        "tests/unit/test_narrative_config_scope.py",
+        "tests/unit/test_config.py",
+        "tests/unit/test_narrative_model_config.py",
+        "tests/unit/test_narrative_purpose_policy.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "74",
+        "time": "4.868",
+        "timestamp": "2026-10-15T19:32:27.014556+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    },
+    "scoped-config-final-cli-e2e": {
+      "exit_code": 0,
+      "seconds": 30.36663969999063,
+      "tests": [
+        "tests/integration/test_narrative_config_scope_e2e.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0,
+      "junit": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "1",
+        "time": "21.918",
+        "timestamp": "2026-10-15T19:33:02.358623+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    }
+  },
+  "independent_review": {
+    "schema_version": "independent-config-scope-followup-review/1",
+    "reviewer": "attribution_release_review",
+    "date": "2026-10-15",
+    "status": "PASS",
+    "findings": [
+      {
+        "id": "CF-01",
+        "status": "CLOSED",
+        "topic": "unselected fallback consumed"
+      },
+      {
+        "id": "CF-02",
+        "status": "CLOSED",
+        "topic": "third provider scope lost"
+      }
+    ],
+    "blocking_findings": [],
+    "independent_executions": [
+      "five original fallback shapes rechecked; all PASS after repair",
+      "configured fallback exact profile/generation preserved",
+      "third provider uses one llm-only builder",
+      "disabled selected fallback refused",
+      "missing selected key under pytest refused"
+    ],
+    "source_sha256": {
+      "scripts\\config.py": "78059cd84e89f5f976157b9b4e87b4f422a3c04cb519fc6ab607ec367e4dd7a6",
+      "scripts\\narrative_batch_configured.py": "e4c11491efb439296d7f569f2387d1d80540a31322303f3c0372348745a4b2d5",
+      "scripts\\narrative_summary_review_pilot.py": "79e7c91af93acca10296c996e1bd9c7c2cdb48a479c6718acec2876d3a44f81b"
+    },
+    "artifacts": {
+      "handoff.md": {
+        "bytes": 5748,
+        "sha256": "f47791541ee30a1dfdf6742a5be76d2336a89cc420269a87c32df5d2c26b966e"
+      },
+      "initial-findings.json": {
+        "bytes": 1992,
+        "sha256": "a3bc8427d2d3acff6a5d52ac18ef6f7e0590694c7d0d83cb69de28333cd9dc2a"
+      },
+      "fallback-probe.json": {
+        "bytes": 624,
+        "sha256": "6b2a6b52646953a0b1804a41ed1bf1229c9a8143e99c7670fe0a0b8b1087fcfe"
+      },
+      "fallback-probe-rerun.json": {
+        "bytes": 429,
+        "sha256": "6b534263afe3995186966b5808171b7b5c2448794ca1c84b9d0921f9b7d7dc98"
+      },
+      "provider-scope-probe.json": {
+        "bytes": 339,
+        "sha256": "c8af8f825d0d8a3272d07f9f73ab61ec19b3d45b6b34a368515927522ed4c6da"
+      },
+      "selected-profile-after.json": {
+        "bytes": 792,
+        "sha256": "3fe8b954f27effa0c3b70ae213a314af3474f4d94e63c7454c88ae8a0c5f5cf6"
+      },
+      "probe_fallback_scope.py": {
+        "bytes": 1769,
+        "sha256": "bacf45c1cdcaea078150e4bdce42fb548bbd4b627ec3ac713121f2c1cebd7284"
+      }
+    },
+    "supplier_calls": 0,
+    "real_original_reads": 0,
+    "reviewer_source_test_config_git_writes": 0,
+    "not_run_by_reviewer": [
+      "full pre-push suite",
+      "real configured CLI/official QA E2E",
+      "remote CI",
+      "real supplier summary semantic validation"
+    ]
+  },
+  "normal_push_initial": {
+    "passed": 5610,
+    "failed": 6,
+    "skipped": 24,
+    "seconds": 462.3,
+    "rejected_before_publication": true,
+    "hooks_bypassed": false
+  },
+  "scope": "single Config loader/builder scoped to actually selected LLM; unused search/wiki/schedule/downloader/fallback do not block; full legacy default preserved",
+  "consumer_publication": {
+    "repo": "revenue-forecast",
+    "head": "caf74c5f6c71e917a6320c37789ff18194c24dbd",
+    "pre_push_passed": 416,
+    "subtests": 36,
+    "ci": 38784099830,
+    "conclusion": "success"
+  },
+  "incidents": [
+    "pytest resets its current-test marker after fixture setup; real strict controls explicitly remove it inside test bodies",
+    "sandbox temp setup ERROR not product failure; normal host owned short Temp used",
+    "two old loader spies required new scope argument and now assert exact llm scope",
+    "new E2E initially compared internal ArtifactRef with public NarrativeRef; corrected to actual version/content SHA/byte-size mapping, no product relaxation",
+    "review discovered unselected fallback and third-provider scope residuals; fixed centrally with semantic RED and exact-profile controls"
+  ],
+  "supplier_calls": 0,
+  "production_original_or_config_writes": 0,
+  "mother_tokens": 581487,
+  "mother_micro_usd_proxy": 381768,
+  "old_unknown_retained": true,
+  "default_selector": "0.8.0",
+  "du4_status": "USER_CONFIRMED_ALL_THREE_IN_PROGRESS_NO_ROOT_WRITES",
+  "remaining": [
+    "normal CWP repush and exact CI",
+    "DU4 component delivery and ROOT integration",
+    "HK IPO performance",
+    "real supplier summary quality and concurrency",
+    "default cutover",
+    "mother G2/G4/G5 and company audit loop"
+  ],
+  "archive": {
+    "name": "scoped-config-recovery-receipts.zip",
+    "bytes": 46830,
+    "sha256": "e5a0064fe4d7f5873a832629f5a6c4ed0108214f97a672a35149436a41f6b2ba",
+    "members": [
+      {
+        "name": "cwp-stage-path-normalization.json",
+        "bytes": 540,
+        "sha256": "2ae4981cb7ce57a8323c79ef2cdbe2aa6e1d99fbc43b04a9f3b1839c04e1c90f"
+      },
+      {
+        "name": "first-attribution-push-failure.json",
+        "bytes": 1133,
+        "sha256": "b11f365bc7d15f9a5f5ba9fbf538507c6888cdf77008a522486d1c1ae97b594a"
+      },
+      {
+        "name": "model-projection-root/push-compatibility-six-fixed/junit.xml",
+        "bytes": 16318,
+        "sha256": "a4408561800f122bddf5127b05c24ffa4eaf41d76391ea62b266acb330c8c65d"
+      },
+      {
+        "name": "model-projection-root/push-compatibility-six-fixed/receipt.json",
+        "bytes": 460,
+        "sha256": "baf966338bf270d9923a42779cf7ac4f6d425cd69b11b43f4795f14f4dc11512"
+      },
+      {
+        "name": "model-projection-root/push-compatibility-six-fixed/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/push-compatibility-six-fixed/stdout.log",
+        "bytes": 1699,
+        "sha256": "8ceec3d011fdaa127ef21ade30c8caffe4cde43e5945d62b69f4bc122adc3404"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/config-scope-followup/fallback-probe-rerun.json",
+        "bytes": 429,
+        "sha256": "6b534263afe3995186966b5808171b7b5c2448794ca1c84b9d0921f9b7d7dc98"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/config-scope-followup/fallback-probe.json",
+        "bytes": 624,
+        "sha256": "6b2a6b52646953a0b1804a41ed1bf1229c9a8143e99c7670fe0a0b8b1087fcfe"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/config-scope-followup/handoff.json",
+        "bytes": 2418,
+        "sha256": "cb337282494533a0b66ccb4a3f8da86455a2d25c8eb937bfbbcd62ad1d74def1"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/config-scope-followup/handoff.md",
+        "bytes": 5748,
+        "sha256": "f47791541ee30a1dfdf6742a5be76d2336a89cc420269a87c32df5d2c26b966e"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/config-scope-followup/initial-findings.json",
+        "bytes": 1992,
+        "sha256": "a3bc8427d2d3acff6a5d52ac18ef6f7e0590694c7d0d83cb69de28333cd9dc2a"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/config-scope-followup/probe_fallback_scope.py",
+        "bytes": 1769,
+        "sha256": "bacf45c1cdcaea078150e4bdce42fb548bbd4b627ec3ac713121f2c1cebd7284"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/config-scope-followup/provider-scope-probe.json",
+        "bytes": 339,
+        "sha256": "c8af8f825d0d8a3272d07f9f73ab61ec19b3d45b6b34a368515927522ed4c6da"
+      },
+      {
+        "name": "model-projection-root/release-independent-review/config-scope-followup/selected-profile-after.json",
+        "bytes": 792,
+        "sha256": "3fe8b954f27effa0c3b70ae213a314af3474f4d94e63c7454c88ae8a0c5f5cf6"
+      },
+      {
+        "name": "model-projection-root/scoped-config-fallback-red/junit.xml",
+        "bytes": 3146,
+        "sha256": "6d5afe4487c95c90df06d13d578210cac0a2c2645999d4198fe989f3800f4713"
+      },
+      {
+        "name": "model-projection-root/scoped-config-fallback-red/receipt.json",
+        "bytes": 408,
+        "sha256": "97db0664fa8f48489d7a890b84d18664913f8733062c56e471f7e8c98e0f78bb"
+      },
+      {
+        "name": "model-projection-root/scoped-config-fallback-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/scoped-config-fallback-red/stdout.log",
+        "bytes": 3986,
+        "sha256": "671ff16cdad4dc4b30486e6de2a53b1af1c52284a50be50c615c19591a3db406"
+      },
+      {
+        "name": "model-projection-root/scoped-config-final-cli-e2e/junit.xml",
+        "bytes": 409,
+        "sha256": "e0c424aa7e1594963a8df3944cd2dd472cb18ce3710371e4f69687e5c295f12b"
+      },
+      {
+        "name": "model-projection-root/scoped-config-final-cli-e2e/receipt.json",
+        "bytes": 255,
+        "sha256": "42a2e7d9c5f4615dfa5b37a9dd2782ae078a153dd59d613c45c70518aecbd71b"
+      },
+      {
+        "name": "model-projection-root/scoped-config-final-cli-e2e/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/scoped-config-final-cli-e2e/stdout.log",
+        "bytes": 1365,
+        "sha256": "45112261fe4238e3a7132e3a34c2d527773593f946111ab30b64ddc9eb90bd59"
+      },
+      {
+        "name": "model-projection-root/scoped-config-formal-e2e/junit.xml",
+        "bytes": 1907,
+        "sha256": "9900f5f87303c61912b7c75e027be81f9e22c48c8e28232d2edabc839177ddc5"
+      },
+      {
+        "name": "model-projection-root/scoped-config-formal-e2e/receipt.json",
+        "bytes": 398,
+        "sha256": "8b8be5e7ca3c168974f2e184187c6e795317530488308d1c46b1ae8441e2a0ff"
+      },
+      {
+        "name": "model-projection-root/scoped-config-formal-e2e/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/scoped-config-formal-e2e/stdout.log",
+        "bytes": 2555,
+        "sha256": "284d49f2a98aaac01e3e1fa3d7cf411c1989127413c7cd717e706daa75b7e08f"
+      },
+      {
+        "name": "model-projection-root/scoped-config-formal-e2e-public-ref/junit.xml",
+        "bytes": 409,
+        "sha256": "272826b36d5c973756b2c285d1b5f63aa01397e17934131317090b9570fbdc52"
+      },
+      {
+        "name": "model-projection-root/scoped-config-formal-e2e-public-ref/receipt.json",
+        "bytes": 256,
+        "sha256": "0e4ed90f478acee0fd7847488d29d2b90b301fc03c1dd658d11681f9fb158e6a"
+      },
+      {
+        "name": "model-projection-root/scoped-config-formal-e2e-public-ref/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/scoped-config-formal-e2e-public-ref/stdout.log",
+        "bytes": 1373,
+        "sha256": "5fbfc9daccee277f15029d2ceb76bf71bf9342ea1976dd335511e71d11b4248c"
+      },
+      {
+        "name": "model-projection-root/scoped-config-owner-final/junit.xml",
+        "bytes": 11292,
+        "sha256": "7a607088969ecf92e52d0905b165290cfc47e692b34ee1dbe9dbe564e6b312a3"
+      },
+      {
+        "name": "model-projection-root/scoped-config-owner-final/receipt.json",
+        "bytes": 380,
+        "sha256": "ffebd11564256edf3b24d471d3790ca14e9be4c922853b3ab0cfe615eba59810"
+      },
+      {
+        "name": "model-projection-root/scoped-config-owner-final/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/scoped-config-owner-final/stdout.log",
+        "bytes": 1608,
+        "sha256": "515c26df53d26302f8720c55f9ebf49e232d10917d803851fb6c203e01439f4f"
+      },
+      {
+        "name": "model-projection-root/scoped-config-production-green/junit.xml",
+        "bytes": 10428,
+        "sha256": "b6a7cb23438800c9499a019b142fa97fa2478f00e95bd2e342193e624093834c"
+      },
+      {
+        "name": "model-projection-root/scoped-config-production-green/receipt.json",
+        "bytes": 380,
+        "sha256": "5e75d86da864fef41f2496d4f24b0461c2aaabfd6734707f4a6ba82195f0f0f1"
+      },
+      {
+        "name": "model-projection-root/scoped-config-production-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/scoped-config-production-green/stdout.log",
+        "bytes": 1613,
+        "sha256": "a4e226300e0fd35d16e80799bb5b3a06f2d4cfe2235341d435c13e0dcd88e156"
+      },
+      {
+        "name": "model-projection-root/scoped-config-production-red/junit.xml",
+        "bytes": 1620,
+        "sha256": "f25cb75b33fc470cc53d475639dff8e8c5f5346122303c29609906a5f9e84a3f"
+      },
+      {
+        "name": "model-projection-root/scoped-config-production-red/receipt.json",
+        "bytes": 286,
+        "sha256": "5c8cc3050bb7df354001d630994364da7832fe83cf4358fef9bca9f0708991f8"
+      },
+      {
+        "name": "model-projection-root/scoped-config-production-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/scoped-config-production-red/stdout.log",
+        "bytes": 2439,
+        "sha256": "e7ccc5be5fb99da37efa6dbf23223d4735a25e69aaf6d21f87dc0cd2d8410bad"
+      },
+      {
+        "name": "model-projection-root/scoped-config-real-cli-red/junit.xml",
+        "bytes": 1586,
+        "sha256": "11c3184d1dced0c96c5b34522468200634aa04143ac179adac85cd874de8b155"
+      },
+      {
+        "name": "model-projection-root/scoped-config-real-cli-red/receipt.json",
+        "bytes": 501,
+        "sha256": "c5dd21a7272087339576fa952b875f0dbbd907a63b57509eb247305ab1597434"
+      },
+      {
+        "name": "model-projection-root/scoped-config-real-cli-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/scoped-config-real-cli-red/stdout.log",
+        "bytes": 2623,
+        "sha256": "38fad0820426d78fd23c6973780b8f287a98693eae5a2a9d4722d103b583ca78"
+      },
+      {
+        "name": "model-projection-root/scoped-config-real-red/junit.xml",
+        "bytes": 10479,
+        "sha256": "dabfcf1dd56e8f324ada1500372cdd9881be871b4477703dee98590a5ace8a6c"
+      },
+      {
+        "name": "model-projection-root/scoped-config-real-red/receipt.json",
+        "bytes": 291,
+        "sha256": "0dbb803aa3c24eb17970bf2f543e2cf247ddab2933edd57bf69e46a7ea48224b"
+      },
+      {
+        "name": "model-projection-root/scoped-config-real-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/scoped-config-real-red/stdout.log",
+        "bytes": 10665,
+        "sha256": "295f20bbe3b057699ddfc8ec00ac56c007f85d7c7b658ca24f5a6d6a618fd6f2"
+      },
+      {
+        "name": "scoped-config-dev/baseline.json",
+        "bytes": 189,
+        "sha256": "7d92030074060e1c645255b491e3db5106db05d892144c40710a89286d413acc"
+      },
+      {
+        "name": "scoped-config-dev/host-concentrated-junit.xml",
+        "bytes": 13447,
+        "sha256": "113f9aef208e38ffd17f839ee37c27bc56254b3cf1ff3b1f88e9fead09068268"
+      },
+      {
+        "name": "scoped-config-dev/host-concentrated-receipt.json",
+        "bytes": 126,
+        "sha256": "50cc444ee59e0c511810cec63b18d85a298c309864af88c5b0382a8f96ba62a5"
+      },
+      {
+        "name": "scoped-config-dev/host-concentrated-stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "scoped-config-dev/host-concentrated-stdout.log",
+        "bytes": 3887,
+        "sha256": "fd22193a7ee3eb0fd0348dbf4b26c2429dd3ef8a1780536e100d70d659fc8b45"
+      },
+      {
+        "name": "scoped-config-dev/host-junit.xml",
+        "bytes": 3571,
+        "sha256": "706334e10c5e184258abc73a363263d232e6744dd173a9f709d5dec7c4161e6c"
+      },
+      {
+        "name": "scoped-config-dev/host-receipt.json",
+        "bytes": 127,
+        "sha256": "078b2dc5d1bc5911c9e030058ad418b25622e5a5bec63dc298dca64a5f3bbeb0"
+      },
+      {
+        "name": "scoped-config-dev/host-stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "scoped-config-dev/host-stdout.log",
+        "bytes": 1445,
+        "sha256": "21fb1428fb60dca20ad87b64d5c8a4bb89cf90ecb61f4837c7648c6e8b3d14f6"
+      },
+      {
+        "name": "scoped-config-dev/junit.xml",
+        "bytes": 13483,
+        "sha256": "6d32f0921635abf979115f32bb422bd43581687a93519319926a8b06adfafe22"
+      }
+    ]
+  }
+}

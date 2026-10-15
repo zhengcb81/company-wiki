@@ -1,16 +1,18 @@
 ## ROOT 当前工程接收与剩余任务 — 2026-10-15
 
-引用归属/恢复共因节点已集中验收，源码冻结，准备正常提交发布。新显式0.9使用单一citation-unit/3，完整原文只发一份；原生QA的回答支撑与提问上下文分别传递，程序恢复canonical ID，不让模型回填来源。context/2和可选claim context字段由既有RF消费者接收，旧None/v1/v2请求字节与已存Ref保持。PDF重放传真实源语言；语言观察逐claim比较自己的事实支撑，避免其他中文段落掩盖英文被翻译。
+引用归属/恢复共因节点e1b3e234已正常提交；首次正常push由6项兼容问题拒绝（5610PASS/24SKIP），已按真实职责修复并88集中PASS，准备连同用途范围配置节点正常补交/重推。新显式0.9使用单一citation-unit/3，完整原文只发一份；原生QA的回答支撑与提问上下文分别传递，程序恢复canonical ID，不让模型回填来源。context/2和可选claim context字段由既有RF消费者接收，旧None/v1/v2请求字节与已存Ref保持。PDF重放传真实源语言；语言观察逐claim比较自己的事实支撑，避免其他中文段落掩盖英文被翻译。
 
 实际验收：ROOT 146单元/契约、7正式生产E2E、6历史恢复E2E通过；独立审查另跑110单元及20纯反例，无阻断发现。各测试集可能重叠，不相加冒充唯一覆盖数。真实旧5a源码生成activation_pending，由新代码正常恢复，额外模型POST=0，费用/attempt保持；输出结算三字段正常变成真实已发布字节/SHA。新的FF→CWP→RF完整离线CLI PASS；另有原生QA→正式选择/模型/验证/发布→公共compact /3→RF真实CLI PASS，管理层支撑/投资者问题上下文和完整正文逐字段保持。静态Ruff/mypy通过。
 
 新测试全部为隔离loopback，0供应商、母账不变；配置/原件/sentinel保持，临时目录清理。真实HK source-only重放96/96另有收据；旧付费HK的typed snapshot缺失仍NOT_RETAINED，不用新重放冒充旧任务恢复。初始配置快照选错、探针夹具/版本/summary路径错误、13E2E合并超时、mypy及sandbox失败均保留，在所属测试工具修复，未放宽产品断言。详见[验收收据](common-root-quality-evidence/source-attribution-recovery-acceptance.json)和[123份紧凑证据](common-root-quality-evidence/source-attribution-recovery-receipts.zip)。
 
-RF消费者代码caf74c5f已正常提交，推送/精确CI收尾；两份物理安装副本只定点同步一个脚本。DU4卡/PWF4f065af2已推远端，三个作者目录独立READY；ROOT不写它们的新组件/测试/PWF。[DU4总调度](parallel/du4-2026-10-15/README.md)与[固定接口](parallel/du4-2026-10-15/INTERFACES.md)有效，只有A/B/C大节点。
+RF消费者代码caf74c5f已正常推送，416+36subtests通过，精确CI38784099830 SUCCESS；两份物理安装副本只定点同步一个脚本。DU4卡/PWF4f065af2已推远端，用户确认三个作者包均已开工，目录独立IN_PROGRESS；ROOT不写它们的新组件/测试/PWF。[DU4总调度](parallel/du4-2026-10-15/README.md)与[固定接口](parallel/du4-2026-10-15/INTERFACES.md)有效，只有A/B/C大节点。
 
-**仍未完成：** DU4表格期间/选择、经营状态、真实FORM/turn信号及ROOT接线；narrative CLI用途范围配置（当前全局Config.load误要求未用search/wiki）；HKIPO有界性能；三配置供应商正式摘要新旧质量、并发2/4、默认切换、母G2/G4/G5和原三/新三公司研究审计循环。默认仍0.8；工程通过不等于正式摘要或买方研究通过。累计581487 tokens /381768µUSD代理（旧unknown7保留），上限$20/200万tokens，本节点新增供应商消耗0。
+用途范围配置共因也已TDD完成：统一loader/builder先选择真实profile，llm范围不消费无关search/wiki/schedule/downloader或未选fallback；实际key/参数仍严格，不靠pytest宽松。25新反例与旧配置/模型/purpose共74PASS，真实CLI缺搜索配置/旧路径且无测试宽松变量的摘要+0POST恢复E2E PASS，官方JSON问答另PASS。独审最初找到两处残耦合，修复后5个原fallback形状和4个profile控制均通过。见[范围/兼容收尾](common-root-quality-evidence/scoped-config-recovery-acceptance.json)及[紧凑证据](common-root-quality-evidence/scoped-config-recovery-receipts.zip)。
 
-Next Step：正常发布本次CWP/RF工程节点并核精确CI；随后TDD修narrative-only配置责任范围，再处理不与DU4重叠的有界性能/真实验收准备。接收DU4后统一接线并重新跑真实摘要质量，保留失败和原分母。
+**仍未完成：** DU4表格期间/选择、经营状态、真实FORM/turn信号及ROOT接线；HKIPO有界性能；三配置供应商正式摘要新旧质量、并发2/4、默认切换、母G2/G4/G5和原三/新三公司研究审计循环。默认仍0.8；工程通过不等于正式摘要或买方研究通过。累计581487 tokens /381768µUSD代理（旧unknown7保留），上限$20/200万tokens，本节点新增供应商消耗0。
+
+Next Step：正常发布本次CWP/RF工程节点并核精确CI；随后处理不与DU4重叠的HKIPO有界性能/真实验收准备。接收DU4后统一接线并重新跑真实摘要质量，保留失败和原分母。
 
 以下为历史冻结记录；若与本节状态不同，以本节为准。
 

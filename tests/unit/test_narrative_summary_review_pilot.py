@@ -5,6 +5,22 @@ import pytest
 from scripts.narrative_summary_review_pilot import build_report
 
 
+def test_review_pilot_preserves_measured_source_in_evidence_adapter(monkeypatch):
+    from scripts import narrative_summary_review_pilot as pilot
+
+    actual_validate = pilot.validate_summary_draft
+    parents = []
+
+    def validate(draft, **kwargs):
+        parents.extend(span.source_id for span in kwargs["evidence_spans"])
+        assert set(parents) == {kwargs["source_id"]} == {draft.source_id}
+        return actual_validate(draft, **kwargs)
+
+    monkeypatch.setattr(pilot, "validate_summary_draft", validate)
+    build_report(*_inputs())
+    assert parents
+
+
 def _inputs(
     *,
     scope: str = "selected_span_window",
