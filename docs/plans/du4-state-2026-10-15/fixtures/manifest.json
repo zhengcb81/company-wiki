@@ -1,0 +1,13 @@
+[
+  {
+    "path": "cn-ir-observation.json",
+    "sha256": "f70cc6f4017bea976ea843acfc4061e96cf718e9abf25977791d62b5bfba086a",
+    "bytes": 153356,
+    "kind": "retained_real_observation",
+    "original_receipt": "type-matrix-root/root-cause-followup/cn-ir.json",
+    "limits": [
+      "partial saved observation, not full original or complete native corpus",
+      "new component and production integration NOT_RUN"
+    ]
+  }
+]

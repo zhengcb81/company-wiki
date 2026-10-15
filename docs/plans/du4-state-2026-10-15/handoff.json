@@ -1,0 +1,87 @@
+{
+  "schema_version": "du4-handoff/1",
+  "lane": "DU4-STATE",
+  "base_commit": "8206e78d4087531b1d7ed57c45a73c942cc702e3",
+  "branch": "codex/du4-state-20261015",
+  "commits": [],
+  "changed_paths": [
+    "src/company_wiki/document_understanding/operating_states/__init__.py",
+    "src/company_wiki/document_understanding/operating_states/text_view.py",
+    "src/company_wiki/document_understanding/operating_states/patterns.py",
+    "src/company_wiki/document_understanding/operating_states/relations.py",
+    "tests/unit/du4_operating_states/conftest.py",
+    "tests/unit/du4_operating_states/helpers.py",
+    "tests/unit/du4_operating_states/test_a_real_observation.py",
+    "tests/unit/du4_operating_states/test_b_synthetic_specs.py",
+    "tests/unit/du4_operating_states/test_c_contract.py",
+    "docs/plans/du4-state-2026-10-15/"
+  ],
+  "interface_version": "du4-interfaces/1",
+  "entrypoint": "company_wiki.document_understanding.operating_states.detect_operating_relations(observation, *, work_budget) -> dict",
+  "tests": [
+    {
+      "command": "PYTHONPATH=src python -B -m pytest -q tests/unit/du4_operating_states",
+      "exit_code": 0,
+      "passed": 86,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "results/final-run.txt"
+    },
+    {
+      "command": "python -m ruff check src/company_wiki/document_understanding/operating_states tests/unit/du4_operating_states",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "results/static-checks.txt"
+    },
+    {
+      "command": "python -m mypy src/company_wiki/document_understanding/operating_states",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "results/static-checks.txt"
+    }
+  ],
+  "fixtures": [
+    {
+      "path": "fixtures/cn-ir-observation.json",
+      "sha256": "f70cc6f4017bea976ea843acfc4061e96cf718e9abf25977791d62b5bfba086a",
+      "kind": "retained_real_observation",
+      "limits": [
+        "partial saved observation, not full original or complete native corpus",
+        "tests only read this retained JSON; the original PDF is never reopened",
+        "32 synthetic originals + 16 extended counterexamples + 4 holdouts are embedded specs in tests/unit/du4_operating_states/test_b_synthetic_specs.py (kind synthetic), not market recall samples"
+      ]
+    }
+  ],
+  "red_receipt": "results/red-run.txt",
+  "known_limits": [
+    "assertion_refs is the clause evidence span (its tail may exceed the bound, e.g. 的情况); the binding itself lives in actor/object/predicate/qualifier refs",
+    "attribution classes: issuer pronouns -> issuer; related-party nouns (股东/控股股东/母公司/子公司/关联方/parent/subsidiary) -> quoted_related_party; third-party nouns -> other; bare names -> unknown; subsidiary and shareholder are the same related-party class and stay distinguishable only via actor_refs",
+    "actor name classes come only from bounded cues inside the target unit and same-parent context units; no entity DB, no external identity check",
+    "binary yes/no Q+A answers without an observed referent ('没有。' / 'No.') yield no relation; referent closure across units is not guessed — any source-consumer change stays ROOT-owned",
+    "restriction-continuation ('仅用于试用') attaches only to the immediately preceding relation of the same unit",
+    "no quantity/period/currency parsing; numbers stay in source wording",
+    "double negation and undeterminable scope emit modality=uncertain with polarity=unknown; they are never inverted into positives"
+  ],
+  "not_run": [
+    "owner original reopen / real parse replay",
+    "real selection (selector) integration and complete-QA/cap regression",
+    "historical explicit 0.8 replay regression",
+    "real model summary and downstream revenue-forecast acceptance",
+    "another-company holdout on real documents",
+    "READING_BUSINESS_POLICY_VERSION bump and cache invalidation (ROOT owns narrative_business_policy.py)"
+  ],
+  "root_integration_steps": [
+    "In source_catalog/narrative_business_policy.py::detect_reading_business_fact, consume detect_operating_relations via a thin adapter that wraps the text as one observation unit (schema du4-operating-observation/1; unit fields text/parent_id/role/kind/locator may be caller placeholders; no source re-signature). The adapter must pass a caller-owned shared WorkBudget; the component never creates budgets.",
+    "Relation -> OperatingFact mapping (suggested): reasons add 'operating_state_boundary' when polarity=negative or stage in (not_yet, suspended, discontinued) or modality=uncertain; add 'business_relationship_stage' when activity=business_relationship and stage in (contact_established, intended_cooperation, planned, conditional). topics: core_business base; capacity_projects when activity in (production, capacity) and polarity=positive and stage=current; new_business when stage in (planned, conditional, intended_cooperation). Never emit business_progress for denials or non-progress states; ordinary bounded score (3), never scaled by negation-token count.",
+    "Remove the reading-only bare OBJECT x ACTIVITY co-occurrence branch (narrative_business_policy.py near line 534: activity = any(_OBJECT.search(clause) and _ACTIVITY.search(clause) ...)) so the new relation semantics cannot be bypassed; keep legacy detect_business_fact, N6 recognition and explicit 0.8 replay untouched.",
+    "Bump READING_BUSINESS_POLICY_VERSION (reading-business-policy/6 -> 7) with the existing inventory import; add the single cache invalidation assertion through the real inventory/freezer/comparator.",
+    "Keep role admission at the source/structure boundary: the component is role-agnostic and its interrogative guard is text-level only; question/shadow roles must keep failing _admitted as they do today.",
+    "Pass context_unit_ids = the same-parent observed context (e.g. m41 siblings); never trim QA package members — the component only reads units and returns relations."
+  ],
+  "production_writes": 0,
+  "supplier_calls": 0
+}
