@@ -15,12 +15,12 @@ PWF_PLAN_ROOT=docs/plans/du4-table-2026-10-15
 
 ## 阶段
 
-- [ ] A：核对实际保存观察，先写独立 expected 的语义反例并留真正 RED。
-- [ ] B：实现纯组件，集中单元/契约测试、输入不变、预算/范围/未知值与 holdout。
-- [ ] C：Ruff/mypy、交接文档和正常 commit，STOP 等 ROOT 接收。
+- [x] A：核对实际保存观察，先写独立 expected 的语义反例并留真正 RED。
+- [x] B：实现纯组件，集中单元/契约测试、输入不变、预算/范围/未知值与 holdout。
+- [x] C：Ruff/mypy、交接文档和正常 commit，STOP 等 ROOT 接收。
 
 没有逐小节点签收；仅上述三个大节点。不得调用真实供应商、操作生产资料、同步技能、改 CI 或跳 hooks。ROOT 负责现有引擎接线与真实 E2E/并线。
 
 ## Next Step
 
-执行 A，确认本工作目录 src import，再写可复现的语义 RED。完成后把实际命令与证据记入 progress.md。
+A/B/C 已完成：RED 证据 results/red-1、red-2，集中结果 results/pytest-final.log（35 passed），真实走通 results/real-packet-bindings-report.json，交接见 handoff.md/handoff.json。STOP 等 ROOT 接收。

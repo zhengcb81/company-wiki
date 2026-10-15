@@ -1,0 +1,107 @@
+{
+  "schema_version": "du4-handoff/1",
+  "lane": "DU4-TABLE",
+  "base_commit": "8206e78d4087531b1d7ed57c45a73c942cc702e3",
+  "branch": "codex/du4-table-20261015",
+  "commits": ["87c69b92444566e4e3f6011491b36ae93af3b5e5"],
+  "changed_paths": [
+    "src/company_wiki/document_understanding/table_measurements/__init__.py",
+    "src/company_wiki/document_understanding/table_measurements/bindings.py",
+    "src/company_wiki/document_understanding/table_measurements/_periods.py",
+    "src/company_wiki/document_understanding/table_measurements/_labels.py",
+    "tests/unit/du4_table_measurements/conftest.py",
+    "tests/unit/du4_table_measurements/builders.py",
+    "tests/unit/du4_table_measurements/real_packet.py",
+    "tests/unit/du4_table_measurements/report_real_packet.py",
+    "tests/unit/du4_table_measurements/test_1_semantic_columns_periods.py",
+    "tests/unit/du4_table_measurements/test_2_merged_and_unknown_slots.py",
+    "tests/unit/du4_table_measurements/test_3_headers_units_scope.py",
+    "tests/unit/du4_table_measurements/test_4_refs_budget_stability.py",
+    "tests/unit/du4_table_measurements/test_5_real_hk_packet.py",
+    "tests/unit/du4_table_measurements/test_6_holdout_multi_table.py",
+    "docs/plans/du4-table-2026-10-15/"
+  ],
+  "interface_version": "du4-interfaces/1",
+  "entrypoint": "company_wiki.document_understanding.table_measurements.bind_operating_table",
+  "tests": [
+    {
+      "command": "$env:PYTHONPATH = (Join-Path (Get-Location) 'src'); python -B -m pytest -q tests/unit/du4_table_measurements",
+      "exit_code": 0,
+      "passed": 35,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "results/pytest-final.log"
+    },
+    {
+      "command": "python -m ruff check src/company_wiki/document_understanding/table_measurements tests/unit/du4_table_measurements",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "results/ruff-final.log"
+    },
+    {
+      "command": "python -m mypy src/company_wiki/document_understanding/table_measurements",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "results/mypy-final.log"
+    }
+  ],
+  "fixtures": [
+    {
+      "path": "fixtures/hk-table-observation.json.gz",
+      "sha256": "6f3ce02a485572debf61277b27adf428601eeeb3507e8b63439e1ec8c1e25571",
+      "kind": "retained_real_observation",
+      "limits": [
+        "partial saved observation, not full original or complete native corpus",
+        "adapter-derived facts in tests/unit/du4_table_measurements/real_packet.py: parent_id/role/kind placeholders, header_rows=[0..3], span projection from retained cell boxes, truncation flag",
+        "table p20t1 raw_rows capture truncated; its rows fall back to unit row_cells without boxes or empty/none kind"
+      ]
+    },
+    {
+      "path": "tests/unit/du4_table_measurements/builders.py",
+      "sha256": "d10f964888f2189b9950b5c359d78e3ed2d6978ba55d2ea52dd3139b7ff2dd13",
+      "kind": "synthetic",
+      "limits": [
+        "synthetic observation builders only; expected results were written independently in the test modules"
+      ]
+    },
+    {
+      "path": "tests/unit/du4_table_measurements/real_packet.py",
+      "sha256": "acf8c5d326d00ded1d0aefb40cba2f64e549eb5b683367983c10224437e74aae",
+      "kind": "synthetic",
+      "limits": [
+        "projection adapter over the retained packet; it never binds values and never repairs the selection"
+      ]
+    }
+  ],
+  "red_receipt": "results/red-2-semantic-failure.log",
+  "known_limits": [
+    "input contract semantics frozen by this lane: data-cell text_refs are per-value char refs, header_refs are label/header refs; any ref appearing in a header_refs list is a label and never a measurement",
+    "a merged big cell without per-value native positioning is kept as one whole-cell value_ref and reported ambiguous; values inside are never split into invented columns",
+    "period facts come only from header labels: bare year labels give kind=unspecified with raw labels kept, fiscal year never becomes duration_months=12, undisclosed start stays null",
+    "unit/scope/qualifier refs are bounded vocabulary and parenthesized-group matches over label texts only (value text is scanned only for inline percent/currency units)",
+    "binding_status=bound requires a single proven native column plus an established header path; no-header-path values are ambiguous with a diagnostic",
+    "provenance fine_geometry records without layout span results are ignored as fine-cell evidence (coarse_geometry_ignored)",
+    "real-packet counts (retained tables): bound 34 / ambiguous 7 / unavailable 0; see results/real-packet-bindings-report.json"
+  ],
+  "not_run": [
+    "production wiring (narrative_evidence/narrative_pdf_layout/observation_adapter/structure/tables/layout_bridge/narrative_reading/model projection)",
+    "real supplier/API calls, real AUTO runs, production catalog operations",
+    "cache fingerprints and old Ref recovery tests",
+    "real second company/format holdout beyond the retained HK packet (synthetic multi-table/repeated-year holdout is covered)",
+    "full repository test suite (only this lane's test directory was run)"
+  ],
+  "root_integration_steps": [
+    "collect native cell slots (row/column/row_span/column_span/presence + per-value text refs) in the same native parse and build du4-table-observation/1",
+    "call bind_operating_table from the adapter/structure layer and keep the bindings object referenced by TableDraft/wire",
+    "add the interpretation-required refs (column header_refs/period raw_label_refs, unit_refs, qualifier_refs) to the existing selection dependency closure",
+    "project the same bindings into canonical reading context/model input (period/unit/scope come from bound measurements; unbound values stay qualitative/unknown)",
+    "verify real HK plus another company/format holdout claim by claim; do not shrink gold or raise caps to hide gaps",
+    "re-check cache fingerprints/old Ref recovery and summary numbers after wiring"
+  ],
+  "production_writes": 0,
+  "supplier_calls": 0
+}
