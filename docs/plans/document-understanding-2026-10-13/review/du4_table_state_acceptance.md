@@ -31,3 +31,24 @@ TABLE作者真实HK包只为保留的部分原生观察，包含明确的测试�
 显式作者src纯内存探针已确认：TABLE可以借外parent的日期/单位仍bound；明确Six months from January 1, 2024 to June 30, 2024把start/end均填January 1。STATE对未签署/计划签署/尚未建立联系/计划商业化/has not signed出现positive actual/current，前导空白/连接词还会令actor原文ref错位。预算0仍遍历STATE1001units、转换5000字符、复制10000context；TABLE零费用遍历10000header_rows、work2遍历10000provenance，work4耗尽后仍扩张5001列范围。
 
 这些是有限合成反例，不是生产事故统计。按上面同一接收节点先ROOT可执行RED，再统一来源ref作用域/日期事实组合、状态谓词及qualifier绑定/原坐标映射、预算前运算与索引复杂度修复；不按公司/词组各打补丁。两包当前为REQUEST_CHANGES_COMPONENT，不能称已验收或生产接线完成。独立原始probe保留在owned independent-review目录，最后同一节点集中复核归档。
+
+
+## ROOT最终组件验收
+
+## ROOT当前状态 — 2026-10-15 DU4三包组件集中接收
+
+FORM已发布master cbfe3e7f，正常推送5784PASS/24SKIP321.47s、精确CI38804974095 SUCCESS；文档收尾de6b4660已正常推送148PASS/26.54s，docs-only无workflow。TABLE/STATE用户均已交付，作者head fa1681c0/284eea60，36/90原测试ROOT复跑通过。两分支已合入ROOT待提交工作区，保留作者完整历史；独审发现的7类共因经集中RED/共同责任修复，最终三包+Git字节 **251PASS/6.42s**，独立纯探针复核通过，Ruff/mypy8源PASS。仍待正常提交/推送和精确CI，不能先称两包已发布。
+
+修复包括真实ref作用域与表头可用性、明确起止与同标签冲突、单位维度保留、稀疏原生列/一次label缓存；STATE限定词/条件/假设、主句与供应商从属描述的主体隔离、控制动词对象及原文偏移，原relative反例中取得类助动词也不再被当成对象。所有变量长工作先扣原WorkBudget，无第二预算或重复身份流程。23初始RED、后续4/3/6及aux1RED与旧失败均保留；foreign row仅剔除并partial为原绑定定义允许行为，不为此新增整表阻断。STATE真实fixture恢复原manifest准确字节，不改gold；作者目录不写。
+
+细则见[两包接收](du4_table_state_acceptance.md)，证据见[紧凑验收](../common-root-quality-evidence/du4-table-state-acceptance.json)。**组件通过不等于生产接线或语义完成**：默认0.8、新0.9仍v3，新v4未实现；六错引/重要遗漏、真实holdout、HKIPO性能及母G2/G4/G5/公司循环继续开放。原件/配置/sentinel保持、测试Temp删除，0供应商，累计599590tokens/385113µUSD预算代理（旧unknown7；限2M/$20）不变。
+
+**Next Step：** 正常发布两包组件；三包均到齐后先统一source-owned生产接线（FORM native/carrier→原cap/router、STATE唯一经营谓词、TABLE原生槽/解释依赖），再完成v4正式边界/源任务覆盖/费用恢复和真实摘要验收。先修来源作用域可避免新协议绑定旧错误来源，不重复付费探路。只在原A/B/C和母G大节点集中验收，未完成不切默认。
+
+
+收尾工具曾把混编码prepush日志严格当UTF8读取而失败，随后依赖manifest不存在的commit准备也停止；原日志未改，改为仅在计数观察时替换坏编码，raw完整归档，之后正常完成FORM文档发布。没有错误提交或跳hooks。
+
+
+提交前diff --check发现作者RED日志保留pytest实际尾随空格，以及参考Markdown的硬换行双空格。原始RED不修剪，按既有fixtures/evidence的原始字节角色统一将PWF results声明为-text/-diff/-eol；不批量重写旧结果、不动源码检查。参考Markdown仅把两处等价硬换行改为反斜线。首次提交准备在check处停止，尚未commit，错误和修法如实保留。
+
+提交准备重试又遇到已从index移除的新conftest路径不再匹配；修复ROOT准备脚本只暂存仍存在或index仍跟踪的清单项，保持同一允许范围与精确最终文件集合断言。这是准备工具幂等问题，无源码/测试失败，也未产生commit。

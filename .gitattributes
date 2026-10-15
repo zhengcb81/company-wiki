@@ -43,3 +43,4 @@
 # Retained native observations carry byte hashes in plan fixture manifests.
 # Preserve their original bytes through Git filters and cross-platform checkout.
 /docs/plans/**/fixtures/** -text -diff -eol
+/docs/plans/**/results/** -text -diff -eol

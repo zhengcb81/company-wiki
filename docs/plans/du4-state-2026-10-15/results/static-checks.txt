@@ -1,0 +1,9 @@
+# DU4-STATE static checks (phase C)
+# command: python -m ruff check src/company_wiki/document_understanding/operating_states tests/unit/du4_operating_states
+# first run: 14 F541 (f-string without placeholders), fixed with ruff --fix
+# exit after fix: 0, 0 remaining
+# command: python -m mypy src/company_wiki/document_understanding/operating_states
+# exit: 0 — Success: no issues found in 4 source files
+# re-run after independent-review fixes:
+# ruff -> All checks passed! (0 remaining)
+# mypy -> Success: no issues found in 4 source files

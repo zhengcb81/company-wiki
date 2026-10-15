@@ -1,0 +1,883 @@
+{
+  "schema_version": "du4-table-state-component-acceptance/1",
+  "status": "PASS_COMPONENT_PENDING_NORMAL_PUSH",
+  "intake": {
+    "lanes": [
+      {
+        "lane": "table",
+        "head": "fa1681c0514df4b1896857ff56baa60be5729fc7",
+        "changed_paths": [
+          "docs/plans/du4-table-2026-10-15/INTERFACES.md",
+          "docs/plans/du4-table-2026-10-15/card.md",
+          "docs/plans/du4-table-2026-10-15/findings.md",
+          "docs/plans/du4-table-2026-10-15/fixtures/hk-table-observation.json.gz",
+          "docs/plans/du4-table-2026-10-15/fixtures/manifest.json",
+          "docs/plans/du4-table-2026-10-15/handoff.json",
+          "docs/plans/du4-table-2026-10-15/handoff.md",
+          "docs/plans/du4-table-2026-10-15/progress.md",
+          "docs/plans/du4-table-2026-10-15/references/implementation-brief.md",
+          "docs/plans/du4-table-2026-10-15/results/import-check.log",
+          "docs/plans/du4-table-2026-10-15/results/mypy-final.log",
+          "docs/plans/du4-table-2026-10-15/results/pytest-final.log",
+          "docs/plans/du4-table-2026-10-15/results/real-packet-bindings-report.json",
+          "docs/plans/du4-table-2026-10-15/results/red-1-import-failure.log",
+          "docs/plans/du4-table-2026-10-15/results/red-2-semantic-failure.log",
+          "docs/plans/du4-table-2026-10-15/results/ruff-final.log",
+          "docs/plans/du4-table-2026-10-15/task_plan.md",
+          "src/company_wiki/document_understanding/table_measurements/__init__.py",
+          "src/company_wiki/document_understanding/table_measurements/_labels.py",
+          "src/company_wiki/document_understanding/table_measurements/_periods.py",
+          "src/company_wiki/document_understanding/table_measurements/bindings.py",
+          "tests/unit/du4_table_measurements/builders.py",
+          "tests/unit/du4_table_measurements/conftest.py",
+          "tests/unit/du4_table_measurements/real_packet.py",
+          "tests/unit/du4_table_measurements/report_real_packet.py",
+          "tests/unit/du4_table_measurements/test_1_semantic_columns_periods.py",
+          "tests/unit/du4_table_measurements/test_2_merged_and_unknown_slots.py",
+          "tests/unit/du4_table_measurements/test_3_headers_units_scope.py",
+          "tests/unit/du4_table_measurements/test_4_refs_budget_stability.py",
+          "tests/unit/du4_table_measurements/test_5_real_hk_packet.py",
+          "tests/unit/du4_table_measurements/test_6_holdout_multi_table.py"
+        ],
+        "scope_valid": true,
+        "fixtures": [
+          {
+            "path": "docs/plans/du4-table-2026-10-15/fixtures/hk-table-observation.json.gz",
+            "declared_sha256": "6f3ce02a485572debf61277b27adf428601eeeb3507e8b63439e1ec8c1e25571",
+            "worktree_sha256": "6f3ce02a485572debf61277b27adf428601eeeb3507e8b63439e1ec8c1e25571",
+            "git_blob_sha256": "6f3ce02a485572debf61277b27adf428601eeeb3507e8b63439e1ec8c1e25571",
+            "worktree_matches": true,
+            "blob_matches": true
+          },
+          {
+            "path": "tests/unit/du4_table_measurements/builders.py",
+            "declared_sha256": "d10f964888f2189b9950b5c359d78e3ed2d6978ba55d2ea52dd3139b7ff2dd13",
+            "worktree_sha256": "d10f964888f2189b9950b5c359d78e3ed2d6978ba55d2ea52dd3139b7ff2dd13",
+            "git_blob_sha256": "d10f964888f2189b9950b5c359d78e3ed2d6978ba55d2ea52dd3139b7ff2dd13",
+            "worktree_matches": true,
+            "blob_matches": true
+          },
+          {
+            "path": "tests/unit/du4_table_measurements/real_packet.py",
+            "declared_sha256": "acf8c5d326d00ded1d0aefb40cba2f64e549eb5b683367983c10224437e74aae",
+            "worktree_sha256": "acf8c5d326d00ded1d0aefb40cba2f64e549eb5b683367983c10224437e74aae",
+            "git_blob_sha256": "acf8c5d326d00ded1d0aefb40cba2f64e549eb5b683367983c10224437e74aae",
+            "worktree_matches": true,
+            "blob_matches": true
+          }
+        ],
+        "author_tree_modified": false
+      },
+      {
+        "lane": "state",
+        "head": "284eea600764e0dfe98270c364c9c6cd2c095478",
+        "changed_paths": [
+          "docs/plans/du4-state-2026-10-15/INTERFACES.md",
+          "docs/plans/du4-state-2026-10-15/card.md",
+          "docs/plans/du4-state-2026-10-15/findings.md",
+          "docs/plans/du4-state-2026-10-15/fixtures/cn-ir-observation.json",
+          "docs/plans/du4-state-2026-10-15/fixtures/manifest.json",
+          "docs/plans/du4-state-2026-10-15/handoff.json",
+          "docs/plans/du4-state-2026-10-15/handoff.md",
+          "docs/plans/du4-state-2026-10-15/progress.md",
+          "docs/plans/du4-state-2026-10-15/references/operating_state_admission_implementation.md",
+          "docs/plans/du4-state-2026-10-15/results/final-run.txt",
+          "docs/plans/du4-state-2026-10-15/results/red-run.txt",
+          "docs/plans/du4-state-2026-10-15/results/static-checks.txt",
+          "docs/plans/du4-state-2026-10-15/task_plan.md",
+          "src/company_wiki/document_understanding/operating_states/__init__.py",
+          "src/company_wiki/document_understanding/operating_states/patterns.py",
+          "src/company_wiki/document_understanding/operating_states/relations.py",
+          "src/company_wiki/document_understanding/operating_states/text_view.py",
+          "tests/unit/du4_operating_states/conftest.py",
+          "tests/unit/du4_operating_states/helpers.py",
+          "tests/unit/du4_operating_states/test_a_real_observation.py",
+          "tests/unit/du4_operating_states/test_b_synthetic_specs.py",
+          "tests/unit/du4_operating_states/test_c_contract.py"
+        ],
+        "scope_valid": true,
+        "fixtures": [
+          {
+            "path": "docs/plans/du4-state-2026-10-15/fixtures/cn-ir-observation.json",
+            "declared_sha256": "f70cc6f4017bea976ea843acfc4061e96cf718e9abf25977791d62b5bfba086a",
+            "worktree_sha256": "f70cc6f4017bea976ea843acfc4061e96cf718e9abf25977791d62b5bfba086a",
+            "git_blob_sha256": "d71de3f1d5c3f8800679a72b1a24d1277635a19ea47633803009ce0b764c0ae2",
+            "worktree_matches": true,
+            "blob_matches": false
+          }
+        ],
+        "author_tree_modified": false
+      }
+    ],
+    "supplier_calls": 0
+  },
+  "independent_review": {
+    "schema_version": "independent-du4-root-final-review/1",
+    "reviewer": "attribution_release_review",
+    "date": "2026-10-15",
+    "status": "PASS_COMPONENT",
+    "remaining_blocking_findings": [],
+    "closed_findings": [
+      "T1 interpretation scope and native header quality",
+      "T2 period role binding",
+      "T3 compatible unit dimensions",
+      "T4 actual bounded indexing",
+      "S1 major qualifier/modal/role common causes",
+      "S2 exact prefix offsets",
+      "S3 actual bounded preparation"
+    ],
+    "nonblocking_findings": [
+      {
+        "priority": 3,
+        "id": "STATE-QUALIFICATION-AUX-OBJECT",
+        "description": "Existing relative-party sample still labels auxiliary 获 as object; main party/issuer and modal errors fixed",
+        "root_notified": true,
+        "future_fix": "drop unknown object or recognize acquisition auxiliary at common qualification valency"
+      }
+    ],
+    "independent_execution": {
+      "command": "final-candidate-probe.py table and state",
+      "asserted_result_groups": 27,
+      "source": "ROOT/src forced imports",
+      "entire_suite_rerun": false
+    },
+    "root_evidence": {
+      "two_components": {
+        "passed": 164,
+        "seconds": 3.38
+      },
+      "ruff_mypy_eight_sources": "PASS_REPORTED_BY_ROOT",
+      "three_packages_git_boundary_251": "IN_PROGRESS_AT_REPORT; NOT_DECLARED_PASS",
+      "independently_reexecuted": false
+    },
+    "source_sha256": {
+      "src/company_wiki/document_understanding/table_measurements/__init__.py": "0e70cabe032244817ae363f6938fa6156fe6efaa4d17a981308db457b78cce21",
+      "src/company_wiki/document_understanding/table_measurements/bindings.py": "01a88a0b1ec14d70b95df584a9b8b62b8842c7d9c87e738803a754e7c2295925",
+      "src/company_wiki/document_understanding/table_measurements/_periods.py": "12a63d328cce74b4e7f532bfedf83d81e88fd8d238aef8b64dcd8dffd1b387c9",
+      "src/company_wiki/document_understanding/table_measurements/_labels.py": "229687a5b73f0ae088f4d21755a161b5e21df62da3d23e7cce30ae44fc10ee78",
+      "src/company_wiki/document_understanding/operating_states/__init__.py": "4e79edc05e6b67db3448a4c0a6f356a7f24eef1a800295f30ab7c28dc9c71c65",
+      "src/company_wiki/document_understanding/operating_states/relations.py": "c32a58bbc29b85d97d2b6cdde27fed754c8717a6be9ab700c7d59ed5376329a5",
+      "src/company_wiki/document_understanding/operating_states/patterns.py": "038eaa2fe63353f54acc51686ecaae81bb89e2451e21f726865d65243397c53a",
+      "src/company_wiki/document_understanding/operating_states/text_view.py": "eb1b71bdb5d4f13af6d901ec4cb4f472181acfa8e434d9766b5c23710667e03e"
+    },
+    "test_sha256": {
+      "tests/unit/du4_table_measurements/test_root_boundaries.py": "d0baf6896646404a28006b3ffd277330652063261fae2d5211ed757f7e13fe25",
+      "tests/unit/du4_operating_states/test_root_boundaries.py": "c2c421fa30b5b6e6807385a666e561492e00a3383f83bd62288a4ee1732cc4ad"
+    },
+    "api_calls": 0,
+    "original_reads": 0,
+    "source_test_pwf_config_git_author_writes": 0,
+    "production_wiring": "NOT_RUN_NOT_ESTABLISHED",
+    "real_document_quality": "NOT_RUN_NOT_ESTABLISHED",
+    "artifacts": {
+      "final-handoff.md": {
+        "bytes": 5691,
+        "sha256": "7ed51d28278326cabe541eef6de48e62db64107c34da71af44523a8ccc2429e8"
+      },
+      "final-candidate-probe.py": {
+        "bytes": 7539,
+        "sha256": "159e0a9eff9265f9e3a96fd05eaa4aa30586bfdd56c733f33305ce63b14399e0"
+      },
+      "independent-final-checks.json": {
+        "bytes": 1432,
+        "sha256": "e5e89baae6c7128087df0dae0c5d7c4b3632ad5ddeafacafc57fc811e7c2687b"
+      },
+      "table-final-candidate-results.json": {
+        "bytes": 12873,
+        "sha256": "ed5b357b62fcbc7717573bf0e21ed7ce8912864852990291e18b9a7a2a4354d3"
+      },
+      "state-final-candidate-results.json": {
+        "bytes": 31227,
+        "sha256": "4b1232c92b308409551a6b355677d50c92dc811dcef2c2820d8e053abb49bf31"
+      },
+      "handoff.md": {
+        "bytes": 11411,
+        "sha256": "859d3fd57d462addb8b8aa2005b37351640784c0db6218c5373ce1b036ce2042"
+      },
+      "handoff.json": {
+        "bytes": 4345,
+        "sha256": "2af759c7f5dba2911064dcee202bdafd357f2abe9162c3cb948cef6138ad90f4"
+      },
+      "table-probe-results.json": {
+        "bytes": 7469,
+        "sha256": "28bc7942729b83d268832050322c33f21e6df7868f42bf768cb05f6cb453edfa"
+      },
+      "state-probe-results.json": {
+        "bytes": 13275,
+        "sha256": "cde1b682bd6e1151818bbd0cf7ce2828ae60c2deba2bdc53b05b9ff6b179a7e9"
+      },
+      "state-review-round1.md": {
+        "bytes": 3085,
+        "sha256": "b88a2308b7e82e8b5e1feaf78ff1bb3aa18a18310e16056d8bac94273e290b8d"
+      },
+      "state-review-round1.json": {
+        "bytes": 1576,
+        "sha256": "775ef2fe848a74c2e3512003978213aee7c7af1df58084e6f417d7d21d2b15b1"
+      },
+      "state-review-round1-results.json": {
+        "bytes": 25094,
+        "sha256": "acf28b881157525e3ca556e1d8b974b9d71fec5d7126a93379f88df5761487d6"
+      },
+      "candidate-review-round2.md": {
+        "bytes": 4020,
+        "sha256": "b66c9de3dfce948b48b352b0d659afdd7b2fa72307e62ffaa33ad7e9d29203ab"
+      },
+      "candidate-review-round2.json": {
+        "bytes": 1291,
+        "sha256": "c8e9540c02d7e54b8a12f441b386f8e2d8eddd0e74bc2697dd679b35fbe1ffcb"
+      },
+      "table-review-round2-results.json": {
+        "bytes": 13110,
+        "sha256": "cc667945b00ed8f1f252b43ffcc883e56de2812ecd7dcbf6f27a9667b32c4066"
+      },
+      "state-review-round2-results.json": {
+        "bytes": 30740,
+        "sha256": "bce178e47f68791391b2450894e7d2019fd68ff9ee9ba0265ee0d5b3026211df"
+      }
+    }
+  },
+  "independent_aux_followup": {
+    "schema_version": "independent-du4-root-aux-final/1",
+    "reviewer": "attribution_release_review",
+    "date": "2026-10-15",
+    "status": "PASS_COMPONENT",
+    "closed_finding": "STATE-QUALIFICATION-AUX-OBJECT",
+    "remaining_blocking_findings": [],
+    "remaining_nonblocking_findings": [],
+    "previous_final_report_preserved": true,
+    "independent_execution": {
+      "source": "ROOT/src forced imports",
+      "existing_samples": 2,
+      "assertions": "PASS",
+      "prior_27_groups_not_rerun_on_last_grammar": true
+    },
+    "root_evidence": {
+      "three_packages_git_boundary": {
+        "passed": 251,
+        "seconds": 6.42
+      },
+      "ruff_mypy_eight_sources": "PASS_REPORTED_BY_ROOT",
+      "independently_reexecuted": false
+    },
+    "source_test_sha256": {
+      "src/company_wiki/document_understanding/table_measurements/__init__.py": "0e70cabe032244817ae363f6938fa6156fe6efaa4d17a981308db457b78cce21",
+      "src/company_wiki/document_understanding/table_measurements/bindings.py": "01a88a0b1ec14d70b95df584a9b8b62b8842c7d9c87e738803a754e7c2295925",
+      "src/company_wiki/document_understanding/table_measurements/_periods.py": "12a63d328cce74b4e7f532bfedf83d81e88fd8d238aef8b64dcd8dffd1b387c9",
+      "src/company_wiki/document_understanding/table_measurements/_labels.py": "229687a5b73f0ae088f4d21755a161b5e21df62da3d23e7cce30ae44fc10ee78",
+      "src/company_wiki/document_understanding/operating_states/__init__.py": "4e79edc05e6b67db3448a4c0a6f356a7f24eef1a800295f30ab7c28dc9c71c65",
+      "src/company_wiki/document_understanding/operating_states/relations.py": "c32a58bbc29b85d97d2b6cdde27fed754c8717a6be9ab700c7d59ed5376329a5",
+      "src/company_wiki/document_understanding/operating_states/patterns.py": "038eaa2fe63353f54acc51686ecaae81bb89e2451e21f726865d65243397c53a",
+      "src/company_wiki/document_understanding/operating_states/text_view.py": "eb1b71bdb5d4f13af6d901ec4cb4f472181acfa8e434d9766b5c23710667e03e",
+      "tests/unit/du4_table_measurements/test_root_boundaries.py": "d0baf6896646404a28006b3ffd277330652063261fae2d5211ed757f7e13fe25",
+      "tests/unit/du4_operating_states/test_root_boundaries.py": "c2c421fa30b5b6e6807385a666e561492e00a3383f83bd62288a4ee1732cc4ad",
+      "tests/unit/du4_operating_states/test_b_synthetic_specs.py": "ef5bae289aa3f7787988b2426b596a6a0da7d0f0c996cf3cddc8fe47dd270ffd"
+    },
+    "api_calls": 0,
+    "original_reads": 0,
+    "source_test_pwf_config_git_author_writes": 0,
+    "production_wiring": "NOT_RUN_NOT_ESTABLISHED",
+    "real_document_quality": "NOT_RUN_NOT_ESTABLISHED",
+    "artifacts": {
+      "aux-final-handoff.md": {
+        "bytes": 2211,
+        "sha256": "dce838fe5e050be19c40d9b085ff6d7e7c8de0efd5a90fd56e9b94639678cf54"
+      },
+      "aux-final-probe-results.json": {
+        "bytes": 6499,
+        "sha256": "e2748edc66628f307982e1e7e113fd638b4536a9762ac7effe34e13bd8a4a5d7"
+      },
+      "relative-aux-final.json": {
+        "bytes": 2728,
+        "sha256": "7c392ab847e84f034085bed26b24fb322f160a3cbd0fbf40f6fa98b789e2c4b5"
+      },
+      "final-handoff.md": {
+        "bytes": 5691,
+        "sha256": "7ed51d28278326cabe541eef6de48e62db64107c34da71af44523a8ccc2429e8"
+      },
+      "final-handoff.json": {
+        "bytes": 5521,
+        "sha256": "e2924e6f0421ad0f129dffcb5c99f7d4b9e06f6de9515af5771c8cf0b3c3aba3"
+      },
+      "independent-final-checks.json": {
+        "bytes": 1432,
+        "sha256": "e5e89baae6c7128087df0dae0c5d7c4b3632ad5ddeafacafc57fc811e7c2687b"
+      },
+      "table-final-candidate-results.json": {
+        "bytes": 12873,
+        "sha256": "ed5b357b62fcbc7717573bf0e21ed7ce8912864852990291e18b9a7a2a4354d3"
+      },
+      "state-final-candidate-results.json": {
+        "bytes": 31227,
+        "sha256": "4b1232c92b308409551a6b355677d50c92dc811dcef2c2820d8e053abb49bf31"
+      },
+      "handoff.md": {
+        "bytes": 11411,
+        "sha256": "859d3fd57d462addb8b8aa2005b37351640784c0db6218c5373ce1b036ce2042"
+      },
+      "handoff.json": {
+        "bytes": 4345,
+        "sha256": "2af759c7f5dba2911064dcee202bdafd357f2abe9162c3cb948cef6138ad90f4"
+      },
+      "candidate-review-round2.md": {
+        "bytes": 4020,
+        "sha256": "b66c9de3dfce948b48b352b0d659afdd7b2fa72307e62ffaa33ad7e9d29203ab"
+      },
+      "candidate-review-round2.json": {
+        "bytes": 1291,
+        "sha256": "c8e9540c02d7e54b8a12f441b386f8e2d8eddd0e74bc2697dd679b35fbe1ffcb"
+      }
+    }
+  },
+  "author_replay": {
+    "table": {
+      "passed": 36,
+      "seconds": 0.89
+    },
+    "state": {
+      "passed": 90,
+      "seconds": 3.25
+    }
+  },
+  "root_red": {
+    "initial": 23,
+    "state_scope_round2": 4,
+    "table_unit_period_round2": 3,
+    "last_review": 6,
+    "qualification_aux": 1
+  },
+  "root_final": {
+    "passed": 251,
+    "seconds": 6.42,
+    "includes_form_and_git": true
+  },
+  "static": {
+    "ruff": "PASS: both source and test packages",
+    "mypy": "PASS: 8 source files"
+  },
+  "source_sha256": {
+    "src/company_wiki/document_understanding/operating_states/patterns.py": "038eaa2fe63353f54acc51686ecaae81bb89e2451e21f726865d65243397c53a",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "c32a58bbc29b85d97d2b6cdde27fed754c8717a6be9ab700c7d59ed5376329a5",
+    "src/company_wiki/document_understanding/operating_states/text_view.py": "eb1b71bdb5d4f13af6d901ec4cb4f472181acfa8e434d9766b5c23710667e03e",
+    "src/company_wiki/document_understanding/operating_states/__init__.py": "4e79edc05e6b67db3448a4c0a6f356a7f24eef1a800295f30ab7c28dc9c71c65",
+    "src/company_wiki/document_understanding/table_measurements/bindings.py": "01a88a0b1ec14d70b95df584a9b8b62b8842c7d9c87e738803a754e7c2295925",
+    "src/company_wiki/document_understanding/table_measurements/_labels.py": "229687a5b73f0ae088f4d21755a161b5e21df62da3d23e7cce30ae44fc10ee78",
+    "src/company_wiki/document_understanding/table_measurements/_periods.py": "12a63d328cce74b4e7f532bfedf83d81e88fd8d238aef8b64dcd8dffd1b387c9",
+    "src/company_wiki/document_understanding/table_measurements/__init__.py": "0e70cabe032244817ae363f6938fa6156fe6efaa4d17a981308db457b78cce21"
+  },
+  "fixture_transport": "STATE exact observed CRLF SHA retained; original manifest unchanged",
+  "work_semantics": "reserve variable-length indexing and text/scans before work; preserve determined prefix; same caller WorkBudget",
+  "sparse_columns": "only native observed columns; absent intervals diagnostic; no dense invented columns",
+  "units": "closest scope per dimension; compatible currency/scale from exact original refs; no conversion",
+  "form_publication": {
+    "head": "cbfe3e7f780c349dc1ded212571f1a8e3a5e6691",
+    "ci": 38804974095,
+    "conclusion": "success"
+  },
+  "form_closure": {
+    "head": "de6b46606ae4ee5e1fbc307f76b7949a7be7999f",
+    "passed": 148,
+    "seconds": 26.54,
+    "ci": "docs-only query returned no workflows"
+  },
+  "production_wiring": "NOT_RUN",
+  "real_supplier_summary": "NOT_RUN",
+  "v4_runtime": "NOT_IMPLEMENTED",
+  "default_selector": "0.8.0",
+  "supplier_calls": 0,
+  "author_worktree_modified": false,
+  "production_config_unchanged": true,
+  "test_temp_removed": true,
+  "original_documents_modified": 0,
+  "archive": {
+    "path": "docs/plans/document-understanding-2026-10-13/common-root-quality-evidence/du4-table-state-receipts.zip",
+    "bytes": 133041,
+    "sha256": "623da18fd72481efba7d2b7de14350d5624cdfb6ceb922558e2922cbb457d653",
+    "members": [
+      {
+        "name": "du4-form-closure-push/ci.json",
+        "bytes": 166,
+        "sha256": "b7a125c0a192a140bbcdaaee07a5489814f9c187b8055d79e2fe85fd955b0373"
+      },
+      {
+        "name": "du4-form-closure-push/receipt.json",
+        "bytes": 187,
+        "sha256": "466e84bc11c303381577601d18c6cd37a2eef9c4550ed0e7e8dd0a7bceab5360"
+      },
+      {
+        "name": "du4-form-closure-push/stderr.log",
+        "bytes": 89,
+        "sha256": "890a2dfdba407b2155638ffa8329687deedeae2d79a19263ec94d6d08c21d284"
+      },
+      {
+        "name": "du4-form-closure-push/stdout.log",
+        "bytes": 240,
+        "sha256": "aa4d068129aa85e31bf910cf1f51f6a08465575ae856e53dee865d01b25aaebe"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/aux-final-handoff.json",
+        "bytes": 4348,
+        "sha256": "a818f5b07c81ac713b3ec0dff65d67077fb11cf1c2f6d8ff01931cf63e895bb3"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/aux-final-handoff.md",
+        "bytes": 2211,
+        "sha256": "dce838fe5e050be19c40d9b085ff6d7e7c8de0efd5a90fd56e9b94639678cf54"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/aux-final-probe-results.json",
+        "bytes": 6499,
+        "sha256": "e2748edc66628f307982e1e7e113fd638b4536a9762ac7effe34e13bd8a4a5d7"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/candidate-review-round2.json",
+        "bytes": 1291,
+        "sha256": "c8e9540c02d7e54b8a12f441b386f8e2d8eddd0e74bc2697dd679b35fbe1ffcb"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/candidate-review-round2.md",
+        "bytes": 4020,
+        "sha256": "b66c9de3dfce948b48b352b0d659afdd7b2fa72307e62ffaa33ad7e9d29203ab"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/final-candidate-probe.py",
+        "bytes": 7539,
+        "sha256": "159e0a9eff9265f9e3a96fd05eaa4aa30586bfdd56c733f33305ce63b14399e0"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/final-handoff.json",
+        "bytes": 5521,
+        "sha256": "e2924e6f0421ad0f129dffcb5c99f7d4b9e06f6de9515af5771c8cf0b3c3aba3"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/final-handoff.md",
+        "bytes": 5691,
+        "sha256": "7ed51d28278326cabe541eef6de48e62db64107c34da71af44523a8ccc2429e8"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/handoff.json",
+        "bytes": 4345,
+        "sha256": "2af759c7f5dba2911064dcee202bdafd357f2abe9162c3cb948cef6138ad90f4"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/handoff.md",
+        "bytes": 11411,
+        "sha256": "859d3fd57d462addb8b8aa2005b37351640784c0db6218c5373ce1b036ce2042"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/independent-final-checks.json",
+        "bytes": 1432,
+        "sha256": "e5e89baae6c7128087df0dae0c5d7c4b3632ad5ddeafacafc57fc811e7c2687b"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/probe.py",
+        "bytes": 5745,
+        "sha256": "b92549aa8b0bc1b180ee1c100f853853a10b66b460aabd34eaf7469a028bd1da"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/relative-aux-final.json",
+        "bytes": 2728,
+        "sha256": "7c392ab847e84f034085bed26b24fb322f160a3cbd0fbf40f6fa98b789e2c4b5"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/state-final-candidate-results.json",
+        "bytes": 31227,
+        "sha256": "4b1232c92b308409551a6b355677d50c92dc811dcef2c2820d8e053abb49bf31"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/state-final-probe-results.json",
+        "bytes": 25094,
+        "sha256": "acf28b881157525e3ca556e1d8b974b9d71fec5d7126a93379f88df5761487d6"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/state-final-probe.py",
+        "bytes": 6448,
+        "sha256": "7433dbd50256b1835669bc524fd2d47f2d256bbaec0676549538230f2d839ef2"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/state-probe-results.json",
+        "bytes": 13275,
+        "sha256": "cde1b682bd6e1151818bbd0cf7ce2828ae60c2deba2bdc53b05b9ff6b179a7e9"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/state-review-round1-results.json",
+        "bytes": 25094,
+        "sha256": "acf28b881157525e3ca556e1d8b974b9d71fec5d7126a93379f88df5761487d6"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/state-review-round1.json",
+        "bytes": 1576,
+        "sha256": "775ef2fe848a74c2e3512003978213aee7c7af1df58084e6f417d7d21d2b15b1"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/state-review-round1.md",
+        "bytes": 3085,
+        "sha256": "b88a2308b7e82e8b5e1feaf78ff1bb3aa18a18310e16056d8bac94273e290b8d"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/state-review-round2-results.json",
+        "bytes": 30740,
+        "sha256": "bce178e47f68791391b2450894e7d2019fd68ff9ee9ba0265ee0d5b3026211df"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/table-final-candidate-results.json",
+        "bytes": 12873,
+        "sha256": "ed5b357b62fcbc7717573bf0e21ed7ce8912864852990291e18b9a7a2a4354d3"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/table-probe-results.json",
+        "bytes": 7469,
+        "sha256": "28bc7942729b83d268832050322c33f21e6df7868f42bf768cb05f6cb453edfa"
+      },
+      {
+        "name": "du4-table-state-acceptance/independent-review/table-review-round2-results.json",
+        "bytes": 13110,
+        "sha256": "cc667945b00ed8f1f252b43ffcc883e56de2812ecd7dcbf6f27a9667b32c4066"
+      },
+      {
+        "name": "du4-table-state-acceptance/intake.json",
+        "bytes": 6011,
+        "sha256": "b92cfb43bb9583dce4df7e342cdd09488d69781c2e3417a7b016dd9f29d5104b"
+      },
+      {
+        "name": "du4-table-state-acceptance/state/author-junit.xml",
+        "bytes": 13659,
+        "sha256": "875a5747f7764755b762856bf18b7948552077721a39abb4b9ff50dc973dc60f"
+      },
+      {
+        "name": "du4-table-state-acceptance/state/author-receipt.json",
+        "bytes": 236,
+        "sha256": "a5bcd0c297bab54a6b7ae88c9c9e960d890e6e4af15bc181cc4c50533bf52172"
+      },
+      {
+        "name": "du4-table-state-acceptance/state/author-stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "du4-table-state-acceptance/state/author-stdout.log",
+        "bytes": 1614,
+        "sha256": "aa6478a536d7409cfb9328fa13448eb9a1fc6acee9bab733faa68a94cd3e9950"
+      },
+      {
+        "name": "du4-table-state-acceptance/table/author-junit.xml",
+        "bytes": 6147,
+        "sha256": "c0c9d4fd194d5e7c8e5d40eb3d5c3a30db9dafbb412fdd83bb5e35f7266bfccf"
+      },
+      {
+        "name": "du4-table-state-acceptance/table/author-receipt.json",
+        "bytes": 236,
+        "sha256": "5016536828798b4616cbbc12605293f196bcfa1d68ec30e3ec47f81815891e0f"
+      },
+      {
+        "name": "du4-table-state-acceptance/table/author-stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "du4-table-state-acceptance/table/author-stdout.log",
+        "bytes": 2100,
+        "sha256": "0bfbbf0f552bb33b924b84d7d509dcf7a5efc269a6091344db94edfaf10c1be4"
+      },
+      {
+        "name": "model-projection-root/du4-all-final-frozen/junit.xml",
+        "bytes": 38736,
+        "sha256": "1e32fb2685a3040cea7a419d9751d2f7f31c77c134b4bd0e7db56ad11543e424"
+      },
+      {
+        "name": "model-projection-root/du4-all-final-frozen/receipt.json",
+        "bytes": 370,
+        "sha256": "abc44ea1e5dc0004cb3d152cfddb99554591ee0726a45a4c7068db3dd6030895"
+      },
+      {
+        "name": "model-projection-root/du4-all-final-frozen/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-all-final-frozen/stdout.log",
+        "bytes": 3386,
+        "sha256": "12d31fa198569c79a16f1ff5976f4e5f4d32f42dd2ede52ae7ac127289a1cb44"
+      },
+      {
+        "name": "model-projection-root/du4-final-review-roots-green/junit.xml",
+        "bytes": 26927,
+        "sha256": "45ad59cd489196e3007fd518e05ebaf601a569c971d83e5e6f2432d6f7c6ef2c"
+      },
+      {
+        "name": "model-projection-root/du4-final-review-roots-green/receipt.json",
+        "bytes": 276,
+        "sha256": "f6d322b0229600d677921862a0e4ad89d5de2dafaaba8a3a5065110a1ef4d7d7"
+      },
+      {
+        "name": "model-projection-root/du4-final-review-roots-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-final-review-roots-green/stdout.log",
+        "bytes": 2827,
+        "sha256": "4f8c1e1b1f1caf5375996e894ce42e19afe9966e114381a52431fb71b9a53f92"
+      },
+      {
+        "name": "model-projection-root/du4-qualification-aux-red/junit.xml",
+        "bytes": 1039,
+        "sha256": "a76116707678ffc410522d1d2e068249e0c82046bea23e87c4856ef7e913d6eb"
+      },
+      {
+        "name": "model-projection-root/du4-qualification-aux-red/receipt.json",
+        "bytes": 331,
+        "sha256": "23b31428853ef5b47114cbf01446108df22b97c8dd89b7437c3e2ecf7f9ef459"
+      },
+      {
+        "name": "model-projection-root/du4-qualification-aux-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-qualification-aux-red/stdout.log",
+        "bytes": 2118,
+        "sha256": "fced470877d7a907440784c0f0a07b0d28bcb068b849bcd9d8524866bda55691"
+      },
+      {
+        "name": "model-projection-root/du4-state-root-corrected/junit.xml",
+        "bytes": 16638,
+        "sha256": "72080559e6ee5898661eed54a0d1629378d1f4660958279cb7b04976bf800e16"
+      },
+      {
+        "name": "model-projection-root/du4-state-root-corrected/receipt.json",
+        "bytes": 233,
+        "sha256": "31af863444636c88c59e3815abad5b6e50838a42147df8a9ef67d999e354a96c"
+      },
+      {
+        "name": "model-projection-root/du4-state-root-corrected/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-state-root-corrected/stdout.log",
+        "bytes": 1689,
+        "sha256": "eeb5d4259ee8e95a4bd3b8720909dc67192aafc85df80fd575568dfabbc86973"
+      },
+      {
+        "name": "model-projection-root/du4-state-root-first-green/junit.xml",
+        "bytes": 20174,
+        "sha256": "35a63bfc6d81b2627484c53d66cc21fc7a69bac0c98ca533785474e834724474"
+      },
+      {
+        "name": "model-projection-root/du4-state-root-first-green/receipt.json",
+        "bytes": 234,
+        "sha256": "254c4a4fbbb9480689bb453cf461bc3e5e9fedaa5bef86daae2ab8dff77452d6"
+      },
+      {
+        "name": "model-projection-root/du4-state-root-first-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-state-root-first-green/stdout.log",
+        "bytes": 5536,
+        "sha256": "dd810b0a60cda270dd9dc03cfa79b42825c5b87e06c8eb4a2f9df557d926154a"
+      },
+      {
+        "name": "model-projection-root/du4-state-scope-round2-green/junit.xml",
+        "bytes": 18014,
+        "sha256": "42c9267537ae23d711467f9ef740fbea53e5d6f31e2d9ad189837b36ed333113"
+      },
+      {
+        "name": "model-projection-root/du4-state-scope-round2-green/receipt.json",
+        "bytes": 234,
+        "sha256": "a6e733308cb9df48c67af8dd1382c72f987e3a864734cf241f8dde6f40d73b99"
+      },
+      {
+        "name": "model-projection-root/du4-state-scope-round2-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-state-scope-round2-green/stdout.log",
+        "bytes": 2417,
+        "sha256": "5e46232ea4cb72a91a49d8a1b831b38e63f69e9ece4914790cfa524f57856598"
+      },
+      {
+        "name": "model-projection-root/du4-state-scope-round2-red/junit.xml",
+        "bytes": 6514,
+        "sha256": "a216b7b99bdf86f036e4d22b25705ea85a429d04f39fd5b50c61ef9b898b6301"
+      },
+      {
+        "name": "model-projection-root/du4-state-scope-round2-red/receipt.json",
+        "bytes": 258,
+        "sha256": "ec3545689ab2772bab68f2fc5252d913d61f04dd79747cda9fc179c054ab3b0f"
+      },
+      {
+        "name": "model-projection-root/du4-state-scope-round2-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-state-scope-round2-red/stdout.log",
+        "bytes": 4624,
+        "sha256": "1d797da90d48c7cea31566d4d36afc2f8f518e6965ab5adadee1219c49c136e5"
+      },
+      {
+        "name": "model-projection-root/du4-state-table-final-review-red/junit.xml",
+        "bytes": 10156,
+        "sha256": "f9bf08a6c62d56234d9b09b8d63229562d227d56d25b885f8d387e23343a36be"
+      },
+      {
+        "name": "model-projection-root/du4-state-table-final-review-red/receipt.json",
+        "bytes": 324,
+        "sha256": "9baba55687113cc872573710b66bdca07c9b41b8da81f3083dae59873a08c315"
+      },
+      {
+        "name": "model-projection-root/du4-state-table-final-review-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-state-table-final-review-red/stdout.log",
+        "bytes": 5037,
+        "sha256": "09d8bfebebe70298e2bce772489146717136bef9508c65b4abc48d6a7de06b9a"
+      },
+      {
+        "name": "model-projection-root/du4-table-report-cli/junit.xml",
+        "bytes": 411,
+        "sha256": "6c23f7e51870cc750ecf076edf85c64ffc985fcca3053a196dbe7747c951ad16"
+      },
+      {
+        "name": "model-projection-root/du4-table-report-cli/receipt.json",
+        "bytes": 260,
+        "sha256": "3795ea307ec3fe198437b4785c6c6b885a7e45a3ef34191fea8d8cf2b1e43d74"
+      },
+      {
+        "name": "model-projection-root/du4-table-report-cli/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-table-report-cli/stdout.log",
+        "bytes": 1358,
+        "sha256": "cbc5b874c8cc7ba0543fea7251cd0868d0e070c20e98ac32a85566fcd42e4963"
+      },
+      {
+        "name": "model-projection-root/du4-table-root-first-green/junit.xml",
+        "bytes": 7579,
+        "sha256": "2442b91525d72a750d0284897709c170b90b12916756ada933c35b43763e0164"
+      },
+      {
+        "name": "model-projection-root/du4-table-root-first-green/receipt.json",
+        "bytes": 236,
+        "sha256": "73954df4810bf73d44d56411de007be069c603c7de4f0c861b68489dcadf31d8"
+      },
+      {
+        "name": "model-projection-root/du4-table-root-first-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-table-root-first-green/stdout.log",
+        "bytes": 2176,
+        "sha256": "6b7df1e6155bac59ca88c4c9d3c6477b5f49b3c0e6d3fa1870171210b59e170a"
+      },
+      {
+        "name": "model-projection-root/du4-table-state-final-candidate/junit.xml",
+        "bytes": 37992,
+        "sha256": "0d7a710921567884a8b7eca3e0eff01a7636415bba676bebd6df9d20cbaedc67"
+      },
+      {
+        "name": "model-projection-root/du4-table-state-final-candidate/receipt.json",
+        "bytes": 370,
+        "sha256": "b7dcafaa4e9d14e343d167f6b3a0648958aa9a1b9958fe6c21df696c45a6d0d7"
+      },
+      {
+        "name": "model-projection-root/du4-table-state-final-candidate/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-table-state-final-candidate/stdout.log",
+        "bytes": 3397,
+        "sha256": "8a908b2514525b592a715dfa552ae93b1cf7f1f080c2a3f9eaded445a047da56"
+      },
+      {
+        "name": "model-projection-root/du4-table-state-root-red/junit.xml",
+        "bytes": 18794,
+        "sha256": "cd48735362831d08bbd55c852d5ccdb1459013aefc670ab4a966569507ad0fde"
+      },
+      {
+        "name": "model-projection-root/du4-table-state-root-red/receipt.json",
+        "bytes": 324,
+        "sha256": "b8b05a60880bdeca56307f5126d38ca4d707b141b9064c8474eb7826a8ad7620"
+      },
+      {
+        "name": "model-projection-root/du4-table-state-root-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-table-state-root-red/stdout.log",
+        "bytes": 18371,
+        "sha256": "2be69735f0f47f8876081ff5501dde0a0ec3dc5bd7c8f4fc4d4cf76949218e8e"
+      },
+      {
+        "name": "model-projection-root/du4-table-unit-period-round2-red/junit.xml",
+        "bytes": 3835,
+        "sha256": "537bff6b78cc5d097aab4c2a367363862fe703aa307276447760a15e63a95362"
+      },
+      {
+        "name": "model-projection-root/du4-table-unit-period-round2-red/receipt.json",
+        "bytes": 260,
+        "sha256": "8f6f7567856d4447832eb3e195578ed7efde51e237e6587e8b17842ebc4c09cf"
+      },
+      {
+        "name": "model-projection-root/du4-table-unit-period-round2-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-table-unit-period-round2-red/stdout.log",
+        "bytes": 3235,
+        "sha256": "666a49a73e1e72d390e7c6e0c8ff39a175b7374e22a0f912161be34112699432"
+      },
+      {
+        "name": "model-projection-root/du4-three-components-final-after-aux/junit.xml",
+        "bytes": 39972,
+        "sha256": "9b9eda15769692612d5c170a14aeeb7911467a561f1585b97d919773ffe12d09"
+      },
+      {
+        "name": "model-projection-root/du4-three-components-final-after-aux/receipt.json",
+        "bytes": 370,
+        "sha256": "56bf95a0b767a973b22a9543d4f0d8ad93ad1773763023c2f292ed6bf799eaa7"
+      },
+      {
+        "name": "model-projection-root/du4-three-components-final-after-aux/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-three-components-final-after-aux/stdout.log",
+        "bytes": 3564,
+        "sha256": "aba0c1d15554e84dc2abf2521fbff8720930f021697ce21c1bd8fe1ff8f6dcb1"
+      },
+      {
+        "name": "model-projection-root/du4-three-components-frozen-final/junit.xml",
+        "bytes": 39972,
+        "sha256": "84537932d5c1496d9a3917feba7c0e9706b922a44a46e91c892ccc45888b473e"
+      },
+      {
+        "name": "model-projection-root/du4-three-components-frozen-final/receipt.json",
+        "bytes": 370,
+        "sha256": "5ebf0c42e41e263ec30804c73467ce404484acc101bfc0846e28da2d32ffcccc"
+      },
+      {
+        "name": "model-projection-root/du4-three-components-frozen-final/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "model-projection-root/du4-three-components-frozen-final/stdout.log",
+        "bytes": 3561,
+        "sha256": "83488eac9ac80883b6164fa7ff9b22b422cbfd94b3d65ec18171fd94ce4350ca"
+      }
+    ]
+  }
+}

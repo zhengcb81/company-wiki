@@ -1,0 +1,3142 @@
+{
+  "sample_id": "cn-ir",
+  "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万润股份\\raw\\research\\万润股份：投资者关系活动记录表20260515.pdf",
+  "source_before": {
+    "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "size": 153851,
+    "mtime_ns": 1779228233262998600
+  },
+  "parse_count": 1,
+  "formal_selection_count": 1,
+  "model_calls": 0,
+  "supplier_calls": 0,
+  "source_writes": 0,
+  "status": "COMPLETE",
+  "parse_seconds": 0.9485893999990367,
+  "native_units": 302,
+  "page_count": 6,
+  "native_complete": true,
+  "selection_seconds": 0.7891566999969655,
+  "route": {
+    "schema_version": "du-route/1",
+    "profile_id": "investor_qa",
+    "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+    "regime": "cn_exchange",
+    "family": "investor_qa",
+    "subtype": "ir_activity_record",
+    "form_type": "unknown",
+    "confidence": "low",
+    "reasons": [
+      {
+        "code": "QA_STRUCTURE",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:81f54085f3dcbb04fc2712a9baa105d7ed487f1d08dc74860aa232e999d9f5d6",
+          "urn:company-wiki:narrative-unit:sha256:79ae052d3c3b1b9cfc07166912561686d7dd50269a044064bc9f7ebbed09e7f8",
+          "urn:company-wiki:narrative-unit:sha256:a1ffbde6e9bbe2ba609f603af2da203a37b425530549cb2ad8190d5633b4af69",
+          "urn:company-wiki:narrative-unit:sha256:ccec3fef46e1d34fb45e3cb2bce9916280be1691940728cd1a494cce406d22e0",
+          "urn:company-wiki:narrative-unit:sha256:3104e0eb99bd455b8acb899a9ef4966b91aee446bfbe06d63828fa703edad955",
+          "urn:company-wiki:narrative-unit:sha256:fc5e0573c717fbbdceb9e47387373588f5d075805959028f2031d877a6b05683",
+          "urn:company-wiki:narrative-unit:sha256:858a0e3cb1e96face9334e2a8159123bee278ad749d55531088dd9f42d8fae6e",
+          "urn:company-wiki:narrative-unit:sha256:98dd3e299b37caed211afc0094ffdf1e91f8696299f06a4969891ddc465b99bb",
+          "urn:company-wiki:narrative-unit:sha256:489d4ff2dfd12e5c2c0ef1fd4d050328bc5c168741c0a1fe6d0d72d0bb824975",
+          "urn:company-wiki:narrative-unit:sha256:7da34c06165e2e821b73b6cc13a533d1620a25b7a223986c49fbd3ea93d7a73f",
+          "urn:company-wiki:narrative-unit:sha256:9fae4a62d2a0419ded70b6da3695fab583bec869016548e89ea13b1d545ba53d",
+          "urn:company-wiki:narrative-unit:sha256:4f1ead3806dca97b6049b922b63a943014bfe230882b8833fd5e0054435f3847",
+          "urn:company-wiki:narrative-unit:sha256:dc7090c91b1c6d6dffa099a3e350b35058f094508593c67bfaebaaad7739a107",
+          "urn:company-wiki:narrative-unit:sha256:b842bc0e18cecf6d19eb167bdc004f096764af46d5724c3a44574fd1526a0bf3",
+          "urn:company-wiki:narrative-unit:sha256:85906428f8861de7e3cfaa96b4143b85e4d406052be45d0099d0d88b17b5613c",
+          "urn:company-wiki:narrative-unit:sha256:24593cfb810fddb08020a80ee648eb32d7a5a62e41ed7691662ba8ccef976ae6",
+          "urn:company-wiki:narrative-unit:sha256:b9667d647093ec56170e34da626b00c8faab5d2c022151998d374bb29e1fd7a3",
+          "urn:company-wiki:narrative-unit:sha256:226ec82f1f57fcf5a010b962151d0ed917d9f9d032d7363921014e265bd3d6f1",
+          "urn:company-wiki:narrative-unit:sha256:a7354f1e0aa3a5186afe7b3de8c19633ce61c90b96f6d939a8c766166e95c7fe",
+          "urn:company-wiki:narrative-unit:sha256:94ebf686b3b8f747539111ccb3a3f4c2b93ce555a1e27ed63b94df1a68da7254",
+          "urn:company-wiki:narrative-unit:sha256:b938cdef4ac8a7c259a3b7763fdeb956d2a3bdcc28f24244ae2b0e7d9bcc6a05",
+          "urn:company-wiki:narrative-unit:sha256:10e8067e12f9fc62d18a93ce8991056b997e1ae5711ebe262721a2b3feb2b13a",
+          "urn:company-wiki:narrative-unit:sha256:0a1cb02f43cab8d790cd4db92ebe6dc285e0a9746845ee3e1b511fb83820f9f1",
+          "urn:company-wiki:narrative-unit:sha256:cace5a8cead013787dc73ba5258e4e0ccd80f3168e7f782764ff605c3e180a0c",
+          "urn:company-wiki:narrative-unit:sha256:8831e2558681d528355f35b41306ed7ca18478172dbdde3305af6070673f4239",
+          "urn:company-wiki:narrative-unit:sha256:f0f0958ffebe8b76526379a3f3fcfe5de0695d28767a3bf692f6751d0fa72907",
+          "urn:company-wiki:narrative-unit:sha256:50add9043a9b7fc0cf925ffab5ea5716db9aa7dada4d494ffe6c6ffddc2189d1",
+          "urn:company-wiki:narrative-unit:sha256:2becd46d83066cf1d242655cf604490e6c31a4d08045a8cf9f41cf5d38648b4c",
+          "urn:company-wiki:narrative-unit:sha256:c88a683b584890d74e041c38bdd3086acca0b099463bdc154c0f202c0ab67425",
+          "urn:company-wiki:narrative-unit:sha256:8b2a4b25eb9848dcab33017699cf255b905196667e60fe6f34c0e5b7b26699e7",
+          "urn:company-wiki:narrative-unit:sha256:4bf0eb02861872879a5186cec6d5add78252a29cce0c2cdece5cb7d3f476538d",
+          "urn:company-wiki:narrative-unit:sha256:1f76427132bc91c6355df68665f4606c89046dec6dd78170162b4d724e0ebff7",
+          "urn:company-wiki:narrative-unit:sha256:337dafaee489a6fb9ac4c57aa6c07d2a43e18f213f4e61ea058f5f312b2d2921",
+          "urn:company-wiki:narrative-unit:sha256:38c9b7fa4f78473d4ad60f3831cdea85f78d0cb0cc2de0fc0048700047ec9e06",
+          "urn:company-wiki:narrative-unit:sha256:d30802255ab9ea512f2452214544775123f972810bea02dbfd21da35e0fc1c74",
+          "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+          "urn:company-wiki:narrative-unit:sha256:af780850a3bf69bb1a3be15f2f3547e6e9ce1ac8e626cfc3489d817d5895892c",
+          "urn:company-wiki:narrative-unit:sha256:133817b221d954d655b85b3340ac30814bdb825d1a1cbaa7962784624e4cff7f",
+          "urn:company-wiki:narrative-unit:sha256:0fdf890eb1b56a89a13ff31721c3da760e06435fc236a9d1fdbef97b84a88bda",
+          "urn:company-wiki:narrative-unit:sha256:8d4a847a9c06e4ae0092d22876e02bdfa307d74d57f870347d7fdf82d5a7d10c",
+          "urn:company-wiki:narrative-unit:sha256:482ea42236b2c553d48e13828ed3277514d079182855c3dd46a887fd4997be51",
+          "urn:company-wiki:narrative-unit:sha256:3e4e89c2efb5d5958256c78fb6e85f4d4de1fc91820221d5d2b8467c7de91155",
+          "urn:company-wiki:narrative-unit:sha256:14d6f7c2cb90563157dcea7d74991547d53be6936b49a43221988f55f20e3b9e"
+        ],
+        "detail": "投资者关系问答记录"
+      },
+      {
+        "code": "ROUTE_PROBE_LIMIT",
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:f8a39129eaaa178438233eb3e9283bdb754b961dcc3a196750225db47663f5c0"
+        ],
+        "detail": "探测到预算上限：已探测 200/302 单元、5867 字符"
+      }
+    ],
+    "alternatives": [],
+    "child_routes": [
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:a53b6e1721baacaf41ba985e2d1d3ab013c23ba99fae32cf7f63674d14fcbe12"
+        ],
+        "profile_id": "generic",
+        "reason": "EXTERNAL_ATTACHMENT_NOT_READ"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:81f54085f3dcbb04fc2712a9baa105d7ed487f1d08dc74860aa232e999d9f5d6"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:0378bbc53bbaf28d",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:79ae052d3c3b1b9cfc07166912561686d7dd50269a044064bc9f7ebbed09e7f8"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:5842c119ad81b28f",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:a1ffbde6e9bbe2ba609f603af2da203a37b425530549cb2ad8190d5633b4af69"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:ab450885dd36d43b",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:ccec3fef46e1d34fb45e3cb2bce9916280be1691940728cd1a494cce406d22e0"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:fe3dd6b8bce73d12",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:3104e0eb99bd455b8acb899a9ef4966b91aee446bfbe06d63828fa703edad955"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:4f1a4ddb2277c63a",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:fc5e0573c717fbbdceb9e47387373588f5d075805959028f2031d877a6b05683"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:205fb8c892c6b4de",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:858a0e3cb1e96face9334e2a8159123bee278ad749d55531088dd9f42d8fae6e"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:f69a74f012fb5b22",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:98dd3e299b37caed211afc0094ffdf1e91f8696299f06a4969891ddc465b99bb"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:87c2478f9c6a1f91",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:489d4ff2dfd12e5c2c0ef1fd4d050328bc5c168741c0a1fe6d0d72d0bb824975"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:dec801c7bcd40716",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:7da34c06165e2e821b73b6cc13a533d1620a25b7a223986c49fbd3ea93d7a73f"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:34cfab2022e94084",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:9fae4a62d2a0419ded70b6da3695fab583bec869016548e89ea13b1d545ba53d"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:1f60ed82137f76bb",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:4f1ead3806dca97b6049b922b63a943014bfe230882b8833fd5e0054435f3847"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:53cbd0c9e3c665f6",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:dc7090c91b1c6d6dffa099a3e350b35058f094508593c67bfaebaaad7739a107"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:bf3d152b07c86fe1",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:b842bc0e18cecf6d19eb167bdc004f096764af46d5724c3a44574fd1526a0bf3"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:a755c5d1be57830f",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      },
+      {
+        "unit_ids": [
+          "urn:company-wiki:narrative-unit:sha256:85906428f8861de7e3cfaa96b4143b85e4d406052be45d0099d0d88b17b5613c"
+        ],
+        "profile_id": "investor_qa",
+        "reason": "IN_DOCUMENT_QA_RANGE",
+        "reading_profile_key": "investor_qa:c97b3d202493e165",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3"
+      }
+    ],
+    "disposition_hint": "read",
+    "modifiers": {
+      "extent": "unknown",
+      "revision": "unknown"
+    }
+  },
+  "observation_metadata": {
+    "title": "万润股份：投资者关系活动记录表20260515",
+    "declared_kind": "investor_relations",
+    "mime_type": "application/pdf",
+    "language": "zh",
+    "layout_feature_version": "1.2.0",
+    "native_layout_frontend_version": "pdf-reading-layout/1"
+  },
+  "selected_spans": 38,
+  "selected_chars": 2094,
+  "candidate_count": 38,
+  "final_status": "partial",
+  "graph_complete": true,
+  "withheld_reasons": {
+    "INCOMPLETE_OR_NONSELECTABLE_CONTEXT": 83,
+    "ANSWER_MISSING": 2
+  },
+  "diagnostics": [],
+  "source_integrity_failures": [],
+  "target_units": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:154840790a3b6e47a18fd72879464837792fee0b38902c598284efc9d4181416",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:1/paragraph:28",
+      "text": "高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，",
+      "text_length": 39,
+      "text_sha": "08d02bc293e63e94e17be67c4dd1bee56e0b34058294350c83af64ea0ee375e9",
+      "metadata": {
+        "block_char_end": 39,
+        "block_char_start": 0,
+        "pdf_block": 27
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business"
+        ],
+        "reasons": [
+          "quantified_operating_status"
+        ],
+        "score": 2,
+        "financial_exempt": true
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "business",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m16",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:8b2a4b25eb9848dcab33017699cf255b905196667e60fe6f34c0e5b7b26699e7",
+            "urn:company-wiki:narrative-unit:sha256:154840790a3b6e47a18fd72879464837792fee0b38902c598284efc9d4181416",
+            "urn:company-wiki:narrative-unit:sha256:52374f30e32c1f10b879a023c4e93c7b203c5273dfc2a2f546ec80ed46a783b3",
+            "urn:company-wiki:narrative-unit:sha256:08b1e5035583b198e984127c34e0f35fd2f5c50d30e98267ec3903c740ab2fa4",
+            "urn:company-wiki:narrative-unit:sha256:ffdd090869615f2825120acfd51eee147169973a61e3bc9dd9500fc79d8c6661",
+            "urn:company-wiki:narrative-unit:sha256:0abeb898d3096c747aea895a0bedcac8dc94f0f5bd30147f375eafba8a8efab4",
+            "urn:company-wiki:narrative-unit:sha256:600f125ed36cbe77a1b2e0eb9a0cbadf62d2779ecd716319e606208a75781766",
+            "urn:company-wiki:narrative-unit:sha256:875c528c810428e1321202ff51b646ecbcb8f5cef1909099c8b9336c33a71268"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:8b2a4b25eb9848dcab33017699cf255b905196667e60fe6f34c0e5b7b26699e7",
+            "urn:company-wiki:narrative-unit:sha256:154840790a3b6e47a18fd72879464837792fee0b38902c598284efc9d4181416",
+            "urn:company-wiki:narrative-unit:sha256:52374f30e32c1f10b879a023c4e93c7b203c5273dfc2a2f546ec80ed46a783b3",
+            "urn:company-wiki:narrative-unit:sha256:08b1e5035583b198e984127c34e0f35fd2f5c50d30e98267ec3903c740ab2fa4",
+            "urn:company-wiki:narrative-unit:sha256:ffdd090869615f2825120acfd51eee147169973a61e3bc9dd9500fc79d8c6661",
+            "urn:company-wiki:narrative-unit:sha256:0abeb898d3096c747aea895a0bedcac8dc94f0f5bd30147f375eafba8a8efab4",
+            "urn:company-wiki:narrative-unit:sha256:600f125ed36cbe77a1b2e0eb9a0cbadf62d2779ecd716319e606208a75781766",
+            "urn:company-wiki:narrative-unit:sha256:875c528c810428e1321202ff51b646ecbcb8f5cef1909099c8b9336c33a71268"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m16",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:08b1e5035583b198e984127c34e0f35fd2f5c50d30e98267ec3903c740ab2fa4",
+            "urn:company-wiki:narrative-unit:sha256:0abeb898d3096c747aea895a0bedcac8dc94f0f5bd30147f375eafba8a8efab4",
+            "urn:company-wiki:narrative-unit:sha256:154840790a3b6e47a18fd72879464837792fee0b38902c598284efc9d4181416",
+            "urn:company-wiki:narrative-unit:sha256:52374f30e32c1f10b879a023c4e93c7b203c5273dfc2a2f546ec80ed46a783b3",
+            "urn:company-wiki:narrative-unit:sha256:600f125ed36cbe77a1b2e0eb9a0cbadf62d2779ecd716319e606208a75781766",
+            "urn:company-wiki:narrative-unit:sha256:875c528c810428e1321202ff51b646ecbcb8f5cef1909099c8b9336c33a71268",
+            "urn:company-wiki:narrative-unit:sha256:8b2a4b25eb9848dcab33017699cf255b905196667e60fe6f34c0e5b7b26699e7",
+            "urn:company-wiki:narrative-unit:sha256:ffdd090869615f2825120acfd51eee147169973a61e3bc9dd9500fc79d8c6661"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4bf0eb02861872879a5186cec6d5add78252a29cce0c2cdece5cb7d3f476538d",
+      "kind": "pdf_table_qa_fragment",
+      "role": "management",
+      "locator": "loc:v1/page:1/table:0/row:6/column:1",
+      "text": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。",
+      "text_length": 86,
+      "text_sha": "8ea5c3361a93379e25f8c70cfb372cec912f60b683c0d62a210af1c5af3394c6",
+      "metadata": {
+        "column_index": 1,
+        "qa_group_id": "p1:t0:r6:c1:q1",
+        "qa_state": "answer_paired"
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business"
+        ],
+        "reasons": [
+          "quantified_operating_status"
+        ],
+        "score": 2,
+        "financial_exempt": true
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": false,
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 2,
+        "topics": [
+          "core_business"
+        ],
+        "context_only": false,
+        "value_band": "meaningful_fact",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:18f907616cb57290ca2eea78e48cbb13f9cb8b0162056ae898e85f49542d8297",
+          "urn:company-wiki:narrative-unit:sha256:603ad8283260f05ea15df80a9ba0027c8b75c98a884a0be1423ef4f1294a3223",
+          "urn:company-wiki:narrative-unit:sha256:82b9421a8d6f8c99a72d4aa66fa61f8676aa4712348c36081759894df49fcaab",
+          "urn:company-wiki:narrative-unit:sha256:f5291fbaae9d917a02b3a98fc6a13bf663c0bfc35821ec724152d66f85226888"
+        ]
+      },
+      "selected_original": true,
+      "packages": [
+        {
+          "package_id": "m19",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:f5291fbaae9d917a02b3a98fc6a13bf663c0bfc35821ec724152d66f85226888",
+            "urn:company-wiki:narrative-unit:sha256:4bf0eb02861872879a5186cec6d5add78252a29cce0c2cdece5cb7d3f476538d",
+            "urn:company-wiki:narrative-unit:sha256:603ad8283260f05ea15df80a9ba0027c8b75c98a884a0be1423ef4f1294a3223",
+            "urn:company-wiki:narrative-unit:sha256:82b9421a8d6f8c99a72d4aa66fa61f8676aa4712348c36081759894df49fcaab"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:4bf0eb02861872879a5186cec6d5add78252a29cce0c2cdece5cb7d3f476538d",
+            "urn:company-wiki:narrative-unit:sha256:603ad8283260f05ea15df80a9ba0027c8b75c98a884a0be1423ef4f1294a3223",
+            "urn:company-wiki:narrative-unit:sha256:82b9421a8d6f8c99a72d4aa66fa61f8676aa4712348c36081759894df49fcaab"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:f5291fbaae9d917a02b3a98fc6a13bf663c0bfc35821ec724152d66f85226888",
+            "urn:company-wiki:narrative-unit:sha256:18f907616cb57290ca2eea78e48cbb13f9cb8b0162056ae898e85f49542d8297"
+          ],
+          "completeness": "complete",
+          "diagnostics": []
+        }
+      ],
+      "withheld": []
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:181c50fe91c04f110d8d3bb6c72acff46659fc736adcf523afc65b5365d001de",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:2/paragraph:7",
+      "text": "九目化学主要产品为OLED",
+      "text_length": 13,
+      "text_sha": "44a7d97efde5494e81d03e221fe938a96e0fc6ab3497450efeccffa6f11df43c",
+      "metadata": {
+        "block_char_end": 33,
+        "block_char_start": 20,
+        "pdf_block": 5
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "operating_metrics",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m24",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:1f76427132bc91c6355df68665f4606c89046dec6dd78170162b4d724e0ebff7",
+            "urn:company-wiki:narrative-unit:sha256:b73887ff7fe6d83fae36f135b4879262aa0cb6f6634a054e329bfc7200d1152a",
+            "urn:company-wiki:narrative-unit:sha256:181c50fe91c04f110d8d3bb6c72acff46659fc736adcf523afc65b5365d001de",
+            "urn:company-wiki:narrative-unit:sha256:eff7cb9376894e60d946095839539d5a4c7695828740da6c6e62d4d0c9e8b9b0",
+            "urn:company-wiki:narrative-unit:sha256:d03baf28c5dc031fda6b0d5f46f9774733a04a609c20196216998c1337bfb627",
+            "urn:company-wiki:narrative-unit:sha256:bb3114e4bdbf472d6d7b6c6c04447a8c75476eace87eecf6740e91235b85812c",
+            "urn:company-wiki:narrative-unit:sha256:18f27c005542fe351c117cfc5f556ec7fac466949d18a799d83ffe624ca3ce6c",
+            "urn:company-wiki:narrative-unit:sha256:cf91f93acab1c29864b058706d00d56a9614ab639701e262bf2b615ecda18c15",
+            "urn:company-wiki:narrative-unit:sha256:798aca08c0a60ceedd61a1c11208d5fa3268db50eb57495e3b65a1c56ad4ab70",
+            "urn:company-wiki:narrative-unit:sha256:ef0aaab65530c39659e9f54aeb307a02e6aa372f5a607682cea4790d8b013620",
+            "urn:company-wiki:narrative-unit:sha256:f2b37a7f4a876a860bffe304eb2c8005c6f3d1eac395aafd810f63a19ef13606"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:1f76427132bc91c6355df68665f4606c89046dec6dd78170162b4d724e0ebff7",
+            "urn:company-wiki:narrative-unit:sha256:b73887ff7fe6d83fae36f135b4879262aa0cb6f6634a054e329bfc7200d1152a",
+            "urn:company-wiki:narrative-unit:sha256:181c50fe91c04f110d8d3bb6c72acff46659fc736adcf523afc65b5365d001de",
+            "urn:company-wiki:narrative-unit:sha256:eff7cb9376894e60d946095839539d5a4c7695828740da6c6e62d4d0c9e8b9b0",
+            "urn:company-wiki:narrative-unit:sha256:d03baf28c5dc031fda6b0d5f46f9774733a04a609c20196216998c1337bfb627",
+            "urn:company-wiki:narrative-unit:sha256:bb3114e4bdbf472d6d7b6c6c04447a8c75476eace87eecf6740e91235b85812c",
+            "urn:company-wiki:narrative-unit:sha256:18f27c005542fe351c117cfc5f556ec7fac466949d18a799d83ffe624ca3ce6c",
+            "urn:company-wiki:narrative-unit:sha256:cf91f93acab1c29864b058706d00d56a9614ab639701e262bf2b615ecda18c15",
+            "urn:company-wiki:narrative-unit:sha256:798aca08c0a60ceedd61a1c11208d5fa3268db50eb57495e3b65a1c56ad4ab70",
+            "urn:company-wiki:narrative-unit:sha256:ef0aaab65530c39659e9f54aeb307a02e6aa372f5a607682cea4790d8b013620",
+            "urn:company-wiki:narrative-unit:sha256:f2b37a7f4a876a860bffe304eb2c8005c6f3d1eac395aafd810f63a19ef13606"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m24",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:181c50fe91c04f110d8d3bb6c72acff46659fc736adcf523afc65b5365d001de",
+            "urn:company-wiki:narrative-unit:sha256:18f27c005542fe351c117cfc5f556ec7fac466949d18a799d83ffe624ca3ce6c",
+            "urn:company-wiki:narrative-unit:sha256:1f76427132bc91c6355df68665f4606c89046dec6dd78170162b4d724e0ebff7",
+            "urn:company-wiki:narrative-unit:sha256:798aca08c0a60ceedd61a1c11208d5fa3268db50eb57495e3b65a1c56ad4ab70",
+            "urn:company-wiki:narrative-unit:sha256:b73887ff7fe6d83fae36f135b4879262aa0cb6f6634a054e329bfc7200d1152a",
+            "urn:company-wiki:narrative-unit:sha256:bb3114e4bdbf472d6d7b6c6c04447a8c75476eace87eecf6740e91235b85812c",
+            "urn:company-wiki:narrative-unit:sha256:cf91f93acab1c29864b058706d00d56a9614ab639701e262bf2b615ecda18c15",
+            "urn:company-wiki:narrative-unit:sha256:d03baf28c5dc031fda6b0d5f46f9774733a04a609c20196216998c1337bfb627",
+            "urn:company-wiki:narrative-unit:sha256:ef0aaab65530c39659e9f54aeb307a02e6aa372f5a607682cea4790d8b013620",
+            "urn:company-wiki:narrative-unit:sha256:eff7cb9376894e60d946095839539d5a4c7695828740da6c6e62d4d0c9e8b9b0",
+            "urn:company-wiki:narrative-unit:sha256:f2b37a7f4a876a860bffe304eb2c8005c6f3d1eac395aafd810f63a19ef13606"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:eff7cb9376894e60d946095839539d5a4c7695828740da6c6e62d4d0c9e8b9b0",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:2/paragraph:8",
+      "text": "升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产",
+      "text_length": 37,
+      "text_sha": "bc4cbf3b29a193735f203bc8f63c46261257de618199741f2bf985ca7f964c7b",
+      "metadata": {
+        "block_char_end": 37,
+        "block_char_start": 0,
+        "pdf_block": 6
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "operating_metrics",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m24",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:1f76427132bc91c6355df68665f4606c89046dec6dd78170162b4d724e0ebff7",
+            "urn:company-wiki:narrative-unit:sha256:b73887ff7fe6d83fae36f135b4879262aa0cb6f6634a054e329bfc7200d1152a",
+            "urn:company-wiki:narrative-unit:sha256:181c50fe91c04f110d8d3bb6c72acff46659fc736adcf523afc65b5365d001de",
+            "urn:company-wiki:narrative-unit:sha256:eff7cb9376894e60d946095839539d5a4c7695828740da6c6e62d4d0c9e8b9b0",
+            "urn:company-wiki:narrative-unit:sha256:d03baf28c5dc031fda6b0d5f46f9774733a04a609c20196216998c1337bfb627",
+            "urn:company-wiki:narrative-unit:sha256:bb3114e4bdbf472d6d7b6c6c04447a8c75476eace87eecf6740e91235b85812c",
+            "urn:company-wiki:narrative-unit:sha256:18f27c005542fe351c117cfc5f556ec7fac466949d18a799d83ffe624ca3ce6c",
+            "urn:company-wiki:narrative-unit:sha256:cf91f93acab1c29864b058706d00d56a9614ab639701e262bf2b615ecda18c15",
+            "urn:company-wiki:narrative-unit:sha256:798aca08c0a60ceedd61a1c11208d5fa3268db50eb57495e3b65a1c56ad4ab70",
+            "urn:company-wiki:narrative-unit:sha256:ef0aaab65530c39659e9f54aeb307a02e6aa372f5a607682cea4790d8b013620",
+            "urn:company-wiki:narrative-unit:sha256:f2b37a7f4a876a860bffe304eb2c8005c6f3d1eac395aafd810f63a19ef13606"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:1f76427132bc91c6355df68665f4606c89046dec6dd78170162b4d724e0ebff7",
+            "urn:company-wiki:narrative-unit:sha256:b73887ff7fe6d83fae36f135b4879262aa0cb6f6634a054e329bfc7200d1152a",
+            "urn:company-wiki:narrative-unit:sha256:181c50fe91c04f110d8d3bb6c72acff46659fc736adcf523afc65b5365d001de",
+            "urn:company-wiki:narrative-unit:sha256:eff7cb9376894e60d946095839539d5a4c7695828740da6c6e62d4d0c9e8b9b0",
+            "urn:company-wiki:narrative-unit:sha256:d03baf28c5dc031fda6b0d5f46f9774733a04a609c20196216998c1337bfb627",
+            "urn:company-wiki:narrative-unit:sha256:bb3114e4bdbf472d6d7b6c6c04447a8c75476eace87eecf6740e91235b85812c",
+            "urn:company-wiki:narrative-unit:sha256:18f27c005542fe351c117cfc5f556ec7fac466949d18a799d83ffe624ca3ce6c",
+            "urn:company-wiki:narrative-unit:sha256:cf91f93acab1c29864b058706d00d56a9614ab639701e262bf2b615ecda18c15",
+            "urn:company-wiki:narrative-unit:sha256:798aca08c0a60ceedd61a1c11208d5fa3268db50eb57495e3b65a1c56ad4ab70",
+            "urn:company-wiki:narrative-unit:sha256:ef0aaab65530c39659e9f54aeb307a02e6aa372f5a607682cea4790d8b013620",
+            "urn:company-wiki:narrative-unit:sha256:f2b37a7f4a876a860bffe304eb2c8005c6f3d1eac395aafd810f63a19ef13606"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m24",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:181c50fe91c04f110d8d3bb6c72acff46659fc736adcf523afc65b5365d001de",
+            "urn:company-wiki:narrative-unit:sha256:18f27c005542fe351c117cfc5f556ec7fac466949d18a799d83ffe624ca3ce6c",
+            "urn:company-wiki:narrative-unit:sha256:1f76427132bc91c6355df68665f4606c89046dec6dd78170162b4d724e0ebff7",
+            "urn:company-wiki:narrative-unit:sha256:798aca08c0a60ceedd61a1c11208d5fa3268db50eb57495e3b65a1c56ad4ab70",
+            "urn:company-wiki:narrative-unit:sha256:b73887ff7fe6d83fae36f135b4879262aa0cb6f6634a054e329bfc7200d1152a",
+            "urn:company-wiki:narrative-unit:sha256:bb3114e4bdbf472d6d7b6c6c04447a8c75476eace87eecf6740e91235b85812c",
+            "urn:company-wiki:narrative-unit:sha256:cf91f93acab1c29864b058706d00d56a9614ab639701e262bf2b615ecda18c15",
+            "urn:company-wiki:narrative-unit:sha256:d03baf28c5dc031fda6b0d5f46f9774733a04a609c20196216998c1337bfb627",
+            "urn:company-wiki:narrative-unit:sha256:ef0aaab65530c39659e9f54aeb307a02e6aa372f5a607682cea4790d8b013620",
+            "urn:company-wiki:narrative-unit:sha256:eff7cb9376894e60d946095839539d5a4c7695828740da6c6e62d4d0c9e8b9b0",
+            "urn:company-wiki:narrative-unit:sha256:f2b37a7f4a876a860bffe304eb2c8005c6f3d1eac395aafd810f63a19ef13606"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:d03baf28c5dc031fda6b0d5f46f9774733a04a609c20196216998c1337bfb627",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:2/paragraph:9",
+      "text": "企业下游主要为OLED 显示面板生产企业，OLED 显示面板生产企业下游为",
+      "text_length": 37,
+      "text_sha": "a407a9b91c832d66a3ad4a5ab7f48d8aee8868811b089874e2177e12a1c1c01c",
+      "metadata": {
+        "block_char_end": 37,
+        "block_char_start": 0,
+        "pdf_block": 7
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "operating_metrics",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m24",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:1f76427132bc91c6355df68665f4606c89046dec6dd78170162b4d724e0ebff7",
+            "urn:company-wiki:narrative-unit:sha256:b73887ff7fe6d83fae36f135b4879262aa0cb6f6634a054e329bfc7200d1152a",
+            "urn:company-wiki:narrative-unit:sha256:181c50fe91c04f110d8d3bb6c72acff46659fc736adcf523afc65b5365d001de",
+            "urn:company-wiki:narrative-unit:sha256:eff7cb9376894e60d946095839539d5a4c7695828740da6c6e62d4d0c9e8b9b0",
+            "urn:company-wiki:narrative-unit:sha256:d03baf28c5dc031fda6b0d5f46f9774733a04a609c20196216998c1337bfb627",
+            "urn:company-wiki:narrative-unit:sha256:bb3114e4bdbf472d6d7b6c6c04447a8c75476eace87eecf6740e91235b85812c",
+            "urn:company-wiki:narrative-unit:sha256:18f27c005542fe351c117cfc5f556ec7fac466949d18a799d83ffe624ca3ce6c",
+            "urn:company-wiki:narrative-unit:sha256:cf91f93acab1c29864b058706d00d56a9614ab639701e262bf2b615ecda18c15",
+            "urn:company-wiki:narrative-unit:sha256:798aca08c0a60ceedd61a1c11208d5fa3268db50eb57495e3b65a1c56ad4ab70",
+            "urn:company-wiki:narrative-unit:sha256:ef0aaab65530c39659e9f54aeb307a02e6aa372f5a607682cea4790d8b013620",
+            "urn:company-wiki:narrative-unit:sha256:f2b37a7f4a876a860bffe304eb2c8005c6f3d1eac395aafd810f63a19ef13606"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:1f76427132bc91c6355df68665f4606c89046dec6dd78170162b4d724e0ebff7",
+            "urn:company-wiki:narrative-unit:sha256:b73887ff7fe6d83fae36f135b4879262aa0cb6f6634a054e329bfc7200d1152a",
+            "urn:company-wiki:narrative-unit:sha256:181c50fe91c04f110d8d3bb6c72acff46659fc736adcf523afc65b5365d001de",
+            "urn:company-wiki:narrative-unit:sha256:eff7cb9376894e60d946095839539d5a4c7695828740da6c6e62d4d0c9e8b9b0",
+            "urn:company-wiki:narrative-unit:sha256:d03baf28c5dc031fda6b0d5f46f9774733a04a609c20196216998c1337bfb627",
+            "urn:company-wiki:narrative-unit:sha256:bb3114e4bdbf472d6d7b6c6c04447a8c75476eace87eecf6740e91235b85812c",
+            "urn:company-wiki:narrative-unit:sha256:18f27c005542fe351c117cfc5f556ec7fac466949d18a799d83ffe624ca3ce6c",
+            "urn:company-wiki:narrative-unit:sha256:cf91f93acab1c29864b058706d00d56a9614ab639701e262bf2b615ecda18c15",
+            "urn:company-wiki:narrative-unit:sha256:798aca08c0a60ceedd61a1c11208d5fa3268db50eb57495e3b65a1c56ad4ab70",
+            "urn:company-wiki:narrative-unit:sha256:ef0aaab65530c39659e9f54aeb307a02e6aa372f5a607682cea4790d8b013620",
+            "urn:company-wiki:narrative-unit:sha256:f2b37a7f4a876a860bffe304eb2c8005c6f3d1eac395aafd810f63a19ef13606"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m24",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:181c50fe91c04f110d8d3bb6c72acff46659fc736adcf523afc65b5365d001de",
+            "urn:company-wiki:narrative-unit:sha256:18f27c005542fe351c117cfc5f556ec7fac466949d18a799d83ffe624ca3ce6c",
+            "urn:company-wiki:narrative-unit:sha256:1f76427132bc91c6355df68665f4606c89046dec6dd78170162b4d724e0ebff7",
+            "urn:company-wiki:narrative-unit:sha256:798aca08c0a60ceedd61a1c11208d5fa3268db50eb57495e3b65a1c56ad4ab70",
+            "urn:company-wiki:narrative-unit:sha256:b73887ff7fe6d83fae36f135b4879262aa0cb6f6634a054e329bfc7200d1152a",
+            "urn:company-wiki:narrative-unit:sha256:bb3114e4bdbf472d6d7b6c6c04447a8c75476eace87eecf6740e91235b85812c",
+            "urn:company-wiki:narrative-unit:sha256:cf91f93acab1c29864b058706d00d56a9614ab639701e262bf2b615ecda18c15",
+            "urn:company-wiki:narrative-unit:sha256:d03baf28c5dc031fda6b0d5f46f9774733a04a609c20196216998c1337bfb627",
+            "urn:company-wiki:narrative-unit:sha256:ef0aaab65530c39659e9f54aeb307a02e6aa372f5a607682cea4790d8b013620",
+            "urn:company-wiki:narrative-unit:sha256:eff7cb9376894e60d946095839539d5a4c7695828740da6c6e62d4d0c9e8b9b0",
+            "urn:company-wiki:narrative-unit:sha256:f2b37a7f4a876a860bffe304eb2c8005c6f3d1eac395aafd810f63a19ef13606"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:9b448ed7bef763959253d5c5d1437f99e7f33de486e3905d74cdd0cd3f24e3ff",
+      "kind": "pdf_table_qa_fragment",
+      "role": "management",
+      "locator": "loc:v1/page:2/table:0/row:0/column:1",
+      "text": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。",
+      "text_length": 102,
+      "text_sha": "5fe74f80adb024591f291f58fc5df6abfce7d09f6ec8c0786abbe501404899e5",
+      "metadata": {
+        "column_index": 1,
+        "qa_group_id": "p1:t0:r6:c1:q2",
+        "qa_state": "answer_paired_cross_page"
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "operating_metrics",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": false,
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 2,
+        "topics": [
+          "operating_metrics"
+        ],
+        "context_only": false,
+        "value_band": "description",
+        "required": [
+          "urn:company-wiki:narrative-unit:sha256:18f907616cb57290ca2eea78e48cbb13f9cb8b0162056ae898e85f49542d8297",
+          "urn:company-wiki:narrative-unit:sha256:861153b7ffc155d70c045724804e683f6e1ae88619ba27f96dfc4dc1213a93fc",
+          "urn:company-wiki:narrative-unit:sha256:86ec4f73742546f6be87159215393f6ebac98b8debe1b5b160f4ee4636d40d94",
+          "urn:company-wiki:narrative-unit:sha256:90ba4049859c11ee46c6f5b17291bc3a2de0ee9f859df52d992bd2cf07a4bc8d",
+          "urn:company-wiki:narrative-unit:sha256:a1ffbde6e9bbe2ba609f603af2da203a37b425530549cb2ad8190d5633b4af69",
+          "urn:company-wiki:narrative-unit:sha256:b45716da8c1320dd7871f971a3df8360f10e1b5308c1e5525ece6c2bfbcc2abe"
+        ]
+      },
+      "selected_original": true,
+      "packages": [
+        {
+          "package_id": "m20",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:a1ffbde6e9bbe2ba609f603af2da203a37b425530549cb2ad8190d5633b4af69",
+            "urn:company-wiki:narrative-unit:sha256:b45716da8c1320dd7871f971a3df8360f10e1b5308c1e5525ece6c2bfbcc2abe",
+            "urn:company-wiki:narrative-unit:sha256:861153b7ffc155d70c045724804e683f6e1ae88619ba27f96dfc4dc1213a93fc",
+            "urn:company-wiki:narrative-unit:sha256:9b448ed7bef763959253d5c5d1437f99e7f33de486e3905d74cdd0cd3f24e3ff",
+            "urn:company-wiki:narrative-unit:sha256:86ec4f73742546f6be87159215393f6ebac98b8debe1b5b160f4ee4636d40d94",
+            "urn:company-wiki:narrative-unit:sha256:90ba4049859c11ee46c6f5b17291bc3a2de0ee9f859df52d992bd2cf07a4bc8d"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:861153b7ffc155d70c045724804e683f6e1ae88619ba27f96dfc4dc1213a93fc",
+            "urn:company-wiki:narrative-unit:sha256:9b448ed7bef763959253d5c5d1437f99e7f33de486e3905d74cdd0cd3f24e3ff",
+            "urn:company-wiki:narrative-unit:sha256:86ec4f73742546f6be87159215393f6ebac98b8debe1b5b160f4ee4636d40d94",
+            "urn:company-wiki:narrative-unit:sha256:90ba4049859c11ee46c6f5b17291bc3a2de0ee9f859df52d992bd2cf07a4bc8d"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:a1ffbde6e9bbe2ba609f603af2da203a37b425530549cb2ad8190d5633b4af69",
+            "urn:company-wiki:narrative-unit:sha256:b45716da8c1320dd7871f971a3df8360f10e1b5308c1e5525ece6c2bfbcc2abe",
+            "urn:company-wiki:narrative-unit:sha256:18f907616cb57290ca2eea78e48cbb13f9cb8b0162056ae898e85f49542d8297"
+          ],
+          "completeness": "complete",
+          "diagnostics": []
+        }
+      ],
+      "withheld": []
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:ac4574ea0d100b177a3b7bf0cf37fa622cf24602cd985957a8f4b50918b68db4",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:3/paragraph:3",
+      "text": "亚胺材料、高性能聚合物材料、OLED 材料等领域持续丰富产品布局。",
+      "text_length": 33,
+      "text_sha": "549170fe5bf357e07e3de88d7eef66ae6d14b486f033f5e8bd954490157f2aeb",
+      "metadata": {
+        "block_char_end": 33,
+        "block_char_start": 0,
+        "pdf_block": 3
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m32",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d30802255ab9ea512f2452214544775123f972810bea02dbfd21da35e0fc1c74",
+            "urn:company-wiki:narrative-unit:sha256:c939b47441aa0005518ccca9ca9f1bb6c78a5d7808ec7d8605a13efad34244ed",
+            "urn:company-wiki:narrative-unit:sha256:ac4574ea0d100b177a3b7bf0cf37fa622cf24602cd985957a8f4b50918b68db4",
+            "urn:company-wiki:narrative-unit:sha256:01a2834291d71fa9befeeed77ca35075fd5ab46cbe1def3389ab685353c611c7",
+            "urn:company-wiki:narrative-unit:sha256:2473807cde7ee19f574a8ed34de31113fc219a531af7580f971e0ff7533e812f",
+            "urn:company-wiki:narrative-unit:sha256:f9436350d7171643f39453f7c3e00229010f49b591afa416b3cd690cdec62d4e",
+            "urn:company-wiki:narrative-unit:sha256:15d0e5959955bf376cb9ed992cd69b3416180a26c8ccb1bea676ebcb54360ff6",
+            "urn:company-wiki:narrative-unit:sha256:9edd0c51d53c873f0bc6df70235194a2ea823ecccba971449f11432534b702bb",
+            "urn:company-wiki:narrative-unit:sha256:a582f2918588cd804f06cfa0a9d125242d5116ff1ab8ed23d5fd629ffa916c68",
+            "urn:company-wiki:narrative-unit:sha256:1e9c71cf8dfbd94db5bb8c557eec03d130044e7df10804055fb8818458f33899",
+            "urn:company-wiki:narrative-unit:sha256:311cf1a4c216ba06e92e848ebe6942ce0eae57b3221340b687bb8f9203342e86",
+            "urn:company-wiki:narrative-unit:sha256:da64aea3d3eed2314e06de9a077f6a8e10e123a6b7f0cfde66dc3c068a12ead0"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d30802255ab9ea512f2452214544775123f972810bea02dbfd21da35e0fc1c74",
+            "urn:company-wiki:narrative-unit:sha256:c939b47441aa0005518ccca9ca9f1bb6c78a5d7808ec7d8605a13efad34244ed",
+            "urn:company-wiki:narrative-unit:sha256:ac4574ea0d100b177a3b7bf0cf37fa622cf24602cd985957a8f4b50918b68db4",
+            "urn:company-wiki:narrative-unit:sha256:01a2834291d71fa9befeeed77ca35075fd5ab46cbe1def3389ab685353c611c7",
+            "urn:company-wiki:narrative-unit:sha256:2473807cde7ee19f574a8ed34de31113fc219a531af7580f971e0ff7533e812f",
+            "urn:company-wiki:narrative-unit:sha256:f9436350d7171643f39453f7c3e00229010f49b591afa416b3cd690cdec62d4e",
+            "urn:company-wiki:narrative-unit:sha256:15d0e5959955bf376cb9ed992cd69b3416180a26c8ccb1bea676ebcb54360ff6",
+            "urn:company-wiki:narrative-unit:sha256:9edd0c51d53c873f0bc6df70235194a2ea823ecccba971449f11432534b702bb",
+            "urn:company-wiki:narrative-unit:sha256:a582f2918588cd804f06cfa0a9d125242d5116ff1ab8ed23d5fd629ffa916c68",
+            "urn:company-wiki:narrative-unit:sha256:1e9c71cf8dfbd94db5bb8c557eec03d130044e7df10804055fb8818458f33899",
+            "urn:company-wiki:narrative-unit:sha256:311cf1a4c216ba06e92e848ebe6942ce0eae57b3221340b687bb8f9203342e86",
+            "urn:company-wiki:narrative-unit:sha256:da64aea3d3eed2314e06de9a077f6a8e10e123a6b7f0cfde66dc3c068a12ead0"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m32",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:01a2834291d71fa9befeeed77ca35075fd5ab46cbe1def3389ab685353c611c7",
+            "urn:company-wiki:narrative-unit:sha256:15d0e5959955bf376cb9ed992cd69b3416180a26c8ccb1bea676ebcb54360ff6",
+            "urn:company-wiki:narrative-unit:sha256:1e9c71cf8dfbd94db5bb8c557eec03d130044e7df10804055fb8818458f33899",
+            "urn:company-wiki:narrative-unit:sha256:2473807cde7ee19f574a8ed34de31113fc219a531af7580f971e0ff7533e812f",
+            "urn:company-wiki:narrative-unit:sha256:311cf1a4c216ba06e92e848ebe6942ce0eae57b3221340b687bb8f9203342e86",
+            "urn:company-wiki:narrative-unit:sha256:9edd0c51d53c873f0bc6df70235194a2ea823ecccba971449f11432534b702bb",
+            "urn:company-wiki:narrative-unit:sha256:a582f2918588cd804f06cfa0a9d125242d5116ff1ab8ed23d5fd629ffa916c68",
+            "urn:company-wiki:narrative-unit:sha256:ac4574ea0d100b177a3b7bf0cf37fa622cf24602cd985957a8f4b50918b68db4",
+            "urn:company-wiki:narrative-unit:sha256:c939b47441aa0005518ccca9ca9f1bb6c78a5d7808ec7d8605a13efad34244ed",
+            "urn:company-wiki:narrative-unit:sha256:d30802255ab9ea512f2452214544775123f972810bea02dbfd21da35e0fc1c74",
+            "urn:company-wiki:narrative-unit:sha256:da64aea3d3eed2314e06de9a077f6a8e10e123a6b7f0cfde66dc3c068a12ead0",
+            "urn:company-wiki:narrative-unit:sha256:f9436350d7171643f39453f7c3e00229010f49b591afa416b3cd690cdec62d4e"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:020a63caafc84d882c49ef6c7ae8691bd7fab197e1f5a383075ec38bb8edb513",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:3/paragraph:15",
+      "text": "能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具",
+      "text_length": 33,
+      "text_sha": "1921ffd3b8138af211cf3177cfa37c0a042ec90c5d61f4f19215d82a63be9dfa",
+      "metadata": {
+        "block_char_end": 33,
+        "block_char_start": 0,
+        "pdf_block": 10
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m34",
+          "kind": "background",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d8fd2e5d403762d1da3e719686f31b271b183811389efd4befb26d237ad66e5d",
+            "urn:company-wiki:narrative-unit:sha256:020a63caafc84d882c49ef6c7ae8691bd7fab197e1f5a383075ec38bb8edb513",
+            "urn:company-wiki:narrative-unit:sha256:a44cb295953507ca1fbedde0c03f2fa905a2e835e8e967dba0a5243d4aba1dde"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d8fd2e5d403762d1da3e719686f31b271b183811389efd4befb26d237ad66e5d"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d8fd2e5d403762d1da3e719686f31b271b183811389efd4befb26d237ad66e5d"
+          ],
+          "completeness": "unknown",
+          "diagnostics": []
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m34:urn:company-wiki:narrative-unit:sha256:020a63caafc84d882c49ef6c7ae8691bd7fab197e1f5a383075ec38bb8edb513",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:020a63caafc84d882c49ef6c7ae8691bd7fab197e1f5a383075ec38bb8edb513",
+            "urn:company-wiki:narrative-unit:sha256:639e2a9f33928abafbe1dec77fae068aa46b493e6f93492d48e406e75a2b0a59"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:3/paragraph:17",
+      "text": "答：您好，公司现无生产VC（碳酸亚乙烯酯）的情况，根据公司控",
+      "text_length": 30,
+      "text_sha": "8e3faa664a798cd4aab892222478bb79a3467031edbb3e19b7980c6dec403510",
+      "metadata": {
+        "block_char_end": 30,
+        "block_char_start": 0,
+        "pdf_block": 12
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m35",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m35",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f",
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:3/paragraph:18",
+      "text": "股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立",
+      "text_length": 32,
+      "text_sha": "9d40dd10fa0d340e5d02134a7f842f7ca1450da8a12bb18a75c4da2276dc4903",
+      "metadata": {
+        "block_char_end": 32,
+        "block_char_start": 0,
+        "pdf_block": 13
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m35",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m35",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f",
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:3/paragraph:20",
+      "text": "公司控股股东中国节能基于对公司未来发展前景的信心",
+      "text_length": 24,
+      "text_sha": "0484181ffca1565224fb72fb2ce7dcb138542f86c69ef51ff2d883bd847b9de1",
+      "metadata": {
+        "block_char_end": 32,
+        "block_char_start": 8,
+        "pdf_block": 14
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m35",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m35",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f",
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:3/paragraph:25",
+      "text": "份，截至2026 年5 月14日，中国节能本次已累计增持公司股份3,594.5807",
+      "text_length": 42,
+      "text_sha": "cf15571da117157f343ca323ccab8369ec7273ba7d20f02c857d9a3513f2cb98",
+      "metadata": {
+        "block_char_end": 42,
+        "block_char_start": 0,
+        "pdf_block": 19
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m35",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            "ANSWER_WITHOUT_QUESTION"
+          ]
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m35",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:06a756dba43704ea7bdc51c647d71724d5d2d310033c3ef0c03b4f73a88d9473",
+            "urn:company-wiki:narrative-unit:sha256:0b02c7af7107ad0b22d551bafb3acf5f8e684ca3745776dbc73984931d1f1d86",
+            "urn:company-wiki:narrative-unit:sha256:5e038cbadf62de06e8e41eeda459d56cfe8dac2791d9b30fd9f2e09b9cc70ec9",
+            "urn:company-wiki:narrative-unit:sha256:88dbd1d7be00a404229476da77bfb313246066b794c8cdfe05e7685a2d55ac85",
+            "urn:company-wiki:narrative-unit:sha256:94d5da20100db81d00ffab4e3a79117007a21f95ddb8d145dd4074defe282fc8",
+            "urn:company-wiki:narrative-unit:sha256:a1e6e52decedfc1ca097cf0975af046a4c735a7b21a4e463b4aeda3f08e1292f",
+            "urn:company-wiki:narrative-unit:sha256:a8d6a4a56408dce95c714740f73ac3ef48a8fc33f6c768c3aa40853790dcd1f6",
+            "urn:company-wiki:narrative-unit:sha256:c400c6d329a89589dc9d17c1f0f3d75704f37a3dad92fcc2e2b7b93938c4a66f",
+            "urn:company-wiki:narrative-unit:sha256:d01b51226ba281376767ed10de3acd92d94d26a95f42b4a39fd5fddc64164f5e",
+            "urn:company-wiki:narrative-unit:sha256:ded77285a2c5bbe2170844debc927fedce54fee60be311b7477ea9f8b0180aa9"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:858a0e3cb1e96face9334e2a8159123bee278ad749d55531088dd9f42d8fae6e",
+      "kind": "pdf_text_block",
+      "role": "qa_text_shadow",
+      "locator": "loc:v1/page:3/paragraph:27",
+      "text": "6、问：公司目前账面价值17 个亿的库存，有没有存在今年化工产",
+      "text_length": 31,
+      "text_sha": "c1c7f64c7165fa880158c9d4ddbad58f79be8f0fc8f8711bc9e40978dc96cf50",
+      "metadata": {
+        "block_char_end": 31,
+        "block_char_start": 0,
+        "pdf_block": 21
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": "investor_qa:f69a74f012fb5b22",
+        "family": "investor_qa",
+        "regime": "unknown",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": true,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m36",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:858a0e3cb1e96face9334e2a8159123bee278ad749d55531088dd9f42d8fae6e",
+            "urn:company-wiki:narrative-unit:sha256:d82e5ff3418075788aa7b1b7f7cb1a58e9bf9dbdc4f90d8970e5f5f2a430a576"
+          ],
+          "anchor_unit_ids": [],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:858a0e3cb1e96face9334e2a8159123bee278ad749d55531088dd9f42d8fae6e",
+            "urn:company-wiki:narrative-unit:sha256:d82e5ff3418075788aa7b1b7f7cb1a58e9bf9dbdc4f90d8970e5f5f2a430a576"
+          ],
+          "completeness": "partial",
+          "diagnostics": [
+            "ANSWER_MISSING"
+          ]
+        }
+      ],
+      "withheld": [
+        {
+          "package_id": "m36",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:858a0e3cb1e96face9334e2a8159123bee278ad749d55531088dd9f42d8fae6e",
+            "urn:company-wiki:narrative-unit:sha256:d82e5ff3418075788aa7b1b7f7cb1a58e9bf9dbdc4f90d8970e5f5f2a430a576"
+          ]
+        },
+        {
+          "package_id": "m37:urn:company-wiki:narrative-unit:sha256:d040b6d4904eefeb49ad6b5b7338044e9f99dc84d461c16112989f620f5afc63",
+          "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
+          "known_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:858a0e3cb1e96face9334e2a8159123bee278ad749d55531088dd9f42d8fae6e",
+            "urn:company-wiki:narrative-unit:sha256:d040b6d4904eefeb49ad6b5b7338044e9f99dc84d461c16112989f620f5afc63"
+          ]
+        }
+      ]
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4effe343ea8f6e01f44f953e1eedc49262f954bca93f50d26a986d84862f800b",
+      "kind": "pdf_table_qa_fragment",
+      "role": "management",
+      "locator": "loc:v1/page:3/table:0/row:0/column:1",
+      "text": "答：您好，公司是以研发创新驱动发展的平台型企业，为争取更多市\n场机会，公司持续增加研发投入，在半导体制造材料、电子与显示用聚酰\n亚胺材料、高性能聚合物材料、OLED 材料等领域持续丰富产品布局。",
+      "text_length": 97,
+      "text_sha": "853600277b8e94e5c4a664cfc3edf814a21dfad41f123534259c9c5cc041a372",
+      "metadata": {
+        "column_index": 1,
+        "qa_group_id": "p2:t0:r0:c1:q2",
+        "qa_state": "answer_paired_cross_page"
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": false,
+      "candidate": true,
+      "candidate_metadata": {
+        "priority": 2,
+        "topics": [],
+        "context_only": true,
+        "required": []
+      },
+      "selected_original": true,
+      "packages": [
+        {
+          "package_id": "m30",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:8affe296fc22b2165b6468e86a751a3a29e3c7ecbabb5a067f1b22e4d4c979bf",
+            "urn:company-wiki:narrative-unit:sha256:4effe343ea8f6e01f44f953e1eedc49262f954bca93f50d26a986d84862f800b",
+            "urn:company-wiki:narrative-unit:sha256:0780773865935ee8a02dae3b0d8e9e441fc3ecb172b98de4c61480a8304ae8f5",
+            "urn:company-wiki:narrative-unit:sha256:edead2ffdea53c769cbf4dcd11521a931f2a5f0c1e27295ad17667c9ca354d81",
+            "urn:company-wiki:narrative-unit:sha256:335e6caa6b755de319d4a1e09e858f2ba37e8e032b2e0fc1cddceb2219c82e54",
+            "urn:company-wiki:narrative-unit:sha256:e30794af26d491efc9725fe7f8c52ef6d0a28a7a90c4629e3c4656420df8267c"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:4effe343ea8f6e01f44f953e1eedc49262f954bca93f50d26a986d84862f800b",
+            "urn:company-wiki:narrative-unit:sha256:0780773865935ee8a02dae3b0d8e9e441fc3ecb172b98de4c61480a8304ae8f5",
+            "urn:company-wiki:narrative-unit:sha256:edead2ffdea53c769cbf4dcd11521a931f2a5f0c1e27295ad17667c9ca354d81",
+            "urn:company-wiki:narrative-unit:sha256:335e6caa6b755de319d4a1e09e858f2ba37e8e032b2e0fc1cddceb2219c82e54",
+            "urn:company-wiki:narrative-unit:sha256:e30794af26d491efc9725fe7f8c52ef6d0a28a7a90c4629e3c4656420df8267c"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:8affe296fc22b2165b6468e86a751a3a29e3c7ecbabb5a067f1b22e4d4c979bf"
+          ],
+          "completeness": "complete",
+          "diagnostics": []
+        }
+      ],
+      "withheld": []
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:489d4ff2dfd12e5c2c0ef1fd4d050328bc5c168741c0a1fe6d0d72d0bb824975",
+      "kind": "pdf_table_qa_fragment",
+      "role": "investor_question",
+      "locator": "loc:v1/page:3/table:0/row:0/column:1",
+      "text": "5、问：控股股东在支持上市公司层面，具体做了哪些工作？有没有\n能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具\n体业务，推动上市公司快速做大做强？",
+      "text_length": 82,
+      "text_sha": "bf840eaa362718bd25fa302c19195e8f531e095b47c971d02550e52bc49f0eb2",
+      "metadata": {
+        "column_index": 1,
+        "qa_group_id": "p3:t0:r0:c1:q1",
+        "qa_state": "question_paired"
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": "investor_qa:dec801c7bcd40716",
+        "family": "investor_qa",
+        "regime": "unknown",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": false,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m41",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:489d4ff2dfd12e5c2c0ef1fd4d050328bc5c168741c0a1fe6d0d72d0bb824975",
+            "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+            "urn:company-wiki:narrative-unit:sha256:dd1466bb3d22568392e6199c9976eb12cfc6dd7a9f0409ea8df5ed522e7a7284"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+            "urn:company-wiki:narrative-unit:sha256:dd1466bb3d22568392e6199c9976eb12cfc6dd7a9f0409ea8df5ed522e7a7284"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:489d4ff2dfd12e5c2c0ef1fd4d050328bc5c168741c0a1fe6d0d72d0bb824975"
+          ],
+          "completeness": "complete",
+          "diagnostics": []
+        }
+      ],
+      "withheld": []
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+      "kind": "pdf_table_qa_fragment",
+      "role": "management",
+      "locator": "loc:v1/page:3/table:0/row:0/column:1",
+      "text": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。",
+      "text_length": 73,
+      "text_sha": "75d6843575a7923f58d9cf417379115876830f6760fecd0c2eaa683efd317d0d",
+      "metadata": {
+        "column_index": 1,
+        "qa_group_id": "p3:t0:r0:c1:q1",
+        "qa_state": "answer_paired"
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": false,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m41",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:489d4ff2dfd12e5c2c0ef1fd4d050328bc5c168741c0a1fe6d0d72d0bb824975",
+            "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+            "urn:company-wiki:narrative-unit:sha256:dd1466bb3d22568392e6199c9976eb12cfc6dd7a9f0409ea8df5ed522e7a7284"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+            "urn:company-wiki:narrative-unit:sha256:dd1466bb3d22568392e6199c9976eb12cfc6dd7a9f0409ea8df5ed522e7a7284"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:489d4ff2dfd12e5c2c0ef1fd4d050328bc5c168741c0a1fe6d0d72d0bb824975"
+          ],
+          "completeness": "complete",
+          "diagnostics": []
+        }
+      ],
+      "withheld": []
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:dd1466bb3d22568392e6199c9976eb12cfc6dd7a9f0409ea8df5ed522e7a7284",
+      "kind": "pdf_table_qa_fragment",
+      "role": "management",
+      "locator": "loc:v1/page:3/table:0/row:0/column:1",
+      "text": "公司控股股东中国节能基于对公司未来发展前景的信心\n和对公司长期投资价值的认可，为切实维护广大投资者利益，促进公司持\n续、健康、稳定发展，增强投资者信心，计划自 2025 年 11 月 24 日起 6\n个月内（即 2025 年 11 月 24 日至 2026 年5 月23 日），以自有资金及股\n票增持专项贷款通过集中竞价交易方式，择机以适当的价格增持公司股\n份，截至2026 年5 月14日，中国节能本次已累计增持公司股份3,594.5807\n万股，合计持股比例已经达 29.08%，感谢您对公司的关注！",
+      "text_length": 252,
+      "text_sha": "8f3c9c50df650b4390d8803aa617590e054da3f97e052cef9463eb2350df2105",
+      "metadata": {
+        "column_index": 1,
+        "qa_group_id": "p3:t0:r0:c1:q1",
+        "qa_state": "answer_paired"
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": null,
+        "family": "investor_qa",
+        "regime": "cn_exchange",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": false,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m41",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:489d4ff2dfd12e5c2c0ef1fd4d050328bc5c168741c0a1fe6d0d72d0bb824975",
+            "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+            "urn:company-wiki:narrative-unit:sha256:dd1466bb3d22568392e6199c9976eb12cfc6dd7a9f0409ea8df5ed522e7a7284"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+            "urn:company-wiki:narrative-unit:sha256:dd1466bb3d22568392e6199c9976eb12cfc6dd7a9f0409ea8df5ed522e7a7284"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:489d4ff2dfd12e5c2c0ef1fd4d050328bc5c168741c0a1fe6d0d72d0bb824975"
+          ],
+          "completeness": "complete",
+          "diagnostics": []
+        }
+      ],
+      "withheld": []
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:7da34c06165e2e821b73b6cc13a533d1620a25b7a223986c49fbd3ea93d7a73f",
+      "kind": "pdf_table_qa_fragment",
+      "role": "investor_question",
+      "locator": "loc:v1/page:3/table:0/row:0/column:1",
+      "text": "6、问：公司目前账面价值 17 个亿的库存，有没有存在今年化工产\n品涨价的预期？还是说仍要进行计提？",
+      "text_length": 50,
+      "text_sha": "575a8671dd89eda0a4137727773ea5a42a2b98fe0bfc6b31d1ed3684550edf18",
+      "metadata": {
+        "column_index": 1,
+        "qa_group_id": "p3:t0:r0:c1:q2",
+        "qa_state": "question_paired"
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false
+      },
+      "reading_profile": {
+        "profile_id": "investor_qa",
+        "profile_version": "investor_qa/v2+6093fd744f12c0e3",
+        "reading_profile_key": "investor_qa:34cfab2022e94084",
+        "family": "investor_qa",
+        "regime": "unknown",
+        "form_type": "unknown",
+        "section_role": "unknown",
+        "priority": 2,
+        "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 完整 Q+A 与追问的绑定关系 管理层补充说明与明确否定 回避回答/不了解的诚实表达 主/子公司归属（如子公司验证供货不等于母公司） 数字的期间与口径",
+        "policy_components": [
+          {
+            "kind": "family",
+            "id": "investor_qa_record",
+            "version": "1.0.1",
+            "content_digest": "e272d13c49b9e8589e4c5825f5159a39d6ed2bc1effe8d104339e74164d88d5c"
+          }
+        ],
+        "reading_questions": [
+          "完整 Q+A 与追问的绑定关系",
+          "管理层补充说明与明确否定",
+          "回避回答/不了解的诚实表达",
+          "主/子公司归属（如子公司验证供货不等于母公司）",
+          "数字的期间与口径"
+        ],
+        "context_requirements": [
+          {
+            "when": "always_for_assertion",
+            "slots": [
+              "subject",
+              "period",
+              "role"
+            ],
+            "missing_behavior": "unknown",
+            "reason": "活动记录中提问者与管理层角色不同，断言必须绑定主体、期间与来源角色"
+          },
+          {
+            "when": "quantity_emitted",
+            "slots": [
+              "quantity",
+              "unit",
+              "period",
+              "denominator"
+            ],
+            "missing_behavior": "partial",
+            "reason": "回答中的数字必须带期间与口径，提问中的数字不得当作公司数据"
+          },
+          {
+            "when": "project_emitted",
+            "slots": [
+              "project",
+              "subject",
+              "stage",
+              "condition"
+            ],
+            "missing_behavior": "partial",
+            "reason": "项目/产能回答必须带主体（含子公司）、阶段与条件"
+          },
+          {
+            "when": "explicit_condition_present",
+            "slots": [
+              "condition",
+              "modality"
+            ],
+            "missing_behavior": "deferred",
+            "reason": "“建成后”“预计”等条件语气必须随事实保留"
+          }
+        ],
+        "family_policy": {
+          "id": "investor_qa_record",
+          "design_status": "verified",
+          "spec_status": "implemented",
+          "evidence_status": "real",
+          "integration_status": "not_integrated",
+          "gaps": [
+            "业绩说明会直播/文字稿形态缺失",
+            "港股 analyst meeting 记录缺失"
+          ]
+        },
+        "negative_hints": [
+          "活动通知、参与人员签到、接待程序；例外：活动属性影响内容可信范围",
+          "寒暄、致谢与套话；例外：其中含明确否定或澄清"
+        ],
+        "semantic_units": [
+          "qa_exchange",
+          "paragraph_event",
+          "background"
+        ],
+        "matched_section_rule": null
+      },
+      "excluded": false,
+      "candidate": false,
+      "candidate_metadata": null,
+      "selected_original": false,
+      "packages": [
+        {
+          "package_id": "m42",
+          "kind": "qa_exchange",
+          "truncated": false,
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:7da34c06165e2e821b73b6cc13a533d1620a25b7a223986c49fbd3ea93d7a73f",
+            "urn:company-wiki:narrative-unit:sha256:975aad35305fc37fbb8214b2d9de8874fc096eaa4ad292efa833072557421de1",
+            "urn:company-wiki:narrative-unit:sha256:75a6572a6cc41a0aff7151f73ea6d38a932a6ae3774848eab57bc119448b2e93",
+            "urn:company-wiki:narrative-unit:sha256:ba0b28d2f2c3d1d6641d0f2707a8daf573d133bc5dc998b1feb40174a3747334",
+            "urn:company-wiki:narrative-unit:sha256:22aecc7c8aaafa2f85c44341adc525a9bda6eedc6f4fd883169432e6025295df"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:975aad35305fc37fbb8214b2d9de8874fc096eaa4ad292efa833072557421de1",
+            "urn:company-wiki:narrative-unit:sha256:75a6572a6cc41a0aff7151f73ea6d38a932a6ae3774848eab57bc119448b2e93",
+            "urn:company-wiki:narrative-unit:sha256:ba0b28d2f2c3d1d6641d0f2707a8daf573d133bc5dc998b1feb40174a3747334",
+            "urn:company-wiki:narrative-unit:sha256:22aecc7c8aaafa2f85c44341adc525a9bda6eedc6f4fd883169432e6025295df"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:7da34c06165e2e821b73b6cc13a533d1620a25b7a223986c49fbd3ea93d7a73f"
+          ],
+          "completeness": "complete",
+          "diagnostics": []
+        }
+      ],
+      "withheld": []
+    }
+  ],
+  "target_context_deferred": [
+    {
+      "package_id": "m16",
+      "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT"
+    },
+    {
+      "package_id": "m24",
+      "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT"
+    },
+    {
+      "package_id": "m32",
+      "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT"
+    },
+    {
+      "package_id": "m35",
+      "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT"
+    },
+    {
+      "package_id": "m36",
+      "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT"
+    }
+  ],
+  "structured_qa_counts": {
+    "qa_text_shadow": 219,
+    "company_filing": 8,
+    "investor_question": 18,
+    "management": 55,
+    "unknown": 2
+  },
+  "source_after": {
+    "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "size": 153851,
+    "mtime_ns": 1779228233262998600
+  },
+  "source_guard_pass": true
+}
