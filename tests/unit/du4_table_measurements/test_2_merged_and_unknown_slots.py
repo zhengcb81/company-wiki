@@ -117,6 +117,7 @@ def test_none_empty_and_merged_unknown_slots_stay_distinct() -> None:
     ]
     m = measurement_for(result, value)
     assert m["binding_status"] == "ambiguous"
+    assert "merged_value_no_column" in codes
     # no value was invented for empty/unavailable/merged slots without refs
     assert len(result["measurements"]) == 1
 

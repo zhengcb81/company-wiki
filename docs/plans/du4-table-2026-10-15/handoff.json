@@ -27,7 +27,7 @@
     {
       "command": "$env:PYTHONPATH = (Join-Path (Get-Location) 'src'); python -B -m pytest -q tests/unit/du4_table_measurements",
       "exit_code": 0,
-      "passed": 35,
+      "passed": 36,
       "failed": 0,
       "skipped": 0,
       "receipt": "results/pytest-final.log"
@@ -83,6 +83,7 @@
     "a merged big cell without per-value native positioning is kept as one whole-cell value_ref and reported ambiguous; values inside are never split into invented columns",
     "period facts come only from header labels: bare year labels give kind=unspecified with raw labels kept, fiscal year never becomes duration_months=12, undisclosed start stays null",
     "unit/scope/qualifier refs are bounded vocabulary and parenthesized-group matches over label texts only (value text is scanned only for inline percent/currency units)",
+    "unit_refs take the tightest scope only (cell-level, else row labels, else header path): a row-label unit wins over a column-header scale annotation; original header refs stay on columns[].header_refs and period.raw_label_refs",
     "binding_status=bound requires a single proven native column plus an established header path; no-header-path values are ambiguous with a diagnostic",
     "provenance fine_geometry records without layout span results are ignored as fine-cell evidence (coarse_geometry_ignored)",
     "real-packet counts (retained tables): bound 34 / ambiguous 7 / unavailable 0; see results/real-packet-bindings-report.json"

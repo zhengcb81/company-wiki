@@ -8,7 +8,7 @@ import json
 
 import pytest
 
-from builders import cell, diagnostic_codes, observation, text_ref, unit
+from builders import cell, diagnostic_codes, measurement_for, observation, text_ref, unit
 
 from company_wiki.document_understanding.layout_hints.contract import (
     WorkBudget,
@@ -186,6 +186,32 @@ def test_small_budget_keeps_determined_results_and_reports_partial() -> None:
         assert m["binding_status"] in {"bound", "ambiguous", "unavailable"}
     with pytest.raises(WorkBudgetExceeded):
         b.charge(1)  # the exhausted budget stays exhausted for the caller
+
+
+def test_internal_diagnostics_are_named_not_silent() -> None:
+    u_h = unit("u-h", "2024", kind="table_header")
+    u_v = unit("u-v", "42")
+    value = text_ref("u-v", u_v["text"], "42")
+    obs = observation(
+        {"u-h": u_h, "u-v": u_v},
+        [
+            cell("h1", 0, 1, presence="present", text_refs=[text_ref("u-h", u_h["text"], "2024")]),
+            # present cell whose text was not retained: diagnosed, not bound
+            cell("lost", 1, 3, presence="present", text_refs=[]),
+            # empty slot carrying a contradictory ref: diagnosed, not zeroed
+            cell("weird", 2, 1, presence="empty", text_refs=[value]),
+            # gap at native column 2 between cells at 1 and 3
+        ],
+        header_rows=[0],
+    )
+    result = bind_operating_table(obs, work_budget=budget())
+    codes = diagnostic_codes(result)
+    assert "value_text_unavailable" in codes
+    assert "slot_value_conflict" in codes
+    assert "period_not_disclosed" in codes  # bare '2024' header discloses no period kind
+    assert "column_without_cells" in codes  # native column 2 has no cells at all
+    m = measurement_for(result, value)
+    assert m["binding_status"] == "unavailable"
 
 
 def test_work_is_bounded_linearly_on_large_inputs() -> None:

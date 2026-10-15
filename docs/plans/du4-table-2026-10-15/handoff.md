@@ -25,6 +25,9 @@ result = bind_operating_table(observation, *, work_budget: WorkBudget)
   非法索引、越界 ref、非法 provenance）抛 `ValueError`；证据不足逐项 ambiguous/unavailable + 诊断。
 - 预算：复用传入的 `layout_hints.contract.WorkBudget`，不新建限额；耗尽保留已确定结果、
   `status=partial` + `work_budget_exhausted`。
+- 单位取用为最紧作用域优先（单元格 > 行标签 > 表头路径）：行标签已给单位时不再叠加列头的
+  量级标注（如 in millions），接线核对摘要数字时需知悉；原始表头引用始终保留在
+  `columns[].header_refs`/`period.raw_label_refs`。
 
 ## 未绑定原因（真实保留包）
 
@@ -33,8 +36,9 @@ result = bind_operating_table(observation, *, work_budget: WorkBudget)
 
 - 7 项 ambiguous 全部是左侧大合并格内容（门店数旧值块、`Total 合計` 块、GMV 多行块、TOP TOY 块）：
   合并格覆盖标签列＋旧年列（GMV 表覆盖三列），没有逐值原生定位，按契约明确 ambiguous，
-  不右对齐、不按最新年填槽，`column_id/period=null` 并记 `multi_column_value`（p20t1 一块按
-  `no_header_path`，因其 raw_rows 截断、行槽无格 bbox）。
+  不右对齐、不按最新年填槽：全部 `period=null` 并记 `multi_column_value`，其中 6 项因跨列
+  `column_id` 亦为 null；p20t1 一块因 raw_rows 截断、行槽无格 bbox，按 `no_header_path` 判
+  ambiguous，保留其已知原生 `column_id=col-0`。
 - 34 项 bound 全部是后续右列行的原生单格值：门店表绑到 as-of 2024-12-31 列，GMV 表绑到
   fiscal 2024（fiscal_label "2024"）列；没有任何值落到 2023 列，六个月/十二个月 2023 与
   fiscal 2024 是三个独立列/期间。
@@ -56,7 +60,7 @@ result = bind_operating_table(observation, *, work_budget: WorkBudget)
 |---|---|---|---|
 | RED-1 导入失败 | `python -B -m pytest -q tests/unit/du4_table_measurements` | exit 2 | results/red-1-import-failure.log |
 | RED-2 语义失败 | 同上（骨架） | exit 1，31 failed/2 passed | results/red-2-semantic-failure.log |
-| 集中单测 | 同上 | exit 0，35 passed | results/pytest-final.log |
+| 集中单测 | 同上 | exit 0，36 passed | results/pytest-final.log |
 | Ruff | `python -m ruff check src/.../table_measurements tests/unit/du4_table_measurements` | exit 0 | results/ruff-final.log |
 | mypy | `python -m mypy src/company_wiki/document_understanding/table_measurements` | exit 0 | results/mypy-final.log |
 | 真实走通 | `python -B tests/unit/du4_table_measurements/report_real_packet.py` | bound 34/ambiguous 7 | results/real-packet-bindings-report.json |
