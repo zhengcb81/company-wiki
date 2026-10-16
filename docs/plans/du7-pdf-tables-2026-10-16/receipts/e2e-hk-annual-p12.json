@@ -1,0 +1,352 @@
+{
+ "schema_version": "du7-pdf-table-e2e/1",
+ "status": "RUN",
+ "original": {
+  "file_name": "2024年度报告（港股）.pdf",
+  "sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+  "sha256_expected": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+  "sha256_matches_expected": true,
+  "bytes": 2230253,
+  "pages_requested": [
+   12
+  ]
+ },
+ "parse": {
+  "parse_count": 1,
+  "page_count": 246,
+  "pages_read": 246,
+  "table_scan_pages": [
+   12
+  ],
+  "deferred_table_page_count": 245,
+  "unit_count": 6480,
+  "seconds": 2.299,
+  "layout_capture": {
+   "processed_page_count": 64,
+   "processed_unit_count": 1583,
+   "deferred_unit_count": 4897,
+   "fine_element_count": 35578,
+   "complete": false,
+   "diagnostic_counts": {
+    "LAYOUT_CAPTURE_DEFERRED": 128
+   }
+  }
+ },
+ "work": {
+  "budget_ceiling": 4000000,
+  "used_total": 1162939,
+  "stages_used": {
+   "parse_done": 0,
+   "layout_hints_done": 1151294,
+   "table_observations_done": 1161578,
+   "binder_done": 1162939
+  },
+  "component_work_used": 10284
+ },
+ "tables": [
+  {
+   "scope": {
+    "parent_id": "urn:company-wiki:source:sha256:07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+    "table_id": "p12:t0",
+    "page": 12
+   },
+   "cells": 17,
+   "header_rows": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "truncated": false,
+   "status": "partial",
+   "measurements": 11
+  },
+  {
+   "scope": {
+    "parent_id": "urn:company-wiki:source:sha256:07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+    "table_id": "p12:t1",
+    "page": 12
+   },
+   "cells": 11,
+   "header_rows": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "truncated": false,
+   "status": "partial",
+   "measurements": 5
+  }
+ ],
+ "denominator": {
+  "table_claims": 2,
+  "slots_observed": 28,
+  "refs_located": 28,
+  "cells_without_located_ref": 0,
+  "rows_truncated": 0,
+  "measurements": {
+   "bound": 12,
+   "ambiguous": 4,
+   "unavailable": 0
+  },
+  "unlocated_examples": [],
+  "binder_diagnostic_counts": {
+   "no_header_path": 6,
+   "column_without_cells": 1,
+   "period_not_disclosed": 2
+  },
+  "component_diagnostic_counts": {},
+  "component_status": "complete"
+ },
+ "values": [
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:1b85d63e7cce783125024b80062908c9af561251f8a37ac2bee8561d11e592e6",
+   "char_start": 0,
+   "char_end": 366,
+   "value_sha256": "5f97bcd1e2edeba78448fe97e75657461b85276dd3767ff5d733b58c798254df",
+   "value": "Number of MINISO stores 名創優品門店數量\nMainland China 中國內地 3,926\nDirectly operated sto",
+   "value_truncated": true,
+   "binding_status": "ambiguous",
+   "column_id": "col-0",
+   "period_kind": null,
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:070188d81cc87978ab5d82ef47632ca8a7ee2c8fe1f72e59bdf8de2d126560c9",
+   "char_start": 0,
+   "char_end": 5,
+   "value_sha256": "52a8b34035404a37db9b09b2c6fe636e0a8fd4727074e26e276095aa60f3aa4d",
+   "value": "4,386",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-3",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:892dff7d8bfded9e103fdb923bd80c4334f92c271d34ff1c48cf7539f84f0199",
+   "char_start": 0,
+   "char_end": 2,
+   "value_sha256": "b7a56873cd771f2c446d369b649430b65a756ba278ff97ec81bb6f55b2e73569",
+   "value": "25",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-3",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:7a5f6a85220814f715a34c971bbb764caa3a48a9e1f030a03031c6374997f7f5",
+   "char_start": 0,
+   "char_end": 5,
+   "value_sha256": "5e596905c6b810329e8c89400cc41d8b2e3276cb559795f0730a5fba6802653b",
+   "value": "4,335",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-3",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:eea339f65b1d0a1f3f9a733cfb8988511e5afa5133b6fd6527e1ed0f3f27cc5d",
+   "char_start": 0,
+   "char_end": 2,
+   "value_sha256": "5f9c4ab08cac7457e9111a30e4664920607ea2c115a1433d7be98e97e64244ca",
+   "value": "26",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-3",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:cb91012dd2a243dcc27c4d59a108b1e995bab86bcd25826cadd49eb025b0d8fc",
+   "char_start": 0,
+   "char_end": 5,
+   "value_sha256": "4c24ba5ead1352b124496a107a5f042fab015cb690a3034acc724850622aa405",
+   "value": "3,118",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-3",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:d4f0151cd8bbc30dc9ed4df95c611eb2cbbed2353cf965ab16a381c7775a819f",
+   "char_start": 0,
+   "char_end": 3,
+   "value_sha256": "7182dd431b5c8833ed3c8a02c8615780df8dca7d83ed4166962b207f45a656b5",
+   "value": "503",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-3",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:ad1e4d662d1e16555530e5cf69c23c1cd884150978021b720727eff7da695e62",
+   "char_start": 0,
+   "char_end": 3,
+   "value_sha256": "6b3c238ebcf1f3c07cf0e556faa82c6b8fe96840ff4b6b7e9962a2d855843a0b",
+   "value": "404",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-3",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:04ce93ff0e4113355e980fe6366c2230aad0ae5a4dcca63824c64cffc3c72c32",
+   "char_start": 0,
+   "char_end": 5,
+   "value_sha256": "c6ece44747cdc1e6a927f237e0befbc4c95916d6048b93207918da4005f5621e",
+   "value": "2,211",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-3",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:9102f713587c1b2c08aeb164a6a77f846781b171f1197abe8874f023578d54ce",
+   "char_start": 0,
+   "char_end": 14,
+   "value_sha256": "a0ca6c62178f66e99ffb94dedbdd9f8f1611b1bd8c6470840d266d734841a571",
+   "value": "Total 合計 6,413",
+   "value_truncated": false,
+   "binding_status": "ambiguous",
+   "column_id": "col-0",
+   "period_kind": null,
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:e5cfbdb0bbb1c53cbc3496abd4106b425363fbe501b9ae5a27e9f881e8425a53",
+   "char_start": 0,
+   "char_end": 5,
+   "value_sha256": "aae77f6fa67977f1c901bc24d9cad0dc8d5a53ad142ea02de4d82e131745c73a",
+   "value": "7,504",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-3",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:450a8ef266106d65e655d7b3375879b4cdb224433c48d0e2013bdbe43b4d1f79",
+   "char_start": 0,
+   "char_end": 130,
+   "value_sha256": "04ab0c521891262834c8ed25a6e681ecb31d5be151276aaf85ec09b341cb8708",
+   "value": "Number of TOP TOY stores TOP TOY門店數量\nDirectly operated stores 直營店 14\nStores oper",
+   "value_truncated": true,
+   "binding_status": "ambiguous",
+   "column_id": "col-0",
+   "period_kind": null,
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:fc48627a42d644265bd616dce44d1dfcdb735e9d40fa29f08ce178ea380ce34c",
+   "char_start": 0,
+   "char_end": 2,
+   "value_sha256": "d59eced1ded07f84c145592f65bdf854358e009c5cd705f5215bf18697fed103",
+   "value": "40",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-2",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:187d8e7821cc3d5f9a7b2cac449cdebf3db1eb25dbe724e8a5b289800de504dc",
+   "char_start": 0,
+   "char_end": 3,
+   "value_sha256": "9a049b03f6fc40bfcf2f136320359257ed4af8513f71aa6fef47f17059bbae23",
+   "value": "236",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-2",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:16822d6ad45cbd7169f4dc3d755c09d834529f6bd40ce7a90157f5ee575b1a56",
+   "char_start": 0,
+   "char_end": 12,
+   "value_sha256": "2d64b3b09f16467452fa8681c5b64173a3be59ec41f14f2600103e351762cec2",
+   "value": "Total 合計 148",
+   "value_truncated": false,
+   "binding_status": "ambiguous",
+   "column_id": "col-0",
+   "period_kind": null,
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "07f4937e0558",
+   "page": 12,
+   "table_id": "p12:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:054ae339381e7ac2815f191592f00ec67a7f3c907df0c8578fe28c14ff5436d5",
+   "char_start": 0,
+   "char_end": 3,
+   "value_sha256": "c76b405781134be1dab7fe45adfb8c32104805a01de7b863e1004b66d56edf9f",
+   "value": "276",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-2",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  }
+ ],
+ "all_slices_match_original": true,
+ "cleanup": {
+  "original_sha256_after": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+  "original_unchanged": true,
+  "derived_files_deleted": true,
+  "work_dir_was_temporary": true
+ },
+ "wall_seconds": 3.991
+}

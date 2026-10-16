@@ -8,22 +8,22 @@ PLAN_ID：`du7-pdf-tables-2026-10-16`；PWF_PLAN_ROOT：`docs/plans`。
 
 ## A：调查、冻结接口、行为RED
 
-Status: pending
+Status: done
 
-按卡真实代码与期望，保留旧正确行为，区分合成/真实/未运行。
+按卡真实代码与期望，保留旧正确行为，区分合成/真实/未运行。见 findings.md A-1..A-5 与 receipts/red-1、red-2。
 
 ## B：所属层共因实现和集中测试
 
-Status: pending
+Status: done
 
-先测试后实现，不增加预算/权限/身份库；不改旧断言、跨仓或兄弟范围。
+先测试后实现，不增加预算/权限/身份库；不改旧断言、跨仓或兄弟范围。见 findings.md B-1 与 receipts/。
 
 ## C：实际入口E2E、清理和交接
 
-Status: pending
+Status: done
 
-只读原件，独立Temp/sentinel，成功/失败均恢复；正常commit后提交handoff.md/json和收据，冻结源码并STOP。
+只读原件，独立Temp/sentinel，成功/失败均恢复；正常commit后提交handoff.md/json和收据，冻结源码并STOP。见 findings.md C-1/C-2 与 receipts/e2e-*、cleanup-c.json。
 
 ## Next Step
 
-执行A；只在A/B/C大节点集中检查，不增加小节点人工许可或每commit全仓测试。
+已交付 handoff（handoff.md / handoff.json），owned 源码冻结，STOP 等 ROOT 接收；不执行 ROOT 接线与跨白名单扩张。

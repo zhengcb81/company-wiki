@@ -1,0 +1,436 @@
+{
+ "schema_version": "du7-pdf-table-e2e/1",
+ "status": "RUN",
+ "original": {
+  "file_name": "金禾实业：公开发行可转换公司债券募集说明书.PDF",
+  "sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+  "sha256_expected": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+  "sha256_matches_expected": true,
+  "bytes": 7062482,
+  "pages_requested": [
+   25,
+   26
+  ]
+ },
+ "parse": {
+  "parse_count": 1,
+  "page_count": 283,
+  "pages_read": 283,
+  "table_scan_pages": [
+   25,
+   26
+  ],
+  "deferred_table_page_count": 281,
+  "unit_count": 11154,
+  "seconds": 2.547,
+  "layout_capture": {
+   "processed_page_count": 64,
+   "processed_unit_count": 2293,
+   "deferred_unit_count": 8861,
+   "fine_element_count": 15230,
+   "complete": false,
+   "diagnostic_counts": {
+    "LAYOUT_CAPTURE_DEFERRED": 128
+   }
+  }
+ },
+ "work": {
+  "budget_ceiling": 4000000,
+  "used_total": 1267582,
+  "stages_used": {
+   "parse_done": 0,
+   "layout_hints_done": 1247098,
+   "table_observations_done": 1266159,
+   "binder_done": 1267582
+  },
+  "component_work_used": 19061
+ },
+ "tables": [
+  {
+   "scope": {
+    "parent_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+    "table_id": "p25:t0",
+    "page": 25
+   },
+   "cells": 16,
+   "header_rows": [
+    0
+   ],
+   "truncated": false,
+   "status": "complete",
+   "measurements": 7
+  },
+  {
+   "scope": {
+    "parent_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+    "table_id": "p25:t1",
+    "page": 25
+   },
+   "cells": 18,
+   "header_rows": [
+    0
+   ],
+   "truncated": false,
+   "status": "complete",
+   "measurements": 10
+  },
+  {
+   "scope": {
+    "parent_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+    "table_id": "p26:t0",
+    "page": 26
+   },
+   "cells": 6,
+   "header_rows": [],
+   "truncated": false,
+   "status": "partial",
+   "measurements": 4
+  }
+ ],
+ "denominator": {
+  "table_claims": 3,
+  "slots_observed": 40,
+  "refs_located": 40,
+  "cells_without_located_ref": 0,
+  "rows_truncated": 0,
+  "measurements": {
+   "bound": 17,
+   "ambiguous": 4,
+   "unavailable": 0
+  },
+  "unlocated_examples": [],
+  "binder_diagnostic_counts": {
+   "period_not_disclosed": 5,
+   "no_header_path": 7
+  },
+  "component_diagnostic_counts": {
+   "HEADER_EVIDENCE_CONFLICT": 1
+  },
+  "component_status": "complete"
+ },
+ "values": [
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:ed50ea33e86597f9e4d2f0a5dde163c6c7380a76306a40054ed5cda80709b393",
+   "char_start": 10,
+   "char_end": 13,
+   "value_sha256": "1a1cf797fabe7f95836fabeca626907c77b3e6c9aff7c2290b396a238c69362e",
+   "value": "800",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:7678d181877043412c1625775314dd8011ce68fd0f87812825040011e0e72249",
+   "char_start": 10,
+   "char_end": 12,
+   "value_sha256": "624b60c58c9d8bfb6ff1886c2fd605d2adeb6ea4da576068201b6c6958ce93f4",
+   "value": "30",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:e436e53f004c506d5163df9b7277968ee1c8a07c9b83a78b876f4a683a69341d",
+   "char_start": 7,
+   "char_end": 9,
+   "value_sha256": "39fa9ec190eee7b6f4dff1100d6343e10918d044c75eac8f9e9a2596173f80c9",
+   "value": "60",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:f09159d172fd0d3295a3676831d5445d8f976b1e5ca9e9d185fea3bd750f2b7a",
+   "char_start": 9,
+   "char_end": 11,
+   "value_sha256": "624b60c58c9d8bfb6ff1886c2fd605d2adeb6ea4da576068201b6c6958ce93f4",
+   "value": "30",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:b7671714ecca3413db470e912b3237b3d54b8a2501af1c82f2d2100e312ed5fc",
+   "char_start": 8,
+   "char_end": 9,
+   "value_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+   "value": "6",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:b5f4797cd4963a1447985646bc39f4b4a7e07c199f12ed5f54f1975cae9a87a7",
+   "char_start": 15,
+   "char_end": 17,
+   "value_sha256": "c75cb66ae28d8ebc6eded002c28a8ba0d06d3a78c6b5cbf9b2ade051f0775ac4",
+   "value": "69",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:c6c6c4581b54c6241660acc2f96387aa8ffe0eb8e620ba0631803e2db17e2c62",
+   "char_start": 5,
+   "char_end": 8,
+   "value_sha256": "abbb9233cee3e720b2a86acf4ad04e51a670a7e762f301f0fc5b64b8794c30cd",
+   "value": "995",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:aaf44a389682cde7818217a5ea216c7a71c6f64b3815d43c7b71887bd63ce128",
+   "char_start": 21,
+   "char_end": 26,
+   "value_sha256": "a3f6314590b09cd6507f4a8f5710b13d3ce7d96b29263955b2dcde827163f54a",
+   "value": "T-2 日",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:aaf44a389682cde7818217a5ea216c7a71c6f64b3815d43c7b71887bd63ce128",
+   "char_start": 29,
+   "char_end": 55,
+   "value_sha256": "242ae593774ebeeeea3d3b4fc66cc3749c918e4fefae47029c21c27dac7a091e",
+   "value": "刊登《募集说明书》、《发行公告》、《网上路\n演公告》",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-2",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:6111e5ebbba49863d6fa0b9ddcd3e155534a75b8a041ae3684f5b0af71392ea6",
+   "char_start": 21,
+   "char_end": 26,
+   "value_sha256": "e049a75076d8b19e46bede165b1c758ff46950832c82ead7ff469f2a466b2aeb",
+   "value": "T-1 日",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:6111e5ebbba49863d6fa0b9ddcd3e155534a75b8a041ae3684f5b0af71392ea6",
+   "char_start": 29,
+   "char_end": 54,
+   "value_sha256": "0b88c9b5ccb516e570e80a3ae1103b5371922559c3abc7da93bbc0fb58694ea7",
+   "value": "网上申购准备；原股东优先配售股权登记日；网\n上路演",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-2",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:2c3839809ba4a1204682a0b88249b5250a9caa64ec5898d1832705166566beb8",
+   "char_start": 20,
+   "char_end": 23,
+   "value_sha256": "7ad0f15a7cac0c506bbcfb9b5bf3249070ccede4a3ccc480f8d0bbb506adba7b",
+   "value": "T 日",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:2c3839809ba4a1204682a0b88249b5250a9caa64ec5898d1832705166566beb8",
+   "char_start": 26,
+   "char_end": 56,
+   "value_sha256": "4f23b58f3feb20851ebc36c6af3c46fa9c2e16d3c1b74754cee00b14e7131e2a",
+   "value": "刊登《发行方案提示性公告》；原股东优先配售\n并缴款；网上申购",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-2",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:711c6981f90f7944a50762ef3d25e0b88ee1e46f25b84852efd5812b88e5381e",
+   "char_start": 20,
+   "char_end": 25,
+   "value_sha256": "eb7372ffc80eebef95981b883d5a551143e25fe93d78ea93946b754cb9047138",
+   "value": "T+1 日",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:711c6981f90f7944a50762ef3d25e0b88ee1e46f25b84852efd5812b88e5381e",
+   "char_start": 28,
+   "char_end": 55,
+   "value_sha256": "47d491f523ce35a9d8b178de07bc62079c7cd183af6c80feaf7052f18dde8f02",
+   "value": "刊登《网上发行中签率及原股东配售结果公告》；\n网上摇号",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-2",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:cde570f35fb87293897edf70a8352ec5474de505ede91055eceaf88766eb4e2b",
+   "char_start": 20,
+   "char_end": 25,
+   "value_sha256": "d06e35f9e4af4675ad1e6698f7ddedfbe7ac1aa2410a12fc5b8f4b317099a0b8",
+   "value": "T+2 日",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-1",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 25,
+   "table_id": "p25:t1",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:cde570f35fb87293897edf70a8352ec5474de505ede91055eceaf88766eb4e2b",
+   "char_start": 28,
+   "char_end": 48,
+   "value_sha256": "0d7e3f7d833e116bba466e1966cc75f42b2d408ef50a9d13a23670d3929a4965",
+   "value": "刊登《中签号码公告》；网上中签投资者缴款",
+   "value_truncated": false,
+   "binding_status": "bound",
+   "column_id": "col-2",
+   "period_kind": "unspecified",
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 26,
+   "table_id": "p26:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:b409e98b185d93f3f89d44769b2d9288ecab2c1b65f3af46ad204bc29e2fd67a",
+   "char_start": 20,
+   "char_end": 25,
+   "value_sha256": "8aa090d48145ab642a9018d10227535ed1954fafa6af86cb7c4fa8208da903cb",
+   "value": "T+3 日",
+   "value_truncated": false,
+   "binding_status": "ambiguous",
+   "column_id": "col-1",
+   "period_kind": null,
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 26,
+   "table_id": "p26:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:b409e98b185d93f3f89d44769b2d9288ecab2c1b65f3af46ad204bc29e2fd67a",
+   "char_start": 28,
+   "char_end": 56,
+   "value_sha256": "36869eb14bb4b90b38d6d45c5f0e50b0aeb0ca9f6c9aefd3f9dd4ce4bf80cf2b",
+   "value": "主承销商根据网上资金到账情况确定最终配售结果\n和包销金额",
+   "value_truncated": false,
+   "binding_status": "ambiguous",
+   "column_id": "col-2",
+   "period_kind": null,
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 26,
+   "table_id": "p26:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:5c5209ab09e748d5dbff5fd731f83387fce6bd0ccae3bde13f5cc0e36f99cb47",
+   "char_start": 20,
+   "char_end": 25,
+   "value_sha256": "d63f5f2b943cf46b599af39fed9e21ca6c3c0479e01b962f51fe97f31da02f70",
+   "value": "T+4 日",
+   "value_truncated": false,
+   "binding_status": "ambiguous",
+   "column_id": "col-1",
+   "period_kind": null,
+   "slice_matches_original": true
+  },
+  {
+   "source_id": "3ce59fde9895",
+   "page": 26,
+   "table_id": "p26:t0",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:5c5209ab09e748d5dbff5fd731f83387fce6bd0ccae3bde13f5cc0e36f99cb47",
+   "char_start": 28,
+   "char_end": 38,
+   "value_sha256": "885554d0749e094e1d7ffaa7ea2ab44eac2ff761c3c91470c4da8ddcd4189a02",
+   "value": "刊登《发行结果公告》",
+   "value_truncated": false,
+   "binding_status": "ambiguous",
+   "column_id": "col-2",
+   "period_kind": null,
+   "slice_matches_original": true
+  }
+ ],
+ "all_slices_match_original": true,
+ "cleanup": {
+  "original_sha256_after": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+  "original_unchanged": true,
+  "derived_files_deleted": true,
+  "work_dir_was_temporary": true
+ },
+ "wall_seconds": 4.613
+}
