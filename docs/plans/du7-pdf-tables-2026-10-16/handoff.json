@@ -1,0 +1,136 @@
+{
+  "schema_version": "du7-handoff/1",
+  "card_id": "DU7-PDF-TABLE",
+  "base_commit": "04c7f1bc93386a5703693f9303c3a59bb7546025",
+  "branch": "codex/du7-pdf-tables-20261016",
+  "implementation_commits": ["a8b391da"],
+  "changed_paths": [
+    "src/company_wiki/document_normalization/pdf_table_observations/__init__.py",
+    "src/company_wiki/document_normalization/pdf_table_observations/adapter.py",
+    "tests/unit/pdf_table_observations/__init__.py",
+    "tests/unit/pdf_table_observations/builders.py",
+    "tests/unit/pdf_table_observations/pipeline.py",
+    "tests/unit/pdf_table_observations/test_1_prepare_and_scopes.py",
+    "tests/unit/pdf_table_observations/test_2_values_periods_units.py",
+    "tests/unit/pdf_table_observations/test_3_missing_and_boundary.py",
+    "tests/unit/pdf_table_observations/test_4_multi_unit_cells.py",
+    "tests/unit/pdf_table_observations/test_5_budget_and_stability.py",
+    "tests/unit/pdf_table_observations/test_6_generalization.py",
+    "tests/unit/pdf_table_observations/test_7_real_pipeline_pdf.py",
+    "tests/unit/pdf_table_observations/test_red_production_gap.py",
+    "e2e/run_e2e.py",
+    "docs/plans/du7-pdf-tables-2026-10-16/findings.md",
+    "docs/plans/du7-pdf-tables-2026-10-16/progress.md",
+    "docs/plans/du7-pdf-tables-2026-10-16/task_plan.md",
+    "docs/plans/du7-pdf-tables-2026-10-16/receipts/"
+  ],
+  "entrypoints": [
+    "company_wiki.document_normalization.pdf_table_observations.build_pdf_table_observations",
+    "e2e/run_e2e.py"
+  ],
+  "interfaces": {
+    "inputs": [
+      "du-input/1 observation (units[].hints.cells fine entries, hints.table_id/row/source_id)",
+      "du2-layout-hints/1 relations (header_for/caption_for/footnote_for), optional None",
+      "document_understanding.layout_hints.contract.WorkBudget (caller-owned instance)"
+    ],
+    "outputs": [
+      "du4-table-observation/1 tables (scope/units/cells/header_rows/provenance/truncated)",
+      "{\"status\": complete|partial|unavailable, \"tables\", \"diagnostics\", \"work_used\"}"
+    ],
+    "unchanged": [
+      "PDF parser (narrative_evidence/narrative_pdf_layout)",
+      "layout_snapshots (DU3)",
+      "layout_hints (DU2) and layout_bridge",
+      "observation_adapter",
+      "native_table_bridge (HTML)",
+      "table_measurements binder (DU4)",
+      "structure/pipeline/source_catalog",
+      "existing tests, gold fixtures, CI and hooks"
+    ]
+  },
+  "tests": [
+    {
+      "command": "PYTHONPATH=src python -B -m pytest -q tests/unit/pdf_table_observations",
+      "exit_code": 0,
+      "passed": 30,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "receipts/component-tests-final.log"
+    },
+    {
+      "command": "PYTHONPATH=src python -B -m pytest -q tests/unit/du4_table_measurements tests/unit/document_understanding_root tests/unit/document_normalization_layout_snapshots tests/unit/document_understanding_layout_hints tests/unit/test_shared_reading_pdf_layout.py tests/unit/test_shared_reading_pdf_table_policy.py tests/unit/test_shared_reading_layout_coverage.py",
+      "exit_code": 0,
+      "passed": 516,
+      "failed": 0,
+      "skipped": 24,
+      "receipt": "receipts/old-suite-regression.log"
+    },
+    {
+      "command": "python -m ruff check src/company_wiki/document_normalization/pdf_table_observations tests/unit/pdf_table_observations",
+      "exit_code": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "receipt": "receipts/ruff-final.log"
+    }
+  ],
+  "red_receipts": [
+    "receipts/red-1-pre-implementation.log",
+    "receipts/red-2-behavior-replay.log"
+  ],
+  "fixtures": [
+    {
+      "kind": "synthetic",
+      "source_sha256": null,
+      "scope": "tests/unit/pdf_table_observations builders (in-memory du-input/1 + du2-layout-hints/1 wire, fitz-generated PDFs); no fixture files on disk",
+      "expected_basis": "construction card manual expectations A-3 written independently of the implementation"
+    },
+    {
+      "kind": "real",
+      "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "scope": "hk-annual (MINISO 2024 bilingual annual) page 12, read-only original",
+      "expected_basis": "main PWF sample_manifest hk-annual; e2e receipt receipts/e2e-hk-annual-p12.json"
+    },
+    {
+      "kind": "real",
+      "source_sha256": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+      "scope": "cn-equity (Hengfeng 2020 equity offering) pages 61-62, read-only original",
+      "expected_basis": "main PWF sample_manifest cn-equity; e2e receipt receipts/e2e-cn-equity-p61-62.json"
+    },
+    {
+      "kind": "real",
+      "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+      "scope": "cn-convertible (Jinhe convertible prospectus) pages 223-224 holdout and pages 25-26 addendum, read-only original",
+      "expected_basis": "main PWF sample_manifest cn-convertible; receipts/e2e-cn-convertible-holdout-p223-224.json and receipts/e2e-cn-convertible-addendum-p25-26.json"
+    }
+  ],
+  "old_behavior_preserved": [
+    "old TABLE/layout suites run unchanged: 516 passed / 24 skipped / 0 failed (receipts/old-suite-regression.log), including the DU4 real HK packet measurements",
+    "no old assertion or gold fixture edited; test fixture dirs materialised read-only via sparse-checkout to run as-is",
+    "HTML native table bridge, PDF parser, DU3 layout snapshots, DU2 layout hints and the DU4 binder untouched",
+    "wire kind/locator/unit ids reused verbatim; observation inputs byte-identical after calls (test_5)"
+  ],
+  "known_limits": [
+    "deep-page PDF tables have no fine geometry: PdfLayoutCollector capture is hard-capped at 64 pages (resolve_limits can only tighten), so holdout pages 223/224 are LAYOUT_CAPTURE_DEFERRED and the component degrades honestly to partial with 0 tables",
+    "upstream capture_table keeps only valued boxed cells: lost empty slots and merged spans are never fabricated (presence empty/merged_unknown never produced, spans stay None)",
+    "row label = leading native slot of a non-header row with >=2 cells; transposed tables would misattach (counterexample in findings A-4-2)",
+    "wire kind table_header is an unconditional row-0 claim; without a shared-engine view of the table it remains the only header evidence (documented residual), contradicted claims are rejected via shared data-row groups (seen once on real Hengfeng data)",
+    "words carriers are never used to re-locate values (forbidden substring search); NFC-only-equal slices are conservatively dropped (0 occurrences in real runs)",
+    "structural validity does not guarantee business/period interpretation; binder semantics unchanged"
+  ],
+  "not_run": [
+    "holdout p223/224 binding-quality acceptance: blocked by the upstream 64-page layout capture cap (the run itself executed and honestly recorded 0 tables/partial; no fake pass claimed)",
+    "main PWF sample pages beyond the card's named pages (cn-h1/cn-ipo/...) out of scope for this card"
+  ],
+  "root_integration_steps": [
+    "one production call site after apply_layout_hints: build_pdf_table_observations(observation, layout_hints, work_budget=shared) then bind_operating_table(table, work_budget=shared) per table on the same budget instance",
+    "add explanation-needed refs (header/period raw labels, unit/scope/qualifier) to the existing selection dependency closure (du4_production_integration.md §4)",
+    "decide deep-page layout capture policy (target-page capture or widening PdfLayoutCollector caps; ROOT frozen surface)",
+    "source enhancements with counterexamples (findings A-4-6): project parser table_headers header-row observation to the wire, add a real row-label observation (HTML header_scope=row equivalent), retain empty slots/merged spans in capture_table",
+    "real HK retained packet plus unseen company/format holdout claim checks stay in the ROOT/parent PWF acceptance nodes"
+  ],
+  "supplier_calls": 0,
+  "production_writes": 0,
+  "cleanup_receipt": "receipts/cleanup-c.json"
+}
