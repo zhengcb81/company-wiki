@@ -78,7 +78,9 @@ def test_multi_unit_cell_carries_every_real_ref_without_a_fabricated_join():
         ]
         for m in bound["measurements"]
     )
-    assert values == ["34", "56"]
+    assert values == ["12", "34", "56"]  # no invented leading-cell label
+    assert all(m["binding_status"] == "unavailable" for m in bound["measurements"])
+    assert result["status"] == "partial"
     assert all(v not in {"34 56", "3456"} for v in values)
 
 

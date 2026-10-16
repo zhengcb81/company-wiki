@@ -64,7 +64,8 @@ def _cell(table, row, column):
 def test_header_rows_follow_evidence_not_row_index_constants():
     obs, hints = _sample()
     result = build_pdf_table_observations(obs, hints, work_budget=budget())
-    assert result["status"] == "complete"
+    assert result["status"] == "partial"
+    assert "ROW_LABEL_UNAVAILABLE" in {d["code"] for d in result["diagnostics"]}
     table, = result["tables"]
     assert table["header_rows"] == [0]
     assert all(
@@ -110,7 +111,7 @@ def test_row_label_unit_and_scope_refs_point_at_their_own_fragments():
     value_cell = _cell(table, 1, 1)
     label_ref = _cell(table, 1, 0)["text_refs"][0]
     assert [_slice(table, r) for r in _cell(table, 1, 0)["text_refs"]] == ["海外直营门店"]
-    assert label_ref in value_cell["header_refs"]
+    assert label_ref not in value_cell["header_refs"]  # native first column is not an observed row-label role
     caption_refs = [r for r in value_cell["header_refs"] if r["unit_id"] == "u-cap"]
     assert caption_refs and _slice(table, caption_refs[0]) == "单位：（人民币万元）"
 
@@ -119,13 +120,15 @@ def test_row_label_unit_and_scope_refs_point_at_their_own_fragments():
         m for m in bound["measurements"]
         if _slice(table, m["value_ref"]) == "16" and m["column_id"] == "col-1"
     )
-    # 行标签：binder 把非列路径的 header_refs 作为行标签，指向标签原片段
-    assert value["row_label_refs"] == [label_ref]
-    assert [_slice(table, r) for r in value["row_label_refs"]] == ["海外直营门店"]
+    # No native row-label role exists on this wire: keep the original cell,
+    # but do not borrow its text as a proven label for another value.
+    assert value["row_label_refs"] == []
+    assert any(_slice(table, m["value_ref"]) == "海外直营门店" for m in bound["measurements"])
     # 单位：来自 caption 片段，原词不变更、无换算
     assert [_slice(table, r) for r in value["unit_refs"]] == ["（人民币万元）"]
-    # 范围：标签中的范围词保留为整段标签引用
-    assert [_slice(table, r) for r in value["scope_refs"]] == ["海外直营门店"]
+    # The neighbouring cell contains a geographic word, but no relation proves
+    # it qualifies this number; scope stays unknown.
+    assert value["scope_refs"] == []
 
 
 def test_verbatim_values_negative_dash_and_strings_are_not_rewritten():
@@ -146,8 +149,9 @@ def test_verbatim_values_negative_dash_and_strings_are_not_rewritten():
         for m in bound["measurements"]
     ]
     assert "-1,200" in values and "—" in values
-    # 行标签与 caption 不是 measurement（label_refs 标记），不重复计值
-    assert "海外直营门店" not in values and "单位：（人民币万元）" not in values
+    # Caption is observed context; the leading data cell lacks an observed
+    # label role and must remain available as original data instead of vanishing.
+    assert "海外直营门店" in values and "单位：（人民币万元）" not in values
 
 
 def test_scale_currency_and_composite_unit_words_stay_verbatim():
@@ -186,12 +190,13 @@ def test_scale_currency_and_composite_unit_words_stay_verbatim():
     by_value = {
         _slice(table, m["value_ref"]): m for m in bound["measurements"]
     }
-    assert sorted(by_value) == ["0.52", "1,024", "3.2", "7,000"]
-    assert [_slice(table, r) for r in by_value["3.2"]["unit_refs"]] == ["（人民币亿元）"]
-    assert [_slice(table, r) for r in by_value["1,024"]["unit_refs"]] == ["（US$千元）"]
-    assert [_slice(table, r) for r in by_value["0.52"]["unit_refs"]] == ["（人民币元）"]
-    assert by_value["7,000"]["unit_refs"] == []  # 计数单位无量纲表达时不造单位
-    assert [_slice(table, r) for r in by_value["3.2"]["row_label_refs"]] == ["合同负债（人民币亿元）"]
+    assert set(by_value) == {"0.52", "1,024", "3.2", "7,000", "合同负债（人民币亿元）", "海外收入（US$千元）", "每股收益（人民币元）", "门店数（家）"}
+    # Unit words in adjacent cells are preserved verbatim but not silently
+    # promoted to a relation that the input never observed.
+    for number in ("3.2", "1,024", "0.52", "7,000"):
+        assert by_value[number]["unit_refs"] == []
+        assert by_value[number]["row_label_refs"] == []
+    assert result["status"] == "partial"
 
 
 def test_missing_header_evidence_stays_unknown():

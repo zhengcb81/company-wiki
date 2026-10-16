@@ -65,7 +65,8 @@ def test_multi_table_multi_page_and_same_id_across_parents_are_kept_apart():
     merged = merge_layout_hints(*[hints_for(rows) for rows in (a_t0, a_t1, a_p2, b_t0)])
 
     result = build_pdf_table_observations(obs, merged, work_budget=budget())
-    assert result["status"] == "complete"
+    assert result["status"] == "partial"
+    assert "ROW_LABEL_UNAVAILABLE" in {d["code"] for d in result["diagnostics"]}
     scopes = {
         (t["scope"]["parent_id"], t["scope"]["table_id"], t["scope"]["page"]): t
         for t in result["tables"]

@@ -67,7 +67,9 @@ def test_real_parse_produces_observations_that_bind_and_slice_back():
         ]
         for m in bound["measurements"]
     )
-    assert value_list == ["-1,200", "16", "16", "N/A"]
+    assert value_list == sorted(["-1,200", "16", "16", "N/A", "Directly operated stores", "Distributor stores"])
+    assert result["status"] == "partial"
+    assert all(m["row_label_refs"] == [] for m in bound["measurements"])
     columns = {
         table["units"][m["value_ref"]["unit_id"]]["text"][
             m["value_ref"]["char_start"]:m["value_ref"]["char_end"]

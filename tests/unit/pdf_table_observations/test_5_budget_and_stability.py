@@ -62,17 +62,20 @@ def test_mid_exhaustion_keeps_only_closed_tables_and_half_of_nothing():
     obs, hints = _two_tables()
     full = build_pdf_table_observations(obs, hints, work_budget=WorkBudget(100_000))
     assert len(full["tables"]) == 2
-    # 让预算恰好在第二张表构建中途耗尽：第一张闭合表保留，第二张整表丢弃
-    budget = WorkBudget(max_work_units=full["work_used"] - 1)
-    result = build_pdf_table_observations(obs, hints, work_budget=budget)
-    assert budget.exhausted
-    assert result["status"] == "partial"
-    assert "WORK_BUDGET_EXCEEDED" in {d["code"] for d in result["diagnostics"]}
-    assert len(result["tables"]) == 1
-    kept, = result["tables"]
-    assert kept["scope"] == full["tables"][0]["scope"]
-    assert kept == full["tables"][0]  # 无半个表：保留的表与完整运行逐字节一致
-    assert result["work_used"] == budget.used
+    # Check every actual cutoff, instead of assuming full_work-1 must land
+    # inside table #2 rather than a paid final diagnostic scan.
+    saw_exactly_one_closed_table = False
+    for cap in range(full["work_used"]):
+        budget = WorkBudget(max_work_units=cap)
+        result = build_pdf_table_observations(obs, hints, work_budget=budget)
+        assert budget.exhausted
+        assert result["status"] == "partial"
+        assert "WORK_BUDGET_EXCEEDED" in {d["code"] for d in result["diagnostics"]}
+        assert result["tables"] == full["tables"][:len(result["tables"])]
+        assert result["work_used"] == budget.used <= cap
+        saw_exactly_one_closed_table |= len(result["tables"]) == 1
+    assert saw_exactly_one_closed_table
+
 
 
 def test_inputs_are_unchanged_and_outputs_are_deterministic():

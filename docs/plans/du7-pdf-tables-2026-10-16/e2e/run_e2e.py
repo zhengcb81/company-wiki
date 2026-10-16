@@ -2,10 +2,10 @@
 
 Usage (from the worktree root, PYTHONPATH=src)::
 
-    python -B e2e/run_e2e.py --original <read-only path> --sha256 <expected sha256> \
+    python -B docs/plans/du7-pdf-tables-2026-10-16/e2e/run_e2e.py --original <read-only path> --sha256 <expected sha256> \
         --pages 12 --language zh --work-dir <tmp dir> --out receipts/e2e-....json
 
-    python -B e2e/run_e2e.py --manifest <sample_manifest.json> --sample hk-annual \
+    python -B docs/plans/du7-pdf-tables-2026-10-16/e2e/run_e2e.py --manifest <sample_manifest.json> --sample hk-annual \
         --originals-root <root of relative manifest paths> ...
 
 One run = one real parse of the read-only original, then the production adapter,

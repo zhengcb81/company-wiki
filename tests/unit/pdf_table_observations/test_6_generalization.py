@@ -57,7 +57,9 @@ def test_header_order_and_business_names_do_not_change_the_semantics():
         values = [
             _slice(table, m["value_ref"]) for m in bound["measurements"]
         ]
-        assert sorted(values) == sorted(grid[1][1:])
+        assert sorted(values) == sorted(grid[1])
+        assert result["status"] == "partial"
+        assert all(m["row_label_refs"] == [] for m in bound["measurements"])
         assert all(m["binding_status"] == "bound" for m in bound["measurements"])
 
 
@@ -78,7 +80,7 @@ def test_multi_row_header_blocks_follow_relations_not_header_row_constants():
     bound = bind_operating_table(table, work_budget=budget())
     assert {m["binding_status"] for m in bound["measurements"]} == {"bound"}
     assert all(
-        _slice(table, m["value_ref"]) in {"18", "21"} for m in bound["measurements"]
+        _slice(table, m["value_ref"]) in {"门店", "18", "21"} for m in bound["measurements"]
     )
 
 
@@ -97,4 +99,4 @@ def test_newest_year_is_never_a_header_rule():
     assert table["header_rows"] == [1]
     bound = bind_operating_table(table, work_budget=budget())
     values = {_slice(table, m["value_ref"]) for m in bound["measurements"]}
-    assert values == {"18", "47"}  # 第 0 行的 18 仍是值，不是标题
+    assert values == {"直营门店", "经销商门店", "18", "47"}  # 第 0 行的 18 仍是值，不是标题
