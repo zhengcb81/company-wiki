@@ -1,3 +1,13 @@
+## DU8工程接收发布 — 2026-10-16（当前）
+
+两作者完整历史与ROOT修复已正常并入main，作者树未改。AUDIT `a2f216bd` 本地并线/干净，无remote；两安装目录各5技能文件定点同步，全部38文件MATCH。实际完整unittest620PASS/2SKIP(91.330s)，随后修独审复合locator/null归一化P2；最终59PASS/15subtests(7.49s)含unittest遗漏的17例，独立终审13SHA/8控例PASS。前后源版本与重叠计数分别保留，不虚报同一版本重跑全套。
+
+FF工程 `c7c8867d` main/origin已发布，ROOT修复41f49882，251PASS/独审0P1/P2，正常pre-push754PASS/7SKIP/78subtests(87.73s)，精确quality CI38977822228已SUCCESS。唯一41链20PASS/4PARTIAL/17NOT_RUN(173.27s)，完整中断后重启NOT_RUN，C仍OPEN。完整209文件/1.15MB证明保留、scratch/cache删除；未偷偷重跑、改CaseSpec或抬30/180限额。[详情](review/du8_reception.md)。CI绿不等于完整41例通过。
+
+CWP冻结原生表格另复放17PASS/2.61s（与190重叠），实际VRSK/MSFT原2M预算分别1,989,140/1,035,473、单parse、无耗尽；Temp/sentinel/config保护通过。0供应商/0原件复制；CWP工程WIP待正常发布，DU8RF仍外包、DU9不写。Next：接收记录发布→CWP生产闭包；FF效率C保留具名责任。
+
+---
+
 ## DU8并行施工已就绪 — 2026-10-16
 
 三条新独立线已准备为READY：[总表](parallel/du8-2026-10-16/README.md)、[RF比较单一责任](parallel/du8-2026-10-16/du8_rf_comparison_owner.md)、[FF固定时限矩阵](parallel/du8-2026-10-16/du8_ff_matrix_completion.md)、[AUDIT数值实读证据](parallel/du8-2026-10-16/du8_audit_measure_evidence.md)。各自RF/FF/AUDIT独占工区，源码base/seed/干净状态/import已验证，启动共9,893,247bytes，0原件副本/0供应商/主仓WIP保持；各卡业务A/B/C尚未实施。可立即同时启动，不等待ROOT的CWP/ET接线；只有原三个大节点集中验收。
@@ -409,3 +419,23 @@ DU3三树最新均干净，QUALITY本地接收四commit至804dfbb7、ROOT217PASS
 三独立稀疏工作树已创建并附各自卡/接口/真实观察/参考设计，实际各约20.8MB，三份约62.4MB（源码15.2MB，另根工程文件/夹具；共享 Git 对象）。无原件/生产 config 目录。包本身尚未实施/测试，READY。准备中一次误用 PowerShell 不支持的 Bash 花括号路径导致 ParserError，改为显式四路径；一次猜测预算文件不存在，改用 CodeGraph 定位既有 WorkBudget；CodeGraph node 首次参数 name 无效，按 symbol 调用修正。均未修改源配置/原件。
 
 DU4 启动核对：三个计划入口/独立 Git 分支/稀疏目录与本树 src import 均确认，diff-check 通过；尚未执行作者组件测试。核对脚本首轮子进程输出使用本地编码导致 UTF8 解码失败，改显式 -X utf8；第二轮把 Python repr 路径直接与原始路径比较导致观察器断言失败，改 JSON 解码后的 resolved Path 比较，最终三树通过。均为准备脚本问题，无源码/原件变更。
+
+
+## 2026-10-16 ROOT继续
+
+用户确认三DU8包发出，launch/总表更新DISPATCHED；ROOT不进入三作者白名单。ET228/10gold与隔离99+跨cwd7已冻结待正常发布。v4最终26PASS/172.11s含无.planning部署；0供应商，六错引/真实holdout仍开放。
+
+
+## ROOT工程节点更新 — 2026-10-16
+
+ET 0cb71731已正常并线推送且精确远端HEAD一致，2个未跟踪原项保持。CWP新增用途前置真实RED→修复、原生表未知质量标记与capture因果；1016PASS/11SKIP，VRSK1966632和MSFT1035473工作单位不耗尽，39/96片段原范围验真。旧probe在沙箱Temp末级目录删除失败记录保留，新probe改工作区owned临时根并验证清理。
+
+
+## DU9与当前审查 — 2026-10-16
+
+三个READY工区共50,750,798bytes，0生产原件副本/0供应商。正常docs提交070ae520已推远端，主仓活动源码不暂存/不恢复。初启动全status相等检查捕获ROOT授权structure/tables.py并发修改，三个seed已完成；只读恢复核对精确seed/branch/clean/card字节后产出launch，不重建或覆盖源码。独立审查的同表混合行/partial问题修复仍待最终验收；原1016不能代表最终源SHA。
+
+
+## 2026-10-16 DU8接收
+
+FF作者C只有21/26/14PASS，完整完成仍OPEN；原15基线失败不能自动当新回归，也不能因基线存在就绕hook。AUDIT最终源码a915456，后续仅文档至3ed248df，必须接完整历史不能按旧handoff只取首feat。两作者树只读，ROOT用独立树审查和修复。

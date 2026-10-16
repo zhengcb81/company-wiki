@@ -1,3 +1,9 @@
+## DU8接收根因发现 — 2026-10-16（当前）
+
+AUDIT已在既有EvidenceReader统一精确JSON/字段定位/缓存/时间，保留所有坏/重复输入分母，修字节版本/冲突复活/非法pointer；无第二解析器预算或运行许可。最后独审又抓到复合primary locator+null字段回退漏归一化，保存实际RED再复用split_locator修，独立终审通过后已并入本地main/定点安装。完整unittest漏发现一个pytest函数文件17个参数化用例，已单独补跑；不按预计总数编造覆盖。FF工程同样已并线推送，但唯一41链仅20PASS/4PARTIAL/17NOT_RUN，C继续OPEN。197次Python boot/35次FF parent call表明静态分组2.02%收益不足以根治成本；下一步定位并消除重复启动/准备，保持固定输入/边界/来源证明，不抬限额。中断observer须观察当前state与零→新增GET，无法证明准确kill瞬间仍在网络阻塞；完整矩阵中断后重启仍NOT_RUN。三损坏UTF8文档已按原字节hex/SHA留档重建。原失败与最终版本分别保留。[接收细则](review/du8_reception.md)。
+
+---
+
 ## DU8并行施工已就绪 — 2026-10-16
 
 三条新独立线已准备为READY：[总表](parallel/du8-2026-10-16/README.md)、[RF比较单一责任](parallel/du8-2026-10-16/du8_rf_comparison_owner.md)、[FF固定时限矩阵](parallel/du8-2026-10-16/du8_ff_matrix_completion.md)、[AUDIT数值实读证据](parallel/du8-2026-10-16/du8_audit_measure_evidence.md)。各自RF/FF/AUDIT独占工区，源码base/seed/干净状态/import已验证，启动共9,893,247bytes，0原件副本/0供应商/主仓WIP保持；各卡业务A/B/C尚未实施。可立即同时启动，不等待ROOT的CWP/ET接线；只有原三个大节点集中验收。
@@ -375,3 +381,23 @@ RF 的实际公有 claim/versions 形状并未变化，真实破口仅是新增 
 ### DU5调查纠错记录
 
 跨仓sandbox git status误报非worktree/Permission denied，已用正常宿主只读核对：RF仅原alert/output WIP、FF仅原凭证文件未跟踪（未读取）、audit干净。若干猜测的AGENTS/旧handoff/金标路径并不存在，改用rg inventory找实际文件，不据猜测判代码缺失。PWF初次PWF_PLAN_ROOT覆盖docs选择产生空输出，已清除该覆盖并以docs/plans+明确PLAN_ID正确解析。RF旧draft-backtest handoff已被后来代码实现，未重复发卡；HKD跨币旧反例仍必须拒绝，仅更新正确原因而不改成PASS。新三卡均未运行业务测试/真实供应商。
+
+
+## 2026-10-16 ROOT继续
+
+默认PDF自动triage仍耗尽前部几何限额；显式深页成功不是默认完成。统一PageIntent需复用同catalog/章节匹配，且旧automation隐式二次full_scan会重置15秒，须按根因整改；不提高cap。
+
+
+## ROOT工程节点更新 — 2026-10-16
+
+先全量数值绑定再丢会计表是真实效率回归。统一用途prepare一次、再绑定经营表、source复用结果修复共同根因；不提高2M。未知行角色不能因数字bound就当表映射完整；复用现质量flag和约束传模型。默认PageIntent与隐式full-scan重置仍需下一节点。
+
+
+## 同表原生行语义的重要性 — 2026-10-16
+
+两张表的用途反例不覆盖同表混合行。独立探针真实发现数字cell900继承Capacity表头且闭包补回Cash标签；必须在最早结构层按source/table/page/row观察统一用途，不能单靠后置标partial。partial来源绑定也不能由存活bound洗complete。ROOT已授权同一owner修structure/table_purpose、structure/tables、native bridge及专用测试；报告先保留REQUEST_CHANGES，修复者不自签独立PASS。
+
+
+## 2026-10-16 DU8接收
+
+FF作者C只有21/26/14PASS，完整完成仍OPEN；原15基线失败不能自动当新回归，也不能因基线存在就绕hook。AUDIT最终源码a915456，后续仅文档至3ed248df，必须接完整历史不能按旧handoff只取首feat。两作者树只读，ROOT用独立树审查和修复。

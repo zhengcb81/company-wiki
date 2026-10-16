@@ -1,0 +1,145 @@
+{
+  "schema_version": "du8-root-reception/1",
+  "status": "AUDIT_ACCEPTED_FF_ENGINEERING_PUBLISHED_C_OPEN",
+  "ff": {
+    "main_origin": "c7c8867da35cd19d4f419fa70947332615e8e9c0",
+    "ci": [
+      {
+        "id": 38977822228,
+        "name": "quality",
+        "head_sha": "c7c8867da35cd19d4f419fa70947332615e8e9c0",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/38977822228",
+        "created_at": "2026-10-16T22:47:29Z",
+        "updated_at": "2026-10-16T22:48:51Z"
+      }
+    ],
+    "focused_passed": 251,
+    "pre_push": {
+      "passed": 754,
+      "skipped": 7,
+      "subtests": 78
+    },
+    "full41": {
+      "PASS": 20,
+      "FAIL": 0,
+      "PARTIAL": 4,
+      "NOT_RUN": 17,
+      "seconds": 173.2744
+    },
+    "full_interruption_restart": "NOT_RUN",
+    "all_C_completed": false
+  },
+  "audit": {
+    "main": "a2f216bd8cc8e3ed430c60ee27bdd309dabd8a17",
+    "repair_commit": "7ea6071b42ffb5155cf3d0741ac0603708aad6fa",
+    "remote": null,
+    "unittest_before_locator_fix": {
+      "passed": 620,
+      "skipped": 2,
+      "seconds": 91.33
+    },
+    "final_focused": {
+      "passed": 59,
+      "subtests": 15,
+      "seconds": 7.49
+    },
+    "independent_final": {
+      "passed": 8,
+      "source_files_verified": 13
+    },
+    "installed": [
+      {
+        "before": {
+          "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+          "files": 38,
+          "changed": [],
+          "mismatches": [
+            "SKILL.md",
+            "scripts/financial_measure_audit.py",
+            "scripts/financial_measure_evidence.py",
+            "scripts/review_evidence.py",
+            "references/financial-measure-evidence.md"
+          ],
+          "status": "DRIFT"
+        },
+        "installed": {
+          "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+          "files": 38,
+          "changed": [
+            "SKILL.md",
+            "scripts/financial_measure_audit.py",
+            "scripts/financial_measure_evidence.py",
+            "scripts/review_evidence.py",
+            "references/financial-measure-evidence.md"
+          ],
+          "mismatches": [],
+          "status": "MATCH"
+        },
+        "after": {
+          "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+          "files": 38,
+          "changed": [],
+          "mismatches": [],
+          "status": "MATCH"
+        }
+      },
+      {
+        "before": {
+          "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+          "files": 38,
+          "changed": [],
+          "mismatches": [
+            "SKILL.md",
+            "scripts/financial_measure_audit.py",
+            "scripts/financial_measure_evidence.py",
+            "scripts/review_evidence.py",
+            "references/financial-measure-evidence.md"
+          ],
+          "status": "DRIFT"
+        },
+        "installed": {
+          "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+          "files": 38,
+          "changed": [
+            "SKILL.md",
+            "scripts/financial_measure_audit.py",
+            "scripts/financial_measure_evidence.py",
+            "scripts/review_evidence.py",
+            "references/financial-measure-evidence.md"
+          ],
+          "mismatches": [],
+          "status": "MATCH"
+        },
+        "after": {
+          "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+          "files": 38,
+          "changed": [],
+          "mismatches": [],
+          "status": "MATCH"
+        }
+      }
+    ]
+  },
+  "reserved_not_entered": [
+    "DU8-RF-COMPARISON",
+    "DU9 profiles",
+    "DU9 geometry_intent",
+    "DU9 ET legacy comparison"
+  ],
+  "supplier_calls": 0,
+  "original_copies": 0,
+  "raw_originals_modified": false,
+  "archive": {
+    "path": "docs/plans/document-understanding-2026-10-13/common-root-quality-evidence/du8-reception-receipts.zip",
+    "bytes": 261724,
+    "sha256": "98231f0e3441131618d791aadb3f66ae1b00bd6761c4ee0f20d3e692aef1558c"
+  },
+  "open": [
+    "FF repeated startup/preparation cost and complete41/restart acceptance",
+    "CWP frozen engineering publication",
+    "default geometry intents",
+    "real configured summaries and heldout semantic quality"
+  ]
+}

@@ -1,3 +1,41 @@
+## DU8两包工程接收并线完成，FF完整C仍OPEN — 2026-10-16
+
+两作者HEAD `6f381199`/`3ed248df` 完整历史均已保留并线，作者树只读不动。AUDIT共享reader精确数值/覆盖分母/冲突/预算根因已修；完整单测620PASS/2SKIP，归一化一处终审P2之后最终集中59PASS及独立8控例PASS。本地main `a2f216bd` 干净，`.agents`/`.claude`定点各5文件同步、38文件MATCH；无remote未创建。FF最终251PASS及独审0P1/P2，工程main/origin `c7c8867d` 正常推送，pre-push754PASS/7SKIP；唯一41例仍20PASS/4PARTIAL/17NOT_RUN、173.27s，C与完整中断重启仍OPEN，不能以0FAIL称全通过。详见[接收实施细则](review/du8_reception.md)。DU8RF、DU9白名单不进入。CWP冻结190PASS、ROOT17PASS和最新两实文档原2M预算通过（1,989,140/1,035,473，单parse/0API）；工程源码尚未发布，真实摘要质量仍未完成，原WIP保留。
+
+**Next Step：** 发布本次接收/PWF及精确FF CI结论，返回CWP冻结工程的正常提交推送和默认PageIntent/共享引擎生产闭包；FF重复启动/准备效率及完整中断恢复为具名未完成责任，不继续调权重或放大限额冒充完成。
+
+---
+
+## 当前唯一执行状态 — 2026-10-16 DU9已就绪
+
+三张DU9新卡已完成工区/seed/import/接口与排他白名单，母卡已正常提交推送 `070ae520444d6ab875686fd8abb12ba9c6c12f31`。[总览](parallel/du9-2026-10-16/README.md)。状态READY_NOT_DISPATCHED（等待用户分发，不能冒称已开工）。两CWP作者分别独占profiles与新geometry_intent目录、ET作者独占legacy比较；ROOT不写这些白名单，仍独占source/parser/automation生产装配及本轮structure/binder共因整改。DU8原三线保持用户已分发状态，不进入其工区。
+
+每卡新增用户要求：最终交接前必须调用独立审查agent全面审查，所有问题修复并经独立复核PASS后方可交接；报告记录agent身份、实际审查提交与源码SHA、问题及修复/验证。不是新增运行时许可或逐小节点人签。
+
+ET主线/远端 `0cb71731` 已发布。CWP新工程代码尚未提交：第一轮1016PASS/11SKIP之后，独立审查发现同表会计数字借经营头混入及partial被洗complete，原RED保留；当前按原生row/parent/table scope在最早用途层根治并复用到package/binder，相关186通过后仍在收尾max_chars与rowspan边界，不能把旧快照绿写成最终验收。
+
+实际公开v4 raw/1、raw/2、official_json与RF真实消费者在正常主机环境4PASS/186.53s；首轮沙箱loopback不可用3+1失败/combined240s超时保留，0真实供应商、Temp与原件/config保护通过。10个runtime unit亦通过。该工程E2E不代替真实供应商摘要/六错引/holdout/default切换。
+
+**Next Step：** 收齐row语义/partial/预算/rowspan整改及ROOT最终独审，复放必要相邻/真实预算后正常提交推送工程节点；DU9作者组件收到后由ROOT统一接默认PageIntent、取消0.9隐式二次full_scan预算重置，再做原配置真实摘要与未见公司质量验收。原A/B/C大节点保持，无额外小门禁。
+
+---
+
+## ROOT工程节点更新 — 2026-10-16
+
+**ET已发布**：main/origin `0cb71731`。CWP生产TABLE/父文/capture/STATE集中1016PASS/11SKIP，真实两源不耗尽预算；正式v4/RF最终联调进行中。详见[工程节点](review/production_ports_20261016.md)及[下一默认深页实施](review/pdf_page_intent_implementation.md)。
+
+**Next Step：** 完成最终联调并正常提交推送CWP工程节点；随后实施默认PageIntent与真实摘要质量，不切默认。
+
+---
+
+## DU8已由用户分发；ROOT推进排他主线 — 2026-10-16
+
+三卡状态DISPATCHED，RF/FF/AUDIT独立工区及其白名单由外包作者排他；ROOT不写这些工区。ROOT继续CWP与ET：先发布已冻结ET节点，再统一TABLE不确定性/预算/来源capture因果，随后默认深页规划与正式v4摘要真实验收。v4公开请求/正式runner26项隔离测试通过，零供应商，真实语义及holdout仍OPEN。
+
+**Next Step：** 正常提交ET接收整改并合入main、推送；继续CWP生产闭包。只A/B/C大节点，无逐小节点审查。
+
+---
+
 ## DU8并行施工已就绪 — 2026-10-16
 
 三条新独立线已准备为READY：[总表](parallel/du8-2026-10-16/README.md)、[RF比较单一责任](parallel/du8-2026-10-16/du8_rf_comparison_owner.md)、[FF固定时限矩阵](parallel/du8-2026-10-16/du8_ff_matrix_completion.md)、[AUDIT数值实读证据](parallel/du8-2026-10-16/du8_audit_measure_evidence.md)。各自RF/FF/AUDIT独占工区，源码base/seed/干净状态/import已验证，启动共9,893,247bytes，0原件副本/0供应商/主仓WIP保持；各卡业务A/B/C尚未实施。可立即同时启动，不等待ROOT的CWP/ET接线；只有原三个大节点集中验收。

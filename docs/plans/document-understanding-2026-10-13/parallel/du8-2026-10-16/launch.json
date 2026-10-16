@@ -1,6 +1,6 @@
 {
   "schema_version": "du8-launch/1",
-  "status": "READY_NOT_DISPATCHED",
+  "status": "TWO_DELIVERIES_INTEGRATED_FF_C_OPEN_RF_EXTERNAL",
   "lanes": [
     {
       "id": "DU8-RF-COMPARISON",
@@ -22,12 +22,12 @@
       "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-du8-comparison",
       "plan": "docs/plans/du8-comparison-2026-10-16/task_plan.md",
       "seed_commit": "e86488a701ee8a107b432749e85003b9d115d407",
-      "status": "READY",
-      "clean": true,
+      "status": "IN_PROGRESS_EXTERNAL",
       "hooks": ".githooks",
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "bytes": 4878719,
-      "business_tests": "NOT_RUN_AUTHOR_TASK"
+      "business_tests": "NOT_RUN_AUTHOR_TASK",
+      "startup_clean": true
     },
     {
       "id": "DU8-FF-MATRIX-COMPLETION",
@@ -50,12 +50,16 @@
       "workdir": "C:/Users/郑曾波/Projects/filing-fetch-du8-matrix",
       "plan": "docs/plans/du8-matrix-2026-10-16/task_plan.md",
       "seed_commit": "7a682bc4a454a8bc03a5f14e96414f303029f76d",
-      "status": "READY",
-      "clean": true,
+      "status": "MERGED_MAIN_ENGINEERING_C_OPEN",
       "hooks": ".githooks",
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "bytes": 3502148,
-      "business_tests": "NOT_RUN_AUTHOR_TASK"
+      "business_tests": "251 focused PASS; full41:20 PASS/4 PARTIAL/17 NOT_RUN in173.2744s; interruption+restart NOT_RUN",
+      "startup_clean": true,
+      "author_head": "6f381199f146109b4f517537a70da1c20c6e05bd",
+      "root_repair_commit": "41f498827943676fc0d352124e286461c73726ca",
+      "main_origin_head": "c7c8867da35cd19d4f419fa70947332615e8e9c0",
+      "root_integration_workdir": "C:/Users/郑曾波/Projects/filing-fetch-du8-integration"
     },
     {
       "id": "DU8-AUDIT-MEASURE-EVIDENCE",
@@ -73,12 +77,18 @@
       "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du8-measures",
       "plan": "docs/plans/du8-measures-2026-10-16/task_plan.md",
       "seed_commit": "172778fe2dd55967ffb253a3aeee7ee4c9d0c8fe",
-      "status": "READY",
-      "clean": true,
+      "status": "MERGED_LOCAL_MAIN_INSTALLED",
       "hooks": "GIT_DEFAULT",
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "bytes": 1512380,
-      "business_tests": "NOT_RUN_AUTHOR_TASK"
+      "business_tests": "620 PASS/2 SKIP full unittest before one locator fix; final59 focused PASS/15subtests; independent8 PASS",
+      "startup_clean": true,
+      "author_head": "3ed248df06b2ba00e4f59d930647149ecc1f88af",
+      "root_repair_commit": "7ea6071b42ffb5155cf3d0741ac0603708aad6fa",
+      "main_head": "a2f216bd8cc8e3ed430c60ee27bdd309dabd8a17",
+      "remote": "NONE_NOT_CREATED",
+      "root_integration_workdir": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du8-integration",
+      "installed": ".agents/.claude: each5 changed files,38 package files MATCH"
     }
   ],
   "read_only_ff_dependencies": [
