@@ -3,7 +3,10 @@
   "card_id": "DU7-PDF-TABLE",
   "base_commit": "04c7f1bc93386a5703693f9303c3a59bb7546025",
   "branch": "codex/du7-pdf-tables-20261016",
-  "implementation_commits": ["a8b391da"],
+  "implementation_commits": [
+    "a8b391da",
+    "3707cafa"
+  ],
   "changed_paths": [
     "src/company_wiki/document_normalization/pdf_table_observations/__init__.py",
     "src/company_wiki/document_normalization/pdf_table_observations/adapter.py",
@@ -22,7 +25,8 @@
     "docs/plans/du7-pdf-tables-2026-10-16/findings.md",
     "docs/plans/du7-pdf-tables-2026-10-16/progress.md",
     "docs/plans/du7-pdf-tables-2026-10-16/task_plan.md",
-    "docs/plans/du7-pdf-tables-2026-10-16/receipts/"
+    "docs/plans/du7-pdf-tables-2026-10-16/receipts/",
+    "docs/plans/du7-pdf-tables-2026-10-16/handoff.md"
   ],
   "entrypoints": [
     "company_wiki.document_normalization.pdf_table_observations.build_pdf_table_observations",
@@ -53,7 +57,7 @@
     {
       "command": "PYTHONPATH=src python -B -m pytest -q tests/unit/pdf_table_observations",
       "exit_code": 0,
-      "passed": 30,
+      "passed": 31,
       "failed": 0,
       "skipped": 0,
       "receipt": "receipts/component-tests-final.log"
@@ -69,7 +73,7 @@
     {
       "command": "python -m ruff check src/company_wiki/document_normalization/pdf_table_observations tests/unit/pdf_table_observations",
       "exit_code": 0,
-      "passed": 0,
+      "passed": 31,
       "failed": 0,
       "skipped": 0,
       "receipt": "receipts/ruff-final.log"

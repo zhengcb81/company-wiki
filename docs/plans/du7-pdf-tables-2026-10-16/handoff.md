@@ -63,9 +63,9 @@ DU3/DU2 旧测试目录的本地 fixtures 不在本 sparse 工作树视图内，
 
 | 项 | 命令 | 结果 | receipt |
 |---|---|---|---|
-| RED-1 首个行为红 | `pytest -q tests/unit/pdf_table_observations`（实现前） | exit 2，组件导入收集失败（含当时测试夹具一次 TypeError，已修） | receipts/red-1-pre-implementation.log |
+| RED-1 首个行为红 | `pytest -q tests/unit/pdf_table_observations`（实现前） | exit 2，组件导入收集失败（6×ModuleNotFoundError，pytest 中断；缺口演示同轮未执行到） | receipts/red-1-pre-implementation.log |
 | RED-2 行为红重放 | 同上（隐藏实现、`--continue-on-collection-errors`） | 3 failed + 6 errors（组件缺失）+ **3 passed（公开链缺口/错误假设演示）** | receipts/red-2-behavior-replay.log |
-| 组件行为测试 | 同上（实现后） | exit 0，**30 passed** | receipts/component-tests-final.log |
+| 组件行为测试 | 同上（实现后） | exit 0，**31 passed** | receipts/component-tests-final.log |
 | 旧集中回归 | 见上 | exit 0，**516 passed / 24 skipped / 0 failed** | receipts/old-suite-regression.log |
 | Ruff | `python -m ruff check src/.../pdf_table_observations tests/unit/pdf_table_observations` | exit 0 | receipts/ruff-final.log |
 | E2E 名创 p12（开发） | `run_e2e.py --sample hk-annual --pages 12` | 2 表，12 bound/4 ambiguous，complete，逐值回切全等 | receipts/e2e-hk-annual-p12.json |
@@ -111,3 +111,14 @@ DU3/DU2 旧测试目录的本地 fixtures 不在本 sparse 工作树视图内，
    组件 C 不算正式摘要验收。
 
 供应商调用 0；生产写入 0；未改主目录、兄弟工作树、CI、hooks、旧断言/金样。交付后 owned 源码冻结，STOP 等 ROOT 接收。
+
+## 独立审查（第二轮）
+
+独立 agent 逐条核对施工卡/INTERFACES 全部接收要求（含实跑 pytest/ruff 复核）：**无必须修复项**。
+其 6 条建议中已落实 4 条：① red-1 收据描述改为与留档日志逐字一致（原措辞提到未留档的中间轮 TypeError，
+已更正并注明事实以留档收据为准）；② test_2 补"亿元/US$千元/人民币元/复合单位"显式用例（31 项）；
+③ e2e 收据分母增加 `wire_table_claims`（wire 表声明数）并把 `table_claims` 更名 `tables_built`
+（holdout 的 3 个声明现直接可见）；④ 逐值记录 `source_id` 改用规范 urn（`source_id_for_sha256`）。
+未落实并保留：pytest 收据日志内的工区绝对路径（本机路径属日志固有内容，原件机器路径从未提交；
+如 ROOT 要求脱敏可后处理）；`e2e/` 位于仓库根（与施工卡 §5 "提供自有 e2e/run_e2e.py" 的字面一致，
+请 ROOT 合并时确认归属）。审查后 e2e 四份收据由最终脚本重新生成，组件实现自 holdout 观察后未再改动。
