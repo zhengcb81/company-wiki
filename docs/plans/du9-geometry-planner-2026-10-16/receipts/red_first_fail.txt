@@ -1,0 +1,44 @@
+# DU9 首次RED回执（实现前，基线 cb1e4c07 / 分支 codex/du9-geometry-planner-20261016）
+# 生成命令：python -m pytest tests/unit/du9_geometry_planner/ -v
+#           PYTHONPATH=src python -c "…helpers.legacy_front_greedy_admissions…"
+# 日期：2026-10-16。此回执在 geometry_intent 包实现之前采集。
+
+## 1) 冻结期望 vs 基线贪心（真实共因复现）
+
+baseline admitted total: 64 (limit 64)
+baseline admitted by class: {"administrative": 6, "context": 49, "operating": 9}
+baseline w-attach-op admitted: 0
+baseline project admitted: 0
+baseline last admitted page overall: 64
+frozen expectation class_quotas: {"administrative": 6, "context": 16+10=26, "operating": 16, "project": 16}
+FROZEN EXPECTATION RESULT: FAIL — starved classes under baseline: ['project']
+
+前部独占复现：粗关键词+邻页式前部顺序请求在物理页64处耗尽共享细几何限，
+project（募投71..88两段）与最深窗口 w-attach-op（89..96）得0；与金禾283页
+案例"深页223/224被延后"同构。冻结期望：同一64页限下各类别均有真实机会。
+
+## 2) pytest 首次FAIL（能力不存在）
+
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki-du9-geometry-planner
+configfile: pytest.ini
+collecting ... collected 2 items
+
+tests/unit/du9_geometry_planner/test_a_root_cause_and_fairness.py::test_baseline_front_greedy_starves_deep_windows PASSED [ 50%]
+tests/unit/du9_geometry_planner/test_a_root_cause_and_fairness.py::test_frozen_fairness_expectation_holds_under_planner FAILED [100%]
+
+================================== FAILURES ===================================
+____________ test_frozen_fairness_expectation_holds_under_planner ____________
+tests\unit\du9_geometry_planner\test_a_root_cause_and_fairness.py:44: in test_frozen_fairness_expectation_holds_under_planner
+    plan_geometry_requests, new_admission_state, admit = _planner()
+                                                         ^^^^^^
+tests\unit\du9_geometry_planner\test_a_root_cause_and_fairness.py:16: in _planner
+    from company_wiki.document_understanding.geometry_intent import (
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.geometry_intent'
+=========================== short test summary info ============================
+FAILED tests/unit/du9_geometry_planner/test_a_root_cause_and_fairness.py::test_frozen_fairness_expectation_holds_under_planner - ModuleNotFoundError
+========================= 1 failed, 1 passed in 0.58s =========================
+
+说明：基线病理测试恒通过（永久文档化真实共因）；冻结公平期望在组件存在前
+必然FAIL。RED未通过抬max_pages、未排除后部窗口、未放宽断言制造。

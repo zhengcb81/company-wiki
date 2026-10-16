@@ -7,7 +7,9 @@ PLAN_ID：du9-geometry-planner-2026-10-16。基线：`bf160c8e3fd8b9620f6bbc891b
 
 ## A：调查和独立行为RED
 
-Status: pending。核实真实共因，冻结独立期望和首FAIL。
+Status: done。核实真实共因（findings.md：无请求规划组件、WorkBudget纯总量封顶、
+fine_geometry无顺序偏好），冻结96页手算用例与期望，首FAIL见
+receipts/red_first_fail.txt（基线贪心project饿死=0；planner测试 ModuleNotFoundError）。
 
 ## B：所属层实现与集中回归
 
