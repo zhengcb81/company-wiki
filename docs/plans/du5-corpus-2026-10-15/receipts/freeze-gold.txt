@@ -1,0 +1,10 @@
+froze 9 samples at 2026-10-15T23:54:38+01:00
+  du5-cn-iflytek-h1            a_share_interim            gold=36e36b6f0add
+  du5-cn-fangbang-q1           a_share_quarterly_business gold=ebc1d3fecf0a
+  du5-cn-proya-q1              a_share_quarterly_sparse   gold=a7b9e94fb08f
+  du5-cn-zhongmi-offering      equity_offering            gold=a5e8596abb96
+  du5-hk-kingsoft-interim      hk_interim                 gold=14132a28c9be
+  du5-hk-kingsoft-q1           hk_quarterly               gold=8eaf4a18e759
+  du5-us-msft-8k               sec_8k_container           gold=5693dc530bc0
+  du5-us-msft-ex991            sec_exhibit                gold=e7c4ad62c189
+  du5-cn-gbits-call            earnings_call_transcript   gold=39f237575e8f

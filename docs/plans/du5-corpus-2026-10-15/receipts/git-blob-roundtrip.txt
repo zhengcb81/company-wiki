@@ -1,0 +1,6 @@
+staged package JSON files: 12
+add->blob identity: OK
+blob->fresh-checkout identity: OK
+fresh-checkout sha256 du5-cn-proya-q1.json: a7b9e94fb08f4f0ad688c9cfdab07f095916acc61d63515d6c08bfa8f0ef0eef
+manifest expects: a7b9e94fb08f4f0ad688c9cfdab07f095916acc61d63515d6c08bfa8f0ef0eef
+fresh-checkout temp dir removed (owned)

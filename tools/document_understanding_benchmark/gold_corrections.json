@@ -1,0 +1,187 @@
+{
+  "schema_version": "du-gold-corrections/1",
+  "created": "2026-10-15",
+  "card": "DU5-CORPUS",
+  "note": "Measured anchor-location deviations in the preserved old gold set. Old gold files are NEVER edited: the claimed value stays replayable and the correction records the measured truth with its method, per INTERFACES (改错金标需单独更正记录和版本，旧值仍可回放). ROOT decides whether to publish an applied correction version; status stays 'proposed' until then. Corrections may only touch location fields (page/line/location_kind/locator); fact content, importance and denominators are untouchable here.",
+  "corrections": [
+    {
+      "sample_id": "cn-equity",
+      "fact_id": "f-phase-two-timeline",
+      "set_index": 0,
+      "anchor_index": 0,
+      "anchor": {
+        "claimed_page": 62
+      },
+      "kind": "wrong_page",
+      "observed": {
+        "pages_found": [
+          61
+        ],
+        "method": "PyMuPDF physical-page extraction (enumerate start=1) + textutil.text_contains, 2026-10-15"
+      },
+      "proposed": {
+        "page": 61
+      },
+      "status": "proposed",
+      "evidence": "the full quote 预计在2021 年1 月启动建设，2021 年12 月完成建设，2022 年二期建成投产。 is on physical page 61; the fact's second support set (page 63) verifies as claimed"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-cashflow-up-is-not-growth",
+      "set_index": 0,
+      "anchor_index": 0,
+      "anchor": {
+        "claimed_page": 2
+      },
+      "kind": "wrong_page",
+      "observed": {
+        "pages_found": [
+          1,
+          9
+        ],
+        "method": "PyMuPDF physical-page extraction + textutil.text_contains, 2026-10-15"
+      },
+      "proposed": {
+        "page": 1
+      },
+      "status": "proposed",
+      "evidence": "112,145,511.65 sits in the 主要会计数据 table on physical page 1 (page 9 is the consolidated cash-flow statement); page 2 holds 总资产/非经常性损益 rows instead"
+    },
+    {
+      "sample_id": "cn-q-sparse",
+      "fact_id": "f-cashflow-up-is-not-growth",
+      "set_index": 0,
+      "anchor_index": 1,
+      "anchor": {
+        "claimed_page": 2
+      },
+      "kind": "wrong_page",
+      "observed": {
+        "pages_found": [
+          1,
+          3,
+          6
+        ],
+        "method": "PyMuPDF physical-page extraction + textutil.text_contains, 2026-10-15"
+      },
+      "proposed": {
+        "page": 1
+      },
+      "status": "proposed",
+      "evidence": "53.28 appears in the same 主要会计数据 row on physical page 1 (also in the variance-note table on page 3); it is not on page 2"
+    }
+  ],
+  "unverifiable": [
+    {
+      "sample_id": "cn-ipo-confirmation",
+      "class": "no_text_layer",
+      "reason": "scanned one-page confirmation opinion: page.get_text() returns whitespace only, so no independent extraction can confirm or refute any quote; the gold quotes trace to the original's image content and the sample's measured role is the opaque-scan case"
+    },
+    {
+      "sample_id": "hk-annual-mojibake",
+      "class": "mojibake_cid",
+      "reason": "CID font mapping is broken: independent extraction yields different garbage than the parser units the gold quotes were taken from (parser: 9,618 units with zero flags; PyMuPDF renders the same garbled header block starting page 7 while the gold cites page 1/9). The quotes remain replayable against parser unit text; independent extraction cannot adjudicate them"
+    },
+    {
+      "sample_id": "holdout-cn-glodon-q1",
+      "class": "extraction_divergence",
+      "fact_id": "h-ifrs-not-audited",
+      "reason": "the audit-checkbox anchor □是 否 renders with a different checkbox glyph sequence in independent extraction (□是√否 style layout); character-level divergence, not a location error"
+    },
+    {
+      "sample_id": "us-20f",
+      "class": "extraction_divergence",
+      "fact_id": "f-not-a-discontinued-operation",
+      "reason": "the quote crosses an inline-XBRL element boundary that a naive tag-strip interleaves with hidden tokens; the public normalization frontend strips the hidden header, the independent stripper does not. Verified against parser unit text at authoring time; flagged here so the divergence is visible"
+    }
+  ],
+  "content_corrections": [
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "q1-revenue-yoy-decline",
+      "field": "must_not_assert",
+      "old_value": [
+        "营业收入同比增长2.29%",
+        "2,305,344,625.43元为年初至报告期末累计或2026年3月单月收入",
+        "营业收入23.05亿元（以此为单位改写）"
+      ],
+      "new_value": [
+        "营业收入同比增长2.29%",
+        "2,305,344,625.43元为2026年3月单月收入或2026年上半年累计收入",
+        "营业收入23亿元",
+        "营业收入2,305,344,625.4元"
+      ],
+      "reason": "旧负例含两个真命题（Q1 报告的『年初至报告期末』≡本报告期；23.05亿 是忠实四舍五入），会惩罚正确摘要；改为只有真正错误的期间与精度改写",
+      "status": "applied",
+      "version": 2
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "eps-basic-diluted-unit",
+      "field": "must_not_assert",
+      "old_value": [
+        "基本每股收益为0.93元/股，较上年增长6.06%",
+        "每股收益0.93元为年化或年初至报告期末累计口径",
+        "稀释每股收益高于基本每股收益"
+      ],
+      "new_value": [
+        "基本每股收益为0.93元/股，较上年增长6.06%",
+        "每股收益0.93元为年化口径或2026年上半年累计口径",
+        "稀释每股收益高于基本每股收益"
+      ],
+      "reason": "旧负例的『年初至报告期末累计』在 Q1 报告里为真（半真析取），删除后保留年化/半年度错误口径",
+      "status": "applied",
+      "version": 2
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "share-capital-and-buyback-holdings",
+      "field": "must_not_assert",
+      "old_value": [
+        "公司在报告期内增发了约100万股",
+        "回购专户持股3,757,848股占总股本9.5%",
+        "股本395,976,008为金额（元）而非股数/注册资本元"
+      ],
+      "new_value": [
+        "公司在报告期内增发了约100万股",
+        "回购专户持股3,757,848股占总股本9.5%",
+        "395,976,008.00为上年度末（2025年12月31日）的股本数"
+      ],
+      "reason": "旧负例『股本为金额（元）而非股数』与资产负债表原文（实收资本（或股本）单位：元）歧义甚至为真；改为明确错误的期间错置",
+      "status": "applied",
+      "version": 2
+    },
+    {
+      "sample_id": "du5-cn-gbits-call",
+      "fact_id": "yy-stabilize-target-uncertain",
+      "field": "modality",
+      "old_value": "conditional",
+      "new_value": "plan",
+      "reason": "审阅判定：该句是带对冲的计划（希望…但目前也不太好判断），非 if-then 条件句；modality 由 conditional 更正为 plan",
+      "status": "applied",
+      "version": 2
+    },
+    {
+      "sample_id": "du5-cn-proya-q1",
+      "fact_id": "q1-revenue-yoy-decline",
+      "field": "must_not_assert",
+      "old_value": [
+        "营业收入同比增长2.29%",
+        "2,305,344,625.43元为2026年3月单月收入或2026年上半年累计收入",
+        "营业收入23亿元",
+        "营业收入2,305,344,625.4元"
+      ],
+      "new_value": [
+        "营业收入同比增长2.29%",
+        "2,305,344,625.43元为2026年3月单月收入或2026年上半年累计收入"
+      ],
+      "status": "applied",
+      "version": 3,
+      "old_gold_sha256": "1eb273cb1bedefa2b9f1bf63d407ba95bbdc9bafc6683e3f44cffc6c8cdb271b",
+      "new_gold_sha256": "f535537ac60e9d5fece7d97709baacf549021396ec5f73b27a71fa40cc402e12",
+      "reason": "2305344625.43元按亿元保留整数=23亿元，按元保留1位小数=2305344625.4元。舍入本身不是虚构，必须与事实/币种/期间/数字失真分开；不新增目标、不改原文、重要性或分母。",
+      "old_version_replay": "author commit3558fd507c76411bae0ab423e53d34f267833c7d keeps complete v2 gold bytes"
+    }
+  ],
+  "content_corrections_note": "改错金标：独立 reviewer 对照原件判定为真/歧义的负例与一处 modality 标签。旧值逐字段记录在 old_value，可与版本1字节（manifest.gold_sha256_at_freeze）一起回放。锚点、importance、target_kind、分母均未改动。"
+}

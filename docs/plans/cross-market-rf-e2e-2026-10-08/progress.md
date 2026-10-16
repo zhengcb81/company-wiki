@@ -1,3 +1,9 @@
+## 2026-10-16 DU5接收进行中
+
+CORPUS集中修复后真实252项通过；RF单位210项+23项CLI通过；AUDIT仍修复。所有合并尚待正式提交/发布，当前状态统一见[共享PWF](../document-understanding-2026-10-13/task_plan.md)和[接收细则](../document-understanding-2026-10-13/review/du5_reception.md)。原默认/生产真实质量/母公司循环未完成。
+
+---
+
 ## ROOT当前归总 — 2026-10-15 DU4三包组件与剩余生产接线
 
 FORM已正常发布cbfe3e7f且精确CI38804974095 SUCCESS，文档收尾de6b4660已推。TABLE/STATE作者36/90复跑后，ROOT保留history正式合入并推送master；独审7类来源/语义/预算共因先RED再修，三包+Git最终251PASS/6.42s、独审纯探针通过、Ruff/mypy8源PASS，两包已正常合并并推送master `a4cb40c9`：**5948PASS/24SKIP，515.93秒**，精确CI **38810541475 SUCCESS**，作者完整history保留。[发布收据](../document-understanding-2026-10-13/common-root-quality-evidence/du4-table-state-publication.json)。具体唯一执行入口与原始失败/证据见[共享PWF](../document-understanding-2026-10-13/task_plan.md)。

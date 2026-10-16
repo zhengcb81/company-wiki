@@ -1,0 +1,28 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: <HOME>\Projects\company-wiki-du5-corpus
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 5 items
+
+tools\document_understanding_benchmark\tests\test_gold_anchor_integrity.py . [ 20%]
+..FF                                                                     [100%]
+
+================================== FAILURES ===================================
+______ test_du5_gold_anchors_are_all_resolvable_on_their_bound_originals ______
+tools\document_understanding_benchmark\tests\test_gold_anchor_integrity.py:130: in test_du5_gold_anchors_are_all_resolvable_on_their_bound_originals
+    assert checked > 0, "no du5 anchor was checked"
+E   AssertionError: no du5 anchor was checked
+E   assert 0 > 0
+_________ test_all_gold_anchors_verify_or_are_corrected_with_evidence _________
+tools\document_understanding_benchmark\tests\test_gold_anchor_integrity.py:191: in test_all_gold_anchors_verify_or_are_corrected_with_evidence
+    assert not problems, "gold anchors neither verify nor carry evidence: " + "; ".join(problems)
+E   AssertionError: gold anchors neither verify nor carry evidence: cn-equity/f-phase-two-timeline/0/0 page 62: unverified and not in the corrections record; cn-ipo-confirmation/f-scan-is-opaque/0/0 page 1: unverified and not in the corrections record; cn-ipo-confirmation/f-title-is-misleading/0/0 page 1: unverified and not in the corrections record; cn-ipo-confirmation/f-single-page-not-full-prospectus/0/0 page 1: unverified and not in the corrections record; cn-ipo-confirmation/f-no-fabricated-confirmation-content/0/0 page 1: unverified and not in the corrections record; cn-q-sparse/f-cashflow-up-is-not-growth/0/0 page 2: unverified and not in the corrections record; cn-q-sparse/f-cashflow-up-is-not-growth/0/1 page 2: unverified and not in the corrections record; hk-annual-mojibake/f-no-business-fact-may-be-claimed/0/0 page 1: unverified and not in the corrections record; hk-annual-mojibake/f-page-count-and-blank-pages/0/0 page 1: unverified and not in the corrections record; hk-annual-mojibake/f-selected-garbage-is-not-evidence/0/0 page 9: unverified and not in the corrections record; holdout-cn-glodon-q1/h-ifrs-not-audited/0/1 page 2: unverified and not in the corrections record; us-20f/f-not-a-discontinued-operation/0/0 document: unverified and not in the corrections record
+E   assert not ['cn-equity/f-phase-two-timeline/0/0 page 62: unverified and not in the corrections record', 'cn-ipo-confirmation/f-sc...tions record', 'cn-q-sparse/f-cashflow-up-is-not-growth/0/0 page 2: unverified and not in the corrections record', ...]
+=========================== short test summary info ===========================
+FAILED tools/document_understanding_benchmark/tests/test_gold_anchor_integrity.py::test_du5_gold_anchors_are_all_resolvable_on_their_bound_originals
+FAILED tools/document_understanding_benchmark/tests/test_gold_anchor_integrity.py::test_all_gold_anchors_verify_or_are_corrected_with_evidence
+======================== 2 failed, 3 passed in 10.02s =========================

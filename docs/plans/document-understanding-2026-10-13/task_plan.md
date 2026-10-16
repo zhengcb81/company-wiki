@@ -1,3 +1,13 @@
+## ROOT当前状态 — 2026-10-16 DU5集中接收
+
+三包均收到并保留作者history接入主线待提交。CORPUS已修复独审发现的金标舍入与锚点验证共因：252真实材料测试通过、最终格式定点7PASS、Ruff通过，保留旧版本/分母及原生产12/37漏读。RF单位共因修复210PASS/9SKIP/59subtests、完整23项CLI E2E通过；AUDIT谱系/冲突聚合/unknown/重复片段共因仍在修复。作者目录/原件/生产配置不改，RF原alert WIP保护，0供应商；累计599590tokens/385113µUSD代理/旧unknown7/2M与$20上限不变。
+
+本阶段只有原接收大节点，不增许可或人工签收。[接收细则](review/du5_reception.md)；[CORPUS留证](common-root-quality-evidence/du5-corpus-acceptance.json)。audit无origin且对应GitHub查询not found，尚无可推远端，不能声称已同步。
+
+**Next Step：** 正常发布已通过CORPUS/RF，完成AUDIT集中修复/实际CLI和安装；随后继续统一准备/WorkBudget与FORM→STATE→TABLE生产接线、v4与真实质量。默认0.8，母G2/G4/G5及原三/新三公司循环仍开放，组件绿不关闭母目标。
+
+---
+
 ## ROOT当前状态 — 2026-10-15 DU4三包组件集中接收
 
 FORM已发布master cbfe3e7f，正常推送5784PASS/24SKIP321.47s、精确CI38804974095 SUCCESS；文档收尾de6b4660已正常推送148PASS/26.54s，docs-only无workflow。TABLE/STATE用户均已交付，作者head fa1681c0/284eea60，36/90原测试ROOT复跑通过。两分支已正式合入master并推送，保留作者完整历史；独审发现的7类共因经集中RED/共同责任修复，最终三包+Git字节 **251PASS/6.42s**，独立纯探针复核通过，Ruff/mypy8源PASS。两包已正常合并并推送master `a4cb40c9`：**5948PASS/24SKIP，515.93秒**，精确CI **38810541475 SUCCESS**，作者完整history保留。[发布收据](common-root-quality-evidence/du4-table-state-publication.json)。

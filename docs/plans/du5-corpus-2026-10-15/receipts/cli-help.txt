@@ -1,0 +1,32 @@
+usage: python -m tools.document_understanding_benchmark [-h]
+                                                        [--mode {offline,native,adapter}]
+                                                        [--bindings BINDINGS]
+                                                        --output OUTPUT
+                                                        [--gold-dir GOLD_DIR]
+                                                        [--sample SAMPLE]
+                                                        [--adapter ADAPTER]
+                                                        [--review REVIEW]
+                                                        [--probe-file PROBE_FILE]
+                                                        [--probe-config PROBE_CONFIG]
+                                                        [--cleanup]
+
+Independent document-understanding quality benchmark (DU-BENCH).
+
+options:
+  -h, --help            show this help message and exit
+  --mode {offline,native,adapter}
+  --bindings BINDINGS   local uncommitted {sample_id: absolute_path} JSON
+  --output OUTPUT       directory owned by this run
+  --gold-dir GOLD_DIR   override the packaged gold directory
+  --sample SAMPLE       restrict to a sample_id (repeatable)
+  --adapter ADAPTER     path to a ROOT-injected observer adapter
+  --review REVIEW       independent semantic-review JSON (one object or a
+                        list, each with sample_id and per-claim verdicts).
+                        Without it, semantics.entailment stays NOT_EVALUATED
+                        rather than silently passing.
+  --probe-file PROBE_FILE
+                        extra file whose SHA+mtime must be unchanged
+                        (repeatable)
+  --probe-config PROBE_CONFIG
+                        production config file to fingerprint (repeatable)
+  --cleanup             remove owned scratch after the run

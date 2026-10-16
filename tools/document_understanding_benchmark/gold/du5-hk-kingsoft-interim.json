@@ -1,0 +1,500 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "du5-hk-kingsoft-interim",
+  "market": "HK",
+  "company": "金山雲",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "scope": "holdout",
+  "language": "zh-hant",
+  "support_set_frozen_before_output": true,
+  "expected_route_families": [
+    "interim",
+    "hk_interim"
+  ],
+  "notes": "DU5-CORPUS（冻结于 2026-10-15，frozen_at=2026-10-15T23:54:38+01:00）。金山雲 hk_interim。prior_use=contaminated：du-bench 选样时探测过金山雲原件的文字层（.planning/du-bench/progress.md:269 '壁仞科技 and 金山雲 extract cleanly, so 壁仞 was used'），portfolio-reuse-fix 的 filing-fetch 复用机制也处理过其年报文件；本中期报告内容未用于任何规则或金标调参。support set 在读取本样本任何候选输出前冻结（support_set_frozen_before_output）；事实由独立子代理逐字读取原件回报并经锚点逐条验证，重要性由原文阅读判断，未使用 selector 输出或生成 claim 填充。指定陷阱：千元表vs百萬元叙述、US GAAP 非 IFRS、收入类别非报告分部、投资vs收入。",
+  "facts": [
+    {
+      "id": "total-revenue-h1-2025",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "收入\n3,667,464\n4,319,204\n17.8%",
+            "page": 5,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "人民幣千元",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "總收入達到人民幣4,319.2百萬元（602.9百萬美元）",
+            "page": 9,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "4,319,204",
+        "人民幣千元",
+        "17.8%",
+        "3,667,464"
+      ],
+      "must_not_assert": [
+        "總收入為人民幣4,319.2千元",
+        "總收入按年下降17.8%",
+        "總收入4,319,204百萬元"
+      ],
+      "reason": "Total revenue RMB4,319,204 THOUSAND (prose: 4,319.2 millions) +17.8% YoY. Trap: table in thousands vs MD&A in millions; direction must be increase."
+    },
+    {
+      "id": "segment-revenue-split",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "公有雲服務\n2,421,912\n2,978,788\n415,823",
+            "page": 12,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "行業雲服務\n1,245,400\n1,340,416\n187,115",
+            "page": 12,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "公有雲服務收入為人民幣2,978.8百萬元（415.8百萬美元），",
+            "page": 9,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "行業雲服務收入為人民幣1,340.4百萬元（187.1百萬美元）。",
+            "page": 9,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "2,978,788",
+        "1,340,416",
+        "公有雲服務",
+        "行業雲服務",
+        "千元"
+      ],
+      "must_not_assert": [
+        "公有雲服務收入為人民幣2,978.8千元",
+        "行業雲服務收入高於公有雲服務",
+        "行業雲服務收入按年增長23.0%"
+      ],
+      "reason": "Public cloud RMB2,978,788k vs industry cloud RMB1,340,416k (public is larger, +23.0%; industry +7.6%). Trap: thousands-vs-millions and segment swap/growth-rate confusion."
+    },
+    {
+      "id": "net-loss-us-gaap-widened",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "淨虧損\n(717,334)\n(772,973)\n(107,901)",
+            "page": 12,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "7.8%",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "淨虧損為人民幣773.0百萬元（107.9百萬美元），較二零二四年同期的淨虧損人民幣717.3百萬元有所增加。",
+            "page": 14,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "(772,973)",
+        "717,334",
+        "淨虧損",
+        "7.8%",
+        "千元"
+      ],
+      "must_not_assert": [
+        "淨虧損收窄7.8%",
+        "公司錄得淨利潤772,973千元",
+        "淨虧損為人民幣772,973百萬元"
+      ],
+      "reason": "Net loss RMB772,973k WIDENED 7.8% from RMB717,334k (US GAAP). Traps: sign/direction flip, unit swap, treating the 7.8% 'change' as improvement."
+    },
+    {
+      "id": "us-gaap-basis-not-ifrs",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "未經審計中期簡明財務報表乃根據美國公認會計準則編製，在若干方面有別於《國際財務報告準則》",
+            "page": 67,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "未經審計中期簡明合併財務資料乃根據美國公認會計準則（「美國公認會計準則」）編製。",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "美國公認會計準則",
+        "《國際財務報告準則》",
+        "未經審計"
+      ],
+      "must_not_assert": [
+        "財務報表根據《國際財務報告準則》編製",
+        "財務報表已經審計",
+        "按IFRS編製並無重大差異"
+      ],
+      "reason": "The filing is US GAAP with an IFRS reconciliation (note 16). Asserting IFRS-basis reporting is a benchmark-worthy framework error; statements are unaudited."
+    },
+    {
+      "id": "unit-and-fx-convention",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "（除股數和每股數據外，所有金額以千計）",
+            "page": 12,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "以人民幣7.1636元兌1.00美元的中午買入匯率換算",
+            "page": 45,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "千計",
+        "7.1636",
+        "人民幣千元",
+        "美元"
+      ],
+      "must_not_assert": [
+        "所有金額以百萬元計",
+        "美元金額按期末官方匯率7.1636折算為實際兌換",
+        "每股數據亦以千元列示"
+      ],
+      "reason": "Tables are RMB/USD thousands except share & per-share data; USD is convenience translation at 7.1636. Any fact restating table numbers as millions (or prose millions as thousands) is wrong."
+    },
+    {
+      "id": "gross-margin-decline",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "ratio",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "毛利率為15.2%，而二零二四年同期則為16.7%。",
+            "page": 9,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "毛利\n611,600\n657,163\n7.4%",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "15.2%",
+        "16.7%",
+        "657,163",
+        "毛利"
+      ],
+      "must_not_assert": [
+        "毛利率由15.2%提升至16.7%",
+        "毛利下降7.4%",
+        "毛利率提高因AI業務擴張"
+      ],
+      "reason": "Gross profit ROSE 7.4% to RMB657,163k but gross margin FELL 16.7%→15.2% (AI server costs). Traps: direction flip between level and ratio; cause reversal."
+    },
+    {
+      "id": "adjusted-ebitda-nongaap",
+      "importance": "normal",
+      "target_kind": "disposition_context",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_statement",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "非公認會計準則EBITDA為人民幣724.6百萬元（101.1百萬美元）",
+            "page": 14,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "非公認會計準則",
+        "724.6",
+        "101.1"
+      ],
+      "must_not_assert": [
+        "經調整EBITDA為美國公認會計準則指標",
+        "公司經營利潤為724.6百萬元",
+        "經調整EBITDA為人民幣724.6千元"
+      ],
+      "reason": "Non-GAAP adjusted EBITDA RMB724.6m is positive while GAAP operating result is a loss RMB561.2m; must stay labelled non-GAAP and in millions in prose."
+    },
+    {
+      "id": "capex-vs-revenue",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "quantity_basis": "investment",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "購買物業及設備及預付款項\n(1,866,298)\n(1,483,742)\n(207,123)",
+            "page": 41,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "折舊及攤銷成本由人民幣449.5百萬元增加",
+            "page": 13,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "1,483,742",
+        "1,866,298",
+        "千元",
+        "購買物業及設備"
+      ],
+      "must_not_assert": [
+        "資本開支1,483,742百萬元",
+        "資本開支即公司收入",
+        "投資活動為公司帶來現金流入1,483,742千元"
+      ],
+      "reason": "H1-2025 investing outflow for PP&E+prepayments RMB1,483,742k vs prior-year RMB1,866,298k — an INVESTMENT outflow, not revenue (revenue is 4,319,204k). Traps: unit swap, direction (it is an outflow), investment-vs-revenue confusion."
+    },
+    {
+      "id": "no-material-investments-or-capex-plans",
+      "importance": "normal",
+      "target_kind": "required_business",
+      "quantity_basis": "investment",
+      "modality": "negation",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "本集團並無任何未來重大投資\n及資本資產計劃。",
+            "page": 15,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "本集團並無持有任何重大投資（包括對被投資公司的任何投資價值佔本集團截",
+            "page": 15,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "並無",
+        "重大投資",
+        "5%",
+        "資本資產計劃"
+      ],
+      "must_not_assert": [
+        "本集團持有佔總資產5%以上的重大投資",
+        "本集團計劃未來進行重大資本開支",
+        "本集團有重大收購計劃"
+      ],
+      "reason": "Explicit negation: no investments ≥5% of total assets and NO future major investment/capex plans as of 2025-06-30 — despite ongoing AI infrastructure spending. Traps: negation dropped, mistaking regular capex for announced major investment plans."
+    },
+    {
+      "id": "h2-2025-business-outlook",
+      "importance": "normal",
+      "target_kind": "disposition_context",
+      "quantity_basis": "unknown",
+      "modality": "plan",
+      "role": "management_prepared",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發",
+            "page": 11,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "展望下半年",
+        "將",
+        "戰略",
+        "AI"
+      ],
+      "must_not_assert": [
+        "公司已完成全面AI能力提升",
+        "公司在上半年實現高質量盈利",
+        "公司將退出研發投入"
+      ],
+      "reason": "Forward-looking plan (modality=plan, safe-harbour covered): H2-2025 strategy, continued R&D investment, AI capability build-out — not actual achieved results."
+    },
+    {
+      "id": "single-operating-segment",
+      "importance": "normal",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "本集團整體表現的決策時審閱合併經營業績，因此本集團僅有一個經營分部。",
+            "page": 50,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "本集團的大部分收入來自中國內地，且本集團的大部分長期資產位於中國內地，因此並無呈列地區分",
+            "page": 50,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "一個經營分部",
+        "並無呈列地區分部"
+      ],
+      "must_not_assert": [
+        "公司披露公有雲與行業雲兩個報告分部",
+        "公司按地區披露海外分部收入",
+        "主要經營決策者按分部評估業績"
+      ],
+      "reason": "Public cloud / industry cloud are revenue CATEGORIES, not reportable segments; group has ONE operating segment and no geographic segment. Trap: mislabelling revenue disaggregation as segment reporting."
+    },
+    {
+      "id": "related-party-revenue",
+      "importance": "normal",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "period_flow",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "narrative",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "向小米集團提供公有雲服務\n490,133\n772,761\n107,873",
+            "page": 64,
+            "location_kind": "page"
+          },
+          {
+            "exact_quote": "702,381\n1,125,458\n157,109",
+            "page": 64,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "小米集團",
+        "772,761",
+        "1,125,458",
+        "千元"
+      ],
+      "must_not_assert": [
+        "關聯方收入為人民幣1,125,458百萬元",
+        "關聯方收入按年下降",
+        "向小米集團提供行業雲服務772,761千元"
+      ],
+      "reason": "H1-2025 related-party revenue RMB1,125,458k (vs 702,381k), of which Xiaomi public cloud RMB772,761k — traps: unit swap, related-party/segment line swap, direction."
+    },
+    {
+      "id": "interim-period-meta",
+      "importance": "normal",
+      "target_kind": "correctness_if_emitted",
+      "quantity_basis": "unknown",
+      "modality": "actual",
+      "role": "company_filing",
+      "fact_scope": "document_meta",
+      "any_support_sets": [
+        [
+          {
+            "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+            "page": 5,
+            "location_kind": "page"
+          }
+        ],
+        [
+          {
+            "exact_quote": "合同最低採購承諾，總金額為人民幣630,000元（87,945美元）",
+            "page": 66,
+            "location_kind": "page"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "截至二零二五年六月三十日止六個月",
+        "未經審計",
+        "630,000"
+      ],
+      "must_not_assert": [
+        "報告期為截至二零二五年六月三十日止十二個月",
+        "數據為全年數據",
+        "採購承諾金額為人民幣630,000元整（非千元列示基準）"
+      ],
+      "reason": "Period is the six months ended 2025-06-30 (unaudited interim). Even amounts written '人民幣…元' in notes follow the RMB-thousands basis (630,000 → USD 87,945 confirms thousands) — a residual unit trap."
+    }
+  ],
+  "support_set_digest": "9b80d50400588236b3ed0a5db7bc3bfa9cab190b9017017a2759a1c0f8a011e1"
+}

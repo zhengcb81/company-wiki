@@ -1,0 +1,38 @@
+{
+  "du5-cn-iflytek-h1": {
+    "path": "<ORIGINALS_ROOT>/companies\\科大讯飞\\raw\\financial_reports\\科大讯飞：2025年半年度报告.pdf",
+    "sha256": "8381e3ef16329666c170255a74c39e8614eb96073cf26556b1cb5439e32b9d31"
+  },
+  "du5-cn-fangbang-q1": {
+    "path": "<ORIGINALS_ROOT>/companies\\方邦股份\\raw\\financial_reports\\方邦股份：2025年第一季度报告.pdf",
+    "sha256": "da2b66bfc7a8f781aa55ebe7d7faec60d65f6531ca8fc181bafccd1a3aa3e300"
+  },
+  "du5-cn-proya-q1": {
+    "path": "<ORIGINALS_ROOT>/companies\\珀莱雅\\raw\\financial_reports\\珀莱雅：珀莱雅化妆品股份有限公司2026年第一季度报告.pdf",
+    "sha256": "873df9697b20c8c8882f9f16f60bdf755bc6b1b27022f2cd491ebc94c012a49e"
+  },
+  "du5-cn-zhongmi-offering": {
+    "path": "<ORIGINALS_ROOT>/companies\\中密控股\\raw\\research\\中密控股：2020年度向特定对象发行股票募集说明书.PDF",
+    "sha256": "d3105354bff42054ffcd9a07fb82bfef7f73058fac43b47c9f94315dd03100ad"
+  },
+  "du5-hk-kingsoft-interim": {
+    "path": "<ORIGINALS_ROOT>/companies\\金山雲\\raw\\financial_reports\\semi_annual\\2025-09-26_hkexnews_11857348_2025 中期報告.pdf",
+    "sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36"
+  },
+  "du5-hk-kingsoft-q1": {
+    "path": "<ORIGINALS_ROOT>/companies\\金山雲\\raw\\financial_reports\\quarterly\\2026-05-27_hkexnews_12173028_內幕消息 截至二零二六年三月三十一日止三個月的未經審計財務業績.pdf",
+    "sha256": "37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f"
+  },
+  "du5-us-msft-8k": {
+    "path": "<ORIGINALS_ROOT>/companies\\MICROSOFT CORP\\raw\\other\\2026-09-02_sec_0001193125-26-380280_MICROSOFT CORP 8-K 2026-09-02.htm",
+    "sha256": "a3d0bbf6411bb2b2db0bc9deee1541ea44639399e26e1f08adf8df3037ab0878"
+  },
+  "du5-us-msft-ex991": {
+    "path": "<ORIGINALS_ROOT>/companies\\MICROSOFT CORP\\raw\\other\\2026-09-02_sec_0001193125-26-380280_MICROSOFT CORP EX-99.1 2026-09-02.htm",
+    "sha256": "47a0a4a1d6a335fffab571789aba597eca0637d2650f0f62371afa10e205b987"
+  },
+  "du5-cn-gbits-call": {
+    "path": "<ORIGINALS_ROOT>/companies\\吉比特\\raw\\research\\中泰-吉比特财报交流会0409.mp3-文稿-转写结果.docx",
+    "sha256": "63777874f5956f37ed32f4839c170340af4f61ee7594b99423acc698968a158a"
+  }
+}
