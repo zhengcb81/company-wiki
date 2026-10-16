@@ -9,13 +9,16 @@ ROOT = Path(__file__).resolve().parents[2]
 
 @pytest.mark.parametrize("autocrlf", ["true", "input", "false"])
 @pytest.mark.parametrize("preserve_fixture_rule", [True, False], ids=["retained-bytes", "filter-control"])
-def test_retained_plan_fixture_roundtrip_preserves_original_bytes(tmp_path, autocrlf, preserve_fixture_rule):
+@pytest.mark.parametrize("attribute_eol", ["lf", "crlf"])
+def test_retained_plan_fixture_roundtrip_preserves_original_bytes(tmp_path, autocrlf, preserve_fixture_rule, attribute_eol):
     def git(*args):
         return subprocess.run(["git", "-C", str(tmp_path), "-c", f"core.autocrlf={autocrlf}",
             *args], capture_output=True, check=True).stdout
 
     git("init", "--quiet")
-    attributes = (ROOT / ".gitattributes").read_bytes()
+    attributes = (ROOT / ".gitattributes").read_bytes().replace(b"\r\n", b"\n")
+    if attribute_eol == "crlf":
+        attributes = attributes.replace(b"\n", b"\r\n")
     if not preserve_fixture_rule:
         attributes = b"".join(line for line in attributes.splitlines(keepends=True)
                               if not line.startswith(b"/docs/plans/**/fixtures/** "))
