@@ -1,3 +1,11 @@
+## 剩余四包已盘点并安排自动跟进 — 2026-10-17（当前）
+
+RF已有交接但冻结声明落后于最新代码；ET有实现与测试收据但无最终交接/独审；两CWP仍仅A阶段。均未按完成验收。已创建本线程每30分钟自动跟进du8-du9，有正式交付/新阻塞才通知，不动作者工区。[完整盘点与下一步](review/remaining_packages_watch.md)。主线原默认深页/真实摘要与FF完整C仍OPEN，不因巡查宣布目标完成。
+
+**Next Step：** 按原卡收齐最终交接后ROOT集中验收；作者继续B/C无需A批准。巡查仅维护本地去重状态，不逐次跑重测试或提交。
+
+---
+
 ## DU9交付核对待补；既有CWP工程已发布 — 2026-10-17
 
 用户确认两包完成。ROOT已实际核对指定工区、全部本地DU9 refs/工作树、同名Projects目录和远端DU9 refs：POLICY f70318f1只有A调查文档，缺geometry_policy.py与测试；PLANNER 8ff47e28仅A测试，geometry_intent只有未提交contracts/__init__，B/C仍pending。尚未找到最终handoff、独审或完整实现，不能按完成签收，也不能把A调查当完整交付。已异步请求最终目录/commit，作者树保持只读，不擅自覆盖半成品。见[核对记录](review/du9_reception.md)。

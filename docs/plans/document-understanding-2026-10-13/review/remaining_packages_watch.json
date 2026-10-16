@@ -1,0 +1,47 @@
+{
+  "checked_at_utc": "2026-10-16T23:19:58Z",
+  "local_date": "2026-10-17",
+  "automation_id": "du8-du9",
+  "interval_minutes": 30,
+  "automation_status": "ACTIVE",
+  "supplier_calls": 0,
+  "author_writes": false,
+  "packages": [
+    {
+      "card": "DU8-RF-COMPARISON",
+      "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-du8-comparison",
+      "plan": "docs/plans/du8-comparison-2026-10-16",
+      "head": "6de6a0c45bf738a295e1161f06edb6a5e3b2bdc2",
+      "status": "HANDOFF_STALE_PENDING_FINAL_REVIEW",
+      "details": "已有实现、测试与handoff；handoff冻结03f35e91并声称scripts无变化，但最新HEAD的scripts/revenue_report.py及两测试已变化（532增/63删）；最终审查/收据版本待对齐。tools/du8_freeze_recheck2.py未提交。",
+      "handoff_sha256": "a23eb78ea3dc35ff79765f13848d58467088c49df8a8968c6c9807a0f4d97b12"
+    },
+    {
+      "card": "DU9-CWP-GEOMETRY-POLICY",
+      "workdir": "C:/Users/郑曾波/Projects/company-wiki-du9-geometry-policy",
+      "plan": "docs/plans/du9-geometry-policy-2026-10-16",
+      "head": "f70318f1edd3e5bfec86ae1ee0922a1ac72b59a2",
+      "status": "A_ONLY_BC_PENDING",
+      "details": "仅A调查，缺geometry_policy.py、专用测试、最终handoff及独审；工作树干净。原卡不要求ROOT签A才能继续。"
+    },
+    {
+      "card": "DU9-CWP-GEOMETRY-PLANNER",
+      "workdir": "C:/Users/郑曾波/Projects/company-wiki-du9-geometry-planner",
+      "plan": "docs/plans/du9-geometry-planner-2026-10-16",
+      "head": "8ff47e28031270c7bf7f6fca01b582fdb680fd64",
+      "status": "A_ONLY_BC_PENDING",
+      "details": "A测试已提交，contracts/__init__未提交；缺planner.py及B/C/最终handoff/独审。"
+    },
+    {
+      "card": "DU9-ET-LEGACY-COMPARISON",
+      "workdir": "C:/Users/郑曾波/Projects/earnings-transcripts-du9-legacy-comparison",
+      "plan": "docs/plans/du9-legacy-comparison-2026-10-16",
+      "head": "36c9b38cd8ed29ad991a4c6ec0194fb5791026a5",
+      "status": "IMPLEMENTATION_RECEIPTS_PRESENT_HANDOFF_PENDING",
+      "details": "已提交有界legacy比较与真实入口测试，工作树干净；作者收据170/193/58 PASS及10 golden（不同套件不可相加）；未见最终handoff和独审，作者PWF尚为旧READY。ROOT本次未重跑测试。"
+    }
+  ],
+  "root_followups": [
+    "FF完整41例C与完整中断重启仍OPEN，不是第五条待作者交付包；不因工程已并线把C写完成。"
+  ]
+}

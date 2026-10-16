@@ -1,3 +1,9 @@
+## 剩余施工包巡查已建立 — 2026-10-17（当前）
+
+只读实查RF6de6a0c4、POLICYf70318f1、PLANNER8ff47e28、ET36c9b38。RF冻结声明与实际最新源码不一致；ET实现/测试已推进但无最终交接；两CWP缺B/C。未重跑作者测试，0供应商/0作者写入。Codex heartbeat du8-du9已确认ACTIVE/每30分钟，无变化静默，有新交付或新阻塞通知。[证据和约定](review/remaining_packages_watch.md)。
+
+---
+
 ## DU9实查与CWP工程发布 — 2026-10-17（当前）
 
 指定POLICY工区f70318f1干净但仅A调查，无实现/测试；PLANNER工区8ff47e28有A RED与未提交contracts/__init__，缺planner实现，B/C未完成，无最终handoff/独审。已核对本地refs、注册worktrees、Projects同名目录及远端DU9 refs，未发现另一最终交付；异步问用户最终文件/commit，暂不动作者树。母线既有代码/资料保护，不因缺交付重写他人半成品。[接收记录](review/du9_reception.md)。
