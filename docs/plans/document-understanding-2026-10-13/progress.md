@@ -1,3 +1,17 @@
+## ROOT当前状态 — 2026-10-16 统一准备与共享预算首段、DU6启动
+
+DU5三包已接收。ROOT新增准备/预算首段：route与policy复用实际Observation；选择入口拥有同一WorkBudget并传至各parent/layout/binding；零预算/耗尽在进入后续正文分类前返回未完成；共享路径只overlay增强字段，standalone独立返回保持。初始5RED、owner3RED和独审3P2各自固定后修；最终224集中PASS，独立相同探针复验通过，Ruff/mypy8源通过。这里只完成layout准备/绑定与prepared限额复用，**结构/strategy/candidate尚未全部计费，full_pipeline_hard_bound=false**，不能称预算/来源准备整体完成。
+
+完整1045PASS/11SKIP是中途兼容快照；旧只读作者runner在ROOT并行场景因卡文档变更触发status断言，不能称清洁作者收据。后续目录收集意外带入FORM作者正在写的9条RED（1057PASS/9FAIL/11SKIP）；失败原样保留，不当主线验收、不改作者expected洗绿。下一集中节点冻结所有相关写者后只跑一次，避免活施工源码/测试混入。
+
+[首段证据](common-root-quality-evidence/prepared-source-budget-acceptance.json)、[实施细则](review/production_preparation_budget_implementation.md)。FORM原生carrier与显式v4正式runtime已在互不重叠文件委派主线agent施工，尚未接收，不算完成。默认0.8、新0.9仍v3；旧20条8/6/6、PD5/Matrix遗漏、原生12/37与母G2/G4/G5仍开放。0供应商；累计599590tokens/385113µUSD代理、旧unknown7、限2M/$20不变。
+
+[DU6三张独立卡](parallel/du6-2026-10-16/README.md)已真实READY：RF目标计量、AUDIT公开摘要导入、FF原生证据路径重放。三工区源码基线/种子已提交、导入定位PASS；只读CWP/ET固定依赖隔离ROOT当前未提交代码。合计约28.89MB、0原件副本/0API；启动核对不是业务验收。ROOT不写三卡白名单，作者不写CWP。
+
+**Next Step：** 提交已验收首段和DU6调度；继续单次来源索引与结构/strategy/candidate真实工作计费，FORM→STATE→TABLE正式接线、v4/旧paid恢复，冻结后集中离线worker→公共读→RF，再按现配置做真实摘要质量和holdout。原大节点，不新增小节点许可。
+
+---
+
 ## ROOT当前状态 — 2026-10-16 DU5三包接收完成
 
 DU5三包已验收并线。CWP merge b083a1b1及配置补丁5dae70a0正常推送，精确CI 38834945691 SUCCESS；最终5954PASS/24SKIP、真实benchmark252PASS、Git12种往返PASS。RF main794240df/收尾5122107b已推且CI38833831553/38834985290成功，210集中及23CLI通过，三路径/两物理副本定点同步。AUDIT main58b2797/收尾a3f36d1本地并线、48集中/静态与真实CLI通过，两份技能同步；无origin/对应远端not found，未远端发布。

@@ -1,0 +1,160 @@
+{
+  "schema_version": "du6-launch/1",
+  "status": "READY",
+  "lanes": [
+    {
+      "id": "DU6-RF-TARGET-MEASURES",
+      "repo": "revenue-forecast",
+      "target": "revenue-forecast-du6-targets",
+      "branch": "codex/du6-rf-targets-20261016",
+      "base": "5122107bbc86c3d1e79886b372700c05d19bb349",
+      "slug": "targets",
+      "card": "du6_rf_target_measures.md",
+      "scopes": [
+        "scripts",
+        "tests",
+        "tools",
+        "references",
+        "templates",
+        "schemas",
+        ".github"
+      ],
+      "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-du6-targets",
+      "plan": "docs/plans/du6-targets-2026-10-16/task_plan.md",
+      "seed_commit": "75a7fb0cd5b2536680306d56ca89b2eebdd05770",
+      "tracked_pwf_files": [
+        "docs/plans/du6-targets-2026-10-16/INTERFACES.md",
+        "docs/plans/du6-targets-2026-10-16/construction_card.md",
+        "docs/plans/du6-targets-2026-10-16/findings.md",
+        "docs/plans/du6-targets-2026-10-16/progress.md",
+        "docs/plans/du6-targets-2026-10-16/task_plan.md"
+      ],
+      "status": "READY",
+      "import": {
+        "module": "research.target_measurement",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-du6-targets\\scripts\\research\\target_measurement.py"
+      },
+      "logical_bytes": 4653494,
+      "pwf_sha256": {
+        "docs/plans/du6-targets-2026-10-16/INTERFACES.md": "f2a11b29f6ae4d7d07b9af03a187a6a66a412970c08f473d2da8980b4a0a861b",
+        "docs/plans/du6-targets-2026-10-16/construction_card.md": "d82bc00d5865a5809522ef15f97bff5a4193f2846993eb934c90289a7fc02c8f",
+        "docs/plans/du6-targets-2026-10-16/findings.md": "eb82276d146c63386c2c0c4abc829e2a138df2da286b16592c5293b4afc0b28a",
+        "docs/plans/du6-targets-2026-10-16/progress.md": "b3e7297da9583175eb973167eb88013ce8624dbc26c12e18f1b2050bfa43e7d2",
+        "docs/plans/du6-targets-2026-10-16/task_plan.md": "42a7b6010c11f5d6e1b34065db1df9d52dcd2a362fb85c9920d034848af647e4"
+      },
+      "worktree_clean": true
+    },
+    {
+      "id": "DU6-AUDIT-IMPORT",
+      "repo": "revenue-forecast-audit",
+      "target": "revenue-forecast-audit-du6-import",
+      "branch": "codex/du6-audit-import-20261016",
+      "base": "a3f36d16016ff80169b3e535ea1b1df4fa595dd8",
+      "slug": "import",
+      "card": "du6_audit_summary_import.md",
+      "scopes": [
+        "skills",
+        "tests",
+        "tools",
+        ".github"
+      ],
+      "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du6-import",
+      "plan": "docs/plans/du6-import-2026-10-16/task_plan.md",
+      "seed_commit": "0e05a4978b2fd71fc6b2f8c68829a9329837cf11",
+      "tracked_pwf_files": [
+        "docs/plans/du6-import-2026-10-16/INTERFACES.md",
+        "docs/plans/du6-import-2026-10-16/construction_card.md",
+        "docs/plans/du6-import-2026-10-16/findings.md",
+        "docs/plans/du6-import-2026-10-16/progress.md",
+        "docs/plans/du6-import-2026-10-16/task_plan.md"
+      ],
+      "status": "READY",
+      "import": {
+        "module": "summary_review_packet",
+        "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-du6-import\\skills\\revenue-forecast-audit\\scripts\\summary_review_packet.py"
+      },
+      "logical_bytes": 1911751,
+      "pwf_sha256": {
+        "docs/plans/du6-import-2026-10-16/INTERFACES.md": "f2a11b29f6ae4d7d07b9af03a187a6a66a412970c08f473d2da8980b4a0a861b",
+        "docs/plans/du6-import-2026-10-16/construction_card.md": "a753444d0f3e6126b3c085b5e5792928ac9353f7dfe255d511b167d7d2ad72dc",
+        "docs/plans/du6-import-2026-10-16/findings.md": "eb82276d146c63386c2c0c4abc829e2a138df2da286b16592c5293b4afc0b28a",
+        "docs/plans/du6-import-2026-10-16/progress.md": "b3e7297da9583175eb973167eb88013ce8624dbc26c12e18f1b2050bfa43e7d2",
+        "docs/plans/du6-import-2026-10-16/task_plan.md": "5f4fe084caaefabae9875c3b996d2d44e956d6f60031ef78b7c193a8c4fbd6be"
+      },
+      "worktree_clean": true
+    },
+    {
+      "id": "DU6-FF-PORTABLE-EVIDENCE",
+      "repo": "filing-fetch",
+      "target": "filing-fetch-du6-portable",
+      "branch": "codex/du6-ff-portable-20261016",
+      "base": "e2efa81d7995836d457479eb528fa6f8cd5dc3f3",
+      "slug": "portable",
+      "card": "du6_ff_portable_evidence.md",
+      "scopes": [
+        "scripts",
+        "tests",
+        "tools",
+        "references",
+        "schemas",
+        ".github"
+      ],
+      "workdir": "C:/Users/郑曾波/Projects/filing-fetch-du6-portable",
+      "plan": "docs/plans/du6-portable-2026-10-16/task_plan.md",
+      "seed_commit": "c35ea52156a73ba366eba8196fff1cf36c792c8e",
+      "tracked_pwf_files": [
+        "docs/plans/du6-portable-2026-10-16/INTERFACES.md",
+        "docs/plans/du6-portable-2026-10-16/construction_card.md",
+        "docs/plans/du6-portable-2026-10-16/findings.md",
+        "docs/plans/du6-portable-2026-10-16/progress.md",
+        "docs/plans/du6-portable-2026-10-16/task_plan.md"
+      ],
+      "status": "READY",
+      "import": {
+        "module": "oracle",
+        "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch-du6-portable\\tools\\offline_contract_matrix\\oracle.py"
+      },
+      "logical_bytes": 2051173,
+      "pwf_sha256": {
+        "docs/plans/du6-portable-2026-10-16/INTERFACES.md": "f2a11b29f6ae4d7d07b9af03a187a6a66a412970c08f473d2da8980b4a0a861b",
+        "docs/plans/du6-portable-2026-10-16/construction_card.md": "8d5a4fdbc3fba876a7feef7eda39e60b5ec59d181ac1c988307f71cf7c5d8653",
+        "docs/plans/du6-portable-2026-10-16/findings.md": "eb82276d146c63386c2c0c4abc829e2a138df2da286b16592c5293b4afc0b28a",
+        "docs/plans/du6-portable-2026-10-16/progress.md": "b3e7297da9583175eb973167eb88013ce8624dbc26c12e18f1b2050bfa43e7d2",
+        "docs/plans/du6-portable-2026-10-16/task_plan.md": "2475eb1e4d8b28dcb66ed34468e14769f14ee59547adc575dda640a6b9a21958"
+      },
+      "worktree_clean": true
+    }
+  ],
+  "readonly_dependencies": [
+    {
+      "repo": "company-wiki",
+      "target": "company-wiki-du6-ff-readonly",
+      "base": "f08aa101ab49ca983d3a40356abfb05347f586b3",
+      "scopes": [
+        "src",
+        "scripts",
+        "tests",
+        "config"
+      ],
+      "path": "C:/Users/郑曾波/Projects/company-wiki-du6-ff-readonly",
+      "mode": "READ_ONLY_COMMITTED_CODE",
+      "logical_bytes": 19701722
+    },
+    {
+      "repo": "earnings-transcripts/earnings-transcripts",
+      "target": "earnings-transcripts-du6-ff-readonly",
+      "base": "d0ac42c60dcca992db78860b8469cfed3dd527e5",
+      "scopes": [
+        "tests",
+        "tools",
+        "templates"
+      ],
+      "path": "C:/Users/郑曾波/Projects/earnings-transcripts-du6-ff-readonly",
+      "mode": "READ_ONLY_COMMITTED_CODE",
+      "logical_bytes": 566697
+    }
+  ],
+  "business_tests_run": false,
+  "supplier_calls": 0,
+  "originals_copied": 0
+}

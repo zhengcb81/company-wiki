@@ -19,6 +19,7 @@ from company_wiki.document_understanding.pipeline import understand_units
 from company_wiki.document_understanding.narrative_continuity import build_native_continuity
 from company_wiki.document_understanding.selection_bridge import build_context_graph
 from company_wiki.document_understanding.summary_input import _sent_policies, _unread, _SHARED_CONSTRAINTS
+from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded, DEFAULT_LIMITS
 
 from .narrative_budget import READING_BUDGET_POLICY
 from .narrative_business_policy import detect_reading_business_fact, reject_finance_only_text
@@ -541,14 +542,17 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
             "deferred": deferred, "layout_coverage": layout_coverage}
 
 
-def _understand(parsed: DocumentStructure, *, title: str, kind: str, mime_type: str):
+def _understand(parsed: DocumentStructure, *, title: str, kind: str, mime_type: str,
+                work_budget: WorkBudget | None = None):
     """Each immutable parent has its own structure; selection stays global.
 
     A captured API projection may contain several genuine original parents.
     Their adjacent fields must never manufacture cross-parent Q&A or tables.
     """
+    budget = work_budget if work_budget is not None else WorkBudget(DEFAULT_LIMITS["max_work_units"])
     parents: dict[str, list[Any]] = {}
     for unit in parsed.units:
+        budget.charge()
         parents.setdefault(unit.source_id, []).append(unit)
     if not parents:
         parents[parsed.source_id] = []
@@ -559,7 +563,10 @@ def _understand(parsed: DocumentStructure, *, title: str, kind: str, mime_type: 
             source_sha256=source_id.rsplit(":", 1)[-1], title=title, declared_kind=kind,
             mime_type=mime_type, language=parsed.language,
             native_scan="complete" if parsed.coverage_complete else "partial",
-            opaque_pages=parsed.opaque_pages, deferred_pages=parsed.deferred_table_pages)
+            opaque_pages=parsed.opaque_pages, deferred_pages=parsed.deferred_table_pages,
+            work_budget=budget)
+        if part.get("analysis_status") == "deferred":
+            return part
         if native_frontend is not None:
             part["native_layout_frontend"] = native_frontend
             part["observation"]["metadata"]["native_layout_frontend_version"] = native_frontend.get("feature_version")
@@ -635,11 +642,20 @@ def _selected_unit_spans(parsed: DocumentStructure, result: NarrativeEvidencePac
 
 def select_reading_evidence(parsed: DocumentStructure, *, title: str,
                             existing_kind: str = "unknown", max_selected: int | None = None,
-                            max_chars: int = MAX_READING_CHARS) -> NarrativeEvidencePackage:
+                            max_chars: int = MAX_READING_CHARS,
+                            work_budget: WorkBudget | None = None) -> NarrativeEvidencePackage:
     route = route_document(title, existing_kind=existing_kind, max_selected=max_selected)
     mime_type = parsed.mime_type or ("text/plain" if route.document_kind == "investor_call_transcript" else
                                     "application/pdf" if parsed.page_count else "text/html")
-    pipeline = _understand(parsed, title=title, kind=route.document_kind, mime_type=mime_type)
+    budget = work_budget if work_budget is not None else WorkBudget(DEFAULT_LIMITS["max_work_units"])
+    try:
+        budget.charge()
+        pipeline = _understand(parsed, title=title, kind=route.document_kind, mime_type=mime_type,
+                               work_budget=budget)
+    except WorkBudgetExceeded:
+        return _deferred_selection(parsed, route)
+    if pipeline.get("analysis_status") == "deferred":
+        return _deferred_selection(parsed, route)
     candidates, reading, eligible, graph_complete, withheld = _candidates(parsed, pipeline)
     dropped = sum(_financial_only(unit.raw_text) for unit in parsed.units)
     # Semantic 'unassigned' is not an unread page. It must not defeat a fully
@@ -685,6 +701,15 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
             pipeline, used_facet_ids=[facet["id"] for facet in context["business_facets"]],
             source_parser_names=tuple({unit.parser_name for unit in parsed.units})))
     return replace(result, reading_context=context, reading_dependencies=dependencies)
+
+
+def _deferred_selection(parsed: DocumentStructure, route: DocumentRoute) -> NarrativeEvidencePackage:
+    return NarrativeEvidencePackage(source_id=parsed.source_id, source_sha256=parsed.source_sha256,
+        document_kind=route.document_kind, status="needs_review", evidence_spans=(),
+        selection_limit=route.selection_limit, candidate_count=0, dropped_financial_count=0,
+        source_units=len(parsed.units), omitted_candidate_count=0, coverage_complete=False,
+        selection_diagnostics=({"code": "work_budget_exhausted", "count": 1,
+                               "detail": "unexamined source content remains unknown; original is unchanged"},))
 
 
 __all__ = ["select_reading_evidence", "READING_SELECTOR_VERSION"]

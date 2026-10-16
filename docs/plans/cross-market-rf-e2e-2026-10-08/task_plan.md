@@ -1,3 +1,9 @@
+## ROOT当前状态 — 2026-10-16
+
+共享阅读主线已实施准备/共享预算首段，224集中与独审/静态通过；整链硬工作限制/FORM-STATE-TABLE/v4/真实质量仍开放，母目标未完成。DU6三条独占外包卡已READY。以[选定PWF](../document-understanding-2026-10-13/task_plan.md)及[首段证据](../document-understanding-2026-10-13/common-root-quality-evidence/prepared-source-budget-acceptance.json)为当前事实；原三/新三、G2/G4/G5不因工具绿关闭。
+
+---
+
 ## 2026-10-16 DU5验收并线完成
 
 DU5三包已验收并线。CWP merge b083a1b1及配置补丁5dae70a0正常推送，精确CI 38834945691 SUCCESS；最终5954PASS/24SKIP、真实benchmark252PASS、Git12种往返PASS。RF main794240df/收尾5122107b已推且CI38833831553/38834985290成功，210集中及23CLI通过，三路径/两物理副本定点同步。AUDIT main58b2797/收尾a3f36d1本地并线、48集中/静态与真实CLI通过，两份技能同步；无origin/对应远端not found，未远端发布。

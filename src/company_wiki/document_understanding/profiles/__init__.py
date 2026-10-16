@@ -75,7 +75,7 @@ def get_profile(profile_id: str) -> dict:
 
 
 def route_document(
-    observation: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None
+    observation: Mapping[str, Any] | Observation, *, limits: Mapping[str, Any] | None = None
 ) -> dict:
     """Route one ``du-input/1`` observation to a document profile.
 

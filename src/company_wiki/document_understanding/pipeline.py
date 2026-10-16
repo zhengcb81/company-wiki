@@ -35,9 +35,10 @@ from hashlib import sha256
 from .observation_adapter import build_observation, selectable_unit_ids
 from .orchestration import build_dependency_packages
 from .strategy_binding import bind_reading_plan
+from .layout_hints.contract import WorkBudget, WorkBudgetExceeded, resolve_limits as layout_limits
 
 PIPELINE_SCHEMA_VERSION = "du-pipeline/1"
-PIPELINE_FEATURE_VERSION = "1.8.0"
+PIPELINE_FEATURE_VERSION = "1.9.0"
 
 #: Families whose documents carry business narrative worth reading closely. A document that
 #: routes to ``administrative`` is *readable* but is not expected to yield narrative, so the
@@ -72,6 +73,7 @@ def understand_units(
     deferred_pages: Sequence[int] = (),
     limits: Mapping[str, Any] | None = None,
     max_packages: int | None = None,
+    work_budget: WorkBudget | None = None,
 ) -> dict[str, Any]:
     """Run the full document-understanding chain over already-parsed units.
 
@@ -85,8 +87,16 @@ def understand_units(
     from .profiles import get_profile, route_document, resolve_reading_profile
     from .layout_bridge import apply_layout_hints, bind_layout_context
     from .structure import build_structure
+    from .profiles.observation import parse_observation
 
-    observation = build_observation(
+    budget = work_budget if work_budget is not None else WorkBudget(layout_limits(limits)["max_work_units"])
+    source_unit_count = len(units)
+    try:
+        budget.charge()
+    except WorkBudgetExceeded:
+        return _deferred_pipeline(source_id, source_sha256, source_unit_count, budget)
+
+    observation: Mapping[str, Any] = build_observation(
         units,
         source_id=source_id,
         source_sha256=source_sha256,
@@ -100,12 +110,21 @@ def understand_units(
         deferred_pages=deferred_pages,
     )
 
-    observation, layout_hints = apply_layout_hints(observation, limits=limits)
-    route = route_document(observation, limits=limits)
-    profile = resolve_reading_profile(get_profile(route["profile_id"]), observation,
+    observation, layout_hints = apply_layout_hints(observation, limits=limits, work_budget=budget)
+    if budget.exhausted:
+        return _deferred_pipeline(source_id, source_sha256, source_unit_count, budget,
+                                  observation=observation, layout_hints=layout_hints)
+    prepared = parse_observation(observation, limits)
+    route = route_document(prepared, limits=limits)
+    profile = resolve_reading_profile(get_profile(route["profile_id"]), prepared,
                                       route, limits=limits)
     route["profile_version"] = profile["profile_version"]
-    structure = bind_layout_context(build_structure(observation, limits=limits), layout_hints)
+    structure = bind_layout_context(build_structure(observation, limits=limits), layout_hints,
+                                    work_budget=budget)
+    if budget.exhausted:
+        return _deferred_pipeline(source_id, source_sha256, source_unit_count, budget,
+                                  observation=observation, layout_hints=layout_hints,
+                                  structure=structure)
     child_profiles = {}
     for child in route.get("child_routes", ()):
         pid = child.get("profile_id")
@@ -163,6 +182,8 @@ def understand_units(
     return {
         "schema_version": PIPELINE_SCHEMA_VERSION,
         "feature_version": PIPELINE_FEATURE_VERSION,
+        "analysis_status": "complete",
+        "work": _work_observation(budget, source_unit_count),
         "source_ref": observation["source_ref"],
         "observation": observation,
         "route": route,
@@ -178,6 +199,29 @@ def understand_units(
         + list(profile.get("policy_diagnostics", ()))
         + list(layout_hints.get("diagnostics", ())),
     }
+
+
+def _work_observation(budget: WorkBudget, source_unit_count: int) -> dict[str, Any]:
+    # Do not mislabel the legacy structure/strategy estimates as hard metering.
+    return {"used": budget.used, "limit": budget.max_work_units,
+            "exhausted": budget.exhausted, "source_unit_count": source_unit_count,
+            "scope": "layout_preparation_and_binding",
+            "full_pipeline_hard_bound": False}
+
+
+def _deferred_pipeline(source_id, source_sha256, count, budget, *, observation=None,
+                       layout_hints=None, structure=None):
+    """No exception-path document scan; already prepared originals stay readable."""
+    return {"schema_version": PIPELINE_SCHEMA_VERSION, "feature_version": PIPELINE_FEATURE_VERSION,
+            "analysis_status": "deferred", "source_ref": {"source_id": source_id, "source_sha256": source_sha256},
+            "observation": observation if observation is not None else {
+                "schema_version": "du-input/1", "source_ref": {"source_id": source_id, "source_sha256": source_sha256},
+                "units": [], "coverage": {"native_scan": "partial", "unobserved_unit_count": count}},
+            "structure": structure if structure is not None else {"coverage": {"complete": False}},
+            "layout_hints": layout_hints,
+            "work": _work_observation(budget, count),
+            "diagnostics": [{"code": "WORK_BUDGET_EXCEEDED", "unit_ids": [],
+                             "detail": "enhancement deferred; unexamined material is unknown, not absent"}]}
 
 
 

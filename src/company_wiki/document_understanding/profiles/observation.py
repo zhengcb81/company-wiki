@@ -89,6 +89,7 @@ class Observation:
     probed_chars: int
     probe_limited: bool
     char_limited: bool
+    probe_limits: Limits = Limits()
 
     @property
     def unit_ids(self) -> tuple[str, ...]:
@@ -263,9 +264,18 @@ def _is_heading_like(unit: UnitRef) -> bool:
 
 
 def parse_observation(
-    observation: Mapping[str, Any], limits: Mapping[str, Any] | None = None
+    observation: Mapping[str, Any] | Observation, limits: Mapping[str, Any] | None = None
 ) -> Observation:
     """Validate and reduce a ``du-input/1`` observation. Never mutates the input."""
+    if isinstance(observation, Observation):
+        resolved = Limits.from_mapping(limits) if limits is not None else observation.probe_limits
+        if resolved == observation.probe_limits:
+            return observation
+        probes = _stratified_probes(observation.units, resolved.max_probe_units)
+        kept, chars, clipped = _bounded_probe_texts(probes, resolved.max_probe_chars)
+        return replace(observation, probes=kept, probed_chars=chars,
+                       probe_limited=len(probes) < len(observation.units) or clipped,
+                       char_limited=clipped, probe_limits=resolved)
     raw = _as_mapping(observation, "observation")
     schema_version = raw.get("schema_version")
     if schema_version != v.SCHEMA_VERSION_INPUT:
@@ -311,6 +321,7 @@ def parse_observation(
         probed_chars=probed_chars,
         probe_limited=len(probes) < len(units) or char_limited,
         char_limited=char_limited,
+        probe_limits=resolved_limits,
     )
 
 

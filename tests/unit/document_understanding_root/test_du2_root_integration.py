@@ -111,7 +111,10 @@ def test_same_profile_children_are_resolved_only_from_each_read_range(monkeypatc
     seen = []
 
     def resolve(profile, obs, actual_route, *, limits=None):
-        ids = tuple(u['unit_id'] for u in obs['units'])
+        # The combination owner now reuses the actual prepared Observation;
+        # child mappings remain compatible. Keep the same scope assertions.
+        from company_wiki.document_understanding.profiles.observation import Observation
+        ids = obs.unit_ids if isinstance(obs, Observation) else tuple(u['unit_id'] for u in obs['units'])
         seen.append(ids)
         value = dict(profile)
         value['profile_version'] = '/'.join(ids)

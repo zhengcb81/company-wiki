@@ -14,7 +14,7 @@ from bisect import bisect_right
 from typing import Any, Mapping
 
 from . import columns, headings, ordering, relations, tables
-from .contract import SCHEMA_IN, SCHEMA_OUT, WorkBudgetExceeded, parse_observation
+from .contract import SCHEMA_IN, SCHEMA_OUT, WorkBudget, WorkBudgetExceeded, parse_observation
 from .geometry import assign_cell_columns, native_cell_identity
 from .fine_geometry import consume_fine_geometry
 
@@ -24,9 +24,10 @@ __all__ = ["derive_layout_hints", "SCHEMA_IN", "SCHEMA_OUT", "LAYOUT_HINTS_VERSI
 
 
 def derive_layout_hints(
-    observation: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None
+    observation: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None,
+    work_budget: WorkBudget | None = None,
 ) -> dict:
-    doc = parse_observation(observation, limits=limits)
+    doc = parse_observation(observation, limits=limits, work_budget=work_budget)
     try:
         return _derive(doc)
     except WorkBudgetExceeded:
@@ -505,8 +506,8 @@ def _derive(doc) -> dict:
                     continuations.append((prev_draft, next_draft, claim))
     # Geometry can fit more than one adjacent table. Preserve ambiguity instead
     # of joining multiple tables or overwriting one predecessor's context.
-    targets = {}
-    sources = {}
+    targets: dict[int, set[int]] = {}
+    sources: dict[int, set[int]] = {}
     for prev_draft, next_draft, _claim in continuations:
         budget.charge()
         targets.setdefault(id(prev_draft), set()).add(id(next_draft))

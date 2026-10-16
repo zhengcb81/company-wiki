@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from typing import Any, Mapping
+from typing import Any, Mapping, cast
 
 SCHEMA_IN = "du2-layout-input/1"
 SCHEMA_OUT = "du2-layout-hints/1"
@@ -156,7 +156,8 @@ def resolve_limits(limits: Mapping[str, Any] | None) -> dict:
 
 
 def parse_observation(
-    observation: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None
+    observation: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None,
+    work_budget: WorkBudget | None = None,
 ) -> Doc:
     _require(isinstance(observation, Mapping), "observation must be a mapping")
     _require(
@@ -172,9 +173,12 @@ def parse_observation(
     _require(isinstance(coverage, Mapping), "coverage must be a mapping")
     pages_raw = observation.get("pages")
     _require(isinstance(pages_raw, list), "pages must be a list")
+    source_ref = cast(Mapping, source_ref)
+    coverage = cast(Mapping, coverage)
+    pages_raw = cast(list, pages_raw)
 
     resolved = resolve_limits(limits)
-    budget = WorkBudget(max_work_units=resolved["max_work_units"])
+    budget = work_budget if work_budget is not None else WorkBudget(max_work_units=resolved["max_work_units"])
     doc = Doc(
         source_ref=dict(source_ref),
         coverage=dict(coverage),
@@ -184,10 +188,24 @@ def parse_observation(
         budget=budget,
     )
 
+    try:
+        return _prepare_pages(doc, pages_raw, charge_preparation=work_budget is not None)
+    except WorkBudgetExceeded:
+        doc.add_diagnostic("PREPARATION_WORK_BUDGET_EXCEEDED", (),
+                           "only the observed prefix was prepared; remaining source units were not analysed")
+        return doc
+
+
+def _prepare_pages(doc: Doc, pages_raw: list, *, charge_preparation: bool) -> Doc:
+    def charge(n=1):
+        if charge_preparation:
+            doc.budget.charge(n)
+
     seen_ids: set = set()
     seen_ordinals: set = set()
 
     for page_index, page_raw in enumerate(pages_raw):
+        charge()
         _require(
             isinstance(page_raw, Mapping), f"pages[{page_index}] must be a mapping"
         )
@@ -215,10 +233,11 @@ def parse_observation(
         )
         ordered = []
         for pos, unit_raw in enumerate(units_raw):
+            charge()
             _require(isinstance(unit_raw, Mapping), f"units[{pos}] must be a mapping")
             unit_id = unit_raw.get("unit_id")
             _require(
-                isinstance(unit_id, str) and unit_id,
+                isinstance(unit_id, str) and bool(unit_id),
                 f"units[{pos}].unit_id must be a non-empty string",
             )
             _require(unit_id not in seen_ids, f"duplicate unit_id: {unit_id}")
@@ -234,6 +253,7 @@ def parse_observation(
             seen_ordinals.add(ordinal)
             text = unit_raw.get("text")
             _require(isinstance(text, str), f"{unit_id}.text must be a string")
+            charge(len(text))
             locator = unit_raw.get("locator")
             _require(
                 locator is None or isinstance(locator, str),
@@ -262,6 +282,7 @@ def parse_observation(
                 f"{unit_id}.layout must be a mapping or null",
             )
             bbox_raw = unit_raw.get("bbox")
+            charge(len(frame) + len(hints or {}))
             ordered.append(
                 (
                     ordinal,
@@ -277,6 +298,7 @@ def parse_observation(
                 )
             )
 
+        charge(len(ordered) * max(1, len(ordered).bit_length()))
         for (
             ordinal,
             unit_id,

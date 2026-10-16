@@ -1,0 +1,208 @@
+{
+  "schema_version": "prepared-source-budget-acceptance/1",
+  "date": "2026-10-16",
+  "status": "ACCEPTED_LIMITED_TRANCHE",
+  "full_pipeline_complete": false,
+  "implementation": [
+    "prepared Observation shared by route/policy",
+    "one WorkBudget at reading selection shared across parent/layout/bridge",
+    "thin zero/exhausted return prevents selector body/classifier continuation",
+    "shared overlay replaces full layout deepcopy; standalone return remains independent",
+    "prepared probe limits inherited instead of silently widened"
+  ],
+  "red": [
+    {
+      "group": "prep-budget-red",
+      "failed": 5,
+      "passed": 3
+    },
+    {
+      "group": "prep-budget-owner-red",
+      "failed": 3,
+      "passed": 8
+    },
+    {
+      "group": "prep-budget-review-red",
+      "failed": 3,
+      "passed": 11
+    }
+  ],
+  "final_concentrated": {
+    "group": "prep-budget-review-green",
+    "passed": 224,
+    "failed": 0,
+    "seconds": 2.03
+  },
+  "compatibility_snapshot": {
+    "passed": 1045,
+    "skipped": 11,
+    "seconds": 33.77,
+    "runner_exit": 1,
+    "reason": "all tests passed; read-only author-status assertion detected concurrent DU6 card documentation writes; not an acceptance receipt for a clean author tree"
+  },
+  "concurrent_collection_not_acceptance": {
+    "group": "prep-budget-final",
+    "passed": 1057,
+    "failed": 9,
+    "skipped": 11,
+    "reason": "directory collection included the live FORM agent untracked RED tests; not a regression of the frozen budget tranche; do not repeat while peers write"
+  },
+  "static": {
+    "results": [
+      {
+        "tool": "ruff",
+        "exit_code": 0,
+        "seconds": 0.13899360000505112
+      },
+      {
+        "tool": "mypy",
+        "exit_code": 0,
+        "seconds": 2.013416900008451
+      }
+    ],
+    "source_sha256": {
+      "src/company_wiki/document_understanding/layout_bridge.py": "3e429777f3694c94d7ed7faaa12ffc545cc7a70339f360e0790bc903fa51089f",
+      "src/company_wiki/document_understanding/layout_hints/contract.py": "b5a6acd249a6d93b0883ed128004f965b60024110f1a90e0a6ab9c5f94079743",
+      "src/company_wiki/document_understanding/layout_hints/__init__.py": "4f96106b186ca125eb1b9eb58cd1ad5f45f49cd72ee4da9876426a736b62974b",
+      "src/company_wiki/document_understanding/pipeline.py": "a9c534431c14b92079f8521e88ceb9b3e427dc35d931a8a5319e11676f7da428",
+      "src/company_wiki/document_understanding/profiles/observation.py": "77d42c57f03b8c342a42d36d9bab09a60c77c7c7f3d47f8edc0529e615b24b9b",
+      "src/company_wiki/document_understanding/profiles/registry.py": "d46490e743276a53a7a5942798b3651d50bdfc9029a87a7f30e3900072a01a84",
+      "src/company_wiki/document_understanding/profiles/__init__.py": "8b7706444f4b9222576b86bf5c098f0619cd925747152a9de3d80676f3791c23",
+      "src/company_wiki/source_catalog/narrative_reading.py": "ad06962a8f9a4e3e94275291465c07725fe2d59e30e3bc27560142aaee904170",
+      "tests/unit/document_understanding_root/test_prepared_source_budget.py": "daea8f6446c773a75469deb1d89c31e3c7cdfa26819c216e23816736f40cc238",
+      "tests/unit/document_understanding_root/test_du2_root_integration.py": "f2cda2d0a738396b29c256867277337a0354d792f2fa6dfe0323f8b45c2b6665"
+    },
+    "temp_removed": true,
+    "supplier_calls": 0
+  },
+  "independent": {
+    "schema_version": "shared-budget-independent-final-review/1",
+    "date": "2026-10-16",
+    "reviewer": "attribution_release_review",
+    "status": "PASS_TRANCHE",
+    "closed_findings": [
+      "R1",
+      "R2",
+      "R3"
+    ],
+    "remaining_blocking_findings": [],
+    "scope": "layout_preparation_and_binding + prepared probe limit inheritance",
+    "full_pipeline_hard_bound": false,
+    "actual": {
+      "standalone_zero_mutated_input": false,
+      "standalone_before_completeness": "complete",
+      "standalone_after_completeness": "complete",
+      "standalone_return_completeness": "partial",
+      "shared_zero_diagnostics": {
+        "visited": 0,
+        "budget_used": 0,
+        "returned_diagnostics": 1
+      },
+      "implicit_policy_widens_prepared": {
+        "input_probe_ids": [
+          "u0"
+        ],
+        "input_chars": 1,
+        "resolved_probe_ids": [
+          "u0"
+        ],
+        "resolved_chars": 1,
+        "policy_probe": {
+          "probed_unit_count": 1,
+          "probed_chars": 1,
+          "limited": true
+        }
+      },
+      "implicit_subscope_reopens_unprobed_text": {
+        "parent_probe_ids": [
+          "u0"
+        ],
+        "child_probe_ids": [
+          "u2"
+        ],
+        "child_chars": 1
+      },
+      "api_calls": 0,
+      "original_reads": 0,
+      "source_test_git_writes": 0
+    },
+    "source_sha256": {
+      "src/company_wiki/document_understanding/layout_bridge.py": "d3e116632e396d752366275d75aec01f481e643597bc97cc91715c069d317b89",
+      "src/company_wiki/document_understanding/layout_hints/__init__.py": "b9e82b909360037a295289f65191de8ff7f2e3716f7983bdfc22e3a4c6453e9a",
+      "src/company_wiki/document_understanding/layout_hints/contract.py": "4de99699568c3a210bbd95d417fe9c666e8e5fffb8fb4b6778c355373e1d09de",
+      "src/company_wiki/document_understanding/pipeline.py": "cd9f2cfe536955813e139cdf1b5d27d23d5b35a1274d66c372e48c900e679fa8",
+      "src/company_wiki/document_understanding/profiles/__init__.py": "8b7706444f4b9222576b86bf5c098f0619cd925747152a9de3d80676f3791c23",
+      "src/company_wiki/document_understanding/profiles/observation.py": "77d42c57f03b8c342a42d36d9bab09a60c77c7c7f3d47f8edc0529e615b24b9b",
+      "src/company_wiki/document_understanding/profiles/registry.py": "d46490e743276a53a7a5942798b3651d50bdfc9029a87a7f30e3900072a01a84",
+      "src/company_wiki/source_catalog/narrative_reading.py": "ad06962a8f9a4e3e94275291465c07725fe2d59e30e3bc27560142aaee904170"
+    },
+    "test_sha256": {
+      "tests/unit/document_understanding_root/test_prepared_source_budget.py": "daea8f6446c773a75469deb1d89c31e3c7cdfa26819c216e23816736f40cc238",
+      "tests/unit/document_understanding_root/test_du2_root_integration.py": "f2cda2d0a738396b29c256867277337a0354d792f2fa6dfe0323f8b45c2b6665"
+    },
+    "independent_execution": {
+      "identical_existing_probe": true,
+      "only_output_filename_changed_in_memory": true,
+      "final_field_assertions": "PASS",
+      "full_suite": false
+    },
+    "root_test_evidence": {
+      "initial_red": {
+        "failed": 3,
+        "passed": 11
+      },
+      "final_related_passed": 224,
+      "independently_reexecuted": false
+    },
+    "first_red_evidence_preserved": true,
+    "api_calls": 0,
+    "original_reads": 0,
+    "source_test_pwf_git_author_writes": 0,
+    "limitations": [
+      "structure/strategy/candidate full hard budget remains outside this tranche",
+      "no real PDF/source semantic validation",
+      "0.8 paid recovery not independently rerun"
+    ],
+    "artifacts": {
+      "final-handoff.md": {
+        "bytes": 2348,
+        "sha256": "d70d632109a5351908f7bfc742c8c4208f0bfe5450921fcecdb9e175f3720ee7"
+      },
+      "final-probe-results.json": {
+        "bytes": 848,
+        "sha256": "edaa7246f2652975a4834ea14de4bb21c70787ec78cbdeb082d5fa1c42dbc286"
+      },
+      "handoff.md": {
+        "bytes": 6626,
+        "sha256": "e1961240b12bc99a353326414d0dac51855dc75bfc416a63f3a8e76f944baab0"
+      },
+      "handoff.json": {
+        "bytes": 2712,
+        "sha256": "dedbdc45546320d445de85763a63fab43e849cb8c618ee93d781f3d57fe67205"
+      },
+      "probe.py": {
+        "bytes": 3339,
+        "sha256": "0e822dc4c3775fa54d3be5f6ea65b07d181f3b9d4bd839409173a797514a2574"
+      },
+      "probe-results.json": {
+        "bytes": 881,
+        "sha256": "a21f7756a2884a7d14f05dafbbc81814f8674b26846d7fde846cdf0549cf8092"
+      }
+    }
+  },
+  "not_complete": [
+    "structure/strategy/candidate analysis still not fully metered",
+    "single call source indexes and remaining full copies",
+    "FORM/STATE/TABLE production wiring",
+    "v4 formal protocol/worker recovery/real supplier summary quality"
+  ],
+  "default_selector": "0.8.0",
+  "new_09_default_projection": "v3 unchanged",
+  "supplier_calls": 0,
+  "production_originals_or_config_writes": 0,
+  "archive": {
+    "path": "common-root-quality-evidence/prepared-source-budget-receipts.zip",
+    "bytes": 134506,
+    "sha256": "bad454c41385b3e62c90840b82196bd2c8ce74a3bc631edae1b9f3929c0e1cb7"
+  }
+}
