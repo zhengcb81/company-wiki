@@ -2469,6 +2469,18 @@ def validate_summary_claim(
     _validate_claim_roles(claim, known)
 
 
+def summary_claim_type_for_roles(roles: Sequence[str]) -> Literal[
+    "company_statement", "analyst_question", "uncertain"
+]:
+    """One role-family policy for source validation and program-owned claims."""
+    observed = set(roles)
+    if observed and observed <= {"company_filing", "management"}:
+        return "company_statement"
+    if observed and observed <= {"analyst", "investor_question"}:
+        return "analyst_question"
+    return "uncertain"
+
+
 def _validate_claim_roles(
     claim: SummaryClaim, known: Mapping[str, EvidenceSpan]
 ) -> None:
@@ -2476,16 +2488,12 @@ def _validate_claim_roles(
         known[evidence_id].structured_value.get("source_role", "unknown")
         for evidence_id in claim.evidence_ids
     }
-    if claim.claim_type == "company_statement" and not roles <= {
-        "company_filing",
-        "management",
-    }:
+    family = summary_claim_type_for_roles(tuple(roles))
+    if claim.claim_type == "company_statement" and roles and family != "company_statement":
         raise SummaryValidationError(
             "non-company evidence cannot support a company statement"
         )
-    if claim.claim_type == "analyst_question" and (
-        not roles or not roles <= {"analyst", "investor_question"}
-    ):
+    if claim.claim_type == "analyst_question" and family != "analyst_question":
         raise SummaryValidationError(
             "analyst-question claims must cite question evidence only"
         )

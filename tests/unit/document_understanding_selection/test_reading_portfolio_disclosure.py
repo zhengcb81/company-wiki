@@ -61,6 +61,6 @@ def test_real_decision_inventory_reads_current_business_policy_version(monkeypat
     from company_wiki.document_understanding.decision_inventory import _versions
     from company_wiki.source_catalog import narrative_business_policy
 
-    assert _versions()["business_policy"] == "reading-business-policy/6"
+    assert _versions()["business_policy"] == "reading-business-policy/7"
     monkeypatch.setattr(narrative_business_policy, "READING_BUSINESS_POLICY_VERSION", "reading-business-policy/test-next")
     assert _versions()["business_policy"] == "reading-business-policy/test-next"

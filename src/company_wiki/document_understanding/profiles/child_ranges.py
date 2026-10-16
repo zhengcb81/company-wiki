@@ -11,6 +11,43 @@ from .signals import URL_PATTERN, detect_signals, is_title_evidence, normalize
 _EXHIBIT = re.compile(r"^(?:exhibit|附件)\s*(?:no\.?\s*)?\d+(?:\.\d+)?(?:\s|[:：-]|$)", re.IGNORECASE)
 
 
+def attachment_markers(parsed: Observation, *, probes_only: bool = True):
+    return [unit for unit in (parsed.probes if probes_only else parsed.units)
+            if unit.kind != 'reference' and (unit.kind == 'attachment' or is_title_evidence(unit))
+            and _EXHIBIT.search(normalize(unit.text)) and not URL_PATTERN.search(unit.text)]
+
+
+def primary_scope(parsed: Observation) -> Observation:
+    """One observed container scope; a child's facts never name its parent."""
+    if parsed.native_source_signals is None:
+        return parsed
+    markers = attachment_markers(parsed)
+    if parsed.is_attachment_scope and parsed.units:
+        markers = [marker for marker in markers if marker.unit_id != parsed.units[0].unit_id]
+    if not markers:
+        return parsed
+    stop = min(marker.ordinal for marker in markers)
+    probes = tuple(unit for unit in parsed.probes if unit.ordinal < stop)
+    return replace(parsed, units=tuple(unit for unit in parsed.units if unit.ordinal < stop),
+                   probes=probes, probed_chars=sum(len(unit.text) for unit in probes))
+
+
+def reserve_native_scope(parsed: Observation, reserved_ids: tuple[str, ...]) -> tuple[str, ...]:
+    """Boundary precedes its observed child carrier inside the original cap."""
+    marker_ids = {unit.unit_id for unit in attachment_markers(parsed, probes_only=False)}
+    reserved = set(reserved_ids)
+    boundary = None
+    result = {}
+    for unit in parsed.units:
+        if unit.unit_id in marker_ids:
+            boundary = unit.unit_id
+        if unit.unit_id in reserved:
+            if boundary is not None:
+                result[boundary] = None
+            result[unit.unit_id] = None
+    return tuple(result)
+
+
 def attachment_routes(parsed: Observation, *, cap: int) -> tuple[list[dict], list[dict]]:
     """Only fully observed ranges receive a typed child, never a lone marker.
 
@@ -23,10 +60,7 @@ def attachment_routes(parsed: Observation, *, cap: int) -> tuple[list[dict], lis
         return [], []
     original = {unit.unit_id: (index, unit) for index, unit in enumerate(parsed.units)}
     probed = {unit.unit_id: unit for unit in parsed.probes}
-    markers = [unit for unit in parsed.probes
-               if _EXHIBIT.search(normalize(unit.text))
-               and unit.kind != "reference"
-               and (unit.kind == "attachment" or is_title_evidence(unit))]
+    markers = attachment_markers(parsed)
     children: list[dict] = []
     diagnostics: list[dict] = []
     for position, marker in enumerate(markers):
@@ -53,7 +87,7 @@ def attachment_routes(parsed: Observation, *, cap: int) -> tuple[list[dict], lis
         child = replace(parsed, title=None, form_type=None, declared_kind=None, regime_claim=None,
                         units=tuple(members), probes=tuple(members),
                         probed_chars=sum(len(unit.text) for unit in members), probe_limited=False,
-                        char_limited=False)
+                        char_limited=False, is_attachment_scope=True)
         signals = detect_signals(child)
         winner = decide(child, signals)
         # A shared compatibility profile ID does not identify the observed

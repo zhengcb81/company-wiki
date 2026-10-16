@@ -31,14 +31,16 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from typing import Any
 from hashlib import sha256
+from dataclasses import replace
 
 from .observation_adapter import build_observation, selectable_unit_ids
 from .orchestration import build_dependency_packages
 from .strategy_binding import bind_reading_plan
 from .layout_hints.contract import WorkBudget, WorkBudgetExceeded, resolve_limits as layout_limits
+from .native_signal_bridge import collect_native_signals
 
 PIPELINE_SCHEMA_VERSION = "du-pipeline/1"
-PIPELINE_FEATURE_VERSION = "1.9.0"
+PIPELINE_FEATURE_VERSION = "1.10.0"
 
 #: Families whose documents carry business narrative worth reading closely. A document that
 #: routes to ``administrative`` is *readable* but is not expected to yield narrative, so the
@@ -87,7 +89,8 @@ def understand_units(
     from .profiles import get_profile, route_document, resolve_reading_profile
     from .layout_bridge import apply_layout_hints, bind_layout_context
     from .structure import build_structure
-    from .profiles.observation import parse_observation
+    from .profiles.observation import parse_observation, reprobe_observation
+    from .profiles.child_ranges import reserve_native_scope
 
     budget = work_budget if work_budget is not None else WorkBudget(layout_limits(limits)["max_work_units"])
     source_unit_count = len(units)
@@ -110,22 +113,33 @@ def understand_units(
         deferred_pages=deferred_pages,
     )
 
+    try:
+        native_signals = collect_native_signals(observation, work_budget=budget)
+    except WorkBudgetExceeded:
+        return _deferred_pipeline(source_id, source_sha256, source_unit_count, budget,
+                                  observation=observation)
     observation, layout_hints = apply_layout_hints(observation, limits=limits, work_budget=budget)
     if budget.exhausted:
         return _deferred_pipeline(source_id, source_sha256, source_unit_count, budget,
                                   observation=observation, layout_hints=layout_hints)
     prepared = parse_observation(observation, limits)
+    reserved = tuple(native_signals['reserved_unit_ids'])
+    if reserved:
+        reserved = reserve_native_scope(prepared, reserved)
+        prepared = reprobe_observation(prepared, reserved_unit_ids=reserved)
+    prepared = replace(prepared, native_source_signals=native_signals)
     route = route_document(prepared, limits=limits)
     profile = resolve_reading_profile(get_profile(route["profile_id"]), prepared,
                                       route, limits=limits)
     route["profile_version"] = profile["profile_version"]
-    structure = bind_layout_context(build_structure(observation, limits=limits), layout_hints,
+    structure = bind_layout_context(build_structure(observation, limits=limits, work_budget=budget), layout_hints,
                                     work_budget=budget)
     if budget.exhausted:
         return _deferred_pipeline(source_id, source_sha256, source_unit_count, budget,
                                   observation=observation, layout_hints=layout_hints,
                                   structure=structure)
     child_profiles = {}
+    prepared_by_id = {unit.unit_id: unit for unit in prepared.units}
     for child in route.get("child_routes", ()):
         pid = child.get("profile_id")
         reason = child.get("reason", "")
@@ -133,30 +147,36 @@ def understand_units(
         scope = set(child.get("unit_ids", ()))
         if "EXTERNAL_ATTACHMENT_NOT_READ" in code or not scope:
             continue
-        actual_units = [u for u in observation["units"] if u["unit_id"] in scope]
-        if {u["unit_id"] for u in actual_units} != scope:
+        if not scope <= prepared_by_id.keys():
             continue
+        actual_units = tuple(sorted((prepared_by_id[uid] for uid in scope), key=lambda unit: unit.ordinal))
         try:
             child_base = get_profile(pid)
         except (KeyError, TypeError, ValueError):
             continue
         # A child sees only its already-read range, including its own metadata.
         # The parent's title/form cannot certify an attachment's purpose.
-        child_observation = {**observation, "units": actual_units,
-                             "metadata": {"mime_type": mime_type, "language": language,
-                                          "form_type": child.get("form_type"),
-                                          "regime": child.get("regime")}}
+        child_observation = replace(reprobe_observation(prepared, units=actual_units),
+                                    title=None, declared_kind=None, form_type=None,
+                                    regime_claim=None, is_attachment_scope=True)
         child_route = {**route, "profile_id": pid,
                        "family": child.get("family", child_base["family"]),
                        "regime": child.get("regime", child_base.get("regime", "unknown")),
+                       "form_type": child.get("form_type"),
                        "subtype": child.get("subtype"), "child_routes": []}
         key = f"{pid}:" + sha256("\0".join(sorted(scope)).encode()).hexdigest()[:16]
         child["reading_profile_key"] = key
         child_profiles[key] = resolve_reading_profile(child_base, child_observation,
                                                      child_route, limits=limits)
         child["profile_version"] = child_profiles[key]["profile_version"]
-    reading_plan = bind_reading_plan(observation, structure, route=route,
-                                     profile=profile, child_profiles=child_profiles)
+    try:
+        reading_plan = bind_reading_plan(observation, structure, route=route,
+                                         profile=profile, child_profiles=child_profiles,
+                                         work_budget=budget)
+    except WorkBudgetExceeded:
+        return _deferred_pipeline(source_id, source_sha256, source_unit_count, budget,
+                                  observation=observation, layout_hints=layout_hints,
+                                  structure=structure)
     structure = reading_plan["structure"]
     # Carry the observation's non-selectable units into the packages, so the decision made
     # in the adapter actually reaches the consumers that add and send evidence. A marking
@@ -193,6 +213,7 @@ def understand_units(
         "packages": packages,
         "reading_plan": reading_plan,
         "layout_hints": layout_hints,
+        "source_signals": native_signals,
         "non_selectable_unit_ids": non_selectable,
         "plan": _plan(route, profile, structure, packages),
         "diagnostics": _pipeline_diagnostics(route, structure, packages) + reading_plan["diagnostics"]
@@ -202,10 +223,10 @@ def understand_units(
 
 
 def _work_observation(budget: WorkBudget, source_unit_count: int) -> dict[str, Any]:
-    # Do not mislabel the legacy structure/strategy estimates as hard metering.
+    # Logical analysis accounting does not claim regex or wall-clock bounds.
     return {"used": budget.used, "limit": budget.max_work_units,
             "exhausted": budget.exhausted, "source_unit_count": source_unit_count,
-            "scope": "layout_preparation_and_binding",
+            "scope": "native_signals_layout_structure_and_strategy",
             "full_pipeline_hard_bound": False}
 
 

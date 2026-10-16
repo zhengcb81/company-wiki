@@ -214,7 +214,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/6"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/7"
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -553,5 +553,59 @@ def detect_reading_business_fact(text: str) -> OperatingFact:
                          max(fact.score, 3), fact.financial_exempt or bool(relations))
 
 
+def project_reading_business_fact(text: str, source_relations: dict, *,
+                                  include_description: bool = True, ref_text=None) -> OperatingFact:
+    """Combine independent descriptions with source-owned operating states.
+
+    The text-only compatibility recognizer cannot assert progress in production.
+    Relations already own scope, attribution and modifiers; this projection
+    never reparses predicates, changes refs or borrows an actor from a noun.
+    Legacy 0.8 recognition remains unchanged.
+    """
+    fact = detect_reading_business_fact(text) if include_description else OperatingFact()
+    dynamic_reasons = {"operating_activity", "specific_business_event",
+                       "applied_operating_milestone", "customer_adoption_milestone"}
+    independent = tuple(reason for reason in fact.reasons if reason not in dynamic_reasons)
+    topics = [topic for topic in fact.topics if topic != "business_progress"] if independent else []
+    reasons = list(independent)
+    if not source_relations.get("relations") and set(fact.reasons) & dynamic_reasons:
+        # Uncovered event grammar is useful source description, not proof of a
+        # milestone. Preserve recall without a text-only completed-state label.
+        reasons.append("operating_description_unknown")
+        topics.append("core_business")
+    for relation in source_relations.get("relations", ()):
+        polarity, stage = relation["polarity"], relation["stage"]
+        attribution, modality = relation["attribution"], relation["modality"]
+        topics.append("core_business")
+        if attribution in {"other", "quoted_related_party"}:
+            reasons.append("operating_other_party_state")
+        elif modality in {"planned", "conditional", "aspirational"}:
+            topics.append("new_business")
+            reasons.append("operating_plan")
+        elif polarity == "negative" or stage in {"not_yet", "suspended", "discontinued"}:
+            reasons.append("operating_restriction")
+        elif (attribution == "issuer" and polarity == "positive" and modality == "actual"
+              and stage in {"current", "contact_established"}):
+            # Current state is retained as state. A bound aspect marker or a
+            # concrete signed/contact relationship proves an observed milestone.
+            qualifiers = [ref_text(ref) if ref_text is not None else text[ref["char_start"]:ref["char_end"]]
+                          for ref in relation["qualifier_refs"]]
+            milestone = (stage == "contact_established" or
+                (relation["activity"] == "business_relationship" and relation["predicate_refs"]) or
+                any(re.search(r"已|完成|开始|正在|\b(?:already|has|have|began|started|currently)\b", q, re.I)
+                    for q in qualifiers))
+            reasons.append("operating_milestone" if milestone else "operating_current_state")
+            if milestone:
+                topics.append("business_progress")
+        else:
+            reasons.append("operating_state_unknown")
+        if relation["activity"] == "production" and attribution == "issuer":
+            topics.append("capacity_projects")
+    return OperatingFact(bool(reasons), tuple(dict.fromkeys(topics)), tuple(dict.fromkeys(reasons)),
+                         max(fact.score if independent else 0, 3 if reasons else 0),
+                         fact.financial_exempt or bool(source_relations.get("relations")))
+
+
 __all__ = ["business_objects", "business_qualification", "detect_business_fact",
-           "detect_reading_business_fact", "reject_finance_only_text", "READING_BUSINESS_POLICY_VERSION"]
+           "detect_reading_business_fact", "project_reading_business_fact",
+           "reject_finance_only_text", "READING_BUSINESS_POLICY_VERSION"]

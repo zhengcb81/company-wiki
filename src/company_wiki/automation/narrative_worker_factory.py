@@ -165,8 +165,8 @@ def _reading_projection_identity(manifest: Mapping[str, Any]) -> str | None:
 
 def _validate_model_software(manifest: Mapping[str, Any]) -> str | None:
     """Validate only the implementation a particular summarize job will use."""
-    from .narrative_model import (
-        ModelResponseError,
+    from .narrative_model import ModelResponseError
+    from .narrative_model_runtime import (
         reading_model_boundary_identity, resolve_model_boundary,
     )
 

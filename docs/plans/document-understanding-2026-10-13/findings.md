@@ -1,4 +1,28 @@
+## ROOT发布节点更新 — 2026-10-16
+
+FORM/native TABLE适配、STATE、共享结构与策略预算、显式v4工程已收齐，独立scope/预算尾部反例修复并复放通过。[本节点详情](review/native_state_scoped_engineering.md)与[验收收据](common-root-quality-evidence/native-state-scoped-engineering-acceptance.json)。集中1212 PASS后12项失败已分类修复：可选role/kind不再阻断，正常宿主相关25 PASS（含v4与旧paid恢复）；未删除失败或跳hook。准备正常提交和推送，精确CI未返回前不称远端绿。
+
+真实VRSK/MSFT在固定2M共享预算内仍耗尽，已优先安排STATE惰性事件准备共因整改；只读剖析83%耗在大多无事件owner的全语法扫描。当前不切默认，不提高cap，不把partial视为质量通过。新DU7候选仅两张：PDF已观察细格适配与ET既有HTML抽取忠实度，均与DU6三卡排他；正式卡/工区准备后再交付。
+
+**Next Step：** 完成本工程节点正常发布；随后STATE共享效率共因、TABLE依赖闭包和正式跨仓/真实摘要验收继续。母目标未完成，DU6已分包继续，不进入其owned目录。
+
+---
+
+## 2026-10-16 主线新发现
+
+FORM两项共因是scope：同范围互斥DEI必须unknown；Exhibit边界内的子表单不能替父文定性。原RED与相同探针复放在 `.planning/shared-reading-production/du6-form-route-review/`，真实TXT/VRSK/字符上限/同预算正控均保留。
+
+结构预算不能变成通用Python操作代理层。首版在八个冻结fixture合成扩展6K的实测为原算法0.734s、共享1.801s/2M耗尽、语义10.5%/关系0；这是合成规模对照，不是真实财报全文。该形态拒收并保留patch，收敛为现有算法的阶段/主要循环预算。regex逻辑预算不等于wall-clock硬界。
+
+ROOT策略层存在逐section重复normalization/逐unit重复deepcopy同一profile；当前以调用内缓存和共享内部材料解决，绝不引入跨run缓存/新政策库。旧standalone独立返回与来源字节保持。一次shell使用Bash花括号导致PowerShell解析错误、一次inline Python转义失败，均未执行项目改动；已改为明确路径和here-string。
+
+显式v4的238 PASS只验证协议/归属/恢复，不证明摘要蕴含或关键方向完整。旧六错引及PD5/Matrix遗漏保持；真实质量只在后续配置供应商节点判断。
+
+---
+
 ## ROOT当前状态 — 2026-10-16 统一准备与共享预算首段、DU6启动
+
+**并行调度更新：用户已确认 DU6 三包发出（DISPATCHED），ROOT不进入三卡源码范围；各作者独占工区和接口继续按总表。**
 
 DU5三包已接收。ROOT新增准备/预算首段：route与policy复用实际Observation；选择入口拥有同一WorkBudget并传至各parent/layout/binding；零预算/耗尽在进入后续正文分类前返回未完成；共享路径只overlay增强字段，standalone独立返回保持。初始5RED、owner3RED和独审3P2各自固定后修；最终224集中PASS，独立相同探针复验通过，Ruff/mypy8源通过。这里只完成layout准备/绑定与prepared限额复用，**结构/strategy/candidate尚未全部计费，full_pipeline_hard_bound=false**，不能称预算/来源准备整体完成。
 

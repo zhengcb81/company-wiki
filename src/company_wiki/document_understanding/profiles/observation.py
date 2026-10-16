@@ -66,6 +66,7 @@ class UnitRef:
     role: str | None
     heading_level: int | None
     text_clipped: bool = False
+    parent_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -90,6 +91,9 @@ class Observation:
     probe_limited: bool
     char_limited: bool
     probe_limits: Limits = Limits()
+    native_source_signals: Mapping[str, Any] | None = None
+    reserved_unit_ids: tuple[str, ...] = ()
+    is_attachment_scope: bool = False
 
     @property
     def unit_ids(self) -> tuple[str, ...]:
@@ -176,6 +180,8 @@ def _parse_units(raw_units: Any) -> tuple[UnitRef, ...]:
                 language=_optional_str(item.get("language")),
                 role=_optional_str(item.get("role")),
                 heading_level=_heading_level(item.get("hints")),
+                parent_id=_optional_str((item.get("hints") or {}).get("source_id"))
+                if isinstance(item.get("hints"), Mapping) else None,
             )
         )
     return tuple(units)
@@ -192,7 +198,8 @@ def _spread_sample(units: list[UnitRef], count: int) -> list[UnitRef]:
     return [units[index * (len(units) - 1) // (count - 1)] for index in range(count)]
 
 
-def _stratified_probes(units: tuple[UnitRef, ...], limit: int) -> tuple[UnitRef, ...]:
+def _stratified_probes(units: tuple[UnitRef, ...], limit: int,
+                       reserved_unit_ids: tuple[str, ...] = ()) -> tuple[UnitRef, ...]:
     """Reserve opportunities for cover, span headings and ordinary body.
 
     A dense front TOC cannot exhaust the heading allocation. Sampling each lane
@@ -204,8 +211,12 @@ def _stratified_probes(units: tuple[UnitRef, ...], limit: int) -> tuple[UnitRef,
     if len(units) <= limit:
         return units
     cover_count = min(3, max(1, limit // 4))
-    selected = {unit.unit_id for unit in units[:cover_count]}
-    remainder = list(units[cover_count:])
+    reserved = set(reserved_unit_ids[:limit])
+    selected = {unit.unit_id for unit in units if unit.unit_id in reserved}
+    for unit in units[:cover_count]:
+        if len(selected) < limit:
+            selected.add(unit.unit_id)
+    remainder = [unit for unit in units if unit.unit_id not in selected]
     headings = [unit for unit in remainder if _is_heading_like(unit)]
     body = [unit for unit in remainder if not _is_heading_like(unit)]
     available = limit - len(selected)
@@ -271,11 +282,7 @@ def parse_observation(
         resolved = Limits.from_mapping(limits) if limits is not None else observation.probe_limits
         if resolved == observation.probe_limits:
             return observation
-        probes = _stratified_probes(observation.units, resolved.max_probe_units)
-        kept, chars, clipped = _bounded_probe_texts(probes, resolved.max_probe_chars)
-        return replace(observation, probes=kept, probed_chars=chars,
-                       probe_limited=len(probes) < len(observation.units) or clipped,
-                       char_limited=clipped, probe_limits=resolved)
+        return reprobe_observation(observation, limits=resolved)
     raw = _as_mapping(observation, "observation")
     schema_version = raw.get("schema_version")
     if schema_version != v.SCHEMA_VERSION_INPUT:
@@ -302,7 +309,6 @@ def parse_observation(
     kept, probed_chars, char_limited = _bounded_probe_texts(
         probes, resolved_limits.max_probe_chars
     )
-
     return Observation(
         source_id=_optional_str(source_ref.get("source_id")),
         source_sha256=_optional_str(source_ref.get("source_sha256")),
@@ -323,6 +329,19 @@ def parse_observation(
         char_limited=char_limited,
         probe_limits=resolved_limits,
     )
+
+
+def reprobe_observation(observation: Observation, *, units: tuple[UnitRef, ...] | None = None,
+                        limits: Limits | None = None, reserved_unit_ids: tuple[str, ...] | None = None) -> Observation:
+    """Project a known native scope with the one existing bounded allocator."""
+    actual = observation.units if units is None else units
+    resolved = observation.probe_limits if limits is None else limits
+    reserved = observation.reserved_unit_ids if reserved_unit_ids is None else reserved_unit_ids
+    probes = _stratified_probes(actual, resolved.max_probe_units, reserved)
+    kept, chars, clipped = _bounded_probe_texts(probes, resolved.max_probe_chars)
+    return replace(observation, units=actual, probes=kept, probed_chars=chars,
+                   probe_limited=len(probes) < len(actual) or clipped, char_limited=clipped,
+                   probe_limits=resolved, reserved_unit_ids=reserved)
 
 
 __all__ = [

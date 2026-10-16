@@ -218,6 +218,9 @@ def _policy_score(record: Mapping, parsed: Observation) -> tuple[int, int]:
 
 
 def _bounded_observation(observation: Mapping | Observation, route: Mapping, limits: Mapping | None) -> Observation:
+    if isinstance(observation, Observation):
+        from .child_ranges import primary_scope
+        observation = primary_scope(observation)
     resolved = (observation.probe_limits if limits is None and isinstance(observation, Observation)
                 else Limits.from_mapping(limits))
     capped = {"max_probe_units": min(resolved.max_probe_units, v.DEFAULT_MAX_PROBE_UNITS),
@@ -230,13 +233,9 @@ def _bounded_observation(observation: Mapping | Observation, route: Mapping, lim
             raise ValueError("policy scope unit_ids must be a sequence")
         scope_ids = set(scope)
         if isinstance(observation, Observation):
-            from .observation import _stratified_probes, _bounded_probe_texts
+            from .observation import reprobe_observation
             units = tuple(unit for unit in observation.units if unit.unit_id in scope_ids)
-            probes = _stratified_probes(units, capped["max_probe_units"])
-            kept, chars, clipped = _bounded_probe_texts(probes, capped["max_probe_chars"])
-            scoped = replace(observation, units=units, probes=kept, probed_chars=chars,
-                             char_limited=clipped, probe_limited=len(probes) < len(units) or clipped,
-                             probe_limits=Limits.from_mapping(capped))
+            scoped = reprobe_observation(observation, units=units, limits=Limits.from_mapping(capped))
         else:
             scoped = dict(observation)
             scoped["units"] = [unit for unit in observation.get("units", ()) if unit.get("unit_id") in scope_ids]

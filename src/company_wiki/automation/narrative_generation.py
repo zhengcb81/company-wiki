@@ -62,8 +62,8 @@ def _bind_reading_projection(manifest, versions, reading_model_projection):
                 or len(reading_model_projection) > 256):
             raise ValueError("invalid reading model projection identity")
         manifest["reading_model_projection"] = reading_model_projection
-        from .narrative_model import (
-            ModelResponseError,
+        from .narrative_model import ModelResponseError
+        from .narrative_model_runtime import (
             reading_model_boundary_identity,
             resolve_model_boundary,
         )

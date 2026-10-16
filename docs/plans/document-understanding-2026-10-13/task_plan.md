@@ -1,4 +1,32 @@
+## ROOT发布节点更新 — 2026-10-16
+
+FORM/native TABLE适配、STATE、共享结构与策略预算、显式v4工程已收齐，独立scope/预算尾部反例修复并复放通过。[本节点详情](review/native_state_scoped_engineering.md)与[验收收据](common-root-quality-evidence/native-state-scoped-engineering-acceptance.json)。集中1212 PASS后12项失败已分类修复：可选role/kind不再阻断，正常宿主相关25 PASS（含v4与旧paid恢复）；未删除失败或跳hook。准备正常提交和推送，精确CI未返回前不称远端绿。
+
+真实VRSK/MSFT在固定2M共享预算内仍耗尽，已优先安排STATE惰性事件准备共因整改；只读剖析83%耗在大多无事件owner的全语法扫描。当前不切默认，不提高cap，不把partial视为质量通过。新DU7候选仅两张：PDF已观察细格适配与ET既有HTML抽取忠实度，均与DU6三卡排他；正式卡/工区准备后再交付。
+
+**Next Step：** 完成本工程节点正常发布；随后STATE共享效率共因、TABLE依赖闭包和正式跨仓/真实摘要验收继续。母目标未完成，DU6已分包继续，不进入其owned目录。
+
+---
+
+## ROOT当前状态 — 2026-10-16 FORM/v4工程完成，统一预算继续收敛
+
+DU6三包由用户确认已分发，状态DISPATCHED；RF/AUDIT/FF三作者独占目录和接口不变，ROOT不进入其白名单。预算/准备首段已正常commit `06f4ea24`，尚未推送；待相关写者稳定后统一正常提交/推送，避免pre-commit自动stash干扰并行施工。
+
+- FORM原生carrier→adapter→原cap路由已接线；真实兄弟表单冲突与父文借用附件身份两项P2已修，独审原探针复放通过。最后集中范围228 PASS；表格原生桥后续修改这些源码时需在同一大节点回归，尚不把生产全链质量签为完成。
+- 显式v4正式runtime已交付：238 PASS，原worker/caller/verify/publish/恢复1次loopback POST、恢复0次；None/v1/v2/v3原模块和旧wire保持。只是离线工程证据，原六条错误引文及业务遗漏仍开放，默认0.8和新0.9默认v3未切。
+- STATE关系准入与TABLE原生槽位桥继续接线；来源身份/角色/限定关系由所属层负责，不加人工许可。
+- 统一结构预算的第一版过度包装Python操作，合成6K units仅留下10.5%语义且2M耗尽，已明确拒收。保留失败与patch，按阶段/主要循环边界收敛，原算法和2M上限保持；不得用提高限额掩盖复杂度。
+- ROOT策略准备正接同一预算，局部缓存重复heading/aliases及每profile材料，standalone独立可变返回兼容；新5 RED后23相关PASS。仍待生产组合集中验收，不称预算全链完成。
+
+**Next Step：** 收齐STATE/结构预算收敛与TABLE薄桥，冻结相关写者后完成生产组合、正式worker→公共读→RF离线联调并集中审查发布；继而按现配置三供应商运行真实摘要、原错例和新holdout。0新增供应商；累计599590 tokens/385113µUSD代理、旧unknown7，限2M/$20不变。母G2/G4/G5与原三→新三审查循环仍开放。
+
+以下为按时间倒序的历史记录，若旧Next Step与上文冲突以上文为准。
+
+---
+
 ## ROOT当前状态 — 2026-10-16 统一准备与共享预算首段、DU6启动
+
+**并行调度更新：用户已确认 DU6 三包发出（DISPATCHED），ROOT不进入三卡源码范围；各作者独占工区和接口继续按总表。**
 
 DU5三包已接收。ROOT新增准备/预算首段：route与policy复用实际Observation；选择入口拥有同一WorkBudget并传至各parent/layout/binding；零预算/耗尽在进入后续正文分类前返回未完成；共享路径只overlay增强字段，standalone独立返回保持。初始5RED、owner3RED和独审3P2各自固定后修；最终224集中PASS，独立相同探针复验通过，Ruff/mypy8源通过。这里只完成layout准备/绑定与prepared限额复用，**结构/strategy/candidate尚未全部计费，full_pipeline_hard_bound=false**，不能称预算/来源准备整体完成。
 

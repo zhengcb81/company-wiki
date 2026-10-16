@@ -13,8 +13,10 @@ Two hard rules govern this module:
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Iterable, Sequence
 
+from ..layout_hints.contract import WorkBudget
+from ._work import reserve
 from . import layout as layout_mod
 from .contract import RELATION_KINDS, ObservationUnit
 
@@ -27,7 +29,14 @@ _ACYCLIC_KINDS = frozenset(
 class RelationBuilder:
     """Accumulate relations with dedup, existence checks, and cycle detection."""
 
-    def __init__(self, known_ids: set[str], *, max_relations: int) -> None:
+    def __init__(
+        self,
+        known_ids: set[str],
+        *,
+        max_relations: int,
+        work_budget: WorkBudget | None = None,
+    ) -> None:
+        self._budget = work_budget
         self._known = known_ids
         self._max = max_relations
         self._items: list[dict] = []
@@ -45,6 +54,7 @@ class RelationBuilder:
     ) -> bool:
         if kind not in RELATION_KINDS:
             raise ValueError(f"unknown relation kind {kind!r}")
+        reserve(self._budget, len(from_ids) + len(to_ids))
         sources = tuple(dict.fromkeys(unit for unit in from_ids if unit))
         targets = tuple(dict.fromkeys(unit for unit in to_ids if unit))
         if not sources or not targets:
@@ -89,16 +99,12 @@ class RelationBuilder:
 
     def check_acyclic(self) -> tuple[dict, ...]:
         """Drop relations that close a cycle, reporting each removal."""
-        dependencies: dict[str, set[str]] = {}
-        for item in self._items:
-            if item["kind"] not in _ACYCLIC_KINDS:
-                continue
-            for source in item["from_unit_ids"]:
-                dependencies.setdefault(source, set()).update(item["to_unit_ids"])
-
         safe: list[dict] = []
         graph: dict[str, set[str]] = {}
         for item in self._items:
+            reserve(
+                self._budget, 1 + len(item["from_unit_ids"]) * len(item["to_unit_ids"])
+            )
             if item["kind"] not in _ACYCLIC_KINDS:
                 safe.append(item)
                 continue
@@ -107,7 +113,8 @@ class RelationBuilder:
             # normal (one question and its continuation both point at the
             # answer) and must not be mistaken for a cycle.
             closes = any(
-                target == source or source in _reachable(graph, target)
+                target == source
+                or source in _reachable(graph, target, work_budget=self._budget)
                 for source in item["from_unit_ids"]
                 for target in item["to_unit_ids"]
             )
@@ -127,15 +134,20 @@ class RelationBuilder:
         return tuple(safe)
 
 
-def _reachable(graph: dict[str, set[str]], start: str) -> set[str]:
+def _reachable(
+    graph: dict[str, set[str]], start: str, *, work_budget: WorkBudget | None = None
+) -> set[str]:
     seen: set[str] = set()
     stack = [start]
     while stack:
+        reserve(work_budget)
         node = stack.pop()
         if node in seen:
             continue
         seen.add(node)
-        stack.extend(sorted(graph.get(node, ())))
+        edges = graph.get(node, ())
+        reserve(work_budget, len(edges) * (1 + len(edges).bit_length()))
+        stack.extend(sorted(edges))
     return seen
 
 
@@ -230,6 +242,7 @@ def header_and_footnote_relations(
     for unit in ordering.ordered:
         if unit.table_id is not None or not layout_mod.looks_like_footnote(unit):
             continue
+        reserve(builder._budget, len(rows_by_page.get(unit.page, ())))
         candidates = [
             other
             for other in rows_by_page.get(unit.page, ())
@@ -245,7 +258,7 @@ def header_and_footnote_relations(
         if previous is None:
             continue
         if previous.bbox is not None and unit.bbox is not None:
-            if unit.y0 - previous.y1 > 40:
+            if unit.bbox[1] - previous.bbox[3] > 40:
                 continue
         builder.add(
             from_ids=[unit.unit_id],
@@ -297,12 +310,19 @@ def language_lane_relations(
 
     pages = {page for page, _ in by_page_lane}
     for page in sorted(pages, key=lambda value: (value is None, value or 0)):
-        lanes = sorted(lane for candidate_page, lane in by_page_lane if candidate_page == page)
+        reserve(builder._budget, len(by_page_lane))
+        lanes = sorted(
+            lane for candidate_page, lane in by_page_lane if candidate_page == page
+        )
         for left_index, left_lane in enumerate(lanes):
-            for right_lane in lanes[left_index + 1 :]:
+            for right_index in range(left_index + 1, len(lanes)):
+                reserve(builder._budget)
+                right_lane = lanes[right_index]
                 left_units = by_page_lane[(page, left_lane)]
                 right_units = by_page_lane[(page, right_lane)]
-                _pair_lanes(builder, left_units, right_units)
+                _pair_lanes(
+                    builder, left_units, right_units, work_budget=builder._budget
+                )
 
     by_dom_parent: dict[str, list[ObservationUnit]] = {}
     for unit in ordering.ordered:
@@ -314,7 +334,7 @@ def language_lane_relations(
         group = by_dom_parent[parent]
         if len(group) < 2:
             continue
-        _pair_lanes(builder, group, group, allow_self=True)
+        _pair_lanes(builder, group, group, allow_self=True, work_budget=builder._budget)
 
     _geometric_lane_pairs(builder, ordering)
 
@@ -331,7 +351,13 @@ def _geometric_lane_pairs(
     for unit in ordering.ordered:
         if unit.page is None or unit.bbox is None or unit.column is not None:
             continue
-        if unit.kind in {"header", "footer", "table_row", "table_header", "table_caption"}:
+        if unit.kind in {
+            "header",
+            "footer",
+            "table_row",
+            "table_header",
+            "table_caption",
+        }:
             continue
         script = layout_mod.script_of(unit.text)
         if script is None:
@@ -339,14 +365,19 @@ def _geometric_lane_pairs(
         by_page.setdefault(unit.page, []).append(unit)
 
     for page in sorted(by_page):
+        reserve(builder._budget, len(by_page[page]) * len(by_page[page]).bit_length())
         bucket = sorted(by_page[page], key=lambda unit: (unit.y0, unit.x0))
         for index, left in enumerate(bucket):
             left_script = layout_mod.script_of(left.text)
             if left_script is None:
                 continue
-            for right in bucket[index + 1 :]:
-                if right.y0 - left.y0 > 24:
+            for right_index in range(index + 1, len(bucket)):
+                reserve(builder._budget)
+                right = bucket[right_index]
+                right_y, left_y = right.y0, left.y0
+                if right_y is None or left_y is None or right_y - left_y > 24:
                     break
+                reserve(builder._budget, (len(right.text) + 63) // 64)
                 if layout_mod.script_of(right.text) == left_script:
                     continue
                 if not layout_mod.vertically_aligned(left, right):
@@ -367,19 +398,24 @@ def _pair_lanes(
     right_units: Sequence[ObservationUnit],
     *,
     allow_self: bool = False,
+    work_budget: WorkBudget | None = None,
 ) -> None:
     """Pair units positionally, refusing pairs without a language difference."""
+    candidates: Iterable[tuple[ObservationUnit, ObservationUnit]]
     if allow_self:
-        candidates = [
-            (left, right)
-            for index, left in enumerate(left_units)
-            for right in left_units[index + 1 :]
-        ]
+        # Reserve the exact possible pairs before expansion; keep them lazy.
+        reserve(work_budget, len(left_units) * (len(left_units) - 1) // 2)
+        candidates = (
+            (left_units[i], left_units[j])
+            for i in range(len(left_units))
+            for j in range(i + 1, len(left_units))
+        )
     else:
         if len(left_units) != len(right_units):
-            _pair_by_nearest(builder, left_units, right_units)
+            _pair_by_nearest(builder, left_units, right_units, work_budget=work_budget)
             return
-        candidates = list(zip(left_units, right_units, strict=False))
+        reserve(work_budget, len(left_units))
+        candidates = zip(left_units, right_units, strict=False)
 
     for left, right in candidates:
         if not _different_language(left, right):
@@ -398,17 +434,22 @@ def _pair_by_nearest(
     builder: RelationBuilder,
     left_units: Sequence[ObservationUnit],
     right_units: Sequence[ObservationUnit],
+    *,
+    work_budget: WorkBudget | None = None,
 ) -> None:
     """Unequal lane lengths: pair by vertical position, never by count order."""
+    reserve(work_budget, len(left_units) * len(right_units))
     for left in left_units:
-        if left.y0 is None:
+        left_y = left.y0
+        if left_y is None:
             continue
         best: ObservationUnit | None = None
         best_distance = None
         for right in right_units:
-            if right.y0 is None or not _different_language(left, right):
+            right_y = right.y0
+            if right_y is None or not _different_language(left, right):
                 continue
-            distance = abs(left.y0 - right.y0)
+            distance = abs(left_y - right_y)
             if best_distance is None or distance < best_distance:
                 best, best_distance = right, distance
         if best is None or best_distance is None or best_distance > 24:
@@ -437,7 +478,7 @@ def _aligned(left: ObservationUnit, right: ObservationUnit) -> bool:
         return False
     if left.bbox is None or right.bbox is None:
         return True
-    return abs(left.y0 - right.y0) <= 24
+    return abs(left.bbox[1] - right.bbox[1]) <= 24
 
 
 __all__ = [

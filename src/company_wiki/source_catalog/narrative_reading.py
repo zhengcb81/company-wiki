@@ -6,7 +6,7 @@ selection, not IO, research conclusions, model calls or another task store.
 from __future__ import annotations
 
 from bisect import bisect_right
-from collections.abc import Callable, Mapping
+from collections.abc import Mapping
 from copy import deepcopy
 from dataclasses import replace
 from hashlib import sha256
@@ -59,15 +59,16 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
     # Glyphs/page counters are observed text, not operating descriptions. A
     # numeric cell of an already qualified operating table is different: its
     # original headers, units and period travel in the complete dependency graph.
-    alphanumeric = "".join(character for character in unit.raw_text if character.isalnum())
-    numeric_marker = bool(alphanumeric) and all(character.isnumeric() for character in alphanumeric)
-    roman_marker = bool(re.fullmatch(r"[IVXLCDM]+", alphanumeric, re.IGNORECASE))
-    letter_marker = bool(re.fullmatch(r"\s*[(\[（【]\s*[A-Za-z]\s*[)\]）】]\s*[.、:]?\s*", unit.raw_text))
-    if not any(character.isalpha() for character in unit.raw_text) or numeric_marker:
-        if kind != "operating_table" or not any(character.isdigit() for character in unit.raw_text):
+    if not fact.eligible:
+        alphanumeric = "".join(character for character in unit.raw_text if character.isalnum())
+        numeric_marker = bool(alphanumeric) and all(character.isnumeric() for character in alphanumeric)
+        roman_marker = bool(re.fullmatch(r"[IVXLCDM]+", alphanumeric, re.IGNORECASE))
+        letter_marker = bool(re.fullmatch(r"\s*[(\[（【]\s*[A-Za-z]\s*[)\]）】]\s*[.、:]?\s*", unit.raw_text))
+        if not any(character.isalpha() for character in unit.raw_text) or numeric_marker:
+            if kind != "operating_table" or not any(character.isdigit() for character in unit.raw_text):
+                return False, fact
+        if roman_marker or letter_marker:
             return False, fact
-    if not fact.eligible and (roman_marker or letter_marker):
-        return False, fact
     if (is_heading or unit.unit_kind.endswith("_heading")) and not fact.eligible:
         return False, fact
     # Family/role are observed reading intent, not proof of any specific fact.
@@ -96,13 +97,13 @@ def _qualified_table(package: Mapping[str, Any], units: Mapping[str, Any]):
     )
 
 
-def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, Any],
-                            classify: Callable[[str], Any]):
+def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, Any], classify=None):
     """Container membership is not a claim that all prose is one atomic fact.
 
     Audit every source-owned prose member. Only the shared native continuity
-    engine can replace independent members with a bounded original-ID window;
-    its assembled text is used here for admission and never becomes evidence.
+    engine can group independent members into a bounded original-ID window.
+    The final material owner is established before source-state recognition;
+    the optional text callback is retained only for private diagnostic replay.
     """
     units = {unit.unit_id: unit for unit in parsed.units}
     profiles = pipeline["reading_plan"]["unit_profiles"]
@@ -221,7 +222,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             preceding = linguistic_text(current)
             separate = (current and independent_subject.search(text)
                         and not dependent_statement.search(text)
-                        and not dependent_statement.search(preceding) and classify(text).eligible)
+                        and not dependent_statement.search(preceding))
             if separate:
                 result.append(current)
                 current = []
@@ -236,20 +237,22 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
             continue
         pieces = statement_members(members)
         for piece in pieces:
-            # Only the classifier receives a transient linguistic view. Raw
-            # text, IDs, locators and actual fragment charges stay unchanged.
-            fact = classify(linguistic_text(piece))
-            anchor = next((uid for uid in piece if _admitted(units[uid], profiles.get(uid, {}),
-                           "native_continuity", fact=fact)[0]), None)
-            if not fact.eligible or anchor is None:
-                continue
+            # Structural closure establishes the material owner before meaning.
+            # A linguistic join has no original coordinate system and cannot
+            # supply operating states or refs on behalf of its first fragment.
+            # Retain the old private diagnostic callback for replay tests. The
+            # production owner never supplies it; its join never supplies refs
+            # or source-state facts to the selection session.
+            if classify is not None:
+                diagnostic_fact = classify(linguistic_text(piece))
+                if not diagnostic_fact.eligible:
+                    continue
             pid = window["window_id"]
             if len(pieces) > 1:
                 pid += ":statement:" + sha256("\0".join(piece).encode()).hexdigest()
             generated.append({"package_id": pid, "kind": "native_continuity",
-                "member_unit_ids": piece, "anchor_unit_ids": [anchor],
+                "member_unit_ids": piece, "anchor_unit_ids": list(piece),
                 "required_context_unit_ids": context(piece)})
-            joint_facts[pid] = fact
             grouped.update(piece)
     expanded = []
     seen: set[str] = set()
@@ -267,10 +270,13 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     return [*expanded, *generated], joint_facts, continuity, blocked
 
 
-def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
+def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
+                work_budget: WorkBudget | None = None,
+                _session_state: dict[str, Any] | None = None):
     from typing import cast
 
     from .narrative_native_ranges import native_range_unit
+    from .narrative_operating_relations import SourceOperatingSession
 
     mutable_pipeline = cast(dict[str, Any], pipeline)
     mutable_pipeline.pop("_material_units", None)
@@ -282,20 +288,10 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
     metadata: dict[str, dict[str, Any]] = {}
     eligible_packages = []
     withheld = []
-    facts: dict[str, Any] = {}
     headings = {uid for section in pipeline.get("structure", {}).get("sections", ())
                 for uid in section.get("heading_unit_ids", ())}
 
-    def classify(text: str):
-        if text in facts:
-            return facts[text]
-        value = detect_reading_business_fact(text)
-        # Source-local semantic memoization never deduplicates locators/spans,
-        # changes a scope, or retains a document in global worker state.
-        if len(facts) < 4096:
-            facts[text] = value
-        return value
-    packages, joint_facts, continuity, blocked = _prose_reading_packages(parsed, pipeline, classify)
+    packages, _joint_facts, continuity, blocked = _prose_reading_packages(parsed, pipeline)
     # Qualify actual table rows before the context graph establishes cost and
     # closure. Rejected account rows are neither facts nor borrowed context.
     scoped_packages = []
@@ -375,10 +371,34 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
         mutable_pipeline["_carrier_origins"] = origins
     texts = {uid: unit.raw_text for uid, unit in units.items()}
     graph = build_context_graph({**pipeline["packages"], "packages": budget_packages}, texts)
+    contexts: dict[str, set[str]] = {}
+    analysis_groups: dict[str, tuple[str, ...]] = {}
+    for package in budget_packages:
+        context_ids = set(package.get("required_context_unit_ids", ()))
+        anchors = package.get("anchor_unit_ids", ())
+        for uid in anchors:
+            contexts.setdefault(uid, set()).update(context_ids - {uid})
+        if package["kind"] == "native_continuity" and len(package["member_unit_ids"]) > 1:
+            owner = "analysis:" + package["package_id"]
+            members = tuple(package["member_unit_ids"])
+            analysis_groups[owner] = members
+            contexts[owner] = context_ids - set(members)
+    session = SourceOperatingSession(units,
+        work_budget=work_budget if work_budget is not None else WorkBudget(DEFAULT_LIMITS["max_work_units"]),
+        contexts={uid: tuple(sorted(ids)) for uid, ids in contexts.items()}, groups=analysis_groups)
+    if _session_state is not None:
+        _session_state["session"] = session
     if not continuity["complete"]:
         withheld.append({"package_id": "native-continuity",
             "reason": "INCOMPLETE_NATIVE_CONTINUITY", "known_unit_ids": sorted(blocked)})
-    for index, package in enumerate(budget_packages):
+    def package_priority(entry):
+        index, package = entry
+        anchors = package.get("anchor_unit_ids", ()) or package.get("member_unit_ids", ())[:1]
+        return (min((int(reading.get(uid, {}).get("priority", 2)) for uid in anchors), default=2), index)
+
+    # Spend scarce source-state work on known reading priorities first. This
+    # changes analysis order, not material order, ownership or selected costs.
+    for index, package in sorted(enumerate(budget_packages), key=package_priority):
         members = list(dict.fromkeys(package["member_unit_ids"]))
         required = set(graph["groups"][index]["required_unit_ids"]) | set(members)
         # Incomplete closure is not a smaller complete fact. Missing original
@@ -410,8 +430,18 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
                 continue
             unit = units[uid]
             view = reading.get(uid, {})
+            if session.work_budget.exhausted and session.owner_for(uid) not in session.facts:
+                session.complete = False
+                withheld.append({"package_id": str(package["package_id"]),
+                    "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": sorted(required)})
+                continue
+            fact = session.fact(uid)
+            if session.work_budget.exhausted and not fact.eligible:
+                withheld.append({"package_id": str(package["package_id"]),
+                    "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": sorted(required)})
+                continue
             admitted, fact = _admitted(unit, view, package["kind"],
-                                       fact=joint_facts.get(package["package_id"]) or classify(unit.raw_text),
+                                       fact=fact,
                                        is_heading=uid in headings, table_qualified=table_qualified)
             if not admitted:
                 continue
@@ -449,7 +479,9 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any]):
                 metadata[uid] = {"priority": 2, "topics": (), "context_only": True, "required": ()}
     # Stable source order, never text-only identity deduplication.
     ordered = tuple(candidates[unit.unit_id] for unit in material_units if unit.unit_id in candidates)
-    return ordered, metadata, eligible_packages, graph["complete"] and continuity["complete"], withheld
+    source_order = {package["package_id"]: index for index, package in enumerate(packages)}
+    eligible_packages.sort(key=lambda package: source_order[package["package_id"]])
+    return ordered, metadata, eligible_packages, graph["complete"] and continuity["complete"] and session.complete, withheld
 
 
 def _native_layout_summary(parsed: DocumentStructure) -> dict[str, Any] | None:
@@ -509,6 +541,20 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
         citation_views = []
         seen_support = set()
         native_views = entry.get("citation_support_views")
+        if entry["kind"] == "qa_exchange":
+            declared = entry.get("anchor_unit_ids")
+            answer_ids = {uid for uid in (declared if declared is not None else entry["member_unit_ids"])
+                          if uid in original and original[uid].get("role") not in _CONTEXT_ROLES
+                          and (declared is not None or original[uid].get("role") == "management")}
+            # A question can establish attribution/context, never an answer's
+            # factual support. Generic per-member native views may include Q;
+            # narrow them to actual source-owned answer anchors, keeping the
+            # complete question and all remaining members as dependencies.
+            native_views = [list(dict.fromkeys(uid for uid in view if uid in answer_ids))
+                            for view in native_views or [list(answer_ids)]]
+            native_views = [view for view in native_views if view]
+            if not native_views and answer_ids:
+                native_views = [[uid for uid in entry["member_unit_ids"] if uid in answer_ids]]
         for native_support in native_views if native_views is not None else [list(required)]:
             if not native_support or not set(native_support) <= required:
                 raise ValueError("native citation support must belong to its complete source package")
@@ -656,11 +702,33 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
         return _deferred_selection(parsed, route)
     if pipeline.get("analysis_status") == "deferred":
         return _deferred_selection(parsed, route)
-    candidates, reading, eligible, graph_complete, withheld = _candidates(parsed, pipeline)
-    dropped = sum(_financial_only(unit.raw_text) for unit in parsed.units)
+    session_state: dict[str, Any] = {}
+    candidates, reading, eligible, graph_complete, withheld = _candidates(
+        parsed, pipeline, work_budget=budget, _session_state=session_state)
+    session = session_state["session"]
+    origins = pipeline.get("_carrier_origins", {})
+    financial: dict[str, bool] = {}
+    dropped = 0
+    for unit in parsed.units:
+        uid = session.owner_for(origins.get(unit.unit_id, unit.unit_id))
+        if budget.exhausted:
+            session.complete = False
+            break
+        if uid not in financial:
+            fact = session.fact(uid)
+            if not session.complete and budget.exhausted:
+                break
+            if not fact.financial_exempt:
+                try:
+                    budget.charge(2 * len(session.source_text(uid)))
+                except WorkBudgetExceeded:
+                    session.complete = False
+                    break
+            financial[uid] = _financial_only(session.source_text(uid), fact)
+        dropped += financial[uid]
     # Semantic 'unassigned' is not an unread page. It must not defeat a fully
     # read and positively classified finance-only document's zero-model result.
-    processing_complete = graph_complete and not withheld and not any(
+    processing_complete = graph_complete and session.complete and not budget.exhausted and not withheld and not any(
         "BUDGET" in str(entry.get("code", "")) or "LIMIT_REACHED" in str(entry.get("code", ""))
         for entry in pipeline.get("diagnostics", ()))
     empty_may_skip = (not candidates and parsed.coverage_complete and processing_complete

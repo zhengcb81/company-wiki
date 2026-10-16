@@ -246,8 +246,8 @@ def visual_overlap(left: ObservationUnit, right: ObservationUnit) -> float | Non
     """Horizontal overlap ratio of two boxes, or ``None`` without geometry."""
     if left.bbox is None or right.bbox is None:
         return None
-    overlap = min(left.x1, right.x1) - max(left.x0, right.x0)
-    narrower = min(left.x1 - left.x0, right.x1 - right.x0)
+    overlap = min(left.bbox[2], right.bbox[2]) - max(left.bbox[0], right.bbox[0])
+    narrower = min(left.bbox[2] - left.bbox[0], right.bbox[2] - right.bbox[0])
     if narrower <= 0:
         return None
     return overlap / narrower
@@ -261,7 +261,7 @@ def continues_visually(previous: ObservationUnit, current: ObservationUnit) -> b
         return False
     if not same_column(previous, current):
         return False
-    gap = current.y0 - previous.y1
+    gap = current.bbox[1] - previous.bbox[3]
     if gap < -1.0 or gap > 16.0:
         return False
     overlap = visual_overlap(previous, current)
@@ -306,10 +306,10 @@ def horizontal_gap(left: ObservationUnit, right: ObservationUnit) -> float | Non
     """Signed horizontal separation between two boxes on the same page."""
     if left.bbox is None or right.bbox is None:
         return None
-    if left.x1 <= right.x0:
-        return right.x0 - left.x1
-    if right.x1 <= left.x0:
-        return left.x0 - right.x1
+    if left.bbox[2] <= right.bbox[0]:
+        return right.bbox[0] - left.bbox[2]
+    if right.bbox[2] <= left.bbox[0]:
+        return left.bbox[0] - right.bbox[2]
     return None
 
 
@@ -335,7 +335,7 @@ def vertically_aligned(
     """True when two boxes describe the same band of the page."""
     if left.bbox is None or right.bbox is None:
         return False
-    return abs(left.y0 - right.y0) <= tolerance
+    return abs(left.bbox[1] - right.bbox[1]) <= tolerance
 
 
 __all__ = [

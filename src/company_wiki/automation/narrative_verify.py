@@ -164,7 +164,7 @@ def _validate_dependency_identity(
             normalization=normalization, parser_version=selected.parser.version,
         )
         parser_current = selected.parser.name == parser_name and selected.parser.version == parser_version
-    from .narrative_model import resolve_model_boundary
+    from .narrative_model_runtime import resolve_model_boundary
     active_prompt = resolve_model_boundary(reading_projection_version, projected=projected).prompt_version
     if (
         not parser_current

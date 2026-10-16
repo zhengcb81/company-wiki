@@ -551,6 +551,8 @@ def _is_toc_unit(unit: UnitRef) -> bool:
 
 def detect_signals(observation: Observation) -> SignalBag:
     """Extract an inspectable signal bag from the probed units."""
+    from .child_ranges import primary_scope
+    observation = primary_scope(observation)
     bag = SignalBag(
         probe_limit_hit=observation.probe_limited,
         char_limit_hit=observation.char_limited,
@@ -923,6 +925,26 @@ def _detect_offering(
         bag.add(bag.toc_signals, "TOC_STRUCTURE", toc_ids, "港股招股书目录结构")
 
 
+def _native_form_evidence(observation: Observation) -> list:
+    """Only collected native ranges within this actual, capped source scope."""
+    if observation.native_source_signals is None:
+        return []
+    probed = {unit.unit_id: unit for unit in observation.probes}
+    forms = []
+    for entry in observation.native_source_signals.get('source_form_evidence', ()):
+        if not entry['carrier_unit_ids'] or not all(uid in probed for uid in entry['carrier_unit_ids']):
+            continue
+        if any((probed[uid].parent_id or observation.source_id) != entry['parent_id']
+               for uid in entry['carrier_unit_ids']):
+            continue
+        if not all(ref['unit_id'] in probed and ref['char_end'] <= len(probed[ref['unit_id']].text)
+                   for ref in entry['value_refs']):
+            continue
+        if entry['normalized_value'].casefold().removesuffix('/a') in SEC_FORMS:
+            forms.append(entry)
+    return sorted(forms, key=lambda entry: min(probed[uid].ordinal for uid in entry['carrier_unit_ids']))
+
+
 def _detect_sec(
     bag: SignalBag,
     observation: Observation,
@@ -975,20 +997,25 @@ def _detect_sec(
 
     # The first printed own form identifies the containing filing. Registry
     # order must not let an attached 10-K replace an earlier outer 8-K.
-    form = None
+    native_forms = _native_form_evidence(observation)
+    native_owner_values = {entry['normalized_value'].casefold().removesuffix('/a') for entry in native_forms}
+    native_conflict = len(native_owner_values) > 1
+    form = native_forms[0]['normalized_value'].casefold().removesuffix('/a') if native_forms and not native_conflict else None
     chosen_label_ids: tuple[str, ...] = ()
-    for unit in labelled_units:
+    if form:
+        chosen_label_ids = tuple(native_forms[0]['carrier_unit_ids'])
+    for unit in labelled_units if not form and not native_conflict else ():
         match = _SEC_FORM_LABEL.search(normalize(unit.text))
         if match:
             form = match.group(1)
             chosen_label_ids = (unit.unit_id,)
             break
-    if form is None:
+    if form is None and not native_conflict:
         for candidate, aliases in SEC_FORMS.items():
             if matches_any(title_text, aliases):
                 form = candidate
                 break
-    if form is None:
+    if form is None and not native_conflict:
         short_haystack = title_text + " " + " ".join(
             normalize(unit.text) for unit in own_lines
         )
@@ -996,7 +1023,7 @@ def _detect_sec(
             if matches_any(short_haystack, aliases):
                 form = candidate
                 break
-    if form is None and observation.form_type and not _hk_body_evidence(toc_text):
+    if form is None and not native_conflict and observation.form_type and not _hk_body_evidence(toc_text):
         # Metadata may supply a form only when the body does not contradict it. An HK
         # bilingual report whose metadata claims 10-K is a metadata error, not a 10-K;
         # ``design.md`` section 4 puts cover/section evidence above the file metadata.
@@ -1006,7 +1033,7 @@ def _detect_sec(
                 form = candidate
                 break
 
-    labelled = bool(labelled_units)
+    labelled = bool(labelled_units or native_forms)
     # Period-report header wording ("annual report pursuant to section 13") is trusted from
     # the cover and the document's own short title lines.
     haystack = title_text + " " + " ".join(normalize(unit.text) for unit in own_lines)
@@ -1243,7 +1270,16 @@ def _detect_qa_and_call(
     transcript_hits = [
         unit for unit in observation.probes if matches_any(normalize(unit.text), TRANSCRIPT_MARKERS)
     ]
-    speaker_units = [unit for unit in observation.probes if is_speaker_turn(unit.text or "")]
+    if observation.native_source_signals is None:
+        # Standalone historical mappings retain their old textual contract.
+        speaker_units = [unit for unit in observation.probes if is_speaker_turn(unit.text or "")]
+    else:
+        probed = {unit.unit_id: unit for unit in observation.probes}
+        turn_ids = {ref['unit_id'] for turn in observation.native_source_signals.get('turn_evidence', ())
+                    for ref in turn['body_refs'] if ref['unit_id'] in probed
+                    and ref['char_end'] <= len(probed[ref['unit_id']].text)
+                    and (probed[ref['unit_id']].parent_id or observation.source_id) == turn['parent_id']}
+        speaker_units = [unit for unit in observation.probes if unit.unit_id in turn_ids]
     if transcript_hits or (
         len(speaker_units) >= 2 and matches_any(body_text, ("earnings", "call", "quarter"))
     ):

@@ -464,6 +464,18 @@ def build_observation(
                 if isinstance(value, int) and not isinstance(value, bool):
                     hints[target] = value
         hints.update(_qa_hints(unit, metadata))
+        source_view = metadata.get("native_source_view")
+        if isinstance(source_view, Mapping):
+            native_carriers = source_view.get("carriers")
+            if isinstance(native_carriers, list) and native_carriers:
+                # Native parser observations only; provider/form declarations
+                # never synthesize a carrier. The collector owns validation.
+                hints["native_source_carriers"] = deepcopy(native_carriers)
+            native_tables = source_view.get("tables")
+            if isinstance(native_tables, list) and native_tables:
+                # A transient native grid is shared read-only by the binder;
+                # it never enters canonical EvidenceSpan/model metadata.
+                hints["native_tables"] = native_tables
         if unit.unit_kind.startswith("html_") and isinstance(
             metadata.get("dom_path"), str
         ):

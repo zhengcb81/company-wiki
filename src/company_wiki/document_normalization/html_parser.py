@@ -32,10 +32,11 @@ from __future__ import annotations
 import hashlib
 import re
 import sys
+from dataclasses import replace
 from typing import Any
 
 from bs4 import BeautifulSoup
-from bs4.element import NavigableString, Tag
+from bs4.element import Comment, NavigableString, Tag
 
 from company_wiki.source_contract.evidence_span import EvidenceCoordinates
 
@@ -164,6 +165,8 @@ def _element_children(tag: Any) -> list[Tag]:
 
 
 def _is_hidden(tag: Tag) -> bool:
+    if tag.name == "ix:hidden":
+        return True
     attrs = tag.attrs
     if attrs.get("hidden") is not None:
         return True
@@ -247,9 +250,98 @@ class _HtmlScanState:
         # table/row and reused by every cell coordinate lookup.
         self.table_rows_by_id: dict[int, list[Tag]] = {}
         self.row_cells_by_id: dict[int, list[Tag]] = {}
+        # One actual native fact may cross several text owners. Preserve all
+        # their refs so the existing collector can diagnose split ownership.
+        self.document_type_facts: dict[int, dict[str, Any]] = {}
+        self.native_tables: list[dict[str, Any]] = []
+        self.native_cells: dict[int, dict[str, Any]] = {}
+        self.legacy_cell_coordinates: dict[int, tuple[int, int, int]] = {}
+        self.native_cell_count = 0
 
     def check_deadline(self, where: str) -> None:
         self.limits.check_deadline(f"html:{where}")
+
+    def document_type_fact(self, node: Any, active: int | None) -> int | None:
+        if (
+            isinstance(node, Tag)
+            and node.name == "ix:nonnumeric"
+            and str(node.get("name", "")).casefold() == "dei:documenttype"
+        ):
+            key = id(node)
+            self.document_type_facts.setdefault(
+                key, {"concept": node.get("name"), "refs": []}
+            )
+            return key
+        return active
+
+
+class _OwnedText(list[str]):
+    """Observe offsets while the existing visible owner text is accumulated."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.length = 0
+        self.fact_ranges: dict[int, list[tuple[int, int]]] = {}
+        self.has_link = False
+        self.fragments: list[tuple[int, int]] = []
+
+    def observe(self, text: str, native_fact: int | None) -> None:
+        start = self.length + bool(self)
+        self.append(text)
+        self.length = start + len(text)
+        self.fragments.append((start, self.length))
+        if native_fact is not None:
+            ranges = self.fact_ranges.setdefault(native_fact, [])
+            if ranges and ranges[-1][1] + 1 == start:
+                # The normalized owner inserts this actual separating space;
+                # include it rather than inventing a joined form token.
+                ranges[-1] = (ranges[-1][0], self.length)
+            else:
+                ranges.append((start, self.length))
+
+
+_OWN_FORM_LABEL = re.compile(
+    r"FORM[\s:：]+[A-Z]{0,2}\d{0,3}-[A-Z0-9]{1,3}(?:/[A-Z0-9]{1,3})?",
+    re.IGNORECASE,
+)
+
+
+def _attach_carriers(
+    state: _HtmlScanState, index: int, carriers: list[dict[str, Any]]
+) -> None:
+    unit = state.units[index]
+    view = dict(unit.metadata.get("native_source_view", {}))
+    view["carriers"] = [*view.get("carriers", []), *carriers]
+    state.units[index] = replace(
+        unit, metadata={**unit.metadata, "native_source_view": view}
+    )
+
+
+def _attach_document_type_facts(state: _HtmlScanState) -> None:
+    by_owner: dict[int, list[dict[str, Any]]] = {}
+    for fact in state.document_type_facts.values():
+        state.check_deadline("form_carriers")
+        ranges = fact["refs"]
+        if not ranges:
+            continue  # An attribute/value with no original visible text is unknown.
+        indices = list(dict.fromkeys(index for index, _, _ in ranges))
+        by_owner.setdefault(indices[0], []).append(
+            {
+                "kind": "visible_inline_xbrl_document_type",
+                "unit_ids": [state.units[index].unit_id for index in indices],
+                "parent_id": state.source_id,
+                "value_refs": [
+                    {"unit_id": state.units[index].unit_id, "char_start": start, "char_end": end}
+                    for index, start, end in ranges
+                ],
+                "attributes": {"concept": fact["concept"], "visibility": "visible"},
+            },
+        )
+    # One owner can contain many inline facts: do not repeatedly copy its
+    # growing carrier list and materialize a new NarrativeUnit per fact.
+    for index, carriers in by_owner.items():
+        state.check_deadline("form_carriers")
+        _attach_carriers(state, index, carriers)
 
 
 def _collect_visible(tag: Tag, state: _HtmlScanState, path: tuple[int, ...]) -> None:
@@ -344,6 +436,8 @@ def _row_cells(row: Tag, state: _HtmlScanState) -> list[Tag]:
 
 
 def _cell_coordinates(cell: Tag, state: _HtmlScanState) -> tuple[int, int, int] | None:
+    if id(cell) in state.legacy_cell_coordinates:
+        return state.legacy_cell_coordinates[id(cell)]
     table = cell.find_parent("table")
     if table is None:
         return None
@@ -358,6 +452,115 @@ def _cell_coordinates(cell: Tag, state: _HtmlScanState) -> tuple[int, int, int] 
     return table_index, row_index, column_index
 
 
+def _native_span(cell: Tag, name: str, remaining_rows: int) -> int | None:
+    value = cell.get(name)
+    if value is None:
+        return 1
+    value = str(value).strip()
+    if not value.isascii() or not value.isdecimal() or len(value) > 6:
+        return None
+    number = int(value)
+    if name == 'rowspan' and number == 0:
+        return remaining_rows
+    return number if number > 0 else None
+
+
+def _native_table_grid(table: Tag, state: _HtmlScanState) -> None:
+    """Cache native slots once; legacy sibling coordinates remain untouched.
+
+    Invisible cells have no observed value. Keeping their explicit DOM slots
+    unavailable avoids moving a neighbouring value into their column. This is
+    native DOM provenance, not inferred PDF/browser-rendered geometry.
+    """
+    index = state.table_index_by_id[id(table)]
+    rows = _table_rows(table, state)
+    grid: dict[str, Any] = {'scope': {'parent_id': state.source_id,
+        'table_id': f'html:t{index}', 'page': None}, 'cells': [],
+        'header_rows': [], 'context_refs': [], 'position_complete': True}
+    active: list[tuple[int, int, int]] = []
+    group_first: dict[int, int] = {}
+    group_remaining: dict[int, int] = {}
+    for row_index, row in enumerate(rows):
+        state.check_deadline('table_grid')
+        key = id(row.parent)
+        group_first.setdefault(key, row_index)
+        group_remaining[key] = group_remaining.get(key, 0) + 1
+    for row_index, row in enumerate(rows):
+        state.check_deadline('table_grid')
+        active = [slot for slot in active if slot[0] > row_index]
+        occupied = sorted(active, key=lambda slot: slot[1])
+        slot_index = 0
+        cells = _row_cells(row, state)
+        group = row.parent
+        remaining = group_remaining[id(group)]
+        group_remaining[id(group)] -= 1
+        column = 0
+        row_cells = []
+        for sibling_index, cell in enumerate(cells):
+            state.check_deadline('table_grid')
+            if state.native_cell_count >= state.limits.max_units:
+                raise NormalizationLimitError('max_units', state.limits.max_units, 'html native table slots')
+            state.native_cell_count += 1
+            while slot_index < len(occupied):
+                _end_row, start, end = occupied[slot_index]
+                if end <= column:
+                    slot_index += 1
+                elif start <= column:
+                    column = end
+                    slot_index += 1
+                else:
+                    break
+            row_span = _native_span(cell, 'rowspan', remaining)
+            column_span = _native_span(cell, 'colspan', remaining)
+            if row_span is None or column_span is None:
+                grid['position_complete'] = False
+            current: Any = cell
+            visible = True
+            while current is not table:
+                if current.name in EXCLUDE_TAGS or _is_hidden(current):
+                    visible = False
+                    break
+                current = current.parent
+            scope = str(cell.get('scope') or '').casefold()
+            raw_headers = cell.get('headers')
+            headers = (raw_headers.split() if isinstance(raw_headers, str)
+                       else list(raw_headers) if isinstance(raw_headers, list) else [])
+            descriptor = {'cell_id': f'html:t{index}:r{row_index}:c{sibling_index}',
+                'row': row_index, 'column': column, 'row_span': row_span,
+                'column_span': column_span, 'presence': 'unavailable',
+                'text_refs': [], 'fragment_refs': [], 'is_header': cell.name == 'th',
+                'header_scope': scope if scope in {'row','rowgroup','col','colgroup'} else None,
+                'html_id': cell.get('id'), 'headers': list(headers),
+                'row_group': group_first[id(group)], 'visible': visible}
+            grid['cells'].append(descriptor)
+            row_cells.append(descriptor)
+            state.native_cells[id(cell)] = descriptor
+            state.legacy_cell_coordinates[id(cell)] = (index, row_index, sibling_index)
+            if (row_span or 1) > 1:
+                active.append((row_index + (row_span or 1), column, column + (column_span or 1)))
+            column += column_span or 1
+        visible_cells = [cell for cell in row_cells if cell['visible']]
+        native_head = row.find_parent('thead')
+        if (native_head is not None and native_head.find_parent('table') is table) or (
+            visible_cells and all(cell['is_header'] and cell['header_scope'] not in {'row','rowgroup'}
+                                  for cell in visible_cells)):
+            grid['header_rows'].append(row_index)
+    state.native_tables.append(grid)
+
+
+def _attach_native_tables(state: _HtmlScanState) -> None:
+    if not state.native_tables or not state.units:
+        return  # No visible owner means unavailable, never a fabricated unit.
+    for table in state.native_tables:
+        for cell in table['cells']:
+            cell.pop('visible')
+            if not table['position_complete'] and cell['presence'] == 'present':
+                cell['presence'] = 'merged_unknown'
+    unit = state.units[0]
+    view = {**unit.metadata.get('native_source_view', {}), 'tables': state.native_tables}
+    state.units[0] = replace(unit, metadata={**unit.metadata, 'native_source_view': view})
+
+
 def _emit(
     state: _HtmlScanState,
     *,
@@ -365,6 +568,7 @@ def _emit(
     path: tuple[int, ...],
     text: str,
     unit_kind: str,
+    observed: _OwnedText,
 ) -> None:
     limits = state.limits
     if len(state.units) >= limits.max_units:
@@ -418,10 +622,39 @@ def _emit(
             ),
         )
     )
+    index = len(state.units) - 1
+    unit_id = state.units[index].unit_id
+    native_cell = state.native_cells.get(id(owner))
+    if native_cell is not None:
+        native_cell['presence'] = 'present'
+        native_cell['text_refs'] = [{'unit_id': unit_id, 'char_start': 0, 'char_end': len(text)}]
+        native_cell['fragment_refs'] = [
+            {'unit_id': unit_id, 'char_start': start, 'char_end': end}
+            for start, end in observed.fragments]
+    caption = owner if owner.name == 'caption' else owner.find_parent('caption')
+    if caption is not None:
+        table = caption.find_parent('table')
+        if table is not None and id(table) in state.table_index_by_id:
+            state.native_tables[state.table_index_by_id[id(table)]]['context_refs'].append(
+                {'unit_id': unit_id, 'char_start': 0, 'char_end': len(text)})
+    for fact, ranges in observed.fact_ranges.items():
+        state.document_type_facts[fact]["refs"].extend(
+            (index, start, end) for start, end in ranges
+        )
+    if not observed.has_link and _OWN_FORM_LABEL.fullmatch(text):
+        _attach_carriers(
+            state, index,
+            [{"kind": "visible_own_form_label", "unit_ids": [unit_id],
+             "parent_id": state.source_id,
+             "value_refs": [{"unit_id": unit_id, "char_start": 0, "char_end": len(text)}],
+             "attributes": {"visibility": "visible"}}],
+        )
 
 
 def _scan_children(
-    node: Any, state: _HtmlScanState, node_path: tuple[int, ...], own_parts: list[str]
+    node: Any, state: _HtmlScanState, node_path: tuple[int, ...], own_parts: _OwnedText,
+    native_fact: int | None = None,
+    linked: bool = False,
 ) -> None:
     """Collect this owner's strings in document order; emit deeper owners.
 
@@ -432,12 +665,17 @@ def _scan_children(
     dispatch to ``_walk_cell`` instead.
     """
     state.check_deadline("walk")
+    native_fact = state.document_type_fact(node, native_fact)
+    linked = linked or bool(isinstance(node, Tag) and node.name == "a" and node.get("href"))
+    own_parts.has_link |= linked
     index = 0
     for child in node.children:
+        if isinstance(child, Comment):
+            continue
         if isinstance(child, NavigableString):
             normalized = normalize_text(str(child))
             if normalized:
-                own_parts.append(normalized)
+                own_parts.observe(normalized, native_fact)
             continue
         if not isinstance(child, Tag):
             continue
@@ -451,24 +689,31 @@ def _scan_children(
         if child.name == "svg":
             continue  # registered as an opaque gap in the prepass
         if child.name in {"td", "th"}:
-            _walk_cell(child, state, child_path)
+            _walk_cell(child, state, child_path, native_fact, linked)
         elif child.name in OWNER_TAGS:
-            _walk_owner(child, state, child_path)
+            _walk_owner(child, state, child_path, native_fact, linked)
         else:
-            _scan_children(child, state, child_path, own_parts)
+            _scan_children(child, state, child_path, own_parts, native_fact, linked)
 
 
 def _scan_cell_body(
-    cell: Any, state: _HtmlScanState, node_path: tuple[int, ...], own_parts: list[str]
+    cell: Any, state: _HtmlScanState, node_path: tuple[int, ...], own_parts: _OwnedText,
+    native_fact: int | None = None,
+    linked: bool = False,
 ) -> None:
     """Collect a cell's whole visible body; nested tables keep their cells."""
     state.check_deadline("cell")
+    native_fact = state.document_type_fact(cell, native_fact)
+    linked = linked or bool(isinstance(cell, Tag) and cell.name == "a" and cell.get("href"))
+    own_parts.has_link |= linked
     index = 0
     for child in cell.children:
+        if isinstance(child, Comment):
+            continue
         if isinstance(child, NavigableString):
             normalized = normalize_text(str(child))
             if normalized:
-                own_parts.append(normalized)
+                own_parts.observe(normalized, native_fact)
             continue
         if not isinstance(child, Tag):
             continue
@@ -484,27 +729,36 @@ def _scan_cell_body(
         if child.name == "table":
             # Loose text in the nested table still belongs to this cell;
             # its own td/th dispatch to their own cell units.
-            _scan_children(child, state, child_path, own_parts)
+            _scan_children(child, state, child_path, own_parts, native_fact, linked)
         else:
             # Paragraphs, divs, lists inside a cell are formatting wrappers:
             # their text belongs to the cell, not to separate paragraph units.
-            _scan_cell_body(child, state, child_path, own_parts)
+            _scan_cell_body(child, state, child_path, own_parts, native_fact, linked)
 
 
-def _walk_cell(cell: Any, state: _HtmlScanState, path: tuple[int, ...]) -> str:
+def _walk_cell(
+    cell: Any, state: _HtmlScanState, path: tuple[int, ...], native_fact: int | None = None,
+    linked: bool = False,
+) -> str:
     """Emit the table-cell unit owning every string in the cell body."""
-    own_parts: list[str] = []
-    _scan_cell_body(cell, state, path, own_parts)
+    own_parts = _OwnedText()
+    _scan_cell_body(cell, state, path, own_parts, native_fact, linked)
     text = normalize_text(" ".join(own_parts))
     if not text:
+        native = state.native_cells.get(id(cell))
+        if native is not None:
+            native['presence'] = 'empty'
         return ""
     _emit(
-        state, owner=cell, path=path, text=text, unit_kind=_UNIT_KINDS["table_cell"]
+        state, owner=cell, path=path, text=text, unit_kind=_UNIT_KINDS["table_cell"], observed=own_parts
     )
     return text
 
 
-def _walk_owner(owner: Any, state: _HtmlScanState, path: tuple[int, ...]) -> str:
+def _walk_owner(
+    owner: Any, state: _HtmlScanState, path: tuple[int, ...], native_fact: int | None = None,
+    linked: bool = False,
+) -> str:
     """Emit the unit owned by ``owner``; return its own visible text.
 
     The unit text contains only strings whose nearest block owner is this
@@ -512,17 +766,17 @@ def _walk_owner(owner: Any, state: _HtmlScanState, path: tuple[int, ...]) -> str
     so nested nodes are never double-counted.  ``html`` aggregates only and
     never becomes a unit itself.
     """
-    if owner.name in EXCLUDE_TAGS:
+    if owner.name in EXCLUDE_TAGS or _is_hidden(owner):
         return ""
-    own_parts: list[str] = []
-    _scan_children(owner, state, path, own_parts)
+    own_parts = _OwnedText()
+    _scan_children(owner, state, path, own_parts, native_fact, linked)
     text = normalize_text(" ".join(own_parts))
     if not text:
         return ""
     if owner.name == "html":
         return text
     _emit(
-        state, owner=owner, path=path, text=text, unit_kind=_unit_kind_for(owner)
+        state, owner=owner, path=path, text=text, unit_kind=_unit_kind_for(owner), observed=own_parts
     )
     return text
 
@@ -565,6 +819,7 @@ def parse_html(
     old_limit = sys.getrecursionlimit()
     sys.setrecursionlimit(max(old_limit, _MAX_RECURSION))
     try:
+        root_path: tuple[int, ...]
         if document.html is not None:
             root = document.html
             root_path = (0,)
@@ -579,7 +834,10 @@ def parse_html(
             state.table_classes[
                 state.table_index_by_id[id(table)]
             ] = _classify_table(table)
+            _native_table_grid(table, state)
         _walk_owner(root, state, root_path)
+        _attach_document_type_facts(state)
+        _attach_native_tables(state)
     finally:
         sys.setrecursionlimit(old_limit)
     if not state.units:

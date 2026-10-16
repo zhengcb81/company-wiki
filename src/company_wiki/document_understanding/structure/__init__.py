@@ -13,11 +13,15 @@ path, which keeps this layer free of a second copy of the document.
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from typing import Any
+
+from ..layout_hints.contract import WorkBudget, WorkBudgetExceeded
+from ._work import WorkPlan, reserve
 
 from .contract import (
     SCHEMA_VERSION,
+    StructureInputError,
     parse_observation,
     resolve_limits,
 )
@@ -43,16 +47,107 @@ _LANGUAGE_FAMILY_MAP = {"zh": "zh", "en": "en"}
 
 
 def build_structure(
-    observation: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None
+    observation: Mapping[str, Any],
+    *,
+    limits: Mapping[str, Any] | None = None,
+    work_budget: WorkBudget | None = None,
 ) -> dict:
     """Return the ``du-structure/1`` view of one ``du-input/1`` observation."""
+    if work_budget is None:
+        return _build_structure(observation, limits=limits)
+    # Limits remain the old positive input contract, independent of remaining
+    # shared work. Validate only this constant-size envelope before charging.
+    resolve_limits(limits)
+    if (
+        not isinstance(observation, Mapping)
+        or observation.get("schema_version") != "du-input/1"
+    ):
+        raise StructureInputError("schema_version must be 'du-input/1'")
+    source = observation.get("source_ref")
+    if (
+        not isinstance(source, Mapping)
+        or not isinstance(source.get("source_id"), str)
+        or not source.get("source_id")
+    ):
+        raise StructureInputError("source_ref.source_id is required")
+    raw_units = observation.get("units")
+    if isinstance(raw_units, (str, bytes)) or not isinstance(raw_units, Sequence):
+        raise StructureInputError("units must be a sequence")
+    state: dict[str, Any] = {
+        "sections": [],
+        "semantic_units": [],
+        "relations": [],
+        "diagnostics": [],
+        "completed_stage": "none",
+    }
+    try:
+        work_budget.charge()
+        return _build_structure(
+            observation, limits=limits, work_budget=work_budget, state=state
+        )
+    except WorkBudgetExceeded:
+        return _partial_structure(observation, state, work_budget)
+
+
+def _partial_structure(observation, state, budget):
+    """Constant-size failure projection over already committed stage results."""
+    source = observation["source_ref"]
+    coverage = observation.get("coverage")
+    coverage = coverage if isinstance(coverage, Mapping) else {}
+    native = coverage.get("native_scan", "unavailable")
+    if native not in {"complete", "partial", "unavailable"}:
+        native = "unavailable"
+    raw_units = observation.get("units", ())
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "source_ref": {
+            "source_id": source["source_id"],
+            "source_sha256": source.get("source_sha256"),
+        },
+        "sections": state["sections"],
+        "semantic_units": state["semantic_units"],
+        "relations": state["relations"],
+        "coverage": {
+            "native_scan": native,
+            "complete": False,
+            "source_unit_count": len(raw_units),
+            "structured_unit_count": len(state["semantic_units"]),
+            "unassigned_unit_ids": [],
+            "deferred_unit_ids": [],
+            "excluded_furniture_unit_ids": [],
+            "opaque_pages": [],
+            "deferred_pages": [],
+            "unobserved_ids_limited": True,
+            "source_opaque_page_count": len(coverage["opaque_pages"])
+            if isinstance(coverage.get("opaque_pages"), (list, tuple))
+            else None,
+            "source_deferred_page_count": len(coverage["deferred_pages"])
+            if isinstance(coverage.get("deferred_pages"), (list, tuple))
+            else None,
+            "completed_stage": state["completed_stage"],
+            "work_used": budget.used,
+        },
+        "diagnostics": [
+            {
+                "code": "WORK_BUDGET_EXCEEDED",
+                "unit_ids": [],
+                "detail": "structure work stopped; only closed committed stages are published",
+            }
+        ],
+    }
+
+
+def _build_structure(observation, *, limits=None, work_budget=None, state=None):
     resolved = resolve_limits(limits)
-    envelope, units = parse_observation(observation)
+    work = WorkPlan(work_budget) if work_budget is not None else None
+    envelope, units = parse_observation(observation, work=work)
     diagnostics: list[dict] = []
 
     if not units:
         return _empty_result(envelope)
 
+    if work is not None:
+        work.stage(passes=6, sorts=2)  # layout indexes, furniture/text, page ordering
     ordering = layout_mod.order_units(units)
     if "ordinal_only" in ordering.evidence:
         diagnostics.append(
@@ -94,7 +189,14 @@ def build_structure(
             }
         )
 
+    if work is not None:
+        work.stage(passes=4, sorts=1)  # section membership, roles and layout checks
     section_build = build_sections(units, ordering, limits=resolved)
+    if state is not None:
+        state["sections"] = [
+            _section_wire(section) for section in section_build.sections
+        ]
+        state["completed_stage"] = "sections"
     diagnostics.extend(section_build.diagnostics)
 
     if not any(section.heading_ids for section in section_build.sections):
@@ -110,7 +212,28 @@ def build_structure(
     semantic_units: list[dict] = []
     member_of: dict[str, str] = {}
 
+    ordinal_of = {unit.unit_id: unit.ordinal for unit in units}
+
+    def commit_semantics(stage):
+        if state is not None:
+            # Independent shells: final ID stabilisation must not mutate a
+            # previously committed stage. Open questions stay unpublished.
+            reserve(
+                work_budget,
+                len(units)
+                + len(semantic_units) * (1 + len(semantic_units).bit_length()),
+            )
+            closed = [
+                dict(unit)
+                for unit in semantic_units
+                if unit["completeness"] == "complete"
+            ]
+            state["semantic_units"] = _stabilise_semantic_ids(closed, ordinal_of)
+            state["completed_stage"] = stage
+
     paragraph_start = 0
+    if work is not None:
+        work.stage(passes=3)  # QA discovery and closed exchange members
     if qa_available(ordering.ordered):
         qa_drafts, qa_diagnostics = build_qa_exchanges(
             units,
@@ -120,11 +243,14 @@ def build_structure(
             consumed=consumed,
         )
         diagnostics.extend(qa_diagnostics)
-        for draft in qa_drafts:
-            semantic_units.append(draft.as_wire())
-            for unit_id in draft.member_ids:
-                member_of.setdefault(unit_id, draft.semantic_id)
+        for qa_draft in qa_drafts:
+            semantic_units.append(qa_draft.as_wire())
+            for unit_id in qa_draft.member_ids:
+                member_of.setdefault(unit_id, qa_draft.semantic_id)
 
+    commit_semantics("qa")
+    if work is not None:
+        work.stage(passes=4)  # project headers, bounded carry and membership
     project_drafts, project_diagnostics = build_projects(
         units,
         ordering,
@@ -135,6 +261,8 @@ def build_structure(
     diagnostics.extend(project_diagnostics)
     projects = list(project_drafts)
 
+    if work is not None:
+        work.stage(passes=5, sorts=1)  # scoped table rows, labels and qualification
     table_drafts, table_diagnostics = build_operating_tables(
         units,
         ordering,
@@ -147,15 +275,18 @@ def build_structure(
     if len(projects) > 1:
         projects = _resolve_project_overlap(projects, diagnostics)
 
-    for draft in projects:
-        semantic_units.append(draft.as_wire())
-        for unit_id in draft.member_ids:
-            member_of.setdefault(unit_id, draft.semantic_id)
-    for draft in table_drafts:
-        semantic_units.append(draft.as_wire())
-        for unit_id in draft.member_ids:
-            member_of.setdefault(unit_id, draft.semantic_id)
+    for project_draft in projects:
+        semantic_units.append(project_draft.as_wire())
+        for unit_id in project_draft.member_ids:
+            member_of.setdefault(unit_id, project_draft.semantic_id)
+    for table_draft in table_drafts:
+        semantic_units.append(table_draft.as_wire())
+        for unit_id in table_draft.member_ids:
+            member_of.setdefault(unit_id, table_draft.semantic_id)
 
+    commit_semantics("projects_and_tables")
+    if work is not None:
+        work.stage(passes=3)  # paragraph classification and packages
     section_roles = {
         section.section_id: section.section_role for section in section_build.sections
     }
@@ -169,17 +300,22 @@ def build_structure(
         start_index=paragraph_start,
     )
     diagnostics.extend(paragraph_diagnostics)
-    for draft in paragraph_drafts:
-        semantic_units.append(draft.as_wire())
-        for unit_id in draft.member_ids:
-            member_of.setdefault(unit_id, draft.semantic_id)
+    for paragraph_draft in paragraph_drafts:
+        semantic_units.append(paragraph_draft.as_wire())
+        for unit_id in paragraph_draft.member_ids:
+            member_of.setdefault(unit_id, paragraph_draft.semantic_id)
 
-    semantic_units = _stabilise_semantic_ids(
-        semantic_units, {unit.unit_id: unit.ordinal for unit in units}
-    )
+    commit_semantics("semantics")
+    if work is not None:
+        work.stage(passes=2, sorts=1)  # final IDs and member/anchor references
+    semantic_units = _stabilise_semantic_ids(semantic_units, ordinal_of)
 
+    if work is not None:
+        work.stage(passes=7, sorts=2)  # relation indexes, bounded adjacent checks
     builder = RelationBuilder(
-        {unit.unit_id for unit in units}, max_relations=resolved["max_relations"]
+        {unit.unit_id for unit in units},
+        max_relations=resolved["max_relations"],
+        work_budget=work_budget,
     )
     continuation_relations(builder, units, ordering, _member_map(semantic_units))
     header_and_footnote_relations(builder, units, ordering)
@@ -194,8 +330,21 @@ def build_structure(
     language_lane_relations(builder, units, ordering)
     builder.check_acyclic()
     diagnostics.extend(builder.diagnostics)
+    if state is not None:
+        state["relations"] = [dict(item) for item in builder.relations()]
+        state["completed_stage"] = "relations"
+    if work is not None:
+        work.stage(passes=4, sorts=3)  # coverage, diagnostics and output ordering
+        pages = envelope["coverage"]
+        reserve(
+            work_budget,
+            (len(pages.get("opaque_pages", [])) + len(pages.get("deferred_pages", [])))
+            * (1 + len(units)),
+        )
 
-    coverage = _coverage(envelope, units, ordering, semantic_units, over_budget, resolved)
+    coverage = _coverage(
+        envelope, units, ordering, semantic_units, over_budget, resolved
+    )
     coverage["complete"] = bool(
         coverage["complete"]
         and not over_budget
@@ -356,9 +505,7 @@ def _coverage_diagnostics(
         diagnostics.append(
             {
                 "code": "OPAQUE_PAGE",
-                "unit_ids": [
-                    unit.unit_id for unit in units if unit.page == page
-                ],
+                "unit_ids": [unit.unit_id for unit in units if unit.page == page],
                 "detail": f"page {page} produced no native text and is not covered",
             }
         )
@@ -366,9 +513,7 @@ def _coverage_diagnostics(
         diagnostics.append(
             {
                 "code": "DEFERRED_PAGE",
-                "unit_ids": [
-                    unit.unit_id for unit in units if unit.page == page
-                ],
+                "unit_ids": [unit.unit_id for unit in units if unit.page == page],
                 "detail": f"page {page} is deferred by the caller's read budget",
             }
         )
@@ -390,7 +535,11 @@ def _sorted_diagnostics(diagnostics: list[dict]) -> list[dict]:
         deduped.setdefault(key, item)
     return sorted(
         deduped.values(),
-        key=lambda item: (item["code"], tuple(item.get("unit_ids", ())), item.get("detail", "")),
+        key=lambda item: (
+            item["code"],
+            tuple(item.get("unit_ids", ())),
+            item.get("detail", ""),
+        ),
     )
 
 

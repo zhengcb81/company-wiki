@@ -32,11 +32,9 @@ from .narrative_model import (
     ModelResponseError,
     ModelTimeoutError,
     NarrativeModel,
-    NarrativeModelRequest,
     NarrativeModelResponse,
-    decode_model_draft,
-    resolve_model_boundary,
 )
+from .narrative_model_runtime import build_model_request, decode_model_draft, resolve_model_boundary
 from .narrative_http_model import ModelHTTPError
 from .narrative_failed_final import fit_failed_final_result
 from .narrative_model_caller import NarrativeBudgetCallError, NarrativeModelCaller
@@ -362,7 +360,7 @@ class NarrativeSummarizeHandler:
             except ModelResponseError as exc:
                 raise _SummaryFailure("MODEL_GENERATION_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
                                       str(exc)) from exc
-        request = NarrativeModelRequest.from_selection(selected,
+        request = build_model_request(selected,
             reading_projection_version=reading_projection_version)
         context.checkpoint()
         if self._model_caller is not None:

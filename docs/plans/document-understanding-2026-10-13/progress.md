@@ -1,4 +1,24 @@
+## ROOT发布节点更新 — 2026-10-16
+
+FORM/native TABLE适配、STATE、共享结构与策略预算、显式v4工程已收齐，独立scope/预算尾部反例修复并复放通过。[本节点详情](review/native_state_scoped_engineering.md)与[验收收据](common-root-quality-evidence/native-state-scoped-engineering-acceptance.json)。集中1212 PASS后12项失败已分类修复：可选role/kind不再阻断，正常宿主相关25 PASS（含v4与旧paid恢复）；未删除失败或跳hook。准备正常提交和推送，精确CI未返回前不称远端绿。
+
+真实VRSK/MSFT在固定2M共享预算内仍耗尽，已优先安排STATE惰性事件准备共因整改；只读剖析83%耗在大多无事件owner的全语法扫描。当前不切默认，不提高cap，不把partial视为质量通过。新DU7候选仅两张：PDF已观察细格适配与ET既有HTML抽取忠实度，均与DU6三卡排他；正式卡/工区准备后再交付。
+
+**Next Step：** 完成本工程节点正常发布；随后STATE共享效率共因、TABLE依赖闭包和正式跨仓/真实摘要验收继续。母目标未完成，DU6已分包继续，不进入其owned目录。
+
+---
+
+## 2026-10-16 DU6已分发，ROOT主线继续
+
+用户确认三卡已发出，README保持DISPATCHED。首段commit06f4ea24完成但未push。FORM独立两P2固定后原探针回放通过，显式v4交付238 PASS/44.26s，loopback初次1 POST、恢复0 POST，0供应商调用。ROOT策略准备5 RED（缺共享端口）→23相关PASS/1.53s；Temp/sentinel/config/RF默认registry保护通过。
+
+结构首版代表规模暴露2M耗尽和代理层复杂度，ROOT拒收并要求收敛；STATE/TABLE处于隔离owned文件主线施工，非外包作者目录。未来Git操作前先冻结写者，避免已实证pre-commit stash隐藏活源码；不跳hook、不把并行快照当最终验收。完成的来源/预算/摘要工程将在集中节点正常提交推送，真实质量与母计划未结束。
+
+---
+
 ## ROOT当前状态 — 2026-10-16 统一准备与共享预算首段、DU6启动
+
+**并行调度更新：用户已确认 DU6 三包发出（DISPATCHED），ROOT不进入三卡源码范围；各作者独占工区和接口继续按总表。**
 
 DU5三包已接收。ROOT新增准备/预算首段：route与policy复用实际Observation；选择入口拥有同一WorkBudget并传至各parent/layout/binding；零预算/耗尽在进入后续正文分类前返回未完成；共享路径只overlay增强字段，standalone独立返回保持。初始5RED、owner3RED和独审3P2各自固定后修；最终224集中PASS，独立相同探针复验通过，Ruff/mypy8源通过。这里只完成layout准备/绑定与prepared限额复用，**结构/strategy/candidate尚未全部计费，full_pipeline_hard_bound=false**，不能称预算/来源准备整体完成。
 

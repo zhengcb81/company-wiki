@@ -10,6 +10,8 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from typing import Any
 
+from ._work import WorkPlan
+
 SCHEMA_VERSION = "du-structure/1"
 INPUT_SCHEMA_VERSION = "du-input/1"
 
@@ -225,7 +227,9 @@ class ObservationUnit:
 
     @property
     def is_heading_kind(self) -> bool:
-        return self.kind in {"heading", "html_heading"} or self.heading_level is not None
+        return (
+            self.kind in {"heading", "html_heading"} or self.heading_level is not None
+        )
 
     @property
     def is_table_furniture(self) -> bool:
@@ -253,7 +257,9 @@ class ObservationUnit:
         }
 
 
-def parse_observation(observation: Mapping[str, Any]) -> tuple[dict[str, Any], list[ObservationUnit]]:
+def parse_observation(
+    observation: Mapping[str, Any], *, work: WorkPlan | None = None
+) -> tuple[dict[str, Any], list[ObservationUnit]]:
     """Validate the envelope and return ``(envelope, units)``.
 
     Raises :class:`StructureInputError` for real data errors only: a wrong
@@ -263,9 +269,7 @@ def parse_observation(observation: Mapping[str, Any]) -> tuple[dict[str, Any], l
     """
     document = _require_mapping(observation, "observation")
     if document.get("schema_version") != INPUT_SCHEMA_VERSION:
-        raise StructureInputError(
-            f"schema_version must be {INPUT_SCHEMA_VERSION!r}"
-        )
+        raise StructureInputError(f"schema_version must be {INPUT_SCHEMA_VERSION!r}")
     source_ref = _require_mapping(document.get("source_ref"), "source_ref")
     source_id = source_ref.get("source_id")
     if not isinstance(source_id, str) or not source_id:
@@ -277,7 +281,24 @@ def parse_observation(observation: Mapping[str, Any]) -> tuple[dict[str, Any], l
 
     units: list[ObservationUnit] = []
     seen: set[str] = set()
+    if work is not None:
+        # Reserve the actual sequence before its iterator or any unit parser.
+        work.budget.charge(len(raw_units))
+        for name in ("metadata", "coverage"):
+            value = document.get(name)
+            if isinstance(value, Mapping):
+                work.budget.charge(len(value))
+                if name == "coverage":
+                    for field in ("opaque_pages", "deferred_pages"):
+                        pages = value.get(field, ())
+                        if isinstance(pages, Sequence):
+                            work.budget.charge(len(pages))
     for position, payload in enumerate(raw_units):
+        if work is not None:
+            work.budget.charge()
+            actual = _require_mapping(payload, "unit").get("text")
+            if isinstance(actual, str):
+                work.observe(actual)
         unit = ObservationUnit(_require_mapping(payload, "unit"), position)
         if unit.unit_id in seen:
             raise StructureInputError(f"duplicate unit_id {unit.unit_id!r}")

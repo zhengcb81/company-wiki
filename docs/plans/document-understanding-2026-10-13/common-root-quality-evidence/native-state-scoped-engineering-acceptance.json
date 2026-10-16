@@ -1,0 +1,79 @@
+{
+  "schema_version": "native-state-scoped-engineering/1",
+  "status": "engineering_components_ready_real_quality_open",
+  "form": {
+    "unit_concentrated_passed": 228,
+    "independent_scope_counterexamples": "fixed"
+  },
+  "v4": {
+    "concentrated_passed": 238,
+    "loopback_posts": 1,
+    "recovery_extra_posts": 0,
+    "legacy_module_sha256": "2306aa70f532e508f8a470fb03088bce52bf1e340f4a44dc623f3d7d95e4f702"
+  },
+  "structure": {
+    "concentrated_passed": 137,
+    "synthetic_6k_used": 1428909,
+    "original_output_equal": true,
+    "hard_wall_clock_bound": false
+  },
+  "state": {
+    "concentrated_passed": 771,
+    "old_version_assertion_updated": "reading-business-policy/7",
+    "new_phase_and_QA_and_continuity_cases": 28
+  },
+  "native_table": {
+    "concentrated_passed": 100,
+    "production_selection_closure": "not_connected"
+  },
+  "root_concentrated": {
+    "passed": 1212,
+    "failed": 12,
+    "skipped": 11,
+    "failures": "10 optional role/kind bridge regressions fixed; 2 loopback failures in sandbox; normal-host focused 25 PASS with no v4 code change"
+  },
+  "root_strategy": {
+    "independent_shared_scope_issue_fixed": true,
+    "final_tail_patch_tests_in_host_focus": true
+  },
+  "real_budget_probes": {
+    "us-10q": {
+      "units": 2274,
+      "chars": 100175,
+      "used": 1999656,
+      "exhausted": true,
+      "selected": 19
+    },
+    "us-txt": {
+      "units": 489,
+      "chars": 56713,
+      "used": 1999955,
+      "exhausted": true,
+      "selected": 96
+    },
+    "status": "open_common_efficiency_fix_required_no_cap_increase"
+  },
+  "defaults": {
+    "selector": "0.8.0",
+    "new_selector_default_model_projection": "reading-model-input/3",
+    "explicit_v4_only": true
+  },
+  "supplier_calls": 0,
+  "budget_tokens_limit": 2000000,
+  "budget_usd_limit": 20,
+  "spent_tokens_unchanged": 599590,
+  "config_and_originals_unchanged": true,
+  "archive": {
+    "path": "common-root-quality-evidence/native-state-scoped-engineering-receipts.zip",
+    "bytes": 499990,
+    "sha256": "812fbcd9c2496f48a8cd8ae4cfe2e85b50190f5cba904bc03fcae0cbb23db2a5",
+    "files": 213
+  },
+  "open": [
+    "shared STATE full-event scans consume work on mostly event-free source owners",
+    "TABLE selection dependencies and actual PDF observations",
+    "formal public reader to RF consumer E2E",
+    "configured supplier semantic quality and holdout",
+    "HKIPO bounded native replay and mother G2/G4/G5"
+  ]
+}

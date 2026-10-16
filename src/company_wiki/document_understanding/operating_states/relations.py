@@ -496,10 +496,14 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
             continue
         construction = p.EVENT_PATTERNS[order][0]
         groups = match.groupdict()
-        pred = groups.get("pred")
+        # The existing English shipment grammar binds its verbal phrase in
+        # ``qual`` (shipped / delivered / suspend shipments). It is both an
+        # aspect/state cue and the actual source predicate, not a noun list.
+        pred_key = "qual" if construction == "shipment_en" and not groups.get("pred") else "pred"
+        pred = groups.get(pred_key)
         if not pred:
             continue
-        pred_start = clause[0] + match.start("pred")
+        pred_start = clause[0] + match.start(pred_key)
         # Bind a contiguous modifier suffix to every predicate family. Missing
         # optional regex groups cannot turn a denial or plan into completion.
         while embedded_ranges and embedded_ranges[0][1] <= pred_start-64:
@@ -548,7 +552,7 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
         if obj_group:
             raw_start = clause[0] + match.start("obj")
             raw = obj_group
-            if match.start("obj") < match.start("pred"):
+            if match.start("obj") < match.start(pred_key):
                 trimmed = _tail_np(_clean_np(raw))
             else:
                 trimmed = _clean_np(_obj_after(raw))
@@ -637,8 +641,56 @@ def _relation_dict(unit_id: str, view: MatchingView, clause: tuple[int, int],
     }
 
 
+class OperatingRelationSession:
+    """One immutable source map and one caller-owned work balance.
+
+    Preparation is cached by source unit identity, never by text. Cached names
+    are copied before context names are merged, so another scope cannot alter
+    a later target's attribution. No unreferenced unit is read or copied.
+    """
+
+    def __init__(self, units: Mapping[str, Any], *, work_budget: WorkBudget):
+        self.units = units
+        self.work_budget = work_budget
+        self._units: dict[str, Any] = {}
+        self._views: dict[str, tuple[MatchingView, dict[str, str]]] = {}
+        self._results: dict[tuple[str, tuple[str, ...]], dict[str, Any]] = {}
+
+    def unit(self, uid: str):
+        if uid not in self._units:
+            self._units[uid] = _unit(self.units, uid, self.work_budget)
+        return self._units[uid]
+
+    def prepared(self, uid: str):
+        if uid not in self._views:
+            self._views[uid] = _view_and_names(self.unit(uid), self.work_budget)
+        view, names = self._views[uid]
+        return view, dict(names)
+
+    def detect(self, unit_id: str, context_unit_ids: tuple[str, ...] = ()):
+        key = (unit_id, context_unit_ids)
+        if key not in self._results:
+            self._results[key] = _detect_operating_relations({
+                "schema_version": OBSERVATION_SCHEMA, "unit_id": unit_id,
+                "units": self.units, "context_unit_ids": context_unit_ids,
+            }, work_budget=self.work_budget, prepared=self)
+        return self._results[key]
+
+
 def detect_operating_relations(
     observation: Mapping[str, Any], *, work_budget: WorkBudget
+) -> dict[str, Any]:
+    return _detect_operating_relations(observation, work_budget=work_budget)
+
+
+_FRONTED_CONDITION = re.compile(r"^\s*(?:如果|若|一旦|假如|\bif\b|\bunless\b)", re.I)
+_CONTRAST_BOUNDARY = re.compile(r"^\s*(?:但是|然而|不过|但|\bhowever\b|\bbut\b|\bnevertheless\b)", re.I)
+_SENTENCE_END = re.compile(r"[。！？!?；;]|\.(?:\s|$)")
+
+
+def _detect_operating_relations(
+    observation: Mapping[str, Any], *, work_budget: WorkBudget,
+    prepared: OperatingRelationSession | None = None,
 ) -> dict[str, Any]:
     """Extract bounded operating relations from one observed unit.
 
@@ -655,8 +707,9 @@ def detect_operating_relations(
     contexts_used: list[str] = []
 
     try:
-        target_unit = _unit(units, target, work_budget)
-        target_view, name_classes = _view_and_names(target_unit, work_budget)
+        target_unit = prepared.unit(target) if prepared else _unit(units, target, work_budget)
+        target_view, name_classes = (prepared.prepared(target) if prepared else
+                                    _view_and_names(target_unit, work_budget))
         target_parent = target_unit["parent_id"]
         seen_contexts: set[str] = set()
         for index in range(len(context_ids)):
@@ -670,11 +723,12 @@ def detect_operating_relations(
             if context_id not in units:
                 diagnostics.append({"code": "context_unit_missing", "unit_id": context_id})
                 continue
-            context_unit = _unit(units, context_id, work_budget)
+            context_unit = prepared.unit(context_id) if prepared else _unit(units, context_id, work_budget)
             if context_unit["parent_id"] != target_parent:
                 diagnostics.append({"code": "context_parent_mismatch", "unit_id": context_id})
                 continue
-            context_view, context_names = _view_and_names(context_unit, work_budget)
+            context_view, context_names = (prepared.prepared(context_id) if prepared else
+                                          _view_and_names(context_unit, work_budget))
             for name, label in context_names.items():
                 name_classes.setdefault(name, label)
             contexts_used.append(context_id)
@@ -693,9 +747,17 @@ def detect_operating_relations(
         scan = _UnitScan(target_view, name_classes)
         work_budget.charge(len(target_view.text))
         clauses = split_clauses(target_view)
+        condition_scope = None
+        preceding_end = 0
         for clause in clauses:
             work_budget.charge(1 + 8 * (clause[1] - clause[0]))
             clause_text = target_view.text[clause[0]:clause[1]]
+            if (_SENTENCE_END.search(target_view.text[preceding_end:clause[0]])
+                    or _CONTRAST_BOUNDARY.match(clause_text)):
+                condition_scope = None
+            if _FRONTED_CONDITION.match(clause_text):
+                condition_scope = clause
+            preceding_end = clause[1]
             closing = target_view.text[clause[1]:clause[1] + 1]
             if _clause_guarded(clause_text, closing):
                 continue
@@ -715,7 +777,12 @@ def detect_operating_relations(
                 work_budget.charge(1)
                 # Assemble immediately: budget exhaustion keeps the relations
                 # already determined instead of dropping unconverted events.
-                relations.append(_relation_dict(target, target_view, clause, event, []))
+                extra_quals = []
+                if condition_scope is not None:
+                    event.stage = event.modality = "conditional"
+                    if condition_scope != clause:
+                        extra_quals.append(condition_scope)
+                relations.append(_relation_dict(target, target_view, clause, event, extra_quals))
     except WorkBudgetExceeded:
         exhausted = True
 
