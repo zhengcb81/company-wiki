@@ -7,16 +7,17 @@ and data; callers bind their original IDs and keep every required qualifier.
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 import re
-from typing import Literal
+from typing import Any, Literal
+from bisect import bisect_left
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
 
 from ..profiles.registry import configured_table_signal
 
-FEATURE_VERSION = "operating-table-purpose/3"
+FEATURE_VERSION = "operating-table-purpose/4"
 MAX_PURPOSE_CHARS = 2_000_000
 
 # These are account identities, not financial-section locations. Operating
@@ -191,4 +192,169 @@ def qualify_table(
     return TablePurpose("not_business", "NO_OPERATING_TABLE_PURPOSE")
 
 
-__all__ = ["FEATURE_VERSION", "TablePurpose", "operating_header", "qualify_table"]
+def _native_row_scope(unit: Any) -> tuple[Any, ...] | None:
+    """Use supplied source/table/page/row identity, never text or adjacency."""
+    if isinstance(unit, Mapping):
+        hints = unit.get('hints') or {}
+        source, table, page, row = (hints.get('source_id'), hints.get('table_id'),
+                                    unit.get('page'), hints.get('row'))
+    else:
+        source, table, page, row = unit.source_id, unit.table_id, unit.page, unit.row
+    if not isinstance(table, str) or not table or type(row) is not int or row < 0:
+        return None
+    return source, table, page, row
+
+
+def attach_native_row_headers(tables, units, *, work_budget=None) -> None:
+    """Project observed row/rowgroup headers onto this call's typed units.
+
+    This is classification context only. Real references and measured spans
+    remain owned by the native descriptor; no inferred PDF role is added.
+    """
+    if not tables:
+        return
+
+    def charge(count=1):
+        if work_budget is not None:
+            work_budget.charge(count)
+
+    charge(len(units))
+    by_id = {unit.unit_id: unit for unit in units}
+    seen = set()
+    for table in tables:
+        charge()
+        scope = table['scope']
+        identity = (scope['parent_id'], scope['table_id'], scope['page'])
+        if identity in seen:
+            continue
+        seen.add(identity)
+        cells = table['cells']
+        charge(len(cells))
+        rows = {cell['row'] for cell in cells}
+        charge(len(rows) * max(1, len(rows).bit_length()))
+        ordered_rows = sorted(rows)
+        headers: dict[int, list] = {}
+        groups: dict[Any, list] = {}
+        labels = {}
+
+        def label(ref):
+            key = (ref['unit_id'], ref['char_start'], ref['char_end'])
+            if key not in labels:
+                charge()
+                unit = by_id.get(key[0])
+                valid = (unit is not None and unit.source_id == scope['parent_id']
+                    and unit.table_id == scope['table_id'] and unit.page == scope['page']
+                    and type(key[1]) is int and type(key[2]) is int
+                    and 0 <= key[1] < key[2] <= len(unit.text))
+                if valid:
+                    assert unit is not None  # established by the scope/range predicate
+                    charge(1 + (key[2] - key[1]) // 64)
+                    labels[key] = unit.text[key[1]:key[2]]
+                else:
+                    labels[key] = None
+            return labels[key]
+
+        for cell in cells:
+            charge()
+            if not cell.get('is_header') or cell.get('header_scope') not in {'row', 'rowgroup'}:
+                continue
+            refs = cell['text_refs']
+            if cell['header_scope'] == 'rowgroup':
+                charge(len(refs))
+                groups.setdefault(cell['row_group'], []).extend(refs)
+            else:
+                # Unknown spans do not confer context on any later row.
+                span = cell.get('row_span')
+                stop = cell['row'] + (span if type(span) is int and span > 0 else 1)
+                first = bisect_left(ordered_rows, cell['row'])
+                last = bisect_left(ordered_rows, stop)
+                charge((last - first) * (1 + len(refs)))
+                for index in range(first, last):
+                    headers.setdefault(ordered_rows[index], []).extend(refs)
+        for cell in cells:
+            charge()
+            context = headers.get(cell['row'], ())
+            group = groups.get(cell.get('row_group'), ())
+            charge(len(context) + len(group))
+            texts = tuple(dict.fromkeys(text for ref in (*context, *group)
+                                        if (text := label(ref)) is not None))
+            for ref in cell['text_refs']:
+                charge()
+                unit = by_id.get(ref['unit_id'])
+                if (unit is not None and unit.source_id == scope['parent_id']
+                        and unit.table_id == scope['table_id'] and unit.page == scope['page']):
+                    unit.native_row_headers = texts
+
+
+def qualify_native_rows(
+    header_texts: Sequence[str], body_units: Sequence[Any], *,
+    caption_texts: Sequence[str] = (), max_chars: int = MAX_PURPOSE_CHARS,
+) -> TablePurpose:
+    """Qualify native rows and project the decision onto their original units.
+
+    HTML cells share the original row's accounting/operating meaning. A bare
+    numeric cell cannot borrow an operating header after its account label was
+    rejected. Units without a native row remain separate; no role is inferred.
+    The joined view is classification only, never a source or numeric carrier.
+    """
+    if type(max_chars) is not int or max_chars < 0:
+        raise ValueError('max_chars must be a nonnegative integer')
+    if max_chars == 0:
+        return TablePurpose('incomplete', 'TABLE_PURPOSE_RESOURCE_LIMIT')
+    groups: dict[tuple[Any, ...], list[int]] = {}
+    row_headers: dict[tuple[Any, ...], list[str]] = {}
+    texts: list[str] = []
+    cost = 0
+    bounded: list[list[str]] = []
+    for values in (header_texts, caption_texts):
+        if isinstance(values, str):
+            raise TypeError('table purpose input must be a sequence of strings')
+        prefix = []
+        for text in values:
+            if not isinstance(text, str):
+                raise TypeError('table purpose input must contain strings')
+            cost += 1 + len(text)
+            if cost > max_chars:
+                return TablePurpose('incomplete', 'TABLE_PURPOSE_RESOURCE_LIMIT')
+            prefix.append(text)
+        bounded.append(prefix)
+    for index, unit in enumerate(body_units):
+        text = unit['text'] if isinstance(unit, Mapping) else unit.text
+        cost += 3 + len(text)  # includes the temporary classification separator
+        if cost > max_chars:
+            return TablePurpose('incomplete', 'TABLE_PURPOSE_RESOURCE_LIMIT')
+        texts.append(text)
+        scope = _native_row_scope(unit)
+        key = ('native', *scope) if scope is not None else ('unit', index)
+        groups.setdefault(key, []).append(index)
+        context = unit.get('native_row_headers', ()) if isinstance(unit, Mapping) else unit.native_row_headers
+        for header in context:
+            cost += 3 + len(header)
+            if cost > max_chars:
+                return TablePurpose('incomplete', 'TABLE_PURPOSE_RESOURCE_LIMIT')
+            if header not in row_headers.setdefault(key, []):
+                row_headers[key].append(header)
+    members = list(groups.values())
+    result = qualify_table(bounded[0],
+        [' | '.join([*row_headers.get(key, ()), *(texts[index] for index in group)])
+         for key, group in groups.items()],
+        caption_texts=bounded[1], max_chars=max_chars)
+    return TablePurpose(result.status, result.reason, tuple(
+        index for row in result.eligible_row_indices for index in members[row]))
+
+
+def qualify_package_table(package: Mapping, units: Mapping) -> TablePurpose:
+    """Adapt one original dependency package to the single purpose classifier."""
+    members = list(dict.fromkeys(package.get('member_unit_ids', ())))
+    required = set(package.get('required_context_unit_ids', ()))
+    if not (set(members) | required) <= units.keys():
+        return TablePurpose('incomplete', 'TABLE_MEMBERS_NOT_READ')
+    context = [units[uid] for uid in members if uid in required]
+    return qualify_native_rows(
+        [unit['text'] for unit in context if unit['kind'] not in {'footnote', 'table_caption'}],
+        [units[uid] for uid in members if uid not in required],
+        caption_texts=[unit['text'] for unit in context if unit['kind'] == 'table_caption'])
+
+
+__all__ = ["FEATURE_VERSION", "TablePurpose", "operating_header", "qualify_table",
+           "qualify_native_rows", "qualify_package_table"]

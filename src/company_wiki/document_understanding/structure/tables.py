@@ -14,7 +14,7 @@ import re
 
 from . import layout as layout_mod
 from .contract import ObservationUnit
-from .table_purpose import operating_header, qualify_table
+from .table_purpose import operating_header, qualify_native_rows
 
 _CAPTION = re.compile(r"^\s*[（(]?\s*(?:单位|單位|币种|幣種|units?|currency)\s*[:：]\s*(?P<unit>.+)$", re.IGNORECASE)
 _YEAR = re.compile(r"(20\d{2})\s*年?")
@@ -215,9 +215,9 @@ def build_operating_tables(
         captions = [unit.unit_id for unit in scope if _is_caption(unit)]
         notes = [unit.unit_id for unit in scope if _is_note(unit)]
         header_set, body_set, caption_set = set(headers), set(body), set(captions)
-        qualification = qualify_table(
+        qualification = qualify_native_rows(
             [unit.text for unit in scope if unit.unit_id in header_set],
-            [unit.text for unit in scope if unit.unit_id in body_set],
+            [unit for unit in scope if unit.unit_id in body_set],
             caption_texts=[unit.text for unit in scope if unit.unit_id in caption_set],
             max_chars=limits["max_work_units"],
         )

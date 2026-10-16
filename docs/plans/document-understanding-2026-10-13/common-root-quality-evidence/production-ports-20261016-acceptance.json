@@ -1,0 +1,286 @@
+{
+  "status": "ENGINEERING_NODE_PASS_DEFAULT_AND_REAL_QUALITY_OPEN",
+  "owned_sha256": {
+    "docs/plans/document-understanding-2026-10-13/findings.md": "5bfef164749cafa8fcc54b7ebf7c32eda3bb6babe65c0774b7c4696a8a425ff1",
+    "docs/plans/document-understanding-2026-10-13/progress.md": "aa70d9820a824cbd2db339a0e2ca92a1dbc6ee53a9f93847bfadf50251dcdca3",
+    "docs/plans/document-understanding-2026-10-13/review/du9_reception.md": "92e0a219cb17699aec87214c7a4101667592e1926d53b741525331d3bbfee76d",
+    "docs/plans/document-understanding-2026-10-13/review/pdf_page_intent_implementation.md": "250000e5e993736406bf545a70a22c7bf401f0f6738ab4204a1ab8d13fb71999",
+    "docs/plans/document-understanding-2026-10-13/review/production_ports_20261016.md": "db8fbab86b9e499ce8044739d7538ce2914a84156fbee367c0cce6b2adae5ea1",
+    "docs/plans/document-understanding-2026-10-13/task_plan.md": "e779d6e41529e09ce92743ad5faaf1f0019056462cac8e15d9a694f65cab9c96",
+    "src/company_wiki/automation/narrative_batch.py": "48956ab3f732e0945b3d3594a8f657392f7728b99e118744930980c0a20dced2",
+    "src/company_wiki/automation/narrative_batch_request.py": "8800380dfd26cd75e398ff968ba727998cdb745aa2347c998b6600a47d1ce9ab",
+    "src/company_wiki/document_understanding/decision_inventory.py": "5c8476b56a0f85cc77b0825ccc4988aac96922eed5b8292d57d8699ab5bd8a6b",
+    "src/company_wiki/document_understanding/native_table_bridge.py": "7c6f7ea8c99854d673abe059f14cd16f2ce4fb590c3b695da9a5ac74f148ac51",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "858283b62a6f743877f27a82de234d4ee9ecc155d6c594e553e11b63a9fd1831",
+    "src/company_wiki/document_understanding/operating_states/text_view.py": "25628bfc7af43ce486ef6d2cc01065c3f1b09ded24e1a3b5d39fe8119818118c",
+    "src/company_wiki/document_understanding/pipeline.py": "bd007cabb717a07bbbd80037f5d10d05e53f6b585219a727f97d8e45ca77febe",
+    "src/company_wiki/document_understanding/structure/__init__.py": "1f3624fe61572e99228425f3c60d9b7a0af7ef56d106c1ac9d74b6237e99d8a5",
+    "src/company_wiki/document_understanding/structure/contract.py": "9a3be96269c2d84c6cb7b564e025cc00e0bbac31839a8f0ffcffb031244d3099",
+    "src/company_wiki/document_understanding/structure/table_purpose.py": "f88fc48f4842ca5fa477ac68cc708fb2ac0ba79cf0b8ca1441aee618143ce8d9",
+    "src/company_wiki/document_understanding/structure/tables.py": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "b28c836a54e2c617b1103a50ff9dd51edf7a48abd1c53dff0ac76c73be77a89a",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "5c52d45e964466f42e760adc70503effffe112773c523ef80a139aa988f1f5f7",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "12885608ae6fa7615627f9a6ab1330ac1b23e46c2b7e1e933f1a7c3b6435fff5",
+    "src/company_wiki/source_catalog/narrative_parent_composition.py": "db0eed5f36bd6723947a744c91a4b551e5c6ce0a2515c41407bd61fbdec9b5b5",
+    "src/company_wiki/source_catalog/narrative_pdf_layout.py": "da6b0869bd87dd18475adca448bc3ae82e245b0ace1878de57319f34b6286fc7",
+    "src/company_wiki/source_catalog/narrative_reading.py": "707738e2660d45d1e855ddeccc005ee230e2abfd51a69aaed4a950b905c3a891",
+    "tests/fixtures/shared_scoped_public_request/legacy_request_hashes.json": "07e3b1940504daffc466f0dc984f38815ba75a64711ba95085d1651f521d6b75",
+    "tests/integration/test_shared_scoped_public_request.py": "d497a424a59f1cf3b7f76e5ab2a5242f2bf9a975e7c1f4d659087d959d96bb67",
+    "tests/integration/test_shared_scoped_rf_consumer.py": "31db3336cee9441704b6598f755330933d0abcb56d72c8780b695647db44a0e7",
+    "tests/unit/document_understanding_root/test_deep_pdf_capture_production.py": "7c9e35cd5da3084b5b09e9c9d84ae8ca19fbbccf1406f4704daee19f11acde23",
+    "tests/unit/document_understanding_root/test_native_table_production.py": "6777d2d639fd7953b74225dd24548865c05a2ff5fae809c6eb9b33a256c1c32d",
+    "tests/unit/document_understanding_root/test_operating_relation_production.py": "f7ea00052e56415fdcac9444d7385a078cc721fac15d39a95603a2aa6a1fb723",
+    "tests/unit/document_understanding_root/test_parent_pipeline_composition.py": "677fc3e883cc29784fe0eda24a61f1e713047fe830f098b5b59b9478fc15e611",
+    "tests/unit/pdf_table_observations/test_red_production_gap.py": "28e3f0bd27158157ab4ec9c0d334043f22e24b636fc1b5c61dcf766b28002fc6",
+    "tools/document_understanding_benchmark/README.md": "b74a4ffd2165e241a993f0d6e37bfcd95e6dce2c3bf5888d445b8a6b0a6e30da",
+    "tools/document_understanding_benchmark/phase_c_bootstrap/sitecustomize.py": "a29ad367296f26bc256083742e72b1251ed0bf4876b0af17e6c89130e00f56aa",
+    "tools/document_understanding_benchmark/phase_c_failure_review_material.py": "f5701babacd232b9df58a7ec1bf40950cc43ade1a0ee1b313b9e54b032a7f6c7",
+    "tools/document_understanding_benchmark/phase_c_launcher.py": "4e1e61d6b5365a3d64478387551ec8ba08b141e2ecd363a46d4d5de1a55fda26",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "3aeef7afbb4d7274fb4230be04f87c913b9aca3bcb6e25f903719ff7c93f392e",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "1d3e8c882b5633c81cc5212353e0765f5be3de9a4817a30934ce9b7b3c1a78c8"
+  },
+  "test_receipts": {
+    "parent-production-red": {
+      "exit_code": 1,
+      "seconds": 10.01198499999009,
+      "tests": [
+        "tests/unit/document_understanding_root/test_parent_pipeline_composition.py::test_actual_reading_entry_keeps_second_parent_structure_and_heading_dependency",
+        "tests/unit/document_understanding_root/test_parent_pipeline_composition.py::test_actual_reading_entry_borrows_native_metadata_and_reuses_one_budget"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "parent-production-green": {
+      "exit_code": 0,
+      "seconds": 17.61656180000864,
+      "tests": [
+        "tests/unit/document_understanding_root/test_parent_pipeline_composition.py",
+        "tests/unit/document_understanding_root/test_native_signal_routing.py",
+        "tests/unit/document_understanding_root/test_native_table_observation.py",
+        "tests/unit/document_understanding_root/test_du_root_pipeline.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "table-production-red": {
+      "exit_code": 1,
+      "seconds": 8.563042800000403,
+      "tests": [
+        "tests/unit/document_understanding_root/test_native_table_production.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "table-production-green": {
+      "exit_code": 0,
+      "seconds": 11.08166060000076,
+      "tests": [
+        "tests/unit/document_understanding_root/test_native_table_production.py",
+        "tests/unit/document_understanding_root/test_native_table_observation.py",
+        "tests/unit/document_understanding_root/test_parent_pipeline_composition.py",
+        "tests/unit/document_understanding_root/test_du_root_pipeline.py",
+        "tests/unit/document_understanding_root/test_prepared_source_budget.py",
+        "tests/unit/document_understanding_root/test_structure_shared_work_budget.py",
+        "tests/unit/document_understanding_root/test_strategy_preparation_budget.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "table-uncertainty-red": {
+      "exit_code": 1,
+      "seconds": 11.926288099988597,
+      "tests": [
+        "tests/unit/document_understanding_root/test_native_table_production.py::test_unproven_table_mapping_remains_visible_in_real_selected_material",
+        "tests/unit/document_understanding_root/test_native_table_production.py::test_complete_table_mapping_is_not_marked_ambiguous_and_native_identity_stays_exact"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "table-uncertainty-green": {
+      "exit_code": 1,
+      "seconds": 39.86949419998564,
+      "tests": [
+        "tests/unit/document_understanding_root/test_native_table_production.py",
+        "tests/unit/document_understanding_root/test_parent_pipeline_composition.py",
+        "tests/unit/document_understanding_root/test_native_table_observation.py",
+        "tests/unit/pdf_table_observations/test_red_production_gap.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "capture-inventory-red": {
+      "exit_code": 1,
+      "seconds": 28.057062999985646,
+      "tests": [
+        "tests/unit/document_understanding_root/test_native_table_production.py::test_native_binder_algorithm_is_a_real_decision_dependency",
+        "tests/unit/document_understanding_root/test_deep_pdf_capture_production.py::test_actual_capture_survives_production_summary_and_causal_inventory"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "table-capture-inventory-green": {
+      "exit_code": 0,
+      "seconds": 35.77449490001891,
+      "tests": [
+        "tests/unit/document_understanding_root/test_native_table_production.py",
+        "tests/unit/document_understanding_root/test_deep_pdf_capture_production.py",
+        "tests/unit/document_understanding_root/test_native_table_observation.py",
+        "tests/unit/document_understanding_root/test_parent_pipeline_composition.py",
+        "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+        "tests/unit/pdf_table_observations"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "table-purpose-production-red": {
+      "exit_code": 1,
+      "seconds": 18.83240549999755,
+      "tests": [
+        "tests/unit/document_understanding_root/test_native_table_production.py::test_financial_table_is_not_bound_before_business_purpose_is_known"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "purpose-table-capture-green": {
+      "exit_code": 0,
+      "seconds": 77.11072490000515,
+      "tests": [
+        "tests/unit/document_understanding_root",
+        "tests/unit/document_understanding_selection",
+        "tests/unit/pdf_table_observations"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "public-v4-rf-final": {
+      "exit_code": 124,
+      "seconds": 240.31127679999918,
+      "tests": [
+        "tests/integration/test_shared_scoped_public_request.py",
+        "tests/integration/test_shared_scoped_rf_consumer.py",
+        "tests/unit/test_narrative_scoped_runtime_binding.py",
+        "tests/unit/test_narrative_scoped_runtime_legacy.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "public-v4-worker-final": {
+      "exit_code": 1,
+      "seconds": 80.5753304999962,
+      "tests": [
+        "tests/integration/test_shared_scoped_public_request.py::test_configured_public_v4_worker_recovery_reuse_protocol_separation_and_exact_read",
+        "tests/unit/test_narrative_scoped_runtime_binding.py",
+        "tests/unit/test_narrative_scoped_runtime_legacy.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "rf-consumer-final": {
+      "exit_code": 1,
+      "seconds": 34.46864439998171,
+      "tests": [
+        "tests/integration/test_shared_scoped_rf_consumer.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "public-v4-host-diagnostic": {
+      "exit_code": 0,
+      "seconds": 193.95194870000705,
+      "tests": [
+        "tests/integration/test_shared_scoped_public_request.py::test_configured_public_v4_worker_recovery_reuse_protocol_separation_and_exact_read",
+        "tests/integration/test_shared_scoped_rf_consumer.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "independent-native-row-span-budget-final": {
+      "exit_code": 0,
+      "seconds": 21.173531599983107,
+      "tests": [
+        "tests/unit/document_understanding_root/test_native_table_production.py",
+        "tests/unit/document_understanding_root/test_native_table_observation.py",
+        "tests/unit/document_understanding_structure",
+        "tests/unit/pdf_table_observations",
+        "tests/unit/pdf_table_observations_root",
+        "tests/unit/du4_table_measurements",
+        "tests/unit/document_understanding_profiles/test_periodic_purpose_provenance.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    },
+    "root-native-final-review": {
+      "exit_code": 0,
+      "seconds": 7.344240500009619,
+      "tests": [
+        "tests/unit/document_understanding_root/test_native_table_production.py"
+      ],
+      "temp_removed": true,
+      "sentinel_unchanged": true,
+      "production_config_unchanged": true,
+      "supplier_calls": 0
+    }
+  },
+  "real_same_budget": [
+    {
+      "sample_id": "us-10q",
+      "parse_count": 1,
+      "supplier_calls": 0,
+      "final_work_used": 1989140,
+      "work_exhausted": false,
+      "selected_count": 39,
+      "originals_and_config_unchanged": true
+    },
+    {
+      "sample_id": "us-txt",
+      "parse_count": 1,
+      "supplier_calls": 0,
+      "final_work_used": 1035473,
+      "work_exhausted": false,
+      "selected_count": 96,
+      "originals_and_config_unchanged": true
+    }
+  ],
+  "archive_sha256": "697543e6842750d217cc79f4693fc8fd1607070762a25e67121d2a352fa4237a",
+  "archive_bytes": 101275,
+  "supplier_calls": 0,
+  "et_main_origin": "0cb71731cef6c6b3582f595d44f5b8a077392ac1",
+  "open": [
+    "default geometry intent and duplicate parse budget",
+    "real configured summaries",
+    "six historical citation errors and heldout quality",
+    "DU8 RF external reception",
+    "DU9 POLICY/PLANNER final delivery location unresolved",
+    "FF complete41/restart performance"
+  ]
+}

@@ -1,3 +1,11 @@
+## DU9 POLICY/PLANNER交付位置核对中 — 2026-10-16
+
+用户确认两包完成。ROOT已实际核对指定工区、全部本地DU9 refs/工作树、同名Projects目录和远端DU9 refs：POLICY f70318f1只有A调查文档，缺geometry_policy.py与测试；PLANNER 8ff47e28仅A测试，geometry_intent只有未提交contracts/__init__，B/C仍pending。尚未找到最终handoff、独审或完整实现，不能按完成签收，也不能把A调查当完整交付。已异步请求最终目录/commit，作者树保持只读，不擅自覆盖半成品。见[核对记录](review/du9_reception.md)。
+
+**Next Step：** 核对最终交付位置并按卡验收两组件；等待期间正常发布已通过测试的CWP工程WIP，不进入DU9或其他外包作者范围。
+
+---
+
 ## DU8两包工程接收并线完成，FF完整C仍OPEN — 2026-10-16
 
 两作者HEAD `6f381199`/`3ed248df` 完整历史均已保留并线，作者树只读不动。AUDIT共享reader精确数值/覆盖分母/冲突/预算根因已修；完整单测620PASS/2SKIP，归一化一处终审P2之后最终集中59PASS及独立8控例PASS。本地main `a2f216bd` 干净，`.agents`/`.claude`定点各5文件同步、38文件MATCH；无remote未创建。FF最终251PASS及独审0P1/P2，工程main/origin `c7c8867d` 正常推送，pre-push754PASS/7SKIP；唯一41例仍20PASS/4PARTIAL/17NOT_RUN、173.27s，C与完整中断重启仍OPEN，不能以0FAIL称全通过。详见[接收实施细则](review/du8_reception.md)。DU8RF、DU9白名单不进入。CWP冻结190PASS、ROOT17PASS和最新两实文档原2M预算通过（1,989,140/1,035,473，单parse/0API）；工程源码尚未发布，真实摘要质量仍未完成，原WIP保留。

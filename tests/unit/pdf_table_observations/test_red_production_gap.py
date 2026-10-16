@@ -39,14 +39,22 @@ def test_pdf_wire_carries_no_native_table_hints_today():
     assert all("native_tables" not in u["hints"] for u in observation["units"])
 
 
-def test_public_native_bridge_returns_no_pdf_tables_today():
+def test_public_native_bridge_binds_observed_pdf_values_without_inventing_row_roles():
     raw = real_pdf_bytes(pages=[_row_grid()])
-    _parsed, observation, _hints, _budget = parse_and_observe(raw, table_pages=(1,))
-    result = bind_native_tables(observation, work_budget=WorkBudget(100_000))
-    # GAP: the fine geometry exists on the wire, but nothing adapts it into a
-    # du4-table-observation/1, so the production binder sees zero PDF tables.
-    assert result["tables"] == []
-    assert result["status"] == "unavailable"
+    _parsed, observation, hints, _budget = parse_and_observe(raw, table_pages=(1,))
+    result = bind_native_tables(observation, layout_hints=hints, work_budget=WorkBudget(100_000))
+    assert result['tables'], 'the production bridge must consume observed fine slots'
+    units = {unit['unit_id']: unit['text'] for unit in observation['units']}
+    values = set()
+    for table in result['tables']:
+        for measurement in table['measurements']:
+            ref = measurement['value_ref']
+            text = units[ref['unit_id']]
+            assert 0 <= ref['char_start'] < ref['char_end'] <= len(text)
+            values.add(text[ref['char_start']:ref['char_end']])
+            # Native PDF slots prove position, not an HTML row-header role.
+            assert measurement['row_label_refs'] == []
+    assert {'16', '21', '38', '47'} <= values
 
 
 def test_continuation_data_row_is_declared_table_header_today():

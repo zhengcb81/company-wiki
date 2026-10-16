@@ -9,6 +9,8 @@ from __future__ import annotations
 
 from bisect import bisect_right
 from dataclasses import replace
+import hashlib
+import json
 from math import isfinite
 from time import monotonic
 from typing import Any, Mapping, Sequence
@@ -17,7 +19,9 @@ import unicodedata
 from company_wiki.document_normalization.layout_snapshots import project_layout_snapshot
 from company_wiki.document_normalization.layout_snapshots.identity import resolve_limits
 
-PDF_READING_LAYOUT_FEATURE_VERSION = "pdf-reading-layout/1"
+PDF_READING_LAYOUT_FEATURE_VERSION = "pdf-reading-layout/2"
+PDF_LAYOUT_CAPTURE_SCHEMA = "pdf-layout-capture/1"
+PDF_LAYOUT_CAPTURE_STRATEGY = "requested-pages/1"
 
 
 def _text(value: str) -> str:
@@ -59,6 +63,17 @@ class PdfLayoutCollector:
         self.bound_ids: set[str] = set()
         self.failed = False
         self.exhausted = False
+        # Source parsing opts into deferred fine capture after observing page
+        # purpose. Native material is held for at most the current/previous page.
+        # Direct collector callers retain their established immediate behavior.
+        self.defer_capture = False
+        self.pending_pages: dict[int, tuple[Any, Any, Mapping[str, Any]]] = {}
+        self.capture_mode = "direct"
+        self.source_page_count = 0
+        self.max_seconds = min(float(max_seconds), 15.0)
+        self.requested_pages: set[int] = set()
+        self.captured_page_ids: set[int] = set()
+        self.projected_page_ids: set[int] = set()
 
     def _diag(
         self, code: str, *, page: int | None = None, unit_id: str | None = None
@@ -101,6 +116,9 @@ class PdfLayoutCollector:
         return True
 
     def read_snapshot(self, page: Any, page_number: int) -> Mapping[str, Any]:
+        if self.defer_capture:
+            return self._read_pending_snapshot(page, page_number)
+        self.requested_pages.add(page_number)
         enabled = (
             self.captured_pages < self.limits["max_pages"]
             and self.limits["max_units"] > 0
@@ -127,10 +145,61 @@ class PdfLayoutCollector:
             self._diag("NATIVE_WORD_GEOMETRY_UNAVAILABLE", page=page_number)
         try:
             self._capture(page, page_number, snapshot, words)
+            self.captured_page_ids.add(page_number)
         except Exception:
             self.pages.pop(page_number, None)
             self._diag("NATIVE_LAYOUT_CAPTURE_FAILED", page=page_number)
         return snapshot
+
+    def _read_pending_snapshot(self, page: Any, number: int) -> Mapping[str, Any]:
+        """One native TextPage supplies base text and any later demanded fine view."""
+        text_page = None
+        if (self.limits["max_pages"] and self.limits["max_units"]
+                and self.limits["max_fine_elements"] and self._take()):
+            try:
+                import fitz  # type: ignore[import-untyped]
+                text_page = page.get_textpage(flags=fitz.TEXTFLAGS_DICT)
+            except (AttributeError, RuntimeError, TypeError, ValueError):
+                self._diag("NATIVE_TEXT_PAGE_UNAVAILABLE", page=number)
+        snapshot = (page.get_text("dict", sort=False, textpage=text_page)
+                    if text_page is not None else page.get_text("dict", sort=False))
+        # Image payload is never used by the text parser. Retain its original
+        # block position/type, not full image bytes in the one-page lookahead.
+        for block in snapshot.get("blocks", ()):
+            if isinstance(block, dict) and block.get("type") != 0:
+                block.pop("image", None)
+                block.pop("mask", None)
+        self.pending_pages[number] = (page, text_page, snapshot)
+        return snapshot
+
+    def capture_pending_page(self, number: int, *, requested: bool) -> None:
+        """Capture a real demand once, before its canonical page units are emitted."""
+        material = self.pending_pages.pop(number, None)
+        if not requested:
+            return
+        self.requested_pages.add(number)
+        enabled = (material is not None and material[1] is not None
+                   and self.captured_pages < self.limits["max_pages"]
+                   and self.processed < self.limits["max_units"]
+                   and self.captured_fine < self.limits["max_fine_elements"]
+                   and self._take())
+        if not enabled:
+            self._diag("LAYOUT_CAPTURE_DEFERRED", page=number)
+            return
+        assert material is not None  # enabled proves an existing native carrier
+        page, text_page, snapshot = material
+        try:
+            words = text_page.extractWORDS()
+        except (AttributeError, RuntimeError, TypeError, ValueError):
+            words = []
+            self._diag("NATIVE_WORD_GEOMETRY_UNAVAILABLE", page=number)
+        self.captured_pages += 1
+        try:
+            self._capture(page, number, snapshot, words)
+            self.captured_page_ids.add(number)
+        except Exception:
+            self.pages.pop(number, None)
+            self._diag("NATIVE_LAYOUT_CAPTURE_FAILED", page=number)
 
     def _capture(
         self, page: Any, number: int, snapshot: Mapping, words: Sequence
@@ -602,6 +671,7 @@ class PdfLayoutCollector:
                 "upstream_hints": dict(upstream, spans=native_spans),
             }
             result.append(replace(unit, metadata=metadata))
+        self.projected_page_ids.add(page)
         return tuple(result)
 
     def summary(self, units: Sequence[Any]) -> tuple[dict, tuple[dict, ...]]:
@@ -611,6 +681,28 @@ class PdfLayoutCollector:
         if deferred:
             self.failed = True
         self.pages.clear()
+        self.pending_pages.clear()
+        requested = sorted(self.requested_pages)
+        captured = sorted(self.captured_page_ids)
+        projected = sorted(self.projected_page_ids)
+        deferred_pages = sorted(self.requested_pages - self.projected_page_ids)
+        request = {"strategy": PDF_LAYOUT_CAPTURE_STRATEGY,
+                   "mode": self.capture_mode, "pages": requested,
+                   "limits": self.limits, "max_seconds": self.max_seconds}
+        capture = {
+            "schema_version": PDF_LAYOUT_CAPTURE_SCHEMA,
+            "strategy": PDF_LAYOUT_CAPTURE_STRATEGY,
+            "mode": self.capture_mode,
+            "request_sha256": hashlib.sha256(json.dumps(
+                request, sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
+            "complete": not deferred_pages and not self.exhausted,
+            "not_requested_page_count": max(0, self.source_page_count - len(requested)),
+        }
+        for name, values in (("requested", requested), ("captured", captured),
+                             ("projected", projected), ("deferred", deferred_pages)):
+            capture[name + "_page_count"] = len(values)
+            capture[name + "_pages"] = values[:128]
+            capture[name + "_pages_limited"] = len(values) > 128
         return {
             "feature_version": PDF_READING_LAYOUT_FEATURE_VERSION,
             "complete": not self.failed,
@@ -621,4 +713,5 @@ class PdfLayoutCollector:
             "deferred_limited": len(deferred) > 128,
             "fine_element_count": self.fine,
             "work_units": self.work,
+            "capture": capture,
         }, tuple(self.diagnostics)

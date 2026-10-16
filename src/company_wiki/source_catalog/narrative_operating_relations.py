@@ -13,7 +13,7 @@ from company_wiki.document_understanding.layout_hints.contract import WorkBudget
 from company_wiki.document_understanding.operating_states.relations import OperatingRelationSession
 
 from .n6_candidate_operating_facts import OperatingFact
-from .narrative_business_policy import project_reading_business_fact
+from .narrative_business_policy import assess_reading_business_fact, project_reading_business_fact
 
 
 class _ObservedUnits(Mapping):
@@ -49,6 +49,7 @@ class SourceOperatingSession:
         self.engine = OperatingRelationSession(_ObservedUnits(units, self.analysis), work_budget=work_budget)
         self.results: dict[str, dict[str, Any]] = {}
         self.facts: dict[str, OperatingFact] = {}
+        self.financial: dict[str, bool | None] = {}
         self.complete = True
 
     def owner_for(self, uid: str) -> str:
@@ -145,12 +146,18 @@ class SourceOperatingSession:
             if result["status"] == "partial" and self.work_budget.exhausted:
                 raise WorkBudgetExceeded("operating relation work exhausted")
             self.work_budget.charge(4 * len(text))
-            fact = project_reading_business_fact(text, result, ref_text=ref_text)
+            fact, financial = assess_reading_business_fact(text, result, ref_text=ref_text)
         except WorkBudgetExceeded:
             self.complete = False
             # Closed relations retain their exact qualifiers and states without
             # restarting the text recognizer or scanning an unexamined tail.
             fact = project_reading_business_fact(text, result,
                 include_description=False, ref_text=ref_text) if result["relations"] else OperatingFact()
+            financial = False if fact.financial_exempt else None
         self.facts[owner] = fact
+        self.financial[owner] = financial
         return fact
+
+    def financial_only(self, uid: str) -> bool | None:
+        self.fact(uid)
+        return self.financial[self.owner_for(uid)]

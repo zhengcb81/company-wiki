@@ -7,7 +7,6 @@ from __future__ import annotations
 
 from bisect import bisect_right
 from collections.abc import Mapping
-from copy import deepcopy
 from dataclasses import replace
 from hashlib import sha256
 from importlib import import_module
@@ -22,7 +21,7 @@ from company_wiki.document_understanding.summary_input import _sent_policies, _u
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded, DEFAULT_LIMITS
 
 from .narrative_budget import READING_BUDGET_POLICY
-from .narrative_business_policy import detect_reading_business_fact, reject_finance_only_text
+from .narrative_business_policy import detect_reading_business_fact, reading_financial_only
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
 from .narrative_finalize import finalize_selection
@@ -34,8 +33,6 @@ _BUSINESS_ROLES = frozenset({"business", "management_discussion", "operating_met
                              "fundraising", "industry", "outlook"})
 _CONTEXT_ROLES = frozenset({"operator", "analyst", "investor_question", "qa_text_shadow"})
 _NEVER_HEADING = re.compile(r"(?!x)x")
-_ACCOUNTING = re.compile(r"营业收入|营业成本|净利润|资产负债|每股收益|现金流量|货币资金|应收账款|"
-                         r"\b(?:revenue|net income|earnings per share|cash flow|balance sheet)\b", re.IGNORECASE)
 
 
 def _financial_only(text: str, fact: Any = None) -> bool:
@@ -43,18 +40,17 @@ def _financial_only(text: str, fact: Any = None) -> bool:
     # A source-bound billing/scope/operating-driver/contract-conversion relation
     # can contain revenue words. It is not a routine accounting total; the
     # legacy rejector knows none of these opt-in relations.
-    if fact.financial_exempt:
-        return False
-    return reject_finance_only_text(text) or bool(
-        _ACCOUNTING.search(text) and not fact.eligible)
+    return reading_financial_only(text, fact)
 
 
 def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = None,
-              is_heading: bool = False, table_qualified: bool = False) -> tuple[bool, Any]:
+              is_heading: bool = False, table_qualified: bool = False,
+              financial_only: bool | None = None) -> tuple[bool, Any]:
     fact = fact or detect_reading_business_fact(unit.raw_text)
     if kind == "operating_table" and not table_qualified:
         return False, fact
-    if unit.source_role in _CONTEXT_ROLES or (kind != "operating_table" and _financial_only(unit.raw_text, fact)):
+    if unit.source_role in _CONTEXT_ROLES or (kind != "operating_table" and
+            (financial_only if financial_only is not None else _financial_only(unit.raw_text, fact))):
         return False, fact
     # Glyphs/page counters are observed text, not operating descriptions. A
     # numeric cell of an already qualified operating table is different: its
@@ -82,19 +78,14 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
 
 def _qualified_table(package: Mapping[str, Any], units: Mapping[str, Any]):
     """Use the structure owner's one semantic service over actual table members."""
-    from company_wiki.document_understanding.structure.table_purpose import qualify_table
+    from company_wiki.document_understanding.structure.table_purpose import TablePurpose, qualify_package_table
 
-    members = list(dict.fromkeys(package.get("member_unit_ids", ())))
-    required = set(package.get("required_context_unit_ids", ()))
-    # Outside headings remain real dependencies. They cannot supply a missing
-    # operating purpose to an unrelated financial table on the same page.
-    context = [units[uid] for uid in members if uid in required]
-    body = [units[uid] for uid in members if uid not in required]
-    return qualify_table(
-        [unit.raw_text for unit in context if unit.unit_kind not in {"footnote", "table_caption"}],
-        [unit.raw_text for unit in body],
-        caption_texts=[unit.raw_text for unit in context if unit.unit_kind == "table_caption"],
-    )
+    prepared = package.get('table_purpose')
+    if prepared is not None:
+        return TablePurpose(prepared['status'], prepared['reason'], tuple(prepared['eligible_row_indices']))
+    # Compatibility for callers that supply a package without the shared pipeline.
+    return qualify_package_table(package, {uid: {'text': unit.raw_text, 'kind': unit.unit_kind}
+        for uid, unit in units.items() if uid in package['member_unit_ids']})
 
 
 def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, Any], classify=None):
@@ -442,6 +433,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 continue
             admitted, fact = _admitted(unit, view, package["kind"],
                                        fact=fact,
+                                       financial_only=session.financial_only(uid),
                                        is_heading=uid in headings, table_qualified=table_qualified)
             if not admitted:
                 continue
@@ -497,6 +489,17 @@ def _native_layout_summary(parsed: DocumentStructure) -> dict[str, Any] | None:
         result["native_ranges"] = {key: native_ranges[key] for key in (
             "feature_version", "complete", "captured_chars", "deferred_page_count", "deferred_pages")
             if key in native_ranges}
+    capture = coverage.get("capture")
+    if isinstance(capture, Mapping):
+        result['capture'] = {key: capture[key] for key in (
+            'schema_version', 'strategy', 'mode', 'request_sha256', 'complete',
+            'not_requested_page_count') if key in capture}
+        for phase in ('requested', 'captured', 'projected', 'deferred'):
+            pages = capture.get(phase + '_pages', ())
+            result['capture'][phase + '_pages'] = list(pages[:128])
+            result['capture'][phase + '_page_count'] = capture.get(phase + '_page_count', len(pages))
+            result['capture'][phase + '_pages_limited'] = bool(
+                capture.get(phase + '_pages_limited') or len(pages) > 128)
     identifiers = coverage.get("deferred_unit_ids", ())
     result["deferred_unit_ids"] = list(identifiers[:128])
     result["deferred_limited"] = bool(coverage.get("deferred_limited") or len(identifiers) > 128)
@@ -581,9 +584,14 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
     layout_coverage = dict(pipeline.get("layout_hints", {}).get("coverage", {}))
     if pipeline.get("native_layout_frontend") is not None:
         layout_coverage["native_frontend"] = pipeline["native_layout_frontend"]
+    constraints = list(_SHARED_CONSTRAINTS)
+    if any("table_structure_ambiguous" in span.quality_flags for span in package.evidence_spans):
+        constraints.append("Fragments flagged table_structure_ambiguous do not prove column, period, "
+                           "row-label or unit attribution. Use independently supported business prose; "
+                           "leave unproven numeric interpretations unknown.")
     return {"schema_version": "du-production-reading/2", "reading_policy_version": version,
             "reading_policies": policies, "business_facets": facets,
-            "constraints": list(_SHARED_CONSTRAINTS),
+            "constraints": constraints,
             "groups": groups, "unread": unread,
             "deferred": deferred, "layout_coverage": layout_coverage}
 
@@ -619,40 +627,12 @@ def _understand(parsed: DocumentStructure, *, title: str, kind: str, mime_type: 
         parts.append(part)
     if len(parts) == 1:
         return parts[0]
-    combined = deepcopy(parts[0])
-    combined["observation"]["units"] = []
-    combined["reading_plan"]["unit_profiles"] = {}
-    combined["reading_plan"]["used_profiles"] = []
-    combined["child_profiles"] = {}
-    combined["packages"]["packages"] = []
-    combined["non_selectable_unit_ids"] = []
-    combined["diagnostics"] = []
-    for source_id, part in zip(parents, parts):
-        def scope_key(key: Any = None) -> str:
-            return source_id + "|" + str(key or "root")
-        combined["observation"]["units"].extend(part["observation"]["units"])
-        combined["reading_plan"]["unit_profiles"].update({
-            uid: {**view, "reading_profile_key": scope_key(view.get("reading_profile_key"))}
-            for uid, view in part["reading_plan"]["unit_profiles"].items()})
-        # Namespace actual parent and child decisions together. A compatibility
-        # profile ID can denote more than one family (e.g. HK annual/interim);
-        # neither policy assembly nor dependency tracing may guess it later.
-        combined["child_profiles"][scope_key()] = part["profile"]
-        combined["child_profiles"].update({scope_key(key): profile
-                                          for key, profile in part.get("child_profiles", {}).items()})
-        combined["reading_plan"]["used_profiles"].extend({**used,
-            "reading_profile_key": scope_key(used.get("reading_profile_key"))}
-            for used in part["reading_plan"].get("used_profiles", ()))
-        combined["packages"]["packages"].extend({**entry,
-            "package_id": source_id + ":" + str(entry["package_id"])} for entry in part["packages"]["packages"])
-        combined["non_selectable_unit_ids"].extend(part.get("non_selectable_unit_ids", ()))
-        combined["diagnostics"].extend(part.get("diagnostics", ()))
-    combined["packages"]["non_selectable_unit_ids"] = combined["non_selectable_unit_ids"]
-    coverage = combined["structure"]["coverage"]
-    for key in ("deferred_unit_ids", "unassigned_unit_ids"):
-        coverage[key] = [uid for part in parts for uid in part["structure"]["coverage"].get(key, ())]
-    coverage["complete"] = all(part["structure"]["coverage"].get("complete") for part in parts)
-    return combined
+    # Each parent owns its structure and native evidence. Compose graph shells
+    # once; copying only the first graph silently loses later parent headings.
+    from .narrative_parent_composition import compose_parent_pipelines
+
+    budget.charge(len(parents))
+    return compose_parent_pipelines(parts, list(parents), work_budget=budget)
 
 
 def _selected_unit_spans(parsed: DocumentStructure, result: NarrativeEvidencePackage,
@@ -707,25 +687,17 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
         parsed, pipeline, work_budget=budget, _session_state=session_state)
     session = session_state["session"]
     origins = pipeline.get("_carrier_origins", {})
-    financial: dict[str, bool] = {}
     dropped = 0
     for unit in parsed.units:
         uid = session.owner_for(origins.get(unit.unit_id, unit.unit_id))
-        if budget.exhausted:
+        if budget.exhausted and uid not in session.facts:
             session.complete = False
             break
-        if uid not in financial:
-            fact = session.fact(uid)
-            if not session.complete and budget.exhausted:
-                break
-            if not fact.financial_exempt:
-                try:
-                    budget.charge(2 * len(session.source_text(uid)))
-                except WorkBudgetExceeded:
-                    session.complete = False
-                    break
-            financial[uid] = _financial_only(session.source_text(uid), fact)
-        dropped += financial[uid]
+        financial = session.financial_only(uid)
+        if financial is None:
+            session.complete = False
+            break
+        dropped += financial
     # Semantic 'unassigned' is not an unread page. It must not defeat a fully
     # read and positively classified finance-only document's zero-model result.
     processing_complete = graph_complete and session.complete and not budget.exhausted and not withheld and not any(
@@ -750,6 +722,17 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
         result = replace(result, coverage_complete=False,
                          status="partial" if result.evidence_spans else "needs_review")
     pipeline["selected_span_ids"] = _selected_unit_spans(parsed, result, pipeline)
+    # Preserve source bytes and IDs. The existing quality vocabulary carries
+    # unresolved table attribution into every model view, without an IO gate.
+    uncertain = {pipeline["selected_span_ids"][uid]
+                 for entry in eligible
+                 if entry["kind"] == "operating_table" and entry.get("table_binding_status") != "complete"
+                 for uid in set(entry["member_unit_ids"]) - set(entry.get("required_context_unit_ids", ()))
+                 if uid in pipeline["selected_span_ids"]}
+    if uncertain:
+        result = replace(result, evidence_spans=tuple(
+            replace(span, quality_flags=tuple(dict.fromkeys((*span.quality_flags, "table_structure_ambiguous"))))
+            if span.span_id in uncertain else span for span in result.evidence_spans))
     context = _context(pipeline, result, eligible)
     context["deferred"].extend({"package_id": item["package_id"], "reason": item["reason"]} for item in withheld)
     context["deferred_count"] = len(context["deferred"])

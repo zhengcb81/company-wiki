@@ -416,3 +416,45 @@ through the existing public entry points.
 
 See `.planning/du-bench/handoff.md` and `handoff.json` for the A/B/C evidence,
 known gaps, and the acquisition requests for ROOT.
+
+## Formal Phase C production runner (explicit v4)
+
+`phase_c_runner.py` is the single executable owner. `phase_c_launcher.py` invokes
+the actual configured batch CLI, `phase_c_bootstrap/sitecustomize.py` installs
+`phase_c_observer.py` in spawned workers, and
+`phase_c_failure_review_material.py` preserves failed native evidence. Old
+`.planning/.../owned-runner` scripts are compatibility forwards only; original
+paid inputs, preparations, costs and receipts remain external execution data.
+
+Run the complete engineering loopback without any `.planning` history, provider
+credentials or sibling checkouts (choose a new output directory):
+
+```powershell
+python -B tools/document_understanding_benchmark/phase_c_runner.py --mode loopback --output C:/Temp/cwp-phase-c-new-run --reading-model-projection reading-model-input/4
+```
+
+This drives the real configured CLI, spawned worker, public original replay,
+same-run recovery, cross-run zero-POST reuse, legacy default baseline, pre-POST
+missing/split gold controls and charged malformed-output handling. Its model
+response is a copied source fragment, so PASS does not certify semantic summary
+quality. `--consumer-projects C:/Users/<user>/Projects` additionally runs the
+existing FF/RF consumers; omission explicitly records consumers `NOT_RUN`.
+
+Live execution requires an explicit external preparation, the existing cumulative
+ledger and a new output directory. It retains the prepared provider settings; no
+model selection or credential is stored in this tool. Example argv:
+
+```powershell
+python -B tools/document_understanding_benchmark/phase_c_runner.py --mode live --sample cn-h1 --metadata <prepared-revision.json> --usage-ledger <existing-usage.jsonl> --output <new-receipt-dir> --consumer-projects <Projects-dir> --reading-model-projection reading-model-input/4
+```
+
+The public batch input accepts `reading_model_projection: reading-model-input/4`
+only with explicit `selector_version: 0.9.0`. Omission keeps current defaults.
+The existing manifest, actual decoder identity and artifact generation hashes
+remain the sole cache owner. No new store or approval chain is introduced.
+
+Focused regression (all fixtures isolated and cleaned; zero provider calls):
+
+```powershell
+python -B -m pytest tests/integration/test_shared_scoped_public_request.py tests/unit/test_narrative_scoped_runtime_binding.py tests/unit/test_narrative_scoped_runtime_legacy.py -q
+```

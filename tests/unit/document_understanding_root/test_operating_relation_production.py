@@ -1,5 +1,6 @@
 """Source-owned state consumption, native coordinates and one work owner."""
 import importlib.util
+import ast
 from pathlib import Path
 
 import pytest
@@ -155,11 +156,11 @@ def test_prepared_context_reused_but_same_text_different_parents_not_deduplicate
         contexts={first.units[0].unit_id: (question.unit_id,), sibling.unit_id: (question.unit_id,),
                   second.units[0].unit_id: (question.unit_id,)})
     views = []
-    original = relations.build_matching_view
-    def traced(text):
-        views.append(text)
-        return original(text)
-    monkeypatch.setattr(relations, "build_matching_view", traced)
+    original = relations.build_prepared_matching_view
+    def traced(prepared):
+        views.append(prepared.text)
+        return original(prepared)
+    monkeypatch.setattr(relations, "build_prepared_matching_view", traced)
     for unit in (first.units[0], sibling, second.units[0]):
         assert session.fact(unit.unit_id).eligible
     assert views.count(question.raw_text) == 1
@@ -174,6 +175,7 @@ def test_zero_budget_does_not_run_matching_or_plain_detector(monkeypatch):
     def forbidden(*_args, **_kwargs):
         pytest.fail("work continued after exhaustion")
     monkeypatch.setattr(relations, "build_matching_view", forbidden)
+    monkeypatch.setattr(relations, "prepare_matching_text", forbidden)
     session = SourceOperatingSession({u.unit_id: u for u in parsed.units}, work_budget=WorkBudget(0))
     assert not session.fact(parsed.units[0].unit_id).eligible
     assert not session.complete
@@ -222,3 +224,100 @@ def test_actual_qa_keeps_question_as_context_and_denial_as_answer_support():
             assert by_text[question.raw_text] not in view["support_evidence_ids"]
             assert by_text[answer.raw_text] in view["support_evidence_ids"]
             assert by_text[question.raw_text] in view["context_evidence_ids"]
+
+
+@pytest.mark.parametrize("text", ["公司产品包括精密传感器与控制器。",
+    "Our platform routes workloads across multiple models to reduce computing costs.",
+    "Industry export licensing requirements tightened."])
+def test_non_event_description_needs_no_offset_names_or_context_view(text, monkeypatch):
+    from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
+    parsed, _ = native([(text,), ("控股股东海岸公司已量产产品，是否已经商业化？",)])
+    def forbidden(*_args, **_kwargs):
+        pytest.fail("no-event description prepared heavy operating state machinery")
+    monkeypatch.setattr(relations, "build_matching_view", forbidden)
+    monkeypatch.setattr(relations, "build_prepared_matching_view", forbidden)
+    monkeypatch.setattr(relations, "_scan_name_classes", forbidden)
+    monkeypatch.setattr(relations, "_clause_events", forbidden)
+    session = SourceOperatingSession({u.unit_id: u for u in parsed.units}, work_budget=WorkBudget(100000),
+        contexts={parsed.units[0].unit_id: (parsed.units[1].unit_id,)})
+    assert session.fact(parsed.units[0].unit_id).eligible
+    assert session.relations(parsed.units[0].unit_id)["relations"] == []
+    assert not session.engine._views
+
+
+@pytest.mark.parametrize("raw,text,positions", [
+    ("公 \n司 现 无", "公司现无", (0, 3, 5, 7)),
+    ("ABC\r\n shipped", "ABC   shipped", tuple(range(13))),
+    ("並未生\n產", "并未生产", (0, 1, 2, 4)),
+    ("12 \nV", "12  V", tuple(range(5))),
+])
+def test_text_preparation_and_late_offsets_keep_old_scalar_mapping(raw, text, positions):
+    from company_wiki.document_understanding.operating_states.text_view import (
+        prepare_matching_text, build_prepared_matching_view, build_matching_view,
+    )
+    prepared = prepare_matching_text(raw)
+    assert prepared.text == text
+    assert not hasattr(prepared, "positions")
+    view = build_prepared_matching_view(prepared)
+    assert view.text == text and view.positions == positions
+    assert view == build_matching_view(raw)
+
+
+def test_necessary_trigger_is_derived_and_unknown_capture_is_full_fallback():
+    import re
+    from company_wiki.document_understanding.operating_states import patterns
+    assert relations._predicate_gate(patterns.EVENT_PATTERNS) is not None
+    assert relations._predicate_gate((("new", re.compile(r"(?P<pred>^manufacture)")),)) is None
+    assert relations._predicate_gate((("new", re.compile(r"(?P<a>x)(?P<pred>\1)")),)) is None
+    assert relations._predicate_gate((("new", re.compile(r"(?P<a>x)?(?P<pred>(?(a)yes|no))")),)) is None
+    assert relations._predicate_gate((("new", re.compile(r"(?P<pred>[])]word)")),)) is None
+    assert relations._predicate_gate((("new", re.compile(r"(?i:(?P<pred>manufacture))")),)) is None
+
+
+def test_trigger_preserves_all_old_relations_on_retained_specifications(monkeypatch):
+    from company_wiki.document_understanding.operating_states import patterns
+    from company_wiki.document_understanding.operating_states.text_view import build_matching_view
+    path = Path(__file__).parents[1] / "du4_operating_states/test_b_synthetic_specs.py"
+    cases = next(ast.literal_eval(node.value) for node in ast.parse(path.read_text(encoding="utf-8")).body
+        if isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id == "SYNTHETIC_CASES"
+                                               for target in node.targets))
+    gate = relations._predicate_gate(patterns.EVENT_PATTERNS)
+    assert gate is not None
+    for _name, text, _expected in cases:
+        with monkeypatch.context() as baseline:
+            baseline.setattr(relations, "_predicate_gate", lambda _patterns: None)
+            old = relations.detect_operating_relations(observation(text), work_budget=WorkBudget(100000))
+        new = relations.detect_operating_relations(observation(text), work_budget=WorkBudget(100000))
+        assert new["relations"] == old["relations"]
+        if old["relations"]:
+            assert gate.search(build_matching_view(text).text)
+
+
+def test_source_fact_and_financial_status_share_one_owner_assessment(monkeypatch):
+    from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
+    from company_wiki.source_catalog import narrative_business_policy as policy
+    text = "Total revenue increased 10%."
+    first, _ = native([(text,)])
+    second, _ = native([(text,)], source_sha="d" * 64)
+    session = SourceOperatingSession({u.unit_id:u for u in (*first.units, *second.units)},
+                                    work_budget=WorkBudget(100000))
+    calls = []
+    original = policy.detect_business_fact
+    def traced(value):
+        calls.append(value)
+        return original(value)
+    monkeypatch.setattr(policy, "detect_business_fact", traced)
+    for unit in (*first.units, *second.units):
+        session.fact(unit.unit_id)
+        assert session.financial_only(unit.unit_id) is True
+        assert session.financial_only(unit.unit_id) is True
+    assert calls.count(text) == 2  # one per actual parent, no text identity cache
+
+
+def test_production_admission_and_dropped_do_not_restart_financial_detector(monkeypatch):
+    parsed, _ = native([("公司已量产ZX-9产品。",), ("Total revenue increased 10%.",)])
+    def forbidden(*_args, **_kwargs):
+        pytest.fail("production restarted a text-only finance detector")
+    monkeypatch.setattr(reading, "_financial_only", forbidden)
+    result = reading.select_reading_evidence(parsed, title="2025 annual report", work_budget=WorkBudget(2000000))
+    assert any("已量产" in span.raw_text for span in result.evidence_spans)

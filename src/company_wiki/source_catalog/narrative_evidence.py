@@ -1082,6 +1082,24 @@ def _pdf_geometry_metadata(
     return result
 
 
+def _record_pdf_native_view(state: _PdfParseState, page_number: int, blocks: Sequence) -> None:
+    """One existing native-range owner for both legacy and streamed page scans."""
+    if state.native_view_limits is None or not blocks:
+        return
+    from .narrative_native_ranges import build_native_page_view
+    ceiling = min(state.native_view_limits["max_page_chars"],
+                  state.native_view_limits["max_total_chars"] - state.native_view_chars)
+    try:
+        view = build_native_page_view(blocks, max_chars=ceiling)
+    except (TypeError, ValueError):
+        view = None
+    if view is None:
+        state.native_view_deferred.append(page_number)
+    else:
+        state.native_views[page_number] = view
+        state.native_view_chars += len(view["text"])
+
+
 def _scan_pdf_pages(state: _PdfParseState, document: Any) -> None:
     for page_number, page in enumerate(document, start=1):
         try:
@@ -1092,19 +1110,7 @@ def _scan_pdf_pages(state: _PdfParseState, document: Any) -> None:
             )
             state.page_geometry[page_number] = geometry
             state.page_blocks.append((page_number, blocks))
-            if state.native_view_limits is not None and blocks:
-                from .narrative_native_ranges import build_native_page_view
-                ceiling = min(state.native_view_limits["max_page_chars"],
-                              state.native_view_limits["max_total_chars"] - state.native_view_chars)
-                try:
-                    view = build_native_page_view(blocks, max_chars=ceiling)
-                except (TypeError, ValueError):
-                    view = None
-                if view is None:
-                    state.native_view_deferred.append(page_number)
-                else:
-                    state.native_views[page_number] = view
-                    state.native_view_chars += len(view["text"])
+            _record_pdf_native_view(state, page_number, blocks)
             if not blocks:
                 state.empty_pages.add(page_number)
             state.pages_read += 1
@@ -1112,6 +1118,77 @@ def _scan_pdf_pages(state: _PdfParseState, document: Any) -> None:
             state.errors.append(f"page_text:{page_number}:{type(exc).__name__}")
             state.page_blocks.append((page_number, []))
             state.empty_pages.add(page_number)
+
+
+def _scan_and_emit_pdf_pages(
+    state: _PdfParseState, document: Any, *,
+    full_table_scan: bool, table_pages: Sequence[int] | None,
+) -> None:
+    """Bounded one-page lookahead; spend fine capture on actual source demands.
+
+    Base text, native ranges and canonical units retain physical source order.
+    A signal on the current page can admit its preceding neighbour before that
+    page is emitted. Neither a rich prefix nor a second full PDF parse is needed.
+    """
+    collector = state.layout_collector
+    assert collector is not None  # this branch is only the optional rich frontend
+    collector.defer_capture = True
+    collector.source_page_count = state.page_count
+    automatic = not full_table_scan and table_pages is None
+    fixed = (set() if automatic else
+             _pdf_table_scan_pages(state, full_table_scan, table_pages))
+    # Explicit empty table_pages is the existing text-only rich-layout request.
+    all_text_fine = table_pages is not None and not fixed and not full_table_scan
+    collector.capture_mode = ("all-pages" if full_table_scan or all_text_fine else
+                              "source-triage" if automatic else "explicit-table-pages")
+    if automatic:
+        from company_wiki.document_understanding.profiles.registry import configured_table_signal
+    pending = None
+    previous_trigger = False
+
+    def emit(number, blocks, selected):
+        if selected:
+            state.table_scan_pages.add(number)
+        collector.capture_pending_page(number, requested=bool(selected or all_text_fine))
+        _emit_pdf_page(state, document, number, blocks)
+
+    try:
+        for number, page in enumerate(document, start=1):
+            try:
+                geometry: dict[str, Any] = {}
+                blocks = _pdf_text_blocks(page, geometry_out=geometry,
+                                          layout_collector=collector, page_number=number)
+                state.page_geometry[number] = geometry
+                state.page_blocks.append((number, blocks))
+                _record_pdf_native_view(state, number, blocks)
+                if not blocks:
+                    state.empty_pages.add(number)
+                state.pages_read += 1
+            except Exception as exc:
+                state.errors.append(f"page_text:{number}:{type(exc).__name__}")
+                state.page_blocks.append((number, []))
+                state.empty_pages.add(number)
+                blocks = []
+            if automatic:
+                text = "\n".join(item[2] for item in blocks)
+                trigger = (_table_scan_signal(text, parser_version=state.parser_version)
+                           or configured_table_signal(text))
+                selected = trigger or previous_trigger or not blocks
+            else:
+                trigger = False
+                selected = number in fixed
+            if pending is not None:
+                prior_number, prior_blocks, prior_selected = pending
+                emit(prior_number, prior_blocks,
+                     prior_selected or bool(automatic and trigger))
+            pending = (number, blocks, selected)
+            previous_trigger = trigger
+        if pending is not None:
+            emit(*pending)
+    finally:
+        # Native page objects/TextPages/snapshots never become a parse cache.
+        collector.pending_pages.clear()
+        collector.pages.clear()
 
 
 def _pdf_table_scan_pages(
@@ -1396,11 +1473,15 @@ def _parse_pdf_document(
             limits=layout_limits, max_seconds=layout_max_seconds,
         )
     state.page_count = len(document)
-    _scan_pdf_pages(state, document)
-    state.table_scan_pages = _pdf_table_scan_pages(state, full_table_scan, table_pages,
-                                                 selector_version=selector_version)
-    for page_number, blocks in state.page_blocks:
-        _emit_pdf_page(state, document, page_number, blocks)
+    if state.layout_collector is not None:
+        _scan_and_emit_pdf_pages(state, document, full_table_scan=full_table_scan,
+                                table_pages=table_pages)
+    else:
+        _scan_pdf_pages(state, document)
+        state.table_scan_pages = _pdf_table_scan_pages(state, full_table_scan, table_pages,
+                                                     selector_version=selector_version)
+        for page_number, blocks in state.page_blocks:
+            _emit_pdf_page(state, document, page_number, blocks)
     units = _link_cross_page_qa(state.units)
     layout_coverage, layout_diagnostics = (
         state.layout_collector.summary(units)

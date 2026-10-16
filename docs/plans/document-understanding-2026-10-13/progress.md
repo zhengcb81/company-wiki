@@ -1,4 +1,10 @@
-## DU8工程接收发布 — 2026-10-16（当前）
+## DU9交付实查 — 2026-10-16（当前）
+
+指定POLICY工区f70318f1干净但仅A调查，无实现/测试；PLANNER工区8ff47e28有A RED与未提交contracts/__init__，缺planner实现，B/C未完成，无最终handoff/独审。已核对本地refs、注册worktrees、Projects同名目录及远端DU9 refs，未发现另一最终交付；异步问用户最终文件/commit，暂不动作者树。母线既有代码/资料保护，不因缺交付重写他人半成品。[接收记录](review/du9_reception.md)。
+
+---
+
+## DU8工程接收发布 — 2026-10-16（历史）
 
 两作者完整历史与ROOT修复已正常并入main，作者树未改。AUDIT `a2f216bd` 本地并线/干净，无remote；两安装目录各5技能文件定点同步，全部38文件MATCH。实际完整unittest620PASS/2SKIP(91.330s)，随后修独审复合locator/null归一化P2；最终59PASS/15subtests(7.49s)含unittest遗漏的17例，独立终审13SHA/8控例PASS。前后源版本与重叠计数分别保留，不虚报同一版本重跑全套。
 

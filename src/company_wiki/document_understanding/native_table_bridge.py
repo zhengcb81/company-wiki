@@ -10,11 +10,40 @@ from typing import Any
 from .layout_hints.contract import WorkBudget, WorkBudgetExceeded
 from .table_measurements import bind_operating_table
 
+NATIVE_TABLE_BRIDGE_VERSION = '2.1.0'
+
 
 def _each(values, budget):
     for index in range(len(values)):
         budget.charge()
         yield values[index]
+
+
+def _eligible_cells(table, eligible, budget):
+    """Retain admitted native rows and their actual header dependencies only."""
+    if eligible is None:
+        return table
+    active_rows = set()
+    needed_refs = set()
+    active_groups = set()
+    header_rows = set(_each(table['header_rows'], budget))
+    for cell in _each(table['cells'], budget):
+        if any(ref['unit_id'] in eligible for ref in _each(cell['text_refs'], budget)):
+            active_rows.add(cell['row'])
+            active_groups.add(cell.get('row_group'))
+            needed_refs.update(_each(cell.get('headers', ()), budget))
+            for ref in _each(cell.get('header_refs', ()), budget):
+                needed_refs.add(ref['unit_id'])
+    keep = []
+    for cell in _each(table['cells'], budget):
+        if (cell['row'] in active_rows or cell['row'] in header_rows
+                or cell.get('html_id') in needed_refs
+                or any(ref['unit_id'] in needed_refs for ref in _each(cell['text_refs'], budget))
+                or (cell.get('is_header') and cell.get('header_scope') in {'col', 'colgroup'})
+                or (cell.get('is_header') and cell.get('header_scope') == 'rowgroup'
+                    and cell.get('row_group') in active_groups)):
+            keep.append(cell)
+    return {**table, 'cells': keep}
 
 
 def _observation(table, units, budget):
@@ -67,7 +96,9 @@ def _observation(table, units, budget):
         'provenance':provenance,'truncated':not table['position_complete']}
 
 
-def bind_native_tables(observation: Mapping[str, Any], *, work_budget: WorkBudget) -> dict:
+def bind_native_tables(observation: Mapping[str, Any], *, work_budget: WorkBudget,
+                       layout_hints: Mapping[str, Any] | None = None,
+                       eligible_unit_ids: set[str] | None = None) -> dict:
     """Return existing binder results and a small transient coverage summary."""
     start = work_budget.used
     tables = []
@@ -90,7 +121,11 @@ def bind_native_tables(observation: Mapping[str, Any], *, work_budget: WorkBudge
                     seen.add(key)
                     tables.append(table)
         for table in _each(tables, work_budget):
-            native = _observation(table, units, work_budget)
+            if eligible_unit_ids is not None and not any(
+                ref['unit_id'] in eligible_unit_ids for cell in _each(table['cells'], work_budget)
+                for ref in _each(cell['text_refs'], work_budget)):
+                continue
+            native = _observation(_eligible_cells(table, eligible_unit_ids, work_budget), units, work_budget)
             if native is None:
                 diagnostics.append({'code':'NATIVE_TABLE_REFS_UNAVAILABLE','scope':table['scope']})
                 status = 'partial'
@@ -99,6 +134,25 @@ def bind_native_tables(observation: Mapping[str, Any], *, work_budget: WorkBudge
             results.append(result)
             if work_budget.exhausted:
                 raise WorkBudgetExceeded('native table binding exhausted caller work')
+        # The format owner projects observed fine slots; both formats use the
+        # same measurement binder and caller budget. No second PDF parse.
+        from company_wiki.document_normalization.pdf_table_observations import build_pdf_table_observations
+
+        pdf = (build_pdf_table_observations(observation, layout_hints, work_budget=work_budget)
+               if eligible_unit_ids is None or eligible_unit_ids else
+               {'tables': [], 'diagnostics': [], 'status': 'unavailable'})
+        diagnostics.extend(pdf['diagnostics'])
+        for table in _each(pdf['tables'], work_budget):
+            if eligible_unit_ids is not None:
+                work_budget.charge(len(table['units']))
+                if not eligible_unit_ids.intersection(table['units']):
+                    continue
+            results.append(bind_operating_table(_eligible_cells(table, eligible_unit_ids, work_budget),
+                                               work_budget=work_budget))
+            if work_budget.exhausted:
+                raise WorkBudgetExceeded('PDF table binding exhausted caller work')
+        if pdf['status'] == 'partial' and (pdf['tables'] or work_budget.exhausted):
+            status = 'partial'
         if status != 'partial' and results:
             states = {row['status'] for row in results}
             status = next(iter(states)) if states in ({'complete'}, {'unavailable'}) else 'partial'
@@ -107,3 +161,57 @@ def bind_native_tables(observation: Mapping[str, Any], *, work_budget: WorkBudge
         diagnostics.append({'code':'WORK_BUDGET_EXCEEDED'})
     return {'status':status,'tables':results,'diagnostics':diagnostics,
             'work_used':work_budget.used-start}
+
+
+def close_native_table_dependencies(packages: Mapping[str, Any], bindings: Mapping[str, Any],
+                                    *, work_budget: WorkBudget) -> dict[str, Any]:
+    """Carry exact bound labels with their value's existing reading package.
+
+    A text ref never invents a new unit. Whole row owners remain body material,
+    even when label and value offsets share that owner. The binder has already
+    checked parent/page scope; ambiguous measurements stay diagnostic.
+    """
+    work_budget.charge()
+    by_value: dict[str, list[tuple[Mapping[str, Any], str]]] = {}
+    for table in _each(bindings.get('tables', ()), work_budget):
+        for measurement in _each(table['measurements'], work_budget):
+            by_value.setdefault(measurement['value_ref']['unit_id'], []).append(
+                (measurement, table.get('status', 'unavailable')))
+    rows = []
+    for package in _each(packages['packages'], work_budget):
+        if package['kind'] != 'operating_table':
+            rows.append(package)
+            continue
+        required = set(package.get('required_context_unit_ids', ()))
+        members = list(package['member_unit_ids'])
+        body = set(members) - required
+        matched: list[tuple[Mapping[str, Any], str]] = []
+        for uid in _each(members, work_budget):
+            if uid not in body:
+                continue
+            matched.extend(by_value.get(uid, ()))
+        statuses = set()
+        for measurement, source_status in _each(matched, work_budget):
+            statuses.add(measurement['binding_status'])
+            if source_status != 'complete':
+                statuses.add('source_incomplete')
+            if not measurement['row_label_refs']:
+                statuses.add('row_label_unknown')
+            if measurement['binding_status'] != 'bound':
+                continue
+            refs = []
+            for name in ('row_label_refs', 'unit_refs', 'scope_refs', 'qualifier_refs'):
+                refs.extend(_each(measurement[name], work_budget))
+            period = measurement.get('period')
+            if period is not None:
+                refs.extend(_each(period['raw_label_refs'], work_budget))
+            for ref in _each(refs, work_budget):
+                if ref['unit_id'] not in body:
+                    required.add(ref['unit_id'])
+        extra = required - set(members)
+        work_budget.charge(len(extra))
+        rows.append({**package, 'member_unit_ids': members + sorted(extra),
+                     'required_context_unit_ids': sorted(required),
+                     'table_binding_status': ('complete' if statuses == {'bound'} else
+                                              'partial' if matched else 'unavailable')})
+    return {**packages, 'packages': rows}

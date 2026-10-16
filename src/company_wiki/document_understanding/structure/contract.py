@@ -152,6 +152,7 @@ class ObservationUnit:
         "has_layout",
         "has_hints",
         "layout_inconsistent",
+        "native_row_headers",
     )
 
     def __init__(self, payload: Mapping[str, Any], position: int) -> None:
@@ -196,6 +197,7 @@ class ObservationUnit:
         self.layout_inconsistent = (
             raw_bbox is not None and self.bbox is None
         ) or self._column_conflicts_with_box()
+        self.native_row_headers: tuple[str, ...] = ()
 
     def _column_conflicts_with_box(self) -> bool:
         """A lane index that disagrees with the box's own half of the page."""
@@ -280,6 +282,7 @@ def parse_observation(
         raise StructureInputError("units must be a sequence")
 
     units: list[ObservationUnit] = []
+    native_tables: list[Any] = []
     seen: set[str] = set()
     if work is not None:
         # Reserve the actual sequence before its iterator or any unit parser.
@@ -304,6 +307,15 @@ def parse_observation(
             raise StructureInputError(f"duplicate unit_id {unit.unit_id!r}")
         seen.add(unit.unit_id)
         units.append(unit)
+        hints = payload.get('hints') or {}
+        # Borrow existing producer descriptors, never copy native arrays or
+        # recover a span from text/adjacency. The structure owner consumes them.
+        if isinstance(hints, Mapping):
+            tables = hints.get('native_tables')
+            if isinstance(tables, Sequence) and not isinstance(tables, (str, bytes)):
+                if work is not None:
+                    work.budget.charge(len(tables))
+                native_tables.extend(tables)
 
     coverage = document.get("coverage")
     metadata = document.get("metadata")
@@ -315,6 +327,7 @@ def parse_observation(
         },
         "metadata": dict(metadata) if isinstance(metadata, Mapping) else {},
         "coverage": dict(coverage) if isinstance(coverage, Mapping) else {},
+        "native_tables": native_tables,
     }
     return envelope, units
 

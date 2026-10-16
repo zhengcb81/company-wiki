@@ -23,6 +23,7 @@ import re
 from collections import deque
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
+from functools import lru_cache
 from typing import Any
 
 from company_wiki.document_understanding.layout_hints.contract import (
@@ -31,7 +32,9 @@ from company_wiki.document_understanding.layout_hints.contract import (
 )
 
 from . import patterns as p
-from .text_view import MatchingView, build_matching_view, split_clauses, strip_connector
+from .text_view import (MatchingText, MatchingView, build_matching_view,
+                        build_prepared_matching_view, prepare_matching_text,
+                        split_clauses, strip_connector)
 
 OBSERVATION_SCHEMA = "du4-operating-observation/1"
 RELATIONS_SCHEMA = "du4-operating-relations/1"
@@ -184,13 +187,73 @@ def _unit(units, key, budget):
     return value
 
 
-def _view_and_names(unit, budget):
+def _view_and_names(unit, budget, text: MatchingText | None = None):
     # Reserve character work before constructing the offset map or scanning
     # names. Unreferenced units and arbitrary metadata are never copied.
     budget.charge(len(unit['text']))
-    view = build_matching_view(unit['text'])
+    view = build_matching_view(unit['text']) if text is None else build_prepared_matching_view(text)
     budget.charge(2 * len(view.text))
     return view, _scan_name_classes(view)
+
+
+def _predicate_expression(pattern: str, group: str) -> str | None:
+    """Read an existing named predicate, without inventing a second lexicon."""
+    marker = "(?P<" + group + ">"
+    if pattern.count(marker) != 1 or "[]" in pattern or "[[" in pattern:
+        return None
+    start = pattern.find(marker)
+    if start < 0:
+        return None
+    start += len(marker)
+    depth, escaped, char_class = 1, False, False
+    for index in range(start, len(pattern)):
+        char = pattern[index]
+        if escaped:
+            escaped = False
+            continue
+        if char == "\\":
+            escaped = True
+        elif char == "[" and not char_class:
+            char_class = True
+        elif char == "]" and char_class:
+            char_class = False
+        elif not char_class:
+            if char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    return pattern[start:index]
+    return None
+
+
+@lru_cache(maxsize=1)
+def _predicate_gate(entries):
+    """A conservative necessary condition derived from the actual grammar.
+
+    Every emitted relation must capture its predicate. Removing its surrounding
+    assertion grammar only widens matching. Context-sensitive captures, external
+    backrefs or future unsupported flags disable this optimization entirely;
+    they never become absence. The original rules still decide all semantics.
+    """
+    expressions = []
+    for construction, regex in entries:
+        if regex.flags & ~(re.I | re.U) or re.search(r"\(\?[aiLmsux-]", regex.pattern):
+            return None
+        group = "qual" if construction == "shipment_en" and "pred" not in regex.groupindex else "pred"
+        expression = _predicate_expression(regex.pattern, group)
+        if expression is None or any(token in expression for token in
+                ("(?=", "(?!", "(?<", "(?P", "^", "$", "\\A", "\\Z", "\\z")):
+            return None
+        if re.search(r"\(\?(?!:)", expression):
+            return None
+        if re.search(r"\\[1-9]", expression):
+            return None
+        expressions.append("(?i:" + expression + ")" if regex.flags & re.I else "(?:" + expression + ")")
+    try:
+        return re.compile("|".join(dict.fromkeys(expressions)))
+    except re.error:
+        return None
 
 
 # ---------------------------------------------------------------- name classes
@@ -653,6 +716,7 @@ class OperatingRelationSession:
         self.units = units
         self.work_budget = work_budget
         self._units: dict[str, Any] = {}
+        self._texts: dict[str, MatchingText] = {}
         self._views: dict[str, tuple[MatchingView, dict[str, str]]] = {}
         self._results: dict[tuple[str, tuple[str, ...]], dict[str, Any]] = {}
 
@@ -663,9 +727,16 @@ class OperatingRelationSession:
 
     def prepared(self, uid: str):
         if uid not in self._views:
-            self._views[uid] = _view_and_names(self.unit(uid), self.work_budget)
+            self._views[uid] = _view_and_names(self.unit(uid), self.work_budget, self.matching_text(uid))
         view, names = self._views[uid]
         return view, dict(names)
+
+    def matching_text(self, uid: str):
+        if uid not in self._texts:
+            unit = self.unit(uid)
+            self.work_budget.charge(len(unit["text"]))
+            self._texts[uid] = prepare_matching_text(unit["text"])
+        return self._texts[uid]
 
     def detect(self, unit_id: str, context_unit_ids: tuple[str, ...] = ()):
         key = (unit_id, context_unit_ids)
@@ -707,9 +778,10 @@ def _detect_operating_relations(
     contexts_used: list[str] = []
 
     try:
-        target_unit = prepared.unit(target) if prepared else _unit(units, target, work_budget)
-        target_view, name_classes = (prepared.prepared(target) if prepared else
-                                    _view_and_names(target_unit, work_budget))
+        if prepared is None:
+            prepared = OperatingRelationSession(units, work_budget=work_budget)
+        target_unit = prepared.unit(target)
+        target_text = prepared.matching_text(target)
         target_parent = target_unit["parent_id"]
         seen_contexts: set[str] = set()
         for index in range(len(context_ids)):
@@ -723,17 +795,13 @@ def _detect_operating_relations(
             if context_id not in units:
                 diagnostics.append({"code": "context_unit_missing", "unit_id": context_id})
                 continue
-            context_unit = prepared.unit(context_id) if prepared else _unit(units, context_id, work_budget)
+            context_unit = prepared.unit(context_id)
             if context_unit["parent_id"] != target_parent:
                 diagnostics.append({"code": "context_parent_mismatch", "unit_id": context_id})
                 continue
-            context_view, context_names = (prepared.prepared(context_id) if prepared else
-                                          _view_and_names(context_unit, work_budget))
-            for name, label in context_names.items():
-                name_classes.setdefault(name, label)
             contexts_used.append(context_id)
 
-        if not target_view.text.strip():
+        if not target_text.text.strip():
             diagnostics.append({"code": "unit_text_unavailable", "unit_id": target})
             return {
                 "schema_version": RELATIONS_SCHEMA,
@@ -744,6 +812,20 @@ def _detect_operating_relations(
                 "work_used": work_budget.used - used_before,
             }
 
+        work_budget.charge(len(target_text.text))
+        gate = _predicate_gate(p.EVENT_PATTERNS)
+        if gate is not None and not gate.search(target_text.text):
+            return {"schema_version": RELATIONS_SCHEMA, "unit_id": target,
+                "relations": [], "diagnostics": diagnostics,
+                "status": "partial" if diagnostics else "complete",
+                "work_used": work_budget.used - used_before}
+        # Only an actual possible predicate needs offset maps and contextual
+        # name attribution. Normalized source characters were prepared once.
+        target_view, name_classes = prepared.prepared(target)
+        for context_id in contexts_used:
+            _context_view, context_names = prepared.prepared(context_id)
+            for name, label in context_names.items():
+                name_classes.setdefault(name, label)
         scan = _UnitScan(target_view, name_classes)
         work_budget.charge(len(target_view.text))
         clauses = split_clauses(target_view)
@@ -765,7 +847,8 @@ def _detect_operating_relations(
                 span = (clause[0], clause[1])
                 relations[-1]["qualifier_refs"].append(_to_ref(target, target_view, span))
                 continue
-            events = _clause_events(target_view, scan, clause, clause_text, work_budget)
+            events = (_clause_events(target_view, scan, clause, clause_text, work_budget)
+                      if gate is None or gate.search(clause_text) else [])
             if not events:
                 stripped = clause_text.strip()
                 if stripped:

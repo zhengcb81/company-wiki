@@ -514,7 +514,7 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
     return tuple(dict.fromkeys(reasons))
 
 
-def detect_reading_business_fact(text: str) -> OperatingFact:
+def _detect_reading_business_fact(text: str, recognize) -> OperatingFact:
     """Operating activity and bounded business relationships, independent of issuer.
 
     Legacy replay keeps its historical recognizer. The reading policy admits
@@ -529,8 +529,8 @@ def detect_reading_business_fact(text: str) -> OperatingFact:
         if not (_brand_portfolio(clause)[0] and not _brand_portfolio(clause)[1]))
     # Preserve the old bounded per-native-line recognizer for all unfiltered
     # material. A long wrapped tail must not erase an already observed fact.
-    fact = detect_business_fact('. '.join(source_clauses) if len(source_clauses) != len(clauses)
-                                else matching_script_text(text))
+    fact = recognize('. '.join(source_clauses) if len(source_clauses) != len(clauses)
+                     else matching_script_text(text))
     activity = any(_OBJECT.search(clause) and _ACTIVITY.search(clause) for clause in clauses)
     relations = _reading_relations(clauses)
     if not relations and not activity and not _business_fact(interpreted).eligible:
@@ -541,7 +541,7 @@ def detect_reading_business_fact(text: str) -> OperatingFact:
         # still carry independently proven source facts; raw spans are untouched.
         source_clauses = tuple(clause for clause in clauses if not _REVENUE_GROWTH.search(clause))
         if len(source_clauses) != len(clauses):
-            fact = detect_business_fact(". ".join(source_clauses))
+            fact = recognize(". ".join(source_clauses))
     if not activity and not relations:
         return fact
     families = business_objects(interpreted)
@@ -553,8 +553,43 @@ def detect_reading_business_fact(text: str) -> OperatingFact:
                          max(fact.score, 3), fact.financial_exempt or bool(relations))
 
 
+def detect_reading_business_fact(text: str) -> OperatingFact:
+    """Compatibility text recognizer; production supplies source relationships."""
+    return _detect_reading_business_fact(text, detect_business_fact)
+
+
+_READING_ACCOUNTING = re.compile(r"营业收入|营业成本|净利润|资产负债|每股收益|现金流量|货币资金|应收账款|"
+    r"\b(?:revenue|net income|earnings per share|cash flow|balance sheet)\b", re.IGNORECASE)
+
+
+def reading_financial_only(text: str, fact: OperatingFact, *, recognize=None) -> bool:
+    """The existing finance predicate, optionally sharing raw legacy facts.
+
+    detect_business_fact.eligible is exactly the OR of the two legacy
+    recognizers used by reject_finance_only_text; no new finance rule is added.
+    """
+    if fact.financial_exempt:
+        return False
+    rejected = (reject_finance_only_text(text) if recognize is None else
+                bool(_FINANCE.search(text) and not recognize(text).eligible))
+    return rejected or bool(_READING_ACCOUNTING.search(text) and not fact.eligible)
+
+
+def assess_reading_business_fact(text: str, source_relations: dict, *, ref_text=None):
+    """One call-local description/finance assessment for one source owner."""
+    legacy_facts: dict[str, OperatingFact] = {}
+    def recognize(value):
+        if value not in legacy_facts:
+            legacy_facts[value] = detect_business_fact(value)
+        return legacy_facts[value]
+    description = _detect_reading_business_fact(text, recognize)
+    fact = project_reading_business_fact(text, source_relations, description=description, ref_text=ref_text)
+    return fact, reading_financial_only(text, fact, recognize=recognize)
+
+
 def project_reading_business_fact(text: str, source_relations: dict, *,
-                                  include_description: bool = True, ref_text=None) -> OperatingFact:
+                                  include_description: bool = True, ref_text=None,
+                                  description: OperatingFact | None = None) -> OperatingFact:
     """Combine independent descriptions with source-owned operating states.
 
     The text-only compatibility recognizer cannot assert progress in production.
@@ -562,7 +597,7 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
     never reparses predicates, changes refs or borrows an actor from a noun.
     Legacy 0.8 recognition remains unchanged.
     """
-    fact = detect_reading_business_fact(text) if include_description else OperatingFact()
+    fact = (description if description is not None else detect_reading_business_fact(text)) if include_description else OperatingFact()
     dynamic_reasons = {"operating_activity", "specific_business_event",
                        "applied_operating_milestone", "customer_adoption_milestone"}
     independent = tuple(reason for reason in fact.reasons if reason not in dynamic_reasons)

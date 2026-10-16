@@ -40,7 +40,7 @@ from .layout_hints.contract import WorkBudget, WorkBudgetExceeded, resolve_limit
 from .native_signal_bridge import collect_native_signals
 
 PIPELINE_SCHEMA_VERSION = "du-pipeline/1"
-PIPELINE_FEATURE_VERSION = "1.10.0"
+PIPELINE_FEATURE_VERSION = "1.12.0"
 
 #: Families whose documents carry business narrative worth reading closely. A document that
 #: routes to ``administrative`` is *readable* but is not expected to yield narrative, so the
@@ -199,6 +199,38 @@ def understand_units(
         unit_reading_plan=reading_plan["unit_profiles"],
     )
 
+    from .native_table_bridge import bind_native_tables, close_native_table_dependencies
+
+    try:
+        # Purpose is determined once from the real table's own fields, before
+        # costly numeric binding. Source selection reuses this transient result.
+        from .structure.table_purpose import qualify_package_table
+        from dataclasses import asdict
+
+        original_units = {unit['unit_id']: unit for unit in observation['units']}
+        eligible_ids = set()
+        prepared_packages = []
+        for package in packages['packages']:
+            budget.charge()
+            if package['kind'] == 'operating_table':
+                members = package['member_unit_ids']
+                budget.charge(sum(1 + len(original_units[uid]['text']) // 64
+                                  for uid in members if uid in original_units))
+                purpose = qualify_package_table(package, original_units)
+                package = {**package, 'table_purpose': asdict(purpose)}
+                body = [uid for uid in members if uid not in package.get('required_context_unit_ids', ())]
+                if purpose.eligible and not package.get('truncated'):
+                    eligible_ids.update(body[index] for index in purpose.eligible_row_indices)
+            prepared_packages.append(package)
+        packages = {**packages, 'packages': prepared_packages}
+        table_bindings = bind_native_tables(observation, layout_hints=layout_hints,
+                                            eligible_unit_ids=eligible_ids, work_budget=budget)
+        packages = close_native_table_dependencies(packages, table_bindings, work_budget=budget)
+    except WorkBudgetExceeded:
+        return _deferred_pipeline(source_id, source_sha256, source_unit_count, budget,
+                                  observation=observation, layout_hints=layout_hints,
+                                  structure=structure)
+
     return {
         "schema_version": PIPELINE_SCHEMA_VERSION,
         "feature_version": PIPELINE_FEATURE_VERSION,
@@ -214,6 +246,7 @@ def understand_units(
         "reading_plan": reading_plan,
         "layout_hints": layout_hints,
         "source_signals": native_signals,
+        "table_bindings": table_bindings,
         "non_selectable_unit_ids": non_selectable,
         "plan": _plan(route, profile, structure, packages),
         "diagnostics": _pipeline_diagnostics(route, structure, packages) + reading_plan["diagnostics"]

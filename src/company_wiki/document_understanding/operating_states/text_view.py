@@ -44,15 +44,35 @@ class MatchingView:
         return self.positions[start], self.positions[end - 1] + 1
 
 
-def build_matching_view(text: str) -> MatchingView:
-    """Length-safe script reading; elide only inter-CJK wrapping whitespace."""
+@dataclass(frozen=True)
+class MatchingText:
+    """Matching characters without allocating any original-position map."""
+
+    text: str
+    converted: str
+
+
+def prepare_matching_text(text: str) -> MatchingText:
+    """The single script/wrapping owner, shared by preflight and exact refs."""
     if not isinstance(text, str):
         raise TypeError("unit text must be a string")
-    converted: list[str] = []
-    for character in text:
-        reading = matching_script_text(character)
-        converted.append(reading if len(reading) == 1 else character)
-    out_chars: list[str] = []
+    if text.isascii():
+        converted = text
+    else:
+        characters = []
+        for character in text:
+            reading = matching_script_text(character)
+            characters.append(reading if len(reading) == 1 else character)
+        converted = "".join(characters)
+    compact = re.sub(r"(?<=[㐀-鿿])\s+(?=[㐀-鿿])", "", converted)
+    # Two original CR/LF characters remain two spaces outside CJK wrapping,
+    # exactly as the historical scalar-position view, not bulk reading text.
+    return MatchingText(compact.replace("\r", " ").replace("\n", " "), converted)
+
+
+def build_prepared_matching_view(prepared: MatchingText) -> MatchingView:
+    """Allocate offsets only when an observed predicate can need them."""
+    converted = prepared.converted
     out_positions: list[int] = []
     index = 0
     total = len(converted)
@@ -62,20 +82,23 @@ def build_matching_view(text: str) -> MatchingView:
             run_end = index
             while run_end < total and converted[run_end].isspace():
                 run_end += 1
-            previous_cjk = bool(out_chars) and bool(_CJK_RE.fullmatch(out_chars[-1]))
+            previous_cjk = index > 0 and bool(_CJK_RE.fullmatch(converted[index - 1]))
             next_cjk = run_end < total and bool(_CJK_RE.fullmatch(converted[run_end]))
             if previous_cjk and next_cjk:
                 index = run_end
                 continue
             for run_index in range(index, run_end):
-                out_chars.append(" " if converted[run_index] in "\r\n" else converted[run_index])
                 out_positions.append(run_index)
             index = run_end
             continue
-        out_chars.append(character)
         out_positions.append(index)
         index += 1
-    return MatchingView("".join(out_chars), tuple(out_positions))
+    return MatchingView(prepared.text, tuple(out_positions))
+
+
+def build_matching_view(text: str) -> MatchingView:
+    """Length-safe script reading; elide only inter-CJK wrapping whitespace."""
+    return build_prepared_matching_view(prepare_matching_text(text))
 
 
 def split_clauses(view: MatchingView) -> list[tuple[int, int]]:

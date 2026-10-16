@@ -141,6 +141,8 @@ def _build_structure(observation, *, limits=None, work_budget=None, state=None):
     resolved = resolve_limits(limits)
     work = WorkPlan(work_budget) if work_budget is not None else None
     envelope, units = parse_observation(observation, work=work)
+    from .table_purpose import attach_native_row_headers
+    attach_native_row_headers(envelope.get('native_tables', ()), units, work_budget=work_budget)
     diagnostics: list[dict] = []
 
     if not units:

@@ -1,0 +1,442 @@
+[
+  {
+    "wire": {
+      "schema_version": "narrative-batch-request/1",
+      "run_id": "legacy-public-freeze",
+      "sources": [
+        {
+          "schema_version": "2.0",
+          "document_id": "fixture-document",
+          "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "byte_size": 100,
+          "mime_type": "text/plain"
+        }
+      ],
+      "profile": "P2",
+      "max_seconds": 40,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "model_id": "stub-model",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "allow_local_http": true
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      }
+    },
+    "normalized": {
+      "schema_version": "narrative-batch-request/1",
+      "run_id": "legacy-public-freeze",
+      "sources": [
+        {
+          "schema_version": "2.0",
+          "document_id": "fixture-document",
+          "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "byte_size": 100,
+          "mime_type": "text/plain"
+        }
+      ],
+      "profile": "P2",
+      "max_seconds": 40.0,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "allow_local_http": true,
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "max_output_tokens": 2400,
+        "max_request_bytes": 262144,
+        "max_response_bytes": 262144,
+        "model_id": "stub-model",
+        "timeout_seconds": 60
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "max_final_bytes": 2097152,
+      "max_persistent_bytes": 1073741824,
+      "max_scratch_bytes": 2147483648
+    },
+    "request_sha256": "ca390a0c92b99253744edd272b8fea22943b972b3e086e3893dc39d24f38c0b8",
+    "input_hash": "3141699e820531324ba2cdc8b2bd6510580015e3e27385807d90817ac9b1cad6"
+  },
+  {
+    "wire": {
+      "schema_version": "narrative-batch-request/1",
+      "run_id": "legacy-public-freeze",
+      "sources": [
+        {
+          "schema_version": "2.0",
+          "document_id": "fixture-document",
+          "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "byte_size": 100,
+          "mime_type": "text/plain"
+        }
+      ],
+      "profile": "P2",
+      "max_seconds": 40,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "model_id": "stub-model",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "allow_local_http": true
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "selector_version": "0.8.0"
+    },
+    "normalized": {
+      "selector_version": "0.8.0",
+      "schema_version": "narrative-batch-request/1",
+      "run_id": "legacy-public-freeze",
+      "sources": [
+        {
+          "schema_version": "2.0",
+          "document_id": "fixture-document",
+          "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "byte_size": 100,
+          "mime_type": "text/plain"
+        }
+      ],
+      "profile": "P2",
+      "max_seconds": 40.0,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "allow_local_http": true,
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "max_output_tokens": 2400,
+        "max_request_bytes": 262144,
+        "max_response_bytes": 262144,
+        "model_id": "stub-model",
+        "timeout_seconds": 60
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "max_final_bytes": 2097152,
+      "max_persistent_bytes": 1073741824,
+      "max_scratch_bytes": 2147483648
+    },
+    "request_sha256": "09a58d6d015dbca79f2a58437dd15af4a303a614cf6113db7204703ffd0b81ed",
+    "input_hash": "d7da951cc3b0e74d8e49a0bbc6cc756a1db2399852782a3ee589285abc5ec44f"
+  },
+  {
+    "wire": {
+      "schema_version": "narrative-batch-request/1",
+      "run_id": "legacy-public-freeze",
+      "sources": [
+        {
+          "schema_version": "2.0",
+          "document_id": "fixture-document",
+          "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "byte_size": 100,
+          "mime_type": "text/plain"
+        }
+      ],
+      "profile": "P2",
+      "max_seconds": 40,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "model_id": "stub-model",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "allow_local_http": true
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "selector_version": "0.9.0"
+    },
+    "normalized": {
+      "selector_version": "0.9.0",
+      "schema_version": "narrative-batch-request/1",
+      "run_id": "legacy-public-freeze",
+      "sources": [
+        {
+          "schema_version": "2.0",
+          "document_id": "fixture-document",
+          "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "byte_size": 100,
+          "mime_type": "text/plain"
+        }
+      ],
+      "profile": "P2",
+      "max_seconds": 40.0,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "allow_local_http": true,
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "max_output_tokens": 2400,
+        "max_request_bytes": 262144,
+        "max_response_bytes": 262144,
+        "model_id": "stub-model",
+        "timeout_seconds": 60
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "max_final_bytes": 2097152,
+      "max_persistent_bytes": 1073741824,
+      "max_scratch_bytes": 2147483648
+    },
+    "request_sha256": "cb590bf85e829a5488f8cbc15f33b703f41bece0b05756cdea3891ec9a9533ea",
+    "input_hash": "80d5e946af9313a78e7afa257c0df3a65fe43242a1db6e02632ad744613a9909"
+  },
+  {
+    "wire": {
+      "schema_version": "narrative-batch-request/2",
+      "run_id": "legacy-public-freeze",
+      "profile": "P2",
+      "max_seconds": 40,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "model_id": "stub-model",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "allow_local_http": true
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "items": [
+        {
+          "kind": "raw",
+          "source_ref": {
+            "schema_version": "2.0",
+            "document_id": "fixture-document",
+            "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "byte_size": 100,
+            "mime_type": "text/plain"
+          }
+        }
+      ]
+    },
+    "normalized": {
+      "schema_version": "narrative-batch-request/2",
+      "run_id": "legacy-public-freeze",
+      "items": [
+        {
+          "kind": "raw",
+          "source_ref": {
+            "schema_version": "2.0",
+            "document_id": "fixture-document",
+            "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "byte_size": 100,
+            "mime_type": "text/plain"
+          }
+        }
+      ],
+      "profile": "P2",
+      "max_seconds": 40.0,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "allow_local_http": true,
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "max_output_tokens": 2400,
+        "max_request_bytes": 262144,
+        "max_response_bytes": 262144,
+        "model_id": "stub-model",
+        "timeout_seconds": 60
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "max_final_bytes": 2097152,
+      "max_persistent_bytes": 1073741824,
+      "max_scratch_bytes": 2147483648
+    },
+    "request_sha256": "a283cb22427273ca5c43c0941c6fc77ad4cdbb11acbdd563fa5841d173593070",
+    "input_hash": "94cc0b5e841318b577e78bc1d2e777113bc02c7a10396948273fa3b58804abb9"
+  },
+  {
+    "wire": {
+      "schema_version": "narrative-batch-request/2",
+      "run_id": "legacy-public-freeze",
+      "profile": "P2",
+      "max_seconds": 40,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "model_id": "stub-model",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "allow_local_http": true
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "items": [
+        {
+          "kind": "raw",
+          "source_ref": {
+            "schema_version": "2.0",
+            "document_id": "fixture-document",
+            "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "byte_size": 100,
+            "mime_type": "text/plain"
+          }
+        }
+      ],
+      "selector_version": "0.8.0"
+    },
+    "normalized": {
+      "selector_version": "0.8.0",
+      "schema_version": "narrative-batch-request/2",
+      "run_id": "legacy-public-freeze",
+      "items": [
+        {
+          "kind": "raw",
+          "source_ref": {
+            "schema_version": "2.0",
+            "document_id": "fixture-document",
+            "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "byte_size": 100,
+            "mime_type": "text/plain"
+          }
+        }
+      ],
+      "profile": "P2",
+      "max_seconds": 40.0,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "allow_local_http": true,
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "max_output_tokens": 2400,
+        "max_request_bytes": 262144,
+        "max_response_bytes": 262144,
+        "model_id": "stub-model",
+        "timeout_seconds": 60
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "max_final_bytes": 2097152,
+      "max_persistent_bytes": 1073741824,
+      "max_scratch_bytes": 2147483648
+    },
+    "request_sha256": "cbc37253b9d888d88926dc564c080dec8acd60f04e3599396e9153d3f276cb39",
+    "input_hash": "7b9714c17c0bc3398928868abe231c9a53da8e740df90706b391b29008b171f5"
+  },
+  {
+    "wire": {
+      "schema_version": "narrative-batch-request/2",
+      "run_id": "legacy-public-freeze",
+      "profile": "P2",
+      "max_seconds": 40,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "model_id": "stub-model",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "allow_local_http": true
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "items": [
+        {
+          "kind": "raw",
+          "source_ref": {
+            "schema_version": "2.0",
+            "document_id": "fixture-document",
+            "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "byte_size": 100,
+            "mime_type": "text/plain"
+          }
+        }
+      ],
+      "selector_version": "0.9.0"
+    },
+    "normalized": {
+      "selector_version": "0.9.0",
+      "schema_version": "narrative-batch-request/2",
+      "run_id": "legacy-public-freeze",
+      "items": [
+        {
+          "kind": "raw",
+          "source_ref": {
+            "schema_version": "2.0",
+            "document_id": "fixture-document",
+            "source_id": "urn:company-wiki:source:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "byte_size": 100,
+            "mime_type": "text/plain"
+          }
+        }
+      ],
+      "profile": "P2",
+      "max_seconds": 40.0,
+      "max_tokens": 100000,
+      "max_cost_usd": "1",
+      "model": {
+        "allow_local_http": true,
+        "api_key_env": "LOOPBACK_TEST_KEY",
+        "endpoint": "http://127.0.0.1:12345/chat/completions",
+        "max_output_tokens": 2400,
+        "max_request_bytes": 262144,
+        "max_response_bytes": 262144,
+        "model_id": "stub-model",
+        "timeout_seconds": 60
+      },
+      "pricing": {
+        "version": "fixture-price/1",
+        "input_micro_usd_per_million_tokens": 1000000,
+        "output_micro_usd_per_million_tokens": 2000000
+      },
+      "max_final_bytes": 2097152,
+      "max_persistent_bytes": 1073741824,
+      "max_scratch_bytes": 2147483648
+    },
+    "request_sha256": "f29a83b659718f4ea0a4cc4d420da337ecf2d39d7af1e3916af857cf48faa783",
+    "input_hash": "c25bc2aad084886989c946624cbc382ca8375b6b2b922750643cdc503129b60a"
+  }
+]

@@ -62,9 +62,11 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
     from .observation_adapter import OBSERVATION_ADAPTER_VERSION
     from .narrative_continuity import NARRATIVE_CONTINUITY_FEATURE_VERSION
     from .structure import table_purpose
+    from .native_table_bridge import NATIVE_TABLE_BRIDGE_VERSION
     from company_wiki.document_normalization import text_matching
 
-    versions = {"inventory": "1.3.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+    versions = {"inventory": "1.4.0", "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
+            "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
             "source_usability": _source_usability_version(
                 mime_type or ("application/pdf" if pdf_frontend else None), material_matcher),
             "business_policy": READING_BUSINESS_POLICY_VERSION,
@@ -78,6 +80,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
     if pdf_frontend:
         for key, module_name, attribute in (
             ("pdf_frontend", "company_wiki.source_catalog.narrative_pdf_layout", "PDF_READING_LAYOUT_FEATURE_VERSION"),
+            ("pdf_capture", "company_wiki.source_catalog.narrative_pdf_layout", "PDF_LAYOUT_CAPTURE_STRATEGY"),
             ("pdf_projection", "company_wiki.document_normalization.layout_snapshots", "FEATURE_VERSION"),
             ("pdf_native_range", "company_wiki.source_catalog.narrative_native_ranges", "NATIVE_PAGE_VIEW_FEATURE_VERSION"),
             ("pdf_native_range_parser", "company_wiki.source_catalog.narrative_native_ranges", "NATIVE_RANGE_PARSER_VERSION"),
@@ -97,7 +100,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
 def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
                used_facets: set[str], *, complete: bool = True,
                carrier: str | None = None, actual_frontend: str | None = None,
-               material_matcher: str | None = None) -> dict[str, Any]:
+               material_matcher: str | None = None, capture_digest: str | None = None) -> dict[str, Any]:
     components = []
     candidates = []
     if len(scopes) > 64:
@@ -169,6 +172,11 @@ def _inventory(scopes: Sequence[Mapping[str, Any]], bindings: Mapping[str, str],
             components.append({"component_id": "pdf-frontend-used|" + actual_frontend,
                 "version": "native-frontend-use/1", "content_digest": proof, "matcher_digest": proof,
                 "scope_ids": [scope["scope_id"] for scope in scopes]})
+        if capture_digest:
+            components.append({'component_id': 'pdf-capture-used|' + capture_digest,
+                'version': 'source-capture-use/1', 'content_digest': capture_digest,
+                'matcher_digest': capture_digest,
+                'scope_ids': [scope['scope_id'] for scope in scopes]})
     return {"schema_version": "du-decision-trace/1", "scopes": list(scopes),
             "components": components, "candidates": candidates,
             "versions": versions,
@@ -263,8 +271,10 @@ def build_decision_trace(pipeline: Mapping[str, Any], *, used_facet_ids: Sequenc
         material_matcher = (_NORMALIZED_MATERIAL_MATCHER
                             if all(name == PARSER_NAME for name in source_parser_names)
                             else _NARRATIVE_MATERIAL_MATCHER)
+    capture = (pipeline.get('native_layout_frontend') or {}).get('capture')
     return _inventory(scopes, bindings, set(used_facet_ids), complete=complete, carrier=carrier,
-                      actual_frontend=frontend, material_matcher=material_matcher)
+                      actual_frontend=frontend, material_matcher=material_matcher,
+                      capture_digest=_digest(capture) if isinstance(capture, Mapping) else None)
 
 
 def current_decision_trace(frozen: Mapping[str, Any]) -> dict[str, Any]:
@@ -321,9 +331,26 @@ def current_decision_trace(frozen: Mapping[str, Any]) -> dict[str, Any]:
                 and set(proof.get("scope_ids", ())) == {scope["scope_id"] for scope in frozen.get("scopes", ())}):
             material_matcher = actual
             matcher_complete = True
+    # This is the immutable source attempt's actual coverage, not a prediction
+    # of what a new parse would capture. Current algorithm versions still cause
+    # invalidation; replay does not reread an original just to recreate a digest.
+    capture_proofs = [row for row in frozen.get('components', ())
+                      if row['component_id'].startswith('pdf-capture-used|')]
+    capture_digest = None
+    capture_complete = not capture_proofs
+    if len(capture_proofs) == 1 and carrier == 'application/pdf':
+        proof = capture_proofs[0]
+        actual = proof['component_id'].removeprefix('pdf-capture-used|')
+        if (len(actual) == 64 and all(c in '0123456789abcdef' for c in actual)
+                and proof.get('version') == 'source-capture-use/1'
+                and proof.get('content_digest') == proof.get('matcher_digest') == actual
+                and set(proof.get('scope_ids', ())) == {s['scope_id'] for s in frozen.get('scopes', ())}):
+            capture_digest, capture_complete = actual, True
     return _inventory(frozen.get("scopes", ()), bindings, used,
-                      complete=frozen.get("inventory_complete", frozen.get("status") == "complete") and matcher_complete,
-                      carrier=carrier, actual_frontend=actual_frontend, material_matcher=material_matcher)
+                      complete=frozen.get("inventory_complete", frozen.get("status") == "complete")
+                      and matcher_complete and capture_complete,
+                      carrier=carrier, actual_frontend=actual_frontend, material_matcher=material_matcher,
+                      capture_digest=capture_digest)
 
 
 __all__ = ["build_decision_trace", "current_decision_trace"]

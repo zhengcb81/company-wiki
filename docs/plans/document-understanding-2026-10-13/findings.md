@@ -1,4 +1,10 @@
-## DU8接收根因发现 — 2026-10-16（当前）
+## DU9交付状态与实际工区不一致 — 2026-10-16（当前）
+
+两份施工卡均要求完整A/B/C+独立审查，不要求A后停止。可见POLICY progress却写“冻结A等待ROOT接线/B实施”，且没有实际compile模块/typed catalog字段/新增测试；PLANNER仅A RED和未提交DTO/入口，无实现及handoff。这是交付定位或提前停止的事实缺口，不能猜测已经全量完成；先核对最终交付文件，仍保持作者树只读。与ROOT可独立发布的既有生产工程分开，不追加运行门禁。
+
+---
+
+## DU8接收根因发现 — 2026-10-16（历史）
 
 AUDIT已在既有EvidenceReader统一精确JSON/字段定位/缓存/时间，保留所有坏/重复输入分母，修字节版本/冲突复活/非法pointer；无第二解析器预算或运行许可。最后独审又抓到复合primary locator+null字段回退漏归一化，保存实际RED再复用split_locator修，独立终审通过后已并入本地main/定点安装。完整unittest漏发现一个pytest函数文件17个参数化用例，已单独补跑；不按预计总数编造覆盖。FF工程同样已并线推送，但唯一41链仅20PASS/4PARTIAL/17NOT_RUN，C继续OPEN。197次Python boot/35次FF parent call表明静态分组2.02%收益不足以根治成本；下一步定位并消除重复启动/准备，保持固定输入/边界/来源证明，不抬限额。中断observer须观察当前state与零→新增GET，无法证明准确kill瞬间仍在网络阻塞；完整矩阵中断后重启仍NOT_RUN。三损坏UTF8文档已按原字节hex/SHA留档重建。原失败与最终版本分别保留。[接收细则](review/du8_reception.md)。
 

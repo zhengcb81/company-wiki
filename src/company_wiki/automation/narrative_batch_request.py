@@ -140,6 +140,7 @@ class NarrativeBatchRequest:
     items: tuple[NarrativeBatchItem, ...] = ()
     schema_version: str = BATCH_REQUEST_SCHEMA
     selector_version: str | None = None
+    reading_model_projection: str | None = None
 
     @classmethod
     def from_dict(cls, value: object) -> NarrativeBatchRequest:
@@ -169,6 +170,7 @@ class NarrativeBatchRequest:
                 "max_persistent_bytes",
                 "max_scratch_bytes",
                 "selector_version",
+                "reading_model_projection",
             }
         ):
             raise ValueError("unsupported projected batch request fields")
@@ -179,6 +181,15 @@ class NarrativeBatchRequest:
         selector = None
         if "selector_version" in value:
             selector = resolve_narrative_selector_version(_text(value["selector_version"], "selector_version"))
+        projection = None
+        if "reading_model_projection" in value:
+            from .narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION
+
+            projection = _text(value["reading_model_projection"], "reading_model_projection")
+            if projection != SCOPED_MODEL_PROJECTION_VERSION:
+                raise ValueError("unsupported reading_model_projection")
+            if selector != "0.9.0":
+                raise ValueError("explicit reading_model_projection requires selector_version 0.9.0")
         membership = value[membership_field]
         if not isinstance(membership, list) or not 1 <= len(membership) <= 100:
             raise ValueError("batch must contain 1 to 100 explicit work items")
@@ -278,6 +289,7 @@ class NarrativeBatchRequest:
             tuple(items.values()) if projected else (),
             value["schema_version"],
             selector,
+            projection,
         )
 
     @property
@@ -294,6 +306,8 @@ class NarrativeBatchRequest:
         return {
             **({"refresh": True} if self.refresh else {}),
             **({"selector_version": self.selector_version} if self.selector_version is not None else {}),
+            **({"reading_model_projection": self.reading_model_projection}
+               if self.reading_model_projection is not None else {}),
             "schema_version": self.schema_version,
             "run_id": self.run_id,
             **(

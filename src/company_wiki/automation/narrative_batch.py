@@ -789,6 +789,9 @@ def _projection_loader(catalog):
 
 def _item_generation(request, payload, *, normalization=None, versions=None,
                      reading_model_projection=READING_PROJECTION_UNSET):
+    if (reading_model_projection is READING_PROJECTION_UNSET
+            and request.reading_model_projection is not None):
+        reading_model_projection = request.reading_model_projection
     versions = versions or _execution_versions(request)
     if payload.subject.kind == "raw":
         raw_versions = {
