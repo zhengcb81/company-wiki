@@ -22,7 +22,7 @@
   ],
   "deferred_table_page_count": 94,
   "unit_count": 3126,
-  "seconds": 0.68,
+  "seconds": 0.663,
   "layout_capture": {
    "processed_page_count": 64,
    "processed_unit_count": 2303,
@@ -104,7 +104,8 @@
   }
  ],
  "denominator": {
-  "table_claims": 4,
+  "wire_table_claims": 4,
+  "tables_built": 4,
   "slots_observed": 75,
   "refs_located": 75,
   "cells_without_located_ref": 0,
@@ -126,7 +127,7 @@
  },
  "values": [
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:264e5f9a8dccf5975a94d2f3d10313da267be423bb668a5651361dd5dca652bb",
@@ -141,7 +142,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:264e5f9a8dccf5975a94d2f3d10313da267be423bb668a5651361dd5dca652bb",
@@ -156,7 +157,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:264e5f9a8dccf5975a94d2f3d10313da267be423bb668a5651361dd5dca652bb",
@@ -171,7 +172,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:e743d11ab20f67cf2f5df7881c49f54d2a6b7ca29929562380abdcf374b65527",
@@ -186,7 +187,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:e743d11ab20f67cf2f5df7881c49f54d2a6b7ca29929562380abdcf374b65527",
@@ -201,7 +202,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:e743d11ab20f67cf2f5df7881c49f54d2a6b7ca29929562380abdcf374b65527",
@@ -216,7 +217,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:7e1c48ba5b70c426883068123d4a8c0280a86e5c2ad923dd2e924fe5b7f0b594",
@@ -231,7 +232,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:7e1c48ba5b70c426883068123d4a8c0280a86e5c2ad923dd2e924fe5b7f0b594",
@@ -246,7 +247,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:3917ab6feef46b532df3609a6d286e0311cc1c3946762b07b898d07d4c383fca",
@@ -261,7 +262,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:be2b798dd9b1a63a40cd26f97ce5878852632c2463527616a92ff2dfaa8d8503",
@@ -276,7 +277,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:e496043533e8459bda88a44643d8cfb00a2309faa64504d931fb5cbcd243be20",
@@ -291,7 +292,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:6911f6adbacea22b60f5ed8583cb5e2f3f9d64120524b7f842d4d1b9b9786502",
@@ -306,7 +307,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:06c6f0bb51a0e565cd40f78ded8b6af9b3d327846d79a553b64ebf483954d954",
@@ -321,7 +322,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 61,
    "table_id": "p61:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:ee08c7a1d3ab59b42424b0006e2c5d11f61e384cdb078a906cabc18d81c400d1",
@@ -336,7 +337,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:ef50ec1c1283ccd2c2e66ef93cf3b81c0f74cdb1039a25fce0d0397423b3c478",
@@ -351,7 +352,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:70fb73ec9fe9b370775a5e7496d6498b28047c60b1ebc2f91e5b34f2dc630cc7",
@@ -366,7 +367,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:27b7cb60fac59c109206bf70844b073eeaed97546d68abe9201618e241a7252b",
@@ -381,7 +382,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:27b7cb60fac59c109206bf70844b073eeaed97546d68abe9201618e241a7252b",
@@ -396,7 +397,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:27b7cb60fac59c109206bf70844b073eeaed97546d68abe9201618e241a7252b",
@@ -411,7 +412,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:c918629d81209b7a5b44f588c9cee29ab23b870c8846f5da5963d92c94c93b8b",
@@ -426,7 +427,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:c918629d81209b7a5b44f588c9cee29ab23b870c8846f5da5963d92c94c93b8b",
@@ -441,7 +442,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:c918629d81209b7a5b44f588c9cee29ab23b870c8846f5da5963d92c94c93b8b",
@@ -456,7 +457,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:f9f6a70708097e2b79168090c698f4be5785a511c48dbac871b9f77ca62ab05b",
@@ -471,7 +472,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:f9f6a70708097e2b79168090c698f4be5785a511c48dbac871b9f77ca62ab05b",
@@ -486,7 +487,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:f9f6a70708097e2b79168090c698f4be5785a511c48dbac871b9f77ca62ab05b",
@@ -501,7 +502,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:1c9cb22dc5c0655573e9091203381ba1b684324cfbb7e179254238c2f385afde",
@@ -516,7 +517,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:1c9cb22dc5c0655573e9091203381ba1b684324cfbb7e179254238c2f385afde",
@@ -531,7 +532,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:1c9cb22dc5c0655573e9091203381ba1b684324cfbb7e179254238c2f385afde",
@@ -546,7 +547,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:8882fe54b745e4aa96512b6c179bc40e3d1f6368818b06ce5829874a7b57f310",
@@ -561,7 +562,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:8882fe54b745e4aa96512b6c179bc40e3d1f6368818b06ce5829874a7b57f310",
@@ -576,7 +577,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:8882fe54b745e4aa96512b6c179bc40e3d1f6368818b06ce5829874a7b57f310",
@@ -591,7 +592,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:fc98315a187016fdf634d15c06598393b668cdf025857526096d11151b731e71",
@@ -606,7 +607,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:fc98315a187016fdf634d15c06598393b668cdf025857526096d11151b731e71",
@@ -621,7 +622,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:fc98315a187016fdf634d15c06598393b668cdf025857526096d11151b731e71",
@@ -636,7 +637,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:9e71fc779621cae88ad7dd3deefd0bce427f62a0986470f98898231a9ded89b1",
@@ -651,7 +652,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:9e71fc779621cae88ad7dd3deefd0bce427f62a0986470f98898231a9ded89b1",
@@ -666,7 +667,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:9e71fc779621cae88ad7dd3deefd0bce427f62a0986470f98898231a9ded89b1",
@@ -681,7 +682,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:22c0fad257c5643ce9b1d00ffc71cd1276ebb5f32e8198f54f2b757cc9a0ddcd",
@@ -696,7 +697,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:22c0fad257c5643ce9b1d00ffc71cd1276ebb5f32e8198f54f2b757cc9a0ddcd",
@@ -711,7 +712,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:22c0fad257c5643ce9b1d00ffc71cd1276ebb5f32e8198f54f2b757cc9a0ddcd",
@@ -726,7 +727,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:2a486db12c17d9b1ca2daf25482704a9b196ad2e444fb0b8a801484b59c2a679",
@@ -741,7 +742,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:2a486db12c17d9b1ca2daf25482704a9b196ad2e444fb0b8a801484b59c2a679",
@@ -756,7 +757,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:2a486db12c17d9b1ca2daf25482704a9b196ad2e444fb0b8a801484b59c2a679",
@@ -771,7 +772,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:a3489cefd5bcbebe290c83335921292847c2fd4200d4a6f0f90c2ea24615e319",
@@ -786,7 +787,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "37f7c62de54b",
+   "source_id": "urn:company-wiki:source:sha256:37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
    "page": 62,
    "table_id": "p62:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:a3489cefd5bcbebe290c83335921292847c2fd4200d4a6f0f90c2ea24615e319",
@@ -808,5 +809,5 @@
   "derived_files_deleted": true,
   "work_dir_was_temporary": true
  },
- "wall_seconds": 1.403
+ "wall_seconds": 1.389
 }

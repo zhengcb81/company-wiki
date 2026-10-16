@@ -105,16 +105,18 @@ scalar offsets 才是值定位依据。fine cell 的 `native_cell_char_start/end
 （parse_pdf_bytes→build_observation→bind_native_tables 对 PDF 表产出 0 张表；续表第 0 数据行被标
 table_header 的错误假设），并与非 fixture 常量方案（本组件按关系证据得 header_rows）对照断言。
 
-- `receipts/red-1-pre-implementation.log`：首个行为红（组件导入失败收集错误；含当时测试夹具管线的
-  一次 TypeError，夹具在复现前已修，实现未受影响）。
-- `receipts/red-2-behavior-replay.log`：夹具修正后、隐藏实现复现缺组件状态的完整行为红
+- `receipts/red-1-pre-implementation.log`：首个行为红。该轮 pytest 因组件导入失败的收集错误中断
+  （6×ModuleNotFoundError），缺口演示同轮未执行到。
+- `receipts/red-2-behavior-replay.log`：隐藏实现复现缺组件状态的完整行为红
   （3 failed + 6 collection errors 为组件缺失；**3 passed 为经现行公开适配链的缺口/错误假设演示**，
-  即"接口未导入不是全部RED"）。实现提交后行为套件 30/30 全绿（`receipts/component-tests-final.log`）。
+  即"接口未导入不是全部RED"）。中间另有一轮缺口演示复跑曾因本 lane 测试夹具的重复传参 TypeError 失败，
+  夹具当场修正且该轮输出未单独留档，事实以上述两份留档收据为准。
+  实现提交后行为套件 31/31 全绿（`receipts/component-tests-final.log`）。
 
 ## B-1 实施结果
 
 组件 `src/company_wiki/document_normalization/pdf_table_observations/`（`build_pdf_table_observations`），
-行为测试 `tests/unit/pdf_table_observations/` 30 项（B-1..B-6 覆盖清单 + 真实管线 capstone + RED 演示）。
+行为测试 `tests/unit/pdf_table_observations/` 31 项（B-1..B-6 覆盖清单 + 真实管线 capstone + RED 演示）。
 计费公式固定在模块 docstring 并被测试断言（合并调用=单表调用之和-1 的单次索引性质）。
 旧 TABLE/layout 相关测试集中回归：**516 passed / 24 skipped / 0 failed**
 （`receipts/old-suite-regression.log`；du4_table_measurements、document_understanding_root、

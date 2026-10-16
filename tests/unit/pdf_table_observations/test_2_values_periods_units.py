@@ -150,6 +150,50 @@ def test_verbatim_values_negative_dash_and_strings_are_not_rewritten():
     assert "海外直营门店" not in values and "单位：（人民币万元）" not in values
 
 
+def test_scale_currency_and_composite_unit_words_stay_verbatim():
+    # 卡 B-2 点名：万元/亿元/币种/复合单位都不改原词，单位引用指向各自原片段
+    rows = {
+        0: [(0, "项目"), (1, "截至2025年12月31日")],
+        1: [(0, "合同负债（人民币亿元）"), (1, "3.2")],
+        2: [(0, "海外收入（US$千元）"), (1, "1,024")],
+        3: [(0, "每股收益（人民币元）"), (1, "0.52")],
+        4: [(0, "门店数（家）"), (1, "7,000")],
+    }
+    units = [
+        row_unit(
+            f"u-r{row}",
+            cells,
+            row=row,
+            table_id=TABLE,
+            parent=PARENT,
+            kind="table_header" if row == 0 else "table_row",
+        )
+        for row, cells in rows.items()
+    ]
+    hints = layout_hints(
+        region_units=[u["unit_id"] for u in units],
+        header_units=["u-r0"],
+        data_rows=[[f"u-r{r}"] for r in range(1, 5)],
+    )
+    result = build_pdf_table_observations(observation(units), hints, work_budget=budget())
+    table, = result["tables"]
+    texts = {_slice(table, ref) for cell in table["cells"] for ref in cell["text_refs"]}
+    # 原词逐字保留：数值、单位词、复合单位括号都不改写
+    assert {"3.2", "1,024", "0.52", "7,000"} <= texts
+    assert {"合同负债（人民币亿元）", "海外收入（US$千元）", "每股收益（人民币元）", "门店数（家）"} <= texts
+
+    bound = bind_operating_table(table, work_budget=budget())
+    by_value = {
+        _slice(table, m["value_ref"]): m for m in bound["measurements"]
+    }
+    assert sorted(by_value) == ["0.52", "1,024", "3.2", "7,000"]
+    assert [_slice(table, r) for r in by_value["3.2"]["unit_refs"]] == ["（人民币亿元）"]
+    assert [_slice(table, r) for r in by_value["1,024"]["unit_refs"]] == ["（US$千元）"]
+    assert [_slice(table, r) for r in by_value["0.52"]["unit_refs"]] == ["（人民币元）"]
+    assert by_value["7,000"]["unit_refs"] == []  # 计数单位无量纲表达时不造单位
+    assert [_slice(table, r) for r in by_value["3.2"]["row_label_refs"]] == ["合同负债（人民币亿元）"]
+
+
 def test_missing_header_evidence_stays_unknown():
     obs, hints = _sample()
     # 没有任何共享 header 关系，且 wire 不声明表头行时，不得自造表头

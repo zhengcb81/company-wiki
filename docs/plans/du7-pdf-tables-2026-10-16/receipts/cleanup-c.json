@@ -32,7 +32,7 @@
   }
  ],
  "temp_dirs_removed": [
-  "/tmp/du7-e2e-work (explicit e2e work dir)",
+  "$TEMP/du7-e2e-work (explicit e2e work dir, removed after runs)",
   "tempfile.TemporaryDirectory du7-e2e-* (per run, auto-deleted)"
  ],
  "derived_files_left_in_test_dirs": [],

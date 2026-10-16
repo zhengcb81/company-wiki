@@ -22,7 +22,7 @@
   ],
   "deferred_table_page_count": 281,
   "unit_count": 11150,
-  "seconds": 2.033,
+  "seconds": 1.956,
   "layout_capture": {
    "processed_page_count": 64,
    "processed_unit_count": 2277,
@@ -47,7 +47,8 @@
  },
  "tables": [],
  "denominator": {
-  "table_claims": 0,
+  "wire_table_claims": 3,
+  "tables_built": 0,
   "slots_observed": 0,
   "refs_located": 0,
   "cells_without_located_ref": 0,
@@ -73,5 +74,5 @@
   "derived_files_deleted": true,
   "work_dir_was_temporary": true
  },
- "wall_seconds": 3.929
+ "wall_seconds": 3.572
 }

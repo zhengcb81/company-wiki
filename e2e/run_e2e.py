@@ -106,6 +106,8 @@ def run(args) -> dict:
     data = original.read_bytes()  # read-only
     parse_seconds = 0.0
     started = time.monotonic()
+    if args.work_dir:
+        Path(args.work_dir).mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="du7-e2e-", dir=args.work_dir) as tmp:
         work_dir = Path(tmp)
         (work_dir / "sentinel.json").write_text(
@@ -146,10 +148,20 @@ def run(args) -> dict:
 
         parsed_text = {unit.unit_id: unit.raw_text for unit in parsed.units}
         values = []
+        source_urn = source_id_for_sha256(sha_before)
+        wire_claims = {
+            (
+                (unit.get("hints") or {}).get("source_id") or source_urn,
+                (unit.get("hints") or {}).get("table_id"),
+                unit.get("page"),
+            )
+            for unit in observation["units"]
+            if (unit.get("hints") or {}).get("table_id")
+        }
         for table, binding in zip(built["tables"], bindings):
             page = table["scope"]["page"]
             for measurement in binding["measurements"]:
-                record = _value_record(measurement, table, sha_before[:12], page)
+                record = _value_record(measurement, table, source_urn, page)
                 ref = measurement["value_ref"]
                 sliced = parsed_text.get(ref["unit_id"], "")[
                     ref["char_start"]:ref["char_end"]
@@ -227,7 +239,8 @@ def run(args) -> dict:
                 for table, binding in zip(built["tables"], bindings)
             ],
             "denominator": {
-                "table_claims": len(built["tables"]),
+                "wire_table_claims": len(wire_claims),
+                "tables_built": len(built["tables"]),
                 "slots_observed": total_slots,
                 "refs_located": located_refs,
                 "cells_without_located_ref": sum(

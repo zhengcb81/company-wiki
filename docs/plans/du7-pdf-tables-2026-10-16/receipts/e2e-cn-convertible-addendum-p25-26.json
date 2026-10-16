@@ -22,7 +22,7 @@
   ],
   "deferred_table_page_count": 281,
   "unit_count": 11154,
-  "seconds": 2.547,
+  "seconds": 1.914,
   "layout_capture": {
    "processed_page_count": 64,
    "processed_unit_count": 2293,
@@ -88,7 +88,8 @@
   }
  ],
  "denominator": {
-  "table_claims": 3,
+  "wire_table_claims": 3,
+  "tables_built": 3,
   "slots_observed": 40,
   "refs_located": 40,
   "cells_without_located_ref": 0,
@@ -110,7 +111,7 @@
  },
  "values": [
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:ed50ea33e86597f9e4d2f0a5dde163c6c7380a76306a40054ed5cda80709b393",
@@ -125,7 +126,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:7678d181877043412c1625775314dd8011ce68fd0f87812825040011e0e72249",
@@ -140,7 +141,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:e436e53f004c506d5163df9b7277968ee1c8a07c9b83a78b876f4a683a69341d",
@@ -155,7 +156,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:f09159d172fd0d3295a3676831d5445d8f976b1e5ca9e9d185fea3bd750f2b7a",
@@ -170,7 +171,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:b7671714ecca3413db470e912b3237b3d54b8a2501af1c82f2d2100e312ed5fc",
@@ -185,7 +186,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:b5f4797cd4963a1447985646bc39f4b4a7e07c199f12ed5f54f1975cae9a87a7",
@@ -200,7 +201,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:c6c6c4581b54c6241660acc2f96387aa8ffe0eb8e620ba0631803e2db17e2c62",
@@ -215,7 +216,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:aaf44a389682cde7818217a5ea216c7a71c6f64b3815d43c7b71887bd63ce128",
@@ -230,7 +231,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:aaf44a389682cde7818217a5ea216c7a71c6f64b3815d43c7b71887bd63ce128",
@@ -245,7 +246,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:6111e5ebbba49863d6fa0b9ddcd3e155534a75b8a041ae3684f5b0af71392ea6",
@@ -260,7 +261,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:6111e5ebbba49863d6fa0b9ddcd3e155534a75b8a041ae3684f5b0af71392ea6",
@@ -275,7 +276,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:2c3839809ba4a1204682a0b88249b5250a9caa64ec5898d1832705166566beb8",
@@ -290,7 +291,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:2c3839809ba4a1204682a0b88249b5250a9caa64ec5898d1832705166566beb8",
@@ -305,7 +306,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:711c6981f90f7944a50762ef3d25e0b88ee1e46f25b84852efd5812b88e5381e",
@@ -320,7 +321,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:711c6981f90f7944a50762ef3d25e0b88ee1e46f25b84852efd5812b88e5381e",
@@ -335,7 +336,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:cde570f35fb87293897edf70a8352ec5474de505ede91055eceaf88766eb4e2b",
@@ -350,7 +351,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 25,
    "table_id": "p25:t1",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:cde570f35fb87293897edf70a8352ec5474de505ede91055eceaf88766eb4e2b",
@@ -365,7 +366,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 26,
    "table_id": "p26:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:b409e98b185d93f3f89d44769b2d9288ecab2c1b65f3af46ad204bc29e2fd67a",
@@ -380,7 +381,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 26,
    "table_id": "p26:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:b409e98b185d93f3f89d44769b2d9288ecab2c1b65f3af46ad204bc29e2fd67a",
@@ -395,7 +396,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 26,
    "table_id": "p26:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:5c5209ab09e748d5dbff5fd731f83387fce6bd0ccae3bde13f5cc0e36f99cb47",
@@ -410,7 +411,7 @@
    "slice_matches_original": true
   },
   {
-   "source_id": "3ce59fde9895",
+   "source_id": "urn:company-wiki:source:sha256:3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
    "page": 26,
    "table_id": "p26:t0",
    "unit_id": "urn:company-wiki:narrative-unit:sha256:5c5209ab09e748d5dbff5fd731f83387fce6bd0ccae3bde13f5cc0e36f99cb47",
@@ -432,5 +433,5 @@
   "derived_files_deleted": true,
   "work_dir_was_temporary": true
  },
- "wall_seconds": 4.613
+ "wall_seconds": 3.557
 }
