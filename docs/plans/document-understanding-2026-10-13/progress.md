@@ -1,6 +1,10 @@
-## DU9交付实查 — 2026-10-16（当前）
+## DU9实查与CWP工程发布 — 2026-10-17（当前）
 
 指定POLICY工区f70318f1干净但仅A调查，无实现/测试；PLANNER工区8ff47e28有A RED与未提交contracts/__init__，缺planner实现，B/C未完成，无最终handoff/独审。已核对本地refs、注册worktrees、Projects同名目录及远端DU9 refs，未发现另一最终交付；异步问用户最终文件/commit，暂不动作者树。母线既有代码/资料保护，不因缺交付重写他人半成品。[接收记录](review/du9_reception.md)。
+
+实际import分别ModuleNotFoundError(geometry_policy / geometry_intent.planner)，收尾再次只读核对仍未补齐。已提供[原卡继续B/C说明](parallel/du9-2026-10-16/CONTINUE_BC.md)，无A人工签收/新签名，不另开包。
+
+核对期间完成既有CWP工程：add7afef源码提交，首pre-push6212PASS/1FAIL/24SKIP(280s)，失败为旧测试假设tables导入qualify_table。只改测试验两真实入口有界unknown，原断言未放松，44PASS；测试修正ce6e4646后正常pre-push6213PASS/24SKIP(270.07s)，远端CI38979991954 SUCCESS。本地ff-only初因四文件索引/换行冲突被拒，40文件均先核对已提交/压缩留存，再仅恢复所属worktree+index/refresh后正常快进成功。master/origin均ce6e4646，已完成源码/测试/工具不再未提交；仅工作记录/继续说明待文档发布。0原件改写/0供应商；source默认仍0.8，新0.9默认v3，真实摘要/默认深页未称完成。
 
 ---
 

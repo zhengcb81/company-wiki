@@ -1,5 +1,7 @@
 # ROOT生产端口节点（2026-10-16）
 
+发布更新（2026-10-17）：工程源码add7afef及测试修正ce6e4646已正常推送并快进到本地master；正常pre-push **6213PASS/24SKIP**，[精确CI SUCCESS](https://github.com/zhengcb81/company-wiki/actions/runs/38979991954)。首轮唯一失败/测试纠正/本地索引恢复完整留证，未跳hook、不修改生产逻辑去配私有导入名。详见[发布收据](../common-root-quality-evidence/production-ports-publication.json)。默认PageIntent、正式供应商摘要及语义holdout仍OPEN；DU9作者成果当前仅见A，最终交付位置待核对。
+
 ## 已完成与证据边界
 
 - ET作者完整历史与ROOT三个共因修复、隔离测试已合入并推送main `0cb71731cef6c6b3582f595d44f5b8a077392ac1`。228提取测试/10旧gold，99隔离与7跨cwd通过；无已跟踪CI workflow，不虚报远端CI。
@@ -13,7 +15,7 @@
 
 1016PASS/11SKIP（原可选真实资料10及旧可选E2E1，不把skip称真实通过）；102捕获/父文/原生表/因果子集PASS与主集重叠不相加。原红灯包括2capture、1purpose及旧“必须返回零表”行为断言；后者随真实功能上线改为逐值/逐ref与未知行角色的正向断言，保留原FAIL收据。新HTML缺header夹具曾误把thead改成tdead，现只改真实th和thead组标签，未动原gold。
 
-公开v4子线冻结26PASS/172.11s，物理无.planning部署验证；正式公共v4 raw/1、raw/2、official_json与RF实际消费者在正常宿主环境 **4PASS/186.53s**，同/跨attempt缓存恢复无新增POST。首轮沙箱loopback不可用的3+1失败及combined240s超时原样留存，不能计PASS。原生行语义独审两缺陷及rowspan/预算反例修后相关 **190PASS**，ROOT再对最终SHA复放 **17PASS/2.61s**，核对六个精确文件与上面的最新真实预算；该17项与190重叠，不相加。全程0真实供应商，工程代码尚待正常提交推送；真实摘要质量仍未验收。
+公开v4子线冻结26PASS/172.11s，物理无.planning部署验证；正式公共v4 raw/1、raw/2、official_json与RF实际消费者在正常宿主环境 **4PASS/186.53s**，同/跨attempt缓存恢复无新增POST。首轮沙箱loopback不可用的3+1失败及combined240s超时原样留存，不能计PASS。原生行语义独审两缺陷及rowspan/预算反例修后相关 **190PASS**，ROOT再对最终SHA复放 **17PASS/2.61s**，核对六个精确文件与上面的最新真实预算；该17项与190重叠，不相加。全程0真实供应商，工程已发布ce6e4646；真实摘要质量仍未验收。
 
 ## 未完成，不能签共享阅读整体完成
 

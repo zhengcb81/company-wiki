@@ -1,6 +1,6 @@
 {
   "schema_version": "du9-launch/1",
-  "status": "READY_NOT_DISPATCHED",
+  "status": "TWO_DELIVERY_REPORTS_PENDING_FINAL_ARTIFACTS",
   "lanes": [
     {
       "id": "DU9-CWP-GEOMETRY-POLICY",
@@ -10,12 +10,16 @@
       "seed_commit": "68807088ab1eb51bfd45c5d112ba601a96d7b40d",
       "plan": "docs/plans/du9-geometry-policy-2026-10-16/task_plan.md",
       "card": "du9_cwp_geometry_policy.md",
-      "status": "READY",
+      "status": "DELIVERY_LOCATION_PENDING_VISIBLE_A_ONLY",
       "startup_clean": true,
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "independent_review_required": true,
-      "business_tests": "NOT_RUN_AUTHOR_TASK",
-      "bytes": 25056644
+      "business_tests": "NO_IMPLEMENTATION_OR_FINAL_TEST_RECEIPT_FOUND",
+      "bytes": 25056644,
+      "visible_head": "f70318f1edd3e5bfec86ae1ee0922a1ac72b59a2",
+      "visible_import": "FAIL: missing profiles.geometry_policy",
+      "continuation": "CONTINUE_BC.md",
+      "root_author_writes": 0
     },
     {
       "id": "DU9-CWP-GEOMETRY-PLANNER",
@@ -25,12 +29,16 @@
       "seed_commit": "cb1e4c0783c00dedd58160a458b7ad3d2405cfc2",
       "plan": "docs/plans/du9-geometry-planner-2026-10-16/task_plan.md",
       "card": "du9_cwp_geometry_planner.md",
-      "status": "READY",
+      "status": "DELIVERY_LOCATION_PENDING_VISIBLE_A_ONLY",
       "startup_clean": true,
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "independent_review_required": true,
-      "business_tests": "NOT_RUN_AUTHOR_TASK",
-      "bytes": 25056735
+      "business_tests": "A RED only; untracked contracts/__init__; B/C pending",
+      "bytes": 25056735,
+      "visible_head": "8ff47e28031270c7bf7f6fca01b582fdb680fd64",
+      "visible_import": "FAIL: missing geometry_intent.planner",
+      "continuation": "CONTINUE_BC.md",
+      "root_author_writes": 0
     },
     {
       "id": "DU9-ET-LEGACY-COMPARISON",
@@ -40,7 +48,7 @@
       "seed_commit": "306ce2df1c622e635770de1dee8caba5057b9716",
       "plan": "docs/plans/du9-legacy-comparison-2026-10-16/task_plan.md",
       "card": "du9_et_legacy_comparison.md",
-      "status": "READY",
+      "status": "NOT_RECEIVED_RESERVED",
       "startup_clean": true,
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "independent_review_required": true,

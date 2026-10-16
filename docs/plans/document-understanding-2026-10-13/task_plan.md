@@ -1,8 +1,10 @@
-## DU9 POLICY/PLANNER交付位置核对中 — 2026-10-16
+## DU9交付核对待补；既有CWP工程已发布 — 2026-10-17
 
 用户确认两包完成。ROOT已实际核对指定工区、全部本地DU9 refs/工作树、同名Projects目录和远端DU9 refs：POLICY f70318f1只有A调查文档，缺geometry_policy.py与测试；PLANNER 8ff47e28仅A测试，geometry_intent只有未提交contracts/__init__，B/C仍pending。尚未找到最终handoff、独审或完整实现，不能按完成签收，也不能把A调查当完整交付。已异步请求最终目录/commit，作者树保持只读，不擅自覆盖半成品。见[核对记录](review/du9_reception.md)。
 
-**Next Step：** 核对最终交付位置并按卡验收两组件；等待期间正常发布已通过测试的CWP工程WIP，不进入DU9或其他外包作者范围。
+独立期间已正常发布原ROOT工程：master/origin `ce6e4646`，本地src/tests/tools的已完成工程WIP已并线清理，正常pre-push6213PASS/24SKIP，精确CI38979991954 SUCCESS。首轮6212PASS/1FAIL为旧私有导入名白盒断言，保留原失败后改验两个真实入口的预算unknown行为（44PASS）；无生产代码补兼容符号、未跳hook。正常快进遇四路径索引/换行冲突，先核对40文件已在远端提交、保存小代码快照，再仅恢复这些路径的工作区+索引并refresh，正常ff-only完成；原件/config及DU9作者未改。见[发布收据](common-root-quality-evidence/production-ports-publication.json)。默认深页与真实摘要仍OPEN。
+
+**Next Step：** 核对两包最终交接路径/commit；若原目录就是交付，沿用[原卡继续B/C说明](parallel/du9-2026-10-16/CONTINUE_BC.md)，无需ROOT签收A。完整交付后再独审/组装默认PageIntent，不把当前A调查当组件完成，不进入其他外包作者范围。
 
 ---
 
@@ -14,7 +16,7 @@
 
 ---
 
-## 当前唯一执行状态 — 2026-10-16 DU9已就绪
+## 历史就绪快照 — 2026-10-16（非当前执行状态）
 
 三张DU9新卡已完成工区/seed/import/接口与排他白名单，母卡已正常提交推送 `070ae520444d6ab875686fd8abb12ba9c6c12f31`。[总览](parallel/du9-2026-10-16/README.md)。状态READY_NOT_DISPATCHED（等待用户分发，不能冒称已开工）。两CWP作者分别独占profiles与新geometry_intent目录、ET作者独占legacy比较；ROOT不写这些白名单，仍独占source/parser/automation生产装配及本轮structure/binder共因整改。DU8原三线保持用户已分发状态，不进入其工区。
 

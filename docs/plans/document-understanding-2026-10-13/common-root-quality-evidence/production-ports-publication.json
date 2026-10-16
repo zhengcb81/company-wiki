@@ -1,0 +1,240 @@
+{
+  "status": "ENGINEERING_PUBLISHED_DEFAULT_AND_REAL_QUALITY_OPEN",
+  "head": "ce6e464639943facf1c574dcdc62d79eb218fee3",
+  "source_main_clean": true,
+  "normal_hooks": true,
+  "pre_push": {
+    "passed": 6213,
+    "skipped": 24,
+    "seconds": 270.07
+  },
+  "CI": [
+    {
+      "id": 38979991954,
+      "name": "CI",
+      "head_sha": "ce6e464639943facf1c574dcdc62d79eb218fee3",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38979991954",
+      "created_at": "2026-10-16T23:10:36Z",
+      "updated_at": "2026-10-16T23:13:44Z"
+    }
+  ],
+  "previous_failure": {
+    "passed": 6212,
+    "failed": 1,
+    "skipped": 24,
+    "seconds": 280,
+    "cause": "test inspected old private module import alias; shared native-row entrypoint changed",
+    "fix": "budget/unknown assertions preserved, both actual purpose service APIs now checked; no production code added for obsolete alias",
+    "focused_after_fix": 44
+  },
+  "local_fast_forward_recovery": "working-tree-only restore left 4 index stat/line-ending conflicts; exact committed-content snapshot retained, targeted worktree+index restore/refresh enabled normal ff-only merge",
+  "source_sha256": [
+    {
+      "path": "src/company_wiki/automation/narrative_batch.py",
+      "reviewed_worktree_sha256": "48956ab3f732e0945b3d3594a8f657392f7728b99e118744930980c0a20dced2",
+      "published_worktree_sha256": "48956ab3f732e0945b3d3594a8f657392f7728b99e118744930980c0a20dced2",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_batch_request.py",
+      "reviewed_worktree_sha256": "8800380dfd26cd75e398ff968ba727998cdb745aa2347c998b6600a47d1ce9ab",
+      "published_worktree_sha256": "8800380dfd26cd75e398ff968ba727998cdb745aa2347c998b6600a47d1ce9ab",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "reviewed_worktree_sha256": "5c8476b56a0f85cc77b0825ccc4988aac96922eed5b8292d57d8699ab5bd8a6b",
+      "published_worktree_sha256": "5c8476b56a0f85cc77b0825ccc4988aac96922eed5b8292d57d8699ab5bd8a6b",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/native_table_bridge.py",
+      "reviewed_worktree_sha256": "7c6f7ea8c99854d673abe059f14cd16f2ce4fb590c3b695da9a5ac74f148ac51",
+      "published_worktree_sha256": "67ff6cc2f61f43eced0988b7cc17684d1ad0c6bb39ee9a220f6685dd8e397951",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "reviewed_worktree_sha256": "858283b62a6f743877f27a82de234d4ee9ecc155d6c594e553e11b63a9fd1831",
+      "published_worktree_sha256": "858283b62a6f743877f27a82de234d4ee9ecc155d6c594e553e11b63a9fd1831",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/text_view.py",
+      "reviewed_worktree_sha256": "25628bfc7af43ce486ef6d2cc01065c3f1b09ded24e1a3b5d39fe8119818118c",
+      "published_worktree_sha256": "25628bfc7af43ce486ef6d2cc01065c3f1b09ded24e1a3b5d39fe8119818118c",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/pipeline.py",
+      "reviewed_worktree_sha256": "bd007cabb717a07bbbd80037f5d10d05e53f6b585219a727f97d8e45ca77febe",
+      "published_worktree_sha256": "bd007cabb717a07bbbd80037f5d10d05e53f6b585219a727f97d8e45ca77febe",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/__init__.py",
+      "reviewed_worktree_sha256": "1f3624fe61572e99228425f3c60d9b7a0af7ef56d106c1ac9d74b6237e99d8a5",
+      "published_worktree_sha256": "1f3624fe61572e99228425f3c60d9b7a0af7ef56d106c1ac9d74b6237e99d8a5",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/contract.py",
+      "reviewed_worktree_sha256": "9a3be96269c2d84c6cb7b564e025cc00e0bbac31839a8f0ffcffb031244d3099",
+      "published_worktree_sha256": "9a3be96269c2d84c6cb7b564e025cc00e0bbac31839a8f0ffcffb031244d3099",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "reviewed_worktree_sha256": "f88fc48f4842ca5fa477ac68cc708fb2ac0ba79cf0b8ca1441aee618143ce8d9",
+      "published_worktree_sha256": "c2064f61162515f909ebd80a89d2b3ad195e4783cf62667480dc3a9d768c4b83",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/tables.py",
+      "reviewed_worktree_sha256": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+      "published_worktree_sha256": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "reviewed_worktree_sha256": "b28c836a54e2c617b1103a50ff9dd51edf7a48abd1c53dff0ac76c73be77a89a",
+      "published_worktree_sha256": "b28c836a54e2c617b1103a50ff9dd51edf7a48abd1c53dff0ac76c73be77a89a",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "reviewed_worktree_sha256": "5c52d45e964466f42e760adc70503effffe112773c523ef80a139aa988f1f5f7",
+      "published_worktree_sha256": "5c52d45e964466f42e760adc70503effffe112773c523ef80a139aa988f1f5f7",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "reviewed_worktree_sha256": "12885608ae6fa7615627f9a6ab1330ac1b23e46c2b7e1e933f1a7c3b6435fff5",
+      "published_worktree_sha256": "f68e2039cdb9325053fec465faca053fb51dfc5083ed9ca44ad93c3da10fe70c",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_parent_composition.py",
+      "reviewed_worktree_sha256": "db0eed5f36bd6723947a744c91a4b551e5c6ce0a2515c41407bd61fbdec9b5b5",
+      "published_worktree_sha256": "35333e8af811736424f13a9d00337fa3f54093c80bc33a9906f29746d59f04e2",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_layout.py",
+      "reviewed_worktree_sha256": "da6b0869bd87dd18475adca448bc3ae82e245b0ace1878de57319f34b6286fc7",
+      "published_worktree_sha256": "bef7478293f7ffdc76e5afc6ddf72c11def288f3c1a1171d0df0997a29eb9dd1",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "reviewed_worktree_sha256": "707738e2660d45d1e855ddeccc005ee230e2abfd51a69aaed4a950b905c3a891",
+      "published_worktree_sha256": "707738e2660d45d1e855ddeccc005ee230e2abfd51a69aaed4a950b905c3a891",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tests/fixtures/shared_scoped_public_request/legacy_request_hashes.json",
+      "reviewed_worktree_sha256": "07e3b1940504daffc466f0dc984f38815ba75a64711ba95085d1651f521d6b75",
+      "published_worktree_sha256": "07e3b1940504daffc466f0dc984f38815ba75a64711ba95085d1651f521d6b75",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tests/integration/test_shared_scoped_public_request.py",
+      "reviewed_worktree_sha256": "d497a424a59f1cf3b7f76e5ab2a5242f2bf9a975e7c1f4d659087d959d96bb67",
+      "published_worktree_sha256": "e72b840ab5cde464d11e44d57897756725ad86e6eee365472a7b5f44e9828b1f",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tests/integration/test_shared_scoped_rf_consumer.py",
+      "reviewed_worktree_sha256": "31db3336cee9441704b6598f755330933d0abcb56d72c8780b695647db44a0e7",
+      "published_worktree_sha256": "c9c759ba251881b365773dc82f95841a832337c5067e15b35889fa394eaa35bf",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tests/unit/document_understanding_root/test_deep_pdf_capture_production.py",
+      "reviewed_worktree_sha256": "7c9e35cd5da3084b5b09e9c9d84ae8ca19fbbccf1406f4704daee19f11acde23",
+      "published_worktree_sha256": "7692df37e6f54f246909b3266ef38641f66ca933364bf8c6a591032c8e7face8",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tests/unit/document_understanding_root/test_native_table_production.py",
+      "reviewed_worktree_sha256": "6777d2d639fd7953b74225dd24548865c05a2ff5fae809c6eb9b33a256c1c32d",
+      "published_worktree_sha256": "4b151224ba8d307f1277add2004687f28f114459e3bf63d1ebb32a7e14ff963f",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tests/unit/document_understanding_root/test_operating_relation_production.py",
+      "reviewed_worktree_sha256": "f7ea00052e56415fdcac9444d7385a078cc721fac15d39a95603a2aa6a1fb723",
+      "published_worktree_sha256": "bf74e000c620f3176447742e329ba4fb361e647137e626c39e1719d82ab20d86",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tests/unit/document_understanding_root/test_parent_pipeline_composition.py",
+      "reviewed_worktree_sha256": "677fc3e883cc29784fe0eda24a61f1e713047fe830f098b5b59b9478fc15e611",
+      "published_worktree_sha256": "45d274847e886dc7ecc10ca93671f5b14130e5d037016c2bc2f8bcee831cd749",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_table_admission.py",
+      "reviewed_worktree_sha256": "5c2786d6aba95c1b1d0b85f242e422170e0dec8ed7a99852d9d780346ff03a39",
+      "published_worktree_sha256": "c3e2ebd0cce5bf04ea1d459630777d4cac9ed7be57fefa5e01ce8ea2e3812fd9",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tests/unit/pdf_table_observations/test_red_production_gap.py",
+      "reviewed_worktree_sha256": "28e3f0bd27158157ab4ec9c0d334043f22e24b636fc1b5c61dcf766b28002fc6",
+      "published_worktree_sha256": "28e3f0bd27158157ab4ec9c0d334043f22e24b636fc1b5c61dcf766b28002fc6",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tools/document_understanding_benchmark/README.md",
+      "reviewed_worktree_sha256": "b74a4ffd2165e241a993f0d6e37bfcd95e6dce2c3bf5888d445b8a6b0a6e30da",
+      "published_worktree_sha256": "b6258f2bd74e9957cd92b1ff4b962cd6753f35e94bc6353e663d02ef2fc06d68",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_bootstrap/sitecustomize.py",
+      "reviewed_worktree_sha256": "a29ad367296f26bc256083742e72b1251ed0bf4876b0af17e6c89130e00f56aa",
+      "published_worktree_sha256": "c907ca970dfaa9fe98bb09f96dcde41d38fe6d31fde03694a61c146d9e4db5b7",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_failure_review_material.py",
+      "reviewed_worktree_sha256": "f5701babacd232b9df58a7ec1bf40950cc43ade1a0ee1b313b9e54b032a7f6c7",
+      "published_worktree_sha256": "41805ca4fc5be00352ee1a9326585c1f4567880e3bc9e8bff16fd3199f19131f",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_launcher.py",
+      "reviewed_worktree_sha256": "4e1e61d6b5365a3d64478387551ec8ba08b141e2ecd363a46d4d5de1a55fda26",
+      "published_worktree_sha256": "3c860463ba04df71a474024b25383729aea39c8294b6d6ed82bdc63a8220f6d8",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "reviewed_worktree_sha256": "3aeef7afbb4d7274fb4230be04f87c913b9aca3bcb6e25f903719ff7c93f392e",
+      "published_worktree_sha256": "cdef697b7c08257906827e40cf4e197d2f1ea418f2d4c90467e36d9125e2fbee",
+      "content_equal_after_Git_line_ending_normalization": true
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "reviewed_worktree_sha256": "1d3e8c882b5633c81cc5212353e0765f5be3de9a4817a30934ce9b7b3c1a78c8",
+      "published_worktree_sha256": "d1186b8dca2fed9c2fe6ff2bd5c1f0d840df07d3cc90b666d032c1d4cc984238",
+      "content_equal_after_Git_line_ending_normalization": true
+    }
+  ],
+  "archive_bytes": 19305,
+  "archive_sha256": "3ef226ff78994cfa4fee93198d23a0d82283d4b11a0638ee1b3861fde09612a7",
+  "supplier_calls": 0,
+  "original_copies": 0,
+  "production_originals_and_config_unchanged": true,
+  "du9_authors_modified": false,
+  "open": [
+    "DU9 final delivery location/B-C completion",
+    "default geometry and duplicate full-scan budget",
+    "real configured summary/semantic holdout",
+    "FF complete41 and interruption restart",
+    "DU8 RF external delivery"
+  ]
+}
