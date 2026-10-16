@@ -1,0 +1,88 @@
+{
+  "schema_version": "du7-launch/1",
+  "status": "READY_NOT_DISPATCHED",
+  "lanes": [
+    {
+      "id": "DU7-PDF-TABLE",
+      "repo": "C:/Users/郑曾波/Projects/company-wiki",
+      "target": "company-wiki-du7-pdf-tables",
+      "plan_id": "du7-pdf-tables-2026-10-16",
+      "branch": "codex/du7-pdf-tables-20261016",
+      "base": "04c7f1bc93386a5703693f9303c3a59bb7546025",
+      "card": "du7_pdf_table_observations.md",
+      "scopes": [
+        "src",
+        "tests/unit",
+        "tests/support",
+        "tools/document_understanding_benchmark",
+        "docs/plans/du4-table-2026-10-15",
+        "docs/plans/document-understanding-2026-10-13/review"
+      ],
+      "workdir": "C:/Users/郑曾波/Projects/company-wiki-du7-pdf-tables",
+      "plan": "docs/plans/du7-pdf-tables-2026-10-16/task_plan.md",
+      "seed_commit": "f93507014f757591f2c55735b0895133d276cad9",
+      "status": "READY",
+      "files_sha256": {
+        "docs/plans/du7-pdf-tables-2026-10-16/construction_card.md": "08b31a2bd3f3216b33c473cf9db27ca5b0a867c8cf844ab2ff2ebe634057e464",
+        "docs/plans/du7-pdf-tables-2026-10-16/findings.md": "eadd36a50a8ee9f8b0a9e045193b9847396e7cc7ec58a9b6900e8d80adc7c3c4",
+        "docs/plans/du7-pdf-tables-2026-10-16/INTERFACES.md": "2ad367d4d0372235142a947e1ab3af0760896f19f89166c90c98dbf1acf51149",
+        "docs/plans/du7-pdf-tables-2026-10-16/progress.md": "c35e94c3ea430a5f271c56788d89427773e5d9285cbe80296bdf52f7eb13bdd8",
+        "docs/plans/du7-pdf-tables-2026-10-16/task_plan.md": "a8c9ef073d54ce206b1b42fa61b17dc34455ad0e78053979947b3fbaf05f13b7"
+      }
+    },
+    {
+      "id": "DU7-ET-EXTRACTION",
+      "repo": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts",
+      "target": "earnings-transcripts-du7-extraction",
+      "plan_id": "du7-extraction-2026-10-16",
+      "branch": "codex/du7-et-extraction-20261016",
+      "base": "d0ac42c60dcca992db78860b8469cfed3dd527e5",
+      "card": "du7_et_extraction_fidelity.md",
+      "scopes": [
+        "tests",
+        "tools",
+        "templates",
+        "docs/implementation"
+      ],
+      "workdir": "C:/Users/郑曾波/Projects/earnings-transcripts-du7-extraction",
+      "plan": "docs/plans/du7-extraction-2026-10-16/task_plan.md",
+      "seed_commit": "7986b3eb829a313440b816bea7d54ebea9ad3509",
+      "status": "READY",
+      "files_sha256": {
+        "docs/plans/du7-extraction-2026-10-16/construction_card.md": "f94bb1691a24ba5a296f73ae817b0052cbe3150590572fb5e0ce9930b0bac25a",
+        "docs/plans/du7-extraction-2026-10-16/findings.md": "eadd36a50a8ee9f8b0a9e045193b9847396e7cc7ec58a9b6900e8d80adc7c3c4",
+        "docs/plans/du7-extraction-2026-10-16/INTERFACES.md": "2ad367d4d0372235142a947e1ab3af0760896f19f89166c90c98dbf1acf51149",
+        "docs/plans/du7-extraction-2026-10-16/progress.md": "c35e94c3ea430a5f271c56788d89427773e5d9285cbe80296bdf52f7eb13bdd8",
+        "docs/plans/du7-extraction-2026-10-16/task_plan.md": "f9f1147001fa9f671996c97bd0674b53541090968c6716a45997e469a1c9ca40"
+      }
+    }
+  ],
+  "supplier_calls": 0,
+  "originals_copied": 0,
+  "production_writes": 0,
+  "startup_verification": {
+    "status": "PASS_IMPORTS_AND_ISOLATION_ONLY",
+    "business_tests": "NOT_RUN_AUTHOR_TASK",
+    "lanes": [
+      {
+        "id": "DU7-PDF-TABLE",
+        "branch": "codex/du7-pdf-tables-20261016",
+        "seed_commit": "f93507014f757591f2c55735b0895133d276cad9",
+        "clean": true,
+        "current_worktree_import": true,
+        "bytes": 19670141
+      },
+      {
+        "id": "DU7-ET-EXTRACTION",
+        "branch": "codex/du7-et-extraction-20261016",
+        "seed_commit": "7986b3eb829a313440b816bea7d54ebea9ad3509",
+        "clean": true,
+        "current_worktree_import": true,
+        "bytes": 648173
+      }
+    ],
+    "bytes_total": 20318314,
+    "supplier_calls": 0,
+    "production_writes": 0
+  }
+}

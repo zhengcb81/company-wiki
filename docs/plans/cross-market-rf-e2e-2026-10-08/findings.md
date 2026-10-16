@@ -1,3 +1,9 @@
+## ROOT主线发布 — 2026-10-16
+
+CWP主线04c7f1bc已推远端，正常prepush6115 PASS/24 SKIP；FORM/STATE/预算准备/显式v4工程与native TABLE薄桥发布，真实预算效率和正式TABLE依赖/真实质量仍开放，默认不切。DU6三卡用户已分发；[DU7两张独立新卡](../document-understanding-2026-10-13/parallel/du7-2026-10-16/README.md)已READY，PDF适配/ET抽取独占工区已建。以[选定PWF](../document-understanding-2026-10-13/task_plan.md)为执行状态，母G2/G4/G5和公司循环未结束，0新增付费。
+
+---
+
 ## ROOT当前状态 — 2026-10-16
 
 共享阅读主线已实施准备/共享预算首段，224集中与独审/静态通过；整链硬工作限制/FORM-STATE-TABLE/v4/真实质量仍开放，母目标未完成。DU6三条独占外包卡已READY。以[选定PWF](../document-understanding-2026-10-13/task_plan.md)及[首段证据](../document-understanding-2026-10-13/common-root-quality-evidence/prepared-source-budget-acceptance.json)为当前事实；原三/新三、G2/G4/G5不因工具绿关闭。

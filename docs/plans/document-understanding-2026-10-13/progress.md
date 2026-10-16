@@ -1,3 +1,17 @@
+## 当前发布与并行安排 — 2026-10-16
+
+主线工程 `04c7f1bc93386a5703693f9303c3a59bb7546025` 已正常推远端，pre-push **6115 PASS/24 SKIP/373.88s**，无跳hook；[发布收据](common-root-quality-evidence/native-state-scoped-publication.json)。推送执行器最后在GBK控制台打印时UnicodeEncodeError，发生在成功push、远端HEAD核对和落盘之后，不是Git失败；保留原错误，后续使用Python -X utf8。精确CI另核，不借其他HEAD的绿。
+
+[DU7两张新卡总表](parallel/du7-2026-10-16/README.md)已READY，分别独占PDF细格适配新组件和ET现有网页抽取窄port，真实工作树/基线/种子在[launch](parallel/du7-2026-10-16/launch.json)。两个imports和干净状态通过；共20.32MB，0原件复制、0供应商，业务A/B/C由作者执行。可立即同时开工，不等待ROOT，不重复DU6三包。
+
+ROOT继续STATE真实预算耗尽共因整改、TABLE依赖闭包、正式跨仓及真实摘要；默认仍0.8、新0.9默认v3。真实VRSK/MSFT耗尽和旧六错引/业务遗漏未关闭，母G2/G4/G5和公司循环仍开放。
+
+**Next Step：** 发出DU7两卡，由ROOT完成共享STATE惰性事件准备，正式TABLE及worker→公共读→RF联调后再真实供应商/holdout验收；只用原大节点，不增加小节点许可。
+
+---
+
+文档收尾第一次preflight因Windows默认换行为CRLF导致母PWF整段diff/check失败，未形成提交；已按HEAD原始字节保留旧正文、仅添加LF新前言，未改Git attributes或旧证据。
+
 ## ROOT发布节点更新 — 2026-10-16
 
 FORM/native TABLE适配、STATE、共享结构与策略预算、显式v4工程已收齐，独立scope/预算尾部反例修复并复放通过。[本节点详情](review/native_state_scoped_engineering.md)与[验收收据](common-root-quality-evidence/native-state-scoped-engineering-acceptance.json)。集中1212 PASS后12项失败已分类修复：可选role/kind不再阻断，正常宿主相关25 PASS（含v4与旧paid恢复）；未删除失败或跳hook。准备正常提交和推送，精确CI未返回前不称远端绿。

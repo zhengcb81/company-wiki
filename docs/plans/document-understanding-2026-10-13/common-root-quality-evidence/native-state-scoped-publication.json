@@ -1,0 +1,33 @@
+{
+  "head": "04c7f1bc93386a5703693f9303c3a59bb7546025",
+  "exit_code": 0,
+  "seconds": 386.20657290000236,
+  "observed_at": "2026-10-16T07:12:07.008645+00:00",
+  "hooks_bypassed": false,
+  "remote_tip": "04c7f1bc93386a5703693f9303c3a59bb7546025",
+  "tracked_worktree_and_index_clean_before_push": true,
+  "schema_version": "native-state-scoped-publication/1",
+  "prepush": {
+    "passed": 6115,
+    "skipped": 24,
+    "pytest_seconds": 373.88
+  },
+  "wrapper_console_error": "UnicodeEncodeError printing decoded output under GBK after successful push and receipt persistence; remote head and exit_code prove actual push success",
+  "supplier_calls": 0,
+  "defaults_changed": false,
+  "ci_first_observation": {
+    "observed_at": "2026-10-16T07:13:26.973679+00:00",
+    "repo": "company-wiki",
+    "requested_head": "04c7f1bc93386a5703693f9303c3a59bb7546025",
+    "runs": [
+      {
+        "id": 38865710454,
+        "head_sha": "04c7f1bc93386a5703693f9303c3a59bb7546025",
+        "name": "CI",
+        "status": "in_progress",
+        "conclusion": null,
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38865710454"
+      }
+    ]
+  }
+}
