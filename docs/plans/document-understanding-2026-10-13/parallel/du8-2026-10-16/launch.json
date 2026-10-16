@@ -1,0 +1,105 @@
+{
+  "schema_version": "du8-launch/1",
+  "status": "READY_NOT_DISPATCHED",
+  "lanes": [
+    {
+      "id": "DU8-RF-COMPARISON",
+      "repo": "revenue-forecast",
+      "target": "revenue-forecast-du8-comparison",
+      "branch": "codex/du8-rf-comparison-20261016",
+      "base": "0feea9b097747165a37009ad4a7ed5616cf46c38",
+      "slug": "comparison",
+      "card": "du8_rf_comparison_owner.md",
+      "scopes": [
+        "scripts",
+        "tests",
+        "tools",
+        "references",
+        "templates",
+        "schemas",
+        "compatibility"
+      ],
+      "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-du8-comparison",
+      "plan": "docs/plans/du8-comparison-2026-10-16/task_plan.md",
+      "seed_commit": "e86488a701ee8a107b432749e85003b9d115d407",
+      "status": "READY",
+      "clean": true,
+      "hooks": ".githooks",
+      "imports": "CURRENT_WORKTREE_IMPORT_OK",
+      "bytes": 4878719,
+      "business_tests": "NOT_RUN_AUTHOR_TASK"
+    },
+    {
+      "id": "DU8-FF-MATRIX-COMPLETION",
+      "repo": "filing-fetch",
+      "target": "filing-fetch-du8-matrix",
+      "branch": "codex/du8-ff-matrix-20261016",
+      "base": "e8a85585b4c64a9596e576ff3b73e5c2ee29c334",
+      "slug": "matrix",
+      "card": "du8_ff_matrix_completion.md",
+      "scopes": [
+        "scripts",
+        "tests",
+        "tools",
+        "references",
+        "schemas",
+        "e2e",
+        "docs/handoffs",
+        "compatibility"
+      ],
+      "workdir": "C:/Users/郑曾波/Projects/filing-fetch-du8-matrix",
+      "plan": "docs/plans/du8-matrix-2026-10-16/task_plan.md",
+      "seed_commit": "7a682bc4a454a8bc03a5f14e96414f303029f76d",
+      "status": "READY",
+      "clean": true,
+      "hooks": ".githooks",
+      "imports": "CURRENT_WORKTREE_IMPORT_OK",
+      "bytes": 3502148,
+      "business_tests": "NOT_RUN_AUTHOR_TASK"
+    },
+    {
+      "id": "DU8-AUDIT-MEASURE-EVIDENCE",
+      "repo": "revenue-forecast-audit",
+      "target": "revenue-forecast-audit-du8-measures",
+      "branch": "codex/du8-audit-measures-20261016",
+      "base": "f5e7f4988148a1348661d737faa92a9c5b5cd31e",
+      "slug": "measures",
+      "card": "du8_audit_measure_evidence.md",
+      "scopes": [
+        "skills",
+        "tests",
+        "tools"
+      ],
+      "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-audit-du8-measures",
+      "plan": "docs/plans/du8-measures-2026-10-16/task_plan.md",
+      "seed_commit": "172778fe2dd55967ffb253a3aeee7ee4c9d0c8fe",
+      "status": "READY",
+      "clean": true,
+      "hooks": "GIT_DEFAULT",
+      "imports": "CURRENT_WORKTREE_IMPORT_OK",
+      "bytes": 1512380,
+      "business_tests": "NOT_RUN_AUTHOR_TASK"
+    }
+  ],
+  "read_only_ff_dependencies": [
+    {
+      "repo": "company-wiki",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-du6-ff-readonly",
+      "head": "f08aa101ab49ca983d3a40356abfb05347f586b3"
+    },
+    {
+      "repo": "earnings-transcripts",
+      "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts-du6-ff-readonly",
+      "head": "d0ac42c60dcca992db78860b8469cfed3dd527e5"
+    }
+  ],
+  "supplier_calls": 0,
+  "originals_copied": 0,
+  "production_writes": 0,
+  "startup_bytes": 9893247,
+  "root_active_owners": [
+    "company-wiki production source/parser/model integration",
+    "earnings-transcripts DU7 reception"
+  ],
+  "main_wip_status_preserved": true
+}

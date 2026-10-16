@@ -1,3 +1,27 @@
+## DU8并行施工已就绪 — 2026-10-16
+
+三条新独立线已准备为READY：[总表](parallel/du8-2026-10-16/README.md)、[RF比较单一责任](parallel/du8-2026-10-16/du8_rf_comparison_owner.md)、[FF固定时限矩阵](parallel/du8-2026-10-16/du8_ff_matrix_completion.md)、[AUDIT数值实读证据](parallel/du8-2026-10-16/du8_audit_measure_evidence.md)。各自RF/FF/AUDIT独占工区，源码base/seed/干净状态/import已验证，启动共9,893,247bytes，0原件副本/0供应商/主仓WIP保持；各卡业务A/B/C尚未实施。可立即同时启动，不等待ROOT的CWP/ET接线；只有原三个大节点集中验收。
+
+ROOT主线继续：ET独审已完成三共因修复，228PASS/10旧gold，待测试基础设施收尾及正常并线；多父文真实入口2RED→50PASS，原生TABLE生产3RED→90相关PASS。深页按显式请求的来源port已修，真实金禾223/224有31bound/4ambiguous，但默认自动triage请求136页仍在前部耗尽原15秒/64请求页限，深页仍deferred；此条继续OPEN，必须由统一阅读策略提供有限优先请求，不提高限额/写公司页码补丁。公开v4真实batch选择/正式runner由ROOT子线继续，尚未称真实付费摘要或完整语义通过。
+
+**Next Step：** ROOT完成ET并线、默认深页优先请求与TABLE未知标记/缓存身份、正式v4端口/runner集中验收，再执行原配置真实摘要与独立语义holdout；三DU8作者分别独立A→B→C交付，ROOT合流。母目标仍OPEN。
+
+---
+
+## 2026-10-16 主线生产闭包恢复实施
+
+用户确认DU7-ET-EXTRACTION已交付，ROOT开始独立验收；原四包均已并线，工程CI与PWF发布已完成（bd270b71）。本轮严格复用既有配置、预算和授权，原件/生产目录只读，所有真实摘要与下载测试在独立可清理测试根中执行。
+
+- A（进行中）：接收ET，复放其真实入口/既有TXT复用/不翻译与失败路径，审清作者披露的baseline失败，再正常并线、推送；不直接按作者文字跳过失败。
+- B（进行中）：完成已有STATE效率进展与parent composition真实生产接线；来源层修复深页layout捕获与native TABLE依赖闭包，覆盖缓存版本/恢复、不同文档策略/父文作用域，按根因修复，不提高上限掩盖复杂度。
+- C（待执行）：正式worker→公共资料读→RF/AUDIT实际消费者；用现配置真实供应商生成原语言摘要并验证首次调用/缓存恢复0重复调用、原引文/数字/语义质量与独立holdout。保留未知/失败，不用组件通过代替语义验收；最终正常提交/推送并核对工程CI。
+
+仅在原A/B/C大节点集中审查测试。ET只读独审、PDF来源结构只读调查、真实E2E复用路线只读调查互不改代码；ROOT独占CWP生产接线和总PWF。源/测试既有WIP已按字节冻结到`.planning/shared-reading-production/production-closure-20261016/start-source-sha.json`，不丢弃未提交进展。
+
+**Next Step：** 先固化parent真实依赖丢失的生产RED并接入已有composer；同时收齐ET独审和深页捕获定位，进入一次集中生产节点。
+
+---
+
 ## 发布收尾已核对 — 2026-10-16
 
 本次四包已验收并入主线，RF、FF、CWP均已正常推送并核对精确HEAD的远端CI成功；AUDIT无origin，仅本地合并并定点同步技能。DU7-ET-EXTRACTION仍施工，目录未改。四包结果不等于共享引擎生产全链完成；原生TABLE/深页捕获、正式摘要及RF/AUDIT消费者、真实语义holdout和母审查循环继续按原计划执行。
