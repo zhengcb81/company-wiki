@@ -126,16 +126,17 @@ SAMPLE_AXES: dict[str, dict[str, str]] = {
     "fresh-cn-smic-fy2025": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-14; anchors verified against the original; no candidate run recorded yet"),
     "fresh-hk-anta-fy2025": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-14; anchors verified; no candidate run recorded yet"),
     "fresh-us-apple-10k": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-14; DOM-locator anchors verified; no candidate run recorded yet"),
-    # --- DU5-CORPUS set (frozen 2026-10-15) ------------------------------
-    "du5-cn-iflytek-h1": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-15 (du5_manifest.json); all anchors verified; no candidate output read before freeze"),
-    "du5-cn-fangbang-q1": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-15; all anchors verified"),
-    "du5-cn-proya-q1": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-15; all anchors verified (period/unit table case)"),
-    "du5-cn-zhongmi-offering": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-15; all anchors verified (investment/plan case)"),
-    "du5-hk-kingsoft-interim": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-15; all anchors verified (千元/百萬元 unit case)"),
-    "du5-hk-kingsoft-q1": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-15; all anchors verified (quarter-only period case)"),
-    "du5-us-msft-8k": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-15; all anchors verified (container-vs-exhibit case)"),
-    "du5-us-msft-ex991": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-15; all anchors verified (plan/metric-definition case)"),
-    "du5-cn-gbits-call": _sample(_Y, _U, _U, _U, "gold frozen 2026-10-15; all anchors verified (negation/plan/Q&A case)"),
+    # --- DU5-CORPUS set (frozen 2026-10-15; axes updated after the 2026-10-15
+    # native du5 run: 9/9 parsed and readable, critical_fact_unavailable=0) ----
+    "du5-cn-iflytek-h1": _sample(_Y, _Y, _Y, _N, "gold frozen 2026-10-15 (du5_manifest.json), anchors verified pre-freeze; native du5 run: parsed, 96 spans selected, no summary emitted"),
+    "du5-cn-fangbang-q1": _sample(_Y, _Y, _Y, _N, "gold frozen 2026-10-15, anchors verified; native du5 run: parsed, 8 spans selected, no summary emitted"),
+    "du5-cn-proya-q1": _sample(_Y, _Y, _N, _N, "gold frozen 2026-10-15, anchors verified (period/unit table case); native du5 run: parsed and readable but 0 spans selected — pure-financial quarter, zero selection is legitimate"),
+    "du5-cn-zhongmi-offering": _sample(_Y, _Y, _Y, _N, "gold frozen 2026-10-15, anchors verified (investment/plan case); native du5 run: parsed, 160 spans selected, no summary emitted"),
+    "du5-hk-kingsoft-interim": _sample(_Y, _Y, _Y, _N, "gold frozen 2026-10-15, anchors verified (千元/百萬元 unit case); native du5 run: parsed, 96 spans selected, no summary emitted"),
+    "du5-hk-kingsoft-q1": _sample(_Y, _Y, _Y, _N, "gold frozen 2026-10-15, anchors verified (quarter-only period case); native du5 run: parsed, 4 spans selected, no summary emitted"),
+    "du5-us-msft-8k": _sample(_Y, _Y, _N, _N, "gold frozen 2026-10-15, anchors verified (container-vs-exhibit case); native du5 run: parsed and readable but 0 spans selected — container body carries only document_meta targets"),
+    "du5-us-msft-ex991": _sample(_Y, _Y, _Y, _N, "gold frozen 2026-10-15, anchors verified (plan/metric-definition case); native du5 run: parsed, 7 spans selected, no summary emitted"),
+    "du5-cn-gbits-call": _sample(_Y, _Y, _Y, _N, "gold frozen 2026-10-15, anchors verified (negation/plan/Q&A case); native du5 run: parsed via docx frontend, 23 spans selected, no summary emitted"),
 }
 
 

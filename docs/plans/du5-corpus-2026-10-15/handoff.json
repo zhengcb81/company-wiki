@@ -68,11 +68,12 @@
     },
     {
       "command": "python -B -X utf8 -m tools.document_understanding_benchmark --mode native --bindings <du5> --output receipts/native-run-final --probe-config <prod source_catalog.yaml> --sample <9 du5>",
-      "exit_code": 0,
+      "exit_code": 1,
       "passed": 0,
       "failed": 8,
       "skipped": 0,
-      "receipt": "docs/plans/du5-corpus-2026-10-15/receipts/native-run-final/native/summary.json"
+      "receipt": "docs/plans/du5-corpus-2026-10-15/receipts/native-run-final/native/summary.json",
+      "exit_note": "CLI exit 1 is the honest outcome: any FAIL maps to EXIT_FAIL=1; the run has 8 FAILs (production quality gaps, not a package defect)"
     }
   ],
   "fixtures": [
@@ -192,9 +193,10 @@
         "du5-cn-proya-q1",
         "du5-cn-gbits-call"
       ],
-      "result": "all facts reference_resolved; sample B clean (21/21 anchors, semantics faithful); sample A: 4 defective must_not_assert (true/ambiguous negative controls) + 1 modality mislabel",
-      "action": "recorded v2 content correction (gold_corrections.content_corrections; old values replayable; anchors/importance/denominators untouched)",
-      "receipt": "docs/plans/du5-corpus-2026-10-15/receipts/review-corrections-applied.txt"
+      "result": "all anchors RESOLVED (proya 22 anchors/10 facts, gbits 20 anchors/12 facts); sample A (proya): 4 defective must_not_assert strings across 3 facts (true/ambiguous negative controls); sample B (gbits): 1 modality mislabel (conditional->plan), otherwise clean",
+      "action": "recorded v2 content correction (gold_corrections.content_corrections; old values replayable; anchors/importance/denominators untouched). Post-freeze fact additions suggested by the reviewer were deliberately NOT applied",
+      "receipt": "docs/plans/du5-corpus-2026-10-15/receipts/independent-review-verdict.md",
+      "action_receipt": "docs/plans/du5-corpus-2026-10-15/receipts/review-corrections-applied.txt"
     }
   ],
   "old_failures_preserved": true,

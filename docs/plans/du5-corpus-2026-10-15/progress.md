@@ -32,8 +32,10 @@
 - 真实 CLI native 回放 ×2（复跑一致）：9/9 可读、新集 critical 12/37=0.324
   （8 FAIL/1 PARTIAL，生产质量缺口如实保留）；raw/config/sentinel 恢复证据齐全，
   model/paid/network=0（receipts/native-run*/native/summary.json）。
-- 独立 reviewer 对照原件复核 2 组新来源目标（proya/gbits，21+10 锚点全 RESOLVED）；
-  发现 4 条负例真命题/歧义 + 1 条 modality 误标 → 按“改错金标需单独更正记录和版本”
-  以版本 2 记录应用（gold_corrections.content_corrections，旧值可回放）。
+- 独立 reviewer 对照原件复核 2 组新来源目标（proya 22 锚点/10 事实、gbits 20 锚点/
+  12 事实，全部 RESOLVED；判定原文见 receipts/independent-review-verdict.md）；
+  发现 proya 3 条事实的 4 条 must_not_assert 含真命题/半真析取 + gbits 1 条 modality
+  误标 → 按“改错金标需单独更正记录和版本”以版本 2 记录应用
+  （gold_corrections.content_corrections，旧值可回放）。
   reviewer 建议的增补事实因已过冻结点未采纳，记录为后续候选。
 - 旧/新分开报告、handoff.md/json、正常 commit；STOP 等 ROOT 接收。
