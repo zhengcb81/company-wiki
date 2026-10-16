@@ -4,7 +4,8 @@
   "base_commit": "8c027011037dc8c8659235fb65f529028dcd15ca",
   "branch": "codex/du5-corpus-20261015",
   "implementation_commits": [
-    "e347c2f2"
+    "e347c2f2",
+    "bdcd8b60"
   ],
   "changed_paths": [
     "tools/document_understanding_benchmark/gold/du5-*.json (9 new frozen gold records)",
