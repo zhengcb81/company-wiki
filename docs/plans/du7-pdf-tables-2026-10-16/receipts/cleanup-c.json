@@ -1,0 +1,44 @@
+{
+ "schema_version": "du7-cleanup/1",
+ "lane": "DU7-PDF-TABLE",
+ "originals_readonly": [
+  {
+   "receipt": "e2e-cn-convertible-addendum-p25-26.json",
+   "file_name": "金禾实业：公开发行可转换公司债券募集说明书.PDF",
+   "sha256_before": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+   "sha256_after": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+   "byte_identical": true
+  },
+  {
+   "receipt": "e2e-cn-convertible-holdout-p223-224.json",
+   "file_name": "金禾实业：公开发行可转换公司债券募集说明书.PDF",
+   "sha256_before": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+   "sha256_after": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+   "byte_identical": true
+  },
+  {
+   "receipt": "e2e-cn-equity-p61-62.json",
+   "file_name": "恒锋工具：2020年向特定对象发行A股股票募集说明书（注册稿）.PDF",
+   "sha256_before": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+   "sha256_after": "37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e",
+   "byte_identical": true
+  },
+  {
+   "receipt": "e2e-hk-annual-p12.json",
+   "file_name": "2024年度报告（港股）.pdf",
+   "sha256_before": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+   "sha256_after": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+   "byte_identical": true
+  }
+ ],
+ "temp_dirs_removed": [
+  "$TEMP/du7-e2e-work (explicit e2e work dir, removed after runs)",
+  "tempfile.TemporaryDirectory du7-e2e-* (per run, auto-deleted)"
+ ],
+ "derived_files_left_in_test_dirs": [],
+ "test_dir_state": "tests/unit/pdf_table_observations contains only lane test sources; no generated fixtures on disk",
+ "sentinels": "each e2e run wrote and removed its own sentinel.json inside its TemporaryDirectory",
+ "supplier_calls": 0,
+ "production_writes": 0,
+ "production_config_touched": false
+}

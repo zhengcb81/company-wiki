@@ -1,0 +1,78 @@
+{
+ "schema_version": "du7-pdf-table-e2e/1",
+ "status": "RUN",
+ "original": {
+  "file_name": "金禾实业：公开发行可转换公司债券募集说明书.PDF",
+  "sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+  "sha256_expected": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+  "sha256_matches_expected": true,
+  "bytes": 7062482,
+  "pages_requested": [
+   223,
+   224
+  ]
+ },
+ "parse": {
+  "parse_count": 1,
+  "page_count": 283,
+  "pages_read": 283,
+  "table_scan_pages": [
+   223,
+   224
+  ],
+  "deferred_table_page_count": 281,
+  "unit_count": 11150,
+  "seconds": 1.956,
+  "layout_capture": {
+   "processed_page_count": 64,
+   "processed_unit_count": 2277,
+   "deferred_unit_count": 8873,
+   "fine_element_count": 15190,
+   "complete": false,
+   "diagnostic_counts": {
+    "LAYOUT_CAPTURE_DEFERRED": 128
+   }
+  }
+ },
+ "work": {
+  "budget_ceiling": 4000000,
+  "used_total": 1264107,
+  "stages_used": {
+   "parse_done": 0,
+   "layout_hints_done": 1245231,
+   "table_observations_done": 1264107,
+   "binder_done": 1264107
+  },
+  "component_work_used": 18876
+ },
+ "tables": [],
+ "denominator": {
+  "wire_table_claims": 3,
+  "tables_built": 0,
+  "slots_observed": 0,
+  "refs_located": 0,
+  "cells_without_located_ref": 0,
+  "rows_truncated": 0,
+  "measurements": {
+   "bound": 0,
+   "ambiguous": 0,
+   "unavailable": 0
+  },
+  "unlocated_examples": [],
+  "binder_diagnostic_counts": {},
+  "component_diagnostic_counts": {
+   "TABLE_ROW_SLOTS_UNAVAILABLE": 3,
+   "TABLE_CELLS_UNAVAILABLE": 3
+  },
+  "component_status": "partial"
+ },
+ "values": [],
+ "all_slices_match_original": true,
+ "cleanup": {
+  "original_sha256_after": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+  "original_unchanged": true,
+  "derived_files_deleted": true,
+  "work_dir_was_temporary": true
+ },
+ "wall_seconds": 3.572
+}

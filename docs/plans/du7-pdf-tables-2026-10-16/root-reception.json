@@ -1,0 +1,24 @@
+{
+  "lane": "pdf",
+  "status": "ENGINEERING_ACCEPTED_AWAITING_PUBLICATION",
+  "source_sha256": {
+    "src/company_wiki/document_normalization/pdf_table_observations/adapter.py": "91468d06823387a19f1cdbb5d84ed470d8f41b6d9514021096aad3eef3382fb2",
+    "tests/unit/pdf_table_observations/test_1_prepare_and_scopes.py": "d9a1e17c593569272b8e7244595492840784a9559fa1c953eca89541d4a4ace9",
+    "tests/unit/pdf_table_observations/test_2_values_periods_units.py": "2377a41d95d05b4fd28adab77c6b3c18d3267fa5c373d3ead70e0034e7671423",
+    "tests/unit/pdf_table_observations/test_4_multi_unit_cells.py": "71f7daee7c022c4ad890df37c8425565f1a93071dc7e60a84bda884ee82e62a4",
+    "tests/unit/pdf_table_observations/test_5_budget_and_stability.py": "f927d2dd47e3eae186cadf7aee13636d17aab413927afe8eba28ce7aa22fff27",
+    "tests/unit/pdf_table_observations/test_6_generalization.py": "397f6a9b2147d032aa10f39c7f68e56d68b51822d56e646b5ef589b33bc29506",
+    "tests/unit/pdf_table_observations/test_7_real_pipeline_pdf.py": "affdff7c851e55ab14365880e029b328e49dfe56000ea03889dc1b1957f5d21e",
+    "tests/unit/pdf_table_observations_root/test_projection_evidence.py": "545b68059a55309d186a0909e5902343f2b29c45ded2e2d8bcee5ae6cb8bfadc",
+    "docs/plans/du7-pdf-tables-2026-10-16/root_acceptance_repair.md": "b91043068c509c7e34f525c2594da4808f3da0b97596e2655c000e267cd6b814",
+    "docs/plans/du7-pdf-tables-2026-10-16/e2e/run_e2e.py": "a1df5331f7ef08840f2b300155e22d49faf50b301163e6110676028e7e0e0fd9"
+  },
+  "retained_archive": {
+    "path": "root-reception-receipts.zip",
+    "bytes": 40695,
+    "sha256": "512ae5ff46ab421dd3c7bbb6b2eabc3a5f6c27c342783ccd5b91a3b3bdd37d39"
+  },
+  "supplier_calls": 0,
+  "production_writes": 0,
+  "note": "ROOT接收组件验收通过，待正常提交/并线/远端；不是生产摘要接线完成。独审6类RED：partial碎片假整体数值、无观察的首格标签导致丢值、耗尽后O(rows*cells)扫描、坏格丢弃仍complete、fine页矛盾、header跨scope。隔离修复后43短测通过；逐row索引一次、排序/复制预付，耗尽尾部扫描由12万/49万/194万line变72/72/72。真实名创年报p12单parse、2表28格16值（12bound/4ambiguous），所有引用核对；2M预算用1,162,753、原件/配置SHAmtime不变，0供应商。集中557PASS/24SKIP/2FAIL均为ROOT稀疏树漏检出旧DU2资产，补既有夹具后原两项2PASS/4.03s，原失败保留，不改旧断言。六个本次作者新测试的错误首格/耗尽假设已保存原zip并纠正，旧binder/layout金标没改。全局e2e runner移入本PWF/e2e避免未来外包冲突。深页223/224因上游64页capture未覆盖，未知merged/空格/行标签及正式selection/summary/RF仍OPEN，由ROOT来源层后续解决。"
+}
