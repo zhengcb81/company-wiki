@@ -1,0 +1,59 @@
+{
+  "schema_version": "du9-launch/1",
+  "status": "READY_NOT_DISPATCHED",
+  "lanes": [
+    {
+      "id": "DU9-CWP-GEOMETRY-POLICY",
+      "workdir": "C:/Users/郑曾波/Projects/company-wiki-du9-geometry-policy",
+      "branch": "codex/du9-geometry-policy-20261016",
+      "base": "bf160c8e3fd8b9620f6bbc891ba448fd5647e388",
+      "seed_commit": "68807088ab1eb51bfd45c5d112ba601a96d7b40d",
+      "plan": "docs/plans/du9-geometry-policy-2026-10-16/task_plan.md",
+      "card": "du9_cwp_geometry_policy.md",
+      "status": "READY",
+      "startup_clean": true,
+      "imports": "CURRENT_WORKTREE_IMPORT_OK",
+      "independent_review_required": true,
+      "business_tests": "NOT_RUN_AUTHOR_TASK",
+      "bytes": 25056644
+    },
+    {
+      "id": "DU9-CWP-GEOMETRY-PLANNER",
+      "workdir": "C:/Users/郑曾波/Projects/company-wiki-du9-geometry-planner",
+      "branch": "codex/du9-geometry-planner-20261016",
+      "base": "bf160c8e3fd8b9620f6bbc891ba448fd5647e388",
+      "seed_commit": "cb1e4c0783c00dedd58160a458b7ad3d2405cfc2",
+      "plan": "docs/plans/du9-geometry-planner-2026-10-16/task_plan.md",
+      "card": "du9_cwp_geometry_planner.md",
+      "status": "READY",
+      "startup_clean": true,
+      "imports": "CURRENT_WORKTREE_IMPORT_OK",
+      "independent_review_required": true,
+      "business_tests": "NOT_RUN_AUTHOR_TASK",
+      "bytes": 25056735
+    },
+    {
+      "id": "DU9-ET-LEGACY-COMPARISON",
+      "workdir": "C:/Users/郑曾波/Projects/earnings-transcripts-du9-legacy-comparison",
+      "branch": "codex/du9-legacy-comparison-20261016",
+      "base": "0cb71731cef6c6b3582f595d44f5b8a077392ac1",
+      "seed_commit": "306ce2df1c622e635770de1dee8caba5057b9716",
+      "plan": "docs/plans/du9-legacy-comparison-2026-10-16/task_plan.md",
+      "card": "du9_et_legacy_comparison.md",
+      "status": "READY",
+      "startup_clean": true,
+      "imports": "CURRENT_WORKTREE_IMPORT_OK",
+      "independent_review_required": true,
+      "business_tests": "NOT_RUN_AUTHOR_TASK",
+      "bytes": 637419
+    }
+  ],
+  "supplier_calls": 0,
+  "production_originals_copied": 0,
+  "production_writes": 0,
+  "total_bytes": 50750798,
+  "startup_guard_note": "Initial status equality guard rejected authorized concurrent ROOT changes to structure/tables.py; all three seed commits had completed. Recovery only reads these existing worktrees, validates exact seed/branch/clean/card bytes and ET unchanged state. No retry of worktree creation or source restore.",
+  "root_concurrent_authorized_changes": [
+    "src/company_wiki/document_understanding/structure/tables.py"
+  ]
+}
