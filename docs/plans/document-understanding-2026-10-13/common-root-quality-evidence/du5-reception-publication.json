@@ -1,0 +1,248 @@
+{
+  "schema_version": "du5-reception-publication/1",
+  "status": "ALL_THREE_ACCEPTED",
+  "cwp": {
+    "merge": "b083a1b1c3fb2c4aa119e5d5e78ff8b23af364c1",
+    "fix_head": "5dae70a02d5ad87e89cfccb0dc68c7de55026d61",
+    "normal_push": {
+      "head": "5dae70a02d5ad87e89cfccb0dc68c7de55026d61",
+      "exit_code": 0,
+      "seconds": 406.2281522999983,
+      "observed_at": "2026-10-16T01:32:47.523107+00:00",
+      "hooks_bypassed": false,
+      "remote_tip": "5dae70a02d5ad87e89cfccb0dc68c7de55026d61",
+      "tracked_worktree_and_index_clean_before_push": true
+    },
+    "ci": {
+      "observed_at": "2026-10-16T01:33:26.565994+00:00",
+      "repo": "company-wiki",
+      "requested_head": "5dae70a02d5ad87e89cfccb0dc68c7de55026d61",
+      "runs": [
+        {
+          "id": 38834945691,
+          "head_sha": "5dae70a02d5ad87e89cfccb0dc68c7de55026d61",
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38834945691"
+        }
+      ]
+    },
+    "full_units_before_final_exact_push": {
+      "passed": 5954,
+      "skipped": 24,
+      "seconds": 366.56
+    },
+    "real_benchmark": {
+      "passed": 252,
+      "seconds": 56.54
+    },
+    "git_transport_final": {
+      "passed": 12,
+      "seconds": 3.89
+    }
+  },
+  "rf": {
+    "implementation": "794240df7b8c0ce3e0d6cc75ac0219a9b134311d",
+    "closure": "5122107bbc86c3d1e79886b372700c05d19bb349",
+    "ci": {
+      "observed_at": "2026-10-16T01:26:22.358409+00:00",
+      "repo": "revenue-forecast",
+      "requested_head": "5122107bbc86c3d1e79886b372700c05d19bb349",
+      "runs": [
+        {
+          "id": 38834985290,
+          "head_sha": "5122107bbc86c3d1e79886b372700c05d19bb349",
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/38834985290"
+        }
+      ]
+    },
+    "focused_passed": 210,
+    "cli_checks": 23,
+    "installed_aliases": 3,
+    "physical_copies": 2
+  },
+  "audit": {
+    "implementation": "58b2797492af49d060d036a663c6dad9d672da25",
+    "closure": "a3f36d16016ff80169b3e535ea1b1df4fa595dd8",
+    "status": "MERGED_LOCAL_INSTALLED_NO_REMOTE",
+    "focused_passed": 48,
+    "installed_copies": 2,
+    "packet_bytes_before": 591439,
+    "packet_bytes_after": 54835
+  },
+  "supplier_calls": 0,
+  "originals_changed": 0,
+  "default_selector": "0.8.0",
+  "production_wiring_and_semantic_quality": "OPEN",
+  "archive": {
+    "path": "docs/plans/document-understanding-2026-10-13/common-root-quality-evidence/du5-reception-publication-receipts.zip",
+    "sha256": "cef40a3716e6ff384e18d3c98f4a7bb90a635c06260750a187a661bba40cdaad",
+    "bytes": 20776,
+    "members": [
+      {
+        "name": "du5-corpus-final-push/receipt.json",
+        "bytes": 187,
+        "sha256": "3a8aa8addf563cc0c1b91ee12682b85a51a537531a3726d270a41cabade608d0"
+      },
+      {
+        "name": "du5-corpus-final-push/stderr.log",
+        "bytes": 173,
+        "sha256": "ecd4d9d5f45ab62b0c0ed21b1d3fe70015d14e79efabb610d94dc4065a65edd5"
+      },
+      {
+        "name": "du5-corpus-final-push/stdout.log",
+        "bytes": 39705,
+        "sha256": "b66e3c20d3cd7414789993cc94a6d33f08910a77fc498c9c2296cebd7ab63afc"
+      },
+      {
+        "name": "du5-corpus-final-fixed-push/ci.json",
+        "bytes": 166,
+        "sha256": "d1ea99e408a60dbaad59043552450fb56f7ecf2eb637077c46212076f718bb13"
+      },
+      {
+        "name": "du5-corpus-final-fixed-push/receipt.json",
+        "bytes": 187,
+        "sha256": "91d415bc8992d0c63a88040953cf6a05f2b3f7be1ff0e5ad400d24b854c4fa13"
+      },
+      {
+        "name": "du5-corpus-final-fixed-push/stderr.log",
+        "bytes": 89,
+        "sha256": "db11743b6253fdb03b16ba0da787455bd074e9dbd32a99a58e53b6e5b180e8e7"
+      },
+      {
+        "name": "du5-corpus-final-fixed-push/stdout.log",
+        "bytes": 261,
+        "sha256": "414284877814e874fc64500f5df0acf34d34c1003563a9ea8530f37e2d2cc162"
+      },
+      {
+        "name": "du5-corpus-exact-head-push/ci-final.json",
+        "bytes": 444,
+        "sha256": "a77bcc0b575ef4bdb506a96e8fa0dedc4525c5c286648f591673eedbfe164952"
+      },
+      {
+        "name": "du5-corpus-exact-head-push/receipt.json",
+        "bytes": 303,
+        "sha256": "d4db9efed82216ffa4ea0cce0e75c988c6f2e8914e3050dd62e25fc6a4e7793b"
+      },
+      {
+        "name": "du5-corpus-exact-head-push/stderr.log",
+        "bytes": 22,
+        "sha256": "47e930bfa8547af0e275fdc8f30ee4b5eded740e9615307434258197298b0ea5"
+      },
+      {
+        "name": "du5-corpus-exact-head-push/stdout.log",
+        "bytes": 239,
+        "sha256": "095ada48e227cad048814fdd9397ff40d07ecf2d5666545c13e8725084f33135"
+      },
+      {
+        "name": "du5-reception/corpus-git-attributes-red/junit.xml",
+        "bytes": 3305,
+        "sha256": "cf5f6de00cb0c033a70e1a408ddec8a14a5ca574b9ca3d110dcf5f81012544b1"
+      },
+      {
+        "name": "du5-reception/corpus-git-attributes-red/receipt.json",
+        "bytes": 762,
+        "sha256": "cc7479775d6ff86d59889b05d156b5652659a377734bf0a66df01d18c7b0f91b"
+      },
+      {
+        "name": "du5-reception/corpus-git-attributes-red/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "du5-reception/corpus-git-attributes-red/stdout.log",
+        "bytes": 2421,
+        "sha256": "7478f1e9c482ee4a840645fed027fc8a85513c699a767a3d1e50b527f827ab30"
+      },
+      {
+        "name": "du5-reception/corpus-git-attributes-green/junit.xml",
+        "bytes": 2360,
+        "sha256": "00f9c59ac9d74abb453bb41fae9f9aa6a714c56236a53703c519d6c59ecc443a"
+      },
+      {
+        "name": "du5-reception/corpus-git-attributes-green/receipt.json",
+        "bytes": 764,
+        "sha256": "2815a3d29155655a401ea28cbd367ded25a1b9a57ad03c9a9f738e2623cf568e"
+      },
+      {
+        "name": "du5-reception/corpus-git-attributes-green/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "du5-reception/corpus-git-attributes-green/stdout.log",
+        "bytes": 1363,
+        "sha256": "476edac2598e7e508ab465a3e8ae8970142bdb586a2ede65bb1aa60f8ad9a760"
+      },
+      {
+        "name": "du5-reception/rf-final-push/ci-final.json",
+        "bytes": 457,
+        "sha256": "030f1f0bf7452f18a57eb91af453e7a985b8f1d3263e9fe0019ddc21df85bf3f"
+      },
+      {
+        "name": "du5-reception/rf-final-push/receipt.json",
+        "bytes": 282,
+        "sha256": "08972c2202a58447af53050cfaf88a46ae0c0234d41c6e78932934fe986b63c4"
+      },
+      {
+        "name": "du5-reception/rf-final-push/stderr.log",
+        "bytes": 89,
+        "sha256": "95e6bcbeb6e7ca832ded605519a01c3e86bd441450e3606a6c4c33ee98b550e7"
+      },
+      {
+        "name": "du5-reception/rf-final-push/stdout.log",
+        "bytes": 699,
+        "sha256": "b4c32d8a485aca7dbaeb94abb476d71950b844e669335c9ca7b1b6ead0499426"
+      },
+      {
+        "name": "du5-reception/rf-closure-push/ci-final.json",
+        "bytes": 457,
+        "sha256": "0ec22dd8708bc5cec73115be843bf601a382dedf459b123e7e4e6fd58e22e124"
+      },
+      {
+        "name": "du5-reception/rf-closure-push/receipt.json",
+        "bytes": 282,
+        "sha256": "d37b1638eba4048b08d0499b51675835c1bc1fb8a476aeccd2068dca9801f3db"
+      },
+      {
+        "name": "du5-reception/rf-closure-push/stderr.log",
+        "bytes": 89,
+        "sha256": "f5dae940f3529370fb75e77b222ee178a2e732e7df989417afc277bd2ebc5682"
+      },
+      {
+        "name": "du5-reception/rf-closure-push/stdout.log",
+        "bytes": 699,
+        "sha256": "d82025488c83a159382baef8d8ec2e391e9f5ca1665a709f0551031c93761adb"
+      },
+      {
+        "name": "du5-reception/rf-merge-commit.json",
+        "bytes": 1958,
+        "sha256": "5236b03008027a04bb91fdcfeab50daebfaca2be1f9b0a3de1dce924e8d8f893"
+      },
+      {
+        "name": "du5-reception/audit-merge-commit.json",
+        "bytes": 3137,
+        "sha256": "751f2c59a1e28d4601fae0a96fe4b8ac8a8b86283aee187c9ffe69723786d271"
+      },
+      {
+        "name": "du5-reception/peer-closure-commits.json",
+        "bytes": 1090,
+        "sha256": "f2bf907808c090693ce9883e3617b34c029ed9fa3f9dfd74c058e4430aa1d9fd"
+      },
+      {
+        "name": "du5-reception/rf-install.json",
+        "bytes": 1848,
+        "sha256": "27a1bf24e88530804b1a6dc1d8cc7c446bcd25d3af5411049a58ffdaf131a3a4"
+      },
+      {
+        "name": "du5-reception/audit-install.json",
+        "bytes": 2488,
+        "sha256": "5479f41bc8e8ab1fa582a661b3ddbf2021d958fc2e342675c000edcdc31d1258"
+      }
+    ]
+  }
+}

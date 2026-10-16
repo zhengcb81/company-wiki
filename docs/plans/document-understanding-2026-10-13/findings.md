@@ -1,10 +1,12 @@
-## ROOT当前状态 — 2026-10-16 DU5集中接收
+## ROOT当前状态 — 2026-10-16 DU5三包接收完成
 
-三包均收到并保留作者history接入主线待提交。CORPUS已修复独审发现的金标舍入与锚点验证共因：252真实材料测试通过、最终格式定点7PASS、Ruff通过，保留旧版本/分母及原生产12/37漏读。RF单位共因修复210PASS/9SKIP/59subtests、完整23项CLI E2E通过；AUDIT谱系/冲突聚合/unknown/重复片段共因仍在修复。作者目录/原件/生产配置不改，RF原alert WIP保护，0供应商；累计599590tokens/385113µUSD代理/旧unknown7/2M与$20上限不变。
+DU5三包已验收并线。CWP merge b083a1b1及配置补丁5dae70a0正常推送，精确CI 38834945691 SUCCESS；最终5954PASS/24SKIP、真实benchmark252PASS、Git12种往返PASS。RF main794240df/收尾5122107b已推且CI38833831553/38834985290成功，210集中及23CLI通过，三路径/两物理副本定点同步。AUDIT main58b2797/收尾a3f36d1本地并线、48集中/静态与真实CLI通过，两份技能同步；无origin/对应远端not found，未远端发布。
 
-本阶段只有原接收大节点，不增许可或人工签收。[接收细则](review/du5_reception.md)；[CORPUS留证](common-root-quality-evidence/du5-corpus-acceptance.json)。audit无origin且对应GitHub查询not found，尚无可推远端，不能声称已同步。
+独审发现的根因均已修复：金标合法舍入/页行SHA/例外范围；share与count真正数值单位；审查谱系/冲突无损聚合/unknown/历史与当前区分及片段去重（同输入591439→54835B）。旧20条8/6/6和业务遗漏、原生12/37保持，不用工具绿替代生产质量。原件/配置/作者树保护，RF原alert WIP保留，测试Temp恢复；0供应商，累计599590tokens/385113µUSD代理/旧unknown7/2M/$20不变。
 
-**Next Step：** 正常发布已通过CORPUS/RF，完成AUDIT集中修复/实际CLI和安装；随后继续统一准备/WorkBudget与FORM→STATE→TABLE生产接线、v4与真实质量。默认0.8，母G2/G4/G5及原三/新三公司循环仍开放，组件绿不关闭母目标。
+[完整接收](review/du5_reception.md)，[正式发布证据](common-root-quality-evidence/du5-reception-publication.json)。
+
+**Next Step：** 按[生产接线细则](review/du4_production_integration.md)先TDD修统一准备与WorkBudget所有权，复用一次来源视图，再FORM→STATE→TABLE接线、v4正式摘要/覆盖/旧付费恢复及真实质量。默认0.8，HKIPO性能、母G2/G4/G5与原三/新三公司审计仍开放，母目标未完成。只保留原大节点，不新增许可或小节点签收。
 
 ---
 

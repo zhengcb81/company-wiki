@@ -1,3 +1,11 @@
+## ROOT接收收尾 — 2026-10-16
+
+CWP已正常并线推送，252真实材料测试与12Git往返通过，精确CI 38834945691 SUCCESS。ROOT金标纠正显式v3，保留原旧值/锚点/重要性/分母；作者v2 handoff为历史。
+
+**Next Step：** ROOT用同一金标验生产候选；原native12/37是待修质量，不自称生产完成。详[总接收](../document-understanding-2026-10-13/review/du5_reception.md)。
+
+---
+
 # 调查记录（findings）
 
 2026-10-15。基线 `8c027011`，分支 `codex/du5-corpus-2026-10-15`。全部测量只读；

@@ -1,6 +1,8 @@
-## 2026-10-16 DU5接收进行中
+## 2026-10-16 DU5验收并线完成
 
-CORPUS集中修复后真实252项通过；RF单位210项+23项CLI通过；AUDIT仍修复。所有合并尚待正式提交/发布，当前状态统一见[共享PWF](../document-understanding-2026-10-13/task_plan.md)和[接收细则](../document-understanding-2026-10-13/review/du5_reception.md)。原默认/生产真实质量/母公司循环未完成。
+DU5三包已验收并线。CWP merge b083a1b1及配置补丁5dae70a0正常推送，精确CI 38834945691 SUCCESS；最终5954PASS/24SKIP、真实benchmark252PASS、Git12种往返PASS。RF main794240df/收尾5122107b已推且CI38833831553/38834985290成功，210集中及23CLI通过，三路径/两物理副本定点同步。AUDIT main58b2797/收尾a3f36d1本地并线、48集中/静态与真实CLI通过，两份技能同步；无origin/对应远端not found，未远端发布。
+
+统一证据与剩余实施见[共享PWF](../document-understanding-2026-10-13/task_plan.md)。三包不关闭生产接线/正式摘要/真实质量与母公司循环。
 
 ---
 

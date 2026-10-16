@@ -1,6 +1,8 @@
-# 当前接收：2026-10-16
+# DU5接收完成 — 2026-10-16
 
-三作者已交付，不再是待启动任务。CORPUS/RF独审整改与集中验证通过、待正式发布；AUDIT接收修复中。以[ROOT接收细则](../../review/du5_reception.md)为准；下方READY是原发包记录。
+DU5三包已验收并线。CWP merge b083a1b1及配置补丁5dae70a0正常推送，精确CI 38834945691 SUCCESS；最终5954PASS/24SKIP、真实benchmark252PASS、Git12种往返PASS。RF main794240df/收尾5122107b已推且CI38833831553/38834985290成功，210集中及23CLI通过，三路径/两物理副本定点同步。AUDIT main58b2797/收尾a3f36d1本地并线、48集中/静态与真实CLI通过，两份技能同步；无origin/对应远端not found，未远端发布。
+
+[ROOT验收](../../review/du5_reception.md)为当前状态；下方启动记录保留历史，不再表示待开工。
 
 ---
 

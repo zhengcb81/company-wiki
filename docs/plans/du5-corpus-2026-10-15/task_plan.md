@@ -1,3 +1,11 @@
+## ROOT接收收尾 — 2026-10-16
+
+CWP已正常并线推送，252真实材料测试与12Git往返通过，精确CI 38834945691 SUCCESS。ROOT金标纠正显式v3，保留原旧值/锚点/重要性/分母；作者v2 handoff为历史。
+
+**Next Step：** ROOT用同一金标验生产候选；原native12/37是待修质量，不自称生产完成。详[总接收](../document-understanding-2026-10-13/review/du5_reception.md)。
+
+---
+
 # DU5-CORPUS 独立施工计划
 
 状态：READY；2026-10-15。工作目录 `C:/Users/郑曾波/Projects/company-wiki-du5-corpus`。
