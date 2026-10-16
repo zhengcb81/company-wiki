@@ -31,3 +31,9 @@
 ```
 
 交付后冻结owned源码，给ROOT最终commit和两份handoff路径，STOP。细卡/冻结接口有不足时交具体反例与提案给ROOT，不自行跨白名单扩张。
+
+## ROOT后续稀疏工区启动修正（2026-10-16）
+
+本次接收发现稀疏工区漏检出`.githooks`，Git对不存在的相对hooks会静默略过。ROOT建立后续代码工区时，在正常commit/push前读取`git config --get core.hooksPath`，将仓库已提交的实际相对hook目录与`.github`检出，核对文件存在；外部绝对hook不覆盖、不改配置。调用正常Git，不用`--no-verify`或SKIP。此为启动环境修复，不是作者新增人工签收。
+
+按本轮测试实际依赖同时检出受版本控制的fixture/辅助脚本。CWP全Unit会读取DU2/DU4计划fixtures、`benchmarks/cross_market_rf`、`control`与`docs/implementation/main-ocr-selection`；目录缺失先补原文件，不跳测试、不改为通过。组件定向测试仅需其实际依赖，不因修复重复每小节点全仓运行。已有ET施工工区不为此重建、重置或插入修改，最终接收由ROOT处理。

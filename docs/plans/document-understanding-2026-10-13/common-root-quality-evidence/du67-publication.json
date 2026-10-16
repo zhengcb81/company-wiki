@@ -1,0 +1,166 @@
+{
+  "schema_version": "du67-publication/1",
+  "status": "FOUR_ACCEPTED_MERGED_PUBLISHED_WHERE_ORIGIN",
+  "ci": [
+    {
+      "observed_at": "2026-10-16T17:54:24.831313+00:00",
+      "repo": "revenue-forecast",
+      "requested_head": "0feea9b097747165a37009ad4a7ed5616cf46c38",
+      "runs": [
+        {
+          "id": 38942885025,
+          "head_sha": "0feea9b097747165a37009ad4a7ed5616cf46c38",
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/38942885025"
+        }
+      ]
+    },
+    {
+      "observed_at": "2026-10-16T18:15:48.116751+00:00",
+      "repo": "filing-fetch",
+      "requested_head": "e8a85585b4c64a9596e576ff3b73e5c2ee29c334",
+      "runs": [
+        {
+          "id": 38945628434,
+          "head_sha": "e8a85585b4c64a9596e576ff3b73e5c2ee29c334",
+          "name": "quality",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/38945628434"
+        }
+      ]
+    },
+    {
+      "observed_at": "2026-10-16T17:59:05.070836+00:00",
+      "repo": "company-wiki",
+      "requested_head": "83cc4be55ca79a9cf1e0fedc51ca31c9694dfa05",
+      "runs": [
+        {
+          "id": 38943510645,
+          "head_sha": "83cc4be55ca79a9cf1e0fedc51ca31c9694dfa05",
+          "name": "CI",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38943510645"
+        }
+      ]
+    }
+  ],
+  "ff_portability_commit": {
+    "before": "ca23c926a808cf38d56e5dbf6cd9fe9185e2af69",
+    "exit_code": 0,
+    "head": "e8a85585b4c64a9596e576ff3b73e5c2ee29c334",
+    "paths": [
+      "tests/test_w07_matrix_efficiency.py",
+      "tests/test_root_w07_matrix_boundaries.py"
+    ],
+    "main_head": "e8a85585b4c64a9596e576ff3b73e5c2ee29c334",
+    "main_status": "?? config/FMP_API_KEY.txt",
+    "key_metadata_unchanged": true
+  },
+  "ff_push": {
+    "lane": "ff",
+    "head": "e8a85585b4c64a9596e576ff3b73e5c2ee29c334",
+    "branch": "main",
+    "exit_code": 0,
+    "remote_tip": "e8a85585b4c64a9596e576ff3b73e5c2ee29c334",
+    "head_unchanged": true,
+    "status": "?? config/FMP_API_KEY.txt"
+  },
+  "ff_local_pre_push": {
+    "passed": 754,
+    "skipped": 7,
+    "subtests_passed": 78,
+    "seconds": 114.01,
+    "hook": "normal configured pre-push"
+  },
+  "cwp_original_hook_replay": {
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-du67-integration",
+      "hook",
+      "run",
+      "--to-stdin=C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\du67-reception\\cwp-original-push-refs.txt",
+      "pre-push",
+      "--",
+      "origin",
+      "https://github.com/zhengcb81/company-wiki.git"
+    ],
+    "exit_code": 1,
+    "kind": "replay actual configured hook against original push ref delta after missing sparse hooks corrected",
+    "remote_mutation": false
+  },
+  "cwp_fixture_recovery": {
+    "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "--tb=short",
+      "--timeout=180",
+      "-p",
+      "no:cacheprovider",
+      "tests/unit/du4_operating_states/test_a_real_observation.py",
+      "tests/unit/du4_source_signals/test_real_observation_fixtures.py",
+      "tests/unit/test_cross_market_suite.py::test_corrupt_portable_raw_is_refused",
+      "tests/unit/test_g5_legacy_checks_retirement.py::test_control_architecture_rules_config_has_no_surviving_consumer",
+      "tests/unit/test_main_ocr_selection.py::test_real_normalization_interface_with_explicit_synthetic_split_ocr_port"
+    ],
+    "exit_code": 0,
+    "seconds": 14.63,
+    "action": "check out tracked fixture/control files, no tests/source modifications",
+    "source_writes": false,
+    "previous_attempt": "sandbox invocation timeout120, no result; child confirmed ended, not counted pass"
+  },
+  "wip_recovery": {
+    "cause": "normal pre-commit auto-stash applies tracked diff through Git newline normalization",
+    "all_exact_frozen_sha": true,
+    "rows": [
+      {
+        "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+        "restored_newline_only": false,
+        "exact_frozen_sha": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_reading.py",
+        "restored_newline_only": false,
+        "exact_frozen_sha": true
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "restored_newline_only": true,
+        "exact_frozen_sha": true
+      },
+      {
+        "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+        "restored_newline_only": false,
+        "exact_frozen_sha": true
+      },
+      {
+        "path": "src/company_wiki/document_understanding/operating_states/text_view.py",
+        "restored_newline_only": false,
+        "exact_frozen_sha": true
+      },
+      {
+        "path": "tests/unit/document_understanding_root/test_operating_relation_production.py",
+        "restored_newline_only": true,
+        "exact_frozen_sha": true
+      }
+    ]
+  },
+  "audit_remote": "NO_ORIGIN_LOCAL_ONLY",
+  "et": "IN_PROGRESS_UNTOUCHED",
+  "supplier_calls": 0,
+  "open": [
+    "native TABLE/deep capture and formal summary consumer production closure",
+    "real configured-provider semantic holdout and mother audit loops"
+  ],
+  "archive": {
+    "path": "du67-publication-receipts.zip",
+    "bytes": 12907,
+    "sha256": "3cbff55d0fc01d343677cfcad3c472c648dd71dc284d227713031c5ca3384a45"
+  }
+}

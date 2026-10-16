@@ -1,3 +1,15 @@
+## 发布收尾已核对 — 2026-10-16
+
+本次四包已验收并入主线，RF、FF、CWP均已正常推送并核对精确HEAD的远端CI成功；AUDIT无origin，仅本地合并并定点同步技能。DU7-ET-EXTRACTION仍施工，目录未改。四包结果不等于共享引擎生产全链完成；原生TABLE/深页捕获、正式摘要及RF/AUDIT消费者、真实语义holdout和母审查循环继续按原计划执行。
+
+FF发布时发现ROOT迁移测试误假设无输入时stdin总是PIPE。Ubuntu真实复现两项None.closed；生产无输入正确使用DEVNULL，stdout/stderr仍为管道。先增加跨平台形状回归得到2RED，再修两个测试并明确stdout/stderr存在，保留进程退出、管道关闭和线程清理；Windows32PASS、Ubuntu4PASS，正常推送及精确CI成功。未改生产transport、0.2s/<5s断言、30/180预算或旧业务金标。完整失败和修复收据仍保留。
+
+ROOT稀疏接收工区漏检出.githooks，导致CWP首次推送未执行本地hook：已补齐并按原始推送全范围实际回放，6144PASS/14FAIL/24SKIP（14项均缺已有受控资料），补齐原资料后14/14原样PASS；不是称首次hook成功，也没有修改失败断言。另一次沙箱定向复验120s超时不计通过；正常宿主原14项6.64s通过。远端完整CI在原工程83cc4be已独立SUCCESS。以后ROOT稀疏工区启动同时检出实际配置的相对hooks/CI与本轮回归所依赖的受控fixture，不增加人工门禁。当前主仓STATE/parent WIP保持原冻结SHA，正常pre-commit暂存恢复造成的两文件换行已按原SHA恢复。
+
+**Next Step：** 返回ROOT统一来源准备、深页/native TABLE闭包与既有STATE效率/parent组合接线，在原大节点集中做正式worker→公共读→RF/AUDIT、真实配置摘要和独立语义holdout；等ET交付再集中接收。0新增供应商调用，不改原件/生产配置；主目标仍OPEN。详细提交、CI与收据见[接收记录](../document-understanding-2026-10-13/review/du67_reception.md)及[发布收据](../document-understanding-2026-10-13/common-root-quality-evidence/du67-publication.json)。
+
+---
+
 ## 2026-10-16 子计划交付接收更新
 
 DU6 RF/AUDIT/FF及DU7 PDF四包已工程验收、ROOT共因修复并主线；RF199+119subtests、AUDIT90及当前公开v2/v3联调、FF305、PDF557+2（24SKIP）和真实名创单parse原ref核对。详见document-understanding-2026-10-13/review/du67_reception.md。DU7-ET仍施工不触碰。AUDIT无origin仅本地；RF/FF/CWP发布收尾由ROOT归总。组件通过不关闭母G2/G4/G5/真实公司语义，PDF深页64capture与生产TABLE/正式摘要仍OPEN。下一步继续共享来源/预算/生产闭包和真实配置摘要/holdout，无额外人工门。

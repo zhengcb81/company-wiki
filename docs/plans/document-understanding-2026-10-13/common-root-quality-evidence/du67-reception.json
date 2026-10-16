@@ -93,7 +93,7 @@
         "unrelated_files_deleted": 0,
         "source_only": true
       },
-      "remote_status": "PUSHED_EXACT_HEAD_CI_SUCCESS",
+      "remote_status": "PUSHED_CI_SUCCESS",
       "ci": {
         "observed_at": "2026-10-16T17:54:24.831313+00:00",
         "repo": "revenue-forecast",
@@ -166,18 +166,19 @@
       "mainline_closure_commit": "c538c0cc59dbea866d32939cac4037c305480c56",
       "merged": true,
       "protected_wip_unchanged": true,
-      "remote_status": "PUBLISHING_EXACT_RECEIPTS_FOLLOW",
+      "remote_status": "PUSHED_CI_SUCCESS",
       "release_followup_commit": "ca23c926a808cf38d56e5dbf6cd9fe9185e2af69",
-      "pre_push_followup": "preserve all65 old oracle fields via structured baseline fixture, no new hash registration; original refusal preserved"
+      "pre_push_followup": "preserve all65 old oracle fields via structured baseline fixture, no new hash registration; original refusal preserved",
+      "portability_followup_commit": "e8a85585b4c64a9596e576ff3b73e5c2ee29c334"
     },
     "pdf": {
       "author_head": "caca0eb61e657bead05609ec963e00c48502761f",
       "root_fix_commit": "cbd3024fe738fad01f07c51a2ab0ec0d3b6e11fb",
       "mainline_engineering_commit": "250d1a0e759b5bd180eb45ac2bfaadc9fc526612",
-      "mainline_closure_commit": null,
+      "mainline_closure_commit": "83cc4be55ca79a9cf1e0fedc51ca31c9694dfa05",
       "merged": true,
       "protected_wip_unchanged": true,
-      "remote_status": "PUBLISHING_EXACT_RECEIPTS_FOLLOW"
+      "remote_status": "PUSHED_CI_SUCCESS"
     }
   },
   "tests": {
@@ -199,5 +200,6 @@
     "native TABLE production closure, summaries and semantic quality/holdouts",
     "STATE efficiency and parent composition local ROOT WIP, not included in external delivery commits",
     "mother G2/G4/G5, original/new companies and eight-company audit loop"
-  ]
+  ],
+  "publication_receipt": "du67-publication.json"
 }

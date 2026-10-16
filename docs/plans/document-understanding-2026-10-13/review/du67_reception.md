@@ -1,3 +1,15 @@
+## 发布收尾已核对 — 2026-10-16
+
+本次四包已验收并入主线，RF、FF、CWP均已正常推送并核对精确HEAD的远端CI成功；AUDIT无origin，仅本地合并并定点同步技能。DU7-ET-EXTRACTION仍施工，目录未改。四包结果不等于共享引擎生产全链完成；原生TABLE/深页捕获、正式摘要及RF/AUDIT消费者、真实语义holdout和母审查循环继续按原计划执行。
+
+FF发布时发现ROOT迁移测试误假设无输入时stdin总是PIPE。Ubuntu真实复现两项None.closed；生产无输入正确使用DEVNULL，stdout/stderr仍为管道。先增加跨平台形状回归得到2RED，再修两个测试并明确stdout/stderr存在，保留进程退出、管道关闭和线程清理；Windows32PASS、Ubuntu4PASS，正常推送及精确CI成功。未改生产transport、0.2s/<5s断言、30/180预算或旧业务金标。完整失败和修复收据仍保留。
+
+ROOT稀疏接收工区漏检出.githooks，导致CWP首次推送未执行本地hook：已补齐并按原始推送全范围实际回放，6144PASS/14FAIL/24SKIP（14项均缺已有受控资料），补齐原资料后14/14原样PASS；不是称首次hook成功，也没有修改失败断言。另一次沙箱定向复验120s超时不计通过；正常宿主原14项6.64s通过。远端完整CI在原工程83cc4be已独立SUCCESS。以后ROOT稀疏工区启动同时检出实际配置的相对hooks/CI与本轮回归所依赖的受控fixture，不增加人工门禁。当前主仓STATE/parent WIP保持原冻结SHA，正常pre-commit暂存恢复造成的两文件换行已按原SHA恢复。
+
+**Next Step：** 返回ROOT统一来源准备、深页/native TABLE闭包与既有STATE效率/parent组合接线，在原大节点集中做正式worker→公共读→RF/AUDIT、真实配置摘要和独立语义holdout；等ET交付再集中接收。0新增供应商调用，不改原件/生产配置；主目标仍OPEN。详细提交、CI与收据见[接收记录](du67_reception.md)及[发布收据](../common-root-quality-evidence/du67-publication.json)。
+
+---
+
 # DU6／DU7 ROOT接收与共因修复
 
 ## ROOT当前状态：DU6三包与DU7-PDF接收并线完成 — 2026-10-16
@@ -25,3 +37,12 @@ ROOT原STATE效率、parent composition和跨仓E2E本地进展完整保留，�
 ## 接收工程错误记录
 
 PDF helper首次把Git rename展示当成白名单少文件，第二次对已暂存删除路径重复git add，两次均未形成提交；按--no-renames及只添加需要更新路径修正后正常通过，未放宽文件白名单。PDF集中两FAIL来自ROOT稀疏资产缺失，未删改测试。FF最初180s harness超时原因unknown，单独保留；后续5.247s回收实证按唯一process owner修复。
+
+## 精确发布结果
+
+- revenue-forecast: `0feea9b097747165a37009ad4a7ed5616cf46c38` — [CI成功](https://github.com/zhengcb81/revenue-forecast/actions/runs/38942885025)
+- filing-fetch: `e8a85585b4c64a9596e576ff3b73e5c2ee29c334` — [CI成功](https://github.com/zhengcb81/filing-fetch/actions/runs/38945628434)
+- company-wiki: `83cc4be55ca79a9cf1e0fedc51ca31c9694dfa05` — [CI成功](https://github.com/zhengcb81/company-wiki/actions/runs/38943510645)
+- AUDIT：`f5e7f4988148a1348661d737faa92a9c5b5cd31e`，无origin，不冒称已推送。
+
+收尾文档写入曾因ROOT稀疏工区未检出母计划/两份接口中止，第一次恢复校验又遇到Git工作区CRLF与blob LF差异；仅逐项恢复本脚本写入的七份未提交文档，补齐受控输入并在写入前统一核验后完成。没有形成失败提交，没有恢复或覆盖主仓源码WIP；后续启动接口同时覆盖hooks、测试资产和PWF依赖。
