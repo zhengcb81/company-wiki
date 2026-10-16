@@ -1,3 +1,11 @@
+## ROOT主线接收完成 — 2026-10-16
+
+本包及独立审查共因修复已正常并入CWP主线 `250d1a0e759b5bd180eb45ac2bfaadc9fc526612`，作者完整历史保留；接收依据见本目录root-reception与母计划review/du67_reception.md。原件、配置与ROOT既有WIP保持。样本runner现位于本目录e2e/run_e2e.py；真实名创验证仍单parse、同2M、全引用核对。
+
+**Next Step：** 作者STOP；ROOT后续将本组件接生产native TABLE选择/摘要，并修来源层64页capture限制；此包绿不等于深页或摘要语义已验收。DU7-ET仍在其他独占工区施工，勿进入。
+
+---
+
 ## ROOT接收更新 — 2026-10-16
 
 ROOT接收组件验收通过，待正常提交/并线/远端；不是生产摘要接线完成。独审6类RED：partial碎片假整体数值、无观察的首格标签导致丢值、耗尽后O(rows*cells)扫描、坏格丢弃仍complete、fine页矛盾、header跨scope。隔离修复后43短测通过；逐row索引一次、排序/复制预付，耗尽尾部扫描由12万/49万/194万line变72/72/72。真实名创年报p12单parse、2表28格16值（12bound/4ambiguous），所有引用核对；2M预算用1,162,753、原件/配置SHAmtime不变，0供应商。集中557PASS/24SKIP/2FAIL均为ROOT稀疏树漏检出旧DU2资产，补既有夹具后原两项2PASS/4.03s，原失败保留，不改旧断言。六个本次作者新测试的错误首格/耗尽假设已保存原zip并纠正，旧binder/layout金标没改。全局e2e runner移入本PWF/e2e避免未来外包冲突。深页223/224因上游64页capture未覆盖，未知merged/空格/行标签及正式selection/summary/RF仍OPEN，由ROOT来源层后续解决。

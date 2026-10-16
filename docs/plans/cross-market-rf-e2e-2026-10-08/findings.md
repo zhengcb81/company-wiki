@@ -1,3 +1,9 @@
+## 2026-10-16 子计划交付接收更新
+
+DU6 RF/AUDIT/FF及DU7 PDF四包已工程验收、ROOT共因修复并主线；RF199+119subtests、AUDIT90及当前公开v2/v3联调、FF305、PDF557+2（24SKIP）和真实名创单parse原ref核对。详见document-understanding-2026-10-13/review/du67_reception.md。DU7-ET仍施工不触碰。AUDIT无origin仅本地；RF/FF/CWP发布收尾由ROOT归总。组件通过不关闭母G2/G4/G5/真实公司语义，PDF深页64capture与生产TABLE/正式摘要仍OPEN。下一步继续共享来源/预算/生产闭包和真实配置摘要/holdout，无额外人工门。
+
+---
+
 ## ROOT主线发布 — 2026-10-16
 
 CWP主线04c7f1bc已推远端，正常prepush6115 PASS/24 SKIP；FORM/STATE/预算准备/显式v4工程与native TABLE薄桥发布，真实预算效率和正式TABLE依赖/真实质量仍开放，默认不切。DU6三卡用户已分发；[DU7两张独立新卡](../document-understanding-2026-10-13/parallel/du7-2026-10-16/README.md)已READY，PDF适配/ET抽取独占工区已建。以[选定PWF](../document-understanding-2026-10-13/task_plan.md)为执行状态，母G2/G4/G5和公司循环未结束，0新增付费。

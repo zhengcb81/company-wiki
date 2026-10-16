@@ -1,6 +1,6 @@
 {
   "schema_version": "du7-launch/1",
-  "status": "READY_NOT_DISPATCHED",
+  "status": "PDF_ACCEPTED_ET_IN_PROGRESS",
   "lanes": [
     {
       "id": "DU7-PDF-TABLE",
@@ -21,13 +21,22 @@
       "workdir": "C:/Users/郑曾波/Projects/company-wiki-du7-pdf-tables",
       "plan": "docs/plans/du7-pdf-tables-2026-10-16/task_plan.md",
       "seed_commit": "f93507014f757591f2c55735b0895133d276cad9",
-      "status": "READY",
+      "status": "ACCEPTED_MAINLINE",
       "files_sha256": {
         "docs/plans/du7-pdf-tables-2026-10-16/construction_card.md": "08b31a2bd3f3216b33c473cf9db27ca5b0a867c8cf844ab2ff2ebe634057e464",
         "docs/plans/du7-pdf-tables-2026-10-16/findings.md": "eadd36a50a8ee9f8b0a9e045193b9847396e7cc7ec58a9b6900e8d80adc7c3c4",
         "docs/plans/du7-pdf-tables-2026-10-16/INTERFACES.md": "2ad367d4d0372235142a947e1ab3af0760896f19f89166c90c98dbf1acf51149",
         "docs/plans/du7-pdf-tables-2026-10-16/progress.md": "c35e94c3ea430a5f271c56788d89427773e5d9285cbe80296bdf52f7eb13bdd8",
         "docs/plans/du7-pdf-tables-2026-10-16/task_plan.md": "a8c9ef073d54ce206b1b42fa61b17dc34455ad0e78053979947b3fbaf05f13b7"
+      },
+      "reception": {
+        "author_head": "caca0eb61e657bead05609ec963e00c48502761f",
+        "root_fix_commit": "cbd3024fe738fad01f07c51a2ab0ec0d3b6e11fb",
+        "mainline_engineering_commit": "250d1a0e759b5bd180eb45ac2bfaadc9fc526612",
+        "mainline_closure_commit": null,
+        "merged": true,
+        "protected_wip_unchanged": true,
+        "remote_status": "PUBLISHING_EXACT_RECEIPTS_FOLLOW"
       }
     },
     {
@@ -47,7 +56,7 @@
       "workdir": "C:/Users/郑曾波/Projects/earnings-transcripts-du7-extraction",
       "plan": "docs/plans/du7-extraction-2026-10-16/task_plan.md",
       "seed_commit": "7986b3eb829a313440b816bea7d54ebea9ad3509",
-      "status": "READY",
+      "status": "IN_PROGRESS",
       "files_sha256": {
         "docs/plans/du7-extraction-2026-10-16/construction_card.md": "f94bb1691a24ba5a296f73ae817b0052cbe3150590572fb5e0ce9930b0bac25a",
         "docs/plans/du7-extraction-2026-10-16/findings.md": "eadd36a50a8ee9f8b0a9e045193b9847396e7cc7ec58a9b6900e8d80adc7c3c4",

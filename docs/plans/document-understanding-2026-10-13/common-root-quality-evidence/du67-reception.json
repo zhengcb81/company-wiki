@@ -1,0 +1,203 @@
+{
+  "status": "FOUR_DELIVERIES_ACCEPTED_AND_MERGED",
+  "records": {
+    "rf": {
+      "author_head": "86ca29411fbed1eaf2958b2eff579395f7d151a7",
+      "root_fix_commit": "2a68c6878c8bfd2b88c208d1bbc87540dedd6676",
+      "mainline_engineering_commit": "033f396279aeb9980f57dbefff85b69007fcb478",
+      "mainline_closure_commit": "0feea9b097747165a37009ad4a7ed5616cf46c38",
+      "merged": true,
+      "protected_wip_unchanged": true,
+      "install": {
+        "lane": "rf",
+        "logical_files": 15,
+        "physical_files": 10,
+        "files": [
+          {
+            "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_quantities.py",
+            "before": "6f37a2dde6a5643ad18bfbb9745f0ab33a838736e3182d6c12b84e0961a06f50",
+            "after": "dc20d7d1999e0722a48ccc9b7275ef7acb930e17b1e770f8ef20af1002e4c581"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_targets.py",
+            "before": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+            "after": "fe3ec089a8f3827bde60d3f0b154f350251fc1ac36831b7430d441a682632098"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+            "before": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+            "after": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+            "before": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+            "after": "2788720120b9b0559f15224ffbba1d09846ee8ce1788f0d96f42c4f5abf3c91c"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\management-targets.md",
+            "before": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+            "after": "24a77e914e70d3f4bf73924ece0fde425f00db4d450b3e778d37b57a16e98330"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\input_quantities.py",
+            "before": "6f37a2dde6a5643ad18bfbb9745f0ab33a838736e3182d6c12b84e0961a06f50",
+            "after": "dc20d7d1999e0722a48ccc9b7275ef7acb930e17b1e770f8ef20af1002e4c581"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\input_targets.py",
+            "before": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+            "after": "fe3ec089a8f3827bde60d3f0b154f350251fc1ac36831b7430d441a682632098"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+            "before": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+            "after": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+            "before": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+            "after": "2788720120b9b0559f15224ffbba1d09846ee8ce1788f0d96f42c4f5abf3c91c"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\references\\management-targets.md",
+            "before": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+            "after": "24a77e914e70d3f4bf73924ece0fde425f00db4d450b3e778d37b57a16e98330"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\input_quantities.py",
+            "before": "6f37a2dde6a5643ad18bfbb9745f0ab33a838736e3182d6c12b84e0961a06f50",
+            "after": "dc20d7d1999e0722a48ccc9b7275ef7acb930e17b1e770f8ef20af1002e4c581"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\input_targets.py",
+            "before": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+            "after": "fe3ec089a8f3827bde60d3f0b154f350251fc1ac36831b7430d441a682632098"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+            "before": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+            "after": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+            "before": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+            "after": "2788720120b9b0559f15224ffbba1d09846ee8ce1788f0d96f42c4f5abf3c91c"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\references\\management-targets.md",
+            "before": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+            "after": "24a77e914e70d3f4bf73924ece0fde425f00db4d450b3e778d37b57a16e98330"
+          }
+        ],
+        "source_head": "033f396279aeb9980f57dbefff85b69007fcb478",
+        "unrelated_files_deleted": 0,
+        "source_only": true
+      },
+      "remote_status": "PUSHED_EXACT_HEAD_CI_SUCCESS",
+      "ci": {
+        "observed_at": "2026-10-16T17:54:24.831313+00:00",
+        "repo": "revenue-forecast",
+        "requested_head": "0feea9b097747165a37009ad4a7ed5616cf46c38",
+        "runs": [
+          {
+            "id": 38942885025,
+            "head_sha": "0feea9b097747165a37009ad4a7ed5616cf46c38",
+            "name": "quality",
+            "status": "completed",
+            "conclusion": "success",
+            "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/38942885025"
+          }
+        ]
+      }
+    },
+    "audit": {
+      "author_head": "c603d23d6ba731ed2f510f30a731f6ef3f3b43d3",
+      "root_fix_commit": "8fd5a33949735422abbf3a5f39108d1fc606edb1",
+      "mainline_engineering_commit": "6ae3235db938182e0098961414348d9dd1b6fbab",
+      "mainline_closure_commit": "f5e7f4988148a1348661d737faa92a9c5b5cd31e",
+      "merged": true,
+      "protected_wip_unchanged": true,
+      "install": {
+        "lane": "audit",
+        "logical_files": 6,
+        "physical_files": 6,
+        "files": [
+          {
+            "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\SKILL.md",
+            "before": "b1be58b288c6751088b9b0f72c5e014f7c2c994c80788326a345e0ad478f1707",
+            "after": "d4a7633262aae4ab895dfdc7f85b019294003cd2c5e308e03a0519f5bd74ec64"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+            "before": null,
+            "after": "688729fd10645ae81658f3343f7948e19ee09d0766723ea11952037511978100"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\summary-review-import.md",
+            "before": null,
+            "after": "6466ad0042ba8b87d9fae862896a0e7deb9dee01bb1d169bdd9f589d40237ad1"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\SKILL.md",
+            "before": "b1be58b288c6751088b9b0f72c5e014f7c2c994c80788326a345e0ad478f1707",
+            "after": "d4a7633262aae4ab895dfdc7f85b019294003cd2c5e308e03a0519f5bd74ec64"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+            "before": null,
+            "after": "688729fd10645ae81658f3343f7948e19ee09d0766723ea11952037511978100"
+          },
+          {
+            "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\references\\summary-review-import.md",
+            "before": null,
+            "after": "6466ad0042ba8b87d9fae862896a0e7deb9dee01bb1d169bdd9f589d40237ad1"
+          }
+        ],
+        "source_head": "6ae3235db938182e0098961414348d9dd1b6fbab",
+        "unrelated_files_deleted": 0,
+        "source_only": true
+      },
+      "remote_status": "NO_ORIGIN_LOCAL_ONLY"
+    },
+    "ff": {
+      "author_head": "ff08a8e04f2ae146e42daf9b36710b3ef1f47d89",
+      "root_fix_commit": "29dd3453c7b729c16e5fc8554d4d5fa8006106ae",
+      "mainline_engineering_commit": "d11d5f9e3e766521c84787b691f935466bf32f47",
+      "mainline_closure_commit": "c538c0cc59dbea866d32939cac4037c305480c56",
+      "merged": true,
+      "protected_wip_unchanged": true,
+      "remote_status": "PUBLISHING_EXACT_RECEIPTS_FOLLOW",
+      "release_followup_commit": "ca23c926a808cf38d56e5dbf6cd9fe9185e2af69",
+      "pre_push_followup": "preserve all65 old oracle fields via structured baseline fixture, no new hash registration; original refusal preserved"
+    },
+    "pdf": {
+      "author_head": "caca0eb61e657bead05609ec963e00c48502761f",
+      "root_fix_commit": "cbd3024fe738fad01f07c51a2ab0ec0d3b6e11fb",
+      "mainline_engineering_commit": "250d1a0e759b5bd180eb45ac2bfaadc9fc526612",
+      "mainline_closure_commit": null,
+      "merged": true,
+      "protected_wip_unchanged": true,
+      "remote_status": "PUBLISHING_EXACT_RECEIPTS_FOLLOW"
+    }
+  },
+  "tests": {
+    "rf": "199 PASS +119 subtests; 3 new models/6 CLI",
+    "audit": "90 PASS (11+31+48), 15 CLI/16checks; actual CWP public v2/v3 2 PASS with local synthetic originals",
+    "ff": "305 PASS/74.42s; original 0.2s/<5s deadline assertion retained",
+    "pdf": "557 PASS/24SKIP +2 existing asset-dependent tests PASS after checking out missing tracked fixtures; 43 short PASS; real MINISO p12 single parse all refs exact"
+  },
+  "archive": {
+    "path": "du67-reception-receipts.zip",
+    "bytes": 30618,
+    "sha256": "a695ea74de3e5f18450bf6564058c9c31ee1b99e33c792b1ee23d9fb36888719"
+  },
+  "et_status": "DU7-ET-EXTRACTION_IN_PROGRESS_UNTOUCHED",
+  "supplier_calls": 0,
+  "production_writes": 0,
+  "open": [
+    "PDF deep pages 223/224: upstream capture max64, NOT_RUN binding quality",
+    "native TABLE production closure, summaries and semantic quality/holdouts",
+    "STATE efficiency and parent composition local ROOT WIP, not included in external delivery commits",
+    "mother G2/G4/G5, original/new companies and eight-company audit loop"
+  ]
+}

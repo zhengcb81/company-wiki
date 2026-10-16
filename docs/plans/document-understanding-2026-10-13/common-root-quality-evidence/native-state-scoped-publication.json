@@ -29,5 +29,20 @@
         "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38865710454"
       }
     ]
+  },
+  "ci_final_observation": {
+    "observed_at": "2026-10-16T07:22:36.094349+00:00",
+    "repo": "company-wiki",
+    "requested_head": "04c7f1bc93386a5703693f9303c3a59bb7546025",
+    "runs": [
+      {
+        "id": 38865710454,
+        "head_sha": "04c7f1bc93386a5703693f9303c3a59bb7546025",
+        "name": "CI",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/38865710454"
+      }
+    ]
   }
 }

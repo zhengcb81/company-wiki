@@ -1,6 +1,6 @@
 {
   "schema_version": "du6-launch/1",
-  "status": "READY",
+  "status": "ACCEPTED_MAINLINE",
   "lanes": [
     {
       "id": "DU6-RF-TARGET-MEASURES",
@@ -29,7 +29,7 @@
         "docs/plans/du6-targets-2026-10-16/progress.md",
         "docs/plans/du6-targets-2026-10-16/task_plan.md"
       ],
-      "status": "READY",
+      "status": "ACCEPTED_MAINLINE",
       "import": {
         "module": "research.target_measurement",
         "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-du6-targets\\scripts\\research\\target_measurement.py"
@@ -42,7 +42,101 @@
         "docs/plans/du6-targets-2026-10-16/progress.md": "b3e7297da9583175eb973167eb88013ce8624dbc26c12e18f1b2050bfa43e7d2",
         "docs/plans/du6-targets-2026-10-16/task_plan.md": "42a7b6010c11f5d6e1b34065db1df9d52dcd2a362fb85c9920d034848af647e4"
       },
-      "worktree_clean": true
+      "worktree_clean": true,
+      "reception": {
+        "author_head": "86ca29411fbed1eaf2958b2eff579395f7d151a7",
+        "root_fix_commit": "2a68c6878c8bfd2b88c208d1bbc87540dedd6676",
+        "mainline_engineering_commit": "033f396279aeb9980f57dbefff85b69007fcb478",
+        "mainline_closure_commit": "0feea9b097747165a37009ad4a7ed5616cf46c38",
+        "merged": true,
+        "protected_wip_unchanged": true,
+        "install": {
+          "lane": "rf",
+          "logical_files": 15,
+          "physical_files": 10,
+          "files": [
+            {
+              "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_quantities.py",
+              "before": "6f37a2dde6a5643ad18bfbb9745f0ab33a838736e3182d6c12b84e0961a06f50",
+              "after": "dc20d7d1999e0722a48ccc9b7275ef7acb930e17b1e770f8ef20af1002e4c581"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_targets.py",
+              "before": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+              "after": "fe3ec089a8f3827bde60d3f0b154f350251fc1ac36831b7430d441a682632098"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+              "before": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+              "after": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+              "before": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+              "after": "2788720120b9b0559f15224ffbba1d09846ee8ce1788f0d96f42c4f5abf3c91c"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\management-targets.md",
+              "before": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+              "after": "24a77e914e70d3f4bf73924ece0fde425f00db4d450b3e778d37b57a16e98330"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\input_quantities.py",
+              "before": "6f37a2dde6a5643ad18bfbb9745f0ab33a838736e3182d6c12b84e0961a06f50",
+              "after": "dc20d7d1999e0722a48ccc9b7275ef7acb930e17b1e770f8ef20af1002e4c581"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\input_targets.py",
+              "before": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+              "after": "fe3ec089a8f3827bde60d3f0b154f350251fc1ac36831b7430d441a682632098"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+              "before": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+              "after": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+              "before": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+              "after": "2788720120b9b0559f15224ffbba1d09846ee8ce1788f0d96f42c4f5abf3c91c"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\references\\management-targets.md",
+              "before": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+              "after": "24a77e914e70d3f4bf73924ece0fde425f00db4d450b3e778d37b57a16e98330"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\input_quantities.py",
+              "before": "6f37a2dde6a5643ad18bfbb9745f0ab33a838736e3182d6c12b84e0961a06f50",
+              "after": "dc20d7d1999e0722a48ccc9b7275ef7acb930e17b1e770f8ef20af1002e4c581"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\input_targets.py",
+              "before": "0abaf3c3771250730dadf7f13294cc9c22eec586e014ebeade851361f6e7a45f",
+              "after": "fe3ec089a8f3827bde60d3f0b154f350251fc1ac36831b7430d441a682632098"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\target_measurement.py",
+              "before": "4009b0ad2ac60b5e7bc9f38c3c9f4d60e39c602c56bd712da902aeba112d1e4e",
+              "after": "0bd1b697863d89a91a08ffefd8ef4ddbd2913b97c5d2dca9f7888515db8472de"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+              "before": "59c0019d1855bb43000aa59718d2a907a0185679397169c773690aa315e19a21",
+              "after": "2788720120b9b0559f15224ffbba1d09846ee8ce1788f0d96f42c4f5abf3c91c"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\references\\management-targets.md",
+              "before": "85ae3dcaa49d0ee16a35f87f21a13ca16bfed1261c2f0742e9b74d71463c9c15",
+              "after": "24a77e914e70d3f4bf73924ece0fde425f00db4d450b3e778d37b57a16e98330"
+            }
+          ],
+          "source_head": "033f396279aeb9980f57dbefff85b69007fcb478",
+          "unrelated_files_deleted": 0,
+          "source_only": true
+        },
+        "remote_status": "PUBLISHING_EXACT_RECEIPTS_FOLLOW"
+      }
     },
     {
       "id": "DU6-AUDIT-IMPORT",
@@ -68,7 +162,7 @@
         "docs/plans/du6-import-2026-10-16/progress.md",
         "docs/plans/du6-import-2026-10-16/task_plan.md"
       ],
-      "status": "READY",
+      "status": "ACCEPTED_MAINLINE",
       "import": {
         "module": "summary_review_packet",
         "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-du6-import\\skills\\revenue-forecast-audit\\scripts\\summary_review_packet.py"
@@ -81,7 +175,56 @@
         "docs/plans/du6-import-2026-10-16/progress.md": "b3e7297da9583175eb973167eb88013ce8624dbc26c12e18f1b2050bfa43e7d2",
         "docs/plans/du6-import-2026-10-16/task_plan.md": "5f4fe084caaefabae9875c3b996d2d44e956d6f60031ef78b7c193a8c4fbd6be"
       },
-      "worktree_clean": true
+      "worktree_clean": true,
+      "reception": {
+        "author_head": "c603d23d6ba731ed2f510f30a731f6ef3f3b43d3",
+        "root_fix_commit": "8fd5a33949735422abbf3a5f39108d1fc606edb1",
+        "mainline_engineering_commit": "6ae3235db938182e0098961414348d9dd1b6fbab",
+        "mainline_closure_commit": "f5e7f4988148a1348661d737faa92a9c5b5cd31e",
+        "merged": true,
+        "protected_wip_unchanged": true,
+        "install": {
+          "lane": "audit",
+          "logical_files": 6,
+          "physical_files": 6,
+          "files": [
+            {
+              "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\SKILL.md",
+              "before": "b1be58b288c6751088b9b0f72c5e014f7c2c994c80788326a345e0ad478f1707",
+              "after": "d4a7633262aae4ab895dfdc7f85b019294003cd2c5e308e03a0519f5bd74ec64"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+              "before": null,
+              "after": "688729fd10645ae81658f3343f7948e19ee09d0766723ea11952037511978100"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit\\references\\summary-review-import.md",
+              "before": null,
+              "after": "6466ad0042ba8b87d9fae862896a0e7deb9dee01bb1d169bdd9f589d40237ad1"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\SKILL.md",
+              "before": "b1be58b288c6751088b9b0f72c5e014f7c2c994c80788326a345e0ad478f1707",
+              "after": "d4a7633262aae4ab895dfdc7f85b019294003cd2c5e308e03a0519f5bd74ec64"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\scripts\\summary_review_import.py",
+              "before": null,
+              "after": "688729fd10645ae81658f3343f7948e19ee09d0766723ea11952037511978100"
+            },
+            {
+              "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit\\references\\summary-review-import.md",
+              "before": null,
+              "after": "6466ad0042ba8b87d9fae862896a0e7deb9dee01bb1d169bdd9f589d40237ad1"
+            }
+          ],
+          "source_head": "6ae3235db938182e0098961414348d9dd1b6fbab",
+          "unrelated_files_deleted": 0,
+          "source_only": true
+        },
+        "remote_status": "NO_ORIGIN_LOCAL_ONLY"
+      }
     },
     {
       "id": "DU6-FF-PORTABLE-EVIDENCE",
@@ -109,7 +252,7 @@
         "docs/plans/du6-portable-2026-10-16/progress.md",
         "docs/plans/du6-portable-2026-10-16/task_plan.md"
       ],
-      "status": "READY",
+      "status": "ACCEPTED_MAINLINE",
       "import": {
         "module": "oracle",
         "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch-du6-portable\\tools\\offline_contract_matrix\\oracle.py"
@@ -122,7 +265,16 @@
         "docs/plans/du6-portable-2026-10-16/progress.md": "b3e7297da9583175eb973167eb88013ce8624dbc26c12e18f1b2050bfa43e7d2",
         "docs/plans/du6-portable-2026-10-16/task_plan.md": "2475eb1e4d8b28dcb66ed34468e14769f14ee59547adc575dda640a6b9a21958"
       },
-      "worktree_clean": true
+      "worktree_clean": true,
+      "reception": {
+        "author_head": "ff08a8e04f2ae146e42daf9b36710b3ef1f47d89",
+        "root_fix_commit": "29dd3453c7b729c16e5fc8554d4d5fa8006106ae",
+        "mainline_engineering_commit": "d11d5f9e3e766521c84787b691f935466bf32f47",
+        "mainline_closure_commit": "c538c0cc59dbea866d32939cac4037c305480c56",
+        "merged": true,
+        "protected_wip_unchanged": true,
+        "remote_status": "PUBLISHING_EXACT_RECEIPTS_FOLLOW"
+      }
     }
   ],
   "readonly_dependencies": [
