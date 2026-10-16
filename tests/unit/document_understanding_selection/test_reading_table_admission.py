@@ -225,15 +225,20 @@ def test_du_structure_and_source_share_retained_earnings_disambiguation():
 
 
 def test_shared_purpose_service_has_an_explicit_bounded_unknown_outcome():
-    from company_wiki.document_understanding.structure import table_purpose, tables
+    from company_wiki.document_understanding.structure import table_purpose
 
-    assert tables.qualify_table is table_purpose.qualify_table
     proof = table_purpose.qualify_table(
         ["门店数量 | 2026"], ["直营店 | 50"], max_chars=0
     )
     assert proof.status == "incomplete"
     assert not proof.eligible
     assert proof.reason == "TABLE_PURPOSE_RESOURCE_LIMIT"
+    # Both actual service entrypoints must preserve bounded unknown. Which
+    # helper structure.tables imports is not a source/extraction contract.
+    native = table_purpose.qualify_native_rows(
+        ["门店数量 | 2026"], [{"text": "直营店 | 50"}], max_chars=0
+    )
+    assert native == proof
 
 
 def test_structural_table_name_alone_cannot_bypass_explicit_source_qualification():
