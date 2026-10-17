@@ -59,10 +59,11 @@
       "startup_clean": true,
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "independent_review_required": true,
-      "business_tests": "NOT_RUN_AUTHOR_TASK",
+      "business_tests": "454PASS;10gold;FF117PASS;CWP12PASS;independent5roundPASS0",
       "bytes": 637419,
       "owner": "ROOT",
-      "publication_commit": "7d06777e250ee3f7ae58f0be2cee62944bd2c104"
+      "publication_commit": "7d06777e250ee3f7ae58f0be2cee62944bd2c104",
+      "acceptance_report": "../../review/du9_et_reception.md"
     }
   ],
   "supplier_calls": 0,

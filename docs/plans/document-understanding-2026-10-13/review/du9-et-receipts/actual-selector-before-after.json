@@ -1,0 +1,20 @@
+{
+  "range": [
+    "tests/contract/test_transcript_import_cli_e2e.py"
+  ],
+  "before": {
+    "paths": [
+      "tests/unit"
+    ],
+    "reason": "dynamic execution changed",
+    "selection_seconds": 6.335
+  },
+  "after": {
+    "paths": [
+      "tests/contract/test_transcript_import_cli_e2e.py"
+    ],
+    "reason": "affected test modules",
+    "selection_seconds": 5.186
+  },
+  "smoke_set_unchanged": true
+}

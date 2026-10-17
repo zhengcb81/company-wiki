@@ -1,3 +1,13 @@
+## 当前收尾完成：外包工程待交付0 — 2026-10-17（最新）
+
+当前DU8/DU9六包工程交付已全部接收并线，最后ET main/origin7d06777已核远端；CWP接收及推送范围共因修复已正常发布80be6877。pre-push6344PASS/24SKIP（296.69秒），精确[CI39047038268](https://github.com/zhengcb81/company-wiki/actions/runs/39047038268) SUCCESS。ET454PASS/10gold、FF117PASS、CWP12PASS，五轮独审受审源未变；作者工区/原件/配置/主仓既有文件保持，ROOT临时工区清理。详情见[最后ET接收](review/du9_et_reception.md)。AUDIT无remote仅本地，ET无CI不冒称CI绿。
+
+已修复收尾效率共因：可执行contract/integration/e2e测试专改不再作为未知生产runtime回退全Unit，而跑实际模块与已知测试消费者＋原smoke。新TDD原4FAIL/4PASS，相关选择器与隔离76PASS；生产代码/配置/未知删除依赖保守回退、CI全Unit保持。本次工具自身变更已完整验证，不加人工许可/防伪签收。ROOT旧push外层300秒错误已绕回正确的直接正常Git执行，未跳hook，旧失败与实际前后选择证据保留。
+
+**Next Step：** ROOT继续既有pdf_page_intent_implementation：原生导航/唯一matcher/POLICY+PLANNER/同一WorkBudget/source单parse生产装配，随后真实PDF深页、配置供应商摘要、缓存恢复与holdout；FF完整41例C及完整中断恢复仍OPEN。工程外包收齐不等于全项目完成。旧巡查任务不存在，未重建，当前也无待外包可巡查。下方各次“待接收/待推送”记录仅为历史。
+
+---
+
 ## 接收收尾的推送范围共因修复 — 2026-10-17（最新）
 
 六个DU8/DU9外包源码已接收且交付历史全部在各自主线，ET已推送7d06777；CWP接收提交5d41尚未推送，因为ROOT收尾脚本给git push错误套300秒超时，遇旧推送范围回退全Unit后提前杀Git；不能称母仓已远端发布，之前的ROOT联调绿仍有效。

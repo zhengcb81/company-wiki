@@ -13,3 +13,11 @@ ROOT正常保留完整历史并线推送；实际发布SHA、远端核对和自�
 ## 发布实证
 
 ET main/origin `7d06777e250ee3f7ae58f0be2cee62944bd2c104`，ls-remote实际核对一致；完整作者历史已包含。ROOT临时接收工区已正常移除，作者树及主仓原3个未跟踪文件SHA/mtime未变。ET无配置CI，因此只报告上述实际本地/离线结果。见[机器收据](du9_et_reception.json)。
+
+## 母仓工程发布与推送范围整改完成
+
+CWP接收和推送选择器修复已正常发布master/origin80be6877，pre-push6344PASS/24SKIP、296.69秒；[精确CI39047038268](https://github.com/zhengcb81/company-wiki/actions/runs/39047038268) SUCCESS。ROOT旧收尾脚本给git push设300秒而先中断，未当作测试失败；随后使用直接Git正常发布、不跳hook。
+
+实际本次契约文件旧选择因dynamic execution changed回退全Unit；现在它是可执行消费者，选本模块与已知测试消费者，固定smoke不变。生产代码/配置/未知删除依赖仍保守回退；新TDD原4FAIL/4PASS→相关76PASS，原unit-only reason兼容。工具自身修改本次仍完成全Unit大节点验证，此后契约测试专改可直接收敛；未增人工许可/身份/签收链。
+
+所有六包的工程交付历史已核对在各自主线，外包待交付0；FF完整C、CWP真实生产/摘要仍由ROOT继续，不因接收完毕宣布整个项目完成。最后只补发布文档，工程冻结80be6877。

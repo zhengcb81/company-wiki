@@ -26,9 +26,11 @@
       "hooks": ".githooks",
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "bytes": 4878719,
-      "business_tests": "NOT_RUN_AUTHOR_TASK",
+      "business_tests": "558PASS/7SKIP; independentPASS unresolved0",
       "startup_clean": true,
-      "owner": "ROOT"
+      "owner": "ROOT",
+      "publication_commit": "568fb9256885eb31a0f76d9ead59fd0f98575073",
+      "acceptance_report": "../../review/du8_rf_reception.md"
     },
     {
       "id": "DU8-FF-MATRIX-COMPLETION",

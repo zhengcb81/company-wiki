@@ -1,3 +1,9 @@
+## 当前状态索引 — 2026-10-17
+
+DU8三包工程已接收并线：RF最终568fb925、FF工程c7c8867d，AUDIT本地a2f216bd。FF完整41例C与中断恢复仍是ROOT具名OPEN；AUDIT无remote不冒称已推送。详见母review/du8_rf_reception.md与du8_reception.md。 下方旧状态快照保留历史，以本节和母task_plan最新结论为准。
+
+---
+
 # DU8：三条独立施工线
 
 当前状态：AUDIT已本地主线并线/安装；FF工程已主线并线/推送，完整C继续OPEN；RF仍IN_PROGRESS_EXTERNAL。用户于2026-10-16发出三卡，作者树始终只读保留；ROOT在另外两棵集成树接收整改，不进入RF/DU9工区。具体源码、测试、并线与未完成范围见[接收记录](../../review/du8_reception.md)。

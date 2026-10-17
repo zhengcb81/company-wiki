@@ -36,5 +36,13 @@
     "result": "CWP5d41 was committed locally but push aborted; not a test failure or remote success",
     "et_publication_unaffected": "7d06777e250ee3f7ae58f0be2cee62944bd2c104"
   },
-  "next": "normal direct git push with existing hooks; no artificial outer300s timeout; this selector change itself still takes full gate once"
+  "next": "COMPLETE; normal source CI/full fallbacks remain, return to production reading plan",
+  "actual_changed_contract_before_after": "actual-selector-before-after.json",
+  "actual_old_reason": "dynamic execution changed: subprocess inside executable contract test was treated as changed production runtime",
+  "publication": {
+    "commit": "80be6877367bf515fe1677c514e4f66545b1457e",
+    "ci": "https://github.com/zhengcb81/company-wiki/actions/runs/39047038268",
+    "ci_conclusion": "success",
+    "local_gate": "6344PASS/24SKIP;296.69s"
+  }
 }
