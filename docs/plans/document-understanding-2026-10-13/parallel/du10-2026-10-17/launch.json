@@ -1,0 +1,19 @@
+{
+  "plan_id": "document-understanding-2026-10-13",
+  "package_set": "DU10-2026-10-17",
+  "status": "READY_FOR_DISPATCH",
+  "created_from": {
+    "company_wiki": "900dbf6489f3b995a0bfb7fcbb8a001a68df241d",
+    "filing_fetch": "c7c8867da35cd19d4f419fa70947332615e8e9c0",
+    "earnings_transcripts": "7d06777e250ee3f7ae58f0be2cee62944bd2c104"
+  },
+  "packages": [
+    {"id": "DU10-FF41-CLOSE", "repository": "C:/Users/郑曾波/Projects/filing-fetch", "workdir": "C:/Users/郑曾波/Projects/filing-fetch-du10-41-matrix", "branch": "codex/du10-ff41-close", "card": "du10_ff41_close.md", "status": "READY_FOR_DISPATCH"},
+    {"id": "DU10-CWP-SUMMARY-GOLDSET", "repository": "C:/Users/郑曾波/Projects/company-wiki", "workdir": "C:/Users/郑曾波/Projects/company-wiki-du10-summary-goldset", "branch": "codex/du10-cwp-summary-goldset", "card": "du10_cwp_summary_goldset.md", "status": "READY_FOR_DISPATCH"},
+    {"id": "DU10-ET-TXT-FIDELITY", "repository": "C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts", "workdir": "C:/Users/郑曾波/Projects/earnings-transcripts-du10-txt-fidelity", "branch": "codex/du10-et-txt-fidelity", "card": "du10_et_txt_fidelity.md", "status": "READY_FOR_DISPATCH"}
+  ],
+  "independent_review_required": true,
+  "provider_calls_allowed": false,
+  "raw_document_copy_allowed": false,
+  "root_production_integration_owner": "ROOT"
+}

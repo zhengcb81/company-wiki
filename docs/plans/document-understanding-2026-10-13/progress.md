@@ -1,5 +1,9 @@
 ## 当前收尾完成：外包工程待交付0 — 2026-10-17（最新）
 
+## DU10 独立施工包已准备 — 2026-10-17
+
+为并行工作建立三张独立卡，范围分别属于 filing-fetch、company-wiki（仅新增 goldset 目录）和 earnings-transcripts；固定起点提交、专属测试/临时目录、交接格式和独立审查复核要求均已写明。作者须由不同 agent 审查最终 HEAD，发现的问题修完并复核后才可交接。各工作目录目前未创建，卡尚未派发。总表：[DU10](parallel/du10-2026-10-17/README.md)。
+
 当前DU8/DU9六包工程交付已全部接收并线，最后ET main/origin7d06777已核远端；CWP接收及推送范围共因修复已正常发布80be6877。pre-push6344PASS/24SKIP（296.69秒），精确[CI39047038268](https://github.com/zhengcb81/company-wiki/actions/runs/39047038268) SUCCESS。ET454PASS/10gold、FF117PASS、CWP12PASS，五轮独审受审源未变；作者工区/原件/配置/主仓既有文件保持，ROOT临时工区清理。详情见[最后ET接收](review/du9_et_reception.md)。AUDIT无remote仅本地，ET无CI不冒称CI绿。
 
 已修复收尾效率共因：可执行contract/integration/e2e测试专改不再作为未知生产runtime回退全Unit，而跑实际模块与已知测试消费者＋原smoke。新TDD原4FAIL/4PASS，相关选择器与隔离76PASS；生产代码/配置/未知删除依赖保守回退、CI全Unit保持。本次工具自身变更已完整验证，不加人工许可/防伪签收。ROOT旧push外层300秒错误已绕回正确的直接正常Git执行，未跳hook，旧失败与实际前后选择证据保留。
