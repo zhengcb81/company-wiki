@@ -1,12 +1,12 @@
-## DU11 真实首批三例暴露共因，非验收通过 — 2026-10-18（当前）
+## DU11 本轮主线进展 — 2026-10-18
 
-三例原件均只读/未复制/未改，测试湖均删除；结果review/du11_real_summary_first_batch.json：CN选材关键事实0/10被发送前拦、0POST；HK选材7/7后DeepSeek一次POST已知13985tokens/6159microUSD，合法业务JSON多type=json_object被旧解码器拒绝；US原文定位复核把下游新增table_structure_ambiguous误当源变化，0POST。累计613575tokens/$0.391272proxy，新增unknown0/历史7仍计，不盲重发，不把有响应当摘要通过。
+- 用户确认RF/FF两包已派发；ROOT未进入作者树写代码。
+- 模型/重放共因修复已提交aafbd662，远端尚未发布。Native3文件按最终SHA精确集成；最终NFC独审PASS/0代码未决，原10项测试和72相关测试收据复用，不重复全PDF。
+- CN剩余两项已完成全部候选链trace，业务覆盖关系owner进行portable正反控TDD；不加公司规则、不增片段/工作预算。
+- CI初版资源缩范围被独审拒收，已撤回并修为未知资源full；作者集中103PASS，等待最终delta。原“542局部诊断”已WITHDRAWN，不能当实际push范围。
+- ROOT超时诊断：2FAIL/4PASS的RED后保留TimeoutExpired字节/文本stdout及stderr；独审GBK反例1FAIL/6PASS后统一安全打印，最终7PASS/1.43s、Ruff通过，仍红码124且600秒不变，最终独审中。
 
-HK统一格式兼容与US质量分层已修并独审PASS/0代码未决：精确格式marker不进入canonical，身份/翻译/task/basis不放宽；重放保留所有原解析flag，允许既有稳定enum中的新增保守诊断，仍验真实源/文字/坐标/metadata/SHA，不把OCR标记当跑过OCR证明。模型55PASS；归一化相关76既有PASS+当前8PASS（原首轮2个新反控夹具自洽hash错误已纠正，运行源未改），Ruff通过，见review/du11_protocol_replay_review.md/json。
-
-CN普通正文缺frame/font native材料导致物理行碎片的source共因已在ROOT隔离树修，72PASS，0POST真实guard0→8/10；仍缺未来目标60/70与当前30，等待完整有界候选链trace，不抬96/16M、不加公司规则。源工程尚待独审接收，C全部仍OPEN。推送范围共因工具在独立内部线收尾，保持门禁自身/真实生产动态全量回退，不修改CI或600秒、不跳hook。
-
-**Next Step：** 提交已审模型/重放修复；接收native源和scope工具，定位修完剩余两项选材共因，再串行真实摘要/同run付费恢复/公共read/缓存/消费者及独立内容审查。正常大节点push时停ROOT自有并发重测试，核真实远端CI。
+尚未完成：业务覆盖识别最终源、三份配置供应商真实摘要/恢复及内容审查、正常push/精确CI、新盲样本。未把离线绿或同AUTO重跑写成跨AUTO/完整RF预测验收。
 
 ---
 

@@ -1,12 +1,13 @@
-## DU11 真实首批三例暴露共因，非验收通过 — 2026-10-18（当前）
+## DU11 当前执行位置 — 2026-10-18
 
-三例原件均只读/未复制/未改，测试湖均删除；结果review/du11_real_summary_first_batch.json：CN选材关键事实0/10被发送前拦、0POST；HK选材7/7后DeepSeek一次POST已知13985tokens/6159microUSD，合法业务JSON多type=json_object被旧解码器拒绝；US原文定位复核把下游新增table_structure_ambiguous误当源变化，0POST。累计613575tokens/$0.391272proxy，新增unknown0/历史7仍计，不盲重发，不把有响应当摘要通过。
+用户再次确认两卡已派发。RF citation-closure 与 FF local-transcript-reuse 继续独占各自作者树；ROOT只实施 CWP 主线。已提交至 aafbd662，远端仍是 4bc3492f；此前正常 push 的一次全量3FAIL已修，随后600秒超时未发布，不能当作远端CI失败或通过。
 
-HK统一格式兼容与US质量分层已修并独审PASS/0代码未决：精确格式marker不进入canonical，身份/翻译/task/basis不放宽；重放保留所有原解析flag，允许既有稳定enum中的新增保守诊断，仍验真实源/文字/坐标/metadata/SHA，不把OCR标记当跑过OCR证明。模型55PASS；归一化相关76既有PASS+当前8PASS（原首轮2个新反控夹具自洽hash错误已纠正，运行源未改），Ruff通过，见review/du11_protocol_replay_review.md/json。
+- 已完成：模型展示marker兼容、source/下游质量分层、当前来源事实统一、只读原件挂载、同run已付费outbox恢复装配。真实摘要首批CN/HK/US均FAIL已保留，未冒称验收完成。
+- 刚接收：native正文原生布局3文件通过最终独审，NFC改变片段字体保持unknown，未改变的兄弟片段保留实测字体；已精确集成，待本次commit。
+- 正在实施：完整业务覆盖句已进入连续窗口，却被共享业务事实识别降为普通描述，当前/未来两项覆盖事实被96片段预算挤掉。沿业务关系owner作可迁移TDD修复，不调96或16M，不写公司/gold特例。
+- 工程配套：推送选择器撤回不可靠资源字符串owner推断；未知资源保持full。保留Python工具真实执行依赖、顶层测试识别与scope计算早返回。独审收尾中；当前bootstrap仍须full，计算scope变快不等于测试变快。超时诊断保留子进度并返回红，不增600秒。
 
-CN普通正文缺frame/font native材料导致物理行碎片的source共因已在ROOT隔离树修，72PASS，0POST真实guard0→8/10；仍缺未来目标60/70与当前30，等待完整有界候选链trace，不抬96/16M、不加公司规则。源工程尚待独审接收，C全部仍OPEN。推送范围共因工具在独立内部线收尾，保持门禁自身/真实生产动态全量回退，不修改CI或600秒、不跳hook。
-
-**Next Step：** 提交已审模型/重放修复；接收native源和scope工具，定位修完剩余两项选材共因，再串行真实摘要/同run付费恢复/公共read/缓存/消费者及独立内容审查。正常大节点push时停ROOT自有并发重测试，核真实远端CI。
+**Next Step：** 业务覆盖关系修复及最终独审后，串行真实三供应商摘要、同run付费恢复、公共read/缓存/消费者与内容独审；集中正常commit/push，保留完整预推送日志并核精确远端CI。C及新盲样本仍OPEN。
 
 ---
 

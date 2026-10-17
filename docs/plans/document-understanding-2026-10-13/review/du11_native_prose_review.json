@@ -1,0 +1,97 @@
+{
+  "schema_version": "du11-native-prose-independent-final-review/1",
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at": "2026-10-17T23:30:01.824291+00:00",
+  "verdict": "PASS_NATIVE_PROSE_ENGINEERING_NFC_FIXED_C_OPEN",
+  "workdir": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-source-facts\\company-wiki",
+  "frozen_file_sha256": {
+    "src/company_wiki/source_catalog/narrative_evidence.py": "ed5b5ffed8fb6e2a514ba122db71e774e5d54f42980a7b48c0c0604a20bea3b1",
+    "src/company_wiki/document_understanding/decision_inventory.py": "36c5002c6f5a7169fa352dfc281a4972976fe0cab2cb95291692477e4f4bedc8",
+    "tests/unit/du11_production/test_native_prose_continuity.py": "4e9d6582a79dc84bf18e17e743dd9ebba11bedc9c2aad898971d22b11ea2833d"
+  },
+  "confirmed_unresolved_code_findings": [],
+  "resolved_findings": [
+    {
+      "id": "NATIVE-PROSE-NFC-FONT",
+      "priority": "P2",
+      "status": "RESOLVED_IN_FINAL_FROZEN_BYTES",
+      "original_counterexample": "Decomposed e+accent+x with12regular/20bold/12regular sourcefonts previously became uniformly12regular/exact after zero-width accent span vanished.",
+      "repair": "For eachfragment, retain actual source blockbbox/frame/text/ID. Only emit exact font ranges if original trimmed fragment exactly equals its canonical unittext; any normalization change leaves thatfragment fontunknown. Unchanged sibling in sameblock uses direct sourcechar-offset clipping and retains measured exactfont.",
+      "independent_green": "Actual source-DICT helper and existing projector now emit NFCfragmentéx; withno font_runs/font_size/font_weight, sameactualbbox; siblingstable sentence retains regular12/exact. Allcanonical IDs/rawtext/coordinates unchanged; no words/cells fabricated.",
+      "tradeoff": "Conservatively omits fonts even in normalized single-style fragments. This is honest unknown rather than inferred typography, with no need for a grapheme/style mapper or second native read."
+    }
+  ],
+  "final_delta_assessment": {
+    "code": "Normalization prefix-length-to-font remapping removed. No native finder/TextPage/read added; no parsedsource mutation. Perfragment equality decision prevents unrelatedNFCelsewhere from dropping good siblingfonts.",
+    "budget": "Same parent WorkBudget charged before projection; zero-budget base retention from prior independentcontrol unchanged. Noaccountreset/localrenewal.",
+    "source_provenance": "OriginalDICT actualfontsize/flags and originalblock-character offsets remain the producer. Real blockbbox/frame/rotation only; blockgranularity and nofake word/cell geometry.",
+    "canonical_legacy": "Canonical original unitIDs/text/coordinates/parser preserved; legacy selector0.8doesnot optin. Transient reading_layout remains outside canonicalspanidentity.",
+    "cache": "Existing PDF-only versions includeactual narrative_evidence module sourcehash and PDF_PROSE_LAYOUT_FEATURE_VERSION; finalNFCsource bytes therefore change realcache identity. No newcache/store."
+  },
+  "evidence": {
+    "final_control_file": ".planning/shared-reading-production/du11/native-prose-final-controls.json",
+    "final_control_sha256": "bec95777e66faebc05437bad10bbab7480119ea5a857d090dbc67b542f52db31",
+    "final_control": {
+      "result": "PASS_P2_COUNTERCONTROL",
+      "NFC_fragment": {
+        "text": "éx;",
+        "font_size": null,
+        "font_weight": null,
+        "font_runs": [],
+        "bbox": [
+          60.0,
+          100.0,
+          350.0,
+          120.0
+        ]
+      },
+      "unchanged_sibling": {
+        "text": "stable sentence.",
+        "font_runs": [
+          {
+            "char_start": 0,
+            "char_end": 16,
+            "char_start_supplied": 0,
+            "char_end_supplied": 16,
+            "font_size": 12.0,
+            "font_weight": "regular",
+            "font": null,
+            "char_alignment": "exact",
+            "page": 1,
+            "coordinate_frame": "dict",
+            "source": "pdf_native_single_textpage"
+          }
+        ]
+      },
+      "canonical_identity_unchanged": true,
+      "fake_fine": false,
+      "final_file_sha256": {
+        "src/company_wiki/source_catalog/narrative_evidence.py": "ed5b5ffed8fb6e2a514ba122db71e774e5d54f42980a7b48c0c0604a20bea3b1",
+        "src/company_wiki/document_understanding/decision_inventory.py": "36c5002c6f5a7169fa352dfc281a4972976fe0cab2cb95291692477e4f4bedc8",
+        "tests/unit/du11_production/test_native_prose_continuity.py": "4e9d6582a79dc84bf18e17e743dd9ebba11bedc9c2aad898971d22b11ea2833d"
+      },
+      "real_PDF_reads": 0,
+      "model_calls": 0,
+      "pytest_reruns": 0
+    },
+    "historical_red_controls_file": ".planning/shared-reading-production/du11/native-prose-review-controls.json",
+    "historical_red_controls_sha256": "e0a48c327de5acc8dbc73c18fa74e380fb2f1fbf916f58540dde81a67952328b",
+    "prior_review_file": ".planning/shared-reading-production/du11/native-prose-independent-review.json",
+    "test_reuse": "ROOT10new testsPASS afterNFCrepair; prior72related passes and realCN8/10guard reused as bounded earlier evidence. Reviewer doesnot claim independent10/72pytest execution or a new realPDFgoldrun. Tests were read including NFCdifferentstyle and unaffected siblingcontrols."
+  },
+  "validation_actions": {
+    "new_pytest_runs": 0,
+    "independent_pure_helper_calls": 1,
+    "real_PDF_reads": 0,
+    "provider_model_network_calls": 0,
+    "source_author_tree_changes": 0,
+    "report_writes_only": true
+  },
+  "remaining_C": [
+    "RealCN8/10inputguard still lacks five-year target/current30 facts; no final10/10 or summaryPASS",
+    "Actual configured-provider content/claim numeric/units/required-output acceptance",
+    "Real paid activation/cache/public consumers and blind tests",
+    "CI2file repair awaiting independent reception; no claim all project issues closed"
+  ],
+  "decision": "ROOT may integrate these3frozen native engineering files. P2closed; source/summary quality and remainingC are explicitlyOPEN. This is not an additional approval or small-node gate."
+}

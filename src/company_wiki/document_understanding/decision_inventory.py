@@ -89,6 +89,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
             "company_wiki.document_understanding.profiles.geometry_policy",
             "company_wiki.source_catalog.narrative_pdf_intent",
             "company_wiki.source_catalog.narrative_pdf_candidates",
+            "company_wiki.source_catalog.narrative_evidence",
             "company_wiki.resource_budget",
         )
         versions["pdf_reading_bridge"] = BRIDGE_VERSION
@@ -97,6 +98,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
             for name in modules})
         for key, module_name, attribute in (
             ("pdf_frontend", "company_wiki.source_catalog.narrative_pdf_layout", "PDF_READING_LAYOUT_FEATURE_VERSION"),
+            ("pdf_native_prose", "company_wiki.source_catalog.narrative_evidence", "PDF_PROSE_LAYOUT_FEATURE_VERSION"),
             ("pdf_capture", "company_wiki.source_catalog.narrative_pdf_layout", "PDF_LAYOUT_CAPTURE_STRATEGY"),
             ("pdf_projection", "company_wiki.document_normalization.layout_snapshots", "FEATURE_VERSION"),
             ("pdf_native_range", "company_wiki.source_catalog.narrative_native_ranges", "NATIVE_PAGE_VIEW_FEATURE_VERSION"),

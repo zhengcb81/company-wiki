@@ -63,6 +63,7 @@ from .transcript_versions import (
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = QA_FRAGMENT_VERSION
 PDF_GEOMETRY_FEATURE_VERSION = "pdf-geometry/1"
+PDF_PROSE_LAYOUT_FEATURE_VERSION = "pdf-native-prose-layout/1"
 
 
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
@@ -948,6 +949,7 @@ class _PdfParseState:
     native_view_deferred: list[int] = field(default_factory=list)
     prepared_text_units: dict[int, tuple[NarrativeUnit, ...]] = field(default_factory=dict)
     geometry_session: Any | None = None
+    prose_work_budget: Any | None = None
 
 
 def _pdf_text_blocks(
@@ -1040,9 +1042,96 @@ def _pdf_text_blocks(
                 "page_width": snapshot.get("width"),
                 "page_height": snapshot.get("height"),
                 "block_fonts": block_fonts,
+                "rotation": getattr(page, "rotation", None),
+                "rect_width": getattr(getattr(page, "rect", None), "width", None),
+                "rect_height": getattr(getattr(page, "rect", None), "height", None),
             }
         )
     return blocks
+
+
+def _project_native_prose(
+    state: _PdfParseState, page_number: int, units: Sequence[NarrativeUnit],
+) -> tuple[NarrativeUnit, ...]:
+    """Project measured DICT fonts/frame independently of table fine capture.
+
+    No words, cells, guessed boxes or second native read are introduced. The
+    existing snapshot producer validates the same block geometry and exact
+    source-character font ranges used by the continuity owner.
+    """
+    if state.prose_work_budget is None:
+        return tuple(units)
+    from company_wiki.document_normalization.layout_snapshots import project_layout_snapshot
+    from company_wiki.resource_budget import WorkBudgetExceeded
+
+    budget = state.prose_work_budget
+    try:
+        budget.charge(1 + len(units))
+        geometry = state.page_geometry.get(page_number, {})
+        bindings, wire = [], []
+        for unit in units:
+            if unit.unit_kind != "pdf_text_block":
+                continue
+            budget.charge()
+            meta = unit.metadata
+            view = meta.get("native_source_view")
+            record = view["by_block"].get(meta.get("pdf_block")) if view else None
+            if record is None:
+                continue
+            raw = record["source_text"]
+            start, end = meta["block_char_start"], meta["block_char_end"]
+            while start < end and raw[start].isspace():
+                budget.charge()
+                start += 1
+            while end > start and raw[end - 1].isspace():
+                budget.charge()
+                end -= 1
+            budget.charge(1 + (end - start) // 64)
+            fragment = raw[start:end]
+            if unicodedata.normalize("NFC", fragment.replace("\r\n", "\n")) != unit.raw_text:
+                continue
+            index = geometry.get("block_fonts", {}).get(meta["pdf_block"], {})
+            fonts = index.get("runs", ())
+            runs = []
+            # Composition can cross differently styled native glyph runs. A
+            # normalized prefix length does not prove which style owns the
+            # composed glyph: retain text/box, but make no font assertion for
+            # this fragment. An unchanged sibling in the same block remains
+            # exactly aligned and does not need any prefix remapping.
+            positions = (range(bisect_right(index.get("ends", ()), start), len(fonts))
+                         if fragment == unit.raw_text else ())
+            for position in positions:
+                budget.charge()
+                a, b, size, weight = fonts[position]
+                if a >= end:
+                    break
+                left, right = max(start, a), min(end, b)
+                if left >= right:
+                    continue
+                a, b = left - start, right - start
+                runs.append({"char_start": a, "char_end": b,
+                             "font_size": size, "font_weight": weight})
+            bindings.append({"unit_id": unit.unit_id, "bbox": meta.get("bbox"),
+                             "source": "pdf_native_single_textpage", "font_runs": runs})
+            wire.append({"unit_id": unit.unit_id, "page": page_number, "text": unit.raw_text})
+        snapshot = {"schema_version": "du-layout-snapshot/1", "pages": [{
+            "page": page_number, "width": geometry.get("page_width"),
+            "height": geometry.get("page_height"), "dict_width": geometry.get("page_width"),
+            "dict_height": geometry.get("page_height"), "rect_width": geometry.get("rect_width"),
+            "rect_height": geometry.get("rect_height"), "rotation": geometry.get("rotation"),
+            "coordinate_frame": "dict", "bindings": bindings}]}
+        projected = project_layout_snapshot(snapshot, wire, work_budget=budget)
+        result = []
+        for unit in units:
+            budget.charge()
+            patch = projected["unit_metadata"].get(unit.unit_id)
+            result.append(replace(unit, metadata={**unit.metadata, "reading_layout": {
+                "feature_version": PDF_PROSE_LAYOUT_FEATURE_VERSION, **patch}}) if patch else unit)
+        return tuple(result)
+    except WorkBudgetExceeded:
+        # Exhaustion remains on the shared caller account; base source text is
+        # retained and the semantic selector reports honest deferred work.
+        return tuple(units)
 
 
 def _pdf_geometry_metadata(
@@ -1434,6 +1523,8 @@ def _emit_pdf_page(
 ) -> None:
     page_unit_count = len(state.units)
     qa_page = _emit_pdf_text_units(state, page_number, blocks)
+    state.units[page_unit_count:] = _project_native_prose(
+        state, page_number, state.units[page_unit_count:])
     if page_number in state.table_scan_pages:
         qa_unit_start = len(state.units)
         _emit_pdf_tables(state, document, page_number)
@@ -1492,6 +1583,7 @@ def _parse_pdf_document(
         # account. The native layout owner's existing ceiling applies only to
         # its own fine capture/projection, not to all newly composed stages.
         source_budget = shared_budget
+        state.prose_work_budget = shared_budget
 
         state.layout_collector = PdfLayoutCollector(
             limits=layout_limits, max_seconds=layout_max_seconds,
