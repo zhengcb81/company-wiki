@@ -417,7 +417,7 @@ def test_production_default_parser_gets_opt_in_but_legacy_custom_parser_keeps_it
         source_ref=SimpleNamespace(
             source_id=source_id_for_sha256(sha), content_sha256=sha
         ),
-        source_metadata=SimpleNamespace(language="en"),
+        source_metadata=SimpleNamespace(language="en", title="Annual Report", document_kind="annual_report"),
     )
     default = NarrativeSelectHandler(reader=None, selector_version="0.9.0")
     assert default._parse_pdf(payload, raw).layout_coverage is not None

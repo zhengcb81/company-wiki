@@ -12,11 +12,11 @@ DU9 POLICY/PLANNER 与 DU10 回归基准已接收；实际 PDF 0.9 仍由旧关�
 
 - ROOT：source_catalog 的 PDF parser/collector 与新增窄 source 执行器；automation 的原 select/bound selector、dependency inventory、必要共享工作预算基础实现；相关专属测试、真实 E2E 与母 PWF。
 - 内部实现 agent：strategy_binding 原 owner 的公开 SectionPolicyMatcher、geometry_intent/reading.py、tests/unit/du11_reading_plan。复用原 router/profile/compiler/planner，不能另起业务正则/章节策略。其文件 ROOT 不同时编辑，完成后由不同 agent 独立复审。
-- 用户外包 DU11：仅 RF 引文闭合与 FF 本地电话会复用，分别独立新工区，完全不写 CWP 生产目录；施工卡和精确白名单另列总表。未派发不声称正在施工。
+- 用户外包 DU11：仅 RF 引文闭合与 FF 本地电话会复用，分别独立新工区，完全不写 CWP 生产目录；施工卡和精确白名单另列总表。两卡用户已确认派发，ROOT不改作者工区。
 
 `PdfReadingContext(title, declared_kind, language)` 是纯不可变 caller 元数据；实际源前两页用当前 source emitter 产生 canonical probe units，随后同单位复用，不生成第二全文/第二TextPage。`prepare_geometry_reading` 产出已解析profile、compiled policy、真实native窗口、原PLANNER计划、诊断和request digest。导航是资源计划依据，不是body证据；没有真实probes保持generic。
 
-source执行器用同一DICT中的实际行列/对齐验证候选，再由原PLANNER准入，统一决定finder/fine。纯金额列、目录词和空/扫描页不能仅凭词汇触发表查找；财务章节内真实经营表仍可请求，最终经营资格继续归原qualify_table。不抬64页、1M source几何或15秒限额。共享WorkBudget作为调用内账户，子阶段本地上限是父账户的收紧视图，不复制余额、不重置。source和后置正式selector共用2M总工作账户，所有实际收费在执行前。
+source执行器用同一DICT中的实际行列/对齐验证候选，再由原PLANNER准入，统一决定finder/fine。纯金额列、目录词和空/扫描页不能仅凭词汇触发表查找；财务章节内真实经营表仍可请求，最终经营资格继续归原qualify_table。不抬64页、1M source几何或15秒限额。共享WorkBudget作为调用内账户，子阶段本地上限是父账户的收紧视图，不复制余额、不重置。source和后置正式selector共用2M总工作账户，所有实际工作在执行前计入同一父账户。未知导航探索限用同账户1/8局部额度，不可吞掉已知业务与后置选择资源；未知或冲突范围显式partial/deferred，不把未做写成无内容。
 
 ## A — 行为契约与RED
 
@@ -42,4 +42,12 @@ source执行器用同一DICT中的实际行列/对齐验证候选，再由原PLA
 
 ## Next Step
 
-先保存 A 的 source/parser/预算 RED；同时内部纯matcher/native计划实现，外部DU11两卡定界并发布给用户。B/C在实际调用链通过前保持OPEN。
+A行为已固定并修复独审发现；B默认真实PDF已到销售93/94和项目223，186集中复测全绿。当前修复同账户parse→select资源争用，未通过前不调用付费模型；B全链/C正式摘要、恢复与holdout仍OPEN。两张DU11外包已经派发，与ROOT所有权隔离。
+
+## 实测后的统一计算额度修订（2026-10-17）
+
+2M是旧独立布局算法的默认工作计数，本轮最初将其误用于整个组合账户；它与用户200万LLM tokens不是一回事。独立实源测量：金禾11297个原单位，解析约1.268M工作、完整语义选择约7.928M工作（结构3.571M、候选2.300M、布局1.194M），选择约18秒。旧2M不仅抵不住parse→select，fresh2M选择本身也提前中止，掩盖了PDF裁行后provenance悬空的真实代码缺陷；该缺陷已在裁剪owner修复，严格binder不放宽，并补ghost引用反控。
+
+由共同resource_budget明确组合默认16M，source/正式handler/selector从同一factory获得一个账户，余额不重置；显式调用传入的小预算仍生效。纯布局默认和原source精几何1M、64页、15秒不变。未知导航探索额外封顶min(250k,parent/8)，父账户变大不能顺带放大无目标遍历。模型、token、费用、网络、输出和空间配置均不变。16M是有上限的本机工作计数，不把它冒充CPU硬计时。
+
+必须再以正式handler默认→parse→selector→原文span验证的同账户回放验收，诊断性fresh16M结果不能替代。原始源码/策略改变继续失效旧缓存；真实部分覆盖、160片段上限和未读范围必须保留partial，不宣称全篇都读完。最终独审与集中工程回归通过后方可开始付费摘要。

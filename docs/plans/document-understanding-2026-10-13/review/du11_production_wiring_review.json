@@ -1,0 +1,283 @@
+{
+  "reviewer": "/root/du10_et_reception_review",
+  "stage": "Final engineering B delta review; current frozen working bytes",
+  "verdict": "PASS_ENGINEERING_B_PRODUCTION_C_OPEN",
+  "unresolved_confirmed_defects_in_reviewed_delta": [],
+  "current_read_file_sha256": {
+    "src/company_wiki/automation/narrative_select.py": "b4b3f122f066725192a358d32f8c755359b43c3840f6d14c6bc667a23a12a98e",
+    "src/company_wiki/automation/narrative_selector_binding.py": "b32834cec079a873e0c6f7cfd0562a15bccc2a1d02a6df892ffdea283cf0411c",
+    "src/company_wiki/document_normalization/layout_snapshots/contract.py": "ec27457f1e1575e4e84636a4d5afd10d73c8f718f7285605d529d735ff222e1f",
+    "src/company_wiki/document_normalization/layout_snapshots/identity.py": "2b0fa1f61176e9a69da9dd6b33a9295ed4f3b8e8e8b47204538a9363ac7a32da",
+    "src/company_wiki/document_normalization/layout_snapshots/projection.py": "998fb43282470beff27a8b96d64700018937f221c05db4a01efd15808fb001d2",
+    "src/company_wiki/document_understanding/decision_inventory.py": "b1fdac2e22fdab0f7eaee0fc2af3262222ac782bb5abafa55934c94f58d1bc20",
+    "src/company_wiki/document_understanding/geometry_intent/reading.py": "77eb80392c88b3e8e12922cc7570a8fdae071c469f4057cc6432066887b65813",
+    "src/company_wiki/document_understanding/layout_hints/contract.py": "9ab7f3256396fc865788eebbb92f4bb7ef3792a7ab7b5a3e5164bc9a3f81cc2d",
+    "src/company_wiki/document_understanding/native_table_bridge.py": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1",
+    "src/company_wiki/document_understanding/profiles/reading_catalog.json": "fe5d64401860f4a2205fff061c5befc43824cecf727ffc471d4a6f1f144759e5",
+    "src/company_wiki/document_understanding/strategy_binding.py": "63678a70251781e530875e670b80d1bed3055dc31fc7a6e11faff39917ea92b2",
+    "src/company_wiki/document_understanding/structure/table_purpose.py": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+    "src/company_wiki/resource_budget.py": "17ef6e5a3ffa87d0527d03e86ec4b325273fb38f275b57600db2dcff406dab1e",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "cc5508e726b192ba0581b0663739a3395c630bf9969130c3568692f61451de3a",
+    "src/company_wiki/source_catalog/narrative_pdf_candidates.py": "c64cc0fb3ebc4d4a300dd2ec5f0d9555b4de29b36457875a2bcc989921356bd3",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "5f526fa991d319f364a155f13224dd12b6a04e49d3dcddcd6e53b4a59b0fa0b9",
+    "src/company_wiki/source_catalog/narrative_pdf_layout.py": "b735129fcdbaed1d2e0a3e98ec987702d4b85303596dac0677f704ef96bb62ab",
+    "src/company_wiki/source_catalog/narrative_reading.py": "a61e30673ae8411db7d9f508a4ccdffc66422598572092569bbe6de601a63cb6"
+  },
+  "binding_note": "These SHA-256 values bind final frozen runtime/policy/test working bytes, including untracked DU11 modules/tests. An eventual commit may be recorded without self-referential SHA changes. Earlier RED probes belong to their explicit chronology, not all final bytes.",
+  "resolved_findings": [
+    {
+      "id": "DU11-WIRING-01",
+      "resolution": "Candidate helper now measures aligned header/body and reuses existing operating purpose owner; separate numeric header/body case GREEN. A newly exposed qualitative-project digit prerequisite was removed; no-numeric project table now candidate=True without fabricated year.",
+      "actual_controls": [
+        "产品|产能|单位 -> A型设备|100|台/年 => candidate True",
+        "项目名称|主要产品|建设地点 -> 机床项目|高端机床|苏州 => RED False then GREEN True; same semantic owner eligible throughout"
+      ],
+      "status": "DELTA_VERIFIED"
+    },
+    {
+      "id": "DU11-WIRING-02",
+      "resolution": "Actual _emit_pdf_tables checks collector.admit_table_discovery immediately before native finder. Budget check depends on shared work account rather than reading-policy capture mode, closing explicit table_pages/full_table_scan 0.9 branch. State.geometry_session is attached before emitting prepared cover pages, so actual refusal can add deferred/reason.",
+      "actual_controls": [
+        "One synthetic page, selector0.9+WorkBudget(0)+layout_max_seconds0+table_pages(1) => zero finder, zero debit, scan_pages empty",
+        "Same synthetic page with full_table_scan=True => zero finder/debit/scan_pages",
+        "Synthetic deadline advanced after text emission => zero finder; latest early-session attachment read statically"
+      ],
+      "status": "DELTA_VERIFIED"
+    },
+    {
+      "id": "DU11-WIRING-03",
+      "resolution": "Existing dependency inventory now includes BRIDGE_VERSION and normalized source SHA of the real new planning/candidate/resource modules; native pre-read profile scope is separately included in catalog decision scopes. Existing capture digest remains immutable attempt history.",
+      "actual_controls": [
+        "In-memory BRIDGE_VERSION change now changes _versions (previously equal)",
+        "Actual pdf_reading_algorithms digest field exists and covers real new source modules"
+      ],
+      "status": "DELTA_VERIFIED"
+    },
+    {
+      "id": "DU11-WIRING-04",
+      "classification": "additional generic completeness root cause found and repaired during review",
+      "resolution": "Valid but unmatched native navigation now has explicit unresolved ranges and bounded same-account exploration. Unknown physical prefix is included. Conflicting shared pages are blocked/deferred without becoming business evidence.",
+      "actual_controls": [
+        "2-page unmatched outline RED: zero finder/completeTrue -> GREEN: finder[2]/completeFalse",
+        "3-page first bookmark at p3 with actual table p2 RED: zero finder/completeTrue/unresolved0 -> GREEN: finder[2]/completeFalse/unresolved1",
+        "3-page shared-page conflicting headings => zero finder, deferred[2], navigation_conflict_deferred1"
+      ],
+      "status": "DELTA_VERIFIED"
+    }
+  ],
+  "architecture_assessment": [
+    "One WorkBudget implementation, parent-debit scopes. Calibrated whole-document default16M local algorithm operations is created once by new_document_work_budget; source planning/candidate and builtin selector retain that account. Fine layout retains1M local cap/64pages/15seconds; an explicitly supplied smaller budget is never enlarged/reset. LLM token/cost limits are separate and unchanged.",
+    "No second default0.9 full_table_scan fallback. Actual source TextPage reused for base/fine views, source canonical cover units reused, no new native body parser.",
+    "Single section matcher facade delegates _match_rule; contiguous same-rule windows merged with bounded chain digest/count, no duplicated keyword or role router.",
+    "Native outline is scheduling evidence only. No title/body locator fabrication or printed-page offset; actual source role/byte/locator remains source responsibility.",
+    "Candidate page-local memo is bounded and temporary, charged to same account; it is not another persistent cache/source registry. Cross-page continuation stores bounded measured columns/field labels only.",
+    "Frozen attempt capture history is separate from current algorithm/catalog identity; existing dependency/cache owner is extended, no second cache.",
+    "No new approval identity store task database or persistent whole-page snapshots."
+  ],
+  "nonblocking_notes": [
+    {
+      "id": "COVERAGE-COUNT",
+      "note": "Source and compact downstream coverage preserve planning completeFalse, unresolved_navigation_count, navigation_missing, reason_counts and deferred counts. No full plan/window copy was added. These compact unknown/deferred reasons remain source-quality diagnostics rather than approval gates."
+    },
+    {
+      "id": "ALGORITHM-IDENTITY-BOUNDARY",
+      "note": "New seven-module source-hash chain is real. Existing native extraction/capture modules still rely on their existing version constants. Preserve that owner contract: semantic changes to excluded existing modules need their version updated or inclusion in the existing footprint. This is a maintenance boundary note, not an independently demonstrated current-cache failure."
+    }
+  ],
+  "validation": {
+    "broad_pytest_rerun": false,
+    "controls": "Pure synthetic candidate/versions probes and 1-3-page in-memory PDF source parsing only; native find_tables replaced by counter fixture, never whole extraction pipeline mocked",
+    "network_calls": 0,
+    "provider_calls": 0,
+    "llm_calls": 0,
+    "real_pdf_reads": 0,
+    "source_file_writes": 0,
+    "author_tree_writes": 0,
+    "generated_original_files": 0,
+    "cache_or_bytecode_writes": 0
+  },
+  "not_accepted_by_this_draft": [
+    "No final production C PASS: paid summary / cache recovery / blind samples remain OPEN.",
+    "No claim of whole-document extraction completeness, investment accuracy or all-document-kind acceptance.",
+    "ROOT real-source results are inspected receipts; reviewer performed no real source reads/API/model calls."
+  ],
+  "next": "ROOT may commit the engineering B frozen bytes and continue isolated production C acceptance. Any runtime/policy/test-byte change after this manifest needs finite delta review, not a repeated whole review.",
+  "b_test_adjustments_review": {
+    "verdict": "PASS_FOR_TWO_TARGETED_TEST_ADJUSTMENTS",
+    "actual_independent_command": "python -B -m pytest -p no:cacheprovider -q tests/unit/test_shared_reading_pdf_layout.py::test_production_default_parser_gets_opt_in_but_legacy_custom_parser_keeps_its_interface tests/unit/du9_geometry_policy/test_geometry_policy.py::test_legacy_wire_fingerprints_only_change_with_an_explicit_policy_upgrade tests/unit/du11_production/test_convertible_policy_scope.py::test_actual_offering_policy_keeps_sales_and_project_windows_independent",
+    "actual_result": "3 passed in 3.97s",
+    "metadata_fixture_reason": "SourceMetadataValue always defines title (nullable) and document_kind. Filling those fields in SimpleNamespace matches the public event DTO instead of loosening implementation or removing the custom parser compatibility assertions.",
+    "golden_reason": "offering_cn_convertible intentionally upgraded1.0.2->1.0.3 to add source-business rules. Only offering hash changes. Exact output compatibility is intentionally changed for that versioned policy, not for geometry-only metadata. Existing all-profile equality assertion remains, and actual sales/project window behavior is separately asserted.",
+    "compatibility_risk": "Offering source selection can expand intentionally; downstream cache must observe current catalog version/material and cannot claim old offering selection byte-identical. Other14 legacy profile hashes and external schemas unchanged.",
+    "shared_budget_assessment": "Responsibility assessment unchanged: caller account owns composed document work, fine capture owns its tighter scoped ceiling. Earlier2M numeric assumption is superseded by the calibrated16M local-work factory, not by renewing accounts or raising model budgets.",
+    "root_reported_real_observation": "CN default physical93/94/223 with212/89/42 fine cells in10.21s/raw unchanged; HKp12 28cells with later deadline deferral. These are ROOT observations, not independently re-read real documents.",
+    "still_required": "Original same-account evidence requirement now has actual production handler receipts and reviewed runner source. C still requires actual paid summary, cache recovery and blind-sample validation."
+  },
+  "reviewed_test_sha256": {
+    "tests/fixtures/du9_geometry_policy/legacy_profile_sha256.json": "798c388fa9c0ec7b9dfb1d24307a966b07496561591820ddca93cef8850fd250",
+    "tests/unit/du11_production/test_cache_identity.py": "17cc2b149e94a7a589e2ff671e0a2bc32a63bf277f12048262023c77340e2b2c",
+    "tests/unit/du11_production/test_convertible_policy_scope.py": "277905bf973fa4f778a4500056d87a338cd9c4198ddb1399ac34a069c2bc63a8",
+    "tests/unit/du11_production/test_exploration_fairness.py": "0a5351ff0ce20507c8cd9abfc1e946c0522b95192f59ce8369b438da24f72c3c",
+    "tests/unit/du11_production/test_native_table_projection.py": "684b7401c4d5ec50adcbecdab9cec5b52c4f73d51e3e8c3be820e614fb7430e6",
+    "tests/unit/du11_production/test_pdf_candidates.py": "4bd68272ba3b161b5a88038604aa91ad8bb5c2c1eeb0bc7fed2077a65b0b97a3",
+    "tests/unit/du11_production/test_pdf_production.py": "b36b8a0633ba8697d7ebce94e60320422a614a3dff401716ed80aeac1e88eaef",
+    "tests/unit/du11_production/test_project_table_scope.py": "5b30eb2ae28f96dd21e6c32758182405198c0656e327bb352424543441271650",
+    "tests/unit/du11_production/test_shared_work_budget.py": "c7610bbd032d645a908056ddd4fa5a78713e90b0be17ce4c178151ff6cf78c48",
+    "tests/unit/du11_reading_plan/test_reading.py": "9d1cb48f3d440b429cafcd9341108697f595fafc479a208d40358b7c316a1862",
+    "tests/unit/du9_geometry_policy/test_geometry_policy.py": "a2cdfcc6f07133eb67b6ba60136a6ea74a70db5b6f3fc909fa88341eeb327225",
+    "tests/unit/test_shared_reading_pdf_layout.py": "0e65e30448cc03fda5ad844140a4f8d470f717efab9f86bb1afe7cd737f7872a"
+  },
+  "production_c_open_after_B": "Previous2M zero-span diagnostics are superseded by actual official handler16M results, not hidden: CN160/HK96 source-owned verified spans and honest partial. Paid summary, normal/cross resume cache recovery, and blind samples remain OPEN; this engineering PASS is not whole production/PWF completion.",
+  "native_table_projection_delta_review": {
+    "id": "NATIVE-PROJECTION-STRICT-REF",
+    "priority": "P1",
+    "status": "RESOLVED_DELTA_VERIFIED",
+    "where": "document_understanding/native_table_bridge.py::_eligible_cells",
+    "legitimate_fix": "Filtering provenance for legitimate cells removed by the eligible-row view is correct; same owner creates both cell and provenance subview, strict binder unchanged, bridge version2.1.0->2.1.1 appropriate.",
+    "root_cause": "Filtering all provenance by membership in retained cell IDs silently drops references whose IDs were never present in the original cell table. This masks original malformed references before the strict binder sees them, including when every legitimate source cell is retained.",
+    "actual_pure_counterexample": "Original2-cell capacity table contains provenance for r0c0,r1c0 plus ghost. Direct bind_operating_table raises provenance points at unknown cell ghost; _eligible_cells(table,{a}) then binder returns complete with ghost silently absent.",
+    "expected_fix": "Remove provenance only when its ID belongs to the legitimate original cells deliberately removed by this view. Unknown/missing/invalid references must remain visible to original strict binder (or be rejected without weakening its contract); no duplicate binder needed.",
+    "needed_tests": [
+      "Actual bind_native_tables->strict binder still succeeds for valid removed r2c0",
+      "Unknown provenance ghost remains rejected after eligible filtering even all legitimate cells retained",
+      "Input table unchanged",
+      "Malformed missing cell_id not silently sanitized if covered by original binder contract"
+    ],
+    "source_sha256": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1",
+    "test_sha256": "684b7401c4d5ec50adcbecdab9cec5b52c4f73d51e3e8c3be820e614fb7430e6",
+    "reviewer_executions": "Final independent targeted pytest: 3 actual native composition cases (valid removed r2c0, ghost, missing cell_id), all PASS. Original pure ghost counterexample and initial broader fix remain RED history; final removed-only patch closes it.",
+    "resolution": "Only IDs in original cells deliberately removed by eligible projection are removed from provenance. Unknown/missing references survive to the unchanged strict binder, so invalid source references cannot be sanitized into an accepted result. Input observations remain unchanged."
+  },
+  "reviewed_at": "2026-10-17T22:38:56.004428+00:00",
+  "git_head": "b914728e98b08fcf5d5e0838ee153cddc0bdfd6f",
+  "capacity_delta_review": {
+    "verdict": "PASS_FOR_LOCAL_WORK_CAPACITY_DESIGN",
+    "rationale": "Measured normal composed CN work9.196M and HK10.794M exceed old standalone2M;16M gives finite headroom without changing algorithm, text/native page limits or provider/model budgets. Raising a local operation ceiling after measuring full pipeline cost is appropriate; no claim of general throughput improvement or universal-document capacity.",
+    "account_flow": "_select_pdf -> one factory -> _parse_pdf(default actual parse_pdf_bytes) -> same work_budget -> builtin BoundNarrativeSelector -> select_reading_evidence -> _understand/_candidates. Optional helper defaults do not run on this official supplied-account path. Custom parser/selector compatibility remains its old call shape.",
+    "small_budget": "Explicit budget selection uses is not None, not truthiness. WorkBudget scoped charges parent before self; exhausted child cap does not exhaust whole parent. Independent same-account test sets factory123456, source charges17, selector observes same object17 then charges11 ->28.",
+    "unknown_exploration": "SourceGeometrySession uses budget.scoped(min(250000,budget.max_work_units//8)). Independent2M and16M tests both stop unknown exploration at240000 successful debit, reject next120000 without exhausting parent, then known p75 can use same parent; incomplete coverage retained.",
+    "unchanged_boundaries": [
+      "native fine cap1M",
+      "native page cap64",
+      "native layout deadline15seconds, not claimed as entire-document wallclock",
+      "no new LLM client/model/provider configuration",
+      "no model token/cost allowance increase",
+      "no new store/cache/identity/permission chain"
+    ]
+  },
+  "root_actual_production_evidence": {
+    "method": "Read recorded receipts and probe_real_pdf.py; did not re-open originals or re-run PDFs. Production branch constructs actual NarrativeSelectHandler, observes factory exactly once, calls real _select_pdf and _verify_selected_material; instruments native calls only for counting. Receipt values are ROOT-executed evidence, not independently reproduced real PDF runs.",
+    "runner_sha256": "d6c6ed8690f7d9b94028c914c755fe723a3ba0d80bfa4f5aa982573a789a51b5",
+    "receipts": {
+      "cn-convertible-production.json": {
+        "sha256": "aaeefa781fcd2e3ad7b82eebd8a63a623fcb3024577bac0ec8cf77913410ab60",
+        "sample": "cn-convertible",
+        "seconds": 26.31,
+        "shared_used": 9195993,
+        "shared_limit": 16000000,
+        "shared_exhausted": false,
+        "selection": {
+          "status": "partial",
+          "span_count": 160,
+          "coverage_complete": false,
+          "candidate_count": 8076,
+          "omitted_candidate_count": 7916,
+          "material_verified": true,
+          "selected_target_pages": {
+            "12": 0,
+            "93": 14,
+            "94": 31,
+            "223": 34,
+            "224": 3
+          },
+          "diagnostics": [
+            {
+              "code": "budget_full",
+              "count": 7299
+            }
+          ]
+        },
+        "original_unchanged": true,
+        "supplier_calls": 0,
+        "raw_copy": false,
+        "max_frontend_textpages_per_page": 1,
+        "peak_live_frontend_textpages": 2,
+        "target_fine_cells": {
+          "12": 0,
+          "93": 212,
+          "94": 89,
+          "223": 42,
+          "224": 0
+        }
+      },
+      "hk-annual-production.json": {
+        "sha256": "df5257535798e7e57ce4b13847c6a26a5d3e2160410dbb08a3358c3f8c603ed1",
+        "sample": "hk-annual",
+        "seconds": 24.465,
+        "shared_used": 10793622,
+        "shared_limit": 16000000,
+        "shared_exhausted": false,
+        "selection": {
+          "status": "partial",
+          "span_count": 96,
+          "coverage_complete": false,
+          "candidate_count": 644,
+          "omitted_candidate_count": 548,
+          "material_verified": true,
+          "selected_target_pages": {
+            "12": 14,
+            "93": 0,
+            "94": 2,
+            "223": 0,
+            "224": 0
+          },
+          "diagnostics": [
+            {
+              "code": "budget_full",
+              "count": 357
+            }
+          ]
+        },
+        "original_unchanged": true,
+        "supplier_calls": 0,
+        "raw_copy": false,
+        "max_frontend_textpages_per_page": 1,
+        "peak_live_frontend_textpages": 2,
+        "target_fine_cells": {
+          "12": 28,
+          "93": 0,
+          "94": 0,
+          "223": 0,
+          "224": 0
+        }
+      }
+    }
+  },
+  "final_independent_validation": {
+    "command": "python -B -m pytest -p no:cacheprovider -q tests/unit/du11_production/test_native_table_projection.py tests/unit/du11_production/test_exploration_fairness.py tests/unit/du11_production/test_shared_work_budget.py tests/unit/du11_production/test_pdf_production.py::test_production_passes_one_budget_from_source_to_builtin_selector --junitxml=.planning/shared-reading-production/du11/reviewer-final-delta-junit.xml",
+    "exit_code": 0,
+    "result": "8 passed in5.34s",
+    "junit_sha256": "2cb499b5d8402c7bf89ff5bc1e97b350722481529a5efebb0d0528c5cf86df26",
+    "no_pdf": true,
+    "no_network_model_provider": true,
+    "no_source_or_author_tree_mutation": true,
+    "bytecode_cache_disabled": true
+  },
+  "evidence_reuse": {
+    "note": "Read existing actual XML, no duplicate concentrated suite rerun. Final strict-ref repair was later than original35 XML and is independently covered by final8.",
+    "b-final-focused.xml": {
+      "tests": 186,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 16.309,
+      "sha256": "7e1248a5b35d48d58cf83dcc996b06733e29eee28814ef41e8815210ba2445b2"
+    },
+    "native-table-closure.xml": {
+      "tests": 35,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 4.475,
+      "sha256": "1e5d386c4cc9d6594bb2c100a6388c5757a6cd9267f4091ac0a2282d4e47783b"
+    }
+  }
+}

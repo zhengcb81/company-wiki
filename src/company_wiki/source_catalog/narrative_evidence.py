@@ -946,6 +946,8 @@ class _PdfParseState:
     native_view_limits: dict[str, int] | None = None
     native_view_chars: int = 0
     native_view_deferred: list[int] = field(default_factory=list)
+    prepared_text_units: dict[int, tuple[NarrativeUnit, ...]] = field(default_factory=dict)
+    geometry_session: Any | None = None
 
 
 def _pdf_text_blocks(
@@ -1236,6 +1238,10 @@ def _emit_pdf_text_units(
         _has_pdf_question(text, state.parser_version) or _QA_ANSWER.search(text)
         for _block_no, _bbox, text in blocks
     )
+    prepared = state.prepared_text_units.pop(page_number, None)
+    if prepared is not None:
+        state.units.extend(prepared)
+        return qa_page
     paragraph_no = 0
     for raw_block_no, bbox, text in blocks:
         block_sha256 = hashlib.sha256(text.encode("utf-8")).hexdigest()
@@ -1404,7 +1410,16 @@ def _emit_pdf_table(
 
 def _emit_pdf_tables(state: _PdfParseState, document: Any, page_number: int) -> None:
     try:
-        finder = document.load_page(page_number - 1).find_tables()
+        page = document.load_page(page_number - 1)
+        collector = state.layout_collector
+        if (collector is not None and collector.work_budget is not None
+                and not collector.admit_table_discovery(page_number)):
+            state.table_scan_pages.discard(page_number)
+            if state.geometry_session is not None:
+                state.geometry_session.deferred.add(page_number)
+                state.geometry_session.reasons['discovery_resource_deferred'] += 1
+            return
+        finder = page.find_tables()
         for table_index, table in enumerate(finder.tables):
             _emit_pdf_table(state, page_number, table_index, table)
     except Exception as exc:
@@ -1459,6 +1474,8 @@ def _parse_pdf_document(
     layout_max_seconds: float = 15,
     native_ranges: bool = False,
     native_range_limits: Mapping[str, int] | None = None,
+    reading_context: Any | None = None,
+    work_budget: Any | None = None,
 ) -> NarrativeParseResult:
     state = _PdfParseState(source_id, source_sha256, parser_version, language)
     if type(native_ranges) is not bool:
@@ -1468,12 +1485,23 @@ def _parse_pdf_document(
         state.native_view_limits = resolve_range_limits(native_range_limits)
     if selector_version == "0.9.0":
         from .narrative_pdf_layout import PdfLayoutCollector
+        from company_wiki.resource_budget import new_document_work_budget
+
+        shared_budget = work_budget if work_budget is not None else new_document_work_budget()
+        # Navigation/candidate work and later selection debit the caller's one
+        # account. The native layout owner's existing ceiling applies only to
+        # its own fine capture/projection, not to all newly composed stages.
+        source_budget = shared_budget
 
         state.layout_collector = PdfLayoutCollector(
             limits=layout_limits, max_seconds=layout_max_seconds,
+            work_budget=shared_budget.scoped(1_000_000),
         )
     state.page_count = len(document)
-    if state.layout_collector is not None:
+    if state.layout_collector is not None and not full_table_scan and table_pages is None:
+        from .narrative_pdf_intent import scan_planned_pages
+        scan_planned_pages(state, document, reading_context=reading_context, work_budget=source_budget)
+    elif state.layout_collector is not None:
         _scan_and_emit_pdf_pages(state, document, full_table_scan=full_table_scan,
                                 table_pages=table_pages)
     else:
@@ -1487,6 +1515,16 @@ def _parse_pdf_document(
         state.layout_collector.summary(units)
         if state.layout_collector is not None else (None, ())
     )
+    if state.geometry_session is not None:
+        layout_coverage = dict(layout_coverage or {})
+        planning = state.geometry_session.summary()
+        layout_coverage["planning"] = planning
+        capture = dict(layout_coverage.get("capture", {}))
+        capture["reading_request_digest"] = planning["request_digest"]
+        capture["request_sha256"] = hashlib.sha256(
+            (capture["request_sha256"] + planning["request_digest"]).encode()).hexdigest()
+        layout_coverage["capture"] = capture
+        layout_diagnostics = (*layout_diagnostics, *planning["diagnostics"])
     if state.native_view_limits is not None:
         from .narrative_native_ranges import NATIVE_PAGE_VIEW_FEATURE_VERSION
         layout_coverage = dict(layout_coverage or {})
@@ -1509,9 +1547,9 @@ def _parse_pdf_document(
         pages_read=state.pages_read,
         opaque_pages=tuple(state.opaque_pages),
         table_scan_pages=tuple(sorted(state.table_scan_pages)),
-        deferred_table_pages=tuple(
-            sorted(set(range(1, state.page_count + 1)) - state.table_scan_pages)
-        ),
+        deferred_table_pages=tuple(sorted(state.geometry_session.deferred))
+        if state.geometry_session is not None else tuple(
+            sorted(set(range(1, state.page_count + 1)) - state.table_scan_pages)),
         errors=tuple(state.errors),
         layout_coverage=layout_coverage,
         layout_diagnostics=layout_diagnostics,
@@ -1532,6 +1570,8 @@ def parse_pdf(
     layout_max_seconds: float = 15,
     native_ranges: bool = False,
     native_range_limits: Mapping[str, int] | None = None,
+    reading_context: Any | None = None,
+    work_budget: Any | None = None,
 ) -> NarrativeParseResult:
     """Scan a PDF path without materializing a normalized full-text artifact."""
     with _fitz_module().open(path) as document:
@@ -1548,6 +1588,8 @@ def parse_pdf(
             layout_max_seconds=layout_max_seconds,
             native_ranges=native_ranges,
             native_range_limits=native_range_limits,
+            reading_context=reading_context,
+            work_budget=work_budget,
         )
 
 
@@ -1565,6 +1607,8 @@ def parse_pdf_bytes(
     layout_max_seconds: float = 15,
     native_ranges: bool = False,
     native_range_limits: Mapping[str, int] | None = None,
+    reading_context: Any | None = None,
+    work_budget: Any | None = None,
 ) -> NarrativeParseResult:
     """Parse verified PDF bytes in memory without a temporary file."""
     if not isinstance(data, bytes):
@@ -1585,6 +1629,8 @@ def parse_pdf_bytes(
             layout_max_seconds=layout_max_seconds,
             native_ranges=native_ranges,
             native_range_limits=native_range_limits,
+            reading_context=reading_context,
+            work_budget=work_budget,
         )
 
 
@@ -2348,13 +2394,14 @@ def select_narrative_evidence(
     existing_kind: str = "unknown",
     max_selected: int | None = None,
     selector_version: str | None = None,
+    work_budget: Any | None = None,
 ) -> NarrativeEvidencePackage:
     """Select compact narrative spans with an explicit replayable policy version."""
     effective_version = resolve_narrative_selector_version(selector_version)
     if effective_version == "0.9.0":
         from .narrative_reading import select_reading_evidence
         return select_reading_evidence(parsed, title=title, existing_kind=existing_kind,
-                                      max_selected=max_selected)
+                                      max_selected=max_selected, work_budget=work_budget)
     original = parsed
     parsed = matching_document(parsed)
     route = route_document(

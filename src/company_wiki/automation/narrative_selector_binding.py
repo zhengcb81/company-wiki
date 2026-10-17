@@ -8,6 +8,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from functools import partial
 from typing import Protocol
+from company_wiki.resource_budget import WorkBudget
 
 from company_wiki.source_catalog.narrative_document import DocumentStructure, NarrativeEvidencePackage
 from company_wiki.source_catalog.narrative_evidence import (
@@ -24,9 +25,14 @@ class NarrativeSelector(Protocol):
 class BoundNarrativeSelector:
     selector: NarrativeSelector
     selector_version: str
+    builtin: bool = False
 
     def __call__(self, parsed: DocumentStructure, *, title: str,
-                 existing_kind: str = "unknown") -> NarrativeEvidencePackage:
+                 existing_kind: str = "unknown",
+                 work_budget: WorkBudget | None = None) -> NarrativeEvidencePackage:
+        if self.builtin and work_budget is not None:
+            return select_narrative_evidence(parsed, title=title, existing_kind=existing_kind,
+                selector_version=self.selector_version, work_budget=work_budget)
         return self.selector(parsed, title=title, existing_kind=existing_kind)
 
 
@@ -40,7 +46,7 @@ def bind_narrative_selector(selector: NarrativeSelector | None = None, *,
         return selector
     if selector is None or selector is select_narrative_evidence:
         effective = resolve_narrative_selector_version(selector_version)
-        return BoundNarrativeSelector(partial(select_narrative_evidence, selector_version=effective), effective)
+        return BoundNarrativeSelector(partial(select_narrative_evidence, selector_version=effective), effective, True)
     if selector_version is None:
         raise NarrativeSelectorVersionError("CUSTOM_SELECTOR_VERSION_REQUIRED")
     return BoundNarrativeSelector(selector, resolve_narrative_selector_version(selector_version))

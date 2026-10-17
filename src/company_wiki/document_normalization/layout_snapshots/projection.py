@@ -22,7 +22,7 @@ from .contract import (
     in_page_bounds,
     validate_snapshot,
 )
-from .identity import WorkBudgetExceeded
+from .identity import WorkBudget, WorkBudgetExceeded
 from .unit_binding import _FineLimit, bind_binding
 
 #: Diagnostic codes that make the projection partial rather than complete.
@@ -64,10 +64,11 @@ def project_layout_snapshot(
     units: Sequence[Mapping[str, Any]],
     *,
     limits: Mapping[str, Any] | None = None,
+    work_budget: WorkBudget | None = None,
 ) -> dict:
     if not isinstance(units, Sequence) or isinstance(units, (str, bytes)):
         raise ValueError("units must be a sequence of mappings")
-    pages, resolved, budget = validate_snapshot(snapshot, limits=limits)
+    pages, resolved, budget = validate_snapshot(snapshot, limits=limits, work_budget=work_budget)
 
     unit_index: dict = {}
     unit_order: list = []

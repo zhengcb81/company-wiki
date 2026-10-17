@@ -196,6 +196,44 @@ def _parent(section: Mapping[str, Any]) -> str | None:
     return section.get("parent_id") if "parent_id" in section else section.get("parent_section_id")
 
 
+class SectionPolicyMatcher:
+    """Call-local facade over the binder's single matching algorithm.
+
+    ``match`` matches the last heading against its complete real ancestry. An
+    unmatched child returns None; callers decide inheritance and must preserve
+    the exposed contrary-title/ambiguous-number diagnostics. No role inference
+    or alternate flattened matching is introduced here.
+    """
+
+    def __init__(self, profile: Mapping[str, Any], work_budget: WorkBudget | None,
+                 *, _prepared: _PolicyPreparation | None = None):
+        self.profile = profile
+        self.budget = work_budget
+        self.prepared = (_prepared if _prepared is not None else
+                         _PolicyPreparation(work_budget) if work_budget is not None else None)
+        self.diagnostics: list[dict[str, Any]] = []
+
+    def match_section(self, sid, parents, headings, diagnostics):
+        """Shared binder entry: retain its exact ancestry, caches and diagnostics."""
+        return _match_rule(sid, self.profile, parents, headings, diagnostics, self.prepared)
+
+    def match(self, heading_path: Sequence[str]) -> Mapping[str, Any] | None:
+        if not isinstance(heading_path, Sequence) or isinstance(heading_path, (str, bytes)):
+            raise TypeError("heading_path must be a sequence of heading strings")
+        self.diagnostics.clear()
+        if self.budget is not None:
+            self.budget.charge(1 + len(heading_path))
+        parents, headings = {}, {}
+        for index, text in enumerate(heading_path):
+            if not isinstance(text, str):
+                raise TypeError("heading_path entries must be strings")
+            sid = str(index)
+            parents[sid] = str(index - 1) if index else None
+            headings[sid] = text
+        return (self.match_section(str(len(heading_path) - 1), parents, headings, self.diagnostics)
+                if heading_path else None)
+
+
 def _unique(values: Sequence[Any]) -> list[Any]:
     result = []
     for value in values:
@@ -220,6 +258,13 @@ def bind_reading_plan(
     if work_budget is not None:
         work_budget.charge()
     prepared = _PolicyPreparation(work_budget) if work_budget is not None else None
+    matchers: dict[int, SectionPolicyMatcher] = {}
+
+    def matcher(chosen):
+        identity = id(chosen)
+        if identity not in matchers:
+            matchers[identity] = SectionPolicyMatcher(chosen, work_budget, _prepared=prepared)
+        return matchers[identity]
 
     def visit(values):
         iterator = iter(values)
@@ -309,7 +354,7 @@ def bind_reading_plan(
         for node in visit(reversed(trail)):
             depth += 1
             depths.setdefault(node, depth)
-            entry = _match_rule(node, chosen, parents, headings, diagnostics, prepared)
+            entry = matcher(chosen).match_section(node, parents, headings, diagnostics)
             if entry is not None:
                 inherited = {"section_role": str(entry.get("role") or entry.get("section_role") or "unknown"),
                              "priority": int(entry.get("priority", 3)),

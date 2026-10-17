@@ -500,6 +500,17 @@ def _native_layout_summary(parsed: DocumentStructure) -> dict[str, Any] | None:
             result['capture'][phase + '_page_count'] = capture.get(phase + '_page_count', len(pages))
             result['capture'][phase + '_pages_limited'] = bool(
                 capture.get(phase + '_pages_limited') or len(pages) > 128)
+    planning = coverage.get('planning')
+    if isinstance(planning, Mapping):
+        result['planning'] = {key: planning[key] for key in (
+            'feature_version', 'request_digest', 'policy_digest', 'plan_digest',
+            'profile_id', 'profile_scope', 'complete', 'navigation_missing',
+            'window_count', 'deferred_page_count', 'unresolved_navigation_count') if key in planning}
+        result['planning']['reason_counts'] = dict(list(planning.get('reason_counts', {}).items())[:32])
+        result['planning']['deferred_pages'] = list(planning.get('deferred_pages', ())[:128])
+        result['planning']['exploration_pages'] = list(planning.get('exploration_pages', ())[:64])
+        admission = planning.get('admission', {})
+        result['planning']['spent'] = dict(admission.get('spent', {}))
     identifiers = coverage.get("deferred_unit_ids", ())
     result["deferred_unit_ids"] = list(identifiers[:128])
     result["deferred_limited"] = bool(coverage.get("deferred_limited") or len(identifiers) > 128)
@@ -673,7 +684,8 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     route = route_document(title, existing_kind=existing_kind, max_selected=max_selected)
     mime_type = parsed.mime_type or ("text/plain" if route.document_kind == "investor_call_transcript" else
                                     "application/pdf" if parsed.page_count else "text/html")
-    budget = work_budget if work_budget is not None else WorkBudget(DEFAULT_LIMITS["max_work_units"])
+    from company_wiki.resource_budget import new_document_work_budget
+    budget = work_budget if work_budget is not None else new_document_work_budget()
     try:
         budget.charge()
         pipeline = _understand(parsed, title=title, kind=route.document_kind, mime_type=mime_type,

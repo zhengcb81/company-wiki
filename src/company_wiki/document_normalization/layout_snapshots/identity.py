@@ -12,6 +12,7 @@ import math
 import unicodedata
 from dataclasses import dataclass
 from typing import Any, Mapping
+from company_wiki.resource_budget import WorkBudget as WorkBudget, WorkBudgetExceeded as WorkBudgetExceeded
 
 #: ``du-layout-snapshot/1`` defaults (card requirement 6).  Callers may only
 #: TIGHTEN these; ``resolve_limits`` clamps any attempted widening back down.
@@ -30,32 +31,6 @@ OTHER_KNOWN_FRAMES = frozenset({"user", "media", "cropbox", "transformed"})
 KNOWN_FRAMES = UNROTATED_TEXT_FRAMES | ROTATED_RECT_FRAMES | OTHER_KNOWN_FRAMES
 
 VALID_ROTATIONS = frozenset({0, 90, 180, 270})
-
-
-class WorkBudgetExceeded(RuntimeError):
-    """Private analysis stop; only the public entry point converts it to partial."""
-
-
-@dataclass
-class WorkBudget:
-    """Reserve actual work before executing it.
-
-    Exhaustion interrupts every stage.  No work is performed on a failed charge,
-    and once exhausted the budget stays exhausted so a caller cannot resume.
-    """
-
-    max_work_units: int
-    used: int = 0
-    exhausted: bool = False
-
-    def charge(self, n: int = 1) -> bool:
-        if n < 0:
-            raise ValueError("work charge must be non-negative")
-        if self.exhausted or self.used + n > self.max_work_units:
-            self.exhausted = True
-            raise WorkBudgetExceeded("layout snapshot work limit reached")
-        self.used += n
-        return True
 
 
 def _require(condition: bool, message: str) -> None:

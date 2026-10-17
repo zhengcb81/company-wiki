@@ -1,3 +1,15 @@
+## DU11 主线真实全链容量修复 — 2026-10-17（当前）
+
+RF/FF两张卡已由用户派发，ROOT不改它们的源码工区。CWP默认深页解析已到金禾销售93/94（212/89真实cells）与项目223（42cells），原件不复制、不修改；224实读为审批续页/正文，不能为达页号硬作经营表。共享matcher、连续同规则窗口、未知导航/前缀与冲突覆盖、实际finder前预算、缓存算法/策略身份已修；集中首轮989PASS/13SKIP/2FAIL已定位并修，186集中复测PASS，独立审查同意两项夹具/明确策略gold升级的理由。
+
+**容量根因已修、正式handler回放通过：** 初始2M同账户与fresh2M均耗尽；实测完整正常阶段后，由唯一factory设组合默认16M（不是LLM token额度），原source精几何1M/64页/15秒保持，未知探索额外封顶250k不随父账户扩大。PDF裁行的provenance引用闭包已修，ghost/missing引用仍严格拒绝。正式handler同一个默认账户parse→select→原文span验证：CN26.31秒/9.196Mwork/160partialspans；HK24.465秒/10.794Mwork/96partialspans；原件未改/0收费。最终工程复审与发布处理中，模型C/恢复/新holdout仍OPEN。
+
+只读原件挂载与单版本测试工具已由不同agent实现、9PASS，独立复审PASS/0未决，提交b914728e（待正常推送）；仍用唯一原runner/费用账，真实metadata不足NOT_RUN，不补造事实。
+
+**Next Step：** 冻结最终源完成工程复审和正常commit/push/CI，再按配置进入真实摘要、缓存中断恢复与新样本验收。详细容量依据见review/production_wiring_phase_bc.md，机器实测见review/du11_production_wiring.json。
+
+---
+
 ## DU11用户已派发 — 2026-10-17
 
 两条RF/FF外包已启动，由作者独占各自新worktree；ROOT继续CWP source/engine/summary/cache，不改它们的源码、索引或配置。

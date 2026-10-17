@@ -1,0 +1,155 @@
+{
+  "schema_version": "du11-production-wiring-receipt/1",
+  "status": "ENGINEERING_B_REAL_HANDLER_PASSED_C_OPEN",
+  "real_samples": [
+    {
+      "sample": "cn-convertible",
+      "source_sha256": "3ce59fde98956a0b0370f76d5039a7025b73909a2673b7b677fca7a46d43650e",
+      "seconds": 26.31,
+      "pages": 283,
+      "frontend_textpage_count": 283,
+      "max_frontend_textpages_per_page": 1,
+      "dict_calls": 283,
+      "words_calls": 9,
+      "peak_live_frontend_textpages": 2,
+      "native_finder_pages": [
+        66,
+        71,
+        82,
+        91,
+        92,
+        93,
+        94,
+        223,
+        244
+      ],
+      "shared_used": 9195993,
+      "shared_limit": 16000000,
+      "shared_exhausted": false,
+      "selection": {
+        "status": "partial",
+        "span_count": 160,
+        "coverage_complete": false,
+        "candidate_count": 8076,
+        "omitted_candidate_count": 7916,
+        "material_verified": true,
+        "selected_target_pages": {
+          "12": 0,
+          "93": 14,
+          "94": 31,
+          "223": 34,
+          "224": 3
+        },
+        "diagnostics": [
+          {
+            "code": "budget_full",
+            "count": 7299
+          }
+        ]
+      },
+      "target_fine_cells": {
+        "12": 0,
+        "93": 212,
+        "94": 89,
+        "223": 42,
+        "224": 0
+      },
+      "original_unchanged": true,
+      "supplier_calls": 0,
+      "raw_copy": false,
+      "actual_production_handler": true
+    },
+    {
+      "sample": "hk-annual",
+      "source_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+      "seconds": 24.465,
+      "pages": 246,
+      "frontend_textpage_count": 246,
+      "max_frontend_textpages_per_page": 1,
+      "dict_calls": 246,
+      "words_calls": 8,
+      "peak_live_frontend_textpages": 2,
+      "native_finder_pages": [
+        12,
+        13,
+        14,
+        16,
+        17,
+        18,
+        19,
+        21
+      ],
+      "shared_used": 10793622,
+      "shared_limit": 16000000,
+      "shared_exhausted": false,
+      "selection": {
+        "status": "partial",
+        "span_count": 96,
+        "coverage_complete": false,
+        "candidate_count": 644,
+        "omitted_candidate_count": 548,
+        "material_verified": true,
+        "selected_target_pages": {
+          "12": 14,
+          "93": 0,
+          "94": 2,
+          "223": 0,
+          "224": 0
+        },
+        "diagnostics": [
+          {
+            "code": "budget_full",
+            "count": 357
+          }
+        ]
+      },
+      "target_fine_cells": {
+        "12": 28,
+        "93": 0,
+        "94": 0,
+        "223": 0,
+        "224": 0
+      },
+      "original_unchanged": true,
+      "supplier_calls": 0,
+      "raw_copy": false,
+      "actual_production_handler": true
+    }
+  ],
+  "evidence_scope": "Existing development regression sources; not blind holdout or paid summary acceptance",
+  "tests": {
+    "first_concentrated": {
+      "passed": 989,
+      "skipped": 13,
+      "failed": 2,
+      "collected": 1004
+    },
+    "corrected_focused": {
+      "passed": 186,
+      "failed": 0,
+      "seconds": 16.34
+    },
+    "native_projection_before_strict_countercontrol": {
+      "passed": 35,
+      "failed": 0
+    },
+    "ghost_and_budget_focused": {
+      "passed": 18,
+      "failed": 0
+    }
+  },
+  "policy": {
+    "local_document_work_limit": 16000000,
+    "native_layout_work_limit": 1000000,
+    "native_page_limit": 64,
+    "native_seconds_limit": 15,
+    "unknown_navigation_work_ceiling": 250000,
+    "explicit_smaller_budget_honored": true,
+    "llm_token_or_money_budget_changed": false
+  },
+  "fee": {
+    "new_external_model_calls": 0,
+    "paid_summary_cache_recovery_holdout": "OPEN"
+  },
+  "next_step": "Final source review, normal commit/push/CI, then configured summary and cache recovery; keep author worktrees untouched"
+}

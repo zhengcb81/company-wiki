@@ -17,7 +17,7 @@ from company_wiki.document_normalization.text_matching import matching_reading_t
 
 from ..profiles.registry import configured_table_signal
 
-FEATURE_VERSION = "operating-table-purpose/4"
+FEATURE_VERSION = "operating-table-purpose/5"
 MAX_PURPOSE_CHARS = 2_000_000
 
 # These are account identities, not financial-section locations. Operating
@@ -70,6 +70,10 @@ _OPERATING_MEASURE_FIELD = re.compile(
     re.IGNORECASE,
 )
 _FIELD_DEFINITION = re.compile(r"是指|定义为|\bis defined as\b|\bmeans? the\b", re.IGNORECASE)
+_NAMED_PROJECT_CAPACITY = re.compile(
+    r"(?:年产|年產)\s*\d[\d,.]*(?:万|萬|亿|億)?\s*(?:吨|噸|台|套|片|件|千瓦|兆瓦|GWh|MWh|kWh)"
+    r"|(?:annual|yearly)\s+(?:capacity|production)\s+(?:of\s+)?\d[\d,.]*\s*"
+    r"(?:tonnes?|tons?|units|wafers|GWh|MWh|kWh)\b", re.IGNORECASE)
 _FINANCIAL_TOTAL_ROW = re.compile(
     r"^\s*(?:营业收入|收入|净利润|经营溢利|股东应占溢利|毛利率|毛利|"
     r"(?:total\s+|net\s+)?(?:revenues?|sales|income|profits?)\b|"
@@ -152,6 +156,10 @@ def qualify_table(
             measure = bool(
                 _PROJECT_BUSINESS_FIELD.search(actual)
                 or _OPERATING_MEASURE_FIELD.search(actual)
+                # A project's actual name can explicitly state its planned
+                # physical capacity. Retain that row's relation; another row
+                # or a neighbouring heading cannot lend it a business purpose.
+                or is_body and header_money and _NAMED_PROJECT_CAPACITY.search(actual)
             )
             operating = operating_header(actual)
             account_seen = account_seen or has_account

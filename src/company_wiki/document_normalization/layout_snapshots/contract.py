@@ -56,7 +56,8 @@ def _optional_size(value: Any) -> float | None:
     return float(value) if _is_number(value) and float(value) > 0 else None
 
 
-def validate_snapshot(snapshot: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None):
+def validate_snapshot(snapshot: Mapping[str, Any], *, limits: Mapping[str, Any] | None = None,
+                      work_budget: WorkBudget | None = None):
     """Validate the snapshot wire and return ``(pages, resolved_limits, budget)``.
 
     Raises ``ValueError`` for structural problems (wrong schema, malformed pages).
@@ -72,7 +73,8 @@ def validate_snapshot(snapshot: Mapping[str, Any], *, limits: Mapping[str, Any] 
     _require(isinstance(pages_raw, list), "pages must be a list")
 
     resolved = resolve_limits(limits)
-    budget = WorkBudget(max_work_units=resolved["max_work_units"])
+    budget = (work_budget.scoped(resolved["max_work_units"]) if work_budget is not None
+              else WorkBudget(max_work_units=resolved["max_work_units"]))
 
     pages: list[PageEnvelope] = []
     for index, page_raw in enumerate(pages_raw):

@@ -1,3 +1,25 @@
+## DU11 默认正式handler同账户已通过 — 2026-10-17
+
+完整实测后才修订本机工作默认：283页金禾实需约9.196M工作，246页HK约10.794M；旧2M是单布局默认，不是多个阶段组合的容量，和用户2M模型tokens无关。统一16M默认factory，显式更小账户仍严格，原fine1M/64页/15秒保留，未知探索封顶250k而不随父账户放大。原始2M失败和fresh16M诊断不充当正式绿；已新增正式handler→唯一factory→parse→select→原文span验证一次回放：CN26.31秒/160spans、HK24.465秒/96spans，均partial、原件未改、0收费，source与selector同一个账户且未耗尽。机器收据review/du11_production_wiring.json。
+
+容量诊断暴露旧PDF子表裁行后保留全provenance导致真实崩溃；owner同步裁引用时独审又找到ghost被隐藏的风险。已加2FAIL/1PASS反控后改成只删原表合法移除cell的记录，unknown/missing引用继续严格binder拒绝，不放宽验真。18集中边界PASS，最终发布集中回归/复审继续。
+
+---
+
+## DU11 同账户全链实证暴露资源争用 — 2026-10-17
+
+独立无收费真实trace：283页parse11.64秒，source总work1682791，其中265页candidate观察1562286，几何capture/projection合计约1万，主要开销不是PDF表格几何。正式selector复用同2M账户剩317209，真实needs_review/0spans，不能验收或付费。根因是未匹配导航的探索没有独立阶段额度，耗完后置语义选择预算。已加入同父账户1/8探索局部上限（不重置/不增总2M/几何原1M），已知策略窗口保持原预算，未解释内容明确partial；新增公平隔离回归，正复测真实parse→select。
+
+B集中首轮1004例989PASS/13SKIP/2FAIL：旧fake metadata不具title/kind及offering新增business规则的旧fingerprint。补符合正式契约的夹具，只更新明确语义升级的offering指纹，其余14profile未变；186例集中复测全绿。未知前缀/目录冲突/显式页零预算/实际finder前deadline控制均独审实证闭合。
+
+---
+
+## DU11 真实默认深页第二轮 — 2026-10-17
+
+新实测金禾283页：finder仅66/71/91/223/244，p223已有42个真实fine cells；p93/94仍漏，planning明确exhausted，source预算999986。HK246页p12已28cells。两份原件SHA/mtime保持、每页一次前端TextPage、最多同时2个native对象，0模型调用。需诊断每窗口公平预留与候选扫描的实际成本；禁止提高预算、按公司/页码打补丁。p224实读为审批续表及正文，不能凭期待强制当经营表。继续B，C尚未开始。
+
+---
+
 ## DU11用户已派发 — 2026-10-17
 
 两条RF/FF外包已启动，由作者独占各自新worktree；ROOT继续CWP source/engine/summary/cache，不改它们的源码、索引或配置。

@@ -18,6 +18,7 @@ import unicodedata
 
 from company_wiki.document_normalization.layout_snapshots import project_layout_snapshot
 from company_wiki.document_normalization.layout_snapshots.identity import resolve_limits
+from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 PDF_READING_LAYOUT_FEATURE_VERSION = "pdf-reading-layout/2"
 PDF_LAYOUT_CAPTURE_SCHEMA = "pdf-layout-capture/1"
@@ -42,7 +43,8 @@ class PdfLayoutCollector:
     """One document-wide budget; transient native records disappear per page."""
 
     def __init__(
-        self, *, limits: Mapping[str, Any] | None = None, max_seconds: float = 15
+        self, *, limits: Mapping[str, Any] | None = None, max_seconds: float = 15,
+        work_budget: WorkBudget | None = None,
     ):
         if (
             isinstance(max_seconds, bool)
@@ -56,6 +58,7 @@ class PdfLayoutCollector:
         self.pages: dict[int, dict] = {}
         self.diagnostics: list[dict] = []
         self.work = 0
+        self.work_budget = work_budget
         self.fine = 0
         self.processed = 0
         self.captured_pages = 0
@@ -103,6 +106,13 @@ class PdfLayoutCollector:
             self.exhausted = True
             self._diag("LAYOUT_WORK_BUDGET_EXCEEDED")
             return False
+        if self.work_budget is not None:
+            try:
+                self.work_budget.charge(cost)
+            except WorkBudgetExceeded:
+                self.exhausted = True
+                self._diag("SHARED_WORK_BUDGET_EXCEEDED")
+                return False
         self.work += cost
         return True
 
@@ -114,6 +124,17 @@ class PdfLayoutCollector:
             return False
         self.captured_fine += 1
         return True
+
+    def admit_table_discovery(self, page: int) -> bool:
+        """Check the current account/deadline immediately before native finder.
+
+        A planner reservation or an earlier fine request is not permission to
+        execute work after capture itself consumed the remaining resources.
+        """
+        if self._take():
+            return True
+        self._diag("TABLE_DISCOVERY_DEFERRED", page=page)
+        return False
 
     def read_snapshot(self, page: Any, page_number: int) -> Mapping[str, Any]:
         if self.defer_capture:
@@ -585,6 +606,7 @@ class PdfLayoutCollector:
         projected = project_layout_snapshot(
             snapshot,
             wire,
+            work_budget=self.work_budget,
             limits={
                 "max_units": limit,
                 "max_pages": 1,

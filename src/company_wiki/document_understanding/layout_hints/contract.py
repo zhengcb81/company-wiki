@@ -11,6 +11,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 from typing import Any, Mapping, cast
+from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 SCHEMA_IN = "du2-layout-input/1"
 SCHEMA_OUT = "du2-layout-hints/1"
@@ -23,32 +24,6 @@ DEFAULT_LIMITS = {
 }
 
 GEOMETRY_EPS = 0.01
-
-
-class WorkBudgetExceeded(RuntimeError):
-    """Private analysis stop; only the public entry point converts it to partial."""
-
-
-@dataclass
-class WorkBudget:
-    """Reserve actual analysis operations before executing them.
-
-    Exhaustion interrupts every stage, including callers that ignore the
-    returned success value. No work is performed on an unsuccessful charge.
-    """
-
-    max_work_units: int
-    used: int = 0
-    exhausted: bool = False
-
-    def charge(self, n: int = 1) -> bool:
-        if n < 0:
-            raise ValueError("work charge must be non-negative")
-        if self.exhausted or self.used + n > self.max_work_units:
-            self.exhausted = True
-            raise WorkBudgetExceeded("layout analysis work limit reached")
-        self.used += n
-        return True
 
 
 @dataclass(frozen=True)

@@ -10,7 +10,7 @@ from typing import Any
 from .layout_hints.contract import WorkBudget, WorkBudgetExceeded
 from .table_measurements import bind_operating_table
 
-NATIVE_TABLE_BRIDGE_VERSION = '2.1.0'
+NATIVE_TABLE_BRIDGE_VERSION = '2.1.1'
 
 
 def _each(values, budget):
@@ -43,7 +43,16 @@ def _eligible_cells(table, eligible, budget):
                 or (cell.get('is_header') and cell.get('header_scope') == 'rowgroup'
                     and cell.get('row_group') in active_groups)):
             keep.append(cell)
-    return {**table, 'cells': keep}
+    projected = {**table, 'cells': keep}
+    if table.get('provenance') is not None:
+        # PDF observations are sent directly to the strict DU4 binder. A row
+        # view must close *all* cell references, not only trim its cell list.
+        # HTML rebuilds these records later; preserve that same ownership here.
+        retained = {cell['cell_id'] for cell in _each(keep, budget)}
+        removed = {cell['cell_id'] for cell in _each(table['cells'], budget)} - retained
+        projected['provenance'] = [record for record in _each(table['provenance'], budget)
+                                   if not isinstance(record, Mapping) or record.get('cell_id') not in removed]
+    return projected
 
 
 def _observation(table, units, budget):

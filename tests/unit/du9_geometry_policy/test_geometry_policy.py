@@ -199,7 +199,10 @@ def test_convertible_alias_gap_is_fixed_in_catalog_path_without_flattening():
             assert "本次募集资金运用" in section["heading_path"][0]
 
 
-def test_legacy_wire_fingerprints_are_frozen_before_implementation():
+def test_legacy_wire_fingerprints_only_change_with_an_explicit_policy_upgrade():
+    # DU11 deliberately adds the issuer's existing business to offering policy.
+    # Its golden changes alongside the source-backed sales coverage test;
+    # geometry metadata alone must still never leak into the legacy wire.
     path = Path(__file__).parents[2] / "fixtures/du9_geometry_policy/legacy_profile_sha256.json"
     expected = json.loads(path.read_text(encoding="utf-8"))
     assert {r["profile_id"]: digest(r) for r in list_profiles()} == expected

@@ -1,3 +1,19 @@
+## DU11 真实全链容量诊断 — 2026-10-17
+
+- 两外包卡已派发，ROOT继续独占CWP，不改变作者工区。
+- 相同策略连续目录段合并，风险/contrary/gap边界保留；补未知前缀、未匹配导航有限探索和冲突页deferred。真正finder前复核预算，包括显式页/全扫0.9，legacy无账户路径保持。
+- 新candidate支持分行表头与纯描述项目表，同页语义结果有界复用，重复30行解释31→3。源matcher及预算实现唯一；因果缓存覆盖真实桥/执行算法与采用策略。
+- 1004集中首轮989PASS/13SKIP/2FAIL：一项旧测试fake缺正式metadata字段，一项offering策略有意增加发行人业务后旧指纹。独立核理由，单一offering gold升级、其他14未变；186集中复测PASS。新增探索预算公平隔离1PASS。套件重叠不相加。
+- 默认真实CN283页单次TextPage、最多2native并存，93/94/223真实fine cells212/89/42，原件SHA/mtime保持，约10–14秒。HK p12 28cells，晚页deadline诚实停止，不宣称所有fine完成。
+- 独立容量trace：parse1.682Mwork+同2M选择→0spans；未知导航局部收紧后parse1.268Mwork仍0spans。fresh2M仅诊断的selector也在layout/structure耗尽，说明既有全篇语义默认容量本身不足。正测阶段真实工作量后系统调整，未调用新模型。
+- 唯一phase_c_runner的registered_readonly与single0.9升级9PASS，原件/配置/母账不变；独审PASS/0未决、源码冻结一致，已提交b914728e待正常推送，不把工具绿等同真实供应商绿。
+
+后续修复已实测：组合默认16M由实际长文档9.2–10.8M工作量校准，未知探索固定封顶250k、显式小预算保持，source几何原上限不变。PDF子表裁剪同步只删合法移除cell的provenance，未知/缺ID仍严格拒绝。正式默认handler单账户、每源单parse、原文span验证：CN160/HK96有效片段，均明确partial，0收费/原件不变；不能把选材绿当摘要C绿。
+
+**Next Step：** 最终工程大节点复审/正常commit/push/CI，随后真实摘要/缓存恢复/holdout。C OPEN。
+
+---
+
 ## DU11用户已派发 — 2026-10-17
 
 两条RF/FF外包已启动，由作者独占各自新worktree；ROOT继续CWP source/engine/summary/cache，不改它们的源码、索引或配置。

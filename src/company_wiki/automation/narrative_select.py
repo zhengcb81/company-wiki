@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, replace
 from typing import Any, Protocol
+from company_wiki.resource_budget import WorkBudget
 
 from company_wiki.source_catalog.narrative_document import (
     NarrativeEvidencePackage,
@@ -456,10 +457,12 @@ class NarrativeSelectHandler:
                 HandlerOutcome.TERMINAL_FAILURE,
                 "filing source is not a PDF",
             )
-        parsed = self._parse_pdf(payload, data)
+        from company_wiki.resource_budget import new_document_work_budget
+        work_budget = new_document_work_budget() if self._selector.selector_version == "0.9.0" else None
+        parsed = self._parse_pdf(payload, data, work_budget=work_budget)
         context.checkpoint()
-        package = self._run_selector(payload, parsed)
-        if not package.evidence_spans and parsed.deferred_table_pages:
+        package = self._run_selector(payload, parsed, work_budget=work_budget)
+        if self._selector.selector_version != "0.9.0" and not package.evidence_spans and parsed.deferred_table_pages:
             parsed = self._parse_pdf(payload, data, full_table_scan=True)
             context.checkpoint()
             package = self._run_selector(payload, parsed)
@@ -472,9 +475,11 @@ class NarrativeSelectHandler:
         data: bytes,
         *,
         full_table_scan: bool = False,
+        work_budget: WorkBudget | None = None,
     ) -> NarrativeParseResult:
         try:
             if self._pdf_parser is parse_pdf_bytes and self._selector.selector_version == "0.9.0":
+                from company_wiki.document_understanding.geometry_intent.reading import PdfReadingContext
                 return parse_pdf_bytes(
                     data,
                     source_id=payload.source_ref.source_id,
@@ -482,6 +487,9 @@ class NarrativeSelectHandler:
                     language=payload.source_metadata.language,
                     full_table_scan=full_table_scan,
                     selector_version="0.9.0",
+                    work_budget=work_budget,
+                    reading_context=PdfReadingContext(payload.source_metadata.title or "",
+                        payload.source_metadata.document_kind, payload.source_metadata.language),
                 )
             return self._pdf_parser(
                 data,
@@ -528,11 +536,13 @@ class NarrativeSelectHandler:
         self,
         payload: SourceRevisionEventPayload,
         parsed: NarrativeParseResult,
+        *, work_budget: WorkBudget | None = None,
     ) -> NarrativeEvidencePackage:
         return self._selector(
             replace(parsed, mime_type=payload.source_ref.mime_type),
             title=payload.source_metadata.title or "untitled",
             existing_kind=payload.source_metadata.document_kind,
+            work_budget=work_budget,
         )
 
     @staticmethod
