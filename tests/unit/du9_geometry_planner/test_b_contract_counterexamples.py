@@ -655,3 +655,140 @@ def test_plan_and_state_are_json_round_trip_compatible():
     summary = summarize_admission_state(plan, restored)
     assert json.loads(json.dumps(summary, ensure_ascii=False)) == summary
     assert summary["spent"] == {"pages": 1, "requests": 1}
+
+
+# --- review findings regressions (F1/F2/F3/F4) ------------------------------
+
+def _tiny_plan(max_pages: int = 2):
+    rule = helpers.tiny_rule("rk_op", "operating")
+    return plan_geometry_requests(
+        helpers.tiny_policy(rule),
+        [helpers.tiny_window("w1", "rk_op", 1, 10)],
+        page_count=10, limits=helpers.tiny_limits(max_pages), work_budget=_big_budget(),
+    )
+
+
+def test_f1_tampered_plan_after_state_creation_is_refused():
+    """Digest must bind plan CONTENT on every use, not just at state mint."""
+    plan = _tiny_plan()
+    state = new_admission_state(plan)
+
+    tampered = json.loads(json.dumps(plan, ensure_ascii=False))
+    tampered["limits"]["max_pages"] = 100
+    tampered["class_quotas"]["operating"]["quota"] = 100
+    tampered["allocations"][0]["quota_pages"] = 100  # plan_digest left stale
+    with pytest.raises(ValueError, match="plan_digest does not match"):
+        admit_geometry_request(
+            tampered, state, page=1, window_keys=["w1"],
+            tabular_evidence="observed_candidate", remaining=100,
+        )
+    with pytest.raises(ValueError, match="plan_digest does not match"):
+        summarize_admission_state(tampered, state)
+
+    # An attacker that also rewrites the digest string is stopped by the
+    # content re-derivation itself...
+    resigned = json.loads(json.dumps(plan, ensure_ascii=False))
+    resigned["allocations"][0]["quota_pages"] = 100
+    resigned["plan_digest"] = "0" * 64
+    with pytest.raises(ValueError, match="plan_digest does not match"):
+        admit_geometry_request(
+            resigned, state, page=1, window_keys=["w1"],
+            tabular_evidence="observed_candidate", remaining=100,
+        )
+
+    # ...and a legitimately different plan (consistent digest) is stopped by
+    # the state-to-plan binding instead.
+    other_plan = _tiny_plan(max_pages=3)
+    assert other_plan["plan_digest"] != plan["plan_digest"]
+    with pytest.raises(ValueError, match="different plan"):
+        admit_geometry_request(
+            other_plan, state, page=1, window_keys=["w1"],
+            tabular_evidence="observed_candidate", remaining=3,
+        )
+
+
+def test_f2_decision_envelope_is_bounded_against_huge_caller_objects():
+    plan = _tiny_plan()
+    state = new_admission_state(plan)
+
+    decision, state = admit_geometry_request(
+        plan, state, page="p" * 1_000_000, window_keys=["w" + "x" * 1_000_000],
+        tabular_evidence="observed_candidate", remaining=2,
+    )
+    assert decision["decision"] == "rejected"
+    assert decision["page"] == "<str>"
+    envelope = json.dumps(decision, ensure_ascii=False)
+    assert len(envelope) < 16_384, f"decision envelope must stay bounded, got {len(envelope)}"
+    assert all(len(key) <= 4096 for key in decision["window_keys"])
+
+    decision, state = admit_geometry_request(
+        plan, state, page=1, window_keys=["k" + "y"] * 100_000,
+        tabular_evidence="observed_candidate", remaining=2,
+    )
+    assert decision["decision"] == "rejected" and decision["reason"] == "bad_window_keys"
+    assert len(json.dumps(decision, ensure_ascii=False)) < 300_000, (
+        "a huge key list must not be materialized into the echo"
+    )
+
+    decision, state = admit_geometry_request(
+        plan, state, page=10**18, window_keys=["w1"],
+        tabular_evidence="observed_candidate", remaining=2,
+    )
+    assert isinstance(decision["page"], str) and decision["page"].startswith("<int:")
+
+
+def test_f3_missing_intent_field_stays_unknown_even_with_non_unknown_default():
+    """INTERFACES: 缺字段保守unknown — default_intent must never grant capability."""
+    rule = {
+        "rule_key": "rk_gap",
+        "section_role": "business",
+        "reading_priority": 1,
+        "geometry_intent": {"demand_class": "operating"},  # discover/fine absent
+    }
+    policy = {
+        "schema_version": "du-geometry-policy/1",
+        "profile_id": "du9_gap_profile",
+        "profile_version": "du9_gap_profile/v1",
+        "default_intent": {"discover": "on_tabular_evidence", "fine": "on_candidate",
+                           "demand_class": "operating"},
+        "rules": [rule],
+    }
+    plan = plan_geometry_requests(
+        policy, [helpers.tiny_window("w-gap", "rk_gap", 1, 6)],
+        page_count=6, limits=helpers.tiny_limits(6), work_budget=_big_budget(),
+    )
+    assert "POLICY_INTENT_MISSING" in [row["code"] for row in plan["diagnostics"]]
+    row = plan["allocations"][0]
+    assert row["requestable"] == {"discover": False, "fine": False}
+    assert row["status"] == "cancelled" and row["reason"] == "not_requestable"
+
+
+def test_f4_malformed_plan_raises_valueerror_not_keyerror():
+    malformed = {
+        "schema_version": "du-geometry-plan/1",
+        "plan_digest": "abc",
+        "allocations": [],
+        "class_quotas": {},
+        "summary": {},
+        "page_count": 1,
+        "limits": {"max_pages": 1, "max_requests": 1},
+        # profile_id / profile_version intentionally absent
+    }
+    with pytest.raises(ValueError):
+        new_admission_state(malformed)
+
+    plan = _tiny_plan()
+    broken_row = json.loads(json.dumps(plan, ensure_ascii=False))
+    del broken_row["allocations"][0]["window_key"]
+    with pytest.raises(ValueError):
+        new_admission_state(broken_row)
+
+    plan2 = _tiny_plan()
+    state = new_admission_state(plan2)
+    broken_class = json.loads(json.dumps(plan2, ensure_ascii=False))
+    del broken_class["class_quotas"]["operating"]
+    with pytest.raises(ValueError):
+        admit_geometry_request(
+            broken_class, state, page=1, window_keys=["w1"],
+            tabular_evidence="observed_candidate", remaining=2,
+        )

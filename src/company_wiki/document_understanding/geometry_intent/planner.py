@@ -24,6 +24,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from copy import deepcopy
+from itertools import islice
 from typing import Any
 
 from company_wiki.document_understanding.layout_hints.contract import (
@@ -84,28 +85,33 @@ def _profile_identity(policy: Mapping[str, Any]) -> tuple[str, str]:
 
 def _intent_value(
     intent: Mapping[str, Any],
-    default_intent: Mapping[str, Any],
     field: str,
     allowed: frozenset[str],
     rule_key: str,
     sink: DiagnosticSink,
 ) -> str:
-    if field in intent:
-        value = intent[field]
-        if isinstance(value, str) and value in allowed:
-            return value
-        if value is not None:
-            # Present but invalid never silently inherits the default.
-            sink.add(
-                "POLICY_INTENT_INVALID",
-                f"{rule_key}.{field} not in enum; conservative unknown",
-                [rule_key],
-            )
-            return "unknown"
-    if field in default_intent:
-        fallback = default_intent[field]
-        if isinstance(fallback, str) and fallback in allowed:
-            return fallback
+    """Resolve one intent field conservatively.
+
+    ``default_intent`` is deliberately NOT consulted: INTERFACES freezes
+    missing fields as conservative ``unknown``, so a rule omitting a field can
+    never silently inherit heavy-request capability from a policy default.
+    Present-but-invalid values are likewise unknown, with a diagnostic.
+    """
+    if field not in intent or intent[field] is None:
+        sink.add(
+            "POLICY_INTENT_MISSING",
+            f"{rule_key}.{field} absent; conservative unknown per interface",
+            [rule_key],
+        )
+        return "unknown"
+    value = intent[field]
+    if isinstance(value, str) and value in allowed:
+        return value
+    sink.add(
+        "POLICY_INTENT_INVALID",
+        f"{rule_key}.{field} not in enum; conservative unknown",
+        [rule_key],
+    )
     return "unknown"
 
 
@@ -124,9 +130,6 @@ def _parse_rules(
     raw_rules = policy.get("rules", ())
     if isinstance(raw_rules, (str, bytes)) or not isinstance(raw_rules, Sequence):
         raise ValueError("policy.rules must be a sequence")
-    default_intent = policy.get("default_intent")
-    if not isinstance(default_intent, Mapping):
-        default_intent = {}
     rules: dict[str, dict[str, Any]] = {}
     for rule in raw_rules:
         budget.charge()
@@ -141,9 +144,9 @@ def _parse_rules(
         if not isinstance(intent, Mapping):
             intent = {}
         rules[rule_key] = {
-            "demand_class": _intent_value(intent, default_intent, "demand_class", DEMAND_VALUES, rule_key, sink),
-            "discover": _intent_value(intent, default_intent, "discover", DISCOVER_VALUES, rule_key, sink),
-            "fine": _intent_value(intent, default_intent, "fine", FINE_VALUES, rule_key, sink),
+            "demand_class": _intent_value(intent, "demand_class", DEMAND_VALUES, rule_key, sink),
+            "discover": _intent_value(intent, "discover", DISCOVER_VALUES, rule_key, sink),
+            "fine": _intent_value(intent, "fine", FINE_VALUES, rule_key, sink),
             "reading_priority": _reading_priority(rule, rule_key, sink),
         }
     profile_id, profile_version = _profile_identity(policy)
@@ -632,31 +635,74 @@ def plan_geometry_requests(
 # --- admission state --------------------------------------------------------
 
 def _require_plan(plan: Any) -> Mapping[str, Any]:
+    """Validate shape AND content binding; the digest is re-derived on every
+    use so a plan edited after planning (or corrupted in a replay) can never
+    carry an existing state forward."""
     if not isinstance(plan, Mapping):
         raise TypeError("plan must be a mapping")
     if plan.get("schema_version") != SCHEMA_PLAN:
         raise ValueError(f"unsupported geometry plan: {plan.get('schema_version')!r}")
-    if not isinstance(plan.get("plan_digest"), str):
+    plan_digest = plan.get("plan_digest")
+    if not isinstance(plan_digest, str) or not plan_digest:
         raise ValueError("plan_digest missing; state cannot bind to this plan")
+    if not isinstance(plan.get("profile_id"), str) or not isinstance(plan.get("profile_version"), str):
+        raise ValueError("plan profile identity must be strings")
+    if not is_int(plan.get("page_count")) or plan.get("page_count") < 0:
+        raise ValueError("plan.page_count must be a nonnegative int")
+    limits = plan.get("limits")
+    if not isinstance(limits, Mapping):
+        raise ValueError("plan.limits must be a mapping")
+    for bound in ("max_pages", "max_requests"):
+        if not is_int(limits.get(bound)) or limits.get(bound) < 0:
+            raise ValueError(f"plan.limits.{bound} must be a nonnegative int")
     allocations = plan.get("allocations")
     if not isinstance(allocations, Sequence) or isinstance(allocations, (str, bytes)):
         raise ValueError("plan.allocations must be a sequence")
-    if not isinstance(plan.get("class_quotas"), Mapping):
+    for row in allocations:
+        if not isinstance(row, Mapping):
+            raise ValueError("every allocation must be a mapping")
+        for field in ("window_key", "scope_id", "demand_class", "status"):
+            if not isinstance(row.get(field), str):
+                raise ValueError(f"allocation.{field} must be a string")
+        for field in ("physical_start", "physical_end", "quota_pages"):
+            if not is_int(row.get(field)):
+                raise ValueError(f"allocation.{field} must be an int")
+        if row["status"] not in ("reserved", "cancelled"):
+            raise ValueError(f"unknown allocation status: {row['status']!r}")
+        requestable = row.get("requestable")
+        if not isinstance(requestable, Mapping) or not all(
+            isinstance(requestable.get(kind), bool) for kind in ("discover", "fine")
+        ):
+            raise ValueError("allocation.requestable must carry two booleans")
+    class_quotas = plan.get("class_quotas")
+    if not isinstance(class_quotas, Mapping):
         raise ValueError("plan.class_quotas must be a mapping")
-    if not isinstance(plan.get("summary"), Mapping):
+    for cls, row in class_quotas.items():
+        if not isinstance(cls, str) or not isinstance(row, Mapping) or not is_int(row.get("quota")):
+            raise ValueError("every class quota row must expose an int quota")
+    for row in allocations:
+        if row["status"] == "reserved" and row["demand_class"] not in class_quotas:
+            raise ValueError("reserved allocation references an undeclared demand class")
+    summary = plan.get("summary")
+    if not isinstance(summary, Mapping):
         raise ValueError("plan.summary must be a mapping")
+    for field in ("partial", "partial_reason", "windows_unplanned"):
+        if field not in summary:
+            raise ValueError(f"plan.summary missing {field}")
+    if canonical_digest(_plan_core(plan)) != plan_digest:
+        raise ValueError(
+            "plan_digest does not match plan content; plan was tampered or corrupted, replan"
+        )
     return plan
 
 
 def new_admission_state(plan: Mapping[str, Any]) -> dict[str, Any]:
     """Fresh ``du-geometry-plan-state/1`` in-call value bound to one plan.
 
-    The digest is re-derived once here, so a tampered plan (content edited
-    after planning) can never carry an old state forward.
+    ``_require_plan`` re-derives the content digest here, so a tampered plan
+    can never mint a state; every later admit/summarize re-checks it too.
     """
     plan = _require_plan(plan)
-    if canonical_digest(_plan_core(plan)) != plan["plan_digest"]:
-        raise ValueError("plan_digest does not match plan content; replan before admitting")
     return {
         "schema_version": SCHEMA_STATE,
         "plan_digest": plan["plan_digest"],
@@ -683,16 +729,47 @@ def _require_state(state: Any, plan: Mapping[str, Any]) -> Mapping[str, Any]:
     for field in ("spent", "class_spent", "windows", "charged", "reason_counts"):
         if not isinstance(state.get(field), Mapping):
             raise ValueError(f"state.{field} must be a mapping")
+    spent = state["spent"]
+    for field in ("pages", "requests"):
+        if not is_int(spent.get(field)) or spent.get(field) < 0:
+            raise ValueError(f"state.spent.{field} must be a nonnegative int")
+    for scope, pages in state["charged"].items():
+        if not isinstance(scope, str) or not isinstance(pages, Mapping):
+            raise ValueError("state.charged must map scope -> page ledger")
+    for cls, value in state["class_spent"].items():
+        if not isinstance(cls, str) or not is_int(value) or value < 0:
+            raise ValueError("state.class_spent must map class -> nonnegative int")
+    for key, counter in state["windows"].items():
+        if not isinstance(key, str) or not isinstance(counter, Mapping):
+            raise ValueError("state.windows must map window_key -> counter")
+        if not is_int(counter.get("admitted")) or counter.get("admitted") < 0:
+            raise ValueError("state.windows counters must hold nonnegative ints")
     return state
 
 
 def _echo_keys(window_keys: Any) -> list[str]:
+    """Bounded echo: at most the admission cap, each entry size-capped, and
+    built through islice so a huge caller list is never materialized."""
     if isinstance(window_keys, (str, bytes)) or not isinstance(window_keys, Sequence):
         return []
-    return [
-        key if isinstance(key, str) else repr(key)[:MAX_STRING]
-        for key in list(window_keys)[:MAX_WINDOW_KEYS_PER_ADMISSION]
-    ][:MAX_WINDOW_KEYS_PER_ADMISSION]
+    echoed: list[str] = []
+    for key in islice(window_keys, MAX_WINDOW_KEYS_PER_ADMISSION):
+        if isinstance(key, str):
+            echoed.append(key[:MAX_STRING])
+        else:
+            echoed.append(f"<{type(key).__name__}>")
+    return echoed
+
+
+def _echo_page(page: Any) -> Any:
+    """Bounded echo: valid ints verbatim, anything else only its type shape —
+    a caller object can never inflate the decision envelope."""
+    if not is_int(page):
+        return f"<{type(page).__name__}>"
+    text = str(page)
+    if len(text) <= 16:
+        return page
+    return f"<int:{len(text)}digits>"
 
 
 def _decision(
@@ -712,7 +789,7 @@ def _decision(
         "schema_version": SCHEMA_ADMISSION,
         "decision": decision,
         "reason": reason,
-        "page": page,
+        "page": _echo_page(page),
         "window_keys": _echo_keys(window_keys),
         "covered_window_keys": list(covered),
         "admitted_window_keys": list(admitted),
@@ -757,7 +834,7 @@ def admit_geometry_request(
         mutate: Any = None,
     ) -> tuple[dict[str, Any], dict[str, Any]]:
         next_state = deepcopy(state)
-        next_state["reason_counts"][decision] += 1
+        next_state["reason_counts"][decision] = next_state["reason_counts"].get(decision, 0) + 1
         if mutate is not None:
             mutate(next_state)
         return (
@@ -906,8 +983,11 @@ def admit_geometry_request(
     def _charge(next_state: dict[str, Any]) -> None:
         next_state["spent"]["pages"] += 1
         next_state["spent"]["requests"] += 1
-        next_state["class_spent"][demand_class] += 1
-        next_state["windows"][attribution["window_key"]]["admitted"] += 1
+        next_state["class_spent"][demand_class] = (
+            next_state["class_spent"].get(demand_class, 0) + 1
+        )
+        counter = next_state["windows"].setdefault(attribution["window_key"], {"admitted": 0})
+        counter["admitted"] = counter.get("admitted", 0) + 1
         next_state["charged"].setdefault(scope, {})[str(page)] = charged_keys
 
     return settle(
