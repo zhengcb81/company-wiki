@@ -549,6 +549,17 @@ def consumers(root, output, env, catalog_config, descriptor, narrative_request, 
     return results
 
 
+def selector_versions(value: str | None) -> tuple[str, ...]:
+    """The historical pair is the default; one new selector is explicit."""
+    if value is None:
+        return ("0.9.0", "0.8.0")
+    if value == "0.9.0":
+        return ("0.9.0",)
+    if value == "0.9.0,0.8.0":
+        return ("0.9.0", "0.8.0")
+    raise ValueError("selector versions must be 0.9.0 or the historical 0.9.0,0.8.0 pair")
+
+
 def run_pair(
     sample,
     provider,
@@ -562,6 +573,9 @@ def run_pair(
     split_groups=False,
     reading_model_projection=None,
     consumer_projects=None,
+    source_mode="isolated-copy",
+    source_catalog_config=None,
+    selected_versions=None,
 ):
     from company_wiki.source_catalog.official_source_flow import (
         prepare_official_narrative_request,
@@ -573,6 +587,18 @@ def run_pair(
     )
     from company_wiki.automation.narrative_contracts import NarrativeBundle
 
+    versions = selector_versions(selected_versions)
+    if source_mode not in {"isolated-copy", "registered_readonly"}:
+        raise ValueError("unsupported phase C source mode")
+    if source_mode == "registered_readonly":
+        if source_catalog_config is None:
+            raise ValueError("registered_readonly requires explicit source_catalog_config")
+        if mode != "live":
+            raise ValueError("registered_readonly requires explicitly prepared source metadata")
+        # Invalid inputs fail before creating owned test IO.
+        source_catalog_config = Path(source_catalog_config).resolve(strict=True)
+        if not source_catalog_config.is_file():
+            raise ValueError("source_catalog_config must be a file")
     temp_parent = Path(tempfile.gettempdir()).resolve()
     root = Path(tempfile.mkdtemp(prefix="cwplC-", dir=temp_parent)).resolve()
     (root / "config").mkdir()
@@ -691,7 +717,9 @@ def run_pair(
         mime = sample["mime_type"]
         llm = None
     protected = {
-        str(path): fingerprint(path) for path in (original, gold, config, sentinel)
+        str(path): fingerprint(path) for path in (
+            (original, gold, sentinel, Path(source_catalog_config))
+            if source_mode == "registered_readonly" else (original, gold, config, sentinel))
     }
     ocr = ROOT / "config/local_ocr.json"
     if ocr.exists():
@@ -719,6 +747,10 @@ def run_pair(
     outcome = {
         "mode": mode,
         "sample": sample["sample_id"],
+        "source_mode": source_mode,
+        "selector_versions": list(versions),
+        "comparison_scope": "paired" if len(versions) == 2 else "single_selector_no_paired_improvement_claim",
+
         "scope": "development regression, not holdout",
         "states": states,
         "internal_algorithm_caps": {
@@ -753,60 +785,75 @@ def run_pair(
             "translation": False,
         }
     try:
-        identity_proof = seed_identity(root, mode, descriptor)
+        identity_proof = (seed_identity(root, mode, descriptor)
+                          if source_mode != "registered_readonly" or consumer_projects is not None
+                          else {"kind": "not_requested_no_consumer_identity_clone"})
         outcome["identity_snapshot"] = identity_proof
         if "original" in identity_proof:
             protected[identity_proof["original"]] = identity_proof["fingerprint"]
-        request = root / "import.json"
-        write_json(
-            request,
-            {
-                "schema_version": "official-source-import-request/1",
-                "request_id": "phaseC-" + uuid.uuid4().hex,
-                "source": descriptor,
-                "content_sha256": sha,
-                "mime_type": mime,
-                "max_bytes": fingerprint(original)["bytes"],
-                "capture_receipt": {
-                    "capture_method": "local_document",
-                    "tool_name": "phase-C-existing-local-reuse",
-                    "tool_call_id": uuid.uuid4().hex,
-                    "captured_at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                    "response_bytes": fingerprint(original)["bytes"],
+        if source_mode == "registered_readonly":
+            from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source
+
+            mounted = prepare_registered_source(source_config=Path(source_catalog_config),
+                owned_root=root, original=original, expected_sha256=sha,
+                descriptor=descriptor, as_of_date=datetime.now(UTC).date().isoformat())
+            config = Path(mounted["catalog_config"])
+            # This is an existing registered SourceRef, not an HTTP/import receipt.
+            imported = {"source_ref": mounted["source_ref"]}
+            outcome["source_registration"] = mounted
+            protected[str(config)] = fingerprint(config)
+            write_json(output / "registered-source.json", mounted)
+        else:
+            request = root / "import.json"
+            write_json(
+                request,
+                {
+                    "schema_version": "official-source-import-request/1",
+                    "request_id": "phaseC-" + uuid.uuid4().hex,
+                    "source": descriptor,
                     "content_sha256": sha,
+                    "mime_type": mime,
+                    "max_bytes": fingerprint(original)["bytes"],
+                    "capture_receipt": {
+                        "capture_method": "local_document",
+                        "tool_name": "phase-C-existing-local-reuse",
+                        "tool_call_id": uuid.uuid4().hex,
+                        "captured_at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        "response_bytes": fingerprint(original)["bytes"],
+                        "content_sha256": sha,
+                    },
                 },
-            },
-        )
-        code, imported, _, _ = _cli(
-            root,
-            output,
-            "import",
-            [
-                sys.executable,
-                "-B",
-                "-X",
-                "utf8",
-                "-m",
-                "company_wiki.source_catalog.official_source_cli",
-                "--config",
-                str(config),
-                "--project-root",
-                str(root),
-                "--operation",
+            )
+            code, imported, _, _ = _cli(
+                root,
+                output,
                 "import",
-                "--request",
-                str(request),
-                "--input-file",
-                str(original),
-            ],
-            env,
-            timeout=60,
-        )
-        assert code == 0
+                [
+                    sys.executable,
+                    "-B",
+                    "-X",
+                    "utf8",
+                    "-m",
+                    "company_wiki.source_catalog.official_source_cli",
+                    "--config",
+                    str(config),
+                    "--project-root",
+                    str(root),
+                    "--operation",
+                    "import",
+                    "--request",
+                    str(request),
+                    "--input-file",
+                    str(original),
+                ],
+                env,
+                timeout=60,
+            )
+            assert code == 0
         outcome["source_ref"] = imported["source_ref"]
         limits = metadata["candidate_per_paid_request_limits"]
         for version in (
-            ["0.9.0"] if (missing_gold or split_groups) else ["0.9.0", "0.8.0"]
+            ["0.9.0"] if (missing_gold or split_groups) else versions
         ):
             current_run = (
                 "phaseC-" + version.replace(".", "") + "-" + uuid.uuid4().hex[:12]
@@ -974,8 +1021,8 @@ def run_pair(
             observer_config["forbid_post"] = False
             write_json(observer, observer_config)
         if not (missing_gold or split_groups):
-            # The older baseline is LATEST now. A consumer must use the saved
-            # exact new-version Ref, never discover LATEST and silently trim it.
+            # Paired mode leaves the older baseline LATEST. Single mode keeps
+            # the current Ref LATEST. Both consumers pin the exact saved 0.9 Ref.
             state, exact_request, previous_bundle = pinned_read
             command = [
                 sys.executable,
@@ -990,7 +1037,7 @@ def run_pair(
             code, latest, _, _ = _cli(
                 root,
                 output,
-                "latest-after-legacy",
+                "latest-after-legacy" if len(versions) == 2 else "latest-single-090",
                 command + ["--operation", "reference"],
                 env,
                 {
@@ -998,14 +1045,16 @@ def run_pair(
                     "source_ref": imported["source_ref"],
                 },
             )
-            assert code == 0 and latest == next(
-                row["artifact_ref"] for row in states if row["version"] == "0.8.0"
-            )
-            assert latest != exact_request["narrative_ref"]
+            assert code == 0
+            if len(versions) == 2:
+                assert latest == next(row["artifact_ref"] for row in states if row["version"] == "0.8.0")
+                assert latest != exact_request["narrative_ref"]
+            else:
+                assert latest == exact_request["narrative_ref"]
             code, wire, stderr, raw = _cli(
                 root,
                 output,
-                "exact-090-after-legacy",
+                "exact-090-after-legacy" if len(versions) == 2 else "exact-single-090",
                 command + ["--operation", "read"],
                 env,
                 exact_request,
@@ -1029,9 +1078,11 @@ def run_pair(
                 reading_material_sha256(exact_bundle)
                 == state["final_generation"]["selection_generation"]["material_sha256"]
             )
-            state["historical_exact_ref_after_legacy_LATEST"] = {
+            exact_proof_key = ("historical_exact_ref_after_legacy_LATEST" if len(versions) == 2
+                               else "current_exact_ref_single_selector")
+            state[exact_proof_key] = {
                 "status": "PASS",
-                "legacy_latest_ref": latest,
+                ("legacy_latest_ref" if len(versions) == 2 else "latest_ref"): latest,
                 "pinned_090_ref": exact_request["narrative_ref"],
                 "reading_context_not_trimmed": True,
                 "duplicate_bundle_saved": False,
@@ -1043,13 +1094,21 @@ def run_pair(
                 projects=consumer_projects,
             ) if consumer_projects is not None else {
                 "status": "NOT_RUN", "reason": "explicit consumer checkout root not supplied"})
+            if len(versions) == 1 and isinstance(state["consumers"], list):
+                for item in state["consumers"]:
+                    if item.pop("historical_exact_ref_full_context_verified", False):
+                        item["current_exact_ref_full_context_verified"] = True
         outcome["status"] = "PASS"
     except Exception as exc:
+        from tools.document_understanding_benchmark.phase_c_readonly_source import ReadonlySourceGap
+
+        if isinstance(exc, ReadonlySourceGap):
+            outcome.update(source_gap={"reason": exc.reason, "detail": exc.detail}, status="NOT_RUN")
         trace = exc.__traceback__
         while trace is not None and trace.tb_next is not None:
             trace = trace.tb_next
         outcome.update(
-            status="FAIL",
+            status="NOT_RUN" if isinstance(exc, ReadonlySourceGap) else "FAIL",
             error=f"{type(exc).__name__}: {exc}",
             error_file=Path(trace.tb_frame.f_code.co_filename).name if trace else None,
             error_line=trace.tb_lineno if trace else None,
@@ -1213,7 +1272,17 @@ def main() -> int:
                         help="Explicit sibling FF/RF checkout root; omission records consumers NOT_RUN.")
     parser.add_argument("--reading-model-projection", choices=("reading-model-input/4",),
                         help="Explicit v4 for selector 0.9 only; omission retains current defaults.")
+    parser.add_argument("--source-mode", choices=("isolated-copy", "registered_readonly"), default="isolated-copy",
+                        help="Keep the historical local import, or register existing roots without copying raw bytes.")
+    parser.add_argument("--source-catalog-config", type=Path,
+                        help="Current source-owner roots for registered_readonly; only the owned catalog is written.")
+    parser.add_argument("--selector-versions", choices=("0.9.0", "0.9.0,0.8.0"),
+                        help="Omission retains the historical pair; 0.9.0 is single-selector acceptance.")
     args = parser.parse_args()
+    if args.source_mode == "registered_readonly" and args.source_catalog_config is None:
+        parser.error("registered_readonly requires --source-catalog-config")
+    if args.source_mode == "registered_readonly" and args.mode != "live":
+        parser.error("registered_readonly uses explicit prepared originals; loopback retains its own synthetic source")
     if args.mode == "live" and (args.metadata is None or args.usage_ledger is None):
         parser.error("live mode requires explicit --metadata and --usage-ledger")
     preparation_path = args.metadata.resolve() if args.metadata is not None else None
@@ -1264,7 +1333,9 @@ def main() -> int:
         outcome = run_pair(sample, provider, metadata, mode="live", output=destination,
                            preparation_path=preparation_path,
                            reading_model_projection=args.reading_model_projection,
-                           consumer_projects=args.consumer_projects)
+                           consumer_projects=args.consumer_projects,
+                           source_mode=args.source_mode, source_catalog_config=args.source_catalog_config,
+                           selected_versions=args.selector_versions)
         write_json(destination / "mother-after.json", mother_totals(preparation_path, USAGE))
     else:
         provider = next(
@@ -1288,6 +1359,7 @@ def main() -> int:
                 reading_model_projection=args.reading_model_projection,
                 consumer_projects=args.consumer_projects,
                 fixture_endpoint=server.endpoint,
+                selected_versions=args.selector_versions,
             )
             count = len(server.requests)
             denied = run_pair(
@@ -1320,8 +1392,8 @@ def main() -> int:
                 == denied["status"]
                 == split_denied["status"]
                 == "PASS"
-                and count == 2
-                and len(server.requests) == 2
+                and count == len(selector_versions(args.selector_versions))
+                and len(server.requests) == len(selector_versions(args.selector_versions))
                 else "FAIL",
                 "mode": "loopback",
                 "normal": normal,

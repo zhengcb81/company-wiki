@@ -1,0 +1,17 @@
+{
+  "command": "python -B -m pytest tests/test_phase_c_readonly_source.py -q -p no:cacheprovider --basetemp .planning/shared-reading-production/du11/runner-red-temp",
+  "exit_code": 1,
+  "pytest_seconds": 4.1,
+  "failed": 4,
+  "passed": 0,
+  "red_scope": "Interface/feature absence before implementation, not a semantic failure reproduction of existing source registration.",
+  "failures": [
+    "test_registered_source_mounts_same_bytes_and_only_explicit_group: ModuleNotFoundError phase_c_readonly_source",
+    "test_missing_metadata_is_gap_without_copy_or_fabrication: ModuleNotFoundError phase_c_readonly_source",
+    "test_sha_mismatch_and_outside_configured_root_are_not_imported: ModuleNotFoundError phase_c_readonly_source",
+    "test_selector_versions_default_pair_and_single_09_are_explicit: ImportError selector_versions"
+  ],
+  "owned_pytest_temp_removed": true,
+  "external_POSTs": 0,
+  "paid_calls": 0
+}

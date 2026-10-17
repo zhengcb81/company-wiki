@@ -1,0 +1,24 @@
+{
+  "schema_version": "source-freeze/1",
+  "state": "UNCOMMITTED_ROOT_OWNED_SOURCE_FROZEN_FOR_REVIEW",
+  "files": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": {
+      "sha256": "f58a904536cf814ba4e1d63faee3469276aeed4b88f0e4e5e139a26565be5013",
+      "bytes": 65071
+    },
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": {
+      "sha256": "af799ad97ca7f14bca0adc2fcca4c1da6ca46913e9b897ab899186521217b09b",
+      "bytes": 6511
+    },
+    "tests/test_phase_c_readonly_source.py": {
+      "sha256": "7ea7e89468a327e2cc54077dc0b6a8bf516ce062cb012c9382d98d1ecb5e4a3e",
+      "bytes": 17730
+    }
+  },
+  "no_commit_by_author": true,
+  "production_source_changes_by_this_package": false,
+  "real_provider_calls": 0,
+  "paid_calls": 0,
+  "configuration_changes": false,
+  "mother_ledger_sha256": "5c0e7748bba55ef287c9f412b234f15140155c1fa071919d70bee81772e32262"
+}

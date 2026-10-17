@@ -1,0 +1,70 @@
+{
+  "reviewer": "/root/du10_et_reception_review",
+  "verdict": "PASS",
+  "unresolved": [],
+  "scope": "Only three frozen test-tool files; not CWP production PDF completeness, paid provider acceptance or overall PWF completion",
+  "reviewed_commit": null,
+  "binding": "Uncommitted frozen file SHA. ROOT may commit exact bytes and append commit identity; no self-reference review loop required.",
+  "source_freeze_matches": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": {
+      "expected": "f58a904536cf814ba4e1d63faee3469276aeed4b88f0e4e5e139a26565be5013",
+      "actual": "f58a904536cf814ba4e1d63faee3469276aeed4b88f0e4e5e139a26565be5013"
+    },
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": {
+      "expected": "af799ad97ca7f14bca0adc2fcca4c1da6ca46913e9b897ab899186521217b09b",
+      "actual": "af799ad97ca7f14bca0adc2fcca4c1da6ca46913e9b897ab899186521217b09b"
+    },
+    "tests/test_phase_c_readonly_source.py": {
+      "expected": "7ea7e89468a327e2cc54077dc0b6a8bf516ce062cb012c9382d98d1ecb5e4a3e",
+      "actual": "7ea7e89468a327e2cc54077dc0b6a8bf516ce062cb012c9382d98d1ecb5e4a3e"
+    }
+  },
+  "checks": {
+    "readonly_source_registration": "PASS: existing source config loaded, roots resolved by source owner, exactly one relative original group registered into owned catalog, query/open/manifest verified; no source write/import/sidecar fabrication in readonly branch",
+    "current_roots_config_db_protected": "PASS: only mounted config/catalog_dir owned temp is written. Original source config and original bytes are fingerprint-protected. Source production catalog never instantiated; tests compare source DB and complete fixture root fingerprints.",
+    "metadata_gap_no_paid_start": "PASS: ReadonlySourceGap becomes NOT_RUN before launcher/POST; not promoted to synthetic official metadata. Original/config fingerprints unchanged.",
+    "single_vs_pair_labels": "PASS: omitted flag retains historical0.9,0.8 pair. Explicit single0.9 records single_selector_no_paired_improvement_claim and current_exact_ref proofs; no historical baseline claim.",
+    "normal_resume_cost_inheritance": "PASS: existing native AUTO reservations/append_native/mother_totals dedupe and unknown/FX hold paths retained. Same-run and cross-run no-POST assertions remain. No independent paid client/account introduced.",
+    "flags_compatibility": "PASS: new source/selector options are additive, existing loopback isolated source default intact; readonly invalid inputs rejected before owned allocation where possible.",
+    "cleanup": "PASS: exact owned Temp parent/prefix verified before cleanup; isolated config/DB/results removed; readonly raw/config source never cleaned or rewritten."
+  },
+  "independent_execution": {
+    "selected_tests": 4,
+    "passed": 4,
+    "exit_code": 0,
+    "pytest_seconds": 7.03,
+    "test_names": [
+      "test_registered_source_mounts_same_bytes_and_only_explicit_group",
+      "test_selector_versions_default_pair_and_single_09_are_explicit",
+      "test_readonly_runner_gap_is_not_run_and_never_calls_model",
+      "test_mother_total_keeps_baseline_unknown_and_deduplicates_native_attempts"
+    ],
+    "command": "python -B -m pytest -p no:cacheprovider -q --basetemp <owned-temp>/pytest <four named tests>",
+    "owned_temp_removed": true,
+    "pytest_relocated_temp_removed": true,
+    "first_receipt_attempt": "The first outer stdout print raised GBK UnicodeEncodeError before pytest returncode was retained. No XML was requested then, so no readable pytest result was claimed. Same four fast controls rerun solely to capture receipt using ASCII-safe JSON; no source change.",
+    "network_calls": 0,
+    "provider_calls": 0,
+    "llm_calls": 0,
+    "credentials_read": false
+  },
+  "reused_exact_source_receipt": {
+    "path": "final-test-receipt.json",
+    "xml": "final-junit.xml",
+    "actual_xml_counts": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "source_sha_before_after": "all three match freeze",
+    "scope": "Includes actual local-fixture single-selector lifecycle same/crossresume and public Ref pinning; no real-provider claim"
+  },
+  "limitations": [
+    "Existing runner remains explicit prepared three-sample benchmark, not a generic arbitrary-company ingestion API",
+    "No real production raw document or paid endpoint was used by reviewer",
+    "This PASS cannot clear known real parse->select shared2M exhaustion/zero-span condition or mark production C completed"
+  ],
+  "source_mutations_by_reviewer": 0,
+  "approval_or_security_policy_changes": false
+}

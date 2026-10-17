@@ -1,0 +1,32 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/test_phase_c_readonly_source.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\du11\\runner-frozen-temp",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\document-understanding-2026-10-13\\review\\du11-live-runner\\final-junit.xml"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 74.962,
+  "source_sha256_before": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": "f58a904536cf814ba4e1d63faee3469276aeed4b88f0e4e5e139a26565be5013",
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": "af799ad97ca7f14bca0adc2fcca4c1da6ca46913e9b897ab899186521217b09b",
+    "tests/test_phase_c_readonly_source.py": "7ea7e89468a327e2cc54077dc0b6a8bf516ce062cb012c9382d98d1ecb5e4a3e"
+  },
+  "source_sha256_after": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": "f58a904536cf814ba4e1d63faee3469276aeed4b88f0e4e5e139a26565be5013",
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": "af799ad97ca7f14bca0adc2fcca4c1da6ca46913e9b897ab899186521217b09b",
+    "tests/test_phase_c_readonly_source.py": "7ea7e89468a327e2cc54077dc0b6a8bf516ce062cb012c9382d98d1ecb5e4a3e"
+  },
+  "own_source_unchanged": true,
+  "external_POSTs": 0,
+  "paid_calls": 0,
+  "log": "final-pytest.log"
+}

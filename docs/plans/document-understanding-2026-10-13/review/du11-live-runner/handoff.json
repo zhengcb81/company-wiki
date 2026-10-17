@@ -1,0 +1,131 @@
+{
+  "schema_version": "du11-live-runner-handoff/1",
+  "status": "IMPLEMENTED_TESTED_AWAITING_ROOT_INDEPENDENT_REVIEW",
+  "review_pending": true,
+  "independent_review_not_claimed": true,
+  "source_freeze": "source-freeze.json",
+  "source_sha256": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": {
+      "sha256": "f58a904536cf814ba4e1d63faee3469276aeed4b88f0e4e5e139a26565be5013",
+      "bytes": 65071
+    },
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": {
+      "sha256": "af799ad97ca7f14bca0adc2fcca4c1da6ca46913e9b897ab899186521217b09b",
+      "bytes": 6511
+    },
+    "tests/test_phase_c_readonly_source.py": {
+      "sha256": "7ea7e89468a327e2cc54077dc0b6a8bf516ce062cb012c9382d98d1ecb5e4a3e",
+      "bytes": 17730
+    }
+  },
+  "scope": [
+    "tools/document_understanding_benchmark/phase_c_runner.py",
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py",
+    "tests/test_phase_c_readonly_source.py",
+    "docs/plans/document-understanding-2026-10-13/review/du11-live-runner/**"
+  ],
+  "tests": {
+    "passed": 9,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 60.515,
+    "wall_seconds": 74.962,
+    "command": [
+      "python",
+      "-B",
+      "-m",
+      "pytest",
+      "tests/test_phase_c_readonly_source.py",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\du11\\runner-frozen-temp",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\document-understanding-2026-10-13\\review\\du11-live-runner\\final-junit.xml"
+    ],
+    "exit_code": 0,
+    "source_sha_before_after_equal": true,
+    "junit": "final-junit.xml",
+    "log": "final-pytest.log",
+    "temporary_tree_removed": true
+  },
+  "ruff": "3 files PASS; final check after source freeze",
+  "wrapper_observation_error": "After saving actual pytest exit0 + receipts, optional terminal log echo raised UnicodeEncodeError(gbk). This is not pytest failure; XML/log/receipt show9PASS. No rerun needed. Future print uses ensure_ascii=True/PYTHONUTF8.",
+  "historical_failure": "first-concentrated-junit.xml:7PASS/1FAIL due synthetic live-shaped request HTTP endpoint correctly refused before CLI; fixture corrected to never-requested HTTPS invalid host, no production HTTPS check weakened.",
+  "budget": {
+    "charged_tokens": 599590,
+    "charged_micro_usd": 385113,
+    "historical_unknown7_retained": 7,
+    "new_unknown": 0,
+    "real_provider_calls": 0,
+    "paid_calls": 0,
+    "mother_ledger_sha256": "5c0e7748bba55ef287c9f412b234f15140155c1fa071919d70bee81772e32262",
+    "mother_ledger_unchanged": true
+  },
+  "protected_preparation_inputs": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\semi_annual\\2026-08-19_cninfo_1225482884_2026年半年度报告.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\gold\\cn-h1.json",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\名创优品\\2024年度报告（港股）.pdf",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\gold\\hk-annual.json",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\微软\\raw\\financial_reports\\annual\\微软_10-K_2025.htm",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\gold\\us-10k.json",
+      "unchanged": true
+    }
+  ],
+  "cli_extensions": {
+    "source_mode": "--source-mode registered_readonly --source-catalog-config <actual source_catalog.yaml>",
+    "selector_versions": "--selector-versions 0.9.0",
+    "default_behavior": "isolated-copy with0.9.0 then0.8.0 pair unchanged"
+  },
+  "implementation": {
+    "source_owner_ports": [
+      "load_catalog_config",
+      "resolve_source_location",
+      "SourceCatalog.register_sources(single relative path)",
+      "SourceVersionReader.query_local",
+      "SourceVersionReader.open_version"
+    ],
+    "production_root_rules_preserved": true,
+    "only_catalog_dir_moved_to_owned_temp": true,
+    "original_copy_count_registered_mode": 0,
+    "production_database_writes": 0,
+    "source_metadata_backfill_or_fabrication": false,
+    "same_run_and_cross_run_zero_post_preserved": true,
+    "single_mode_no_paired_improvement_claim": true
+  },
+  "limits": [
+    "Registered-source positive tests cover real registration/query/open and validated batch SourceRef construction, with model CLI intentionally held and correctly labelledFAIL for that negative control.",
+    "Full successful configured lifecycle is tested using existing isolated-copy synthetic loopback:1initial local POST, same/crossrun0added POST, public exact read. Mounted real-provider quality remains ROOTC.",
+    "Unknown/missing or inconsistent metadata yields namedNOT_RUN and0POST. ROOT must address genuine public registration facts in its original owner; this tool never edits actual sidecars.",
+    "Original tamper and controlled outbox stop/resume remain existing independent E2E tests listed in live_acceptance_plan; not reimplemented here.",
+    "registered_readonly CLI requires live-shaped explicit preparation; loopbackCLI keeps its generated isolated synthetic originals."
+  ],
+  "commits_created": [],
+  "push_performed": false
+}
