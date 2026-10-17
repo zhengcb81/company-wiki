@@ -1,0 +1,28 @@
+{
+  "schema_version": "du9-planner-publication/1",
+  "published_commit": "c300e801fd4d3735078ec4b77ced26ddb3a5a59d",
+  "source_review_commit": "a4ca0a8535d3b157e2cc7ff0dbdb8efe2ca65ee4",
+  "remote": "origin",
+  "branch": "master",
+  "normal_push_completed": true,
+  "hooks_skipped": false,
+  "local_gate": {
+    "passed": 6336,
+    "skipped": 24,
+    "failed": 0,
+    "seconds": 311.06,
+    "scope_reason": "configuration or test entrypoint changed (1 paths)"
+  },
+  "ci": {
+    "id": 39008113871,
+    "name": "CI",
+    "head_sha": "c300e801fd4d3735078ec4b77ced26ddb3a5a59d",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39008113871",
+    "created_at": "2026-10-17T05:57:14Z",
+    "updated_at": "2026-10-17T06:00:37Z",
+    "checked_at_utc": "2026-10-17T06:00:51.195462+00:00"
+  },
+  "scope": "component reception and compiled POLICY interop; native PDF/source production and formal summary remain OPEN"
+}

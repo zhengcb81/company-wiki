@@ -1,8 +1,8 @@
 ## PLANNER组件与POLICY联调已验收 — 2026-10-17（最新）
 
-完整作者历史e4f946a2已合本地主线f4ef8531；ROOT共因修复a4ca0a85，独审PASS/0未解决、11SHA无变化。修复更紧请求限导致后部饥饿和同页嵌套fine被配额归因吞掉，未增限额或许可链。ROOT集中796PASS/17SKIP（25.46秒），独立55PASS及9控例PASS；原RED与64/64 gold保留。见[最终接收](review/du9_planner_reception.md)。正常发布与精确CI待完成，不能声称已推送。
+完整作者历史e4f946a2已合本地主线f4ef8531；ROOT共因修复a4ca0a85，独审PASS/0未解决、11SHA无变化。修复更紧请求限导致后部饥饿和同页嵌套fine被配额归因吞掉，未增限额或许可链。ROOT集中796PASS/17SKIP（25.46秒），独立55PASS及9控例PASS；原RED与64/64 gold保留。见[最终接收](review/du9_planner_reception.md)。正常推送master/origin c300e801已完成，pre-push6336PASS/24SKIP、311.06秒；精确[CI39008113871](https://github.com/zhengcb81/company-wiki/actions/runs/39008113871) SUCCESS，发布收据已保存。
 
-**下一步：** 正常commit/push并核对实际CI；然后ROOT按既有pdf_page_intent_implementation完成native窗口/唯一matcher/同一WorkBudget/source单parse生产装配及真实PDF深页/正式摘要/缓存恢复/holdout。组件已完成，生产验收仍OPEN。RF/ET工区不动。旧du8-du9自动任务实际不存在，未重建，不承诺持续巡查。
+**下一步：** ROOT按既有pdf_page_intent_implementation完成native窗口/唯一matcher/同一WorkBudget/source单parse生产装配及真实PDF深页/正式摘要/缓存恢复/holdout。组件已完成，生产验收仍OPEN。RF/ET工区不动。旧du8-du9自动任务实际不存在，未重建，不承诺持续巡查。
 
 ---
 

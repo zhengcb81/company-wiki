@@ -52,5 +52,10 @@
   ],
   "external_packages_remaining": 2,
   "automation_note": "2026-10-17 Codex automation_update返回该任务不存在/可能被手动删除；保留用户可能的删除意图，不重建、不声称定期巡查仍有效。",
-  "acceptance_updated_at_utc": "2026-10-17T05:51:15.244496+00:00"
+  "acceptance_updated_at_utc": "2026-10-17T05:51:15.244496+00:00",
+  "root_cwp_publication": {
+    "commit": "c300e801fd4d3735078ec4b77ced26ddb3a5a59d",
+    "ci_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39008113871",
+    "conclusion": "success"
+  }
 }

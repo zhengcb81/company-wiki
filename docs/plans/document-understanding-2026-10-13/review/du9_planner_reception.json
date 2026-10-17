@@ -1,6 +1,6 @@
 {
   "schema_version": "du9-planner-root-reception/1",
-  "status": "COMPONENT_ACCEPTED_PUBLICATION_PENDING",
+  "status": "COMPONENT_ACCEPTED_PUBLISHED_CI_SUCCESS",
   "date": "2026-10-17",
   "author_final_commit": "e4f946a2bd90f6231ca7542439fdf97512efaa7e",
   "author_reviewed_source_commit": "db126f24e32a8f6986d58049eb295b646c41a3d0",
@@ -54,8 +54,12 @@
   ],
   "automation_status": "NOT_FOUND_NOT_RECREATED",
   "publication": {
-    "status": "PENDING",
-    "normal_hooks_required": true
+    "status": "PUBLISHED_CI_SUCCESS",
+    "receipt": "du9-planner-receipts/publication.json",
+    "published_commit": "c300e801fd4d3735078ec4b77ced26ddb3a5a59d",
+    "ci_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39008113871",
+    "normal_hooks_required": true,
+    "normal_hooks_passed": true
   },
   "recorded_at_utc": "2026-10-17T05:51:15.244496+00:00"
 }

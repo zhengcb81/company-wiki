@@ -1,6 +1,6 @@
 {
   "schema_version": "du9-launch/1",
-  "status": "CWP_COMPONENTS_ACCEPTED_PUBLICATION_PENDING",
+  "status": "CWP_COMPONENTS_PUBLISHED_CI_SUCCESS_PRODUCTION_OPEN",
   "lanes": [
     {
       "id": "DU9-CWP-GEOMETRY-POLICY",
@@ -70,5 +70,10 @@
   "startup_guard_note": "Initial status equality guard rejected authorized concurrent ROOT changes to structure/tables.py; all three seed commits had completed. Recovery only reads these existing worktrees, validates exact seed/branch/clean/card bytes and ET unchanged state. No retry of worktree creation or source restore.",
   "root_concurrent_authorized_changes": [
     "src/company_wiki/document_understanding/structure/tables.py"
-  ]
+  ],
+  "root_publication": {
+    "commit": "c300e801fd4d3735078ec4b77ced26ddb3a5a59d",
+    "ci_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39008113871",
+    "ci_conclusion": "success"
+  }
 }

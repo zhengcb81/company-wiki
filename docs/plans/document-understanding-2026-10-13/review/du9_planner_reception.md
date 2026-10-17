@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-**组件及真实 POLICY 接口联调通过，发布待完成。** 保留完整作者历史 e4f946a2（受审源码 db126f24）合入主线 f4ef8531；ROOT 两项共因修复冻结 a4ca0a85。独立审查 PASS / 未解决0，11个最终源/测试/fixture SHA 读回一致。[独审报告](du9_planner_root_review.md)、[机器收据](du9_planner_reception.json)。作者原工区只读。
+**组件及真实 POLICY 接口联调通过，已发布且精确远端 CI 成功。** 保留完整作者历史 e4f946a2（受审源码 db126f24）合入主线 f4ef8531；ROOT 两项共因修复冻结 a4ca0a85。独立审查 PASS / 未解决0，11个最终源/测试/fixture SHA 读回一致。[独审报告](du9_planner_root_review.md)、[机器收据](du9_planner_reception.json)。作者原工区只读。
 
 ## 发现与修复
 
@@ -22,3 +22,7 @@ ROOT 先保留2FAIL/5PASS，修复后集中796PASS/17SKIP（25.46秒）；独立
 随后由ROOT独占生产接线：native windows→唯一matcher→POLICY→PLANNER→同一WorkBudget→source单parse，再做真实PDF深页表格、实际配置供应商正式摘要、缓存恢复及未见公司质量验收，见[下一默认深页实施](pdf_page_intent_implementation.md)。这些仍OPEN，不把本组件通过写成全项目完成。RF/ET作者任务保持只读等待，FF完整41例C和完整中断恢复仍是ROOT责任。
 
 旧du8-du9定时任务更新返回“不存在，可能手工删除”，因此未重建；不能承诺后台巡查仍有效。其余自动任务不受影响。
+
+## 发布完成
+
+主线与origin已正常推送 c300e801fd4d3735078ec4b77ced26ddb3a5a59d（包含完整作者历史及a4ca0a85修复）。pre-push 6336PASS/24SKIP、311.06秒，无skip-hook；[精确CI39008113871](https://github.com/zhengcb81/company-wiki/actions/runs/39008113871) SUCCESS，06:00:37Z完成。[发布收据](du9-planner-receipts/publication.json)。其后仅补本发布文档，源码/测试冻结不变。
