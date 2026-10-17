@@ -1,0 +1,220 @@
+{
+ "schema_version": "du10-goldset-node-a/1",
+ "card": "DU10-CWP-SUMMARY-GOLDSET",
+ "frozen_at": "2026-10-17",
+ "base_commit": "900dbf6489f3b995a0bfb7fcbb8a001a68df241d",
+ "worktree": "C:/Users/郑曾波/Projects/company-wiki-du10-summary-goldset",
+ "existing_du_gold_reviewed": [
+  "cn-equity",
+  "cn-h1",
+  "cn-ipo-confirmation",
+  "cn-ir",
+  "cn-q-business",
+  "cn-q-sparse",
+  "du5-cn-fangbang-q1",
+  "du5-cn-gbits-call",
+  "du5-cn-iflytek-h1",
+  "du5-cn-proya-q1",
+  "du5-cn-zhongmi-offering",
+  "du5-hk-kingsoft-interim",
+  "du5-hk-kingsoft-q1",
+  "du5-us-msft-8k",
+  "du5-us-msft-ex991",
+  "fresh-cn-smic-fy2025",
+  "fresh-hk-anta-fy2025",
+  "fresh-us-apple-10k",
+  "hk-annual",
+  "hk-annual-mojibake",
+  "holdout-cn-glodon-q1",
+  "holdout-cn-yake-q1",
+  "holdout-hk-alibaba-fy2023",
+  "holdout-hk-biren-fy2025",
+  "holdout-us-mongodb-10k",
+  "holdout-us-nvidia-10k",
+  "us-10k",
+  "us-20f",
+  "us-txt"
+ ],
+ "known_failure_modes_targeted": [
+  "关键事实遗漏",
+  "引用范围过宽（claim引用unit不含该事实）",
+  "actual/planned混淆",
+  "同量纲不同时期（单季vs累计、不同TTM）",
+  "主体/口径错换（类别收入vs总收入、海外品牌vs集团）",
+  "QA问句前提当事实",
+  "预测/测算当已实现",
+  "第三方行业数据当公司收入"
+ ],
+ "cases": [
+  {
+   "case_id": "du10gs-cn-annual-catl-industry",
+   "path": "C:/Users/郑曾波/Projects/company-wiki/companies/宁德时代/raw/financial_reports/宁德时代：2025年年度报告.pdf",
+   "doc_type": "annual_report",
+   "market": "CN",
+   "company": "宁德时代",
+   "carrier_root": "company_raw",
+   "anchor_pages": [
+    16,
+    17
+   ],
+   "prior_use": "公司名出现在万润cn-ir引文上下文与du8-ff41临时目录元数据；本年报原件与内容未被任何gold/lane读取",
+   "sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+   "bytes": 2043710
+  },
+  {
+   "case_id": "du10gs-cn-annual-catl-capacity",
+   "path": "C:/Users/郑曾波/Projects/company-wiki/companies/宁德时代/raw/financial_reports/宁德时代：2025年年度报告.pdf",
+   "doc_type": "annual_report",
+   "market": "CN",
+   "company": "宁德时代",
+   "carrier_root": "company_raw",
+   "anchor_pages": [
+    24
+   ],
+   "prior_use": "同上（同一原件第二个case）",
+   "sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+   "bytes": 2043710
+  },
+  {
+   "case_id": "du10gs-cn-interim-sugon",
+   "path": "C:/Users/郑曾波/Projects/company-wiki/companies/中科曙光/raw/financial_reports/中科曙光：中科曙光2025年半年度报告.pdf",
+   "doc_type": "interim_report",
+   "market": "CN",
+   "company": "中科曙光",
+   "carrier_root": "company_raw",
+   "anchor_pages": [
+    8,
+    9
+   ],
+   "prior_use": "fresh：.planning与docs/plans零提及",
+   "sha256": "8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+   "bytes": 1087326
+  },
+  {
+   "case_id": "du10gs-cn-q3-dfc",
+   "path": "C:/Users/郑曾波/Projects/company-wiki/companies/东方电缆/raw/financial_reports/东方电缆：东方电缆2025年第三季度报告.pdf",
+   "doc_type": "quarterly_report",
+   "market": "CN",
+   "company": "东方电缆",
+   "carrier_root": "company_raw",
+   "anchor_pages": [
+    2,
+    3
+   ],
+   "prior_use": "fresh：.planning与docs/plans零提及",
+   "sha256": "980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+   "bytes": 188697
+  },
+  {
+   "case_id": "du10gs-cn-ipo-hrjc",
+   "path": "C:/Users/郑曾波/Projects/company-wiki/companies/华锐精密/raw/prospectus/华锐精密：华锐精密首次公开发行股票并在科创板上市招股说明书.PDF",
+   "doc_type": "ipo_prospectus",
+   "market": "CN",
+   "company": "华锐精密",
+   "carrier_root": "company_raw",
+   "anchor_pages": [
+    104,
+    105,
+    293
+   ],
+   "prior_use": "公司路径出现在n5 raw-duplicate-audit元数据与narrative-pilot结果；本招股书内容未被读取（其可转债募集说明书曾由n5-document-quality S06读取，本卡未选该文件）",
+   "sha256": "e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+   "bytes": 6144872
+  },
+  {
+   "case_id": "du10gs-cn-convbond-mlkw",
+   "path": "C:/Users/郑曾波/Projects/company-wiki/companies/密尔克卫/raw/research/密尔克卫：密尔克卫化工供应链服务股份有限公司公开发行可转换公司债券募集说明书.PDF",
+   "doc_type": "convertible_bond_prospectus",
+   "market": "CN",
+   "company": "密尔克卫",
+   "carrier_root": "company_raw",
+   "anchor_pages": [
+    344,
+    348
+   ],
+   "prior_use": "仅n5 raw-duplicate-audit与n6 footprint路径/哈希元数据；内容未被读取",
+   "sha256": "9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+   "bytes": 12284397
+  },
+  {
+   "case_id": "du10gs-cn-ir-amec-minutes",
+   "path": "C:/Users/郑曾波/Projects/company-wiki/companies/中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220416.pdf",
+   "doc_type": "ir_minutes",
+   "market": "CN",
+   "company": "中微公司",
+   "carrier_root": "company_raw",
+   "anchor_pages": [
+    1,
+    2,
+    3
+   ],
+   "prior_use": "中微公司另有cn-h1/cn-q-business gold（2026半年报/一季报）；本2022交流纪要原件未被读取",
+   "sha256": "9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+   "bytes": 457608
+  },
+  {
+   "case_id": "du10gs-hk-ipo-baba",
+   "path": "C:/Users/郑曾波/Projects/company-wiki/companies/阿里巴巴/raw/prospectus/阿里巴巴招股说明书2019.pdf",
+   "doc_type": "ipo_prospectus",
+   "market": "HK",
+   "company": "阿里巴巴",
+   "carrier_root": "company_raw",
+   "anchor_pages": [
+    19,
+    21
+   ],
+   "prior_use": "阿里巴巴另有holdout-hk-alibaba-fy2023 gold（FY2023年报）；本2019港股全球发售招股书未被读取",
+   "sha256": "7ae21e7f811d1b74eb0f9e04973c269fd0603d8a2950c173aedd5a246f671fc0",
+   "bytes": 8045606
+  },
+  {
+   "case_id": "du10gs-hk-interim-miniso",
+   "path": "C:/Users/郑曾波/Dropbox/Stock/消费品/名创优品/2025半年报（港股）.pdf",
+   "doc_type": "interim_report",
+   "market": "HK",
+   "company": "名创优品",
+   "carrier_root": "dropbox_stock",
+   "anchor_pages": [
+    14,
+    23
+   ],
+   "prior_use": "名创优品2024年报为hk-annual gold；本2025中期报告原件未被读取",
+   "sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+   "bytes": 2715618
+  },
+  {
+   "case_id": "du10gs-call-miniso-q4-2024",
+   "path": "C:/Users/郑曾波/Dropbox/Stock/消费品/名创优品/December Quarter and Full Year of 2024  Transcript.pdf",
+   "doc_type": "call_transcript",
+   "market": "HK",
+   "company": "名创优品",
+   "carrier_root": "dropbox_stock",
+   "anchor_pages": [
+    2,
+    3,
+    4
+   ],
+   "prior_use": "公司2024年报为hk-annual gold；本官方业绩电话会讲稿原件未被任何gold读取",
+   "sha256": "dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+   "bytes": 390641
+  },
+  {
+   "case_id": "du10gs-us-10q-vrsk",
+   "path": "C:/Users/郑曾波/Projects/dayu-agent/workspace/portfolio/VRSK/filings/fil_0001437749-26-013729/vrsk20260331_10q.htm",
+   "doc_type": "form_10q",
+   "market": "US",
+   "company": "Verisk Analytics",
+   "carrier_root": "dayu_portfolio",
+   "anchor_pages": [
+    26,
+    27,
+    28
+   ],
+   "prior_use": "du2-families曾读取vrsk20250331_10q（2025Q1另一文件）；本2026Q1 10-Q未被读取",
+   "sha256": "8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+   "bytes": 1328753
+  }
+ ],
+ "originals_unchanged_note": "原件只读；本卡零复制零改写；SHA在B/C节点复算",
+ "bindings_note": "机内绝对路径仅存于receipts与未提交bindings.local.json；cases/内只存carrier_root+repo相对路径"
+}

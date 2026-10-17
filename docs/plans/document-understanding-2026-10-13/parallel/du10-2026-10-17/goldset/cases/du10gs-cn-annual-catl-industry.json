@@ -1,0 +1,153 @@
+{
+ "schema_version": "du10-summary-goldset-case/1",
+ "case_id": "du10gs-cn-annual-catl-industry",
+ "created": "2026-10-17",
+ "market": "CN",
+ "company": "宁德时代",
+ "doc_type": "annual_report",
+ "carrier": ".pdf",
+ "language": "zh",
+ "narrative_focus": "industry_change",
+ "bound_failure_mode": "第三方行业数据当公司收入；预测当实际",
+ "source_ref": {
+  "carrier_root": "company_raw",
+  "source_id": "宁德时代/raw/financial_reports/宁德时代：2025年年度报告.pdf",
+  "source_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+  "mime_type": "application/pdf",
+  "registered_sidecar": {
+   "market": "CN",
+   "security_id": "300750",
+   "source_title": "宁德时代：2025年年度报告",
+   "published_date": "2026-04-30"
+  }
+ },
+ "summary_proposition": "2025年全球动力电池使用量1,187GWh（SNE Research，同比+31.7%），宁德时代市占率39.2%（+1.2pct）、连续9年全球第一；全球储能电池出货量550GWh（+79%），公司连续5年储能出货第一。",
+ "allowed_summary": [
+  "据SNE Research数据，2025年全球动力电池使用量1,187GWh，同比增长31.7%；宁德时代动力电池使用量全球市占率39.2%，较上年提升1.2个百分点，连续9年（2017-2025年）全球第一。",
+  "2025年全球储能电池出货量550GWh，同比增长79%（SNE Research统计）；宁德时代储能电池出货量连续5年（2021-2025年）全球第一。"
+ ],
+ "summary_guidance": {
+  "must_preserve": [
+   "SNE Research 来源归属",
+   "使用量（动力）与出货量（储能）两种口径不得互换",
+   "2025 年度期间",
+   "39.2%/1,187GWh/550GWh 数值"
+  ],
+  "boundary": [
+   "行业总量不得写成公司业务量或收入",
+   "公司自评表述（如“综合竞争力行业领先”）不得升格为第三方结论"
+  ]
+ },
+ "facts": [
+  {
+   "id": "industry-global-power-usage",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "third_party",
+   "role": "third_party",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "2025年全球动力电池使用量为1,187GWh，同比增长31.7%",
+      "location_kind": "page",
+      "page": 17
+     }
+    ]
+   ],
+   "must_preserve": [
+    "SNE Research",
+    "2025年",
+    "1,187GWh",
+    "31.7%",
+    "使用量口径"
+   ],
+   "must_not_assert": [
+    "宁德时代2025年动力电池收入1,187GWh对应金额",
+    "全球动力电池出货量1,187GWh（使用量≠出货量）",
+    "该统计为公司自报产销量"
+   ],
+   "reason": "行业总量数据来自SNE Research，是行业背景而非公司业绩；使用量口径是摘要最容易写错的字段。"
+  },
+  {
+   "id": "catl-power-market-share",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "2025年公司动力电池使用量全球市占率为39.2%，较去年同期提升1.2个百分点，公司已连续9年（2017-2025年）动力电池使用量排名全球第一",
+      "location_kind": "page",
+      "page": 17
+     }
+    ]
+   ],
+   "must_preserve": [
+    "39.2%",
+    "+1.2个百分点",
+    "动力电池使用量口径",
+    "SNE Research",
+    "连续9年"
+   ],
+   "must_not_assert": [
+    "39.2%为储能市占率",
+    "39.2%为收入占比",
+    "连续9年储能第一（储能是连续5年）"
+   ],
+   "reason": "公司份额叙述依赖第三方统计；口径（使用量）与连续年数必须原样保留。"
+  },
+  {
+   "id": "industry-global-ess-shipment",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "third_party",
+   "role": "third_party",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "2025年全球储能电池出货量550GWh，同比增长79%",
+      "location_kind": "page",
+      "page": 17
+     },
+     {
+      "exact_quote": "在储能领域，公司已连续5年（2021-2025年）储能电池出货量排名全球第一",
+      "location_kind": "page",
+      "page": 17
+     }
+    ]
+   ],
+   "must_preserve": [
+    "550GWh",
+    "79%",
+    "出货量口径（储能）",
+    "连续5年"
+   ],
+   "must_not_assert": [
+    "储能收入550GWh对应金额",
+    "550GWh为动力电池数据"
+   ],
+   "reason": "同页两类行业数据（动力使用量/储能出货量）口径不同，混用即错引。"
+  }
+ ],
+ "misread_traps": [
+  {
+   "page": 16,
+   "kind": "same_page_mixed",
+   "note": "p16 上半为公司经营模式与业绩驱动因素叙述（含自评“综合竞争力行业领先”），下半为行业情况叙述；自评与第三方数据同页。",
+   "exact_quote": "综合竞争力行业领先，实现业务稳健增长"
+  },
+  {
+   "page": 17,
+   "kind": "third_party_attribution",
+   "note": "p17 所有行业数字均带数据来源（SNE Research/中国汽车工业协会/IEA/国家能源局等）；漏掉来源归属即失真。"
+  }
+ ],
+ "prior_use": "公司名出现在万润cn-ir引文上下文与du8-ff41临时目录元数据；本年报原件与内容未被任何gold/lane读取",
+ "notes": "年报物理页码按 PDF 1 基页。p17 行业地位段落为 SNE Research 转引。",
+ "quote_budget_chars_normalized": 190,
+ "bound_failure_mode_check": "第三方行业数据当公司收入；预测当实际"
+}

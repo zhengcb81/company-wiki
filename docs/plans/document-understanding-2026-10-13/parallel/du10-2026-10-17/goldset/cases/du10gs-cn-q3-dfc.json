@@ -1,0 +1,143 @@
+{
+ "schema_version": "du10-summary-goldset-case/1",
+ "case_id": "du10gs-cn-q3-dfc",
+ "created": "2026-10-17",
+ "market": "CN",
+ "company": "东方电缆",
+ "doc_type": "quarterly_report",
+ "carrier": ".pdf",
+ "language": "zh",
+ "narrative_focus": "main_business",
+ "bound_failure_mode": "同量纲不同时期（单季 vs 累计）；类别收入当总收入",
+ "source_ref": {
+  "carrier_root": "company_raw",
+  "source_id": "东方电缆/raw/financial_reports/东方电缆：东方电缆2025年第三季度报告.pdf",
+  "source_sha256": "980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+  "mime_type": "application/pdf",
+  "registered_sidecar": {
+   "market": "CN",
+   "security_id": "东方电缆",
+   "source_title": "东方电缆：东方电缆2025年第三季度报告"
+  }
+ },
+ "summary_proposition": "2025年第三季度（本报告期=单季）：海底电缆与高压电缆实现营业收入35.49亿元、同比+35.8%，为本报告期利润总额+51.19%的主要原因。",
+ "allowed_summary": [
+  "2025年第三季度（单季），东方电缆海底电缆与高压电缆实现营业收入35.49亿元，同比增长35.8%，带动本报告期利润总额同比增长51.19%。"
+ ],
+ "summary_guidance": {
+  "must_preserve": [
+   "本报告期=单季（Q3三个月）",
+   "海底电缆与高压电缆类别口径",
+   "35.49亿元/35.8%/51.19%"
+  ],
+  "boundary": [
+   "不得把单季类别收入写成前三季度累计或全年",
+   "类别收入不得写成公司营业总收入"
+  ]
+ },
+ "facts": [
+  {
+   "id": "q3-submarine-hv-cable-revenue",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "主要系本报告期高附加值海底电缆营业收入增长较多，本报告期海底电缆与高压电缆实现营业收入35.49亿元，同比增长35.8%",
+      "location_kind": "page",
+      "page": 3
+     }
+    ]
+   ],
+   "must_preserve": [
+    "本报告期（单季）",
+    "海底电缆与高压电缆",
+    "35.49亿元",
+    "35.8%"
+   ],
+   "must_not_assert": [
+    "前三季度累计类别收入35.49亿元",
+    "公司营业总收入35.49亿元",
+    "全年收入35.49亿元",
+    "海外订单收入"
+   ],
+   "reason": "单季+类别口径双限定；报告仅11页，累计算法上极易被放大三倍误引。原件内部张力：p1单季总收入约30.66亿（3,065,970,750.30元）低于p3类别口径35.49亿，说明35.49亿是含了其他收入的口径；标注忠实引用原件措辞，不自行改写期间。"
+  },
+  {
+   "id": "q3-profit-change-reason",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "利润总额_本报告期",
+      "location_kind": "page",
+      "page": 3
+     },
+     {
+      "exact_quote": "归属于上市公司股东的净利润_本报告期",
+      "location_kind": "page",
+      "page": 3
+     }
+    ]
+   ],
+   "must_preserve": [
+    "本报告期口径",
+    "利润总额+51.19%、归母净利+53.12%（见变动表）"
+   ],
+   "must_not_assert": [
+    "年初至报告期末累计同比",
+    "扣非口径混淆（扣非净利+71.73%是另一行）"
+   ],
+   "reason": "变动原因叙述绑定变动表的“本报告期”列；三列同比数字并存，行名必须随数保留。"
+  },
+  {
+   "id": "quarter-definition-note",
+   "importance": "critical",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "“本报告期”指本季度初至本季度末3个月期间，下同",
+      "location_kind": "page",
+      "page": 2
+     }
+    ]
+   ],
+   "must_preserve": [
+    "单季定义注释"
+   ],
+   "must_not_assert": [
+    "把“本报告期”读成前三季度"
+   ],
+   "reason": "p2 注释显式定义单季口径，是本报告所有“本报告期”数字的解释锚。"
+  }
+ ],
+ "misread_traps": [
+  {
+   "page": 3,
+   "kind": "same_page_mixed",
+   "note": "p3 上半为变动原因叙述，下半为前10名股东表；业绩叙述与股东信息同页。",
+   "exact_quote": "二、股东信息"
+  },
+  {
+   "page": 2,
+   "kind": "dual_period_columns",
+   "note": "p2-3 非经常性损益表同时给出“本期金额”与“年初至报告期末金额”两列，双期间并存是错引高发点。",
+   "exact_quote": "年初至报告期末"
+  }
+ ],
+ "prior_use": "fresh：.planning与docs/plans零提及",
+ "notes": "11页短季报；physical pages 2-3（PDF 1基）。",
+ "quote_budget_chars_normalized": 124,
+ "bound_failure_mode_check": "同量纲不同时期（单季 vs 累计）；类别收入当总收入"
+}

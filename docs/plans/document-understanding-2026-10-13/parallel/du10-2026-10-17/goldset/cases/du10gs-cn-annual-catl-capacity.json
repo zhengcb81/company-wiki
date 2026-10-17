@@ -1,0 +1,116 @@
+{
+ "schema_version": "du10-summary-goldset-case/1",
+ "case_id": "du10gs-cn-annual-catl-capacity",
+ "created": "2026-10-17",
+ "market": "CN",
+ "company": "宁德时代",
+ "doc_type": "annual_report",
+ "carrier": ".pdf",
+ "language": "zh",
+ "narrative_focus": "project_progress",
+ "bound_failure_mode": "planned/actual（在建≠投产）；叙述与财务表同页借数",
+ "source_ref": {
+  "carrier_root": "company_raw",
+  "source_id": "宁德时代/raw/financial_reports/宁德时代：2025年年度报告.pdf",
+  "source_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+  "mime_type": "application/pdf",
+  "registered_sidecar": {
+   "market": "CN",
+   "security_id": "300750",
+   "source_title": "宁德时代：2025年年度报告",
+   "published_date": "2026-04-30"
+  }
+ },
+ "summary_proposition": "报告期内公司稳步推进中州基地、济宁基地、福鼎基地、溧阳基地、宜宾基地、匈牙利工厂及印尼电池产业链等项目的建设；锂电池产能772GWh，期末在建产能321GWh。",
+ "allowed_summary": [
+  "2025年宁德时代稳步推进中州基地、济宁基地、福鼎基地、溧阳基地、宜宾基地、匈牙利工厂及印尼电池产业链等项目的建设，期末锂电池产能772GWh、在建产能321GWh。"
+ ],
+ "summary_guidance": {
+  "must_preserve": [
+   "“推进……建设”进行时态",
+   "在建321GWh 与产能772GWh 两个数字分开",
+   "项目列举不得扩写为“已投产”"
+  ],
+  "boundary": [
+   "在建/推进中项目不得写成已投产或已贡献产量",
+   "产能（期末存量）不得写成当期产量或销量"
+  ]
+ },
+ "facts": [
+  {
+   "id": "capacity-projects-under-construction",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "capacity_total",
+   "modality": "plan",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "公司稳步推进中州基地、济宁基地、福鼎基地、溧阳基地、宜宾基地、匈牙利工厂及印尼电池产业链等项目的建设。报告期内公司锂电池产能772GWh，期末在建产能321GWh",
+      "location_kind": "page",
+      "page": 24
+     }
+    ]
+   ],
+   "must_preserve": [
+    "“稳步推进……建设”",
+    "772GWh 为产能",
+    "321GWh 为在建产能",
+    "期末时点"
+   ],
+   "must_not_assert": [
+    "匈牙利工厂或印尼项目已投产",
+    "海外基地已贡献产量",
+    "321GWh 为已投产产能",
+    "772GWh 为2025年产量"
+   ],
+   "reason": "产能叙述全部是进行时/存量口径；“推进建设”写成“建成投产”即 planned/actual 错引。"
+  },
+  {
+   "id": "revenue-table-same-page",
+   "importance": "normal",
+   "target_kind": "correctness_if_emitted",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "营业收入合计 423,701,834 100.00% 362,012,554 100.00% 17.04%",
+      "location_kind": "page",
+      "page": 24
+     }
+    ]
+   ],
+   "must_preserve": [
+    "单位：千元",
+    "2025年 vs 2024年",
+    "17.04% 为同比"
+   ],
+   "must_not_assert": [
+    "营业收入单位为元或万元",
+    "把占比列当同比增速",
+    "把423,701,834当元"
+   ],
+   "reason": "同一物理页下半为收入构成表（单位千元）；摘要若引用收入数字必须落到本表并核对单位。"
+  }
+ ],
+ "misread_traps": [
+  {
+   "page": 24,
+   "kind": "mixed_narrative_and_table",
+   "note": "p24 上半为供应链/产能/可持续叙述，下半为营业收入构成表（单位：千元）；叙述与表格混同页，借数风险高。",
+   "exact_quote": "单位：千元"
+  },
+  {
+   "page": 24,
+   "kind": "tense",
+   "note": "“稳步推进……建设”为进行时；同段项目名（匈牙利工厂、印尼电池产业链）容易被误读为已完工资产。"
+  }
+ ],
+ "prior_use": "同上（同一原件第二个case）",
+ "notes": "与 du10gs-cn-annual-catl-industry 共用同一原件（不同命题）；新增证据为项目进度+混表页。",
+ "quote_budget_chars_normalized": 134,
+ "bound_failure_mode_check": "planned/actual（在建≠投产）；叙述与财务表同页借数"
+}

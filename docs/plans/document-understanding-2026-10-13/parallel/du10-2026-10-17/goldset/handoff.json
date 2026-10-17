@@ -1,0 +1,211 @@
+{
+ "schema_version": "du-handoff/1",
+ "lane": "du10-cwp-summary-goldset",
+ "package_id": "DU10-CWP-SUMMARY-GOLDSET",
+ "status": "COMPLETE",
+ "repository": "C:/Users/郑曾波/Projects/company-wiki-du10-summary-goldset",
+ "branch": "codex/du10-cwp-summary-goldset",
+ "base_sha": "900dbf6489f3b995a0bfb7fcbb8a001a68df241d",
+ "head_sha": "46b0a3cd0f240967e42ef61755f8e3fc718c90d8",
+ "implementation_commits": [
+  "5747dc07b21fae34db7c04048b282d51e9c88591",
+  "45d7f3635e1c4be9e6625e4c362c855a5d5df285",
+  "46b0a3cd0f240967e42ef61755f8e3fc718c90d8"
+ ],
+ "changed_files": [
+  {
+   "path": "cases/du10gs-call-miniso-q4-2024.json",
+   "sha256": "12ecafb675acf0bcc05cbbe9232c49a360dd87f294ac21ca0032abc0d76bceec"
+  },
+  {
+   "path": "cases/du10gs-cn-annual-catl-capacity.json",
+   "sha256": "5e4b9bf294b9506e372ac2d4b6e88f37c7e561933cf7b295cc7df2a764ce9179"
+  },
+  {
+   "path": "cases/du10gs-cn-annual-catl-industry.json",
+   "sha256": "ef0f3704fff5e4a8ad1c8836b2d52bcb02f1595780333cd8d2606efddb1bbc58"
+  },
+  {
+   "path": "cases/du10gs-cn-convbond-mlkw.json",
+   "sha256": "27988c3ba23cd19ea9906ae9302faf017352b0473c9be66ebc990eb24aa496a8"
+  },
+  {
+   "path": "cases/du10gs-cn-interim-sugon.json",
+   "sha256": "7c58a68161697c08c3f1f49892aa2b32348a4cafa950a5f683cc5a712e34a810"
+  },
+  {
+   "path": "cases/du10gs-cn-ipo-hrjc.json",
+   "sha256": "5502d0f67658f748db01675e5850cb94494f700314cc05ad8d86d65a931009ba"
+  },
+  {
+   "path": "cases/du10gs-cn-ir-amec-minutes.json",
+   "sha256": "a7b24235d4eae01e9559e72601bed637eaa8ebae9f53385747f966015c80051e"
+  },
+  {
+   "path": "cases/du10gs-cn-q3-dfc.json",
+   "sha256": "ae607ca2af4ac07700c09829afdfc71b67ff58666627faf59f14f47074f77de2"
+  },
+  {
+   "path": "cases/du10gs-hk-interim-miniso.json",
+   "sha256": "c1b140f7ad913801a89210c9e3ac7e6e0edc29dcf66699cb16edff42070c1e5f"
+  },
+  {
+   "path": "cases/du10gs-hk-ipo-baba.json",
+   "sha256": "9cfbe14e6414bda3f82d5697ba1e5fa5c1caf04021b6c8bc25813d087bb25b0c"
+  },
+  {
+   "path": "cases/du10gs-us-10q-vrsk.json",
+   "sha256": "3929c250d7d6f76c974f2834c40f9493457ad439d3f27bb988a196367ff35070"
+  },
+  {
+   "path": "cases/index.json",
+   "sha256": "8982b90f3eaafc86ef30117d3866f00ae83347ede21c7bd04a87ca54f6a56102"
+  },
+  {
+   "path": "findings.md",
+   "sha256": "2ff7e23e4597ac646ec6cdb4ecdf6b947d1b1c1bcbf95960bf70c56911199cda"
+  },
+  {
+   "path": "progress.md",
+   "sha256": "0ad101dde094ae031397808069c71b43efc18fb79457e080812bc10afd7a1f9a"
+  },
+  {
+   "path": "receipts/anchor_verify_author_run.json",
+   "sha256": "aca9e64b6d52a1cc258409455f8032d6fa0ef719ea8780853bf8ddd32dce1465"
+  },
+  {
+   "path": "receipts/anchor_verify_repair_run.json",
+   "sha256": "06d3a6a933b0c160c36caa511944f2be2fb0f592a2577b928f410ab49d508542"
+  },
+  {
+   "path": "receipts/build_cases_node_b.py",
+   "sha256": "6ef0afd07b7d0d2436225341269b17ae88ba2f84ea27a4fc1df269871f638e0d"
+  },
+  {
+   "path": "receipts/node_a_freeze.json",
+   "sha256": "24d91d0966a818e10c90ad79d7c8a2391d58802c27fc9a0bf924b09eff97fd59"
+  },
+  {
+   "path": "receipts/node_b_tests.json",
+   "sha256": "e14d772eae4e27a662d81494f30770ca42340c88ee7c76e82ba094c3a0124bba"
+  },
+  {
+   "path": "receipts/node_c_anchor_verify_reviewer_run.json",
+   "sha256": "cdd3119258d58bbb1a35dec75ff8b6c231afc2fdaff112ad6f5df1a3194aa988"
+  },
+  {
+   "path": "receipts/node_c_independent_review.json",
+   "sha256": "e663069466e0eba54cdabaf2e943d7be1cf77dd17f4e66a83ac9daabcbb9c552"
+  },
+  {
+   "path": "receipts/node_c_independent_review.md",
+   "sha256": "f6d194c01c5fadcc75acc593e493edf32c4b5acd8a5ce87f99d4276b86949076"
+  },
+  {
+   "path": "receipts/node_c_repair_review.json",
+   "sha256": "8c0ab16f3e273baf96735986b47f4f3e87f45a4531a537cc49125dbc459354d9"
+  },
+  {
+   "path": "receipts/node_c_repair_review.md",
+   "sha256": "1f7954fea59c0f4efe5279914a162c89f10c1d145490a50cd3d32a9b73a88478"
+  },
+  {
+   "path": "receipts/node_c_repair_verify.json",
+   "sha256": "225791a1f95120624e85a23fe050d62a5e61b7389fff75b822dca1c935c2f283"
+  },
+  {
+   "path": "task_plan.md",
+   "sha256": "0a20d052c1c81aa8492221e30a9c69f7d3a8c3181a592af5f023fa6d7ef26f74"
+  },
+  {
+   "path": "tests/_support.py",
+   "sha256": "c3f44c2105ec714fdde8228841bad4ccebd14094e1000ec240ea48c49b9f65b3"
+  },
+  {
+   "path": "tests/test_goldset_structure.py",
+   "sha256": "d23235002c789041ffe7100b5fceddcd40f66ab4edaac0b9d8b4fcf420390e11"
+  },
+  {
+   "path": "tests/verify_anchors.py",
+   "sha256": "7dbec0ac0aac476a4311449757caffe199d6ea414a0d5229b6ebe5fc419c241e"
+  }
+ ],
+ "tests": [
+  {
+   "command": "python -B -X utf8 -m pytest \"docs/plans/document-understanding-2026-10-13/parallel/du10-2026-10-17/goldset/tests\" -q --ignore-glob \"*verify_anchors*\"",
+   "exit_code": 0,
+   "result": "58 passed"
+  },
+  {
+   "command": "python -B -X utf8 tests/verify_anchors.py --bindings \"<machine-local-bindings>\" --output receipts/anchor_verify_repair_run.json",
+   "exit_code": 0,
+   "result": "11/11 PASS"
+  }
+ ],
+ "findings": [
+  {
+   "id": "I1",
+   "root_cause": "baba must_preserve[2] incorrectly stated 8.60亿 included 蚂蚁金服 (actually 9.60亿 Chinese user metric includes 蚂蚁金服; 8.60亿 is China consumption 7.30 + International 1.30 only)",
+   "fixed_in": "45d7f363",
+   "test": "node_c_repair_review verified against source p19"
+  },
+  {
+   "id": "I2",
+   "root_cause": "AMEC allowed_summary[2] merged XD RIE (将很快) and YDRIE (一年左右) timelines",
+   "fixed_in": "45d7f363",
+   "test": "node_c_repair_review verified against source p3"
+  },
+  {
+   "id": "I3",
+   "root_cause": "MINISO call speaker title said 董事长 but transcript self-identifies as 创始人兼首席执行官",
+   "fixed_in": "45d7f363",
+   "test": "node_c_repair_review verified against source p1"
+  },
+  {
+   "id": "I4",
+   "root_cause": "VRSK boundary parenthetical cited ungrounded segment names (energy/specialized markets); actual disaggregation shows Underwriting+Claims=$782.6M = total",
+   "fixed_in": "45d7f363",
+   "test": "node_c_repair_review verified against disaggregation table"
+  }
+ ],
+ "independent_review": {
+  "reviewer_id": "independent-agent (first-pass + repair re-review)",
+  "reviewed_head": "46b0a3cd0f240967e42ef61755f8e3fc718c90d8",
+  "result": "PASS",
+  "reports": [
+   "receipts/node_c_independent_review.md",
+   "receipts/node_c_repair_review.md"
+  ],
+  "unresolved": []
+ },
+ "cleanup": {
+  "owned_temp_restored": true,
+  "raw_sha_unchanged": true,
+  "owned_temp_note": "No temp files created during A/B/C; pytest uses read-only case JSON; verify_anchors writes only receipts/"
+ },
+ "provider_calls": 0,
+ "remaining": [],
+ "coverage": {
+  "case_count": 11,
+  "unique_originals": 10,
+  "markets": [
+   "CN",
+   "HK",
+   "US"
+  ],
+  "doc_types": [
+   "annual_report",
+   "interim_report",
+   "quarterly_report",
+   "ipo_prospectus",
+   "convertible_bond_prospectus",
+   "ir_minutes",
+   "call_transcript",
+   "form_10q"
+  ],
+  "not_available": [
+   "new CN/US earnings call TXT (only CWP-configured-root TXT already covered by us-txt gold; ET repo outside card boundary)",
+   "new HK quarterly announcement (du5 kingsoft coverage exists)"
+  ]
+ }
+}

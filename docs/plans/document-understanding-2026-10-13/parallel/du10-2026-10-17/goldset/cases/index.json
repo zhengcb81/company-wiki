@@ -1,0 +1,130 @@
+{
+ "schema_version": "du10-summary-goldset-index/1",
+ "card": "DU10-CWP-SUMMARY-GOLDSET",
+ "created": "2026-10-17",
+ "case_count": 11,
+ "unique_originals": 10,
+ "cases": [
+  {
+   "case_id": "du10gs-cn-annual-catl-industry",
+   "file": "cases/du10gs-cn-annual-catl-industry.json",
+   "market": "CN",
+   "doc_type": "annual_report",
+   "narrative_focus": "industry_change",
+   "source_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+   "quote_budget_chars_normalized": 190
+  },
+  {
+   "case_id": "du10gs-cn-annual-catl-capacity",
+   "file": "cases/du10gs-cn-annual-catl-capacity.json",
+   "market": "CN",
+   "doc_type": "annual_report",
+   "narrative_focus": "project_progress",
+   "source_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+   "quote_budget_chars_normalized": 134
+  },
+  {
+   "case_id": "du10gs-cn-interim-sugon",
+   "file": "cases/du10gs-cn-interim-sugon.json",
+   "market": "CN",
+   "doc_type": "interim_report",
+   "narrative_focus": "main_business",
+   "source_sha256": "8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+   "quote_budget_chars_normalized": 178
+  },
+  {
+   "case_id": "du10gs-cn-q3-dfc",
+   "file": "cases/du10gs-cn-q3-dfc.json",
+   "market": "CN",
+   "doc_type": "quarterly_report",
+   "narrative_focus": "main_business",
+   "source_sha256": "980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+   "quote_budget_chars_normalized": 124
+  },
+  {
+   "case_id": "du10gs-cn-ipo-hrjc",
+   "file": "cases/du10gs-cn-ipo-hrjc.json",
+   "market": "CN",
+   "doc_type": "ipo_prospectus",
+   "narrative_focus": "industry_change+project_plan",
+   "source_sha256": "e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+   "quote_budget_chars_normalized": 265
+  },
+  {
+   "case_id": "du10gs-cn-convbond-mlkw",
+   "file": "cases/du10gs-cn-convbond-mlkw.json",
+   "market": "CN",
+   "doc_type": "convertible_bond_prospectus",
+   "narrative_focus": "new_business+project_plan",
+   "source_sha256": "9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+   "quote_budget_chars_normalized": 149
+  },
+  {
+   "case_id": "du10gs-cn-ir-amec-minutes",
+   "file": "cases/du10gs-cn-ir-amec-minutes.json",
+   "market": "CN",
+   "doc_type": "ir_minutes",
+   "narrative_focus": "industry_change+new_business",
+   "source_sha256": "9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+   "quote_budget_chars_normalized": 301
+  },
+  {
+   "case_id": "du10gs-hk-ipo-baba",
+   "file": "cases/du10gs-hk-ipo-baba.json",
+   "market": "HK",
+   "doc_type": "ipo_prospectus",
+   "narrative_focus": "overseas+main_business",
+   "source_sha256": "7ae21e7f811d1b74eb0f9e04973c269fd0603d8a2950c173aedd5a246f671fc0",
+   "quote_budget_chars_normalized": 158
+  },
+  {
+   "case_id": "du10gs-hk-interim-miniso",
+   "file": "cases/du10gs-hk-interim-miniso.json",
+   "market": "HK",
+   "doc_type": "interim_report",
+   "narrative_focus": "overseas",
+   "source_sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+   "quote_budget_chars_normalized": 273
+  },
+  {
+   "case_id": "du10gs-call-miniso-q4-2024",
+   "file": "cases/du10gs-call-miniso-q4-2024.json",
+   "market": "HK",
+   "doc_type": "call_transcript",
+   "narrative_focus": "overseas+management_plan",
+   "source_sha256": "dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+   "quote_budget_chars_normalized": 226
+  },
+  {
+   "case_id": "du10gs-us-10q-vrsk",
+   "file": "cases/du10gs-us-10q-vrsk.json",
+   "market": "US",
+   "doc_type": "form_10q",
+   "narrative_focus": "main_business",
+   "source_sha256": "8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+   "quote_budget_chars_normalized": 456
+  }
+ ],
+ "coverage_matrix": {
+  "CN": [
+   "annual_report",
+   "interim_report",
+   "quarterly_report",
+   "ipo_prospectus",
+   "convertible_bond_prospectus",
+   "ir_minutes"
+  ],
+  "HK": [
+   "ipo_prospectus",
+   "interim_report",
+   "call_transcript"
+  ],
+  "US": [
+   "form_10q"
+  ],
+  "not_available_new": [
+   "CN call TXT new original (only CWP-local TXT already covered by us-txt; ET repo outside repo boundary)",
+   "HK quarterly announcement new original (du5 kingsoft coverage exists)"
+  ]
+ }
+}

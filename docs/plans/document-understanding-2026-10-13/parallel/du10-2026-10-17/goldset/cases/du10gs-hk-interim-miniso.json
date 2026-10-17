@@ -1,0 +1,218 @@
+{
+ "schema_version": "du10-summary-goldset-case/1",
+ "case_id": "du10gs-hk-interim-miniso",
+ "created": "2026-10-17",
+ "market": "HK",
+ "company": "名创优品",
+ "doc_type": "interim_report",
+ "carrier": ".pdf",
+ "language": "bilingual-en-zh-Hant",
+ "narrative_focus": "overseas",
+ "bound_failure_mode": "存量 vs 净增；品牌口径 vs 集团口径",
+ "source_ref": {
+  "carrier_root": "dropbox_stock",
+  "source_id": "消费品/名创优品/2025半年报（港股）.pdf",
+  "source_sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+  "mime_type": "application/pdf",
+  "registered_sidecar": null
+ },
+ "summary_proposition": "截至2025年6月30日，名创优品品牌海外市场拥有579家直营店、425家名创合伙人门店与2,303家代理门店（海外直营期初503家、期内净增76家）；集团层面直营店总数637家（2024年6月30日为393家）。",
+ "allowed_summary": [
+  "截至2025年6月30日，名创优品品牌在海外市场拥有579家直营店、425家名创合伙人门店与2,303家代理门店；海外直营店期内净增76家（期初503家）。",
+  "集团层面直营门店总数由2024年6月30日的393家增至2025年6月30日的637家。"
+ ],
+ "summary_guidance": {
+  "must_preserve": [
+   "期末存量与期内净增分开",
+   "名创优品品牌+海外市场 vs 集团层面两种口径",
+   "截至日期",
+   "三种门店模式分列"
+  ],
+  "boundary": [
+   "不得把海外三模式相加写成全球门店总数",
+   "637不得写成海外直营（海外直营579）",
+   "净增不得写成新开门店数（无闭店拆分不得推断）"
+  ]
+ },
+ "facts": [
+  {
+   "id": "overseas-store-mix",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "截至2025年6月30日，名創優品品牌在海外市場",
+      "location_kind": "page",
+      "page": 14
+     },
+     {
+      "exact_quote": "579家直營店，425家名創合夥人門店與",
+      "location_kind": "page",
+      "page": 14
+     },
+     {
+      "exact_quote": "2,303家代理門店",
+      "location_kind": "page",
+      "page": 14
+     }
+    ]
+   ],
+   "must_preserve": [
+    "截至2025年6月30日（期末存量）",
+    "579/425/2,303 三模式分列",
+    "名创优品品牌+海外市场范围"
+   ],
+   "must_not_assert": [
+    "全球门店总数",
+    "含中国门店",
+    "含TOP TOY门店",
+    "三数相加当全球总数"
+   ],
+   "reason": "海外门店三模式存量；范围（品牌+海外）与时点绑定。"
+  },
+  {
+   "id": "overseas-direct-store-flow",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "期初門店數量",
+      "location_kind": "page",
+      "page": 14
+     },
+     {
+      "exact_quote": "期內門店數量的淨增加",
+      "location_kind": "page",
+      "page": 14
+     },
+     {
+      "exact_quote": "503",
+      "location_kind": "page",
+      "page": 14
+     },
+     {
+      "exact_quote": "76",
+      "location_kind": "page",
+      "page": 14
+     },
+     {
+      "exact_quote": "579",
+      "location_kind": "page",
+      "page": 14
+     }
+    ]
+   ],
+   "must_preserve": [
+    "期初503/净增76/期末579",
+    "净增≠新开"
+   ],
+   "must_not_assert": [
+    "新开76家（无闭店拆分不得推断）",
+    "净增76写成期末数"
+   ],
+   "reason": "门店流量结构表（期初/净增/期末三行）；存量与流量错位是已知失败现场。"
+  },
+  {
+   "id": "group-direct-stores-637",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "As of June 30, 2025,",
+      "location_kind": "page",
+      "page": 23
+     },
+     {
+      "exact_quote": "total number of directly operated stores on the group level was",
+      "location_kind": "page",
+      "page": 23
+     },
+     {
+      "exact_quote": "637, compared to 393 as of June 30, 2024",
+      "location_kind": "page",
+      "page": 23
+     }
+    ]
+   ],
+   "must_preserve": [
+    "group level（集团）",
+    "直营",
+    "637（2025-06-30）vs 393（2024-06-30）"
+   ],
+   "must_not_assert": [
+    "637为海外直营（海外直营579）",
+    "637为全部门店模式合计"
+   ],
+   "reason": "集团直营口径与p14海外品牌直营口径并存；主体范围错换是绑定失败模式。"
+  },
+  {
+   "id": "selling-expense-us-investment",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "RMB2,181.0 million",
+      "location_kind": "page",
+      "page": 23
+     },
+     {
+      "exact_quote": "increased by 43.3% year",
+      "location_kind": "page",
+      "page": 23
+     }
+    ]
+   ],
+   "must_preserve": [
+    "人民币百万元",
+    "截至2025年6月30日止六个月",
+    "43.3%为费用同比"
+   ],
+   "must_not_assert": [
+    "43.3%为收入增长",
+    "单季口径",
+    "美元单位"
+   ],
+   "reason": "费用叙述带期间与币种；美国市场为费用增长归因（strategic overseas markets such as the U.S.）。"
+  }
+ ],
+ "misread_traps": [
+  {
+   "page": 14,
+   "kind": "stock_vs_flow_table",
+   "note": "p14 表格三模式各设 期初/期内净增加/期末 三行；行错位即存量/净增混淆。",
+   "exact_quote": "期內門店數量的淨增加"
+  },
+  {
+   "page": 14,
+   "kind": "bilingual_duplication",
+   "note": "p14 同页中英双语并排（同一事实两份文本）；重复引用或双语数错位均属引文范围过宽。",
+   "exact_quote": "Store operations in overseas markets"
+  },
+  {
+   "page": 23,
+   "kind": "scope_shift",
+   "note": "p23 的637为集团直营，与p14的579（名创品牌海外直营）口径不同、数字接近，易错换。",
+   "exact_quote": "on the group level"
+  }
+ ],
+ "prior_use": "名创优品2024年报为hk-annual gold；本2025中期报告原件未被读取",
+ "notes": "110页中期报告（双语）；physical pages 14、23（PDF 1基）。无侧车（source_registered=false），解析走 dropbox_stock 根+SHA。与 hk-annual gold（2024年报）同公司不同原件；新增证据为 H1 2025 存量/净增与集团口径。",
+ "quote_budget_chars_normalized": 273,
+ "bound_failure_mode_check": "存量 vs 净增；品牌口径 vs 集团口径"
+}
