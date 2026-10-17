@@ -1,0 +1,61 @@
+............................................................................................................................................................ [ 27%]
+....s...............................F..F.................................................................... [ 46%]
+.......sss...sss............................................................... [ 60%]
+........................................................................ [ 73%]
+...................................................................... [ 85%]
+........................................................................ [ 98%]
+...........                                                              [100%]
+================================== FAILURES ===================================
+_ CallerGuardTests.test_report_asserts_the_owner_result_not_a_local_recompute _
+
+self = <test_du8_target_comparison_owner.CallerGuardTests testMethod=test_report_asserts_the_owner_result_not_a_local_recompute>
+
+    def test_report_asserts_the_owner_result_not_a_local_recompute(self) -> None:
+        """The report must consult the owner rather than derive the decision.
+    
+        The typed branch compares the published map against the owner's return
+        value. The legacy branch asks the owner to recompute from the report's
+        own scenarios and compares the decision fields row by row, which is
+        strictly stronger (see ``test_du8_owner_enforcement.py``). This guard
+        only requires that at least one such binding exists and that a local
+        band is not built; the behavioural suite is what actually enforces the
+        invariant, because three successive shape-based guards were defeated.
+        """
+        gated = self._owner_gated_requires(SCRIPTS / "revenue_report.py")
+>       self.assertTrue(
+            gated,
+            "revenue_report.py never gates a require on the owner's return "
+            "value; the comparison decision is no longer bound to the owner",
+        )
+E       AssertionError: [] is not true : revenue_report.py never gates a require on the owner's return value; the comparison decision is no longer bound to the owner
+
+tests\test_du8_target_comparison_owner.py:375: AssertionError
+______ CallerGuardTests.test_report_gates_the_typed_branch_on_the_owner _______
+
+self = <test_du8_target_comparison_owner.CallerGuardTests testMethod=test_report_gates_the_typed_branch_on_the_owner>
+
+    def test_report_gates_the_typed_branch_on_the_owner(self) -> None:
+        """The typed branch compares the published map against the owner.
+    
+        The legacy branch is verified differently and more strongly: it asks the
+        owner to recompute from the report's own scenarios and then compares the
+        decision fields row by row (see
+        ``test_du8_owner_enforcement.py``). Counting owner-shaped ``require``
+        sites is exactly the static heuristic that adversarial review defeated
+        three times, so only the typed branch is checked structurally here and
+        the real enforcement lives in the behavioural suite.
+        """
+        gated = self._owner_gated_requires(SCRIPTS / "revenue_report.py")
+>       self.assertTrue(
+            gated,
+            "revenue_report.py never gates a require on the owner's return "
+            "value; the comparison decision is no longer bound to the owner",
+        )
+E       AssertionError: [] is not true : revenue_report.py never gates a require on the owner's return value; the comparison decision is no longer bound to the owner
+
+tests\test_du8_target_comparison_owner.py:422: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_du8_target_comparison_owner.py::CallerGuardTests::test_report_asserts_the_owner_result_not_a_local_recompute
+FAILED tests/test_du8_target_comparison_owner.py::CallerGuardTests::test_report_gates_the_typed_branch_on_the_owner
+2 failed, 559 passed, 7 skipped, 163 subtests passed in 26.57s
+

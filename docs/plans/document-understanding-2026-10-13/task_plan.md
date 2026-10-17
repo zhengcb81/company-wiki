@@ -1,3 +1,21 @@
+## DU8 RF对比外包已接收并发布 — 2026-10-17（最新）
+
+作者8845bc18完整历史并入RF main/origin c984a8fa，ROOT共因修复b41dceef。最终28相关套件558PASS/7SKIP＋163subtests、26.09秒；独审PASS/0未解决、12SHA绑定；正常pre-push416PASS＋36subtests，精确CI39016431219 SUCCESS。三份安装各4文件定点同步，6正常运行/6篡改拒绝通过。既有main告警WIP与147个output未变，作者工区只读。见[最终接收与具体修复](review/du8_rf_reception.md)。不是对作者旧冻结声明/旧收据盲签；删除3项重复AST表达式门禁，保留所有关键行为/数字gold，修复bool/null类型共因。
+
+**Next Step：** 返回ROOT默认深页实施：原生导航/唯一matcher/POLICY+PLANNER与同一WorkBudget/source单parse生产装配，然后真实PDF深页、配置供应商正式摘要、缓存恢复和holdout。RF组件已完成，CWP生产验收仍OPEN。ET继续外包；旧du8-du9定时任务不存在，未重建，不宣称仍在巡查。
+
+---
+
+## DU8 RF 对比任务最终接收 — 2026-10-17（最新）
+
+用户确认RF对比外包完成。作者HEAD8845bc18、树干净；相对当前RF main0feea9b0仅35条本卡工程/测试/文档路径。已修正原“源码冻结”的虚假口径为“发布输出不变”，但MD顶部仍指67b15a60最终、JSON implementation_commits未含05b1f38f/8845bc18，旧125/504收据不能当最新版本验证。本次以实际最终源重新验收，不再等待作者补小签收。
+
+**顺序：** A核对最终范围/既有RED/发布兼容及主仓WIP；B独立ROOT接收工区保留完整历史，集中比较/报告/季度/typed邻域测试和隔离CLI，独立agent对实际最终SHA审查；发现共因先RED再修，不为实现改gold；C正常commit/push、精确远端CI、定点技能同步并更新本母PWF。作者工区只读，RF main告警三文件及output保持，不涉ET/Dayu/IQS/CWP生产代码。此RF接收不宣称CWP深页/真实摘要已完成。
+
+**Next Step：** 创建RF主线基线的ROOT独立接收工区，并合入作者完整历史后一次集中测试。主仓CodeGraph可用但作者未初始化；不为查询初始化只读作者工区。RF仓无AGENTS.md，读取未找到已记录，不据此修改规范。
+
+---
+
 ## PLANNER组件与POLICY联调已验收 — 2026-10-17（最新）
 
 完整作者历史e4f946a2已合本地主线f4ef8531；ROOT共因修复a4ca0a85，独审PASS/0未解决、11SHA无变化。修复更紧请求限导致后部饥饿和同页嵌套fine被配额归因吞掉，未增限额或许可链。ROOT集中796PASS/17SKIP（25.46秒），独立55PASS及9控例PASS；原RED与64/64 gold保留。见[最终接收](review/du9_planner_reception.md)。正常推送master/origin c300e801已完成，pre-push6336PASS/24SKIP、311.06秒；精确[CI39008113871](https://github.com/zhengcb81/company-wiki/actions/runs/39008113871) SUCCESS，发布收据已保存。

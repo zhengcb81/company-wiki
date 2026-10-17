@@ -1,0 +1,24 @@
+{
+  "checks": [
+    {
+      "installation": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "exit_code": 0,
+      "output": "2 model validations +2 tamper rejections PASS; installed modules confirmed\n"
+    },
+    {
+      "installation": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "exit_code": 0,
+      "output": "2 model validations +2 tamper rejections PASS; installed modules confirmed\n"
+    },
+    {
+      "installation": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "exit_code": 0,
+      "output": "2 model validations +2 tamper rejections PASS; installed modules confirmed\n"
+    }
+  ],
+  "normal_models": 6,
+  "tamper_rejections": 6,
+  "owned_temp_removed": true,
+  "sentinel_unchanged": true,
+  "supplier_calls": 0
+}

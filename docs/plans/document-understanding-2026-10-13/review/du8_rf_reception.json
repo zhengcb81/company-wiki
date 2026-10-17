@@ -1,0 +1,41 @@
+{
+  "schema_version": "du8-rf-root-reception/1",
+  "status": "ACCEPTED_PUBLISHED_CI_SUCCESS",
+  "author_final_commit": "8845bc180efaf8b1638ee2056e5152014b425dd5",
+  "root_source_commit": "b41dceef6479af29e0063c439508e3710ed34c01",
+  "publication": {
+    "schema_version": "du8-rf-publication/1",
+    "status": "ENGINEERING_PUBLISHED_CI_SUCCESS",
+    "published_commit": "c984a8fafc2a1e4d46d47d5f4fd7e9ba8f13d105",
+    "source_commit": "b41dceef6479af29e0063c439508e3710ed34c01",
+    "branch": "main",
+    "normal_push": true,
+    "hooks_skipped": false,
+    "local_gate": {
+      "passed": 416,
+      "subtests": 36,
+      "seconds": 36.9
+    },
+    "ci": {
+      "id": 39016431219,
+      "name": "quality",
+      "head_sha": "c984a8fafc2a1e4d46d47d5f4fd7e9ba8f13d105",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/39016431219",
+      "created_at": "2026-10-17T08:11:31Z",
+      "updated_at": "2026-10-17T08:12:20Z",
+      "checked_at_utc": "2026-10-17T08:13:46.464413+00:00"
+    },
+    "installed_sync_receipt": "install-sync.json",
+    "installed_smoke_receipt": "installed-smoke.json",
+    "original_main_wip_preserved": true,
+    "author_tree_read_only": true,
+    "supplier_calls": 0
+  },
+  "final_concentrated": "558PASS/7SKIP;163subtests;26.09s",
+  "independent_review": "du8_rf_root_review.json",
+  "unresolved_count": 0,
+  "remaining": "CWP native navigation/matcher/source single-parse production and real PDF summaries remain OPEN; DU9 ET final handoff still external",
+  "cleanup": "OWNED_ROOT_WORKTREE_REMOVED; three original main WIP SHA and147output metadata unchanged; author original tree kept"
+}

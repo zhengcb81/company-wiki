@@ -1,0 +1,10 @@
+{
+  "main_original_wip_and_output_unchanged": true,
+  "author_head_and_clean_unchanged": true,
+  "owned_worktree_files": 48019,
+  "owned_worktree_bytes": 866229187,
+  "owned_worktree_removed": true,
+  "removed_worktree": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-du8-root-reception",
+  "remove_method": "git worktree remove after exact path/clean/ancestor verification; no force; author tree preserved",
+  "completed_at_utc": "2026-10-17T08:18:53.718307+00:00"
+}

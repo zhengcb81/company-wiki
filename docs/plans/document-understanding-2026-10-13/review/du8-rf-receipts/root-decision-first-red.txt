@@ -1,0 +1,1437 @@
+FFFFFFFFFFFFFFFFFFFFF....FFFFFFFFFFFFFFFFFFFFFFFF....FFF.                [100%]
+================================== FAILURES ===================================
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-constrained] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75F81CD0>
+name = 'constrained', replacement_kind = 'integer', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-legacy_annual] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75F822C0>
+name = 'legacy_annual', replacement_kind = 'integer', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-legacy_approximately] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75E297F0>
+name = 'legacy_approximately', replacement_kind = 'integer', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-legacy_cumulative] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F760158C0>
+name = 'legacy_cumulative', replacement_kind = 'integer', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-typed_growth] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F76016360>
+name = 'typed_growth', replacement_kind = 'integer', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-typed_level] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75FB7050>
+name = 'typed_level', replacement_kind = 'integer', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-typed_quarterly] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75FB7250>
+name = 'typed_quarterly', replacement_kind = 'integer', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-constrained] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac7')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F760049B0>
+name = 'constrained', replacement_kind = 'float', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-legacy_annual] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F760B8B90>
+name = 'legacy_annual', replacement_kind = 'float', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-legacy_approximately] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac9')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75E1C130>
+name = 'legacy_approximately', replacement_kind = 'float', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-legacy_cumulative] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac10')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75E1C050>
+name = 'legacy_cumulative', replacement_kind = 'float', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-typed_growth] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac11')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75F71E60>
+name = 'typed_growth', replacement_kind = 'float', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-typed_level] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac12')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75D64E90>
+name = 'typed_level', replacement_kind = 'float', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-typed_quarterly] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac13')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75D656D0>
+name = 'typed_quarterly', replacement_kind = 'float', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-constrained] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac14')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F760015A0>
+name = 'constrained', replacement_kind = 'string', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management coverage/input binding mismatch'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-legacy_annual] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac15')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F76001DE0>
+name = 'legacy_annual', replacement_kind = 'string', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management coverage/input binding mismatch'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-legacy_approximately] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac16')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F760E4550>
+name = 'legacy_approximately', replacement_kind = 'string', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management coverage/input binding mismatch'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-legacy_cumulative] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac17')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F760E5F90>
+name = 'legacy_cumulative', replacement_kind = 'string', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management coverage/input binding mismatch'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-typed_growth] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac18')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75ED9EB0>
+name = 'typed_growth', replacement_kind = 'string', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-typed_level] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac19')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F76115050>
+name = 'typed_level', replacement_kind = 'string', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-typed_quarterly] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac20')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F760DCBD0>
+name = 'typed_quarterly', replacement_kind = 'string', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-null-typed_growth] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac25')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F76110440>
+name = 'typed_growth', replacement_kind = 'null', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-null-typed_level] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac26')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F7615F0E0>
+name = 'typed_level', replacement_kind = 'null', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-null-typed_quarterly] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac27')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F7615EF20>
+name = 'typed_quarterly', replacement_kind = 'null', input_bound = False
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-constrained] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac28')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761F6350>
+name = 'constrained', replacement_kind = 'integer', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-legacy_annual] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac29')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F762380C0>
+name = 'legacy_annual', replacement_kind = 'integer', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-legacy_approximately] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac30')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F76239710>
+name = 'legacy_approximately', replacement_kind = 'integer', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-legacy_cumulative] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac31')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761F7070>
+name = 'legacy_cumulative', replacement_kind = 'integer', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-typed_growth] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac32')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F7623BF50>
+name = 'typed_growth', replacement_kind = 'integer', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-typed_level] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac33')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761F6B30>
+name = 'typed_level', replacement_kind = 'integer', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-typed_quarterly] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac34')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F76238FA0>
+name = 'typed_quarterly', replacement_kind = 'integer', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-constrained] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac35')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F76238EC0>
+name = 'constrained', replacement_kind = 'float', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-legacy_annual] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac36')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761F6B30>
+name = 'legacy_annual', replacement_kind = 'float', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-legacy_approximately] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac37')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761F6580>
+name = 'legacy_approximately', replacement_kind = 'float', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-legacy_cumulative] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac38')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761F60B0>
+name = 'legacy_cumulative', replacement_kind = 'float', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-typed_growth] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac39')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761F5240>
+name = 'typed_growth', replacement_kind = 'float', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-typed_level] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac40')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761F4A60>
+name = 'typed_level', replacement_kind = 'float', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-typed_quarterly] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac41')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761F6200>
+name = 'typed_quarterly', replacement_kind = 'float', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ForecastInputError
+
+tests\test_du8_root_decision_wire.py:48: Failed
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-constrained] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac42')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761F44B0>
+name = 'constrained', replacement_kind = 'string', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management coverage/input binding mismatch'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-legacy_annual] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac43')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F75F8AE40>
+name = 'legacy_annual', replacement_kind = 'string', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management coverage/input binding mismatch'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-legacy_approximately] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac44')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F7615C130>
+name = 'legacy_approximately', replacement_kind = 'string', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management coverage/input binding mismatch'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-legacy_cumulative] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac45')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F76111470>
+name = 'legacy_cumulative', replacement_kind = 'string', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management coverage/input binding mismatch'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-typed_growth] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac46')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F761134D0>
+name = 'typed_growth', replacement_kind = 'string', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-typed_level] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac47')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F760C0C90>
+name = 'typed_level', replacement_kind = 'string', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-typed_quarterly] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac48')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F7623A510>
+name = 'typed_quarterly', replacement_kind = 'string', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-null-typed_growth] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac53')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F7630A7B0>
+name = 'typed_growth', replacement_kind = 'null', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-null-typed_level] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac54')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F7630AB30>
+name = 'typed_level', replacement_kind = 'null', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+_ test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-null-typed_quarterly] _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/du8-decision-red-megr69ua/pytest/test_decision_cannot_be_replac55')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029F7630B230>
+name = 'typed_quarterly', replacement_kind = 'null', input_bound = True
+
+    @pytest.mark.parametrize("name", sorted(FACTORIES))
+    @pytest.mark.parametrize("replacement_kind", ["integer", "float", "string", "null"])
+    @pytest.mark.parametrize("input_bound", [False, True])
+    def test_decision_cannot_be_replaced_by_equal_or_truthy_json_value(
+        tmp_path, monkeypatch, name, replacement_kind, input_bound,
+    ):
+        monkeypatch.setenv("REVENUE_PUBLICATION_REGISTRY", str(tmp_path / "registry.jsonl"))
+        data = FACTORIES[name]()
+        result = run_forecast(data)
+        validate_forecast_output(result, data if input_bound else None)
+        row = next(iter(result["management_target_coverage"]["targets"][0]["scenario_comparison"].values()))
+        assert type(row["meets_target"]) is bool
+        original = row["meets_target"]
+        row["meets_target"] = {
+            "integer": int(original), "float": float(original),
+            "string": "true" if original else "", "null": None,
+        }[replacement_kind]
+>       with pytest.raises(ForecastInputError, match="meets_target"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'meets_target'
+E         Actual message: 'typed management target comparison recomputation mismatch: five_year_revenue_goal'
+
+tests\test_du8_root_decision_wire.py:48: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-constrained]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-legacy_annual]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-legacy_approximately]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-legacy_cumulative]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-typed_growth]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-typed_level]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-integer-typed_quarterly]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-constrained]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-legacy_annual]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-legacy_approximately]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-legacy_cumulative]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-typed_growth]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-typed_level]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-float-typed_quarterly]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-constrained]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-legacy_annual]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-legacy_approximately]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-legacy_cumulative]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-typed_growth]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-typed_level]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-string-typed_quarterly]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-null-typed_growth]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-null-typed_level]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[False-null-typed_quarterly]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-constrained]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-legacy_annual]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-legacy_approximately]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-legacy_cumulative]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-typed_growth]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-typed_level]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-integer-typed_quarterly]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-constrained]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-legacy_annual]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-legacy_approximately]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-legacy_cumulative]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-typed_growth]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-typed_level]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-float-typed_quarterly]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-constrained]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-legacy_annual]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-legacy_approximately]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-legacy_cumulative]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-typed_growth]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-typed_level]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-string-typed_quarterly]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-null-typed_growth]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-null-typed_level]
+FAILED tests/test_du8_root_decision_wire.py::test_decision_cannot_be_replaced_by_equal_or_truthy_json_value[True-null-typed_quarterly]
+48 failed, 9 passed in 2.42s
+

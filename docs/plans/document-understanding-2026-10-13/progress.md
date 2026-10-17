@@ -1,3 +1,28 @@
+## DU8 RF对比外包已接收并发布 — 2026-10-17（最新）
+
+作者8845bc18完整历史并入RF main/origin c984a8fa，ROOT共因修复b41dceef。最终28相关套件558PASS/7SKIP＋163subtests、26.09秒；独审PASS/0未解决、12SHA绑定；正常pre-push416PASS＋36subtests，精确CI39016431219 SUCCESS。三份安装各4文件定点同步，6正常运行/6篡改拒绝通过。既有main告警WIP与147个output未变，作者工区只读。见[最终接收与具体修复](review/du8_rf_reception.md)。不是对作者旧冻结声明/旧收据盲签；删除3项重复AST表达式门禁，保留所有关键行为/数字gold，修复bool/null类型共因。
+
+**Next Step：** 返回ROOT默认深页实施：原生导航/唯一matcher/POLICY+PLANNER与同一WorkBudget/source单parse生产装配，然后真实PDF深页、配置供应商正式摘要、缓存恢复和holdout。RF组件已完成，CWP生产验收仍OPEN。ET继续外包；旧du8-du9定时任务不存在，未重建，不宣称仍在巡查。
+
+---
+
+
+### DU8 RF 接收共因整改记录 — 2026-10-17
+
+ROOT工区正常完整历史合流6bd53b78，作者8845bc18保持只读；最终作者27相关套件实际504PASS/7SKIP（32.01秒），与陈旧handoff计数不混淆。独审又实证报告将数值0/1等同bool（legacy bool()弱化，typed dict==本身有Python等价陷阱），旧布尔wire可被篡改后重封hash放行。新增57项ROOT跨legacy/typed/input-bound反例；首稿48FAIL中20只是异常消息断言过窄，原日志保留；修正消息断言且尚未改工程时真实RED为28FAIL/29PASS。
+
+修复在report同一bool/null边界用owner singleton identity，typed缺base的合法null仍保持not_comparable；不复制计算公式、不更改数值/原gold、不增人工许可。集中回归与独立原探针复放进行中。RF根无AGENTS、workflow实际quality.yml（不是ci.yml），查询路径缺失非项目失败。作者CodeGraph未初始化，保持只读；改动前使用主仓索引影响查询。ROOT新临时工作树验收发布后检查清洁再移除，防止扩增资料空间；不删作者树和既有main WIP/output。
+
+## DU8 RF 对比任务最终接收 — 2026-10-17（最新）
+
+用户确认RF对比外包完成。作者HEAD8845bc18、树干净；相对当前RF main0feea9b0仅35条本卡工程/测试/文档路径。已修正原“源码冻结”的虚假口径为“发布输出不变”，但MD顶部仍指67b15a60最终、JSON implementation_commits未含05b1f38f/8845bc18，旧125/504收据不能当最新版本验证。本次以实际最终源重新验收，不再等待作者补小签收。
+
+**顺序：** A核对最终范围/既有RED/发布兼容及主仓WIP；B独立ROOT接收工区保留完整历史，集中比较/报告/季度/typed邻域测试和隔离CLI，独立agent对实际最终SHA审查；发现共因先RED再修，不为实现改gold；C正常commit/push、精确远端CI、定点技能同步并更新本母PWF。作者工区只读，RF main告警三文件及output保持，不涉ET/Dayu/IQS/CWP生产代码。此RF接收不宣称CWP深页/真实摘要已完成。
+
+**Next Step：** 创建RF主线基线的ROOT独立接收工区，并合入作者完整历史后一次集中测试。主仓CodeGraph可用但作者未初始化；不为查询初始化只读作者工区。RF仓无AGENTS.md，读取未找到已记录，不据此修改规范。
+
+---
+
 ## PLANNER组件与POLICY联调已验收 — 2026-10-17（最新）
 
 完整作者历史e4f946a2已合本地主线f4ef8531；ROOT共因修复a4ca0a85，独审PASS/0未解决、11SHA无变化。修复更紧请求限导致后部饥饿和同页嵌套fine被配额归因吞掉，未增限额或许可链。ROOT集中796PASS/17SKIP（25.46秒），独立55PASS及9控例PASS；原RED与64/64 gold保留。见[最终接收](review/du9_planner_reception.md)。正常推送master/origin c300e801已完成，pre-push6336PASS/24SKIP、311.06秒；精确[CI39008113871](https://github.com/zhengcb81/company-wiki/actions/runs/39008113871) SUCCESS，发布收据已保存。
@@ -505,3 +530,7 @@ ET 0cb71731已正常并线推送且精确远端HEAD一致，2个未跟踪原项�
 ## 2026-10-16 DU8接收
 
 FF作者C只有21/26/14PASS，完整完成仍OPEN；原15基线失败不能自动当新回归，也不能因基线存在就绕hook。AUDIT最终源码a915456，后续仅文档至3ed248df，必须接完整历史不能按旧handoff只取首feat。两作者树只读，ROOT用独立树审查和修复。
+
+### 接收收尾脚本环境错误与恢复
+
+ROOT临时工区已正常移除，但收据脚本默认GBK解码git worktree中文路径而报UnicodeDecodeError；随后cleanup-final缺失使复制和定点add失败，空commit未产生提交。改明确UTF-8只读复核后生成收据，不重复删目录、不改生产代码；原WIP继续保留并核SHA。此为ROOT收尾脚本错误，不是RF测试失败。

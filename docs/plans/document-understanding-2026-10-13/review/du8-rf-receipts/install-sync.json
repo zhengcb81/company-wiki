@@ -1,0 +1,69 @@
+{
+  "source_head": "c984a8fafc2a1e4d46d47d5f4fd7e9ba8f13d105",
+  "source_commit": "b41dceef6479af29e0063c439508e3710ed34c01",
+  "method": "baseline-checked four exact files in three existing installations; atomic replacement; no directory overwrite",
+  "files": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+      "sha256": "c157ad9f2752eb18db28e1c716403ca06faf4edc79476a3299ea133e5f843b87",
+      "bytes": 34079
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\target_comparison.py",
+      "sha256": "a3389665e6656f0b2168fa740a25faaaf950a5f689302d10c99930f50f375b2c",
+      "bytes": 10177
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "d3eeecf893fbf5e7c6faa278afe17389bfba5962f35451e36eb7828ed836162b",
+      "bytes": 88365
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\management-targets.md",
+      "sha256": "b80cc75a98802efdc831781e8bc5477fb0b0fb7b3320ef405ef3ff9a30534113",
+      "bytes": 14073
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+      "sha256": "c157ad9f2752eb18db28e1c716403ca06faf4edc79476a3299ea133e5f843b87",
+      "bytes": 34079
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\target_comparison.py",
+      "sha256": "a3389665e6656f0b2168fa740a25faaaf950a5f689302d10c99930f50f375b2c",
+      "bytes": 10177
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "d3eeecf893fbf5e7c6faa278afe17389bfba5962f35451e36eb7828ed836162b",
+      "bytes": 88365
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\references\\management-targets.md",
+      "sha256": "b80cc75a98802efdc831781e8bc5477fb0b0fb7b3320ef405ef3ff9a30534113",
+      "bytes": 14073
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\targets.py",
+      "sha256": "c157ad9f2752eb18db28e1c716403ca06faf4edc79476a3299ea133e5f843b87",
+      "bytes": 34079
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\target_comparison.py",
+      "sha256": "a3389665e6656f0b2168fa740a25faaaf950a5f689302d10c99930f50f375b2c",
+      "bytes": 10177
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_report.py",
+      "sha256": "d3eeecf893fbf5e7c6faa278afe17389bfba5962f35451e36eb7828ed836162b",
+      "bytes": 88365
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\references\\management-targets.md",
+      "sha256": "b80cc75a98802efdc831781e8bc5477fb0b0fb7b3320ef405ef3ff9a30534113",
+      "bytes": 14073
+    }
+  ],
+  "count": 12,
+  "config_output_or_unrelated_files_changed": false
+}

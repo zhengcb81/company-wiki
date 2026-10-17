@@ -11,10 +11,14 @@
       "card": "DU8-RF-COMPARISON",
       "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-du8-comparison",
       "plan": "docs/plans/du8-comparison-2026-10-16",
-      "head": "6de6a0c45bf738a295e1161f06edb6a5e3b2bdc2",
-      "status": "HANDOFF_STALE_PENDING_FINAL_REVIEW",
-      "details": "已有实现、测试与handoff；handoff冻结03f35e91并声称scripts无变化，但最新HEAD的scripts/revenue_report.py及两测试已变化（532增/63删）；最终审查/收据版本待对齐。tools/du8_freeze_recheck2.py未提交。",
-      "handoff_sha256": "a23eb78ea3dc35ff79765f13848d58467088c49df8a8968c6c9807a0f4d97b12"
+      "head": "8845bc180efaf8b1638ee2056e5152014b425dd5",
+      "status": "ROOT_ACCEPTED_PUBLISHED_CI_SUCCESS",
+      "details": "完整历史已正常发布RF main，558PASS/7SKIP、独审PASS/0未解决；精确CI成功，三份技能定点同步；CWP生产接线仍OPEN。",
+      "handoff_sha256": "a23eb78ea3dc35ff79765f13848d58467088c49df8a8968c6c9807a0f4d97b12",
+      "owner": "ROOT",
+      "external_watch": false,
+      "implementation_commit": "b41dceef6479af29e0063c439508e3710ed34c01",
+      "publication_commit": "c984a8fafc2a1e4d46d47d5f4fd7e9ba8f13d105"
     },
     {
       "card": "DU9-CWP-GEOMETRY-POLICY",
@@ -50,7 +54,7 @@
   "root_followups": [
     "FF完整41例C与完整中断重启仍OPEN，不是第五条待作者交付包；不因工程已并线把C写完成。"
   ],
-  "external_packages_remaining": 2,
+  "external_packages_remaining": 1,
   "automation_note": "2026-10-17 Codex automation_update返回该任务不存在/可能被手动删除；保留用户可能的删除意图，不重建、不声称定期巡查仍有效。",
   "acceptance_updated_at_utc": "2026-10-17T05:51:15.244496+00:00",
   "root_cwp_publication": {
