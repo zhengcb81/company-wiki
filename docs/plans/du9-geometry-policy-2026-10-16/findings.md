@@ -1,3 +1,11 @@
+## 独审发现根因及修复 — 2026-10-17
+
+独立agent /root/du9_policy_final_review 对30df8eae公开入口真实复现：新section_rules浅拷贝绕过旧_sections深拷贝，调用者改aliases/path/questions可污染全局catalog并影响后续公司profile。P1已在原registry投影处恢复每section deepcopy，统一保护全部嵌套值；新增family/fallback/overlay × 四字段12个跨调用/全局catalog不变回归，测试失败也隔离被污染catalog，避免掩盖串扰。独立首次失败收据reviewer-initial-probe.json保留。
+
+P2：原IR公开回放仅有标题和泛业务正文，真实route是generic；已用已有CN_IR_QA问答原文结构，并为全部12类回放增加expected_family强断言（unknown None）。未改生产路由或放宽原测试。修复后集中626PASS/11SKIP、10.48秒，ruff绿，等待同一独立agent对最终delta复核；614是修复前版本，不能合并计数。
+
+---
+
 ## ROOT B实现与源数据维护 — 2026-10-17
 
 A真实RED补齐：正常主机隔离Temp为55FAIL/1PASS；首次沙箱为43FAIL/1PASS/12ERROR（Temp创建失败）均保留。旧wire基线SHA在写实现前冻结。第一次B集中282PASS/1FAIL：新增测试helper给定增无实际区分正文而resolver正确保守fallback，修夹具为实际定增标题，不改变生产路由或旧测试。
