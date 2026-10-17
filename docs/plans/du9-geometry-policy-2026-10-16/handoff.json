@@ -379,5 +379,7 @@
     "P1 nested section references polluted shared catalog, restored full deepcopy; 12 cross-call family/fallback/overlay regressions",
     "P2 IR fixture routed generic, replaced with original QA structure and all 12 specific family assertions"
   ],
-  "independent_review_receipt": "receipts/reviewer-final-runs.json"
+  "independent_review_receipt": "receipts/reviewer-final-runs.json",
+  "publication_receipt": "receipts/publication.json",
+  "published_engineering_head": "bb678a718ec59e87aecd595b059fdc740ac50bd2"
 }

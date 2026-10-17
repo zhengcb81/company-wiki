@@ -1,3 +1,5 @@
+> 发布确认：master/origin bb678a71，正常pre-push6281PASS/24SKIP（409.24秒），精确CI38999581404 SUCCESS；源码6e0edeef未变，独审PASS。完整收据receipts/publication.json。PLANNER未接管，生产联调仍待交付。
+
 # DU9-CWP-GEOMETRY-POLICY — ROOT组件接收完成
 
 状态：ROOT_COMPONENT_ACCEPTED_WAIT_PLANNER。POLICY组件B/C及独立审查已完成，生产装配等待PLANNER。用户指定ROOT接手A后的B/C；原A历史已保留，PLANNER仍由原harness施工，工区未改。实现已正常提交，精确SHA见handoff.json。

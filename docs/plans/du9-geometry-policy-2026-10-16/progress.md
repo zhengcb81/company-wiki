@@ -1,3 +1,5 @@
+> 发布确认：master/origin bb678a71，正常pre-push6281PASS/24SKIP（409.24秒），精确CI38999581404 SUCCESS；源码6e0edeef未变，独审PASS。完整收据receipts/publication.json。PLANNER未接管，生产联调仍待交付。
+
 ## POLICY组件完成，等待PLANNER合流 — 2026-10-17（最终组件状态）
 
 正常实现提交30df8eae，根因修复提交6e0edeef。最终集中626PASS/11SKIP（新68项）；独立agent另跑263PASS，catalog parity/公开污染与IR反例/25组配置+11畸形反例全部通过。最终独审PASS/0未解决，33源码/测试/规范SHA已读回匹配。见handoff.md/json与review/independent_review.md/json。

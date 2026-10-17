@@ -1,3 +1,9 @@
+## POLICY发布核对 — 2026-10-17
+
+工程/交接已推送master/origin bb678a718ec59e87aecd595b059fdc740ac50bd2；正常pre-push6281PASS/24SKIP，409.24秒。fallback defaults作为配置变更触发既有全Unit范围，这是本次工程大节点检查，不新增逐材料/逐小节点门禁，也未跳hook。精确远端[CI38999581404](https://github.com/zhengcb81/company-wiki/actions/runs/38999581404) SUCCESS（03:42:10Z），不同于修复前版本或仅本地通过。见[发布收据](../du9-geometry-policy-2026-10-16/receipts/publication.json)。源码仍冻结6e0edeef，独审33SHA未变；后续仅补文档。PLANNER继续等待，生产深页和真实摘要仍OPEN。
+
+---
+
 ## POLICY组件已完成并独审，PLANNER继续等待 — 2026-10-17（当前）
 
 用户明确POLICY的A移交ROOT，已保留A历史并完成唯一catalog typed intent、registry因果来源及纯compile_geometry_policy。设计源与catalog/fallback同步，15旧profile wire SHA不变。实现30df8eae，独审发现共用嵌套引用污染和IR落generic假覆盖，已在6e0edeef根治并加12污染回归/12实际family断言。
