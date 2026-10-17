@@ -1,3 +1,9 @@
+## 当前状态 — 2026-10-17
+
+POLICY、PLANNER组件已由ROOT接收，完整历史保留；真实编译策略联调和两项共因修复独审通过。发布尚待完成，真实生产深页与正式摘要仍OPEN。详见 [ROOT接收报告](du9_planner_reception.md)。外包只剩RF/ET，保持作者工区只读。du8-du9自动任务实际不存在，未重建；下方旧巡查和等待A记录仅为历史。
+
+---
+
 > ROOT后续完成POLICY组件，最终源码6e0edeef、集中626PASS/11SKIP、独立263PASS及PASS/0未解决；见[交接](../../du9-geometry-policy-2026-10-16/handoff.md)。生产合流等待PLANNER，三条外包监测继续，不对原POLICY A工区报缺实现。
 
 > 2026-10-17用户已明确所有权：POLICY的A交给ROOT在主仓实施B/C，原A工区只读；PLANNER仍在外包施工，ROOT等待。自动跟进du8-du9已相应改为RF/PLANNER/ET三条外包。下表保留初次盘点历史，后续看JSON/current PWF及本地status，勿把POLICY停A重复报缺交付。

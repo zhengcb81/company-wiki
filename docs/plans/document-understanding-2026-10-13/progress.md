@@ -1,3 +1,29 @@
+## PLANNER组件与POLICY联调已验收 — 2026-10-17（最新）
+
+完整作者历史e4f946a2已合本地主线f4ef8531；ROOT共因修复a4ca0a85，独审PASS/0未解决、11SHA无变化。修复更紧请求限导致后部饥饿和同页嵌套fine被配额归因吞掉，未增限额或许可链。ROOT集中796PASS/17SKIP（25.46秒），独立55PASS及9控例PASS；原RED与64/64 gold保留。见[最终接收](review/du9_planner_reception.md)。正常发布与精确CI待完成，不能声称已推送。
+
+**下一步：** 正常commit/push并核对实际CI；然后ROOT按既有pdf_page_intent_implementation完成native窗口/唯一matcher/同一WorkBudget/source单parse生产装配及真实PDF深页/正式摘要/缓存恢复/holdout。组件已完成，生产验收仍OPEN。RF/ET工区不动。旧du8-du9自动任务实际不存在，未重建，不承诺持续巡查。
+
+---
+
+## PLANNER跨组件共因整改实证 — 2026-10-17
+
+完整作者历史已合本地主线，作者树只读。ROOT新增真实compile→plan→admit/JSON重放/共享WorkBudget联调，首次2FAIL/5PASS：max_pages64/max_requests2仍预留61页，前部吃完2请求使后部饥饿；同页outer only-discover+透明inner fine会只取归因outer请求，丢失inner fine。独立agent另9控例同样7PASS/2FAIL，反例未提高cap或改64/64gold。
+
+共因修复：公平可执行容量统一min(页限,请求限)；同父文同物理页仍只扣一个reservation，但合法reserved覆盖规则合并discover/fine，cancelled不提供能力。8个ROOT接口回归含取消类不能借fine、两种更紧cap、行政取消、预算已耗尽、scope去重与JSON恢复。原request-one测试纠正强制先到行政必放行的假设，改one-class独立固定夹具，仍明确quota1/花费1且不超请求限；原64/64手算gold未变。
+
+修复后六目录集中796PASS/17SKIP（25.46秒），ruff绿，未调用供应商/下载/复制原件。最终独立delta复核进行中。作者报告“几十至几百窗口亚毫秒”不作性能保证：ROOT独立实测50/300/1000窗约0.4/1.7/6.8ms/admit；暂无实际生产阻塞证据，不为此扩成性能重构或加防伪门禁。not_arrived仅表示reserved-unused，不能当未读页事实。真实深页source装配/摘要仍OPEN。
+
+---
+
+## PLANNER最终交付接收与POLICY联调 — 2026-10-17（当前）
+
+用户确认PLANNER完成。实际作者HEAD e4f946a2，工作树干净，原白名单20文件；受审源码db126f24的9个源/测试/fixture SHA与当前及Git blob均一致，独审后无代码delta。作者独审PASS/0未解决，47新测试及618邻域/17SKIP的作者收据仅作其版本证据。ROOT保持作者工区只读，接收完整提交历史到主仓，补真实POLICY→PLANNER公开接口联调和关键预算/重放/父文范围反例，再集中测试、正常发布。原公开default_intent=unknown与planner不继承缺字段兼容，不新增许可或人工签收。
+
+**本轮顺序：** A最终交付/边界核对已完成；B主线合流与真实compiled-policy/调用者共享预算联调，发现共因先独立RED再修；C必要独立delta审查、相关集中回归及正常commit/push/精确CI，并更新PWF/自动巡查。原生导航/唯一matcher/source单parse生产装配和真实PDF/正式摘要是后续具名OPEN，不把纯组件验收冒充全项目完成。RF/ET外包与Dayu/IQS均不进入。
+
+---
+
 ## POLICY发布核对 — 2026-10-17
 
 工程/交接已推送master/origin bb678a718ec59e87aecd595b059fdc740ac50bd2；正常pre-push6281PASS/24SKIP，409.24秒。fallback defaults作为配置变更触发既有全Unit范围，这是本次工程大节点检查，不新增逐材料/逐小节点门禁，也未跳hook。精确远端[CI38999581404](https://github.com/zhengcb81/company-wiki/actions/runs/38999581404) SUCCESS（03:42:10Z），不同于修复前版本或仅本地通过。见[发布收据](../du9-geometry-policy-2026-10-16/receipts/publication.json)。源码仍冻结6e0edeef，独审33SHA未变；后续仅补文档。PLANNER继续等待，生产深页和真实摘要仍OPEN。

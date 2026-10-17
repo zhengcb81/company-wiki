@@ -1,6 +1,6 @@
 {
   "schema_version": "du9-launch/1",
-  "status": "POLICY_COMPONENT_ACCEPTED_PLANNER_EXTERNAL_IN_PROGRESS",
+  "status": "CWP_COMPONENTS_ACCEPTED_PUBLICATION_PENDING",
   "lanes": [
     {
       "id": "DU9-CWP-GEOMETRY-POLICY",
@@ -10,7 +10,7 @@
       "seed_commit": "68807088ab1eb51bfd45c5d112ba601a96d7b40d",
       "plan": "docs/plans/du9-geometry-policy-2026-10-16/task_plan.md",
       "card": "du9_cwp_geometry_policy.md",
-      "status": "ROOT_COMPONENT_ACCEPTED_WAIT_PLANNER",
+      "status": "ROOT_COMPONENT_ACCEPTED_PRODUCTION_ASSEMBLY_OPEN",
       "startup_clean": true,
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "independent_review_required": true,
@@ -33,16 +33,19 @@
       "seed_commit": "cb1e4c0783c00dedd58160a458b7ad3d2405cfc2",
       "plan": "docs/plans/du9-geometry-planner-2026-10-16/task_plan.md",
       "card": "du9_cwp_geometry_planner.md",
-      "status": "IN_PROGRESS_EXTERNAL_WAIT",
+      "status": "ROOT_COMPONENT_ACCEPTED_PRODUCTION_ASSEMBLY_OPEN",
       "startup_clean": true,
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "independent_review_required": true,
-      "business_tests": "A RED only; untracked contracts/__init__; B/C pending",
+      "business_tests": "796PASS/17SKIP concentrated; independent55PASS+9controls; reviewPASS unresolved0",
       "bytes": 25056735,
-      "visible_head": "8ff47e28031270c7bf7f6fca01b582fdb680fd64",
-      "visible_import": "FAIL: missing geometry_intent.planner",
+      "visible_head": "e4f946a2bd90f6231ca7542439fdf97512efaa7e",
+      "visible_import": "MAIN public planner IMPORT_OK",
       "continuation": "CONTINUE_BC.md",
-      "root_author_writes": 0
+      "root_author_writes": 0,
+      "owner": "ROOT",
+      "implementation_commit": "a4ca0a8535d3b157e2cc7ff0dbdb8efe2ca65ee4",
+      "handoff": "docs/plans/document-understanding-2026-10-13/review/du9_planner_reception.json"
     },
     {
       "id": "DU9-ET-LEGACY-COMPARISON",

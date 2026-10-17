@@ -3,7 +3,7 @@
   "local_date": "2026-10-17",
   "automation_id": "du8-du9",
   "interval_minutes": 30,
-  "automation_status": "ACTIVE",
+  "automation_status": "NOT_FOUND_NOT_RECREATED",
   "supplier_calls": 0,
   "author_writes": false,
   "packages": [
@@ -21,8 +21,8 @@
       "workdir": "C:/Users/郑曾波/Projects/company-wiki-du9-geometry-policy",
       "plan": "docs/plans/du9-geometry-policy-2026-10-16",
       "head": "f70318f1edd3e5bfec86ae1ee0922a1ac72b59a2",
-      "status": "ROOT_COMPONENT_ACCEPTED_WAIT_PLANNER",
-      "details": "用户移交ROOT的B/C已完成，独审PASS/0未解决；原A工区只读不再等待外包，生产合流等待PLANNER。",
+      "status": "ROOT_COMPONENT_ACCEPTED_PRODUCTION_ASSEMBLY_OPEN",
+      "details": "组件已完成与独审；POLICY和PLANNER真实接口联调通过，ROOT生产接线与真实PDF摘要仍OPEN。",
       "owner": "ROOT",
       "implementation_workdir": "C:/Users/郑曾波/Projects/company-wiki",
       "external_watch": false,
@@ -32,9 +32,11 @@
       "card": "DU9-CWP-GEOMETRY-PLANNER",
       "workdir": "C:/Users/郑曾波/Projects/company-wiki-du9-geometry-planner",
       "plan": "docs/plans/du9-geometry-planner-2026-10-16",
-      "head": "8ff47e28031270c7bf7f6fca01b582fdb680fd64",
-      "status": "A_ONLY_BC_PENDING",
-      "details": "A测试已提交，contracts/__init__未提交；缺planner.py及B/C/最终handoff/独审。"
+      "head": "e4f946a2bd90f6231ca7542439fdf97512efaa7e",
+      "status": "ROOT_COMPONENT_ACCEPTED_PRODUCTION_ASSEMBLY_OPEN",
+      "details": "组件已完成与独审；POLICY和PLANNER真实接口联调通过，ROOT生产接线与真实PDF摘要仍OPEN。",
+      "owner": "ROOT",
+      "external_watch": false
     },
     {
       "card": "DU9-ET-LEGACY-COMPARISON",
@@ -48,5 +50,7 @@
   "root_followups": [
     "FF完整41例C与完整中断重启仍OPEN，不是第五条待作者交付包；不因工程已并线把C写完成。"
   ],
-  "external_packages_remaining": 3
+  "external_packages_remaining": 2,
+  "automation_note": "2026-10-17 Codex automation_update返回该任务不存在/可能被手动删除；保留用户可能的删除意图，不重建、不声称定期巡查仍有效。",
+  "acceptance_updated_at_utc": "2026-10-17T05:51:15.244496+00:00"
 }

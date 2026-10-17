@@ -1,0 +1,61 @@
+{
+  "schema_version": "du9-planner-root-reception/1",
+  "status": "COMPONENT_ACCEPTED_PUBLICATION_PENDING",
+  "date": "2026-10-17",
+  "author_final_commit": "e4f946a2bd90f6231ca7542439fdf97512efaa7e",
+  "author_reviewed_source_commit": "db126f24e32a8f6986d58049eb295b646c41a3d0",
+  "full_history_merge_commit": "f4ef8531e5ebe8c66b3a9b3da8df5a5f3162b8cc",
+  "root_implementation_commit": "a4ca0a8535d3b157e2cc7ff0dbdb8efe2ca65ee4",
+  "independent_review": "du9_planner_root_review.json",
+  "independent_review_status": "PASS",
+  "unresolved_count": 0,
+  "tests": {
+    "root_first_red": "2FAIL/5PASS",
+    "root_final_concentrated": "796PASS/17SKIP;25.46s",
+    "independent_first_red": "7PASS/2FAIL",
+    "independent_final_probe": "9PASS",
+    "independent_planner_suite": "55PASS;3.12s",
+    "counts_are_overlapping_not_additive": true
+  },
+  "resolved_shared_causes": [
+    "Executable fairness capacity uses min(max_pages,max_requests)",
+    "Single reservation debit separated from merged valid covering request intents; cancelled rules excluded"
+  ],
+  "preserved_independent_receipts": [
+    {
+      "original_path": ".planning/shared-reading-production/du9-planner-reception/reviewer_probe.py",
+      "preserved_path": "docs/plans/document-understanding-2026-10-13/review/du9-planner-receipts/reviewer_probe.py",
+      "sha256": "81c6e2eed03d0f645c933c95bc894ded4c0285a65becbbf7cf553397ce2fcd0b",
+      "bytes": 8164
+    },
+    {
+      "original_path": ".planning/shared-reading-production/du9-planner-reception/reviewer-first-red.json",
+      "preserved_path": "docs/plans/document-understanding-2026-10-13/review/du9-planner-receipts/reviewer-first-red.json",
+      "sha256": "e46fd494c1b92a2768a1d6928ceba912dddb6cde37d33cb48c354cafb0c648dd",
+      "bytes": 3018
+    },
+    {
+      "original_path": ".planning/shared-reading-production/du9-planner-reception/reviewer-final.json",
+      "preserved_path": "docs/plans/document-understanding-2026-10-13/review/du9-planner-receipts/reviewer-final.json",
+      "sha256": "a0dacd2d7cca4772a58758a981d014c214ab6ed3d232f234d26b51fe2db15e75",
+      "bytes": 2908
+    }
+  ],
+  "original_gold_changed": false,
+  "raw_copies": 0,
+  "supplier_calls": 0,
+  "production_config_writes": 0,
+  "author_worktree_writes": 0,
+  "remaining": [
+    "Native navigation + unique matcher into source single parse",
+    "Actual deep-page PDF table acceptance",
+    "Configured supplier official summary + cache recovery + heldout quality",
+    "FF DU8 full41 C and full interruption recovery"
+  ],
+  "automation_status": "NOT_FOUND_NOT_RECREATED",
+  "publication": {
+    "status": "PENDING",
+    "normal_hooks_required": true
+  },
+  "recorded_at_utc": "2026-10-17T05:51:15.244496+00:00"
+}

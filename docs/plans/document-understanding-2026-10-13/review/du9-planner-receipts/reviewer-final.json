@@ -1,0 +1,104 @@
+{
+  "reviewer_agent_id": "/root/du9_planner_root_review",
+  "head": "f4ef8531e5ebe8c66b3a9b3da8df5a5f3162b8cc",
+  "time_utc": "2026-10-17T05:43:59Z",
+  "checks": [
+    {
+      "name": "tight_request_capacity_preserves_late_project",
+      "status": "PASS",
+      "detail": [
+        "admitted",
+        "exhausted",
+        "admitted"
+      ]
+    },
+    {
+      "name": "nested_fine_not_erased_by_quota_attribution",
+      "status": "PASS",
+      "detail": {
+        "request": {
+          "discover": true,
+          "fine": true
+        },
+        "charged": {
+          "pages": 1,
+          "requests": 1
+        }
+      }
+    },
+    {
+      "name": "existing_budget_exhaustion_remains_partial",
+      "status": "PASS",
+      "detail": {
+        "windows_total": 2,
+        "windows_built": 0,
+        "windows_reserved": 0,
+        "windows_cancelled": 0,
+        "windows_unplanned": 2,
+        "pages_reserved": 0,
+        "pages_desired_total": 0,
+        "page_budget": 64,
+        "requests_budget": 64,
+        "partial": true,
+        "partial_reason": "work_budget_exhausted"
+      }
+    },
+    {
+      "name": "parent_scope_isolation_and_duplicate_ack",
+      "status": "PASS",
+      "detail": {
+        "pages": 2,
+        "requests": 2
+      }
+    },
+    {
+      "name": "json_resume_matches_live_call",
+      "status": "PASS",
+      "detail": {
+        "pages": 2,
+        "requests": 2
+      }
+    },
+    {
+      "name": "absent_and_unknown_do_not_become_business_negatives",
+      "status": "PASS",
+      "detail": [
+        "not_found",
+        "unknown"
+      ]
+    },
+    {
+      "name": "window_order_canonical_and_rule_cause_bound",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "name": "administrative_fine_suppressed",
+      "status": "PASS",
+      "detail": {
+        "discover": true,
+        "fine": false
+      }
+    },
+    {
+      "name": "pure_public_calls_leave_inputs_unchanged",
+      "status": "PASS",
+      "detail": true
+    }
+  ],
+  "passed": 9,
+  "failed": 0,
+  "cleanup": {
+    "owned_temp_removed": true,
+    "sentinel_unchanged": true
+  },
+  "supplier_calls": 0,
+  "production_writes": 0,
+  "source_originals_read_or_copied": 0,
+  "source_sha256": {
+    "src\\company_wiki\\document_understanding\\geometry_intent\\__init__.py": "a2f0304fa36e3bec687206859a0a14be682a9a6492c63f0ed7930f5a1b274ce6",
+    "src\\company_wiki\\document_understanding\\geometry_intent\\contracts.py": "0aedb4b45c09efa048835966f3900684e3468c016567db75901e3fbef7b8901e",
+    "src\\company_wiki\\document_understanding\\geometry_intent\\planner.py": "5e8a6b5cf09f607ab74b756bb6a6e3572fe247e63e34eb369b52d496d5d537f7",
+    "src\\company_wiki\\document_understanding\\profiles\\geometry_policy.py": "2fbee9a58aad6f48d79c49f56d5caf5fe155024de501e8c8826018a6cad7a344"
+  }
+}

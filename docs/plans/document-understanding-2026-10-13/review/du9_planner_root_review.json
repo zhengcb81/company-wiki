@@ -1,0 +1,117 @@
+{
+  "schema_version": "du9-root-independent-review/1",
+  "reviewer_agent_id": "/root/du9_planner_root_review",
+  "reviewed_commit": "a4ca0a8535d3b157e2cc7ff0dbdb8efe2ca65ee4",
+  "reviewed_worktree_delta": false,
+  "reviewed_paths_sha256": {
+    "src/company_wiki/document_understanding/geometry_intent/__init__.py": "a2f0304fa36e3bec687206859a0a14be682a9a6492c63f0ed7930f5a1b274ce6",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "0aedb4b45c09efa048835966f3900684e3468c016567db75901e3fbef7b8901e",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "5e8a6b5cf09f607ab74b756bb6a6e3572fe247e63e34eb369b52d496d5d537f7",
+    "src/company_wiki/document_understanding/profiles/geometry_policy.py": "2fbee9a58aad6f48d79c49f56d5caf5fe155024de501e8c8826018a6cad7a344",
+    "tests/unit/du9_geometry_planner/__init__.py": "9f16efdaf57d130c7e66461c3419c6dfe9e5f78a50e600ea3d97f20404083436",
+    "tests/unit/du9_geometry_planner/helpers.py": "483165539594a070b7edac3027fce4da9675ff387cf088c7d03cb6510a750661",
+    "tests/unit/du9_geometry_planner/test_a_root_cause_and_fairness.py": "6380979788fca0373f3c4b85c8401da416b202430934811136d4ab75712de367",
+    "tests/unit/du9_geometry_planner/test_b_contract_counterexamples.py": "5a38cd0284c5aa4f22be7929c15f9275ccc9350a82e5a772a2466d48093147ad",
+    "tests/unit/du9_geometry_planner/test_c_e2e_stream_recovery.py": "952cb5bbc4581058e8414da3397a46ea81c559a12ac31b2d3d1cfa6e370a6804",
+    "tests/unit/du9_geometry_planner/test_root_policy_interop.py": "1fdbacefa054908b240b18f89c5aa7fff9ed76c8e5411a78b458e27895098dda",
+    "tests/fixtures/du9_geometry_planner/fixture_geometry_planner.json": "da11d286c892a7d107b5c0d3883a674e957b8eaee0e64ff08aed8cae4013d4ef"
+  },
+  "final_status": "PASS",
+  "unresolved_count": 0,
+  "findings": [
+    {
+      "id": "ROOT-R1",
+      "severity": "P1",
+      "cause": "Fair reservation ignored tighter request capacity",
+      "status": "CLOSED",
+      "verification": "Independent compiled POLICY counterexample: early event admitted/exhausted, late project admitted"
+    },
+    {
+      "id": "ROOT-R2",
+      "severity": "P1",
+      "cause": "Quota attribution erased nested request semantics",
+      "status": "CLOSED",
+      "verification": "Independent compiled nested fine request preserved with one page/request charge; cancelled capabilities excluded"
+    }
+  ],
+  "tests": [
+    {
+      "argv": [
+        "python",
+        "-B",
+        ".planning/shared-reading-production/du9-planner-reception/reviewer_probe.py"
+      ],
+      "passed": 9,
+      "failed": 0,
+      "exit_code": 0,
+      "receipt": ".planning/shared-reading-production/du9-planner-reception/reviewer-final.json"
+    },
+    {
+      "argv": [
+        "python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "-o",
+        "addopts=",
+        "tests/unit/du9_geometry_planner"
+      ],
+      "passed": 55,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 3.12,
+      "exit_code": 0
+    }
+  ],
+  "first_red": ".planning/shared-reading-production/du9-planner-reception/reviewer-first-red.json",
+  "cleanup": {
+    "owned_temp_removed": true,
+    "sentinel_unchanged": true
+  },
+  "supplier_calls": 0,
+  "source_originals_read_or_copied": 0,
+  "production_writes": 0,
+  "author_worktree_writes": 0,
+  "limits": [
+    "Pure component reception only; not actual PDF/default production/summary quality acceptance",
+    "not_arrived means reserved-but-unused, not actual page visitation evidence",
+    "No new security authorization or signature mechanism added"
+  ],
+  "precommit_review_baseline": "a4ca0a8535d3b157e2cc7ff0dbdb8efe2ca65ee4",
+  "reviewed_git_blob_sha256": {
+    "src/company_wiki/document_understanding/geometry_intent/__init__.py": "15a16cfe16c6ce58d5f021a12251968f337a7a45549f743137a03c6d40cc8b84",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "b44ba3f450d48a9d1ffb33ad42460026c9c9ae707b771fa98660dd3e1981b427",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "67e3138d18fe5fe627b14de3ce4ed527135e79e790cae0e32f99e14ac53b1c86",
+    "src/company_wiki/document_understanding/profiles/geometry_policy.py": "2fbee9a58aad6f48d79c49f56d5caf5fe155024de501e8c8826018a6cad7a344",
+    "tests/unit/du9_geometry_planner/__init__.py": "6890c5e5ca09fb0e4a7f7fd458ed41695eff32beeec1ee733412fc73447eb4ff",
+    "tests/unit/du9_geometry_planner/helpers.py": "259b4fe5d0020e544400b3bcb4699f8d49e48775b6630f2a910abd2d0d297376",
+    "tests/unit/du9_geometry_planner/test_a_root_cause_and_fairness.py": "6eb1dad28d7e671740fadc20adbc7c00f09e5bb50f6e1ca23217b48e0a2363dc",
+    "tests/unit/du9_geometry_planner/test_b_contract_counterexamples.py": "b8f9797d5b472380a1d1e500b6e7615aae8b2955992d1ad6b676a7686a6c3fea",
+    "tests/unit/du9_geometry_planner/test_c_e2e_stream_recovery.py": "5005c411a5db85ad7cbaa5e34008510f9a1af35bcafafcd2b3f4d98052052bcb",
+    "tests/unit/du9_geometry_planner/test_root_policy_interop.py": "1fdbacefa054908b240b18f89c5aa7fff9ed76c8e5411a78b458e27895098dda",
+    "tests/fixtures/du9_geometry_planner/fixture_geometry_planner.json": "0b9d5d94188570fbb009f9b0c3cc42e4a34808ece75353fa7646831f3cc783a6"
+  },
+  "postcommit_sha_verification": {
+    "matched_worktree_paths": 11,
+    "commit_contents_match_ignoring_CRLF_only": true,
+    "exact_blob_paths": [
+      "src/company_wiki/document_understanding/profiles/geometry_policy.py",
+      "tests/unit/du9_geometry_planner/test_root_policy_interop.py"
+    ],
+    "line_ending_only_paths": [
+      "src/company_wiki/document_understanding/geometry_intent/__init__.py",
+      "src/company_wiki/document_understanding/geometry_intent/contracts.py",
+      "src/company_wiki/document_understanding/geometry_intent/planner.py",
+      "tests/unit/du9_geometry_planner/__init__.py",
+      "tests/unit/du9_geometry_planner/helpers.py",
+      "tests/unit/du9_geometry_planner/test_a_root_cause_and_fairness.py",
+      "tests/unit/du9_geometry_planner/test_b_contract_counterexamples.py",
+      "tests/unit/du9_geometry_planner/test_c_e2e_stream_recovery.py",
+      "tests/fixtures/du9_geometry_planner/fixture_geometry_planner.json"
+    ],
+    "rerun_tests": false
+  }
+}
