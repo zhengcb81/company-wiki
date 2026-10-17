@@ -1,0 +1,1022 @@
+{
+  "agent": "/root/du9_policy_final_review",
+  "status": "PASS",
+  "data_deltas_other_than_intent_and_version": [
+    "/families/12/sections/0/heading_path/0",
+    "/families/12/sections/1/heading_path/0",
+    "/families/12/sections/2/heading_path/0",
+    "/families/12/sections/3/heading_path/0"
+  ],
+  "families_and_fallback": [
+    {
+      "id": "administrative_document",
+      "rules": 2,
+      "intents": [
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        }
+      ]
+    },
+    {
+      "id": "container_attachment",
+      "rules": 3,
+      "intents": [
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        }
+      ]
+    },
+    {
+      "id": "cn_annual_report",
+      "rules": 8,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "industry",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "management_discussion",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        }
+      ]
+    },
+    {
+      "id": "cn_interim_report",
+      "rules": 6,
+      "intents": [
+        {
+          "role": "management_discussion",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        }
+      ]
+    },
+    {
+      "id": "cn_quarterly_report",
+      "rules": 4,
+      "intents": [
+        {
+          "role": "management_discussion",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        }
+      ]
+    },
+    {
+      "id": "earnings_call_transcript",
+      "rules": 5,
+      "intents": [
+        {
+          "role": "management_discussion",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "questions",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        }
+      ]
+    },
+    {
+      "id": "event_response",
+      "rules": 4,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "questions",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        }
+      ]
+    },
+    {
+      "id": "hk_annual_report",
+      "rules": 8,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "management_discussion",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        }
+      ]
+    },
+    {
+      "id": "hk_interim_report",
+      "rules": 6,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "management_discussion",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        }
+      ]
+    },
+    {
+      "id": "investor_presentation",
+      "rules": 4,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        }
+      ]
+    },
+    {
+      "id": "investor_qa_record",
+      "rules": 5,
+      "intents": [
+        {
+          "role": "questions",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        }
+      ]
+    },
+    {
+      "id": "lifecycle_revision_overlay",
+      "rules": 1,
+      "intents": [
+        {
+          "role": "unknown",
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        }
+      ]
+    },
+    {
+      "id": "offering_cn_convertible",
+      "rules": 6,
+      "intents": [
+        {
+          "role": "fundraising",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "project"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        }
+      ]
+    },
+    {
+      "id": "offering_cn_equity",
+      "rules": 6,
+      "intents": [
+        {
+          "role": "fundraising",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "project"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "fundraising",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "project"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        }
+      ]
+    },
+    {
+      "id": "offering_feasibility",
+      "rules": 4,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "fundraising",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "project"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        }
+      ]
+    },
+    {
+      "id": "project_change_notice",
+      "rules": 4,
+      "intents": [
+        {
+          "role": "fundraising",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "project"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        }
+      ]
+    },
+    {
+      "id": "prospectus_cn",
+      "rules": 7,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "industry",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "fundraising",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "project"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "management_discussion",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        }
+      ]
+    },
+    {
+      "id": "prospectus_hk",
+      "rules": 7,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "industry",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "fundraising",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "project"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        }
+      ]
+    },
+    {
+      "id": "prospectus_us",
+      "rules": 7,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "industry",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "management_discussion",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "fundraising",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "project"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        }
+      ]
+    },
+    {
+      "id": "results_release",
+      "rules": 5,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "management_discussion",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        }
+      ]
+    },
+    {
+      "id": "sec_10k",
+      "rules": 7,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "management_discussion",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        }
+      ]
+    },
+    {
+      "id": "sec_10q",
+      "rules": 7,
+      "intents": [
+        {
+          "role": "management_discussion",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "operating_metrics",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        },
+        {
+          "role": "administrative",
+          "discover": "context_only",
+          "fine": "unknown",
+          "demand_class": "administrative"
+        }
+      ]
+    },
+    {
+      "id": "sec_20f",
+      "rules": 6,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "industry",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "management_discussion",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "financial_notes",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "mixed"
+        }
+      ]
+    },
+    {
+      "id": "secondary_research",
+      "rules": 4,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "on_tabular_evidence",
+          "fine": "on_candidate",
+          "demand_class": "operating"
+        },
+        {
+          "role": "industry",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "outlook",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        },
+        {
+          "role": "risk",
+          "discover": "context_only",
+          "fine": "explicit_only",
+          "demand_class": "context"
+        }
+      ]
+    },
+    {
+      "id": "generic_source_reading",
+      "rules": 4,
+      "intents": [
+        {
+          "role": "business",
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        },
+        {
+          "role": "management_discussion",
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        },
+        {
+          "role": "risk",
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        },
+        {
+          "role": "unknown",
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        }
+      ]
+    }
+  ],
+  "malformed_diagnostics": [
+    {
+      "field": "priority",
+      "value": 0,
+      "code": "GEOMETRY_POLICY_BAD_PRIORITY"
+    },
+    {
+      "field": "priority",
+      "value": 1.0,
+      "code": "GEOMETRY_POLICY_BAD_PRIORITY"
+    },
+    {
+      "field": "priority",
+      "value": false,
+      "code": "GEOMETRY_POLICY_BAD_PRIORITY"
+    },
+    {
+      "field": "heading_path",
+      "value": [
+        [],
+        [
+          "Business"
+        ]
+      ],
+      "code": "GEOMETRY_POLICY_BAD_PATH"
+    },
+    {
+      "field": "heading_path",
+      "value": [
+        [
+          ""
+        ]
+      ],
+      "code": "GEOMETRY_POLICY_BAD_PATH"
+    },
+    {
+      "field": "heading_path",
+      "value": {
+        "a": "b"
+      },
+      "code": "GEOMETRY_POLICY_BAD_PATH"
+    },
+    {
+      "field": "aliases",
+      "value": [
+        ""
+      ],
+      "code": "GEOMETRY_POLICY_BAD_ALIASES"
+    },
+    {
+      "field": "questions",
+      "value": "text",
+      "code": "GEOMETRY_POLICY_BAD_QUESTIONS"
+    },
+    {
+      "field": "geometry_intent",
+      "value": {
+        "discover": []
+      },
+      "code": "GEOMETRY_POLICY_BAD_INTENT"
+    },
+    {
+      "field": "geometry_intent",
+      "value": {
+        "fine": null
+      },
+      "code": "GEOMETRY_POLICY_BAD_INTENT"
+    },
+    {
+      "field": "role",
+      "value": "risk",
+      "code": "GEOMETRY_POLICY_BAD_ROLE"
+    }
+  ],
+  "partial_intent_defaults_unknown": true,
+  "component_copy_isolated": true,
+  "finite_1000_compilations_seconds_observation_only": 0.04204030000255443,
+  "supplier_calls": 0,
+  "original_copies": 0,
+  "production_writes": 0
+}

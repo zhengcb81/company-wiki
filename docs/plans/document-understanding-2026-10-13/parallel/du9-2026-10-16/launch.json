@@ -1,6 +1,6 @@
 {
   "schema_version": "du9-launch/1",
-  "status": "TWO_DELIVERY_REPORTS_PENDING_FINAL_ARTIFACTS",
+  "status": "POLICY_COMPONENT_ACCEPTED_PLANNER_EXTERNAL_IN_PROGRESS",
   "lanes": [
     {
       "id": "DU9-CWP-GEOMETRY-POLICY",
@@ -10,16 +10,20 @@
       "seed_commit": "68807088ab1eb51bfd45c5d112ba601a96d7b40d",
       "plan": "docs/plans/du9-geometry-policy-2026-10-16/task_plan.md",
       "card": "du9_cwp_geometry_policy.md",
-      "status": "DELIVERY_LOCATION_PENDING_VISIBLE_A_ONLY",
+      "status": "ROOT_COMPONENT_ACCEPTED_WAIT_PLANNER",
       "startup_clean": true,
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "independent_review_required": true,
-      "business_tests": "NO_IMPLEMENTATION_OR_FINAL_TEST_RECEIPT_FOUND",
+      "business_tests": "626PASS/11SKIP concentrated; independent263PASS; reviewPASS unresolved0",
       "bytes": 25056644,
       "visible_head": "f70318f1edd3e5bfec86ae1ee0922a1ac72b59a2",
-      "visible_import": "FAIL: missing profiles.geometry_policy",
+      "visible_import": "MAIN compile_geometry_policy IMPORT_OK; original A tree intentionally read-only",
       "continuation": "CONTINUE_BC.md",
-      "root_author_writes": 0
+      "root_author_writes": 0,
+      "implementation_workdir": "C:/Users/郑曾波/Projects/company-wiki",
+      "owner": "ROOT",
+      "implementation_commit": "6e0edeefa7b46def4df61ebb538051f44363eb50",
+      "handoff": "docs/plans/du9-geometry-policy-2026-10-16/handoff.json"
     },
     {
       "id": "DU9-CWP-GEOMETRY-PLANNER",
@@ -29,7 +33,7 @@
       "seed_commit": "cb1e4c0783c00dedd58160a458b7ad3d2405cfc2",
       "plan": "docs/plans/du9-geometry-planner-2026-10-16/task_plan.md",
       "card": "du9_cwp_geometry_planner.md",
-      "status": "DELIVERY_LOCATION_PENDING_VISIBLE_A_ONLY",
+      "status": "IN_PROGRESS_EXTERNAL_WAIT",
       "startup_clean": true,
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "independent_review_required": true,

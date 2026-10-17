@@ -1,3 +1,11 @@
+## POLICY组件完成，等待PLANNER合流 — 2026-10-17（最终组件状态）
+
+正常实现提交30df8eae，根因修复提交6e0edeef。最终集中626PASS/11SKIP（新68项）；独立agent另跑263PASS，catalog parity/公开污染与IR反例/25组配置+11畸形反例全部通过。最终独审PASS/0未解决，33源码/测试/规范SHA已读回匹配。见handoff.md/json与review/independent_review.md/json。
+
+只表示POLICY纯组件B/C完成；原PLANNER工区仍由其他harness施工并等待最终交接。ROOT随后接matcher/native windows、共享原预算和source/parse；真实PDF深页/默认选择/正式供应商摘要/缓存与holdout仍OPEN。0API/0下载/0原件副本，作者工区未改。不新增门禁/签收/身份链。
+
+---
+
 ## 独审发现根因及修复 — 2026-10-17
 
 独立agent /root/du9_policy_final_review 对30df8eae公开入口真实复现：新section_rules浅拷贝绕过旧_sections深拷贝，调用者改aliases/path/questions可污染全局catalog并影响后续公司profile。P1已在原registry投影处恢复每section deepcopy，统一保护全部嵌套值；新增family/fallback/overlay × 四字段12个跨调用/全局catalog不变回归，测试失败也隔离被污染catalog，避免掩盖串扰。独立首次失败收据reviewer-initial-probe.json保留。

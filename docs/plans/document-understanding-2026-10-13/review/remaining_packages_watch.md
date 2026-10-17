@@ -1,3 +1,7 @@
+> ROOT后续完成POLICY组件，最终源码6e0edeef、集中626PASS/11SKIP、独立263PASS及PASS/0未解决；见[交接](../../du9-geometry-policy-2026-10-16/handoff.md)。生产合流等待PLANNER，三条外包监测继续，不对原POLICY A工区报缺实现。
+
+> 2026-10-17用户已明确所有权：POLICY的A交给ROOT在主仓实施B/C，原A工区只读；PLANNER仍在外包施工，ROOT等待。自动跟进du8-du9已相应改为RF/PLANNER/ET三条外包。下表保留初次盘点历史，后续看JSON/current PWF及本地status，勿把POLICY停A重复报缺交付。
+
 # 剩余外包施工包只读跟进 — 2026-10-17
 
 用户要求未完成时隔一段时间查看。已实际检查四工区Git、PWF、交接/收据；这是交付齐备初筛，不代替ROOT验收。检查时刻 UTC 2026-10-16T23:19:58Z。

@@ -21,8 +21,12 @@
       "workdir": "C:/Users/郑曾波/Projects/company-wiki-du9-geometry-policy",
       "plan": "docs/plans/du9-geometry-policy-2026-10-16",
       "head": "f70318f1edd3e5bfec86ae1ee0922a1ac72b59a2",
-      "status": "A_ONLY_BC_PENDING",
-      "details": "仅A调查，缺geometry_policy.py、专用测试、最终handoff及独审；工作树干净。原卡不要求ROOT签A才能继续。"
+      "status": "ROOT_COMPONENT_ACCEPTED_WAIT_PLANNER",
+      "details": "用户移交ROOT的B/C已完成，独审PASS/0未解决；原A工区只读不再等待外包，生产合流等待PLANNER。",
+      "owner": "ROOT",
+      "implementation_workdir": "C:/Users/郑曾波/Projects/company-wiki",
+      "external_watch": false,
+      "implementation_commit": "6e0edeefa7b46def4df61ebb538051f44363eb50"
     },
     {
       "card": "DU9-CWP-GEOMETRY-PLANNER",
@@ -43,5 +47,6 @@
   ],
   "root_followups": [
     "FF完整41例C与完整中断重启仍OPEN，不是第五条待作者交付包；不因工程已并线把C写完成。"
-  ]
+  ],
+  "external_packages_remaining": 3
 }

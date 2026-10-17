@@ -1,0 +1,383 @@
+{
+  "schema_version": "du9-handoff/1",
+  "card_id": "DU9-CWP-GEOMETRY-POLICY",
+  "status": "ROOT_COMPONENT_ACCEPTED_WAIT_PLANNER",
+  "base_commit": "8b7a46ac8c3e4bcf855392afcc1e4a5c18a93927",
+  "author_a_commit": "f70318f1edd3e5bfec86ae1ee0922a1ac72b59a2",
+  "branch": "master",
+  "implementation_commits": [
+    "30df8eae2d530081b0173a0965bf30f2e9b45c74",
+    "6e0edeefa7b46def4df61ebb538051f44363eb50"
+  ],
+  "implementation_workdir": "C:/Users/郑曾波/Projects/company-wiki",
+  "changed_paths": [
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/administrative_document.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_annual_report.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_interim_report.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_quarterly_report.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/container_attachment.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/earnings_call_transcript.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/event_response.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/hk_annual_report.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/hk_interim_report.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/investor_presentation.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/investor_qa_record.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/lifecycle_revision_overlay.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_cn_convertible.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_cn_equity.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_feasibility.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/project_change_notice.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_cn.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_hk.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_us.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/results_release.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_10k.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_10q.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_20f.json",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/secondary_research.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/INTERFACES.md",
+    "docs/plans/du9-geometry-policy-2026-10-16/construction_card.md",
+    "docs/plans/du9-geometry-policy-2026-10-16/findings.md",
+    "docs/plans/du9-geometry-policy-2026-10-16/handoff.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/handoff.md",
+    "docs/plans/du9-geometry-policy-2026-10-16/progress.md",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/a_root_first_red.txt",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/a_root_host_red.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/a_root_host_red.txt",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/b_root_concentrated.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/b_root_concentrated.txt",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/bc_root_after_review.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/bc_root_after_review.txt",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/bc_root_regression.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/bc_root_regression.txt",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/cleanup.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-catalog-probe.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-catalog-probe.py",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-final-1.txt",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-final-2.txt",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-final-3.txt",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-final-4.txt",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-final-runs.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-fixed-probe.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-initial-probe.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-probe.py",
+    "docs/plans/du9-geometry-policy-2026-10-16/receipts/reviewer-run.py",
+    "docs/plans/du9-geometry-policy-2026-10-16/review/independent_review.json",
+    "docs/plans/du9-geometry-policy-2026-10-16/review/independent_review.md",
+    "docs/plans/du9-geometry-policy-2026-10-16/task_plan.md",
+    "src/company_wiki/document_understanding/profiles/geometry_policy.py",
+    "src/company_wiki/document_understanding/profiles/reading_catalog.json",
+    "src/company_wiki/document_understanding/profiles/reading_defaults.json",
+    "src/company_wiki/document_understanding/profiles/registry.py",
+    "tests/fixtures/du9_geometry_policy/legacy_profile_sha256.json",
+    "tests/unit/du9_geometry_policy/test_geometry_policy.py"
+  ],
+  "interfaces": {
+    "entrypoint": "company_wiki.document_understanding.profiles.geometry_policy.compile_geometry_policy(resolved_profile)",
+    "output": "du-geometry-policy/1",
+    "rule_key": "SHA256 of normalized full rule: origin, role, path, aliases, priority, questions, intent",
+    "pure": true,
+    "default_intent": "unknown",
+    "old_wire": "15 legacy profile SHA unchanged"
+  },
+  "root_integration_steps": [
+    "Wait for independent PLANNER handoff; do not alter its worktree or code",
+    "Bind compiled full rule_key to native navigation windows through existing matcher semantics",
+    "Integrate POLICY + PLANNER at ROOT source/parse port with original shared budget; never reset/raise limits",
+    "Then real deep PDF/default selection, summary cache/resume, configured supplier and heldout quality E2E; component PASS is not that acceptance"
+  ],
+  "tests": [
+    {
+      "argv": "see receipts/bc_root_after_review.json",
+      "exit_code": 0,
+      "passed": 626,
+      "failed": 0,
+      "skipped": 11,
+      "receipt": "receipts/bc_root_after_review.txt"
+    }
+  ],
+  "red_receipts": [
+    "receipts/a_root_first_red.txt",
+    "receipts/a_root_host_red.txt",
+    "receipts/b_root_concentrated.txt"
+  ],
+  "independent_expected_basis": [
+    "Original fixed INTERFACES pure DTO and one catalog",
+    "A family investigation plus ROOT corrections documented in findings.md",
+    "Legacy profile output SHA captured before implementation",
+    "Hand-coded policy intent matrix, no compiler-generated expectations"
+  ],
+  "known_limits": [
+    "No PLANNER production integration or default PageIntent switch",
+    "No real PDF or paid supplier call"
+  ],
+  "not_run": [
+    "PLANNER + source/parse final integration",
+    "Real deep PDF summary/cache quality acceptance"
+  ],
+  "supplier_calls": 0,
+  "production_writes": 0,
+  "cleanup_receipt": "receipts/cleanup.json",
+  "code_sha256": {
+    "src/company_wiki/document_understanding/profiles/geometry_policy.py": "2fbee9a58aad6f48d79c49f56d5caf5fe155024de501e8c8826018a6cad7a344",
+    "src/company_wiki/document_understanding/profiles/reading_catalog.json": "56bd98bcbc1f5e2136681cb7d19b1be6404ce73b01282e8bfe98fd76876a1570",
+    "src/company_wiki/document_understanding/profiles/reading_defaults.json": "156eb082f8c781cafcb183d42a97dcae9326e1871aa137a971776013db5a386e",
+    "src/company_wiki/document_understanding/profiles/registry.py": "1168fff7249e53076c1f6c89993bc907f026df0aff97ee97453982acb5287c68",
+    "tests/fixtures/du9_geometry_policy/legacy_profile_sha256.json": "1fa923ede1462bb755196099e27bb5f3a261fd204133b47b8e4443f94ac125e8",
+    "tests/unit/du9_geometry_policy/test_geometry_policy.py": "05a88c1cb7cad872beb61986bea42fa0ed1f7dfa8efc53b6131c2305daed06fe"
+  },
+  "independent_review": {
+    "schema_version": "du9-independent-review/1",
+    "reviewer_agent_id": "/root/du9_policy_final_review",
+    "reviewed_commit": "6e0edeefa7b46def4df61ebb538051f44363eb50",
+    "implementation_commits": [
+      "30df8eae2d530081b0173a0965bf30f2e9b45c74",
+      "6e0edeefa7b46def4df61ebb538051f44363eb50"
+    ],
+    "base_commit": "8b7a46ac8c3e4bcf855392afcc1e4a5c18a93927",
+    "report": "review/independent_review.md",
+    "final_status": "PASS",
+    "unresolved_count": 0,
+    "reviewed_paths_sha256": [
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/administrative_document.json",
+        "sha256": "20533117717c5e5310a5d707e062c53bc8124b1c89023b62b390e869960b6744",
+        "git_bytes_sha256": "069c01532557ac5f57fade3a1a09add4beac565987aca2701f614076e5145dd1"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_annual_report.json",
+        "sha256": "6a8ee9f353904ffb41326cba139ebb35a92553d1ff5b951eb28c7bcd60d767da",
+        "git_bytes_sha256": "f6f28a4d8d63f0562a92a0b5f4c28f58992c4bda207fbbe0ad5d6b618e0cd7b2"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_interim_report.json",
+        "sha256": "5dac4a5bfed897c9511d200516850ad42300fde28fa9f33e6ba42a225929aca5",
+        "git_bytes_sha256": "6617c004d34a3676637a8c9045e6d8758aa9127f2481e79960615fd95d7090e8"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/cn_quarterly_report.json",
+        "sha256": "5cb93f0f67c286808b871e1b6a905a963be46f7223e66eb49a6243a2306ae1fa",
+        "git_bytes_sha256": "0b4c1a42d67f8578972b0b597c08802f4368dab3e840c08904c945bc391e89a7"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/container_attachment.json",
+        "sha256": "afd249a691d347dcc88d44212c287b31832690d14bb1f85dde8603b8db947569",
+        "git_bytes_sha256": "7b33cb50c5457b8cb12ad7305c6d89e53c3c26d7981f0e726a97eb2493738311"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/earnings_call_transcript.json",
+        "sha256": "848d9e2e069f650b21ba0bf90029cf565586a48c34a39a96d7fd51cd3de3b682",
+        "git_bytes_sha256": "91e206a4d0e62e45e1c4b5152564fb86802e691bd687b38043bbbb464dcb4e14"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/event_response.json",
+        "sha256": "d29ab5f04fca7e4cad04905e429783759c2a3b4043e9380d882f41420ad4c033",
+        "git_bytes_sha256": "4caabdf53623ed7ac2fecaaee5a15d9d1b602ff85612859f6b68e9df09fe0210"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/hk_annual_report.json",
+        "sha256": "73c7eb5a537ab2d1934da7b2fa08eca4c6acd0670402945fc18f5bc65700994c",
+        "git_bytes_sha256": "1d8389231b2be48f3ec248f15c8b711877f28ed7ee57f3873604bb10b0b6fff7"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/hk_interim_report.json",
+        "sha256": "25faf7fc28d484b2ec1fd6cd213ca96a3efbf711cbe03a4c8b11a9275c8a1251",
+        "git_bytes_sha256": "b9a79495089597092d5fe0d00334b860246a125184ec4d1690dad06960bb6430"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/investor_presentation.json",
+        "sha256": "0a7ed12383c036f1f6d6a45da4f7307f2578942666394c8afdbf732059c5ee0f",
+        "git_bytes_sha256": "8fbccb9632d606a45f08be0f59f15e2c173227142f21cdd6473558a15a7cfeed"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/investor_qa_record.json",
+        "sha256": "7a042d728f3f13283d5caaa10a11883fd2da436ad7ee5cbeda3b252c9d07d9b5",
+        "git_bytes_sha256": "0555f5c606e86a3b877030a9e32e9ec3b648cd179e65c91a8b6336381d609176"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/lifecycle_revision_overlay.json",
+        "sha256": "c600f626c921844b52d4fc2e30328426e3cebec3df235d9dcfa56e15e98aa2d0",
+        "git_bytes_sha256": "de4e4e7a813f6fb840e2aa5c2bf5fe17e9e8a9832f6f80b3d567922e401f6f84"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_cn_convertible.json",
+        "sha256": "0478e56d5e05cbe1ac7420b29c1c63a13a6296c2a1eff5bf2d8094187ef2ea2f",
+        "git_bytes_sha256": "e712c546b007b4ce76ad6ca932977771f82ea800c9fb671779a5c6139d24daee"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_cn_equity.json",
+        "sha256": "2d9c85738b999295fe5c33f57e65a5f056334c29b82ddca5285aa76582a74f55",
+        "git_bytes_sha256": "1bd4a8d80f04794b44be3ef83f4f48afa42d30c40b31963da26f3076e7fa63b4"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_feasibility.json",
+        "sha256": "19f8c24a2b75e08b1d687b2dcbda6bca551743fd888be10b1d8e726566adaa2e",
+        "git_bytes_sha256": "e29dfe7e31fe2fdcd1f3b122a6a17fcd78155b9584c5a962132e2571cd871931"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/project_change_notice.json",
+        "sha256": "6945eca22ffb46a2919419ca7e9badc10d86328d893f5c6e5b5d199746da8a81",
+        "git_bytes_sha256": "9c1866989e2c1837525e5ea950969171f8b29409707f4b5d33c246b1531909e0"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_cn.json",
+        "sha256": "29abd08861fc2b2c39371e79a271dd9c08efcae3094f04c5b7cb395de62c0884",
+        "git_bytes_sha256": "115df0890b4a5319baa0df878932bd685796986e2194f83ac9b82afff336c464"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_hk.json",
+        "sha256": "9fc66cc595a895b64177620deae781332137652aa74d75160fea19441bdc4dbf",
+        "git_bytes_sha256": "941d22f9ea07ab41741e19fdcdf15bf453a4629579090f21c2e79bf72f60ff93"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/prospectus_us.json",
+        "sha256": "b4b1949583138368d039256bda1a2d2e262ea22ae25ea81cedd87cde6b2824fc",
+        "git_bytes_sha256": "2f31f2de8ce3e47271886a24928cba2f8dfdc45ded4976b3661e9462afb6bbb7"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/results_release.json",
+        "sha256": "0bb273a075764c753a7b223500edff91825c60caf5aad99881da07a249dcd0cb",
+        "git_bytes_sha256": "43eaa35e0b47249012567e4fc2eb1f4cb69d9d74bda13dea2be0d835934feea9"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_10k.json",
+        "sha256": "24c9edaf27304cc5861f64567b87b10e99184d5c9ae2ca120978d48e23a555db",
+        "git_bytes_sha256": "20d659176234ffa1f8b238f2c220495cc71954d7d053da89bb75a9978f0a9a52"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_10q.json",
+        "sha256": "09b5be30e7292c022efe13152f285c16c6554258632ce32189c34f6aabe6a351",
+        "git_bytes_sha256": "764cc73d56b9aeae5f2d2006dc27f3ca1c9c3493112a336ac9505492a75981b3"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/sec_20f.json",
+        "sha256": "32278e022fcfea10348283c21cb18b6493c1ecc50f3627862d4cab09aa2037f1",
+        "git_bytes_sha256": "011cd756fc6cc62af478e1650e1084ba6bc90ab09cbab0d6fe5a14c20069ac74"
+      },
+      {
+        "path": "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/secondary_research.json",
+        "sha256": "c5431c1ee258721b51b0c515e3ddb5586f2852647ceb17c0dc9ceb1a3c10bbc5",
+        "git_bytes_sha256": "21f0b8d69af78f6cd990802b9caa0bae6303e6ab6e8df75922d59bb359c73fb0"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/profiles/geometry_policy.py",
+        "sha256": "2fbee9a58aad6f48d79c49f56d5caf5fe155024de501e8c8826018a6cad7a344",
+        "git_bytes_sha256": "2fbee9a58aad6f48d79c49f56d5caf5fe155024de501e8c8826018a6cad7a344"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/profiles/reading_catalog.json",
+        "sha256": "56bd98bcbc1f5e2136681cb7d19b1be6404ce73b01282e8bfe98fd76876a1570",
+        "git_bytes_sha256": "98bc0f0f93ed9cea9008eb65f3364c554ededbf19b8f13970a9987c9319afc4f"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/profiles/reading_defaults.json",
+        "sha256": "156eb082f8c781cafcb183d42a97dcae9326e1871aa137a971776013db5a386e",
+        "git_bytes_sha256": "55a72e2813dea8e97ae1f56ad430b075931ab758b1df7cc09fe0f158f8335d4f"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/profiles/registry.py",
+        "sha256": "1168fff7249e53076c1f6c89993bc907f026df0aff97ee97453982acb5287c68",
+        "git_bytes_sha256": "2f7e672e1d53cc5ec9f060eb5d4570e42465d3c0240c77fb5cfaf5da4f93c1eb"
+      },
+      {
+        "path": "tests/fixtures/du9_geometry_policy/legacy_profile_sha256.json",
+        "sha256": "1fa923ede1462bb755196099e27bb5f3a261fd204133b47b8e4443f94ac125e8",
+        "git_bytes_sha256": "34a8b53831cfac7978a9c4e89b85a3f7e99c502d4351bbfebb53ede0b5e29c01"
+      },
+      {
+        "path": "tests/unit/du9_geometry_policy/test_geometry_policy.py",
+        "sha256": "05a88c1cb7cad872beb61986bea42fa0ed1f7dfa8efc53b6131c2305daed06fe",
+        "git_bytes_sha256": "05a88c1cb7cad872beb61986bea42fa0ed1f7dfa8efc53b6131c2305daed06fe"
+      },
+      {
+        "path": "tools/import_reading_policies.py",
+        "sha256": "e7da4551bf5403e54bb3ef7df165eb61eab6c15395df6dfebadca1f80b4a35fc",
+        "git_bytes_sha256": "72ff6793824bddca7292965fde510ba6bdce1cf7d01c5fc4a0cf40b609ae5824"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/profiles/__init__.py",
+        "sha256": "8b7706444f4b9222576b86bf5c098f0619cd925747152a9de3d80676f3791c23",
+        "git_bytes_sha256": "fb4be4096cb91167545d9e0b3a41ed9b24dbc152da7955247583c6c63e28507f"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/profiles/vocabulary.py",
+        "sha256": "e24f0d4536199d26f64742b40708d16428e3585ddff5e40d6d712da7ba543340",
+        "git_bytes_sha256": "df38d00acc959d35488fa5f7070e611c7d4d0fdaa0aca0fe7cde8d8a2fc6b552"
+      }
+    ],
+    "findings": [
+      {
+        "id": "R1",
+        "severity": "P1",
+        "cause": "Resolved section projection replaced nested deep copies with shallow dict references, allowing caller changes to poison shared catalog and later profiles.",
+        "status": "FIXED_VERIFIED",
+        "fix_commit": "6e0edeefa7b46def4df61ebb538051f44363eb50",
+        "verification_receipt": "receipts/reviewer-fixed-probe.json",
+        "first_failure_receipt": "receipts/reviewer-initial-probe.json",
+        "first_failure_exit_code": 1
+      },
+      {
+        "id": "R2",
+        "severity": "P2",
+        "cause": "Roundtrip asserted consistency but not intended resolved family, so an IR-labelled case silently used generic fallback and overstated coverage.",
+        "status": "FIXED_VERIFIED",
+        "fix_commit": "6e0edeefa7b46def4df61ebb538051f44363eb50",
+        "verification_receipt": "receipts/reviewer-final-1.txt",
+        "independent_ir_receipt": "receipts/reviewer-fixed-probe.json"
+      }
+    ],
+    "tests": [
+      {
+        "name": "Independent POLICY + full profiles pytest",
+        "passed": 263,
+        "failed": 0,
+        "skipped": 0,
+        "exit_code": 0,
+        "pytest_seconds": 4.78,
+        "receipt": "receipts/reviewer-final-1.txt"
+      },
+      {
+        "name": "Existing catalog generation --check",
+        "exit_code": 0,
+        "families": 24,
+        "facets": 14,
+        "receipt": "receipts/reviewer-final-2.txt"
+      },
+      {
+        "name": "Independent shared-catalog mutation and weak/rich IR probes",
+        "exit_code": 0,
+        "checks": 5,
+        "receipt": "receipts/reviewer-fixed-probe.json"
+      },
+      {
+        "name": "Independent data delta, all family/fallback compilation, malformed and partial/component probes",
+        "exit_code": 0,
+        "family_and_fallback_count": 25,
+        "malformed_cases": 11,
+        "receipt": "receipts/reviewer-catalog-probe.json"
+      }
+    ],
+    "run_and_cleanup_receipt": "receipts/reviewer-final-runs.json",
+    "receipt_script_renames_after_run": {
+      "reviewer_probe.py": "reviewer-probe.py",
+      "reviewer_catalog_probe.py": "reviewer-catalog-probe.py",
+      "reviewer_run.py": "reviewer-run.py"
+    },
+    "supplier_calls": 0,
+    "downloads": 0,
+    "original_copies": 0,
+    "production_writes": 0,
+    "known_limits": [
+      "Component-level policy acceptance only; no PLANNER assembly/default page scheduling acceptance.",
+      "No actual PDF, paid summaries, cache recovery or heldout quality E2E was run by this review.",
+      "Full 6213 suite not run; independent finite 263 tests plus counterexamples ran.",
+      "ROOT 626 pass/11 skip is supporting neighboring evidence; skipped cases are not real-document passes."
+    ],
+    "source_unchanged_after_review": true
+  },
+  "review_findings_fixed": [
+    "P1 nested section references polluted shared catalog, restored full deepcopy; 12 cross-call family/fallback/overlay regressions",
+    "P2 IR fixture routed generic, replaced with original QA structure and all 12 specific family assertions"
+  ],
+  "independent_review_receipt": "receipts/reviewer-final-runs.json"
+}

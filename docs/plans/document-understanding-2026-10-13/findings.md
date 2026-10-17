@@ -1,3 +1,21 @@
+## POLICY组件已完成并独审，PLANNER继续等待 — 2026-10-17（当前）
+
+用户明确POLICY的A移交ROOT，已保留A历史并完成唯一catalog typed intent、registry因果来源及纯compile_geometry_policy。设计源与catalog/fallback同步，15旧profile wire SHA不变。实现30df8eae，独审发现共用嵌套引用污染和IR落generic假覆盖，已在6e0edeef根治并加12污染回归/12实际family断言。
+
+最终集中626PASS/11SKIP（10.48秒），独立agent另263PASS，catalog parity/25策略/11畸形及公开反例通过；最终独审PASS、未解决0，33SHA读回匹配。[组件交接](../du9-geometry-policy-2026-10-16/handoff.md)。0供应商/0下载/0原件复制/0作者工区写入，不提高预算或增许可链。该组件完成不等于默认深页/真PDF/正式摘要完成。
+
+**Next Step：** 按用户要求等待PLANNER，其geometry_intent目录与工区不改；收到最终交接后ROOT统一POLICY→PLANNER→原matcher/native windows→共享预算/source生产接线，再做真PDF深页与配置供应商摘要/缓存恢复/holdout。RF/ET继续只读等待交付；自动跟进已排除POLICY，不误报停A。
+
+---
+
+## POLICY由ROOT接手B/C，PLANNER继续外包 — 2026-10-17（当前）
+
+用户明确POLICY只冻结A期望，后续由ROOT按INTERFACES实施profiles/geometry_policy.py；PLANNER仍在施工，ROOT等待、不写其geometry_intent目录。A历史f70318f1已正常合入主线；ROOT在本主仓完成POLICY原白名单，实现/测试/独审后发布，原作者A工区保持只读。自动跟进du8-du9已更新为三条外包，不再把POLICY停A当新阻塞。
+
+**实施顺序：** 先固化接口RED和旧wire指纹；再补唯一catalog的typed意图/真实可转债heading变体、registry因果摘要和纯编译器；集中矩阵/旧profiles/策略回归；C从route→resolve→compile走公开入口并核对隔离恢复，独立agent全面审查修复后正常提交推送。不做PLANNER/source生产装配，等待其最终交付后ROOT统一联调。A研究中的SHA截断、缺路径转字符串unknown、同path不同alias必拒和MD&A必须与business不同fine只是作者假设：按原固定接口纠正，以完整规则SHA、结构化空路径/unknown意图、合法多规则保留为准。真实PDF深页与付费摘要仍OPEN，不用此组件测试代替。
+
+---
+
 ## 施工进度须以实际版本核对 — 2026-10-17（当前）
 
 RF本轮源码/测试继续修改但handoff冻结声明仍停旧版；ET已提交实现和测试而PWF仍READY。说明状态标题不能单独判断完工：巡查比较实际HEAD、交接、独审及收据版本，仅发生实质交付变化才通知，不增加运行许可或小节点审查。已建立四包30分钟自动跟进；FF完整C是ROOT责任而非仍在作者施工的第五包。[盘点](review/remaining_packages_watch.md)。

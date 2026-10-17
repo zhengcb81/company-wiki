@@ -1,3 +1,11 @@
+## POLICY组件完成，等待PLANNER合流 — 2026-10-17（最终组件状态）
+
+正常实现提交30df8eae，根因修复提交6e0edeef。最终集中626PASS/11SKIP（新68项）；独立agent另跑263PASS，catalog parity/公开污染与IR反例/25组配置+11畸形反例全部通过。最终独审PASS/0未解决，33源码/测试/规范SHA已读回匹配。见handoff.md/json与review/independent_review.md/json。
+
+只表示POLICY纯组件B/C完成；原PLANNER工区仍由其他harness施工并等待最终交接。ROOT随后接matcher/native windows、共享原预算和source/parse；真实PDF深页/默认选择/正式供应商摘要/缓存与holdout仍OPEN。0API/0下载/0原件副本，作者工区未改。不新增门禁/签收/身份链。
+
+---
+
 ## 独审修复节点 — 2026-10-17
 
 独立agent真实发现catalog嵌套值共享P1与IR回放落fallback的P2；均已根因修复、补断言与12跨调用污染回归。最终集中626PASS/11SKIP（10.48秒）、ruff绿；原失败与旧614版本分别保留。最终独立复核仍进行中，不称完整交付。

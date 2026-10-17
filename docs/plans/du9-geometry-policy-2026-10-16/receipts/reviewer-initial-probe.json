@@ -1,0 +1,40 @@
+{
+  "reviewer_agent_id": "/root/du9_policy_final_review",
+  "checks": [
+    {
+      "check": "resolved_nested_isolation_aliases",
+      "expected": "catalog unchanged and later resolved profile unaffected",
+      "catalog_changed": true,
+      "next_profile_affected": true,
+      "pass": false
+    },
+    {
+      "check": "resolved_nested_isolation_heading_path",
+      "expected": "catalog unchanged and later resolved profile unaffected",
+      "catalog_changed": true,
+      "next_profile_affected": true,
+      "pass": false
+    },
+    {
+      "check": "resolved_nested_isolation_questions",
+      "expected": "catalog unchanged and later resolved profile unaffected",
+      "catalog_changed": true,
+      "next_profile_affected": true,
+      "pass": false
+    },
+    {
+      "check": "declared_ir_roundtrip_family",
+      "route_profile": "generic",
+      "actual_family": null,
+      "component_ids": [
+        "generic_source_reading"
+      ],
+      "expected": "IR-labeled test must resolve investor_qa_record to count as its coverage",
+      "pass": false
+    }
+  ],
+  "supplier_calls": 0,
+  "original_reads": 0,
+  "production_writes": 0,
+  "catalog_restored_in_memory": true
+}

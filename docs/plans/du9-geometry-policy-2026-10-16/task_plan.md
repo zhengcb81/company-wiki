@@ -1,3 +1,11 @@
+## POLICY组件完成，等待PLANNER合流 — 2026-10-17（最终组件状态）
+
+正常实现提交30df8eae，根因修复提交6e0edeef。最终集中626PASS/11SKIP（新68项）；独立agent另跑263PASS，catalog parity/公开污染与IR反例/25组配置+11畸形反例全部通过。最终独审PASS/0未解决，33源码/测试/规范SHA已读回匹配。见handoff.md/json与review/independent_review.md/json。
+
+只表示POLICY纯组件B/C完成；原PLANNER工区仍由其他harness施工并等待最终交接。ROOT随后接matcher/native windows、共享原预算和source/parse；真实PDF深页/默认选择/正式供应商摘要/缓存与holdout仍OPEN。0API/0下载/0原件副本，作者工区未改。不新增门禁/签收/身份链。
+
+---
+
 # DU9-CWP-GEOMETRY-POLICY — ROOT接手
 
 用户2026-10-17确认：A冻结独立期望后交由ROOT实施B/C。A原工区只读；实际实现目录为C:/Users/郑曾波/Projects/company-wiki，本PWF及母计划记录ROOT进度。PLANNER仍由独立harness推进，禁止写geometry_intent及其工区。
