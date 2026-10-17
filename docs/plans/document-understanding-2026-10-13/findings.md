@@ -1,3 +1,13 @@
+## 接收收尾的推送范围共因修复 — 2026-10-17（最新）
+
+六个DU8/DU9外包源码已接收且交付历史全部在各自主线，ET已推送7d06777；CWP接收提交5d41尚未推送，因为ROOT收尾脚本给git push错误套300秒超时，遇旧推送范围回退全Unit后提前杀Git；不能称母仓已远端发布，之前的ROOT联调绿仍有效。
+
+已直接根治推送选择共因：contract/integration/e2e的可执行test模块是其自身消费者，不应因“没有unit消费者”回退全Unit。测试模块专改时选实际模块和逆向依赖测试，保留固定smoke；生产源码、配置、全局fixture、未知/删除依赖原保守回退不变。新TDD最初4FAIL/4PASS；修复后原选择器/临时隔离/新回归集中76PASS（1.89秒），既有unit-only reason保持，不改CI全Unit或跳hook。旧收尾脚本不再用于执行push，直接正常Git由工具管理，不加虚构运行许可。
+
+**Next Step：** 正常提交本次选择器共因修复并直接push（不再套ROOT脚本300秒上限）；工具自身变更本次仍按现规则全Unit验证一次，随后只改契约测试即可收敛到相应模块。核精确远端CI和母PWF，返回CWP默认深页生产装配。外包接收完成不等于PDF/摘要或FF完整C已完成。
+
+---
+
 ## DU8/DU9全部外包已验收并线 — 2026-10-17（最新）
 
 最后ET作者6d94c38已接收：五轮独审PASS/0未解决，da82后仅文档变更；ROOT454PASS/10gold、FF117PASS、CWP12PASS。ET main/origin 7d06777e250ee3f7ae58f0be2cee62944bd2c104已正常推送并用ls-remote核对。原件/配置/作者树未改；主仓3个原未跟踪文件SHA/mtime保持，自建ROOT工区已清理。见[最后ET接收](review/du9_et_reception.md)。其余CWP/RF/FF/AUDIT五包已只读核对交付历史包含于主线，当前外包待交付=0。AUDIT无远端仍只本地发布，ET无CI不冒称CI绿。

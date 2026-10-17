@@ -1,0 +1,40 @@
+{
+  "schema_version": "push-test-scope-root-fix/1",
+  "initial_new_test_result": {
+    "failed": 4,
+    "passed": 4,
+    "cause": "changed contract/integration/e2e modules fell back to all units or omitted themselves"
+  },
+  "final_related_tests": {
+    "passed": 76,
+    "seconds": 1.89,
+    "argv": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "-o",
+      "addopts=",
+      "tests/unit/test_ci_push_selection.py",
+      "tests/unit/test_changed_test_module_scope.py",
+      "tests/unit/test_pre_push_temp_scope.py"
+    ]
+  },
+  "invariants": [
+    "runtime/config/unknown/deleted dependency conservative fallback kept",
+    "all configured CI smoke cases kept",
+    "changed executable test and known test consumers run directly",
+    "existing unit-only reason/wire preserved"
+  ],
+  "publication_error": {
+    "origin": "ROOT close_reception.py subprocess.run timeout=300 on git push",
+    "result": "CWP5d41 was committed locally but push aborted; not a test failure or remote success",
+    "et_publication_unaffected": "7d06777e250ee3f7ae58f0be2cee62944bd2c104"
+  },
+  "next": "normal direct git push with existing hooks; no artificial outer300s timeout; this selector change itself still takes full gate once"
+}

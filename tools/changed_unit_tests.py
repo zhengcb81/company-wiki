@@ -106,6 +106,12 @@ def _is_unit_test_path(name: str) -> bool:
     return name.startswith("tests/unit/") and filename.startswith("test_") and filename.endswith(".py")
 
 
+def _is_test_module_path(name: str) -> bool:
+    filename = name.rsplit("/", 1)[-1]
+    return (name.startswith(("tests/unit/", "tests/contract/", "tests/integration/", "tests/e2e/"))
+            and filename.startswith("test_") and filename.endswith(".py"))
+
+
 def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], str]:
     """Select whole test files, never individual asserts, and explain fallbacks."""
     full = ["tests/unit"]
@@ -126,16 +132,17 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
              for p in (root / directory).rglob("*.py")}
     if not relevant <= paths.keys():
         return full, "deleted or unknown dependency"
-    # Changing a unit test does not alter the runtime used by unrelated CLI or
-    # computed-import tests. Its known helper consumers still follow the graph.
-    unit_tests_only = all(_is_unit_test_path(name) for name in relevant)
+    # An executable contract/integration/E2E module is itself a test consumer.
+    # Test-only edits do not change runtime used by unrelated computed imports;
+    # known helper consumers must still follow the same reverse import graph.
+    test_modules_only = all(_is_test_module_path(name) for name in relevant)
     modules = {alias: name for name in paths for alias in _aliases(name)}
     reverse: dict[str, set[str]] = {}
     uncertain = set()
     try:
         for name, path in paths.items():
             tree = ast.parse(path.read_text(encoding="utf-8-sig"))
-            if not unit_tests_only and _dynamic_execution(tree):
+            if not test_modules_only and _dynamic_execution(tree):
                 if name in relevant:
                     return full, "dynamic execution changed"
                 uncertain.add(name)
@@ -165,7 +172,10 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
             if caller not in known:
                 known.add(caller)
                 pending.append(caller)
-    if not any(_is_unit_test_path(name) for name in known):
+    if not test_modules_only and not any(_is_unit_test_path(name) for name in known):
         return full, "no known unit consumer"
-    tests = sorted(name for name in affected if _is_unit_test_path(name))
-    return tests, "affected unit tests"
+    tests = sorted(name for name in affected if (
+        _is_test_module_path(name) if test_modules_only else _is_unit_test_path(name)
+    ))
+    includes_nonunit_change = any(not _is_unit_test_path(name) for name in relevant)
+    return tests, "affected test modules" if test_modules_only and includes_nonunit_change else "affected unit tests"
