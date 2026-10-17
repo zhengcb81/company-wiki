@@ -20,3 +20,7 @@
 **每卡交接前必须另调用独立agent，全面审查完整度和质量，所有问题修复并测试通过，由审查员复核最终受审源码SHA，零未解决才handoff.md/json。** 已有契约审查可重用，新增实际消费行为仍须检验。最终交接包含基线/实现提交/源SHA/精简命令收据/独审与恢复记录，不保留庞大原始运行树。具体白名单/契约/反控/命令均在各卡，`launch.json`为机器索引。
 
 FF公开接口注意：中性本地复用用普通SourceRequest(provider=null)，不包要求provider非空的transcript-import lookup envelope；显式fmp保留原专用lookup。普通query的unknown日期在excluded_candidates，不是可用历史来源；原provider从成功reader receipt.manifest读取。各分支反控与合格match优先规则已写卡。
+
+## 隔离 worktree 的运行来源（ROOT接收观察，2026-10-18）
+
+使用系统 Python 直接跑临时 stdin 脚本可能命中全局 editable install 的母仓源码，即使当前目录在作者树。pytest 的 conftest 置前行为不能替代独立子进程的实际来源证明。真实回放命令需按现有入口显式置前本工区 src/scripts，核关键模块 __file__ 与最终源码 SHA；若误载母仓，记录为新实现未被测试，纠正装配后只复测受影响回放，不重跑全包。测试目录仍须恢复。此项是运行收据真实性检查，不增加人工许可。

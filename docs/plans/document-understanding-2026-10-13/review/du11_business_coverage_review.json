@@ -1,0 +1,60 @@
+{
+  "schema_version": "du11-business-coverage-independent-review/1",
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at_utc": "2026-10-17T23:44:55.262658+00:00",
+  "verdict": "PASS_BUSINESS_COVERAGE_ENGINEERING_DELTA_C_OPEN",
+  "worktree": "C:/Users/郑曾波/.codex/worktrees/du11-source-facts/company-wiki",
+  "files_sha256": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "20cb13f7e4259d53e6f418da457efc1b28ae8e78b4fcacd2bcc38f2948e12a0c",
+    "tests/unit/du11_production/test_business_coverage_relations.py": "65925870e6cb25d2eb7324058a66672fba13e1b433847b146b9c980586019a15",
+    "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py": "65ff44850f0aa9946daba88015ffe0c9bd5a62aaa57e125d91d8a86a12b15e01"
+  },
+  "scope": "Bounded descriptive business-coverage classification only; no achieved-state, market-share, revenue-share or company-specific inference.",
+  "root_cause": "Native continuous carriers already retained complete text, but the reading-only business policy did not recognize explicit measured product/process/market coverage relationships. Predicate/object/measure/scope linkage is added in the existing policy owner, not in parser/gold/issuer-specific code.",
+  "findings_closed": [
+    {
+      "priority": "P1",
+      "finding": "Equipment/software words incorrectly admitted loan/receivable/asset balance ratios as operating coverage.",
+      "resolution": "Local coverage subject plus its local relation tail are screened for financial balance families."
+    },
+    {
+      "priority": "P1",
+      "finding": "A financial result denominator still admitted ordinary revenue/sales/profit/income family variants.",
+      "resolution": "Ordinary result families including English plurals and CN/TC are screened in the local denominator; genuine sales services and separate financial clauses remain eligible."
+    },
+    {
+      "priority": "P2",
+      "finding": "Broad financial screening could erase a genuine coverage clause when a neighboring independent financial clause follows or precedes it.",
+      "resolution": "Existing local break grammar scopes finance to the same relationship; positive controls preserve both clause orders."
+    }
+  ],
+  "independent_validation": {
+    "command": "PowerShell UTF-8 / PYTHONDONTWRITEBYTECODE=1; inline python -B with isolated WT/src inserted before imports; 14 bounded relation controls plus legacy unchanged assertion",
+    "exit_code": 0,
+    "passed": 15,
+    "receipt": "business-coverage-final-independent-controls.json",
+    "module_path_verified": true,
+    "real_pdf_reads": 0,
+    "model_or_network_calls": 0,
+    "source_or_author_workspace_writes": 0
+  },
+  "reused_author_evidence": {
+    "receipt": "isolated WT/.planning/du11-business-coverage-final-delta.json",
+    "final_focused": "45 PASS / 3.34s reported by author; no independent rerun",
+    "related_regression": "Prior 190 related PASS reused, no claim of final full-suite rerun",
+    "real_guard": "Prior real CN 10/10 receipt binds prior policy c0f447...; NOT relabeled as final 20cb13f7 result. Final finance-only delta preserved original native carrier in pure assessment."
+  },
+  "architecture_assessment": [
+    "One existing reading policy owner; no provider/issuer/percentage hardcodes, second parser, task store, cache, permissions or approval layer.",
+    "Relationship context bounded to existing clauses plus 100-character prefix/120-character suffix; no PDF traversal or model call added.",
+    "Legacy detector remains unchanged; new reason only descriptive business_coverage_relation; original raw text/modality/identity/locators are not modified.",
+    "Policy semantic version /8 invalidates reading selection cache by existing decision inventory binding; dynamic-version test still exercises live module value and monkeypatched next version."
+  ],
+  "unresolved_confirmed_defects": [],
+  "boundaries": [
+    "This finite grammar is source selection, not general language understanding or factual truth/achievement certification.",
+    "Engineering PASS does not certify paid summary contents, all-document recall, real providers, recovery or final C.",
+    "ROOT final C must run accepted latest revision against the specified live source/summary checks and original budgets."
+  ],
+  "integration": "May integrate these exact three file bytes; source changes after this SHA require limited delta review."
+}

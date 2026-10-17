@@ -1,12 +1,14 @@
-## DU11 最新共因与已知边界 — 2026-10-18
+## DU11 正式摘要C前工程已修并独审 — 2026-10-18
 
-CN全10项trace明确：当前超30%设备产品范围、未来五年60%高端设备市场/70%先进封装市场的110字原文，连续窗口/真实字体/候选均通过；共享业务事实识别eligible=false、score0，最终packing忠实返回budget_full。下一责任层是业务覆盖关系识别，不是PDF字体、几何或总预算。源布局修复后的8/10只是此前版本选材证据，不能代替最终源真实摘要验收。
+RF/FF两外包已派发，作者树仍独占。ROOT已提交native布局75e024cf、推送诊断ec80b0c5；本次接收共享业务覆盖关系3文件，最终独审PASS/0已知未修缺陷。此前aafbd662已修模型展示metadata及下游诊断分层，原首批三例FAIL保留，不能当作真实摘要验收完成。
 
-NFC字体反控已修并独审PASS：é组合字符不能从丢失的重音font-run推断成全部regular12；只舍弃被规范化改变片段的字体，保留真实bbox和未改兄弟片段字体。源SHA、真实字节、canonical ID与legacy0.8不变；真实解析仍一次TextPage，无假fine/cells。
+业务覆盖按同一有界关系owner处理，保留原文当前/未来及第三方状态、不推断市场份额或完成里程碑；/8只作用新reading路径，legacy0.8不变。独审发现并修金融主体/分母误升，常见收入/销售/盈利词族统一局部否控，仍保留前后独立财务分句和sales services经营正控；45集中PASS、独审15纯控制PASS，原190相关收据复用。版本测试改实时常量并保留test-next反控。
 
-CI范围初版发现P1：文件名比较/说明字符串被当资源owner会漏实际动态reader。该优化已撤回，非Python资源保守full，避免另造复杂AST数据流引擎。测试工具/顶层测试可追真实Python执行边；本次自身门禁与真实动态源变更仍full。ROOT补超时stdout/stderr诊断，独审再发现GBK控制台会抹掉UTF8雪人日志，已先RED后统一输出转义、7PASS，待最终delta。
+此前正确工区模块路径、同16M/96片段真实CN选择支持10/10、7739字、0POST；此收据绑定金融否控前c0f447版本，明确只作开发回归。最终受审20cb13f7尚须正式C实际实读选材/模型/恢复；不把旧10/10移给新SHA。首误载editable母仓的调查已记录NOT_TESTED_NEW_POLICY，施工总表已补运行来源要求。
 
-真实累计仍613575 model tokens、391272 microUSD预算proxy（$0.391272），新增unknown0/历史7仍计；本阶段修复未新增模型调用。三份真实原件只读未复制，生产config/DB不改；两个已记录旧测试Temp残留共2981888bytes维持NOT_CLEAN，不绕平台拒绝清理。
+范围工具两P1已闭：资源未知full、文件名字面量不能证明执行；本次bootstrap仍full，不宣称局部测试几秒即发布。超时日志GBK反例已修，保留600秒/红码124及真实子进度，未放行失败。远端当前仍4bc3492f、发布待正常push。
+
+**Next Step：** 在本次最终提交HEAD串行真实cn-h1→hk-annual→us-10k（当前配置、同一母账、registered_readonly、仅0.9、activation-recovery），验独立摘要质量、公共read/同run及新run同AUTO缓存、FF/RF只读消费和精确清理；随后正常push并核实际CI。C、新盲样本、完整RF审查循环仍OPEN。
 
 ---
 

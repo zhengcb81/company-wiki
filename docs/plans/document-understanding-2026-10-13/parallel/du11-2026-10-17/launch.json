@@ -98,5 +98,7 @@
   "key_content_read_allowed": false,
   "raw_document_copy_allowed": false,
   "worktrees_created": false,
-  "dispatch_occurred": false
+  "dispatch_occurred": true,
+  "dispatch_evidence": "User confirmed both packages dispatched; ROOT does not take over author trees.",
+  "worktrees_created_as_of": "Card preparation only; not a claim about current author progress."
 }

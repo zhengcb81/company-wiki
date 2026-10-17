@@ -214,7 +214,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/7"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/8"
 _READING_OBJECT = re.compile(
     r"\b(?:products?|services?|software|platforms?|hosting|cloud|subscriptions?|"
     r"customers?|users?|transactions?)\b|产品|產品|服务|服務|软件|軟件|平台|云|雲|客户|客戶|用户|用戶|订阅|訂閱", re.I)
@@ -471,6 +471,81 @@ def _segment_reporting_relation(clause: str) -> bool:
     return False
 
 
+_COVERAGE_PREDICATE = re.compile(r"覆盖|覆蓋|\bcover(?:s|ed|ing|age)?\b", re.I)
+_COVERAGE_OBJECT = re.compile(
+    r"产品|產品|设备|設備|软件|軟件|服务|服務|工艺|工藝|功能|业务|業務|"
+    r"\b(?:products?|equipment|devices?|software|services?|processes?|functions?|business)\b", re.I)
+_COVERAGE_SCOPE = re.compile(
+    r"产品|產品|设备|設備|工艺|工藝|功能|应用|應用|市场|市場|地区|地區|国家|國家|"
+    r"\b(?:products?|equipment|devices?|process(?:es|ing)?|functions?|applications?|"
+    r"markets?|regions?|countries)\b", re.I)
+_COVERAGE_RATIO = re.compile(r"\d+(?:\.\d+)?\s*(?:[%％]|percent\b)", re.I)
+_COVERAGE_COUNT = re.compile(
+    r"\d+\s*(?:个|個|类|類|项|項)?(?:海外|国内|國內|目标|目標)?"
+    r"(?:市场|市場|地区|地區|国家|國家|功能|工艺|工藝)|"
+    r"\b(?:\d+|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|"
+    r"twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)"
+    r"\s+(?:(?:regional|overseas|local|target)\s+)?"
+    r"(?:markets?|regions?|countries|functions?|processes?)\b", re.I)
+_COVERAGE_QUANTITY_PREFIX = re.compile(
+    r"^\s*(?:(?:了|率|度|为|為|达到|達到|至|约|約|超|逾|近|至少|超过|超過|"
+    r"大于|大於|将|將|已|已经|已經|可)\s*|"
+    r"(?:of|is|was|reached|currently|approximately|over|nearly|about|"
+    r"at least|more than|up to)\s+)*$", re.I)
+_COVERAGE_LOCAL_BREAK = re.compile(
+    r"[,，]|\b(?:and|but|while|whereas|whose|with|caus\w*|leading)\b|"
+    r"但是|然而|同时|以及|导致", re.I)
+_COVERAGE_SCOPE_END = re.compile(
+    r"(?:" + _COVERAGE_SCOPE.pattern + r")\s*(?:的|为|為|is|was|at|reached)?\s*$", re.I)
+_COVERAGE_FINANCIAL = re.compile(
+    r"拨备|撥備|抵押|准备金|準備金|保额|保額|赔付|賠付|偿付|償付|"
+    r"贷款|貸款|应收|應收|应付|應付|资产余额|資產餘額|"
+    r"\b(?:provisions?|collateral|reserves?|debt|liabilities|insured\s+values?|"
+    r"insured\s+amounts?|claims?|loans?|receivables?|payables?|"
+    r"asset\s+balances?)\b|insurance\s+coverage", re.I)
+# The same ordinary financial-results family as legacy _FINANCE, scoped only
+# to the coverage denominator. A sales service/network can still have genuine
+# geographic coverage; its noun is not itself a financial balance or ratio.
+_COVERAGE_FINANCIAL_RESULT = re.compile(
+    r"\b(?:revenues?|sales|earnings|profits?|incomes?|dividends?|cash\s+flows?|EPS)\b|"
+    r"收入|营收|營收|营业额|營業額|销售额|銷售額|利润|利潤|盈利|股利|股息|现金流|現金流", re.I)
+
+
+def _business_coverage_relation(clause: str) -> bool:
+    """A measured coverage predicate and explicit operating scope in one clause.
+
+    This is descriptive source meaning, not an issuer/state assignment: actual,
+    planned, conditional and third-party wording remains in the unchanged
+    source. In particular, coverage is never projected as a completed milestone
+    or converted into market share, revenue share or an achievement forecast.
+    """
+    for predicate in _COVERAGE_PREDICATE.finditer(clause):
+        before = clause[max(0, predicate.start() - 100):predicate.start()]
+        after = re.split(r"[,，]", clause[predicate.end():predicate.end() + 120], maxsplit=1)[0]
+        subject = _COVERAGE_LOCAL_BREAK.split(before)[-1]
+        relation_tail = _COVERAGE_LOCAL_BREAK.split(after, maxsplit=1)[0]
+        if (_COVERAGE_FINANCIAL.search(subject + relation_tail)
+                or _COVERAGE_FINANCIAL_RESULT.search(relation_tail)):
+            continue
+        if not (_COVERAGE_OBJECT.search(before) or _COMPANY_ANCHOR.search(before)):
+            continue
+        for measure in _COVERAGE_RATIO.finditer(after):
+            prefix = after[:measure.start()]
+            if _COVERAGE_QUANTITY_PREFIX.fullmatch(prefix):
+                # The denominator belongs to this quantity, not a new actor or
+                # a second unrelated ratio later in the same source clause.
+                denominator = _COVERAGE_LOCAL_BREAK.split(after[measure.end():], maxsplit=1)[0]
+                if _COVERAGE_SCOPE.search(denominator):
+                    return True
+            elif (not _COVERAGE_LOCAL_BREAK.search(prefix)
+                  and _COVERAGE_SCOPE_END.search(prefix)):
+                return True
+        for measure in _COVERAGE_COUNT.finditer(after):
+            if _COVERAGE_QUANTITY_PREFIX.fullmatch(after[:measure.start()]):
+                return True
+    return False
+
+
 def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
     """Specific source relationships, not a bag of nouns across sentences."""
     reasons = []
@@ -488,6 +563,8 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
             reasons.append("business_billing_basis")
         if _segment_reporting_relation(clause):
             reasons.append("business_reporting_scope")
+        if _business_coverage_relation(clause):
+            reasons.append("business_coverage_relation")
         growth = _REVENUE_GROWTH.search(clause)
         link = _DRIVER_LINK.search(clause)
         if growth and link:
