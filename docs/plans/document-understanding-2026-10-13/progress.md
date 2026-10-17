@@ -1,3 +1,15 @@
+## DU11 真实首批三例暴露共因，非验收通过 — 2026-10-18（当前）
+
+三例原件均只读/未复制/未改，测试湖均删除；结果review/du11_real_summary_first_batch.json：CN选材关键事实0/10被发送前拦、0POST；HK选材7/7后DeepSeek一次POST已知13985tokens/6159microUSD，合法业务JSON多type=json_object被旧解码器拒绝；US原文定位复核把下游新增table_structure_ambiguous误当源变化，0POST。累计613575tokens/$0.391272proxy，新增unknown0/历史7仍计，不盲重发，不把有响应当摘要通过。
+
+HK统一格式兼容与US质量分层已修并独审PASS/0代码未决：精确格式marker不进入canonical，身份/翻译/task/basis不放宽；重放保留所有原解析flag，允许既有稳定enum中的新增保守诊断，仍验真实源/文字/坐标/metadata/SHA，不把OCR标记当跑过OCR证明。模型55PASS；归一化相关76既有PASS+当前8PASS（原首轮2个新反控夹具自洽hash错误已纠正，运行源未改），Ruff通过，见review/du11_protocol_replay_review.md/json。
+
+CN普通正文缺frame/font native材料导致物理行碎片的source共因已在ROOT隔离树修，72PASS，0POST真实guard0→8/10；仍缺未来目标60/70与当前30，等待完整有界候选链trace，不抬96/16M、不加公司规则。源工程尚待独审接收，C全部仍OPEN。推送范围共因工具在独立内部线收尾，保持门禁自身/真实生产动态全量回退，不修改CI或600秒、不跳hook。
+
+**Next Step：** 提交已审模型/重放修复；接收native源和scope工具，定位修完剩余两项选材共因，再串行真实摘要/同run付费恢复/公共read/缓存/消费者及独立内容审查。正常大节点push时停ROOT自有并发重测试，核真实远端CI。
+
+---
+
 ## DU11 来源复用与同run恢复工程已独审 — 2026-10-18（当前）
 
 已接收8份冻结源码/测试：query与resolve共用当前来源事实，权威公司身份覆盖错误目录及旧ticker；handle只输出已有canonical ID，否则空列表，不造ID。相关102项通过（101+修正canonical夹具1，runtime不变），只读测试工具22PASS、恢复装配1PASS31秒。统一独审PASS/0未决代码问题，见review/du11_source_facts_c_review.md/json。三份真实SourceRef与正式语言准备已通过、原件/config/生产DB不改、0原件复制/0模型/实际预检Temp全删，见review/du11_registered_source_preflight.json。

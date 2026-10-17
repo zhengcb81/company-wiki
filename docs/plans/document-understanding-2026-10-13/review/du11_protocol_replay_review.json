@@ -1,0 +1,142 @@
+{
+  "schema_version": "du11-protocol-replay-independent-final-review/1",
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at": "2026-10-17T23:23:12.906420+00:00",
+  "repository": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+  "git_head": "54c4c2f2b136dd89f1d3104598b87b795d0e2559",
+  "verdict": "PASS_SCOPED_PROTOCOL_AND_NORMALIZED_REPLAY_ENGINEERING_DELTA_C_OPEN",
+  "confirmed_unresolved_code_findings": [],
+  "frozen_file_sha256": {
+    "src/company_wiki/automation/narrative_model_scoped.py": "f7b8093e8f07f5f414d5d418bd446c808bdfad4b88f283685521c596ceb70aa0",
+    "tests/unit/test_narrative_scoped_presentation_metadata.py": "2c6dcc2cac926c91cc1da358b812404929adf96af4eff4ba25bef57aab39d625",
+    "src/company_wiki/document_normalization/replay.py": "7bf63177865218ba34d414cffdb4d66572e310e0cf3d682c86ae5bf32fc8cad4",
+    "tests/unit/test_normalized_span_quality_layers.py": "8a631c2aab8beb01890daccac059900966c07302e7c9cc049ca8b4b2bdfd0ef6"
+  },
+  "scope": "Exactly2runtime and2test files in main/root worktree; does not receive isolated native/candidate changes or close whole productionC.",
+  "model_protocol_review": {
+    "assessment": "PASS",
+    "finite_metadata": "Only exact top-key sets{drafts_by_task} or{drafts_by_task,type}; optional type must equal json_object. No other marker value/key accepted; standardINFO log records known marker only. Canonical summary dictionary is unchanged.",
+    "preserved_semantics": "Existing prompt/UTF8/uniqueJSON/noNaN, known task, task-local basis/context, explicit translation contradiction, clause count/length/modality/path, canonical source/hash/language and quality owners unchanged. Metadata cannot overwrite claims/source facts.",
+    "dependency_causality": "Existing scoped_boundary_identity hashes actual scoped_protocol source; new implementationSHA observed through actual public boundary. No new cache/store or fake existing generation. No extra decoder string bump needed for real invalidation because current dependency hash is already causal.",
+    "test_review": "13new tests include exact canonical equality, wrong marker values, extra semantic/unknown fields, unknown task/basis;55concentrated includes existing translation, duplicateJSON, legacy identity, stale implementation, actual handler/worker/recovery controls. No assertion was relaxed to admit arbitrary output.",
+    "actual_paid_response_offline_replay": {
+      "result": "PASS_ACTUAL_PUBLIC_DISPATCH",
+      "retained_claims": 19,
+      "status": "needs_review",
+      "source_sha_same": true,
+      "language": "mixed",
+      "canonical_has_type": false,
+      "content_acceptance": false,
+      "response_sha256": "166d7ee25d03246d342ee73d36f2bb2301f6609443d73cc118580250f14fa938",
+      "public_boundary_implementation_sha256": "97e3dbaf64133cee65b75836202de7e5d83a7a738348551e5adbca3fca691763",
+      "model_calls": 0
+    },
+    "semantic_limit": "19retained/needs_review is mechanical source binding, not claim-level fact/units/required-output acceptance. Original saved paid response/charge is untouched; no new attempt/outbox/artifact activation."
+  },
+  "normalized_matcher_review": {
+    "assessment": "PASS",
+    "one_shared_rule": "Existing verify_parsed_evidence_spans now requires original source quality flags subset of selected flags. It is the one matcher shared by initial normalized selection and later original evidence replay; no special company path or second per-flag allowlist.",
+    "proof_preserved": "Exact sourceID/parser/version/rawtext/coordinates/locator/metadata/textSHA/role remain. Every original source flag must survive. Original replay_unit/replay_units still compare complete reconstructed units exactly. Unknown flags rejected by existing EvidenceSpan enum.",
+    "trust_direction": "Current flags are uncertainty/diagnostic vocabulary, never higher-trust authority. OCR_USED alone is not extraction proof; actual OCR parser/mediaSHA/config fingerprint/locator metadata remain exact. Addedwarning cannot upgrade source bytes or numeric/table attribution. Docstring explicitly states this boundary.",
+    "tests_and_fixture_review": "8final controls cover3legalwarning additions on both initial and byte replay, originalunit exact replay, removedsourceflag, actual self-consistent rawtext/parser-version tampering, forgedOCRlocator and unknownenum. Corrected EvidenceSpan.create fixtures make tampered candidates internally valid before checking them against source; the earlier outputSHA constructor failure was a setup failure rather than proof of matcher rejection.",
+    "honest_history": "RED7cases had3intendedbehavior failures+2invalidfixture failures. First related84had82PASS/2fixtureFAIL; final8PASS includes corrected2and addedunknownenum. Runtime comparator unchanged after first related run, so original76passing tests are reused; do not call this a final single84PASS run.",
+    "real_US_limit": "Prior single real HTML14.297s/5215units/96spans/8failures diagnosed quality-only mismatch. This review does not repeat real normalization, nor claim currentUS gold coverage/contentC complete."
+  },
+  "validation_evidence": {
+    "actual_xml": {
+      "presentation-metadata-red.xml": {
+        "sha256": "9a3beb050eef16e6eb1525c7a60fe84cdf691ac90a4e11ec0c3c3ce1d328f957",
+        "actual_suites": [
+          {
+            "name": "pytest",
+            "errors": "0",
+            "failures": "1",
+            "skipped": "0",
+            "tests": "13",
+            "time": "3.382",
+            "timestamp": "2026-10-18T00:14:56.091239+01:00",
+            "hostname": "DESKTOP-156V213"
+          }
+        ]
+      },
+      "presentation-metadata-green.xml": {
+        "sha256": "3b77b3338bf8e165c0382ed1578db0b0436f135718a953983654e7136c2854e8",
+        "actual_suites": [
+          {
+            "name": "pytest",
+            "errors": "0",
+            "failures": "0",
+            "skipped": "0",
+            "tests": "55",
+            "time": "19.280",
+            "timestamp": "2026-10-18T00:15:24.402434+01:00",
+            "hostname": "DESKTOP-156V213"
+          }
+        ]
+      },
+      "normalized-quality-red.xml": {
+        "sha256": "732cb92201a291d8fa19465ac11a520a8d2999734c4e972d2606abc2bf599b85",
+        "actual_suites": [
+          {
+            "name": "pytest",
+            "errors": "0",
+            "failures": "5",
+            "skipped": "0",
+            "tests": "7",
+            "time": "3.319",
+            "timestamp": "2026-10-18T00:19:15.930764+01:00",
+            "hostname": "DESKTOP-156V213"
+          }
+        ]
+      },
+      "normalized-quality-related-first.xml": {
+        "sha256": "e4a32aeaeac20eebc712684c611b7c3cd5669a8b5ebdcbbffc64e986a6093007",
+        "actual_suites": [
+          {
+            "name": "pytest",
+            "errors": "0",
+            "failures": "2",
+            "skipped": "0",
+            "tests": "84",
+            "time": "21.782",
+            "timestamp": "2026-10-18T00:19:49.584470+01:00",
+            "hostname": "DESKTOP-156V213"
+          }
+        ]
+      },
+      "normalized-quality-green.xml": {
+        "sha256": "dc4f45e10fe2de4dbdf2a790adb540920b71e03f59eac65bfd517a6e1aa83ee6",
+        "actual_suites": [
+          {
+            "name": "pytest",
+            "errors": "0",
+            "failures": "0",
+            "skipped": "0",
+            "tests": "8",
+            "time": "1.691",
+            "timestamp": "2026-10-18T00:21:32.633245+01:00",
+            "hostname": "DESKTOP-156V213"
+          }
+        ]
+      }
+    },
+    "independent_new_action": "One actual public decoder offline replay of unchanged paidHK5294byte final + saved selected; retains19needs_review, sourceSHA/language unchanged, no canonicaltype. No new real document parse/testsuite/provider call.",
+    "offline_probe_sha256": "376523850f6e09235fdcb1106600e19bc91ae8f598ccd1a7a1f0fe00c46c3849",
+    "prior_US_diagnosis_sha256": "0f811d1c365dcf12f498679d1faf7a18c0078e5788120fcffda52f630962ad94",
+    "ruff": "ROOT reports4filePASS; not independently rerun.",
+    "large_suite_reruns": 0,
+    "new_pytest_runs": 0,
+    "paid_model_network_calls": 0,
+    "real_original_reads": 0,
+    "runtime_or_gold_writes": 0,
+    "author_or_isolated_tree_changes": 0
+  },
+  "still_open": [
+    "Actual configured supplier summary/content acceptance and required-output semantic/units checks",
+    "Actual post-fixUS material/gold acceptance; prior0POSTfailure is not paid quality evidence",
+    "Separate native-source engineering3files and CN gold8/10 remaining2 facts; outside this frozen scope",
+    "Real paid activation/public/cache/consumer and blind-sampleC completion",
+    "Exact future commit/push/remoteCI; not inferred from these targeted tests"
+  ],
+  "acceptance": "ROOT may receive this4file engineering delta. Existing paid failures and fees remain historical truth. This report adds no small-node approval/identity/canary chain and makes no finalC/PWF completion claim."
+}

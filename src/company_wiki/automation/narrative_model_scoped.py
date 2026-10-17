@@ -11,6 +11,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 import hashlib
 import json
+import logging
 from pathlib import Path
 from types import MappingProxyType
 from typing import Any
@@ -26,6 +27,7 @@ SCOPED_VIEW_SCHEMA = "source-scoped-model-view/1"
 SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
 SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.0'
 SCOPED_REQUEST_SCHEMA = 'narrative-model-request/5'
+_LOG = logging.getLogger(__name__)
 SCOPED_INSTRUCTION = (
     'Summarize only the supplied original-language source tasks. No translation. '
     'Return one JSON object containing drafts_by_task, a sparse object keyed by supplied task keys. '
@@ -161,8 +163,16 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult) -> dict[st
             object_pairs_hook=legacy._unique_object, parse_constant=legacy._invalid_json_number)
     except (UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
         raise legacy.ModelResponseError('model response is not strict UTF-8 JSON') from exc
-    if not isinstance(payload, dict) or set(payload) != {'drafts_by_task'} or not isinstance(payload['drafts_by_task'], dict):
+    if (not isinstance(payload, dict)
+            or set(payload) not in ({'drafts_by_task'}, {'drafts_by_task', 'type'})
+            or not isinstance(payload['drafts_by_task'], dict)):
         raise legacy.ModelResponseError('model response must contain only drafts_by_task')
+    if 'type' in payload:
+        # Some JSON-object transports echo their presentation marker into the
+        # generated object. It supplies no source identity or claim semantics.
+        if payload['type'] != 'json_object':
+            raise legacy.ModelResponseError('unsupported response presentation type')
+        _LOG.info('ignored response presentation metadata type=json_object')
     tasks = payload['drafts_by_task']
     if any(not isinstance(rows, list) for rows in tasks.values()):
         raise NarrativeContractError('scoped task clauses must be arrays')

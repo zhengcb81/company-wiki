@@ -1,0 +1,61 @@
+{
+  "status": "REAL_C_FAIL_ROOT_CAUSES_UNDER_REPAIR",
+  "samples": [
+    {
+      "sample": "cn-h1",
+      "status": "FAIL",
+      "model_POSTs": 0,
+      "errors": [
+        "DEPENDENCY_TERMINAL",
+        "PHASE_C_GOLD_SUPPORT_MISSING"
+      ],
+      "raw_copies": 0,
+      "protected_unchanged": true,
+      "temporary_lake_removed": true,
+      "tokens": 0,
+      "micro_usd": 0,
+      "receipt": ".planning\\shared-reading-production\\du11\\live-cn-h1-sourcefacts-20261018\\receipt.json"
+    },
+    {
+      "sample": "hk-annual",
+      "status": "FAIL",
+      "model_POSTs": 1,
+      "errors": [
+        "MODEL_RESPONSE_INVALID",
+        "DEPENDENCY_TERMINAL"
+      ],
+      "raw_copies": 0,
+      "protected_unchanged": true,
+      "temporary_lake_removed": true,
+      "tokens": 13985,
+      "micro_usd": 6159,
+      "receipt": ".planning\\shared-reading-production\\du11\\live-hk-annual-sourcefacts-20261018\\receipt.json"
+    },
+    {
+      "sample": "us-10k",
+      "status": "FAIL",
+      "model_POSTs": 0,
+      "errors": [
+        "DEPENDENCY_TERMINAL",
+        "PARSER_INCOMPLETE",
+        "DEPENDENCY_TERMINAL"
+      ],
+      "raw_copies": 0,
+      "protected_unchanged": true,
+      "temporary_lake_removed": true,
+      "tokens": 0,
+      "micro_usd": 0,
+      "receipt": ".planning\\shared-reading-production\\du11\\live-us-10k-sourcefacts-20261018\\receipt.json"
+    }
+  ],
+  "mother_totals": {
+    "charged_tokens": 613575,
+    "charged_micro_usd": 391272,
+    "new_unknown_count": 0,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "false_acceptance_prevented": true,
+  "blind_resends": 0
+}

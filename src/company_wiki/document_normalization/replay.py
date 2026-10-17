@@ -253,6 +253,10 @@ def verify_parsed_evidence_spans(units, *, source_id, evidence_spans) -> int:
     The caller owns verified bytes and parsing. This pure matching port is
     shared by initial selection and later original replay; it never opens,
     reparses, downloads or enriches a document.
+
+    Parser quality is source-owned and cannot be removed. Selection may append
+    conservative diagnostics from EvidenceSpan's existing quality vocabulary;
+    these do not prove an extraction method or replace parser/media locators.
     """
     spans = tuple(evidence_spans)
     if not spans:
@@ -271,7 +275,7 @@ def verify_parsed_evidence_spans(units, *, source_id, evidence_spans) -> int:
             or candidate.parser_name != PARSER_NAME
             or span.raw_text != candidate.raw_text
             or span.coordinates != candidate.coordinates
-            or set(span.quality_flags) != set(candidate.quality_flags)
+            or not set(candidate.quality_flags).issubset(span.quality_flags)
         ):
             raise ReplayError(
                 "selected span text/coordinates/quality differs from source"
