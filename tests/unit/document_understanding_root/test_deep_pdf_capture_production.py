@@ -10,7 +10,7 @@ from company_wiki.source_catalog import narrative_evidence as pdf
 from company_wiki.source_contract import source_id_for_sha256
 
 
-def _bytes(pages=80, table_pages=(75, 76)):
+def _bytes(pages=80, table_pages=(75, 76), *, business_table=False):
     fitz = pytest.importorskip("fitz")
     doc = fitz.open()
     for physical in range(1, pages + 1):
@@ -23,8 +23,8 @@ def _bytes(pages=80, table_pages=(75, 76)):
             for y in (180, 210, 240):
                 page.draw_line((70, y), (430, y))
             for y, label, value in (
-                (200, "Metric", "FY2025"),
-                (230, "Production", "18"),
+                (200, "Capacity (units/year)" if business_table else "Metric", "FY2025"),
+                (230, "Plant A" if business_table else "Production", "18"),
             ):
                 page.insert_text((80, y), label)
                 page.insert_text((270, y), value)
@@ -92,17 +92,17 @@ def test_explicit_deep_targets_have_fine_cells_without_capture_of_a_prefix():
     assert rich.pages_read == 80
 
 
-def test_auto_source_triage_captures_deep_candidate_and_real_neighbours(monkeypatch):
-    registry = import_module("company_wiki.document_understanding.profiles.registry")
-    monkeypatch.setattr(
-        registry, "configured_table_signal", lambda text: "ROOT_TABLE_TARGET" in text
-    )
-    raw = _bytes(table_pages=(75,))
+def test_auto_source_observes_deep_business_without_blanket_neighbour_discovery():
+    # The production owner uses actual measured fields; a keyword elsewhere
+    # on a page is no longer an instruction to scan both blank neighbours.
+    raw = _bytes(table_pages=(75,), business_table=True)
     parsed = _parse(raw)
-    assert parsed.table_scan_pages == (74, 75, 76)
+    assert parsed.table_scan_pages == (75,)
     assert _fine(parsed, 75)
-    assert parsed.layout_coverage["capture"]["requested_pages"] == [74, 75, 76]
-    assert parsed.layout_coverage["capture"]["captured_pages"] == [74, 75, 76]
+    assert parsed.layout_coverage["capture"]["requested_pages"] == [75]
+    assert parsed.layout_coverage["capture"]["captured_pages"] == [75]
+    assert parsed.layout_coverage['planning']['navigation_missing']
+    assert not parsed.layout_coverage['planning']['complete']
 
 
 @pytest.mark.parametrize(
@@ -119,7 +119,9 @@ def test_zero_geometry_limits_keep_original_units_and_explicit_deferred_targets(
 ):
     raw = _bytes(pages=3, table_pages=(3,))
     parsed = _parse(raw, table_pages=(3,), layout_limits={limit: value})
-    legacy = _parse(raw, table_pages=(3,), selector_version="0.8.0")
+    # Zero work blocks actual table discovery too. Preserve all canonical
+    # text, without inventing table rows whose extraction was never executed.
+    legacy = _parse(raw, table_pages=() if limit == 'max_work_units' else (3,), selector_version="0.8.0")
     assert _identity(parsed) == _identity(legacy)
     assert not _fine(parsed, 3)
     capture = parsed.layout_coverage["capture"]

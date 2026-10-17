@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "offering_cn_convertible",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "applies_to": {
     "regimes": [
       "cn_exchange"
@@ -95,6 +95,30 @@
         "discover": "on_tabular_evidence",
         "fine": "on_candidate",
         "demand_class": "project"
+      }
+    },
+    {
+      "role": "business",
+      "aliases": [
+        "发行人基本情况",
+        "发行人业务情况",
+        "业务与技术"
+      ],
+      "heading_path": [
+        [
+          "发行人基本情况",
+          "发行人业务情况",
+          "业务与技术"
+        ]
+      ],
+      "priority": 1,
+      "questions": [
+        "发行人现有主营业务、主要产品、产销量、客户和竞争能力，为募投项目提供原有业务基线"
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
       }
     },
     {

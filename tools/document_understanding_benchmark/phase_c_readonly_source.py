@@ -124,6 +124,10 @@ def prepare_registered_source(
             raise ReadonlySourceGap("registered_source_sha_mismatch")
         opened = reader.open_version(ref, purpose="narrative_derivation")
         manifest = reader.describe_version(ref)
+        # query_local owns issuer/period/kind/as-of qualification. Display facts
+        # and language declarations are observations, not a second admission
+        # contract: formal narrative preparation normalizes/detects language.
+        descriptor_diagnostics = {}
         for field in (
             "market",
             "security_id",
@@ -139,14 +143,16 @@ def prepare_registered_source(
                 type(manifest.get(field)) is not type(expected)
                 or manifest.get(field) != expected
             ):
-                raise ReadonlySourceGap(
-                    "registered_source_metadata_gap", detail={"field": field}
-                )
+                descriptor_diagnostics[field] = {
+                    "expected": expected,
+                    "observed": manifest.get(field),
+                }
         if opened.content_sha256 != expected_sha256:
             raise ReadonlySourceGap("registered_source_sha_mismatch")
         return {
             "source_ref": asdict(ref),
             "manifest": manifest,
+            "descriptor_diagnostics": descriptor_diagnostics,
             "catalog_config": str(target),
             "raw_copies": 0,
             "verified_sha256": opened.content_sha256,

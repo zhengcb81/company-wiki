@@ -1,3 +1,9 @@
+## 2026-10-17 readonly boundary correction (ROOT C preflight)
+
+Real CN zh-CN and US unknown language were rejected by the benchmark exact-manifest loop even though formal source preparation supports both. Keep query issuer/kind/period/as-of admission, unique SourceRef, SHA and real open; make descriptor URL/date/language differences diagnostic only. TDD corrected RED 4/4 (language-red-corrected.json); final affected 11 PASS / 0 SKIP in29.12s, Ruff PASS, frozen source SHA unchanged across run. Initial synthetic import fixture rejected locale tags and was corrected before the true RED; retain receipt. Actual source preparation and owned HK facts consumer inconsistency are documented in ROOT-owned .planning/shared-reading-production/du11/source-preflight-review.md/json. No HK facts copied into this helper, no production data/config change or paid/network call. Tool implementation frozen; ROOT performs one combined independent review with source-owner projection fix, no extra small-node gate. See language-fix-handoff.md/json.
+
+---
+
 ## 最终软件节点（2026-10-17）
 
 最终冻结三文件集中9PASS/0SKIP，60.51秒，前后SHA相同；Ruff PASS。8prepared输入指纹与母账完全不变。已有初始RED、fixture错误与最终绿均保留；外层终端GBK echo错误不影响已落盘pytest exit0/XML。详handoff.md/json、final-test-receipt.json。本包实现测试完成，等待ROOT独立reviewer；未commit/push，不能标独审COMPLETE。真实provider质量/metadata补全仍ROOTC。

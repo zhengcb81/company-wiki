@@ -1,3 +1,13 @@
+## DU11 工程接线已提交，正常推送修复中 — 2026-10-17（当前）
+
+共享引擎生产接线提交d52a6562，正式CN/HK单账户选材与独立工程B审查通过，真实模型摘要/缓存恢复C仍OPEN。两张RF/FF卡已派发，作者工区不改。
+
+正常push的完整预推送6455项结果6428PASS/24SKIP/3FAIL（585.28秒），未推远端。三项已从契约确认修正：旧测试不再要求空邻页扫表；零工作预算以完整text-only canonical身份对照，其他零cap仍对照table ID；offering策略canonical设计源同步已审1.0.3资产，运行资产字节未变。37集中PASS/5秒、独审PASS且18份B运行源SHA未变。只读测试工具删除query之后重复manifest精确门禁，正式语言owner/错误身份期间asof拒绝仍在，11PASS和独审PASS。
+
+**Next Step：** 正常提交并推送上述修正，核完整预推送和精确CI；随后按[来源事实统一投影与C验收](review/source_metadata_reuse_phase_c.md)先TDD修复query/resolve事实投影，再真实摘要/缓存恢复。不跳hook、不新增小节点许可。
+
+---
+
 ## DU11 默认正式handler同账户已通过 — 2026-10-17
 
 完整实测后才修订本机工作默认：283页金禾实需约9.196M工作，246页HK约10.794M；旧2M是单布局默认，不是多个阶段组合的容量，和用户2M模型tokens无关。统一16M默认factory，显式更小账户仍严格，原fine1M/64页/15秒保留，未知探索封顶250k而不随父账户放大。原始2M失败和fresh16M诊断不充当正式绿；已新增正式handler→唯一factory→parse→select→原文span验证一次回放：CN26.31秒/160spans、HK24.465秒/96spans，均partial、原件未改、0收费，source与selector同一个账户且未耗尽。机器收据review/du11_production_wiring.json。

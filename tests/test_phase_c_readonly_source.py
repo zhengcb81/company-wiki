@@ -385,7 +385,9 @@ def test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model
         provider = meta["providers"][0]
         # This live-shaped request is never sent. Use a valid HTTPS fixture
         # endpoint so the production request validator reaches the held CLI.
-        provider["options"]["endpoint"] = "https://model.fixture.invalid/chat/completions"
+        provider["options"]["endpoint"] = (
+            "https://model.fixture.invalid/chat/completions"
+        )
         monkeypatch.setattr(runner, "source_descriptor", lambda _sample: descriptor)
         calls = []
 
@@ -429,7 +431,9 @@ def test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model
             selected_versions="0.9.0",
             reading_model_projection="reading-model-input/4",
         )
-        if len(calls) != 1 or "ROOT_OFFLINE_MODEL_NOT_STARTED" not in actual.get("error", ""):
+        if len(calls) != 1 or "ROOT_OFFLINE_MODEL_NOT_STARTED" not in actual.get(
+            "error", ""
+        ):
             pytest.fail(json.dumps(actual, ensure_ascii=False, indent=2))
         assert (
             actual["status"] == "FAIL"
@@ -464,3 +468,117 @@ def test_invalid_registered_configuration_fails_before_allocating_temp(
             source_catalog_config=tmp_path / "missing.yaml",
         )
     assert allocated == []
+
+
+@pytest.mark.parametrize(
+    "declared,expected_family",
+    [("en-US", "en"), ("en", "en"), (None, "en"), ("zh-CN", "zh")],
+)
+def test_registered_source_defers_language_and_display_facts_to_source_owner(
+    tmp_path, declared, expected_family
+):
+    from types import SimpleNamespace
+    from company_wiki.automation.narrative_batch import _current_sources
+    from company_wiki.automation.narrative_batch_request import NarrativeBatchItem
+    from tools.document_understanding_benchmark.phase_c_readonly_source import (
+        prepare_registered_source,
+    )
+
+    with reuse.setup_source("http://127.0.0.1:1/chat/completions") as (
+        _root,
+        catalog,
+        config,
+        _,
+        imported,
+        _kind,
+    ):
+        original, descriptor = _fixture_source(catalog, imported)
+        # This owned synthetic sidecar models existing acquisition observations.
+        # New official imports deliberately accept worker families only; existing
+        # catalogs may contain locale tags or unknown language (the real CN/US cases).
+        sidecar = original.with_name(original.name + ".source.json")
+        acquisition = json.loads(sidecar.read_text(encoding="utf-8"))
+        acquisition["language"] = declared
+        acquisition["candidate"]["language"] = declared
+        acquisition["request"]["language"] = declared
+        sidecar.write_text(json.dumps(acquisition), encoding="utf-8")
+        descriptor.update(
+            language=expected_family,
+            source_url="https://descriptor.example/different",
+            published_date="2026-08-25",
+        )
+        before = {
+            p: _fingerprint(p)
+            for p in (original, sidecar, config, catalog.config.database_path)
+        }
+        result = prepare_registered_source(
+            source_config=config,
+            owned_root=tmp_path / "owned",
+            original=original,
+            expected_sha256=imported["source_ref"]["content_sha256"],
+            descriptor=descriptor,
+            as_of_date="2026-10-17",
+        )
+        assert result["manifest"]["language"] == declared
+        assert result["manifest"]["published_date"] == "2026-08-26"
+        assert result["descriptor_diagnostics"]["published_date"] == {
+            "expected": "2026-08-25",
+            "observed": "2026-08-26",
+        }
+        assert result["manifest"]["source_url"] != descriptor["source_url"]
+        owned = SourceCatalog(load_catalog_config(Path(result["catalog_config"])))
+        try:
+            item = NarrativeBatchItem.from_dict(
+                {"kind": "raw", "source_ref": result["source_ref"]}
+            )
+            payloads, _ = _current_sources(
+                SimpleNamespace(work_items=[item]), SourceVersionReader(owned)
+            )
+            assert (
+                payloads[0].to_dict()["source_metadata"]["language"] == expected_family
+            )
+        finally:
+            owned.close()
+        assert all(_fingerprint(p) == fingerprint for p, fingerprint in before.items())
+        assert result["raw_copies"] == 0
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"entity": "Different issuer"},
+        {"market": "HK"},
+        {"security_id": "OTHER"},
+        {"fiscal_year": 2027},
+        {"fiscal_period": "Q4"},
+        {"document_kind": "annual_report"},
+        {"_as_of_date": "2026-08-25"},
+    ],
+)
+def test_registered_source_identity_and_period_still_belong_to_query(tmp_path, change):
+    from tools.document_understanding_benchmark.phase_c_readonly_source import (
+        prepare_registered_source,
+        ReadonlySourceGap,
+    )
+
+    with reuse.setup_source("http://127.0.0.1:1/chat/completions") as (
+        _root,
+        catalog,
+        config,
+        _,
+        imported,
+        _kind,
+    ):
+        original, descriptor = _fixture_source(catalog, imported)
+        descriptor.update(
+            {key: value for key, value in change.items() if not key.startswith("_")}
+        )
+        with pytest.raises(ReadonlySourceGap, match="registered_source_not_found"):
+            prepare_registered_source(
+                source_config=config,
+                owned_root=tmp_path / "owned",
+                original=original,
+                expected_sha256=imported["source_ref"]["content_sha256"],
+                descriptor=descriptor,
+                as_of_date=change.get("_as_of_date", "2026-10-17"),
+            )

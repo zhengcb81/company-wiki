@@ -1,0 +1,38 @@
+{
+  "schema_version": "du11-readonly-boundary-fix/1",
+  "baseline_head": "d52a6562ffb858f6bebe78322ce14198df1d0144",
+  "status": "IMPLEMENTED_TESTED_AWAITING_ROOT_INDEPENDENT_REVIEW",
+  "source_sha256": {
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": "22ccb3c2497380280f2c34c3d76de24b443ea1d617724c2b0c5df3db51223862",
+    "tests/test_phase_c_readonly_source.py": "4182e664266301467109aae61d177a0cedc6060e8d255616d9c23a18972c14d5"
+  },
+  "tested_source_unchanged": true,
+  "focused_tests": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "pytest_seconds": 29.12,
+    "process_seconds": 34.8244083999889,
+    "receipt": "language-final-test-receipt.json",
+    "junit": "language-final-junit.xml"
+  },
+  "red": "language-red-corrected.json",
+  "first_fixture_error": "language-red.json: official new import refuses locale tags; fixed synthetic legacy metadata before baseline, not production sidecar",
+  "ruff": "PASS",
+  "model_calls": 0,
+  "production_writes": 0,
+  "temporary_directory_removed": true,
+  "usage_ledger_sha256": "5c0e7748bba55ef287c9f412b234f15140155c1fa071919d70bee81772e32262",
+  "mother_usage": {
+    "tokens": 599590,
+    "micro_usd": 385113,
+    "unknown_historical": 7
+  },
+  "excluded_scope": [
+    "HK facts registration or resolver source edits",
+    "new model or fee client",
+    "network or providers",
+    "mother plan edits",
+    "commit or push"
+  ]
+}

@@ -1,3 +1,9 @@
+## 2026-10-17 readonly boundary correction (ROOT C preflight)
+
+Real CN zh-CN and US unknown language were rejected by the benchmark exact-manifest loop even though formal source preparation supports both. Keep query issuer/kind/period/as-of admission, unique SourceRef, SHA and real open; make descriptor URL/date/language differences diagnostic only. TDD corrected RED 4/4 (language-red-corrected.json); final affected 11 PASS / 0 SKIP in29.12s, Ruff PASS, frozen source SHA unchanged across run. Initial synthetic import fixture rejected locale tags and was corrected before the true RED; retain receipt. Actual source preparation and owned HK facts consumer inconsistency are documented in ROOT-owned .planning/shared-reading-production/du11/source-preflight-review.md/json. No HK facts copied into this helper, no production data/config change or paid/network call. Tool implementation frozen; ROOT performs one combined independent review with source-owner projection fix, no extra small-node gate. See language-fix-handoff.md/json.
+
+---
+
 # Findings
 
 唯一旧工具是tools/document_understanding_benchmark/phase_c_runner.py；owned-runner旧入口只是wrapper。已有purpose=narrative/母费用账/同run和同AUTO跨run0POST/公开exactRef，不需第二套客户端。

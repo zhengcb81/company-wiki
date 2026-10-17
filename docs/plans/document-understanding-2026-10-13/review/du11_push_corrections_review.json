@@ -1,0 +1,80 @@
+{
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at": "2026-10-17T22:53:30.033319+00:00",
+  "verdict": "PASS_FINITE_TEST_CANONICAL_AND_TOOL_DELTAS",
+  "head": "d52a6562ffb858f6bebe78322ce14198df1d0144",
+  "scope": "Two pre-push failure correction files plus the two-file readonly source tool language/display boundary delta; no full architecture or production-C acceptance.",
+  "file_sha256": {
+    "tests/unit/document_understanding_root/test_deep_pdf_capture_production.py": "1682fd3ef43641088a662b5d5992c995e439b3ca7958df40ef2fce9dc5fe65a7",
+    "docs/plans/document-understanding-2026-10-13/review/deliverables/families/records/offering_cn_convertible.json": "9eb86fafadc865b4ae5bc880bed7c1e5cb6095758312a39cb8da9ad775274f15",
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": "22ccb3c2497380280f2c34c3d76de24b443ea1d617724c2b0c5df3db51223862",
+    "tests/test_phase_c_readonly_source.py": "4182e664266301467109aae61d177a0cedc6060e8d255616d9c23a18972c14d5"
+  },
+  "confirmed_unresolved_findings": [],
+  "runtime_B_frozen_manifest_recheck": {
+    "file": ".planning/shared-reading-production/du11/wiring-review-final.json",
+    "runtime_files": 18,
+    "mismatches": []
+  },
+  "test_corrections_review": {
+    "auto_deep": "PASS: removes monkeypatch of configured_table_signal not consumed by the new owner. Adds real Capacity(units/year) field grid and retains actual deep p75 table discovery/fine cells/capture assertions; blank74/76 are correctly not forced. Missing-outline remains partial rather than complete. This tests new measured-evidence behavior instead of deleted implementation plumbing.",
+    "zero_work": "PASS: max_work_units0 prevents actual finder, so comparison to legacy text-only is appropriate. It still compares full canonical unit identity/text/locator/parser/version/kind/role and deferred target/incomplete capture. Other3zero caps preserve prior table-inclusive legacy identity comparison. No runtime behavior or assertion globally weakened.",
+    "canonical": "PASS: v1.0.3 source record exactly equals current runtime family object, including schema_version. New issuer-business aliases and geometry priority already approved in prior B review; all18runtime file hashes match B frozen manifest. This fixes canonical-generator source drift, not regenerating runtime to make tests pass."
+  },
+  "tool_delta_review": {
+    "verdict": "PASS",
+    "responsibility": "SourceRequest exact issuer/kind/market/security/period/form/as-of query remains unchanged; found+one match, SHA ref, open_version, describe and final byte SHA remain. Only subsequent duplicate manifest-vs-descriptor exact comparisons become returned diagnostics. Diagnostics preserve actual manifest rather than replacing it with caller expected fields.",
+    "language_owner": "Formal narrative_batch._current_sources still validates currentRef/policy, opens and validates SHA for unknown language before detecting actual bytes, and normalizes declared locale via narrative_language_family. The tool does not add another classifier or overwrite source metadata.",
+    "regression_evidence": "Author new11 tests:4 locales/unknown and differing display URL/date,7 wrong identity/period/as-of negative cases. Actual query and current_sources exercised; synthetic sidecar only, no production writes. Source/test currentSHA equal handoff and before/after testreceipt.",
+    "boundaries": "Read-only helper still uses owned catalog and current configured roots. New diagnostics are not independent source verification, nor authority to fabricate metadata. Existing real HK metadata projection/query issue remains separate ROOT production-C work, not bypassed by this fix."
+  },
+  "existing_test_receipts": {
+    ".planning/shared-reading-production/du11/push-failure-corrections.xml": {
+      "sha256": "ae7f661bc3bc2035b85aaa21ddc90e9f295018767d0deda208fbf07d186648da",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "37",
+          "time": "4.969",
+          "timestamp": "2026-10-17T23:51:36.009490+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "method": "Read existing ROOT/author completed XML; reviewer did not repeat these tests."
+    },
+    "docs/plans/document-understanding-2026-10-13/review/du11-live-runner/language-final-junit.xml": {
+      "sha256": "def46513b2bd4063f41f583560c6f729fd4314c2db200b7a13df4d0b3b7d637d",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "11",
+          "time": "29.124",
+          "timestamp": "2026-10-17T23:47:37.194673+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "method": "Read existing ROOT/author completed XML; reviewer did not repeat these tests."
+    }
+  },
+  "author_handoff_sha256": "eae441ab5b9afc3030f9090860d5388caae1b0374bd38cb664259e041b7a681b",
+  "author_test_receipt_sha256": "da0357b16615d15469e73e5d4ad79982c0e951f4ecc8ca4a7fc5bb79058bd44c",
+  "validation_constraints": {
+    "new_test_runs": 0,
+    "network_provider_model_calls": 0,
+    "raw_reads": 0,
+    "source_changes": 0,
+    "author_tree_changes": 0,
+    "review_report_writes_only": true
+  },
+  "still_open": [
+    "Real source metadata projection/query root cause owned by ROOT in C",
+    "Paid summaries, cache recovery and blind-sample C acceptance",
+    "Pre-push full suite had3 failures before these corrections;37corrected targeted and11tool tests now green. This report does not claim a second full6455suite was run or remote CI succeeded."
+  ]
+}

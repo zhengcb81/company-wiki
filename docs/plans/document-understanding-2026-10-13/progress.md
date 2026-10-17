@@ -1,3 +1,13 @@
+## DU11 工程接线已提交，正常推送修复中 — 2026-10-17（当前）
+
+共享引擎生产接线提交d52a6562，正式CN/HK单账户选材与独立工程B审查通过，真实模型摘要/缓存恢复C仍OPEN。两张RF/FF卡已派发，作者工区不改。
+
+正常push的完整预推送6455项结果6428PASS/24SKIP/3FAIL（585.28秒），未推远端。三项已从契约确认修正：旧测试不再要求空邻页扫表；零工作预算以完整text-only canonical身份对照，其他零cap仍对照table ID；offering策略canonical设计源同步已审1.0.3资产，运行资产字节未变。37集中PASS/5秒、独审PASS且18份B运行源SHA未变。只读测试工具删除query之后重复manifest精确门禁，正式语言owner/错误身份期间asof拒绝仍在，11PASS和独审PASS。
+
+**Next Step：** 正常提交并推送上述修正，核完整预推送和精确CI；随后按[来源事实统一投影与C验收](review/source_metadata_reuse_phase_c.md)先TDD修复query/resolve事实投影，再真实摘要/缓存恢复。不跳hook、不新增小节点许可。
+
+---
+
 ## DU11 真实全链容量诊断 — 2026-10-17
 
 - 两外包卡已派发，ROOT继续独占CWP，不改变作者工区。
