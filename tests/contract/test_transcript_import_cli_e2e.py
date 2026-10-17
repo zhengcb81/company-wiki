@@ -308,8 +308,13 @@ def test_fmp_unknown_publication_cli_stores_original_but_excludes_historical_cut
         assert not any("path" in key.lower() for key in source_ref)
         files = [p for p in (root / "companies").rglob("*.json") if not p.name.endswith(".source.json")]
         assert len(files) == 1 and files[0].read_bytes() == original
-        assert files[0].name.startswith("unknown-date_fmp_")
+        # Storage owns the physical filename (including Windows path budgets).
+        # Provider/publication semantics live in provenance and the reader,
+        # rather than in the spelling of the raw file's name.
+        assert files[0].suffix == ".json"
         sidecar = json.loads(files[0].with_name(files[0].name + ".source.json").read_text(encoding="utf-8"))
+        assert sidecar["provider"] == "fmp"
+        assert sidecar["filing_date"] is None
         audit = sidecar["provenance_extensions"]["transcript_acquisition"]
         assert audit["call_date"] == "2026-07-22"
         assert audit["publication_date"] is None

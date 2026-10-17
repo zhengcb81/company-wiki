@@ -1,0 +1,35 @@
+[
+  {
+    "repo": "CWP",
+    "branch": "master",
+    "delivered_history_in_main": true,
+    "commits": [
+      "e4f946a2bd90f6231ca7542439fdf97512efaa7e",
+      "6e0edeefa7b46def4df61ebb538051f44363eb50"
+    ]
+  },
+  {
+    "repo": "RF",
+    "branch": "main",
+    "delivered_history_in_main": true,
+    "commits": [
+      "8845bc180efaf8b1638ee2056e5152014b425dd5"
+    ]
+  },
+  {
+    "repo": "FF",
+    "branch": "main",
+    "delivered_history_in_main": true,
+    "commits": [
+      "6f381199f146109b4f517537a70da1c20c6e05bd"
+    ]
+  },
+  {
+    "repo": "AUDIT",
+    "branch": "main",
+    "delivered_history_in_main": true,
+    "commits": [
+      "3ed248df06b2ba00e4f59d930647149ecc1f88af"
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 {
   "schema_version": "du8-launch/1",
-  "status": "TWO_DELIVERIES_INTEGRATED_FF_C_OPEN_RF_EXTERNAL",
+  "status": "ALL_DELIVERIES_RECEIVED_ROOT_PRODUCTION_WORK_OPEN",
   "lanes": [
     {
       "id": "DU8-RF-COMPARISON",
@@ -22,12 +22,13 @@
       "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-du8-comparison",
       "plan": "docs/plans/du8-comparison-2026-10-16/task_plan.md",
       "seed_commit": "e86488a701ee8a107b432749e85003b9d115d407",
-      "status": "IN_PROGRESS_EXTERNAL",
+      "status": "ROOT_ACCEPTED_MAINLINE_PUBLISHED",
       "hooks": ".githooks",
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "bytes": 4878719,
       "business_tests": "NOT_RUN_AUTHOR_TASK",
-      "startup_clean": true
+      "startup_clean": true,
+      "owner": "ROOT"
     },
     {
       "id": "DU8-FF-MATRIX-COMPLETION",

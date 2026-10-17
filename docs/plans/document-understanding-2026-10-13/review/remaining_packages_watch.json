@@ -46,20 +46,24 @@
       "card": "DU9-ET-LEGACY-COMPARISON",
       "workdir": "C:/Users/郑曾波/Projects/earnings-transcripts-du9-legacy-comparison",
       "plan": "docs/plans/du9-legacy-comparison-2026-10-16",
-      "head": "36c9b38cd8ed29ad991a4c6ec0194fb5791026a5",
-      "status": "IMPLEMENTATION_RECEIPTS_PRESENT_HANDOFF_PENDING",
-      "details": "已提交有界legacy比较与真实入口测试，工作树干净；作者收据170/193/58 PASS及10 golden（不同套件不可相加）；未见最终handoff和独审，作者PWF尚为旧READY。ROOT本次未重跑测试。"
+      "head": "6d94c38df1f0edaae34cfed199ae8407287b0681",
+      "status": "ROOT_ACCEPTED_MAINLINE_PUBLISHED",
+      "details": "454PASS、10gold、FF117PASS、CWP12PASS；五轮独审最终源未变；完整历史已发布ET main，ROOT临时工区清理。仓库未配置CI，未冒称CI绿。",
+      "owner": "ROOT",
+      "external_watch": false,
+      "publication_commit": "7d06777e250ee3f7ae58f0be2cee62944bd2c104"
     }
   ],
   "root_followups": [
     "FF完整41例C与完整中断重启仍OPEN，不是第五条待作者交付包；不因工程已并线把C写完成。"
   ],
-  "external_packages_remaining": 1,
+  "external_packages_remaining": 0,
   "automation_note": "2026-10-17 Codex automation_update返回该任务不存在/可能被手动删除；保留用户可能的删除意图，不重建、不声称定期巡查仍有效。",
   "acceptance_updated_at_utc": "2026-10-17T05:51:15.244496+00:00",
   "root_cwp_publication": {
     "commit": "c300e801fd4d3735078ec4b77ced26ddb3a5a59d",
     "ci_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39008113871",
     "conclusion": "success"
-  }
+  },
+  "all_current_packages_received": true
 }

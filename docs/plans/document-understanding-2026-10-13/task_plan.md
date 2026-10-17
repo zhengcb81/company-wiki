@@ -1,3 +1,21 @@
+## DU8/DU9全部外包已验收并线 — 2026-10-17（最新）
+
+最后ET作者6d94c38已接收：五轮独审PASS/0未解决，da82后仅文档变更；ROOT454PASS/10gold、FF117PASS、CWP12PASS。ET main/origin 7d06777e250ee3f7ae58f0be2cee62944bd2c104已正常推送并用ls-remote核对。原件/配置/作者树未改；主仓3个原未跟踪文件SHA/mtime保持，自建ROOT工区已清理。见[最后ET接收](review/du9_et_reception.md)。其余CWP/RF/FF/AUDIT五包已只读核对交付历史包含于主线，当前外包待交付=0。AUDIT无远端仍只本地发布，ET无CI不冒称CI绿。
+
+**Next Step：** ROOT继续既有默认深页实施的原生导航/唯一matcher/POLICY+PLANNER/同一WorkBudget/source单parse生产接线，随后真实PDF深页、配置供应商正式摘要、缓存恢复、holdout；FF完整41例C及完整中断恢复仍OPEN。全部外包接收不等于整个项目完成。旧巡查任务不存在，未重建。
+
+---
+
+## 全部外包交付：最后ET包接收 — 2026-10-17（最新）
+
+用户确认全部外包完成。RF/两个CWP组件已验收发布；唯一待接收ET作者HEAD6d94c38、工区干净，最终独审第5轮PASS/0未解决绑定da82f3a，da82..HEAD只变交接文档，源/测试未变。沿用已有五轮独审，不重复发起同范围审查；ROOT核版本/范围与最终集中回归，若发现新delta再按实际风险复核，不新增小门禁。
+
+**A/B/C收尾：** A核作者22条白名单、冻结legacy oracle不变、主仓既有未跟踪.workbuddy-ai/eval_results保持；B ROOT隔离工区保留作者全历史，复测DU9+DU7/ROOT+提取/API预算相关回归和10gold；C 并线前FF→ET→CWP离线契约联调，正常快进/推送，核实际远端配置和必要定点同步，再更新母PWF/清理自建工区。0收费/翻译/外网provider/原件复制，真实CWP PDF/摘要仍OPEN。
+
+**Next Step：** 建立ET ROOT小型隔离接收工区，集中执行实际最终源测试。首轮沙箱外部Git误报非worktree，正常主机只读核对已恢复；ET无AGENTS、无.githooks/pre-push和.github/workflows/ci.yml，实际现有检查按Git跟踪列表核对，不凭猜测加新CI。ET未初始化CodeGraph，仅接收既有已审源码，已知文件读回即可，不在作者树建索引。
+
+---
+
 ## DU8 RF对比外包已接收并发布 — 2026-10-17（最新）
 
 作者8845bc18完整历史并入RF main/origin c984a8fa，ROOT共因修复b41dceef。最终28相关套件558PASS/7SKIP＋163subtests、26.09秒；独审PASS/0未解决、12SHA绑定；正常pre-push416PASS＋36subtests，精确CI39016431219 SUCCESS。三份安装各4文件定点同步，6正常运行/6篡改拒绝通过。既有main告警WIP与147个output未变，作者工区只读。见[最终接收与具体修复](review/du8_rf_reception.md)。不是对作者旧冻结声明/旧收据盲签；删除3项重复AST表达式门禁，保留所有关键行为/数字gold，修复bool/null类型共因。

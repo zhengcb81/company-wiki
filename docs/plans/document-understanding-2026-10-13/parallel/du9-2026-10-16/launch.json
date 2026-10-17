@@ -1,6 +1,6 @@
 {
   "schema_version": "du9-launch/1",
-  "status": "CWP_COMPONENTS_PUBLISHED_CI_SUCCESS_PRODUCTION_OPEN",
+  "status": "ALL_DELIVERIES_RECEIVED_ROOT_PRODUCTION_WORK_OPEN",
   "lanes": [
     {
       "id": "DU9-CWP-GEOMETRY-POLICY",
@@ -55,12 +55,14 @@
       "seed_commit": "306ce2df1c622e635770de1dee8caba5057b9716",
       "plan": "docs/plans/du9-legacy-comparison-2026-10-16/task_plan.md",
       "card": "du9_et_legacy_comparison.md",
-      "status": "NOT_RECEIVED_RESERVED",
+      "status": "ROOT_ACCEPTED_MAINLINE_PUBLISHED",
       "startup_clean": true,
       "imports": "CURRENT_WORKTREE_IMPORT_OK",
       "independent_review_required": true,
       "business_tests": "NOT_RUN_AUTHOR_TASK",
-      "bytes": 637419
+      "bytes": 637419,
+      "owner": "ROOT",
+      "publication_commit": "7d06777e250ee3f7ae58f0be2cee62944bd2c104"
     }
   ],
   "supplier_calls": 0,
