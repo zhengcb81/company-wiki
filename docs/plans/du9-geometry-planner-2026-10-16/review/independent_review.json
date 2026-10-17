@@ -1,0 +1,63 @@
+{
+  "schema_version": "du9-independent-review/1",
+  "card_id": "DU9-CWP-GEOMETRY-PLANNER",
+  "reviewer_agent_id": "agent_5dd60502-f82e-49e2-b382-41d7cfc8b2c8",
+  "reviewer_independent_of_implementer": true,
+  "reviewed_commit": "db126f24e32a8f6986d58049eb295b646c41a3d0",
+  "baseline_implementation_commit": "61120fe14348f5ddfc7166ecdf925101383e915d",
+  "predecessor_commit": "8ff47e28031270c7bf7f6fca01b582fdb680fd64",
+  "review_rounds": [
+    {"round": 1, "target": "61120fe14348f5ddfc7166ecdf925101383e915d", "verdict": "FAIL",
+     "detail": "F1(P1)+F2/F3/F4/F5(P2); reviewer ran own counterexamples and independent hand-calc"},
+    {"round": 2, "target": "db126f24e32a8f6986d58049eb295b646c41a3d0", "verdict": "PASS_in_scope",
+     "detail": "F1-F4 closed by replayed counterexamples; zero new findings; 4 NOT_VERIFIED deferred"},
+    {"round": 3, "target": "db126f24e32a8f6986d58049eb295b646c41a3d0", "verdict": "PASS",
+     "detail": "reviewer personally ran: du9 47 passed (1.21s); neighbors 618 passed 17 skipped (all env-gated); ruff clean; 20k-window plan per-admit 142.4/157.5ms (linear); zero repo residue"}
+  ],
+  "reviewed_paths_sha256": {
+    "src/company_wiki/document_understanding/geometry_intent/__init__.py": "15a16cfe16c6ce58d5f021a12251968f337a7a45549f743137a03c6d40cc8b84",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "b44ba3f450d48a9d1ffb33ad42460026c9c9ae707b771fa98660dd3e1981b427",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "9776d7c0091bac970536d393f369c6f6c2909a904db06b6b86633839ab360ece",
+    "tests/fixtures/du9_geometry_planner/fixture_geometry_planner.json": "0b9d5d94188570fbb009f9b0c3cc42e4a34808ece75353fa7646831f3cc783a6",
+    "tests/unit/du9_geometry_planner/__init__.py": "6890c5e5ca09fb0e4a7f7fd458ed41695eff32beeec1ee733412fc73447eb4ff",
+    "tests/unit/du9_geometry_planner/helpers.py": "259b4fe5d0020e544400b3bcb4699f8d49e48775b6630f2a910abd2d0d297376",
+    "tests/unit/du9_geometry_planner/test_a_root_cause_and_fairness.py": "6eb1dad28d7e671740fadc20adbc7c00f09e5bb50f6e1ca23217b48e0a2363dc",
+    "tests/unit/du9_geometry_planner/test_b_contract_counterexamples.py": "b727b92ca2a8d29ef2ebe47b19e5d645e2427eafd86e0be9bdc3c062e6b8808a",
+    "tests/unit/du9_geometry_planner/test_c_e2e_stream_recovery.py": "5005c411a5db85ad7cbaa5e34008510f9a1af35bcafafcd2b3f4d98052052bcb"
+  },
+  "report": "docs/plans/du9-geometry-planner-2026-10-16/review/independent_review.md",
+  "findings": [
+    {"id": "F1", "severity": "P1",
+     "cause": "admission path only compared the stored digest string and never re-derived plan content; a plan edited after state mint could carry the old state past the hard balance (reviewer measured max_pages=2 exceeded to 3)",
+     "status": "CLOSED",
+     "fix_commit": "db126f24e32a8f6986d58049eb295b646c41a3d0",
+     "verification_receipt": "reviewer replayed 3 attack paths: stale digest -> ValueError('plan_digest does not match plan content'); resigned digest -> same content re-derivation error; legitimately different plan -> ValueError('state belongs to a different plan'); untouched plan unaffected; regression test_f1_tampered_plan_after_state_creation_is_refused"},
+    {"id": "F2", "severity": "P2",
+     "cause": "decision envelope echoed unbounded caller objects (1MB page -> 1MB envelope; str keys uncapped; huge key lists materialized before slicing)",
+     "status": "CLOSED",
+     "fix_commit": "db126f24e32a8f6986d58049eb295b646c41a3d0",
+     "verification_receipt": "reviewer measured: 1MB page -> '<str>' 357B; 1MB key -> 4096 truncation; 1M-element list -> 64-entry islice echo 680B; page=10**18 -> '<int:19digits>'; valid int pages echoed verbatim; regression test_f2_decision_envelope_is_bounded_against_huge_caller_objects"},
+    {"id": "F3", "severity": "P2",
+     "cause": "rule intent fields missing from geometry_intent silently fell back to policy default_intent, contradicting the literal INTERFACES rule 缺字段保守unknown (an aggressive default granted heavy-request capability without diagnostics)",
+     "status": "CLOSED",
+     "fix_commit": "db126f24e32a8f6986d58049eb295b646c41a3d0",
+     "verification_receipt": "reviewer confirmed: aggressive default no longer grants capability (requestable {discover: False, fine: False} with POLICY_INTENT_MISSING); complete policy produces zero MISSING noise; fixture quotas unchanged (no behavioral drift); default_intent now planner-inert and declared in docstring + handoff known_limits; regression test_f3_missing_intent_field_stays_unknown_even_with_non_unknown_default"},
+    {"id": "F4", "severity": "P2",
+     "cause": "hand-crafted malformed plans raised KeyError instead of ValueError (_require_plan did not validate digest-covered fields or allocation rows)",
+     "status": "CLOSED",
+     "fix_commit": "db126f24e32a8f6986d58049eb295b646c41a3d0",
+     "verification_receipt": "reviewer ran 9 malformed cases: all ValueError, zero KeyError; partial plan still mints state and admits with rejected/window_not_in_plan; plan JSON round-trip digest stable; regression test_f4_malformed_plan_raises_valueerror_not_keyerror"},
+    {"id": "F5", "severity": "P2",
+     "cause": "task_plan.md B/C statuses and progress.md stale after implementation commits landed",
+     "status": "CLOSED",
+     "fix_commit": "handoff commit (docs-only; code SHA unchanged from db126f24)",
+     "verification_receipt": "task_plan B/C -> done with commit references; progress.md entry added; handoff.md/json and review/independent_review.md|json land in the same handoff commit; reviewer confirmed the pending write-back appeared in the worktree before commit"}
+  ],
+  "final_status": "PASS",
+  "unresolved_count": 0,
+  "residual_boundaries_declared": [
+    "forging plan+digest+state together equals forging the caller's own in-call state; INTERFACES forbids a sign-off/token system, so this is outside the threat model",
+    "per-admit cost is O(plan+state): ~142-158ms/admit on a synthetic 20k-window plan (linear; fixture-scale is sub-millisecond)",
+    "policy default_intent is planner-inert under the literal 缺字段保守unknown reading; ROOT/POLICY should confirm its intended consumer"
+  ]
+}
