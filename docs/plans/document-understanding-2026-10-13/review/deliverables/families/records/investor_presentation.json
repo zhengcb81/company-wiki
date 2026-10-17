@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "investor_presentation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "sec",
@@ -96,7 +96,12 @@
       "priority": 1,
       "questions": [
         "一页一个主题：业务构成、战略与进展"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -119,7 +124,12 @@
       "questions": [
         "图/表的单位、期间、口径与脚注",
         "指标定义（GMV/同店/RPO）"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "outlook",
@@ -140,7 +150,12 @@
       "priority": 2,
       "questions": [
         "目标/展望的期间与假设"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "financial_notes",
@@ -161,7 +176,12 @@
       "priority": 2,
       "questions": [
         "脚注限定语与数据定义随图保留"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     }
   ],
   "reading_questions": [

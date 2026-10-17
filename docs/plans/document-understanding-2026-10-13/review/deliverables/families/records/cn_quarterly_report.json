@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "cn_quarterly_report",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange"
@@ -87,7 +87,12 @@
       "priority": 1,
       "questions": [
         "本期重要事项与变动原因中的业务信息"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "business",
@@ -106,7 +111,12 @@
       "priority": 2,
       "questions": [
         "是否有产品验证、订单、项目等短业务叙述"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "outlook",
@@ -123,7 +133,12 @@
       "priority": 2,
       "questions": [
         "需提醒事项中是否有业务/经营事件"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "financial_notes",
@@ -140,7 +155,12 @@
       "priority": 3,
       "questions": [
         "变动原因中的经营驱动解释"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     }
   ],
   "reading_questions": [

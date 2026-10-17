@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "offering_cn_convertible",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange"
@@ -82,13 +82,20 @@
         [
           "募集资金投资项目",
           "本次募集资金投资项目",
-          "本次发行募集资金投资项目简介"
+          "本次发行募集资金投资项目简介",
+          "本次募集资金运用",
+          "募集资金运用"
         ]
       ],
       "priority": 1,
       "questions": [
         "每个募投项目的主体、产品、产能、建设期与投资构成"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "project"
+      }
     },
     {
       "role": "business",
@@ -100,7 +107,9 @@
       "heading_path": [
         [
           "本次发行",
-          "募集资金投资项目"
+          "募集资金投资项目",
+          "本次募集资金运用",
+          "募集资金运用"
         ],
         [
           "必要性",
@@ -113,7 +122,12 @@
       "questions": [
         "新项目与现有业务的关系",
         "产品口径的独立性（原有产能 vs 拟建产能）"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -126,7 +140,9 @@
       "heading_path": [
         [
           "募集资金投资项目",
-          "本次发行募集资金投资项目简介"
+          "本次发行募集资金投资项目简介",
+          "本次募集资金运用",
+          "募集资金运用"
         ],
         [
           "产能",
@@ -138,7 +154,12 @@
       "priority": 1,
       "questions": [
         "现有产能、新增产能与生产负荷假设的区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "financial_notes",
@@ -150,7 +171,9 @@
       "heading_path": [
         [
           "募集资金投资项目",
-          "本次发行募集资金投资项目简介"
+          "本次发行募集资金投资项目简介",
+          "本次募集资金运用",
+          "募集资金运用"
         ],
         [
           "项目效益分析",
@@ -161,7 +184,12 @@
       "priority": 2,
       "questions": [
         "测算假设（建设期/生产期/负荷）与免责声明"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "risk",
@@ -178,7 +206,12 @@
       "priority": 2,
       "questions": [
         "项目失败/延期风险的具体条件"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "administrative",
@@ -197,7 +230,12 @@
       "priority": 3,
       "questions": [
         "哪些条款影响项目融资或建设节奏"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     }
   ],
   "reading_questions": [

@@ -667,7 +667,7 @@
   ],
   "fallback": {
     "id": "generic_source_reading",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "sections": [
       {
         "role": "business",
@@ -683,7 +683,12 @@
         "priority": 2,
         "questions": [
           "Read the actual source material, retain its author and uncertainty."
-        ]
+        ],
+        "geometry_intent": {
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        }
       },
       {
         "role": "management_discussion",
@@ -697,7 +702,12 @@
         "priority": 2,
         "questions": [
           "Read the actual source material, retain its author and uncertainty."
-        ]
+        ],
+        "geometry_intent": {
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        }
       },
       {
         "role": "risk",
@@ -709,7 +719,12 @@
         "priority": 2,
         "questions": [
           "Read the actual source material, retain its author and uncertainty."
-        ]
+        ],
+        "geometry_intent": {
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        }
       },
       {
         "role": "unknown",
@@ -723,7 +738,12 @@
         "priority": 3,
         "questions": [
           "Read the actual source material, retain its author and uncertainty."
-        ]
+        ],
+        "geometry_intent": {
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        }
       }
     ],
     "reading_questions": [

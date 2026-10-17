@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "cn_interim_report",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange"
@@ -84,7 +84,12 @@
       "questions": [
         "上半年相比年初/上年同期发生了什么变化",
         "变动原因中的经营驱动"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "business",
@@ -109,7 +114,12 @@
       "questions": [
         "业务与产品线构成是否变化",
         "新产品/新订单的阶段证据"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -136,7 +146,12 @@
       "questions": [
         "产能/订单/项目进度的主体、期间与阶段",
         "哪些是本期新增、哪些是存量"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "outlook",
@@ -159,7 +174,12 @@
       "questions": [
         "下半年安排与实现条件",
         "计划相对年报是否变化"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "risk",
@@ -179,7 +199,12 @@
       "priority": 2,
       "questions": [
         "风险提示中已发生事实与一般提示的区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "financial_notes",
@@ -200,7 +225,12 @@
       "priority": 3,
       "questions": [
         "哪些附注含业务机制或经营解释"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     }
   ],
   "reading_questions": [

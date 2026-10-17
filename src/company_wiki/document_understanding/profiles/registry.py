@@ -21,6 +21,7 @@ import unicodedata
 from company_wiki.document_normalization.text_matching import matching_script_text
 
 from . import vocabulary as v
+from .geometry_policy import normalize_geometry_intent
 from .model import Profile, SectionPriority
 from .observation import Limits, Observation, UnitRef, parse_observation
 
@@ -319,7 +320,10 @@ def resolve_reading_profile(profile: Mapping, observation: Mapping | Observation
     result = deepcopy(dict(profile))
     result.update({"family": route.get("family", binding["family"]), "regime": route.get("regime", parsed.regime_claim or binding["regime"]),
                    "form_type": parsed.form_type or "unknown",
-                   "section_rules": [dict(section, section_role=section["role"]) for section in sections],
+                   "section_rules": [dict(section, section_role=section["role"], family_id=record["id"],
+                                          family_version=record["version"],
+                                          geometry_intent=normalize_geometry_intent(section.get("geometry_intent")))
+                                     for record in records for section in record["sections"]],
                    "section_priorities": _flatten(sections), "summary_focus": _focus(records),
                    "negative_hints": _negative(records), "reading_questions": _questions(records),
                    "context_requirements": _unique([entry for record in records for entry in record["context_requirements"]]),

@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "event_response",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange",
@@ -106,7 +106,12 @@
       "questions": [
         "事件主体、标的、金额、条件与时间",
         "对经营的实际影响"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "questions",
@@ -131,7 +136,12 @@
       "priority": 1,
       "questions": [
         "被询问的业务细节；提问方内容与公司回复分离"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "operating_metrics",
@@ -158,7 +168,12 @@
       "questions": [
         "合同额/对价/收入的口径区分",
         "经营资产/产能的实际数据"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "risk",
@@ -179,7 +194,12 @@
       "priority": 2,
       "questions": [
         "终止/变更/延期的具体条件与作用域"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     }
   ],
   "reading_questions": [

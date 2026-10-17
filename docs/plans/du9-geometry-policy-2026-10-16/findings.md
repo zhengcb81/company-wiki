@@ -1,3 +1,13 @@
+## ROOT B实现与源数据维护 — 2026-10-17
+
+A真实RED补齐：正常主机隔离Temp为55FAIL/1PASS；首次沙箱为43FAIL/1PASS/12ERROR（Temp创建失败）均保留。旧wire基线SHA在写实现前冻结。第一次B集中282PASS/1FAIL：新增测试helper给定增无实际区分正文而resolver正确保守fallback，修夹具为实际定增标题，不改变生产路由或旧测试。
+
+发现catalog是由既有docs/review/deliverables/families和reading_defaults生成，直接改reading_catalog会被导入覆盖/--check报漂移。ROOT作为集成者将同一typed字段及章节变体同步到这些既有设计源数据和fallback defaults；不改导入工具、不删校验、不新增第二runtime配置。此为必要的数据维护范围补充，不进入PLANNER文件/工区。原24family仍24，旧15profile wire逐字保持；新解析视图带family_id/version与geometry_intent，actual adopted组件和section进入既有因果摘要。
+
+A假设按原接口纠正：完整SHA64非强行截断16；空路径保持[]且意图unknown，不使用字符串unknown替代数组；同路径不同aliases合法，仅完整相同rule_key拒绝；MD&A混合经营表允许on_candidate，行政priority1及纯电话会不自动fine。编译器仅验证/投影已解析policy，不关键词匹配、重路由、读文件、分配预算或猜事实。
+
+---
+
 # DU9-CWP-GEOMETRY-POLICY — 调查
 
 ## 0. 状态

@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "administrative_document",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange",
@@ -108,7 +108,12 @@
       "questions": [
         "正文是否真为纯程序性",
         "是否包含经营议案/实质附件"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     },
     {
       "role": "business",
@@ -129,7 +134,12 @@
       "priority": 2,
       "questions": [
         "若正文含经营内容（如活动记录、议案），按实际内容走对应 family"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     }
   ],
   "reading_questions": [

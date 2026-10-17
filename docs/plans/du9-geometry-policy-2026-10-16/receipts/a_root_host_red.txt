@@ -1,0 +1,667 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du9p-red-l2fw4jvc\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+cachedir: C:\Users\郑曾波\AppData\Local\Temp\du9p-red-l2fw4jvc\cache
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 56 items
+
+tests\unit\du9_geometry_policy\test_geometry_policy.py FFFFFFFFFFFFFFFFF [ 30%]
+FFFFFFFFFFFFFFFFFFFFFFFFF.FFFFFFFFFFFFF                                  [100%]
+
+================================== FAILURES ===================================
+__ test_compiler_is_pure_json_and_keeps_full_context_without_mutating_input ___
+tests\unit\du9_geometry_policy\test_geometry_policy.py:62: in test_compiler_is_pure_json_and_keeps_full_context_without_mutating_input
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_missing_fields_are_structured_unknown_and_priority_does_not_invent_intent _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:86: in test_missing_fields_are_structured_unknown_and_priority_does_not_invent_intent
+    policy = compiler()({"section_rules": [{"section_role": "business", "priority": 1}]})
+             ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_full_rule_keys_distinguish_part_aliases_priority_questions_and_intent __
+tests\unit\du9_geometry_policy\test_geometry_policy.py:102: in test_full_rule_keys_distinguish_part_aliases_priority_questions_and_intent
+    keys = [r["rule_key"] for r in compiler()(sample(section_rules=variants))["rules"]]
+                                   ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[geometry_intent-value0-GEOMETRY_POLICY_BAD_INTENT] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[geometry_intent-value1-GEOMETRY_POLICY_BAD_INTENT] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[geometry_intent-value2-GEOMETRY_POLICY_BAD_INTENT] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[geometry_intent-value3-GEOMETRY_POLICY_BAD_INTENT] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[geometry_intent-value4-GEOMETRY_POLICY_BAD_INTENT] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[heading_path-value5-GEOMETRY_POLICY_BAD_PATH] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[heading_path-value6-GEOMETRY_POLICY_BAD_PATH] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[heading_path-value7-GEOMETRY_POLICY_BAD_PATH] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[aliases-Business-GEOMETRY_POLICY_BAD_ALIASES] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[questions-value9-GEOMETRY_POLICY_BAD_QUESTIONS] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[section_role-investment_rating-GEOMETRY_POLICY_BAD_ROLE] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_malformed_rules_have_explicit_diagnostic_codes[priority-True-GEOMETRY_POLICY_BAD_PRIORITY] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:126: in test_malformed_rules_have_explicit_diagnostic_codes
+    compiler()(data)
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_exact_duplicate_is_diagnosed_but_shared_path_distinct_aliases_are_legal _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:133: in test_exact_duplicate_is_diagnosed_but_shared_path_distinct_aliases_are_legal
+    compiler()(sample(section_rules=[rule, deepcopy(rule)]))
+    ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_single_catalog_has_explicit_family_section_intents[cn_annual_report-business-expected0] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFE3E880>)
+_ test_single_catalog_has_explicit_family_section_intents[cn_interim_report-operating_metrics-expected1] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFE54120>)
+_ test_single_catalog_has_explicit_family_section_intents[cn_quarterly_report-financial_notes-expected2] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFE3EEA0>)
+_ test_single_catalog_has_explicit_family_section_intents[hk_annual_report-business-expected3] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFE3D8C0>)
+_ test_single_catalog_has_explicit_family_section_intents[hk_interim_report-business-expected4] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFE3C040>)
+_ test_single_catalog_has_explicit_family_section_intents[sec_10k-financial_notes-expected5] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFE1A7A0>)
+_ test_single_catalog_has_explicit_family_section_intents[sec_10q-management_discussion-expected6] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFE18040>)
+_ test_single_catalog_has_explicit_family_section_intents[sec_20f-risk-expected7] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDF7D80>)
+_ test_single_catalog_has_explicit_family_section_intents[prospectus_cn-fundraising-expected8] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDF6C00>)
+_ test_single_catalog_has_explicit_family_section_intents[prospectus_hk-fundraising-expected9] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDF5C40>)
+_ test_single_catalog_has_explicit_family_section_intents[prospectus_us-fundraising-expected10] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDF49E0>)
+_ test_single_catalog_has_explicit_family_section_intents[offering_cn_convertible-fundraising-expected11] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDDF220>)
+_ test_single_catalog_has_explicit_family_section_intents[offering_cn_equity-fundraising-expected12] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDDD700>)
+_ test_single_catalog_has_explicit_family_section_intents[offering_feasibility-fundraising-expected13] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDDC660>)
+_ test_single_catalog_has_explicit_family_section_intents[project_change_notice-fundraising-expected14] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDDD000>)
+_ test_single_catalog_has_explicit_family_section_intents[results_release-operating_metrics-expected15] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDDEC00>)
+_ test_single_catalog_has_explicit_family_section_intents[investor_presentation-operating_metrics-expected16] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDDFCA0>)
+_ test_single_catalog_has_explicit_family_section_intents[investor_qa_record-questions-expected17] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDF43C0>)
+_ test_single_catalog_has_explicit_family_section_intents[earnings_call_transcript-operating_metrics-expected18] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDF6CE0>)
+_ test_single_catalog_has_explicit_family_section_intents[administrative_document-administrative-expected19] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFDF75A0>)
+_ test_single_catalog_has_explicit_family_section_intents[container_attachment-business-expected20] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFE18900>)
+_ test_single_catalog_has_explicit_family_section_intents[event_response-questions-expected21] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFE19380>)
+_ test_single_catalog_has_explicit_family_section_intents[secondary_research-risk-expected22] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:167: in test_single_catalog_has_explicit_family_section_intents
+    assert all(s.get("geometry_intent") == expected for s in sections)
+E   assert False
+E    +  where False = all(<generator object test_single_catalog_has_explicit_family_section_intents.<locals>.<genexpr> at 0x00000176AFE1B840>)
+_ test_all_catalog_rules_compile_and_keep_component_origins_without_role_collapse _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:174: in test_all_catalog_rules_compile_and_keep_component_origins_without_role_collapse
+    assert all("geometry_intent" in s for s in rules), family["id"]
+E   AssertionError: administrative_document
+E   assert False
+E    +  where False = all(<generator object test_all_catalog_rules_compile_and_keep_component_origins_without_role_collapse.<locals>.<genexpr> at 0x00000176B0BA9490>)
+______ test_admin_priority_one_does_not_disable_its_business_attachment _______
+tests\unit\du9_geometry_policy\test_geometry_policy.py:186: in test_admin_priority_one_does_not_disable_its_business_attachment
+    assert family["sections"][0]["geometry_intent"] == ADMIN
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'geometry_intent'
+___ test_convertible_alias_gap_is_fixed_in_catalog_path_without_flattening ____
+tests\unit\du9_geometry_policy\test_geometry_policy.py:193: in test_convertible_alias_gap_is_fixed_in_catalog_path_without_flattening
+    assert "本次募集资金运用" in root["heading_path"][0]
+E   AssertionError: assert '本次募集资金运用' in ['募集资金投资项目', '本次募集资金投资项目', '本次发行募集资金投资项目简介']
+_ test_adopted_geometry_changes_existing_causal_hash_but_other_family_does_not _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:218: in test_adopted_geometry_changes_existing_causal_hash_but_other_family_does_not
+    assert compiler()(before)["content_digest"] != compiler()(after)["content_digest"]
+           ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[2025\u5e74\u5e74\u5ea6\u62a5\u544a-None-cn_exchange-annual_report] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[2025\u5e74\u534a\u5e74\u5ea6\u62a5\u544a-None-cn_exchange-semi_annual_report] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[2025\u5e74\u7b2c\u4e09\u5b63\u5ea6\u62a5\u544a-None-cn_exchange-quarterly_report] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[Annual Report-None-hkex-annual_report] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[FORM 10-K-10-K-sec-annual_report] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[FORM 10-Q-10-Q-sec-quarterly_report] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[FORM 20-F-20-F-sec-annual_report] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[\u9996\u6b21\u516c\u5f00\u53d1\u884c\u80a1\u7968\u62db\u80a1\u8bf4\u660e\u4e66-None-cn_exchange-prospectus] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[\u5411\u4e0d\u7279\u5b9a\u5bf9\u8c61\u53d1\u884c\u53ef\u8f6c\u6362\u516c\u53f8\u503a\u5238\u52df\u96c6\u8bf4\u660e\u4e66-None-cn_exchange-convertible_bond_prospectus] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[\u6295\u8d44\u8005\u5173\u7cfb\u6d3b\u52a8\u8bb0\u5f55\u8868-None-cn_exchange-investor_relations] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[Full Conference Call Transcript-None-sec-investor_call_transcript] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+_ test_public_route_resolve_compile_roundtrip_is_isolated[unclassified-None-unknown-unknown] _
+tests\unit\du9_geometry_policy\test_geometry_policy.py:241: in test_public_route_resolve_compile_roundtrip_is_isolated
+    compile_policy = compiler()
+                     ^^^^^^^^^^
+tests\unit\du9_geometry_policy\test_geometry_policy.py:25: in compiler
+    return importlib.import_module(
+C:\Miniconda\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'company_wiki.document_understanding.profiles.geometry_policy'
+=========================== short test summary info ===========================
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_compiler_is_pure_json_and_keeps_full_context_without_mutating_input
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_missing_fields_are_structured_unknown_and_priority_does_not_invent_intent
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_full_rule_keys_distinguish_part_aliases_priority_questions_and_intent
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[geometry_intent-value0-GEOMETRY_POLICY_BAD_INTENT]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[geometry_intent-value1-GEOMETRY_POLICY_BAD_INTENT]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[geometry_intent-value2-GEOMETRY_POLICY_BAD_INTENT]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[geometry_intent-value3-GEOMETRY_POLICY_BAD_INTENT]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[geometry_intent-value4-GEOMETRY_POLICY_BAD_INTENT]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[heading_path-value5-GEOMETRY_POLICY_BAD_PATH]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[heading_path-value6-GEOMETRY_POLICY_BAD_PATH]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[heading_path-value7-GEOMETRY_POLICY_BAD_PATH]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[aliases-Business-GEOMETRY_POLICY_BAD_ALIASES]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[questions-value9-GEOMETRY_POLICY_BAD_QUESTIONS]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[section_role-investment_rating-GEOMETRY_POLICY_BAD_ROLE]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_malformed_rules_have_explicit_diagnostic_codes[priority-True-GEOMETRY_POLICY_BAD_PRIORITY]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_exact_duplicate_is_diagnosed_but_shared_path_distinct_aliases_are_legal
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[cn_annual_report-business-expected0]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[cn_interim_report-operating_metrics-expected1]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[cn_quarterly_report-financial_notes-expected2]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[hk_annual_report-business-expected3]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[hk_interim_report-business-expected4]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[sec_10k-financial_notes-expected5]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[sec_10q-management_discussion-expected6]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[sec_20f-risk-expected7]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[prospectus_cn-fundraising-expected8]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[prospectus_hk-fundraising-expected9]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[prospectus_us-fundraising-expected10]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[offering_cn_convertible-fundraising-expected11]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[offering_cn_equity-fundraising-expected12]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[offering_feasibility-fundraising-expected13]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[project_change_notice-fundraising-expected14]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[results_release-operating_metrics-expected15]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[investor_presentation-operating_metrics-expected16]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[investor_qa_record-questions-expected17]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[earnings_call_transcript-operating_metrics-expected18]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[administrative_document-administrative-expected19]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[container_attachment-business-expected20]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[event_response-questions-expected21]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_single_catalog_has_explicit_family_section_intents[secondary_research-risk-expected22]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_all_catalog_rules_compile_and_keep_component_origins_without_role_collapse
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_admin_priority_one_does_not_disable_its_business_attachment
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_convertible_alias_gap_is_fixed_in_catalog_path_without_flattening
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_adopted_geometry_changes_existing_causal_hash_but_other_family_does_not
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[2025\u5e74\u5e74\u5ea6\u62a5\u544a-None-cn_exchange-annual_report]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[2025\u5e74\u534a\u5e74\u5ea6\u62a5\u544a-None-cn_exchange-semi_annual_report]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[2025\u5e74\u7b2c\u4e09\u5b63\u5ea6\u62a5\u544a-None-cn_exchange-quarterly_report]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[Annual Report-None-hkex-annual_report]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[FORM 10-K-10-K-sec-annual_report]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[FORM 10-Q-10-Q-sec-quarterly_report]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[FORM 20-F-20-F-sec-annual_report]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[\u9996\u6b21\u516c\u5f00\u53d1\u884c\u80a1\u7968\u62db\u80a1\u8bf4\u660e\u4e66-None-cn_exchange-prospectus]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[\u5411\u4e0d\u7279\u5b9a\u5bf9\u8c61\u53d1\u884c\u53ef\u8f6c\u6362\u516c\u53f8\u503a\u5238\u52df\u96c6\u8bf4\u660e\u4e66-None-cn_exchange-convertible_bond_prospectus]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[\u6295\u8d44\u8005\u5173\u7cfb\u6d3b\u52a8\u8bb0\u5f55\u8868-None-cn_exchange-investor_relations]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[Full Conference Call Transcript-None-sec-investor_call_transcript]
+FAILED tests/unit/du9_geometry_policy/test_geometry_policy.py::test_public_route_resolve_compile_roundtrip_is_isolated[unclassified-None-unknown-unknown]
+======================== 55 failed, 1 passed in 3.06s =========================
+

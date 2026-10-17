@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "earnings_call_transcript",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "sec",
@@ -105,7 +105,12 @@
       "questions": [
         "管理层准备发言中的业务事实与展望",
         "发言人角色（CEO/CFO）"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "questions",
@@ -126,7 +131,12 @@
       "questions": [
         "问答对绑定：分析师问题 vs 管理层回答",
         "管理层对问题前提的修正/否定"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "outlook",
@@ -150,7 +160,12 @@
       "priority": 1,
       "questions": [
         "指引的期间、口径与全局限定语"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "operating_metrics",
@@ -177,7 +192,12 @@
       "questions": [
         "经营指标定义与口径",
         "增长率的基期与币种口径"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "administrative",
@@ -198,7 +218,12 @@
       "priority": 3,
       "questions": [
         "参与人角色表、编辑附加内容与真实发言的分界"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     }
   ],
   "reading_questions": [

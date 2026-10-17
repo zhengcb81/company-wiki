@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "hk_annual_report",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "applies_to": {
     "regimes": [
       "hkex"
@@ -99,7 +99,12 @@
       "questions": [
         "品牌/产品/渠道构成与本期进展",
         "谁向谁卖什么、收费与交付方式"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "business",
@@ -130,7 +135,12 @@
       "questions": [
         "品牌/产品/渠道构成与本期进展",
         "谁向谁卖什么、收费与交付方式"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -174,7 +184,12 @@
       "questions": [
         "店数/同店/用户等指标的存量与净增口径",
         "直营/加盟/合伙人等模式范围与分母"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "management_discussion",
@@ -193,7 +208,12 @@
       "questions": [
         "财务表现背后的经营解释",
         "同比基期与口径"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "outlook",
@@ -215,7 +235,12 @@
       "questions": [
         "下一阶段计划与条件",
         "计划非承诺的语气保留"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "risk",
@@ -235,7 +260,12 @@
       "priority": 2,
       "questions": [
         "已发生风险事实与一般提示的区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "financial_notes",
@@ -260,7 +290,12 @@
       "priority": 3,
       "questions": [
         "收入确认、分部、供应链等商业机制描述"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "administrative",
@@ -281,7 +316,12 @@
       "priority": 3,
       "questions": [
         "是否有影响经营的重大收购/出售/合约事实"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     }
   ],
   "reading_questions": [

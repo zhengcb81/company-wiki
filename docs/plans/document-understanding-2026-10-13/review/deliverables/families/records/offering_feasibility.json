@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "offering_feasibility",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange",
@@ -97,7 +97,12 @@
       "questions": [
         "项目与现有业务的关系",
         "产品方案与市场假设的作者"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "fundraising",
@@ -123,7 +128,12 @@
       "questions": [
         "投资构成、资金来源与自筹比例",
         "效益测算的假设与口径"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "project"
+      }
     },
     {
       "role": "operating_metrics",
@@ -151,7 +161,12 @@
       "questions": [
         "建设规模/产能口径与分期",
         "建设期与达产假设"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "risk",
@@ -170,7 +185,12 @@
       "priority": 2,
       "questions": [
         "敏感性假设与失败条件"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     }
   ],
   "reading_questions": [

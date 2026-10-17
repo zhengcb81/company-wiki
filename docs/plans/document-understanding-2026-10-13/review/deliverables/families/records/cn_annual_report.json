@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "cn_annual_report",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange"
@@ -105,7 +105,12 @@
       "questions": [
         "谁向谁卖什么产品/服务，收费与交付方式是什么",
         "本期主业构成与收入机制有何变化"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "industry",
@@ -128,7 +133,12 @@
       "questions": [
         "行业供需/技术变化中公司自己受到的具体影响是什么",
         "行业数据的作者与统计口径是谁的"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "management_discussion",
@@ -145,7 +155,12 @@
       "questions": [
         "报告期经营变化及其原因",
         "财务指标变动背后的经营驱动是什么"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "operating_metrics",
@@ -172,7 +187,12 @@
       "questions": [
         "经营指标的存量/流量、分母与期间口径",
         "产能/利用率/订单的主体与阶段"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "outlook",
@@ -197,7 +217,12 @@
       "questions": [
         "公司下一阶段计划与实现条件",
         "哪些是承诺、哪些是愿景性表述"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "risk",
@@ -220,7 +245,12 @@
       "questions": [
         "哪些风险是本期已发生事实、哪些是一般性提示",
         "风险的作用域、主体与条件"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "financial_notes",
@@ -241,7 +271,12 @@
       "priority": 3,
       "questions": [
         "哪些附注含收入确认、分部、合同等商业机制描述"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "administrative",
@@ -258,7 +293,12 @@
       "priority": 3,
       "questions": [
         "是否存在影响经营的重大合同、诉讼、担保或股权变动事实"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     }
   ],
   "reading_questions": [

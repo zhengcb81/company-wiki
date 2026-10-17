@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "hk_interim_report",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "applies_to": {
     "regimes": [
       "hkex"
@@ -87,7 +87,12 @@
       "priority": 1,
       "questions": [
         "本期（六个月）业务变化与新进展"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "business",
@@ -113,7 +118,12 @@
       "priority": 1,
       "questions": [
         "本期（六个月）业务变化与新进展"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -154,7 +164,12 @@
       "priority": 1,
       "questions": [
         "期间经营指标的存量/净增与模式口径"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "management_discussion",
@@ -172,7 +187,12 @@
       "priority": 1,
       "questions": [
         "中期财务表现的经营解释"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "outlook",
@@ -194,7 +214,12 @@
       "questions": [
         "下半年展望与条件",
         "期后近期发展与报告期事实的分离"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "risk",
@@ -213,7 +238,12 @@
       "priority": 2,
       "questions": [
         "本期新增的风险事实"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     }
   ],
   "reading_questions": [

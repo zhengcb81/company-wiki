@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/du9_geometry_policy",
+    "tests/unit/document_understanding_profiles",
+    "tests/unit/document_understanding_root",
+    "-q",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du9p-bc-8n9vb4b_\\pytest",
+    "-o",
+    "cache_dir=C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du9p-bc-8n9vb4b_\\cache"
+  ],
+  "exit_code": 0,
+  "seconds": 15.06581049997476,
+  "supplier_calls": 0,
+  "includes_public_route_resolve_compile": true,
+  "temp_removed_after_run": true
+}

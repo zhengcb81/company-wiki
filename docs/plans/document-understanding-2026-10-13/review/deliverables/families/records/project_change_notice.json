@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "project_change_notice",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange",
@@ -109,7 +109,12 @@
       "questions": [
         "原计划→本次变化的具体内容",
         "受影响子项目范围"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "project"
+      }
     },
     {
       "role": "business",
@@ -134,7 +139,12 @@
       "questions": [
         "变化原因的客观条件与管理层解释",
         "对业务/第二曲线的影响"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -161,7 +171,12 @@
       "questions": [
         "剩余承诺、已投入与未投入口径",
         "达产时间的变化"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "risk",
@@ -179,7 +194,12 @@
       "priority": 2,
       "questions": [
         "变更带来的新条件与风险"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     }
   ],
   "reading_questions": [

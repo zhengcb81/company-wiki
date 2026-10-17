@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "offering_cn_equity",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange"
@@ -98,7 +98,12 @@
       "questions": [
         "项目主体、投资额构成、建设期与达产条件",
         "资金缺口与自筹来源"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "project"
+      }
     },
     {
       "role": "business",
@@ -125,7 +130,12 @@
       "questions": [
         "现有业务与新项目的关系",
         "新增产能与现有产能的口径区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -151,7 +161,12 @@
       "priority": 1,
       "questions": [
         "总产能 vs 新增产能、现有利用率、消化措施的证据"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "fundraising",
@@ -175,7 +190,12 @@
       "priority": 1,
       "questions": [
         "每包项目必须绑定主体、地点、分期与建设期"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "project"
+      }
     },
     {
       "role": "risk",
@@ -195,7 +215,12 @@
       "priority": 2,
       "questions": [
         "项目风险的具体条件"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "financial_notes",
@@ -218,7 +243,12 @@
       "priority": 2,
       "questions": [
         "测算口径、假设与免责声明的保留"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     }
   ],
   "reading_questions": [

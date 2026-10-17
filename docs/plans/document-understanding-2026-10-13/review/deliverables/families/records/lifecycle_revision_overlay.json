@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "lifecycle_revision_overlay",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange",
@@ -111,7 +111,12 @@
       "priority": 1,
       "questions": [
         "本件覆盖范围是什么、修改原因是什么、变化部分与被引用旧文的关系"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "unknown",
+        "fine": "unknown",
+        "demand_class": "unknown"
+      }
     }
   ],
   "reading_questions": [

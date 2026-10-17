@@ -1,26 +1,10 @@
-# 进度
+# ROOT实施进度 — 2026-10-17
 
-ROOT建立独立代码工区、原hooks/CI和PWF；0供应商、0生产原件副本、无业务实现。交接前必须独立agent审查、修复并复核PASS。
+- A原调查f70318f1历史已合入；ROOT补真实行为RED。沙箱43FAIL/1PASS/12Temp ERROR保留；正常主机隔离Temp55FAIL/1PASS，确认缺模块/typed策略/章节变体。
+- B完成初版：唯一catalog全部section明确typed intent、源规范同步；registry给实际section绑定family来源和几何字段，沿用原profile/component摘要；新增纯编译器，不改PLANNER/匹配器/来源port。旧15profile指纹未变。
+- 首B集中282PASS/1FAIL。唯一失败为新测试定增夹具缺区分证据，改成真实定增标题，未放宽生产或旧测试；原失败保留。
+- B/C集中614PASS/11SKIP，11.30秒；含新56项、旧profiles、完整ROOT邻近生产/预算测试，真实route→resolve→compile回放12种披露/unknown；11项真实样本测试按原设置SKIP，不冒称真PDF/付费摘要验收。ruff与catalog --check通过。
+- C所属层隔离/输入不变/重放已通过；最终独立agent审查待执行，尚不称完整交付/生产装配完成。
+- 0供应商/0下载/0原件复制/0生产config写入，原POLICY和PLANNER作者工区未改；正常主机测试各自TemporaryDirectory finally清理。
 
-## A — 调查与行为RED
-
-- 状态：完成（独立行为RED与期望已冻结，未运行业务测试）。
-- 完整白名单、白名单外不写：见 findings.md §1。
-- 24 family 实测枚举与几何请求意图映射：findings.md §2。
-- 关键不一致（金禾 CB 缺口、HK 双 business rule_key、priority≠fine、行政 pri=1 陷阱、季度 short）：findings.md §2.2。
-- 12 条 RED 期望（R1..R12）：findings.md §3。
-- 已知限制与诚实声明：findings.md §4。
-- 未运行 pytest；不宣称组件或生产 PASS。
-- 已 commit A findings；冻结独立期望，等待 ROOT 按 INTERFACES.md 接线与 B 阶段实施编译模块。
-
-## B — 所属层实现与集中回归
-
-- 状态：pending。本卡交付时已写 compile_geometry_policy 与必要 schema，不动 registry.py / reading_catalog.json schema 字段；catalog 数据补丁（"本次募集资金运用"根变体）作为一次独立 commit 列入。
-
-## C — 所属层E2E、恢复、清理和独立审查
-
-- 状态：pending。调用不同于实施者的独立审查agent全面检查：架构边界、接口兼容、所有差异、删除/重复/硬编码、正常与异常/恢复、原文与数字语义、预算/效率/空间、测试覆盖、夹具/断言、handoff与实际一致。审查后修复再复核 PASS 才能交接 STOP。
-
-## STOP
-
-A 阶段冻结独立期望，等待 ROOT 接线。下一步不写新代码、不开新签名；B/C 由 ROOT 调度。
+Next：独立全面审查最终实现，修复后复核；再正常发布并更新母PWF。PLANNER继续等待。

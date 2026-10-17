@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "results_release",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "sec",
@@ -109,7 +109,12 @@
       "questions": [
         "各业务线表现与解释",
         "产品/客户/渠道动态"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "management_discussion",
@@ -136,7 +141,12 @@
       "priority": 1,
       "questions": [
         "财务表现的经营解释与管理层引语的角色归属"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "operating_metrics",
@@ -162,7 +172,12 @@
       "priority": 1,
       "questions": [
         "经营指标口径、分母与期间"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "outlook",
@@ -183,7 +198,12 @@
       "priority": 2,
       "questions": [
         "展望/指引的期间与条件"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "administrative",
@@ -204,7 +224,12 @@
       "priority": 3,
       "questions": [
         "全局限定语与联系信息；不承载业务事实"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     }
   ],
   "reading_questions": [

@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "sec_10k",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "sec"
@@ -99,7 +99,12 @@
       "questions": [
         "业务模式与收费/交付方式",
         "分部构成与各分部经营机制"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -124,7 +129,12 @@
       "questions": [
         "经营指标/KPI 的定义、分母与期间",
         "分部指标与收入机制的关系"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "risk",
@@ -142,7 +152,12 @@
       "questions": [
         "哪些风险是已发生事实、哪些是假设性风险",
         "风险更新相对上年的变化"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "management_discussion",
@@ -161,7 +176,12 @@
       "questions": [
         "经营结果背后的业务驱动与解释",
         "同比/环比基期与口径"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "financial_notes",
@@ -183,7 +203,12 @@
       "priority": 2,
       "questions": [
         "收入确认、履约义务、剩余履约义务等描述解释了什么商业机制"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "outlook",
@@ -205,7 +230,12 @@
       "priority": 2,
       "questions": [
         "公司展望/指引的期间、假设与限定语"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "administrative",
@@ -226,7 +256,12 @@
       "priority": 3,
       "questions": [
         "是否有影响经营的诉讼、物业或控制事项事实"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     }
   ],
   "reading_questions": [

@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "sec_20f",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "sec"
@@ -95,7 +95,12 @@
       "questions": [
         "业务模式、产品与服务、收费方式",
         "组织结构与经营主体归属"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "industry",
@@ -119,7 +124,12 @@
       "questions": [
         "监管/行业变化对业务的具体约束",
         "行业数据的作者与口径"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "management_discussion",
@@ -136,7 +146,12 @@
       "priority": 1,
       "questions": [
         "经营回顾中的业务驱动与解释"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "outlook",
@@ -157,7 +172,12 @@
       "priority": 2,
       "questions": [
         "展望与计划的条件语气"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "risk",
@@ -175,7 +195,12 @@
       "priority": 1,
       "questions": [
         "具体风险（含监管、结构、业务）与一般套话的区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "financial_notes",
@@ -195,7 +220,12 @@
       "priority": 3,
       "questions": [
         "收入确认与业务机制描述"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     }
   ],
   "reading_questions": [

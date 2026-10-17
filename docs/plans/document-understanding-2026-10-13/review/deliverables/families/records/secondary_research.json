@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "secondary_research",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "other",
@@ -105,7 +105,12 @@
       "questions": [
         "与业务相关的新事实、约束或机会",
         "内容的作者/发文主体是谁"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "industry",
@@ -126,7 +131,12 @@
       "priority": 2,
       "questions": [
         "政策/行业事实的发文主体、适用范围与生效期"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "outlook",
@@ -147,7 +157,12 @@
       "priority": 3,
       "questions": [
         "预测与建议标注为第三方观点，不当公司承诺"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "risk",
@@ -164,7 +179,12 @@
       "priority": 2,
       "questions": [
         "第三方提示的风险与公司披露风险的来源区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     }
   ],
   "reading_questions": [

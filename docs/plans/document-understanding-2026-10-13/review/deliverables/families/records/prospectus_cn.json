@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "prospectus_cn",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange"
@@ -106,7 +106,12 @@
       "questions": [
         "产品/服务与收入机制",
         "技术与产品线的商业化阶段"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "industry",
@@ -132,7 +137,12 @@
       "questions": [
         "行业口径与统计作者",
         "公司份额/地位的证据来源"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "operating_metrics",
@@ -160,7 +170,12 @@
       "questions": [
         "客户/供应商集中度与匿名口径",
         "产能、产销量与利用率的历史口径"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "fundraising",
@@ -185,7 +200,12 @@
       "questions": [
         "募投项目、投资额、建设期与达产条件",
         "补流与项目资金的区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "project"
+      }
     },
     {
       "role": "risk",
@@ -205,7 +225,12 @@
       "priority": 2,
       "questions": [
         "具体风险与一般风险的区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "management_discussion",
@@ -224,7 +249,12 @@
       "priority": 3,
       "questions": [
         "历史沿革、股权与治理对经营的影响"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "financial_notes",
@@ -246,7 +276,12 @@
       "priority": 2,
       "questions": [
         "历史财务口径与会计政策的商业含义"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     }
   ],
   "reading_questions": [

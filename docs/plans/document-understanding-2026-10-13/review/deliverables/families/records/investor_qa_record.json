@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "investor_qa_record",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "cn_exchange",
@@ -95,7 +95,12 @@
       "questions": [
         "每组问题+回答+追问绑定为一个单元",
         "提问内容与回答内容的角色区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "business",
@@ -119,7 +124,12 @@
       "priority": 1,
       "questions": [
         "回答中的业务事实、进展与明确否定"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -147,7 +157,12 @@
       "priority": 2,
       "questions": [
         "经营数字的期间、口径与主体归属（母公司/子公司）"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "outlook",
@@ -173,7 +188,12 @@
       "priority": 2,
       "questions": [
         "计划与承诺的区分、附带条件"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "administrative",
@@ -194,7 +214,12 @@
       "priority": 3,
       "questions": [
         "活动属性（调研/说明会/路演）与参与范围"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     }
   ],
   "reading_questions": [

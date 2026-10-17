@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "prospectus_hk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "hkex"
@@ -106,7 +106,12 @@
       "questions": [
         "品牌/产品/渠道与商业模式",
         "收入与加盟/合伙人机制"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "industry",
@@ -125,7 +130,12 @@
       "questions": [
         "市场规模与竞争格局的作者/口径",
         "公司份额的证据来源"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "operating_metrics",
@@ -152,7 +162,12 @@
       "questions": [
         "门店/用户的存量与净增、地域与模式口径",
         "同店定义与可比范围"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "outlook",
@@ -177,7 +192,12 @@
       "questions": [
         "扩张/募资计划与条件",
         "所得款項用途与项目的对应"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "fundraising",
@@ -198,7 +218,12 @@
       "priority": 1,
       "questions": [
         "募资净额用途、包销与老股安排的区别"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "project"
+      }
     },
     {
       "role": "risk",
@@ -215,7 +240,12 @@
       "priority": 2,
       "questions": [
         "具体风险与一般风险、客户/供应商依赖的量化口径"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "financial_notes",
@@ -238,7 +268,12 @@
       "priority": 2,
       "questions": [
         "收入确认与商业机制描述"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     }
   ],
   "reading_questions": [

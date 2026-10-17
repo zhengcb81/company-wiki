@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "container_attachment",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "sec",
@@ -106,7 +106,12 @@
       "priority": 1,
       "questions": [
         "主表确定了什么事项、列出了哪些附件"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     },
     {
       "role": "business",
@@ -126,7 +131,12 @@
       "priority": 1,
       "questions": [
         "附件正文（按 release/deck/事件正文策略读取）"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -144,7 +154,12 @@
       "priority": 2,
       "questions": [
         "业绩展示附件的指标与脚注"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     }
   ],
   "reading_questions": [

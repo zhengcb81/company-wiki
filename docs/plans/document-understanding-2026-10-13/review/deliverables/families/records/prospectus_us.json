@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "prospectus_us",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "sec"
@@ -109,7 +109,12 @@
       "questions": [
         "业务模式、产品与收费方式",
         "客户与市场结构"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "industry",
@@ -128,7 +133,12 @@
       "priority": 2,
       "questions": [
         "行业数据的作者与统计口径"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "risk",
@@ -145,7 +155,12 @@
       "priority": 1,
       "questions": [
         "具体业务风险与一般风险的区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "management_discussion",
@@ -168,7 +183,12 @@
       "priority": 1,
       "questions": [
         "经营结果的业务驱动与解释"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "fundraising",
@@ -190,7 +210,12 @@
       "questions": [
         "募资用途与项目对应",
         "公司发行与老股转售的区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "project"
+      }
     },
     {
       "role": "outlook",
@@ -209,7 +234,12 @@
       "priority": 2,
       "questions": [
         "增长策略与实现条件"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "administrative",
@@ -230,7 +260,12 @@
       "priority": 3,
       "questions": [
         "发行结构与转售主体对募资归属的影响"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     }
   ],
   "reading_questions": [

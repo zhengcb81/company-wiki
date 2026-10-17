@@ -1,7 +1,7 @@
 {
   "schema_version": "du2-family-spec/1",
   "id": "sec_10q",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "applies_to": {
     "regimes": [
       "sec"
@@ -92,7 +92,12 @@
       "questions": [
         "本季与 YTD 经营结果的业务驱动",
         "同比/环比基期与口径"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "business",
@@ -119,7 +124,12 @@
       "priority": 1,
       "questions": [
         "业务模式、分部与收入机制的本期变化"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "operating_metrics",
@@ -148,7 +158,12 @@
       "priority": 2,
       "questions": [
         "订阅/消耗/订单等指标定义与分母"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "operating"
+      }
     },
     {
       "role": "financial_notes",
@@ -173,7 +188,12 @@
       "priority": 2,
       "questions": [
         "收入确认与履约义务的商业机制"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "on_tabular_evidence",
+        "fine": "on_candidate",
+        "demand_class": "mixed"
+      }
     },
     {
       "role": "risk",
@@ -194,7 +214,12 @@
       "priority": 2,
       "questions": [
         "相对年报新增/更新的业务风险"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "explicit_only",
+        "demand_class": "context"
+      }
     },
     {
       "role": "administrative",
@@ -215,7 +240,12 @@
       "priority": 3,
       "questions": [
         "控制与程序是否有实际经营约束；与 Part II Item 4 矿山安全披露区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     },
     {
       "role": "administrative",
@@ -237,7 +267,12 @@
       "priority": 3,
       "questions": [
         "是否有影响经营的诉讼或融资事实；与 Part I Item 1 财务报表区分"
-      ]
+      ],
+      "geometry_intent": {
+        "discover": "context_only",
+        "fine": "unknown",
+        "demand_class": "administrative"
+      }
     }
   ],
   "reading_questions": [

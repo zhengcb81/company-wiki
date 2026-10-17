@@ -4,7 +4,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "administrative_document",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange",
@@ -111,7 +111,12 @@
           "questions": [
             "正文是否真为纯程序性",
             "是否包含经营议案/实质附件"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         },
         {
           "role": "business",
@@ -132,7 +137,12 @@
           "priority": 2,
           "questions": [
             "若正文含经营内容（如活动记录、议案），按实际内容走对应 family"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         }
       ],
       "reading_questions": [
@@ -190,7 +200,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "container_attachment",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "sec",
@@ -295,7 +305,12 @@
           "priority": 1,
           "questions": [
             "主表确定了什么事项、列出了哪些附件"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         },
         {
           "role": "business",
@@ -315,7 +330,12 @@
           "priority": 1,
           "questions": [
             "附件正文（按 release/deck/事件正文策略读取）"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -333,7 +353,12 @@
           "priority": 2,
           "questions": [
             "业绩展示附件的指标与脚注"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         }
       ],
       "reading_questions": [
@@ -414,7 +439,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "cn_annual_report",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange"
@@ -518,7 +543,12 @@
           "questions": [
             "谁向谁卖什么产品/服务，收费与交付方式是什么",
             "本期主业构成与收入机制有何变化"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "industry",
@@ -541,7 +571,12 @@
           "questions": [
             "行业供需/技术变化中公司自己受到的具体影响是什么",
             "行业数据的作者与统计口径是谁的"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "management_discussion",
@@ -558,7 +593,12 @@
           "questions": [
             "报告期经营变化及其原因",
             "财务指标变动背后的经营驱动是什么"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "operating_metrics",
@@ -585,7 +625,12 @@
           "questions": [
             "经营指标的存量/流量、分母与期间口径",
             "产能/利用率/订单的主体与阶段"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "outlook",
@@ -610,7 +655,12 @@
           "questions": [
             "公司下一阶段计划与实现条件",
             "哪些是承诺、哪些是愿景性表述"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "risk",
@@ -633,7 +683,12 @@
           "questions": [
             "哪些风险是本期已发生事实、哪些是一般性提示",
             "风险的作用域、主体与条件"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "financial_notes",
@@ -654,7 +709,12 @@
           "priority": 3,
           "questions": [
             "哪些附注含收入确认、分部、合同等商业机制描述"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "administrative",
@@ -671,7 +731,12 @@
           "priority": 3,
           "questions": [
             "是否存在影响经营的重大合同、诉讼、担保或股权变动事实"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         }
       ],
       "reading_questions": [
@@ -764,7 +829,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "cn_interim_report",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange"
@@ -847,7 +912,12 @@
           "questions": [
             "上半年相比年初/上年同期发生了什么变化",
             "变动原因中的经营驱动"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "business",
@@ -872,7 +942,12 @@
           "questions": [
             "业务与产品线构成是否变化",
             "新产品/新订单的阶段证据"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -899,7 +974,12 @@
           "questions": [
             "产能/订单/项目进度的主体、期间与阶段",
             "哪些是本期新增、哪些是存量"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "outlook",
@@ -922,7 +1002,12 @@
           "questions": [
             "下半年安排与实现条件",
             "计划相对年报是否变化"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "risk",
@@ -942,7 +1027,12 @@
           "priority": 2,
           "questions": [
             "风险提示中已发生事实与一般提示的区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "financial_notes",
@@ -963,7 +1053,12 @@
           "priority": 3,
           "questions": [
             "哪些附注含业务机制或经营解释"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         }
       ],
       "reading_questions": [
@@ -1046,7 +1141,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "cn_quarterly_report",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange"
@@ -1132,7 +1227,12 @@
           "priority": 1,
           "questions": [
             "本期重要事项与变动原因中的业务信息"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "business",
@@ -1151,7 +1251,12 @@
           "priority": 2,
           "questions": [
             "是否有产品验证、订单、项目等短业务叙述"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "outlook",
@@ -1168,7 +1273,12 @@
           "priority": 2,
           "questions": [
             "需提醒事项中是否有业务/经营事件"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "financial_notes",
@@ -1185,7 +1295,12 @@
           "priority": 3,
           "questions": [
             "变动原因中的经营驱动解释"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         }
       ],
       "reading_questions": [
@@ -1258,7 +1373,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "earnings_call_transcript",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "sec",
@@ -1362,7 +1477,12 @@
           "questions": [
             "管理层准备发言中的业务事实与展望",
             "发言人角色（CEO/CFO）"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "questions",
@@ -1383,7 +1503,12 @@
           "questions": [
             "问答对绑定：分析师问题 vs 管理层回答",
             "管理层对问题前提的修正/否定"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "outlook",
@@ -1407,7 +1532,12 @@
           "priority": 1,
           "questions": [
             "指引的期间、口径与全局限定语"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "operating_metrics",
@@ -1434,7 +1564,12 @@
           "questions": [
             "经营指标定义与口径",
             "增长率的基期与币种口径"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "administrative",
@@ -1455,7 +1590,12 @@
           "priority": 3,
           "questions": [
             "参与人角色表、编辑附加内容与真实发言的分界"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         }
       ],
       "reading_questions": [
@@ -1539,7 +1679,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "event_response",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange",
@@ -1644,7 +1784,12 @@
           "questions": [
             "事件主体、标的、金额、条件与时间",
             "对经营的实际影响"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "questions",
@@ -1669,7 +1814,12 @@
           "priority": 1,
           "questions": [
             "被询问的业务细节；提问方内容与公司回复分离"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "operating_metrics",
@@ -1696,7 +1846,12 @@
           "questions": [
             "合同额/对价/收入的口径区分",
             "经营资产/产能的实际数据"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "risk",
@@ -1717,7 +1872,12 @@
           "priority": 2,
           "questions": [
             "终止/变更/延期的具体条件与作用域"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         }
       ],
       "reading_questions": [
@@ -1799,7 +1959,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "hk_annual_report",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "applies_to": {
         "regimes": [
           "hkex"
@@ -1897,7 +2057,12 @@
           "questions": [
             "品牌/产品/渠道构成与本期进展",
             "谁向谁卖什么、收费与交付方式"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "business",
@@ -1928,7 +2093,12 @@
           "questions": [
             "品牌/产品/渠道构成与本期进展",
             "谁向谁卖什么、收费与交付方式"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -1972,7 +2142,12 @@
           "questions": [
             "店数/同店/用户等指标的存量与净增口径",
             "直营/加盟/合伙人等模式范围与分母"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "management_discussion",
@@ -1991,7 +2166,12 @@
           "questions": [
             "财务表现背后的经营解释",
             "同比基期与口径"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "outlook",
@@ -2013,7 +2193,12 @@
           "questions": [
             "下一阶段计划与条件",
             "计划非承诺的语气保留"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "risk",
@@ -2033,7 +2218,12 @@
           "priority": 2,
           "questions": [
             "已发生风险事实与一般提示的区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "financial_notes",
@@ -2058,7 +2248,12 @@
           "priority": 3,
           "questions": [
             "收入确认、分部、供应链等商业机制描述"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "administrative",
@@ -2079,7 +2274,12 @@
           "priority": 3,
           "questions": [
             "是否有影响经营的重大收购/出售/合约事实"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         }
       ],
       "reading_questions": [
@@ -2173,7 +2373,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "hk_interim_report",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "applies_to": {
         "regimes": [
           "hkex"
@@ -2259,7 +2459,12 @@
           "priority": 1,
           "questions": [
             "本期（六个月）业务变化与新进展"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "business",
@@ -2285,7 +2490,12 @@
           "priority": 1,
           "questions": [
             "本期（六个月）业务变化与新进展"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -2326,7 +2536,12 @@
           "priority": 1,
           "questions": [
             "期间经营指标的存量/净增与模式口径"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "management_discussion",
@@ -2344,7 +2559,12 @@
           "priority": 1,
           "questions": [
             "中期财务表现的经营解释"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "outlook",
@@ -2366,7 +2586,12 @@
           "questions": [
             "下半年展望与条件",
             "期后近期发展与报告期事实的分离"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "risk",
@@ -2385,7 +2610,12 @@
           "priority": 2,
           "questions": [
             "本期新增的风险事实"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         }
       ],
       "reading_questions": [
@@ -2470,7 +2700,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "investor_presentation",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "sec",
@@ -2565,7 +2795,12 @@
           "priority": 1,
           "questions": [
             "一页一个主题：业务构成、战略与进展"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -2588,7 +2823,12 @@
           "questions": [
             "图/表的单位、期间、口径与脚注",
             "指标定义（GMV/同店/RPO）"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "outlook",
@@ -2609,7 +2849,12 @@
           "priority": 2,
           "questions": [
             "目标/展望的期间与假设"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "financial_notes",
@@ -2630,7 +2875,12 @@
           "priority": 2,
           "questions": [
             "脚注限定语与数据定义随图保留"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         }
       ],
       "reading_questions": [
@@ -2713,7 +2963,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "investor_qa_record",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange",
@@ -2807,7 +3057,12 @@
           "questions": [
             "每组问题+回答+追问绑定为一个单元",
             "提问内容与回答内容的角色区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "business",
@@ -2831,7 +3086,12 @@
           "priority": 1,
           "questions": [
             "回答中的业务事实、进展与明确否定"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -2859,7 +3119,12 @@
           "priority": 2,
           "questions": [
             "经营数字的期间、口径与主体归属（母公司/子公司）"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "outlook",
@@ -2885,7 +3150,12 @@
           "priority": 2,
           "questions": [
             "计划与承诺的区分、附带条件"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "administrative",
@@ -2906,7 +3176,12 @@
           "priority": 3,
           "questions": [
             "活动属性（调研/说明会/路演）与参与范围"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         }
       ],
       "reading_questions": [
@@ -2993,7 +3268,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "lifecycle_revision_overlay",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange",
@@ -3103,7 +3378,12 @@
           "priority": 1,
           "questions": [
             "本件覆盖范围是什么、修改原因是什么、变化部分与被引用旧文的关系"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "unknown",
+            "fine": "unknown",
+            "demand_class": "unknown"
+          }
         }
       ],
       "reading_questions": [
@@ -3180,7 +3460,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "offering_cn_convertible",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange"
@@ -3261,13 +3541,20 @@
             [
               "募集资金投资项目",
               "本次募集资金投资项目",
-              "本次发行募集资金投资项目简介"
+              "本次发行募集资金投资项目简介",
+              "本次募集资金运用",
+              "募集资金运用"
             ]
           ],
           "priority": 1,
           "questions": [
             "每个募投项目的主体、产品、产能、建设期与投资构成"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "project"
+          }
         },
         {
           "role": "business",
@@ -3279,7 +3566,9 @@
           "heading_path": [
             [
               "本次发行",
-              "募集资金投资项目"
+              "募集资金投资项目",
+              "本次募集资金运用",
+              "募集资金运用"
             ],
             [
               "必要性",
@@ -3292,7 +3581,12 @@
           "questions": [
             "新项目与现有业务的关系",
             "产品口径的独立性（原有产能 vs 拟建产能）"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -3305,7 +3599,9 @@
           "heading_path": [
             [
               "募集资金投资项目",
-              "本次发行募集资金投资项目简介"
+              "本次发行募集资金投资项目简介",
+              "本次募集资金运用",
+              "募集资金运用"
             ],
             [
               "产能",
@@ -3317,7 +3613,12 @@
           "priority": 1,
           "questions": [
             "现有产能、新增产能与生产负荷假设的区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "financial_notes",
@@ -3329,7 +3630,9 @@
           "heading_path": [
             [
               "募集资金投资项目",
-              "本次发行募集资金投资项目简介"
+              "本次发行募集资金投资项目简介",
+              "本次募集资金运用",
+              "募集资金运用"
             ],
             [
               "项目效益分析",
@@ -3340,7 +3643,12 @@
           "priority": 2,
           "questions": [
             "测算假设（建设期/生产期/负荷）与免责声明"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "risk",
@@ -3357,7 +3665,12 @@
           "priority": 2,
           "questions": [
             "项目失败/延期风险的具体条件"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "administrative",
@@ -3376,7 +3689,12 @@
           "priority": 3,
           "questions": [
             "哪些条款影响项目融资或建设节奏"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         }
       ],
       "reading_questions": [
@@ -3462,7 +3780,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "offering_cn_equity",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange"
@@ -3559,7 +3877,12 @@
           "questions": [
             "项目主体、投资额构成、建设期与达产条件",
             "资金缺口与自筹来源"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "project"
+          }
         },
         {
           "role": "business",
@@ -3586,7 +3909,12 @@
           "questions": [
             "现有业务与新项目的关系",
             "新增产能与现有产能的口径区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -3612,7 +3940,12 @@
           "priority": 1,
           "questions": [
             "总产能 vs 新增产能、现有利用率、消化措施的证据"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "fundraising",
@@ -3636,7 +3969,12 @@
           "priority": 1,
           "questions": [
             "每包项目必须绑定主体、地点、分期与建设期"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "project"
+          }
         },
         {
           "role": "risk",
@@ -3656,7 +3994,12 @@
           "priority": 2,
           "questions": [
             "项目风险的具体条件"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "financial_notes",
@@ -3679,7 +4022,12 @@
           "priority": 2,
           "questions": [
             "测算口径、假设与免责声明的保留"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         }
       ],
       "reading_questions": [
@@ -3766,7 +4114,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "offering_feasibility",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange",
@@ -3862,7 +4210,12 @@
           "questions": [
             "项目与现有业务的关系",
             "产品方案与市场假设的作者"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "fundraising",
@@ -3888,7 +4241,12 @@
           "questions": [
             "投资构成、资金来源与自筹比例",
             "效益测算的假设与口径"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "project"
+          }
         },
         {
           "role": "operating_metrics",
@@ -3916,7 +4274,12 @@
           "questions": [
             "建设规模/产能口径与分期",
             "建设期与达产假设"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "risk",
@@ -3935,7 +4298,12 @@
           "priority": 2,
           "questions": [
             "敏感性假设与失败条件"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         }
       ],
       "reading_questions": [
@@ -4017,7 +4385,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "project_change_notice",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange",
@@ -4125,7 +4493,12 @@
           "questions": [
             "原计划→本次变化的具体内容",
             "受影响子项目范围"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "project"
+          }
         },
         {
           "role": "business",
@@ -4150,7 +4523,12 @@
           "questions": [
             "变化原因的客观条件与管理层解释",
             "对业务/第二曲线的影响"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -4177,7 +4555,12 @@
           "questions": [
             "剩余承诺、已投入与未投入口径",
             "达产时间的变化"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "risk",
@@ -4195,7 +4578,12 @@
           "priority": 2,
           "questions": [
             "变更带来的新条件与风险"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         }
       ],
       "reading_questions": [
@@ -4276,7 +4664,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "prospectus_cn",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "cn_exchange"
@@ -4381,7 +4769,12 @@
           "questions": [
             "产品/服务与收入机制",
             "技术与产品线的商业化阶段"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "industry",
@@ -4407,7 +4800,12 @@
           "questions": [
             "行业口径与统计作者",
             "公司份额/地位的证据来源"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "operating_metrics",
@@ -4435,7 +4833,12 @@
           "questions": [
             "客户/供应商集中度与匿名口径",
             "产能、产销量与利用率的历史口径"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "fundraising",
@@ -4460,7 +4863,12 @@
           "questions": [
             "募投项目、投资额、建设期与达产条件",
             "补流与项目资金的区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "project"
+          }
         },
         {
           "role": "risk",
@@ -4480,7 +4888,12 @@
           "priority": 2,
           "questions": [
             "具体风险与一般风险的区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "management_discussion",
@@ -4499,7 +4912,12 @@
           "priority": 3,
           "questions": [
             "历史沿革、股权与治理对经营的影响"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "financial_notes",
@@ -4521,7 +4939,12 @@
           "priority": 2,
           "questions": [
             "历史财务口径与会计政策的商业含义"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         }
       ],
       "reading_questions": [
@@ -4608,7 +5031,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "prospectus_hk",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "hkex"
@@ -4713,7 +5136,12 @@
           "questions": [
             "品牌/产品/渠道与商业模式",
             "收入与加盟/合伙人机制"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "industry",
@@ -4732,7 +5160,12 @@
           "questions": [
             "市场规模与竞争格局的作者/口径",
             "公司份额的证据来源"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "operating_metrics",
@@ -4759,7 +5192,12 @@
           "questions": [
             "门店/用户的存量与净增、地域与模式口径",
             "同店定义与可比范围"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "outlook",
@@ -4784,7 +5222,12 @@
           "questions": [
             "扩张/募资计划与条件",
             "所得款項用途与项目的对应"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "fundraising",
@@ -4805,7 +5248,12 @@
           "priority": 1,
           "questions": [
             "募资净额用途、包销与老股安排的区别"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "project"
+          }
         },
         {
           "role": "risk",
@@ -4822,7 +5270,12 @@
           "priority": 2,
           "questions": [
             "具体风险与一般风险、客户/供应商依赖的量化口径"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "financial_notes",
@@ -4845,7 +5298,12 @@
           "priority": 2,
           "questions": [
             "收入确认与商业机制描述"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         }
       ],
       "reading_questions": [
@@ -4932,7 +5390,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "prospectus_us",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "sec"
@@ -5040,7 +5498,12 @@
           "questions": [
             "业务模式、产品与收费方式",
             "客户与市场结构"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "industry",
@@ -5059,7 +5522,12 @@
           "priority": 2,
           "questions": [
             "行业数据的作者与统计口径"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "risk",
@@ -5076,7 +5544,12 @@
           "priority": 1,
           "questions": [
             "具体业务风险与一般风险的区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "management_discussion",
@@ -5099,7 +5572,12 @@
           "priority": 1,
           "questions": [
             "经营结果的业务驱动与解释"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "fundraising",
@@ -5121,7 +5599,12 @@
           "questions": [
             "募资用途与项目对应",
             "公司发行与老股转售的区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "project"
+          }
         },
         {
           "role": "outlook",
@@ -5140,7 +5623,12 @@
           "priority": 2,
           "questions": [
             "增长策略与实现条件"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "administrative",
@@ -5161,7 +5649,12 @@
           "priority": 3,
           "questions": [
             "发行结构与转售主体对募资归属的影响"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         }
       ],
       "reading_questions": [
@@ -5243,7 +5736,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "results_release",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "sec",
@@ -5351,7 +5844,12 @@
           "questions": [
             "各业务线表现与解释",
             "产品/客户/渠道动态"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "management_discussion",
@@ -5378,7 +5876,12 @@
           "priority": 1,
           "questions": [
             "财务表现的经营解释与管理层引语的角色归属"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "operating_metrics",
@@ -5404,7 +5907,12 @@
           "priority": 1,
           "questions": [
             "经营指标口径、分母与期间"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "outlook",
@@ -5425,7 +5933,12 @@
           "priority": 2,
           "questions": [
             "展望/指引的期间与条件"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "administrative",
@@ -5446,7 +5959,12 @@
           "priority": 3,
           "questions": [
             "全局限定语与联系信息；不承载业务事实"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         }
       ],
       "reading_questions": [
@@ -5533,7 +6051,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "sec_10k",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "sec"
@@ -5631,7 +6149,12 @@
           "questions": [
             "业务模式与收费/交付方式",
             "分部构成与各分部经营机制"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -5656,7 +6179,12 @@
           "questions": [
             "经营指标/KPI 的定义、分母与期间",
             "分部指标与收入机制的关系"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "risk",
@@ -5674,7 +6202,12 @@
           "questions": [
             "哪些风险是已发生事实、哪些是假设性风险",
             "风险更新相对上年的变化"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "management_discussion",
@@ -5693,7 +6226,12 @@
           "questions": [
             "经营结果背后的业务驱动与解释",
             "同比/环比基期与口径"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "financial_notes",
@@ -5715,7 +6253,12 @@
           "priority": 2,
           "questions": [
             "收入确认、履约义务、剩余履约义务等描述解释了什么商业机制"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "outlook",
@@ -5737,7 +6280,12 @@
           "priority": 2,
           "questions": [
             "公司展望/指引的期间、假设与限定语"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "administrative",
@@ -5758,7 +6306,12 @@
           "priority": 3,
           "questions": [
             "是否有影响经营的诉讼、物业或控制事项事实"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         }
       ],
       "reading_questions": [
@@ -5851,7 +6404,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "sec_10q",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "sec"
@@ -5942,7 +6495,12 @@
           "questions": [
             "本季与 YTD 经营结果的业务驱动",
             "同比/环比基期与口径"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "business",
@@ -5969,7 +6527,12 @@
           "priority": 1,
           "questions": [
             "业务模式、分部与收入机制的本期变化"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "operating_metrics",
@@ -5998,7 +6561,12 @@
           "priority": 2,
           "questions": [
             "订阅/消耗/订单等指标定义与分母"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "financial_notes",
@@ -6023,7 +6591,12 @@
           "priority": 2,
           "questions": [
             "收入确认与履约义务的商业机制"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "risk",
@@ -6044,7 +6617,12 @@
           "priority": 2,
           "questions": [
             "相对年报新增/更新的业务风险"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "administrative",
@@ -6065,7 +6643,12 @@
           "priority": 3,
           "questions": [
             "控制与程序是否有实际经营约束；与 Part II Item 4 矿山安全披露区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         },
         {
           "role": "administrative",
@@ -6087,7 +6670,12 @@
           "priority": 3,
           "questions": [
             "是否有影响经营的诉讼或融资事实；与 Part I Item 1 财务报表区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "unknown",
+            "demand_class": "administrative"
+          }
         }
       ],
       "reading_questions": [
@@ -6172,7 +6760,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "sec_20f",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "sec"
@@ -6266,7 +6854,12 @@
           "questions": [
             "业务模式、产品与服务、收费方式",
             "组织结构与经营主体归属"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "industry",
@@ -6290,7 +6883,12 @@
           "questions": [
             "监管/行业变化对业务的具体约束",
             "行业数据的作者与口径"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "management_discussion",
@@ -6307,7 +6905,12 @@
           "priority": 1,
           "questions": [
             "经营回顾中的业务驱动与解释"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         },
         {
           "role": "outlook",
@@ -6328,7 +6931,12 @@
           "priority": 2,
           "questions": [
             "展望与计划的条件语气"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "risk",
@@ -6346,7 +6954,12 @@
           "priority": 1,
           "questions": [
             "具体风险（含监管、结构、业务）与一般套话的区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "financial_notes",
@@ -6366,7 +6979,12 @@
           "priority": 3,
           "questions": [
             "收入确认与业务机制描述"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "mixed"
+          }
         }
       ],
       "reading_questions": [
@@ -6450,7 +7068,7 @@
     {
       "schema_version": "du2-family-spec/1",
       "id": "secondary_research",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "applies_to": {
         "regimes": [
           "other",
@@ -6554,7 +7172,12 @@
           "questions": [
             "与业务相关的新事实、约束或机会",
             "内容的作者/发文主体是谁"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "on_tabular_evidence",
+            "fine": "on_candidate",
+            "demand_class": "operating"
+          }
         },
         {
           "role": "industry",
@@ -6575,7 +7198,12 @@
           "priority": 2,
           "questions": [
             "政策/行业事实的发文主体、适用范围与生效期"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "outlook",
@@ -6596,7 +7224,12 @@
           "priority": 3,
           "questions": [
             "预测与建议标注为第三方观点，不当公司承诺"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         },
         {
           "role": "risk",
@@ -6613,7 +7246,12 @@
           "priority": 2,
           "questions": [
             "第三方提示的风险与公司披露风险的来源区分"
-          ]
+          ],
+          "geometry_intent": {
+            "discover": "context_only",
+            "fine": "explicit_only",
+            "demand_class": "context"
+          }
         }
       ],
       "reading_questions": [
@@ -10610,7 +11248,7 @@
   ],
   "fallback": {
     "id": "generic_source_reading",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "sections": [
       {
         "role": "business",
@@ -10626,7 +11264,12 @@
         "priority": 2,
         "questions": [
           "Read the actual source material, retain its author and uncertainty."
-        ]
+        ],
+        "geometry_intent": {
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        }
       },
       {
         "role": "management_discussion",
@@ -10640,7 +11283,12 @@
         "priority": 2,
         "questions": [
           "Read the actual source material, retain its author and uncertainty."
-        ]
+        ],
+        "geometry_intent": {
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        }
       },
       {
         "role": "risk",
@@ -10652,7 +11300,12 @@
         "priority": 2,
         "questions": [
           "Read the actual source material, retain its author and uncertainty."
-        ]
+        ],
+        "geometry_intent": {
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        }
       },
       {
         "role": "unknown",
@@ -10666,7 +11319,12 @@
         "priority": 3,
         "questions": [
           "Read the actual source material, retain its author and uncertainty."
-        ]
+        ],
+        "geometry_intent": {
+          "discover": "unknown",
+          "fine": "unknown",
+          "demand_class": "unknown"
+        }
       }
     ],
     "reading_questions": [
