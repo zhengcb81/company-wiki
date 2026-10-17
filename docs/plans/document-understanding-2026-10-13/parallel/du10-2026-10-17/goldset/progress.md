@@ -13,8 +13,10 @@
   - 结构测试 58 passed（0.95→2.6s，离线，0 网络模型）。
   - 锚点核对 11/11 PASS（SHA+mtime+118 anchors 回放）。
   - 施工中修正 3 处（见 `receipts/node_b_tests.json` fixes_during_node_b）。
-- [ ] C 节点：独立 agent 实读复核。
-- [ ] 终审 + handoff。
+- [x] C 节点：独立 agent 实读复核。首轮发现 1 阻断（baba must_preserve 口径错配）+ 3 轻微建议；
+  全部修复后同一 reviewer 复核 PASS。收据 `receipts/node_c_independent_review.*`、
+  `receipts/node_c_repair_review.*`。
+- [x] 交接：`handoff.md`、`handoff.json` 完成。状态 COMPLETE。
 
 ## 环境与卫生
 
