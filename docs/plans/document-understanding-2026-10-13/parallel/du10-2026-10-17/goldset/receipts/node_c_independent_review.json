@@ -1,0 +1,142 @@
+{
+ "schema_version": "du10-goldset-independent-review/1",
+ "reviewed_at": "2026-10-17",
+ "reviewer": "independent (non-author), fresh context",
+ "reviewed_head": "5747dc07b21fae34db7c04048b282d51e9c88591",
+ "branch": "codex/du10-cwp-summary-goldset",
+ "base_head": "900dbf6489f3b995a0bfb7fcbb8a001a68df241d",
+ "worktree_clean": true,
+ "worktree_untracked": [
+  "docs/plans/document-understanding-2026-10-13/parallel/du10-2026-10-17/goldset/receipts/node_c_anchor_verify_reviewer_run.json"
+ ],
+ "diff_scope": {
+  "base": "900dbf6489f3b995a0bfb7fcbb8a001a68df241d",
+  "files_total": 22,
+  "all_under_goldset_dir": true,
+  "out_of_bounds": []
+ },
+ "commands": [
+  {
+   "cmd": "python -B -X utf8 -m pytest \"docs/plans/document-understanding-2026-10-13/parallel/du10-2026-10-17/goldset/tests\" -q --ignore-glob \"*verify_anchors*\"",
+   "result": "58 passed in 3.22s",
+   "exit_code": 0
+  },
+  {
+   "cmd": "python -B -X utf8 tests/verify_anchors.py --bindings \"C:/Users/郑曾波/.du10-goldset/bindings.local.json\" --output receipts/node_c_anchor_verify_reviewer_run.json",
+   "result": "11/11 cases PASS",
+   "exit_code": 0,
+   "receipt": "receipts/node_c_anchor_verify_reviewer_run.json"
+  }
+ ],
+ "source_sha256_recomputed": "all 10 unique originals match case source_sha256",
+ "quote_budgets_normalized": {
+  "du10gs-cn-annual-catl-industry": 190,
+  "du10gs-cn-annual-catl-capacity": 134,
+  "du10gs-cn-interim-sugon": 178,
+  "du10gs-cn-q3-dfc": 124,
+  "du10gs-cn-ipo-hrjc": 265,
+  "du10gs-cn-convbond-mlkw": 149,
+  "du10gs-cn-ir-amec-minutes": 301,
+  "du10gs-hk-ipo-baba": 158,
+  "du10gs-hk-interim-miniso": 273,
+  "du10gs-call-miniso-q4-2024": 226,
+  "du10gs-us-10q-vrsk": 456,
+  "budget_limit": 8192,
+  "all_within_budget": true
+ },
+ "not_available_claims": {
+  "only_transcripts_dir_under_companies": "companies/Microsoft/raw/transcripts",
+  "verified": true,
+  "method": "read-only find over companies/ in main repo"
+ },
+ "case_verdicts": {
+  "du10gs-cn-annual-catl-industry": "PASS",
+  "du10gs-cn-annual-catl-capacity": "PASS",
+  "du10gs-cn-interim-sugon": "PASS",
+  "du10gs-cn-q3-dfc": "PASS",
+  "du10gs-cn-ipo-hrjc": "PASS",
+  "du10gs-cn-convbond-mlkw": "PASS",
+  "du10gs-cn-ir-amec-minutes": "PASS",
+  "du10gs-hk-ipo-baba": "FAIL",
+  "du10gs-hk-interim-miniso": "PASS",
+  "du10gs-call-miniso-q4-2024": "PASS",
+  "du10gs-us-10q-vrsk": "PASS"
+ },
+ "outlook_vs_actual_per_case": {
+  "du10gs-cn-annual-catl-industry": "no outlook confusion; third-party stats attributed",
+  "du10gs-cn-annual-catl-capacity": "under-construction kept as plan; no 'operational' upgrade",
+  "du10gs-cn-interim-sugon": "IDC full-year forecast marked plan with 有望 preserved; NBS H1 actual",
+  "du10gs-cn-q3-dfc": "all realized; single-quarter qualifier preserved",
+  "du10gs-cn-ipo-hrjc": "capex projects marked plan (拟/将); saturation bounded to reporting period",
+  "du10gs-cn-convbond-mlkw": "projections marked conditional with 完全达产后预计; first planned center not asserted existing",
+  "du10gs-cn-ir-amec-minutes": "2022 market size marked plan with annotation preserved; XD RIE/YDRIE marked plan (in development)",
+  "du10gs-hk-ipo-baba": "all historical actuals (issue is scope misattribution, not outlook)",
+  "du10gs-hk-interim-miniso": "all realized stock/flow",
+  "du10gs-call-miniso-q4-2024": "90 IP launches marked plan (筹划); hedged quantifiers preserved; no reverse error",
+  "du10gs-us-10q-vrsk": "all realized; EBITDA non-GAAP attribute preserved"
+ },
+ "issues": [
+  {
+   "id": "I1",
+   "severity": "blocking",
+   "case_id": "du10gs-hk-ipo-baba",
+   "location": "facts[id=global-annual-active-consumers].must_preserve[2]",
+   "problem": "must_preserve requires '中国消费业务+蚂蚁金服去重合并口径' for the 8.60亿 global annual active consumers figure. Per p19 of the prospectus, 8.60亿 = 中国消费业务 7.30亿 + 国际 1.30亿 (Lazada与速卖通去重, footnote 4) and does NOT include Ant users; the Ant-dedup merged scope belongs to the separate 9.60亿 China users figure (footnote 1). The entry also contradicts the same case's boundary '8.60亿不得写成……含蚂蚁金服中国用户，去重合并口径'.",
+   "evidence_pages": [19],
+   "suggested_fix": "Replace must_preserve[2] with: '全球8.60亿＝中国消费业务7.30亿＋国际1.30亿（Lazada与速卖通去重），不含蚂蚁金服用户（蚂蚁金服仅并入9.60亿中国用户口径）'."
+  },
+  {
+   "id": "I2",
+   "severity": "minor",
+   "case_id": "du10gs-cn-ir-amec-minutes",
+   "location": "allowed_summary[2]",
+   "problem": "'XD RIE、YDRIE处于在研阶段，预计一年左右进入市场' blurs timing: source (p3) binds '一年左右即将进入市场' to YDRIE only; XD RIE is '很快就完成开发进入市场'.",
+   "suggested_fix": "Split: XD RIE — soon to complete development; YDRIE — in development, expected to enter market in about a year."
+  },
+  {
+   "id": "I3",
+   "severity": "minor",
+   "case_id": "du10gs-call-miniso-q4-2024",
+   "location": "summary_proposition / summary_guidance.must_preserve[0]",
+   "problem": "Speaker labeled 董事长; transcript self-describes him on p1 as 创始人兼首席执行官叶国富先生 (p3 header '叶董讲稿'). Title is external knowledge, not in-document.",
+   "suggested_fix": "must_preserve as '说话人=叶国富（本件自称创始人兼首席执行官；页眉叶董讲稿）' or just 叶国富."
+  },
+  {
+   "id": "I4",
+   "severity": "minor",
+   "case_id": "du10gs-us-10q-vrsk",
+   "location": "summary_guidance.boundary[0]",
+   "problem": "Rationale '（公司另有能源与专业市场等收入）' is not supported by this 10-Q: revenue disaggregation shows Insurance Underwriting+Claims summing to total revenues (782.6) with no specialized/energy rows. Boundary direction (84% scoped to insurance revenues) remains correct.",
+   "suggested_fix": "Reword rationale to scope-discipline: same numbers, but the sentence scope (insurance revenues) must not be rewritten as total revenues."
+  }
+ ],
+ "observations": [
+  {
+   "id": "O1",
+   "case_id": "du10gs-cn-q3-dfc",
+   "note": "Filing-internal tension (not an annotation error): single-quarter total revenue 30.66亿 (p1) is smaller than the same-period category revenue 海缆+高压电缆 35.49亿 (p3). Annotation quotes the filing verbatim and anchors the single-quarter definition to p2; out of goldset repair scope; flagged for downstream awareness."
+  },
+  {
+   "id": "O2",
+   "case_id": "du10gs-us-10q-vrsk",
+   "note": "Raw HTML contains an intra-word tag break ('t ransactional'); the project convention norm() removes ALL whitespace (documented in tests/_support.py, matching du-gold/1 and DU2 families), under which the anchor matches. Keep the convention consistent across consumers."
+  }
+ ],
+ "case_file_sha256": {
+  "du10gs-call-miniso-q4-2024.json": "b46e1a7aaa5b59303d77d3a7f03f74f1bb3c8b7e76f6b3f549987db9aa60e61d",
+  "du10gs-cn-annual-catl-capacity.json": "5e4b9bf294b9506e372ac2d4b6e88f37c7e561933cf7b295cc7df2a764ce9179",
+  "du10gs-cn-annual-catl-industry.json": "ef0f3704fff5e4a8ad1c8836b2d52bcb02f1595780333cd8d2606efddb1bbc58",
+  "du10gs-cn-convbond-mlkw.json": "27988c3ba23cd19ea9906ae9302faf017352b0473c9be66ebc990eb24aa496a8",
+  "du10gs-cn-interim-sugon.json": "7c58a68161697c08c3f1f49892aa2b32348a4cafa950a5f683cc5a712e34a810",
+  "du10gs-cn-ipo-hrjc.json": "5502d0f67658f748db01675e5850cb94494f700314cc05ad8d86d65a931009ba",
+  "du10gs-cn-ir-amec-minutes.json": "e0b3da655acf8dde06416a00a127748d1338c5b7bc53b3e7bc5b19c8991d75bb",
+  "du10gs-cn-q3-dfc.json": "21e186fb55ad47288a157ad8e562ca1ac26e63e7343819a3ec295f7ba2b02e7e",
+  "du10gs-hk-interim-miniso.json": "c1b140f7ad913801a89210c9e3ac7e6e0edc29dcf66699cb16edff42070c1e5f",
+  "du10gs-hk-ipo-baba.json": "4504c5ef898c8dcf7aef8221987e213ad2b2614a9934a72bf36b2efe8e36b470",
+  "du10gs-us-10q-vrsk.json": "cf46b219b0c4cff8f0d98d3a3453a6a887dd14580526df5f2941f63096d220f8",
+  "index.json": "8982b90f3eaafc86ef30117d3866f00ae83347ede21c7bd04a87ca54f6a56102"
+ },
+ "overall": "FAIL",
+ "overall_reason": "One unresolved blocking issue (I1: baba must_preserve scope misattribution for the 8.60亿 figure, contradicting both source p19 and the case's own boundary). All other 10 cases PASS; both receipt commands exit 0; SHA/anchors/pages/budgets/boundaries/NOT_AVAILABLE verified. After the one-line I1 fix and re-running tests/verify_anchors.py, expect PASS on re-review.",
+ "not_verified": []
+}

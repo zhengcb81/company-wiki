@@ -33,7 +33,7 @@
    "EBITDA non-GAAP 属性"
   ],
   "boundary": [
-   "84%不得写成总收入占比（公司另有能源与专业市场等收入）",
+   "84%不得写成总收入占比（84%为insurance revenues子口径，非total revenues；disaggregation中total revenues=Underwriting+Claims=$782.6m）",
    "EBITDA不得写成GAAP经营利润或净利",
    "订阅占比不得写成订阅收入金额"
   ]

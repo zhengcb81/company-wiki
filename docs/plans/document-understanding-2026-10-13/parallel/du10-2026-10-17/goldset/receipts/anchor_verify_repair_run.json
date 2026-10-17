@@ -1,0 +1,677 @@
+{
+ "schema_version": "du10-goldset-anchor-verify/1",
+ "verified_at": "2026-10-17T18:28:06+00:00",
+ "cases_total": 11,
+ "cases_bound": 11,
+ "unbound_cases": [],
+ "results": [
+  {
+   "case_id": "du10gs-call-miniso-q4-2024",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\名创优品\\December Quarter and Full Year of 2024  Transcript.pdf"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\名创优品\\December Quarter and Full Year of 2024  Transcript.pdf"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:global-stores-and-net-adds]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[fact:global-stores-and-net-adds]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[fact:brand-split-net-adds-beat-target]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[fact:overseas-share-hedged]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[fact:overseas-share-hedged]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[fact:ip-pipeline-2025-plan]",
+     "status": "PASS",
+     "detail": "p4"
+    },
+    {
+     "check": "anchor[fact:currency-statement]",
+     "status": "PASS",
+     "detail": "p2"
+    },
+    {
+     "check": "anchor[trap:prepared_remarks]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[trap:plan_language]",
+     "status": "PASS",
+     "detail": "p4"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 226
+  },
+  {
+   "case_id": "du10gs-cn-annual-catl-capacity",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\宁德时代\\raw\\financial_reports\\宁德时代：2025年年度报告.pdf"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\宁德时代\\raw\\financial_reports\\宁德时代：2025年年度报告.pdf"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:capacity-projects-under-construction]",
+     "status": "PASS",
+     "detail": "p24"
+    },
+    {
+     "check": "anchor[fact:revenue-table-same-page]",
+     "status": "PASS",
+     "detail": "p24"
+    },
+    {
+     "check": "anchor[trap:mixed_narrative_and_table]",
+     "status": "PASS",
+     "detail": "p24"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 134
+  },
+  {
+   "case_id": "du10gs-cn-annual-catl-industry",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\宁德时代\\raw\\financial_reports\\宁德时代：2025年年度报告.pdf"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\宁德时代\\raw\\financial_reports\\宁德时代：2025年年度报告.pdf"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:industry-global-power-usage]",
+     "status": "PASS",
+     "detail": "p17"
+    },
+    {
+     "check": "anchor[fact:catl-power-market-share]",
+     "status": "PASS",
+     "detail": "p17"
+    },
+    {
+     "check": "anchor[fact:industry-global-ess-shipment]",
+     "status": "PASS",
+     "detail": "p17"
+    },
+    {
+     "check": "anchor[fact:industry-global-ess-shipment]",
+     "status": "PASS",
+     "detail": "p17"
+    },
+    {
+     "check": "anchor[trap:same_page_mixed]",
+     "status": "PASS",
+     "detail": "p16"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 190
+  },
+  {
+   "case_id": "du10gs-cn-convbond-mlkw",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\密尔克卫\\raw\\research\\密尔克卫：密尔克卫化工供应链服务股份有限公司公开发行可转换公司债券募集说明书.PDF"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\密尔克卫\\raw\\research\\密尔克卫：密尔克卫化工供应链服务股份有限公司公开发行可转换公司债券募集说明书.PDF"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:supercritical-project-investment]",
+     "status": "PASS",
+     "detail": "p344"
+    },
+    {
+     "check": "anchor[fact:supercritical-project-investment]",
+     "status": "PASS",
+     "detail": "p344"
+    },
+    {
+     "check": "anchor[fact:first-hazardous-waste-center]",
+     "status": "PASS",
+     "detail": "p344"
+    },
+    {
+     "check": "anchor[fact:benefit-projection-full-capacity]",
+     "status": "PASS",
+     "detail": "p344"
+    },
+    {
+     "check": "anchor[trap:projection_adjacent_to_facts]",
+     "status": "PASS",
+     "detail": "p344"
+    },
+    {
+     "check": "anchor[trap:same_page_scope]",
+     "status": "PASS",
+     "detail": "p344"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 149
+  },
+  {
+   "case_id": "du10gs-cn-interim-sugon",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中科曙光\\raw\\financial_reports\\中科曙光：中科曙光2025年半年度报告.pdf"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中科曙光\\raw\\financial_reports\\中科曙光：中科曙光2025年半年度报告.pdf"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:parastor-china-mobile-streak]",
+     "status": "PASS",
+     "detail": "p8"
+    },
+    {
+     "check": "anchor[fact:liquid-cooling-c8000-750kw]",
+     "status": "PASS",
+     "detail": "p8"
+    },
+    {
+     "check": "anchor[fact:industry-server-output-h1]",
+     "status": "PASS",
+     "detail": "p9"
+    },
+    {
+     "check": "anchor[fact:industry-server-market-idc-forecast]",
+     "status": "PASS",
+     "detail": "p9"
+    },
+    {
+     "check": "anchor[trap:forecast_vs_actual_same_section]",
+     "status": "PASS",
+     "detail": "p9"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 178
+  },
+  {
+   "case_id": "du10gs-cn-ipo-hrjc",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\华锐精密\\raw\\prospectus\\华锐精密：华锐精密首次公开发行股票并在科创板上市招股说明书.PDF"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\华锐精密\\raw\\prospectus\\华锐精密：华锐精密首次公开发行股票并在科创板上市招股说明书.PDF"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:tool-market-2019-scale]",
+     "status": "PASS",
+     "detail": "p105"
+    },
+    {
+     "check": "anchor[fact:import-share-decline]",
+     "status": "PASS",
+     "detail": "p105"
+    },
+    {
+     "check": "anchor[fact:capacity-saturation-expansion-plan]",
+     "status": "PASS",
+     "detail": "p293"
+    },
+    {
+     "check": "anchor[fact:capacity-saturation-expansion-plan]",
+     "status": "PASS",
+     "detail": "p293"
+    },
+    {
+     "check": "anchor[trap:industry_vs_company]",
+     "status": "PASS",
+     "detail": "p105"
+    },
+    {
+     "check": "anchor[trap:persuasive_registration_document]",
+     "status": "PASS",
+     "detail": "p293"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 265
+  },
+  {
+   "case_id": "du10gs-cn-ir-amec-minutes",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\investor_relations\\【芯片】中微公司交流纪要20220416.pdf"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\investor_relations\\【芯片】中微公司交流纪要20220416.pdf"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:revenue-vs-new-orders-2021]",
+     "status": "PASS",
+     "detail": "p1"
+    },
+    {
+     "check": "anchor[fact:industry-equipment-growth-2021]",
+     "status": "PASS",
+     "detail": "p2"
+    },
+    {
+     "check": "anchor[fact:market-size-2022-forecast]",
+     "status": "PASS",
+     "detail": "p2"
+    },
+    {
+     "check": "anchor[fact:market-size-2022-forecast]",
+     "status": "PASS",
+     "detail": "p2"
+    },
+    {
+     "check": "anchor[fact:icp-nanova-growth]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[fact:xdrie-ydrie-in-development]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[fact:xdrie-ydrie-in-development]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[trap:document_nature]",
+     "status": "PASS",
+     "detail": "p1"
+    },
+    {
+     "check": "anchor[trap:forecast_annotation]",
+     "status": "PASS",
+     "detail": "p2"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 301
+  },
+  {
+   "case_id": "du10gs-cn-q3-dfc",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\东方电缆\\raw\\financial_reports\\东方电缆：东方电缆2025年第三季度报告.pdf"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\东方电缆\\raw\\financial_reports\\东方电缆：东方电缆2025年第三季度报告.pdf"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:q3-submarine-hv-cable-revenue]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[fact:q3-profit-change-reason]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[fact:q3-profit-change-reason]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[fact:quarter-definition-note]",
+     "status": "PASS",
+     "detail": "p2"
+    },
+    {
+     "check": "anchor[trap:same_page_mixed]",
+     "status": "PASS",
+     "detail": "p3"
+    },
+    {
+     "check": "anchor[trap:dual_period_columns]",
+     "status": "PASS",
+     "detail": "p2"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 124
+  },
+  {
+   "case_id": "du10gs-hk-interim-miniso",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\名创优品\\2025半年报（港股）.pdf"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Dropbox\\Stock\\消费品\\名创优品\\2025半年报（港股）.pdf"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:overseas-store-mix]",
+     "status": "PASS",
+     "detail": "p14"
+    },
+    {
+     "check": "anchor[fact:overseas-store-mix]",
+     "status": "PASS",
+     "detail": "p14"
+    },
+    {
+     "check": "anchor[fact:overseas-store-mix]",
+     "status": "PASS",
+     "detail": "p14"
+    },
+    {
+     "check": "anchor[fact:overseas-direct-store-flow]",
+     "status": "PASS",
+     "detail": "p14"
+    },
+    {
+     "check": "anchor[fact:overseas-direct-store-flow]",
+     "status": "PASS",
+     "detail": "p14"
+    },
+    {
+     "check": "anchor[fact:overseas-direct-store-flow]",
+     "status": "PASS",
+     "detail": "p14"
+    },
+    {
+     "check": "anchor[fact:overseas-direct-store-flow]",
+     "status": "PASS",
+     "detail": "p14"
+    },
+    {
+     "check": "anchor[fact:overseas-direct-store-flow]",
+     "status": "PASS",
+     "detail": "p14"
+    },
+    {
+     "check": "anchor[fact:group-direct-stores-637]",
+     "status": "PASS",
+     "detail": "p23"
+    },
+    {
+     "check": "anchor[fact:group-direct-stores-637]",
+     "status": "PASS",
+     "detail": "p23"
+    },
+    {
+     "check": "anchor[fact:group-direct-stores-637]",
+     "status": "PASS",
+     "detail": "p23"
+    },
+    {
+     "check": "anchor[fact:selling-expense-us-investment]",
+     "status": "PASS",
+     "detail": "p23"
+    },
+    {
+     "check": "anchor[fact:selling-expense-us-investment]",
+     "status": "PASS",
+     "detail": "p23"
+    },
+    {
+     "check": "anchor[trap:stock_vs_flow_table]",
+     "status": "PASS",
+     "detail": "p14"
+    },
+    {
+     "check": "anchor[trap:bilingual_duplication]",
+     "status": "PASS",
+     "detail": "p14"
+    },
+    {
+     "check": "anchor[trap:scope_shift]",
+     "status": "PASS",
+     "detail": "p23"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 273
+  },
+  {
+   "case_id": "du10gs-hk-ipo-baba",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\阿里巴巴\\raw\\prospectus\\阿里巴巴招股说明书2019.pdf"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\阿里巴巴\\raw\\prospectus\\阿里巴巴招股说明书2019.pdf"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:global-annual-active-consumers]",
+     "status": "PASS",
+     "detail": "p19"
+    },
+    {
+     "check": "anchor[fact:global-annual-active-consumers]",
+     "status": "PASS",
+     "detail": "p19"
+    },
+    {
+     "check": "anchor[fact:global-annual-active-consumers]",
+     "status": "PASS",
+     "detail": "p19"
+    },
+    {
+     "check": "anchor[fact:international-active-consumers]",
+     "status": "PASS",
+     "detail": "p19"
+    },
+    {
+     "check": "anchor[fact:international-active-consumers]",
+     "status": "PASS",
+     "detail": "p19"
+    },
+    {
+     "check": "anchor[fact:international-active-consumers]",
+     "status": "PASS",
+     "detail": "p19"
+    },
+    {
+     "check": "anchor[fact:china-retail-gmv-march-ttm]",
+     "status": "PASS",
+     "detail": "p19"
+    },
+    {
+     "check": "anchor[fact:china-retail-gmv-march-ttm]",
+     "status": "PASS",
+     "detail": "p19"
+    },
+    {
+     "check": "anchor[fact:china-retail-gmv-march-ttm]",
+     "status": "PASS",
+     "detail": "p19"
+    },
+    {
+     "check": "anchor[fact:cloud-segment-revenue-fy2019]",
+     "status": "PASS",
+     "detail": "p21"
+    },
+    {
+     "check": "anchor[fact:cloud-segment-revenue-fy2019]",
+     "status": "PASS",
+     "detail": "p21"
+    },
+    {
+     "check": "anchor[fact:cloud-segment-revenue-fy2019]",
+     "status": "PASS",
+     "detail": "p21"
+    },
+    {
+     "check": "anchor[trap:dual_ttm_same_page]",
+     "status": "PASS",
+     "detail": "p19"
+    },
+    {
+     "check": "anchor[trap:non_gaap_rows]",
+     "status": "PASS",
+     "detail": "p21"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 158
+  },
+  {
+   "case_id": "du10gs-us-10q-vrsk",
+   "checks": [
+    {
+     "check": "binding_resolves",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\VRSK\\filings\\fil_0001437749-26-013729\\vrsk20260331_10q.htm"
+    },
+    {
+     "check": "sha256_matches",
+     "status": "PASS",
+     "detail": "C:\\Users\\郑曾波\\Projects\\dayu-agent\\workspace\\portfolio\\VRSK\\filings\\fil_0001437749-26-013729\\vrsk20260331_10q.htm"
+    },
+    {
+     "check": "mtime_unchanged",
+     "status": "PASS",
+     "detail": ""
+    },
+    {
+     "check": "anchor[fact:insurance-subscription-share]",
+     "status": "PASS",
+     "detail": "document"
+    },
+    {
+     "check": "anchor[fact:transactional-advisory-share]",
+     "status": "PASS",
+     "detail": "document"
+    },
+    {
+     "check": "anchor[fact:ebitda-non-gaap-definition]",
+     "status": "PASS",
+     "detail": "document"
+    },
+    {
+     "check": "anchor[fact:total-revenue-q1-2026]",
+     "status": "PASS",
+     "detail": "document"
+    },
+    {
+     "check": "anchor[trap:scope_insurance_vs_total]",
+     "status": "PASS",
+     "detail": "document"
+    },
+    {
+     "check": "anchor[trap:printed_page_markers]",
+     "status": "PASS",
+     "detail": "document"
+    }
+   ],
+   "status": "PASS",
+   "quote_chars_normalized": 456
+  }
+ ],
+ "status": "PASS"
+}
