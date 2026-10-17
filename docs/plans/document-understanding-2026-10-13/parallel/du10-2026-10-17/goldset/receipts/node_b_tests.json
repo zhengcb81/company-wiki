@@ -1,0 +1,53 @@
+{
+ "schema_version": "du10-goldset-node-b/1",
+ "completed_at": "2026-10-17",
+ "deliverables": {
+  "cases": [
+   "cases/index.json",
+   "cases/du10gs-cn-annual-catl-industry.json",
+   "cases/du10gs-cn-annual-catl-capacity.json",
+   "cases/du10gs-cn-interim-sugon.json",
+   "cases/du10gs-cn-q3-dfc.json",
+   "cases/du10gs-cn-ipo-hrjc.json",
+   "cases/du10gs-cn-convbond-mlkw.json",
+   "cases/du10gs-cn-ir-amec-minutes.json",
+   "cases/du10gs-hk-ipo-baba.json",
+   "cases/du10gs-hk-interim-miniso.json",
+   "cases/du10gs-call-miniso-q4-2024.json",
+   "cases/du10gs-us-10q-vrsk.json"
+  ],
+  "tests": [
+   "tests/_support.py",
+   "tests/test_goldset_structure.py",
+   "tests/verify_anchors.py"
+  ]
+ },
+ "schema": "du10-summary-goldset-case/1",
+ "vocabulary_reuse": "modality/role/target_kind/quantity_basis/quote-anchor 与既有 du-gold/1 语料一致（扫描 tools/document_understanding_benchmark/gold/*.json 全部 467 facts 得到词表）；锚点比对规则沿用 DU2 families 空白归一化",
+ "commands": [
+  {
+   "command": "python -B -X utf8 -m pytest docs/plans/document-understanding-2026-10-13/parallel/du10-2026-10-17/goldset/tests -q --ignore-glob '*verify_anchors*'",
+   "exit_code": 0,
+   "result": "58 passed",
+   "receipt": "receipts/node_b_tests.json"
+  },
+  {
+   "command": "python -B -X utf8 tests/verify_anchors.py --bindings C:/Users/郑曾波/.du10-goldset/bindings.local.json --output receipts/anchor_verify_author_run.json",
+   "exit_code": 0,
+   "result": "11/11 cases PASS (SHA + mtime + 118 anchors replayed)",
+   "receipt": "receipts/anchor_verify_author_run.json"
+  }
+ ],
+ "anchor_total": 118,
+ "quote_budget_max_bytes_normalized": 456,
+ "quote_budget_limit_bytes": 8192,
+ "validator_scope": "数据完整性（字段/枚举/唯一性/覆盖/锚点格式/支持与反例不冲突/引文预算/无绝对路径/index一致性）；不判定经济事实或摘要质量",
+ "source_resolution": "carrier_root 配置根（company_raw/dropbox_stock/dayu_portfolio）+ 根内相对路径 source_id + 机内 bindings 绝对路径 + SHA 复算；catalog.db 为空库（零表），不伪造 SourceExport 记录",
+ "fixes_during_node_b": [
+  "XD RIE 引文补“来会”两字与原文一致",
+  "VRSK 锚点按去标签文本逐字校正（for our solutions, respectively / Total revenues $ 782.6 $ 753.0）",
+  "引文预算改为含 trap 引文（与 du-gold ≤8KiB 全部摘录口径一致）"
+ ],
+ "author": "DU10-CWP-SUMMARY-GOLDSET 作者（本 worktree）",
+ "notes": "bindings.local.json 位于 C:/Users/郑曾波/.du10-goldset/（两仓之外，不提交）"
+}

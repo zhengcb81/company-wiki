@@ -1,0 +1,173 @@
+{
+ "schema_version": "du10-summary-goldset-case/1",
+ "case_id": "du10gs-cn-interim-sugon",
+ "created": "2026-10-17",
+ "market": "CN",
+ "company": "中科曙光",
+ "doc_type": "interim_report",
+ "carrier": ".pdf",
+ "language": "zh",
+ "narrative_focus": "main_business",
+ "bound_failure_mode": "预测当实际（IDC 全年预测 vs 统计局 H1 实际）；第三方数据归属",
+ "source_ref": {
+  "carrier_root": "company_raw",
+  "source_id": "中科曙光/raw/financial_reports/中科曙光：中科曙光2025年半年度报告.pdf",
+  "source_sha256": "8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+  "mime_type": "application/pdf",
+  "registered_sidecar": {
+   "market": "CN",
+   "security_id": "中科曙光",
+   "source_title": "中科曙光：中科曙光2025年半年度报告"
+  }
+ },
+ "summary_proposition": "ParaStor分布式存储连续6年中标中国移动集采；2024年第三代C8000浸没液冷单机柜功率密度突破750kW以上；2025H1中国服务器产量+126.7%（国家统计局），IDC预测2025年全球服务器市场规模有望达3660亿美元（+44.6%）。",
+ "allowed_summary": [
+  "报告期内ParaStor分布式存储系列连续6年中标中国移动分布式存储集采。",
+  "2024年第三代C8000浸没液冷解决方案单机柜功率密度突破至750kW以上；2025年子公司曙光数创发布C7000-F相变间接液冷技术。",
+  "行业侧：国家统计局数据显示2025年上半年中国服务器产量增长126.7%；IDC预测2025年全球服务器市场规模有望达到3660亿美元、同比增速44.6%。"
+ ],
+ "summary_guidance": {
+  "must_preserve": [
+   "国家统计局（实际）与 IDC（预测）来源分开",
+   "“有望达到”预测措辞",
+   "2024年（C8000）与2025年（C7000-F）时间归属"
+  ],
+  "boundary": [
+   "全年市场规模预测不得写成上半年已实现",
+   "行业产量/规模不得写成公司收入",
+   "自建研发中心数量等资质叙述不升格为行业结论"
+  ]
+ },
+ "facts": [
+  {
+   "id": "parastor-china-mobile-streak",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "报告期内，公司ParaStor分布式存储系列连续6年中标中国移动分布式存储集采",
+      "location_kind": "page",
+      "page": 8
+     }
+    ]
+   ],
+   "must_preserve": [
+    "连续6年",
+    "中国移动",
+    "分布式存储集采",
+    "ParaStor"
+   ],
+   "must_not_assert": [
+    "连续6年存储市场份额第一（份额第一是赛迪报告中具身智能/自动驾驶/科教等细分领域口径，属另一句）",
+    "海外运营商订单"
+   ],
+   "reason": "公司主营业务实际进展；与同页“市场份额首位”句是两个不同事实，来源与口径都不同。"
+  },
+  {
+   "id": "liquid-cooling-c8000-750kw",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "projected_output",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "2024年第三代C8000浸没液冷解决方案单机柜功率密度突破至750kW以上",
+      "location_kind": "page",
+      "page": 8
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2024年",
+    "第三代C8000",
+    "单机柜功率密度",
+    "750kW以上"
+   ],
+   "must_not_assert": [
+    "750kW为2025年发布（2025年是曙光数创C7000-F相变间接液冷技术）",
+    "公司全部服务器功率密度"
+   ],
+   "reason": "产品代际与年份绑定；同页下一句才是2025年C7000-F，时间错位是高发错引。"
+  },
+  {
+   "id": "industry-server-output-h1",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "incremental",
+   "modality": "third_party",
+   "role": "third_party",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "国家统计局数据显示，中国服务器产量增长126.7%",
+      "location_kind": "page",
+      "page": 9
+     }
+    ]
+   ],
+   "must_preserve": [
+    "国家统计局",
+    "中国服务器产量",
+    "2025年上半年"
+   ],
+   "must_not_assert": [
+    "全球服务器产量增长126.7%",
+    "公司服务器产量增长126.7%",
+    "IDC数据"
+   ],
+   "reason": "行业实际数据（半年、中国、产量）；与下一条IDC全年预测形成实际/预测对照。"
+  },
+  {
+   "id": "industry-server-market-idc-forecast",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "plan",
+   "role": "third_party",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "IDC（国际数据公司）发布预测，2025年全球服务器市场规模有望达到3660亿美元，同比增速44.6%",
+      "location_kind": "page",
+      "page": 9
+     }
+    ]
+   ],
+   "must_preserve": [
+    "IDC",
+    "2025年全年",
+    "3660亿美元",
+    "“有望”预测措辞"
+   ],
+   "must_not_assert": [
+    "2025年上半年已实现3660亿美元市场规模",
+    "公司收入3660亿美元",
+    "预测当已实现"
+   ],
+   "reason": "第三方全年预测；丢掉“有望”或把期间换成上半年即 planned/actual 错引。"
+  }
+ ],
+ "misread_traps": [
+  {
+   "page": 9,
+   "kind": "forecast_vs_actual_same_section",
+   "note": "p9 行业段先给统计局H1实际产量增速，紧接着给IDC全年规模预测；两句连排且都带百分数。",
+   "exact_quote": "国家统计局数据显示，中国服务器产量增长126.7%"
+  },
+  {
+   "page": 8,
+   "kind": "footnote_sources",
+   "note": "p8-9 多个数字带脚注来源（赛迪/SPC/工信部/IDC 等），脚注编号在PDF抽取中黏在数字后（如126.7%⁴）；引文比对须空白归一化。"
+  }
+ ],
+ "prior_use": "fresh：.planning与docs/plans零提及",
+ "notes": "半年报 physical pages 8-9（PDF 1基）。189页。",
+ "quote_budget_chars_normalized": 178,
+ "bound_failure_mode_check": "预测当实际（IDC 全年预测 vs 统计局 H1 实际）；第三方数据归属"
+}

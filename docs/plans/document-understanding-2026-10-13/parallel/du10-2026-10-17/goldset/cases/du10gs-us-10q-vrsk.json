@@ -1,0 +1,166 @@
+{
+ "schema_version": "du10-summary-goldset-case/1",
+ "case_id": "du10gs-us-10q-vrsk",
+ "created": "2026-10-17",
+ "market": "US",
+ "company": "Verisk Analytics",
+ "doc_type": "form_10q",
+ "carrier": ".htm",
+ "language": "en",
+ "narrative_focus": "main_business",
+ "bound_failure_mode": "insurance 收入范围当总收入；non-GAAP 当 GAAP；approximately 丢失",
+ "source_ref": {
+  "carrier_root": "dayu_portfolio",
+  "source_id": "VRSK/filings/fil_0001437749-26-013729/vrsk20260331_10q.htm",
+  "source_sha256": "8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+  "mime_type": "text/html",
+  "registered_sidecar": {
+   "market": "HK",
+   "security_id": "VRSK",
+   "source_title": "vrsk20260331_10q"
+  }
+ },
+ "summary_proposition": "2026Q1 10-Q MD&A：截至2026年3月31日止三个月，约84%的保险（insurance）收入来自托管订阅（协议一般一至五年），2025年同期约83%；约16%/17%来自交易型与咨询/顾问服务；EBITDA为非GAAP指标（净利加回利息、所得税、折旧摊销）。",
+ "allowed_summary": [
+  "Verisk 2026Q1（截至2026年3月31日止三个月）约84%的保险收入来自托管订阅（协议一般一至五年），上年同期约83%。",
+  "EBITDA是公司使用的非GAAP指标（净利加回利息费用、所得税准备及折旧摊销），公司提示其作为分析工具的局限。"
+ ],
+ "summary_guidance": {
+  "must_preserve": [
+   "insurance revenues 范围（非总收入）",
+   "approximately（约）",
+   "三个月期间与两年对比",
+   "EBITDA non-GAAP 属性"
+  ],
+  "boundary": [
+   "84%不得写成总收入占比（公司另有能源与专业市场等收入）",
+   "EBITDA不得写成GAAP经营利润或净利",
+   "订阅占比不得写成订阅收入金额"
+  ]
+ },
+ "facts": [
+  {
+   "id": "insurance-subscription-share",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "approximately 84% and 83% of our insurance revenues were derived from hosted subscriptions through agreements (generally one to five years) for our solutions, respectively.",
+      "location_kind": "document"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "insurance revenues 范围",
+    "approximately",
+    "三个月（Q1）期间",
+    "2026 vs 2025（84%/83%）"
+   ],
+   "must_not_assert": [
+    "84%为总收入占比",
+    "84%为订阅收入金额",
+    "期间为全年"
+   ],
+   "reason": "商业模式叙述；“insurance revenues”是公司分部口径下的子集，范围错换即主体错引。"
+  },
+  {
+   "id": "transactional-advisory-share",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "approximately 16% and 17% of our insurance revenues were derived from providing transactional and advisory/consulting solutions, respectively.",
+      "location_kind": "document"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "16%/17% 交易型+咨询",
+    "保险收入口径",
+    "两年对比"
+   ],
+   "must_not_assert": [
+    "16%为全部收入的交易占比",
+    "与84%相加后写成一个口径"
+   ],
+   "reason": "与订阅占比互补（84%+16%≈100%，83%+17%=100%）；两行必须同口径引用。"
+  },
+  {
+   "id": "ebitda-non-gaap-definition",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "EBITDA is defined as net income before interest expense, provision for income taxes, and depreciation and amortization of fixed and intangible assets",
+      "location_kind": "document"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "非GAAP属性",
+    "定义（净利+利息+所得税+折旧摊销）"
+   ],
+   "must_not_assert": [
+    "EBITDA为GAAP指标",
+    "EBITDA等于经营利润或净利"
+   ],
+   "reason": "指标定义叙述；摘要引用EBITDA必须带non-GAAP标识。"
+  },
+  {
+   "id": "total-revenue-q1-2026",
+   "importance": "normal",
+   "target_kind": "correctness_if_emitted",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "Total revenues $ 782.6 $ 753.0",
+      "location_kind": "document"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "百万美元",
+    "三个月",
+    "782.6 vs 753.0（+3.9%）"
+   ],
+   "must_not_assert": [
+    "单位为人民币",
+    "全年口径"
+   ],
+   "reason": "若摘要引用总收入数字，以本表为准（单位百万美元、Q1三个月）。"
+  }
+ ],
+ "misread_traps": [
+  {
+   "page": null,
+   "kind": "scope_insurance_vs_total",
+   "note": "MD&A 同时讨论 insurance revenues 占比与 total revenues；两者范围不同。",
+   "exact_quote": "Total revenues"
+  },
+  {
+   "page": null,
+   "kind": "printed_page_markers",
+   "note": "HTML 无物理页；正文嵌有打印页码提示（26/27/28）与 Table of Contents 链接文本。锚点按 location_kind=document 全文空白归一化匹配。",
+   "exact_quote": "Table of Contents"
+  }
+ ],
+ "prior_use": "du2-families曾读取vrsk20250331_10q（2025Q1另一文件）；本2026Q1 10-Q未被读取",
+ "notes": "10-Q Q1 2026（period 2026-03-31）。锚点 location_kind=document。侧车market=HK为登记误值（实为US/NASDAQ:VRSK），已如实记录，case以文档内容为准。",
+ "quote_budget_chars_normalized": 456,
+ "bound_failure_mode_check": "insurance 收入范围当总收入；non-GAAP 当 GAAP；approximately 丢失"
+}

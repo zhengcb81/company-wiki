@@ -1,0 +1,212 @@
+{
+ "schema_version": "du10-summary-goldset-case/1",
+ "case_id": "du10gs-hk-ipo-baba",
+ "created": "2026-10-17",
+ "market": "HK",
+ "company": "阿里巴巴",
+ "doc_type": "ipo_prospectus",
+ "carrier": ".pdf",
+ "language": "zh-Hant",
+ "narrative_focus": "overseas+main_business",
+ "bound_failure_mode": "同页不同 TTM 期间混用；去重口径丢失",
+ "source_ref": {
+  "carrier_root": "company_raw",
+  "source_id": "阿里巴巴/raw/prospectus/阿里巴巴招股说明书2019.pdf",
+  "source_sha256": "7ae21e7f811d1b74eb0f9e04973c269fd0603d8a2950c173aedd5a246f671fc0",
+  "mime_type": "application/pdf",
+  "registered_sidecar": {
+   "market": "CN",
+   "security_id": "阿里巴巴",
+   "source_title": "阿里巴巴招股说明书2019"
+  }
+ },
+ "summary_proposition": "招股书概要：截至2019年6月30日止12个月全球年度活跃消费者8.60亿，其中国际1.30亿（Lazada与速卖通去重后总和）；中国零售市场GMV人民币5.727万亿元为截至2019年3月31日止12个月；FY2019雲計算分部收入24,702百万元（FY2018：13,390百万元）。",
+ "allowed_summary": [
+  "招股书披露：截至2019年6月30日止12个月，阿里巴巴数字经济体全球年度活跃消费者8.60亿，其中国际年度活跃消费者1.30亿（Lazada与速卖通去重后总和）。",
+  "中国零售市场GMV为人民币5.727万亿元，截至2019年3月31日止12个月（与用户数期间口径不同）。",
+  "FY2019（截至2019年3月31日止年度）雲計算分部收入24,702百万元，FY2018为13,390百万元（人民币百万元）。"
+ ],
+ "summary_guidance": {
+  "must_preserve": [
+   "两组TTM期间（6/30 vs 3/31）不得互换",
+   "国际1.30亿的去重定义",
+   "GMV的中国零售市场范围",
+   "分部收入的人民币百万元单位与财年口径"
+  ],
+  "boundary": [
+   "国际消费者不得写成全部国际业务用户",
+   "8.60亿不得写成公司收入用户（含蚂蚁金服中国用户，去重合并口径）",
+   "GMV不得写为全集团/全球或与用户同期"
+  ]
+ },
+ "facts": [
+  {
+   "id": "global-annual-active-consumers",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "全球年度活躍",
+      "location_kind": "page",
+      "page": 19
+     },
+     {
+      "exact_quote": "8.60億",
+      "location_kind": "page",
+      "page": 19
+     },
+     {
+      "exact_quote": "截至2019年6月30日止12個月期間",
+      "location_kind": "page",
+      "page": 19
+     }
+    ]
+   ],
+   "must_preserve": [
+    "8.60亿",
+    "截至2019年6月30日止12个月",
+    "中国消费业务+蚂蚁金服去重合并口径"
+   ],
+   "must_not_assert": [
+    "8.60亿为公司单一口径注册用户",
+    "期间为2019年3月31日"
+   ],
+   "reason": "规模框内数字全部带注释限定；期间与口径注释是事实的一部分。"
+  },
+  {
+   "id": "international-active-consumers",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "國際年度活躍",
+      "location_kind": "page",
+      "page": 19
+     },
+     {
+      "exact_quote": "1.30億",
+      "location_kind": "page",
+      "page": 19
+     },
+     {
+      "exact_quote": "去重後Lazada和速賣通年度活躍消費者之總和",
+      "location_kind": "page",
+      "page": 19
+     }
+    ]
+   ],
+   "must_preserve": [
+    "1.30亿",
+    "Lazada+速卖通去重",
+    "截至2019年6月30日止12个月"
+   ],
+   "must_not_assert": [
+    "1.30亿为全部国际业务用户（如国际站/菜鸟）",
+    "去重定义删去"
+   ],
+   "reason": "出海叙述核心数字；去重范围（仅Lazada与速卖通）是定义的一部分。"
+  },
+  {
+   "id": "china-retail-gmv-march-ttm",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "GMV",
+      "location_kind": "page",
+      "page": 19
+     },
+     {
+      "exact_quote": "人民幣5.727萬億元",
+      "location_kind": "page",
+      "page": 19
+     },
+     {
+      "exact_quote": "截至2019年3月31日止12個月期間我們的中國零售市場",
+      "location_kind": "page",
+      "page": 19
+     }
+    ]
+   ],
+   "must_preserve": [
+    "5.727万亿元",
+    "截至2019年3月31日止12个月",
+    "中国零售市场范围"
+   ],
+   "must_not_assert": [
+    "GMV与年度活跃消费者同一期间（6/30）",
+    "GMV为全集团或全球口径"
+   ],
+   "reason": "同页两组TTM并存（用户6/30、GMV 3/31），混用即期间错引。"
+  },
+  {
+   "id": "cloud-segment-revenue-fy2019",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "雲計算",
+      "location_kind": "page",
+      "page": 21
+     },
+     {
+      "exact_quote": "24,702",
+      "location_kind": "page",
+      "page": 21
+     },
+     {
+      "exact_quote": "13,390",
+      "location_kind": "page",
+      "page": 21
+     }
+    ]
+   ],
+   "must_preserve": [
+    "FY2019=截至2019年3月31日止年度",
+    "24,702百万元",
+    "FY2018为13,390百万元",
+    "人民币百万元"
+   ],
+   "must_not_assert": [
+    "日历年口径",
+    "收入占比7%当作绝对额",
+    "与6月止季度数字（7,787）混算"
+   ],
+   "reason": "分部表按财年列示；第二曲线（云）进展的规模与增速证据。"
+  }
+ ],
+ "misread_traps": [
+  {
+   "page": 19,
+   "kind": "dual_ttm_same_page",
+   "note": "p19 规模框：用户数截至6/30 TTM，GMV截至3/31 TTM；注释(1)-(6)逐项限定。",
+   "exact_quote": "截至2019年3月31日止12個月期間我們的中國零售市場"
+  },
+  {
+   "page": 21,
+   "kind": "non_gaap_rows",
+   "note": "p21 表内同时有GAAP收入与经调整EBITDA等非公认会计准则指标；引用非GAAP行必须保留“經調整/非公認會計準則”标识。",
+   "exact_quote": "經調整EBITDA"
+  }
+ ],
+ "prior_use": "阿里巴巴另有holdout-hk-alibaba-fy2023 gold（FY2023年报）；本2019港股全球发售招股书未被读取",
+ "notes": "666页港股全球发售招股书（封面股份代号9988）；physical pages 19、21（PDF 1基）。侧车market=CN与实际（HK发行）不符，已如实记录，case以文档内容为准。",
+ "quote_budget_chars_normalized": 158,
+ "bound_failure_mode_check": "同页不同 TTM 期间混用；去重口径丢失"
+}

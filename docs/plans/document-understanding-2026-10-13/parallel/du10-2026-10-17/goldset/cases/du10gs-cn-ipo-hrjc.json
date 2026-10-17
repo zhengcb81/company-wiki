@@ -1,0 +1,152 @@
+{
+ "schema_version": "du10-summary-goldset-case/1",
+ "case_id": "du10gs-cn-ipo-hrjc",
+ "created": "2026-10-17",
+ "market": "CN",
+ "company": "华锐精密",
+ "doc_type": "ipo_prospectus",
+ "carrier": ".pdf",
+ "language": "zh",
+ "narrative_focus": "industry_change+project_plan",
+ "bound_failure_mode": "planned/actual（拟建募投当已建成）；行业规模当公司收入",
+ "source_ref": {
+  "carrier_root": "company_raw",
+  "source_id": "华锐精密/raw/prospectus/华锐精密：华锐精密首次公开发行股票并在科创板上市招股说明书.PDF",
+  "source_sha256": "e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+  "mime_type": "application/pdf",
+  "registered_sidecar": {
+   "market": "CN",
+   "security_id": "华锐精密",
+   "source_title": "华锐精密：华锐精密首次公开发行股票并在科创板上市招股说明书"
+  }
+ },
+ "summary_proposition": "招股书披露：2019年我国刀具市场总消费规模约393亿元、进口刀具136亿元，进口占比从2016年37.17%降至2019年34.61%（中国机床工具工业协会统计）；公司产能利用率已基本饱和，拟通过募投扩建新生产基地并新增金属陶瓷数控刀片、整体刀具等产能。",
+ "allowed_summary": [
+  "据中国机床工具工业协会统计（招股书转引），2019年我国刀具市场总消费规模约393亿元，其中进口刀具136亿元；进口占比由2016年37.17%降至2019年34.61%。",
+  "招股书披露报告期内公司产能利用率已基本处于饱和状态，拟通过募投项目扩建新生产基地，新增金属陶瓷数控刀片、硬质合金整体刀具和刀杆、刀盘等产能。"
+ ],
+ "summary_guidance": {
+  "must_preserve": [
+   "“约393亿元”的约",
+   "协会统计来源（脚注6）",
+   "募投“拟/将”计划语态",
+   "2016→2019 期间"
+  ],
+  "boundary": [
+   "行业市场规模不得写成公司收入",
+   "拟建产能不得写成已建成/已投产",
+   "行业趋势不得外推为招股书发布后承诺"
+  ]
+ },
+ "facts": [
+  {
+   "id": "tool-market-2019-scale",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "third_party",
+   "role": "third_party",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "2019年我国刀具市场总消费规模约为393亿元，进口刀具规模为136亿元",
+      "location_kind": "page",
+      "page": 105
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2019年",
+    "我国（中国）刀具市场",
+    "约393亿元",
+    "136亿元",
+    "中国机床工具工业协会统计"
+   ],
+   "must_not_assert": [
+    "公司收入393亿元",
+    "全球刀具市场规模",
+    "精确值（原文为“约”）"
+   ],
+   "reason": "行业规模叙述；“约”与来源归属必须保留。"
+  },
+  {
+   "id": "import-share-decline",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "third_party",
+   "role": "third_party",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "2016—2019年进口刀具占总消费的比重从37.17%下降至34.61%",
+      "location_kind": "page",
+      "page": 105
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2016—2019年",
+    "占比口径",
+    "37.17%→34.61%"
+   ],
+   "must_not_assert": [
+    "进口刀具绝对额降至34.61%",
+    "占比变化被写成金额变化",
+    "趋势延续至招股书发布日的承诺"
+   ],
+   "reason": "进口替代趋势的行业证据；期间与占比口径绑定。"
+  },
+  {
+   "id": "capacity-saturation-expansion-plan",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "capacity_new",
+   "modality": "plan",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "报告期内，公司适时把握市场需求变化趋势，积极引进先进生产设备提升产能规模，但产能利用率已基本处于饱和状态，扩大产能成为公司进一步发展的迫切任务。通过本次募集资金投资项目的实施，公司将扩建新生产基地，引进国内外先进生产设备",
+      "location_kind": "page",
+      "page": 293
+     },
+     {
+      "exact_quote": "通过本次募集资金投资项目，公司将新增金属陶瓷数控刀片、硬质合金整体刀具和刀杆、刀盘等数控刀具配套产品产能",
+      "location_kind": "page",
+      "page": 293
+     }
+    ]
+   ],
+   "must_preserve": [
+    "产能饱和为报告期内状态",
+    "“拟/将”（计划）",
+    "新增产能品类列举"
+   ],
+   "must_not_assert": [
+    "新产能已建成或已投产",
+    "募投项目已实现新增收入",
+    "产能饱和为摘要时点状态"
+   ],
+   "reason": "募投必要性论证是计划语态；写成已完成的扩产即 planned/actual 错引。"
+  }
+ ],
+ "misread_traps": [
+  {
+   "page": 105,
+   "kind": "industry_vs_company",
+   "note": "p105 下半为上游碳化钨/钴粉供应商叙述（厦门钨业等公司名连排），行业叙述与具体公司名单同页。",
+   "exact_quote": "厦门钨业"
+  },
+  {
+   "page": 293,
+   "kind": "persuasive_registration_document",
+   "note": "p293 属募集资金运用必要性论证（发行申请文件的说理性内容），“迫切任务/打下坚实基础”等措辞不是已实现事实。",
+   "exact_quote": "为未来转型向终端客户提供整体刀具解决方案打下坚实基础"
+  }
+ ],
+ "prior_use": "公司路径出现在n5 raw-duplicate-audit元数据与narrative-pilot结果；本招股书内容未被读取（其可转债募集说明书曾由n5-document-quality S06读取，本卡未选该文件）",
+ "notes": "350页科创板招股书；physical pages 104-105、293（PDF 1基）。",
+ "quote_budget_chars_normalized": 265,
+ "bound_failure_mode_check": "planned/actual（拟建募投当已建成）；行业规模当公司收入"
+}

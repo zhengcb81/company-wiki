@@ -1,0 +1,206 @@
+{
+ "schema_version": "du10-summary-goldset-case/1",
+ "case_id": "du10gs-call-miniso-q4-2024",
+ "created": "2026-10-17",
+ "market": "HK",
+ "company": "名创优品",
+ "doc_type": "call_transcript",
+ "carrier": ".pdf",
+ "language": "zh",
+ "narrative_focus": "overseas+management_plan",
+ "bound_failure_mode": "讲稿量词丢失；2025计划当已实现；说话人归属",
+ "source_ref": {
+  "carrier_root": "dropbox_stock",
+  "source_id": "消费品/名创优品/December Quarter and Full Year of 2024  Transcript.pdf",
+  "source_sha256": "dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+  "mime_type": "application/pdf",
+  "registered_sidecar": {
+   "market": "HK",
+   "security_id": "Unresolved (dropbox_stock)",
+   "source_title": "December Quarter and Full Year of 2024  Transcript"
+  }
+ },
+ "summary_proposition": "叶国富（董事长）讲稿：截至2024年12月31日集团全球门店7,780家、全年净增1,219家（MINISO中国+460、海外+631、TOP TOY+128），均超额完成2024年初开店目标；海外超3,100家门店、贡献接近40%收入；集团收入增长23%、约170亿人民币；2025年已筹划超过90档IP上新。",
+ "allowed_summary": [
+  "管理层讲稿：截至2024年12月31日，集团全球门店7,780家，全年净增1,219家，其中MINISO中国增长460家、海外增长631家、TOP TOY增长128家，均超额完成2024年初开店目标。",
+  "管理层讲稿：名创海外市场超3,100家门店，为集团贡献接近40%的收入；集团全年收入增长23%、约170亿人民币。",
+  "管理层讲稿：2025年已筹划超过90档IP上新（计划）。"
+ ],
+ "summary_guidance": {
+  "must_preserve": [
+   "说话人（叶国富/董事长）与讲稿形态",
+   "超过3,100/接近40%/约170亿三个量词",
+   "净增口径",
+   "“筹划”（2025计划）"
+  ],
+  "boundary": [
+   "量词不得删（恰值化）",
+   "开店目标数值原文未给，不得反推",
+   "计划（90档IP上新）不得写成已完成",
+   "讲稿数字与审计年报数字不得互串"
+  ]
+ },
+ "facts": [
+  {
+   "id": "global-stores-and-net-adds",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "management_prepared",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "截止2024年12月31日，集团全球门店达到7,780家，全年净增",
+      "location_kind": "page",
+      "page": 3
+     },
+     {
+      "exact_quote": "7,780",
+      "location_kind": "page",
+      "page": 3
+     }
+    ]
+   ],
+   "must_preserve": [
+    "截止2024年12月31日",
+    "净增1,219家",
+    "集团全球口径"
+   ],
+   "must_not_assert": [
+    "7,780为期初数",
+    "直营门店数"
+   ],
+   "reason": "讲稿头句；存量与净增同句。"
+  },
+  {
+   "id": "brand-split-net-adds-beat-target",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "management_prepared",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "MINISO海外增长631家，TOPTOY增长128家，均超额完成2024年初开店目标",
+      "location_kind": "page",
+      "page": 3
+     }
+    ]
+   ],
+   "must_preserve": [
+    "三分口径（中国/海外/TOP TOY）",
+    "“超额完成2024年初开店目标”"
+   ],
+   "must_not_assert": [
+    "目标数值（原文未给，不得反推）",
+    "门店增长写成收入增长"
+   ],
+   "reason": "actual对照计划的成功表述；但目标数值不在文中，摘要不得补数。"
+  },
+  {
+   "id": "overseas-share-hedged",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "management_prepared",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "名创在海外市场拥有超过3,100家门店，为集团贡献了接近40%的收入",
+      "location_kind": "page",
+      "page": 3
+     },
+     {
+      "exact_quote": "助力集团整体收入增长23%，达到约170亿人民币",
+      "location_kind": "page",
+      "page": 3
+     }
+    ]
+   ],
+   "must_preserve": [
+    "超过3,100家",
+    "接近40%",
+    "约170亿人民币",
+    "增长23%"
+   ],
+   "must_not_assert": [
+    "恰为3,100家/40%/170亿",
+    "量词删除",
+    "美元"
+   ],
+   "reason": "出海贡献叙述带三个量词；量词是准确性的组成部分。"
+  },
+  {
+   "id": "ip-pipeline-2025-plan",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "plan",
+   "role": "management_prepared",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "今年我们已经筹划了超过90档IP上新，覆盖了从常青、潜力到强属性等不同类别",
+      "location_kind": "page",
+      "page": 4
+     }
+    ]
+   ],
+   "must_preserve": [
+    "“筹划”（计划）",
+    "超过90档",
+    "2025年"
+   ],
+   "must_not_assert": [
+    "已完成90档上新",
+    "90档为2024年实绩"
+   ],
+   "reason": "管理层2025计划；写成已实现即 planned/actual 错引。"
+  },
+  {
+   "id": "currency-statement",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "management_prepared",
+   "any_support_sets": [
+    [
+     {
+      "exact_quote": "除非另有说明，货币单位均为人民币",
+      "location_kind": "page",
+      "page": 2
+     }
+    ]
+   ],
+   "must_preserve": [
+    "币种声明"
+   ],
+   "must_not_assert": [
+    "默认美元"
+   ],
+   "reason": "讲稿币种约定锚。"
+  }
+ ],
+ "misread_traps": [
+  {
+   "page": 3,
+   "kind": "prepared_remarks",
+   "note": "本件为公司官方业绩电话会讲稿（management prepared remarks），页眉“叶董讲稿”；是公司口径但非审计文件。",
+   "exact_quote": "2024 年全年财报电话会议 叶董讲稿"
+  },
+  {
+   "page": 4,
+   "kind": "plan_language",
+   "note": "p4 渠道/产品/IP三段均为2025年策略与计划叙述（“正在”“筹划”“将成为”）。",
+   "exact_quote": "我们正在对渠道和加盟商结构进行优化"
+  }
+ ],
+ "prior_use": "公司2024年报为hk-annual gold；本官方业绩电话会讲稿原件未被任何gold读取",
+ "notes": "16页讲稿；physical pages 2-4（PDF 1基）。与hk-annual gold同公司不同原件；新增证据为话轮/讲稿形态+actual超额对照+2025计划。",
+ "quote_budget_chars_normalized": 226,
+ "bound_failure_mode_check": "讲稿量词丢失；2025计划当已实现；说话人归属"
+}
