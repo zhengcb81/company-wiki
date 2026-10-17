@@ -82,3 +82,64 @@ def admitted_by_class(fixture: dict, admitted: dict[str, list[int]]) -> dict[str
             counts.get(class_of_window(fixture, window_key), 0) + len(pages)
         )
     return counts
+
+
+# --- synthetic builders for counterexample tests (same fixed interfaces) ----
+
+def tiny_rule(
+    rule_key: str,
+    demand_class: str,
+    *,
+    discover: str = "on_tabular_evidence",
+    fine: str = "on_candidate",
+    priority: int = 1,
+) -> dict:
+    return {
+        "rule_key": rule_key,
+        "section_role": "business",
+        "heading_path": [["synthetic"]],
+        "aliases": ["synthetic"],
+        "reading_priority": priority,
+        "geometry_intent": {
+            "discover": discover,
+            "fine": fine,
+            "demand_class": demand_class,
+        },
+    }
+
+
+def tiny_policy(*rules: dict) -> dict:
+    return {
+        "schema_version": "du-geometry-policy/1",
+        "profile_id": "du9_tiny_profile",
+        "profile_version": "du9_tiny_profile/v1+tiny",
+        "default_intent": {"discover": "unknown", "fine": "unknown", "demand_class": "unknown"},
+        "rules": list(rules),
+    }
+
+
+def tiny_window(
+    window_key: str,
+    rule_key: str,
+    start: int,
+    end: int,
+    *,
+    scope: str = "s1",
+    nav: str = "native_destination",
+) -> dict:
+    return {
+        "window_key": window_key,
+        "scope_id": scope,
+        "rule_key": rule_key,
+        "physical_start": start,
+        "physical_end": end,
+        "native_navigation_refs": [],
+        "navigation_status": nav,
+    }
+
+
+def tiny_limits(max_pages: int, max_requests: int | None = None) -> dict:
+    return {
+        "max_pages": max_pages,
+        "max_requests": max_pages if max_requests is None else max_requests,
+    }

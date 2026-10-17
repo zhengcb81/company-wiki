@@ -58,7 +58,7 @@ def test_frozen_fairness_expectation_holds_under_planner():
         for row in plan["allocations"]
         if row["status"] == "reserved"
     }
-    assert quotas == {k: v for k, v in calc["window_quotas"].items() if v > 0}
+    assert quotas == calc["window_quotas"]
     cancelled = {
         row["window_key"]: row["reason"]
         for row in plan["allocations"]
