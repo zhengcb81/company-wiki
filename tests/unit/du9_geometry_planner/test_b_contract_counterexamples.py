@@ -136,22 +136,29 @@ def test_tiny_tail_budget_keeps_back_windows_alive():
 
 
 def test_request_limit_of_one_fires_before_pages_do():
-    fixture = helpers.load_fixture()
+    # One consumable class isolates the request cap from inter-class fairness.
+    # The effective reservation must be one even though the page cap is 64.
+    rule = helpers.tiny_rule("rk_op", "operating")
     limits = helpers.tiny_limits(64, 1)
-    plan = _fixture_plan(fixture, limits=limits)
+    plan = plan_geometry_requests(
+        helpers.tiny_policy(rule), [helpers.tiny_window("w1", "rk_op", 1, 10)],
+        page_count=10, limits=limits, work_budget=_big_budget(),
+    )
+    assert plan["summary"]["pages_reserved"] == 1
     state = new_admission_state(plan)
 
     first, state = admit_geometry_request(
-        plan, state, page=4, window_keys=["w-admin"],
+        plan, state, page=4, window_keys=["w1"],
         tabular_evidence="observed_candidate", remaining=64,
     )
     assert first["decision"] == "admitted"
     second, state = admit_geometry_request(
-        plan, state, page=5, window_keys=["w-admin"],
+        plan, state, page=5, window_keys=["w1"],
         tabular_evidence="observed_candidate", remaining=64,
     )
     assert second["decision"] == "exhausted"
-    assert second["reason"] == "request_limit_exhausted"
+    # This window's sole executable reservation is already consumed.
+    assert second["reason"] == "window_quota_exhausted"
     assert state["spent"] == {"pages": 1, "requests": 1}
 
 

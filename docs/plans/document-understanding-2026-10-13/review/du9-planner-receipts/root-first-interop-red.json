@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "tests/unit/du9_geometry_planner/test_root_policy_interop.py",
+    "-q",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du9pr-abx5myet\\pytest",
+    "-o",
+    "cache_dir=C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Temp\\du9pr-abx5myet\\cache"
+  ],
+  "exit_code": 1,
+  "seconds": 4.344115999992937,
+  "supplier_calls": 0
+}

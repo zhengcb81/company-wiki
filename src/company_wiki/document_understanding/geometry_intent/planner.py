@@ -4,7 +4,7 @@ Semantics frozen by INTERFACES.md / construction_card.md:
 
 * ``plan_geometry_requests`` turns a compiled ``du-geometry-policy/1`` and
   ROOT-bound windows into finite per-section reservations. Demand classes get
-  fair shares of ``limits.max_pages`` with plan-time borrowing and a global
+  fair shares of the tighter page/request capacity with plan-time borrowing and a global
   hard balance (sum of class quotas never exceeds the limit). Reservations are
   atomic: an exhausted :class:`WorkBudget` yields a partial plan with no
   allocation rows ("not done stays unknown") instead of fabricated claims.
@@ -532,8 +532,12 @@ def plan_geometry_requests(
         # Charge before the demand traversal, not after it.
         work_budget.charge(1 + len(survivors))
         desired, min_priority = _class_desired(consumable_rows)
+        # Each admitted physical page spends one page AND one request. Reserving
+        # only against max_pages promises capacity that a tighter request limit
+        # cannot execute, so early windows would still starve reserved late ones.
+        capacity = min(limits_out["max_pages"], limits_out["max_requests"])
         quotas, held, borrowed = _fair_quotas(
-            consumable_classes, desired, min_priority, limits_out["max_pages"]
+            consumable_classes, desired, min_priority, capacity
         )
 
         class_quotas: dict[str, dict[str, Any]] = {}
@@ -990,12 +994,20 @@ def admit_geometry_request(
         counter["admitted"] = counter.get("admitted", 0) + 1
         next_state["charged"].setdefault(scope, {})[str(page)] = charged_keys
 
+    # One reservation pays for this physical page, but its outer rule is not
+    # the sole reading instruction. A nested transparent window can add fine
+    # capability without requiring or charging a second page. Cancelled rows
+    # never supply capabilities, and scopes were checked before this point.
+    request = {
+        kind: any(row["requestable"][kind] for row in covering if row["status"] == "reserved")
+        for kind in ("discover", "fine")
+    }
     return settle(
         "admitted",
         "admitted",
         covered=[row["window_key"] for row in covering],
         admitted=[attribution["window_key"]],
-        request=attribution["requestable"],
+        request=request,
         charged_pages=1,
         charged_requests=1,
         mutate=_charge,
