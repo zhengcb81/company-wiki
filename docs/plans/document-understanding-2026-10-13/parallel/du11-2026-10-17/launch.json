@@ -1,0 +1,102 @@
+{
+  "schema_version": "parallel-package-set/1",
+  "plan_id": "document-understanding-2026-10-13",
+  "package_set": "DU11-2026-10-17",
+  "status": "READY_FOR_DISPATCH",
+  "created_from": {
+    "company_wiki": "34a7dd71aaa49d18c13fcdd300ce79581114ca5b",
+    "filing_fetch": "f1a939e522c22b23659712a8bd2b344f5eb0a364",
+    "revenue_forecast": "568fb9256885eb31a0f76d9ead59fd0f98575073",
+    "earnings_transcripts": "2584b7eed062a9a30254bc06b4f19ab5471b414e"
+  },
+  "packages": [
+    {
+      "id": "DU11-RF-CITATION-CLOSURE",
+      "repository": "C:/Users/郑曾波/Projects/revenue-forecast",
+      "base_commit": "568fb9256885eb31a0f76d9ead59fd0f98575073",
+      "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-du11-citation-closure",
+      "branch": "codex/du11-rf-citation-closure",
+      "plan_id": "du11-rf-citation-closure-2026-10-17",
+      "pwf_plan_root": "docs/plans",
+      "card": "du11_rf_citation_closure.md",
+      "status": "READY_FOR_DISPATCH",
+      "inputs": [
+        "validated NarrativeContext /1 or /3",
+        "optional source-owned reading_context /1 or /2",
+        "explicit span/parameter bindings"
+      ],
+      "outputs": [
+        "compatible evidence claims and parameter dependencies",
+        "versioned support/context consumption trace",
+        "finite unread/deferred/layout coverage diagnostics"
+      ],
+      "write_paths": [
+        "scripts/source_narrative_context.py",
+        "scripts/research/input_evidence.py",
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/narrative_citation_context.py",
+        "tests/test_du11_narrative_citation_*.py",
+        "tests/fixtures/du11_narrative_citation/**",
+        "docs/plans/du11-rf-citation-closure-2026-10-17/**"
+      ]
+    },
+    {
+      "id": "DU11-FF-TRANSCRIPT-REUSE",
+      "repository": "C:/Users/郑曾波/Projects/filing-fetch",
+      "base_commit": "f1a939e522c22b23659712a8bd2b344f5eb0a364",
+      "workdir": "C:/Users/郑曾波/Projects/filing-fetch-du11-local-transcript-reuse",
+      "branch": "codex/du11-ff-transcript-reuse",
+      "plan_id": "du11-ff-transcript-reuse-2026-10-17",
+      "pwf_plan_root": "docs/plans",
+      "card": "du11_ff_transcript_reuse.md",
+      "status": "READY_FOR_DISPATCH",
+      "inputs": [
+        "existing filing request + optional companion_transcript",
+        "normal SourceRequest /1 (provider=null) to source_query_cli/query_local for default local cross-provider lookup",
+        "existing transcript-import-lookup envelope with provider=fmp only for explicit fmp/idempotency path",
+        "CWP source_reader successful receipt.manifest for truthful provider metadata",
+        "excluded_candidates SourceRef + source-qualification/1 for unknown/restricted duplicate suppression"
+      ],
+      "outputs": [
+        "same FF result schema with truthful reused provider from verified reader manifest",
+        "zero ET/provider calls for unique eligible published local hit",
+        "unknown/restricted exclusions retained as diagnostic gap, never historical-qualified or a download miss",
+        "existing FMP acquisition only on true local miss"
+      ],
+      "write_paths": [
+        "scripts/transcript_companion.py",
+        "scripts/transcript_tool_transport.py",
+        "scripts/ff_v2_envelope.py",
+        "scripts/transcript_reuse_selection.py",
+        "tests/test_du11_transcript_reuse*.py",
+        "tests/fixtures/du11_transcript_reuse/**",
+        "docs/plans/du11-ff-transcript-reuse-2026-10-17/**"
+      ],
+      "forbidden_shortcuts": [
+        "provider=null inside company-wiki-transcript-import-lookup-request/1",
+        "assuming normal query_local yields unknown_publication success",
+        "assuming query candidate top-level contains provider",
+        "downloading because unknown-date excluded sources were omitted from matches"
+      ]
+    }
+  ],
+  "fixed_dependency_policy": "source-only fixed commit snapshot; synthetic temp config/data; no actual raw-document copy",
+  "root_exclusive": [
+    "company-wiki production automation",
+    "company-wiki source_catalog",
+    "company-wiki document_understanding",
+    "company-wiki production tests",
+    "mainline integration/publication",
+    "installed skill targeted synchronization"
+  ],
+  "independent_review_required": true,
+  "independent_review_final_source_sha_required": true,
+  "small_node_manual_approval_required": false,
+  "external_network_calls_allowed": false,
+  "provider_calls_allowed": false,
+  "llm_calls_allowed": false,
+  "key_content_read_allowed": false,
+  "raw_document_copy_allowed": false,
+  "worktrees_created": false,
+  "dispatch_occurred": false
+}

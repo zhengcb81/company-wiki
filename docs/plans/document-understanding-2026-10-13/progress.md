@@ -1,3 +1,21 @@
+## DU11 两条独立施工卡就绪 — 2026-10-17
+
+独立审卡已PASS，FF卡最初把provider=None误指向专用lookup，已按实际普通SourceRequest/query_local及reader manifest接口修正并复核。两卡现在可启动，状态READY_FOR_DISPATCH（尚未获用户已派发通知）：[总表](parallel/du11-2026-10-17/README.md)。RF/FF独立新worktree和源码白名单互不重叠，与ROOT CWP生产接线无文件争用。每卡交接前必须独立agent全面审查、全部问题修复/测试绿、按最终源SHA复核，0未解决才交接。
+
+ROOT主线A/B正在实施：初始行为RED6FAIL/1PASS；共享matcher/native桥加source端初步37PASS，旧selector/handler81PASS、邻域772PASS（套件重叠不累加）。真实首回放HK经营页已到12；金禾223/224与销量/客户页仍漏，明确FAIL不验收。独审发现普通跨行表头、capture拒绝后仍finder、桥算法缓存身份/有限coverage遗漏，正按共用责任层修复。原件/config未改，0新模型调用；正式摘要/恢复/holdout仍OPEN。
+
+**Next Step：** 完成候选网格/实际执行前预算/因果身份修复，集中默认真实PDF回放通过后，进入正式配置模型与恢复。
+
+---
+
+## ROOT 生产接线实施中 — 2026-10-17
+
+用户确认继续。实施依据 [共享阅读生产接线B/C](review/production_wiring_phase_bc.md)：先固定单parse/同WorkBudget/默认深页行为，再接唯一策略与真实材料、正式摘要和缓存恢复；A进行中，B/C仍OPEN。内部agent仅strategy_binding/geometry_intent/reading与专属测试；ROOT独占source/automation，其余两张DU11外包只写RF/FF。只在大节点集中验证，当前0新模型费用。
+
+**Next Step：** source单parse/预算与默认深页先RED；外包卡准备后及时交用户，ROOT并行实施生产链。
+
+---
+
 ## DU10 已验收并推送 — 2026-10-17（当前）
 
 三包独立复审PASS、0未解决，实现已全部进入各自主线并核远端：FF main f1a939e（754PASS/7SKIP＋78subtests，精确CI39072192244 SUCCESS）；ET main2584b7e（ROOT304PASS，FF→最新ET117PASS，无CI）；CWP master757bb833（Gold71PASS，11/11真实SourceRef回放，pre-push148PASS，docs/plans按既有paths-ignore不触发CI）。作者工区与原件/配置保持，两个ROOT接收worktree已正常移除。工具平台拒绝清理显式测试temp目录，剩余体积/路径列入 [最终机器记录](review/du10_reception.json)，未绕过拒绝、不虚报恢复完成。

@@ -1,0 +1,57 @@
+{
+  "reviewer": "/root/du10_et_reception_review",
+  "verdict": "PASS",
+  "scope": "DU11 two construction cards readiness only; no implementation or full architecture audit",
+  "reviewed_card_sha256": {
+    "du11_ff_transcript_reuse.md": "04eea219346de2f291b002f248948baef4dc1e1164842c8ba43f79ea21de463c",
+    "du11_rf_citation_closure.md": "7aebf900f25a40933216743364dc50a623d6919ef4acb361e78c53224fc13d13",
+    "launch.json": "19f6a9680646a3fab87dd14dc6a2ae1223fe5315ac33b0c8da25084aa260daa7",
+    "README.md": "7ae1b73bd2f2fcfc03166c377f54c0db74b8e1cea6c0f20bcb8798910b808395"
+  },
+  "package_verdicts": {
+    "DU11-RF-CITATION-CLOSURE": "PASS",
+    "DU11-FF-TRANSCRIPT-REUSE": "PASS"
+  },
+  "findings": [
+    {
+      "id": "DU11-CARD-01",
+      "priority": "P1 dispatch correctness",
+      "card": "du11_ff_transcript_reuse.md",
+      "problem": "Card describes provider=None as usable via the existing transcript lookup path, but fixed CWP lookup_transcript_import explicitly rejects provider=None. Ordinary query_local supports it but excludes unknown-publication candidates. An author following the current wording can hit blocked/invalid_request or wrongly treat existing unknown-date material as absence.",
+      "evidence": [
+        "CWP source_query_cli.py unwraps company-wiki-transcript-import-lookup-request/1 and invokes lookup_transcript_import; plain SourceRequest invokes query_local",
+        "source_reader.py lookup_transcript_import includes or request.provider is None guard",
+        "query_local uses include_unknown_publication=False; _query_local emits excluded_candidates containing SourceRef+qualification for unknown/future",
+        "source_reader_cli successful stderr receipt has manifest from describe_version with true provider/published_date, so no new CWP field is needed"
+      ],
+      "required_card_change": "Specify current public wire: default provider-omitted reuse uses plain SourceRequest/provider=None, not the transcript lookup envelope; explicit fmp may use existing import-lookup. Document handling of unknown-publication excluded candidates for duplicate suppression without historical-eligibility promotion and use verified reader manifest for actual provider metadata. Freeze decision precedence/ambiguity for eligible matches plus unknown/future excluded refs, not just helpers. Keep blocked/unknown/bad bytes from falling into acquisition. Update launch inputs to reflect this distinction; no CWP writes or unpublished field dependency.",
+      "compatibility_note": "Do not turn generic not_found into download if excluded unknown local source remains. Future-publication entries are not unknown. Do not require all not_found states with future-only exclusions to become unknown.",
+      "status": "RESOLVED",
+      "resolution": "Card now explicitly separates ordinary neutral SourceRequest and provider-required transcript lookup envelope; handles excluded unknown/restricted refs with no download, reads true provider from successful reader manifest, and tests actual fixed CLI boundaries."
+    }
+  ],
+  "passes": [
+    "Both worktree target paths are absent and explicit git bases match local main and origin/main refs; no checkout created",
+    "RF and FF write paths are separate repositories; ROOT owns CWP production assembly; no overlapping code or installed-skill paths",
+    "RF _reading_context actually accepts du-production-reading/1 and /2, finite reading fields, groups and citation_views with support/context partitions; NarrativeContext preserves reading_context",
+    "RF consume_narrative_input currently binds span text and tracks formula refs but omits reading closure; _bind_narrative_span is a second actual parameter-binding entry, so work is real and within white list",
+    "FF hardcoded fmp lookup and fmp returned-provider labels are real current source behavior; envelope serializer does not impose a provider enumeration",
+    "Cards give independent review/final source SHA/no unresolved defects before handoff, RED-first plus concentrated B/C checks, mocked supplier/CWP process boundaries explicit, tmp/sentinel/SHA/mtime cleanup, no credentials/network/LLM, existing WIP preservation",
+    "No second cache/identity/source store, no new approval chain, no source schema change required, author commits then ROOT integrates"
+  ],
+  "static_only": true,
+  "tests_run": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "key_contents_read": false,
+  "source_mutations": 0,
+  "initial_verdict": "REQUEST_CHANGES",
+  "initial_reviewed_card_sha256": {
+    "du11_ff_transcript_reuse.md": "16e808dca958a162e7688e0e7f3be55a8e8d340ff495fc9d7bc2fb718460342b",
+    "du11_rf_citation_closure.md": "7aebf900f25a40933216743364dc50a623d6919ef4acb361e78c53224fc13d13",
+    "launch.json": "246a67a9827fd063c3528e521668b0f6e10ed49b8b428f74921c8024a9d2fa11",
+    "README.md": "33cfda41b6b31435a14c9f5e37e455c47534e1c6de9a8ba4116029a2b59753e0"
+  },
+  "unresolved": [],
+  "delta_recheck": "README/FF card/launch revised consistently. RF card unchanged. No unpublished CWP wire or source-field requirement; immediately executable using fixed source-only dependency snapshot. No implementation tests run for planning-only review."
+}
