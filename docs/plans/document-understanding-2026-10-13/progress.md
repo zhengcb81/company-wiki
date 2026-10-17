@@ -1,3 +1,11 @@
+## DU11 正式C第二次CN结果 — 2026-10-18（最新）
+
+最终受审HEAD ae9a2fbb 的真实只读CN选材10/10通过，96片段7739字、64个source tasks；MiMo一次POST返回22条（协议总限20），整份以CLAIMS_LIMIT拒绝。原响应还见未知本地引用，进入离线正式decoder/taskbinding共因诊断，不修引用、不直接抬20、不盲重发；HK/US暂缓付费，避免重复共因。详细记录review/du11_real_summary_second_cn.json。
+
+实际新增14819tokens/2681microUSD，累计628394tokens/$0.393953预算proxy，unknown新增0/历史7保留。原件/config/gold/sentinel不改、raw复制0、owned湖已删除。正式摘要C仍FAIL，付费恢复/缓存/消费者未到达。已完成源工程和独审结果保留，下一步诊断共享任务/输出容量与质量策略，再TDD修复后重验。
+
+---
+
 ## DU11 正式摘要C前工程已修并独审 — 2026-10-18
 
 RF/FF两外包已派发，作者树仍独占。ROOT已提交native布局75e024cf、推送诊断ec80b0c5；本次接收共享业务覆盖关系3文件，最终独审PASS/0已知未修缺陷。此前aafbd662已修模型展示metadata及下游诊断分层，原首批三例FAIL保留，不能当作真实摘要验收完成。
