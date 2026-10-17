@@ -85,6 +85,12 @@ FAST_CONTRACT_CASES = (
 )
 
 
+def _print_output(value: str) -> None:
+    """A legacy console must not erase a child's diagnostic or its exit code."""
+    encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+    print(value.encode(encoding, errors="backslashreplace").decode(encoding))
+
+
 def _run(
     cmd: list[str],
     label: str,
@@ -99,19 +105,34 @@ def _run(
     env["PYTHONPATH"] = str(PROJECT_ROOT / "src")
     if env_extra:
         env.update(env_extra)
-    print(f"\n=== {label} ===")
-    proc = subprocess.run(
-        cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True,
-        encoding="utf-8", errors="replace", timeout=timeout, env=env,
-    )
+    _print_output(f"\n=== {label} ===")
+    try:
+        proc = subprocess.run(
+            cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True,
+            encoding="utf-8", errors="replace", timeout=timeout, env=env,
+        )
+    except subprocess.TimeoutExpired as exc:
+        # TimeoutExpired can carry bytes even with text=True. Keep the child's
+        # last progress rather than replacing the evidence with a traceback.
+        for stream in (exc.stdout, exc.stderr):
+            if stream:
+                _print_output(stream.decode("utf-8", errors="replace")
+                              if isinstance(stream, bytes) else stream)
+        _print_output(f"FAILED: {label} (timeout after {timeout}s)")
+        return 124
     output = (proc.stdout or "") + "\n" + (proc.stderr or "")
     returncode = proc.returncode
     if returncode != 0:
-        print(output)  # Keep the first failing node, not just the report's tail.
-        print(f"FAILED: {label}")
+        _print_output(output)  # Keep the first failing node, not just the tail.
+        _print_output(f"FAILED: {label}")
     else:
         summary = next((line for line in reversed(output.splitlines()) if "passed" in line), "ok")
-        print(summary)
+        _print_output(summary)
+        if "--durations=15" in cmd:
+            durations = next((index for index, line in enumerate(output.splitlines())
+                              if "slowest 15 durations" in line), None)
+            if durations is not None:
+                _print_output("\n".join(output.splitlines()[durations:]))
     return returncode
 
 
@@ -119,6 +140,10 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
     # Scratch belongs to this invocation, independent of checkout depth. Pytest's
     # existing Windows fallback handles path placement; its log is diagnostic.
     # TemporaryDirectory restores this owned root on success, failure or timeout.
+    # Full bootstrap progress is captured (not streamed on successful pushes).
+    # On timeout it identifies the last test; successful output lists slow cases.
+    if "tests/unit" in cmd:
+        cmd = [*cmd, "-vv", "--durations=15"]
     with tempfile.TemporaryDirectory(prefix="cwpp-") as basetemp:
         return _run(
             [*cmd, "--basetemp", basetemp, "-p", "no:cacheprovider"],

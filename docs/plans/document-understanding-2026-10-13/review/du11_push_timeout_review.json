@@ -1,0 +1,105 @@
+{
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at": "2026-10-17T23:35:06.598400+00:00",
+  "verdict": "PASS_TIMEOUT_DIAGNOSTIC_ENCODING_FIXED",
+  "frozen_file_sha256": {
+    "tools/pre_push_gate.py": "59dccc92906eb1336748f29c9e6c19018a5796b65552d486af08649a0852b4db",
+    "tests/unit/test_pre_push_temp_scope.py": "e70d119f3271ab86335c0c166864aa2173bbf9460eb9f2765cc88f033dc1fb36"
+  },
+  "findings": [
+    {
+      "id": "PUSH-TIMEOUT-ENCODING",
+      "priority": "P2",
+      "status": "RESOLVED_SHARED_ENCODING_SAFE_OUTPUT",
+      "actual": "Mock subprocess.TimeoutExpired carrying UTF8bytes; outer stdoutTextIOWrapper(GBK,strict), same shape as redirected Windows hook. Snowman in partialprogress raisesUnicodeEncodeError in print; only gateheading captured, not partialprogress/stderr/FAILED line or returned124.",
+      "consequence": "Gate staysred viaexception; not a bypass. But timeoutpreservation goal and deterministic124 fail in this real encoding condition. Newcapsys tests useUnicodeStringIO and do not cover external sink encoding.",
+      "fix": "Use one robust output boundary for subprocess diagnostics, withUTF8 or unencodablechars backslashreplace fallback, so logging cannot mask original124/red outcome. Preserve stderr and useful last progress. Do not raise timeouts or ignore failures."
+    }
+  ],
+  "sound_parts": [
+    "Timeout remains600 and returns124when diagnostics renderable",
+    "stdout/stderr bytes andstr decoded without alteringchild",
+    "Full tests/unit only receives-vv/durations15; successful output remains summary",
+    "Existing ownedTemp/Git environment behavior retained"
+  ],
+  "evidence": {
+    "actual6tests": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "6",
+        "time": "1.369",
+        "timestamp": "2026-10-18T00:30:20.501176+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "test_xml_sha256": "c3299c87481e094e9845d2ed0caa7c6440564069b5966ddc30238a47f196769d",
+    "independent_pure_control": {
+      "exception": "UnicodeEncodeError",
+      "error": "'gbk' codec can't encode character '\\u2603' in position 72: illegal multibyte sequence",
+      "captured_output": "\r\n=== full bootstrap ===\r\n",
+      "synthetic_pure_only": true
+    },
+    "control_sha256": "150ce04b69d577e5d787c618fee33bf67e9c82671bea2021d2196bd931af32c1"
+  },
+  "validation": {
+    "pure_mock_calls": 1,
+    "actual_child_or_pytest_execution": 0,
+    "network_model_calls": 0,
+    "source_changes": 0,
+    "fullsuite": false,
+    "pure_mock_calls_after_fix": 4,
+    "own_empty_temps_removed": true
+  },
+  "remaining": "Engineeringdiagnostics accepted. Thisdoesnotprovefullsuitecompletion,remoteCIgreen,nativegrandchildren termination oralltestTempcleanup. Stdoutisnormalhookdiagnosticstream, notanewpersistent logfile.",
+  "prior_review_history": {
+    "verdict": "REPAIR_REQUIRED_TIMEOUT_DIAGNOSTIC_STDOUT_ENCODING",
+    "file_sha256": {
+      "tools/pre_push_gate.py": "d98b0e19f987c2099dc87f4904dfea3bb2135bd0c914373b465ea64f21f0266f",
+      "tests/unit/test_pre_push_temp_scope.py": "e70d119f3271ab86335c0c166864aa2173bbf9460eb9f2765cc88f033dc1fb36"
+    },
+    "countercontrol": {
+      "exception": "UnicodeEncodeError",
+      "error": "'gbk' codec can't encode character '\\u2603' in position 72: illegal multibyte sequence",
+      "captured_output": "\r\n=== full bootstrap ===\r\n",
+      "synthetic_pure_only": true
+    }
+  },
+  "confirmed_unresolved_findings": [],
+  "final_delta": {
+    "output_boundary": "Single_print_output encodes onlytoactualstdoutencoding withbackslashreplace, thenprints; stdout/stderr/title/status/successsummary sharethisboundary. Characterescaping cannot turnredintogreen ormask124.",
+    "verbosity": "Onlyfulltests/unitaddsvv/durations15. Successfulfullcheck prints summary pluscapturedslowest15tail, never allverboseprogress. Focusedcommands unchanged.",
+    "timeout": "600secondsunchanged; bytes/strpartialoutput preserved;124stillred. No testscope/permission/skip change.",
+    "controls": {
+      "result": "PASS_TIMEOUT_ENCODING_AND_COMMAND_SCOPE",
+      "timeout_returncode": 124,
+      "GBK_progress": "\r\n=== full bootstrap ===\r\nlast test: snowman \\u2603 原文\r\n\r\nchild stderr\r\n\r\nFAILED: full bootstrap (timeout after 600s)\r\n",
+      "successful_output": "\n=== full bootstrap ===\n=== 500 passed in 3s ===\n=== slowest 15 durations ===\n1.00s call tests/unit/test_x.py::test_x\n=== 500 passed in 3s ===\n",
+      "success_returncode": 0,
+      "full_only_verbose": true,
+      "owned_empty_temps_removed": true,
+      "actual_child_or_pytest_runs": 0,
+      "puremock_controls": 4,
+      "network_model_calls": 0,
+      "prior_probe_during_hook_stash": "Expected oldHEAD version imported duringpre-commit stash; nofinding asserted, nochild started, rerun after ROOT confirmed WIPrestored."
+    },
+    "test_receipt": {
+      "sha256": "46e59986e18c23bbc75e18b5fb2b39e111f974a9aac78f7b2ab13b7a30342949",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "7",
+          "time": "1.417",
+          "timestamp": "2026-10-18T00:32:04.549737+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    "hook_stash_note": "Onepureprobe readexpectedoldHEADduringprecommitstash; nofalsewithdrawalreport orchildexecution. Finalcontrols repeatedonlyafterROOTconfirmednormalWIPrestore."
+  }
+}

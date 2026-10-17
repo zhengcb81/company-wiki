@@ -3,8 +3,8 @@
 - 用户确认RF/FF两包已派发；ROOT未进入作者树写代码。
 - 模型/重放共因修复已提交aafbd662，远端尚未发布。Native3文件按最终SHA精确集成；最终NFC独审PASS/0代码未决，原10项测试和72相关测试收据复用，不重复全PDF。
 - CN剩余两项已完成全部候选链trace，业务覆盖关系owner进行portable正反控TDD；不加公司规则、不增片段/工作预算。
-- CI初版资源缩范围被独审拒收，已撤回并修为未知资源full；作者集中103PASS，等待最终delta。原“542局部诊断”已WITHDRAWN，不能当实际push范围。
-- ROOT超时诊断：2FAIL/4PASS的RED后保留TimeoutExpired字节/文本stdout及stderr；独审GBK反例1FAIL/6PASS后统一安全打印，最终7PASS/1.43s、Ruff通过，仍红码124且600秒不变，最终独审中。
+- CI初版资源缩范围被独审拒收，已撤回并修为未知资源full；作者集中103PASS，已修路径文字伪execution第二P1，最终独审PASS/0未决，4文件精确集成；103与后续32集中绿复用。原“542局部诊断”已WITHDRAWN，不能当实际push范围。
+- ROOT超时诊断：2FAIL/4PASS的RED后保留TimeoutExpired字节/文本stdout及stderr；独审GBK反例1FAIL/6PASS后统一安全打印，最终7PASS/1.43s、Ruff通过，仍红码124且600秒不变，最终独审PASS/0未决，已集成。
 
 尚未完成：业务覆盖识别最终源、三份配置供应商真实摘要/恢复及内容审查、正常push/精确CI、新盲样本。未把离线绿或同AUTO重跑写成跨AUTO/完整RF预测验收。
 

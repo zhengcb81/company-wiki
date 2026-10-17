@@ -1,0 +1,227 @@
+{
+  "schema_version": "du11-push-selector-independent-review/1",
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at": "2026-10-17T23:35:06.576729+00:00",
+  "workdir": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-source-facts\\company-wiki",
+  "verdict": "PASS_SELECTOR_ENGINEERING_BOTH_POSITIVE_PROOF_DEFECTS_CLOSED",
+  "frozen_file_sha256": {
+    "tools/changed_unit_tests.py": "0b9305ce0a7413276946ca3089e65c00fe9b17e1a6f759fb8b05775ee877105a",
+    "tests/unit/test_changed_resource_scope.py": "65f59b552bfe02ac462ec5ca1f101420ee364588109cef29db31ae2c64519ce6"
+  },
+  "findings": [
+    {
+      "id": "CI-RESOURCE-POSITIVE-OWNER",
+      "priority": "P1",
+      "status": "RESOLVED_NONPYTHON_RESOURCES_ALWAYS_FULL",
+      "where": "tools/changed_unit_tests.py::select_unit_tests resource_names→reverse resource owner / test_side_only",
+      "mechanism": "_resource_names includes every literal string in a module. A filename comparison/diagnostic string creates a resource→test edge that counts as a proven consumer. Resource-only known test closure then makes test_side_only=True, suppressing broader uncertainty and omitting actual dynamic-filename resource readers. A possible string mention is not positive file access/ownership proof.",
+      "actual_control": "Changed src/pkg/profiles/catalog.json; actual pkg.reader reads Path(folder)/name and its unit test imports/calls it. Without known literal mention select returns full resource owner unknown. Add unrelated filename-policy test containing only assert path.name == catalog.json; select now returns only that decoy test, omitting test_actual_reader.",
+      "expected": "Comparison mention cannot prove resource ownership; retain full fallback if actual reader cannot be established. No ignored failures or smaller false scope.",
+      "root_fix_boundary": "Separate possible literal-reference edges (safe to overapproximate impact/isolation) from positive resource-access/declaration proof (needed to avoid full fallback). Generic _file_path_names counts everyAssign/Call and is not sufficient proof: print(filename) or metadata dictionaries can also mention same string without file use. Prefer actual Path/open/read/load expression linkage or explicit trusted resource declaration dataflow; otherwisefull.",
+      "needed_TDD": [
+        "Filename comparison mention doesnot defeat unknown-resource fallback",
+        "Diagnostic print/string dict doesnot count as positive reader",
+        "Real Path/open/read/load resource consumer and reverse consumers remain included",
+        "Samebasename genuine readers retained, known globals/deletions/unresolved paths remainfull"
+      ]
+    },
+    {
+      "id": "CI-BENCHMARK-FILE-POSITIVE-EXECUTION",
+      "priority": "P1",
+      "status": "RESOLVED_FILENAME_POSITIVE_EXECUTION_REMOVED",
+      "counterexample": "Filenameprint plus unrelated subprocess formerly counted as execution of namedbenchmark; independentcontrol reproduced false local scope.",
+      "fix": "Allfilename/path→positive execution edges removed. Keep possible reverse edges only; staticimport callchains can prove a knownconsumer, unproven launcher/worker path staysfull. No newsubprocess AST/dataflow engine."
+    }
+  ],
+  "reviewed_correct_boundaries": {
+    "gate_and_bootstrap": "Selector/gate/self/unknowntools changes still return full; this actual firstbootstrap is not claimed local. No pre_push_gate/CI/timeouts edits inscope.",
+    "production_dynamic": "Early same dynamic detection returns full before graphbuild. Original74path committed range remains full because decision_inventory is dynamic.0.195s is scopeconstructiontime only, not testtime.",
+    "benchmark": "Exemption restricted namespace with reverse import/filepossible-path closure and executing test consumer; production caller/unknown execution fallsfull. Top-level/deeper tests kept as direct consumers.",
+    "test_completeness": "Each change is checked separately so unrelated changedtests cannot hide entirely untested source; globalconfig/conftest/requirements/deleted paths fallback. Resource positive-owner bug is independent of these sound safeguards."
+  },
+  "author_evidence_inspected": {
+    "handoff_sha256": "f8fef522871d5dd3fb2f66faa550777f7256b29e9999e182514296d870ace91e",
+    "final_junit_sha256": "49f71165343cde5b53cea91f96e814d953681bd0752f802d6455beb85ef67e9b",
+    "actual_suites": [
+      {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "101",
+        "time": "4.519",
+        "timestamp": "2026-10-18T00:24:06.480695+01:00",
+        "hostname": "DESKTOP-156V213"
+      }
+    ],
+    "real_range_receipt_sha256": "6a4fb63f8f5e2aefd4f7bcd3523562be058a904f2e02264e351f7a736129877c",
+    "real_range": "74paths select tests/unit/full, dynamicexecutionchanged,0.19457s selectoronly. No6455suite run, firstbootstrap remains full."
+  },
+  "independent_controls": {
+    "selector": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-source-facts\\company-wiki\\tools\\changed_unit_tests.py",
+    "cases": [
+      {
+        "case": "unresolved_actual_reader_without_decoy",
+        "observed": [
+          [
+            "tests/unit"
+          ],
+          "resource owner unknown"
+        ],
+        "expected": [
+          "tests/unit"
+        ]
+      },
+      {
+        "case": "filename_comparison_decoy_is_not_file_owner",
+        "observed": [
+          [
+            "tests/unit/test_filename_policy.py"
+          ],
+          "affected unit tests"
+        ],
+        "expected": [
+          "tests/unit"
+        ],
+        "missed": "tests/unit/test_actual_reader.py"
+      }
+    ],
+    "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-selector-independent-stqaxfg3",
+    "owned_temp_removed": true,
+    "model_network_calls": 0,
+    "author_tree_writes": 0
+  },
+  "validation_constraints": {
+    "selector_only_calls": 2,
+    "pytest_suite_reruns": 0,
+    "full6455_reruns": 0,
+    "network_model_calls": 0,
+    "author_tree_writes": 0,
+    "own_temp_removed": true
+  },
+  "acceptance": "ROOT may receive these2frozen selector files. Both confirmedP1defects fixed by deleting unsafe narrowing, not ignoring failures. Firstbootstrap remainsfull; no realpush/test runtime improvement claimed from graph-only timings.",
+  "prior_review_history": {
+    "verdict": "REPAIR_REQUIRED_RESOURCE_POSITIVE_OWNER_FALSE_PROOF",
+    "file_sha256": {
+      "tools/changed_unit_tests.py": "bccb1848e307f5e176d61469fd0104fc66325e43e97366228c83b3864e2c6b2f",
+      "tests/unit/test_changed_resource_scope.py": "1a64f83b376fc29555ffcd77fe434d8c1cc74f25178a9f6c7e50115d0ef2721a"
+    },
+    "resource_countercontrol": {
+      "selector": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-source-facts\\company-wiki\\tools\\changed_unit_tests.py",
+      "cases": [
+        {
+          "case": "unresolved_actual_reader_without_decoy",
+          "observed": [
+            [
+              "tests/unit"
+            ],
+            "resource owner unknown"
+          ],
+          "expected": [
+            "tests/unit"
+          ]
+        },
+        {
+          "case": "filename_comparison_decoy_is_not_file_owner",
+          "observed": [
+            [
+              "tests/unit/test_filename_policy.py"
+            ],
+            "affected unit tests"
+          ],
+          "expected": [
+            "tests/unit"
+          ],
+          "missed": "tests/unit/test_actual_reader.py"
+        }
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-selector-independent-stqaxfg3",
+      "owned_temp_removed": true,
+      "model_network_calls": 0,
+      "author_tree_writes": 0
+    }
+  },
+  "confirmed_unresolved_findings": [],
+  "final_delta": {
+    "resource_optimization": "COMPLETELY_WITHDRAWN; nonPython resources usefull even genuine staticliteralowner exists, because it cannot exclude dynamicreaders. No filename parsing positiveproof remains.",
+    "benchmark_execution": "Only existingknownimport-call closure contributes executions. Paths remain conservativepotentialdependencies, never executablepositiveproof. Unprovenpathlaunchedworker returnsfull.",
+    "preserved": "Top-level/deepertest discovery, productiondynamic earlyfullreturn, gate/self/unknown/config/deleted fallback. NoCI/timeout/skip edits inselector scope.",
+    "limits": "StaticPythoncall evidence is not runtimecoverage proof. Original74pathrange and firstselector/gate bootstrap stillfull. Earlier542owned-files diagnostic withdrawn, not valid scopeproof.",
+    "final_independent_controls": {
+      "result": "PASS_BOTH_POSITIVE_PROOF_REPAIRS",
+      "cases": [
+        {
+          "case": "printedfilename_unrelatedchild_not_execution",
+          "observed": [
+            [
+              "tests/unit"
+            ],
+            "benchmark execution or isolation unproven"
+          ]
+        },
+        {
+          "case": "actualimport_call_test_retained",
+          "observed": [
+            [
+              "tests/test_display.py",
+              "tests/test_reader.py"
+            ],
+            "affected unit tests"
+          ]
+        },
+        {
+          "case": "resourcealwaysfull_despite_decoy",
+          "observed": [
+            [
+              "tests/unit"
+            ],
+            "resource dependency scope unknown"
+          ]
+        }
+      ],
+      "frozen_file_sha256": {
+        "tools/changed_unit_tests.py": "0b9305ce0a7413276946ca3089e65c00fe9b17e1a6f759fb8b05775ee877105a",
+        "tests/unit/test_changed_resource_scope.py": "65f59b552bfe02ac462ec5ca1f101420ee364588109cef29db31ae2c64519ce6"
+      },
+      "owned_temp_removed": true,
+      "actual_child_or_pytest_executions": 0,
+      "selector_calls": 3
+    },
+    "new_pytest_runs": 0,
+    "new_selector_calls": 3
+  },
+  "final_xml_receipts": {
+    "review-delta-green-junit.xml": {
+      "sha256": "6e2e8c39686a7c489f65f6239a2e5585392a0046fd7bbdf91555b5e10434f7b9",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "103",
+          "time": "5.152",
+          "timestamp": "2026-10-18T00:30:35.793516+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    "execution-delta-green-junit.xml": {
+      "sha256": "7bef4a8a67cc1bdf63ee34109d8fd909cb295d4663026b479a72ab06d5a4ecdd",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "32",
+          "time": "1.664",
+          "timestamp": "2026-10-18T00:33:34.667222+01:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    }
+  },
+  "test_evidence_reuse": "Original72cases from103green retained; finalmodule32green after secondP1fix inspected. No finalfull104/6455run asserted. PreviousRED/controls retained.",
+  "related_gate_review": "push-timeout-review.md/json is separateROOT2file scope, jointly reviewed in this engineeringnode."
+}

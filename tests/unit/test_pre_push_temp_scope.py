@@ -2,8 +2,10 @@
 from __future__ import annotations
 
 import importlib.util
+import io
 from pathlib import Path
 import sys
+import subprocess
 
 import pytest
 
@@ -66,3 +68,38 @@ def test_check_child_does_not_inherit_hook_repository_context(tmp_path, monkeypa
              f"assert not any(k in os.environ for k in {gate.GIT_REPOSITORY_CONTEXT!r}); "
              "assert os.environ['GIT_CONFIG_PARAMETERS']=='preserved-user-setting'")
     assert gate._run([sys.executable, "-c", probe], "isolated child Git context") == 0
+
+
+@pytest.mark.parametrize("as_bytes", [False, True])
+def test_timed_out_check_preserves_progress_and_returns_red(monkeypatch, capsys, as_bytes):
+    progress = "tests/unit/test_reader.py::test_source 原文 PASSED\n"
+    error = "last child diagnostic\n"
+    def expired(*args, **kwargs):
+        assert kwargs["timeout"] == 600
+        raise subprocess.TimeoutExpired(args[0], 600,
+            output=progress.encode("utf-8") if as_bytes else progress,
+            stderr=error.encode("utf-8") if as_bytes else error)
+    monkeypatch.setattr(gate.subprocess, "run", expired)
+    assert gate._run([sys.executable, "-m", "pytest"], "full bootstrap") == 124
+    output = capsys.readouterr().out
+    assert progress.strip() in output
+    assert error.strip() in output
+    assert "600" in output and "FAILED: full bootstrap" in output
+
+
+def test_timeout_diagnostic_survives_a_legacy_console_encoding(monkeypatch):
+    def expired(*args, **kwargs):
+        raise subprocess.TimeoutExpired(args[0], 600,
+            output="last test: snowman ☃ 原文\n".encode("utf-8"),
+            stderr=b"child stderr\n")
+    monkeypatch.setattr(gate.subprocess, "run", expired)
+    buffer = io.BytesIO()
+    console = io.TextIOWrapper(buffer, encoding="gbk", errors="strict")
+    with monkeypatch.context() as context:
+        context.setattr(gate.sys, "stdout", console)
+        code = gate._run([sys.executable, "-m", "pytest"], "full bootstrap")
+    console.flush()
+    output = buffer.getvalue().decode("gbk")
+    assert code == 124
+    assert "last test: snowman \\u2603 原文" in output
+    assert "child stderr" in output and "FAILED: full bootstrap" in output
