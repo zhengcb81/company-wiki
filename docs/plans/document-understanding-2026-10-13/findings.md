@@ -1,3 +1,11 @@
+## DU11用户已派发 — 2026-10-17
+
+两条RF/FF外包已启动，由作者独占各自新worktree；ROOT继续CWP source/engine/summary/cache，不改它们的源码、索引或配置。
+
+**Next Step：** 完成CWP真实默认深页根因修复及独立复审，然后按配置运行正式摘要/恢复。
+
+---
+
 ## DU11 两条独立施工卡就绪 — 2026-10-17
 
 独立审卡已PASS，FF卡最初把provider=None误指向专用lookup，已按实际普通SourceRequest/query_local及reader manifest接口修正并复核。两卡现在可启动，状态READY_FOR_DISPATCH（尚未获用户已派发通知）：[总表](parallel/du11-2026-10-17/README.md)。RF/FF独立新worktree和源码白名单互不重叠，与ROOT CWP生产接线无文件争用。每卡交接前必须独立agent全面审查、全部问题修复/测试绿、按最终源SHA复核，0未解决才交接。

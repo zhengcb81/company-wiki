@@ -2,7 +2,7 @@
   "schema_version": "parallel-package-set/1",
   "plan_id": "document-understanding-2026-10-13",
   "package_set": "DU11-2026-10-17",
-  "status": "READY_FOR_DISPATCH",
+  "status": "DISPATCHED_BY_USER",
   "created_from": {
     "company_wiki": "34a7dd71aaa49d18c13fcdd300ce79581114ca5b",
     "filing_fetch": "f1a939e522c22b23659712a8bd2b344f5eb0a364",
@@ -19,7 +19,7 @@
       "plan_id": "du11-rf-citation-closure-2026-10-17",
       "pwf_plan_root": "docs/plans",
       "card": "du11_rf_citation_closure.md",
-      "status": "READY_FOR_DISPATCH",
+      "status": "DISPATCHED_BY_USER",
       "inputs": [
         "validated NarrativeContext /1 or /3",
         "optional source-owned reading_context /1 or /2",
@@ -49,7 +49,7 @@
       "plan_id": "du11-ff-transcript-reuse-2026-10-17",
       "pwf_plan_root": "docs/plans",
       "card": "du11_ff_transcript_reuse.md",
-      "status": "READY_FOR_DISPATCH",
+      "status": "DISPATCHED_BY_USER",
       "inputs": [
         "existing filing request + optional companion_transcript",
         "normal SourceRequest /1 (provider=null) to source_query_cli/query_local for default local cross-provider lookup",
