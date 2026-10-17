@@ -6,20 +6,71 @@
   "ff_main": "f1a939e522c22b23659712a8bd2b344f5eb0a364",
   "ff_push": "VERIFIED_REMOTE_MAIN",
   "et_main_origin": "2584b7eed062a9a30254bc06b4f19ab5471b414e",
-  "cwp_publication": "IN_PROGRESS",
+  "cwp_publication": "VERIFIED_REMOTE_MASTER",
   "ff_full_41_c": "CLOSED_FIXED_ENVIRONMENT",
   "formal_summary_and_blind_holdout": "OPEN",
   "paid_calls": 0,
   "downloads": 0,
   "ff_ci": {
     "id": 39072192244,
-    "status": "in_progress",
-    "conclusion": null
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/filing-fetch/actions/runs/39072192244"
   },
   "ff_pre_push": {
     "passed": 754,
     "skipped": 7,
     "subtests_passed": 78,
     "seconds": 95.42
+  },
+  "cwp_published_implementation": "757bb8330818b95e9d6596cefc96e4ba0f8752f4",
+  "cwp_ci": "NOT_TRIGGERED_DOCS_PLANS_PATHS_IGNORE",
+  "cwp_pre_push": {
+    "passed": 148,
+    "seconds": 47.28
+  },
+  "et_ci": "NO_WORKFLOW",
+  "root_reception_worktrees_removed": true,
+  "preservation": {
+    "ff": true,
+    "et": true,
+    "author_worktrees": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch-du10-41-matrix",
+        "head": "ff2ba400ad37e1188b88ed61ff7a1814a647b94b",
+        "status": ""
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-du10-summary-goldset",
+        "head": "faf5e58019314fd0b5dce0f6d00b44587a81ff28",
+        "status": ""
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts-du10-txt-fidelity",
+        "head": "cb8e29cddb3836fe670d93d65a02678f5ce8e466",
+        "status": ""
+      }
+    ]
+  },
+  "test_temp_cleanup": {
+    "status": "BLOCKED_BY_TOOL_PLATFORM",
+    "action": "PowerShell Remove-Item on explicitly named owned test-temp directories",
+    "reason": "execution policy rejected command; no detailed reason returned",
+    "remaining": [
+      {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du10-root-et-green",
+        "bytes": 5461
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pytest-of-郑曾波\\pytest-1859",
+        "bytes": 322759
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pytest-of-郑曾波\\pytest-1860",
+        "bytes": 1458095
+      }
+    ],
+    "workaround_attempted": false,
+    "note": "Separate normal git worktree removal succeeded after verifying clean trees and main ancestry; no author worktree removed."
   }
 }

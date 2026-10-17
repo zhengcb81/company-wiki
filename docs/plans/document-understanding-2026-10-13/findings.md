@@ -1,3 +1,13 @@
+## DU10 已验收并推送 — 2026-10-17（当前）
+
+三包独立复审PASS、0未解决，实现已全部进入各自主线并核远端：FF main f1a939e（754PASS/7SKIP＋78subtests，精确CI39072192244 SUCCESS）；ET main2584b7e（ROOT304PASS，FF→最新ET117PASS，无CI）；CWP master757bb833（Gold71PASS，11/11真实SourceRef回放，pre-push148PASS，docs/plans按既有paths-ignore不触发CI）。作者工区与原件/配置保持，两个ROOT接收worktree已正常移除。工具平台拒绝清理显式测试temp目录，剩余体积/路径列入 [最终机器记录](review/du10_reception.json)，未绕过拒绝、不虚报恢复完成。
+
+FF完整41例及中断新attempt恢复固定环境C已关闭；Gold已修正的11例是回归集，不是盲holdout。当前没有待作者交付包。完整说明见 [DU10最终验收](review/du10_reception.md)。
+
+**Next Step：** 继续 review/pdf_page_intent_implementation.md 的PDF导航/唯一matcher/POLICY+PLANNER/统一WorkBudget/source单parse生产装配，然后真实深页、按配置供应商正式摘要、缓存恢复和新盲样本验收。整个项目尚未完成；下面的“待派发/待推送/FF41OPEN”只描述历史时点。
+
+---
+
 ## DU10 三包验收收尾 — 2026-10-17（最新）
 
 三包作者完整历史已合入本地主线；ROOT独审发现的问题已修复并复审通过，0未解决。具体见 [DU10接收](review/du10_reception.md)。FF固定依赖/限额完整41例和中断新attempt恢复已按有效收据关闭；ET EOF token/main直挂文本共因已修复，304PASS，FF→最新ET合同117PASS；CWP样本6项语义修正和真实SourceRef/locator回放，71PASS、11/11来源实读，独立核10原件未改。样本为已看过回归集，正式摘要/盲holdout未完成。

@@ -1,7 +1,7 @@
 {
   "plan_id": "document-understanding-2026-10-13",
   "package_set": "DU10-2026-10-17",
-  "status": "ACCEPTED_LOCAL_PUBLICATION_CLOSING",
+  "status": "ACCEPTED_PUBLISHED",
   "created_from": {
     "company_wiki": "900dbf6489f3b995a0bfb7fcbb8a001a68df241d",
     "filing_fetch": "c7c8867da35cd19d4f419fa70947332615e8e9c0",
@@ -16,7 +16,8 @@
       "card": "du10_ff41_close.md",
       "status": "ACCEPTED",
       "author_final_head": "ff2ba400ad37e1188b88ed61ff7a1814a647b94b",
-      "independent_review": "PASS"
+      "independent_review": "PASS",
+      "published_main": "f1a939e522c22b23659712a8bd2b344f5eb0a364"
     },
     {
       "id": "DU10-CWP-SUMMARY-GOLDSET",
@@ -26,7 +27,8 @@
       "card": "du10_cwp_summary_goldset.md",
       "status": "ACCEPTED",
       "author_final_head": "faf5e58019314fd0b5dce0f6d00b44587a81ff28",
-      "independent_review": "PASS"
+      "independent_review": "PASS",
+      "published_main": "757bb8330818b95e9d6596cefc96e4ba0f8752f4"
     },
     {
       "id": "DU10-ET-TXT-FIDELITY",
@@ -36,7 +38,8 @@
       "card": "du10_et_txt_fidelity.md",
       "status": "ACCEPTED",
       "author_final_head": "cb8e29cddb3836fe670d93d65a02678f5ce8e466",
-      "independent_review": "PASS"
+      "independent_review": "PASS",
+      "published_main": "2584b7eed062a9a30254bc06b4f19ab5471b414e"
     }
   ],
   "independent_review_required": true,

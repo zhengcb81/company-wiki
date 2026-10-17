@@ -7,5 +7,6 @@
   "independent_review": "PASS",
   "unresolved": [],
   "corpus_use": "seen_regression_not_blind_holdout",
-  "report": "ROOT_RECEPTION.md"
+  "report": "ROOT_RECEPTION.md",
+  "published_implementation": "757bb8330818b95e9d6596cefc96e4ba0f8752f4"
 }

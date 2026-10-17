@@ -4,8 +4,8 @@
 
 | 包 | 作者最终 HEAD | ROOT 验收与修复 | 主线 |
 |---|---|---|---|
-| FF41 | ff2ba400 | 原41 CaseSpec/oracle不变；完整41/41及中断新attempt41/41收据有效，独立42PASS。按组seed优化、分组收据隔离 | main/origin f1a939e，754PASS＋78subtests；CI39072192244运行中 |
-| CWP Goldset | faf5e580 | 修复6组标注口径、真实v2 SourceRef及canonical HTML locator；71PASS，11/11来源回放，独立8问题全部闭环 | master，待本次正常提交/推送 |
+| FF41 | ff2ba400 | 原41 CaseSpec/oracle不变；完整41/41及中断新attempt41/41收据有效，独立42PASS。按组seed优化、分组收据隔离 | main/origin f1a939e，754PASS＋78subtests；CI39072192244 SUCCESS |
+| CWP Goldset | faf5e580 | 修复6组标注口径、真实v2 SourceRef及canonical HTML locator；71PASS，11/11来源回放，独立8问题全部闭环 | master/origin 757bb833；pre-push148PASS |
 | ET Fidelity | cb8e29cd | 进一步修复带`>`未闭属性/注释、main直挂/inline文本丢失；304PASS，独立15控制PASS | main/origin 2584b7e 已核 |
 
 ## 大节点实证
@@ -31,3 +31,9 @@ Gold是**已看过的回归标注集**；不能充当未见holdout，也没有�
 ## 下一步
 
 回到 [PDF生产接线方案](pdf_page_intent_implementation.md)：原生导航、唯一matcher、POLICY+PLANNER、统一WorkBudget、source单parse，然后真实深页、配置供应商正式摘要、缓存恢复与新盲样本验收。三包完成不表示整个PWF目标完成；FF41固定C不再OPEN。
+
+## 发布与清理实际结果
+
+FF精确CI [39072192244](https://github.com/zhengcb81/filing-fetch/actions/runs/39072192244) SUCCESS；CWP已正常push并核远端757bb833，docs/plans专改按既有paths-ignore无新CI；ET无workflow。三个作者树均保持最终HEAD且干净，FF/ET原未跟踪文件大小/mtime保持。两个ROOT接收worktree已在确认主线包含完整交付、树干净后正常git worktree remove。
+
+工具平台拒绝了显式列举本轮测试临时目录的PowerShell删除命令（仅返回blocked by policy，无细化理由）。未换通道重试；剩余目录/大小已列机器记录。真实SourceRef回放自己创建的TemporaryDirectory已正常移除，生产配置和原件均未变。不把这项环境清理写成已完成；它不影响已通过的工程/来源验收。
