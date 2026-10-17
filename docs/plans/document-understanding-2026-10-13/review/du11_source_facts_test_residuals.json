@@ -1,0 +1,16 @@
+[
+  {
+    "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261017-225950-881449b1",
+    "exists": true,
+    "files": 15,
+    "bytes": 1490944.0,
+    "cleanup_status": "platform_rejected_not_retried"
+  },
+  {
+    "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261017-230239-142e30d3",
+    "exists": true,
+    "files": 15,
+    "bytes": 1490944.0,
+    "cleanup_status": "platform_rejected_not_retried"
+  }
+]

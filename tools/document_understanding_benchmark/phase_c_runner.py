@@ -576,6 +576,7 @@ def run_pair(
     source_mode="isolated-copy",
     source_catalog_config=None,
     selected_versions=None,
+    activation_recovery=False,
 ):
     from company_wiki.source_catalog.official_source_flow import (
         prepare_official_narrative_request,
@@ -758,6 +759,7 @@ def run_pair(
             "0.9.0": 48000,
         },
         "public_span_cap": 96,
+        "activation_recovery_requested": activation_recovery,
         "model_settings": options,
         "capture_origin": "existing local bytes; descriptor URL does not prove remote or historical download SHA",
     }
@@ -796,7 +798,8 @@ def run_pair(
 
             mounted = prepare_registered_source(source_config=Path(source_catalog_config),
                 owned_root=root, original=original, expected_sha256=sha,
-                descriptor=descriptor, as_of_date=datetime.now(UTC).date().isoformat())
+                descriptor=descriptor, as_of_date=datetime.now(UTC).date().isoformat(),
+                source_facts=sample.get("registered_source_facts"))
             config = Path(mounted["catalog_config"])
             # This is an existing registered SourceRef, not an HTTP/import receipt.
             imported = {"source_ref": mounted["source_ref"]}
@@ -909,7 +912,12 @@ def run_pair(
             ]
             if mode == "loopback":
                 command += ["--llm-config", str(llm), "--allow-local-model-http"]
+            observer_config.update(hold_activation=activation_recovery,
+                                   activation_run_id=current_run)
+            write_json(observer, observer_config)
             code, receipt, _, _ = _cli(root, output, current_run, command, env)
+            # Persist native charges before resuming any paid output. A fresh
+            # run, request, work directory or model call is never a substitute.
             native = append_native(database, current_run, output, mode)
             state = {
                 "version": version,
@@ -943,6 +951,48 @@ def run_pair(
                     state["actual_groups_separate_with_all_anchors_present"] = True
                 state["expected_refusal_zero_reservation_zero_POST"] = True
                 break
+            if activation_recovery:
+                assert code == 2 and receipt is not None
+                assert receipt["documents"][0]["status"] == "activation_pending"
+                assert any(row.get("event") == "activation_held"
+                           and row.get("run_id") == current_run for row in read_rows(events))
+                assert native and all(row["usage_status"] == "known"
+                                      and row["response_sha256"] for row in native)
+                runs = NarrativeRunStore(database)
+                generation_before = runs.final_generations(current_run)
+                posts_before_recovery = sum(row["event"] == "http_post_attempt"
+                                            for row in read_rows(events))
+                observer_config.update(hold_activation=False, forbid_post=True)
+                write_json(observer, observer_config)
+                code, receipt, _, _ = _cli(root, output, current_run + "-activation-resume",
+                                           command, env)
+                after = append_native(database, current_run, output, mode)
+                stable_fields = ("attempt_id", "request_sha256", "response_sha256", "usage_status",
+                                 "input_tokens", "output_tokens", "estimated_micro_usd",
+                                 "charged_tokens", "charged_micro_usd")
+                identity_before = [{key: row[key] for key in stable_fields} for row in native]
+                identity_after = [{key: row[key] for key in stable_fields} for row in after]
+                posts_after_recovery = sum(row["event"] == "http_post_attempt"
+                                           for row in read_rows(events))
+                assert code == 0 and receipt is not None
+                assert identity_before == identity_after
+                assert runs.final_generations(current_run) == generation_before
+                assert posts_before_recovery == posts_after_recovery
+                state["activation_recovery"] = {
+                    "status": "PASS", "held_status": "activation_pending",
+                    "same_run_id": current_run,
+                    "native_attempts_before": len(native), "native_attempts_after": len(after),
+                    "charged_tokens_before": sum(row["charged_tokens"] for row in native),
+                    "charged_tokens_after": sum(row["charged_tokens"] for row in after),
+                    "charged_micro_usd_before": sum(row["charged_micro_usd"] for row in native),
+                    "charged_micro_usd_after": sum(row["charged_micro_usd"] for row in after),
+                    "POSTs_before": posts_before_recovery, "POSTs_after": posts_after_recovery,
+                    "paid_generation_unchanged": True, "response_identity_unchanged": True,
+                }
+                native = after
+                state.update(exit=code, receipt=receipt, native_usage=native)
+                observer_config["forbid_post"] = False
+                write_json(observer, observer_config)
             if code != 0:
                 raise ValueError("INITIAL_BATCH_FAILED_NO_BLIND_RESEND")
             reference, bundle, read_request, replay = public_bundle(
@@ -1278,6 +1328,8 @@ def main() -> int:
                         help="Current source-owner roots for registered_readonly; only the owned catalog is written.")
     parser.add_argument("--selector-versions", choices=("0.9.0", "0.9.0,0.8.0"),
                         help="Omission retains the historical pair; 0.9.0 is single-selector acceptance.")
+    parser.add_argument("--activation-recovery", action="store_true",
+                        help="Test paid outbox activation_pending then resume the same run with zero new POST.")
     args = parser.parse_args()
     if args.source_mode == "registered_readonly" and args.source_catalog_config is None:
         parser.error("registered_readonly requires --source-catalog-config")
@@ -1335,7 +1387,8 @@ def main() -> int:
                            reading_model_projection=args.reading_model_projection,
                            consumer_projects=args.consumer_projects,
                            source_mode=args.source_mode, source_catalog_config=args.source_catalog_config,
-                           selected_versions=args.selector_versions)
+                           selected_versions=args.selector_versions,
+                           activation_recovery=args.activation_recovery)
         write_json(destination / "mother-after.json", mother_totals(preparation_path, USAGE))
     else:
         provider = next(
@@ -1360,6 +1413,7 @@ def main() -> int:
                 consumer_projects=args.consumer_projects,
                 fixture_endpoint=server.endpoint,
                 selected_versions=args.selector_versions,
+                activation_recovery=args.activation_recovery,
             )
             count = len(server.requests)
             denied = run_pair(

@@ -582,3 +582,43 @@ def test_registered_source_identity_and_period_still_belong_to_query(tmp_path, c
                 descriptor=descriptor,
                 as_of_date=change.get("_as_of_date", "2026-10-17"),
             )
+
+
+def test_registered_source_facts_use_existing_public_owner_without_copy(tmp_path):
+    from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source
+
+    raw = tmp_path / "source/companies/WRONG_FOLDER/update.txt"
+    raw.parent.mkdir(parents=True)
+    raw.write_text("Acme business update. Published 2026-09-30. New factory opened.", encoding="utf-8")
+    config = tmp_path / "source/config.json"
+    config.write_text(json.dumps({"schema_version": "1.0", "catalog_dir": str(tmp_path / "production-db"),
+        "roots": [{"root_id": "raw", "path": str(tmp_path / "source/companies"), "kind": "company_raw"}]}), encoding="utf-8")
+    sha = hashlib.sha256(raw.read_bytes()).hexdigest()
+    facts = {"entity": "Acme", "market": "CN", "security_id": "300775",
+        "document_kind": "investor_relations", "published_date": "2026-09-30", "fiscal_year": 2026}
+    proof = {"content_sha256": sha, "facts": facts, "evidence": {
+        key: {"value": value, "locator": "test:original-header", "content_sha256": sha}
+        for key, value in facts.items()}}
+    before = {p: _fingerprint(p) for p in (raw, config)}
+    mounted = prepare_registered_source(source_config=config, owned_root=tmp_path / "owned",
+        original=raw, expected_sha256=sha, descriptor=facts, as_of_date="2026-10-17", source_facts=proof)
+    assert mounted["source_fact_registration"]["status"] == "recorded"
+    assert mounted["manifest"]["display_name"] == "Acme"
+    assert mounted["manifest"]["published_date"] == "2026-09-30"
+    assert mounted["raw_copies"] == 0
+    assert all(_fingerprint(p) == v for p, v in before.items())
+    assert not (tmp_path / "production-db").exists()
+
+
+def test_registered_source_fact_proof_is_bound_to_original_sha(tmp_path):
+    from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source, ReadonlySourceGap
+
+    with reuse.setup_source("http://127.0.0.1:1/chat/completions") as (root, catalog, config, _, imported, _):
+        original, descriptor = _fixture_source(catalog, imported)
+        before = _fingerprint(original)
+        with pytest.raises(ReadonlySourceGap, match="registered_source_fact_sha_mismatch"):
+            prepare_registered_source(source_config=config, owned_root=tmp_path / "owned",
+                original=original, expected_sha256=imported["source_ref"]["content_sha256"],
+                descriptor=descriptor, as_of_date="2026-10-17",
+                source_facts={"content_sha256": "0" * 64, "facts": {"entity": "Acme"}, "evidence": {}})
+        assert _fingerprint(original) == before

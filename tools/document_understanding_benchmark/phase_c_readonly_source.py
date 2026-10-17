@@ -31,6 +31,7 @@ def prepare_registered_source(
     expected_sha256: str,
     descriptor: dict,
     as_of_date: str,
+    source_facts: dict | None = None,
 ) -> dict:
     from company_wiki.source_catalog.config import load_catalog_config
     from company_wiki.source_catalog.resolver import SourceRequest
@@ -97,6 +98,22 @@ def prepare_registered_source(
                 "registered_source_registration_failed",
                 detail={"errors": registration.errors},
             )
+        reader = SourceVersionReader(catalog)
+        fact_registration = None
+        if source_facts is not None:
+            if source_facts.get("content_sha256") != expected_sha256:
+                raise ReadonlySourceGap("registered_source_fact_sha_mismatch")
+            # Only the explicitly registered original is in this owned catalog.
+            # Resolve its actual registered identifiers; never manufacture a Ref
+            # or an HTTP capture from the prepared official descriptor.
+            versions = [row for row in catalog.query(text=expected_sha256, limit=2)
+                        if row.get("content_sha256") == expected_sha256]
+            if len(versions) != 1:
+                raise ReadonlySourceGap("registered_source_fact_version_ambiguous")
+            version = versions[0]
+            fact_ref = reader.query_ref(version["document_id"], version["source_id"], expected_sha256)
+            fact_registration = catalog.record_source_facts(
+                ref=fact_ref, facts=source_facts["facts"], evidence=source_facts["evidence"])
         request = SourceRequest(
             entity=descriptor["entity"],
             document_kind=descriptor["document_kind"],
@@ -109,7 +126,6 @@ def prepare_registered_source(
             mode="exact",
             allow_download=False,
         )
-        reader = SourceVersionReader(catalog)
         query = reader.query_local(request)
         if query.status != "found" or len(query.matches) != 1:
             raise ReadonlySourceGap(
@@ -153,6 +169,7 @@ def prepare_registered_source(
             "source_ref": asdict(ref),
             "manifest": manifest,
             "descriptor_diagnostics": descriptor_diagnostics,
+            "source_fact_registration": fact_registration,
             "catalog_config": str(target),
             "raw_copies": 0,
             "verified_sha256": opened.content_sha256,

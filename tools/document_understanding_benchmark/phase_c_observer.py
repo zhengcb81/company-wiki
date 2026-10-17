@@ -127,6 +127,21 @@ def install() -> None:
     if not config_path:
         raise RuntimeError("PHASE_C_OBSERVER_CONFIG_MISSING")
     config = json.loads(Path(config_path).read_text(encoding="utf8"))
+    if config.get("hold_activation"):
+        # Test-only post-payment boundary: the normal worker has already
+        # persisted its verified output and outbox before activation is called.
+        from company_wiki.source_catalog.narrative_artifact_store import NarrativeArtifactStore
+        from company_wiki.source_catalog.lock import CatalogOperationLockedError
+
+        def hold_activation(*args, **kwargs):
+            _append(config["events"], {
+                "event": "activation_held", "run_id": config["activation_run_id"],
+                "test_only": True,
+            })
+            print("phase_c_activation_held=1", file=sys.stderr)
+            raise CatalogOperationLockedError("phase C test activation boundary")
+
+        NarrativeArtifactStore.activate = hold_activation
     if os.environ.get("CWP_PHASE_C_NO_NETWORK") == "1":
         original_connect = socket.socket.connect
 

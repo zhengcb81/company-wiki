@@ -1,3 +1,23 @@
+## DU11 来源复用与同run恢复工程已独审 — 2026-10-18（当前）
+
+已接收8份冻结源码/测试：query与resolve共用当前来源事实，权威公司身份覆盖错误目录及旧ticker；handle只输出已有canonical ID，否则空列表，不造ID。相关102项通过（101+修正canonical夹具1，runtime不变），只读测试工具22PASS、恢复装配1PASS31秒。统一独审PASS/0未决代码问题，见review/du11_source_facts_c_review.md/json。三份真实SourceRef与正式语言准备已通过、原件/config/生产DB不改、0原件复制/0模型/实际预检Temp全删，见review/du11_registered_source_preflight.json。
+
+模型C仍OPEN：下一步用现配置串行真实摘要，并启用显式--activation-recovery验证已付费outbox在同run/DB/workdir恢复0新增POST；现有loopback证明工程装配，不能当真实供应商内容绿。推送范围工具的共因修复由内部线在ROOT隔离树继续，不碰外包RF/FF；600秒超时历史保持，不跳hook或延长超时。
+
+**Next Step：** 正常提交本次冻结C工程，然后真实cn-h1→hk-annual→us-10k；完成推送范围修复独审后正常push/核精确CI。两个pytest Temp共2,981,888bytes明确NOT_CLEAN并记录，未绕过平台拒绝。
+
+---
+
+## DU11 正常预推送超时与C工程 — 2026-10-18（当前）
+
+第二次正常push在600秒总超时被拦，仍未发布；不得写远端CI失败或通过。实际触发比单个策略JSON更广：当前工具将整个tools/和tests/fixtures/归为全局，局部JSON没有资源依赖边，顶层tests/test_phase_c*.py又不属于现有执行测试识别。这导致无关全Unit，同时遗漏工具自己的准确执行消费者。ROOT将按资源/工程工具责任修复选择器，保留未知配置、全局入口、未知资源与生产动态执行的保守回退；不跳hook、不改CI全Unit、不延长600秒。
+
+隔离C工程已完成来源事实统一投影及现有canonical ID的真实输出，正确公司可复用、错目录和旧ticker不能冒名；相关102项通过（最终101+夹具修正1，运行源SHA不变）。只读原件三例已进入正式语言准备，0模型/raw复制，生产原件/config/DB不改；同run paid-outbox恢复装配loopback1PASS、1POST/80tokens/110microUSD均无增长，均待最终统一独审。两个pytest自有Temp各1490944bytes被平台拒绝清理，保留准确路径与NOT_CLEAN，不换通道重试；实际三源预检Temp全部恢复。
+
+**Next Step：** 独审C运行源/工具→提交进展；并行修复有明确归属资源与测试工具的推送范围选择，独审后正常push；随后/期间按现配置串行真实摘要、公共读取、同run恢复与缓存，不重复授权。RF/FF两外包独占作者树。
+
+---
+
 ## DU11 工程接线已提交，正常推送修复中 — 2026-10-17（当前）
 
 共享引擎生产接线提交d52a6562，正式CN/HK单账户选材与独立工程B审查通过，真实模型摘要/缓存恢复C仍OPEN。两张RF/FF卡已派发，作者工区不改。

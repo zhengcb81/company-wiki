@@ -1,0 +1,168 @@
+{
+  "schema_version": "du11-source-facts-c-engineering-independent-review/1",
+  "reviewer": "/root/du10_et_reception_review",
+  "reviewed_at": "2026-10-17T23:07:07.631059+00:00",
+  "workdir": "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-source-facts\\company-wiki",
+  "baseline_head": "fcee443ef5cb5a7d67a35741a7de46d791f3328c",
+  "verdict": "PASS_ENGINEERING_B_WITH_DECLARED_TEST_RESIDUALS_C_OPEN",
+  "confirmed_unresolved_code_findings": [],
+  "file_sha256": {
+    "src/company_wiki/source_catalog/resolver.py": "8ba9cf6c33f5fab2386b504f9596a9f911c2921aef619467c2bd3a1ad54e41c0",
+    "src/company_wiki/source_catalog/source_reader.py": "e4097902220bce7bf33bd0dbccce7863bcada40ceb103aeed9412f6e27f0a09d",
+    "tests/unit/test_source_fact_entity_projection.py": "324e608e91a19bf827f279d45701ae9801a9b276b03c9246bcbe5dd79972a049",
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": "6742433dacb5abbe5e7cd5b6fc4dd9a4096e8ec15efecd1991e060ce52776cb1",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "5dc613ebbd3b22aa16d7cf2addf7b2404db2cb1b26a804dc181b7d938d6cd9ca",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "c62143bc0dd25e1a8819b53bbbd9e0e4a8524f7744b196c0725794fce16acf4d",
+    "tests/test_phase_c_readonly_source.py": "1649d4ccde24d7b8750f75d2c923eb49b4e8eabe66e03af65320fdcdf777974c",
+    "tests/test_phase_c_activation_recovery.py": "db183c15e49ccb288e5e74b05016e4edf721fa77bbbe60ed4e5801fae8210997"
+  },
+  "scope": "Source-facts issuer matching and SourceHandle projection at both public ports; registered-readonly source-facts tool; optional activation-pending same-run recovery. No production-provider/content C acceptance.",
+  "source_owner_review": {
+    "unified_current_projection": "Both resolve and query project visible source metadata once per candidate before calling the shared _entity_matches owner. Metadata is passed through; no second assertion read is introduced by the entity gate. SourceHandle receives that same metadata.",
+    "identity_boundary": "A current display_name/canonical identity or explicit entity unknown from source-facts supersedes directory entities, legacy company_name and ticker. A wrong directory/ticker is not unioned into authoritative aliases. Current security_id/display/canonical values and existing security_master issuer aliases remain available; no new identity registry/fuzzy match.",
+    "unknown_and_visibility": "Explicit unknown entity still prevents directory fallback; shadow/candidate facts remain invisible under original owner. Absent visible authority preserves legacy matching. Existing canonical/display conflict handling, reader policy/epoch/cohort/SHA rules were not loosened.",
+    "handle_boundary": "Authoritative handle exports only an existing nonempty canonical ID. Known display with unknown canonical yields tuple()/JSON[] rather than fabricated ticker/name IDs. Original legacy IDs retained when no authority. Existing public SourceHandle contract permits empty list.",
+    "preserved_owners": [
+      "actual bytes/root/config/source status and public SHA validation",
+      "market/security and fiscal/form/period/as-of checks",
+      "ambiguity and source-version qualification",
+      "same issuer alias index and normalization"
+    ],
+    "test_quality": "New30-case source fixture is a real registered immutable synthetic file with public facts/describe/open; correct issuer positive makes wrong scope/date controls meaningful. Wrong legacy sidecar ticker and handle export leaks are covered; genuine alias, explicit unknown, invisible facts, one metadata-load, existing canonical ID tests retained.",
+    "canonical_fixture_review": "Correcting the sole canonical case to existing sidecar_filing_v1 is justified: original legacy scanner does not expose newly handwritten canonical fields. Revised case first asserts actual public describe canonical ID, then source facts and handle behavior. Runtime bytes equal101PASS run; no assertion was waived."
+  },
+  "tool_owner_review": {
+    "source_facts": "Optional facts require actual originalSHA match, register exactly one original group, resolve its real document/source identifiers from public catalog query/ref, then call existing record_source_facts in owned catalog. Existing query/open/byteSHA and identity/period/as-of remain. No synthesized HTTP receipt, sidecar overwrite or production DB write.",
+    "metadata_provenance": "Metadata parentSHA matched. OnlyHK gains registered_source_facts; every fact equals pre-existing verified_official_descriptor, all evidence values and localSHA bind same original. CN/US unchanged; remoteSHA remainsNOT_CHECKED and historical downloadURL UNKNOWN. Reviewer verifies provenance continuity, not a fresh remote/original-content audit.",
+    "activation_recovery": "Test-side activation seam only in observer child with explicit flag; normal paid output/outbox persisted before hold. Native charges appended/fsync before same command/request/run/workdir resumes in fresh process with POST forbidden. Attempt/request/response IDs, known charge fields and final generation compared unchanged; public replay and normal same/crossrun continue through existing owner.",
+    "no_second_client_or_store": true,
+    "loopback_evidence": {
+      "receipt_path": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du11-activation-final\\test_actual_paid_outbox_resume0\\recovery\\receipt.json",
+      "receipt_sha256": "609b9ebff75d2a3ba5e012ef5e0d7adee838d20f075ed995cfac700531b8d678",
+      "activation": {
+        "status": "PASS",
+        "held_status": "activation_pending",
+        "same_run_id": "phaseC-090-a86e6ab3a1be",
+        "native_attempts_before": 1,
+        "native_attempts_after": 1,
+        "charged_tokens_before": 80,
+        "charged_tokens_after": 80,
+        "charged_micro_usd_before": 110,
+        "charged_micro_usd_after": 110,
+        "POSTs_before": 1,
+        "POSTs_after": 1,
+        "paid_generation_unchanged": true,
+        "response_identity_unchanged": true
+      },
+      "model_post_attempts": 1,
+      "same_run_zero_POST": true,
+      "cross_run_zero_POST": true,
+      "protected_unchanged": true,
+      "sentinel_unchanged": true,
+      "temporary_lake_removed": true,
+      "qualification": "Loopback exercises real production attempt/outbox/token/cost machinery, but is not a real supplier bill or paid semantic C acceptance."
+    }
+  },
+  "evidence_reuse": {
+    "source_tests": "Actual final concentrated XML102cases=101PASS/1canonical-fixtureFAIL; corrected canonical singleton1PASS with exact same2runtime SHA. Jointly102distinct cases green, not one final full102 rerun. Reviewer reused receipts, did not rerun.",
+    "tool_tests": "Existing source-tool XML22PASS81.767s; activation author reports singletonPASS31.04s and actual loopback receipt inspected. No broad re-test.",
+    "xml_receipts": {
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\du11\\source-facts-red\\final-concentrated-junit.xml": {
+        "sha256": "73d335c81df432db0dc764973db3b33f15647a1d4254764d06544f6ba1b9ad2f",
+        "actual_suites": [
+          {
+            "name": "pytest",
+            "errors": "0",
+            "failures": "1",
+            "skipped": "0",
+            "tests": "102",
+            "time": "28.738",
+            "timestamp": "2026-10-18T00:02:39.744959+01:00",
+            "hostname": "DESKTOP-156V213"
+          }
+        ]
+      },
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\du11\\source-facts-red\\canonical-corrected-junit.xml": {
+        "sha256": "8ddf937334c57155fc3cceb6f3e696f26feb8dcd2c14d1e6cb44ea9c7ba7e3a2",
+        "actual_suites": [
+          {
+            "name": "pytest",
+            "errors": "0",
+            "failures": "0",
+            "skipped": "0",
+            "tests": "1",
+            "time": "1.837",
+            "timestamp": "2026-10-18T00:04:19.907661+01:00",
+            "hostname": "DESKTOP-156V213"
+          }
+        ]
+      },
+      "C:\\Users\\郑曾波\\.codex\\worktrees\\du11-source-facts\\company-wiki\\.planning\\du11-source-facts-tool.xml": {
+        "sha256": "793540c6c43adb9c34e52379325854d4e26f84db9715b668076690068632eaff",
+        "actual_suites": [
+          {
+            "name": "pytest",
+            "errors": "0",
+            "failures": "0",
+            "skipped": "0",
+            "tests": "22",
+            "time": "81.767",
+            "timestamp": "2026-10-17T23:59:35.631480+01:00",
+            "hostname": "DESKTOP-156V213"
+          }
+        ]
+      }
+    },
+    "handoff_sha256": "bc508a2e2e7f27ba319fb3774be069a7ae19866525579df7ca7c9c8ba83295f1",
+    "final_concentrated_receipt_sha256": "37bc2b2baf35792cc4b929c56570c43c6e791317c6b69d143af271838a8c108e",
+    "canonical_corrected_receipt_sha256": "ae86995cbcfc0b555c784375cce6d4ba790bf29332f775d40409cec919be3634"
+  },
+  "real_preflight_inspected": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\du11\\registered-preflight-v2.json",
+    "sha256": "10d9c4eaeb0df0f02e347b58849566283075bb6bfa166a208e4c2ca0fb2c1aa8",
+    "result": "ROOT-recorded3realSourceRef/formal preparation:CNzh/HKmixed/USen;0model/rawcopy;originals/config/productionDB unchanged;all3ownedTemps removed. This is inspected receipt, not reviewer re-reading real sources."
+  },
+  "metadata_binding": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\du11\\metadata-registered-source-facts-20261017.json",
+    "sha256": "d30bd1204e904c935a695d825888e819bc60d863fa3e48a68f70f4fda7a85ae5",
+    "parent_sha256": "236159359aebf05071d1fdb31c6631d0d02bbb7fddb572d8f8d8393b9aa55e87"
+  },
+  "cleanup": {
+    "status": "NOT_CLEAN_FOR_TWO_PRIOR_PYTEST_DIRS",
+    "residuals": [
+      {
+        "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261017-225950-881449b1",
+        "exists": true,
+        "files": 15,
+        "bytes": 1490944.0,
+        "cleanup_status": "platform_rejected_not_retried"
+      },
+      {
+        "path": "C:/Users/郑曾波/AppData/Local/Temp/cw-pytest-basetemp/20261017-230239-142e30d3",
+        "exists": true,
+        "files": 15,
+        "bytes": 1490944.0,
+        "cleanup_status": "platform_rejected_not_retried"
+      }
+    ],
+    "total_files": 30,
+    "total_bytes": 2981888.0,
+    "reason": "Platform rejected removal; no retry/alternate-channel removal attempted by reviewer. Known bounded synthetic residuals are separate from production safety and functional engineering acceptance.",
+    "must_not_claim": "No claim that every test directory was restored/removed. Actual3-source preflight and loopback owned lakes separately show successful cleanup."
+  },
+  "reviewer_execution": {
+    "new_tests": 0,
+    "network_provider_model_calls": 0,
+    "real_document_reads": 0,
+    "runtime_or_author_tree_writes": 0,
+    "cleanup_retries": 0,
+    "report_writes_only": true
+  },
+  "remaining_C": [
+    "Configured real supplier original-language summaries under existing mother budget and ledger",
+    "Independent final claim-level meaning/required-output coverage review",
+    "Actual paid activation recovery/public reads/cache same/crossrun and consumer checks for real acceptance samples",
+    "Blind sample/holdout validation and exact eventual remote CI check"
+  ],
+  "decision": "ROOT may receive and commit these frozen engineering bytes with the cleanup limitation recorded. No new approval mechanism or small-node review gate. Any actual code change after this manifest requires limited delta review, not a whole repeated audit."
+}

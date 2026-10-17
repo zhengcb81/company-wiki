@@ -1,0 +1,87 @@
+{
+  "receipts": [
+    {
+      "sample": "cn-h1",
+      "status": "REGISTERED_AND_FORMAL_PREPARED",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "byte_size": 3149962,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "source_fact_registration": null,
+      "declared_language": "zh-CN",
+      "formal_language": "zh",
+      "descriptor_diagnostics": {
+        "language": {
+          "expected": "zh",
+          "observed": "zh-CN"
+        }
+      },
+      "raw_copies": 0,
+      "model_calls": 0,
+      "original_unchanged": true,
+      "owned_temp_removed": true
+    },
+    {
+      "sample": "hk-annual",
+      "status": "REGISTERED_AND_FORMAL_PREPARED",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+        "source_id": "urn:company-wiki:source:sha256:07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+        "content_sha256": "07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+        "byte_size": 2230253,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "source_fact_registration": {
+        "status": "recorded",
+        "assertion_id": "sa-b30b21ec71214354ab4b85d949d2c4db",
+        "document_id": "urn:company-wiki:document:sha256:07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf",
+        "source_id": "urn:company-wiki:source:sha256:07f4937e0558fc31189a56236313ad93c1cef4182adb10ebaf4f355acb9bf1cf"
+      },
+      "declared_language": null,
+      "formal_language": "mixed",
+      "descriptor_diagnostics": {
+        "language": {
+          "expected": "mixed",
+          "observed": null
+        }
+      },
+      "raw_copies": 0,
+      "model_calls": 0,
+      "original_unchanged": true,
+      "owned_temp_removed": true
+    },
+    {
+      "sample": "us-10k",
+      "status": "REGISTERED_AND_FORMAL_PREPARED",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "source_fact_registration": null,
+      "declared_language": null,
+      "formal_language": "en",
+      "descriptor_diagnostics": {
+        "language": {
+          "expected": "en",
+          "observed": null
+        }
+      },
+      "raw_copies": 0,
+      "model_calls": 0,
+      "original_unchanged": true,
+      "owned_temp_removed": true
+    }
+  ],
+  "source_config_and_production_database_unchanged": true,
+  "model_calls": 0,
+  "network_calls": 0
+}

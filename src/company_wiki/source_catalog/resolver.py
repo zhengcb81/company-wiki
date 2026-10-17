@@ -1231,6 +1231,16 @@ def _load_issuer_index(
     }
 
 
+def _has_source_entity_authority(metadata: dict[str, Any]) -> bool:
+    """Known source identity or its explicit unknown supersedes directory hints."""
+    evidence = metadata.get("evidence")
+    patch = evidence.get("source_fact_patch") if isinstance(evidence, dict) else None
+    return bool(
+        metadata.get("canonical_entity_id") or metadata.get("display_name")
+        or (isinstance(patch, dict) and "entity" in patch)
+    )
+
+
 class SourceResolver:
     """Resolve existing catalog sources without performing acquisition side effects."""
 
@@ -1316,7 +1326,16 @@ class SourceResolver:
 
         for document in candidates:
             document = observe_metadata(document.get("metadata")).project_document(document)
-            if not self._entity_matches(request.entity, document):
+            metadata = _source_metadata(
+                document,
+                store=self.catalog.reader,
+                observer=self.observer,
+                reader=self.reader,
+                current_epoch=self.current_epoch,
+                active_cohorts=self.active_cohorts,
+                legacy_bridge_allowed=self.legacy_bridge_allowed,
+            )
+            if not self._entity_matches(request.entity, document, metadata=metadata):
                 entity_gate_rejected += 1
                 continue
             if document["document_kind"] != request.document_kind:
@@ -1330,15 +1349,6 @@ class SourceResolver:
                     f"{document['source_status']}"
                 )
                 continue
-            metadata = _source_metadata(
-                document,
-                store=self.catalog.reader,
-                observer=self.observer,
-                reader=self.reader,
-                current_epoch=self.current_epoch,
-                active_cohorts=self.active_cohorts,
-                legacy_bridge_allowed=self.legacy_bridge_allowed,
-            )
             if "published_date" in metadata:
                 document["published_date"] = metadata["published_date"]
             # --- identity-aware market/security_id filtering ---
@@ -1602,7 +1612,9 @@ class SourceResolver:
             return {}, {}
         return _load_issuer_index(str(catalog_dir))
 
-    def _entity_matches(self, entity: str, document: dict[str, Any]) -> bool:
+    def _entity_matches(
+        self, entity: str, document: dict[str, Any], *, metadata: dict[str, Any] | None = None,
+    ) -> bool:
         # Phase 14 R8 fix: the entity gate must use the SAME canonical
         # normalization as the identity layer (NFKC + casefold + alnum-only —
         # security_identity._normalize_text).  Plain casefold left "Apple Inc."
@@ -1612,25 +1624,39 @@ class SourceResolver:
         # company-name-vs-ticker still conflicts).
         from .security_identity import _normalize_text
 
-        wanted = _normalize_text(entity)
-        doc_values = {
-            _normalize_text(str(item.get("entity_id") or ""))
-            for item in document["entities"]
-        } | {
-            _normalize_text(str(item.get("name") or ""))
-            for item in document["entities"]
-        }
-        metadata = _source_metadata(
-            document, legacy_bridge_allowed=self.legacy_bridge_allowed
-        )
-        if set(metadata.get("_conflicted_fields", ())) & {"canonical_entity_id", "display_name", "company_name"}:
+        if metadata is None:
+            metadata = _source_metadata(
+                document, store=self.catalog.reader, reader=self.reader,
+                current_epoch=self.current_epoch, active_cohorts=self.active_cohorts,
+                legacy_bridge_allowed=self.legacy_bridge_allowed,
+            )
+        authoritative = _has_source_entity_authority(metadata)
+        identity_fields = {"canonical_entity_id", "display_name"}
+        if not authoritative:
+            identity_fields.add("company_name")
+        if set(metadata.get("_conflicted_fields", ())) & identity_fields:
             return False
+        wanted = _normalize_text(entity)
+        # Directory entities locate legacy originals. Once source facts identify
+        # their issuer (including an explicit unknown), those hints cannot become
+        # aliases for a different issuer. Both query and resolve pass this same
+        # current visible metadata projection, avoiding a second assertion read.
+        doc_values = set()
+        if not authoritative:
+            doc_values.update(
+                _normalize_text(str(item.get(key) or ""))
+                for item in document["entities"] for key in ("entity_id", "name")
+            )
+            if metadata.get("company_name"):
+                doc_values.add(_normalize_text(str(metadata["company_name"])))
+            if metadata.get("ticker"):
+                doc_values.add(_normalize_text(str(metadata["ticker"])))
         doc_values.update(
             _normalize_text(str(value))
             for value in (
-                metadata.get("ticker"),
                 metadata.get("security_id"),
-                metadata.get("company_name"),
+                metadata.get("canonical_entity_id"),
+                metadata.get("display_name"),
             )
             if value
         )
@@ -1839,13 +1865,19 @@ class SourceResolver:
         collector_version = str(manifest.get("collector_version") or "")
         if not retrieved_at or not collector_name or not collector_version:
             missing.append("capture_trace")
+        entity_ids = tuple(sorted(item["entity_id"] for item in document["entities"]))
+        if _has_source_entity_authority(metadata):
+            canonical_entity_id = metadata.get("canonical_entity_id")
+            entity_ids = (
+                (canonical_entity_id,)
+                if isinstance(canonical_entity_id, str) and canonical_entity_id.strip()
+                else ()
+            )
         built = SourceHandle(
             schema_version=SOURCE_RESOLVER_SCHEMA_VERSION,
             document_id=document["document_id"],
             source_id=source_id,
-            entity_ids=tuple(
-                sorted(item["entity_id"] for item in document["entities"])
-            ),
+            entity_ids=entity_ids,
             title=document["title"],
             source_type=document["source_type"],
             document_kind=document["document_kind"],

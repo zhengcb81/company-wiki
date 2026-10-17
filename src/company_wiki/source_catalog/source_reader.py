@@ -299,8 +299,6 @@ class SourceVersionReader:
             request, include_unknown_publication=True
         ):
             document = observe_metadata(document.get("metadata")).project_document(document)
-            if not resolver._entity_matches(request.entity, document):
-                continue
             metadata = _source_metadata(
                 document, store=self.catalog.reader,
                 reader=resolver.reader,
@@ -308,6 +306,8 @@ class SourceVersionReader:
                 active_cohorts=resolver.active_cohorts,
                 legacy_bridge_allowed=resolver.legacy_bridge_allowed,
             )
+            if not resolver._entity_matches(request.entity, document, metadata=metadata):
+                continue
             if "published_date" in metadata:
                 document["published_date"] = metadata["published_date"]
             if resolver._identity_matches(request, metadata) != "match":
