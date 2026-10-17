@@ -1,0 +1,73 @@
+{
+ "schema_version": "du10-goldset-repair-review/1",
+ "reviewed_at": "2026-10-17T18:30:00+00:00",
+ "head_commit": "45d7f3635e1c4be9e6625e4c362c855a5d5df285",
+ "reviewer": "automated-agent",
+ "scope": "verify 5 identified issues (I1-I4, O1)",
+ "pre_flight": {
+  "head_match": "PASS",
+  "pytest_result": "58 passed, 0 failed",
+  "anchor_verify_result": "11/11 PASS, 0 unbound",
+  "git_status": "clean (only receipt files untracked)"
+ },
+ "fixes": [
+  {
+   "id": "I1",
+   "case_id": "du10gs-hk-ipo-baba",
+   "field": "facts[global-annual-active-consumers].must_preserve[2]",
+   "issue": "must_preserve[2] misstated scope as including Ant Group dedup",
+   "fix": "Changed to global口径=中国消费业务7.30亿+国际1.30亿之和（不含蚂蚁金服；蚂蚁金服并入的是9.60亿中国用户口径）",
+   "source_file": "companies/阿里巴巴/raw/prospectus/阿里巴巴招股说明书2019.pdf",
+   "source_page": 19,
+   "source_evidence": "p19: 全球年度活跃消费者 8.60亿 = 中国消费业务 7.30亿 + 国际 1.30亿; 注(1): 中国用户9.60亿 = 中国消费业务+蚂蚁金服",
+   "verdict": "PASS"
+  },
+  {
+   "id": "I2",
+   "case_id": "du10gs-cn-ir-amec-minutes",
+   "field": "allowed_summary[2]",
+   "issue": "XD RIE and YDRIE timelines conflated",
+   "fix": "Separated: XD RIE=将很快完成开发进入市场, YDRIE=预计一年左右进入市场",
+   "source_file": "companies/中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220416.pdf",
+   "source_page": 3,
+   "source_evidence": "p3: XD RIE 就很快完成开发进入市场; YDRIE 一年左右即将进入市场",
+   "verdict": "PASS"
+  },
+  {
+   "id": "I3",
+   "case_id": "du10gs-call-miniso-q4-2024",
+   "field": "summary_proposition + summary_guidance.must_preserve[0]",
+   "issue": "Speaker labeled as 董事长 instead of correct title",
+   "fix": "Changed to 创始人兼首席执行官 (Founder and CEO)",
+   "source_file": "名创优品/December Quarter and Full Year of 2024 Transcript.pdf",
+   "source_page": 1,
+   "source_evidence": "p1: 参加今天会议的有我们的创始人兼首席执行官叶国富先生",
+   "verdict": "PASS"
+  },
+  {
+   "id": "I4",
+   "case_id": "du10gs-us-10q-vrsk",
+   "field": "summary_guidance.boundary[0]",
+   "issue": "Boundary parenthetical about Underwriting+Claims=82.6m lacked source support",
+   "fix": "Anchored to disaggregation table: Underwriting 52.1M + Claims 30.5M = Total revenues 82.6M",
+   "source_file": "VRSK/filings/fil_0001437749-26-013729/vrsk20260331_10q.htm",
+   "source_page": null,
+   "source_evidence": "Disaggregation table: Underwriting 52.1M + Claims 30.5M = Total revenues 82.6M",
+   "verdict": "PASS"
+  },
+  {
+   "id": "O1",
+   "case_id": "du10gs-cn-q3-dfc",
+   "field": "facts[q3-submarine-hv-cable-revenue].reason",
+   "issue": "Reason lacked observation that single-quarter total revenue < category revenue",
+   "fix": "Added internal tension: p1 单季总收入约30.66亿 < p3 类别收入35.49亿",
+   "source_file": "companies/东方电缆/raw/financial_reports/东方电缆：东方电缆2025年第三季度报告.pdf",
+   "source_page": "1,3",
+   "source_evidence": "p1: 营业收入 3,065,970,750.30元 (30.66亿); p3: 海底电缆与高压电缆 35.49亿元",
+   "verdict": "PASS"
+  }
+ ],
+ "new_issues": [],
+ "overall_verdict": "PASS",
+ "overall_notes": "All 5 identified issues correctly fixed. No new issues found. Goldset ready for use."
+}
