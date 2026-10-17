@@ -1,3 +1,11 @@
+## ROOT 接收更新 — 2026-10-17
+
+三张卡均已交付并完成ROOT独立复审/修复，作者工区保持只读。状态与发布见 [最终接收](../../review/du10_reception.md)。FF41 C项关闭；ET保真修复入main；goldset为已看过回归集，不能当盲holdout。下方READY/目录未建仅为派发时历史。
+
+---
+
+以下为历史记录（状态以顶部 ROOT 更新为准）。
+
 # DU10 并行施工包 — 2026-10-17
 
 状态：`READY_FOR_DISPATCH`。三个施工包分别在 filing-fetch、company-wiki、earnings-transcripts 的独立工作目录内进行；没有共享源码文件或共享测试目录。CWP 主线生产接线仍由 ROOT 负责。

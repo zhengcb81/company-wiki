@@ -13,17 +13,11 @@ Conventions reused from the existing DU lanes:
 from __future__ import annotations
 
 import json
-import os
 import re
-import warnings
 from pathlib import Path
 
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore")
-    from bs4 import BeautifulSoup  # noqa: F401  (SEC filings are XML-flavored HTML)
-
-CASE_SCHEMA = "du10-summary-goldset-case/1"
-INDEX_SCHEMA = "du10-summary-goldset-index/1"
+CASE_SCHEMA = "du10-summary-goldset-case/2"
+INDEX_SCHEMA = "du10-summary-goldset-index/2"
 
 MARKETS = {"CN", "HK", "US"}
 DOC_TYPES = {
@@ -51,11 +45,6 @@ ROLE = {
     "operator",
 }
 # configured carrier roots; mapping mirrors config/source_catalog.yaml (read-only)
-CARRIER_ROOTS = {
-    "company_raw": ("companies",),
-    "dropbox_stock": ("Dropbox", "Stock"),
-    "dayu_portfolio": ("dayu-agent", "workspace", "portfolio"),
-}
 QUOTE_BUDGET_PER_DOCUMENT = 8 * 1024  # du-gold/1: excerpts per document <= 8KiB
 
 
@@ -91,6 +80,7 @@ def iter_anchors(case: dict):
     for trap in case.get("misread_traps", []):
         if trap.get("exact_quote"):
             yield trap.get("kind", "trap"), "trap", {
+                **{k: trap[k] for k in ("unit_id", "source_locator") if k in trap},
                 "page": trap.get("page"),
                 "exact_quote": trap["exact_quote"],
                 "location_kind": trap.get("location_kind", "page" if trap.get("page") else "document"),
@@ -101,56 +91,9 @@ def quote_budget_by_document(cases: list[dict]) -> dict[str, int]:
     """Normalized quote characters per unique source document (du-gold budget)."""
     budget: dict[str, int] = {}
     for case in cases:
-        sha = case["source_ref"]["source_sha256"]
+        sha = case["source_ref"]["content_sha256"]
         total = 0
         for _, _, a in iter_anchors(case):
             total += len(norm(a["exact_quote"]))
         budget[sha] = budget.get(sha, 0) + total
     return budget
-
-
-def resolve_binding(case: dict, bindings: dict[str, str]) -> str:
-    """Resolve a case to its local original via the uncommitted bindings file.
-
-    Returns the absolute path or raises KeyError. The binding must agree with
-    the case's carrier root so the read-only resolution stays config-faithful.
-    """
-    cid = case["case_id"]
-    if cid not in bindings:
-        raise KeyError(cid)
-    path = os.path.abspath(bindings[cid])
-    root_parts = CARRIER_ROOTS[case["source_ref"]["carrier_root"]]
-    lowered = path.replace("\\", "/").lower()
-    marker = "/" + "/".join(root_parts).lower() + "/"
-    if marker not in lowered:
-        raise ValueError(f"binding for {cid} does not live under carrier root {root_parts}")
-    return path
-
-
-def sha256_file(path: str) -> str:
-    import hashlib
-
-    h = hashlib.sha256()
-    with open(path, "rb") as f:
-        for chunk in iter(lambda: f.read(1 << 20), b""):
-            h.update(chunk)
-    return h.hexdigest()
-
-
-def page_text(path: str, page: int | None, carrier: str) -> str:
-    """Read-only extraction. PDF: PyMuPDF page text (1-based physical page) or
-    whole document when page is None. HTML: de-tagged text."""
-    if carrier == ".pdf":
-        import fitz
-
-        doc = fitz.open(path)
-        try:
-            if page is None:
-                return "\n".join(doc[i].get_text("text") for i in range(doc.page_count))
-            return doc[page - 1].get_text("text")
-        finally:
-            doc.close()
-    from bs4 import BeautifulSoup
-
-    raw = Path(path).read_bytes()
-    return BeautifulSoup(raw, "lxml").get_text("\n")

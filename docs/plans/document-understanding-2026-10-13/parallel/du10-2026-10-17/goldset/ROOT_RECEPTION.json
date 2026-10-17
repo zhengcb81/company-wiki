@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "schema_version": "du10-root-reception/1",
+  "case_schema": "du10-summary-goldset-case/2",
+  "test_passed": 71,
+  "real_source_replay_passed": 11,
+  "independent_review": "PASS",
+  "unresolved": [],
+  "corpus_use": "seen_regression_not_blind_holdout",
+  "report": "ROOT_RECEPTION.md"
+}

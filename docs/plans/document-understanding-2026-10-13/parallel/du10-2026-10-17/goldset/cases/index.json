@@ -1,5 +1,5 @@
 {
- "schema_version": "du10-summary-goldset-index/1",
+ "schema_version": "du10-summary-goldset-index/2",
  "card": "DU10-CWP-SUMMARY-GOLDSET",
  "created": "2026-10-17",
  "case_count": 11,
@@ -39,7 +39,7 @@
    "doc_type": "quarterly_report",
    "narrative_focus": "main_business",
    "source_sha256": "980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
-   "quote_budget_chars_normalized": 124
+   "quote_budget_chars_normalized": 164
   },
   {
    "case_id": "du10gs-cn-ipo-hrjc",
@@ -66,7 +66,7 @@
    "doc_type": "ir_minutes",
    "narrative_focus": "industry_change+new_business",
    "source_sha256": "9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
-   "quote_budget_chars_normalized": 301
+   "quote_budget_chars_normalized": 309
   },
   {
    "case_id": "du10gs-hk-ipo-baba",
@@ -93,7 +93,7 @@
    "doc_type": "call_transcript",
    "narrative_focus": "overseas+management_plan",
    "source_sha256": "dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
-   "quote_budget_chars_normalized": 226
+   "quote_budget_chars_normalized": 240
   },
   {
    "case_id": "du10gs-us-10q-vrsk",
@@ -102,7 +102,7 @@
    "doc_type": "form_10q",
    "narrative_focus": "main_business",
    "source_sha256": "8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
-   "quote_budget_chars_normalized": 456
+   "quote_budget_chars_normalized": 515
   }
  ],
  "coverage_matrix": {

@@ -1,5 +1,5 @@
 {
- "schema_version": "du10-summary-goldset-case/1",
+ "schema_version": "du10-summary-goldset-case/2",
  "case_id": "du10gs-cn-annual-catl-capacity",
  "created": "2026-10-17",
  "market": "CN",
@@ -10,20 +10,16 @@
  "narrative_focus": "project_progress",
  "bound_failure_mode": "planned/actual（在建≠投产）；叙述与财务表同页借数",
  "source_ref": {
-  "carrier_root": "company_raw",
-  "source_id": "宁德时代/raw/financial_reports/宁德时代：2025年年度报告.pdf",
-  "source_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+  "document_id": "urn:company-wiki:document:sha256:c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+  "source_id": "urn:company-wiki:source:sha256:c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+  "content_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+  "byte_size": 2043710,
   "mime_type": "application/pdf",
-  "registered_sidecar": {
-   "market": "CN",
-   "security_id": "300750",
-   "source_title": "宁德时代：2025年年度报告",
-   "published_date": "2026-04-30"
-  }
+  "schema_version": "2.0"
  },
  "summary_proposition": "报告期内公司稳步推进中州基地、济宁基地、福鼎基地、溧阳基地、宜宾基地、匈牙利工厂及印尼电池产业链等项目的建设；锂电池产能772GWh，期末在建产能321GWh。",
  "allowed_summary": [
-  "2025年宁德时代稳步推进中州基地、济宁基地、福鼎基地、溧阳基地、宜宾基地、匈牙利工厂及印尼电池产业链等项目的建设，期末锂电池产能772GWh、在建产能321GWh。"
+  "2025年宁德时代稳步推进中州基地、济宁基地、福鼎基地、溧阳基地、宜宾基地、匈牙利工厂及印尼电池产业链等项目的建设，报告期内锂电池产能772GWh、期末在建产能321GWh。"
  ],
  "summary_guidance": {
   "must_preserve": [
@@ -33,7 +29,7 @@
   ],
   "boundary": [
    "在建/推进中项目不得写成已投产或已贡献产量",
-   "产能（期末存量）不得写成当期产量或销量"
+   "报告期内产能772GWh与期末在建产能321GWh分别按原文期间；产能不得写成当期产量或销量"
   ]
  },
  "facts": [
@@ -55,9 +51,8 @@
    ],
    "must_preserve": [
     "“稳步推进……建设”",
-    "772GWh 为产能",
-    "321GWh 为在建产能",
-    "期末时点"
+    "报告期内产能772GWh",
+    "期末在建产能321GWh"
    ],
    "must_not_assert": [
     "匈牙利工厂或印尼项目已投产",
@@ -65,7 +60,7 @@
     "321GWh 为已投产产能",
     "772GWh 为2025年产量"
    ],
-   "reason": "产能叙述全部是进行时/存量口径；“推进建设”写成“建成投产”即 planned/actual 错引。"
+   "reason": "报告期内产能和期末在建产能分别保留原文期间；建设进展不代表已建成、投产或已贡献产量。"
   },
   {
    "id": "revenue-table-same-page",
@@ -112,5 +107,16 @@
  "prior_use": "同上（同一原件第二个case）",
  "notes": "与 du10gs-cn-annual-catl-industry 共用同一原件（不同命题）；新增证据为项目进度+混表页。",
  "quote_budget_chars_normalized": 134,
- "bound_failure_mode_check": "planned/actual（在建≠投产）；叙述与财务表同页借数"
+ "bound_failure_mode_check": "planned/actual（在建≠投产）；叙述与财务表同页借数",
+ "source_binding": {
+  "root_id": "company_raw",
+  "relative_path": "宁德时代/raw/financial_reports/宁德时代：2025年年度报告.pdf",
+  "expected_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+  "observed_sidecar": {
+   "market": "CN",
+   "security_id": "300750",
+   "source_title": "宁德时代：2025年年度报告",
+   "published_date": "2026-04-30"
+  }
+ }
 }

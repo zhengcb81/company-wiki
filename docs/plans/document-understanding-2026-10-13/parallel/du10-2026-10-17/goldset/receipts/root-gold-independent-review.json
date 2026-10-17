@@ -1,0 +1,497 @@
+{
+  "schema_version": "du10-root-independent-review/1",
+  "reviewer": "/root/du10_gold_reception_review",
+  "reviewed_at": "2026-10-17T21:29:54.532307+00:00",
+  "author_head": "faf5e58019314fd0b5dce0f6d00b44587a81ff28",
+  "result": "NEEDS_FIX",
+  "findings": [
+    {
+      "id": "GS-R1",
+      "priority": "P1",
+      "case_id": "du10gs-us-10q-vrsk",
+      "issue": "Gold incorrectly treats insurance revenues as a strict subset of total revenues, forbids a potentially correct total-revenue subscription share, and labels the scope difference a known trap.",
+      "source_evidence": "Original explicitly says one operating segment and one reportable segment, Insurance. Insurance Underwriting $552.1m + Claims $230.5m = Total revenues $782.6m. MD&A category table repeats Total Insurance $782.6m.",
+      "affected_fields": [
+        "bound_failure_mode",
+        "summary_guidance.must_preserve",
+        "summary_guidance.boundary",
+        "facts[insurance-subscription-share].must_not_assert/reason",
+        "facts[transactional-advisory-share].must_not_assert",
+        "misread_traps[scope_insurance_vs_total]"
+      ],
+      "root_cause": "Required literal scope preservation was elevated into an unproven strict subset assumption; the independent review did not reconcile business-segment note and revenue tables.",
+      "fix": "Preserve wording insurance revenue and approximately, but remove strict-subset assertion and blanket prohibition; add evidence for one Insurance segment and insurance total. Replace trap with category-vs-total or subscription-share-vs-amount distinction.",
+      "receipt_only_issue": "node_c_repair_review json/md says 52.1+30.5=82.6m; these are incorrect historical review numbers. Actual case total $782.6m is correct. Retain old receipt as historical and record correction, never treat it as final PASS."
+    },
+    {
+      "id": "GS-R2",
+      "priority": "P1",
+      "case_id": "du10gs-hk-ipo-baba",
+      "issue": "Corrected fact conflicts with uncorrected summary_guidance.boundary claiming 8.60亿 includes Ant Chinese users.",
+      "source_evidence": "PDF p19: global active consumers 8.60亿 = China consumer business 7.30亿 + international 1.30亿; China digital economy users 9.60亿 combines China consumer business and Ant, note (1).",
+      "affected_fields": [
+        "summary_guidance.boundary[1]"
+      ],
+      "root_cause": "Repair changed one fact branch while leaving duplicated boundary prose contradictory.",
+      "fix": "Align every proposition/guidance/fact branch to original 8.60 vs 9.60 definitions; keep periods, international dedup and 2019 FY cloud values."
+    },
+    {
+      "id": "GS-R3",
+      "priority": "P1",
+      "case_id": "du10gs-cn-q3-dfc",
+      "issue": "Allowed summary presents internally contradictory 35.49亿元 category revenue as a confident Q3 actual and reason invents an explanation that it includes other revenue.",
+      "source_evidence": "PDF p1: company Q3 total 3,065,970,750.30 yuan (~30.66亿); p2 explicitly defines 本报告期 as three-month Q3; p3 says 本报告期海底电缆与高压电缆 35.49亿. Original itself inconsistent; no explanation in source.",
+      "affected_fields": [
+        "summary_proposition",
+        "allowed_summary",
+        "summary_guidance",
+        "facts[q3-submarine-hv-cable-revenue].reason/must_preserve/target_kind"
+      ],
+      "root_cause": "Literal quote replay was treated as economic truth, and a numeric reconciliation failure was explained through unsupported inference.",
+      "fix": "Represent this as source inconsistency: attribute p3 figure as original statement with conflict to p1, mark period/scope unresolved, prohibit confident standalone Q3 category assertion and invented explanation. Do not silently rewrite to YTD or “correct” original. This is useful real holdout evidence."
+    },
+    {
+      "id": "GS-R4",
+      "priority": "P2",
+      "case_id": "du10gs-call-miniso-q4-2024",
+      "issue": "Repair report claims title repaired, but proposition still labels speaker 董事长; guidance says 招股书称创始人兼首席执行官 although source is this call.",
+      "source_evidence": "PDF p1 operator introduces 创始人兼首席执行官叶国富; p3 heading 叶董讲稿. “董事长” inference may be externally true but not the direct title from this self-contained source.",
+      "affected_fields": [
+        "summary_proposition",
+        "summary_guidance.must_preserve[0]"
+      ],
+      "root_cause": "Partial textual fix and incorrect document attribution; reviewer did not re-read all final fields.",
+      "fix": "Use source explicit 创始人兼首席执行官 or neutral 叶国富; say 本电话会开场而非招股书. Add p1 role anchor if required role remains enforced."
+    },
+    {
+      "id": "GS-R5",
+      "priority": "P2",
+      "case_id": "du10gs-cn-ir-amec-minutes",
+      "issue": "21.81% must_preserve omits that CAGR concerns plasma etching equipment, attaching it to general semiconductor-equipment market-size fact. Proposition still groups XD RIE and YDRIE as both expected about one year although allowed_summary was fixed.",
+      "source_evidence": "PDF p2: 等离子体刻蚀设备 ... 2019-2022年平均年增长率21.81%（2022年是预测数据）. PDF p3: XD RIE 很快完成开发进入市场; YDRIE 一年左右进入市场.",
+      "affected_fields": [
+        "summary_proposition",
+        "facts[market-size-2022-forecast].must_preserve[2]",
+        "facts[xdrie-ydrie-in-development].must_preserve[1]"
+      ],
+      "root_cause": "Adjacent industry and product facts conflated; repair edited allowed_summary but did not propagate semantic distinction throughout schema.",
+      "fix": "Bind 21.81% explicitly to plasma etching or move into separate factual unit with same anchor; distinguish XD RIE soon vs YDRIE about a year in every summary/guidance field."
+    },
+    {
+      "id": "GS-R6",
+      "priority": "P2",
+      "case_id": "du10gs-cn-annual-catl-capacity",
+      "issue": "Allowed summary and guidance redefine 772GWh as period-end capacity; original says 报告期内产能772GWh and only 321GWh is explicitly period-end construction capacity.",
+      "source_evidence": "PDF p24 exact: 报告期内公司锂电池产能772GWh，期末在建产能321GWh.",
+      "affected_fields": [
+        "allowed_summary[0]",
+        "summary_guidance.boundary[1]",
+        "facts[capacity-projects-under-construction].must_preserve/reason"
+      ],
+      "root_cause": "Period and stock interpretation added beyond exact text.",
+      "fix": "Retain 报告期内772GWh vs 期末在建321GWh; do not assert period-end for both without separate source support. Preserve construction-not-operating distinction."
+    },
+    {
+      "id": "GS-R7",
+      "priority": "P1",
+      "case_id": "all",
+      "issue": "No actual CWP read-only SourceRef/SourceExport replay exists in submitted verifier or reviewer receipts. Local binding is raw path plus substring marker, SHA, fitz/BeautifulSoup.",
+      "source_evidence": "tests/_support.py resolve_binding os.path.abspath + contains /companies/ etc, page_text uses fitz.open(path)/Path.read_bytes; verify_anchors only calls these. No configured root resolver, CWP SourceRef read, or evidence open; case source_id never participates in resolution.",
+      "root_cause": "SourceRef-shaped metadata and raw-file anchor integrity were conflated with integration-contract validation.",
+      "fix": "Add a bounded ROOT-owned or goldset-only existing CWP read-interface replay for each SourceRef and locator. Confirm configured-root/current source identity + SHA and required read operation. Keep raw verifier as separate anchor integrity evidence, not SourceRef contract PASS. Unregistered roots must use existing scan/open policy and remain honest, do not add production permission gates."
+    },
+    {
+      "id": "GS-R8",
+      "priority": "P2",
+      "case_id": "du10gs-us-10q-vrsk",
+      "issue": "All HTML anchors are document-level whitespace contains matches, so no precise section/paragraph/DOM locator is provided for machine/analyst replay.",
+      "root_cause": "Minimum anchor-present condition substituted for card precise locator requirement.",
+      "fix": "Use existing locator vocabulary to record MD&A insurance subscriptions, revenue disaggregation, segment note, non-GAAP definition section/paragraph anchors; verify bounded location, keeping document-level match as fallback diagnosis only."
+    }
+  ],
+  "verification": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-du10-summary-goldset\\docs\\plans\\document-understanding-2026-10-13\\parallel\\du10-2026-10-17\\goldset\\tests\\test_goldset_structure.py",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\du10-gold-independent-l8bls873\\pytest"
+    ],
+    "returncode": 0,
+    "output": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\du10-gold-independent-l8bls873\\\\pytest\", \"requested_basetemp_len\": 69, \"cwd_len\": 55, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261017-212839-957d7edf\", \"effective_basetemp_len\": 75}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki-du10-summary-goldset\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 58 items\n\ndocs\\plans\\document-understanding-2026-10-13\\parallel\\du10-2026-10-17\\goldset\\tests\\test_goldset_structure.py . [  1%]\n.........................................................                [100%]\n\n============================= 58 passed in 1.24s ==============================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261017-212839-957d7edf\", \"existed\": true, \"removed\": true}\n",
+    "anchor_statuses": [
+      {
+        "case_id": "du10gs-call-miniso-q4-2024",
+        "status": "PASS"
+      },
+      {
+        "case_id": "du10gs-cn-annual-catl-capacity",
+        "status": "PASS"
+      },
+      {
+        "case_id": "du10gs-cn-annual-catl-industry",
+        "status": "PASS"
+      },
+      {
+        "case_id": "du10gs-cn-convbond-mlkw",
+        "status": "PASS"
+      },
+      {
+        "case_id": "du10gs-cn-interim-sugon",
+        "status": "PASS"
+      },
+      {
+        "case_id": "du10gs-cn-ipo-hrjc",
+        "status": "PASS"
+      },
+      {
+        "case_id": "du10gs-cn-ir-amec-minutes",
+        "status": "PASS"
+      },
+      {
+        "case_id": "du10gs-cn-q3-dfc",
+        "status": "PASS"
+      },
+      {
+        "case_id": "du10gs-hk-interim-miniso",
+        "status": "PASS"
+      },
+      {
+        "case_id": "du10gs-hk-ipo-baba",
+        "status": "PASS"
+      },
+      {
+        "case_id": "du10gs-us-10q-vrsk",
+        "status": "PASS"
+      }
+    ],
+    "sentinel_unchanged": true,
+    "anchor_checks": 118,
+    "all_originals_unchanged": true,
+    "all_author_files_unchanged": true,
+    "author_head": "faf5e58019314fd0b5dce0f6d00b44587a81ff28",
+    "test_cases_count": 11,
+    "owned_temp_removed": true
+  },
+  "case_results": [
+    {
+      "case_id": "du10gs-call-miniso-q4-2024",
+      "status": "PASS",
+      "semantic_review": "NEEDS_FIX",
+      "findings": [
+        "GS-R4"
+      ]
+    },
+    {
+      "case_id": "du10gs-cn-annual-catl-capacity",
+      "status": "PASS",
+      "semantic_review": "NEEDS_FIX",
+      "findings": [
+        "GS-R6"
+      ]
+    },
+    {
+      "case_id": "du10gs-cn-annual-catl-industry",
+      "status": "PASS",
+      "semantic_review": "PASS_IN_REVIEWED_SCOPE",
+      "findings": []
+    },
+    {
+      "case_id": "du10gs-cn-convbond-mlkw",
+      "status": "PASS",
+      "semantic_review": "PASS_IN_REVIEWED_SCOPE",
+      "findings": []
+    },
+    {
+      "case_id": "du10gs-cn-interim-sugon",
+      "status": "PASS",
+      "semantic_review": "PASS_IN_REVIEWED_SCOPE",
+      "findings": []
+    },
+    {
+      "case_id": "du10gs-cn-ipo-hrjc",
+      "status": "PASS",
+      "semantic_review": "PASS_IN_REVIEWED_SCOPE",
+      "findings": []
+    },
+    {
+      "case_id": "du10gs-cn-ir-amec-minutes",
+      "status": "PASS",
+      "semantic_review": "NEEDS_FIX",
+      "findings": [
+        "GS-R5"
+      ]
+    },
+    {
+      "case_id": "du10gs-cn-q3-dfc",
+      "status": "PASS",
+      "semantic_review": "NEEDS_FIX",
+      "findings": [
+        "GS-R3"
+      ]
+    },
+    {
+      "case_id": "du10gs-hk-interim-miniso",
+      "status": "PASS",
+      "semantic_review": "PASS_IN_REVIEWED_SCOPE",
+      "findings": []
+    },
+    {
+      "case_id": "du10gs-hk-ipo-baba",
+      "status": "PASS",
+      "semantic_review": "NEEDS_FIX",
+      "findings": [
+        "GS-R2"
+      ]
+    },
+    {
+      "case_id": "du10gs-us-10q-vrsk",
+      "status": "PASS",
+      "semantic_review": "NEEDS_FIX",
+      "findings": [
+        "GS-R1",
+        "GS-R8"
+      ]
+    }
+  ],
+  "coverage": {
+    "cases": 11,
+    "unique_originals": 10,
+    "same_original_distinct_propositions": "CATL industry and capacity are two distinct cases from same report, honestly declared, not duplicate padding",
+    "markets": [
+      "CN",
+      "HK",
+      "US"
+    ],
+    "doc_types_count": 8,
+    "phone_call": "MINISO source is official prepared-script PDF, not actual Q&A nor TXT",
+    "honest_missing": "No new TXT or HK quarterly original claimed; gap stated. This goldset does not prove full matrix/Q&A/TXT coverage."
+  },
+  "source_snapshots": {
+    "C:/Users/郑曾波/Projects/company-wiki/companies/密尔克卫/raw/research/密尔克卫：密尔克卫化工供应链服务股份有限公司公开发行可转换公司债券募集说明书.PDF": {
+      "sha256": "9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+      "mtime_ns": 1687708379000000000,
+      "size": 12284397
+    },
+    "C:/Users/郑曾波/Projects/company-wiki/companies/阿里巴巴/raw/prospectus/阿里巴巴招股说明书2019.pdf": {
+      "sha256": "7ae21e7f811d1b74eb0f9e04973c269fd0603d8a2950c173aedd5a246f671fc0",
+      "mtime_ns": 1638224311000000000,
+      "size": 8045606
+    },
+    "C:/Users/郑曾波/Projects/company-wiki/companies/华锐精密/raw/prospectus/华锐精密：华锐精密首次公开发行股票并在科创板上市招股说明书.PDF": {
+      "sha256": "e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+      "mtime_ns": 1613840372000000000,
+      "size": 6144872
+    },
+    "C:/Users/郑曾波/Projects/dayu-agent/workspace/portfolio/VRSK/filings/fil_0001437749-26-013729/vrsk20260331_10q.htm": {
+      "sha256": "8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+      "mtime_ns": 1781969731350426400,
+      "size": 1328753
+    },
+    "C:/Users/郑曾波/Projects/company-wiki/companies/东方电缆/raw/financial_reports/东方电缆：东方电缆2025年第三季度报告.pdf": {
+      "sha256": "980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+      "mtime_ns": 1776417609383411700,
+      "size": 188697
+    },
+    "C:/Users/郑曾波/Projects/company-wiki/companies/中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220416.pdf": {
+      "sha256": "9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+      "mtime_ns": 1656231951000000000,
+      "size": 457608
+    },
+    "C:/Users/郑曾波/Dropbox/Stock/消费品/名创优品/December Quarter and Full Year of 2024  Transcript.pdf": {
+      "sha256": "dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+      "mtime_ns": 1761392407000000000,
+      "size": 390641
+    },
+    "C:/Users/郑曾波/Projects/company-wiki/companies/中科曙光/raw/financial_reports/中科曙光：中科曙光2025年半年度报告.pdf": {
+      "sha256": "8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+      "mtime_ns": 1779610538921255100,
+      "size": 1087326
+    },
+    "C:/Users/郑曾波/Dropbox/Stock/消费品/名创优品/2025半年报（港股）.pdf": {
+      "sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+      "mtime_ns": 1761392799000000000,
+      "size": 2715618
+    },
+    "C:/Users/郑曾波/Projects/company-wiki/companies/宁德时代/raw/financial_reports/宁德时代：2025年年度报告.pdf": {
+      "sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+      "mtime_ns": 1780001650877358100,
+      "size": 2043710
+    }
+  },
+  "reviewed_file_snapshots": {
+    "findings.md": {
+      "sha256": "2ff7e23e4597ac646ec6cdb4ecdf6b947d1b1c1bcbf95960bf70c56911199cda",
+      "mtime_ns": 1792258854364842700,
+      "size": 7902
+    },
+    "handoff.json": {
+      "sha256": "8494947431870bcfb10e4dd416d2c26658818d9cc1ae5d67e83e8cbefecfdefa",
+      "mtime_ns": 1792262162173518200,
+      "size": 7069
+    },
+    "handoff.md": {
+      "sha256": "9444d0740960469ef34e5c77e77c2adff6fbdb8225a21edbf071170e652c09f2",
+      "mtime_ns": 1792262112627717100,
+      "size": 4224
+    },
+    "progress.md": {
+      "sha256": "8db3fd2400d3761239c9fecdf6c8fe3b70e79b7ccb550772492a099509ce274c",
+      "mtime_ns": 1792262168653091600,
+      "size": 1828
+    },
+    "task_plan.md": {
+      "sha256": "0a20d052c1c81aa8492221e30a9c69f7d3a8c3181a592af5f023fa6d7ef26f74",
+      "mtime_ns": 1792258640411998300,
+      "size": 2661
+    },
+    "cases\\du10gs-call-miniso-q4-2024.json": {
+      "sha256": "12ecafb675acf0bcc05cbbe9232c49a360dd87f294ac21ca0032abc0d76bceec",
+      "mtime_ns": 1792261676521366900,
+      "size": 6635
+    },
+    "cases\\du10gs-cn-annual-catl-capacity.json": {
+      "sha256": "5e4b9bf294b9506e372ac2d4b6e88f37c7e561933cf7b295cc7df2a764ce9179",
+      "mtime_ns": 1792261676506249600,
+      "size": 4257
+    },
+    "cases\\du10gs-cn-annual-catl-industry.json": {
+      "sha256": "ef0f3704fff5e4a8ad1c8836b2d52bcb02f1595780333cd8d2606efddb1bbc58",
+      "mtime_ns": 1792261676506249600,
+      "size": 5446
+    },
+    "cases\\du10gs-cn-convbond-mlkw.json": {
+      "sha256": "27988c3ba23cd19ea9906ae9302faf017352b0473c9be66ebc990eb24aa496a8",
+      "mtime_ns": 1792261676517333500,
+      "size": 5484
+    },
+    "cases\\du10gs-cn-interim-sugon.json": {
+      "sha256": "7c58a68161697c08c3f1f49892aa2b32348a4cafa950a5f683cc5a712e34a810",
+      "mtime_ns": 1792261676506249600,
+      "size": 6108
+    },
+    "cases\\du10gs-cn-ipo-hrjc.json": {
+      "sha256": "5502d0f67658f748db01675e5850cb94494f700314cc05ad8d86d65a931009ba",
+      "mtime_ns": 1792261676517333500,
+      "size": 5937
+    },
+    "cases\\du10gs-cn-ir-amec-minutes.json": {
+      "sha256": "a7b24235d4eae01e9559e72601bed637eaa8ebae9f53385747f966015c80051e",
+      "mtime_ns": 1792261676519350000,
+      "size": 7114
+    },
+    "cases\\du10gs-cn-q3-dfc.json": {
+      "sha256": "ae607ca2af4ac07700c09829afdfc71b67ff58666627faf59f14f47074f77de2",
+      "mtime_ns": 1792261676517333500,
+      "size": 4907
+    },
+    "cases\\du10gs-hk-interim-miniso.json": {
+      "sha256": "c1b140f7ad913801a89210c9e3ac7e6e0edc29dcf66699cb16edff42070c1e5f",
+      "mtime_ns": 1792261676519350000,
+      "size": 6716
+    },
+    "cases\\du10gs-hk-ipo-baba.json": {
+      "sha256": "9cfbe14e6414bda3f82d5697ba1e5fa5c1caf04021b6c8bc25813d087bb25b0c",
+      "mtime_ns": 1792261676519350000,
+      "size": 6991
+    },
+    "cases\\du10gs-us-10q-vrsk.json": {
+      "sha256": "3929c250d7d6f76c974f2834c40f9493457ad439d3f27bb988a196367ff35070",
+      "mtime_ns": 1792261676521366900,
+      "size": 5844
+    },
+    "cases\\index.json": {
+      "sha256": "8982b90f3eaafc86ef30117d3866f00ae83347ede21c7bd04a87ca54f6a56102",
+      "mtime_ns": 1792261676522385600,
+      "size": 4232
+    },
+    "receipts\\anchor_verify_author_run.json": {
+      "sha256": "aca9e64b6d52a1cc258409455f8032d6fa0ef719ea8780853bf8ddd32dce1465",
+      "mtime_ns": 1792259835665620000,
+      "size": 17120
+    },
+    "receipts\\anchor_verify_repair_run.json": {
+      "sha256": "06d3a6a933b0c160c36caa511944f2be2fb0f592a2577b928f410ab49d508542",
+      "mtime_ns": 1792261686610978600,
+      "size": 17120
+    },
+    "receipts\\build_cases_node_b.py": {
+      "sha256": "6ef0afd07b7d0d2436225341269b17ae88ba2f84ea27a4fc1df269871f638e0d",
+      "mtime_ns": 1792261666055023800,
+      "size": 61385
+    },
+    "receipts\\final_files_sha.json": {
+      "sha256": "11c42225b24ff57f61fa0c69df4aab07c2fbf87235ae308da8d01a138ebfa4c0",
+      "mtime_ns": 1792262080195344300,
+      "size": 4422
+    },
+    "receipts\\node_a_freeze.json": {
+      "sha256": "24d91d0966a818e10c90ad79d7c8a2391d58802c27fc9a0bf924b09eff97fd59",
+      "mtime_ns": 1792258790538703300,
+      "size": 8052
+    },
+    "receipts\\node_b_tests.json": {
+      "sha256": "e14d772eae4e27a662d81494f30770ca42340c88ee7c76e82ba094c3a0124bba",
+      "mtime_ns": 1792259862538307200,
+      "size": 2593
+    },
+    "receipts\\node_c_anchor_verify_reviewer_run.json": {
+      "sha256": "cdd3119258d58bbb1a35dec75ff8b6c231afc2fdaff112ad6f5df1a3194aa988",
+      "mtime_ns": 1792260164014220600,
+      "size": 17120
+    },
+    "receipts\\node_c_independent_review.json": {
+      "sha256": "e663069466e0eba54cdabaf2e943d7be1cf77dd17f4e66a83ac9daabcbb9c552",
+      "mtime_ns": 1792261292340427000,
+      "size": 8431
+    },
+    "receipts\\node_c_independent_review.md": {
+      "sha256": "f6d194c01c5fadcc75acc593e493edf32c4b5acd8a5ce87f99d4276b86949076",
+      "mtime_ns": 1792261243556576700,
+      "size": 16491
+    },
+    "receipts\\node_c_repair_review.json": {
+      "sha256": "8c0ab16f3e273baf96735986b47f4f3e87f45a4531a537cc49125dbc459354d9",
+      "mtime_ns": 1792262033947391600,
+      "size": 3509
+    },
+    "receipts\\node_c_repair_review.md": {
+      "sha256": "1f7954fea59c0f4efe5279914a162c89f10c1d145490a50cd3d32a9b73a88478",
+      "mtime_ns": 1792262033145888000,
+      "size": 4805
+    },
+    "receipts\\node_c_repair_verify.json": {
+      "sha256": "225791a1f95120624e85a23fe050d62a5e61b7389fff75b822dca1c935c2f283",
+      "mtime_ns": 1792261788395616700,
+      "size": 17120
+    },
+    "tests\\test_goldset_structure.py": {
+      "sha256": "d23235002c789041ffe7100b5fceddcd40f66ab4edaac0b9d8b4fcf420390e11",
+      "mtime_ns": 1792259475079197600,
+      "size": 8993
+    },
+    "tests\\verify_anchors.py": {
+      "sha256": "7dbec0ac0aac476a4311449757caffe199d6ea414a0d5229b6ebe5fc419c241e",
+      "mtime_ns": 1792259680397773600,
+      "size": 4134
+    },
+    "tests\\_support.py": {
+      "sha256": "c3f44c2105ec714fdde8228841bad4ccebd14094e1000ec240ea48c49b9f65b3",
+      "mtime_ns": 1792259762889462000,
+      "size": 5039
+    }
+  },
+  "scope_limitations": [
+    "58 structural tests and raw anchor verification do not validate economic support semantics.",
+    "No network, supplier, model call, production summary, or raw mutation.",
+    "No author checkout/index/code edit.",
+    "No root production SourceRef interface test executed because author package does not contain it; gap reported rather than invented PASS."
+  ]
+}

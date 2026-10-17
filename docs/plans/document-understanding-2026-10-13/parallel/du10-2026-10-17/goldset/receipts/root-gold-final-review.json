@@ -1,0 +1,158 @@
+{
+  "schema_version": "du10-root-independent-final-review/1",
+  "reviewer": "/root/du10_gold_reception_review",
+  "reviewed_at": "2026-10-17T21:42:18.158563+00:00",
+  "current_root_head": "ed70d640c184b570a98dbfc31519e051b5ff10a3",
+  "review_binding": "Exact current worktree data/helper/test file SHA below; root to bind publication commit afterward. Author baseline remains faf5e58019314fd0b5dce0f6d00b44587a81ff28.",
+  "result": "PASS",
+  "unresolved": [],
+  "findings_closure": [
+    {
+      "id": "GS-R1",
+      "status": "PASS",
+      "evidence": "Single Insurance segment and 552.1+230.5=782.6m now explicitly supported; false strict-subset penalties removed across guidance/facts/trap. Historical review magnitude error acknowledged in notes, old receipt retained."
+    },
+    {
+      "id": "GS-R2",
+      "status": "PASS",
+      "evidence": "BABA guidance now separates global8.60=China7.30+international1.30 and China9.60 with Ant; matches prior p19 independent reading."
+    },
+    {
+      "id": "GS-R3",
+      "status": "PASS",
+      "evidence": "DFC 35.49亿 now source-attributed, disputed vs Q3 total30.66亿 and quarterly definition; modality unknown, correctness_if_emitted, explicit prohibition of invented explanation and YTD rewrite. Actual profit changes retained separately."
+    },
+    {
+      "id": "GS-R4",
+      "status": "PASS",
+      "evidence": "MINISO proposition/guidance now cite phone-call opening founder/CEO, not prospectus or inferred board title; actual p1 role anchor added."
+    },
+    {
+      "id": "GS-R5",
+      "status": "PASS",
+      "evidence": "AMEC proposition/allowed_summary/fact distinguish XD RIE soon vs YDRIE about one year; 21.81% split into dedicated plasma-etching forecast fact."
+    },
+    {
+      "id": "GS-R6",
+      "status": "PASS",
+      "evidence": "CATL772 retains 报告期内; only construction321GWh gets period-end qualifier. Capacity not confused with output."
+    },
+    {
+      "id": "GS-R7",
+      "status": "PASS",
+      "evidence": "Verifier resolves source_binding via current configured resolver, registers only selected paths in owned temp catalog, constructs real SourceRef, query_ref identity checks, and open_version byte verification. Raw-path shortcut removed. Five real tmpCatalog positive/tamper controls present; parent run receipt11/11 matches exact current declarations."
+    },
+    {
+      "id": "GS-R8",
+      "status": "PASS",
+      "evidence": "Every VRSK fact/trap anchor now canonical unit_id+cwp-html-dom/1 locator. Verifier normalizes actual opened bytes, verifies unit/locator/quote and batch replays unique units; no document-wide contains shortcut."
+    }
+  ],
+  "final_file_snapshots": {
+    "cases\\du10gs-call-miniso-q4-2024.json": {
+      "sha256": "10a5d2ce70672f43c539d9b730995d8181556542c22cc7948e7eabab7b78b058",
+      "bytes": 7441
+    },
+    "cases\\du10gs-cn-annual-catl-capacity.json": {
+      "sha256": "c98c3f10bc024bf2c633739cee6c2a092bbe97c89435e7bd0b06556a654ea997",
+      "bytes": 4842
+    },
+    "cases\\du10gs-cn-annual-catl-industry.json": {
+      "sha256": "8ffcecfa929f3a043968d07115fd9521d839a82d99cbf2099949ac0f6fe9eb6e",
+      "bytes": 6000
+    },
+    "cases\\du10gs-cn-convbond-mlkw.json": {
+      "sha256": "27a55d84af60261eaf830b97d4b90865e303b39c5912b4ee11a1438c41fe8bb4",
+      "bytes": 6036
+    },
+    "cases\\du10gs-cn-interim-sugon.json": {
+      "sha256": "d9a5ce575edcbf0d39c61727e8baa44dd613e30b72ae93dcc438d5f6a87fb5f8",
+      "bytes": 6682
+    },
+    "cases\\du10gs-cn-ipo-hrjc.json": {
+      "sha256": "83b0e37a5aebc8dcb92c779ac3e2f5afe0f55e68663a8d56bc7e99c6fa79cedc",
+      "bytes": 6490
+    },
+    "cases\\du10gs-cn-ir-amec-minutes.json": {
+      "sha256": "f1016112fc60952e8151cf563f5806d4d69d7d26ecb35d1cb3a46589b0aec226",
+      "bytes": 8544
+    },
+    "cases\\du10gs-cn-q3-dfc.json": {
+      "sha256": "7c96bcd4707294c5d8138cb1c2d3266e6da11397ce61464ce407bde8fa56bed3",
+      "bytes": 6054
+    },
+    "cases\\du10gs-hk-interim-miniso.json": {
+      "sha256": "f15728bc6191e719075bd3549e08fa8138bf75940c634dfa691d93ad4e8bc4e8",
+      "bytes": 7335
+    },
+    "cases\\du10gs-hk-ipo-baba.json": {
+      "sha256": "13446167c2e391e14c6c8bcfc4bac4b15f9c08f3846cacc7aa5dc895906709e9",
+      "bytes": 7640
+    },
+    "cases\\du10gs-us-10q-vrsk.json": {
+      "sha256": "4165f7e534f357db6c29d067d6133a2693b9756c1ae0042bca07abf2f0669b84",
+      "bytes": 9549
+    },
+    "cases\\index.json": {
+      "sha256": "72c1bf58792ad56928c3500fd20c0dbd195fe9e1def86c573949403a689c95f6",
+      "bytes": 4362
+    },
+    "tests\\test_goldset_structure.py": {
+      "sha256": "0ffbac0bbdb698da88bae810ca96837919b6a802fda0b771f219390442d29556",
+      "bytes": 10043
+    },
+    "tests\\test_root_semantic_boundaries.py": {
+      "sha256": "174f868dc886d69d097a2ed355e0d6fce62bb45b69a925b42a9b5c3cb2dee280",
+      "bytes": 3299
+    },
+    "tests\\test_source_ref_replay.py": {
+      "sha256": "7264af667f0748867833d98f5ea31f4a03e2121599702a9e990400aeea5aa4d1",
+      "bytes": 2699
+    },
+    "tests\\verify_anchors.py": {
+      "sha256": "b384cc3a6d5889f34fe1a15a58ee5d9ad6f9b0d28e85ff02766603e2891e9705",
+      "bytes": 6703
+    },
+    "tests\\_support.py": {
+      "sha256": "445682dc55d953d6d4c731103174b13a898a83a360b9e13e8dc091c109f3c700",
+      "bytes": 3283
+    }
+  },
+  "source_verification": {
+    "all_ten_original_sha_match_prior_independent_read": true,
+    "all_ten_original_stats_unchanged": true,
+    "source_count": 10
+  },
+  "root_replay_receipt": {
+    "path": ".planning\\shared-reading-production\\du10-reception\\gold-source-ref-replay.json",
+    "sha256": "83156309a91eb1729d7f0a981777df7efc45e5b233ed5a30aaba3056d2364645",
+    "status": "PASS",
+    "case_count": 11,
+    "refs_equal_current_cases": true,
+    "registration_errors_zero": true,
+    "original_stat_unchanged": true,
+    "production_config_unchanged": true,
+    "sentinel_unchanged": true,
+    "owned_temp_removed": true
+  },
+  "tests": "Parent executed final71PASS/2.83s; reviewer inspected actual five tmpCatalog positive/tamper test bodies and semantic-control tests. No redundant broad rerun. Previous once-only58 structural/11raw anchors independently passed; final source-reader replay11PASS accepted with current SourceRef equality.",
+  "scope": [
+    "This is a seen source-derived regression annotation set, not blind holdout.",
+    "Annotation corrections and source identity/locator success do not establish generated summary factuality, usefulness, coverage or official model quality acceptance.",
+    "No production parser/default selection/summary change is approved by this data-only reception.",
+    "No network, model, paid supplier calls, author/source writes or new temp test environment in final delta review.",
+    "ROOT final mother/handoff docs should supersede author PASS and identify corrected corpus as regression. Historical receipts remain historical."
+  ],
+  "eof_only_delta": {
+    "verified_at": "2026-10-17T21:44:42.615289+00:00",
+    "path": "tests\\_support.py",
+    "previous_sha256": "5ba2f6981b5b9f896829015ee1b4fd8564615af5d4969da4a11939b25aff3d4a",
+    "sha256": "445682dc55d953d6d4c731103174b13a898a83a360b9e13e8dc091c109f3c700",
+    "removed_bytes": 5,
+    "previous_eof": "b'\\r\\n\\r\\n\\r\\n'",
+    "current_eof": "b'\\n'",
+    "all_other_16_reviewed_files_match": true,
+    "verified_only_terminal_blank_lines_and_final_newline_changed": true,
+    "tests_rerun": false
+  }
+}

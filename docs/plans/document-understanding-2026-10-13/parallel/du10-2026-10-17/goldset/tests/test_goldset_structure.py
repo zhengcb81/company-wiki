@@ -29,7 +29,6 @@ from _support import (
     QUOTE_BUDGET_PER_DOCUMENT,
     ROLE,
     TARGET_KIND,
-    CARRIER_ROOTS,
     cases_dir,
     iter_anchors,
     load_cases,
@@ -82,8 +81,9 @@ def test_required_fields(case):
     ):
         assert key in case, f"{cid} missing {key}"
     src = case["source_ref"]
-    for key in ("carrier_root", "source_id", "source_sha256", "mime_type"):
+    for key in ("document_id", "source_id", "content_sha256", "byte_size", "mime_type", "schema_version"):
         assert key in src, f"{cid} source_ref missing {key}"
+    assert case["source_binding"]["expected_sha256"] == src["content_sha256"]
     assert case["summary_proposition"].strip()
     assert case["allowed_summary"] and all(s.strip() for s in case["allowed_summary"])
     assert case["prior_use"].strip()
@@ -93,7 +93,8 @@ def test_required_fields(case):
 def test_enums_and_market(case):
     assert case["market"] in MARKETS, case["case_id"]
     assert case["doc_type"] in DOC_TYPES, case["case_id"]
-    assert case["source_ref"]["carrier_root"] in CARRIER_ROOTS, case["case_id"]
+    assert isinstance(case["source_binding"]["root_id"], str)
+    assert case["source_binding"]["root_id"].strip()
 
 
 def test_market_coverage():
@@ -140,7 +141,11 @@ def test_anchor_format(case):
     html_like = case["carrier"] in (".htm", ".html")
     for fid, kind, a in iter_anchors(case):
         assert a.get("exact_quote", "").strip(), f"{cid}/{fid} empty quote"
-        assert a.get("location_kind") in ("page", "document"), f"{cid}/{fid}"
+        assert a.get("location_kind") in ("page", "document", "unit"), f"{cid}/{fid}"
+        if html_like:
+            assert a["location_kind"] == "unit"
+            assert a["source_locator"].startswith("cwp-html-dom/1|")
+            assert a["unit_id"].startswith("urn:company-wiki:narrative-unit:")
         if kind == "trap" or html_like:
             # HTML anchors are document-level; PDF traps may omit page
             continue
@@ -153,10 +158,13 @@ def test_source_ref_shape_and_no_absolute_paths(case):
     cid = case["case_id"]
     raw = json.dumps(case, ensure_ascii=False)
     src = case["source_ref"]
-    assert not os.path.isabs(src["source_id"]), f"{cid} source_id must be root-relative"
-    assert "\\" not in src["source_id"], f"{cid} source_id must use forward slashes"
-    assert len(src["source_sha256"]) == 64
-    int(src["source_sha256"], 16)
+    binding = case["source_binding"]["relative_path"]
+    assert not os.path.isabs(binding), f"{cid} fixture binding must be root-relative"
+    assert "\\" not in binding
+    assert src["schema_version"] == "2.0"
+    assert src["source_id"].startswith("urn:company-wiki:source:")
+    assert len(src["content_sha256"]) == 64
+    int(src["content_sha256"], 16)
     # portability: no machine-specific absolute paths anywhere in the case file
     for token in ("C:/Users", "C:\\Users", "/Users/", "AppData"):
         assert token not in raw, f"{cid} leaks absolute path token {token}"
@@ -205,7 +213,7 @@ def test_index_consistency():
         c = by_id[row["case_id"]]
         assert row["market"] == c["market"]
         assert row["doc_type"] == c["doc_type"]
-        assert row["source_sha256"] == c["source_ref"]["source_sha256"]
+        assert row["source_sha256"] == c["source_ref"]["content_sha256"]
         seen_shas.add(row["source_sha256"])
     assert INDEX["unique_originals"] == len(seen_shas)
 
@@ -215,7 +223,7 @@ def test_no_duplicate_case_on_same_original_and_proposition():
     propositions and narrative focus must differ."""
     seen = {}
     for c in ALL_CASES:
-        key = (c["source_ref"]["source_sha256"], norm(c["summary_proposition"])[:60])
+        key = (c["source_ref"]["content_sha256"], norm(c["summary_proposition"])[:60])
         assert key not in seen, f"duplicate proposition on same original: {c['case_id']}"
         seen[key] = c["case_id"]
 
@@ -239,8 +247,14 @@ def test_known_failures_covered():
     """The set of bound failure modes must collectively cover the known
     summary-citation failure classes from the live review."""
     joined = " ".join(c["bound_failure_mode"] for c in ALL_CASES)
-    for needed in ("planned/actual", "同量纲不同时期", "第三方", "测算", "在研"):
+    for needed in ("planned/actual", "第三方", "测算", "在研"):
         assert needed in joined, f"failure mode family missing: {needed}"
+    # Period coverage is a property of the facts, not a required Chinese slogan.
+    baba = next(c for c in ALL_CASES if c["case_id"] == "du10gs-hk-ipo-baba")
+    facts = json.dumps(baba["facts"], ensure_ascii=False)
+    assert "2019年3月31日" in facts
+    assert "2019年6月30日" in facts
+    assert "12個月" in facts or "12个月" in facts
 
 
 def test_cases_dir_contains_only_owned_files():

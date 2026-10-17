@@ -1,5 +1,5 @@
 {
- "schema_version": "du10-summary-goldset-case/1",
+ "schema_version": "du10-summary-goldset-case/2",
  "case_id": "du10gs-cn-ipo-hrjc",
  "created": "2026-10-17",
  "market": "CN",
@@ -10,15 +10,12 @@
  "narrative_focus": "industry_change+project_plan",
  "bound_failure_mode": "planned/actual（拟建募投当已建成）；行业规模当公司收入",
  "source_ref": {
-  "carrier_root": "company_raw",
-  "source_id": "华锐精密/raw/prospectus/华锐精密：华锐精密首次公开发行股票并在科创板上市招股说明书.PDF",
-  "source_sha256": "e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+  "document_id": "urn:company-wiki:document:sha256:e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+  "source_id": "urn:company-wiki:source:sha256:e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+  "content_sha256": "e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+  "byte_size": 6144872,
   "mime_type": "application/pdf",
-  "registered_sidecar": {
-   "market": "CN",
-   "security_id": "华锐精密",
-   "source_title": "华锐精密：华锐精密首次公开发行股票并在科创板上市招股说明书"
-  }
+  "schema_version": "2.0"
  },
  "summary_proposition": "招股书披露：2019年我国刀具市场总消费规模约393亿元、进口刀具136亿元，进口占比从2016年37.17%降至2019年34.61%（中国机床工具工业协会统计）；公司产能利用率已基本饱和，拟通过募投扩建新生产基地并新增金属陶瓷数控刀片、整体刀具等产能。",
  "allowed_summary": [
@@ -148,5 +145,15 @@
  "prior_use": "公司路径出现在n5 raw-duplicate-audit元数据与narrative-pilot结果；本招股书内容未被读取（其可转债募集说明书曾由n5-document-quality S06读取，本卡未选该文件）",
  "notes": "350页科创板招股书；physical pages 104-105、293（PDF 1基）。",
  "quote_budget_chars_normalized": 265,
- "bound_failure_mode_check": "planned/actual（拟建募投当已建成）；行业规模当公司收入"
+ "bound_failure_mode_check": "planned/actual（拟建募投当已建成）；行业规模当公司收入",
+ "source_binding": {
+  "root_id": "company_raw",
+  "relative_path": "华锐精密/raw/prospectus/华锐精密：华锐精密首次公开发行股票并在科创板上市招股说明书.PDF",
+  "expected_sha256": "e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+  "observed_sidecar": {
+   "market": "CN",
+   "security_id": "华锐精密",
+   "source_title": "华锐精密：华锐精密首次公开发行股票并在科创板上市招股说明书"
+  }
+ }
 }

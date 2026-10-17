@@ -1,5 +1,5 @@
 {
- "schema_version": "du10-summary-goldset-case/1",
+ "schema_version": "du10-summary-goldset-case/2",
  "case_id": "du10gs-us-10q-vrsk",
  "created": "2026-10-17",
  "market": "US",
@@ -8,17 +8,14 @@
  "carrier": ".htm",
  "language": "en",
  "narrative_focus": "main_business",
- "bound_failure_mode": "insurance 收入范围当总收入；non-GAAP 当 GAAP；approximately 丢失",
+ "bound_failure_mode": "订阅占比当金额或财务年度；错误假定单一Insurance分部必为总收入子集；non-GAAP属性遗漏",
  "source_ref": {
-  "carrier_root": "dayu_portfolio",
-  "source_id": "VRSK/filings/fil_0001437749-26-013729/vrsk20260331_10q.htm",
-  "source_sha256": "8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+  "document_id": "urn:company-wiki:document:sha256:8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+  "source_id": "urn:company-wiki:source:sha256:8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+  "content_sha256": "8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+  "byte_size": 1328753,
   "mime_type": "text/html",
-  "registered_sidecar": {
-   "market": "HK",
-   "security_id": "VRSK",
-   "source_title": "vrsk20260331_10q"
-  }
+  "schema_version": "2.0"
  },
  "summary_proposition": "2026Q1 10-Q MD&A：截至2026年3月31日止三个月，约84%的保险（insurance）收入来自托管订阅（协议一般一至五年），2025年同期约83%；约16%/17%来自交易型与咨询/顾问服务；EBITDA为非GAAP指标（净利加回利息、所得税、折旧摊销）。",
  "allowed_summary": [
@@ -27,13 +24,13 @@
  ],
  "summary_guidance": {
   "must_preserve": [
-   "insurance revenues 范围（非总收入）",
+   "原文insurance revenues措辞，并结合唯一经营/可报告分部Insurance的上下文",
    "approximately（约）",
    "三个月期间与两年对比",
    "EBITDA non-GAAP 属性"
   ],
   "boundary": [
-   "84%不得写成总收入占比（84%为insurance revenues子口径，非total revenues；disaggregation中total revenues=Underwriting+Claims=$782.6m）",
+   "本期唯一经营及可报告分部为Insurance，其552.1+230.5=782.6百万美元等于总收入；不能臆定保险口径必小于集团总收入",
    "EBITDA不得写成GAAP经营利润或净利",
    "订阅占比不得写成订阅收入金额"
   ]
@@ -49,8 +46,10 @@
    "any_support_sets": [
     [
      {
+      "location_kind": "unit",
       "exact_quote": "approximately 84% and 83% of our insurance revenues were derived from hosted subscriptions through agreements (generally one to five years) for our solutions, respectively.",
-      "location_kind": "document"
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:59dedb3667630d32208f9873aea3eddd4ef47f3adac400f00848038e99938d8e",
+      "source_locator": "cwp-html-dom/1|n=0.1.128"
      }
     ]
    ],
@@ -61,11 +60,10 @@
     "2026 vs 2025（84%/83%）"
    ],
    "must_not_assert": [
-    "84%为总收入占比",
     "84%为订阅收入金额",
     "期间为全年"
    ],
-   "reason": "商业模式叙述；“insurance revenues”是公司分部口径下的子集，范围错换即主体错引。"
+   "reason": "保留原文保险收入口径；本报告只有一个Insurance分部，不能在未核对分部附注前假定它是严格子集。"
   },
   {
    "id": "transactional-advisory-share",
@@ -77,8 +75,10 @@
    "any_support_sets": [
     [
      {
+      "location_kind": "unit",
       "exact_quote": "approximately 16% and 17% of our insurance revenues were derived from providing transactional and advisory/consulting solutions, respectively.",
-      "location_kind": "document"
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e26e0f83795241c9f7d9582c6907a04eea58634b547f8ab35da7052b362ae6a2",
+      "source_locator": "cwp-html-dom/1|n=0.1.130"
      }
     ]
    ],
@@ -88,8 +88,8 @@
     "两年对比"
    ],
    "must_not_assert": [
-    "16%为全部收入的交易占比",
-    "与84%相加后写成一个口径"
+    "16%为交易收入金额",
+    "16%与84%属于不同年份"
    ],
    "reason": "与订阅占比互补（84%+16%≈100%，83%+17%=100%）；两行必须同口径引用。"
   },
@@ -103,8 +103,10 @@
    "any_support_sets": [
     [
      {
+      "location_kind": "unit",
       "exact_quote": "EBITDA is defined as net income before interest expense, provision for income taxes, and depreciation and amortization of fixed and intangible assets",
-      "location_kind": "document"
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b2e24bfe3d43e801e3a1e0c2de4dc551c769392fdb2fe22a281be249bca39ba3",
+      "source_locator": "cwp-html-dom/1|n=0.1.112"
      }
     ]
    ],
@@ -128,8 +130,22 @@
    "any_support_sets": [
     [
      {
-      "exact_quote": "Total revenues $ 782.6 $ 753.0",
-      "location_kind": "document"
+      "location_kind": "unit",
+      "exact_quote": "Total revenues",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:69bf33821711fbf33cfdd0316ce28eec171f5766f45896cf9418596b1be1d05d",
+      "source_locator": "cwp-html-dom/1|n=0.1.71.4.0.0.5.0"
+     },
+     {
+      "location_kind": "unit",
+      "exact_quote": "782.6",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a9dc480c3a34e75156e69435be9c87c405c147f7bc3d819cf6ea6d6d7d74c343",
+      "source_locator": "cwp-html-dom/1|n=0.1.71.4.0.0.5.3"
+     },
+     {
+      "location_kind": "unit",
+      "exact_quote": "753.0",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:daed0334f027ce5f4acb4769bcd41bd4c8274ca35eb577c324fde58a4527c06a",
+      "source_locator": "cwp-html-dom/1|n=0.1.71.4.0.0.5.7"
      }
     ]
    ],
@@ -143,24 +159,75 @@
     "全年口径"
    ],
    "reason": "若摘要引用总收入数字，以本表为准（单位百万美元、Q1三个月）。"
+  },
+  {
+   "id": "single-insurance-segment-scope",
+   "importance": "critical",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "company_filing",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "unit",
+      "exact_quote": "one operating segment and one reportable segment, Insurance",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2dd3a24c1fc68b40f82eb0a0f066ec277766946face6fc7bca1c7a254918541a",
+      "source_locator": "cwp-html-dom/1|n=0.1.87.4"
+     },
+     {
+      "location_kind": "unit",
+      "exact_quote": "552.1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:af0fb8c0ea93433e3c5687cf7d6cc9d64235494047e3191d7a97b5fd0574e7c3",
+      "source_locator": "cwp-html-dom/1|n=0.1.71.4.0.0.3.3"
+     },
+     {
+      "location_kind": "unit",
+      "exact_quote": "230.5",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:07a218fd3be0e35c1275387883c1b6d4515949b3772c424ff3421a9aa9acee0c",
+      "source_locator": "cwp-html-dom/1|n=0.1.71.4.0.0.4.3"
+     },
+     {
+      "location_kind": "unit",
+      "exact_quote": "782.6",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a9dc480c3a34e75156e69435be9c87c405c147f7bc3d819cf6ea6d6d7d74c343",
+      "source_locator": "cwp-html-dom/1|n=0.1.71.4.0.0.5.3"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "唯一经营及可报告分部Insurance",
+    "552.1+230.5=782.6，单位百万美元"
+   ],
+   "must_not_assert": [
+    "断言Insurance必为集团收入严格子集",
+    "把782.6百万美元写成82.6百万美元"
+   ],
+   "reason": "同报告分部附注与收入分拆表共同限定分母，不能只因原文提insurance而制造范围错误。"
   }
  ],
  "misread_traps": [
   {
-   "page": null,
-   "kind": "scope_insurance_vs_total",
-   "note": "MD&A 同时讨论 insurance revenues 占比与 total revenues；两者范围不同。",
-   "exact_quote": "Total revenues"
-  },
-  {
-   "page": null,
-   "kind": "printed_page_markers",
-   "note": "HTML 无物理页；正文嵌有打印页码提示（26/27/28）与 Table of Contents 链接文本。锚点按 location_kind=document 全文空白归一化匹配。",
-   "exact_quote": "Table of Contents"
+   "kind": "ratio_is_not_amount",
+   "note": "84%是该期订阅收入占比，不是金额。单一Insurance分部不应被误判为集团收入严格子集。",
+   "location_kind": "unit",
+   "exact_quote": "approximately 84% and 83%",
+   "unit_id": "urn:company-wiki:narrative-unit:sha256:59dedb3667630d32208f9873aea3eddd4ef47f3adac400f00848038e99938d8e",
+   "source_locator": "cwp-html-dom/1|n=0.1.128"
   }
  ],
  "prior_use": "du2-families曾读取vrsk20250331_10q（2025Q1另一文件）；本2026Q1 10-Q未被读取",
- "notes": "10-Q Q1 2026（period 2026-03-31）。锚点 location_kind=document。侧车market=HK为登记误值（实为US/NASDAQ:VRSK），已如实记录，case以文档内容为准。",
- "quote_budget_chars_normalized": 456,
- "bound_failure_mode_check": "insurance 收入范围当总收入；non-GAAP 当 GAAP；approximately 丢失"
+ "notes": "ROOT已核原文唯一Insurance分部和收入分拆；侧车market=HK为历史登记误值，case的US来自原文内容，未改生产侧车。HTML均用既有canonical单位ID及cwp-html-dom/1定位。旧独审的52.1+30.5=82.6为审查记录错误，正确为552.1+230.5=782.6百万美元。",
+ "quote_budget_chars_normalized": 515,
+ "bound_failure_mode_check": "订阅占比当金额或财务年度；错误假定单一Insurance分部必为总收入子集；non-GAAP属性遗漏",
+ "source_binding": {
+  "root_id": "dayu_portfolio",
+  "relative_path": "VRSK/filings/fil_0001437749-26-013729/vrsk20260331_10q.htm",
+  "expected_sha256": "8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+  "observed_sidecar": {
+   "market": "HK",
+   "security_id": "VRSK",
+   "source_title": "vrsk20260331_10q"
+  }
+ }
 }

@@ -1,5 +1,5 @@
 {
- "schema_version": "du10-summary-goldset-case/1",
+ "schema_version": "du10-summary-goldset-case/2",
  "case_id": "du10gs-cn-ir-amec-minutes",
  "created": "2026-10-17",
  "market": "CN",
@@ -10,17 +10,14 @@
  "narrative_focus": "industry_change+new_business",
  "bound_failure_mode": "订单当收入；预测标注丢失；在研当上市",
  "source_ref": {
-  "carrier_root": "company_raw",
-  "source_id": "中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220416.pdf",
-  "source_sha256": "9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+  "document_id": "urn:company-wiki:document:sha256:9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+  "source_id": "urn:company-wiki:source:sha256:9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+  "content_sha256": "9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+  "byte_size": 457608,
   "mime_type": "application/pdf",
-  "registered_sidecar": {
-   "market": "CN",
-   "security_id": "688012",
-   "source_title": "【芯片】中微公司交流纪要20220416"
-  }
+  "schema_version": "2.0"
  },
- "summary_proposition": "纪要转述：2021年收入31.08亿元（+36.72%）、新订单41.29亿元（+90.46%）；2021年全球半导体设备市场增长44.7%，2022年预计超800亿美元（预测）；ICP Nanova每年销售增长超100%、2021年超200%；XD RIE与YDRIE在研、预计一年左右进入市场。",
+ "summary_proposition": "纪要转述：2021年收入31.08亿元（+36.72%）、新订单41.29亿元（+90.46%）；2021年全球半导体设备市场增长44.7%，2022年预计超800亿美元（预测）；ICP Nanova每年销售增长超100%、2021年超200%；XD RIE在研且将很快完成开发进入市场，YDRIE在研且预计一年左右进入市场。",
  "allowed_summary": [
   "交流纪要转述：公司2021年营业收入31.08亿元、同比增长36.72%；新订单41.29亿元、同比增长90.46%。",
   "纪要转述：2021年全球半导体设备市场增长44.7%，预计2022年超过800亿美元（纪要括注2022年为预测数据）。",
@@ -109,18 +106,13 @@
       "exact_quote": "2022年会超过800亿美元",
       "location_kind": "page",
       "page": 2
-     },
-     {
-      "exact_quote": "2019-2022年平均年增长率达21.81%（2022年是预测数据）",
-      "location_kind": "page",
-      "page": 2
      }
     ]
    ],
    "must_preserve": [
     "2022年为预测",
     "800亿美元",
-    "21.81%为2019-2022平均年增长率（含预测年）"
+    "该句为纪要转述的半导体设备市场预测"
    ],
    "must_not_assert": [
     "2022年已超过800亿美元",
@@ -178,9 +170,9 @@
     ]
    ],
    "must_preserve": [
-    "XD RIE 与 YDRIE 均为在研",
-    "“一年左右即将进入市场”为预期",
-    "demo/开发中状态"
+    "XD RIE：将很快完成开发进入市场",
+    "YDRIE：预计一年左右进入市场",
+    "两者在研/demo状态，不是承诺日期"
    ],
    "must_not_assert": [
     "两产品已上市或已量产",
@@ -188,6 +180,38 @@
     "“一年左右”为承诺日期"
    ],
    "reason": "在研管线叙述；写成已上市产品即 planned/actual 错引。"
+  },
+  {
+   "id": "plasma-etching-cagr-forecast",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "plan",
+   "role": "third_party",
+   "any_support_sets": [
+    [
+     {
+      "page": 2,
+      "location_kind": "page",
+      "exact_quote": "等离子体刻蚀设备"
+     },
+     {
+      "exact_quote": "2019-2022年平均年增长率达21.81%（2022年是预测数据）",
+      "location_kind": "page",
+      "page": 2
+     }
+    ]
+   ],
+   "must_preserve": [
+    "等离子体刻蚀设备行业",
+    "21.81%为2019-2022平均年增长率（含2022预测年）"
+   ],
+   "must_not_assert": [
+    "半导体设备整体增速21.81%",
+    "公司收入增速21.81%",
+    "全部年份为已实现数据"
+   ],
+   "reason": "将刻蚀设备子行业与相邻半导体设备市场总量分开；2022仍为预测。"
   }
  ],
  "misread_traps": [
@@ -206,6 +230,16 @@
  ],
  "prior_use": "中微公司另有cn-h1/cn-q-business gold（2026半年报/一季报）；本2022交流纪要原件未被读取",
  "notes": "10页纪要；physical pages 1-3（PDF 1基）。role=company_statement：纪要转述的管理层陈述。",
- "quote_budget_chars_normalized": 301,
- "bound_failure_mode_check": "订单当收入；预测标注丢失；在研当上市"
+ "quote_budget_chars_normalized": 309,
+ "bound_failure_mode_check": "订单当收入；预测标注丢失；在研当上市",
+ "source_binding": {
+  "root_id": "company_raw",
+  "relative_path": "中微公司/raw/investor_relations/【芯片】中微公司交流纪要20220416.pdf",
+  "expected_sha256": "9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+  "observed_sidecar": {
+   "market": "CN",
+   "security_id": "688012",
+   "source_title": "【芯片】中微公司交流纪要20220416"
+  }
+ }
 }

@@ -1,5 +1,5 @@
 {
- "schema_version": "du10-summary-goldset-case/1",
+ "schema_version": "du10-summary-goldset-case/2",
  "case_id": "du10gs-cn-interim-sugon",
  "created": "2026-10-17",
  "market": "CN",
@@ -10,15 +10,12 @@
  "narrative_focus": "main_business",
  "bound_failure_mode": "预测当实际（IDC 全年预测 vs 统计局 H1 实际）；第三方数据归属",
  "source_ref": {
-  "carrier_root": "company_raw",
-  "source_id": "中科曙光/raw/financial_reports/中科曙光：中科曙光2025年半年度报告.pdf",
-  "source_sha256": "8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+  "document_id": "urn:company-wiki:document:sha256:8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+  "source_id": "urn:company-wiki:source:sha256:8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+  "content_sha256": "8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+  "byte_size": 1087326,
   "mime_type": "application/pdf",
-  "registered_sidecar": {
-   "market": "CN",
-   "security_id": "中科曙光",
-   "source_title": "中科曙光：中科曙光2025年半年度报告"
-  }
+  "schema_version": "2.0"
  },
  "summary_proposition": "ParaStor分布式存储连续6年中标中国移动集采；2024年第三代C8000浸没液冷单机柜功率密度突破750kW以上；2025H1中国服务器产量+126.7%（国家统计局），IDC预测2025年全球服务器市场规模有望达3660亿美元（+44.6%）。",
  "allowed_summary": [
@@ -169,5 +166,15 @@
  "prior_use": "fresh：.planning与docs/plans零提及",
  "notes": "半年报 physical pages 8-9（PDF 1基）。189页。",
  "quote_budget_chars_normalized": 178,
- "bound_failure_mode_check": "预测当实际（IDC 全年预测 vs 统计局 H1 实际）；第三方数据归属"
+ "bound_failure_mode_check": "预测当实际（IDC 全年预测 vs 统计局 H1 实际）；第三方数据归属",
+ "source_binding": {
+  "root_id": "company_raw",
+  "relative_path": "中科曙光/raw/financial_reports/中科曙光：中科曙光2025年半年度报告.pdf",
+  "expected_sha256": "8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+  "observed_sidecar": {
+   "market": "CN",
+   "security_id": "中科曙光",
+   "source_title": "中科曙光：中科曙光2025年半年度报告"
+  }
+ }
 }

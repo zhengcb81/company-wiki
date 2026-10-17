@@ -1,5 +1,5 @@
 {
- "schema_version": "du10-summary-goldset-case/1",
+ "schema_version": "du10-summary-goldset-case/2",
  "case_id": "du10gs-hk-interim-miniso",
  "created": "2026-10-17",
  "market": "HK",
@@ -10,11 +10,12 @@
  "narrative_focus": "overseas",
  "bound_failure_mode": "存量 vs 净增；品牌口径 vs 集团口径",
  "source_ref": {
-  "carrier_root": "dropbox_stock",
-  "source_id": "消费品/名创优品/2025半年报（港股）.pdf",
-  "source_sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+  "document_id": "urn:company-wiki:document:sha256:9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+  "source_id": "urn:company-wiki:source:sha256:9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+  "content_sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+  "byte_size": 2715618,
   "mime_type": "application/pdf",
-  "registered_sidecar": null
+  "schema_version": "2.0"
  },
  "summary_proposition": "截至2025年6月30日，名创优品品牌海外市场拥有579家直营店、425家名创合伙人门店与2,303家代理门店（海外直营期初503家、期内净增76家）；集团层面直营店总数637家（2024年6月30日为393家）。",
  "allowed_summary": [
@@ -214,5 +215,11 @@
  "prior_use": "名创优品2024年报为hk-annual gold；本2025中期报告原件未被读取",
  "notes": "110页中期报告（双语）；physical pages 14、23（PDF 1基）。无侧车（source_registered=false），解析走 dropbox_stock 根+SHA。与 hk-annual gold（2024年报）同公司不同原件；新增证据为 H1 2025 存量/净增与集团口径。",
  "quote_budget_chars_normalized": 273,
- "bound_failure_mode_check": "存量 vs 净增；品牌口径 vs 集团口径"
+ "bound_failure_mode_check": "存量 vs 净增；品牌口径 vs 集团口径",
+ "source_binding": {
+  "root_id": "dropbox_stock",
+  "relative_path": "消费品/名创优品/2025半年报（港股）.pdf",
+  "expected_sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+  "observed_sidecar": null
+ }
 }

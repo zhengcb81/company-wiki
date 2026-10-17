@@ -1,3 +1,16 @@
+## DU10 三包验收收尾 — 2026-10-17（最新）
+
+三包作者完整历史已合入本地主线；ROOT独审发现的问题已修复并复审通过，0未解决。具体见 [DU10接收](review/du10_reception.md)。FF固定依赖/限额完整41例和中断新attempt恢复已按有效收据关闭；ET EOF token/main直挂文本共因已修复，304PASS，FF→最新ET合同117PASS；CWP样本6项语义修正和真实SourceRef/locator回放，71PASS、11/11来源实读，独立核10原件未改。样本为已看过回归集，正式摘要/盲holdout未完成。
+
+ET main已推送2584b7e；FF正常push/CI与CWP本次发布收尾以 review/du10_reception.json 为最终机器记录。CWP仅docs/plans改动由现有CI paths-ignore跳过，不冒称产生新CI；ET无CI。未绕hook、未重复全矩阵，不加签收许可链。历史OPEN/待派发记录不代表当前。
+
+**Next Step：** 继续 review/pdf_page_intent_implementation.md：原生PDF导航/唯一matcher/POLICY+PLANNER/同一WorkBudget/source单parse生产装配，再做深页真实文档、配置供应商正式摘要、缓存恢复和新盲样本；FF41 C节点不再OPEN，真实模型摘要主线仍OPEN。不改Dayu/IQS，不碰作者工区。
+
+
+---
+
+以下为历史记录（状态以顶部 ROOT 更新为准）。
+
 ## 当前收尾完成：外包工程待交付0 — 2026-10-17（最新）
 
 ## DU10 独立施工包已准备 — 2026-10-17

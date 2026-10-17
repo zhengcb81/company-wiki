@@ -1,0 +1,1011 @@
+{
+  "schema_version": "du10-goldset-source-replay/2",
+  "cases_total": 11,
+  "results": [
+    {
+      "case_id": "du10gs-call-miniso-q4-2024",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-stores-and-net-adds:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-stores-and-net-adds:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-stores-and-net-adds:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-stores-and-net-adds:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-stores-and-net-adds:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-stores-and-net-adds:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:brand-split-net-adds-beat-target:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:brand-split-net-adds-beat-target:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-share-hedged:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-share-hedged:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-share-hedged:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-share-hedged:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:ip-pipeline-2025-plan:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:ip-pipeline-2025-plan:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:currency-statement:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:currency-statement:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:prepared_remarks:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:prepared_remarks:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:plan_language:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:plan_language:quote",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+        "source_id": "urn:company-wiki:source:sha256:dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+        "content_sha256": "dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+        "byte_size": 390641,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case_id": "du10gs-cn-annual-catl-capacity",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:capacity-projects-under-construction:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:capacity-projects-under-construction:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:revenue-table-same-page:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:revenue-table-same-page:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:mixed_narrative_and_table:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:mixed_narrative_and_table:quote",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+        "source_id": "urn:company-wiki:source:sha256:c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+        "content_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+        "byte_size": 2043710,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case_id": "du10gs-cn-annual-catl-industry",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-global-power-usage:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-global-power-usage:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:catl-power-market-share:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:catl-power-market-share:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-global-ess-shipment:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-global-ess-shipment:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-global-ess-shipment:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-global-ess-shipment:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:same_page_mixed:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:same_page_mixed:quote",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+        "source_id": "urn:company-wiki:source:sha256:c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+        "content_sha256": "c15272977147dee7e6935a38ea0e4fd6855370aabb106f54cfe20f7cf6048ec9",
+        "byte_size": 2043710,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case_id": "du10gs-cn-convbond-mlkw",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:supercritical-project-investment:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:supercritical-project-investment:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:supercritical-project-investment:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:supercritical-project-investment:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:first-hazardous-waste-center:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:first-hazardous-waste-center:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:benefit-projection-full-capacity:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:benefit-projection-full-capacity:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:projection_adjacent_to_facts:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:projection_adjacent_to_facts:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:same_page_scope:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:same_page_scope:quote",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+        "source_id": "urn:company-wiki:source:sha256:9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+        "content_sha256": "9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+        "byte_size": 12284397,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case_id": "du10gs-cn-interim-sugon",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:parastor-china-mobile-streak:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:parastor-china-mobile-streak:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:liquid-cooling-c8000-750kw:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:liquid-cooling-c8000-750kw:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-server-output-h1:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-server-output-h1:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-server-market-idc-forecast:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-server-market-idc-forecast:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:forecast_vs_actual_same_section:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:forecast_vs_actual_same_section:quote",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+        "source_id": "urn:company-wiki:source:sha256:8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+        "content_sha256": "8f17b0af565dddcb388d514961210d368c16060c71d5b522524458d0c228f147",
+        "byte_size": 1087326,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case_id": "du10gs-cn-ipo-hrjc",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:tool-market-2019-scale:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:tool-market-2019-scale:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:import-share-decline:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:import-share-decline:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:capacity-saturation-expansion-plan:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:capacity-saturation-expansion-plan:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:capacity-saturation-expansion-plan:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:capacity-saturation-expansion-plan:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:industry_vs_company:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:industry_vs_company:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:persuasive_registration_document:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:persuasive_registration_document:quote",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+        "source_id": "urn:company-wiki:source:sha256:e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+        "content_sha256": "e463853bf1efd7884de4578930023ad9a6b182687eedee1a296adc8f4adf3e87",
+        "byte_size": 6144872,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case_id": "du10gs-cn-ir-amec-minutes",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:revenue-vs-new-orders-2021:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:revenue-vs-new-orders-2021:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-equipment-growth-2021:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:industry-equipment-growth-2021:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:market-size-2022-forecast:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:market-size-2022-forecast:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:icp-nanova-growth:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:icp-nanova-growth:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:xdrie-ydrie-in-development:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:xdrie-ydrie-in-development:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:xdrie-ydrie-in-development:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:xdrie-ydrie-in-development:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:plasma-etching-cagr-forecast:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:plasma-etching-cagr-forecast:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:plasma-etching-cagr-forecast:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:plasma-etching-cagr-forecast:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:document_nature:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:document_nature:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:forecast_annotation:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:forecast_annotation:quote",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+        "source_id": "urn:company-wiki:source:sha256:9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+        "content_sha256": "9e8a36d3f974c0f8a780f304f040857bfe2e833f721a7b119b565379bdc394a4",
+        "byte_size": 457608,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case_id": "du10gs-cn-q3-dfc",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:q3-submarine-hv-cable-revenue:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:q3-submarine-hv-cable-revenue:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:q3-submarine-hv-cable-revenue:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:q3-submarine-hv-cable-revenue:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:q3-submarine-hv-cable-revenue:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:q3-submarine-hv-cable-revenue:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:q3-profit-change-reason:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:q3-profit-change-reason:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:q3-profit-change-reason:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:q3-profit-change-reason:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:quarter-definition-note:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:quarter-definition-note:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:same_page_mixed:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:same_page_mixed:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:dual_period_columns:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:dual_period_columns:quote",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+        "source_id": "urn:company-wiki:source:sha256:980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+        "content_sha256": "980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+        "byte_size": 188697,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case_id": "du10gs-hk-interim-miniso",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-store-mix:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-store-mix:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-store-mix:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-store-mix:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-store-mix:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-store-mix:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-direct-store-flow:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-direct-store-flow:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-direct-store-flow:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-direct-store-flow:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-direct-store-flow:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-direct-store-flow:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-direct-store-flow:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-direct-store-flow:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-direct-store-flow:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:overseas-direct-store-flow:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:group-direct-stores-637:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:group-direct-stores-637:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:group-direct-stores-637:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:group-direct-stores-637:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:group-direct-stores-637:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:group-direct-stores-637:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:selling-expense-us-investment:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:selling-expense-us-investment:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:selling-expense-us-investment:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:selling-expense-us-investment:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:stock_vs_flow_table:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:stock_vs_flow_table:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:bilingual_duplication:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:bilingual_duplication:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:scope_shift:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:scope_shift:quote",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+        "source_id": "urn:company-wiki:source:sha256:9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+        "content_sha256": "9ca846507bf4fcf703e847b25062420abac6ab5dd757a7e2f40d51d06206d1cb",
+        "byte_size": 2715618,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case_id": "du10gs-hk-ipo-baba",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-annual-active-consumers:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-annual-active-consumers:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-annual-active-consumers:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-annual-active-consumers:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-annual-active-consumers:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:global-annual-active-consumers:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:international-active-consumers:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:international-active-consumers:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:international-active-consumers:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:international-active-consumers:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:international-active-consumers:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:international-active-consumers:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:china-retail-gmv-march-ttm:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:china-retail-gmv-march-ttm:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:china-retail-gmv-march-ttm:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:china-retail-gmv-march-ttm:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:china-retail-gmv-march-ttm:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:china-retail-gmv-march-ttm:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:cloud-segment-revenue-fy2019:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:cloud-segment-revenue-fy2019:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:cloud-segment-revenue-fy2019:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:cloud-segment-revenue-fy2019:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:cloud-segment-revenue-fy2019:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:cloud-segment-revenue-fy2019:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:dual_ttm_same_page:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:dual_ttm_same_page:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:non_gaap_rows:physical_page",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:non_gaap_rows:quote",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:7ae21e7f811d1b74eb0f9e04973c269fd0603d8a2950c173aedd5a246f671fc0",
+        "source_id": "urn:company-wiki:source:sha256:7ae21e7f811d1b74eb0f9e04973c269fd0603d8a2950c173aedd5a246f671fc0",
+        "content_sha256": "7ae21e7f811d1b74eb0f9e04973c269fd0603d8a2950c173aedd5a246f671fc0",
+        "byte_size": 8045606,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      }
+    },
+    {
+      "case_id": "du10gs-us-10q-vrsk",
+      "checks": [
+        {
+          "check": "source_ref_identity",
+          "status": "PASS"
+        },
+        {
+          "check": "actual_source_sha",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:insurance-subscription-share:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:insurance-subscription-share:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:transactional-advisory-share:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:transactional-advisory-share:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:ebitda-non-gaap-definition:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:ebitda-non-gaap-definition:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:total-revenue-q1-2026:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:total-revenue-q1-2026:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:total-revenue-q1-2026:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:total-revenue-q1-2026:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:total-revenue-q1-2026:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:total-revenue-q1-2026:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:single-insurance-segment-scope:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:single-insurance-segment-scope:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:single-insurance-segment-scope:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:single-insurance-segment-scope:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:single-insurance-segment-scope:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:single-insurance-segment-scope:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:single-insurance-segment-scope:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "fact:single-insurance-segment-scope:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:ratio_is_not_amount:canonical_locator",
+          "status": "PASS"
+        },
+        {
+          "check": "trap:ratio_is_not_amount:quote",
+          "status": "PASS"
+        },
+        {
+          "check": "canonical_batched_replay",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+        "source_id": "urn:company-wiki:source:sha256:8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+        "content_sha256": "8273e1412f7892b076916a1c896939183d3f66732dd16e86249fa7f5e169473d",
+        "byte_size": 1328753,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      }
+    }
+  ],
+  "registration_errors_zero": true,
+  "original_stat_unchanged": true,
+  "production_config_unchanged": true,
+  "sentinel_unchanged": true,
+  "owned_temp_removed": true,
+  "semantic_quality_evaluated": false,
+  "status": "PASS"
+}

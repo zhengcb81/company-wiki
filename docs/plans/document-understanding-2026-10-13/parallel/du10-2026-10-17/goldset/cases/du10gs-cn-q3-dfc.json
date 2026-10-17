@@ -1,5 +1,5 @@
 {
- "schema_version": "du10-summary-goldset-case/1",
+ "schema_version": "du10-summary-goldset-case/2",
  "case_id": "du10gs-cn-q3-dfc",
  "created": "2026-10-17",
  "market": "CN",
@@ -8,40 +8,39 @@
  "carrier": ".pdf",
  "language": "zh",
  "narrative_focus": "main_business",
- "bound_failure_mode": "同量纲不同时期（单季 vs 累计）；类别收入当总收入",
+ "bound_failure_mode": "原件内部矛盾不能洗成确定事实；单季与累计口径；类别与总收入不能无据调和",
  "source_ref": {
-  "carrier_root": "company_raw",
-  "source_id": "东方电缆/raw/financial_reports/东方电缆：东方电缆2025年第三季度报告.pdf",
-  "source_sha256": "980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+  "document_id": "urn:company-wiki:document:sha256:980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+  "source_id": "urn:company-wiki:source:sha256:980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+  "content_sha256": "980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+  "byte_size": 188697,
   "mime_type": "application/pdf",
-  "registered_sidecar": {
-   "market": "CN",
-   "security_id": "东方电缆",
-   "source_title": "东方电缆：东方电缆2025年第三季度报告"
-  }
+  "schema_version": "2.0"
  },
- "summary_proposition": "2025年第三季度（本报告期=单季）：海底电缆与高压电缆实现营业收入35.49亿元、同比+35.8%，为本报告期利润总额+51.19%的主要原因。",
+ "summary_proposition": "原报告p3称“本报告期”海底电缆与高压电缆收入35.49亿元、同比35.8%；但p1单季营业总收入约30.66亿元，p2又定义本报告期为Q3三个月，存在未解决的期间或范围矛盾。",
  "allowed_summary": [
-  "2025年第三季度（单季），东方电缆海底电缆与高压电缆实现营业收入35.49亿元，同比增长35.8%，带动本报告期利润总额同比增长51.19%。"
+  "报告原文p3称“本报告期”海底电缆与高压电缆收入35.49亿元、同比增长35.8%；该数高于p1单季营业总收入约30.66亿元，且p2定义本报告期为Q3三个月，期间或范围矛盾未解决，不能据此确认35.49亿元为单季类别实绩。"
  ],
  "summary_guidance": {
   "must_preserve": [
-   "本报告期=单季（Q3三个月）",
-   "海底电缆与高压电缆类别口径",
-   "35.49亿元/35.8%/51.19%"
+   "p3原文为35.49亿元/35.8%",
+   "p1单季总收入3,065,970,750.30元，约30.66亿元",
+   "p2本报告期为三个月；矛盾未解决"
   ],
   "boundary": [
-   "不得把单季类别收入写成前三季度累计或全年",
-   "类别收入不得写成公司营业总收入"
+   "不自行改成前三季度或全年",
+   "不编造含其他收入等解释",
+   "不能把有矛盾的类别数直接当确定单季实绩",
+   "来源引文正确不等于数据已调和"
   ]
  },
  "facts": [
   {
    "id": "q3-submarine-hv-cable-revenue",
    "importance": "critical",
-   "target_kind": "required_business",
+   "target_kind": "correctness_if_emitted",
    "quantity_basis": "period_flow",
-   "modality": "actual",
+   "modality": "unknown",
    "role": "company_filing",
    "any_support_sets": [
     [
@@ -49,22 +48,31 @@
       "exact_quote": "主要系本报告期高附加值海底电缆营业收入增长较多，本报告期海底电缆与高压电缆实现营业收入35.49亿元，同比增长35.8%",
       "location_kind": "page",
       "page": 3
+     },
+     {
+      "page": 1,
+      "location_kind": "page",
+      "exact_quote": "3,065,970,750.30"
+     },
+     {
+      "page": 2,
+      "location_kind": "page",
+      "exact_quote": "“本报告期”指本季度初至本季度末3个月期间，下同"
      }
     ]
    ],
    "must_preserve": [
-    "本报告期（单季）",
-    "海底电缆与高压电缆",
-    "35.49亿元",
-    "35.8%"
+    "原文p3类别收入35.49亿元及35.8%",
+    "p1总收入约30.66亿元与p2季度定义",
+    "期间/范围内部矛盾未解决，必须归因原文并提示冲突"
    ],
    "must_not_assert": [
-    "前三季度累计类别收入35.49亿元",
-    "公司营业总收入35.49亿元",
-    "全年收入35.49亿元",
-    "海外订单收入"
+    "单季类别收入35.49亿元已经确认",
+    "35.49亿元是公司总收入",
+    "自行改成前三季度累计",
+    "自行推断含其他收入以消除矛盾"
    ],
-   "reason": "单季+类别口径双限定；报告仅11页，累计算法上极易被放大三倍误引。原件内部张力：p1单季总收入约30.66亿（3,065,970,750.30元）低于p3类别口径35.49亿，说明35.49亿是含了其他收入的口径；标注忠实引用原件措辞，不自行改写期间。"
+   "reason": "忠实引用p3并同时保留p1、p2冲突证据；当前来源不能支持确定的单季类别实绩，也未提供解释。"
   },
   {
    "id": "q3-profit-change-reason",
@@ -137,7 +145,17 @@
   }
  ],
  "prior_use": "fresh：.planning与docs/plans零提及",
- "notes": "11页短季报；physical pages 2-3（PDF 1基）。",
- "quote_budget_chars_normalized": 124,
- "bound_failure_mode_check": "同量纲不同时期（单季 vs 累计）；类别收入当总收入"
+ "notes": "11页短季报；physical pages 2-3（PDF 1基）。 ROOT核实原件内部期间/数额不一致；本case检验冲突保留，不提供来源之外的纠错数。",
+ "quote_budget_chars_normalized": 164,
+ "bound_failure_mode_check": "同量纲不同时期（单季 vs 累计）；类别收入当总收入",
+ "source_binding": {
+  "root_id": "company_raw",
+  "relative_path": "东方电缆/raw/financial_reports/东方电缆：东方电缆2025年第三季度报告.pdf",
+  "expected_sha256": "980224213ff8aa3248fe081a32568a94981e17372f9e71b0462c28045885443b",
+  "observed_sidecar": {
+   "market": "CN",
+   "security_id": "东方电缆",
+   "source_title": "东方电缆：东方电缆2025年第三季度报告"
+  }
+ }
 }

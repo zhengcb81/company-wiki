@@ -1,0 +1,35 @@
+{
+  "schema_version": "du10-root-tests/1",
+  "gold_tests": {
+    "passed": 71,
+    "seconds": 2.83
+  },
+  "source_replay": {
+    "cases_passed": 11,
+    "unique_originals": 10
+  },
+  "gold_semantic_red": {
+    "failed": 8,
+    "passed": 0,
+    "evidence": "ROOT actual tool output before migration; no invented raw log"
+  },
+  "intermediate_gold": {
+    "failed": 1,
+    "passed": 65,
+    "reason": "legacy literal slogan check replaced by actual distinct TTM period evidence assertions"
+  },
+  "et_root_red": {
+    "failed": 6,
+    "passed": 4
+  },
+  "et_root_green": {
+    "passed": 304,
+    "seconds": 80.05
+  },
+  "ff_et_contract": {
+    "passed": 117,
+    "seconds": 17.09,
+    "et_tool": "ROOT reception transcript_tool.py, not installed stale copy"
+  },
+  "external_calls": 0
+}

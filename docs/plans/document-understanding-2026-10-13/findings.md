@@ -1,3 +1,16 @@
+## DU10 三包验收收尾 — 2026-10-17（最新）
+
+三包作者完整历史已合入本地主线；ROOT独审发现的问题已修复并复审通过，0未解决。具体见 [DU10接收](review/du10_reception.md)。FF固定依赖/限额完整41例和中断新attempt恢复已按有效收据关闭；ET EOF token/main直挂文本共因已修复，304PASS，FF→最新ET合同117PASS；CWP样本6项语义修正和真实SourceRef/locator回放，71PASS、11/11来源实读，独立核10原件未改。样本为已看过回归集，正式摘要/盲holdout未完成。
+
+ET main已推送2584b7e；FF正常push/CI与CWP本次发布收尾以 review/du10_reception.json 为最终机器记录。CWP仅docs/plans改动由现有CI paths-ignore跳过，不冒称产生新CI；ET无CI。未绕hook、未重复全矩阵，不加签收许可链。历史OPEN/待派发记录不代表当前。
+
+**Next Step：** 继续 review/pdf_page_intent_implementation.md：原生PDF导航/唯一matcher/POLICY+PLANNER/同一WorkBudget/source单parse生产装配，再做深页真实文档、配置供应商正式摘要、缓存恢复和新盲样本；FF41 C节点不再OPEN，真实模型摘要主线仍OPEN。不改Dayu/IQS，不碰作者工区。
+
+
+---
+
+以下为历史记录（状态以顶部 ROOT 更新为准）。
+
 ## 当前收尾完成：外包工程待交付0 — 2026-10-17（最新）
 
 当前DU8/DU9六包工程交付已全部接收并线，最后ET main/origin7d06777已核远端；CWP接收及推送范围共因修复已正常发布80be6877。pre-push6344PASS/24SKIP（296.69秒），精确[CI39047038268](https://github.com/zhengcb81/company-wiki/actions/runs/39047038268) SUCCESS。ET454PASS/10gold、FF117PASS、CWP12PASS，五轮独审受审源未变；作者工区/原件/配置/主仓既有文件保持，ROOT临时工区清理。详情见[最后ET接收](review/du9_et_reception.md)。AUDIT无remote仅本地，ET无CI不冒称CI绿。

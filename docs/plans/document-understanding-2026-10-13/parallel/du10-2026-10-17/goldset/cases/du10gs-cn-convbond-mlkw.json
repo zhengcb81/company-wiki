@@ -1,5 +1,5 @@
 {
- "schema_version": "du10-summary-goldset-case/1",
+ "schema_version": "du10-summary-goldset-case/2",
  "case_id": "du10gs-cn-convbond-mlkw",
  "created": "2026-10-17",
  "market": "CN",
@@ -10,15 +10,12 @@
  "narrative_focus": "new_business+project_plan",
  "bound_failure_mode": "测算当已实现（完全达产后预计）；拟建首个别当已有业务",
  "source_ref": {
-  "carrier_root": "company_raw",
-  "source_id": "密尔克卫/raw/research/密尔克卫：密尔克卫化工供应链服务股份有限公司公开发行可转换公司债券募集说明书.PDF",
-  "source_sha256": "9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+  "document_id": "urn:company-wiki:document:sha256:9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+  "source_id": "urn:company-wiki:source:sha256:9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+  "content_sha256": "9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+  "byte_size": 12284397,
   "mime_type": "application/pdf",
-  "registered_sidecar": {
-   "market": "CN",
-   "security_id": "密尔克卫",
-   "source_title": "密尔克卫：密尔克卫化工供应链服务股份有限公司公开发行可转换公司债券募集说明书"
-  }
+  "schema_version": "2.0"
  },
  "summary_proposition": "可转债募投“超临界水氧化及配套环保项目”投资总额70,000.00万元、废液处理能力5.0万吨/年，将成为公司首个拟建成的危废处理中心；完全达产后预计年销售收入19,528.30万元、净利润4,783.21万元、毛利率39.38%、税后内部收益率6.17%。",
  "allowed_summary": [
@@ -146,5 +143,15 @@
  "prior_use": "仅n5 raw-duplicate-audit与n6 footprint路径/哈希元数据；内容未被读取",
  "notes": "401页可转债募集说明书；physical page 344（PDF 1基）。",
  "quote_budget_chars_normalized": 149,
- "bound_failure_mode_check": "测算当已实现（完全达产后预计）；拟建首个别当已有业务"
+ "bound_failure_mode_check": "测算当已实现（完全达产后预计）；拟建首个别当已有业务",
+ "source_binding": {
+  "root_id": "company_raw",
+  "relative_path": "密尔克卫/raw/research/密尔克卫：密尔克卫化工供应链服务股份有限公司公开发行可转换公司债券募集说明书.PDF",
+  "expected_sha256": "9ada21401dd35e734f36c98aef71201b9fdfec8cbcd31ab45434a5b82f113f7d",
+  "observed_sidecar": {
+   "market": "CN",
+   "security_id": "密尔克卫",
+   "source_title": "密尔克卫：密尔克卫化工供应链服务股份有限公司公开发行可转换公司债券募集说明书"
+  }
+ }
 }

@@ -1,5 +1,5 @@
 {
- "schema_version": "du10-summary-goldset-case/1",
+ "schema_version": "du10-summary-goldset-case/2",
  "case_id": "du10gs-call-miniso-q4-2024",
  "created": "2026-10-17",
  "market": "HK",
@@ -10,17 +10,14 @@
  "narrative_focus": "overseas+management_plan",
  "bound_failure_mode": "讲稿量词丢失；2025计划当已实现；说话人归属",
  "source_ref": {
-  "carrier_root": "dropbox_stock",
-  "source_id": "消费品/名创优品/December Quarter and Full Year of 2024  Transcript.pdf",
-  "source_sha256": "dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+  "document_id": "urn:company-wiki:document:sha256:dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+  "source_id": "urn:company-wiki:source:sha256:dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+  "content_sha256": "dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+  "byte_size": 390641,
   "mime_type": "application/pdf",
-  "registered_sidecar": {
-   "market": "HK",
-   "security_id": "Unresolved (dropbox_stock)",
-   "source_title": "December Quarter and Full Year of 2024  Transcript"
-  }
+  "schema_version": "2.0"
  },
- "summary_proposition": "叶国富（董事长）讲稿：截至2024年12月31日集团全球门店7,780家、全年净增1,219家（MINISO中国+460、海外+631、TOP TOY+128），均超额完成2024年初开店目标；海外超3,100家门店、贡献接近40%收入；集团收入增长23%、约170亿人民币；2025年已筹划超过90档IP上新。",
+ "summary_proposition": "叶国富（本电话会开场介绍为创始人兼首席执行官）讲稿：截至2024年12月31日集团全球门店7,780家、全年净增1,219家（MINISO中国+460、海外+631、TOP TOY+128），均超额完成2024年初开店目标；海外超3,100家门店、贡献接近40%收入；集团收入增长23%、约170亿人民币；2025年已筹划超过90档IP上新。",
  "allowed_summary": [
   "管理层讲稿：截至2024年12月31日，集团全球门店7,780家，全年净增1,219家，其中MINISO中国增长460家、海外增长631家、TOP TOY增长128家，均超额完成2024年初开店目标。",
   "管理层讲稿：名创海外市场超3,100家门店，为集团贡献接近40%的收入；集团全年收入增长23%、约170亿人民币。",
@@ -28,7 +25,7 @@
  ],
  "summary_guidance": {
   "must_preserve": [
-   "说话人（叶国富，招股书称创始人兼首席执行官）与讲稿形态",
+   "说话人叶国富（本电话会开场介绍为创始人兼首席执行官）及管理层讲稿形态",
    "超过3,100/接近40%/约170亿三个量词",
    "净增口径",
    "“筹划”（2025计划）"
@@ -59,6 +56,11 @@
       "exact_quote": "7,780",
       "location_kind": "page",
       "page": 3
+     },
+     {
+      "page": 1,
+      "location_kind": "page",
+      "exact_quote": "创始人兼首席执行官叶国富先生"
      }
     ]
    ],
@@ -201,6 +203,16 @@
  ],
  "prior_use": "公司2024年报为hk-annual gold；本官方业绩电话会讲稿原件未被任何gold读取",
  "notes": "16页讲稿；physical pages 2-4（PDF 1基）。与hk-annual gold同公司不同原件；新增证据为话轮/讲稿形态+actual超额对照+2025计划。",
- "quote_budget_chars_normalized": 226,
- "bound_failure_mode_check": "讲稿量词丢失；2025计划当已实现；说话人归属"
+ "quote_budget_chars_normalized": 240,
+ "bound_failure_mode_check": "讲稿量词丢失；2025计划当已实现；说话人归属",
+ "source_binding": {
+  "root_id": "dropbox_stock",
+  "relative_path": "消费品/名创优品/December Quarter and Full Year of 2024  Transcript.pdf",
+  "expected_sha256": "dbe321a9343aa3dd705d9f2f7ba5daf29580e6051a8015be1755672ef59333ab",
+  "observed_sidecar": {
+   "market": "HK",
+   "security_id": "Unresolved (dropbox_stock)",
+   "source_title": "December Quarter and Full Year of 2024  Transcript"
+  }
+ }
 }
