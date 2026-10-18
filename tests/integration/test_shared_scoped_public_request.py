@@ -223,7 +223,7 @@ def test_configured_public_v4_worker_recovery_reuse_protocol_separation_and_exac
         store = NarrativeRunStore(state.automation_db)
         manifest = next(iter(store.final_generations("public-v4").values()))
         assert manifest["reading_model_projection"] == V4
-        assert manifest["execution_versions"]["prompt"] == "reading-source-scoped/4.0.8"
+        assert manifest["execution_versions"]["prompt"] == "reading-source-scoped/4.0.6"
         assert manifest["reading_model_boundary"]["request_schema"] == "narrative-model-request/5"
         reservations = tuple(asdict(row) for row in store.reservations_for_run("public-v4"))
         reference = first["items"][0]["artifact_ref"] if kind != "raw-v1" else first["documents"][0]["artifact_ref"]
