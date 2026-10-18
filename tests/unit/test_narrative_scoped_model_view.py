@@ -30,7 +30,10 @@ def test_real_original_prose_is_defined_once_and_next_to_local_tasks():
     result = view(selected)
     data = result.to_model_dict()
     rows = definitions(data)
-    assert len(data["tasks"]) == 64 and len(rows) == len(selected.evidence_spans) == 96
+    # Adjacent single-view tasks of one page and section are merged up to the
+    # claim budget, so the model receives 40 local tasks instead of 64 while
+    # every selected span is still defined exactly once.
+    assert len(data["tasks"]) == 40 and len(rows) == len(selected.evidence_spans) == 96
     assert len({row["source_key"] for row in rows}) == 96
     by_key = {row["source_key"]: row for row in rows}
     assert [by_key["s" + str(i)]["text"] for i in range(1, 97)] == [row.raw_text for row in selected.evidence_spans]

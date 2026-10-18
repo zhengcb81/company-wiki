@@ -16,7 +16,9 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any
 
-from company_wiki.document_understanding.summary_tasks import SummaryTaskPlan, build_summary_task_plan
+from company_wiki.document_understanding.summary_tasks import (
+    SourceSummaryTask, SummaryTaskPlan, build_summary_task_plan,
+)
 from company_wiki.source_contract import EvidenceSpan
 
 from .models import canonical_json, canonical_json_hash
@@ -370,10 +372,85 @@ class ScopedModelView:
                                   task.support_ids, task.context_ids)
 
 
+def _task_page(task, spans_by_id) -> object:
+    """Native page of a task's first member, used only to bound section merges."""
+    for sid in task.member_ids:
+        raw = spans_by_id[sid].structured_value.get("native_range")
+        if not isinstance(raw, dict):
+            continue
+        for member in raw.get("members", ()):
+            locator = member.get("locator") if isinstance(member, dict) else None
+            if isinstance(locator, str) and "/page:" in locator:
+                digits = locator.split("/page:", 1)[1].split("/", 1)[0]
+                if digits.isdigit():
+                    return int(digits)
+    return None
+
+
+def _merge_section_tasks(plan: SummaryTaskPlan, spans_by_id, *, max_members: int):
+    """Merge adjacent single-view tasks of one page/section into bounded tasks.
+
+    A long filing produces one task per citation view (64 for the CN case),
+    while a real provider writes only 20-28 clauses. Grouping adjacent views of
+    the same page and section keeps every selected span, preserves the
+    support/context partition and gives each clause more than one source fact.
+    """
+    order = {sid: index for index, sid in enumerate(plan.evidence_order)}
+    merged: list[SourceSummaryTask] = []
+    group: list[SourceSummaryTask] = []
+    group_page: object = None
+
+    def flush():
+        if not group:
+            return
+        base = group[0]
+        raw_members = [sid for task in group for sid in task.member_ids]
+        if len(raw_members) != len(set(raw_members)):
+            raise ValueError("merged source task repeats a native unit")
+        members = sorted(raw_members, key=order.__getitem__)
+        support = sorted({sid for task in group for sid in task.support_ids}, key=order.__getitem__)
+        context = sorted({sid for task in group for sid in task.context_ids}, key=order.__getitem__)
+        if (set(support) & set(context)
+                or set(support) | set(context) != set(members)):
+            raise ValueError("merged source task must preserve its native partition")
+        if len({task.source_id for task in group}) != 1:
+            raise ValueError("merged source task cannot cross original parents")
+        merged.append(SourceSummaryTask(
+            key="t" + str(len(merged) + 1), source_id=base.source_id,
+            origin_group_id=base.origin_group_id, member_ids=tuple(members),
+            support_ids=tuple(support), context_ids=tuple(context),
+            kind=base.kind, section_role=base.section_role,
+            topics=tuple(dict.fromkeys(topic for task in group for topic in task.topics)),
+            selection_reasons=tuple(dict.fromkeys(
+                reason for task in group for reason in task.selection_reasons)),
+            support_roles=tuple(dict.fromkeys(
+                role for task in group for role in task.support_roles)),
+        ))
+
+    for task in plan.tasks:
+        page = _task_page(task, spans_by_id)
+        members = set(task.member_ids)
+        overlap = any(members & set(other.member_ids) for other in group)
+        if group and (len(group) >= max_members or page != group_page or overlap
+                      or task.section_role != group[0].section_role):
+            flush()
+            group = []
+        if not group:
+            group_page = page
+        group.append(task)
+    flush()
+    return SummaryTaskPlan(tuple(merged), plan.evidence_order, plan.max_claims)
+
+
 def compile_scoped_model_view(selected: NarrativeSelectResult, *, max_claims: int) -> ScopedModelView:
     """Compile a transient view of this pinned selection, with no extra IO."""
     plan = build_summary_task_plan(selected.evidence_spans,
                                    reading_context=selected.reading_context, max_claims=max_claims)
+    # Only a selection larger than the claim budget needs section grouping;
+    # small views keep their exact one-task-per-view identity.
+    if len(plan.tasks) > max_claims:
+        plan = _merge_section_tasks(plan, {span.span_id: span for span in selected.evidence_spans},
+                                    max_members=5)
     return ScopedModelView(plan,
         MappingProxyType({span.span_id: span for span in selected.evidence_spans}),
         MappingProxyType({sid: "s" + str(i) for i, sid in enumerate(plan.evidence_order, 1)}),
